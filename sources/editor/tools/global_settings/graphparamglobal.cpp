@@ -59,7 +59,6 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
         double pos = (double)(note * this->nbPoints) / 127.;
         x[2*i] = x[2*i+1] = pos;
         QCPItemText *textLabel = new QCPItemText(this);
-        this->addItem(textLabel);
         textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         textLabel->position->setType(QCPItemPosition::ptPlotCoords);
         textLabel->position->setCoords(pos, 0);
@@ -103,7 +102,6 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     this->graph(4)->setPen(graphPen);
     this->graph(4)->setScatterStyle(QCPScatterStyle::ssPlus);
     labelCoord = new QCPItemText(this);
-    this->addItem(labelCoord);
     labelCoord->position->setType(QCPItemPosition::ptPlotCoords);
     labelCoord->setText("");
     QFont fontLabel = QFont(font().family(), 9);
@@ -122,11 +120,14 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     // Marges
     this->axisRect()->setAutoMargins(QCP::msNone);
     this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
+
     // Préparation des données
     this->dValues.resize(this->nbPoints);
     this->dValues.fill(0.5);
+
     // Filtre sur les événements
     this->installEventFilter(this);
+
     // Affichage
     this->replot();
 }

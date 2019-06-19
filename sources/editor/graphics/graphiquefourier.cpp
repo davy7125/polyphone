@@ -29,6 +29,8 @@
 #include <QFileDialog>
 
 GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
+    _fixedTickerX(new QCPAxisTickerFixed()),
+    _fixedTickerY(new QCPAxisTickerFixed()),
     _menu(nullptr)
 {
     // Configuration du graphe
@@ -45,35 +47,34 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     QPen penSubGrid = this->xAxis->grid()->subGridPen();
     penGrid.setColor(QColor(140, 140, 140));
     penSubGrid.setColor(QColor(220, 220, 220));
+
     this->xAxis->setRange(0, 20000);
     this->xAxis->setVisible(false);
     this->xAxis->setTicks(false);
     this->xAxis->setLabel(trUtf8("Frequency (Hz)"));
-    this->xAxis->setAutoSubTicks(false);
-    this->xAxis->setAutoTickStep(false);
-    this->xAxis->setTickStep(2000);
-    this->xAxis->setSubTickCount(3);
     this->xAxis->grid()->setSubGridVisible(true);
     this->xAxis->grid()->setPen(penGrid);
     this->xAxis->grid()->setSubGridPen(penSubGrid);
     this->xAxis->setTickLength(0);
     this->xAxis->setSubTickLength(0);
     this->xAxis->setBasePen(penGrid);
+    _fixedTickerX->setScaleStrategy(QCPAxisTickerFixed::ssNone);
+    _fixedTickerX->setTickStep(2000);
+    this->xAxis->setTicker(_fixedTickerX);
 
     this->yAxis->setRange(0, 1.05);
     this->yAxis->setVisible(false);
     this->yAxis->setTicks(false);
     this->yAxis->setLabel(trUtf8("Intensity"));
-    this->yAxis->setAutoSubTicks(false);
-    this->yAxis->setAutoTickStep(false);
-    this->yAxis->setTickStep(0.2);
-    this->yAxis->setSubTickCount(1);
     this->yAxis->grid()->setSubGridVisible(true);
     this->yAxis->grid()->setPen(penGrid);
     this->yAxis->grid()->setSubGridPen(penSubGrid);
     this->yAxis->setTickLength(0);
     this->yAxis->setSubTickLength(0);
     this->yAxis->setBasePen(penGrid);
+    _fixedTickerY->setScaleStrategy(QCPAxisTickerFixed::ssNone);
+    _fixedTickerY->setTickStep(0.2);
+    this->yAxis->setTicker(_fixedTickerY);
 
     // Marges
     this->axisRect()->setAutoMargins(QCP::msNone);
@@ -87,7 +88,7 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     text1->setTextAlignment(Qt::AlignRight);
     text1->setFont(QFont(font().family(), 8, QFont::Bold));
     text1->setColor(color);
-    this->addItem(text1);
+
     text2 = new QCPItemText(this);
     text2->position->setType(QCPItemPosition::ptAxisRectRatio);
     text2->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
@@ -95,28 +96,27 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     text2->setFont(QFont(font().family(), 7));
     color.setAlpha(75);
     text2->setColor(color);
-    this->addItem(text2);
+
     text3 = new QCPItemText(this);
     text3->position->setType(QCPItemPosition::ptAxisRectRatio);
     text3->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
     text3->setTextAlignment(Qt::AlignRight);
     text3->setFont(QFont(font().family(), 7));
     text3->setColor(this->palette().color(QPalette::Highlight));
-    this->addItem(text3);
+
     text4 = new QCPItemText(this);
     text4->position->setType(QCPItemPosition::ptAxisRectRatio);
     text4->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
     text4->setTextAlignment(Qt::AlignRight);
     text4->setFont(QFont(font().family(), 7));
     text4->setColor(this->palette().color(QPalette::Highlight));
-    this->addItem(text4);
+
     text5 = new QCPItemText(this);
     text5->position->setType(QCPItemPosition::ptAxisRectRatio);
     text5->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
     text5->setTextAlignment(Qt::AlignRight);
     text5->setFont(QFont(font().family(), 7));
     text5->setColor(this->palette().color(QPalette::Highlight));
-    this->addItem(text5);
 
     // Préparation du menu contextuel
     _menu = new QMenu(this);
@@ -126,6 +126,12 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     this->plotLayout()->insertRow(0);
     this->plotLayout()->setRowStretchFactors(QList<double>() << 1 << 100);
     this->plotLayout()->setRowSpacing(0);
+}
+
+GraphiqueFourier::~GraphiqueFourier()
+{
+    _fixedTickerX.clear();
+    _fixedTickerY.clear();
 }
 
 // Méthodes publiques
@@ -161,7 +167,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
 
     if (_fData.isEmpty())
     {
-        graph(0)->clearData();
+        graph(0)->data()->clear();
         replot();
         return;
     }
@@ -192,7 +198,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     QList<quint32> posMaxFFT = Sound::findMax(vectFourier, 50, 0.05);
     if (posMaxFFT.isEmpty())
     {
-        graph(0)->clearData();
+        graph(0)->data()->clear();
         replot();
         return;
     }
@@ -313,25 +319,34 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
         _note = note;
         _correction = correction;
 
-        for (int i = 0; i < qMin(10, posMaxFFT.size()); i++)
+        for (int i = 0; i < posMaxFFT.size(); i++)
         {
             // intensité
             factors << vectFourier[posMaxFFT[i]] / vectFourier[posMaxFFT[0]];
-            qStr2 += QString::number(factors.last(), 'f', 2) + "\n";
+
             // fréquence
             double freq = (double)(posMaxFFT[i] * dwSmplRate) / (size - 1);
             frequencies << freq;
-            qStr3 += QString::number(freq, 'f', 2) + " " + trUtf8("Hz", "unit for Herz") + "\n";
+
             // note la plus proche
             double note = 12 * qLn(freq) / 0.69314718056 - 36.3763;
-            if (note < 0) note = 0;
-            else if (note > 128) note = 128;
+            if (note < 0)
+                note = 0;
+            else if (note > 128)
+                note = 128;
             int note2 = qRound(note);
             int correction = qRound(((double)note2 - note) * 100.);
-            qStr4 += ContextManager::keyName()->getKeyName(note2) + "\n";
-            qStr5 += QString::number(correction) + "\n";
             pitch << note2;
             corrections << correction;
+
+            // Prepare text
+            if (i < 8)
+            {
+                qStr2 += QString::number(factors.last(), 'f', 2) + "\n";
+                qStr3 += QString::number(freq, 'f', 2) + " " + trUtf8("Hz", "unit for Herz") + "\n";
+                qStr4 += ContextManager::keyName()->getKeyName(note2) + "\n";
+                qStr5 += QString::number(correction) + "\n";
+            }
         }
     }
     else
@@ -352,7 +367,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
 
 void GraphiqueFourier::dispFourier(QVector<float> vectFourier, float posMaxFourier)
 {
-    this->graph(0)->clearData();
+    this->graph(0)->data()->clear();
     quint32 size_x = ((long int)vectFourier.size() * 40000) / this->dwSmplRate;
     QVector<double> x(size_x), y(size_x);
     for (unsigned long i = 0; i < size_x; i++)
@@ -409,7 +424,7 @@ void GraphiqueFourier::exportPng(QString fileName)
     this->yAxis->setVisible(true);
     this->yAxis->setTicks(true);
     this->axisRect()->setAutoMargins(QCP::msAll);
-    QCPPlotTitle * title = new QCPPlotTitle(this, _name);
+    QCPTextElement * title = new QCPTextElement(this, _name);
     this->plotLayout()->addElement(0, 0, title);
     QPen graphPen;
     graphPen.setColor(QColor(240, 0, 0));

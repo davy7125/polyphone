@@ -83,7 +83,6 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
     _textMultipleSelection->setTextAlignment(Qt::AlignHCenter);
     _textMultipleSelection->setFont(QFont(font().family(), 16, QFont::Bold));
     _textMultipleSelection->setText(trUtf8("Multiple selection"));
-    addItem(_textMultipleSelection);
 
     // Positions
     _textPositionL = new QCPItemText(this);
@@ -93,7 +92,6 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
     _textPositionL->setTextAlignment(Qt::AlignBottom);
     _textPositionL->setFont(QFont(font().family(), 8, QFont::Bold));
     _textPositionL->setText("");
-    addItem(_textPositionL);
 
     _textPositionR = new QCPItemText(this);
     _textPositionR->position->setType(QCPItemPosition::ptAxisRectRatio);
@@ -102,7 +100,6 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
     _textPositionR->setTextAlignment(Qt::AlignBottom);
     _textPositionR->setFont(QFont(font().family(), 8, QFont::Bold));
     _textPositionR->setText("");
-    addItem(_textPositionR);
 
     // Paramétrage des couleurs
     this->updateStyle();
@@ -192,12 +189,12 @@ void Graphique::updateStyle()
 
 void Graphique::clearAll()
 {
-    this->graph(0)->clearData();
-    this->graph(1)->clearData();
-    this->graph(2)->clearData();
-    this->graph(3)->clearData();
-    this->graph(4)->clearData();
-    this->graph(5)->clearData();
+    this->graph(0)->data()->clear();
+    this->graph(1)->data()->clear();
+    this->graph(2)->data()->clear();
+    this->graph(3)->data()->clear();
+    this->graph(4)->data()->clear();
+    this->graph(5)->data()->clear();
 }
 
 void Graphique::setData(QByteArray baData, int sampleRate)
@@ -326,7 +323,7 @@ void Graphique::zoomDrag()
 
     // Mise à jour
     displayCurrentRange();
-    this->replot(QCustomPlot::rpQueued);
+    this->replot(QCustomPlot::rpQueuedReplot);
     if (!_bFromExt && _qScrollX)
     {
         // Mise à jour du scrollbar
@@ -414,7 +411,7 @@ void Graphique::setZoomLine(double x1, double y1, double x2, double y2)
         this->graph(3)->setData(x, y);
     }
     else
-        this->graph(3)->clearData();
+        this->graph(3)->data()->clear();
 }
 
 void Graphique::plotOverlay()
@@ -430,21 +427,21 @@ void Graphique::plotOverlay()
             // Partie droite recopiée à gauche
             x1[i]                       = posDebut - sizeOverlay + i;
             x1[2 * sizeOverlay - i - 1] = posDebut + sizeOverlay - i;
-            y1[i]                       = this->graph(0)->data()->value(posFin - sizeOverlay + i).value;
-            y1[2 * sizeOverlay - i - 1] = this->graph(0)->data()->value(posFin + sizeOverlay - i).value;
+            y1[i]                       = this->graph(0)->data()->at(posFin - sizeOverlay + i)->value;
+            y1[2 * sizeOverlay - i - 1] = this->graph(0)->data()->at(posFin + sizeOverlay - i)->value;
             // Partie gauche recopiée à droite
             x2[i]                       = posFin - sizeOverlay + i;
             x2[2 * sizeOverlay - i - 1] = posFin + sizeOverlay - i;
-            y2[i]                       = this->graph(0)->data()->value(posDebut - sizeOverlay + i).value;
-            y2[2 * sizeOverlay - i - 1] = this->graph(0)->data()->value(posDebut + sizeOverlay - i).value;
+            y2[i]                       = this->graph(0)->data()->at(posDebut - sizeOverlay + i)->value;
+            y2[2 * sizeOverlay - i - 1] = this->graph(0)->data()->at(posDebut + sizeOverlay - i)->value;
         }
         this->graph(4)->setData(x1, y1);
         this->graph(5)->setData(x2, y2);
     }
     else
     {
-        this->graph(4)->clearData();
-        this->graph(5)->clearData();
+        this->graph(4)->data()->clear();
+        this->graph(5)->data()->clear();
     }
 }
 

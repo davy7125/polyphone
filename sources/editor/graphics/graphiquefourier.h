@@ -34,8 +34,8 @@ class GraphiqueFourier : public QCustomPlot
     Q_OBJECT
 
 public:
-    explicit GraphiqueFourier(QWidget *parent = 0);
-    ~GraphiqueFourier() {}
+    explicit GraphiqueFourier(QWidget *parent = nullptr);
+    ~GraphiqueFourier();
 
     void setBackgroundColor(QColor color);
     void setData(QByteArray baData, quint32 dwSmplRate);
@@ -61,6 +61,8 @@ private:
     QCPItemText * text3; // fréquence
     QCPItemText * text4; // note
     QCPItemText * text5; // correction
+    QSharedPointer<QCPAxisTickerFixed> _fixedTickerX;
+    QSharedPointer<QCPAxisTickerFixed> _fixedTickerY;
     QMenu * _menu;
     int _note, _correction;
 

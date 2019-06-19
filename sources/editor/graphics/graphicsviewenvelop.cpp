@@ -38,7 +38,8 @@ GraphicsViewEnvelop::GraphicsViewEnvelop(QWidget *parent) : QCustomPlot(parent),
     _bFromExt(false),
     _qScrollX(nullptr),
     _textPositionL(nullptr),
-    _textPositionR(nullptr)
+    _textPositionR(nullptr),
+    _fixedTicker(new QCPAxisTickerFixed())
 {
     // Images
     _imageNoteOn = QImage(":/icons/note_on.png").scaled(36, 36, Qt::KeepAspectRatio);
@@ -55,7 +56,8 @@ GraphicsViewEnvelop::GraphicsViewEnvelop(QWidget *parent) : QCustomPlot(parent),
     this->yAxis2->setRange(0, 1);
     this->yAxis->setRange(0, 1.2);
     this->yAxis->setVisible(false);
-    this->xAxis->setAutoTickStep(false);
+    _fixedTicker->setScaleStrategy(QCPAxisTickerFixed::ssNone);
+    this->xAxis->setTicker(_fixedTicker);
     this->xAxis->setTickLength(0, 0);
     this->xAxis->setSubTickLength(0, 0);
     this->xAxis->setTickPen(QPen(QColor(255, 0, 255), 0));
@@ -73,7 +75,6 @@ GraphicsViewEnvelop::GraphicsViewEnvelop(QWidget *parent) : QCustomPlot(parent),
     _textPositionL->setTextAlignment(Qt::AlignBottom);
     _textPositionL->setFont(QFont(font().family(), 8, QFont::Bold));
     _textPositionL->setText("");
-    this->addItem(_textPositionL);
 
     _textPositionR = new QCPItemText(this);
     _textPositionR->position->setType(QCPItemPosition::ptAxisRectRatio);
@@ -82,7 +83,6 @@ GraphicsViewEnvelop::GraphicsViewEnvelop(QWidget *parent) : QCustomPlot(parent),
     _textPositionR->setTextAlignment(Qt::AlignBottom);
     _textPositionR->setFont(QFont(font().family(), 8, QFont::Bold));
     _textPositionR->setText("");
-    this->addItem(_textPositionR);
 
     this->updateStyle();
 }
@@ -90,6 +90,7 @@ GraphicsViewEnvelop::GraphicsViewEnvelop(QWidget *parent) : QCustomPlot(parent),
 GraphicsViewEnvelop::~GraphicsViewEnvelop()
 {
     clearEnvelops();
+    _fixedTicker.clear();
 }
 
 void GraphicsViewEnvelop::updateStyle()
@@ -182,7 +183,7 @@ void GraphicsViewEnvelop::zoomDrag()
 
     // Mise à jour
     displayCurrentRange();
-    this->replot(QCustomPlot::rpQueued);
+    this->replot(QCustomPlot::rpQueuedReplot);
     if (!_bFromExt && _qScrollX)
     {
         // Mise à jour du scrollbar
@@ -251,8 +252,8 @@ void GraphicsViewEnvelop::clearEnvelops()
         this->removeGraph(envelop->graph2());
         delete envelop;
     }
-    this->graph(0)->clearData();
-    this->graph(1)->clearData();
+    this->graph(0)->data()->clear();
+    this->graph(1)->data()->clear();
     _index = 0;
 }
 
@@ -436,7 +437,7 @@ void GraphicsViewEnvelop::drawEnvelops()
 void GraphicsViewEnvelop::paintEvent(QPaintEvent *event)
 {
     // Tick step
-    this->xAxis->setTickStep(getTickStep());
+    _fixedTicker->setTickStep(getTickStep());
 
     QCustomPlot::paintEvent(event);
 
@@ -580,7 +581,7 @@ void GraphicsViewEnvelop::setZoomLine(double x1, double y1, double x2, double y2
         this->graph(0)->setData(x, y);
     }
     else
-        this->graph(0)->clearData();
+        this->graph(0)->data()->clear();
 }
 
 void GraphicsViewEnvelop::displayCurrentRange()

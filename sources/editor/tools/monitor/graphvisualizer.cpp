@@ -48,7 +48,6 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
         int note = 12 * (i + 1);
         QCPItemText *textLabel = new QCPItemText(this);
         listTextOctave << textLabel;
-        this->addItem(textLabel);
         textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         textLabel->position->setType(QCPItemPosition::ptPlotCoords);
         textLabel->position->setCoords(note, 0);
@@ -92,7 +91,6 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
     this->graph(4)->setPen(graphPen);
     this->graph(4)->setScatterStyle(QCPScatterStyle::ssPlus);
     labelCoord = new QCPItemText(this);
-    this->addItem(labelCoord);
     labelCoord->position->setType(QCPItemPosition::ptPlotCoords);
     labelCoord->setText("");
     QFont fontLabel = QFont(font().family(), 9);
@@ -102,7 +100,6 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
 
     // Message warning
     textWarning = new QCPItemText(this);
-    this->addItem(textWarning);
     textWarning->setPositionAlignment(Qt::AlignTop | Qt::AlignLeft);
     textWarning->position->setType(QCPItemPosition::ptPlotCoords);
     textWarning->position->setCoords(0, 0);

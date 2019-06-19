@@ -32,7 +32,7 @@ class GraphVisualizer : public QCustomPlot
     Q_OBJECT
 
 public:
-    explicit GraphVisualizer(QWidget *parent = 0);
+    explicit GraphVisualizer(QWidget *parent = nullptr);
     ~GraphVisualizer();
     void setScale();
     void setData(QVector<QList<double> > listPoints, QVector<QList<double> > listPointsDef);

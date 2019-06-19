@@ -92,6 +92,7 @@ private:
     QScrollBar * _qScrollX;
     QCPItemText * _textPositionL;
     QCPItemText * _textPositionR;
+    QSharedPointer<QCPAxisTickerFixed> _fixedTicker;
 
     double getTickStep();
     void updateStyle();

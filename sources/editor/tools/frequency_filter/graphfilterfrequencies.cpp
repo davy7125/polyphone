@@ -56,11 +56,10 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(p
         double pos = (double)(freq * POINT_NUMBER) / 20000.;
         x[2*i] = x[2*i+1] = pos;
         QCPItemText *textLabel = new QCPItemText(this);
-        this->addItem(textLabel);
         textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         textLabel->position->setType(QCPItemPosition::ptPlotCoords);
         textLabel->position->setCoords(pos, 0.0001);
-        textLabel->setText(QString::number(freq / 1000) + "kHz");
+        textLabel->setText(QString::number(freq / 1000) + " kHz");
         textLabel->setFont(QFont(font().family(), 8));
         textLabel->setColor(color);
     }
@@ -81,7 +80,6 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(p
     this->graph(2)->setPen(graphPen);
     this->graph(2)->setScatterStyle(QCPScatterStyle::ssPlus);
     labelCoord = new QCPItemText(this);
-    this->addItem(labelCoord);
     labelCoord->position->setType(QCPItemPosition::ptPlotCoords);
     labelCoord->setText("");
     QFont fontLabel = QFont(font().family(), 9);
@@ -172,7 +170,7 @@ void GraphFilterFrequencies::addFourierTransform(QVector<float> fData, quint32 s
     if (max == 0)
         max = 1;
 
-    this->graph(nbGraphs + 1)->clearData();
+    this->graph(nbGraphs + 1)->data()->clear();
     quint32 sizeToProcess = ((long int)fData.size() * 40000) / sampleRate;
     x.resize(POINT_NUMBER + 1);
     y.resize(POINT_NUMBER + 1);
