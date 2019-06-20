@@ -54,6 +54,7 @@ Duplicator::Duplicator() :
 
 void Duplicator::copy(EltID idSource, EltID idDest)
 {
+    qDebug() << "copy" << idSource.toString() << "into" << idDest.toString();
     if (idDest.typeElement != elementSf2 && idDest.typeElement != elementInst &&
             idDest.typeElement != elementInstSmpl && idDest.typeElement != elementRootInst &&
             idDest.typeElement != elementPrst && idDest.typeElement != elementPrstInst &&
@@ -62,7 +63,7 @@ void Duplicator::copy(EltID idSource, EltID idDest)
 
     if (idSource.indexSf2 == idDest.indexSf2)
     {
-        // Lien dans le même Sf2
+        // Link in the same file
         switch (idSource.typeElement)
         {
         case elementSmpl:
@@ -72,13 +73,12 @@ void Duplicator::copy(EltID idSource, EltID idDest)
         case elementInst:
             if (idDest.typeElement == elementPrst || idDest.typeElement == elementPrstInst)
                 linkInst(idSource, idDest);
-            else if ((idDest.typeElement == elementInst || idDest.typeElement == elementInstSmpl) &&
-                     idSource.indexElt != idDest.indexElt)
+            else if (idDest.typeElement == elementInst || idDest.typeElement == elementInstSmpl)
             {
-                // Copie de la division globale
+                // Copy the global division
                 copyGlobal(idSource, idDest);
 
-                // Copie de tous les samples d'un instrument dans un autre
+                // Link all samples of an instrument to the other instrument (can be the same instrument)
                 idSource.typeElement = elementInstSmpl;
                 foreach (int i, _sm->getSiblings(idSource))
                 {
@@ -88,18 +88,16 @@ void Duplicator::copy(EltID idSource, EltID idDest)
             }
             break;
         case elementInstSmpl:
-            if ((idDest.typeElement == elementInst || idDest.typeElement == elementInstSmpl) &&
-                    idDest.indexElt != idSource.indexElt)
+            if (idDest.typeElement == elementInst || idDest.typeElement == elementInstSmpl)
                 copyLink(idSource, idDest);
             break;
         case elementPrst:
-            if ((idDest.typeElement == elementPrst || idDest.typeElement == elementPrstInst) &&
-                    idSource.indexElt != idDest.indexElt)
+            if (idDest.typeElement == elementPrst || idDest.typeElement == elementPrstInst)
             {
-                // Copie de la division globale
+                // Copy the global division
                 copyGlobal(idSource, idDest);
 
-                // Copie de tous les instruments d'un preset dans un autre
+                // Link all instruments of a preset to the other preset (can be the same preset)
                 idSource.typeElement = elementPrstInst;
                 foreach (int i, _sm->getSiblings(idSource))
                 {
@@ -109,8 +107,7 @@ void Duplicator::copy(EltID idSource, EltID idDest)
             }
             break;
         case elementPrstInst:
-            if ((idDest.typeElement == elementPrst || idDest.typeElement == elementPrstInst) &&
-                    idDest.indexElt != idSource.indexElt)
+            if (idDest.typeElement == elementPrst || idDest.typeElement == elementPrstInst)
                 copyLink(idSource, idDest);
             break;
         default:
@@ -119,7 +116,7 @@ void Duplicator::copy(EltID idSource, EltID idDest)
     }
     else
     {
-        // Copie entre 2 sf2
+        // Copy between two different files
         switch (idSource.typeElement)
         {
         case elementSmpl:
