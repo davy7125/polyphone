@@ -42,11 +42,11 @@ public:
     // Remove all customization
     void clearCustomization();
 
-    // Add a current range arround a key
+    // Add a current range around a key
     void addCurrentRange(int note, int noteMin, int noteMax);
 
 public slots:
-    // Remove a current range arround a key
+    // Remove a current range around a key
     void removeCurrentRange(int num);
 
 private slots:

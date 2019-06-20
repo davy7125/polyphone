@@ -1395,7 +1395,6 @@ void PageTable::reselect()
     foreach (EltID id, listID)
         this->select(id);
     _table->setSelectionMode(QAbstractItemView::ExtendedSelection);
-    customizeKeyboard();
     _table->setRowHidden(0, true); // It's now hidden again
 }
 
@@ -1437,6 +1436,7 @@ void PageTable::selected()
         return;
     for (int i = 0; i < listItems.count(); i++)
         ids << _table->getID(listItems.at(i)->column());
+    _currentIds = ids;
 
     // Mise à jour des informations sur les mods
     int colonne = listItems.last()->column();
