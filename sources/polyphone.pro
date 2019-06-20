@@ -40,6 +40,8 @@ TRANSLATIONS = polyphone_fr.ts \
 QT += core gui printsupport svg network #testlib
 TARGET = polyphone
 TEMPLATE = app
+QMAKE_CXXFLAGS += -std=c++11
+CONFIG += c++11
 
 win32{
     DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
