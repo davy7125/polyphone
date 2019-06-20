@@ -47,7 +47,7 @@ void midiCallback(double deltatime, std::vector< unsigned char > *message, void 
     MidiDevice * instance = static_cast<MidiDevice*>(userData);
 
     // Create an event
-    QEvent* ev = 0;
+    QEvent* ev = nullptr;
     //unsigned char channel = message->at(0) & MASK_CHANNEL;
     unsigned char status = message->at(0) & MASK_STATUS;
     if (status == STATUS_NOTEON || status == STATUS_NOTEOFF)
