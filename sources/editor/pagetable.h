@@ -33,8 +33,9 @@
 #include "tablewidgetmod.h"
 class GraphicsViewRange;
 class EnvelopEditor;
+class ModulatorEditor;
 
-// Spécialisation de page pour inst et prst
+// Common class for inst and prst
 class PageTable : public Page
 {
     Q_OBJECT
@@ -81,6 +82,8 @@ protected:
     ElementType lienMod;
     ElementType contenu;
     TableWidget *_table;
+    ModulatorEditor * _modulatorEditor;
+
     TableWidgetMod *tableMod;
     QSpinBox *spinAmount;
     ComboBox *comboSource1;

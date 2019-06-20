@@ -242,7 +242,7 @@ QString ThemeManager::getName(ColorType type)
 
 QPalette::ColorRole ThemeManager::getColorRole(ColorType type)
 {
-    QPalette::ColorRole ret;
+    QPalette::ColorRole ret = QPalette::NoRole;
 
     switch (type)
     {

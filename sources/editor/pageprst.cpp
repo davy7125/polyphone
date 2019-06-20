@@ -77,10 +77,6 @@ PagePrst::PagePrst(QWidget *parent) :
     ui->tablePrst->setStyleSheet("QTableWidget{border:1px solid " +
                                  this->palette().dark().color().name() +
                                  ";border-top:0;border-left:0;border-right:0}");
-    ui->pushCopyMod->setIcon(ContextManager::theme()->getColoredSvg(":/icons/copy.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
-    ui->pushPasteMod->setIcon(ContextManager::theme()->getColoredSvg(":/icons/paste.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
-    ui->pushNouveauMod->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-new.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
-    ui->pushSupprimerMod->setIcon(ContextManager::theme()->getColoredSvg(":/icons/minus.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
 
     this->contenant = elementPrst;
     this->contenantGen = elementPrstGen;
@@ -90,7 +86,11 @@ PagePrst::PagePrst(QWidget *parent) :
     this->lienGen = elementPrstInstGen;
     this->lienMod = elementPrstInstMod;
     this->_table = ui->tablePrst;
-    this->tableMod = ui->tableMod;
+    _rangeEditor = ui->rangeEditor;
+    _envelopEditor = nullptr;
+    _modulatorEditor = ui->modulatorEditor;
+
+    /*this->tableMod = ui->tableMod;
     this->spinAmount = ui->spinSource2;
     this->checkAbs = ui->checkAbs;
     this->pushNouveauMod = ui->pushNouveauMod;
@@ -100,11 +100,9 @@ PagePrst::PagePrst(QWidget *parent) :
     this->comboSource1 = ui->comboSource1;
     this->comboSource2 = ui->comboSource2;
     this->comboDestination = ui->comboDestination;
-    _pushCopyMod = ui->pushCopyMod;
-    _rangeEditor = ui->rangeEditor;
-    _envelopEditor = nullptr;
+    _pushCopyMod = ui->pushCopyMod;*/
 
-    // Remplissage de comboDestination
+    /* Remplissage de comboDestination
     for (int i = 0; i < _destIndex.count(); i++)
         this->comboDestination->addItem(Attribute::getDescription(this->getDestNumber(i), true));
     this->comboDestination->setLimite(_destIndex.count());
@@ -113,14 +111,14 @@ PagePrst::PagePrst(QWidget *parent) :
     this->remplirComboSource(this->comboSource1);
     this->remplirComboSource(this->comboSource2);
 
-    // Initialisation spinBoxes
-    ui->spinBank->init(this);
-    ui->spinPreset->init(this);
-
     // Initialisation menu de copie de modulateurs
     _menu = new QMenu();
     _menu->addAction("", this, SLOT(duplicateMod()));
-    _menu->addAction("", this, SLOT(copyMod()));
+    _menu->addAction("", this, SLOT(copyMod()));*/
+
+    // Initialisation spinBoxes
+    ui->spinBank->init(this);
+    ui->spinPreset->init(this);
 
     // Initialisation édition étendues
     ui->rangeEditor->init(_sf2);
@@ -158,11 +156,6 @@ QList<Page::DisplayOption> PagePrst::getDisplayOptions(IdList selectedIds)
             << DisplayOption(2, ":/icons/range.svg", trUtf8("Ranges"), selectedIds.isElementUnique(elementPrst));
 }
 
-void PagePrst::setModVisible(bool visible)
-{
-    ui->frameModulator->setVisible(visible);
-}
-
 bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int displayOption)
 {
     if (selectedIds.empty())
@@ -193,7 +186,7 @@ bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int di
     {
         ui->spinBank->setEnabled(true);
         ui->spinPreset->setEnabled(true);
-        ui->frameModulator->setEnabled(true);
+        //ui->frameModulator->setEnabled(true);
         EltID id = _currentParentIds.first();
         id.typeElement = elementPrst;
         ui->spinBank->setValue(_sf2->get(id, champ_wBank).wValue);
@@ -239,7 +232,7 @@ bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int di
             ui->spinPreset->setValue(tmp);
 
         // Hide modulators
-        ui->frameModulator->setEnabled(false);
+        //ui->frameModulator->setEnabled(false);
 
         // Hide the percussion label
         ui->labelPercussion->hide();

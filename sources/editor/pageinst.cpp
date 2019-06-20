@@ -99,10 +99,6 @@ PageInst::PageInst(QWidget *parent) :
     ui->tableInst->setStyleSheet("QTableWidget{border:1px solid " +
                                  this->palette().dark().color().name() +
                                  ";border-top:0;border-left:0;border-right:0}");
-    ui->pushCopyMod->setIcon(ContextManager::theme()->getColoredSvg(":/icons/copy.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
-    ui->pushPasteMod->setIcon(ContextManager::theme()->getColoredSvg(":/icons/paste.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
-    ui->pushNouveauMod->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-new.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
-    ui->pushSupprimerMod->setIcon(ContextManager::theme()->getColoredSvg(":/icons/minus.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
 
     this->contenant = elementInst;
     this->contenantGen = elementInstGen;
@@ -112,7 +108,11 @@ PageInst::PageInst(QWidget *parent) :
     this->lienGen = elementInstSmplGen;
     this->lienMod = elementInstSmplMod;
     this->_table = ui->tableInst;
-    this->tableMod = ui->tableMod;
+    _rangeEditor = ui->rangeEditor;
+    _envelopEditor = ui->envelopEditor;
+    _modulatorEditor = ui->modulatorEditor;
+
+    /*this->tableMod = ui->tableMod;
     this->spinAmount = ui->spinSource2;
     this->checkAbs = ui->checkAbs;
     this->pushNouveauMod = ui->pushNouveauMod;
@@ -122,11 +122,9 @@ PageInst::PageInst(QWidget *parent) :
     this->comboSource1 = ui->comboSource1;
     this->comboSource2 = ui->comboSource2;
     this->comboDestination = ui->comboDestination;
-    _pushCopyMod = ui->pushCopyMod;
-    _rangeEditor = ui->rangeEditor;
-    _envelopEditor = ui->envelopEditor;
+    _pushCopyMod = ui->pushCopyMod;*/
 
-    // Remplissage de comboDestination
+    /* Remplissage de comboDestination
     for (int i = 0; i < 48; i++)
         this->comboDestination->addItem(Attribute::getDescription(this->getDestNumber(i), false));
     this->comboDestination->setLimite(48);
@@ -138,7 +136,7 @@ PageInst::PageInst(QWidget *parent) :
     // Initialisation menu de copie de modulateurs
     _menu = new QMenu();
     _menu->addAction("", this, SLOT(duplicateMod()));
-    _menu->addAction("", this, SLOT(copyMod()));
+    _menu->addAction("", this, SLOT(copyMod()));*/
 
     // Initialisation édition étendues, enveloppes
     ui->rangeEditor->init(_sf2);
@@ -177,11 +175,6 @@ QList<Page::DisplayOption> PageInst::getDisplayOptions(IdList selectedIds)
             << DisplayOption(1, ":/icons/table.svg", trUtf8("Table"))
             << DisplayOption(2, ":/icons/range.svg", trUtf8("Ranges"), selectedIds.isElementUnique(elementInst))
             << DisplayOption(3, ":/icons/adsr.svg", trUtf8("Envelopes"), selectedIds.isElementUnique(elementInst));
-}
-
-void PageInst::setModVisible(bool visible)
-{
-    ui->frameModulator->setVisible(visible);
 }
 
 bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int displayOption)

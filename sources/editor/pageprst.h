@@ -42,7 +42,6 @@ class PagePrst : public PageTable
 public:
     explicit PagePrst(QWidget *parent = nullptr);
     ~PagePrst() override;
-    void setModVisible(bool visible);
     void spinUpDown(int steps, SpinBox *spin);
 
     // Display options

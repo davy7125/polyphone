@@ -39,7 +39,6 @@ class PageInst : public PageTable
 public:
     explicit PageInst(QWidget *parent = nullptr);
     ~PageInst() override;
-    void setModVisible(bool visible);
 
     // Display options
     QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;

@@ -54,7 +54,6 @@ Duplicator::Duplicator() :
 
 void Duplicator::copy(EltID idSource, EltID idDest)
 {
-    qDebug() << "copy" << idSource.toString() << "into" << idDest.toString();
     if (idDest.typeElement != elementSf2 && idDest.typeElement != elementInst &&
             idDest.typeElement != elementInstSmpl && idDest.typeElement != elementRootInst &&
             idDest.typeElement != elementPrst && idDest.typeElement != elementPrstInst &&

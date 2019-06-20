@@ -69,13 +69,13 @@ void PageTable::afficheTable(bool justSelection)
     }
 
     // Mods
-    if (_currentIds.count() == 1)
+    /*if (_currentIds.count() == 1)
         afficheMod(_currentIds[0]);
     else
     {
         this->afficheEditMod();
         this->displayModInTable();
-    }
+    }*/
 
     // Fin de la préparation
     this->reselect();
@@ -457,7 +457,7 @@ void PageTable::afficheMod(EltID id, AttributeType selectedField)
                 index = i;
         }
     }
-    afficheMod(id, index);
+    //afficheMod(id, index);
 }
 
 void PageTable::afficheMod(EltID id, int selectedIndex)
@@ -1440,10 +1440,10 @@ void PageTable::selected()
 
     // Mise à jour des informations sur les mods
     int colonne = listItems.last()->column();
-    if (listItems.count() == 1)
+    /*if (listItems.count() == 1)
         this->afficheMod(_table->getID(colonne), _table->getChamp(listItems.last()->row()));
     else
-        this->afficheMod(_table->getID(colonne));
+        this->afficheMod(_table->getID(colonne));*/
 
     // Update the selection outside the table
     emit(selectedIdsChanged(ids));
