@@ -332,7 +332,7 @@ void EnvelopEditor::enableEditor(bool isEnabled)
     for (int i = 0; i < ui->gridLayout_2->count(); ++i)
     {
         QWidget *widget = ui->gridLayout_2->itemAt(i)->widget();
-        if (widget != NULL)
+        if (widget != nullptr)
             widget->setEnabled(isEnabled);
     }
 }
@@ -342,7 +342,7 @@ void EnvelopEditor::stopSignals(bool isStopped)
     for (int i = 0; i < ui->gridLayout_2->count(); ++i)
     {
         QWidget *widget = ui->gridLayout_2->itemAt(i)->widget();
-        if (widget != NULL)
+        if (widget != nullptr)
             widget->blockSignals(isStopped);
     }
 }

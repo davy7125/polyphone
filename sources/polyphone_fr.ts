@@ -1878,34 +1878,32 @@ en ligne</translation>
     <message>
         <location filename="editor/envelopeditor.ui" line="279"/>
         <source>Delay</source>
-        <translation>Delay</translation>
+        <translation>Délai</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="181"/>
         <source>Key → Decay</source>
-        <oldsource>Key ? Decay</oldsource>
-        <translation>Note → Decay</translation>
+        <translation>Note → Déclin</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="128"/>
         <source>Decay</source>
-        <translation>Decay</translation>
+        <translation>Déclin</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="420"/>
         <source>Sustain</source>
-        <translation>Sustain</translation>
+        <translation>Soutien</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="391"/>
         <source>Key → Hold</source>
-        <oldsource>Key ? Hold</oldsource>
-        <translation>Note → Hold</translation>
+        <translation>Note → Maintien</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="263"/>
         <source>Hold</source>
-        <translation>Hold</translation>
+        <translation>Maintien</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="138"/>
@@ -1915,7 +1913,7 @@ en ligne</translation>
     <message>
         <location filename="editor/envelopeditor.ui" line="329"/>
         <source>Attack</source>
-        <translation>Attack</translation>
+        <translation>Attaque</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="458"/>

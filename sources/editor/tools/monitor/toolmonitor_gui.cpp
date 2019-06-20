@@ -80,6 +80,7 @@ ToolMonitor_gui::~ToolMonitor_gui()
 void ToolMonitor_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
 {
     _isInst = (ids.isEmpty() || ids[0].typeElement == elementInst || ids[0].typeElement == elementInstSmpl);
+    _initialID = ids.empty() ? EltID(elementUnknown) : ids[0];
     ToolMonitor_parameters * params = (ToolMonitor_parameters *)parameters;
 
     ui->comboParameter->blockSignals(true);
@@ -137,47 +138,59 @@ void ToolMonitor_gui::on_comboParameter_currentIndexChanged(int index)
 
     // Valeur par défaut
     EltID id = _initialID;
-    if (_isInst)
-        id.typeElement = elementInst;
-    else
-        id.typeElement = elementPrst;
-    bool globDefined = sm->isSet(id, champ);
-    double globVal;
-    if (globDefined)
-        globVal = Attribute::toRealValue(champ, !_isInst, sm->get(id, champ));
-    else
-        globVal = Attribute::getDefaultRealValue(champ, !_isInst);
-    if (_isInst)
-        id.typeElement = elementInstSmpl;
-    else
-        id.typeElement = elementPrstInst;
-    foreach (int i, sm->getSiblings(id))
+    if (id.typeElement == elementUnknown)
     {
-        id.indexElt2 = i;
-        rangesType keyRange = sm->get(id, champ_keyRange).rValue;
-        if (sm->isSet(id, champ))
+        for (int i = 0; i < 128; i++)
         {
-            // Champ renseigné dans la division
-            double val = Attribute::toRealValue(champ, !_isInst, sm->get(id, champ));
-            for (int key = keyRange.byLo; key <= keyRange.byHi; key++)
-            {
-                if (key >= 0 && key < 128)
-                    vectListPoints[key] << val;
-            }
+            vectListPoints[i] << 0;
+            vectListPointsDef[i] << 0;
         }
-        else if (globDefined)
-        {
-            // Champ renseigné globalement
-            for (int key = keyRange.byLo; key <= keyRange.byHi; key++)
-                if (key >= 0 && key < 128)
-                    vectListPoints[key] << globVal;
-        }
+    }
+    else
+    {
+        if (_isInst)
+            id.typeElement = elementInst;
         else
+            id.typeElement = elementPrst;
+        bool globDefined = sm->isSet(id, champ);
+        double globVal;
+        if (globDefined)
+            globVal = Attribute::toRealValue(champ, !_isInst, sm->get(id, champ));
+        else
+            globVal = Attribute::getDefaultRealValue(champ, !_isInst);
+        if (_isInst)
+            id.typeElement = elementInstSmpl;
+        else
+            id.typeElement = elementPrstInst;
+
+        foreach (int i, sm->getSiblings(id))
         {
-            // Valeur par défaut du champ
-            for (int key = keyRange.byLo; key <= keyRange.byHi; key++)
-                if (key >= 0 && key < 128)
-                    vectListPointsDef[key] << globVal;
+            id.indexElt2 = i;
+            rangesType keyRange = sm->get(id, champ_keyRange).rValue;
+            if (sm->isSet(id, champ))
+            {
+                // Champ renseigné dans la division
+                double val = Attribute::toRealValue(champ, !_isInst, sm->get(id, champ));
+                for (int key = keyRange.byLo; key <= keyRange.byHi; key++)
+                {
+                    if (key >= 0 && key < 128)
+                        vectListPoints[key] << val;
+                }
+            }
+            else if (globDefined)
+            {
+                // Champ renseigné globalement
+                for (int key = keyRange.byLo; key <= keyRange.byHi; key++)
+                    if (key >= 0 && key < 128)
+                        vectListPoints[key] << globVal;
+            }
+            else
+            {
+                // Valeur par défaut du champ
+                for (int key = keyRange.byLo; key <= keyRange.byHi; key++)
+                    if (key >= 0 && key < 128)
+                        vectListPointsDef[key] << globVal;
+            }
         }
     }
 
