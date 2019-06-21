@@ -33,18 +33,18 @@ int PianoScene::KEYHEIGHT = 72;
 qreal PianoScene::sceneWidth(int startKey, int keys)
 {
     int nbWidth = 0;
-    if (getOffsetX(startKey) != 0)
+    if (getOffsetX(startKey) < 0.1)
     {
         nbWidth++;
         startKey++;
     }
-    if (getOffsetX(startKey + keys - 1) != 0)
+    if (getOffsetX(startKey + keys - 1) < 0.1)
     {
         nbWidth++;
         keys--;
     }
     for (int i = startKey; i < startKey + keys; i++)
-        if (getOffsetX(i) == 0)
+        if (getOffsetX(i) < 0.1)
             nbWidth++;
 
     return KEYWIDTH * nbWidth;
@@ -298,7 +298,7 @@ void PianoScene::keyOn(PianoKey* key, qreal pressure)
     showKeyOn(key, vel);
 }
 
-void PianoScene::keyOff( PianoKey* key )
+void PianoScene::keyOff(PianoKey* key)
 {
     triggerNoteOff(key->getNote());
     showKeyOff(key);
@@ -322,7 +322,7 @@ void PianoScene::keyNoteOff(const int note)
 
 PianoKey* PianoScene::getKeyForPos( const QPointF& p ) const
 {
-    PianoKey* key = 0;
+    PianoKey* key = nullptr;
     QList<QGraphicsItem *> ptitems = this->items(p, Qt::IntersectsItemShape, Qt::DescendingOrder);
     foreach(QGraphicsItem *itm, ptitems)
     {
@@ -348,10 +348,10 @@ void PianoScene::mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent)
     {
         PianoKey* key = getKeyForPos(mouseEvent->scenePos());
         PianoKey* lastkey = getKeyForPos(mouseEvent->lastScenePos());
-        if (lastkey != NULL && lastkey != key && lastkey->isPressed())
+        if (lastkey != nullptr && lastkey != key && lastkey->isPressed())
             keyOff(lastkey);
 
-        if (key != NULL && !key->isPressed())
+        if (key != nullptr && !key->isPressed())
             keyOn(key, getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
 
         mouseEvent->accept();
@@ -370,7 +370,7 @@ void PianoScene::mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent)
 void PianoScene::mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent)
 {
     PianoKey* key = getKeyForPos(mouseEvent->scenePos());
-    if (key != NULL && !key->isPressed())
+    if (key != nullptr && !key->isPressed())
     {
         keyOn(key, getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
         m_mousePressed = true;
@@ -382,7 +382,7 @@ void PianoScene::mouseReleaseEvent(QGraphicsSceneMouseEvent * mouseEvent)
 {
     m_mousePressed = false;
     PianoKey* key = getKeyForPos(mouseEvent->scenePos());
-    if (key != NULL && key->isPressed())
+    if (key != nullptr && key->isPressed())
     {
         keyOff(key);
         mouseEvent->accept();
@@ -493,23 +493,26 @@ bool PianoScene::event(QEvent *event)
     {
         QTouchEvent *touchEvent = static_cast<QTouchEvent*>(event);
         QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
-        foreach(const QTouchEvent::TouchPoint& touchPoint, touchPoints)
+        foreach (const QTouchEvent::TouchPoint& touchPoint, touchPoints)
         {
+            // Make sure the touchpoint started in the scene
+            if (getKeyForPos(touchPoint.startScenePos()) == nullptr)
+                continue;
+
             switch (touchPoint.state())
             {
-            //case Qt::TouchPointPrimary:
             case Qt::TouchPointStationary:
                 continue;
             case Qt::TouchPointReleased: {
                 PianoKey* key = getKeyForPos(touchPoint.scenePos());
-                if (key != NULL && key->isPressed())
+                if (key != nullptr && key->isPressed())
                     keyOff(key);
                 break;
             }
             case Qt::TouchPointPressed: {
                 PianoKey* key = getKeyForPos(touchPoint.scenePos());
-                if (key != NULL && !key->isPressed()) {
-                    keyOn(key, touchPoint.pressure());
+                if (key != nullptr && !key->isPressed()) {
+                    keyOn(key, 127 * touchPoint.pressure());
                     key->ensureVisible();
                 }
                 break;
@@ -517,14 +520,12 @@ bool PianoScene::event(QEvent *event)
             case Qt::TouchPointMoved: {
                 PianoKey* key = getKeyForPos(touchPoint.scenePos());
                 PianoKey* lastkey = getKeyForPos(touchPoint.lastScenePos());
-                if ((lastkey != NULL) && (lastkey != key) && lastkey->isPressed())
+                if (lastkey != nullptr && lastkey != key && lastkey->isPressed())
                     keyOff(lastkey);
-                if ((key != NULL) && !key->isPressed())
-                    keyOn(key, touchPoint.pressure());
+                if (key != nullptr && !key->isPressed())
+                    keyOn(key, 127 * touchPoint.pressure());
                 break;
             }
-            default:
-                break;
             }
         }
         event->accept();
@@ -542,7 +543,7 @@ bool PianoScene::event(QEvent *event)
 
 void PianoScene::allKeysOff()
 {
-    foreach(PianoKey* key, m_keys)
+    foreach (PianoKey* key, m_keys)
     {
         key->setPressed(false);
     }

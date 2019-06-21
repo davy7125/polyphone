@@ -70,7 +70,7 @@ public:
         MARKER_TYPE_DOT_BLACK
     };
 
-    PianoKeybd(QWidget *parent = NULL, const int startKey = 36, const int numKeys = 61);
+    PianoKeybd(QWidget *parent = nullptr, const int startKey = 36, const int numKeys = 61);
     virtual ~PianoKeybd();
 
     // Settings

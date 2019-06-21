@@ -33,7 +33,7 @@ class PianoScene : public QGraphicsScene
     Q_OBJECT
     
 public:
-    PianoScene (const int startKey, const int numKeys, PianoScene * previousScene = NULL, QObject * parent = NULL);
+    PianoScene (const int startKey, const int numKeys, PianoScene * previousScene = nullptr, QObject * parent = nullptr);
     
     QSize sizeHint() const;
     double getRatio() const { return m_ratio; }
@@ -79,11 +79,12 @@ protected:
     int getKeyVelocity();
     PianoKey* getKeyForPos(const QPointF& p) const;
     int getPressureFromPos(const QPointF& p, bool isBlack) const;
+
     void mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent);
     void mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent * mouseEvent);
-    void keyPressEvent(QKeyEvent * keyEvent );
-    void keyReleaseEvent(QKeyEvent * keyEvent );
+    void keyPressEvent(QKeyEvent * keyEvent);
+    void keyReleaseEvent(QKeyEvent * keyEvent);
     bool event(QEvent *event);
 
 protected slots:
