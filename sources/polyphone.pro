@@ -202,7 +202,6 @@ SOURCES	+= main.cpp \
     editor/overview/pageoverviewinst.cpp \
     editor/overview/pageoverviewprst.cpp \
     editor/overview/tablepageoverview.cpp \
-    editor/widgets/tablewidgetmod.cpp \
     editor/widgets/tablewidget.cpp \
     editor/widgets/tabledelegate.cpp \
     editor/widgets/spinboxkey.cpp \
@@ -467,7 +466,6 @@ HEADERS  += \
     editor/overview/pageoverviewinst.h \
     editor/overview/pageoverviewprst.h \
     editor/overview/tablepageoverview.h \
-    editor/widgets/tablewidgetmod.h \
     editor/widgets/tablewidget.h \
     editor/widgets/tabledelegate.h \
     editor/widgets/spinboxkey.h \

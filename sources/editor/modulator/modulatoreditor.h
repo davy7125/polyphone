@@ -42,7 +42,7 @@ public:
     explicit ModulatorEditor(QWidget *parent = 0);
     ~ModulatorEditor();
 
-    void setIds(IdList ids, QList<AttributeType> attributes);
+    void setIds(IdList ids, QList<AttributeType> attributes = QList<AttributeType>());
 
 signals:
     void attributesSelected(QList<AttributeType> attributes);

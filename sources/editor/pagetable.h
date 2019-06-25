@@ -27,11 +27,7 @@
 #define PAGETABLE_H
 
 #include "page.h"
-#include "modulatorcombosrc.h"
-#include "modulatorcombodest.h"
-#include "modulatorcombocurve.h"
 #include "tablewidget.h"
-#include "tablewidgetmod.h"
 class GraphicsViewRange;
 class EnvelopEditor;
 class ModulatorEditor;
@@ -49,20 +45,9 @@ public:
 
 public slots:
     void set(int ligne, int colonne, bool allowPropagation = true);
-    void setAmount();
-    void setAbs();
     void selected();
-    void afficheEditMod();
-    void setSourceType(int row, int column);
-    void setSourceAmountType(int row, int column);
-    void setDest(int index);
-    void setSource(int index);
-    void setSource2(int index);
-    void supprimerMod();
-    void nouveauMod();
 
 protected:
-    QList<EltID> getEltIds(bool &error, bool allWithDivisions, bool allDivWithRange);
     void afficheTable(bool justSelection);
     void afficheRanges(bool justSelection);
     void afficheEnvelops(bool justSelection);
@@ -85,18 +70,6 @@ protected:
     TableWidget *_table;
     ModulatorEditor * _modulatorEditor;
 
-    TableWidgetMod *tableMod;
-    QSpinBox *spinAmount;
-    ModulatorComboSrc *comboSource1;
-    ModulatorComboCurve *comboSource1Courbe;
-    ModulatorComboSrc *comboSource2;
-    ModulatorComboCurve *comboSource2Courbe;
-    ModulatorComboDest *comboDestination;
-    QCheckBox *checkAbs;
-    QPushButton *pushSupprimerMod;
-    QPushButton *pushNouveauMod;
-    QMenu * _menu;
-    QPushButton * _pushCopyMod;
     GraphicsViewRange * _rangeEditor;
     EnvelopEditor * _envelopEditor;
 
@@ -105,10 +78,6 @@ protected:
     quint16 getSrcNumber(quint16 wVal, bool &CC);
 
 protected slots:
-    void copyMod();
-    void pasteMod();
-    void duplicateMod();
-    void duplicateMod(QList<int> listIndex);
     void actionBegin();
     void actionFinished();
     void customizeKeyboard();
@@ -119,31 +88,13 @@ private slots:
     void divisionSortChanged();
 
 private:
-    class Modulator
-    {
-    public:
-        SFModulator modSrcOper;
-        AttributeType modDestOper;
-        qint32 modAmount;
-        SFModulator modAmtSrcOper;
-        SFTransform modTransOper;
-        qint32 index;
-    };
-
     void addGlobal(IdList listIds);
     void addDivisions(EltID id);
     void formatTable(bool multiGlobal);
-    void afficheMod(EltID id, int selectedIndex = -1);
-    /*static void addAvailableReceiverMod(ModulatorComboSrcDest *combo, EltID id);
-    static void addAvailableSenderMod(ModulatorComboSrcDest *combo, EltID id);*/
-    int getAssociatedMod(EltID id);
     int limit(int iVal, AttributeType champ, EltID id);
     void resetChamp(int colonne, AttributeType champ1, AttributeType champ2);
     void setOffset(int ligne, int colonne, AttributeType champ1, AttributeType champ2);
-    void pasteMod(EltID id, QList<Modulator> modulators);
-    QList<Modulator> getModList(EltID id);
 
-    static QList<Modulator> _modulatorCopy;
     QList<int> _listKeyEnlighted;
     int _sortType;
 };
