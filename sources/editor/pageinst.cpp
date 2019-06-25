@@ -38,55 +38,6 @@ PageInst::PageInst(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    _destIndex << champ_startAddrsOffset
-               << champ_startAddrsCoarseOffset
-               << champ_endAddrsOffset
-               << champ_endAddrsCoarseOffset
-               << champ_startloopAddrsOffset
-               << champ_startloopAddrsCoarseOffset
-               << champ_endloopAddrsOffset
-               << champ_endloopAddrsCoarseOffset
-               << champ_overridingRootKey
-               << champ_fineTune
-               << champ_coarseTune
-               << champ_scaleTuning
-               << champ_initialFilterFc
-               << champ_initialFilterQ
-               << champ_pan
-               << champ_chorusEffectsSend
-               << champ_reverbEffectsSend
-               << champ_keynum
-               << champ_exclusiveClass
-               << champ_initialAttenuation
-               << champ_delayVolEnv
-               << champ_attackVolEnv
-               << champ_holdVolEnv
-               << champ_decayVolEnv
-               << champ_sustainVolEnv
-               << champ_releaseVolEnv
-               << champ_keynumToVolEnvHold
-               << champ_keynumToVolEnvDecay
-               << champ_velocity
-               << champ_sampleModes
-               << champ_delayModEnv
-               << champ_attackModEnv
-               << champ_holdModEnv
-               << champ_decayModEnv
-               << champ_sustainModEnv
-               << champ_releaseModEnv
-               << champ_modEnvToPitch
-               << champ_modEnvToFilterFc
-               << champ_keynumToModEnvHold
-               << champ_keynumToModEnvDecay
-               << champ_delayModLFO
-               << champ_freqModLFO
-               << champ_modLfoToPitch
-               << champ_modLfoToVolume
-               << champ_modLfoToFilterFc
-               << champ_delayVibLFO
-               << champ_freqVibLFO
-               << champ_vibLfoToPitch;
-
     // Style
     QString resetHoverColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name();
     ui->frameBottom->setStyleSheet("QFrame{background-color:" +
@@ -112,32 +63,6 @@ PageInst::PageInst(QWidget *parent) :
     _envelopEditor = ui->envelopEditor;
     _modulatorEditor = ui->modulatorEditor;
 
-    /*this->tableMod = ui->tableMod;
-    this->spinAmount = ui->spinSource2;
-    this->checkAbs = ui->checkAbs;
-    this->pushNouveauMod = ui->pushNouveauMod;
-    this->pushSupprimerMod = ui->pushSupprimerMod;
-    this->comboSource1Courbe = ui->comboCourbeSource1;
-    this->comboSource2Courbe = ui->comboCourbeSource2;
-    this->comboSource1 = ui->comboSource1;
-    this->comboSource2 = ui->comboSource2;
-    this->comboDestination = ui->comboDestination;
-    _pushCopyMod = ui->pushCopyMod;*/
-
-    /* Remplissage de comboDestination
-    for (int i = 0; i < 48; i++)
-        this->comboDestination->addItem(Attribute::getDescription(this->getDestNumber(i), false));
-    this->comboDestination->setLimite(48);
-
-    // Remplissage des combosources
-    this->remplirComboSource(this->comboSource1);
-    this->remplirComboSource(this->comboSource2);
-
-    // Initialisation menu de copie de modulateurs
-    _menu = new QMenu();
-    _menu->addAction("", this, SLOT(duplicateMod()));
-    _menu->addAction("", this, SLOT(copyMod()));*/
-
     // Initialisation édition étendues, enveloppes
     ui->rangeEditor->init(_sf2);
     ui->envelopEditor->init(_sf2);
@@ -162,6 +87,7 @@ PageInst::PageInst(QWidget *parent) :
     connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(customizeKeyboard()));
     connect(ui->rangeEditor, SIGNAL(divisionsSelected(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
     connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
+    connect(ui->modulatorEditor, SIGNAL(attributesSelected(QList<AttributeType>)), this, SLOT(onModSelectionChanged(QList<AttributeType>)));
 }
 
 PageInst::~PageInst()
@@ -216,11 +142,13 @@ bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int di
             ui->labelLinkedTo->setText(trUtf8("Instrument linked to preset:"));
         else
             ui->labelLinkedTo->setText(trUtf8("Instrument linked to presets:"));
+        ui->modulatorEditor->show();
     }
     else
     {
         ui->labelLinkedTo->setText("-");
         ui->widgetLinkedTo->clear();
+        ui->modulatorEditor->hide();
     }
 
     switch (displayOption)
@@ -381,16 +309,4 @@ void PageInst::keyPlayedInternal2(int key, int velocity)
             }
         }
     }
-}
-
-int PageInst::getDestIndex(AttributeType type)
-{
-    return _destIndex.indexOf(type);
-}
-
-AttributeType PageInst::getDestNumber(int row)
-{
-    if (_destIndex.count() > row)
-        return _destIndex[row];
-    return champ_unknown;
 }

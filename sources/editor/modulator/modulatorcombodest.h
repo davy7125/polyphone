@@ -2,6 +2,7 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2019 Davy Triponney                                **
+**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,53 +23,37 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_INST_H
-#define PAGE_INST_H
+#ifndef MODULATORCOMBODEST_H
+#define MODULATORCOMBODEST_H
 
-#include <QWidget>
-#include "pagetable.h"
+#include <QComboBox>
+#include "basetypes.h"
 
-namespace Ui {
-class PageInst;
-}
-
-class PageInst : public PageTable
+class ModulatorComboDest : public QComboBox
 {
     Q_OBJECT
 
 public:
-    explicit PageInst(QWidget *parent = nullptr);
-    ~PageInst() override;
+    ModulatorComboDest(QWidget* parent = nullptr);
 
-    // Display options
-    QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;
+    // Initialize the combobox
+    void initialize(EltID id);
 
-protected:
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
-    void keyPlayedInternal2(int key, int velocity) override;
+    // Load value
+    void loadValue();
 
-private slots:
-    void onLinkClicked(EltID id);
+    // Set / get the attribute
+    void selectAttribute(AttributeType attribute);
+    AttributeType getCurrentAttribute();
 
-private:
-    Ui::PageInst *ui;
-};
-
-// Classe TableWidget pour instruments
-class TableWidgetInst : public TableWidget
-{
-    Q_OBJECT
-
-public:
-    TableWidgetInst(QWidget *parent = nullptr);
-    ~TableWidgetInst();
-
-    // Association champ - ligne
-    AttributeType getChamp(int row);
-    int getRow(quint16 champ);
+    // Set / get the index
+    void selectIndex(int index);
+    int getCurrentIndex();
 
 private:
-    QList<AttributeType> _fieldList;
+    QList<AttributeType> _destIndex;
+    EltID _id;
+    QList<int> _listIndex;
 };
 
-#endif // PAGE_INST_H
+#endif // MODULATORCOMBODEST_H

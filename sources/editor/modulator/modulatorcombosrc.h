@@ -23,23 +23,35 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TABLECOMBOBOX_H
-#define TABLECOMBOBOX_H
+#ifndef MODULATORCOMBOSRC_H
+#define MODULATORCOMBOSRC_H
 
 #include <QComboBox>
+#include "basetypes.h"
 
-// Classe TableComboBox pour les formes de courbes
-class TableComboBox : public QComboBox
+class ModulatorComboSrc : public QComboBox
 {
     Q_OBJECT
 
 public:
-    explicit TableComboBox(QWidget* parent = 0);
-    ~TableComboBox();
-    bool eventFilter(QObject* object, QEvent* event);
+    ModulatorComboSrc(QWidget* parent = nullptr);
 
-signals:
-    void clicked(int row, int column);
+    // Initialize the combobox
+    void initialize(EltID id, bool source1);
+
+    // Load value
+    void loadValue();
+
+    // Get the value changed by the user
+    int getValue();
+
+private:
+    QList<int> getAssociatedMods(EltID id);
+    void setLink(bool enabled, QString text);
+    static QString getIndexName(quint16 iVal, int CC);
+
+    EltID _id;
+    bool _source1;
 };
 
-#endif // TABLECOMBOBOX_H
+#endif // MODULATORCOMBOSRC_H

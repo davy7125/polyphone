@@ -23,14 +23,15 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "tablecombobox.h"
+#include "modulatorcombocurve.h"
 #include "contextmanager.h"
 #include <QMouseEvent>
 #include <QTableView>
 #include <QStandardItemModel>
 #include <QHeaderView>
+#include "soundfontmanager.h"
 
-TableComboBox::TableComboBox(QWidget* parent) : QComboBox(parent)
+ModulatorComboCurve::ModulatorComboCurve(QWidget* parent) : QComboBox(parent)
 {
     // Nouvelle vue
     QTableView * view = new QTableView();
@@ -77,12 +78,12 @@ TableComboBox::TableComboBox(QWidget* parent) : QComboBox(parent)
     view->setPalette(p);
 }
 
-TableComboBox::~TableComboBox()
+ModulatorComboCurve::~ModulatorComboCurve()
 {
     delete this->model();
 }
 
-bool TableComboBox::eventFilter(QObject* object, QEvent* event)
+bool ModulatorComboCurve::eventFilter(QObject* object, QEvent* event)
 {
     if (event->type() == QEvent::MouseButtonPress && object == view()->viewport())
     {
@@ -90,7 +91,24 @@ bool TableComboBox::eventFilter(QObject* object, QEvent* event)
         view()->indexAt(mouseEvent->pos());
         this->setCurrentIndex(view()->currentIndex().row());
         this->setModelColumn(view()->currentIndex().column());
-        emit(clicked(view()->currentIndex().row(), view()->currentIndex().column()));
+        //emit(clicked(view()->currentIndex().row(), view()->currentIndex().column()));
     }
     return false;
+}
+
+void ModulatorComboCurve::initialize(EltID id, bool source1)
+{
+    _id = id;
+    _source1 = source1;
+
+    loadValue();
+}
+
+void ModulatorComboCurve::loadValue()
+{
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    sfmodulator sfMod = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper).sfModValue;
+    int iTmp = sfMod.D + 2 * sfMod.P + 4 * sfMod.Type;
+    this->setCurrentIndex(iTmp / 4);
+    this->setModelColumn(iTmp % 4);
 }

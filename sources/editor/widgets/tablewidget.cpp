@@ -479,23 +479,32 @@ void TableWidget::updateModDisplay(int column, QList<int> rows)
     _tableDelegate->updateModDisplay(column, rows);
 }
 
-void TableWidget::selectCell(EltID id, AttributeType champ)
+void TableWidget::selectCells(EltID id, QList<AttributeType> attributes)
 {
-    if (champ == champ_startAddrsCoarseOffset)
-        champ = champ_startAddrsOffset;
-    else if (champ == champ_endAddrsCoarseOffset)
-        champ = champ_endAddrsOffset;
-    else if (champ == champ_startloopAddrsCoarseOffset)
-        champ = champ_startloopAddrsOffset;
-    else if (champ == champ_endloopAddrsCoarseOffset)
-        champ = champ_endloopAddrsOffset;
-
-    int numRow = getRow(champ);
     int numCol = _columnIds.indexOf(id);
-    if (numRow >= 0 && numRow < this->rowCount() && numCol >= 0 && numCol < this->columnCount())
+    if (numCol < 0 && numCol >= this->columnCount())
+        return;
+
+    int selectionNumber = 0;
+    this->blockSignals(true);
+    foreach (AttributeType attribute, attributes)
     {
-        this->blockSignals(true);
-        this->selectionModel()->select(this->model()->index(numRow, numCol), QItemSelectionModel::ClearAndSelect);
-        this->blockSignals(false);
+        if (attribute == champ_startAddrsCoarseOffset)
+            attribute = champ_startAddrsOffset;
+        else if (attribute == champ_endAddrsCoarseOffset)
+            attribute = champ_endAddrsOffset;
+        else if (attribute == champ_startloopAddrsCoarseOffset)
+            attribute = champ_startloopAddrsOffset;
+        else if (attribute == champ_endloopAddrsCoarseOffset)
+            attribute = champ_endloopAddrsOffset;
+
+        int numRow = getRow(attribute);
+        if (numRow >= 0 && numRow < this->rowCount())
+        {
+            this->selectionModel()->select(this->model()->index(numRow, numCol),
+                                           selectionNumber == 0 ? QItemSelectionModel::ClearAndSelect : QItemSelectionModel::Select);
+            selectionNumber++;
+        }
     }
+    this->blockSignals(false);
 }

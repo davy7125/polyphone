@@ -34,42 +34,6 @@ PagePrst::PagePrst(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    _destIndex << champ_fineTune
-               << champ_coarseTune
-               << champ_scaleTuning
-               << champ_initialFilterFc
-               << champ_initialFilterQ
-               << champ_pan
-               << champ_chorusEffectsSend
-               << champ_reverbEffectsSend
-               << champ_initialAttenuation
-               << champ_delayVolEnv
-               << champ_attackVolEnv
-               << champ_holdVolEnv
-               << champ_decayVolEnv
-               << champ_sustainVolEnv
-               << champ_releaseVolEnv
-               << champ_keynumToVolEnvHold
-               << champ_keynumToVolEnvDecay
-               << champ_delayModEnv
-               << champ_attackModEnv
-               << champ_holdModEnv
-               << champ_decayModEnv
-               << champ_sustainModEnv
-               << champ_releaseModEnv
-               << champ_modEnvToPitch
-               << champ_modEnvToFilterFc
-               << champ_keynumToModEnvHold
-               << champ_keynumToModEnvDecay
-               << champ_delayModLFO
-               << champ_freqModLFO
-               << champ_modLfoToPitch
-               << champ_modLfoToVolume
-               << champ_modLfoToFilterFc
-               << champ_delayVibLFO
-               << champ_freqVibLFO
-               << champ_vibLfoToPitch;
-
     // Style
     ui->frameBottom->setStyleSheet("QFrame{background-color:" +
                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";color:" +
@@ -90,37 +54,11 @@ PagePrst::PagePrst(QWidget *parent) :
     _envelopEditor = nullptr;
     _modulatorEditor = ui->modulatorEditor;
 
-    /*this->tableMod = ui->tableMod;
-    this->spinAmount = ui->spinSource2;
-    this->checkAbs = ui->checkAbs;
-    this->pushNouveauMod = ui->pushNouveauMod;
-    this->pushSupprimerMod = ui->pushSupprimerMod;
-    this->comboSource1Courbe = ui->comboCourbeSource1;
-    this->comboSource2Courbe = ui->comboCourbeSource2;
-    this->comboSource1 = ui->comboSource1;
-    this->comboSource2 = ui->comboSource2;
-    this->comboDestination = ui->comboDestination;
-    _pushCopyMod = ui->pushCopyMod;*/
-
-    /* Remplissage de comboDestination
-    for (int i = 0; i < _destIndex.count(); i++)
-        this->comboDestination->addItem(Attribute::getDescription(this->getDestNumber(i), true));
-    this->comboDestination->setLimite(_destIndex.count());
-
-    // Remplissage des combosources
-    this->remplirComboSource(this->comboSource1);
-    this->remplirComboSource(this->comboSource2);
-
-    // Initialisation menu de copie de modulateurs
-    _menu = new QMenu();
-    _menu->addAction("", this, SLOT(duplicateMod()));
-    _menu->addAction("", this, SLOT(copyMod()));*/
-
-    // Initialisation spinBoxes
+    // Initialization of spinBoxes
     ui->spinBank->init(this);
     ui->spinPreset->init(this);
 
-    // Initialisation édition étendues
+    // Initialization édition étendues
     ui->rangeEditor->init(_sf2);
 
 #ifdef Q_OS_MAC
@@ -142,6 +80,7 @@ PagePrst::PagePrst(QWidget *parent) :
     connect(this->_table, SIGNAL(openElement(EltID)), this, SLOT(onOpenElement(EltID)));
     connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(customizeKeyboard()));
     connect(ui->rangeEditor, SIGNAL(divisionsSelected(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
+    connect(ui->modulatorEditor, SIGNAL(attributesSelected(QList<AttributeType>)), this, SLOT(onModSelectionChanged(QList<AttributeType>)));
 }
 
 PagePrst::~PagePrst()
@@ -186,7 +125,7 @@ bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int di
     {
         ui->spinBank->setEnabled(true);
         ui->spinPreset->setEnabled(true);
-        //ui->frameModulator->setEnabled(true);
+        ui->modulatorEditor->show();
         EltID id = _currentParentIds.first();
         id.typeElement = elementPrst;
         ui->spinBank->setValue(_sf2->get(id, champ_wBank).wValue);
@@ -232,7 +171,7 @@ bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int di
             ui->spinPreset->setValue(tmp);
 
         // Hide modulators
-        //ui->frameModulator->setEnabled(false);
+        ui->modulatorEditor->hide();
 
         // Hide the percussion label
         ui->labelPercussion->hide();
@@ -353,18 +292,6 @@ void PagePrst::keyPlayedInternal2(int key, int velocity)
     IdList ids = _currentIds.getSelectedIds(elementPrst);
     if (ids.count() == 1)
         ContextManager::audio()->getSynth()->play(2, ids[0].indexSf2, ids[0].indexElt, key, velocity);
-}
-
-int PagePrst::getDestIndex(AttributeType type)
-{
-    return _destIndex.indexOf(type);
-}
-
-AttributeType PagePrst::getDestNumber(int row)
-{
-    if (_destIndex.count() > row)
-        return _destIndex[row];
-    return champ_unknown;
 }
 
 void PagePrst::setBank(quint16 desiredBank, int collisionResolution)

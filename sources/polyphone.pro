@@ -205,7 +205,6 @@ SOURCES	+= main.cpp \
     editor/widgets/tablewidgetmod.cpp \
     editor/widgets/tablewidget.cpp \
     editor/widgets/tabledelegate.cpp \
-    editor/widgets/tablecombobox.cpp \
     editor/widgets/spinboxkey.cpp \
     editor/widgets/spinboxrange.cpp \
     editor/widgets/comboboxloopmode.cpp \
@@ -421,7 +420,10 @@ SOURCES	+= main.cpp \
     repository/widgets/elidedlabel.cpp \
     mainwindow/animatedbackground.cpp \
     editor/modulator/modulatoreditor.cpp \
-    editor/modulator/modulatorcell.cpp
+    editor/modulator/modulatorcell.cpp \
+    editor/modulator/modulatorcombocurve.cpp \
+    editor/modulator/modulatorcombodest.cpp \
+    editor/modulator/modulatorcombosrc.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -467,8 +469,6 @@ HEADERS  += \
     editor/overview/tablepageoverview.h \
     editor/widgets/tablewidgetmod.h \
     editor/widgets/tablewidget.h \
-    editor/widgets/combobox.h \
-    editor/widgets/tablecombobox.h \
     editor/widgets/tabledelegate.h \
     editor/widgets/spinboxkey.h \
     editor/widgets/spinboxrange.h \
@@ -694,7 +694,10 @@ HEADERS  += \
     editor/overview/sortedtablewidgetitem.h \
     mainwindow/animatedbackground.h \
     editor/modulator/modulatoreditor.h \
-    editor/modulator/modulatorcell.h
+    editor/modulator/modulatorcell.h \
+    editor/modulator/modulatorcombocurve.h \
+    editor/modulator/modulatorcombodest.h \
+    editor/modulator/modulatorcombosrc.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

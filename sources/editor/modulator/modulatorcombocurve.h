@@ -23,79 +23,28 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef COMBOBOX_H
-#define COMBOBOX_H
+#ifndef MODULATORCOMBOCURVE_H
+#define MODULATORCOMBOCURVE_H
 
 #include <QComboBox>
-#include <QAbstractItemView>
-#include <QMouseEvent>
+#include "basetypes.h"
 
-// Classe ComboBox pour destination et source
-class ComboBox : public QComboBox
+// Special combobox displaying a list of curves used for the modulators
+class ModulatorComboCurve : public QComboBox
 {
     Q_OBJECT
 
 public:
-    ComboBox(QWidget* parent = 0) : QComboBox(parent)
-    {
-        this->limite = 0;
-        this->view()->viewport()->installEventFilter(this);
-    }
+    explicit ModulatorComboCurve(QWidget* parent = 0);
+    ~ModulatorComboCurve();
+    bool eventFilter(QObject* object, QEvent* event);
 
-    bool eventFilter(QObject* object, QEvent* event)
-    {
-        if (event->type() == QEvent::MouseButtonPress && object == view()->viewport())
-        {
-            QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
-            int index = view()->indexAt(mouseEvent->pos()).row();
-            if (index >= this->limite)
-            {
-                // index du modulateur pointé
-                index = this->itemText(index).split("#").last().toInt();
-                index += 32767; // 32768 - 1
-            }
-            emit(this->clicked(index));
-        }
-        return false;
-    }
-
-    void setLimite(int lim) { this->limite = lim; }
-
-    void removeItemsAfterLim()
-    {
-        for (int i = this->count(); i >= this->limite; i--)
-            this->removeItem(i);
-    }
-
-    void selectIndex(quint16 index, quint16 numChamp)
-    {
-        if (index > 99)
-        {
-            // On cherche le modulateur numChamp
-            numChamp -= 32768;
-            int iVal = this->findText(trUtf8("Modulator") + ": #" + QString::number(numChamp + 1));
-            if (iVal != -1)
-                this->setCurrentIndex(iVal);
-            else
-                this->setCurrentIndex(0);
-        }
-        else
-        {
-            // Sélection de l'index pointé par index
-            this->setCurrentIndex(index);
-        }
-    }
-
-    void selectIndex(quint16 index)
-    {
-        this->setCurrentIndex(index);
-    }
+    void initialize(EltID id, bool source1);
+    void loadValue();
 
 private:
-    int limite;
-
-signals:
-    void clicked(int index);
+    EltID _id;
+    bool _source1;
 };
 
-#endif // COMBOBOX_H
+#endif // MODULATORCOMBOCURVE_H

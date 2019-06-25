@@ -32,6 +32,7 @@
 #include <QScrollBar>
 #include <QMenu>
 #include "pianokeybdcustom.h"
+#include "modulatoreditor.h"
 
 QList<PageTable::Modulator> PageTable::_modulatorCopy;
 
@@ -69,13 +70,8 @@ void PageTable::afficheTable(bool justSelection)
     }
 
     // Mods
-    /*if (_currentIds.count() == 1)
-        afficheMod(_currentIds[0]);
-    else
-    {
-        this->afficheEditMod();
-        this->displayModInTable();
-    }*/
+    _modulatorEditor->setIds(_currentIds, QList<AttributeType>());
+    this->displayModInTable();
 
     // Fin de la préparation
     this->reselect();
@@ -430,57 +426,8 @@ void PageTable::afficheEnvelops(bool justSelection)
         _envelopEditor->display(_currentIds, justSelection);
 }
 
-void PageTable::afficheMod(EltID id, AttributeType selectedField)
-{
-    // Try to find a corresponding index
-    EltID idMod = id;
-    if (id.typeElement == this->contenant)
-        idMod.typeElement = this->contenantMod;
-    else
-        idMod.typeElement = this->lienMod;
-    int index = -1;
-    if (_table->selectedItems().count() == 1)
-    {
-        foreach (int i, _sf2->getSiblings(idMod))
-        {
-            idMod.indexMod = i;
-            AttributeType champ = _sf2->get(idMod, champ_sfModDestOper).sfGenValue;
-            if (champ == champ_startAddrsCoarseOffset)
-                champ = champ_startAddrsOffset;
-            else if (champ == champ_endAddrsCoarseOffset)
-                champ = champ_endAddrsOffset;
-            else if (champ == champ_startloopAddrsCoarseOffset)
-                champ = champ_startloopAddrsOffset;
-            else if (champ == champ_endloopAddrsCoarseOffset)
-                champ = champ_endloopAddrsOffset;
-            if (champ == selectedField)
-                index = i;
-        }
-    }
-    //afficheMod(id, index);
-}
-
 void PageTable::afficheMod(EltID id, int selectedIndex)
-{
-    // Affichage du menu ou non
-    if (id.typeElement == elementPrst || id.typeElement == elementInst)
-    {
-        _pushCopyMod->setMenu(_menu);
-        _pushCopyMod->setStyleSheet("QPushButton { text-align: left; padding-left: 4px }");
-#ifdef Q_OS_MAC
-        _pushCopyMod->setMaximumWidth(43);
-#else
-        _pushCopyMod->setMaximumWidth(38);
-#endif
-        _pushCopyMod->setToolTip("");
-    }
-    else
-    {
-        _pushCopyMod->setMenu(nullptr);
-        _pushCopyMod->setStyleSheet("");
-        _pushCopyMod->setMaximumWidth(24);
-    }
-
+{return;
     QString qStr;
     AttributeValue genValTmp;
     SFModulator sfModTmp;
@@ -523,15 +470,17 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
                 qStr = trUtf8("Link (invalid)");
         }
         else
-            qStr = getIndexName(sfModTmp.Index, sfModTmp.CC);
+        {
+            //qStr = getIndexName(sfModTmp.Index, sfModTmp.CC);
+        }
 
         this->tableMod->item(numLigne, 6)->setText(qStr);
         sfModTmp = _sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
-        iVal = 4*sfModTmp.D + 8*sfModTmp.P + sfModTmp.Type + 1;
+        iVal = 4 * sfModTmp.D + 8 * sfModTmp.P + sfModTmp.Type + 1;
         iconName = QString(":/icons/courbe%1.svg").arg(iVal, 2, 10, QChar('0'));
         icon = ContextManager::theme()->getColoredSvg(iconName, QSize(iconWidth, iconWidth), replacement);
         this->tableMod->item(numLigne, 7)->setIcon(icon);
-        qStr = getIndexName(sfModTmp.Index, sfModTmp.CC);
+        //qStr = getIndexName(sfModTmp.Index, sfModTmp.CC);
         genValTmp = _sf2->get(id, champ_modAmount);
         qStr.append(QString::fromUtf8(" × ")).append(Attribute::toString(champ_modAmount, _typePage == PAGE_PRST, genValTmp));
         this->tableMod->item(numLigne, 7)->setText(qStr);
@@ -559,10 +508,6 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
             if (this->tableMod->getID(i).indexMod == selectedIndex)
                 this->tableMod->selectRow(i);
     }
-
-    this->tableMod->resizeColumnToContents(5);
-    this->tableMod->resizeColumnToContents(6);
-    this->tableMod->resizeColumnToContents(7);
 
     this->afficheEditMod();
     this->displayModInTable();
@@ -623,8 +568,8 @@ void PageTable::afficheEditMod()
         this->comboSource1Courbe->setModelColumn(iTmp % 4);
 
         // COMBOBOX SOURCE 1
-        this->comboSource1->removeItemsAfterLim();
-        addAvailableSenderMod(this->comboSource1, id);
+        //this->comboSource1->removeElements2();
+        //addAvailableSenderMod(this->comboSource1, id);
 
         // Sélection et activation
         wTmp = sfMod.Index;
@@ -633,10 +578,10 @@ void PageTable::afficheEditMod()
         {
             // On cherche le lien
             int iVal = getAssociatedMod(id);
-            if (iVal > -1) this->comboSource1->selectIndex(100, 32768 + iVal);
-            else this->comboSource1->selectIndex(this->getSrcIndex(0, 0));
+            //if (iVal > -1) this->comboSource1->selectIndex(100, 32768 + iVal);
+            //else this->comboSource1->selectIndex(this->getSrcIndex(0, 0));
         }
-        else this->comboSource1->selectIndex(this->getSrcIndex(wTmp, bTmp));
+        //else this->comboSource1->selectIndex(this->getSrcIndex(wTmp, bTmp));
         this->comboSource1->setEnabled(true);
         sfMod = _sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
         iTmp = sfMod.D + 2 * sfMod.P + 4 * sfMod.Type;
@@ -648,16 +593,16 @@ void PageTable::afficheEditMod()
         // Sélection et activation
         wTmp = sfMod.Index;
         bTmp = sfMod.CC;
-        this->comboSource2->selectIndex(this->getSrcIndex(wTmp, bTmp));
+        //this->comboSource2->selectIndex(this->getSrcIndex(wTmp, bTmp));
         this->comboSource2->setEnabled(true);
 
         // COMBOBOX DESTINATION
-        this->comboDestination->removeItemsAfterLim();
-        addAvailableReceiverMod(this->comboDestination, id);
+        //this->comboDestination->removeElements2();
+        //addAvailableReceiverMod(this->comboDestination, id);
 
         // Sélection et activation
         wTmp = _sf2->get(id, champ_sfModDestOper).wValue;
-        this->comboDestination->selectIndex(this->getDestIndex((AttributeType)wTmp), wTmp);
+        //this->comboDestination->selectIndex(this->getDestIndex((AttributeType)wTmp), wTmp);
         this->comboDestination->setEnabled(true);
 
         // Selection in the table
@@ -666,26 +611,7 @@ void PageTable::afficheEditMod()
             idParent.typeElement = this->contenant;
         else if (idParent.typeElement == this->lienMod)
             idParent.typeElement = this->lien;
-        _table->selectCell(idParent, (AttributeType)_sf2->get(id, champ_sfModDestOper).wValue);
-    }
-    else
-    {
-        this->spinAmount->setValue(0);
-        this->spinAmount->setEnabled(false);
-        this->checkAbs->setChecked(false);
-        this->checkAbs->setEnabled(false);
-        this->comboSource1Courbe->setCurrentIndex(0);
-        this->comboSource1Courbe->setModelColumn(0);
-        this->comboSource1Courbe->setEnabled(false);
-        this->comboSource2Courbe->setCurrentIndex(0);
-        this->comboSource2Courbe->setModelColumn(0);
-        this->comboSource2Courbe->setEnabled(false);
-        this->comboDestination->setCurrentIndex(0);
-        this->comboDestination->setEnabled(false);
-        this->comboSource1->setCurrentIndex(0);
-        this->comboSource1->setEnabled(false);
-        this->comboSource2->setCurrentIndex(0);
-        this->comboSource2->setEnabled(false);
+        //_table->selectCell(idParent, (AttributeType)_sf2->get(id, champ_sfModDestOper).wValue);
     }
 }
 
@@ -1110,8 +1036,8 @@ void PageTable::setDest(int index)
         id.typeElement = this->contenant;
     else
         id.typeElement = this->lien;
-    if (index < 32768)
-        index = getDestNumber(index);
+    //    if (index < 32768)
+    //        index = getDestNumber(index);
     AttributeValue val;
     if (id2.typeElement != elementUnknown)
     {
@@ -1429,21 +1355,32 @@ void PageTable::selected()
         return;
     _preparingPage = true;
 
-    // Selected items
+    // List of distinct selected ids
     IdList ids;
     QList<QTableWidgetItem*> listItems = _table->selectedItems();
-    if (listItems.empty())
+    if (listItems.empty()) {
+        _preparingPage = false;
         return;
+    }
     for (int i = 0; i < listItems.count(); i++)
-        ids << _table->getID(listItems.at(i)->column());
+    {
+        EltID idTmp = _table->getID(listItems.at(i)->column());
+        if (!ids.contains(idTmp))
+            ids << idTmp;
+    }
     _currentIds = ids;
 
-    // Mise à jour des informations sur les mods
-    int colonne = listItems.last()->column();
-    /*if (listItems.count() == 1)
-        this->afficheMod(_table->getID(colonne), _table->getChamp(listItems.last()->row()));
+    // Update mods
+    if (_currentIds.count() == 1)
+    {
+        // List of attributes
+        QList<AttributeType> attributes;
+        for (int i = 0; i < listItems.count(); i++)
+            attributes << _table->getChamp(listItems.at(i)->row());
+        _modulatorEditor->setIds(_currentIds, attributes);
+    }
     else
-        this->afficheMod(_table->getID(colonne));*/
+        _modulatorEditor->setIds(_currentIds, QList<AttributeType>());
 
     // Update the selection outside the table
     emit(selectedIdsChanged(ids));
@@ -1534,7 +1471,7 @@ void PageTable::customizeKeyboard()
     }
 }
 
-void PageTable::addAvailableReceiverMod(ComboBox *combo, EltID id)
+/*void PageTable::addAvailableReceiverMod(ModulatorComboSrcDest *combo, EltID id)
 {
     if (id.typeElement != elementInstMod && id.typeElement != elementInstSmplMod && \
             id.typeElement != elementPrstMod && id.typeElement != elementPrstInstMod)
@@ -1592,7 +1529,7 @@ void PageTable::addAvailableReceiverMod(ComboBox *combo, EltID id)
     }
 }
 
-void PageTable::addAvailableSenderMod(ComboBox *combo, EltID id)
+void PageTable::addAvailableSenderMod(ModulatorComboSrcDest *combo, EltID id)
 {
     if (id.typeElement != elementInstMod && id.typeElement != elementInstSmplMod && \
             id.typeElement != elementPrstMod && id.typeElement != elementPrstInstMod)
@@ -1656,11 +1593,11 @@ void PageTable::addAvailableSenderMod(ComboBox *combo, EltID id)
             }
         }
     }
-}
+}*/
 
 int PageTable::getAssociatedMod(EltID id)
 {
-    if (id.typeElement != elementInstMod && id.typeElement != elementInstSmplMod && \
+    if (id.typeElement != elementInstMod && id.typeElement != elementInstSmplMod &&
             id.typeElement != elementPrstMod && id.typeElement != elementPrstInstMod)
         return -1;
     int iVal = -1;
@@ -2001,22 +1938,6 @@ void PageTable::duplicateMod(QList<int> listIndex)
     }
 
     _sf2->endEditing(getEditingSource());
-}
-
-void PageTable::remplirComboSource(ComboBox *comboBox)
-{
-    comboBox->addItem(getIndexName(0, 0));
-    comboBox->addItem(getIndexName(2, 0));
-    comboBox->addItem(getIndexName(3, 0));
-    comboBox->addItem(getIndexName(10, 0));
-    comboBox->addItem(getIndexName(13, 0));
-    comboBox->addItem(getIndexName(14, 0));
-    comboBox->addItem(getIndexName(16, 0));
-    for (int i = 1; i < 6; i++) comboBox->addItem(getIndexName(i, 1));
-    for (int i = 7; i < 32; i++) comboBox->addItem(getIndexName(i, 1));
-    for (int i = 64; i < 98; i++) comboBox->addItem(getIndexName(i, 1));
-    for (int i = 102; i < 120; i++) comboBox->addItem(getIndexName(i, 1));
-    comboBox->setLimite(89);
 }
 
 quint16 PageTable::getSrcNumber(quint16 wVal, bool &CC)
@@ -2521,4 +2442,10 @@ void PageTable::onShow()
 void PageTable::divisionSortChanged()
 {
     this->afficheTable(false);
+}
+
+void PageTable::onModSelectionChanged(QList<AttributeType> attributes)
+{
+    if (!attributes.empty() && _currentIds.count() == 1)
+        _table->selectCells(_currentIds[0], attributes);
 }

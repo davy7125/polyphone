@@ -44,8 +44,6 @@ namespace Ui
 {
     class Page;
     class PageTable;
-    class TableComboBox;
-    class ComboBox;
 }
 
 class Page : public QWidget

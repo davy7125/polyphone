@@ -48,7 +48,7 @@ public:
     void removeColumn(int column);
     void resetModDisplay();
     void updateModDisplay(int column, QList<int> rows);
-    void selectCell(EltID id, AttributeType champ);
+    void selectCells(EltID id, QList<AttributeType> attributes);
 
     // Set the image corresponding to the loop mode value
     // -1 will remove the image

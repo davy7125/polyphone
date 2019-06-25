@@ -27,8 +27,9 @@
 #define PAGETABLE_H
 
 #include "page.h"
-#include "combobox.h"
-#include "tablecombobox.h"
+#include "modulatorcombosrc.h"
+#include "modulatorcombodest.h"
+#include "modulatorcombocurve.h"
 #include "tablewidget.h"
 #include "tablewidgetmod.h"
 class GraphicsViewRange;
@@ -86,11 +87,11 @@ protected:
 
     TableWidgetMod *tableMod;
     QSpinBox *spinAmount;
-    ComboBox *comboSource1;
-    TableComboBox *comboSource1Courbe;
-    ComboBox *comboSource2;
-    TableComboBox *comboSource2Courbe;
-    ComboBox *comboDestination;
+    ModulatorComboSrc *comboSource1;
+    ModulatorComboCurve *comboSource1Courbe;
+    ModulatorComboSrc *comboSource2;
+    ModulatorComboCurve *comboSource2Courbe;
+    ModulatorComboDest *comboDestination;
     QCheckBox *checkAbs;
     QPushButton *pushSupprimerMod;
     QPushButton *pushNouveauMod;
@@ -100,9 +101,6 @@ protected:
     EnvelopEditor * _envelopEditor;
 
     void select(EltID id);
-    static void remplirComboSource(ComboBox *comboBox);
-    virtual int getDestIndex(AttributeType type) = 0;
-    virtual AttributeType getDestNumber(int row) = 0;
     quint16 getSrcIndex(quint16 wVal, bool bVal);
     quint16 getSrcNumber(quint16 wVal, bool &CC);
 
@@ -115,6 +113,7 @@ protected slots:
     void actionFinished();
     void customizeKeyboard();
     void onOpenElement(EltID id);
+    void onModSelectionChanged(QList<AttributeType> attributes);
 
 private slots:
     void divisionSortChanged();
@@ -134,10 +133,9 @@ private:
     void addGlobal(IdList listIds);
     void addDivisions(EltID id);
     void formatTable(bool multiGlobal);
-    void afficheMod(EltID id, AttributeType selectedField);
     void afficheMod(EltID id, int selectedIndex = -1);
-    static void addAvailableReceiverMod(ComboBox *combo, EltID id);
-    static void addAvailableSenderMod(ComboBox *combo, EltID id);
+    /*static void addAvailableReceiverMod(ModulatorComboSrcDest *combo, EltID id);
+    static void addAvailableSenderMod(ModulatorComboSrcDest *combo, EltID id);*/
     int getAssociatedMod(EltID id);
     int limit(int iVal, AttributeType champ, EltID id);
     void resetChamp(int colonne, AttributeType champ1, AttributeType champ2);
