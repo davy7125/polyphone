@@ -50,10 +50,10 @@ bool Page::preparePage(QString editingSource, IdList selectedIds)
 
     // Possibly update the selected ids
     if (!selectedIds.empty())
-        _selectedIds = selectedIds;
+        _currentIds = selectedIds;
 
     // Find a suitable display option
-    _displayOptions = getDisplayOptions(_selectedIds);
+    _displayOptions = getDisplayOptions(_currentIds);
     bool currentDisplayOptionValid = false;
     foreach (DisplayOption displayOption, _displayOptions)
     {
@@ -82,7 +82,7 @@ bool Page::preparePage(QString editingSource, IdList selectedIds)
         _displayOptions[i]._isSelected = (_displayOptions[i]._id == _currentDisplayOption);
 
     // Update the interface according to the selected display action
-    bool result = updateInterface(editingSource, _selectedIds, _currentDisplayOption);
+    bool result = updateInterface(editingSource, _currentIds, _currentDisplayOption);
 
     _preparingPage = false;
     return result;

@@ -130,7 +130,7 @@ void ModulatorComboDest::loadValue()
     // Select the value
     AttributeValue genValTmp = sm->get(_id, champ_sfModDestOper);
     if (genValTmp.wValue >= 32768) // Link to another modulator?
-        this->selectIndex(genValTmp.wValue - 32768);
+        this->selectIndex(_listIndex.indexOf(genValTmp.wValue - 32768));
     else
         this->selectAttribute(genValTmp.sfGenValue);
 

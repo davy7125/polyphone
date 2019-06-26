@@ -414,7 +414,8 @@ void PageTable::formatTable(bool multiGlobal)
 
 void PageTable::afficheRanges(bool justSelection)
 {
-    _rangeEditor->display(_currentIds[0], justSelection);
+    if (!_currentIds.isEmpty())
+        _rangeEditor->display(_currentIds[0], justSelection);
 }
 
 void PageTable::afficheEnvelops(bool justSelection)

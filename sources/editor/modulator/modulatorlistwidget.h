@@ -23,64 +23,35 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef MODULATOREDITOR_H
-#define MODULATOREDITOR_H
+#ifndef MODULATORLISTWIDGET_H
+#define MODULATORLISTWIDGET_H
 
-#include <QWidget>
-#include "idlist.h"
-#include "attribute.h"
+#include <QListWidget>
+#include <QKeyEvent>
+#include <QDebug>
 
-namespace Ui {
-class ModulatorEditor;
-}
-
-class ModulatorEditor : public QWidget
+class ModulatorListWidget : public QListWidget
 {
     Q_OBJECT
 
 public:
-    explicit ModulatorEditor(QWidget *parent = 0);
-    ~ModulatorEditor();
-
-    void setIds(IdList ids, QList<AttributeType> attributes = QList<AttributeType>());
+    ModulatorListWidget(QWidget * parent = nullptr) : QListWidget(parent) {}
 
 signals:
-    void attributesSelected(QList<AttributeType> attributes);
+    void pasted();
+    void copied();
+    void deleted();
 
-private slots:
-    void on_pushExpand_clicked();
-    void on_pushCollapse_clicked();
-    void on_listWidget_itemSelectionChanged();
-    void on_pushAdd_clicked();
-    void on_pushCopy_clicked();
-    void on_pushPaste_clicked();
-    void on_pushClone_clicked();
-    void on_pushDelete_clicked();
-    void duplicateMod(QList<int> listIndex);
-
-private:
-    class Modulator
+protected:
+    void keyPressEvent(QKeyEvent * event)
     {
-    public:
-        SFModulator modSrcOper;
-        AttributeType modDestOper;
-        qint32 modAmount;
-        SFModulator modAmtSrcOper;
-        SFTransform modTransOper;
-        qint32 index;
-    };
-
-    void updateInterface(QList<AttributeType> attributes);
-    void updateButtons(bool withSelection);
-    QList<EltID> getSelectedModulators();
-    QList<Modulator> getModList(EltID id);
-    void pasteMod(EltID id, QList<Modulator> modulators);
-
-    static QList<ModulatorEditor *> s_instances;
-    static QList<Modulator> s_modulatorCopy;
-
-    Ui::ModulatorEditor *ui;
-    EltID _currentId;
+        if (event->key() == Qt::Key_Delete)
+            emit(deleted());
+        else if (event->key() == Qt::Key_C && (event->modifiers() & Qt::ControlModifier))
+            emit(copied());
+        else if (event->key() == Qt::Key_V && (event->modifiers() & Qt::ControlModifier))
+            emit(pasted());
+    }
 };
 
-#endif // MODULATOREDITOR_H
+#endif // MODULATORLISTWIDGET_H

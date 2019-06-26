@@ -695,7 +695,8 @@ HEADERS  += \
     editor/modulator/modulatorcell.h \
     editor/modulator/modulatorcombocurve.h \
     editor/modulator/modulatorcombodest.h \
-    editor/modulator/modulatorcombosrc.h
+    editor/modulator/modulatorcombosrc.h \
+    editor/modulator/modulatorlistwidget.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

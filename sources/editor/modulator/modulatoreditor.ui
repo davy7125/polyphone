@@ -161,7 +161,7 @@
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="pageNoModulators">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -245,7 +245,7 @@
            <number>0</number>
           </property>
           <item row="0" column="1">
-           <widget class="QListWidget" name="listWidget">
+           <widget class="ModulatorListWidget" name="listWidget">
             <property name="styleSheet">
              <string notr="true">QListWidget {
 border-top: 0;
@@ -329,6 +329,13 @@ border-bottom: 0;
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ModulatorListWidget</class>
+   <extends>QListWidget</extends>
+   <header>modulatorlistwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

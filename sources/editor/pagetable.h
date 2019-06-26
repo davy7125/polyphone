@@ -58,7 +58,6 @@ protected:
     void onShow() override;
 
     IdList _currentParentIds;
-    IdList _currentIds;
 
     ElementType contenant;
     ElementType contenantGen;

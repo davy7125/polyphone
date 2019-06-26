@@ -43,6 +43,7 @@ public:
     ~ModulatorCell();
 
     AttributeType getTargetAttribute();
+    EltID getID() { return _id; }
 
 protected:
     void paintEvent(QPaintEvent* event);
