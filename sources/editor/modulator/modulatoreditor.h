@@ -23,79 +23,64 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef COMBOBOX_H
-#define COMBOBOX_H
+#ifndef MODULATOREDITOR_H
+#define MODULATOREDITOR_H
 
-#include <QComboBox>
-#include <QAbstractItemView>
-#include <QMouseEvent>
+#include <QWidget>
+#include "idlist.h"
+#include "attribute.h"
 
-// Classe ComboBox pour destination et source
-class ComboBox : public QComboBox
+namespace Ui {
+class ModulatorEditor;
+}
+
+class ModulatorEditor : public QWidget
 {
     Q_OBJECT
 
 public:
-    ComboBox(QWidget* parent = 0) : QComboBox(parent)
-    {
-        this->limite = 0;
-        this->view()->viewport()->installEventFilter(this);
-    }
+    explicit ModulatorEditor(QWidget *parent = 0);
+    ~ModulatorEditor();
 
-    bool eventFilter(QObject* object, QEvent* event)
-    {
-        if (event->type() == QEvent::MouseButtonPress && object == view()->viewport())
-        {
-            QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
-            int index = view()->indexAt(mouseEvent->pos()).row();
-            if (index >= this->limite)
-            {
-                // index du modulateur pointé
-                index = this->itemText(index).split("#").last().toInt();
-                index += 32767; // 32768 - 1
-            }
-            emit(this->clicked(index));
-        }
-        return false;
-    }
-
-    void setLimite(int lim) { this->limite = lim; }
-
-    void removeItemsAfterLim()
-    {
-        for (int i = this->count(); i >= this->limite; i--)
-            this->removeItem(i);
-    }
-
-    void selectIndex(quint16 index, quint16 numChamp)
-    {
-        if (index > 99)
-        {
-            // On cherche le modulateur numChamp
-            numChamp -= 32768;
-            int iVal = this->findText(trUtf8("Modulator") + ": #" + QString::number(numChamp + 1));
-            if (iVal != -1)
-                this->setCurrentIndex(iVal);
-            else
-                this->setCurrentIndex(0);
-        }
-        else
-        {
-            // Sélection de l'index pointé par index
-            this->setCurrentIndex(index);
-        }
-    }
-
-    void selectIndex(quint16 index)
-    {
-        this->setCurrentIndex(index);
-    }
-
-private:
-    int limite;
+    void setIds(IdList ids, QList<AttributeType> attributes = QList<AttributeType>());
 
 signals:
-    void clicked(int index);
+    void attributesSelected(QList<AttributeType> attributes);
+
+private slots:
+    void on_pushExpand_clicked();
+    void on_pushCollapse_clicked();
+    void on_listWidget_itemSelectionChanged();
+    void on_pushAdd_clicked();
+    void on_pushCopy_clicked();
+    void on_pushPaste_clicked();
+    void on_pushClone_clicked();
+    void on_pushDelete_clicked();
+    void duplicateMod(QList<int> listIndex);
+
+private:
+    class Modulator
+    {
+    public:
+        SFModulator modSrcOper;
+        AttributeType modDestOper;
+        qint32 modAmount;
+        SFModulator modAmtSrcOper;
+        SFTransform modTransOper;
+        qint32 index;
+    };
+
+    void updateInterface(QList<AttributeType> attributes);
+    void updateButtons(bool withSelection);
+    QList<EltID> getSelectedModulators();
+    QList<Modulator> getModList(EltID id);
+    void pasteMod(EltID id, QList<Modulator> modulators);
+
+    static QList<ModulatorEditor *> s_instances;
+    static QList<Modulator> s_modulatorCopy;
+
+    Ui::ModulatorEditor *ui;
+    EltID _currentId;
 };
 
-#endif // COMBOBOX_H
+#endif // MODULATOREDITOR_H

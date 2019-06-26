@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ModulatorCell</class>
+ <widget class="QWidget" name="ModulatorCell">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>609</width>
+    <height>78</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <property name="verticalSpacing">
+    <number>3</number>
+   </property>
+   <item row="1" column="2">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="3">
+    <widget class="ModulatorComboCurve" name="widgetShape1" native="true">
+     <property name="maximumSize">
+      <size>
+       <width>53</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="5">
+    <widget class="QSpinBox" name="spinAmount">
+     <property name="minimum">
+      <number>-32768</number>
+     </property>
+     <property name="maximum">
+      <number>32767</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="ModulatorComboSrc" name="comboSource2"/>
+   </item>
+   <item row="1" column="8">
+    <widget class="ModulatorComboDest" name="comboDestination"/>
+   </item>
+   <item row="0" column="1">
+    <widget class="ModulatorComboSrc" name="comboSource1"/>
+   </item>
+   <item row="1" column="6">
+    <widget class="QComboBox" name="comboTransform">
+     <item>
+      <property name="text">
+       <string>none</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>absolute value</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="ModulatorComboCurve" name="widgetShape2" native="true">
+     <property name="maximumSize">
+      <size>
+       <width>53</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="4">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>60</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="7">
+    <spacer name="horizontalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="0" rowspan="2">
+    <widget class="QLabel" name="labelModNumber">
+     <property name="text">
+      <string notr="true">Modulator
+#1</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="5">
+    <widget class="QLabel" name="labelCoeff">
+     <property name="text">
+      <string>coefficient</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="6">
+    <widget class="QLabel" name="labelTransform">
+     <property name="text">
+      <string>transformation</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ModulatorComboCurve</class>
+   <extends>QWidget</extends>
+   <header>modulatorcombocurve.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ModulatorComboSrc</class>
+   <extends>QComboBox</extends>
+   <header>modulatorcombosrc.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ModulatorComboDest</class>
+   <extends>QComboBox</extends>
+   <header>modulatorcombodest.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

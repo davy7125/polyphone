@@ -2,6 +2,7 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2019 Davy Triponney                                **
+**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,34 +23,30 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TABLEWIDGETMOD_H
-#define TABLEWIDGETMOD_H
+#ifndef MODULATORCOMBOCURVE_H
+#define MODULATORCOMBOCURVE_H
 
-#include <QTableWidget>
+#include <QComboBox>
 #include "basetypes.h"
 
-// Classe QTableWidget pour mod
-class TableWidgetMod : public QTableWidget
+// Special combobox displaying a list of curves used for the modulators
+class ModulatorComboCurve : public QComboBox
 {
     Q_OBJECT
 
 public:
-    explicit TableWidgetMod(QWidget *parent = 0) : QTableWidget(parent) {}
-    ~TableWidgetMod() {}
+    explicit ModulatorComboCurve(QWidget* parent = nullptr);
+    ~ModulatorComboCurve();
+    bool eventFilter(QObject* object, QEvent* event);
 
-    void clear();
-    void addRow(int row, EltID id);
-    EltID getID(int row);
-    EltID getID();
-    QList<EltID> getSelectedIDs();
+    void initialize(EltID id, bool source1);
+    void loadValue();
 
-protected:
-    virtual void keyPressEvent(QKeyEvent * event);
+private:
+    void valueSelected(int row, int column);
 
-signals:
-    void deleteModPressed();
-    void copyAsked();
-    void pasteAsked();
+    EltID _id;
+    bool _source1;
 };
 
-#endif // TABLEWIDGETMOD_H
+#endif // MODULATORCOMBOCURVE_H

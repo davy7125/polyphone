@@ -550,7 +550,7 @@ QString Attribute::getDescription(AttributeType champ, bool isPrst)
         result = trUtf8("Loop end offset");
         break;
     case champ_startAddrsCoarseOffset:
-        result = trUtf8("Loop start offset (× 32768)");
+        result = trUtf8("Sample start offset (× 32768)");
         break;
     case champ_modLfoToPitch:
         result = trUtf8("Mod LFO → pitch (c)");

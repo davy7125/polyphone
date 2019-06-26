@@ -2,6 +2,7 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2019 Davy Triponney                                **
+**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,53 +23,42 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_INST_H
-#define PAGE_INST_H
+#ifndef MODULATORCELL_H
+#define MODULATORCELL_H
 
 #include <QWidget>
-#include "pagetable.h"
+#include "basetypes.h"
+class SoundfontManager;
 
 namespace Ui {
-class PageInst;
+class ModulatorCell;
 }
 
-class PageInst : public PageTable
+class ModulatorCell : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit PageInst(QWidget *parent = nullptr);
-    ~PageInst() override;
+    explicit ModulatorCell(EltID id, QWidget *parent = nullptr);
+    ~ModulatorCell();
 
-    // Display options
-    QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;
+    AttributeType getTargetAttribute();
+    EltID getID() { return _id; }
 
 protected:
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
-    void keyPlayedInternal2(int key, int velocity) override;
+    void paintEvent(QPaintEvent* event);
 
 private slots:
-    void onLinkClicked(EltID id);
+    void on_spinAmount_editingFinished();
+
+    void on_comboTransform_currentIndexChanged(int index);
 
 private:
-    Ui::PageInst *ui;
+    Ui::ModulatorCell *ui;
+    QColor _computationAreaColor;
+    QColor _labelColor;
+    EltID _id;
+    SoundfontManager * _sm;
 };
 
-// Classe TableWidget pour instruments
-class TableWidgetInst : public TableWidget
-{
-    Q_OBJECT
-
-public:
-    TableWidgetInst(QWidget *parent = nullptr);
-    ~TableWidgetInst();
-
-    // Association champ - ligne
-    AttributeType getChamp(int row);
-    int getRow(quint16 champ);
-
-private:
-    QList<AttributeType> _fieldList;
-};
-
-#endif // PAGE_INST_H
+#endif // MODULATORCELL_H

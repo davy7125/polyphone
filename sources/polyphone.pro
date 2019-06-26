@@ -9,7 +9,7 @@
 # Uncomment a line if your distribution doesn't come with some of the following libraries
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
-#DEFINES += USE_LOCAL_QCUSTOMPLOT
+DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # Polyphone version
 DEFINES += SOFT_VERSION=\\\"2.0.1\\\"
@@ -139,6 +139,7 @@ INCLUDEPATH += mainwindow \
     context/interface \
     editor \
     editor/graphics \
+    editor/modulator \
     editor/overview \
     editor/tools \
     editor/widgets \
@@ -201,10 +202,8 @@ SOURCES	+= main.cpp \
     editor/overview/pageoverviewinst.cpp \
     editor/overview/pageoverviewprst.cpp \
     editor/overview/tablepageoverview.cpp \
-    editor/widgets/tablewidgetmod.cpp \
     editor/widgets/tablewidget.cpp \
     editor/widgets/tabledelegate.cpp \
-    editor/widgets/tablecombobox.cpp \
     editor/widgets/spinboxkey.cpp \
     editor/widgets/spinboxrange.cpp \
     editor/widgets/comboboxloopmode.cpp \
@@ -418,7 +417,12 @@ SOURCES	+= main.cpp \
     repository/widgets/downloadprogresscell.cpp \
     editor/overview/sortedtablewidgetitem.cpp \
     repository/widgets/elidedlabel.cpp \
-    mainwindow/animatedbackground.cpp
+    mainwindow/animatedbackground.cpp \
+    editor/modulator/modulatoreditor.cpp \
+    editor/modulator/modulatorcell.cpp \
+    editor/modulator/modulatorcombocurve.cpp \
+    editor/modulator/modulatorcombodest.cpp \
+    editor/modulator/modulatorcombosrc.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -462,10 +466,7 @@ HEADERS  += \
     editor/overview/pageoverviewinst.h \
     editor/overview/pageoverviewprst.h \
     editor/overview/tablepageoverview.h \
-    editor/widgets/tablewidgetmod.h \
     editor/widgets/tablewidget.h \
-    editor/widgets/combobox.h \
-    editor/widgets/tablecombobox.h \
     editor/widgets/tabledelegate.h \
     editor/widgets/spinboxkey.h \
     editor/widgets/spinboxrange.h \
@@ -689,7 +690,13 @@ HEADERS  += \
     repository/widgets/downloadprogresscell.h \
     core/types/indexedelementlist.h \
     editor/overview/sortedtablewidgetitem.h \
-    mainwindow/animatedbackground.h
+    mainwindow/animatedbackground.h \
+    editor/modulator/modulatoreditor.h \
+    editor/modulator/modulatorcell.h \
+    editor/modulator/modulatorcombocurve.h \
+    editor/modulator/modulatorcombodest.h \
+    editor/modulator/modulatorcombosrc.h \
+    editor/modulator/modulatorlistwidget.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -750,7 +757,9 @@ FORMS    += \
     repository/soundfont/soundfontcomment.ui \
     repository/soundfont/soundfontdownloadcell.ui \
     repository/soundfont/soundfontcommentcell.ui \
-    repository/widgets/downloadprogresscell.ui
+    repository/widgets/downloadprogresscell.ui \
+    editor/modulator/modulatoreditor.ui \
+    editor/modulator/modulatorcell.ui
 
 RESOURCES += resources.qrc
 

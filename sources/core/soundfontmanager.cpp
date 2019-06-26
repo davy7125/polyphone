@@ -782,7 +782,7 @@ void SoundfontManager::getListeBags(EltID id, QList<AttributeType> &listeChamps,
     listeValeurs = division->getGens().values();
 }
 
-// Ajoute un enfant à id
+// Add a child to ID
 int SoundfontManager::add(EltID id)
 {
     QMutexLocker locker(&_mutex);
@@ -1096,21 +1096,6 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
                 AttributeValue value;
                 value.dwValue = 0;
                 this->set(id2, champ_sfModDestOper, value);
-            }
-        }
-
-        // If the src of a modulator is the modulator to delete, remove the link
-        int iVal = bag->getMod(id.indexMod)->_sfModDestOper;
-        if (iVal >= 32768 && bag->getMod(iVal - 32768) != nullptr)
-        {
-            Modulator * mod2 = bag->getMod(iVal - 32768);
-            if (mod2->_sfModSrcOper.CC == 0 && mod2->_sfModSrcOper.Index == 127)
-            {
-                EltID id2 = id;
-                id2.indexMod = iVal - 32768;
-                AttributeValue value;
-                value.dwValue = 0;
-                this->set(id2, champ_sfModSrcOper, value);
             }
         }
 

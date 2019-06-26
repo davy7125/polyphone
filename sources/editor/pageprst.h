@@ -39,10 +39,10 @@ class SpinBox;
 class PagePrst : public PageTable
 {
     Q_OBJECT
+
 public:
     explicit PagePrst(QWidget *parent = nullptr);
     ~PagePrst() override;
-    void setModVisible(bool visible);
     void spinUpDown(int steps, SpinBox *spin);
 
     // Display options
@@ -51,8 +51,6 @@ public:
 protected:
     bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
     void keyPlayedInternal2(int key, int velocity) override;
-    int getDestIndex(AttributeType type) override;
-    AttributeType getDestNumber(int row) override;
 
 private slots:
     void setBank();
@@ -68,7 +66,6 @@ private:
     QList<int> getUsedBanksForPreset(int sf2Index, quint16 wPreset);
 
     Ui::PagePrst *ui;
-    QList<AttributeType> _destIndex;
 };
 
 // Classe TableWidget pour presets
@@ -94,8 +91,7 @@ class SpinBox : public QSpinBox
     Q_OBJECT
 public:
     SpinBox(QWidget *parent = nullptr) : QSpinBox(parent) {}
-    // Initialisation du sf2
-    void init(PagePrst *page) {this->page = page;}
+    void init(PagePrst *page) { this->page = page; }
 
 public slots:
     virtual void stepBy(int steps) { this->page->spinUpDown(steps, this); }

@@ -23,23 +23,35 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TABLECOMBOBOX_H
-#define TABLECOMBOBOX_H
+#ifndef MODULATORLISTWIDGET_H
+#define MODULATORLISTWIDGET_H
 
-#include <QComboBox>
+#include <QListWidget>
+#include <QKeyEvent>
+#include <QDebug>
 
-// Classe TableComboBox pour les formes de courbes
-class TableComboBox : public QComboBox
+class ModulatorListWidget : public QListWidget
 {
     Q_OBJECT
 
 public:
-    explicit TableComboBox(QWidget* parent = 0);
-    ~TableComboBox();
-    bool eventFilter(QObject* object, QEvent* event);
+    ModulatorListWidget(QWidget * parent = nullptr) : QListWidget(parent) {}
 
 signals:
-    void clicked(int row, int column);
+    void pasted();
+    void copied();
+    void deleted();
+
+protected:
+    void keyPressEvent(QKeyEvent * event)
+    {
+        if (event->key() == Qt::Key_Delete)
+            emit(deleted());
+        else if (event->key() == Qt::Key_C && (event->modifiers() & Qt::ControlModifier))
+            emit(copied());
+        else if (event->key() == Qt::Key_V && (event->modifiers() & Qt::ControlModifier))
+            emit(pasted());
+    }
 };
 
-#endif // TABLECOMBOBOX_H
+#endif // MODULATORLISTWIDGET_H

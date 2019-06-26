@@ -2,6 +2,7 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2019 Davy Triponney                                **
+**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,53 +23,37 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_INST_H
-#define PAGE_INST_H
+#ifndef MODULATORCOMBOSRC_H
+#define MODULATORCOMBOSRC_H
 
-#include <QWidget>
-#include "pagetable.h"
+#include <QComboBox>
+#include "basetypes.h"
 
-namespace Ui {
-class PageInst;
-}
-
-class PageInst : public PageTable
+class ModulatorComboSrc : public QComboBox
 {
     Q_OBJECT
 
 public:
-    explicit PageInst(QWidget *parent = nullptr);
-    ~PageInst() override;
+    ModulatorComboSrc(QWidget* parent = nullptr);
 
-    // Display options
-    QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;
+    // Initialize the combobox
+    void initialize(EltID id, bool source1);
 
-protected:
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
-    void keyPlayedInternal2(int key, int velocity) override;
+    // Load value
+    void loadValue();
 
 private slots:
-    void onLinkClicked(EltID id);
+    void onCurrentIndexChanged(int index);
 
 private:
-    Ui::PageInst *ui;
+    QList<int> getAssociatedMods(EltID id);
+    void setLink(bool enabled, QString text);
+    static QString getIndexName(quint16 iVal, bool CC);
+    int getIndex();
+    bool isCC();
+
+    EltID _id;
+    bool _source1;
 };
 
-// Classe TableWidget pour instruments
-class TableWidgetInst : public TableWidget
-{
-    Q_OBJECT
-
-public:
-    TableWidgetInst(QWidget *parent = nullptr);
-    ~TableWidgetInst();
-
-    // Association champ - ligne
-    AttributeType getChamp(int row);
-    int getRow(quint16 champ);
-
-private:
-    QList<AttributeType> _fieldList;
-};
-
-#endif // PAGE_INST_H
+#endif // MODULATORCOMBOSRC_H

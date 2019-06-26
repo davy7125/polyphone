@@ -95,27 +95,27 @@ void TreeItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         break;
     case elementSmpl:
         drawElement(painter, option, index, s_icons->getPixmap(
-                        "sample", highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::YELLOW, highlighted ? false : true),
+                        "sample", highlighted ? (int)ThemeManager::HIGHLIGHTED_TEXT : (int)ThemeManager::YELLOW, highlighted ? false : true),
                     false, false);
         break;
     case elementInst:
         drawElement(painter, option, index, s_icons->getPixmap(
-                        "instrument", highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::BLUE, highlighted ? false : true),
+                        "instrument", highlighted ? (int)ThemeManager::HIGHLIGHTED_TEXT : (int)ThemeManager::BLUE, highlighted ? false : true),
                     true, false);
         break;
     case elementPrst:
         drawElement(painter, option, index, s_icons->getPixmap(
-                        "preset", highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::RED, highlighted ? false : true),
+                        "preset", highlighted ? (int)ThemeManager::HIGHLIGHTED_TEXT : (int)ThemeManager::RED, highlighted ? false : true),
                     true, false);
         break;
     case elementInstSmpl:
         drawElement(painter, option, index, s_icons->getPixmap(
-                        "sample", highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::YELLOW, highlighted ? false : true),
+                        "sample", highlighted ? (int)ThemeManager::HIGHLIGHTED_TEXT : (int)ThemeManager::YELLOW, highlighted ? false : true),
                     false, true);
         break;
     case elementPrstInst:
         drawElement(painter, option, index, s_icons->getPixmap(
-                        "instrument", highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::BLUE, highlighted ? false : true),
+                        "instrument", highlighted ? (int)ThemeManager::HIGHLIGHTED_TEXT : (int)ThemeManager::BLUE, highlighted ? false : true),
                     false, true);
         break;
     default:

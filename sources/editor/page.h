@@ -44,8 +44,6 @@ namespace Ui
 {
     class Page;
     class PageTable;
-    class TableComboBox;
-    class ComboBox;
 }
 
 class Page : public QWidget
@@ -127,6 +125,7 @@ protected:
     static Synth * _synth;
     bool _preparingPage;
     TypePage _typePage;
+    IdList _currentIds;
 
     static QString getIndexName(quint16 iVal, int CC);
 
@@ -134,7 +133,6 @@ protected:
     void hideEvent(QHideEvent * event);
 
 private:
-    IdList _selectedIds;
     QString _editingSource;
     int _currentDisplayOption;
     QList<DisplayOption> _displayOptions;
