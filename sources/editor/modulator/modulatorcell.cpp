@@ -73,7 +73,9 @@ ModulatorCell::ModulatorCell(EltID id, QWidget *parent) :
     ui->widgetShape2->initialize(id, false);
 
     // Coefficient
+    ui->spinAmount->blockSignals(true);
     ui->spinAmount->setValue(SoundfontManager::getInstance()->get(id, champ_modAmount).shValue);
+    ui->spinAmount->blockSignals(false);
 
     // Transform
     ui->comboTransform->setCurrentIndex(SoundfontManager::getInstance()->get(id, champ_sfModTransOper).wValue == 2 ? 1 : 0);
@@ -121,4 +123,31 @@ void ModulatorCell::paintEvent(QPaintEvent* event)
 AttributeType ModulatorCell::getTargetAttribute()
 {
     return ui->comboDestination->getCurrentAttribute();
+}
+
+void ModulatorCell::on_spinAmount_editingFinished()
+{
+    // Compare with the old value
+    AttributeValue val;
+    val.shValue = ui->spinAmount->value();
+    if (_sm->get(_id, champ_modAmount).shValue != val.shValue)
+    {
+        _sm->set(_id, champ_modAmount, val);
+        _sm->endEditing("modulatorEditor");
+    }
+}
+
+void ModulatorCell::on_comboTransform_currentIndexChanged(int index)
+{
+    // Compare with the old value
+    AttributeValue val;
+    if (index == 1)
+        val.wValue = 2;
+    else
+        val.wValue = 0;
+    if (_sm->get(_id, champ_sfModTransOper).wValue != val.wValue)
+    {
+        _sm->set(_id, champ_sfModTransOper, val);
+        _sm->endEditing("modulatorEditor");
+    }
 }

@@ -27,7 +27,10 @@
 #include <QStandardItemModel>
 #include "soundfontmanager.h"
 
-ModulatorComboSrc::ModulatorComboSrc(QWidget * parent) : QComboBox(parent) {}
+ModulatorComboSrc::ModulatorComboSrc(QWidget * parent) : QComboBox(parent)
+{
+    connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(onCurrentIndexChanged(int)));
+}
 
 void ModulatorComboSrc::initialize(EltID id, bool source1)
 {
@@ -36,21 +39,22 @@ void ModulatorComboSrc::initialize(EltID id, bool source1)
     _source1 = source1;
 
     // Populate
-    this->addItem(getIndexName(0, 0));
-    this->addItem(getIndexName(2, 0));
-    this->addItem(getIndexName(3, 0));
-    this->addItem(getIndexName(10, 0));
-    this->addItem(getIndexName(13, 0));
-    this->addItem(getIndexName(14, 0));
-    this->addItem(getIndexName(16, 0));
+    this->blockSignals(true);
+    this->addItem(getIndexName(0, false), QString::number(0));
+    this->addItem(getIndexName(2, false), QString::number(2));
+    this->addItem(getIndexName(3, false), QString::number(3));
+    this->addItem(getIndexName(10, false), QString::number(10));
+    this->addItem(getIndexName(13, false), QString::number(13));
+    this->addItem(getIndexName(14, false), QString::number(14));
+    this->addItem(getIndexName(16, false), QString::number(16));
     for (int i = 1; i < 6; i++)
-        this->addItem(getIndexName(i, 1));
+        this->addItem(getIndexName(i, true), "CC#" + QString::number(i));
     for (int i = 7; i < 32; i++)
-        this->addItem(getIndexName(i, 1));
+        this->addItem(getIndexName(i, true), "CC#" + QString::number(i));
     for (int i = 64; i < 98; i++)
-        this->addItem(getIndexName(i, 1));
+        this->addItem(getIndexName(i, true), "CC#" + QString::number(i));
     for (int i = 102; i < 120; i++)
-        this->addItem(getIndexName(i, 1));
+        this->addItem(getIndexName(i, true), "CC#" + QString::number(i));
 
     if (_source1)
     {
@@ -59,12 +63,15 @@ void ModulatorComboSrc::initialize(EltID id, bool source1)
         this->addItem("");
         setLink(false, trUtf8("Link"));
     }
+    this->blockSignals(false);
 
     loadValue();
 }
 
 void ModulatorComboSrc::loadValue()
 {
+    this->blockSignals(true);
+
     // Select the value
     SoundfontManager * sm = SoundfontManager::getInstance();
     sfmodulator sfModTmp = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper).sfModValue;
@@ -83,6 +90,7 @@ void ModulatorComboSrc::loadValue()
                 linkText += (i > 0 ? ", #" : " #") + QString::number(linkMods[i]);
         }
         setLink(true, linkText);
+
         this->setCurrentIndex(this->count() - 1);
     }
     else
@@ -90,11 +98,7 @@ void ModulatorComboSrc::loadValue()
         // Select a source
         this->setCurrentText(getIndexName(sfModTmp.Index, sfModTmp.CC));
     }
-}
-
-int ModulatorComboSrc::getValue()
-{
-    return -1;
+    this->blockSignals(false);
 }
 
 QList<int> ModulatorComboSrc::getAssociatedMods(EltID id)
@@ -125,7 +129,54 @@ void ModulatorComboSrc::setLink(bool enabled, QString text)
     item->setFlags(enabled ? item->flags() | Qt::ItemIsEnabled : item->flags() & ~Qt::ItemIsEnabled);
 }
 
-QString ModulatorComboSrc::getIndexName(quint16 iVal, int CC)
+int ModulatorComboSrc::getIndex()
+{
+    return this->itemData(this->currentIndex()).toString().split("#").last().toInt();
+}
+
+bool ModulatorComboSrc::isCC()
+{
+    return this->itemData(this->currentIndex()).toString().contains("#");
+}
+
+void ModulatorComboSrc::onCurrentIndexChanged(int index)
+{
+    // New value
+    bool isCC = this->isCC();
+    index = this->getIndex();
+
+    // Compare with the old value
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    AttributeValue val = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper);
+    if (val.sfModValue.Index != index || val.sfModValue.CC != isCC)
+    {
+        // If this was a link, change the destination of the targeting modulator(s) to 0
+        if (val.sfModValue.Index == 127 && val.sfModValue.CC == 0)
+        {
+            foreach (int i, sm->getSiblings(_id))
+            {
+                if (i == _id.indexMod)
+                    continue;
+                EltID otherModId = _id;
+                otherModId.indexMod = i;
+                int destIndex = sm->get(otherModId, champ_sfModDestOper).wValue;
+                if (destIndex == 32768 + _id.indexMod)
+                {
+                    AttributeValue val2;
+                    val2.wValue = 0;
+                    sm->set(otherModId, champ_sfModDestOper, val2);
+                }
+            }
+        }
+
+        val.sfModValue.Index = index;
+        val.sfModValue.CC = isCC;
+        sm->set(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper, val);
+        sm->endEditing("modulatorEditor");
+    }
+}
+
+QString ModulatorComboSrc::getIndexName(quint16 iVal, bool CC)
 {
     QString qStr = "";
     if (CC)

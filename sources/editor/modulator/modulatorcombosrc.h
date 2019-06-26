@@ -42,13 +42,15 @@ public:
     // Load value
     void loadValue();
 
-    // Get the value changed by the user
-    int getValue();
+private slots:
+    void onCurrentIndexChanged(int index);
 
 private:
     QList<int> getAssociatedMods(EltID id);
     void setLink(bool enabled, QString text);
-    static QString getIndexName(quint16 iVal, int CC);
+    static QString getIndexName(quint16 iVal, bool CC);
+    int getIndex();
+    bool isCC();
 
     EltID _id;
     bool _source1;

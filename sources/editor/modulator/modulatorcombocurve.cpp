@@ -91,7 +91,9 @@ bool ModulatorComboCurve::eventFilter(QObject* object, QEvent* event)
         view()->indexAt(mouseEvent->pos());
         this->setCurrentIndex(view()->currentIndex().row());
         this->setModelColumn(view()->currentIndex().column());
-        //emit(clicked(view()->currentIndex().row(), view()->currentIndex().column()));
+
+        // Store the result
+        valueSelected(view()->currentIndex().row(), view()->currentIndex().column());
     }
     return false;
 }
@@ -111,4 +113,25 @@ void ModulatorComboCurve::loadValue()
     int iTmp = sfMod.D + 2 * sfMod.P + 4 * sfMod.Type;
     this->setCurrentIndex(iTmp / 4);
     this->setModelColumn(iTmp % 4);
+}
+
+void ModulatorComboCurve::valueSelected(int row, int column)
+{
+    int D = column % 2;
+    int P = column / 2;
+    int type = row;
+
+    // Compare with the old value
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    AttributeValue val;
+    val.sfModValue = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper).sfModValue;
+    if (val.sfModValue.D != D || val.sfModValue.P != P || val.sfModValue.Type != type)
+    {
+        val.sfModValue.D = D;
+        val.sfModValue.P = P;
+        val.sfModValue.Type = type;
+
+        sm->set(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper, val);
+        sm->endEditing("modulatorEditor");
+    }
 }

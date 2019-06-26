@@ -35,7 +35,7 @@ class ModulatorComboCurve : public QComboBox
     Q_OBJECT
 
 public:
-    explicit ModulatorComboCurve(QWidget* parent = 0);
+    explicit ModulatorComboCurve(QWidget* parent = nullptr);
     ~ModulatorComboCurve();
     bool eventFilter(QObject* object, QEvent* event);
 
@@ -43,6 +43,8 @@ public:
     void loadValue();
 
 private:
+    void valueSelected(int row, int column);
+
     EltID _id;
     bool _source1;
 };

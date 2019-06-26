@@ -47,6 +47,11 @@ public:
 protected:
     void paintEvent(QPaintEvent* event);
 
+private slots:
+    void on_spinAmount_editingFinished();
+
+    void on_comboTransform_currentIndexChanged(int index);
+
 private:
     Ui::ModulatorCell *ui;
     QColor _computationAreaColor;

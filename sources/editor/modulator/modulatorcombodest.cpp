@@ -26,7 +26,10 @@
 #include "modulatorcombodest.h"
 #include "soundfontmanager.h"
 
-ModulatorComboDest::ModulatorComboDest(QWidget * parent) : QComboBox(parent) {}
+ModulatorComboDest::ModulatorComboDest(QWidget * parent) : QComboBox(parent)
+{
+    connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(onCurrentIndexChanged(int)));
+}
 
 void ModulatorComboDest::initialize(EltID id)
 {
@@ -90,14 +93,18 @@ void ModulatorComboDest::initialize(EltID id)
                << champ_vibLfoToPitch;
 
     // Populate with the attribute list
+    this->blockSignals(true);
     for (int i = 0; i < _destIndex.count(); i++)
         this->addItem(Attribute::getDescription(_destIndex[i], !isInst));
+    this->blockSignals(false);
 
     loadValue();
 }
 
 void ModulatorComboDest::loadValue()
 {
+    this->blockSignals(true);
+
     // Remove modulators
     while (this->count() > _destIndex.count())
         this->removeItem(this->count() - 1);
@@ -126,6 +133,8 @@ void ModulatorComboDest::loadValue()
         this->selectIndex(genValTmp.wValue - 32768);
     else
         this->selectAttribute(genValTmp.sfGenValue);
+
+    this->blockSignals(false);
 }
 
 void ModulatorComboDest::selectAttribute(AttributeType attribute)
@@ -165,4 +174,45 @@ int ModulatorComboDest::getCurrentIndex()
     }
 
     return -1;
+}
+
+void ModulatorComboDest::onCurrentIndexChanged(int index)
+{
+    // New index
+    if (getCurrentAttribute() != champ_unknown)
+        index = (int)getCurrentAttribute();
+    else
+    {
+        int newIndex = getCurrentIndex();
+        if (newIndex >= 0 && newIndex < _listIndex.count())
+            index = _listIndex[newIndex] + 32768;
+        else
+        {
+            qDebug() << "pas bon";
+            return;
+        }
+    }
+
+    // Compare with the old value
+    AttributeValue val;
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    val.sfGenValue = sm->get(_id, champ_sfModDestOper).sfGenValue;
+    if (val.wValue != index)
+    {
+        // If this is a link, change the source 1 of the targeted modulator to "link"
+        if (index >= 32768 && sm->getSiblings(_id).contains(index - 32768))
+        {
+            EltID otherModId = _id;
+            otherModId.indexMod = index - 32768;
+            AttributeValue val2;
+            val2.sfModValue = sm->get(otherModId, champ_sfModSrcOper).sfModValue;
+            val2.sfModValue.Index = 127;
+            val2.sfModValue.CC = 0;
+            sm->set(otherModId, champ_sfModSrcOper, val2);
+        }
+
+        val.sfGenValue = (AttributeType)index;
+        sm->set(_id, champ_sfModDestOper, val);
+        sm->endEditing("modulatorEditor");
+    }
 }

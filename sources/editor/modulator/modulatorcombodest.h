@@ -42,15 +42,17 @@ public:
     // Load value
     void loadValue();
 
-    // Set / get the attribute
-    void selectAttribute(AttributeType attribute);
+    // Get the attribute
     AttributeType getCurrentAttribute();
 
-    // Set / get the index
+private slots:
+    void onCurrentIndexChanged(int index);
+
+private:
+    void selectAttribute(AttributeType attribute);
     void selectIndex(int index);
     int getCurrentIndex();
 
-private:
     QList<AttributeType> _destIndex;
     EltID _id;
     QList<int> _listIndex;
