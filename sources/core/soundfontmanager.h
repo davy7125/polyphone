@@ -52,7 +52,7 @@ public:
     bool isSet(EltID id, AttributeType champ);
     AttributeValue get(EltID id, AttributeType champ);
     QString getQstr(EltID id, AttributeType champ);
-    Sound getSound(EltID id);
+    Sound *getSound(EltID id);
     QByteArray getData(EltID id, AttributeType champ);
     int set(EltID id, AttributeType champ, AttributeValue value);
     int set(EltID id, AttributeType champ, QString qStr);

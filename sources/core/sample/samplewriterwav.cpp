@@ -31,51 +31,51 @@ SampleWriterWav::SampleWriterWav(QString fileName) :
 
 }
 
-void SampleWriterWav::write(Sound &sound)
+void SampleWriterWav::write(Sound * sound)
 {
     // Exportation d'un sample mono au format wav
-    quint16 wBps = sound.getInfo().wBpsFile;
+    quint16 wBps = sound->getInfo().wBpsFile;
     if (wBps > 16)
         wBps = 24;
     else
         wBps = 16;
-    QByteArray baData = sound.getData(wBps);
+    QByteArray baData = sound->getData(wBps);
 
     // Création d'un fichier
-    InfoSound info = sound.getInfo();
+    InfoSound info = sound->getInfo();
     info.wBpsFile = wBps;
     info.wChannels = 1;
     write(baData, info);
 }
 
-void SampleWriterWav::write(Sound &leftSound, Sound &rightSound)
+void SampleWriterWav::write(Sound *leftSound, Sound *rightSound)
 {
     // Exportation d'un sample stereo au format wav
     // bps (max des 2 canaux)
-    quint16 wBps = leftSound.getInfo().wBpsFile;
-    if (rightSound.getInfo().wBpsFile > wBps)
-        wBps = rightSound.getInfo().wBpsFile;
+    quint16 wBps = leftSound->getInfo().wBpsFile;
+    if (rightSound->getInfo().wBpsFile > wBps)
+        wBps = rightSound->getInfo().wBpsFile;
     if (wBps > 16)
         wBps = 24;
     else
         wBps = 16;
 
     // Récupération des données
-    QByteArray channel1 = leftSound.getData(wBps);
-    QByteArray channel2 = rightSound.getData(wBps);
+    QByteArray channel1 = leftSound->getData(wBps);
+    QByteArray channel2 = rightSound->getData(wBps);
 
     // sample rate (max des 2 canaux)
-    quint32 dwSmplRate = leftSound.getInfo().dwSampleRate;
-    if (rightSound.getInfo().dwSampleRate > dwSmplRate)
+    quint32 dwSmplRate = leftSound->getInfo().dwSampleRate;
+    if (rightSound->getInfo().dwSampleRate > dwSmplRate)
     {
         // Ajustement son1
-        channel1 = SampleUtils::resampleMono(channel1, dwSmplRate, rightSound.getInfo().dwSampleRate, wBps);
-        dwSmplRate = rightSound.getInfo().dwSampleRate;
+        channel1 = SampleUtils::resampleMono(channel1, dwSmplRate, rightSound->getInfo().dwSampleRate, wBps);
+        dwSmplRate = rightSound->getInfo().dwSampleRate;
     }
-    else if (rightSound.getInfo().dwSampleRate < dwSmplRate)
+    else if (rightSound->getInfo().dwSampleRate < dwSmplRate)
     {
         // Ajustement son2
-        channel2 = SampleUtils::resampleMono(channel2, rightSound.getInfo().dwSampleRate, dwSmplRate, wBps);
+        channel2 = SampleUtils::resampleMono(channel2, rightSound->getInfo().dwSampleRate, dwSmplRate, wBps);
     }
 
     // Taille et mise en forme des données
@@ -102,7 +102,7 @@ void SampleWriterWav::write(Sound &leftSound, Sound &rightSound)
     QByteArray baData = SampleUtils::from2MonoTo1Stereo(channel1, channel2, wBps);
 
     // Création d'un fichier
-    InfoSound info = leftSound.getInfo();
+    InfoSound info = leftSound->getInfo();
     info.wBpsFile = wBps;
     info.dwSampleRate = dwSmplRate;
     info.wChannels = 2;

@@ -33,8 +33,8 @@ class SampleWriterWav
 public:
     SampleWriterWav(QString fileName);
 
-    void write(Sound &sound);
-    void write(Sound &leftSound, Sound &rightSound);
+    void write(Sound *sound);
+    void write(Sound *leftSound, Sound *rightSound);
 
 private:
     void write(QByteArray &baData, InfoSound &info);

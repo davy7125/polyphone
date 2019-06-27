@@ -326,15 +326,15 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
     return value;
 }
 
-Sound SoundfontManager::getSound(EltID id)
+Sound * SoundfontManager::getSound(EltID id)
 {
     QMutexLocker locker(&_mutex);
-    Sound son;
+    Sound * son = nullptr;
     if (!this->isValid(id))
         return son;
 
     if (id.typeElement == elementSmpl)
-        son = _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt)->_sound;
+        son = &_soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt)->_sound;
 
     return son;
 }
