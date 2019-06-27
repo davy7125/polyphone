@@ -161,6 +161,11 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
             // Skip it
             in.skipRawData(static_cast<int>(sectionSize.value));
         }
+        else
+        {
+            // Skip the bloc
+            in.skipRawData(static_cast<int>(sectionSize.value));
+        }
 
         // Update position
         pos += sectionSize.value;
@@ -238,9 +243,13 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getExtraData24(QFile &fi, Q
 
 QByteArray SampleReaderWav::loadData(QFile &fi)
 {
+    // Skip the headers
+    fi.skip(_info->dwStart);
+
+    // Read data
     QByteArray data = fi.read(_info->dwLength * _info->wBpsFile / 8 * _info->wChannels);
 
-    // Possibly convert from WAVE_FORMAT_IEEE_FLOAT to PCM 32
+    // Possibly convert it from WAVE_FORMAT_IEEE_FLOAT to PCM 32
     if (_isIeeeFloat && _info->wBpsFile == 32)
     {
         float * dataF = reinterpret_cast<float *>(data.data());
