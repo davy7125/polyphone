@@ -64,7 +64,7 @@ QList<int> SfzParameterGroup::getSampleIndex(SoundfontManager *sf2, EltID idElt,
 
     // Récupération des informations d'un sample
     Sound son(fileName, false);
-    int nChannels = son.get(champ_wChannels);
+    int nChannels = son.getUInt32(champ_wChannels);
     QString nom = QFileInfo(fileName).completeBaseName();
     QString nom2 = nom;
 
@@ -126,23 +126,23 @@ QList<int> SfzParameterGroup::getSampleIndex(SoundfontManager *sf2, EltID idElt,
             sf2->set(idElt, champ_sfSampleType, val);
         }
         sf2->set(idElt, champ_filenameForData, fileName);
-        val.dwValue = son.get(champ_dwStart16);
+        val.dwValue = son.getUInt32(champ_dwStart16);
         sf2->set(idElt, champ_dwStart16, val);
-        val.dwValue = son.get(champ_dwStart24);
+        val.dwValue = son.getUInt32(champ_dwStart24);
         sf2->set(idElt, champ_dwStart24, val);
         val.wValue = numChannel;
         sf2->set(idElt, champ_wChannel, val);
-        val.dwValue = son.get(champ_dwLength);
+        val.dwValue = son.getUInt32(champ_dwLength);
         sf2->set(idElt, champ_dwLength, val);
-        val.dwValue = son.get(champ_dwSampleRate);
+        val.dwValue = son.getUInt32(champ_dwSampleRate);
         sf2->set(idElt, champ_dwSampleRate, val);
-        val.dwValue = son.get(champ_dwStartLoop);
+        val.dwValue = son.getUInt32(champ_dwStartLoop);
         sf2->set(idElt, champ_dwStartLoop, val);
-        val.dwValue = son.get(champ_dwEndLoop);
+        val.dwValue = son.getUInt32(champ_dwEndLoop);
         sf2->set(idElt, champ_dwEndLoop, val);
-        val.bValue = (quint8)son.get(champ_byOriginalPitch);
+        val.bValue = (quint8)son.getUInt32(champ_byOriginalPitch);
         sf2->set(idElt, champ_byOriginalPitch, val);
-        val.cValue = (char)son.get(champ_chPitchCorrection);
+        val.cValue = (char)son.getInt32(champ_chPitchCorrection);
         sf2->set(idElt, champ_chPitchCorrection, val);
     }
 
@@ -170,9 +170,9 @@ void SfzParameterGroup::adjustStereoVolumeAndCorrection(QString path, int defaul
     if (!sample.isEmpty())
     {
         Sound son(path + "/" + sample);
-        if (son.get(champ_wChannels) == 2)
+        if (son.getUInt32(champ_wChannels) == 2)
             adjustVolume(3.);
-        int correctionSample = son.get(champ_chPitchCorrection);
+        int correctionSample = son.getInt32(champ_chPitchCorrection);
         if (correctionSample != 0)
             adjustCorrection(correctionSample, defaultCorrection);
     }

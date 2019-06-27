@@ -26,6 +26,7 @@
 #include "ui_toolfrequencyfilter_gui.h"
 #include "toolfrequencyfilter_parameters.h"
 #include "soundfontmanager.h"
+#include "sampleutils.h"
 
 ToolFrequencyFilter_gui::ToolFrequencyFilter_gui(QWidget *parent) :
     AbstractToolGui(parent),
@@ -65,7 +66,7 @@ void ToolFrequencyFilter_gui::updateInterface(AbstractToolParameters * parameter
         qint16 * data = (qint16*)baData.data();
         for (int i = 0; i < length; i++)
             fData[i] = (float)data[i];
-        fData = Sound::getFourierTransform(fData);
+        fData = SampleUtils::getFourierTransform(fData);
 
         // Display it
         ui->graphFilterFrequencies->addFourierTransform(fData, sampleRate);

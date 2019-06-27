@@ -241,7 +241,7 @@ QString RepositoryManager::loadSoundfontInfo()
         // Create a new soundfont information
         SoundfontInformation * si = new SoundfontInformation(id, title);
         _soundfontInfos[id] = si;
-        qDebug() << "RepositoryManager::loadSoundfontInfo() - soundfont" << id << "added (" << title << ")";
+        //qDebug() << "RepositoryManager::loadSoundfontInfo() - soundfont" << id << "added (" << title << ")";
 
         // Date
         valueTmp = jsonObject.value("date");

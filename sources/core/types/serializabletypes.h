@@ -22,44 +22,45 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "toolchangevolume.h"
-#include "toolchangevolume_gui.h"
-#include "toolchangevolume_parameters.h"
-#include "soundfontmanager.h"
-#include "sampleutils.h"
-#include <qmath.h>
+#ifndef SERIALIZABLETYPES_H
+#define SERIALIZABLETYPES_H
 
-ToolChangeVolume::ToolChangeVolume() : AbstractToolIterating(elementSmpl, new ToolChangeVolume_parameters(), new ToolChangeVolume_gui())
+#include "qglobal.h"
+#include "attribute.h"
+class QDataStream;
+
+class quint32Reversed
 {
+public:
+    quint32Reversed(quint32 val = 0) : value(val) {}
+    quint32 value;
+};
+QDataStream & operator >> (QDataStream &in, quint32Reversed &val);
 
-}
-
-void ToolChangeVolume::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
+class quint16Reversed
 {
-    ToolChangeVolume_parameters * params = (ToolChangeVolume_parameters *)parameters;
+public:
+    quint16Reversed(quint16 val = 0) : value(val) {}
+    quint16 value;
+};
+QDataStream & operator >> (QDataStream &in, quint16Reversed &val);
 
-    // Sample data
-    QByteArray baData = sm->getData(id, champ_sampleDataFull24);
+class qint32Reversed
+{
+public:
+    qint32Reversed(qint32 val = 0) : value(val) {}
+    qint32 value;
+};
+QDataStream & operator >> (QDataStream &in, qint32Reversed &val);
 
-    // Change the volume
-    double db = 0;
-    switch (params->getMode())
-    {
-    case 0: // Add dB
-        // Compute the factor
-        baData = SampleUtils::multiplier(baData, qPow(10, params->getAddValue() / 20.0), 24, db);
-        break;
-    case 1: // Multiply by a factor
-        baData = SampleUtils::multiplier(baData, params->getMultiplyValue(), 24, db);
-        break;
-    case 2: // Normalize
-        baData = SampleUtils::normaliser(baData, params->getNormalizeValue() / 100, 24, db);
-        break;
-    default:
-        // Nothing
-        return;
-    }
+class qint16Reversed
+{
+public:
+    qint16Reversed(qint16 val = 0) : value(val) {}
+    qint16 value;
+};
+QDataStream & operator >> (QDataStream &in, qint16Reversed &val);
 
-    // Update the sample data
-    sm->set(id, champ_sampleDataFull24, baData);
-}
+QDataStream & operator >> (QDataStream &in, SFModulator &mod);
+
+#endif // SERIALIZABLETYPES_H

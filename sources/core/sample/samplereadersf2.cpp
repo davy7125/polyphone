@@ -22,44 +22,68 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "toolchangevolume.h"
-#include "toolchangevolume_gui.h"
-#include "toolchangevolume_parameters.h"
-#include "soundfontmanager.h"
-#include "sampleutils.h"
-#include <qmath.h>
+#include "samplereadersf2.h"
 
-ToolChangeVolume::ToolChangeVolume() : AbstractToolIterating(elementSmpl, new ToolChangeVolume_parameters(), new ToolChangeVolume_gui())
+SampleReaderSf2::SampleReaderSf2(QString filename) : SampleReader(filename),
+    _info(nullptr)
 {
 
 }
 
-void ToolChangeVolume::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
+SampleReaderSf2::SampleReaderResult SampleReaderSf2::getInfo(QFile &fi, InfoSound &info)
 {
-    ToolChangeVolume_parameters * params = (ToolChangeVolume_parameters *)parameters;
+    Q_UNUSED(fi)
 
-    // Sample data
-    QByteArray baData = sm->getData(id, champ_sampleDataFull24);
+    // Info completed outside for an sf2: we keep the pointer
+    _info = &info;
 
-    // Change the volume
-    double db = 0;
-    switch (params->getMode())
+    // Extra info
+    info.wChannel = 0;
+    info.wChannels = 1;
+
+    return FILE_OK;
+}
+
+SampleReaderSf2::SampleReaderResult SampleReaderSf2::getData16(QFile &fi, QByteArray &smpl)
+{
+    // Size of the vector
+    smpl.resize(static_cast<int>(_info->dwLength) * 2);
+
+    // Load smpl part of an sf2
+    if (_info->dwLength > 0)
     {
-    case 0: // Add dB
-        // Compute the factor
-        baData = SampleUtils::multiplier(baData, qPow(10, params->getAddValue() / 20.0), 24, db);
-        break;
-    case 1: // Multiply by a factor
-        baData = SampleUtils::multiplier(baData, params->getMultiplyValue(), 24, db);
-        break;
-    case 2: // Normalize
-        baData = SampleUtils::normaliser(baData, params->getNormalizeValue() / 100, 24, db);
-        break;
-    default:
-        // Nothing
-        return;
+        // Copy data
+        fi.seek(_info->dwStart);
+        qint64 nb = fi.read(smpl.data(), _info->dwLength * 2);
+        if (nb == -1)
+            return FILE_NOT_READABLE;
+        if (nb != _info->dwLength * 2)
+            return FILE_CORRUPT;
     }
+    else
+        smpl.fill(0);
 
-    // Update the sample data
-    sm->set(id, champ_sampleDataFull24, baData);
+    return FILE_OK;
+}
+
+SampleReaderSf2::SampleReaderResult SampleReaderSf2::getExtraData24(QFile &fi, QByteArray &sm24)
+{
+    // Size of the vector
+    sm24.resize(static_cast<int>(_info->dwLength));
+
+    // Load sm24 part of an sf2
+    if (_info->wBpsFile >= 24 && _info->dwLength > 0)
+    {
+        // Copy data
+        fi.seek(_info->dwStart2);
+        qint64 nb = fi.read(sm24.data(), _info->dwLength);
+        if (nb == -1)
+            return FILE_NOT_READABLE;
+        if (nb != _info->dwLength * 2)
+            return FILE_CORRUPT;
+    }
+    else
+        sm24.fill(0);
+
+    return FILE_OK;
 }

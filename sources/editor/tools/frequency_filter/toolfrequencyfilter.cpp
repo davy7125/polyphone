@@ -26,6 +26,7 @@
 #include "toolfrequencyfilter_gui.h"
 #include "toolfrequencyfilter_parameters.h"
 #include "soundfontmanager.h"
+#include "sampleutils.h"
 
 ToolFrequencyFilter::ToolFrequencyFilter() : AbstractToolIterating(elementSmpl, new ToolFrequencyFilter_parameters(), new ToolFrequencyFilter_gui())
 {
@@ -43,6 +44,6 @@ void ToolFrequencyFilter::process(SoundfontManager * sm, EltID id, AbstractToolP
     quint32 dwSmplRate = sm->get(id, champ_dwSampleRate).dwValue;
 
     // Apply the filter and update data
-    baData = Sound::cutFilter(baData, dwSmplRate, dValues, 24, 20000);
+    baData = SampleUtils::cutFilter(baData, dwSmplRate, dValues, 24, 20000);
     sm->set(id, champ_sampleDataFull24, baData);
 }

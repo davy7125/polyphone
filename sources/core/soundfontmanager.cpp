@@ -33,6 +33,7 @@
 #include "action.h"
 #include "indexedelementlist.h"
 #include "utils.h"
+#include "sampleutils.h"
 
 SoundfontManager * SoundfontManager::s_instance = nullptr;
 
@@ -192,27 +193,27 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
         switch (champ)
         {
         case champ_dwStart16:
-            value.dwValue = tmp->_sound.get(champ_dwStart16); break;
+            value.dwValue = tmp->_sound.getUInt32(champ_dwStart16); break;
         case champ_dwStart24:
-            value.dwValue = tmp->_sound.get(champ_dwStart24); break;
+            value.dwValue = tmp->_sound.getUInt32(champ_dwStart24); break;
         case champ_dwLength:
-            value.dwValue = tmp->_sound.get(champ_dwLength); break;
+            value.dwValue = tmp->_sound.getUInt32(champ_dwLength); break;
         case champ_dwStartLoop:
-            value.dwValue = tmp->_sound.get(champ_dwStartLoop); break;
+            value.dwValue = tmp->_sound.getUInt32(champ_dwStartLoop); break;
         case champ_dwEndLoop:
-            value.dwValue = tmp->_sound.get(champ_dwEndLoop); break;
+            value.dwValue = tmp->_sound.getUInt32(champ_dwEndLoop); break;
         case champ_dwSampleRate:
-            value.dwValue = tmp->_sound.get(champ_dwSampleRate); break;
+            value.dwValue = tmp->_sound.getUInt32(champ_dwSampleRate); break;
         case champ_bpsFile:
-            value.dwValue = tmp->_sound.get(champ_bpsFile); break;
+            value.dwValue = tmp->_sound.getUInt32(champ_bpsFile); break;
         case champ_wChannel:
-            value.dwValue = tmp->_sound.get(champ_wChannel); break;
+            value.dwValue = tmp->_sound.getUInt32(champ_wChannel); break;
         case champ_wChannels:
-            value.dwValue = tmp->_sound.get(champ_wChannels); break;
+            value.dwValue = tmp->_sound.getUInt32(champ_wChannels); break;
         case champ_byOriginalPitch:
-            value.bValue = tmp->_sound.get(champ_byOriginalPitch); break;
+            value.bValue = tmp->_sound.getUInt32(champ_byOriginalPitch); break;
         case champ_chPitchCorrection:
-            value.cValue = tmp->_sound.get(champ_chPitchCorrection); break;
+            value.cValue = tmp->_sound.getInt32(champ_chPitchCorrection); break;
         case champ_wSampleLink:
             value.wValue = tmp->_wSampleLink; break;
         case champ_sfSampleType:
@@ -1199,28 +1200,28 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
         switch ((int)champ)
         {
         case champ_dwStart16:
-            oldValue.dwValue = tmp->_sound.get(champ_dwStart16);
+            oldValue.dwValue = tmp->_sound.getUInt32(champ_dwStart16);
             tmp->_sound.set(champ_dwStart16, value); break;
         case champ_dwStart24:
-            oldValue.dwValue = tmp->_sound.get(champ_dwStart24);
+            oldValue.dwValue = tmp->_sound.getUInt32(champ_dwStart24);
             tmp->_sound.set(champ_dwStart24, value); break;
         case champ_dwLength:
-            oldValue.dwValue = tmp->_sound.get(champ_dwLength);
+            oldValue.dwValue = tmp->_sound.getUInt32(champ_dwLength);
             tmp->_sound.set(champ_dwLength, value); break;
         case champ_dwStartLoop:
-            oldValue.dwValue = tmp->_sound.get(champ_dwStartLoop);
+            oldValue.dwValue = tmp->_sound.getUInt32(champ_dwStartLoop);
             tmp->_sound.set(champ_dwStartLoop, value); break;
         case champ_dwEndLoop:
-            oldValue.dwValue = tmp->_sound.get(champ_dwEndLoop);
+            oldValue.dwValue = tmp->_sound.getUInt32(champ_dwEndLoop);
             tmp->_sound.set(champ_dwEndLoop, value); break;
         case champ_dwSampleRate:
-            oldValue.dwValue = tmp->_sound.get(champ_dwSampleRate);
+            oldValue.dwValue = tmp->_sound.getUInt32(champ_dwSampleRate);
             tmp->_sound.set(champ_dwSampleRate, value); break;
         case champ_byOriginalPitch:
-            oldValue.bValue = tmp->_sound.get(champ_byOriginalPitch);
+            oldValue.bValue = tmp->_sound.getUInt32(champ_byOriginalPitch);
             tmp->_sound.set(champ_byOriginalPitch, value); break;
         case champ_chPitchCorrection:
-            oldValue.cValue = tmp->_sound.get(champ_chPitchCorrection);
+            oldValue.cValue = tmp->_sound.getInt32(champ_chPitchCorrection);
             tmp->_sound.set(champ_chPitchCorrection, value); break;
         case champ_wSampleLink:
             oldValue.wValue = tmp->_wSampleLink;
@@ -1229,13 +1230,13 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
             oldValue.sfLinkValue = tmp->_sfSampleType;
             tmp->_sfSampleType = value.sfLinkValue; break;
         case champ_bpsFile:
-            oldValue.wValue = tmp->_sound.get(champ_bpsFile);
+            oldValue.wValue = tmp->_sound.getUInt32(champ_bpsFile);
             tmp->_sound.set(champ_bpsFile, value); break;
         case champ_wChannel:
-            oldValue.wValue = tmp->_sound.get(champ_wChannel);
+            oldValue.wValue = tmp->_sound.getUInt32(champ_wChannel);
             tmp->_sound.set(champ_wChannel, value); break;
         case champ_wChannels:
-            oldValue.wValue = tmp->_sound.get(champ_wChannels);
+            oldValue.wValue = tmp->_sound.getUInt32(champ_wChannels);
             tmp->_sound.set(champ_wChannels, value); break;
         }
     }break;
@@ -1481,11 +1482,11 @@ int SoundfontManager::set(EltID id, AttributeType champ, QByteArray data)
     QByteArray oldData;
     oldData.clear();
     // Type d'élément à modifier
-    switch ((int)id.typeElement)
+    switch (id.typeElement)
     {
     case elementSmpl:
-        // modification d'un sample
-        switch ((int)champ)
+        // Update a sample
+        switch (champ)
         {
         case champ_sampleData16:
             oldData = _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt)->_sound.getData(16);
@@ -1497,22 +1498,30 @@ int SoundfontManager::set(EltID id, AttributeType champ, QByteArray data)
             break;
         case champ_sampleDataFull24:{
             // Modification 16 bits
-            QByteArray baData = Sound::bpsConversion(data, 24, 16);
+            QByteArray baData = SampleUtils::bpsConversion(data, 24, 16);
             this->set(id, champ_sampleData16, baData);
+
             // Modification 8 bits de poids faibles
-            baData = Sound::bpsConversion(data, 24, 824);
+            baData = SampleUtils::bpsConversion(data, 24, 824);
             this->set(id, champ_sampleData24, baData);
         }break;
         case champ_sampleData32:{
             // Modification 16 bits
-            QByteArray baData = Sound::bpsConversion(data, 32, 16);
+            QByteArray baData = SampleUtils::bpsConversion(data, 32, 16);
             this->set(id, champ_sampleData16, baData);
+
             // Modification 8 bits de poids faibles
-            baData = Sound::bpsConversion(data, 32, 824);
+            baData = SampleUtils::bpsConversion(data, 32, 824);
             this->set(id, champ_sampleData24, baData);
         }break;
+        default:
+            break;
         }
+        break;
+    default:
+        return 0;
     }
+
     // Création et stockage de l'action
     Action *action = new Action();
     action->typeAction = Action::TypeUpdate;
@@ -1533,7 +1542,7 @@ void SoundfontManager::reset(EltID id, AttributeType champ)
 
     AttributeValue oldValue;
     // Type d'élément à modifier
-    switch ((int)id.typeElement)
+    switch (id.typeElement)
     {
     case elementInst:{
         // Remise à zéro d'une propriété d'un instrument
@@ -1571,6 +1580,8 @@ void SoundfontManager::reset(EltID id, AttributeType champ)
         oldValue = tmp->getGen(champ);
         tmp->resetGen(champ);
     }break;
+    default:
+        return;
     }
 
     // Create and store the action

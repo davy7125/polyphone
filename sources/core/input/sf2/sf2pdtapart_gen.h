@@ -25,8 +25,7 @@
 #ifndef SF2PDTAPART_GEN_H
 #define SF2PDTAPART_GEN_H
 
-#include "sf2basetypes.h"
-class QDataStream;
+#include "basetypes.h"
 
 class Sf2PdtaPart_gen
 {

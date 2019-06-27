@@ -121,9 +121,6 @@ MainWindow::MainWindow(QWidget *parent) :
     if (ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "auto_connect", false).toBool())
         UserManager::getInstance()->login();
 
-    // Initialization object Sound
-    Sound::setParent(this);
-
     // Recent files
     connect(ContextManager::recentFile(), SIGNAL(recentSf2Changed()), this, SLOT(recentSf2Changed()));
     connect(ui->widgetShowHistory, SIGNAL(openFile(QString)), this, SLOT(openFile(QString)));

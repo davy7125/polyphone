@@ -27,6 +27,7 @@
 #include "sound.h"
 #include "graphique.h"
 #include "graphiquefourier.h"
+#include "sampleutils.h"
 #include "contextmanager.h"
 #include "pianokeybdcustom.h"
 #include <QProgressDialog>
@@ -876,7 +877,7 @@ void PageSmpl::setRateElt(EltID id, quint32 echFinal)
     // Modification échantillonnage
     quint32 echInit = _sf2->get(id, champ_dwSampleRate).dwValue;
     QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
-    baData = Sound::resampleMono(baData, echInit, echFinal, 24);
+    baData = SampleUtils::resampleMono(baData, echInit, echFinal, 24);
     _sf2->set(id, champ_sampleDataFull24, baData);
     AttributeValue val;
     val.dwValue = echFinal;
@@ -937,7 +938,7 @@ void PageSmpl::applyEQ()
         {
             listprocessedID << id;
             QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
-            baData = Sound::EQ(baData, _sf2->get(id, champ_dwSampleRate).dwValue, 24,
+            baData = SampleUtils::EQ(baData, _sf2->get(id, champ_dwSampleRate).dwValue, 24,
                                ui->verticalSlider_1->value(),
                                ui->verticalSlider_2->value(),
                                ui->verticalSlider_3->value(),
@@ -958,7 +959,7 @@ void PageSmpl::applyEQ()
                 {
                     listprocessedID << id2;
                     QByteArray baData = _sf2->getData(id2, champ_sampleDataFull24);
-                    baData = Sound::EQ(baData, _sf2->get(id2, champ_dwSampleRate).dwValue, 24,
+                    baData = SampleUtils::EQ(baData, _sf2->get(id2, champ_dwSampleRate).dwValue, 24,
                                        ui->verticalSlider_1->value(),
                                        ui->verticalSlider_2->value(),
                                        ui->verticalSlider_3->value(),

@@ -25,9 +25,8 @@
 #ifndef SF2PDTAPART_SHDR_H
 #define SF2PDTAPART_SHDR_H
 
-#include "sf2basetypes.h"
+#include "basetypes.h"
 #include <QString>
-class QDataStream;
 
 class Sf2PdtaPart_shdr
 {

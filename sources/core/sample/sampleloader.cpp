@@ -46,15 +46,15 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
     QFileInfo qFileInfo = path;
 
     // Get information about a sample
-    Sound * son = new Sound(path);
-    int nChannels = son->get(champ_wChannels);
+    Sound son(path);
+    unsigned int nChannels = son.getUInt32(champ_wChannels);
 
     // Add a sample
     SoundfontManager * sm = SoundfontManager::getInstance();
     AttributeValue val;
     QString nom = qFileInfo.completeBaseName();
 
-    // Replacement ?
+    // Replacement?
     int indexL = -1;
     int indexR = -1;
     QString qStr3 = "";
@@ -87,7 +87,7 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
         }
         if (*replace != 2 && *replace != 4 && (indexL != -1 || indexR != -1))
         {
-            // Remplacement ?
+            // Replacement?
             QMessageBox msgBox(_parent);
             msgBox.setIcon(QMessageBox::Warning);
             msgBox.setText(qStr3);
@@ -113,7 +113,7 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
         }
     }
 
-    // Ajustement du nom, s'il est déjà utilisé
+    // Adjust the name, if already used
     if (*replace == 0 || *replace == -1)
     {
         QStringList listSampleName;
@@ -144,11 +144,11 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
         }
     }
 
-    for (int j = 0; j < nChannels; j++)
+    for (unsigned int j = 0; j < nChannels; j++)
     {
         if (*replace < 3 || (nChannels == 2 && j == 0 && indexL == -1) ||
                 (nChannels == 2 && j == 1 && indexR == -1) ||
-                (nChannels == 1 && indexL == -1)) // Si pas ignorer
+                (nChannels == 1 && indexL == -1)) // Don't ignore
         {
             if (((nChannels == 2 && j == 0 && indexL != -1) ||
                  (nChannels == 2 && j == 1 && indexR != -1) ||
@@ -159,16 +159,18 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                 else
                     id.indexElt = indexR;
 
-                // Mise à jour des données
+                // Update data
                 AttributeValue valTmp;
-                valTmp.wValue = j;
-                son->set(champ_wChannel, valTmp);
-                QByteArray data = son->getData(24);
-                sm->set(id, champ_sampleDataFull24, data);
+                valTmp.wValue = static_cast<quint16>(j);
+                son.set(champ_wChannel, valTmp);
+                QByteArray smpl = son.getData(16);
+                QByteArray sm24 = son.getData(8);
+                sm->set(id, champ_sampleData16, smpl);
+                sm->set(id, champ_sampleData24, sm24);
             }
             else
             {
-                // Ajout d'un sample
+                // Add a sample
                 id.indexElt = sm->add(id);
                 addedSmpl << id;
                 if (nChannels == 2)
@@ -177,7 +179,7 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                     {
                         // Left
                         sm->set(id, champ_name, nom.left(19).append("L"));
-                        val.wValue = id.indexElt + 1;
+                        val.wValue = static_cast<quint16>(id.indexElt) + 1;
                         sm->set(id, champ_wSampleLink, val);
                         val.sfLinkValue = leftSample;
                         sm->set(id, champ_sfSampleType, val);
@@ -186,7 +188,7 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                     {
                         // Right
                         sm->set(id, champ_name, nom.left(19).append("R"));
-                        val.wValue = id.indexElt - 1;
+                        val.wValue = static_cast<quint16>(id.indexElt) - 1;
                         sm->set(id, champ_wSampleLink, val);
                         val.sfLinkValue = rightSample;
                         sm->set(id, champ_sfSampleType, val);
@@ -201,26 +203,26 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                     sm->set(id, champ_sfSampleType, val);
                 }
                 sm->set(id, champ_filenameForData, path);
-                val.dwValue = son->get(champ_dwStart16);
+                val.dwValue = son.getUInt32(champ_dwStart16);
                 sm->set(id, champ_dwStart16, val);
-                val.dwValue = son->get(champ_dwStart24);
+                val.dwValue = son.getUInt32(champ_dwStart24);
                 sm->set(id, champ_dwStart24, val);
             }
 
             // Configuration du sample
-            val.wValue = j;
+            val.wValue = static_cast<quint16>(j);
             sm->set(id, champ_wChannel, val);
-            val.dwValue = son->get(champ_dwLength);
+            val.dwValue = son.getUInt32(champ_dwLength);
             sm->set(id, champ_dwLength, val);
-            val.dwValue = son->get(champ_dwSampleRate);
+            val.dwValue = son.getUInt32(champ_dwSampleRate);
             sm->set(id, champ_dwSampleRate, val);
-            val.dwValue = son->get(champ_dwStartLoop);
+            val.dwValue = son.getUInt32(champ_dwStartLoop);
             sm->set(id, champ_dwStartLoop, val);
-            val.dwValue = son->get(champ_dwEndLoop);
+            val.dwValue = son.getUInt32(champ_dwEndLoop);
             sm->set(id, champ_dwEndLoop, val);
-            val.bValue = (quint8)son->get(champ_byOriginalPitch);
+            val.bValue = static_cast<quint8>(son.getUInt32(champ_byOriginalPitch));
             sm->set(id, champ_byOriginalPitch, val);
-            val.cValue = (char)son->get(champ_chPitchCorrection);
+            val.cValue = static_cast<char>(son.getInt32(champ_chPitchCorrection));
             sm->set(id, champ_chPitchCorrection, val);
 
             // Automatically remove leading blank?
@@ -232,7 +234,6 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                 ToolTrimEnd::trim(id);
         }
     }
-    delete son;
 
     return addedSmpl;
 }

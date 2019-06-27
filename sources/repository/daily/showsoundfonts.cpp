@@ -129,9 +129,9 @@ void ShowSoundfonts::populate()
         foreach (int dailyId, _dailyIds)
         {
             SoundfontInformation * si = RepositoryManager::getInstance()->getSoundfontInformation(dailyId);
-            if (si != NULL)
+            if (si != nullptr)
             {
-                qDebug() << "ShowSoundfonts::populate() - adding daily soundfont " << si->getTitle();
+                //qDebug() << "ShowSoundfonts::populate() - adding daily soundfont " << si->getTitle();
                 SoundfontCell * cell = new SoundfontCell(si, this);
                 connect(cell, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
 

@@ -29,16 +29,17 @@
 KeyNameManager::KeyNameManager(ConfManager * configuration) :
     _configuration(configuration)
 {
-    _nameMiddleC = (NameMiddleC)_configuration->getValue(ConfManager::SECTION_NONE, "name_middle_c", 0).toInt();
+    _nameMiddleC = static_cast<NameMiddleC>(
+                _configuration->getValue(ConfManager::SECTION_NONE, "name_middle_c", 0).toInt());
 }
 
 void KeyNameManager::setMiddleKey(NameMiddleC name)
 {
     _nameMiddleC = name;
-    _configuration->setValue(ConfManager::SECTION_NONE, "name_middle_c", (int)_nameMiddleC);
+    _configuration->setValue(ConfManager::SECTION_NONE, "name_middle_c", static_cast<int>(_nameMiddleC));
 }
 
-QString KeyNameManager::getKeyName(int keyNum, bool forceTexte, bool with0, bool forceC4, bool noOctave)
+QString KeyNameManager::getKeyName(unsigned int keyNum, bool forceTexte, bool with0, bool forceC4, bool noOctave)
 {
     if (_nameMiddleC == MIDDLE_C_60 && !forceTexte)
     {
@@ -121,7 +122,7 @@ int KeyNameManager::getKeyNum(QString keyName, bool forceC4)
         case 'g': note = 67; break;
         case 'a': case 'h': note = 69; break;
         case 'b': note = 71; break;
-        default : return -1; break;
+        default : return -1;
         }
         keyName = keyName.right(keyName.size() - 1);
         if (keyName.at(0).unicode() == '#' || keyName.at(0) == QString::fromUtf8("♯").at(0))

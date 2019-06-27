@@ -22,41 +22,30 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "sf2basetypes.h"
-#include <QDataStream>
+#include "samplereaderfactory.h"
+#include "samplereaderwav.h"
+#include "samplereadersf2.h"
+#include "samplereaderflac.h"
+#include <QFileInfo>
 
-QDataStream & operator >> (QDataStream &in, quint32Reversed &val)
+SampleReader * SampleReaderFactory::getSampleReader(QString filename)
 {
-    quint8 b0, b1, b2, b3;
-    in >> b0 >> b1 >> b2 >> b3;
-    val.value = b3 << 24 | b2 << 16 | b1 << 8 | b0;
-    return in;
-}
+    QFileInfo fileInfo(filename);
+    QString ext = fileInfo.suffix().toLower();
 
-QDataStream & operator >> (QDataStream &in, quint16Reversed &val)
-{
-    quint8 b0, b1;
-    in >> b0 >> b1;
-    val.value = b1 << 8 | b0;
-    return in;
-}
+    // Soundfont?
+    if (ext.compare("sf2") == 0 || ext.compare("sf3") == 0)
+        return new SampleReaderSf2(filename);
 
-QDataStream & operator >> (QDataStream &in, qint16Reversed &val)
-{
-    quint8 b0, b1;
-    in >> b0 >> b1;
-    val.value = ((short) b1) << 8 | b0;
-    return in;
-}
+    // Wav file?
+    if (ext.compare("wav") == 0)
+        return new SampleReaderWav(filename);
 
-QDataStream & operator >> (QDataStream &in, SFModulator &mod)
-{
-    quint8 b0, b1;
-    in >> b0 >> b1;
-    mod.Type = (int) b1 >> 2;
-    mod.P = bool((b1 >> 1) & 1);
-    mod.D = bool(b1 & 1);
-    mod.CC = bool(b0 >> 7);
-    mod.Index = quint16(b0 & 0x7F);
-    return in;
+    // Flac file?
+    if (ext.compare("flac") == 0)
+        return new SampleReaderFlac(filename);
+
+    // TODO: check if there is a library for reading extra formats
+
+    return nullptr;
 }

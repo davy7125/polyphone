@@ -22,44 +22,31 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "toolchangevolume.h"
-#include "toolchangevolume_gui.h"
-#include "toolchangevolume_parameters.h"
-#include "soundfontmanager.h"
-#include "sampleutils.h"
-#include <qmath.h>
+#ifndef SAMPLEREADERWAV_H
+#define SAMPLEREADERWAV_H
 
-ToolChangeVolume::ToolChangeVolume() : AbstractToolIterating(elementSmpl, new ToolChangeVolume_parameters(), new ToolChangeVolume_gui())
+#include "samplereader.h"
+
+class SampleReaderWav: public SampleReader
 {
+public:
+    SampleReaderWav(QString filename);
+    ~SampleReaderWav() override {}
 
-}
+    // Extract general information (sampling rate, ...)
+    SampleReaderResult getInfo(QFile &fi, InfoSound &info) override;
 
-void ToolChangeVolume::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
-{
-    ToolChangeVolume_parameters * params = (ToolChangeVolume_parameters *)parameters;
+    // Get sample data (16 bits)
+    SampleReaderResult getData16(QFile &fi, QByteArray &smpl) override;
 
-    // Sample data
-    QByteArray baData = sm->getData(id, champ_sampleDataFull24);
+    // Get sample data (extra 8 bits)
+    SampleReaderResult getExtraData24(QFile &fi, QByteArray &sm24) override;
 
-    // Change the volume
-    double db = 0;
-    switch (params->getMode())
-    {
-    case 0: // Add dB
-        // Compute the factor
-        baData = SampleUtils::multiplier(baData, qPow(10, params->getAddValue() / 20.0), 24, db);
-        break;
-    case 1: // Multiply by a factor
-        baData = SampleUtils::multiplier(baData, params->getMultiplyValue(), 24, db);
-        break;
-    case 2: // Normalize
-        baData = SampleUtils::normaliser(baData, params->getNormalizeValue() / 100, 24, db);
-        break;
-    default:
-        // Nothing
-        return;
-    }
+private:
+    QByteArray loadData(QFile &fi);
 
-    // Update the sample data
-    sm->set(id, champ_sampleDataFull24, baData);
-}
+    InfoSound * _info;
+    bool _isIeeeFloat;
+};
+
+#endif // SAMPLEREADERWAV_H

@@ -30,6 +30,7 @@
 #include <QDir>
 #include <QApplication>
 #include "soundfontmanager.h"
+#include "samplewriterwav.h"
 #include <QProcess>
 
 ToolExternalCommand::ToolExternalCommand() :
@@ -96,10 +97,12 @@ void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolP
     tempFile->open();
     QString pathTempFile = tempFile->fileName();
     tempFile->close();
+
+    SampleWriterWav writer(pathTempFile);
     if (id2.indexElt != -1)
-        Sound::exporter(pathTempFile, sm->getSound(id), sm->getSound(id2));
+        writer.write(sm->getSound(id), sm->getSound(id2));
     else
-        Sound::exporter(pathTempFile, sm->getSound(id));
+        writer.write(sm->getSound(id));
 
     // Execute an external command
 #ifdef Q_OS_WIN
@@ -124,7 +127,7 @@ void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolP
         val.wValue = 0;
         sound.set(champ_wChannel, val);
         import(id, sound, sm, replaceInfo);
-        if (id2.indexSf2 != -1 && sound.get(champ_wChannels) == 2)
+        if (id2.indexSf2 != -1 && sound.getUInt32(champ_wChannels) == 2)
         {
             val.wValue = 1;
             sound.set(champ_wChannel, val);
@@ -143,40 +146,40 @@ void ToolExternalCommand::import(EltID id, Sound &sound, SoundfontManager * sm, 
     sm->set(id, champ_sampleDataFull24, sound.getData(24));
 
     AttributeValue val;
-    val.dwValue = sound.get(champ_dwStart16);
+    val.dwValue = sound.getUInt32(champ_dwStart16);
     sm->set(id, champ_dwStart16, val);
-    val.dwValue = sound.get(champ_dwStart24);
+    val.dwValue = sound.getUInt32(champ_dwStart24);
     sm->set(id, champ_dwStart24, val);
-    val.dwValue = sound.get(champ_dwLength);
+    val.dwValue = sound.getUInt32(champ_dwLength);
     sm->set(id, champ_dwLength, val);
-    val.dwValue = sound.get(champ_dwSampleRate);
+    val.dwValue = sound.getUInt32(champ_dwSampleRate);
     sm->set(id, champ_dwSampleRate, val);
 
     // Sample configuration
     if (replaceInfo)
     {
         // Loop
-        val.dwValue = sound.get(champ_dwEndLoop);
+        val.dwValue = sound.getUInt32(champ_dwEndLoop);
         if (val.dwValue != 0)
         {
             sm->set(id, champ_dwEndLoop, val);
-            val.dwValue = sound.get(champ_dwStartLoop);
+            val.dwValue = sound.getUInt32(champ_dwStartLoop);
             sm->set(id, champ_dwStartLoop, val);
         }
 
         // Original pitch and correction
-        if (sound.get(champ_pitchDefined) == 1)
+        if (sound.getUInt32(champ_pitchDefined) == 1)
         {
-            val.bValue = (quint8)sound.get(champ_byOriginalPitch);
+            val.bValue = (quint8)sound.getUInt32(champ_byOriginalPitch);
             sm->set(id, champ_byOriginalPitch, val);
-            val.cValue = (char)sound.get(champ_chPitchCorrection);
+            val.cValue = (char)sound.getInt32(champ_chPitchCorrection);
             sm->set(id, champ_chPitchCorrection, val);
         }
     }
 
     // Check that start loop and end loop are not out of range
-    if (sm->get(id, champ_dwStartLoop).dwValue > sound.get(champ_dwLength) ||
-            sm->get(id, champ_dwEndLoop).dwValue > sound.get(champ_dwLength))
+    if (sm->get(id, champ_dwStartLoop).dwValue > sound.getUInt32(champ_dwLength) ||
+            sm->get(id, champ_dwEndLoop).dwValue > sound.getUInt32(champ_dwLength))
     {
         val.dwValue = 0;
         sm->set(id, champ_dwStartLoop, val);

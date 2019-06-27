@@ -22,44 +22,50 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "toolchangevolume.h"
-#include "toolchangevolume_gui.h"
-#include "toolchangevolume_parameters.h"
-#include "soundfontmanager.h"
-#include "sampleutils.h"
-#include <qmath.h>
 
-ToolChangeVolume::ToolChangeVolume() : AbstractToolIterating(elementSmpl, new ToolChangeVolume_parameters(), new ToolChangeVolume_gui())
+#include "serializabletypes.h"
+#include <QDataStream>
+
+QDataStream & operator >> (QDataStream &in, quint32Reversed &val)
 {
-
+    quint8 b0, b1, b2, b3;
+    in >> b0 >> b1 >> b2 >> b3;
+    val.value = b3 << 24 | b2 << 16 | b1 << 8 | b0;
+    return in;
 }
 
-void ToolChangeVolume::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
+QDataStream & operator >> (QDataStream &in, quint16Reversed &val)
 {
-    ToolChangeVolume_parameters * params = (ToolChangeVolume_parameters *)parameters;
+    quint8 b0, b1;
+    in >> b0 >> b1;
+    val.value = b1 << 8 | b0;
+    return in;
+}
 
-    // Sample data
-    QByteArray baData = sm->getData(id, champ_sampleDataFull24);
+QDataStream & operator >> (QDataStream &in, qint32Reversed &val)
+{
+    quint8 b0, b1, b2, b3;
+    in >> b0 >> b1 >> b2 >> b3;
+    val.value = ((short) b3) << 24 | b2 << 16 | b1 << 8 | b0;
+    return in;
+}
 
-    // Change the volume
-    double db = 0;
-    switch (params->getMode())
-    {
-    case 0: // Add dB
-        // Compute the factor
-        baData = SampleUtils::multiplier(baData, qPow(10, params->getAddValue() / 20.0), 24, db);
-        break;
-    case 1: // Multiply by a factor
-        baData = SampleUtils::multiplier(baData, params->getMultiplyValue(), 24, db);
-        break;
-    case 2: // Normalize
-        baData = SampleUtils::normaliser(baData, params->getNormalizeValue() / 100, 24, db);
-        break;
-    default:
-        // Nothing
-        return;
-    }
+QDataStream & operator >> (QDataStream &in, qint16Reversed &val)
+{
+    quint8 b0, b1;
+    in >> b0 >> b1;
+    val.value = ((short) b1) << 8 | b0;
+    return in;
+}
 
-    // Update the sample data
-    sm->set(id, champ_sampleDataFull24, baData);
+QDataStream & operator >> (QDataStream &in, SFModulator &mod)
+{
+    quint8 b0, b1;
+    in >> b0 >> b1;
+    mod.Type = (int) b1 >> 2;
+    mod.P = bool((b1 >> 1) & 1);
+    mod.D = bool(b1 & 1);
+    mod.CC = bool(b0 >> 7);
+    mod.Index = quint16(b0 & 0x7F);
+    return in;
 }

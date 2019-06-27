@@ -22,44 +22,48 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "toolchangevolume.h"
-#include "toolchangevolume_gui.h"
-#include "toolchangevolume_parameters.h"
-#include "soundfontmanager.h"
-#include "sampleutils.h"
-#include <qmath.h>
+#ifndef INFOSOUND_H
+#define INFOSOUND_H
 
-ToolChangeVolume::ToolChangeVolume() : AbstractToolIterating(elementSmpl, new ToolChangeVolume_parameters(), new ToolChangeVolume_gui())
+#include "basetypes.h"
+
+class InfoSound
 {
-
-}
-
-void ToolChangeVolume::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
-{
-    ToolChangeVolume_parameters * params = (ToolChangeVolume_parameters *)parameters;
-
-    // Sample data
-    QByteArray baData = sm->getData(id, champ_sampleDataFull24);
-
-    // Change the volume
-    double db = 0;
-    switch (params->getMode())
+public:
+    InfoSound()
     {
-    case 0: // Add dB
-        // Compute the factor
-        baData = SampleUtils::multiplier(baData, qPow(10, params->getAddValue() / 20.0), 24, db);
-        break;
-    case 1: // Multiply by a factor
-        baData = SampleUtils::multiplier(baData, params->getMultiplyValue(), 24, db);
-        break;
-    case 2: // Normalize
-        baData = SampleUtils::normaliser(baData, params->getNormalizeValue() / 100, 24, db);
-        break;
-    default:
-        // Nothing
-        return;
+        // Initialization
+        reset();
     }
 
-    // Update the sample data
-    sm->set(id, champ_sampleDataFull24, baData);
-}
+    void reset()
+    {
+        dwStart = 0;
+        dwStart2 = 0;
+        dwLength = 0;
+        dwSampleRate = 0;
+        wChannels = 0;
+        wBpsFile = 0;
+        dwStartLoop = 0;
+        dwEndLoop = 0;
+        dwRootKey = 60; // Middle C
+        wChannel = 0;
+        iFineTune = 0;
+        pitchDefined = false;
+    }
+
+    quint32 dwStart;
+    quint32 dwStart2; // for sf2 : 24-bit data are stored on 2 blocs
+    quint32 dwLength;
+    quint32 dwSampleRate;
+    quint16 wChannels;
+    quint16 wBpsFile; // number of bytes for a value
+    quint32 dwStartLoop;
+    quint32 dwEndLoop;
+    quint32 dwRootKey;
+    quint16 wChannel;
+    int iFineTune; // from -100 (-1 semi tone) to 100 (+1 semi tone)
+    bool pitchDefined;
+};
+
+#endif // INFOSOUND_H

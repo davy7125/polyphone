@@ -24,9 +24,11 @@
 
 #include "toolsampleexport.h"
 #include "soundfontmanager.h"
+#include "sampleutils.h"
+#include "contextmanager.h"
+#include "samplewriterwav.h"
 #include <qmath.h>
 #include <QFileDialog>
-#include "contextmanager.h"
 #include <QApplication>
 
 void ToolSampleExport::beforeProcess(IdList ids)
@@ -78,6 +80,8 @@ void ToolSampleExport::process(SoundfontManager * sm, EltID id, AbstractToolPara
     _mutex.unlock();
 
     // Export
+
+    SampleWriterWav writer(fileName);
     if (isStereo)
     {
         // First id must be the left sound
@@ -88,10 +92,10 @@ void ToolSampleExport::process(SoundfontManager * sm, EltID id, AbstractToolPara
             id2 = idTmp;
         }
 
-        Sound::exporter(fileName, sm->getSound(id), sm->getSound(id2));
+        writer.write(sm->getSound(id), sm->getSound(id2));
     }
     else
-        Sound::exporter(fileName, sm->getSound(id));
+        writer.write(sm->getSound(id));
 }
 
 QString ToolSampleExport::getFilePath(SoundfontManager * sm, EltID id1, EltID id2, bool isStereo)
@@ -101,7 +105,7 @@ QString ToolSampleExport::getFilePath(SoundfontManager * sm, EltID id1, EltID id
     {
         QString fileName1 = sm->getQstr(id1, champ_name);
         QString fileName2 = sm->getQstr(id2, champ_name);
-        int nb = Sound::lastLettersToRemove(fileName1, fileName2);
+        int nb = SampleUtils::lastLettersToRemove(fileName1, fileName2);
         fileName = fileName1.left(fileName1.size() - nb).replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
     }
     else

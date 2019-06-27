@@ -22,28 +22,35 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SAMPLELOADER_H
-#define SAMPLELOADER_H
+#ifndef SAMPLEREADERFLAC_H
+#define SAMPLEREADERFLAC_H
 
-#include "basetypes.h"
-#include <QList>
+#include "samplereader.h"
 
-class QWidget;
-class SoundfontManager;
-
-class SampleLoader
+class SampleReaderFlac : public SampleReader
 {
 public:
-    SampleLoader(QWidget * parent = NULL);
+    SampleReaderFlac(QString filename);
+    ~SampleReaderFlac() override {}
 
-    /// Add a sample to a soundfont
-    IdList load(QString path, int numSf2, int *replace);
+    // Extract general information (sampling rate, ...)
+    SampleReaderResult getInfo(QFile &fi, InfoSound &info) override;
+
+    // Get sample data (16 bits)
+    SampleReaderResult getData16(QFile &fi, QByteArray &smpl) override;
+
+    // Get sample data (extra 8 bits)
+    SampleReaderResult getExtraData24(QFile &fi, QByteArray &sm24) override;
+
+    // Public for an access in the callback
+    QFile * _file;
+    InfoSound * _info;
+    QByteArray * _data;
+    quint32 _pos;
+    bool _readExtra8;
 
 private:
-    QString getName(QString name, int maxCharacters, int suffixNumber);
-
-    QWidget * _parent;
-    SoundfontManager * _sm;
+    SampleReaderResult launchDecoder(bool justMetadata);
 };
 
-#endif // SAMPLELOADER_H
+#endif // SAMPLEREADERFLAC_H

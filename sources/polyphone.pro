@@ -12,8 +12,8 @@
 DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # Polyphone version
-DEFINES += SOFT_VERSION=\\\"2.0.1\\\"
-DEFINES += IDENTIFIER=\\\"\\\"
+DEFINES += SOFT_VERSION=\\\"2.1.0\\\"
+DEFINES += IDENTIFIER=\\\"DEVEL\\\"
 
 OBJECTS_DIR=generated_files
 MOC_DIR=generated_files
@@ -47,6 +47,7 @@ win32 {
     DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
     INCLUDEPATH += lib \
         lib/ogg_vorbis \
+        lib/flac \
         ../lib_windows/include
     RC_FILE = polyphone.rc
 
@@ -59,13 +60,14 @@ win32 {
         LIBS += -L$$PWD/../lib_windows/64bits -lportaudio_x64
         DESTDIR = $$PWD/../lib_windows/64bits
     }
-    LIBS += -lzlib1 -lwinmm -llibogg -llibvorbis -llibvorbisfile -lcrypto
+    LIBS += -lzlib1 -lwinmm -llibogg -llibvorbis -llibvorbisfile -lcrypto -llibFLAC
 }
 unix:!macx {
     DEFINES += __LINUX_ALSASEQ__
     CONFIG += link_pkgconfig
-    PKGCONFIG += alsa jack portaudio-2.0 zlib ogg vorbis vorbisfile vorbisenc glib-2.0 openssl
-    INCLUDEPATH += /usr/include/jack
+    PKGCONFIG += alsa jack portaudio-2.0 zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0 openssl
+    INCLUDEPATH += /usr/include/jack \
+        lib/flac
     isEmpty(PREFIX) {
         PREFIX = /usr/local
     }
@@ -79,8 +81,9 @@ macx {
     INCLUDEPATH += ../lib_mac/Jackmp.framework/Headers \
         lib \
         lib/ogg_vorbis \
+        lib/flac \
         ../lib_mac/include
-    LIBS += -L$$PWD/../lib_mac -lportaudio -logg -lvorbis -lssl -lcrypto -F$$PWD/../lib_mac/ -framework Jackmp \
+    LIBS += -L$$PWD/../lib_mac -lportaudio -logg -lFLAC -lvorbis -lssl -lcrypto -F$$PWD/../lib_mac/ -framework Jackmp \
         -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
         -framework AudioUnit -framework AudioToolbox -framework Cocoa -lz
     ICON = polyphone.icns
@@ -150,6 +153,7 @@ INCLUDEPATH += mainwindow \
     core/input \
     core/output \
     core/model \
+    core/sample \
     core/types \
     clavier \
     sound_engine \
@@ -164,8 +168,16 @@ INCLUDEPATH += mainwindow \
     .
 
 SOURCES	+= main.cpp \
-    core/sound.cpp \
+    core/sample/samplereaderfactory.cpp \
+    core/sample/samplereaderflac.cpp \
+    core/sample/samplereadersf2.cpp \
+    core/sample/samplereaderwav.cpp \
+    core/sample/sampleutils.cpp \
+    core/sample/samplewriterwav.cpp \
+    core/sample/sound.cpp \
+    core/sample/sampleloader.cpp \
     core/duplicator.cpp \
+    core/types/serializabletypes.cpp \
     core/utils.cpp \
     core/input/sfark/sfarkglobal.cpp \
     core/input/sfark/sfarkfilemanager.cpp \
@@ -280,7 +292,6 @@ SOURCES	+= main.cpp \
     core/input/empty/inputempty.cpp \
     core/input/sf2/sf2header.cpp \
     core/input/sf2/sf2sdtapart.cpp \
-    core/input/sf2/sf2basetypes.cpp \
     core/input/sf2/sf2pdtapart.cpp \
     core/input/sf2/sf2pdtapart_phdr.cpp \
     core/input/sf2/sf2pdtapart_inst.cpp \
@@ -354,7 +365,6 @@ SOURCES	+= main.cpp \
     editor/tools/transpose/tooltranspose_gui.cpp \
     editor/tools/transpose/tooltranspose_parameters.cpp \
     editor/tree/treeviewmenu.cpp \
-    core/sampleloader.cpp \
     editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp \
     editor/tools/frequency_peaks/toolfrequencypeaks_parameters.cpp \
     editor/tools/mixture_creation/runnablesamplecreator.cpp \
@@ -425,8 +435,18 @@ SOURCES	+= main.cpp \
     editor/modulator/modulatorcombosrc.cpp
 
 HEADERS  += \
-    core/sound.h \
+    core/sample/infosound.h \
+    core/sample/samplereader.h \
+    core/sample/samplereaderfactory.h \
+    core/sample/samplereaderflac.h \
+    core/sample/samplereadersf2.h \
+    core/sample/samplereaderwav.h \
+    core/sample/sampleutils.h \
+    core/sample/samplewriterwav.h \
+    core/sample/sound.h \
+    core/sample/sampleloader.h \
     core/duplicator.h \
+    core/types/serializabletypes.h \
     core/utils.h \
     core/input/sfark/sfarkglobal.h \
     core/input/sfark/sfarkfilemanager.h \
@@ -546,7 +566,6 @@ HEADERS  += \
     core/input/empty/inputempty.h \
     core/input/sf2/sf2header.h \
     core/input/sf2/sf2sdtapart.h \
-    core/input/sf2/sf2basetypes.h \
     core/input/sf2/sf2pdtapart.h \
     core/input/sf2/sf2pdtapart_phdr.h \
     core/input/sf2/sf2pdtapart_inst.h \
@@ -627,7 +646,6 @@ HEADERS  += \
     editor/tools/transpose/tooltranspose_gui.h \
     editor/tools/transpose/tooltranspose_parameters.h \
     editor/tree/treeviewmenu.h \
-    core/sampleloader.h \
     editor/tools/frequency_peaks/toolfrequencypeaks_gui.h \
     editor/tools/frequency_peaks/toolfrequencypeaks_parameters.h \
     editor/tools/mixture_creation/runnablesamplecreator.h \

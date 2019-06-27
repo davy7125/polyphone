@@ -24,6 +24,7 @@
 
 #include "graphiquefourier.h"
 #include "sound.h"
+#include "sampleutils.h"
 #include "contextmanager.h"
 #include <QMenu>
 #include <QFileDialog>
@@ -174,7 +175,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
 
     // Détermination du régime permanent pour transformée de Fourier et corrélation (max 0.5 seconde)
     if (posStart == posEnd)
-        Sound::regimePermanent(_fData, dwSmplRate, posStart, posEnd);
+        SampleUtils::regimePermanent(_fData, dwSmplRate, posStart, posEnd);
     if (posEnd > (qint32)(posStart + dwSmplRate / 2))
     {
         qint32 offset = (posEnd - posStart - dwSmplRate / 2) / 2;
@@ -187,15 +188,15 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
 
     // Corrélation du signal de 20 à 20000Hz
     qint32 dMin;
-    QVector<float> vectCorrel = Sound::correlation(baData2.mid(0, qMin(baData2.size(), 4000)), dwSmplRate, 20, 20000, dMin);
+    QVector<float> vectCorrel = SampleUtils::correlation(baData2.mid(0, qMin(baData2.size(), 4000)), dwSmplRate, 20, 20000, dMin);
 
     // Transformée de Fourier du signal
-    QVector<float> vectFourier = Sound::getFourierTransform(baData2);
+    QVector<float> vectFourier = SampleUtils::getFourierTransform(baData2);
     unsigned long size = vectFourier.size() * 2;
 
     // Recherche des corrélations minimales (= plus grandes similitudes) et intensités fréquencielles maximales
-    QList<int> posMinCor = Sound::findMins(vectCorrel, 20, 0.7);
-    QList<quint32> posMaxFFT = Sound::findMax(vectFourier, 50, 0.05);
+    QList<int> posMinCor = SampleUtils::findMins(vectCorrel, 20, 0.7);
+    QList<quint32> posMaxFFT = SampleUtils::findMax(vectFourier, 50, 0.05);
     if (posMaxFFT.isEmpty())
     {
         graph(0)->data()->clear();

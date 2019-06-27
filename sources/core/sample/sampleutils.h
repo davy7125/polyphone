@@ -22,33 +22,16 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SOUND_H
-#define SOUND_H
+#ifndef SAMPLEUTILS_H
+#define SAMPLEUTILS_H
 
 #include "basetypes.h"
 
-class QFile;
-class QWidget;
-
-class Sound
+class SampleUtils
 {
 public:
-    Sound(QString filename = "", bool tryFindRootkey = true);
-    ~Sound();
+    SampleUtils();
 
-    // Méthodes publiques
-    static void setParent(QWidget * parent) { _parent = parent; }
-    QByteArray getData(quint16 wBps);
-    quint32 get(AttributeType champ);
-    QString getFileName();
-    void set(AttributeType champ, AttributeValue value);
-    void setFileName(QString qStr, bool tryFindRootKey = true);
-    void setData(QByteArray data, quint16 wBps);
-    void setRam(bool ram);
-    static void exporter(QString _fileName, Sound son);
-    static void exporter(QString _fileName, Sound leftSound, Sound rightSound);
-
-    // Utilitaires
     static QByteArray resampleMono(QByteArray data, double echInit, qint32 echFinal, quint16 wBps);
     static QByteArray bandFilter(QByteArray baData, quint16 wBps, double dwSmplRate, double fBas, double fHaut, int ordre);
     static QByteArray cutFilter(QByteArray baData, quint32 dwSmplRate, QVector<double> dValues, quint16 wBps, int maxFreq);
@@ -76,49 +59,6 @@ public:
     static int lastLettersToRemove(QString str1, QString str2);
 
 private:
-    // Structure de données pour informations sur un sample
-    typedef struct infoSound
-    {
-        quint16 wFormat;
-        quint32 dwStart;
-        quint32 dwStart2; // pour sf2 : les données en 24 bits sont sur 2 blocs
-        quint32 dwLength;
-        quint32 dwSampleRate;
-        quint16 wChannels;
-        quint16 wBpsFile;
-        quint32 dwStartLoop;
-        quint32 dwEndLoop;
-        quint32 dwNote;
-        quint16 wChannel;
-        int iCent;
-        bool pitchDefined;
-    } InfoSound;
-
-    // Type de fichier
-    typedef enum
-    {
-        fileUnknown = 0,
-        fileSf2,
-        fileWav,
-        fileCustom1
-    } FileType;
-
-    // Attributs privés
-    QString _fileName;
-    InfoSound _info;
-    QByteArray _smpl;
-    QByteArray _sm24;
-
-    // Méthodes privées
-    FileType getFileType();
-    void getInfoSound(bool tryFindRootkey);
-    QByteArray getDataSf2(QFile *fi, quint16 byte);
-    QByteArray getDataWav(QFile *fi, quint16 byte);
-    QByteArray getDataWav(QByteArray baData, quint16 byte);
-    void determineRootKey();
-    void getInfoSoundWav(bool tryFindRootkey);
-    void getInfoSoundWav(QByteArray &baData, bool tryFindRootkey);
-    static void exporter(QString _fileName, QByteArray baData, InfoSound info);
     static void FFT_calculate(Complex * x, long N /* must be a power of 2 */,
             Complex * X, Complex * scratch, Complex * twiddles);
     static double moyenne(QByteArray baData, quint16 wBps);
@@ -132,11 +72,6 @@ private:
     static double BesselI0(double x);
     static Complex * FFT(Complex * x, int N); // N must be a power of 2
     static Complex * IFFT(Complex * x, int N); // N must be a power of 2
-
-    static quint32 readDWORD(const char *chaine, int pos);
-    static quint16 readWORD(const char *chaine, int pos);
-
-    static QWidget * _parent;
 };
 
-#endif // SOUND_H
+#endif // SAMPLEUTILS_H

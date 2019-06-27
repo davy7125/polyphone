@@ -24,6 +24,7 @@
 
 #include "tooltrimstart.h"
 #include "soundfontmanager.h"
+#include "sampleutils.h"
 
 void ToolTrimStart::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
@@ -39,7 +40,7 @@ void ToolTrimStart::trim(EltID id)
     SoundfontManager * sm = SoundfontManager::getInstance();
     QByteArray baData = sm->getData(id, champ_sampleDataFull24);
     quint32 pos = 0;
-    baData = Sound::enleveBlanc(baData, 0.001, 24, pos);
+    baData = SampleUtils::enleveBlanc(baData, 0.001, 24, pos);
     if (pos == 0)
         return;
 

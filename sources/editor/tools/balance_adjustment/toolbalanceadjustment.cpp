@@ -24,6 +24,7 @@
 
 #include "toolbalanceadjustment.h"
 #include "soundfontmanager.h"
+#include "sampleutils.h"
 #include <qmath.h>
 
 void ToolBalanceAdjustment::beforeProcess(IdList ids)
@@ -79,7 +80,7 @@ void ToolBalanceAdjustment::process(SoundfontManager * sm, EltID id, AbstractToo
     // Find steady areas
     qint32 debut1, fin1;
     if (sm->get(id, champ_dwStartLoop).dwValue == sm->get(id, champ_dwEndLoop).dwValue)
-        Sound::regimePermanent(baData1, sm->get(id, champ_dwSampleRate).dwValue, 24, debut1, fin1);
+        SampleUtils::regimePermanent(baData1, sm->get(id, champ_dwSampleRate).dwValue, 24, debut1, fin1);
     else
     {
         debut1 = sm->get(id, champ_dwStartLoop).dwValue;
@@ -87,7 +88,7 @@ void ToolBalanceAdjustment::process(SoundfontManager * sm, EltID id, AbstractToo
     }
     qint32 debut2, fin2;
     if (sm->get(id2, champ_dwStartLoop).dwValue == sm->get(id2, champ_dwEndLoop).dwValue)
-        Sound::regimePermanent(baData2, sm->get(id2, champ_dwSampleRate).dwValue,24, debut2, fin2);
+        SampleUtils::regimePermanent(baData2, sm->get(id2, champ_dwSampleRate).dwValue,24, debut2, fin2);
     else
     {
         debut2 = sm->get(id2, champ_dwStartLoop).dwValue;
@@ -95,16 +96,16 @@ void ToolBalanceAdjustment::process(SoundfontManager * sm, EltID id, AbstractToo
     }
 
     // Compute intensities
-    double intensite1 = Sound::moyenneCarre(baData1.mid(debut1 * 3, (fin1 - debut1) * 3), 24);
-    double intensite2 = Sound::moyenneCarre(baData2.mid(debut2 * 3, (fin2 - debut2) * 3), 24);
+    double intensite1 = SampleUtils::moyenneCarre(baData1.mid(debut1 * 3, (fin1 - debut1) * 3), 24);
+    double intensite2 = SampleUtils::moyenneCarre(baData2.mid(debut2 * 3, (fin2 - debut2) * 3), 24);
 
     // Mean intensity
     double intensiteMoy = sqrt(intensite1 * intensite2);
 
     // Adjust volume
     double gain1, gain2;
-    baData1 = Sound::multiplier(baData1, intensiteMoy / intensite1, 24, gain1);
-    baData2 = Sound::multiplier(baData2, intensiteMoy / intensite2, 24, gain2);
+    baData1 = SampleUtils::multiplier(baData1, intensiteMoy / intensite1, 24, gain1);
+    baData2 = SampleUtils::multiplier(baData2, intensiteMoy / intensite2, 24, gain2);
 
     // Update sample data
     sm->set(id, champ_sampleDataFull24, baData1);

@@ -22,44 +22,19 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "toolchangevolume.h"
-#include "toolchangevolume_gui.h"
-#include "toolchangevolume_parameters.h"
-#include "soundfontmanager.h"
-#include "sampleutils.h"
-#include <qmath.h>
+#ifndef SAMPLEREADERFACTORY_H
+#define SAMPLEREADERFACTORY_H
 
-ToolChangeVolume::ToolChangeVolume() : AbstractToolIterating(elementSmpl, new ToolChangeVolume_parameters(), new ToolChangeVolume_gui())
+#include <QString>
+class SampleReader;
+
+class SampleReaderFactory
 {
+public:
+    SampleReaderFactory() {}
 
-}
+    // Get a reader corresponding to a file
+    static SampleReader * getSampleReader(QString filename);
+};
 
-void ToolChangeVolume::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
-{
-    ToolChangeVolume_parameters * params = (ToolChangeVolume_parameters *)parameters;
-
-    // Sample data
-    QByteArray baData = sm->getData(id, champ_sampleDataFull24);
-
-    // Change the volume
-    double db = 0;
-    switch (params->getMode())
-    {
-    case 0: // Add dB
-        // Compute the factor
-        baData = SampleUtils::multiplier(baData, qPow(10, params->getAddValue() / 20.0), 24, db);
-        break;
-    case 1: // Multiply by a factor
-        baData = SampleUtils::multiplier(baData, params->getMultiplyValue(), 24, db);
-        break;
-    case 2: // Normalize
-        baData = SampleUtils::normaliser(baData, params->getNormalizeValue() / 100, 24, db);
-        break;
-    default:
-        // Nothing
-        return;
-    }
-
-    // Update the sample data
-    sm->set(id, champ_sampleDataFull24, baData);
-}
+#endif // SAMPLEREADERFACTORY_H

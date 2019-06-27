@@ -55,7 +55,7 @@ public:
     /// with additional 0 (for example key 002 instead of key 2 if with0 is true)
     /// considering C4 as the middle C if forceC4 is true
     /// otherwise take the way the user configured it with NameMiddleC
-    QString getKeyName(int keyNum, bool forceTexte = false, bool with0 = false,
+    QString getKeyName(unsigned int keyNum, bool forceTexte = false, bool with0 = false,
                        bool forceC4 = false, bool noOctave = false);
 
     /// Get the number of the key based on a text

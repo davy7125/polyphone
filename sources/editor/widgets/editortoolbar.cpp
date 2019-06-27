@@ -254,7 +254,7 @@ void EditorToolBar::onNewSmplClicked()
     // Display dialog
     QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Import an audio file"),
                                                         ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SAMPLE),
-                                                        trUtf8("Wav file") + " (*.wav)" + ext);
+                                                        trUtf8("Audio files") + " (*.wav *.flac)" + ext);
 
     if (strList.count() == 0)
         return;

@@ -22,44 +22,43 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "toolchangevolume.h"
-#include "toolchangevolume_gui.h"
-#include "toolchangevolume_parameters.h"
-#include "soundfontmanager.h"
-#include "sampleutils.h"
-#include <qmath.h>
+#ifndef SOUND_H
+#define SOUND_H
 
-ToolChangeVolume::ToolChangeVolume() : AbstractToolIterating(elementSmpl, new ToolChangeVolume_parameters(), new ToolChangeVolume_gui())
+#include "basetypes.h"
+#include "infosound.h"
+
+class QFile;
+class QWidget;
+class SampleReader;
+
+class Sound
 {
+public:
+    Sound(QString filename = "", bool tryFindRootkey = true);
+    ~Sound();
 
-}
+    // Get information about the sample loaded
+    InfoSound getInfo() { return _info; }
+    QString getFileName() { return this->_fileName; }
+    QByteArray getData(quint16 wBps);
+    quint32 getUInt32(AttributeType champ); // For everything but the pitch correction
+    qint32 getInt32(AttributeType champ); // For the pitch correction
 
-void ToolChangeVolume::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
-{
-    ToolChangeVolume_parameters * params = (ToolChangeVolume_parameters *)parameters;
+    // Set data
+    void set(AttributeType champ, AttributeValue value);
+    void setFileName(QString qStr, bool tryFindRootKey = true);
+    void setData(QByteArray data, quint16 wBps);
+    void setRam(bool ram);
 
-    // Sample data
-    QByteArray baData = sm->getData(id, champ_sampleDataFull24);
+private:
+    QString _fileName;
+    InfoSound _info;
+    QByteArray _smpl;
+    QByteArray _sm24;
+    SampleReader * _reader;
 
-    // Change the volume
-    double db = 0;
-    switch (params->getMode())
-    {
-    case 0: // Add dB
-        // Compute the factor
-        baData = SampleUtils::multiplier(baData, qPow(10, params->getAddValue() / 20.0), 24, db);
-        break;
-    case 1: // Multiply by a factor
-        baData = SampleUtils::multiplier(baData, params->getMultiplyValue(), 24, db);
-        break;
-    case 2: // Normalize
-        baData = SampleUtils::normaliser(baData, params->getNormalizeValue() / 100, 24, db);
-        break;
-    default:
-        // Nothing
-        return;
-    }
+    void determineRootKey();
+};
 
-    // Update the sample data
-    sm->set(id, champ_sampleDataFull24, baData);
-}
+#endif // SOUND_H

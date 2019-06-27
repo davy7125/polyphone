@@ -29,6 +29,7 @@
 #include "eltid.h"
 #include "complex.h"
 #include "attribute.h"
+#include "serializabletypes.h"
 
 #define DB_SF2_TO_SFZ 0.397
 

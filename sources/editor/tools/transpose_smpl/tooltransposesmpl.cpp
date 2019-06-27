@@ -26,6 +26,7 @@
 #include "tooltransposesmpl_gui.h"
 #include "tooltransposesmpl_parameters.h"
 #include "soundfontmanager.h"
+#include "sampleutils.h"
 #include "qmath.h"
 
 ToolTransposeSmpl::ToolTransposeSmpl() : AbstractToolIterating(elementSmpl, new ToolTransposeSmpl_parameters(), new ToolTransposeSmpl_gui())
@@ -45,7 +46,7 @@ void ToolTransposeSmpl::process(SoundfontManager * sm, EltID id, AbstractToolPar
     double echInit = (double)echFinal * qPow(2, params->getSemiTones() / 12);
 
     // Resampling
-    baData = Sound::resampleMono(baData, echInit, echFinal, 24);
+    baData = SampleUtils::resampleMono(baData, echInit, echFinal, 24);
     sm->set(id, champ_sampleDataFull24, baData);
 
     // Update the length

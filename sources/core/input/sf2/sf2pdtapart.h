@@ -25,7 +25,7 @@
 #ifndef SF2PDTAPART_H
 #define SF2PDTAPART_H
 
-#include "sf2basetypes.h"
+#include "basetypes.h"
 #include "sf2pdtapart_phdr.h"
 #include "sf2pdtapart_bag.h"
 #include "sf2pdtapart_mod.h"
@@ -33,7 +33,6 @@
 #include "sf2pdtapart_inst.h"
 #include "sf2pdtapart_shdr.h"
 #include <QList>
-class QDataStream;
 
 class Sf2PdtaPart
 {

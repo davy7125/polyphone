@@ -136,7 +136,7 @@ typedef enum
     champ_nameSort = 174,
 
     champ_sampleData16 = 200,           // QByteArray
-    champ_sampleData24 = 201,
+    champ_sampleData24 = 201, // Only the extra 8 bits
     champ_sampleDataFull24 = 202,
     champ_sampleData32 = 203,
 

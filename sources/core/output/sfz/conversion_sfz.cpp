@@ -24,6 +24,8 @@
 
 #include "conversion_sfz.h"
 #include "soundfontmanager.h"
+#include "sampleutils.h"
+#include "samplewriterwav.h"
 #include <QFile>
 #include <QFileInfo>
 #include <QDir>
@@ -435,7 +437,7 @@ QString ConversionSfz::getLink(EltID idSmpl, bool enableStereo)
             // Nom du fichier
             QString nom1 = _sf2->getQstr(idSmpl, champ_name);
             QString nom2 = _sf2->getQstr(idSmpl2, champ_name);
-            int nb = Sound::lastLettersToRemove(nom1, nom2);
+            int nb = SampleUtils::lastLettersToRemove(nom1, nom2);
             name = nom1.left(nom1.size() - nb);
 
             if (_sf2->get(idSmpl, champ_sfSampleType).wValue != rightSample &&
@@ -467,18 +469,19 @@ QString ConversionSfz::getLink(EltID idSmpl, bool enableStereo)
             path.prepend("../");
 
         // Export et sauvegarde
+        SampleWriterWav writer(_dirSamples + "/" + name + ".wav");
         if (idSmpl.indexElt == -1 || idSmpl2.indexElt == -1)
         {
             // Mono
             if (idSmpl.indexElt2 != -1)
             {
                 _mapMonoSamples.insert(idSmpl.indexElt, path);
-                Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSound(idSmpl));
+                writer.write(_sf2->getSound(idSmpl));
             }
             else if (idSmpl2.indexElt != -1)
             {
                 _mapMonoSamples.insert(idSmpl2.indexElt, path);
-                Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSound(idSmpl2));
+                writer.write(_sf2->getSound(idSmpl2));
             }
         }
         else
@@ -486,7 +489,7 @@ QString ConversionSfz::getLink(EltID idSmpl, bool enableStereo)
             // Stéréo
             _mapStereoSamples.insert(idSmpl.indexElt, path);
             _mapStereoSamples.insert(idSmpl2.indexElt, path);
-            Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSound(idSmpl2), _sf2->getSound(idSmpl));
+            writer.write(_sf2->getSound(idSmpl2), _sf2->getSound(idSmpl));
         }
     }
     return path;

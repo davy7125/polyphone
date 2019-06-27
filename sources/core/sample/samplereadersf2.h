@@ -22,37 +22,28 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SF2BASETYPE_H
-#define SF2BASETYPE_H
+#ifndef SAMPLEREADERSF2_H
+#define SAMPLEREADERSF2_H
 
-#include "qglobal.h"
-#include "basetypes.h"
-class QDataStream;
+#include "samplereader.h"
 
-class quint32Reversed
+class SampleReaderSf2: public SampleReader
 {
 public:
-    quint32Reversed(quint32 val = 0) : value(val) {}
-    quint32 value;
+    SampleReaderSf2(QString filename);
+    ~SampleReaderSf2() override {}
+
+    // Extract general information (sampling rate, ...)
+    SampleReaderResult getInfo(QFile &fi, InfoSound &info) override;
+
+    // Get sample data (16 bits)
+    SampleReaderResult getData16(QFile &fi, QByteArray &smpl) override;
+
+    // Get sample data (extra 8 bits)
+    SampleReaderResult getExtraData24(QFile &fi, QByteArray &sm24) override;
+
+private:
+    InfoSound * _info;
 };
-QDataStream & operator >> (QDataStream &in, quint32Reversed &val);
 
-class quint16Reversed
-{
-public:
-    quint16Reversed(quint16 val = 0) : value(val) {}
-    quint16 value;
-};
-QDataStream & operator >> (QDataStream &in, quint16Reversed &val);
-
-class qint16Reversed
-{
-public:
-    qint16Reversed(qint16 val = 0) : value(val) {}
-    qint16 value;
-};
-QDataStream & operator >> (QDataStream &in, qint16Reversed &val);
-
-QDataStream & operator >> (QDataStream &in, SFModulator &mod);
-
-#endif // SF2BASETYPE_H
+#endif // SAMPLEREADERSF2_H

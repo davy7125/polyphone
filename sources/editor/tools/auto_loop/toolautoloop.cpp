@@ -24,6 +24,7 @@
 
 #include "auto_loop/toolautoloop.h"
 #include "soundfontmanager.h"
+#include "sampleutils.h"
 
 void ToolAutoLoop::beforeProcess(IdList ids)
 {
@@ -42,7 +43,7 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
     qint32 endLoop = sm->get(id, champ_dwEndLoop).dwValue;
 
     // Loop
-    baData = Sound::bouclage(baData, dwSmplRate, startLoop, endLoop, 24);
+    baData = SampleUtils::bouclage(baData, dwSmplRate, startLoop, endLoop, 24);
     if (!baData.isEmpty())
     {
         // Update data, length, startloop and endloop

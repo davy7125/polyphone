@@ -25,6 +25,7 @@
 #include "runnablechordcreator.h"
 #include "toolchords.h"
 #include "soundfontmanager.h"
+#include "sampleutils.h"
 
 double RunnableChordCreator::SAMPLE_DURATION = 7.0;
 int RunnableChordCreator::SAMPLE_RATE = 48000;
@@ -97,7 +98,7 @@ void RunnableChordCreator::run()
             attenuation /= pitches.count();
 
             // Rééchantillonnage
-            baDataTmp = Sound::resampleMono(baDataTmp, fEchInit, SAMPLE_RATE, 32);
+            baDataTmp = SampleUtils::resampleMono(baDataTmp, fEchInit, SAMPLE_RATE, 32);
 
             // Ajout du son
             addSampleData(baData, baDataTmp, attenuation);
@@ -109,7 +110,7 @@ void RunnableChordCreator::run()
     qint32 loopEnd = 0;
     if (_loop)
     {
-        QByteArray baData2 = Sound::bouclage(baData, SAMPLE_RATE, loopStart, loopEnd, 32);
+        QByteArray baData2 = SampleUtils::bouclage(baData, SAMPLE_RATE, loopStart, loopEnd, 32);
         if (!baData2.isEmpty())
             baData = baData2;
     }
@@ -119,11 +120,11 @@ void RunnableChordCreator::run()
     idSmpl.indexElt = sm->add(idSmpl);
 
     // Ajout des données
-    sm->set(idSmpl, champ_sampleData16, Sound::bpsConversion(baData, 32, 16));
+    sm->set(idSmpl, champ_sampleData16, SampleUtils::bpsConversion(baData, 32, 16));
     EltID idSf2 = idSmpl;
     idSf2.typeElement = elementSf2;
     if (sm->get(idSf2, champ_wBpsSave).wValue == 24)
-        sm->set(idSmpl, champ_sampleData24, Sound::bpsConversion(baData, 32, 824));
+        sm->set(idSmpl, champ_sampleData24, SampleUtils::bpsConversion(baData, 32, 824));
 
     // Configuration
     AttributeValue value;
