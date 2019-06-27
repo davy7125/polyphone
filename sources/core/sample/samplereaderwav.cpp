@@ -244,7 +244,7 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getExtraData24(QFile &fi, Q
 QByteArray SampleReaderWav::loadData(QFile &fi)
 {
     // Skip the headers
-    fi.skip(_info->dwStart);
+    fi.seek(_info->dwStart);
 
     // Read data
     QByteArray data = fi.read(_info->dwLength * _info->wBpsFile / 8 * _info->wChannels);
