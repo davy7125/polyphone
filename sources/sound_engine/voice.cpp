@@ -62,8 +62,8 @@ Voice::~Voice()
 void Voice::generateData(float *dataL, float *dataR, quint32 len)
 {
     // Synchronization delay
-    quint32 nbNullValues = qMin(len, _delayStart);
-    for (quint32 i = 0; i < nbNullValues; i++)
+    int nbNullValues = qMin(len, _delayStart);
+    for (qint32 i = 0; i < nbNullValues; i++)
     {
         dataL[i] = 0;
         dataR[i] = 0;
@@ -207,8 +207,8 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 
     _mutexParam.unlock();
 
-    dataL = &dataL[-1 * static_cast<qint32>(nbNullValues)];
-    dataR = &dataR[-1 * static_cast<qint32>(nbNullValues)];
+    dataL = &dataL[-nbNullValues];
+    dataR = &dataR[-nbNullValues];
 }
 
 bool Voice::takeData(qint32 * data, quint32 nbRead)

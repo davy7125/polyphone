@@ -34,11 +34,11 @@ class CircularBuffer : public QObject
     Q_OBJECT
 
 public:
-    CircularBuffer(unsigned int minBuffer, unsigned int maxBuffer);
+    CircularBuffer(quint32 minBuffer, quint32 maxBuffer);
     ~CircularBuffer();
 
     void addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, quint32 maxlen);
-    quint32 currentLengthAvailable() { return static_cast<quint32>(_currentLengthAvailable); }
+    quint32 currentLengthAvailable() { return _currentLengthAvailable.load(); }
     void stop();
 
 public slots:
@@ -56,9 +56,9 @@ private:
     // Buffer et positions
     float * _dataL, * _dataR, * _dataRevL, * _dataRevR;
     float * _dataTmpL, * _dataTmpR, * _dataTmpRevL, * _dataTmpRevR;
-    quint32 _minBuffer, _maxBuffer, _bufferSize;
+    const quint32 _minBuffer, _maxBuffer, _bufferSize;
     quint32 _posEcriture, _posLecture;
-    QAtomicInt _currentLengthAvailable;
+    QAtomicInteger<quint32> _currentLengthAvailable;
 
     // Gestion interruption
     QAtomicInt _interrupted;

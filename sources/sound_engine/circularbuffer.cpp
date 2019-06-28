@@ -25,7 +25,7 @@
 
 #include "circularbuffer.h"
 
-CircularBuffer::CircularBuffer(unsigned int minBuffer, unsigned int maxBuffer) : QObject(nullptr),
+CircularBuffer::CircularBuffer(quint32 minBuffer, quint32 maxBuffer) : QObject(nullptr),
     _minBuffer(minBuffer),
     _maxBuffer(maxBuffer),
     _bufferSize(4 * maxBuffer),
@@ -35,7 +35,7 @@ CircularBuffer::CircularBuffer(unsigned int minBuffer, unsigned int maxBuffer) :
     _interrupted(0)
 {
 
-    // Initialisation des buffers
+    // Buffer initialization
     _dataL       = new float [_bufferSize];
     _dataR       = new float [_bufferSize];
     _dataTmpL    = new float [_bufferSize];
@@ -60,17 +60,17 @@ CircularBuffer::~CircularBuffer()
 
 void CircularBuffer::stop()
 {
-    _interrupted = 1;
+    _interrupted.store(1);
     _mutexSynchro.tryLock();
     _mutexSynchro.unlock();
 }
 
 void CircularBuffer::start()
 {
-    quint32 avance = _maxBuffer - _minBuffer;
+    quint32 avance = (_maxBuffer + _minBuffer) / 2;
 
-    // Surveillance du buffer après chaque lecture
-    while (_interrupted == 0)
+    // Generate and copy data into the buffer after each reading
+    while (_interrupted.load() == 0)
     {
         // Génération de données
         _mutexBuffer.lock();
@@ -89,36 +89,35 @@ void CircularBuffer::start()
 void CircularBuffer::writeData(const float *dataL, const float *dataR, float *dataRevL, float *dataRevR, quint32 &len)
 {
     quint32 total = 0;
-    while (len - total > 0)
+    while (total < len)
     {
         const quint32 chunk = qMin(_bufferSize - _posEcriture, len - total);
         memcpy(&_dataL   [_posEcriture], &dataL   [total], 4 * chunk);
         memcpy(&_dataR   [_posEcriture], &dataR   [total], 4 * chunk);
         memcpy(&_dataRevL[_posEcriture], &dataRevL[total], 4 * chunk);
         memcpy(&_dataRevR[_posEcriture], &dataRevR[total], 4 * chunk);
-        _posEcriture += chunk;
-        if (_posEcriture >= _bufferSize)
-            _posEcriture = 0;
+        _posEcriture = (_posEcriture + chunk) % _bufferSize;
         total += chunk;
     }
 
-    // Quantité qu'il aurait fallu écrire (mise à jour pour la fois suivante)
-    len = _maxBuffer - static_cast<unsigned int>(_currentLengthAvailable);
-    if (len < _maxBuffer - _minBuffer)
-        len = _maxBuffer - _minBuffer;
+    // Update the quantity of data to read
+    if (_currentLengthAvailable > _maxBuffer)
+        len = _minBuffer; // Minimum to read
+    else
+        len = _maxBuffer - _currentLengthAvailable;
 
-    // Mise à jour avance
-    _currentLengthAvailable.fetchAndAddAcquire(static_cast<int>(total));
+    // Update the current amount of data available
+    _currentLengthAvailable.fetchAndAddAcquire(total);
 }
 
 // Read data (audio thread)
 void CircularBuffer::addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, quint32 maxlen)
 {
-    quint32 writeLen = qMin(maxlen, static_cast<unsigned int>(_currentLengthAvailable));
+    quint32 readLen = qMin(maxlen, _currentLengthAvailable.load());
     quint32 total = 0;
-    while (total < writeLen)
+    while (total < readLen)
     {
-        const quint32 chunk = qMin((_bufferSize - _posLecture), writeLen - total);
+        const quint32 chunk = qMin(_bufferSize - _posLecture, readLen - total);
         for (quint32 i = 0; i < chunk; i++)
         {
             dataL   [total + i] += _dataL   [_posLecture + i];
@@ -129,10 +128,9 @@ void CircularBuffer::addData(float *dataL, float *dataR, float *dataRevL, float 
         _posLecture = (_posLecture + chunk) % _bufferSize;
         total += chunk;
     }
-    for (quint32 i = total; i < maxlen; i++)
-        dataL[i] = dataR[i] = dataRevL[i] = dataRevR[i] = 0;
 
-    if (static_cast<quint32>(_currentLengthAvailable.fetchAndSubAcquire(static_cast<qint32>(total))) <= _minBuffer + total)
+    // Possibly trigger data generation
+    if (_currentLengthAvailable.fetchAndSubAcquire(total) - total <= _minBuffer)
     {
         _mutexSynchro.tryLock();
         _mutexSynchro.unlock();
