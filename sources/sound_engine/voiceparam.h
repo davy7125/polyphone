@@ -84,5 +84,4 @@ private:
     static quint32 limitUI(quint32 val, quint32 min, quint32 max);
 };
 
-
 #endif // VOICEPARAM_H

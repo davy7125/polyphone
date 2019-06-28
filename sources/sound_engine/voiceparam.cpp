@@ -435,7 +435,7 @@ void VoiceParam::add(VoiceParam * voiceParamTmp)
     // Autres
     if (voiceParamTmp->loopMode != -1)
         this->loopMode        = voiceParamTmp->loopMode;
-    if (voiceParamTmp->rootkey < 0)
+    if (voiceParamTmp->rootkey >= 0)
         this->rootkey         = voiceParamTmp->rootkey;
     if (voiceParamTmp->keynum != -1)
         this->keynum          = voiceParamTmp->keynum;
@@ -456,12 +456,12 @@ double VoiceParam::getPitchDifference(int note)
     double noteJouee = note;
     if (this->keynum > -1)
         noteJouee = this->keynum;
-    return (noteJouee - this->rootkey) * 0.01 * (scaleTune + fineTune) + coarseTune;
+    return (noteJouee - this->rootkey) * 0.01 * scaleTune + 0.01 * fineTune + coarseTune;
 }
 
 double VoiceParam::d1200e2(qint32 val)
 {
-    return qPow(2., static_cast<double>(val) / 1200);
+    return qPow(2., 0.000833333 * val); // Division by 1200
 }
 
 double VoiceParam::limitD(double val, double min, double max)

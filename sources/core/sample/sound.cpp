@@ -347,6 +347,9 @@ void Sound::setRam(bool ram)
 void Sound::determineRootKey()
 {
     // Try to find the root key with the help of the file name
+    QFileInfo fileInfo(_fileName);
+    QString nameNoExtension = fileInfo.baseName();
+
     unsigned int key = 0;
     bool keyFound = false;
     for (unsigned int i = 0; i <= 127; i++)
@@ -355,7 +358,7 @@ void Sound::determineRootKey()
         QString nomNote = ContextManager::keyName()->getKeyName(i, true);
 
         // Recherche de la note dans le nom de fichier
-        if (_fileName.toUpper().contains(nomNote))
+        if (nameNoExtension.toUpper().contains(nomNote))
         {
             key = i;
             keyFound = true;
@@ -365,7 +368,7 @@ void Sound::determineRootKey()
     if (!keyFound)
     {
         // Then search the numeric name of the key
-        QString name = _fileName;
+        QString name = nameNoExtension;
         QStringList listeNum = name.replace(QRegExp("[^0-9]"), "-").split("-", QString::SkipEmptyParts);
         if (listeNum.size())
         {
@@ -380,6 +383,6 @@ void Sound::determineRootKey()
     if (keyFound)
     {
         _info.dwRootKey = key;
-        _info.pitchDefined = false;
+        _info.pitchDefined = true;
     }
 }

@@ -83,16 +83,16 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
     if (applyOn1)
         levelSustain = 1.f - _levelSustain / 100; // %
     else
-        levelSustain = static_cast<float>(qPow(10, -static_cast<double>(_levelSustain) / 20)); // dB
+        levelSustain = static_cast<float>(qPow(10, -0.05 * _levelSustain)); // dB
 
     // Ajustement hold time et volume
     quint32 timeHold = static_cast<quint32>(_timeHold * fastPow2(_noteToHold * (60 - note)));
     quint32 timeDecay = static_cast<quint32>(_timeDecay * fastPow2(_noteToDecay * (60 - note)));
-    float volume = static_cast<float>(qPow(10, (static_cast<double>(_volume) + gain) / 50)); // normalement division par 10
-    if (_fixedVelocity < 0)
-        volume *= (_fixedVelocity * _fixedVelocity) / 16129;
+    float volume = static_cast<float>(qPow(10, 0.02 * (static_cast<double>(_volume) + gain))); // normalement multiplication par 0.1
+    if (_fixedVelocity >= 0)
+        volume *= 0.000062 * (_fixedVelocity * _fixedVelocity);
     else
-        volume *= (velocity * velocity) / 16129;
+        volume *= 0.000062 * (velocity * velocity);
 
     // Avancement
     bool fin = false;

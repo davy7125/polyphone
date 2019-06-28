@@ -40,6 +40,7 @@ SampleReaderSf2::SampleReaderResult SampleReaderSf2::getInfo(QFile &fi, InfoSoun
     // Extra info
     info.wChannel = 0;
     info.wChannels = 1;
+    info.pitchDefined = true; // So that we don't try to find the key based on the filename
 
     return FILE_OK;
 }

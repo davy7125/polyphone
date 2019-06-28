@@ -114,7 +114,7 @@ void SoundEngine::syncNewVoices()
 {
     foreach (SoundEngine * engine, _listInstances)
         engine->_mutexBuffer.lock();
-        
+
     foreach (SoundEngine * engine, _listInstances)
         engine->_mutexVoices.lock();
 
@@ -135,7 +135,7 @@ void SoundEngine::syncNewVoices()
 
     foreach (SoundEngine * engine, _listInstances)
         engine->_mutexVoices.unlock();
-    
+
     foreach (SoundEngine * engine, _listInstances)
         engine->_mutexBuffer.unlock();
 }
@@ -155,16 +155,16 @@ void SoundEngine::releaseNote(int numNote)
 {
     foreach (SoundEngine * engine, _listInstances)
         engine->_mutexBuffer.lock();
-        
+
     foreach (SoundEngine * engine, _listInstances)
         engine->_mutexVoices.lock();
-    
+
     for (int i = 0; i < _listInstances.size(); i++)
         _listInstances.at(i)->releaseNoteInstance(numNote);
-        
+
     foreach (SoundEngine * engine, _listInstances)
         engine->_mutexVoices.unlock();
-    
+
     foreach (SoundEngine * engine, _listInstances)
         engine->_mutexBuffer.unlock();
 }

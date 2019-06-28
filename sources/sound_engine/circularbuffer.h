@@ -47,7 +47,7 @@ public slots:
 protected:
     virtual void generateData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, quint32 len) = 0;
     QMutex _mutexBuffer;
-    
+
 private:
     // Sound engine thread => write data in the buffer
     // "len" contains at the end the data length that should have been written to meet the buffer requirements
