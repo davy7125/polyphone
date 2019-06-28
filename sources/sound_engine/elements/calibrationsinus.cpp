@@ -42,14 +42,14 @@ CalibrationSinus::~CalibrationSinus()
     delete [] _buf;
 }
 
-void CalibrationSinus::initBuffer(int size)
+void CalibrationSinus::initBuffer(quint32 size)
 {
     delete [] _buf;
     _bufSize = size;
     _buf = new float[_bufSize];
 }
 
-void CalibrationSinus::setSampleRate(int sampleRate)
+void CalibrationSinus::setSampleRate(quint32 sampleRate)
 {
     delete _sinus;
     _sinus = new OscSinus(sampleRate);
@@ -65,7 +65,7 @@ void CalibrationSinus::setPitch(int numNote)
 void CalibrationSinus::on()
 {
     _mutex.lock();
-    _level = 0.7;
+    _level = 0.7f;
     _mutex.unlock();
 }
 
@@ -76,7 +76,7 @@ void CalibrationSinus::off()
     _mutex.unlock();
 }
 
-void CalibrationSinus::addData(float * dataR, float * dataL, int len)
+void CalibrationSinus::addData(float * dataR, float * dataL, quint32 len)
 {
     if (!_sinus)
         return;
@@ -87,15 +87,15 @@ void CalibrationSinus::addData(float * dataR, float * dataL, int len)
     if (!_mutex.tryLock(1)) // Impossible ici d'attendre
         return;
     double pitch = _pitch;
-    double level = _level;
+    float level = _level;
     _mutex.unlock();
 
     // Possibly stop here
-    if (level == 0 && _currentLevel <= 0.0004)
+    if (level <= 0.0004f && _currentLevel <= 0.0004f)
         return;
 
     // Current frequency (smooth transitions)
-    if (_currentPitch == -1)
+    if (_currentPitch < 0)
         _currentPitch = pitch;
     if (_currentPitch > pitch)
         _currentPitch -= 0.5;
@@ -103,15 +103,15 @@ void CalibrationSinus::addData(float * dataR, float * dataL, int len)
         _currentPitch += 0.5;
 
     // Génération et copie
-    _sinus->getSinus(_buf, len, 440.0 * qPow(2., (double)(_currentPitch - 69) / 12.));
+    _sinus->getSinus(_buf, len, 440.0f * static_cast<float>(qPow(2., (_currentPitch - 69.) / 12.)));
 
-    for (int i = 0; i < len; i++)
+    for (quint32 i = 0; i < len; i++)
     {
         // Smooth transition for the level
         if (_currentLevel > level)
-            _currentLevel -= 0.0002;
+            _currentLevel -= 0.0002f;
         else if (_currentLevel < level)
-            _currentLevel += 0.0002;
+            _currentLevel += 0.0002f;
 
         dataR[i] += _currentLevel * _buf[i];
         dataL[i] += _currentLevel * _buf[i];

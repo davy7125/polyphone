@@ -60,7 +60,7 @@ PageSmpl::PageSmpl(QWidget *parent) :
     ui->graphe->linkSpinBoxes(ui->spinStartLoop, ui->spinEndLoop);
 
     // Connexions
-    ui->graphe->connect(_synth, SIGNAL(currentPosChanged(int)), SLOT(setCurrentSample(int)));
+    ui->graphe->connect(_synth, SIGNAL(currentPosChanged(quint32)), SLOT(setCurrentSample(quint32)));
     this->connect(_synth, SIGNAL(readFinished()), SLOT(lecteurFinished()));
     connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
 

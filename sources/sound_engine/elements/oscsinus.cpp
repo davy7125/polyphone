@@ -26,45 +26,45 @@
 #include "qmath.h"
 
 
-OscSinus::OscSinus(qint32 sampleRate, double delay) :
+OscSinus::OscSinus(quint32 sampleRate, double delay) :
     _sampleRate(sampleRate),
     _previousFreq(-1),
-    _delayTime(delay * sampleRate),
+    _delayTime(static_cast<quint32>(delay * sampleRate)),
     _currentDelay(0)
 {
 }
 
 // Générateur Gordon-Smith
-void OscSinus::getSinus(float * data, qint32 len, double freq)
+void OscSinus::getSinus(float * data, quint32 len, float freq)
 {
     // Attente
-    qint64 total = qMin(_delayTime - _currentDelay, len);
-    for (int i = 0; i < total; i++)
+    quint32 total = qMin(_delayTime - _currentDelay, len);
+    for (quint32 i = 0; i < total; i++)
         data[i] = 0;
     _currentDelay += total;
 
     // Sinus
     if (total != len)
     {
-        if (_previousFreq == -1)
+        if (_previousFreq < 0)
         {
             // Initialisation du système
             _previousFreq = freq;
             computeEpsilon(freq, _theta, _epsilon);
-            _posPrec = qSin(-_theta);
-            _posPrecQuad = qCos(-_theta);
+            _posPrec = static_cast<float>(qSin(static_cast<double>(-_theta)));
+            _posPrecQuad = static_cast<float>(qCos(static_cast<double>(-_theta)));
         }
-        if (_previousFreq != freq)
+        if (qAbs(_previousFreq - freq) > 0)
         {
-            double theta2, epsilon2;
+            float theta2, epsilon2;
             computeEpsilon(freq, theta2, epsilon2);
             _previousFreq = freq;
 
-            double progEpsilon;
-            for (int i = total; i < len; i++)
+            float progEpsilon;
+            for (quint32 i = total; i < len; i++)
             {
-                progEpsilon = (double)(len - i) / (len - total) * _epsilon
-                        + (double)(i - total) / (len - total) * epsilon2;
+                progEpsilon = static_cast<float>(len - i) / (len - total) * _epsilon
+                        + static_cast<float>(i - total) / (len - total) * epsilon2;
                 _posPrecQuad -= progEpsilon * _posPrec;
                 _posPrec     += progEpsilon * _posPrecQuad;
                 data[i] = _posPrec;
@@ -77,7 +77,7 @@ void OscSinus::getSinus(float * data, qint32 len, double freq)
         }
         else
         {
-            for (int i = total; i < len; i++)
+            for (quint32 i = total; i < len; i++)
             {
                 _posPrecQuad -= _epsilon * _posPrec;
                 _posPrec     += _epsilon * _posPrecQuad;
@@ -87,8 +87,8 @@ void OscSinus::getSinus(float * data, qint32 len, double freq)
     }
 }
 
-void OscSinus::computeEpsilon(double freq, double &theta, double &epsilon)
+void OscSinus::computeEpsilon(float freq, float &theta, float &epsilon)
 {
-    theta = 2. * M_PI * freq / _sampleRate;
-    epsilon = 2. * qSin(theta / 2.);
+    theta = 2.f * static_cast<float>(M_PI) * freq / _sampleRate;
+    epsilon = 2.f * static_cast<float>(qSin(static_cast<double>(theta) / 2.));
 }

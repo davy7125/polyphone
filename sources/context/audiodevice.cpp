@@ -61,7 +61,7 @@ int standardProcess(const void* inputBuffer, void* outputBuffer,
 
     // Récupération de l'instance de AudioDevice
     AudioDevice * instance = static_cast<AudioDevice*>(userData);
-    float** outputs = (float**)outputBuffer;
+    float** outputs = reinterpret_cast<float**>(outputBuffer);
 
     // Envoi de données
     if (instance->_format.channelCount() == 2)
@@ -174,7 +174,7 @@ void AudioDevice::initAudio()
     int deviceType = listStr.size() >= 1 ? listStr[0].toInt() : 0;
     int numIndex = listStr.size() >= 2 ? listStr[1].toInt() : 0;
 
-    int bufferSize = _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toInt();
+    quint32 bufferSize = _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();
 
     // Arrêt des serveurs son si besoin
     this->closeConnections();
@@ -213,7 +213,7 @@ void AudioDevice::initAudio()
         emit(connectionDone());
 }
 
-void AudioDevice::openDefaultConnection(int bufferSize)
+void AudioDevice::openDefaultConnection(quint32 bufferSize)
 {
     QList<HostInfo> hostInfos = getHostInfo();
 
@@ -241,7 +241,7 @@ void AudioDevice::openDefaultConnection(int bufferSize)
         openStandardConnection(type, index, bufferSize);
 }
 
-void AudioDevice::openJackConnection(int bufferSize)
+void AudioDevice::openJackConnection(quint32 bufferSize)
 {
 #ifndef Q_OS_WIN
     // Format audio à l'écoute
@@ -342,7 +342,7 @@ void AudioDevice::openJackConnection(int bufferSize)
 #endif
 }
 
-void AudioDevice::openStandardConnection(int deviceType, int numIndex, int bufferSize)
+void AudioDevice::openStandardConnection(int deviceType, int numIndex, quint32 bufferSize)
 {
     if (!_initialized)
         return;
@@ -365,7 +365,7 @@ void AudioDevice::openStandardConnection(int deviceType, int numIndex, int buffe
     outputParameters.channelCount = pdi->maxOutputChannels;
     if (outputParameters.channelCount > 2)
         outputParameters.channelCount = 2;
-    _format.setChannelCount(outputParameters.channelCount);
+    _format.setChannelCount(static_cast<quint32>(outputParameters.channelCount));
     outputParameters.sampleFormat = paFloat32 | paNonInterleaved;
     if (deviceType == paASIO)
         outputParameters.suggestedLatency = qMin(0.04, pdi->defaultLowOutputLatency);
@@ -375,7 +375,7 @@ void AudioDevice::openStandardConnection(int deviceType, int numIndex, int buffe
 
     // Ouverture du flux
     PaError err = Pa_OpenStream(&_standardStream,
-                                NULL,               // pas d'entrée
+                                nullptr,            // pas d'entrée
                                 &outputParameters,  // paramètres
                                 SAMPLE_RATE,        // sample rate
                                 bufferSize,         // frame par buffer

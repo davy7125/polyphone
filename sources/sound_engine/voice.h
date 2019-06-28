@@ -38,36 +38,36 @@ class Voice : public QObject
 
 public:
     Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int note,
-          int velocity, VoiceParam *voiceParam, QObject *parent = NULL);
+          int velocity, VoiceParam *voiceParam, QObject *parent = nullptr);
     ~Voice();
 
-    int getNote()                       { return m_note; }
+    int getNote()                       { return _note; }
     void release(bool quick = false);
     void setGain(double gain);
     void setChorus(int level, int depth, int frequency);
     bool isFinished() { return _isFinished; }
     bool isRunning() { return _isRunning; }
-    void runVoice(int delay) { _isRunning = true; _delayStart = delay; }
+    void runVoice(quint32 delay) { _isRunning = true; _delayStart = delay; }
 
     // Accès aux propriétés de voiceParam
     double getPan();
     int getExclusiveClass();
     int getPresetNumber();
-    double getReverb();
+    float getReverb();
 
     // Modification des propriétés de voiceParam
     void setPan(double val);
     void setLoopMode(int val);
-    void setLoopStart(qint32 val);
-    void setLoopEnd(qint32 val);
+    void setLoopStart(quint32 val);
+    void setLoopEnd(quint32 val);
     void setFineTune(qint32 val);
     void setRootKey(double val);
 
     // Génération de données
-    void generateData(float *dataL, float *dataR, qint64 len);
+    void generateData(float *dataL, float *dataR, quint32 len);
 
 signals:
-    void currentPosChanged(int pos);
+    void currentPosChanged(quint32 pos);
 
 private:
     // Oscillateurs, enveloppes et chorus
@@ -77,28 +77,28 @@ private:
 
     // Données son et paramètres
     QByteArray _baData;
-    quint32 m_smplRate, m_audioSmplRate;
-    int m_note;
-    int m_velocity;
-    double m_gain;
+    quint32 _smplRate, _audioSmplRate;
+    int _note;
+    int _velocity;
+    double _gain;
     VoiceParam * _voiceParam;
 
     // Lecture du sample
-    qint64 m_currentSmplPos;
-    double m_time;
-    bool m_release;
-    int _delayEnd, _delayStart;
+    quint32 _currentSmplPos;
+    double _time;
+    bool _release;
+    quint32 _delayEnd, _delayStart;
     bool _isFinished;
     bool _isRunning;
 
     // Sauvegarde état pour le resampling
-    double m_deltaPos;
-    qint32 m_valPrec, m_valBase;
+    float _deltaPos;
+    qint32 _valPrec, _valBase;
 
     // Sauvegarde état pour filtre passe bas
-    double m_x1, m_x2, m_y1, m_y2;
+    double _x1, _x2, _y1, _y2;
 
-    bool takeData(qint32 *data, qint64 nbRead);
+    bool takeData(qint32 *data, quint32 nbRead);
     void biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, double &b2,
                             double freq, double Q);
 

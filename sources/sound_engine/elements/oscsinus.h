@@ -30,19 +30,17 @@
 class OscSinus
 {
 public:
-    OscSinus(qint32 sampleRate, double delay = 0);
-    void getSinus(float *data, qint32 len, double freq);
+    OscSinus(quint32 sampleRate, double delay = 0);
+    void getSinus(float *data, quint32 len, float freq);
 
 private:
-    // Attributs privés
-    qint32 _sampleRate;
-    double _previousFreq;
-    qint32 _delayTime, _currentDelay;
-    double _posPrec, _posPrecQuad;
-    double _theta, _epsilon;
+    quint32 _sampleRate;
+    float _previousFreq;
+    quint32 _delayTime, _currentDelay;
+    float _posPrec, _posPrecQuad;
+    float _theta, _epsilon;
 
-    // Méthode privée
-    void computeEpsilon(double freq, double &theta, double &epsilon);
+    void computeEpsilon(float freq, float &theta, float &epsilon);
 };
 
 #endif // OSCSINUS_H

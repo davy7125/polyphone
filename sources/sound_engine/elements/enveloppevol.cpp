@@ -27,38 +27,38 @@
 
 
 EnveloppeVol::EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isMod) :
-    m_currentSmpl(0),
-    m_precValue(0),
-    m_currentPhase(phase1delay),
-    m_sampleRate(sampleRate)
+    _currentSmpl(0),
+    _precValue(0),
+    _currentPhase(phase1delay),
+    _sampleRate(sampleRate)
 {
     // Stockage des paramètres initiaux
     if (isMod)
     {
-        m_timeDelay       = voiceParam->modDelayTime * m_sampleRate;
-        m_timeAttack      = voiceParam->modAttackTime * m_sampleRate;
-        m_timeHold        = voiceParam->modHoldTime * m_sampleRate;
-        m_timeDecay       = voiceParam->modDecayTime * m_sampleRate;
-        m_levelSustain    = voiceParam->modSustainLevel;
-        m_timeRelease     = voiceParam->modReleaseTime * m_sampleRate;
-        m_noteToHold      = (double)voiceParam->modKeynumToHold / 1200;
-        m_noteToDecay     = (double)voiceParam->modKeynumToDecay / 1200;
-        m_volume          = 0;
+        _timeDelay       = voiceParam->modDelayTime * _sampleRate;
+        _timeAttack      = voiceParam->modAttackTime * _sampleRate;
+        _timeHold        = voiceParam->modHoldTime * _sampleRate;
+        _timeDecay       = voiceParam->modDecayTime * _sampleRate;
+        _levelSustain    = voiceParam->modSustainLevel;
+        _timeRelease     = voiceParam->modReleaseTime * _sampleRate;
+        _noteToHold      = (float)voiceParam->modKeynumToHold / 1200;
+        _noteToDecay     = (float)voiceParam->modKeynumToDecay / 1200;
+        _volume          = 0;
     }
     else
     {
-        m_timeDelay       = voiceParam->volDelayTime * m_sampleRate;
-        m_timeAttack      = voiceParam->volAttackTime * m_sampleRate;
-        m_timeHold        = voiceParam->volHoldTime * m_sampleRate;
-        m_timeDecay       = voiceParam->volDecayTime * m_sampleRate;
-        m_levelSustain    = voiceParam->volSustainLevel;
-        m_timeRelease     = voiceParam->volReleaseTime * m_sampleRate;
-        m_noteToHold      = (double)voiceParam->volKeynumToHold / 1200;
-        m_noteToDecay     = (double)voiceParam->volKeynumToDecay / 1200;
-        m_volume          = -voiceParam->attenuation;
+        _timeDelay       = voiceParam->volDelayTime * _sampleRate;
+        _timeAttack      = voiceParam->volAttackTime * _sampleRate;
+        _timeHold        = voiceParam->volHoldTime * _sampleRate;
+        _timeDecay       = voiceParam->volDecayTime * _sampleRate;
+        _levelSustain    = voiceParam->volSustainLevel;
+        _timeRelease     = voiceParam->volReleaseTime * _sampleRate;
+        _noteToHold      = (float)voiceParam->volKeynumToHold / 1200;
+        _noteToDecay     = (float)voiceParam->volKeynumToDecay / 1200;
+        _volume          = -voiceParam->attenuation;
     }
 
-    m_fixedVelocity   = voiceParam->fixedVelocity;
+    _fixedVelocity   = voiceParam->fixedVelocity;
 }
 
 bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int note,
@@ -72,50 +72,50 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
     // renvoie true si la fin de la release est atteint
 
     // Beginning of the release phase?
-    if (release && m_currentPhase != phase7off && m_currentPhase != phase6release)
+    if (release && _currentPhase != phase7off && _currentPhase != phase6release)
     {
-        m_currentPhase = phase6release;
-        m_currentSmpl = 0;
+        _currentPhase = phase6release;
+        _currentSmpl = 0;
     }
 
     // Ajustement sustain level
-    double levelSustain = 0;
+    float levelSustain = 0;
     if (applyOn1)
-        levelSustain = 1. - m_levelSustain / 100; // %
+        levelSustain = 1.f - _levelSustain / 100; // %
     else
-        levelSustain = qPow(10, -m_levelSustain / 20); // dB
+        levelSustain = static_cast<float>(qPow(10, -static_cast<double>(_levelSustain) / 20)); // dB
 
     // Ajustement hold time et volume
-    quint32 timeHold = m_timeHold * fastPow2(m_noteToHold * (60 - note));
-    quint32 timeDecay = m_timeDecay * fastPow2(m_noteToDecay * (60 - note));
-    double volume = qPow(10, (m_volume + gain) / 50); // normalement division par 10
-    if (m_fixedVelocity != -1)
-        volume *= (double)(m_fixedVelocity * m_fixedVelocity) / 16129;
+    quint32 timeHold = static_cast<quint32>(_timeHold * fastPow2(_noteToHold * (60 - note)));
+    quint32 timeDecay = static_cast<quint32>(_timeDecay * fastPow2(_noteToDecay * (60 - note)));
+    float volume = static_cast<float>(qPow(10, (static_cast<double>(_volume) + gain) / 50)); // normalement division par 10
+    if (_fixedVelocity < 0)
+        volume *= (_fixedVelocity * _fixedVelocity) / 16129;
     else
-        volume *= (double)(velocity * velocity) / 16129;
+        volume *= (velocity * velocity) / 16129;
 
     // Avancement
     bool fin = false;
     quint32 avancement = 0;
     quint32 duree = 0;
-    double val2 = 0;
-    double coef, valTmp;
+    float val2 = 0;
+    float coef, valTmp;
     while (avancement < size)
     {
-        switch (m_currentPhase)
+        switch (_currentPhase)
         {
         case phase1delay:
             // Nombre de valeurs restantes dans la phase
-            duree = m_timeDelay - m_currentSmpl;
+            duree = _timeDelay - _currentSmpl;
             if (duree <= size - avancement)
             {
-                m_currentPhase = phase2attack;
-                m_currentSmpl = 0;
+                _currentPhase = phase2attack;
+                _currentSmpl = 0;
             }
             else
             {
                 duree = size - avancement;
-                m_currentSmpl += duree;
+                _currentSmpl += duree;
             }
             val2 = 0;
             for (quint32 i = 0; i < duree; i++)
@@ -123,27 +123,27 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             break;
         case phase2attack:
             // Nombre de valeurs restantes dans la phase
-            duree = m_timeAttack - m_currentSmpl;
+            duree = _timeAttack - _currentSmpl;
             if (duree <= size - avancement)
             {
-                m_currentPhase = phase3hold;
-                m_currentSmpl = 0;
+                _currentPhase = phase3hold;
+                _currentSmpl = 0;
                 val2 = 1;
             }
             else
             {
                 duree = size - avancement;
-                m_currentSmpl += duree;
-                val2 = (double)m_currentSmpl / m_timeAttack;
+                _currentSmpl += duree;
+                val2 = static_cast<float>(_currentSmpl) / _timeAttack;
             }
             // Attaque convexe => amplitude linéaire
-            coef = (val2 - this->m_precValue) / duree;
+            coef = (val2 - this->_precValue) / duree;
             valTmp = 0;
             if (applyOn1)
             {
                 for (quint32 i = 0; i < duree; i++)
                 {
-                    data[avancement + i] = volume * (valTmp + this->m_precValue);
+                    data[avancement + i] = volume * (valTmp + this->_precValue);
                     valTmp += coef;
                 }
             }
@@ -152,23 +152,23 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                 for (quint32 i = 0; i < duree; i++)
                 {
                     data[avancement + i] = volume * (data[avancement + i] *
-                                                     (valTmp + this->m_precValue));
+                                                     (valTmp + this->_precValue));
                     valTmp += coef;
                 }
             }
             break;
         case phase3hold:
             // Nombre de valeurs restantes dans la phase
-            duree = timeHold - m_currentSmpl;
+            duree = timeHold - _currentSmpl;
             if (duree <= size - avancement)
             {
-                m_currentPhase = phase4decay;
-                m_currentSmpl = 0;
+                _currentPhase = phase4decay;
+                _currentSmpl = 0;
             }
             else
             {
                 duree = size - avancement;
-                m_currentSmpl += duree;
+                _currentSmpl += duree;
             }
             val2 = 1;
             if (applyOn1)
@@ -184,22 +184,22 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             break;
         case phase4decay:
             // Nombre de valeurs restantes dans la phase
-            duree = timeDecay - m_currentSmpl;
+            duree = timeDecay - _currentSmpl;
             if (duree <= size - avancement)
             {
-                m_currentPhase = phase5sustain;
-                m_currentSmpl = 0;
+                _currentPhase = phase5sustain;
+                _currentSmpl = 0;
             }
             else
             {
                 duree = size - avancement;
-                m_currentSmpl += duree;
+                _currentSmpl += duree;
             }
             if (applyOn1)
             {
                 // Décroissance exponentielle
-                coef = qPow(0.001 / (1. - levelSustain + 0.001), 1. / timeDecay);
-                val2 = (m_precValue - levelSustain) * coef + levelSustain;
+                coef = static_cast<float>(qPow(0.001 / (1. - static_cast<double>(levelSustain) + 0.001), 1. / timeDecay));
+                val2 = (_precValue - levelSustain) * coef + levelSustain;
                 for (quint32 i = 0; i < duree; i++)
                 {
                     data[avancement + i] = volume * val2;
@@ -209,8 +209,8 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             else
             {
                 // Décroissance exponentielle
-                coef = qPow(0.00001585 / (1. - levelSustain + 0.00001585), 1. / timeDecay);
-                val2 = (m_precValue - levelSustain) * coef + levelSustain;
+                coef = static_cast<float>(qPow(0.00001585 / (1. - static_cast<double>(levelSustain) + 0.00001585), 1. / timeDecay));
+                val2 = (_precValue - levelSustain) * coef + levelSustain;
                 for (quint32 i = 0; i < duree; i++)
                 {
                     data[avancement + i] = volume * (data[avancement + i] * val2);
@@ -235,22 +235,22 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             break;
         case phase6release:
             // Nombre de valeurs restantes dans la phase
-            duree = m_timeRelease - m_currentSmpl;
+            duree = _timeRelease - _currentSmpl;
             if (duree <= size - avancement)
             {
-                m_currentPhase = phase7off;
-                m_currentSmpl = 0;
+                _currentPhase = phase7off;
+                _currentSmpl = 0;
             }
             else
             {
                 duree = size - avancement;
-                m_currentSmpl += duree;
+                _currentSmpl += duree;
             }
             if (applyOn1)
             {
                 // Linéaire
-                coef = -1. / m_timeRelease;
-                val2 = m_precValue + coef;
+                coef = -1.f / _timeRelease;
+                val2 = _precValue + coef;
                 for (quint32 i = 0; i < duree; i++)
                 {
                     data[avancement + i] = volume * val2;
@@ -262,8 +262,8 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             else
             {
                 // Décroissance exponentielle
-                coef = qPow(0.00001585, 1. / m_timeRelease);
-                val2 = m_precValue * coef;
+                coef = static_cast<float>(qPow(0.00001585, 1. / _timeRelease));
+                val2 = _precValue * coef;
                 for (quint32 i = 0; i < duree; i++)
                 {
                     data[avancement + i] = volume * (data[avancement + i] * val2);
@@ -281,7 +281,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             fin = true;
         }
         // On retient la dernière valeur et on avance
-        m_precValue = val2;
+        _precValue = val2;
         avancement += duree;
     }
     return fin;
@@ -290,7 +290,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
 void EnveloppeVol::quickRelease()
 {
     // Arrêt par classe exclusive : release très courte
-    m_timeRelease = 0.02 * m_sampleRate;
-    m_currentPhase = phase6release;
-    m_currentSmpl = 0;
+    _timeRelease = static_cast<quint32>(0.02 * _sampleRate);
+    _currentPhase = phase6release;
+    _currentSmpl = 0;
 }

@@ -34,30 +34,30 @@ class CircularBuffer : public QObject
     Q_OBJECT
 
 public:
-    CircularBuffer(int minBuffer, int maxBuffer);
+    CircularBuffer(unsigned int minBuffer, unsigned int maxBuffer);
     ~CircularBuffer();
 
-    void addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int maxlen);
-    int currentLengthAvailable() { return _currentLengthAvailable; }
+    void addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, quint32 maxlen);
+    quint32 currentLengthAvailable() { return static_cast<quint32>(_currentLengthAvailable); }
     void stop();
 
 public slots:
     void start();
 
 protected:
-    virtual void generateData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int len) = 0;
+    virtual void generateData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, quint32 len) = 0;
     QMutex _mutexBuffer;
     
 private:
     // Sound engine thread => write data in the buffer
     // "len" contains at the end the data length that should have been written to meet the buffer requirements
-    void writeData(const float *dataL, const float *dataR, float *dataRevL, float *dataRevR, int &len);
+    void writeData(const float *dataL, const float *dataR, float *dataRevL, float *dataRevR, quint32 &len);
 
     // Buffer et positions
     float * _dataL, * _dataR, * _dataRevL, * _dataRevR;
     float * _dataTmpL, * _dataTmpR, * _dataTmpRevL, * _dataTmpRevR;
-    int _minBuffer, _maxBuffer, _bufferSize;
-    int _posEcriture, _posLecture;
+    quint32 _minBuffer, _maxBuffer, _bufferSize;
+    quint32 _posEcriture, _posLecture;
     QAtomicInt _currentLengthAvailable;
 
     // Gestion interruption

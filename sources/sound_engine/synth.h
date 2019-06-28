@@ -44,15 +44,15 @@ public:
     // Executed by the main thread (thread 1)
     // Type 0 is sample, 1 is instrument, 2 is preset
     void play(int type, int idSf2, int idElt, int note, int velocity,
-              VoiceParam * voiceParamTmp = NULL);
+              VoiceParam * voiceParamTmp = nullptr);
     void stop();
     void setGain(double gain);
 
     // Parameters for reading samples
     void setGainSample(int gain);
     void setStereo(bool isStereo);
-    void setStartLoop(int startLoop, bool repercute);
-    void setEndLoop(int endLoop, bool repercute);
+    void setStartLoop(quint32 startLoop, bool repercute);
+    void setEndLoop(quint32 endLoop, bool repercute);
     void setLoopEnabled(bool isEnabled);
     void setSinus(bool isOn, int rootKey);
     void setPitchCorrection(int correction, bool repercute);
@@ -63,21 +63,21 @@ public:
     void pause(bool isOn);
 
     // Following functions are executed by the audio server (thread 2)
-    void readData(float *data1, float *data2, qint64 maxlen);
+    void readData(float *data1, float *data2, quint32 maxlen);
     void setFormat(AudioFormat format);
 
 signals:
-    void currentPosChanged(int pos);
+    void currentPosChanged(quint32 pos);
     void readFinished();
-    void sampleRateChanged(qint32 sampleRate);
-    void dataWritten(qint32 sampleRate, int number);
+    void sampleRateChanged(quint32 sampleRate);
+    void dataWritten(quint32 sampleRate, quint32 number);
 
 public slots:
     void updateConfiguration();
 
 private:
     void play_sub(int type, int idSf2, int idElt, int note, int velocity,
-                  VoiceParam * voiceParamTmp = NULL);
+                  VoiceParam * voiceParamTmp = nullptr);
     void destroySoundEnginesAndBuffers();
     void createSoundEnginesAndBuffers();
 
@@ -103,17 +103,17 @@ private:
             }
         }
 
-        if (dMax > .99)
+        if (dMax > .99f)
         {
-            float coef = .99 / dMax;
+            float coef = .99f / dMax;
             for (int i = 0; i < pos; i++)
             {
-                dTmp = (float)(pos - i) / pos * m_clipCoef
-                        + (float)i / pos * coef;
+                dTmp = static_cast<float>(pos - i) / pos * _clipCoef
+                        + static_cast<float>(i) / pos * coef;
                 data1[i] *= dTmp;
                 data2[i] *= dTmp;
             }
-            m_clipCoef = coef;
+            _clipCoef = coef;
             for (int i = pos; i < size; i++)
             {
                 data1[i] *= coef;
@@ -132,28 +132,28 @@ private:
     QList<Voice *> _listVoixTmp;
 
     // Format audio
-    AudioFormat m_format;
+    AudioFormat _format;
 
     // Paramètre global
-    double m_gain;
+    double _gain;
 
     // Effets
-    int m_choLevel, m_choDepth, m_choFrequency;
+    int _choLevel, _choDepth, _choFrequency;
     stk::FreeVerb _reverb;
     QMutex _mutexReverb, _mutexSynchro;
 
     // Etat clipping
-    double m_clipCoef;
+    float _clipCoef;
 
     // Gestion de l'enregistrement
-    QFile * m_recordFile;
-    QDataStream m_recordStream;
-    bool m_isRecording;
-    quint32 m_recordLength;
-    QMutex m_mutexRecord;
+    QFile * _recordFile;
+    QDataStream _recordStream;
+    bool _isRecording;
+    quint32 _recordLength;
+    QMutex _mutexRecord;
 
     float * _fTmpSumRev1, * _fTmpSumRev2, * _dataWav;
-    int _bufferSize;
+    quint32 _bufferSize;
 };
 
 

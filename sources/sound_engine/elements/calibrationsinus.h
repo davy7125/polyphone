@@ -33,7 +33,7 @@ class CalibrationSinus
 public:
     CalibrationSinus();
     ~CalibrationSinus();
-    void setSampleRate(int sampleRate);
+    void setSampleRate(quint32 sampleRate);
 
     // Configuration du sinus
     void setPitch(int numNote);
@@ -41,18 +41,18 @@ public:
     void off();
 
     // Génération de données
-    void addData(float * dataR, float * dataL, int len);
+    void addData(float * dataR, float * dataL, quint32 len);
 
 private:
-    void initBuffer(int size);
+    void initBuffer(quint32 size);
 
     OscSinus * _sinus;
     double _pitch, _currentPitch;
-    double _level, _currentLevel;
+    float _level, _currentLevel;
 
     // Buffer de travail
     float * _buf;
-    int _bufSize;
+    quint32 _bufSize;
 
     // Protection accès multiples
     QMutex _mutex;

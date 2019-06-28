@@ -32,18 +32,18 @@
 // Constructeur, destructeur
 Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _sf2(SoundfontManager::getInstance()),
-    m_gain(0),
-    m_choLevel(0), m_choDepth(0), m_choFrequency(0),
-    m_clipCoef(1),
-    m_recordFile(nullptr),
-    m_isRecording(true),
+    _gain(0),
+    _choLevel(0), _choDepth(0), _choFrequency(0),
+    _clipCoef(1),
+    _recordFile(nullptr),
+    _isRecording(true),
     _fTmpSumRev1(nullptr),
     _fTmpSumRev2(nullptr),
     _dataWav(nullptr)
 {
 
     // Création des buffers et sound engines
-    _bufferSize = 2 * configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toInt();
+    _bufferSize = 2 * configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();
     createSoundEnginesAndBuffers();
 }
 
@@ -148,7 +148,7 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
         // Création voix
         Voice * voiceTmp = new Voice(_sf2->getData(idSmpl, champ_sampleData32),
                                      _sf2->get(idSmpl, champ_dwSampleRate).dwValue,
-                                     m_format.sampleRate(), note, velocity,
+                                     _format.sampleRate(), note, velocity,
                                      voiceParam);
 
         // Initialisation chorus et gain
@@ -156,8 +156,8 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
             voiceTmp->setChorus(0, 0, 0);
         else
         {
-            voiceTmp->setChorus(m_choLevel, m_choDepth, m_choFrequency);
-            voiceTmp->setGain(m_gain);
+            voiceTmp->setChorus(_choLevel, _choDepth, _choFrequency);
+            voiceTmp->setGain(_gain);
         }
 
         // Ajout de la voix
@@ -167,7 +167,7 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
         if (note == -1)
         {
             // Avancement du graphique
-            connect(voiceTmp, SIGNAL(currentPosChanged(int)), this, SIGNAL(currentPosChanged(int)));
+            connect(voiceTmp, SIGNAL(currentPosChanged(quint32)), this, SIGNAL(currentPosChanged(quint32)));
 
             // Lien ?
             SFSampleLink typeLien = _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
@@ -320,16 +320,16 @@ void Synth::updateConfiguration()
     this->stop();
 
     // Update chorus
-    m_choLevel = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt();
-    m_choDepth = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_depth", 0).toInt();
-    m_choFrequency = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_frequency", 0).toInt();
-    SoundEngine::setChorus(m_choLevel, m_choDepth, m_choFrequency);
+    _choLevel = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt();
+    _choDepth = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_depth", 0).toInt();
+    _choFrequency = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_frequency", 0).toInt();
+    SoundEngine::setChorus(_choLevel, _choDepth, _choFrequency);
 
     // Update reverb
-    double revLevel = (double)ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", 0).toInt() / 100.;
-    double revSize = (double)ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_size", 0).toInt() / 100.;
-    double revWidth = (double)ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_width", 0).toInt() / 100.;
-    double revDamping = (double)ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", 0).toInt() / 100.;
+    double revLevel = 0.01 * ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", 0).toInt();
+    double revSize = 0.01 * ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_size", 0).toInt();
+    double revWidth = 0.01 * ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_width", 0).toInt();
+    double revDamping = 0.01 * ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", 0).toInt();
 
     _mutexReverb.lock();
     _reverb.setEffectMix(revLevel);
@@ -339,11 +339,11 @@ void Synth::updateConfiguration()
     _mutexReverb.unlock();
 
     // Update gain
-    m_gain = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
-    SoundEngine::setGain(m_gain);
+    _gain = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
+    SoundEngine::setGain(_gain);
 
     // Update buffer size
-    int bufferSize = 2 * ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toInt();
+    quint32 bufferSize = 2 * ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();
     if (_bufferSize != bufferSize)
     {
         _bufferSize = bufferSize;
@@ -381,13 +381,13 @@ void Synth::setSinus(bool isOn, int rootKey)
         _sinus.off();
 }
 
-void Synth::setStartLoop(int startLoop, bool repercute)
+void Synth::setStartLoop(quint32 startLoop, bool repercute)
 {
     // mise à jour voix -1 et -2 si répercussion
     SoundEngine::setStartLoop(startLoop, repercute);
 }
 
-void Synth::setEndLoop(int endLoop, bool repercute)
+void Synth::setEndLoop(quint32 endLoop, bool repercute)
 {
     // mise à jour voix -1 et -2 si répercussion
     SoundEngine::setEndLoop(endLoop, repercute);
@@ -402,7 +402,7 @@ void Synth::setPitchCorrection(int correction, bool repercute)
 void Synth::setFormat(AudioFormat format)
 {
     // Mutex inutile : pas de génération de données lors de l'appel à setFormat
-    m_format = format;
+    _format = format;
 
     // Réinitialisation
     this->stop();
@@ -414,92 +414,92 @@ void Synth::setFormat(AudioFormat format)
 
 void Synth::startNewRecord(QString fileName)
 {
-    m_mutexRecord.lock();
-    if (m_recordFile)
+    _mutexRecord.lock();
+    if (_recordFile)
         this->endRecord();
-    m_recordFile = new QFile(fileName);
-    if (m_recordFile->open(QIODevice::WriteOnly))
+    _recordFile = new QFile(fileName);
+    if (_recordFile->open(QIODevice::WriteOnly))
     {
         // Création de l'entête
         quint32 dwTemp = 0;
         quint16 wTemp;
-        m_recordStream.setDevice(m_recordFile);
-        m_recordStream.setByteOrder(QDataStream::LittleEndian);
-        m_recordLength = 0;
+        _recordStream.setDevice(_recordFile);
+        _recordStream.setByteOrder(QDataStream::LittleEndian);
+        _recordLength = 0;
         // Entete
-        m_recordStream.writeRawData("RIFF", 4);
-        m_recordStream << (quint32)(m_recordLength + 18 + 4 + 8 + 8);
-        m_recordStream.writeRawData("WAVE", 4);
+        _recordStream.writeRawData("RIFF", 4);
+        _recordStream << static_cast<quint32>(_recordLength + 18 + 4 + 8 + 8);
+        _recordStream.writeRawData("WAVE", 4);
         ///////////// BLOC FMT /////////////
-        m_recordStream.writeRawData("fmt ", 4);
+        _recordStream.writeRawData("fmt ", 4);
         dwTemp = 18;
-        m_recordStream << dwTemp;
+        _recordStream << dwTemp;
         // Compression code
         wTemp = 3;
-        m_recordStream << wTemp;
+        _recordStream << wTemp;
         // Number of channels
         wTemp = 2;
-        m_recordStream << wTemp;
+        _recordStream << wTemp;
         // Sample rate
-        dwTemp = m_format.sampleRate();
-        m_recordStream << dwTemp;
+        dwTemp = _format.sampleRate();
+        _recordStream << dwTemp;
         // Average byte per second
         dwTemp *= 2 * 4;
-        m_recordStream << dwTemp;
+        _recordStream << dwTemp;
         // Block align
         wTemp = 2 * 4;
-        m_recordStream << wTemp;
+        _recordStream << wTemp;
         // Significants bits per smpl
-        m_recordStream << (quint16)32;
+        _recordStream << static_cast<quint16>(32);
         // Extra format bytes
         wTemp = 0;
-        m_recordStream << wTemp;
+        _recordStream << wTemp;
         ///////////// BLOC DATA /////////////
-        m_recordStream.writeRawData("data", 4);
-        m_recordStream << m_recordLength;
+        _recordStream.writeRawData("data", 4);
+        _recordStream << _recordLength;
 
-        m_isRecording = true;
+        _isRecording = true;
     }
     else
     {
-        delete m_recordFile;
-        m_recordFile = nullptr;
+        delete _recordFile;
+        _recordFile = nullptr;
     }
-    m_mutexRecord.unlock();
+    _mutexRecord.unlock();
 }
 
 void Synth::endRecord()
 {
-    m_mutexRecord.lock();
-    if (m_recordFile)
+    _mutexRecord.lock();
+    if (_recordFile)
     {
         // Ajustement des dimensions du fichier
-        m_recordFile->seek(4);
-        m_recordStream << (quint32)(m_recordLength + 18 + 4 + 8 + 8);
-        m_recordFile->seek(42);
-        m_recordStream << m_recordLength;
+        _recordFile->seek(4);
+        _recordStream << static_cast<quint32>(_recordLength + 18 + 4 + 8 + 8);
+        _recordFile->seek(42);
+        _recordStream << _recordLength;
 
         // Fermeture
-        m_recordStream.setDevice(nullptr);
-        m_recordFile->close();
-        delete m_recordFile;
-        m_recordFile = nullptr;
+        _recordStream.setDevice(nullptr);
+        _recordFile->close();
+        delete _recordFile;
+        _recordFile = nullptr;
 
-        m_isRecording = false;
+        _isRecording = false;
     }
-    m_mutexRecord.unlock();
+    _mutexRecord.unlock();
 }
 
 void Synth::pause(bool isOn)
 {
-    m_mutexRecord.lock();
-    m_isRecording = !isOn;
-    m_mutexRecord.unlock();
+    _mutexRecord.lock();
+    _isRecording = !isOn;
+    _mutexRecord.unlock();
 }
 
-void Synth::readData(float *data1, float *data2, qint64 maxlen)
+void Synth::readData(float *data1, float *data2, quint32 maxlen)
 {
-    for (int i = 0; i < maxlen; i++)
+    for (quint32 i = 0; i < maxlen; i++)
         data1[i] = data2[i] = _fTmpSumRev1[i] = _fTmpSumRev2[i] = 0;
 
     // Fusion des sound engines
@@ -510,10 +510,11 @@ void Synth::readData(float *data1, float *data2, qint64 maxlen)
 
     // Application réverbération et addition
     _mutexReverb.lock();
-    for (int i = 0; i < maxlen; i++)
+    for (quint32 i = 0; i < maxlen; i++)
     {
-        data1[i] += _reverb.tick(_fTmpSumRev1[i], _fTmpSumRev2[i]);
-        data2[i] += _reverb.lastOut(1);
+        data1[i] += static_cast<float>(
+                    _reverb.tick(static_cast<double>(_fTmpSumRev1[i]), static_cast<double>(_fTmpSumRev2[i])));
+        data2[i] += static_cast<float>(_reverb.lastOut(1));
     }
     _mutexReverb.unlock();
 
@@ -524,20 +525,20 @@ void Synth::readData(float *data1, float *data2, qint64 maxlen)
     clip(data1, data2, maxlen);
 
     // Enregistrement dans un fichier si demandé
-    m_mutexRecord.lock();
-    if (m_recordFile && m_isRecording)
+    _mutexRecord.lock();
+    if (_recordFile && _isRecording)
     {
         // Entrelacement et écriture
-        for (int i = 0; i < maxlen; i++)
+        for (quint32 i = 0; i < maxlen; i++)
         {
             _dataWav[2 * i + 1] = data1[i];
             _dataWav[2 * i]     = data2[i];
         }
-        m_recordStream.writeRawData((char*)_dataWav, maxlen * 8);
+        _recordStream.writeRawData(reinterpret_cast<char*>(_dataWav), static_cast<int>(maxlen * 8));
 
         // Prise en compte de l'avance
-        m_recordLength += maxlen * 8;
-        emit(dataWritten(m_format.sampleRate(), maxlen));
+        _recordLength += maxlen * 8;
+        emit(dataWritten(_format.sampleRate(), maxlen));
     }
-    m_mutexRecord.unlock();
+    _mutexRecord.unlock();
 }

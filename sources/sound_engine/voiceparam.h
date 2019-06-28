@@ -32,7 +32,7 @@
 class VoiceParam
 {
 public:
-    VoiceParam(SoundfontManager * sf2, EltID id, VoiceParam * voiceParamTmp = NULL);
+    VoiceParam(SoundfontManager * sf2, EltID id, VoiceParam * voiceParamTmp = nullptr);
     ~VoiceParam() {}
     double getPitchDifference(int note);
     // Liste des paramètres de lecture (libre accès)
@@ -43,7 +43,7 @@ public:
     double filterFreq, filterQ;
     // BOUCLES ET OFFSETS
     int loopMode;
-    qint32 loopStart, loopEnd, sampleStart, sampleEnd;
+    quint32 loopStart, loopEnd, sampleStart, sampleEnd;
     // ATTENUATION, BALANCE
     double attenuation, pan;
     int fixedVelocity;
@@ -61,7 +61,7 @@ public:
     qint32 modLfoToPitch, modLfoToFilterFreq, vibLfoToPitch;
     double modLfoToVolume;
     // EFFETS
-    double reverb, chorus;
+    float reverb, chorus;
     // DIVERS
     int exclusiveClass, numPreset;
 
@@ -78,8 +78,10 @@ private:
 
     // Limites
     void limit(EltID id);
-    static double limit(double val, double min, double max);
-    static qint32 limit(qint32 val, qint32 min, qint32 max);
+    static double limitD(double val, double min, double max);
+    static float limitF(float val, float min, float max);
+    static qint32 limitI(qint32 val, qint32 min, qint32 max);
+    static quint32 limitUI(quint32 val, quint32 min, quint32 max);
 };
 
 

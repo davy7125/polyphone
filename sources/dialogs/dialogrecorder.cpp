@@ -39,7 +39,7 @@ DialogRecorder::DialogRecorder(QWidget *parent) :
 {
     ui->setupUi(this);
     _synth = ContextManager::audio()->getSynth();
-    connect(_synth, SIGNAL(dataWritten(qint32,int)), this, SLOT(onDataWritten(qint32,int)));
+    connect(_synth, SIGNAL(dataWritten(quint32,int)), this, SLOT(onDataWritten(quint32,int)));
     this->setWindowFlags(Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
     this->initialize();
 }
@@ -63,7 +63,7 @@ void DialogRecorder::initialize()
     _currentSample = 0;
 }
 
-void DialogRecorder::onDataWritten(int sampleRate, int number)
+void DialogRecorder::onDataWritten(quint32 sampleRate, quint32 number)
 {
     _currentSample += number;
 
@@ -71,7 +71,7 @@ void DialogRecorder::onDataWritten(int sampleRate, int number)
     if (sampleRate != 0)
     {
         QTime time(0, 0);
-        time = time.addMSecs((int)((double)_currentSample / ((double)sampleRate / 1000.)));
+        time = time.addMSecs(static_cast<int>(1000. * _currentSample / sampleRate));
         ui->lcdNumber->display(time.toString("HH:mm:ss"));
     }
 }

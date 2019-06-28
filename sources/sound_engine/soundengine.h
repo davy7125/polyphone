@@ -34,7 +34,7 @@ class SoundEngine : public CircularBuffer
     Q_OBJECT
 
 public:
-    SoundEngine(int bufferSize);
+    SoundEngine(unsigned int bufferSize);
     virtual ~SoundEngine();
 
     static void addVoice(Voice * voice, QList<Voice *> friends = QList<Voice*>());
@@ -44,8 +44,8 @@ public:
     static void setGain(double gain);
     static void setChorus(int level, int depth, int frequency);
     static void setPitchCorrection(int correction, bool repercute);
-    static void setStartLoop(int startLoop, bool repercute);
-    static void setEndLoop(int endLoop, bool repercute);
+    static void setStartLoop(quint32 startLoop, bool repercute);
+    static void setEndLoop(quint32 endLoop, bool repercute);
     static void setLoopEnabled(bool isEnabled);
     static void setStereo(bool isStereo);
     static void setGainSample(int gain);
@@ -55,10 +55,10 @@ signals:
 
 protected:
     // Thread du buffer circulaire
-    void generateData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int len)
+    void generateData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, quint32 len)
     {
         // Initialisation des données
-        for (int i = 0; i < len; i++)
+        for (quint32 i = 0; i < len; i++)
             dataL[i] = dataR[i] = dataRevL[i] = dataRevR[i] = 0;
 
         _mutexVoices.lock();
@@ -71,11 +71,11 @@ protected:
             {
                 // Récupération des données
                 _listVoices.at(i)->generateData(_dataTmpL, _dataTmpR, len);
-                float coef1 = _listVoices.at(i)->getReverb() / 100.;
-                float coef2 = 1. - coef1;
+                float coef1 = _listVoices.at(i)->getReverb() / 100.0f;
+                float coef2 = 1.f - coef1;
 
                 // Fusion
-                for (int j = 0; j < len; j++)
+                for (quint32 j = 0; j < len; j++)
                 {
                     dataL   [j] += coef2 * _dataTmpL[j];
                     dataR   [j] += coef2 * _dataTmpR[j];
@@ -102,13 +102,13 @@ private:
     void closeAllInstance(int exclusiveClass, int numPreset, QList<Voice*> friends);
     void addVoiceInstance(Voice * voice);
     void stopAllVoicesInstance();
-    void syncNewVoicesInstance(int delay);
+    void syncNewVoicesInstance(quint32 delay);
     void releaseNoteInstance(int numNote);
     void setGainInstance(double gain);
     void setChorusInstance(int level, int depth, int frequency);
     void setPitchCorrectionInstance(int correction, bool repercute);
-    void setStartLoopInstance(int startLoop, bool repercute);
-    void setEndLoopInstance(int endLoop, bool repercute);
+    void setStartLoopInstance(quint32 startLoop, bool repercute);
+    void setEndLoopInstance(quint32 endLoop, bool repercute);
     void setLoopEnabledInstance(bool isEnabled);
     void setStereoInstance(bool isStereo);
     void setGainSampleInstance(int gain);

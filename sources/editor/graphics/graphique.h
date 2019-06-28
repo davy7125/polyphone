@@ -46,7 +46,7 @@ public slots:
     void setPosX(int _posX);
     void setStartLoop(int pos, bool replot = true);
     void setEndLoop(int pos, bool replot = true);
-    void setCurrentSample(int pos);
+    void setCurrentSample(quint32 pos);
 
 signals:
     void startLoopChanged();

@@ -38,17 +38,17 @@ typedef struct _jack_client jack_client_t;
 class AudioFormat
 {
 public:
-    void setChannelCount(qint32 value)  {_channelCount = value;}
-    void setSampleRate(qint32 value)    {_sampleRate = value;}
-    void setSampleSize(qint32 value)    {_sampleSize = value;}
-    qint32 channelCount()               {return _channelCount;}
-    qint32 sampleRate()                 {return _sampleRate;}
-    qint32 sampleSize()                 {return _sampleSize;}
+    void setChannelCount(quint32 value)  {_channelCount = value;}
+    void setSampleRate(quint32 value)    {_sampleRate = value;}
+    void setSampleSize(quint32 value)    {_sampleSize = value;}
+    quint32 channelCount()               {return _channelCount;}
+    quint32 sampleRate()                 {return _sampleRate;}
+    quint32 sampleSize()                 {return _sampleSize;}
 
 private:
-    qint32 _channelCount;
-    qint32 _sampleRate;
-    qint32 _sampleSize;
+    quint32 _channelCount;
+    quint32 _sampleRate;
+    quint32 _sampleSize;
 };
 
 class HostInfo
@@ -109,9 +109,9 @@ signals:
     void connectionProblem();
 
 private:
-    void openDefaultConnection(int bufferSize);
-    void openJackConnection(int bufferSize);
-    void openStandardConnection(int deviceType, int numIndex, int bufferSize);
+    void openDefaultConnection(quint32 bufferSize);
+    void openJackConnection(quint32 bufferSize);
+    void openStandardConnection(int deviceType, int numIndex, quint32 bufferSize);
 
     // Serveur son, sortie standard ou asio
     bool _isStandardRunning;

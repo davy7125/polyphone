@@ -276,7 +276,7 @@ void Graphique::setEndLoop(int pos, bool replot)
     }
 }
 
-void Graphique::setCurrentSample(int pos)
+void Graphique::setCurrentSample(quint32 pos)
 {
     if (_lastUpdate.elapsed() < 16 && pos != 0)
         return;

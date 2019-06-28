@@ -32,7 +32,7 @@ int SoundEngine::_gainSmpl = 0;
 bool SoundEngine::_isStereo = false;
 bool SoundEngine::_isLoopEnabled = true;
 
-SoundEngine::SoundEngine(int bufferSize) : CircularBuffer(bufferSize, 2 * bufferSize)
+SoundEngine::SoundEngine(unsigned int bufferSize) : CircularBuffer(bufferSize, 2 * bufferSize)
 {
     _listInstances << this;
     _dataTmpL = new float [8 * bufferSize];
@@ -119,11 +119,11 @@ void SoundEngine::syncNewVoices()
         engine->_mutexVoices.lock();
 
     // Current data length available in all buffers
-    QList<int> dataAvailable;
-    int maxDataLength = 0;
+    QList<quint32> dataAvailable;
+    quint32 maxDataLength = 0;
     for (int i = 0; i < _listInstances.size(); i++)
     {
-        int iTmp = _listInstances.at(i)->currentLengthAvailable();
+        quint32 iTmp = _listInstances.at(i)->currentLengthAvailable();
         if (iTmp > maxDataLength)
             maxDataLength = iTmp;
         dataAvailable << iTmp;
@@ -140,7 +140,7 @@ void SoundEngine::syncNewVoices()
         engine->_mutexBuffer.unlock();
 }
 
-void SoundEngine::syncNewVoicesInstance(int delay)
+void SoundEngine::syncNewVoicesInstance(quint32 delay)
 {
     int nbVoices = _listVoices.size();
     for (int i = nbVoices - 1; i >= 0; i--)
@@ -231,13 +231,13 @@ void SoundEngine::setPitchCorrectionInstance(int correction, bool repercute)
     _mutexVoices.unlock();
 }
 
-void SoundEngine::setStartLoop(int startLoop, bool repercute)
+void SoundEngine::setStartLoop(quint32 startLoop, bool repercute)
 {
     for (int i = 0; i < _listInstances.size(); i++)
         _listInstances.at(i)->setStartLoopInstance(startLoop, repercute);
 }
 
-void SoundEngine::setStartLoopInstance(int startLoop, bool repercute)
+void SoundEngine::setStartLoopInstance(quint32 startLoop, bool repercute)
 {
     _mutexVoices.lock();
     for (int i = 0; i < _listVoices.size(); i++)
@@ -246,13 +246,13 @@ void SoundEngine::setStartLoopInstance(int startLoop, bool repercute)
     _mutexVoices.unlock();
 }
 
-void SoundEngine::setEndLoop(int endLoop, bool repercute)
+void SoundEngine::setEndLoop(quint32 endLoop, bool repercute)
 {
     for (int i = 0; i < _listInstances.size(); i++)
         _listInstances.at(i)->setEndLoopInstance(endLoop, repercute);
 }
 
-void SoundEngine::setEndLoopInstance(int endLoop, bool repercute)
+void SoundEngine::setEndLoopInstance(quint32 endLoop, bool repercute)
 {
     _mutexVoices.lock();
     for (int i = 0; i < _listVoices.size(); i++)

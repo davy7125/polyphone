@@ -38,8 +38,8 @@ class DialogRecorder : public QDialog
     Q_OBJECT
     
 public:
-    explicit DialogRecorder(QWidget *parent = 0);
-    ~DialogRecorder();
+    explicit DialogRecorder(QWidget *parent = nullptr);
+    ~DialogRecorder() override;
 
 protected:
     void hideEvent(QHideEvent * event) override;
@@ -47,13 +47,13 @@ protected:
     void closeEvent(QCloseEvent * event) override;
 
 private slots:
-    void onDataWritten(qint32 sampleRate, int number);
+    void onDataWritten(quint32 sampleRate, quint32 number);
     void on_pushRecord_clicked();
     void on_pushPlayPause_clicked();
 
 private:
     Ui::DialogRecorder *ui;
-    int _currentSample;
+    quint32 _currentSample;
     bool _isRecording;
     bool _isPaused;
     Synth * _synth;
