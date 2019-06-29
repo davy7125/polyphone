@@ -39,20 +39,26 @@ public:
     explicit DialogKeyboard(QWidget *parent = 0);
     ~DialogKeyboard();
 
-    /// Focus on the keyboard and animate with a glow effect
+    // Focus on the keyboard and animate with a glow effect
     void glow();
 
 protected:
-    void hideEvent(QHideEvent * event) override;
-    void showEvent(QShowEvent * event) override;
     void closeEvent(QCloseEvent * event) override;
 
 private slots:
-    void keyPlayed(int key, int vel);
     void on_comboType_currentIndexChanged(int index);
+    void onMouseHover(int key, int vel);
+    void keyPlayed(int key, int vel);
+    void polyPressureChanged(int key, int pressure);
+    void on_pushExpand_clicked();
 
 private:
+    void displayKeyInfo();
+    void updateControlAreaVisibility();
+    void resizeWindow();
+
     Ui::DialogKeyboard *ui;
+    QList<QPair<int, QPair<int, int> > > _triggeredKeys; // velocity and aftertouch by key
 };
 
 #endif // DIALOGKEYBOARD_H

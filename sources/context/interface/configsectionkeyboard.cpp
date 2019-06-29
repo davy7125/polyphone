@@ -72,6 +72,11 @@ void ConfigSectionKeyboard::initialize()
     ui->spinDefaultVelocity->blockSignals(true);
     ui->spinDefaultVelocity->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "velocity", 127).toInt());
     ui->spinDefaultVelocity->blockSignals(false);
+
+    // Default polyphonic aftertouch
+    ui->spinBoxDefaultAfterTouch->blockSignals(true);
+    ui->spinBoxDefaultAfterTouch->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "aftertouch", 127).toInt());
+    ui->spinBoxDefaultAfterTouch->blockSignals(false);
 }
 
 void ConfigSectionKeyboard::initializeFirstC()
@@ -101,4 +106,9 @@ void ConfigSectionKeyboard::on_comboFirstC_currentIndexChanged(int index)
 void ConfigSectionKeyboard::on_spinDefaultVelocity_editingFinished()
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "velocity", ui->spinDefaultVelocity->value());
+}
+
+void ConfigSectionKeyboard::on_spinBoxDefaultAfterTouch_editingFinished()
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "aftertouch", ui->spinBoxDefaultAfterTouch->value());
 }

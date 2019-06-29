@@ -34,8 +34,8 @@ DialogKeyboard::DialogKeyboard(QWidget *parent) :
     ui->setupUi(this);
 
     // Style
-    ui->frameBottom->setStyleSheet("QFrame{background-color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";color:" +
+    ui->frameBottom->setStyleSheet("QFrame#frameBottom{background-color:" +
+                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";}QLabel{color:" +
                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "}");
 
     // Initialize the keyboard
@@ -58,50 +58,89 @@ DialogKeyboard::DialogKeyboard(QWidget *parent) :
         break;
     }
     ContextManager::midi()->setKeyboard(ui->keyboard);
+    ContextManager::midi()->setControllerArea(ui->controllerArea);
     connect(ContextManager::configuration(), SIGNAL(keyMapChanged()), ui->keyboard, SLOT(updateMapping()));
 
-    // Connections for displaying the current note and velocity
-    connect(ui->keyboard, SIGNAL(mouseOver(int, int)), this, SLOT(keyPlayed(int, int)));
+    // Connections for displaying the current note, velocity and aftertouch
+    connect(ui->keyboard, SIGNAL(mouseOver(int, int)), this, SLOT(onMouseHover(int,int)));
+    connect(ui->keyboard, SIGNAL(polyPressureChanged(int, int)), this, SLOT(polyPressureChanged(int,int)));
     connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), this, SLOT(keyPlayed(int, int)));
+    connect(ContextManager::midi(), SIGNAL(polyPressureChanged(int,int)), this, SLOT(polyPressureChanged(int, int)));
+
+    // Visibility of the control area
+    updateControlAreaVisibility();
+
+    // Restore the geometry
+    QByteArray geometry = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "keyboardGeometry", QByteArray()).toByteArray();
+    if (!geometry.isEmpty())
+        this->restoreGeometry(geometry);
 }
 
 DialogKeyboard::~DialogKeyboard()
 {
+    // Save the keyboard state
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboard_height", ui->keyboard->sizeHint().height());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboardGeometry", this->saveGeometry());
     delete ui;
 }
 
 void DialogKeyboard::keyPlayed(int key, int vel)
 {
-    if (key >= 0 && key <= 127 && vel > 0)
+    if (key >= 0 && key <= 127)
     {
-        ui->labelKey->setText(ContextManager::keyName()->getKeyName(key));
-        ui->labelVel->setText(QString::number(vel));
+        if (vel == 0)
+        {
+            // Remove a key from the list
+            for (int i = _triggeredKeys.count() - 1; i >= 0; i--)
+                if (_triggeredKeys[i].first == key)
+                    _triggeredKeys.removeAt(i);
+        }
+        else
+        {
+            // Add a key in the list to display
+            _triggeredKeys << QPair<int, QPair<int, int> >(key, QPair<int, int>(vel, vel));
+        }
     }
-    else
+
+    displayKeyInfo();
+}
+
+void DialogKeyboard::onMouseHover(int key, int vel)
+{
+    if (_triggeredKeys.empty())
     {
-        ui->labelKey->setText("-");
-        ui->labelVel->setText("-");
+        if (key >= 0 && key <= 127 && vel > 0)
+        {
+            ui->labelKey->setText(ContextManager::keyName()->getKeyName(key));
+            ui->labelVel->setText(QString::number(vel));
+        }
+        else
+        {
+            ui->labelKey->setText("-");
+            ui->labelVel->setText("-");
+        }
+        ui->labelAftertouch->setText("-");
     }
+}
+
+void DialogKeyboard::polyPressureChanged(int key, int pressure)
+{
+    if (_triggeredKeys.empty())
+        return;
+
+    // Change the pressure of an existing key
+    for (int i = 0; i < _triggeredKeys.count(); i++)
+        if (_triggeredKeys[i].first == key)
+            _triggeredKeys[i].second.second = pressure;
+
+    if (_triggeredKeys.last().first == key)
+        displayKeyInfo();
 }
 
 void DialogKeyboard::glow()
 {
     ui->keyboard->setFocus();
     ui->keyboard->triggerGlowEffect();
-}
-
-void DialogKeyboard::hideEvent(QHideEvent * event)
-{
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboardGeometry", this->saveGeometry());
-    QDialog::hideEvent(event);
-}
-
-void DialogKeyboard::showEvent(QShowEvent * event)
-{
-    QDialog::showEvent(event);
-    QByteArray geometry = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "keyboardGeometry", QByteArray()).toByteArray();
-    if (!geometry.isEmpty())
-        this->restoreGeometry(geometry);
 }
 
 void DialogKeyboard::closeEvent(QCloseEvent * event)
@@ -112,6 +151,9 @@ void DialogKeyboard::closeEvent(QCloseEvent * event)
 
 void DialogKeyboard::on_comboType_currentIndexChanged(int index)
 {
+    // Save the keyboard height
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboard_height", ui->keyboard->sizeHint().height());
+
     switch (index)
     {
     case 0:
@@ -140,6 +182,76 @@ void DialogKeyboard::on_comboType_currentIndexChanged(int index)
         break;
     }
 
-    int dialogWidth = (int)((double)(ui->keyboard->height()) * 0.92 * ui->keyboard->ratio());
-    this->resize(dialogWidth, this->height());
+    this->resizeWindow();
+}
+
+void DialogKeyboard::displayKeyInfo()
+{
+    if (_triggeredKeys.empty())
+    {
+        // Reset the key information
+        ui->labelKey->setText("-");
+        ui->labelVel->setText("-");
+        ui->labelAftertouch->setText("-");
+    }
+    else
+    {
+        // Display the last key in the list
+        ui->labelKey->setText(ContextManager::keyName()->getKeyName(_triggeredKeys.last().first));
+        ui->labelVel->setText(QString::number(_triggeredKeys.last().second.first));
+        if (_triggeredKeys.last().second.second >= 0)
+            ui->labelAftertouch->setText(QString::number(_triggeredKeys.last().second.second));
+        else
+            ui->labelAftertouch->setText("-");
+    }
+}
+
+void DialogKeyboard::on_pushExpand_clicked()
+{
+    // Toggle the visibility of the modulator area
+    bool isVisible = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "control_area_expanded", false).toBool();
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "control_area_expanded", !isVisible);
+    updateControlAreaVisibility();
+}
+
+void DialogKeyboard::updateControlAreaVisibility()
+{
+    // Save the keyboard height
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboard_height", ui->keyboard->sizeHint().height());
+
+    // Initialize the expanded / collapsed state
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "control_area_expanded", false).toBool())
+    {
+        ui->controllerArea->show();
+        ui->pushExpand->setIcon(ContextManager::theme()->getColoredSvg(":/icons/arrow_up.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
+        ui->pushExpand->setToolTip(trUtf8("Hide the controller area"));
+    }
+    else
+    {
+        ui->controllerArea->hide();
+        ui->pushExpand->setIcon(ContextManager::theme()->getColoredSvg(":/icons/arrow_down.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
+        ui->pushExpand->setToolTip(trUtf8("Show the controller area"));
+    }
+
+    this->resizeWindow();
+}
+
+void DialogKeyboard::resizeWindow()
+{
+    // Resize the window so that the keyboard has the same height
+    int keyboardHeight = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "keyboard_height", 60).toInt();
+
+    // Keyboard corresponding width
+    int keyboardWidth = static_cast<int>(ui->keyboard->ratio() * keyboardHeight);
+
+    // Size of the window
+    int margin = ui->topLayout->contentsMargins().left(); // Vertical and horizontal are same
+    int windowWidth = keyboardWidth + 2 * margin;
+    int windowHeight = ui->frameBottom->height() + 2 * margin + keyboardHeight;
+    if (ui->controllerArea->isVisible())
+        windowHeight += ui->controllerArea->height(); // Vertical margin is included
+
+    // Resize the window
+    this->adjustSize();
+    this->resize(windowWidth, windowHeight + 3); // Adding a small offset (3) seems to be necessary...
 }

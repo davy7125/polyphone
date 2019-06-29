@@ -43,6 +43,7 @@ public:
 private slots:
     void on_comboFirstC_currentIndexChanged(int index);
     void on_spinDefaultVelocity_editingFinished();
+    void on_spinBoxDefaultAfterTouch_editingFinished();
     void initializeFirstC();
 
 private:

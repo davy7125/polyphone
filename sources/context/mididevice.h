@@ -32,6 +32,7 @@ class ConfManager;
 class RtMidiIn;
 class PianoKeybdCustom;
 class Synth;
+class ControllerArea;
 
 class MidiDevice: public QObject
 {
@@ -49,25 +50,39 @@ public:
     void setKeyboard(PianoKeybdCustom * keyboard);
     PianoKeybdCustom * keyboard() { return _keyboard; }
 
+    // Connect the controller area
+    void setControllerArea(ControllerArea * controllerArea);
+
     // Stop all keys
     void stopAll();
 
 public slots:
-    void setKey(int key, int vel, bool syncKeyboard = false);
-    void setKeyOff(int key, bool syncKeyboard = false);
-    void setController(int numController, int value);
+    void processKeyOn(int key, int vel, bool syncKeyboard = false);
+    void processKeyOff(int key, bool syncKeyboard = false);
+    void processPolyPressureChanged(int key, int pressure, bool syncKeyboard = false);
+    void processMonoPressureChanged(int value, bool syncControllerArea = false);
+    void processControllerChanged(int num, int value, bool syncControllerArea = false);
+    void processBendChanged(int value, bool syncControllerArea = false);
+    void processBendSensitivityChanged(double semitones, bool syncControllerArea = false);
 
 signals:
     void keyPlayed(int key, int vel);
+    void polyPressureChanged(int key, int pressure);
+    void monoPressureChanged(int value);
+    void controllerChanged(int num, int value);
+    void bendChanged(int value);
+    void bendSensitivityChanged(double semitones);
 
 protected:
     void customEvent(QEvent * event);
 
 private:
     PianoKeybdCustom * _keyboard;
+    ControllerArea * _controllerArea;
     ConfManager * _configuration;
     RtMidiIn * _midiin;
     Synth * _synth;
+    QList<QPair<int, int> > _rpnHistory;
 
     // Sustain pedal
     QList<int> _listKeysToRelease;

@@ -32,7 +32,6 @@
 #include <QApplication>
 #include <QStandardPaths>
 #include <QDir>
-#include <QDebug>
 
 DownloadManager * DownloadManager::s_instance = nullptr;
 

@@ -31,22 +31,22 @@ class ControllerEvent : public QEvent
 {
 public:
     ControllerEvent(unsigned char numController, unsigned char value) : QEvent((QEvent::Type)(QEvent::User+1)),
-          m_numController(numController),
-          m_value(value) {}
+          _numController(numController),
+          _value(value) {}
 
     unsigned char getNumController() const
     {
-        return m_numController;
+        return _numController;
     }
 
     unsigned char getValue() const
     {
-        return m_value;
+        return _value;
     }
 
 protected:
-    unsigned char m_numController;
-    unsigned char m_value;
+    unsigned char _numController;
+    unsigned char _value;
 };
 
 #endif // CONTROLLEREVENT_H

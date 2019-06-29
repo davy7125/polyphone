@@ -31,22 +31,22 @@ class NoteEvent : public QEvent
 {
 public:
     NoteEvent(unsigned char note, unsigned char val) : QEvent(QEvent::User),
-          m_note(note),
-          m_velocity(val) {}
+          _note(note),
+          _velocity(val) {}
 
     unsigned char getNote() const
     {
-        return m_note;
+        return _note;
     }
 
     unsigned char getVelocity() const
     {
-        return m_velocity;
+        return _velocity;
     }
 
 protected:
-    unsigned char m_note;
-    unsigned char m_velocity;
+    unsigned char _note;
+    unsigned char _velocity;
 };
 
 #endif // NOTEEVENT_H

@@ -2,7 +2,6 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2019 Davy Triponney                                **
-**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -23,34 +22,24 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef MODULATORLISTWIDGET_H
-#define MODULATORLISTWIDGET_H
+#ifndef BENDEVENT_H
+#define BENDEVENT_H
 
-#include <QListWidget>
-#include <QKeyEvent>
+#include <QEvent>
 
-class ModulatorListWidget : public QListWidget
+class BendEvent : public QEvent
 {
-    Q_OBJECT
-
 public:
-    ModulatorListWidget(QWidget * parent = nullptr) : QListWidget(parent) {}
+    BendEvent(unsigned char val) : QEvent((QEvent::Type)(QEvent::User+4)),
+          _value(val) {}
 
-signals:
-    void pasted();
-    void copied();
-    void deleted();
+    unsigned char getValue() const
+    {
+        return _value;
+    }
 
 protected:
-    void keyPressEvent(QKeyEvent * event)
-    {
-        if (event->key() == Qt::Key_Delete)
-            emit(deleted());
-        else if (event->key() == Qt::Key_C && (event->modifiers() & Qt::ControlModifier))
-            emit(copied());
-        else if (event->key() == Qt::Key_V && (event->modifiers() & Qt::ControlModifier))
-            emit(pasted());
-    }
+    unsigned char _value;
 };
 
-#endif // MODULATORLISTWIDGET_H
+#endif // BENDEVENT_H

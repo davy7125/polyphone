@@ -81,13 +81,13 @@ private:
     void destroySoundEnginesAndBuffers();
     void createSoundEnginesAndBuffers();
 
-    void clip(float *data1, float *data2, qint64 size)
+    void clip(float *data1, float *data2, quint32 size)
     {
         // Recherche valeur maxi
         float dMax = 0;
-        qint32 pos = -1;
+        quint32 pos = 0;
         float dTmp;
-        for (qint32 i = 0; i < size; i++)
+        for (quint32 i = 0; i < size; i++)
         {
             dTmp = qAbs(data1[i]);
             if (dTmp > dMax)
@@ -106,7 +106,7 @@ private:
         if (dMax > .99f)
         {
             float coef = .99f / dMax;
-            for (int i = 0; i < pos; i++)
+            for (quint32 i = 0; i < pos; i++)
             {
                 dTmp = static_cast<float>(pos - i) / pos * _clipCoef
                         + static_cast<float>(i) / pos * coef;
@@ -114,7 +114,7 @@ private:
                 data2[i] *= dTmp;
             }
             _clipCoef = coef;
-            for (int i = pos; i < size; i++)
+            for (quint32 i = pos; i < size; i++)
             {
                 data1[i] *= coef;
                 data2[i] *= coef;

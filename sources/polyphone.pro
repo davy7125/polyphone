@@ -432,7 +432,8 @@ SOURCES	+= main.cpp \
     editor/modulator/modulatorcell.cpp \
     editor/modulator/modulatorcombocurve.cpp \
     editor/modulator/modulatorcombodest.cpp \
-    editor/modulator/modulatorcombosrc.cpp
+    editor/modulator/modulatorcombosrc.cpp \
+    clavier/controllerarea.cpp
 
 HEADERS  += \
     core/sample/infosound.h \
@@ -714,7 +715,12 @@ HEADERS  += \
     editor/modulator/modulatorcombocurve.h \
     editor/modulator/modulatorcombodest.h \
     editor/modulator/modulatorcombosrc.h \
-    editor/modulator/modulatorlistwidget.h
+    editor/modulator/modulatorlistwidget.h \
+    context/polypressureevent.h \
+    context/monopressureevent.h \
+    context/bendevent.h \
+    context/programevent.h \
+    clavier/controllerarea.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -777,7 +783,8 @@ FORMS    += \
     repository/soundfont/soundfontcommentcell.ui \
     repository/widgets/downloadprogresscell.ui \
     editor/modulator/modulatoreditor.ui \
-    editor/modulator/modulatorcell.ui
+    editor/modulator/modulatorcell.ui \
+    clavier/controllerarea.ui
 
 RESOURCES += resources.qrc
 

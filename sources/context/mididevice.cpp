@@ -26,53 +26,71 @@
 #include "RtMidi.h"
 #include "controllerevent.h"
 #include "noteevent.h"
+#include "bendevent.h"
+#include "programevent.h"
+#include "monopressureevent.h"
+#include "polypressureevent.h"
 #include "pianokeybdcustom.h"
+#include "controllerarea.h"
 #include "confmanager.h"
 #include <QApplication>
 #include "synth.h"
 
 // Callback for MIDI signals
-void midiCallback(double deltatime, std::vector< unsigned char > *message, void *userData)
+void midiCallback(double deltatime, std::vector<unsigned char> *message, void *userData)
 {
     Q_UNUSED(deltatime);
 
-    // Constantes
-    int STATUS_NOTEOFF    = 0x80;
-    int STATUS_NOTEON     = 0x90;
-    int STATUS_CONTROLLER = 0xB0;
-    //int MASK_CHANNEL   = 0x0f;
-    int MASK_STATUS    = 0xF0;
-
-    // Récupération de l'instance de PianoKeybdCustom
-    MidiDevice * instance = static_cast<MidiDevice*>(userData);
-
     // Create an event
     QEvent* ev = nullptr;
-    //unsigned char channel = message->at(0) & MASK_CHANNEL;
-    unsigned char status = message->at(0) & MASK_STATUS;
-    if (status == STATUS_NOTEON || status == STATUS_NOTEOFF)
+    //unsigned char channel = message->at(0) & 0x0F;
+    unsigned char status = message->at(0) & 0xF0;
+
+    switch (status)
     {
-        unsigned char midi_note = message->at(1);
-        unsigned char vel = message->at(2);
-        if ((status == STATUS_NOTEOFF) || (vel == 0))
-            ev = new NoteEvent(midi_note, 0);
+    case 0x80: case 0x90: // NOTE ON or NOTE OFF
+        // First message is the note, second is velocity
+        if (status == 0x90 || message->at(2) == 0)
+            ev = new NoteEvent(message->at(1), 0);
         else
-            ev = new NoteEvent(midi_note, vel);
-    }
-    else if (status == STATUS_CONTROLLER)
-    {
-        unsigned char numController = message->at(1);
-        unsigned char value = message->at(2);
-        ev = new ControllerEvent(numController, value);
+            ev = new NoteEvent(message->at(1), message->at(2));
+        break;
+    case 0xA0: // AFTERTOUCH
+        // First message is the note, second is the pressure
+        ev = new PolyPressureEvent(message->at(1), message->at(2));
+        break;
+    case 0xB0: // CONTROLLER CHANGE
+        // First message is the controller number, second is its value
+        ev = new ControllerEvent(message->at(1), message->at(2));
+        break;
+    case 0xC0: // PROGRAM CHANGED
+        // First message is the program number
+        ev = new ProgramEvent(message->at(1));
+        break;
+    case 0xD0: // MONO PRESSURE
+        // First message is the global pressure
+        ev = new MonoPressureEvent(message->at(1));
+        break;
+    case 0xE0: // BEND
+        // First message is the value
+        ev = new BendEvent(message->at(1));
+        break;
+    default:
+        // Nothing
+        break;
     }
 
-    // Post the event
     if (ev)
+    {
+        // Get the midi device instance and post the event
+        MidiDevice * instance = static_cast<MidiDevice*>(userData);
         QApplication::postEvent(instance, ev);
+    }
 }
 
 MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
     _keyboard(nullptr),
+    _controllerArea(nullptr),
     _configuration(configuration),
     _synth(synth),
     _isSustainOn(false)
@@ -143,22 +161,51 @@ void MidiDevice::customEvent(QEvent * event)
 {
     if (event->type() == QEvent::User)
     {
+        // Note on or off
         NoteEvent *noteEvent = dynamic_cast<NoteEvent *>(event);
         if (noteEvent->getVelocity() > 0)
-            this->setKey(noteEvent->getNote(), noteEvent->getVelocity(), true);
+            this->processKeyOn(noteEvent->getNote(), noteEvent->getVelocity(), true);
         else
-            this->setKeyOff(noteEvent->getNote(), true);
+            this->processKeyOff(noteEvent->getNote(), true);
         event->accept();
     }
     else if (event->type() == QEvent::User + 1)
     {
+        // A controller value changed
         ControllerEvent *controllerEvent = dynamic_cast<ControllerEvent *>(event);
-        this->setController(controllerEvent->getNumController(), controllerEvent->getValue());
+        processControllerChanged(controllerEvent->getNumController(), controllerEvent->getValue(), true);
+        event->accept();
+    }
+    else if (event->type() == QEvent::User + 2)
+    {
+        // The pressure of a note changed
+        PolyPressureEvent *pressureEvent = dynamic_cast<PolyPressureEvent *>(event);
+        processPolyPressureChanged(pressureEvent->getNote(), pressureEvent->getPressure(), true);
+        event->accept();
+    }
+    else if (event->type() == QEvent::User + 3)
+    {
+        // The global pressure changed
+        MonoPressureEvent *pressureEvent = dynamic_cast<MonoPressureEvent *>(event);
+        processMonoPressureChanged(pressureEvent->getPressure(), true);
+        event->accept();
+    }
+    else if (event->type() == QEvent::User + 4)
+    {
+        // The bend changed
+        BendEvent *bendEvent = dynamic_cast<BendEvent *>(event);
+        processBendChanged(bendEvent->getValue(), true);
+        event->accept();
+    }
+    else if (event->type() == QEvent::User + 5)
+    {
+        // The program changed (no need for now)
+        //ProgramEvent *programEvent = dynamic_cast<ProgramEvent *>(event);
         event->accept();
     }
 }
 
-void MidiDevice::setController(int numController, int value)
+void MidiDevice::processControllerChanged(int numController, int value, bool syncControllerArea)
 {
     if (numController == 64)
     {
@@ -168,9 +215,7 @@ void MidiDevice::setController(int numController, int value)
         {
             // Release all keys that have been sustained
             while (_listKeysToRelease.size())
-            {
-                setKeyOff(_listKeysToRelease.takeFirst(), true);
-            }
+                processKeyOff(_listKeysToRelease.takeFirst(), true);
         }
     }
     else if (numController == 7)
@@ -179,9 +224,32 @@ void MidiDevice::setController(int numController, int value)
         double vol = (double)value / 127. * 101. - 50.5;
         _configuration->setValue(ConfManager::SECTION_SOUND_ENGINE, "gain", vol);
     }
+    else if (numController == 101 || numController == 100 || numController == 6 || numController == 38)
+    {
+        // RPN reception, store the messages since they are grouped by 4
+        // http://midi.teragonaudio.com/tech/midispec/rpn.htm
+        _rpnHistory << QPair<int, int>(numController, value);
+        if (_rpnHistory.size() > 4)
+            _rpnHistory.removeFirst();
+        if (numController == 38 && _rpnHistory.size() == 4)
+        {
+            // Bend sensitivity?
+            if (_rpnHistory[0].first == 101 && _rpnHistory[0].second == 0 && // B0 65 00
+                    _rpnHistory[1].first == 100 && _rpnHistory[1].second == 0 && // B0 64 00
+                    _rpnHistory[2].first == 6 && // B0 06 XX => semitones
+                    _rpnHistory[3].first == 38) // B0 38 YY => cents
+            {
+                double pitch = 0.01 * _rpnHistory[3].second + _rpnHistory[2].second;
+                processBendSensitivityChanged(pitch, syncControllerArea);
+            }
+        }
+    }
+
+    if (syncControllerArea)
+        _controllerArea->updateController(numController, value);
 }
 
-void MidiDevice::setKey(int key, int vel, bool syncKeyboard)
+void MidiDevice::processKeyOn(int key, int vel, bool syncKeyboard)
 {
     // Display the note on the keyboard
     if (_keyboard && syncKeyboard)
@@ -189,13 +257,13 @@ void MidiDevice::setKey(int key, int vel, bool syncKeyboard)
 
     // Possibly restart a note if the same key is already played
     if (_listKeysToRelease.contains(key))
-        setKeyOff(key);
+        processKeyOff(key);
 
     // Notify about a key being played
     emit(keyPlayed(key, vel));
 }
 
-void MidiDevice::setKeyOff(int key, bool syncKeyboard)
+void MidiDevice::processKeyOff(int key, bool syncKeyboard)
 {
     // Remove the note from the keyboard
     if (_keyboard && syncKeyboard)
@@ -222,20 +290,54 @@ void MidiDevice::setKeyOff(int key, bool syncKeyboard)
     }
 }
 
+void MidiDevice::processPolyPressureChanged(int key, int pressure, bool syncKeyboard)
+{
+    Q_UNUSED(syncKeyboard) // No synchronization with the keyboard
+    emit(polyPressureChanged(key, pressure));
+}
+
+void MidiDevice::processMonoPressureChanged(int value, bool syncControllerArea)
+{
+    emit(monoPressureChanged(value));
+    if (syncControllerArea)
+        _controllerArea->updateMonoPressure(value);
+}
+
+void MidiDevice::processBendChanged(int value, bool syncControllerArea)
+{
+    emit(bendChanged(value));
+    if (syncControllerArea)
+        _controllerArea->updateBend(value);
+}
+
+void MidiDevice::processBendSensitivityChanged(double semitones, bool syncControllerArea)
+{
+    emit(bendSensitivityChanged(semitones));
+    if (syncControllerArea)
+        _controllerArea->updateBendSensitivity(semitones);
+}
+
 void MidiDevice::setKeyboard(PianoKeybdCustom * keyboard)
 {
-    connect(keyboard, SIGNAL(noteOn(int,int)), this, SLOT(setKey(int,int)));
-    connect(keyboard, SIGNAL(noteOff(int)), this, SLOT(setKeyOff(int)));
+    connect(keyboard, SIGNAL(noteOn(int,int)), this, SLOT(processKeyOn(int,int)));
+    connect(keyboard, SIGNAL(noteOff(int)), this, SLOT(processKeyOff(int)));
     _keyboard = keyboard;
+}
+
+void MidiDevice::setControllerArea(ControllerArea * controllerArea)
+{
+    connect(controllerArea, SIGNAL(monoPressureChanged(int)), this, SLOT(processMonoPressureChanged(int)));
+    connect(controllerArea, SIGNAL(controllerChanged(int,int)), this, SLOT(processControllerChanged(int,int)));
+    connect(controllerArea, SIGNAL(bendChanged(int)), this, SLOT(processBendChanged(int)));
+    connect(controllerArea, SIGNAL(bendSensitivityChanged(double)), this, SLOT(processBendSensitivityChanged(double)));
+    _controllerArea = controllerArea;
 }
 
 void MidiDevice::stopAll()
 {
     // Release all keys sustained
     while (_listKeysToRelease.size())
-    {
-        setKeyOff(_listKeysToRelease.takeFirst(), true);
-    }
+        processKeyOff(_listKeysToRelease.takeFirst(), true);
 
     // Reset the keyboard
     _keyboard->clearCustomization();

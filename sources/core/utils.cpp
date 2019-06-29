@@ -24,7 +24,6 @@
 
 #include "utils.h"
 #include <QStringList>
-#include <QDebug>
 #include <QFile>
 #include "openssl/rsa.h"
 #include "openssl/pem.h"

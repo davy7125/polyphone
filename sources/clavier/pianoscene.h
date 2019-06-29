@@ -70,6 +70,7 @@ signals:
     void noteOn(int n, int v);
     void noteOff(int n);
     void mouseOver(int n, int v);
+    void polyPressureChanged(int n, int p);
 
 protected:
     void showKeyOn(PianoKey* key, int vel = -1, int channel = -1);

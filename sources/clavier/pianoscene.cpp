@@ -348,11 +348,19 @@ void PianoScene::mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent)
     {
         PianoKey* key = getKeyForPos(mouseEvent->scenePos());
         PianoKey* lastkey = getKeyForPos(mouseEvent->lastScenePos());
+
+        // Possibly release a previous key
         if (lastkey != nullptr && lastkey != key && lastkey->isPressed())
             keyOff(lastkey);
 
-        if (key != nullptr && !key->isPressed())
-            keyOn(key, getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
+        if (key != nullptr)
+        {
+            // Press on a new key or change the aftertouch pressure of an already pressed key
+            if (!key->isPressed())
+                keyOn(key, getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
+            else
+                polyPressureChanged(key->getNote(), getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
+        }
 
         mouseEvent->accept();
     }
@@ -501,8 +509,13 @@ bool PianoScene::event(QEvent *event)
 
             switch (touchPoint.state())
             {
-            case Qt::TouchPointStationary:
-                continue;
+            case Qt::TouchPointStationary: {
+                // Pressure changed maybe
+                PianoKey* key = getKeyForPos(touchPoint.scenePos());
+                if (key != nullptr && key->isPressed())
+                    polyPressureChanged(key->getNote(), 127 * touchPoint.pressure());
+                break;
+            }
             case Qt::TouchPointReleased: {
                 PianoKey* key = getKeyForPos(touchPoint.scenePos());
                 if (key != nullptr && key->isPressed())

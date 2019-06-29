@@ -249,7 +249,7 @@ void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
         int velocity = 127 - qRound(p.y());
         if (velocity > 0)
         {
-            ContextManager::midi()->setKey(key, velocity, true);
+            ContextManager::midi()->processKeyOn(key, velocity, true);
             _keyTriggered = key;
         }
     }
@@ -300,7 +300,7 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
     {
         if (_keyTriggered != -1)
         {
-            ContextManager::midi()->setKeyOff(_keyTriggered, true);
+            ContextManager::midi()->processKeyOff(_keyTriggered, true);
             _keyTriggered = -1;
         }
     }

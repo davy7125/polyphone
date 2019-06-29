@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>105</height>
+    <width>573</width>
+    <height>203</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
     <number>0</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>6</number>
    </property>
    <property name="rightMargin">
     <number>0</number>
@@ -30,13 +30,39 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <property name="spacing">
+   <property name="horizontalSpacing">
     <number>0</number>
    </property>
+   <property name="verticalSpacing">
+    <number>6</number>
+   </property>
    <item row="0" column="0">
-    <widget class="PianoKeybdCustom" name="keyboard" native="true"/>
+    <layout class="QVBoxLayout" name="topLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>6</number>
+     </property>
+     <property name="rightMargin">
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="PianoKeybdCustom" name="keyboard" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="ControllerArea" name="controllerArea" native="true"/>
+     </item>
+    </layout>
    </item>
-   <item row="1" column="0">
+   <item row="2" column="0">
     <widget class="QFrame" name="frameBottom">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
@@ -64,13 +90,13 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <property name="leftMargin">
-       <number>3</number>
+       <number>0</number>
       </property>
       <property name="topMargin">
        <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>3</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
        <number>0</number>
@@ -164,6 +190,45 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Aftertouch</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelAftertouch">
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushExpand">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -174,6 +239,12 @@
    <class>PianoKeybdCustom</class>
    <extends>QWidget</extends>
    <header>pianokeybdcustom.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ControllerArea</class>
+   <extends>QWidget</extends>
+   <header>controllerarea.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
