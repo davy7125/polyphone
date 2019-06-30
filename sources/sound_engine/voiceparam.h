@@ -34,7 +34,9 @@ class VoiceParam
 public:
     VoiceParam(SoundfontManager * sf2, EltID id, VoiceParam * voiceParamTmp = nullptr);
     ~VoiceParam() {}
+
     double getPitchDifference(int note);
+
     // Liste des paramètres de lecture (libre accès)
     // PITCH
     qint32 fineTune, coarseTune, keynum, scaleTune;

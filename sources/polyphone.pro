@@ -324,7 +324,6 @@ SOURCES	+= main.cpp \
     editor/tools/transpose_smpl/tooltransposesmpl_parameters.cpp \
     editor/tools/transpose_smpl/tooltransposesmpl_gui.cpp \
     context/interface/configpanel.cpp \
-    sound_engine/midilistener.cpp \
     dialogs/dialogkeyboard.cpp \
     dialogs/dialogrecorder.cpp \
     editor/tools/link_sample/toollinksample.cpp \
@@ -433,7 +432,8 @@ SOURCES	+= main.cpp \
     editor/modulator/modulatorcombocurve.cpp \
     editor/modulator/modulatorcombodest.cpp \
     editor/modulator/modulatorcombosrc.cpp \
-    clavier/controllerarea.cpp
+    clavier/controllerarea.cpp \
+    clavier/combocc.cpp
 
 HEADERS  += \
     core/sample/infosound.h \
@@ -603,7 +603,6 @@ HEADERS  += \
     editor/tools/transpose_smpl/tooltransposesmpl_parameters.h \
     editor/tools/transpose_smpl/tooltransposesmpl_gui.h \
     context/interface/configpanel.h \
-    sound_engine/midilistener.h \
     dialogs/dialogkeyboard.h \
     dialogs/dialogrecorder.h \
     context/controllerevent.h \
@@ -720,7 +719,8 @@ HEADERS  += \
     context/monopressureevent.h \
     context/bendevent.h \
     context/programevent.h \
-    clavier/controllerarea.h
+    clavier/controllerarea.h \
+    clavier/combocc.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

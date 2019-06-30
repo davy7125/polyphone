@@ -42,13 +42,14 @@ public:
     // Load value
     void loadValue();
 
+    static QString getIndexName(quint16 iVal, bool CC);
+
 private slots:
     void onCurrentIndexChanged(int index);
 
 private:
     QList<int> getAssociatedMods(EltID id);
     void setLink(bool enabled, QString text);
-    static QString getIndexName(quint16 iVal, bool CC);
     int getIndex();
     bool isCC();
 

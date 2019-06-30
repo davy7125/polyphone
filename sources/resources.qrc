@@ -84,6 +84,7 @@
         <file alias="download_progress.svg">resources/download_progress.svg</file>
         <file alias="canceled.svg">resources/canceled.svg</file>
         <file alias="clone.svg">resources/clone.svg</file>
+        <file alias="led.svg">resources/led.svg</file>
     </qresource>
     <qresource prefix="/translations">
         <file>resources/translations/polyphone_cs.qm</file>

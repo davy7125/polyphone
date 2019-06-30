@@ -2,6 +2,7 @@
 #define CONTROLLERAREA_H
 
 #include <QWidget>
+class QComboBox;
 
 namespace Ui {
 class ControllerArea;
@@ -38,9 +39,15 @@ private slots:
     void on_knob1_valueChanged(int value);
     void on_knob2_valueChanged(int value);
     void on_knob3_valueChanged(int value);
+    void on_push4_clicked();
 
 private:
+    void updateInput4Display();
+
     Ui::ControllerArea *ui;
+    QPixmap _ledOn;
+    QPixmap _ledOff;
+    bool _ledState;
 };
 
 #endif // CONTROLLERAREA_H

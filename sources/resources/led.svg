@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg height="50.000000px" width="50.000000px" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientTransform="matrix(24.16238,0.000000,0.000000,18.68556,-538.2464,-790.0387)" gradientUnits="userSpaceOnUse" id="linearGradient1336" x1="23.410463" x2="23.393822" y1="44.485516" y2="43.026684">
+      <stop id="stop6508" offset="0.0000000" style="stop-color:#ffffff;stop-opacity:0.0000000;"/>
+      <stop id="stop6510" offset="1.0000000" style="stop-color:#ffffff;stop-opacity:0.87450981;"/>
+    </linearGradient>
+    <linearGradient gradientTransform="matrix(30.28350,0.000000,0.000000,30.28350,-680.9062,-1286.161)" gradientUnits="userSpaceOnUse" id="linearGradient1339" x1="23.213980" x2="23.201290" y1="42.754631" y2="43.892632">
+      <stop id="stop7502" offset="0.0000000" style="stop-color:color1;stop-opacity:1.0000000;"/>
+      <stop id="stop7504" offset="1.0000000" style="stop-color:color2;stop-opacity:1.0000000;"/>
+    </linearGradient>
+    <linearGradient gradientTransform="matrix(33.82731,0.000000,0.000000,33.82731,-763.5122,-1439.594)" gradientUnits="userSpaceOnUse" id="linearGradient1342" x1="23.349695" x2="23.440580" y1="42.767944" y2="43.710873">
+      <stop id="stop5758" offset="0.0000000" style="stop-color:border1;stop-opacity:1.0000000;"/>
+      <stop id="stop5760" offset="1.0000000" style="stop-color:border2;stop-opacity:0.35294119;"/>
+    </linearGradient>
+  </defs>
+    <g style="stroke:none">
+      <path
+     d="M 45.175583,25.000115 C 45.175583,36.137046 36.136926,45.175703 24.999994,45.175703 C 13.863063,45.175703 4.8244057,36.137046 4.8244057,25.000115 C 4.8244057,13.863183 13.863063,4.8244920 24.999994,4.8244920 C 36.136926,4.8244920 45.175583,13.863183 45.175583,25.000115 z"
+     style="fill:url(#linearGradient1342)"/>
+    <path d="M 43.061992,24.999594 C 43.061992,34.969800 34.970241,43.061551 25.000035,43.061551 C 15.029828,43.061551 6.9380772,34.969800 6.9380772,24.999594 C 6.9380772,15.029387 15.029828,6.9376059 25.000035,6.9376059 C 34.970241,6.9376059 43.061992,15.029387 43.061992,24.999594 z"
+      style="fill:url(#linearGradient1339)"/>
+    <path d="M 39.388106,18.975118 C 39.388106,25.126946 32.931918,30.119727 24.976962,30.119727 C 17.022006,30.119727 10.565818,25.126946 10.565818,18.975118 C 10.565818,12.823289 17.022006,7.8304891 24.976962,7.8304891 C 32.931918,7.8304891 39.388106,12.823289 39.388106,18.975118 z"
+      style="fill:url(#linearGradient1336)"/>
+    </g>
+</svg>

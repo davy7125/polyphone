@@ -22,19 +22,31 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef MIDILISTENER_H
-#define MIDILISTENER_H
+#ifndef COMBOCC_H
+#define COMBOCC_H
 
-#include <QAbstractItemModel>
+#include <QComboBox>
 
-class MidiListener : public QObject
+
+class ComboCC : public QComboBox
 {
     Q_OBJECT
 
 public:
-    MidiListener();
+    ComboCC(QWidget * parent = nullptr);
+    ~ComboCC();
+
+    void selectCC(int number);
+    int getCurrentCC();
+
+private slots:
+    void onCurrentIndexChanged(int index);
 
 private:
+    void updateEnableState();
+
+    static QMap<ComboCC *, int> s_exclusions;
+    QMap<int, int> _controllerToIndex;
 };
 
-#endif // MIDILISTENER_H
+#endif // COMBOCC_H

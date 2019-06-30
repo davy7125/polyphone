@@ -93,6 +93,9 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
     _controllerArea(nullptr),
     _configuration(configuration),
     _synth(synth),
+    _bendValue(-1),
+    _bendSensitivityValue(-1.0),
+    _monoPressureValue(-1),
     _isSustainOn(false)
 {
     // Connexion midi
@@ -207,6 +210,10 @@ void MidiDevice::customEvent(QEvent * event)
 
 void MidiDevice::processControllerChanged(int numController, int value, bool syncControllerArea)
 {
+    _mutexValues.lock();
+    _controllerValues[numController] = value;
+    _mutexValues.unlock();
+
     if (numController == 64)
     {
         // Sustain pedal
@@ -298,6 +305,10 @@ void MidiDevice::processPolyPressureChanged(int key, int pressure, bool syncKeyb
 
 void MidiDevice::processMonoPressureChanged(int value, bool syncControllerArea)
 {
+    _mutexValues.lock();
+    _monoPressureValue = value;
+    _mutexValues.unlock();
+
     emit(monoPressureChanged(value));
     if (syncControllerArea)
         _controllerArea->updateMonoPressure(value);
@@ -305,6 +316,10 @@ void MidiDevice::processMonoPressureChanged(int value, bool syncControllerArea)
 
 void MidiDevice::processBendChanged(int value, bool syncControllerArea)
 {
+    _mutexValues.lock();
+    _bendValue = value;
+    _mutexValues.unlock();
+
     emit(bendChanged(value));
     if (syncControllerArea)
         _controllerArea->updateBend(value);
@@ -312,6 +327,10 @@ void MidiDevice::processBendChanged(int value, bool syncControllerArea)
 
 void MidiDevice::processBendSensitivityChanged(double semitones, bool syncControllerArea)
 {
+    _mutexValues.lock();
+    _bendSensitivityValue = semitones;
+    _mutexValues.unlock();
+
     emit(bendSensitivityChanged(semitones));
     if (syncControllerArea)
         _controllerArea->updateBendSensitivity(semitones);
@@ -344,4 +363,36 @@ void MidiDevice::stopAll()
 
     // Stop all voices
     _synth->stop();
+}
+
+int MidiDevice::getControllerValue(int controllerNumber)
+{
+    _mutexValues.lock();
+    int result = _controllerValues.contains(controllerNumber) ? _controllerValues[controllerNumber] : -1;
+    _mutexValues.unlock();
+    return result;
+}
+
+int MidiDevice::getBendValue()
+{
+    _mutexValues.lock();
+    int result = _bendValue;
+    _mutexValues.unlock();
+    return result;
+}
+
+double MidiDevice::getBendSensitivityValue()
+{
+    _mutexValues.lock();
+    double result = _bendSensitivityValue;
+    _mutexValues.unlock();
+    return result;
+}
+
+int MidiDevice::getMonoPressure()
+{
+    _mutexValues.lock();
+    int result = _monoPressureValue;
+    _mutexValues.unlock();
+    return result;
 }

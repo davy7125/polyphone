@@ -28,6 +28,8 @@
 #include <QString>
 #include <QStringList>
 #include <QObject>
+#include <QMap>
+#include <QMutex>
 class ConfManager;
 class RtMidiIn;
 class PianoKeybdCustom;
@@ -56,6 +58,12 @@ public:
     // Stop all keys
     void stopAll();
 
+    // Get last values (-1 if not received yet)
+    int getControllerValue(int controllerNumber);
+    int getBendValue();
+    double getBendSensitivityValue();
+    int getMonoPressure();
+
 public slots:
     void processKeyOn(int key, int vel, bool syncKeyboard = false);
     void processKeyOff(int key, bool syncKeyboard = false);
@@ -83,6 +91,13 @@ private:
     RtMidiIn * _midiin;
     Synth * _synth;
     QList<QPair<int, int> > _rpnHistory;
+
+    // Last values
+    QMutex _mutexValues;
+    QMap<int, int> _controllerValues;
+    int _bendValue;
+    double _bendSensitivityValue;
+    int _monoPressureValue;
 
     // Sustain pedal
     QList<int> _listKeysToRelease;

@@ -112,7 +112,7 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
 {
     if (velocity == 0)
     {
-        // Relachement d'une note
+        // Release of a key
         SoundEngine::releaseNote(note);
         return;
     }
