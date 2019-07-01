@@ -435,7 +435,16 @@ SOURCES	+= main.cpp \
     editor/modulator/modulatorcombodest.cpp \
     editor/modulator/modulatorcombosrc.cpp \
     clavier/controllerarea.cpp \
-    clavier/combocc.cpp
+    clavier/combocc.cpp \
+    lib/iir/Biquad.cpp \
+    lib/iir/Butterworth.cpp \
+    lib/iir/Cascade.cpp \
+    lib/iir/ChebyshevI.cpp \
+    lib/iir/ChebyshevII.cpp \
+    lib/iir/Custom.cpp \
+    lib/iir/PoleFilter.cpp \
+    lib/iir/RBJ.cpp \
+    lib/iir/State.cpp
 
 HEADERS  += \
     core/sample/infosound.h \
@@ -724,7 +733,21 @@ HEADERS  += \
     context/bendevent.h \
     context/programevent.h \
     clavier/controllerarea.h \
-    clavier/combocc.h
+    clavier/combocc.h \
+    lib/Iir_2.h \
+    lib/iir/Biquad.h \
+    lib/iir/Butterworth.h \
+    lib/iir/Cascade.h \
+    lib/iir/ChebyshevI.h \
+    lib/iir/ChebyshevII.h \
+    lib/iir/Common.h \
+    lib/iir/Custom.h \
+    lib/iir/Layout.h \
+    lib/iir/MathSupplement.h \
+    lib/iir/PoleFilter.h \
+    lib/iir/RBJ.h \
+    lib/iir/State.h \
+    lib/iir/Types.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

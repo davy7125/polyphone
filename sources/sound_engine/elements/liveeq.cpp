@@ -24,40 +24,88 @@
 ***************************************************************************/
 
 #include "liveeq.h"
+#include <qmath.h>
 
 LiveEQ::LiveEQ() :
     _isOn(false)
 {
-
+    _coeff.resize(10);
 }
 
 void LiveEQ::setSampleRate(quint32 sampleRate)
 {
     _sampleRate = sampleRate;
+
+    // Prepare 10 pass bands per channel
+    _passBandsR.resize(10);
+    _passBandsR[0].setup(_sampleRate, 32, 2*12);
+    _passBandsR[1].setup(_sampleRate, 64, 2*20);
+    _passBandsR[2].setup(_sampleRate, 125, 2*41);
+    _passBandsR[3].setup(_sampleRate, 250, 2*84);
+    _passBandsR[4].setup(_sampleRate, 500, 2*166);
+    _passBandsR[5].setup(_sampleRate, 1000, 2*334);
+    _passBandsR[6].setup(_sampleRate, 2000, 2*666);
+    _passBandsR[7].setup(_sampleRate, 4000, 2*1334);
+    _passBandsR[8].setup(_sampleRate, 8000, 2*2666);
+    _passBandsR[9].setup(_sampleRate, 16000, 2*5334);
+
+    _passBandsL.resize(10);
+    _passBandsL[0].setup(_sampleRate, 32, 2*12);
+    _passBandsL[1].setup(_sampleRate, 64, 2*20);
+    _passBandsL[2].setup(_sampleRate, 125, 2*41);
+    _passBandsL[3].setup(_sampleRate, 250, 2*84);
+    _passBandsL[4].setup(_sampleRate, 500, 2*166);
+    _passBandsL[5].setup(_sampleRate, 1000, 2*334);
+    _passBandsL[6].setup(_sampleRate, 2000, 2*666);
+    _passBandsL[7].setup(_sampleRate, 4000, 2*1334);
+    _passBandsL[8].setup(_sampleRate, 8000, 2*2666);
+    _passBandsL[9].setup(_sampleRate, 16000, 2*5334);
 }
 
 void LiveEQ::on()
 {
-    // Reset the state
-    //TODO
-
+    _mutex.lock();
     _isOn = true;
+    _mutex.unlock();
 }
 
 void LiveEQ::off()
 {
+    _mutex.lock();
     _isOn = false;
+    _mutex.unlock();
 }
 
 void LiveEQ::setValues(QVector<int> values)
 {
-
+    _mutex.lock();
+    for (int i = 0; i < 10; i++)
+        _coeff[i] = qPow(10.0, 0.1 * values[i]);
+    _mutex.unlock();
 }
 
 void LiveEQ::filterData(float * dataR, float * dataL, quint32 len)
 {
-    if (!_isOn)
-        return;
+    _mutex.lock();
 
-    //TODO
+    if (!_isOn)
+    {
+        _mutex.unlock();
+        return;
+    }
+
+    // Filter
+    for (quint32 i = 0; i < len; i++)
+    {
+        float fTmp = 0;
+        for (int j = 0; j < 10; j++)
+            fTmp += _coeff[j] * _passBandsR[j].filter(dataR[i]);
+        dataR[i] = fTmp;
+
+        fTmp = 0;
+        for (int j = 0; j < 10; j++)
+            fTmp += _coeff[j] * _passBandsL[j].filter(dataL[i]);
+        dataL[i] = fTmp;
+    }
+    _mutex.unlock();
 }

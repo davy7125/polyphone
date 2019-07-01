@@ -27,6 +27,8 @@
 #define LIVEEQ_H
 
 #include <QVector>
+#include <QMutex>
+#include "lib/Iir_2.h"
 
 class LiveEQ
 {
@@ -47,6 +49,10 @@ public:
 private:
     quint32 _sampleRate;
     bool _isOn;
+    QVector<Iir::Butterworth::BandPass<4>  > _passBandsR;
+    QVector<Iir::Butterworth::BandPass<4>  > _passBandsL;
+    QVector<double> _coeff;
+    QMutex _mutex;
 };
 
 #endif // LIVEEQ_H
