@@ -38,7 +38,7 @@ class PageSmpl : public Page
     Q_OBJECT
 
 public:
-    explicit PageSmpl(QWidget * parent = 0);
+    explicit PageSmpl(QWidget * parent = nullptr);
     ~PageSmpl();
 
     void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
@@ -83,11 +83,10 @@ private slots:
 
 private:
     Ui::PageSmpl *ui;
-    bool lectureEnCours;
+    bool _playingSmpl;
     int preventStop;
-    IdList _currentIds;
 
-    // Méthodes privées
+    void updatePlayButton();
     void setRateElt(EltID id, quint32 echFinal);
     EltID getRepercussionID(EltID id);
     void autoTune(EltID id, int &pitch, int &correction);

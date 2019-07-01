@@ -39,7 +39,7 @@
 PageSmpl::PageSmpl(QWidget *parent) :
     Page(parent, PAGE_SMPL, "page:smpl"),
     ui(new Ui::PageSmpl),
-    lectureEnCours(false),
+    _playingSmpl(false),
     preventStop(0)
 {
     ui->setupUi(this);
@@ -54,6 +54,10 @@ PageSmpl::PageSmpl(QWidget *parent) :
                                    ";border:0;padding:0px 5px}" +
                                    "QPushButton:hover{color:" + resetHoverColor + "}");
     ui->frameGraph->setStyleSheet("QFrame{border:0; border-bottom: 1px solid " + this->palette().dark().color().name() + "}");
+    ui->framePlayArea->setStyleSheet(".QFrame{background-color: " +
+                                     ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() +
+                                     ";color: " + ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name() +
+                                     ";border: 1px solid " + this->palette().dark().color().name() + ";border-radius: 3px;}");
 
     // Initialisation du graphique
     ui->graphe->linkSliderX(ui->sliderGraphe);
@@ -259,7 +263,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     }
     ui->comboLink->model()->sort(0);
     ui->comboLink->insertItem(0, "-");
-    ui->comboLink->setEnabled(nombreElements == 1 && !lectureEnCours);
+    ui->comboLink->setEnabled(nombreElements == 1 && !_playingSmpl);
 
     // Types possibles et sélections
     ui->comboType->addItem(trUtf8("mono", "opposite to stereo"));
@@ -299,7 +303,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
 
         ui->checkLectureLien->setEnabled(nombreElements == 1);
     }
-    ui->comboType->setEnabled(nombreElements == 1 && !lectureEnCours);
+    ui->comboType->setEnabled(nombreElements == 1 && !_playingSmpl);
 
     // Instruments that use the sample
     if (nombreElements > 1)
@@ -319,16 +323,14 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
             ui->labelLinkedTo->setText(trUtf8("Sample linked to instruments:"));
     }
 
-    if (!ui->pushLecture->isChecked())
-        ui->pushLecture->setText(trUtf8("Play"));
-
     // Reprise de la lecture
-    if (this->lectureEnCours)
+    if (this->_playingSmpl)
     {
         ui->pushLecture->setChecked(true);
         this->lecture();
         preventStop++;
     }
+    updatePlayButton();
 
     return true;
 }
@@ -997,8 +999,6 @@ void PageSmpl::lecture()
 {
     if (ui->pushLecture->isChecked())
     {
-        ui->pushLecture->setText(trUtf8("Stop"));
-
         QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
         if (listID.count() == 1)
             _synth->play(0, listID[0].indexSf2, listID[0].indexElt, -1, 127);
@@ -1020,15 +1020,15 @@ void PageSmpl::lecture()
         ui->pushEgaliser->setEnabled(false);
         ui->pushEgalRestore->setEnabled(false);
 
-        this->lectureEnCours = true;
+        this->_playingSmpl = true;
     }
     else
     {
-        ui->pushLecture->setText(trUtf8("Play"));
-        this->lectureEnCours = false;
+        this->_playingSmpl = false;
         _synth->play(0, 0, 0, -1, 0);
     }
 
+    updatePlayButton();
     updateSinus();
 }
 
@@ -1062,11 +1062,11 @@ void PageSmpl::lecteurFinished()
     {
         ui->pushLecture->blockSignals(true);
         ui->pushLecture->setChecked(false);
-        ui->pushLecture->setText(trUtf8("Play"));
         ui->pushLecture->blockSignals(false);
         updateSinus();
     }
-    this->lectureEnCours = false;
+    _playingSmpl = false;
+    updatePlayButton();
 }
 
 void PageSmpl::on_checkLectureBoucle_stateChanged(int arg1)
@@ -1239,4 +1239,20 @@ void PageSmpl::onShow()
     }
     else
         ContextManager::midi()->keyboard()->addRangeAndRootKey(-1, 0, 127);
+}
+
+void PageSmpl::updatePlayButton()
+{
+    if (_playingSmpl)
+    {
+        ui->pushLecture->setToolTip(trUtf8("Stop"));
+        ui->pushLecture->setIcon(ContextManager::theme()->getColoredSvg(
+                                     ":/icons/play.svg", QSize(36, 36), ThemeManager::HIGHLIGHTED_BACKGROUND));
+    }
+    else
+    {
+        ui->pushLecture->setToolTip(trUtf8("Play"));
+        ui->pushLecture->setIcon(ContextManager::theme()->getColoredSvg(
+                                     ":/icons/play.svg", QSize(36, 36), ThemeManager::WINDOW_TEXT));
+    }
 }
