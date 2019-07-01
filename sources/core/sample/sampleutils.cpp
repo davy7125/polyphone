@@ -309,9 +309,11 @@ QByteArray SampleUtils::EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, 
                          int i6, int i7, int i8, int i9, int i10)
 {
     unsigned long size;
+
     // Conversion de baData en complexes
     Complex * cpxData;
     cpxData = fromBaToComplex(baData, wBps, size);
+
     // Calculer la fft du signal
     Complex * fc_sortie_fft = FFT(cpxData, size);
     delete [] cpxData;
@@ -325,12 +327,15 @@ QByteArray SampleUtils::EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, 
         fc_sortie_fft[i] *= gain;
         fc_sortie_fft[size-1-i] *= gain;
     }
+
     // Calculer l'ifft du signal
     cpxData = IFFT(fc_sortie_fft, size);
     delete [] fc_sortie_fft;
+
     // Prise en compte du facteur d'echelle
     for (unsigned long i = 0; i < size; i++)
         cpxData[i].real(cpxData[i].real() / size);
+
     // Retour en QByteArray
     QByteArray baRet;
     baRet = fromComplexToBa(cpxData, baData.size() * 8 / wBps, wBps);

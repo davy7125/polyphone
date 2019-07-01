@@ -214,6 +214,7 @@ SOURCES	+= main.cpp \
     editor/overview/pageoverviewinst.cpp \
     editor/overview/pageoverviewprst.cpp \
     editor/overview/tablepageoverview.cpp \
+    editor/widgets/equalizer.cpp \
     editor/widgets/tablewidget.cpp \
     editor/widgets/tabledelegate.cpp \
     editor/widgets/spinboxkey.cpp \
@@ -225,6 +226,7 @@ SOURCES	+= main.cpp \
     clavier/pianokeybd.cpp \
     clavier/pianokeybdcustom.cpp \
     clavier/keyboardmap.cpp \
+    sound_engine/elements/liveeq.cpp \
     sound_engine/synth.cpp \
     sound_engine/voice.cpp \
     sound_engine/circularbuffer.cpp \
@@ -487,6 +489,7 @@ HEADERS  += \
     editor/overview/pageoverviewinst.h \
     editor/overview/pageoverviewprst.h \
     editor/overview/tablepageoverview.h \
+    editor/widgets/equalizer.h \
     editor/widgets/tablewidget.h \
     editor/widgets/tabledelegate.h \
     editor/widgets/spinboxkey.h \
@@ -499,6 +502,7 @@ HEADERS  += \
     clavier/pianokeybd.h \
     clavier/pianokeybdcustom.h \
     clavier/keyboardmap.h \
+    sound_engine/elements/liveeq.h \
     sound_engine/synth.h \
     sound_engine/voice.h \
     sound_engine/circularbuffer.h \
@@ -730,6 +734,7 @@ FORMS    += \
     dialogs/dialogchangelog.ui \
     editor/envelopeditor.ui \
     editor/overview/pageoverview.ui \
+    editor/widgets/equalizer.ui \
     mainwindow/widgetshowhistory.ui \
     mainwindow/widgetshowhistorycell.ui \
     mainwindow/mainwindow.ui \

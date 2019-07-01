@@ -2,6 +2,7 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2019 Davy Triponney                                **
+**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,73 +23,41 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_SMPL_H
-#define PAGE_SMPL_H
+#include "liveeq.h"
 
-#include <QWidget>
-#include "page.h"
-
-namespace Ui
+LiveEQ::LiveEQ() :
+    _isOn(false)
 {
-    class PageSmpl;
+
 }
 
-class PageSmpl : public Page
+void LiveEQ::setSampleRate(quint32 sampleRate)
 {
-    Q_OBJECT
+    _sampleRate = sampleRate;
+}
 
-public:
-    explicit PageSmpl(QWidget * parent = nullptr);
-    ~PageSmpl() override;
+void LiveEQ::on()
+{
+    // Reset the state
+    //TODO
 
-    void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
-    static EltID getRepercussionID(EltID id);
+    _isOn = true;
+}
 
-public slots:
-    // When the key "space" is pressed in the tree
-    void onSampleOnOff();
+void LiveEQ::off()
+{
+    _isOn = false;
+}
 
-protected:
-    // Update the interface
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
+void LiveEQ::setValues(QVector<int> values)
+{
 
-    // Refresh things after a page is shown
-    void onShow() override;
+}
 
-    // Reaction when a key is played
-    void keyPlayedInternal(int key, int velocity) override;
+void LiveEQ::filterData(float * dataR, float * dataL, quint32 len)
+{
+    if (!_isOn)
+        return;
 
-private slots:
-    void lecture();
-    void lecteurFinished();
-    void setStartLoop();
-    void setStartLoop(int val);
-    void setEndLoop();
-    void setEndLoop(int val);
-    void on_pushFullLength_clicked();
-    void setRootKey();
-    void setRootKey(int val);
-    void setTune();
-    void setTune(int val);
-    void setType(int index);
-    void setLinkedSmpl(int index);
-    void setRate(int index);
-    void on_checkLectureBoucle_stateChanged(int arg1);
-    void setSinusEnabled(bool val);
-    void setGainSample(int val);
-    void setStereo(bool val);
-    void on_pushAutoTune_clicked();
-    void onLinkClicked(EltID id);
-
-private:
-    Ui::PageSmpl *ui;
-    bool _playingSmpl;
-    int preventStop;
-
-    void updatePlayButton();
-    void setRateElt(EltID id, quint32 echFinal);
-    void autoTune(EltID id, int &pitch, int &correction);
-    void updateSinus();
-};
-
-#endif // PAGE_SMPL_H
+    //TODO
+}

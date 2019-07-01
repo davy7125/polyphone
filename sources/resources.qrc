@@ -86,6 +86,8 @@
         <file alias="clone.svg">resources/clone.svg</file>
         <file alias="led.svg">resources/led.svg</file>
         <file alias="play.svg">resources/play.svg</file>
+        <file alias="check.svg">resources/check.svg</file>
+        <file alias="reset_eq.svg">resources/reset_eq.svg</file>
     </qresource>
     <qresource prefix="/translations">
         <file>resources/translations/polyphone_cs.qm</file>

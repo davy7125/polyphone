@@ -29,6 +29,7 @@
 #include "soundengine.h"
 #include "audiodevice.h"
 #include "calibrationsinus.h"
+#include "liveeq.h"
 #include <QDataStream>
 class SoundfontManager;
 class ConfManager;
@@ -56,6 +57,8 @@ public:
     void setLoopEnabled(bool isEnabled);
     void setSinus(bool isOn, int rootKey);
     void setPitchCorrection(int correction, bool repercute);
+    void activateSmplEq(bool isActivated);
+    void setSmplEqValues(QVector<int> values);
 
     // Record
     void startNewRecord(QString fileName);
@@ -123,6 +126,7 @@ private:
     }
 
     CalibrationSinus _sinus;
+    LiveEQ _eq;
 
     // Pointeur vers les données
     SoundfontManager * _sf2;

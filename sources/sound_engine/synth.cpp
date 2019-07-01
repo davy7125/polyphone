@@ -399,6 +399,19 @@ void Synth::setPitchCorrection(int correction, bool repercute)
     SoundEngine::setPitchCorrection(correction, repercute);
 }
 
+void Synth::activateSmplEq(bool isActivated)
+{
+    if (isActivated)
+        _eq.on();
+    else
+        _eq.off();
+}
+
+void Synth::setSmplEqValues(QVector<int> values)
+{
+    _eq.setValues(values);
+}
+
 void Synth::setFormat(AudioFormat format)
 {
     // Mutex inutile : pas de génération de données lors de l'appel à setFormat
@@ -409,6 +422,7 @@ void Synth::setFormat(AudioFormat format)
 
     // Mise à jour échantillonnage
     _sinus.setSampleRate(format.sampleRate());
+    _eq.setSampleRate(format.sampleRate());
     this->sampleRateChanged(format.sampleRate());
 }
 
@@ -507,6 +521,9 @@ void Synth::readData(float *data1, float *data2, quint32 maxlen)
     for (int i = 0; i < _soundEngines.size(); i++)
         _soundEngines.at(i)->addData(data1, data2, _fTmpSumRev1, _fTmpSumRev2, maxlen);
     _mutexSynchro.unlock();
+
+    // EQ filter (live preview of filtered samples)
+    _eq.filterData(data1, data2, maxlen);
 
     // Application réverbération et addition
     _mutexReverb.lock();

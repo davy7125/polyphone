@@ -63,16 +63,13 @@ PageSmpl::PageSmpl(QWidget *parent) :
     ui->graphe->linkSliderX(ui->sliderGraphe);
     ui->graphe->linkSpinBoxes(ui->spinStartLoop, ui->spinEndLoop);
 
-    // Connexions
+    // Connections
     ui->graphe->connect(_synth, SIGNAL(currentPosChanged(quint32)), SLOT(setCurrentSample(quint32)));
     this->connect(_synth, SIGNAL(readFinished()), SLOT(lecteurFinished()));
     connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
 
     // Couleur de fond du graphe Fourier
     ui->grapheFourier->setBackgroundColor(this->palette().background().color());
-
-    // Initialize EQ
-    loadEQ();
 
     // Adaptation petits écrans
     if (QApplication::desktop()->width() <= 800)
@@ -82,39 +79,11 @@ PageSmpl::PageSmpl(QWidget *parent) :
         fontBold.setBold(true);
         tabWidget->setFont(fontBold);
         fontBold.setBold(false);
-        QFont font = fontBold;
-        ui->label->setFont(font);
-        ui->label_2->setFont(font);
-        ui->label_3->setFont(font);
-        ui->label_4->setFont(font);
-        ui->label_5->setFont(font);
-        ui->label_6->setFont(font);
-        ui->label_7->setFont(font);
-        ui->label_8->setFont(font);
-        ui->label_9->setFont(font);
-        ui->label_10->setFont(font);
-        ui->label_11->setFont(font);
-        ui->label_12->setFont(font);
-        ui->label_13->setFont(font);
-        ui->label_14->setFont(font);
-        ui->label_15->setFont(font);
-        ui->label_16->setFont(font);
-        ui->label_17->setFont(font);
-        ui->labelTaille->setFont(font);
-        ui->comboLink->setFont(font);
-        ui->comboSampleRate->setFont(font);
-        ui->comboType->setFont(font);
-        ui->spinEndLoop->setFont(font);
-        ui->spinRootKey->setFont(font);
-        ui->spinStartLoop->setFont(font);
-        ui->spinTune->setFont(font);
-        ui->pushEgaliser->setFont(font);
-        ui->pushEgalRestore->setFont(font);
         tabWidget->addTab(ui->frameLeft, trUtf8("Information"));
         tabWidget->addTab(ui->frameRight, trUtf8("Equalizer (±15 dB)"));
         delete ui->label_20;
         delete ui->label_21;
-        QGridLayout * layout = (QGridLayout *) ui->frame_5->layout();
+        QGridLayout * layout = dynamic_cast<QGridLayout *>(ui->frame_5->layout());
         layout->addWidget(tabWidget, 0, 0, 0, 1);
     }
 }
@@ -135,7 +104,8 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     if (!selectedIds.isElementUnique(elementSf2))
         return false;
     _currentIds = selectedIds;
-    QList<EltID> ids = _currentIds.getSelectedIds(elementSmpl);
+    IdList ids = _currentIds.getSelectedIds(elementSmpl);
+    ui->widgetEqualizer->setCurrentIds(ids);
     int nombreElements = ids.size();
 
     EltID id = ids.takeFirst();
@@ -913,112 +883,22 @@ EltID PageSmpl::getRepercussionID(EltID id)
     return id2;
 }
 
-void PageSmpl::applyEQ()
-{
-    if (_preparingPage)
-        return;
-    saveEQ();
-
-    if (ui->verticalSlider_1->value() == 0 &&
-            ui->verticalSlider_2->value() == 0 &&
-            ui->verticalSlider_3->value() == 0 &&
-            ui->verticalSlider_4->value() == 0 &&
-            ui->verticalSlider_5->value() == 0 &&
-            ui->verticalSlider_6->value() == 0 &&
-            ui->verticalSlider_7->value() == 0 &&
-            ui->verticalSlider_8->value() == 0 &&
-            ui->verticalSlider_9->value() == 0 &&
-            ui->verticalSlider_10->value() == 0)
-        return;
-
-    // Soundfont editing
-    QList<EltID> listprocessedID;
-    QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
-    foreach (EltID id, listID)
-    {
-        if (_sf2->isValid(id) && !listprocessedID.contains(id))
-        {
-            listprocessedID << id;
-            QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
-            baData = SampleUtils::EQ(baData, _sf2->get(id, champ_dwSampleRate).dwValue, 24,
-                               ui->verticalSlider_1->value(),
-                               ui->verticalSlider_2->value(),
-                               ui->verticalSlider_3->value(),
-                               ui->verticalSlider_4->value(),
-                               ui->verticalSlider_5->value(),
-                               ui->verticalSlider_6->value(),
-                               ui->verticalSlider_7->value(),
-                               ui->verticalSlider_8->value(),
-                               ui->verticalSlider_9->value(),
-                               ui->verticalSlider_10->value());
-            _sf2->set(id, champ_sampleDataFull24, baData);
-
-            // Sample associé ?
-            EltID id2 = getRepercussionID(id);
-            if (id2.indexElt != -1)
-            {
-                if (_sf2->isValid(id2) && !listprocessedID.contains(id2))
-                {
-                    listprocessedID << id2;
-                    QByteArray baData = _sf2->getData(id2, champ_sampleDataFull24);
-                    baData = SampleUtils::EQ(baData, _sf2->get(id2, champ_dwSampleRate).dwValue, 24,
-                                       ui->verticalSlider_1->value(),
-                                       ui->verticalSlider_2->value(),
-                                       ui->verticalSlider_3->value(),
-                                       ui->verticalSlider_4->value(),
-                                       ui->verticalSlider_5->value(),
-                                       ui->verticalSlider_6->value(),
-                                       ui->verticalSlider_7->value(),
-                                       ui->verticalSlider_8->value(),
-                                       ui->verticalSlider_9->value(),
-                                       ui->verticalSlider_10->value());
-                    _sf2->set(id2, champ_sampleDataFull24, baData);
-                }
-            }
-        }
-    }
-    _sf2->endEditing(getEditingSource() + ":update");
-}
-
-void PageSmpl::initEQ()
-{
-    ui->verticalSlider_1->setValue(0);
-    ui->verticalSlider_2->setValue(0);
-    ui->verticalSlider_3->setValue(0);
-    ui->verticalSlider_4->setValue(0);
-    ui->verticalSlider_5->setValue(0);
-    ui->verticalSlider_6->setValue(0);
-    ui->verticalSlider_7->setValue(0);
-    ui->verticalSlider_8->setValue(0);
-    ui->verticalSlider_9->setValue(0);
-    ui->verticalSlider_10->setValue(0);
-    saveEQ();
-}
-
 void PageSmpl::lecture()
 {
     if (ui->pushLecture->isChecked())
     {
         QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
         if (listID.count() == 1)
+        {
+            _synth->activateSmplEq(ui->widgetEqualizer->isPreviewEnabled());
             _synth->play(0, listID[0].indexSf2, listID[0].indexElt, -1, 127);
+        }
 
         // Désactivations
         ui->comboLink->setEnabled(false);
         ui->comboType->setEnabled(false);
         ui->comboSampleRate->setEnabled(false);
-        ui->verticalSlider_1->setEnabled(false);
-        ui->verticalSlider_2->setEnabled(false);
-        ui->verticalSlider_3->setEnabled(false);
-        ui->verticalSlider_4->setEnabled(false);
-        ui->verticalSlider_5->setEnabled(false);
-        ui->verticalSlider_6->setEnabled(false);
-        ui->verticalSlider_7->setEnabled(false);
-        ui->verticalSlider_8->setEnabled(false);
-        ui->verticalSlider_9->setEnabled(false);
-        ui->verticalSlider_10->setEnabled(false);
-        ui->pushEgaliser->setEnabled(false);
-        ui->pushEgalRestore->setEnabled(false);
+        ui->widgetEqualizer->enableApply(false);
 
         this->_playingSmpl = true;
     }
@@ -1045,18 +925,7 @@ void PageSmpl::lecteurFinished()
     ui->comboLink->setEnabled(true);
     ui->comboType->setEnabled(true);
     ui->comboSampleRate->setEnabled(true);
-    ui->verticalSlider_1->setEnabled(true);
-    ui->verticalSlider_2->setEnabled(true);
-    ui->verticalSlider_3->setEnabled(true);
-    ui->verticalSlider_4->setEnabled(true);
-    ui->verticalSlider_5->setEnabled(true);
-    ui->verticalSlider_6->setEnabled(true);
-    ui->verticalSlider_7->setEnabled(true);
-    ui->verticalSlider_8->setEnabled(true);
-    ui->verticalSlider_9->setEnabled(true);
-    ui->verticalSlider_10->setEnabled(true);
-    ui->pushEgaliser->setEnabled(true);
-    ui->pushEgalRestore->setEnabled(true);
+    ui->widgetEqualizer->enableApply(true);
 
     if (ui->pushLecture->isChecked())
     {
@@ -1064,6 +933,7 @@ void PageSmpl::lecteurFinished()
         ui->pushLecture->setChecked(false);
         ui->pushLecture->blockSignals(false);
         updateSinus();
+        _synth->activateSmplEq(false);
     }
     _playingSmpl = false;
     updatePlayButton();
@@ -1180,34 +1050,6 @@ void PageSmpl::autoTune(EltID id, int &pitch, int &correction)
         pitch = _sf2->get(id, champ_byOriginalPitch).bValue;
         correction = _sf2->get(id, champ_chPitchCorrection).cValue;
     }
-}
-
-void PageSmpl::saveEQ()
-{
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "01", ui->verticalSlider_1->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "02", ui->verticalSlider_2->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "03", ui->verticalSlider_3->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "04", ui->verticalSlider_4->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "05", ui->verticalSlider_5->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "06", ui->verticalSlider_6->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "07", ui->verticalSlider_7->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "08", ui->verticalSlider_8->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "09", ui->verticalSlider_9->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "10", ui->verticalSlider_10->value());
-}
-
-void PageSmpl::loadEQ()
-{
-    ui->verticalSlider_1->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "01", 0).toInt());
-    ui->verticalSlider_2->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "02", 0).toInt());
-    ui->verticalSlider_3->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "03", 0).toInt());
-    ui->verticalSlider_4->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "04", 0).toInt());
-    ui->verticalSlider_5->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "05", 0).toInt());
-    ui->verticalSlider_6->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "06", 0).toInt());
-    ui->verticalSlider_7->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "07", 0).toInt());
-    ui->verticalSlider_8->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "08", 0).toInt());
-    ui->verticalSlider_9->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "09", 0).toInt());
-    ui->verticalSlider_10->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "10", 0).toInt());
 }
 
 void PageSmpl::onLinkClicked(EltID id)

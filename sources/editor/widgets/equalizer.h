@@ -2,6 +2,7 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2019 Davy Triponney                                **
+**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,73 +23,59 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_SMPL_H
-#define PAGE_SMPL_H
+#ifndef EQUALIZER_H
+#define EQUALIZER_H
 
 #include <QWidget>
-#include "page.h"
+#include "basetypes.h"
+#include "pagesmpl.h"
+class Synth;
 
-namespace Ui
-{
-    class PageSmpl;
+namespace Ui {
+class Equalizer;
 }
 
-class PageSmpl : public Page
+class Equalizer : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit PageSmpl(QWidget * parent = nullptr);
-    ~PageSmpl() override;
+    explicit Equalizer(QWidget *parent = nullptr);
+    ~Equalizer();
 
-    void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
-    static EltID getRepercussionID(EltID id);
+    // Allow the user to press on "apply" or not
+    void enableApply(bool isEnabled);
 
-public slots:
-    // When the key "space" is pressed in the tree
-    void onSampleOnOff();
+    // Set the current ids to work on
+    void setCurrentIds(IdList ids) { _currentIds = ids; }
 
-protected:
-    // Update the interface
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
-
-    // Refresh things after a page is shown
-    void onShow() override;
-
-    // Reaction when a key is played
-    void keyPlayedInternal(int key, int velocity) override;
+    // Return true if the preview is enabled
+    bool isPreviewEnabled();
 
 private slots:
-    void lecture();
-    void lecteurFinished();
-    void setStartLoop();
-    void setStartLoop(int val);
-    void setEndLoop();
-    void setEndLoop(int val);
-    void on_pushFullLength_clicked();
-    void setRootKey();
-    void setRootKey(int val);
-    void setTune();
-    void setTune(int val);
-    void setType(int index);
-    void setLinkedSmpl(int index);
-    void setRate(int index);
-    void on_checkLectureBoucle_stateChanged(int arg1);
-    void setSinusEnabled(bool val);
-    void setGainSample(int val);
-    void setStereo(bool val);
-    void on_pushAutoTune_clicked();
-    void onLinkClicked(EltID id);
+    void on_pushEgalRestore_clicked();
+    void on_pushEgaliser_clicked();
+    void on_checkEqualizerPreview_stateChanged(int arg1);
+    void on_verticalSlider_1_sliderMoved(int position);
+    void on_verticalSlider_2_sliderMoved(int position);
+    void on_verticalSlider_3_sliderMoved(int position);
+    void on_verticalSlider_4_sliderMoved(int position);
+    void on_verticalSlider_5_sliderMoved(int position);
+    void on_verticalSlider_6_sliderMoved(int position);
+    void on_verticalSlider_7_sliderMoved(int position);
+    void on_verticalSlider_8_sliderMoved(int position);
+    void on_verticalSlider_9_sliderMoved(int position);
+    void on_verticalSlider_10_sliderMoved(int position);
 
 private:
-    Ui::PageSmpl *ui;
-    bool _playingSmpl;
-    int preventStop;
+    void saveEQ();
+    void loadEQ();
+    QVector<int> gatherEqVariables();
 
-    void updatePlayButton();
-    void setRateElt(EltID id, quint32 echFinal);
-    void autoTune(EltID id, int &pitch, int &correction);
-    void updateSinus();
+    Ui::Equalizer *ui;
+    Synth * _synth;
+    bool _initialization;
+    IdList _currentIds;
 };
 
-#endif // PAGE_SMPL_H
+#endif // EQUALIZER_H
