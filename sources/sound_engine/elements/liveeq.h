@@ -49,10 +49,12 @@ public:
 private:
     quint32 _sampleRate;
     bool _isOn;
-    QVector<Iir::Butterworth::BandPass<4>  > _passBandsR;
-    QVector<Iir::Butterworth::BandPass<4>  > _passBandsL;
+    QVector<Iir::Butterworth::BandPass<4> > _passBandsR, _passBandsL;
     QVector<double> _coeff;
     QMutex _mutex;
+    int _crossFade;
+    static int CROSSFADE_LENGTH;
+    static double CORRECTION;
 };
 
 #endif // LIVEEQ_H

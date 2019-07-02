@@ -26,8 +26,12 @@
 #include "liveeq.h"
 #include <qmath.h>
 
+int LiveEQ::CROSSFADE_LENGTH = 1000;
+double LiveEQ::CORRECTION = 0.85;
+
 LiveEQ::LiveEQ() :
-    _isOn(false)
+    _isOn(false),
+    _crossFade(0)
 {
     _coeff.resize(10);
 }
@@ -88,7 +92,7 @@ void LiveEQ::filterData(float * dataR, float * dataL, quint32 len)
 {
     _mutex.lock();
 
-    if (!_isOn)
+    if (!_isOn && _crossFade == 0)
     {
         _mutex.unlock();
         return;
@@ -97,15 +101,24 @@ void LiveEQ::filterData(float * dataR, float * dataL, quint32 len)
     // Filter
     for (quint32 i = 0; i < len; i++)
     {
-        float fTmp = 0;
-        for (int j = 0; j < 10; j++)
-            fTmp += _coeff[j] * _passBandsR[j].filter(dataR[i]);
-        dataR[i] = fTmp;
+        if (_isOn && _crossFade < CROSSFADE_LENGTH)
+            _crossFade++;
+        else if (!_isOn && _crossFade > 0)
+            _crossFade--;
+        double pos = static_cast<double>(_crossFade) / CROSSFADE_LENGTH;
 
+        double value = static_cast<double>(dataR[i]);
+        double fTmp = 0;
+        for (int j = 0; j < 10; j++)
+            fTmp += _coeff[j] * _passBandsR[j].filter(value);
+        dataR[i] = static_cast<float>((1.0 - pos) * dataR[i] + pos * fTmp * CORRECTION);
+
+        value = static_cast<double>(dataL[i]);
         fTmp = 0;
         for (int j = 0; j < 10; j++)
-            fTmp += _coeff[j] * _passBandsL[j].filter(dataL[i]);
-        dataL[i] = fTmp;
+            fTmp += _coeff[j] * _passBandsL[j].filter(value);
+        dataL[i] = static_cast<float>((1.0 - pos) * dataL[i] + pos * fTmp * CORRECTION);
     }
+
     _mutex.unlock();
 }

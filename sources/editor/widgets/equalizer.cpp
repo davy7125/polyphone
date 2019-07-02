@@ -65,6 +65,7 @@ void Equalizer::on_pushEgalRestore_clicked()
     ui->verticalSlider_9->setValue(0);
     ui->verticalSlider_10->setValue(0);
     saveEQ();
+    _synth->setSmplEqValues(gatherEqVariables());
 }
 
 void Equalizer::on_pushEgaliser_clicked()
@@ -200,58 +201,68 @@ void Equalizer::on_verticalSlider_1_sliderMoved(int position)
 {
     Q_UNUSED(position)
     _synth->setSmplEqValues(gatherEqVariables());
+    saveEQ();
 }
 
 void Equalizer::on_verticalSlider_2_sliderMoved(int position)
 {
     Q_UNUSED(position)
     _synth->setSmplEqValues(gatherEqVariables());
+    saveEQ();
 }
 
 void Equalizer::on_verticalSlider_3_sliderMoved(int position)
 {
     Q_UNUSED(position)
     _synth->setSmplEqValues(gatherEqVariables());
+    saveEQ();
 }
 
 void Equalizer::on_verticalSlider_4_sliderMoved(int position)
 {
     Q_UNUSED(position)
     _synth->setSmplEqValues(gatherEqVariables());
+    saveEQ();
 }
 
 void Equalizer::on_verticalSlider_5_sliderMoved(int position)
 {
     Q_UNUSED(position)
     _synth->setSmplEqValues(gatherEqVariables());
+    saveEQ();
 }
 
 void Equalizer::on_verticalSlider_6_sliderMoved(int position)
 {
     Q_UNUSED(position)
     _synth->setSmplEqValues(gatherEqVariables());
+    saveEQ();
 }
 
 void Equalizer::on_verticalSlider_7_sliderMoved(int position)
 {
     Q_UNUSED(position)
     _synth->setSmplEqValues(gatherEqVariables());
+    saveEQ();
 }
 
 void Equalizer::on_verticalSlider_8_sliderMoved(int position)
 {
     Q_UNUSED(position)
     _synth->setSmplEqValues(gatherEqVariables());
+    saveEQ();
 }
 
 void Equalizer::on_verticalSlider_9_sliderMoved(int position)
 {
     Q_UNUSED(position)
     _synth->setSmplEqValues(gatherEqVariables());
+    saveEQ();
 }
 
 void Equalizer::on_verticalSlider_10_sliderMoved(int position)
 {
     Q_UNUSED(position)
     _synth->setSmplEqValues(gatherEqVariables());
+    saveEQ();
 }

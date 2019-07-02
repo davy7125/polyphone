@@ -112,14 +112,16 @@ contains(DEFINES, USE_LOCAL_STK) {
         lib/stk/Delay.h \
         lib/stk/Chorus.h \
         lib/stk/FreeVerb.h \
-        lib/stk/DelayL.h
+        lib/stk/DelayL.h \
+        lib/stk/Iir.h
     SOURCES += lib/stk/Stk.cpp \
         lib/stk/SineWave.cpp \
         lib/stk/OnePole.cpp \
         lib/stk/Delay.cpp \
         lib/stk/Chorus.cpp \
         lib/stk/FreeVerb.cpp \
-        lib/stk/DelayL.cpp
+        lib/stk/DelayL.cpp \
+        lib/stk/Iir.cpp
     INCLUDEPATH += lib/stk
 } else {
     LIBS += -lstk
@@ -439,11 +441,7 @@ SOURCES	+= main.cpp \
     lib/iir/Biquad.cpp \
     lib/iir/Butterworth.cpp \
     lib/iir/Cascade.cpp \
-    lib/iir/ChebyshevI.cpp \
-    lib/iir/ChebyshevII.cpp \
-    lib/iir/Custom.cpp \
     lib/iir/PoleFilter.cpp \
-    lib/iir/RBJ.cpp \
     lib/iir/State.cpp
 
 HEADERS  += \
@@ -738,14 +736,10 @@ HEADERS  += \
     lib/iir/Biquad.h \
     lib/iir/Butterworth.h \
     lib/iir/Cascade.h \
-    lib/iir/ChebyshevI.h \
-    lib/iir/ChebyshevII.h \
     lib/iir/Common.h \
-    lib/iir/Custom.h \
     lib/iir/Layout.h \
     lib/iir/MathSupplement.h \
     lib/iir/PoleFilter.h \
-    lib/iir/RBJ.h \
     lib/iir/State.h \
     lib/iir/Types.h
 
