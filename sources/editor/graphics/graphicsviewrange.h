@@ -41,7 +41,7 @@ class GraphicsViewRange : public QGraphicsView
     Q_OBJECT
 
 public:
-    explicit GraphicsViewRange(QWidget *parent = 0);
+    explicit GraphicsViewRange(QWidget *parent = nullptr);
     ~GraphicsViewRange();
 
     void init(SoundfontManager * sf2);

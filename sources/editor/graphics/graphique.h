@@ -34,7 +34,7 @@ class Graphique : public QCustomPlot
 {
     Q_OBJECT
 public:
-    explicit Graphique(QWidget *parent = 0);
+    explicit Graphique(QWidget *parent = nullptr);
     void clearAll();
     void setData(QByteArray baData, int sampleRate);
     void linkSliderX(QScrollBar * _qScrollX);
@@ -51,6 +51,7 @@ public slots:
 signals:
     void startLoopChanged();
     void endLoopChanged();
+    void cutOrdered(int start, int end);
 
 protected:
     void paintEvent(QPaintEvent *event);
@@ -64,11 +65,11 @@ private:
     double _sizeX;
     bool _zoomFlag;
     bool _dragFlag;
+    bool _cutFlag;
     bool _modifiedFlag;
     double _xInit, _yInit;
     double _zoomX, _zoomY, _posX, _posY;
     double _zoomXinit, _zoomYinit, _posXinit, _posYinit;
-    QPoint _pointInit;
     bool _bFromExt;
     QScrollBar * _qScrollX;
     QSpinBox * _spinStart;
@@ -78,6 +79,7 @@ private:
     QCPItemText * _textMultipleSelection;
     QCPItemText * _textPositionL;
     QCPItemText * _textPositionR;
+    QCPItemRect * _cutArea;
     QTime _lastUpdate;
     int _sampleRate;
 
@@ -87,6 +89,8 @@ private:
     void setZoomLine(double x1, double y1, double x2, double y2);
     void plotOverlay();
     void displayCurrentRange();
+    int getSamplePosX(double zoomX, double shiftX, double x);
+    void cut(int start, int end);
 };
 
 #endif // GRAPHIQUE_H

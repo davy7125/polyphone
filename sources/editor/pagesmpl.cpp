@@ -67,6 +67,7 @@ PageSmpl::PageSmpl(QWidget *parent) :
     ui->graphe->connect(_synth, SIGNAL(currentPosChanged(quint32)), SLOT(setCurrentSample(quint32)));
     this->connect(_synth, SIGNAL(readFinished()), SLOT(lecteurFinished()));
     connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
+    connect(ui->graphe, SIGNAL(cutOrdered(int,int)), this, SLOT(onCutOrdered(int,int)));
 
     // Couleur de fond du graphe Fourier
     ui->grapheFourier->setBackgroundColor(this->palette().background().color());
@@ -162,7 +163,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     ui->spinStartLoop->blockSignals(true);
     ui->spinEndLoop->blockSignals(true);
     ui->spinStartLoop->setMaximum(endLoop);
-    ui->spinEndLoop->setMaximum(length-1);
+    ui->spinEndLoop->setMaximum(length - 1);
     ui->spinEndLoop->setMinimum(startLoop);
     ui->spinStartLoop->setValue(startLoop);
     ui->spinEndLoop->setValue(endLoop);
@@ -1097,4 +1098,87 @@ void PageSmpl::updatePlayButton()
         ui->pushLecture->setIcon(ContextManager::theme()->getColoredSvg(
                                      ":/icons/play.svg", QSize(36, 36), ThemeManager::WINDOW_TEXT));
     }
+}
+
+void PageSmpl::onCutOrdered(int start, int end)
+{
+    if (_currentIds.count() != 1 || start < 0 || end <= 0 || start >= end)
+        return;
+
+    QMessageBox msgBox(this);
+    msgBox.setIcon(QMessageBox::Warning);
+    msgBox.setWindowTitle(trUtf8("Warning"));
+    msgBox.setText(trUtf8("Are you sure to cut the sample from <b>%0</b> to <b>%1</b>?").arg(start).arg(end));
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.button(QMessageBox::Yes)->setText(trUtf8("&Yes"));
+    msgBox.button(QMessageBox::No)->setText(trUtf8("&No"));
+    msgBox.setDefaultButton(QMessageBox::No);
+
+    if (msgBox.exec() == QMessageBox::No)
+        return;
+
+    // Current sample id, with possibly its stereo sample id
+    EltID id = _currentIds[0];
+    EltID id2 = getRepercussionID(id);
+    if (id2.indexElt != -1)
+    {
+        // Both samples must have the same length
+        if (_sf2->get(id, champ_dwLength).dwValue != _sf2->get(id2, champ_dwLength).dwValue)
+            id2.indexElt = -1;
+    }
+
+    // Cut between start and end
+    bool updateNeeded = cutSample(id, static_cast<quint32>(start), static_cast<quint32>(end));
+    if (id2.indexElt != -1)
+        updateNeeded |= cutSample(id2, static_cast<quint32>(start), static_cast<quint32>(end));
+
+    if (updateNeeded)
+        _sf2->endEditing(getEditingSource() + ":update");
+}
+
+bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end)
+{
+    if (end > _sf2->get(id, champ_dwLength).dwValue)
+        return false;
+
+    quint16 wBps = _sf2->get(id, champ_wBpsInit).wValue;
+    if (wBps > 16)
+        wBps = 24;
+    else
+        wBps = 16;
+    QByteArray baData = _sf2->getData(id, wBps == 24 ? champ_sampleDataFull24 : champ_sampleData16);
+
+    // Possibly adapt start and end of loop
+    quint32 startLoop = _sf2->get(id, champ_dwStartLoop).dwValue;
+    quint32 endLoop = _sf2->get(id, champ_dwEndLoop).dwValue;
+    AttributeValue val;
+    if (startLoop > end)
+    {
+        val.dwValue = startLoop - end + start;
+        _sf2->set(id, champ_dwStartLoop, val);
+    }
+    else if (startLoop > start)
+    {
+        val.dwValue = 0;
+        _sf2->set(id, champ_dwStartLoop, val);
+    }
+    if (endLoop > end)
+    {
+        val.dwValue = endLoop - end + start;
+        _sf2->set(id, champ_dwEndLoop, val);
+    }
+    else if (endLoop > start)
+    {
+        val.dwValue = 0;
+        _sf2->set(id, champ_dwStartLoop, val);
+        _sf2->set(id, champ_dwEndLoop, val);
+    }
+
+    // Remove data and update the sample
+    baData = baData.left(start * wBps / 8) + baData.right(baData.size() - static_cast<int>(end * wBps / 8));
+    _sf2->set(id, wBps == 24 ? champ_sampleDataFull24 : champ_sampleData16, baData);
+    val.dwValue = static_cast<quint32>(8 * baData.size()) / wBps;
+    _sf2->set(id, champ_dwLength, val);
+
+    return true;
 }

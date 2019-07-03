@@ -79,6 +79,8 @@ private slots:
     void setStereo(bool val);
     void on_pushAutoTune_clicked();
     void onLinkClicked(EltID id);
+    void onCutOrdered(int start, int end);
+    bool cutSample(EltID id, quint32 start, quint32 end);
 
 private:
     Ui::PageSmpl *ui;

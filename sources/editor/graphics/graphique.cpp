@@ -31,6 +31,8 @@
 Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
     _zoomFlag(false),
     _dragFlag(false),
+    _cutFlag(false),
+    _modifiedFlag(false),
     _zoomX(1),
     _zoomY(1),
     _posX(.5),
@@ -47,6 +49,7 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
     _textMultipleSelection(nullptr),
     _textPositionL(nullptr),
     _textPositionR(nullptr),
+    _cutArea(nullptr),
     _sampleRate(0)
 {
     // Graphe des données
@@ -83,6 +86,12 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
     _textMultipleSelection->setTextAlignment(Qt::AlignHCenter);
     _textMultipleSelection->setFont(QFont(font().family(), 16, QFont::Bold));
     _textMultipleSelection->setText(trUtf8("Multiple selection"));
+
+    // Cut Area
+    _cutArea = new QCPItemRect(this);
+    _cutArea->position("topLeft")->setType(QCPItemPosition::ptViewportRatio);
+    _cutArea->position("bottomRight")->setType(QCPItemPosition::ptViewportRatio);
+    _cutArea->setVisible(false);
 
     // Positions
     _textPositionL = new QCPItemText(this);
@@ -183,6 +192,11 @@ void Graphique::updateStyle()
     _textMultipleSelection->setColor(textColor);
     _textPositionL->setColor(textColor);
     _textPositionR->setColor(textColor);
+
+    // Style of the cut area
+    textColor.setAlpha(100);
+    _cutArea->setBrush(QBrush(textColor, Qt::BDiagPattern));
+    _cutArea->setPen(textColor);
 
     this->replot();
 }
@@ -346,7 +360,6 @@ void Graphique::displayMultipleSelection(bool isOn)
         _qScrollX->setRange(0, 0);
 }
 
-// Méthodes privées
 void Graphique::zoom(QPoint point)
 {
     // Décalage
@@ -450,18 +463,35 @@ void Graphique::mousePressEvent(QMouseEvent *event)
     if (!_filterEventEnabled)
         return;
 
-    // Enregistrement situation
-    _xInit = this->xAxis2->pixelToCoord(event->x());
-    _yInit = this->yAxis2->pixelToCoord(event->y());
-    _zoomXinit = _zoomX;
-    _zoomYinit = _zoomY;
-    _posXinit = _posX;
-    _posYinit = _posY;
-    _modifiedFlag = false;
     if (event->button() == Qt::LeftButton && !_zoomFlag)
-        _dragFlag = true;
-    else if (event->button() == Qt::RightButton && !_dragFlag)
+    {
+        // Save the initial state
+        _xInit = this->xAxis2->pixelToCoord(event->x());
+        _yInit = this->yAxis2->pixelToCoord(event->y());
+        _zoomXinit = _zoomX;
+        _zoomYinit = _zoomY;
+        _posXinit = _posX;
+        _posYinit = _posY;
+        _modifiedFlag = false;
+
+        if (QApplication::keyboardModifiers() == Qt::AltModifier)
+            _cutFlag = true;
+        else
+            _dragFlag = true;
+    }
+    else if (event->button() == Qt::RightButton && !_dragFlag && !_cutFlag)
+    {
+        // Save the initial state
+        _xInit = this->xAxis2->pixelToCoord(event->x());
+        _yInit = this->yAxis2->pixelToCoord(event->y());
+        _zoomXinit = _zoomX;
+        _zoomYinit = _zoomY;
+        _posXinit = _posX;
+        _posYinit = _posY;
+        _modifiedFlag = false;
+
         _zoomFlag = true;
+    }
 }
 
 void Graphique::mouseReleaseEvent(QMouseEvent *event)
@@ -469,54 +499,75 @@ void Graphique::mouseReleaseEvent(QMouseEvent *event)
     if (!_filterEventEnabled)
         return;
 
-    int val = qRound(_sizeX / _zoomX * ((_zoomX - 1) * _posX + _xInit) - 1);
-    if (val < 0)
-        val = 0;
+    int startSamplePosition = getSamplePosX(_zoomXinit, _posXinit, _xInit);
+
     if (event->button() == Qt::LeftButton)
     {
-        _dragFlag = false;
         if (!_modifiedFlag)
         {
             // Modification start loop
             if (this->_spinStart && this->_spinEnd)
             {
-                if (this->_spinEnd->value() > val)
+                if (this->_spinEnd->value() > startSamplePosition)
                 {
-                    this->_spinEnd->setMinimum(val);
-                    this->_spinStart->setValue(val);
+                    this->_spinEnd->setMinimum(startSamplePosition);
+                    this->_spinStart->setValue(startSamplePosition);
                     emit(startLoopChanged());
                 }
             }
             else
-                this->setStartLoop(val);
+                this->setStartLoop(startSamplePosition);
         }
         else
+        {
+            if (_cutFlag)
+            {
+                int endSamplePosition = getSamplePosX(_zoomX, _posX, this->xAxis2->pixelToCoord(event->x()));
+                if (startSamplePosition < endSamplePosition)
+                    emit(cutOrdered(startSamplePosition, endSamplePosition));
+                else
+                    emit(cutOrdered(endSamplePosition, startSamplePosition));
+
+                // Hide the cut area
+                _cutArea->setVisible(false);
+                this->replot();
+            }
             this->setCursor(Qt::ArrowCursor);
+        }
+
+        _dragFlag = false;
+        _cutFlag = false;
     }
     else if (event->button() == Qt::RightButton)
     {
-        _zoomFlag = false;
         if (!_modifiedFlag)
         {
             // Modification end loop
             if (this->_spinStart && this->_spinEnd)
             {
-                if (this->_spinStart->value() < val)
+                if (this->_spinStart->value() < startSamplePosition)
                 {
-                    this->_spinStart->setMaximum(val);
-                    this->_spinEnd->setValue(val);
+                    this->_spinStart->setMaximum(startSamplePosition);
+                    this->_spinEnd->setValue(startSamplePosition);
                     emit(endLoopChanged());
                 }
             }
             else
-                this->setEndLoop(val);
+                this->setEndLoop(startSamplePosition);
         }
         else
         {
+            // Stop the cut process
+            _cutFlag = false;
+            _cutArea->setVisible(false);
+
+            // Remove the zoom line
             this->setZoomLine(-1, 0, 0, 0);
             this->setCursor(Qt::ArrowCursor);
             this->replot();
         }
+
+        _zoomFlag = false;
     }
 }
 
@@ -549,6 +600,20 @@ void Graphique::mouseMoveEvent(QMouseEvent *event)
         }
         this->drag(event->pos());
     }
+    else if (_cutFlag)
+    {
+        if (!_modifiedFlag)
+        {
+            _modifiedFlag = true;
+            this->setCursor(Qt::UpArrowCursor);
+            _cutArea->setVisible(true);
+        }
+
+        // Update the cut area
+        _cutArea->position("topLeft")->setCoords(QPointF(_xInit, -1));
+        _cutArea->position("bottomRight")->setCoords(QPointF(this->xAxis2->pixelToCoord(event->x()), 2));
+        this->replot();
+    }
 }
 
 void Graphique::wheelEvent(QWheelEvent *event)
@@ -556,7 +621,7 @@ void Graphique::wheelEvent(QWheelEvent *event)
     if (!_filterEventEnabled)
         return;
 
-    if (!_dragFlag && !_zoomFlag)
+    if (!_dragFlag && !_zoomFlag && !_cutFlag)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
         _qScrollX->setValue(_qScrollX->value() - 0.2 * event->angleDelta().x());
 #else
@@ -582,4 +647,14 @@ void Graphique::displayCurrentRange()
         _textPositionL->setText("");
         _textPositionR->setText("");
     }
+}
+
+int Graphique::getSamplePosX(double zoomX, double shiftX, double x)
+{
+    int pos = qRound(_sizeX / zoomX * ((zoomX - 1) * shiftX + x) - 1);
+    if (pos < 0)
+        pos = 0;
+    else if (pos > _sizeX)
+        pos = qRound(_sizeX - 1);
+    return pos;
 }
