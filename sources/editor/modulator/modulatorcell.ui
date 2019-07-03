@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>609</width>
+    <width>532</width>
     <height>78</height>
    </rect>
   </property>
@@ -54,13 +54,34 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="ModulatorComboSrc" name="comboSource2"/>
+    <widget class="ModulatorComboSrc" name="comboSource2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
    </item>
    <item row="1" column="8">
-    <widget class="ModulatorComboDest" name="comboDestination"/>
+    <widget class="ModulatorComboDest" name="comboDestination">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
    </item>
    <item row="0" column="1">
-    <widget class="ModulatorComboSrc" name="comboSource1"/>
+    <widget class="ModulatorComboSrc" name="comboSource1">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
    </item>
    <item row="1" column="6">
     <widget class="QComboBox" name="comboTransform">

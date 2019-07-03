@@ -45,6 +45,10 @@ public:
     // Get the attribute
     AttributeType getCurrentAttribute();
 
+    // Keep a minimum width of 50px, regardless the content of the ComboBox
+    QSize sizeHint() const override        { return minimumSizeHint(); }
+    QSize minimumSizeHint() const override { return QSize(50, QComboBox::minimumSizeHint().height()); }
+
 private slots:
     void onCurrentIndexChanged(int index);
 
