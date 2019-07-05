@@ -27,7 +27,7 @@
 
 #include <QGraphicsItem>
 #include <QPen>
-#include "soundfontmanager.h"
+#include "basetypes.h"
 
 class GraphicsRectangleItem : public QGraphicsRectItem
 {
@@ -42,19 +42,22 @@ public:
         MOVE_BOTTOM
     };
 
-    GraphicsRectangleItem(EltID id, QGraphicsItem *parent = 0);
-    static void init(SoundfontManager * sf2) { s_sf2 = sf2; }
+    GraphicsRectangleItem(EltID id, QGraphicsItem *parent = nullptr);
 
     EltID getID() { return _id; }
     EltID findBrother();
     EditingMode setHover(bool isHovered, const QPoint &point = QPoint());
+    bool isHovered() { return _editingMode != EditingMode::NONE; }
+    static void syncHover(bool isSync) { s_synchronizeEditingMode = isSync; }
+    void setSelected(bool isSelected) { _isSelected = isSelected; }
+    bool isSelected() { return _isSelected; }
 
     QRectF getRectF() const;
-    void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = NULL);
+    void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr);
     bool contains(const QPointF &point) const;
 
     void computeNewRange(const QPointF &pointInit, const QPointF &pointFinal);
-    void saveChanges();
+    bool saveChanges(); // Return true if changes have been made
 
     bool operator==(const GraphicsRectangleItem& other) { return (_id == other._id); }
     bool operator==(const EltID &id) { return _id == id; }
@@ -65,17 +68,18 @@ public:
     int currentMaxVel() { return _maxVel; }
 
 private:
-
     QPen _penBorderThin;
     QPen _penBorderFat;
     QBrush _brushRectangle;
-    QBrush _brushRectangleHovered;
-    static SoundfontManager * s_sf2;
+    QBrush _brushRectangleSelected;
 
     EltID _id;
     int _minKeyInit, _maxKeyInit, _minVelInit, _maxVelInit;
     int _minKey, _maxKey, _minVel, _maxVel;
     EditingMode _editingMode;
+    bool _isSelected;
+    static EditingMode s_globalEditingMode;
+    static bool s_synchronizeEditingMode;
 
     void initialize(EltID id);
     EditingMode getEditingMode(const QPoint &point);

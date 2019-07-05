@@ -5,6 +5,7 @@ polyphone (2.1) unstable; urgency=low
   * (new) live preview of the equalizer at the sample level
   * (new) the virtual keyboard dialog can trigger various kinds of MIDI signals
   * (improvement) better ergonomics for editing modulators
+  * (improvement) multi selection is allowed in the range editor
   * (improvement) drag & drop of divisions in the tree can create instruments and presets
   * (improvement) drag & drop in the tree can duplicate elements within instruments and presets
   * (fix) several modulators can target the same modulator

@@ -27,8 +27,8 @@
 #include <QPen>
 #include <QPainter>
 #include <QApplication>
+#include "soundfontmanager.h"
 
-SoundfontManager *   GraphicsLegendItem::s_sf2 = nullptr;
 const int    GraphicsLegendItem::s_border = 5;
 
 GraphicsLegendItem::GraphicsLegendItem(QString fontFamily, QGraphicsItem * parent) : QGraphicsItem(parent),
@@ -59,16 +59,20 @@ bool GraphicsLegendItem::isLeft()
     return (_alignment & Qt::AlignLeft) != 0;
 }
 
-void GraphicsLegendItem::setIds(QList<EltID> ids, int selectionIndex, int selectionNumber)
+void GraphicsLegendItem::setIds(QList<EltID> ids, QList<int> highlightedIds, int selectionIndex, int selectionNumber)
 {
     _selectionIndex = selectionIndex;
     _selectionNumber = selectionNumber;
 
-    _text.clear();
+    _textTop.clear();
+    _textBottom.clear();
+    _selectedLinesInTextTop = highlightedIds;
     if (!ids.isEmpty())
     {
         // First id and global division
         EltID id = ids.first();
+        if (!highlightedIds.empty() && highlightedIds[0] < ids.count() && highlightedIds[0] >= 0)
+            id = ids[highlightedIds[0]]; // Anyone of the highlighted ids have the same range
         EltID idGlobal = id;
         if (idGlobal.typeElement == elementInstSmpl)
             idGlobal.typeElement = elementInst;
@@ -76,59 +80,60 @@ void GraphicsLegendItem::setIds(QList<EltID> ids, int selectionIndex, int select
             idGlobal.typeElement = elementPrst;
 
         // Name of the divisions
+        SoundfontManager * sm = SoundfontManager::getInstance();
         foreach (EltID id, ids)
         {
             EltID idLink = id;
             if (id.typeElement == elementInstSmpl)
             {
                 idLink.typeElement = elementSmpl;
-                idLink.indexElt = s_sf2->get(id, champ_sampleID).wValue;
+                idLink.indexElt = sm->get(id, champ_sampleID).wValue;
             }
             else
             {
                 idLink.typeElement = elementInst;
-                idLink.indexElt = s_sf2->get(id, champ_instrument).wValue;
+                idLink.indexElt = sm->get(id, champ_instrument).wValue;
             }
-            _text << s_sf2->getQstr(idLink, champ_name);
+            _textTop << sm->getQstr(idLink, champ_name);
         }
 
         // Key range
-        int minKey = 0;
-        int maxKey = 127;
-        if (s_sf2->isSet(id, champ_keyRange))
+        unsigned int minKey = 0;
+        unsigned int maxKey = 127;
+        if (sm->isSet(id, champ_keyRange))
         {
-            rangesType range = s_sf2->get(id, champ_keyRange).rValue;
+            rangesType range = sm->get(id, champ_keyRange).rValue;
             minKey = range.byLo;
             maxKey = range.byHi;
         }
-        else if (s_sf2->isSet(idGlobal, champ_keyRange))
+        else if (sm->isSet(idGlobal, champ_keyRange))
         {
-            rangesType range = s_sf2->get(idGlobal, champ_keyRange).rValue;
+            rangesType range = sm->get(idGlobal, champ_keyRange).rValue;
             minKey = range.byLo;
             maxKey = range.byHi;
         }
-        _text << QObject::trUtf8("Key range:") + " " +
-                 ContextManager::keyName()->getKeyName(minKey) + " - " +
-                 ContextManager::keyName()->getKeyName(maxKey);
+        _textBottom << QObject::trUtf8("Key range:") + " " +
+                       ContextManager::keyName()->getKeyName(minKey) + " - " +
+                       ContextManager::keyName()->getKeyName(maxKey);
 
         // Velocity range
         int minVel = 0;
         int maxVel = 127;
-        if (s_sf2->isSet(id, champ_velRange))
+        if (sm->isSet(id, champ_velRange))
         {
-            rangesType range = s_sf2->get(id, champ_velRange).rValue;
+            rangesType range = sm->get(id, champ_velRange).rValue;
             minVel = range.byLo;
             maxVel = range.byHi;
         }
-        else if (s_sf2->isSet(idGlobal, champ_velRange))
+        else if (sm->isSet(idGlobal, champ_velRange))
         {
-            rangesType range = s_sf2->get(idGlobal, champ_velRange).rValue;
+            rangesType range = sm->get(idGlobal, champ_velRange).rValue;
             minVel = range.byLo;
             maxVel = range.byHi;
         }
-        _text << QObject::trUtf8("Velocity range:") + " " +
-                 QString::number(minVel) + " - " +
-                 QString::number(maxVel);
+        _textBottom << QObject::trUtf8("Velocity range:") + " " +
+                       QString::number(minVel) + " - " +
+                       QString::number(maxVel);
     }
 }
 
@@ -142,7 +147,7 @@ void GraphicsLegendItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
 {
     Q_UNUSED(option)
     Q_UNUSED(widget)
-    if (_text.isEmpty())
+    if (_textTop.isEmpty())
         return;
 
     // Translation of the painter
@@ -158,14 +163,21 @@ void GraphicsLegendItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
     painter->setPen(_textPen);
     painter->setFont(_font);
     QFontMetrics fm(_font);
-    for (int i = 0; i < _text.count(); i++)
-        painter->drawText(QPoint(s_border, fm.height() * (i + 1)), _text.at(i));
+    for (int i = 0; i < _textTop.count(); i++)
+    {
+        if (_selectedLinesInTextTop.contains(i))
+            painter->drawText(QPoint(s_border, fm.height() * (i + 1)), "⮞");
+        painter->drawText(QPoint(static_cast<int>(1.5 * fm.width("⮞") + s_border),
+                                 fm.height() * (i + 1)), _textTop.at(i));
+    }
+    for (int i = 0; i < _textBottom.count(); i++)
+        painter->drawText(QPoint(s_border, static_cast<int>(fm.height() * (1.5 + _textTop.count() + i))), _textBottom.at(i));
 
     if (_selectionNumber > 1)
     {
         painter->setFont(_smallFont);
         QString text = QString::number(_selectionIndex + 1) + " / " + QString::number(_selectionNumber);
-        double posY = fm.height() * (_text.count() + 1) + 3;
+        double posY = fm.height() * (1.5 + _textTop.count() + _textBottom.count()) + 3;
         double posX = 0.5 * (size.width() - QFontMetrics(_smallFont).width(text));
         painter->drawText(QPointF(posX, posY), text);
     }
@@ -173,15 +185,17 @@ void GraphicsLegendItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
 QSizeF GraphicsLegendItem::getTextSize() const
 {
-    if (_text.isEmpty())
+    if (_textTop.isEmpty())
         return QSizeF(0, 0);
 
     QFontMetrics fm(_font);
 
-    int height = _text.count() * fm.height() + 2 * s_border;
-    int width = 0;
-    foreach (QString line, _text)
-        width = qMax(width, fm.width(line));
+    double height = (0.5 + _textTop.count() + _textBottom.count()) * fm.height() + 2 * s_border;
+    double width = 0;
+    foreach (QString line, _textTop)
+        width = qMax(width, 1.5 * fm.width("⮞") + fm.width(line));
+    foreach (QString line, _textBottom)
+        width = qMax(width, static_cast<double>(fm.width(line)));
     width += 2 * s_border;
 
     if (_selectionNumber > 1)

@@ -58,9 +58,6 @@ PagePrst::PagePrst(QWidget *parent) :
     ui->spinBank->init(this);
     ui->spinPreset->init(this);
 
-    // Initialization édition étendues
-    ui->rangeEditor->init(_sf2);
-
 #ifdef Q_OS_MAC
     _table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
     QFont fontTmp = _table->font();

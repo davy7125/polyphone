@@ -44,8 +44,7 @@ public:
     explicit GraphicsViewRange(QWidget *parent = nullptr);
     ~GraphicsViewRange();
 
-    void init(SoundfontManager * sf2);
-    void display(EltID id, bool justSelection);
+    void display(IdList ids, bool justSelection);
     void playKey(int key, int velocity);
 
 signals:
@@ -63,10 +62,11 @@ protected:
 
 private:
     void initItems();
-    void updateLabels();
+    void updateLabelPosition();
+    void updateHover(QPoint mousePos);
     QList<QList<GraphicsRectangleItem*> > getRectanglesUnderMouse(QPoint mousePos);
-    void setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect, const QPoint &point, int selectionIndex, int selectionNumber);
     QRectF getCurrentRect();
+    void triggerDivisionSelected();
 
     SoundfontManager * _sf2;
     EltID _defaultID;
@@ -74,7 +74,6 @@ private:
     // Graphics items
     QGraphicsScene * _scene;
     QList<GraphicsRectangleItem *> _rectangles;
-    QList<GraphicsRectangleItem *> _currentRectangles;
     QList<GraphicsSimpleTextItem *> _leftLabels, _bottomLabels;
     GraphicsLegendItem * _legendItem;
     GraphicsLegendItem2 * _legendItem2;
@@ -85,6 +84,8 @@ private:
     // Various
     bool _dontRememberScroll;
     int _keyTriggered;
+    bool _keepIndexOnRelease;
+    bool _editing;
 
     // Drag & zoom
     Qt::MouseButton _buttonPressed;
@@ -93,6 +94,7 @@ private:
     double _zoomX, _zoomY, _posX, _posY;
     double _zoomXinit, _zoomYinit, _posXinit, _posYinit;
     QRectF _displayedRect;
+    QVector<GraphicsRectangleItem *> _shiftRectangles;
     void zoom(QPoint point);
     void drag(QPoint point);
     void zoomDrag();

@@ -64,8 +64,8 @@ void GraphicsLegendItem2::setNewValues(int minKey, int maxKey, int minVel, int m
     if (minKey != -1)
     {
         _text << QObject::trUtf8("Key range:") + " " +
-                 ContextManager::keyName()->getKeyName(minKey) + " - " +
-                 ContextManager::keyName()->getKeyName(maxKey)
+                 ContextManager::keyName()->getKeyName(static_cast<unsigned int>(minKey)) + " - " +
+                 ContextManager::keyName()->getKeyName(static_cast<unsigned int>(maxKey))
               << QObject::trUtf8("Velocity range:") + " " +
                  QString::number(minVel) + " - " +
                  QString::number(maxVel);
@@ -77,6 +77,7 @@ QRectF GraphicsLegendItem2::boundingRect() const
     QSizeF size = getTextSize();
     return QRectF(QPointF(dx(size), dy(size)), size);
 }
+
 void GraphicsLegendItem2::paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
     Q_UNUSED(option)

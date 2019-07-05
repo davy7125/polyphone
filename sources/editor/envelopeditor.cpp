@@ -30,7 +30,7 @@
 EnvelopEditor::EnvelopEditor(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::EnvelopEditor),
-    _sf2(nullptr),
+    _sf2(SoundfontManager::getInstance()),
     _isVolume(true)
 {
     ui->setupUi(this);
@@ -76,11 +76,6 @@ EnvelopEditor::EnvelopEditor(QWidget *parent) :
 EnvelopEditor::~EnvelopEditor()
 {
     delete ui;
-}
-
-void EnvelopEditor::init(SoundfontManager * sf2)
-{
-    _sf2 = sf2;
 }
 
 void EnvelopEditor::display(QList<EltID> ids, bool justSelection)

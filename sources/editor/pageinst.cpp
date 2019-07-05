@@ -63,10 +63,6 @@ PageInst::PageInst(QWidget *parent) :
     _envelopEditor = ui->envelopEditor;
     _modulatorEditor = ui->modulatorEditor;
 
-    // Initialisation édition étendues, enveloppes
-    ui->rangeEditor->init(_sf2);
-    ui->envelopEditor->init(_sf2);
-
 #ifdef Q_OS_MAC
     _table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
     QFont fontTmp = _table->font();

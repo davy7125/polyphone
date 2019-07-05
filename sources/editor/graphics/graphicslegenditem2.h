@@ -33,7 +33,7 @@
 class GraphicsLegendItem2 : public QGraphicsItem
 {
 public:
-    GraphicsLegendItem2(QString fontFamily, QGraphicsItem *parent = NULL);
+    GraphicsLegendItem2(QString fontFamily, QGraphicsItem *parent = nullptr);
 
     void setNewValues(int minKey, int maxKey, int minVel, int maxVel);
     void setLeft(bool isLeft);
@@ -41,7 +41,7 @@ public:
     bool isLeft();
 
     QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = NULL);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr);
 
 private:
     static const int s_border;

@@ -39,7 +39,7 @@ class EnvelopEditor : public QWidget
     Q_OBJECT
 
 public:
-    explicit EnvelopEditor(QWidget *parent = 0);
+    explicit EnvelopEditor(QWidget *parent = nullptr);
     ~EnvelopEditor();
 
     void init(SoundfontManager * sf2);

@@ -28,12 +28,15 @@
 #include <QPainter>
 #include <QGraphicsView>
 #include "contextmanager.h"
+#include "soundfontmanager.h"
 
-SoundfontManager * GraphicsRectangleItem::s_sf2 = nullptr;
+GraphicsRectangleItem::EditingMode GraphicsRectangleItem::s_globalEditingMode = GraphicsRectangleItem::NONE;
+bool GraphicsRectangleItem::s_synchronizeEditingMode = false;
 
 GraphicsRectangleItem::GraphicsRectangleItem(EltID id, QGraphicsItem *parent) : QGraphicsRectItem(parent),
     _id(id),
-    _editingMode(NONE)
+    _editingMode(NONE),
+    _isSelected(false)
 {
     // Initialize pens and brushes
     QColor color = QApplication::palette().color(QPalette::Highlight);
@@ -43,8 +46,9 @@ GraphicsRectangleItem::GraphicsRectangleItem(EltID id, QGraphicsItem *parent) : 
     _penBorderFat = QPen(color, 3);
     color.setAlpha(60);
     _brushRectangle = QBrush(color);
-    color.setAlpha(120);
-    _brushRectangleHovered = QBrush(color);
+    color.setAlpha(140);
+    _brushRectangleSelected = QBrush(color, Qt::DiagCrossPattern);
+    _brushRectangleSelected.setMatrix(QMatrix(1,0,1,0,0,0)); // Don't scale the pattern
 
     initialize(id);
     _penBorderThin.setCosmetic(true);
@@ -56,8 +60,10 @@ GraphicsRectangleItem::GraphicsRectangleItem(EltID id, QGraphicsItem *parent) : 
 void GraphicsRectangleItem::initialize(EltID id)
 {
     // Default values
-    _minKey = 0, _maxKey = 127;
-    _minVel = 0, _maxVel = 127;
+    _minKey = 0;
+    _maxKey = 127;
+    _minVel = 0;
+    _maxVel = 127;
 
     // Global division
     EltID idGlobal = id;
@@ -67,29 +73,30 @@ void GraphicsRectangleItem::initialize(EltID id)
         idGlobal.typeElement = elementPrst;
 
     // Key range
-    if (s_sf2->isSet(id, champ_keyRange))
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    if (sm->isSet(id, champ_keyRange))
     {
-        rangesType range = s_sf2->get(id, champ_keyRange).rValue;
+        rangesType range = sm->get(id, champ_keyRange).rValue;
         _minKey = range.byLo;
         _maxKey = range.byHi;
     }
-    else if (s_sf2->isSet(idGlobal, champ_keyRange))
+    else if (sm->isSet(idGlobal, champ_keyRange))
     {
-        rangesType range = s_sf2->get(idGlobal, champ_keyRange).rValue;
+        rangesType range = sm->get(idGlobal, champ_keyRange).rValue;
         _minKey = range.byLo;
         _maxKey = range.byHi;
     }
 
     // Velocity range
-    if (s_sf2->isSet(id, champ_velRange))
+    if (sm->isSet(id, champ_velRange))
     {
-        rangesType range = s_sf2->get(id, champ_velRange).rValue;
+        rangesType range = sm->get(id, champ_velRange).rValue;
         _minVel = range.byLo;
         _maxVel = range.byHi;
     }
-    else if (s_sf2->isSet(idGlobal, champ_velRange))
+    else if (sm->isSet(idGlobal, champ_velRange))
     {
-        rangesType range = s_sf2->get(idGlobal, champ_velRange).rValue;
+        rangesType range = sm->get(idGlobal, champ_velRange).rValue;
         _minVel = range.byLo;
         _maxVel = range.byHi;
     }
@@ -102,8 +109,7 @@ void GraphicsRectangleItem::initialize(EltID id)
 
 QRectF GraphicsRectangleItem::getRectF() const
 {
-    return QRectF((float)_minKey - 0.5, 126.5 - (float)_maxVel,
-                  (float)_maxKey - (float)_minKey + 1, (float)_maxVel - (float)_minVel + 1);
+    return QRectF(-0.5 + _minKey, 126.5 - _maxVel, 1.0 + _maxKey - _minKey, 1.0 + _maxVel - _minVel);
 }
 
 bool GraphicsRectangleItem::contains(const QPointF &point) const
@@ -116,15 +122,12 @@ bool GraphicsRectangleItem::contains(const QPointF &point) const
 void GraphicsRectangleItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
     // Draw base rectangle with a background color and a thin border
-    if (_editingMode == NONE)
-        this->setBrush(_brushRectangle);
-    else
-        this->setBrush(_brushRectangleHovered);
+    this->setBrush(_isSelected ? _brushRectangleSelected : _brushRectangle);
     this->setPen(_penBorderThin);
     QGraphicsRectItem::paint(painter, option, widget);
 
     QRectF rectF = this->rect();
-    switch (_editingMode)
+    switch (_isSelected && s_synchronizeEditingMode ? s_globalEditingMode : _editingMode)
     {
     case NONE:
         // Nothing else
@@ -178,7 +181,8 @@ GraphicsRectangleItem::EditingMode GraphicsRectangleItem::getEditingMode(const Q
     QPoint bottomRightPx = view->mapFromScene(rectF.bottomRight());
 
     // Width of the external areas
-    int width = qMin(0.3 * qMin(bottomRightPx.x() - topLeftPx.x(), bottomRightPx.y() - topLeftPx.y()), 10.);
+    int width = static_cast<int>(qMin(0.3 * qMin(bottomRightPx.x() - topLeftPx.x(),
+                                                 bottomRightPx.y() - topLeftPx.y()), 10.));
 
     // Minimal distance from a border
     EditingMode mode = MOVE_TOP;
@@ -212,6 +216,7 @@ GraphicsRectangleItem::EditingMode GraphicsRectangleItem::setHover(bool isHovere
     if (isHovered)
     {
         _editingMode = getEditingMode(point);
+        s_globalEditingMode = _editingMode;
         this->setZValue(51);
     }
     else
@@ -229,35 +234,36 @@ EltID GraphicsRectangleItem::findBrother()
             _id.typeElement == elementInstSmpl)
     {
         // Sample linked to the division
+        SoundfontManager * sm = SoundfontManager::getInstance();
         EltID idSmpl = _id;
         idSmpl.typeElement = elementSmpl;
-        idSmpl.indexElt = s_sf2->get(_id, champ_sampleID).wValue;
+        idSmpl.indexElt = sm->get(_id, champ_sampleID).wValue;
 
         // Sample linked to another one?
-        SFSampleLink typeLink = s_sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
+        SFSampleLink typeLink = sm->get(idSmpl, champ_sfSampleType).sfLinkValue;
         if (typeLink == rightSample || typeLink == leftSample || typeLink == linkedSample ||
                 typeLink == RomRightSample || typeLink == RomLeftSample || typeLink == RomLinkedSample)
         {
             // Characteristics to find in the other divisions
-            int numSmpl2 = s_sf2->get(idSmpl, champ_wSampleLink).wValue;
-            rangesType keyRange = s_sf2->get(_id, champ_keyRange).rValue;
-            rangesType velRange = s_sf2->get(_id, champ_velRange).rValue;
+            int numSmpl2 = sm->get(idSmpl, champ_wSampleLink).wValue;
+            rangesType keyRange = sm->get(_id, champ_keyRange).rValue;
+            rangesType velRange = sm->get(_id, champ_velRange).rValue;
 
             // Search the brother
             int numBrothers = 0;
             EltID idBrother = _id;
             EltID id2 = _id;
-            foreach (int i, s_sf2->getSiblings(_id))
+            foreach (int i, sm->getSiblings(_id))
             {
                 id2.indexElt2 = i;
                 if (i != _id.indexElt2)
                 {
-                    rangesType keyRange2 = s_sf2->get(id2, champ_keyRange).rValue;
-                    rangesType velRange2 = s_sf2->get(id2, champ_velRange).rValue;
+                    rangesType keyRange2 = sm->get(id2, champ_keyRange).rValue;
+                    rangesType velRange2 = sm->get(id2, champ_velRange).rValue;
                     if (keyRange2.byLo == keyRange.byLo && keyRange2.byHi == keyRange.byHi &&
                             velRange2.byLo == velRange.byLo && velRange2.byHi == velRange.byHi)
                     {
-                        int iTmp = s_sf2->get(id2, champ_sampleID).wValue;
+                        int iTmp = sm->get(id2, champ_sampleID).wValue;
                         if (iTmp == idSmpl.indexElt)
                             numBrothers = 2; // ambiguity, another sample is like id
                         else if (iTmp == numSmpl2)
@@ -288,37 +294,34 @@ void GraphicsRectangleItem::computeNewRange(const QPointF &pointInit, const QPoi
     int nKey = qRound(pointFinal.x() - pointInit.x());
     int nVel = qRound(pointInit.y() - pointFinal.y());
 
-    if (_editingMode != NONE)
+    switch (s_globalEditingMode)
     {
-        switch (_editingMode)
-        {
-        case MOVE_ALL:
-            _minKey = limit(_minKeyInit + nKey, 0, 127);
-            _maxKey = limit(_maxKeyInit + nKey, 0, 127);
-            _minVel = limit(_minVelInit + nVel, 0, 127);
-            _maxVel = limit(_maxVelInit + nVel, 0, 127);
-            break;
-        case MOVE_RIGHT:
-            _maxKey = limit(_maxKeyInit + nKey, _minKey, 127);
-            break;
-        case MOVE_LEFT:
-            _minKey = limit(_minKeyInit + nKey, 0, _maxKey);
-            break;
-        case MOVE_TOP:
-            _maxVel = limit(_maxVelInit + nVel, _minVel, 127);
-            break;
-        case MOVE_BOTTOM:
-            _minVel = limit(_minVelInit + nVel, 0, _maxVel);
-            break;
-        default:
-            break;
-        }
+    case MOVE_ALL:
+        _minKey = limit(_minKeyInit + nKey, 0, 127);
+        _maxKey = limit(_maxKeyInit + nKey, 0, 127);
+        _minVel = limit(_minVelInit + nVel, 0, 127);
+        _maxVel = limit(_maxVelInit + nVel, 0, 127);
+        break;
+    case MOVE_RIGHT:
+        _maxKey = limit(_maxKeyInit + nKey, _minKey, 127);
+        break;
+    case MOVE_LEFT:
+        _minKey = limit(_minKeyInit + nKey, 0, _maxKey);
+        break;
+    case MOVE_TOP:
+        _maxVel = limit(_maxVelInit + nVel, _minVel, 127);
+        break;
+    case MOVE_BOTTOM:
+        _minVel = limit(_minVelInit + nVel, 0, _maxVel);
+        break;
+    default:
+        break;
     }
 
     this->setRect(getRectF());
 }
 
-void GraphicsRectangleItem::saveChanges()
+bool GraphicsRectangleItem::saveChanges()
 {
     EltID idGlobal = _id;
     if (_id.typeElement == elementInstSmpl)
@@ -327,30 +330,34 @@ void GraphicsRectangleItem::saveChanges()
         idGlobal.typeElement = elementPrst;
 
     // Store the key range
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    bool changes = false;
     if (_minKey != _minKeyInit || _maxKey != _maxKeyInit)
     {
-        if (_minKey == 0 && _maxKey == 127 && !s_sf2->isSet(idGlobal, champ_keyRange))
-            s_sf2->reset(_id, champ_keyRange);
+        changes = true;
+        if (_minKey == 0 && _maxKey == 127 && !sm->isSet(idGlobal, champ_keyRange))
+            sm->reset(_id, champ_keyRange);
         else
         {
             AttributeValue value;
-            value.rValue.byLo = _minKey;
-            value.rValue.byHi = _maxKey;
-            s_sf2->set(_id, champ_keyRange, value);
+            value.rValue.byLo = static_cast<unsigned char>(_minKey);
+            value.rValue.byHi = static_cast<unsigned char>(_maxKey);
+            sm->set(_id, champ_keyRange, value);
         }
     }
 
     // Store the velocity range
     if (_minVel != _minVelInit || _maxVel != _maxVelInit)
     {
-        if (_minVel == 0 && _maxVel == 127 && !s_sf2->isSet(idGlobal, champ_velRange))
-            s_sf2->reset(_id, champ_velRange);
+        changes = true;
+        if (_minVel == 0 && _maxVel == 127 && !sm->isSet(idGlobal, champ_velRange))
+            sm->reset(_id, champ_velRange);
         else
         {
             AttributeValue value;
-            value.rValue.byLo = _minVel;
-            value.rValue.byHi = _maxVel;
-            s_sf2->set(_id, champ_velRange, value);
+            value.rValue.byLo = static_cast<unsigned char>(_minVel);
+            value.rValue.byHi = static_cast<unsigned char>(_maxVel);
+            sm->set(_id, champ_velRange, value);
         }
     }
 
@@ -358,6 +365,8 @@ void GraphicsRectangleItem::saveChanges()
     _maxKeyInit = _maxKey;
     _minVelInit = _minVel;
     _maxVelInit = _maxVel;
+
+    return changes;
 }
 
 

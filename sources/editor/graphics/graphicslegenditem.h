@@ -29,23 +29,21 @@
 #include <QBrush>
 #include <QFont>
 #include <QPen>
-#include "soundfontmanager.h"
+#include "basetypes.h"
 
 class GraphicsLegendItem : public QGraphicsItem
 {
 public:
-    GraphicsLegendItem(QString fontFamily, QGraphicsItem *parent = NULL);
-    static void initSf2(SoundfontManager * sf2) { s_sf2 = sf2; }
+    GraphicsLegendItem(QString fontFamily, QGraphicsItem *parent = nullptr);
 
-    void setIds(QList<EltID> ids, int selectionIndex, int selectionNumber);
+    void setIds(QList<EltID> ids, QList<int> highlightedIds, int selectionIndex, int selectionNumber);
     void setLeft(bool isLeft);
     bool isLeft();
 
     QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = NULL);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr);
 
 private:
-    static SoundfontManager * s_sf2;
     static const int s_border;
     QBrush _foregroundBrush;
     QPen _borderPen;
@@ -53,7 +51,9 @@ private:
 
     const QFont _font;
     const QFont _smallFont;
-    QStringList _text;
+    QStringList _textTop;
+    QList<int> _selectedLinesInTextTop;
+    QStringList _textBottom;
     int _selectionIndex;
     int _selectionNumber;
     int _alignment;
