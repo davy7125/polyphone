@@ -42,7 +42,7 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
 
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
-    connect((QObject*)this->horizontalHeader(), SIGNAL(sectionDoubleClicked(int)), this, SLOT(onSectionDoubleClicked(int)));
+    connect(this->horizontalHeader(), SIGNAL(sectionDoubleClicked(int)), this, SLOT(onSectionDoubleClicked(int)));
     connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(onItemSelectionChanged()));
 
     _muteIcon = ContextManager::theme()->getColoredSvg(":/icons/volume-mute.svg", QSize(12, 12), ThemeManager::HIGHLIGHTED_BACKGROUND);
@@ -227,7 +227,7 @@ void TableWidget::commitData(QWidget *editor)
                 {
                     const QModelIndex idx = model()->index(rows, cols);
 
-                    if (this->rowCount() == 47 && curRow == 5)
+                    if (this->rowCount() == 50 && curRow == 5)
                     {
                         // Copy the data in DecorationRole and UserRole
                         model()->setData(idx, model()->data(currentIndex(), Qt::DecorationRole), Qt::DecorationRole);
@@ -405,7 +405,7 @@ void TableWidget::paste()
                 if (text == "!")
                     text = "";
 
-                if (this->rowCount() == 47 && indRow + minRow == 5)
+                if (this->rowCount() == 50 && indRow + minRow == 5)
                 {
                     bool ok;
                     int val = text.toInt(&ok);
@@ -441,7 +441,7 @@ void TableWidget::onSectionDoubleClicked(int index)
 
 void TableWidget::onItemSelectionChanged()
 {
-    if (this->rowCount() == 47) // If instrument
+    if (this->rowCount() == 50) // If instrument
     {
         // Problematic case: background color when the first loopmode cell is selected
         if (this->item(5, 0)->isSelected())

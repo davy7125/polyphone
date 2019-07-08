@@ -703,6 +703,15 @@ QString Attribute::getDescription(AttributeType champ, bool isPrst)
     case champ_overridingRootKey:
         result = trUtf8("Root key");
         break;
+    case champ_byOriginalPitch:
+        result = trUtf8("Sample root key");
+        break;
+    case champ_dwLength:
+        result = trUtf8("Sample length");
+        break;
+    case champ_dwStartLoop:
+        result = trUtf8("Sample loop");
+        break;
     default:
         break;
     }

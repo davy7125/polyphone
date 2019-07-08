@@ -51,9 +51,11 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
 {
     Q_UNUSED(option)
 
-    bool isNumeric, isKey, isLoop;
+    bool isNumeric, isKey, isLoop, isFixed;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop);
+    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed);
+    if (isFixed)
+        return nullptr;
 
     QWidget * widget;
     QColor highlightColor = parent->palette().color(QPalette::Highlight);
@@ -63,7 +65,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
         {
             // Remove the icon in the model
             QVariant previousDecoration = index.data(Qt::DecorationRole);
-            QAbstractItemModel * model = (QAbstractItemModel *)index.model();
+            QAbstractItemModel * model = const_cast<QAbstractItemModel *>(index.model());
             model->blockSignals(true);
             model->setData(index, QImage(), Qt::DecorationRole);
             model->blockSignals(false);
@@ -126,13 +128,13 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
 
 void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    bool isNumeric, isKey, isLoop;
+    bool isNumeric, isKey, isLoop, isFixed;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop);
+    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed);
 
     if (!isNumeric)
     {
-        SpinBoxRange * spin = (SpinBoxRange *)editor;
+        SpinBoxRange * spin = dynamic_cast<SpinBoxRange *>(editor);
         if (index.data().isNull())
             spin->setText("0" + SpinBoxRange::SEPARATOR + "127");
         else
@@ -140,7 +142,7 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
     }
     else if (isLoop)
     {
-        QComboBox * combobox = (QComboBox *)editor;
+        QComboBox * combobox = dynamic_cast<QComboBox *>(editor);
         combobox->blockSignals(true);
         if (index.data(Qt::UserRole).isNull())
             combobox->setCurrentIndex(0);
@@ -163,7 +165,7 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
     }
     else if (isKey)
     {
-        SpinBoxKey * spin = (SpinBoxKey *)editor;
+        SpinBoxKey * spin = dynamic_cast<SpinBoxKey *>(editor);
         if (index.data().isNull())
             spin->setValue(60); // Default value
         else
@@ -171,7 +173,7 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
     }
     else if (nbDecimales > 0)
     {
-        QDoubleSpinBox * spin = (QDoubleSpinBox *)editor;
+        QDoubleSpinBox * spin = dynamic_cast<QDoubleSpinBox *>(editor);
         if (!index.data().isNull())
             spin->setValue(index.data().toString().replace(",", ".").toDouble());
         else
@@ -179,7 +181,7 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
     }
     else
     {
-        QSpinBox * spin = (QSpinBox *)editor;
+        QSpinBox * spin = dynamic_cast<QSpinBox *>(editor);
         if (!index.data().isNull())
             spin->setValue(index.data().toString().toInt());
         else
@@ -191,13 +193,13 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
 
 void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
-    bool isNumeric, isKey, isLoop;
+    bool isNumeric, isKey, isLoop, isFixed;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop);
+    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed);
 
     if (isLoop)
     {
-        ComboBoxLoopMode * combobox = (ComboBoxLoopMode *)editor;
+        ComboBoxLoopMode * combobox = dynamic_cast<ComboBoxLoopMode *>(editor);
 
         if (combobox->count() > 0)
         {
@@ -235,7 +237,7 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
     }
     else if (nbDecimales > 0 && isNumeric)
     {
-        QDoubleSpinBox * spin = (QDoubleSpinBox*)editor;
+        QDoubleSpinBox * spin = dynamic_cast<QDoubleSpinBox*>(editor);
         model->setData(index, QString::number(spin->value(), 'f', nbDecimales), Qt::EditRole);
     }
     else
@@ -247,14 +249,14 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 void TableDelegate::destroyEditor(QWidget * editor, const QModelIndex & index) const
 {
-    bool isNumeric, isKey, isLoop;
+    bool isNumeric, isKey, isLoop, isFixed;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop);
+    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed);
 
     if (isLoop && !editor->property(DECO_PROPERTY).isNull())
     {
         // Restore the previous decoration
-        QAbstractItemModel * model = (QAbstractItemModel *)index.model();
+        QAbstractItemModel * model = const_cast<QAbstractItemModel *>(index.model());
         model->blockSignals(true);
         model->setData(index, editor->property(DECO_PROPERTY), Qt::DecorationRole);
         model->blockSignals(false);
@@ -266,9 +268,9 @@ void TableDelegate::destroyEditor(QWidget * editor, const QModelIndex & index) c
 
 void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    bool isNumeric, isKey, isLoop;
+    bool isNumeric, isKey, isLoop, isFixed;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop);
+    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed);
 
     if (isLoop)
     {
@@ -311,14 +313,15 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
     }
 }
 
-void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow, bool &isLoop) const
+void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow, bool &isLoop, bool &isFixed) const
 {
     isNumeric = true;
     isKey = false;
     isLoop = false;
+    isFixed = false;
     nbDecimales = 0;
 
-    if (_table->rowCount() == 47)
+    if (_table->rowCount() == 50)
     {
         // Table instrument
         switch (numRow - 1)
@@ -330,20 +333,28 @@ void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int 
         case 1:
             isNumeric = false;
             break;
-        case 2: case 3: case 10: case 15: case 23: case 33: case 38: case 39:
+        case 2: case 3: case 11: case 16: case 24: case 34: case 39: case 40:
             nbDecimales = 1;
             break;
-        case 11: case 12: case 13: case 14: case 16:
-        case 19: case 20: case 21: case 22: case 24:
-        case 29: case 30: case 34: case 35:
+        case 12: case 13: case 14: case 15: case 17:
+        case 20: case 21: case 22: case 23: case 25:
+        case 30: case 31: case 35: case 36:
             nbDecimales = 3;
             break;
-        case 5: case 40:
+        case 5:
+            isKey = true;
+            isFixed = true;
+            break;
+        case 41: case 6:
             isKey = true;
             break;
         case 4:
             // Loop mode
             isLoop = true;
+            break;
+        case 43: case 46:
+            isFixed = true;
+            isNumeric = false;
             break;
         }
     }

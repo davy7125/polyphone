@@ -93,6 +93,7 @@ private:
     int limit(int iVal, AttributeType champ, EltID id);
     void resetChamp(int colonne, AttributeType champ1, AttributeType champ2);
     void setOffset(int ligne, int colonne, AttributeType champ1, AttributeType champ2);
+    void styleFixedRow(int numRow);
 
     QList<int> _listKeyEnlighted;
     int _sortType;

@@ -177,6 +177,7 @@ TableWidgetInst::TableWidgetInst(QWidget *parent) : TableWidget(parent)
                << champ_initialAttenuation
                << champ_pan
                << champ_sampleModes
+               << champ_byOriginalPitch
                << champ_overridingRootKey
                << champ_coarseTune
                << champ_fineTune
@@ -214,14 +215,30 @@ TableWidgetInst::TableWidgetInst(QWidget *parent) : TableWidget(parent)
                << champ_reverbEffectsSend
                << champ_keynum
                << champ_velocity
+               << champ_dwLength
                << champ_startAddrsOffset
                << champ_endAddrsOffset
+               << champ_dwStartLoop
                << champ_startloopAddrsOffset
                << champ_endloopAddrsOffset;
 
+    // Vertical header
+    QColor color = this->palette().color(QPalette::Base);
+    QColor fixedColor = ThemeManager::mix(this->palette().color(QPalette::Text), color, 0.25);
+    QFont font(this->font().family(), 4 * this->font().pointSize() / 5, QFont::Bold);
     this->setRowCount(_fieldList.count() + 1);
     for (int i = 1; i < this->rowCount(); i++)
-        this->setVerticalHeaderItem(i, new QTableWidgetItem(Attribute::getDescription(_fieldList[i - 1], false)));
+    {
+        QTableWidgetItem * item = new QTableWidgetItem(Attribute::getDescription(_fieldList[i - 1], false));
+        if (i == 6 || i == 44 || i == 47)
+        {
+            // Different style for the fixed elements
+            item->setFont(font);
+            item->setTextColor(color);
+            item->setBackground(fixedColor);
+        }
+        this->setVerticalHeaderItem(i, item);
+    }
 }
 
 TableWidgetInst::~TableWidgetInst() {}

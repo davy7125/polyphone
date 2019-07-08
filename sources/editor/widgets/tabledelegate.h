@@ -49,7 +49,7 @@ protected:
 #endif
 
 private:
-    void getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow, bool &isLoop) const;
+    void getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow, bool &isLoop, bool &isFixed) const;
     QTableWidget * _table;
 
     static const char * DECO_PROPERTY;

@@ -38,7 +38,7 @@ class TableWidget : public QTableWidget
     Q_OBJECT
 
 public:
-    TableWidget(QWidget *parent = 0);
+    TableWidget(QWidget *parent = nullptr);
     ~TableWidget() { delete this->itemDelegate(); }
     void clear();
     void addColumn(int column, QString title, EltID id);

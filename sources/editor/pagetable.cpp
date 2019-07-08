@@ -309,6 +309,32 @@ void PageTable::addDivisions(EltID id)
             row = _table->getRow(champ_endloopAddrsOffset);
             _table->item(row, numCol)->setText(QString::number(offsetEndLoop));
         }
+
+        if (this->contenant == elementInst)
+        {
+            // Data about linked samples
+            int row = _table->getRow(champ_byOriginalPitch);
+            if (row > -1)
+            {
+                unsigned char pitch = _sf2->get(id3, champ_byOriginalPitch).bValue;
+                _table->item(row, numCol)->setText(QString::number(pitch));
+            }
+
+            row = _table->getRow(champ_dwLength);
+            if (row > -1)
+            {
+                unsigned int length = _sf2->get(id3, champ_dwLength).dwValue;
+                _table->item(row, numCol)->setText(QString::number(length));
+            }
+
+            row = _table->getRow(champ_dwStartLoop);
+            if (row > -1)
+            {
+                unsigned int start = _sf2->get(id3, champ_dwStartLoop).dwValue;
+                unsigned int end = _sf2->get(id3, champ_dwEndLoop).dwValue;
+                _table->item(row, numCol)->setText(QString::number(start) + "-" + QString::number(end));
+            }
+        }
     }
 }
 
@@ -320,50 +346,62 @@ void PageTable::formatTable(bool multiGlobal)
     QBrush brush2(TableWidget::getPixMap(alternateColor, color));
     if (this->contenant == elementInst)
     {
-        // First column with a hatching pattern
-        if (!multiGlobal)
-        {
-            for (int j = 0; j < _table->rowCount(); j++)
-            {
-                if (j < 6)
-                    _table->item(j, 0)->setBackground(brush1);
-                else if (j < 10)
-                    _table->item(j, 0)->setBackground(brush2);
-                else if (j < 12)
-                    _table->item(j, 0)->setBackground(brush1);
-                else if (j < 20)
-                    _table->item(j, 0)->setBackground(brush2);
-                else if (j < 30)
-                    _table->item(j, 0)->setBackground(brush1);
-                else if (j < 38)
-                    _table->item(j, 0)->setBackground(brush2);
-                else if (j < 43)
-                    _table->item(j, 0)->setBackground(brush1);
-                else
-                    _table->item(j, 0)->setBackground(brush2);
-                _table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
-            }
-        }
-
         // Yellow rows
         for (int i = multiGlobal ? 0 : 1; i < _table->columnCount(); i++)
         {
             for (int j = 0; j < _table->rowCount(); j++)
             {
                 if (j < 6) {}
-                else if (j < 10)
+                else if (j < 11)
                     _table->item(j, i)->setBackgroundColor(alternateColor);
-                else if (j < 12) {}
-                else if (j < 20)
+                else if (j < 13) {}
+                else if (j < 21)
                     _table->item(j, i)->setBackgroundColor(alternateColor);
-                else if (j < 30) {}
-                else if (j < 38)
+                else if (j < 31) {}
+                else if (j < 39)
                     _table->item(j, i)->setBackgroundColor(alternateColor);
-                else if (j < 43) {}
+                else if (j < 44) {}
                 else
                     _table->item(j, i)->setBackgroundColor(alternateColor);
                 _table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
+        }
+
+        if (multiGlobal)
+        {
+            // Hide rows champ_byOriginalPitch, champ_dwLength and champ_dwStartLoop
+            _table->hideRow(6);
+            _table->hideRow(44);
+            _table->hideRow(47);
+        }
+        else
+        {
+            // First column with a hatching pattern
+            for (int j = 0; j < _table->rowCount(); j++)
+            {
+                if (j < 6)
+                    _table->item(j, 0)->setBackground(brush1);
+                else if (j < 11)
+                    _table->item(j, 0)->setBackground(brush2);
+                else if (j < 13)
+                    _table->item(j, 0)->setBackground(brush1);
+                else if (j < 21)
+                    _table->item(j, 0)->setBackground(brush2);
+                else if (j < 31)
+                    _table->item(j, 0)->setBackground(brush1);
+                else if (j < 39)
+                    _table->item(j, 0)->setBackground(brush2);
+                else if (j < 44)
+                    _table->item(j, 0)->setBackground(brush1);
+                else
+                    _table->item(j, 0)->setBackground(brush2);
+                _table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
+            }
+
+            // Style of rows champ_byOriginalPitch, champ_dwLength and champ_dwStartLoop
+            styleFixedRow(6);
+            styleFixedRow(44);
+            styleFixedRow(47);
         }
     }
     else
@@ -410,6 +448,27 @@ void PageTable::formatTable(bool multiGlobal)
         }
     }
     _table->hideRow(0);
+}
+
+void PageTable::styleFixedRow(int numRow)
+{
+    // Colors, font
+    QColor color = this->palette().color(QPalette::Base);
+    QFont font(this->font().family(), 4 * this->font().pointSize() / 5, QFont::Bold);
+    QColor fixedColor = ThemeManager::mix(this->palette().color(QPalette::Text), color, 0.25);
+
+    // Style the cells
+    for (int i = 0; i < _table->columnCount(); i++)
+    {
+        _table->item(numRow, i)->setFont(font);
+        _table->item(numRow, i)->setTextColor(color);
+        _table->item(numRow, i)->setBackground(fixedColor);
+        _table->item(numRow, i)->setFlags(Qt::NoItemFlags);
+    }
+
+    // Visibility of the row
+    _table->showRow(numRow);
+    _table->setRowHeight(numRow, 14);
 }
 
 void PageTable::afficheRanges(bool justSelection)
