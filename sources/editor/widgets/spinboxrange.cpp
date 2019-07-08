@@ -32,9 +32,11 @@ int SpinBoxRange::MAXI = 127;
 
 SpinBoxRange::SpinBoxRange(QWidget *parent) : QAbstractSpinBox(parent),
     _valMin(MINI),
-    _valMax(MAXI)
+    _valMax(MAXI),
+    _firstMidiKey(-1)
 {
     connect(this, SIGNAL(editingFinished()), this, SLOT(updateValue()));
+    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), this, SLOT(onKeyPlayed(int,int)));
 }
 
 void SpinBoxRange::stepBy(int steps)
@@ -124,6 +126,29 @@ void SpinBoxRange::clear()
     _valMax = MAXI;
     formatText();
     emit(valueChanged());
+}
+
+void SpinBoxRange::onKeyPlayed(int key, int vel)
+{
+    if (vel > 0)
+    {
+        if (_firstMidiKey == -1)
+        {
+            // Single note for now
+            _firstMidiKey = key;
+            _valMin = _valMax = key;
+        }
+        else
+        {
+            // The second creates a range
+            _valMin = qMin(_firstMidiKey, key);
+            _valMax = qMax(_firstMidiKey, key);
+            _firstMidiKey = -1;
+        }
+        formatText();
+    }
+    else
+        _firstMidiKey = -1;
 }
 
 QAbstractSpinBox::StepEnabled SpinBoxRange::stepEnabled() const

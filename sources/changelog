@@ -7,6 +7,7 @@ polyphone (2.1) unstable; urgency=low
   * (improvement) better ergonomics for editing modulators
   * (improvement) multi selection is allowed in the range editor
   * (improvement) show some of the sample information at the instrument level
+  * (improvement) keys and key ranges can be edited with a midi keyboard in the table
   * (improvement) drag & drop of divisions in the tree can create instruments and presets
   * (improvement) drag & drop in the tree can duplicate elements within instruments and presets
   * (fix) several modulators can target the same modulator

@@ -37,6 +37,9 @@ protected:
     virtual QValidator::State validate(QString &input, int &pos) const;
     virtual int valueFromText(const QString &text) const;
     virtual QString textFromValue(int val) const;
+
+private slots:
+    void onKeyPlayed(int key, int vel);
 };
 
 #endif // SPINBOXKEY_H

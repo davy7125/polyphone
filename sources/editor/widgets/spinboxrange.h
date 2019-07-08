@@ -59,6 +59,7 @@ protected:
 
 private slots:
     void updateValue();
+    void onKeyPlayed(int key, int vel);
 
 private:
     enum SpinboxSection
@@ -72,6 +73,7 @@ private:
     static int MINI;
     static int MAXI;
     int _valMin, _valMax;
+    int _firstMidiKey;
 };
 
 class SpinBoxVelocityRange : public SpinBoxRange

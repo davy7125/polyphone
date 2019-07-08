@@ -31,6 +31,8 @@ SpinBoxKey::SpinBoxKey(QWidget *parent) :
     this->setMinimum(0);
     this->setMaximum(127);
     this->setValue(60);
+
+    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), this, SLOT(onKeyPlayed(int,int)));
 }
 
 QValidator::State SpinBoxKey::validate(QString &input, int &pos) const
@@ -50,4 +52,10 @@ int SpinBoxKey::valueFromText(const QString &text) const
 QString SpinBoxKey::textFromValue(int val) const
 {
     return ContextManager::keyName()->getKeyName(val);
+}
+
+void SpinBoxKey::onKeyPlayed(int key, int vel)
+{
+    if (vel > 0)
+        this->setValue(key);
 }

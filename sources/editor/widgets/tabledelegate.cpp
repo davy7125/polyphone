@@ -63,7 +63,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
     {
         if (isLoop)
         {
-            // Remove the icon in the model
+            // Remove the icon from the model
             QVariant previousDecoration = index.data(Qt::DecorationRole);
             QAbstractItemModel * model = const_cast<QAbstractItemModel *>(index.model());
             model->blockSignals(true);
@@ -79,8 +79,8 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             SpinBoxKey * spin = new SpinBoxKey(parent);
             spin->setMinimum(0);
             spin->setMaximum(127);
-            spin->setStyleSheet("SpinBoxKey{ border: 3px solid " + highlightColor.name() + "; }"
-                                                                                           "SpinBoxKey::down-button{width:0px;} SpinBoxKey::up-button{width:0px;} ");
+            spin->setStyleSheet("SpinBoxKey{ border: 3px solid " + highlightColor.name() + "; }" +
+                                "SpinBoxKey::down-button{width:0px;} SpinBoxKey::up-button{width:0px;} ");
             widget = spin;
         }
         else if (nbDecimales == 0)
@@ -88,8 +88,8 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             QSpinBox * spin = new QSpinBox(parent);
             spin->setMinimum(-2147483647);
             spin->setMaximum(2147483647);
-            spin->setStyleSheet("QSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
-                                                                                         "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
+            spin->setStyleSheet("QSpinBox{ border: 3px solid " + highlightColor.name() + "; }" +
+                                "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
             widget = spin;
         }
         else
@@ -98,8 +98,8 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             spin->setMinimum(-1000000);
             spin->setMaximum(1000000);
             spin->setSingleStep(.1);
-            spin->setStyleSheet("QDoubleSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
-                                                                                               "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
+            spin->setStyleSheet("QDoubleSpinBox{ border: 3px solid " + highlightColor.name() + "; }" +
+                                "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
             spin->setDecimals(nbDecimales);
             widget = spin;
         }
@@ -112,8 +112,8 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             spin = new SpinBoxKeyRange(parent);
         else
             spin = new SpinBoxVelocityRange(parent);
-        spin->setStyleSheet("SpinBoxRange{ border: 3px solid " + highlightColor.name() + "; }"
-                                                                                         "SpinBoxRange::down-button{width:0px;} SpinBoxRange::up-button{width:0px;} ");
+        spin->setStyleSheet("SpinBoxRange{ border: 3px solid " + highlightColor.name() + "; }" +
+                            "SpinBoxRange::down-button{width:0px;} SpinBoxRange::up-button{width:0px;} ");
         widget = spin;
     }
 
@@ -297,9 +297,9 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
         if (_modDisplay.contains(index.column()) && _modDisplay[index.column()].contains(index.row()))
         {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
-        QStyleOptionViewItem opt(option);
+            QStyleOptionViewItem opt(option);
 #else
-        QStyleOptionViewItemV4 opt(option);
+            QStyleOptionViewItemV4 opt(option);
 #endif
             initStyleOption(&opt, index);
             QRect rect1 = opt.rect;

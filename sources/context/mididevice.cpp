@@ -50,7 +50,7 @@ void midiCallback(double deltatime, std::vector<unsigned char> *message, void *u
     {
     case 0x80: case 0x90: // NOTE ON or NOTE OFF
         // First message is the note, second is velocity
-        if (status == 0x90 || message->at(2) == 0)
+        if (status == 0x80 || message->at(2) == 0)
             ev = new NoteEvent(message->at(1), 0);
         else
             ev = new NoteEvent(message->at(1), message->at(2));
