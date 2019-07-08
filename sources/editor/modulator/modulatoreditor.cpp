@@ -119,14 +119,14 @@ void ModulatorEditor::setIds(IdList ids, QList<AttributeType> attributes)
         // Shouldn't happen
         _currentId.typeElement = elementUnknown;
         ui->stackedWidget->setCurrentIndex(0);
-        ui->labelModSummary->setText("<b>" + trUtf8("Modulators:") + "</b> -");
+        ui->labelModSummary->setText(trUtf8("No modulators"));
 
     }
     else if (ids.count() > 1)
     {
         _currentId.typeElement = elementUnknown;
         ui->stackedWidget->setCurrentIndex(1);
-        ui->labelModSummary->setText("<b>" + trUtf8("Modulators:") + "</b> -");
+        ui->labelModSummary->setText(trUtf8("Select a single division to display the modulator list"));
     }
     else
     {

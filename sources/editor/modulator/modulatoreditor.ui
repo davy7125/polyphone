@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>214</width>
-    <height>159</height>
+    <width>437</width>
+    <height>208</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -161,7 +161,7 @@
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>2</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="pageNoModulators">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -218,7 +218,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Select a single division</string>
+             <string>Select a single division to display the modulator list</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
