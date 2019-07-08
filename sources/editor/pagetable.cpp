@@ -346,13 +346,13 @@ void PageTable::formatTable(bool multiGlobal)
     QBrush brush2(TableWidget::getPixMap(alternateColor, color));
     if (this->contenant == elementInst)
     {
-        // Yellow rows
+        // Rows with the alternate color
         for (int i = multiGlobal ? 0 : 1; i < _table->columnCount(); i++)
         {
             for (int j = 0; j < _table->rowCount(); j++)
             {
                 if (j < 6) {}
-                else if (j < 11)
+                else if (j < 10)
                     _table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 13) {}
                 else if (j < 21)
@@ -381,7 +381,7 @@ void PageTable::formatTable(bool multiGlobal)
             {
                 if (j < 6)
                     _table->item(j, 0)->setBackground(brush1);
-                else if (j < 11)
+                else if (j < 10)
                     _table->item(j, 0)->setBackground(brush2);
                 else if (j < 13)
                     _table->item(j, 0)->setBackground(brush1);
@@ -452,23 +452,21 @@ void PageTable::formatTable(bool multiGlobal)
 
 void PageTable::styleFixedRow(int numRow)
 {
-    // Colors, font
-    QColor color = this->palette().color(QPalette::Base);
-    QFont font(this->font().family(), 4 * this->font().pointSize() / 5, QFont::Bold);
-    QColor fixedColor = ThemeManager::mix(this->palette().color(QPalette::Text), color, 0.25);
+    // Color, font
+    QFont font(this->font().family(), 4 * this->font().pointSize() / 5, QFont::Normal, true);
+    QColor fixedColor = ThemeManager::mix(this->palette().color(QPalette::Text), this->palette().color(QPalette::Base), 0.35);
 
     // Style the cells
     for (int i = 0; i < _table->columnCount(); i++)
     {
         _table->item(numRow, i)->setFont(font);
-        _table->item(numRow, i)->setTextColor(color);
-        _table->item(numRow, i)->setBackground(fixedColor);
+        _table->item(numRow, i)->setTextColor(fixedColor);
         _table->item(numRow, i)->setFlags(Qt::NoItemFlags);
     }
 
     // Visibility of the row
     _table->showRow(numRow);
-    _table->setRowHeight(numRow, 14);
+    _table->setRowHeight(numRow, 2 * font.pointSize());
 }
 
 void PageTable::afficheRanges(bool justSelection)

@@ -166,8 +166,8 @@ void GraphicsLegendItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
     for (int i = 0; i < _textTop.count(); i++)
     {
         if (_selectedLinesInTextTop.contains(i))
-            painter->drawText(QPoint(s_border, fm.height() * (i + 1)), "⮞");
-        painter->drawText(QPoint(static_cast<int>(1.5 * fm.width("⮞") + s_border),
+            painter->drawText(QPoint(s_border, fm.height() * (i + 1)), "\u2192");
+        painter->drawText(QPoint(static_cast<int>(1.5 * fm.width("\u2192") + s_border),
                                  fm.height() * (i + 1)), _textTop.at(i));
     }
     for (int i = 0; i < _textBottom.count(); i++)
@@ -193,7 +193,7 @@ QSizeF GraphicsLegendItem::getTextSize() const
     double height = (0.5 + _textTop.count() + _textBottom.count()) * fm.height() + 2 * s_border;
     double width = 0;
     foreach (QString line, _textTop)
-        width = qMax(width, 1.5 * fm.width("⮞") + fm.width(line));
+        width = qMax(width, 1.5 * fm.width("\u2192") + fm.width(line));
     foreach (QString line, _textBottom)
         width = qMax(width, static_cast<double>(fm.width(line)));
     width += 2 * s_border;

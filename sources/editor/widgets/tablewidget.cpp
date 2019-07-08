@@ -39,6 +39,7 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
     setItemDelegate(_tableDelegate);
     _tableHeader = new TableHeaderView(this);
     setHorizontalHeader(_tableHeader);
+    this->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));

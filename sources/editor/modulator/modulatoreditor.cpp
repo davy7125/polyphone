@@ -207,12 +207,20 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes)
     ui->stackedWidget->setCurrentIndex(modCount == 0 ? 0 : 2);
 
     // Fill the summary
-    QString summary = "<b>" + trUtf8("Modulators (%1): ").arg(modCount) + "</b> ";
+    QString summary;
     if (modTargets.count() == 0)
-        summary += "-";
+        summary = trUtf8("No modulators");
     else
+    {
+        summary = "<b>";
+        if (modCount > 1)
+            summary += trUtf8("1 modulator:", "singular form of modulator").arg(modCount);
+        else
+            summary += trUtf8("%1 modulators:", "plural form of modulator").arg(modCount);
+        summary += "</b> ";
         for (int i = 0; i < modTargets.count(); i++)
             summary += (i > 0 ? ", " : "") + modTargets[i];
+    }
     ui->labelModSummary->setText(summary);
 
     // Button visibility
