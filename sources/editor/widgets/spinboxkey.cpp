@@ -56,6 +56,6 @@ QString SpinBoxKey::textFromValue(int val) const
 
 void SpinBoxKey::onKeyPlayed(int key, int vel)
 {
-    if (vel > 0)
+    if (vel > 0 && this->hasFocus())
         this->setValue(key);
 }

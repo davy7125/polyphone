@@ -130,7 +130,7 @@ void SpinBoxRange::clear()
 
 void SpinBoxRange::onKeyPlayed(int key, int vel)
 {
-    if (vel > 0)
+    if (vel > 0 && this->hasFocus())
     {
         if (_firstMidiKey == -1)
         {
