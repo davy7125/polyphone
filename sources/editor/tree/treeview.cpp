@@ -25,9 +25,11 @@
 #include "treeview.h"
 #include "treeitemdelegate.h"
 #include "treesortfilterproxy.h"
+#include "contextmanager.h"
 #include "soundfontmanager.h"
 #include <QMouseEvent>
 #include <QScrollBar>
+#include <QApplication>
 #include "treeviewmenu.h"
 #include "duplicator.h"
 #include "sampleloader.h"
@@ -55,6 +57,9 @@ TreeView::TreeView(QWidget * parent) : QTreeView(parent),
     this->viewport()->setAcceptDrops(true);
     this->setDropIndicatorShown(true);
     this->setDragDropMode(QAbstractItemView::InternalMove);
+
+    // Connection to the midi signals
+    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), this, SLOT(onKeyPlayed(int,int)));
 }
 
 void TreeView::mousePressEvent(QMouseEvent * event)
@@ -857,4 +862,81 @@ void TreeView::onCreateElements(IdList ids, bool oneForEach)
             duplicator.copy(id, newElement);
     }
     sm->endEditing("command:fastAdd");
+}
+
+void TreeView::onKeyPlayed(int key, int vel)
+{
+    // The velocity must be positive, the "ctrl" key must be on, the treeview must be visible
+    if (vel == 0 || (QApplication::keyboardModifiers() & Qt::ControlModifier) == 0 || !this->isVisible())
+        return;
+
+    // Get the unique instrument or preset, or return
+    IdList ids = getSelectedIds();
+    if (ids.empty() || (!ids.areAllWithType(elementInst) && !ids.areAllWithType(elementPrst)))
+        return;
+
+    EltID id(elementUnknown);
+    IdList tmpIds = ids.getSelectedIds(elementInst);
+    if (tmpIds.count() == 1)
+        id = tmpIds[0];
+    else
+    {
+        tmpIds = ids.getSelectedIds(elementPrst);
+        if (tmpIds.count() == 1)
+            id = tmpIds[0];
+    }
+    if (id.typeElement == elementUnknown)
+        return;
+
+    // Child id
+    EltID idChild = id;
+    if (id.typeElement == elementInst)
+        idChild.typeElement = elementInstSmpl;
+    else if (id.typeElement == elementPrst)
+        idChild.typeElement = elementPrstInst;
+    else
+        return;
+
+    // Browse all children
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    IdList idsToSelect;
+    foreach (int i, sm->getSiblings(idChild))
+    {
+        idChild.indexElt2 = i;
+
+        // Ranges
+        int minKey, maxKey, minVel, maxVel;
+        if (sm->isSet(idChild, champ_keyRange))
+        {
+            rangesType range = sm->get(idChild, champ_keyRange).rValue;
+            minKey = qMin(range.byLo, range.byHi);
+            maxKey = qMax(range.byLo, range.byHi);
+        }
+        else
+        {
+            minKey = 0;
+            maxKey = 127;
+        }
+        if (sm->isSet(idChild, champ_velRange))
+        {
+            rangesType range = sm->get(idChild, champ_velRange).rValue;
+            minVel = qMin(range.byLo, range.byHi);
+            maxVel = qMax(range.byLo, range.byHi);
+        }
+        else
+        {
+            minVel = 0;
+            maxVel = 127;
+        }
+
+        // Keep the division if the range contains {key, vel}
+        if (minKey <= key && key <= maxKey && minVel <= vel && vel <= maxVel)
+            idsToSelect << idChild;
+    }
+
+    // If possible, select the divisions containing {key, vel}
+    if (idsToSelect.empty())
+        return;
+
+    this->onSelectionChanged(idsToSelect);
 }

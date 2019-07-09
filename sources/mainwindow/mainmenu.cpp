@@ -79,6 +79,7 @@ MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
 
     _helpAction = new QAction(trUtf8("Online &manual"), this);
     _helpAction->setShortcut(Qt::Key_F1);
+    //_helpAction->setShortcutContext(Qt::ApplicationShortcut);
     connect(_helpAction, SIGNAL(triggered()), this, SIGNAL(onlineHelpClicked()));
     this->addAction(_helpAction);
 

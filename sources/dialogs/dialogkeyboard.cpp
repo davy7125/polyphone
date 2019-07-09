@@ -27,8 +27,9 @@
 #include "contextmanager.h"
 #include "editortoolbar.h"
 
+// Note: cannot be Qt::Tool instead of Qt::Dialog because keys must be catched before the QActions of the QMainWindow
 DialogKeyboard::DialogKeyboard(QWidget *parent) :
-    QDialog(parent, Qt::Tool | Qt::WindowCloseButtonHint),
+    QDialog(parent, Qt::Dialog | Qt::WindowCloseButtonHint),
     ui(new Ui::DialogKeyboard)
 {
     ui->setupUi(this);

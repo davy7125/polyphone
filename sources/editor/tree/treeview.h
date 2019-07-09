@@ -61,6 +61,7 @@ protected:
 private slots:
     void openMenu(const QPoint &point);
     void onCreateElements(IdList ids, bool oneForEach);
+    void onKeyPlayed(int key, int vel);
 
 private:
     bool select(EltID id, QItemSelectionModel::SelectionFlag flags = QItemSelectionModel::ClearAndSelect);

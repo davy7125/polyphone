@@ -29,49 +29,49 @@ ContextManager * ContextManager::s_instance = nullptr;
 
 ConfManager * ContextManager::configuration()
 {
-    if (s_instance == NULL)
+    if (s_instance == nullptr)
         s_instance = new ContextManager();
     return s_instance->_configuration;
 }
 
 KeyNameManager * ContextManager::keyName()
 {
-    if (s_instance == NULL)
+    if (s_instance == nullptr)
         s_instance = new ContextManager();
     return s_instance->_keyName;
 }
 
 RecentFileManager * ContextManager::recentFile()
 {
-    if (s_instance == NULL)
+    if (s_instance == nullptr)
         s_instance = new ContextManager();
     return s_instance->_recentFile;
 }
 
 ThemeManager * ContextManager::theme()
 {
-    if (s_instance == NULL)
+    if (s_instance == nullptr)
         s_instance = new ContextManager();
     return s_instance->_theme;
 }
 
 TranslationManager * ContextManager::translation()
 {
-    if (s_instance == NULL)
+    if (s_instance == nullptr)
         s_instance = new ContextManager();
     return s_instance->_translation;
 }
 
 AudioDevice * ContextManager::audio()
 {
-    if (s_instance == NULL)
+    if (s_instance == nullptr)
         s_instance = new ContextManager();
     return s_instance->_audio;
 }
 
 MidiDevice * ContextManager::midi()
 {
-    if (s_instance == NULL)
+    if (s_instance == nullptr)
         s_instance = new ContextManager();
     return s_instance->_midi;
 }

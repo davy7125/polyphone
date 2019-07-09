@@ -401,37 +401,34 @@ void PianoScene::keyPressEvent(QKeyEvent * keyEvent)
 {
     if (!keyEvent->isAutoRepeat()) // ignore auto-repeats
     {
-        if (keyEvent->modifiers() & Qt::ControlModifier)
+        int key = keyEvent->key();
+        if ((keyEvent->modifiers() & Qt::ControlModifier) > 0 && key >= Qt::Key_1 && key <= Qt::Key_8)
         {
-            int key = keyEvent->key();
-            if (key >= Qt::Key_1 && key <= Qt::Key_8)
-            {
-                int octave = key - Qt::Key_1;
-                ContextManager::configuration()->setValue(ConfManager::SECTION_MAP, "octave_offset", octave);
-            }
+            int octave = key - Qt::Key_1;
+            ContextManager::configuration()->setValue(ConfManager::SECTION_MAP, "octave_offset", octave);
         }
-        else if (keyEvent->key() == Qt::Key_Up && m_currentArrow == 0)
+        else if (key == Qt::Key_Up && m_currentArrow == 0)
         {
             int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 10 : 1;
             m_lastNoteUp = m_lastNote;
             keyNoteOn(m_lastNoteUp, qMin(127, m_lastVelocity + modif));
             m_currentArrow = 1;
         }
-        else if (keyEvent->key() == Qt::Key_Down && m_currentArrow == 0)
+        else if (key == Qt::Key_Down && m_currentArrow == 0)
         {
             int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 10 : 1;
             m_lastNoteDown = m_lastNote;
             keyNoteOn(m_lastNoteDown, qMax(1, m_lastVelocity - modif));
             m_currentArrow = 2;
         }
-        else if (keyEvent->key() == Qt::Key_Right && m_currentArrow == 0)
+        else if (key == Qt::Key_Right && m_currentArrow == 0)
         {
             int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 6 : 1;
             m_lastNoteRight = qMin(127, m_lastNote + modif);
             keyNoteOn(m_lastNoteRight, m_lastVelocity);
             m_currentArrow = 3;
         }
-        else if (keyEvent->key() == Qt::Key_Left && m_currentArrow == 0)
+        else if (key == Qt::Key_Left && m_currentArrow == 0)
         {
             int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 6 : 1;
             m_lastNoteLeft = qMax(0, m_lastNote - modif);
@@ -443,8 +440,8 @@ void PianoScene::keyPressEvent(QKeyEvent * keyEvent)
             QString modifier;
             if (keyEvent->modifiers() & Qt::ShiftModifier)
                 modifier = "Shift+";
-            QString key = QKeySequence(keyEvent->key()).toString();
-            int note = _keybdMap.getKey(QKeySequence(modifier + key));
+            QString keyStr = QKeySequence(key).toString();
+            int note = _keybdMap.getKey(QKeySequence(modifier + keyStr));
             if (note > -1)
                 keyNoteOn(note, getKeyVelocity());
         }
@@ -478,12 +475,12 @@ void PianoScene::keyReleaseEvent(QKeyEvent * keyEvent)
         }
         else
         {
-            QString modifier;
-            if (keyEvent->modifiers() & Qt::ShiftModifier)
-                modifier = "Shift+";
-            QString key = QKeySequence(keyEvent->key()).toString();
-            QKeySequence(modifier + key);
-            int note = _keybdMap.getKey(QKeySequence(modifier + key));
+            // Mute the note with and without the modifier
+            QString keyStr = QKeySequence(keyEvent->key()).toString();
+            int note = _keybdMap.getKey(QKeySequence(keyStr));
+            if (note > -1)
+                keyNoteOff(note);
+            note = _keybdMap.getKey(QKeySequence("Shift+" + keyStr));
             if (note > -1)
                 keyNoteOff(note);
         }

@@ -10,6 +10,7 @@ polyphone (2.1) unstable; urgency=low
   * (improvement) keys and key ranges can be edited with a midi keyboard in the table
   * (improvement) drag & drop of divisions in the tree can create instruments and presets
   * (improvement) drag & drop in the tree can duplicate elements within instruments and presets
+  * (improvement) "Ctrl" + a midi signal selects the corresponding division(s) in an instrument or preset
   * (fix) several modulators can target the same modulator
   * (fix) bug when exporting several WAV files
   * (fix) monitoring tool was not working
