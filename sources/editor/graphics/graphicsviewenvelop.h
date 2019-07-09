@@ -34,10 +34,10 @@ class GraphicsViewEnvelop : public QCustomPlot
     Q_OBJECT
 
 public:
-    explicit GraphicsViewEnvelop(QWidget *parent = 0);
+    explicit GraphicsViewEnvelop(QWidget *parent = nullptr);
     ~GraphicsViewEnvelop();
 
-    // Specify the scroll bar
+    // Link the scroll bar
     void linkSliderX(QScrollBar * _qScrollX);
 
     // Clear all envelops
