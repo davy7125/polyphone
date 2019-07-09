@@ -61,6 +61,8 @@ ModulatorEditor::ModulatorEditor(QWidget *parent) :
     ui->labelSelectDivision->setStyleSheet("QLabel{color:" + this->palette().dark().color().name() +
                                            ";background-color:" + ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() +
                                            "}");
+    _mixedColor = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
+                                    ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND), 0.5);
 
     // Initialize the expanded / collapsed state
     if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "modulator_section_collapsed", false).toBool())
@@ -119,14 +121,15 @@ void ModulatorEditor::setIds(IdList ids, QList<AttributeType> attributes)
         // Shouldn't happen
         _currentId.typeElement = elementUnknown;
         ui->stackedWidget->setCurrentIndex(0);
-        ui->labelModSummary->setText(trUtf8("No modulators"));
-
+        ui->labelModSummary->setText("<b>" + trUtf8("No modulators") + "</b>");
+        ui->labelModSummary->setStyleSheet("QLabel{color:" + _mixedColor.name() + ";}");
     }
     else if (ids.count() > 1)
     {
         _currentId.typeElement = elementUnknown;
         ui->stackedWidget->setCurrentIndex(1);
-        ui->labelModSummary->setText(trUtf8("Select a single division to display the modulator list"));
+        ui->labelModSummary->setText("<b>" + trUtf8("Select a single division to display the modulator list") + "</b>");
+        ui->labelModSummary->setStyleSheet("QLabel{color:" + _mixedColor.name() + ";}");
     }
     else
     {
@@ -209,17 +212,21 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes)
     // Fill the summary
     QString summary;
     if (modTargets.count() == 0)
-        summary = trUtf8("No modulators");
+    {
+        summary = "<b>" + trUtf8("No modulators") + "</b>";
+        ui->labelModSummary->setStyleSheet("QLabel{color:" + _mixedColor.name() + ";}");
+    }
     else
     {
         summary = "<b>";
-        if (modCount > 1)
-            summary += trUtf8("1 modulator:", "singular form of modulator").arg(modCount);
+        if (modCount == 1)
+            summary += trUtf8("1 modulator:", "singular form of modulator");
         else
             summary += trUtf8("%1 modulators:", "plural form of modulator").arg(modCount);
         summary += "</b> ";
         for (int i = 0; i < modTargets.count(); i++)
             summary += (i > 0 ? ", " : "") + modTargets[i];
+        ui->labelModSummary->setStyleSheet("");
     }
     ui->labelModSummary->setText(summary);
 
@@ -235,7 +242,7 @@ void ModulatorEditor::on_listWidget_itemSelectionChanged()
     QList<AttributeType> attributes;
     foreach (QListWidgetItem * item, selection)
     {
-        ModulatorCell * cell = (ModulatorCell *)ui->listWidget->itemWidget(item);
+        ModulatorCell * cell = dynamic_cast<ModulatorCell *>(ui->listWidget->itemWidget(item));
         AttributeType attribute = cell->getTargetAttribute();
         if (attribute != champ_unknown && !attributes.contains(attribute))
             attributes << attribute;
@@ -287,7 +294,6 @@ void ModulatorEditor::on_pushAdd_clicked()
         break;
     default:
         return;
-        break;
     }
     SoundfontManager * sm = SoundfontManager::getInstance();
     modId.indexMod = sm->add(modId);
@@ -514,7 +520,7 @@ QList<EltID> ModulatorEditor::getSelectedModulators()
     QList<QListWidgetItem *> selection = ui->listWidget->selectedItems();
     foreach (QListWidgetItem * item, selection)
     {
-        ModulatorCell * cell = (ModulatorCell *)ui->listWidget->itemWidget(item);
+        ModulatorCell * cell = dynamic_cast<ModulatorCell *>(ui->listWidget->itemWidget(item));
         listIDs << cell->getID();
     }
     return listIDs;

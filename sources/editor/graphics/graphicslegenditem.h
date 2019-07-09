@@ -45,6 +45,7 @@ public:
 
 private:
     static const int s_border;
+    static const QString s_rightArrow;
     QBrush _foregroundBrush;
     QPen _borderPen;
     QPen _textPen;

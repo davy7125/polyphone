@@ -29,7 +29,9 @@
 #include <QApplication>
 #include "soundfontmanager.h"
 
-const int    GraphicsLegendItem::s_border = 5;
+const int GraphicsLegendItem::s_border = 5;
+static const QChar unicodeArrow[] = { 0xfeff, 0x279c };
+const QString GraphicsLegendItem::s_rightArrow = QString::fromRawData(unicodeArrow, 2);
 
 GraphicsLegendItem::GraphicsLegendItem(QString fontFamily, QGraphicsItem * parent) : QGraphicsItem(parent),
     _font(fontFamily, 8),
@@ -166,8 +168,8 @@ void GraphicsLegendItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
     for (int i = 0; i < _textTop.count(); i++)
     {
         if (_selectedLinesInTextTop.contains(i))
-            painter->drawText(QPoint(s_border, fm.height() * (i + 1)), "\u2192");
-        painter->drawText(QPoint(static_cast<int>(1.5 * fm.width("\u2192") + s_border),
+            painter->drawText(QPoint(s_border, fm.height() * (i + 1)), s_rightArrow);
+        painter->drawText(QPoint(static_cast<int>(1.5 * fm.width(s_rightArrow) + s_border),
                                  fm.height() * (i + 1)), _textTop.at(i));
     }
     for (int i = 0; i < _textBottom.count(); i++)
@@ -193,7 +195,7 @@ QSizeF GraphicsLegendItem::getTextSize() const
     double height = (0.5 + _textTop.count() + _textBottom.count()) * fm.height() + 2 * s_border;
     double width = 0;
     foreach (QString line, _textTop)
-        width = qMax(width, 1.5 * fm.width("\u2192") + fm.width(line));
+        width = qMax(width, 1.5 * fm.width(s_rightArrow) + fm.width(line));
     foreach (QString line, _textBottom)
         width = qMax(width, static_cast<double>(fm.width(line)));
     width += 2 * s_border;

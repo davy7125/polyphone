@@ -39,7 +39,7 @@ class ModulatorEditor : public QWidget
     Q_OBJECT
 
 public:
-    explicit ModulatorEditor(QWidget *parent = 0);
+    explicit ModulatorEditor(QWidget *parent = nullptr);
     ~ModulatorEditor();
 
     void setIds(IdList ids, QList<AttributeType> attributes = QList<AttributeType>());
@@ -81,6 +81,7 @@ private:
 
     Ui::ModulatorEditor *ui;
     EltID _currentId;
+    QColor _mixedColor;
 };
 
 #endif // MODULATOREDITOR_H
