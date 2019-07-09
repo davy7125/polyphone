@@ -33,6 +33,7 @@
 #include "dialogkeyboard.h"
 #include "dialogrecorder.h"
 #include "toprightwidget.h"
+#include "editortoolbar.h"
 #include <QToolButton>
 #include <QDesktopWidget>
 #include <QDesktopServices>
@@ -305,6 +306,7 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
         {
             _keyboard->show();
             _keyboard->activateWindow();
+            EditorToolBar::updateKeyboardButtonsState(true);
         }
         else
         {

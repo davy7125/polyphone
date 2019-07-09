@@ -35,7 +35,7 @@ class EditorToolBar : public QToolBar
     Q_OBJECT
 
 public:
-    EditorToolBar(QWidget *parent = NULL);
+    EditorToolBar(QWidget *parent = nullptr);
     ~EditorToolBar();
     void setSf2Index(int sf2index);
     void updateActions();

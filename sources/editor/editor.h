@@ -38,7 +38,7 @@ class Editor : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit Editor(QWidget *parent = 0);
+    explicit Editor(QWidget *parent = nullptr);
     ~Editor();
 
     /// Initialize the editor with a parser that can extract data and build a soundfont

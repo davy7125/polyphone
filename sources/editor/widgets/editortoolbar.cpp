@@ -185,7 +185,7 @@ void EditorToolBar::onDisplayActionClicked()
     if (_updatingDisplayOptions)
         return;
 
-    StyledAction * action = (StyledAction *)QObject::sender();
+    StyledAction * action = dynamic_cast<StyledAction *>(QObject::sender());
     selectDisplayOption(action->getData());
     emit(displayOptionChanged(action->getData()));
 }
@@ -247,14 +247,14 @@ void EditorToolBar::onNewSmplClicked()
     // Other allowed format?
     QString ext = "";
     typedef QString (*MyPrototype)();
-    MyPrototype myFunction = (MyPrototype) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extensions", "getExtensionFilter");
+    MyPrototype myFunction = reinterpret_cast<MyPrototype>(QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extensions", "getExtensionFilter"));
     if (myFunction)
         ext = myFunction();
 
     // Display dialog
     QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Import an audio file"),
                                                         ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SAMPLE),
-                                                        trUtf8("Audio files") + " (*.wav *.flac)" + ext);
+                                                        trUtf8("Audio files") + " (*.wav *.flac" + ext + ")");
 
     if (strList.count() == 0)
         return;
