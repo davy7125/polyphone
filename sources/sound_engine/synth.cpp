@@ -95,9 +95,9 @@ void Synth::createSoundEnginesAndBuffers()
 }
 
 // signal de lecture ou de fin
-void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoiceParam * voiceParamTmp)
+void Synth::play(int type, int idSf2, int idElt, int note, int velocity)
 {
-    play_sub(type, idSf2, idElt, note, velocity, voiceParamTmp);
+    play_sub(type, idSf2, idElt, note, velocity);
 
     if (velocity > 0)
     {
@@ -117,41 +117,25 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
         return;
     }
 
-    // Appui sur une note
+    // A key is pressed
     switch (type)
     {
-    case 0:{ // sample
+    case 0:{ // Sample level
         EltID idSmpl(elementSmpl, idSf2, idElt, 0, 0);
 
-        // Récupération des paramètres
+        // Compute parameters
         VoiceParam * voiceParam = new VoiceParam(_sf2, idSmpl, voiceParamTmp);
 
-        if (note < 0)
-        {
-            // Temps de fin, exclusive class et balance
-            voiceParam->volReleaseTime = 0.2;
-            voiceParam->exclusiveClass = note;
-            SFSampleLink typeLien = _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
-            switch (typeLien)
-            {
-            case leftSample: case RomLeftSample:
-                voiceParam->pan = -50;
-                break;
-            case rightSample: case RomRightSample:
-                voiceParam->pan = 50;
-                break;
-            default:
-                break;
-            }
-        }
+        if (note < 0) // Smpl area
+            voiceParam->prepareForSmpl(note, _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue);
 
-        // Création voix
+        // Create a voice
         Voice * voiceTmp = new Voice(_sf2->getData(idSmpl, champ_sampleData32),
                                      _sf2->get(idSmpl, champ_dwSampleRate).dwValue,
                                      _format.sampleRate(), note, velocity,
                                      voiceParam);
 
-        // Initialisation chorus et gain
+        // Initialize chorus and gain
         if (note < 0)
             voiceTmp->setChorus(0, 0, 0);
         else
@@ -160,7 +144,7 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
             voiceTmp->setGain(_gain);
         }
 
-        // Ajout de la voix
+        // Add the voice in the list
         _listVoixTmp << voiceTmp;
         SoundEngine::addVoice(voiceTmp, _listVoixTmp);
 
@@ -175,8 +159,8 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
                 this->play(0, idSf2, _sf2->get(idSmpl, champ_wSampleLink).wValue, -2, 127);
         }
     }break;
-    case 1:{ // instrument
-        // Parcours de tous les samples liés
+    case 1:{ // Instrument level
+        // Browse all linked samples
         EltID idInstSmpl(elementInstSmpl, idSf2, idElt, 0, 0);
         EltID idInst = idInstSmpl;
         idInst.typeElement = elementInst;
@@ -229,16 +213,15 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
             }
             if (keyMin <= note && keyMax >= note && velMin <= velocity && velMax >= velocity)
             {
-                // Récupération des paramètres et lecture du sample associé
+                // Get all parameters of the linked sample and play
                 VoiceParam * voiceParam = new VoiceParam(_sf2, idInstSmpl, voiceParamTmp);
-                this->play_sub(0, idSf2, _sf2->get(idInstSmpl, champ_sampleID).wValue,
-                               note, velocity, voiceParam);
+                this->play_sub(0, idSf2, _sf2->get(idInstSmpl, champ_sampleID).wValue, note, velocity, voiceParam);
                 delete voiceParam;
             }
         }
     }break;
-    case 2:{ // preset
-        // Parcours de tous les instruments liés
+    case 2:{ // Preset level
+        // Browse all linked instrument
         EltID idPrstInst(elementPrstInst, idSf2, idElt, 0, 0);
         EltID idPrst = idPrstInst;
         idPrst.typeElement = elementPrst;
@@ -289,13 +272,12 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
                 velMin = defaultVelRange.byLo;
                 velMax = defaultVelRange.byHi;
             }
-            if (keyMin <= note     && keyMax >= note &&
+            if (keyMin <= note && keyMax >= note &&
                     velMin <= velocity && velMax >= velocity)
             {
-                // Récupération des paramètres et lecture de l'instrument associé
+                // Get the parameters of the linked instrument and play it
                 VoiceParam * voiceParam = new VoiceParam(_sf2, idPrstInst);
-                this->play_sub(1, idSf2, _sf2->get(idPrstInst, champ_instrument).wValue,
-                               note, velocity, voiceParam);
+                this->play_sub(1, idSf2, _sf2->get(idPrstInst, champ_instrument).wValue, note, velocity, voiceParam);
                 delete voiceParam;
             }
         }
@@ -541,7 +523,7 @@ void Synth::readData(float *data1, float *data2, quint32 maxlen)
     // Clipping
     clip(data1, data2, maxlen);
 
-    // Enregistrement dans un fichier si demandé
+    // Possibly record in a file
     _mutexRecord.lock();
     if (_recordFile && _isRecording)
     {

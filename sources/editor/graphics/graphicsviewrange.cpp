@@ -582,7 +582,6 @@ void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
         if (_editing)
         {
             // Try to move rectangles
-            bool moved = false;
             GraphicsRectangleItem * highlightedRectangle = nullptr;
             foreach (GraphicsRectangleItem * item, _rectangles)
             {
@@ -592,7 +591,6 @@ void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
                                 static_cast<int>(_xInit * this->width()), static_cast<int>(_yInit * this->height()));
                     QPointF pointFinal = this->mapToScene(event->pos());
                     item->computeNewRange(pointInit, pointFinal);
-                    moved = true;
 
                     if (item->isHovered())
                         highlightedRectangle = item;

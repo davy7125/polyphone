@@ -22,55 +22,44 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ENVELOPPEVOL_H
-#define ENVELOPPEVOL_H
+#include "spinboxcents.h"
+#include <QPainter>
+#include <QPaintEvent>
+#include "contextmanager.h"
 
-#include "voiceparam.h"
-
-class EnveloppeVol
+SpinBoxCents::SpinBoxCents(QWidget *parent) : QSpinBox(parent)
 {
-public:
-    EnveloppeVol(quint32 sampleRate, bool isMod);
+    this->setMaximum(100);
+    this->setMinimum(-100);
+    this->setPrefix("+");
 
-    // Apply an envelop on data
-    // Return true if the end of the release is reached
-    bool applyEnveloppe(float *data, quint32 size, bool release, int note, int velocity, VoiceParam * voiceParam,
-                        double gain);
+    // Change the line edit
+    this->setLineEdit(new LineEditCents(this));
 
-    // Call a quick release
-    void quickRelease();
+    // Connection
+    connect(this, SIGNAL(valueChanged(int)), this, SLOT(onValueChanged(int)));
+}
 
-    static float fastPow2(float p)
-    {
-        float offset = (p < 0) ? 1.0f : 0.0f;
-        float clipp = (p < -126) ? -126.0f : p;
-        int w = static_cast<int>(clipp);
-        float z = clipp - w + offset;
-        union { quint32 i; float f; } v =
-        { static_cast<quint32> ( (1 << 23) * (clipp + 121.2740575f + 27.7280233f / (4.84252568f - z) - 1.49012907f * z) ) };
-        return v.f;
-    }
+void SpinBoxCents::onValueChanged(int value)
+{
+    this->setPrefix(value >= 0 ? "+" : "");
+}
 
-private:
-    enum EnveloppePhase
-    {
-        phase1delay,
-        phase2attack,
-        phase3hold,
-        phase4decay,
-        phase5sustain,
-        phase6release,
-        phase7off
-    };
+LineEditCents::LineEditCents(QWidget * parent) : QLineEdit(parent)
+{
+    // Style
+    _textColor = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
+                                   ContextManager::theme()->getColor(ThemeManager::LIST_TEXT), 0.5);
+    _textFont = QFont(this->font().family(), 3 * this->font().pointSize() / 4);
+}
 
-    // State of the system
-    quint32 _currentSmpl;
-    float _precValue;
-    EnveloppePhase _currentPhase;
+void LineEditCents::paintEvent(QPaintEvent *event)
+{
+    QLineEdit::paintEvent(event);
 
-    quint32 _sampleRate;
-    bool _isMod;
-    bool _fastRelease;
-};
-
-#endif // ENVELOPPEVOL_H
+    // Draw "/100" on the bottom right
+    QPainter p(this);
+    p.setPen(_textColor);
+    p.setFont(_textFont);
+    p.drawText(0, 0, this->width() - 2, this->height(), Qt::AlignBottom | Qt::AlignRight, "/ 100");
+}

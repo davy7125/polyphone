@@ -22,55 +22,37 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ENVELOPPEVOL_H
-#define ENVELOPPEVOL_H
+#ifndef SPINBOXCENTS_H
+#define SPINBOXCENTS_H
 
-#include "voiceparam.h"
+#include <QSpinBox>
+#include <QLineEdit>
 
-class EnveloppeVol
+
+class SpinBoxCents : public QSpinBox
 {
+    Q_OBJECT
+
 public:
-    EnveloppeVol(quint32 sampleRate, bool isMod);
+    SpinBoxCents(QWidget * parent = nullptr);
 
-    // Apply an envelop on data
-    // Return true if the end of the release is reached
-    bool applyEnveloppe(float *data, quint32 size, bool release, int note, int velocity, VoiceParam * voiceParam,
-                        double gain);
-
-    // Call a quick release
-    void quickRelease();
-
-    static float fastPow2(float p)
-    {
-        float offset = (p < 0) ? 1.0f : 0.0f;
-        float clipp = (p < -126) ? -126.0f : p;
-        int w = static_cast<int>(clipp);
-        float z = clipp - w + offset;
-        union { quint32 i; float f; } v =
-        { static_cast<quint32> ( (1 << 23) * (clipp + 121.2740575f + 27.7280233f / (4.84252568f - z) - 1.49012907f * z) ) };
-        return v.f;
-    }
-
-private:
-    enum EnveloppePhase
-    {
-        phase1delay,
-        phase2attack,
-        phase3hold,
-        phase4decay,
-        phase5sustain,
-        phase6release,
-        phase7off
-    };
-
-    // State of the system
-    quint32 _currentSmpl;
-    float _precValue;
-    EnveloppePhase _currentPhase;
-
-    quint32 _sampleRate;
-    bool _isMod;
-    bool _fastRelease;
+private slots:
+    void onValueChanged(int value);
 };
 
-#endif // ENVELOPPEVOL_H
+class LineEditCents : public QLineEdit
+{
+    Q_OBJECT
+
+public:
+    LineEditCents(QWidget * parent = nullptr);
+
+protected:
+    void paintEvent(QPaintEvent *event);
+
+private:
+    QColor _textColor;
+    QFont _textFont;
+};
+
+#endif // SPINBOXCENTS_H

@@ -26,29 +26,36 @@
 #include "qmath.h"
 
 
-OscSinus::OscSinus(quint32 sampleRate, double delay) :
+OscSinus::OscSinus(quint32 sampleRate) :
     _sampleRate(sampleRate),
     _previousFreq(-1),
-    _delayTime(static_cast<quint32>(delay * sampleRate)),
-    _currentDelay(0)
+    _currentDelay(0),
+    _delayEnded(false)
 {
 }
 
-// Générateur Gordon-Smith
-void OscSinus::getSinus(float * data, quint32 len, float freq)
+// Gordon-Smith Generator
+void OscSinus::getSinus(float * data, quint32 len, float freq, double delay)
 {
-    // Attente
-    quint32 total = qMin(_delayTime - _currentDelay, len);
-    for (quint32 i = 0; i < total; i++)
-        data[i] = 0;
-    _currentDelay += total;
+    quint32 total = 0;
+
+    // Possible delay
+    quint32 delayTime = static_cast<quint32>(delay * _sampleRate);
+    if (!_delayEnded && _currentDelay < delayTime)
+    {
+        total = qMin(delayTime - _currentDelay, len);
+        for (quint32 i = 0; i < total; i++)
+            data[i] = 0;
+        _currentDelay += total;
+        _delayEnded = (_currentDelay >= delayTime);
+    }
 
     // Sinus
     if (total != len)
     {
         if (_previousFreq < 0)
         {
-            // Initialisation du système
+            // Initialize the system
             _previousFreq = freq;
             computeEpsilon(freq, _theta, _epsilon);
             _posPrec = static_cast<float>(qSin(static_cast<double>(-_theta)));
@@ -70,7 +77,7 @@ void OscSinus::getSinus(float * data, quint32 len, float freq)
                 data[i] = _posPrec;
             }
 
-            // Mise à jour valeurs
+            // Update values
             _theta = theta2;
             _epsilon = epsilon2;
             _previousFreq = freq;

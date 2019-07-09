@@ -442,7 +442,8 @@ SOURCES	+= main.cpp \
     lib/iir/Butterworth.cpp \
     lib/iir/Cascade.cpp \
     lib/iir/PoleFilter.cpp \
-    lib/iir/State.cpp
+    lib/iir/State.cpp \
+    editor/widgets/spinboxcents.cpp
 
 HEADERS  += \
     core/sample/infosound.h \
@@ -741,7 +742,8 @@ HEADERS  += \
     lib/iir/MathSupplement.h \
     lib/iir/PoleFilter.h \
     lib/iir/State.h \
-    lib/iir/Types.h
+    lib/iir/Types.h \
+    editor/widgets/spinboxcents.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

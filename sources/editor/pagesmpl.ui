@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>630</width>
+    <width>713</width>
     <height>330</height>
    </rect>
   </property>
@@ -413,63 +413,73 @@
           <number>0</number>
          </property>
          <item>
-          <layout class="QGridLayout" name="gridLayout_2" columnminimumwidth="0,28,0,0">
+          <layout class="QGridLayout" name="gridLayout_2">
            <property name="spacing">
             <number>3</number>
            </property>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>Loop</string>
-             </property>
-            </widget>
+           <item row="5" column="2" colspan="2">
+            <widget class="QComboBox" name="comboLink"/>
            </item>
-           <item row="1" column="2">
-            <widget class="QSpinBox" name="spinStartLoop">
-             <property name="minimumSize">
-              <size>
-               <width>65</width>
-               <height>0</height>
-              </size>
-             </property>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="pushFullLength">
              <property name="maximumSize">
               <size>
-               <width>80</width>
-               <height>16777215</height>
+               <width>28</width>
+               <height>19</height>
               </size>
              </property>
-             <property name="correctionMode">
-              <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+             <property name="toolTip">
+              <string>Use the full length of the sample as loop</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources.qrc">
+               <normaloff>:/icons/double-arrow</normaloff>:/icons/double-arrow</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>16</width>
+               <height>16</height>
+              </size>
              </property>
             </widget>
            </item>
-           <item row="1" column="3">
-            <widget class="QSpinBox" name="spinEndLoop">
-             <property name="minimumSize">
-              <size>
-               <width>65</width>
-               <height>0</height>
-              </size>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Tuning</string>
              </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="pushAutoTune">
              <property name="maximumSize">
               <size>
-               <width>80</width>
-               <height>16777215</height>
+               <width>28</width>
+               <height>19</height>
               </size>
              </property>
-             <property name="correctionMode">
-              <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+             <property name="toolTip">
+              <string>Use the estimated pitch and correction as values</string>
              </property>
-            </widget>
-           </item>
-           <item row="0" column="2" colspan="2">
-            <widget class="QLabel" name="labelTaille">
              <property name="text">
-              <string notr="true">TextLabel</string>
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources.qrc">
+               <normaloff>:/icons/auto</normaloff>:/icons/auto</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>16</width>
+               <height>16</height>
+              </size>
              </property>
             </widget>
            </item>
-           <item row="2" column="2" colspan="2">
+           <item row="2" column="2">
             <widget class="SpinBoxKey" name="spinRootKey">
              <property name="correctionMode">
               <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
@@ -479,20 +489,17 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="2" colspan="2">
-            <widget class="QSpinBox" name="spinTune">
-             <property name="correctionMode">
-              <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
-             </property>
-             <property name="minimum">
-              <number>-100</number>
-             </property>
-             <property name="maximum">
-              <number>100</number>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Loop</string>
              </property>
             </widget>
            </item>
            <item row="4" column="2" colspan="2">
+            <widget class="QComboBox" name="comboType"/>
+           </item>
+           <item row="3" column="2" colspan="2">
             <widget class="QComboBox" name="comboSampleRate">
              <item>
               <property name="text">
@@ -531,38 +538,6 @@
              </item>
             </widget>
            </item>
-           <item row="5" column="2" colspan="2">
-            <widget class="QComboBox" name="comboType"/>
-           </item>
-           <item row="6" column="2" colspan="2">
-            <widget class="QComboBox" name="comboLink"/>
-           </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="pushFullLength">
-             <property name="maximumSize">
-              <size>
-               <width>28</width>
-               <height>19</height>
-              </size>
-             </property>
-             <property name="toolTip">
-              <string>Use the full length of the sample as loop</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="../resources.qrc">
-               <normaloff>:/icons/double-arrow</normaloff>:/icons/double-arrow</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>16</width>
-               <height>16</height>
-              </size>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="0" colspan="2">
             <widget class="QLabel" name="label">
              <property name="text">
@@ -570,64 +545,70 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="0" colspan="2">
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>Correction (cents)</string>
-             </property>
-            </widget>
-           </item>
            <item row="4" column="0" colspan="2">
-            <widget class="QLabel" name="label_6">
-             <property name="text">
-              <string>Sample rate</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0" colspan="2">
             <widget class="QLabel" name="label_7">
              <property name="text">
               <string>Type</string>
              </property>
             </widget>
            </item>
-           <item row="6" column="0" colspan="2">
+           <item row="5" column="0" colspan="2">
             <widget class="QLabel" name="label_5">
              <property name="text">
               <string>Link</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_3">
+           <item row="3" column="0" colspan="2">
+            <widget class="QLabel" name="label_6">
              <property name="text">
-              <string>Root key</string>
+              <string>Sample rate</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QPushButton" name="pushAutoTune">
-             <property name="maximumSize">
+           <item row="1" column="2">
+            <widget class="QSpinBox" name="spinStartLoop">
+             <property name="minimumSize">
               <size>
-               <width>28</width>
-               <height>19</height>
+               <width>65</width>
+               <height>0</height>
               </size>
              </property>
-             <property name="toolTip">
-              <string>Use the estimated pitch and correction as values</string>
+             <property name="correctionMode">
+              <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
              </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QSpinBox" name="spinEndLoop">
+             <property name="minimumSize">
+              <size>
+               <width>65</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="correctionMode">
+              <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2" colspan="2">
+            <widget class="QLabel" name="labelTaille">
              <property name="text">
-              <string/>
+              <string notr="true">TextLabel</string>
              </property>
-             <property name="icon">
-              <iconset resource="../resources.qrc">
-               <normaloff>:/icons/auto</normaloff>:/icons/auto</iconset>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <widget class="SpinBoxCents" name="spinTune">
+             <property name="correctionMode">
+              <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
              </property>
-             <property name="iconSize">
-              <size>
-               <width>16</width>
-               <height>16</height>
-              </size>
+             <property name="minimum">
+              <number>-100</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
              </property>
             </widget>
            </item>
@@ -793,12 +774,16 @@
    <header>equalizer.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>SpinBoxCents</class>
+   <extends>QSpinBox</extends>
+   <header>spinboxcents.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>spinStartLoop</tabstop>
   <tabstop>spinEndLoop</tabstop>
   <tabstop>spinRootKey</tabstop>
-  <tabstop>spinTune</tabstop>
   <tabstop>comboSampleRate</tabstop>
   <tabstop>comboType</tabstop>
   <tabstop>comboLink</tabstop>

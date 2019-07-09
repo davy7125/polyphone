@@ -69,7 +69,7 @@ protected:
             // Check for started voice (synchronization)
             if (_listVoices.at(i)->isRunning())
             {
-                // Récupération des données
+                // Get data
                 _listVoices.at(i)->generateData(_dataTmpL, _dataTmpR, len);
                 float coef1 = _listVoices.at(i)->getReverb() / 100.0f;
                 float coef2 = 1.f - coef1;

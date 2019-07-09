@@ -44,8 +44,7 @@ public:
 
     // Executed by the main thread (thread 1)
     // Type 0 is sample, 1 is instrument, 2 is preset
-    void play(int type, int idSf2, int idElt, int note, int velocity,
-              VoiceParam * voiceParamTmp = nullptr);
+    void play(int type, int idSf2, int idElt, int note, int velocity);
     void stop();
     void setGain(double gain);
 
@@ -79,14 +78,13 @@ public slots:
     void updateConfiguration();
 
 private:
-    void play_sub(int type, int idSf2, int idElt, int note, int velocity,
-                  VoiceParam * voiceParamTmp = nullptr);
+    void play_sub(int type, int idSf2, int idElt, int note, int velocity, VoiceParam * voiceParamTmp = nullptr);
     void destroySoundEnginesAndBuffers();
     void createSoundEnginesAndBuffers();
 
     void clip(float *data1, float *data2, quint32 size)
     {
-        // Recherche valeur maxi
+        // Find the maximum value
         float dMax = 0;
         quint32 pos = 0;
         float dTmp;

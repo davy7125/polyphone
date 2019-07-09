@@ -40,7 +40,7 @@ public:
     void on();
     void off();
 
-    // Génération de données
+    // Generate data
     void addData(float * dataR, float * dataL, quint32 len);
 
 private:

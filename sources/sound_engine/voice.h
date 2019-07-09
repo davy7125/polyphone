@@ -37,11 +37,10 @@ class Voice : public QObject
     Q_OBJECT
 
 public:
-    Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int note,
-          int velocity, VoiceParam *voiceParam, QObject *parent = nullptr);
+    Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int note, int velocity, VoiceParam *voiceParam);
     ~Voice();
 
-    int getNote()                       { return _note; }
+    int getNote() { return _note; }
     void release(bool quick = false);
     void setGain(double gain);
     void setChorus(int level, int depth, int frequency);
@@ -61,9 +60,8 @@ public:
     void setLoopStart(quint32 val);
     void setLoopEnd(quint32 val);
     void setFineTune(qint32 val);
-    void setRootKey(double val);
 
-    // Génération de données
+    // Generate data
     void generateData(float *dataL, float *dataR, quint32 len);
 
 signals:
@@ -74,6 +72,7 @@ private:
     OscSinus _modLFO, _vibLFO;
     EnveloppeVol _enveloppeVol, _enveloppeMod;
     stk::Chorus _chorus;
+    int _chorusLevel;
 
     // Données son et paramètres
     QByteArray _baData;
@@ -91,16 +90,15 @@ private:
     bool _isFinished;
     bool _isRunning;
 
-    // Sauvegarde état pour le resampling
+    // Save state for resampling
     float _deltaPos;
     qint32 _valPrec, _valBase;
 
-    // Sauvegarde état pour filtre passe bas
+    // Save state for low pass filter
     double _x1, _x2, _y1, _y2;
 
     bool takeData(qint32 *data, quint32 nbRead);
-    void biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, double &b2,
-                            double freq, double Q);
+    void biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, double &b2, double freq, double Q);
 
     // protection des paramètres
     QMutex _mutexParam;

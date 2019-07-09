@@ -26,12 +26,12 @@
 #include "qmath.h"
 
 // Constructeur, destructeur
-Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int note, int velocity,
-             VoiceParam * voiceParam, QObject * parent) : QObject(parent),
-    _modLFO(audioSmplRate, voiceParam->modLfoDelay),
-    _vibLFO(audioSmplRate, voiceParam->vibLfoDelay),
-    _enveloppeVol(voiceParam, audioSmplRate, 0),
-    _enveloppeMod(voiceParam, audioSmplRate, 1),
+Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int note, int velocity, VoiceParam * voiceParam) : QObject(nullptr),
+    _modLFO(audioSmplRate),
+    _vibLFO(audioSmplRate),
+    _enveloppeVol(audioSmplRate, false),
+    _enveloppeMod(audioSmplRate, true),
+    _chorusLevel(0),
     _baData(baData),
     _smplRate(smplRate),
     _audioSmplRate(audioSmplRate),
@@ -39,7 +39,7 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int not
     _velocity(velocity),
     _gain(0),
     _voiceParam(voiceParam),
-    _currentSmplPos(voiceParam->sampleStart),
+    _currentSmplPos(voiceParam->getUnsigned(champ_dwStart16)), // This value is read only once
     _time(0),
     _release(false),
     _delayEnd(10),
@@ -61,7 +61,34 @@ Voice::~Voice()
 
 void Voice::generateData(float *dataL, float *dataR, quint32 len)
 {
-    // Synchronization delay
+    // Get voice current parameters
+    _voiceParam->updateParameters();
+    qint32 v_rootkey = _voiceParam->getInteger(champ_overridingRootKey);
+    qint32 v_fixedKey = _voiceParam->getInteger(champ_keynum);
+    qint32 v_scaleTune = _voiceParam->getInteger(champ_scaleTuning);
+    qint32 v_fineTune = _voiceParam->getInteger(champ_fineTune);
+    qint32 v_coarseTune = _voiceParam->getInteger(champ_coarseTune);
+
+    double v_modLfoFreq = _voiceParam->getDouble(champ_freqModLFO);
+    double v_modLfoDelay = _voiceParam->getDouble(champ_delayModLFO);
+    qint32 v_modLfoToPitch = _voiceParam->getInteger(champ_modLfoToPitch);
+    qint32 v_modLfoToFilterFreq = _voiceParam->getInteger(champ_modLfoToFilterFc);
+    double v_modLfoToVolume = _voiceParam->getDouble(champ_modLfoToVolume);
+
+    double v_vibLfoFreq = _voiceParam->getDouble(champ_freqVibLFO);
+    double v_vibLfoDelay = _voiceParam->getDouble(champ_delayVibLFO);
+    qint32 v_vibLfoToPitch = _voiceParam->getInteger(champ_vibLfoToPitch);
+
+    qint32 v_modEnvToPitch = _voiceParam->getInteger(champ_modEnvToPitch);
+    qint32 v_modEnvToFilterFc = _voiceParam->getInteger(champ_modEnvToFilterFc);
+
+    double v_filterQ = _voiceParam->getDouble(champ_initialFilterQ);
+    double v_filterFreq = _voiceParam->getDouble(champ_initialFilterFc);
+    qint32 v_loopMode = _voiceParam->getInteger(champ_sampleModes);
+    double v_pan = _voiceParam->getDouble(champ_pan);
+    double v_chorusEffect = _voiceParam->getDouble(champ_chorusEffectsSend);
+
+    // Synchronization delay (stereo samples)
     int nbNullValues = qMin(len, _delayStart);
     for (qint32 i = 0; i < nbNullValues; i++)
     {
@@ -70,7 +97,8 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     }
     _delayStart -= nbNullValues;
     len -= nbNullValues;
-    if (len == 0) return;
+    if (len == 0)
+        return;
     dataL = &dataL[nbNullValues];
     dataR = &dataR[nbNullValues];
 
@@ -79,7 +107,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     bool endSample = false;
     double gainLowPassFilter = 0;
 
-    // Construction des tableaux
+    // Prepare arrays
     float * dataMod = new float[len];
     float * modLfo = new float[len];
     float * vibLfo = new float[len];
@@ -87,33 +115,29 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     double * modFreq = new double[len];
 
     /// ENVELOPPE DE MODULATION ///
-    _enveloppeMod.applyEnveloppe(dataMod, len, _release, _note, 127, _voiceParam, 0, true);
+    _enveloppeMod.applyEnveloppe(dataMod, len, _release, _note, 127, _voiceParam, 0);
 
     /// LFOs ///
-    _modLFO.getSinus(modLfo, len, _voiceParam->modLfoFreq);
-    _vibLFO.getSinus(vibLfo, len, _voiceParam->vibLfoFreq);
+    _modLFO.getSinus(modLfo, len, v_modLfoFreq, v_modLfoDelay);
+    _vibLFO.getSinus(vibLfo, len, v_vibLfoFreq, v_vibLfoDelay);
 
-    // MODULATION DU PITCH
-    double deltaPitchFixe = 0;
-    if (_note < 0)
-        deltaPitchFixe = -12. * qLn((double)_audioSmplRate / _smplRate) / 0.69314718056 +
-                _voiceParam->getPitchDifference(_voiceParam->rootkey);
-    else
-        deltaPitchFixe = -12. * qLn((double)_audioSmplRate / _smplRate) / 0.69314718056 +
-                _voiceParam->getPitchDifference(_note);
+    // Pitch modulation
+    int playedNote = (v_fixedKey > -1 ? v_fixedKey : (_note < 0 ? v_rootkey : _note));
+    double deltaPitchFixed = -12. * qLn((double)_audioSmplRate / _smplRate) / 0.69314718056 +
+            (playedNote - v_rootkey) * 0.01 * v_scaleTune + 0.01 * v_fineTune + v_coarseTune;
     for (quint32 i = 0; i < len; i++)
-        modPitch[i + 1] = deltaPitchFixe + 0.01 * (dataMod[i] * _voiceParam->modEnvToPitch
-                                            + modLfo[i] * _voiceParam->modLfoToPitch
-                                            + vibLfo[i] * _voiceParam->vibLfoToPitch);
+        modPitch[i + 1] = deltaPitchFixed + 0.01 * (dataMod[i] * v_modEnvToPitch
+                                                    + modLfo[i] * v_modLfoToPitch
+                                                    + vibLfo[i] * v_vibLfoToPitch);
 
-    // Conversion en distance cumulée entre points
+    // Convert into a cumulated distance between points
     modPitch[0] = _deltaPos + 1;
     for (quint32 i = 1; i <= len; i++)
         modPitch[i] = qMin(qMax(0.001f, EnveloppeVol::fastPow2(modPitch[i] / 12)), 64.f) + modPitch[i-1];
     _deltaPos = modPitch[len];
     _deltaPos = _deltaPos - ceil(_deltaPos);
 
-    // Constitution des données
+    // Resample data
     quint32 nbDataTmp = static_cast<quint32>(ceil(modPitch[len])) - 1;
     qint32 * dataTmp = new qint32[nbDataTmp + 2];
     dataTmp[0] = _valPrec;
@@ -133,18 +157,18 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     }
     delete [] dataTmp;
 
-    // FILTRE PASSE-BAS
+    // Low-pass filter
     for (quint32 i = 0; i < len; i++)
     {
-        modFreq[i] = _voiceParam->filterFreq * EnveloppeVol::fastPow2((dataMod[i] * _voiceParam->modEnvToFilterFc +
-                                                                       modLfo[i] * _voiceParam->modLfoToFilterFreq) / 1200);
+        modFreq[i] = v_filterFreq * EnveloppeVol::fastPow2((dataMod[i] * v_modEnvToFilterFc +
+                                                            modLfo[i] * v_modLfoToFilterFreq) / 1200);
         if (modFreq[i] > 20000)
             modFreq[i] = 20000;
         else if (modFreq[i] < 20)
             modFreq[i] = 20;
     }
     double a0, a1, a2, b1, b2, valTmp;
-    double filterQ = _voiceParam->filterQ - 3.01;
+    double filterQ = v_filterQ - 3.01;
     double q_lin = qPow(10, filterQ / 20.);
     for (quint32 i = 0; i < len; i++)
     {
@@ -158,35 +182,31 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     }
     gainLowPassFilter = qMax(1.33 * filterQ, 0.);
 
-    // Modulation du volume, conversion des dB
+    // Volume modulation, dB conversion
     int signe;
-    if (_voiceParam->modLfoToVolume < 0)
+    if (v_modLfoToVolume < 0)
         signe = 1;
     else
         signe = -1;
     for (quint32 i = 0; i < len; i++)
     {
         valTmp = qMax(signe * static_cast<double>(modLfo[i]), 0.);
-        dataL[i] *= static_cast<float>(qPow(10., signe * 0.005 * _voiceParam->modLfoToVolume * valTmp));
+        dataL[i] *= static_cast<float>(qPow(10., signe * 0.005 * v_modLfoToVolume * valTmp));
     }
 
-    // Destruction des tableaux
+    // Destroy arrays
     delete [] dataMod;
     delete [] modLfo;
     delete [] vibLfo;
     delete [] modPitch;
     delete [] modFreq;
 
-    // Application de l'enveloppe de volume
-    bool bRet2 = false;
-    if (_note < 0)
-        bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release, _voiceParam->rootkey,
-                                             _velocity, _voiceParam, _gain - gainLowPassFilter);
-    else
-        bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release, _note,
-                                             _velocity, _voiceParam, _gain - gainLowPassFilter);
+    // Apply the volume envelop
+    bool bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release,
+                                              _note < 0 ? v_rootkey : _note, _velocity,
+                                              _voiceParam, _gain - gainLowPassFilter);
 
-    if ((bRet2 && _voiceParam->loopMode != 3) || endSample)
+    if ((bRet2 && v_loopMode != 3) || endSample)
     {
         _isFinished = true;
         emit(currentPosChanged(0));
@@ -194,11 +214,12 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     else
         emit(currentPosChanged(_currentSmplPos));
 
-    //// APPLICATION BALANCE ET CHORUS ////
+    //// APPLY PAN AND CHORUS ////
 
-    double pan = (_voiceParam->pan + 50) * M_PI / 200.;    // Entre 0 et pi / 2
+    double pan = (v_pan + 50) * M_PI / 200.; // Between 0 and π/2
     double coef1 = sin(pan);
     double coef2 = cos(pan);
+    _chorus.setEffectMix(0.005 * _chorusLevel * 0.01 * v_chorusEffect);
     for (quint32 i = 0; i < len; i++)
     {
         dataL[i] = static_cast<float>(coef1 * _chorus.tick(static_cast<double>(dataL[i])));
@@ -216,39 +237,51 @@ bool Voice::takeData(qint32 * data, quint32 nbRead)
     bool endSample = false;
     const qint32 * dataSmpl = reinterpret_cast<const qint32*>(_baData.constData());
 
-    if ((_voiceParam->loopMode == 1 || _voiceParam->loopMode == 2 ||
-         (_voiceParam->loopMode == 3 && !_release)) &&
-            _voiceParam->loopStart != _voiceParam->loopEnd)
+    int loopMode = _voiceParam->getInteger(champ_sampleModes);
+    quint32 loopStart = _voiceParam->getUnsigned(champ_dwStartLoop);
+    quint32 loopEnd = _voiceParam->getUnsigned(champ_dwEndLoop);
+
+    if ((loopMode == 1 || loopMode == 2 || (loopMode == 3 && !_release)) && loopStart < loopEnd)
     {
-        // Boucle
-        if (_currentSmplPos >= _voiceParam->loopEnd)
-            _currentSmplPos = _voiceParam->loopStart;
+        // Loop
+        if (_currentSmplPos >= loopEnd)
+            _currentSmplPos = loopStart;
         quint32 total = 0;
         while (nbRead - total > 0)
         {
-            const quint32 chunk = qMin(_voiceParam->loopEnd - _currentSmplPos, nbRead - total);
+            const quint32 chunk = qMin(_currentSmplPos < loopEnd ? loopEnd - _currentSmplPos : 0, nbRead - total);
             memcpy(&data[total], &dataSmpl[_currentSmplPos], chunk * sizeof(qint32));
             _currentSmplPos += chunk;
-            if (_currentSmplPos >= _voiceParam->loopEnd)
-                _currentSmplPos = _voiceParam->loopStart;
+            if (_currentSmplPos >= loopEnd)
+                _currentSmplPos = loopStart;
             total += chunk;
         }
     }
     else
     {
-        // Pas de boucle
-        if (_voiceParam->sampleEnd - _currentSmplPos < nbRead)
+        // No loop
+        quint32 sampleEnd = _voiceParam->getUnsigned(champ_dwLength);
+        if (_currentSmplPos > sampleEnd)
         {
-            memcpy(data, &dataSmpl[_currentSmplPos], 4 * (_voiceParam->sampleEnd - _currentSmplPos));
-            for (quint32 i = _voiceParam->sampleEnd - _currentSmplPos; i < nbRead; i++)
-                data[i] = 0;
-            _currentSmplPos = _voiceParam->sampleEnd;
+            // No more data, fill with 0
+            memset(data, 0, nbRead * sizeof(qint32));
+            endSample = true;
+        }
+        else if (sampleEnd - _currentSmplPos < nbRead)
+        {
+            // Copy what is possible to copy, fill the rest with 0
+            memcpy(data, &dataSmpl[_currentSmplPos], sizeof(qint32) * (sampleEnd - _currentSmplPos));
+            memset(&data[sampleEnd - _currentSmplPos], 0, (nbRead - sampleEnd + _currentSmplPos) * sizeof(qint32));
+
+            // We are now at the end
+            _currentSmplPos = sampleEnd;
             _delayEnd--;
             if (_delayEnd == 0)
                 endSample = true;
         }
         else
         {
+            // Copy data
             memcpy(data, &dataSmpl[_currentSmplPos], nbRead * sizeof(qint32));
             _currentSmplPos += nbRead;
         }
@@ -279,14 +312,13 @@ void Voice::setGain(double gain)
 void Voice::setChorus(int level, int depth, int frequency)
 {
     _mutexParam.lock();
-    _chorus.setEffectMix(0.005 * level * 0.01 * static_cast<double>(_voiceParam->chorus));
+    _chorusLevel = level;
     _chorus.setModDepth(0.00025 * depth);
     _chorus.setModFrequency(0.06667 * frequency);
     _mutexParam.unlock();
 }
 
-void Voice::biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, double &b2,
-                               double freq, double Q)
+void Voice::biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, double &b2, double freq, double Q)
 {
     // Calcul des coefficients d'une structure bi-quad pour un passe-bas
     double theta = 2. * M_PI * freq / _audioSmplRate;
@@ -327,7 +359,7 @@ void Voice::biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, d
 double Voice::getPan()
 {
     _mutexParam.lock();
-    double val = _voiceParam->pan;
+    double val = _voiceParam->getDouble(champ_pan);
     _mutexParam.unlock();
     return val;
 }
@@ -335,7 +367,7 @@ double Voice::getPan()
 int Voice::getExclusiveClass()
 {
     _mutexParam.lock();
-    int val = _voiceParam->exclusiveClass;
+    int val = _voiceParam->getInteger(champ_exclusiveClass);
     _mutexParam.unlock();
     return val;
 }
@@ -343,7 +375,7 @@ int Voice::getExclusiveClass()
 int Voice::getPresetNumber()
 {
     _mutexParam.lock();
-    int val = _voiceParam->numPreset;
+    int val = _voiceParam->getInteger(champ_wPreset);
     _mutexParam.unlock();
     return val;
 }
@@ -351,7 +383,7 @@ int Voice::getPresetNumber()
 float Voice::getReverb()
 {
     _mutexParam.lock();
-    float val = _voiceParam->reverb;
+    float val = static_cast<float>(_voiceParam->getDouble(champ_reverbEffectsSend));
     _mutexParam.unlock();
     return val;
 }
@@ -359,41 +391,34 @@ float Voice::getReverb()
 void Voice::setPan(double val)
 {
     _mutexParam.lock();
-    _voiceParam->pan = val;
+    _voiceParam->setPan(val);
     _mutexParam.unlock();
 }
 
 void Voice::setLoopMode(int val)
 {
     _mutexParam.lock();
-    _voiceParam->loopMode = val;
+    _voiceParam->setLoopMode(val);
     _mutexParam.unlock();
 }
 
 void Voice::setLoopStart(quint32 val)
 {
     _mutexParam.lock();
-    _voiceParam->loopStart = val;
+    _voiceParam->setLoopStart(val);
     _mutexParam.unlock();
 }
 
 void Voice::setLoopEnd(quint32 val)
 {
     _mutexParam.lock();
-    _voiceParam->loopEnd = val;
+    _voiceParam->setLoopEnd(val);
     _mutexParam.unlock();
 }
 
 void Voice::setFineTune(qint32 val)
 {
     _mutexParam.lock();
-    _voiceParam->fineTune = val;
-    _mutexParam.unlock();
-}
-
-void Voice::setRootKey(double val)
-{
-    _mutexParam.lock();
-    _voiceParam->rootkey = val;
+    _voiceParam->setFineTune(val);
     _mutexParam.unlock();
 }
