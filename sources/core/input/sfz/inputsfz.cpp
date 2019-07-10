@@ -343,26 +343,26 @@ void InputSfz::createSf2(int &sf2Index, QString filename, bool isChannel10)
             idInstSmpl.indexElt2 = j;
             if (sm->isSet(idInstSmpl, champ_keyRange))
             {
-                rangesType range = sm->get(idInstSmpl, champ_keyRange).rValue;
+                RangesType range = sm->get(idInstSmpl, champ_keyRange).rValue;
                 keyMin = qMin(keyMin, (int)range.byLo);
                 keyMax = qMax(keyMax, (int)range.byHi);
             }
             if (sm->isSet(idInstSmpl, champ_velRange))
             {
-                rangesType range = sm->get(idInstSmpl, champ_velRange).rValue;
+                RangesType range = sm->get(idInstSmpl, champ_velRange).rValue;
                 velMin = qMin(velMin, (int)range.byLo);
                 velMax = qMax(velMax, (int)range.byHi);
             }
         }
         if (sm->isSet(idInst, champ_keyRange))
         {
-            rangesType range = sm->get(idInst, champ_keyRange).rValue;
+            RangesType range = sm->get(idInst, champ_keyRange).rValue;
             keyMin = qMin(keyMin, (int)range.byLo);
             keyMax = qMax(keyMax, (int)range.byHi);
         }
         if (sm->isSet(idInst, champ_velRange))
         {
-            rangesType range = sm->get(idInst, champ_velRange).rValue;
+            RangesType range = sm->get(idInst, champ_velRange).rValue;
             velMin = qMin(velMin, (int)range.byLo);
             velMax = qMax(velMax, (int)range.byHi);
         }

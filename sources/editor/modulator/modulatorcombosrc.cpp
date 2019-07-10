@@ -74,7 +74,7 @@ void ModulatorComboSrc::loadValue()
 
     // Select the value
     SoundfontManager * sm = SoundfontManager::getInstance();
-    sfmodulator sfModTmp = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper).sfModValue;
+    SFModulator sfModTmp = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper).sfModValue;
 
     if (sfModTmp.Index == 127 && sfModTmp.CC == 0 && _source1)
     {

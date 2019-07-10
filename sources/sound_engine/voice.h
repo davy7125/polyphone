@@ -40,7 +40,7 @@ public:
     Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int note, int velocity, VoiceParam *voiceParam);
     ~Voice();
 
-    int getNote() { return _note; }
+    int getKey() { return _note; }
     void release(bool quick = false);
     void setGain(double gain);
     void setChorus(int level, int depth, int frequency);
@@ -56,10 +56,10 @@ public:
 
     // Modification des propriétés de voiceParam
     void setPan(double val);
-    void setLoopMode(int val);
+    void setLoopMode(quint16 val);
     void setLoopStart(quint32 val);
     void setLoopEnd(quint32 val);
-    void setFineTune(qint32 val);
+    void setFineTune(qint16 val);
 
     // Generate data
     void generateData(float *dataL, float *dataR, quint32 len);

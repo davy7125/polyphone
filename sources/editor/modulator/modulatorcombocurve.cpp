@@ -109,7 +109,7 @@ void ModulatorComboCurve::initialize(EltID id, bool source1)
 void ModulatorComboCurve::loadValue()
 {
     SoundfontManager * sm = SoundfontManager::getInstance();
-    sfmodulator sfMod = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper).sfModValue;
+    SFModulator sfMod = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper).sfModValue;
     int iTmp = sfMod.D + 2 * sfMod.P + 4 * sfMod.Type;
     this->setCurrentIndex(iTmp / 4);
     this->setModelColumn(iTmp % 4);

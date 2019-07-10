@@ -43,8 +43,7 @@ public:
     ~Synth();
 
     // Executed by the main thread (thread 1)
-    // Type 0 is sample, 1 is instrument, 2 is preset
-    void play(int type, int idSf2, int idElt, int note, int velocity);
+    void play(EltID id, int key, int velocity);
     void stop();
     void setGain(double gain);
 
@@ -78,7 +77,11 @@ public slots:
     void updateConfiguration();
 
 private:
-    void play_sub(int type, int idSf2, int idElt, int note, int velocity, VoiceParam * voiceParamTmp = nullptr);
+    void playPrst(int idSf2, int idElt, int key, int velocity);
+    void playInst(int idSf2, int idElt, int key, int velocity, EltID idPrstInst = EltID(elementUnknown));
+    void playSmpl(int idSf2, int idElt, int key, int velocity,
+                  EltID idInstSmpl = EltID(elementUnknown), EltID idPrstInst = EltID(elementUnknown));
+
     void destroySoundEnginesAndBuffers();
     void createSoundEnginesAndBuffers();
 

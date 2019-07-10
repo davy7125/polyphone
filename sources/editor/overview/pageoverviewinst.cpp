@@ -155,7 +155,7 @@ QString PageOverviewInst::getKeyRange(EltID id)
     int globalMax = 127;
     if (_sf2->isSet(id, champ_keyRange))
     {
-        rangesType range = _sf2->get(id, champ_keyRange).rValue;
+        RangesType range = _sf2->get(id, champ_keyRange).rValue;
         globalMin = range.byLo;
         globalMax = range.byHi;
     }
@@ -169,7 +169,7 @@ QString PageOverviewInst::getKeyRange(EltID id)
         id.indexElt2 = i;
         if (_sf2->isSet(id, champ_keyRange))
         {
-            rangesType range = _sf2->get(id, champ_keyRange).rValue;
+            RangesType range = _sf2->get(id, champ_keyRange).rValue;
             min = qMin(min, (int)range.byLo);
             max = qMax(max, (int)range.byHi);
         }
@@ -205,7 +205,7 @@ QString PageOverviewInst::getVelocityRange(EltID id)
     int globalMax = 127;
     if (_sf2->isSet(id, champ_velocity))
     {
-        rangesType range = _sf2->get(id, champ_velocity).rValue;
+        RangesType range = _sf2->get(id, champ_velocity).rValue;
         globalMin = range.byLo;
         globalMax = range.byHi;
     }
@@ -219,7 +219,7 @@ QString PageOverviewInst::getVelocityRange(EltID id)
         id.indexElt2 = i;
         if (_sf2->isSet(id, champ_velocity))
         {
-            rangesType range = _sf2->get(id, champ_velocity).rValue;
+            RangesType range = _sf2->get(id, champ_velocity).rValue;
             min = qMin(min, (int)range.byLo);
             max = qMax(max, (int)range.byHi);
         }

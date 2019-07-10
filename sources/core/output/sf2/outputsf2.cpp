@@ -111,7 +111,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     EltID id(elementSf2, sf2Index, 0, 0, 0);
 
     // Préparation de la sauvegarde
-    sfVersionTag sfVersionTmp;
+    SfVersionTag sfVersionTmp;
     quint32 dwTmp, dwTmp2;
     quint16 wTmp;
     quint8 byTmp;

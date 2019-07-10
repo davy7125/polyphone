@@ -166,7 +166,7 @@ void ToolMonitor_gui::on_comboParameter_currentIndexChanged(int index)
         foreach (int i, sm->getSiblings(id))
         {
             id.indexElt2 = i;
-            rangesType keyRange = sm->get(id, champ_keyRange).rValue;
+            RangesType keyRange = sm->get(id, champ_keyRange).rValue;
             if (sm->isSet(id, champ))
             {
                 // Champ renseigné dans la division

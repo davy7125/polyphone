@@ -26,26 +26,27 @@
 #define VOICEPARAM_H
 
 #include "basetypes.h"
-#include "soundfontmanager.h"
+class SoundfontManager;
+class ModulatedParameter;
 
 // Class gathering all parameters useful to create a sound
 // Parameters can evolve in real-time depending on the modulators
 class VoiceParam
 {
 public:
-    // Initialize a set of parameters
-    VoiceParam(SoundfontManager * sf2, EltID id, VoiceParam * voiceParamTmp = nullptr);
+    // Initialize a set of parameters (idPrstInst and idInstSmpl can be unknown)
+    VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl);
 
     // Sample reading
     void prepareForSmpl(int key, SFSampleLink link);
-    void setPan(double val) { pan = val; }
-    void setLoopMode(int val) { loopMode = val; }
-    void setLoopStart(quint32 val) { startLoop = val; }
-    void setLoopEnd(quint32 val) { endLoop = val; }
-    void setFineTune(qint32 val) { fineTune = val; }
+    void setPan(double val);
+    void setLoopMode(quint16 val);
+    void setLoopStart(quint32 val);
+    void setLoopEnd(quint32 val);
+    void setFineTune(qint16 val);
 
     // Destructor
-    ~VoiceParam() {}
+    ~VoiceParam();
 
     // Update parameters before reading them (modulators)
     void updateParameters() {}
@@ -53,47 +54,21 @@ public:
     // Get a param
     double getDouble(AttributeType type);
     qint32 getInteger(AttributeType type);
-    quint32 getUnsigned(AttributeType type);
+    quint32 getPosition(AttributeType type);
 
 private:
     SoundfontManager * _sm;
 
     // All parameters
-    quint32 length;
-    quint32 startLoop;
-    quint32 endLoop;
-    qint32 loopStartOffset, loopEndOffset, sampleStartOffset, sampleEndOffset;
-    qint32 loopStartCoarseOffset, loopEndCoarseOffset, sampleStartCoarseOffset, sampleEndCoarseOffset;
-    qint32 exclusiveClass, numPreset;
-    qint32 fineTune, coarseTune, fixedKey, scaleTune;
-    qint32 loopMode;
-    qint32 fixedVelocity;
-    qint32 volKeynumToHold, volKeynumToDecay;
-    qint32 modKeynumToHold, modKeynumToDecay;
-    qint32 modEnvToPitch, modEnvToFilterFc;
-    qint32 modLfoToPitch, modLfoToFilterFreq, vibLfoToPitch;
-    qint32 rootkey;
-    double filterFreq, filterQ;
-    double attenuation, pan;
-    double volSustainLevel, volDelayTime, volAttackTime, volHoldTime, volDecayTime, volReleaseTime;
-    double modSustainLevel, modDelayTime, modAttackTime, modHoldTime, modDecayTime, modReleaseTime;
-    double modLfoDelay, modLfoFreq, vibLfoDelay, vibLfoFreq;
-    double modLfoToVolume;
-    double reverb, chorus;
+    QMap<AttributeType, ModulatedParameter *> _parameters;
+    qint32 _sampleLength, _sampleLoopStart, _sampleLoopEnd, _sampleFineTune;
+    qint32 _wPresetNumber;
 
-    void add(VoiceParam *voiceParamTmp);
-    static double d1200e2(qint32 val);
-
-    // Initialisation, lecture
-    void init(ElementType type, int numPreset = -1);
-    void readSample(EltID id);
-    void read(EltID id);
-
-    // Limites
-    void limit();
-    static double limitD(double val, double min, double max);
-    static qint32 limitI(qint32 val, qint32 min, qint32 max);
-    static quint32 limitUI(quint32 val, quint32 min, quint32 max);
+    // Initialization of the parameters
+    void prepareParameters();
+    void readSmpl(EltID idSmpl);
+    void readInstSmpl(EltID idInstSmpl);
+    void readPrstInst(EltID idPrstInst);
 };
 
 #endif // VOICEPARAM_H

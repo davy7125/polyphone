@@ -281,9 +281,7 @@ void MidiDevice::processKeyOff(int key, bool syncKeyboard)
 
     // Stop a sample reading if key is -1
     if (key == -1)
-    {
-        _synth->play(0, 0, 0, -1, 0);
-    }
+        _synth->play(EltID(), -1, 0);
     else if (_isSustainOn)
     {
         // Add the key to the list of keys to release when the pedal is released

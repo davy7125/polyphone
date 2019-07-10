@@ -104,7 +104,7 @@ void Editor::inputProcessed()
 void Editor::onSelectionChanged(IdList ids)
 {
     // Sample play is muted
-    ContextManager::audio()->getSynth()->play(0, 0, 0, -1, 0);
+    ContextManager::audio()->getSynth()->play(EltID(), -1, 0);
 
     // At least one id must be selected
     if (ids.empty())

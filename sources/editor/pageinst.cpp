@@ -264,14 +264,14 @@ void PageInst::keyPlayedInternal2(int key, int velocity)
     IdList ids = _currentIds.getSelectedIds(elementInst);
     if (ids.count() == 1)
     {
-        ContextManager::audio()->getSynth()->play(1, ids[0].indexSf2, ids[0].indexElt, key, velocity);
+        ContextManager::audio()->getSynth()->play(ids[0], key, velocity);
 
         if (velocity > 0)
         {
             // Emphasize the related ranges
             EltID idInst = ids[0];
             idInst.typeElement = elementInst;
-            rangesType defaultKeyRange, defaultVelRange;
+            RangesType defaultKeyRange, defaultVelRange;
             if (_sf2->isSet(idInst, champ_keyRange))
                 defaultKeyRange = _sf2->get(idInst, champ_keyRange).rValue;
             else
@@ -295,7 +295,7 @@ void PageInst::keyPlayedInternal2(int key, int velocity)
                 int keyMin, keyMax, velMin, velMax;
                 if (_sf2->isSet(idInstSmpl, champ_keyRange))
                 {
-                    rangesType rangeTmp = _sf2->get(idInstSmpl, champ_keyRange).rValue;
+                    RangesType rangeTmp = _sf2->get(idInstSmpl, champ_keyRange).rValue;
                     keyMin = rangeTmp.byLo;
                     keyMax = rangeTmp.byHi;
                 }
@@ -306,7 +306,7 @@ void PageInst::keyPlayedInternal2(int key, int velocity)
                 }
                 if (_sf2->isSet(idInstSmpl, champ_velRange))
                 {
-                    rangesType rangeTmp = _sf2->get(idInstSmpl, champ_velRange).rValue;
+                    RangesType rangeTmp = _sf2->get(idInstSmpl, champ_velRange).rValue;
                     velMin = rangeTmp.byLo;
                     velMax = rangeTmp.byHi;
                 }

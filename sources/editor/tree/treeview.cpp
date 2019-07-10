@@ -908,7 +908,7 @@ void TreeView::onKeyPlayed(int key, int vel)
         int minKey, maxKey, minVel, maxVel;
         if (sm->isSet(idChild, champ_keyRange))
         {
-            rangesType range = sm->get(idChild, champ_keyRange).rValue;
+            RangesType range = sm->get(idChild, champ_keyRange).rValue;
             minKey = qMin(range.byLo, range.byHi);
             maxKey = qMax(range.byLo, range.byHi);
         }
@@ -919,7 +919,7 @@ void TreeView::onKeyPlayed(int key, int vel)
         }
         if (sm->isSet(idChild, champ_velRange))
         {
-            rangesType range = sm->get(idChild, champ_velRange).rValue;
+            RangesType range = sm->get(idChild, champ_velRange).rValue;
             minVel = qMin(range.byLo, range.byHi);
             maxVel = qMax(range.byLo, range.byHi);
         }

@@ -104,13 +104,13 @@ void GraphicsLegendItem::setIds(QList<EltID> ids, QList<int> highlightedIds, int
         unsigned int maxKey = 127;
         if (sm->isSet(id, champ_keyRange))
         {
-            rangesType range = sm->get(id, champ_keyRange).rValue;
+            RangesType range = sm->get(id, champ_keyRange).rValue;
             minKey = range.byLo;
             maxKey = range.byHi;
         }
         else if (sm->isSet(idGlobal, champ_keyRange))
         {
-            rangesType range = sm->get(idGlobal, champ_keyRange).rValue;
+            RangesType range = sm->get(idGlobal, champ_keyRange).rValue;
             minKey = range.byLo;
             maxKey = range.byHi;
         }
@@ -123,13 +123,13 @@ void GraphicsLegendItem::setIds(QList<EltID> ids, QList<int> highlightedIds, int
         int maxVel = 127;
         if (sm->isSet(id, champ_velRange))
         {
-            rangesType range = sm->get(id, champ_velRange).rValue;
+            RangesType range = sm->get(id, champ_velRange).rValue;
             minVel = range.byLo;
             maxVel = range.byHi;
         }
         else if (sm->isSet(idGlobal, champ_velRange))
         {
-            rangesType range = sm->get(idGlobal, champ_velRange).rValue;
+            RangesType range = sm->get(idGlobal, champ_velRange).rValue;
             minVel = range.byLo;
             maxVel = range.byHi;
         }

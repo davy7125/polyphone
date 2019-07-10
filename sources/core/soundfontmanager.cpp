@@ -754,7 +754,7 @@ bool SoundfontManager::isEdited(int indexSf2)
 }
 
 // Récupération liste de champs et valeurs de bags
-void SoundfontManager::getListeBags(EltID id, QList<AttributeType> &listeChamps, QList<AttributeValue> &listeValeurs)
+void SoundfontManager::getAllAttributes(EltID id, QList<AttributeType> &listeChamps, QList<AttributeValue> &listeValeurs)
 {
     QMutexLocker locker(&_mutex);
     if (!this->isValid(id))

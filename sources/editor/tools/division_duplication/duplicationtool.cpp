@@ -36,7 +36,7 @@ DuplicationTool::DuplicationTool(EltID id) :
     {
         EltID id = _id;
         id.indexElt2 = i;
-        rangesType keyRange;
+        RangesType keyRange;
         if (_sf2->isSet(id, champ_keyRange))
             keyRange = _sf2->get(id, champ_keyRange).rValue;
         else
@@ -45,7 +45,7 @@ DuplicationTool::DuplicationTool(EltID id) :
             keyRange.byHi = 127;
         }
 
-        rangesType velRange;
+        RangesType velRange;
         if (_sf2->isSet(id, champ_velRange))
             velRange = _sf2->get(id, champ_velRange).rValue;
         else

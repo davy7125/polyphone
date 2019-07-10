@@ -892,7 +892,7 @@ void PageSmpl::lecture()
         if (listID.count() == 1)
         {
             _synth->activateSmplEq(ui->widgetEqualizer->isPreviewEnabled());
-            _synth->play(0, listID[0].indexSf2, listID[0].indexElt, -1, 127);
+            _synth->play(listID[0], -1, 127);
         }
 
         // Désactivations
@@ -906,7 +906,7 @@ void PageSmpl::lecture()
     else
     {
         this->_playingSmpl = false;
-        _synth->play(0, 0, 0, -1, 0);
+        _synth->play(EltID(), -1, 0);
     }
 
     updatePlayButton();
@@ -1062,7 +1062,7 @@ void PageSmpl::keyPlayedInternal(int key, int velocity)
 {
     IdList ids = _currentIds.getSelectedIds(elementSmpl);
     if (ids.count() == 1)
-        ContextManager::audio()->getSynth()->play(0, ids[0].indexSf2, ids[0].indexElt, key, velocity);
+        ContextManager::audio()->getSynth()->play(ids[0], key, velocity);
 }
 
 void PageSmpl::onSampleOnOff()

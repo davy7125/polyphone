@@ -39,7 +39,7 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int not
     _velocity(velocity),
     _gain(0),
     _voiceParam(voiceParam),
-    _currentSmplPos(voiceParam->getUnsigned(champ_dwStart16)), // This value is read only once
+    _currentSmplPos(voiceParam->getPosition(champ_dwStart16)), // This value is read only once
     _time(0),
     _release(false),
     _delayEnd(10),
@@ -238,8 +238,8 @@ bool Voice::takeData(qint32 * data, quint32 nbRead)
     const qint32 * dataSmpl = reinterpret_cast<const qint32*>(_baData.constData());
 
     int loopMode = _voiceParam->getInteger(champ_sampleModes);
-    quint32 loopStart = _voiceParam->getUnsigned(champ_dwStartLoop);
-    quint32 loopEnd = _voiceParam->getUnsigned(champ_dwEndLoop);
+    quint32 loopStart = _voiceParam->getPosition(champ_dwStartLoop);
+    quint32 loopEnd = _voiceParam->getPosition(champ_dwEndLoop);
 
     if ((loopMode == 1 || loopMode == 2 || (loopMode == 3 && !_release)) && loopStart < loopEnd)
     {
@@ -260,7 +260,7 @@ bool Voice::takeData(qint32 * data, quint32 nbRead)
     else
     {
         // No loop
-        quint32 sampleEnd = _voiceParam->getUnsigned(champ_dwLength);
+        quint32 sampleEnd = _voiceParam->getPosition(champ_dwLength);
         if (_currentSmplPos > sampleEnd)
         {
             // No more data, fill with 0
@@ -395,7 +395,7 @@ void Voice::setPan(double val)
     _mutexParam.unlock();
 }
 
-void Voice::setLoopMode(int val)
+void Voice::setLoopMode(quint16 val)
 {
     _mutexParam.lock();
     _voiceParam->setLoopMode(val);
@@ -416,7 +416,7 @@ void Voice::setLoopEnd(quint32 val)
     _mutexParam.unlock();
 }
 
-void Voice::setFineTune(qint32 val)
+void Voice::setFineTune(qint16 val)
 {
     _mutexParam.lock();
     _voiceParam->setFineTune(val);

@@ -572,8 +572,8 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
                 typeLink == RomRightSample || typeLink == RomLeftSample || typeLink == RomLinkedSample)
         {
             int numSmpl2 = _sf2->get(idSmpl, champ_wSampleLink).wValue;
-            rangesType keyRange = _sf2->get(id, champ_keyRange).rValue;
-            rangesType velRange = _sf2->get(id, champ_velRange).rValue;
+            RangesType keyRange = _sf2->get(id, champ_keyRange).rValue;
+            RangesType velRange = _sf2->get(id, champ_velRange).rValue;
 
             // Recherche d'une correspondance dans les samples liés
             bool ok = true;
@@ -584,8 +584,8 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
                 idTmp = _table->getID(i);
                 if (i != colonne)
                 {
-                    rangesType keyRange2 = _sf2->get(idTmp, champ_keyRange).rValue;
-                    rangesType velRange2 = _sf2->get(idTmp, champ_velRange).rValue;
+                    RangesType keyRange2 = _sf2->get(idTmp, champ_keyRange).rValue;
+                    RangesType velRange2 = _sf2->get(idTmp, champ_velRange).rValue;
                     if (keyRange2.byLo == keyRange.byLo && keyRange2.byHi == keyRange.byHi &&
                             velRange2.byLo == velRange.byLo && velRange2.byHi == velRange.byHi)
                     {
@@ -830,7 +830,7 @@ void PageTable::customizeKeyboard()
                 }
             }
 
-            rangesType keyRange;
+            RangesType keyRange;
             keyRange.byLo = 0;
             keyRange.byHi = 127;
             if (_sf2->isSet(id, champ_keyRange))
@@ -848,7 +848,7 @@ void PageTable::customizeKeyboard()
         }
         else if (id.typeElement == elementInst || id.typeElement == elementPrst)
         {
-            rangesType defaultKeyRange;
+            RangesType defaultKeyRange;
             if (_sf2->isSet(id, champ_keyRange))
                 defaultKeyRange = _sf2->get(id, champ_keyRange).rValue;
             else
@@ -863,7 +863,7 @@ void PageTable::customizeKeyboard()
             foreach (int i, _sf2->getSiblings(id))
             {
                 id.indexElt2 = i;
-                rangesType keyRange;
+                RangesType keyRange;
                 if (_sf2->isSet(id, champ_keyRange))
                     keyRange = _sf2->get(id, champ_keyRange).rValue;
                 else

@@ -22,34 +22,31 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SF2HEADER_H
-#define SF2HEADER_H
+#ifndef MODULATEDPARAMETER_H
+#define MODULATEDPARAMETER_H
 
 #include "basetypes.h"
-#include <QMap>
 
-class Sf2Header
+class ModulatedParameter
 {
 public:
-    Sf2Header();
+    // Initialize a modulated parameter
+    ModulatedParameter(AttributeType type);
 
-    QString getInfo(QString key);
-    SfVersionTag getVersion(QString key);
+    // Set the values from the instrument and preset levels
+    void initInst(AttributeValue value);
+    void initPrst(AttributeValue value);
 
-    bool _isValid;
+    // Get the resulting value as an integer or a double (a conversion might occur)
+    qint32 getIntValue();
+    double getRealValue();
 
-    char _RIFF[4]; // Should be "RIFF"
-    quint32Reversed _size; // Full size of the file - 8
-    char _sfbk[4]; // Should be "sfbk"
-    char _LIST[4]; // Should be "LIST"
-    quint32Reversed _infoSize; // Size of the section INFO
-    char _INFO[4]; // Should be "INFO"
-    QMap<QString, QString> _infos;
-    QMap<QString, SfVersionTag> _versions;
+private:
+    AttributeType _type;
+    Attribute _instValue, _prstValue;
+
+    // Limit some parameters
+    double limit(double value);
 };
 
-// Extension methods for QDataStream to serialize / deserialize
-QDataStream & operator >> (QDataStream &in, Sf2Header &header);
-//QDataStream & operator << (QDataStream &out, const Sf2Header &header);
-
-#endif // SF2HEADER_H
+#endif // MODULATEDPARAMETER_H

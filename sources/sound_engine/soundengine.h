@@ -86,7 +86,7 @@ protected:
                 // Voix terminée ?
                 if (_listVoices.at(i)->isFinished())
                 {
-                    if (_listVoices.at(i)->getNote() == -1)
+                    if (_listVoices.at(i)->getKey() == -1)
                         emit(readFinished());
                     delete _listVoices.takeAt(i);
                 }

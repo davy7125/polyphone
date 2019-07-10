@@ -146,12 +146,6 @@ typedef enum
 
 typedef enum
 {
-    SFGenerator_value = 0,
-    sfModSrcOper = 1
-} SFSource;
-
-typedef enum
-{
     linkInvalid = 0,
     monoSample = 1,
     rightSample = 2,
@@ -169,13 +163,13 @@ typedef enum
     absolute_value = 2
 } SFTransform;
 
-typedef struct sfVersionTag
+typedef struct
 {
     quint16 wMajor;
     quint16 wMinor;
 } SfVersionTag;
 
-typedef struct sfmodulator
+typedef struct
 {
     quint16
         Type  : 6, // 6 bits for the type
@@ -189,7 +183,7 @@ typedef struct
 {
     quint8 byLo;
     quint8 byHi;
-} rangesType;
+} RangesType;
 
 typedef union
 {
@@ -203,7 +197,7 @@ typedef union
     qint16 shValue;
 
     // Complex data
-    rangesType rValue;
+    RangesType rValue;
     SFModulator sfModValue;
     SfVersionTag sfVerValue;
     SFSampleLink sfLinkValue;
@@ -234,12 +228,12 @@ public:
     void setStoredValue(AttributeValue storedValue);
     void setStoredValue(qint16 storedValue);
     void setStoredValue(quint16 storedValue);
-    void setStoredValue(qint8 lower, qint8 upper);
+    void setStoredValue(quint8 lower, quint8 upper);
     AttributeValue getStoredValue() { return _storedValue; }
 
     // Default values
     static double getDefaultRealValue(AttributeType champ, bool isPrst);
-    static AttributeValue getDefaultStoredValue(AttributeType champ);
+    static AttributeValue getDefaultStoredValue(AttributeType champ, bool isPrst);
 
     // Conversions
     static double toRealValue(AttributeType champ, bool isPrst, AttributeValue storedValue);

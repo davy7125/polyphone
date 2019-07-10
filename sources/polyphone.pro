@@ -229,6 +229,7 @@ SOURCES	+= main.cpp \
     clavier/pianokeybdcustom.cpp \
     clavier/keyboardmap.cpp \
     sound_engine/elements/liveeq.cpp \
+    sound_engine/modulatedparameter.cpp \
     sound_engine/synth.cpp \
     sound_engine/voice.cpp \
     sound_engine/circularbuffer.cpp \
@@ -511,6 +512,7 @@ HEADERS  += \
     clavier/pianokeybdcustom.h \
     clavier/keyboardmap.h \
     sound_engine/elements/liveeq.h \
+    sound_engine/modulatedparameter.h \
     sound_engine/synth.h \
     sound_engine/voice.h \
     sound_engine/circularbuffer.h \

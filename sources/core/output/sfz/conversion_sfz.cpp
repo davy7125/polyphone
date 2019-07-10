@@ -641,13 +641,13 @@ bool ConversionSfz::isIncluded(SfzParamList * paramPrst, EltID idInstSmpl)
     int instMinKey = 0, instMaxKey = 127, instMinVel = 0, instMaxVel = 127;
     if (_sf2->isSet(idInstSmpl, champ_keyRange))
     {
-        rangesType range = _sf2->get(idInstSmpl, champ_keyRange).rValue;
+        RangesType range = _sf2->get(idInstSmpl, champ_keyRange).rValue;
         instMinKey = range.byLo;
         instMaxKey = range.byHi;
     }
     if (_sf2->isSet(idInstSmpl, champ_velRange))
     {
-        rangesType range = _sf2->get(idInstSmpl, champ_velRange).rValue;
+        RangesType range = _sf2->get(idInstSmpl, champ_velRange).rValue;
         instMinVel = range.byLo;
         instMaxVel = range.byHi;
     }

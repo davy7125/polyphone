@@ -94,201 +94,202 @@ void Synth::createSoundEnginesAndBuffers()
     }
 }
 
-// signal de lecture ou de fin
-void Synth::play(int type, int idSf2, int idElt, int note, int velocity)
-{
-    play_sub(type, idSf2, idElt, note, velocity);
-
-    if (velocity > 0)
-    {
-        // Synchronize new voices
-        _mutexSynchro.lock();
-        SoundEngine::syncNewVoices();
-        _mutexSynchro.unlock();
-    }
-}
-
-void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, VoiceParam * voiceParamTmp)
+void Synth::play(EltID id, int key, int velocity)
 {
     if (velocity == 0)
     {
         // Release of a key
-        SoundEngine::releaseNote(note);
+        SoundEngine::releaseNote(key);
         return;
     }
 
     // A key is pressed
-    switch (type)
+    switch (id.typeElement)
     {
-    case 0:{ // Sample level
-        EltID idSmpl(elementSmpl, idSf2, idElt, 0, 0);
-
-        // Compute parameters
-        VoiceParam * voiceParam = new VoiceParam(_sf2, idSmpl, voiceParamTmp);
-
-        if (note < 0) // Smpl area
-            voiceParam->prepareForSmpl(note, _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue);
-
-        // Create a voice
-        Voice * voiceTmp = new Voice(_sf2->getData(idSmpl, champ_sampleData32),
-                                     _sf2->get(idSmpl, champ_dwSampleRate).dwValue,
-                                     _format.sampleRate(), note, velocity,
-                                     voiceParam);
-
-        // Initialize chorus and gain
-        if (note < 0)
-            voiceTmp->setChorus(0, 0, 0);
-        else
-        {
-            voiceTmp->setChorus(_choLevel, _choDepth, _choFrequency);
-            voiceTmp->setGain(_gain);
-        }
-
-        // Add the voice in the list
-        _listVoixTmp << voiceTmp;
-        SoundEngine::addVoice(voiceTmp, _listVoixTmp);
-
-        if (note == -1)
-        {
-            // Avancement du graphique
-            connect(voiceTmp, SIGNAL(currentPosChanged(quint32)), this, SIGNAL(currentPosChanged(quint32)));
-
-            // Lien ?
-            SFSampleLink typeLien = _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
-            if (typeLien != monoSample && typeLien != RomMonoSample)
-                this->play(0, idSf2, _sf2->get(idSmpl, champ_wSampleLink).wValue, -2, 127);
-        }
-    }break;
-    case 1:{ // Instrument level
-        // Browse all linked samples
-        EltID idInstSmpl(elementInstSmpl, idSf2, idElt, 0, 0);
-        EltID idInst = idInstSmpl;
-        idInst.typeElement = elementInst;
-        rangesType defaultKeyRange, defaultVelRange;
-        if (_sf2->isSet(idInst, champ_keyRange))
-            defaultKeyRange = _sf2->get(idInst, champ_keyRange).rValue;
-        else
-        {
-            defaultKeyRange.byLo = 0;
-            defaultKeyRange.byHi = 127;
-        }
-        if (_sf2->isSet(idInst, champ_velRange))
-            defaultVelRange = _sf2->get(idInst, champ_velRange).rValue;
-        else
-        {
-            defaultVelRange.byLo = 0;
-            defaultVelRange.byHi = 127;
-        }
-        int keyMin, keyMax, velMin, velMax;
-        rangesType rangeTmp;
-        foreach (int i, _sf2->getSiblings(idInstSmpl))
-        {
-            idInstSmpl.indexElt2 = i;
-
-            // Skip muted divisions
-            if (_sf2->get(idInstSmpl, champ_mute).bValue > 0)
-                continue;
-
-            if (_sf2->isSet(idInstSmpl, champ_keyRange))
-            {
-                rangeTmp = _sf2->get(idInstSmpl, champ_keyRange).rValue;
-                keyMin = rangeTmp.byLo;
-                keyMax = rangeTmp.byHi;
-            }
-            else
-            {
-                keyMin = defaultKeyRange.byLo;
-                keyMax = defaultKeyRange.byHi;
-            }
-            if (_sf2->isSet(idInstSmpl, champ_velRange))
-            {
-                rangeTmp = _sf2->get(idInstSmpl, champ_velRange).rValue;
-                velMin = rangeTmp.byLo;
-                velMax = rangeTmp.byHi;
-            }
-            else
-            {
-                velMin = defaultVelRange.byLo;
-                velMax = defaultVelRange.byHi;
-            }
-            if (keyMin <= note && keyMax >= note && velMin <= velocity && velMax >= velocity)
-            {
-                // Get all parameters of the linked sample and play
-                VoiceParam * voiceParam = new VoiceParam(_sf2, idInstSmpl, voiceParamTmp);
-                this->play_sub(0, idSf2, _sf2->get(idInstSmpl, champ_sampleID).wValue, note, velocity, voiceParam);
-                delete voiceParam;
-            }
-        }
-    }break;
-    case 2:{ // Preset level
-        // Browse all linked instrument
-        EltID idPrstInst(elementPrstInst, idSf2, idElt, 0, 0);
-        EltID idPrst = idPrstInst;
-        idPrst.typeElement = elementPrst;
-        rangesType defaultKeyRange, defaultVelRange;
-        if (_sf2->isSet(idPrst, champ_keyRange))
-            defaultKeyRange = _sf2->get(idPrst, champ_keyRange).rValue;
-        else
-        {
-            defaultKeyRange.byLo = 0;
-            defaultKeyRange.byHi = 127;
-        }
-        if (_sf2->isSet(idPrst, champ_velRange))
-            defaultVelRange = _sf2->get(idPrst, champ_velRange).rValue;
-        else
-        {
-            defaultVelRange.byLo = 0;
-            defaultVelRange.byHi = 127;
-        }
-        int keyMin, keyMax, velMin, velMax;
-        rangesType rangeTmp;
-        foreach (int i, _sf2->getSiblings(idPrstInst))
-        {
-            idPrstInst.indexElt2 = i;
-
-            // Skip muted divisions
-            if (_sf2->get(idPrstInst, champ_mute).bValue > 0)
-                continue;
-
-            if (_sf2->isSet(idPrstInst, champ_keyRange))
-            {
-                rangeTmp = _sf2->get(idPrstInst, champ_keyRange).rValue;
-                keyMin = rangeTmp.byLo;
-                keyMax = rangeTmp.byHi;
-            }
-            else
-            {
-                keyMin = defaultKeyRange.byLo;
-                keyMax = defaultKeyRange.byHi;
-            }
-            if (_sf2->isSet(idPrstInst, champ_velRange))
-            {
-                rangeTmp = _sf2->get(idPrstInst, champ_velRange).rValue;
-                velMin = rangeTmp.byLo;
-                velMax = rangeTmp.byHi;
-            }
-            else
-            {
-                velMin = defaultVelRange.byLo;
-                velMax = defaultVelRange.byHi;
-            }
-            if (keyMin <= note && keyMax >= note &&
-                    velMin <= velocity && velMax >= velocity)
-            {
-                // Get the parameters of the linked instrument and play it
-                VoiceParam * voiceParam = new VoiceParam(_sf2, idPrstInst);
-                this->play_sub(1, idSf2, _sf2->get(idPrstInst, champ_instrument).wValue, note, velocity, voiceParam);
-                delete voiceParam;
-            }
-        }
-    }break;
+    case elementSmpl:
+        playSmpl(id.indexSf2, id.indexElt, key, velocity);
+        break;
+    case elementInst: case elementInstSmpl:
+        playInst(id.indexSf2, id.indexElt, key, velocity);
+        break;
+    case elementPrst: case elementPrstInst:
+        playPrst(id.indexSf2, id.indexElt, key, velocity);
+        break;
     default:
         return;
     }
 
-    // Réinitialisation de la liste temporaire de voix (utilisée pour exclusive class)
-    if (!voiceParamTmp)
-        _listVoixTmp.clear();
+    // Synchronize all new voices that have been added
+    _mutexSynchro.lock();
+    SoundEngine::syncNewVoices();
+    _mutexSynchro.unlock();
+
+    // Reset the list used for the exclusive class system
+    _listVoixTmp.clear();
+}
+
+void Synth::playPrst(int idSf2, int idElt, int key, int velocity)
+{
+    // Default preset range
+    EltID idPrst(elementPrst, idSf2, idElt, 0, 0);
+    RangesType defaultKeyRange, defaultVelRange;
+    if (_sf2->isSet(idPrst, champ_keyRange))
+        defaultKeyRange = _sf2->get(idPrst, champ_keyRange).rValue;
+    else
+    {
+        defaultKeyRange.byLo = 0;
+        defaultKeyRange.byHi = 127;
+    }
+    if (_sf2->isSet(idPrst, champ_velRange))
+        defaultVelRange = _sf2->get(idPrst, champ_velRange).rValue;
+    else
+    {
+        defaultVelRange.byLo = 0;
+        defaultVelRange.byHi = 127;
+    }
+
+    // Browse the ranges of all linked instruments
+    EltID idPrstInst(elementPrstInst, idSf2, idElt, 0, 0);
+    int keyMin, keyMax, velMin, velMax;
+    RangesType rangeTmp;
+    foreach (int i, _sf2->getSiblings(idPrstInst))
+    {
+        idPrstInst.indexElt2 = i;
+
+        // Skip muted divisions
+        if (_sf2->get(idPrstInst, champ_mute).bValue > 0)
+            continue;
+
+        if (_sf2->isSet(idPrstInst, champ_keyRange))
+        {
+            rangeTmp = _sf2->get(idPrstInst, champ_keyRange).rValue;
+            keyMin = rangeTmp.byLo;
+            keyMax = rangeTmp.byHi;
+        }
+        else
+        {
+            keyMin = defaultKeyRange.byLo;
+            keyMax = defaultKeyRange.byHi;
+        }
+        if (_sf2->isSet(idPrstInst, champ_velRange))
+        {
+            rangeTmp = _sf2->get(idPrstInst, champ_velRange).rValue;
+            velMin = rangeTmp.byLo;
+            velMax = rangeTmp.byHi;
+        }
+        else
+        {
+            velMin = defaultVelRange.byLo;
+            velMax = defaultVelRange.byHi;
+        }
+
+        // Check {key, vel} is in the division and go inside the instruments
+        if (keyMin <= key && key <= keyMax && velMin <= velocity && velocity <= velMax)
+            this->playInst(idSf2, _sf2->get(idPrstInst, champ_instrument).wValue, key, velocity, idPrstInst);
+    }
+}
+
+void Synth::playInst(int idSf2, int idElt, int key, int velocity, EltID idPrstInst)
+{
+    // Default instrument range
+    EltID idInst(elementInst, idSf2, idElt, 0, 0);
+    idInst.typeElement = elementInst;
+    RangesType defaultKeyRange, defaultVelRange;
+    if (_sf2->isSet(idInst, champ_keyRange))
+        defaultKeyRange = _sf2->get(idInst, champ_keyRange).rValue;
+    else
+    {
+        defaultKeyRange.byLo = 0;
+        defaultKeyRange.byHi = 127;
+    }
+    if (_sf2->isSet(idInst, champ_velRange))
+        defaultVelRange = _sf2->get(idInst, champ_velRange).rValue;
+    else
+    {
+        defaultVelRange.byLo = 0;
+        defaultVelRange.byHi = 127;
+    }
+
+    // Browse the range of all linked samples
+    EltID idInstSmpl(elementInstSmpl, idSf2, idElt, 0, 0);
+    int keyMin, keyMax, velMin, velMax;
+    RangesType rangeTmp;
+    foreach (int i, _sf2->getSiblings(idInstSmpl))
+    {
+        idInstSmpl.indexElt2 = i;
+
+        // Skip muted divisions
+        if (_sf2->get(idInstSmpl, champ_mute).bValue > 0)
+            continue;
+
+        if (_sf2->isSet(idInstSmpl, champ_keyRange))
+        {
+            rangeTmp = _sf2->get(idInstSmpl, champ_keyRange).rValue;
+            keyMin = rangeTmp.byLo;
+            keyMax = rangeTmp.byHi;
+        }
+        else
+        {
+            keyMin = defaultKeyRange.byLo;
+            keyMax = defaultKeyRange.byHi;
+        }
+        if (_sf2->isSet(idInstSmpl, champ_velRange))
+        {
+            rangeTmp = _sf2->get(idInstSmpl, champ_velRange).rValue;
+            velMin = rangeTmp.byLo;
+            velMax = rangeTmp.byHi;
+        }
+        else
+        {
+            velMin = defaultVelRange.byLo;
+            velMax = defaultVelRange.byHi;
+        }
+
+        // Check {key, vel} is in the division and go inside the samples
+        if (keyMin <= key && key <= keyMax && velMin <= velocity && velocity <= velMax)
+            this->playSmpl(idSf2, _sf2->get(idInstSmpl, champ_sampleID).wValue, key, velocity, idInstSmpl, idPrstInst);
+    }
+}
+
+void Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSmpl, EltID idPrstInst)
+{
+    EltID idSmpl(elementSmpl, idSf2, idElt, 0, 0);
+
+    // Prepare the parameters for the voice
+    VoiceParam * voiceParam = new VoiceParam(idPrstInst, idInstSmpl, idSmpl);
+
+    if (key < 0) // Smpl area
+        voiceParam->prepareForSmpl(key, _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue);
+
+    // Create a voice
+    Voice * voiceTmp = new Voice(_sf2->getData(idSmpl, champ_sampleData32),
+                                 _sf2->get(idSmpl, champ_dwSampleRate).dwValue,
+                                 _format.sampleRate(), key, velocity,
+                                 voiceParam);
+
+    // Initialize chorus and gain
+    if (key < 0)
+        voiceTmp->setChorus(0, 0, 0);
+    else
+    {
+        voiceTmp->setChorus(_choLevel, _choDepth, _choFrequency);
+        voiceTmp->setGain(_gain);
+    }
+
+    // Add the voice in the list
+    _listVoixTmp << voiceTmp;
+    SoundEngine::addVoice(voiceTmp, _listVoixTmp);
+
+    if (key == -1) // -2 is the linked sample
+    {
+        // Position in the graphics
+        connect(voiceTmp, SIGNAL(currentPosChanged(quint32)), this, SIGNAL(currentPosChanged(quint32)));
+
+        // Stereo link?
+        SFSampleLink typeLien = _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
+        if (typeLien != monoSample && typeLien != RomMonoSample)
+            this->playSmpl(idSf2, _sf2->get(idSmpl, champ_wSampleLink).wValue, -2, 127);
+    }
 }
 
 void Synth::stop()

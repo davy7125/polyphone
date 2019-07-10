@@ -31,7 +31,8 @@ Attribute::Attribute(AttributeType champ, bool isPrst) :
     _isPrst(isPrst),
     _realValue(0)
 {
-    _storedValue.shValue = 0;
+    // Load the default value
+    setStoredValue(getDefaultStoredValue(champ, isPrst));
 }
 
 Attribute::Attribute(AttributeType champ, bool isPrst, double value) : Attribute(champ, isPrst)
@@ -70,7 +71,7 @@ void Attribute::setStoredValue(quint16 storedValue)
     _realValue = toRealValue(_champ, _isPrst, _storedValue);
 }
 
-void Attribute::setStoredValue(qint8 lower, qint8 upper)
+void Attribute::setStoredValue(quint8 lower, quint8 upper)
 {
     _storedValue.rValue.byLo = (lower < upper ? lower : upper);
     _storedValue.rValue.byHi = (upper > lower ? upper : lower);
@@ -79,7 +80,6 @@ void Attribute::setStoredValue(qint8 lower, qint8 upper)
 
 double Attribute::toRealValue(AttributeType champ, bool isPrst, AttributeValue storedValue)
 {
-    Q_UNUSED(isPrst);
     double realValue = 0;
 
     switch (champ)
@@ -90,7 +90,7 @@ double Attribute::toRealValue(AttributeType champ, bool isPrst, AttributeValue s
     case champ_decayModEnv: case champ_decayVolEnv:
     case champ_releaseModEnv: case champ_releaseVolEnv:
     case champ_delayModLFO: case champ_delayVibLFO:
-        realValue = qPow(2., (double)storedValue.shValue / 1200.);
+        realValue = qPow(2., 0.000833333 * storedValue.shValue); // 0.000833333 = 1/1200
         break;
     case champ_fineTune: case champ_coarseTune: case champ_keynumToVolEnvHold: case champ_keynumToVolEnvDecay:
     case champ_keynumToModEnvHold: case champ_keynumToModEnvDecay: case champ_modEnvToPitch:
@@ -98,14 +98,15 @@ double Attribute::toRealValue(AttributeType champ, bool isPrst, AttributeValue s
     case champ_vibLfoToPitch: case champ_scaleTuning:
     case champ_startloopAddrsOffset: case champ_startAddrsOffset: case champ_endloopAddrsOffset:
     case champ_endAddrsOffset:
+    case champ_overridingRootKey: case champ_keynum: case champ_velocity: // can be -1 (not defined)
         realValue = storedValue.shValue;
         break;
     case champ_pan: case champ_initialAttenuation: case champ_initialFilterQ: case champ_sustainVolEnv:
     case champ_sustainModEnv: case champ_modLfoToVolume: case champ_reverbEffectsSend:
     case champ_chorusEffectsSend:
-        realValue = (double)storedValue.shValue / 10.;
+        realValue = 0.1 * static_cast<double>(storedValue.shValue);
         break;
-    case champ_overridingRootKey: case champ_keynum: case champ_velocity: case champ_sampleModes:
+    case champ_sampleModes:
     case champ_exclusiveClass: case champ_sampleID:
         realValue = storedValue.wValue;
         break;
@@ -115,9 +116,9 @@ double Attribute::toRealValue(AttributeType champ, bool isPrst, AttributeValue s
         break;
     case champ_initialFilterFc: case champ_freqModLFO: case champ_freqVibLFO:
         if (isPrst)
-            realValue = qPow(2., (double)storedValue.shValue / 1200.);
+            realValue = qPow(2., 0.000833333 * storedValue.shValue); // 0.000833333 = 1/1200
         else
-            realValue = qPow(2., (double)storedValue.shValue / 1200.) * 8.176;
+            realValue = qPow(2., 0.000833333 * storedValue.shValue) * 8.176;
         break;
     case champ_keyRange: case champ_velRange:
         realValue = storedValue.rValue.byLo * 1000 + storedValue.rValue.byHi;
@@ -140,28 +141,28 @@ AttributeValue Attribute::fromRealValue(AttributeType champ, bool isPrst, double
     case champ_keynumToModEnvHold: case champ_keynumToModEnvDecay: case champ_modEnvToPitch:
     case champ_modEnvToFilterFc: case champ_modLfoToPitch: case champ_modLfoToFilterFc:
     case champ_vibLfoToPitch: case champ_scaleTuning:
-        storedValue.shValue = qRound(realValue);
+    case champ_overridingRootKey: case champ_keynum: case champ_velocity: // can be -1 (not defined)
+        storedValue.shValue = static_cast<qint16>(qRound(realValue));
         break;
     case champ_pan: case champ_initialAttenuation: case champ_initialFilterQ: case champ_sustainVolEnv:
     case champ_sustainModEnv: case champ_modLfoToVolume: case champ_reverbEffectsSend:
     case champ_chorusEffectsSend:
-        storedValue.shValue = qRound(realValue * 10.);
+        storedValue.shValue = static_cast<qint16>(qRound(realValue * 10.));
         break;
-    case champ_overridingRootKey: case champ_keynum: case champ_velocity: case champ_sampleModes:
-    case champ_exclusiveClass: case champ_sampleID:
-        storedValue.wValue = qRound(realValue);
+    case champ_sampleModes: case champ_exclusiveClass: case champ_sampleID:
+        storedValue.wValue = static_cast<quint16>(qRound(realValue));
         break;
     case champ_startloopAddrsCoarseOffset: case champ_endloopAddrsCoarseOffset:
     case champ_startAddrsCoarseOffset: case champ_endAddrsCoarseOffset:
-        storedValue.shValue = qRound(realValue) / 32768;
+        storedValue.shValue = static_cast<qint16>(qRound(realValue) / 32768);
         break;
     case champ_startloopAddrsOffset: case champ_startAddrsOffset:
     case champ_endloopAddrsOffset: case champ_endAddrsOffset:
-        storedValue.shValue = qRound(realValue) % 32768;
+        storedValue.shValue = static_cast<qint16>(qRound(realValue) % 32768);
         break;
     case champ_keyRange: case champ_velRange:
-        storedValue.rValue.byHi = (quint8)(realValue / 1000);
-        storedValue.rValue.byLo = (quint8)(realValue - 1000 * storedValue.rValue.byHi);
+        storedValue.rValue.byHi = static_cast<quint8>(0.001 * realValue);
+        storedValue.rValue.byLo = static_cast<quint8>(realValue - 1000 * storedValue.rValue.byHi);
         break;
     case champ_delayModEnv: case champ_delayVolEnv:
     case champ_holdModEnv: case champ_holdVolEnv:
@@ -169,20 +170,19 @@ AttributeValue Attribute::fromRealValue(AttributeType champ, bool isPrst, double
     case champ_attackModEnv: case champ_attackVolEnv:
     case champ_decayModEnv: case champ_decayVolEnv:
     case champ_releaseModEnv: case champ_releaseVolEnv:
-        storedValue.shValue = qRound(1200. * qLn(realValue) / 0.69314718056);
+        storedValue.shValue = static_cast<qint16>(qRound(1200. * qLn(realValue) / 0.69314718056));
         break;
     case champ_initialFilterFc:
         if (isPrst)
-            storedValue.shValue = (qint16)(1200. * qLn(realValue) / 0.69314718056);
+            storedValue.shValue = static_cast<qint16>(1200. * qLn(realValue) / 0.69314718056);
         else
-            storedValue.shValue = (qint16)(1200. * qLn(realValue / 8.176) / 0.69314718056);
+            storedValue.shValue = static_cast<qint16>(1200. * qLn(realValue / 8.176) / 0.69314718056);
         break;
     case champ_freqModLFO: case champ_freqVibLFO:
         if (isPrst)
-            storedValue.shValue = (qint16)(1200. * qLn(realValue) / 0.69314718056);
+            storedValue.shValue = static_cast<qint16>(1200. * qLn(realValue) / 0.69314718056);
         else
-            storedValue.shValue = (qint16)(1200. * qLn(realValue / 8.176) / 0.69314718056);
-        break;
+            storedValue.shValue = static_cast<qint16>(1200. * qLn(realValue / 8.176) / 0.69314718056);
         break;
     default:
         break;
@@ -194,13 +194,13 @@ AttributeValue Attribute::fromRealValue(AttributeType champ, bool isPrst, double
 double Attribute::getDefaultRealValue(AttributeType champ, bool isPrst)
 {
     // Default stored value
-    AttributeValue defaultStoredValue = Attribute::getDefaultStoredValue(champ);
+    AttributeValue defaultStoredValue = Attribute::getDefaultStoredValue(champ, isPrst);
 
     // Compute the corresponding real value
     return toRealValue(champ, isPrst, defaultStoredValue);
 }
 
-AttributeValue Attribute::getDefaultStoredValue(AttributeType champ)
+AttributeValue Attribute::getDefaultStoredValue(AttributeType champ, bool isPrst)
 {
     AttributeValue value;
     value.dwValue = 0;
@@ -217,7 +217,7 @@ AttributeValue Attribute::getDefaultStoredValue(AttributeType champ)
     case champ_vibLfoToPitch: case champ_reverbEffectsSend: case champ_chorusEffectsSend:
     case champ_freqModLFO: case champ_freqVibLFO:
     case champ_exclusiveClass: case champ_sampleModes:
-        value.wValue = 0;
+        value.wValue = 0; // Same than value.shValue = 0
         break;
     case champ_delayModLFO: case champ_delayVibLFO:
     case champ_delayModEnv: case champ_delayVolEnv:
@@ -225,7 +225,7 @@ AttributeValue Attribute::getDefaultStoredValue(AttributeType champ)
     case champ_holdModEnv: case champ_holdVolEnv:
     case champ_decayModEnv: case champ_decayVolEnv:
     case champ_releaseModEnv: case champ_releaseVolEnv:
-        value.shValue = -12000;
+        value.shValue = isPrst ? 0 : -12000;
         break;
     case champ_velRange: case champ_keyRange:
         value.rValue.byLo = 0;
@@ -235,10 +235,10 @@ AttributeValue Attribute::getDefaultStoredValue(AttributeType champ)
         value.shValue = -1;
         break;
     case champ_scaleTuning:
-        value.shValue = 100;
+        value.shValue = isPrst ? 0 : 100;
         break;
     case champ_initialFilterFc:
-        value.wValue = 13500;
+        value.wValue = isPrst ? 0 : 13500;
         break;
     default:
         break;
@@ -294,11 +294,11 @@ AttributeValue Attribute::limit(AttributeType champ, AttributeValue value, bool 
                     limit(value.shValue, -1920, 1920) :
                     limit(value.shValue, -960, 960);
         break;
-    case champ_overridingRootKey: case champ_keynum: case champ_exclusiveClass:
+    case champ_exclusiveClass:
         value.wValue = limit(value.wValue, 0, 127);
         break;
-    case champ_velocity:
-        value.wValue = limit(value.wValue, 1, 127);
+    case champ_velocity: case champ_overridingRootKey: case champ_keynum:
+        value.shValue = limit(value.shValue, -1, 127);
         break;
     case champ_startloopAddrsCoarseOffset: case champ_endloopAddrsCoarseOffset:
     case champ_startAddrsCoarseOffset: case champ_endAddrsCoarseOffset:
@@ -518,7 +518,7 @@ AttributeValue Attribute::fromString(AttributeType champ, bool isPrst, QString s
     }break;
     case champ_overridingRootKey: case champ_keynum: {
         int keyNum = ContextManager::keyName()->getKeyNum(strValue);
-        ok = (keyNum >= 0 && keyNum <= 127);
+        ok = (keyNum >= -1 && keyNum <= 127);
         value.wValue = keyNum;
     }break;
     default:

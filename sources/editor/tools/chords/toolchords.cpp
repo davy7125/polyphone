@@ -86,7 +86,7 @@ void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids
 
     // Compute the number of steps
     _currentStep = 0;
-    rangesType range = this->getInstrumentRange(idInst);
+    RangesType range = this->getInstrumentRange(idInst);
     _steps = qAbs(range.byHi - range.byLo) / keyNumber + 1;
     _stereoSamples = params->getStereoSample();
     if (_stereoSamples)
@@ -212,9 +212,9 @@ QString ToolChords::getWarning()
     return _warning;
 }
 
-rangesType ToolChords::getInstrumentRange(EltID idInst)
+RangesType ToolChords::getInstrumentRange(EltID idInst)
 {
-    rangesType result;
+    RangesType result;
     result.byLo = 127;
     result.byHi = 0;
 
@@ -228,7 +228,7 @@ rangesType ToolChords::getInstrumentRange(EltID idInst)
 
         if (sm->isSet(idInstSmpl, champ_keyRange))
         {
-            rangesType rangeTmp = sm->get(idInstSmpl, champ_keyRange).rValue;
+            RangesType rangeTmp = sm->get(idInstSmpl, champ_keyRange).rValue;
             if (rangeTmp.byLo < result.byLo)
                 result.byLo = rangeTmp.byLo;
             if (rangeTmp.byHi > result.byHi)
@@ -241,7 +241,7 @@ rangesType ToolChords::getInstrumentRange(EltID idInst)
     // Check the range of the instrument, if needed
     if (useDefault && sm->isSet(idInst, champ_keyRange))
     {
-        rangesType defaultRange = sm->get(idInst, champ_keyRange).rValue;
+        RangesType defaultRange = sm->get(idInst, champ_keyRange).rValue;
         if (defaultRange.byLo < result.byLo)
             result.byLo = defaultRange.byLo;
         if (defaultRange.byHi > result.byHi)

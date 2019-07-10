@@ -77,7 +77,7 @@ public:
     bool isEdited(int indexSf2);
 
     // Récupération d'une liste de champs et de valeurs contenues dans les bags de l'élément id
-    void getListeBags(EltID id, QList<AttributeType> &listeChamps, QList<AttributeValue> &listeValeurs);
+    void getAllAttributes(EltID id, QList<AttributeType> &listeChamps, QList<AttributeValue> &listeValeurs);
 
     // Détermination de la validité d'un ID (en acceptant ou non les ID masqués, par défaut non)
     bool isValid(EltID id, bool acceptHidden = false);

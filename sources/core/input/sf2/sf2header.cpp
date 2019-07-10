@@ -40,11 +40,11 @@ QString Sf2Header::getInfo(QString key)
     return "";
 }
 
-sfVersionTag Sf2Header::getVersion(QString key)
+SfVersionTag Sf2Header::getVersion(QString key)
 {
     if (_versions.contains(key))
         return _versions[key];
-    sfVersionTag version;
+    SfVersionTag version;
     version.wMajor = 0;
     version.wMinor = 0;
     return version;

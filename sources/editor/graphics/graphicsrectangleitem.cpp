@@ -76,13 +76,13 @@ void GraphicsRectangleItem::initialize(EltID id)
     SoundfontManager * sm = SoundfontManager::getInstance();
     if (sm->isSet(id, champ_keyRange))
     {
-        rangesType range = sm->get(id, champ_keyRange).rValue;
+        RangesType range = sm->get(id, champ_keyRange).rValue;
         _minKey = range.byLo;
         _maxKey = range.byHi;
     }
     else if (sm->isSet(idGlobal, champ_keyRange))
     {
-        rangesType range = sm->get(idGlobal, champ_keyRange).rValue;
+        RangesType range = sm->get(idGlobal, champ_keyRange).rValue;
         _minKey = range.byLo;
         _maxKey = range.byHi;
     }
@@ -90,13 +90,13 @@ void GraphicsRectangleItem::initialize(EltID id)
     // Velocity range
     if (sm->isSet(id, champ_velRange))
     {
-        rangesType range = sm->get(id, champ_velRange).rValue;
+        RangesType range = sm->get(id, champ_velRange).rValue;
         _minVel = range.byLo;
         _maxVel = range.byHi;
     }
     else if (sm->isSet(idGlobal, champ_velRange))
     {
-        rangesType range = sm->get(idGlobal, champ_velRange).rValue;
+        RangesType range = sm->get(idGlobal, champ_velRange).rValue;
         _minVel = range.byLo;
         _maxVel = range.byHi;
     }
@@ -246,8 +246,8 @@ EltID GraphicsRectangleItem::findBrother()
         {
             // Characteristics to find in the other divisions
             int numSmpl2 = sm->get(idSmpl, champ_wSampleLink).wValue;
-            rangesType keyRange = sm->get(_id, champ_keyRange).rValue;
-            rangesType velRange = sm->get(_id, champ_velRange).rValue;
+            RangesType keyRange = sm->get(_id, champ_keyRange).rValue;
+            RangesType velRange = sm->get(_id, champ_velRange).rValue;
 
             // Search the brother
             int numBrothers = 0;
@@ -258,8 +258,8 @@ EltID GraphicsRectangleItem::findBrother()
                 id2.indexElt2 = i;
                 if (i != _id.indexElt2)
                 {
-                    rangesType keyRange2 = sm->get(id2, champ_keyRange).rValue;
-                    rangesType velRange2 = sm->get(id2, champ_velRange).rValue;
+                    RangesType keyRange2 = sm->get(id2, champ_keyRange).rValue;
+                    RangesType velRange2 = sm->get(id2, champ_velRange).rValue;
                     if (keyRange2.byLo == keyRange.byLo && keyRange2.byHi == keyRange.byHi &&
                             velRange2.byLo == velRange.byLo && velRange2.byHi == velRange.byHi)
                     {
