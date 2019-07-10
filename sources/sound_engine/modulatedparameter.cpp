@@ -32,14 +32,12 @@ ModulatedParameter::ModulatedParameter(AttributeType type) :
 
 }
 
-void ModulatedParameter::initInst(AttributeValue value)
+void ModulatedParameter::initValue(AttributeValue value, bool isPrst)
 {
-    _instValue.setStoredValue(value);
-}
-
-void ModulatedParameter::initPrst(AttributeValue value)
-{
-    _prstValue.setStoredValue(value);
+    if (isPrst)
+        _prstValue.setStoredValue(value);
+    else
+        _instValue.setStoredValue(value);
 }
 
 qint32 ModulatedParameter::getIntValue()

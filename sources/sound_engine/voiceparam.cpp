@@ -39,12 +39,12 @@ VoiceParam::VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl) :
 
     // Possibly add the configuration of the instrument level
     if (idInstSmpl.typeElement != elementUnknown)
-        readInstSmpl(idInstSmpl);
+        readDivision(idInstSmpl);
 
     // Possibly add the configuration of the preset level
     if (idPrstInst.typeElement != elementUnknown)
     {
-        readPrstInst(idPrstInst);
+        readDivision(idPrstInst);
         _wPresetNumber = _sm->get(EltID(elementPrst, idPrstInst.indexSf2, idPrstInst.indexElt), champ_wPreset).wValue;
     }
     else
@@ -133,66 +133,40 @@ void VoiceParam::prepareParameters()
 void VoiceParam::readSmpl(EltID idSmpl)
 {
     // Read sample properties
-    _parameters[champ_overridingRootKey]->initInst(_sm->get(idSmpl, champ_byOriginalPitch));
+    _parameters[champ_overridingRootKey]->initValue(_sm->get(idSmpl, champ_byOriginalPitch), false);
     _sampleFineTune = _sm->get(idSmpl, champ_chPitchCorrection).cValue;
     _sampleLength = static_cast<qint32>(_sm->get(idSmpl, champ_dwLength).dwValue);
     _sampleLoopStart = static_cast<qint32>(_sm->get(idSmpl, champ_dwStartLoop).dwValue);
     _sampleLoopEnd = static_cast<qint32>(_sm->get(idSmpl, champ_dwEndLoop).dwValue);
 }
 
-void VoiceParam::readInstSmpl(EltID idInstSmpl)
+void VoiceParam::readDivision(EltID idDivision)
 {
+    bool isPrst = (idDivision.typeElement == elementPrstInst);
+
     // Load division attributes
     QList<AttributeType> divisionAttributeTypes;
     QList<AttributeValue> divisionAttributeValues;
-    _sm->getAllAttributes(idInstSmpl, divisionAttributeTypes, divisionAttributeValues);
+    _sm->getAllAttributes(idDivision, divisionAttributeTypes, divisionAttributeValues);
 
     // Configure with the division attributes
     for (int i = 0; i < divisionAttributeTypes.count(); i++)
     {
         if (_parameters.contains(divisionAttributeTypes[i]))
-            _parameters[divisionAttributeTypes[i]]->initInst(divisionAttributeValues[i]);
+            _parameters[divisionAttributeTypes[i]]->initValue(divisionAttributeValues[i], isPrst);
     }
 
     // Load global attributes
-    EltID idInst(elementInst, idInstSmpl.indexSf2, idInstSmpl.indexElt);
+    EltID id(isPrst ? elementPrst : elementInst, idDivision.indexSf2, idDivision.indexElt);
     QList<AttributeType> globalAttributeTypes;
     QList<AttributeValue> globalAttributeValues;
-    _sm->getAllAttributes(idInst, globalAttributeTypes, globalAttributeValues);
+    _sm->getAllAttributes(id, globalAttributeTypes, globalAttributeValues);
 
     // Complete the configuration with global attributes that have not been overridden in divisions
     for (int i = 0; i < globalAttributeTypes.count(); i++)
     {
         if (!divisionAttributeTypes.contains(globalAttributeTypes[i]) && _parameters.contains(globalAttributeTypes[i]))
-            _parameters[globalAttributeTypes[i]]->initInst(globalAttributeValues[i]);
-    }
-}
-
-void VoiceParam::readPrstInst(EltID idPrstInst)
-{
-    // Load division attributes
-    QList<AttributeType> divisionAttributeTypes;
-    QList<AttributeValue> divisionAttributeValues;
-    _sm->getAllAttributes(idPrstInst, divisionAttributeTypes, divisionAttributeValues);
-
-    // Configure with the division attributes
-    for (int i = 0; i < divisionAttributeTypes.count(); i++)
-    {
-        if (_parameters.contains(divisionAttributeTypes[i]))
-            _parameters[divisionAttributeTypes[i]]->initPrst(divisionAttributeValues[i]);
-    }
-
-    // Load global attributes
-    EltID idPrst(elementPrst, idPrstInst.indexSf2, idPrstInst.indexElt);
-    QList<AttributeType> globalAttributeTypes;
-    QList<AttributeValue> globalAttributeValues;
-    _sm->getAllAttributes(idPrst, globalAttributeTypes, globalAttributeValues);
-
-    // Complete the configuration with global attributes that have not been overridden in divisions
-    for (int i = 0; i < globalAttributeTypes.count(); i++)
-    {
-        if (!divisionAttributeTypes.contains(globalAttributeTypes[i]) && _parameters.contains(globalAttributeTypes[i]))
-            _parameters[globalAttributeTypes[i]]->initPrst(globalAttributeValues[i]);
+            _parameters[globalAttributeTypes[i]]->initValue(globalAttributeValues[i], isPrst);
     }
 }
 
@@ -201,26 +175,26 @@ void VoiceParam::prepareForSmpl(int key, SFSampleLink link)
     // Calling a second time the same sample mute the first one
     AttributeValue value;
     value.wValue = static_cast<quint16>(key); // Not a problem if -1 is translated into an unsigned
-    _parameters[champ_exclusiveClass]->initInst(value);
+    _parameters[champ_exclusiveClass]->initValue(value, false);
 
     // Default release
     value.shValue = static_cast<qint16>(qRound(1200. * qLn(0.2) / 0.69314718056));
-    _parameters[champ_releaseVolEnv]->initInst(value);
+    _parameters[champ_releaseVolEnv]->initValue(value, false);
 
     // Pan
     switch (link)
     {
     case leftSample: case RomLeftSample:
         value.shValue = -500;
-        _parameters[champ_pan]->initInst(value);
+        _parameters[champ_pan]->initValue(value, false);
         break;
     case rightSample: case RomRightSample:
         value.shValue = 500;
-        _parameters[champ_pan]->initInst(value);
+        _parameters[champ_pan]->initValue(value, false);
         break;
     default:
         value.shValue = 0;
-        _parameters[champ_pan]->initInst(value);
+        _parameters[champ_pan]->initValue(value, false);
         break;
     }
 }
@@ -229,14 +203,14 @@ void VoiceParam::setPan(double val)
 {
     AttributeValue value;
     value.shValue = static_cast<qint16>(qRound(val * 10.));
-    _parameters[champ_pan]->initInst(value);
+    _parameters[champ_pan]->initValue(value, false);
 }
 
 void VoiceParam::setLoopMode(quint16 val)
 {
     AttributeValue value;
     value.wValue = val;
-    _parameters[champ_sampleModes]->initInst(value);
+    _parameters[champ_sampleModes]->initValue(value, false);
 }
 
 void VoiceParam::setLoopStart(quint32 val)
@@ -253,7 +227,7 @@ void VoiceParam::setFineTune(qint16 val)
 {
     AttributeValue value;
     value.shValue = val;
-    _parameters[champ_fineTune]->initInst(value);
+    _parameters[champ_fineTune]->initValue(value, false);
 }
 
 double VoiceParam::getDouble(AttributeType type)

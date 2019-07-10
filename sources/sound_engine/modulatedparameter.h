@@ -33,9 +33,8 @@ public:
     // Initialize a modulated parameter
     ModulatedParameter(AttributeType type);
 
-    // Set the values from the instrument and preset levels
-    void initInst(AttributeValue value);
-    void initPrst(AttributeValue value);
+    // Set the values from the instrument or preset level
+    void initValue(AttributeValue value, bool isPrst);
 
     // Get the resulting value as an integer or a double (a conversion might occur)
     qint32 getIntValue();

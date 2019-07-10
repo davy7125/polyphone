@@ -67,8 +67,7 @@ private:
     // Initialization of the parameters
     void prepareParameters();
     void readSmpl(EltID idSmpl);
-    void readInstSmpl(EltID idInstSmpl);
-    void readPrstInst(EltID idPrstInst);
+    void readDivision(EltID idDivision);
 };
 
 #endif // VOICEPARAM_H
