@@ -39,12 +39,12 @@ Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _isRecording(true),
     _fTmpSumRev1(nullptr),
     _fTmpSumRev2(nullptr),
-    _dataWav(nullptr)
+    _dataWav(nullptr),
+    _bufferSize(0),
+    _configuration(configuration)
 {
-
     // Création des buffers et sound engines
-    _bufferSize = 2 * configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();
-    createSoundEnginesAndBuffers();
+    updateConfiguration();
 }
 
 Synth::~Synth()
@@ -264,8 +264,7 @@ void Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSm
     // Create a voice
     Voice * voiceTmp = new Voice(_sf2->getData(idSmpl, champ_sampleData32),
                                  _sf2->get(idSmpl, champ_dwSampleRate).dwValue,
-                                 _format.sampleRate(), key, velocity,
-                                 voiceParam);
+                                 _format.sampleRate(), key, voiceParam);
 
     // Initialize chorus and gain
     if (key < 0)
@@ -303,16 +302,16 @@ void Synth::updateConfiguration()
     this->stop();
 
     // Update chorus
-    _choLevel = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt();
-    _choDepth = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_depth", 0).toInt();
-    _choFrequency = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_frequency", 0).toInt();
+    _choLevel = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt();
+    _choDepth = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_depth", 0).toInt();
+    _choFrequency = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_frequency", 0).toInt();
     SoundEngine::setChorus(_choLevel, _choDepth, _choFrequency);
 
     // Update reverb
-    double revLevel = 0.01 * ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", 0).toInt();
-    double revSize = 0.01 * ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_size", 0).toInt();
-    double revWidth = 0.01 * ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_width", 0).toInt();
-    double revDamping = 0.01 * ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", 0).toInt();
+    double revLevel = 0.01 * _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", 0).toInt();
+    double revSize = 0.01 * _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_size", 0).toInt();
+    double revWidth = 0.01 * _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_width", 0).toInt();
+    double revDamping = 0.01 * _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", 0).toInt();
 
     _mutexReverb.lock();
     _reverb.setEffectMix(revLevel);
@@ -322,11 +321,11 @@ void Synth::updateConfiguration()
     _mutexReverb.unlock();
 
     // Update gain
-    _gain = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
+    _gain = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
     SoundEngine::setGain(_gain);
 
     // Update buffer size
-    quint32 bufferSize = 2 * ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();
+    quint32 bufferSize = 2 * _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();
     if (_bufferSize != bufferSize)
     {
         _bufferSize = bufferSize;
@@ -376,7 +375,7 @@ void Synth::setEndLoop(quint32 endLoop, bool repercute)
     SoundEngine::setEndLoop(endLoop, repercute);
 }
 
-void Synth::setPitchCorrection(int correction, bool repercute)
+void Synth::setPitchCorrection(qint16 correction, bool repercute)
 {
     // mise à jour voix -1 et -2 si répercussion
     SoundEngine::setPitchCorrection(correction, repercute);

@@ -29,9 +29,13 @@ ModulatedParameter::ModulatedParameter(AttributeType type) :
     _instValue(type, false),
     _prstValue(type, true),
     _instModulation(0),
-    _prstModulation(0)
+    _prstModulation(0),
+    _computed(false)
 {
-
+    // Some parameters are computed only once
+    _notRealTime = (_type == champ_keynum || _type == champ_velocity || _type == champ_sampleModes ||
+                    _type == champ_scaleTuning || _type == champ_exclusiveClass || _type == champ_overridingRootKey ||
+                    _type == champ_keyRange || _type == champ_velRange);
 }
 
 void ModulatedParameter::initValue(AttributeValue value, bool isPrst)
@@ -49,149 +53,55 @@ void ModulatedParameter::clearModulations()
 }
 
 void ModulatedParameter::addInstModulation(double value)
-{qDebug() << "inst modulation" << value;
+{
     _instModulation += value;
 }
 
 void ModulatedParameter::addPrstModulation(double value)
 {
-    _prstModulation += value;
+    // Some attributes cannot be modulated at the preset level
+    if (_type != champ_overridingRootKey && _type != champ_velocity && _type != champ_keynum)
+        _prstModulation += value;
 }
 
 qint32 ModulatedParameter::getIntValue()
 {
-    // Combine inst and prst
-    qint32 result = 0;
-    switch (_type)
-    {
-    case champ_sampleModes: case champ_exclusiveClass:
-        // Only in instrument
-        result = _instValue.getStoredValue().wValue + static_cast<qint32>(_instModulation);
-        break;
-    case champ_overridingRootKey: case champ_velocity: case champ_keynum:
-        // Only in instrument, can be -1 (not defined)
-        result = _instValue.getStoredValue().shValue + static_cast<qint32>(_instModulation);
-        break;
-    case champ_startAddrsOffset: case champ_startAddrsCoarseOffset:
-    case champ_endAddrsOffset: case champ_endAddrsCoarseOffset:
-    case champ_startloopAddrsOffset: case champ_startloopAddrsCoarseOffset:
-    case champ_endloopAddrsOffset: case champ_endloopAddrsCoarseOffset:
-    case champ_fineTune: case champ_coarseTune: case champ_scaleTuning:
-    case champ_modLfoToFilterFc: case champ_modLfoToPitch: case champ_vibLfoToPitch:
-    case champ_modEnvToPitch: case champ_modEnvToFilterFc:
-    case champ_keynumToModEnvHold: case champ_keynumToModEnvDecay:
-    case champ_keynumToVolEnvHold: case champ_keynumToVolEnvDecay:
-        result = _instValue.getStoredValue().shValue + _prstValue.getStoredValue().shValue +
-                static_cast<qint32>(_instModulation) + static_cast<qint32>(_prstModulation);
-        break;
-    default:
-        qDebug() << "ModulatedParameter: type" << _type << "is not an integer";
-        return 0;
-    }
+    // Compute the value
+    computeValue();
 
-    // Limit the result
-    AttributeValue value;
-    if (result > 32767)
-        value.shValue = 32767;
-    else if (result < -32768)
-        value.shValue = -32768;
-    else
-        value.shValue = static_cast<qint16>(result);
-    value = Attribute::limit(_type, value, false);
-
-    // Return it
-    return value.shValue;
+    // Return a modulated value without conversion
+    return _computedValue.shValue;
 }
 
 double ModulatedParameter::getRealValue()
 {
-    // Combine inst and prst
-    double result = 0;
-    switch (_type)
-    {
-    case champ_reverbEffectsSend: case champ_chorusEffectsSend:
-    case champ_pan: case champ_initialAttenuation:
-    case champ_initialFilterQ: case champ_modLfoToVolume:
-    case champ_sustainModEnv: case champ_sustainVolEnv:
-        result = _instValue.getRealValue() + _prstValue.getRealValue() + _instModulation + _prstModulation;
-        break;
-    case champ_delayVolEnv: case champ_attackVolEnv: case champ_holdVolEnv:
-    case champ_decayVolEnv: case champ_releaseVolEnv:
-    case champ_delayModEnv: case champ_attackModEnv: case champ_holdModEnv:
-    case champ_decayModEnv: case champ_releaseModEnv:
-    case champ_delayModLFO: case champ_freqModLFO:
-    case champ_delayVibLFO: case champ_freqVibLFO:
-    case champ_initialFilterFc:
-        result = (_instValue.getRealValue() + _instModulation) * (_prstValue.getRealValue() + _prstModulation);
-        break;
-    default:
-        qDebug() << "ModulatedParameter: type" << _type << "is not a floating value";
-        return 0.0;
-    }
+    // Compute the value
+    computeValue();
 
-    // Limit the result
-    result = this->limit(result);
-
-    // Return it
-    return result;
+    // Return a possibly converted value
+    return Attribute(_type, false, _computedValue).getRealValue();
 }
 
-double ModulatedParameter::limit(double value)
+void ModulatedParameter::computeValue()
 {
-    double min = 0;
-    double max = 0;
+    if (_computed && _notRealTime)
+        return;
 
-    switch (_type)
-    {
-    case champ_reverbEffectsSend: case champ_chorusEffectsSend:
-        min = 0;
-        max = 100;
-        break;
-    case champ_pan:
-        min = -50;
-        max = 50;
-        break;
-    case champ_initialAttenuation: case champ_sustainModEnv: case champ_sustainVolEnv:
-        min = 0;
-        max = 144;
-        break;
-    case champ_initialFilterFc:
-        min = 18;
-        max = 19914;
-        break;
-    case champ_initialFilterQ:
-        min = 0;
-        max = 96;
-        break;
-    case champ_delayVolEnv: case champ_holdVolEnv: case champ_delayModEnv: case champ_holdModEnv:
-        min = 0.001;
-        max = 18;
-        break;
-    case champ_attackVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
-    case champ_attackModEnv: case champ_decayModEnv: case champ_releaseModEnv:
-        min = 0.001;
-        max = 101.6;
-        break;
-    case champ_delayModLFO: case champ_delayVibLFO:
-        min = 0.001;
-        max = 20;
-        break;
-    case champ_freqModLFO: case champ_freqVibLFO:
-        min = 0.001;
-        max = 100;
-        break;
-    case champ_modLfoToVolume:
-        min = -96;
-        max = 96;
-        break;
-    default:
-        qDebug() << "ModulatedParameter: type" << _type << "cannot be limited as a double";
-        return value;
-    }
+    // Add all values (before any conversion)
+    qint32 addition = static_cast<qint32>(_instModulation + _prstModulation) +
+            _instValue.getStoredValue().shValue +
+            _prstValue.getStoredValue().shValue;
 
-    if (value > max)
-        return max;
-    if (value < min)
-        return min;
-    return value;
+    // Limit the result
+    if (addition > 32767)
+        _computedValue.shValue = 32767;
+    else if (addition < -32768)
+        _computedValue.shValue = -32768;
+    else
+        _computedValue.shValue = static_cast<qint16>(addition);
+
+    if (_type != champ_fineTune) // This parameter can be out of its original range (pitch wheel)
+        _computedValue = Attribute::limit(_type, _computedValue, false);
+
+    _computed = true;
 }

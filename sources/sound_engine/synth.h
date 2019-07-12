@@ -54,7 +54,7 @@ public:
     void setEndLoop(quint32 endLoop, bool repercute);
     void setLoopEnabled(bool isEnabled);
     void setSinus(bool isOn, int rootKey);
-    void setPitchCorrection(int correction, bool repercute);
+    void setPitchCorrection(qint16 correction, bool repercute);
     void activateSmplEq(bool isActivated);
     void setSmplEqValues(QVector<int> values);
 
@@ -159,6 +159,8 @@ private:
 
     float * _fTmpSumRev1, * _fTmpSumRev2, * _dataWav;
     quint32 _bufferSize;
+
+    ConfManager * _configuration;
 };
 
 

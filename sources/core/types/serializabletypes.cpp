@@ -62,9 +62,9 @@ QDataStream & operator >> (QDataStream &in, SFModulator &mod)
 {
     quint8 b0, b1;
     in >> b0 >> b1;
-    mod.Type = (int) b1 >> 2;
-    mod.P = bool((b1 >> 1) & 1);
-    mod.D = bool(b1 & 1);
+    mod.Type = static_cast<ModType>(b1 >> 2);
+    mod.P = static_cast<ModPolarity>((b1 >> 1) & 1);
+    mod.D = static_cast<ModDirection>(b1 & 1);
     mod.CC = bool(b0 >> 7);
     mod.Index = quint16(b0 & 0x7F);
     return in;

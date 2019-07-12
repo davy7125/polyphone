@@ -46,12 +46,15 @@ public:
     double getRealValue();
 
 private:
+    void computeValue();
+
     AttributeType _type;
     Attribute _instValue, _prstValue;
     double _instModulation, _prstModulation;
 
-    // Limit some parameters
-    double limit(double value);
+    bool _notRealTime;
+    bool _computed;
+    AttributeValue _computedValue;
 };
 
 #endif // MODULATEDPARAMETER_H

@@ -207,7 +207,7 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes)
         ui->listWidget->setItemWidget(item, cell);
 
         // Selection
-        item->setSelected(attributes.contains((AttributeType)value.wValue));
+        item->setSelected(attributes.contains(static_cast<AttributeType>(value.wValue)));
 
         // Modulator count
         modCount++;
@@ -308,11 +308,7 @@ void ModulatorEditor::on_pushAdd_clicked()
     val.wValue = 1;
     sm->set(modId, champ_modAmount, val);
     sm->set(modId, champ_sfModTransOper, val);
-    val.sfModValue.CC = 0;
-    val.sfModValue.D = 0;
-    val.sfModValue.Index = 0;
-    val.sfModValue.P = 0;
-    val.sfModValue.Type = 0;
+    val.dwValue = 0;
     sm->set(modId, champ_sfModSrcOper, val);
     sm->set(modId, champ_sfModAmtSrcOper, val);
     val.wValue = champ_fineTune; // An "easy" default value
@@ -446,7 +442,7 @@ QList<ModulatorData> ModulatorEditor::getModList(EltID id)
             modTmp.amount = sm->get(id, champ_modAmount).shValue;
             modTmp.amtSrcOper = sm->get(id, champ_sfModAmtSrcOper).sfModValue;
             modTmp.transOper = sm->get(id, champ_sfModTransOper).sfTransValue;
-            modTmp.index = id.indexMod;
+            modTmp.index = static_cast<quint16>(id.indexMod);
             listRet << modTmp;
         }
     }
@@ -461,7 +457,7 @@ QList<ModulatorData> ModulatorEditor::getModList(EltID id)
             modTmp.amount = sm->get(id, champ_modAmount).shValue;
             modTmp.amtSrcOper = sm->get(id, champ_sfModAmtSrcOper).sfModValue;
             modTmp.transOper = sm->get(id, champ_sfModTransOper).sfTransValue;
-            modTmp.index = id.indexMod;
+            modTmp.index = static_cast<quint16>(id.indexMod);
             listRet << modTmp;
         }
     }
@@ -476,18 +472,18 @@ QList<ModulatorData> ModulatorEditor::getModList(EltID id)
     {
         ModulatorData mod = listRet.at(i);
 
-        if ((int)mod.destOper >= 32768)
+        if (mod.destOper >= 32768)
         {
             // Broken links are removed
             int link = mod.destOper - 32768;
             if (listIndex.contains(link))
-                mod.destOper = 32768 + listIndex.indexOf(link);
+                mod.destOper = static_cast<quint16>(32768 + listIndex.indexOf(link));
             else
                 mod.destOper = champ_fineTune;
         }
 
         // Indexes start at 0
-        mod.index = listIndex.indexOf(mod.index);
+        mod.index = static_cast<quint16>(listIndex.indexOf(mod.index));
 
         listRet[i] = mod;
     }
@@ -590,7 +586,7 @@ void ModulatorEditor::pasteMod(EltID id, QList<ModulatorData> modulators)
         ModulatorData mod = modulators.at(i);
         mod.index += offsetIndex;
         if (mod.destOper >= 32768)
-            mod.destOper = mod.destOper + offsetIndex;
+            mod.destOper = static_cast<quint16>(mod.destOper + offsetIndex);
         modulators[i] = mod;
     }
 

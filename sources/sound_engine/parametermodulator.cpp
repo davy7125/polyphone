@@ -69,8 +69,12 @@ void ParameterModulator::setOutput(ParameterModulator * modulator)
 
 void ParameterModulator::processInput()
 {
-    _input1 = getValue(_data.srcOper);
-    _input2 = getValue(_data.amtSrcOper);
+    if (_data.amount != 0)
+    {
+        _input1 = getValue(_data.srcOper);
+        _input2 = getValue(_data.amtSrcOper);
+    }
+
     _inputCount = 0;
     _computed = false;
 }
@@ -127,35 +131,31 @@ double ParameterModulator::getValue(SFModulator sfMod)
         // General controllers
         switch (sfMod.Index)
         {
-        case 0:
+        case GC_noController:
             // Will be "1"
             value = 127;
             break;
-        case 2:
-            // Current velocity
+        case GC_noteOnVelocity:
             value = _vel;
             break;
-        case 3:
-            // Current key
+        case GC_noteOnKeyNumber:
             value = _key;
             break;
-        case 10:
-            // Poly pressure (after touch by key)
+        case GC_polypressure:
+            // After touch by key
             value = ContextManager::midi()->getPolyPressure(_key);
             break;
-        case 13:
-            // Channel pressure (after touch for the whole keyboard)
+        case GC_channelPressure:
+            // After touch for the whole keyboard
             value = ContextManager::midi()->getMonoPressure();
             break;
-        case 14:
-            // Pitch wheel
+        case GC_pitchWheel:
             value = ContextManager::midi()->getBendValue();
             break;
-        case 16:
-            // Pitch wheel sensitivity
+        case GC_pitchWheelSensitivity:
             value = ContextManager::midi()->getBendSensitivityValue();
             break;
-        case 127: default:
+        case GC_link: default:
             // Link (the value will come later)
             return 0;
         }
@@ -167,7 +167,7 @@ double ParameterModulator::getValue(SFModulator sfMod)
 
     switch (sfMod.Type)
     {
-    case 0:
+    case typeLinear:
         // Linearly increasing from 0 to 1
         value /= 127.0;
 
@@ -180,7 +180,7 @@ double ParameterModulator::getValue(SFModulator sfMod)
             value = 2.0 * value - 1.0;
 
         break;
-    case 1:
+    case typeConcave:
         if (sfMod.D)
         {
             if (sfMod.P)
@@ -200,7 +200,7 @@ double ParameterModulator::getValue(SFModulator sfMod)
                 value = Utils::concave(value);
         }
         break;
-    case 2:
+    case typeConvex:
         if (sfMod.D)
         {
             if (sfMod.P)
@@ -220,7 +220,7 @@ double ParameterModulator::getValue(SFModulator sfMod)
                 value = Utils::convex(value);
         }
         break;
-    case 3:
+    case typeSwitch:
         // Switch
         value = (value >= 64 ? 1.0 : 0.0);
 

@@ -36,7 +36,7 @@ class ConfigSectionSound : public QWidget
     Q_OBJECT
 
 public:
-    explicit ConfigSectionSound(QWidget *parent = 0);
+    explicit ConfigSectionSound(QWidget *parent = nullptr);
     ~ConfigSectionSound();
     void initialize();
 

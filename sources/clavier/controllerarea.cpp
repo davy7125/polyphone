@@ -1,7 +1,6 @@
 #include "controllerarea.h"
 #include "ui_controllerarea.h"
 #include "contextmanager.h"
-#include <QDebug>
 
 ControllerArea::ControllerArea(QWidget *parent) :
     QWidget(parent),
@@ -37,7 +36,7 @@ ControllerArea::ControllerArea(QWidget *parent) :
     on_comboControl1_currentIndexChanged(-1);
     ui->comboControl1->blockSignals(false);
     ui->comboControl2->blockSignals(true);
-    ui->comboControl2->selectCC(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "controller_2", 2).toInt());
+    ui->comboControl2->selectCC(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "controller_2", 10).toInt());
     on_comboControl2_currentIndexChanged(-1);
     ui->comboControl2->blockSignals(false);
     ui->comboControl3->blockSignals(true);

@@ -127,9 +127,9 @@ void ModulatorComboCurve::valueSelected(int row, int column)
     val.sfModValue = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper).sfModValue;
     if (val.sfModValue.D != D || val.sfModValue.P != P || val.sfModValue.Type != type)
     {
-        val.sfModValue.D = D;
-        val.sfModValue.P = P;
-        val.sfModValue.Type = type;
+        val.sfModValue.D = static_cast<ModDirection>(D);
+        val.sfModValue.P = static_cast<ModPolarity>(P);
+        val.sfModValue.Type = static_cast<quint8>(type);
 
         sm->set(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper, val);
         sm->endEditing("modulatorEditor");

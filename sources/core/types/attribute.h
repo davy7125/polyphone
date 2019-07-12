@@ -169,11 +169,11 @@ typedef struct
     quint8 byHi;
 } RangesType;
 
-typedef union
+union AttributeValue
 {
     // Unsigned values
     quint8 bValue;
-    quint16 wValue;
+    quint16 wValue; // SFModulator data is also represented here
     quint32 dwValue;
 
     // Signed values
@@ -186,7 +186,9 @@ typedef union
     SfVersionTag sfVerValue;
     SFSampleLink sfLinkValue;
     SFTransform sfTransValue;
-} AttributeValue;
+
+    AttributeValue() { memset(this, 0, sizeof(AttributeValue)); }
+};
 
 class Attribute: QObject
 {

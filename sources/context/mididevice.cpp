@@ -98,9 +98,30 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
 {
     // Initialize MIDI values
     _bendSensitivityValue = _configuration->getValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", 2.0).toDouble();
-    _monoPressureValue = _configuration->getValue(ConfManager::SECTION_MIDI, "mono_pressure", 127).toInt();
+    _monoPressureValue = _configuration->getValue(ConfManager::SECTION_MIDI, "mono_pressure", 0).toInt();
     for (int i = 0; i < 128; i++)
-        _controllerValues[i] = _configuration->getValue(ConfManager::SECTION_MIDI, "CC_" + QString("%1").arg(i, 3, 10, QChar('0')), 64).toInt();
+    {
+        // Default value, depending on the CC number
+        int defaultValue = 64;
+        switch (i)
+        {
+        case 0: // Bank select
+        case 1: // Modulation wheel
+        case 2: // Breath controller
+        case 12: case 13: // Effect controllers
+        case 4: case 64: case 65: case 66: case 67: case 68: case 69: // Pedals
+        case 80: case 81: case 82: case 83: // On/Off switch
+        case 91: case 92: case 93: case 94: case 95: // Effect amount
+            defaultValue = 0;
+            break;
+        case 7: case 11: // Main volume, expression
+            defaultValue = 127;
+            break;
+        default:
+            break;
+        }
+        _controllerValues[i] = _configuration->getValue(ConfManager::SECTION_MIDI, "CC_" + QString("%1").arg(i, 3, 10, QChar('0')), defaultValue).toInt();
+    }
 
     // MIDI connection
     try
@@ -234,12 +255,6 @@ void MidiDevice::processControllerChanged(int numController, int value, bool syn
             while (_listKeysToRelease.size())
                 processKeyOff(_listKeysToRelease.takeFirst(), true);
         }
-    }
-    else if (numController == 7)
-    {
-        // General volume
-        double vol = 101.0 * value / 127. - 50.5;
-        _configuration->setValue(ConfManager::SECTION_SOUND_ENGINE, "gain", vol);
     }
     else if (numController == 101 || numController == 100 || numController == 6 || numController == 38)
     {

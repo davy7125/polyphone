@@ -36,9 +36,7 @@ EnveloppeVol::EnveloppeVol(quint32 sampleRate, bool isMod) :
 {
 }
 
-bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int note,
-                                  int velocity, VoiceParam * voiceParam,
-                                  double gain)
+bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int note, float gain, VoiceParam * voiceParam)
 {
     // Load parameters
     quint32 v_timeDelay;
@@ -48,8 +46,6 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
     float v_levelSustain;
     quint32 v_timeRelease;
     float v_noteToHold, v_noteToDecay;
-    float v_volume;
-    int v_fixedVelocity = voiceParam->getInteger(champ_velocity);
 
     if (_isMod)
     {
@@ -61,7 +57,6 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
         v_timeRelease = voiceParam->getDouble(champ_releaseModEnv) * _sampleRate;
         v_noteToHold = (float)voiceParam->getInteger(champ_keynumToModEnvHold) / 1200;
         v_noteToDecay = (float)voiceParam->getInteger(champ_keynumToModEnvDecay) / 1200;
-        v_volume = 0;
     }
     else
     {
@@ -73,7 +68,6 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
         v_timeRelease = voiceParam->getDouble(champ_releaseVolEnv) * _sampleRate;
         v_noteToHold = (float)voiceParam->getInteger(champ_keynumToVolEnvHold) / 1200;
         v_noteToDecay = (float)voiceParam->getInteger(champ_keynumToVolEnvDecay) / 1200;
-        v_volume = -voiceParam->getDouble(champ_initialAttenuation);
     }
 
     if (_fastRelease)
@@ -89,16 +83,11 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
     // Compute the sustain level
     float levelSustain = _isMod ?
                 (1.f - v_levelSustain / 100) : // percentage
-                static_cast<float>(qPow(10, -0.05 * v_levelSustain)); // decrease in dB
+                static_cast<float>(qPow(10, -0.05 * static_cast<double>(v_levelSustain))); // decrease in dB
 
     // Update hold / decay time and volume according to the key
     quint32 timeHold = static_cast<quint32>(v_timeHold * fastPow2(v_noteToHold * (60 - note)));
     quint32 timeDecay = static_cast<quint32>(v_timeDecay * fastPow2(v_noteToDecay * (60 - note)));
-    float volume = static_cast<float>(qPow(10, 0.02 * (static_cast<double>(v_volume) + gain))); // Should have been a multiplication by 0.1 but FluidSynth do this
-    if (v_fixedVelocity >= 0)
-        volume *= 0.000062 * (v_fixedVelocity * v_fixedVelocity);
-    else
-        volume *= 0.000062 * (velocity * velocity);
 
     // Avancement
     bool fin = false;
@@ -150,7 +139,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             {
                 for (quint32 i = 0; i < duree; i++)
                 {
-                    data[avancement + i] = volume * (valTmp + this->_precValue);
+                    data[avancement + i] = gain * (valTmp + this->_precValue);
                     valTmp += coef;
                 }
             }
@@ -158,7 +147,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             {
                 for (quint32 i = 0; i < duree; i++)
                 {
-                    data[avancement + i] = volume * (data[avancement + i] * (valTmp + this->_precValue));
+                    data[avancement + i] = gain * (data[avancement + i] * (valTmp + this->_precValue));
                     valTmp += coef;
                 }
             }
@@ -180,12 +169,12 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             if (_isMod)
             {
                 for (quint32 i = 0; i < duree; i++)
-                    data[avancement + i] = volume;
+                    data[avancement + i] = gain;
             }
             else
             {
                 for (quint32 i = 0; i < duree; i++)
-                    data[avancement + i] = volume * data[avancement + i];
+                    data[avancement + i] = gain * data[avancement + i];
             }
             break;
         case phase4decay:
@@ -208,7 +197,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                 val2 = (_precValue - levelSustain) * coef + levelSustain;
                 for (quint32 i = 0; i < duree; i++)
                 {
-                    data[avancement + i] = volume * val2;
+                    data[avancement + i] = gain * val2;
                     val2 = (val2 - levelSustain) * coef + levelSustain;
                 }
             }
@@ -219,7 +208,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                 val2 = (_precValue - levelSustain) * coef + levelSustain;
                 for (quint32 i = 0; i < duree; i++)
                 {
-                    data[avancement + i] = volume * (data[avancement + i] * val2);
+                    data[avancement + i] = gain * (data[avancement + i] * val2);
                     val2 = (val2 - levelSustain) * coef + levelSustain;
                 }
             }
@@ -231,12 +220,12 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             if (_isMod)
             {
                 for (quint32 i = 0; i < duree; i++)
-                    data[avancement + i] = volume * val2;
+                    data[avancement + i] = gain * val2;
             }
             else
             {
                 for (quint32 i = 0; i < duree; i++)
-                    data[avancement + i] = volume * (data[avancement + i] * val2);
+                    data[avancement + i] = gain * (data[avancement + i] * val2);
             }
             break;
         case phase6release:
@@ -259,7 +248,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                 val2 = _precValue + coef;
                 for (quint32 i = 0; i < duree; i++)
                 {
-                    data[avancement + i] = volume * val2;
+                    data[avancement + i] = gain * val2;
                     val2 += coef;
                     if (val2 < 0)
                         val2 = 0;
@@ -272,7 +261,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                 val2 = _precValue * coef;
                 for (quint32 i = 0; i < duree; i++)
                 {
-                    data[avancement + i] = volume * (data[avancement + i] * val2);
+                    data[avancement + i] = gain * (data[avancement + i] * val2);
                     val2 *= coef;
                 }
             }

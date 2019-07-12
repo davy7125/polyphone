@@ -43,7 +43,7 @@ public:
     static void releaseNote(int numNote);
     static void setGain(double gain);
     static void setChorus(int level, int depth, int frequency);
-    static void setPitchCorrection(int correction, bool repercute);
+    static void setPitchCorrection(qint16 correction, bool repercute);
     static void setStartLoop(quint32 startLoop, bool repercute);
     static void setEndLoop(quint32 endLoop, bool repercute);
     static void setLoopEnabled(bool isEnabled);
@@ -106,7 +106,7 @@ private:
     void releaseNoteInstance(int numNote);
     void setGainInstance(double gain);
     void setChorusInstance(int level, int depth, int frequency);
-    void setPitchCorrectionInstance(int correction, bool repercute);
+    void setPitchCorrectionInstance(qint16 correction, bool repercute);
     void setStartLoopInstance(quint32 startLoop, bool repercute);
     void setEndLoopInstance(quint32 endLoop, bool repercute);
     void setLoopEnabledInstance(bool isEnabled);

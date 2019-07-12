@@ -26,7 +26,8 @@
 #include "qmath.h"
 
 // Constructeur, destructeur
-Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int note, int velocity, VoiceParam * voiceParam) : QObject(nullptr),
+Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int initialKey,
+             VoiceParam * voiceParam) : QObject(nullptr),
     _modLFO(audioSmplRate),
     _vibLFO(audioSmplRate),
     _enveloppeVol(audioSmplRate, false),
@@ -35,9 +36,8 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int not
     _baData(baData),
     _smplRate(smplRate),
     _audioSmplRate(audioSmplRate),
-    _note(note),
-    _velocity(velocity),
     _gain(0),
+    _initialKey(initialKey),
     _voiceParam(voiceParam),
     _currentSmplPos(voiceParam->getPosition(champ_dwStart16)), // This value is read only once
     _time(0),
@@ -65,7 +65,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     _mutexParam.lock();
     _voiceParam->computeModulations();
     qint32 v_rootkey = _voiceParam->getInteger(champ_overridingRootKey);
-    qint32 v_fixedKey = _voiceParam->getInteger(champ_keynum);
+    qint32 playedNote = _voiceParam->getInteger(champ_keynum);
     qint32 v_scaleTune = _voiceParam->getInteger(champ_scaleTuning);
     qint32 v_fineTune = _voiceParam->getInteger(champ_fineTune);
     qint32 v_coarseTune = _voiceParam->getInteger(champ_coarseTune);
@@ -88,6 +88,8 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     qint32 v_loopMode = _voiceParam->getInteger(champ_sampleModes);
     double v_pan = _voiceParam->getDouble(champ_pan);
     double v_chorusEffect = _voiceParam->getDouble(champ_chorusEffectsSend);
+
+    double v_attenuation = _voiceParam->getDouble(champ_initialAttenuation);
 
     // Synchronization delay (stereo samples)
     int nbNullValues = qMin(len, _delayStart);
@@ -114,14 +116,13 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     double * modFreq = new double[len];
 
     /// ENVELOPPE DE MODULATION ///
-    _enveloppeMod.applyEnveloppe(dataMod, len, _release, _note, 127, _voiceParam, 0);
+    _enveloppeMod.applyEnveloppe(dataMod, len, _release, playedNote, 1.0f, _voiceParam);
 
     /// LFOs ///
-    _modLFO.getSinus(modLfo, len, v_modLfoFreq, v_modLfoDelay);
-    _vibLFO.getSinus(vibLfo, len, v_vibLfoFreq, v_vibLfoDelay);
+    _modLFO.getSinus(modLfo, len, static_cast<float>(v_modLfoFreq), v_modLfoDelay);
+    _vibLFO.getSinus(vibLfo, len, static_cast<float>(v_vibLfoFreq), v_vibLfoDelay);
 
     // Pitch modulation
-    int playedNote = (v_fixedKey > -1 ? v_fixedKey : (_note < 0 ? v_rootkey : _note));
     double deltaPitchFixed = -12. * qLn((double)_audioSmplRate / _smplRate) / 0.69314718056 +
             (playedNote - v_rootkey) * 0.01 * v_scaleTune + 0.01 * v_fineTune + v_coarseTune;
     for (quint32 i = 0; i < len; i++)
@@ -201,9 +202,10 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     delete [] modFreq;
 
     // Apply the volume envelop
-    bool bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release,
-                                              _note < 0 ? v_rootkey : _note, _velocity,
-                                              _voiceParam, _gain - gainLowPassFilter);
+    bool bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release, playedNote,
+                                              // Gain: should have been a multiplication by 0.1 but FluidSynth do this
+                                              static_cast<float>(qPow(10, 0.02 * (_gain - gainLowPassFilter - v_attenuation))),
+                                              _voiceParam);
 
     if ((bRet2 && v_loopMode != 3) || endSample)
     {

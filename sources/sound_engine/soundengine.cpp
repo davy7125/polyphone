@@ -215,17 +215,18 @@ void SoundEngine::setChorusInstance(int level, int depth, int frequency)
     _mutexVoices.unlock();
 }
 
-void SoundEngine::setPitchCorrection(int correction, bool repercute)
+void SoundEngine::setPitchCorrection(qint16 correction, bool repercute)
 {
     for (int i = 0; i < _listInstances.size(); i++)
         _listInstances.at(i)->setPitchCorrectionInstance(correction, repercute);
 }
 
-void SoundEngine::setPitchCorrectionInstance(int correction, bool repercute)
+void SoundEngine::setPitchCorrectionInstance(qint16 correction, bool repercute)
 {
     _mutexVoices.lock();
     for (int i = 0; i < _listVoices.size(); i++)
-        if (_listVoices.at(i)->getKey() == -1 || (_listVoices.at(i)->getKey() == -2 && repercute))
+        if (_listVoices.at(i)->getKey() == -1 ||
+                (_listVoices.at(i)->getKey() == -2 && repercute))
             _listVoices[i]->setFineTune(correction);
     _mutexVoices.unlock();
 }
@@ -240,7 +241,8 @@ void SoundEngine::setStartLoopInstance(quint32 startLoop, bool repercute)
 {
     _mutexVoices.lock();
     for (int i = 0; i < _listVoices.size(); i++)
-        if (_listVoices.at(i)->getKey() == -1 || (_listVoices.at(i)->getKey() == -2 && repercute))
+        if (_listVoices.at(i)->getKey() == -1 ||
+                (_listVoices.at(i)->getKey() == -2 && repercute))
             _listVoices[i]->setLoopStart(startLoop);
     _mutexVoices.unlock();
 }
@@ -255,7 +257,8 @@ void SoundEngine::setEndLoopInstance(quint32 endLoop, bool repercute)
 {
     _mutexVoices.lock();
     for (int i = 0; i < _listVoices.size(); i++)
-        if (_listVoices.at(i)->getKey() == -1 || (_listVoices.at(i)->getKey() == -2 && repercute))
+        if (_listVoices.at(i)->getKey() == -1 ||
+                (_listVoices.at(i)->getKey() == -2 && repercute))
             _listVoices[i]->setLoopEnd(endLoop);
     _mutexVoices.unlock();
 }
@@ -269,10 +272,10 @@ void SoundEngine::setLoopEnabled(bool isEnabled)
 
 void SoundEngine::setLoopEnabledInstance(bool isEnabled)
 {
-    // Mise à jour voix -1 et -2
+    // Update voices -1 and -2
     _mutexVoices.lock();
     for (int i = 0; i < _listVoices.size(); i++)
-        if (_listVoices.at(i)->getKey() == -1 || _listVoices.at(i)->getKey() == -2)
+        if (_listVoices.at(i)->getKey() < 0)
             _listVoices.at(i)->setLoopMode(isEnabled);
     _mutexVoices.unlock();
 }
@@ -286,7 +289,7 @@ void SoundEngine::setStereo(bool isStereo)
 
 void SoundEngine::setStereoInstance(bool isStereo)
 {
-    // Mise à jour voix -1 et -2
+    // Update voices -1 and -2
     _mutexVoices.lock();
     Voice * voice1 = nullptr;
     Voice * voice2 = nullptr;
@@ -340,7 +343,7 @@ void SoundEngine::setGainSample(int gain)
 
 void SoundEngine::setGainSampleInstance(int gain)
 {
-    // Modification du gain des samples, mise à jour voix -1 et -2
+    // Update voices -1 and -2
     _mutexVoices.lock();
     for (int i = 0; i < _listVoices.size(); i++)
     {

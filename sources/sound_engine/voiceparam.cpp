@@ -35,8 +35,19 @@ VoiceParam::VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int key
     // Prepare the parameters
     prepareParameters();
 
-    // Read sample properties
+    // Read sample properties and specify the default key / vel
     readSmpl(idSmpl);
+    AttributeValue value;
+    if (key < 0)
+        value.wValue = static_cast<quint16>(_parameters[champ_overridingRootKey]->getIntValue());
+    else
+        value.wValue = static_cast<quint16>(key);
+    _parameters[champ_keynum]->initValue(value, false);
+    if (vel < 0)
+        value.wValue = 127;
+    else
+        value.wValue = static_cast<quint16>(vel);
+    _parameters[champ_velocity]->initValue(value, false);
 
     // Possibly add the configuration of the instrument level
     if (idInstSmpl.typeElement != elementUnknown)
