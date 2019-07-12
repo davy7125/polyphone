@@ -101,7 +101,8 @@ void ToolLinkSample::process(SoundfontManager * sm, EltID id, AbstractToolParame
 void ToolLinkSample::scan(SoundfontManager * sm, int indexSf2)
 {
     // Browse all sample names and classify them
-    QList<int> allSamples = sm->getSiblings(EltID(elementSmpl, indexSf2));
+    EltID idSmpl(elementSmpl, indexSf2);
+    QList<int> allSamples = sm->getSiblings(idSmpl);
     foreach (int i, allSamples)
     {
         QString sampleName = sm->getQstr(EltID(elementSmpl, indexSf2, i), champ_name);

@@ -1,6 +1,7 @@
 polyphone (2.1) unstable; urgency=low
 
-  * (new) FLAC support
+  * (new) Modulator support in the sound engine
+  * (new) FLAC sample files can be imported
   * (new) "alt + left click" can cut samples in the graphics
   * (new) live preview of the equalizer at the sample level
   * (new) the virtual keyboard dialog can trigger various kinds of MIDI signals

@@ -22,16 +22,54 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "modulator.h"
+#ifndef PARAMETERMODULATOR_H
+#define PARAMETERMODULATOR_H
 
-Modulator::Modulator(int id) :
-    _id(id),
-    _hidden(false)
+#include "basetypes.h"
+class ModulatedParameter;
+
+class ParameterModulator
 {
+public:
+    // Initialize a modulator
+    ParameterModulator(ModulatorData &modData, bool isPrst, int key, int vel);
 
-}
+    // Try to merge an existing modulator with another one, return true if success
+    bool merge(ModulatorData &modData);
 
-void Modulator::setHidden(bool isHidden)
-{
-    _hidden = isHidden;
-}
+    // Get info about the modulator
+    quint16 getOuputType() { return _data.destOper; }
+    quint16 getIndex() { return _data.index; }
+
+    // Set the output
+    void setOutput(ModulatedParameter * parameter);
+    void setOutput(ParameterModulator * modulator);
+
+    // Compute the input based on midi values
+    void processInput();
+
+    // Process the output and return true or return false if the input is not computed yet
+    bool processOutput();
+
+private:
+    // Input coming from another modulator
+    void setInput(double value);
+
+    // Add 1 to the number of input to wait before computing the result
+    void waitForAnInput() { _inputNumber++; }
+
+    // Get a current input value
+    double getValue(SFModulator sfMod);
+
+    ModulatorData _data;
+
+    int _inputNumber, _inputCount;
+    bool _computed;
+    double _input1, _input2;
+    ModulatedParameter * _outputParameter;
+    ParameterModulator * _outputModulator;
+    bool _isPrst;
+    int _key, _vel;
+};
+
+#endif // PARAMETERMODULATOR_H

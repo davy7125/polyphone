@@ -271,7 +271,6 @@ SOURCES	+= main.cpp \
     core/actionmanager.cpp \
     core/model/soundfont.cpp \
     core/model/division.cpp \
-    core/model/modulator.cpp \
     core/model/smpl.cpp \
     core/model/instprst.cpp \
     core/model/soundfonts.cpp \
@@ -444,7 +443,9 @@ SOURCES	+= main.cpp \
     lib/iir/Cascade.cpp \
     lib/iir/PoleFilter.cpp \
     lib/iir/State.cpp \
-    editor/widgets/spinboxcents.cpp
+    editor/widgets/spinboxcents.cpp \
+    sound_engine/parametermodulator.cpp \
+    sound_engine/modulatorgroup.cpp
 
 HEADERS  += \
     core/sample/infosound.h \
@@ -745,7 +746,10 @@ HEADERS  += \
     lib/iir/PoleFilter.h \
     lib/iir/State.h \
     lib/iir/Types.h \
-    editor/widgets/spinboxcents.h
+    editor/widgets/spinboxcents.h \
+    sound_engine/parametermodulator.h \
+    sound_engine/modulatorgroup.h \
+    core/types/modulatordata.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

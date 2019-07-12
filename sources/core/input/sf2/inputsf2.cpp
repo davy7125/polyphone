@@ -266,7 +266,7 @@ void InputSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pd
                 Sf2PdtaPart_mod mod = pdtaPart._imods[k];
                 value.sfModValue = mod._sfModSrcOper;
                 _sm->set(id2, champ_sfModSrcOper, value);
-                value.sfGenValue = (AttributeType)mod._sfModDestOper.value;
+                value.wValue = mod._sfModDestOper.value;
                 _sm->set(id2, champ_sfModDestOper, value);
                 value.shValue = mod._modAmount.value;
                 _sm->set(id2, champ_modAmount, value);
@@ -370,7 +370,7 @@ void InputSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pd
                 Sf2PdtaPart_mod mod = pdtaPart._pmods[k];
                 value.sfModValue = mod._sfModSrcOper;
                 _sm->set(id2, champ_sfModSrcOper, value);
-                value.sfGenValue = (AttributeType)mod._sfModDestOper.value;
+                value.wValue = mod._sfModDestOper.value;
                 _sm->set(id2, champ_sfModDestOper, value);
                 value.shValue = mod._modAmount.value;
                 _sm->set(id2, champ_modAmount, value);

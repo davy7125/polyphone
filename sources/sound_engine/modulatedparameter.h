@@ -36,6 +36,11 @@ public:
     // Set the values from the instrument or preset level
     void initValue(AttributeValue value, bool isPrst);
 
+    // Clear or add modulations
+    void clearModulations();
+    void addInstModulation(double value);
+    void addPrstModulation(double value);
+
     // Get the resulting value as an integer or a double (a conversion might occur)
     qint32 getIntValue();
     double getRealValue();
@@ -43,6 +48,7 @@ public:
 private:
     AttributeType _type;
     Attribute _instValue, _prstValue;
+    double _instModulation, _prstModulation;
 
     // Limit some parameters
     double limit(double value);

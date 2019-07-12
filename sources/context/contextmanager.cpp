@@ -119,6 +119,12 @@ ContextManager::ContextManager() :
 
 ContextManager::~ContextManager()
 {
-
+    // Delete everything in the reverse order
+    delete _midi;
+    delete _audio;
+    delete _translation;
+    delete _keyName;
+    delete _recentFile;
+    delete _theme;
     delete _configuration;
 }

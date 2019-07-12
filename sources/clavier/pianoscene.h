@@ -1,7 +1,7 @@
 /*
     MIDI Virtual Piano Keyboard
     Copyright (C) 2008-2014, Pedro Lopez-Cabanillas <plcl@users.sf.net>
-                  2014,      Davy Triponney         <davy.triponney@gmail.com>
+                  2014-2019, Davy Triponney         <davy.triponney@gmail.com>
                   2014,      Andrea Celani          <acelani74@gmail.com>
 
     This program is free software; you can redistribute it and/or modify

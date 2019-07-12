@@ -112,7 +112,7 @@ void DialogKeyboard::onMouseHover(int key, int vel)
     {
         if (key >= 0 && key <= 127 && vel > 0)
         {
-            ui->labelKey->setText(ContextManager::keyName()->getKeyName(key));
+            ui->labelKey->setText(ContextManager::keyName()->getKeyName(static_cast<unsigned int>(key)));
             ui->labelVel->setText(QString::number(vel));
         }
         else
@@ -198,7 +198,7 @@ void DialogKeyboard::displayKeyInfo()
     else
     {
         // Display the last key in the list
-        ui->labelKey->setText(ContextManager::keyName()->getKeyName(_triggeredKeys.last().first));
+        ui->labelKey->setText(ContextManager::keyName()->getKeyName(static_cast<unsigned int>(_triggeredKeys.last().first)));
         ui->labelVel->setText(QString::number(_triggeredKeys.last().second.first));
         if (_triggeredKeys.last().second.second >= 0)
             ui->labelAftertouch->setText(QString::number(_triggeredKeys.last().second.second));

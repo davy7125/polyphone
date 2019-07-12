@@ -46,6 +46,11 @@ public:
     static QString rsaEncrypt(QString input);
     static QString rsaDecrypt(QString input);
 
+    /// Conversion functions
+    static void prepareConversionTables(); // Call it once before concave(..) or convex(..)
+    static double concave(double value);
+    static double convex(double value);
+
 private:
     static int getNumberPart(const QString &str, int &length);
     static int compareKey(SoundfontManager *sm, EltID idDiv1, EltID idDiv2);
@@ -54,6 +59,9 @@ private:
 
     static QString s_diacriticLetters;
     static QStringList s_noDiacriticLetters;
+
+    static double s_concaveTable[128];
+    static double s_convexTable[128];
 };
 
 #endif // UTILS_H

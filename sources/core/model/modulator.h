@@ -30,17 +30,15 @@
 class Modulator
 {
 public:
-    Modulator(int id);
+    Modulator(int id) :
+        _id(id),
+        _hidden(false)
+    {}
 
-    void setHidden(bool isHidden);
+    void setHidden(bool isHidden) { _hidden = isHidden; }
     bool isHidden() { return _hidden; }
 
-    SFModulator _sfModSrcOper;
-    AttributeType _sfModDestOper;
-    short _modAmount;
-    SFModulator _sfModAmtSrcOper;
-    SFTransform _sfModTransOper;
-    int _index; // Global index of the modulator that may be referenced by others
+    ModulatorData _data;
     int _id;
 
 private:

@@ -256,7 +256,7 @@ void Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSm
     EltID idSmpl(elementSmpl, idSf2, idElt, 0, 0);
 
     // Prepare the parameters for the voice
-    VoiceParam * voiceParam = new VoiceParam(idPrstInst, idInstSmpl, idSmpl);
+    VoiceParam * voiceParam = new VoiceParam(idPrstInst, idInstSmpl, idSmpl, key, velocity);
 
     if (key < 0) // Smpl area
         voiceParam->prepareForSmpl(key, _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue);

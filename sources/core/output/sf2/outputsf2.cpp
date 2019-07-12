@@ -36,7 +36,8 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
     Q_UNUSED(options)
 
     // Check that we don't save over another soundfont already open
-    foreach (int i, sm->getSiblings(EltID(elementSf2)))
+    EltID idSf2(elementSf2);
+    foreach (int i, sm->getSiblings(idSf2))
     {
         if (i != sf2Index && QString::compare(sm->getQstr(EltID(elementSf2, i), champ_filenameInitial), fileName, Qt::CaseSensitive) == 0)
         {

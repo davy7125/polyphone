@@ -62,7 +62,8 @@ Voice::~Voice()
 void Voice::generateData(float *dataL, float *dataR, quint32 len)
 {
     // Get voice current parameters
-    _voiceParam->updateParameters();
+    _mutexParam.lock();
+    _voiceParam->computeModulations();
     qint32 v_rootkey = _voiceParam->getInteger(champ_overridingRootKey);
     qint32 v_fixedKey = _voiceParam->getInteger(champ_keynum);
     qint32 v_scaleTune = _voiceParam->getInteger(champ_scaleTuning);
@@ -101,8 +102,6 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         return;
     dataL = &dataL[nbNullValues];
     dataR = &dataR[nbNullValues];
-
-    _mutexParam.lock();
 
     bool endSample = false;
     double gainLowPassFilter = 0;
@@ -295,7 +294,7 @@ void Voice::release(bool quick)
     _mutexParam.lock();
     if (quick)
     {
-        // Arrêt par classe exclusive, arrêt rapide
+        // Stopped by an exclusive class => quick release
         _enveloppeVol.quickRelease();
     }
     _release = true;

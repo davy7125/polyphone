@@ -32,6 +32,8 @@
 
 QString Utils::s_diacriticLetters;
 QStringList Utils::s_noDiacriticLetters;
+double Utils::s_concaveTable[128];
+double Utils::s_convexTable[128];
 
 int Utils::naturalOrder(QString str1, QString str2)
 {
@@ -235,7 +237,6 @@ int Utils::sortDivisions(EltID id1, EltID id2, int sortType)
     return result;
 }
 
-
 int Utils::compareKey(SoundfontManager * sm, EltID idDiv1, EltID idDiv2)
 {
     int lKey1 = sm->get(idDiv1, champ_keyRange).rValue.byLo;
@@ -263,4 +264,40 @@ int Utils::compareName(SoundfontManager *sm, EltID idDiv1, EltID idDiv2)
     if (name1 != name2)
         return naturalOrder(name1, name2);
     return 0;
+}
+
+void Utils::prepareConversionTables()
+{
+    // Limits of the tables
+    s_concaveTable[0] = 0.0;
+    s_concaveTable[127] = 1.0;
+    s_convexTable[0] = 0;
+    s_convexTable[127] = 1.0;
+
+    // Compute values of the tables
+    double x;
+    for (int i = 1; i < 127; i++)
+    {
+        x = -20.0 / 96.0 * log((i * i) / (127.0 * 127.0)) / log(10.0);
+        s_convexTable[i] = 1.0 - x;
+        s_concaveTable[127 - i] = x;
+    }
+}
+
+double Utils::concave(double val)
+{
+  if (val < 0)
+    return 0;
+  if (val > 127)
+    return 1;
+  return s_concaveTable[static_cast<int>(val)];
+}
+
+double Utils::convex(double val)
+{
+  if (val < 0)
+    return 0;
+  if (val > 127)
+    return 1;
+  return s_convexTable[static_cast<int>(val)];
 }

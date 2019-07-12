@@ -71,7 +71,7 @@ void EditKey::focusOutEvent(QFocusEvent * event)
 {
     Q_UNUSED(event)
     if (!this->text().contains("...") && this->text() != "")
-        ContextManager::configuration()->setValue(ConfManager::SECTION_MAP,
+        ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD,
                                                   "key_" + QString::number(_octave) + "_" + QString::number(_key),
                                                   this->text());
     updateText();
@@ -98,7 +98,7 @@ void EditKey::processKeyEvent(QKeyEvent * event)
             if (keyNum == Qt::Key_Delete)
             {
                 // Reset the key
-                ContextManager::configuration()->setValue(ConfManager::SECTION_MAP,
+                ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD,
                                                           "key_" + QString::number(_octave) + "_" + QString::number(_key),
                                                           "");
                 this->setText("");

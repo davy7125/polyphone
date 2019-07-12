@@ -42,7 +42,6 @@ public:
         SECTION_COLORS,
         SECTION_EXPORT,
         SECTION_KEYBOARD,
-        SECTION_MAP,
         SECTION_MIDI,
         SECTION_RECENT_FILES,
         SECTION_SOUND_ENGINE,

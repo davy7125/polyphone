@@ -93,12 +93,16 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
     _controllerArea(nullptr),
     _configuration(configuration),
     _synth(synth),
-    _bendValue(-1),
-    _bendSensitivityValue(-1.0),
-    _monoPressureValue(-1),
+    _bendValue(64),
     _isSustainOn(false)
 {
-    // Connexion midi
+    // Initialize MIDI values
+    _bendSensitivityValue = _configuration->getValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", 2.0).toDouble();
+    _monoPressureValue = _configuration->getValue(ConfManager::SECTION_MIDI, "mono_pressure", 127).toInt();
+    for (int i = 0; i < 128; i++)
+        _controllerValues[i] = _configuration->getValue(ConfManager::SECTION_MIDI, "CC_" + QString("%1").arg(i, 3, 10, QChar('0')), 64).toInt();
+
+    // MIDI connection
     try
     {
 #if defined(__LINUX_ALSASEQ__)
@@ -127,6 +131,12 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
 
 MidiDevice::~MidiDevice()
 {
+    // Store MIDI values
+    _configuration->setValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", _bendSensitivityValue);
+    _configuration->setValue(ConfManager::SECTION_MIDI, "mono_pressure", _monoPressureValue);
+    for (int i = 0; i < 128; i++)
+        _configuration->setValue(ConfManager::SECTION_MIDI, "CC_" + QString("%1").arg(i, 3, 10, QChar('0')), _controllerValues[i]);
+
     delete _midiin;
 }
 
@@ -146,11 +156,11 @@ void MidiDevice::openMidiPort(int index)
     if (_midiin)
     {
         _midiin->closePort();
-        if (index < (signed)_midiin->getPortCount() && index != -1)
+        if (index < static_cast<int>(_midiin->getPortCount()) && index != -1)
         {
             try
             {
-                _midiin->openPort(index);
+                _midiin->openPort(static_cast<unsigned int>(index));
             }
             catch (std::exception &error)
             {
@@ -228,7 +238,7 @@ void MidiDevice::processControllerChanged(int numController, int value, bool syn
     else if (numController == 7)
     {
         // General volume
-        double vol = (double)value / 127. * 101. - 50.5;
+        double vol = 101.0 * value / 127. - 50.5;
         _configuration->setValue(ConfManager::SECTION_SOUND_ENGINE, "gain", vol);
     }
     else if (numController == 101 || numController == 100 || numController == 6 || numController == 38)
@@ -258,6 +268,12 @@ void MidiDevice::processControllerChanged(int numController, int value, bool syn
 
 void MidiDevice::processKeyOn(int key, int vel, bool syncKeyboard)
 {
+    // Possibly initialize the poly pressure value
+    _mutexValues.lock();
+    if (!_polyPressureValues.contains(key) || _polyPressureValues[key] == -1)
+        _polyPressureValues[key] = vel;
+    _mutexValues.unlock();
+
     // Display the note on the keyboard
     if (_keyboard && syncKeyboard)
         _keyboard->inputNoteOn(key, vel);
@@ -298,6 +314,11 @@ void MidiDevice::processKeyOff(int key, bool syncKeyboard)
 void MidiDevice::processPolyPressureChanged(int key, int pressure, bool syncKeyboard)
 {
     Q_UNUSED(syncKeyboard) // No synchronization with the keyboard
+
+    _mutexValues.lock();
+    _polyPressureValues[key] = pressure;
+    _mutexValues.unlock();
+
     emit(polyPressureChanged(key, pressure));
 }
 
@@ -338,6 +359,7 @@ void MidiDevice::setKeyboard(PianoKeybdCustom * keyboard)
 {
     connect(keyboard, SIGNAL(noteOn(int,int)), this, SLOT(processKeyOn(int,int)));
     connect(keyboard, SIGNAL(noteOff(int)), this, SLOT(processKeyOff(int)));
+    connect(keyboard, SIGNAL(polyPressureChanged(int,int)), this, SLOT(processPolyPressureChanged(int, int)));
     _keyboard = keyboard;
 }
 
@@ -391,6 +413,14 @@ int MidiDevice::getMonoPressure()
 {
     _mutexValues.lock();
     int result = _monoPressureValue;
+    _mutexValues.unlock();
+    return result;
+}
+
+int MidiDevice::getPolyPressure(int key)
+{
+    _mutexValues.lock();
+    int result = _polyPressureValues.contains(key) ? _polyPressureValues[key] : -1;
     _mutexValues.unlock();
     return result;
 }

@@ -132,7 +132,7 @@ void ModulatorComboDest::loadValue()
     if (genValTmp.wValue >= 32768) // Link to another modulator?
         this->selectIndex(_listIndex.indexOf(genValTmp.wValue - 32768));
     else
-        this->selectAttribute(genValTmp.sfGenValue);
+        this->selectAttribute(static_cast<AttributeType>(genValTmp.wValue));
 
     this->blockSignals(false);
 }
@@ -194,9 +194,9 @@ void ModulatorComboDest::onCurrentIndexChanged(int index)
     }
 
     // Compare with the old value
-    AttributeValue val;
+
     SoundfontManager * sm = SoundfontManager::getInstance();
-    val.sfGenValue = sm->get(_id, champ_sfModDestOper).sfGenValue;
+    AttributeValue val = sm->get(_id, champ_sfModDestOper);
     if (val.wValue != index)
     {
         // If this is a link, change the source 1 of the targeted modulator to "link"
@@ -211,7 +211,7 @@ void ModulatorComboDest::onCurrentIndexChanged(int index)
             sm->set(otherModId, champ_sfModSrcOper, val2);
         }
 
-        val.sfGenValue = (AttributeType)index;
+        val.wValue = index;
         sm->set(_id, champ_sfModDestOper, val);
         sm->endEditing("modulatorEditor");
     }

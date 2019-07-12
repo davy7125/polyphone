@@ -23,26 +23,30 @@ ControllerArea::ControllerArea(QWidget *parent) :
     ui->push4->setIcon(_ledOff);
 
     // Initialization of the sensitivity slider
-    updateBendSensitivity(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", 2.0).toDouble());
+    updateBendSensitivity(ContextManager::midi()->getBendSensitivityValue());
 
     // Initialization of the pressure slider
-    updateMonoPressure(ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "aftertouch", 127).toInt());
+    updateMonoPressure(ContextManager::midi()->getMonoPressure());
 
     // Initialization of the wheel
-    updateBend(64);
+    updateBend(64); // Always in the middle
 
     // Initialization of the controllers
     ui->comboControl1->blockSignals(true);
     ui->comboControl1->selectCC(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "controller_1", 1).toInt());
+    on_comboControl1_currentIndexChanged(-1);
     ui->comboControl1->blockSignals(false);
     ui->comboControl2->blockSignals(true);
     ui->comboControl2->selectCC(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "controller_2", 2).toInt());
+    on_comboControl2_currentIndexChanged(-1);
     ui->comboControl2->blockSignals(false);
     ui->comboControl3->blockSignals(true);
     ui->comboControl3->selectCC(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "controller_3", 11).toInt());
+    on_comboControl3_currentIndexChanged(-1);
     ui->comboControl3->blockSignals(false);
     ui->comboControl4->blockSignals(true);
     ui->comboControl4->selectCC(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "controller_4", 64).toInt());
+    on_comboControl4_currentIndexChanged(-1);
     ui->comboControl4->blockSignals(false);
 }
 

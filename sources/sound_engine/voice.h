@@ -48,7 +48,7 @@ public:
     bool isRunning() { return _isRunning; }
     void runVoice(quint32 delay) { _isRunning = true; _delayStart = delay; }
 
-    // Accès aux propriétés de voiceParam
+    // Access to voiceParam properties
     double getPan();
     int getExclusiveClass();
     int getPresetNumber();
@@ -100,7 +100,7 @@ private:
     bool takeData(qint32 *data, quint32 nbRead);
     void biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, double &b2, double freq, double Q);
 
-    // protection des paramètres
+    // Protect parameters
     QMutex _mutexParam;
 };
 

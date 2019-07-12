@@ -44,7 +44,7 @@ ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
     // Populate the table with all keys and all octaves
     for (int j = 0; j < ui->tableKeyboardMap->columnCount(); j++)
         for (int i = 0; i < ui->tableKeyboardMap->rowCount(); i++)
-            ui->tableKeyboardMap->setCellWidget(i, j, new EditKey(i, (ConfManager::Key)j));
+            ui->tableKeyboardMap->setCellWidget(i, j, new EditKey(i, static_cast<ConfManager::Key>(j)));
 }
 
 ConfigSectionKeyboard::~ConfigSectionKeyboard()
@@ -55,34 +55,35 @@ ConfigSectionKeyboard::~ConfigSectionKeyboard()
 void ConfigSectionKeyboard::initialize()
 {
     // Name of the keys in the table
-    for (int i = 0; i <= 12; i++)
+    for (quint32 i = 0; i <= 12; i++)
     {
-        ui->tableKeyboardMap->horizontalHeaderItem(i)->setText(ContextManager::keyName()->getKeyName(i, true, false, false, true));
+        ui->tableKeyboardMap->horizontalHeaderItem(static_cast<int>(i))->setText(
+                    ContextManager::keyName()->getKeyName(i, true, false, false, true));
     }
 
     // Populate the table
     for (int j = 0; j < ui->tableKeyboardMap->columnCount(); j++)
         for (int i = 0; i < ui->tableKeyboardMap->rowCount(); i++)
-            ((EditKey*)ui->tableKeyboardMap->cellWidget(i, j))->updateText();
+            (dynamic_cast<EditKey*>(ui->tableKeyboardMap->cellWidget(i, j)))->updateText();
 
     // Octave configuration
     initializeFirstC();
 
     // Default velocity
     ui->spinDefaultVelocity->blockSignals(true);
-    ui->spinDefaultVelocity->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "velocity", 127).toInt());
+    ui->spinDefaultVelocity->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "velocity", 127).toInt());
     ui->spinDefaultVelocity->blockSignals(false);
 
     // Default polyphonic aftertouch
     ui->spinBoxDefaultAfterTouch->blockSignals(true);
-    ui->spinBoxDefaultAfterTouch->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "aftertouch", 127).toInt());
+    ui->spinBoxDefaultAfterTouch->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "aftertouch", 127).toInt());
     ui->spinBoxDefaultAfterTouch->blockSignals(false);
 }
 
 void ConfigSectionKeyboard::initializeFirstC()
 {
     ui->comboFirstC->blockSignals(true);
-    int octaveMapping = ContextManager::configuration()->getValue(ConfManager::SECTION_MAP, "octave_offset", 3).toInt();
+    int octaveMapping = ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "octave_offset", 3).toInt();
     if (octaveMapping >= ui->comboFirstC->count())
         octaveMapping = 3;
     else if (octaveMapping < 0)
@@ -95,20 +96,20 @@ void ConfigSectionKeyboard::renameComboFirstC()
 {
     int nbElement = ui->comboFirstC->count();
     for (int i = 0; i < nbElement; i++)
-        ui->comboFirstC->setItemText(i, ContextManager::keyName()->getKeyName(12 * i));
+        ui->comboFirstC->setItemText(i, ContextManager::keyName()->getKeyName(static_cast<unsigned int>(12 * i)));
 }
 
 void ConfigSectionKeyboard::on_comboFirstC_currentIndexChanged(int index)
 {
-    ContextManager::configuration()->setValue(ConfManager::SECTION_MAP, "octave_offset", index);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "octave_offset", index);
 }
 
 void ConfigSectionKeyboard::on_spinDefaultVelocity_editingFinished()
 {
-    ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "velocity", ui->spinDefaultVelocity->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_MIDI, "velocity", ui->spinDefaultVelocity->value());
 }
 
 void ConfigSectionKeyboard::on_spinBoxDefaultAfterTouch_editingFinished()
 {
-    ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "aftertouch", ui->spinBoxDefaultAfterTouch->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_MIDI, "aftertouch", ui->spinBoxDefaultAfterTouch->value());
 }

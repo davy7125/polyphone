@@ -58,13 +58,15 @@ void ToolRemoveMods::process(SoundfontManager * sm, EltID id, AbstractToolParame
 
     switch (_deletionType)
     {
-    case DeletionGlobal:
+    case DeletionGlobal: {
         id.typeElement = elementInst;
-        foreach (int i, sm->getSiblings(EltID(elementInst, id.indexSf2)))
+        EltID idInst(elementInst, id.indexSf2);
+        foreach (int i, sm->getSiblings(idInst))
             clearModInst(sm, EltID(elementInst, id.indexSf2, i));
-        foreach (int i, sm->getSiblings(EltID(elementPrst, id.indexSf2)))
+        EltID idPrst(elementPrst, id.indexSf2);
+        foreach (int i, sm->getSiblings(idPrst))
             clearModPrst(sm, EltID(elementPrst, id.indexSf2, i));
-        break;
+    } break;
     case DeletionForInstrument:
         id.typeElement = elementInst;
         clearModInst(sm, id);
@@ -82,7 +84,8 @@ void ToolRemoveMods::clearModInst(SoundfontManager *sm, EltID idInst)
     clearMod(sm, EltID(elementInstMod, idInst.indexSf2, idInst.indexElt));
 
     // Mods in each division linked to an element
-    foreach (int i, sm->getSiblings(EltID(elementInstSmpl, idInst.indexSf2, idInst.indexElt)))
+    EltID idInstSmpl(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
+    foreach (int i, sm->getSiblings(idInstSmpl))
         clearMod(sm, EltID(elementInstSmplMod, idInst.indexSf2, idInst.indexElt, i));
 }
 
@@ -92,7 +95,8 @@ void ToolRemoveMods::clearModPrst(SoundfontManager *sm, EltID idPrst)
     clearMod(sm, EltID(elementPrstMod, idPrst.indexSf2, idPrst.indexElt));
 
     // Mods in each division linked to an element
-    foreach (int i, sm->getSiblings(EltID(elementPrstInst, idPrst.indexSf2, idPrst.indexElt)))
+    EltID idPrstInst(elementPrstInst, idPrst.indexSf2, idPrst.indexElt);
+    foreach (int i, sm->getSiblings(idPrstInst))
         clearMod(sm, EltID(elementPrstInstMod, idPrst.indexSf2, idPrst.indexElt, i));
 }
 

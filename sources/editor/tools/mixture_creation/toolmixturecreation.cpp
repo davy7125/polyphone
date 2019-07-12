@@ -46,7 +46,7 @@ bool ToolMixtureCreation::isCompatible(IdList ids)
 
 void ToolMixtureCreation::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters)
 {
-    ToolMixtureCreation_parameters * params = (ToolMixtureCreation_parameters *)parameters;
+    ToolMixtureCreation_parameters * params = dynamic_cast<ToolMixtureCreation_parameters *>(parameters);
     _sampleKey.clear();
     _canceled = false;
     _warning = "";
@@ -54,7 +54,8 @@ void ToolMixtureCreation::runInternal(SoundfontManager * sm, QWidget * parent, I
     // Current instrument
     EltID idInst = ids.getSelectedIds(elementInst)[0];
     idInst.typeElement = elementInst;
-    if (sm->getSiblings(EltID(elementInstSmpl, idInst.indexSf2, idInst.indexElt)).empty())
+    EltID idInstSmpl(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
+    if (sm->getSiblings(idInstSmpl).empty())
     {
         _warning = trUtf8("The instrument contains no samples.");
         finished(true);
@@ -105,7 +106,7 @@ void ToolMixtureCreation::runInternal(SoundfontManager * sm, QWidget * parent, I
     }
 
     // Create and open a progress dialog
-    if (_waitingDialog != NULL)
+    if (_waitingDialog != nullptr)
         delete _waitingDialog;
     _waitingDialog = new WaitingToolDialog(this->getLabel(), _steps, parent);
     _waitingDialog->show();

@@ -29,10 +29,55 @@
 ConfManager::ConfManager(): QObject(),
     _settings(this)
 {
-    // Possibly reset the configuration if the previous version was < 2.0
-    QString version = this->getValue(SECTION_NONE, "last_version_installed", "0.0").toString();
-    if (version.split(".").count() == 2 && version.toDouble() < 2.0)
+    // Get the previous version installed
+    QStringList version = this->getValue(SECTION_NONE, "last_version_installed", "0.0").toString().split(".");
+    int v_major = 0;
+    int v_minor = 0;
+    int v_fix = 0;
+    if (version.count() == 2)
+    {
+        v_major = version[0].toInt();
+        v_minor = version[1].toInt();
+    }
+    else if (version.count() == 3)
+    {
+        v_major = version[0].toInt();
+        v_minor = version[1].toInt();
+        v_fix = version[2].toInt();
+    }
+
+    // Possibly changes in the configurations
+    if (v_major < 2)
+    {
+        // Clear everything if the previous version was < 2.0
         this->clear();
+    }
+    else if (v_major == 2 && v_minor == 0)
+    {
+        // One key moved from "keyboard" to "midi"
+        _settings.setValue("midi/velocity", _settings.value("keyboard/velocity"));
+        _settings.remove("keyboard/velocity");
+
+        // 1 key moved from the general section to "display"
+        _settings.setValue("display/name_middle_c", _settings.value("name_middle_c"));
+        _settings.remove("name_middle_c");
+
+        // Everything from "map" is now in "keyboard"
+        _settings.beginGroup("map");
+        QStringList keys = _settings.allKeys();
+        _settings.endGroup();
+        foreach (QString key, keys)
+            _settings.setValue("keyboard/" + key, _settings.value("map/" + key));
+        _settings.remove("map");
+
+        // "affichage" renamed in "display"
+        _settings.beginGroup("affichage");
+        keys = _settings.allKeys();
+        _settings.endGroup();
+        foreach (QString key, keys)
+            _settings.setValue("display/" + key, _settings.value("affichage/" + key));
+        _settings.remove("affichage");
+    }
 }
 
 QVariant ConfManager::getValue(Section section, QString key, QVariant defaultValue) const
@@ -59,7 +104,7 @@ void ConfManager::setValue(Section section, QString key, QVariant value)
         emit(soundEngineConfigurationChanged()); // First prepare the sound engine (the buffer can be adjusted)
         emit(audioServerConfigurationChanged()); // Then update the audio server configuration
         break;
-    case Section::SECTION_MAP:
+    case Section::SECTION_KEYBOARD:
         emit(keyMapChanged());
         if (key == "octave_offset")
             emit(keyboardOctaveChanged());
@@ -67,9 +112,7 @@ void ConfManager::setValue(Section section, QString key, QVariant value)
     case Section::SECTION_DISPLAY:
         if (key == "division_sort")
             emit(divisionSortChanged());
-        break;
-    case Section::SECTION_NONE:
-        if (key == "name_middle_c")
+        else if (key == "name_middle_c")
             emit(interfaceChanged());
         break;
     default:
@@ -90,13 +133,12 @@ QString ConfManager::getFullKey(Section section, QString key) const
     switch (section)
     {
     case SECTION_NONE:         firstPart = "";            break;
-    case SECTION_DISPLAY:      firstPart = "affichage";   break;
+    case SECTION_DISPLAY:      firstPart = "display";     break;
     case SECTION_AUDIO:        firstPart = "audio";       break;
     case SECTION_BULK_RENAME:  firstPart = "bulk_rename"; break;
     case SECTION_COLORS:       firstPart = "colors";      break;
     case SECTION_EXPORT:       firstPart = "export";      break;
     case SECTION_KEYBOARD:     firstPart = "keyboard";    break;
-    case SECTION_MAP:          firstPart = "map";         break;
     case SECTION_MIDI:         firstPart = "midi";        break;
     case SECTION_RECENT_FILES: firstPart = "recent_file"; break;
     case SECTION_SOUND_ENGINE: firstPart = "synth";       break;
@@ -213,7 +255,7 @@ QString ConfManager::getMapping(int numOctave, Key key)
     }
 
     // The default value is possibly overriden
-    QString override = this->getValue(SECTION_MAP, "key_" + QString::number(numOctave) + "_" + QString::number((int)key), txt).toString();
+    QString override = this->getValue(SECTION_KEYBOARD, "key_" + QString::number(numOctave) + "_" + QString::number((int)key), txt).toString();
     return (override != "") ? override : txt;
 }
 

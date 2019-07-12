@@ -22,54 +22,32 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef VOICEPARAM_H
-#define VOICEPARAM_H
+#ifndef MODULATORGROUP_H
+#define MODULATORGROUP_H
 
 #include "basetypes.h"
-#include "modulatorgroup.h"
-class SoundfontManager;
 class ModulatedParameter;
+class ParameterModulator;
 
-// Class gathering all parameters useful to create a sound
-// Parameters can evolve in real-time depending on the modulators
-class VoiceParam
+class ModulatorGroup
 {
 public:
-    // Initialize a set of parameters (idPrstInst and idInstSmpl can be unknown)
-    VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int key, int vel);
+    ModulatorGroup(QMap<AttributeType, ModulatedParameter *> * parameters, bool isPrst, int key, int vel);
+    ~ModulatorGroup();
 
-    // Sample reading
-    void prepareForSmpl(int key, SFSampleLink link);
-    void setPan(double val);
-    void setLoopMode(quint16 val);
-    void setLoopStart(quint32 val);
-    void setLoopEnd(quint32 val);
-    void setFineTune(qint16 val);
+    // Load modulators from the instrument or preset level
+    void loadModulators(QList<ModulatorData> &modulators);
 
-    // Destructor
-    ~VoiceParam();
-
-    // Update parameters before reading them (modulators)
-    void computeModulations();
-
-    // Get a param
-    double getDouble(AttributeType type);
-    qint32 getInteger(AttributeType type);
-    quint32 getPosition(AttributeType type);
+    // Compute the modulations and apply them on the parameters
+    void process();
 
 private:
-    SoundfontManager * _sm;
+    void loadDefaultModulators();
 
-    // All parameters
-    QMap<AttributeType, ModulatedParameter *> _parameters;
-    ModulatorGroup _modulatorGroupInst, _modulatorGroupPrst;
-    qint32 _sampleLength, _sampleLoopStart, _sampleLoopEnd, _sampleFineTune;
-    qint32 _wPresetNumber;
-
-    // Initialization of the parameters
-    void prepareParameters();
-    void readSmpl(EltID idSmpl);
-    void readDivision(EltID idDivision);
+    QMap<AttributeType, ModulatedParameter *> * _parameters;
+    bool _isPrst;
+    int _key, _vel;
+    QList<ParameterModulator *> _modulators;
 };
 
-#endif // VOICEPARAM_H
+#endif // MODULATORGROUP_H

@@ -1117,7 +1117,7 @@ void PageTable::displayModInTable()
                 foreach (int j, modCount)
                 {
                     id.indexMod = j;
-                    AttributeType champ = _sf2->get(id, champ_sfModDestOper).sfGenValue;
+                    AttributeType champ = static_cast<AttributeType>(_sf2->get(id, champ_sfModDestOper).wValue);
                     if (champ == champ_startAddrsCoarseOffset)
                         champ = champ_startAddrsOffset;
                     else if (champ == champ_endAddrsCoarseOffset)

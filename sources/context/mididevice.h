@@ -63,6 +63,7 @@ public:
     int getBendValue();
     double getBendSensitivityValue();
     int getMonoPressure();
+    int getPolyPressure(int key);
 
 public slots:
     void processKeyOn(int key, int vel, bool syncKeyboard = false);
@@ -98,6 +99,7 @@ private:
     int _bendValue;
     double _bendSensitivityValue;
     int _monoPressureValue;
+    QMap<int, int> _polyPressureValues;
 
     // Sustain pedal
     QList<int> _listKeysToRelease;

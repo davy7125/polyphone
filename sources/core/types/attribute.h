@@ -25,7 +25,7 @@
 #ifndef ATTRIBUTE_H
 #define ATTRIBUTE_H
 
-#include <QtCore>
+#include "modulatordata.h"
 
 typedef enum
 {
@@ -157,27 +157,11 @@ typedef enum
     RomLinkedSample = 0x8008
 } SFSampleLink;
 
-typedef enum
-{
-    linear = 0,
-    absolute_value = 2
-} SFTransform;
-
 typedef struct
 {
     quint16 wMajor;
     quint16 wMinor;
 } SfVersionTag;
-
-typedef struct
-{
-    quint16
-        Type  : 6, // 6 bits for the type
-        P     : 1, // Polarity
-        D     : 1, // Direction
-        CC    : 1,
-        Index : 7;
-} SFModulator;
 
 typedef struct
 {
@@ -201,7 +185,6 @@ typedef union
     SFModulator sfModValue;
     SfVersionTag sfVerValue;
     SFSampleLink sfLinkValue;
-    AttributeType sfGenValue;
     SFTransform sfTransValue;
 } AttributeValue;
 

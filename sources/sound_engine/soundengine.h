@@ -54,10 +54,10 @@ signals:
     void readFinished();
 
 protected:
-    // Thread du buffer circulaire
+    // Executed by the circular buffer thread
     void generateData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, quint32 len)
     {
-        // Initialisation des données
+        // Initialize data
         for (quint32 i = 0; i < len; i++)
             dataL[i] = dataR[i] = dataRevL[i] = dataRevR[i] = 0;
 
@@ -83,7 +83,7 @@ protected:
                     dataRevR[j] += coef1 * _dataTmpR[j];
                 }
 
-                // Voix terminée ?
+                // Voice ended?
                 if (_listVoices.at(i)->isFinished())
                 {
                     if (_listVoices.at(i)->getKey() == -1)

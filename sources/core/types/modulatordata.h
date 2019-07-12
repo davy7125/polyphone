@@ -22,54 +22,44 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef VOICEPARAM_H
-#define VOICEPARAM_H
+#ifndef MODULATORDATA_H
+#define MODULATORDATA_H
 
-#include "basetypes.h"
-#include "modulatorgroup.h"
-class SoundfontManager;
-class ModulatedParameter;
+#include <QtCore>
 
-// Class gathering all parameters useful to create a sound
-// Parameters can evolve in real-time depending on the modulators
-class VoiceParam
+typedef enum
 {
-public:
-    // Initialize a set of parameters (idPrstInst and idInstSmpl can be unknown)
-    VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int key, int vel);
+    linear = 0,
+    absolute_value = 2
+} SFTransform;
 
-    // Sample reading
-    void prepareForSmpl(int key, SFSampleLink link);
-    void setPan(double val);
-    void setLoopMode(quint16 val);
-    void setLoopStart(quint32 val);
-    void setLoopEnd(quint32 val);
-    void setFineTune(qint16 val);
+typedef struct
+{
+    quint16
+        Type  : 6, // 6 bits for the type
+        P     : 1, // Polarity
+        D     : 1, // Direction
+        CC    : 1,
+        Index : 7;
+} SFModulator;
 
-    // Destructor
-    ~VoiceParam();
+static bool operator==(const SFModulator& a1, const SFModulator& a2)
+{
+    return a1.Type == a2.Type &&
+            a1.P == a2.P &&
+            a1.D == a2.D &&
+            a1.CC == a2.CC &&
+            a1.Index == a2.Index;
+}
 
-    // Update parameters before reading them (modulators)
-    void computeModulations();
+typedef struct
+{
+    SFModulator srcOper;
+    quint16 destOper; // One of the AttributeType if < 32768, otherwise the index of another modulator
+    SFModulator amtSrcOper;
+    SFTransform transOper;
+    qint16 amount;
+    quint16 index; // Global index of the modulator that may be referenced by others
+} ModulatorData;
 
-    // Get a param
-    double getDouble(AttributeType type);
-    qint32 getInteger(AttributeType type);
-    quint32 getPosition(AttributeType type);
-
-private:
-    SoundfontManager * _sm;
-
-    // All parameters
-    QMap<AttributeType, ModulatedParameter *> _parameters;
-    ModulatorGroup _modulatorGroupInst, _modulatorGroupPrst;
-    qint32 _sampleLength, _sampleLoopStart, _sampleLoopEnd, _sampleFineTune;
-    qint32 _wPresetNumber;
-
-    // Initialization of the parameters
-    void prepareParameters();
-    void readSmpl(EltID idSmpl);
-    void readDivision(EltID idDivision);
-};
-
-#endif // VOICEPARAM_H
+#endif // MODULATORDATA_H

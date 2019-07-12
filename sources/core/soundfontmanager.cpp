@@ -230,7 +230,7 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
     case elementPrst:{
         // Analyse d'un preset
         InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_wPreset: case champ_wBank:
             value.wValue = tmp->getExtraField(champ);
@@ -282,17 +282,17 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
         switch (champ)
         {
         case champ_sfModSrcOper:
-            value.sfModValue = tmp->_sfModSrcOper; break;
+            value.sfModValue = tmp->_data.srcOper; break;
         case champ_sfModDestOper:
-            value.sfGenValue = tmp->_sfModDestOper; break;
+            value.wValue = tmp->_data.destOper; break;
         case champ_modAmount:
-            value.shValue = tmp->_modAmount; break;
+            value.shValue = tmp->_data.amount; break;
         case champ_sfModAmtSrcOper:
-            value.sfModValue = tmp->_sfModAmtSrcOper; break;
+            value.sfModValue = tmp->_data.amtSrcOper; break;
         case champ_sfModTransOper:
-            value.sfTransValue = tmp->_sfModTransOper; break;
+            value.sfTransValue = tmp->_data.transOper; break;
         case champ_indexMod:
-            value.wValue = tmp->_index; break;
+            value.wValue = tmp->_data.index; break;
         default:
             break;
         }
@@ -467,26 +467,12 @@ QByteArray SoundfontManager::getData(EltID id, AttributeType champ)
     return baRet;
 }
 
-QList<int> SoundfontManager::getSiblings(EltID id)
+QList<int> SoundfontManager::getSiblings(EltID &id)
 {
     QMutexLocker locker(&_mutex);
-    switch (id.typeElement)
-    {
-    case elementSf2:
-        id.indexSf2 = -1;
-    case elementSmpl: case elementInst: case elementPrst:
-        id.indexElt = -1;
-    case elementInstSmpl: case elementPrstInst:
-    case elementInstMod: case elementPrstMod: case elementInstGen: case elementPrstGen:
-        id.indexElt2 = -1;
-    case elementInstSmplMod: case elementPrstInstMod: case elementInstSmplGen: case elementPrstInstGen:
-        id.indexMod = -1;
-    default:
-        break;
-    }
 
     QList<int> result;
-    if (!this->isValid(id, true))
+    if (!this->isValid(id, true, true))
         return result;
 
     switch (id.typeElement)
@@ -753,7 +739,6 @@ bool SoundfontManager::isEdited(int indexSf2)
             !this->getQstr(EltID(elementSf2, indexSf2), champ_filenameInitial).toLower().endsWith(".sf2");
 }
 
-// Récupération liste de champs et valeurs de bags
 void SoundfontManager::getAllAttributes(EltID id, QList<AttributeType> &listeChamps, QList<AttributeValue> &listeValeurs)
 {
     QMutexLocker locker(&_mutex);
@@ -776,43 +761,66 @@ void SoundfontManager::getAllAttributes(EltID id, QList<AttributeType> &listeCha
         division = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
         break;
     default:
-        break;
+        return;
     }
 
     listeChamps = division->getGens().keys();
     listeValeurs = division->getGens().values();
 }
 
+void SoundfontManager::getAllModulators(EltID id, QList<ModulatorData> &modulators)
+{
+    QMutexLocker locker(&_mutex);
+    if (!this->isValid(id))
+        return;
+
+    Division * division = nullptr;
+    switch (id.typeElement)
+    {
+    case elementInst:
+        division = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision();
+        break;
+    case elementInstSmpl:
+        division = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2);
+        break;
+    case elementPrst:
+        division = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision();
+        break;
+    case elementPrstInst:
+        division = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
+        break;
+    default:
+        return;
+    }
+
+    // Fill the lists with the modulators that are not hidden
+    QVector<Modulator *> mods = division->getMods().values();
+    foreach (Modulator * mod, mods)
+        if (!mod->isHidden())
+            modulators << mod->_data;
+}
+
 // Add a child to ID
 int SoundfontManager::add(EltID id)
 {
     QMutexLocker locker(&_mutex);
-    if (id.typeElement == elementSf2)
-        id.indexSf2 = -1;
-    else if (id.typeElement == elementSmpl || id.typeElement == elementInst || id.typeElement == elementPrst)
-        id.indexElt = -1;
-    else if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
-        id.indexElt2 = -1;
-    else id.indexMod = -1;
-    if (!this->isValid(id))
+    if (!this->isValid(id, false, true))
         return -1;
 
     int i = -1;
 
-    switch ((int)id.typeElement)
+    switch (id.typeElement)
     {
-    case elementSf2:
+    case elementSf2: {
         // Create a new SF2
         i = id.indexSf2 = _soundfonts->addSoundfont();
 
         // Initialisation bps
-    {
         AttributeValue valTmp;
         valTmp.wValue = 16;
         this->set(id, champ_wBpsInit, valTmp);
         this->set(id, champ_wBpsSave, valTmp);
-    }
-        break;
+    } break;
     case elementSmpl:
         // Create a new sample
         i = id.indexElt = _soundfonts->getSoundfont(id.indexSf2)->addSample();
@@ -836,7 +844,7 @@ int SoundfontManager::add(EltID id)
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // Add a new mod
         Division *bag = nullptr;
-        switch ((int)id.typeElement)
+        switch (id.typeElement)
         {
         case elementInstMod:
             // For an instrument
@@ -853,6 +861,9 @@ int SoundfontManager::add(EltID id)
         case elementPrstInstMod:
             // For an instrument linked to a preset
             bag = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
+            break;
+        default:
+            break;
         }
         i = id.indexMod = bag->addMod();
 
@@ -861,6 +872,8 @@ int SoundfontManager::add(EltID id)
         val.wValue = id.indexMod;
         this->set(id, champ_indexMod, val);
     }break;
+    default:
+        break;
     }
 
     // Create and store an action
@@ -1090,7 +1103,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
         // If the destination of a modulator is the modulator to delete, remove the link
         foreach (Modulator * mod, bag->getMods().values())
         {
-            if ((int)mod->_sfModDestOper - 32768 == id.indexMod)
+            if (mod->_data.destOper - 32768 == id.indexMod)
             {
                 EltID id2 = id;
                 id2.indexMod = mod->_id;
@@ -1178,7 +1191,7 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
     case elementSf2:{
         // Modification d'un SF2
         Soundfont *tmp = _soundfonts->getSoundfont(id.indexSf2);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_IFIL:
             oldValue.sfVerValue = tmp->_IFIL;
@@ -1192,12 +1205,14 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
         case champ_wBpsSave:
             oldValue.wValue = tmp->_wBpsSave;
             tmp->_wBpsSave = value.wValue; break;
+        default:
+            break;
         }
     }break;
     case elementSmpl:{
         // Modification d'un sample
         Smpl *tmp = _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_dwStart16:
             oldValue.dwValue = tmp->_sound.getUInt32(champ_dwStart16);
@@ -1238,6 +1253,8 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
         case champ_wChannels:
             oldValue.wValue = tmp->_sound.getUInt32(champ_wChannels);
             tmp->_sound.set(champ_wChannels, value); break;
+        default:
+            break;
         }
     }break;
     case elementInst:{
@@ -1302,7 +1319,7 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // Modification d'un mod d'un instrument
         Modulator *tmp = nullptr;
-        switch ((int)id.typeElement)
+        switch (id.typeElement)
         {
         case elementInstMod:
             tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->getMod(id.indexMod); break;
@@ -1312,28 +1329,30 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
             tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2)->getMod(id.indexMod); break;
         case elementPrstInstMod:
             tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->getMod(id.indexMod); break;
+        default:
+            break;
         }
 
         switch (champ)
         {
         case champ_sfModSrcOper:
-            oldValue.sfModValue = tmp->_sfModSrcOper;
-            tmp->_sfModSrcOper = value.sfModValue; break;
+            oldValue.sfModValue = tmp->_data.srcOper;
+            tmp->_data.srcOper = value.sfModValue; break;
         case champ_sfModDestOper:
-            oldValue.sfGenValue = tmp->_sfModDestOper;
-            tmp->_sfModDestOper = value.sfGenValue; break;
+            oldValue.wValue = tmp->_data.destOper;
+            tmp->_data.destOper = value.wValue; break;
         case champ_modAmount:
-            oldValue.shValue = tmp->_modAmount;
-            tmp->_modAmount = value.shValue; break;
+            oldValue.shValue = tmp->_data.amount;
+            tmp->_data.amount = value.shValue; break;
         case champ_sfModAmtSrcOper:
-            oldValue.sfModValue = tmp->_sfModAmtSrcOper;
-            tmp->_sfModAmtSrcOper = value.sfModValue; break;
+            oldValue.sfModValue = tmp->_data.amtSrcOper;
+            tmp->_data.amtSrcOper = value.sfModValue; break;
         case champ_sfModTransOper:
-            oldValue.sfTransValue = tmp->_sfModTransOper;
-            tmp->_sfModTransOper = value.sfTransValue; break;
+            oldValue.sfTransValue = tmp->_data.transOper;
+            tmp->_data.transOper = value.sfTransValue; break;
         case champ_indexMod:
-            oldValue.wValue = tmp->_index;
-            tmp->_index = value.wValue; break;
+            oldValue.wValue = tmp->_data.index;
+            tmp->_data.index = value.wValue; break;
         default:
             break;
         }
@@ -1369,12 +1388,12 @@ int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
     QString qOldStr = "";
 
     // Type of element to edit
-    switch ((int)id.typeElement)
+    switch (id.typeElement)
     {
     case elementSf2:{
         // Editing of a sf2
         Soundfont *tmp = _soundfonts->getSoundfont(id.indexSf2);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_name:
             qOldStr = tmp->_INAM;
@@ -1412,13 +1431,15 @@ int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
         case champ_filenameForData:
             qOldStr = tmp->_fileNameForData;
             tmp->_fileNameForData = qStr; break;
+        default:
+            break;
         }
     }break;
     case elementSmpl:{
         // Editing of a sample
         qStr = qStr.trimmed();
         Smpl *tmp = _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_name:
             qOldStr = tmp->getName();
@@ -1429,13 +1450,15 @@ int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
             qOldStr = tmp->_sound.getFileName();
             tmp->_sound.setFileName(qStr);
             break;
+        default:
+            break;
         }
     }break;
     case elementInst:{
         qStr = qStr.trimmed();
         // Modification d'un instrument
         InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_name:
             // Modification du nom d'un instrument
@@ -1443,13 +1466,15 @@ int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
             qStr = qStr.left(20);
             tmp->setName(qStr);
             break;
+        default:
+            break;
         }
     }break;
     case elementPrst:{
         qStr = qStr.trimmed();
         // Modification d'un preset
         InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_name:
             // Modification du nom d'un preset
@@ -1457,8 +1482,12 @@ int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
             qStr = qStr.left(20);
             tmp->setName(qStr);
             break;
+        default:
+            break;
         }
     }break;
+    default:
+        break;
     }
 
     // Create and store the action
@@ -1647,7 +1676,7 @@ int SoundfontManager::display(EltID id)
         return 1;
 
     // Type d'élément à afficher (suite à une suppression non définitive)
-    switch ((int)id.typeElement)
+    switch (id.typeElement)
     {
     case elementSf2: break;
     case elementSmpl:{
@@ -1695,175 +1724,107 @@ int SoundfontManager::display(EltID id)
         Modulator *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->getMod(id.indexMod);
         tmp->setHidden(false);
     }break;
+    default:
+        break;
     }
     return 0;
 }
 
-bool SoundfontManager::isValid(EltID id, bool acceptHidden)
+bool SoundfontManager::isValid(EltID &id, bool acceptHidden, bool justCheckParentLevel)
 {
     QMutexLocker locker(&_mutex);
-    Soundfont *sf2Tmp;
     if (id.typeElement < elementSf2 || id.typeElement > elementPrstInstGen)
         return false;
 
-    if (id.indexSf2 < 0)
-        return (id.typeElement == elementSf2 || id.typeElement == elementRootSmpl ||
-                id.typeElement == elementRootInst || id.typeElement == elementRootPrst);
-
-    // Check indexSf2
-    if (_soundfonts->getSoundfont(id.indexSf2) == nullptr)
+    // First level: sf2, rootSmpl, rootInst, rootPrst
+    if (id.typeElement == elementSf2 || id.typeElement == elementRootSmpl ||
+            id.typeElement == elementRootInst || id.typeElement == elementRootPrst)
+    {
+        if (id.indexSf2 < 0 || justCheckParentLevel)
+            return true;
+    }
+    Soundfont *sf2Tmp = _soundfonts->getSoundfont(id.indexSf2);
+    if (sf2Tmp == nullptr)
         return false;
-    sf2Tmp = _soundfonts->getSoundfont(id.indexSf2);
+    if (id.typeElement == elementSf2 || id.typeElement == elementRootSmpl ||
+            id.typeElement == elementRootInst || id.typeElement == elementRootPrst)
+        return true;
 
-    if (id.indexElt < 0 && id.typeElement != elementSf2 && id.typeElement != elementRootInst &&
-            id.typeElement != elementRootSmpl && id.typeElement != elementRootPrst)
-        return (id.typeElement == elementSmpl || id.typeElement == elementInst || id.typeElement == elementPrst);
+    // Second level: smpl, inst, prst
+    if (id.typeElement == elementSmpl || id.typeElement == elementInst || id.typeElement == elementPrst)
+    {
+        if (id.indexElt < 0 || justCheckParentLevel)
+            return true;
+    }
 
+    // Sample?
     if (id.typeElement == elementSmpl)
     {
-        // Check indexElt
-        if (sf2Tmp->getSample(id.indexElt) == nullptr)
-            return false;
-
-        if (sf2Tmp->getSample(id.indexElt)->isHidden() && !acceptHidden)
-            return false;
+        Smpl * smpl = sf2Tmp->getSample(id.indexElt);
+        return smpl != nullptr && (!smpl->isHidden() || acceptHidden);
     }
-    else if (id.typeElement == elementInst || id.typeElement == elementInstSmpl ||
-             id.typeElement == elementInstMod || id.typeElement == elementInstSmplMod ||
-             id.typeElement == elementInstGen || id.typeElement == elementInstSmplGen)
+
+    // Instrument or preset?
+    InstPrst * instPrst = nullptr;
+    if (id.typeElement == elementInst || id.typeElement == elementInstSmpl ||
+            id.typeElement == elementInstMod || id.typeElement == elementInstSmplMod ||
+            id.typeElement == elementInstGen || id.typeElement == elementInstSmplGen)
+        instPrst = sf2Tmp->getInstrument(id.indexElt);
+    else
+        instPrst = sf2Tmp->getPreset(id.indexElt);
+    if (instPrst == nullptr || (instPrst->isHidden() && !acceptHidden))
+        return false;
+    if (id.typeElement == elementInst || id.typeElement == elementPrst)
+        return true;
+
+    // Higher levels: in the global division or in local division
+    if (id.typeElement == elementInstSmpl || id.typeElement == elementInstSmplMod || id.typeElement == elementInstSmplGen ||
+            id.typeElement == elementPrstInst || id.typeElement == elementPrstInstMod || id.typeElement == elementPrstInstGen)
     {
-        // Check indexElt
-        if (sf2Tmp->getInstrument(id.indexElt) == nullptr)
-            return false;
-
-        InstPrst *inst = sf2Tmp->getInstrument(id.indexElt);
-        if (inst->isHidden() && !acceptHidden)
-            return false;
-
-        if (id.typeElement == elementInstSmpl || id.typeElement == elementInstSmplMod || id.typeElement == elementInstSmplGen)
+        if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
         {
-            if (id.indexElt2 < 0 && id.typeElement != elementInstSmplMod && id.typeElement != elementInstSmplGen)
-                return (id.typeElement == elementInstSmpl);
-
-            // Vérification qu'indexElt2 est correct
-            if (inst->getDivision(id.indexElt2) == nullptr)
-                return false;
-            Division * bag = inst->getDivision(id.indexElt2);
-
-            if (bag->isHidden() && !acceptHidden)
-                return false;
-
-            if (id.typeElement == elementInstSmplMod || id.typeElement == elementInstSmplGen)
-            {
-                if (id.indexMod < 0)
-                    return true;
-
-                // Check indexMod
-                if (id.typeElement == elementInstSmplMod)
-                {
-                    if (bag->getMod(id.indexMod) == nullptr)
-                        return false;
-
-                    if (bag->getMod(id.indexMod)->isHidden() && !acceptHidden)
-                        return false;
-                }
-                else
-                {
-                    if (id.indexMod >= bag->getGens().count())
-                        return false;
-                }
-            }
-        }
-        else if (id.typeElement == elementInstMod || id.typeElement == elementInstGen)
-        {
-            if (id.indexMod < 0)
+            if (id.indexElt2 < 0 || justCheckParentLevel)
                 return true;
-
-            // Check indexMod
-            if (id.typeElement == elementInstMod)
-            {
-                if (inst->getGlobalDivision()->getMod(id.indexMod) == nullptr)
-                    return false;
-
-                if (inst->getGlobalDivision()->getMod(id.indexMod)->isHidden() && !acceptHidden)
-                    return false;
-            }
-            else
-            {
-                if (id.indexMod >= inst->getGlobalDivision()->getGens().count())
-                    return false;
-            }
         }
+        Division * div = instPrst->getDivision(id.indexElt2);
+        if (div == nullptr || (div->isHidden() && !acceptHidden))
+            return false;
+        if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
+            return true;
+
+        // Last level: mod or gen
+        if (id.indexMod < 0 || justCheckParentLevel)
+            return true;
+
+        // Check mods?
+        if (id.typeElement == elementInstSmplMod || id.typeElement == elementPrstInstMod)
+        {
+            Modulator * mod = div->getMod(id.indexMod);
+            return mod != nullptr && (!mod->isHidden() || acceptHidden);
+        }
+
+        // Gens: based on the count only
+        return id.indexMod < div->getGens().count();
     }
-    else if (id.typeElement == elementPrst || id.typeElement == elementPrstInst ||
-             id.typeElement == elementPrstMod || id.typeElement == elementPrstInstMod ||
-             id.typeElement == elementPrstGen || id.typeElement == elementPrstInstGen)
+    else if (id.typeElement == elementInstMod || id.typeElement == elementInstGen ||
+             id.typeElement == elementPrstMod || id.typeElement == elementPrstGen)
     {
-        // Check indexElt
-        if (sf2Tmp->getPreset(id.indexElt) == nullptr)
-            return false;
+        if (id.indexMod < 0 || justCheckParentLevel)
+            return true;
 
-        InstPrst *prst = sf2Tmp->getPreset(id.indexElt);
-        if (prst->isHidden() && !acceptHidden)
-            return false;
-
-        if (id.typeElement == elementPrstInst || id.typeElement == elementPrstInstMod || id.typeElement == elementPrstInstGen)
+        // Check mods?
+        if (id.typeElement == elementInstMod || id.typeElement == elementPrstMod)
         {
-            if (id.indexElt2 < 0 && id.typeElement != elementPrstInstMod && id.typeElement != elementPrstInstGen)
-                return (id.typeElement == elementPrstInst);
-
-            // Vérification qu'indexElt2 est correct
-            if (prst->getDivision(id.indexElt2) == nullptr)
-                return false;
-            Division * bag = prst->getDivision(id.indexElt2);
-
-            if (bag->isHidden() && !acceptHidden)
-                return false;
-
-            if (id.typeElement == elementPrstInstMod || id.typeElement == elementPrstInstGen)
-            {
-                if (id.indexMod < 0)
-                    return true;
-
-                // Check indexMod
-                if (id.typeElement == elementPrstInstMod)
-                {
-                    if (bag->getMod(id.indexMod) == nullptr)
-                        return false;
-
-                    if (bag->getMod(id.indexMod)->isHidden() && !acceptHidden)
-                        return false;
-                }
-                else
-                {
-                    if (id.indexMod >= bag->getGens().count())
-                        return false;
-                }
-            }
+            Modulator * mod = instPrst->getGlobalDivision()->getMod(id.indexMod);
+            return mod != nullptr && (!mod->isHidden() || acceptHidden);
         }
-        else if (id.typeElement == elementPrstMod || id.typeElement == elementPrstGen)
-        {
-            if (id.indexMod < 0)
-                return true;
 
-            // Check indexMod
-            if (id.typeElement == elementPrstMod)
-            {
-                if (prst->getGlobalDivision()->getMod(id.indexMod) == nullptr)
-                    return false;
-
-                if (prst->getGlobalDivision()->getMod(id.indexMod)->isHidden() && !acceptHidden)
-                    return false;
-            }
-            else
-            {
-                if (id.indexMod >= prst->getGlobalDivision()->getGens().count())
-                    return false;
-            }
-        }
+        // Gens: based on the count only
+        return id.indexMod < instPrst->getGlobalDivision()->getGens().count();
     }
 
-    return true;
+    // Not possible to be here
+    return false;
 }
 
 void SoundfontManager::firstAvailablePresetBank(EltID id, int &nBank, int &nPreset)

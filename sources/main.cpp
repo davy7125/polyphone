@@ -34,6 +34,7 @@
 #include "abstractoutput.h"
 #include "options.h"
 #include "contextmanager.h"
+#include "utils.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #include <QDesktopWidget>
@@ -180,6 +181,9 @@ int displayHelp(Options &options)
 
 int main(int argc, char *argv[])
 {
+    // Prior to everything
+    Utils::prepareConversionTables();
+
 #ifdef Q_OS_MAC
     MacApplication a(argc, argv);
 #else

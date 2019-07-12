@@ -61,7 +61,7 @@ public:
     void simplify(EltID id, AttributeType champ);
 
     // Nombre de freres de id (id compris)
-    QList<int> getSiblings(EltID id);
+    QList<int> getSiblings(EltID &id);
 
     // Gestionnaire d'actions
     void endEditing(QString editingSource);
@@ -76,11 +76,12 @@ public:
     void markAsSaved(int indexSf2);
     bool isEdited(int indexSf2);
 
-    // Récupération d'une liste de champs et de valeurs contenues dans les bags de l'élément id
+    // Get all attributes or modulators related to inst, instsmpl, prst, prstinst
     void getAllAttributes(EltID id, QList<AttributeType> &listeChamps, QList<AttributeValue> &listeValeurs);
+    void getAllModulators(EltID id, QList<ModulatorData> &modulators);
 
     // Détermination de la validité d'un ID (en acceptant ou non les ID masqués, par défaut non)
-    bool isValid(EltID id, bool acceptHidden = false);
+    bool isValid(EltID &id, bool acceptHidden = false, bool justCheckParentLevel = false);
 
     // Availability of banks / presets
     void firstAvailablePresetBank(EltID id, int &nBank, int &nPreset);

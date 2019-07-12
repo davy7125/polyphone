@@ -1,7 +1,7 @@
 /*
     MIDI Virtual Piano Keyboard
     Copyright (C) 2008-2014, Pedro Lopez-Cabanillas <plcl@users.sf.net>
-                  2014,      Davy Triponney         <davy.triponney@gmail.com>
+                  2014-2019, Davy Triponney         <davy.triponney@gmail.com>
                   2014,      Andrea Celani          <acelani74@gmail.com>
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -405,7 +405,7 @@ void PianoScene::keyPressEvent(QKeyEvent * keyEvent)
         if ((keyEvent->modifiers() & Qt::ControlModifier) > 0 && key >= Qt::Key_1 && key <= Qt::Key_8)
         {
             int octave = key - Qt::Key_1;
-            ContextManager::configuration()->setValue(ConfManager::SECTION_MAP, "octave_offset", octave);
+            ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "octave_offset", octave);
         }
         else if (key == Qt::Key_Up && m_currentArrow == 0)
         {

@@ -27,7 +27,9 @@
 ModulatedParameter::ModulatedParameter(AttributeType type) :
     _type(type),
     _instValue(type, false),
-    _prstValue(type, true)
+    _prstValue(type, true),
+    _instModulation(0),
+    _prstModulation(0)
 {
 
 }
@@ -40,21 +42,35 @@ void ModulatedParameter::initValue(AttributeValue value, bool isPrst)
         _instValue.setStoredValue(value);
 }
 
+void ModulatedParameter::clearModulations()
+{
+    _instModulation = 0;
+    _prstModulation = 0;
+}
+
+void ModulatedParameter::addInstModulation(double value)
+{qDebug() << "inst modulation" << value;
+    _instModulation += value;
+}
+
+void ModulatedParameter::addPrstModulation(double value)
+{
+    _prstModulation += value;
+}
+
 qint32 ModulatedParameter::getIntValue()
 {
-    // TODO: possibly modulate inst and prst
-
     // Combine inst and prst
     qint32 result = 0;
     switch (_type)
     {
     case champ_sampleModes: case champ_exclusiveClass:
         // Only in instrument
-        result = _instValue.getStoredValue().wValue;
+        result = _instValue.getStoredValue().wValue + static_cast<qint32>(_instModulation);
         break;
     case champ_overridingRootKey: case champ_velocity: case champ_keynum:
         // Only in instrument, can be -1 (not defined)
-        result = _instValue.getStoredValue().shValue;
+        result = _instValue.getStoredValue().shValue + static_cast<qint32>(_instModulation);
         break;
     case champ_startAddrsOffset: case champ_startAddrsCoarseOffset:
     case champ_endAddrsOffset: case champ_endAddrsCoarseOffset:
@@ -65,7 +81,8 @@ qint32 ModulatedParameter::getIntValue()
     case champ_modEnvToPitch: case champ_modEnvToFilterFc:
     case champ_keynumToModEnvHold: case champ_keynumToModEnvDecay:
     case champ_keynumToVolEnvHold: case champ_keynumToVolEnvDecay:
-        result = _instValue.getStoredValue().shValue + _prstValue.getStoredValue().shValue;
+        result = _instValue.getStoredValue().shValue + _prstValue.getStoredValue().shValue +
+                static_cast<qint32>(_instModulation) + static_cast<qint32>(_prstModulation);
         break;
     default:
         qDebug() << "ModulatedParameter: type" << _type << "is not an integer";
@@ -88,8 +105,6 @@ qint32 ModulatedParameter::getIntValue()
 
 double ModulatedParameter::getRealValue()
 {
-    // TODO: possibly modulate inst and prst
-
     // Combine inst and prst
     double result = 0;
     switch (_type)
@@ -98,7 +113,7 @@ double ModulatedParameter::getRealValue()
     case champ_pan: case champ_initialAttenuation:
     case champ_initialFilterQ: case champ_modLfoToVolume:
     case champ_sustainModEnv: case champ_sustainVolEnv:
-        result = _instValue.getRealValue() + _prstValue.getRealValue();
+        result = _instValue.getRealValue() + _prstValue.getRealValue() + _instModulation + _prstModulation;
         break;
     case champ_delayVolEnv: case champ_attackVolEnv: case champ_holdVolEnv:
     case champ_decayVolEnv: case champ_releaseVolEnv:
@@ -107,7 +122,7 @@ double ModulatedParameter::getRealValue()
     case champ_delayModLFO: case champ_freqModLFO:
     case champ_delayVibLFO: case champ_freqVibLFO:
     case champ_initialFilterFc:
-        result = _instValue.getRealValue() * _prstValue.getRealValue();
+        result = (_instValue.getRealValue() + _instModulation) * (_prstValue.getRealValue() + _prstModulation);
         break;
     default:
         qDebug() << "ModulatedParameter: type" << _type << "is not a floating value";

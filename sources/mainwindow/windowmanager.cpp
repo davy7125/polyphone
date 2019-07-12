@@ -131,7 +131,8 @@ void WindowManager::openSoundfont(QString fileName)
     // Check if the file is not already open?
     SoundfontManager * sf2 = SoundfontManager::getInstance();
     int indexSf2 = -1;
-    foreach (int i, sf2->getSiblings(EltID(elementSf2)))
+    EltID idSf2(elementSf2);
+    foreach (int i, sf2->getSiblings(idSf2))
     {
         if (sf2->getQstr(EltID(elementSf2, i), champ_filenameInitial) == fileName)
         {
@@ -195,14 +196,14 @@ void WindowManager::editingDone(QString source, QList<int> sf2Indexes)
 
 void WindowManager::onTabTitleChanged(QString title)
 {
-    int index = _tabWidget->indexOf((Editor*)QObject::sender());
+    int index = _tabWidget->indexOf(dynamic_cast<Editor*>(QObject::sender()));
     if (index != -1)
         _tabWidget->setTabText(index, title);
 }
 
 void WindowManager::onFilePathChanged(QString filePath)
 {
-    int index = _tabWidget->indexOf((Editor*)QObject::sender());
+    int index = _tabWidget->indexOf(dynamic_cast<Editor*>(QObject::sender()));
     if (index != -1)
         _tabWidget->setTabToolTip(index, filePath);
 }
@@ -211,10 +212,10 @@ void WindowManager::onTabCloseRequested(int tabIndex)
 {
     QWidget * widget = _tabWidget->widget(tabIndex);
     SoundfontManager * sf2 = SoundfontManager::getInstance();
-    if (_editors.contains((Editor*)widget))
+    if (_editors.contains(dynamic_cast<Editor*>(widget)))
     {
         // Close a soundfont
-        Editor * editor = (Editor*)widget;
+        Editor * editor = dynamic_cast<Editor*>(widget);
         editor->setFocus();
 
         int ret;
@@ -269,25 +270,25 @@ void WindowManager::onTabCloseRequested(int tabIndex)
             keyboardDisplayChanged(false);
         }
     }
-    else if (widget == (QWidget *)_configTab)
+    else if (widget == dynamic_cast<QWidget*>(_configTab))
     {
         // Close the configurations
         _tabWidget->removeTab(tabIndex);
     }
-    else if (widget == (QWidget *)_browserTab)
+    else if (widget == dynamic_cast<QWidget*>(_browserTab))
     {
         // Close the soundfont browser
         _tabWidget->removeTab(tabIndex);
     }
-    else if (widget == (QWidget *)_userTab)
+    else if (widget == dynamic_cast<QWidget*>(_userTab))
     {
         // Close the user area
         _tabWidget->removeTab(tabIndex);
     }
-    else if (_viewers.contains((SoundfontViewer*)widget))
+    else if (_viewers.contains(dynamic_cast<SoundfontViewer*>(widget)))
     {
         // Close a soundfont from the repository
-        SoundfontViewer * viewer = (SoundfontViewer*)widget;
+        SoundfontViewer * viewer = dynamic_cast<SoundfontViewer*>(widget);
         _viewers.removeAll(viewer);
         _tabWidget->removeTab(tabIndex);
         delete viewer;
@@ -297,9 +298,9 @@ void WindowManager::onTabCloseRequested(int tabIndex)
 int WindowManager::getCurrentSf2()
 {
     QWidget * widget = _tabWidget->currentWidget();
-    if (_editors.contains((Editor*)widget))
+    if (_editors.contains(dynamic_cast<Editor*>(widget)))
     {
-        Editor * editor = (Editor*)widget;
+        Editor * editor = dynamic_cast<Editor*>(widget);
         return editor->getSf2Index();
     }
     return -1;
@@ -313,7 +314,7 @@ void WindowManager::closeCurrentTab()
 void WindowManager::onTabIndexChanged(int tabIndex)
 {
     QWidget * widget = _tabWidget->widget(tabIndex);
-    emit(editorOpen(_editors.contains((Editor*)widget)));
+    emit(editorOpen(_editors.contains(dynamic_cast<Editor*>(widget))));
 }
 
 void WindowManager::openUser()

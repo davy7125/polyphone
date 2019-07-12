@@ -54,7 +54,8 @@ void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids
     // Current instrument
     EltID idInst = ids.getSelectedIds(elementInst)[0];
     idInst.typeElement = elementInst;
-    if (sm->getSiblings(EltID(elementInstSmpl, idInst.indexSf2, idInst.indexElt)).empty())
+    EltID idInstSmpl(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
+    if (sm->getSiblings(idInstSmpl).empty())
     {
         _warning = trUtf8("The instrument contains no samples.");
         finished(true);

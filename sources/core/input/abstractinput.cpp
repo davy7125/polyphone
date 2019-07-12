@@ -72,7 +72,8 @@ void AbstractInput::processAsync()
     // Check that the file is not already open
     if (!_fileName.isEmpty())
     {
-        foreach (int i, _sm->getSiblings(EltID(elementSf2)))
+        EltID idSf2(elementSf2);
+        foreach (int i, _sm->getSiblings(idSf2))
         {
             if (_sm->getQstr(EltID(elementSf2, i), champ_filenameInitial) == _fileName)
             {

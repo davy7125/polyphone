@@ -27,9 +27,10 @@
 #include "modulatedparameter.h"
 #include "soundfontmanager.h"
 
-// Chargement des paramètres
-VoiceParam::VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl) :
-    _sm(SoundfontManager::getInstance())
+VoiceParam::VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int key, int vel) :
+    _sm(SoundfontManager::getInstance()),
+    _modulatorGroupInst(&_parameters, false, key, vel),
+    _modulatorGroupPrst(&_parameters, true, key, vel)
 {
     // Prepare the parameters
     prepareParameters();
@@ -144,30 +145,42 @@ void VoiceParam::readDivision(EltID idDivision)
 {
     bool isPrst = (idDivision.typeElement == elementPrstInst);
 
-    // Load division attributes
-    QList<AttributeType> divisionAttributeTypes;
-    QList<AttributeValue> divisionAttributeValues;
-    _sm->getAllAttributes(idDivision, divisionAttributeTypes, divisionAttributeValues);
-
-    // Configure with the division attributes
-    for (int i = 0; i < divisionAttributeTypes.count(); i++)
-    {
-        if (_parameters.contains(divisionAttributeTypes[i]))
-            _parameters[divisionAttributeTypes[i]]->initValue(divisionAttributeValues[i], isPrst);
-    }
-
     // Load global attributes
     EltID id(isPrst ? elementPrst : elementInst, idDivision.indexSf2, idDivision.indexElt);
     QList<AttributeType> globalAttributeTypes;
     QList<AttributeValue> globalAttributeValues;
     _sm->getAllAttributes(id, globalAttributeTypes, globalAttributeValues);
 
-    // Complete the configuration with global attributes that have not been overridden in divisions
+    // Configure with the global attributes
     for (int i = 0; i < globalAttributeTypes.count(); i++)
-    {
-        if (!divisionAttributeTypes.contains(globalAttributeTypes[i]) && _parameters.contains(globalAttributeTypes[i]))
+        if (_parameters.contains(globalAttributeTypes[i]))
             _parameters[globalAttributeTypes[i]]->initValue(globalAttributeValues[i], isPrst);
-    }
+
+    // Load division attributes
+    QList<AttributeType> divisionAttributeTypes;
+    QList<AttributeValue> divisionAttributeValues;
+    _sm->getAllAttributes(idDivision, divisionAttributeTypes, divisionAttributeValues);
+
+    // Configure with the division attributes (possibly overriding it)
+    for (int i = 0; i < divisionAttributeTypes.count(); i++)
+        if (_parameters.contains(divisionAttributeTypes[i]))
+            _parameters[divisionAttributeTypes[i]]->initValue(divisionAttributeValues[i], isPrst);
+
+    // Load global modulators
+    QList<ModulatorData> globalModulators;
+    _sm->getAllModulators(id, globalModulators);
+    if (isPrst)
+        _modulatorGroupPrst.loadModulators(globalModulators);
+    else
+        _modulatorGroupInst.loadModulators(globalModulators);
+
+    // Load division modulators
+    QList<ModulatorData> divisionModulators;
+    _sm->getAllModulators(idDivision, divisionModulators);
+    if (isPrst)
+        _modulatorGroupPrst.loadModulators(divisionModulators);
+    else
+        _modulatorGroupInst.loadModulators(divisionModulators);
 }
 
 void VoiceParam::prepareForSmpl(int key, SFSampleLink link)
@@ -313,4 +326,15 @@ quint32 VoiceParam::getPosition(AttributeType type)
     }
 
     return result;
+}
+
+void VoiceParam::computeModulations()
+{
+    // First clear all modulations
+    foreach (ModulatedParameter * parameter, _parameters)
+        parameter->clearModulations();
+
+    // Process modulators
+    _modulatorGroupInst.process();
+    _modulatorGroupPrst.process();
 }

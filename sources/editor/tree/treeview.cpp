@@ -316,7 +316,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
     {
         if (!deselected.indexes().isEmpty())
         {
-            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+            TreeSortFilterProxy * proxy = dynamic_cast<TreeSortFilterProxy *>(this->model());
             QModelIndex indexInitial = deselected.indexes()[0];
 
             if (indexInitial.isValid())
@@ -737,7 +737,7 @@ void TreeView::dropEvent(QDropEvent *event)
     {
         SoundfontManager * sm = SoundfontManager::getInstance();
         int replace = 0;
-        SampleLoader sl((QWidget*)this->parent());
+        SampleLoader sl(dynamic_cast<QWidget*>(this->parent()));
         IdList smplList;
         for (int i = 0; i < event->mimeData()->urls().count(); i++)
         {
@@ -812,7 +812,8 @@ void TreeView::onCreateElements(IdList ids, bool oneForEach)
     // List of all instrument names
     SoundfontManager * sm = SoundfontManager::getInstance();
     QStringList names;
-    foreach (int i, sm->getSiblings(EltID(isSmpl ? elementInst : elementPrst, indexSf2)))
+    EltID idTmp(isSmpl ? elementInst : elementPrst, indexSf2);
+    foreach (int i, sm->getSiblings(idTmp))
         names << sm->getQstr(EltID(isSmpl ? elementInst : elementPrst, indexSf2, i), champ_name);
 
     Duplicator duplicator;

@@ -36,7 +36,7 @@ void KeyboardMap::initializeMapping()
             _keyMap[octave][key] = QKeySequence(ContextManager::configuration()->getMapping(octave, key));
         }
     }
-    _firstNote = 12 * ContextManager::configuration()->getValue(ConfManager::SECTION_MAP, "octave_offset", 3).toInt();
+    _firstNote = 12 * ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "octave_offset", 3).toInt();
 }
 
 int KeyboardMap::getKey(QKeySequence sequence)

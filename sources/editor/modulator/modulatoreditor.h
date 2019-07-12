@@ -59,25 +59,14 @@ private slots:
     void duplicateMod(QList<int> listIndex);
 
 private:
-    class Modulator
-    {
-    public:
-        SFModulator modSrcOper;
-        AttributeType modDestOper;
-        qint32 modAmount;
-        SFModulator modAmtSrcOper;
-        SFTransform modTransOper;
-        qint32 index;
-    };
-
     void updateInterface(QList<AttributeType> attributes);
     void updateButtons(bool withSelection);
     QList<EltID> getSelectedModulators();
-    QList<Modulator> getModList(EltID id);
-    void pasteMod(EltID id, QList<Modulator> modulators);
+    QList<ModulatorData> getModList(EltID id);
+    void pasteMod(EltID id, QList<ModulatorData> modulators);
 
     static QList<ModulatorEditor *> s_instances;
-    static QList<Modulator> s_modulatorCopy;
+    static QList<ModulatorData> s_modulatorCopy;
 
     Ui::ModulatorEditor *ui;
     EltID _currentId;

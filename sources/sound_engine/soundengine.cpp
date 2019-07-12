@@ -26,7 +26,6 @@
 #include "soundengine.h"
 #include <QThread>
 
-// Variable statique
 QList<SoundEngine*> SoundEngine::_listInstances = QList<SoundEngine*>();
 int SoundEngine::_gainSmpl = 0;
 bool SoundEngine::_isStereo = false;
@@ -66,7 +65,7 @@ void SoundEngine::addVoice(Voice * voice, QList<Voice*> friends)
     else
         voice->setLoopMode(_isLoopEnabled);
 
-    // Recherche du soundengine le moins surchargé
+    // Find the less busy SoundEngine
     int index = -1;
     int minVoiceNumber = -1;
     for (int i = 0; i < _listInstances.size(); i++)
@@ -173,7 +172,7 @@ void SoundEngine::releaseNoteInstance(int numNote)
 {
     if (numNote == -1)
     {
-        // Arrêt lecture d'un sample
+        // Stop playing a sample
         for (int i = 0; i < _listVoices.size(); i++)
             if (_listVoices.at(i)->getKey() < 0)
                 _listVoices.at(i)->release();

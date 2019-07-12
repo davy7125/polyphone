@@ -33,7 +33,7 @@
 #include <QKeyEvent>
 
 QList<ModulatorEditor *> ModulatorEditor::s_instances;
-QList<ModulatorEditor::Modulator> ModulatorEditor::s_modulatorCopy;
+QList<ModulatorData> ModulatorEditor::s_modulatorCopy;
 
 ModulatorEditor::ModulatorEditor(QWidget *parent) :
     QWidget(parent),
@@ -55,10 +55,14 @@ ModulatorEditor::ModulatorEditor(QWidget *parent) :
     ui->frameButtons->setStyleSheet("QFrame{border:1px solid " +
                                     this->palette().dark().color().name() +
                                     ";border-top:0;border-bottom:0;border-left:0}");
-    ui->labelNoModulators->setStyleSheet("QLabel{color:" + this->palette().dark().color().name() +
+    QColor labelColor = ThemeManager::mix(
+                ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
+                ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
+                0.5);
+    ui->labelNoModulators->setStyleSheet("QLabel{color:" + labelColor.name() +
                                          ";background-color:" + ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() +
                                          "}");
-    ui->labelSelectDivision->setStyleSheet("QLabel{color:" + this->palette().dark().color().name() +
+    ui->labelSelectDivision->setStyleSheet("QLabel{color:" + labelColor.name() +
                                            ";background-color:" + ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() +
                                            "}");
     _mixedColor = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
@@ -191,8 +195,9 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes)
 
         // Target list
         AttributeValue value = SoundfontManager::getInstance()->get(modId, champ_sfModDestOper);
-        if (value.wValue < 99) // Link are rejected in the summary
-            modTargets << Attribute::getDescription(value.sfGenValue, modId.typeElement == elementPrstMod || modId.typeElement == elementPrstInstMod);
+        if (value.wValue < 32768) // Link are rejected in the summary
+            modTargets << Attribute::getDescription(static_cast<AttributeType>(value.wValue),
+                                                    modId.typeElement == elementPrstMod || modId.typeElement == elementPrstInstMod);
 
         // Add a new cell
         ModulatorCell * cell = new ModulatorCell(modId);
@@ -300,8 +305,7 @@ void ModulatorEditor::on_pushAdd_clicked()
 
     // Initialization
     AttributeValue val;
-    val.sfGenValue = (AttributeType)0;
-    val.wValue = 0;
+    val.wValue = 1;
     sm->set(modId, champ_modAmount, val);
     sm->set(modId, champ_sfModTransOper, val);
     val.sfModValue.CC = 0;
@@ -311,8 +315,7 @@ void ModulatorEditor::on_pushAdd_clicked()
     val.sfModValue.Type = 0;
     sm->set(modId, champ_sfModSrcOper, val);
     sm->set(modId, champ_sfModAmtSrcOper, val);
-    if (modId.typeElement == elementPrstMod || modId.typeElement == elementPrstInstMod)
-        val.sfGenValue = (AttributeType)52;
+    val.wValue = champ_fineTune; // An "easy" default value
     sm->set(modId, champ_sfModDestOper, val);
 
     sm->endEditing("modulatorEditor");
@@ -369,7 +372,7 @@ void ModulatorEditor::duplicateMod(QList<int> listIndex)
         idMod.typeElement = elementPrstMod;
 
     // Copy mods
-    QList<Modulator> modulators = getModList(idMod);
+    QList<ModulatorData> modulators = getModList(idMod);
     EltID idDest = _currentId;
     foreach (int numElement, listIndex)
     {
@@ -425,9 +428,9 @@ void ModulatorEditor::on_pushDelete_clicked()
     ui->listWidget->setCurrentRow(rowToSelect);
 }
 
-QList<ModulatorEditor::Modulator> ModulatorEditor::getModList(EltID id)
+QList<ModulatorData> ModulatorEditor::getModList(EltID id)
 {
-    QList<Modulator> listRet;
+    QList<ModulatorData> listRet;
     SoundfontManager * sm = SoundfontManager::getInstance();
 
     QList<EltID> listSelectedMods = this->getSelectedModulators();
@@ -437,12 +440,12 @@ QList<ModulatorEditor::Modulator> ModulatorEditor::getModList(EltID id)
         foreach (int i, sm->getSiblings(id))
         {
             id.indexMod = i;
-            Modulator modTmp;
-            modTmp.modSrcOper = sm->get(id, champ_sfModSrcOper).sfModValue;
-            modTmp.modDestOper = sm->get(id, champ_sfModDestOper).sfGenValue;
-            modTmp.modAmount = sm->get(id, champ_modAmount).shValue;
-            modTmp.modAmtSrcOper = sm->get(id, champ_sfModAmtSrcOper).sfModValue;
-            modTmp.modTransOper = sm->get(id, champ_sfModTransOper).sfTransValue;
+            ModulatorData modTmp;
+            modTmp.srcOper = sm->get(id, champ_sfModSrcOper).sfModValue;
+            modTmp.destOper = sm->get(id, champ_sfModDestOper).wValue;
+            modTmp.amount = sm->get(id, champ_modAmount).shValue;
+            modTmp.amtSrcOper = sm->get(id, champ_sfModAmtSrcOper).sfModValue;
+            modTmp.transOper = sm->get(id, champ_sfModTransOper).sfTransValue;
             modTmp.index = id.indexMod;
             listRet << modTmp;
         }
@@ -452,12 +455,12 @@ QList<ModulatorEditor::Modulator> ModulatorEditor::getModList(EltID id)
         // Only selected mods are copied
         foreach (EltID id, listSelectedMods)
         {
-            Modulator modTmp;
-            modTmp.modSrcOper = sm->get(id, champ_sfModSrcOper).sfModValue;
-            modTmp.modDestOper = sm->get(id, champ_sfModDestOper).sfGenValue;
-            modTmp.modAmount = sm->get(id, champ_modAmount).shValue;
-            modTmp.modAmtSrcOper = sm->get(id, champ_sfModAmtSrcOper).sfModValue;
-            modTmp.modTransOper = sm->get(id, champ_sfModTransOper).sfTransValue;
+            ModulatorData modTmp;
+            modTmp.srcOper = sm->get(id, champ_sfModSrcOper).sfModValue;
+            modTmp.destOper = sm->get(id, champ_sfModDestOper).wValue;
+            modTmp.amount = sm->get(id, champ_modAmount).shValue;
+            modTmp.amtSrcOper = sm->get(id, champ_sfModAmtSrcOper).sfModValue;
+            modTmp.transOper = sm->get(id, champ_sfModTransOper).sfTransValue;
             modTmp.index = id.indexMod;
             listRet << modTmp;
         }
@@ -465,22 +468,22 @@ QList<ModulatorEditor::Modulator> ModulatorEditor::getModList(EltID id)
 
     // List all indexes
     QList<int> listIndex;
-    foreach (Modulator mod, listRet)
+    foreach (ModulatorData mod, listRet)
         if (!listIndex.contains(mod.index))
             listIndex << mod.index;
 
     for (int i = 0; i < listRet.size(); i++)
     {
-        Modulator mod = listRet.at(i);
+        ModulatorData mod = listRet.at(i);
 
-        if ((int)mod.modDestOper >= 32768)
+        if ((int)mod.destOper >= 32768)
         {
             // Broken links are removed
-            int link = mod.modDestOper - 32768;
+            int link = mod.destOper - 32768;
             if (listIndex.contains(link))
-                mod.modDestOper = (AttributeType)(32768 + listIndex.indexOf(link));
+                mod.destOper = 32768 + listIndex.indexOf(link);
             else
-                mod.modDestOper = champ_fineTune;
+                mod.destOper = champ_fineTune;
         }
 
         // Indexes start at 0
@@ -491,20 +494,20 @@ QList<ModulatorEditor::Modulator> ModulatorEditor::getModList(EltID id)
 
     for (int i = 0; i < listRet.size(); i++)
     {
-        Modulator mod = listRet.at(i);
-        if (mod.modSrcOper.Index == 127 && mod.modSrcOper.CC == 0)
+        ModulatorData mod = listRet.at(i);
+        if (mod.srcOper.Index == 127 && mod.srcOper.CC == 0)
         {
             // We find the link
             bool found = false;
             for (int j = 0; j < listRet.size(); j++)
             {
-                if (i != j && listRet.at(j).modDestOper == 32768 + i)
+                if (i != j && listRet.at(j).destOper == 32768 + i)
                     found = true;
             }
 
             if (!found)
             {
-                mod.modSrcOper.Index = 0;
+                mod.srcOper.Index = 0;
                 listRet[i] = mod;
             }
         }
@@ -526,7 +529,7 @@ QList<EltID> ModulatorEditor::getSelectedModulators()
     return listIDs;
 }
 
-void ModulatorEditor::pasteMod(EltID id, QList<Modulator> modulators)
+void ModulatorEditor::pasteMod(EltID id, QList<ModulatorData> modulators)
 {
     if (modulators.empty())
         return;
@@ -547,7 +550,7 @@ void ModulatorEditor::pasteMod(EltID id, QList<Modulator> modulators)
         AttributeType champTmp;
         for (int i = 0; i < modulators.size(); i++)
         {
-            champTmp = modulators[i].modDestOper;
+            champTmp = static_cast<AttributeType>(modulators[i].destOper);
             QString warnQStr = trUtf8("Forbidden action:") + " ";
             if (champTmp == champ_startAddrsOffset ||
                     champTmp == champ_startAddrsCoarseOffset ||
@@ -584,29 +587,29 @@ void ModulatorEditor::pasteMod(EltID id, QList<Modulator> modulators)
     int offsetIndex = listIndex[0];
     for (int i = 0; i < modulators.size(); i++)
     {
-        Modulator mod = modulators.at(i);
+        ModulatorData mod = modulators.at(i);
         mod.index += offsetIndex;
-        if ((int)mod.modDestOper >= 32768)
-            mod.modDestOper = (AttributeType)(mod.modDestOper + offsetIndex);
+        if (mod.destOper >= 32768)
+            mod.destOper = mod.destOper + offsetIndex;
         modulators[i] = mod;
     }
 
     // Copy the configuration of the saved mods
     AttributeValue valTmp;
-    Modulator modTmp;
+    ModulatorData modTmp;
     for (int i = 0; i < modulators.size(); i++)
     {
         id.indexMod = listIndex.at(i);
         modTmp = modulators.at(i);
-        valTmp.sfModValue = modTmp.modSrcOper;
+        valTmp.sfModValue = modTmp.srcOper;
         sm->set(id, champ_sfModSrcOper, valTmp);
-        valTmp.sfGenValue = modTmp.modDestOper;
+        valTmp.wValue = modTmp.destOper;
         sm->set(id, champ_sfModDestOper, valTmp);
-        valTmp.shValue = modTmp.modAmount;
+        valTmp.shValue = modTmp.amount;
         sm->set(id, champ_modAmount, valTmp);
-        valTmp.sfModValue = modTmp.modAmtSrcOper;
+        valTmp.sfModValue = modTmp.amtSrcOper;
         sm->set(id, champ_sfModAmtSrcOper, valTmp);
-        valTmp.sfTransValue = modTmp.modTransOper;
+        valTmp.sfTransValue = modTmp.transOper;
         sm->set(id, champ_sfModTransOper, valTmp);
     }
 }

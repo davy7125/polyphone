@@ -30,13 +30,13 @@ KeyNameManager::KeyNameManager(ConfManager * configuration) :
     _configuration(configuration)
 {
     _nameMiddleC = static_cast<NameMiddleC>(
-                _configuration->getValue(ConfManager::SECTION_NONE, "name_middle_c", 0).toInt());
+                _configuration->getValue(ConfManager::SECTION_DISPLAY, "name_middle_c", 0).toInt());
 }
 
 void KeyNameManager::setMiddleKey(NameMiddleC name)
 {
     _nameMiddleC = name;
-    _configuration->setValue(ConfManager::SECTION_NONE, "name_middle_c", static_cast<int>(_nameMiddleC));
+    _configuration->setValue(ConfManager::SECTION_DISPLAY, "name_middle_c", static_cast<int>(_nameMiddleC));
 }
 
 QString KeyNameManager::getKeyName(unsigned int keyNum, bool forceTexte, bool with0, bool forceC4, bool noOctave)
