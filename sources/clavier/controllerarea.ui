@@ -66,7 +66,7 @@
     </widget>
    </item>
    <item row="2" column="2">
-    <widget class="QSlider" name="sliderPressure">
+    <widget class="StyledSlider" name="sliderPressure">
      <property name="maximum">
       <number>127</number>
      </property>
@@ -82,7 +82,7 @@
     </widget>
    </item>
    <item row="1" column="2">
-    <widget class="QSlider" name="sliderSensitivity">
+    <widget class="StyledSlider" name="sliderSensitivity">
      <property name="maximum">
       <number>1500</number>
      </property>
@@ -186,7 +186,7 @@
     </widget>
    </item>
    <item row="0" column="2">
-    <widget class="QSlider" name="sliderPitchWheel">
+    <widget class="StyledSlider" name="sliderPitchWheel">
      <property name="minimumSize">
       <size>
        <width>100</width>
@@ -316,6 +316,11 @@
    <class>ComboCC</class>
    <extends>QComboBox</extends>
    <header>combocc.h</header>
+  </customwidget>
+  <customwidget>
+   <class>StyledSlider</class>
+   <extends>QSlider</extends>
+   <header>styledslider.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

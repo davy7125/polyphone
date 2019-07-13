@@ -28,6 +28,8 @@ ControllerArea::ControllerArea(QWidget *parent) :
     updateMonoPressure(ContextManager::midi()->getMonoPressure());
 
     // Initialization of the wheel
+    ui->sliderPitchWheel->setColorFromMiddle(true);
+    ui->sliderPitchWheel->setBackToValue(64);
     updateBend(64); // Always in the middle
 
     // Initialization of the controllers

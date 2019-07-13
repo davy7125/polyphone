@@ -446,7 +446,8 @@ SOURCES	+= main.cpp \
     editor/widgets/spinboxcents.cpp \
     sound_engine/parametermodulator.cpp \
     sound_engine/modulatorgroup.cpp \
-    editor/modulator/modulatorlistwidget.cpp
+    editor/modulator/modulatorlistwidget.cpp \
+    clavier/styledslider.cpp
 
 HEADERS  += \
     core/sample/infosound.h \
@@ -750,7 +751,8 @@ HEADERS  += \
     editor/widgets/spinboxcents.h \
     sound_engine/parametermodulator.h \
     sound_engine/modulatorgroup.h \
-    core/types/modulatordata.h
+    core/types/modulatordata.h \
+    clavier/styledslider.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
