@@ -99,7 +99,7 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
 {
     // Initialize MIDI values
     _bendSensitivityValue = _configuration->getValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", 2.0).toDouble();
-    _monoPressureValue = _configuration->getValue(ConfManager::SECTION_MIDI, "mono_pressure", 0).toInt();
+    _monoPressureValue = 0; // Always starts with 0
     for (int i = 0; i < 128; i++)
     {
         // Default value, depending on the CC number
@@ -159,9 +159,8 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
 
 MidiDevice::~MidiDevice()
 {
-    // Store MIDI values
+    // Store some MIDI values
     _configuration->setValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", _bendSensitivityValue);
-    _configuration->setValue(ConfManager::SECTION_MIDI, "mono_pressure", _monoPressureValue);
     for (int i = 0; i < 128; i++)
         _configuration->setValue(ConfManager::SECTION_MIDI, "CC_" + QString("%1").arg(i, 3, 10, QChar('0')), _controllerValues[i]);
 
