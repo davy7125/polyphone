@@ -29,27 +29,36 @@
 #include "contextmanager.h"
 #include "soundfontmanager.h"
 
+static const QChar unicodeDoubleArrow[] = { 0xfeff, 0x27F7 };
+const QString ModulatorCell::s_doubleArrow = " " + QString::fromRawData(unicodeDoubleArrow, 2) + " ";
+
 ModulatorCell::ModulatorCell(EltID id, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ModulatorCell),
+    _isSelected(false),
     _id(id),
     _sm(SoundfontManager::getInstance())
 {
     ui->setupUi(this);
 
-    // Colors
+    // Style
     _labelColor = ThemeManager::mix(
-                ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
                 ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                0.5).name();
+                0.75);
     _computationAreaColor = ThemeManager::mix(
-                ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+                0.35);
+    _labelColorSelected = ThemeManager::mix(
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
                 ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
                 0.25);
-
-    // Label style
-    ui->labelCoeff->setStyleSheet("QLabel{color:" + _labelColor.name() + "}");
-    ui->labelTransform->setStyleSheet("QLabel{color:" + _labelColor.name() + "}");
+    _computationAreaColorSelected = ThemeManager::mix(
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+                0.65);
+    _fontHint = QFont(this->font().family(), this->font().pointSize() * 3 / 4);
 
     // Current number
     int modCount = 0;
@@ -63,10 +72,11 @@ ModulatorCell::ModulatorCell(EltID id, QWidget *parent) :
         modCount++;
     }
 
-    // Populate comboboxes
+    // Comboboxes
     ui->comboSource1->initialize(id, true);
     ui->comboSource2->initialize(id, false);
     ui->comboDestination->initialize(id);
+    connect(ui->comboDestination, SIGNAL(currentIndexChanged(int)), this, SLOT(onOutputChanged(int)));
 
     // Shapes
     ui->widgetShape1->initialize(id, true);
@@ -76,14 +86,30 @@ ModulatorCell::ModulatorCell(EltID id, QWidget *parent) :
     ui->spinAmount->blockSignals(true);
     ui->spinAmount->setValue(SoundfontManager::getInstance()->get(id, champ_modAmount).shValue);
     ui->spinAmount->blockSignals(false);
+    connect(ui->spinAmount, SIGNAL(valueChanged(int)), this, SLOT(onOutputChanged(int)));
 
     // Transform
     ui->comboTransform->setCurrentIndex(SoundfontManager::getInstance()->get(id, champ_sfModTransOper).wValue == 2 ? 1 : 0);
+
+    // Compute the range
+    ui->labelFinalRange->setFont(_fontHint);
+    onOutputChanged(-1);
 }
 
 ModulatorCell::~ModulatorCell()
 {
     delete ui;
+}
+
+void ModulatorCell::setSelected(bool isSelected)
+{
+    _isSelected = isSelected;
+    QString labelStyleSheet = "QLabel{color:" +
+            ContextManager::theme()->getColor(isSelected ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::LIST_TEXT).name() +
+            "}";
+
+    ui->labelModNumber->setStyleSheet(labelStyleSheet);
+    ui->labelFinalRange->setStyleSheet(labelStyleSheet);
 }
 
 void ModulatorCell::paintEvent(QPaintEvent* event)
@@ -95,27 +121,38 @@ void ModulatorCell::paintEvent(QPaintEvent* event)
     int x2 = ui->comboTransform->x() + ui->comboTransform->width() + 6;
     int y1 = ui->widgetShape1->y() - 6;
     int y2 = ui->widgetShape2->y() + ui->widgetShape2->height() + 6;
-    p.fillRect(QRect(x1, y1, x2 - x1, y2 - y1), _computationAreaColor);
+    p.fillRect(QRect(x1, y1, x2 - x1, y2 - y1), _isSelected ? _computationAreaColorSelected : _computationAreaColor);
 
     // Draw lines
-    p.setPen(QPen(_labelColor, 3));
-    p.drawLine(ui->comboSource1->x() + ui->comboSource1->width(), ui->comboSource1->y() + ui->comboSource1->height() / 2,
-               ui->widgetShape1->x() + ui->widgetShape1->width() + 34, ui->comboSource1->y() + ui->comboSource1->height() / 2);
+    int posMultiplicationSign = 44;
+    p.setPen(QPen(_isSelected ? _labelColorSelected : _labelColor, 3));
     p.drawLine(ui->comboSource2->x() + ui->comboSource2->width(), ui->comboSource2->y() + ui->comboSource2->height() / 2,
-               ui->comboDestination->x(), ui->comboSource2->y() + ui->comboSource2->height() / 2);
-    p.drawLine(ui->widgetShape1->x() + ui->widgetShape1->width() + 34, ui->comboSource1->y() + ui->comboSource1->height() / 2,
-               ui->widgetShape1->x() + ui->widgetShape1->width() + 34, ui->comboSource2->y() + ui->comboSource2->height() / 2);
+               ui->widgetShape2->x() + ui->widgetShape2->width() + posMultiplicationSign, ui->comboSource2->y() + ui->comboSource2->height() / 2);
+    p.drawLine(ui->comboSource1->x() + ui->comboSource1->width(), ui->comboSource1->y() + ui->comboSource1->height() / 2,
+               ui->comboDestination->x(), ui->comboSource1->y() + ui->comboSource1->height() / 2);
+    p.drawLine(ui->widgetShape1->x() + ui->widgetShape1->width() + posMultiplicationSign, ui->comboSource1->y() + ui->comboSource1->height() / 2,
+               ui->widgetShape1->x() + ui->widgetShape1->width() + posMultiplicationSign, ui->comboSource2->y() + ui->comboSource2->height() / 2);
+
+    // Add input range
+    p.setFont(_fontHint);
+    p.drawText(ui->widgetShape1->x() + ui->widgetShape1->width() + 2, ui->comboSource1->y() + ui->comboSource1->height() / 2 + 5 + _fontHint.pointSize(),
+               ui->comboSource1->currentIndex() == 0 ? "1" : ui->widgetShape1->getEvolution());
+    p.drawText(ui->widgetShape2->x() + ui->widgetShape2->width() + 2, ui->comboSource2->y() + ui->comboSource2->height() / 2 + 5 + _fontHint.pointSize(),
+               ui->comboSource2->currentIndex() == 0 ? "1" : ui->widgetShape2->getEvolution());
+
+    // Add output range
+    p.drawText(ui->spinAmount->x(), ui->spinAmount->y() + ui->spinAmount->height() + 5 + _fontHint.pointSize(), _intRange);
 
     // Draw a multiplication sign
     p.setRenderHint(QPainter::Antialiasing);
     p.setRenderHint(QPainter::HighQualityAntialiasing);
-    p.setBrush(_labelColor);
-    p.drawEllipse(ui->widgetShape1->x() + ui->widgetShape1->width() + 34 - 8, ui->comboSource2->y() + ui->comboSource2->height() / 2 - 8, 16, 16);
-    p.setPen(QPen(_computationAreaColor, 2));
-    p.drawLine(ui->widgetShape1->x() + ui->widgetShape1->width() + 34 - 3, ui->comboSource2->y() + ui->comboSource2->height() / 2 - 3,
-               ui->widgetShape1->x() + ui->widgetShape1->width() + 34 + 3, ui->comboSource2->y() + ui->comboSource2->height() / 2 + 3);
-    p.drawLine(ui->widgetShape1->x() + ui->widgetShape1->width() + 34 - 3, ui->comboSource2->y() + ui->comboSource2->height() / 2 + 3,
-               ui->widgetShape1->x() + ui->widgetShape1->width() + 34 + 3, ui->comboSource2->y() + ui->comboSource2->height() / 2 - 3);
+    p.setBrush(_isSelected ? _labelColorSelected : _labelColor);
+    p.drawEllipse(ui->widgetShape1->x() + ui->widgetShape1->width() + posMultiplicationSign - 8, ui->comboSource1->y() + ui->comboSource1->height() / 2 - 8, 16, 16);
+    p.setPen(QPen(_isSelected ? _computationAreaColorSelected : _computationAreaColor, 2));
+    p.drawLine(ui->widgetShape1->x() + ui->widgetShape1->width() + posMultiplicationSign - 3, ui->comboSource1->y() + ui->comboSource1->height() / 2 - 3,
+               ui->widgetShape1->x() + ui->widgetShape1->width() + posMultiplicationSign + 3, ui->comboSource1->y() + ui->comboSource1->height() / 2 + 3);
+    p.drawLine(ui->widgetShape1->x() + ui->widgetShape1->width() + posMultiplicationSign - 3, ui->comboSource1->y() + ui->comboSource1->height() / 2 + 3,
+               ui->widgetShape1->x() + ui->widgetShape1->width() + posMultiplicationSign + 3, ui->comboSource1->y() + ui->comboSource1->height() / 2 - 3);
 
     QWidget::paintEvent(event);
 }
@@ -129,7 +166,7 @@ void ModulatorCell::on_spinAmount_editingFinished()
 {
     // Compare with the old value
     AttributeValue val;
-    val.shValue = ui->spinAmount->value();
+    val.shValue = static_cast<qint16>(ui->spinAmount->value());
     if (_sm->get(_id, champ_modAmount).shValue != val.shValue)
     {
         _sm->set(_id, champ_modAmount, val);
@@ -150,4 +187,91 @@ void ModulatorCell::on_comboTransform_currentIndexChanged(int index)
         _sm->set(_id, champ_sfModTransOper, val);
         _sm->endEditing("modulatorEditor");
     }
+}
+
+void ModulatorCell::onOutputChanged(int dummy)
+{
+    Q_UNUSED(dummy)
+
+    // Compute min / max as integer
+    qint16 min1 = (ui->comboSource1->currentIndex() == 0 ? 1 : (ui->widgetShape1->isBipolar() ? -1 : 0));
+    qint16 min2 = (ui->comboSource2->currentIndex() == 0 ? 1 : (ui->widgetShape2->isBipolar() ? -1 : 0));
+    qint16 max = static_cast<qint16>(ui->spinAmount->value());
+    qint16 min = max * qMin(min1, min2);
+    if (ui->comboTransform->currentIndex() == 1 && min < 0)
+        min = 0;
+    if (min > max)
+    {
+        qint16 tmp = max;
+        max = min;
+        min = tmp;
+    }
+    _intRange = QString::number(min) + s_doubleArrow + QString::number(max);
+
+    // Compute the new range in double
+    AttributeValue val;
+    val.shValue = min;
+    double dMin = Attribute::toRealValue(ui->comboDestination->getCurrentAttribute(), _id.isPrst(), val);
+    val.shValue = max;
+    double dMax = Attribute::toRealValue(ui->comboDestination->getCurrentAttribute(), _id.isPrst(), val);
+
+    // Addition or multiplication?
+    bool isAddition = true;
+    switch (ui->comboDestination->getCurrentAttribute())
+    {
+    case champ_delayModEnv: case champ_delayVolEnv:
+    case champ_attackModEnv: case champ_attackVolEnv:
+    case champ_holdModEnv: case champ_holdVolEnv:
+    case champ_decayModEnv: case champ_decayVolEnv:
+    case champ_releaseModEnv: case champ_releaseVolEnv:
+    case champ_delayModLFO: case champ_delayVibLFO:
+    case champ_initialFilterFc: case champ_freqModLFO: case champ_freqVibLFO:
+        isAddition = false;
+        break;
+    default:
+        break;
+    }
+
+    // Get the unit
+    QString unit = "";
+    switch (ui->comboDestination->getCurrentAttribute())
+    {
+    case champ_modLfoToPitch:
+    case champ_vibLfoToPitch:
+    case champ_modEnvToPitch:
+    case champ_modLfoToFilterFc:
+    case champ_modEnvToFilterFc:
+    case champ_keynumToModEnvHold:
+    case champ_keynumToModEnvDecay:
+    case champ_keynumToVolEnvHold:
+    case champ_keynumToVolEnvDecay:
+        unit = "(c)"; // No better way to display it...
+        break;
+    case champ_initialFilterQ:
+    case champ_modLfoToVolume:
+    case champ_sustainVolEnv:
+    case champ_initialAttenuation:
+        unit = trUtf8("dB");
+        break;
+    case champ_chorusEffectsSend:
+    case champ_reverbEffectsSend:
+    case champ_sustainModEnv:
+        unit = "%";
+        break;
+    case champ_coarseTune:
+        unit = trUtf8("semi-tones");
+        break;
+    case champ_fineTune:
+        unit = trUtf8("cents", "hundredth of semi-tones");
+        break;
+    case champ_scaleTuning:
+        unit = "cent / key";
+        break;
+    default:
+        break;
+    }
+
+    ui->labelFinalRange->setText((isAddition ? trUtf8("Add from: ") : trUtf8("Multiply from: ")) + QString::number(dMin) + " " + unit + "\n" +
+                                 trUtf8("To: ") + QString::number(dMax) + " " + unit);
+    this->repaint();
 }

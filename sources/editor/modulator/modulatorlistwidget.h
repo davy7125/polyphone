@@ -34,7 +34,7 @@ class ModulatorListWidget : public QListWidget
     Q_OBJECT
 
 public:
-    ModulatorListWidget(QWidget * parent = nullptr) : QListWidget(parent) {}
+    ModulatorListWidget(QWidget * parent = nullptr);
 
 signals:
     void pasted();
@@ -51,6 +51,9 @@ protected:
         else if (event->key() == Qt::Key_V && (event->modifiers() & Qt::ControlModifier))
             emit(pasted());
     }
+
+private slots:
+    void onSelectionChanged();
 };
 
 #endif // MODULATORLISTWIDGET_H

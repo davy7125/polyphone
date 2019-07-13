@@ -45,20 +45,27 @@ public:
     AttributeType getTargetAttribute();
     EltID getID() { return _id; }
 
+    void setSelected(bool isSelected);
+
 protected:
     void paintEvent(QPaintEvent* event);
 
 private slots:
     void on_spinAmount_editingFinished();
-
     void on_comboTransform_currentIndexChanged(int index);
+    void onOutputChanged(int dummy);
 
 private:
     Ui::ModulatorCell *ui;
-    QColor _computationAreaColor;
-    QColor _labelColor;
+    QColor _computationAreaColor, _computationAreaColorSelected;
+    QColor _labelColor, _labelColorSelected;
+    bool _isSelected;
+    QFont _fontHint;
     EltID _id;
     SoundfontManager * _sm;
+    QString _intRange;
+
+    static const QString s_doubleArrow;
 };
 
 #endif // MODULATORCELL_H

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>532</width>
+    <width>610</width>
     <height>78</height>
    </rect>
   </property>
@@ -43,28 +43,8 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="5">
-    <widget class="QSpinBox" name="spinAmount">
-     <property name="minimum">
-      <number>-32768</number>
-     </property>
-     <property name="maximum">
-      <number>32767</number>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="1">
     <widget class="ModulatorComboSrc" name="comboSource2">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="8">
-    <widget class="ModulatorComboDest" name="comboDestination">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -81,20 +61,6 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-    </widget>
-   </item>
-   <item row="1" column="6">
-    <widget class="QComboBox" name="comboTransform">
-     <item>
-      <property name="text">
-       <string>none</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>absolute value</string>
-      </property>
-     </item>
     </widget>
    </item>
    <item row="1" column="3">
@@ -117,7 +83,7 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>60</width>
+       <width>70</width>
        <height>20</height>
       </size>
      </property>
@@ -151,22 +117,46 @@
     </widget>
    </item>
    <item row="0" column="5">
-    <widget class="QLabel" name="labelCoeff">
-     <property name="text">
-      <string>coefficient</string>
+    <widget class="QSpinBox" name="spinAmount">
+     <property name="prefix">
+      <string>× </string>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+     <property name="minimum">
+      <number>-32768</number>
+     </property>
+     <property name="maximum">
+      <number>32767</number>
      </property>
     </widget>
    </item>
    <item row="0" column="6">
-    <widget class="QLabel" name="labelTransform">
-     <property name="text">
-      <string>transformation</string>
+    <widget class="QComboBox" name="comboTransform">
+     <item>
+      <property name="text">
+       <string>no operation</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>absolute value</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="0" column="8">
+    <widget class="ModulatorComboDest" name="comboDestination">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+    </widget>
+   </item>
+   <item row="1" column="8">
+    <widget class="QLabel" name="labelFinalRange">
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </item>

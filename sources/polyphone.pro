@@ -445,7 +445,8 @@ SOURCES	+= main.cpp \
     lib/iir/State.cpp \
     editor/widgets/spinboxcents.cpp \
     sound_engine/parametermodulator.cpp \
-    sound_engine/modulatorgroup.cpp
+    sound_engine/modulatorgroup.cpp \
+    editor/modulator/modulatorlistwidget.cpp
 
 HEADERS  += \
     core/sample/infosound.h \

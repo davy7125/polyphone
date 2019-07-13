@@ -31,9 +31,12 @@
 #include <QHeaderView>
 #include "soundfontmanager.h"
 
+static const QChar unicodeArrow[] = { 0xfeff, 0x279c };
+const QString ModulatorComboCurve::s_rightArrow = " " + QString::fromRawData(unicodeArrow, 2) + " ";
+
 ModulatorComboCurve::ModulatorComboCurve(QWidget* parent) : QComboBox(parent)
 {
-    // Nouvelle vue
+    // New view
     QTableView * view = new QTableView();
     view->viewport()->installEventFilter(this);
     view->horizontalHeader()->setVisible(false);
@@ -87,8 +90,6 @@ bool ModulatorComboCurve::eventFilter(QObject* object, QEvent* event)
 {
     if (event->type() == QEvent::MouseButtonPress && object == view()->viewport())
     {
-        QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
-        view()->indexAt(mouseEvent->pos());
         this->setCurrentIndex(view()->currentIndex().row());
         this->setModelColumn(view()->currentIndex().column());
 
@@ -111,27 +112,39 @@ void ModulatorComboCurve::loadValue()
     SoundfontManager * sm = SoundfontManager::getInstance();
     SFModulator sfMod = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper).sfModValue;
     int iTmp = sfMod.D + 2 * sfMod.P + 4 * sfMod.Type;
+    _isBipolar = sfMod.P;
+    _isDescending = sfMod.D;
     this->setCurrentIndex(iTmp / 4);
     this->setModelColumn(iTmp % 4);
 }
 
 void ModulatorComboCurve::valueSelected(int row, int column)
 {
-    int D = column % 2;
-    int P = column / 2;
+    _isDescending = column % 2;
+    _isBipolar = column / 2;
     int type = row;
 
     // Compare with the old value
     SoundfontManager * sm = SoundfontManager::getInstance();
     AttributeValue val;
     val.sfModValue = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper).sfModValue;
-    if (val.sfModValue.D != D || val.sfModValue.P != P || val.sfModValue.Type != type)
+    if (val.sfModValue.D != _isDescending || val.sfModValue.P != _isBipolar || val.sfModValue.Type != type)
     {
-        val.sfModValue.D = static_cast<ModDirection>(D);
-        val.sfModValue.P = static_cast<ModPolarity>(P);
+        val.sfModValue.D = static_cast<ModDirection>(_isDescending);
+        val.sfModValue.P = static_cast<ModPolarity>(_isBipolar);
         val.sfModValue.Type = static_cast<quint8>(type);
 
         sm->set(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper, val);
         sm->endEditing("modulatorEditor");
     }
+}
+
+QString ModulatorComboCurve::getEvolution()
+{
+    QString result = "";
+    if (_isDescending)
+        result = _isBipolar ? "1" + s_rightArrow + "-1" : "1" + s_rightArrow + "0";
+    else
+        result = _isBipolar ? "-1" + s_rightArrow + "1" : "0" + s_rightArrow + "1";
+    return result;
 }

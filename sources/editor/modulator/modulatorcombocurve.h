@@ -42,11 +42,19 @@ public:
     void initialize(EltID id, bool source1);
     void loadValue();
 
+    // Get information about the evolution
+    QString getEvolution();
+    bool isBipolar() { return _isBipolar; }
+
 private:
     void valueSelected(int row, int column);
 
     EltID _id;
     bool _source1;
+    bool _isBipolar;
+    bool _isDescending;
+
+    static const QString s_rightArrow;
 };
 
 #endif // MODULATORCOMBOCURVE_H

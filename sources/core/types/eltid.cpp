@@ -88,33 +88,33 @@ EltID EltID::parent(bool includeRoot)
 
 bool EltID::operator==(const EltID &other)
 {
-    bool ok = true;
-    if (this->typeElement != other.typeElement || this->indexSf2 != other.indexSf2)
-        ok = false;
-    else
+    // Check sf2 and element type
+    if (this->typeElement != other.typeElement || this->indexSf2 != other.indexSf2 || typeElement == elementUnknown)
+        return false;
+    if (typeElement == elementSf2 || typeElement == elementRootSmpl || typeElement == elementRootInst || typeElement == elementRootPrst)
+        return true;
+
+    // Check smpl / inst / prst
+    if (this->indexElt != other.indexElt)
+        return false;
+    if (typeElement == elementSmpl || typeElement == elementInst || typeElement == elementPrst)
+        return true;
+
+    if (typeElement == elementInstMod || typeElement == elementInstGen ||
+            typeElement == elementPrstMod || typeElement == elementPrstGen)
     {
-        switch (typeElement)
-        {
-        case elementUnknown:
-            ok = false;
-            break;
-        case elementInstMod: case elementPrstMod:
-        case elementInstGen: case elementPrstGen: // Pas besoin de vérifier sur indexElt2
-            ok = (this->indexElt == other.indexElt) &&
-                    (this->indexMod == other.indexMod);
-            break;
-        case elementInstSmplMod: case elementPrstInstMod:
-        case elementInstSmplGen: case elementPrstInstGen:
-            ok = (this->indexMod == other.indexMod);
-        case elementInstSmpl: case elementPrstInst:
-            ok = ok && (this->indexElt2 == other.indexElt2);
-        case elementSmpl: case elementInst: case elementPrst:
-            ok = ok && (this->indexElt == other.indexElt);
-        default:
-            break;
-        }
+        // No need to check indexElt2
+        return (this->indexMod == other.indexMod);
     }
-    return ok;
+
+    // Check the division
+    if (this->indexElt2 != other.indexElt2)
+        return false;
+    if (typeElement == elementInstSmpl || typeElement == elementPrstInst)
+        return true;
+
+    // Check the last index
+    return this->indexMod == other.indexMod;
 }
 
 bool EltID::operator !=(const EltID &other)
@@ -145,9 +145,15 @@ QString EltID::toString()
     case elementInstSmplGen: type = "InstSmplGen"; break;
     case elementPrstInstGen: type = "PrstInstGen"; break;
     case elementUnknown: type = "Unknown"; break;
-    default: type = "erreur " + QString::number(typeElement); break;
     }
     return "ID [type=" + type + ", sf2=" + QString::number(indexSf2) +
             ", Elt=" + QString::number(indexElt) + ", Elt2=" + QString::number(indexElt2) +
             ", Mod=" + QString::number(indexMod) + "]";
+}
+
+bool EltID::isPrst()
+{
+    return typeElement == elementPrst || typeElement == elementPrstGen || typeElement == elementPrstMod ||
+            typeElement == elementPrstInst || typeElement == elementPrstInstGen || typeElement == elementPrstInstMod ||
+            typeElement == elementRootPrst;
 }
