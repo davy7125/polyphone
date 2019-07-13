@@ -72,7 +72,7 @@ void CircularBuffer::start()
     // Generate and copy data into the buffer after each reading
     while (_interrupted.load() == 0)
     {
-        // Génération de données
+        // Generate data
         _mutexBuffer.lock();
         generateData(_dataTmpL, _dataTmpR, _dataTmpRevL, _dataTmpRevR, avance);
         writeData(_dataTmpL, _dataTmpR, _dataTmpRevL, _dataTmpRevR, avance);

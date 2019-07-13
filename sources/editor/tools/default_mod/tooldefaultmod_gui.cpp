@@ -22,43 +22,27 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLCELESTETUNING_H
-#define TOOLCELESTETUNING_H
+#include "tooldefaultmod_gui.h"
+#include "ui_tooldefaultmod_gui.h"
 
-#include "abstracttooliterating.h"
-
-class ToolCelesteTuning: public AbstractToolIterating
+ToolDefaultMod_gui::ToolDefaultMod_gui(QWidget *parent) :
+    AbstractToolGui(parent),
+    ui(new Ui::ToolDefaultMod_gui)
 {
-    Q_OBJECT
+    ui->setupUi(this);
+}
 
-public:
-    ToolCelesteTuning();
+ToolDefaultMod_gui::~ToolDefaultMod_gui()
+{
+    delete ui;
+}
 
-    /// Icon, label and category displayed to the user to describe the tool
-    QString getIconName() const override
-    {
-        return ":/tool/celeste_tuning.svg";
-    }
+void ToolDefaultMod_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
+{
 
-    QString getCategory() const override
-    {
-        return trUtf8("Fast editing");
-    }
+}
 
-    /// Internal identifier
-    QString getIdentifier() const override
-    {
-        return "inst:celesteTuning";
-    }
+void ToolDefaultMod_gui::saveParameters(AbstractToolParameters * parameters)
+{
 
-    /// Process an element
-    void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
-
-protected:
-    QString getLabelInternal() const override
-    {
-        return trUtf8("Detune");
-    }
-};
-
-#endif // TOOLCELESTETUNING_H
+}

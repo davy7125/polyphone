@@ -42,7 +42,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Clean up");
+        return trUtf8("Modulators");
     }
 
     /// Internal identifier

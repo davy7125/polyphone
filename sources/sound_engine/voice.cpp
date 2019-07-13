@@ -101,7 +101,10 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     _delayStart -= nbNullValues;
     len -= nbNullValues;
     if (len == 0)
+    {
+        _mutexParam.unlock();
         return;
+    }
     dataL = &dataL[nbNullValues];
     dataR = &dataR[nbNullValues];
 
@@ -138,7 +141,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     _deltaPos = _deltaPos - ceil(_deltaPos);
 
     // Resample data
-    quint32 nbDataTmp = static_cast<quint32>(ceil(modPitch[len])) - 1;
+    quint32 nbDataTmp = static_cast<quint32>(ceil(static_cast<double>(modPitch[len]))) - 1;
     qint32 * dataTmp = new qint32[nbDataTmp + 2];
     dataTmp[0] = _valPrec;
     dataTmp[1] = _valBase;

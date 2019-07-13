@@ -36,8 +36,8 @@ class ToolCelesteTuning_gui : public AbstractToolGui
     Q_OBJECT
 
 public:
-    explicit ToolCelesteTuning_gui(QWidget *parent = 0);
-    ~ToolCelesteTuning_gui();
+    explicit ToolCelesteTuning_gui(QWidget *parent = nullptr);
+    ~ToolCelesteTuning_gui() override;
 
     /// Update the interface with the parameters
     void updateInterface(AbstractToolParameters * parameters, IdList ids) override;

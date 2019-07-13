@@ -52,6 +52,7 @@
 #include "release/toolrelease.h"
 #include "chords/toolchords.h"
 #include "sample_export/toolsampleexport.h"
+#include "default_mod/tooldefaultmod.h"
 
 ToolFactory::~ToolFactory()
 {
@@ -97,6 +98,7 @@ void ToolFactory::initialize()
            << new ToolSoundSpatialization()
            << new ToolTranspose()
            << new ToolRelease()
+           << new ToolDefaultMod()
            << new ToolChangeAttenuation() // Instruments, presets
            << new ToolGlobalSettings()
            << new ToolDivisionDuplication()

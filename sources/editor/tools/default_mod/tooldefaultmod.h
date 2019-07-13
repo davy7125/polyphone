@@ -22,33 +22,33 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLCELESTETUNING_H
-#define TOOLCELESTETUNING_H
+#ifndef TOOLDEFAULTMOD_H
+#define TOOLDEFAULTMOD_H
 
 #include "abstracttooliterating.h"
 
-class ToolCelesteTuning: public AbstractToolIterating
+class ToolDefaultMod: public AbstractToolIterating
 {
     Q_OBJECT
 
 public:
-    ToolCelesteTuning();
+    ToolDefaultMod();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/celeste_tuning.svg";
+        return ":/tool/defaultmod.svg";
     }
 
     QString getCategory() const override
     {
-        return trUtf8("Fast editing");
+        return trUtf8("Modulators");
     }
 
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "inst:celesteTuning";
+        return "inst:default_mod";
     }
 
     /// Process an element
@@ -57,8 +57,8 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Detune");
+        return trUtf8("Override a default modulator");
     }
 };
 
-#endif // TOOLCELESTETUNING_H
+#endif // TOOLDEFAULTMOD_H

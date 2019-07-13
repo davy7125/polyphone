@@ -447,7 +447,10 @@ SOURCES	+= main.cpp \
     sound_engine/parametermodulator.cpp \
     sound_engine/modulatorgroup.cpp \
     editor/modulator/modulatorlistwidget.cpp \
-    clavier/styledslider.cpp
+    clavier/styledslider.cpp \
+    editor/tools/default_mod/tooldefaultmod.cpp \
+    editor/tools/default_mod/tooldefaultmod_parameters.cpp \
+    editor/tools/default_mod/tooldefaultmod_gui.cpp
 
 HEADERS  += \
     core/sample/infosound.h \
@@ -752,7 +755,10 @@ HEADERS  += \
     sound_engine/parametermodulator.h \
     sound_engine/modulatorgroup.h \
     core/types/modulatordata.h \
-    clavier/styledslider.h
+    clavier/styledslider.h \
+    editor/tools/default_mod/tooldefaultmod.h \
+    editor/tools/default_mod/tooldefaultmod_parameters.h \
+    editor/tools/default_mod/tooldefaultmod_gui.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -817,7 +823,8 @@ FORMS    += \
     repository/widgets/downloadprogresscell.ui \
     editor/modulator/modulatoreditor.ui \
     editor/modulator/modulatorcell.ui \
-    clavier/controllerarea.ui
+    clavier/controllerarea.ui \
+    editor/tools/default_mod/tooldefaultmod_gui.ui
 
 RESOURCES += resources.qrc
 
