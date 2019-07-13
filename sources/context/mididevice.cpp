@@ -94,7 +94,8 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
     _configuration(configuration),
     _synth(synth),
     _bendValue(64),
-    _isSustainOn(false)
+    _isSustainOn(false),
+    _isSostenutoOn(false)
 {
     // Initialize MIDI values
     _bendSensitivityValue = _configuration->getValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", 2.0).toDouble();
@@ -103,16 +104,20 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
     {
         // Default value, depending on the CC number
         int defaultValue = 64;
+        bool forceDefault = false;
         switch (i)
         {
         case 0: // Bank select
         case 1: // Modulation wheel
         case 2: // Breath controller
         case 12: case 13: // Effect controllers
-        case 4: case 64: case 65: case 66: case 67: case 68: case 69: // Pedals
         case 80: case 81: case 82: case 83: // On/Off switch
         case 91: case 92: case 93: case 94: case 95: // Effect amount
             defaultValue = 0;
+            break;
+        case 4: case 64: case 65: case 66: case 67: case 68: case 69: // Pedals
+            defaultValue = 0;
+            forceDefault = true;
             break;
         case 7: case 11: // Main volume, expression
             defaultValue = 127;
@@ -120,7 +125,9 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
         default:
             break;
         }
-        _controllerValues[i] = _configuration->getValue(ConfManager::SECTION_MIDI, "CC_" + QString("%1").arg(i, 3, 10, QChar('0')), defaultValue).toInt();
+
+        _controllerValues[i] = forceDefault ?
+                    defaultValue : _configuration->getValue(ConfManager::SECTION_MIDI, "CC_" + QString("%1").arg(i, 3, 10, QChar('0')), defaultValue).toInt();
     }
 
     // MIDI connection
@@ -251,9 +258,33 @@ void MidiDevice::processControllerChanged(int numController, int value, bool syn
         _isSustainOn = (value >= 64);
         if (!_isSustainOn)
         {
-            // Release all keys that have been sustained
-            while (_listKeysToRelease.size())
-                processKeyOff(_listKeysToRelease.takeFirst(), true);
+            // Release all keys that have been sustained by the sustained pedal
+            while (_sustainedKeys.size())
+            {
+                int key = _sustainedKeys.takeFirst();
+                if (!_isSostenutoOn || !_sostenutoMemoryKeys.contains(key))
+                    processKeyOff(key, true);
+            }
+        }
+    }
+    else if (numController == 66)
+    {
+        // Sostenuto pedal
+        if (_isSostenutoOn != (value >= 64))
+        {
+            _isSostenutoOn = (value >= 64);
+            if (!_isSostenutoOn)
+            {
+                // Release all keys that have been sustained by the sostenuto pedal
+                while (_sostenutoMemoryKeys.size())
+                {
+                    int key = _sostenutoMemoryKeys.takeFirst();
+                    if (!_isSustainOn)
+                        processKeyOff(key, true);
+                    else if (!_sustainedKeys.contains(key))
+                        _sustainedKeys << key; // Will be released later with the sustained pedal
+                }
+            }
         }
     }
     else if (numController == 101 || numController == 100 || numController == 6 || numController == 38)
@@ -293,9 +324,9 @@ void MidiDevice::processKeyOn(int key, int vel, bool syncKeyboard)
     if (_keyboard && syncKeyboard)
         _keyboard->inputNoteOn(key, vel);
 
-    // Possibly restart a note if the same key is already played
-    if (_listKeysToRelease.contains(key))
-        processKeyOff(key);
+    // Update the memory list for the sostenuto
+    if (!_isSostenutoOn && !_sostenutoMemoryKeys.contains(key))
+        _sostenutoMemoryKeys << key;
 
     // Notify about a key being played
     emit(keyPlayed(key, vel));
@@ -315,12 +346,16 @@ void MidiDevice::processKeyOff(int key, bool syncKeyboard)
         _synth->play(EltID(), -1, 0);
     else if (_isSustainOn)
     {
-        // Add the key to the list of keys to release when the pedal is released
-        if (!_listKeysToRelease.contains(key))
-            _listKeysToRelease << key;
+        // Add the key to the list of keys to release later when the pedal is released
+        if (!_sustainedKeys.contains(key))
+            _sustainedKeys << key;
     }
-    else
+    else if (!_isSostenutoOn || !_sostenutoMemoryKeys.contains(key))
     {
+        // Update the sostenuto memory
+        if (!_isSostenutoOn)
+            _sostenutoMemoryKeys.removeAll(key);
+
         // Notify about a key being not played anymore
         emit(keyPlayed(key, 0));
     }
@@ -390,8 +425,15 @@ void MidiDevice::setControllerArea(ControllerArea * controllerArea)
 void MidiDevice::stopAll()
 {
     // Release all keys sustained
-    while (_listKeysToRelease.size())
-        processKeyOff(_listKeysToRelease.takeFirst(), true);
+    _isSustainOn = false;
+    while (_sustainedKeys.size())
+        processKeyOff(_sustainedKeys.takeFirst(), true);
+    if (_isSostenutoOn)
+    {
+        _isSostenutoOn = false;
+        while (_sostenutoMemoryKeys.size())
+            processKeyOff(_sostenutoMemoryKeys.takeFirst(), true);
+    }
 
     // Reset the keyboard
     _keyboard->clearCustomization();

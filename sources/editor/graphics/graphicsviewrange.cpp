@@ -387,11 +387,9 @@ void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
             if (modifiers == Qt::ShiftModifier)
             {
                 // Select all rectangles between the previous rectangle and the new one
-                qDebug() << _shiftRectangles[0] << _shiftRectangles[1];
                 if (_shiftRectangles[0] != nullptr && _shiftRectangles[1] != nullptr)
                 {
                     QRectF shiftZone = _shiftRectangles[0]->rect().united(_shiftRectangles[1]->rect());
-                    qDebug() << _shiftRectangles[0]->rect() << _shiftRectangles[1]->rect() << shiftZone;
                     foreach (GraphicsRectangleItem * item, _rectangles)
                         item->setSelected(shiftZone.intersects(item->rect()));
                 }

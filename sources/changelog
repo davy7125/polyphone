@@ -5,6 +5,7 @@ polyphone (2.1) unstable; urgency=low
   * (new) "alt + left click" can cut samples in the graphics
   * (new) live preview of the equalizer at the sample level
   * (new) the virtual keyboard dialog can trigger various kinds of MIDI signals
+  * (new) support for the sostenuto pedal
   * (improvement) better ergonomics for editing modulators
   * (improvement) multi selection is allowed in the range editor
   * (improvement) show some of the sample information at the instrument level

@@ -32,8 +32,11 @@ class ParameterModulator;
 class ModulatorGroup
 {
 public:
-    ModulatorGroup(QMap<AttributeType, ModulatedParameter *> * parameters, bool isPrst, int key, int vel);
+    ModulatorGroup(QMap<AttributeType, ModulatedParameter *> * parameters, bool isPrst);
     ~ModulatorGroup();
+
+    // Initialize with keys and vel
+    void initialize(int initialKey, int keyForComputation, int velForComputation);
 
     // Load modulators from the instrument or preset level
     void loadModulators(QList<ModulatorData> &modulators);
@@ -46,7 +49,7 @@ private:
 
     QMap<AttributeType, ModulatedParameter *> * _parameters;
     bool _isPrst;
-    int _key, _vel;
+    int _initialKey, _keyForComputation, _velForComputation;
     QList<ParameterModulator *> _modulators;
 };
 

@@ -27,7 +27,7 @@
 #include "contextmanager.h"
 #include "utils.h"
 
-ParameterModulator::ParameterModulator(ModulatorData &modData, bool isPrst, int key, int vel) :
+ParameterModulator::ParameterModulator(ModulatorData &modData, bool isPrst, int initialKey, int keyForComputation, int velForComputation) :
     _data(modData),
     _inputNumber(0),
     _inputCount(0),
@@ -37,8 +37,9 @@ ParameterModulator::ParameterModulator(ModulatorData &modData, bool isPrst, int 
     _outputParameter(nullptr),
     _outputModulator(nullptr),
     _isPrst(isPrst),
-    _key(key),
-    _vel(vel)
+    _initialKey(initialKey),
+    _keyForComputation(keyForComputation),
+    _velForComputation(velForComputation)
 {}
 
 bool ParameterModulator::merge(ModulatorData &modData)
@@ -136,14 +137,14 @@ double ParameterModulator::getValue(SFModulator sfMod)
             value = 127;
             break;
         case GC_noteOnVelocity:
-            value = _vel;
+            value = _velForComputation;
             break;
         case GC_noteOnKeyNumber:
-            value = _key;
+            value = _keyForComputation;
             break;
         case GC_polypressure:
             // After touch by key
-            value = ContextManager::midi()->getPolyPressure(_key);
+            value = ContextManager::midi()->getPolyPressure(_initialKey);
             break;
         case GC_channelPressure:
             // After touch for the whole keyboard

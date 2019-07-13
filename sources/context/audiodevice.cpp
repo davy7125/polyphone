@@ -88,6 +88,7 @@ AudioDevice::AudioDevice(ConfManager *configuration) : QObject(nullptr),
 
 AudioDevice::~AudioDevice()
 {
+    delete _synth;
     if (_initialized)
         Pa_Terminate();
 }

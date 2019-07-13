@@ -514,12 +514,12 @@ AttributeValue Attribute::fromString(AttributeType champ, bool isPrst, QString s
         int iTmp = qRound(strValue.toDouble(&ok));
         if (iTmp != 0 && iTmp != 1 && iTmp != 3)
             iTmp = 0;
-        value.wValue = iTmp;
+        value.wValue = static_cast<quint16>(iTmp);
     }break;
     case champ_overridingRootKey: case champ_keynum: {
         int keyNum = ContextManager::keyName()->getKeyNum(strValue);
         ok = (keyNum >= -1 && keyNum <= 127);
-        value.wValue = keyNum;
+        value.shValue = static_cast<qint16>(keyNum);
     }break;
     default:
         ok = false;
@@ -540,17 +540,26 @@ QString Attribute::getDescription(AttributeType champ, bool isPrst)
     case champ_startAddrsOffset:
         result = trUtf8("Sample start offset");
         break;
+    case champ_startAddrsCoarseOffset:
+        result = trUtf8("Sample start offset (× 32768)");
+        break;
     case champ_endAddrsOffset:
         result = trUtf8("Sample end offset");
+        break;
+    case champ_endAddrsCoarseOffset:
+        result = trUtf8("Sample end offset (× 32768)");
         break;
     case champ_startloopAddrsOffset:
         result = trUtf8("Loop start offset");
         break;
+    case champ_startloopAddrsCoarseOffset:
+        result = trUtf8("Loop start offset (× 32768)");
+        break;
     case champ_endloopAddrsOffset:
         result = trUtf8("Loop end offset");
         break;
-    case champ_startAddrsCoarseOffset:
-        result = trUtf8("Sample start offset (× 32768)");
+    case champ_endloopAddrsCoarseOffset:
+        result = trUtf8("Loop end offset (× 32768)");
         break;
     case champ_modLfoToPitch:
         result = trUtf8("Mod LFO → pitch (c)");
@@ -573,9 +582,6 @@ QString Attribute::getDescription(AttributeType champ, bool isPrst)
         break;
     case champ_modEnvToFilterFc:
         result = trUtf8("Mod env → filter (c)");
-        break;
-    case champ_endAddrsCoarseOffset:
-        result = trUtf8("Sample end offset (× 32768)");
         break;
     case champ_modLfoToVolume:
         result = trUtf8("Mod LFO → volume (dB)");
@@ -670,9 +676,6 @@ QString Attribute::getDescription(AttributeType champ, bool isPrst)
     case champ_velRange:
         result = trUtf8("Velocity range");
         break;
-    case champ_startloopAddrsCoarseOffset:
-        result = trUtf8("Loop start offset (× 32768)");
-        break;
     case champ_keynum:
         result = trUtf8("Fixed key");
         break;
@@ -681,9 +684,6 @@ QString Attribute::getDescription(AttributeType champ, bool isPrst)
         break;
     case champ_initialAttenuation:
         result = trUtf8("Attenuation (dB)");
-        break;
-    case champ_endloopAddrsCoarseOffset:
-        result = trUtf8("Loop end offset (× 32768)");
         break;
     case champ_coarseTune:
         result = trUtf8("Tuning (semi-tones)");

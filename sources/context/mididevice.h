@@ -101,9 +101,10 @@ private:
     int _monoPressureValue;
     QMap<int, int> _polyPressureValues;
 
-    // Sustain pedal
-    QList<int> _listKeysToRelease;
-    bool _isSustainOn;
+    // Sustain / Sostenuto pedals
+    QList<int> _sustainedKeys;
+    QList<int> _sostenutoMemoryKeys;
+    bool _isSustainOn, _isSostenutoOn;
 };
 
 #endif // MIDIDEVICE_H

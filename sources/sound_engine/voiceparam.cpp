@@ -29,10 +29,10 @@
 
 VoiceParam::VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int key, int vel) :
     _sm(SoundfontManager::getInstance()),
-    _modulatorGroupInst(&_parameters, false, key, vel),
-    _modulatorGroupPrst(&_parameters, true, key, vel)
+    _modulatorGroupInst(&_parameters, false),
+    _modulatorGroupPrst(&_parameters, true)
 {
-    // Prepare the parameters
+    // Prepare the parameters (everything to default)
     prepareParameters();
 
     // Read sample properties and specify the default key / vel
@@ -51,16 +51,28 @@ VoiceParam::VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int key
 
     // Possibly add the configuration of the instrument level
     if (idInstSmpl.typeElement != elementUnknown)
-        readDivision(idInstSmpl);
+        readDivisionAttributes(idInstSmpl);
 
     // Possibly add the configuration of the preset level
     if (idPrstInst.typeElement != elementUnknown)
     {
-        readDivision(idPrstInst);
+        readDivisionAttributes(idPrstInst);
         _wPresetNumber = _sm->get(EltID(elementPrst, idPrstInst.indexSf2, idPrstInst.indexElt), champ_wPreset).wValue;
     }
     else
         _wPresetNumber = -1;
+
+    // Initialize the modulator groups
+    int keyForComputation = _parameters[champ_keynum]->getIntValue();
+    int velForComputation = _parameters[champ_velocity]->getIntValue();
+    _modulatorGroupInst.initialize(key, keyForComputation, velForComputation);
+    _modulatorGroupPrst.initialize(key, keyForComputation, velForComputation);
+
+    // Load modulators from the instrument and preset levels, if possible
+    if (idInstSmpl.typeElement != elementUnknown)
+        readDivisionModulators(idInstSmpl);
+    if (idPrstInst.typeElement != elementUnknown)
+        readDivisionModulators(idPrstInst);
 }
 
 VoiceParam::~VoiceParam()
@@ -152,9 +164,9 @@ void VoiceParam::readSmpl(EltID idSmpl)
     _sampleLoopEnd = static_cast<qint32>(_sm->get(idSmpl, champ_dwEndLoop).dwValue);
 }
 
-void VoiceParam::readDivision(EltID idDivision)
+void VoiceParam::readDivisionAttributes(EltID idDivision)
 {
-    bool isPrst = (idDivision.typeElement == elementPrstInst);
+    bool isPrst = idDivision.isPrst();
 
     // Load global attributes
     EltID id(isPrst ? elementPrst : elementInst, idDivision.indexSf2, idDivision.indexElt);
@@ -176,8 +188,14 @@ void VoiceParam::readDivision(EltID idDivision)
     for (int i = 0; i < divisionAttributeTypes.count(); i++)
         if (_parameters.contains(divisionAttributeTypes[i]))
             _parameters[divisionAttributeTypes[i]]->initValue(divisionAttributeValues[i], isPrst);
+}
+
+void VoiceParam::readDivisionModulators(EltID idDivision)
+{
+    bool isPrst = idDivision.isPrst();
 
     // Load global modulators
+    EltID id(isPrst ? elementPrst : elementInst, idDivision.indexSf2, idDivision.indexElt);
     QList<ModulatorData> globalModulators;
     _sm->getAllModulators(id, globalModulators);
     if (isPrst)

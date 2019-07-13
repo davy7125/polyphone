@@ -27,21 +27,27 @@
 #include "modulatedparameter.h"
 #include "parametermodulator.h"
 
-ModulatorGroup::ModulatorGroup(QMap<AttributeType, ModulatedParameter *> * parameters, bool isPrst, int key, int vel) :
+ModulatorGroup::ModulatorGroup(QMap<AttributeType, ModulatedParameter *> * parameters, bool isPrst) :
     _parameters(parameters),
-    _isPrst(isPrst),
-    _key(key),
-    _vel(vel)
+    _isPrst(isPrst)
 {
-    // Load default modulators at the instrument level
-    if (!_isPrst)
-        loadDefaultModulators();
 }
 
 ModulatorGroup::~ModulatorGroup()
 {
     while (!_modulators.empty())
         delete _modulators.takeFirst();
+}
+
+void ModulatorGroup::initialize(int initialKey, int keyForComputation, int velForComputation)
+{
+    _initialKey = initialKey;
+    _keyForComputation = keyForComputation;
+    _velForComputation = velForComputation;
+
+    // Load default modulators at the instrument level
+    if (!_isPrst)
+        loadDefaultModulators();
 }
 
 void ModulatorGroup::loadDefaultModulators()
@@ -55,70 +61,70 @@ void ModulatorGroup::loadDefaultModulators()
     modData.amtSrcOper = SFModulator();
     modData.amount = 960;
     modData.destOper = champ_initialAttenuation;
-    _modulators << new ParameterModulator(modData, false, _key, _vel);
+    _modulators << new ParameterModulator(modData, false, _initialKey, _keyForComputation, _velForComputation);
 
     // 2. MIDI Note-On Velocity to Filter Cutoff
     modData.srcOper = SFModulator(GC_noteOnVelocity, typeLinear, directionDescending, polarityUnipolar);
     modData.amtSrcOper = SFModulator();
     modData.amount = -2400;
     modData.destOper = champ_initialFilterFc;
-    _modulators << new ParameterModulator(modData, false, _key, _vel);
+    _modulators << new ParameterModulator(modData, false, _initialKey, _keyForComputation, _velForComputation);
 
     // 3. MIDI Channel Pressure to Vibrato LFO Pitch Depth
     modData.srcOper = SFModulator(GC_channelPressure, typeLinear, directionAscending, polarityUnipolar);
     modData.amtSrcOper = SFModulator();
     modData.amount = 50;
     modData.destOper = champ_vibLfoToPitch;
-    _modulators << new ParameterModulator(modData, false, _key, _vel);
+    _modulators << new ParameterModulator(modData, false, _initialKey, _keyForComputation, _velForComputation);
 
     // 4. MIDI Continuous Controller 1 to Vibrato LFO Pitch Depth
     modData.srcOper = SFModulator(1, typeLinear, directionAscending, polarityUnipolar);
     modData.amtSrcOper = SFModulator();
     modData.amount = 50;
     modData.destOper = champ_vibLfoToPitch;
-    _modulators << new ParameterModulator(modData, false, _key, _vel);
+    _modulators << new ParameterModulator(modData, false, _initialKey, _keyForComputation, _velForComputation);
 
     // 5. MIDI Continuous Controller 7 to Initial Attenuation
     modData.srcOper = SFModulator(7, typeConcave, directionDescending, polarityUnipolar);
     modData.amtSrcOper = SFModulator();
     modData.amount = 960;
     modData.destOper = champ_initialAttenuation;
-    _modulators << new ParameterModulator(modData, false, _key, _vel);
+    _modulators << new ParameterModulator(modData, false, _initialKey, _keyForComputation, _velForComputation);
 
     // 6. MIDI Continuous Controller 10 to Pan Position
     modData.srcOper = SFModulator(10, typeLinear, directionAscending, polarityBipolar);
     modData.amtSrcOper = SFModulator();
     modData.amount = 1000;
     modData.destOper = champ_pan;
-    _modulators << new ParameterModulator(modData, false, _key, _vel);
+    _modulators << new ParameterModulator(modData, false, _initialKey, _keyForComputation, _velForComputation);
 
     // 7. MIDI Continuous Controller 11 to Initial Attenuation
     modData.srcOper = SFModulator(11, typeConcave, directionDescending, polarityUnipolar);
     modData.amtSrcOper = SFModulator();
     modData.amount = 960;
     modData.destOper = champ_initialAttenuation;
-    _modulators << new ParameterModulator(modData, false, _key, _vel);
+    _modulators << new ParameterModulator(modData, false, _initialKey, _keyForComputation, _velForComputation);
 
     // 8. MIDI Continuous Controller 91 to Reverb Effects Send
     modData.srcOper = SFModulator(91, typeLinear, directionAscending, polarityUnipolar);
     modData.amtSrcOper = SFModulator();
     modData.amount = 200; // Yes, only 20% added...
     modData.destOper = champ_reverbEffectsSend;
-    _modulators << new ParameterModulator(modData, false, _key, _vel);
+    _modulators << new ParameterModulator(modData, false, _initialKey, _keyForComputation, _velForComputation);
 
     // 9. MIDI Continuous Controller 93 to Chorus Effects Send
     modData.srcOper = SFModulator(93, typeLinear, directionAscending, polarityUnipolar);
     modData.amtSrcOper = SFModulator();
     modData.amount = 200;
     modData.destOper = champ_chorusEffectsSend;
-    _modulators << new ParameterModulator(modData, false, _key, _vel);
+    _modulators << new ParameterModulator(modData, false, _initialKey, _keyForComputation, _velForComputation);
 
     // 10. MIDI Pitch Wheel to Initial Pitch Controlled by MIDI Pitch Wheel Sensitivity
     modData.srcOper = SFModulator(GC_pitchWheel, typeLinear, directionAscending, polarityBipolar);
     modData.amtSrcOper = SFModulator(GC_pitchWheelSensitivity, typeLinear, directionAscending, polarityUnipolar);
     modData.amount = 12700;
     modData.destOper = champ_fineTune;
-    _modulators << new ParameterModulator(modData, false, _key, _vel);
+    _modulators << new ParameterModulator(modData, false, _initialKey, _keyForComputation, _velForComputation);
 }
 
 void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
@@ -139,7 +145,7 @@ void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
 
         // Or create another one
         if (!overwritten)
-            _modulators << new ParameterModulator(modData, _isPrst, _key, _vel);
+            _modulators << new ParameterModulator(modData, _isPrst, _initialKey, _keyForComputation, _velForComputation);
     }
 
     // Link outputs
