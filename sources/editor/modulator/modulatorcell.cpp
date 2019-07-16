@@ -38,7 +38,8 @@ ModulatorCell::ModulatorCell(EltID id, QWidget *parent) :
     _isSelected(false),
     _id(id),
     _isPrst(id.isPrst()),
-    _sm(SoundfontManager::getInstance())
+    _sm(SoundfontManager::getInstance()),
+    _overridenBy(false)
 {
     ui->setupUi(this);
 
@@ -46,16 +47,15 @@ ModulatorCell::ModulatorCell(EltID id, QWidget *parent) :
     this->initializeStyle();
 
     // Current number
-    int modCount = 0;
+    int currentNumber = 0;
     foreach (int i, SoundfontManager::getInstance()->getSiblings(id))
     {
         if (i == _id.indexMod)
-        {
-            ui->labelModNumber->setText(trUtf8("Modulator") + "\n#" + QString::number(modCount + 1));
             break;
-        }
-        modCount++;
+        currentNumber++;
     }
+    ui->labelModNumber->setText(trUtf8("Modulator") + "<br/>#" + QString::number(currentNumber + 1));
+    ui->labelDetails->hide();
 
     // Comboboxes
     ui->comboSource1->initialize(id, true);
@@ -86,7 +86,8 @@ ModulatorCell::ModulatorCell(ModulatorData modulatorData, QWidget * parent) :
     _isSelected(false),
     _id(elementUnknown),
     _isPrst(false),
-    _sm(nullptr)
+    _sm(nullptr),
+    _overridenBy(false)
 {
     ui->setupUi(this);
 
@@ -94,7 +95,8 @@ ModulatorCell::ModulatorCell(ModulatorData modulatorData, QWidget * parent) :
     this->initializeStyle();
 
     // Load data
-    ui->labelModNumber->setText(trUtf8("Default mod.") + "\n#" + QString::number(modulatorData.index + 1));
+    ui->labelModNumber->setText(trUtf8("Default mod.") + "<br/>#" + QString::number(modulatorData.index + 1));
+    ui->labelDetails->hide();
     ui->spinAmount->setValue(modulatorData.amount);
     ui->comboSource1->initialize(modulatorData.srcOper);
     ui->widgetShape1->initialize(modulatorData.srcOper);
@@ -139,6 +141,36 @@ void ModulatorCell::initializeStyle()
     ui->labelFinalRange->setFont(_fontHint);
 }
 
+void ModulatorCell::setOverridenBy(int otherModulator)
+{
+    _overridenBy = true;
+    setSelected(_isSelected);
+    ui->labelDetails->setText(trUtf8("overriden by %1").arg(otherModulator + 1));
+    ui->labelDetails->show();
+}
+
+void ModulatorCell::setOverridingDefault()
+{
+    ui->labelDetails->setText(trUtf8("overriding\ndefault mod."));
+    ui->labelDetails->show();
+}
+
+void ModulatorCell::setSelected(bool isSelected)
+{
+    // Save the selected state
+    _isSelected = isSelected;
+
+    // Load all possible colors
+    QString colorRed = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND).name();
+    QString colorSelected = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
+    QString colorNormal = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name();
+
+    ui->labelModNumber->setStyleSheet(QString("QLabel{color:%1}").arg(_isSelected ? colorSelected : colorNormal));
+    ui->labelFinalRange->setStyleSheet(QString("QLabel{color:%1}").arg(_isSelected ? colorSelected : colorNormal));
+    ui->labelDetails->setStyleSheet(QString("QLabel{color:%1}").arg(
+                                        _isSelected ? colorSelected : (_overridenBy ? colorRed : colorNormal)));
+}
+
 ModulatorCell::~ModulatorCell()
 {
     delete ui;
@@ -165,17 +197,6 @@ ModulatorData ModulatorCell::getModulatorData()
     mod.destOper = static_cast<quint16>(ui->comboDestination->getCurrentAttribute());
 
     return mod;
-}
-
-void ModulatorCell::setSelected(bool isSelected)
-{
-    _isSelected = isSelected;
-    QString labelStyleSheet = "QLabel{color:" +
-            ContextManager::theme()->getColor(isSelected ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::LIST_TEXT).name() +
-            "}";
-
-    ui->labelModNumber->setStyleSheet(labelStyleSheet);
-    ui->labelFinalRange->setStyleSheet(labelStyleSheet);
 }
 
 void ModulatorCell::paintEvent(QPaintEvent* event)

@@ -108,6 +108,15 @@ public:
     SFTransform transOper;
     qint16 amount;
     quint16 index; // Global index of the modulator that may be referenced by others
+
+    bool operator== (ModulatorData &other)
+    {
+        // Everything equal except "amount" and "index"
+        return srcOper.toWord() == other.srcOper.toWord() &&
+                amtSrcOper.toWord() == other.amtSrcOper.toWord() &&
+                transOper == other.transOper &&
+                destOper == other.destOper;
+    }
 } ;
 
 #endif // MODULATORDATA_H

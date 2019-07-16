@@ -212,6 +212,9 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes)
         // Modulator count
         modCount++;
     }
+
+    // Display "overriding default mod."
+    checkOverrides();
     ui->stackedWidget->setCurrentIndex(modCount == 0 ? 0 : 2);
 
     // Fill the summary
@@ -238,6 +241,48 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes)
     // Button visibility
     ui->pushClone->setEnabled(modCount > 0 && (_currentId.typeElement == elementInst || _currentId.typeElement == elementPrst));
     ui->pushCopy->setEnabled(modCount > 0);
+}
+
+void ModulatorEditor::checkOverrides()
+{
+    // List of default mods
+    QVector<ModulatorData> defaultMods(10);
+    for (quint16 i = 0; i < 10; i++)
+        defaultMods[i].loadDefaultModulator(i);
+
+    // Browse all cells
+    QList<ModulatorCell*> _cells;
+    QList<ModulatorData> _mods;
+    for (int i = 0; i < ui->listWidget->count(); i++)
+    {
+        // Get the mod
+        QListWidgetItem * item = ui->listWidget->item(i);
+        ModulatorCell * cell = dynamic_cast<ModulatorCell *>(ui->listWidget->itemWidget(item));
+        ModulatorData mod = cell->getModulatorData();
+
+        // Test if previous mods are overriden
+        for (int j = _mods.count() - 1; j >= 0; j--)
+        {
+            if (_mods[j] == mod)
+            {
+                _cells[j]->setOverridenBy(i);
+                break;
+            }
+        }
+
+        // Test if the mod is overriding a default mod
+        for (int j = 0; j < 10; j++)
+        {
+            if (mod == defaultMods[j])
+            {
+                cell->setOverridingDefault();
+                break;
+            }
+        }
+
+        _mods << mod;
+        _cells << cell;
+    }
 }
 
 void ModulatorEditor::on_listWidget_itemSelectionChanged()

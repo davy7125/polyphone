@@ -59,6 +59,7 @@ private slots:
     void duplicateMod(QList<int> listIndex);
 
 private:
+    void checkOverrides();
     void updateInterface(QList<AttributeType> attributes);
     void updateButtons(bool withSelection);
     QList<EltID> getSelectedModulators();
