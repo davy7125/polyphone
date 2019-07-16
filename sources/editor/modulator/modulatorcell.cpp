@@ -151,7 +151,10 @@ void ModulatorCell::setOverridenBy(int otherModulator)
 
 void ModulatorCell::setOverridingDefault()
 {
-    ui->labelDetails->setText(trUtf8("overriding\ndefault mod."));
+    if (ui->spinAmount->value() == 0)
+        ui->labelDetails->setText(trUtf8("disabling\ndefault mod."));
+    else
+        ui->labelDetails->setText(trUtf8("overriding\ndefault mod."));
     ui->labelDetails->show();
 }
 
