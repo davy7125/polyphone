@@ -34,5 +34,32 @@ ToolDefaultMod::ToolDefaultMod() : AbstractToolIterating (elementInst, new ToolD
 
 void ToolDefaultMod::process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters)
 {
-    Q_UNUSED(parameters)
+    // Get the parameters
+    ToolDefaultMod_parameters * params = dynamic_cast<ToolDefaultMod_parameters *>(parameters);
+    QList<ModulatorData> mods = params->getModulators();
+
+    // For each element
+    id.typeElement = elementInstMod;
+    AttributeValue value;
+    foreach (ModulatorData mod, mods)
+    {
+        // Create a modulator
+        id.indexMod = sm->add(id);
+
+        // Configure it
+        value.sfModValue = mod.srcOper;
+        sm->set(id, champ_sfModSrcOper, value);
+
+        value.sfModValue = mod.amtSrcOper;
+        sm->set(id, champ_sfModAmtSrcOper, value);
+
+        value.shValue = mod.amount;
+        sm->set(id, champ_modAmount, value);
+
+        value.sfTransValue = mod.transOper;
+        sm->set(id, champ_sfModTransOper, value);
+
+        value.wValue = mod.destOper;
+        sm->set(id, champ_sfModDestOper, value);
+    }
 }

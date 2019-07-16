@@ -35,18 +35,6 @@ enum ModType: unsigned char
     typeSwitch = 3
 };
 
-enum ModDirection: bool
-{
-    directionAscending = 0,
-    directionDescending = 1
-};
-
-enum ModPolarity: bool
-{
-    polarityUnipolar = 0,
-    polarityBipolar = 1
-};
-
 enum GeneralController: unsigned char
 {
     GC_noController = 0,
@@ -62,53 +50,36 @@ enum GeneralController: unsigned char
 class SFModulator
 {
 public:
-    SFModulator(GeneralController index, ModType type, ModDirection direction, ModPolarity polarity) :
+    SFModulator(GeneralController index, ModType type, bool direction, bool polarity) :
         Type(type),
-        P(polarity),
-        D(direction),
+        isBipolar(polarity),
+        isDescending(direction),
         CC(false),
         Index(static_cast<quint8>(index))
     {}
 
-    SFModulator(quint8 ccNumber, ModType type, ModDirection direction, ModPolarity polarity) :
+    SFModulator(quint8 ccNumber, ModType type, bool direction, bool polarity) :
         Type(type),
-        P(polarity),
-        D(direction),
+        isBipolar(polarity),
+        isDescending(direction),
         CC(true),
         Index(ccNumber)
     {}
 
     SFModulator() :
         Type(typeLinear),
-        P(polarityUnipolar),
-        D(directionAscending),
+        isBipolar(false),
+        isDescending(false),
         CC(false),
         Index(0)
     {}
 
-    bool operator==(const SFModulator& other)
-    {
-        return this->Type == other.Type &&
-                this->P == other.P &&
-                this->D == other.D &&
-                this->CC == other.CC &&
-                this->Index == other.Index;
-    }
-
-    quint16 toWord()
-    {
-        //    quint16
-        //        Type  : 6, // 6 bits for the type
-        //        P     : 1, // Polarity
-        //        D     : 1, // Direction
-        //        CC    : 1,
-        //        Index : 7;
-        return ((Type << 10) + (P << 9) + (D << 8) + (CC << 7) + Index) & 0xFFFF;
-    }
+    bool operator==(const SFModulator& other);
+    quint16 toWord();
 
     quint8 Type : 6;
-    ModPolarity P : 1;
-    ModDirection D : 1;
+    bool isBipolar : 1;
+    bool isDescending : 1;
     bool CC : 1;
     quint8 Index : 7;
 };
@@ -119,14 +90,24 @@ typedef enum
     absolute_value = 2
 } SFTransform;
 
-typedef struct
+class ModulatorData
 {
+public:
+    ModulatorData() :
+        destOper(0),
+        amount(0),
+        index(0)
+    {}
+
+    // Load a default modulator (num being from 0 to 9 included)
+    void loadDefaultModulator(quint16 num);
+
     SFModulator srcOper;
     quint16 destOper; // One of the AttributeType if < 32768, otherwise the index of another modulator
     SFModulator amtSrcOper;
     SFTransform transOper;
     qint16 amount;
     quint16 index; // Global index of the modulator that may be referenced by others
-} ModulatorData;
+} ;
 
 #endif // MODULATORDATA_H

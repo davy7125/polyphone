@@ -27,10 +27,10 @@
 
 void ToolDefaultMod_parameters::loadConfiguration()
 {
-
+    // Nothing to load
 }
 
 void ToolDefaultMod_parameters::saveConfiguration()
 {
-
+    // Nothing to save
 }

@@ -34,7 +34,7 @@ ToolCelesteTuning::ToolCelesteTuning() : AbstractToolIterating(elementInst, new 
 
 void ToolCelesteTuning::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
-    ToolCelesteTuning_parameters * params = (ToolCelesteTuning_parameters *)parameters;
+    ToolCelesteTuning_parameters * params = dynamic_cast<ToolCelesteTuning_parameters *>(parameters);
 
     // For each linked element
     id.typeElement = elementInstSmpl;

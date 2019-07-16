@@ -450,7 +450,8 @@ SOURCES	+= main.cpp \
     clavier/styledslider.cpp \
     editor/tools/default_mod/tooldefaultmod.cpp \
     editor/tools/default_mod/tooldefaultmod_parameters.cpp \
-    editor/tools/default_mod/tooldefaultmod_gui.cpp
+    editor/tools/default_mod/tooldefaultmod_gui.cpp \
+    core/types/modulatordata.cpp
 
 HEADERS  += \
     core/sample/infosound.h \

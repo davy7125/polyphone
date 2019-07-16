@@ -45,8 +45,16 @@ public:
     /// Save the parameters based on the interface
     void saveParameters(AbstractToolParameters * parameters) override;
 
+private slots:
+    void on_pushCancel_clicked();
+    void on_pushOverride_clicked();
+    void on_pushDisable_clicked();
+    void on_listWidget_itemSelectionChanged();
+
 private:
     Ui::ToolDefaultMod_gui *ui;
+    bool _initialized;
+    bool _isActionDisable;
 };
 
 #endif // TOOLDEFAULTMOD_GUI_H

@@ -68,6 +68,14 @@ void ModulatorComboSrc::initialize(EltID id, bool source1)
     loadValue();
 }
 
+void ModulatorComboSrc::initialize(SFModulator mod)
+{
+    _id.typeElement = elementUnknown;
+
+    // Just load one value (default modulator)
+    this->addItem(getIndexName(mod.Index, mod.CC), mod.CC ? "CC#" + QString::number(mod.Index) : QString::number(mod.Index));
+}
+
 void ModulatorComboSrc::loadValue()
 {
     this->blockSignals(true);
@@ -141,6 +149,9 @@ bool ModulatorComboSrc::isCC()
 
 void ModulatorComboSrc::onCurrentIndexChanged(int index)
 {
+    if (_id.typeElement == elementUnknown)
+        return;
+
     // New value
     bool isCC = this->isCC();
     index = this->getIndex();
@@ -169,7 +180,7 @@ void ModulatorComboSrc::onCurrentIndexChanged(int index)
             }
         }
 
-        val.sfModValue.Index = index;
+        val.sfModValue.Index = static_cast<quint8>(index);
         val.sfModValue.CC = isCC;
         sm->set(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper, val);
         sm->endEditing("modulatorEditor");

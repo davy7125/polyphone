@@ -173,18 +173,18 @@ double ParameterModulator::getValue(SFModulator sfMod)
         value /= 127.0;
 
         // Possibly from 1 to 0 instead of 0 to 1
-        if (sfMod.D)
+        if (sfMod.isDescending)
             value = 1.0 - value;
 
         // Possibly from -1 to 1 instead of 0 to 1
-        if (sfMod.P)
+        if (sfMod.isBipolar)
             value = 2.0 * value - 1.0;
 
         break;
     case typeConcave:
-        if (sfMod.D)
+        if (sfMod.isDescending)
         {
-            if (sfMod.P)
+            if (sfMod.isBipolar)
                 // Concave, bipolar, negative
                 value = (value > 64) ? -Utils::concave(2 * (value - 64)) : Utils::concave(2 * (64 - value));
             else
@@ -193,7 +193,7 @@ double ParameterModulator::getValue(SFModulator sfMod)
         }
         else
         {
-            if (sfMod.P)
+            if (sfMod.isBipolar)
                 // Concave, bipolar, positive
                 value = (value > 64) ? Utils::concave(2 * (value - 64)) : -Utils::concave(2 * (64 - value));
             else
@@ -202,9 +202,9 @@ double ParameterModulator::getValue(SFModulator sfMod)
         }
         break;
     case typeConvex:
-        if (sfMod.D)
+        if (sfMod.isDescending)
         {
-            if (sfMod.P)
+            if (sfMod.isBipolar)
                 // Convex, bipolar, negative
                 value = (value > 64) ? -Utils::convex(2 * (value - 64)) : Utils::convex(2 * (64 - value));
             else
@@ -213,7 +213,7 @@ double ParameterModulator::getValue(SFModulator sfMod)
         }
         else
         {
-            if (sfMod.P)
+            if (sfMod.isBipolar)
                 // Convex, bipolar, positive
                 value = (value > 64) ? Utils::convex(2 * (value - 64)) : -Utils::convex(2 * (64 - value));
             else
@@ -226,11 +226,11 @@ double ParameterModulator::getValue(SFModulator sfMod)
         value = (value >= 64 ? 1.0 : 0.0);
 
         // Possibly from 1 to 0 instead of 0 to 1
-        if (sfMod.D)
+        if (sfMod.isDescending)
             value = 1.0 - value;
 
         // Possibly from -1 to 1 instead of 0 to 1
-        if (sfMod.P)
+        if (sfMod.isBipolar)
             value = 2.0 * value - 1.0;
 
         break;

@@ -25,6 +25,7 @@
 
 #include "modulatorlistwidget.h"
 #include "modulatorcell.h"
+#include <QKeyEvent>
 
 ModulatorListWidget::ModulatorListWidget(QWidget * parent) : QListWidget(parent)
 {
@@ -42,4 +43,33 @@ void ModulatorListWidget::onSelectionChanged()
         // Inform them whether they are selected or not
         cell->setSelected(item->isSelected());
     }
+}
+
+
+void ModulatorListWidget::keyPressEvent(QKeyEvent * event)
+{
+    if (event->key() == Qt::Key_Delete)
+        emit(deleted());
+    else if (event->key() == Qt::Key_C && (event->modifiers() & Qt::ControlModifier))
+        emit(copied());
+    else if (event->key() == Qt::Key_V && (event->modifiers() & Qt::ControlModifier))
+        emit(pasted());
+}
+
+QList<ModulatorData> ModulatorListWidget::getSelectedModulators()
+{
+    QList<ModulatorData> result;
+
+    // Browse the list of cells
+    for (int i = 0; i < this->count(); i++)
+    {
+        QListWidgetItem * item = this->item(i);
+        ModulatorCell * cell = dynamic_cast<ModulatorCell*>(this->itemWidget(item));
+
+        // Get the modulator data if the cell is selected
+        if (item->isSelected())
+            result << cell->getModulatorData();
+    }
+
+    return result;
 }

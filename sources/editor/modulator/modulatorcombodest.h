@@ -38,6 +38,7 @@ public:
 
     // Initialize the combobox
     void initialize(EltID id);
+    void initialize(quint16 index);
 
     // Load value
     void loadValue();

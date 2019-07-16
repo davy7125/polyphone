@@ -27,7 +27,7 @@
 #define MODULATORLISTWIDGET_H
 
 #include <QListWidget>
-#include <QKeyEvent>
+#include "basetypes.h"
 
 class ModulatorListWidget : public QListWidget
 {
@@ -36,21 +36,16 @@ class ModulatorListWidget : public QListWidget
 public:
     ModulatorListWidget(QWidget * parent = nullptr);
 
+    // Get all modulators that have been selected
+    QList<ModulatorData> getSelectedModulators();
+
 signals:
     void pasted();
     void copied();
     void deleted();
 
 protected:
-    void keyPressEvent(QKeyEvent * event)
-    {
-        if (event->key() == Qt::Key_Delete)
-            emit(deleted());
-        else if (event->key() == Qt::Key_C && (event->modifiers() & Qt::ControlModifier))
-            emit(copied());
-        else if (event->key() == Qt::Key_V && (event->modifiers() & Qt::ControlModifier))
-            emit(pasted());
-    }
+    void keyPressEvent(QKeyEvent * event);
 
 private slots:
     void onSelectionChanged();

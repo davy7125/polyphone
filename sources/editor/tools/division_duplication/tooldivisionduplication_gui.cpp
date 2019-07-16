@@ -42,7 +42,7 @@ ToolDivisionDuplication_gui::~ToolDivisionDuplication_gui()
 void ToolDivisionDuplication_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
 {
     _isInst = (ids.isEmpty() || ids[0].typeElement == elementInst || ids[0].typeElement == elementInstSmpl);
-    ToolDivisionDuplication_parameters * params = (ToolDivisionDuplication_parameters *) parameters;
+    ToolDivisionDuplication_parameters * params = dynamic_cast<ToolDivisionDuplication_parameters *>(parameters);
 
     // Recall values
     _listeVelocites = _isInst ? params->getInstVelocityRanges() : params->getPrstVelocityRanges();

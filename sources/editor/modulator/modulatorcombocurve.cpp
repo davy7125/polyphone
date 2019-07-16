@@ -107,32 +107,49 @@ void ModulatorComboCurve::initialize(EltID id, bool source1)
     loadValue();
 }
 
+void ModulatorComboCurve::initialize(SFModulator mod)
+{
+    _id.typeElement = elementUnknown;
+
+    _isBipolar = mod.isBipolar;
+    _isDescending = mod.isDescending;
+    _type = mod.Type;
+
+    this->setCurrentIndex(_type);
+    this->setModelColumn((_isDescending ? 1 : 0) + (_isBipolar ? 2 : 0));
+}
+
 void ModulatorComboCurve::loadValue()
 {
     SoundfontManager * sm = SoundfontManager::getInstance();
-    SFModulator sfMod = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper).sfModValue;
-    int iTmp = sfMod.D + 2 * sfMod.P + 4 * sfMod.Type;
-    _isBipolar = sfMod.P;
-    _isDescending = sfMod.D;
-    this->setCurrentIndex(iTmp / 4);
-    this->setModelColumn(iTmp % 4);
+    SFModulator mod = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper).sfModValue;
+
+    _isBipolar = mod.isBipolar;
+    _isDescending = mod.isDescending;
+    _type = mod.Type;
+
+    this->setCurrentIndex(_type);
+    this->setModelColumn((_isDescending ? 1 : 0) + (_isBipolar ? 2 : 0));
 }
 
 void ModulatorComboCurve::valueSelected(int row, int column)
 {
-    _isDescending = column % 2;
-    _isBipolar = column / 2;
-    int type = row;
+    if (_id.typeElement == elementUnknown)
+        return;
+
+    _isDescending = (column % 2 > 0);
+    _isBipolar = (column / 2 > 0);
+    _type = static_cast<quint8>(row);
 
     // Compare with the old value
     SoundfontManager * sm = SoundfontManager::getInstance();
     AttributeValue val;
     val.sfModValue = sm->get(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper).sfModValue;
-    if (val.sfModValue.D != _isDescending || val.sfModValue.P != _isBipolar || val.sfModValue.Type != type)
+    if (val.sfModValue.isDescending != _isDescending || val.sfModValue.isBipolar != _isBipolar || val.sfModValue.Type != _type)
     {
-        val.sfModValue.D = static_cast<ModDirection>(_isDescending);
-        val.sfModValue.P = static_cast<ModPolarity>(_isBipolar);
-        val.sfModValue.Type = static_cast<quint8>(type);
+        val.sfModValue.isDescending = _isDescending;
+        val.sfModValue.isBipolar = _isBipolar;
+        val.sfModValue.Type = static_cast<quint8>(_type);
 
         sm->set(_id, _source1 ? champ_sfModSrcOper : champ_sfModAmtSrcOper, val);
         sm->endEditing("modulatorEditor");

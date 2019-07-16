@@ -37,28 +37,13 @@ ModulatorCell::ModulatorCell(EltID id, QWidget *parent) :
     ui(new Ui::ModulatorCell),
     _isSelected(false),
     _id(id),
+    _isPrst(id.isPrst()),
     _sm(SoundfontManager::getInstance())
 {
     ui->setupUi(this);
 
     // Style
-    _labelColor = ThemeManager::mix(
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                0.75);
-    _computationAreaColor = ThemeManager::mix(
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                0.35);
-    _labelColorSelected = ThemeManager::mix(
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                0.25);
-    _computationAreaColorSelected = ThemeManager::mix(
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                0.65);
-    _fontHint = QFont(this->font().family(), this->font().pointSize() * 3 / 4);
+    this->initializeStyle();
 
     // Current number
     int modCount = 0;
@@ -92,13 +77,94 @@ ModulatorCell::ModulatorCell(EltID id, QWidget *parent) :
     ui->comboTransform->setCurrentIndex(SoundfontManager::getInstance()->get(id, champ_sfModTransOper).wValue == 2 ? 1 : 0);
 
     // Compute the range
-    ui->labelFinalRange->setFont(_fontHint);
     onOutputChanged(-1);
+}
+
+ModulatorCell::ModulatorCell(ModulatorData modulatorData, QWidget * parent) :
+    QWidget(parent),
+    ui(new Ui::ModulatorCell),
+    _isSelected(false),
+    _id(elementUnknown),
+    _isPrst(false),
+    _sm(nullptr)
+{
+    ui->setupUi(this);
+
+    // Style
+    this->initializeStyle();
+
+    // Load data
+    ui->labelModNumber->setText(trUtf8("Default mod.") + "\n#" + QString::number(modulatorData.index + 1));
+    ui->spinAmount->setValue(modulatorData.amount);
+    ui->comboSource1->initialize(modulatorData.srcOper);
+    ui->widgetShape1->initialize(modulatorData.srcOper);
+    ui->comboSource2->initialize(modulatorData.amtSrcOper);
+    ui->widgetShape2->initialize(modulatorData.amtSrcOper);
+    ui->comboTransform->setCurrentIndex(modulatorData.transOper == 2 ? 1 : 0);
+    ui->comboDestination->initialize(modulatorData.destOper);
+
+    // Disable elements
+    ui->comboSource1->setEnabled(false);
+    ui->widgetShape1->setEnabled(false);
+    ui->comboSource2->setEnabled(false);
+    ui->widgetShape2->setEnabled(false);
+    ui->spinAmount->setEnabled(false);
+    ui->comboTransform->setEnabled(false);
+    ui->comboDestination->setEnabled(false);
+
+    // Compute the range
+    onOutputChanged(-1);
+}
+
+void ModulatorCell::initializeStyle()
+{
+    // Style
+    _labelColor = ThemeManager::mix(
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+                0.75);
+    _computationAreaColor = ThemeManager::mix(
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+                0.35);
+    _labelColorSelected = ThemeManager::mix(
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+                0.25);
+    _computationAreaColorSelected = ThemeManager::mix(
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+                0.65);
+    _fontHint = QFont(this->font().family(), qMax(7, this->font().pointSize() * 3 / 4));
+    ui->labelFinalRange->setFont(_fontHint);
 }
 
 ModulatorCell::~ModulatorCell()
 {
     delete ui;
+}
+
+ModulatorData ModulatorCell::getModulatorData()
+{
+    ModulatorData mod;
+
+    mod.srcOper.CC = ui->comboSource1->isCC();
+    mod.srcOper.Index = static_cast<quint8>(ui->comboSource1->getIndex());
+    mod.srcOper.Type = ui->widgetShape1->getType();
+    mod.srcOper.isBipolar = ui->widgetShape1->isBipolar();
+    mod.srcOper.isDescending = ui->widgetShape1->isDescending();
+
+    mod.amtSrcOper.CC = ui->comboSource2->isCC();
+    mod.amtSrcOper.Index = static_cast<quint8>(ui->comboSource2->getIndex());
+    mod.amtSrcOper.Type = ui->widgetShape2->getType();
+    mod.amtSrcOper.isBipolar = ui->widgetShape2->isBipolar();
+    mod.amtSrcOper.isDescending = ui->widgetShape2->isDescending();
+
+    mod.amount = static_cast<qint16>(ui->spinAmount->value());
+    mod.transOper = ui->comboTransform->currentIndex() == 0 ? linear : absolute_value;
+    mod.destOper = static_cast<quint16>(ui->comboDestination->getCurrentAttribute());
+
+    return mod;
 }
 
 void ModulatorCell::setSelected(bool isSelected)
@@ -136,9 +202,9 @@ void ModulatorCell::paintEvent(QPaintEvent* event)
     // Add input range
     p.setFont(_fontHint);
     p.drawText(ui->widgetShape1->x() + ui->widgetShape1->width() + 2, ui->comboSource1->y() + ui->comboSource1->height() / 2 + 5 + _fontHint.pointSize(),
-               ui->comboSource1->currentIndex() == 0 ? "1" : ui->widgetShape1->getEvolution());
+               ui->comboSource1->isOne() ? "1" : ui->widgetShape1->getEvolution());
     p.drawText(ui->widgetShape2->x() + ui->widgetShape2->width() + 2, ui->comboSource2->y() + ui->comboSource2->height() / 2 + 5 + _fontHint.pointSize(),
-               ui->comboSource2->currentIndex() == 0 ? "1" : ui->widgetShape2->getEvolution());
+               ui->comboSource2->isOne() ? "1" : ui->widgetShape2->getEvolution());
 
     // Add output range
     p.drawText(ui->spinAmount->x(), ui->spinAmount->y() + ui->spinAmount->height() + 5 + _fontHint.pointSize(), _intRange);
@@ -164,6 +230,9 @@ AttributeType ModulatorCell::getTargetAttribute()
 
 void ModulatorCell::on_spinAmount_editingFinished()
 {
+    if (_sm == nullptr)
+        return;
+
     // Compare with the old value
     AttributeValue val;
     val.shValue = static_cast<qint16>(ui->spinAmount->value());
@@ -176,6 +245,9 @@ void ModulatorCell::on_spinAmount_editingFinished()
 
 void ModulatorCell::on_comboTransform_currentIndexChanged(int index)
 {
+    if (_sm == nullptr)
+        return;
+
     // Compare with the old value
     AttributeValue val;
     if (index == 1)
@@ -194,8 +266,8 @@ void ModulatorCell::onOutputChanged(int dummy)
     Q_UNUSED(dummy)
 
     // Compute min / max as integer
-    qint16 min1 = (ui->comboSource1->currentIndex() == 0 ? 1 : (ui->widgetShape1->isBipolar() ? -1 : 0));
-    qint16 min2 = (ui->comboSource2->currentIndex() == 0 ? 1 : (ui->widgetShape2->isBipolar() ? -1 : 0));
+    qint16 min1 = (ui->comboSource1->isOne() ? 1 : (ui->widgetShape1->isBipolar() ? -1 : 0));
+    qint16 min2 = (ui->comboSource2->isOne() ? 1 : (ui->widgetShape2->isBipolar() ? -1 : 0));
     qint16 max = static_cast<qint16>(ui->spinAmount->value());
     qint16 min = max * qMin(min1, min2);
     if (ui->comboTransform->currentIndex() == 1 && min < 0)
@@ -211,9 +283,9 @@ void ModulatorCell::onOutputChanged(int dummy)
     // Compute the new range in double
     AttributeValue val;
     val.shValue = min;
-    double dMin = Attribute::toRealValue(ui->comboDestination->getCurrentAttribute(), _id.isPrst(), val);
+    double dMin = Attribute::toRealValue(ui->comboDestination->getCurrentAttribute(), _isPrst, val);
     val.shValue = max;
-    double dMax = Attribute::toRealValue(ui->comboDestination->getCurrentAttribute(), _id.isPrst(), val);
+    double dMax = Attribute::toRealValue(ui->comboDestination->getCurrentAttribute(), _isPrst, val);
 
     // Addition or multiplication?
     bool isAddition = true;

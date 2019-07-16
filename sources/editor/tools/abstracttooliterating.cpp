@@ -159,20 +159,30 @@ void AbstractToolIterating::onElementProcessed()
     if (_waitingDialog == nullptr)
         return; // Just in case
 
-    _waitingDialog->setValue(++_currentStep);
-    if (_currentStep >= _steps)
+    if (_canceled)
     {
         delete _waitingDialog;
         _waitingDialog = nullptr;
-        if (_canceled)
+
+        // Revert everything that has been done until now
+        SoundfontManager::getInstance()->revertNewEditing();
+        emit(finished(false));
+    }
+    else
+    {
+        _waitingDialog->setValue(++_currentStep);
+        if (_currentStep >= _steps)
         {
-            SoundfontManager::getInstance()->revertNewEditing();
-            emit(finished(false));
+            delete _waitingDialog;
+            _waitingDialog = nullptr;
+             emit(finished(true));
         }
-        else
-            emit(finished(true));
-    } else if (!_idsToProcess.empty())
-        QThreadPool::globalInstance()->start(new RunnableTool(_sm, this, _idsToProcess.takeFirst(), _parameters));
+        else if (!_async && !_idsToProcess.empty())
+        {
+            QThreadPool::globalInstance()->start(new RunnableTool(_sm, this, _idsToProcess.takeFirst(), _parameters));
+        }
+    }
+
 }
 
 void AbstractToolIterating::onCancel()

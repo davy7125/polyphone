@@ -42,7 +42,7 @@ ToolCelesteTuning_gui::~ToolCelesteTuning_gui()
 void ToolCelesteTuning_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
 {
     Q_UNUSED(ids)
-    ToolCelesteTuning_parameters * params = (ToolCelesteTuning_parameters *) parameters;
+    ToolCelesteTuning_parameters * params = dynamic_cast<ToolCelesteTuning_parameters *>(parameters);
 
     // Load parameters
     ui->doubleSpinHerz->setValue(params->getBaseFrequency());
@@ -52,7 +52,7 @@ void ToolCelesteTuning_gui::updateInterface(AbstractToolParameters * parameters,
 
 void ToolCelesteTuning_gui::saveParameters(AbstractToolParameters * parameters)
 {
-    ToolCelesteTuning_parameters * params = (ToolCelesteTuning_parameters *) parameters;
+    ToolCelesteTuning_parameters * params = dynamic_cast<ToolCelesteTuning_parameters *>(parameters);
 
     // Save current parameters
     params->setBaseFrequency(ui->doubleSpinHerz->value());

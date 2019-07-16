@@ -39,13 +39,22 @@ class ModulatorCell : public QWidget
     Q_OBJECT
 
 public:
-    explicit ModulatorCell(EltID id, QWidget *parent = nullptr);
+    // Initialization based on an existing id
+    ModulatorCell(EltID id, QWidget *parent = nullptr);
+
+    // Initialization based on a default modulator
+    ModulatorCell(ModulatorData modulatorData, QWidget * parent = nullptr);
+
     ~ModulatorCell();
 
     AttributeType getTargetAttribute();
     EltID getID() { return _id; }
 
+    // Inform the cell that it's been selected (the colors will change)
     void setSelected(bool isSelected);
+
+    // Get the modulator as configured in the cell
+    ModulatorData getModulatorData();
 
 protected:
     void paintEvent(QPaintEvent* event);
@@ -56,12 +65,15 @@ private slots:
     void onOutputChanged(int dummy);
 
 private:
+    void initializeStyle();
+
     Ui::ModulatorCell *ui;
     QColor _computationAreaColor, _computationAreaColorSelected;
     QColor _labelColor, _labelColorSelected;
     bool _isSelected;
     QFont _fontHint;
     EltID _id;
+    bool _isPrst;
     SoundfontManager * _sm;
     QString _intRange;
 

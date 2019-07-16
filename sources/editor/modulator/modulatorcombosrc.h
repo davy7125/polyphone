@@ -38,11 +38,19 @@ public:
 
     // Initialize the combobox
     void initialize(EltID id, bool source1);
+    void initialize(SFModulator mod);
 
     // Load value
     void loadValue();
 
     static QString getIndexName(quint16 iVal, bool CC);
+
+    // Return true if the input is "no controller"
+    bool isOne() { return currentData().toString() == "0"; }
+
+    // Get information
+    int getIndex();
+    bool isCC();
 
     // Keep a minimum width of 50px, regardless the content of the ComboBox
     QSize sizeHint() const override        { return minimumSizeHint(); }
@@ -54,8 +62,6 @@ private slots:
 private:
     QList<int> getAssociatedMods(EltID id);
     void setLink(bool enabled, QString text);
-    int getIndex();
-    bool isCC();
 
     EltID _id;
     bool _source1;

@@ -26,9 +26,7 @@
 #define TOOLDEFAULTMOD_PARAMETERS_H
 
 #include "abstracttoolparameters.h"
-#include <QList>
-#include <QString>
-#include "qmath.h"
+#include "basetypes.h"
 
 
 class ToolDefaultMod_parameters: public AbstractToolParameters
@@ -39,9 +37,13 @@ public:
 
     /// Save the configuration in the ini file
     void saveConfiguration() override;
+
+    /// Get / set the mods to create
+    void setModulators(QList<ModulatorData> modData) { _modData = modData; }
+    QList<ModulatorData> getModulators() { return _modData; }
     
 private:
-
+    QList<ModulatorData> _modData;
 };
 
 #endif // TOOLDEFAULTMOD_PARAMETERS_H

@@ -93,10 +93,20 @@ void ModulatorComboDest::initialize(EltID id)
     // Populate with the attribute list
     this->blockSignals(true);
     for (int i = 0; i < _destIndex.count(); i++)
-        this->addItem(Attribute::getDescription(_destIndex[i], !isInst));
+        this->addItem(Attribute::getDescription(_destIndex[i], !isInst), _destIndex[i]);
     this->blockSignals(false);
 
     loadValue();
+}
+
+void ModulatorComboDest::initialize(quint16 index)
+{
+    _id.typeElement = elementUnknown;
+
+    // Add just one value (default modulator)
+    AttributeType currentAttribute = static_cast<AttributeType>(index);
+    _destIndex << currentAttribute;
+    this->addItem(Attribute::getDescription(currentAttribute, false), currentAttribute);
 }
 
 void ModulatorComboDest::loadValue()
@@ -144,7 +154,7 @@ void ModulatorComboDest::selectAttribute(AttributeType attribute)
 AttributeType ModulatorComboDest::getCurrentAttribute()
 {
     if (this->currentIndex() < _destIndex.count())
-        return _destIndex[this->currentIndex()];
+        return static_cast<AttributeType>(this->currentData().toInt());
     return champ_unknown;
 }
 
@@ -176,6 +186,9 @@ int ModulatorComboDest::getCurrentIndex()
 
 void ModulatorComboDest::onCurrentIndexChanged(int index)
 {
+    if (_id.typeElement == elementUnknown)
+        return;
+
     // New index
     if (getCurrentAttribute() != champ_unknown)
         index = static_cast<int>(getCurrentAttribute());

@@ -723,7 +723,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
             sfTmp = sm->get(id3, champ_sfModSrcOper).sfModValue;
             byTmp = sfTmp.Index + sfTmp.CC * 128;
             fi.write((char *)&byTmp, 1);
-            byTmp = sfTmp.D + 2 * sfTmp.P + 4 * sfTmp.Type;
+            byTmp = sfTmp.isDescending + 2 * sfTmp.isBipolar + 4 * sfTmp.Type;
             fi.write((char *)&byTmp, 1);
             wTmp = converterMod.getIndexOf(sm->get(id3, champ_sfModDestOper).wValue, true);
             fi.write((char *)&wTmp, 2);
@@ -732,7 +732,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
             sfTmp = sm->get(id3, champ_sfModAmtSrcOper).sfModValue;
             byTmp = sfTmp.Index + sfTmp.CC * 128;
             fi.write((char *)&byTmp, 1);
-            byTmp = sfTmp.D + 2 * sfTmp.P + 4 * sfTmp.Type;
+            byTmp = sfTmp.isDescending + 2 * sfTmp.isBipolar + 4 * sfTmp.Type;
             fi.write((char *)&byTmp, 1);
             wTmp = sm->get(id3, champ_sfModTransOper).wValue;
             fi.write((char *)&wTmp, 2);
@@ -755,7 +755,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
                 sfTmp = sm->get(id3, champ_sfModSrcOper).sfModValue;
                 byTmp = sfTmp.Index + sfTmp.CC * 128;
                 fi.write((char *)&byTmp, 1);
-                byTmp = sfTmp.D + 2 * sfTmp.P + 4 * sfTmp.Type;
+                byTmp = sfTmp.isDescending + 2 * sfTmp.isBipolar + 4 * sfTmp.Type;
                 fi.write((char *)&byTmp, 1);
                 wTmp = converterMod2.getIndexOf(sm->get(id3, champ_sfModDestOper).wValue, true);
                 fi.write((char *)&wTmp, 2);
@@ -764,7 +764,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
                 sfTmp = sm->get(id3, champ_sfModAmtSrcOper).sfModValue;
                 byTmp = sfTmp.Index + sfTmp.CC * 128;
                 fi.write((char *)&byTmp, 1);
-                byTmp = sfTmp.D + 2 * sfTmp.P + 4 * sfTmp.Type;
+                byTmp = sfTmp.isDescending + 2 * sfTmp.isBipolar + 4 * sfTmp.Type;
                 fi.write((char *)&byTmp, 1);
                 wTmp = sm->get(id3, champ_sfModTransOper).wValue;
                 fi.write((char *)&wTmp, 2);
@@ -1001,7 +1001,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
             sfTmp = sm->get(id3, champ_sfModSrcOper).sfModValue;
             byTmp = sfTmp.Index + sfTmp.CC * 128;
             fi.write((char *)&byTmp, 1);
-            byTmp = sfTmp.D + 2 * sfTmp.P + 4 * sfTmp.Type;
+            byTmp = sfTmp.isDescending + 2 * sfTmp.isBipolar + 4 * sfTmp.Type;
             fi.write((char *)&byTmp, 1);
             wTmp = converterMod.getIndexOf(sm->get(id3, champ_sfModDestOper).wValue, true);
             fi.write((char *)&wTmp, 2);
@@ -1010,7 +1010,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
             sfTmp = sm->get(id3, champ_sfModAmtSrcOper).sfModValue;
             byTmp = sfTmp.Index + sfTmp.CC * 128;
             fi.write((char *)&byTmp, 1);
-            byTmp = sfTmp.D + 2 * sfTmp.P + 4 * sfTmp.Type;
+            byTmp = sfTmp.isDescending + 2 * sfTmp.isBipolar + 4 * sfTmp.Type;
             fi.write((char *)&byTmp, 1);
             wTmp = sm->get(id3, champ_sfModTransOper).wValue;
             fi.write((char *)&wTmp, 2);
@@ -1033,7 +1033,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
                 sfTmp = sm->get(id3, champ_sfModSrcOper).sfModValue;
                 byTmp = sfTmp.Index + sfTmp.CC * 128;
                 fi.write((char *)&byTmp, 1);
-                byTmp = sfTmp.D + 2 * sfTmp.P + 4 * sfTmp.Type;
+                byTmp = sfTmp.isDescending + 2 * sfTmp.isBipolar + 4 * sfTmp.Type;
                 fi.write((char *)&byTmp, 1);
                 wTmp = converterMod2.getIndexOf(sm->get(id3, champ_sfModDestOper).wValue, true);
                 fi.write((char *)&wTmp, 2);
@@ -1042,7 +1042,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
                 sfTmp = sm->get(id3, champ_sfModAmtSrcOper).sfModValue;
                 byTmp = sfTmp.Index + sfTmp.CC * 128;
                 fi.write((char *)&byTmp, 1);
-                byTmp = sfTmp.D + 2 * sfTmp.P + 4 * sfTmp.Type;
+                byTmp = sfTmp.isDescending + 2 * sfTmp.isBipolar + 4 * sfTmp.Type;
                 fi.write((char *)&byTmp, 1);
                 wTmp = sm->get(id3, champ_sfModTransOper).wValue;
                 fi.write((char *)&wTmp, 2);

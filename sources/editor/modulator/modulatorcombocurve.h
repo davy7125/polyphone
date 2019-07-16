@@ -40,17 +40,21 @@ public:
     bool eventFilter(QObject* object, QEvent* event);
 
     void initialize(EltID id, bool source1);
+    void initialize(SFModulator mod);
     void loadValue();
 
     // Get information about the evolution
     QString getEvolution();
     bool isBipolar() { return _isBipolar; }
+    bool isDescending() { return _isDescending; }
+    quint8 getType() { return _type; }
 
 private:
     void valueSelected(int row, int column);
 
     EltID _id;
     bool _source1;
+    quint8 _type;
     bool _isBipolar;
     bool _isDescending;
 
