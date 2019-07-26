@@ -25,6 +25,7 @@
 #include "editordialoginsertimage.h"
 #include "ui_editordialoginsertimage.h"
 #include "contextmanager.h"
+#include <QUrl>
 
 EditorDialogInsertImage::EditorDialogInsertImage(QWidget *parent) :
     QDialog(parent),
