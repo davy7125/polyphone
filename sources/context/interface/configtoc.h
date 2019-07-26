@@ -36,7 +36,7 @@ class ConfigToc : public QWidget
     Q_OBJECT
 
 public:
-    explicit ConfigToc(QWidget *parent = 0);
+    explicit ConfigToc(QWidget *parent = nullptr);
     ~ConfigToc();
 
 signals:

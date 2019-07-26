@@ -34,7 +34,7 @@ class RotatingSpinner : public QWidget
     Q_OBJECT
 
 public:
-    explicit RotatingSpinner(QWidget *parent = 0);
+    explicit RotatingSpinner(QWidget *parent = nullptr);
     ~RotatingSpinner();
 
     // Start or restart the animation

@@ -33,15 +33,14 @@ FilterTagCell::FilterTagCell(QWidget *parent) :
     ui->setupUi(this);
 
     // Style of the widget
-    QColor buttonBackground = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
-    QColor buttonText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT);
-    QColor buttonHover = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND, ThemeManager::HOVERED);
-    this->setStyleSheet("QPushButton,QLabel{background-color:" + buttonBackground.name() + "; color:" + buttonText.name() +
-                        ";padding:5px;border:1px solid " + buttonBackground.name() + "}" +
-                        "QPushButton:hover{ background-color:" + buttonHover.name() + ";border:1px solid " + buttonHover.name() + "}" +
+    QString buttonBackground = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
+    QString buttonText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
+    QString buttonHover = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND, ThemeManager::HOVERED).name();
+    this->setStyleSheet("QLabel,QPushButton{background-color:" + buttonBackground + ";color:" + buttonText + ";padding:5px;border:0}" +
                         "QLabel{border-top-left-radius:4px;border-bottom-left-radius:4px}" +
-                        "QPushButton{border-top-right-radius:4px;border-bottom-right-radius:4px}");
-    ui->pushDelete->setIcon(ContextManager::theme()->getColoredSvg(":/icons/close.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
+                        "QPushButton{border-radius:0;border-top-right-radius:4px;border-bottom-right-radius:4px}" +
+                        "QPushButton:hover{background-color:" + buttonHover + "}");
+    ui->pushDelete->setIcon(ContextManager::theme()->getColoredSvg(":/icons/close.svg", QSize(12, 12), ThemeManager::HIGHLIGHTED_TEXT));
 }
 
 FilterTagCell::~FilterTagCell()

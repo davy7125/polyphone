@@ -35,7 +35,7 @@ class LinkedToWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit LinkedToWidget(QWidget *parent = 0);
+    explicit LinkedToWidget(QWidget *parent = nullptr);
     ~LinkedToWidget();
 
     /// Clear all links

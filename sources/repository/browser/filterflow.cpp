@@ -50,7 +50,7 @@ FilterFlow::FilterFlow(QWidget *parent) : QWidget(parent)
                         "QPushButton:checked:hover{ background-color:" + buttonSelectedHover.name() + ";border:1px solid " + buttonSelectedHover.name() + "}");
 }
 
-void FilterFlow::initialize(bool singleSelection)
+void FilterFlow::initialize(bool singleSelection, QString firstElementText)
 {
     _singleSelection = singleSelection;
     QLayoutItem *item;
@@ -61,7 +61,7 @@ void FilterFlow::initialize(bool singleSelection)
     }
 
     // Add the element "All"
-    this->addElement(trUtf8("All"), -1, true);
+    this->addElement(firstElementText.isEmpty() ? trUtf8("All") : firstElementText, -1, true);
 }
 
 void FilterFlow::addElement(QString text, int id, bool selected)
@@ -76,7 +76,7 @@ void FilterFlow::select(QStringList elements)
     {
         for (int i = 0; i < _layout->count(); i++)
         {
-            QPushButton * buttonTmp = (QPushButton *)_layout->itemAt(i)->widget();
+            QPushButton * buttonTmp = dynamic_cast<QPushButton *>(_layout->itemAt(i)->widget());
             buttonTmp->setChecked(i == 0);
         }
     }
@@ -84,7 +84,7 @@ void FilterFlow::select(QStringList elements)
     {
         for (int i = 0; i < _layout->count(); i++)
         {
-            QPushButton * buttonTmp = (QPushButton *)_layout->itemAt(i)->widget();
+            QPushButton * buttonTmp = dynamic_cast<QPushButton *>(_layout->itemAt(i)->widget());
             buttonTmp->setChecked(i > 0 && elements.contains(buttonTmp->text()));
         }
     }
@@ -98,7 +98,7 @@ void FilterFlow::select(QList<int> elements)
     {
         for (int i = 0; i < _layout->count(); i++)
         {
-            QPushButton * buttonTmp = (QPushButton *)_layout->itemAt(i)->widget();
+            QPushButton * buttonTmp = dynamic_cast<QPushButton *>(_layout->itemAt(i)->widget());
             buttonTmp->setChecked(i == 0);
         }
     }
@@ -106,7 +106,7 @@ void FilterFlow::select(QList<int> elements)
     {
         for (int i = 0; i < _layout->count(); i++)
         {
-            QPushButton * buttonTmp = (QPushButton *)_layout->itemAt(i)->widget();
+            QPushButton * buttonTmp = dynamic_cast<QPushButton *>(_layout->itemAt(i)->widget());
             buttonTmp->setChecked(i > 0 && elements.contains(buttonTmp->property("id").toInt()));
         }
     }
@@ -118,7 +118,7 @@ void FilterFlow::select(int element)
     this->blockSignals(true);
     for (int i = 0; i < _layout->count(); i++)
     {
-        QPushButton * buttonTmp = (QPushButton *)_layout->itemAt(i)->widget();
+        QPushButton * buttonTmp = dynamic_cast<QPushButton *>(_layout->itemAt(i)->widget());
         buttonTmp->setChecked(buttonTmp->property("id").toInt() == element);
     }
     this->blockSignals(false);
@@ -129,7 +129,7 @@ QStringList FilterFlow::getSelectedElements()
     QStringList result;
     for (int i = 1; i < _layout->count(); i++)
     {
-        QPushButton * buttonTmp = (QPushButton *)_layout->itemAt(i)->widget();
+        QPushButton * buttonTmp = dynamic_cast<QPushButton *>(_layout->itemAt(i)->widget());
         if (buttonTmp->isChecked())
             result.append(buttonTmp->text());
     }
@@ -141,7 +141,7 @@ QList<int> FilterFlow::getSelectedIds()
     QList<int> result;
     for (int i = 1; i < _layout->count(); i++)
     {
-        QPushButton * buttonTmp = (QPushButton *)_layout->itemAt(i)->widget();
+        QPushButton * buttonTmp = dynamic_cast<QPushButton *>(_layout->itemAt(i)->widget());
         if (buttonTmp->isChecked())
             result.append(buttonTmp->property("id").toInt());
     }
@@ -152,7 +152,7 @@ int FilterFlow::getSelectedId()
 {
     for (int i = 0; i < _layout->count(); i++)
     {
-        QPushButton * buttonTmp = (QPushButton *)_layout->itemAt(i)->widget();
+        QPushButton * buttonTmp = dynamic_cast<QPushButton *>(_layout->itemAt(i)->widget());
         if (buttonTmp->isChecked())
             return buttonTmp->property("id").toInt();
     }
@@ -174,7 +174,7 @@ QWidget * FilterFlow::createItem(QString text, int id, bool selected)
 void FilterFlow::buttonClicked()
 {
     // Sender
-    QPushButton* currentButton = (QPushButton*)QObject::sender();
+    QPushButton* currentButton = dynamic_cast<QPushButton *>(QObject::sender());
 
     this->blockSignals(true);
 
@@ -185,7 +185,7 @@ void FilterFlow::buttonClicked()
         currentButton->setChecked(true);
         for (int i = 1; i < _layout->count(); i++)
         {
-            QPushButton * buttonTmp = (QPushButton *)_layout->itemAt(i)->widget();
+            QPushButton * buttonTmp = dynamic_cast<QPushButton *>(_layout->itemAt(i)->widget());
             if (buttonTmp->isChecked())
             {
                 updateNeeded = true;
@@ -200,7 +200,7 @@ void FilterFlow::buttonClicked()
             currentButton->setChecked(true);
             for (int i = 0; i < _layout->count(); i++)
             {
-                QPushButton * buttonTmp = (QPushButton *)_layout->itemAt(i)->widget();
+                QPushButton * buttonTmp = dynamic_cast<QPushButton *>(_layout->itemAt(i)->widget());
                 if (buttonTmp != currentButton && buttonTmp->isChecked())
                 {
                     updateNeeded = true;
@@ -214,14 +214,14 @@ void FilterFlow::buttonClicked()
             bool allSelected = true;
             for (int i = 1; i < _layout->count(); i++)
             {
-                QPushButton * buttonTmp = (QPushButton *)_layout->itemAt(i)->widget();
+                QPushButton * buttonTmp = dynamic_cast<QPushButton *>(_layout->itemAt(i)->widget());
                 if (buttonTmp->isChecked())
                 {
                     allSelected = false;
                     break;
                 }
             }
-            ((QPushButton *)_layout->itemAt(0)->widget())->setChecked(allSelected);
+            (dynamic_cast<QPushButton *>(_layout->itemAt(0)->widget()))->setChecked(allSelected);
         }
     }
     this->blockSignals(false);

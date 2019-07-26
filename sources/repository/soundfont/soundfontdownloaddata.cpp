@@ -24,6 +24,7 @@
 
 #include "soundfontdownloaddata.h"
 #include <QJsonObject>
+#include <QObject>
 
 SoundfontDownloadData::SoundfontDownloadData(const QJsonObject &data)
 {
@@ -46,4 +47,23 @@ SoundfontDownloadData::SoundfontDownloadData(const QJsonObject &data)
 QDateTime SoundfontDownloadData::convertDate(QString txt)
 {
     return QDateTime::fromString(txt, "yyyy-MM-dd hh:mm:ss");
+}
+
+QString SoundfontDownloadData::getFormattedSize()
+{
+    if (_size < 1024)
+        return QString::number(_size) + " " + QObject::trUtf8("bytes");
+    if (_size < 1024 * 1024)
+        return QString::number(static_cast<double>(_size) / 1024, 'f', 2) + " " + QObject::trUtf8("kB", "kilobytes");
+    if (_size < 1024 * 1024 * 1024)
+        return QString::number(static_cast<double>(_size) / 1024 / 1024, 'f', 2) + " " + QObject::trUtf8("MB", "megabytes");
+    if (_size / 1024 < 1024 * 1024 * 1024)
+        return QString::number(static_cast<double>(_size) / 1024 / 1024 / 1024, 'f', 2) + " " + QObject::trUtf8("GB", "gigabytes");
+    return QString::number(static_cast<double>(_size) / 1024 / 1024 / 1024 / 1024, 'f', 2) + " " + QObject::trUtf8("TB", "terabytes");
+}
+
+QString SoundfontDownloadData::getLastDate()
+{
+    QDateTime lastDate = (_updatedTime.isValid() ? _updatedTime : _createdTime);
+    return lastDate.date().toString(Qt::SystemLocaleShortDate);
 }

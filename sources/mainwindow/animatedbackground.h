@@ -33,7 +33,7 @@ class AnimatedBackground : public QWidget
     Q_OBJECT
 
 public:
-    explicit AnimatedBackground(QWidget *parent = 0);
+    explicit AnimatedBackground(QWidget *parent = nullptr);
     ~AnimatedBackground();
 
 protected:

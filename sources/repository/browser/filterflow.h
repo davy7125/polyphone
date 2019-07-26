@@ -33,10 +33,10 @@ class FilterFlow : public QWidget
     Q_OBJECT
 
 public:
-    explicit FilterFlow(QWidget *parent = 0);
+    explicit FilterFlow(QWidget *parent = nullptr);
 
     // Clear the list
-    void initialize(bool singleSelection = false);
+    void initialize(bool singleSelection = false, QString firstElementText = "");
 
     // Add an element in the list, with the possibility to link it with an id (for the categories)
     void addElement(QString text, int id = -1, bool selected = false);

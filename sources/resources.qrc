@@ -88,6 +88,7 @@
         <file alias="play.svg">resources/play.svg</file>
         <file alias="check.svg">resources/check.svg</file>
         <file alias="reset_eq.svg">resources/reset_eq.svg</file>
+        <file alias="pen.svg">resources/pen.svg</file>
     </qresource>
     <qresource prefix="/translations">
         <file>resources/translations/polyphone_cs.qm</file>
@@ -112,7 +113,6 @@
         <file alias="spinner.svg">resources/spinner.svg</file>
         <file alias="decoration.svg">resources/decoration.svg</file>
         <file alias="id_rsa.pub">repository/id_rsa.pub</file>
-        <file alias="youtube.jpg">resources/youtube.jpg</file>
     </qresource>
     <qresource prefix="/tool">
         <file alias="trim_loop.svg">editor/tools/trim_end/trim_loop.svg</file>
@@ -152,5 +152,22 @@
         <file alias="halloween.png">resources/banners/halloween.png</file>
         <file alias="valentine.png">resources/banners/valentine.png</file>
         <file alias="music.png">resources/banners/music.png</file>
+    </qresource>
+    <qresource prefix="/html_editor">
+        <file alias="align-left.svg">resources/html_editor/align-left.svg</file>
+        <file alias="bold.svg">resources/html_editor/bold.svg</file>
+        <file alias="code.svg">resources/html_editor/code.svg</file>
+        <file alias="italic.svg">resources/html_editor/italic.svg</file>
+        <file alias="list-ol.svg">resources/html_editor/list-ol.svg</file>
+        <file alias="list-ul.svg">resources/html_editor/list-ul.svg</file>
+        <file alias="strikethrough.svg">resources/html_editor/strikethrough.svg</file>
+        <file alias="table.svg">resources/html_editor/table.svg</file>
+        <file alias="underline.svg">resources/html_editor/underline.svg</file>
+        <file alias="paragraph.svg">resources/html_editor/paragraph.svg</file>
+        <file alias="hr.svg">resources/html_editor/hr.svg</file>
+        <file alias="image.svg">resources/html_editor/image.svg</file>
+        <file alias="link.svg">resources/html_editor/link.svg</file>
+        <file alias="video.svg">resources/html_editor/video.svg</file>
+        <file alias="piece.svg">resources/html_editor/piece.svg</file>
     </qresource>
 </RCC>

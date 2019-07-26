@@ -31,7 +31,7 @@ class SpinBoxKey : public QSpinBox
 {
     Q_OBJECT
 public:
-    explicit SpinBoxKey(QWidget *parent = 0);
+    explicit SpinBoxKey(QWidget *parent = nullptr);
 
 protected:
     virtual QValidator::State validate(QString &input, int &pos) const;

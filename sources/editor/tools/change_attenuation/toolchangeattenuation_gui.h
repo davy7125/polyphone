@@ -36,7 +36,7 @@ class ToolChangeAttenuation_gui : public AbstractToolGui
     Q_OBJECT
 
 public:
-    explicit ToolChangeAttenuation_gui(QWidget *parent = 0);
+    explicit ToolChangeAttenuation_gui(QWidget *parent = nullptr);
     ~ToolChangeAttenuation_gui();
 
     /// Update the interface with the parameters

@@ -91,7 +91,7 @@ void AttributeFlow::onClick(bool checked)
     Q_UNUSED(checked)
 
     // Create a soundfont filter
-    ElidedPushButton * sender = (ElidedPushButton*)QObject::sender();
+    ElidedPushButton * sender = dynamic_cast<ElidedPushButton*>(QObject::sender());
     if (_filterDefinitions.contains(sender))
     {
         SoundfontFilter * filter = new SoundfontFilter();

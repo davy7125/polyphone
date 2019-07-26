@@ -37,7 +37,7 @@ class SoundfontViewer : public QWidget
     Q_OBJECT
 
 public:
-    explicit SoundfontViewer(QWidget *parent = 0);
+    explicit SoundfontViewer(QWidget *parent = nullptr);
     ~SoundfontViewer();
 
     void initialize(int soundfontId);
@@ -47,10 +47,12 @@ signals:
     void itemClicked(SoundfontFilter * filter);
 
 private slots:
-    void on_labelAuthor_linkActivated(const QString &link);
     void onDetailsReady(int soundfontId);
     void onDetailsFailed(int soundfontId, QString error);
     void on_pushRetry_clicked();
+    void on_pushCancel_clicked();
+    void on_pushSave_clicked();
+    void on_pushEdit_clicked();
 
 private:
     Ui::SoundfontViewer *ui;

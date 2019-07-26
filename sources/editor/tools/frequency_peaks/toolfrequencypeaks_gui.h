@@ -37,7 +37,7 @@ class ToolFrequencyPeaks_gui : public AbstractToolGui
     Q_OBJECT
 
 public:
-    explicit ToolFrequencyPeaks_gui(QWidget *parent = 0);
+    explicit ToolFrequencyPeaks_gui(QWidget *parent = nullptr);
     ~ToolFrequencyPeaks_gui();
 
     /// Update the interface with the parameters

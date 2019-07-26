@@ -37,7 +37,7 @@ class ConfigSectionRepository : public QWidget
     Q_OBJECT
 
 public:
-    explicit ConfigSectionRepository(QWidget *parent = 0);
+    explicit ConfigSectionRepository(QWidget *parent = nullptr);
     ~ConfigSectionRepository();
     void initialize();
 

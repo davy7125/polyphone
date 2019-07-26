@@ -37,7 +37,7 @@ class FiveStarsWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit FiveStarsWidget(QWidget *parent = 0);
+    explicit FiveStarsWidget(QWidget *parent = nullptr);
     ~FiveStarsWidget();
 
     // Set the score, between 0 and 10

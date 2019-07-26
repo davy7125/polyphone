@@ -39,11 +39,12 @@ class FilterTag : public QWidget
     Q_OBJECT
 
 public:
-    explicit FilterTag(QWidget *parent = 0);
+    explicit FilterTag(QWidget *parent = nullptr);
     ~FilterTag();
 
     // Initialize the different tags that can be selected
-    void setPossibleTags(QStringList tags);
+    // Possible to create other tags or not
+    void setPossibleTags(QStringList tags, bool canCreate = false);
 
     void select(QStringList tags);
     QStringList getSelection();
@@ -62,6 +63,7 @@ private:
     QStringList _tags;
     QCompleter * _completer;
     QVBoxLayout * _layout;
+    bool _canCreate;
 };
 
 #endif // FILTERTAG_H

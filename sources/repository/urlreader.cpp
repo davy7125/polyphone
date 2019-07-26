@@ -30,7 +30,7 @@
 #include <QMutex>
 #include <QUrlQuery>
 
-const int UrlReader::TIMEOUT_MS = 5000;
+const int UrlReader::TIMEOUT_MS = 10000;
 
 UrlReader::UrlReader(QString url) :
     _url(url),

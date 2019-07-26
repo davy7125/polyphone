@@ -39,7 +39,7 @@ class TextEdit : public QTextEdit
 {
     Q_OBJECT
 public:
-    TextEdit(QWidget *parent=0) : QTextEdit(parent) {}
+    TextEdit(QWidget *parent = nullptr) : QTextEdit(parent) {}
 
 private:
     void focusOutEvent(QFocusEvent *e)
@@ -69,8 +69,8 @@ class PageSf2 : public Page
     Q_OBJECT
 
 public:
-    explicit PageSf2(QWidget *parent = 0);
-    ~PageSf2();
+    explicit PageSf2(QWidget *parent = nullptr);
+    ~PageSf2() override;
 
 private slots:
     void setName();

@@ -36,7 +36,7 @@ class ToolChangeVolume_gui : public AbstractToolGui
     Q_OBJECT
 
 public:
-    explicit ToolChangeVolume_gui(QWidget *parent = 0);
+    explicit ToolChangeVolume_gui(QWidget *parent = nullptr);
     ~ToolChangeVolume_gui();
 
     /// Update the interface with the parameters

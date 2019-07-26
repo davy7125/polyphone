@@ -32,7 +32,14 @@ class StyledLineEdit : public QLineEdit
     Q_OBJECT
 
 public:
-    StyledLineEdit(QWidget *parent = NULL);
+    StyledLineEdit(QWidget *parent = nullptr);
+
+    // Set it to false if you want the widget keeps the same size
+    // By default: true
+    void resizeAfterChange(bool resizeOn) { _resize = resizeOn; }
+
+    // Change the color of the text
+    void setColor(QColor textColor);
 
 signals:
     void focussed(bool hasFocus);
@@ -40,12 +47,16 @@ signals:
 protected:
     virtual void focusInEvent(QFocusEvent *e);
     virtual void focusOutEvent(QFocusEvent *e);
+    virtual void keyPressEvent(QKeyEvent * e);
 
 private slots:
     void onTextEdited(QString text);
 
 private:
     void setStyle(bool hasFocus);
+
+    bool _resize;
+    QColor _textColor;
 };
 
 #endif // STYLEDLINEEDIT_H

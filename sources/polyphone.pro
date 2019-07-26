@@ -167,6 +167,8 @@ INCLUDEPATH += mainwindow \
     repository/widgets \
     repository/user \
     repository/soundfont \
+    repository/soundfont/viewer \
+    repository/soundfont/editor \
     .
 
 SOURCES	+= main.cpp \
@@ -228,6 +230,12 @@ SOURCES	+= main.cpp \
     clavier/pianokeybd.cpp \
     clavier/pianokeybdcustom.cpp \
     clavier/keyboardmap.cpp \
+    repository/widgets/customtextedit.cpp \
+    repository/soundfont/editor/editordialoginsertlink.cpp \
+    repository/soundfont/editor/editordialoginserttable.cpp \
+    repository/soundfont/editor/htmleditor.cpp \
+    repository/soundfont/editor/soundfonteditorfiles.cpp \
+    repository/soundfont/editor/soundfontfilecell.cpp \
     sound_engine/elements/liveeq.cpp \
     sound_engine/modulatedparameter.cpp \
     sound_engine/synth.cpp \
@@ -411,20 +419,25 @@ SOURCES	+= main.cpp \
     context/interface/configsectionrepository.cpp \
     repository/usermanager.cpp \
     mainwindow/toprightwidget.cpp \
-    repository/user/userarea.cpp \
-    repository/soundfont/soundfontviewer.cpp \
-    repository/widgets/elidedpushbutton.cpp \
-    repository/soundfont/soundfontdescription.cpp \
-    repository/soundfont/soundfontdownload.cpp \
-    repository/soundfont/soundfontcomment.cpp \
     repository/soundfontdetails.cpp \
     repository/detailsmanager.cpp \
+    repository/user/userarea.cpp \
+    repository/urlreaderimage.cpp \
+    repository/widgets/elidedpushbutton.cpp \
+    repository/soundfont/soundfontviewer.cpp \
     repository/soundfont/soundfontcommentdata.cpp \
     repository/soundfont/soundfontdescriptiondata.cpp \
     repository/soundfont/soundfontdownloaddata.cpp \
-    repository/urlreaderimage.cpp \
-    repository/soundfont/soundfontdownloadcell.cpp \
-    repository/soundfont/soundfontcommentcell.cpp \
+    repository/soundfont/viewer/soundfontdownload.cpp \
+    repository/soundfont/viewer/soundfontcomment.cpp \
+    repository/soundfont/viewer/soundfontdownloadcell.cpp \
+    repository/soundfont/viewer/soundfontcommentcell.cpp \
+    repository/soundfont/viewer/soundfontviewerleft.cpp \
+    repository/soundfont/viewer/soundfontviewercenter.cpp \
+    repository/soundfont/viewer/soundfontviewertop.cpp \
+    repository/soundfont/editor/soundfonteditorleft.cpp \
+    repository/soundfont/editor/soundfonteditorcenter.cpp \
+    repository/soundfont/editor/soundfonteditortop.cpp \
     repository/downloadmanager.cpp \
     repository/widgets/downloadprogressbutton.cpp \
     repository/widgets/downloadprogresscell.cpp \
@@ -451,7 +464,9 @@ SOURCES	+= main.cpp \
     editor/tools/default_mod/tooldefaultmod.cpp \
     editor/tools/default_mod/tooldefaultmod_parameters.cpp \
     editor/tools/default_mod/tooldefaultmod_gui.cpp \
-    core/types/modulatordata.cpp
+    core/types/modulatordata.cpp \
+    repository/soundfont/editor/editordialoginsertvideo.cpp \
+    repository/soundfont/editor/editordialoginsertimage.cpp
 
 HEADERS  += \
     core/sample/infosound.h \
@@ -518,6 +533,12 @@ HEADERS  += \
     clavier/pianokeybd.h \
     clavier/pianokeybdcustom.h \
     clavier/keyboardmap.h \
+    repository/widgets/customtextedit.h \
+    repository/soundfont/editor/editordialoginsertlink.h \
+    repository/soundfont/editor/editordialoginserttable.h \
+    repository/soundfont/editor/htmleditor.h \
+    repository/soundfont/editor/soundfonteditorfiles.h \
+    repository/soundfont/editor/soundfontfilecell.h \
     sound_engine/elements/liveeq.h \
     sound_engine/modulatedparameter.h \
     sound_engine/synth.h \
@@ -711,19 +732,25 @@ HEADERS  += \
     repository/usermanager.h \
     mainwindow/toprightwidget.h \
     repository/user/userarea.h \
-    repository/soundfont/soundfontviewer.h \
     repository/widgets/elidedpushbutton.h \
-    repository/soundfont/soundfontdescription.h \
-    repository/soundfont/soundfontdownload.h \
-    repository/soundfont/soundfontcomment.h \
     repository/soundfontdetails.h \
     repository/detailsmanager.h \
+    repository/urlreaderimage.h \
+    repository/soundfont/soundfontviewer.h \
     repository/soundfont/soundfontcommentdata.h \
     repository/soundfont/soundfontdescriptiondata.h \
     repository/soundfont/soundfontdownloaddata.h \
-    repository/urlreaderimage.h \
-    repository/soundfont/soundfontdownloadcell.h \
-    repository/soundfont/soundfontcommentcell.h \
+    repository/soundfont/viewer/soundfontdownload.h \
+    repository/soundfont/viewer/soundfontcomment.h \
+    repository/soundfont/viewer/soundfontdownloadcell.h \
+    repository/soundfont/viewer/soundfontcommentcell.h \
+    repository/soundfont/viewer/soundfontviewerleft.h \
+    repository/soundfont/viewer/soundfontviewercenter.h \
+    repository/soundfont/viewer/soundfontviewertop.h \
+    repository/soundfont/editor/smallcombobox.h \
+    repository/soundfont/editor/soundfonteditorleft.h \
+    repository/soundfont/editor/soundfonteditorcenter.h \
+    repository/soundfont/editor/soundfonteditortop.h \
     repository/downloadmanager.h \
     repository/widgets/downloadprogressbutton.h \
     repository/widgets/downloadprogresscell.h \
@@ -759,7 +786,9 @@ HEADERS  += \
     clavier/styledslider.h \
     editor/tools/default_mod/tooldefaultmod.h \
     editor/tools/default_mod/tooldefaultmod_parameters.h \
-    editor/tools/default_mod/tooldefaultmod_gui.h
+    editor/tools/default_mod/tooldefaultmod_gui.h \
+    repository/soundfont/editor/editordialoginsertvideo.h \
+    repository/soundfont/editor/editordialoginsertimage.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -779,6 +808,11 @@ FORMS    += \
     repository/browser/filtertagcell.ui \
     repository/daily/showsoundfonts.ui \
     repository/daily/soundfontcell.ui \
+    repository/soundfont/editor/editordialoginsertlink.ui \
+    repository/soundfont/editor/editordialoginserttable.ui \
+    repository/soundfont/editor/htmleditor.ui \
+    repository/soundfont/editor/soundfonteditorfiles.ui \
+    repository/soundfont/editor/soundfontfilecell.ui \
     repository/widgets/fivestarswidget.ui \
     editor/editor.ui \
     editor/pageinst.ui \
@@ -816,16 +850,23 @@ FORMS    += \
     mainwindow/toprightwidget.ui \
     repository/user/userarea.ui \
     repository/soundfont/soundfontviewer.ui \
-    repository/soundfont/soundfontdescription.ui \
-    repository/soundfont/soundfontdownload.ui \
-    repository/soundfont/soundfontcomment.ui \
-    repository/soundfont/soundfontdownloadcell.ui \
-    repository/soundfont/soundfontcommentcell.ui \
+    repository/soundfont/viewer/soundfontdownload.ui \
+    repository/soundfont/viewer/soundfontcomment.ui \
+    repository/soundfont/viewer/soundfontdownloadcell.ui \
+    repository/soundfont/viewer/soundfontcommentcell.ui \
+    repository/soundfont/viewer/soundfontviewerleft.ui \
+    repository/soundfont/viewer/soundfontviewercenter.ui \
+    repository/soundfont/viewer/soundfontviewertop.ui \
+    repository/soundfont/editor/soundfonteditorleft.ui \
+    repository/soundfont/editor/soundfonteditorcenter.ui \
+    repository/soundfont/editor/soundfonteditortop.ui \
     repository/widgets/downloadprogresscell.ui \
     editor/modulator/modulatoreditor.ui \
     editor/modulator/modulatorcell.ui \
     clavier/controllerarea.ui \
-    editor/tools/default_mod/tooldefaultmod_gui.ui
+    editor/tools/default_mod/tooldefaultmod_gui.ui \
+    repository/soundfont/editor/editordialoginsertvideo.ui \
+    repository/soundfont/editor/editordialoginsertimage.ui
 
 RESOURCES += resources.qrc
 

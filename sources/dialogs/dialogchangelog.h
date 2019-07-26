@@ -36,7 +36,7 @@ class DialogChangeLog : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogChangeLog(QWidget *parent = 0);
+    explicit DialogChangeLog(QWidget *parent = nullptr);
     ~DialogChangeLog();
 
 private slots:

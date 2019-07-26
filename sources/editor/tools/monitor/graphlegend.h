@@ -32,7 +32,7 @@ class GraphLegend : public QCustomPlot
     Q_OBJECT
 
 public:
-    explicit GraphLegend(QWidget *parent = 0);
+    explicit GraphLegend(QWidget *parent = nullptr);
     void plot(QCPScatterStyle::ScatterShape style, QColor couleur, int size, int epaisseur, bool antiAliased);
 };
 #endif // GRAPHLEGEND_H

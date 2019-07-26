@@ -36,7 +36,7 @@ class WidgetShowHistoryCell : public QWidget
     Q_OBJECT
 
 public:
-    explicit WidgetShowHistoryCell(QWidget *parent = 0);
+    explicit WidgetShowHistoryCell(QWidget *parent = nullptr);
     ~WidgetShowHistoryCell();
 
     void setLink(QString filePath);

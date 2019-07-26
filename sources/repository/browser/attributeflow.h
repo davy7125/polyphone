@@ -36,7 +36,7 @@ class AttributeFlow : public QWidget
     Q_OBJECT
 
 public:
-    explicit AttributeFlow(QWidget *parent = 0);
+    explicit AttributeFlow(QWidget *parent = nullptr);
     ~AttributeFlow();
     void addCategory(int id);
     void addProperty(SoundfontInformation::Property property, QString propertyValue);

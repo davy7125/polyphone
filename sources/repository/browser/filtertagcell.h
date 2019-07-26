@@ -36,7 +36,7 @@ class FilterTagCell : public QWidget
     Q_OBJECT
 
 public:
-    explicit FilterTagCell(QWidget *parent = 0);
+    explicit FilterTagCell(QWidget *parent = nullptr);
     ~FilterTagCell();
 
     void setTagName(QString tagName);

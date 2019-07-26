@@ -40,14 +40,14 @@ RepositoryManager * RepositoryManager::s_instance = nullptr;
 
 RepositoryManager * RepositoryManager::getInstance()
 {
-    if (s_instance == NULL)
+    if (s_instance == nullptr)
         s_instance = new RepositoryManager();
     return s_instance;
 }
 
 void RepositoryManager::kill()
 {
-    if (s_instance != NULL)
+    if (s_instance != nullptr)
     {
         delete s_instance;
         s_instance = nullptr;
@@ -226,7 +226,7 @@ QString RepositoryManager::loadSoundfontInfo()
 
         // ID
         QJsonValue valueTmp = jsonObject.value("id");
-        int id = valueTmp.isDouble() ? (int)valueTmp.toDouble() : -1;
+        int id = valueTmp.isDouble() ? static_cast<int>(valueTmp.toDouble()) : -1;
 
         // Title
         valueTmp = jsonObject.value("title");
@@ -272,7 +272,7 @@ QString RepositoryManager::loadSoundfontInfo()
         // Download number
         valueTmp = jsonObject.value("downloads");
         if (valueTmp.isDouble())
-            si->setDownloadNumber((int)valueTmp.toDouble());
+            si->setDownloadNumber(static_cast<int>(valueTmp.toDouble()));
 
         // Rating
         valueTmp = jsonObject.value("rating");
@@ -282,7 +282,7 @@ QString RepositoryManager::loadSoundfontInfo()
         // Comment number
         valueTmp = jsonObject.value("comment_number");
         if (valueTmp.isDouble())
-            si->setCommentNumber((int)valueTmp.toDouble());
+            si->setCommentNumber(static_cast<int>(valueTmp.toDouble()));
 
         // Website
         valueTmp = jsonObject.value("website");
@@ -292,7 +292,7 @@ QString RepositoryManager::loadSoundfontInfo()
         // Category id and name
         valueTmp = jsonObject.value("category_id");
         if (valueTmp.isDouble())
-            si->setCategoryId((int)valueTmp.toDouble());
+            si->setCategoryId(static_cast<int>(valueTmp.toDouble()));
         valueTmp = jsonObject.value("category_title");
         if (valueTmp.isString() && si->getCategoryId() != -1)
             _categoryNames[si->getCategoryId()] = valueTmp.toString();
@@ -358,7 +358,7 @@ QString RepositoryManager::getPropertyTranslation(SoundfontInformation::Property
 
 SoundfontInformation * RepositoryManager::getSoundfontInformation(int id)
 {
-    return _soundfontInfos.contains(id) ? _soundfontInfos[id] : NULL;
+    return _soundfontInfos.contains(id) ? _soundfontInfos[id] : nullptr;
 }
 
 QList<SoundfontInformation *> RepositoryManager::getSoundfontInformation(SoundfontFilter * filter)

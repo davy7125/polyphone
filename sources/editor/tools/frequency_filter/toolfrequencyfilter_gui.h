@@ -37,7 +37,7 @@ class ToolFrequencyFilter_gui : public AbstractToolGui
     Q_OBJECT
 
 public:
-    explicit ToolFrequencyFilter_gui(QWidget *parent = 0);
+    explicit ToolFrequencyFilter_gui(QWidget *parent = nullptr);
     ~ToolFrequencyFilter_gui();
 
     /// Update the interface with the parameters

@@ -23,12 +23,18 @@
 ***************************************************************************/
 
 #include "styledlineedit.h"
+#include "contextmanager.h"
+#include <QPainter>
 
-StyledLineEdit::StyledLineEdit(QWidget * parent) : QLineEdit(parent)
+StyledLineEdit::StyledLineEdit(QWidget * parent) : QLineEdit(parent),
+    _resize(true)
 {
-    this->setStyle(false);
     connect(this, SIGNAL(textEdited(QString)), this, SLOT(onTextEdited(QString)));
     connect(this, SIGNAL(textChanged(QString)), this, SLOT(onTextEdited(QString)));
+
+    // Default color
+    _textColor = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT);
+    this->setStyle(false);
 }
 
 void StyledLineEdit::focusInEvent(QFocusEvent *e)
@@ -45,6 +51,20 @@ void StyledLineEdit::focusOutEvent(QFocusEvent *e)
     emit(focussed(false));
 }
 
+void StyledLineEdit::keyPressEvent(QKeyEvent * e)
+{
+    if (e->key() == Qt::Key_Enter)
+        this->clearFocus();
+
+    QLineEdit::keyPressEvent(e);
+}
+
+void StyledLineEdit::setColor(QColor textColor)
+{
+    _textColor = textColor;
+    this->setStyle(this->hasFocus());
+}
+
 void StyledLineEdit::setStyle(bool hasFocus)
 {
     if (hasFocus)
@@ -55,12 +75,15 @@ void StyledLineEdit::setStyle(bool hasFocus)
     else
     {
         this->setCursor(Qt::PointingHandCursor);
-        this->setStyleSheet("QLineEdit{background-color:transparent; border: 0}");
+        this->setStyleSheet("QLineEdit{color:" + _textColor.name() + ";background-color:transparent; border: 0}");
     }
 }
 
 void StyledLineEdit::onTextEdited(QString text)
 {
+    if (!_resize)
+        return;
+
     // Adapt the width
     QFontMetrics fm(this->font());
     int width = fm.width(text.isEmpty() ? this->placeholderText() : text) + 20;

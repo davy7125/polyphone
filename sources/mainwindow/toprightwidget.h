@@ -39,7 +39,7 @@ class TopRightWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit TopRightWidget(QWidget *parent = 0);
+    explicit TopRightWidget(QWidget *parent = nullptr);
     ~TopRightWidget();
 
 public slots:

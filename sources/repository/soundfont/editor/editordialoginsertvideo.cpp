@@ -22,36 +22,60 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SOUNDFONTDOWNLOADCELL_H
-#define SOUNDFONTDOWNLOADCELL_H
+#include "editordialoginsertvideo.h"
+#include "ui_editordialoginsertvideo.h"
+#include "contextmanager.h"
 
-#include <QWidget>
-class SoundfontDownloadData;
+EditorDialogInsertVideo::EditorDialogInsertVideo(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::EditorDialogInsertVideo)
+{
+    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
+    this->setWindowModality(Qt::WindowModal);
+    this->setAttribute(Qt::WA_DeleteOnClose);
 
-namespace Ui {
-class SoundfontDownloadCell;
+    ui->setupUi(this);
+    ui->labelWarning->setStyleSheet(
+                "QLabel{color:" + ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND).name() + "}");
+    ui->labelWarning->hide();
+
+    ui->lineUrl->setFocus();
 }
 
-class SoundfontDownloadCell : public QWidget
+EditorDialogInsertVideo::~EditorDialogInsertVideo()
 {
-    Q_OBJECT
+    delete ui;
+}
 
-public:
-    explicit SoundfontDownloadCell(QWidget *parent = 0);
-    ~SoundfontDownloadCell();
+void EditorDialogInsertVideo::accept()
+{
+    // Try to find the video ID
+    QString url = ui->lineUrl->text();
 
-    void initialize(SoundfontDownloadData * data);
+    // Example 1: https://www.youtube.com/watch?v=YOpa5Ec3i4s
+    QRegExp rx_1("www\\.youtube\\.com/watch\\?v=(\\w+)");
+    if (rx_1.indexIn(url) != -1)
+    {
+        emit(accepted(rx_1.cap(1)));
+        QDialog::accept();
+    }
 
-private slots:
-    void on_pushDownload_clicked();
+    // Example 2: https://youtu.be/YOpa5Ec3i4s
+    QRegExp rx_2("youtu\\.be/(\\w+)");
+    if (rx_2.indexIn(url) != -1)
+    {
+        emit(accepted(rx_2.cap(1)));
+        QDialog::accept();
+    }
 
-private:
-    QString getSize(SoundfontDownloadData * data);
-    QString getDate(SoundfontDownloadData * data);
+    // Example 3: https://www.youtube.com/embed/YOpa5Ec3i4s
+    QRegExp rx_3("youtube\\.com/embed/(\\w+)");
+    if (rx_3.indexIn(url) != -1)
+    {
+        emit(accepted(rx_3.cap(1)));
+        QDialog::accept();
+    }
 
-    Ui::SoundfontDownloadCell *ui;
-    int _id;
-    QString _name;
-};
-
-#endif // SOUNDFONTDOWNLOADCELL_H
+    // Notify the url is wrong
+    ui->labelWarning->show();
+}

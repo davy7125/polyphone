@@ -32,7 +32,7 @@ class GraphFilterFrequencies : public QCustomPlot
     Q_OBJECT
 
 public:
-    explicit GraphFilterFrequencies(QWidget *parent = 0);
+    explicit GraphFilterFrequencies(QWidget *parent = nullptr);
     ~GraphFilterFrequencies();
 
     bool eventFilter(QObject* o, QEvent* e)

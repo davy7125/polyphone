@@ -22,28 +22,31 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SOUNDFONTCOMMENT_H
-#define SOUNDFONTCOMMENT_H
+#ifndef SOUNDFONTCOMMENTCELL_H
+#define SOUNDFONTCOMMENTCELL_H
 
 #include <QWidget>
 class SoundfontCommentData;
 
 namespace Ui {
-class SoundfontComment;
+class SoundfontCommentCell;
 }
 
-class SoundfontComment : public QWidget
+class SoundfontCommentCell : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit SoundfontComment(QWidget *parent = 0);
-    ~SoundfontComment();
+    explicit SoundfontCommentCell(QWidget *parent = nullptr);
+    ~SoundfontCommentCell();
 
-    void display(QList<SoundfontCommentData *> data, int level = 0);
+    void initialize(SoundfontCommentData * data, int level);
+
+protected:
+    void resizeEvent(QResizeEvent *event);
 
 private:
-    Ui::SoundfontComment *ui;
+    Ui::SoundfontCommentCell *ui;
 };
 
-#endif // SOUNDFONTCOMMENT_H
+#endif // SOUNDFONTCOMMENTCELL_H

@@ -3625,7 +3625,7 @@ public:
                        };
   Q_ENUMS(RefreshPriority)
   
-  explicit QCustomPlot(QWidget *parent = 0);
+  explicit QCustomPlot(QWidget *parent = nullptr);
   virtual ~QCustomPlot();
   
   // getters:

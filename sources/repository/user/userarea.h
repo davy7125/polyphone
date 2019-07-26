@@ -36,7 +36,7 @@ class UserArea : public QWidget
     Q_OBJECT
 
 public:
-    explicit UserArea(QWidget *parent = 0);
+    explicit UserArea(QWidget *parent = nullptr);
     ~UserArea();
 
     void initializeInterface();

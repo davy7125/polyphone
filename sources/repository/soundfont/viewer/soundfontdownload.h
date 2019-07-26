@@ -22,41 +22,28 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SOUNDFONTDESCRIPTION_H
-#define SOUNDFONTDESCRIPTION_H
+#ifndef SOUNDFONTDOWNLOAD_H
+#define SOUNDFONTDOWNLOAD_H
 
 #include <QWidget>
-class SoundfontDescriptionData;
-class UrlReaderImage;
+class SoundfontDownloadData;
 
 namespace Ui {
-class SoundfontDescription;
+class SoundfontDownload;
 }
 
-class SoundfontDescription : public QWidget
+class SoundfontDownload : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit SoundfontDescription(QWidget *parent = nullptr);
-    ~SoundfontDescription();
+    explicit SoundfontDownload(QWidget *parent = nullptr);
+    ~SoundfontDownload();
 
-    void display(SoundfontDescriptionData * data);
-
-private slots:
-    void documentSizeChanged(QSizeF size);
-    void imageDownloaded(QString error);
+    void display(QList<SoundfontDownloadData *> data);
 
 private:
-    static QString getCss();
-    QString processFrame(QString frame);
-    QString getBody(SoundfontDescriptionData * data);
-    void downloadOneImage();
-
-    Ui::SoundfontDescription *ui;
-    UrlReaderImage * _imageReader;
-    QStringList _imagesToDownload;
-    static QString s_css;
+    Ui::SoundfontDownload *ui;
 };
 
-#endif // SOUNDFONTDESCRIPTION_H
+#endif // SOUNDFONTDOWNLOAD_H

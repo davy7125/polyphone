@@ -43,6 +43,10 @@ public:
     int getOrdering() const { return _ordering; }
     int getId() const { return _id; }
 
+    // Format
+    QString getFormattedSize();
+    QString getLastDate();
+
 private:
     QDateTime convertDate(QString txt);
 

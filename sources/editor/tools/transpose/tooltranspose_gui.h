@@ -36,7 +36,7 @@ class ToolTranspose_gui : public AbstractToolGui
     Q_OBJECT
 
 public:
-    explicit ToolTranspose_gui(QWidget *parent = 0);
+    explicit ToolTranspose_gui(QWidget *parent = nullptr);
     ~ToolTranspose_gui();
 
     /// Update the interface with the parameters

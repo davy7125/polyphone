@@ -37,7 +37,7 @@ class DialogCreateElements : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogCreateElements(QWidget *parent = 0);
+    explicit DialogCreateElements(QWidget *parent = nullptr);
     ~DialogCreateElements();
 
     void initialize(IdList ids);

@@ -36,7 +36,7 @@ class ToolDivisionDuplication_gui : public AbstractToolGui
     Q_OBJECT
 
 public:
-    explicit ToolDivisionDuplication_gui(QWidget *parent = 0);
+    explicit ToolDivisionDuplication_gui(QWidget *parent = nullptr);
     ~ToolDivisionDuplication_gui();
 
     /// Update the interface with the parameters

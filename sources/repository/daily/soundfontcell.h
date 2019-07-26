@@ -38,7 +38,7 @@ class SoundfontCell : public QWidget
     Q_OBJECT
 
 public:
-    SoundfontCell(SoundfontInformation* soundfontInfo, QWidget *parent = 0);
+    SoundfontCell(SoundfontInformation* soundfontInfo, QWidget *parent = nullptr);
     ~SoundfontCell();
     void setActive(bool isActive);
     bool hasHeightForWidth() const override;

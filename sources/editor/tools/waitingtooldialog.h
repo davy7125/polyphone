@@ -36,7 +36,7 @@ class WaitingToolDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit WaitingToolDialog(QString title, int stepNumber, QWidget *parent = 0);
+    explicit WaitingToolDialog(QString title, int stepNumber, QWidget *parent = nullptr);
     ~WaitingToolDialog();
 
     void setValue(int value);

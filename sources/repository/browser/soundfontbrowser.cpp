@@ -140,8 +140,8 @@ void SoundfontBrowser::fillFilter()
 
     // License
     ui->filterLicense->initialize();
-    ui->filterLicense->addElement(trUtf8("commercial use"), (int)SoundfontInformation::LicenseFlag::COMMERCIAL_USE);
-    ui->filterLicense->addElement(trUtf8("share after editing"), (int)SoundfontInformation::LicenseFlag::SHARE_MODIFIED);
+    ui->filterLicense->addElement(trUtf8("commercial use"), static_cast<int>(SoundfontInformation::LicenseFlag::COMMERCIAL_USE));
+    ui->filterLicense->addElement(trUtf8("share after editing"), static_cast<int>(SoundfontInformation::LicenseFlag::SHARE_MODIFIED));
 
     // Properties
     ui->filterSampleSource->initialize();
@@ -187,9 +187,9 @@ void SoundfontBrowser::applyFilter(SoundfontFilter * filter)
         // License
         QList<int> selectedLicenses;
         if (filter->licenseFlags().testFlag(SoundfontInformation::LicenseFlag::COMMERCIAL_USE))
-            selectedLicenses.append((int)SoundfontInformation::LicenseFlag::COMMERCIAL_USE);
+            selectedLicenses.append(static_cast<int>(SoundfontInformation::LicenseFlag::COMMERCIAL_USE));
         if (filter->licenseFlags().testFlag(SoundfontInformation::LicenseFlag::SHARE_MODIFIED))
-            selectedLicenses.append((int)SoundfontInformation::LicenseFlag::SHARE_MODIFIED);
+            selectedLicenses.append(static_cast<int>(SoundfontInformation::LicenseFlag::SHARE_MODIFIED));
         ui->filterLicense->select(selectedLicenses);
 
         // Properties
@@ -245,7 +245,7 @@ SoundfontFilter * SoundfontBrowser::getFilter()
     QList<int> licenseIds = ui->filterLicense->getSelectedIds();
     foreach (int licenseId, licenseIds)
         sum += licenseId;
-    filter->setLicenseFlags((SoundfontInformation::LicenseFlags)sum);
+    filter->setLicenseFlags(static_cast<SoundfontInformation::LicenseFlags>(sum));
 
     // Properties
     filter->setProperties(SoundfontInformation::Property::SAMPLE_SOURCE, ui->filterSampleSource->getSelectedElements());
@@ -348,7 +348,7 @@ void SoundfontBrowser::updateCellHeight()
     for (int i = 0; i < ui->listWidget->count(); i++)
     {
         QListWidgetItem * item = ui->listWidget->item(i);
-        SoundfontCellFull* cell = (SoundfontCellFull*)ui->listWidget->itemWidget(item);
+        SoundfontCellFull* cell = dynamic_cast<SoundfontCellFull*>(ui->listWidget->itemWidget(item));
         item->setSizeHint(QSize(0, cell->heightForWidth(_lastWidth == -1 ? ui->listWidget->width() : _lastWidth)));
     }
 }
@@ -365,7 +365,7 @@ void SoundfontBrowser::on_listWidget_itemSelectionChanged()
     for (int i = 0; i < ui->listWidget->count(); i++)
     {
         QListWidgetItem * item = ui->listWidget->item(i);
-        ((SoundfontCellFull*)ui->listWidget->itemWidget(item))->setActive(item->isSelected());
+        (dynamic_cast<SoundfontCellFull*>(ui->listWidget->itemWidget(item)))->setActive(item->isSelected());
     }
 }
 
@@ -390,7 +390,7 @@ void SoundfontBrowser::keyPressEvent(QKeyEvent * event)
             QListWidgetItem * item = ui->listWidget->item(i);
             if (item->isSelected())
             {
-                SoundfontCellFull* cell = (SoundfontCellFull*)ui->listWidget->itemWidget(item);
+                SoundfontCellFull* cell = dynamic_cast<SoundfontCellFull*>(ui->listWidget->itemWidget(item));
                 RepositoryManager::getInstance()->openSoundfont(cell->getSoundfontId(), false);
             }
         }

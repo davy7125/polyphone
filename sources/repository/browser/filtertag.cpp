@@ -32,7 +32,8 @@
 FilterTag::FilterTag(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FilterTag),
-    _completer(nullptr)
+    _completer(nullptr),
+    _canCreate(false)
 {
     ui->setupUi(this);
     ui->tagArea->setLayout(new FlowLayout(0));
@@ -44,10 +45,11 @@ FilterTag::~FilterTag()
     delete _completer;
 }
 
-void FilterTag::setPossibleTags(QStringList tags)
+void FilterTag::setPossibleTags(QStringList tags, bool canCreate)
 {
+    _canCreate = canCreate;
     _possibleTags = tags;
-    if (_completer != NULL)
+    if (_completer != nullptr)
     {
         ui->lineEdit->setCompleter(nullptr);
         delete _completer;
@@ -73,7 +75,7 @@ void FilterTag::select(QStringList tags)
 
     // Add new tags
     foreach (QString tag, tags)
-        if (_possibleTags.contains(tag))
+        if (_possibleTags.contains(tag) || _canCreate)
             onCompletionSelected(tag);
 
     this->blockSignals(false);
@@ -105,14 +107,15 @@ void FilterTag::onCompletionSelected(QString completion)
 
 void FilterTag::on_lineEdit_returnPressed()
 {
-    if (_possibleTags.contains(ui->lineEdit->text()))
-        onCompletionSelected(ui->lineEdit->text());
+    QString tagToSelect = ui->lineEdit->text();
+    if (_possibleTags.contains(tagToSelect) || _canCreate)
+        onCompletionSelected(tagToSelect);
 }
 
 void FilterTag::onCellDelete()
 {
     // Delete the cell and update the tag list
-    FilterTagCell * cell = (FilterTagCell *)QObject::sender();
+    FilterTagCell * cell = dynamic_cast<FilterTagCell *>(QObject::sender());
     _tags.removeAll(cell->getTagName());
     cell->deleteLater();
 

@@ -33,7 +33,7 @@ class ComboBoxLoopMode : public QComboBox
     Q_OBJECT
 
 public:
-    explicit ComboBoxLoopMode(QWidget *parent = 0);
+    explicit ComboBoxLoopMode(QWidget *parent = nullptr);
     int getIndex() { return _currentIndex; }
 
 protected:

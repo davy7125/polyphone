@@ -36,7 +36,7 @@ class ToolGlobalSettings_gui : public AbstractToolGui
     Q_OBJECT
 
 public:
-    explicit ToolGlobalSettings_gui(QWidget *parent = 0);
+    explicit ToolGlobalSettings_gui(QWidget *parent = nullptr);
     ~ToolGlobalSettings_gui();
 
     /// Update the interface with the parameters

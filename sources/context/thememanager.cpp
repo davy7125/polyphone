@@ -509,6 +509,32 @@ QList<ThemeManager::ColorTheme> ThemeManager::getThemes()
     theme9.setColor(HIGHLIGHTED_TEXT, QColor(255, 255, 255));
     themes << theme9;
 
+    // Good night theme
+    ColorTheme theme10 = ColorTheme(trUtf8("Good night"), 10);
+    theme10.setColor(WINDOW_BACKGROUND, QColor(41, 38, 50));
+    theme10.setColor(WINDOW_TEXT, QColor(240, 240, 240));
+    theme10.setColor(BUTTON_BACKGROUND, QColor(51, 51, 73));
+    theme10.setColor(BUTTON_TEXT, QColor(212, 212, 226));
+    theme10.setColor(LIST_BACKGROUND, QColor(24, 21, 18));
+    theme10.setColor(LIST_ALTERNATIVE_BACKGROUND, QColor(50, 48, 40));
+    theme10.setColor(LIST_TEXT, QColor(255, 255, 255));
+    theme10.setColor(HIGHLIGHTED_BACKGROUND, QColor(224, 205, 169));
+    theme10.setColor(HIGHLIGHTED_TEXT, QColor(18, 17, 16));
+    themes << theme10;
+
+    // Pink theme
+    ColorTheme theme11 = ColorTheme(trUtf8("Pink"), 11);
+    theme11.setColor(WINDOW_BACKGROUND, QColor(255, 140, 177));
+    theme11.setColor(WINDOW_TEXT, QColor(0, 0, 0));
+    theme11.setColor(BUTTON_BACKGROUND, QColor(245, 185, 193));
+    theme11.setColor(BUTTON_TEXT, QColor(95, 1, 65));
+    theme11.setColor(LIST_BACKGROUND, QColor(255, 255, 255));
+    theme11.setColor(LIST_ALTERNATIVE_BACKGROUND, QColor(227, 224, 225));
+    theme11.setColor(LIST_TEXT, QColor(0, 76, 76));
+    theme11.setColor(HIGHLIGHTED_BACKGROUND, QColor(157, 48, 99));
+    theme11.setColor(HIGHLIGHTED_TEXT, QColor(255, 222, 223));
+    themes << theme11;
+
     return themes;
 }
 

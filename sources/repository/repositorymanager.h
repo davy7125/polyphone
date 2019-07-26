@@ -55,6 +55,7 @@ public:
     QString getCategoryName(int id);
     QStringList getProperties(SoundfontInformation::Property property) { return _properties[property]; }
     QString getLicenseLabel(QString licenseKey);
+    QMap<QString, QString> getLicenseLabels() { return _licenseLabels; }
     QString getLicenseLink(QString licenseKey);
     QStringList getTags() { return _tags; }
 

@@ -22,28 +22,29 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SOUNDFONTDOWNLOAD_H
-#define SOUNDFONTDOWNLOAD_H
+#ifndef SOUNDFONTEDITORLEFT_H
+#define SOUNDFONTEDITORLEFT_H
 
 #include <QWidget>
-class SoundfontDownloadData;
+class SoundfontInformation;
 
 namespace Ui {
-class SoundfontDownload;
+class SoundfontEditorLeft;
 }
 
-class SoundfontDownload : public QWidget
+class SoundfontEditorLeft : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit SoundfontDownload(QWidget *parent = 0);
-    ~SoundfontDownload();
+    explicit SoundfontEditorLeft(QWidget *parent = nullptr);
+    ~SoundfontEditorLeft();
 
-    void display(QList<SoundfontDownloadData *> data);
+    // Initialize the interface with the soundfont information
+    void initialize(SoundfontInformation * soundfontInfo);
 
 private:
-    Ui::SoundfontDownload *ui;
+    Ui::SoundfontEditorLeft *ui;
 };
 
-#endif // SOUNDFONTDOWNLOAD_H
+#endif // SOUNDFONTEDITORLEFT_H

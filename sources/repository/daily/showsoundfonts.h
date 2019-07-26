@@ -40,7 +40,7 @@ class ShowSoundfonts : public QWidget
     Q_OBJECT
 
 public:
-    explicit ShowSoundfonts(QWidget *parent = 0);
+    explicit ShowSoundfonts(QWidget *parent = nullptr);
     ~ShowSoundfonts();
 
 public slots:

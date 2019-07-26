@@ -42,7 +42,7 @@ public:
         FORME_ALEATOIRE
     };
 
-    explicit GraphParamGlobal(QWidget *parent = 0);
+    explicit GraphParamGlobal(QWidget *parent = nullptr);
     ~GraphParamGlobal();
 
     bool eventFilter(QObject* o, QEvent* e)

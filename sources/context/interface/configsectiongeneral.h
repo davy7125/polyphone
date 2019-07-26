@@ -36,7 +36,7 @@ class ConfigSectionGeneral : public QWidget
     Q_OBJECT
 
 public:
-    explicit ConfigSectionGeneral(QWidget *parent = 0);
+    explicit ConfigSectionGeneral(QWidget *parent = nullptr);
     ~ConfigSectionGeneral();
 
     void initialize();

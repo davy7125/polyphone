@@ -37,7 +37,7 @@ class ToolExternalCommand_gui : public AbstractToolGui
     Q_OBJECT
 
 public:
-    explicit ToolExternalCommand_gui(QWidget *parent = 0);
+    explicit ToolExternalCommand_gui(QWidget *parent = nullptr);
     ~ToolExternalCommand_gui();
 
     /// Update the interface with the parameters
