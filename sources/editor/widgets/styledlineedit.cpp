@@ -25,6 +25,7 @@
 #include "styledlineedit.h"
 #include "contextmanager.h"
 #include <QPainter>
+#include <QKeyEvent>
 
 StyledLineEdit::StyledLineEdit(QWidget * parent) : QLineEdit(parent),
     _resize(true)
