@@ -18,8 +18,8 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __SOUNDFONT_H__
-#define __SOUNDFONT_H__
+#ifndef SFONT_H
+#define SFONT_H
 
 #include <QtCore/QString>
 #include <QtCore/QList>

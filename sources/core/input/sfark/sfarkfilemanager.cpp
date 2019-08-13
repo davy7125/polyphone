@@ -120,6 +120,18 @@ int SfArkFileManager::setPos(int fileHandler, long offset)
     return false;
 }
 
+// Return true if success, otherwise false
+int SfArkFileManager::setAbsolutePos(int fileHandler, long pos)
+{
+    if (_mapDataStream.contains(fileHandler))
+    {
+        QDataStream * stream = _mapDataStream.value(fileHandler);
+        QIODevice * device = stream->device();
+        return device->seek(pos);
+    }
+    return false;
+}
+
 // Return the number of bytes read, -1 otherwise
 int SfArkFileManager::read(int fileHandler, char * ptr, unsigned int count)
 {

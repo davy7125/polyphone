@@ -60,6 +60,12 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="placeholderText">
+      <string>No description.</string>
+     </property>
     </widget>
    </item>
    <item>

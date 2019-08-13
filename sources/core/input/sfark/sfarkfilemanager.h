@@ -49,6 +49,9 @@ public:
     // Return true if success, otherwise false
     int setPos(int fileHandler, long offset);
 
+    // Return true if success, otherwise false
+    int setAbsolutePos(int fileHandler, long pos);
+
     // Return the number of bytes read, -1 otherwise
     int read(int fileHandler, char *ptr, unsigned int count);
 

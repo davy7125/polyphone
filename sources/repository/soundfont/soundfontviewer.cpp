@@ -121,7 +121,7 @@ void SoundfontViewer::onDetailsReady(int soundfontId)
     {
         ui->viewerCenter->initialize(sd);
         ui->stackedWidget->setCurrentIndex(1);
-        ui->pushEdit->show();
+        //ui->pushEdit->show(); // No editing for now
     }
     else
         ui->stackedWidget->setCurrentIndex(2);

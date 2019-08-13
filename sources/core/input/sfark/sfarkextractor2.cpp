@@ -127,7 +127,7 @@ int WriteOutputFile(const quint8 *Buf, int BytesToWrite)
 
 bool SetOutputFilePosition(int NewPos)
 {
-    if (!SfArkExtractor2::_fileManager.setPos(OutputFileHandle, NewPos))
+    if (!SfArkExtractor2::_fileManager.setAbsolutePos(OutputFileHandle, NewPos))
     {
         ChkErr("set position", false);
         return false;
@@ -145,60 +145,21 @@ void CloseOutputFile()
     OutputFileHandle = -1;
 }
 
-#include <stdio.h>
-
-#ifdef Q_OS_WIN
-// Windows32 target
-#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
-#include "windows.h"
-#undef 	WIN32_LEAN_AND_MEAN
-
-#define	FILE_SHARE_NONE		0
-#define NO_SECURITY			((LPSECURITY_ATTRIBUTES) 0)
-#define NOT_OVERLAPPED		((LPOVERLAPPED) 0)
-#define	NO_TEMPLATE			((HANDLE) 0)
-
-#define	CREATEFILE(FileName) 	CreateFile((LPCTSTR)FileName, GENERIC_WRITE, FILE_SHARE_NONE, NO_SECURITY, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL + FILE_FLAG_SEQUENTIAL_SCAN, NO_TEMPLATE)
-#define OPENFILE(FileName)	CreateFile((LPCTSTR)FileName, GENERIC_READ,  FILE_SHARE_READ, NO_SECURITY, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL + FILE_FLAG_SEQUENTIAL_SCAN, NO_TEMPLATE)
-#define READFILE(fh, Buf, BytesToRead, pBytesRead)	ReadFile(fh, Buf, BytesToRead, pBytesRead, NOT_OVERLAPPED)
-#define WRITEFILE(fh, Buf, BytesToWrite, pBytesWritten)	ReadFile(fh, Buf, BytesToWrite, pBytesWritten, NOT_OVERLAPPED)
-#define	SETFILEPOINTER(fh, NewPos)	(SetFilePointer(fh, NewPos, 0, FILE_BEGIN))
-#define CLOSEFILE(fh)		(CloseHandle(fh))
-
-// Mac, Linux target
-#else
-typedef FILE* HANDLE;
-
-#define INVALID_HANDLE_VALUE	(nullptr)
-
-#define	CREATEFILE(filename) 	fopen(filename, "wb")
-#define OPENFILE(filename)	fopen(filename, "rb")
-#define READFILE(fh, Buf, BytesToRead, pBytesRead)		*pBytesRead = fread(Buf, 1, BytesToRead, fh)
-#define WRITEFILE(fh, Buf, BytesToWrite, pBytesWritten)	*pBytesWritten = fwrite(Buf, 1, BytesToWrite, fh)
-#define SETFILEPOINTER(fh, NewPos)	(fseek(fh, NewPos, SEEK_SET))
-#define CLOSEFILE(fh)		(fclose(fh) == 0)
-#endif
-
 // Static data to track current input and output file...
-HANDLE	InputFileHandle = INVALID_HANDLE_VALUE;		// current input file handle
+int	InputFileHandle = -1;		// current input file handle
 
 void OpenInputFile(const char *FileName)
 {
-    InputFileHandle = OPENFILE(FileName);
-    if (InputFileHandle == INVALID_HANDLE_VALUE)
+    InputFileHandle = SfArkExtractor2::_fileManager.openReadOnly(FileName);
+    if (InputFileHandle == -1)
         ChkErr("open", true);
-
-    //InputFileHandle = SfArkExtractor2::_fileManager.openReadOnly(FileName);
-    //if (InputFileHandle == -1)
-    //    ChkErr("open", true);
 }
 
 int ReadInputFile(quint8 *Buf, int BytesToRead)
 {
     unsigned long BytesRead;
 
-    //BytesRead = SfArkExtractor2::_fileManager.read(InputFileHandle, (char*)Buf, BytesToRead);
-    READFILE(InputFileHandle, Buf, BytesToRead, &BytesRead);
+    BytesRead = SfArkExtractor2::_fileManager.read(InputFileHandle, (char*)Buf, BytesToRead);
     if (BytesRead < 0)
     {
         ChkErr("read", true);
@@ -210,8 +171,7 @@ int ReadInputFile(quint8 *Buf, int BytesToRead)
 
 bool SetInputFilePosition(int NewPos)
 {
-    //if (!SfArkExtractor2::_fileManager.setPos(InputFileHandle, NewPos))
-    if (SETFILEPOINTER(InputFileHandle, NewPos) != 0)
+    if (!SfArkExtractor2::_fileManager.setAbsolutePos(InputFileHandle, NewPos))
     {
         ChkErr("set position", true);
         return false;
@@ -222,13 +182,9 @@ bool SetInputFilePosition(int NewPos)
 
 void CloseInputFile()
 {
-    if (InputFileHandle != INVALID_HANDLE_VALUE && CLOSEFILE(InputFileHandle) == 0)
+    if (InputFileHandle == -1)
         ChkErr("close", true);
-    InputFileHandle = INVALID_HANDLE_VALUE;
-
-    //    if (InputFileHandle == -1)
-    //        ChkErr("close", true);
-    //    else
-    //        SfArkExtractor2::_fileManager.close(InputFileHandle);
-    //    InputFileHandle = -1;
+    else
+        SfArkExtractor2::_fileManager.close(InputFileHandle);
+    InputFileHandle = -1;
 }
