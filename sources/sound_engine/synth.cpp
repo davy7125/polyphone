@@ -344,13 +344,13 @@ void Synth::setGainSample(int gain)
 
 void Synth::setStereo(bool isStereo)
 {
-    // Modification lecture mono ou stereo
+    // Enable the stereo when playing a sample
     SoundEngine::setStereo(isStereo);
 }
 
 void Synth::setLoopEnabled(bool isEnabled)
 {
-    // Modification lecture en boucle ou non
+    // Enable the loop when playing a sample
     SoundEngine::setLoopEnabled(isEnabled);
 }
 

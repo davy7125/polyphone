@@ -44,6 +44,9 @@ void ModulatedParameter::initValue(AttributeValue value, bool isPrst)
         _prstValue.setStoredValue(value);
     else
         _instValue.setStoredValue(value);
+
+    // Initialize the computed value for non real-time parameters
+    _computedValue = value;
 }
 
 void ModulatedParameter::clearModulations()
