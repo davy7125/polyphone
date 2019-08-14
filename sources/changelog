@@ -16,9 +16,10 @@ polyphone (2.1) unstable; urgency=low
   * (fix) several modulators can target the same modulator
   * (fix) bug when exporting several WAV files
   * (fix) monitoring tool was not working
+  * (fix) sfArk import with Windows
   * (fix) small GUI issues
 
- -- Davy Triponney <davy.triponney@gmail.com>
+ -- Davy Triponney <davy.triponney@gmail.com>  Wed, 14 Aug 2019 14:40:30 +0100
 
 
 polyphone (2.0) UNRELEASED; urgency=low

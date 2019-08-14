@@ -16,8 +16,9 @@ The following libraries are required (the name may vary depending on your system
  - vorbis      (libvorbis-dev)
  - ogg         (libogg-dev)
  - ssl         (libssl-dev)
+ - flac        (libflac-dev)
 
-Use your package manager to install them: synaptic, yum,...
+Use your package manager to install them: apt, synaptic, yum,...
 
 
 ######### 2. Build #################################################################################
