@@ -41,6 +41,8 @@ UrlReader::UrlReader(QString url) :
 {
     // Connect the network access manager
     connect(_webCtrl, SIGNAL(finished(QNetworkReply*)), this, SLOT(fileDownloaded(QNetworkReply*)), Qt::DirectConnection);
+    if (!QSslSocket::supportsSsl())
+        qDebug() << "SSL not supported! Please provide the following library:" << QSslSocket::sslLibraryBuildVersionString();
 
     // Prepare the timer
     connect(_timer, SIGNAL(timeout()), this, SLOT(onTimeout()));
