@@ -71,7 +71,7 @@ private:
     bool _isPrst;
 
     // Distinction between the initial key that triggered the sound (still useful for the aftertouch)
-    // and the value used for the modulators (keynum and velocity might be overriden)
+    // and the value used for the modulators (keynum and velocity might be overridden)
     int _initialKey, _keyForComputation, _velForComputation;
 };
 

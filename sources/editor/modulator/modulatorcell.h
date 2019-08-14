@@ -53,7 +53,7 @@ public:
     // Inform the cell that it's been selected (the colors will change)
     void setSelected(bool isSelected);
 
-    void setOverridenBy(int otherModulator);
+    void setOverwrittenBy(int otherModulator);
     void setOverridingDefault();
 
     // Get the modulator as configured in the cell
@@ -80,7 +80,7 @@ private:
     bool _isPrst;
     SoundfontManager * _sm;
     QString _intRange;
-    bool _overridenBy;
+    bool _overwrittenBy;
 
     static const QString s_doubleArrow;
 };

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true">Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="12" column="0" colspan="2">
@@ -250,6 +250,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>StyledLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>styledlineedit.h</header>
+  </customwidget>
+  <customwidget>
    <class>FilterFlow</class>
    <extends>QWidget</extends>
    <header>filterflow.h</header>
@@ -260,11 +265,6 @@
    <extends>QWidget</extends>
    <header>filtertag.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>StyledLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>styledlineedit.h</header>
   </customwidget>
   <customwidget>
    <class>SmallComboBox</class>

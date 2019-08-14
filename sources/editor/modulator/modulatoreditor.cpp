@@ -260,12 +260,12 @@ void ModulatorEditor::checkOverrides()
         ModulatorCell * cell = dynamic_cast<ModulatorCell *>(ui->listWidget->itemWidget(item));
         ModulatorData mod = cell->getModulatorData();
 
-        // Test if previous mods are overriden
+        // Test if previous mods are overridden
         for (int j = _mods.count() - 1; j >= 0; j--)
         {
             if (_mods[j] == mod)
             {
-                _cells[j]->setOverridenBy(i);
+                _cells[j]->setOverwrittenBy(i);
                 break;
             }
         }

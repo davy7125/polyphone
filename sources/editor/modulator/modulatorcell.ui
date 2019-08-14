@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>610</width>
+    <width>634</width>
     <height>78</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true">Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <property name="verticalSpacing">
@@ -89,7 +89,7 @@
    <item row="0" column="6">
     <widget class="QSpinBox" name="spinAmount">
      <property name="prefix">
-      <string>× </string>
+      <string notr="true">× </string>
      </property>
      <property name="minimum">
       <number>-32768</number>
@@ -154,7 +154,7 @@
      <item>
       <widget class="QLabel" name="labelModNumber">
        <property name="text">
-        <string>Modulator
+        <string notr="true">Modulator
 #1</string>
        </property>
        <property name="alignment">

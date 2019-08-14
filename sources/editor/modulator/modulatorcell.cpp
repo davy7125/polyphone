@@ -39,7 +39,7 @@ ModulatorCell::ModulatorCell(EltID id, QWidget *parent) :
     _id(id),
     _isPrst(id.isPrst()),
     _sm(SoundfontManager::getInstance()),
-    _overridenBy(false)
+    _overwrittenBy(false)
 {
     ui->setupUi(this);
 
@@ -87,7 +87,7 @@ ModulatorCell::ModulatorCell(ModulatorData modulatorData, QWidget * parent) :
     _id(elementUnknown),
     _isPrst(false),
     _sm(nullptr),
-    _overridenBy(false)
+    _overwrittenBy(false)
 {
     ui->setupUi(this);
 
@@ -141,11 +141,11 @@ void ModulatorCell::initializeStyle()
     ui->labelFinalRange->setFont(_fontHint);
 }
 
-void ModulatorCell::setOverridenBy(int otherModulator)
+void ModulatorCell::setOverwrittenBy(int otherModulator)
 {
-    _overridenBy = true;
+    _overwrittenBy = true;
     setSelected(_isSelected);
-    ui->labelDetails->setText(trUtf8("overriden by %1").arg(otherModulator + 1));
+    ui->labelDetails->setText(trUtf8("overwritten by %1").arg(otherModulator + 1));
     ui->labelDetails->show();
 }
 
@@ -171,7 +171,7 @@ void ModulatorCell::setSelected(bool isSelected)
     ui->labelModNumber->setStyleSheet(QString("QLabel{color:%1}").arg(_isSelected ? colorSelected : colorNormal));
     ui->labelFinalRange->setStyleSheet(QString("QLabel{color:%1}").arg(_isSelected ? colorSelected : colorNormal));
     ui->labelDetails->setStyleSheet(QString("QLabel{color:%1}").arg(
-                                        _isSelected ? colorSelected : (_overridenBy ? colorRed : colorNormal)));
+                                        _isSelected ? colorSelected : (_overwrittenBy ? colorRed : colorNormal)));
 }
 
 ModulatorCell::~ModulatorCell()
@@ -367,7 +367,9 @@ void ModulatorCell::onOutputChanged(int dummy)
         break;
     }
 
-    ui->labelFinalRange->setText((isAddition ? trUtf8("Add from: ") : trUtf8("Multiply from: ")) + QString::number(dMin) + " " + unit + "\n" +
-                                 trUtf8("To: ") + QString::number(dMax) + " " + unit);
+    ui->labelFinalRange->setText((isAddition ? trUtf8("Add from:") :
+                                               trUtf8("Multiply from:")) +
+                                 " " + QString::number(dMin) + " " + unit + "\n" +
+                                 trUtf8("To:") + " " + QString::number(dMax) + " " + unit);
     this->repaint();
 }

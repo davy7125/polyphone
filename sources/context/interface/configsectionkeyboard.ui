@@ -7,60 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>376</width>
-    <height>274</height>
+    <height>198</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string notr="true">Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="1">
-    <widget class="QComboBox" name="comboFirstC">
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
-     <item>
-      <property name="text">
-       <string notr="true">0</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">12</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">24</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">36</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">48</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">60</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">72</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">84</string>
-      </property>
-     </item>
-    </widget>
-   </item>
    <item row="0" column="0" colspan="2">
     <widget class="QTableWidget" name="tableKeyboardMap">
      <property name="sizePolicy">
@@ -174,16 +127,6 @@
      </column>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QSpinBox" name="spinDefaultVelocity">
-     <property name="maximum">
-      <number>127</number>
-     </property>
-     <property name="value">
-      <number>127</number>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
@@ -191,28 +134,51 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_20">
-     <property name="text">
-      <string>Default velocity</string>
+   <item row="1" column="1">
+    <widget class="QComboBox" name="comboFirstC">
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Default polyphonic aftertouch</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QSpinBox" name="spinBoxDefaultAfterTouch">
-     <property name="maximum">
-      <number>127</number>
-     </property>
-     <property name="value">
-      <number>127</number>
-     </property>
+     <item>
+      <property name="text">
+       <string notr="true">0</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">12</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">24</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">36</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">48</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">60</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">72</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">84</string>
+      </property>
+     </item>
     </widget>
    </item>
   </layout>

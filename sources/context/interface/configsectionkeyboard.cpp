@@ -68,16 +68,6 @@ void ConfigSectionKeyboard::initialize()
 
     // Octave configuration
     initializeFirstC();
-
-    // Default velocity
-    ui->spinDefaultVelocity->blockSignals(true);
-    ui->spinDefaultVelocity->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "velocity", 127).toInt());
-    ui->spinDefaultVelocity->blockSignals(false);
-
-    // Default polyphonic aftertouch
-    ui->spinBoxDefaultAfterTouch->blockSignals(true);
-    ui->spinBoxDefaultAfterTouch->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "aftertouch", 127).toInt());
-    ui->spinBoxDefaultAfterTouch->blockSignals(false);
 }
 
 void ConfigSectionKeyboard::initializeFirstC()
@@ -102,14 +92,4 @@ void ConfigSectionKeyboard::renameComboFirstC()
 void ConfigSectionKeyboard::on_comboFirstC_currentIndexChanged(int index)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "octave_offset", index);
-}
-
-void ConfigSectionKeyboard::on_spinDefaultVelocity_editingFinished()
-{
-    ContextManager::configuration()->setValue(ConfManager::SECTION_MIDI, "velocity", ui->spinDefaultVelocity->value());
-}
-
-void ConfigSectionKeyboard::on_spinBoxDefaultAfterTouch_editingFinished()
-{
-    ContextManager::configuration()->setValue(ConfManager::SECTION_MIDI, "aftertouch", ui->spinBoxDefaultAfterTouch->value());
 }

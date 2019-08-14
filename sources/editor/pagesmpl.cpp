@@ -1108,7 +1108,7 @@ void PageSmpl::onCutOrdered(int start, int end)
     QMessageBox msgBox(this);
     msgBox.setIcon(QMessageBox::Warning);
     msgBox.setWindowTitle(trUtf8("Warning"));
-    msgBox.setText(trUtf8("Are you sure to cut the sample from <b>%0</b> to <b>%1</b>?").arg(start).arg(end));
+    msgBox.setText(trUtf8("Are you sure to cut the sample from <b>%1</b> to <b>%2</b>?").arg(start).arg(end));
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     msgBox.button(QMessageBox::Yes)->setText(trUtf8("&Yes"));
     msgBox.button(QMessageBox::No)->setText(trUtf8("&No"));

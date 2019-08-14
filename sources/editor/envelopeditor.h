@@ -76,7 +76,7 @@ private:
     void stopSignals(bool isStopped);
     void addEnvelop(EltID id, bool isVolume, bool isMain);
     void addSample(EltID idInstSmpl);
-    double computeValue(EltID id, AttributeType champ, bool &isOverriden);
+    double computeValue(EltID id, AttributeType champ, bool &isOverridden);
     void processEdit(AttributeType champ, double value);
     void processClear(AttributeType champ);
 };

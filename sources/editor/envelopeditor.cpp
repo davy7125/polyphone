@@ -128,47 +128,47 @@ void EnvelopEditor::populate()
     if (_displayedElt.count() == 1)
     {
         EltID id = _displayedElt[0];
-        bool isOverriden;
+        bool isOverridden;
 
         // Delay
-        ui->doubleSpinDelay->setValue(computeValue(id, _isVolume ? champ_delayVolEnv : champ_delayModEnv, isOverriden));
-        ui->labelDelay->setFont(isOverriden ? fontB : font);
-        ui->pushDelay->setEnabled(isOverriden);
+        ui->doubleSpinDelay->setValue(computeValue(id, _isVolume ? champ_delayVolEnv : champ_delayModEnv, isOverridden));
+        ui->labelDelay->setFont(isOverridden ? fontB : font);
+        ui->pushDelay->setEnabled(isOverridden);
 
         // Attack
-        ui->doubleSpinAttack->setValue(computeValue(id, _isVolume ? champ_attackVolEnv : champ_attackModEnv, isOverriden));
-        ui->labelAttack->setFont(isOverriden ? fontB : font);
-        ui->pushAttack->setEnabled(isOverriden);
+        ui->doubleSpinAttack->setValue(computeValue(id, _isVolume ? champ_attackVolEnv : champ_attackModEnv, isOverridden));
+        ui->labelAttack->setFont(isOverridden ? fontB : font);
+        ui->pushAttack->setEnabled(isOverridden);
 
         // Hold
-        ui->doubleSpinHold->setValue(computeValue(id, _isVolume ? champ_holdVolEnv : champ_holdModEnv, isOverriden));
-        ui->labelHold->setFont(isOverriden ? fontB : font);
-        ui->pushHold->setEnabled(isOverriden);
+        ui->doubleSpinHold->setValue(computeValue(id, _isVolume ? champ_holdVolEnv : champ_holdModEnv, isOverridden));
+        ui->labelHold->setFont(isOverridden ? fontB : font);
+        ui->pushHold->setEnabled(isOverridden);
 
         // Decay
-        ui->doubleSpinDecay->setValue(computeValue(id, _isVolume ? champ_decayVolEnv : champ_decayModEnv, isOverriden));
-        ui->labelDecay->setFont(isOverriden ? fontB : font);
-        ui->pushDecay->setEnabled(isOverriden);
+        ui->doubleSpinDecay->setValue(computeValue(id, _isVolume ? champ_decayVolEnv : champ_decayModEnv, isOverridden));
+        ui->labelDecay->setFont(isOverridden ? fontB : font);
+        ui->pushDecay->setEnabled(isOverridden);
 
         // Sustain
-        ui->doubleSpinSustain->setValue(computeValue(id, _isVolume ? champ_sustainVolEnv : champ_sustainModEnv, isOverriden));
-        ui->labelSustain->setFont(isOverriden ? fontB : font);
-        ui->pushSustain->setEnabled(isOverriden);
+        ui->doubleSpinSustain->setValue(computeValue(id, _isVolume ? champ_sustainVolEnv : champ_sustainModEnv, isOverridden));
+        ui->labelSustain->setFont(isOverridden ? fontB : font);
+        ui->pushSustain->setEnabled(isOverridden);
 
         // Release
-        ui->doubleSpinRelease->setValue(computeValue(id, _isVolume ? champ_releaseVolEnv : champ_releaseModEnv, isOverriden));
-        ui->labelRelease->setFont(isOverriden ? fontB : font);
-        ui->pushRelease->setEnabled(isOverriden);
+        ui->doubleSpinRelease->setValue(computeValue(id, _isVolume ? champ_releaseVolEnv : champ_releaseModEnv, isOverridden));
+        ui->labelRelease->setFont(isOverridden ? fontB : font);
+        ui->pushRelease->setEnabled(isOverridden);
 
         // Key -> Hold
-        ui->spinKeyHold->setValue(computeValue(id, _isVolume ? champ_keynumToVolEnvHold : champ_keynumToModEnvHold, isOverriden));
-        ui->labelKeyHold->setFont(isOverriden ? fontB : font);
-        ui->pushKeyHold->setEnabled(isOverriden);
+        ui->spinKeyHold->setValue(computeValue(id, _isVolume ? champ_keynumToVolEnvHold : champ_keynumToModEnvHold, isOverridden));
+        ui->labelKeyHold->setFont(isOverridden ? fontB : font);
+        ui->pushKeyHold->setEnabled(isOverridden);
 
         // Key -> Decay
-        ui->spinKeyDecay->setValue(computeValue(id, _isVolume ? champ_keynumToVolEnvDecay : champ_keynumToModEnvDecay, isOverriden));
-        ui->labelKeyDecay->setFont(isOverriden ? fontB : font);
-        ui->pushKeyDecay->setEnabled(isOverriden);
+        ui->spinKeyDecay->setValue(computeValue(id, _isVolume ? champ_keynumToVolEnvDecay : champ_keynumToModEnvDecay, isOverridden));
+        ui->labelKeyDecay->setFont(isOverridden ? fontB : font);
+        ui->pushKeyDecay->setEnabled(isOverridden);
     }
 
     // Graphics
@@ -208,11 +208,11 @@ void EnvelopEditor::populate()
     stopSignals(false);
 }
 
-double EnvelopEditor::computeValue(EltID id, AttributeType champ, bool &isOverriden)
+double EnvelopEditor::computeValue(EltID id, AttributeType champ, bool &isOverridden)
 {
     if (_sf2->isSet(id, champ))
     {
-        isOverriden = true;
+        isOverridden = true;
         return Attribute::toRealValue(champ, false, _sf2->get(id, champ));
     }
     else
@@ -227,7 +227,7 @@ double EnvelopEditor::computeValue(EltID id, AttributeType champ, bool &isOverri
             if (_sf2->isSet(id2, champ))
                 value = Attribute::toRealValue(champ, false, _sf2->get(id2, champ));
         }
-        isOverriden = false;
+        isOverridden = false;
         return value;
     }
 }
@@ -237,28 +237,28 @@ void EnvelopEditor::addEnvelop(EltID id, bool isVolume, bool isMain)
     int index = ui->graphicsView->addEnvelop();
     ui->graphicsView->setEnvelopStyle(index, id.typeElement == elementInst, isVolume, isMain);
 
-    bool isOverriden = false;
+    bool isOverridden = false;
     if (isVolume)
     {
-        ui->graphicsView->setValue(index, Envelop::DELAY, computeValue(id, champ_delayVolEnv, isOverriden), isOverriden);
-        ui->graphicsView->setValue(index, Envelop::ATTACK, computeValue(id, champ_attackVolEnv, isOverriden), isOverriden);
-        ui->graphicsView->setValue(index, Envelop::HOLD, computeValue(id, champ_holdVolEnv, isOverriden), isOverriden);
-        ui->graphicsView->setValue(index, Envelop::DECAY, computeValue(id, champ_decayVolEnv, isOverriden), isOverriden);
-        ui->graphicsView->setValue(index, Envelop::SUSTAIN, 1. - computeValue(id, champ_sustainVolEnv, isOverriden) / 144., isOverriden);
-        ui->graphicsView->setValue(index, Envelop::RELEASE, computeValue(id, champ_releaseVolEnv, isOverriden), isOverriden);
-        ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_HOLD, computeValue(id, champ_keynumToVolEnvHold, isOverriden), isOverriden);
-        ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_DECAY, computeValue(id, champ_keynumToVolEnvDecay, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::DELAY, computeValue(id, champ_delayVolEnv, isOverridden), isOverridden);
+        ui->graphicsView->setValue(index, Envelop::ATTACK, computeValue(id, champ_attackVolEnv, isOverridden), isOverridden);
+        ui->graphicsView->setValue(index, Envelop::HOLD, computeValue(id, champ_holdVolEnv, isOverridden), isOverridden);
+        ui->graphicsView->setValue(index, Envelop::DECAY, computeValue(id, champ_decayVolEnv, isOverridden), isOverridden);
+        ui->graphicsView->setValue(index, Envelop::SUSTAIN, 1. - computeValue(id, champ_sustainVolEnv, isOverridden) / 144., isOverridden);
+        ui->graphicsView->setValue(index, Envelop::RELEASE, computeValue(id, champ_releaseVolEnv, isOverridden), isOverridden);
+        ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_HOLD, computeValue(id, champ_keynumToVolEnvHold, isOverridden), isOverridden);
+        ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_DECAY, computeValue(id, champ_keynumToVolEnvDecay, isOverridden), isOverridden);
     }
     else
     {
-        ui->graphicsView->setValue(index, Envelop::DELAY, computeValue(id, champ_delayModEnv, isOverriden), isOverriden);
-        ui->graphicsView->setValue(index, Envelop::ATTACK, computeValue(id, champ_attackModEnv, isOverriden), isOverriden);
-        ui->graphicsView->setValue(index, Envelop::HOLD, computeValue(id, champ_holdModEnv, isOverriden), isOverriden);
-        ui->graphicsView->setValue(index, Envelop::DECAY, computeValue(id, champ_decayModEnv, isOverriden), isOverriden);
-        ui->graphicsView->setValue(index, Envelop::SUSTAIN, 1. - computeValue(id, champ_sustainModEnv, isOverriden) / 100., isOverriden);
-        ui->graphicsView->setValue(index, Envelop::RELEASE, computeValue(id, champ_releaseModEnv, isOverriden), isOverriden);
-        ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_HOLD, computeValue(id, champ_keynumToModEnvHold, isOverriden), isOverriden);
-        ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_DECAY, computeValue(id, champ_keynumToModEnvDecay, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::DELAY, computeValue(id, champ_delayModEnv, isOverridden), isOverridden);
+        ui->graphicsView->setValue(index, Envelop::ATTACK, computeValue(id, champ_attackModEnv, isOverridden), isOverridden);
+        ui->graphicsView->setValue(index, Envelop::HOLD, computeValue(id, champ_holdModEnv, isOverridden), isOverridden);
+        ui->graphicsView->setValue(index, Envelop::DECAY, computeValue(id, champ_decayModEnv, isOverridden), isOverridden);
+        ui->graphicsView->setValue(index, Envelop::SUSTAIN, 1. - computeValue(id, champ_sustainModEnv, isOverridden) / 100., isOverridden);
+        ui->graphicsView->setValue(index, Envelop::RELEASE, computeValue(id, champ_releaseModEnv, isOverridden), isOverridden);
+        ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_HOLD, computeValue(id, champ_keynumToModEnvHold, isOverridden), isOverridden);
+        ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_DECAY, computeValue(id, champ_keynumToModEnvDecay, isOverridden), isOverridden);
     }
 
     // Keyrange of the envelop
@@ -384,8 +384,8 @@ void EnvelopEditor::on_spinKeyDecay_editingFinished()
 
 void EnvelopEditor::processEdit(AttributeType champ, double value)
 {
-    bool isOverriden = true;
-    double oldValue = computeValue(_displayedElt[0], champ, isOverriden);
+    bool isOverridden = true;
+    double oldValue = computeValue(_displayedElt[0], champ, isOverridden);
     if (qAbs(value - oldValue) > 0.0005)
     {
         AttributeValue val = Attribute::fromRealValue(champ, false, value);

@@ -254,7 +254,7 @@ QString ConfManager::getMapping(int numOctave, Key key)
         break;
     }
 
-    // The default value is possibly overriden
+    // The default value is possibly overridden
     QString override = this->getValue(SECTION_KEYBOARD, "key_" + QString::number(numOctave) + "_" + QString::number((int)key), txt).toString();
     return (override != "") ? override : txt;
 }
