@@ -29,6 +29,7 @@
 #include "sfarkglobal.h"
 #include "zlib.h"
 #include "stdint.h"
+#include <QDir>
 
 #ifdef Q_OS_MAC
 #include "unistd.h"
@@ -1800,23 +1801,17 @@ qint32 SfArkExtractor1::assembleParts()
 
 void SfArkExtractor1::getTempPartName(char partNum)
 {
-    quint32	len;
-    char *			buffer;
+    // Temp directory
+    char * buffer = (char *)_sfArkInfo->WorkBuffer2;
+    strcpy(buffer, QDir::tempPath().toStdString().c_str());
+    quint32 len = strlen(buffer);
+    buffer[len++] = '/';
 
-    buffer = (char *)_sfArkInfo->WorkBuffer2;
-    {
-        char * tmpdir;
-
-        if (!(tmpdir = getenv("TMPDIR")))
-            strcpy(buffer, "/tmp");
-        else
-            strcpy(buffer, tmpdir);
-        len = strlen(buffer);
-        buffer[len++] = '/';
-    }
-
+    // Append the file name
     strcpy(&buffer[len], (const char *)_sfArkInfo->WorkBuffer2 + 262144 - 1024);
     len += _sfArkInfo->LeadingPadUncompSize;
+
+    // Followed by the part number
     buffer[len++] = partNum;
     buffer[len] = 0;
 }
