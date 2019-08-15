@@ -41,6 +41,7 @@ public:
     void addCategory(int id);
     void addProperty(SoundfontInformation::Property property, QString propertyValue);
     void addTag(QString tagName);
+    void polish(QStyle *style);
 
 signals:
     // Signal emitted when an item is clicked

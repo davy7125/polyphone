@@ -40,7 +40,7 @@ SoundfontCell::SoundfontCell(SoundfontInformation* soundfontInfo, QWidget *paren
     ui->setupUi(this);
     this->installEventFilter(this);
 
-    if (s_icons == NULL)
+    if (s_icons == nullptr)
         s_icons = new IconContainer();
 
     // Title
@@ -70,7 +70,7 @@ SoundfontCell::SoundfontCell(SoundfontInformation* soundfontInfo, QWidget *paren
     _activeStyleSheet = QString("QPushButton{background-color:") + buttonText.name() + "; color:" + buttonBackground.name() +
             ";border:0px;padding:5px;border-radius:4px;}" +
             "QPushButton:hover{ background-color:" + buttonBackgroundHover2.name() + ";}" +
-            "QLabel{color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";}";
+            "ElidedLabel{color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";}";
 
     // Initialize the style
     this->setActive(false);
@@ -80,28 +80,32 @@ SoundfontCell::~SoundfontCell()
 {
     delete ui;
 }
-
+#include <QDebug>
 void SoundfontCell::setActive(bool isActive)
 {
     if (isActive && !_active)
     {
         this->setStyleSheet(_activeStyleSheet);
-        ui->iconAuthor->setPixmap(s_icons->_userIconSelected);
 
         // Author texts
+        ui->iconAuthor->setPixmap(s_icons->_userIconSelected);
         QString linkColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
         ui->labelAuthor->setText(QString(_authorTextNoColor).arg(linkColor));
     }
     else if (!isActive && _active)
     {
         this->setStyleSheet(_normalStyleSheet);
-        ui->iconAuthor->setPixmap(s_icons->_userIcon);
 
         // Author texts
+        ui->iconAuthor->setPixmap(s_icons->_userIcon);
         QString linkColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
         ui->labelAuthor->setText(QString(_authorTextNoColor).arg(linkColor));
     }
     _active = isActive;
+
+    // So that the stylesheet updates...
+    this->style()->polish(ui->labelTitle);
+    ui->line3->polish(this->style());
 }
 
 SoundfontCell::IconContainer::IconContainer()
@@ -122,7 +126,7 @@ void SoundfontCell::on_labelAuthor_linkActivated(const QString &link)
 
 int SoundfontCell::heightForWidth(int width) const
 {
-    return 30 + ui->line1->height() + ui->line2->height() + ui->line3->heightForWidth(width - 18);
+    return 37 + ui->line1->height() + ui->line2->height() + ui->line3->heightForWidth(width - 18);
 }
 
 bool SoundfontCell::hasHeightForWidth() const

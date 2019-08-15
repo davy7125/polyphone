@@ -112,3 +112,9 @@ void AttributeFlow::onClick(bool checked)
         emit(itemClicked(filter));
     }
 }
+
+void AttributeFlow::polish(QStyle * style)
+{
+    foreach (ElidedPushButton * button, _filterDefinitions.keys())
+        style->polish(button);
+}

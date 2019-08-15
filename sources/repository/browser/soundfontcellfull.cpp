@@ -127,6 +127,14 @@ void SoundfontCellFull::setActive(bool isActive)
 
     // Stars
     ui->widgetStars->setActive(isActive);
+
+    // So that the stylesheet updates...
+    this->style()->polish(ui->labelTitle);
+    this->style()->polish(ui->labelDownloadNumber);
+    this->style()->polish(ui->labelCommentNumber);
+    this->style()->polish(ui->labelDate);
+    this->style()->polish(ui->labelLicense);
+    ui->line3->polish(this->style());
 }
 
 SoundfontCellFull::IconContainer::IconContainer()
@@ -155,7 +163,7 @@ void SoundfontCellFull::on_labelAuthor_linkActivated(const QString &link)
 
 int SoundfontCellFull::heightForWidth(int width) const
 {
-    return 30 + ui->line1->height() + ui->line2->height() + ui->line3->heightForWidth(width - 18);
+    return 37 + ui->line1->height() + ui->line2->height() + ui->line3->heightForWidth(width - 18);
 }
 
 bool SoundfontCellFull::hasHeightForWidth() const
