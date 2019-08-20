@@ -39,9 +39,11 @@
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #include <QDesktopWidget>
 #endif
+
 #include "mainwindow.h"
 #include "translationmanager.h"
 #include <QDir>
+#include <QNetworkSession>
 
 #ifdef Q_OS_MAC
 #include "macapplication.h"
@@ -62,7 +64,7 @@ int launchApplication(Options &options)
 
     // Additional type used in signals
     qRegisterMetaType<EltID>("EltID");
-    qRegisterMetaType<QList<QPair<QByteArray,QByteArray> > >();
+    qRegisterMetaType<QSharedPointer<QNetworkSession> >();
 
     // Display the main window
     MainWindow w;
