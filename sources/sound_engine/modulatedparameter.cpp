@@ -91,9 +91,9 @@ void ModulatedParameter::computeValue()
         return;
 
     // Add all values (before any conversion)
-    qint32 addition = static_cast<qint32>(_instModulation + _prstModulation) +
-            _instValue.getStoredValue().shValue +
-            _prstValue.getStoredValue().shValue;
+    qint32 addition = static_cast<qint32>(_instModulation) + _instValue.getStoredValue().shValue;
+    if (_type != champ_overridingRootKey && _type != champ_velocity && _type != champ_keynum)
+        addition += static_cast<qint32>(_prstModulation) + _prstValue.getStoredValue().shValue;
 
     // Limit the result
     if (addition > 32767)
