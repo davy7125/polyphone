@@ -116,7 +116,7 @@ void SampleWriterWav::write(QByteArray &baData, InfoSound &info)
     if (!fi.open(QIODevice::WriteOnly))
         return;
 
-    bool withLoop = (info.dwStartLoop != info.dwEndLoop);
+    bool withLoop = !info.loops.empty();
 
     // Ecriture
     quint32 dwTemp;
@@ -201,9 +201,9 @@ void SampleWriterWav::write(QByteArray &baData, InfoSound &info)
         out << dwTemp; // CUE point id
         dwTemp = 0;
         out << dwTemp; // type
-        dwTemp = info.dwStartLoop;
+        dwTemp = info.loops[0].first;
         out << dwTemp; // début boucle
-        dwTemp = info.dwEndLoop-1;
+        dwTemp = info.loops[0].second - 1;
         out << dwTemp; // fin boucle
         dwTemp = 0;
         out << dwTemp; // fraction

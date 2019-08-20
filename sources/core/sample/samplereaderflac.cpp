@@ -235,14 +235,24 @@ void metadataCallback(const FLAC__StreamDecoder * decoder, const FLAC__StreamMet
                 bool ok = false;
                 unsigned int num = value.toUInt(&ok);
                 if (ok)
-                    info->dwStartLoop = num;
+                {
+                    if (info->loops.empty())
+                        info->loops << QPair<quint32, quint32>(num, qMax(info->dwLength, num + 1) - 1);
+                    else
+                        info->loops[0].first = num;
+                }
             }
             else if (key == "LOOP_END")
             {
                 bool ok = false;
                 unsigned int num = value.toUInt(&ok);
                 if (ok)
-                    info->dwEndLoop = num;
+                {
+                    if (info->loops.empty())
+                        info->loops << QPair<quint32, quint32>(0, num);
+                    else
+                        info->loops[0].second = num;
+                }
             }
 
             // Fine tune? root key? pitch defined?

@@ -1189,19 +1189,18 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
             for (quint32 iteration = 0; iteration < 20 - dwTmp; iteration++)
                 fi.write(&charTmp, 1);
         }
-        // dwStart
+        // dwStart, dwEnd, dwStartLoop, dwEndLoop
         fi.write((char *)&dwTmp2, 4);
-        // dwEnd
         dwTmp = dwTmp2 + sm->get(id, champ_dwLength).dwValue;
         fi.write((char *)&dwTmp, 4);
-        // dwStartLoop
         dwTmp = dwTmp2 + sm->get(id, champ_dwStartLoop).dwValue;
         fi.write((char *)&dwTmp, 4);
-        // dwEndLoop
         dwTmp = dwTmp2 + sm->get(id, champ_dwEndLoop).dwValue;
         fi.write((char *)&dwTmp, 4);
+
         // on avance
         dwTmp2 += sm->get(id, champ_dwLength).dwValue + 46; // 46 zeros
+
         // dwSampleRate
         dwTmp = sm->get(id, champ_dwSampleRate).dwValue;
         fi.write((char *)&dwTmp, 4);

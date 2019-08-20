@@ -134,11 +134,9 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
                     in.skipRawData(8); // Cue Point ID, Type
 
                     // Loop
-                    quint32Reversed tmp32;
-                    in >> tmp32;
-                    info.dwStartLoop = tmp32.value;
-                    in >> tmp32;
-                    info.dwEndLoop = tmp32.value + 1;
+                    quint32Reversed loopStart, loopEnd;
+                    in >> loopStart >> loopEnd;
+                    info.loops << QPair<quint32, quint32>(loopStart.value, loopEnd.value + 1);
 
                     // Skip the rest
                     in.skipRawData(static_cast<int>(sectionSize.value) - 52);

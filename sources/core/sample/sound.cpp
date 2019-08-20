@@ -83,8 +83,8 @@ void Sound::setFileName(QString qStr, bool tryFindRootKey)
         }
 
         // Add default start and end loop if not specified
-        if (_info.dwStartLoop == 0 && _info.dwEndLoop == 0 && _info.dwLength != 0)
-            _info.dwEndLoop = _info.dwLength - 1;
+        if (_info.loops.empty())
+            _info.loops << QPair<quint32, quint32>(0, _info.dwLength > 0 ? _info.dwLength - 1 : 0);
     }
     else
         _info.reset();
@@ -158,35 +158,35 @@ QByteArray Sound::getData(quint16 wBps)
     case 24:
         // Concat 16 bits and 8 bits
         baRet.resize(static_cast<int>(_info.dwLength) * 3);
+    {
+        char * cDest = baRet.data();
+        char * cFrom = _smpl.data();
+        char * cFrom24 = _sm24.data();
+        unsigned int len = _info.dwLength;
+        for (unsigned int i = 0; i < len; i++)
         {
-            char * cDest = baRet.data();
-            char * cFrom = _smpl.data();
-            char * cFrom24 = _sm24.data();
-            unsigned int len = _info.dwLength;
-            for (unsigned int i = 0; i < len; i++)
-            {
-                cDest[3*i] = cFrom24[i];
-                cDest[3*i+1] = cFrom[2*i];
-                cDest[3*i+2] = cFrom[2*i+1];
-            }
+            cDest[3*i] = cFrom24[i];
+            cDest[3*i+1] = cFrom[2*i];
+            cDest[3*i+2] = cFrom[2*i+1];
         }
+    }
         break;
     case 32:
         // Concat 16 bits, 8 bits, and null values
         baRet.resize(static_cast<int>(_info.dwLength) * 4);
+    {
+        char * cDest = baRet.data();
+        char * cFrom = _smpl.data();
+        char * cFrom24 = _sm24.data();
+        unsigned int len = _info.dwLength;
+        for (unsigned int i = 0; i < len; i++)
         {
-            char * cDest = baRet.data();
-            char * cFrom = _smpl.data();
-            char * cFrom24 = _sm24.data();
-            unsigned int len = _info.dwLength;
-            for (unsigned int i = 0; i < len; i++)
-            {
-                cDest[4*i] = 0;
-                cDest[4*i+1] = cFrom24[i];
-                cDest[4*i+2] = cFrom[2*i];
-                cDest[4*i+3] = cFrom[2*i+1];
-            }
+            cDest[4*i] = 0;
+            cDest[4*i+1] = cFrom24[i];
+            cDest[4*i+2] = cFrom[2*i];
+            cDest[4*i+3] = cFrom[2*i+1];
         }
+    }
         break;
     default:
         QMessageBox::warning(QApplication::activeWindow(), QObject::trUtf8("Warning"), "Error in Sound::getData.");
@@ -210,10 +210,10 @@ quint32 Sound::getUInt32(AttributeType champ)
         result = _info.dwLength;
         break;
     case champ_dwStartLoop:
-        result = _info.dwStartLoop;
+        result = _info.loops.empty() ? 0 : _info.loops[0].first;
         break;
     case champ_dwEndLoop:
-        result = _info.dwEndLoop;
+        result = _info.loops.empty() ? 0 : _info.loops[0].second;
         break;
     case champ_dwSampleRate:
         result = _info.dwSampleRate;
@@ -287,11 +287,17 @@ void Sound::set(AttributeType champ, AttributeValue value)
         break;
     case champ_dwStartLoop:
         // modification du début de la boucle
-        _info.dwStartLoop = value.dwValue;
+        if (_info.loops.empty())
+            _info.loops << QPair<quint32, quint32>(value.dwValue, value.dwValue);
+        else
+            _info.loops[0].first = value.dwValue;
         break;
     case champ_dwEndLoop:
         // modification de la fin de la boucle
-        _info.dwEndLoop = value.dwValue;
+        if (_info.loops.empty())
+            _info.loops << QPair<quint32, quint32>(value.dwValue, value.dwValue);
+        else
+            _info.loops[0].second = value.dwValue;
         break;
     case champ_dwSampleRate:
         // modification de l'échantillonnage

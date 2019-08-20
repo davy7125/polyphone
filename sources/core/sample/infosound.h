@@ -44,8 +44,7 @@ public:
         dwSampleRate = 0;
         wChannels = 0;
         wBpsFile = 0;
-        dwStartLoop = 0;
-        dwEndLoop = 0;
+        loops.clear();
         dwRootKey = 60; // Middle C
         wChannel = 0;
         iFineTune = 0;
@@ -58,8 +57,7 @@ public:
     quint32 dwSampleRate;
     quint16 wChannels;
     quint16 wBpsFile; // number of bytes for a value
-    quint32 dwStartLoop;
-    quint32 dwEndLoop;
+    QList<QPair<quint32, quint32> > loops;
     quint32 dwRootKey;
     quint16 wChannel;
     int iFineTune; // from -100 (-1 semi tone) to 100 (+1 semi tone)

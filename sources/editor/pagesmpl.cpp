@@ -131,9 +131,9 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
             rootKey = 0;
         if (correction != _sf2->get(idTmp, champ_chPitchCorrection).cValue)
             correction = 0;
-        if (startLoop != (int)_sf2->get(idTmp, champ_dwStartLoop).dwValue)
+        if (startLoop != static_cast<int>(_sf2->get(idTmp, champ_dwStartLoop).dwValue))
             startLoop = 0;
-        if (endLoop != (int)_sf2->get(idTmp, champ_dwEndLoop).dwValue)
+        if (endLoop != static_cast<int>(_sf2->get(idTmp, champ_dwEndLoop).dwValue))
             endLoop = 0;
         length = qMin(length, _sf2->get(idTmp, champ_dwLength).dwValue);
         if (typeLink != _sf2->get(idTmp, champ_sfSampleType).sfLinkValue)
