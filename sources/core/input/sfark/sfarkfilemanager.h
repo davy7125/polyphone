@@ -61,6 +61,9 @@ public:
     // Clear data (not the files)
     void clearData();
 
+    // Delete a file after being closed
+    void deleteFile(const char * name);
+
 private:
     QMap<QString, int> _mapName;
     QMap<int, QDataStream *> _mapDataStream;

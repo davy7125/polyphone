@@ -89,6 +89,12 @@ int SfArkFileManager::create(const char *name)
     return handler;
 }
 
+void SfArkFileManager::deleteFile(const char * name)
+{
+    QFile file (name);
+    file.remove();
+}
+
 // Return true if success, otherwise false
 void SfArkFileManager::close(int fileHandler)
 {

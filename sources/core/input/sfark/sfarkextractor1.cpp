@@ -31,10 +31,6 @@
 #include "stdint.h"
 #include <QDir>
 
-#ifdef Q_OS_MAC
-#include "unistd.h"
-#endif
-
 static const char * SfArkId = ".sfArk";
 
 SfArkExtractor1::SfArkExtractor1(const char * fileName) : AbstractExtractor(),
@@ -2436,9 +2432,9 @@ void SfArkExtractor1::cleanFiles()
     if (_sfArkInfo->Flags & SFARK_TEMP_MADE)
     {
         getTempPartName('2');
-        unlink((char *)_sfArkInfo->WorkBuffer2);
+        _fileManager.deleteFile((const char *)_sfArkInfo->WorkBuffer2);
         getTempPartName('1');
-        unlink((char *)_sfArkInfo->WorkBuffer2);
+        _fileManager.deleteFile((const char *)_sfArkInfo->WorkBuffer2);
     }
 
     _sfArkInfo->Flags &= ~(SFARK_OUT_OPEN|SFARK_IN1_OPEN|SFARK_IN2_OPEN|SFARK_TEMP_MADE);
