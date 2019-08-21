@@ -27,6 +27,12 @@
 
 ContextManager * ContextManager::s_instance = nullptr;
 
+void ContextManager::initializeNoAudioMidi()
+{
+    if (s_instance == nullptr)
+        s_instance = new ContextManager(false);
+}
+
 ConfManager * ContextManager::configuration()
 {
     if (s_instance == nullptr)
@@ -82,7 +88,7 @@ void ContextManager::kill()
     s_instance = nullptr;
 }
 
-ContextManager::ContextManager() :
+ContextManager::ContextManager(bool withAudioAndMidi) :
     _configuration(nullptr),
     _keyName(nullptr),
     _recentFile(nullptr),
@@ -108,13 +114,17 @@ ContextManager::ContextManager() :
     // 5. Translations
     _translation = new TranslationManager(_configuration);
 
-    // 6. Audio device
-    _audio = new AudioDevice(_configuration);
-    connect(_configuration, SIGNAL(audioServerConfigurationChanged()), _audio, SLOT(initAudio()));
-    connect(_configuration, SIGNAL(soundEngineConfigurationChanged()), _audio->getSynth(), SLOT(updateConfiguration()));
 
-    // 7. Midi device
-    _midi = new MidiDevice(_configuration, _audio->getSynth());
+    if (withAudioAndMidi)
+    {
+        // 6. Audio device
+        _audio = new AudioDevice(_configuration);
+        connect(_configuration, SIGNAL(audioServerConfigurationChanged()), _audio, SLOT(initAudio()));
+        connect(_configuration, SIGNAL(soundEngineConfigurationChanged()), _audio->getSynth(), SLOT(updateConfiguration()));
+
+        // 7. Midi device
+        _midi = new MidiDevice(_configuration, _audio->getSynth());
+    }
 }
 
 ContextManager::~ContextManager()

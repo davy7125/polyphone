@@ -49,6 +49,19 @@
 #include "macapplication.h"
 #endif
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
+void writeLine(QString line)
+{
+#ifdef _WIN32
+    printf_s((line + "\n").toStdString().c_str());
+#else
+    qInfo() << line;
+#endif
+}
+
 int launchApplication(Options &options)
 {
     // Application name
@@ -63,8 +76,9 @@ int launchApplication(Options &options)
     } catch (...) { /* bug with mac */ }
 
     // Additional type used in signals
-    qRegisterMetaType<EltID>("EltID");
+    qRegisterMetaType<EltID>();
     qRegisterMetaType<QSharedPointer<QNetworkSession> >();
+    qRegisterMetaType<QList<int> >();
 
     // Display the main window
     MainWindow w;
@@ -93,7 +107,7 @@ int convert(Options &options)
     QFileInfo inputFile(options.getInputFiles()[0]);
     if (!inputFile.exists())
     {
-        qWarning() << "The file" << inputFile.filePath() << "does not exist.";
+        writeLine("The file " + inputFile.filePath() + " does not exist.");
         return 1;
     }
 
@@ -101,48 +115,48 @@ int convert(Options &options)
     QFileInfo outputFile(options.getOutputFileFullPath());
     if (!QDir(options.getOutputDirectory()).exists())
     {
-        qWarning() << "The directory" << options.getOutputDirectory() << "does not exist.";
+        writeLine("The directory " + options.getOutputDirectory() + " does not exist.");
         return 1;
     }
     if (outputFile.exists() && options.mode() != Options::MODE_CONVERSION_TO_SFZ)
     {
-        qWarning() << "The file" << outputFile.filePath() << "already exists.";
+        writeLine("The file "  + outputFile.filePath() + " already exists.");
         return 1;
     }
 
     // Load input file
-    qInfo() << "Loading file" << inputFile.filePath() << "...";
+    writeLine("Loading file " + inputFile.filePath() + "...");
     AbstractInput * input = InputFactory::getInput(inputFile.filePath());
     input->process(false);
     if (!input->isSuccess())
     {
-        qWarning() << "Couldn't load" << inputFile.filePath() + ":" << input->getError();
+        writeLine("Couldn't load " + inputFile.filePath() + ": " + input->getError());
         delete input;
         return 1;
     }
     int sf2Index = input->getSf2Index();
     delete input;
-    qInfo() << "File loaded";
+    writeLine("File loaded");
 
     // Prepare the output with the respective options
     AbstractOutput * output = OutputFactory::getOutput(outputFile.filePath());
     switch (options.mode())
     {
     case Options::MODE_CONVERSION_TO_SF2:
-        qInfo() << "Saving file" << outputFile.filePath() << "...";
+        writeLine("Saving file " + outputFile.filePath() + " ...");
         break;
     case Options::MODE_CONVERSION_TO_SF3:
         output->setOption("quality", options.quality());
-        qInfo() << "Saving file" << outputFile.filePath() << "...";
+        writeLine("Saving file " + outputFile.filePath() + "...");
         break;
     case Options::MODE_CONVERSION_TO_SFZ: {
         output->setOption("prefix", options.sfzPresetPrefix());
         output->setOption("bankdir", options.sfzOneDirPerBank());
         output->setOption("gmsort", options.sfzGeneralMidi());
-        qInfo() << "Exporting in directory" << options.getOutputDirectory() << "...";
+        writeLine("Exporting in directory " + options.getOutputDirectory() + "...");
     } break;
     default:
-        qWarning() << "fail";
+        writeLine("fail");
         return 1;
     }
 
@@ -150,12 +164,12 @@ int convert(Options &options)
     output->process(sf2Index, false);
     if (!output->isSuccess())
     {
-        qWarning() << "Couldn't create" << outputFile.filePath() + ":" << output->getError();
+        writeLine("Couldn't create " + outputFile.filePath() + ": " + output->getError());
         delete output;
         return 1;
     }
     delete output;
-    qInfo() << "done";
+    writeLine("done");
 
     // Destroy a singleton that has been silently created
     SoundfontManager::kill();
@@ -170,7 +184,7 @@ int resetConfig(Options &options)
     QApplication::setOrganizationName("polyphone");
     QSettings settings;
     settings.clear();
-    qInfo() << "Previous configuration is now cleared.";
+    writeLine("Previous configuration is now cleared.");
 
     return 0;
 }
@@ -178,7 +192,11 @@ int resetConfig(Options &options)
 int displayHelp(Options &options)
 {
     Q_UNUSED(options)
-    qInfo() << "write \"man polyphone\" to show usage";
+#ifdef _WIN32
+    writeLine("see \"www.polyphone-soundfonts.com/en/manual/annexes/console\" for more information");
+#else
+    writeLine("write \"man polyphone\" to show usage");
+#endif
     return 0;
 }
 
@@ -195,10 +213,21 @@ int main(int argc, char *argv[])
     Options options(argc, argv);
     int valRet = 0;
 
+    // Possibly launch the application
+    if (!options.error() && options.mode() == Options::MODE_GUI)
+        return launchApplication(options);
+
+    // Otherwise, console mode
+#ifdef _WIN32
+    if (AttachConsole(ATTACH_PARENT_PROCESS)) {
+        freopen("CONOUT$", "w", stdout);
+        freopen("CONOUT$", "w", stderr);
+    }
+#endif
+    ContextManager::initializeNoAudioMidi();
+
     if (options.error() || options.help())
         valRet = displayHelp(options);
-    else if (options.mode() == Options::MODE_GUI)
-        valRet = launchApplication(options);
     else if (options.mode() == Options::MODE_RESET_CONFIG)
         valRet = resetConfig(options);
     else

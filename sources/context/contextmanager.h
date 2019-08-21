@@ -38,6 +38,8 @@ class ContextManager: public QObject
     Q_OBJECT
 
 public:
+    static void initializeNoAudioMidi();
+
     // Access to the configuration (key / value)
     static ConfManager * configuration();
 
@@ -63,7 +65,7 @@ public:
     static void kill();
 
 private:
-    ContextManager();
+    ContextManager(bool withAudioAndMidi = true);
     ~ContextManager();
     static ContextManager * s_instance;
 
