@@ -182,7 +182,8 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
         QString name = _sm->getQstr(idInst, champ_nameSort);
         if (name.contains(filter))
         {
-            _matchingInstruments << i;
+            if (!_matchingInstruments.contains(i))
+                _matchingInstruments << i;
             if (_bestMatchInstrument == -1 || lessThan(name, _bestMatchInstrumentName))
             {
                 _bestMatchInstrument = i;
@@ -202,7 +203,8 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
                 .arg(_sm->getQstr(idPrst, champ_nameSort));
         if (name.contains(filter))
         {
-            _matchingPresets << i;
+            if (!_matchingPresets.contains(i))
+                _matchingPresets << i;
             if (_bestMatchPreset == -1 || lessThan(name, _bestMatchPresetName))
             {
                 _bestMatchPreset = i;
@@ -210,6 +212,74 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
             }
         }
     }
+
+    // Include the instruments that contain one of the samples
+    QList<int> extraInst;
+    foreach (int i, _sm->getSiblings(idInst))
+    {
+        EltID idTmp(elementInstSmpl, idSf2, i);
+        foreach (int j, _sm->getSiblings(idTmp))
+        {
+            idTmp.indexElt2 = j;
+            quint16 smplIndex = _sm->get(idTmp, champ_sampleID).wValue;
+            if (_matchingSamples.contains(smplIndex))
+            {
+                extraInst << i;
+                break;
+            }
+        }
+    }
+
+    // Include the presets that contain one of the instruments
+    QList<int> extraPrst;
+    foreach (int i, _sm->getSiblings(idPrst))
+    {
+        EltID idTmp(elementPrstInst, idSf2, i);
+        foreach (int j, _sm->getSiblings(idTmp))
+        {
+            idTmp.indexElt2 = j;
+            quint16 instIndex = _sm->get(idTmp, champ_instrument).wValue;
+            if (_matchingInstruments.contains(instIndex) || extraInst.contains(instIndex))
+            {
+                extraPrst << i;
+                break;
+            }
+        }
+    }
+
+    // Include the instruments used by the preset
+    foreach (int i, _matchingPresets)
+    {
+        EltID idTmp(elementPrstInst, idSf2, i);
+        foreach (int j, _sm->getSiblings(idTmp))
+        {
+            idTmp.indexElt2 = j;
+            quint16 instIndex = _sm->get(idTmp, champ_instrument).wValue;
+            if (!_matchingInstruments.contains(instIndex))
+                _matchingInstruments << instIndex;
+        }
+    }
+
+    // Include the samples used by the instrument
+    foreach (int i, _matchingInstruments)
+    {
+        EltID idTmp(elementInstSmpl, idSf2, i);
+        foreach (int j, _sm->getSiblings(idTmp))
+        {
+            idTmp.indexElt2 = j;
+            quint16 smplIndex = _sm->get(idTmp, champ_sampleID).wValue;
+            if (!_matchingSamples.contains(smplIndex))
+                _matchingSamples << smplIndex;
+        }
+    }
+
+    // Merge extraInst and extraPrst
+    foreach (int i, extraInst)
+        if (!_matchingInstruments.contains(i))
+            _matchingInstruments << i;
+    foreach (int i, extraPrst)
+        if (!_matchingPresets.contains(i))
+            _matchingPresets << i;
 }
 
 bool TreeSortFilterProxy::isFiltered(EltID id)

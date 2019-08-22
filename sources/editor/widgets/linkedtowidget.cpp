@@ -102,5 +102,5 @@ int LinkedToWidget::getLinkNumber()
 void LinkedToWidget::onClick(bool isClicked)
 {
     Q_UNUSED(isClicked)
-    emit(itemClicked(_buttonIds[(QWidget*)QObject::sender()]));
+    emit(itemClicked(_buttonIds[dynamic_cast<QWidget*>(QObject::sender())]));
 }
