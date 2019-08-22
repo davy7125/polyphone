@@ -91,7 +91,8 @@ bool OutputFactory::save(int indexSf2, bool saveAs)
     QString savePath;
     QString filePathInitial = sm->getQstr(id, champ_filenameInitial);
     QString filePathForData = sm->getQstr(id, champ_filenameForData);
-    if (saveAs || filePathInitial != filePathForData || filePathInitial.isEmpty())
+    if (saveAs || !filePathInitial.toLower().endsWith(".sf2") ||
+            filePathInitial != filePathForData || filePathInitial.isEmpty())
     {
         // Default path for selecting the destination
         QString defaultPath;
@@ -103,7 +104,7 @@ bool OutputFactory::save(int indexSf2, bool saveAs)
                 currentName = QObject::trUtf8("untitled");
             defaultPath = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SOUNDFONT) + "/" + currentName + ".sf2";
         }
-        else if (filePathInitial != filePathForData)
+        else if (filePathInitial != filePathForData || !filePathInitial.toLower().endsWith(".sf2"))
         {
             // The soundfont to be saved was imported => the path is based on the initial file with another extension
             QFileInfo fi(filePathInitial);
