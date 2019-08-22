@@ -765,7 +765,8 @@
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="178"/>
-        <source>Wav file import</source>
+        <source>Sample import</source>
+        <oldsource>Wav file import</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1793,17 +1794,17 @@ repository</source>
 <context>
     <name>Editor</name>
     <message>
-        <location filename="editor/editor.ui" line="142"/>
+        <location filename="editor/editor.ui" line="154"/>
         <source>Search...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="242"/>
+        <location filename="editor/editor.ui" line="254"/>
         <source>Opening file...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="373"/>
+        <location filename="editor/editor.ui" line="385"/>
         <source>Cannot open the file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3438,22 +3439,22 @@ rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="103"/>
+        <location filename="core/output/outputfactory.cpp" line="104"/>
         <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="116"/>
+        <location filename="core/output/outputfactory.cpp" line="117"/>
         <source>Save a soundfont</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="117"/>
+        <location filename="core/output/outputfactory.cpp" line="118"/>
         <source>Sf2 files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="138"/>
+        <location filename="core/output/outputfactory.cpp" line="139"/>
         <location filename="core/sample/sound.cpp" line="70"/>
         <location filename="core/sample/sound.cpp" line="74"/>
         <location filename="core/sample/sound.cpp" line="78"/>
@@ -4889,12 +4890,12 @@ download content</source>
 <context>
     <name>ToolExternalCommand</name>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="117"/>
+        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="118"/>
         <source>Couldn&apos;t start the command.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="120"/>
+        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="121"/>
         <source>The execution of the command ended with an error.</source>
         <translation type="unfinished"></translation>
     </message>

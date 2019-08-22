@@ -766,8 +766,9 @@
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="178"/>
-        <source>Wav file import</source>
-        <translation>Wav Datei importieren</translation>
+        <source>Sample import</source>
+        <oldsource>Wav file import</oldsource>
+        <translation type="unfinished">Wav Datei importieren</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="191"/>
@@ -1798,17 +1799,17 @@ Fundgrube</translation>
 <context>
     <name>Editor</name>
     <message>
-        <location filename="editor/editor.ui" line="142"/>
+        <location filename="editor/editor.ui" line="154"/>
         <source>Search...</source>
         <translation>Suche...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="242"/>
+        <location filename="editor/editor.ui" line="254"/>
         <source>Opening file...</source>
         <translation>Datei öffnen...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="373"/>
+        <location filename="editor/editor.ui" line="385"/>
         <source>Cannot open the file</source>
         <translation>Datei kann nicht geöffnet werden</translation>
     </message>
@@ -3358,17 +3359,17 @@ Frequenz</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="116"/>
+        <location filename="core/output/outputfactory.cpp" line="117"/>
         <source>Save a soundfont</source>
         <translation>einen Soundfont speichern</translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="117"/>
+        <location filename="core/output/outputfactory.cpp" line="118"/>
         <source>Sf2 files</source>
         <translation>sf2 Datei</translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="138"/>
+        <location filename="core/output/outputfactory.cpp" line="139"/>
         <location filename="core/sample/sound.cpp" line="70"/>
         <location filename="core/sample/sound.cpp" line="74"/>
         <location filename="core/sample/sound.cpp" line="78"/>
@@ -3457,7 +3458,7 @@ Frequenz</translation>
         <translation>die Datei &quot;%1&quot; kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="103"/>
+        <location filename="core/output/outputfactory.cpp" line="104"/>
         <source>untitled</source>
         <translation>kein Name</translation>
     </message>
@@ -4315,7 +4316,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="245"/>
         <source>MIDI standard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MIDI standard</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="46"/>
@@ -4440,7 +4441,7 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="241"/>
         <source>MIDI standard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MIDI standard</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="257"/>
@@ -4939,12 +4940,12 @@ download content</source>
 <context>
     <name>ToolExternalCommand</name>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="117"/>
+        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="118"/>
         <source>Couldn&apos;t start the command.</source>
         <translation>Der Befehl konnte nicht ausgeführt werden.</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="120"/>
+        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="121"/>
         <source>The execution of the command ended with an error.</source>
         <translation>Die Ausführung des Befehls endete mit einem Fehler.</translation>
     </message>

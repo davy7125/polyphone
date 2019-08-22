@@ -766,8 +766,9 @@
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="178"/>
-        <source>Wav file import</source>
-        <translation>Import fichiers wav</translation>
+        <source>Sample import</source>
+        <oldsource>Wav file import</oldsource>
+        <translation>Import d&apos;échantillons</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="191"/>
@@ -1798,17 +1799,17 @@ en ligne</translation>
 <context>
     <name>Editor</name>
     <message>
-        <location filename="editor/editor.ui" line="142"/>
+        <location filename="editor/editor.ui" line="154"/>
         <source>Search...</source>
         <translation>Rechercher...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="242"/>
+        <location filename="editor/editor.ui" line="254"/>
         <source>Opening file...</source>
         <translation>Ouverture du fichier en cours...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="373"/>
+        <location filename="editor/editor.ui" line="385"/>
         <source>Cannot open the file</source>
         <translation>Impossible d&apos;ouvrir le fichier</translation>
     </message>
@@ -3346,22 +3347,22 @@ d&apos;échantillonnage</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="103"/>
+        <location filename="core/output/outputfactory.cpp" line="104"/>
         <source>untitled</source>
         <translation>sans titre</translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="116"/>
+        <location filename="core/output/outputfactory.cpp" line="117"/>
         <source>Save a soundfont</source>
         <translation>Sauvegarder une banque de son</translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="117"/>
+        <location filename="core/output/outputfactory.cpp" line="118"/>
         <source>Sf2 files</source>
         <translation>Fichier .sf2</translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="138"/>
+        <location filename="core/output/outputfactory.cpp" line="139"/>
         <location filename="core/sample/sound.cpp" line="70"/>
         <location filename="core/sample/sound.cpp" line="74"/>
         <location filename="core/sample/sound.cpp" line="78"/>
@@ -4930,12 +4931,12 @@ de télécharger le contenu</translation>
 <context>
     <name>ToolExternalCommand</name>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="117"/>
+        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="118"/>
         <source>Couldn&apos;t start the command.</source>
         <translation>La commande n&apos;a pas pu démarrer.</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="120"/>
+        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="121"/>
         <source>The execution of the command ended with an error.</source>
         <translation>La commande s&apos;est terminée avec une erreur.</translation>
     </message>

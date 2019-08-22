@@ -175,7 +175,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Wav file import</string>
+         <string>Sample import</string>
         </property>
        </widget>
       </item>

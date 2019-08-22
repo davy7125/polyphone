@@ -766,8 +766,9 @@
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="178"/>
-        <source>Wav file import</source>
-        <translation>WAV 文件导入</translation>
+        <source>Sample import</source>
+        <oldsource>Wav file import</oldsource>
+        <translation type="unfinished">WAV 文件导入</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="191"/>
@@ -1796,17 +1797,17 @@ repository</source>
 <context>
     <name>Editor</name>
     <message>
-        <location filename="editor/editor.ui" line="142"/>
+        <location filename="editor/editor.ui" line="154"/>
         <source>Search...</source>
         <translation>搜索...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="242"/>
+        <location filename="editor/editor.ui" line="254"/>
         <source>Opening file...</source>
         <translation>正在打开文件...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="373"/>
+        <location filename="editor/editor.ui" line="385"/>
         <source>Cannot open the file</source>
         <translation>无法打开文件</translation>
     </message>
@@ -3340,17 +3341,17 @@ rate</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="116"/>
+        <location filename="core/output/outputfactory.cpp" line="117"/>
         <source>Save a soundfont</source>
         <translation>保存音色库</translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="117"/>
+        <location filename="core/output/outputfactory.cpp" line="118"/>
         <source>Sf2 files</source>
         <translation>SF2 文件</translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="138"/>
+        <location filename="core/output/outputfactory.cpp" line="139"/>
         <location filename="core/sample/sound.cpp" line="70"/>
         <location filename="core/sample/sound.cpp" line="74"/>
         <location filename="core/sample/sound.cpp" line="78"/>
@@ -3439,7 +3440,7 @@ rate</source>
         <translation>无法打开文件 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="103"/>
+        <location filename="core/output/outputfactory.cpp" line="104"/>
         <source>untitled</source>
         <translation>未命名</translation>
     </message>
@@ -4261,7 +4262,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="36"/>
         <source>Timbre</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">乐器音质</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="62"/>
@@ -4281,7 +4282,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="177"/>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">目录</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="184"/>
@@ -4396,7 +4397,7 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="161"/>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">目录</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="177"/>
@@ -4406,7 +4407,7 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="193"/>
         <source>Timbre</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">乐器音质</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="209"/>
@@ -4920,12 +4921,12 @@ download content</source>
 <context>
     <name>ToolExternalCommand</name>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="117"/>
+        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="118"/>
         <source>Couldn&apos;t start the command.</source>
         <translation>无法启动命令。</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="120"/>
+        <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="121"/>
         <source>The execution of the command ended with an error.</source>
         <translation>命令的执行以含错误的状态结束。</translation>
     </message>

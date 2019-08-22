@@ -3,9 +3,6 @@
         <file alias="external_link.gif">resources/external_link.gif</file>
         <file alias="double-arrow">resources/double-arrow.png</file>
         <file alias="auto">resources/auto.png</file>
-        <file alias="modulator">resources/modulator.png</file>
-        <file alias="zoom_in">resources/zoom_in.png</file>
-        <file alias="zoom_out">resources/zoom_out.png</file>
         <file alias="loop_off.png">resources/loop_off.png</file>
         <file alias="loop_on.png">resources/loop_on.png</file>
         <file alias="loop_on_end.png">resources/loop_on_end.png</file>
