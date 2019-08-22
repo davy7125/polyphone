@@ -1095,7 +1095,7 @@ int SoundFont::writeCompressedSample(Sample* s)
     ogg_stream_packetin(&os, &header_comm);
     ogg_stream_packetin(&os, &header_code);
 
-    char obuf[1048576]; // 1024 * 1024
+    char* obuf = new char[1048576]; // 1024 * 1024
     char* p = obuf;
 
     for (;;) {
@@ -1176,7 +1176,9 @@ int SoundFont::writeCompressedSample(Sample* s)
     int n = p - obuf;
     write(obuf, n);
 
+    delete [] obuf;
     delete [] ibuffer;
+
     return n;
 }
 
