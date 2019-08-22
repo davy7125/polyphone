@@ -55,7 +55,7 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>Override</string>
+      <string>&amp;Override</string>
      </property>
     </widget>
    </item>
@@ -65,7 +65,7 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>Disable</string>
+      <string>&amp;Disable</string>
      </property>
     </widget>
    </item>
@@ -85,7 +85,7 @@
    <item row="2" column="3">
     <widget class="QPushButton" name="pushCancel">
      <property name="text">
-      <string>Cancel</string>
+      <string>&amp;Cancel</string>
      </property>
     </widget>
    </item>

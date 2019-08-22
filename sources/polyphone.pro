@@ -466,7 +466,8 @@ SOURCES	+= main.cpp \
     editor/tools/default_mod/tooldefaultmod_gui.cpp \
     core/types/modulatordata.cpp \
     repository/soundfont/editor/editordialoginsertvideo.cpp \
-    repository/soundfont/editor/editordialoginsertimage.cpp
+    repository/soundfont/editor/editordialoginsertimage.cpp \
+    dialogs/dialogquestion.cpp
 
 HEADERS  += \
     core/sample/infosound.h \
@@ -788,7 +789,8 @@ HEADERS  += \
     editor/tools/default_mod/tooldefaultmod_parameters.h \
     editor/tools/default_mod/tooldefaultmod_gui.h \
     repository/soundfont/editor/editordialoginsertvideo.h \
-    repository/soundfont/editor/editordialoginsertimage.h
+    repository/soundfont/editor/editordialoginsertimage.h \
+    dialogs/dialogquestion.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -866,7 +868,8 @@ FORMS    += \
     clavier/controllerarea.ui \
     editor/tools/default_mod/tooldefaultmod_gui.ui \
     repository/soundfont/editor/editordialoginsertvideo.ui \
-    repository/soundfont/editor/editordialoginsertimage.ui
+    repository/soundfont/editor/editordialoginsertimage.ui \
+    dialogs/dialogquestion.ui
 
 RESOURCES += resources.qrc
 

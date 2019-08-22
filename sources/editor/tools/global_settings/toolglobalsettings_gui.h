@@ -37,7 +37,7 @@ class ToolGlobalSettings_gui : public AbstractToolGui
 
 public:
     explicit ToolGlobalSettings_gui(QWidget *parent = nullptr);
-    ~ToolGlobalSettings_gui();
+    ~ToolGlobalSettings_gui() override;
 
     /// Update the interface with the parameters
     void updateInterface(AbstractToolParameters * parameters, IdList ids) override;
@@ -50,8 +50,8 @@ private slots:
     void on_doubleSpinParam_valueChanged(double arg1);
     void on_doubleSpinMin_valueChanged(double arg1);
     void on_doubleSpinMax_valueChanged(double arg1);
-    void on_buttonBox_accepted();
-    void on_buttonBox_rejected();
+    void on_pushCancel_clicked();
+    void on_pushOk_clicked();
 
 private:
     bool _isInst;

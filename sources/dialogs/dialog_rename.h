@@ -43,8 +43,9 @@ signals:
     void updateNames(int renameType, QString text1, QString text2, int val1, int val2);
 
 private slots:
-    virtual void accept();
     void on_comboBox_currentIndexChanged(int index);
+    void on_pushCancel_clicked();
+    void on_pushOk_clicked();
 
 private:
     Ui::DialogRename *ui;

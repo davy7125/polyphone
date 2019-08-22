@@ -59,7 +59,9 @@ signals:
 private slots:
     void onNewSmplClicked();
     void onNewInstClicked();
+    void onNewInstClicked(QString name);
     void onNewPrstClicked();
+    void onNewPrstClicked(QString name);
     void onSaveClicked();
     void onDisplayActionClicked();
     void onRecorderActionClicked();

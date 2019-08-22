@@ -48,7 +48,7 @@ ToolMixtureCreation_gui::~ToolMixtureCreation_gui()
 void ToolMixtureCreation_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
 {
     Q_UNUSED(ids)
-    ToolMixtureCreation_parameters * params = (ToolMixtureCreation_parameters *) parameters;
+    ToolMixtureCreation_parameters * params = dynamic_cast<ToolMixtureCreation_parameters *>(parameters);
 
     // Recall values
     _divisions = params->getDivisions();
@@ -67,45 +67,12 @@ void ToolMixtureCreation_gui::updateInterface(AbstractToolParameters * parameter
 void ToolMixtureCreation_gui::saveParameters(AbstractToolParameters * parameters)
 {
     // Save values
-    ToolMixtureCreation_parameters * params = (ToolMixtureCreation_parameters *) parameters;
+    ToolMixtureCreation_parameters * params = dynamic_cast<ToolMixtureCreation_parameters *>(parameters);
     params->setDivisions(_divisions);
     params->setInstrumentName(ui->lineNom->text());
     params->setDensityType(ui->comboFreq->currentIndex());
     params->setLoopSample(ui->checkBouclage->isChecked());
     params->setStereoSample(ui->checkStereo->isChecked());
-}
-
-void ToolMixtureCreation_gui::on_buttonBox_accepted()
-{
-    // Check that the name is specified
-    if (ui->lineNom->text().isEmpty())
-    {
-        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("The instrument name must be provided."));
-        return;
-    }
-
-    // Check that at least one division is not empty
-    bool ok = false;
-    for (int i = 0; i < _divisions.length(); i++)
-    {
-        if (!_divisions[i].getRanks().empty())
-        {
-            ok = true;
-            break;
-        }
-    }
-    if (!ok)
-    {
-        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("At least one rank must be specified."));
-        return;
-    }
-
-    emit(this->validated());
-}
-
-void ToolMixtureCreation_gui::on_buttonBox_rejected()
-{
-    emit(this->canceled());
 }
 
 // Display
@@ -553,4 +520,37 @@ void ToolMixtureCreation_gui::on_comboType2_currentIndexChanged(int index)
     ui->listRangs->blockSignals(true);
     ui->listRangs->setCurrentRow(numRang);
     ui->listRangs->blockSignals(false);
+}
+
+void ToolMixtureCreation_gui::on_pushCancel_clicked()
+{
+    emit(this->canceled());
+}
+
+void ToolMixtureCreation_gui::on_pushOk_clicked()
+{
+    // Check that the name is specified
+    if (ui->lineNom->text().isEmpty())
+    {
+        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("The instrument name must be provided."));
+        return;
+    }
+
+    // Check that at least one division is not empty
+    bool ok = false;
+    for (int i = 0; i < _divisions.length(); i++)
+    {
+        if (!_divisions[i].getRanks().empty())
+        {
+            ok = true;
+            break;
+        }
+    }
+    if (!ok)
+    {
+        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("At least one rank must be specified."));
+        return;
+    }
+
+    emit(this->validated());
 }

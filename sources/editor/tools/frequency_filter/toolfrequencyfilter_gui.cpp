@@ -42,7 +42,7 @@ ToolFrequencyFilter_gui::~ToolFrequencyFilter_gui()
 
 void ToolFrequencyFilter_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
 {
-    ToolFrequencyFilter_parameters * params = (ToolFrequencyFilter_parameters *) parameters;
+    ToolFrequencyFilter_parameters * params = dynamic_cast<ToolFrequencyFilter_parameters *>(parameters);
 
     // Filter used
     ui->graphFilterFrequencies->setValues(params->getCurve());
@@ -63,9 +63,9 @@ void ToolFrequencyFilter_gui::updateInterface(AbstractToolParameters * parameter
         int length = baData.size() / 2;
         QVector<float> fData;
         fData.resize(length);
-        qint16 * data = (qint16*)baData.data();
+        qint16 * data = reinterpret_cast<qint16*>(baData.data());
         for (int i = 0; i < length; i++)
-            fData[i] = (float)data[i];
+            fData[i] = static_cast<float>(data[i]);
         fData = SampleUtils::getFourierTransform(fData);
 
         // Display it
@@ -75,18 +75,18 @@ void ToolFrequencyFilter_gui::updateInterface(AbstractToolParameters * parameter
 
 void ToolFrequencyFilter_gui::saveParameters(AbstractToolParameters * parameters)
 {
-    ToolFrequencyFilter_parameters * params = (ToolFrequencyFilter_parameters *) parameters;
+    ToolFrequencyFilter_parameters * params = dynamic_cast<ToolFrequencyFilter_parameters *>(parameters);
 
     // Save parameters
     params->setCurve(ui->graphFilterFrequencies->getValues());
 }
 
-void ToolFrequencyFilter_gui::on_buttonBox_accepted()
-{
-    emit(this->validated());
-}
-
-void ToolFrequencyFilter_gui::on_buttonBox_rejected()
+void ToolFrequencyFilter_gui::on_pushCancel_clicked()
 {
     emit(this->canceled());
+}
+
+void ToolFrequencyFilter_gui::on_pushOk_clicked()
+{
+    emit(this->validated());
 }

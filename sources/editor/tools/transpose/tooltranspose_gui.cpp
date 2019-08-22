@@ -58,12 +58,12 @@ void ToolTranspose_gui::saveParameters(AbstractToolParameters * parameters)
     params->setAdaptKeyRanges(ui->checkKeyRange->isChecked());
 }
 
-void ToolTranspose_gui::on_buttonBox_accepted()
-{
-    emit(this->validated());
-}
-
-void ToolTranspose_gui::on_buttonBox_rejected()
+void ToolTranspose_gui::on_pushCancel_clicked()
 {
     emit(this->canceled());
+}
+
+void ToolTranspose_gui::on_pushOk_clicked()
+{
+    emit(this->validated());
 }

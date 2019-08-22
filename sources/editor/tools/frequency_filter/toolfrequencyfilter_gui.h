@@ -38,7 +38,7 @@ class ToolFrequencyFilter_gui : public AbstractToolGui
 
 public:
     explicit ToolFrequencyFilter_gui(QWidget *parent = nullptr);
-    ~ToolFrequencyFilter_gui();
+    ~ToolFrequencyFilter_gui() override;
 
     /// Update the interface with the parameters
     void updateInterface(AbstractToolParameters * parameters, IdList ids) override;
@@ -47,8 +47,8 @@ public:
     void saveParameters(AbstractToolParameters * parameters) override;
 
 private slots:
-    void on_buttonBox_accepted();
-    void on_buttonBox_rejected();
+    void on_pushCancel_clicked();
+    void on_pushOk_clicked();
 
 private:
     Ui::ToolFrequencyFilter_gui *ui;

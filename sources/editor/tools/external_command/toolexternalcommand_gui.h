@@ -38,7 +38,7 @@ class ToolExternalCommand_gui : public AbstractToolGui
 
 public:
     explicit ToolExternalCommand_gui(QWidget *parent = nullptr);
-    ~ToolExternalCommand_gui();
+    ~ToolExternalCommand_gui() override;
 
     /// Update the interface with the parameters
     void updateInterface(AbstractToolParameters * parameters, IdList ids) override;
@@ -49,8 +49,8 @@ public:
 private slots:
     void on_comboPrevious_currentIndexChanged(const QString &arg1);
     void on_pushOpen_clicked();
-    void on_buttonBox_accepted();
-    void on_buttonBox_rejected();
+    void on_pushOk_clicked();
+    void on_pushCancel_clicked();
 
 private:
     Ui::ToolExternalCommand_gui *ui;

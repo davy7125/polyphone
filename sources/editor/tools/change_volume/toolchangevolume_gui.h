@@ -37,7 +37,7 @@ class ToolChangeVolume_gui : public AbstractToolGui
 
 public:
     explicit ToolChangeVolume_gui(QWidget *parent = nullptr);
-    ~ToolChangeVolume_gui();
+    ~ToolChangeVolume_gui() override;
 
     /// Update the interface with the parameters
     void updateInterface(AbstractToolParameters * parameters, IdList ids) override;
@@ -49,9 +49,8 @@ private slots:
     void on_radioAdd_toggled(bool checked);
     void on_radioMultiply_toggled(bool checked);
     void on_radioNormalize_toggled(bool checked);
-
-    void on_buttonBox_accepted();
-    void on_buttonBox_rejected();
+    void on_pushOk_clicked();
+    void on_pushCancel_clicked();
 
 private:
     Ui::ToolChangeVolume_gui *ui;

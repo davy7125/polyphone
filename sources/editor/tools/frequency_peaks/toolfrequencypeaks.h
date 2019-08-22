@@ -57,7 +57,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Show peak frequency");
+        return trUtf8("Show peak frequencies");
     }
 
     /// Return true if the tool can be used on the specified ids

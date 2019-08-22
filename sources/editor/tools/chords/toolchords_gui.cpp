@@ -153,12 +153,12 @@ void ToolChords_gui::saveParameters(AbstractToolParameters * parameters)
     params->setChordConfiguration(ci);
 }
 
-void ToolChords_gui::on_buttonBox_accepted()
-{
-    emit(this->validated());
-}
-
-void ToolChords_gui::on_buttonBox_rejected()
+void ToolChords_gui::on_pushCancel_clicked()
 {
     emit(this->canceled());
+}
+
+void ToolChords_gui::on_pushOk_clicked()
+{
+    emit(this->validated());
 }

@@ -33,6 +33,7 @@
 #include <QFileDialog>
 #include "windowmanager.h"
 #include "outputfactory.h"
+#include "dialogquestion.h"
 
 bool EditorToolBar::s_recorderOpen = false;
 bool EditorToolBar::s_keyboardOpen = false;
@@ -273,38 +274,75 @@ void EditorToolBar::onNewSmplClicked()
 
 void EditorToolBar::onNewInstClicked()
 {
-    SoundfontManager * sm = SoundfontManager::getInstance();
     EltID id(elementSf2, _sf2Index);
-    if (!sm->isValid(id))
+    if (!SoundfontManager::getInstance()->isValid(id))
         return;
 
-    bool ok;
-    QString name = QInputDialog::getText(this, trUtf8("Create a new instrument"),
-                                         trUtf8("Name of the new instrument:"), QLineEdit::Normal, "", &ok,
-                                         Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
-    if (ok && !name.isEmpty())
+    // Default name of the instrument
+    QString text = "";
+    if (_currentSelection.getSelectedIds(elementSmpl).count() == 1)
     {
-        // Add a new instrument
-        id.typeElement = elementInst;
-        id.indexElt = sm->add(id);
-        sm->set(id, champ_name, name.left(20));
-        sm->endEditing("command:newInst");
-
-        // Selection
-        selectionChanged(id);
+        EltID selectedSmpl = _currentSelection.getSelectedIds(elementSmpl)[0];
+        text = SoundfontManager::getInstance()->getQstr(selectedSmpl, champ_name);
     }
+
+    // Open a dialog
+    DialogQuestion * dial = new DialogQuestion(this);
+    dial->initialize(trUtf8("Create a new instrument"), trUtf8("Name of the new instrument") + "...", text);
+    dial->setTextLimit(20);
+    connect(dial, SIGNAL(onOk(QString)), this, SLOT(onNewInstClicked(QString)));
+    dial->show();
+}
+
+void EditorToolBar::onNewInstClicked(QString name)
+{
+    if (name.isEmpty())
+        return;
+
+    // Add a new instrument
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    EltID id(elementSf2, _sf2Index);
+    id.typeElement = elementInst;
+    id.indexElt = sm->add(id);
+    sm->set(id, champ_name, name.left(20));
+    sm->endEditing("command:newInst");
+
+    // Selection
+    selectionChanged(id);
 }
 
 void EditorToolBar::onNewPrstClicked()
 {
-    SoundfontManager * sm = SoundfontManager::getInstance();
     EltID id(elementSf2, _sf2Index);
-    if (!sm->isValid(id))
+    if (!SoundfontManager::getInstance()->isValid(id))
+        return;
+
+    // Default name of the preset
+    QString text = "";
+    if (_currentSelection.getSelectedIds(elementInst).count() == 1)
+    {
+        EltID selectedInst = _currentSelection.getSelectedIds(elementInst)[0];
+        text = SoundfontManager::getInstance()->getQstr(selectedInst, champ_name);
+    }
+
+    // Open a dialog
+    DialogQuestion * dial = new DialogQuestion(this);
+    dial->initialize(trUtf8("Create a new preset"), trUtf8("Name of the new preset") + "...", text);
+    dial->setTextLimit(20);
+    connect(dial, SIGNAL(onOk(QString)), this, SLOT(onNewPrstClicked(QString)));
+    dial->show();
+}
+
+void EditorToolBar::onNewPrstClicked(QString name)
+{
+    if (name.isEmpty())
         return;
 
     // Check that a preset is available
     int nPreset = -1;
     int nBank = -1;
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    EltID id(elementSf2, _sf2Index);
     sm->firstAvailablePresetBank(id, nBank, nPreset);
     if (nPreset == -1)
     {
@@ -312,34 +350,19 @@ void EditorToolBar::onNewPrstClicked()
         return;
     }
 
-    // Default name of the preset
-    QString text = "";
-    if (_currentSelection.getSelectedIds(elementInst).count() == 1)
-    {
-        EltID selectedInst = _currentSelection.getSelectedIds(elementInst)[0];
-        text = sm->getQstr(selectedInst, champ_name);
-    }
+    // Add a new preset
+    id.typeElement = elementPrst;
+    id.indexElt = sm->add(id);
+    sm->set(id, champ_name, name.left(20));
+    AttributeValue val;
+    val.wValue = nPreset;
+    sm->set(id, champ_wPreset, val);
+    val.wValue = nBank;
+    sm->set(id, champ_wBank, val);
+    sm->endEditing("command:newPrst");
 
-    bool ok;
-    QString name = QInputDialog::getText(this, trUtf8("Create a new preset"),
-                                         trUtf8("Name of the new preset:"), QLineEdit::Normal, text, &ok,
-                                         Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
-    if (ok && !name.isEmpty())
-    {
-        // Add a new preset
-        id.typeElement = elementPrst;
-        id.indexElt = sm->add(id);
-        sm->set(id, champ_name, name.left(20));
-        AttributeValue val;
-        val.wValue = nPreset;
-        sm->set(id, champ_wPreset, val);
-        val.wValue = nBank;
-        sm->set(id, champ_wBank, val);
-        sm->endEditing("command:newPrst");
-
-        // Selection
-        selectionChanged(id);
-    }
+    // Selection
+    selectionChanged(id);
 }
 
 void EditorToolBar::onSaveClicked()

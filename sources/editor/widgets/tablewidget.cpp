@@ -436,8 +436,11 @@ void TableWidget::deleteCells()
 
 void TableWidget::onSectionDoubleClicked(int index)
 {
-    EltID id = getID(index);
-    openElement(id);
+    if (index >= 0) // Avoid a double click in the empty area
+    {
+        EltID id = getID(index);
+        openElement(id);
+    }
 }
 
 void TableWidget::onItemSelectionChanged()

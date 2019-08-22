@@ -89,7 +89,7 @@ void ToolDivisionDuplication_gui::dispVel()
 
 void ToolDivisionDuplication_gui::saveParameters(AbstractToolParameters * parameters)
 {
-    ToolDivisionDuplication_parameters * params = (ToolDivisionDuplication_parameters *) parameters;
+    ToolDivisionDuplication_parameters * params = dynamic_cast<ToolDivisionDuplication_parameters *>(parameters);
 
     // Save values
     if (_isInst)
@@ -165,12 +165,12 @@ void ToolDivisionDuplication_gui::on_checkForEachVelocityRange_clicked()
     ui->spinMinVel->setEnabled(isEnabled);
 }
 
-void ToolDivisionDuplication_gui::on_buttonBox_accepted()
-{       
-    emit(this->validated());
-}
-
-void ToolDivisionDuplication_gui::on_buttonBox_rejected()
+void ToolDivisionDuplication_gui::on_pushCancel_clicked()
 {
     emit(this->canceled());
+}
+
+void ToolDivisionDuplication_gui::on_pushOk_clicked()
+{
+    emit(this->validated());
 }

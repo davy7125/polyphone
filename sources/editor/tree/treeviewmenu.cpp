@@ -30,6 +30,7 @@
 #include <QMessageBox>
 #include "contextmanager.h"
 #include "duplicator.h"
+#include "dialogquestion.h"
 
 IdList TreeViewMenu::s_copy = IdList();
 
@@ -313,7 +314,7 @@ void TreeViewMenu::rename()
 
     if (_currentIds.count() > 1)
     {
-        DialogRename * dial = new DialogRename(type == elementSmpl, (QWidget*)this->parent());
+        DialogRename * dial = new DialogRename(type == elementSmpl, dynamic_cast<QWidget*>(this->parent()));
         connect(dial, SIGNAL(updateNames(int, QString, QString, int, int)),
                 this, SLOT(bulkRename(int, QString, QString, int, int)));
         dial->show();
@@ -322,21 +323,28 @@ void TreeViewMenu::rename()
     {
         QString msg;
         if (type == elementSmpl)
-            msg = trUtf8("Sample name (max 20 characters):");
+            msg = trUtf8("Sample name");
         else if (type == elementInst)
-            msg = trUtf8("Instrument name (max 20 characters):");
+            msg = trUtf8("Instrument name");
         else if (type == elementPrst)
-            msg = trUtf8("Preset name (max 20 characters):");
+            msg = trUtf8("Preset name");
 
-        SoundfontManager * sm = SoundfontManager::getInstance();
-        bool ok = true;
-        QString text = QInputDialog::getText((QWidget*)this->parent(), trUtf8("Question"), msg, QLineEdit::Normal,
-                                             sm->getQstr(_currentIds[0], champ_name), &ok,
-                Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
-        if (ok && !text.isEmpty())
-            sm->set(_currentIds[0], champ_name, text);
-        sm->endEditing("command:rename");
+        DialogQuestion * dial = new DialogQuestion(dynamic_cast<QWidget*>(this->parent()));
+        dial->initialize(trUtf8("Rename"), msg + "...", SoundfontManager::getInstance()->getQstr(_currentIds[0], champ_name));
+        dial->setTextLimit(20);
+        connect(dial, SIGNAL(onOk(QString)), this, SLOT(onRename(QString)));
+        dial->show();
     }
+}
+
+void TreeViewMenu::onRename(QString txt)
+{
+    if (txt.isEmpty() || _currentIds.empty())
+        return;
+
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    sm->set(_currentIds[0], champ_name, txt);
+    sm->endEditing("command:rename");
 }
 
 void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int val1, int val2)

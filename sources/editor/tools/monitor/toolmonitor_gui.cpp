@@ -81,14 +81,14 @@ void ToolMonitor_gui::updateInterface(AbstractToolParameters * parameters, IdLis
 {
     _isInst = (ids.isEmpty() || ids[0].typeElement == elementInst || ids[0].typeElement == elementInstSmpl);
     _initialID = ids.empty() ? EltID(elementUnknown) : ids[0];
-    ToolMonitor_parameters * params = (ToolMonitor_parameters *)parameters;
+    ToolMonitor_parameters * params = dynamic_cast<ToolMonitor_parameters *>(parameters);
 
     ui->comboParameter->blockSignals(true);
     ui->comboParameter->clear();
     for (int i = 0; i < _attributeList.size(); i++)
     {
         ui->comboParameter->addItem(Attribute::getDescription(_attributeList.at(i), !_isInst));
-        ui->comboParameter->setItemData(i, (int)_attributeList.at(i));
+        ui->comboParameter->setItemData(i, static_cast<int>(_attributeList.at(i)));
     }
     ui->comboParameter->setCurrentIndex(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
     ui->comboParameter->blockSignals(false);
@@ -109,7 +109,7 @@ void ToolMonitor_gui::updateInterface(AbstractToolParameters * parameters, IdLis
 
 void ToolMonitor_gui::saveParameters(AbstractToolParameters * parameters)
 {
-    ToolMonitor_parameters * params = (ToolMonitor_parameters *)parameters;
+    ToolMonitor_parameters * params = dynamic_cast<ToolMonitor_parameters *>(parameters);
     if (_isInst)
     {
         params->setInstLog(ui->checkLog->isChecked());
@@ -122,11 +122,6 @@ void ToolMonitor_gui::saveParameters(AbstractToolParameters * parameters)
     }
 }
 
-void ToolMonitor_gui::on_buttonBox_accepted()
-{
-    emit(this->validated());
-}
-
 void ToolMonitor_gui::on_comboParameter_currentIndexChanged(int index)
 {
     // Création des données
@@ -134,7 +129,7 @@ void ToolMonitor_gui::on_comboParameter_currentIndexChanged(int index)
     QVector<QList<double> > vectListPoints, vectListPointsDef;
     vectListPoints.resize(128);
     vectListPointsDef.resize(128);
-    AttributeType champ = (AttributeType)ui->comboParameter->itemData(index).toInt();
+    AttributeType champ = static_cast<AttributeType>(ui->comboParameter->itemData(index).toInt());
 
     // Valeur par défaut
     EltID id = _initialID;

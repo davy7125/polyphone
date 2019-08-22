@@ -22,54 +22,42 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TREEVIEWMENU_H
-#define TREEVIEWMENU_H
+#include "dialogquestion.h"
+#include "ui_dialogquestion.h"
 
-#include <QMenu>
-#include "basetypes.h"
-class DialogList;
-
-class TreeViewMenu : public QMenu
+DialogQuestion::DialogQuestion(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::DialogQuestion)
 {
-    Q_OBJECT
+    ui->setupUi(this);
+    this->setAttribute(Qt::WA_DeleteOnClose);
+    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
+}
 
-public:
-    TreeViewMenu(QWidget * parent);
-    ~TreeViewMenu();
+DialogQuestion::~DialogQuestion()
+{
+    delete ui;
+}
 
-    /// Initialize the menu with the selected IDs
-    void initialize(IdList ids);
+void DialogQuestion::initialize(QString title, QString placeHolder, QString defaultValue)
+{
+    this->setWindowTitle(title);
+    ui->lineEdit->setPlaceholderText(placeHolder);
+    ui->lineEdit->setText(defaultValue);
+}
 
-public slots:
-    void associate();
-    void replace();
-    void itemSelectedFromList(EltID id, bool isAssociation);
-    void copy();
-    void paste();
-    void duplicate();
-    void remove();
-    void rename();
+void DialogQuestion::setTextLimit(int textLimit)
+{
+    ui->lineEdit->setMaxLength(textLimit);
+}
 
-private slots:
-    void bulkRename(int renameType, QString text1, QString text2, int val1, int val2);
-    void onRename(QString txt);
+void DialogQuestion::on_pushCancel_clicked()
+{
+    QDialog::reject();
+}
 
-private:
-    void associate(IdList ids, EltID idDest);
-    void replace(EltID idSrc, EltID idDest);
-
-    IdList _currentIds;
-    QAction * _replaceAction;
-    QAction * _associateAction;
-    QAction * _copyAction;
-    QAction * _pasteAction;
-    QAction * _duplicateAction;
-    QAction * _removeAction;
-    QAction * _renameAction;
-    DialogList * _dialogList;
-
-    // Same copy for all instances
-    static IdList s_copy;
-};
-
-#endif // TREEVIEWMENU_H
+void DialogQuestion::on_pushOk_clicked()
+{
+    emit(onOk(ui->lineEdit->text()));
+    QDialog::close();
+}

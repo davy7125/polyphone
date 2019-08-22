@@ -41,7 +41,7 @@ ToolChangeVolume_gui::~ToolChangeVolume_gui()
 void ToolChangeVolume_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
 {
     Q_UNUSED(ids)
-    ToolChangeVolume_parameters * params = (ToolChangeVolume_parameters *) parameters;
+    ToolChangeVolume_parameters * params = dynamic_cast<ToolChangeVolume_parameters *>(parameters);
 
     // Mode
     switch (params->getMode())
@@ -64,7 +64,7 @@ void ToolChangeVolume_gui::updateInterface(AbstractToolParameters * parameters, 
 
 void ToolChangeVolume_gui::saveParameters(AbstractToolParameters * parameters)
 {
-    ToolChangeVolume_parameters * params = (ToolChangeVolume_parameters *) parameters;
+    ToolChangeVolume_parameters * params = dynamic_cast<ToolChangeVolume_parameters *>(parameters);
 
     // Mode
     int mode = 0;
@@ -95,12 +95,12 @@ void ToolChangeVolume_gui::on_radioNormalize_toggled(bool checked)
     ui->doubleSpinNormalize->setEnabled(checked);
 }
 
-void ToolChangeVolume_gui::on_buttonBox_accepted()
+void ToolChangeVolume_gui::on_pushOk_clicked()
 {
     emit(this->validated());
 }
 
-void ToolChangeVolume_gui::on_buttonBox_rejected()
+void ToolChangeVolume_gui::on_pushCancel_clicked()
 {
     emit(this->canceled());
 }

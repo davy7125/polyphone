@@ -57,7 +57,8 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     {
         int note = 12 * (i + 1);
         double pos = (double)(note * this->nbPoints) / 127.;
-        x[2*i] = x[2*i+1] = pos;
+        x[2 * i] = x[2 * i + 1] = pos;
+        x[2 * i + 1] += 0.0001;
         QCPItemText *textLabel = new QCPItemText(this);
         textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         textLabel->position->setType(QCPItemPosition::ptPlotCoords);

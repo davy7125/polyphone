@@ -55,6 +55,7 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(p
         int freq = 2000 * (i + 1);
         double pos = (double)(freq * POINT_NUMBER) / 20000.;
         x[2*i] = x[2*i+1] = pos;
+        x[2*i+1] += 0.0001;
         QCPItemText *textLabel = new QCPItemText(this);
         textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         textLabel->position->setType(QCPItemPosition::ptPlotCoords);

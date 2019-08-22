@@ -104,10 +104,16 @@ void DialogCreateElements::initialize(IdList ids)
         ui->radioOnlyOne->setChecked(true);
 }
 
-void DialogCreateElements::on_buttonBox_accepted()
+void DialogCreateElements::on_pushCancel_clicked()
+{
+    QDialog::reject();
+}
+
+void DialogCreateElements::on_pushOk_clicked()
 {
     // Store the option
     ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "create_element_dialog", ui->radioOnePerElement->isChecked() ? 1 : 0);
 
     emit(createElements(_ids, ui->radioOnePerElement->isChecked() || _ids.count() == 1));
+    QDialog::accept();
 }

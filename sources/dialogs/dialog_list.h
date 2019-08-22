@@ -49,8 +49,8 @@ signals:
     void elementSelected(EltID id, bool isAssociation);
 
 private slots:
-    void accept();
-    void reject();
+    void on_pushCancel_clicked();
+    void on_pushOk_clicked();
 
 signals:
     void selectedID(EltID id);

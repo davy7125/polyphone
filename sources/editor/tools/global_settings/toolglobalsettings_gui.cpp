@@ -43,7 +43,7 @@ ToolGlobalSettings_gui::~ToolGlobalSettings_gui()
 void ToolGlobalSettings_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
 {
     _isInst = (ids.isEmpty() || ids[0].typeElement == elementInst || ids[0].typeElement == elementInstSmpl);
-    ToolGlobalSettings_parameters * params = (ToolGlobalSettings_parameters *) parameters;
+    ToolGlobalSettings_parameters * params = dynamic_cast<ToolGlobalSettings_parameters *>(parameters);
 
     // Attribute list
     QList<AttributeType> paramTypeList;
@@ -138,7 +138,7 @@ void ToolGlobalSettings_gui::updateInterface(AbstractToolParameters * parameters
 
 void ToolGlobalSettings_gui::saveParameters(AbstractToolParameters * parameters)
 {
-    ToolGlobalSettings_parameters * params = (ToolGlobalSettings_parameters *) parameters;
+    ToolGlobalSettings_parameters * params = dynamic_cast<ToolGlobalSettings_parameters *>(parameters);
 
     // Store data
     if (_isInst)
@@ -181,16 +181,6 @@ void ToolGlobalSettings_gui::saveParameters(AbstractToolParameters * parameters)
     }
 }
 
-void ToolGlobalSettings_gui::on_buttonBox_accepted()
-{
-    emit(this->validated());
-}
-
-void ToolGlobalSettings_gui::on_buttonBox_rejected()
-{
-    emit(this->canceled());
-}
-
 void ToolGlobalSettings_gui::on_comboPattern_currentIndexChanged(int index)
 {
     if (index == 3 || index == 4)
@@ -224,4 +214,14 @@ void ToolGlobalSettings_gui::on_doubleSpinMin_valueChanged(double arg1)
 void ToolGlobalSettings_gui::on_doubleSpinMax_valueChanged(double arg1)
 {
     ui->graphParamGlobal->setMinMax(ui->doubleSpinMin->value(), arg1);
+}
+
+void ToolGlobalSettings_gui::on_pushCancel_clicked()
+{
+    emit(this->canceled());
+}
+
+void ToolGlobalSettings_gui::on_pushOk_clicked()
+{
+    emit(this->validated());
 }

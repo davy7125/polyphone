@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>385</width>
-    <height>264</height>
+    <width>380</width>
+    <height>281</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -298,28 +298,6 @@
          </size>
         </property>
        </spacer>
-      </item>
-      <item row="1" column="3">
-       <widget class="QDialogButtonBox" name="buttonBox">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>200</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="standardButtons">
-         <set>QDialogButtonBox::Ok</set>
-        </property>
-       </widget>
       </item>
      </layout>
     </widget>

@@ -275,7 +275,10 @@ void GraphVisualizer::setScale()
     y[0] = y[3] = y[4] = y[7] = y[8] = y[11] = y[12] = y[15] = y[16] = y[19] = maxY;
     y[1] = y[2] = y[5] = y[6] = y[9] = y[10] = y[13] = y[14] = y[17] = y[18] = minY;
     for (int i = 0; i < 10; i++)
-        x[2*i] = x[2*i+1] = 12 * (i + 1);
+    {
+        x[2 * i] = x[2 * i + 1] = 12 * (i + 1);
+        x[2 * i + 1] += 0.0001;
+    }
     this->graph(0)->setData(x, y);
 
     this->replot();

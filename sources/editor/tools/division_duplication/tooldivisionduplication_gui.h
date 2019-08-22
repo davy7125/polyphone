@@ -37,7 +37,7 @@ class ToolDivisionDuplication_gui : public AbstractToolGui
 
 public:
     explicit ToolDivisionDuplication_gui(QWidget *parent = nullptr);
-    ~ToolDivisionDuplication_gui();
+    ~ToolDivisionDuplication_gui() override;
 
     /// Update the interface with the parameters
     void updateInterface(AbstractToolParameters * parameters, IdList ids) override;
@@ -46,14 +46,14 @@ public:
     void saveParameters(AbstractToolParameters * parameters) override;
 
 private slots:
-    void on_buttonBox_accepted();
-    void on_buttonBox_rejected();
     void on_pushAdd_clicked();
     void on_pushRemove_clicked();
     void on_spinMinVel_valueChanged(int arg1);
     void on_spinMaxVel_valueChanged(int arg1);
     void on_checkForEachVelocityRange_clicked();
     void on_listVelocites_currentRowChanged(int currentRow);
+    void on_pushCancel_clicked();
+    void on_pushOk_clicked();
 
 private:
     void dispVel();

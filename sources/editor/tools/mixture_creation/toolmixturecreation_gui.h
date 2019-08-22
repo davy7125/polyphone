@@ -47,8 +47,6 @@ public:
     void saveParameters(AbstractToolParameters * parameters) override;
 
 private slots:
-    void on_buttonBox_accepted();
-    void on_buttonBox_rejected();
     void on_pushAddDiv_pressed();
     void on_pushRemoveDiv_pressed();
     void on_spinDivStart_valueChanged(int arg1);
@@ -59,6 +57,8 @@ private slots:
     void on_comboType2_currentIndexChanged(int index);
     void on_listDivisions_itemSelectionChanged();
     void on_listRangs_itemSelectionChanged();
+    void on_pushCancel_clicked();
+    void on_pushOk_clicked();
 
 private:
     QList<QList<int> > getStoredRanks();

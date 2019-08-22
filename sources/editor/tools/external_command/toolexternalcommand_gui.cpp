@@ -51,7 +51,7 @@ ToolExternalCommand_gui::~ToolExternalCommand_gui()
 void ToolExternalCommand_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
 {
     Q_UNUSED(ids)
-    ToolExternalCommand_parameters * params = (ToolExternalCommand_parameters *)parameters;
+    ToolExternalCommand_parameters * params = dynamic_cast<ToolExternalCommand_parameters *>(parameters);
 
     // Command history
     ui->comboPrevious->clear();
@@ -68,7 +68,7 @@ void ToolExternalCommand_gui::updateInterface(AbstractToolParameters * parameter
 
 void ToolExternalCommand_gui::saveParameters(AbstractToolParameters * parameters)
 {
-    ToolExternalCommand_parameters * params = (ToolExternalCommand_parameters *)parameters;
+    ToolExternalCommand_parameters * params = dynamic_cast<ToolExternalCommand_parameters *>(parameters);
 
     // Update the command history
     QList<QString> history;
@@ -103,7 +103,7 @@ void ToolExternalCommand_gui::on_pushOpen_clicked()
         ui->lineCommand->setText("\"" + command + "\" {wav}");
 }
 
-void ToolExternalCommand_gui::on_buttonBox_accepted()
+void ToolExternalCommand_gui::on_pushOk_clicked()
 {
     QString command = ui->lineCommand->text();
 
@@ -128,7 +128,7 @@ void ToolExternalCommand_gui::on_buttonBox_accepted()
     emit(this->validated());
 }
 
-void ToolExternalCommand_gui::on_buttonBox_rejected()
+void ToolExternalCommand_gui::on_pushCancel_clicked()
 {
     emit(this->canceled());
 }

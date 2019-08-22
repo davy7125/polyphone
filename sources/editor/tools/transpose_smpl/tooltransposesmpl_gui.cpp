@@ -41,22 +41,22 @@ ToolTransposeSmpl_gui::~ToolTransposeSmpl_gui()
 void ToolTransposeSmpl_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
 {
     Q_UNUSED(ids)
-    ToolTransposeSmpl_parameters * params = (ToolTransposeSmpl_parameters *)parameters;
+    ToolTransposeSmpl_parameters * params = dynamic_cast<ToolTransposeSmpl_parameters *>(parameters);
     ui->spinTon->setValue(params->getSemiTones());
 }
 
 void ToolTransposeSmpl_gui::saveParameters(AbstractToolParameters * parameters)
 {
-    ToolTransposeSmpl_parameters * params = (ToolTransposeSmpl_parameters *)parameters;
+    ToolTransposeSmpl_parameters * params = dynamic_cast<ToolTransposeSmpl_parameters *>(parameters);
     params->setSemiTones(ui->spinTon->value());
 }
 
-void ToolTransposeSmpl_gui::on_buttonBox_accepted()
-{
-    emit(this->validated());
-}
-
-void ToolTransposeSmpl_gui::on_buttonBox_rejected()
+void ToolTransposeSmpl_gui::on_pushCancel_clicked()
 {
     emit(this->canceled());
+}
+
+void ToolTransposeSmpl_gui::on_pushOk_clicked()
+{
+    emit(this->validated());
 }

@@ -53,8 +53,8 @@ private slots:
     void on_spinOffset_valueChanged(int arg1);
     void on_checkFlip_stateChanged(int arg1);
     void on_checkFlop_stateChanged(int arg1);
-    void on_buttonBox_accepted();
-    void on_buttonBox_rejected();
+    void on_pushCancel_clicked();
+    void on_pushOk_clicked();
 
 private:
     double spaceLinear(int note, int nbDiv, int etalement, int occupation, int offset, int sens, bool isAscending);

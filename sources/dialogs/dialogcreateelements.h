@@ -46,7 +46,8 @@ signals:
     void createElements(IdList ids, bool oneForEach);
 
 private slots:
-    void on_buttonBox_accepted();
+    void on_pushCancel_clicked();
+    void on_pushOk_clicked();
 
 private:
     Ui::DialogCreateElements *ui;

@@ -57,7 +57,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Automatically link the samples");
+        return trUtf8("Sample auto-positioning");
     }
 };
 

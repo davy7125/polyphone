@@ -42,7 +42,7 @@ ToolRelease_gui::~ToolRelease_gui()
 void ToolRelease_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
 {
     Q_UNUSED(ids)
-    ToolRelease_parameters * params = (ToolRelease_parameters *) parameters;
+    ToolRelease_parameters * params = dynamic_cast<ToolRelease_parameters *>(parameters);
 
     // Load parameters
     ui->doubleDuree36->setValue(params->getBaseDuration());
@@ -53,7 +53,7 @@ void ToolRelease_gui::updateInterface(AbstractToolParameters * parameters, IdLis
 
 void ToolRelease_gui::saveParameters(AbstractToolParameters * parameters)
 {
-    ToolRelease_parameters * params = (ToolRelease_parameters *) parameters;
+    ToolRelease_parameters * params = dynamic_cast<ToolRelease_parameters *>(parameters);
 
     // Save current parameters
     params->setBaseDuration(ui->doubleDuree36->value());
@@ -61,12 +61,12 @@ void ToolRelease_gui::saveParameters(AbstractToolParameters * parameters)
     params->setDetune(ui->doubleDeTune->value());
 }
 
-void ToolRelease_gui::on_buttonBox_accepted()
-{
-    emit(this->validated());
-}
-
-void ToolRelease_gui::on_buttonBox_rejected()
+void ToolRelease_gui::on_pushCancel_clicked()
 {
     emit(this->canceled());
+}
+
+void ToolRelease_gui::on_pushOk_clicked()
+{
+    emit(this->validated());
 }

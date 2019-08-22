@@ -57,22 +57,6 @@ DialogRename::~DialogRename()
     delete ui;
 }
 
-void DialogRename::accept()
-{
-    int type = ui->comboBox->currentIndex() + !_isSample;
-    this->updateNames(type, ui->lineText1->text(), ui->lineText2->text(),
-                      ui->spinPos1->value(), ui->spinPos2->value());
-
-    // Mémorisation des paramètres
-    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "option", ui->comboBox->currentIndex() + !_isSample);
-    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "int_1", ui->spinPos1->value());
-    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "int_2", ui->spinPos2->value());
-    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "text_1", ui->lineText1->text());
-    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "text_2", ui->lineText2->text());
-
-    QDialog::accept();
-}
-
 void DialogRename::on_comboBox_currentIndexChanged(int index)
 {
     switch (index + !_isSample)
@@ -139,4 +123,25 @@ void DialogRename::on_comboBox_currentIndexChanged(int index)
     }
 
     this->adjustSize();
+}
+
+void DialogRename::on_pushCancel_clicked()
+{
+    QDialog::reject();
+}
+
+void DialogRename::on_pushOk_clicked()
+{
+    int type = ui->comboBox->currentIndex() + !_isSample;
+    this->updateNames(type, ui->lineText1->text(), ui->lineText2->text(),
+                      ui->spinPos1->value(), ui->spinPos2->value());
+
+    // Mémorisation des paramètres
+    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "option", ui->comboBox->currentIndex() + !_isSample);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "int_1", ui->spinPos1->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "int_2", ui->spinPos2->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "text_1", ui->lineText1->text());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "text_2", ui->lineText2->text());
+
+    QDialog::accept();
 }

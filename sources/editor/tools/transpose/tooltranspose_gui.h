@@ -37,7 +37,7 @@ class ToolTranspose_gui : public AbstractToolGui
 
 public:
     explicit ToolTranspose_gui(QWidget *parent = nullptr);
-    ~ToolTranspose_gui();
+    ~ToolTranspose_gui() override;
 
     /// Update the interface with the parameters
     void updateInterface(AbstractToolParameters * parameters, IdList ids) override;
@@ -46,8 +46,8 @@ public:
     void saveParameters(AbstractToolParameters * parameters) override;
 
 private slots:
-    void on_buttonBox_accepted();
-    void on_buttonBox_rejected();
+    void on_pushCancel_clicked();
+    void on_pushOk_clicked();
 
 private:
     Ui::ToolTranspose_gui *ui;

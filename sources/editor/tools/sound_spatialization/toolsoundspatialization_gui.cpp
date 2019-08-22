@@ -144,16 +144,6 @@ void ToolSoundSpatialization_gui::saveParameters(AbstractToolParameters * parame
     params->setMapPan(mapPan);
 }
 
-void ToolSoundSpatialization_gui::on_buttonBox_accepted()
-{
-    emit(this->validated());
-}
-
-void ToolSoundSpatialization_gui::on_buttonBox_rejected()
-{
-    emit(this->canceled());
-}
-
 void ToolSoundSpatialization_gui::on_comboPattern_currentIndexChanged(int index)
 {
     Q_UNUSED(index);
@@ -361,4 +351,14 @@ double ToolSoundSpatialization_gui::getAxe(int note, int nbDiv, bool sens)
     if (sens)
         axe = nbDiv - 1 - axe;
     return (double)(2 * axe + 1) / (2 * nbDiv);
+}
+
+void ToolSoundSpatialization_gui::on_pushCancel_clicked()
+{
+    emit(this->canceled());
+}
+
+void ToolSoundSpatialization_gui::on_pushOk_clicked()
+{
+    emit(this->validated());
 }

@@ -106,7 +106,12 @@ void DialogList::showDialog(EltID idSrc, bool isAssociation)
         ui->listWidget->scrollToItem(selectedItem, QAbstractItemView::PositionAtCenter);
 }
 
-void DialogList::accept()
+void DialogList::on_pushCancel_clicked()
+{
+    QDialog::reject();
+}
+
+void DialogList::on_pushOk_clicked()
 {
     // élément sélectionné ?
     if (ui->listWidget->selectedItems().count())
@@ -115,9 +120,4 @@ void DialogList::accept()
         emit(elementSelected(item->id, _isAssociation));
     }
     QDialog::accept();
-}
-
-void DialogList::reject()
-{
-    QDialog::reject();
 }

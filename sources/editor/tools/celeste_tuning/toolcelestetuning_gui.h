@@ -46,8 +46,8 @@ public:
     void saveParameters(AbstractToolParameters * parameters) override;
 
 private slots:
-    void on_buttonBox_accepted();
-    void on_buttonBox_rejected();
+    void on_pushCancel_clicked();
+    void on_pushOk_clicked();
 
 private:
     Ui::ToolCelesteTuning_gui *ui;

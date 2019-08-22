@@ -22,54 +22,34 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TREEVIEWMENU_H
-#define TREEVIEWMENU_H
+#ifndef DIALOGQUESTION_H
+#define DIALOGQUESTION_H
 
-#include <QMenu>
-#include "basetypes.h"
-class DialogList;
+#include <QDialog>
 
-class TreeViewMenu : public QMenu
+namespace Ui {
+class DialogQuestion;
+}
+
+class DialogQuestion : public QDialog
 {
     Q_OBJECT
 
 public:
-    TreeViewMenu(QWidget * parent);
-    ~TreeViewMenu();
+    explicit DialogQuestion(QWidget *parent = nullptr);
+    void initialize(QString title, QString placeHolder, QString defaultValue);
+    void setTextLimit(int textLimit);
+    ~DialogQuestion();
 
-    /// Initialize the menu with the selected IDs
-    void initialize(IdList ids);
-
-public slots:
-    void associate();
-    void replace();
-    void itemSelectedFromList(EltID id, bool isAssociation);
-    void copy();
-    void paste();
-    void duplicate();
-    void remove();
-    void rename();
+signals:
+    void onOk(QString txt);
 
 private slots:
-    void bulkRename(int renameType, QString text1, QString text2, int val1, int val2);
-    void onRename(QString txt);
+    void on_pushCancel_clicked();
+    void on_pushOk_clicked();
 
 private:
-    void associate(IdList ids, EltID idDest);
-    void replace(EltID idSrc, EltID idDest);
-
-    IdList _currentIds;
-    QAction * _replaceAction;
-    QAction * _associateAction;
-    QAction * _copyAction;
-    QAction * _pasteAction;
-    QAction * _duplicateAction;
-    QAction * _removeAction;
-    QAction * _renameAction;
-    DialogList * _dialogList;
-
-    // Same copy for all instances
-    static IdList s_copy;
+    Ui::DialogQuestion *ui;
 };
 
-#endif // TREEVIEWMENU_H
+#endif // DIALOGQUESTION_H

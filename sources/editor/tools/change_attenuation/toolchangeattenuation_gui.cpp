@@ -42,7 +42,7 @@ ToolChangeAttenuation_gui::~ToolChangeAttenuation_gui()
 void ToolChangeAttenuation_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
 {
     _isInst = (ids.isEmpty() || ids[0].typeElement == elementInst || ids[0].typeElement == elementInstSmpl);
-    ToolChangeAttenuation_parameters * params = (ToolChangeAttenuation_parameters *) parameters;
+    ToolChangeAttenuation_parameters * params = dynamic_cast<ToolChangeAttenuation_parameters *>(parameters);
     SoundfontManager * sm = SoundfontManager::getInstance();
 
     // Compute current attenuation range
@@ -90,7 +90,7 @@ void ToolChangeAttenuation_gui::updateInterface(AbstractToolParameters * paramet
 
 void ToolChangeAttenuation_gui::saveParameters(AbstractToolParameters * parameters)
 {
-    ToolChangeAttenuation_parameters * params = (ToolChangeAttenuation_parameters *) parameters;
+    ToolChangeAttenuation_parameters * params = dynamic_cast<ToolChangeAttenuation_parameters *>(parameters);
 
     // Value
     if (_isInst)
@@ -99,17 +99,17 @@ void ToolChangeAttenuation_gui::saveParameters(AbstractToolParameters * paramete
         params->setPrstValue(ui->doubleSpinValue->value());
 }
 
-void ToolChangeAttenuation_gui::on_buttonBox_accepted()
+QString ToolChangeAttenuation_gui::formatDouble(double value)
 {
-    emit(this->validated());
+    return (value > 0 ? "+" : "") + QString::number(value, 'f', 1);
 }
 
-void ToolChangeAttenuation_gui::on_buttonBox_rejected()
+void ToolChangeAttenuation_gui::on_pushCancel_clicked()
 {
     emit(this->canceled());
 }
 
-QString ToolChangeAttenuation_gui::formatDouble(double value)
+void ToolChangeAttenuation_gui::on_pushOk_clicked()
 {
-    return (value > 0 ? "+" : "") + QString::number(value, 'f', 1);
+    emit(this->validated());
 }
