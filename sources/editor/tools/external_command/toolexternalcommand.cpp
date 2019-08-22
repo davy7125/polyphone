@@ -43,6 +43,7 @@ void ToolExternalCommand::beforeProcess(IdList ids)
 {
     Q_UNUSED(ids)
     _warning = "";
+    _processedIds.clear();
 }
 
 void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters)
@@ -52,7 +53,7 @@ void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolP
         return;
 
     // Parameters
-    ToolExternalCommand_parameters * params = (ToolExternalCommand_parameters *)parameters;
+    ToolExternalCommand_parameters * params = dynamic_cast<ToolExternalCommand_parameters *>(parameters);
     if (params->getCommandHistory().empty())
         return;
     QString command = params->getCommandHistory()[0];
@@ -170,9 +171,9 @@ void ToolExternalCommand::import(EltID id, Sound &sound, SoundfontManager * sm, 
         // Original pitch and correction
         if (sound.getUInt32(champ_pitchDefined) == 1)
         {
-            val.bValue = (quint8)sound.getUInt32(champ_byOriginalPitch);
+            val.bValue = static_cast<quint8>(sound.getUInt32(champ_byOriginalPitch));
             sm->set(id, champ_byOriginalPitch, val);
-            val.cValue = (char)sound.getInt32(champ_chPitchCorrection);
+            val.cValue = static_cast<char>(sound.getInt32(champ_chPitchCorrection));
             sm->set(id, champ_chPitchCorrection, val);
         }
     }
