@@ -50,10 +50,14 @@ void ToolRelease::process(SoundfontManager * sm, EltID id, AbstractToolParameter
                                   sm->get(id, champ_keyRange).rValue.byLo) / 2;
         // Calcul durée release
         double release = pow(division, ((36. - noteMoy) / 12.)) * duree36;
-        if (release < 0.001) release = 0.001;
-        else if (release > 101.594) release = 101.594;
+        if (release < 0.001)
+            release = 0.001;
+        else if (release > 101.594)
+            release = 101.594;
+
         // Valeur correspondante
         short val = 1200 * qLn(release) / 0.69314718056;
+
         // Modification instSmpl
         AttributeValue valeur;
         if (sm->get(id, champ_releaseVolEnv).shValue != val)

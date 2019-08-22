@@ -170,19 +170,19 @@ AttributeValue Attribute::fromRealValue(AttributeType champ, bool isPrst, double
     case champ_attackModEnv: case champ_attackVolEnv:
     case champ_decayModEnv: case champ_decayVolEnv:
     case champ_releaseModEnv: case champ_releaseVolEnv:
-        storedValue.shValue = static_cast<qint16>(qRound(1200. * qLn(realValue) / 0.69314718056));
+        storedValue.shValue = static_cast<qint16>(qRound(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056));
         break;
     case champ_initialFilterFc:
         if (isPrst)
-            storedValue.shValue = static_cast<qint16>(1200. * qLn(realValue) / 0.69314718056);
+            storedValue.shValue = static_cast<qint16>(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056);
         else
-            storedValue.shValue = static_cast<qint16>(1200. * qLn(realValue / 8.176) / 0.69314718056);
+            storedValue.shValue = static_cast<qint16>(1200. * qLn(qMax(0.001, realValue) / 8.176) / 0.69314718056);
         break;
     case champ_freqModLFO: case champ_freqVibLFO:
         if (isPrst)
-            storedValue.shValue = static_cast<qint16>(1200. * qLn(realValue) / 0.69314718056);
+            storedValue.shValue = static_cast<qint16>(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056);
         else
-            storedValue.shValue = static_cast<qint16>(1200. * qLn(realValue / 8.176) / 0.69314718056);
+            storedValue.shValue = static_cast<qint16>(1200. * qLn(qMax(0.001, realValue) / 8.176) / 0.69314718056);
         break;
     default:
         break;
