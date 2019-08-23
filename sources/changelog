@@ -16,7 +16,12 @@ polyphone (2.1) unstable; urgency=low
   * (fix) several modulators can target the same modulator
   * (fix) bug when exporting several WAV files
   * (fix) monitoring tool was not working
+  * (fix) the external command tool was not working twice on a same sample
+  * (fix) removing the loop at the sample level was not possible
+  * (fix) double clicking on the empty part of a table header was crashing the software
   * (fix) sfArk import with Windows
+  * (fix) sf3 export with Windows
+  * (fix) bug when importing a sfz and then saving
   * (fix) small GUI issues
 
  -- Davy Triponney <davy.triponney@gmail.com>  Wed, 14 Aug 2019 14:40:30 +0100
