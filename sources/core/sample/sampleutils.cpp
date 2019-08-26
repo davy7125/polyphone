@@ -41,7 +41,7 @@ QByteArray SampleUtils::resampleMono(QByteArray baData, double echInit, qint32 e
     if (echFinal < echInit)
     {
         // Filtre passe bas (voir sinc filter)
-        baData = SampleUtils::bandFilter(baData, 32, echInit, echFinal/2, 0, -1);
+        baData = SampleUtils::bandFilter(baData, 32, echInit, echFinal / 2, 0, -1);
     }
     qint32 sizeInit = baData.size() / 4;
     qint32 * dataI = (qint32*)baData.data();
@@ -104,7 +104,7 @@ QByteArray SampleUtils::resampleMono(QByteArray baData, double echInit, qint32 e
     delete [] data;
 
     // Filtre passe bas après resampling
-    baRet = SampleUtils::bandFilter(baRet, 32, echFinal, echFinal/2, 0, -1);
+    baRet = SampleUtils::bandFilter(baRet, 32, echFinal, echFinal / 2, 0, -1);
     baRet = bpsConversion(baRet, 32, wBps);
     return baRet;
 }
@@ -825,7 +825,7 @@ QVector<float> SampleUtils::getFourierTransform(QVector<float> input)
         vectFourier[i] += 0.5 * qSqrt(fc_sortie_fft[size-i-1].real() * fc_sortie_fft[size-i-1].real() +
                 fc_sortie_fft[size-i-1].imag() * fc_sortie_fft[size-i-1].imag());
     }
-    delete fc_sortie_fft;
+    delete [] fc_sortie_fft;
 
     return vectFourier;
 }
@@ -1066,48 +1066,68 @@ void SampleUtils::regimePermanent(QVector<float> fData, quint32 dwSmplRate, qint
     }
 }
 
-QVector<float> SampleUtils::correlation(const QVector<float> fData, quint32 dwSmplRate, qint32 fMin, qint32 fMax, qint32 &dMin)
+QVector<float> SampleUtils::correlation(const float * fData, quint32 size, quint32 dwSmplRate, quint32 fMin, quint32 fMax, quint32 &dMin)
 {
     // Décalage max (fréquence basse)
-    qint32 dMax = qRound((double)dwSmplRate / fMin);
-    int size = fData.size();
+    quint32 dMax = dwSmplRate / fMin;
     if (dMax >= size / 2)
         dMax = size / 2 - 1;
 
     // Décalage min (fréquence haute)
-    dMin = qRound((double)dwSmplRate / fMax);
+    dMin = dwSmplRate / fMax;
 
     // Calcul de la corrélation
     QVector<float> vectCorrel;
     if (dMax - dMin + 1 <= 0)
         return vectCorrel;
-    vectCorrel.resize(dMax - dMin + 1);
+    vectCorrel.resize(static_cast<int>(dMax - dMin + 1));
 
     double qTmp;
-    for (int i = dMin; i <= dMax; i++)
+    float fTmp;
+    for (quint32 i = dMin; i <= dMax; ++i)
     {
         // Mesure de la ressemblance
         qTmp = 0;
-        for (int j = 0; j < size - dMax; j++)
-            qTmp += (double)qAbs(fData[j] - fData[j+i]);
-        vectCorrel[i - dMin] = (double)qTmp / (size - dMax);
+        for (quint32 j = 0; j < size - dMax; j++)
+        {
+            fTmp = fData[j] - fData[j+i];
+            qTmp += static_cast<double>(fTmp * fTmp);
+        }
+        vectCorrel[static_cast<int>(i - dMin)] = static_cast<float>(qTmp / (size - dMax));
     }
 
     return vectCorrel;
 }
 
-float SampleUtils::correlation(QVector<float> fData1, QVector<float> fData2)
+float SampleUtils::correlation(const float *fData1, const float* fData2, int size, float *bestValue)
 {
-    if (fData1.size() != fData2.size() || fData1.size() == 0)
-        return 0;
-
     // Mesure ressemblance
-    double somme = 0;
-    for (int i = 0; i < fData1.size(); i++)
-        somme += qAbs(fData1[i] - fData2[i]);
+    double sum = 0;
+    float tmp;
+    if (bestValue == nullptr)
+    {
+        // Just compute the value
+        for (int i = 0; i < size; ++i)
+        {
+            tmp = fData1[i] - fData2[i];
+            sum += static_cast<double>(tmp * tmp);
+        }
+    }
+    else
+    {
+        // If the sum exceeds bestValue, return immediately
+        double max = size * static_cast<double>(*bestValue);
+        for (int i = 0; i < size; ++i)
+        {
+            tmp = fData1[i] - fData2[i];
+            sum += static_cast<double>(tmp * tmp);
+            if (sum > max)
+                return *bestValue + 1; // Anything more than bestvalue is ok
+        }
+    }
 
     // Normalisation et retour
-    return somme / fData1.size();
+    return static_cast<float>(sum / size);
 }
 
 QByteArray SampleUtils::bouclage(QByteArray baData, quint32 dwSmplRate, qint32 &loopStart, qint32 &loopEnd, quint16 wBps)
@@ -1134,24 +1154,38 @@ QByteArray SampleUtils::bouclage(QByteArray baData, quint32 dwSmplRate, qint32 &
     qint32 longueurSegmentB = 0.05 * dwSmplRate;
     QVector<float> segmentB = fData.mid((loopEnd - longueurSegmentB), longueurSegmentB);
 
-    // Calcul des corrélations
-    qint32 nbCor = (loopEnd - posStart) / 2 - 2 * longueurSegmentB;
-    QVector<float> vectCorrelations;
-    vectCorrelations.resize(nbCor);
-    for (int i = 0; i < nbCor; i++)
-        vectCorrelations[i] = correlation(segmentB, fData.mid((i + longueurSegmentB + posStart), longueurSegmentB));
+    // Find the best correlation
+    float minCorValue;
+    int bestCorPos;
+    {
+        float fTmp;
+        qint32 nbCor = (loopEnd - posStart) / 2 - 2 * longueurSegmentB;
 
-    // Recherche des meilleures corrélations
-    QList<int> meilleuresCorrel = findMins(vectCorrelations, 1, 0.9);
-    if (meilleuresCorrel.isEmpty())
-        return QByteArray();
+        if (nbCor == 0)
+            return QByteArray();
 
-    // calcul de posStartLoop
-    qint32 posStartLoop = 2 * longueurSegmentB + meilleuresCorrel[0] + posStart;
+        const float * pointerSegB = segmentB.constData();
+        const float * pointerData = fData.constData();
+
+        minCorValue = correlation(pointerSegB, &pointerData[longueurSegmentB + posStart], longueurSegmentB, nullptr);
+        bestCorPos = 0;
+        for (int i = 1; i < nbCor; ++i)
+        {
+            fTmp = correlation(pointerSegB, &pointerData[longueurSegmentB + posStart + i], longueurSegmentB, &minCorValue);
+            if (fTmp < minCorValue)
+            {
+                minCorValue = fTmp;
+                bestCorPos = i;
+            }
+        }
+    }
+
+    // Calcul de posStartLoop
+    qint32 posStartLoop = 2 * longueurSegmentB + bestCorPos + posStart;
 
     // Longueur du crossfade pour bouclage (augmente avec l'incohérence)
-    int longueurBouclage = qMin(meilleuresCorrel[0] + 2 * longueurSegmentB,
-                                qRound(dwSmplRate * 4 * (double)(2147483647. - vectCorrelations[meilleuresCorrel[0]]) / 2147483647));
+    int longueurBouclage = qMin(bestCorPos + 2 * longueurSegmentB,
+                                qRound(dwSmplRate * 4 * (double)(2147483647. - minCorValue) / 2147483647));
 
     // Bouclage avec crossfade
     for (int i = 0; i < longueurBouclage; i++)

@@ -29,6 +29,7 @@
 
 GraphicsViewEnvelop::GraphicsViewEnvelop(QWidget *parent) : QCustomPlot(parent),
     _dontRememberScroll(false),
+    _posReleaseLine(0),
     _zoomFlag(false),
     _dragFlag(false),
     _zoomX(1),

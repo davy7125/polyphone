@@ -58,8 +58,8 @@ SfArkInfo::SfArkInfo() :
 
 SfArkInfo::~SfArkInfo()
 {
-    delete WorkBuffer1;
-    delete WorkBuffer2;
+    delete [] WorkBuffer1;
+    delete [] WorkBuffer2;
 }
 
 

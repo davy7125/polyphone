@@ -49,8 +49,8 @@ public:
     static QByteArray enleveBlanc(QByteArray baData, double seuil, quint16 wBps, quint32 &pos);
     static void regimePermanent(QByteArray baData, quint32 dwSmplRate, quint16 wBps, qint32 &posStart, qint32 &posEnd);
     static void regimePermanent(QVector<float> fData, quint32 dwSmplRate, qint32 &posStart, qint32 &posEnd);
-    static QVector<float> correlation(const QVector<float> fData, quint32 dwSmplRate, qint32 fMin, qint32 fMax, qint32 &dMin);
-    static float correlation(QVector<float> fData1, QVector<float> fData2);
+    static QVector<float> correlation(const float *fData, quint32 size, quint32 dwSmplRate, quint32 fMin, quint32 fMax, quint32 &dMin);
+    static float correlation(const float *fData1, const float *fData2, int length, float *bestValue);
     static QByteArray bouclage(QByteArray baData, quint32 dwSmplRate, qint32 &loopStart, qint32 &loopEnd, quint16 wBps);
     static QList<int> findMins(QVector<float> vectData, int maxNb, double minFrac = 0);
     static QList<quint32> findMax(QVector<float> vectData, int maxNb, double minFrac = 0);

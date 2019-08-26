@@ -107,6 +107,7 @@ void SfArkFileManager::close(int fileHandler)
     {
         QFile * file = _mapFile.take(fileHandler);
         file->close();
+        delete file;
 
         QString key = _mapName.key(fileHandler, "");
         if (!key.isEmpty())
@@ -176,5 +177,6 @@ void SfArkFileManager::clearData()
     {
         QFile * file = _mapFile.take(key);
         file->close();
+        delete file;
     }
 }

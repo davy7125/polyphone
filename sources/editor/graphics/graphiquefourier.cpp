@@ -187,8 +187,10 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     QVector<float> baData2 = _fData.mid(posStart, (posEnd - posStart));
 
     // Corrélation du signal de 20 à 20000Hz
-    qint32 dMin;
-    QVector<float> vectCorrel = SampleUtils::correlation(baData2.mid(0, qMin(baData2.size(), 4000)), dwSmplRate, 20, 20000, dMin);
+    quint32 dMin;
+    QVector<float> vectCorrel = SampleUtils::correlation(baData2.constData(),
+                                                         qMin(static_cast<quint32>(baData2.size()), 4000u),
+                                                         dwSmplRate, 20, 20000, dMin);
 
     // Transformée de Fourier du signal
     QVector<float> vectFourier = SampleUtils::getFourierTransform(baData2);

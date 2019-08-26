@@ -45,6 +45,7 @@ ConfManager::ConfManager(): QObject(),
         v_minor = version[1].toInt();
         v_fix = version[2].toInt();
     }
+    Q_UNUSED(v_fix)
 
     // Possibly changes in the configurations
     if (v_major < 2)

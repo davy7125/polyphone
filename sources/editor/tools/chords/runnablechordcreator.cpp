@@ -315,9 +315,10 @@ QByteArray RunnableChordCreator::getSampleData(EltID idSmpl, qint32 nbRead)
 void RunnableChordCreator::addSampleData(QByteArray &baData1, QByteArray &baData2, double mult)
 {
     // Ajout de baData2 multiplié par mult dans baData1
-    qint32 * data1 = (qint32 *)baData1.data();
-    qint32 * data2 = (qint32 *)baData2.data();
-    for (int i = 0; i < qMin(baData1.size(), baData2.size()) / 4; i++)
+    qint32 * data1 = reinterpret_cast<qint32 *>(baData1.data());
+    qint32 * data2 = reinterpret_cast<qint32 *>(baData2.data());
+    int count = qMin(baData1.size(), baData2.size()) / 4;
+    for (int i = 0; i < count; ++i)
         data1[i] += mult * data2[i];
 }
 

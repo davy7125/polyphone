@@ -99,6 +99,7 @@ GraphicsViewRange::~GraphicsViewRange()
         delete _keyLines.takeFirst();
     while (!_mapGraphicsKeys.isEmpty())
         delete _mapGraphicsKeys.take(_mapGraphicsKeys.keys().first());
+    delete _scene;
 }
 
 void GraphicsViewRange::initItems()
