@@ -38,7 +38,7 @@ class WidgetShowHistory : public QWidget
 
 public:
     explicit WidgetShowHistory(QWidget *parent = nullptr);
-    ~WidgetShowHistory();
+    ~WidgetShowHistory() override;
 
     /// Clear all files
     void clear();
@@ -51,7 +51,7 @@ signals:
 
 protected:
     void paintEvent(QPaintEvent *event) override;
-
+    void resizeEvent(QResizeEvent * event);
     void dragEnterEvent(QDragEnterEvent * event) override;
     void dropEvent(QDropEvent *event) override;
 
@@ -60,6 +60,8 @@ private slots:
     void on_listWidget_itemSelectionChanged();
 
 private:
+    void updateCellSize();
+
     Ui::WidgetShowHistory *ui;
     bool _withDecoration;
     QPixmap _decoration;

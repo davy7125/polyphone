@@ -37,7 +37,7 @@ WidgetShowHistoryCell::WidgetShowHistoryCell(QWidget *parent) :
     ui->setupUi(this);
 
     // File icons
-    if (s_icons == NULL)
+    if (s_icons == nullptr)
         s_icons = new Icons();
 
     ui->iconFile->setPixmap(s_icons->_fileIcon);
@@ -60,7 +60,7 @@ WidgetShowHistoryCell::~WidgetShowHistoryCell()
 void WidgetShowHistoryCell::setLink(QString filePath)
 {
     _link = filePath;
-    ui->labelLink->setText(filePath);
+    ui->labelLink->setTextToElide(filePath);
 }
 
 QString WidgetShowHistoryCell::getLink()

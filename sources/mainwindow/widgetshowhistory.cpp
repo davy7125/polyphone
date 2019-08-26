@@ -89,6 +89,8 @@ void WidgetShowHistory::addFile(QString path, QDateTime datetime)
 
     ui->frameNoHistory->hide();
     ui->listWidget->show();
+
+    updateCellSize();
 }
 
 void WidgetShowHistory::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
@@ -117,6 +119,27 @@ void WidgetShowHistory::paintEvent(QPaintEvent *event)
         p.drawPixmap(opt.rect.right() - OFFSET_X - _decoration.width(), opt.rect.bottom() - _decoration.height() - OFFSET_Y, _decoration);
 
     QWidget::paintEvent(event);
+}
+
+void WidgetShowHistory::resizeEvent(QResizeEvent * event)
+{
+    QWidget::resizeEvent(event);
+    updateCellSize();
+}
+
+void WidgetShowHistory::updateCellSize()
+{
+    if (!this->isVisible())
+        return;
+
+    // Update size hints for all cells
+    int viewPortWidth = ui->listWidget->viewport()->width();
+    for (int i = 0; i < ui->listWidget->count(); i++)
+    {
+        QListWidgetItem * item = ui->listWidget->item(i);
+        WidgetShowHistoryCell* cell = dynamic_cast<WidgetShowHistoryCell*>(ui->listWidget->itemWidget(item));
+        cell->setMaximumWidth(viewPortWidth);
+    }
 }
 
 void WidgetShowHistory::dragEnterEvent(QDragEnterEvent * event)

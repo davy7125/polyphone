@@ -174,11 +174,13 @@ void ShowSoundfonts::resizeEvent(QResizeEvent * event)
 void ShowSoundfonts::updateCellHeight()
 {
     // Update size hints for all cells
+    int viewPortWidth = ui->listWidget->viewport()->width();
     for (int i = 0; i < ui->listWidget->count(); i++)
     {
         QListWidgetItem * item = ui->listWidget->item(i);
         SoundfontCell* cell = dynamic_cast<SoundfontCell*>(ui->listWidget->itemWidget(item));
-        item->setSizeHint(QSize(0, cell->heightForWidth(ui->listWidget->viewport()->width())));
+        cell->setMaximumWidth(viewPortWidth);
+        item->setSizeHint(QSize(viewPortWidth, cell->heightForWidth(viewPortWidth)));
     }
 }
 

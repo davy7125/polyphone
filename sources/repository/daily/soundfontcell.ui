@@ -43,6 +43,12 @@
       </property>
       <item>
        <widget class="ElidedLabel" name="labelTitle">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="font">
          <font>
           <weight>75</weight>
