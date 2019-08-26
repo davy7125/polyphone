@@ -46,7 +46,7 @@ bool ToolChords::isCompatible(IdList ids)
 
 void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters)
 {
-    ToolChords_parameters * params = (ToolChords_parameters *)parameters;
+    ToolChords_parameters * params = dynamic_cast<ToolChords_parameters *>(parameters);
     _canceled = false;
     _warning = "";
     bool loopEnabled = params->getLoopSample();

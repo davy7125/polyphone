@@ -329,7 +329,7 @@ QMap<int, int> RunnableChordCreator::getChordKeys(int key, ChordInfo& chordInfo)
 
     // Root key (not impacted by the octave or inversion)
     if (chordInfo.chordType1 == 1)
-        chordKeys[0] = chordInfo.chordType1Attenuation;
+        chordKeys[key] = chordInfo.chordType1Attenuation;
 
     // Third
     switch (chordInfo.chordType3)
