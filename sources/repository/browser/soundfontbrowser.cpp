@@ -35,8 +35,7 @@
 SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SoundfontBrowser),
-    _loadingFilter(false),
-    _lastWidth(-1)
+    _loadingFilter(false)
 {
     ui->setupUi(this);
 
@@ -349,13 +348,12 @@ void SoundfontBrowser::updateCellHeight()
     {
         QListWidgetItem * item = ui->listWidget->item(i);
         SoundfontCellFull* cell = dynamic_cast<SoundfontCellFull*>(ui->listWidget->itemWidget(item));
-        item->setSizeHint(QSize(0, cell->heightForWidth(_lastWidth == -1 ? ui->listWidget->width() : _lastWidth)));
+        item->setSizeHint(QSize(0, cell->heightForWidth(ui->listWidget->viewport()->width())));
     }
 }
 
 void SoundfontBrowser::resizeEvent(QResizeEvent * event)
 {
-    _lastWidth = event->size().width();
     QWidget::resizeEvent(event);
     updateCellHeight();
 }

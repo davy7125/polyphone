@@ -70,7 +70,6 @@ private:
     bool _soundfontListOk, _dailyListOk;
     QMutex _mutex; // Because two URL queries are concurrent
     QString _error1, _error2;
-    int _lastWidth;
 };
 
 #endif // SHOWSOUNDFONTS_H

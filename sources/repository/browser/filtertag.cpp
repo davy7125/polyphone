@@ -36,7 +36,7 @@ FilterTag::FilterTag(QWidget *parent) :
     _canCreate(false)
 {
     ui->setupUi(this);
-    ui->tagArea->setLayout(new FlowLayout(0));
+    ui->tagArea->setLayout(new FlowLayout(ui->tagArea, 6, 6));
 }
 
 FilterTag::~FilterTag()

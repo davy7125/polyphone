@@ -39,7 +39,7 @@ class SoundfontCellFull : public QWidget
 
 public:
     explicit SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidget *parent = nullptr);
-    ~SoundfontCellFull();
+    ~SoundfontCellFull() override;
     void setActive(bool isActive);
     bool hasHeightForWidth() const override;
     int heightForWidth(int width) const override;

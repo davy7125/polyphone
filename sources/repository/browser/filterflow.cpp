@@ -29,8 +29,7 @@
 
 FilterFlow::FilterFlow(QWidget *parent) : QWidget(parent)
 {
-    _layout = new FlowLayout(this);
-    _layout->setMargin(0);
+    _layout = new FlowLayout(this, 6, 6);
     this->setLayout(_layout);
 
     // Style of the buttons

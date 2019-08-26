@@ -36,8 +36,7 @@ ShowSoundfonts::ShowSoundfonts(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ShowSoundfonts),
     _urlReaderJson(nullptr),
-    _soundfontListOk(false),
-    _lastWidth(-1)
+    _soundfontListOk(false)
 {
     // Interface
     ui->setupUi(this);
@@ -103,7 +102,7 @@ QString ShowSoundfonts::loadDailyIds()
     _dailyIds.clear();
     foreach (QJsonValue value, dailyIds)
         if (value.isDouble())
-            _dailyIds.append((int)value.toDouble());
+            _dailyIds.append(static_cast<int>(value.toDouble()));
     if (_dailyIds.isEmpty())
         return "empty daily list";
 
@@ -131,7 +130,6 @@ void ShowSoundfonts::populate()
             SoundfontInformation * si = RepositoryManager::getInstance()->getSoundfontInformation(dailyId);
             if (si != nullptr)
             {
-                //qDebug() << "ShowSoundfonts::populate() - adding daily soundfont " << si->getTitle();
                 SoundfontCell * cell = new SoundfontCell(si, this);
                 connect(cell, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
 
@@ -158,7 +156,7 @@ void ShowSoundfonts::on_listWidget_itemSelectionChanged()
     for (int i = 0; i < ui->listWidget->count(); i++)
     {
         QListWidgetItem * item = ui->listWidget->item(i);
-        ((SoundfontCell*)ui->listWidget->itemWidget(item))->setActive(item->isSelected());
+        (dynamic_cast<SoundfontCell*>(ui->listWidget->itemWidget(item)))->setActive(item->isSelected());
     }
 }
 
@@ -169,7 +167,6 @@ void ShowSoundfonts::on_pushRetry_clicked()
 
 void ShowSoundfonts::resizeEvent(QResizeEvent * event)
 {
-    _lastWidth = event->size().width();
     QWidget::resizeEvent(event);
     updateCellHeight();
 }
@@ -180,8 +177,8 @@ void ShowSoundfonts::updateCellHeight()
     for (int i = 0; i < ui->listWidget->count(); i++)
     {
         QListWidgetItem * item = ui->listWidget->item(i);
-        SoundfontCell* cell = (SoundfontCell*)ui->listWidget->itemWidget(item);
-        item->setSizeHint(QSize(0, cell->heightForWidth(_lastWidth == -1 ? ui->listWidget->width() : _lastWidth)));
+        SoundfontCell* cell = dynamic_cast<SoundfontCell*>(ui->listWidget->itemWidget(item));
+        item->setSizeHint(QSize(0, cell->heightForWidth(ui->listWidget->viewport()->width())));
     }
 }
 
@@ -195,7 +192,7 @@ void ShowSoundfonts::keyPressEvent(QKeyEvent * event)
             QListWidgetItem * item = ui->listWidget->item(i);
             if (item->isSelected())
             {
-                SoundfontCell* cell = (SoundfontCell*)ui->listWidget->itemWidget(item);
+                SoundfontCell* cell = dynamic_cast<SoundfontCell*>(ui->listWidget->itemWidget(item));
                 RepositoryManager::getInstance()->openSoundfont(cell->getSoundfontId(), true);
             }
         }

@@ -59,30 +59,31 @@
 class FlowLayout : public QLayout
 {
 public:
-    explicit FlowLayout(QWidget *parent, int margin = -1, int hSpacing = -1, int vSpacing = -1);
-    explicit FlowLayout(int margin = -1, int hSpacing = -1, int vSpacing = -1);
-    ~FlowLayout();
+    explicit FlowLayout(QWidget *parent, int hSpacing, int vSpacing);
+    ~FlowLayout() override;
 
+    // Item management
     void addItem(QLayoutItem *item) override;
-    int horizontalSpacing() const;
-    int verticalSpacing() const;
-    Qt::Orientations expandingDirections() const override;
-    bool hasHeightForWidth() const override;
-    int heightForWidth(int width) const override;
     int count() const override;
+    QLayoutItem *takeAt(int index) override;
     QLayoutItem *itemAt(int index) const override;
+
+    // Properties
+    Qt::Orientations expandingDirections() const override { return 0; }
+    bool hasHeightForWidth() const override { return true; }
+
+    // Size management
+    int heightForWidth(int width) const override;
     QSize minimumSize() const override;
     void setGeometry(const QRect &rect) override;
     QSize sizeHint() const override;
-    QLayoutItem *takeAt(int index) override;
 
 private:
     int doLayout(const QRect &rect, bool testOnly) const;
-    int smartSpacing(QStyle::PixelMetric pm) const;
 
-    QList<QLayoutItem *> itemList;
-    int m_hSpace;
-    int m_vSpace;
+    QList<QLayoutItem *> _itemList;
+    int _hSpace;
+    int _vSpace;
 };
 
 #endif // FLOWLAYOUT_H

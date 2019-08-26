@@ -30,7 +30,7 @@
 
 AttributeFlow::AttributeFlow(QWidget *parent) : QWidget(parent)
 {
-    _layout = new FlowLayout(this);
+    _layout = new FlowLayout(this, 6, 6);
     _layout->setMargin(0);
     this->setLayout(_layout);
 }
@@ -47,6 +47,7 @@ void AttributeFlow::addCategory(int id)
     ElidedPushButton * widget = createItem(RepositoryManager::getInstance()->getCategoryName(id));
     _filterDefinitions[widget]._type = FilterType::CATEGORY;
     _filterDefinitions[widget]._id = id;
+    _filters << widget;
     _layout->addWidget(widget);
 }
 
@@ -56,6 +57,7 @@ void AttributeFlow::addProperty(SoundfontInformation::Property property, QString
     _filterDefinitions[widget]._type = FilterType::PROPERTY;
     _filterDefinitions[widget]._property = property;
     _filterDefinitions[widget]._propertyValue = propertyValue;
+    _filters << widget;
     _layout->addWidget(widget);
 }
 
@@ -64,6 +66,7 @@ void AttributeFlow::addTag(QString tagName)
     ElidedPushButton * widget = createItem(tagName);
     _filterDefinitions[widget]._type = FilterType::TAG;
     _filterDefinitions[widget]._tag = tagName;
+    _filters << widget;
     _layout->addWidget(widget);
 }
 
@@ -80,8 +83,9 @@ void AttributeFlow::resizeEvent(QResizeEvent * event)
 {
     Q_UNUSED(event)
 
-    foreach (ElidedPushButton * button, _filterDefinitions.keys())
-        button->setAvailableWidth(this->width() - 12);
+    foreach (ElidedPushButton * button, _filters)
+        button->setAvailableWidth(this->width());
+    _layout->setGeometry(QRect(0, 0, this->width(), 0));
 
     QWidget::resizeEvent(event);
 }
@@ -115,6 +119,16 @@ void AttributeFlow::onClick(bool checked)
 
 void AttributeFlow::polish(QStyle * style)
 {
-    foreach (ElidedPushButton * button, _filterDefinitions.keys())
+    foreach (ElidedPushButton * button, _filters)
         style->polish(button);
+}
+
+bool AttributeFlow::hasHeightForWidth() const
+{
+    return true;
+}
+
+int AttributeFlow::heightForWidth(int width) const
+{
+    return _layout->heightForWidth(width);
 }

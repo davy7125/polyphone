@@ -37,11 +37,14 @@ class AttributeFlow : public QWidget
 
 public:
     explicit AttributeFlow(QWidget *parent = nullptr);
-    ~AttributeFlow();
+    ~AttributeFlow() override;
     void addCategory(int id);
     void addProperty(SoundfontInformation::Property property, QString propertyValue);
     void addTag(QString tagName);
     void polish(QStyle *style);
+
+    bool hasHeightForWidth() const override;
+    int heightForWidth(int width) const override;
 
 signals:
     // Signal emitted when an item is clicked
@@ -49,7 +52,7 @@ signals:
     void itemClicked(SoundfontFilter * filter);
 
 protected:
-    void resizeEvent(QResizeEvent * event);
+    void resizeEvent(QResizeEvent * event) override;
 
 private slots:
     void onClick(bool checked);
@@ -76,6 +79,7 @@ private:
 
     FlowLayout * _layout;
     QMap<ElidedPushButton *, FilterDefinition> _filterDefinitions;
+    QList<ElidedPushButton *> _filters;
 };
 
 #endif // ATTRIBUTEFLOW_H

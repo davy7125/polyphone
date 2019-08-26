@@ -163,7 +163,8 @@ void SoundfontCellFull::on_labelAuthor_linkActivated(const QString &link)
 
 int SoundfontCellFull::heightForWidth(int width) const
 {
-    return 37 + ui->line1->height() + ui->line2->height() + ui->line3->heightForWidth(width - 18);
+    // 2 * 9px (margins) + 2 * 6px (spaces) => 30px
+    return 30 + ui->line1->height() + ui->line2->height() + ui->line3->heightForWidth(width - 18);
 }
 
 bool SoundfontCellFull::hasHeightForWidth() const

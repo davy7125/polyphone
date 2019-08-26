@@ -70,7 +70,6 @@ private:
     Ui::SoundfontBrowser *ui;
     bool _loadingFilter;
     QList<SoundfontInformation *> _currentSoundfontInfos;
-    int _lastWidth;
 };
 
 #endif // SOUNDFONTBROWSER_H
