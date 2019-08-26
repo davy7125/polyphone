@@ -344,11 +344,13 @@ void SoundfontBrowser::updateList2()
 void SoundfontBrowser::updateCellHeight()
 {
     // Update size hints for all cells
+    int viewPortWidth = ui->listWidget->viewport()->width();
     for (int i = 0; i < ui->listWidget->count(); i++)
     {
         QListWidgetItem * item = ui->listWidget->item(i);
         SoundfontCellFull* cell = dynamic_cast<SoundfontCellFull*>(ui->listWidget->itemWidget(item));
-        item->setSizeHint(QSize(0, cell->heightForWidth(ui->listWidget->viewport()->width())));
+        cell->setMaximumWidth(viewPortWidth);
+        item->setSizeHint(QSize(0, cell->heightForWidth(viewPortWidth)));
     }
 }
 

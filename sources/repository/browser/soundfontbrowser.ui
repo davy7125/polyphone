@@ -155,7 +155,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>250</width>
+            <width>236</width>
             <height>346</height>
            </rect>
           </property>
@@ -413,6 +413,9 @@
         <widget class="QListWidget" name="listWidget">
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOn</enum>
          </property>
          <property name="horizontalScrollBarPolicy">
           <enum>Qt::ScrollBarAlwaysOff</enum>
