@@ -32,7 +32,7 @@ SoundfontCommentData::SoundfontCommentData(const QJsonObject &data)
     if (data.contains("name") && data.value("name").isString())
         _userName = data.value("name").toString();
     if (data.contains("comment") && data.value("comment").isString())
-        _content = data.value("comment").toString();
+        _content = processString(data.value("comment").toString());
     if (data.contains("created") && data.value("created").isString())
         _created = convertDate(data.value("created").toString());
     if (data.contains("parent_id"))
@@ -59,4 +59,9 @@ bool SoundfontCommentData::addComment(SoundfontCommentData * orphan)
 QDateTime SoundfontCommentData::convertDate(QString txt)
 {
     return QDateTime::fromString(txt, "yyyy-MM-dd hh:mm:ss");
+}
+
+QString SoundfontCommentData::processString(QString txt)
+{
+    return txt.replace("[", "<").replace("]", ">");
 }

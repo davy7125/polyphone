@@ -47,6 +47,7 @@ public:
 
 private:
     QDateTime convertDate(QString txt);
+    QString processString(QString txt);
 
     int _id;
     int _parentId;
