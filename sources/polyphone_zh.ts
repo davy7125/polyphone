@@ -1435,6 +1435,16 @@ repository</source>
         <translation>问题</translation>
     </message>
     <message>
+        <location filename="dialogs/dialogcreateelements.ui" line="102"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialogcreateelements.ui" line="122"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="72"/>
         <source>Create an instrument comprising the sample %1?</source>
         <translation>由 %1 样本组合创建乐器？</translation>
@@ -1546,6 +1556,29 @@ repository</source>
         <source>Preset list</source>
         <translation>预设列表</translation>
     </message>
+    <message>
+        <location filename="dialogs/dialog_list.ui" line="44"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_list.ui" line="64"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+</context>
+<context>
+    <name>DialogQuestion</name>
+    <message>
+        <location filename="dialogs/dialogquestion.ui" line="38"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialogquestion.ui" line="45"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogRecorder</name>
@@ -1579,59 +1612,69 @@ repository</source>
         <translation>批量重命名</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="59"/>
+        <location filename="dialogs/dialog_rename.ui" line="66"/>
         <source>Replace characters</source>
         <translation>替换文本</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="64"/>
+        <location filename="dialogs/dialog_rename.ui" line="71"/>
         <source>Insert after a specific position</source>
         <translation>在指定位置插入文本</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="69"/>
+        <location filename="dialogs/dialog_rename.ui" line="76"/>
         <source>Delete character range</source>
         <translation>删除指定范围文本</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="87"/>
-        <location filename="dialogs/dialog_rename.cpp" line="119"/>
+        <location filename="dialogs/dialog_rename.ui" line="121"/>
+        <location filename="dialogs/dialog_rename.cpp" line="103"/>
         <source>Position</source>
         <translation>位置</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="49"/>
+        <location filename="dialogs/dialog_rename.ui" line="137"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_rename.ui" line="157"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_rename.ui" line="56"/>
         <source>Overwrite existing name with key name as suffix</source>
         <translation>为名称添加音符名后缀</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="54"/>
+        <location filename="dialogs/dialog_rename.ui" line="61"/>
         <source>Overwrite existing name with numerical ascending suffix</source>
         <translation>为名称添加升序数字后缀</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="85"/>
-        <location filename="dialogs/dialog_rename.cpp" line="96"/>
+        <location filename="dialogs/dialog_rename.cpp" line="69"/>
+        <location filename="dialogs/dialog_rename.cpp" line="80"/>
         <source>New name:</source>
         <translation>新名称：</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="107"/>
+        <location filename="dialogs/dialog_rename.cpp" line="91"/>
         <source>Find:</source>
         <translation>查找：</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="110"/>
+        <location filename="dialogs/dialog_rename.cpp" line="94"/>
         <source>And replace by:</source>
         <translation>并替换：</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="120"/>
+        <location filename="dialogs/dialog_rename.cpp" line="104"/>
         <source>Text to insert:</source>
         <translation>插入文本：</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="131"/>
+        <location filename="dialogs/dialog_rename.cpp" line="115"/>
         <source>Range</source>
         <translation>范围</translation>
     </message>
@@ -1640,7 +1683,6 @@ repository</source>
     <name>DialogSelection</name>
     <message>
         <location filename="dialogs/dialogselection.ui" line="17"/>
-        <location filename="dialogs/dialogselection.ui" line="66"/>
         <source>Duplicate</source>
         <translation>创建副本</translation>
     </message>
@@ -1656,8 +1698,14 @@ repository</source>
     </message>
     <message>
         <location filename="dialogs/dialogselection.ui" line="46"/>
-        <source>Cancel</source>
-        <translation>取消</translation>
+        <source>&amp;Cancel</source>
+        <oldsource>Cancel</oldsource>
+        <translation>取消(&amp;C)</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialogselection.ui" line="66"/>
+        <source>&amp;Duplicate</source>
+        <translation type="unfinished">创建副本(&amp;D)</translation>
     </message>
 </context>
 <context>
@@ -1882,89 +1930,89 @@ repository</source>
 <context>
     <name>EditorToolBar</name>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="53"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="54"/>
         <source>Add a sample</source>
         <translation>添加样本</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="57"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="58"/>
         <source>Add an instrument</source>
         <translation>添加乐器</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="61"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="62"/>
         <source>Add a preset</source>
         <translation>添加预设</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="65"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="66"/>
         <source>Toolbox</source>
         <translation>工具栏</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="73"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="76"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="77"/>
         <source>Redo</source>
         <translation>重做</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="81"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="82"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="91"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="92"/>
         <source>Recorder</source>
         <translation>录音机</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="97"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="98"/>
         <source>Virtual keyboard</source>
         <translation>虚拟键盘</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="255"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="256"/>
         <source>Import an audio file</source>
         <translation>导入音频文件</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="257"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="258"/>
         <source>Audio files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="282"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="291"/>
         <source>Create a new instrument</source>
         <translation>创建新乐器</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="283"/>
-        <source>Name of the new instrument:</source>
-        <translation>新乐器名称：</translation>
+        <location filename="editor/widgets/editortoolbar.cpp" line="291"/>
+        <source>Name of the new instrument</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="311"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="330"/>
+        <source>Name of the new preset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/widgets/editortoolbar.cpp" line="349"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="311"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="349"/>
         <source>No preset available.</source>
         <translation>无预设可用。</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="324"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="330"/>
         <source>Create a new preset</source>
         <translation>创建新预设</translation>
-    </message>
-    <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="325"/>
-        <source>Name of the new preset:</source>
-        <translation>新预设名称：</translation>
     </message>
 </context>
 <context>
@@ -4525,8 +4573,9 @@ download content</source>
     </message>
     <message>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
-        <source>Automatically link the samples</source>
-        <translation>自动链接样本</translation>
+        <source>Sample auto-positioning</source>
+        <oldsource>Automatically link the samples</oldsource>
+        <translation type="unfinished">自动链接样本</translation>
     </message>
 </context>
 <context>
@@ -4591,12 +4640,22 @@ download content</source>
 <context>
     <name>ToolCelesteTuning_gui</name>
     <message>
-        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="20"/>
+        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="29"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="49"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="97"/>
         <source>Division to the next octave</source>
         <translation>划分到下个八度</translation>
     </message>
     <message>
-        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="60"/>
+        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="58"/>
         <source>The algebraic sign determines the tuning direction.</source>
         <translation>代数符号决定调音方向。</translation>
     </message>
@@ -4627,22 +4686,32 @@ download content</source>
 <context>
     <name>ToolChangeAttenuation_gui</name>
     <message>
-        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="39"/>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="83"/>
         <source>Desired value</source>
         <translation>期望值</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="65"/>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="125"/>
         <source>Possible offset</source>
         <translation>可偏移量</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="78"/>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="112"/>
         <source>Attenuation range</source>
         <translation>衰减范围</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="91"/>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="35"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="55"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="96"/>
         <source> dB</source>
         <translation> 分贝</translation>
     </message>
@@ -4668,22 +4737,32 @@ download content</source>
         <translation>增加</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="30"/>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="27"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="37"/>
         <source> dB</source>
         <translation> 分贝</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="43"/>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="50"/>
         <source>Multiply</source>
         <translation>放大倍数</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="63"/>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="57"/>
         <source>Normalize</source>
         <translation>规格化</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="73"/>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="77"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="87"/>
         <source> %</source>
         <translation> %</translation>
     </message>
@@ -4714,118 +4793,128 @@ download content</source>
         <translation>乐器名称：</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="35"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="39"/>
         <source>Sample creation:</source>
         <translation>样本创建物：</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="43"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="47"/>
         <source>for every key</source>
         <translation>每个音符</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="48"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="52"/>
         <source>every 3 keys</source>
         <translation>每3个音符</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="53"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="57"/>
         <source>every 6 keys</source>
         <translation>每6个音符</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="61"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="65"/>
         <source>Auto loop</source>
         <translation>自动循环</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="71"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="75"/>
         <source>Stereo</source>
         <translation>双声道</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="86"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="90"/>
         <source>Chord</source>
         <translation>和声</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="111"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="115"/>
         <source>Seventh</source>
         <translation>七度</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="124"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="128"/>
         <source>Ninth</source>
         <translation>九度</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="137"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="141"/>
         <source>Third</source>
         <translation>三度</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="175"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="179"/>
         <source>Root key</source>
         <translation>根音符</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="188"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="192"/>
         <source>Fifth</source>
         <translation>五度</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="227"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="252"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="297"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="360"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="415"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="231"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="256"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="301"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="364"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="419"/>
         <source>no</source>
         <translation>否</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="232"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="302"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="370"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="236"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="306"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="374"/>
         <source>major</source>
         <translation>大调</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="237"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="307"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="365"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="241"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="311"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="369"/>
         <source>minor</source>
         <translation>小调</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="257"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="261"/>
         <source>yes</source>
         <translation>是</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="346"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="350"/>
         <source>Inversion number</source>
         <translation>倒数</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="375"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="425"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="379"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="429"/>
         <source>diminished</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="420"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="424"/>
         <source>perfect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="430"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="434"/>
         <source>augmented</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="683"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="687"/>
         <source>Octave</source>
         <translation>八度</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="699"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="719"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
     </message>
 </context>
 <context>
@@ -4868,17 +4957,20 @@ download content</source>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="58"/>
-        <source>Override</source>
+        <source>&amp;Override</source>
+        <oldsource>Override</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="68"/>
-        <source>Disable</source>
+        <source>&amp;Disable</source>
+        <oldsource>Disable</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="88"/>
-        <source>Cancel</source>
+        <source>&amp;Cancel</source>
+        <oldsource>Cancel</oldsource>
         <translation type="unfinished">取消</translation>
     </message>
 </context>
@@ -4908,12 +5000,22 @@ download content</source>
 <context>
     <name>ToolDivisionDuplication_gui</name>
     <message>
-        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="119"/>
+        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="30"/>
         <source>A division for each velocity range</source>
         <translation>为每个力度范围创建分层</translation>
     </message>
     <message>
-        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="126"/>
+        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="123"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="143"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="20"/>
         <source>A division for each key</source>
         <translation>为每个音符创建分层</translation>
     </message>
@@ -4944,27 +5046,37 @@ download content</source>
 <context>
     <name>ToolExternalCommand_gui</name>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="20"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="80"/>
         <source>Command</source>
         <translation>命令</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="44"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="87"/>
         <source>History</source>
         <translation>历史</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="54"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="94"/>
         <source>Authorize stereo editing</source>
         <translation>允许编辑双声道</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="61"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="118"/>
         <source>Replace sample information if possible</source>
         <translation>如可能则替换样本信息</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="98"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="130"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="150"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="50"/>
         <source>Command examples:</source>
         <translation>命令示例：</translation>
     </message>
@@ -5006,7 +5118,17 @@ download content</source>
 <context>
     <name>ToolFrequencyFilter_gui</name>
     <message>
-        <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="32"/>
+        <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="26"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="33"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="46"/>
         <source>Mark with red color where you want to cut the frequencies:</source>
         <oldsource>Put in red the part of frequencies to filter:</oldsource>
         <translation>将要剪掉的频率置于红色部分：</translation>
@@ -5056,21 +5178,24 @@ download content</source>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="60"/>
-        <source>Show peak frequency</source>
-        <translation>显示峰值频率</translation>
+        <source>Show peak frequencies</source>
+        <oldsource>Show peak frequency</oldsource>
+        <translation type="unfinished">显示峰值频率</translation>
     </message>
 </context>
 <context>
     <name>ToolFrequencyPeaks_gui</name>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="26"/>
-        <source>Export</source>
-        <translation>导出</translation>
+        <source>&amp;Export</source>
+        <oldsource>Export</oldsource>
+        <translation type="unfinished">导出</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="33"/>
-        <source>Close</source>
-        <translation>关闭</translation>
+        <source>&amp;Close</source>
+        <oldsource>Close</oldsource>
+        <translation type="unfinished">关闭</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="84"/>
@@ -5134,87 +5259,97 @@ download content</source>
 <context>
     <name>ToolGlobalSettings_gui</name>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="37"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="27"/>
         <source>Minimum</source>
         <translation>最小值</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="45"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="35"/>
         <source>Addition</source>
         <translation>加</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="50"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="40"/>
         <source>Multiplication</source>
         <translation>乘</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="55"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="45"/>
         <source>Replacement</source>
         <translation>替换</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="86"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="76"/>
         <source>Parameter</source>
         <translation>参数</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="106"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="96"/>
         <source>Pattern</source>
         <translation>模式</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="129"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="119"/>
         <source>Maximum</source>
         <translation>最大值</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="136"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="126"/>
         <source>Modification</source>
         <translation>修改方式</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="163"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="153"/>
         <source>Manual</source>
         <translation>手动</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="168"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="158"/>
         <source>Linear ascending</source>
         <translation>线性上升</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="173"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="163"/>
         <source>Linear descending</source>
         <translation>线性下降</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="178"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="168"/>
         <source>Exponential ascending</source>
         <translation>指数上升</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="183"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="173"/>
         <source>Exponential descending</source>
         <translation>指数下降</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="188"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="178"/>
         <source>Random</source>
         <translation>随机</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="259"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="249"/>
         <source>Apply to a velocity range</source>
         <translation>应用到力度范围</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="198"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="271"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="278"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="188"/>
         <source>Stiffness</source>
         <translation>硬度</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="203"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="193"/>
         <source>Distribution</source>
         <translation>分布</translation>
     </message>
@@ -5258,138 +5393,148 @@ download content</source>
         <translation>名称：</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="35"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="39"/>
         <source>Sample creation:</source>
         <translation>创建样本：</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="43"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="47"/>
         <source>for every key</source>
         <translation>每个音符</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="48"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="52"/>
         <source>every 3 keys</source>
         <translation>每 3 个音符</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="53"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="57"/>
         <source>every 6 keys</source>
         <translation>每 6 个音符</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="61"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="65"/>
         <source>Auto loop</source>
         <translation>自动循环</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="71"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="75"/>
         <source>Stereo</source>
         <translation>双声道</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="85"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="89"/>
         <source>Divisions</source>
         <translation>分层</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="238"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="242"/>
         <source>Key range</source>
         <translation>音符范围</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="261"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="265"/>
         <source>Ranks</source>
         <translation>管列</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="334"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="338"/>
         <source>Type</source>
         <translation>类型</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="342"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="346"/>
         <source>octave</source>
         <translation>八度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="347"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="351"/>
         <source>fifth</source>
         <translation>五度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="352"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="356"/>
         <source>third</source>
         <translation>三度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="357"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="361"/>
         <source>seventh</source>
         <translation>七度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="362"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="366"/>
         <source>ninth</source>
         <translation>九度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="367"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="371"/>
         <source>eleventh</source>
         <translation>十一度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="372"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="376"/>
         <source>thirteenth</source>
         <translation>十三度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="377"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="381"/>
         <source>fifteenth</source>
         <translation>十五度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="382"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="386"/>
         <source>seventeenth</source>
         <translation>十七度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="387"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="391"/>
         <source>nineteenth</source>
         <translation>十九度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="392"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="396"/>
         <source>twenty-first</source>
         <translation>二十一度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="397"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="401"/>
         <source>twenty-third</source>
         <translation>二十三度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="402"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="406"/>
         <source>twenty-fifth</source>
         <translation>二十五度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="407"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="411"/>
         <source>twenty-seventh</source>
         <translation>二十七度</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="83"/>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="99"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="478"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="498"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="535"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="551"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="83"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="535"/>
         <source>The instrument name must be provided.</source>
         <translation>该乐器需要名称。</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="99"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="551"/>
         <source>At least one rank must be specified.</source>
         <translation>至少指定一个管列。</translation>
     </message>
@@ -5498,12 +5643,22 @@ download content</source>
 <context>
     <name>ToolRelease_gui</name>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="43"/>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="38"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="58"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="67"/>
         <source>Division to the next octave</source>
         <translation>划分到下个八度</translation>
     </message>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="66"/>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="110"/>
         <source>Detuning induced (semi-tones)</source>
         <translation>引发失谐(半音)</translation>
     </message>
@@ -5575,57 +5730,67 @@ download content</source>
 <context>
     <name>ToolSoundSpatialization_gui</name>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="70"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="138"/>
         <source>Inversions</source>
         <translation>倒置</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="100"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="59"/>
         <source>Spreading (%)</source>
         <translation>扩散(%)</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="144"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="21"/>
         <source>Ascending</source>
         <translation>上升</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="149"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="26"/>
         <source>Descending</source>
         <translation>下降</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="154"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="31"/>
         <source>Hollow</source>
         <translation>回荡</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="159"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="36"/>
         <source>Spike</source>
         <translation>刺入</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="164"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="41"/>
         <source>Random</source>
         <translation>随机</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="172"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="88"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="95"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="104"/>
         <source>Pattern</source>
         <translation>模式</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="189"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="66"/>
         <source>Division number</source>
         <translation>分割数</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="196"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="121"/>
         <source>Offset (0-100)</source>
         <translation>偏移(0-100)</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="203"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="181"/>
         <source>Filling (%)</source>
         <translation>填充(%)</translation>
     </message>
@@ -5712,13 +5877,15 @@ download content</source>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="170"/>
-        <source>Cancel</source>
-        <translation>取消</translation>
+        <source>&amp;Cancel</source>
+        <oldsource>Cancel</oldsource>
+        <translation type="unfinished">取消</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="190"/>
-        <source>Export</source>
-        <translation>导出</translation>
+        <source>&amp;Export</source>
+        <oldsource>Export</oldsource>
+        <translation type="unfinished">导出</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="142"/>
@@ -5792,6 +5959,16 @@ download content</source>
         <source>Shift in semitones</source>
         <translation>移动量(半音)</translation>
     </message>
+    <message>
+        <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="39"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="59"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
+    </message>
 </context>
 <context>
     <name>ToolTranspose_gui</name>
@@ -5801,9 +5978,19 @@ download content</source>
         <translation>移动量(半音)</translation>
     </message>
     <message>
-        <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="44"/>
+        <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="27"/>
         <source>Adapt keyrange</source>
         <translation>适应音符范围</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="36"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="56"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">确定(&amp;O)</translation>
     </message>
 </context>
 <context>
@@ -5894,78 +6081,83 @@ download content</source>
 <context>
     <name>TreeViewMenu</name>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="46"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="47"/>
         <source>&amp;Bind to...</source>
         <translation>绑定至(&amp;B)...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="51"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="52"/>
         <source>&amp;Replace by...</source>
         <translation>替换为(&amp;R)...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="59"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="60"/>
         <source>&amp;Copy</source>
         <translation>复制(&amp;C)</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="65"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="66"/>
         <source>&amp;Paste</source>
         <translation>粘贴(&amp;P)</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="71"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="72"/>
         <source>D&amp;uplicate</source>
         <translation>创建副本(&amp;D)</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="77"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="78"/>
         <source>&amp;Delete</source>
         <translation>删除(&amp;D)</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="84"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="141"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="145"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="85"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="142"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="146"/>
         <source>Re&amp;name...</source>
         <oldsource>&amp;Rename...</oldsource>
         <translation>重命名(&amp;R)...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="187"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="190"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="142"/>
+        <source>Bulk re&amp;name...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tree/treeviewmenu.cpp" line="188"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="191"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="188"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="189"/>
         <source>Cannot delete a sample used by another instrument.</source>
         <translation>无法删除已被乐器使用的样本。</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="191"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="192"/>
         <source>Cannot delete an instrument used by another preset.</source>
         <translation>无法删除已被预设使用的乐器。</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="325"/>
-        <source>Sample name (max 20 characters):</source>
-        <translation>样本名称(最多 20 个半角字符)：</translation>
+        <location filename="editor/tree/treeviewmenu.cpp" line="326"/>
+        <source>Sample name</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="327"/>
-        <source>Instrument name (max 20 characters):</source>
-        <translation>乐器名称(最多 20 个半角字符)：</translation>
+        <location filename="editor/tree/treeviewmenu.cpp" line="328"/>
+        <source>Instrument name</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="329"/>
-        <source>Preset name (max 20 characters):</source>
-        <translation>预设名称(最多 20 个半角字符)：</translation>
+        <location filename="editor/tree/treeviewmenu.cpp" line="330"/>
+        <source>Preset name</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="333"/>
-        <source>Question</source>
-        <translation>问题</translation>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

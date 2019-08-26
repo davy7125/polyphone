@@ -1438,6 +1438,16 @@ en ligne</translation>
         <translation>Question</translation>
     </message>
     <message>
+        <location filename="dialogs/dialogcreateelements.ui" line="102"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialogcreateelements.ui" line="122"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="72"/>
         <source>Create an instrument comprising the sample %1?</source>
         <translation>Créer un instrument contenant l&apos;échantillon %1 ?</translation>
@@ -1548,6 +1558,29 @@ en ligne</translation>
         <source>Preset list</source>
         <translation>Liste des ensembles</translation>
     </message>
+    <message>
+        <location filename="dialogs/dialog_list.ui" line="44"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_list.ui" line="64"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+</context>
+<context>
+    <name>DialogQuestion</name>
+    <message>
+        <location filename="dialogs/dialogquestion.ui" line="38"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialogquestion.ui" line="45"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
 </context>
 <context>
     <name>DialogRecorder</name>
@@ -1581,59 +1614,69 @@ en ligne</translation>
         <translation>Renommage de masse</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="59"/>
+        <location filename="dialogs/dialog_rename.ui" line="66"/>
         <source>Replace characters</source>
         <translation>Remplacer une chaîne de caractères</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="64"/>
+        <location filename="dialogs/dialog_rename.ui" line="71"/>
         <source>Insert after a specific position</source>
         <translation>Insérer après une position</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="69"/>
+        <location filename="dialogs/dialog_rename.ui" line="76"/>
         <source>Delete character range</source>
         <translation>Supprimer une étendue</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="87"/>
-        <location filename="dialogs/dialog_rename.cpp" line="119"/>
+        <location filename="dialogs/dialog_rename.ui" line="121"/>
+        <location filename="dialogs/dialog_rename.cpp" line="103"/>
         <source>Position</source>
         <translation>Position</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="49"/>
+        <location filename="dialogs/dialog_rename.ui" line="137"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_rename.ui" line="157"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_rename.ui" line="56"/>
         <source>Overwrite existing name with key name as suffix</source>
         <translation>Écraser nom existant avec nom de la note en suffixe</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="54"/>
+        <location filename="dialogs/dialog_rename.ui" line="61"/>
         <source>Overwrite existing name with numerical ascending suffix</source>
         <translation>Écraser nom existant avec incrément en suffixe</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="85"/>
-        <location filename="dialogs/dialog_rename.cpp" line="96"/>
+        <location filename="dialogs/dialog_rename.cpp" line="69"/>
+        <location filename="dialogs/dialog_rename.cpp" line="80"/>
         <source>New name:</source>
         <translation>Nouveau nom :</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="107"/>
+        <location filename="dialogs/dialog_rename.cpp" line="91"/>
         <source>Find:</source>
         <translation>Trouver :</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="110"/>
+        <location filename="dialogs/dialog_rename.cpp" line="94"/>
         <source>And replace by:</source>
         <translation>Et remplacer par :</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="120"/>
+        <location filename="dialogs/dialog_rename.cpp" line="104"/>
         <source>Text to insert:</source>
         <translation>Texte à insérer :</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="131"/>
+        <location filename="dialogs/dialog_rename.cpp" line="115"/>
         <source>Range</source>
         <translation>Étendue</translation>
     </message>
@@ -1642,7 +1685,6 @@ en ligne</translation>
     <name>DialogSelection</name>
     <message>
         <location filename="dialogs/dialogselection.ui" line="17"/>
-        <location filename="dialogs/dialogselection.ui" line="66"/>
         <source>Duplicate</source>
         <translation>Dupliquer</translation>
     </message>
@@ -1658,8 +1700,14 @@ en ligne</translation>
     </message>
     <message>
         <location filename="dialogs/dialogselection.ui" line="46"/>
-        <source>Cancel</source>
-        <translation>Annuler</translation>
+        <source>&amp;Cancel</source>
+        <oldsource>Cancel</oldsource>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialogselection.ui" line="66"/>
+        <source>&amp;Duplicate</source>
+        <translation type="unfinished">&amp;Dupliquer</translation>
     </message>
 </context>
 <context>
@@ -1884,89 +1932,89 @@ en ligne</translation>
 <context>
     <name>EditorToolBar</name>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="53"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="54"/>
         <source>Add a sample</source>
         <translation>Ajouter un échantillon</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="57"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="58"/>
         <source>Add an instrument</source>
         <translation>Ajouter un instrument</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="61"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="62"/>
         <source>Add a preset</source>
         <translation>Ajouter un ensemble</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="65"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="66"/>
         <source>Toolbox</source>
         <translation>Boîte à outils</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="73"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="76"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="77"/>
         <source>Redo</source>
         <translation>Rétablir</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="81"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="82"/>
         <source>Save</source>
         <translation>Sauvegarder</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="91"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="92"/>
         <source>Recorder</source>
         <translation>Magnétophone</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="97"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="98"/>
         <source>Virtual keyboard</source>
         <translation>Clavier virtuel</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="255"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="256"/>
         <source>Import an audio file</source>
         <translation>Importer un fichier audio</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="257"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="258"/>
         <source>Audio files</source>
         <translation>Fichiers audio</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="282"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="291"/>
         <source>Create a new instrument</source>
         <translation>Créer un nouvel instrument</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="283"/>
-        <source>Name of the new instrument:</source>
-        <translation>Nom du nouvel instrument :</translation>
+        <location filename="editor/widgets/editortoolbar.cpp" line="291"/>
+        <source>Name of the new instrument</source>
+        <translation>Nom du nouvel instrument</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="311"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="330"/>
+        <source>Name of the new preset</source>
+        <translation>Nom du nouvel ensemble</translation>
+    </message>
+    <message>
+        <location filename="editor/widgets/editortoolbar.cpp" line="349"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="311"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="349"/>
         <source>No preset available.</source>
         <translation>Aucun ensemble n&apos;est disponible.</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="324"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="330"/>
         <source>Create a new preset</source>
         <translation>Créer un nouvel ensemble</translation>
-    </message>
-    <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="325"/>
-        <source>Name of the new preset:</source>
-        <translation>Nom du nouvel ensemble :</translation>
     </message>
 </context>
 <context>
@@ -4530,8 +4578,9 @@ de télécharger le contenu</translation>
     <name>ToolAutoDistribution</name>
     <message>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
-        <source>Automatically link the samples</source>
-        <translation>Répartir automatiquement les échantillons</translation>
+        <source>Sample auto-positioning</source>
+        <oldsource>Automatically link the samples</oldsource>
+        <translation>Auto-positionnement des échantillons</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="45"/>
@@ -4601,12 +4650,22 @@ de télécharger le contenu</translation>
 <context>
     <name>ToolCelesteTuning_gui</name>
     <message>
-        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="20"/>
+        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="29"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="49"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="97"/>
         <source>Division to the next octave</source>
         <translation>Division à l&apos;octave suivante</translation>
     </message>
     <message>
-        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="60"/>
+        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="58"/>
         <source>The algebraic sign determines the tuning direction.</source>
         <translation>Le signe définit le sens du désaccordage.</translation>
     </message>
@@ -4637,22 +4696,32 @@ de télécharger le contenu</translation>
 <context>
     <name>ToolChangeAttenuation_gui</name>
     <message>
-        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="39"/>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="83"/>
         <source>Desired value</source>
         <translation>Valeur désirée</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="65"/>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="125"/>
         <source>Possible offset</source>
         <translation>Offset possible</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="78"/>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="112"/>
         <source>Attenuation range</source>
         <translation>Étendue des atténuations</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="91"/>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="35"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="55"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="96"/>
         <source> dB</source>
         <translation> dB</translation>
     </message>
@@ -4678,22 +4747,32 @@ de télécharger le contenu</translation>
         <translation>Ajouter</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="30"/>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="27"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="37"/>
         <source> dB</source>
         <translation> dB</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="43"/>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="50"/>
         <source>Multiply</source>
         <translation>Multiplier</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="63"/>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="57"/>
         <source>Normalize</source>
         <translation>Normaliser</translation>
     </message>
     <message>
-        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="73"/>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="77"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="87"/>
         <source> %</source>
         <translation> %</translation>
     </message>
@@ -4724,118 +4803,128 @@ de télécharger le contenu</translation>
         <translation>Nom de l&apos;instrument :</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="35"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="39"/>
         <source>Sample creation:</source>
         <translation>Création de son :</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="43"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="47"/>
         <source>for every key</source>
         <translation>à chaque note</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="48"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="52"/>
         <source>every 3 keys</source>
         <translation>toutes les 3 notes</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="53"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="57"/>
         <source>every 6 keys</source>
         <translation>toutes les 6 notes</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="61"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="65"/>
         <source>Auto loop</source>
         <translation>Bouclage</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="71"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="75"/>
         <source>Stereo</source>
         <translation>Stéréo</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="86"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="90"/>
         <source>Chord</source>
         <translation>Accord</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="111"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="115"/>
         <source>Seventh</source>
         <translation>Septième</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="124"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="128"/>
         <source>Ninth</source>
         <translation>Neuvième</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="137"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="141"/>
         <source>Third</source>
         <translation>Tierce</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="175"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="179"/>
         <source>Root key</source>
         <translation>Fondamentale</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="188"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="192"/>
         <source>Fifth</source>
         <translation>Quinte</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="227"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="252"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="297"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="360"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="415"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="231"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="256"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="301"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="364"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="419"/>
         <source>no</source>
         <translation>non</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="232"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="302"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="370"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="236"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="306"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="374"/>
         <source>major</source>
         <translation>majeure</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="237"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="307"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="365"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="241"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="311"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="369"/>
         <source>minor</source>
         <translation>mineure</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="257"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="261"/>
         <source>yes</source>
         <translation>oui</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="346"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="350"/>
         <source>Inversion number</source>
         <translation>Nombre de renversements</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="375"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="425"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="379"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="429"/>
         <source>diminished</source>
         <translation>diminuée</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="420"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="424"/>
         <source>perfect</source>
         <translation>juste</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="430"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="434"/>
         <source>augmented</source>
         <translation>augmentée</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="683"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="687"/>
         <source>Octave</source>
         <translation>Octave</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="699"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="719"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
     </message>
 </context>
 <context>
@@ -4878,18 +4967,21 @@ de télécharger le contenu</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="58"/>
-        <source>Override</source>
-        <translation>Surcharger</translation>
+        <source>&amp;Override</source>
+        <oldsource>Override</oldsource>
+        <translation>&amp;Surcharger</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="68"/>
-        <source>Disable</source>
-        <translation>Désactiver</translation>
+        <source>&amp;Disable</source>
+        <oldsource>Disable</oldsource>
+        <translation>&amp;Désactiver</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="88"/>
-        <source>Cancel</source>
-        <translation>Annuler</translation>
+        <source>&amp;Cancel</source>
+        <oldsource>Cancel</oldsource>
+        <translation>&amp;Annuler</translation>
     </message>
 </context>
 <context>
@@ -4918,12 +5010,22 @@ de télécharger le contenu</translation>
 <context>
     <name>ToolDivisionDuplication_gui</name>
     <message>
-        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="119"/>
+        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="30"/>
         <source>A division for each velocity range</source>
         <translation>Une division pour chaque étendue de vélocité</translation>
     </message>
     <message>
-        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="126"/>
+        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="123"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="143"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="20"/>
         <source>A division for each key</source>
         <translation>Une division pour chaque note</translation>
     </message>
@@ -4954,27 +5056,37 @@ de télécharger le contenu</translation>
 <context>
     <name>ToolExternalCommand_gui</name>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="20"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="80"/>
         <source>Command</source>
         <translation>Commande</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="44"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="87"/>
         <source>History</source>
         <translation>Historique</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="54"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="94"/>
         <source>Authorize stereo editing</source>
         <translation>Autoriser l&apos;édition stéréo</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="61"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="118"/>
         <source>Replace sample information if possible</source>
         <translation>Remplacer les informations de l&apos;échantillon si possible</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="98"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="130"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="150"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="50"/>
         <source>Command examples:</source>
         <translation>Exemples de commandes :</translation>
     </message>
@@ -5016,7 +5128,17 @@ de télécharger le contenu</translation>
 <context>
     <name>ToolFrequencyFilter_gui</name>
     <message>
-        <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="32"/>
+        <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="26"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="33"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="46"/>
         <source>Mark with red color where you want to cut the frequencies:</source>
         <oldsource>Put in red the part of frequencies to filter:</oldsource>
         <translation>Marquer en rouge les fréquences du signal à filtrer :</translation>
@@ -5061,7 +5183,8 @@ de télécharger le contenu</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="60"/>
-        <source>Show peak frequency</source>
+        <source>Show peak frequencies</source>
+        <oldsource>Show peak frequency</oldsource>
         <translation>Visualiser les pics de fréquences</translation>
     </message>
     <message>
@@ -5074,13 +5197,15 @@ de télécharger le contenu</translation>
     <name>ToolFrequencyPeaks_gui</name>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="26"/>
-        <source>Export</source>
-        <translation>Exporter</translation>
+        <source>&amp;Export</source>
+        <oldsource>Export</oldsource>
+        <translation>&amp;Exporter</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="33"/>
-        <source>Close</source>
-        <translation>Fermer</translation>
+        <source>&amp;Close</source>
+        <oldsource>Close</oldsource>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="84"/>
@@ -5144,87 +5269,97 @@ de télécharger le contenu</translation>
 <context>
     <name>ToolGlobalSettings_gui</name>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="37"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="27"/>
         <source>Minimum</source>
         <translation>Minimum</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="45"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="35"/>
         <source>Addition</source>
         <translation>Ajout</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="50"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="40"/>
         <source>Multiplication</source>
         <translation>Multiplication</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="55"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="45"/>
         <source>Replacement</source>
         <translation>Remplacement</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="86"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="76"/>
         <source>Parameter</source>
         <translation>Paramètre</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="106"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="96"/>
         <source>Pattern</source>
         <translation>Motif</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="129"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="119"/>
         <source>Maximum</source>
         <translation>Maximum</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="136"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="126"/>
         <source>Modification</source>
         <translation>Modification</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="163"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="153"/>
         <source>Manual</source>
         <translation>Manuel</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="168"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="158"/>
         <source>Linear ascending</source>
         <translation>Linéaire ascendant</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="173"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="163"/>
         <source>Linear descending</source>
         <translation>Linéaire descendant</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="178"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="168"/>
         <source>Exponential ascending</source>
         <translation>Exponentiel ascendant</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="183"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="173"/>
         <source>Exponential descending</source>
         <translation>Exponentiel descendant</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="188"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="178"/>
         <source>Random</source>
         <translation>Aléatoire</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="259"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="249"/>
         <source>Apply to a velocity range</source>
         <translation>Appliquer à l&apos;étendue de vélocité</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="198"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="271"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="278"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="188"/>
         <source>Stiffness</source>
         <translation>Raideur</translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="203"/>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="193"/>
         <source>Distribution</source>
         <translation>Répartition</translation>
     </message>
@@ -5268,138 +5403,148 @@ de télécharger le contenu</translation>
         <translation>Nom de la mixture :</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="35"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="39"/>
         <source>Sample creation:</source>
         <translation>Création de son :</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="43"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="47"/>
         <source>for every key</source>
         <translation>à chaque note</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="48"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="52"/>
         <source>every 3 keys</source>
         <translation>toutes les 3 notes</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="53"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="57"/>
         <source>every 6 keys</source>
         <translation>toutes les 6 notes</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="61"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="65"/>
         <source>Auto loop</source>
         <translation>Bouclage</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="71"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="75"/>
         <source>Stereo</source>
         <translation>Stéréo</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="85"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="89"/>
         <source>Divisions</source>
         <translation>Divisions</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="238"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="242"/>
         <source>Key range</source>
         <translation>Étendue</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="261"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="265"/>
         <source>Ranks</source>
         <translation>Rangs</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="334"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="338"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="342"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="346"/>
         <source>octave</source>
         <translation>octave</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="347"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="351"/>
         <source>fifth</source>
         <translation>quinte</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="352"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="356"/>
         <source>third</source>
         <translation>tierce</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="357"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="361"/>
         <source>seventh</source>
         <translation>septième</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="362"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="366"/>
         <source>ninth</source>
         <translation>neuvième</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="367"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="371"/>
         <source>eleventh</source>
         <translation>onzième</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="372"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="376"/>
         <source>thirteenth</source>
         <translation>treizième</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="377"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="381"/>
         <source>fifteenth</source>
         <translation>quinzième</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="382"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="386"/>
         <source>seventeenth</source>
         <translation>dix-septième</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="387"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="391"/>
         <source>nineteenth</source>
         <translation>dix-neuvième</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="392"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="396"/>
         <source>twenty-first</source>
         <translation>vingt-et-unième</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="397"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="401"/>
         <source>twenty-third</source>
         <translation>vingt-troisième</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="402"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="406"/>
         <source>twenty-fifth</source>
         <translation>vingt-cinquième</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="407"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="411"/>
         <source>twenty-seventh</source>
         <translation>vingt-septième</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="83"/>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="99"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="478"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="498"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="535"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="551"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="83"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="535"/>
         <source>The instrument name must be provided.</source>
         <translation>Un titre doit être renseigné.</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="99"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="551"/>
         <source>At least one rank must be specified.</source>
         <translation>Au moins un rang doit être renseigné.</translation>
     </message>
@@ -5508,12 +5653,22 @@ de télécharger le contenu</translation>
 <context>
     <name>ToolRelease_gui</name>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="43"/>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="38"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="58"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="67"/>
         <source>Division to the next octave</source>
         <translation>Division à l&apos;octave suivante</translation>
     </message>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="66"/>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="110"/>
         <source>Detuning induced (semi-tones)</source>
         <translation>Désaccordage provoqué (demi-tons)</translation>
     </message>
@@ -5585,57 +5740,67 @@ de télécharger le contenu</translation>
 <context>
     <name>ToolSoundSpatialization_gui</name>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="70"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="138"/>
         <source>Inversions</source>
         <translation>Renversements</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="100"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="59"/>
         <source>Spreading (%)</source>
         <translation>Étalement (%)</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="144"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="21"/>
         <source>Ascending</source>
         <translation>Ascendant</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="149"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="26"/>
         <source>Descending</source>
         <translation>Descendant</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="154"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="31"/>
         <source>Hollow</source>
         <translation>Creux</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="159"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="36"/>
         <source>Spike</source>
         <translation>Pointe</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="164"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="41"/>
         <source>Random</source>
         <translation>Aléatoire</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="172"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="88"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="95"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="104"/>
         <source>Pattern</source>
         <translation>Motif</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="189"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="66"/>
         <source>Division number</source>
         <translation>Nombre divisions</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="196"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="121"/>
         <source>Offset (0-100)</source>
         <translation>Offset (0-100)</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="203"/>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="181"/>
         <source>Filling (%)</source>
         <translation>Occupation (%)</translation>
     </message>
@@ -5722,13 +5887,15 @@ de télécharger le contenu</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="170"/>
-        <source>Cancel</source>
-        <translation>Annuler</translation>
+        <source>&amp;Cancel</source>
+        <oldsource>Cancel</oldsource>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="190"/>
-        <source>Export</source>
-        <translation>Exporter</translation>
+        <source>&amp;Export</source>
+        <oldsource>Export</oldsource>
+        <translation>&amp;Exporter</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="142"/>
@@ -5802,6 +5969,16 @@ de télécharger le contenu</translation>
         <source>Shift in semitones</source>
         <translation>Écart en demi-tons</translation>
     </message>
+    <message>
+        <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="39"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="59"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
+    </message>
 </context>
 <context>
     <name>ToolTranspose_gui</name>
@@ -5811,9 +5988,19 @@ de télécharger le contenu</translation>
         <translation>Écart en demi-tons</translation>
     </message>
     <message>
-        <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="44"/>
+        <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="27"/>
         <source>Adapt keyrange</source>
         <translation>Adapter l&apos;étendue de notes</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="36"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="56"/>
+        <source>&amp;Ok</source>
+        <translation>&amp;Ok</translation>
     </message>
 </context>
 <context>
@@ -5904,78 +6091,83 @@ de télécharger le contenu</translation>
 <context>
     <name>TreeViewMenu</name>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="46"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="47"/>
         <source>&amp;Bind to...</source>
         <translation>&amp;Associer à...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="51"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="52"/>
         <source>&amp;Replace by...</source>
         <translation>&amp;Remplacer par...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="59"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="60"/>
         <source>&amp;Copy</source>
         <translation>&amp;Copier</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="65"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="66"/>
         <source>&amp;Paste</source>
         <translation>C&amp;oller</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="71"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="72"/>
         <source>D&amp;uplicate</source>
         <translation>&amp;Dupliquer</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="77"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="78"/>
         <source>&amp;Delete</source>
         <translation>&amp;Supprimer</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="84"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="141"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="145"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="85"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="142"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="146"/>
         <source>Re&amp;name...</source>
         <oldsource>&amp;Rename...</oldsource>
         <translation>Re&amp;nommer...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="187"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="190"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="142"/>
+        <source>Bulk re&amp;name...</source>
+        <translation>Re&amp;nommage de masse...</translation>
+    </message>
+    <message>
+        <location filename="editor/tree/treeviewmenu.cpp" line="188"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="191"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="188"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="189"/>
         <source>Cannot delete a sample used by another instrument.</source>
         <translation>Impossible de supprimer un échantillon s&apos;il est utilisé par un instrument.</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="191"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="192"/>
         <source>Cannot delete an instrument used by another preset.</source>
         <translation>Impossible de supprimer un instrument s&apos;il est utilisé par un ensemble.</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="325"/>
-        <source>Sample name (max 20 characters):</source>
-        <translation>Nom de l&apos;échantillon (max 20 caractères) :</translation>
+        <location filename="editor/tree/treeviewmenu.cpp" line="326"/>
+        <source>Sample name</source>
+        <translation>Nom de l&apos;échantillon</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="327"/>
-        <source>Instrument name (max 20 characters):</source>
-        <translation>Nom de l&apos;instrument (max 20 caractères) :</translation>
+        <location filename="editor/tree/treeviewmenu.cpp" line="328"/>
+        <source>Instrument name</source>
+        <translation>Nom de l&apos;instrument</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="329"/>
-        <source>Preset name (max 20 characters):</source>
-        <translation>Nom de l&apos;ensemble (max 20 caractères) :</translation>
+        <location filename="editor/tree/treeviewmenu.cpp" line="330"/>
+        <source>Preset name</source>
+        <translation>Nom de l&apos;ensemble</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="333"/>
-        <source>Question</source>
-        <translation>Question</translation>
+        <source>Rename</source>
+        <translation>Renommer</translation>
     </message>
 </context>
 <context>
