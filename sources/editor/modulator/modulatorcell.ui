@@ -87,10 +87,7 @@
     </spacer>
    </item>
    <item row="0" column="6">
-    <widget class="QSpinBox" name="spinAmount">
-     <property name="prefix">
-      <string notr="true">× </string>
-     </property>
+    <widget class="SpinBoxMultiply" name="spinAmount">
      <property name="minimum">
       <number>-32768</number>
      </property>
@@ -199,6 +196,11 @@
    <class>ModulatorComboDest</class>
    <extends>QComboBox</extends>
    <header>modulatorcombodest.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SpinBoxMultiply</class>
+   <extends>QSpinBox</extends>
+   <header>spinboxmultiply.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

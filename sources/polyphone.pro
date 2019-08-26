@@ -790,7 +790,8 @@ HEADERS  += \
     editor/tools/default_mod/tooldefaultmod_gui.h \
     repository/soundfont/editor/editordialoginsertvideo.h \
     repository/soundfont/editor/editordialoginsertimage.h \
-    dialogs/dialogquestion.h
+    dialogs/dialogquestion.h \
+    editor/modulator/spinboxmultiply.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
