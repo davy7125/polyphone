@@ -34,13 +34,16 @@ class ElidedLabel : public QLabel
 
 public:
     /// Constructor
-    ElidedLabel(QWidget * parent = nullptr) : QLabel(parent) {}
+    ElidedLabel(QWidget * parent = nullptr);
 
     /// Set the text to elide. The displayed text will be set automatically
     void setTextToElide(const QString text);
 
     /// Set the text to elide and specify a link when we click on it
     void setTextToElide(const QString text, const QString link);
+
+    /// Best size of the label
+    QSize sizeHint() const override;
 
 protected:
     void resizeEvent(QResizeEvent * event) override;
@@ -49,6 +52,7 @@ protected:
 private:
     QString _text;
     QString _linkContent;
+    QSize _fullSize;
 };
 
 #endif // ELIDEDLABEL_H

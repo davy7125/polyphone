@@ -25,17 +25,27 @@
 #include "elidedlabel.h"
 #include <QDesktopServices>
 
+ElidedLabel::ElidedLabel(QWidget * parent) : QLabel(parent),
+    _fullSize(-1, -1)
+{
+
+}
+
 void ElidedLabel::setTextToElide(const QString text)
 {
-    _text = text;
-    _linkContent = "";
-    this->resizeEvent(nullptr);
+    setTextToElide(text, "");
 }
 
 void ElidedLabel::setTextToElide(const QString text, const QString link)
 {
+    // Store data
     _text = text;
     _linkContent = link;
+
+    // Best width
+    QFontMetrics metrics(this->font());
+    _fullSize = QSize(metrics.width(_text), metrics.height());
+
     this->resizeEvent(nullptr);
 }
 
@@ -57,4 +67,9 @@ void ElidedLabel::mousePressEvent(QMouseEvent * event)
         QDesktopServices::openUrl(QUrl(_linkContent));
     }
     QLabel::mousePressEvent(event);
+}
+
+QSize ElidedLabel::sizeHint() const
+{
+    return _fullSize;
 }
