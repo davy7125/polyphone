@@ -1707,7 +1707,7 @@ en ligne</translation>
     <message>
         <location filename="dialogs/dialogselection.ui" line="66"/>
         <source>&amp;Duplicate</source>
-        <translation type="unfinished">&amp;Dupliquer</translation>
+        <translation>&amp;Dupliquer</translation>
     </message>
 </context>
 <context>
