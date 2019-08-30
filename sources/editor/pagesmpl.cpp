@@ -198,16 +198,8 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     // Lecteur
     if (nombreElements == 1)
     {
-        if (ui->spinEndLoop->value() == ui->spinStartLoop->value())
-        {
-            ui->checkLectureBoucle->setEnabled(false);
-            ui->checkLectureBoucle->setChecked(false);
-        }
-        else
-        {
-            ui->checkLectureBoucle->setEnabled(true);
-            ui->checkLectureBoucle->setChecked(true);
-        }
+        ui->checkLectureBoucle->setEnabled(ui->spinStartLoop->value() != ui->spinEndLoop->value());
+        ui->checkLectureBoucle->setChecked(qAbs(ui->spinEndLoop->value() - ui->spinStartLoop->value()) > 10);
     }
     else
         ui->checkLectureBoucle->setEnabled(false);
@@ -338,17 +330,7 @@ void PageSmpl::setStartLoop()
     }
     _sf2->endEditing(getEditingSource());
 
-    // Update the page
-    if (ui->spinEndLoop->value() == ui->spinStartLoop->value())
-    {
-        ui->checkLectureBoucle->setEnabled(false);
-        ui->checkLectureBoucle->setChecked(false);
-    }
-    else
-    {
-        ui->checkLectureBoucle->setEnabled(_currentIds.count() == 1);
-        ui->checkLectureBoucle->setChecked(true);
-    }
+    // Update the graph
     if (_currentIds.count() == 1)
         ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
 }
@@ -401,17 +383,7 @@ void PageSmpl::setEndLoop()
     }
     _sf2->endEditing(getEditingSource());
 
-    // Update the page
-    if (ui->spinEndLoop->value() == ui->spinStartLoop->value())
-    {
-        ui->checkLectureBoucle->setEnabled(false);
-        ui->checkLectureBoucle->setChecked(false);
-    }
-    else
-    {
-        ui->checkLectureBoucle->setEnabled(_currentIds.count() == 1);
-        ui->checkLectureBoucle->setChecked(true);
-    }
+    // Update the graph
     if (_currentIds.count() == 1)
         ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
 }
@@ -495,16 +467,6 @@ void PageSmpl::on_pushFullLength_clicked()
     ui->spinStartLoop->setMaximum(displayedEndLoop);
     ui->spinEndLoop->setValue(displayedEndLoop);
     ui->spinEndLoop->setMinimum(0);
-    if (ui->spinEndLoop->value() == ui->spinStartLoop->value())
-    {
-        ui->checkLectureBoucle->setEnabled(false);
-        ui->checkLectureBoucle->setChecked(false);
-    }
-    else
-    {
-        ui->checkLectureBoucle->setEnabled(_currentIds.count() == 1);
-        ui->checkLectureBoucle->setChecked(true);
-    }
 
     if (_currentIds.count() == 1)
         ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
@@ -888,6 +850,8 @@ void PageSmpl::lecture()
 {
     if (ui->pushLecture->isChecked())
     {
+        _synth->setLoopEnabled(ui->checkLectureBoucle->isChecked());
+
         QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
         if (listID.count() == 1)
         {
@@ -938,12 +902,6 @@ void PageSmpl::lecteurFinished()
     }
     _playingSmpl = false;
     updatePlayButton();
-}
-
-void PageSmpl::on_checkLectureBoucle_stateChanged(int arg1)
-{
-    // Modif synth
-    _synth->setLoopEnabled(arg1);
 }
 
 void PageSmpl::setSinusEnabled(bool val)

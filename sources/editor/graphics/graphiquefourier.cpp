@@ -166,6 +166,13 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     text4->setText("");
     text5->setText("");
 
+    if (posEnd < 20 + posStart)
+    {
+        // Take the full sample in that case
+        posStart = 0;
+        posEnd = _fData.size() - 1;
+    }
+
     if (_fData.isEmpty())
     {
         graph(0)->data()->clear();

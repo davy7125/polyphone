@@ -1068,6 +1068,10 @@ void SampleUtils::regimePermanent(QVector<float> fData, quint32 dwSmplRate, qint
 
 QVector<float> SampleUtils::correlation(const float * fData, quint32 size, quint32 dwSmplRate, quint32 fMin, quint32 fMax, quint32 &dMin)
 {
+    QVector<float> vectCorrel;
+    if (size < 10)
+        return vectCorrel;
+
     // Décalage max (fréquence basse)
     quint32 dMax = dwSmplRate / fMin;
     if (dMax >= size / 2)
@@ -1077,8 +1081,7 @@ QVector<float> SampleUtils::correlation(const float * fData, quint32 size, quint
     dMin = dwSmplRate / fMax;
 
     // Calcul de la corrélation
-    QVector<float> vectCorrel;
-    if (dMax - dMin + 1 <= 0)
+    if (dMax + 1 <= dMin)
         return vectCorrel;
     vectCorrel.resize(static_cast<int>(dMax - dMin + 1));
 

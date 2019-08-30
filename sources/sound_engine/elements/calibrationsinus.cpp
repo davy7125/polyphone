@@ -94,13 +94,13 @@ void CalibrationSinus::addData(float * dataR, float * dataL, quint32 len)
     if (level <= 0.0004f && _currentLevel <= 0.0004f)
         return;
 
-    // Current frequency (smooth transitions)
+    // Current frequency
     if (_currentPitch < 0)
         _currentPitch = pitch;
-    if (_currentPitch > pitch)
-        _currentPitch -= 0.5;
-    else if (_currentPitch < pitch)
-        _currentPitch += 0.5;
+    if (_currentPitch - pitch < -1 || _currentPitch - pitch > 1)
+        _currentPitch += (pitch - _currentPitch) / 2; // fast transition
+    else
+        _currentPitch = pitch; // smooth transition
 
     // Génération et copie
     _sinus->getSinus(_buf, len, 440.0f * static_cast<float>(qPow(2., (_currentPitch - 69.) / 12.)), 0);
