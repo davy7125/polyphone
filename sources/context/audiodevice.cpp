@@ -256,7 +256,7 @@ void AudioDevice::openJackConnection(quint32 bufferSize)
 
     // Ouverture d'une session cliente au serveur Jack
     _jack_client = jack_client_open(client_name, JackNullOption, &status);
-    if (_jack_client == NULL)
+    if (_jack_client == nullptr)
     {
         printf ("jack_client_open() failed, status = 0x%2.0x\n", status);
         if (status & JackServerFailed)
@@ -273,7 +273,7 @@ void AudioDevice::openJackConnection(quint32 bufferSize)
 
     // Callback de jack pour la récupération de données et l'arrêt
     jack_set_process_callback(_jack_client, jackProcess, this);
-    jack_on_shutdown(_jack_client, jack_shutdown, 0);
+    jack_on_shutdown(_jack_client, jack_shutdown, nullptr);
 
     // Enregistrement fréquence d'échantillonnage
     _format.setSampleRate((int)jack_get_sample_rate(_jack_client));
@@ -282,9 +282,9 @@ void AudioDevice::openJackConnection(quint32 bufferSize)
     jack_set_buffer_size(_jack_client, bufferSize);
 
     // Nombre de sorties audio
-    const char ** ports = jack_get_ports(_jack_client, NULL, NULL,
+    const char ** ports = jack_get_ports(_jack_client, nullptr, nullptr,
                                          JackPortIsPhysical|JackPortIsInput);
-    if (ports == NULL)
+    if (ports == nullptr)
     {
         printf("no physical playback ports\n");
         return;
@@ -416,7 +416,15 @@ void AudioDevice::closeConnections()
 #ifndef Q_OS_WIN
     if (_jack_client)
     {
-        jack_client_close(_jack_client);
+        try
+        {
+            jack_client_close(_jack_client);
+        }
+        catch (std::exception error)
+        {
+            Q_UNUSED(error)
+        }
+
         _jack_client = nullptr;
     }
 #endif

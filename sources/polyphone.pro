@@ -63,7 +63,7 @@ win32 {
     LIBS += -lzlib1 -lwinmm -llibogg -llibvorbis -llibvorbisfile -lcrypto -llibFLAC
 }
 unix:!macx {
-    DEFINES += __LINUX_ALSASEQ__
+    DEFINES += __LINUX_ALSASEQ__ __UNIX_JACK__
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa jack portaudio-2.0 zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0 openssl
     INCLUDEPATH += /usr/include/jack \

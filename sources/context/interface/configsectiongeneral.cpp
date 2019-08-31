@@ -74,6 +74,7 @@ void ConfigSectionGeneral::initializeAudio()
     bool configFound = false;
     int comboboxIndex = 0;
     int comboboxDefaultIndex = 0;
+    ui->comboAudioOuput->clear();
     for (int i = 0; i < hostInfos.size(); i++)
     {
         if (hostInfos[i]._index < 0)
@@ -151,24 +152,29 @@ void ConfigSectionGeneral::initializeMidi()
     // Update the possible midi inputs
     ui->comboMidiInput->blockSignals(true);
     ui->comboMidiInput->clear();
-    QStringList listMidi = ContextManager::midi()->getMidiList();
-    ui->comboMidiInput->addItem("-");
-    ui->comboMidiInput->addItems(listMidi);
+    QMap<QString, QString> listMidi = ContextManager::midi()->getMidiList();
+    ui->comboMidiInput->addItem("-", "-1#-1");
+    foreach (QString key, listMidi.keys())
+        ui->comboMidiInput->addItem(listMidi[key], key);
 
     // Select the current one
-    int numMidiPort = ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "index_port", -1).toInt();
-    if (numMidiPort + 1 < ui->comboMidiInput->count())
-        ui->comboMidiInput->setCurrentIndex(numMidiPort + 1);
-    else
-        ui->comboMidiInput->setCurrentIndex(0); // None
+    QString indexPort = ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "index_port", "-1#-1").toString();
+    for (int i = 0; i < ui->comboMidiInput->count(); i++)
+    {
+        if (ui->comboMidiInput->itemData(i).toString() == indexPort)
+        {
+            ui->comboMidiInput->setCurrentIndex(i);
+            break;
+        }
+    }
     ui->comboMidiInput->blockSignals(false);
 }
 
 void ConfigSectionGeneral::on_comboMidiInput_currentIndexChanged(int index)
 {
-    int numPortMidi = index - 1;
-    ContextManager::configuration()->setValue(ConfManager::SECTION_MIDI, "index_port", numPortMidi);
-    ContextManager::midi()->openMidiPort(numPortMidi);
+    QString indexInput = ui->comboMidiInput->itemData(index).toString();
+    ContextManager::configuration()->setValue(ConfManager::SECTION_MIDI, "index_port", indexInput);
+    ContextManager::midi()->openMidiPort(indexInput);
 }
 
 void ConfigSectionGeneral::on_checkBoucle_toggled(bool checked)

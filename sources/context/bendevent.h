@@ -30,16 +30,21 @@
 class BendEvent : public QEvent
 {
 public:
-    BendEvent(unsigned char val) : QEvent((QEvent::Type)(QEvent::User+4)),
-          _value(val) {}
+    BendEvent(unsigned char val1, unsigned char val2) : QEvent((QEvent::Type)(QEvent::User+4)),
+          _value1(val1),
+          _value2(val2),
+          _value((_value2 << 7) | _value1)
+    {}
 
-    unsigned char getValue() const
+    double getValue() const
     {
-        return _value;
+        // Result between -1 and 1
+        return static_cast<double>(_value - 8192) / 8192.0;
     }
 
 protected:
-    unsigned char _value;
+    unsigned char _value1, _value2;
+    qint32 _value;
 };
 
 #endif // BENDEVENT_H

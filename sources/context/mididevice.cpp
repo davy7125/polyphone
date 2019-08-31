@@ -23,7 +23,6 @@
 ***************************************************************************/
 
 #include "mididevice.h"
-#include "RtMidi.h"
 #include "controllerevent.h"
 #include "noteevent.h"
 #include "bendevent.h"
@@ -73,7 +72,7 @@ void midiCallback(double deltatime, std::vector<unsigned char> *message, void *u
         break;
     case 0xE0: // BEND
         // First message is the value
-        ev = new BendEvent(message->at(1));
+        ev = new BendEvent(message->at(1), message->at(2));
         break;
     default:
         // Nothing
@@ -92,8 +91,9 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
     _keyboard(nullptr),
     _controllerArea(nullptr),
     _configuration(configuration),
+    _midiin(nullptr),
     _synth(synth),
-    _bendValue(64),
+    _bendValue(0),
     _isSustainOn(false),
     _isSostenutoOn(false)
 {
@@ -130,31 +130,8 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
                     defaultValue : _configuration->getValue(ConfManager::SECTION_MIDI, "CC_" + QString("%1").arg(i, 3, 10, QChar('0')), defaultValue).toInt();
     }
 
-    // MIDI connection
-    try
-    {
-#if defined(__LINUX_ALSASEQ__)
-        _midiin = new RtMidiIn(RtMidi::LINUX_ALSA, "Polyphone");
-#endif
-#if defined(__WINDOWS_MM__)
-        _midiin = new RtMidiIn(RtMidi::WINDOWS_MM, "Polyphone");
-#endif
-#if defined(__MACOSX_CORE__)
-        _midiin = new RtMidiIn(RtMidi::MACOSX_CORE, "Polyphone");
-#endif
-    }
-    catch (std::exception &error)
-    {
-        Q_UNUSED(error)
-        _midiin = nullptr;
-    }
-    if (_midiin)
-    {
-        _midiin->ignoreTypes(false, false, false);
-        _midiin->setCallback(&midiCallback, this);
-    }
-
-    this->openMidiPort(_configuration->getValue(ConfManager::SECTION_MIDI, "index_port", -1).toInt());
+    // Initialize the connection
+    this->openMidiPort(_configuration->getValue(ConfManager::SECTION_MIDI, "index_port", "-1#-1").toString());
 }
 
 MidiDevice::~MidiDevice()
@@ -164,35 +141,104 @@ MidiDevice::~MidiDevice()
     for (int i = 0; i < 128; i++)
         _configuration->setValue(ConfManager::SECTION_MIDI, "CC_" + QString("%1").arg(i, 3, 10, QChar('0')), _controllerValues[i]);
 
-    delete _midiin;
-}
-
-QStringList MidiDevice::getMidiList()
-{
-    QStringList listRet;
-    if (_midiin)
+    if (_midiin != nullptr)
     {
-        for (unsigned int i = 0; i < _midiin->getPortCount(); i++)
-            listRet.append(QString(_midiin->getPortName(i).c_str()));
+        _midiin->closePort();
+        delete _midiin;
     }
-    return listRet;
 }
 
-void MidiDevice::openMidiPort(int index)
+QMap<QString, QString> MidiDevice::getMidiList()
 {
+    QMap<QString, QString> mapRet;
+
+#if defined(__LINUX_ALSASEQ__)
+    getMidiList(RtMidi::LINUX_ALSA, &mapRet);
+#endif
+#if defined(__UNIX_JACK__)
+    getMidiList(RtMidi::UNIX_JACK, &mapRet);
+#endif
+#if defined(__WINDOWS_MM__)
+    getMidiList(RtMidi::WINDOWS_MM, &mapRet);
+#endif
+#if defined(__MACOSX_CORE__)
+    getMidiList(RtMidi::MACOSX_CORE, &mapRet);
+#endif
+
+    return mapRet;
+}
+
+void MidiDevice::getMidiList(RtMidi::Api api, QMap<QString, QString> * map)
+{
+    try
+    {
+        RtMidiIn * midiInTmp = new RtMidiIn(api, "Polyphone");
+        for (unsigned int i = 0; i < midiInTmp->getPortCount(); i++)
+        {
+            map->insert(QString::number(static_cast<int>(api)) + "#" + QString::number(i),
+                        QString(midiInTmp->getPortName(i).c_str()));
+        }
+        delete midiInTmp;
+    }
+    catch (std::exception &error)
+    {
+        Q_UNUSED(error);
+    }
+}
+
+void MidiDevice::openMidiPort(QString source)
+{
+    // Possibly close an existing midi input
     if (_midiin)
     {
         _midiin->closePort();
-        if (index < static_cast<int>(_midiin->getPortCount()) && index != -1)
+        delete _midiin;
+        _midiin = nullptr;
+    }
+
+    // Get the api and the port number
+    QStringList split = source.split('#');
+    if (split.count() != 2)
+        return;
+    bool ok;
+    int api = split[0].toInt(&ok);
+    if (!ok)
+        return;
+    int portNumber = split[1].toInt(&ok);
+    if (!ok)
+        return;
+    if (portNumber == -1 || api == -1)
+        return;
+
+    // Create a MIDI input based on the selected API
+    try
+    {
+        _midiin = new RtMidiIn(static_cast<RtMidi::Api>(api), "Polyphone");
+    }
+    catch (std::exception &error)
+    {
+        Q_UNUSED(error)
+        delete _midiin;
+        _midiin = nullptr;
+        return;
+    }
+
+    // Associate a callback
+    _midiin->ignoreTypes(false, false, false);
+    _midiin->setCallback(&midiCallback, this);
+
+    // Initialize the midi connection
+    if (portNumber < static_cast<int>(_midiin->getPortCount()))
+    {
+        try
         {
-            try
-            {
-                _midiin->openPort(static_cast<unsigned int>(index));
-            }
-            catch (std::exception &error)
-            {
-                Q_UNUSED(error)
-            }
+            _midiin->openPort(static_cast<unsigned int>(portNumber));
+        }
+        catch (std::exception &error)
+        {
+            Q_UNUSED(error)
+            delete _midiin;
+            _midiin = nullptr;
         }
     }
 }
@@ -382,7 +428,7 @@ void MidiDevice::processMonoPressureChanged(int value, bool syncControllerArea)
         _controllerArea->updateMonoPressure(value);
 }
 
-void MidiDevice::processBendChanged(int value, bool syncControllerArea)
+void MidiDevice::processBendChanged(double value, bool syncControllerArea)
 {
     _mutexValues.lock();
     _bendValue = value;
@@ -416,7 +462,7 @@ void MidiDevice::setControllerArea(ControllerArea * controllerArea)
 {
     connect(controllerArea, SIGNAL(monoPressureChanged(int)), this, SLOT(processMonoPressureChanged(int)));
     connect(controllerArea, SIGNAL(controllerChanged(int,int)), this, SLOT(processControllerChanged(int,int)));
-    connect(controllerArea, SIGNAL(bendChanged(int)), this, SLOT(processBendChanged(int)));
+    connect(controllerArea, SIGNAL(bendChanged(double)), this, SLOT(processBendChanged(double)));
     connect(controllerArea, SIGNAL(bendSensitivityChanged(double)), this, SLOT(processBendSensitivityChanged(double)));
     _controllerArea = controllerArea;
 }
@@ -449,10 +495,10 @@ int MidiDevice::getControllerValue(int controllerNumber)
     return result;
 }
 
-int MidiDevice::getBendValue()
+double MidiDevice::getBendValue()
 {
     _mutexValues.lock();
-    int result = _bendValue;
+    double result = _bendValue;
     _mutexValues.unlock();
     return result;
 }

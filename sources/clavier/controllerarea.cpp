@@ -54,7 +54,7 @@ ControllerArea::ControllerArea(QWidget *parent) :
     // Initialization of the wheel
     ui->sliderPitchWheel->setColorFromMiddle(true);
     ui->sliderPitchWheel->setBackToValue(64);
-    updateBend(64); // Always in the middle
+    updateBend(0); // Always in the middle
 
     // Initialization of the controllers
     ui->comboControl1->blockSignals(true);
@@ -131,14 +131,20 @@ void ControllerArea::updateController(int num, int value)
     }
 }
 
-void ControllerArea::updateBend(int value)
+void ControllerArea::updateBend(double value, bool stopTimer)
 {
-    if (value < 0)
-        value = 0;
-    else if (value > 127)
-        value = 127;
+    if (value < -1)
+        value = -1;
+    else if (value > 1)
+        value = 1;
 
-    ui->labelWheelValue->setText(QString::number(value));
+    ui->sliderPitchWheel->blockSignals(true);
+    ui->sliderPitchWheel->setValue(static_cast<int>((value + 1) * 64));
+    if (stopTimer)
+        ui->sliderPitchWheel->stopTimer();
+    ui->sliderPitchWheel->blockSignals(false);
+
+    ui->labelWheelValue->setText(QString::number(value, 'f', 2));
 }
 
 void ControllerArea::updateBendSensitivity(double semitones)
@@ -157,8 +163,9 @@ void ControllerArea::updateBendSensitivity(double semitones)
 
 void ControllerArea::on_sliderPitchWheel_valueChanged(int value)
 {
-    updateBend(value);
-    emit(bendChanged(value));
+    double fVal = static_cast<double>(value - 64) / 64;
+    updateBend(fVal, false);
+    emit(bendChanged(fVal));
 }
 
 void ControllerArea::on_sliderSensitivity_valueChanged(int value)

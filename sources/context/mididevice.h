@@ -30,6 +30,7 @@
 #include <QObject>
 #include <QMap>
 #include <QMutex>
+#include "RtMidi.h"
 class ConfManager;
 class RtMidiIn;
 class PianoKeybdCustom;
@@ -45,8 +46,8 @@ public:
     ~MidiDevice();
 
     // Initialize the midi device
-    QStringList getMidiList();
-    void openMidiPort(int index);
+    QMap<QString, QString> getMidiList();
+    void openMidiPort(QString source); // Source in the form "{api type]#{port number}"
 
     // Connect the keyboard
     void setKeyboard(PianoKeybdCustom * keyboard);
@@ -60,7 +61,7 @@ public:
 
     // Get last values (-1 if not received yet)
     int getControllerValue(int controllerNumber);
-    int getBendValue();
+    double getBendValue();
     double getBendSensitivityValue();
     int getMonoPressure();
     int getPolyPressure(int key);
@@ -71,7 +72,7 @@ public slots:
     void processPolyPressureChanged(int key, int pressure, bool syncKeyboard = false);
     void processMonoPressureChanged(int value, bool syncControllerArea = false);
     void processControllerChanged(int num, int value, bool syncControllerArea = false);
-    void processBendChanged(int value, bool syncControllerArea = false);
+    void processBendChanged(double value, bool syncControllerArea = false);
     void processBendSensitivityChanged(double semitones, bool syncControllerArea = false);
 
 signals:
@@ -79,13 +80,15 @@ signals:
     void polyPressureChanged(int key, int pressure);
     void monoPressureChanged(int value);
     void controllerChanged(int num, int value);
-    void bendChanged(int value);
+    void bendChanged(double value);
     void bendSensitivityChanged(double semitones);
 
 protected:
     void customEvent(QEvent * event);
 
 private:
+    void getMidiList(RtMidi::Api api, QMap<QString, QString> *map);
+
     PianoKeybdCustom * _keyboard;
     ControllerArea * _controllerArea;
     ConfManager * _configuration;
@@ -96,7 +99,7 @@ private:
     // Last values
     QMutex _mutexValues;
     QMap<int, int> _controllerValues;
-    int _bendValue;
+    double _bendValue;
     double _bendSensitivityValue;
     int _monoPressureValue;
     QMap<int, int> _polyPressureValues;

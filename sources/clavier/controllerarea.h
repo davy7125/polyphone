@@ -43,13 +43,13 @@ public:
 public slots:
     void updateMonoPressure(int value);
     void updateController(int num, int value);
-    void updateBend(int value);
+    void updateBend(double value, bool stopTimer = true);
     void updateBendSensitivity(double semitones);
 
 signals:
     void monoPressureChanged(int value);
     void controllerChanged(int num, int value);
-    void bendChanged(int value);
+    void bendChanged(double value);
     void bendSensitivityChanged(double semitones);
 
 private slots:

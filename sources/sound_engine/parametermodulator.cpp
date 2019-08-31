@@ -151,7 +151,7 @@ double ParameterModulator::getValue(SFModulator sfMod)
             value = ContextManager::midi()->getMonoPressure();
             break;
         case GC_pitchWheel:
-            value = ContextManager::midi()->getBendValue();
+            value = 64 * (ContextManager::midi()->getBendValue() + 1);
             break;
         case GC_pitchWheelSensitivity:
             value = ContextManager::midi()->getBendSensitivityValue();

@@ -41,6 +41,9 @@ public:
     // If set, the handle will be back to the specified position
     void setBackToValue(int middleValue) { _middleValue = middleValue; }
 
+    // Stop the timer so that the slider stay in its position
+    void stopTimer() { _timer.stop(); }
+
 protected:
     void paintEvent(QPaintEvent *event);
 
