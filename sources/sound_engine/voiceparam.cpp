@@ -267,9 +267,7 @@ void VoiceParam::setLoopEnd(quint32 val)
 
 void VoiceParam::setFineTune(qint16 val)
 {
-    AttributeValue value;
-    value.shValue = val;
-    _parameters[champ_fineTune]->initValue(value, false);
+    _sampleFineTune = val;
 }
 
 double VoiceParam::getDouble(AttributeType type)
