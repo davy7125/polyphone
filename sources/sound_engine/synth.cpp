@@ -253,6 +253,10 @@ void Synth::playInst(int idSf2, int idElt, int key, int velocity, EltID idPrstIn
 
 void Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSmpl, EltID idPrstInst)
 {
+    // Only one -1 or -2 at a time
+    if (key < 0)
+        SoundEngine::releaseNote(key);
+
     EltID idSmpl(elementSmpl, idSf2, idElt, 0, 0);
 
     // Prepare the parameters for the voice
