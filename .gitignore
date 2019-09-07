@@ -7,3 +7,4 @@
 **/polyphone.exe
 deployment
 lib_*
+.DS_Store

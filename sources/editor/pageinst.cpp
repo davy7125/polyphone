@@ -68,7 +68,6 @@ PageInst::PageInst(QWidget *parent) :
     QFont fontTmp = _table->font();
     fontTmp.setPixelSize(10);
     _table->setFont(fontTmp);
-    ui->horizontalLayout_2->setSpacing(15);
 #endif
     ui->tableInst->verticalHeader()->setDefaultSectionSize(QFontMetrics(ui->tableInst->font()).height() + 8);
 
