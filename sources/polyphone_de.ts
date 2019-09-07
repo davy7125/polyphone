@@ -399,313 +399,365 @@
         <location filename="context/confmanager.cpp" line="185"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
-        <translation>Erstes key mapping für tiefes C links</translation>
+        <translatorcomment>Erstes key mapping für tiefes C links</translatorcomment>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="186"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
-        <translation>Erstes key mapping für tiefes C#</translation>
+        <translatorcomment>Erstes key mapping für tiefes C#</translatorcomment>
+        <translation>S</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="187"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
-        <translation>Erstes key mapping für tiefes D</translation>
+        <translatorcomment>Erstes key mapping für tiefes D</translatorcomment>
+        <translation>X</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="188"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
-        <translation>Erstes key mapping für tiefes D#</translation>
+        <translatorcomment>Erstes key mapping für tiefes D#</translatorcomment>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="189"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
-        <translation>Erstes key mapping für tiefes E</translation>
+        <translatorcomment>Erstes key mapping für tiefes E</translatorcomment>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="190"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
-        <translation>Erstes key mapping für tiefes F</translation>
+        <translatorcomment>Erstes key mapping für tiefes F</translatorcomment>
+        <translation>V</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="191"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
-        <translation>Erstes key mapping für tiefes F#</translation>
+        <translatorcomment>Erstes key mapping für tiefes F#</translatorcomment>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="192"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
-        <translation>Erstes key mapping für tiefes G</translation>
+        <translatorcomment>Erstes key mapping für tiefes G</translatorcomment>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="193"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
-        <translation>Erstes key mapping für tiefes G#</translation>
+        <translatorcomment>Erstes key mapping für tiefes G#</translatorcomment>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="194"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
-        <translation>Erstes key mapping für tiefes A</translation>
+        <translatorcomment>Erstes key mapping für tiefes A</translatorcomment>
+        <translation>N</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="195"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
-        <translation>Erstes key mapping für tiefes A#</translation>
+        <translatorcomment>Erstes key mapping für tiefes A#</translatorcomment>
+        <translation>J</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="196"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
-        <translation>Erstes key mapping für tiefes H</translation>
+        <translatorcomment>Erstes key mapping für tiefes H</translatorcomment>
+        <translation>M</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="197"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
-        <translation>Erstes key mapping für tiefes C rechts</translation>
+        <translatorcomment>Erstes key mapping für tiefes C rechts</translatorcomment>
+        <translation>,</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="203"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
-        <translation>Erstes key mapping für hohes C links</translation>
+        <translatorcomment>Erstes key mapping für hohes C links</translatorcomment>
+        <translation>Q</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="204"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
-        <translation>Erstes key mapping für hohes C#</translation>
+        <translatorcomment>Erstes key mapping für hohes C#</translatorcomment>
+        <translation>2</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="205"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
-        <translation>Erstes key mapping für hohes D</translation>
+        <translatorcomment>Erstes key mapping für hohes D</translatorcomment>
+        <translation>W</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="206"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
-        <translation>Erstes key mapping für hohes D#</translation>
+        <translatorcomment>Erstes key mapping für hohes D#</translatorcomment>
+        <translation>3</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="207"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
-        <translation>Erstes key mapping für hohes E</translation>
+        <translatorcomment>Erstes key mapping für hohes E</translatorcomment>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="208"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
-        <translation>Erstes key mapping für hohes F</translation>
+        <translatorcomment>Erstes key mapping für hohes F</translatorcomment>
+        <translation>R</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="209"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
-        <translation>Erstes key mapping für hohes F#</translation>
+        <translatorcomment>Erstes key mapping für hohes F#</translatorcomment>
+        <translation>5</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="210"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
-        <translation>Erstes key mapping für hohes G</translation>
+        <translatorcomment>Erstes key mapping für hohes G</translatorcomment>
+        <translation>T</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="211"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
-        <translation>Erstes key mapping für hohes G#</translation>
+        <translatorcomment>Erstes key mapping für hohes G#</translatorcomment>
+        <translation>6</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="212"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
-        <translation>Erstes key mapping für hohes A</translation>
+        <translatorcomment>Erstes key mapping für hohes A</translatorcomment>
+        <translation>Z</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="213"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
-        <translation>Erstes key mapping für hohes A#</translation>
+        <translatorcomment>Erstes key mapping für hohes A#</translatorcomment>
+        <translation>7</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="214"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
-        <translation>Erstes key mapping für hohes H</translation>
+        <translatorcomment>Erstes key mapping für hohes H</translatorcomment>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="215"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
-        <translation>Erstes key mapping für hohes C rechts</translation>
+        <translatorcomment>Erstes key mapping für hohes C rechts</translatorcomment>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="221"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
-        <translation>Zweites key mapping für tiefes C links</translation>
+        <translatorcomment>Zweites key mapping für tiefes C links</translatorcomment>
+        <translation>Shift+Y</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="222"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
-        <translation>Zweites key mapping für tiefes C#</translation>
+        <translatorcomment>Zweites key mapping für tiefes C#</translatorcomment>
+        <translation>Shift+S</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="223"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
-        <translation>Zweites key mapping für tiefes D</translation>
+        <translatorcomment>Zweites key mapping für tiefes D</translatorcomment>
+        <translation>Shift+X</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="224"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
-        <translation>Zweites key mapping für tiefes D#</translation>
+        <translatorcomment>Zweites key mapping für tiefes D#</translatorcomment>
+        <translation>Shift+D</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="225"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
-        <translation>Zweites key mapping für tiefes E</translation>
+        <translatorcomment>Zweites key mapping für tiefes E</translatorcomment>
+        <translation>Shift+C</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="226"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
-        <translation>Zweites key mapping für tiefes F</translation>
+        <translatorcomment>Zweites key mapping für tiefes F</translatorcomment>
+        <translation>Shift+V</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="227"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
-        <translation>Zweites key mapping für tiefes F#</translation>
+        <translatorcomment>Zweites key mapping für tiefes F#</translatorcomment>
+        <translation>Shift+G</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="228"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
-        <translation>Zweites key mapping für tiefes G</translation>
+        <translatorcomment>Zweites key mapping für tiefes G</translatorcomment>
+        <translation>Shift+B</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="229"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
-        <translation>Zweites key mapping für tiefes G#</translation>
+        <translatorcomment>Zweites key mapping für tiefes G#</translatorcomment>
+        <translation>Shift+H</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="230"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
-        <translation>Zweites key mapping für tiefes A</translation>
+        <translatorcomment>Zweites key mapping für tiefes A</translatorcomment>
+        <translation>Shift+N</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="231"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
-        <translation>Zweites key mapping für tiefes A#</translation>
+        <translatorcomment>Zweites key mapping für tiefes A#</translatorcomment>
+        <translation>Shift+J</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="232"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
-        <translation>Zweites key mapping für tiefes H</translation>
+        <translatorcomment>Zweites key mapping für tiefes H</translatorcomment>
+        <translation>Shift+M</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="233"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
-        <translation>Zweites key mapping für tiefes C rechts</translation>
+        <translatorcomment>Zweites key mapping für tiefes C rechts</translatorcomment>
+        <translation>Shift+;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="239"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
-        <translation>Zweites key mapping für hohes C links </translation>
+        <translatorcomment>Zweites key mapping für hohes C links</translatorcomment>
+        <translation>Shift+Q</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="240"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
-        <translation>Zweites key mapping für hohes C#</translation>
+        <translatorcomment>Zweites key mapping für hohes C#</translatorcomment>
+        <translation>Shift+&quot;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="241"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
-        <translation>Zweites key mapping für hohes D</translation>
+        <translatorcomment>Zweites key mapping für hohes D</translatorcomment>
+        <translation>Shift+W</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="242"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
-        <translation>Zweites key mapping für hohes D#</translation>
+        <translatorcomment>Zweites key mapping für hohes D#</translatorcomment>
+        <translation>Shift+§</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="243"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
-        <translation>Zweites key mapping für hohes E</translation>
+        <translatorcomment>Zweites key mapping für hohes E</translatorcomment>
+        <translation>Shift+E</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="244"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
-        <translation>Zweites key mapping für hohes F</translation>
+        <translatorcomment>Zweites key mapping für hohes F</translatorcomment>
+        <translation>Shift+R</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="245"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
-        <translation>Zweites key mapping für hohes F#</translation>
+        <translatorcomment>Zweites key mapping für hohes F#</translatorcomment>
+        <translation>Shift+%</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="246"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
-        <translation>Zweites key mapping für hohes G</translation>
+        <translatorcomment>Zweites key mapping für hohes G</translatorcomment>
+        <translation>Shift+T</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="247"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
-        <translation>Zweites key mapping für hohes G#</translation>
+        <translatorcomment>Zweites key mapping für hohes G#</translatorcomment>
+        <translation>Shift+&amp;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="248"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
-        <translation>Zweites key mapping für hohes A</translation>
+        <translatorcomment>Zweites key mapping für hohes A</translatorcomment>
+        <translation>Shift+Z</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="249"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
-        <translation>Zweites key mapping für hohes A#</translation>
+        <translatorcomment>Zweites key mapping für hohes A#</translatorcomment>
+        <translation>Shift+/</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="250"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
-        <translation>Zweites key mapping für hohes H</translation>
+        <translatorcomment>Zweites key mapping für hohes H</translatorcomment>
+        <translation>Shift+U</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="251"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
-        <translation>Zweites key mapping für hohes C rechts</translation>
+        <translatorcomment>Zweites key mapping für hohes C rechts</translatorcomment>
+        <translation>Shift+I</translation>
     </message>
 </context>
 <context>
