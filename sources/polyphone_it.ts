@@ -396,313 +396,313 @@
 <context>
     <name>ConfManager</name>
     <message>
-        <location filename="context/confmanager.cpp" line="184"/>
+        <location filename="context/confmanager.cpp" line="185"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
         <translation>Z</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="185"/>
+        <location filename="context/confmanager.cpp" line="186"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="186"/>
+        <location filename="context/confmanager.cpp" line="187"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="187"/>
+        <location filename="context/confmanager.cpp" line="188"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="188"/>
+        <location filename="context/confmanager.cpp" line="189"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="189"/>
+        <location filename="context/confmanager.cpp" line="190"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
         <translation>V</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="190"/>
+        <location filename="context/confmanager.cpp" line="191"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
         <translation>G</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="191"/>
+        <location filename="context/confmanager.cpp" line="192"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="192"/>
+        <location filename="context/confmanager.cpp" line="193"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="193"/>
+        <location filename="context/confmanager.cpp" line="194"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
         <translation>N</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="194"/>
+        <location filename="context/confmanager.cpp" line="195"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
         <translation>J</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="195"/>
+        <location filename="context/confmanager.cpp" line="196"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="196"/>
+        <location filename="context/confmanager.cpp" line="197"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="202"/>
+        <location filename="context/confmanager.cpp" line="203"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
         <translation>Q</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="203"/>
+        <location filename="context/confmanager.cpp" line="204"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="204"/>
+        <location filename="context/confmanager.cpp" line="205"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
         <translation>W</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="205"/>
+        <location filename="context/confmanager.cpp" line="206"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="206"/>
+        <location filename="context/confmanager.cpp" line="207"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="207"/>
+        <location filename="context/confmanager.cpp" line="208"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="208"/>
+        <location filename="context/confmanager.cpp" line="209"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="209"/>
+        <location filename="context/confmanager.cpp" line="210"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
         <translation>T</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="210"/>
+        <location filename="context/confmanager.cpp" line="211"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="211"/>
+        <location filename="context/confmanager.cpp" line="212"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="212"/>
+        <location filename="context/confmanager.cpp" line="213"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="213"/>
+        <location filename="context/confmanager.cpp" line="214"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
         <translation>U</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="214"/>
+        <location filename="context/confmanager.cpp" line="215"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="220"/>
+        <location filename="context/confmanager.cpp" line="221"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
         <translation>Shift+Z</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="221"/>
+        <location filename="context/confmanager.cpp" line="222"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
         <translation>Shift+S</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="222"/>
+        <location filename="context/confmanager.cpp" line="223"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
         <translation>Shift+X</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="223"/>
+        <location filename="context/confmanager.cpp" line="224"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
         <translation>Shift+D</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="224"/>
+        <location filename="context/confmanager.cpp" line="225"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
         <translation>Shift+C</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="225"/>
+        <location filename="context/confmanager.cpp" line="226"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
         <translation>Shift+V</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="226"/>
+        <location filename="context/confmanager.cpp" line="227"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
         <translation>Shift+G</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="227"/>
+        <location filename="context/confmanager.cpp" line="228"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
         <translation>Shift+B</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="228"/>
+        <location filename="context/confmanager.cpp" line="229"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
         <translation>Shift+H</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="229"/>
+        <location filename="context/confmanager.cpp" line="230"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
         <translation>Shift+N</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="230"/>
+        <location filename="context/confmanager.cpp" line="231"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
         <translation>Shift+J</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="231"/>
+        <location filename="context/confmanager.cpp" line="232"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
         <translation>Shift+M</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="232"/>
+        <location filename="context/confmanager.cpp" line="233"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
         <translation>Shift+;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="238"/>
+        <location filename="context/confmanager.cpp" line="239"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
         <translation>Shift+Q</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="239"/>
+        <location filename="context/confmanager.cpp" line="240"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
         <translation>Shift+&quot;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="240"/>
+        <location filename="context/confmanager.cpp" line="241"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
         <translation>Shift+W</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="241"/>
+        <location filename="context/confmanager.cpp" line="242"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
         <translation>Shift+£</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="242"/>
+        <location filename="context/confmanager.cpp" line="243"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
         <translation>Shift+E</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="243"/>
+        <location filename="context/confmanager.cpp" line="244"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
         <translation>Shift+R</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="244"/>
+        <location filename="context/confmanager.cpp" line="245"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
         <translation>Shift+%</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="245"/>
+        <location filename="context/confmanager.cpp" line="246"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
         <translation>Shift+T</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="246"/>
+        <location filename="context/confmanager.cpp" line="247"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
         <translation>Shift+&amp;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="247"/>
+        <location filename="context/confmanager.cpp" line="248"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
         <translation>Shift+Y</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="248"/>
+        <location filename="context/confmanager.cpp" line="249"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
         <translation>Shift+/</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="249"/>
+        <location filename="context/confmanager.cpp" line="250"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
         <translation>Shift+U</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="250"/>
+        <location filename="context/confmanager.cpp" line="251"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
         <translation>Shift+I</translation>
@@ -1126,12 +1126,12 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="275"/>
+        <location filename="clavier/controllerarea.cpp" line="282"/>
         <source>on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="280"/>
+        <location filename="clavier/controllerarea.cpp" line="287"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2118,7 +2118,7 @@ repository</source>
 <context>
     <name>FilterFlow</name>
     <message>
-        <location filename="repository/browser/filterflow.cpp" line="64"/>
+        <location filename="repository/browser/filterflow.cpp" line="63"/>
         <source>All</source>
         <translation>Tutti</translation>
     </message>
@@ -2157,7 +2157,7 @@ repository</source>
 <context>
     <name>Graphique</name>
     <message>
-        <location filename="editor/graphics/graphique.cpp" line="88"/>
+        <location filename="editor/graphics/graphique.cpp" line="89"/>
         <source>Multiple selection</source>
         <translation>Selezione multipla</translation>
     </message>
@@ -2180,33 +2180,33 @@ repository</source>
         <translation>Esporta il grafico</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="318"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="327"/>
         <source>key</source>
         <translation>nota</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="319"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="328"/>
         <source>correction</source>
         <translation>correzione</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="319"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="328"/>
         <source>estimation</source>
         <translation>stima</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="347"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="356"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="409"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="418"/>
         <source>Export a graph</source>
         <translation>Esporta il grafico</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="410"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="419"/>
         <source>Png file</source>
         <translation>File Png</translation>
     </message>
@@ -2479,12 +2479,12 @@ repository</source>
 <context>
     <name>ModulatorCell</name>
     <message>
-        <location filename="editor/modulator/modulatorcell.ui" line="142"/>
+        <location filename="editor/modulator/modulatorcell.ui" line="139"/>
         <source>no operation</source>
         <translation>nessuna operazione</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.ui" line="147"/>
+        <location filename="editor/modulator/modulatorcell.ui" line="144"/>
         <source>absolute value</source>
         <translation>valore assoluto</translation>
     </message>
@@ -3225,7 +3225,7 @@ di campionamento</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="297"/>
-        <location filename="editor/pagesmpl.cpp" line="1097"/>
+        <location filename="editor/pagesmpl.cpp" line="1055"/>
         <source>Play</source>
         <translation>Play</translation>
     </message>
@@ -3292,8 +3292,8 @@ di campionamento</translation>
     <message>
         <location filename="editor/pagesmpl.ui" line="641"/>
         <location filename="editor/pagesmpl.cpp" line="83"/>
-        <location filename="editor/pagesmpl.cpp" line="513"/>
-        <location filename="editor/pagesmpl.cpp" line="1021"/>
+        <location filename="editor/pagesmpl.cpp" line="475"/>
+        <location filename="editor/pagesmpl.cpp" line="979"/>
         <source>Information</source>
         <translation>Informazione</translation>
     </message>
@@ -3312,80 +3312,80 @@ di campionamento</translation>
         <translation>(min)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="240"/>
-        <location filename="editor/pagesmpl.cpp" line="643"/>
+        <location filename="editor/pagesmpl.cpp" line="232"/>
+        <location filename="editor/pagesmpl.cpp" line="605"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="250"/>
-        <location filename="editor/pagesmpl.cpp" line="782"/>
+        <location filename="editor/pagesmpl.cpp" line="242"/>
+        <location filename="editor/pagesmpl.cpp" line="744"/>
         <source>right</source>
         <translation>destra</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="251"/>
-        <location filename="editor/pagesmpl.cpp" line="783"/>
+        <location filename="editor/pagesmpl.cpp" line="243"/>
+        <location filename="editor/pagesmpl.cpp" line="745"/>
         <source>left</source>
         <translation>sinistra</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="252"/>
-        <location filename="editor/pagesmpl.cpp" line="784"/>
+        <location filename="editor/pagesmpl.cpp" line="244"/>
+        <location filename="editor/pagesmpl.cpp" line="746"/>
         <source>link</source>
         <translation>collegamento</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="290"/>
+        <location filename="editor/pagesmpl.cpp" line="282"/>
         <source>Sample not linked to an instrument yet.</source>
         <translation>Campione non ancora collegato ad uno strumento.</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="292"/>
+        <location filename="editor/pagesmpl.cpp" line="284"/>
         <source>Sample linked to instrument:</source>
         <translation>Campione collegato allo strumento:</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="294"/>
+        <location filename="editor/pagesmpl.cpp" line="286"/>
         <source>Sample linked to instruments:</source>
         <translation>Campione collegato agli strumenti:</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="514"/>
-        <location filename="editor/pagesmpl.cpp" line="1022"/>
+        <location filename="editor/pagesmpl.cpp" line="476"/>
+        <location filename="editor/pagesmpl.cpp" line="980"/>
         <source>Change successfully applied to the different samples</source>
         <translation>I cambiamenti sono stati apllicati con successo ai differenti campioni</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="781"/>
-        <location filename="editor/pagesmpl.cpp" line="806"/>
+        <location filename="editor/pagesmpl.cpp" line="743"/>
+        <location filename="editor/pagesmpl.cpp" line="768"/>
         <source>mono</source>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1091"/>
+        <location filename="editor/pagesmpl.cpp" line="1049"/>
         <source>Stop</source>
         <translation>Stop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1110"/>
+        <location filename="editor/pagesmpl.cpp" line="1068"/>
         <source>Warning</source>
         <translation type="unfinished">Attenzione</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1111"/>
+        <location filename="editor/pagesmpl.cpp" line="1069"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1113"/>
+        <location filename="editor/pagesmpl.cpp" line="1071"/>
         <source>&amp;Yes</source>
         <translation>&amp;Si</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1114"/>
+        <location filename="editor/pagesmpl.cpp" line="1072"/>
         <source>&amp;No</source>
         <translation>&amp;no</translation>
     </message>
@@ -4173,7 +4173,7 @@ di campionamento</translation>
 <context>
     <name>ShowSoundfonts</name>
     <message>
-        <location filename="repository/daily/showsoundfonts.ui" line="214"/>
+        <location filename="repository/daily/showsoundfonts.ui" line="217"/>
         <source>Oops! Cannot
 download the list</source>
         <translation>Oops! Impossibile
@@ -4248,39 +4248,39 @@ scaricare la lista</translation>
         <translation>Titolo (A→Z)</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="455"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="458"/>
         <source>Filters</source>
         <translation>Filtri</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="484"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="487"/>
         <source>Reset</source>
         <translation>Resetta</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="503"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="506"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation>Sottoscrivi un account Premium per utilizzare tutte le funzioni!</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="525"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="528"/>
         <source>No results</source>
         <translation>Nessun risultato</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="606"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="609"/>
         <source>Oops! Cannot
 download the list</source>
         <translation>Oops! Impossibile
 scaricare la lista</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="143"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="142"/>
         <source>commercial use</source>
         <translation>uso commerciale</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="144"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="143"/>
         <source>share after editing</source>
         <translation>condividi dopo le modifiche</translation>
     </message>
@@ -6207,7 +6207,7 @@ scaricare il contenuto</translation>
 <context>
     <name>WidgetShowHistory</name>
     <message>
-        <location filename="mainwindow/widgetshowhistory.ui" line="84"/>
+        <location filename="mainwindow/widgetshowhistory.ui" line="90"/>
         <source>Empty list</source>
         <translation>Lista vuota</translation>
     </message>
