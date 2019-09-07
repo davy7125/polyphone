@@ -199,9 +199,9 @@ void GraphVisualizer::setData(QVector<QList<double> > listPoints, QVector<QList<
     this->xAxis->setRange(xMinDonnees - 1, xMaxDonnees + 1);
 
     // Affichage
-    this->graph(1)->setData(vectMoyX, vectMoyY);
-    this->graph(2)->setData(vectValX, vectValY);
-    this->graph(3)->setData(vectDefValX, vectDefValY);
+    this->graph(1)->setData(vectMoyX, vectMoyY, true);
+    this->graph(2)->setData(vectValX, vectValY, true);
+    this->graph(3)->setData(vectDefValX, vectDefValY, true);
     this->setScale();
 }
 
@@ -279,7 +279,7 @@ void GraphVisualizer::setScale()
         x[2 * i] = x[2 * i + 1] = 12 * (i + 1);
         x[2 * i + 1] += 0.0001;
     }
-    this->graph(0)->setData(x, y);
+    this->graph(0)->setData(x, y, true);
 
     this->replot();
 }
@@ -381,6 +381,6 @@ void GraphVisualizer::afficheCoord(double x, double y)
         yVector.resize(0);
         labelCoord->setText("");
     }
-    this->graph(4)->setData(xVector, yVector);
+    this->graph(4)->setData(xVector, yVector, true);
     this->replot();
 }

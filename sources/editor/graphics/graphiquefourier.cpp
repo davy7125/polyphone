@@ -145,9 +145,9 @@ void GraphiqueFourier::setData(QByteArray baData, quint32 dwSmplRate)
 {
     int length = baData.size() / 2;
     _fData.resize(length);
-    qint16 * data = (qint16*)baData.data();
+    qint16 * data = reinterpret_cast<qint16*>(baData.data());
     for (int i = 0; i < length; i++)
-        _fData[i] = (float)data[i];
+        _fData[i] = static_cast<float>(data[i]);
 
     this->dwSmplRate = dwSmplRate;
 }
@@ -388,7 +388,7 @@ void GraphiqueFourier::dispFourier(QVector<float> vectFourier, float posMaxFouri
         else
             y[i] = 0;
     }
-    this->graph(0)->setData(x, y);
+    this->graph(0)->setData(x, y, true);
 }
 
 void GraphiqueFourier::resizeEvent(QResizeEvent * event)

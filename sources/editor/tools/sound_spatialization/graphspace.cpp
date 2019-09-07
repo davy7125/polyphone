@@ -41,7 +41,7 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     QVector<double> x, y;
     x << 0.5 << 0.5;
     y << -10 << 10;
-    graph(0)->setData(x, y);
+    graph(0)->setData(x, y, true);
 
     // Couche données
     this->addGraph();
@@ -121,7 +121,7 @@ void GraphSpace::setData(QVector<double> x, QVector<int> y)
     }
 
     // Affichage de la courbe
-    this->graph(1)->setData(_xPan, _yLength);
+    this->graph(1)->setData(_xPan, _yLength, true);
     this->replot();
 }
 
@@ -193,6 +193,6 @@ void GraphSpace::afficheCoord(double xPan, double yLength, int key)
         yVector.resize(0);
         labelCoord->setText("");
     }
-    this->graph(2)->setData(xVector, yVector);
+    this->graph(2)->setData(xVector, yVector, true);
     this->replot();
 }
