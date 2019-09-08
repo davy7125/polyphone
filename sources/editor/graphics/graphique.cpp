@@ -55,7 +55,7 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
 {
     // Graphe des données
     this->addGraph();
-    this->graph(0)->setAntialiased(true);
+    this->graph(0)->setAntialiased(false);
 
     // Graphes contenant startLoop, endLoop
     this->addGraph();
