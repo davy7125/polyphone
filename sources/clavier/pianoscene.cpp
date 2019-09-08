@@ -191,7 +191,7 @@ void PianoScene::createKeyboard()
             x += ((1. - coefWidth) / 2 + offsetX) * KEYWIDTH;
         PianoKey* key = new PianoKey(QRectF(x, 0, KEYWIDTH * coefWidth, KEYHEIGHT * coefHeight), offsetX != 0, i);
 
-        key->setAcceptTouchEvents(true);
+        key->setAcceptTouchEvents(false); // Attempt to fix https://github.com/davy7125/polyphone/issues/31
         m_keys.insert(i, key);
         addItem(key);
     }
@@ -495,7 +495,7 @@ bool PianoScene::event(QEvent *event)
     case QEvent::TouchBegin:
     case QEvent::TouchEnd:
     case QEvent::TouchUpdate:
-    {
+    {break; // Attempt to fix https://github.com/davy7125/polyphone/issues/31
         QTouchEvent *touchEvent = static_cast<QTouchEvent*>(event);
         QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
         foreach (const QTouchEvent::TouchPoint& touchPoint, touchPoints)
