@@ -9,7 +9,7 @@
 # Uncomment a line if your distribution doesn't come with some of the following libraries
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
-DEFINES += USE_LOCAL_QCUSTOMPLOT
+#DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # Polyphone version
 DEFINES += SOFT_VERSION=\\\"2.1.0\\\"
