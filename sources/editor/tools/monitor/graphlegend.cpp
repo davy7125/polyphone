@@ -33,7 +33,7 @@ GraphLegend::GraphLegend(QWidget *parent) : QCustomPlot(parent)
     QVector<double> x, y;
     x << 0;
     y << 0;
-    this->graph(0)->setData(x, y, true);
+    this->graph(0)->setData(x, y);
 
     // Axes
     this->xAxis->setVisible(false);

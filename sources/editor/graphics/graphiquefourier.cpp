@@ -388,7 +388,7 @@ void GraphiqueFourier::dispFourier(QVector<float> vectFourier, float posMaxFouri
         else
             y[i] = 0;
     }
-    this->graph(0)->setData(x, y, true);
+    this->graph(0)->setData(x, y);
 }
 
 void GraphiqueFourier::resizeEvent(QResizeEvent * event)

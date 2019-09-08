@@ -150,8 +150,8 @@ void Envelop::draw(double triggeredKeyDuration, double releasedKeyDuration)
     vectX2[7] = position;
     vectY2[7] = 0;
 
-    _graph1->setData(vectX1, vectY1, true);
-    _graph2->setData(vectX2, vectY2, true);
+    _graph1->setData(vectX1, vectY1);
+    _graph2->setData(vectX2, vectY2);
 }
 
 double Envelop::getValueForKey(double value, double keyModifier, int key)

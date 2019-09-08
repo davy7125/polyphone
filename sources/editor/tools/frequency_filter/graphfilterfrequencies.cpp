@@ -64,7 +64,7 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(p
         textLabel->setFont(QFont(font().family(), 8));
         textLabel->setColor(color);
     }
-    this->graph(0)->setData(x, y, true);
+    this->graph(0)->setData(x, y);
 
     // Layer des valeurs
     this->addGraph();
@@ -97,7 +97,7 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(p
     y[0] = y[1] = 10;
     color = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND);
     color.setAlpha(30);
-    this->graph(3)->setData(x, y, true);
+    this->graph(3)->setData(x, y);
     this->graph(3)->setBrush(QBrush(color));
     this->graph(3)->setChannelFillGraph(this->graph(1));
 
@@ -155,7 +155,7 @@ void GraphFilterFrequencies::addFourierTransform(QVector<float> fData, quint32 s
 
     this->addGraph();
     this->graph(nbGraphs)->setPen(graphPen);
-    this->graph(nbGraphs)->setData(x, y, true);
+    this->graph(nbGraphs)->setData(x, y);
     this->graph(nbGraphs)->setBrush(QBrush(color));
     this->addGraph();
     this->graph(nbGraphs + 1)->setPen(graphPen);
@@ -189,7 +189,7 @@ void GraphFilterFrequencies::addFourierTransform(QVector<float> fData, quint32 s
         if (value > y[index])
             y[index] = value;
     }
-    this->graph(nbGraphs + 1)->setData(x, y, true);
+    this->graph(nbGraphs + 1)->setData(x, y);
 }
 
 QVector<double> GraphFilterFrequencies::getValues()
@@ -308,7 +308,7 @@ void GraphFilterFrequencies::replot()
     QVector<double> x(POINT_NUMBER);
     for (int i = 0; i < POINT_NUMBER; i++)
         x[i] = i;
-    this->graph(1)->setData(x, this->dValues, true);
+    this->graph(1)->setData(x, this->dValues);
 
     // Affichage
     QCustomPlot::replot();
@@ -348,6 +348,6 @@ void GraphFilterFrequencies::afficheCoord(double x, double y)
         yVector.resize(0);
         labelCoord->setText("");
     }
-    this->graph(2)->setData(xVector, yVector, true);
+    this->graph(2)->setData(xVector, yVector);
     this->replot();
 }

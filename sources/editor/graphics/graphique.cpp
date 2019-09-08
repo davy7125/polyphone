@@ -224,7 +224,7 @@ void Graphique::setData(QByteArray baData, int sampleRate)
         x[i] = i;
         y[i] = (double)data[i] / 32768.; // normalisation entre -1 et 1
     }
-    this->graph(0)->setData(x, y, true);
+    this->graph(0)->setData(x, y);
     _sampleRate = sampleRate;
 }
 
@@ -264,7 +264,7 @@ void Graphique::setStartLoop(int pos, bool replot)
             x[1] = pos;
             y[0] = -1;
             y[1] = 1;
-            this->graph(1)->setData(x, y, true);
+            this->graph(1)->setData(x, y);
         }
         this->plotOverlay();
         if (replot)
@@ -283,7 +283,7 @@ void Graphique::setEndLoop(int pos, bool replot)
             x[1] = pos;
             y[0] = -1;
             y[1] = 1;
-            this->graph(2)->setData(x, y, true);
+            this->graph(2)->setData(x, y);
         }
         this->plotOverlay();
         if (replot)
@@ -449,8 +449,8 @@ void Graphique::plotOverlay()
             y2[i]                       = this->graph(0)->data()->at(posDebut - sizeOverlay + i)->value;
             y2[2 * sizeOverlay - i - 1] = this->graph(0)->data()->at(posDebut + sizeOverlay - i)->value;
         }
-        this->graph(4)->setData(x1, y1, true);
-        this->graph(5)->setData(x2, y2, true);
+        this->graph(4)->setData(x1, y1);
+        this->graph(5)->setData(x2, y2);
     }
     else
     {
