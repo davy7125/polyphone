@@ -348,6 +348,9 @@ void PageSmpl::setStartLoop(int val)
 
         // Modif synth
         _synth->setStartLoop(val, id2.indexElt != -1);
+
+        // Update the loop option
+        ui->checkLectureBoucle->setEnabled(ui->spinStartLoop->value() != ui->spinEndLoop->value());
     }
 }
 
@@ -401,6 +404,9 @@ void PageSmpl::setEndLoop(int val)
 
         // Modif synth
         _synth->setEndLoop(val, id2.indexElt != -1);
+
+        // Update the loop option
+        ui->checkLectureBoucle->setEnabled(ui->spinStartLoop->value() != ui->spinEndLoop->value());
     }
 }
 
