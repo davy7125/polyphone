@@ -352,6 +352,7 @@ void ModulatorEditor::on_pushAdd_clicked()
     AttributeValue val;
     val.wValue = 1;
     sm->set(modId, champ_modAmount, val);
+    val.wValue = 0;
     sm->set(modId, champ_sfModTransOper, val);
     val.dwValue = 0;
     sm->set(modId, champ_sfModSrcOper, val);
