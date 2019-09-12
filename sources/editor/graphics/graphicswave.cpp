@@ -195,7 +195,7 @@ void GraphicsWave::paintEvent(QPaintEvent *event)
     QPainter painter(this); // Must be after _wavePainter->paint(...)
     painter.setPen(_textColor);
     painter.setFont(_textFont);
-    int fontHeight = _textFont.pointSize() + 2;
+    int fontHeight = 50;
     painter.drawText(TEXT_MARGIN, this->height() - fontHeight - TEXT_MARGIN,
                      this->width() - TEXT_MARGIN * 2, fontHeight, Qt::AlignLeft | Qt::AlignBottom,
                      QString::number(static_cast<double>(start) / _sampleRate, 'f', 3) + " " + "s");
