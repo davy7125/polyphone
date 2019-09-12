@@ -40,9 +40,9 @@ public:
     Duplicator();
     ~Duplicator() {}
 
-    // Copie idSrc vers idDest si sf2 différent
-    // Sinon établit un lien (InstSmpl ou PrstInst)
-    // Ou ne fait rien
+    // Copy idSrc toward idDest if sf2 different
+    // Else add a division (InstSmpl or PrstInst)
+    // Else nothing
     void copy(EltID idSource, EltID idDest);
 
     // Duplicate an element

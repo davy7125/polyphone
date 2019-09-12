@@ -12,7 +12,7 @@
 #DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # Polyphone version
-DEFINES += SOFT_VERSION=\\\"2.1.0\\\"
+DEFINES += SOFT_VERSION=\\\"2.1.1\\\"
 DEFINES += IDENTIFIER=\\\"\\\"
 
 OBJECTS_DIR=generated_files
@@ -203,7 +203,6 @@ SOURCES	+= main.cpp \
     editor/page.cpp \
     editor/pagetable.cpp \
     editor/envelopeditor.cpp \
-    editor/graphics/graphique.cpp \
     editor/graphics/graphiquefourier.cpp \
     editor/graphics/graphicsviewrange.cpp \
     editor/graphics/graphicslegenditem.cpp \
@@ -467,7 +466,9 @@ SOURCES	+= main.cpp \
     core/types/modulatordata.cpp \
     repository/soundfont/editor/editordialoginsertvideo.cpp \
     repository/soundfont/editor/editordialoginsertimage.cpp \
-    dialogs/dialogquestion.cpp
+    dialogs/dialogquestion.cpp \
+    editor/graphics/graphicswave.cpp \
+    editor/graphics/graphicswavepainter.cpp
 
 HEADERS  += \
     core/sample/infosound.h \
@@ -505,7 +506,6 @@ HEADERS  += \
     editor/page.h \
     editor/pagetable.h \
     editor/envelopeditor.h \
-    editor/graphics/graphique.h \
     editor/graphics/graphiquefourier.h \
     editor/graphics/graphicssimpletextitem.h \
     editor/graphics/graphicsviewrange.h \
@@ -791,7 +791,9 @@ HEADERS  += \
     repository/soundfont/editor/editordialoginsertvideo.h \
     repository/soundfont/editor/editordialoginsertimage.h \
     dialogs/dialogquestion.h \
-    editor/modulator/spinboxmultiply.h
+    editor/modulator/spinboxmultiply.h \
+    editor/graphics/graphicswave.h \
+    editor/graphics/graphicswavepainter.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

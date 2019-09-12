@@ -102,7 +102,7 @@ void CalibrationSinus::addData(float * dataR, float * dataL, quint32 len)
     else
         _currentPitch = pitch; // smooth transition
 
-    // Génération et copie
+    // Generate data and copy
     _sinus->getSinus(_buf, len, 440.0f * static_cast<float>(qPow(2., (_currentPitch - 69.) / 12.)), 0);
 
     for (quint32 i = 0; i < len; i++)

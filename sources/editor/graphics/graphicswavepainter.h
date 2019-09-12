@@ -22,43 +22,47 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "graphlegend.h"
+#ifndef GRAPHICSWAVEPAINTER_H
+#define GRAPHICSWAVEPAINTER_H
 
-GraphLegend::GraphLegend(QWidget *parent) : QCustomPlot(parent)
+#include <QWidget>
+
+class GraphicsWavePainter
 {
-    // Couche pour le symbole
-    this->addGraph();
+public:
+    GraphicsWavePainter(QWidget * widget);
+    ~GraphicsWavePainter();
 
-    // Ajout d'un point
-    QVector<double> x, y;
-    x << 0;
-    y << 0;
-    this->graph(0)->setData(x, y, true);
+    // Configure the painter with data
+    void setData(QByteArray baData);
 
-    // Axes
-    this->xAxis->setVisible(false);
-    this->xAxis->setTicks(false);
-    this->xAxis->setRange(-1, 1);
-    this->yAxis->setVisible(false);
-    this->yAxis->setTicks(false);
-    this->yAxis->setRange(-1, 1);
+    // Draw data
+    void paint(quint32 start, quint32 end, float zoomY);
 
-    // Marges
-    this->axisRect()->setAutoMargins(QCP::msNone);
-    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
+    // Get data around a central point
+    QPointF * getDataAround(quint32 position, quint32 desiredLength, quint32 &pointNumber);
 
-    // Couleur de fond
-    this->setBackground(parent->palette().background().color());
-}
+private:
+    void prepareImage();
+    float getValueX(float pos1, float value1, float pos2, float value2, float posX);
+    static QRgb mergeRgb(QRgb color1, QRgb color2, float x);
 
-void GraphLegend::plot(QCPScatterStyle::ScatterShape style, QColor couleur, int size, int epaisseur, bool antiAliased)
-{
-    this->graph(0)->setScatterStyle(QCPScatterStyle(style, size));
-    this->graph(0)->setAntialiasedScatters(antiAliased);
-    QPen pen;
-    pen.setColor(couleur);
-    pen.setWidth(epaisseur);
-    this->graph(0)->setPen(pen);
+    // Target widget
+    QWidget * _widget;
 
-    this->replot();
-}
+    // Input data
+    quint32 _sampleSize;
+    qint16 * _sampleData;
+
+    // Buffered image and associated parameters
+    QRgb * _pixels;
+    QImage * _image;
+    QPointF * _samplePlotMean;
+    quint32 _start, _end;
+    float _zoomY;
+
+    // Colors
+    QRgb _backgroundColor, _waveColor, _gridColor, _greenColor, _redColor;
+};
+
+#endif // GRAPHICSWAVEPAINTER_H

@@ -124,14 +124,14 @@ void ToolMonitor_gui::saveParameters(AbstractToolParameters * parameters)
 
 void ToolMonitor_gui::on_comboParameter_currentIndexChanged(int index)
 {
-    // Création des données
+    // Create data
     SoundfontManager * sm = SoundfontManager::getInstance();
     QVector<QList<double> > vectListPoints, vectListPointsDef;
     vectListPoints.resize(128);
     vectListPointsDef.resize(128);
     AttributeType champ = static_cast<AttributeType>(ui->comboParameter->itemData(index).toInt());
 
-    // Valeur par défaut
+    // Default value
     EltID id = _initialID;
     if (id.typeElement == elementUnknown)
     {
@@ -164,7 +164,7 @@ void ToolMonitor_gui::on_comboParameter_currentIndexChanged(int index)
             RangesType keyRange = sm->get(id, champ_keyRange).rValue;
             if (sm->isSet(id, champ))
             {
-                // Champ renseigné dans la division
+                // Specified field in division
                 double val = Attribute::toRealValue(champ, !_isInst, sm->get(id, champ));
                 for (int key = keyRange.byLo; key <= keyRange.byHi; key++)
                 {
@@ -174,14 +174,14 @@ void ToolMonitor_gui::on_comboParameter_currentIndexChanged(int index)
             }
             else if (globDefined)
             {
-                // Champ renseigné globalement
+                // Globally specified field
                 for (int key = keyRange.byLo; key <= keyRange.byHi; key++)
                     if (key >= 0 && key < 128)
                         vectListPoints[key] << globVal;
             }
             else
             {
-                // Valeur par défaut du champ
+                // Default value of the field
                 for (int key = keyRange.byLo; key <= keyRange.byHi; key++)
                     if (key >= 0 && key < 128)
                         vectListPointsDef[key] << globVal;
@@ -189,13 +189,13 @@ void ToolMonitor_gui::on_comboParameter_currentIndexChanged(int index)
         }
     }
 
-    // Envoi des données au graphique
+    // Send data to the graphics
     ui->graphVisualizer->setData(vectListPoints, vectListPointsDef);
 }
 
 void ToolMonitor_gui::on_checkLog_stateChanged(int arg1)
 {
-    // Modification de l'échelle
+    // Update scale
     ui->graphVisualizer->setIsLog(arg1);
     ui->graphVisualizer->setScale();
 }

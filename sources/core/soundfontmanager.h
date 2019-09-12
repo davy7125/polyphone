@@ -44,11 +44,11 @@ public:
     ~SoundfontManager();
     QAbstractItemModel * getModel(int indexSf2);
 
-    // Ajout / suppression des données
+    // Add / delete data
     int add(EltID id);
     void remove(EltID id, int *message = nullptr);
 
-    // Accès / modification des propriétés
+    // Get / set properties
     bool isSet(EltID id, AttributeType champ);
     AttributeValue get(EltID id, AttributeType champ);
     QString getQstr(EltID id, AttributeType champ);
@@ -80,7 +80,7 @@ public:
     void getAllAttributes(EltID id, QList<AttributeType> &listeChamps, QList<AttributeValue> &listeValeurs);
     void getAllModulators(EltID id, QList<ModulatorData> &modulators);
 
-    // Détermination de la validité d'un ID (en acceptant ou non les ID masqués, par défaut non)
+    // Find if an ID is valid (allowing or not browing in hidden ID, not allowed by default)
     bool isValid(EltID &id, bool acceptHidden = false, bool justCheckParentLevel = false);
 
     // Availability of banks / presets
@@ -102,7 +102,7 @@ private slots:
 private:
     SoundfontManager();
 
-    /// Affiche l'élément id
+    /// Display the element ID
     int display(EltID id);
 
     /// Delete or hide the element id. Error if the element is used by another

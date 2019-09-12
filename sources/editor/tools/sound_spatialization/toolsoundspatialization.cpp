@@ -42,7 +42,7 @@ void ToolSoundSpatialization::process(SoundfontManager * sm, EltID id, AbstractT
 {
     ToolSoundSpatialization_parameters * params = (ToolSoundSpatialization_parameters *)parameters;
 
-    // Liste des éléments liés avec leur lien (stéréo) le cas échéant
+    // List of linked elements with their corresponding link (stereo) if any
     QList<EltID> list1;
     QList<AttributeValue> listRange;
     QList<EltID> list2;
@@ -65,7 +65,7 @@ void ToolSoundSpatialization::process(SoundfontManager * sm, EltID id, AbstractT
         if (amount.rValue.byLo < noteMin) noteMin = amount.rValue.byLo;
         if (amount.rValue.byHi > noteMax) noteMax = amount.rValue.byHi;
 
-        // Recherche d'une note liée ayant la même étendue sur le clavier
+        // Find the linked key having the same range on the keyboard
         found = false;
         if (_isInst)
         {
@@ -76,7 +76,7 @@ void ToolSoundSpatialization::process(SoundfontManager * sm, EltID id, AbstractT
                         amount.rValue.byLo == listRange.at(pos).rValue.byLo &&
                         list2.at(pos).indexElt2 == -1)
                 {
-                    // Les samples sont-ils liés ?
+                    // Linked samples?
                     EltID idSmpl1 = id;
                     idSmpl1.indexElt = sm->get(id, champ_sampleID).wValue;
                     idSmpl1.typeElement = elementSmpl;
@@ -98,17 +98,19 @@ void ToolSoundSpatialization::process(SoundfontManager * sm, EltID id, AbstractT
         }
         if (found)
         {
-            // Lien
+            // Link
             list2[pos] = id;
         }
         else
         {
-            // Ajout à liste 1
+            // Append list 1
             list1.append(id);
-            // Element nul dans liste 2
+            
+            // Nul element in list 2
             id.indexElt2 = -1;
             list2.append(id);
-            // Etendue
+            
+            // Range
             listRange.append(amount);
         }
     }
@@ -133,7 +135,7 @@ void ToolSoundSpatialization::process(SoundfontManager * sm, EltID id, AbstractT
         }
         else
         {
-            // Quel sample est à gauche ?
+            // Which sample to the left?
             sampleG = 0;
             // Sample correspondant 1
             id2 = list1.at(i);

@@ -42,7 +42,7 @@ void ToolTransposeSmpl::process(SoundfontManager * sm, EltID id, AbstractToolPar
     QByteArray baData = sm->getData(id, champ_sampleDataFull24);
     quint32 echFinal = sm->get(id, champ_dwSampleRate).dwValue;
 
-    // Calcul de l'échantillonnage fictif de départ
+    // Compute the new initial sample rate
     double echInit = (double)echFinal * qPow(2, params->getSemiTones() / 12);
 
     // Resampling

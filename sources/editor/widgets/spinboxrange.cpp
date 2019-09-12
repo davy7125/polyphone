@@ -53,7 +53,7 @@ void SpinBoxRange::stepBy(int steps)
         if (_valMin > _valMax)
             _valMax = _valMin;
 
-        // Sélection à gauche
+        // Select to the left
         selection = -1;
 
         break;
@@ -66,7 +66,7 @@ void SpinBoxRange::stepBy(int steps)
         if (_valMax < _valMin)
             _valMin = _valMax;
 
-        // Sélection à droite
+        // Select to the right
         selection = 1;
 
         break;
@@ -116,7 +116,7 @@ void SpinBoxRange::setText(QString text)
     stringToRange(text, _valMin, _valMax, state);
     formatText();
 
-    // Sélection de la totalité
+    // Select all
     this->lineEdit()->selectAll();
 }
 

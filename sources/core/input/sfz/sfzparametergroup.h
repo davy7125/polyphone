@@ -32,12 +32,12 @@ class SoundfontManager;
 class SfzParameterGroup
 {
 public:
-    // Chargement
+    // Load
     SfzParameterGroup() {}
     void operator << (SfzParameter param) { _listeParam << param; }
     void mergeIfNotDefined(SfzParameterGroup &groupToMerge);
 
-    // Décodage
+    // Decode
     void decode(SoundfontManager * sf2, EltID idElt) const;
     QList<int> getSampleIndex(SoundfontManager * sf2, EltID idElt, QString pathSfz) const;
     void adaptOffsets(int startLoop, int endLoop, int length);

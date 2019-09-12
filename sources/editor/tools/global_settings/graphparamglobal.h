@@ -102,7 +102,6 @@ private:
     int previousX;
     double previousY;
 
-    // Méthodes privées
     void mousePressed(QPoint pos);
     void mouseRightPressed(QPoint pos);
     void mouseReleased(QPoint pos);

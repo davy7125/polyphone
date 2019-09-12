@@ -54,7 +54,7 @@ public:
     // -1 will remove the image
     void setLoopModeImage(int row, int column, int loopModeValue);
 
-    // Association champ - ligne (méthodes virtuelles pures)
+    // Association champ - ligne
     virtual AttributeType getChamp(int row) = 0;
     virtual int getRow(quint16 champ) = 0;
 

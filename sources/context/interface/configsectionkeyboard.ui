@@ -72,12 +72,12 @@
      </column>
      <column>
       <property name="text">
-       <string notr="true">Ré</string>
+       <string notr="true">Re</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string notr="true">Ré#</string>
+       <string notr="true">Re#</string>
       </property>
      </column>
      <column>

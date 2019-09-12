@@ -96,7 +96,7 @@ public:
         op_vibLFOfreq,
         op_vibLFOtoTon,
 
-        // Enveloppe filtre (si équivalent à enveloppe pitch, ou si enveloppe pitch non utilisé)
+        // Envelope filter (if equivalent to envelope pitch, or if envelope pitch not used)
         op_fileg_delay,
         op_fileg_attack,
         op_fileg_hold,
@@ -107,7 +107,7 @@ public:
         op_fileg_holdcc133,
         op_fileg_decaycc133,
 
-        // LFO filtre (si équivalent à LFO volume ou si LFO volume non utilisé)
+        // LFO filter (if equivalent to the LFO volume or if LFO volume not used)
         op_filLFOdelay,
         op_filLFOfreq,
         op_modLFOtoFilter

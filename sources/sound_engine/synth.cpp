@@ -43,7 +43,7 @@ Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _bufferSize(0),
     _configuration(configuration)
 {
-    // Création des buffers et sound engines
+    // Creation buffers and sound engines
     updateConfiguration();
 }
 
@@ -54,15 +54,15 @@ Synth::~Synth()
 
 void Synth::destroySoundEnginesAndBuffers()
 {
-    // Arrêt des soundEngines
+    // Stop sound engines
     for (int i = 0; i < _soundEngines.size(); i++)
         _soundEngines.at(i)->stop();
 
-    // Arrêt des threads
+    // Stop threads
     for (int i = 0; i < _soundEngines.size(); i++)
         _soundEngines.at(i)->thread()->quit();
 
-    // Suppression des sound engines et des threads
+    // Delete sound engines and threads
     while (_soundEngines.size())
     {
         QThread * thread = _soundEngines.last()->thread();
@@ -297,7 +297,7 @@ void Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSm
 
 void Synth::stop()
 {
-    // Arrêt demandé de toutes les voix
+    // Stop required for all voices
     SoundEngine::stopAllVoices();
 }
 
@@ -369,19 +369,19 @@ void Synth::setSinus(bool isOn, int rootKey)
 
 void Synth::setStartLoop(quint32 startLoop, bool repercute)
 {
-    // mise à jour voix -1 et -2 si répercussion
+    // Update voices -1 and -2 if repercussion
     SoundEngine::setStartLoop(startLoop, repercute);
 }
 
 void Synth::setEndLoop(quint32 endLoop, bool repercute)
 {
-    // mise à jour voix -1 et -2 si répercussion
+    // Update voices -1 and -2  if repercussion
     SoundEngine::setEndLoop(endLoop, repercute);
 }
 
 void Synth::setPitchCorrection(qint16 correction, bool repercute)
 {
-    // mise à jour voix -1 et -2 si répercussion
+    // Update voices -1 and -2  if repercussion
     SoundEngine::setPitchCorrection(correction, repercute);
 }
 
@@ -400,13 +400,13 @@ void Synth::setSmplEqValues(QVector<int> values)
 
 void Synth::setFormat(AudioFormat format)
 {
-    // Mutex inutile : pas de génération de données lors de l'appel à setFormat
+    // Mutex not mandatory: no data generation when "setFormat" is called
     _format = format;
 
-    // Réinitialisation
+    // Reset
     this->stop();
 
-    // Mise à jour échantillonnage
+    // Sample rate update
     _sinus.setSampleRate(format.sampleRate());
     _eq.setSampleRate(format.sampleRate());
     this->sampleRateChanged(format.sampleRate());
@@ -420,13 +420,13 @@ void Synth::startNewRecord(QString fileName)
     _recordFile = new QFile(fileName);
     if (_recordFile->open(QIODevice::WriteOnly))
     {
-        // Création de l'entête
+        // Create header
         quint32 dwTemp = 0;
         quint16 wTemp;
         _recordStream.setDevice(_recordFile);
         _recordStream.setByteOrder(QDataStream::LittleEndian);
         _recordLength = 0;
-        // Entete
+        // header
         _recordStream.writeRawData("RIFF", 4);
         _recordStream << static_cast<quint32>(_recordLength + 18 + 4 + 8 + 8);
         _recordStream.writeRawData("WAVE", 4);
@@ -473,13 +473,13 @@ void Synth::endRecord()
     _mutexRecord.lock();
     if (_recordFile)
     {
-        // Ajustement des dimensions du fichier
+        // Adjust file dimensions
         _recordFile->seek(4);
         _recordStream << static_cast<quint32>(_recordLength + 18 + 4 + 8 + 8);
         _recordFile->seek(42);
         _recordStream << _recordLength;
 
-        // Fermeture
+        // Close file
         _recordStream.setDevice(nullptr);
         _recordFile->close();
         delete _recordFile;
@@ -502,7 +502,7 @@ void Synth::readData(float *data1, float *data2, quint32 maxlen)
     for (quint32 i = 0; i < maxlen; i++)
         data1[i] = data2[i] = _fTmpSumRev1[i] = _fTmpSumRev2[i] = 0;
 
-    // Fusion des sound engines
+    // Merge sound engines
     _mutexSynchro.lock();
     for (int i = 0; i < _soundEngines.size(); i++)
         _soundEngines.at(i)->addData(data1, data2, _fTmpSumRev1, _fTmpSumRev2, maxlen);
@@ -511,7 +511,7 @@ void Synth::readData(float *data1, float *data2, quint32 maxlen)
     // EQ filter (live preview of filtered samples)
     _eq.filterData(data1, data2, maxlen);
 
-    // Application réverbération et addition
+    // Apply reverb and add data
     _mutexReverb.lock();
     for (quint32 i = 0; i < maxlen; i++)
     {
@@ -521,7 +521,7 @@ void Synth::readData(float *data1, float *data2, quint32 maxlen)
     }
     _mutexReverb.unlock();
 
-    // Ajout sinus de calibration
+    // Add calibrating sinus
     _sinus.addData(data1, data2, maxlen);
 
     // Clipping
@@ -531,7 +531,7 @@ void Synth::readData(float *data1, float *data2, quint32 maxlen)
     _mutexRecord.lock();
     if (_recordFile && _isRecording)
     {
-        // Entrelacement et écriture
+        // Interleave and write
         for (quint32 i = 0; i < maxlen; i++)
         {
             _dataWav[2 * i + 1] = data1[i];

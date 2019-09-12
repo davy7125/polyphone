@@ -218,7 +218,7 @@ void ToolSoundSpatialization_gui::updateGraph()
 
 void ToolSoundSpatialization_gui::computeData(QVector<double> &x, QVector<int> &y)
 {
-    // Calcul du numéro de note en fonction du positionnement dans l'espace
+    // Compute the key number according to its location in space
     int nbNotes = _maxKey - _minKey + 1;
     x.resize(nbNotes);
     y.resize(nbNotes);
@@ -250,7 +250,7 @@ void ToolSoundSpatialization_gui::computeData(QVector<double> &x, QVector<int> &
                               motif == 2);
         break;
     case 4:{
-        // Mélange des notes
+        // Mix keys
         uint seed = 0;
         QList<int> listTmp;
         for (int i = 0; i < nbNotes; i++)
@@ -274,14 +274,14 @@ void ToolSoundSpatialization_gui::computeData(QVector<double> &x, QVector<int> &
 
 double ToolSoundSpatialization_gui::spaceLinear(int note, int nbDiv, int etalement, int occupation, int offset, int sens, bool isAscending)
 {
-    // Ajustement note
+    // Adjust key
     int noteRelative = isAscending ? note - _minKey : _maxKey - note;
 
-    // Détermination de l'axe autour duquel se trouve la note
+    // Find the axis around which will be the key
     double posAxe = getAxe(noteRelative, nbDiv, sens);
 
-    // Calcul de l'écart à l'axe
-    double e = 1. / (_maxKey - _minKey + nbDiv - 1); // écart unitaire
+    // Compute the gap to the axis
+    double e = 1. / (_maxKey - _minKey + nbDiv - 1); // unit gap
     double ne_axe = (((double)(_maxKey - _minKey) / 2) - noteRelative) / nbDiv;
     double ecart_axe = e * ne_axe;
 
@@ -289,18 +289,18 @@ double ToolSoundSpatialization_gui::spaceLinear(int note, int nbDiv, int etaleme
     double mult = (double)(nbDiv) / (nbDiv - 1 + (double)occupation / 100); // dilatation future
     ecart_axe *= (double)occupation / 100;
 
-    // Synthèse
+    // Synthesis
     return (double)etalement / 100        * ((double)mult * (posAxe + ecart_axe - 0.5) + 0.5) +
            (1. - (double)etalement / 100) * (double)offset / 100;
 }
 
 double ToolSoundSpatialization_gui::spaceCurve(int note, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2, bool isHollow)
 {
-    // Ajustement note
+    // Adjust key
     int noteRelative = 0;
     if (isHollow)
     {
-        // Calcul décalage
+        // Compute shift
         int resteNotes = (_maxKey - _minKey + 1) % (2 * nbDiv);
         int decalage = 0;
         if (resteNotes < nbDiv)
@@ -312,15 +312,15 @@ double ToolSoundSpatialization_gui::spaceCurve(int note, int nbDiv, int etalemen
     else
         noteRelative = note - _minKey;
 
-    // Détermination de l'axe autour duquel se trouve la note
+    // Find the axis around which will be the key
     double posAxe = getAxe(noteRelative, nbDiv, sens);
 
-    // Calcul de l'écart à l'axe
-    double e = 1.0 / (ceil((double)(_maxKey - _minKey + 1 - nbDiv) / (2 * nbDiv)) * (2 * nbDiv) + nbDiv); // écart unitaire
+    // Compute the gap to the axis
+    double e = 1.0 / (ceil((double)(_maxKey - _minKey + 1 - nbDiv) / (2 * nbDiv)) * (2 * nbDiv) + nbDiv); // unit gap
     int ne_axe = (noteRelative + nbDiv) / (2 * nbDiv);
     double ecart_axe = e * ne_axe;
 
-    // Prise en compte de l'occupation
+    // Take into account the occupation
     double mult = 1; // dilation future
     if (isHollow)
         ecart_axe = (double)(ecart_axe * occupation + (double)(100 - occupation) / (2*nbDiv)) / 100;
@@ -330,13 +330,13 @@ double ToolSoundSpatialization_gui::spaceCurve(int note, int nbDiv, int etalemen
         mult = (double)(nbDiv) / (nbDiv - 1 + (double)occupation / 100);
     }
 
-    // Côté de l'axe
+    // Side of the axis
     int cote = noteRelative % (2 * nbDiv);
     if (cote >= nbDiv)
         ecart_axe = -ecart_axe;
     if (sens2 != 0) ecart_axe = -ecart_axe;
 
-    // Synthèse
+    // Synthesis
     return (double)etalement / 100        * ((double)mult * (posAxe + ecart_axe - 0.5) + 0.5) +
            (1. - (double)etalement / 100) * (double)offset / 100;
 }

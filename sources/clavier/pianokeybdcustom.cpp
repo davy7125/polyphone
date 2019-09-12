@@ -78,16 +78,16 @@ PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent)
 
 void PianoKeybdCustom::addRangeAndRootKey(int rootKey, int noteMin, int noteMax)
 {
-    // Mémorisation de l'étendue
+    // Save the range
     for (int i = noteMin; i <= noteMax; i++)
         if (!_currentRange.contains(i))
             _currentRange << i;
 
-    // Mémorisation de la note de base
+    // Save rootkey
     if (!_rootKeys.contains(rootKey) && rootKey != -1)
         _rootKeys << rootKey;
 
-    // Mise à jour du clavier
+    // Update keyboard
     updateRanges();
 }
 
@@ -124,13 +124,13 @@ void PianoKeybdCustom::addCurrentRange(int note, int noteMin, int noteMax)
 
 void PianoKeybdCustom::updateRanges()
 {
-    // Réinitialisation des décorations
+    // Reset decorations
     PianoKeybd::clearCustomization();
 
-    // Liste des notes appuyées
+    // List of triggered keys
     QList<int> notePressed = _mapPressed.keys();
 
-    // Etendues des rangées
+    // Extent of all ranges
     QList<int> noteRanges;
     foreach (QList<int> values, _mapPressed.values())
     {
@@ -139,21 +139,21 @@ void PianoKeybdCustom::updateRanges()
                 noteRanges << key;
     }
 
-    // Etendue de la section courante
+    // Current division range
     QList<int> noteCurrentRange = _currentRange;
 
-    // Les notes appuyées ne doivent pas être modifiées
+    // Triggered keys must not be updated
     foreach (int key, notePressed)
     {
         noteRanges.removeAll(key);
         noteCurrentRange.removeAll(key);
     }
 
-    // Priorité sur les étendues des rangées plutôt que la section courante
+    // Priority on the extent of the divisions rather than on the current division
     foreach (int key, noteRanges)
         noteCurrentRange.removeAll(key);
 
-    // Dessin de l'étendue courante
+    // Draw the current division
     foreach (int key, noteCurrentRange)
     {
         int note = key % 12;
@@ -163,12 +163,12 @@ void PianoKeybdCustom::updateRanges()
             customize(key, CUSTOMIZATION_TYPE_COLOR, COLOR_WHITE_ENABLED);
     }
 
-    // Dessin des notes de base
+    // Draw rootkeys
     customize(60, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_BLACK);
     foreach (int rootKey, _rootKeys)
         customize(rootKey, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_RED);
 
-    // Dessin des étendues
+    // Draws divisions
     foreach (int key, noteRanges)
     {
         int note = key % 12;

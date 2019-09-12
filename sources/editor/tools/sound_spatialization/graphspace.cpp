@@ -29,7 +29,7 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
 {
     this->setBackground(this->palette().color(QPalette::Base));
 
-    // Couche déco
+    // Decoration layer
     this->addGraph();
     QPen graphPen;
     graphPen.setWidthF(1);
@@ -41,9 +41,9 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     QVector<double> x, y;
     x << 0.5 << 0.5;
     y << -10 << 10;
-    graph(0)->setData(x, y);
+    graph(0)->setData(x, y, true);
 
-    // Couche données
+    // Data layer
     this->addGraph();
     graphPen.setColor(this->palette().color(QPalette::Highlight));
     graphPen.setWidthF(2);
@@ -52,7 +52,7 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     this->graph(1)->setLineStyle(QCPGraph::lsImpulse);
     this->graph(1)->setAntialiased(true);
 
-    // Axes
+    // Axis
     this->xAxis->setRange(-0.01, 1.01);
     this->yAxis->setRange(0, 1.05);
     this->xAxis->setVisible(false);
@@ -60,11 +60,11 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     this->yAxis->setVisible(false);
     this->yAxis->setTicks(false);
 
-    // Marges
+    // Margins
     this->axisRect()->setAutoMargins(QCP::msNone);
     this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
 
-    // Ajout G / D
+    // Add L / R
     QCPItemText * text = new QCPItemText(this);
     text->position->setType(QCPItemPosition::ptAxisRectRatio);
     text->position->setCoords(0, 0);
@@ -84,7 +84,7 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     text->setColor(color);
     text->setText(trUtf8("R", "first letter of Right in your language"));
 
-    // Layer aperçu valeurs
+    // Overview values
     this->addGraph();
     color.setAlpha(255);
     graphPen.setColor(color);
@@ -100,7 +100,7 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     labelCoord->setFont(fontLabel);
     labelCoord->setColor(color);
 
-    // Filtre sur les événements
+    // Filter events
     this->installEventFilter(this);
 }
 
@@ -109,29 +109,29 @@ void GraphSpace::setData(QVector<double> x, QVector<int> y)
     _xPan = x;
     _yKey = y;
 
-    // Longueur max tuyau
+    // Max pipe length
     _yLength.resize(_yKey.size());
     double freq = qPow(2., (_yKey.first() + 36.3763) / 12);
-    double l = 172 / freq; // en mètres pour un tuyau ouvert
+    double l = 172 / freq; // in meters for an open pipe
     for (int i = 0; i < _yKey.size(); i++)
     {
-        // Longueur tuyau
+        // Pipe length
         freq = qPow(2., (_yKey.at(i) + 36.3763) / 12);
         _yLength[i] = 172 / freq / l;
     }
 
-    // Affichage de la courbe
-    this->graph(1)->setData(_xPan, _yLength);
+    // Display curve
+    this->graph(1)->setData(_xPan, _yLength, true);
     this->replot();
 }
 
 void GraphSpace::mouseMoved(QPoint pos)
 {
-    // Conversion des coordonnées
+    // Convert coordinates
     double x = xAxis->pixelToCoord(pos.x());
     double y = yAxis->pixelToCoord(pos.y());
 
-    // Point le plus proche
+    // Closest point
     double distanceMin = -1;
     int posX = -1;
     for (int i = 0; i < _xPan.size(); i++)
@@ -159,13 +159,13 @@ void GraphSpace::afficheCoord(double xPan, double yLength, int key)
     QVector<double> xVector, yVector;
     if (key != -1)
     {
-        // Coordonnées du point
+        // Point coordinates
         xVector.resize(1);
         yVector.resize(1);
         xVector[0] = xPan;
         yVector[0] = yLength;
 
-        // Affichage texte
+        // Display text
         if (yLength >= 0.5)
             labelCoord->setPositionAlignment(Qt::AlignTop    | Qt::AlignHCenter);
         else
@@ -173,7 +173,7 @@ void GraphSpace::afficheCoord(double xPan, double yLength, int key)
         labelCoord->setText(ContextManager::keyName()->getKeyName(key) + ":" +
                             QString::number(xPan * 100 - 50, 'f', 1));
 
-        // Ajustement position
+        // Adjust position
         QFontMetrics fm(labelCoord->font());
         double distX = xAxis->pixelToCoord(fm.width(labelCoord->text()) / 2 + 2);
         if (xPan < distX)
@@ -193,6 +193,6 @@ void GraphSpace::afficheCoord(double xPan, double yLength, int key)
         yVector.resize(0);
         labelCoord->setText("");
     }
-    this->graph(2)->setData(xVector, yVector);
+    this->graph(2)->setData(xVector, yVector, true);
     this->replot();
 }

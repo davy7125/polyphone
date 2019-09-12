@@ -109,7 +109,7 @@ void Equalizer::on_pushEgaliser_clicked()
                                ui->verticalSlider_10->value());
             sm->set(id, champ_sampleDataFull24, baData);
 
-            // Sample associé ?
+            // Associated sample?
             EltID id2 = PageSmpl::getRepercussionID(id);
             if (id2.indexElt != -1)
             {

@@ -30,7 +30,7 @@
 typedef enum
 {
     champ_unknown = -1,
-    champ_startAddrsOffset = 0,         // Début champs des générateurs
+    champ_startAddrsOffset = 0,         // Start of generator fields
     champ_endAddrsOffset = 1,
     champ_startloopAddrsOffset = 2,
     champ_endloopAddrsOffset = 3,
@@ -91,9 +91,9 @@ typedef enum
     champ_overridingRootKey = 58,
     champ_unused5 = 59,
     champ_endOper = 60,
-    champ_IFIL = 128,                   // Début champs SF2, valeur
+    champ_IFIL = 128,                   // Start of SF2 fields
     champ_IVER = 129,
-    champ_bpsFile = 130,                // Début champs samples
+    champ_bpsFile = 130,                // Start of sample fields
     champ_dwStart16 = 131,
     champ_dwStart24 = 132,
     champ_dwLength = 133,
@@ -104,12 +104,12 @@ typedef enum
     champ_chPitchCorrection = 138,
     champ_wSampleLink = 139,
     champ_sfSampleType = 140,
-    champ_wPreset = 141,                // Début champs preset
+    champ_wPreset = 141,                // Start of preset fields
     champ_wBank = 142,
     champ_dwLibrary = 143,
     champ_dwGenre = 144,
     champ_dwMorphology = 145,
-    champ_sfModSrcOper = 146,           // Début champs mod
+    champ_sfModSrcOper = 146,           // Start of modulator fields
     champ_sfModDestOper = 147,
     champ_modAmount = 148,
     champ_sfModAmtSrcOper = 149,
@@ -119,7 +119,7 @@ typedef enum
     champ_son = 156,
     champ_wBpsInit = 157,
     champ_wBpsSave = 158,
-    champ_wChannel = 159,   // canal utilisé
+    champ_wChannel = 159,   // current chanel
     champ_wChannels = 160,  // nb canaux total
 
     champ_filenameInitial = 163,   // QString (sf2)

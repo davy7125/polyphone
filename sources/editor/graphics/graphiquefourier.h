@@ -57,8 +57,8 @@ private:
     quint32 dwSmplRate;
     QString _name;
     QCPItemText * text1; // estimation
-    QCPItemText * text2; // intensité
-    QCPItemText * text3; // fréquence
+    QCPItemText * text2; // intensity
+    QCPItemText * text3; // frequence
     QCPItemText * text4; // note
     QCPItemText * text5; // correction
     QSharedPointer<QCPAxisTickerFixed> _fixedTickerX;

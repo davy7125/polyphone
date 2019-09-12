@@ -156,7 +156,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         val1 = dataTmp[static_cast<quint32>(floor(pos))];
         val2 = dataTmp[static_cast<quint32>(ceil(pos))];
         pos -= floor(pos);
-        dataL[i] = static_cast<float>(((1. - pos) * val1 + pos * val2) / 2147483648LL); // Passage en double de -1 à 1
+        dataL[i] = static_cast<float>(((1. - pos) * val1 + pos * val2) / 2147483648LL); // Cast to double from -1 to 1
     }
     delete [] dataTmp;
 
@@ -220,7 +220,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 
     //// APPLY PAN AND CHORUS ////
 
-    double pan = (v_pan + 50) * M_PI / 200.; // Between 0 and π/2
+    double pan = (v_pan + 50) * M_PI / 200.; // Between 0 and PI/2
     double coef1 = sin(pan);
     double coef2 = cos(pan);
     _chorus.setEffectMix(0.005 * _chorusLevel * 0.01 * v_chorusEffect);

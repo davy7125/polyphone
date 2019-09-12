@@ -251,8 +251,8 @@ void ModulatorEditor::checkOverrides()
         defaultMods[i].loadDefaultModulator(i);
 
     // Browse all cells
-    QList<ModulatorCell*> _cells;
-    QList<ModulatorData> _mods;
+    QList<ModulatorCell*> cells;
+    QList<ModulatorData> mods;
     for (int i = 0; i < ui->listWidget->count(); i++)
     {
         // Get the mod
@@ -261,27 +261,30 @@ void ModulatorEditor::checkOverrides()
         ModulatorData mod = cell->getModulatorData();
 
         // Test if previous mods are overridden
-        for (int j = _mods.count() - 1; j >= 0; j--)
+        for (int j = mods.count() - 1; j >= 0; j--)
         {
-            if (_mods[j] == mod)
+            if (mods[j] == mod)
             {
-                _cells[j]->setOverwrittenBy(i);
+                cells[j]->setOverwrittenBy(i);
                 break;
             }
         }
 
-        // Test if the mod is overriding a default mod
-        for (int j = 0; j < 10; j++)
+        // Test if the mod is overriding a default mod (instrument level only)
+        if (!_currentId.isPrst())
         {
-            if (mod == defaultMods[j])
+            for (int j = 0; j < 10; j++)
             {
-                cell->setOverridingDefault();
-                break;
+                if (mod == defaultMods[j])
+                {
+                    cell->setOverridingDefault();
+                    break;
+                }
             }
         }
 
-        _mods << mod;
-        _cells << cell;
+        mods << mod;
+        cells << cell;
     }
 }
 

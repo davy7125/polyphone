@@ -128,29 +128,27 @@ private:
 
     CalibrationSinus _sinus;
     LiveEQ _eq;
-
-    // Pointeur vers les données
     SoundfontManager * _sf2;
 
     // Liste des sound engines, voix temporaires (pour exclusive class)
     QList<SoundEngine *> _soundEngines;
     QList<Voice *> _listVoixTmp;
 
-    // Format audio
+    // Audio format
     AudioFormat _format;
 
-    // Paramètre global
+    // Global parameter
     double _gain;
 
-    // Effets
+    // Effects
     int _choLevel, _choDepth, _choFrequency;
     stk::FreeVerb _reverb;
     QMutex _mutexReverb, _mutexSynchro;
 
-    // Etat clipping
+    // Clipping state
     float _clipCoef;
 
-    // Gestion de l'enregistrement
+    // Record management
     QFile * _recordFile;
     QDataStream _recordStream;
     bool _isRecording;

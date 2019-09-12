@@ -67,7 +67,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
         textLabel->setFont(QFont(font().family(), 8));
         textLabel->setColor(color);
     }
-    this->graph(0)->setData(x, y);
+    this->graph(0)->setData(x, y, true);
 
     // Layers coloration zone sur laquelle s'étend le clavier
     this->addGraph();
@@ -78,7 +78,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     y[0] = y[1] = -2;
     graphPen.setWidth(0);
     this->graph(1)->setPen(graphPen);
-    this->graph(1)->setData(x, y);
+    this->graph(1)->setData(x, y, true);
     color = this->palette().color(QPalette::Highlight);
     color.setAlpha(60);
     this->graph(1)->setBrush(QBrush(color));
@@ -148,13 +148,13 @@ void GraphParamGlobal::setKeyboardRange(int keyboardType)
     {
         // Clavier 5 octaves
         x[1] = 96. * this->nbPoints / 127.;
-        this->graph(2)->setData(x, y);
+        this->graph(2)->setData(x, y, true);
     }
     else if (keyboardType == 2)
     {
         // Clavier 6 octaves
         x[1] = 108. * this->nbPoints / 127.;
-        this->graph(2)->setData(x, y);
+        this->graph(2)->setData(x, y, true);
     }
     this->replot();
 }
@@ -419,7 +419,7 @@ void GraphParamGlobal::replot()
     QVector<double> x(this->nbPoints);
     for (int i = 0; i < this->nbPoints; i++)
         x[i] = i;
-    this->graph(3)->setData(x, this->dValues);
+    this->graph(3)->setData(x, this->dValues, true);
     // Affichage
     QCustomPlot::replot();
 }
@@ -461,6 +461,6 @@ void GraphParamGlobal::afficheCoord(double x, double y)
         yVector.resize(0);
         labelCoord->setText("");
     }
-    this->graph(4)->setData(xVector, yVector);
+    this->graph(4)->setData(xVector, yVector, true);
     this->replot();
 }

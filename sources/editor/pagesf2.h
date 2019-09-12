@@ -34,7 +34,7 @@ namespace Ui {
 class PageSf2;
 }
 
-// Création d'un signal editingFinished() pour qTextEdit
+// Add the signal editingFinished() for qTextEdit
 class TextEdit : public QTextEdit
 {
     Q_OBJECT

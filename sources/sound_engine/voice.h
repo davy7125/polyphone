@@ -58,7 +58,7 @@ public:
     int getPresetNumber();
     float getReverb();
 
-    // Modification des propriétés de voiceParam
+    // Update voiceParam properties
     void setPan(double val);
     void setLoopMode(quint16 val);
     void setLoopStart(quint32 val);
@@ -72,20 +72,20 @@ signals:
     void currentPosChanged(quint32 pos);
 
 private:
-    // Oscillateurs, enveloppes et chorus
+    // Oscillators, envelopes and chorus
     OscSinus _modLFO, _vibLFO;
     EnveloppeVol _enveloppeVol, _enveloppeMod;
     stk::Chorus _chorus;
     int _chorusLevel;
 
-    // Données son et paramètres
+    // Sound data and parameters
     QByteArray _baData;
     quint32 _smplRate, _audioSmplRate;
     double _gain;
     int _initialKey; // Only used to know which key triggered the sound, not for computing data
     VoiceParam * _voiceParam;
 
-    // Lecture du sample
+    // Sample playback
     quint32 _currentSmplPos;
     double _time;
     bool _release;

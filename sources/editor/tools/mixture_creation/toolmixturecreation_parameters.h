@@ -48,10 +48,10 @@ public:
 
     double getOffset()
     {
-        // Calcul du multiple de la fréquence fondamentale
+        // Compute multiple of the fundamental frequency
         double multiple = (double)(2 * _overtoneType + 1) * pow(2.0f, _octave - 3);
 
-        // Renvoi du nombre de demi-tons à ajouter à la fondamentale pour obtenir l'harmonique
+        // Return the number of semi-tones to add to the fundamental for having the harmonic
         return 12. * qLn(multiple) / 0.69314718056;
     }
     

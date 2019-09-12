@@ -25,7 +25,6 @@
 #include "pagesmpl.h"
 #include "ui_pagesmpl.h"
 #include "sound.h"
-#include "graphique.h"
 #include "graphiquefourier.h"
 #include "sampleutils.h"
 #include "contextmanager.h"
@@ -60,14 +59,14 @@ PageSmpl::PageSmpl(QWidget *parent) :
                                      ";border: 1px solid " + this->palette().dark().color().name() + ";border-radius: 3px;}");
 
     // Initialisation du graphique
-    ui->graphe->linkSliderX(ui->sliderGraphe);
-    ui->graphe->linkSpinBoxes(ui->spinStartLoop, ui->spinEndLoop);
+    ui->waveDisplay->linkSliderX(ui->sliderGraphe);
+    ui->waveDisplay->linkSpinBoxes(ui->spinStartLoop, ui->spinEndLoop);
 
     // Connections
-    ui->graphe->connect(_synth, SIGNAL(currentPosChanged(quint32)), SLOT(setCurrentSample(quint32)));
+    ui->waveDisplay->connect(_synth, SIGNAL(currentPosChanged(quint32)), SLOT(setCurrentSample(quint32)));
     this->connect(_synth, SIGNAL(readFinished()), SLOT(lecteurFinished()));
     connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
-    connect(ui->graphe, SIGNAL(cutOrdered(int,int)), this, SLOT(onCutOrdered(int,int)));
+    connect(ui->waveDisplay, SIGNAL(cutOrdered(int,int)), this, SLOT(onCutOrdered(int,int)));
 
     // Couleur de fond du graphe Fourier
     ui->grapheFourier->setBackgroundColor(this->palette().background().color());
@@ -173,22 +172,21 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     ui->spinTune->setValue(correction);
 
     // Graphiques
-    ui->graphe->clearAll();
     ui->grapheFourier->setSampleName(_sf2->getQstr(id, champ_name));
     if (nombreElements > 1)
     {
-        ui->graphe->displayMultipleSelection(true);
+        ui->waveDisplay->displayMultipleSelection(true);
         ui->grapheFourier->setData(QByteArray(), 0);
         ui->grapheFourier->setPos(0, 0);
     }
     else
     {
-        ui->graphe->displayMultipleSelection(false);
+        ui->waveDisplay->displayMultipleSelection(false);
         QByteArray baData = _sf2->getData(id, champ_sampleData16);
-        ui->graphe->setData(baData, sampleRate); // prend du temps
-        ui->graphe->setStartLoop(startLoop, false);
-        ui->graphe->setEndLoop(endLoop, false);
-        ui->graphe->zoomDrag();
+        ui->waveDisplay->setData(baData, sampleRate); // prend du temps
+        ui->waveDisplay->setStartLoop(startLoop, false);
+        ui->waveDisplay->setEndLoop(endLoop, false);
+        ui->waveDisplay->repaint();
 
         // Remplissage du graphe fourier
         ui->grapheFourier->setData(baData, sampleRate);
@@ -890,7 +888,7 @@ void PageSmpl::lecteurFinished()
         preventStop--;
         return;
     }
-    ui->graphe->setCurrentSample(0);
+    ui->waveDisplay->setCurrentSample(0);
 
     // Réinitialisation des boutons
     ui->comboLink->setEnabled(true);

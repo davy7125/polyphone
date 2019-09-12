@@ -73,7 +73,7 @@ void ToolTranspose::process(SoundfontManager * sm, EltID id, AbstractToolParamet
                 int noteInf = sm->get(divId, champ_keyRange).rValue.byLo;
                 int noteSup = sm->get(divId, champ_keyRange).rValue.byHi;
 
-                // Déplacement de l'étendue
+                // Move the range
                 noteInf -= semiTones;
                 noteSup -= semiTones;
 
@@ -87,7 +87,7 @@ void ToolTranspose::process(SoundfontManager * sm, EltID id, AbstractToolParamet
                 else if (noteSup > 127)
                     noteSup = 127;
 
-                // Enregistrement de la nouvelle étendue
+                // Save the new range
                 valeur.rValue.byLo = noteInf;
                 valeur.rValue.byHi = noteSup;
                 sm->set(divId, champ_keyRange, valeur);

@@ -394,7 +394,7 @@ void GraphicsViewEnvelop::setSample(QVector<double> data, int sampleRate, int lo
         }
     }
 
-    this->graph(1)->setData(dataX, dataY);
+    this->graph(1)->setData(dataX, dataY, true);
 }
 
 void GraphicsViewEnvelop::setEnvelopStyle(int index, bool isGlobal, bool isVolume, bool isMain)

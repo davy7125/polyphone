@@ -22,30 +22,31 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef GRAPHIQUE_H
-#define GRAPHIQUE_H
+#ifndef GRAPHICSWAVE_H
+#define GRAPHICSWAVE_H
 
-#include "qcustomplot.h"
+#include <QWidget>
+#include <QDateTime>
 class QScrollBar;
 class QSpinBox;
+class GraphicsWavePainter;
 
-
-class Graphique : public QCustomPlot
+class GraphicsWave : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Graphique(QWidget *parent = nullptr);
-    void clearAll();
-    void setData(QByteArray baData, int sampleRate);
-    void linkSliderX(QScrollBar * _qScrollX);
-    void linkSpinBoxes(QSpinBox * _spinStart, QSpinBox * _spinEnd);
-    void zoomDrag();
+    explicit GraphicsWave(QWidget *parent = nullptr);
+    ~GraphicsWave() override;
+
+    void setData(QByteArray baData, quint32 sampleRate);
+    void linkSliderX(QScrollBar * qScrollX);
+    void linkSpinBoxes(QSpinBox * spinStart, QSpinBox * spinEnd);
     void displayMultipleSelection(bool isOn);
 
 public slots:
-    void setPosX(int _posX);
-    void setStartLoop(int pos, bool replot = true);
-    void setEndLoop(int pos, bool replot = true);
+    void setPosX(int posX);
+    void setStartLoop(int pos, bool repaint = true);
+    void setEndLoop(int pos, bool repaint = true);
     void setCurrentSample(quint32 pos);
 
 signals:
@@ -54,43 +55,48 @@ signals:
     void cutOrdered(int start, int end);
 
 protected:
-    void paintEvent(QPaintEvent *event);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
-    void wheelEvent(QWheelEvent *event);
+    void paintEvent(QPaintEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
 
 private:
-    QPen _penLecture;
-    double _sizeX;
+    int getSamplePosX(double zoomX, double shiftX, double x);
+    void zoom(QPoint point);
+    void drag(QPoint point);
+
+    GraphicsWavePainter * _wavePainter;
+
+    // Zoom & position
+    double _x, _y, _zoomX, _zoomY, _posX;
+    double _xInit, _yInit, _zoomXinit, _zoomYinit, _posXinit;
     bool _zoomFlag;
     bool _dragFlag;
     bool _cutFlag;
     bool _modifiedFlag;
-    double _xInit, _yInit;
-    double _zoomX, _zoomY, _posX, _posY;
-    double _zoomXinit, _zoomYinit, _posXinit, _posYinit;
-    bool _bFromExt;
+    double _sizeX;
+
+    // Input data properties
+    quint32 _sampleSize;
+    quint32 _sampleRate;
+
+    // Loop, playback position
+    quint32 _startLoop, _endLoop, _currentPosition;
+    QDateTime _lastPositionUpdate;
+
+    bool _multipleSelection;
     QScrollBar * _qScrollX;
     QSpinBox * _spinStart;
     QSpinBox * _spinEnd;
-    int _currentPos;
-    bool _filterEventEnabled;
-    QCPItemText * _textMultipleSelection;
-    QCPItemText * _textPositionL;
-    QCPItemText * _textPositionR;
-    QCPItemRect * _cutArea;
-    QTime _lastUpdate;
-    int _sampleRate;
+    bool _bFromExt;
 
-    void updateStyle();
-    void zoom(QPoint point);
-    void drag(QPoint point);
-    void setZoomLine(double x1, double y1, double x2, double y2);
-    void plotOverlay();
-    void displayCurrentRange();
-    int getSamplePosX(double zoomX, double shiftX, double x);
-    void cut(int start, int end);
+    // Style
+    QColor _redColor, _greenColor, _backgroundColor, _textColor;
+    QFont _textFont;
+
+    static const int TEXT_MARGIN;
+    static const int OVERLAY_SIZE;
 };
 
-#endif // GRAPHIQUE_H
+#endif // GRAPHICSWAVE_H

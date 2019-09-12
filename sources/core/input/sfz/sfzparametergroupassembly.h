@@ -60,7 +60,7 @@ public:
     void adjustVolume(double offset);
     QString getLabel() { return _label; }
 
-    // Décodage
+    // Decode
     void decode(SoundfontManager * sf2, EltID idInst, QString pathSfz);
 
 private:

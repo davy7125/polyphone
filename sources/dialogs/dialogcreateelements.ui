@@ -49,21 +49,21 @@
           </font>
          </property>
          <property name="text">
-          <string notr="true">Créer un preset</string>
+          <string notr="true">Create a preset</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QRadioButton" name="radioOnlyOne">
          <property name="text">
-          <string notr="true">contenant les X instruments</string>
+          <string notr="true">comprising X instruments</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QRadioButton" name="radioOnePerElement">
          <property name="text">
-          <string notr="true">pour chaque instrument</string>
+          <string notr="true">for each instrument</string>
          </property>
         </widget>
        </item>
@@ -86,7 +86,7 @@
        <item row="0" column="0">
         <widget class="QLabel" name="labelOneChoice">
          <property name="text">
-          <string notr="true">Créer le preset &quot;...&quot; ?</string>
+          <string notr="true">Create preset &quot;...&quot; ?</string>
          </property>
         </widget>
        </item>

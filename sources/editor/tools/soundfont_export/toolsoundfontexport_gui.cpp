@@ -99,7 +99,7 @@ void ToolSoundfontExport_gui::saveParameters(AbstractToolParameters * parameters
 {
     ToolSoundfontExport_parameters * params = (ToolSoundfontExport_parameters *) parameters;
 
-    // Sauvegarde des paramètres
+    // Save parameters
     params->setDirectory(ui->lineFolder->text());
     params->setFormat(ui->comboFormat->currentIndex());
     params->setQuality(2 - ui->comboQuality->currentIndex());
@@ -113,7 +113,7 @@ void ToolSoundfontExport_gui::saveParameters(AbstractToolParameters * parameters
 
 void ToolSoundfontExport_gui::on_pushTick_clicked()
 {
-    // Tout sélectionner
+    // Select all
     int nbTopLevelItems = ui->listPresets->topLevelItemCount();
     for (int i = 0; i < nbTopLevelItems; i++)
     {
@@ -126,7 +126,7 @@ void ToolSoundfontExport_gui::on_pushTick_clicked()
 
 void ToolSoundfontExport_gui::on_pushUntick_clicked()
 {
-    // Tout décocher
+    // Untick all
     int nbTopLevelItems = ui->listPresets->topLevelItemCount();
     for (int i = 0; i < nbTopLevelItems; i++)
     {

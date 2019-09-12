@@ -54,7 +54,7 @@ private:
     float * _buf;
     quint32 _bufSize;
 
-    // Protection accès multiples
+    // Protect against multiple access
     QMutex _mutex;
 };
 

@@ -57,7 +57,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="Graphique" name="graphe" native="true">
+       <widget class="GraphicsWave" name="waveDisplay" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -745,19 +745,6 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Graphique</class>
-   <extends>QWidget</extends>
-   <header>graphique.h</header>
-   <container>1</container>
-   <slots>
-    <signal>startLoopChanged()</signal>
-    <signal>endLoopChanged()</signal>
-    <slot>setPosX(int)</slot>
-    <slot>setStartLoop(int)</slot>
-    <slot>setEndLoop(int)</slot>
-   </slots>
-  </customwidget>
-  <customwidget>
    <class>GraphiqueFourier</class>
    <extends>QWidget</extends>
    <header>graphiquefourier.h</header>
@@ -778,6 +765,12 @@
    <class>SpinBoxCents</class>
    <extends>QSpinBox</extends>
    <header>spinboxcents.h</header>
+  </customwidget>
+  <customwidget>
+   <class>GraphicsWave</class>
+   <extends>QWidget</extends>
+   <header>graphicswave.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -859,7 +852,7 @@
   <connection>
    <sender>spinStartLoop</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>graphe</receiver>
+   <receiver>waveDisplay</receiver>
    <slot>setStartLoop(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -939,7 +932,7 @@
   <connection>
    <sender>spinEndLoop</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>graphe</receiver>
+   <receiver>waveDisplay</receiver>
    <slot>setEndLoop(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -971,7 +964,7 @@
   <connection>
    <sender>sliderGraphe</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>graphe</receiver>
+   <receiver>waveDisplay</receiver>
    <slot>setPosX(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1001,7 +994,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>graphe</sender>
+   <sender>waveDisplay</sender>
    <signal>endLoopChanged()</signal>
    <receiver>PageSmpl</receiver>
    <slot>setEndLoop()</slot>
@@ -1017,7 +1010,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>graphe</sender>
+   <sender>waveDisplay</sender>
    <signal>startLoopChanged()</signal>
    <receiver>PageSmpl</receiver>
    <slot>setStartLoop()</slot>

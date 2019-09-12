@@ -100,7 +100,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string notr="true">Durée release au do 2 (note 36)</string>
+      <string notr="true">Duration of release for C2 (key 36)</string>
      </property>
     </widget>
    </item>

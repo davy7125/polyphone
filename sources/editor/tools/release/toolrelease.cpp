@@ -39,26 +39,26 @@ void ToolRelease::process(SoundfontManager * sm, EltID id, AbstractToolParameter
     double division = params->getEvolution();
     double deTune = params->getDetune();
 
-    // Modification pour chaque sample lié
+    // Update each linked sample
     id.typeElement = elementInstSmpl;
     foreach (int i, sm->getSiblings(id))
     {
         id.indexElt2 = i;
 
-        // Note moyenne
+        // Mean key
         double noteMoy = (double)(sm->get(id, champ_keyRange).rValue.byHi +
                                   sm->get(id, champ_keyRange).rValue.byLo) / 2;
-        // Calcul durée release
+        // Compute release duration
         double release = pow(division, ((36. - noteMoy) / 12.)) * duree36;
         if (release < 0.001)
             release = 0.001;
         else if (release > 101.594)
             release = 101.594;
 
-        // Valeur correspondante
+        // Corresponding value
         short val = 1200 * qLn(release) / 0.69314718056;
 
-        // Modification instSmpl
+        // Update instSmpl
         AttributeValue valeur;
         if (sm->get(id, champ_releaseVolEnv).shValue != val)
         {
@@ -67,7 +67,7 @@ void ToolRelease::process(SoundfontManager * sm, EltID id, AbstractToolParameter
         }
         if (deTune != 0)
         {
-            // Release de l'enveloppe de modulation
+            // Modulation envelope release
             if (sm->get(id, champ_releaseModEnv).shValue != val)
             {
                 valeur.shValue = val;
@@ -78,7 +78,8 @@ void ToolRelease::process(SoundfontManager * sm, EltID id, AbstractToolParameter
                 valeur.shValue = -(int)100 * deTune;
                 sm->set(id, champ_modEnvToPitch, valeur);
             }
-            // Hauteur de l'effet
+            
+            // Strength of the effect
             int tuningCoarse = floor(deTune);
             int tuningFine = 100 * (deTune - tuningCoarse);
             valeur.shValue = sm->get(id, champ_coarseTune).shValue + tuningCoarse;

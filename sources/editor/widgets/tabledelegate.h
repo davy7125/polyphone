@@ -28,7 +28,7 @@
 #include <QStyledItemDelegate>
 class QTableWidget;
 
-// Redéfinition des éditeurs au sein de la table
+// Editors within the table
 class TableDelegate : public QStyledItemDelegate
 {
     Q_OBJECT

@@ -65,24 +65,24 @@ public:
 
     // Doc: "max 255 characters except for "comments", ended by 1 or 2 \0 for an even number of bits"
     SfVersionTag _IFIL; // version of the Sound Font RIFF file     e.g. 2.01                                MANDATORY
-    QString _ISNG; // Target Sound Engine                          e.g. “EMU8000”                           MANDATORY
-    QString _INAM; // Sound Font Bank Name                         e.g. “General MIDI”                      MANDATORY
-    QString _IROM; // Sound ROM Name                               e.g. “1MGM”
+    QString _ISNG; // Target Sound Engine                          e.g. "EMU8000"                           MANDATORY
+    QString _INAM; // Sound Font Bank Name                         e.g. "General MIDI"                      MANDATORY
+    QString _IROM; // Sound ROM Name                               e.g. "1MGM"
     SfVersionTag _IVER; // Sound ROM Version                       e.g. 2.08
-    QString _ICRD; // Date of Creation of the Bank                 e.g. “July 15, 1997”
-    QString _IENG; // Sound Designers and Engineers for the Bank   e.g. “John Q. Sounddesigner”
-    QString _IPRD; // Product for which the Bank was intended      e.g. “SBAWE64 Gold”
-    QString _ICOP; // Copyright message                            e.g. “Copyright (c) 1997 E-mu Systems, Inc.”
-    QString _ICMT; // Comments on the Bank                         e.g. “This is a comment”                           /!\  65,535 bits maxi
-    QString _ISFT; // Soundfont tools used                         e.g. “:Preditor 2.00a:Vienna SF Studio 2.0:”
+    QString _ICRD; // Date of Creation of the Bank                 e.g. "July 15, 1997"
+    QString _IENG; // Sound Designers and Engineers for the Bank   e.g. "John Q. Sounddesigner"
+    QString _IPRD; // Product for which the Bank was intended      e.g. "SBAWE64 Gold"
+    QString _ICOP; // Copyright message                            e.g. "Copyright (c) 1997 E-mu Systems, Inc."
+    QString _ICMT; // Comments on the Bank                         e.g. "This is a comment"                           /!\  65,535 bits max
+    QString _ISFT; // Soundfont tools used                         e.g. ":Preditor 2.00a:Vienna SF Studio 2.0:"
 
     QString _fileNameInitial; // File that is initially opened, updated after each save
     QString _fileNameForData; // sf2 file (_fileNameInitial or extraction of the initial file). The sounds are read from this file
 
     // Other
-    int _numEdition;  // numéro de l'édition sauvegardée
-    quint16 _wBpsInit;   // résolution sample à l'ouverture du fichier (16, 24 ou 0 si nouveau)
-    quint16 _wBpsSave;   // résolution souhaitée lors d'une sauvegarde (16 ou 24)
+    int _numEdition;  // editing number that is saved
+    quint16 _wBpsInit; // bit per sample found when opening the file (16, 24 or 0 if new)
+    quint16 _wBpsSave; // bit per sample desired during save (16 or 24)
     QString _nameSort; // _INAM lowercase, no accent
 
 private:
