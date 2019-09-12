@@ -30,7 +30,8 @@
 #include <QScrollBar>
 #include <QSpinBox>
 #include <QApplication>
-#include <QDebug>
+#include <QMouseEvent>
+#include <QWheelEvent>
 
 const int GraphicsWave::TEXT_MARGIN = 5;
 const int GraphicsWave::OVERLAY_SIZE = 20;

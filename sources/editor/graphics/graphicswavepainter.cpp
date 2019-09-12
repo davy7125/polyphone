@@ -147,13 +147,11 @@ void GraphicsWavePainter::prepareImage()
 
     delete [] _samplePlotMean;
     _samplePlotMean = nullptr;
-    quint32 samplePlotSize;
 
     if (_sampleSize <= 1)
         return;
 
     // Wave form larger than the number of pixels
-    samplePlotSize = width;
     float * samplePlotMin = new float[width];
     float * samplePlotMax = new float[width];
     _samplePlotMean = new QPointF[width];
