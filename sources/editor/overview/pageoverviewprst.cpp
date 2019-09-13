@@ -103,7 +103,7 @@ QString PageOverviewPrst::getParameterNumber(EltID id)
         id.indexElt2 = i;
         EltID idGen = id;
         idGen.typeElement = elementPrstInstGen;
-        count += _sf2->getSiblings(idGen).count() - 1; // instrument gen is ignored
+        count += _sf2->getSiblings(idGen).count();
     }
 
     return QString::number(count);

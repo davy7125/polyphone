@@ -121,7 +121,7 @@ QString PageOverviewInst::getParameterNumber(EltID id)
         id.indexElt2 = i;
         EltID idGen = id;
         idGen.typeElement = elementInstSmplGen;
-        count += _sf2->getSiblings(idGen).count() - 1; // sample gen is ignored
+        count += _sf2->getSiblings(idGen).count();
     }
 
     return QString::number(count);
