@@ -99,7 +99,9 @@ public:
         index(0)
     {}
 
-    // Load a default modulator (num being from 0 to 9 included)
+    // Load a default modulator
+    static int MODULATOR_VEL_TO_FILTER_TYPE;
+    static quint16 defaultModulatorNumber();
     void loadDefaultModulator(quint16 num);
 
     SFModulator srcOper;

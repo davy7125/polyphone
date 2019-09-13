@@ -1034,48 +1034,69 @@ Premium !</translation>
 <context>
     <name>ConfigSectionSound</name>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="26"/>
+        <location filename="context/interface/configsectionsound.ui" line="191"/>
         <source>Reverb</source>
         <translation>Réverbération</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="39"/>
+        <location filename="context/interface/configsectionsound.ui" line="249"/>
         <source>Gain (dB)</source>
         <translation>Gain (dB)</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="88"/>
+        <location filename="context/interface/configsectionsound.ui" line="298"/>
         <source>Width</source>
         <translation>Densité</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="123"/>
-        <location filename="context/interface/configsectionsound.ui" line="297"/>
+        <location filename="context/interface/configsectionsound.ui" line="65"/>
+        <location filename="context/interface/configsectionsound.ui" line="333"/>
         <source>Level</source>
         <translation>Niveau</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="178"/>
+        <location filename="context/interface/configsectionsound.ui" line="157"/>
+        <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
+        <oldsource>Modulator &quot;velocity → filter cutoff&quot;</oldsource>
+        <translation>Mod. par défaut &quot;vélocité → fréquence de coupure&quot;</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="165"/>
+        <source>soundfont 2.01</source>
+        <translation>soundfont 2.01</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="170"/>
+        <source>soundfont 2.04</source>
+        <translation>soundfont 2.04</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="175"/>
+        <source>disabled</source>
+        <translation>désactivé</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="388"/>
         <source>Damp</source>
         <translation>Atténuation</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="194"/>
+        <location filename="context/interface/configsectionsound.ui" line="404"/>
         <source>Room</source>
         <translation>Profondeur</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="264"/>
+        <location filename="context/interface/configsectionsound.ui" line="32"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="345"/>
+        <location filename="context/interface/configsectionsound.ui" line="113"/>
         <source>Frequency</source>
         <translation>Fréquence</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="361"/>
+        <location filename="context/interface/configsectionsound.ui" line="129"/>
         <source>Depth</source>
         <translation>Amplitude</translation>
     </message>
@@ -2156,11 +2177,18 @@ en ligne</translation>
     </message>
 </context>
 <context>
-    <name>Graphique</name>
+    <name>GraphicsWave</name>
     <message>
-        <location filename="editor/graphics/graphique.cpp" line="89"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="181"/>
         <source>Multiple selection</source>
         <translation>Sélection multiple</translation>
+    </message>
+</context>
+<context>
+    <name>Graphique</name>
+    <message>
+        <source>Multiple selection</source>
+        <translation type="vanished">Sélection multiple</translation>
     </message>
 </context>
 <context>
@@ -2642,43 +2670,43 @@ mod. par défaut</translation>
         <translation>%1 modulateurs :</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="312"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="316"/>
         <source>Duplicate the selection toward...</source>
         <translation>Dupliquer la sélection vers...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="313"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="317"/>
         <source>Copy the selected modulators</source>
         <translation>Copier les modulateurs sélectionnés</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="318"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="322"/>
         <source>Duplicate modulators toward...</source>
         <translation>Dupliquer les modulateurs vers...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="319"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="323"/>
         <source>Copy all modulators</source>
         <translation>Copier l&apos;ensemble des modulateurs</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="595"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="600"/>
         <source>Forbidden action:</source>
         <translation>Action impossible :</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="605"/>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="614"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="610"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="619"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="606"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="611"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>les offsets ne peuvent être modulés dans un ensemble.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="615"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="620"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation>%1 ne peut être modulé dans un ensemble.</translation>
     </message>
@@ -2737,32 +2765,32 @@ mod. par défaut</translation>
 <context>
     <name>PageInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="97"/>
+        <location filename="editor/pageinst.cpp" line="96"/>
         <source>Table</source>
         <translation>Table</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="98"/>
+        <location filename="editor/pageinst.cpp" line="97"/>
         <source>Ranges</source>
         <translation>Étendues</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="99"/>
+        <location filename="editor/pageinst.cpp" line="98"/>
         <source>Envelopes</source>
         <translation>Enveloppes</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="136"/>
+        <location filename="editor/pageinst.cpp" line="135"/>
         <source>Instrument not linked to a preset yet.</source>
         <translation>Instrument lié à aucun ensemble.</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="138"/>
+        <location filename="editor/pageinst.cpp" line="137"/>
         <source>Instrument linked to preset:</source>
         <translation>Instrument lié à l&apos;ensemble :</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="140"/>
+        <location filename="editor/pageinst.cpp" line="139"/>
         <source>Instrument linked to presets:</source>
         <translation>Instrument lié aux ensembles :</translation>
     </message>
@@ -3057,12 +3085,12 @@ d&apos;échantillonnage</translation>
         <translation>(percussion)</translation>
     </message>
     <message>
-        <location filename="editor/pageprst.cpp" line="91"/>
+        <location filename="editor/pageprst.cpp" line="90"/>
         <source>Table</source>
         <translation>Table</translation>
     </message>
     <message>
-        <location filename="editor/pageprst.cpp" line="92"/>
+        <location filename="editor/pageprst.cpp" line="91"/>
         <source>Ranges</source>
         <translation>Étendues</translation>
     </message>
@@ -3213,7 +3241,7 @@ d&apos;échantillonnage</translation>
     <name>PageSmpl</name>
     <message>
         <location filename="editor/pagesmpl.ui" line="297"/>
-        <location filename="editor/pagesmpl.cpp" line="1055"/>
+        <location filename="editor/pagesmpl.cpp" line="1059"/>
         <source>Play</source>
         <translation>Lecture</translation>
     </message>
@@ -3279,107 +3307,107 @@ d&apos;échantillonnage</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="641"/>
-        <location filename="editor/pagesmpl.cpp" line="83"/>
-        <location filename="editor/pagesmpl.cpp" line="475"/>
-        <location filename="editor/pagesmpl.cpp" line="979"/>
+        <location filename="editor/pagesmpl.cpp" line="82"/>
+        <location filename="editor/pagesmpl.cpp" line="479"/>
+        <location filename="editor/pagesmpl.cpp" line="983"/>
         <source>Information</source>
         <translation>Informations</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="185"/>
-        <location filename="editor/pagesmpl.cpp" line="84"/>
+        <location filename="editor/pagesmpl.cpp" line="83"/>
         <source>Equalizer (±15 dB)</source>
         <translation>Égaliseur (±15 dB)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="154"/>
-        <location filename="editor/pagesmpl.cpp" line="159"/>
+        <location filename="editor/pagesmpl.cpp" line="153"/>
+        <location filename="editor/pagesmpl.cpp" line="158"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="158"/>
-        <location filename="editor/pagesmpl.cpp" line="161"/>
+        <location filename="editor/pagesmpl.cpp" line="157"/>
+        <location filename="editor/pagesmpl.cpp" line="160"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(min)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="232"/>
-        <location filename="editor/pagesmpl.cpp" line="605"/>
+        <location filename="editor/pagesmpl.cpp" line="230"/>
+        <location filename="editor/pagesmpl.cpp" line="609"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="242"/>
-        <location filename="editor/pagesmpl.cpp" line="744"/>
+        <location filename="editor/pagesmpl.cpp" line="240"/>
+        <location filename="editor/pagesmpl.cpp" line="748"/>
         <source>right</source>
         <translation>droit</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="243"/>
-        <location filename="editor/pagesmpl.cpp" line="745"/>
+        <location filename="editor/pagesmpl.cpp" line="241"/>
+        <location filename="editor/pagesmpl.cpp" line="749"/>
         <source>left</source>
         <translation>gauche</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="244"/>
-        <location filename="editor/pagesmpl.cpp" line="746"/>
+        <location filename="editor/pagesmpl.cpp" line="242"/>
+        <location filename="editor/pagesmpl.cpp" line="750"/>
         <source>link</source>
         <translation>lien</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="282"/>
+        <location filename="editor/pagesmpl.cpp" line="280"/>
         <source>Sample not linked to an instrument yet.</source>
         <translation>Échantillon lié à aucun instrument.</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="284"/>
+        <location filename="editor/pagesmpl.cpp" line="282"/>
         <source>Sample linked to instrument:</source>
         <translation>Échantillon lié à l&apos;instrument :</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="286"/>
+        <location filename="editor/pagesmpl.cpp" line="284"/>
         <source>Sample linked to instruments:</source>
         <translation>Échantillon lié aux instruments :</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="476"/>
-        <location filename="editor/pagesmpl.cpp" line="980"/>
+        <location filename="editor/pagesmpl.cpp" line="480"/>
+        <location filename="editor/pagesmpl.cpp" line="984"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Modification appliquée avec succès aux différents échantillons</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="743"/>
-        <location filename="editor/pagesmpl.cpp" line="768"/>
+        <location filename="editor/pagesmpl.cpp" line="747"/>
+        <location filename="editor/pagesmpl.cpp" line="772"/>
         <source>mono</source>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1049"/>
+        <location filename="editor/pagesmpl.cpp" line="1053"/>
         <source>Stop</source>
         <translation>Arrêt</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1068"/>
+        <location filename="editor/pagesmpl.cpp" line="1072"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1069"/>
+        <location filename="editor/pagesmpl.cpp" line="1073"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation>Couper l&apos;échantillon de &lt;b&gt;%1&lt;/b&gt; à &lt;b&gt;%2&lt;/b&gt; ?</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1071"/>
+        <location filename="editor/pagesmpl.cpp" line="1075"/>
         <source>&amp;Yes</source>
         <translation>&amp;Oui</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1072"/>
+        <location filename="editor/pagesmpl.cpp" line="1076"/>
         <source>&amp;No</source>
         <translation>&amp;Non</translation>
     </message>

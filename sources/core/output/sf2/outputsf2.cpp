@@ -734,7 +734,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
             fi.write((char *)&byTmp, 1);
             byTmp = sfTmp.isDescending + 2 * sfTmp.isBipolar + 4 * sfTmp.Type;
             fi.write((char *)&byTmp, 1);
-            wTmp = sm->get(id3, champ_sfModTransOper).wValue;
+            wTmp = sm->get(id3, champ_sfModTransOper).wValue == 2 ? absolute_value : linear;
             fi.write((char *)&wTmp, 2);
         }
 
@@ -766,7 +766,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
                 fi.write((char *)&byTmp, 1);
                 byTmp = sfTmp.isDescending + 2 * sfTmp.isBipolar + 4 * sfTmp.Type;
                 fi.write((char *)&byTmp, 1);
-                wTmp = sm->get(id3, champ_sfModTransOper).wValue;
+                wTmp = sm->get(id3, champ_sfModTransOper).wValue == 2 ? absolute_value : linear;
                 fi.write((char *)&wTmp, 2);
             }
         }
@@ -1012,7 +1012,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
             fi.write((char *)&byTmp, 1);
             byTmp = sfTmp.isDescending + 2 * sfTmp.isBipolar + 4 * sfTmp.Type;
             fi.write((char *)&byTmp, 1);
-            wTmp = sm->get(id3, champ_sfModTransOper).wValue;
+            wTmp = sm->get(id3, champ_sfModTransOper).wValue == 2 ? absolute_value : linear;
             fi.write((char *)&wTmp, 2);
         }
 
@@ -1044,7 +1044,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
                 fi.write((char *)&byTmp, 1);
                 byTmp = sfTmp.isDescending + 2 * sfTmp.isBipolar + 4 * sfTmp.Type;
                 fi.write((char *)&byTmp, 1);
-                wTmp = sm->get(id3, champ_sfModTransOper).wValue;
+                wTmp = sm->get(id3, champ_sfModTransOper).wValue == 2 ? absolute_value : linear;
                 fi.write((char *)&wTmp, 2);
             }
         }

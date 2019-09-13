@@ -29,8 +29,7 @@
 
 ToolDefaultMod_gui::ToolDefaultMod_gui(QWidget *parent) :
     AbstractToolGui(parent),
-    ui(new Ui::ToolDefaultMod_gui),
-    _initialized(false)
+    ui(new Ui::ToolDefaultMod_gui)
 {
     ui->setupUi(this);
 }
@@ -46,29 +45,22 @@ void ToolDefaultMod_gui::updateInterface(AbstractToolParameters * parameters, Id
     Q_UNUSED(parameters)
     Q_UNUSED(ids)
 
-    // Possibly fill the list with all default modulators
-    if (!_initialized)
+    // Fill the list with all default modulators
+    ui->listWidget->clear();
+    quint16 count = ModulatorData::defaultModulatorNumber();
+    ModulatorData modData;
+    for (quint16 i = 0; i < count; i++)
     {
-        ModulatorData modData;
-        for (quint16 i = 0; i < 10; i++)
-        {
-            modData.loadDefaultModulator(i);
-            modData.index = i;
+        modData.loadDefaultModulator(i);
+        modData.index = i;
 
-            // Add a new cell
-            ModulatorCell * cell = new ModulatorCell(modData);
-            QListWidgetItem * item = new QListWidgetItem();
-            item->setSizeHint(cell->size());
-            ui->listWidget->addItem(item);
-            ui->listWidget->setItemWidget(item, cell);
-        }
-
-        _initialized = true;
+        // Add a new cell
+        ModulatorCell * cell = new ModulatorCell(modData);
+        QListWidgetItem * item = new QListWidgetItem();
+        item->setSizeHint(cell->size());
+        ui->listWidget->addItem(item);
+        ui->listWidget->setItemWidget(item, cell);
     }
-
-    // Clear the selection
-    for (int i = 0; i < ui->listWidget->count(); i++)
-        ui->listWidget->setItemSelected(ui->listWidget->item(i), false);
 }
 
 void ToolDefaultMod_gui::saveParameters(AbstractToolParameters * parameters)

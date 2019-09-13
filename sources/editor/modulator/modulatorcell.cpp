@@ -74,7 +74,7 @@ ModulatorCell::ModulatorCell(EltID id, QWidget *parent) :
     connect(ui->spinAmount, SIGNAL(valueChanged(int)), this, SLOT(onOutputChanged(int)));
 
     // Transform
-    ui->comboTransform->setCurrentIndex(SoundfontManager::getInstance()->get(id, champ_sfModTransOper).wValue == 2 ? 1 : 0);
+    ui->comboTransform->setCurrentIndex(SoundfontManager::getInstance()->get(id, champ_sfModTransOper).wValue == absolute_value ? 1 : 0);
 
     // Compute the range
     onOutputChanged(-1);
@@ -275,9 +275,9 @@ void ModulatorCell::on_comboTransform_currentIndexChanged(int index)
     // Compare with the old value
     AttributeValue val;
     if (index == 1)
-        val.wValue = 2;
+        val.wValue = absolute_value;
     else
-        val.wValue = 0;
+        val.wValue = linear;
     if (_sm->get(_id, champ_sfModTransOper).wValue != val.wValue)
     {
         _sm->set(_id, champ_sfModTransOper, val);

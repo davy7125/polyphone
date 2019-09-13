@@ -53,7 +53,6 @@ private slots:
 
 private:
     Ui::ToolDefaultMod_gui *ui;
-    bool _initialized;
     bool _isActionDisable;
 };
 

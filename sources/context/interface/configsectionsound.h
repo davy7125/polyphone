@@ -49,6 +49,7 @@ private slots:
     void on_dialChoAmplitude_valueChanged(int value);
     void on_dialChoFrequence_valueChanged(int value);
     void on_sliderGain_valueChanged(int value);
+    void on_comboVelToFilter_currentIndexChanged(int index);
 
 private:
     Ui::ConfigSectionSound *ui;

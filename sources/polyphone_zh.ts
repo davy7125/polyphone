@@ -1033,48 +1033,69 @@ Premium!</source>
 <context>
     <name>ConfigSectionSound</name>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="26"/>
+        <location filename="context/interface/configsectionsound.ui" line="191"/>
         <source>Reverb</source>
         <translation>混响</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="39"/>
+        <location filename="context/interface/configsectionsound.ui" line="249"/>
         <source>Gain (dB)</source>
         <translation>增益(dB)</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="88"/>
+        <location filename="context/interface/configsectionsound.ui" line="298"/>
         <source>Width</source>
         <translation>宽度</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="123"/>
-        <location filename="context/interface/configsectionsound.ui" line="297"/>
+        <location filename="context/interface/configsectionsound.ui" line="65"/>
+        <location filename="context/interface/configsectionsound.ui" line="333"/>
         <source>Level</source>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="178"/>
+        <location filename="context/interface/configsectionsound.ui" line="157"/>
+        <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
+        <oldsource>Modulator &quot;velocity → filter cutoff&quot;</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="165"/>
+        <source>soundfont 2.01</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="170"/>
+        <source>soundfont 2.04</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="175"/>
+        <source>disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="388"/>
         <source>Damp</source>
         <translation>湿度</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="194"/>
+        <location filename="context/interface/configsectionsound.ui" line="404"/>
         <source>Room</source>
         <translation>体积</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="264"/>
+        <location filename="context/interface/configsectionsound.ui" line="32"/>
         <source>Chorus</source>
         <translation>和声</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="345"/>
+        <location filename="context/interface/configsectionsound.ui" line="113"/>
         <source>Frequency</source>
         <translation>频率</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="361"/>
+        <location filename="context/interface/configsectionsound.ui" line="129"/>
         <source>Depth</source>
         <translation>深度</translation>
     </message>
@@ -2155,11 +2176,18 @@ repository</source>
     </message>
 </context>
 <context>
+    <name>GraphicsWave</name>
+    <message>
+        <location filename="editor/graphics/graphicswave.cpp" line="181"/>
+        <source>Multiple selection</source>
+        <translation type="unfinished">多选</translation>
+    </message>
+</context>
+<context>
     <name>Graphique</name>
     <message>
-        <location filename="editor/graphics/graphique.cpp" line="89"/>
         <source>Multiple selection</source>
-        <translation>多选</translation>
+        <translation type="vanished">多选</translation>
     </message>
 </context>
 <context>
@@ -2629,43 +2657,43 @@ default mod.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="312"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="316"/>
         <source>Duplicate the selection toward...</source>
         <translation type="unfinished">复制选择项到...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="313"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="317"/>
         <source>Copy the selected modulators</source>
         <translation type="unfinished">复制选择的调制器</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="318"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="322"/>
         <source>Duplicate modulators toward...</source>
         <translation type="unfinished">复制调制器到...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="319"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="323"/>
         <source>Copy all modulators</source>
         <translation type="unfinished">复制全部调制器</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="595"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="600"/>
         <source>Forbidden action:</source>
         <translation type="unfinished">禁止操作：</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="605"/>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="614"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="610"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="619"/>
         <source>Warning</source>
         <translation type="unfinished">警告</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="606"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="611"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation type="unfinished">在预设中偏移量无法被调制。</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="615"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="620"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation type="unfinished">%1 无法在预设中被调制。</translation>
     </message>
@@ -2724,32 +2752,32 @@ default mod.</source>
 <context>
     <name>PageInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="97"/>
+        <location filename="editor/pageinst.cpp" line="96"/>
         <source>Table</source>
         <translation>表格</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="98"/>
+        <location filename="editor/pageinst.cpp" line="97"/>
         <source>Ranges</source>
         <translation>范围</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="99"/>
+        <location filename="editor/pageinst.cpp" line="98"/>
         <source>Envelopes</source>
         <translation>包络</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="136"/>
+        <location filename="editor/pageinst.cpp" line="135"/>
         <source>Instrument not linked to a preset yet.</source>
         <translation>乐器未链接到预设。</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="138"/>
+        <location filename="editor/pageinst.cpp" line="137"/>
         <source>Instrument linked to preset:</source>
         <translation>乐器已链接的预设：</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="140"/>
+        <location filename="editor/pageinst.cpp" line="139"/>
         <source>Instrument linked to presets:</source>
         <translation>乐器已链接的预设：</translation>
     </message>
@@ -3051,12 +3079,12 @@ rate</source>
         <translation>(percussion)</translation>
     </message>
     <message>
-        <location filename="editor/pageprst.cpp" line="91"/>
+        <location filename="editor/pageprst.cpp" line="90"/>
         <source>Table</source>
         <translation>表格</translation>
     </message>
     <message>
-        <location filename="editor/pageprst.cpp" line="92"/>
+        <location filename="editor/pageprst.cpp" line="91"/>
         <source>Ranges</source>
         <translation>范围</translation>
     </message>
@@ -3207,13 +3235,13 @@ rate</source>
     <name>PageSmpl</name>
     <message>
         <location filename="editor/pagesmpl.ui" line="185"/>
-        <location filename="editor/pagesmpl.cpp" line="84"/>
+        <location filename="editor/pagesmpl.cpp" line="83"/>
         <source>Equalizer (±15 dB)</source>
         <translation>均衡器(±15 分贝)</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="297"/>
-        <location filename="editor/pagesmpl.cpp" line="1055"/>
+        <location filename="editor/pagesmpl.cpp" line="1059"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
@@ -3279,101 +3307,101 @@ rate</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="641"/>
-        <location filename="editor/pagesmpl.cpp" line="83"/>
-        <location filename="editor/pagesmpl.cpp" line="475"/>
-        <location filename="editor/pagesmpl.cpp" line="979"/>
+        <location filename="editor/pagesmpl.cpp" line="82"/>
+        <location filename="editor/pagesmpl.cpp" line="479"/>
+        <location filename="editor/pagesmpl.cpp" line="983"/>
         <source>Information</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="154"/>
-        <location filename="editor/pagesmpl.cpp" line="159"/>
+        <location filename="editor/pagesmpl.cpp" line="153"/>
+        <location filename="editor/pagesmpl.cpp" line="158"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>秒</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="158"/>
-        <location filename="editor/pagesmpl.cpp" line="161"/>
+        <location filename="editor/pagesmpl.cpp" line="157"/>
+        <location filename="editor/pagesmpl.cpp" line="160"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(最小)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="232"/>
-        <location filename="editor/pagesmpl.cpp" line="605"/>
+        <location filename="editor/pagesmpl.cpp" line="230"/>
+        <location filename="editor/pagesmpl.cpp" line="609"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>单声道</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="242"/>
-        <location filename="editor/pagesmpl.cpp" line="744"/>
+        <location filename="editor/pagesmpl.cpp" line="240"/>
+        <location filename="editor/pagesmpl.cpp" line="748"/>
         <source>right</source>
         <translation>右</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="243"/>
-        <location filename="editor/pagesmpl.cpp" line="745"/>
+        <location filename="editor/pagesmpl.cpp" line="241"/>
+        <location filename="editor/pagesmpl.cpp" line="749"/>
         <source>left</source>
         <translation>左</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="244"/>
-        <location filename="editor/pagesmpl.cpp" line="746"/>
+        <location filename="editor/pagesmpl.cpp" line="242"/>
+        <location filename="editor/pagesmpl.cpp" line="750"/>
         <source>link</source>
         <translation>链接</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="282"/>
+        <location filename="editor/pagesmpl.cpp" line="280"/>
         <source>Sample not linked to an instrument yet.</source>
         <translation>样本未链接到乐器。</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="284"/>
+        <location filename="editor/pagesmpl.cpp" line="282"/>
         <source>Sample linked to instrument:</source>
         <translation>样本已链接的乐器：</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="286"/>
+        <location filename="editor/pagesmpl.cpp" line="284"/>
         <source>Sample linked to instruments:</source>
         <translation>样本已链接的乐器：</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="476"/>
-        <location filename="editor/pagesmpl.cpp" line="980"/>
+        <location filename="editor/pagesmpl.cpp" line="480"/>
+        <location filename="editor/pagesmpl.cpp" line="984"/>
         <source>Change successfully applied to the different samples</source>
         <translation>更改已成功应用到其它样本</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="743"/>
-        <location filename="editor/pagesmpl.cpp" line="768"/>
+        <location filename="editor/pagesmpl.cpp" line="747"/>
+        <location filename="editor/pagesmpl.cpp" line="772"/>
         <source>mono</source>
         <translation>单声道</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1049"/>
+        <location filename="editor/pagesmpl.cpp" line="1053"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1068"/>
+        <location filename="editor/pagesmpl.cpp" line="1072"/>
         <source>Warning</source>
         <translation type="unfinished">警告</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1069"/>
+        <location filename="editor/pagesmpl.cpp" line="1073"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1071"/>
+        <location filename="editor/pagesmpl.cpp" line="1075"/>
         <source>&amp;Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1072"/>
+        <location filename="editor/pagesmpl.cpp" line="1076"/>
         <source>&amp;No</source>
         <translation type="unfinished"></translation>
     </message>

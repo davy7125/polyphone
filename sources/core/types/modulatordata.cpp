@@ -26,6 +26,8 @@
 #include "attribute.h"
 
 
+int ModulatorData::MODULATOR_VEL_TO_FILTER_TYPE = 1;
+
 bool SFModulator::operator==(const SFModulator& other)
 {
     return this->Type == other.Type &&
@@ -46,11 +48,19 @@ quint16 SFModulator::toWord()
     return ((Type << 10) + (isBipolar << 9) + (isDescending << 8) + (CC << 7) + Index) & 0xFFFF;
 }
 
+quint16 ModulatorData::defaultModulatorNumber()
+{
+    return MODULATOR_VEL_TO_FILTER_TYPE == 2 ? 9 : 10;
+}
+
 void ModulatorData::loadDefaultModulator(quint16 num)
 {
     // Common to all default modulators
     this->transOper = SFTransform::linear;
     this->index = 65535; // Max so that it has no interaction with possible links
+
+    if (MODULATOR_VEL_TO_FILTER_TYPE == 2 && num >= 1)
+        num++; // Skip the velocity to filter cutoff
 
     switch (num)
     {
@@ -64,7 +74,7 @@ void ModulatorData::loadDefaultModulator(quint16 num)
     case 1:
         // 2. MIDI Note-On Velocity to Filter Cutoff
         this->srcOper = SFModulator(GC_noteOnVelocity, typeLinear, true, false);
-        this->amtSrcOper = SFModulator();
+        this->amtSrcOper = MODULATOR_VEL_TO_FILTER_TYPE == 0 ? SFModulator(GC_noteOnVelocity, typeSwitch, true, false) : SFModulator();
         this->amount = -2400;
         this->destOper = champ_initialFilterFc;
         break;

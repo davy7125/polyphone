@@ -25,6 +25,7 @@
 #include "configsectionsound.h"
 #include "ui_configsectionsound.h"
 #include "contextmanager.h"
+#include "modulatordata.h"
 
 ConfigSectionSound::ConfigSectionSound(QWidget *parent) :
     QWidget(parent),
@@ -76,6 +77,12 @@ void ConfigSectionSound::initialize()
     ui->dialChoFrequence->blockSignals(true);
     ui->dialChoFrequence->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_frequency", 0).toInt());
     ui->dialChoFrequence->blockSignals(false);
+
+    // Other
+    ui->comboVelToFilter->blockSignals(true);
+    ui->comboVelToFilter->setCurrentIndex(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", 1).toInt());
+    ModulatorData::MODULATOR_VEL_TO_FILTER_TYPE = ui->comboVelToFilter->currentIndex();
+    ui->comboVelToFilter->blockSignals(false);
 }
 
 void ConfigSectionSound::on_dialRevNiveau_valueChanged(int value)
@@ -117,4 +124,10 @@ void ConfigSectionSound::on_sliderGain_valueChanged(int value)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "gain", value);
     ui->labelGain->setText(QString::number(value));
+}
+
+void ConfigSectionSound::on_comboVelToFilter_currentIndexChanged(int index)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", index);
+    ModulatorData::MODULATOR_VEL_TO_FILTER_TYPE = index;
 }

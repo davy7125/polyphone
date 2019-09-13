@@ -53,7 +53,8 @@ void ModulatorGroup::initialize(int initialKey, int keyForComputation, int velFo
 void ModulatorGroup::loadDefaultModulators()
 {
     ModulatorData modData;
-    for (int i = 0; i < 10; i++)
+    int count = ModulatorData::defaultModulatorNumber();
+    for (quint16 i = 0; i < count; i++)
     {
         modData.loadDefaultModulator(i);
         _modulators << new ParameterModulator(modData, false, _initialKey, _keyForComputation, _velForComputation);

@@ -1034,48 +1034,69 @@ prémiový!</translation>
 <context>
     <name>ConfigSectionSound</name>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="26"/>
+        <location filename="context/interface/configsectionsound.ui" line="191"/>
         <source>Reverb</source>
         <translation>Dozvuk</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="39"/>
+        <location filename="context/interface/configsectionsound.ui" line="249"/>
         <source>Gain (dB)</source>
         <translation>Zesílení (dB)</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="88"/>
+        <location filename="context/interface/configsectionsound.ui" line="298"/>
         <source>Width</source>
         <translation>Hustota</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="123"/>
-        <location filename="context/interface/configsectionsound.ui" line="297"/>
+        <location filename="context/interface/configsectionsound.ui" line="65"/>
+        <location filename="context/interface/configsectionsound.ui" line="333"/>
         <source>Level</source>
         <translation>Hladina</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="178"/>
+        <location filename="context/interface/configsectionsound.ui" line="157"/>
+        <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
+        <oldsource>Modulator &quot;velocity → filter cutoff&quot;</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="165"/>
+        <source>soundfont 2.01</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="170"/>
+        <source>soundfont 2.04</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="175"/>
+        <source>disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="388"/>
         <source>Damp</source>
         <translation>Ztlumení</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="194"/>
+        <location filename="context/interface/configsectionsound.ui" line="404"/>
         <source>Room</source>
         <translation>Hloubka</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="264"/>
+        <location filename="context/interface/configsectionsound.ui" line="32"/>
         <source>Chorus</source>
         <translation>Sbor (chorus)</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="345"/>
+        <location filename="context/interface/configsectionsound.ui" line="113"/>
         <source>Frequency</source>
         <translation>Kmitočet</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="361"/>
+        <location filename="context/interface/configsectionsound.ui" line="129"/>
         <source>Depth</source>
         <translation>Rozkmit</translation>
     </message>
@@ -2157,11 +2178,18 @@ repository</source>
     </message>
 </context>
 <context>
+    <name>GraphicsWave</name>
+    <message>
+        <location filename="editor/graphics/graphicswave.cpp" line="181"/>
+        <source>Multiple selection</source>
+        <translation type="unfinished">Vícenásobný výběr</translation>
+    </message>
+</context>
+<context>
     <name>Graphique</name>
     <message>
-        <location filename="editor/graphics/graphique.cpp" line="89"/>
         <source>Multiple selection</source>
-        <translation>Vícenásobný výběr</translation>
+        <translation type="vanished">Vícenásobný výběr</translation>
     </message>
 </context>
 <context>
@@ -2634,43 +2662,43 @@ default mod.</source>
         <translation>%1 modulátory:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="312"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="316"/>
         <source>Duplicate the selection toward...</source>
         <translation>Zdvojit výběr k...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="313"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="317"/>
         <source>Copy the selected modulators</source>
         <translation>Kopírovat vybrané modulátory</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="318"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="322"/>
         <source>Duplicate modulators toward...</source>
         <translation>Zdvojit modulátory k...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="319"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="323"/>
         <source>Copy all modulators</source>
         <translation>Kopírovat všechny modulátory</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="595"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="600"/>
         <source>Forbidden action:</source>
         <translation>Zakázaná činnost:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="605"/>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="614"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="610"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="619"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="606"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="611"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>posuny nelze v přednastavení měnit.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="615"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="620"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation>%1 nelze měnit v přednastavení.</translation>
     </message>
@@ -2729,32 +2757,32 @@ default mod.</source>
 <context>
     <name>PageInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="97"/>
+        <location filename="editor/pageinst.cpp" line="96"/>
         <source>Table</source>
         <translation>Tabulka</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="98"/>
+        <location filename="editor/pageinst.cpp" line="97"/>
         <source>Ranges</source>
         <translation>Rozsahy</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="99"/>
+        <location filename="editor/pageinst.cpp" line="98"/>
         <source>Envelopes</source>
         <translation>Obálky</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="136"/>
+        <location filename="editor/pageinst.cpp" line="135"/>
         <source>Instrument not linked to a preset yet.</source>
         <translation>Nástroj ještě není spojen s žádným přednastavením.</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="138"/>
+        <location filename="editor/pageinst.cpp" line="137"/>
         <source>Instrument linked to preset:</source>
         <translation>Nástroj spojen s přednastavením:</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="140"/>
+        <location filename="editor/pageinst.cpp" line="139"/>
         <source>Instrument linked to presets:</source>
         <translation>Nástroj spojen s přednastaveními:</translation>
     </message>
@@ -3050,12 +3078,12 @@ rate</source>
         <translation>(bicí)</translation>
     </message>
     <message>
-        <location filename="editor/pageprst.cpp" line="91"/>
+        <location filename="editor/pageprst.cpp" line="90"/>
         <source>Table</source>
         <translation>Tabulka</translation>
     </message>
     <message>
-        <location filename="editor/pageprst.cpp" line="92"/>
+        <location filename="editor/pageprst.cpp" line="91"/>
         <source>Ranges</source>
         <translation>Rozsahy</translation>
     </message>
@@ -3206,13 +3234,13 @@ rate</source>
     <name>PageSmpl</name>
     <message>
         <location filename="editor/pagesmpl.ui" line="185"/>
-        <location filename="editor/pagesmpl.cpp" line="84"/>
+        <location filename="editor/pagesmpl.cpp" line="83"/>
         <source>Equalizer (±15 dB)</source>
         <translation>Ekvalizér (±15 dB)</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="297"/>
-        <location filename="editor/pagesmpl.cpp" line="1055"/>
+        <location filename="editor/pagesmpl.cpp" line="1059"/>
         <source>Play</source>
         <translation>Přehrávat</translation>
     </message>
@@ -3278,101 +3306,101 @@ rate</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="641"/>
-        <location filename="editor/pagesmpl.cpp" line="83"/>
-        <location filename="editor/pagesmpl.cpp" line="475"/>
-        <location filename="editor/pagesmpl.cpp" line="979"/>
+        <location filename="editor/pagesmpl.cpp" line="82"/>
+        <location filename="editor/pagesmpl.cpp" line="479"/>
+        <location filename="editor/pagesmpl.cpp" line="983"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="154"/>
-        <location filename="editor/pagesmpl.cpp" line="159"/>
+        <location filename="editor/pagesmpl.cpp" line="153"/>
+        <location filename="editor/pagesmpl.cpp" line="158"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="158"/>
-        <location filename="editor/pagesmpl.cpp" line="161"/>
+        <location filename="editor/pagesmpl.cpp" line="157"/>
+        <location filename="editor/pagesmpl.cpp" line="160"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(min)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="232"/>
-        <location filename="editor/pagesmpl.cpp" line="605"/>
+        <location filename="editor/pagesmpl.cpp" line="230"/>
+        <location filename="editor/pagesmpl.cpp" line="609"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="242"/>
-        <location filename="editor/pagesmpl.cpp" line="744"/>
+        <location filename="editor/pagesmpl.cpp" line="240"/>
+        <location filename="editor/pagesmpl.cpp" line="748"/>
         <source>right</source>
         <translation>pravý</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="243"/>
-        <location filename="editor/pagesmpl.cpp" line="745"/>
+        <location filename="editor/pagesmpl.cpp" line="241"/>
+        <location filename="editor/pagesmpl.cpp" line="749"/>
         <source>left</source>
         <translation>levý</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="244"/>
-        <location filename="editor/pagesmpl.cpp" line="746"/>
+        <location filename="editor/pagesmpl.cpp" line="242"/>
+        <location filename="editor/pagesmpl.cpp" line="750"/>
         <source>link</source>
         <translation>spojení</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="282"/>
+        <location filename="editor/pagesmpl.cpp" line="280"/>
         <source>Sample not linked to an instrument yet.</source>
         <translation>Vzorek ještě není spojen s žádným nástrojem.</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="284"/>
+        <location filename="editor/pagesmpl.cpp" line="282"/>
         <source>Sample linked to instrument:</source>
         <translation>Vzorek spojen s nástrojem:</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="286"/>
+        <location filename="editor/pagesmpl.cpp" line="284"/>
         <source>Sample linked to instruments:</source>
         <translation>Vzorek spojen s nástroji:</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="476"/>
-        <location filename="editor/pagesmpl.cpp" line="980"/>
+        <location filename="editor/pagesmpl.cpp" line="480"/>
+        <location filename="editor/pagesmpl.cpp" line="984"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Změna úspěšně použita na různé vzorky</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="743"/>
-        <location filename="editor/pagesmpl.cpp" line="768"/>
+        <location filename="editor/pagesmpl.cpp" line="747"/>
+        <location filename="editor/pagesmpl.cpp" line="772"/>
         <source>mono</source>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1049"/>
+        <location filename="editor/pagesmpl.cpp" line="1053"/>
         <source>Stop</source>
         <translation>Zastavení</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1068"/>
+        <location filename="editor/pagesmpl.cpp" line="1072"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1069"/>
+        <location filename="editor/pagesmpl.cpp" line="1073"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1071"/>
+        <location filename="editor/pagesmpl.cpp" line="1075"/>
         <source>&amp;Yes</source>
         <translation>&amp;Ano</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1072"/>
+        <location filename="editor/pagesmpl.cpp" line="1076"/>
         <source>&amp;No</source>
         <translation>&amp;Ne</translation>
     </message>

@@ -246,8 +246,9 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes)
 void ModulatorEditor::checkOverrides()
 {
     // List of default mods
-    QVector<ModulatorData> defaultMods(10);
-    for (quint16 i = 0; i < 10; i++)
+    quint16 defModCount = ModulatorData::defaultModulatorNumber();
+    QVector<ModulatorData> defaultMods(defModCount);
+    for (quint16 i = 0; i < defModCount; i++)
         defaultMods[i].loadDefaultModulator(i);
 
     // Browse all cells
@@ -273,7 +274,7 @@ void ModulatorEditor::checkOverrides()
         // Test if the mod is overriding a default mod (instrument level only)
         if (!_currentId.isPrst())
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < defModCount; j++)
             {
                 if (mod == defaultMods[j])
                 {
