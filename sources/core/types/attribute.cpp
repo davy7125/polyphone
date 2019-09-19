@@ -142,23 +142,23 @@ AttributeValue Attribute::fromRealValue(AttributeType champ, bool isPrst, double
     case champ_modEnvToFilterFc: case champ_modLfoToPitch: case champ_modLfoToFilterFc:
     case champ_vibLfoToPitch: case champ_scaleTuning:
     case champ_overridingRootKey: case champ_keynum: case champ_velocity: // can be -1 (not defined)
-        storedValue.shValue = static_cast<qint16>(qRound(realValue));
+        storedValue.shValue = round(realValue);
         break;
     case champ_pan: case champ_initialAttenuation: case champ_initialFilterQ: case champ_sustainVolEnv:
     case champ_sustainModEnv: case champ_modLfoToVolume: case champ_reverbEffectsSend:
     case champ_chorusEffectsSend:
-        storedValue.shValue = static_cast<qint16>(qRound(realValue * 10.));
+        storedValue.shValue = round(realValue * 10.);
         break;
     case champ_sampleModes: case champ_exclusiveClass: case champ_sampleID:
-        storedValue.wValue = static_cast<quint16>(qRound(realValue));
+        storedValue.wValue = static_cast<quint16>(realValue + 0.5); // Only positive
         break;
     case champ_startloopAddrsCoarseOffset: case champ_endloopAddrsCoarseOffset:
     case champ_startAddrsCoarseOffset: case champ_endAddrsCoarseOffset:
-        storedValue.shValue = static_cast<qint16>(qRound(realValue) / 32768);
+        storedValue.shValue = round(realValue) / 32768;
         break;
     case champ_startloopAddrsOffset: case champ_startAddrsOffset:
     case champ_endloopAddrsOffset: case champ_endAddrsOffset:
-        storedValue.shValue = static_cast<qint16>(qRound(realValue) % 32768);
+        storedValue.shValue = static_cast<qint16>(round(realValue) % 32768);
         break;
     case champ_keyRange: case champ_velRange:
         storedValue.rValue.byHi = static_cast<quint8>(0.001 * realValue);
@@ -170,19 +170,19 @@ AttributeValue Attribute::fromRealValue(AttributeType champ, bool isPrst, double
     case champ_attackModEnv: case champ_attackVolEnv:
     case champ_decayModEnv: case champ_decayVolEnv:
     case champ_releaseModEnv: case champ_releaseVolEnv:
-        storedValue.shValue = static_cast<qint16>(qRound(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056));
+        storedValue.shValue = round(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056);
         break;
     case champ_initialFilterFc:
         if (isPrst)
-            storedValue.shValue = static_cast<qint16>(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056);
+            storedValue.shValue = round(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056);
         else
-            storedValue.shValue = static_cast<qint16>(1200. * qLn(qMax(0.001, realValue) / 8.176) / 0.69314718056);
+            storedValue.shValue = round(1200. * qLn(qMax(0.001, realValue) / 8.176) / 0.69314718056);
         break;
     case champ_freqModLFO: case champ_freqVibLFO:
         if (isPrst)
-            storedValue.shValue = static_cast<qint16>(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056);
+            storedValue.shValue = round(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056);
         else
-            storedValue.shValue = static_cast<qint16>(1200. * qLn(qMax(0.001, realValue) / 8.176) / 0.69314718056);
+            storedValue.shValue = round(1200. * qLn(qMax(0.001, realValue) / 8.176) / 0.69314718056);
         break;
     default:
         break;
@@ -717,4 +717,9 @@ QString Attribute::getDescription(AttributeType champ, bool isPrst)
     }
 
     return result;
+}
+
+qint16 Attribute::round(double value)
+{
+    return static_cast<qint16>(value > 0 ? (value + 0.5) : (value - 0.5));
 }
