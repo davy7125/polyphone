@@ -1,0 +1,108 @@
+.TH POLYPHONE "1" "7 novembre 2018" "polyphone 2.0" "Page de manuel pour Polyphone"
+
+.SH NOM
+\fBpolyphone\fP \- éditeur de banque de sons
+
+.SH SYNOPSIS
+.B polyphone
+.br
+.B polyphone
+[\fIFICHIER\fR]
+.br
+.B polyphone
+[\fIFICHIER_1\fR] [\fIFICHIER_2\fR] ...
+.br
+.B polyphone
+-1 [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-d\fR \fIRÉPERTOIRE_EN_SORTIE\fR] [\fB\-o\fR \fINOM_EN_SORTIE\fR]
+.br
+.B polyphone
+-2 [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-d\fR \fIRÉPERTOIRE_EN_SORTIE\fR] [\fB\-o\fR \fINOM_EN_SORTIE\fR] [\fB\-c\fR \fICONFIG\fR]
+.br
+.B polyphone
+-3 [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-d\fR \fIRÉPERTOIRE_EN_SORTIE\fR] [\fB\-o\fR \fINOM_EN_SORTIE\fR] [\fB\-c\fR \fICONFIG\fR]
+
+.SH DESCRIPTION
+.B polyphone
+fournit une interface simple et efficace pour créer et éditer des fichiers .sf2 . Ce logiciel incorpore des outils pour faciliter et automatiser l'édition de différents paramètres, rendant possible de gérer de grandes quantités de données. 
+.br
+.PP
+Les formats sf2, sf3, sfz (import / export) et sfArk (import uniquement) sont supportés. Les conversions sont possibles en ligne de commande.
+.br
+.PP
+Davantage d'informations peuvent être trouvées à https://www.polyphone-soundfonts.com .
+
+.SH OPTIONS
+.TP
+.BR \fBFICHIER\fR
+Spécifie le fichier à ouvrir quand
+.B polyphone
+démarre. Plusieurs fichiers peuvent être chargés s'ils sont séparés par des espaces.
+Les formats sf2 (version 2.01 ou 2.04), sf3, sfz et sfArk (version 1 ou 2) sont supportés.
+.TP
+.BR \fB-1\fR
+Utilisez
+.B polyphone
+pour convertir un fichier dans le format sf2.
+.TP
+.BR \fB-2\fR
+Utilisez
+.B polyphone
+pour convertir un fichier dans le format sf3.
+.TP
+.BR \fB-3\fR
+Utilisez
+.B polyphone
+pour convertir un fichier dans le format sfz.
+.TP
+[\fB\-i\fR \fICHEMIN_DU_FICHIER_EN_ENTRÉE\fR]
+Chemin d'entrée à convertir. Le format du fichier d'entrée doit être sf2, sf3, sfz ou sfArk.
+.TP
+[\fB\-d\fR \fIRÉPERTOIRE_DE_SORTIE\fR]
+Le répertoire de sortie dans lequel le fichier d'entrée sera converti. Par défaut, c'est le même répertoire que celui du fichier d'entrée.
+.TP
+[\fB\-o\fR \fINOM_DE_SORTIE\fR]
+Le nom de sortie du fichier converti. L'extension sera ajoutée automatiquement suivant la conversion. Par défaut, c'est le même nom que le fichier d'entrée.
+.TP
+[\fB\-c\fR \fICONFIG\fR]
+Configuration de la conversion, le contenu étant dépendant du type de conversion.
+.BR \fB-r\fR
+Supprime la configuration existante.
+.br
+.BR
+ * 
+.B conversion sf2
+.br
+Pas de configuration pour cette conversion.
+.br
+.BR
+ * 
+.B conversion sf3
+.br
+La configuration est faite avec un caractère indiquant la qualité de la compression. '0' pour basse, '1' pour moyenne, et '2' pour haute qualité. Le défaut est de '1'.
+.br
+.BR
+ * 
+.B conversion sfz
+.br
+La configuration est faite de trois caractères. Le premier caractère est '1' si chaque pré-réglage doit être préfixé par son numéro de pré-réglage, '0' sinon. Le deuxième caractère est '1' si un répertoire par banque doit être créé, '0' sinon. Le troisième caractère est '1' si la classification General MIDI doit être utilisée pour trier les pré-réglages, '0' sinon. Par défaut, c'est '000'.
+.SH EXEMPLES
+ * Conversion depuis sfArk vers sf2 :
+.br
+.BR polyphone
+-1 -i /chemin/vers/le/fichier.sfArk
+.br
+.BR
+ * Conversion depuis sf2 vers sf3 (bonne qualité) :
+.br
+.BR polyphone
+-2 -i /chemin/vers/le/fichier.sf2 -c 2
+.br
+.BR
+ * Conversion depuis sf3 vers sfz (sous-répertoire pour la banque et classification GM) :
+.br
+.BR polyphone
+-3 -i /chemin/vers/le/fichier.sf3 -c 011
+.SH AUTEUR
+Davy Triponney (davy.triponney@gmail.com)
+.br
+Cette page de manuel a été traduite (à partir de la version version anglaise fournie par l'amont) par Olivier Humbert (<trebmuh@tuxfamily.org>) pour le projet LibraZiK et peut être utilisée par tout le monde.
