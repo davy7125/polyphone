@@ -1,0 +1,106 @@
+.TH POLYPHONE "1" "November 7th, 2018" "polyphone 2.0" "Polyphone Manual Page"
+
+.SH NAME
+\fBpolyphone\fP \- soundfont editor
+
+.SH SYNOPSIS
+.B polyphone
+.br
+.B polyphone
+[\fIFILE\fR]
+.br
+.B polyphone
+[\fIFILE_1\fR] [\fIFILE_2\fR] ...
+.br
+.B polyphone
+-1 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR]
+.br
+.B polyphone
+-2 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR] [\fB\-c\fR \fICONFIG\fR]
+.br
+.B polyphone
+-3 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR] [\fB\-c\fR \fICONFIG\fR]
+
+.SH DESCRIPTION
+.B polyphone
+provides a simple and efficient interface for creating and editing .sf2 files. This software comprises tools to facilitate and automate the editing of different parameters, making it possible to handle a large amount of data.
+.br
+.PP
+sf2, sf3, sfz (import / export) and sfArk (import only) formats are supported. Conversions are possible via command lines.
+.br
+.PP
+More information can be found at https://www.polyphone-soundfonts.com .
+
+.SH OPTIONS
+.TP
+.BR \fBFILE\fR
+Specifies the file to open when
+.B polyphone
+starts. Multiple files can be loaded if they are separated by spaces.
+sf2 (version 2.01 or 2.04), sf3, sfz and sfArk (version 1 or 2) formats are supported.
+.TP
+.BR \fB-1\fR
+Use
+.B polyphone
+to convert a file into the sf2 format.
+.TP
+.BR \fB-2\fR
+Use
+.B polyphone
+to convert a file into the sf3 format.
+.TP
+.BR \fB-3\fR
+Use
+.B polyphone
+to convert a file into the sfz format.
+.TP
+[\fB\-i\fR \fIINPUT_FILEPATH\fR]
+Input path to convert. The input file format must be sf2, sf3, sfz or sfArk.
+.TP
+[\fB\-d\fR \fIOUTPUT_DIR\fR]
+Output directory in which the input file will be converted. By default, this is the same directory than the input file.
+.TP
+[\fB\-o\fR \fIOUTPUT_NAME\fR]
+Output name of the converted file. The extension will be automatically added depending on the conversion. By default, this is the same name than the input file.
+.TP
+[\fB\-c\fR \fICONFIG\fR]
+Conversion configuration, the content being dependent on the conversion type.
+.BR \fB-r\fR
+Remove the existing configuration.
+.br
+.BR
+ * 
+.B sf2 conversion
+.br
+No configuration for this conversion.
+.br
+.BR
+ * 
+.B sf3 conversion
+.br
+The configuration is made of one character indicating the compression quality. '0' for low, '1' for medium and '2' for high quality. Default is '1'.
+.br
+.BR
+ * 
+.B sfz conversion
+.br
+The configuration is made of three characters. The first character is '1' if each preset must be prefixed by its preset number, '0' otherwise. The second character is '1' if a directory per bank must be created, '0' otherwise. The third character is '1' if the general midi classification must be used to sort presets, '0' otherwise. Default is '000'.
+.SH EXAMPLES
+ * Conversion from sfArk to sf2:
+.br
+.BR polyphone
+-1 -i /path/to/file.sfArk
+.br
+.BR
+ * Conversion from sf2 to sf3 (good quality):
+.br
+.BR polyphone
+-2 -i /path/to/file.sf2 -c 2
+.br
+.BR
+ * Conversion from sf3 to sfz (sub-directories for bank and gm classification):
+.br
+.BR polyphone
+-3 -i /path/to/file.sf3 -c 011
+.SH AUTHOR
+Davy Triponney (davy.triponney@gmail.com)
