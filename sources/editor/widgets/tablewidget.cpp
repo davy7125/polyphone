@@ -31,6 +31,7 @@
 #include <QClipboard>
 #include <QPainter>
 #include <QHeaderView>
+#include <QScrollBar>
 #include "tableheaderview.h"
 
 TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
@@ -206,6 +207,17 @@ void TableWidget::keyPressEvent(QKeyEvent *event)
     {
         QTableWidget::keyPressEvent(event);
     }
+}
+
+void TableWidget::wheelEvent(QWheelEvent * event)
+{
+    if (event->modifiers() == Qt::ShiftModifier)
+    {
+        event->setModifiers(Qt::NoModifier); // Otherwise it moves too fast
+        QApplication::sendEvent(this->horizontalScrollBar(), event);
+    }
+    else
+        QTableWidget::wheelEvent(event);
 }
 
 void TableWidget::commitData(QWidget *editor)

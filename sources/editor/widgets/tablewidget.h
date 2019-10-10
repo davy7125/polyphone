@@ -67,6 +67,7 @@ signals:
 
 protected:
     void keyPressEvent(QKeyEvent *event);
+    void wheelEvent(QWheelEvent * event);
 
 protected slots:
     // Function reimplemented to fill all selected cells in the same time
