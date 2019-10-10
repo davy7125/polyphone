@@ -69,6 +69,7 @@ private:
     QModelIndex getIndex(EltID id);
     IdList getSelectedIds();
 
+    QDateTime _startDrag;
     bool _fixingSelection;
     int _sf2Index;
     int _bestMatchSample;

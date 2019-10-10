@@ -714,6 +714,9 @@ void TreeView::openMenu(const QPoint &point)
 
 void TreeView::dragEnterEvent(QDragEnterEvent * event)
 {
+    // Start date time, for preventing unwanted actions
+    _startDrag = QDateTime::currentDateTime();
+
     // Current selection
     _draggedIds.clear();
     IdList ids = getSelectedIds();
@@ -762,8 +765,10 @@ void TreeView::dropEvent(QDropEvent *event)
     }
     else if (!_draggedIds.empty())
     {
-        if (!index.isValid())
+        // Possibly prevent unwanted actions
+        if (!index.isValid() || _startDrag.msecsTo(QDateTime::currentDateTime()) < 150)
             return;
+
         EltID idDest = index.data(Qt::UserRole).value<EltID>();
         if (idDest.typeElement == elementRootInst)
         {
