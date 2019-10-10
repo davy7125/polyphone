@@ -40,7 +40,6 @@ TRANSLATIONS = polyphone_fr.ts \
 QT += core gui printsupport svg network #testlib
 TARGET = polyphone
 TEMPLATE = app
-QMAKE_CXXFLAGS += -std=c++11
 CONFIG += c++11
 
 win32 {
@@ -63,6 +62,7 @@ win32 {
     LIBS += -lzlib1 -lwinmm -llibogg -llibvorbis -llibvorbisfile -lcrypto -llibFLAC
 }
 unix:!macx {
+    QMAKE_CXXFLAGS += -std=c++11
     DEFINES += __LINUX_ALSASEQ__ __UNIX_JACK__
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa jack portaudio-2.0 zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0 openssl
@@ -75,6 +75,7 @@ unix:!macx {
     DESTDIR=bin
 }
 macx {
+    QMAKE_CXXFLAGS += -std=c++11
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
     QMAKE_MAC_SDK = macosx10.14
     DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT

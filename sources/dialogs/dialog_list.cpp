@@ -121,3 +121,9 @@ void DialogList::on_pushOk_clicked()
     }
     QDialog::accept();
 }
+
+void DialogList::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    Q_UNUSED(item)
+    on_pushOk_clicked();
+}

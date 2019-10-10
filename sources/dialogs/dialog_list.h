@@ -49,6 +49,7 @@ signals:
     void elementSelected(EltID id, bool isAssociation);
 
 private slots:
+    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
     void on_pushCancel_clicked();
     void on_pushOk_clicked();
 
