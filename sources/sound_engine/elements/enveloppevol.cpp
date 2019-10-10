@@ -92,8 +92,8 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
     // Avancement
     bool fin = false;
     quint32 avancement = 0;
-    quint32 duree = 0;
-    float val2 = 0;
+    quint32 duration = 0;
+    float lastValue = 0;
     float coef, valTmp;
 
     while (avancement < size)
@@ -102,42 +102,42 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
         {
         case phase1delay:
             // Number of remaining points in the phase
-            duree = _currentSmpl < v_timeDelay ? v_timeDelay - _currentSmpl : 0;
-            if (duree <= size - avancement)
+            duration = _currentSmpl < v_timeDelay ? v_timeDelay - _currentSmpl : 0;
+            if (duration <= size - avancement)
             {
                 _currentPhase = phase2attack;
                 _currentSmpl = 0;
             }
             else
             {
-                duree = size - avancement;
-                _currentSmpl += duree;
+                duration = size - avancement;
+                _currentSmpl += duration;
             }
-            val2 = 0;
-            for (quint32 i = 0; i < duree; i++)
+            lastValue = 0;
+            for (quint32 i = 0; i < duration; i++)
                 data[avancement + i] = 0;
             break;
         case phase2attack:
             // Number of remaining points in the phase
-            duree = _currentSmpl < v_timeAttack ? v_timeAttack - _currentSmpl : 0;
-            if (duree <= size - avancement)
+            duration = _currentSmpl < v_timeAttack ? v_timeAttack - _currentSmpl : 0;
+            if (duration <= size - avancement)
             {
                 _currentPhase = phase3hold;
                 _currentSmpl = 0;
-                val2 = 1;
+                lastValue = 1;
             }
             else
             {
-                duree = size - avancement;
-                _currentSmpl += duree;
-                val2 = static_cast<float>(_currentSmpl) / v_timeAttack;
+                duration = size - avancement;
+                _currentSmpl += duration;
+                lastValue = static_cast<float>(_currentSmpl) / v_timeAttack;
             }
             // Convex attack => linear amplitude
-            coef = (val2 - this->_precValue) / duree;
+            coef = (lastValue - this->_precValue) / duration;
             valTmp = 0;
             if (_isMod)
             {
-                for (quint32 i = 0; i < duree; i++)
+                for (quint32 i = 0; i < duration; i++)
                 {
                     data[avancement + i] = gain * (valTmp + this->_precValue);
                     valTmp += coef;
@@ -145,7 +145,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             }
             else
             {
-                for (quint32 i = 0; i < duree; i++)
+                for (quint32 i = 0; i < duration; i++)
                 {
                     data[avancement + i] = gain * (data[avancement + i] * (valTmp + this->_precValue));
                     valTmp += coef;
@@ -154,123 +154,125 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             break;
         case phase3hold:
             // Number of remaining points in the phase
-            duree = _currentSmpl < timeHold ? timeHold - _currentSmpl : 0;
-            if (duree <= size - avancement)
+            duration = _currentSmpl < timeHold ? timeHold - _currentSmpl : 0;
+            if (duration <= size - avancement)
             {
                 _currentPhase = phase4decay;
                 _currentSmpl = 0;
             }
             else
             {
-                duree = size - avancement;
-                _currentSmpl += duree;
+                duration = size - avancement;
+                _currentSmpl += duration;
             }
-            val2 = 1;
+            lastValue = 1;
             if (_isMod)
             {
-                for (quint32 i = 0; i < duree; i++)
+                for (quint32 i = 0; i < duration; i++)
                     data[avancement + i] = gain;
             }
             else
             {
-                for (quint32 i = 0; i < duree; i++)
+                for (quint32 i = 0; i < duration; i++)
                     data[avancement + i] = gain * data[avancement + i];
             }
             break;
         case phase4decay:
             // Number of remaining points in the phase
-            duree = _currentSmpl < timeDecay ? timeDecay - _currentSmpl : 0;
-            if (duree <= size - avancement)
+            duration = _currentSmpl < timeDecay ? timeDecay - _currentSmpl : 0;
+            if (duration <= size - avancement)
             {
                 _currentPhase = phase5sustain;
                 _currentSmpl = 0;
             }
             else
             {
-                duree = size - avancement;
-                _currentSmpl += duree;
+                duration = size - avancement;
+                _currentSmpl += duration;
             }
             if (_isMod)
             {
-                // Exponential decay
-                coef = static_cast<float>(qPow(0.001 / (1. - static_cast<double>(levelSustain) + 0.001), 1. / timeDecay));
-                val2 = (_precValue - levelSustain) * coef + levelSustain;
-                for (quint32 i = 0; i < duree; i++)
+                // Linear decay
+                coef = -1.f / v_timeRelease;
+                lastValue = _precValue + coef;
+                for (quint32 i = 0; i < duration; i++)
                 {
-                    data[avancement + i] = gain * val2;
-                    val2 = (val2 - levelSustain) * coef + levelSustain;
+                    data[avancement + i] = gain * lastValue;
+                    lastValue += coef;
+                    if (lastValue < levelSustain)
+                        lastValue = levelSustain;
                 }
             }
             else
             {
                 // Exponential decay
                 coef = static_cast<float>(qPow(0.00001585 / (1. - static_cast<double>(levelSustain) + 0.00001585), 1. / timeDecay));
-                val2 = (_precValue - levelSustain) * coef + levelSustain;
-                for (quint32 i = 0; i < duree; i++)
+                lastValue = (_precValue - levelSustain) * coef + levelSustain;
+                for (quint32 i = 0; i < duration; i++)
                 {
-                    data[avancement + i] = gain * (data[avancement + i] * val2);
-                    val2 = (val2 - levelSustain) * coef + levelSustain;
+                    data[avancement + i] = gain * (data[avancement + i] * lastValue);
+                    lastValue = (lastValue - levelSustain) * coef + levelSustain;
                 }
             }
             break;
         case phase5sustain:
             // Number of values
-            duree = size - avancement;
-            val2 = levelSustain;
+            duration = size - avancement;
+            lastValue = levelSustain;
             if (_isMod)
             {
-                for (quint32 i = 0; i < duree; i++)
-                    data[avancement + i] = gain * val2;
+                for (quint32 i = 0; i < duration; i++)
+                    data[avancement + i] = gain * lastValue;
             }
             else
             {
-                for (quint32 i = 0; i < duree; i++)
-                    data[avancement + i] = gain * (data[avancement + i] * val2);
+                for (quint32 i = 0; i < duration; i++)
+                    data[avancement + i] = gain * (data[avancement + i] * lastValue);
             }
             break;
         case phase6release:
             // Number of remaining points in the phase
-            duree = _currentSmpl < v_timeRelease ? v_timeRelease - _currentSmpl : 0;
-            if (duree <= size - avancement)
+            duration = _currentSmpl < v_timeRelease ? v_timeRelease - _currentSmpl : 0;
+            if (duration <= size - avancement)
             {
                 _currentPhase = phase7off;
                 _currentSmpl = 0;
             }
             else
             {
-                duree = size - avancement;
-                _currentSmpl += duree;
+                duration = size - avancement;
+                _currentSmpl += duration;
             }
             if (_isMod)
             {
                 // Linear decay
                 coef = -1.f / v_timeRelease;
-                val2 = _precValue + coef;
-                for (quint32 i = 0; i < duree; i++)
+                lastValue = _precValue + coef;
+                for (quint32 i = 0; i < duration; i++)
                 {
-                    data[avancement + i] = gain * val2;
-                    val2 += coef;
-                    if (val2 < 0)
-                        val2 = 0;
+                    data[avancement + i] = gain * lastValue;
+                    lastValue += coef;
+                    if (lastValue < 0)
+                        lastValue = 0;
                 }
             }
             else
             {
                 // Exponential decay
                 coef = static_cast<float>(qPow(0.00001585, 1. / v_timeRelease));
-                val2 = _precValue * coef;
-                for (quint32 i = 0; i < duree; i++)
+                lastValue = _precValue * coef;
+                for (quint32 i = 0; i < duration; i++)
                 {
-                    data[avancement + i] = gain * (data[avancement + i] * val2);
-                    val2 *= coef;
+                    data[avancement + i] = gain * (data[avancement + i] * lastValue);
+                    lastValue *= coef;
                 }
             }
             break;
         case phase7off:
             // Number of values
-            duree = size - avancement;
-            val2 = 0;
-            for (quint32 i = 0; i < duree; i++)
+            duration = size - avancement;
+            lastValue = 0;
+            for (quint32 i = 0; i < duration; i++)
                 data[avancement + i] = 0;
 
             // End
@@ -278,8 +280,8 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
         }
 
         // We keep the last value and we go on
-        _precValue = val2;
-        avancement += duree;
+        _precValue = lastValue;
+        avancement += duration;
     }
     return fin;
 }
