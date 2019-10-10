@@ -100,7 +100,7 @@ public:
     {}
 
     // Load a default modulator
-    static int MODULATOR_VEL_TO_FILTER_TYPE;
+    static int MODULATOR_VEL_TO_FILTER_TYPE; // Modified by confmanager
     static quint16 defaultModulatorNumber();
     void loadDefaultModulator(quint16 num);
 

@@ -25,7 +25,6 @@
 #include "configsectionsound.h"
 #include "ui_configsectionsound.h"
 #include "contextmanager.h"
-#include "modulatordata.h"
 
 ConfigSectionSound::ConfigSectionSound(QWidget *parent) :
     QWidget(parent),
@@ -81,7 +80,6 @@ void ConfigSectionSound::initialize()
     // Other
     ui->comboVelToFilter->blockSignals(true);
     ui->comboVelToFilter->setCurrentIndex(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", 1).toInt());
-    ModulatorData::MODULATOR_VEL_TO_FILTER_TYPE = ui->comboVelToFilter->currentIndex();
     ui->comboVelToFilter->blockSignals(false);
 }
 
@@ -129,5 +127,4 @@ void ConfigSectionSound::on_sliderGain_valueChanged(int value)
 void ConfigSectionSound::on_comboVelToFilter_currentIndexChanged(int index)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", index);
-    ModulatorData::MODULATOR_VEL_TO_FILTER_TYPE = index;
 }

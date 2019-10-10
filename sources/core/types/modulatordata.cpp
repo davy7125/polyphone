@@ -25,7 +25,9 @@
 #include "modulatordata.h"
 #include "attribute.h"
 
-
+// 0 => version 2.01
+// 1 => version 2.04 (default)
+// 2 => deactivated
 int ModulatorData::MODULATOR_VEL_TO_FILTER_TYPE = 1;
 
 bool SFModulator::operator==(const SFModulator& other)
