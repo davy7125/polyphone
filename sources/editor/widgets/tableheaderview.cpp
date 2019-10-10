@@ -160,10 +160,10 @@ void TableHeaderView::unmuteAll(bool unused)
 
     // Unmute all divisions of all presets
     EltID idPrst(elementPrst, _currentId.indexSf2);
-    foreach (int index, sm->getSiblings(idInst))
+    foreach (int index, sm->getSiblings(idPrst))
     {
         idPrst.indexElt = index;
-        EltID idPrstInst(elementPrstInst, idInst.indexSf2, idInst.indexElt);
+        EltID idPrstInst(elementPrstInst, idPrst.indexSf2, idPrst.indexElt);
         foreach (int subIndex, sm->getSiblings(idPrstInst))
         {
             idPrstInst.indexElt2 = subIndex;
