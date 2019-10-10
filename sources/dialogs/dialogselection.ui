@@ -41,9 +41,9 @@
    <item row="4" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QPushButton" name="pushCancel">
+      <widget class="QPushButton" name="pushOk">
        <property name="text">
-        <string>&amp;Cancel</string>
+        <string>&amp;Duplicate</string>
        </property>
       </widget>
      </item>
@@ -61,9 +61,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushOk">
+      <widget class="QPushButton" name="pushCancel">
        <property name="text">
-        <string>&amp;Duplicate</string>
+        <string>&amp;Cancel</string>
        </property>
       </widget>
      </item>
@@ -71,6 +71,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
+  <tabstop>pushSelectAll</tabstop>
+  <tabstop>pushSelectNone</tabstop>
+  <tabstop>listWidget</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

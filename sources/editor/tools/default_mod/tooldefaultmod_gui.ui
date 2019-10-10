@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>718</width>
-    <height>266</height>
+    <height>276</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -98,6 +98,12 @@
    <header>modulatorlistwidget.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>pushOverride</tabstop>
+  <tabstop>pushDisable</tabstop>
+  <tabstop>pushCancel</tabstop>
+  <tabstop>listWidget</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

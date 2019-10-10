@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>430</width>
-    <height>415</height>
+    <width>341</width>
+    <height>358</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -694,9 +694,9 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="pushCancel">
+      <widget class="QPushButton" name="pushOk">
        <property name="text">
-        <string>&amp;Cancel</string>
+        <string>&amp;Ok</string>
        </property>
       </widget>
      </item>
@@ -714,9 +714,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushOk">
+      <widget class="QPushButton" name="pushCancel">
        <property name="text">
-        <string>&amp;Ok</string>
+        <string>&amp;Cancel</string>
        </property>
       </widget>
      </item>
@@ -724,6 +724,26 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
+  <tabstop>lineName</tabstop>
+  <tabstop>checkStereo</tabstop>
+  <tabstop>comboFreq</tabstop>
+  <tabstop>checkLoop</tabstop>
+  <tabstop>comboType1</tabstop>
+  <tabstop>sliderType1</tabstop>
+  <tabstop>comboType3</tabstop>
+  <tabstop>sliderType3</tabstop>
+  <tabstop>comboType5</tabstop>
+  <tabstop>sliderType5</tabstop>
+  <tabstop>comboType7</tabstop>
+  <tabstop>sliderType7</tabstop>
+  <tabstop>comboType9</tabstop>
+  <tabstop>sliderType9</tabstop>
+  <tabstop>spinInversions</tabstop>
+  <tabstop>sliderOctave</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

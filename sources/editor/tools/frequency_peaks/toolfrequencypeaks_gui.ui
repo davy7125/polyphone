@@ -57,10 +57,10 @@
      <attribute name="verticalHeaderVisible">
       <bool>false</bool>
      </attribute>
-     <attribute name="verticalHeaderDefaultSectionSize">
+     <attribute name="verticalHeaderMinimumSectionSize">
       <number>20</number>
      </attribute>
-     <attribute name="verticalHeaderMinimumSectionSize">
+     <attribute name="verticalHeaderDefaultSectionSize">
       <number>20</number>
      </attribute>
     </widget>
@@ -80,6 +80,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushExport</tabstop>
+  <tabstop>pushClose</tabstop>
+  <tabstop>table</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

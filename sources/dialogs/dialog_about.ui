@@ -206,8 +206,8 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>pushClose</tabstop>
   <tabstop>pushCredit</tabstop>
+  <tabstop>pushClose</tabstop>
  </tabstops>
  <resources/>
  <connections/>

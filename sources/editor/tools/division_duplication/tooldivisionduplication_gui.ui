@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>261</width>
-    <height>211</height>
+    <width>202</width>
+    <height>183</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -118,9 +118,9 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="pushCancel">
+      <widget class="QPushButton" name="pushOk">
        <property name="text">
-        <string>&amp;Cancel</string>
+        <string>&amp;Ok</string>
        </property>
       </widget>
      </item>
@@ -138,9 +138,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushOk">
+      <widget class="QPushButton" name="pushCancel">
        <property name="text">
-        <string>&amp;Ok</string>
+        <string>&amp;Cancel</string>
        </property>
       </widget>
      </item>
@@ -148,6 +148,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
+  <tabstop>checkForEachKey</tabstop>
+  <tabstop>checkForEachVelocityRange</tabstop>
+  <tabstop>listVelocites</tabstop>
+  <tabstop>pushAdd</tabstop>
+  <tabstop>pushRemove</tabstop>
+  <tabstop>spinMinVel</tabstop>
+  <tabstop>spinMaxVel</tabstop>
+ </tabstops>
  <resources>
   <include location="../../../resources.qrc"/>
  </resources>

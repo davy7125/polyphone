@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>289</width>
-    <height>136</height>
+    <width>192</width>
+    <height>110</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -97,9 +97,9 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="pushCancel">
+      <widget class="QPushButton" name="pushOk">
        <property name="text">
-        <string>&amp;Cancel</string>
+        <string>&amp;Ok</string>
        </property>
       </widget>
      </item>
@@ -117,9 +117,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushOk">
+      <widget class="QPushButton" name="pushCancel">
        <property name="text">
-        <string>&amp;Ok</string>
+        <string>&amp;Cancel</string>
        </property>
       </widget>
      </item>

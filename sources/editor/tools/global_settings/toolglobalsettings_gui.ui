@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>656</width>
-    <height>376</height>
+    <width>581</width>
+    <height>322</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -266,16 +266,16 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushCancel">
+      <widget class="QPushButton" name="pushOk">
        <property name="text">
-        <string>&amp;Cancel</string>
+        <string>&amp;Ok</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushOk">
+      <widget class="QPushButton" name="pushCancel">
        <property name="text">
-        <string>&amp;Ok</string>
+        <string>&amp;Cancel</string>
        </property>
       </widget>
      </item>
@@ -291,6 +291,18 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
+  <tabstop>comboPattern</tabstop>
+  <tabstop>doubleSpinParam</tabstop>
+  <tabstop>doubleSpinMin</tabstop>
+  <tabstop>doubleSpinMax</tabstop>
+  <tabstop>comboModif</tabstop>
+  <tabstop>comboAttribute</tabstop>
+  <tabstop>spinVelMin</tabstop>
+  <tabstop>spinVelMax</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

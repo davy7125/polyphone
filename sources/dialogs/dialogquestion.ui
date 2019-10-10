@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>231</width>
-    <height>72</height>
+    <width>221</width>
+    <height>61</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,24 +29,21 @@
    <property name="bottomMargin">
     <number>6</number>
    </property>
-   <item row="0" column="0" colspan="3">
-    <widget class="QLineEdit" name="lineEdit"/>
-   </item>
-   <item row="1" column="2">
+   <item row="1" column="1">
     <widget class="QPushButton" name="pushOk">
      <property name="text">
       <string>&amp;Ok</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
+   <item row="1" column="3">
     <widget class="QPushButton" name="pushCancel">
      <property name="text">
       <string>&amp;Cancel</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
+   <item row="1" column="2">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -59,8 +56,16 @@
      </property>
     </spacer>
    </item>
+   <item row="0" column="1" colspan="3">
+    <widget class="QLineEdit" name="lineEdit"/>
+   </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
