@@ -94,7 +94,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
     quint32 avancement = 0;
     quint32 duration = 0;
     float lastValue = 0;
-    float coef, valTmp;
+    float coef;
 
     while (avancement < size)
     {
@@ -124,31 +124,32 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             {
                 _currentPhase = phase3hold;
                 _currentSmpl = 0;
-                lastValue = 1;
             }
             else
             {
                 duration = size - avancement;
                 _currentSmpl += duration;
-                lastValue = static_cast<float>(_currentSmpl) / v_timeAttack;
             }
-            // Convex attack => linear amplitude
-            coef = (lastValue - this->_precValue) / duration;
-            valTmp = 0;
+
+            lastValue = this->_precValue;
             if (_isMod)
             {
+                // Convex attack (TODO)
+                coef = 1.f / v_timeAttack; // Target is 1.f
                 for (quint32 i = 0; i < duration; i++)
                 {
-                    data[avancement + i] = gain * (valTmp + this->_precValue);
-                    valTmp += coef;
+                    data[avancement + i] = gain * lastValue;
+                    lastValue += coef;
                 }
             }
             else
             {
+                // Linear amplitude => convex attack (dB)
+                coef = 1.f / v_timeAttack; // Target is 1.f
                 for (quint32 i = 0; i < duration; i++)
                 {
-                    data[avancement + i] = gain * (data[avancement + i] * (valTmp + this->_precValue));
-                    valTmp += coef;
+                    data[avancement + i] = gain * lastValue * data[avancement + i];
+                    lastValue += coef;
                 }
             }
             break;
