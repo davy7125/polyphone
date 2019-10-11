@@ -134,12 +134,14 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             lastValue = this->_precValue;
             if (_isMod)
             {
-                // Convex attack (TODO)
-                coef = 1.f / v_timeAttack; // Target is 1.f
+                // Convex attack
+                float stiffness = 0.000001f;
+                coef = static_cast<float>(qPow(static_cast<double>(stiffness), 0.4 / v_timeAttack));
+                float correction = static_cast<float>(qPow(static_cast<double>(stiffness), 0.4));
                 for (quint32 i = 0; i < duration; i++)
                 {
                     data[avancement + i] = gain * lastValue;
-                    lastValue += coef;
+                    lastValue = 1.0f - coef * (1.0f - lastValue + stiffness + correction) + stiffness + correction;
                 }
             }
             else
