@@ -31,6 +31,7 @@
 #include "dialogselection.h"
 #include <QMessageBox>
 #include <QKeyEvent>
+#include <QScrollBar>
 
 QList<ModulatorEditor *> ModulatorEditor::s_instances;
 QList<ModulatorData> ModulatorEditor::s_modulatorCopy;
@@ -143,6 +144,7 @@ void ModulatorEditor::setIds(IdList ids, QList<AttributeType> attributes)
         ui->pushPaste->setEnabled(true);
 
         // Update the interface with the current division
+        bool sameId = (_currentId == ids[0]);
         _currentId = ids[0];
 
         // Adapt the attributes to select
@@ -156,11 +158,11 @@ void ModulatorEditor::setIds(IdList ids, QList<AttributeType> attributes)
             attributes << champ_endloopAddrsCoarseOffset;
 
         // Update the interface
-        updateInterface(attributes);
+        updateInterface(attributes, sameId);
     }
 }
 
-void ModulatorEditor::updateInterface(QList<AttributeType> attributes)
+void ModulatorEditor::updateInterface(QList<AttributeType> attributes, bool keepScrollPosition)
 {
     // List of mods associated to the current id
     EltID modId = _currentId;
@@ -184,6 +186,7 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes)
     }
 
     // Clear the cell list
+    int scrollPosition = keepScrollPosition ? ui->listWidget->verticalScrollBar()->value() : -1;
     ui->listWidget->clear();
 
     // Foreach modulator
@@ -241,6 +244,9 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes)
     // Button visibility
     ui->pushClone->setEnabled(modCount > 0 && (_currentId.typeElement == elementInst || _currentId.typeElement == elementPrst));
     ui->pushCopy->setEnabled(modCount > 0);
+
+    if (scrollPosition != -1)
+        ui->listWidget->verticalScrollBar()->setValue(scrollPosition);
 }
 
 void ModulatorEditor::checkOverrides()

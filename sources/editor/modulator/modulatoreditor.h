@@ -60,7 +60,7 @@ private slots:
 
 private:
     void checkOverrides();
-    void updateInterface(QList<AttributeType> attributes);
+    void updateInterface(QList<AttributeType> attributes, bool keepScrollPosition);
     void updateButtons(bool withSelection);
     QList<EltID> getSelectedModulators();
     QList<ModulatorData> getModList(EltID id);
