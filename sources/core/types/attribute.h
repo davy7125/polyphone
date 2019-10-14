@@ -235,7 +235,6 @@ public:
 private:
     static int limit(int value, int min, int max);
     static double limit(double value, double min, double max);
-    static qint16 round(double value);
 
     AttributeType _champ;
     bool _isPrst;

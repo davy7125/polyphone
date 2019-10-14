@@ -50,6 +50,8 @@ public:
     static void prepareConversionTables(); // Call it once before concave(..) or convex(..)
     static double concave(double value);
     static double convex(double value);
+    static qint16 round16(double value);
+    static qint32 round32(double value);
 
 private:
     static int getNumberPart(const QString &str, int &length);

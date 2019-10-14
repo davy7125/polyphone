@@ -24,6 +24,7 @@
 
 #include "attribute.h"
 #include "contextmanager.h"
+#include "utils.h"
 #include <qmath.h>
 
 Attribute::Attribute(AttributeType champ, bool isPrst) :
@@ -142,23 +143,23 @@ AttributeValue Attribute::fromRealValue(AttributeType champ, bool isPrst, double
     case champ_modEnvToFilterFc: case champ_modLfoToPitch: case champ_modLfoToFilterFc:
     case champ_vibLfoToPitch: case champ_scaleTuning:
     case champ_overridingRootKey: case champ_keynum: case champ_velocity: // can be -1 (not defined)
-        storedValue.shValue = round(realValue);
+        storedValue.shValue = Utils::round16(realValue);
         break;
     case champ_pan: case champ_initialAttenuation: case champ_initialFilterQ: case champ_sustainVolEnv:
     case champ_sustainModEnv: case champ_modLfoToVolume: case champ_reverbEffectsSend:
     case champ_chorusEffectsSend:
-        storedValue.shValue = round(realValue * 10.);
+        storedValue.shValue = Utils::round16(realValue * 10.);
         break;
     case champ_sampleModes: case champ_exclusiveClass: case champ_sampleID:
         storedValue.wValue = static_cast<quint16>(realValue + 0.5); // Only positive
         break;
     case champ_startloopAddrsCoarseOffset: case champ_endloopAddrsCoarseOffset:
     case champ_startAddrsCoarseOffset: case champ_endAddrsCoarseOffset:
-        storedValue.shValue = round(realValue) / 32768;
+        storedValue.shValue = Utils::round16(realValue) / 32768;
         break;
     case champ_startloopAddrsOffset: case champ_startAddrsOffset:
     case champ_endloopAddrsOffset: case champ_endAddrsOffset:
-        storedValue.shValue = static_cast<qint16>(round(realValue) % 32768);
+        storedValue.shValue = static_cast<qint16>(Utils::round16(realValue) % 32768);
         break;
     case champ_keyRange: case champ_velRange:
         storedValue.rValue.byHi = static_cast<quint8>(0.001 * realValue);
@@ -170,19 +171,19 @@ AttributeValue Attribute::fromRealValue(AttributeType champ, bool isPrst, double
     case champ_attackModEnv: case champ_attackVolEnv:
     case champ_decayModEnv: case champ_decayVolEnv:
     case champ_releaseModEnv: case champ_releaseVolEnv:
-        storedValue.shValue = round(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056);
+        storedValue.shValue = Utils::round16(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056);
         break;
     case champ_initialFilterFc:
         if (isPrst)
-            storedValue.shValue = round(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056);
+            storedValue.shValue = Utils::round16(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056);
         else
-            storedValue.shValue = round(1200. * qLn(qMax(0.001, realValue) / 8.176) / 0.69314718056);
+            storedValue.shValue = Utils::round16(1200. * qLn(qMax(0.001, realValue) / 8.176) / 0.69314718056);
         break;
     case champ_freqModLFO: case champ_freqVibLFO:
         if (isPrst)
-            storedValue.shValue = round(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056);
+            storedValue.shValue = Utils::round16(1200. * qLn(qMax(0.001, realValue)) / 0.69314718056);
         else
-            storedValue.shValue = round(1200. * qLn(qMax(0.001, realValue) / 8.176) / 0.69314718056);
+            storedValue.shValue = Utils::round16(1200. * qLn(qMax(0.001, realValue) / 8.176) / 0.69314718056);
         break;
     default:
         break;
@@ -511,7 +512,7 @@ AttributeValue Attribute::fromString(AttributeType champ, bool isPrst, QString s
         value = fromRealValue(champ, isPrst, strValue.toDouble(&ok));
         break;
     case champ_sampleModes: {
-        int iTmp = qRound(strValue.toDouble(&ok));
+        int iTmp = Utils::round16(strValue.toDouble(&ok));
         if (iTmp != 0 && iTmp != 1 && iTmp != 3)
             iTmp = 0;
         value.wValue = static_cast<quint16>(iTmp);
@@ -717,9 +718,4 @@ QString Attribute::getDescription(AttributeType champ, bool isPrst)
     }
 
     return result;
-}
-
-qint16 Attribute::round(double value)
-{
-    return static_cast<qint16>(value > 0 ? (value + 0.5) : (value - 0.5));
 }

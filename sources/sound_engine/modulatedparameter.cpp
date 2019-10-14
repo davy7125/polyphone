@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "modulatedparameter.h"
+#include "utils.h"
 
 ModulatedParameter::ModulatedParameter(AttributeType type) :
     _type(type),
@@ -90,10 +91,18 @@ void ModulatedParameter::computeValue()
     if (_computed && _notRealTime)
         return;
 
-    // Add all values (before any conversion)
-    qint32 addition = static_cast<qint32>(_instModulation) + _instValue.getStoredValue().shValue;
-    if (_type != champ_overridingRootKey && _type != champ_velocity && _type != champ_keynum)
-        addition += static_cast<qint32>(_prstModulation) + _prstValue.getStoredValue().shValue;
+    // Add all values and modulations before any conversion
+    // Special case for the attenuation: the value (not the modulation) must be stupidly multiplied by 0.4
+    // Special case for keynum, overriding root key and velocity: only instrument values
+    qint32 addition = 0;
+    if (_type == champ_initialAttenuation)
+        addition = Utils::round32(_instModulation + _prstModulation + 0.4 *
+                                  (_instValue.getStoredValue().shValue + _prstValue.getStoredValue().shValue));
+    else if (_type == champ_overridingRootKey && _type == champ_velocity && _type == champ_keynum)
+        addition = Utils::round32(_instModulation) + _instValue.getStoredValue().shValue;
+    else
+        addition = Utils::round32(_instModulation + _prstModulation) +
+                _instValue.getStoredValue().shValue + _prstValue.getStoredValue().shValue;
 
     // Limit the result
     if (addition > 32767)

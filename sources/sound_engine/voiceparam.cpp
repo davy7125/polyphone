@@ -220,7 +220,7 @@ void VoiceParam::prepareForSmpl(int key, SFSampleLink link)
     _parameters[champ_exclusiveClass]->initValue(value, false);
 
     // Default release
-    value.shValue = static_cast<qint16>(qRound(1200. * qLn(0.2) / 0.69314718056));
+    value.shValue = static_cast<qint16>(qRound(1200. * qLn(0.2) / M_LN2));
     _parameters[champ_releaseVolEnv]->initValue(value, false);
 
     // Pan

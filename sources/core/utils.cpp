@@ -301,3 +301,13 @@ double Utils::convex(double val)
     return 1;
   return s_convexTable[static_cast<int>(val)];
 }
+
+qint16 Utils::round16(double value)
+{
+    return static_cast<qint16>(value > 0 ? (value + 0.5) : (value - 0.5));
+}
+
+qint32 Utils::round32(double value)
+{
+    return static_cast<qint32>(value > 0 ? (value + 0.5) : (value - 0.5));
+}

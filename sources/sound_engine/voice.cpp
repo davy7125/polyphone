@@ -183,7 +183,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         _y1 = valTmp;
         dataL[i] = static_cast<float>(valTmp);
     }
-    gainLowPassFilter = qMax(1.33 * filterQ, 0.);
+    gainLowPassFilter = qMax(1.33 * filterQ, 0.); // Correction due to the filter resonance, in dB
 
     // Volume modulation with values from the mod LFO converted to dB
     if (v_modLfoToVolume <= 0.1 || v_modLfoToVolume >= 0.1)
@@ -199,8 +199,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 
     // Apply the volume envelop
     bool bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release, playedNote,
-                                              // Gain: should have been a multiplication by 0.1 but FluidSynth do this
-                                              static_cast<float>(qPow(10, 0.02 * (_gain - gainLowPassFilter - v_attenuation))),
+                                              static_cast<float>(qPow(10, 0.05 * (_gain - gainLowPassFilter - v_attenuation))),
                                               _voiceParam);
 
     if ((bRet2 && v_loopMode != 3) || endSample)
