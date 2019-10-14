@@ -185,17 +185,10 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     }
     gainLowPassFilter = qMax(1.33 * filterQ, 0.);
 
-    // Volume modulation, dB conversion
-    int signe;
-    if (v_modLfoToVolume < 0)
-        signe = 1;
-    else
-        signe = -1;
-    for (quint32 i = 0; i < len; i++)
-    {
-        valTmp = qMax(signe * static_cast<double>(modLfo[i]), 0.);
-        dataL[i] *= static_cast<float>(qPow(10., signe * 0.005 * v_modLfoToVolume * valTmp));
-    }
+    // Volume modulation with values from the mod LFO converted to dB
+    if (v_modLfoToVolume <= 0.1 || v_modLfoToVolume >= 0.1)
+        for (quint32 i = 0; i < len; i++)
+            dataL[i] *= static_cast<float>(qPow(10., 0.05 * v_modLfoToVolume * static_cast<double>(modLfo[i])));
 
     // Destroy arrays
     delete [] dataMod;
