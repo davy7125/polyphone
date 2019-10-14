@@ -109,7 +109,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     dataR = &dataR[nbNullValues];
 
     bool endSample = false;
-    double gainLowPassFilter = 0;
+    double lowPassFilterGainCorrection = 0;
 
     // Prepare arrays
     float * dataMod = new float[len];
@@ -129,9 +129,9 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     double deltaPitchFixed = -12. * qLn((double)_audioSmplRate / _smplRate) / 0.69314718056 +
             (playedNote - v_rootkey) * 0.01 * v_scaleTune + 0.01 * v_fineTune + v_coarseTune;
     for (quint32 i = 0; i < len; i++)
-        modPitch[i + 1] = deltaPitchFixed + 0.01 * (dataMod[i] * v_modEnvToPitch
-                                                    + modLfo[i] * v_modLfoToPitch
-                                                    + vibLfo[i] * v_vibLfoToPitch);
+        modPitch[i + 1] = deltaPitchFixed + 0.01 * (dataMod[i] * v_modEnvToPitch +
+                                                    modLfo[i] * v_modLfoToPitch +
+                                                    vibLfo[i] * v_vibLfoToPitch);
 
     // Convert into a cumulated distance between points
     modPitch[0] = _deltaPos + 1;
@@ -163,16 +163,16 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     // Low-pass filter
     for (quint32 i = 0; i < len; i++)
     {
-        modFreq[i] = v_filterFreq * EnveloppeVol::fastPow2((dataMod[i] * v_modEnvToFilterFc +
-                                                            modLfo[i] * v_modLfoToFilterFreq) / 1200);
+        modFreq[i] = v_filterFreq * EnveloppeVol::fastPow2(
+                    (dataMod[i] * v_modEnvToFilterFc + modLfo[i] * v_modLfoToFilterFreq) / 1200);
         if (modFreq[i] > 20000)
             modFreq[i] = 20000;
         else if (modFreq[i] < 20)
             modFreq[i] = 20;
     }
     double a0, a1, a2, b1, b2, valTmp;
-    double filterQ = v_filterQ - 3.01;
-    double q_lin = qPow(10, filterQ / 20.);
+    double filterQ = v_filterQ - 3.01; // So that a value of 0 gives a non-resonant low pass
+    double q_lin = qPow(10, filterQ / 20.); // If filterQ is -3.01, q_lin is 1/sqrt(2)
     for (quint32 i = 0; i < len; i++)
     {
         biQuadCoefficients(a0, a1, a2, b1, b2, modFreq[i], q_lin);
@@ -183,7 +183,10 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         _y1 = valTmp;
         dataL[i] = static_cast<float>(valTmp);
     }
-    gainLowPassFilter = qMax(1.33 * filterQ, 0.); // Correction due to the filter resonance, in dB
+
+    // The correction due to the filter resonance, in dB,
+    // is half the gain on the peak (so half of 2 * q_lin * q_lin which is q_lin * q_lin)
+    lowPassFilterGainCorrection = q_lin * q_lin;
 
     // Volume modulation with values from the mod LFO converted to dB
     if (v_modLfoToVolume <= 0.1 || v_modLfoToVolume >= 0.1)
@@ -199,7 +202,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 
     // Apply the volume envelop
     bool bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release, playedNote,
-                                              static_cast<float>(qPow(10, 0.05 * (_gain - gainLowPassFilter - v_attenuation))),
+                                              static_cast<float>(qPow(10, 0.05 * (_gain - lowPassFilterGainCorrection - v_attenuation))),
                                               _voiceParam);
 
     if ((bRet2 && v_loopMode != 3) || endSample)
@@ -329,8 +332,7 @@ void Voice::biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, d
     }
     else
     {
-        double d = 1. / Q;
-        double dTmp = d * sin(theta) / 2.;
+        double dTmp = sin(theta) / (2. * Q);
         if (dTmp <= -1)
         {
             a0 = 1;
