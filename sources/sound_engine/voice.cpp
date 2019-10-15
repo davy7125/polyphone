@@ -184,10 +184,6 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         dataL[i] = static_cast<float>(valTmp);
     }
 
-    // The correction due to the filter resonance, in dB,
-    // is half the gain on the peak (so half of 2 * q_lin * q_lin which is q_lin * q_lin)
-    lowPassFilterGainCorrection = q_lin * q_lin;
-
     // Volume modulation with values from the mod LFO converted to dB
     if (v_modLfoToVolume <= 0.1 || v_modLfoToVolume >= 0.1)
         for (quint32 i = 0; i < len; i++)
@@ -202,7 +198,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 
     // Apply the volume envelop
     bool bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release, playedNote,
-                                              static_cast<float>(qPow(10, 0.05 * (_gain - lowPassFilterGainCorrection - v_attenuation))),
+                                              static_cast<float>(qPow(10, 0.05 * (_gain - v_attenuation))),
                                               _voiceParam);
 
     if ((bRet2 && v_loopMode != 3) || endSample)
