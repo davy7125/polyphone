@@ -51,9 +51,9 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
 {
     Q_UNUSED(option)
 
-    bool isNumeric, isKey, isLoop, isFixed;
+    bool isNumeric, isKey, isLoop, isFixed, isAttenuation;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed);
+    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed, isAttenuation);
     if (isFixed)
         return nullptr;
 
@@ -128,9 +128,9 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
 
 void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    bool isNumeric, isKey, isLoop, isFixed;
+    bool isNumeric, isKey, isLoop, isFixed, isAttenuation;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed);
+    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed, isAttenuation);
 
     if (!isNumeric)
     {
@@ -193,9 +193,9 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
 
 void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
-    bool isNumeric, isKey, isLoop, isFixed;
+    bool isNumeric, isKey, isLoop, isFixed, isAttenuation;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed);
+    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed, isAttenuation);
 
     if (isLoop)
     {
@@ -249,9 +249,9 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 void TableDelegate::destroyEditor(QWidget * editor, const QModelIndex & index) const
 {
-    bool isNumeric, isKey, isLoop, isFixed;
+    bool isNumeric, isKey, isLoop, isFixed, isAttenuation;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed);
+    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed, isAttenuation);
 
     if (isLoop && !editor->property(DECO_PROPERTY).isNull())
     {
@@ -268,9 +268,9 @@ void TableDelegate::destroyEditor(QWidget * editor, const QModelIndex & index) c
 
 void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    bool isNumeric, isKey, isLoop, isFixed;
+    bool isNumeric, isKey, isLoop, isFixed, isAttenuation;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed);
+    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed, isAttenuation);
 
     if (isLoop)
     {
@@ -313,12 +313,14 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
     }
 }
 
-void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow, bool &isLoop, bool &isFixed) const
+void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow, bool &isLoop,
+                            bool &isFixed, bool &isAttenuation) const
 {
     isNumeric = true;
     isKey = false;
     isLoop = false;
     isFixed = false;
+    isAttenuation = (numRow == 3);
     nbDecimales = 0;
 
     if (_table->rowCount() == 50)

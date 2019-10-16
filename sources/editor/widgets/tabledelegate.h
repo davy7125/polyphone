@@ -34,7 +34,7 @@ class TableDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    TableDelegate(QTableWidget * table, QObject * parent = NULL);
+    TableDelegate(QTableWidget * table, QObject * parent = nullptr);
     bool isEditing() { return _isEditing; }
     void resetModDisplay();
     void updateModDisplay(int column, QList<int> rows);
@@ -49,7 +49,8 @@ protected:
 #endif
 
 private:
-    void getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow, bool &isLoop, bool &isFixed) const;
+    void getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow, bool &isLoop,
+                 bool &isFixed, bool &isAttenuation) const;
     QTableWidget * _table;
 
     static const char * DECO_PROPERTY;

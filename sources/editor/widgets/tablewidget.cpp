@@ -224,7 +224,7 @@ void TableWidget::commitData(QWidget *editor)
 {
     emit(actionBegin());
     QTableWidget::commitData(editor);
-    
+
     QVariant value = model()->data(currentIndex(), Qt::EditRole).toString().replace(",", ".");
     int curRow = currentIndex().row();
     int curCol = currentIndex().column();
@@ -461,8 +461,8 @@ void TableWidget::onItemSelectionChanged()
     {
         // Problematic case: background color when the first loopmode cell is selected
         if (this->item(5, 0)->isSelected())
-            this->item(5, 0)->setBackgroundColor(this->palette().color(QPalette::Highlight));
-        else if (this->item(5, 0)->backgroundColor() == this->palette().color(QPalette::Highlight))
+            this->item(5, 0)->setBackground(this->palette().color(QPalette::Highlight));
+        else if (this->item(5, 0)->background() == this->palette().color(QPalette::Highlight))
         {
             QColor color = this->palette().color(QPalette::Base);
             QColor alternateColor = this->palette().color(QPalette::AlternateBase);

@@ -56,7 +56,7 @@ public:
 
     // Association champ - ligne
     virtual AttributeType getChamp(int row) = 0;
-    virtual int getRow(quint16 champ) = 0;
+    virtual int getRow(AttributeType champ) = 0;
 
     static QPixmap getPixMap(QColor backgroundColor, QColor dotColor);
 

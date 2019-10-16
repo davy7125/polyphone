@@ -239,9 +239,9 @@ TableWidgetPrst::TableWidgetPrst(QWidget *parent) : TableWidget(parent)
 
 TableWidgetPrst::~TableWidgetPrst() {}
 
-int TableWidgetPrst::getRow(quint16 champ)
+int TableWidgetPrst::getRow(AttributeType champ)
 {
-    return _fieldList.indexOf((AttributeType)champ) + 1;
+    return _fieldList.indexOf(champ) + 1;
 }
 
 AttributeType TableWidgetPrst::getChamp(int row)

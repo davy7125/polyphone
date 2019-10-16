@@ -120,7 +120,7 @@ void PageTable::addGlobal(IdList listIds)
         idGen.indexElt2 = 0;
         foreach (int i, _sf2->getSiblings(idGen))
         {
-            genValTmp = _sf2->get(id, (AttributeType)i);
+            genValTmp = _sf2->get(id, static_cast<AttributeType>(i));
             switch (i)
             {
             case champ_startAddrsOffset:
@@ -156,13 +156,15 @@ void PageTable::addGlobal(IdList listIds)
                 offsetEndLoop += 32768 * genValTmp.shValue;
                 break;
             default:
-                row = _table->getRow(i);
+                row = _table->getRow(static_cast<AttributeType>(i));
                 if (row > -1)
                 {
                     if (i == champ_sampleModes)
                         _table->setLoopModeImage(row, numCol, genValTmp.wValue);
                     else
-                        _table->item(row, numCol)->setText(Attribute::toString((AttributeType)i, _typePage == PAGE_PRST, genValTmp));
+                        _table->item(row, numCol)->setText(
+                                    Attribute::toString(static_cast<AttributeType>(i),
+                                                        _typePage == PAGE_PRST, genValTmp));
                 }
             }
         }
@@ -242,7 +244,7 @@ void PageTable::addDivisions(EltID id)
         _table->addColumn(numCol, qStr, id);
         foreach (int champTmp, _sf2->getSiblings(id2))
         {
-            genValTmp = _sf2->get(id, (AttributeType)champTmp);
+            genValTmp = _sf2->get(id, static_cast<AttributeType>(champTmp));
             switch (champTmp)
             {
             case champ_startAddrsOffset:
@@ -278,13 +280,15 @@ void PageTable::addDivisions(EltID id)
                 offsetEndLoop += 32768 * genValTmp.shValue;
                 break;
             default:
-                row = _table->getRow(champTmp);
+                row = _table->getRow(static_cast<AttributeType>(champTmp));
                 if (row > -1)
                 {
                     if (champTmp == champ_sampleModes)
                         _table->setLoopModeImage(row, numCol, genValTmp.wValue);
                     else
-                        _table->item(row, numCol)->setText(Attribute::toString((AttributeType)champTmp, _typePage == PAGE_PRST, genValTmp));
+                        _table->item(row, numCol)->setText(
+                                    Attribute::toString(static_cast<AttributeType>(champTmp),
+                                                        _typePage == PAGE_PRST, genValTmp));
                 }
             }
         }
@@ -353,16 +357,16 @@ void PageTable::formatTable(bool multiGlobal)
             {
                 if (j < 6) {}
                 else if (j < 10)
-                    _table->item(j, i)->setBackgroundColor(alternateColor);
+                    _table->item(j, i)->setBackground(alternateColor);
                 else if (j < 13) {}
                 else if (j < 21)
-                    _table->item(j, i)->setBackgroundColor(alternateColor);
+                    _table->item(j, i)->setBackground(alternateColor);
                 else if (j < 31) {}
                 else if (j < 39)
-                    _table->item(j, i)->setBackgroundColor(alternateColor);
+                    _table->item(j, i)->setBackground(alternateColor);
                 else if (j < 44) {}
                 else
-                    _table->item(j, i)->setBackgroundColor(alternateColor);
+                    _table->item(j, i)->setBackground(alternateColor);
                 _table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
@@ -436,13 +440,13 @@ void PageTable::formatTable(bool multiGlobal)
             {
                 if (j < 5) {}
                 else if (j < 8)
-                    _table->item(j, i)->setBackgroundColor(alternateColor);
+                    _table->item(j, i)->setBackground(alternateColor);
                 else if (j < 10) {}
                 else if (j < 18)
-                    _table->item(j, i)->setBackgroundColor(alternateColor);
+                    _table->item(j, i)->setBackground(alternateColor);
                 else if (j < 28) {}
                 else if (j < 36)
-                    _table->item(j, i)->setBackgroundColor(alternateColor);
+                    _table->item(j, i)->setBackground(alternateColor);
                 _table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
@@ -460,7 +464,7 @@ void PageTable::styleFixedRow(int numRow)
     for (int i = 0; i < _table->columnCount(); i++)
     {
         _table->item(numRow, i)->setFont(font);
-        _table->item(numRow, i)->setTextColor(fixedColor);
+        _table->item(numRow, i)->setForeground(fixedColor);
         _table->item(numRow, i)->setFlags(Qt::NoItemFlags);
     }
 
@@ -509,8 +513,8 @@ void PageTable::setOffset(int ligne, int colonne, AttributeType champ1, Attribut
         // Enregistrement de la nouvelle valeur
         AttributeValue genAmount2 = Attribute::fromString(champ2, _typePage == PAGE_PRST, texte, ok);
         int iVal = limit(32768 * genAmount2.shValue + genAmount.shValue, champ1, id);
-        genAmount2.shValue = iVal / 32768;
-        genAmount.shValue = iVal % 32768;
+        genAmount2.shValue = static_cast<qint16>(iVal / 32768);
+        genAmount.shValue = static_cast<qint16>(iVal % 32768);
         if (genAmount.shValue != _sf2->get(id, champ1).shValue ||
                 genAmount2.shValue != _sf2->get(id, champ2).shValue)
         {
@@ -630,7 +634,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
         {
             EltID id = _table->getID(colonne);
             AttributeValue genAmount;
-            genAmount.wValue = _table->item(ligne, colonne)->data(Qt::UserRole).toInt();
+            genAmount.wValue = static_cast<quint16>(_table->item(ligne, colonne)->data(Qt::UserRole).toInt());
 
             // Modification champ
             if (genAmount.wValue != _sf2->get(id, champ).wValue || !_sf2->isSet(id, champ))
@@ -645,7 +649,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
         if (_table->item(ligne, colonne)->text().isEmpty())
         {
             // Effacement d'un paramètre ?
-            switch ((int)champ)
+            switch (champ)
             {
             case champ_startAddrsOffset:
                 resetChamp(colonne, champ_startAddrsOffset, champ_startAddrsCoarseOffset);
@@ -666,7 +670,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
         else
         {
             _preparingPage = true;
-            switch ((int)champ)
+            switch (champ)
             {
             case champ_startAddrsOffset:
                 setOffset(ligne, colonne, champ_startAddrsOffset, champ_startAddrsCoarseOffset);

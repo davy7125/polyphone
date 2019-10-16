@@ -232,7 +232,7 @@ TableWidgetInst::TableWidgetInst(QWidget *parent) : TableWidget(parent)
         {
             // Different style for the fixed elements
             item->setFont(font);
-            item->setTextColor(fixedColor);
+            item->setForeground(fixedColor);
         }
         this->setVerticalHeaderItem(i, item);
     }
@@ -240,9 +240,9 @@ TableWidgetInst::TableWidgetInst(QWidget *parent) : TableWidget(parent)
 
 TableWidgetInst::~TableWidgetInst() {}
 
-int TableWidgetInst::getRow(quint16 champ)
+int TableWidgetInst::getRow(AttributeType champ)
 {
-    return _fieldList.indexOf((AttributeType)champ) + 1;
+    return _fieldList.indexOf(champ) + 1;
 }
 
 AttributeType TableWidgetInst::getChamp(int row)

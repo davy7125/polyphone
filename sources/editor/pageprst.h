@@ -78,7 +78,7 @@ public:
 
     // Association champ - ligne
     AttributeType getChamp(int row);
-    int getRow(quint16 champ);
+    int getRow(AttributeType champ);
 
 private:
     QList<AttributeType> _fieldList;
