@@ -97,7 +97,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             QDoubleSpinBox * spin = new QDoubleSpinBox(parent);
             spin->setMinimum(-1000000);
             spin->setMaximum(1000000);
-            spin->setSingleStep(.1);
+            spin->setSingleStep(isAttenuation ? 0.04 : .1);
             spin->setStyleSheet("QDoubleSpinBox{ border: 3px solid " + highlightColor.name() + "; }" +
                                 "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
             spin->setDecimals(nbDecimales);
@@ -320,7 +320,7 @@ void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int 
     isKey = false;
     isLoop = false;
     isFixed = false;
-    isAttenuation = (numRow == 3);
+    isAttenuation = false;
     nbDecimales = 0;
 
     if (_table->rowCount() == 50)
@@ -335,7 +335,11 @@ void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int 
         case 1:
             isNumeric = false;
             break;
-        case 2: case 3: case 11: case 16: case 24: case 34: case 39: case 40:
+        case 2:
+            isAttenuation = true;
+            nbDecimales = 2;
+            break;
+        case 3: case 11: case 16: case 24: case 34: case 39: case 40:
             nbDecimales = 1;
             break;
         case 12: case 13: case 14: case 15: case 17:
@@ -372,7 +376,11 @@ void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int 
         case 1:
             isNumeric = false;
             break;
-        case 2: case 3: case 8: case 13: case 21: case 31: case 35: case 36:
+        case 2:
+            isAttenuation = true;
+            nbDecimales = 2;
+            break;
+        case 3: case 8: case 13: case 21: case 31: case 35: case 36:
             nbDecimales = 1;
             break;
         case 7: case 9: case 10: case 11: case 12: case 14:

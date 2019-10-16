@@ -102,7 +102,11 @@ double Attribute::toRealValue(AttributeType champ, bool isPrst, AttributeValue s
     case champ_overridingRootKey: case champ_keynum: case champ_velocity: // can be -1 (not defined)
         realValue = storedValue.shValue;
         break;
-    case champ_pan: case champ_initialAttenuation: case champ_initialFilterQ: case champ_sustainVolEnv:
+    case champ_initialAttenuation:
+        // Special case because of an extra coeff 0.4 (historical error)
+        realValue = 0.04 * static_cast<double>(storedValue.shValue);
+        break;
+    case champ_pan: case champ_initialFilterQ: case champ_sustainVolEnv:
     case champ_sustainModEnv: case champ_modLfoToVolume: case champ_reverbEffectsSend:
     case champ_chorusEffectsSend:
         realValue = 0.1 * static_cast<double>(storedValue.shValue);
@@ -145,7 +149,11 @@ AttributeValue Attribute::fromRealValue(AttributeType champ, bool isPrst, double
     case champ_overridingRootKey: case champ_keynum: case champ_velocity: // can be -1 (not defined)
         storedValue.shValue = Utils::round16(realValue);
         break;
-    case champ_pan: case champ_initialAttenuation: case champ_initialFilterQ: case champ_sustainVolEnv:
+    case champ_initialAttenuation:
+        // Multiply by 10 and then divide by 0.4 => multiply by 25
+        storedValue.shValue = Utils::round16(realValue * 25.);
+        break;
+    case champ_pan: case champ_initialFilterQ: case champ_sustainVolEnv:
     case champ_sustainModEnv: case champ_modLfoToVolume: case champ_reverbEffectsSend:
     case champ_chorusEffectsSend:
         storedValue.shValue = Utils::round16(realValue * 10.);
@@ -390,7 +398,11 @@ QString Attribute::toString(AttributeType champ, bool isPrst, AttributeValue sto
         else
             result = ContextManager::keyName()->getKeyName(storedValue.rValue.byLo) + "-" + ContextManager::keyName()->getKeyName(storedValue.rValue.byHi);
         break;
-    case champ_initialAttenuation: case champ_pan: case champ_initialFilterQ:
+    case champ_initialAttenuation:
+        // Now with two digits since we have real dB (one step is 0.04 dB)
+        result = QString::number(toRealValue(champ, isPrst, storedValue), 'f', 2);
+        break;
+    case champ_pan: case champ_initialFilterQ:
     case champ_modLfoToVolume:
     case champ_sustainVolEnv: case champ_sustainModEnv:
     case champ_chorusEffectsSend: case champ_reverbEffectsSend:

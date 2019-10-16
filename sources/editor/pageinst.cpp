@@ -236,6 +236,12 @@ TableWidgetInst::TableWidgetInst(QWidget *parent) : TableWidget(parent)
         }
         this->setVerticalHeaderItem(i, item);
     }
+
+    // Unit warning
+    this->verticalHeaderItem(3)->setToolTip(trUtf8("Values on this row are expressed in real dB.\nOther soundfont editors might display other units."));
+    this->verticalHeaderItem(3)->setData(Qt::DecorationRole,
+                                         ContextManager::theme()->getColoredSvg(":/icons/info.svg", QSize(12, 12),
+                                                                                ThemeManager::HIGHLIGHTED_BACKGROUND));
 }
 
 TableWidgetInst::~TableWidgetInst() {}

@@ -77,7 +77,7 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
         if (item != nullptr)
             return item->isHidden();
     }
-    if (role == Qt::UserRole + 2)
+    else if (role == Qt::UserRole + 2)
     {
         TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
         if (item != nullptr)

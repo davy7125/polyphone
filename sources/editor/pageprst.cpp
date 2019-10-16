@@ -235,6 +235,12 @@ TableWidgetPrst::TableWidgetPrst(QWidget *parent) : TableWidget(parent)
     this->setRowCount(_fieldList.count() + 1);
     for (int i = 1; i < this->rowCount(); i++)
         this->setVerticalHeaderItem(i, new QTableWidgetItem(Attribute::getDescription(_fieldList[i - 1], true)));
+
+    // Unit warning
+    this->verticalHeaderItem(3)->setToolTip(trUtf8("Values on this row are expressed in real dB.\nOther soundfont editors might display other units."));
+    this->verticalHeaderItem(3)->setData(Qt::DecorationRole,
+                                         ContextManager::theme()->getColoredSvg(":/icons/info.svg", QSize(12, 12),
+                                                                                ThemeManager::HIGHLIGHTED_BACKGROUND));
 }
 
 TableWidgetPrst::~TableWidgetPrst() {}

@@ -82,23 +82,31 @@ double ModulatedParameter::getRealValue()
     // Compute the value
     computeValue();
 
+    // Special case: attenuation
+    if (_type == champ_initialAttenuation)
+    {
+        // Historical error: extra coefficient 0.4 for the inst and prst values => multiplication by 0.04
+        // no extra coefficient for the modulations => the conversion with the coeff 0.1 is kept
+        double value = 0.04 * (_instValue.getStoredValue().shValue + _prstValue.getStoredValue().shValue) +
+                0.1 * (_instModulation + _prstModulation);
+        return value < 0 ? 0 : (value > 144 ? 144 : value);
+    }
+
     // Return a possibly converted value
     return Attribute(_type, false, _computedValue).getRealValue();
 }
 
 void ModulatedParameter::computeValue()
 {
-    if (_computed && _notRealTime)
+    // Attenuation is not computed here
+    if ((_computed && _notRealTime) || _type == champ_initialAttenuation)
         return;
 
     // Add all values and modulations before any conversion
     // Special case for the attenuation: the value (not the modulation) must be stupidly multiplied by 0.4
     // Special case for keynum, overriding root key and velocity: only instrument values
     qint32 addition = 0;
-    if (_type == champ_initialAttenuation)
-        addition = Utils::round32(_instModulation + _prstModulation + 0.4 *
-                                  (_instValue.getStoredValue().shValue + _prstValue.getStoredValue().shValue));
-    else if (_type == champ_overridingRootKey && _type == champ_velocity && _type == champ_keynum)
+    if (_type == champ_overridingRootKey && _type == champ_velocity && _type == champ_keynum)
         addition = Utils::round32(_instModulation) + _instValue.getStoredValue().shValue;
     else
         addition = Utils::round32(_instModulation + _prstModulation) +
