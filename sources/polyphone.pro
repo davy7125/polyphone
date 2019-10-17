@@ -219,6 +219,7 @@ SOURCES	+= main.cpp \
     editor/overview/pageoverviewprst.cpp \
     editor/overview/tablepageoverview.cpp \
     editor/widgets/equalizer.cpp \
+    editor/widgets/tableheaderviewv.cpp \
     editor/widgets/tablewidget.cpp \
     editor/widgets/tabledelegate.cpp \
     editor/widgets/spinboxkey.cpp \
@@ -523,6 +524,7 @@ HEADERS  += \
     editor/overview/pageoverviewprst.h \
     editor/overview/tablepageoverview.h \
     editor/widgets/equalizer.h \
+    editor/widgets/tableheaderviewv.h \
     editor/widgets/tablewidget.h \
     editor/widgets/tabledelegate.h \
     editor/widgets/spinboxkey.h \

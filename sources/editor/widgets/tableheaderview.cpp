@@ -27,6 +27,9 @@
 #include <QMouseEvent>
 #include <QMenu>
 #include "soundfontmanager.h"
+#include <QPainter>
+
+const int TableHeaderView::MARGIN = 2;
 
 TableHeaderView::TableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, parent)
 {
@@ -48,6 +51,10 @@ TableHeaderView::TableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, 
 
     QAction * action2 = _menu->addAction(trUtf8("unmute all"));
     connect(action2, SIGNAL(triggered(bool)), this, SLOT(unmuteAll(bool)));
+
+    // Height of the header
+    QFontMetrics fm(this->font());
+    _height = (fm.height() + MARGIN) * 2;
 }
 
 TableHeaderView::~TableHeaderView()
@@ -174,4 +181,59 @@ void TableHeaderView::unmuteAll(bool unused)
     // Remove all decorations
     for (int i = 0; i < this->model()->columnCount(); i++)
         this->model()->setHeaderData(i, Qt::Horizontal, QVariant(), Qt::DecorationRole);
+}
+
+QSize TableHeaderView::sizeHint() const
+{
+    // Override the height with a custom value
+    QSize size = QHeaderView::sizeHint();
+    size.setHeight(_height);
+    return size;
+}
+
+void TableHeaderView::paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const
+{
+    // Get the text and icon to display
+    QString text = this->model()->headerData(logicalIndex, this->orientation(), Qt::DisplayRole).toString();
+    QPixmap icon = this->model()->headerData(logicalIndex, this->orientation(), Qt::DecorationRole).value<QPixmap>();
+
+    // Icon and text rect
+    QRect iconRect = icon.rect();
+    QRect textRect = rect;
+    textRect.setWidth(textRect.width() - 2 * MARGIN);
+    if (iconRect.width() > 0)
+        textRect.setWidth(textRect.width() - iconRect.width() - MARGIN);
+    textRect.translate(MARGIN, MARGIN);
+
+    // Adapt the text
+    QString adaptedText = text;
+    int lengthLine1 = text.length();
+    QFontMetrics fm(this->font());
+    while (fm.width(text.left(lengthLine1)) > textRect.width() && lengthLine1 > 0)
+        lengthLine1--;
+    if (lengthLine1 < text.length())
+        adaptedText = text.left(lengthLine1) + "\n" + fm.elidedText(text.mid(lengthLine1), Qt::ElideRight, textRect.width());
+    else
+        textRect.translate(0, fm.height() / 2);
+
+    // First draw the cell without text or icon for the background and border
+    this->model()->setHeaderData(logicalIndex, this->orientation(), "", Qt::DisplayRole);
+    this->model()->setHeaderData(logicalIndex, this->orientation(), QVariant(), Qt::DecorationRole);
+    QHeaderView::paintSection(painter, rect, logicalIndex);
+    this->model()->setHeaderData(logicalIndex, this->orientation(), text, Qt::DisplayRole);
+    this->model()->setHeaderData(logicalIndex, this->orientation(), icon, Qt::DecorationRole);
+
+    // Then draw the text
+    QVariant foregroundBrush = model()->headerData(logicalIndex, this->orientation(), Qt::ForegroundRole);
+    if (foregroundBrush.canConvert<QBrush>())
+        painter->setPen(foregroundBrush.value<QBrush>().color());
+    painter->setClipRect(rect);
+    painter->drawText(textRect, Qt::AlignHCenter, adaptedText);
+
+    // Finally draw the icon on the right and vertically centered
+    int iconHeight = iconRect.height();
+    int headerHeight = rect.height();
+    int offsetY = iconHeight < headerHeight ? (headerHeight - iconHeight) / 2 : 0;
+    painter->setClipRect(rect);
+    painter->drawPixmap(textRect.right() + MARGIN, rect.top() + offsetY, iconRect.width(), iconRect.height(), icon);
 }

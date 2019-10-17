@@ -41,6 +41,8 @@ signals:
 
 protected:
     void mousePressEvent(QMouseEvent * e);
+    void paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const;
+    QSize sizeHint() const;
 
 private slots:
     void mute(bool isMute);
@@ -53,6 +55,9 @@ private:
     QAction * _muteAction;
     int _currentSection;
     EltID _currentId;
+    int _height;
+
+    static const int MARGIN;
 };
 
 #endif // TABLEHEADERVIEW_H

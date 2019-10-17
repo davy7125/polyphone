@@ -33,14 +33,14 @@
 #include <QHeaderView>
 #include <QScrollBar>
 #include "tableheaderview.h"
+#include "tableheaderviewv.h"
 
 TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
 {
     _tableDelegate = new TableDelegate(this);
     setItemDelegate(_tableDelegate);
-    _tableHeader = new TableHeaderView(this);
-    setHorizontalHeader(_tableHeader);
-    this->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    setHorizontalHeader(new TableHeaderView(this));
+    setVerticalHeader(new TableHeaderViewV(this));
 
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));

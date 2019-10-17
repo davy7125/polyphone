@@ -93,16 +93,6 @@ void PageTable::addGlobal(IdList listIds)
         bool offsetEndLoopDefined = false;
         int row;
 
-        QString qStr;
-        if (multiGlobal)
-        {
-            qStr = _sf2->getQstr(id, champ_name).left(10);
-            qStr.append("\n");
-            qStr.append(_sf2->getQstr(id, champ_name).mid(10).left(10));
-        }
-        else
-            qStr = trUtf8("Global");
-
         // Column number
         int numCol = 0;
         for (int i = 0; i < nbGlobal; i++)
@@ -113,7 +103,7 @@ void PageTable::addGlobal(IdList listIds)
                 break;
         }
 
-        _table->addColumn(numCol, qStr, id);
+        _table->addColumn(numCol, multiGlobal ? _sf2->getQstr(id, champ_name) : trUtf8("Global"), id);
         nbGlobal++;
         EltID idGen = id;
         idGen.typeElement = this->contenantGen;
@@ -223,7 +213,6 @@ void PageTable::addDivisions(EltID id)
                 .arg(_sf2->get(id, champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
                 .arg(_sf2->get(id, champ_velRange).rValue.byLo, 3, 10, QChar('0'))
                 .arg(_sf2->getQstr(id3, champ_name));
-        QString qStr = _sf2->getQstr(id3, champ_name).left(10) + "\n" + _sf2->getQstr(id3, champ_name).mid(10).left(10);
         for (int j = 1; j < nbSmplInst + 1; j++)
         {
             if (Utils::sortDivisions(id, _table->getID(j), _sortType) > 0)
@@ -241,7 +230,7 @@ void PageTable::addDivisions(EltID id)
         bool offsetStartLoopDefined = false;
         int offsetEndLoop = 0;
         bool offsetEndLoopDefined = false;
-        _table->addColumn(numCol, qStr, id);
+        _table->addColumn(numCol, _sf2->getQstr(id3, champ_name), id);
         foreach (int champTmp, _sf2->getSiblings(id2))
         {
             genValTmp = _sf2->get(id, static_cast<AttributeType>(champTmp));
