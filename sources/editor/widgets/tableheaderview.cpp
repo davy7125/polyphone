@@ -54,7 +54,7 @@ TableHeaderView::TableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, 
 
     // Height of the header
     QFontMetrics fm(this->font());
-    _height = (fm.height() + MARGIN) * 2;
+    _height = fm.height() * 2;
 }
 
 TableHeaderView::~TableHeaderView()
@@ -203,7 +203,7 @@ void TableHeaderView::paintSection(QPainter *painter, const QRect &rect, int log
     textRect.setWidth(textRect.width() - 2 * MARGIN);
     if (iconRect.width() > 0)
         textRect.setWidth(textRect.width() - iconRect.width() - MARGIN);
-    textRect.translate(MARGIN, MARGIN);
+    textRect.translate(MARGIN, 0);
 
     // Adapt the text
     QString adaptedText = text;
@@ -213,8 +213,6 @@ void TableHeaderView::paintSection(QPainter *painter, const QRect &rect, int log
         lengthLine1--;
     if (lengthLine1 < text.length())
         adaptedText = text.left(lengthLine1) + "\n" + fm.elidedText(text.mid(lengthLine1), Qt::ElideRight, textRect.width());
-    else
-        textRect.translate(0, fm.height() / 2);
 
     // First draw the cell without text or icon for the background and border
     this->model()->setHeaderData(logicalIndex, this->orientation(), "", Qt::DisplayRole);
@@ -228,7 +226,7 @@ void TableHeaderView::paintSection(QPainter *painter, const QRect &rect, int log
     if (foregroundBrush.canConvert<QBrush>())
         painter->setPen(foregroundBrush.value<QBrush>().color());
     painter->setClipRect(rect);
-    painter->drawText(textRect, Qt::AlignHCenter, adaptedText);
+    painter->drawText(textRect, Qt::AlignCenter, adaptedText);
 
     // Finally draw the icon on the right and vertically centered
     int iconHeight = iconRect.height();
