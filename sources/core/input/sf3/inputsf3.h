@@ -26,17 +26,19 @@
 #define INPUTSF3_H
 
 #include "abstractinput.h"
-class SoundfontManager;
+#include <QObject>
 
 class InputSf3 : public AbstractInput
 {
-    Q_OBJECT
-    
 public:
-    InputSf3();
+    /// Description of the file type to open
+    QString getInputDescription() override { return QObject::trUtf8("Sf3 files"); }
 
-protected slots:
-    void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
+    /// Extension of the file type to open
+    QString getInputExtension() override { return "sf3"; }
+
+    /// Return a parser
+    AbstractInputParser * getParser() override;
 };
 
 #endif // INPUTSF3_H

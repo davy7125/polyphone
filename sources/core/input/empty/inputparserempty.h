@@ -22,50 +22,19 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef EDITOR_H
-#define EDITOR_H
+#ifndef INPUTPARSEREMPTY_H
+#define INPUTPARSEREMPTY_H
 
-#include <QMainWindow>
-#include "basetypes.h"
-class AbstractInputParser;
+#include "abstractinputparser.h"
+class SoundfontManager;
 
-namespace Ui {
-class Editor;
-}
-
-class Editor : public QMainWindow
+class InputParserEmpty : public AbstractInputParser
 {
-    Q_OBJECT
-
 public:
-    explicit Editor(QWidget *parent = nullptr);
-    ~Editor();
+    InputParserEmpty();
 
-    /// Initialize the editor with a parser that can extract data and build a soundfont
-    void initialize(AbstractInputParser * input);
-
-    /// Index of the soundfont created
-    int getSf2Index() { return _sf2Index; }
-
-    /// Notify that a change has been made somewhere
-    void update(QString editingSource);
-
-signals:
-    void tabTitleChanged(QString title);
-    void filePathChanged(QString filePath);
-    void recorderDisplayChanged(bool isDisplayed);
-    void keyboardDisplayChanged(bool isDisplayed);
-
-private slots:
-    void inputProcessed();
-    void onSelectionChanged(IdList ids);
-    void displayOptionChanged(int displayOption);
-
-private:
-    void updateTitleAndPath();
-
-    Ui::Editor *ui;
-    int _sf2Index;
+protected slots:
+    void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
 };
 
-#endif // EDITOR_H
+#endif // INPUTPARSEREMPTY_H

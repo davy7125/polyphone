@@ -22,26 +22,23 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ABSTRACTINPUT_H
-#define ABSTRACTINPUT_H
+#ifndef INPUTGRANDORGUE_H
+#define INPUTGRANDORGUE_H
 
-#include <QString>
-class AbstractInputParser;
+#include "abstractinput.h"
+#include <QObject>
 
-class AbstractInput
+class InputGrandOrgue : public AbstractInput
 {
 public:
-    AbstractInput() {}
-    virtual ~AbstractInput() {}
-
     /// Description of the file type to open
-    virtual QString getInputDescription() = 0;
+    QString getInputDescription() override { return QObject::trUtf8("GrandOrgue sample sets"); }
 
     /// Extension of the file type to open
-    virtual QString getInputExtension() = 0;
+    QString getInputExtension() override { return "organ"; }
 
     /// Return a parser
-    virtual AbstractInputParser * getParser() = 0;
+    AbstractInputParser * getParser() override;
 };
 
-#endif // ABSTRACTINPUT_H
+#endif // INPUTGRANDORGUE_H

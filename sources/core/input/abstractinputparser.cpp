@@ -22,7 +22,7 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "abstractinput.h"
+#include "abstractinputparser.h"
 #include "basetypes.h"
 #include "soundfontmanager.h"
 #include <QFuture>
@@ -34,7 +34,7 @@
 #include <QtConcurrentRun>
 #endif
 
-AbstractInput::AbstractInput() : QObject(),
+AbstractInputParser::AbstractInputParser() : QObject(),
     _futureWatcher(new QFutureWatcher<void>()),
     _sm(nullptr),
     _fileName(""),
@@ -45,29 +45,29 @@ AbstractInput::AbstractInput() : QObject(),
     connect(_futureWatcher, SIGNAL(finished()), this, SIGNAL(finished()), Qt::QueuedConnection);
 }
 
-AbstractInput::~AbstractInput()
+AbstractInputParser::~AbstractInputParser()
 {
     delete _futureWatcher;
 }
 
-void AbstractInput::initialize(QString fileName, SoundfontManager * sm)
+void AbstractInputParser::initialize(QString fileName, SoundfontManager * sm)
 {
     _fileName = fileName;
     _sm = sm;
 }
 
-void AbstractInput::process(bool async)
+void AbstractInputParser::process(bool async)
 {
     if (async)
     {
-        QFuture<void> future = QtConcurrent::run(this, &AbstractInput::processAsync);
+        QFuture<void> future = QtConcurrent::run(this, &AbstractInputParser::processAsync);
         _futureWatcher->setFuture(future);
     }
     else
         processAsync();
 }
 
-void AbstractInput::processAsync()
+void AbstractInputParser::processAsync()
 {
     // Check that the file is not already open
     if (!_fileName.isEmpty())

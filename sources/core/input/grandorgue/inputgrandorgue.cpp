@@ -22,26 +22,10 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ABSTRACTINPUT_H
-#define ABSTRACTINPUT_H
+#include "inputgrandorgue.h"
+#include "inputparsergrandorgue.h"
 
-#include <QString>
-class AbstractInputParser;
-
-class AbstractInput
+AbstractInputParser * InputGrandOrgue::getParser()
 {
-public:
-    AbstractInput() {}
-    virtual ~AbstractInput() {}
-
-    /// Description of the file type to open
-    virtual QString getInputDescription() = 0;
-
-    /// Extension of the file type to open
-    virtual QString getInputExtension() = 0;
-
-    /// Return a parser
-    virtual AbstractInputParser * getParser() = 0;
-};
-
-#endif // ABSTRACTINPUT_H
+    return new InputParserGrandOrgue();
+}

@@ -22,26 +22,21 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ABSTRACTINPUT_H
-#define ABSTRACTINPUT_H
+#ifndef GRANDORGUEPIPE_H
+#define GRANDORGUEPIPE_H
 
-#include <QString>
-class AbstractInputParser;
+#include <QMap>
 
-class AbstractInput
+class GrandOrguePipe
 {
 public:
-    AbstractInput() {}
-    virtual ~AbstractInput() {}
+    GrandOrguePipe(QString rootDir);
+    void processData(QString key, QString value);
+    bool isValid();
 
-    /// Description of the file type to open
-    virtual QString getInputDescription() = 0;
-
-    /// Extension of the file type to open
-    virtual QString getInputExtension() = 0;
-
-    /// Return a parser
-    virtual AbstractInputParser * getParser() = 0;
+private:
+    QString _rootDir;
+    QMap<QString, QString> _properties;
 };
 
-#endif // ABSTRACTINPUT_H
+#endif // GRANDORGUEPIPE_H

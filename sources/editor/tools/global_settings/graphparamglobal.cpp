@@ -69,7 +69,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     }
     this->graph(0)->setData(x, y, true);
 
-    // Layers coloration zone sur laquelle s'étend le clavier
+    // Layers showing the key range
     this->addGraph();
     x.resize(2);
     y.resize(2);
@@ -79,8 +79,8 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     graphPen.setWidth(0);
     this->graph(1)->setPen(graphPen);
     this->graph(1)->setData(x, y, true);
-    color = this->palette().color(QPalette::Highlight);
-    color.setAlpha(60);
+    color = this->palette().color(QPalette::Text);
+    color.setAlpha(20);
     this->graph(1)->setBrush(QBrush(color));
     this->addGraph();
     this->graph(2)->setPen(graphPen);
@@ -137,31 +137,37 @@ GraphParamGlobal::~GraphParamGlobal()
 {
 }
 
-void GraphParamGlobal::setKeyboardRange(int keyboardType)
+void GraphParamGlobal::setHighlightedRange(int minKey, int maxKey)
 {
+    // Prepare data
     QVector<double> x, y;
-    x.resize(2);
-    y.resize(2);
-    x[0] = 36. * this->nbPoints / 127.;
-    y[0] = y[1] = 2;
-    if (keyboardType == 1)
+    if (minKey >= 0 && maxKey > minKey && maxKey <= 127)
     {
-        // Clavier 5 octaves
-        x[1] = 96. * this->nbPoints / 127.;
-        this->graph(2)->setData(x, y, true);
+        x.resize(6);
+        y.resize(6);
+        y[0] = y[1] = y[4] = y[5] = 2;
+        y[2] = y[3] = -1;
+        x[0] = -1;
+        x[1] = static_cast<double>(minKey) * this->nbPoints / 127.;
+        x[2] = x[1] + 0.00001;
+        x[4] = static_cast<double>(maxKey) * this->nbPoints / 127.;
+        x[3] = x[4] - 0.00001;
+        x[5] = this->nbPoints + 1;
     }
-    else if (keyboardType == 2)
+    else
     {
-        // Clavier 6 octaves
-        x[1] = 108. * this->nbPoints / 127.;
-        this->graph(2)->setData(x, y, true);
+        x.resize(0);
+        y.resize(0);
     }
+
+    // Plot the range
+    this->graph(2)->setData(x, y, true);
     this->replot();
 }
 
 void GraphParamGlobal::indexMotifChanged(int motif)
 {
-    this->forme = (TypeForme)motif;
+    this->forme = static_cast<TypeForme>(motif);
     this->flagEdit = false;
     this->limitEdit = 0;
     this->previousX = -1;

@@ -22,20 +22,20 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "inputempty.h"
-#include "soundfontmanager.h"
+#ifndef INPUTPARSERSFARK_H
+#define INPUTPARSERSFARK_H
 
-InputEmpty::InputEmpty() : AbstractInput() {}
+#include "abstractinputparser.h"
 
-void InputEmpty::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath)
+class InputParserSfArk : public AbstractInputParser
 {
-    Q_UNUSED(tempFilePath)
-    Q_UNUSED(fileName)
+    Q_OBJECT
+    
+public:
+    InputParserSfArk();
 
-    // Simply add a new empty soundfont
-    sf2Index = sm->add(EltID(elementSf2));
+protected slots:
+    void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
+};
 
-    // No error possible
-    error = "";
-    success = true;
-}
+#endif // INPUTPARSERSFARK_H

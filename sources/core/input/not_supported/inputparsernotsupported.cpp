@@ -22,50 +22,18 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef EDITOR_H
-#define EDITOR_H
+#include "inputparsernotsupported.h"
 
-#include <QMainWindow>
-#include "basetypes.h"
-class AbstractInputParser;
+InputParserNotSupported::InputParserNotSupported() : AbstractInputParser() {}
 
-namespace Ui {
-class Editor;
-}
-
-class Editor : public QMainWindow
+void InputParserNotSupported::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath)
 {
-    Q_OBJECT
+    Q_UNUSED(fileName)
+    Q_UNUSED(sm)
+    Q_UNUSED(sf2Index)
+    Q_UNUSED(tempFilePath)
 
-public:
-    explicit Editor(QWidget *parent = nullptr);
-    ~Editor();
-
-    /// Initialize the editor with a parser that can extract data and build a soundfont
-    void initialize(AbstractInputParser * input);
-
-    /// Index of the soundfont created
-    int getSf2Index() { return _sf2Index; }
-
-    /// Notify that a change has been made somewhere
-    void update(QString editingSource);
-
-signals:
-    void tabTitleChanged(QString title);
-    void filePathChanged(QString filePath);
-    void recorderDisplayChanged(bool isDisplayed);
-    void keyboardDisplayChanged(bool isDisplayed);
-
-private slots:
-    void inputProcessed();
-    void onSelectionChanged(IdList ids);
-    void displayOptionChanged(int displayOption);
-
-private:
-    void updateTitleAndPath();
-
-    Ui::Editor *ui;
-    int _sf2Index;
-};
-
-#endif // EDITOR_H
+    // File not supported
+    success = false;
+    error = trUtf8("This file format is not supported.");
+}

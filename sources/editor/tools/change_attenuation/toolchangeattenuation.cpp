@@ -26,6 +26,7 @@
 #include "toolchangeattenuation_gui.h"
 #include "toolchangeattenuation_parameters.h"
 #include "soundfontmanager.h"
+#include "utils.h"
 #include <qmath.h>
 
 ToolChangeAttenuation::ToolChangeAttenuation() : AbstractToolIterating(QList<ElementType>() << elementInst << elementPrst,
@@ -41,10 +42,10 @@ void ToolChangeAttenuation::beforeProcess(IdList ids)
 
 void ToolChangeAttenuation::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
-    ToolChangeAttenuation_parameters * params = (ToolChangeAttenuation_parameters *)parameters;
+    ToolChangeAttenuation_parameters * params = static_cast<ToolChangeAttenuation_parameters *>(parameters);
 
     // Compute the attenuation offset
-    int offset = round(10.0 * (_isInst ? params->getInstValue() : params->getPrstValue()));
+    int offset = Utils::round32(25.0 * (_isInst ? params->getInstValue() : params->getPrstValue()));
     if (offset == 0)
         return;
 

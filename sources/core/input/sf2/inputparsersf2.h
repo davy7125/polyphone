@@ -22,19 +22,31 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef INPUTEMPTY_H
-#define INPUTEMPTY_H
+#ifndef INPUTPARSERSF2_H
+#define INPUTPARSERSF2_H
 
-#include "abstractinput.h"
+#include "abstractinputparser.h"
 class SoundfontManager;
+class Sf2Header;
+class Sf2SdtaPart;
+class Sf2PdtaPart;
 
-class InputEmpty : public AbstractInput
+class InputParserSf2 : public AbstractInputParser
 {
+    Q_OBJECT
+    
 public:
-    InputEmpty();
+    InputParserSf2();
 
 protected slots:
     void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
+
+private:
+    void parse(QDataStream &stream, bool &success, QString &error, int &sf2Index);
+    void fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pdtaPart, bool &success, QString &error, int &sf2Index);
+
+    SoundfontManager * _sm;
+    QString _filename;
 };
 
-#endif // INPUTEMPTY_H
+#endif // INPUTPARSERSF2_H

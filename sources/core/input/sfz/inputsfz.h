@@ -26,44 +26,19 @@
 #define INPUTSFZ_H
 
 #include "abstractinput.h"
-#include "sfzparametergroupassembly.h"
-class SoundfontManager;
+#include <QObject>
 
 class InputSfz : public AbstractInput
 {
-    Q_OBJECT
-    
 public:
-    InputSfz();
+    /// Description of the file type to open
+    QString getInputDescription() override { return QObject::trUtf8("Sfz files"); }
 
-protected slots:
-    void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
+    /// Extension of the file type to open
+    QString getInputExtension() override { return "sfz"; }
 
-private:
-    enum Bloc
-    {
-        BLOC_UNKNOWN,
-        BLOC_CONTROL,
-        BLOC_GLOBAL,
-        BLOC_GROUP,
-        BLOC_REGION
-    };
-
-    QList<SfzParameterGroupAssembly> _listeEnsembles;
-    Bloc _currentBloc;
-    SfzParameterGroup _globalZone;
-    QStringList _openFilePaths;
-    QString _rootDir;
-    QMap<QString, QString> _replacements;
-
-    void parseFile(QString filename, bool &success, QString &error);
-    QString applyReplacements(QString opcodeValue);
-    QString getFilePathFromInclude(QString str);
-    void changeBloc(QString bloc);
-    void addOpcode(QString opcode, QString value);
-
-    void createSf2(int &sf2Index, QString filename, bool isChannel10);
-    QString getInstrumentName(QString filePath, int &numBank, int &numPreset);
+    /// Return a parser
+    AbstractInputParser * getParser() override;
 };
 
 #endif // INPUTSFZ_H

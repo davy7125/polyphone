@@ -26,16 +26,19 @@
 #define INPUTSFARK_H
 
 #include "abstractinput.h"
+#include <QObject>
 
 class InputSfArk : public AbstractInput
 {
-    Q_OBJECT
-    
 public:
-    InputSfArk();
+    /// Description of the file type to open
+    QString getInputDescription() override { return QObject::trUtf8("sfArk archives"); }
 
-protected slots:
-    void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
+    /// Extension of the file type to open
+    QString getInputExtension() override { return "sfArk"; }
+
+    /// Return a parser
+    AbstractInputParser * getParser() override;
 };
 
 #endif // INPUTSFARK_H

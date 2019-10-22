@@ -22,26 +22,66 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ABSTRACTINPUT_H
-#define ABSTRACTINPUT_H
+#include "grandorguestop.h"
+#include "grandorguepipe.h"
 
-#include <QString>
-class AbstractInputParser;
-
-class AbstractInput
+GrandOrgueStop::GrandOrgueStop(QString rootDir) :
+    _rootDir(rootDir)
 {
-public:
-    AbstractInput() {}
-    virtual ~AbstractInput() {}
 
-    /// Description of the file type to open
-    virtual QString getInputDescription() = 0;
+}
 
-    /// Extension of the file type to open
-    virtual QString getInputExtension() = 0;
+GrandOrgueStop::~GrandOrgueStop()
+{
+    while (!_pipes.isEmpty())
+        delete _pipes.take(_pipes.firstKey());
+}
 
-    /// Return a parser
-    virtual AbstractInputParser * getParser() = 0;
-};
+void GrandOrgueStop::processData(QString key, QString value)
+{
+    if (key.startsWith("rank"))
+    {
+        if (key.length() < 7)
+            return;
 
-#endif // ABSTRACTINPUT_H
+        // Extract the number of the rank
+        key = key.right(key.length() - 4);
+        bool ok = false;
+        int number = key.left(3).toInt(&ok);
+        if (!ok || number < 0)
+            return;
+
+        // Property
+        QString property = key.length() > 3 ? key.right(key.length() - 3) : "#";
+
+        // Store data
+        _rankProperties[number][property] = value;
+    }
+    else if (key.startsWith("pipe"))
+    {
+        if (key.length() < 7)
+            return;
+
+        // Extract the number of the pipe
+        key = key.right(key.length() - 4);
+        bool ok = false;
+        int number = key.left(3).toInt(&ok);
+        if (!ok || number < 0)
+            return;
+
+        // Property
+        QString property = key.length() > 3 ? key.right(key.length() - 3) : "#";
+
+        // Store data
+        if (!_pipes.contains(number))
+            _pipes[number] = new GrandOrguePipe(_rootDir);
+        _pipes[number]->processData(property, value);
+    }
+    else
+        _properties[key] = value;
+}
+
+void GrandOrgueStop::createPreset(SoundfontManager * sm, EltID idSf2, QMap<int, GrandOrgueRank*> * ranks)
+{
+
+}

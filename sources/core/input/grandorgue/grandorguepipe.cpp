@@ -22,26 +22,30 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ABSTRACTINPUT_H
-#define ABSTRACTINPUT_H
+#include "grandorguepipe.h"
+#include <QFile>
+#include <QDebug>
 
-#include <QString>
-class AbstractInputParser;
-
-class AbstractInput
+GrandOrguePipe::GrandOrguePipe(QString rootDir) :
+    _rootDir(rootDir)
 {
-public:
-    AbstractInput() {}
-    virtual ~AbstractInput() {}
 
-    /// Description of the file type to open
-    virtual QString getInputDescription() = 0;
+}
 
-    /// Extension of the file type to open
-    virtual QString getInputExtension() = 0;
+void GrandOrguePipe::processData(QString key, QString value)
+{
+    _properties[key] = value;
+}
 
-    /// Return a parser
-    virtual AbstractInputParser * getParser() = 0;
-};
+bool GrandOrguePipe::isValid()
+{
+    if (!_properties.contains("#"))
+        return false;
 
-#endif // ABSTRACTINPUT_H
+    QString filePath = _rootDir + "/" + _properties["#"];
+    qDebug() << "path" << filePath;
+    if (!QFile::exists(filePath))
+        return false;
+
+    return true;
+}

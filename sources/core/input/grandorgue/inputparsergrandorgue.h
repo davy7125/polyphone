@@ -22,20 +22,44 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef INPUTNOTSUPPORTED_H
-#define INPUTNOTSUPPORTED_H
+#ifndef INPUTPARSERGRANDORGUE_H
+#define INPUTPARSERGRANDORGUE_H
 
-#include "abstractinput.h"
+#include <QMap>
+#include "abstractinputparser.h"
+class GrandOrgueRank;
+class GrandOrgueStop;
+class SoundfontManager;
 
-class InputNotSupported : public AbstractInput
+class InputParserGrandOrgue : public AbstractInputParser
 {
     Q_OBJECT
     
 public:
-    InputNotSupported();
+    InputParserGrandOrgue();
+    ~InputParserGrandOrgue() override;
 
 protected slots:
     void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
+
+private:
+    enum Section
+    {
+        SECTION_UNKNOWN,
+        SECTION_STOP,
+        SECTION_RANK
+    };
+
+    QString _rootDir;
+    Section _currentSection;
+    int _currentIndex; // Of a rank or stop, -1 if unknown
+    QMap<int, GrandOrgueRank*> _ranks;
+    QMap<int, GrandOrgueStop*> _stops;
+
+    void parseFile(QString filename, bool &success, QString &error);
+    void startSection(QString sectionName);
+    void processData(QString key, QString value);
+    void createSf2(int &sf2Index, QString filename);
 };
 
-#endif // INPUTNOTSUPPORTED_H
+#endif // INPUTPARSERGRANDORGUE_H

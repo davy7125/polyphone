@@ -5,7 +5,7 @@
 #include "soundfontmanager.h"
 #include <QFileInfo>
 #include "treemodel.h"
-#include "abstractinput.h"
+#include "abstractinputparser.h"
 
 Editor::Editor(QWidget *parent) :
     QMainWindow(parent, Qt::Widget),
@@ -59,7 +59,7 @@ Editor::~Editor()
     delete ui;
 }
 
-void Editor::initialize(AbstractInput * input)
+void Editor::initialize(AbstractInputParser * input)
 {
     ui->toolBar->disable();
     ui->rotatingSpinner->startAnimation();
@@ -72,7 +72,7 @@ void Editor::initialize(AbstractInput * input)
 void Editor::inputProcessed()
 {
     // Get information from the input
-    AbstractInput * input = (AbstractInput *)QObject::sender();
+    AbstractInputParser * input = (AbstractInputParser *)QObject::sender();
     if (input->isSuccess())
     {
         // Index of the opened soundfont

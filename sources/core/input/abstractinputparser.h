@@ -22,50 +22,60 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef EDITOR_H
-#define EDITOR_H
+#ifndef ABSTRACTINPUTPARSER_H
+#define ABSTRACTINPUTPARSER_H
 
-#include <QMainWindow>
-#include "basetypes.h"
-class AbstractInputParser;
+#include <QObject>
+#include <QString>
 
-namespace Ui {
-class Editor;
-}
+template<class T>
+class QFutureWatcher;
+class SoundfontManager;
 
-class Editor : public QMainWindow
+class AbstractInputParser: public QObject
 {
     Q_OBJECT
 
 public:
-    explicit Editor(QWidget *parent = nullptr);
-    ~Editor();
+    AbstractInputParser();
+    virtual ~AbstractInputParser();
 
-    /// Initialize the editor with a parser that can extract data and build a soundfont
-    void initialize(AbstractInputParser * input);
+    /// Initialize the parser (done by the InputFactory)
+    void initialize(QString fileName, SoundfontManager * sm);
 
-    /// Index of the soundfont created
+    /// Process a file.
+    /// When async is false, the function returns when the job is done
+    /// Otherwise the function returns immediately and the signal "finished" is sent later
+    void process(bool async);
+
+    /// Return true after having processed the file if it was successful
+    bool isSuccess() { return _isSuccess; }
+
+    /// Return a reason when the process couldn't be done (isSuccess being false)
+    QString getError() { return _error; }
+
+    /// Index of the soundfont that has been created
     int getSf2Index() { return _sf2Index; }
 
-    /// Notify that a change has been made somewhere
-    void update(QString editingSource);
+    /// Name of the file to open
+    QString getFileName() { return _fileName; }
 
 signals:
-    void tabTitleChanged(QString title);
-    void filePathChanged(QString filePath);
-    void recorderDisplayChanged(bool isDisplayed);
-    void keyboardDisplayChanged(bool isDisplayed);
+    /// Signal emitted when the file is processed
+    void finished();
 
-private slots:
-    void inputProcessed();
-    void onSelectionChanged(IdList ids);
-    void displayOptionChanged(int displayOption);
+protected slots:
+    virtual void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) = 0;
 
 private:
-    void updateTitleAndPath();
+    void processAsync();
 
-    Ui::Editor *ui;
+    QFutureWatcher<void> * _futureWatcher;
+    SoundfontManager * _sm;
+    QString _fileName;
+    bool _isSuccess;
+    QString _error;
     int _sf2Index;
 };
 
-#endif // EDITOR_H
+#endif // ABSTRACTINPUTPARSER_H

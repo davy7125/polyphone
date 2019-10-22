@@ -25,52 +25,78 @@
 #include "inputfactory.h"
 #include <QFileInfo>
 #include "soundfontmanager.h"
+#include "abstractinputparser.h"
 #include "abstractinput.h"
 #include "sf2/inputsf2.h"
 #include "sf3/inputsf3.h"
 #include "sfz/inputsfz.h"
 #include "sfark/inputsfark.h"
-#include "not_supported/inputnotsupported.h"
-#include "empty/inputempty.h"
+#include "grandorgue/inputgrandorgue.h"
+#include "not_supported/inputparsernotsupported.h"
+#include "empty/inputparserempty.h"
+#include <QObject>
 
-AbstractInput * InputFactory::getInput(QString fileName)
+InputFactory * InputFactory::s_instance = nullptr;
+
+InputFactory::InputFactory()
 {
-    AbstractInput * input = nullptr;
+    // Load all kinds of input
+    AbstractInput * input = new InputSf2();
+    _inputs[input->getInputExtension().toLower()] = input;
+    _orderedInputs << input;
+
+    input = new InputSf3();
+    _inputs[input->getInputExtension().toLower()] = input;
+    _orderedInputs << input;
+
+    input = new InputSfz();
+    _inputs[input->getInputExtension().toLower()] = input;
+    _orderedInputs << input;
+
+    input = new InputSfArk();
+    _inputs[input->getInputExtension().toLower()] = input;
+    _orderedInputs << input;
+
+//    input = new InputGrandOrgue();
+//    _inputs[input->getInputExtension().toLower()] = input;
+//    _orderedInputs << input;
+}
+
+void InputFactory::clear()
+{
+    if (s_instance == nullptr)
+        return;
+    delete s_instance;
+    s_instance = nullptr;
+}
+
+InputFactory::~InputFactory()
+{
+    while (!_inputs.empty())
+        delete _inputs.take(s_instance->_inputs.firstKey());
+    _orderedInputs.clear();
+}
+
+AbstractInputParser * InputFactory::getInput(QString fileName)
+{
+    if (s_instance == nullptr)
+        s_instance = new InputFactory();
+
+    AbstractInputParser * input = nullptr;
 
     if (fileName.isEmpty())
     {
         // New soundfont from scratch
-        input = new InputEmpty();
+        input = new InputParserEmpty();
     }
     else
     {
         QFileInfo fileInfo(fileName);
         QString extension = fileInfo.suffix().toLower();
-        if (extension == "sf2")
-        {
-            // Format sf2
-            input = new InputSf2();
-        }
-        else if (extension == "sf3")
-        {
-            // Format sf3
-            input = new InputSf3();
-        }
-        else if (extension == "sfz")
-        {
-            // Format sfz
-            input = new InputSfz();
-        }
-        else if (extension == "sfark")
-        {
-            // Format sfArk
-            input = new InputSfArk();
-        }
+        if (s_instance->_inputs.contains(extension))
+            input = s_instance->_inputs[extension]->getParser();
         else
-        {
-            // Input "not supported format"
-            input = new InputNotSupported();
-        }
+            input = new InputParserNotSupported();
     }
     input->initialize(fileName, SoundfontManager::getInstance());
 
@@ -79,6 +105,29 @@ AbstractInput * InputFactory::getInput(QString fileName)
 
 bool InputFactory::isSuffixSupported(QString suffix)
 {
-    suffix = suffix.toLower();
-    return suffix == "sf2" || suffix == "sf3" || suffix == "sfz" || suffix == "sfark";
+    if (s_instance == nullptr)
+        s_instance = new InputFactory();
+    return s_instance->_inputs.contains(suffix.toLower());
+}
+
+QString InputFactory::getFileFilter()
+{
+    if (s_instance == nullptr)
+        s_instance = new InputFactory();
+
+    QString extConcat = QObject::trUtf8("All") + " (";
+    QString typeConcat;
+
+    bool first = true;
+    foreach (AbstractInput * input, s_instance->_orderedInputs)
+    {
+        if (first)
+            first = false;
+        else
+            extConcat += " ";
+        extConcat += "*." + input->getInputExtension();
+        typeConcat += ";;" + input->getInputDescription() + " (*." + input->getInputExtension() + ")";
+    }
+
+    return extConcat + ")" + typeConcat;
 }

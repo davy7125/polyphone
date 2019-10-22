@@ -26,16 +26,34 @@
 #define INPUTFACTORY_H
 
 #include <QString>
+#include <QMap>
+class AbstractInputParser;
 class AbstractInput;
 
 class InputFactory
 {
 public:
     /// Get an input related to a file
-    static AbstractInput * getInput(QString fileName);
+    static AbstractInputParser * getInput(QString fileName);
 
     /// Return true if the suffix (extension) is supported
     static bool isSuffixSupported(QString suffix);
+
+    /// Return a file filter for the open file names dialog
+    static QString getFileFilter();
+
+    /// Clear all inputs
+    static void clear();
+
+private:
+    InputFactory();
+    ~InputFactory();
+
+    static InputFactory * s_instance;
+
+    // All inputs sorted by extension, with no uppercase
+    QMap<QString, AbstractInput *> _inputs;
+    QList<AbstractInput *> _orderedInputs;
 };
 
 #endif // INPUTFACTORY_H

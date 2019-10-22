@@ -25,28 +25,20 @@
 #ifndef INPUTSF2_H
 #define INPUTSF2_H
 
+#include <QObject>
 #include "abstractinput.h"
-class SoundfontManager;
-class Sf2Header;
-class Sf2SdtaPart;
-class Sf2PdtaPart;
 
 class InputSf2 : public AbstractInput
 {
-    Q_OBJECT
-    
 public:
-    InputSf2();
+    /// Description of the file type to open
+    QString getInputDescription() override { return QObject::trUtf8("Sf2 files"); }
 
-protected slots:
-    void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
+    /// Extension of the file type to open
+    QString getInputExtension() override { return "sf2"; }
 
-private:
-    void parse(QDataStream &stream, bool &success, QString &error, int &sf2Index);
-    void fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pdtaPart, bool &success, QString &error, int &sf2Index);
-
-    SoundfontManager * _sm;
-    QString _filename;
+    /// Return a parser
+    AbstractInputParser * getParser() override;
 };
 
 #endif // INPUTSF2_H

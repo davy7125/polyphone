@@ -22,50 +22,48 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef EDITOR_H
-#define EDITOR_H
+#ifndef INPUTPARSERSFZ_H
+#define INPUTPARSERSFZ_H
 
-#include <QMainWindow>
-#include "basetypes.h"
-class AbstractInputParser;
+#include "abstractinputparser.h"
+#include "sfzparametergroupassembly.h"
+class SoundfontManager;
 
-namespace Ui {
-class Editor;
-}
-
-class Editor : public QMainWindow
+class InputParserSfz : public AbstractInputParser
 {
     Q_OBJECT
-
+    
 public:
-    explicit Editor(QWidget *parent = nullptr);
-    ~Editor();
+    InputParserSfz();
 
-    /// Initialize the editor with a parser that can extract data and build a soundfont
-    void initialize(AbstractInputParser * input);
-
-    /// Index of the soundfont created
-    int getSf2Index() { return _sf2Index; }
-
-    /// Notify that a change has been made somewhere
-    void update(QString editingSource);
-
-signals:
-    void tabTitleChanged(QString title);
-    void filePathChanged(QString filePath);
-    void recorderDisplayChanged(bool isDisplayed);
-    void keyboardDisplayChanged(bool isDisplayed);
-
-private slots:
-    void inputProcessed();
-    void onSelectionChanged(IdList ids);
-    void displayOptionChanged(int displayOption);
+protected slots:
+    void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
 
 private:
-    void updateTitleAndPath();
+    enum Bloc
+    {
+        BLOC_UNKNOWN,
+        BLOC_CONTROL,
+        BLOC_GLOBAL,
+        BLOC_GROUP,
+        BLOC_REGION
+    };
 
-    Ui::Editor *ui;
-    int _sf2Index;
+    QList<SfzParameterGroupAssembly> _listeEnsembles;
+    Bloc _currentBloc;
+    SfzParameterGroup _globalZone;
+    QStringList _openFilePaths;
+    QString _rootDir;
+    QMap<QString, QString> _replacements;
+
+    void parseFile(QString filename, bool &success, QString &error);
+    QString applyReplacements(QString opcodeValue);
+    QString getFilePathFromInclude(QString str);
+    void changeBloc(QString bloc);
+    void addOpcode(QString opcode, QString value);
+
+    void createSf2(int &sf2Index, QString filename, bool isChannel10);
+    QString getInstrumentName(QString filePath, int &numBank, int &numPreset);
 };
 
-#endif // EDITOR_H
+#endif // INPUTPARSERSFZ_H

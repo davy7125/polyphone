@@ -173,6 +173,22 @@ INCLUDEPATH += mainwindow \
     .
 
 SOURCES	+= main.cpp \
+    core/input/abstractinputparser.cpp \
+    core/input/empty/inputparserempty.cpp \
+    core/input/grandorgue/grandorguepipe.cpp \
+    core/input/grandorgue/grandorguerank.cpp \
+    core/input/grandorgue/grandorguestop.cpp \
+    core/input/grandorgue/inputgrandorgue.cpp \
+    core/input/grandorgue/inputparsergrandorgue.cpp \
+    core/input/not_supported/inputparsernotsupported.cpp \
+    core/input/sf2/inputparsersf2.cpp \
+    core/input/sf2/inputsf2.cpp \
+    core/input/sf3/inputparsersf3.cpp \
+    core/input/sf3/inputsf3.cpp \
+    core/input/sfark/inputparsersfark.cpp \
+    core/input/sfark/inputsfark.cpp \
+    core/input/sfz/inputparsersfz.cpp \
+    core/input/sfz/inputsfz.cpp \
     core/sample/samplereaderfactory.cpp \
     core/sample/samplereaderflac.cpp \
     core/sample/samplereadersf2.cpp \
@@ -296,13 +312,7 @@ SOURCES	+= main.cpp \
     core/actionset.cpp \
     core/action.cpp \
     editor/widgets/styledlineedit.cpp \
-    core/input/abstractinput.cpp \
     core/input/inputfactory.cpp \
-    core/input/sfark/inputsfark.cpp \
-    core/input/not_supported/inputnotsupported.cpp \
-    core/input/sfz/inputsfz.cpp \
-    core/input/sf2/inputsf2.cpp \
-    core/input/empty/inputempty.cpp \
     core/input/sf2/sf2header.cpp \
     core/input/sf2/sf2sdtapart.cpp \
     core/input/sf2/sf2pdtapart.cpp \
@@ -405,7 +415,6 @@ SOURCES	+= main.cpp \
     core/output/sfz/sfzparamlist.cpp \
     core/output/sf2/sf2indexconverter.cpp \
     core/output/sf3/outputsf3.cpp \
-    core/input/sf3/inputsf3.cpp \
     core/input/sfz/sfzparameter.cpp \
     core/input/sfz/sfzparametergroup.cpp \
     core/input/sfz/sfzparametergroupassembly.cpp \
@@ -473,6 +482,23 @@ SOURCES	+= main.cpp \
     editor/graphics/graphicswavepainter.cpp
 
 HEADERS  += \
+    core/input/abstractinput.h \
+    core/input/abstractinputparser.h \
+    core/input/empty/inputparserempty.h \
+    core/input/grandorgue/grandorguepipe.h \
+    core/input/grandorgue/grandorguerank.h \
+    core/input/grandorgue/grandorguestop.h \
+    core/input/grandorgue/inputgrandorgue.h \
+    core/input/grandorgue/inputparsergrandorgue.h \
+    core/input/not_supported/inputparsernotsupported.h \
+    core/input/sf2/inputparsersf2.h \
+    core/input/sf2/inputsf2.h \
+    core/input/sf3/inputparsersf3.h \
+    core/input/sf3/inputsf3.h \
+    core/input/sfark/inputparsersfark.h \
+    core/input/sfark/inputsfark.h \
+    core/input/sfz/inputparsersfz.h \
+    core/input/sfz/inputsfz.h \
     core/sample/infosound.h \
     core/sample/samplereader.h \
     core/sample/samplereaderfactory.h \
@@ -604,13 +630,7 @@ HEADERS  += \
     core/actionset.h \
     core/action.h \
     editor/widgets/styledlineedit.h \
-    core/input/abstractinput.h \
     core/input/inputfactory.h \
-    core/input/sfark/inputsfark.h \
-    core/input/not_supported/inputnotsupported.h \
-    core/input/sfz/inputsfz.h \
-    core/input/sf2/inputsf2.h \
-    core/input/empty/inputempty.h \
     core/input/sf2/sf2header.h \
     core/input/sf2/sf2sdtapart.h \
     core/input/sf2/sf2pdtapart.h \
@@ -720,7 +740,6 @@ HEADERS  += \
     core/output/sfz/sfzparamlist.h \
     core/output/sf2/sf2indexconverter.h \
     core/output/sf3/outputsf3.h \
-    core/input/sf3/inputsf3.h \
     core/input/sfz/sfzparameter.h \
     core/input/sfz/sfzparametergroup.h \
     core/input/sfz/sfzparametergroupassembly.h \

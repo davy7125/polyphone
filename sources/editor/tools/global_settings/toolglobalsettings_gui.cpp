@@ -27,6 +27,7 @@
 #include "toolglobalsettings_parameters.h"
 #include "soundfontmanager.h"
 #include "graphparamglobal.h"
+#include "utils.h"
 
 ToolGlobalSettings_gui::ToolGlobalSettings_gui(QWidget *parent) :
     AbstractToolGui(parent),
@@ -51,7 +52,9 @@ void ToolGlobalSettings_gui::updateInterface(AbstractToolParameters * parameters
                   << champ_pan;
     if (_isInst)
         paramTypeList << champ_overridingRootKey;
-    paramTypeList << champ_coarseTune
+    paramTypeList << champ_keyRange
+                  << champ_velRange
+                  << champ_coarseTune
                   << champ_fineTune
                   << champ_scaleTuning
                   << champ_initialFilterFc
@@ -90,10 +93,12 @@ void ToolGlobalSettings_gui::updateInterface(AbstractToolParameters * parameters
     for (int i = 0; i < paramTypeList.size(); i++)
     {
         ui->comboAttribute->addItem(Attribute::getDescription(paramTypeList.at(i), !_isInst));
-        ui->comboAttribute->setItemData(i, (int)paramTypeList.at(i));
+        ui->comboAttribute->setItemData(i, static_cast<int>(paramTypeList.at(i)));
     }
-    AttributeType attributeToSelect = (AttributeType)(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
+    AttributeType attributeToSelect = static_cast<AttributeType>(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
     ui->comboAttribute->setCurrentIndex(paramTypeList.indexOf(attributeToSelect));
+    if (ui->comboAttribute->currentIndex() == -1)
+        ui->comboAttribute->setCurrentIndex(paramTypeList.indexOf(champ_initialAttenuation));
     ui->comboAttribute->blockSignals(false);
 
     // Pattern type
@@ -128,12 +133,62 @@ void ToolGlobalSettings_gui::updateInterface(AbstractToolParameters * parameters
 
     // Draw graph
     this->on_comboPattern_currentIndexChanged(ui->comboPattern->currentIndex());
-    ui->graphParamGlobal->setMinMaxX(_isInst ? params->getInstMinX() : params->getPrstMinX(),
-                                     _isInst ? params->getInstMaxX() : params->getPrstMaxX());
+    ui->graphParamGlobal->setMinMaxX(Utils::round32(_isInst ? params->getInstMinX() : params->getPrstMinX()),
+                                     Utils::round32(_isInst ? params->getInstMaxX() : params->getPrstMaxX()));
     ui->graphParamGlobal->setValues(_isInst ? params->getInstValues() : params->getPrstValues());
 
-    // Zone du clavier
-    ui->graphParamGlobal->setKeyboardRange(ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "type", 0).toInt());
+    // Key range to highlight
+    int minKey = -1;
+    int maxKey = -1;
+    IdList processedElts;
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    foreach (EltID id, ids)
+    {
+        // Current instrument or preset
+        EltID idParent = id;
+        idParent.typeElement = (id.typeElement == elementInst || id.typeElement == elementInstSmpl) ?
+                    elementInst : elementPrst;
+        if (processedElts.contains(idParent))
+            continue;
+        else
+            processedElts << idParent;
+
+        // Default range
+        RangesType defRange;
+        if (sm->isSet(idParent, champ_keyRange))
+            defRange = sm->get(idParent, champ_keyRange).rValue;
+        else
+        {
+            defRange.byLo = 0;
+            defRange.byHi = 127;
+        }
+
+        // Browse all children
+        EltID idChild = idParent;
+        idChild.typeElement = (idParent.typeElement == elementInst ? elementInstSmpl : elementPrstInst);
+        foreach (int index, sm->getSiblings(idChild))
+        {
+            idChild.indexElt2 = index;
+            if (sm->isSet(idChild, champ_keyRange))
+            {
+                // Compare with the child range
+                RangesType rangeTmp = sm->get(idChild, champ_keyRange).rValue;
+                if (minKey == -1 || minKey > rangeTmp.byLo)
+                    minKey = rangeTmp.byLo;
+                if (maxKey == -1 || maxKey < rangeTmp.byHi)
+                    maxKey = rangeTmp.byHi;
+            }
+            else
+            {
+                // Compare with the default range
+                if (minKey == -1 || minKey > defRange.byLo)
+                    minKey = defRange.byLo;
+                if (maxKey == -1 || maxKey < defRange.byHi)
+                    maxKey = defRange.byHi;
+            }
+        }
+    }
+    ui->graphParamGlobal->setHighlightedRange(minKey, maxKey);
 }
 
 void ToolGlobalSettings_gui::saveParameters(AbstractToolParameters * parameters)

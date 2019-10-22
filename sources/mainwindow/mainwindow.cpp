@@ -43,6 +43,7 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 #include "outputfactory.h"
+#include "inputfactory.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -146,6 +147,7 @@ MainWindow::~MainWindow()
     SoundfontManager::kill();
     RepositoryManager::kill();
     ContextManager::kill();
+    InputFactory::clear();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -268,11 +270,7 @@ void MainWindow::on_pushButtonOpen_clicked()
     // Ouverture de fichiers
     QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Opening files"),
                                                         ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SOUNDFONT),
-                                                        trUtf8("Soundfonts") + " (*.sf2 *.sf3 *.sfz *.sfArk);;" +
-                                                        trUtf8("Sf2 files") + " (*.sf2);;" +
-                                                        trUtf8("Sf3 files") + " (*.sf3);;" +
-                                                        trUtf8("Sfz files") + " (*.sfz);;" +
-                                                        trUtf8("sfArk archives") + " (*.sfArk)");
+                                                        InputFactory::getFileFilter());
 
     foreach (QString file, strList)
         openFile(file);

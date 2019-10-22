@@ -22,26 +22,28 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ABSTRACTINPUT_H
-#define ABSTRACTINPUT_H
+#ifndef GRANDORGUESTOP_H
+#define GRANDORGUESTOP_H
 
-#include <QString>
-class AbstractInputParser;
+#include <QMap>
+#include "basetypes.h"
+class GrandOrgueRank;
+class GrandOrguePipe;
+class SoundfontManager;
 
-class AbstractInput
+class GrandOrgueStop
 {
 public:
-    AbstractInput() {}
-    virtual ~AbstractInput() {}
+    GrandOrgueStop(QString rootDir);
+    ~GrandOrgueStop();
+    void processData(QString key, QString value);
+    void createPreset(SoundfontManager * sm, EltID idSf2, QMap<int, GrandOrgueRank*> * ranks);
 
-    /// Description of the file type to open
-    virtual QString getInputDescription() = 0;
-
-    /// Extension of the file type to open
-    virtual QString getInputExtension() = 0;
-
-    /// Return a parser
-    virtual AbstractInputParser * getParser() = 0;
+private:
+    QString _rootDir;
+    QMap<int, GrandOrguePipe *> _pipes;
+    QMap<QString, QString> _properties;
+    QMap<int, QMap<QString, QString> > _rankProperties;
 };
 
-#endif // ABSTRACTINPUT_H
+#endif // GRANDORGUESTOP_H

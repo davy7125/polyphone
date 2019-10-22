@@ -29,7 +29,7 @@
 #include <QDebug>
 #include "soundfontmanager.h"
 #include "inputfactory.h"
-#include "abstractinput.h"
+#include "abstractinputparser.h"
 #include "outputfactory.h"
 #include "abstractoutput.h"
 #include "options.h"
@@ -126,7 +126,7 @@ int convert(Options &options)
 
     // Load input file
     writeLine("Loading file " + inputFile.filePath() + "...");
-    AbstractInput * input = InputFactory::getInput(inputFile.filePath());
+    AbstractInputParser * input = InputFactory::getInput(inputFile.filePath());
     input->process(false);
     if (!input->isSuccess())
     {
