@@ -80,7 +80,7 @@ public:
 
     void indexMotifChanged(int index);
     void raideurChanged(double value);
-    void setKeyboardRange(int keyboardType);
+    void setHighlightedRange(int minKey, int maxKey);
     void setMinMax(double min, double max)  { yMin = qMin(min, max); yMax = qMax(min, max); }
     void setMinMaxX(int min, int max)       { xMin = qMin(min, max); xMax = qMax(min, max); }
     QVector<double> getValues();

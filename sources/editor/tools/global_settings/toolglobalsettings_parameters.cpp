@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "toolglobalsettings_parameters.h"
+#include "basetypes.h"
 
 void ToolGlobalSettings_parameters::loadConfiguration()
 {
@@ -53,8 +54,8 @@ void ToolGlobalSettings_parameters::loadConfiguration()
     _prstModifType = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "modification", 0).toInt();
 
     // Attribute to change
-    _instAttribute = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "attribute", 0).toInt();
-    _prstAttribute = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "attribute", 0).toInt();
+    _instAttribute = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "attribute", champ_initialAttenuation).toInt();
+    _prstAttribute = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "attribute", champ_initialAttenuation).toInt();
 
     // Min / max velocity
     _instMinVel = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "minVel", 0).toInt();

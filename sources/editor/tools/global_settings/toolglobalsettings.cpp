@@ -27,6 +27,7 @@
 #include "toolglobalsettings_parameters.h"
 #include "soundfontmanager.h"
 #include <qmath.h>
+#include "utils.h"
 
 ToolGlobalSettings::ToolGlobalSettings() : AbstractToolIterating(QList<ElementType>() << elementInst << elementPrst,
                                                                  new ToolGlobalSettings_parameters(), new ToolGlobalSettings_gui())
@@ -41,7 +42,7 @@ void ToolGlobalSettings::beforeProcess(IdList ids)
 
 void ToolGlobalSettings::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
-    ToolGlobalSettings_parameters * params = (ToolGlobalSettings_parameters *)parameters;
+    ToolGlobalSettings_parameters * params = static_cast<ToolGlobalSettings_parameters *>(parameters);
 
     // Format data
     QVector<double> dValues = (_isInst ? params->getInstValues() : params->getPrstValues());
@@ -83,28 +84,78 @@ void ToolGlobalSettings::process(SoundfontManager * sm, EltID id, AbstractToolPa
         if (currentVelMin >= velMin && currentVelMax <= velMax)
         {
             // Position of the closest point to the middle of the range
-            int pos = (double)(sm->get(idLinked, champ_keyRange).rValue.byLo + sm->get(idLinked, champ_keyRange).rValue.byHi) / 2 * dValues.size() / 127. + 0.5;
+            int pos = Utils::round32(0.5 * (sm->get(idLinked, champ_keyRange).rValue.byLo + sm->get(idLinked, champ_keyRange).rValue.byHi) * dValues.size() / 127.);
             if (pos < 0)
                 pos = 0;
             else if (pos >= dValues.size())
                 pos = dValues.size() - 1;
 
             // Apply modification
-            AttributeType champ = (AttributeType)(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
-            double amount = Attribute::toRealValue(champ, !_isInst, sm->get(idLinked, champ));
-            switch (_isInst ? params->getInstModifType() : params->getPrstModifType())
+            AttributeType champ = static_cast<AttributeType>(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
+
+            if (champ == champ_keyRange || champ == champ_velRange)
             {
-            case 0: // Addition
-                amount += dValues.at(pos);
-                break;
-            case 1: // Multiplication
-                amount *= dValues.at(pos);
-                break;
-            case 2: // Replacement
-                amount = dValues.at(pos);
-                break;
+                // Separately process left and right limits
+                RangesType range = sm->get(idLinked, champ).rValue;
+                int lower = static_cast<int>(range.byLo);
+                int upper = static_cast<int>(range.byHi);
+                switch (_isInst ? params->getInstModifType() : params->getPrstModifType())
+                {
+                case 0: // Addition
+                    lower = Utils::round32(dValues.at(pos) + lower);
+                    upper = Utils::round32(dValues.at(pos) + upper);
+                    break;
+                case 1: // Multiplication
+                    lower = Utils::round32(dValues.at(pos) * lower);
+                    upper = Utils::round32(dValues.at(pos) * upper);
+                    break;
+                case 2: // Replacement
+                    lower = Utils::round32(dValues.at(pos));
+                    upper = Utils::round32(dValues.at(pos));
+                    break;
+                }
+
+                // Limit
+                if (lower < 0)
+                    lower = 0;
+                if (upper < 0)
+                    upper = 0;
+                if (lower > 127)
+                    lower = 127;
+                if (upper > 127)
+                    upper = 127;
+
+                // Possibly reorder
+                if (lower > upper)
+                {
+                    int tmp = lower;
+                    lower = upper;
+                    upper = tmp;
+                }
+
+                // Save the range
+                AttributeValue val;
+                val.rValue.byLo = static_cast<quint8>(lower);
+                val.rValue.byHi = static_cast<quint8>(upper);
+                sm->set(idLinked, champ, val);
             }
-            sm->set(idLinked, champ, Attribute::fromRealValue(champ, !_isInst, amount));
+            else
+            {
+                double amount = Attribute::toRealValue(champ, !_isInst, sm->get(idLinked, champ));
+                switch (_isInst ? params->getInstModifType() : params->getPrstModifType())
+                {
+                case 0: // Addition
+                    amount += dValues.at(pos);
+                    break;
+                case 1: // Multiplication
+                    amount *= dValues.at(pos);
+                    break;
+                case 2: // Replacement
+                    amount = dValues.at(pos);
+                    break;
+                }
+                sm->set(idLinked, champ, Attribute::fromRealValue(champ, !_isInst, amount));
+            }
         }
     }
 }
