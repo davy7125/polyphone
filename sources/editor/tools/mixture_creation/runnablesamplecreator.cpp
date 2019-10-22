@@ -63,7 +63,7 @@ void RunnableSampleCreator::run()
         closestSample(_idInst, noteTmp, ecart, _side, idInstSmplTmp);
         double attenuation = 0;
         if (sm->isSet(idInstSmplTmp, champ_initialAttenuation))
-            attenuation = (double)sm->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0;
+            attenuation = 0.04 * sm->get(idInstSmplTmp, champ_initialAttenuation).shValue;
         if (attenuation < attMini)
             attMini = attenuation;
     }
@@ -90,7 +90,7 @@ void RunnableSampleCreator::run()
             double attenuation = 1;
             if (sm->isSet(idInstSmplTmp, champ_initialAttenuation))
             {
-                attenuation = (double)sm->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0 - attMini;
+                attenuation = 0.04 * sm->get(idInstSmplTmp, champ_initialAttenuation).shValue - attMini;
                 attenuation = pow(10, -attenuation / 20.0);
             }
 

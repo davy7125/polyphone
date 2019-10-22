@@ -67,7 +67,7 @@ void RunnableChordCreator::run()
         closestSample(_idInst, pitch, ecart, _side, idInstSmplTmp);
         double attenuation = 0;
         if (sm->isSet(idInstSmplTmp, champ_initialAttenuation))
-            attenuation = (double)sm->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0;
+            attenuation = 0.04 * sm->get(idInstSmplTmp, champ_initialAttenuation).shValue;
         if (attenuation < attMini)
             attMini = attenuation;
     }
@@ -92,7 +92,7 @@ void RunnableChordCreator::run()
             double attenuation = 1;
             if (sm->isSet(idInstSmplTmp, champ_initialAttenuation))
             {
-                attenuation = (double)sm->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0 - attMini + (double)pitches[pitch] / 10.;
+                attenuation = 0.04 * sm->get(idInstSmplTmp, champ_initialAttenuation).shValue - attMini + (double)pitches[pitch] / 10.;
                 attenuation = pow(10, -attenuation / 20.0);
             }
             attenuation /= pitches.count();
