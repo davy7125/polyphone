@@ -32,6 +32,7 @@ class SpinBoxKey : public QSpinBox
     Q_OBJECT
 public:
     explicit SpinBoxKey(QWidget *parent = nullptr);
+    void setAlwaysShowKeyName(bool isOn);
 
 protected:
     virtual QValidator::State validate(QString &input, int &pos) const;
@@ -40,6 +41,9 @@ protected:
 
 private slots:
     void onKeyPlayed(int key, int vel);
+
+private:
+    bool _alwaysShowKeyName;
 };
 
 #endif // SPINBOXKEY_H

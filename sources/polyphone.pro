@@ -247,6 +247,7 @@ SOURCES	+= main.cpp \
     clavier/pianokeybd.cpp \
     clavier/pianokeybdcustom.cpp \
     clavier/keyboardmap.cpp \
+    editor/widgets/transparentframe.cpp \
     repository/widgets/customtextedit.cpp \
     repository/soundfont/editor/editordialoginsertlink.cpp \
     repository/soundfont/editor/editordialoginserttable.cpp \
@@ -563,6 +564,7 @@ HEADERS  += \
     clavier/pianokeybd.h \
     clavier/pianokeybdcustom.h \
     clavier/keyboardmap.h \
+    editor/widgets/transparentframe.h \
     repository/widgets/customtextedit.h \
     repository/soundfont/editor/editordialoginsertlink.h \
     repository/soundfont/editor/editordialoginserttable.h \

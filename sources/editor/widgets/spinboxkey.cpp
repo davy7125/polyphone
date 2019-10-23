@@ -25,8 +25,8 @@
 #include "spinboxkey.h"
 #include "contextmanager.h"
 
-SpinBoxKey::SpinBoxKey(QWidget *parent) :
-    QSpinBox(parent)
+SpinBoxKey::SpinBoxKey(QWidget *parent) : QSpinBox(parent),
+    _alwaysShowKeyName(false)
 {
     this->setMinimum(0);
     this->setMaximum(127);
@@ -38,6 +38,14 @@ SpinBoxKey::SpinBoxKey(QWidget *parent) :
 QValidator::State SpinBoxKey::validate(QString &input, int &pos) const
 {
     Q_UNUSED(pos);
+
+    // Possibly remove extra information
+    QString textToConvert = input;
+    if (_alwaysShowKeyName && ContextManager::keyName()->getNameMiddleC() == KeyNameManager::MIDDLE_C_60 &&
+            !textToConvert.isEmpty())
+        textToConvert = textToConvert.split(' ').first();
+
+    // Get the key number
     int numKey = ContextManager::keyName()->getKeyNum(input);
     if (numKey < 0 || numKey > 127)
         return QValidator::Invalid;
@@ -46,16 +54,26 @@ QValidator::State SpinBoxKey::validate(QString &input, int &pos) const
 
 int SpinBoxKey::valueFromText(const QString &text) const
 {
-    return ContextManager::keyName()->getKeyNum(text);
+    if (text.isEmpty())
+        return 0;
+    return ContextManager::keyName()->getKeyNum(text.split(' ').first());
 }
 
 QString SpinBoxKey::textFromValue(int val) const
 {
-    return ContextManager::keyName()->getKeyName(val);
+    QString keyName = ContextManager::keyName()->getKeyName(static_cast<unsigned int>(val));
+    if (_alwaysShowKeyName && ContextManager::keyName()->getNameMiddleC() == KeyNameManager::MIDDLE_C_60)
+        keyName += " (" + ContextManager::keyName()->getKeyName(static_cast<unsigned int>(val), true, false, false, true) + ")";
+    return keyName;
 }
 
 void SpinBoxKey::onKeyPlayed(int key, int vel)
 {
     if (vel > 0 && this->hasFocus())
         this->setValue(key);
+}
+
+void SpinBoxKey::setAlwaysShowKeyName(bool isOn)
+{
+    _alwaysShowKeyName = isOn;
 }

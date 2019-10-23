@@ -42,29 +42,41 @@ public:
     void setSampleName(QString name) { _name = name; }
     void setPos(qint32 posStart, qint32 posEnd, bool withReplot = true);
     void setPos(qint32 posStart, qint32 posEnd, QList<double> &frequencies, QList<double> &factors,
-                QList<int> &pitch, QList<int> &corrections, bool withReplot);
+                QList<int> &pitch, QList<int> &deltas, bool withReplot);
     void getEstimation(int &pitch, int &correction);
 
 protected:
-    void resizeEvent(QResizeEvent *event);
     void mousePressEvent(QMouseEvent *event);
+    void paintEvent(QPaintEvent * event);
 
 private slots:
     void exportPng();
 
 private:
+    class Peak
+    {
+    public:
+        Peak(double intensity, double frequency, int key, int delta) :
+            _intensity(intensity),
+            _frequency(frequency),
+            _key(key),
+            _delta(delta)
+        {}
+
+        double _intensity;
+        double _frequency;
+        int _key;
+        int _delta;
+    };
+
     QVector<float> _fData;
     quint32 dwSmplRate;
     QString _name;
-    QCPItemText * text1; // estimation
-    QCPItemText * text2; // intensity
-    QCPItemText * text3; // frequence
-    QCPItemText * text4; // note
-    QCPItemText * text5; // correction
     QSharedPointer<QCPAxisTickerFixed> _fixedTickerX;
     QSharedPointer<QCPAxisTickerFixed> _fixedTickerY;
     QMenu * _menu;
-    int _note, _correction;
+    int _key, _delta;
+    QList<Peak> _peaks;
 
     void resized();
     void exportPng(QString fileName);

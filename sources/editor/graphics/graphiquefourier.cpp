@@ -29,6 +29,7 @@
 #include "utils.h"
 #include <QMenu>
 #include <QFileDialog>
+#include <QPainter>
 
 GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     _fixedTickerX(new QCPAxisTickerFixed()),
@@ -82,44 +83,6 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     this->axisRect()->setAutoMargins(QCP::msNone);
     this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
 
-    // Texte
-    text1 = new QCPItemText(this);
-    text1->position->setType(QCPItemPosition::ptAxisRectRatio);
-    text1->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
-    text1->position->setCoords(1.0, 0);
-    text1->setTextAlignment(Qt::AlignRight);
-    text1->setFont(QFont(font().family(), 8, QFont::Bold));
-    text1->setColor(color);
-
-    text2 = new QCPItemText(this);
-    text2->position->setType(QCPItemPosition::ptAxisRectRatio);
-    text2->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
-    text2->setTextAlignment(Qt::AlignRight);
-    text2->setFont(QFont(font().family(), 7));
-    color.setAlpha(75);
-    text2->setColor(color);
-
-    text3 = new QCPItemText(this);
-    text3->position->setType(QCPItemPosition::ptAxisRectRatio);
-    text3->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
-    text3->setTextAlignment(Qt::AlignRight);
-    text3->setFont(QFont(font().family(), 7));
-    text3->setColor(this->palette().color(QPalette::Highlight));
-
-    text4 = new QCPItemText(this);
-    text4->position->setType(QCPItemPosition::ptAxisRectRatio);
-    text4->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
-    text4->setTextAlignment(Qt::AlignRight);
-    text4->setFont(QFont(font().family(), 7));
-    text4->setColor(this->palette().color(QPalette::Highlight));
-
-    text5 = new QCPItemText(this);
-    text5->position->setType(QCPItemPosition::ptAxisRectRatio);
-    text5->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
-    text5->setTextAlignment(Qt::AlignRight);
-    text5->setFont(QFont(font().family(), 7));
-    text5->setColor(this->palette().color(QPalette::Highlight));
-
     // Préparation du menu contextuel
     _menu = new QMenu(this);
     QAction * action = _menu->addAction(trUtf8("Export graph"));
@@ -136,7 +99,6 @@ GraphiqueFourier::~GraphiqueFourier()
     _fixedTickerY.clear();
 }
 
-// Méthodes publiques
 void GraphiqueFourier::setBackgroundColor(QColor color)
 {
     // Modification de la couleur de fond
@@ -158,14 +120,11 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, bool withReplot)
     QList<int> pitch, corrections;
     setPos(posStart, posEnd, freq, factor, pitch, corrections, withReplot);
 }
+
 void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &frequencies, QList<double> &factors,
-                              QList<int> &pitch, QList<int> &corrections, bool withReplot)
+                              QList<int> &pitch, QList<int> &deltas, bool withReplot)
 {
-    text1->setText("");
-    text2->setText("");
-    text3->setText("");
-    text4->setText("");
-    text5->setText("");
+    _peaks.clear();
 
     if (posEnd < 20 + posStart)
     {
@@ -315,20 +274,13 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
 
     // Note la plus proche
     int note = qRound(note3);
-    int correction = qRound(((double)note - note3) * 100.);
+    int correction = Utils::round32((static_cast<double>(note) - note3) * 100.);
 
     // Affichage
-    QString qStr1 = "";
-    QString qStr2 = "";
-    QString qStr3 = "";
-    QString qStr4 = "";
-    QString qStr5 = "";
     if (note >= 0 && note <= 128)
     {
-        qStr1 = trUtf8("key") + " " + ContextManager::keyName()->getKeyName(note) + ", " +
-                trUtf8("correction") + " " + QString::number(correction) + " (" + trUtf8("estimation") + ")";
-        _note = note;
-        _correction = correction;
+        _key = note;
+        _delta = correction;
 
         for (int i = 0; i < posMaxFFT.size(); i++)
         {
@@ -340,37 +292,25 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
             frequencies << freq;
 
             // note la plus proche
-            double note = 12 * qLn(freq) / 0.69314718056 - 36.3763;
+            double note = 12. * qLn(freq) / 0.69314718056 - 36.3763;
             if (note < 0)
                 note = 0;
             else if (note > 128)
                 note = 128;
             int note2 = Utils::round32(note);
-            int correction = Utils::round32((static_cast<double>(note2) - note) * 100.);
+            int delta = Utils::round32((static_cast<double>(note2) - note) * 100.);
             pitch << note2;
-            corrections << correction;
+            deltas << delta;
 
             // Prepare text
-            if (i < 8)
-            {
-                qStr2 += QString::number(factors.last(), 'f', 2) + "\n";
-                qStr3 += QString::number(freq, 'f', 2) + " " + trUtf8("Hz", "unit for Herz") + "\n";
-                qStr4 += ContextManager::keyName()->getKeyName(note2) + "\n";
-                qStr5 += QString::number(correction) + "\n";
-            }
+            _peaks << Peak(factors.last(), freq, note2, delta);
         }
     }
     else
     {
-        _note = -1;
-        _correction = 0;
+        _key = -1;
+        _delta = 0;
     }
-
-    text1->setText(qStr1);
-    text2->setText(qStr2);
-    text3->setText(qStr3);
-    text4->setText(qStr4);
-    text5->setText(qStr5);
 
     if (withReplot)
         this->replot();
@@ -393,18 +333,6 @@ void GraphiqueFourier::dispFourier(QVector<float> vectFourier, float posMaxFouri
     this->graph(0)->setData(x, y, true);
 }
 
-void GraphiqueFourier::resizeEvent(QResizeEvent * event)
-{
-    // Repositionnement du texte
-    QSize size = this->size();
-    double y = 1.0 + static_cast<double>(17.0 - size.height()) / size.height();
-    text2->position->setCoords(static_cast<double>(size.width() - 108) / size.width(), y);
-    text3->position->setCoords(static_cast<double>(size.width() - 45) / size.width(), y);
-    text4->position->setCoords(static_cast<double>(size.width() - 20) / size.width(), y);
-    text5->position->setCoords(static_cast<double>(size.width() - 1) / size.width(), y);
-
-    QCustomPlot::resizeEvent(event);
-}
 void GraphiqueFourier::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::RightButton)
@@ -413,6 +341,137 @@ void GraphiqueFourier::mousePressEvent(QMouseEvent *event)
         _menu->exec(QCursor::pos());
     }
 }
+
+void GraphiqueFourier::paintEvent(QPaintEvent * event)
+{
+    // Draw the graph
+    QCustomPlot::paintEvent(event);
+
+    // Helpful elements
+    QSize size = this->size();
+    int marginRight = 1;
+    int marginTop = 1;
+    int tuneWidth = qMin(150, size.width() - marginRight);
+    int tuneCellPadding = 5;
+    int tickHalfHeight = 3;
+
+    QColor highlightColor = this->palette().color(QPalette::Highlight);
+    QColor highlightTextColor = this->palette().color(QPalette::HighlightedText);
+    QColor backgroundColor = this->palette().color(QPalette::Window);
+    QColor textColor = this->palette().color(QPalette::WindowText);
+
+    QFont fontInfo = QFont(font().family(), 7);
+    QFont fontInfoSmall = QFont(font().family(), 6);
+    QFont fontMain = fontInfo;
+    fontMain.setBold(true);
+    QFontMetrics fm(fontMain);
+    int fontHeight = fm.height();
+
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    // Text to display
+    QString keyName = ContextManager::keyName()->getKeyName(static_cast<unsigned int>(_key));
+    if (ContextManager::keyName()->getNameMiddleC() == KeyNameManager::MIDDLE_C_60)
+        keyName += " (" + ContextManager::keyName()->getKeyName(static_cast<unsigned int>(_key), true, false, false, true) + ")";
+    int textWidth = fm.width(keyName);
+
+    // TUNING
+
+    // Left and right scales, delta
+    textColor.setAlpha(100);
+    painter.setPen(textColor);
+    painter.setFont(fontMain);
+    {
+        int tuneCellMargin = fontHeight * 3 / 2;
+        int x1 = size.width() - marginRight - tuneWidth;
+        int x2 = size.width() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellMargin - tuneCellPadding;
+        int x3 = size.width() - marginRight - tuneWidth / 2 + textWidth / 2 + tuneCellMargin + tuneCellPadding;
+        int x4 = size.width() - marginRight;
+
+        // Horizontal line
+        painter.drawLine(x1, marginTop + tuneCellPadding + fontHeight / 2, x2,
+                         marginTop + tuneCellPadding + fontHeight / 2);
+        painter.drawLine(x3, marginTop + tuneCellPadding + fontHeight / 2, x4,
+                         marginTop + tuneCellPadding + fontHeight / 2);
+
+        // Ticks
+        for (int i = 0; i < 6; i++)
+        {
+            int x = x1 + (x2 - x1) * i / 5;
+            painter.drawLine(x, marginTop + tuneCellPadding + fontHeight / 2 - tickHalfHeight,
+                             x, marginTop + tuneCellPadding + fontHeight / 2 + tickHalfHeight);
+            x = x3 + (x4 - x3) * i / 5;
+            painter.drawLine(x, marginTop + tuneCellPadding + fontHeight / 2 - tickHalfHeight,
+                             x, marginTop + tuneCellPadding + fontHeight / 2 + tickHalfHeight);
+        }
+
+        // Delta
+        if (_delta != 0)
+        {
+            // Text position
+            int pos = _delta > 0 ?
+                        (50 * x3 + (x4 - x3) * _delta) / 50 :
+                        (50 * x2 + (x2 - x1) * _delta) / 50;
+            QString txt = QString::number(_delta < 0 ? -_delta : _delta);
+            int textWidth = fm.width(txt);
+
+            painter.setBrush(highlightColor);
+            painter.setPen(highlightColor);
+            painter.drawEllipse(QPoint(pos, marginTop + tuneCellPadding + fontHeight / 2),
+                                fontHeight / 2 + tuneCellPadding, fontHeight / 2 + tuneCellPadding);
+            painter.fillRect(pos, marginTop + tuneCellPadding + fontHeight / 2 - tickHalfHeight,
+                             size.width() - marginRight - tuneWidth / 2 - pos, 2 * tickHalfHeight,
+                             highlightColor);
+            painter.setPen(highlightTextColor);
+            painter.drawText(QRect(pos - textWidth / 2, marginTop + tuneCellPadding, textWidth, fontHeight),
+                             Qt::AlignCenter, txt);
+        }
+    }
+
+    // Write key name
+    {
+        QPainterPath path;
+        textColor.setAlpha(255);
+        path.addRoundedRect(QRectF(size.width() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellPadding,
+                                   marginTop, textWidth + 2 * tuneCellPadding, fontHeight + 2 * tuneCellPadding), 3, 3);
+        painter.fillPath(path, _delta == 0 ? highlightColor : textColor);
+        painter.setPen(_delta == 0 ? highlightTextColor : backgroundColor);
+        painter.drawText(QRect(size.width() - marginRight - tuneWidth, marginTop + tuneCellPadding,
+                               tuneWidth - marginRight, fontHeight), Qt::AlignCenter, keyName);
+    }
+
+    // MAIN FREQUENCY PEAKS
+
+    textColor.setAlpha(100);
+    painter.setPen(textColor);
+    {
+        int peakNumber = 0;
+        int posY = 2 * tuneCellPadding + fontHeight * 3 / 2;
+        while (posY + fontHeight < size.height() && peakNumber < _peaks.count())
+        {
+            painter.setFont(fontInfo);
+            painter.drawText(QRect(0, posY, size.width() - 133 - marginRight, fontHeight),
+                             Qt::AlignRight,
+                             QString::number(_peaks[peakNumber]._intensity, 'f', 2));
+            painter.drawText(QRect(0, posY, size.width() - 74 - marginRight, fontHeight),
+                             Qt::AlignRight,
+                             QString::number(_peaks[peakNumber]._frequency, 'f', 2) + " " + trUtf8("Hz", "unit for Herz"));
+            painter.drawText(QRect(0, posY, size.width() - 45 - marginRight, fontHeight),
+                             Qt::AlignRight,
+                             ContextManager::keyName()->getKeyName(static_cast<unsigned int>(_peaks[peakNumber]._key)));
+            painter.drawText(QRect(0, posY, size.width() - 20 - marginRight, fontHeight),
+                             Qt::AlignRight,
+                             (_peaks[peakNumber]._delta > 0 ? "+" : "") + QString::number(_peaks[peakNumber]._delta));
+            painter.setFont(fontInfoSmall);
+            painter.drawText(QRect(0, posY, size.width() - marginRight, fontHeight),
+                             Qt::AlignRight, "/ 100");
+            peakNumber++;
+            posY += fontHeight;
+        }
+    }
+}
+
 void GraphiqueFourier::exportPng()
 {
     QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" +
@@ -476,6 +535,6 @@ void GraphiqueFourier::exportPng(QString fileName)
 
 void GraphiqueFourier::getEstimation(int &pitch, int &correction)
 {
-    pitch = _note;
-    correction = -_correction;
+    pitch = _key;
+    correction = -_delta;
 }

@@ -53,16 +53,19 @@ PageSmpl::PageSmpl(QWidget *parent) :
                                    ";border:0;padding:0px 5px}" +
                                    "QPushButton:hover{color:" + resetHoverColor + "}");
     ui->frameGraph->setStyleSheet("QFrame{border:0; border-bottom: 1px solid " + this->palette().dark().color().name() + "}");
-    ui->framePlayArea->setStyleSheet(".QFrame{background-color: " +
+    ui->framePlayArea->setStyleSheet("TransparentFrame{background-color: " +
                                      ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() +
                                      ";color: " + ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name() +
                                      ";border: 1px solid " + this->palette().dark().color().name() + ";border-radius: 3px;}");
 
     // Icons
     ui->pushFullLength->setIcon(ContextManager::theme()->getColoredSvg(":/icons/range.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
-    ui->pushAutoTune->setIcon(ContextManager::theme()->getColoredSvg(":/icons/magic.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
+    ui->pushAutoTune->setIcon(ContextManager::theme()->getColoredSvg(":/icons/left.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
     ui->pushFullLength->setMaximumHeight(ui->spinStartLoop->height());
     ui->pushAutoTune->setMaximumHeight(ui->spinTune->height());
+
+    // Initialize spin box for the key names
+    ui->spinRootKey->setAlwaysShowKeyName(true);
 
     // Initialisation du graphique
     ui->waveDisplay->linkSliderX(ui->sliderGraphe);
@@ -77,20 +80,34 @@ PageSmpl::PageSmpl(QWidget *parent) :
     // Background color of the Fourier graph
     ui->grapheFourier->setBackgroundColor(this->palette().window().color());
 
-    // Adapt for small screens
+    // Play area over the wave display
+    ui->framePlayArea->setParent(ui->waveDisplay);
+    ui->framePlayArea->move(5, 5);
+
+    // Adapt the interface for small screens
     if (QApplication::desktop()->width() <= 800)
     {
-        QTabWidget * tabWidget = new QTabWidget(this);
+        // Add a tabwidget in an existing layout
+        QTabWidget * tabWidget = new QTabWidget(ui->frame_5);
+        QGridLayout * layout = dynamic_cast<QGridLayout *>(ui->frame_5->layout());
+        layout->addWidget(tabWidget, 0, 0, 0, 1);
+        tabWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum );
+        tabWidget->tabBar()->setMinimumWidth(240);
+
+        // Populate the tab widget
         QFont fontBold = tabWidget->font();
         fontBold.setBold(true);
         tabWidget->setFont(fontBold);
         fontBold.setBold(false);
-        tabWidget->addTab(ui->frameLeft, trUtf8("Information"));
-        tabWidget->addTab(ui->frameRight, trUtf8("Equalizer (±15 dB)"));
+        tabWidget->addTab(ui->frameLeft, ui->label_20->text());
+        ui->frameLeft->setFont(fontBold);
+        tabWidget->addTab(ui->frameRight, ui->label_21->text());
+        ui->frameRight->setFont(fontBold);
+        ui->frameRight->setContentsMargins(0, 6, 0, 0);
+
+        // Remove labels
         delete ui->label_20;
         delete ui->label_21;
-        QGridLayout * layout = dynamic_cast<QGridLayout *>(ui->frame_5->layout());
-        layout->addWidget(tabWidget, 0, 0, 0, 1);
     }
 }
 

@@ -85,7 +85,7 @@
         <file alias="reset_eq.svg">resources/reset_eq.svg</file>
         <file alias="pen.svg">resources/pen.svg</file>
         <file alias="info.svg">resources/info.svg</file>
-        <file alias="magic.svg">resources/magic.svg</file>
+        <file alias="left.svg">resources/left.svg</file>
     </qresource>
     <qresource prefix="/translations">
         <file>resources/translations/polyphone_cs.qm</file>
