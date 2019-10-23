@@ -267,7 +267,11 @@
            </widget>
           </item>
           <item>
-           <widget class="TextEdit" name="textEdit_Com"/>
+           <widget class="TextEdit" name="textEdit_Com">
+            <property name="acceptRichText">
+             <bool>false</bool>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
