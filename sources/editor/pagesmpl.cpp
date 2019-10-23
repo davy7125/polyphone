@@ -313,6 +313,9 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     }
 
     // Reprise de la lecture
+    ui->checkLectureLien->blockSignals(true);
+    ui->checkLectureLien->setChecked(_synth->isStereo());
+    ui->checkLectureLien->blockSignals(false);
     if (this->_playingSmpl)
     {
         ui->pushLecture->setChecked(true);

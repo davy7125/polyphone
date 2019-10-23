@@ -50,6 +50,7 @@ public:
     // Parameters for reading samples
     void setGainSample(int gain);
     void setStereo(bool isStereo);
+    bool isStereo();
     void setStartLoop(quint32 startLoop, bool repercute);
     void setEndLoop(quint32 endLoop, bool repercute);
     void setLoopEnabled(bool isEnabled);

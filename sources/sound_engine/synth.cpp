@@ -352,6 +352,11 @@ void Synth::setStereo(bool isStereo)
     SoundEngine::setStereo(isStereo);
 }
 
+bool Synth::isStereo()
+{
+    return SoundEngine::isStereo();
+}
+
 void Synth::setLoopEnabled(bool isEnabled)
 {
     // Enable the loop when playing a sample

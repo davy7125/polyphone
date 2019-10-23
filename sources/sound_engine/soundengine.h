@@ -48,6 +48,7 @@ public:
     static void setEndLoop(quint32 endLoop, bool repercute);
     static void setLoopEnabled(bool isEnabled);
     static void setStereo(bool isStereo);
+    static bool isStereo() { return _isStereo; }
     static void setGainSample(int gain);
 
 signals:
