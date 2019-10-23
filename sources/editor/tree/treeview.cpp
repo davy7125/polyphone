@@ -814,7 +814,7 @@ void TreeView::onCreateElements(IdList ids, bool oneForEach)
     bool isSmpl = (ids[0].typeElement == elementSmpl);
     int indexSf2 = ids[0].indexSf2;
 
-    // List of all instrument names
+    // List of all instrument or preset names
     SoundfontManager * sm = SoundfontManager::getInstance();
     QStringList names;
     EltID idTmp(isSmpl ? elementInst : elementPrst, indexSf2);
@@ -842,6 +842,18 @@ void TreeView::onCreateElements(IdList ids, bool oneForEach)
             newElement.indexElt = sm->add(newElement);
             sm->set(newElement, champ_name, elementName);
 
+            // Choose a free bank / preset for a preset
+            if (!isSmpl)
+            {
+                int nBank = -1, nPreset = -1;
+                sm->firstAvailablePresetBank(newElement, nBank, nPreset);
+                AttributeValue val;
+                val.wValue = static_cast<quint16>(nBank);
+                sm->set(newElement, champ_wBank, val);
+                val.wValue = static_cast<quint16>(nPreset);
+                sm->set(newElement, champ_wPreset, val);
+            }
+
             // Link to the dragged sample or instrument
             duplicator.copy(id, newElement);
         }
@@ -862,6 +874,18 @@ void TreeView::onCreateElements(IdList ids, bool oneForEach)
         EltID newElement(isSmpl ? elementInst : elementPrst, indexSf2);
         newElement.indexElt = sm->add(newElement);
         sm->set(newElement, champ_name, elementName);
+
+        // Choose a free bank / preset for a preset
+        if (!isSmpl)
+        {
+            int nBank = -1, nPreset = -1;
+            sm->firstAvailablePresetBank(newElement, nBank, nPreset);
+            AttributeValue val;
+            val.wValue = static_cast<quint16>(nBank);
+            sm->set(newElement, champ_wBank, val);
+            val.wValue = static_cast<quint16>(nPreset);
+            sm->set(newElement, champ_wPreset, val);
+        }
 
         // Link all dragged samples or intruments
         foreach (EltID id, ids)
