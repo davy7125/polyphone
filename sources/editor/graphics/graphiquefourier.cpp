@@ -26,6 +26,7 @@
 #include "sound.h"
 #include "sampleutils.h"
 #include "contextmanager.h"
+#include "utils.h"
 #include <QMenu>
 #include <QFileDialog>
 
@@ -183,7 +184,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     // Détermination du régime permanent pour transformée de Fourier et corrélation (max 0.5 seconde)
     if (posStart == posEnd)
         SampleUtils::regimePermanent(_fData, dwSmplRate, posStart, posEnd);
-    if (posEnd > (qint32)(posStart + dwSmplRate / 2))
+    if (posEnd > Utils::round32(posStart + dwSmplRate / 2))
     {
         qint32 offset = (posEnd - posStart - dwSmplRate / 2) / 2;
         posStart += offset;
@@ -344,8 +345,8 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
                 note = 0;
             else if (note > 128)
                 note = 128;
-            int note2 = qRound(note);
-            int correction = qRound(((double)note2 - note) * 100.);
+            int note2 = Utils::round32(note);
+            int correction = Utils::round32((static_cast<double>(note2) - note) * 100.);
             pitch << note2;
             corrections << correction;
 
@@ -378,13 +379,14 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
 void GraphiqueFourier::dispFourier(QVector<float> vectFourier, float posMaxFourier)
 {
     this->graph(0)->data()->clear();
-    quint32 size_x = ((long int)vectFourier.size() * 40000) / this->dwSmplRate;
+    qint32 size_x = (vectFourier.size() * 40000) / static_cast<signed>(this->dwSmplRate);
     QVector<double> x(size_x), y(size_x);
-    for (unsigned long i = 0; i < size_x; i++)
+    for (qint32 i = 0; i < size_x; i++)
     {
-        x[i] = (double)i/(size_x - 1) * 20000; // Conversion Hz
-        if (i < (unsigned)vectFourier.size())
-            y[i] = vectFourier[i] / vectFourier[posMaxFourier]; // normalisation entre 0 et 1
+        x[i] = (20000. * i) / (size_x - 1); // Conversion Hz
+        if (i < vectFourier.size())
+            y[i] = static_cast<double>(vectFourier[i]) /
+                    static_cast<double>(vectFourier[static_cast<int>(posMaxFourier)]); // normalisation entre 0 et 1
         else
             y[i] = 0;
     }
@@ -395,11 +397,11 @@ void GraphiqueFourier::resizeEvent(QResizeEvent * event)
 {
     // Repositionnement du texte
     QSize size = this->size();
-    double y = 1.0 + (double)(17.0 - size.height()) / size.height();
-    text2->position->setCoords((double)(size.width() - 108) / size.width(), y);
-    text3->position->setCoords((double)(size.width() - 45) / size.width(), y);
-    text4->position->setCoords((double)(size.width() - 20) / size.width(), y);
-    text5->position->setCoords((double)(size.width() - 1) / size.width(), y);
+    double y = 1.0 + static_cast<double>(17.0 - size.height()) / size.height();
+    text2->position->setCoords(static_cast<double>(size.width() - 108) / size.width(), y);
+    text3->position->setCoords(static_cast<double>(size.width() - 45) / size.width(), y);
+    text4->position->setCoords(static_cast<double>(size.width() - 20) / size.width(), y);
+    text5->position->setCoords(static_cast<double>(size.width() - 1) / size.width(), y);
 
     QCustomPlot::resizeEvent(event);
 }
@@ -475,5 +477,5 @@ void GraphiqueFourier::exportPng(QString fileName)
 void GraphiqueFourier::getEstimation(int &pitch, int &correction)
 {
     pitch = _note;
-    correction = _correction;
+    correction = -_correction;
 }
