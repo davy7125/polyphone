@@ -1,8 +1,6 @@
 <RCC>
     <qresource prefix="/icons">
         <file alias="external_link.gif">resources/external_link.gif</file>
-        <file alias="double-arrow">resources/double-arrow.png</file>
-        <file alias="auto">resources/auto.png</file>
         <file alias="loop_off.png">resources/loop_off.png</file>
         <file alias="loop_on.png">resources/loop_on.png</file>
         <file alias="loop_on_end.png">resources/loop_on_end.png</file>
@@ -87,6 +85,7 @@
         <file alias="reset_eq.svg">resources/reset_eq.svg</file>
         <file alias="pen.svg">resources/pen.svg</file>
         <file alias="info.svg">resources/info.svg</file>
+        <file alias="magic.svg">resources/magic.svg</file>
     </qresource>
     <qresource prefix="/translations">
         <file>resources/translations/polyphone_cs.qm</file>

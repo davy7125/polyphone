@@ -58,6 +58,12 @@ PageSmpl::PageSmpl(QWidget *parent) :
                                      ";color: " + ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name() +
                                      ";border: 1px solid " + this->palette().dark().color().name() + ";border-radius: 3px;}");
 
+    // Icons
+    ui->pushFullLength->setIcon(ContextManager::theme()->getColoredSvg(":/icons/range.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
+    ui->pushAutoTune->setIcon(ContextManager::theme()->getColoredSvg(":/icons/magic.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
+    ui->pushFullLength->setMaximumHeight(ui->spinStartLoop->height());
+    ui->pushAutoTune->setMaximumHeight(ui->spinTune->height());
+
     // Initialisation du graphique
     ui->waveDisplay->linkSliderX(ui->sliderGraphe);
     ui->waveDisplay->linkSpinBoxes(ui->spinStartLoop, ui->spinEndLoop);
@@ -68,10 +74,10 @@ PageSmpl::PageSmpl(QWidget *parent) :
     connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
     connect(ui->waveDisplay, SIGNAL(cutOrdered(int,int)), this, SLOT(onCutOrdered(int,int)));
 
-    // Couleur de fond du graphe Fourier
-    ui->grapheFourier->setBackgroundColor(this->palette().background().color());
+    // Background color of the Fourier graph
+    ui->grapheFourier->setBackgroundColor(this->palette().window().color());
 
-    // Adaptation petits écrans
+    // Adapt for small screens
     if (QApplication::desktop()->width() <= 800)
     {
         QTabWidget * tabWidget = new QTabWidget(this);
