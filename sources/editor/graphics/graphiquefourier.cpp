@@ -104,6 +104,7 @@ void GraphiqueFourier::setBackgroundColor(QColor color)
     // Modification de la couleur de fond
     this->setBackground(color);
 }
+
 void GraphiqueFourier::setData(QByteArray baData, quint32 dwSmplRate)
 {
     int length = baData.size() / 2;
@@ -114,6 +115,7 @@ void GraphiqueFourier::setData(QByteArray baData, quint32 dwSmplRate)
 
     this->dwSmplRate = dwSmplRate;
 }
+
 void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, bool withReplot)
 {
     QList<double> freq, factor;
@@ -125,6 +127,8 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
                               QList<int> &pitch, QList<int> &deltas, bool withReplot)
 {
     _peaks.clear();
+    _delta = -1;
+    _key = -1;
 
     if (posEnd < 20 + posStart)
     {
@@ -346,6 +350,8 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
 {
     // Draw the graph
     QCustomPlot::paintEvent(event);
+    if (_peaks.empty())
+        return;
 
     // Helpful elements
     QSize size = this->size();

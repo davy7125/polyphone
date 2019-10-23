@@ -201,6 +201,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
         ui->waveDisplay->displayMultipleSelection(true);
         ui->grapheFourier->setData(QByteArray(), 0);
         ui->grapheFourier->setPos(0, 0);
+        ui->pushAutoTune->setEnabled(true);
     }
     else
     {
@@ -214,6 +215,10 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
         // Remplissage du graphe fourier
         ui->grapheFourier->setData(baData, sampleRate);
         ui->grapheFourier->setPos(startLoop, endLoop);
+
+        int pitch, correction;
+        ui->grapheFourier->getEstimation(pitch, correction);
+        ui->pushAutoTune->setEnabled(pitch > 0);
     }
 
     // Lecteur
