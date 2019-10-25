@@ -34,6 +34,7 @@
 #include "windowmanager.h"
 #include "outputfactory.h"
 #include "dialogquestion.h"
+#include "utils.h"
 
 bool EditorToolBar::s_recorderOpen = false;
 bool EditorToolBar::s_keyboardOpen = false;
@@ -279,12 +280,11 @@ void EditorToolBar::onNewInstClicked()
         return;
 
     // Default name of the instrument
-    QString text = "";
-    if (_currentSelection.getSelectedIds(elementSmpl).count() == 1)
-    {
-        EltID selectedSmpl = _currentSelection.getSelectedIds(elementSmpl)[0];
-        text = SoundfontManager::getInstance()->getQstr(selectedSmpl, champ_name);
-    }
+    IdList ids = _currentSelection.getSelectedIds(elementSmpl);
+    QStringList names;
+    foreach (EltID id, ids)
+        names << SoundfontManager::getInstance()->getQstr(id, champ_name);
+    QString text = Utils::commonPart(names);
 
     // Open a dialog
     DialogQuestion * dial = new DialogQuestion(this);
@@ -318,12 +318,11 @@ void EditorToolBar::onNewPrstClicked()
         return;
 
     // Default name of the preset
-    QString text = "";
-    if (_currentSelection.getSelectedIds(elementInst).count() == 1)
-    {
-        EltID selectedInst = _currentSelection.getSelectedIds(elementInst)[0];
-        text = SoundfontManager::getInstance()->getQstr(selectedInst, champ_name);
-    }
+    IdList ids = _currentSelection.getSelectedIds(elementInst);
+    QStringList names;
+    foreach (EltID id, ids)
+        names << SoundfontManager::getInstance()->getQstr(id, champ_name);
+    QString text = Utils::commonPart(names);
 
     // Open a dialog
     DialogQuestion * dial = new DialogQuestion(this);
@@ -344,9 +343,9 @@ void EditorToolBar::onNewPrstClicked(QString name)
     SoundfontManager * sm = SoundfontManager::getInstance();
     EltID id(elementSf2, _sf2Index);
     sm->firstAvailablePresetBank(id, nBank, nPreset);
-    if (nPreset == -1)
+    if (nBank < 0 || nPreset < 0)
     {
-        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("No preset available."));
+        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("Cannot create more presets."));
         return;
     }
 

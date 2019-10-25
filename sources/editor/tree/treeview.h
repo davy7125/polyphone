@@ -28,6 +28,7 @@
 #include <QTreeView>
 #include "basetypes.h"
 class TreeViewMenu;
+class Duplicator;
 
 class TreeView : public QTreeView
 {
@@ -68,6 +69,7 @@ private:
     bool isSelectionValid();
     QModelIndex getIndex(EltID id);
     IdList getSelectedIds();
+    EltID createElement(IdList ids, QStringList &existingNames, Duplicator * duplicator);
 
     QDateTime _startDrag;
     bool _fixingSelection;

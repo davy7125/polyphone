@@ -42,6 +42,9 @@ public:
     /// Can be useful for sorting strings
     static QString removeAccents(QString s);
 
+    /// Return the first letters in common from a list of string
+    static QString commonPart(QStringList list);
+
     /// Encrypt / decrypt data
     static QString rsaEncrypt(QString input);
     static QString rsaDecrypt(QString input);

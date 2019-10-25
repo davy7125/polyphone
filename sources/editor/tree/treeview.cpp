@@ -30,10 +30,12 @@
 #include <QMouseEvent>
 #include <QScrollBar>
 #include <QApplication>
+#include <QMessageBox>
 #include "treeviewmenu.h"
 #include "duplicator.h"
 #include "sampleloader.h"
 #include "dialogcreateelements.h"
+#include "utils.h"
 
 TreeView::TreeView(QWidget * parent) : QTreeView(parent),
     _fixingSelection(false),
@@ -98,7 +100,7 @@ void TreeView::mouseDoubleClickEvent(QMouseEvent * event)
         {
             // Find the corresponding sample
             EltID id(elementSmpl, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_sampleID).wValue, -1, -1);
-            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+            TreeSortFilterProxy * proxy = dynamic_cast<TreeSortFilterProxy *>(this->model());
             if (!proxy->isFiltered(id))
                 this->onSelectionChanged(IdList(id));
             event->accept();
@@ -108,7 +110,7 @@ void TreeView::mouseDoubleClickEvent(QMouseEvent * event)
         {
             // Find the corresponding instrument
             EltID id(elementInst, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_instrument).wValue, -1, -1);
-            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+            TreeSortFilterProxy * proxy = dynamic_cast<TreeSortFilterProxy *>(this->model());
             if (!proxy->isFiltered(id))
                 this->onSelectionChanged(IdList(id));
             event->accept();
@@ -203,7 +205,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
             // Id to reselect
             EltID id = selected.indexes()[0].data(Qt::UserRole).value<EltID>();
             bool isHidden = selected.indexes()[0].data(Qt::UserRole + 1).toBool();
-            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+            TreeSortFilterProxy * proxy = dynamic_cast<TreeSortFilterProxy *>(this->model());
             if (!proxy->isFiltered(id) && !isHidden)
                 this->setCurrentIndex(selected.indexes()[0]);
         }
@@ -212,7 +214,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
             // Id to reselect
             EltID id = deselected.indexes()[0].data(Qt::UserRole).value<EltID>();
             bool isHidden = deselected.indexes()[0].data(Qt::UserRole + 1).toBool();
-            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+            TreeSortFilterProxy * proxy = dynamic_cast<TreeSortFilterProxy *>(this->model());
             if (!proxy->isFiltered(id) && !isHidden)
                 this->setCurrentIndex(deselected.indexes()[0]);
         }
@@ -822,76 +824,88 @@ void TreeView::onCreateElements(IdList ids, bool oneForEach)
         names << sm->getQstr(EltID(isSmpl ? elementInst : elementPrst, indexSf2, i), champ_name);
 
     Duplicator duplicator;
+    IdList createdElements;
     if (oneForEach)
     {
         foreach (EltID id, ids)
         {
-            // Find a name
-            QString elementName = sm->getQstr(id, champ_name);
-            if (names.contains(elementName))
-            {
-                int suffix = 1;
-                while (names.contains(elementName + "-" + QString::number(suffix)))
-                    suffix++;
-                elementName += "-" + QString::number(suffix);
-            }
-            names << elementName;
-
-            // Create an element
-            EltID newElement(isSmpl ? elementInst : elementPrst, indexSf2);
-            newElement.indexElt = sm->add(newElement);
-            sm->set(newElement, champ_name, elementName);
-
-            // Choose a free bank / preset for a preset
-            if (!isSmpl)
-            {
-                int nBank = -1, nPreset = -1;
-                sm->firstAvailablePresetBank(newElement, nBank, nPreset);
-                AttributeValue val;
-                val.wValue = static_cast<quint16>(nBank);
-                sm->set(newElement, champ_wBank, val);
-                val.wValue = static_cast<quint16>(nPreset);
-                sm->set(newElement, champ_wPreset, val);
-            }
-
-            // Link to the dragged sample or instrument
-            duplicator.copy(id, newElement);
+            EltID newId = createElement(id, names, &duplicator);
+            if (newId.typeElement == elementUnknown)
+                break;
+            createdElements << newId;
         }
     }
     else
     {
-        // Find a name
-        QString elementName = isSmpl ? trUtf8("instrument") : trUtf8("preset");
-        if (names.contains(elementName))
-        {
-            int suffix = 1;
-            while (names.contains(elementName + "-" + QString::number(suffix)))
-                suffix++;
-            elementName += "-" + QString::number(suffix);
-        }
-
-        // Create an element
-        EltID newElement(isSmpl ? elementInst : elementPrst, indexSf2);
-        newElement.indexElt = sm->add(newElement);
-        sm->set(newElement, champ_name, elementName);
-
-        // Choose a free bank / preset for a preset
-        if (!isSmpl)
-        {
-            int nBank = -1, nPreset = -1;
-            sm->firstAvailablePresetBank(newElement, nBank, nPreset);
-            AttributeValue val;
-            val.wValue = static_cast<quint16>(nBank);
-            sm->set(newElement, champ_wBank, val);
-            val.wValue = static_cast<quint16>(nPreset);
-            sm->set(newElement, champ_wPreset, val);
-        }
-
-        // Link all dragged samples or intruments
-        foreach (EltID id, ids)
-            duplicator.copy(id, newElement);
+        EltID newId = createElement(ids, names, &duplicator);
+        if (newId.typeElement != elementUnknown)
+            createdElements << newId;
     }
-    sm->endEditing("command:fastAdd");
+
+    if (!createdElements.empty())
+    {
+        sm->endEditing("command:fastAdd");
+        onSelectionChanged(createdElements);
+    }
+}
+
+EltID TreeView::createElement(IdList ids, QStringList &existingNames, Duplicator * duplicator)
+{
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    bool isSmpl = (ids[0].typeElement == elementSmpl);
+
+    // Default name
+    QStringList currentNames;
+    foreach (EltID id, ids)
+        currentNames << SoundfontManager::getInstance()->getQstr(id, champ_name);
+    QString elementName = Utils::commonPart(currentNames);
+    if (elementName.isEmpty())
+        elementName = isSmpl ? trUtf8("instrument") : trUtf8("preset");
+
+    // Possibly add a suffix
+    if (existingNames.contains(elementName))
+    {
+        int suffix = 1;
+        while (existingNames.contains(elementName + "-" + QString::number(suffix)))
+            suffix++;
+        elementName += "-" + QString::number(suffix);
+    }
+    existingNames << elementName;
+
+    // Choose a free bank / preset for a preset
+    EltID newElement(isSmpl ? elementInst : elementPrst, ids[0].indexSf2);
+    int nBank = -1, nPreset = -1;
+    if (!isSmpl)
+    {
+        sm->firstAvailablePresetBank(newElement, nBank, nPreset);
+        if (nBank < 0 || nPreset < 0)
+        {
+            // Cannot create more presets
+            QMessageBox::warning(this, trUtf8("Warning"), trUtf8("Cannot create more presets."));
+            return EltID(elementUnknown);
+        }
+    }
+
+    // Create an element
+    newElement.indexElt = sm->add(newElement);
+    sm->set(newElement, champ_name, elementName);
+
+    // Possibly set a bank and preset number
+    if (!isSmpl)
+    {
+        AttributeValue val;
+        val.wValue = static_cast<quint16>(nBank);
+        sm->set(newElement, champ_wBank, val);
+        val.wValue = static_cast<quint16>(nPreset);
+        sm->set(newElement, champ_wPreset, val);
+    }
+
+    // Link all dragged samples or intruments
+    foreach (EltID id, ids)
+        duplicator->copy(id, newElement);
+
+    // The element has been created
+    return newElement;
 }
 
 void TreeView::onKeyPlayed(int key, int vel)

@@ -121,6 +121,28 @@ QString Utils::removeAccents(QString s)
     return output;
 }
 
+QString Utils::commonPart(QStringList list)
+{
+    if (list.empty())
+        return "";
+
+    QString commonPart = list.takeFirst();
+    while (!list.empty())
+    {
+        QString otherStr = list.takeFirst();
+        int maxCharNumber = qMin(commonPart.length(), otherStr.length());
+        while (maxCharNumber > 0 && commonPart.left(maxCharNumber) != otherStr.left(maxCharNumber))
+            maxCharNumber--;
+        commonPart = commonPart.left(maxCharNumber);
+    }
+
+    // Remove the extra "-" or spaces at the end and return the result
+    commonPart = commonPart.trimmed();
+    if (commonPart.endsWith("-"))
+        commonPart = commonPart.left(commonPart.length() - 1);
+    return commonPart.trimmed();
+}
+
 QString Utils::rsaEncrypt(QString input)
 {
     // Load the public key from the resources
