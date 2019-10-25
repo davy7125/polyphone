@@ -32,7 +32,7 @@ class SampleUtils
 public:
     SampleUtils();
 
-    static QByteArray resampleMono(QByteArray data, double echInit, qint32 echFinal, quint16 wBps);
+    static QByteArray resampleMono(QByteArray data, double echInit, quint32 echFinal, quint16 wBps);
     static QByteArray bandFilter(QByteArray baData, quint16 wBps, double dwSmplRate, double fBas, double fHaut, int ordre);
     static QByteArray cutFilter(QByteArray baData, quint32 dwSmplRate, QVector<double> dValues, quint16 wBps, int maxFreq);
     static QByteArray EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, int i1, int i2, int i3, int i4, int i5,

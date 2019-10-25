@@ -36,14 +36,14 @@ ToolTransposeSmpl::ToolTransposeSmpl() : AbstractToolIterating(elementSmpl, new 
 
 void ToolTransposeSmpl::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
-    ToolTransposeSmpl_parameters * params = (ToolTransposeSmpl_parameters *)parameters;
+    ToolTransposeSmpl_parameters * params = dynamic_cast<ToolTransposeSmpl_parameters *>(parameters);
 
     // Get sample data
     QByteArray baData = sm->getData(id, champ_sampleDataFull24);
     quint32 echFinal = sm->get(id, champ_dwSampleRate).dwValue;
 
     // Compute the new initial sample rate
-    double echInit = (double)echFinal * qPow(2, params->getSemiTones() / 12);
+    double echInit = static_cast<double>(echFinal) * qPow(2, params->getSemiTones() / 12);
 
     // Resampling
     baData = SampleUtils::resampleMono(baData, echInit, echFinal, 24);
@@ -51,7 +51,7 @@ void ToolTransposeSmpl::process(SoundfontManager * sm, EltID id, AbstractToolPar
 
     // Update the length
     AttributeValue val;
-    val.dwValue = baData.size() / 3;
+    val.dwValue = static_cast<quint32>(baData.size() / 3);
     sm->set(id, champ_dwLength, val);
 
     // Update loop
@@ -63,4 +63,34 @@ void ToolTransposeSmpl::process(SoundfontManager * sm, EltID id, AbstractToolPar
     dwTmp = ((qint64)dwTmp * (qint64)echFinal) / echInit;
     val.dwValue = dwTmp;
     sm->set(id, champ_dwEndLoop, val);
+
+    // Update rootkey / correction
+    int deltaPitch = qRound(params->getSemiTones());
+    int deltaCorrection = qRound(100. * (params->getSemiTones() - deltaPitch));
+    int newPitch = sm->get(id, champ_byOriginalPitch).bValue + deltaPitch;
+    int newCorrection = sm->get(id, champ_chPitchCorrection).shValue + deltaCorrection;
+    while (newCorrection < -50)
+    {
+        newCorrection += 100;
+        newPitch -= 1;
+    }
+    if (newCorrection > 50)
+    {
+        newCorrection -= 100;
+        newPitch += 1;
+    }
+    if (newPitch < 0)
+    {
+        newPitch = 0;
+        newCorrection = 0;
+    }
+    if (newPitch > 127)
+    {
+        newPitch = 127;
+        newCorrection = 0;
+    }
+    val.bValue = static_cast<quint8>(newPitch);
+    sm->set(id, champ_byOriginalPitch, val);
+    val.shValue = static_cast<qint8>(newCorrection);
+    sm->set(id, champ_chPitchCorrection, val);
 }

@@ -30,7 +30,7 @@ SampleUtils::SampleUtils()
 
 }
 
-QByteArray SampleUtils::resampleMono(QByteArray baData, double echInit, qint32 echFinal, quint16 wBps)
+QByteArray SampleUtils::resampleMono(QByteArray baData, double echInit, quint32 echFinal, quint16 wBps)
 {
     // Paramètres
     double alpha = 3;
