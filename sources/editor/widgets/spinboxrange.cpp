@@ -211,6 +211,7 @@ void SpinBoxRange::updateValue()
 
 void SpinBoxRange::stringToRange(QString input, int &valMin, int &valMax, QValidator::State &state) const
 {
+    input = input.replace('_', '-');
     int posSeparator = input.indexOf(QRegExp("[0-9]" + SEPARATOR)) + 1;
 
     bool ok = false;
