@@ -436,13 +436,23 @@ void TreeViewMenu::paste()
         // Paste all copied elements
         SoundfontManager * sm = SoundfontManager::getInstance();
         Duplicator duplicator;
+        IdList newIds;
         foreach (EltID idSource, s_copy)
         {
             if ((idSource.typeElement == elementSmpl || idSource.typeElement == elementInst || idSource.typeElement == elementPrst ||
                  idSource.typeElement == elementInstSmpl || idSource.typeElement == elementPrstInst) && sm->isValid(idSource))
-                duplicator.copy(idSource, idDest);
+            {
+                EltID id = duplicator.copy(idSource, idDest);
+                if (id.typeElement != elementUnknown)
+                    newIds << id;
+            }
         }
-        sm->endEditing("command:paste");
+
+        if (!newIds.isEmpty())
+        {
+            sm->endEditing("command:paste");
+            emit(selectionChanged(newIds));
+        }
     }
 }
 
@@ -454,10 +464,20 @@ void TreeViewMenu::duplicate()
     // Duplicate all elements
     SoundfontManager * sm = SoundfontManager::getInstance();
     Duplicator duplicator;
+    IdList newIds;
     foreach (EltID idSource, _currentIds)
     {
         if (sm->isValid(idSource))
-            duplicator.duplicate(idSource);
+        {
+            EltID id = duplicator.duplicate(idSource);
+            if (id.typeElement != elementUnknown)
+                newIds << id;
+        }
     }
-    sm->endEditing("command:duplicate");
+
+    if (!newIds.isEmpty())
+    {
+        sm->endEditing("command:duplicate");
+        emit(selectionChanged(newIds));
+    }
 }

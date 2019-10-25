@@ -799,13 +799,23 @@ void TreeView::dropEvent(QDropEvent *event)
         {
             SoundfontManager * sm = SoundfontManager::getInstance();
             Duplicator duplicator;
+            IdList newIds;
             foreach (EltID idSource, _draggedIds)
             {
                 if ((idSource.typeElement == elementSmpl || idSource.typeElement == elementInst || idSource.typeElement == elementPrst ||
                      idSource.typeElement == elementInstSmpl || idSource.typeElement == elementPrstInst) && sm->isValid(idSource))
-                    duplicator.copy(idSource, idDest);
+                {
+                    EltID id = duplicator.copy(idSource, idDest);
+                    if (id.typeElement != elementUnknown)
+                        newIds << id;
+                }
             }
-            sm->endEditing("command:drop");
+
+            if (!newIds.isEmpty())
+            {
+                sm->endEditing("command:drop");
+                onSelectionChanged(newIds);
+            }
         }
     }
 }

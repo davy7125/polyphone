@@ -43,10 +43,10 @@ public:
     // Copy idSrc toward idDest if sf2 different
     // Else add a division (InstSmpl or PrstInst)
     // Else nothing
-    void copy(EltID idSource, EltID idDest);
+    EltID copy(EltID idSource, EltID idDest);
 
     // Duplicate an element
-    void duplicate(EltID id);
+    EltID duplicate(EltID id);
 
 private:
     enum EtatMessage
@@ -71,15 +71,15 @@ private:
     QMap<int, QList<int> > _initialSmplIndexes, _initialInstIndexes, _initialPrstIndexes;
 
     // Link
-    void linkSmpl(EltID idSource, EltID idDest);
-    void linkInst(EltID idSource, EltID idDest);
-    void copyLink(EltID idSource, EltID idDest);
+    EltID linkSmpl(EltID idSource, EltID idDest);
+    EltID linkInst(EltID idSource, EltID idDest);
+    EltID copyLink(EltID idSource, EltID idDest);
     void copyGlobal(EltID idSource, EltID idDest);
 
     // Copy
-    void copySmpl(EltID idSource, EltID idDest);
-    void copyInst(EltID idSource, EltID idDest, bool withSmpl);
-    void copyPrst(EltID idSource, EltID idDest, bool withInst);
+    EltID copySmpl(EltID idSource, EltID idDest);
+    EltID copyInst(EltID idSource, EltID idDest, bool withSmpl);
+    EltID copyPrst(EltID idSource, EltID idDest, bool withInst);
 
     // Utils
     void copyGen(EltID idSource, EltID idDest);

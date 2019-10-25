@@ -52,14 +52,16 @@ Duplicator::Duplicator() :
     }
 }
 
-void Duplicator::copy(EltID idSource, EltID idDest)
+EltID Duplicator::copy(EltID idSource, EltID idDest)
 {
     if (idDest.typeElement != elementSf2 && idDest.typeElement != elementInst &&
             idDest.typeElement != elementInstSmpl && idDest.typeElement != elementRootInst &&
             idDest.typeElement != elementPrst && idDest.typeElement != elementPrstInst &&
             idDest.typeElement != elementRootPrst && idDest.typeElement != elementRootSmpl &&
-            idDest.typeElement != elementSmpl) return;
+            idDest.typeElement != elementSmpl)
+        return EltID();
 
+    EltID newId;
     if (idSource.indexSf2 == idDest.indexSf2)
     {
         // Link in the same file
@@ -67,11 +69,11 @@ void Duplicator::copy(EltID idSource, EltID idDest)
         {
         case elementSmpl:
             if (idDest.typeElement == elementInst || idDest.typeElement == elementInstSmpl)
-                linkSmpl(idSource, idDest);
+                newId = linkSmpl(idSource, idDest);
             break;
         case elementInst:
             if (idDest.typeElement == elementPrst || idDest.typeElement == elementPrstInst)
-                linkInst(idSource, idDest);
+                newId = linkInst(idSource, idDest);
             else if (idDest.typeElement == elementInst || idDest.typeElement == elementInstSmpl)
             {
                 // Copy the global division
@@ -84,11 +86,13 @@ void Duplicator::copy(EltID idSource, EltID idDest)
                     idSource.indexElt2 = i;
                     copy(idSource, idDest);
                 }
+
+                newId = idDest;
             }
             break;
         case elementInstSmpl:
             if (idDest.typeElement == elementInst || idDest.typeElement == elementInstSmpl)
-                copyLink(idSource, idDest);
+                newId = copyLink(idSource, idDest);
             break;
         case elementPrst:
             if (idDest.typeElement == elementPrst || idDest.typeElement == elementPrstInst)
@@ -103,14 +107,17 @@ void Duplicator::copy(EltID idSource, EltID idDest)
                     idSource.indexElt2 = i;
                     copy(idSource, idDest);
                 }
+
+                newId = idDest;
             }
             break;
         case elementPrstInst:
             if (idDest.typeElement == elementPrst || idDest.typeElement == elementPrstInst)
-                copyLink(idSource, idDest);
+                newId = copyLink(idSource, idDest);
             break;
         default:
-            return;
+            // Nothing
+            break;
         }
     }
     else
@@ -119,46 +126,52 @@ void Duplicator::copy(EltID idSource, EltID idDest)
         switch (idSource.typeElement)
         {
         case elementSmpl:
-            copySmpl(idSource, idDest);
+            newId = copySmpl(idSource, idDest);
             break;
         case elementInst:
-            copyInst(idSource, idDest, true);
+            newId = copyInst(idSource, idDest, true);
             break;
         case elementPrst:
-            copyPrst(idSource, idDest, true);
+            newId = copyPrst(idSource, idDest, true);
             break;
         default:
-            return;
+            // Nothing
+            break;
         }
     }
+    return newId;
 }
 
-void Duplicator::duplicate(EltID idSource)
+EltID Duplicator::duplicate(EltID idSource)
 {
     // Copy within the same soundfont
+    EltID duplicatedId;
     switch (idSource.typeElement)
     {
     case elementSmpl:
         _copieSmpl = DUPLIQUER_TOUT;
-        copySmpl(idSource, EltID(elementSf2, idSource.indexSf2));
+        duplicatedId = copySmpl(idSource, EltID(elementSf2, idSource.indexSf2));
         break;
     case elementInst:
         _copieInst = DUPLIQUER_TOUT;
-        copyInst(idSource, EltID(elementSf2, idSource.indexSf2), false);
+        duplicatedId = copyInst(idSource, EltID(elementSf2, idSource.indexSf2), false);
         break;
     case elementInstSmpl:
-        copyLink(idSource, EltID(elementInst, idSource.indexSf2, idSource.indexElt));
+        duplicatedId = copyLink(idSource, EltID(elementInst, idSource.indexSf2, idSource.indexElt));
         break;
     case elementPrst:
         _copiePrst = DUPLIQUER_TOUT;
-        copyPrst(idSource, EltID(elementSf2, idSource.indexSf2), false);
+        duplicatedId = copyPrst(idSource, EltID(elementSf2, idSource.indexSf2), false);
         break;
     case elementPrstInst:
-        copyLink(idSource, EltID(elementPrst, idSource.indexSf2, idSource.indexElt));
+        duplicatedId = copyLink(idSource, EltID(elementPrst, idSource.indexSf2, idSource.indexElt));
         break;
     default:
-        return;
+        // Nothing
+        break;
     }
+
+    return duplicatedId;
 }
 
 /////////////////////////////////
@@ -168,7 +181,7 @@ void Duplicator::duplicate(EltID idSource)
 // Lien d'un sample dans un instrument
 // idSource : sample
 // idDest   : inst ou instSmpl
-void Duplicator::linkSmpl(EltID idSource, EltID idDest)
+EltID Duplicator::linkSmpl(EltID idSource, EltID idDest)
 {
     idDest.typeElement = elementInstSmpl;
     idDest.indexElt2 = _sm->add(idDest);
@@ -194,12 +207,14 @@ void Duplicator::linkSmpl(EltID idSource, EltID idDest)
         val.shValue = 0;
         _sm->set(idDest, champ_pan, val);
     }
+
+    return idDest;
 }
 
 // Lien d'un instrument dans un preset
 // idSource : instrument
 // idDest   : prst ou prstInst
-void Duplicator::linkInst(EltID idSource, EltID idDest)
+EltID Duplicator::linkInst(EltID idSource, EltID idDest)
 {
     idDest.typeElement = elementPrstInst;
     idDest.indexElt2 = _sm->add(idDest);
@@ -233,12 +248,14 @@ void Duplicator::linkInst(EltID idSource, EltID idDest)
         value.rValue.byHi = 127;
     }
     _sm->set(idDest, champ_keyRange, value);
+
+    return idDest;
 }
 
 // Copie d'un instrument lié dans un autre instrument
 // idSource : instSmpl ou prstInst
 // idDest   : inst/instSmpl ou prst/prstInst (autre élément)
-void Duplicator::copyLink(EltID idSource, EltID idDest)
+EltID Duplicator::copyLink(EltID idSource, EltID idDest)
 {
     idDest.typeElement = idSource.typeElement;
     idDest.indexElt2 = _sm->add(idDest);
@@ -248,6 +265,8 @@ void Duplicator::copyLink(EltID idSource, EltID idDest)
 
     // Copie des mods
     copyMod(idSource, idDest);
+
+    return idDest;
 }
 
 // Copie d'une division global d'un instrument ou d'un preset à un autre
@@ -293,7 +312,7 @@ void Duplicator::copyGlobal(EltID idSource, EltID idDest)
 // Copie d'un sample dans un autre sf2
 // idSource : sample
 // idDest   : indexSf2 différent ou provenant d'un autre fichier
-void Duplicator::copySmpl(EltID idSource, EltID idDest)
+EltID Duplicator::copySmpl(EltID idSource, EltID idDest)
 {
     // Recherche si un sample du même nom existe déjà dans les éléments initiaux
     idDest.typeElement = elementSmpl;
@@ -400,12 +419,14 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
     // Enregistrement de l'élément copié, avec sa correspondance
     _listCopy << idSource;
     _listPaste << idDest;
+
+    return idDest;
 }
 
 // Copie d'un instrument dans un autre sf2
 // idSource : instrument
 // idDest   : indexSf2 différent ou provenant d'un autre fichier
-void Duplicator::copyInst(EltID idSource, EltID idDest, bool withSmpl)
+EltID Duplicator::copyInst(EltID idSource, EltID idDest, bool withSmpl)
 {
     if (withSmpl)
     {
@@ -503,12 +524,14 @@ void Duplicator::copyInst(EltID idSource, EltID idDest, bool withSmpl)
     // Enregistrement de l'élément copié, avec sa correspondance
     _listCopy << idSource;
     _listPaste << idDest;
+
+    return idDest;
 }
 
 // Copie d'un preset dans un autre sf2
 // idSource : preset
 // idDest   : indexSf2 différent ou provenant d'un autre fichier
-void Duplicator::copyPrst(EltID idSource, EltID idDest, bool withInst)
+EltID Duplicator::copyPrst(EltID idSource, EltID idDest, bool withInst)
 {
     if (withInst)
     {
@@ -620,6 +643,8 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest, bool withInst)
     // Enregistrement de l'élément copié, avec sa correspondance
     _listCopy << idSource;
     _listPaste << idDest;
+
+    return idDest;
 }
 
 
