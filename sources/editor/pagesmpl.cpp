@@ -37,7 +37,8 @@
 
 PageSmpl::PageSmpl(QWidget *parent) :
     Page(parent, PAGE_SMPL, "page:smpl"),
-    ui(new Ui::PageSmpl)
+    ui(new Ui::PageSmpl),
+    _currentPlayingToken(0)
 {
     ui->setupUi(this);
 
@@ -71,7 +72,7 @@ PageSmpl::PageSmpl(QWidget *parent) :
 
     // Connections
     ui->waveDisplay->connect(_synth, SIGNAL(currentPosChanged(quint32)), SLOT(setCurrentSample(quint32)));
-    this->connect(_synth, SIGNAL(readFinished(EltID)), SLOT(lecteurFinished(EltID)));
+    this->connect(_synth, SIGNAL(readFinished(int)), SLOT(lecteurFinished(int)));
     connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
     connect(ui->waveDisplay, SIGNAL(cutOrdered(int,int)), this, SLOT(onCutOrdered(int,int)));
 
@@ -118,12 +119,13 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
 {
     Q_UNUSED(displayOption)
 
-    if (editingSource == "page:smpl")
+    if (editingSource == "page:smpl" || editingSource == "tree:remove") // tree:remove comes with a new selection
         return true;
 
     // Check the selection
     if (!selectedIds.isElementUnique(elementSf2))
         return false;
+
     _currentIds = selectedIds;
     IdList ids = _currentIds.getSelectedIds(elementSmpl);
     int nombreElements = ids.size();
@@ -886,7 +888,7 @@ void PageSmpl::lecture()
         if (listID.count() == 1)
         {
             _synth->activateSmplEq(ui->widgetEqualizer->isPreviewEnabled());
-            _synth->play(listID[0], -1, 127);
+            _currentPlayingToken = _synth->play(listID[0], -1, 127);
         }
 
         // Désactivations
@@ -902,9 +904,9 @@ void PageSmpl::lecture()
     updateSinus();
 }
 
-void PageSmpl::lecteurFinished(EltID id)
+void PageSmpl::lecteurFinished(int token)
 {
-    if (this->_currentIds.count() != 1 || id != this->_currentIds[0])
+    if (token != _currentPlayingToken)
         return;
     ui->waveDisplay->setCurrentSample(0);
 

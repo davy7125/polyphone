@@ -29,6 +29,8 @@
 #include "contextmanager.h"
 #include "soundfontmanager.h"
 
+int Synth::s_sampleVoiceTokenCounter = 0;
+
 // Constructeur, destructeur
 Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _sf2(SoundfontManager::getInstance()),
@@ -86,7 +88,7 @@ void Synth::createSoundEnginesAndBuffers()
     for (int i = 0; i < nbEngines; i++)
     {
         SoundEngine * soundEngine = new SoundEngine(_bufferSize);
-        connect(soundEngine, SIGNAL(readFinished(EltID)), this, SIGNAL(readFinished(EltID)));
+        connect(soundEngine, SIGNAL(readFinished(int)), this, SIGNAL(readFinished(int)));
         soundEngine->moveToThread(new QThread());
         soundEngine->thread()->start(QThread::TimeCriticalPriority);
         QMetaObject::invokeMethod(soundEngine, "start");
@@ -94,20 +96,21 @@ void Synth::createSoundEnginesAndBuffers()
     }
 }
 
-void Synth::play(EltID id, int key, int velocity)
+int Synth::play(EltID id, int key, int velocity)
 {
     if (velocity == 0)
     {
         // Release of a key
         SoundEngine::releaseNote(key);
-        return;
+        return -1;
     }
 
     // A key is pressed
+    int playingToken = -1;
     switch (id.typeElement)
     {
     case elementSmpl:
-        playSmpl(id.indexSf2, id.indexElt, key, velocity);
+        playingToken = playSmpl(id.indexSf2, id.indexElt, key, velocity);
         break;
     case elementInst: case elementInstSmpl:
         playInst(id.indexSf2, id.indexElt, key, velocity);
@@ -116,7 +119,7 @@ void Synth::play(EltID id, int key, int velocity)
         playPrst(id.indexSf2, id.indexElt, key, velocity);
         break;
     default:
-        return;
+        return -1;
     }
 
     // Synchronize all new voices that have been added
@@ -126,6 +129,7 @@ void Synth::play(EltID id, int key, int velocity)
 
     // Reset the list used for the exclusive class system
     _listVoixTmp.clear();
+    return playingToken;
 }
 
 void Synth::playPrst(int idSf2, int idElt, int key, int velocity)
@@ -251,7 +255,7 @@ void Synth::playInst(int idSf2, int idElt, int key, int velocity, EltID idPrstIn
     }
 }
 
-void Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSmpl, EltID idPrstInst)
+int Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSmpl, EltID idPrstInst)
 {
     // Only one -1 or -2 at a time
     if (key < 0)
@@ -266,9 +270,10 @@ void Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSm
         voiceParam->prepareForSmpl(key, _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue);
 
     // Create a voice
+    s_sampleVoiceTokenCounter++;
     Voice * voiceTmp = new Voice(_sf2->getData(idSmpl, champ_sampleData32),
                                  _sf2->get(idSmpl, champ_dwSampleRate).dwValue,
-                                 _format.sampleRate(), key, voiceParam, idSmpl);
+                                 _format.sampleRate(), key, voiceParam, s_sampleVoiceTokenCounter);
 
     // Initialize chorus and gain
     if (key < 0)
@@ -293,6 +298,8 @@ void Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSm
         if (typeLien != monoSample && typeLien != RomMonoSample)
             this->playSmpl(idSf2, _sf2->get(idSmpl, champ_wSampleLink).wValue, -2, 127);
     }
+
+    return s_sampleVoiceTokenCounter;
 }
 
 void Synth::stop()

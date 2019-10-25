@@ -43,7 +43,7 @@ public:
     ~Synth();
 
     // Executed by the main thread (thread 1)
-    void play(EltID id, int key, int velocity);
+    int play(EltID id, int key, int velocity);
     void stop();
     void setGain(double gain);
 
@@ -70,7 +70,7 @@ public:
 
 signals:
     void currentPosChanged(quint32 pos);
-    void readFinished(EltID id);
+    void readFinished(int token);
     void sampleRateChanged(quint32 sampleRate);
     void dataWritten(quint32 sampleRate, quint32 number);
 
@@ -80,8 +80,8 @@ public slots:
 private:
     void playPrst(int idSf2, int idElt, int key, int velocity);
     void playInst(int idSf2, int idElt, int key, int velocity, EltID idPrstInst = EltID(elementUnknown));
-    void playSmpl(int idSf2, int idElt, int key, int velocity,
-                  EltID idInstSmpl = EltID(elementUnknown), EltID idPrstInst = EltID(elementUnknown));
+    int playSmpl(int idSf2, int idElt, int key, int velocity,
+                 EltID idInstSmpl = EltID(elementUnknown), EltID idPrstInst = EltID(elementUnknown));
 
     void destroySoundEnginesAndBuffers();
     void createSoundEnginesAndBuffers();
@@ -134,6 +134,7 @@ private:
     // Liste des sound engines, voix temporaires (pour exclusive class)
     QList<SoundEngine *> _soundEngines;
     QList<Voice *> _listVoixTmp;
+    static int s_sampleVoiceTokenCounter;
 
     // Audio format
     AudioFormat _format;

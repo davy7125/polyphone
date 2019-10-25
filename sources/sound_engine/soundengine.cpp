@@ -104,7 +104,7 @@ void SoundEngine::stopAllVoicesInstance()
     {
         // Signal emitted for the sample player (voice -1)
         if (_listVoices.last()->getKey() == -1)
-            emit(readFinished(_listVoices.last()->getId()));
+            emit(readFinished(_listVoices.last()->getToken()));
 
         delete _listVoices.takeLast();
     }

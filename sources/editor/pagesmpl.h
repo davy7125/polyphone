@@ -60,7 +60,7 @@ protected:
 
 private slots:
     void lecture();
-    void lecteurFinished(EltID id);
+    void lecteurFinished(int token);
     void setStartLoop();
     void setStartLoop(int val);
     void setEndLoop();
@@ -83,6 +83,7 @@ private slots:
 
 private:
     Ui::PageSmpl *ui;
+    int _currentPlayingToken;
 
     void updatePlayButton();
     void setRateElt(EltID id, quint32 echFinal);
