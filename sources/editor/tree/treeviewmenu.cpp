@@ -415,7 +415,7 @@ void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int 
 
         newName = newName.left(20);
 
-        if (sm->getQstr(ID, champ_name).compare(newName, Qt::CaseInsensitive))
+        if (sm->getQstr(ID, champ_name).compare(newName, Qt::CaseSensitive))
             sm->set(ID, champ_name, newName);
     }
     sm->endEditing("command:bulkRename");
