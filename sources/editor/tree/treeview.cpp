@@ -51,6 +51,7 @@ TreeView::TreeView(QWidget * parent) : QTreeView(parent),
     // Menu
     _menu = new TreeViewMenu(parent);
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(openMenu(QPoint)));
+    connect(_menu, SIGNAL(selectionChanged(IdList)), this, SLOT(onSelectionChanged(IdList)));
 
     // Drag & drop
     this->setAcceptDrops(true);

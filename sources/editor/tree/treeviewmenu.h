@@ -40,6 +40,9 @@ public:
     /// Initialize the menu with the selected IDs
     void initialize(IdList ids);
 
+signals:
+    void selectionChanged(IdList ids);
+
 public slots:
     void associate();
     void replace();

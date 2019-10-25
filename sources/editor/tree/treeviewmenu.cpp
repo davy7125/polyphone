@@ -279,6 +279,13 @@ void TreeViewMenu::associate(IdList ids, EltID idDest)
     }
 
     sm->endEditing("command:associate");
+
+    // Select the parent element of all children that have been linked
+    if (idDest.typeElement == elementInstSmpl)
+        idDest.typeElement = elementInst;
+    else
+        idDest.typeElement = elementPrst;
+    emit(selectionChanged(idDest));
 }
 
 void TreeViewMenu::replace(EltID idSrc, EltID idDest)
