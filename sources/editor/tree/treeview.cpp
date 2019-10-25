@@ -484,7 +484,14 @@ bool TreeView::select(EltID id, QItemSelectionModel::SelectionFlag flags)
     QModelIndex index = getIndex(id);
     if (!index.isValid())
         return false;
+
+    // Change the current item: maj + click will work
+    if (flags & QItemSelectionModel::Clear)
+        this->setCurrentIndex(index);
+
+    // Change the selection
     this->selectionModel()->select(index, flags);
+
     return true;
 }
 
