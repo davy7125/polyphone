@@ -28,6 +28,7 @@
 #include "contextmanager.h"
 #include "soundfontmanager.h"
 #include "sampleutils.h"
+#include <QMessageBox>
 
 Equalizer::Equalizer(QWidget *parent) :
     QWidget(parent),
@@ -133,8 +134,16 @@ void Equalizer::on_pushEgaliser_clicked()
             }
         }
     }
+
+    int processedSampleNumber = listprocessedID.count();
+    if (processedSampleNumber == 0)
+        return;
+
     sm->endEditing("equalizer");
     ui->checkEqualizerPreview->setChecked(false);
+    QMessageBox::information(this, trUtf8("Information"), processedSampleNumber == 1 ?
+                                 trUtf8("Equalization successfully applied on 1 sample.") :
+                                 trUtf8("Equalization successfully applied on %1 samples.").arg(processedSampleNumber));
 }
 
 void Equalizer::loadEQ()
