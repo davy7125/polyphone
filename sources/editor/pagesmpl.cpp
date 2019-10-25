@@ -37,9 +37,7 @@
 
 PageSmpl::PageSmpl(QWidget *parent) :
     Page(parent, PAGE_SMPL, "page:smpl"),
-    ui(new Ui::PageSmpl),
-    _playingSmpl(false),
-    preventStop(0)
+    ui(new Ui::PageSmpl)
 {
     ui->setupUi(this);
 
@@ -73,7 +71,7 @@ PageSmpl::PageSmpl(QWidget *parent) :
 
     // Connections
     ui->waveDisplay->connect(_synth, SIGNAL(currentPosChanged(quint32)), SLOT(setCurrentSample(quint32)));
-    this->connect(_synth, SIGNAL(readFinished()), SLOT(lecteurFinished()));
+    this->connect(_synth, SIGNAL(readFinished(EltID)), SLOT(lecteurFinished(EltID)));
     connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
     connect(ui->waveDisplay, SIGNAL(cutOrdered(int,int)), this, SLOT(onCutOrdered(int,int)));
 
@@ -128,7 +126,6 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
         return false;
     _currentIds = selectedIds;
     IdList ids = _currentIds.getSelectedIds(elementSmpl);
-    ui->widgetEqualizer->setCurrentIds(ids);
     int nombreElements = ids.size();
 
     EltID id = ids.takeFirst();
@@ -143,10 +140,8 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
         endLoop = 0;
     quint32 length = _sf2->get(id, champ_dwLength).dwValue;
     SFSampleLink typeLink = _sf2->get(id, champ_sfSampleType).sfLinkValue;
-    while (!ids.isEmpty())
+    foreach (EltID idTmp, ids)
     {
-        EltID idTmp = ids.takeFirst();
-
         if (sampleRate != _sf2->get(idTmp, champ_dwSampleRate).dwValue)
             sampleRate = -1;
         if (rootKey != _sf2->get(idTmp, champ_byOriginalPitch).bValue)
@@ -252,7 +247,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     }
     ui->comboLink->model()->sort(0);
     ui->comboLink->insertItem(0, "-");
-    ui->comboLink->setEnabled(nombreElements == 1 && !_playingSmpl);
+    ui->comboLink->setEnabled(nombreElements == 1 && !ui->pushLecture->isChecked());
 
     // Types possibles et sélections
     ui->comboType->addItem(trUtf8("mono", "opposite to stereo"));
@@ -292,7 +287,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
 
         ui->checkLectureLien->setEnabled(nombreElements == 1);
     }
-    ui->comboType->setEnabled(nombreElements == 1 && !_playingSmpl);
+    ui->comboType->setEnabled(nombreElements == 1 && !ui->pushLecture->isChecked());
 
     // Instruments that use the sample
     if (nombreElements > 1)
@@ -316,13 +311,13 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     ui->checkLectureLien->blockSignals(true);
     ui->checkLectureLien->setChecked(_synth->isStereo());
     ui->checkLectureLien->blockSignals(false);
-    if (this->_playingSmpl)
-    {
-        ui->pushLecture->setChecked(true);
+    if (ui->pushLecture->isChecked())
         this->lecture();
-        preventStop++;
-    }
     updatePlayButton();
+
+    // Initialize the equalizer
+    ui->widgetEqualizer->setCurrentIds(ids);
+    ui->widgetEqualizer->enableApply(!ui->pushLecture->isChecked() || nombreElements > 1);
 
     return true;
 }
@@ -899,26 +894,18 @@ void PageSmpl::lecture()
         ui->comboType->setEnabled(false);
         ui->comboSampleRate->setEnabled(false);
         ui->widgetEqualizer->enableApply(false);
-
-        this->_playingSmpl = true;
     }
     else
-    {
-        this->_playingSmpl = false;
         _synth->play(EltID(), -1, 0);
-    }
 
     updatePlayButton();
     updateSinus();
 }
 
-void PageSmpl::lecteurFinished()
+void PageSmpl::lecteurFinished(EltID id)
 {
-    if (preventStop)
-    {
-        preventStop--;
+    if (this->_currentIds.count() != 1 || id != this->_currentIds[0])
         return;
-    }
     ui->waveDisplay->setCurrentSample(0);
 
     // Réinitialisation des boutons
@@ -935,7 +922,6 @@ void PageSmpl::lecteurFinished()
         updateSinus();
         _synth->activateSmplEq(false);
     }
-    _playingSmpl = false;
     updatePlayButton();
 }
 
@@ -1079,7 +1065,7 @@ void PageSmpl::onShow()
 
 void PageSmpl::updatePlayButton()
 {
-    if (_playingSmpl)
+    if (ui->pushLecture->isChecked())
     {
         ui->pushLecture->setToolTip(trUtf8("Stop"));
         ui->pushLecture->setIcon(ContextManager::theme()->getColoredSvg(

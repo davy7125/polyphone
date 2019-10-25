@@ -72,14 +72,14 @@ void Editor::initialize(AbstractInputParser * input)
 void Editor::inputProcessed()
 {
     // Get information from the input
-    AbstractInputParser * input = (AbstractInputParser *)QObject::sender();
+    AbstractInputParser * input = dynamic_cast<AbstractInputParser *>(QObject::sender());
     if (input->isSuccess())
     {
         // Index of the opened soundfont
         _sf2Index = input->getSf2Index();
 
         // Prepare the tree
-        TreeModel * model = (TreeModel*)SoundfontManager::getInstance()->getModel(_sf2Index);
+        TreeModel * model = dynamic_cast<TreeModel*>(SoundfontManager::getInstance()->getModel(_sf2Index));
         TreeSortFilterProxy * proxy = new TreeSortFilterProxy(_sf2Index, ui->treeView, model);
         connect(ui->editFilter, SIGNAL(textChanged(QString)), proxy, SLOT(filterChanged(QString)));
         connect(model, SIGNAL(saveExpandedState()), ui->treeView, SLOT(saveExpandedState()));
@@ -139,7 +139,7 @@ void Editor::onSelectionChanged(IdList ids)
         break;
     }
 
-    if (currentPage != NULL)
+    if (currentPage != nullptr)
     {
         if ((void *)currentPage == (void *)ui->stackedWidget->currentWidget())
             currentPage->preparePage("command:selection", ids);
@@ -158,7 +158,7 @@ void Editor::update(QString editingSource)
     ui->toolBar->updateActions();
 
     // Update the current page
-    Page * currentPage = (Page*)ui->stackedWidget->currentWidget();
+    Page * currentPage = dynamic_cast<Page*>(ui->stackedWidget->currentWidget());
     currentPage->preparePage(editingSource);
 
     // Tab title and filepath
@@ -181,6 +181,6 @@ void Editor::updateTitleAndPath()
 void Editor::displayOptionChanged(int displayOption)
 {
     // Update the current page
-    Page * currentPage = (Page*)ui->stackedWidget->currentWidget();
+    Page * currentPage = dynamic_cast<Page*>(ui->stackedWidget->currentWidget());
     currentPage->setDisplayOption(displayOption);
 }

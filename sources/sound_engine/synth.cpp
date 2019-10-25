@@ -86,7 +86,7 @@ void Synth::createSoundEnginesAndBuffers()
     for (int i = 0; i < nbEngines; i++)
     {
         SoundEngine * soundEngine = new SoundEngine(_bufferSize);
-        connect(soundEngine, SIGNAL(readFinished()), this, SIGNAL(readFinished()));
+        connect(soundEngine, SIGNAL(readFinished(EltID)), this, SIGNAL(readFinished(EltID)));
         soundEngine->moveToThread(new QThread());
         soundEngine->thread()->start(QThread::TimeCriticalPriority);
         QMetaObject::invokeMethod(soundEngine, "start");
@@ -268,7 +268,7 @@ void Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSm
     // Create a voice
     Voice * voiceTmp = new Voice(_sf2->getData(idSmpl, champ_sampleData32),
                                  _sf2->get(idSmpl, champ_dwSampleRate).dwValue,
-                                 _format.sampleRate(), key, voiceParam);
+                                 _format.sampleRate(), key, voiceParam, idSmpl);
 
     // Initialize chorus and gain
     if (key < 0)

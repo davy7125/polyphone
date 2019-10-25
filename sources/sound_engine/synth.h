@@ -70,7 +70,7 @@ public:
 
 signals:
     void currentPosChanged(quint32 pos);
-    void readFinished();
+    void readFinished(EltID id);
     void sampleRateChanged(quint32 sampleRate);
     void dataWritten(quint32 sampleRate, quint32 number);
 

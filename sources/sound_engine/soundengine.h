@@ -52,7 +52,7 @@ public:
     static void setGainSample(int gain);
 
 signals:
-    void readFinished();
+    void readFinished(EltID id);
 
 protected:
     // Executed by the circular buffer thread
@@ -87,8 +87,10 @@ protected:
                 // Voice ended?
                 if (_listVoices.at(i)->isFinished())
                 {
+                    // Signal emitted for the sample player (voice -1)
                     if (_listVoices.at(i)->getKey() == -1)
-                        emit(readFinished());
+                        emit(readFinished(_listVoices.at(i)->getId()));
+
                     delete _listVoices.takeAt(i);
                 }
             }

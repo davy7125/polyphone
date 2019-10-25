@@ -27,7 +27,7 @@
 
 // Constructeur, destructeur
 Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int initialKey,
-             VoiceParam * voiceParam) : QObject(nullptr),
+             VoiceParam * voiceParam, EltID id) : QObject(nullptr),
     _modLFO(audioSmplRate),
     _vibLFO(audioSmplRate),
     _enveloppeVol(audioSmplRate, false),
@@ -39,6 +39,7 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int ini
     _gain(0),
     _initialKey(initialKey),
     _voiceParam(voiceParam),
+    _id(id),
     _currentSmplPos(voiceParam->getPosition(champ_dwStart16)), // This value is read only once
     _time(0),
     _release(false),

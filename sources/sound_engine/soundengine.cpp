@@ -102,8 +102,10 @@ void SoundEngine::stopAllVoicesInstance()
     _mutexVoices.lock();
     while (!_listVoices.isEmpty())
     {
+        // Signal emitted for the sample player (voice -1)
         if (_listVoices.last()->getKey() == -1)
-            emit(readFinished());
+            emit(readFinished(_listVoices.last()->getId()));
+
         delete _listVoices.takeLast();
     }
     _mutexVoices.unlock();

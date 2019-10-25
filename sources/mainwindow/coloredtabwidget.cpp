@@ -157,7 +157,7 @@ void ColoredTabWidget::onCurrentChanged(int index)
 
 void ColoredTabWidget::onCloseButtonClicked()
 {
-    QPushButton * sender = (QPushButton *)QObject::sender();
+    QPushButton * sender = static_cast<QPushButton *>(QObject::sender());
     if (sender == nullptr)
         return;
 
