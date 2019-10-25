@@ -80,6 +80,8 @@ PageSmpl::PageSmpl(QWidget *parent) :
     ui->grapheFourier->setBackgroundColor(this->palette().window().color());
 
     // Play area over the wave display
+    ui->checkLectureLien->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "stereo_playback", false).toBool());
+    _synth->setStereo(ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "stereo_playback", false).toBool());
     ui->framePlayArea->setParent(ui->waveDisplay);
     ui->framePlayArea->move(5, 5);
 
@@ -130,7 +132,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     IdList ids = _currentIds.getSelectedIds(elementSmpl);
     int nombreElements = ids.size();
 
-    EltID id = ids.takeFirst();
+    EltID id = ids.first();
     quint32 sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
     int rootKey = _sf2->get(id, champ_byOriginalPitch).bValue;
     int correction = _sf2->get(id, champ_chPitchCorrection).cValue;
@@ -142,8 +144,9 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
         endLoop = 0;
     quint32 length = _sf2->get(id, champ_dwLength).dwValue;
     SFSampleLink typeLink = _sf2->get(id, champ_sfSampleType).sfLinkValue;
-    foreach (EltID idTmp, ids)
+    for (int i = 1; i < ids.count(); i++)
     {
+        EltID idTmp = ids[i];
         if (sampleRate != _sf2->get(idTmp, champ_dwSampleRate).dwValue)
             sampleRate = -1;
         if (rootKey != _sf2->get(idTmp, champ_byOriginalPitch).bValue)
@@ -310,6 +313,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     }
 
     // Reprise de la lecture
+    _currentPlayingToken = 0;
     ui->checkLectureLien->blockSignals(true);
     ui->checkLectureLien->setChecked(_synth->isStereo());
     ui->checkLectureLien->blockSignals(false);
@@ -948,6 +952,7 @@ void PageSmpl::updateSinus()
 void PageSmpl::setStereo(bool val)
 {
     // Modif synth
+    ContextManager::configuration()->setValue(ConfManager::SECTION_AUDIO, "stereo_playback", val);
     _synth->setStereo(val);
 }
 

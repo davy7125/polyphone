@@ -311,10 +311,10 @@ void SoundEngine::setStereoInstance(bool isStereo)
                 voice1->setPan(-50);
             else if (pan > 0)
                 voice1->setPan(50);
-            voice1->setGain(_gainSmpl - 6);
+            voice1->setGain(_gainSmpl - 3);
         }
         if (voice2)
-            voice2->setGain(_gainSmpl - 6);
+            voice2->setGain(_gainSmpl - 3);
     }
     else
     {

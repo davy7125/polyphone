@@ -108,8 +108,11 @@ void ConfManager::setValue(Section section, QString key, QVariant value)
             ModulatorData::MODULATOR_VEL_TO_FILTER_TYPE = value.toInt();
         break;
     case Section::SECTION_AUDIO:
-        emit(soundEngineConfigurationChanged()); // First prepare the sound engine (the buffer can be adjusted)
-        emit(audioServerConfigurationChanged()); // Then update the audio server configuration
+        if (key != "stereo_playback")
+        {
+            emit(soundEngineConfigurationChanged()); // First prepare the sound engine (the buffer can be adjusted)
+            emit(audioServerConfigurationChanged()); // Then update the audio server configuration
+        }
         break;
     case Section::SECTION_KEYBOARD:
         emit(keyMapChanged());

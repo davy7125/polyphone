@@ -270,10 +270,10 @@ int Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSmp
         voiceParam->prepareForSmpl(key, _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue);
 
     // Create a voice
-    s_sampleVoiceTokenCounter++;
+    int currentToken = s_sampleVoiceTokenCounter++;
     Voice * voiceTmp = new Voice(_sf2->getData(idSmpl, champ_sampleData32),
                                  _sf2->get(idSmpl, champ_dwSampleRate).dwValue,
-                                 _format.sampleRate(), key, voiceParam, s_sampleVoiceTokenCounter);
+                                 _format.sampleRate(), key, voiceParam, currentToken);
 
     // Initialize chorus and gain
     if (key < 0)
@@ -299,7 +299,7 @@ int Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSmp
             this->playSmpl(idSf2, _sf2->get(idSmpl, champ_wSampleLink).wValue, -2, 127);
     }
 
-    return s_sampleVoiceTokenCounter;
+    return currentToken;
 }
 
 void Synth::stop()
