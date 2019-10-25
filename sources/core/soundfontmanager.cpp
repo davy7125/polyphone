@@ -1666,7 +1666,13 @@ void SoundfontManager::simplify(EltID id, AttributeType champ)
             idElement.indexElt2 = i;
             this->reset(idElement, champ);
         }
-        this->set(id, champ, valeur);
+
+        // Either reset the global value if the value is the default one, or set the global value
+        AttributeValue defValue = Attribute::getDefaultStoredValue(champ, id.typeElement == elementPrst);
+        if (defValue.dwValue == valeur.dwValue)
+            this->reset(id, champ);
+        else
+            this->set(id, champ, valeur);
     }
 }
 

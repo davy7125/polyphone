@@ -40,7 +40,7 @@ void ToolTranspose::beforeProcess(IdList ids)
 
 void ToolTranspose::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
-    ToolTranspose_parameters * params = (ToolTranspose_parameters *)parameters;
+    ToolTranspose_parameters * params = static_cast<ToolTranspose_parameters *>(parameters);
     
     // Elements to transpose
     EltID divId = EltID(elementInstSmpl, id.indexSf2, id.indexElt);
@@ -88,8 +88,8 @@ void ToolTranspose::process(SoundfontManager * sm, EltID id, AbstractToolParamet
                     noteSup = 127;
 
                 // Save the new range
-                valeur.rValue.byLo = noteInf;
-                valeur.rValue.byHi = noteSup;
+                valeur.rValue.byLo = static_cast<quint8>(noteInf);
+                valeur.rValue.byHi = static_cast<quint8>(noteSup);
                 sm->set(divId, champ_keyRange, valeur);
             }
 
@@ -109,20 +109,20 @@ void ToolTranspose::process(SoundfontManager * sm, EltID id, AbstractToolParamet
                 rootKey = 0;
             else if (rootKey > 127)
                 rootKey = 127;
-            valeur.wValue = rootKey;
+            valeur.wValue = static_cast<quint8>(rootKey);
             sm->set(divId, champ_overridingRootKey, valeur);
 
             // Correction
             int fineTune = 0;
             if (sm->isSet(id, champ_fineTune))
-                fineTune = sm->get(id, champ_fineTune).wValue;
+                fineTune = sm->get(id, champ_fineTune).shValue;
             if (sm->isSet(divId, champ_fineTune))
-                fineTune = sm->get(divId, champ_fineTune).wValue;
+                fineTune = sm->get(divId, champ_fineTune).shValue;
             int coarseTune = 0;
             if (sm->isSet(id, champ_coarseTune))
-                coarseTune = sm->get(id, champ_coarseTune).wValue;
+                coarseTune = sm->get(id, champ_coarseTune).shValue;
             if (sm->isSet(divId, champ_coarseTune))
-                coarseTune = sm->get(divId, champ_coarseTune).wValue;
+                coarseTune = sm->get(divId, champ_coarseTune).shValue;
 
             // Modification de la correction
             fineTune += correction;
@@ -138,9 +138,9 @@ void ToolTranspose::process(SoundfontManager * sm, EltID id, AbstractToolParamet
             }
 
             // Enregistrement de la nouvelle correction
-            valeur.shValue = fineTune;
+            valeur.shValue = static_cast<qint16>(fineTune);
             sm->set(divId, champ_fineTune, valeur);
-            valeur.shValue = coarseTune;
+            valeur.shValue = static_cast<qint16>(coarseTune);
             sm->set(divId, champ_coarseTune, valeur);
         }
 
