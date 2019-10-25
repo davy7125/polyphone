@@ -44,11 +44,13 @@ void DialogQuestion::initialize(QString title, QString placeHolder, QString defa
     this->setWindowTitle(title);
     ui->lineEdit->setPlaceholderText(placeHolder);
     ui->lineEdit->setText(defaultValue);
+    ui->lineEdit->selectAll();
 }
 
 void DialogQuestion::setTextLimit(int textLimit)
 {
     ui->lineEdit->setMaxLength(textLimit);
+    ui->lineEdit->selectAll();
 }
 
 void DialogQuestion::on_pushCancel_clicked()
