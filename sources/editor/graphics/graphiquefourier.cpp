@@ -127,7 +127,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
                               QList<int> &pitch, QList<int> &deltas, bool withReplot)
 {
     _peaks.clear();
-    _delta = -1;
+    _delta = 0;
     _key = -1;
 
     if (posEnd < 20 + posStart)
@@ -278,13 +278,12 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
 
     // Note la plus proche
     int note = qRound(note3);
-    int correction = Utils::round32((static_cast<double>(note) - note3) * 100.);
 
     // Affichage
     if (note >= 0 && note <= 128)
     {
         _key = note;
-        _delta = correction;
+        _delta = Utils::round32((note3 - static_cast<double>(note)) * 100.);
 
         for (int i = 0; i < posMaxFFT.size(); i++)
         {

@@ -122,9 +122,14 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
                     info.dwRootKey = 60; // back to middle C
 
                 // Tuning
-                qint32Reversed tmp32s;
+                quint32Reversed tmp32s;
                 in >> tmp32s;
-                info.iFineTune = qRound(static_cast<double>(tmp32s.value) / 2147483648. * 50.);
+                info.iFineTune = qRound(static_cast<double>(tmp32s.value) / 0x80000000 * 50.);
+                if (info.iFineTune > 50)
+                {
+                    info.iFineTune -= 100;
+                    info.dwRootKey += 1;
+                }
 
                 in.skipRawData(16); // SMPTE Format, SMPTE Offset, Num Sample Loops, Sampler Data
 

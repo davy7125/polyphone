@@ -245,7 +245,7 @@ qint32 Sound::getInt32(AttributeType champ)
     switch (champ)
     {
     case champ_chPitchCorrection:
-        result = _info.iFineTune;
+        result = -_info.iFineTune; // The correction is the opposite value
         break;
     default:
         break;
@@ -323,7 +323,7 @@ void Sound::set(AttributeType champ, AttributeValue value)
         break;
     case champ_chPitchCorrection:
         // Modification de la note en centième de ton
-        _info.iFineTune = value.cValue;
+        _info.iFineTune = -value.cValue; // Fine tune is the opposite of correction
         break;
     default:
         break;

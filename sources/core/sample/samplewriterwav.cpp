@@ -166,26 +166,27 @@ void SampleWriterWav::write(QByteArray &baData, InfoSound &info)
     out << dwTemp; // product
     dwTemp = 1000000000 / info.dwSampleRate;
     out << dwTemp; // smpl period
+
     // Note et correction
-    if (info.iFineTune > 50)
+    if (info.iFineTune > 100)
     {
-        dwTemp = qMin((quint32)127, info.dwRootKey + 1);
+        dwTemp = qMin(127u, info.dwRootKey + 1);
         out << dwTemp;
-        dwTemp = qRound(((double)(info.iFineTune - 50) / 50.) * 2147483648.);
+        dwTemp = static_cast<quint32>(static_cast<double>(info.iFineTune - 100) / 50. * 0x80000000 + 0.5);
         out << dwTemp;
     }
-    else if (info.iFineTune < -50)
+    else if (info.iFineTune < 0)
     {
-        dwTemp = qMax((quint32)0, info.dwRootKey - 1);
+        dwTemp = qMax(0u, info.dwRootKey - 1);
         out << dwTemp;
-        dwTemp = qRound(((double)(info.iFineTune + 50) / 50.) * 2147483648.);
+        dwTemp = static_cast<quint32>(static_cast<double>(info.iFineTune + 100) / 50. * 0x80000000 + 0.5);
         out << dwTemp;
     }
     else
     {
         dwTemp = info.dwRootKey;
         out << dwTemp;
-        dwTemp = qRound(((double)info.iFineTune / 50.) * 2147483648.);
+        dwTemp = static_cast<quint32>(static_cast<double>(info.iFineTune) / 50. * 0x80000000 + 0.5);
         out << dwTemp;
     }
     dwTemp = 0;
