@@ -22,35 +22,34 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef DIALOGQUESTION_H
-#define DIALOGQUESTION_H
+#ifndef DIALOGNEWELEMENT_H
+#define DIALOGNEWELEMENT_H
 
 #include <QDialog>
 
 namespace Ui {
-class DialogQuestion;
+class DialogNewElement;
 }
 
-class DialogQuestion : public QDialog
+class DialogNewElement : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit DialogQuestion(QWidget *parent = nullptr);
-    ~DialogQuestion();
+    explicit DialogNewElement(QWidget *parent = nullptr);
+    ~DialogNewElement();
 
-    void initialize(QString title, QString placeHolder, QString defaultValue);
-    void setTextLimit(int textLimit);
+    void initialize(bool isPrst, bool withPossibleLinkedElements, QString defaultName);
 
 signals:
-    void onOk(QString txt);
+    void onOk(QString txt, bool withLinkedElements);
 
 private slots:
     void on_pushCancel_clicked();
     void on_pushOk_clicked();
 
 private:
-    Ui::DialogQuestion *ui;
+    Ui::DialogNewElement *ui;
 };
 
-#endif // DIALOGQUESTION_H
+#endif // DIALOGNEWELEMENT_H

@@ -33,7 +33,7 @@
 #include <QFileDialog>
 #include "windowmanager.h"
 #include "outputfactory.h"
-#include "dialogquestion.h"
+#include "dialognewelement.h"
 #include "utils.h"
 
 bool EditorToolBar::s_recorderOpen = false;
@@ -279,22 +279,20 @@ void EditorToolBar::onNewInstClicked()
     if (!SoundfontManager::getInstance()->isValid(id))
         return;
 
-    // Default name of the instrument
+    // Name of all selected samples
     IdList ids = _currentSelection.getSelectedIds(elementSmpl);
     QStringList names;
     foreach (EltID id, ids)
         names << SoundfontManager::getInstance()->getQstr(id, champ_name);
-    QString text = Utils::commonPart(names);
 
     // Open a dialog
-    DialogQuestion * dial = new DialogQuestion(this);
-    dial->initialize(trUtf8("Create a new instrument"), trUtf8("Name of the new instrument") + "...", text);
-    dial->setTextLimit(20);
-    connect(dial, SIGNAL(onOk(QString)), this, SLOT(onNewInstClicked(QString)));
+    DialogNewElement * dial = new DialogNewElement(this);
+    dial->initialize(false, !ids.isEmpty(), Utils::commonPart(names));
+    connect(dial, SIGNAL(onOk(QString, bool)), this, SLOT(onNewInstClicked(QString, bool)));
     dial->show();
 }
 
-void EditorToolBar::onNewInstClicked(QString name)
+void EditorToolBar::onNewInstClicked(QString name, bool linkElements)
 {
     if (name.isEmpty())
         return;
@@ -305,6 +303,36 @@ void EditorToolBar::onNewInstClicked(QString name)
     id.typeElement = elementInst;
     id.indexElt = sm->add(id);
     sm->set(id, champ_name, name.left(20));
+
+    if (linkElements)
+    {
+        // Link all selected samples
+        IdList ids = _currentSelection.getSelectedIds(elementSmpl);
+        EltID idLink = id;
+        idLink.typeElement = elementInstSmpl;
+        AttributeValue val;
+        foreach (EltID idSrc, ids)
+        {
+            // Create a division
+            idLink.indexElt2 = sm->add(idLink);
+
+            // Association of the sample in the instrument
+            val.wValue = idSrc.indexElt;
+            sm->set(idLink, champ_sampleID, val);
+
+            // Pan
+            if (sm->get(idSrc, champ_sfSampleType).sfLinkValue == rightSample ||
+                    sm->get(idSrc, champ_sfSampleType).sfLinkValue == RomRightSample)
+                val.shValue = 500;
+            else if (sm->get(idSrc, champ_sfSampleType).sfLinkValue == leftSample ||
+                     sm->get(idSrc, champ_sfSampleType).sfLinkValue == RomLeftSample)
+                val.shValue = -500;
+            else
+                val.shValue = 0;
+            sm->set(idLink, champ_pan, val);
+        }
+    }
+
     sm->endEditing("command:newInst");
 
     // Selection
@@ -317,22 +345,20 @@ void EditorToolBar::onNewPrstClicked()
     if (!SoundfontManager::getInstance()->isValid(id))
         return;
 
-    // Default name of the preset
+    // List of all selected instruments
     IdList ids = _currentSelection.getSelectedIds(elementInst);
     QStringList names;
     foreach (EltID id, ids)
         names << SoundfontManager::getInstance()->getQstr(id, champ_name);
-    QString text = Utils::commonPart(names);
 
     // Open a dialog
-    DialogQuestion * dial = new DialogQuestion(this);
-    dial->initialize(trUtf8("Create a new preset"), trUtf8("Name of the new preset") + "...", text);
-    dial->setTextLimit(20);
-    connect(dial, SIGNAL(onOk(QString)), this, SLOT(onNewPrstClicked(QString)));
+    DialogNewElement * dial = new DialogNewElement(this);
+    dial->initialize(true, !ids.isEmpty(), Utils::commonPart(names));
+    connect(dial, SIGNAL(onOk(QString, bool)), this, SLOT(onNewPrstClicked(QString, bool)));
     dial->show();
 }
 
-void EditorToolBar::onNewPrstClicked(QString name)
+void EditorToolBar::onNewPrstClicked(QString name, bool linkElements)
 {
     if (name.isEmpty())
         return;
@@ -359,6 +385,51 @@ void EditorToolBar::onNewPrstClicked(QString name)
     val.wValue = nBank;
     sm->set(id, champ_wBank, val);
     sm->endEditing("command:newPrst");
+
+    if (linkElements)
+    {
+        // Link all selected instruments
+        IdList ids = _currentSelection.getSelectedIds(elementInst);
+        EltID idLink = id;
+        idLink.typeElement = elementPrstInst;
+        AttributeValue val;
+        foreach (EltID idSrc, ids)
+        {
+            // Create a division
+            idLink.indexElt2 = sm->add(idLink);
+
+            // Association of the sample in the instrument
+            val.wValue = idSrc.indexElt;
+            sm->set(idLink, champ_instrument, val);
+
+            // Key range
+            int keyMin = 127;
+            int keyMax = 0;
+            EltID idInstSmpl = idSrc;
+            idInstSmpl.typeElement = elementInstSmpl;
+            foreach (int i, sm->getSiblings(idInstSmpl))
+            {
+                idInstSmpl.indexElt2 = i;
+                if (sm->isSet(idInstSmpl, champ_keyRange))
+                {
+                    keyMin = qMin(keyMin, (int)sm->get(idInstSmpl, champ_keyRange).rValue.byLo);
+                    keyMax = qMax(keyMax, (int)sm->get(idInstSmpl, champ_keyRange).rValue.byHi);
+                }
+            }
+            AttributeValue value;
+            if (keyMin < keyMax)
+            {
+                value.rValue.byLo = keyMin;
+                value.rValue.byHi = keyMax;
+            }
+            else
+            {
+                value.rValue.byLo = 0;
+                value.rValue.byHi = 127;
+            }
+            sm->set(idLink, champ_keyRange, value);
+        }
+    }
 
     // Selection
     selectionChanged(id);

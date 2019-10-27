@@ -22,35 +22,48 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef DIALOGQUESTION_H
-#define DIALOGQUESTION_H
+#include "dialognewelement.h"
+#include "ui_dialognewelement.h"
+#include "contextmanager.h"
 
-#include <QDialog>
+DialogNewElement::DialogNewElement(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::DialogNewElement)
+{
+    ui->setupUi(this);
+    this->setAttribute(Qt::WA_DeleteOnClose);
+    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
+    ui->lineEdit->setMaxLength(20);
 
-namespace Ui {
-class DialogQuestion;
+    // Restore the checkbox state
+    ui->checkLink->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, "new_element", true).toBool());
 }
 
-class DialogQuestion : public QDialog
+DialogNewElement::~DialogNewElement()
 {
-    Q_OBJECT
+    delete ui;
+}
 
-public:
-    explicit DialogQuestion(QWidget *parent = nullptr);
-    ~DialogQuestion();
+void DialogNewElement::initialize(bool isPrst, bool withPossibleLinkedElements, QString defaultName)
+{
+    this->setWindowTitle(isPrst ? trUtf8("Create a new preset") : trUtf8("Create a new instrument"));
+    ui->lineEdit->setPlaceholderText((isPrst ? trUtf8("Name of the new preset") : trUtf8("Name of the new instrument")) + "...");
+    ui->checkLink->setText(isPrst ? trUtf8("Link selected presets") : trUtf8("Link selected instruments"));
+    ui->lineEdit->setText(defaultName);
+    ui->checkLink->setEnabled(withPossibleLinkedElements);
+    ui->lineEdit->selectAll();
+}
 
-    void initialize(QString title, QString placeHolder, QString defaultValue);
-    void setTextLimit(int textLimit);
+void DialogNewElement::on_pushCancel_clicked()
+{
+    QDialog::reject();
+}
 
-signals:
-    void onOk(QString txt);
+void DialogNewElement::on_pushOk_clicked()
+{
+    // Save the checkbox state
+    ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, "new_element", ui->checkLink->isChecked());
 
-private slots:
-    void on_pushCancel_clicked();
-    void on_pushOk_clicked();
-
-private:
-    Ui::DialogQuestion *ui;
-};
-
-#endif // DIALOGQUESTION_H
+    emit(onOk(ui->lineEdit->text(), ui->checkLink->isChecked() && ui->checkLink->isEnabled()));
+    QDialog::close();
+}

@@ -41,11 +41,8 @@ DialogRename::DialogRename(bool isSample, QString defaultText, QWidget *parent) 
     if (!_isSample)
         ui->comboBox->removeItem(0);
 
-    ui->lineText1->setText(defaultText.isEmpty() ? ContextManager::configuration()->getValue(ConfManager::SECTION_BULK_RENAME, "text_1", "").toString() :
-                                                   defaultText);
-    ui->lineText2->setText(ContextManager::configuration()->getValue(ConfManager::SECTION_BULK_RENAME, "text_2", "").toString());
-    if (ui->lineText2->text().isEmpty())
-        ui->lineText2->setText(ui->lineText1->text());
+    ui->lineText1->setText(defaultText);
+    ui->lineText2->setText(defaultText);
     ui->spinPos1->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_BULK_RENAME, "int_1", 0).toInt());
     ui->spinPos2->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_BULK_RENAME, "int_2", 0).toInt());
 
@@ -143,8 +140,6 @@ void DialogRename::on_pushOk_clicked()
     ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "option", ui->comboBox->currentIndex() + !_isSample);
     ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "int_1", ui->spinPos1->value());
     ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "int_2", ui->spinPos2->value());
-    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "text_1", ui->lineText1->text());
-    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "text_2", ui->lineText2->text());
 
     QDialog::accept();
 }

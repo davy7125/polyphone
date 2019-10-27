@@ -482,7 +482,8 @@ SOURCES	+= main.cpp \
     repository/soundfont/editor/editordialoginsertimage.cpp \
     dialogs/dialogquestion.cpp \
     editor/graphics/graphicswave.cpp \
-    editor/graphics/graphicswavepainter.cpp
+    editor/graphics/graphicswavepainter.cpp \
+    dialogs/dialognewelement.cpp
 
 HEADERS  += \
     core/input/abstractinput.h \
@@ -818,7 +819,8 @@ HEADERS  += \
     dialogs/dialogquestion.h \
     editor/modulator/spinboxmultiply.h \
     editor/graphics/graphicswave.h \
-    editor/graphics/graphicswavepainter.h
+    editor/graphics/graphicswavepainter.h \
+    dialogs/dialognewelement.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -897,7 +899,8 @@ FORMS    += \
     editor/tools/default_mod/tooldefaultmod_gui.ui \
     repository/soundfont/editor/editordialoginsertvideo.ui \
     repository/soundfont/editor/editordialoginsertimage.ui \
-    dialogs/dialogquestion.ui
+    dialogs/dialogquestion.ui \
+    dialogs/dialognewelement.ui
 
 RESOURCES += resources.qrc
 
