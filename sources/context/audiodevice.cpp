@@ -102,9 +102,12 @@ QList<HostInfo> AudioDevice::getHostInfo()
 
     if (_initialized)
     {
-        for (int i = 0; i < Pa_GetDeviceCount(); i++)
+        for (int i = 0, end = Pa_GetDeviceCount(); i < end; ++i)
         {
             const PaDeviceInfo * deviceInfo = Pa_GetDeviceInfo(i);
+            if (!deviceInfo)
+                continue;
+
             const PaHostApiInfo * hostInfo  = Pa_GetHostApiInfo(deviceInfo->hostApi);
 
             if (deviceInfo->maxOutputChannels > 0 &&
@@ -115,7 +118,7 @@ QList<HostInfo> AudioDevice::getHostInfo()
                 // Host
                 int indexHost = -1;
                 for (int j = 0; j < listRet.size(); j++)
-                    if (listRet[j]._index == hostInfo->type)
+                    if (listRet[j]._type == hostInfo->type)
                         indexHost = j;
                 if (indexHost == -1)
                 {
@@ -124,9 +127,8 @@ QList<HostInfo> AudioDevice::getHostInfo()
                 }
 
                 // Device within an host
-                if (i == hostInfo->defaultOutputDevice || hostInfo->type == paASIO)
-                    listRet[indexHost]._devices << HostInfo::DeviceInfo(QString::fromLatin1(deviceInfo->name), i,
-                                                                        (i == hostInfo->defaultOutputDevice));
+                listRet[indexHost]._devices << HostInfo::DeviceInfo(QString::fromLatin1(deviceInfo->name), i,
+                                                                    (i == hostInfo->defaultOutputDevice));
             }
         }
     }
@@ -135,7 +137,7 @@ QList<HostInfo> AudioDevice::getHostInfo()
     bool found = false;
     for (int i = 0; i < listRet.size(); i++)
     {
-        if (listRet[i]._index == paMME || listRet[i]._index == paALSA)
+        if (listRet[i]._type == paMME || listRet[i]._type == paALSA)
         {
             listRet[i]._isDefault = true;
             found = true;
@@ -146,7 +148,7 @@ QList<HostInfo> AudioDevice::getHostInfo()
     {
         for (int i = 0; i < listRet.size(); i++)
         {
-            if (listRet[i]._index == paDirectSound || listRet[i]._index == paCoreAudio)
+            if (listRet[i]._type == paDirectSound || listRet[i]._type == paCoreAudio)
             {
                 listRet[i]._isDefault = true;
                 found = true;
@@ -167,13 +169,28 @@ QList<HostInfo> AudioDevice::getHostInfo()
 
 void AudioDevice::initAudio()
 {
+//        for (int i = 0, end = Pa_GetDeviceCount(); i < end; ++i)
+//        {
+//            const PaDeviceInfo * deviceInfo = Pa_GetDeviceInfo(i);
+//            if (!deviceInfo)
+//                continue;
+
+//            const PaHostApiInfo * hostInfo  = Pa_GetHostApiInfo(deviceInfo->hostApi);
+//            qDebug() << "host name" << hostInfo->name << "(" + QString::number(hostInfo->type) + ")"
+//                     << "device" << deviceInfo->name << "(" + QString::number(i) + ")"
+//                     << "output channels" << deviceInfo->maxOutputChannels
+//                     << "is default" << hostInfo->defaultOutputDevice;
+//        }
+
     // ≥0 : standard
     // -1 : none
     // -2 : jack
     QString audioTypeStr = _configuration->getValue(ConfManager::SECTION_AUDIO, "type", "0#0").toString();
     QStringList listStr = audioTypeStr.split("#");
-    int deviceType = listStr.size() >= 1 ? listStr[0].toInt() : 0;
-    int numIndex = listStr.size() >= 2 ? listStr[1].toInt() : 0;
+    int hostType = listStr.size() >= 1 ? listStr[0].toInt() : 0;
+    int device = listStr.size() >= 2 ? listStr[1].toInt() : 0;
+
+    //qDebug() << "AUDIO" << "host" << hostType << "device" << device;
 
     quint32 bufferSize = _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();
 
@@ -182,25 +199,26 @@ void AudioDevice::initAudio()
 
 #ifdef Q_OS_WIN
     // Asio cannot work without these two lines
-    if (deviceType == paASIO)
+    if (hostType == paASIO)
     {
         Pa_Terminate();
         Pa_Initialize();
     }
     // No jack support
-    if (deviceType == -2)
-        deviceType = -1;
+    if (hostType == -2)
+        hostType = -1;
 #endif
 
-    if (deviceType == -1)
+    if (hostType == -1)
     {
         emit(connectionDone());
         return;
     }
-    if (deviceType == -2)
+
+    if (hostType == -2)
         this->openJackConnection(bufferSize);
     else
-        this->openStandardConnection(deviceType, numIndex, bufferSize);
+        this->openStandardConnection(hostType, device, bufferSize);
 
     if (!_jack_client && !_isStandardRunning)
     {
@@ -218,8 +236,8 @@ void AudioDevice::openDefaultConnection(quint32 bufferSize)
 {
     QList<HostInfo> hostInfos = getHostInfo();
 
-    int type = -1;
-    int index = -1;
+    int hostType = -1;
+    int deviceIndex = -1;
 
     for (int i = 1; i < hostInfos.size(); i++)
     {
@@ -229,8 +247,8 @@ void AudioDevice::openDefaultConnection(quint32 bufferSize)
             {
                 if (hostInfos[i]._devices[j]._isDefault)
                 {
-                    type = hostInfos[i]._index;
-                    index = hostInfos[i]._devices[j]._index;
+                    hostType = hostInfos[i]._type;
+                    deviceIndex = hostInfos[i]._devices[j]._index;
                     break;
                 }
             }
@@ -238,8 +256,8 @@ void AudioDevice::openDefaultConnection(quint32 bufferSize)
         }
     }
 
-    if (type != -1 && index != -1)
-        openStandardConnection(type, index, bufferSize);
+    if (hostType != -1 && deviceIndex != -1)
+        openStandardConnection(hostType, deviceIndex, bufferSize);
 }
 
 void AudioDevice::openJackConnection(quint32 bufferSize)
@@ -343,15 +361,15 @@ void AudioDevice::openJackConnection(quint32 bufferSize)
 #endif
 }
 
-void AudioDevice::openStandardConnection(int deviceType, int numIndex, quint32 bufferSize)
+void AudioDevice::openStandardConnection(int hostType, int device, quint32 bufferSize)
 {
     if (!_initialized)
         return;
 
-    if (numIndex < 0 || numIndex >= Pa_GetDeviceCount())
+    if (device < 0 || device >= Pa_GetDeviceCount())
         return;
 
-    if (Pa_GetHostApiInfo(Pa_GetDeviceInfo(numIndex)->hostApi)->type != deviceType)
+    if (Pa_GetHostApiInfo(Pa_GetDeviceInfo(device)->hostApi)->type != hostType)
         return;
 
     // Format audio à l'écoute
@@ -361,14 +379,14 @@ void AudioDevice::openStandardConnection(int deviceType, int numIndex, quint32 b
 
     // Sortie audio par défaut, nombre de canaux max
     PaStreamParameters outputParameters;
-    outputParameters.device = numIndex;
+    outputParameters.device = device;
     const PaDeviceInfo* pdi = Pa_GetDeviceInfo(outputParameters.device);
     outputParameters.channelCount = pdi->maxOutputChannels;
     if (outputParameters.channelCount > 2)
         outputParameters.channelCount = 2;
     _format.setChannelCount(static_cast<quint32>(outputParameters.channelCount));
     outputParameters.sampleFormat = paFloat32 | paNonInterleaved;
-    if (deviceType == paASIO)
+    if (hostType == paASIO)
         outputParameters.suggestedLatency = qMin(0.04, pdi->defaultLowOutputLatency);
     else
         outputParameters.suggestedLatency = qMin(0.2, pdi->defaultLowOutputLatency);

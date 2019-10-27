@@ -68,14 +68,14 @@ public:
         bool _isDefault;
     };
 
-    HostInfo(QString name, int index) :
+    HostInfo(QString name, int type) :
         _name(name),
-        _index(index),
+        _type(type),
         _isDefault(false)
     {}
 
     QString _name;
-    int _index; // -2 is jack, -1 is none, >= 0 are from port audio
+    int _type; // -2 is jack, -1 is none, >= 0 are from port audio
     bool _isDefault;
     QList<DeviceInfo> _devices;
 };
@@ -111,7 +111,7 @@ signals:
 private:
     void openDefaultConnection(quint32 bufferSize);
     void openJackConnection(quint32 bufferSize);
-    void openStandardConnection(int deviceType, int numIndex, quint32 bufferSize);
+    void openStandardConnection(int hostType, int device, quint32 bufferSize);
 
     // Serveur son, sortie standard ou asio
     bool _isStandardRunning;

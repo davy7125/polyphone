@@ -67,8 +67,8 @@ void ConfigSectionGeneral::initializeAudio()
 
     QString audioTypeStr = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "type", "0#0").toString();
     QStringList listStr = audioTypeStr.split("#");
-    int audioType = listStr.size() >= 1 ? listStr[0].toInt() : 0;
-    int audioIndex = listStr.size() >= 2 ? listStr[1].toInt() : 0;
+    int audioHostType = listStr.size() >= 1 ? listStr[0].toInt() : 0;
+    int audioDeviceIndex = listStr.size() >= 2 ? listStr[1].toInt() : 0;
 
     QList<HostInfo> hostInfos = ContextManager::audio()->getHostInfo();
     bool configFound = false;
@@ -77,10 +77,10 @@ void ConfigSectionGeneral::initializeAudio()
     ui->comboAudioOuput->clear();
     for (int i = 0; i < hostInfos.size(); i++)
     {
-        if (hostInfos[i]._index < 0)
+        if (hostInfos[i]._type < 0)
         {
-            ui->comboAudioOuput->addItem(hostInfos[i]._name, QString::number(hostInfos[i]._index) + "#-1");
-            if (hostInfos[i]._index == audioType)
+            ui->comboAudioOuput->addItem(hostInfos[i]._name, QString::number(hostInfos[i]._type) + "#-1");
+            if (hostInfos[i]._type == audioHostType)
             {
                 configFound = true;
                 comboboxIndex = ui->comboAudioOuput->count() - 1;
@@ -90,25 +90,30 @@ void ConfigSectionGeneral::initializeAudio()
         {
             for (int j = 0; j < hostInfos[i]._devices.size(); j++)
             {
-                QString suffix = "";
-                ui->comboAudioOuput->addItem(hostInfos[i]._name + ": " +
-                                             hostInfos[i]._devices[j]._name + suffix,
-                                             QString::number(hostInfos[i]._index) + "#" +
-                                             QString::number(hostInfos[i]._devices[j]._index));
-                if (hostInfos[i]._devices[j]._isDefault)
+                // Display the entry only if it is a default device or if it's been selected
+                if (hostInfos[i]._devices[j]._isDefault ||
+                        (hostInfos[i]._type == audioHostType && hostInfos[i]._devices[j]._index == audioDeviceIndex))
                 {
-                    if (hostInfos[i]._isDefault)
+                    // Add an element
+                    ui->comboAudioOuput->addItem(hostInfos[i]._name + ": " + hostInfos[i]._devices[j]._name,
+                                                 QString::number(hostInfos[i]._type) + "#" +
+                                                 QString::number(hostInfos[i]._devices[j]._index));
+
+                    // Keep the default index somewhere
+                    if (hostInfos[i]._isDefault && hostInfos[i]._devices[j]._isDefault)
                         comboboxDefaultIndex = ui->comboAudioOuput->count() - 1;
-                }
-                if (!configFound && hostInfos[i]._index == audioType)
-                {
-                    if (hostInfos[i]._devices[j]._index == audioIndex)
+
+                    // Possibly select it
+                    if (!configFound && hostInfos[i]._type == audioHostType)
                     {
-                        configFound = true;
-                        comboboxIndex = ui->comboAudioOuput->count() - 1;
+                        if (hostInfos[i]._devices[j]._index == audioDeviceIndex)
+                        {
+                            configFound = true;
+                            comboboxIndex = ui->comboAudioOuput->count() - 1;
+                        }
+                        else if (hostInfos[i]._devices[j]._isDefault)
+                            comboboxIndex = ui->comboAudioOuput->count() - 1;
                     }
-                    else if (hostInfos[i]._devices[j]._isDefault)
-                        comboboxIndex = ui->comboAudioOuput->count() - 1;
                 }
             }
         }
