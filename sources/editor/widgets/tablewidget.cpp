@@ -457,18 +457,24 @@ void TableWidget::onSectionDoubleClicked(int index)
 
 void TableWidget::onItemSelectionChanged()
 {
-    if (this->rowCount() == 50) // If instrument
+    // Problematic case: background color when the first loopmode cell is selected
+    // The highlight color must be displayed along with the hatching pattern
+    // Only if ONE instrument is displayed
+    if (_columnIds.empty())
+        return;
+    if (_columnIds[0].typeElement != elementInst)
+        return;
+    if (_columnIds.count() > 1 && _columnIds[1].typeElement != elementInstSmpl)
+        return;
+
+    if (this->item(5, 0)->isSelected())
+        this->item(5, 0)->setBackground(this->palette().color(QPalette::Highlight));
+    else if (this->item(5, 0)->background() == this->palette().color(QPalette::Highlight))
     {
-        // Problematic case: background color when the first loopmode cell is selected
-        if (this->item(5, 0)->isSelected())
-            this->item(5, 0)->setBackground(this->palette().color(QPalette::Highlight));
-        else if (this->item(5, 0)->background() == this->palette().color(QPalette::Highlight))
-        {
-            QColor color = this->palette().color(QPalette::Base);
-            QColor alternateColor = this->palette().color(QPalette::AlternateBase);
-            QBrush brush(TableWidget::getPixMap(color, alternateColor));
-            this->item(5, 0)->setBackground(brush);
-        }
+        QColor color = this->palette().color(QPalette::Base);
+        QColor alternateColor = this->palette().color(QPalette::AlternateBase);
+        QBrush brush(TableWidget::getPixMap(color, alternateColor));
+        this->item(5, 0)->setBackground(brush);
     }
 }
 
