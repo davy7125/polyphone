@@ -40,7 +40,9 @@ TRANSLATIONS = polyphone_fr.ts \
 QT += core gui printsupport svg network #testlib
 TARGET = polyphone
 TEMPLATE = app
-CONFIG += c++11
+
+include(lib/single_application/singleapplication.pri)
+DEFINES += QAPPLICATION_CLASS=QApplication
 
 win32 {
     DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
@@ -581,7 +583,6 @@ HEADERS  += \
     sound_engine/elements/calibrationsinus.h \
     sound_engine/elements/enveloppevol.h \
     sound_engine/elements/oscsinus.h \
-    macapplication.h \
     lib/sf3/sfont.h \
     options.h \
     mainwindow/widgetshowhistory.h \

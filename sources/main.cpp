@@ -22,7 +22,6 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include <QApplication>
 #include <QFileInfo>
 #include <QStyleFactory>
 #include <QItemSelection>
@@ -35,6 +34,8 @@
 #include "options.h"
 #include "contextmanager.h"
 #include "utils.h"
+#include <QApplication>
+#include "singleapplication.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #include <QDesktopWidget>
@@ -44,10 +45,6 @@
 #include "translationmanager.h"
 #include <QDir>
 #include <QNetworkSession>
-
-#ifdef Q_OS_MAC
-#include "macapplication.h"
-#endif
 
 #ifdef _WIN32
 #include <windows.h>
@@ -62,7 +59,7 @@ void writeLine(QString line)
 #endif
 }
 
-int launchApplication(Options &options)
+int launchApplication(SingleApplication * app, Options &options)
 {
     // Application name
     QApplication::setApplicationName("Polyphone");
@@ -82,6 +79,8 @@ int launchApplication(Options &options)
 
     // Display the main window
     MainWindow w;
+    QObject::connect(app, SIGNAL(receivedMessage(quint32,QByteArray)),
+                     &w, SLOT(receivedMessage(quint32,QByteArray)));
     w.show();
 
     // Open files passed as argument
@@ -93,7 +92,7 @@ int launchApplication(Options &options)
     QObject::connect(qApp, SIGNAL(openFile(QString)), &w, SLOT(openFile(QString)));
 #endif
 
-    return QApplication::exec();
+    return app->exec();
 }
 
 /// Error codes
@@ -205,17 +204,27 @@ int main(int argc, char *argv[])
     // Prior to everything
     Utils::prepareConversionTables();
 
-#ifdef Q_OS_MAC
-    MacApplication a(argc, argv);
-#else
-    QApplication a(argc, argv);
-#endif
+    SingleApplication app(argc, argv, true);
     Options options(argc, argv);
     int valRet = 0;
 
     // Possibly launch the application
     if (!options.error() && options.mode() == Options::MODE_GUI)
-        return launchApplication(options);
+    {
+        if (app.isSecondary())
+        {
+            // Just send the list of files to open
+            // The begins with a "|" so that it is never empty
+            // (if empty, the message is not sent)
+            app.sendMessage(("|" + options.getInputFiles().join('|')).toUtf8());
+
+            // Quit
+            return 0;
+        }
+
+        // Otherwise launch the application
+        return launchApplication(&app, options);
+    }
 
     // Otherwise, console mode
 #ifdef _WIN32

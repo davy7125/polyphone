@@ -281,6 +281,20 @@ void MainWindow::on_pushButtonNew_clicked()
     _windowManager->openNewSoundfont();
 }
 
+void MainWindow::receivedMessage(quint32 instanceId, QByteArray message)
+{
+    Q_UNUSED(instanceId)
+
+    // Get the file list and open them
+    QStringList files = QString::fromUtf8(message).split('|', QString::SkipEmptyParts);
+    foreach (QString file, files)
+       this->openFile(file);
+
+    // This window on top
+    this->raise();
+    this->activateWindow();
+}
+
 void MainWindow::openFile(QString fileName)
 {
     _windowManager->openSoundfont(fileName);

@@ -47,6 +47,7 @@ public:
 public slots:
     void slotCloseTab(int index);
     void recentSf2Changed();
+    void receivedMessage(quint32 instanceId, QByteArray message);
     void openFile(QString fileName);
 
 protected:
