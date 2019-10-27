@@ -124,6 +124,59 @@ void TreeView::mouseDoubleClickEvent(QMouseEvent * event)
 
 void TreeView::keyPressEvent(QKeyEvent * event)
 {
+    // Validate or cancel a drag & drop
+    if (event->modifiers() == Qt::NoModifier && event->key() == Qt::Key_Enter)
+    {
+        if (_dropDestID.typeElement == elementRootInst)
+        {
+            // Possibly create one or more instruments based on samples
+            foreach (EltID idSource, _draggedIds)
+                if (idSource.typeElement != elementSmpl && idSource.typeElement != elementInstSmpl)
+                    return;
+            DialogCreateElements * dial = new DialogCreateElements(this);
+            dial->initialize(_draggedIds);
+            connect(dial, SIGNAL(createElements(IdList,bool)), this, SLOT(onCreateElements(IdList,bool)));
+            dial->open();
+        }
+        else if (_dropDestID.typeElement == elementRootPrst)
+        {
+            // Possibly create one or more presets based on instruments
+            foreach (EltID idSource, _draggedIds)
+                if (idSource.typeElement != elementInst && idSource.typeElement != elementPrstInst)
+                    return;
+            DialogCreateElements * dial = new DialogCreateElements(this);
+            dial->initialize(_draggedIds);
+            connect(dial, SIGNAL(createElements(IdList,bool)), this, SLOT(onCreateElements(IdList,bool)));
+            dial->open();
+        }
+        else
+        {
+            SoundfontManager * sm = SoundfontManager::getInstance();
+            Duplicator duplicator;
+            IdList newIds;
+            foreach (EltID idSource, _draggedIds)
+            {
+                if ((idSource.typeElement == elementSmpl || idSource.typeElement == elementInst || idSource.typeElement == elementPrst ||
+                     idSource.typeElement == elementInstSmpl || idSource.typeElement == elementPrstInst) && sm->isValid(idSource))
+                {
+                    EltID id = duplicator.copy(idSource, _dropDestID);
+                    if (id.typeElement != elementUnknown)
+                        newIds << id;
+                }
+            }
+
+            if (!newIds.isEmpty())
+            {
+                sm->endEditing("command:drop");
+                onSelectionChanged(newIds);
+            }
+        }
+    }
+
+    // No more drag & drop
+    _draggedIds.clear();
+    _dropDestID.typeElement = elementUnknown;
+
     if (event->key() == Qt::Key_Delete)
     {
         // Delete the selection
@@ -731,9 +784,12 @@ void TreeView::dragEnterEvent(QDragEnterEvent * event)
     _draggedIds.clear();
     IdList ids = getSelectedIds();
     if (ids.sameType())
+    {
         _draggedIds = ids;
-
-    event->acceptProposedAction();
+        event->acceptProposedAction();
+    }
+    else
+        event->ignore();
 }
 
 void TreeView::dragMoveEvent(QDragMoveEvent * event)
@@ -743,9 +799,6 @@ void TreeView::dragMoveEvent(QDragMoveEvent * event)
 
 void TreeView::dropEvent(QDropEvent *event)
 {
-    // Destination
-    QModelIndex index = this->indexAt(event->pos());
-
     if (event->mimeData()->hasUrls() && event->source() == nullptr)
     {
         SoundfontManager * sm = SoundfontManager::getInstance();
@@ -775,55 +828,17 @@ void TreeView::dropEvent(QDropEvent *event)
     }
     else if (!_draggedIds.empty())
     {
+        // Destination
+        QModelIndex index = this->indexAt(event->pos());
+
         // Possibly prevent unwanted actions
         if (!index.isValid() || _startDrag.msecsTo(QDateTime::currentDateTime()) < 150)
             return;
 
-        EltID idDest = index.data(Qt::UserRole).value<EltID>();
-        if (idDest.typeElement == elementRootInst)
-        {
-            // Possibly create one or more instruments based on samples
-            foreach (EltID idSource, _draggedIds)
-                if (idSource.typeElement != elementSmpl && idSource.typeElement != elementInstSmpl)
-                    return;
-            DialogCreateElements * dial = new DialogCreateElements(this);
-            dial->initialize(_draggedIds);
-            connect(dial, SIGNAL(createElements(IdList,bool)), this, SLOT(onCreateElements(IdList,bool)));
-            dial->open();
-        }
-        else if (idDest.typeElement == elementRootPrst)
-        {
-            // Possibly create one or more presets based on instruments
-            foreach (EltID idSource, _draggedIds)
-                if (idSource.typeElement != elementInst && idSource.typeElement != elementPrstInst)
-                    return;
-            DialogCreateElements * dial = new DialogCreateElements(this);
-            dial->initialize(_draggedIds);
-            connect(dial, SIGNAL(createElements(IdList,bool)), this, SLOT(onCreateElements(IdList,bool)));
-            dial->open();
-        }
-        else
-        {
-            SoundfontManager * sm = SoundfontManager::getInstance();
-            Duplicator duplicator;
-            IdList newIds;
-            foreach (EltID idSource, _draggedIds)
-            {
-                if ((idSource.typeElement == elementSmpl || idSource.typeElement == elementInst || idSource.typeElement == elementPrst ||
-                     idSource.typeElement == elementInstSmpl || idSource.typeElement == elementPrstInst) && sm->isValid(idSource))
-                {
-                    EltID id = duplicator.copy(idSource, idDest);
-                    if (id.typeElement != elementUnknown)
-                        newIds << id;
-                }
-            }
+        _dropDestID = index.data(Qt::UserRole).value<EltID>();
 
-            if (!newIds.isEmpty())
-            {
-                sm->endEditing("command:drop");
-                onSelectionChanged(newIds);
-            }
-        }
+        // Trick: trigger a key "enter" event that will validate the drag & drop
+        QApplication::postEvent(this, new QKeyEvent(QEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
     }
 }
 

@@ -82,6 +82,7 @@ private:
     int _verticalScrollValue;
     TreeViewMenu * _menu;
     IdList _draggedIds;
+    EltID _dropDestID;
 };
 
 #endif // TREEVIEW_H
