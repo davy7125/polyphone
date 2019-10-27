@@ -31,6 +31,7 @@
 #include "contextmanager.h"
 #include "duplicator.h"
 #include "dialogquestion.h"
+#include "utils.h"
 
 IdList TreeViewMenu::s_copy = IdList();
 
@@ -185,10 +186,10 @@ void TreeViewMenu::remove()
     }
 
     if (message % 2 == 0)
-        QMessageBox::warning((QWidget*)this->parent(), trUtf8("Warning"),
+        QMessageBox::warning(dynamic_cast<QWidget*>(this->parent()), trUtf8("Warning"),
                              trUtf8("Cannot delete a sample used by another instrument."));
     if (message % 3 == 0)
-        QMessageBox::warning((QWidget*)this->parent(), trUtf8("Warning"),
+        QMessageBox::warning(dynamic_cast<QWidget*>(this->parent()), trUtf8("Warning"),
                              trUtf8("Cannot delete an instrument used by another preset."));
 
     sm->endEditing("tree:remove");
@@ -321,7 +322,13 @@ void TreeViewMenu::rename()
 
     if (_currentIds.count() > 1)
     {
-        DialogRename * dial = new DialogRename(type == elementSmpl, dynamic_cast<QWidget*>(this->parent()));
+        // List of all names
+        QStringList currentNames;
+        foreach (EltID id, _currentIds)
+            currentNames << SoundfontManager::getInstance()->getQstr(id, champ_name);
+
+        DialogRename * dial = new DialogRename(type == elementSmpl, Utils::commonPart(currentNames),
+                                               dynamic_cast<QWidget*>(this->parent()));
         connect(dial, SIGNAL(updateNames(int, QString, QString, int, int)),
                 this, SLOT(bulkRename(int, QString, QString, int, int)));
         dial->show();

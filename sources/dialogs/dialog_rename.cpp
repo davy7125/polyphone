@@ -26,7 +26,7 @@
 #include "ui_dialog_rename.h"
 #include "contextmanager.h"
 
-DialogRename::DialogRename(bool isSample, QWidget *parent) :
+DialogRename::DialogRename(bool isSample, QString defaultText, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogRename),
     _isSample(isSample)
@@ -41,8 +41,11 @@ DialogRename::DialogRename(bool isSample, QWidget *parent) :
     if (!_isSample)
         ui->comboBox->removeItem(0);
 
-    ui->lineText1->setText(ContextManager::configuration()->getValue(ConfManager::SECTION_BULK_RENAME, "text_1", "").toString());
+    ui->lineText1->setText(defaultText.isEmpty() ? ContextManager::configuration()->getValue(ConfManager::SECTION_BULK_RENAME, "text_1", "").toString() :
+                                                   defaultText);
     ui->lineText2->setText(ContextManager::configuration()->getValue(ConfManager::SECTION_BULK_RENAME, "text_2", "").toString());
+    if (ui->lineText2->text().isEmpty())
+        ui->lineText2->setText(ui->lineText1->text());
     ui->spinPos1->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_BULK_RENAME, "int_1", 0).toInt());
     ui->spinPos2->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_BULK_RENAME, "int_2", 0).toInt());
 
