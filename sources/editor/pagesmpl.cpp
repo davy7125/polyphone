@@ -574,7 +574,7 @@ void PageSmpl::setTune()
             {
                 if (_sf2->isValid(id2))
                 {
-                    if (val.cValue != _sf2->get(id2, champ_chPitchCorrection).bValue)
+                    if (val.cValue != _sf2->get(id2, champ_chPitchCorrection).cValue)
                         _sf2->set(id2, champ_chPitchCorrection, val);
                 }
             }

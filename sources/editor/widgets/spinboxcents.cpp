@@ -24,6 +24,7 @@
 
 #include "spinboxcents.h"
 #include <QPainter>
+#include <QKeyEvent>
 #include <QPaintEvent>
 #include "contextmanager.h"
 
@@ -62,4 +63,17 @@ void LineEditCents::paintEvent(QPaintEvent *event)
     p.setPen(_textColor);
     p.setFont(_textFont);
     p.drawText(0, 0, this->width() - 2, this->height(), Qt::AlignBottom | Qt::AlignRight, "/ 100");
+}
+
+void LineEditCents::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Minus || event->key() == Qt::Key_Plus)
+    {
+        bool ok = false;
+        int value = qAbs(this->text().toInt(&ok));
+        if (ok)
+            this->setText(QString::number(event->key() == Qt::Key_Minus ? -value : value));
+    }
+    else
+        QLineEdit::keyPressEvent(event);
 }
