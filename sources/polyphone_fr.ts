@@ -365,7 +365,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="755"/>
         <source>Pitch correction (cents)</source>
-        <translation>Correction de la note (centième)</translation>
+        <translation>Correction de la note (centièmes)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="598"/>
