@@ -30,6 +30,7 @@
 #include <qmath.h>
 #include "pianokeybdcustom.h"
 #include "contextmanager.h"
+#include "modulatorsplitter.h"
 
 
 PageInst::PageInst(QWidget *parent) :
@@ -83,6 +84,11 @@ PageInst::PageInst(QWidget *parent) :
     connect(ui->rangeEditor, SIGNAL(divisionsSelected(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
     connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
     connect(ui->modulatorEditor, SIGNAL(attributesSelected(QList<AttributeType>)), this, SLOT(onModSelectionChanged(QList<AttributeType>)));
+
+    // QSplitter for being able to resize the modulator area
+    ModulatorSplitter * splitter = new ModulatorSplitter(ui->page, ui->tableInst, ui->modulatorEditor, false);
+    QVBoxLayout * layout = dynamic_cast<QVBoxLayout *>(ui->page->layout());
+    layout->addWidget(splitter);
 }
 
 PageInst::~PageInst()

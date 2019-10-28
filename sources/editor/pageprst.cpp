@@ -26,6 +26,7 @@
 #include "ui_pageprst.h"
 #include "contextmanager.h"
 #include <QMenu>
+#include "modulatorsplitter.h"
 
 // Constructeur, destructeur
 PagePrst::PagePrst(QWidget *parent) :
@@ -77,6 +78,11 @@ PagePrst::PagePrst(QWidget *parent) :
     connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(customizeKeyboard()));
     connect(ui->rangeEditor, SIGNAL(divisionsSelected(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
     connect(ui->modulatorEditor, SIGNAL(attributesSelected(QList<AttributeType>)), this, SLOT(onModSelectionChanged(QList<AttributeType>)));
+
+    // QSplitter for being able to resize the modulator area
+    ModulatorSplitter * splitter = new ModulatorSplitter(ui->page, ui->tablePrst, ui->modulatorEditor, true);
+    QVBoxLayout * layout = dynamic_cast<QVBoxLayout *>(ui->page->layout());
+    layout->addWidget(splitter);
 }
 
 PagePrst::~PagePrst()

@@ -42,10 +42,12 @@ public:
     explicit ModulatorEditor(QWidget *parent = nullptr);
     ~ModulatorEditor();
 
+    void initialize(bool isPrst);
     void setIds(IdList ids, QList<AttributeType> attributes = QList<AttributeType>());
 
 signals:
     void attributesSelected(QList<AttributeType> attributes);
+    void expandedStateChanged(bool isExpanded);
 
 private slots:
     void on_pushExpand_clicked();
@@ -66,12 +68,14 @@ private:
     QList<ModulatorData> getModList(EltID id);
     void pasteMod(EltID id, QList<ModulatorData> modulators);
 
-    static QList<ModulatorEditor *> s_instances;
+    static QList<ModulatorEditor *> s_instInstances;
+    static QList<ModulatorEditor *> s_prstInstances;
     static QList<ModulatorData> s_modulatorCopy;
 
     Ui::ModulatorEditor *ui;
     EltID _currentId;
     QColor _mixedColor;
+    bool _isPrst;
 };
 
 #endif // MODULATOREDITOR_H

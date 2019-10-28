@@ -33,14 +33,14 @@
 #include <QKeyEvent>
 #include <QScrollBar>
 
-QList<ModulatorEditor *> ModulatorEditor::s_instances;
+QList<ModulatorEditor *> ModulatorEditor::s_instInstances;
+QList<ModulatorEditor *> ModulatorEditor::s_prstInstances;
 QList<ModulatorData> ModulatorEditor::s_modulatorCopy;
 
 ModulatorEditor::ModulatorEditor(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ModulatorEditor)
 {
-    s_instances << this;
     ui->setupUi(this);
 
     // Icons
@@ -69,12 +69,6 @@ ModulatorEditor::ModulatorEditor(QWidget *parent) :
     _mixedColor = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
                                     ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND), 0.5);
 
-    // Initialize the expanded / collapsed state
-    if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "modulator_section_collapsed", false).toBool())
-        on_pushCollapse_clicked();
-    else
-        on_pushExpand_clicked();
-
     // Buttons
     updateButtons(false);
 
@@ -84,32 +78,60 @@ ModulatorEditor::ModulatorEditor(QWidget *parent) :
     connect(ui->listWidget, SIGNAL(deleted()), this, SLOT(on_pushDelete_clicked()));
 }
 
+void ModulatorEditor::initialize(bool isPrst)
+{
+    _isPrst = isPrst;
+
+    // Register the element
+    if (_isPrst)
+        s_prstInstances << this;
+    else
+        s_instInstances << this;
+
+    // Initialize the expanded / collapsed state
+    if (ContextManager::configuration()->getValue(
+                ConfManager::SECTION_DISPLAY,
+                _isPrst ? "prst_modulator_section_collapsed" : "inst_modulator_section_collapsed", false).toBool())
+        on_pushCollapse_clicked();
+    else
+        on_pushExpand_clicked();
+}
+
 ModulatorEditor::~ModulatorEditor()
 {
-    s_instances.removeOne(this);
+    if (_isPrst)
+        s_prstInstances.removeOne(this);
+    else
+        s_instInstances.removeOne(this);
     delete ui;
 }
 
 void ModulatorEditor::on_pushExpand_clicked()
 {
-    foreach (ModulatorEditor * elt, s_instances)
+    foreach (ModulatorEditor * elt, _isPrst ? s_prstInstances : s_instInstances)
     {
         elt->ui->frameCollapsed->hide();
         elt->ui->frameExpanded->show();
     }
 
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "modulator_section_collapsed", false);
+    ContextManager::configuration()->setValue(
+                ConfManager::SECTION_DISPLAY,
+                _isPrst ? "prst_modulator_section_collapsed" : "inst_modulator_section_collapsed", false);
+    emit(expandedStateChanged(true));
 }
 
 void ModulatorEditor::on_pushCollapse_clicked()
 {
-    foreach (ModulatorEditor * elt, s_instances)
+    foreach (ModulatorEditor * elt, _isPrst ? s_prstInstances : s_instInstances)
     {
         elt->ui->frameExpanded->hide();
         elt->ui->frameCollapsed->show();
     }
 
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "modulator_section_collapsed", true);
+    ContextManager::configuration()->setValue(
+                ConfManager::SECTION_DISPLAY,
+                _isPrst ? "prst_modulator_section_collapsed" : "inst_modulator_section_collapsed", true);
+    emit(expandedStateChanged(false));
 }
 
 void ModulatorEditor::setIds(IdList ids, QList<AttributeType> attributes)

@@ -218,6 +218,7 @@ SOURCES	+= main.cpp \
     dialogs/dialog_about.cpp \
     dialogs/dialogselection.cpp \
     dialogs/dialogchangelog.cpp \
+    editor/modulator/modulatorsplitter.cpp \
     editor/page.cpp \
     editor/pagetable.cpp \
     editor/envelopeditor.cpp \
@@ -235,6 +236,7 @@ SOURCES	+= main.cpp \
     editor/overview/pageoverviewinst.cpp \
     editor/overview/pageoverviewprst.cpp \
     editor/overview/tablepageoverview.cpp \
+    editor/tree/treesplitter.cpp \
     editor/widgets/equalizer.cpp \
     editor/widgets/tableheaderviewv.cpp \
     editor/widgets/tablewidget.cpp \
@@ -534,6 +536,7 @@ HEADERS  += \
     dialogs/dialogselection.h \
     dialogs/dialogchangelog.h \
     dialogs/modalprogressdialog.h \
+    editor/modulator/modulatorsplitter.h \
     editor/page.h \
     editor/pagetable.h \
     editor/envelopeditor.h \
@@ -552,6 +555,7 @@ HEADERS  += \
     editor/overview/pageoverviewinst.h \
     editor/overview/pageoverviewprst.h \
     editor/overview/tablepageoverview.h \
+    editor/tree/treesplitter.h \
     editor/widgets/equalizer.h \
     editor/widgets/tableheaderviewv.h \
     editor/widgets/tablewidget.h \
