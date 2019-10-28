@@ -22,37 +22,32 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLMENU_H
-#define TOOLMENU_H
-
-#include <QMenu>
+#include "toolfasteditsmpl_parameters.h"
+#include "contextmanager.h"
 #include "basetypes.h"
-class ToolFactory;
-class AbstractTool;
 
-class ToolMenu : public QMenu
+void ToolFastEditSmpl_parameters::loadConfiguration()
 {
-    Q_OBJECT
+    // Mode
+    _mode = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "mode", 0).toInt();
 
-public:
-    ToolMenu(QWidget *parent = nullptr);
-    ~ToolMenu();
+    // Values
+    _addValue = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "add", 0.).toInt();
+    _multiplyValue = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "multiply", 1.).toDouble();
 
-    /// Notify that the selection changed
-    void selectionChanged(IdList ids);
+    // Parameter
+    _parameter = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "parameter", champ_chPitchCorrection).toInt();
+}
 
-private slots:
-    /// When a QAction is clicked
-    void onTriggered(QAction * action);
+void ToolFastEditSmpl_parameters::saveConfiguration()
+{
+    // Mode
+    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "mode", _mode);
 
-private:
-    void addCategory(QString categoryName);
-    static bool lessThan(const AbstractTool * tool1, const AbstractTool * tool2);
-    QString _separatorBackgroundColor;
-    QString _separatorTextColor;
+    // Values
+    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "add", _addValue);
+    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "multiply", _multiplyValue);
 
-    ToolFactory * _toolFactory;
-    QMap<QAction *, AbstractTool *> _currentActions;
-};
-
-#endif // TOOLMENU_H
+    // Parameter
+    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "parameter", _parameter);
+}

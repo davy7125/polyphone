@@ -140,6 +140,7 @@
         <file alias="file-audio.svg">editor/tools/sample_export/file-audio.svg</file>
         <file alias="file-export.svg">editor/tools/soundfont_export/file-export.svg</file>
         <file alias="defaultmod.svg">editor/tools/default_mod/defaultmod.svg</file>
+        <file alias="fast_edit_smpl.svg">editor/tools/fast_edit_smpl/fast_edit_smpl.svg</file>
     </qresource>
     <qresource prefix="/vpiano">
         <file alias="blkey.svg">resources/blkey.svg</file>

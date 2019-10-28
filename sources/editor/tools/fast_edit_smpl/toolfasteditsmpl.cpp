@@ -22,37 +22,64 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLMENU_H
-#define TOOLMENU_H
+#include "toolfasteditsmpl.h"
+#include "toolfasteditsmpl_gui.h"
+#include "toolfasteditsmpl_parameters.h"
+#include "soundfontmanager.h"
+#include "sampleutils.h"
 
-#include <QMenu>
-#include "basetypes.h"
-class ToolFactory;
-class AbstractTool;
-
-class ToolMenu : public QMenu
+ToolFastEditSmpl::ToolFastEditSmpl() : AbstractToolIterating(elementSmpl, new ToolFastEditSmpl_parameters(), new ToolFastEditSmpl_gui())
 {
-    Q_OBJECT
 
-public:
-    ToolMenu(QWidget *parent = nullptr);
-    ~ToolMenu();
+}
 
-    /// Notify that the selection changed
-    void selectionChanged(IdList ids);
+void ToolFastEditSmpl::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
+{
+    ToolFastEditSmpl_parameters * params = dynamic_cast<ToolFastEditSmpl_parameters *>(parameters);
 
-private slots:
-    /// When a QAction is clicked
-    void onTriggered(QAction * action);
+    // Parameter
+    AttributeType param = static_cast<AttributeType>(params->getParameter());
 
-private:
-    void addCategory(QString categoryName);
-    static bool lessThan(const AbstractTool * tool1, const AbstractTool * tool2);
-    QString _separatorBackgroundColor;
-    QString _separatorTextColor;
+    // Current value of the parameter
+    AttributeValue initialVal = sm->get(id, param);
+    double dVal = Attribute::toRealValue(param, false, initialVal);
 
-    ToolFactory * _toolFactory;
-    QMap<QAction *, AbstractTool *> _currentActions;
-};
+    // Apply modification
+    if (params->getMode() == 1)
+        dVal *= params->getMultiplyValue();
+    else
+        dVal += params->getAddValue();
 
-#endif // TOOLMENU_H
+    // Limit the result
+    switch (param)
+    {
+    case champ_byOriginalPitch:
+        if (dVal < 0)
+            dVal = 0;
+        else if (dVal > 127)
+            dVal = 127;
+        break;
+    case champ_chPitchCorrection:
+        if (dVal < -99)
+            dVal = -99;
+        else if (dVal > 99)
+            dVal = 99;
+        break;
+    case champ_dwStartLoop: case champ_dwEndLoop:
+        if (dVal < 0)
+            dVal = 0;
+        else if (dVal > 4294967295)
+            dVal = 4294967295;
+        break;
+    default:
+        // Do nothing more
+        return;
+    }
+
+    // Get the final attribute value
+    AttributeValue finalVal = Attribute::fromRealValue(param, false, dVal);
+
+    // Update the parameter value if different
+    if (finalVal.dwValue != initialVal.dwValue)
+        sm->set(id, param, finalVal);
+}

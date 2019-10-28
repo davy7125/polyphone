@@ -484,7 +484,10 @@ SOURCES	+= main.cpp \
     dialogs/dialogquestion.cpp \
     editor/graphics/graphicswave.cpp \
     editor/graphics/graphicswavepainter.cpp \
-    dialogs/dialognewelement.cpp
+    dialogs/dialognewelement.cpp \
+    editor/tools/fast_edit_smpl/toolfasteditsmpl.cpp \
+    editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.cpp \
+    editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.cpp
 
 HEADERS  += \
     core/input/abstractinput.h \
@@ -823,7 +826,10 @@ HEADERS  += \
     editor/modulator/spinboxmultiply.h \
     editor/graphics/graphicswave.h \
     editor/graphics/graphicswavepainter.h \
-    dialogs/dialognewelement.h
+    dialogs/dialognewelement.h \
+    editor/tools/fast_edit_smpl/toolfasteditsmpl.h \
+    editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.h \
+    editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -903,7 +909,8 @@ FORMS    += \
     repository/soundfont/editor/editordialoginsertvideo.ui \
     repository/soundfont/editor/editordialoginsertimage.ui \
     dialogs/dialogquestion.ui \
-    dialogs/dialognewelement.ui
+    dialogs/dialognewelement.ui \
+    editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui
 
 RESOURCES += resources.qrc
 

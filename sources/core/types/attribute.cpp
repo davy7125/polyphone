@@ -85,6 +85,15 @@ double Attribute::toRealValue(AttributeType champ, bool isPrst, AttributeValue s
 
     switch (champ)
     {
+    case champ_byOriginalPitch:
+        realValue = storedValue.bValue;
+        break;
+    case champ_chPitchCorrection:
+        realValue = storedValue.cValue;
+        break;
+    case champ_dwStartLoop: case champ_dwEndLoop:
+        realValue = storedValue.dwValue;
+        break;
     case champ_delayModEnv: case champ_delayVolEnv:
     case champ_attackModEnv: case champ_attackVolEnv:
     case champ_holdModEnv: case champ_holdVolEnv:
@@ -142,6 +151,15 @@ AttributeValue Attribute::fromRealValue(AttributeType champ, bool isPrst, double
 
     switch (champ)
     {
+    case champ_byOriginalPitch:
+        storedValue.bValue = static_cast<quint8>(realValue + 0.5);
+        break;
+    case champ_chPitchCorrection:
+        storedValue.cValue = Utils::round8(realValue);
+        break;
+    case champ_dwStartLoop: case champ_dwEndLoop:
+        storedValue.dwValue = static_cast<quint32>(realValue + 0.5);
+        break;
     case champ_fineTune: case champ_coarseTune: case champ_keynumToVolEnvHold: case champ_keynumToVolEnvDecay:
     case champ_keynumToModEnvHold: case champ_keynumToModEnvDecay: case champ_modEnvToPitch:
     case champ_modEnvToFilterFc: case champ_modLfoToPitch: case champ_modLfoToFilterFc:
@@ -216,6 +234,7 @@ AttributeValue Attribute::getDefaultStoredValue(AttributeType champ, bool isPrst
 
     switch (champ)
     {
+    case champ_byOriginalPitch: case champ_chPitchCorrection: case champ_dwStartLoop: case champ_dwEndLoop:
     case champ_fineTune: case champ_coarseTune: case champ_initialFilterQ:
     case champ_startAddrsOffset: case champ_endAddrsOffset: case champ_startloopAddrsOffset:
     case champ_endloopAddrsOffset: case champ_initialAttenuation: case champ_pan:
@@ -260,6 +279,12 @@ AttributeValue Attribute::limit(AttributeType champ, AttributeValue value, bool 
 {
     switch (champ)
     {
+    case champ_chPitchCorrection:
+        value.cValue = limit(value.cValue, -99, 99);
+        break;
+    case champ_byOriginalPitch:
+        value.bValue = limit(value.bValue, 0, 127);
+        break;
     case champ_keyRange: case champ_velRange:
         value.rValue.byLo = limit(value.rValue.byLo, 0, 127);
         value.rValue.byHi = limit(value.rValue.byHi, 0, 127);
@@ -414,6 +439,8 @@ QString Attribute::toString(AttributeType champ, bool isPrst, AttributeValue sto
     case champ_sampleModes: case champ_exclusiveClass: case champ_velocity: case champ_sfModDestOper:
         result = QString::number(storedValue.wValue);
         break;
+    case champ_byOriginalPitch: case champ_chPitchCorrection:
+    case champ_dwEndLoop: case champ_dwStartLoop:
     case champ_scaleTuning: case champ_coarseTune: case champ_fineTune:
     case champ_modLfoToFilterFc: case champ_modEnvToFilterFc:
     case champ_modEnvToPitch: case champ_modLfoToPitch: case champ_vibLfoToPitch:
@@ -501,6 +528,8 @@ AttributeValue Attribute::fromString(AttributeType champ, bool isPrst, QString s
         value.rValue.byHi = val2;
         value = limit(champ, value, isPrst);
     }; break;
+    case champ_chPitchCorrection: case champ_byOriginalPitch:
+    case champ_dwEndLoop: case champ_dwStartLoop:
     case champ_initialAttenuation: case champ_sustainVolEnv: case champ_pan:
     case champ_coarseTune: case champ_fineTune: case champ_scaleTuning:
     case champ_initialFilterFc: case champ_initialFilterQ:
@@ -723,9 +752,16 @@ QString Attribute::getDescription(AttributeType champ, bool isPrst)
         result = trUtf8("Sample length");
         break;
     case champ_dwStartLoop:
-        result = trUtf8("Sample loop");
+        result = trUtf8("Loop start");
+        break;
+    case champ_dwEndLoop:
+        result = trUtf8("Loop end");
+        break;
+    case champ_chPitchCorrection:
+        result = trUtf8("Pitch correction (cents)");
         break;
     default:
+        result = "...";
         break;
     }
 

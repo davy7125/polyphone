@@ -324,6 +324,11 @@ double Utils::convex(double val)
   return s_convexTable[static_cast<int>(val)];
 }
 
+qint8 Utils::round8(double value)
+{
+    return static_cast<qint8>(value > 0 ? (value + 0.5) : (value - 0.5));
+}
+
 qint16 Utils::round16(double value)
 {
     return static_cast<qint16>(value > 0 ? (value + 0.5) : (value - 0.5));

@@ -53,6 +53,8 @@
 #include "chords/toolchords.h"
 #include "sample_export/toolsampleexport.h"
 #include "default_mod/tooldefaultmod.h"
+#include "fast_edit_smpl/toolfasteditsmpl.h"
+
 
 ToolFactory::~ToolFactory()
 {
@@ -91,6 +93,7 @@ void ToolFactory::initialize()
            << new ToolUnlinkSample()
            << new ToolFrequencyPeaks()
            << new ToolSampleExport()
+           << new ToolFastEditSmpl()
            << new ToolCelesteTuning() // Instruments
            << new ToolAutoDistribution()
            << new ToolMixtureCreation()

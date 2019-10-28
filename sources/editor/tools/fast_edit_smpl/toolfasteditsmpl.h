@@ -22,37 +22,44 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLMENU_H
-#define TOOLMENU_H
+#ifndef TOOLFASTEDITSMPL_H
+#define TOOLFASTEDITSMPL_H
 
-#include <QMenu>
-#include "basetypes.h"
-class ToolFactory;
-class AbstractTool;
+#include "abstracttooliterating.h"
+#include <QObject>
 
-class ToolMenu : public QMenu
+class ToolFastEditSmpl: public AbstractToolIterating
 {
     Q_OBJECT
 
 public:
-    ToolMenu(QWidget *parent = nullptr);
-    ~ToolMenu();
+    ToolFastEditSmpl();
 
-    /// Notify that the selection changed
-    void selectionChanged(IdList ids);
+    /// Icon, label and category displayed to the user to describe the tool
+    QString getIconName() const override
+    {
+        return ":/tool/fast_edit_smpl.svg";
+    }
 
-private slots:
-    /// When a QAction is clicked
-    void onTriggered(QAction * action);
+    QString getCategory() const override
+    {
+        return trUtf8("Sample processing");
+    }
 
-private:
-    void addCategory(QString categoryName);
-    static bool lessThan(const AbstractTool * tool1, const AbstractTool * tool2);
-    QString _separatorBackgroundColor;
-    QString _separatorTextColor;
+    /// Internal identifier
+    QString getIdentifier() const override
+    {
+        return "smpl:fastEdit";
+    }
 
-    ToolFactory * _toolFactory;
-    QMap<QAction *, AbstractTool *> _currentActions;
+    /// Process an element
+    void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+
+protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Fast editing");
+    }
 };
 
-#endif // TOOLMENU_H
+#endif // TOOLFASTEDITSMPL_H

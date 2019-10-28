@@ -22,37 +22,37 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLMENU_H
-#define TOOLMENU_H
+#ifndef TOOLFASTEDITSMPL_GUI_H
+#define TOOLFASTEDITSMPL_GUI_H
 
-#include <QMenu>
-#include "basetypes.h"
-class ToolFactory;
-class AbstractTool;
+#include "abstracttoolgui.h"
 
-class ToolMenu : public QMenu
+namespace Ui {
+class ToolFastEditSmpl_gui;
+}
+
+class ToolFastEditSmpl_gui : public AbstractToolGui
 {
     Q_OBJECT
 
 public:
-    ToolMenu(QWidget *parent = nullptr);
-    ~ToolMenu();
+    explicit ToolFastEditSmpl_gui(QWidget *parent = nullptr);
+    ~ToolFastEditSmpl_gui() override;
 
-    /// Notify that the selection changed
-    void selectionChanged(IdList ids);
+    /// Update the interface with the parameters
+    void updateInterface(AbstractToolParameters * parameters, IdList ids) override;
+
+    /// Save the parameters based on the interface
+    void saveParameters(AbstractToolParameters * parameters) override;
 
 private slots:
-    /// When a QAction is clicked
-    void onTriggered(QAction * action);
+    void on_radioAdd_toggled(bool checked);
+    void on_radioMultiply_toggled(bool checked);
+    void on_pushOk_clicked();
+    void on_pushCancel_clicked();
 
 private:
-    void addCategory(QString categoryName);
-    static bool lessThan(const AbstractTool * tool1, const AbstractTool * tool2);
-    QString _separatorBackgroundColor;
-    QString _separatorTextColor;
-
-    ToolFactory * _toolFactory;
-    QMap<QAction *, AbstractTool *> _currentActions;
+    Ui::ToolFastEditSmpl_gui *ui;
 };
 
-#endif // TOOLMENU_H
+#endif // TOOLFASTEDITSMPL_GUI_H

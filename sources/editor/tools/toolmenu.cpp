@@ -73,9 +73,10 @@ void ToolMenu::selectionChanged(IdList ids)
         }
 
         // Insert the tool
-        QAction * action = this->addAction(
-                    ContextManager::theme()->getColoredSvg(tool->getIconName(), QSize(24, 24), ThemeManager::LIST_TEXT),
-                    tool->getLabel());
+        QIcon icon;
+        icon.addPixmap(ContextManager::theme()->getColoredSvg(tool->getIconName(), QSize(24, 24), ThemeManager::LIST_TEXT), QIcon::Normal);
+        icon.addPixmap(ContextManager::theme()->getColoredSvg(tool->getIconName(), QSize(24, 24), ThemeManager::HIGHLIGHTED_TEXT), QIcon::Active);
+        QAction * action = this->addAction(icon, tool->getLabel());
         _currentActions[action] = tool;
     }
 }

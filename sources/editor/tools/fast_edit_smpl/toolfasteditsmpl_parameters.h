@@ -22,37 +22,37 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLMENU_H
-#define TOOLMENU_H
+#ifndef TOOLFASTEDITSMPL_PARAMETERS_H
+#define TOOLFASTEDITSMPL_PARAMETERS_H
 
-#include <QMenu>
-#include "basetypes.h"
-class ToolFactory;
-class AbstractTool;
+#include "abstracttoolparameters.h"
 
-class ToolMenu : public QMenu
+class ToolFastEditSmpl_parameters: public AbstractToolParameters
 {
-    Q_OBJECT
-
 public:
-    ToolMenu(QWidget *parent = nullptr);
-    ~ToolMenu();
+    /// Load the configuration from the ini file
+    void loadConfiguration() override;
 
-    /// Notify that the selection changed
-    void selectionChanged(IdList ids);
+    /// Save the configuration in the ini file
+    void saveConfiguration() override;
 
-private slots:
-    /// When a QAction is clicked
-    void onTriggered(QAction * action);
+    int getMode() { return _mode; }
+    void setMode(int mode) { _mode = mode; }
+
+    int getAddValue() { return _addValue; }
+    void setAddValue(int addValue) { _addValue = addValue; }
+
+    double getMultiplyValue() { return _multiplyValue; }
+    void setMultiplyValue(double multiplyValue) { _multiplyValue = multiplyValue; }
+
+    int getParameter() { return _parameter; }
+    void setParameter(int parameter) { _parameter = parameter; }
 
 private:
-    void addCategory(QString categoryName);
-    static bool lessThan(const AbstractTool * tool1, const AbstractTool * tool2);
-    QString _separatorBackgroundColor;
-    QString _separatorTextColor;
-
-    ToolFactory * _toolFactory;
-    QMap<QAction *, AbstractTool *> _currentActions;
+    int _mode;
+    int _addValue;
+    double _multiplyValue;
+    int _parameter;
 };
 
-#endif // TOOLMENU_H
+#endif // TOOLFASTEDITSMPL_PARAMETERS_H
