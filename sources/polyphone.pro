@@ -41,8 +41,7 @@ QT += core gui printsupport svg network #testlib
 TARGET = polyphone
 TEMPLATE = app
 
-include(lib/single_application/singleapplication.pri)
-DEFINES += QAPPLICATION_CLASS=QApplication
+include(lib/qtsingleapplication/qtsingleapplication.pri)
 
 win32 {
     DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT

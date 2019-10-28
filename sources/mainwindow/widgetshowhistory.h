@@ -47,7 +47,7 @@ public:
     void addFile(QString path, QDateTime datetime);
 
 signals:
-    void openFile(QString file);
+    void openFile(const QString& file);
 
 protected:
     void paintEvent(QPaintEvent *event) override;

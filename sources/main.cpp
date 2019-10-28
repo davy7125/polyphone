@@ -34,8 +34,7 @@
 #include "options.h"
 #include "contextmanager.h"
 #include "utils.h"
-#include <QApplication>
-#include "singleapplication.h"
+#include "qtsingleapplication.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #include <QDesktopWidget>
@@ -47,7 +46,7 @@
 #include <QNetworkSession>
 
 #ifdef _WIN32
-#include <windows.h>
+#include <Windows.h>
 #endif
 
 void writeLine(QString line)
@@ -59,7 +58,7 @@ void writeLine(QString line)
 #endif
 }
 
-int launchApplication(SingleApplication * app, Options &options)
+int launchApplication(QtSingleApplication * app, Options &options)
 {
     // Application name
     QApplication::setApplicationName("Polyphone");
@@ -79,14 +78,12 @@ int launchApplication(SingleApplication * app, Options &options)
 
     // Display the main window
     MainWindow w;
-    QObject::connect(app, SIGNAL(receivedMessage(quint32,QByteArray)),
-                     &w, SLOT(receivedMessage(quint32,QByteArray)));
+    app->setActivationWindow(&w, true);
+    QObject::connect(app, SIGNAL(messageReceived(const QString&)), &w, SLOT(openFiles(const QString&)));
     w.show();
 
     // Open files passed as argument
-    QStringList inputFiles = options.getInputFiles();
-    foreach (QString file, inputFiles)
-        w.openFile(file);
+    w.openFiles(options.getInputFiles().join('|'));
 
 #ifdef Q_OS_MAC
     QObject::connect(qApp, SIGNAL(openFile(QString)), &w, SLOT(openFile(QString)));
@@ -204,25 +201,18 @@ int main(int argc, char *argv[])
     // Prior to everything
     Utils::prepareConversionTables();
 
-    SingleApplication app(argc, argv, true);
+    QtSingleApplication app("polyphone", argc, argv);
     Options options(argc, argv);
     int valRet = 0;
 
     // Possibly launch the application
     if (!options.error() && options.mode() == Options::MODE_GUI)
     {
-        if (app.isSecondary())
-        {
-            // Just send the list of files to open
-            // The begins with a "|" so that it is never empty
-            // (if empty, the message is not sent)
-            app.sendMessage(("|" + options.getInputFiles().join('|')).toUtf8());
-
-            // Quit
+        // Return immediately if there is already an instance
+        if (app.sendMessage(options.getInputFiles().join('|')))
             return 0;
-        }
 
-        // Otherwise launch the application
+        // Or launch the application as a unique instance
         return launchApplication(&app, options);
     }
 

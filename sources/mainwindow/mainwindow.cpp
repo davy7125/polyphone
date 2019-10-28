@@ -125,7 +125,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Recent files
     connect(ContextManager::recentFile(), SIGNAL(recentSf2Changed()), this, SLOT(recentSf2Changed()));
-    connect(ui->widgetShowHistory, SIGNAL(openFile(QString)), this, SLOT(openFile(QString)));
+    connect(ui->widgetShowHistory, SIGNAL(openFile(const QString&)), this, SLOT(openFiles(const QString&)));
     recentSf2Changed();
 
     // Show changelog?
@@ -271,9 +271,7 @@ void MainWindow::on_pushButtonOpen_clicked()
     QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Opening files"),
                                                         ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SOUNDFONT),
                                                         InputFactory::getFileFilter());
-
-    foreach (QString file, strList)
-        openFile(file);
+    openFiles(strList.join('|'));
 }
 
 void MainWindow::on_pushButtonNew_clicked()
@@ -281,23 +279,12 @@ void MainWindow::on_pushButtonNew_clicked()
     _windowManager->openNewSoundfont();
 }
 
-void MainWindow::receivedMessage(quint32 instanceId, QByteArray message)
+void MainWindow::openFiles(const QString& fileNames)
 {
-    Q_UNUSED(instanceId)
-
-    // Get the file list and open them
-    QStringList files = QString::fromUtf8(message).split('|', QString::SkipEmptyParts);
+    // Open all files
+    QStringList files = fileNames.split('|', QString::SkipEmptyParts);
     foreach (QString file, files)
-       this->openFile(file);
-
-    // This window on top
-    this->raise();
-    this->activateWindow();
-}
-
-void MainWindow::openFile(QString fileName)
-{
-    _windowManager->openSoundfont(fileName);
+       _windowManager->openSoundfont(file);
 }
 
 void MainWindow::onKeyboardDisplayChange(bool isDisplayed)
