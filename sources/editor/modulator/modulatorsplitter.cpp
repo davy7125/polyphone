@@ -25,6 +25,7 @@
 #include "modulatorsplitter.h"
 #include "modulatoreditor.h"
 #include "contextmanager.h"
+#include <QMouseEvent>
 
 ModulatorSplitter::ModulatorSplitter(QWidget * parent, QWidget * table, ModulatorEditor * modEditor, bool isPrst) :
     QSplitter(Qt::Vertical, parent),
