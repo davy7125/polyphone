@@ -128,13 +128,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->widgetShowHistory, SIGNAL(openFile(const QString&)), this, SLOT(openFiles(const QString&)));
     recentSf2Changed();
 
-    // Show changelog?
-    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "last_version_installed", "0.0").toString() != SOFT_VERSION)
+    // Show changelog if one of the 2 first version number is not identical
+    QStringList lastVersion = ContextManager::configuration()->getValue(
+                ConfManager::SECTION_NONE, "last_version_installed", "0.0.0").toString().split('.');
+    QStringList currentVersion = QString(SOFT_VERSION).split('.');
+    if (lastVersion.size() < 2 || lastVersion[0] != currentVersion[0] || lastVersion[1] != currentVersion[1])
     {
-        ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "last_version_installed", SOFT_VERSION);
         DialogChangeLog * dialog = new DialogChangeLog(this);
         QTimer::singleShot(500, dialog, SLOT(show()));
     }
+    ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "last_version_installed", SOFT_VERSION);
 }
 
 MainWindow::~MainWindow()
