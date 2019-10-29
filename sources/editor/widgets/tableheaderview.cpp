@@ -162,9 +162,11 @@ void TableHeaderView::paintSection(QPainter *painter, const QRect &rect, int log
         adaptedText = text.left(lengthLine1) + "\n" + fm.elidedText(text.mid(lengthLine1), Qt::ElideRight, textRect.width());
 
     // First draw the cell without text for the background and border
+    this->model()->blockSignals(true);
     this->model()->setHeaderData(logicalIndex, this->orientation(), "", Qt::DisplayRole);
     QHeaderView::paintSection(painter, rect, logicalIndex);
     this->model()->setHeaderData(logicalIndex, this->orientation(), text, Qt::DisplayRole);
+    this->model()->blockSignals(false);
 
     // Then draw the text
     QVariant foregroundBrush = model()->headerData(logicalIndex, this->orientation(), Qt::ForegroundRole);
@@ -177,6 +179,5 @@ void TableHeaderView::paintSection(QPainter *painter, const QRect &rect, int log
     int iconHeight = iconRect.height();
     int headerHeight = rect.height();
     int offsetY = iconHeight < headerHeight ? (headerHeight - iconHeight) / 2 : 0;
-    painter->setClipRect(rect);
     painter->drawPixmap(textRect.right() + MARGIN, rect.top() + offsetY, iconRect.width(), iconRect.height(), icon);
 }
