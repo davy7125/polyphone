@@ -27,6 +27,7 @@
 #include "tooldialog.h"
 #include "abstracttoolparameters.h"
 #include "abstracttoolgui.h"
+#include "contextmanager.h"
 #include <QMessageBox>
 
 QWidget * AbstractTool::s_parent = nullptr;
@@ -54,6 +55,29 @@ void AbstractTool::initialize(QWidget * parent)
 bool AbstractTool::setIds(IdList ids)
 {
     _currentIds = ids;
+
+    // Possibly complete the id list if stereo samples are found and if stereo editing is enabled
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", false).toBool())
+    {
+        SoundfontManager * sm = SoundfontManager::getInstance();
+        EltID idLinked;
+        foreach (EltID id, ids)
+        {
+            // Skip if this is not a sample
+            if (id.typeElement != elementSmpl)
+                continue;
+
+            SFSampleLink typeLien = sm->get(id, champ_sfSampleType).sfLinkValue;
+            if (typeLien != monoSample && typeLien != RomMonoSample)
+            {
+                idLinked = id;
+                idLinked.indexElt = sm->get(id, champ_wSampleLink).wValue;
+                if (!_currentIds.contains(idLinked))
+                    _currentIds << idLinked;
+            }
+        }
+    }
+
     return this->isCompatible(_currentIds);
 }
 
