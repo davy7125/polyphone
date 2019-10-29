@@ -67,11 +67,11 @@ unix:!macx {
     DEFINES += __LINUX_ALSASEQ__ __UNIX_JACK__
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa jack portaudio-2.0 zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0 openssl
-    INCLUDEPATH += /usr/include/jack \
-        lib/flac
     isEmpty(PREFIX) {
         PREFIX = /usr/local
     }
+    INCLUDEPATH += $$PREFIX/include/jack \
+        lib/flac
     TARGET.path = $$PREFIX/
     DESTDIR=bin
 }
@@ -127,7 +127,7 @@ contains(DEFINES, USE_LOCAL_STK) {
     INCLUDEPATH += lib/stk
 } else {
     LIBS += -lstk
-    INCLUDEPATH += /usr/include/stk
+    INCLUDEPATH += $$PREFIX/include/stk
 }
 
 # Location of QCustomplot
@@ -137,7 +137,7 @@ contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
     INCLUDEPATH += lib/qcustomplot
 } else {
     LIBS += -lqcustomplot
-    INCLUDEPATH += /usr/include/qcustomplot
+    INCLUDEPATH += $$PREFIX/include/qcustomplot
 }
 
 INCLUDEPATH += mainwindow \
