@@ -27,11 +27,13 @@
 #include <QMouseEvent>
 #include <QMenu>
 #include "soundfontmanager.h"
+#include "solomanager.h"
 #include <QPainter>
 
 const int TableHeaderView::MARGIN = 2;
 
-TableHeaderView::TableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, parent)
+TableHeaderView::TableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, parent),
+    _solo(SoundfontManager::getInstance()->solo())
 {
     this->setSectionsClickable(true);
     this->setHighlightSections(true);
@@ -42,15 +44,21 @@ TableHeaderView::TableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, 
 
     // Menu
     _menu = new QMenu(this);
-    _muteAction = _menu->addAction(trUtf8("mute"));
+    _muteAction = _menu->addAction(tr("mute"));
     _muteAction->setCheckable(true);
     connect(_muteAction, SIGNAL(toggled(bool)), this, SLOT(mute(bool)));
 
-    QAction * action1 = _menu->addAction(trUtf8("activate solo"));
-    connect(action1, SIGNAL(triggered(bool)), this, SLOT(activateSolo(bool)));
+    _menu->addSeparator();
+    _soloAction = _menu->addAction(tr("solo"));
+    connect(_soloAction, SIGNAL(triggered(bool)), this, SLOT(activateSolo(bool)));
 
-    QAction * action2 = _menu->addAction(trUtf8("unmute all"));
-    connect(action2, SIGNAL(triggered(bool)), this, SLOT(unmuteAll(bool)));
+    _clearAction = _menu->addAction(tr("unmute all"));
+    connect(_clearAction, SIGNAL(triggered(bool)), this, SLOT(unmuteAll(bool)));
+
+    _menu->addSeparator();
+    _soloSelectionAction = _menu->addAction(tr("solo on selection"));
+    _soloSelectionAction->setCheckable(true);
+    connect(_soloSelectionAction, SIGNAL(triggered(bool)), this, SLOT(soloOnSelection(bool)));
 
     // Height of the header
     QFontMetrics fm(this->font());
@@ -74,7 +82,23 @@ void TableHeaderView::mousePressEvent(QMouseEvent * e)
         if (_currentId.typeElement == elementInstSmpl || _currentId.typeElement == elementPrstInst)
         {
             _muteAction->blockSignals(true);
-            _muteAction->setChecked(SoundfontManager::getInstance()->get(_currentId, champ_mute).bValue > 0);
+            _soloSelectionAction->blockSignals(true);
+            _muteAction->setChecked(_solo->isMute(_currentId));
+            if (_solo->isSoloOnSelectionEnabled(_currentId.indexSf2))
+            {
+                _muteAction->setEnabled(false);
+                _soloAction->setEnabled(false);
+                _clearAction->setEnabled(false);
+                _soloSelectionAction->setChecked(true);
+            }
+            else
+            {
+                _muteAction->setEnabled(true);
+                _soloAction->setEnabled(true);
+                _clearAction->setEnabled(true);
+                _soloSelectionAction->setChecked(false);
+            }
+            _soloSelectionAction->blockSignals(false);
             _muteAction->blockSignals(false);
             _menu->exec(e->globalPos());
         }
@@ -85,102 +109,24 @@ void TableHeaderView::mousePressEvent(QMouseEvent * e)
 
 void TableHeaderView::mute(bool isMute)
 {
-    AttributeValue val;
-    val.bValue = (isMute ? 1 : 0);
-    SoundfontManager::getInstance()->set(_currentId, champ_mute, val);
-
-    // Update the header
-    this->model()->setHeaderData(_currentSection, Qt::Horizontal,
-                                 isMute ? QVariant::fromValue(_muteIcon) : QVariant(), Qt::DecorationRole);
+    _solo->setMute(_currentId, isMute);
 }
 
 void TableHeaderView::activateSolo(bool unused)
 {
     Q_UNUSED(unused)
-    SoundfontManager * sm = SoundfontManager::getInstance();
-    AttributeValue val;
-
-    // Current id is a division of a preset?
-    if (_currentId.typeElement == elementPrstInst)
-    {
-        // First unmute all divisions of the targeted instrument
-        val.bValue = false;
-
-        EltID idInst(elementInst, _currentId.indexSf2);
-        idInst.indexElt = sm->get(_currentId, champ_instrument).wValue;
-        EltID idInstSmpl(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
-        foreach (int subIndex, sm->getSiblings(idInstSmpl))
-        {
-            idInstSmpl.indexElt2 = subIndex;
-            sm->set(idInstSmpl, champ_mute, val);
-        }
-
-        // Unmute all preset divisions except current id
-        EltID idPrstInst(elementPrstInst, _currentId.indexSf2, _currentId.indexElt);
-        foreach (int subIndex, sm->getSiblings(idPrstInst))
-        {
-            idPrstInst.indexElt2 = subIndex;
-            val.bValue = (subIndex != _currentId.indexElt2);
-            sm->set(idPrstInst, champ_mute, val);
-        }
-    }
-    else
-    {
-        // Unmute all instrument divisions except current id
-        EltID idPrstInst(elementInstSmpl, _currentId.indexSf2, _currentId.indexElt);
-        foreach (int subIndex, sm->getSiblings(idPrstInst))
-        {
-            idPrstInst.indexElt2 = subIndex;
-            val.bValue = (subIndex != _currentId.indexElt2);
-            sm->set(idPrstInst, champ_mute, val);
-        }
-    }
-
-    // Update all decorations
-    for (int i = 0; i < this->model()->columnCount(); i++)
-    {
-        bool isMute = (i != _currentSection && i != 0);
-        this->model()->setHeaderData(i, Qt::Horizontal,
-                                     isMute ? QVariant::fromValue(_muteIcon) : QVariant(), Qt::DecorationRole);
-    }
+    _solo->activateSolo(_currentId);
 }
 
 void TableHeaderView::unmuteAll(bool unused)
 {
     Q_UNUSED(unused)
+    _solo->unmuteAll(_currentId.indexSf2);
+}
 
-    // Unmute all divisions of all instruments
-    SoundfontManager * sm = SoundfontManager::getInstance();
-    AttributeValue val;
-    val.bValue = 0;
-    EltID idInst(elementInst, _currentId.indexSf2);
-    foreach (int index, sm->getSiblings(idInst))
-    {
-        idInst.indexElt = index;
-        EltID idInstSmpl(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
-        foreach (int subIndex, sm->getSiblings(idInstSmpl))
-        {
-            idInstSmpl.indexElt2 = subIndex;
-            sm->set(idInstSmpl, champ_mute, val);
-        }
-    }
-
-    // Unmute all divisions of all presets
-    EltID idPrst(elementPrst, _currentId.indexSf2);
-    foreach (int index, sm->getSiblings(idPrst))
-    {
-        idPrst.indexElt = index;
-        EltID idPrstInst(elementPrstInst, idPrst.indexSf2, idPrst.indexElt);
-        foreach (int subIndex, sm->getSiblings(idPrstInst))
-        {
-            idPrstInst.indexElt2 = subIndex;
-            sm->set(idPrstInst, champ_mute, val);
-        }
-    }
-
-    // Remove all decorations
-    for (int i = 0; i < this->model()->columnCount(); i++)
-        this->model()->setHeaderData(i, Qt::Horizontal, QVariant(), Qt::DecorationRole);
+void TableHeaderView::soloOnSelection(bool isOn)
+{
+    _solo->setSoloOnSelection(isOn, _currentId.indexSf2);
 }
 
 QSize TableHeaderView::sizeHint() const
@@ -195,7 +141,8 @@ void TableHeaderView::paintSection(QPainter *painter, const QRect &rect, int log
 {
     // Get the text and icon to display
     QString text = this->model()->headerData(logicalIndex, this->orientation(), Qt::DisplayRole).toString();
-    QPixmap icon = this->model()->headerData(logicalIndex, this->orientation(), Qt::DecorationRole).value<QPixmap>();
+    EltID currentId = this->model()->headerData(logicalIndex, Qt::Horizontal, Qt::UserRole).value<EltID>();
+    QPixmap icon = _solo->isMute(currentId) ? _muteIcon : QPixmap();
 
     // Icon and text rect
     QRect iconRect = icon.rect();
@@ -214,12 +161,10 @@ void TableHeaderView::paintSection(QPainter *painter, const QRect &rect, int log
     if (lengthLine1 < text.length())
         adaptedText = text.left(lengthLine1) + "\n" + fm.elidedText(text.mid(lengthLine1), Qt::ElideRight, textRect.width());
 
-    // First draw the cell without text or icon for the background and border
+    // First draw the cell without text for the background and border
     this->model()->setHeaderData(logicalIndex, this->orientation(), "", Qt::DisplayRole);
-    this->model()->setHeaderData(logicalIndex, this->orientation(), QVariant(), Qt::DecorationRole);
     QHeaderView::paintSection(painter, rect, logicalIndex);
     this->model()->setHeaderData(logicalIndex, this->orientation(), text, Qt::DisplayRole);
-    this->model()->setHeaderData(logicalIndex, this->orientation(), icon, Qt::DecorationRole);
 
     // Then draw the text
     QVariant foregroundBrush = model()->headerData(logicalIndex, this->orientation(), Qt::ForegroundRole);

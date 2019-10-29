@@ -46,8 +46,6 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
     connect(this->horizontalHeader(), SIGNAL(sectionDoubleClicked(int)), this, SLOT(onSectionDoubleClicked(int)));
     connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(onItemSelectionChanged()));
-
-    _muteIcon = ContextManager::theme()->getColoredSvg(":/icons/volume-mute.svg", QSize(12, 12), ThemeManager::HIGHLIGHTED_BACKGROUND);
 }
 
 void TableWidget::clear()
@@ -83,10 +81,6 @@ void TableWidget::addColumn(int column, QString title, EltID id)
         id.typeElement = elementPrstInst;
     _columnIds[column] = id;
     this->model()->setHeaderData(column, Qt::Horizontal, QVariant::fromValue(id), Qt::UserRole);
-
-    if ((id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst) &&
-            SoundfontManager::getInstance()->get(id, champ_mute).bValue > 0)
-        this->model()->setHeaderData(column, Qt::Horizontal, QVariant::fromValue(_muteIcon), Qt::DecorationRole);
 }
 
 EltID TableWidget::getID(int column)

@@ -31,6 +31,7 @@
 #include "treemodel.h"
 #include "abstractinputparser.h"
 #include "treesplitter.h"
+#include "solomanager.h"
 
 Editor::Editor(QWidget *parent) :
     QMainWindow(parent, Qt::Widget),
@@ -135,6 +136,9 @@ void Editor::onSelectionChanged(IdList ids)
 {
     // Sample play is muted
     ContextManager::audio()->getSynth()->play(EltID(), -1, 0);
+
+    // Update the solo status
+    SoundfontManager::getInstance()->solo()->selectionChanged(ids);
 
     // At least one id must be selected
     if (ids.empty())

@@ -33,6 +33,7 @@ class Action;
 class ActionManager;
 class Soundfonts;
 class QAbstractItemModel;
+class SoloManager;
 
 class SoundfontManager : public QObject
 {
@@ -88,6 +89,9 @@ public:
     int closestAvailablePreset(EltID id, quint16 wBank, quint16 wPreset);
     bool isAvailable(EltID id, quint16 wBank, quint16 wPreset);
 
+    // Access to the solo manager
+    SoloManager * solo() { return _solo; }
+
 signals:
     // Emitted when a group of actions is finished
     // "editingSource" can be:
@@ -117,6 +121,7 @@ private:
     Soundfonts * _soundfonts;
     ActionManager * _undoRedo;
     QMutex _mutex;
+    SoloManager * _solo;
 };
 
 #endif // PILE_SF2_H

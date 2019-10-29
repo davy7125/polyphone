@@ -191,6 +191,7 @@ INCLUDEPATH += mainwindow \
     .
 
 SOURCES	+= main.cpp \
+    core/solomanager.cpp \
     core/input/abstractinputparser.cpp \
     core/input/empty/inputparserempty.cpp \
     core/input/grandorgue/grandorguepipe.cpp \
@@ -507,6 +508,7 @@ SOURCES	+= main.cpp \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.cpp
 
 HEADERS += \
+    core/solomanager.h \
     core/input/abstractinput.h \
     core/input/abstractinputparser.h \
     core/input/empty/inputparserempty.h \

@@ -27,6 +27,7 @@
 
 #include <QHeaderView>
 #include "basetypes.h"
+class SoloManager;
 
 class TableHeaderView: public QHeaderView
 {
@@ -48,14 +49,19 @@ private slots:
     void mute(bool isMute);
     void activateSolo(bool unused);
     void unmuteAll(bool unused);
+    void soloOnSelection(bool isOn);
 
 private:
     QPixmap _muteIcon;
     QMenu * _menu;
     QAction * _muteAction;
+    QAction * _soloAction;
+    QAction * _clearAction;
+    QAction * _soloSelectionAction;
     int _currentSection;
     EltID _currentId;
     int _height;
+    SoloManager * _solo;
 
     static const int MARGIN;
 };

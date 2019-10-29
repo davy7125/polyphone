@@ -81,7 +81,6 @@ private:
     QTimer *_timer;
     QList<QColor> _listColors;
     TableDelegate * _tableDelegate;
-    QPixmap _muteIcon;
 
     void copy();
     void paste();

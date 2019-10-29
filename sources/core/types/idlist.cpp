@@ -94,7 +94,7 @@ IdList IdList::getSelectedIds(ElementType type)
             }
         } break;
         case elementInstSmpl: case elementPrstInst: {
-            // Get all possible InstSmpl
+            // Get all possible InstSmpl or PrstInst
             QMap<int, QMap<int, QList<int> > > indexList;
             for (int i = 0; i < this->count(); i++)
             {
