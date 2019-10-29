@@ -18,4 +18,4 @@ addons:
     - libssl-dev
     - libflac-dev
 script:
-  - cd sources && qmake polyphone.pro QMAKE_CC=gcc-7 QMAKE_CXX=gcc-7 DEFINES+=USE_LOCAL_QCUSTOMPLOT && make -j$(nproc)
+  - cd sources && qmake polyphone.pro QMAKE_CC=gcc-7 QMAKE_CXX=gcc-7 DEFINES+=USE_LOCAL_QCUSTOMPLOT PREFIX=/usr && make -j$(nproc)
