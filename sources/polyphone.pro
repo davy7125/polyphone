@@ -72,8 +72,25 @@ unix:!macx {
     }
     INCLUDEPATH += $$PREFIX/include/jack \
         lib/flac
-    TARGET.path = $$PREFIX/
     DESTDIR=bin
+    
+    # Install target
+    
+    TARGET.path = $$PREFIX/bin
+    install_image_svg.path = $$PREFIX/share/icons/hicolor/scalable/apps
+    install_image_svg.files = contrib/polyphone.svg
+    install_image_png.path = $$PREFIX/share/icons/hicolor/512x512/apps
+    install_image_png.files = resources/polyphone.png
+    install_desktop.path = $$PREFIX/share/applications
+    install_desktop.files = contrib/polyphone.desktop
+    install_mime.path = $$PREFIX/share/mime/packages
+    install_mime.files = contrib/polyphone.xml
+    install_man.path = $$PREFIX/share/man/man1
+    install_man.files = contrib/*.1
+    install_doc.path = $$PREFIX/share/doc/polyphone
+    install_doc.files = ../README.md changelog
+    
+    INSTALL += TARGET install_image_svg install_image_png install_desktop install_mime install_man install_doc
 }
 macx {
     QMAKE_CXXFLAGS += -std=c++11
@@ -489,7 +506,7 @@ SOURCES	+= main.cpp \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.cpp \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.cpp
 
-HEADERS  += \
+HEADERS += \
     core/input/abstractinput.h \
     core/input/abstractinputparser.h \
     core/input/empty/inputparserempty.h \
@@ -831,7 +848,7 @@ HEADERS  += \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.h \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.h
 
-FORMS    += \
+FORMS += \
     dialogs/dialog_list.ui \
     dialogs/dialog_rename.ui \
     dialogs/dialog_about.ui \
@@ -912,6 +929,9 @@ FORMS    += \
     dialogs/dialognewelement.ui \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui
 
+DISTFILES += \
+    changelog
+
 RESOURCES += resources.qrc
 
 
@@ -939,7 +959,6 @@ macx {
         lib/sfarklib/sfklCrunch.cpp \
         lib/sfarklib/sfklCoding.cpp
 }
-
 ExtraCompiler.input = SPECIAL_SOURCES
 ExtraCompiler.variable_out = OBJECTS
 ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
@@ -953,6 +972,3 @@ unix:!macx {
     ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
 QMAKE_EXTRA_COMPILERS += ExtraCompiler
-
-DISTFILES += \
-    changelog
