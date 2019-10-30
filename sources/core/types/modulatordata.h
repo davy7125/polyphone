@@ -50,18 +50,18 @@ enum GeneralController: unsigned char
 class SFModulator
 {
 public:
-    SFModulator(GeneralController index, ModType type, bool direction, bool polarity) :
+    SFModulator(GeneralController index, ModType type, bool descending, bool bipolar) :
         Type(type),
-        isBipolar(polarity),
-        isDescending(direction),
+        isBipolar(bipolar),
+        isDescending(descending),
         CC(false),
         Index(static_cast<quint8>(index))
     {}
 
-    SFModulator(quint8 ccNumber, ModType type, bool direction, bool polarity) :
+    SFModulator(quint8 ccNumber, ModType type, bool descending, bool bipolar) :
         Type(type),
-        isBipolar(polarity),
-        isDescending(direction),
+        isBipolar(bipolar),
+        isDescending(descending),
         CC(true),
         Index(ccNumber)
     {}

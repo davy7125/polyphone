@@ -26,8 +26,13 @@
 #include "soundfontmanager.h"
 #include "grandorguerank.h"
 #include "grandorguestop.h"
+#include "grandorguedatathrough.h"
 
-InputParserGrandOrgue::InputParserGrandOrgue() : AbstractInputParser() {}
+InputParserGrandOrgue::InputParserGrandOrgue() : AbstractInputParser(),
+    _godt(new GrandOrgueDataThrough())
+{
+
+}
 
 InputParserGrandOrgue::~InputParserGrandOrgue()
 {
@@ -35,6 +40,7 @@ InputParserGrandOrgue::~InputParserGrandOrgue()
         delete _ranks.take(_ranks.firstKey());
     while (!_stops.empty())
         delete _stops.take(_stops.firstKey());
+    delete _godt;
 }
 
 void InputParserGrandOrgue::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath)
@@ -137,6 +143,11 @@ void InputParserGrandOrgue::startSection(QString sectionName)
         else
             _currentSection = SECTION_STOP;
     }
+    else if (sectionName == "organ")
+    {
+        _currentSection = SECTION_ORGAN;
+        _currentIndex = -1;
+    }
     else
         _currentSection = SECTION_UNKNOWN;
 }
@@ -149,17 +160,20 @@ void InputParserGrandOrgue::processData(QString key, QString value)
         if (_currentIndex != -1)
         {
             if (!_ranks.contains(_currentIndex))
-                _ranks[_currentIndex] = new GrandOrgueRank(_rootDir);
-            _ranks[_currentIndex]->processData(key, value);
+                _ranks[_currentIndex] = new GrandOrgueRank(_rootDir, _godt, _currentIndex);
+            _ranks[_currentIndex]->readData(key, value);
         }
         break;
     case SECTION_STOP:
         if (_currentIndex != -1)
         {
             if (!_stops.contains(_currentIndex))
-                _stops[_currentIndex] = new GrandOrgueStop(_rootDir);
-            _stops[_currentIndex]->processData(key, value);
+                _stops[_currentIndex] = new GrandOrgueStop(_rootDir, _godt, _currentIndex);
+            _stops[_currentIndex]->readData(key, value);
         }
+        break;
+    case SECTION_ORGAN:
+        _organProperties[key] = value;
         break;
     case SECTION_UNKNOWN:
         // Nothing
@@ -175,18 +189,46 @@ void InputParserGrandOrgue::createSf2(int &sf2Index, QString filename)
     idSf2.indexSf2 = sm->add(idSf2);
     sf2Index = idSf2.indexSf2;
 
-    // Title
+    // Title, comment
     QFileInfo fileInfo(filename);
     sm->set(idSf2, champ_name, fileInfo.completeBaseName());
+    sm->set(idSf2, champ_ICMT, this->getComment());
 
-    // Comment
-    sm->set(idSf2, champ_ICMT, QString("Sf2 imported from a GrandOrgue sample set by Polyphone"));
-
-    // Ranks are instruments
+    // Pre-process everything
     foreach (GrandOrgueRank * rank, _ranks)
-        rank->createInstrument(sm, idSf2);
-
-    // Stops are presets
+        rank->preProcess();
     foreach (GrandOrgueStop * stop, _stops)
-        stop->createPreset(sm, idSf2, &_ranks);
+        stop->preProcess();
+    _godt->finalizePreprocess();
+
+    // Process ranks for creating instruments
+    foreach (GrandOrgueRank * rank, _ranks)
+        rank->process(sm, idSf2);
+
+    // Process stops for creating presets and instruments
+    foreach (GrandOrgueStop * stop, _stops)
+        stop->process(sm, idSf2);
+}
+
+QString InputParserGrandOrgue::getComment()
+{
+    QString comment = "";
+    if (_organProperties.contains("churchname"))
+        comment = "Church name: " + _organProperties["churchname"];
+    if (_organProperties.contains("churchaddress"))
+        comment += (comment.isEmpty() ? QString("") : "\n") +
+                "Church address: " + _organProperties["churchaddress"];
+    if (_organProperties.contains("organbuilder"))
+        comment += (comment.isEmpty() ? QString("") : "\n") +
+                "Organ builder: " + _organProperties["organbuilder"];
+    if (_organProperties.contains("organbuilddate"))
+        comment += (comment.isEmpty() ? QString("") : "\n") +
+                "Organ build date: " + _organProperties["organbuilddate"];
+    if (_organProperties.contains("organcomments"))
+        comment += (comment.isEmpty() ? QString("") : "\n") +
+                "Organ comments: " + _organProperties["organcomments"];
+    if (_organProperties.contains("recordingdetails"))
+        comment += (comment.isEmpty() ? QString("") : "\n") +
+                "Recording details: " + _organProperties["recordingdetails"];
+    return comment;
 }

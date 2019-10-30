@@ -22,38 +22,60 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef GRANDORGUERANK_H
-#define GRANDORGUERANK_H
+#include "grandorguedatathrough.h"
 
-#include <QMap>
-#include "basetypes.h"
-class GrandOrguePipe;
-class SoundfontManager;
-class GrandOrgueDataThrough;
-
-class GrandOrgueRank
+GrandOrgueDataThrough::GrandOrgueDataThrough() :
+    _maxGain(0)
 {
-public:
-    GrandOrgueRank(QString rootDir, GrandOrgueDataThrough * godt, int id);
-    ~GrandOrgueRank();
 
-    void readData(QString key, QString value);
-    void preProcess();
-    EltID process(SoundfontManager * sm, EltID idSf2);
-    bool isValid();
+}
 
-private:
-    void mergeAmplitude(int amplitude);
-    void disableModulators(SoundfontManager * sm, EltID idInst);
+void GrandOrgueDataThrough::setMaxRankGain(int rankId, double gain)
+{
+    if (_maxGainPerRank.contains(rankId))
+        _maxGainPerRank[rankId] = qMax(_maxGainPerRank[rankId], gain);
+    else
+        _maxGainPerRank[rankId] = gain;
+}
 
-    QString _rootDir;
-    GrandOrgueDataThrough * _godt;
-    int _id;
+double GrandOrgueDataThrough::getMaxRankGain(int rankId)
+{
+    return _maxGainPerRank.contains(rankId) ? _maxGainPerRank[rankId] : 0;
+}
 
-    QMap<int, GrandOrguePipe *> _pipes;
-    QMap<QString, QString> _properties;
-    double _gain;
-    int _tuning;
-};
+void GrandOrgueDataThrough::finalizePreprocess()
+{
+    foreach (double val, _maxGainPerRank.values())
+        if (val > _maxGain)
+            _maxGain = val;
+}
 
-#endif // GRANDORGUERANK_H
+void GrandOrgueDataThrough::setSf2InstId(int grandOrgueInstId, int sf2ElementId)
+{
+    _instIds[grandOrgueInstId] = sf2ElementId;
+}
+
+int GrandOrgueDataThrough::getSf2InstId(int grandOrgueInstId)
+{
+    return _instIds.contains(grandOrgueInstId) ? _instIds[grandOrgueInstId] : -1;
+}
+
+void GrandOrgueDataThrough::setSf2SmplId(QString filePath, QList<int> sf2ElementIds)
+{
+    _smplIds[filePath] = sf2ElementIds;
+}
+
+QList<int> GrandOrgueDataThrough::getSf2SmplId(QString filePath)
+{
+    return _smplIds.contains(filePath) ? _smplIds[filePath] : QList<int>();
+}
+
+void GrandOrgueDataThrough::storeSampleName(QString sampleName)
+{
+    _sampleNames << sampleName.toLower();
+}
+
+bool GrandOrgueDataThrough::sampleNameExists(QString sampleName)
+{
+    return _sampleNames.contains(sampleName.toLower());
+}

@@ -29,6 +29,7 @@
 #include "abstractinputparser.h"
 class GrandOrgueRank;
 class GrandOrgueStop;
+class GrandOrgueDataThrough;
 class SoundfontManager;
 
 class InputParserGrandOrgue : public AbstractInputParser
@@ -47,19 +48,23 @@ private:
     {
         SECTION_UNKNOWN,
         SECTION_STOP,
+        SECTION_ORGAN,
         SECTION_RANK
     };
-
-    QString _rootDir;
-    Section _currentSection;
-    int _currentIndex; // Of a rank or stop, -1 if unknown
-    QMap<int, GrandOrgueRank*> _ranks;
-    QMap<int, GrandOrgueStop*> _stops;
 
     void parseFile(QString filename, bool &success, QString &error);
     void startSection(QString sectionName);
     void processData(QString key, QString value);
     void createSf2(int &sf2Index, QString filename);
+    QString getComment();
+
+    QString _rootDir;
+    Section _currentSection;
+    int _currentIndex; // Of a rank or stop, -1 if unknown
+    GrandOrgueDataThrough * _godt;
+    QMap<int, GrandOrgueRank*> _ranks;
+    QMap<int, GrandOrgueStop*> _stops;
+    QMap<QString, QString> _organProperties;
 };
 
 #endif // INPUTPARSERGRANDORGUE_H

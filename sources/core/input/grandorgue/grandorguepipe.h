@@ -26,17 +26,37 @@
 #define GRANDORGUEPIPE_H
 
 #include <QMap>
+#include "basetypes.h"
+class GrandOrgueDataThrough;
 
 class GrandOrguePipe
 {
 public:
-    GrandOrguePipe(QString rootDir);
-    void processData(QString key, QString value);
+    GrandOrguePipe(QString rootDir, GrandOrgueDataThrough * godt);
+
+    void readData(QString key, QString value);
     bool isValid();
 
+    // Possibly add a gain from the rank or stop that includes the pipe
+    void addGain(double offset) { _gain += offset; }
+    void mergeAmplitude(int amplitude);
+    double gain() { return _gain; }
+
+    void addTuning(int offset) { _tuning += offset; }
+
+    void process(EltID parent);
+
 private:
+    QList<int> getSampleIds(int sf2Id);
+    static QString getName(QString name, int maxCharacters, int suffixNumber, QString suffix = "");
+
     QString _rootDir;
+    GrandOrgueDataThrough * _godt;
+
     QMap<QString, QString> _properties;
+    QString _filePath;
+    double _gain;
+    int _tuning;
 };
 
 #endif // GRANDORGUEPIPE_H

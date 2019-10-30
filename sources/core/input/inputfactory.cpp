@@ -57,9 +57,9 @@ InputFactory::InputFactory()
     _inputs[input->getInputExtension().toLower()] = input;
     _orderedInputs << input;
 
-//    input = new InputGrandOrgue();
-//    _inputs[input->getInputExtension().toLower()] = input;
-//    _orderedInputs << input;
+    input = new InputGrandOrgue();
+    _inputs[input->getInputExtension().toLower()] = input;
+    _orderedInputs << input;
 }
 
 void InputFactory::clear()

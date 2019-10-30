@@ -27,23 +27,32 @@
 
 #include <QMap>
 #include "basetypes.h"
-class GrandOrgueRank;
-class GrandOrguePipe;
+#include "grandorguerank.h"
+class GrandOrgueDataThrough;
+class GrandOrgueRankLink;
 class SoundfontManager;
 
 class GrandOrgueStop
 {
 public:
-    GrandOrgueStop(QString rootDir);
+    GrandOrgueStop(QString rootDir, GrandOrgueDataThrough * godt, int id);
     ~GrandOrgueStop();
-    void processData(QString key, QString value);
-    void createPreset(SoundfontManager * sm, EltID idSf2, QMap<int, GrandOrgueRank*> * ranks);
+
+    void readData(QString key, QString value);
+    bool isValid();
+    void preProcess();
+    void process(SoundfontManager * sm, EltID idSf2);
 
 private:
+    RangesType getDefaultKeyRange();
+
     QString _rootDir;
-    QMap<int, GrandOrguePipe *> _pipes;
+    GrandOrgueDataThrough * _godt;
+    int _id;
+
+    GrandOrgueRank _anonymousRank;
     QMap<QString, QString> _properties;
-    QMap<int, QMap<QString, QString> > _rankProperties;
+    QMap<int, GrandOrgueRankLink *> _rankLinks;
 };
 
 #endif // GRANDORGUESTOP_H

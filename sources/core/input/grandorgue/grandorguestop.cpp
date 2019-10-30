@@ -24,20 +24,26 @@
 
 #include "grandorguestop.h"
 #include "grandorguepipe.h"
+#include "grandorguedatathrough.h"
+#include "grandorgueranklink.h"
+#include "soundfontmanager.h"
 
-GrandOrgueStop::GrandOrgueStop(QString rootDir) :
-    _rootDir(rootDir)
+GrandOrgueStop::GrandOrgueStop(QString rootDir, GrandOrgueDataThrough *godt, int id) :
+    _rootDir(rootDir),
+    _godt(godt),
+    _id(id),
+    _anonymousRank(rootDir, godt, -id) // Stops that are also a rank have a negative id
 {
 
 }
 
 GrandOrgueStop::~GrandOrgueStop()
 {
-    while (!_pipes.isEmpty())
-        delete _pipes.take(_pipes.firstKey());
+    while (!_rankLinks.empty())
+        delete _rankLinks.take(_rankLinks.firstKey());
 }
 
-void GrandOrgueStop::processData(QString key, QString value)
+void GrandOrgueStop::readData(QString key, QString value)
 {
     if (key.startsWith("rank"))
     {
@@ -55,33 +61,113 @@ void GrandOrgueStop::processData(QString key, QString value)
         QString property = key.length() > 3 ? key.right(key.length() - 3) : "#";
 
         // Store data
-        _rankProperties[number][property] = value;
-    }
-    else if (key.startsWith("pipe"))
-    {
-        if (key.length() < 7)
-            return;
-
-        // Extract the number of the pipe
-        key = key.right(key.length() - 4);
-        bool ok = false;
-        int number = key.left(3).toInt(&ok);
-        if (!ok || number < 0)
-            return;
-
-        // Property
-        QString property = key.length() > 3 ? key.right(key.length() - 3) : "#";
-
-        // Store data
-        if (!_pipes.contains(number))
-            _pipes[number] = new GrandOrguePipe(_rootDir);
-        _pipes[number]->processData(property, value);
+        if (!_rankLinks.contains(number))
+            _rankLinks[number] = new GrandOrgueRankLink(_godt);
+        _rankLinks[number]->readData(property, value);
     }
     else
-        _properties[key] = value;
+    {
+        // Fill the rank
+        _anonymousRank.readData(key, value);
+
+        // Also store the properties that could be useful for the stop
+        if (!key.startsWith("pipe"))
+            _properties[key] = value;
+    }
 }
 
-void GrandOrgueStop::createPreset(SoundfontManager * sm, EltID idSf2, QMap<int, GrandOrgueRank*> * ranks)
+bool GrandOrgueStop::isValid()
 {
+    if (_anonymousRank.isValid())
+        return true;
+    foreach (GrandOrgueRankLink * link, _rankLinks)
+        if (link->isValid())
+            return true;
+    return false;
+}
 
+void GrandOrgueStop::preProcess()
+{
+    // First key of the stop
+    int firstKey = 36;
+    if (_properties.contains("firstaccessiblepipelogicalkeynumber"))
+    {
+        bool ok = false;
+        int val1 = _properties["firstaccessiblepipelogicalkeynumber"].toInt(&ok);
+        if (ok)
+            firstKey = val1 + 35;
+    }
+
+    // Pre-process all elements
+    _anonymousRank.preProcess();
+    foreach (GrandOrgueRankLink * link, _rankLinks)
+        link->preProcess(firstKey);
+}
+
+void GrandOrgueStop::process(SoundfontManager * sm, EltID idSf2)
+{
+    if (!isValid())
+        return;
+
+    // Create a new preset
+    EltID idPrst = idSf2;
+    idPrst.typeElement = elementPrst;
+    idPrst.indexElt = sm->add(idPrst);
+
+    // Name
+    sm->set(idPrst, champ_name, _properties.contains("name") ? _properties["name"] : QObject::tr("untitled"));
+
+    // Default keyrange
+    RangesType defaultRange = getDefaultKeyRange();
+    if (defaultRange.byLo != 0 || defaultRange.byHi != 127)
+    {
+        AttributeValue val;
+        val.rValue = defaultRange;
+        sm->set(idPrst, champ_keyRange, val);
+    }
+
+    // Possibly associate the pipes that are directly included in the stop
+    if (_anonymousRank.isValid())
+    {
+        EltID idInst = _anonymousRank.process(sm, idSf2);
+
+        // Link the instrument to the preset
+        EltID idPrstInst(elementPrstInst, idPrst.indexSf2, idPrst.indexElt);
+        idPrstInst.indexElt2 = sm->add(idPrstInst);
+        AttributeValue val;
+        val.wValue = idInst.indexElt;
+        sm->set(idPrstInst, champ_instrument, val);
+    }
+
+    // Possibly link to existing ranks
+    foreach (GrandOrgueRankLink * link, _rankLinks)
+        link->process(sm, idPrst);
+}
+
+RangesType GrandOrgueStop::getDefaultKeyRange()
+{
+    RangesType defaultRange;
+    defaultRange.byLo = 0;
+    defaultRange.byHi = 127;
+
+    if (_properties.contains("firstaccessiblepipelogicalkeynumber") &&
+            _properties.contains("numberofaccessiblepipes"))
+    {
+        bool ok = false;
+        int val1 = _properties["firstaccessiblepipelogicalkeynumber"].toInt(&ok);
+        if (!ok)
+            return defaultRange;
+        int val2 = _properties["numberofaccessiblepipes"].toInt(&ok);
+        if (!ok)
+            return defaultRange;
+        val1 += 35;
+        val2 += val1 - 1;
+        if (val1 >= 0 && val2 >= 0 && val1 < 128 && val2 < 128)
+        {
+            defaultRange.byLo = static_cast<quint8>(val1);
+            defaultRange.byHi = static_cast<quint8>(val2);
+        }
+    }
+
+    return defaultRange;
 }

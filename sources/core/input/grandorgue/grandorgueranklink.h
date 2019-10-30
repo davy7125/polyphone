@@ -22,38 +22,31 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef GRANDORGUERANK_H
-#define GRANDORGUERANK_H
+#ifndef GRANDORGUERANKLINK_H
+#define GRANDORGUERANKLINK_H
 
 #include <QMap>
 #include "basetypes.h"
-class GrandOrguePipe;
-class SoundfontManager;
 class GrandOrgueDataThrough;
+class SoundfontManager;
 
-class GrandOrgueRank
+class GrandOrgueRankLink
 {
 public:
-    GrandOrgueRank(QString rootDir, GrandOrgueDataThrough * godt, int id);
-    ~GrandOrgueRank();
+    GrandOrgueRankLink(GrandOrgueDataThrough * godt);
 
     void readData(QString key, QString value);
-    void preProcess();
-    EltID process(SoundfontManager * sm, EltID idSf2);
+    void preProcess(int firstKey);
     bool isValid();
+    void process(SoundfontManager * sm, EltID idPrst);
 
 private:
-    void mergeAmplitude(int amplitude);
-    void disableModulators(SoundfontManager * sm, EltID idInst);
+    RangesType getKeyRange();
 
-    QString _rootDir;
     GrandOrgueDataThrough * _godt;
-    int _id;
-
-    QMap<int, GrandOrguePipe *> _pipes;
     QMap<QString, QString> _properties;
-    double _gain;
-    int _tuning;
+    int _rankId;
+    int _firstKey;
 };
 
-#endif // GRANDORGUERANK_H
+#endif // GRANDORGUERANKLINK_H

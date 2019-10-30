@@ -261,7 +261,7 @@ void SfzParameterGroupAssembly::decode(SoundfontManager * sf2, EltID idInst, QSt
         // Création des samples si besoin et récupération de leur index
         QList<int> listeIndexSmpl = _listeDivisions.at(i).getSampleIndex(sf2, idInst, pathSfz);
 
-        // Tranformation des offsets si présents
+        // Transformation des offsets si présents
         if (!listeIndexSmpl.isEmpty())
         {
             idSmpl.indexElt = listeIndexSmpl.first();

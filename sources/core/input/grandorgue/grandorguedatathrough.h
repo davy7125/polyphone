@@ -22,38 +22,46 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef GRANDORGUERANK_H
-#define GRANDORGUERANK_H
+#ifndef GRANDORGUEDATATHROUGH_H
+#define GRANDORGUEDATATHROUGH_H
 
 #include <QMap>
-#include "basetypes.h"
-class GrandOrguePipe;
-class SoundfontManager;
-class GrandOrgueDataThrough;
+class GrandOrgueRank;
+class GrandOrgueStop;
 
-class GrandOrgueRank
+class GrandOrgueDataThrough
 {
 public:
-    GrandOrgueRank(QString rootDir, GrandOrgueDataThrough * godt, int id);
-    ~GrandOrgueRank();
+    GrandOrgueDataThrough();
 
-    void readData(QString key, QString value);
-    void preProcess();
-    EltID process(SoundfontManager * sm, EltID idSf2);
-    bool isValid();
+    // Gain per rank (instrument)
+    void setMaxRankGain(int rankId, double gain);
+    double getMaxRankGain(int rankId);
+
+    // Finalize the pre-process
+    void finalizePreprocess();
+
+    // Maximum gain found in the sample set
+    double getMaxGain() { return _maxGain; }
+
+    // Match between instrument indexes (in sf2, in GrandOrgue)
+    void setSf2InstId(int grandOrgueInstId, int sf2ElementId);
+    int getSf2InstId(int grandOrgueInstId);
+
+    // Match between a sample name and a sample index (stereo samples have 2 ids)
+    void setSf2SmplId(QString filePath, QList<int> sf2ElementIds);
+    QList<int> getSf2SmplId(QString filePath);
+
+    // Store all created sample name and check if a name already exists
+    void storeSampleName(QString sampleName);
+    bool sampleNameExists(QString sampleName);
 
 private:
-    void mergeAmplitude(int amplitude);
-    void disableModulators(SoundfontManager * sm, EltID idInst);
-
-    QString _rootDir;
-    GrandOrgueDataThrough * _godt;
-    int _id;
-
-    QMap<int, GrandOrguePipe *> _pipes;
-    QMap<QString, QString> _properties;
-    double _gain;
-    int _tuning;
+    QMap<int, double> _maxGainPerRank;
+    double _maxGain;
+    QMap<int, int> _instIds;
+    QMap<QString, QList<int> > _smplIds;
+    QList<QString> _sampleNames;
 };
 
-#endif // GRANDORGUERANK_H
+#endif // GRANDORGUEDATATHROUGH_H

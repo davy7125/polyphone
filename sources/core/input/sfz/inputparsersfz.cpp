@@ -395,7 +395,7 @@ void InputParserSfz::createSf2(int &sf2Index, QString filename, bool isChannel10
             foreach (int i, sm->getSiblings(idInstSmpl))
             {
                 idInstSmpl.indexElt2 = i;
-                if (sm->get(idInstSmpl, champ_fineTune).wValue == 0)
+                if (sm->get(idInstSmpl, champ_fineTune).shValue == 0)
                     sm->reset(idInstSmpl, champ_fineTune);
             }
         }
