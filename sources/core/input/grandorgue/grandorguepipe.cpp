@@ -98,12 +98,14 @@ bool GrandOrguePipe::isValid()
     return _filePath != "";
 }
 
-void GrandOrguePipe::process(EltID parent)
+void GrandOrguePipe::process(EltID parent, int key)
 {
     if (!this->isValid())
         return;
 
-    QList<int> sampleIds = this->getSampleIds(parent.indexSf2);
+    // ATTACK
+
+    QList<int> sampleIds = this->getSampleIds(parent.indexSf2, _filePath, false);
     SoundfontManager * sm = SoundfontManager::getInstance();
     for (int i = 0; i < sampleIds.size(); i++)
     {
@@ -151,20 +153,95 @@ void GrandOrguePipe::process(EltID parent)
             val.wValue = 3;
             sm->set(idInstSmpl, champ_sampleModes, val);
         }
+
+        // Rootkey and keyrange
+        val.wValue = key;
+        sm->set(idInstSmpl, champ_overridingRootKey, val);
+        val.rValue.byLo = key;
+        val.rValue.byHi = key;
+        sm->set(idInstSmpl, champ_keyRange, val);
+
+        // Short release time
+        val.shValue = -7900;
+        sm->set(idInstSmpl, champ_releaseVolEnv, val);
+    }
+
+    // RELEASE
+
+    QString releaseFilePath = getReleaseFilePath();
+    if (!releaseFilePath.isEmpty())
+    {
+        QList<int> sampleIds = this->getSampleIds(parent.indexSf2, releaseFilePath, true);
+        SoundfontManager * sm = SoundfontManager::getInstance();
+        for (int i = 0; i < sampleIds.size(); i++)
+        {
+            // Create one InstSmpl
+            EltID idInstSmpl(elementInstSmpl, parent.indexSf2, parent.indexElt);
+            idInstSmpl.indexElt2 = sm->add(idInstSmpl);
+
+            // Link to the sample
+            AttributeValue val;
+            val.wValue = sampleIds[i];
+            sm->set(idInstSmpl, champ_sampleID, val);
+
+            // Pan
+            if (sampleIds.size() == 2)
+            {
+                val.shValue = (i == 0 ? -500 : 500);
+                sm->set(idInstSmpl, champ_pan, val);
+            }
+
+            // Attenuation
+            val.wValue = static_cast<quint16>(25. * (_gain - _godt->getMaxGain()) + 0.5); // 25 is 10 divided by 0.4;
+            sm->set(idInstSmpl, champ_initialAttenuation, val);
+
+            // Tuning
+            int fineTune = _tuning % 100;
+            int coarseTune = _tuning / 100;
+            if (fineTune > 50)
+            {
+                fineTune -= 100;
+                coarseTune += 1;
+            }
+            else if (fineTune < -50)
+            {
+                fineTune += 100;
+                coarseTune -= 1;
+            }
+            val.shValue = fineTune;
+            sm->set(idInstSmpl, champ_fineTune, val);
+            val.shValue = coarseTune;
+            sm->set(idInstSmpl, champ_coarseTune, val);
+
+            // Loop + end
+            val.wValue = 3;
+            sm->set(idInstSmpl, champ_sampleModes, val);
+
+            // Rootkey and keyrange
+            val.wValue = key;
+            sm->set(idInstSmpl, champ_overridingRootKey, val);
+            val.rValue.byLo = key;
+            val.rValue.byHi = key;
+            sm->set(idInstSmpl, champ_keyRange, val);
+
+            // Long release time
+            val.shValue = 8000;
+            sm->set(idInstSmpl, champ_releaseVolEnv, val);
+        }
     }
 }
 
-QList<int> GrandOrguePipe::getSampleIds(int sf2Id)
+QList<int> GrandOrguePipe::getSampleIds(int sf2Id, QString filePath, bool isRelease)
 {
     // Samples already loaded?
-    QList<int> sampleIndex = _godt->getSf2SmplId(_filePath);
+    QList<int> sampleIndex = _godt->getSf2SmplId(filePath);
     if (!sampleIndex.empty())
         return sampleIndex;
 
     // Otherwise load a new sample
-    Sound sound(_filePath, false);
+    Sound sound(filePath, false);
     quint32 nChannels = sound.getUInt32(champ_wChannels);
-    QString name = QFileInfo(_filePath).completeBaseName();
+    QString name = QFileInfo(filePath).completeBaseName();
     QString name2 = name;
 
     // Possibly adapt the name
@@ -229,7 +306,7 @@ QList<int> GrandOrguePipe::getSampleIds(int sf2Id)
             val.sfLinkValue = monoSample;
             sm->set(idElt, champ_sfSampleType, val);
         }
-        sm->set(idElt, champ_filenameForData, _filePath);
+        sm->set(idElt, champ_filenameForData, filePath);
         val.dwValue = sound.getUInt32(champ_dwStart16);
         sm->set(idElt, champ_dwStart16, val);
         val.dwValue = sound.getUInt32(champ_dwStart24);
@@ -240,9 +317,9 @@ QList<int> GrandOrguePipe::getSampleIds(int sf2Id)
         sm->set(idElt, champ_dwLength, val);
         val.dwValue = sound.getUInt32(champ_dwSampleRate);
         sm->set(idElt, champ_dwSampleRate, val);
-        val.dwValue = sound.getUInt32(champ_dwStartLoop);
+        val.dwValue = isRelease ? 0 : sound.getUInt32(champ_dwStartLoop);
         sm->set(idElt, champ_dwStartLoop, val);
-        val.dwValue = sound.getUInt32(champ_dwEndLoop);
+        val.dwValue = isRelease ? 1 : sound.getUInt32(champ_dwEndLoop);
         sm->set(idElt, champ_dwEndLoop, val);
         val.bValue = (quint8)sound.getUInt32(champ_byOriginalPitch);
         sm->set(idElt, champ_byOriginalPitch, val);
@@ -250,7 +327,7 @@ QList<int> GrandOrguePipe::getSampleIds(int sf2Id)
         sm->set(idElt, champ_chPitchCorrection, val);
     }
 
-    _godt->setSf2SmplId(_filePath, sampleIndex);
+    _godt->setSf2SmplId(filePath, sampleIndex);
     return sampleIndex;
 }
 
@@ -274,4 +351,19 @@ QString GrandOrguePipe::getName(QString name, int maxCharacters, int suffixNumbe
         return name.left(maxCharacters - suffixSize) + suffix;
 
     return name.left(maxCharacters - suffixNumSize - suffixSize) + suffix + "-" + suffixNum;
+}
+
+QString GrandOrguePipe::getReleaseFilePath()
+{
+    if (!_properties.contains("release001"))
+        return "";
+
+    QString filePath = _rootDir + "/" + _properties["release001"];
+    if (!QFile::exists(filePath))
+    {
+        qDebug() << "couldn't find release file:" << filePath;
+        return "";
+    }
+
+    return filePath;
 }

@@ -81,7 +81,7 @@ bool GrandOrgueStop::isValid()
     if (_anonymousRank.isValid())
         return true;
     foreach (GrandOrgueRankLink * link, _rankLinks)
-        if (link->isValid())
+        if (link->getRankId() >= 0)
             return true;
     return false;
 }
@@ -104,13 +104,13 @@ void GrandOrgueStop::preProcess()
         link->preProcess(firstKey);
 }
 
-void GrandOrgueStop::process(SoundfontManager * sm, EltID idSf2)
+void GrandOrgueStop::process(SoundfontManager * sm, int sf2Index, QMap<int, GrandOrgueRank*> &ranks)
 {
     if (!isValid())
         return;
 
     // Create a new preset
-    EltID idPrst = idSf2;
+    EltID idPrst(elementPrst, sf2Index);
     idPrst.typeElement = elementPrst;
     idPrst.indexElt = sm->add(idPrst);
 
@@ -129,19 +129,59 @@ void GrandOrgueStop::process(SoundfontManager * sm, EltID idSf2)
     // Possibly associate the pipes that are directly included in the stop
     if (_anonymousRank.isValid())
     {
-        EltID idInst = _anonymousRank.process(sm, idSf2);
+        EltID idInst = _anonymousRank.process(sm, sf2Index, getFirstPipeNumber(),
+                                              defaultRange.byLo != 0 ? defaultRange.byLo : 36);
 
         // Link the instrument to the preset
         EltID idPrstInst(elementPrstInst, idPrst.indexSf2, idPrst.indexElt);
         idPrstInst.indexElt2 = sm->add(idPrstInst);
         AttributeValue val;
-        val.wValue = idInst.indexElt;
+        val.wValue = static_cast<quint16>(idInst.indexElt);
         sm->set(idPrstInst, champ_instrument, val);
     }
 
-    // Possibly link to existing ranks
+    // Possibly link to specific ranks
     foreach (GrandOrgueRankLink * link, _rankLinks)
-        link->process(sm, idPrst);
+    {
+        if (link->getRankId() == -1 || !ranks.contains(link->getRankId()))
+            continue;
+
+        // Create an instrument
+        RangesType keyRange = link->getKeyRange();
+        EltID idInst = ranks[link->getRankId()]->process(sm, idPrst.indexSf2, link->getFirstPipeIndex(),
+                                                         keyRange.byLo > 0 ? keyRange.byLo : 36);
+
+        // Link it to the preset
+        EltID idPrstInst(elementPrstInst, idPrst.indexSf2, idPrst.indexElt);
+        idPrstInst.indexElt2 = sm->add(idPrstInst);
+        AttributeValue val;
+        val.wValue = static_cast<quint16>(idInst.indexElt);
+        sm->set(idPrstInst, champ_instrument, val);
+
+        // Keyrange
+        if (keyRange.byLo != 0 || keyRange.byHi != 127)
+        {
+            AttributeValue val;
+            val.rValue = keyRange;
+            sm->set(idPrstInst, champ_keyRange, val);
+        }
+    }
+
+    // Simplification
+    sm->simplify(idPrst, champ_keyRange);
+}
+
+int GrandOrgueStop::getFirstPipeNumber()
+{
+    int result = 1;
+    if (_properties.contains("firstaccessiblepipelogicalpipenumber"))
+    {
+        bool ok = false;
+        result = _properties["firstaccessiblepipelogicalpipenumber"].toInt(&ok);
+        if (!ok)
+            qDebug() << "couldnt't read stop first pipe number" << _properties["firstaccessiblepipelogicalpipenumber"];
+    }
+    return result;
 }
 
 RangesType GrandOrgueStop::getDefaultKeyRange()
@@ -156,10 +196,16 @@ RangesType GrandOrgueStop::getDefaultKeyRange()
         bool ok = false;
         int val1 = _properties["firstaccessiblepipelogicalkeynumber"].toInt(&ok);
         if (!ok)
+        {
+            qDebug() << "couldnt't read stop first pipe key" << _properties["firstaccessiblepipelogicalkeynumber"];
             return defaultRange;
+        }
         int val2 = _properties["numberofaccessiblepipes"].toInt(&ok);
         if (!ok)
+        {
+            qDebug() << "couldnt't read stop key number" << _properties["numberofaccessiblepipes"];
             return defaultRange;
+        }
         val1 += 35;
         val2 += val1 - 1;
         if (val1 >= 0 && val2 >= 0 && val1 < 128 && val2 < 128)

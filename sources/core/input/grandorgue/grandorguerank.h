@@ -39,7 +39,7 @@ public:
 
     void readData(QString key, QString value);
     void preProcess();
-    EltID process(SoundfontManager * sm, EltID idSf2);
+    EltID process(SoundfontManager * sm, int sf2Index, int indexOfFirstSample, int keyOfFirstSample);
     bool isValid();
 
 private:

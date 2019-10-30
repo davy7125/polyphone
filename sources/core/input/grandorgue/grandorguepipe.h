@@ -44,11 +44,12 @@ public:
 
     void addTuning(int offset) { _tuning += offset; }
 
-    void process(EltID parent);
+    void process(EltID parent, int key);
 
 private:
-    QList<int> getSampleIds(int sf2Id);
+    QList<int> getSampleIds(int sf2Id, QString filePath, bool isRelease);
     static QString getName(QString name, int maxCharacters, int suffixNumber, QString suffix = "");
+    QString getReleaseFilePath();
 
     QString _rootDir;
     GrandOrgueDataThrough * _godt;

@@ -112,7 +112,7 @@ void GrandOrgueRank::preProcess()
 
         // Maximum gain of the pipes
         bool first = true;
-        double maxGain;
+        double maxGain = 0;
         foreach (GrandOrguePipe * pipe, _pipes.values())
         {
             if (first)
@@ -124,17 +124,15 @@ void GrandOrgueRank::preProcess()
     }
 }
 
-EltID GrandOrgueRank::process(SoundfontManager * sm, EltID idSf2)
+EltID GrandOrgueRank::process(SoundfontManager * sm, int sf2Index, int indexOfFirstSample, int keyOfFirstSample)
 {
     // At least one valid pipe?
     if (!isValid())
         return EltID();
 
     // New instrument
-    EltID idInst = idSf2;
-    idInst.typeElement = elementInst;
+    EltID idInst(elementInst, sf2Index);
     idInst.indexElt = sm->add(idInst);
-    _godt->setSf2InstId(_id, idInst.indexElt);
 
     // Name
     sm->set(idInst, champ_name, _properties.contains("name") ? _properties["name"] : QObject::tr("untitled"));
@@ -170,8 +168,8 @@ EltID GrandOrgueRank::process(SoundfontManager * sm, EltID idSf2)
     sm->set(idInst, champ_sampleModes, val);
 
     // Associate samples
-    foreach (GrandOrguePipe * pipe, _pipes.values())
-        pipe->process(idInst);
+    foreach (int index, _pipes.keys())
+        _pipes[index]->process(idInst, index - indexOfFirstSample + keyOfFirstSample);
 
     // Simplifications
     sm->simplify(idInst, champ_fineTune);

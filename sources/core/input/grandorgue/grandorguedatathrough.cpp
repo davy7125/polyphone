@@ -50,16 +50,6 @@ void GrandOrgueDataThrough::finalizePreprocess()
             _maxGain = val;
 }
 
-void GrandOrgueDataThrough::setSf2InstId(int grandOrgueInstId, int sf2ElementId)
-{
-    _instIds[grandOrgueInstId] = sf2ElementId;
-}
-
-int GrandOrgueDataThrough::getSf2InstId(int grandOrgueInstId)
-{
-    return _instIds.contains(grandOrgueInstId) ? _instIds[grandOrgueInstId] : -1;
-}
-
 void GrandOrgueDataThrough::setSf2SmplId(QString filePath, QList<int> sf2ElementIds)
 {
     _smplIds[filePath] = sf2ElementIds;

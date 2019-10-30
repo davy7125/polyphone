@@ -41,9 +41,10 @@ public:
     void readData(QString key, QString value);
     bool isValid();
     void preProcess();
-    void process(SoundfontManager * sm, EltID idSf2);
+    void process(SoundfontManager * sm, int sf2Index, QMap<int, GrandOrgueRank *> &ranks);
 
 private:
+    int getFirstPipeNumber();
     RangesType getDefaultKeyRange();
 
     QString _rootDir;

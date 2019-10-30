@@ -44,10 +44,6 @@ public:
     // Maximum gain found in the sample set
     double getMaxGain() { return _maxGain; }
 
-    // Match between instrument indexes (in sf2, in GrandOrgue)
-    void setSf2InstId(int grandOrgueInstId, int sf2ElementId);
-    int getSf2InstId(int grandOrgueInstId);
-
     // Match between a sample name and a sample index (stereo samples have 2 ids)
     void setSf2SmplId(QString filePath, QList<int> sf2ElementIds);
     QList<int> getSf2SmplId(QString filePath);
@@ -59,7 +55,6 @@ public:
 private:
     QMap<int, double> _maxGainPerRank;
     double _maxGain;
-    QMap<int, int> _instIds;
     QMap<QString, QList<int> > _smplIds;
     QList<QString> _sampleNames;
 };

@@ -37,16 +37,17 @@ public:
 
     void readData(QString key, QString value);
     void preProcess(int firstKey);
-    bool isValid();
-    void process(SoundfontManager * sm, EltID idPrst);
+    int getRankId() { return _rankId; }
+
+    RangesType getKeyRange();
+    int getFirstPipeIndex();
 
 private:
-    RangesType getKeyRange();
-
     GrandOrgueDataThrough * _godt;
     QMap<QString, QString> _properties;
     int _rankId;
     int _firstKey;
+    int _firstPipeIndex;
 };
 
 #endif // GRANDORGUERANKLINK_H

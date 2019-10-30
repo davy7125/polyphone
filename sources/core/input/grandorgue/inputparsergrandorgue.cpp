@@ -201,13 +201,9 @@ void InputParserGrandOrgue::createSf2(int &sf2Index, QString filename)
         stop->preProcess();
     _godt->finalizePreprocess();
 
-    // Process ranks for creating instruments
-    foreach (GrandOrgueRank * rank, _ranks)
-        rank->process(sm, idSf2);
-
     // Process stops for creating presets and instruments
     foreach (GrandOrgueStop * stop, _stops)
-        stop->process(sm, idSf2);
+        stop->process(sm, sf2Index, _ranks);
 }
 
 QString InputParserGrandOrgue::getComment()

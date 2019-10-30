@@ -30,7 +30,8 @@
 GrandOrgueRankLink::GrandOrgueRankLink(GrandOrgueDataThrough *godt) :
     _godt(godt),
     _rankId(-1),
-    _firstKey(36)
+    _firstKey(36),
+    _firstPipeIndex(1)
 {
 
 }
@@ -54,36 +55,6 @@ void GrandOrgueRankLink::readData(QString key, QString value)
 void GrandOrgueRankLink::preProcess(int firstKey)
 {
     _firstKey = firstKey;
-}
-
-bool GrandOrgueRankLink::isValid()
-{
-    return _rankId >= 0 && _godt->getSf2InstId(_rankId) >= 0;
-}
-
-void GrandOrgueRankLink::process(SoundfontManager * sm, EltID idPrst)
-{
-    if (!this->isValid())
-        return;
-
-    // Instrument to link
-    EltID idInst(elementInst, idPrst.indexSf2, _godt->getSf2InstId(_rankId));
-
-    // Link it to the preset
-    EltID idPrstInst(elementPrstInst, idPrst.indexSf2, idPrst.indexElt);
-    idPrstInst.indexElt2 = sm->add(idPrstInst);
-    AttributeValue val;
-    val.wValue = idInst.indexElt;
-    sm->set(idPrstInst, champ_instrument, val);
-
-    // Keyrange
-    RangesType keyRange = getKeyRange();
-    if (keyRange.byLo != 0 || keyRange.byHi != 127)
-    {
-        AttributeValue val;
-        val.rValue = keyRange;
-        sm->set(idPrstInst, champ_keyRange, val);
-    }
 }
 
 RangesType GrandOrgueRankLink::getKeyRange()
@@ -114,3 +85,17 @@ RangesType GrandOrgueRankLink::getKeyRange()
     return keyRange;
 }
 
+int GrandOrgueRankLink::getFirstPipeIndex()
+{
+    int result = 1;
+
+    if (_properties.contains("firstpipenumber"))
+    {
+        bool ok = false;
+        result = _properties["firstpipenumber"].toInt(&ok);
+        if (!ok)
+            qDebug() << "couldn't read first pipe number of a link: " << _properties["firstpipenumber"];
+    }
+
+    return result;
+}
