@@ -893,7 +893,7 @@ EltID TreeView::createElement(IdList ids, QStringList &existingNames, Duplicator
         currentNames << SoundfontManager::getInstance()->getQstr(id, champ_name);
     QString elementName = Utils::commonPart(currentNames);
     if (elementName.isEmpty())
-        elementName = isSmpl ? trUtf8("instrument") : trUtf8("preset");
+        elementName = isSmpl ? tr("instrument") : tr("preset");
 
     // Possibly add a suffix
     if (existingNames.contains(elementName))
@@ -914,7 +914,7 @@ EltID TreeView::createElement(IdList ids, QStringList &existingNames, Duplicator
         if (nBank < 0 || nPreset < 0)
         {
             // Cannot create more presets
-            QMessageBox::warning(this, trUtf8("Warning"), trUtf8("Cannot create more presets."));
+            QMessageBox::warning(this, tr("Warning"), tr("Cannot create more presets."));
             return EltID(elementUnknown);
         }
     }

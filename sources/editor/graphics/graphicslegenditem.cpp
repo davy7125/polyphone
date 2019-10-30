@@ -114,7 +114,7 @@ void GraphicsLegendItem::setIds(QList<EltID> ids, QList<int> highlightedIds, int
             minKey = range.byLo;
             maxKey = range.byHi;
         }
-        _textBottom << QObject::trUtf8("Key range:") + " " +
+        _textBottom << QObject::tr("Key range:") + " " +
                        ContextManager::keyName()->getKeyName(minKey) + " - " +
                        ContextManager::keyName()->getKeyName(maxKey);
 
@@ -133,7 +133,7 @@ void GraphicsLegendItem::setIds(QList<EltID> ids, QList<int> highlightedIds, int
             minVel = range.byLo;
             maxVel = range.byHi;
         }
-        _textBottom << QObject::trUtf8("Velocity range:") + " " +
+        _textBottom << QObject::tr("Velocity range:") + " " +
                        QString::number(minVel) + " - " +
                        QString::number(maxVel);
     }

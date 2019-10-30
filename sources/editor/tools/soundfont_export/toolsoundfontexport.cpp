@@ -113,7 +113,7 @@ EltID ToolSoundfontExport::mergeSoundfonts(SoundfontManager * sm, QMap<int,  QLi
     else
     {
         name = "soundfont";
-        comment = trUtf8("Merge soudfonts:");
+        comment = tr("Merge soudfonts:");
         foreach (int sf2Index, presets.keys())
             comment += "\n - " + sm->getQstr(EltID(elementSf2, sf2Index), champ_name);
     }
@@ -208,5 +208,5 @@ QString ToolSoundfontExport::getWarning()
 
 QString ToolSoundfontExport::getConfirmation()
 {
-    return _error.isEmpty() ? trUtf8("Export successful!") : "";
+    return _error.isEmpty() ? tr("Export successful!") : "";
 }

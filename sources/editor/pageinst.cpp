@@ -99,9 +99,9 @@ PageInst::~PageInst()
 QList<Page::DisplayOption> PageInst::getDisplayOptions(IdList selectedIds)
 {
     return QList<DisplayOption>()
-            << DisplayOption(1, ":/icons/table.svg", trUtf8("Table"))
-            << DisplayOption(2, ":/icons/range.svg", trUtf8("Ranges"), selectedIds.isElementUnique(elementInst))
-            << DisplayOption(3, ":/icons/adsr.svg", trUtf8("Envelopes"), selectedIds.isElementUnique(elementInst));
+            << DisplayOption(1, ":/icons/table.svg", tr("Table"))
+            << DisplayOption(2, ":/icons/range.svg", tr("Ranges"), selectedIds.isElementUnique(elementInst))
+            << DisplayOption(3, ":/icons/adsr.svg", tr("Envelopes"), selectedIds.isElementUnique(elementInst));
 }
 
 bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int displayOption)
@@ -138,11 +138,11 @@ bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int di
         int nbPrst = ui->widgetLinkedTo->getLinkNumber();
 
         if (nbPrst == 0)
-            ui->labelLinkedTo->setText(trUtf8("Instrument not linked to a preset yet."));
+            ui->labelLinkedTo->setText(tr("Instrument not linked to a preset yet."));
         else if (nbPrst == 1)
-            ui->labelLinkedTo->setText(trUtf8("Instrument linked to preset:"));
+            ui->labelLinkedTo->setText(tr("Instrument linked to preset:"));
         else
-            ui->labelLinkedTo->setText(trUtf8("Instrument linked to presets:"));
+            ui->labelLinkedTo->setText(tr("Instrument linked to presets:"));
         ui->modulatorEditor->show();
     }
     else
@@ -244,7 +244,7 @@ TableWidgetInst::TableWidgetInst(QWidget *parent) : TableWidget(parent)
     }
 
     // Unit warning
-    this->verticalHeaderItem(3)->setToolTip(trUtf8("Values on this row are expressed in real dB.\nOther soundfont editors might display other units."));
+    this->verticalHeaderItem(3)->setToolTip(tr("Values on this row are expressed in real dB.\nOther soundfont editors might display other units."));
     this->verticalHeaderItem(3)->setData(Qt::DecorationRole,
                                          ContextManager::theme()->getColoredSvg(":/icons/info.svg", QSize(12, 12),
                                                                                 ThemeManager::HIGHLIGHTED_BACKGROUND));

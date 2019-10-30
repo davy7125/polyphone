@@ -35,5 +35,5 @@ void InputParserNotSupported::processInternal(QString fileName, SoundfontManager
 
     // File not supported
     success = false;
-    error = trUtf8("This file format is not supported.");
+    error = tr("This file format is not supported.");
 }

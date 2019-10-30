@@ -103,7 +103,7 @@ void PageTable::addGlobal(IdList listIds)
                 break;
         }
 
-        _table->addColumn(numCol, multiGlobal ? _sf2->getQstr(id, champ_name) : trUtf8("Global"), id);
+        _table->addColumn(numCol, multiGlobal ? _sf2->getQstr(id, champ_name) : tr("Global"), id);
         nbGlobal++;
         EltID idGen = id;
         idGen.typeElement = this->contenantGen;

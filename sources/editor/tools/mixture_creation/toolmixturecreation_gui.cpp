@@ -532,7 +532,7 @@ void ToolMixtureCreation_gui::on_pushOk_clicked()
     // Check that the name is specified
     if (ui->lineNom->text().isEmpty())
     {
-        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("The instrument name must be provided."));
+        QMessageBox::warning(this, tr("Warning"), tr("The instrument name must be provided."));
         return;
     }
 
@@ -548,7 +548,7 @@ void ToolMixtureCreation_gui::on_pushOk_clicked()
     }
     if (!ok)
     {
-        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("At least one rank must be specified."));
+        QMessageBox::warning(this, tr("Warning"), tr("At least one rank must be specified."));
         return;
     }
 

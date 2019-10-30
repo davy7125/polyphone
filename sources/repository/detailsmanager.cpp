@@ -133,19 +133,19 @@ void DetailsManager::downloadCompleted(QString error)
                 _soundfontDetails[currentId] = new SoundfontDetails(_urlReaderDetails->getData());
                 break;
             case 1:
-                error = trUtf8("Subscribe to a Premium account to get all the features!");
+                error = tr("Subscribe to a Premium account to get all the features!");
                 break;
             case 2:
-                error = trUtf8("Server error");
+                error = tr("Server error");
                 break;
             default:
-                error = trUtf8("Server error") + QString(" (status '%1')").arg(data.value("status").toString());
+                error = tr("Server error") + QString(" (status '%1')").arg(data.value("status").toString());
                 break;
             }
         }
         else
         {
-            error = trUtf8("Server error");
+            error = tr("Server error");
         }
     }
 

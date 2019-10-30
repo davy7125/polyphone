@@ -115,7 +115,7 @@ QString InputFactory::getFileFilter()
     if (s_instance == nullptr)
         s_instance = new InputFactory();
 
-    QString extConcat = QObject::trUtf8("All") + " (";
+    QString extConcat = QObject::tr("All") + " (";
     QString typeConcat;
 
     bool first = true;

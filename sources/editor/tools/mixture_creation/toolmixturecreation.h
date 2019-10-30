@@ -45,7 +45,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Transformation");
+        return tr("Transformation");
     }
 
     /// Internal identifier
@@ -60,7 +60,7 @@ signals:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Mixture creation");
+        return tr("Mixture creation");
     }
 
     /// Return true if the tool can be used on the specified ids

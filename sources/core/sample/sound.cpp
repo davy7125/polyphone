@@ -67,16 +67,16 @@ void Sound::setFileName(QString qStr, bool tryFindRootKey)
         switch (result)
         {
         case SampleReader::FILE_CORRUPT:
-            QMessageBox::warning(QApplication::activeWindow(), QObject::trUtf8("Warning"),
-                                 QObject::trUtf8("Corrupted file: \"%1\"").arg(_fileName));
+            QMessageBox::warning(QApplication::activeWindow(), QObject::tr("Warning"),
+                                 QObject::tr("Corrupted file: \"%1\"").arg(_fileName));
             break;
         case SampleReader::FILE_NOT_FOUND:
-            QMessageBox::warning(QApplication::activeWindow(), QObject::trUtf8("Warning"),
-                                 QObject::trUtf8("Cannot find file \"%1\"").arg(_fileName));
+            QMessageBox::warning(QApplication::activeWindow(), QObject::tr("Warning"),
+                                 QObject::tr("Cannot find file \"%1\"").arg(_fileName));
             break;
         case SampleReader::FILE_NOT_READABLE:
-            QMessageBox::warning(QApplication::activeWindow(), QObject::trUtf8("Warning"),
-                                 QObject::trUtf8("Cannot open file \"%1\"").arg(_fileName));
+            QMessageBox::warning(QApplication::activeWindow(), QObject::tr("Warning"),
+                                 QObject::tr("Cannot open file \"%1\"").arg(_fileName));
             break;
         default:
             break;
@@ -189,7 +189,7 @@ QByteArray Sound::getData(quint16 wBps)
     }
         break;
     default:
-        QMessageBox::warning(QApplication::activeWindow(), QObject::trUtf8("Warning"), "Error in Sound::getData.");
+        QMessageBox::warning(QApplication::activeWindow(), QObject::tr("Warning"), "Error in Sound::getData.");
     }
 
     return baRet;

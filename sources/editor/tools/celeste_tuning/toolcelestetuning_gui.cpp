@@ -47,7 +47,7 @@ void ToolCelesteTuning_gui::updateInterface(AbstractToolParameters * parameters,
     // Load parameters
     ui->doubleSpinHerz->setValue(params->getBaseFrequency());
     ui->doubleSpinDiv->setValue(params->getCoefficient());
-    ui->label->setText(trUtf8("Number of beats per second") + " (" + trUtf8("key") + " " + ContextManager::keyName()->getKeyName(60) + ")");
+    ui->label->setText(tr("Number of beats per second") + " (" + tr("key") + " " + ContextManager::keyName()->getKeyName(60) + ")");
 }
 
 void ToolCelesteTuning_gui::saveParameters(AbstractToolParameters * parameters)

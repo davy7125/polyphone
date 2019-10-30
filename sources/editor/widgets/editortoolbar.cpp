@@ -52,35 +52,35 @@ EditorToolBar::EditorToolBar(QWidget * parent) : QToolBar(parent),
     this->setStyleSheet("QToolBar{border:0;background-color:" + highlightColor.name() + "}");
 
     // Create the actions
-    _actionAddSample = new StyledAction(trUtf8("Add a sample"), ":/icons/sample.svg", this);
+    _actionAddSample = new StyledAction(tr("Add a sample"), ":/icons/sample.svg", this);
     connect(_actionAddSample, SIGNAL(clicked()), this, SLOT(onNewSmplClicked()));
     this->addWidget(_actionAddSample);
 
-    _actionAddInstrument = new StyledAction(trUtf8("Add an instrument"), ":/icons/instrument.svg", this);
+    _actionAddInstrument = new StyledAction(tr("Add an instrument"), ":/icons/instrument.svg", this);
     connect(_actionAddInstrument, SIGNAL(clicked()), this, SLOT(onNewInstClicked()));
     this->addWidget(_actionAddInstrument);
 
-    _actionAddPreset = new StyledAction(trUtf8("Add a preset"), ":/icons/preset.svg", this);
+    _actionAddPreset = new StyledAction(tr("Add a preset"), ":/icons/preset.svg", this);
     connect(_actionAddPreset, SIGNAL(clicked()), this, SLOT(onNewPrstClicked()));
     this->addWidget(_actionAddPreset);
 
-    _actionToolBox = new StyledAction(trUtf8("Toolbox"), ":/icons/toolbox.svg", this);
+    _actionToolBox = new StyledAction(tr("Toolbox"), ":/icons/toolbox.svg", this);
     this->addWidget(_actionToolBox);
     _toolMenu = new ToolMenu(_actionToolBox);
     _actionToolBox->setMenu(_toolMenu);
     _actionToolBox->setPopupMode(QToolButton::InstantPopup);
 
     this->addSeparator();
-    _actionUndo = new StyledAction(trUtf8("Cancel"), ":/icons/edit-undo.svg", this);
+    _actionUndo = new StyledAction(tr("Cancel"), ":/icons/edit-undo.svg", this);
     connect(_actionUndo, SIGNAL(clicked()), this, SLOT(onUndo()));
     this->addWidget(_actionUndo);
 
-    _actionRedo = new StyledAction(trUtf8("Redo"), ":/icons/edit-redo.svg", this);
+    _actionRedo = new StyledAction(tr("Redo"), ":/icons/edit-redo.svg", this);
     connect(_actionRedo, SIGNAL(clicked()), this, SLOT(onRedo()));
     this->addWidget(_actionRedo);
     this->addSeparator();
 
-    _actionSave = new StyledAction(trUtf8("Save"), ":/icons/document-save.svg", this);
+    _actionSave = new StyledAction(tr("Save"), ":/icons/document-save.svg", this);
     connect(_actionSave, SIGNAL(clicked()), this, SLOT(onSaveClicked()));
     this->addWidget(_actionSave);
 
@@ -90,13 +90,13 @@ EditorToolBar::EditorToolBar(QWidget * parent) : QToolBar(parent),
     _displayActionSeparator = this->addSeparator();
     _displayActionSeparator->setVisible(false);
 
-    _actionShowRecorder = new StyledAction(trUtf8("Recorder"), ":/icons/recorder.svg", this);
+    _actionShowRecorder = new StyledAction(tr("Recorder"), ":/icons/recorder.svg", this);
     _actionShowRecorder->setCheckable(true);
     _actionShowRecorder->setChecked(s_recorderOpen);
     connect(_actionShowRecorder, SIGNAL(clicked()), this, SLOT(onRecorderActionClicked()));
     this->addWidget(_actionShowRecorder);
 
-    _actionShowKeyboard = new StyledAction(trUtf8("Virtual keyboard"), ":/icons/piano.svg", this);
+    _actionShowKeyboard = new StyledAction(tr("Virtual keyboard"), ":/icons/piano.svg", this);
     _actionShowKeyboard->setCheckable(true);
     _actionShowKeyboard->setChecked(s_keyboardOpen);
     connect(_actionShowKeyboard, SIGNAL(clicked()), this, SLOT(onKeyboardActionClicked()));
@@ -254,9 +254,9 @@ void EditorToolBar::onNewSmplClicked()
         ext = myFunction();
 
     // Display dialog
-    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Import an audio file"),
+    QStringList strList = QFileDialog::getOpenFileNames(this, tr("Import an audio file"),
                                                         ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SAMPLE),
-                                                        trUtf8("Audio files") + " (*.wav *.flac" + ext + ")");
+                                                        tr("Audio files") + " (*.wav *.flac" + ext + ")");
 
     if (strList.count() == 0)
         return;
@@ -371,7 +371,7 @@ void EditorToolBar::onNewPrstClicked(QString name, bool linkElements)
     sm->firstAvailablePresetBank(id, nBank, nPreset);
     if (nBank < 0 || nPreset < 0)
     {
-        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("Cannot create more presets."));
+        QMessageBox::warning(this, tr("Warning"), tr("Cannot create more presets."));
         return;
     }
 

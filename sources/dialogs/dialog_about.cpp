@@ -33,7 +33,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
-    ui->labelNomVersion->setText(trUtf8("Polyphone") + " " + SOFT_VERSION +
+    ui->labelNomVersion->setText(tr("Polyphone") + " " + SOFT_VERSION +
                                  (QString(IDENTIFIER).isEmpty() ? "" : QString(" ") + IDENTIFIER));
 
     // Icon
@@ -44,38 +44,38 @@ DialogAbout::DialogAbout(QWidget *parent) :
 
     // Description
     QString annee = "2013 -" + QString::number(QDate::currentDate().year());
-    QString url = trUtf8("https://www.polyphone-soundfonts.com/en");
+    QString url = tr("https://www.polyphone-soundfonts.com/en");
     QString urlDonation = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted";
-    ui->labelDescription->setText("<html><head/><body><p align='center'>" + trUtf8("Copyright") + " © " + annee +
-                                  " " + trUtf8("Davy Triponney") + "<br/><br/><a href='" + url +
+    ui->labelDescription->setText("<html><head/><body><p align='center'>" + tr("Copyright") + " © " + annee +
+                                  " " + tr("Davy Triponney") + "<br/><br/><a href='" + url +
                                   "'><span style=' text-decoration: underline; color:" +
                                   replacement["secondColor"] + ";'>" +
-            trUtf8("Polyphone website") + "</span></a>" +
+            tr("Polyphone website") + "</span></a>" +
             "<br/><br/><a href='" + urlDonation +
             "'><span style=' text-decoration: underline; color:" +
             replacement["secondColor"] + ";'>" +
-            trUtf8("Donate") + "</span></a>" +
+            tr("Donate") + "</span></a>" +
             "</p></body></html>");
 
     // Credits
-    _credit.addCreator(trUtf8("Davy Triponney", "translation needed if the alphabet is not the same (cyrillic for instance)"), "contact@polyphone-soundfonts.com");
+    _credit.addCreator(tr("Davy Triponney", "translation needed if the alphabet is not the same (cyrillic for instance)"), "contact@polyphone-soundfonts.com");
 
-    _credit.addContributor(trUtf8("Andrea Celani", "translation needed if the alphabet is not the same (cyrillic for instance)"), "acelani74@gmail.com");
-    _credit.addContributor(trUtf8("Kinwie", "translation needed if the alphabet is not the same (cyrillic for instance)"), "kinwie@yahoo.com");
-    _credit.addContributor(trUtf8("Michael Schyllberg", "translation needed if the alphabet is not the same (cyrillic for instance)"), "michael.schyllberg@bredband.net");
-    _credit.addContributor(trUtf8("Paul Stratman", "translation needed if the alphabet is not the same (cyrillic for instance)"), "pcstratman@gmail.com");
-    _credit.addContributor(trUtf8("Steve Clarke", "translation needed if the alphabet is not the same (cyrillic for instance)"), "stevertyu@yahoo.com");
+    _credit.addContributor(tr("Andrea Celani", "translation needed if the alphabet is not the same (cyrillic for instance)"), "acelani74@gmail.com");
+    _credit.addContributor(tr("Kinwie", "translation needed if the alphabet is not the same (cyrillic for instance)"), "kinwie@yahoo.com");
+    _credit.addContributor(tr("Michael Schyllberg", "translation needed if the alphabet is not the same (cyrillic for instance)"), "michael.schyllberg@bredband.net");
+    _credit.addContributor(tr("Paul Stratman", "translation needed if the alphabet is not the same (cyrillic for instance)"), "pcstratman@gmail.com");
+    _credit.addContributor(tr("Steve Clarke", "translation needed if the alphabet is not the same (cyrillic for instance)"), "stevertyu@yahoo.com");
 
-    _credit.addTranslator(trUtf8("Andrea Celani", "translation needed if the alphabet is not the same (cyrillic for instance)"), "acelani74@gmail.com"); // Italian
-    _credit.addTranslator(trUtf8("Davy Triponney", "translation needed if the alphabet is not the same (cyrillic for instance)"), "contact@polyphone-soundfonts.com"); // French
-    _credit.addTranslator(trUtf8("F.J. Martínez Murcia", "translation needed if the alphabet is not the same (cyrillic for instance)"), "fjesusmartinez@ugr.es"); // Spanish
-    _credit.addTranslator(trUtf8("Georg Gergull", "translation needed if the alphabet is not the same (cyrillic for instance)"), "geoger@hotmail.de"); // German
-    _credit.addTranslator(trUtf8("Jay Alexander Fleming", "translation needed if the alphabet is not the same (cyrillic for instance)"), "tito.nehru.naser@gmail.com"); // Serbian
-    _credit.addTranslator(trUtf8("Joel Gomes", "translation needed if the alphabet is not the same (cyrillic for instance)"), "joelgomes1994@hotmail.com"); // Portuguese
-    _credit.addTranslator(trUtf8("Magson", "translation needed if the alphabet is not the same (cyrillic for instance)"), "magsom@qq.com"); // Chinese
-    _credit.addTranslator(trUtf8("Pavel Fric", "translation needed if the alphabet is not the same (cyrillic for instance)"), "pavelfric@seznam.cz"); // Czech
-    _credit.addTranslator(trUtf8("Steve Clarke", "translation needed if the alphabet is not the same (cyrillic for instance)"), "stevertyu@yahoo.com"); // English
-    _credit.addTranslator(trUtf8("Chris Hansen", "translation needed if the alphabet is not the same (cyrillic for instance)"), "festmusik@gmail.com"); // Danish
+    _credit.addTranslator(tr("Andrea Celani", "translation needed if the alphabet is not the same (cyrillic for instance)"), "acelani74@gmail.com"); // Italian
+    _credit.addTranslator(tr("Davy Triponney", "translation needed if the alphabet is not the same (cyrillic for instance)"), "contact@polyphone-soundfonts.com"); // French
+    _credit.addTranslator(tr("F.J. Martínez Murcia", "translation needed if the alphabet is not the same (cyrillic for instance)"), "fjesusmartinez@ugr.es"); // Spanish
+    _credit.addTranslator(tr("Georg Gergull", "translation needed if the alphabet is not the same (cyrillic for instance)"), "geoger@hotmail.de"); // German
+    _credit.addTranslator(tr("Jay Alexander Fleming", "translation needed if the alphabet is not the same (cyrillic for instance)"), "tito.nehru.naser@gmail.com"); // Serbian
+    _credit.addTranslator(tr("Joel Gomes", "translation needed if the alphabet is not the same (cyrillic for instance)"), "joelgomes1994@hotmail.com"); // Portuguese
+    _credit.addTranslator(tr("Magson", "translation needed if the alphabet is not the same (cyrillic for instance)"), "magsom@qq.com"); // Chinese
+    _credit.addTranslator(tr("Pavel Fric", "translation needed if the alphabet is not the same (cyrillic for instance)"), "pavelfric@seznam.cz"); // Czech
+    _credit.addTranslator(tr("Steve Clarke", "translation needed if the alphabet is not the same (cyrillic for instance)"), "stevertyu@yahoo.com"); // English
+    _credit.addTranslator(tr("Chris Hansen", "translation needed if the alphabet is not the same (cyrillic for instance)"), "festmusik@gmail.com"); // Danish
 
     ui->textBrowser->setHtml(_credit.getText());
 }
@@ -119,9 +119,9 @@ QString Credit::getText()
     QString text = "<html><head/><body><table border='0' style='margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;' "
                    "cellspacing='2' cellpadding='0'>";
 
-    text += getGroup(QObject::trUtf8("Created by") + " ", _listCreatorName, _listCreatorMail) + "<tr></tr>";
-    text += getGroup(QObject::trUtf8("Contributors") + " ", _listContributorName, _listContributorMail) + "<tr></tr>";
-    text += getGroup(QObject::trUtf8("Translated by") + " ", _listTranslatorName, _listTranslatorMail) + "<tr></tr>";
+    text += getGroup(QObject::tr("Created by") + " ", _listCreatorName, _listCreatorMail) + "<tr></tr>";
+    text += getGroup(QObject::tr("Contributors") + " ", _listContributorName, _listContributorMail) + "<tr></tr>";
+    text += getGroup(QObject::tr("Translated by") + " ", _listTranslatorName, _listTranslatorMail) + "<tr></tr>";
     text += getAwesomeCredit();
 
     return text + "</table></body></html>";
@@ -163,7 +163,7 @@ QString Credit::getFormattedLink(QString text, QString link)
 QString Credit::getAwesomeCredit()
 {
     return "<tr><td width='50%'><p align='right'>" +
-            QObject::trUtf8("Icons") + " </p></td>" +
+            QObject::tr("Icons") + " </p></td>" +
             "<td width='50%'>Most of the icons are provided by " +
             getFormattedLink("Awesome", "https://fontawesome.com/") +
             " under the license " +

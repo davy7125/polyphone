@@ -74,7 +74,7 @@ void WaitingToolDialog::cancel()
 
     ui->progressBar->setValue(0);
     ui->progressBar->setMaximum(0);
-    ui->labelProcess->setText(trUtf8("Canceling..."));
+    ui->labelProcess->setText(tr("Canceling..."));
     _isCanceled = true;
     emit(canceled());
 }

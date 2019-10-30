@@ -50,17 +50,17 @@ void DialogList::showDialog(EltID idSrc, bool isAssociation)
     ElementType element;
     if (idSrc.typeElement == elementInstSmpl)
     {
-        this->setWindowTitle(trUtf8("Sample list"));
+        this->setWindowTitle(tr("Sample list"));
         element = elementSmpl;
     }
     else if (idSrc.typeElement == elementSmpl || idSrc.typeElement == elementPrstInst)
     {
-        this->setWindowTitle(trUtf8("Instrument list"));
+        this->setWindowTitle(tr("Instrument list"));
         element = elementInst;
     }
     else
     {
-        this->setWindowTitle(trUtf8("Preset list"));
+        this->setWindowTitle(tr("Preset list"));
         element = elementPrst;
     }
 

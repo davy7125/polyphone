@@ -43,10 +43,10 @@ Soundfont::Soundfont(EltID id) :
     _rootItem->attachModel(sourceModel);
 
     // Built the tree
-    _generalTreeItem = new TreeItemFirstLevel(QObject::trUtf8("General"), nullptr, _rootItem, EltID(elementSf2, _id.indexSf2, -1, -1, -1));
-    _sampleTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Samples"), (IndexedElementList<TreeItem *> *)&_smpl, _rootItem, EltID(elementRootSmpl, _id.indexSf2, -1, -1, -1));
-    _instrumentTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Instruments"), (IndexedElementList<TreeItem *> *)&_inst, _rootItem, EltID(elementRootInst, _id.indexSf2, -1, -1, -1));
-    _presetTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Presets"), (IndexedElementList<TreeItem *> *)&_prst, _rootItem, EltID(elementRootPrst, _id.indexSf2, -1, -1, -1));
+    _generalTreeItem = new TreeItemFirstLevel(QObject::tr("General"), nullptr, _rootItem, EltID(elementSf2, _id.indexSf2, -1, -1, -1));
+    _sampleTreeItem = new TreeItemFirstLevel(QObject::tr("Samples"), (IndexedElementList<TreeItem *> *)&_smpl, _rootItem, EltID(elementRootSmpl, _id.indexSf2, -1, -1, -1));
+    _instrumentTreeItem = new TreeItemFirstLevel(QObject::tr("Instruments"), (IndexedElementList<TreeItem *> *)&_inst, _rootItem, EltID(elementRootInst, _id.indexSf2, -1, -1, -1));
+    _presetTreeItem = new TreeItemFirstLevel(QObject::tr("Presets"), (IndexedElementList<TreeItem *> *)&_prst, _rootItem, EltID(elementRootPrst, _id.indexSf2, -1, -1, -1));
 
     // Default attributes for a soundfont
     SfVersionTag sfVersionTmp;

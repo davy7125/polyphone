@@ -67,7 +67,7 @@ void DownloadProgressCell::progressChanged(int percent, QString finalFilename)
     ui->labelPercent->setText(QString::number(_percent) + "%");
     if (finalFilename != "")
     {
-        ui->pushOpen->setToolTip(trUtf8("Open \"%1\"").arg(_filename));
+        ui->pushOpen->setToolTip(tr("Open \"%1\"").arg(_filename));
         ui->pushCancel->hide();
         ui->pushOpen->show();
     }
@@ -86,8 +86,8 @@ void DownloadProgressCell::on_pushOpen_clicked()
         if (!QDesktopServices::openUrl(QUrl(_filename, QUrl::TolerantMode)))
         {
             // Warning message
-            QMessageBox::warning(QApplication::activeWindow(), trUtf8("Warning"),
-                                 trUtf8("Couldn't open file \"%1\". If this is an archive, you may have to extract it first.").arg(_filename));
+            QMessageBox::warning(QApplication::activeWindow(), tr("Warning"),
+                                 tr("Couldn't open file \"%1\". If this is an archive, you may have to extract it first.").arg(_filename));
         }
     }
     emit(closeMenu());
@@ -104,6 +104,6 @@ void DownloadProgressCell::cancel()
     _percent = 100;
 
     ui->pushCancel->setIcon(ContextManager::theme()->getColoredSvg(":/icons/canceled.svg", QSize(16, 16), ThemeManager::LIST_TEXT));
-    ui->pushCancel->setToolTip(trUtf8("Download canceled"));
+    ui->pushCancel->setToolTip(tr("Download canceled"));
     ui->pushCancel->setEnabled(false);
 }

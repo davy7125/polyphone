@@ -72,7 +72,7 @@ void SoundfontComment::display(QList<SoundfontCommentData *> data, int level)
     if (level == 0 && data.isEmpty())
     {
         QLabel * label = new QLabel(this);
-        label->setText(trUtf8("No comments."));
+        label->setText(tr("No comments."));
         ui->verticalLayout->addWidget(label);
     }
 }

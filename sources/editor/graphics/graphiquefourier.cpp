@@ -54,7 +54,7 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     this->xAxis->setRange(0, 20000);
     this->xAxis->setVisible(false);
     this->xAxis->setTicks(false);
-    this->xAxis->setLabel(trUtf8("Frequency (Hz)"));
+    this->xAxis->setLabel(tr("Frequency (Hz)"));
     this->xAxis->grid()->setSubGridVisible(true);
     this->xAxis->grid()->setPen(penGrid);
     this->xAxis->grid()->setSubGridPen(penSubGrid);
@@ -68,7 +68,7 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     this->yAxis->setRange(0, 1.05);
     this->yAxis->setVisible(false);
     this->yAxis->setTicks(false);
-    this->yAxis->setLabel(trUtf8("Intensity"));
+    this->yAxis->setLabel(tr("Intensity"));
     this->yAxis->grid()->setSubGridVisible(true);
     this->yAxis->grid()->setPen(penGrid);
     this->yAxis->grid()->setSubGridPen(penSubGrid);
@@ -85,7 +85,7 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
 
     // Préparation du menu contextuel
     _menu = new QMenu(this);
-    QAction * action = _menu->addAction(trUtf8("Export graph"));
+    QAction * action = _menu->addAction(tr("Export graph"));
     connect(action, SIGNAL(triggered()), this, SLOT(exportPng()));
 
     this->plotLayout()->insertRow(0);
@@ -461,7 +461,7 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
                              QString::number(_peaks[peakNumber]._intensity, 'f', 2));
             painter.drawText(QRect(0, posY, size.width() - 74 - marginRight, fontHeight),
                              Qt::AlignRight,
-                             QString::number(_peaks[peakNumber]._frequency, 'f', 2) + " " + trUtf8("Hz", "unit for Herz"));
+                             QString::number(_peaks[peakNumber]._frequency, 'f', 2) + " " + tr("Hz", "unit for Herz"));
             painter.drawText(QRect(0, posY, size.width() - 45 - marginRight, fontHeight),
                              Qt::AlignRight,
                              ContextManager::keyName()->getKeyName(static_cast<unsigned int>(_peaks[peakNumber]._key)));
@@ -481,8 +481,8 @@ void GraphiqueFourier::exportPng()
 {
     QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" +
             _name.replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".png";
-    QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Export a graph"),
-                                                    defaultFile, trUtf8("Png file") + " (*.png)");
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export a graph"),
+                                                    defaultFile, tr("Png file") + " (*.png)");
     if (!fileName.isEmpty())
     {
         ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_FREQUENCIES, fileName);

@@ -76,20 +76,20 @@ void OutputSf3::processInternal(QString fileName, SoundfontManager * sm, bool &s
             }
             else
             {
-                error = trUtf8("Error during the sf3 conversion");
+                error = tr("Error during the sf3 conversion");
                 success = false;
             }
             fo.close();
         }
         else
         {
-            error = trUtf8("Cannot create file \"%1\"").arg(fileName);
+            error = tr("Cannot create file \"%1\"").arg(fileName);
             success = false;
         }
     }
     else
     {
-        error = trUtf8("Cannot read file \"%1\"").arg(fileNameSf2);
+        error = tr("Cannot read file \"%1\"").arg(fileNameSf2);
         success = false;
     }
 

@@ -240,12 +240,12 @@ void ToolGlobalSettings_gui::on_comboPattern_currentIndexChanged(int index)
 {
     if (index == 3 || index == 4)
     {
-        ui->label_6->setText(trUtf8("Stiffness"));
+        ui->label_6->setText(tr("Stiffness"));
         ui->doubleSpinParam->setEnabled(true);
     }
     else if (index == 5)
     {
-        ui->label_6->setText(trUtf8("Distribution"));
+        ui->label_6->setText(tr("Distribution"));
         ui->doubleSpinParam->setEnabled(true);
     }
     else

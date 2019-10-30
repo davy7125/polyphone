@@ -96,7 +96,7 @@ void ToolExternalCommand_gui::on_pushOpen_clicked()
 {
     // Open an executable
     QString command = QFileDialog::getOpenFileName(
-                this, trUtf8("Executable file"),
+                this, tr("Executable file"),
                 ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SOUNDFONT));
 
     if (command != "")
@@ -113,14 +113,14 @@ void ToolExternalCommand_gui::on_pushOk_clicked()
     // Command with at least "wav" as argument
     if (split.count() < 2 || split.first() == "{wav}")
     {
-        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("You must enter a command with at least {wav} as argument."));
+        QMessageBox::warning(this, tr("Warning"), tr("You must enter a command with at least {wav} as argument."));
         return;
     }
 
     // Check that {wav} is present
     if (!split.contains("{wav}"))
     {
-        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("The command must contain the argument {wav}."));
+        QMessageBox::warning(this, tr("Warning"), tr("The command must contain the argument {wav}."));
         return;
     }
 

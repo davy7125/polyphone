@@ -99,8 +99,8 @@ void DialogRecorder::on_pushRecord_clicked()
     {
         // File name
         QString defaultPath = this->getDefaultPath();
-        defaultPath = QFileDialog::getSaveFileName(this, trUtf8("Save a record"),
-                                                   defaultPath, trUtf8("Wav file") + " (*.wav)");
+        defaultPath = QFileDialog::getSaveFileName(this, tr("Save a record"),
+                                                   defaultPath, tr("Wav file") + " (*.wav)");
         if (!defaultPath.isEmpty())
         {
             if (defaultPath.right(4).toLower() != ".wav")
@@ -158,9 +158,9 @@ QString DialogRecorder::getDefaultPath()
     }
     else
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-        defaultPath = QDir::home().path() + "/" + trUtf8("record");
+        defaultPath = QDir::home().path() + "/" + tr("record");
 #else
-        defaultPath = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation) + "/" + trUtf8("record");
+        defaultPath = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation) + "/" + tr("record");
 #endif
 
     return defaultPath + ".wav";

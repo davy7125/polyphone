@@ -46,9 +46,9 @@ DialogNewElement::~DialogNewElement()
 
 void DialogNewElement::initialize(bool isPrst, bool withPossibleLinkedElements, QString defaultName)
 {
-    this->setWindowTitle(isPrst ? trUtf8("Create a new preset") : trUtf8("Create a new instrument"));
-    ui->lineEdit->setPlaceholderText((isPrst ? trUtf8("Name of the new preset") : trUtf8("Name of the new instrument")) + "...");
-    ui->checkLink->setText(isPrst ? trUtf8("Link selected presets") : trUtf8("Link selected instruments"));
+    this->setWindowTitle(isPrst ? tr("Create a new preset") : tr("Create a new instrument"));
+    ui->lineEdit->setPlaceholderText((isPrst ? tr("Name of the new preset") : tr("Name of the new instrument")) + "...");
+    ui->checkLink->setText(isPrst ? tr("Link selected presets") : tr("Link selected instruments"));
     ui->lineEdit->setText(defaultName);
     ui->checkLink->setEnabled(withPossibleLinkedElements);
     ui->lineEdit->selectAll();

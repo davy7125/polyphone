@@ -81,12 +81,12 @@ ToolFrequencyPeaks_gui::ToolFrequencyPeaks_gui(QWidget *parent) :
 
     // Table header
     ui->table->setColumnCount(6);
-    ui->table->setHorizontalHeaderItem(0, new QTableWidgetItem(trUtf8("Sample")));
-    ui->table->setHorizontalHeaderItem(1, new QTableWidgetItem(trUtf8("Peak")));
-    ui->table->setHorizontalHeaderItem(2, new QTableWidgetItem(trUtf8("Intensity")));
-    ui->table->setHorizontalHeaderItem(3, new QTableWidgetItem(trUtf8("Frequency")));
-    ui->table->setHorizontalHeaderItem(4, new QTableWidgetItem(trUtf8("Key")));
-    ui->table->setHorizontalHeaderItem(5, new QTableWidgetItem(trUtf8("Correction")));
+    ui->table->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Sample")));
+    ui->table->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Peak")));
+    ui->table->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Intensity")));
+    ui->table->setHorizontalHeaderItem(3, new QTableWidgetItem(tr("Frequency")));
+    ui->table->setHorizontalHeaderItem(4, new QTableWidgetItem(tr("Key")));
+    ui->table->setHorizontalHeaderItem(5, new QTableWidgetItem(tr("Correction")));
 
     // Connection (do to different threads)
     qRegisterMetaType<SampleFrequencyInfo>();
@@ -148,7 +148,7 @@ void ToolFrequencyPeaks_gui::onPeakComputed(EltID id, const SampleFrequencyInfo 
                 }
                 ui->table->setItem(currentRow + i, 1, new QTableWidgetItem(QString::number(i + 1)));
                 ui->table->setItem(currentRow + i, 2, new QTableWidgetItem(QString::number(fi.factor)));
-                ui->table->setItem(currentRow + i, 3, new QTableWidgetItem(QString::number(fi.frequency) + " " + trUtf8("Hz")));
+                ui->table->setItem(currentRow + i, 3, new QTableWidgetItem(QString::number(fi.frequency) + " " + tr("Hz")));
                 ui->table->setItem(currentRow + i, 4, new QTableWidgetItem(ContextManager::keyName()->getKeyName(fi.key)));
                 ui->table->setItem(currentRow + i, 5, new QTableWidgetItem(QString::number(fi.correction)));
             }
@@ -172,8 +172,8 @@ void ToolFrequencyPeaks_gui::saveParameters(AbstractToolParameters * parameters)
 void ToolFrequencyPeaks_gui::on_pushExport_clicked()
 {
     QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" + _sf2Name;
-    QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Export peak frequency"),
-                                                    defaultFile, trUtf8("Csv file") + " (*.csv)");
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export peak frequency"),
+                                                    defaultFile, tr("Csv file") + " (*.csv)");
     if (!fileName.isEmpty())
     {
         ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_FREQUENCIES, fileName);

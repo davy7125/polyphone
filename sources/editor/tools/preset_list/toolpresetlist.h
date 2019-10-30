@@ -42,7 +42,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Utility");
+        return tr("Utility");
     }
 
     /// Internal identifier
@@ -57,7 +57,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Export preset list");
+        return tr("Export preset list");
     }
 };
 

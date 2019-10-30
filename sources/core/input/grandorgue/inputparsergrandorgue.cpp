@@ -68,7 +68,7 @@ void InputParserGrandOrgue::parseFile(QString filename, bool &success, QString &
     if (!inputFile.open(QIODevice::ReadOnly))
     {
         success = false;
-        error = trUtf8("Cannot open file \"%1\"").arg(filename);
+        error = tr("Cannot open file \"%1\"").arg(filename);
         return;
     }
 

@@ -42,7 +42,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Transformation");
+        return tr("Transformation");
     }
 
     /// Internal identifier
@@ -60,7 +60,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Division duplication");
+        return tr("Division duplication");
     }
 
     /// Get the warning to display after the tool is run

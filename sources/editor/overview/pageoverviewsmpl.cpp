@@ -29,20 +29,20 @@ PageOverviewSmpl::PageOverviewSmpl(QWidget * parent) : PageOverview(PAGE_SMPL, e
 
 QString PageOverviewSmpl::getTitle()
 {
-    return trUtf8("Samples");
+    return tr("Samples");
 }
 
 QStringList PageOverviewSmpl::getHorizontalHeader()
 {
     QStringList hHeader;
-    hHeader << trUtf8("Used")
-            << trUtf8("Total\nduration")
-            << trUtf8("Loop\nduration")
-            << trUtf8("Root\nkey")
-            << trUtf8("Correction")
-            << trUtf8("Sample\ntype")
-            << trUtf8("Linked\nsample")
-            << trUtf8("Sample\nrate");
+    hHeader << tr("Used")
+            << tr("Total\nduration")
+            << tr("Loop\nduration")
+            << tr("Root\nkey")
+            << tr("Correction")
+            << tr("Sample\ntype")
+            << tr("Linked\nsample")
+            << tr("Sample\nrate");
     return hHeader;
 }
 
@@ -91,14 +91,14 @@ void PageOverviewSmpl::getInformation(EltID id, QStringList &info, QStringList &
 
 QString PageOverviewSmpl::isUsed(EltID id)
 {
-    return _usedSmpl.contains(id.indexElt) ? trUtf8("yes") : trUtf8("no");
+    return _usedSmpl.contains(id.indexElt) ? tr("yes") : tr("no");
 }
 
 QString PageOverviewSmpl::totalLength(EltID id)
 {
     quint32 length = _sf2->get(id, champ_dwLength).dwValue;
     quint32 sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
-    return QString::number((double)length / sampleRate, 'f', 3) + trUtf8("s", "unit for seconds");
+    return QString::number((double)length / sampleRate, 'f', 3) + tr("s", "unit for seconds");
 }
 
 QString PageOverviewSmpl::loopLength(EltID id)
@@ -107,7 +107,7 @@ QString PageOverviewSmpl::loopLength(EltID id)
     quint32 endLoop = _sf2->get(id, champ_dwEndLoop).dwValue;
     quint32 sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
     if (startLoop != endLoop)
-        return QString::number((double)(endLoop - startLoop) / sampleRate, 'f', 3) + trUtf8("s", "unit for seconds");
+        return QString::number((double)(endLoop - startLoop) / sampleRate, 'f', 3) + tr("s", "unit for seconds");
     else
         return "-";
 }
@@ -130,19 +130,19 @@ QString PageOverviewSmpl::type(EltID id)
     switch (_sf2->get(id, champ_sfSampleType).sfLinkValue)
     {
     case linkInvalid:
-        type = trUtf8("Invalid link");
+        type = tr("Invalid link");
         break;
     case monoSample: case RomMonoSample:
-        type = trUtf8("Mono", "opposite to stereo");
+        type = tr("Mono", "opposite to stereo");
         break;
     case rightSample: case RomRightSample:
-        type = trUtf8("Stereo right");
+        type = tr("Stereo right");
         break;
     case leftSample: case RomLeftSample:
-        type = trUtf8("Stereo left");
+        type = tr("Stereo left");
         break;
     case linkedSample: case RomLinkedSample:
-        type = trUtf8("Stereo non defined");
+        type = tr("Stereo non defined");
         break;
     }
 
@@ -162,12 +162,12 @@ QString PageOverviewSmpl::link(EltID id)
         if (_sf2->isValid(id2))
             return _sf2->getQstr(id2, champ_name);
         else
-            return trUtf8("invalid");
+            return tr("invalid");
     }
 }
 
 QString PageOverviewSmpl::sampleRate(EltID id)
 {
     unsigned int sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
-    return QString::number(sampleRate) + " " + trUtf8("Hz");
+    return QString::number(sampleRate) + " " + tr("Hz");
 }

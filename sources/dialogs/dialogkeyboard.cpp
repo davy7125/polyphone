@@ -225,13 +225,13 @@ void DialogKeyboard::updateControlAreaVisibility()
     {
         ui->controllerArea->show();
         ui->pushExpand->setIcon(ContextManager::theme()->getColoredSvg(":/icons/arrow_up.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
-        ui->pushExpand->setToolTip(trUtf8("Hide the controller area"));
+        ui->pushExpand->setToolTip(tr("Hide the controller area"));
     }
     else
     {
         ui->controllerArea->hide();
         ui->pushExpand->setIcon(ContextManager::theme()->getColoredSvg(":/icons/arrow_down.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
-        ui->pushExpand->setToolTip(trUtf8("Show the controller area"));
+        ui->pushExpand->setToolTip(tr("Show the controller area"));
     }
 
     this->resizeWindow();

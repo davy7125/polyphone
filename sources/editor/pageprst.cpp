@@ -93,8 +93,8 @@ PagePrst::~PagePrst()
 QList<Page::DisplayOption> PagePrst::getDisplayOptions(IdList selectedIds)
 {
     return QList<DisplayOption>()
-            << DisplayOption(1, ":/icons/table.svg", trUtf8("Table"))
-            << DisplayOption(2, ":/icons/range.svg", trUtf8("Ranges"), selectedIds.isElementUnique(elementPrst));
+            << DisplayOption(1, ":/icons/table.svg", tr("Table"))
+            << DisplayOption(2, ":/icons/range.svg", tr("Ranges"), selectedIds.isElementUnique(elementPrst));
 }
 
 bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int displayOption)
@@ -243,7 +243,7 @@ TableWidgetPrst::TableWidgetPrst(QWidget *parent) : TableWidget(parent)
         this->setVerticalHeaderItem(i, new QTableWidgetItem(Attribute::getDescription(_fieldList[i - 1], true)));
 
     // Unit warning
-    this->verticalHeaderItem(3)->setToolTip(trUtf8("Values on this row are expressed in real dB.\nOther soundfont editors might display other units."));
+    this->verticalHeaderItem(3)->setToolTip(tr("Values on this row are expressed in real dB.\nOther soundfont editors might display other units."));
     this->verticalHeaderItem(3)->setData(Qt::DecorationRole,
                                          ContextManager::theme()->getColoredSvg(":/icons/info.svg", QSize(12, 12),
                                                                                 ThemeManager::HIGHLIGHTED_BACKGROUND));

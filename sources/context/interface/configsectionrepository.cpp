@@ -102,37 +102,37 @@ void ConfigSectionRepository::onConnectionStateChanged(UserManager::ConnectionSt
         messageColor = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
                                          ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT), 0.5);
         currentIndex = 0;
-        buttonText = trUtf8("Connection");
+        buttonText = tr("Connection");
         break;
     case UserManager::PENDING:
-        messageContent = trUtf8("Connecting...");
+        messageContent = tr("Connecting...");
         messageColor = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
                                          ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT), 0.5);
         currentIndex = 0;
-        buttonText = trUtf8("Cancel");
+        buttonText = tr("Cancel");
         break;
     case UserManager::CONNECTED:
-        messageContent = trUtf8("Connected");
+        messageContent = tr("Connected");
         messageColor = ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::WINDOW_BACKGROUND);
         currentIndex = 1;
-        buttonText = trUtf8("Log out");
+        buttonText = tr("Log out");
         break;
     case UserManager::CONNECTED_PREMIUM:
-        messageContent = trUtf8("Connected");
+        messageContent = tr("Connected");
         messageColor = ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::WINDOW_BACKGROUND);
         currentIndex = 2;
-        buttonText = trUtf8("Log out");
+        buttonText = tr("Log out");
         break;
     case UserManager::BANNED:
         messageContent = "";
         currentIndex = 3;
-        buttonText = trUtf8("Log out");
+        buttonText = tr("Log out");
         break;
     case UserManager::FAILED:
         messageContent = UserManager::getInstance()->error();
         messageColor = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND);
         currentIndex = 0;
-        buttonText = trUtf8("Connection");
+        buttonText = tr("Connection");
         break;
     }
 
@@ -191,20 +191,20 @@ void ConfigSectionRepository::on_lineUser_textEdited(const QString &arg1)
 {
     Q_UNUSED(arg1)
     if (_currentState == UserManager::DISCONNECTED)
-        ui->labelMessage->setText(trUtf8("Click on %1 to save parameters.").arg("<b>" + ui->pushConnect->text() + "</b>"));
+        ui->labelMessage->setText(tr("Click on %1 to save parameters.").arg("<b>" + ui->pushConnect->text() + "</b>"));
 }
 
 void ConfigSectionRepository::on_linePassword_textChanged(const QString &arg1)
 {
     Q_UNUSED(arg1)
     if (_currentState == UserManager::DISCONNECTED)
-        ui->labelMessage->setText(trUtf8("Click on %1 to save parameters.").arg("<b>" + ui->pushConnect->text() + "</b>"));
+        ui->labelMessage->setText(tr("Click on %1 to save parameters.").arg("<b>" + ui->pushConnect->text() + "</b>"));
     _fakePassword = false;
 }
 
 void ConfigSectionRepository::on_pushDirectory_clicked()
 {
-    QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Select the destination directory"),
+    QString qDir = QFileDialog::getExistingDirectory(this, tr("Select the destination directory"),
                                                      ui->lineDownloadDirectory->text());
     if (!qDir.isEmpty())
     {

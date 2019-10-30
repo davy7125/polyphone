@@ -60,7 +60,7 @@ void FilterFlow::initialize(bool singleSelection, QString firstElementText)
     }
 
     // Add the element "All"
-    this->addElement(firstElementText.isEmpty() ? trUtf8("All") : firstElementText, -1, true);
+    this->addElement(firstElementText.isEmpty() ? tr("All") : firstElementText, -1, true);
 }
 
 void FilterFlow::addElement(QString text, int id, bool selected)

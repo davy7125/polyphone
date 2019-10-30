@@ -70,13 +70,13 @@ void InputParserSf3::processInternal(QString fileName, SoundfontManager * sm, bo
                 delete sf2Input;
             }
             else
-                error = trUtf8("Error during the sf3 => sf2 conversion");
+                error = tr("Error during the sf3 => sf2 conversion");
 
             fo.close();
         }
         else
-            error = trUtf8("Cannot create file \"%1\"").arg(tempFilePath);
+            error = tr("Cannot create file \"%1\"").arg(tempFilePath);
     }
     else
-        error = trUtf8("Cannot read file \"%1\"").arg(fileName);
+        error = tr("Cannot read file \"%1\"").arg(fileName);
 }

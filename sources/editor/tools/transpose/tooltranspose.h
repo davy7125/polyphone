@@ -42,7 +42,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Fast editing");
+        return tr("Fast editing");
     }
 
     /// Internal identifier
@@ -60,7 +60,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Transpose");
+        return tr("Transpose");
     }
 
     /// Get the warning to display after the tool is run

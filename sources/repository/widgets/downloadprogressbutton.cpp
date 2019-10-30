@@ -42,7 +42,7 @@ DownloadProgressButton::DownloadProgressButton(QWidget * parent) : QToolButton(p
                                            ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.5).name() +
                          ";margin: 10px 45px; height: 1px}");
     _menu->addSeparator();
-    QAction * clearDownloadsAction = _menu->addAction(trUtf8("Clear completed downloads"));
+    QAction * clearDownloadsAction = _menu->addAction(tr("Clear completed downloads"));
     connect(clearDownloadsAction, SIGNAL(triggered()), this, SLOT(clearCompletedDownloads()));
     this->setMenu(_menu);
 }

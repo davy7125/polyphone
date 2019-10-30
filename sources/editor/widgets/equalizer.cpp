@@ -141,9 +141,9 @@ void Equalizer::on_pushEgaliser_clicked()
 
     sm->endEditing("equalizer");
     ui->checkEqualizerPreview->setChecked(false);
-    QMessageBox::information(this, trUtf8("Information"), processedSampleNumber == 1 ?
-                                 trUtf8("Equalization successfully applied on 1 sample.") :
-                                 trUtf8("Equalization successfully applied on %1 samples.").arg(processedSampleNumber));
+    QMessageBox::information(this, tr("Information"), processedSampleNumber == 1 ?
+                                 tr("Equalization successfully applied on 1 sample.") :
+                                 tr("Equalization successfully applied on %1 samples.").arg(processedSampleNumber));
 }
 
 void Equalizer::loadEQ()

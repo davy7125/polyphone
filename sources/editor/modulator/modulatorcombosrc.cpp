@@ -61,7 +61,7 @@ void ModulatorComboSrc::initialize(EltID id, bool source1)
         // Add "Linked"
         this->insertSeparator(this->count());
         this->addItem("");
-        setLink(false, trUtf8("Link"));
+        setLink(false, tr("Link"));
     }
     this->blockSignals(false);
 
@@ -90,10 +90,10 @@ void ModulatorComboSrc::loadValue()
         QList<int> linkMods = getAssociatedMods(_id);
         QString linkText;
         if (linkMods.empty())
-            linkText = trUtf8("Link (invalid)");
+            linkText = tr("Link (invalid)");
         else
         {
-            linkText = trUtf8("Modulator") + ":";
+            linkText = tr("Modulator") + ":";
             for (int i = 0; i < linkMods.count(); i++)
                 linkText += (i > 0 ? ", #" : " #") + QString::number(linkMods[i]);
         }

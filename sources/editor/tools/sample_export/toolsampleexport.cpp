@@ -38,7 +38,7 @@ void ToolSampleExport::beforeProcess(IdList ids)
 
     // Directory in which the samples will be exported
     _dirPath = QFileDialog::getExistingDirectory(
-                QApplication::activeWindow(), trUtf8("Choose a destination folder"),
+                QApplication::activeWindow(), tr("Choose a destination folder"),
                 ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SAMPLE));
     if (!_dirPath.isEmpty())
     {

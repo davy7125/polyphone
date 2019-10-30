@@ -45,7 +45,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Clean up");
+        return tr("Clean up");
     }
 
     /// Internal identifier
@@ -66,7 +66,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Remove unused elements");
+        return tr("Remove unused elements");
     }
 
 private:

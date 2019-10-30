@@ -173,7 +173,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
         {
             QString name = sm->getQstr(id, champ_name);
             if (name.isEmpty())
-                fileNames << trUtf8("untitled");
+                fileNames << tr("untitled");
             else
                 fileNames << sm->getQstr(id, champ_name);
         }
@@ -183,23 +183,23 @@ void MainWindow::closeEvent(QCloseEvent *event)
     {
         QMessageBox msgBox(this);
         msgBox.setIcon(QMessageBox::Warning);
-        msgBox.setWindowTitle(trUtf8("Warning"));
-        msgBox.setText("<b>" + trUtf8("Save before exiting?") + "</b>");
+        msgBox.setWindowTitle(tr("Warning"));
+        msgBox.setText("<b>" + tr("Save before exiting?") + "</b>");
         if (fileNames.count() > 1)
         {
-            QString txt = trUtf8("The following files have been modified:") + "<ul>";
+            QString txt = tr("The following files have been modified:") + "<ul>";
             foreach (QString filename, fileNames)
                 txt += "<li>" + filename + "</li>";
             txt += "</ul>";
             msgBox.setInformativeText(txt);
         }
         else
-            msgBox.setInformativeText(trUtf8("File \"%1\" has been modified.").arg(fileNames[0]));
+            msgBox.setInformativeText(tr("File \"%1\" has been modified.").arg(fileNames[0]));
 
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        msgBox.button(QMessageBox::Save)->setText(trUtf8("&Save"));
-        msgBox.button(QMessageBox::Cancel)->setText(trUtf8("&Cancel"));
-        msgBox.button(QMessageBox::Discard)->setText(trUtf8("Do&n't save"));
+        msgBox.button(QMessageBox::Save)->setText(tr("&Save"));
+        msgBox.button(QMessageBox::Cancel)->setText(tr("&Cancel"));
+        msgBox.button(QMessageBox::Discard)->setText(tr("Do&n't save"));
         msgBox.button(QMessageBox::Save)->setIcon(QIcon::fromTheme("filesave"));
         msgBox.setDefaultButton(QMessageBox::Save);
         switch (msgBox.exec())
@@ -243,12 +243,12 @@ void MainWindow::recentSf2Changed()
 
 void MainWindow::on_pushButtonDocumentation_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/" + trUtf8("en/documentation", "path for the documentation online")));
+    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/" + tr("en/documentation", "path for the documentation online")));
 }
 
 void MainWindow::on_pushButtonForum_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/" + trUtf8("en/forum", "path for the forum")));
+    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/" + tr("en/forum", "path for the forum")));
 }
 
 void MainWindow::on_pushButtonSettings_clicked()
@@ -271,7 +271,7 @@ void MainWindow::on_pushButtonSoundfonts_clicked()
 void MainWindow::on_pushButtonOpen_clicked()
 {
     // Ouverture de fichiers
-    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Opening files"),
+    QStringList strList = QFileDialog::getOpenFileNames(this, tr("Opening files"),
                                                         ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SOUNDFONT),
                                                         InputFactory::getFileFilter());
     openFiles(strList.join('|'));

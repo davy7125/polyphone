@@ -37,7 +37,7 @@ AbstractOutput::AbstractOutput() : QObject(),
     _sm(nullptr),
     _fileName(""),
     _isSuccess(false),
-    _error(trUtf8("not processed yet")),
+    _error(tr("not processed yet")),
     _sf2Index(-1)
 {
     connect(_futureWatcher, SIGNAL(finished()), this, SIGNAL(finished()), Qt::QueuedConnection);

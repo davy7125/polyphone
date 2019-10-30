@@ -178,7 +178,7 @@ void GraphicsWave::paintEvent(QPaintEvent *event)
         font.setPointSize(12);
         painter.setFont(font);
         painter.drawText(0, 0, this->width(), this->height(),
-                         Qt::AlignCenter | Qt::AlignHCenter, trUtf8("Multiple selection"));
+                         Qt::AlignCenter | Qt::AlignHCenter, tr("Multiple selection"));
         return;
     }
 

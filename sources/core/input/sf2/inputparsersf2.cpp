@@ -45,14 +45,14 @@ void InputParserSf2::processInternal(QString fileName, SoundfontManager * sm, bo
     if (!fi.exists())
     {
         success = false;
-        error = trUtf8("Cannot find file \"%1\".").arg(fileName);
+        error = tr("Cannot find file \"%1\".").arg(fileName);
         return;
     }
 
     if (!fi.open(QIODevice::ReadOnly))
     {
         success = false;
-        error = trUtf8("Access denied for reading file \"%1\".").arg(fileName);
+        error = tr("Access denied for reading file \"%1\".").arg(fileName);
         return;
     }
 

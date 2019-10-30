@@ -42,7 +42,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Modulators");
+        return tr("Modulators");
     }
 
     /// Internal identifier
@@ -57,7 +57,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Override a default modulator");
+        return tr("Override a default modulator");
     }
 };
 

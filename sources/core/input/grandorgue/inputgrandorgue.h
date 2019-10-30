@@ -32,7 +32,7 @@ class InputGrandOrgue : public AbstractInput
 {
 public:
     /// Description of the file type to open
-    QString getInputDescription() override { return QObject::trUtf8("GrandOrgue sample sets"); }
+    QString getInputDescription() override { return QObject::tr("GrandOrgue sample sets"); }
 
     /// Extension of the file type to open
     QString getInputExtension() override { return "organ"; }

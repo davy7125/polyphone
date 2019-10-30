@@ -57,7 +57,7 @@ void ToolMixtureCreation::runInternal(SoundfontManager * sm, QWidget * parent, I
     EltID idInstSmpl(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
     if (sm->getSiblings(idInstSmpl).empty())
     {
-        _warning = trUtf8("The instrument contains no samples.");
+        _warning = tr("The instrument contains no samples.");
         finished(true);
         return;
     }

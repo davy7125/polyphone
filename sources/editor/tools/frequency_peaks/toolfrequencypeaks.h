@@ -42,7 +42,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Analyze");
+        return tr("Analyze");
     }
 
     /// Internal identifier
@@ -57,7 +57,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Show peak frequencies");
+        return tr("Show peak frequencies");
     }
 
     /// Return true if the tool can be used on the specified ids

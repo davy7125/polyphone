@@ -131,7 +131,7 @@ void ModulatorComboDest::loadValue()
                 this->insertSeparator(this->count());
                 separatorInserted = true;
             }
-            this->addItem(trUtf8("Modulator") + ": #" + QString::number(_listIndex.count()));
+            this->addItem(tr("Modulator") + ": #" + QString::number(_listIndex.count()));
         }
     }
 
@@ -160,7 +160,7 @@ AttributeType ModulatorComboDest::getCurrentAttribute()
 
 void ModulatorComboDest::selectIndex(int index)
 {
-    int iVal = this->findText(trUtf8("Modulator") + ": #" + QString::number(index + 1));
+    int iVal = this->findText(tr("Modulator") + ": #" + QString::number(index + 1));
     if (iVal != -1)
         this->setCurrentIndex(iVal);
     else

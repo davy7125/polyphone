@@ -32,7 +32,7 @@ class InputSfz : public AbstractInput
 {
 public:
     /// Description of the file type to open
-    QString getInputDescription() override { return QObject::trUtf8("Sfz files"); }
+    QString getInputDescription() override { return QObject::tr("Sfz files"); }
 
     /// Extension of the file type to open
     QString getInputExtension() override { return "sfz"; }

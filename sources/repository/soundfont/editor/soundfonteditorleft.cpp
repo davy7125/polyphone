@@ -43,39 +43,39 @@ SoundfontEditorLeft::SoundfontEditorLeft(QWidget *parent) :
     ui->lineWebsite->setColor(ContextManager::theme()->getColor(ThemeManager::ColorType::LIST_TEXT));
 
     // Possible licenses
-    ui->comboLicense->addItem(trUtf8("Select a license..."), "");
+    ui->comboLicense->addItem(tr("Select a license..."), "");
     QMap<QString, QString> licenses = RepositoryManager::getInstance()->getLicenseLabels();
     foreach (QString key, licenses.keys())
         ui->comboLicense->addItem(licenses[key], key);
 
     // Possible categories
-    ui->comboCategory->addItem(trUtf8("Select a category..."), -1);
+    ui->comboCategory->addItem(tr("Select a category..."), -1);
     QList<int> categories = RepositoryManager::getInstance()->getCategories();
     foreach (int category, categories)
         ui->comboCategory->addItem(RepositoryManager::getInstance()->getCategoryName(category), category);
 
     // Possible properties
-    ui->filterSampleSource->initialize(false, trUtf8("None"));
+    ui->filterSampleSource->initialize(false, tr("None"));
     QStringList properties = RepositoryManager::getInstance()->getProperties(SoundfontInformation::SAMPLE_SOURCE);
     foreach (QString property, properties)
         ui->filterSampleSource->addElement(property);
 
-    ui->filterTimbre->initialize(false, trUtf8("None"));
+    ui->filterTimbre->initialize(false, tr("None"));
     properties = RepositoryManager::getInstance()->getProperties(SoundfontInformation::TIMBRE);
     foreach (QString property, properties)
         ui->filterTimbre->addElement(property);
 
-    ui->filterArticulation->initialize(false, trUtf8("None"));
+    ui->filterArticulation->initialize(false, tr("None"));
     properties = RepositoryManager::getInstance()->getProperties(SoundfontInformation::ARTICULATION);
     foreach (QString property, properties)
         ui->filterArticulation->addElement(property);
 
-    ui->filterGenre->initialize(false, trUtf8("None"));
+    ui->filterGenre->initialize(false, tr("None"));
     properties = RepositoryManager::getInstance()->getProperties(SoundfontInformation::GENRE);
     foreach (QString property, properties)
         ui->filterGenre->addElement(property);
 
-    ui->filterMidiStandard->initialize(false, trUtf8("None"));
+    ui->filterMidiStandard->initialize(false, tr("None"));
     properties = RepositoryManager::getInstance()->getProperties(SoundfontInformation::MIDI_STANDARD);
     foreach (QString property, properties)
         ui->filterMidiStandard->addElement(property);

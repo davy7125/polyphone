@@ -47,7 +47,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Files");
+        return tr("Files");
     }
 
     /// Internal identifier
@@ -65,7 +65,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Wav export");
+        return tr("Wav export");
     }
 
 private:

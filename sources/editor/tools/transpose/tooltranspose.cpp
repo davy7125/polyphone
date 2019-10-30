@@ -156,7 +156,7 @@ QString ToolTranspose::getWarning()
 
     if (!_elementsInError.empty())
     {
-        txt = trUtf8("An instrument comprising no samples is not compatible with this tool:");
+        txt = tr("An instrument comprising no samples is not compatible with this tool:");
         txt += "<ul>";
         foreach (QString element, _elementsInError)
             txt += "<li>" + element + "</li>";

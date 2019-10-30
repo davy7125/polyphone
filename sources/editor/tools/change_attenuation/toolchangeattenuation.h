@@ -43,7 +43,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Fast editing");
+        return tr("Fast editing");
     }
 
     /// Internal identifier
@@ -61,7 +61,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Change attenuations");
+        return tr("Change attenuations");
     }
 
 private:

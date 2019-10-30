@@ -69,15 +69,15 @@ void DialogCreateElements::initialize(IdList ids)
         if (ids.count() == 1)
         {
             ui->stackedWidget->setCurrentIndex(1);
-            ui->labelOneChoice->setText(trUtf8("Create an instrument comprising the sample %1?")
+            ui->labelOneChoice->setText(tr("Create an instrument comprising the sample %1?")
                                         .arg("<b>" + SoundfontManager::getInstance()->getQstr(ids[0], champ_name) + "</b>"));
         }
         else
         {
             ui->stackedWidget->setCurrentIndex(0);
-            ui->labelChoice->setText(trUtf8("Create an instrument"));
-            ui->radioOnePerElement->setText(trUtf8("for each sample"));
-            ui->radioOnlyOne->setText(trUtf8("comprising the %1 samples").arg(ids.count()));
+            ui->labelChoice->setText(tr("Create an instrument"));
+            ui->radioOnePerElement->setText(tr("for each sample"));
+            ui->radioOnlyOne->setText(tr("comprising the %1 samples").arg(ids.count()));
         }
     }
     else
@@ -85,15 +85,15 @@ void DialogCreateElements::initialize(IdList ids)
         if (ids.count() == 1)
         {
             ui->stackedWidget->setCurrentIndex(1);
-            ui->labelOneChoice->setText(trUtf8("Create a preset comprising the instrument %1?")
+            ui->labelOneChoice->setText(tr("Create a preset comprising the instrument %1?")
                                         .arg("<b>" + SoundfontManager::getInstance()->getQstr(ids[0], champ_name) + "</b>"));
         }
         else
         {
             ui->stackedWidget->setCurrentIndex(0);
-            ui->labelChoice->setText(trUtf8("Create a preset"));
-            ui->radioOnePerElement->setText(trUtf8("for each instrument"));
-            ui->radioOnlyOne->setText(trUtf8("comprising the %1 instruments").arg(ids.count()));
+            ui->labelChoice->setText(tr("Create a preset"));
+            ui->radioOnePerElement->setText(tr("for each instrument"));
+            ui->radioOnlyOne->setText(tr("comprising the %1 instruments").arg(ids.count()));
         }
     }
 

@@ -44,7 +44,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Stereo samples");
+        return tr("Stereo samples");
     }
 
     /// Internal identifier
@@ -62,7 +62,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Balance adjustement");
+        return tr("Balance adjustement");
     }
 
     /// Get the warning to display after the tool is run

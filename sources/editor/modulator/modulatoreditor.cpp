@@ -148,14 +148,14 @@ void ModulatorEditor::setIds(IdList ids, QList<AttributeType> attributes)
         // Shouldn't happen
         _currentId.typeElement = elementUnknown;
         ui->stackedWidget->setCurrentIndex(0);
-        ui->labelModSummary->setText("<b>" + trUtf8("No modulators") + "</b>");
+        ui->labelModSummary->setText("<b>" + tr("No modulators") + "</b>");
         ui->labelModSummary->setStyleSheet("QLabel{color:" + _mixedColor.name() + ";}");
     }
     else if (ids.count() > 1)
     {
         _currentId.typeElement = elementUnknown;
         ui->stackedWidget->setCurrentIndex(1);
-        ui->labelModSummary->setText("<b>" + trUtf8("Select a single division to display the modulator list") + "</b>");
+        ui->labelModSummary->setText("<b>" + tr("Select a single division to display the modulator list") + "</b>");
         ui->labelModSummary->setStyleSheet("QLabel{color:" + _mixedColor.name() + ";}");
     }
     else
@@ -246,16 +246,16 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes, bool keep
     QString summary;
     if (modTargets.count() == 0)
     {
-        summary = "<b>" + trUtf8("No modulators") + "</b>";
+        summary = "<b>" + tr("No modulators") + "</b>";
         ui->labelModSummary->setStyleSheet("QLabel{color:" + _mixedColor.name() + ";}");
     }
     else
     {
         summary = "<b>";
         if (modCount == 1)
-            summary += trUtf8("1 modulator:", "singular form of modulator");
+            summary += tr("1 modulator:", "singular form of modulator");
         else
-            summary += trUtf8("%1 modulators:", "plural form of modulator").arg(modCount);
+            summary += tr("%1 modulators:", "plural form of modulator").arg(modCount);
         summary += "</b> ";
         for (int i = 0; i < modTargets.count(); i++)
             summary += (i > 0 ? ", " : "") + modTargets[i];
@@ -341,14 +341,14 @@ void ModulatorEditor::updateButtons(bool withSelection)
 {
     if (withSelection)
     {
-        ui->pushClone->setToolTip(trUtf8("Duplicate the selection toward..."));
-        ui->pushCopy->setToolTip(trUtf8("Copy the selected modulators"));
+        ui->pushClone->setToolTip(tr("Duplicate the selection toward..."));
+        ui->pushCopy->setToolTip(tr("Copy the selected modulators"));
         ui->pushDelete->setEnabled(true);
     }
     else
     {
-        ui->pushClone->setToolTip(trUtf8("Duplicate modulators toward..."));
-        ui->pushCopy->setToolTip(trUtf8("Copy all modulators"));
+        ui->pushClone->setToolTip(tr("Duplicate modulators toward..."));
+        ui->pushCopy->setToolTip(tr("Copy all modulators"));
         ui->pushDelete->setEnabled(false);
     }
 }
@@ -625,7 +625,7 @@ void ModulatorEditor::pasteMod(EltID id, QList<ModulatorData> modulators)
         for (int i = 0; i < modulators.size(); i++)
         {
             champTmp = static_cast<AttributeType>(modulators[i].destOper);
-            QString warnQStr = trUtf8("Forbidden action:") + " ";
+            QString warnQStr = tr("Forbidden action:") + " ";
             if (champTmp == champ_startAddrsOffset ||
                     champTmp == champ_startAddrsCoarseOffset ||
                     champTmp == champ_startloopAddrsOffset ||
@@ -635,8 +635,8 @@ void ModulatorEditor::pasteMod(EltID id, QList<ModulatorData> modulators)
                     champTmp == champ_endloopAddrsOffset ||
                     champTmp == champ_endloopAddrsCoarseOffset)
             {
-                QMessageBox::warning(this, trUtf8("Warning"), warnQStr +
-                                     trUtf8("offsets cannot be modulated in a preset."));
+                QMessageBox::warning(this, tr("Warning"), warnQStr +
+                                     tr("offsets cannot be modulated in a preset."));
                 return;
             }
             else if (champTmp == champ_keynum || champTmp == champ_velocity ||
@@ -644,8 +644,8 @@ void ModulatorEditor::pasteMod(EltID id, QList<ModulatorData> modulators)
                      champTmp == champ_exclusiveClass ||
                      champTmp == champ_overridingRootKey)
             {
-                QMessageBox::warning(this, trUtf8("Warning"), warnQStr +
-                                     trUtf8("%1 cannot be modulated in a preset.").arg("<b>" + Attribute::getDescription(champTmp, true) + "</b>"));
+                QMessageBox::warning(this, tr("Warning"), warnQStr +
+                                     tr("%1 cannot be modulated in a preset.").arg("<b>" + Attribute::getDescription(champTmp, true) + "</b>"));
                 return;
             }
         }

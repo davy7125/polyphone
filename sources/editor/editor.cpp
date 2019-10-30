@@ -205,7 +205,7 @@ void Editor::updateTitleAndPath()
     SoundfontManager * sm = SoundfontManager::getInstance();
     QString title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_name);
     if (title.isEmpty())
-        title = trUtf8("Untitled");
+        title = tr("Untitled");
     emit(tabTitleChanged((sm->isEdited(_sf2Index) ? "*" : "") + title));
 
     // Path

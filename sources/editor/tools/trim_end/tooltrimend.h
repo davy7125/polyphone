@@ -43,7 +43,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Sample processing");
+        return tr("Sample processing");
     }
 
     /// Internal identifier
@@ -61,7 +61,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Trim to end of loop");
+        return tr("Trim to end of loop");
     }
 };
 

@@ -191,73 +191,73 @@ QString ConfManager::getMapping(int numOctave, Key key)
     case 0:
         switch (key)
         {
-        case KEY_C_LEFT:  txt = trUtf8("Z", "first key mapping for bottom left C"); break;
-        case KEY_C_SHARP: txt = trUtf8("S", "first key mapping for bottom C#"); break;
-        case KEY_D:       txt = trUtf8("X", "first key mapping for bottom D"); break;
-        case KEY_D_SHARP: txt = trUtf8("D", "first key mapping for bottom D#"); break;
-        case KEY_E:       txt = trUtf8("C", "first key mapping for bottom E"); break;
-        case KEY_F:       txt = trUtf8("V", "first key mapping for bottom F"); break;
-        case KEY_F_SHARP: txt = trUtf8("G", "first key mapping for bottom F#"); break;
-        case KEY_G:       txt = trUtf8("B", "first key mapping for bottom G"); break;
-        case KEY_G_SHARP: txt = trUtf8("H", "first key mapping for bottom G#"); break;
-        case KEY_A:       txt = trUtf8("N", "first key mapping for bottom A"); break;
-        case KEY_A_SHARP: txt = trUtf8("J", "first key mapping for bottom A#"); break;
-        case KEY_B:       txt = trUtf8("M", "first key mapping for bottom B"); break;
-        case KEY_C_RIGHT: txt = trUtf8(",", "first key mapping for bottom right C"); break;
+        case KEY_C_LEFT:  txt = tr("Z", "first key mapping for bottom left C"); break;
+        case KEY_C_SHARP: txt = tr("S", "first key mapping for bottom C#"); break;
+        case KEY_D:       txt = tr("X", "first key mapping for bottom D"); break;
+        case KEY_D_SHARP: txt = tr("D", "first key mapping for bottom D#"); break;
+        case KEY_E:       txt = tr("C", "first key mapping for bottom E"); break;
+        case KEY_F:       txt = tr("V", "first key mapping for bottom F"); break;
+        case KEY_F_SHARP: txt = tr("G", "first key mapping for bottom F#"); break;
+        case KEY_G:       txt = tr("B", "first key mapping for bottom G"); break;
+        case KEY_G_SHARP: txt = tr("H", "first key mapping for bottom G#"); break;
+        case KEY_A:       txt = tr("N", "first key mapping for bottom A"); break;
+        case KEY_A_SHARP: txt = tr("J", "first key mapping for bottom A#"); break;
+        case KEY_B:       txt = tr("M", "first key mapping for bottom B"); break;
+        case KEY_C_RIGHT: txt = tr(",", "first key mapping for bottom right C"); break;
         }
         break;
     case 1:
         switch (key)
         {
-        case KEY_C_LEFT:  txt = trUtf8("Q", "first key mapping for upper left C"); break;
-        case KEY_C_SHARP: txt = trUtf8("2", "first key mapping for upper C#"); break;
-        case KEY_D:       txt = trUtf8("W", "first key mapping for upper D"); break;
-        case KEY_D_SHARP: txt = trUtf8("3", "first key mapping for upper D#"); break;
-        case KEY_E:       txt = trUtf8("E", "first key mapping for upper E"); break;
-        case KEY_F:       txt = trUtf8("R", "first key mapping for upper F"); break;
-        case KEY_F_SHARP: txt = trUtf8("5", "first key mapping for upper F#"); break;
-        case KEY_G:       txt = trUtf8("T", "first key mapping for upper G"); break;
-        case KEY_G_SHARP: txt = trUtf8("6", "first key mapping for upper G#"); break;
-        case KEY_A:       txt = trUtf8("Y", "first key mapping for upper A"); break;
-        case KEY_A_SHARP: txt = trUtf8("7", "first key mapping for upper A#"); break;
-        case KEY_B:       txt = trUtf8("U", "first key mapping for upper B"); break;
-        case KEY_C_RIGHT: txt = trUtf8("I", "first key mapping for upper right C"); break;
+        case KEY_C_LEFT:  txt = tr("Q", "first key mapping for upper left C"); break;
+        case KEY_C_SHARP: txt = tr("2", "first key mapping for upper C#"); break;
+        case KEY_D:       txt = tr("W", "first key mapping for upper D"); break;
+        case KEY_D_SHARP: txt = tr("3", "first key mapping for upper D#"); break;
+        case KEY_E:       txt = tr("E", "first key mapping for upper E"); break;
+        case KEY_F:       txt = tr("R", "first key mapping for upper F"); break;
+        case KEY_F_SHARP: txt = tr("5", "first key mapping for upper F#"); break;
+        case KEY_G:       txt = tr("T", "first key mapping for upper G"); break;
+        case KEY_G_SHARP: txt = tr("6", "first key mapping for upper G#"); break;
+        case KEY_A:       txt = tr("Y", "first key mapping for upper A"); break;
+        case KEY_A_SHARP: txt = tr("7", "first key mapping for upper A#"); break;
+        case KEY_B:       txt = tr("U", "first key mapping for upper B"); break;
+        case KEY_C_RIGHT: txt = tr("I", "first key mapping for upper right C"); break;
         }
         break;
     case 2:
         switch (key)
         {
-        case KEY_C_LEFT:  txt = trUtf8("Shift+Z", "second key mapping for bottom left C"); break;
-        case KEY_C_SHARP: txt = trUtf8("Shift+S", "second key mapping for bottom C#"); break;
-        case KEY_D:       txt = trUtf8("Shift+X", "second key mapping for bottom D"); break;
-        case KEY_D_SHARP: txt = trUtf8("Shift+D", "second key mapping for bottom D#"); break;
-        case KEY_E:       txt = trUtf8("Shift+C", "second key mapping for bottom E"); break;
-        case KEY_F:       txt = trUtf8("Shift+V", "second key mapping for bottom F"); break;
-        case KEY_F_SHARP: txt = trUtf8("Shift+G", "second key mapping for bottom F#"); break;
-        case KEY_G:       txt = trUtf8("Shift+B", "second key mapping for bottom G"); break;
-        case KEY_G_SHARP: txt = trUtf8("Shift+H", "second key mapping for bottom G#"); break;
-        case KEY_A:       txt = trUtf8("Shift+N", "second key mapping for bottom A"); break;
-        case KEY_A_SHARP: txt = trUtf8("Shift+J", "second key mapping for bottom A#"); break;
-        case KEY_B:       txt = trUtf8("Shift+M", "second key mapping for bottom B"); break;
-        case KEY_C_RIGHT: txt = trUtf8("Shift+<", "second key mapping for bottom right C"); break;
+        case KEY_C_LEFT:  txt = tr("Shift+Z", "second key mapping for bottom left C"); break;
+        case KEY_C_SHARP: txt = tr("Shift+S", "second key mapping for bottom C#"); break;
+        case KEY_D:       txt = tr("Shift+X", "second key mapping for bottom D"); break;
+        case KEY_D_SHARP: txt = tr("Shift+D", "second key mapping for bottom D#"); break;
+        case KEY_E:       txt = tr("Shift+C", "second key mapping for bottom E"); break;
+        case KEY_F:       txt = tr("Shift+V", "second key mapping for bottom F"); break;
+        case KEY_F_SHARP: txt = tr("Shift+G", "second key mapping for bottom F#"); break;
+        case KEY_G:       txt = tr("Shift+B", "second key mapping for bottom G"); break;
+        case KEY_G_SHARP: txt = tr("Shift+H", "second key mapping for bottom G#"); break;
+        case KEY_A:       txt = tr("Shift+N", "second key mapping for bottom A"); break;
+        case KEY_A_SHARP: txt = tr("Shift+J", "second key mapping for bottom A#"); break;
+        case KEY_B:       txt = tr("Shift+M", "second key mapping for bottom B"); break;
+        case KEY_C_RIGHT: txt = tr("Shift+<", "second key mapping for bottom right C"); break;
         }
         break;
     case 3:
         switch (key)
         {
-        case KEY_C_LEFT:  txt = trUtf8("Shift+Q", "second key mapping for upper left C"); break;
-        case KEY_C_SHARP: txt = trUtf8("Shift+@", "second key mapping for upper C#"); break;
-        case KEY_D:       txt = trUtf8("Shift+W", "second key mapping for upper D"); break;
-        case KEY_D_SHARP: txt = trUtf8("Shift+#", "second key mapping for upper D#"); break;
-        case KEY_E:       txt = trUtf8("Shift+E", "second key mapping for upper E"); break;
-        case KEY_F:       txt = trUtf8("Shift+R", "second key mapping for upper F"); break;
-        case KEY_F_SHARP: txt = trUtf8("Shift+%", "second key mapping for upper F#"); break;
-        case KEY_G:       txt = trUtf8("Shift+T", "second key mapping for upper G"); break;
-        case KEY_G_SHARP: txt = trUtf8("Shift+^", "second key mapping for upper G#"); break;
-        case KEY_A:       txt = trUtf8("Shift+Y", "second key mapping for upper A"); break;
-        case KEY_A_SHARP: txt = trUtf8("Shift+&", "second key mapping for upper A#"); break;
-        case KEY_B:       txt = trUtf8("Shift+U", "second key mapping for upper B"); break;
-        case KEY_C_RIGHT: txt = trUtf8("Shift+I", "second key mapping for upper right C"); break;
+        case KEY_C_LEFT:  txt = tr("Shift+Q", "second key mapping for upper left C"); break;
+        case KEY_C_SHARP: txt = tr("Shift+@", "second key mapping for upper C#"); break;
+        case KEY_D:       txt = tr("Shift+W", "second key mapping for upper D"); break;
+        case KEY_D_SHARP: txt = tr("Shift+#", "second key mapping for upper D#"); break;
+        case KEY_E:       txt = tr("Shift+E", "second key mapping for upper E"); break;
+        case KEY_F:       txt = tr("Shift+R", "second key mapping for upper F"); break;
+        case KEY_F_SHARP: txt = tr("Shift+%", "second key mapping for upper F#"); break;
+        case KEY_G:       txt = tr("Shift+T", "second key mapping for upper G"); break;
+        case KEY_G_SHARP: txt = tr("Shift+^", "second key mapping for upper G#"); break;
+        case KEY_A:       txt = tr("Shift+Y", "second key mapping for upper A"); break;
+        case KEY_A_SHARP: txt = tr("Shift+&", "second key mapping for upper A#"); break;
+        case KEY_B:       txt = tr("Shift+U", "second key mapping for upper B"); break;
+        case KEY_C_RIGHT: txt = tr("Shift+I", "second key mapping for upper right C"); break;
         }
         break;
     default:

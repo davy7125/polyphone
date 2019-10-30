@@ -48,7 +48,7 @@ void ToolRelease_gui::updateInterface(AbstractToolParameters * parameters, IdLis
     ui->doubleDuree36->setValue(params->getBaseDuration());
     ui->doubleDivision->setValue(params->getEvolution());
     ui->doubleDeTune->setValue(params->getDetune());
-    ui->label->setText(trUtf8("Release time (key %1)").arg(ContextManager::keyName()->getKeyName(36)));
+    ui->label->setText(tr("Release time (key %1)").arg(ContextManager::keyName()->getKeyName(36)));
 }
 
 void ToolRelease_gui::saveParameters(AbstractToolParameters * parameters)

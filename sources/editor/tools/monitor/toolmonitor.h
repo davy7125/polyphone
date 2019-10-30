@@ -42,7 +42,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Analyze");
+        return tr("Analyze");
     }
 
     /// Internal identifier
@@ -54,7 +54,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Display parameters");
+        return tr("Display parameters");
     }
 
     /// Return true if the tool can be used on the specified ids

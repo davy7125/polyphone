@@ -29,21 +29,21 @@ PageOverviewPrst::PageOverviewPrst(QWidget * parent) : PageOverview(PAGE_PRST, e
 
 QString PageOverviewPrst::getTitle()
 {
-    return trUtf8("Presets");
+    return tr("Presets");
 }
 
 QStringList PageOverviewPrst::getHorizontalHeader()
 {
     QStringList hHeader;
-    hHeader << trUtf8("Bank - Preset")
-            << trUtf8("Instrument number")
-            << trUtf8("Parameter number")
-            << trUtf8("Modulator number")
-            << trUtf8("Max key range")
-            << trUtf8("Max velocity range")
-            << trUtf8("Attenuation")
-            << trUtf8("Chorus")
-            << trUtf8("Reverb");
+    hHeader << tr("Bank - Preset")
+            << tr("Instrument number")
+            << tr("Parameter number")
+            << tr("Modulator number")
+            << tr("Max key range")
+            << tr("Max velocity range")
+            << tr("Attenuation")
+            << tr("Chorus")
+            << tr("Reverb");
     return hHeader;
 }
 

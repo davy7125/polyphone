@@ -61,36 +61,36 @@ QString KeyNameManager::getKeyName(unsigned int keyNum, bool forceTexte, bool wi
     {
         switch (keyNum % 12)
         {
-        case 0:  keyName = QObject::trUtf8("C", "key name");  break;
-        case 1:  keyName = QObject::trUtf8("D♭", "key name"); break;
-        case 2:  keyName = QObject::trUtf8("D", "key name");  break;
-        case 3:  keyName = QObject::trUtf8("E♭", "key name"); break;
-        case 4:  keyName = QObject::trUtf8("E", "key name");  break;
-        case 5:  keyName = QObject::trUtf8("F", "key name");  break;
-        case 6:  keyName = QObject::trUtf8("G♭", "key name"); break;
-        case 7:  keyName = QObject::trUtf8("G", "key name");  break;
-        case 8:  keyName = QObject::trUtf8("A♭", "key name"); break;
-        case 9:  keyName = QObject::trUtf8("A", "key name");  break;
-        case 10: keyName = QObject::trUtf8("B♭", "key name"); break;
-        case 11: keyName = QObject::trUtf8("B", "key name");  break;
+        case 0:  keyName = QObject::tr("C", "key name");  break;
+        case 1:  keyName = QObject::tr("D♭", "key name"); break;
+        case 2:  keyName = QObject::tr("D", "key name");  break;
+        case 3:  keyName = QObject::tr("E♭", "key name"); break;
+        case 4:  keyName = QObject::tr("E", "key name");  break;
+        case 5:  keyName = QObject::tr("F", "key name");  break;
+        case 6:  keyName = QObject::tr("G♭", "key name"); break;
+        case 7:  keyName = QObject::tr("G", "key name");  break;
+        case 8:  keyName = QObject::tr("A♭", "key name"); break;
+        case 9:  keyName = QObject::tr("A", "key name");  break;
+        case 10: keyName = QObject::tr("B♭", "key name"); break;
+        case 11: keyName = QObject::tr("B", "key name");  break;
         }
     }
     else
     {
         switch (keyNum % 12)
         {
-        case 0:  keyName = QObject::trUtf8("C", "key name");  break;
-        case 1:  keyName = QObject::trUtf8("C♯", "key name"); break;
-        case 2:  keyName = QObject::trUtf8("D", "key name");  break;
-        case 3:  keyName = QObject::trUtf8("D♯", "key name"); break;
-        case 4:  keyName = QObject::trUtf8("E", "key name");  break;
-        case 5:  keyName = QObject::trUtf8("F", "key name");  break;
-        case 6:  keyName = QObject::trUtf8("F♯", "key name"); break;
-        case 7:  keyName = QObject::trUtf8("G", "key name");  break;
-        case 8:  keyName = QObject::trUtf8("G♯", "key name"); break;
-        case 9:  keyName = QObject::trUtf8("A", "key name");  break;
-        case 10: keyName = QObject::trUtf8("A♯", "key name"); break;
-        case 11: keyName = QObject::trUtf8("B", "key name");  break;
+        case 0:  keyName = QObject::tr("C", "key name");  break;
+        case 1:  keyName = QObject::tr("C♯", "key name"); break;
+        case 2:  keyName = QObject::tr("D", "key name");  break;
+        case 3:  keyName = QObject::tr("D♯", "key name"); break;
+        case 4:  keyName = QObject::tr("E", "key name");  break;
+        case 5:  keyName = QObject::tr("F", "key name");  break;
+        case 6:  keyName = QObject::tr("F♯", "key name"); break;
+        case 7:  keyName = QObject::tr("G", "key name");  break;
+        case 8:  keyName = QObject::tr("G♯", "key name"); break;
+        case 9:  keyName = QObject::tr("A", "key name");  break;
+        case 10: keyName = QObject::tr("A♯", "key name"); break;
+        case 11: keyName = QObject::tr("B", "key name");  break;
         }
     }
 

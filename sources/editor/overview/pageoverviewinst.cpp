@@ -29,22 +29,22 @@ PageOverviewInst::PageOverviewInst(QWidget * parent) : PageOverview(PAGE_INST, e
 
 QString PageOverviewInst::getTitle()
 {
-    return trUtf8("Instruments");
+    return tr("Instruments");
 }
 
 QStringList PageOverviewInst::getHorizontalHeader()
 {
     QStringList hHeader;
-    hHeader << trUtf8("Used")
-            << trUtf8("Sample number")
-            << trUtf8("Parameter number")
-            << trUtf8("Modulator number")
-            << trUtf8("Max key range")
-            << trUtf8("Max velocity range")
-            << trUtf8("Attenuation")
-            << trUtf8("Loop playback")
-            << trUtf8("Chorus")
-            << trUtf8("Reverb");
+    hHeader << tr("Used")
+            << tr("Sample number")
+            << tr("Parameter number")
+            << tr("Modulator number")
+            << tr("Max key range")
+            << tr("Max velocity range")
+            << tr("Attenuation")
+            << tr("Loop playback")
+            << tr("Chorus")
+            << tr("Reverb");
     return hHeader;
 }
 
@@ -97,7 +97,7 @@ void PageOverviewInst::getInformation(EltID id, QStringList &info, QStringList &
 
 QString PageOverviewInst::isUsed(EltID id)
 {
-    return _usedInst.contains(id.indexElt) ? trUtf8("yes") : trUtf8("no");
+    return _usedInst.contains(id.indexElt) ? tr("yes") : tr("no");
 }
 
 QString PageOverviewInst::getSampleNumber(EltID id)
@@ -281,17 +281,17 @@ QString PageOverviewInst::getLoop(EltID id)
         switch (modes[0])
         {
         case 0:
-            return trUtf8("no");
+            return tr("no");
         case 1:
-            return trUtf8("yes");
+            return tr("yes");
         case 3:
-            return trUtf8("yes, to the end");
+            return tr("yes, to the end");
         }
 
         return "?";
     }
     else
-        return trUtf8("several modes", "speaking about loop modes");
+        return tr("several modes", "speaking about loop modes");
 }
 
 QString PageOverviewInst::getChorus(EltID id)

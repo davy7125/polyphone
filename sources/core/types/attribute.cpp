@@ -464,7 +464,7 @@ QString Attribute::toString(AttributeType champ, bool isPrst, AttributeValue sto
         break;
     case champ_sfModTransOper:
         if (storedValue.wValue == 2)
-            result = ", " + trUtf8("absolute value");
+            result = ", " + tr("absolute value");
         break;
     case champ_indexMod:
         result = QString::number(storedValue.wValue + 1);
@@ -524,8 +524,8 @@ AttributeValue Attribute::fromString(AttributeType champ, bool isPrst, QString s
             val2 = val3;
         }
 
-        value.rValue.byLo = val1;
-        value.rValue.byHi = val2;
+        value.rValue.byLo = static_cast<quint8>(val1);
+        value.rValue.byHi = static_cast<quint8>(val2);
         value = limit(champ, value, isPrst);
     }; break;
     case champ_chPitchCorrection: case champ_byOriginalPitch:
@@ -575,190 +575,190 @@ AttributeValue Attribute::fromString(AttributeType champ, bool isPrst, QString s
 
 QString Attribute::getDescription(AttributeType champ, bool isPrst)
 {
-    QString result = trUtf8("unknown");
+    QString result = tr("unknown");
 
     switch (champ)
     {
     case champ_startAddrsOffset:
-        result = trUtf8("Sample start offset");
+        result = tr("Sample start offset");
         break;
     case champ_startAddrsCoarseOffset:
-        result = trUtf8("Sample start offset (× 32768)");
+        result = tr("Sample start offset (× 32768)");
         break;
     case champ_endAddrsOffset:
-        result = trUtf8("Sample end offset");
+        result = tr("Sample end offset");
         break;
     case champ_endAddrsCoarseOffset:
-        result = trUtf8("Sample end offset (× 32768)");
+        result = tr("Sample end offset (× 32768)");
         break;
     case champ_startloopAddrsOffset:
-        result = trUtf8("Loop start offset");
+        result = tr("Loop start offset");
         break;
     case champ_startloopAddrsCoarseOffset:
-        result = trUtf8("Loop start offset (× 32768)");
+        result = tr("Loop start offset (× 32768)");
         break;
     case champ_endloopAddrsOffset:
-        result = trUtf8("Loop end offset");
+        result = tr("Loop end offset");
         break;
     case champ_endloopAddrsCoarseOffset:
-        result = trUtf8("Loop end offset (× 32768)");
+        result = tr("Loop end offset (× 32768)");
         break;
     case champ_modLfoToPitch:
-        result = trUtf8("Mod LFO → pitch (c)");
+        result = tr("Mod LFO → pitch (c)");
         break;
     case champ_vibLfoToPitch:
-        result = trUtf8("Vib LFO → pitch (c)");
+        result = tr("Vib LFO → pitch (c)");
         break;
     case champ_modEnvToPitch:
-        result = trUtf8("Mod env → pitch (c)");
+        result = tr("Mod env → pitch (c)");
         break;
     case champ_initialFilterFc:
-        result = isPrst ? trUtf8("Filter, cutoff (×)") :
-                          trUtf8("Filter, cutoff (Hz)");
+        result = isPrst ? tr("Filter, cutoff (×)") :
+                          tr("Filter, cutoff (Hz)");
         break;
     case champ_initialFilterQ:
-        result = trUtf8("Filter, resonance (dB)");
+        result = tr("Filter, resonance (dB)");
         break;
     case champ_modLfoToFilterFc:
-        result = trUtf8("Mod LFO → filter (c)");
+        result = tr("Mod LFO → filter (c)");
         break;
     case champ_modEnvToFilterFc:
-        result = trUtf8("Mod env → filter (c)");
+        result = tr("Mod env → filter (c)");
         break;
     case champ_modLfoToVolume:
-        result = trUtf8("Mod LFO → volume (dB)");
+        result = tr("Mod LFO → volume (dB)");
         break;
     case champ_chorusEffectsSend:
-        result = trUtf8("Chorus (%)");
+        result = tr("Chorus (%)");
         break;
     case champ_reverbEffectsSend:
-        result = trUtf8("Reverb (%)");
+        result = tr("Reverb (%)");
         break;
     case champ_pan:
-        result = isPrst ? trUtf8("Pan [-100;100]") :
-                          trUtf8("Pan [-50;50]");
+        result = isPrst ? tr("Pan [-100;100]") :
+                          tr("Pan [-50;50]");
         break;
     case champ_delayModLFO:
-        result = isPrst ? trUtf8("Mod LFO delay (×)") :
-                          trUtf8("Mod LFO delay (s)");
+        result = isPrst ? tr("Mod LFO delay (×)") :
+                          tr("Mod LFO delay (s)");
         break;
     case champ_freqModLFO:
-        result = isPrst ? trUtf8("Mod LFO freq (×)") :
-                          trUtf8("Mod LFO freq (Hz)");
+        result = isPrst ? tr("Mod LFO freq (×)") :
+                          tr("Mod LFO freq (Hz)");
         break;
     case champ_delayVibLFO:
-        result = isPrst ? trUtf8("Vib LFO delay (×)") :
-                          trUtf8("Vib LFO delay (s)");
+        result = isPrst ? tr("Vib LFO delay (×)") :
+                          tr("Vib LFO delay (s)");
         break;
     case champ_freqVibLFO:
-        result = isPrst ? trUtf8("Vib LFO freq (×)") :
-                          trUtf8("Vib LFO freq (Hz)");
+        result = isPrst ? tr("Vib LFO freq (×)") :
+                          tr("Vib LFO freq (Hz)");
         break;
     case champ_delayModEnv:
-        result = isPrst ? trUtf8("Mod env delay (×)") :
-                          trUtf8("Mod env delay (s)");
+        result = isPrst ? tr("Mod env delay (×)") :
+                          tr("Mod env delay (s)");
         break;
     case champ_attackModEnv:
-        result = isPrst ? trUtf8("Mod env attack (×)") :
-                          trUtf8("Mod env attack (s)");
+        result = isPrst ? tr("Mod env attack (×)") :
+                          tr("Mod env attack (s)");
         break;
     case champ_holdModEnv:
-        result = isPrst ? trUtf8("Mod env hold (×)") :
-                          trUtf8("Mod env hold (s)");
+        result = isPrst ? tr("Mod env hold (×)") :
+                          tr("Mod env hold (s)");
         break;
     case champ_decayModEnv:
-        result = isPrst ? trUtf8("Mod env decay (×)") :
-                          trUtf8("Mod env decay (s)");
+        result = isPrst ? tr("Mod env decay (×)") :
+                          tr("Mod env decay (s)");
         break;
     case champ_sustainModEnv:
-        result = trUtf8("Mod env sustain (%)");
+        result = tr("Mod env sustain (%)");
         break;
     case champ_releaseModEnv:
-        result = isPrst ? trUtf8("Mod env release (×)") :
-                          trUtf8("Mod env release (s)");
+        result = isPrst ? tr("Mod env release (×)") :
+                          tr("Mod env release (s)");
         break;
     case champ_keynumToModEnvHold:
-        result = trUtf8("Key → Mod env hold (c)");
+        result = tr("Key → Mod env hold (c)");
         break;
     case champ_keynumToModEnvDecay:
-        result = trUtf8("Key → Mod env decay (c)");
+        result = tr("Key → Mod env decay (c)");
         break;
     case champ_delayVolEnv:
-        result = isPrst ? trUtf8("Vol env delay (×)") :
-                          trUtf8("Vol env delay (s)");
+        result = isPrst ? tr("Vol env delay (×)") :
+                          tr("Vol env delay (s)");
         break;
     case champ_attackVolEnv:
-        result = isPrst ? trUtf8("Vol env attack (×)") :
-                          trUtf8("Vol env attack (s)");
+        result = isPrst ? tr("Vol env attack (×)") :
+                          tr("Vol env attack (s)");
         break;
     case champ_holdVolEnv:
-        result = isPrst ? trUtf8("Vol env hold (×)") :
-                          trUtf8("Vol env hold (s)");
+        result = isPrst ? tr("Vol env hold (×)") :
+                          tr("Vol env hold (s)");
         break;
     case champ_decayVolEnv:
-        result = isPrst ? trUtf8("Vol env decay (×)") :
-                          trUtf8("Vol env decay (s)");
+        result = isPrst ? tr("Vol env decay (×)") :
+                          tr("Vol env decay (s)");
         break;
     case champ_sustainVolEnv:
-        result = trUtf8("Vol env sustain (dB)");
+        result = tr("Vol env sustain (dB)");
         break;
     case champ_releaseVolEnv:
-        result = isPrst ? trUtf8("Vol env release (×)") :
-                          trUtf8("Vol env release (s)");
+        result = isPrst ? tr("Vol env release (×)") :
+                          tr("Vol env release (s)");
         break;
     case champ_keynumToVolEnvHold:
-        result = trUtf8("Key → Vol env hold (c)");
+        result = tr("Key → Vol env hold (c)");
         break;
     case champ_keynumToVolEnvDecay:
-        result = trUtf8("Key → Vol env decay (c)");
+        result = tr("Key → Vol env decay (c)");
         break;
     case champ_keyRange:
-        result = trUtf8("Key range");
+        result = tr("Key range");
         break;
     case champ_velRange:
-        result = trUtf8("Velocity range");
+        result = tr("Velocity range");
         break;
     case champ_keynum:
-        result = trUtf8("Fixed key");
+        result = tr("Fixed key");
         break;
     case champ_velocity:
-        result = trUtf8("Fixed velocity");
+        result = tr("Fixed velocity");
         break;
     case champ_initialAttenuation:
-        result = trUtf8("Attenuation (dB)");
+        result = tr("Attenuation (dB)");
         break;
     case champ_coarseTune:
-        result = trUtf8("Tuning (semi-tones)");
+        result = tr("Tuning (semi-tones)");
         break;
     case champ_fineTune:
-        result = trUtf8("Tuning (cents)");
+        result = tr("Tuning (cents)");
         break;
     case champ_sampleModes:
-        result = trUtf8("Loop playback");
+        result = tr("Loop playback");
         break;
     case champ_scaleTuning:
-        result = trUtf8("Scale tuning");
+        result = tr("Scale tuning");
         break;
     case champ_exclusiveClass:
-        result = trUtf8("Exclusive class");
+        result = tr("Exclusive class");
         break;
     case champ_overridingRootKey:
-        result = trUtf8("Root key");
+        result = tr("Root key");
         break;
     case champ_byOriginalPitch:
-        result = trUtf8("Sample root key");
+        result = tr("Sample root key");
         break;
     case champ_dwLength:
-        result = trUtf8("Sample length");
+        result = tr("Sample length");
         break;
     case champ_dwStartLoop:
-        result = trUtf8("Loop start");
+        result = tr("Loop start");
         break;
     case champ_dwEndLoop:
-        result = trUtf8("Loop end");
+        result = tr("Loop end");
         break;
     case champ_chPitchCorrection:
-        result = trUtf8("Pitch correction (cents)");
+        result = tr("Pitch correction (cents)");
         break;
     default:
         result = "...";

@@ -42,7 +42,7 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
         if (i != sf2Index && QString::compare(sm->getQstr(EltID(elementSf2, i), champ_filenameInitial), fileName, Qt::CaseSensitive) == 0)
         {
             success = false;
-            error = trUtf8("Please close file before overriding it.");
+            error = tr("Please close file before overriding it.");
             return;
         }
     }
@@ -70,7 +70,7 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
         // Delete the initial file and
         if (!QFile(fileName).remove())
         {
-            error = trUtf8("Couldn't delete file \"%1\".").arg(fileName);
+            error = tr("Couldn't delete file \"%1\".").arg(fileName);
             success = false;
             sm->clearNewEditing();
             sm->markAsSaved(sf2Index);
@@ -80,7 +80,7 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
         // Rename the tmp file
         if (!QFile(filenameTmp).rename(fileName))
         {
-            error = trUtf8("Couldn't rename file \"%1\".").arg(filenameTmp);
+            error = tr("Couldn't rename file \"%1\".").arg(filenameTmp);
             success = false;
             sm->clearNewEditing();
             sm->markAsSaved(sf2Index);
@@ -310,7 +310,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     if (!fi.open(QIODevice::WriteOnly))
     {
         success = false;
-        error = trUtf8("Cannot create file \"%1\"").arg(fileName);
+        error = tr("Cannot create file \"%1\"").arg(fileName);
         return;
     }
 

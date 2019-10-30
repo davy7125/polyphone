@@ -81,8 +81,8 @@ QString ToolDivisionDuplication::getWarning()
 
     if (!_elementsInError.empty())
     {
-        txt = _isInst ? trUtf8("An instrument comprising no samples is not compatible with this tool:") :
-                          trUtf8("A preset comprising no instruments is not compatible with this tool:");
+        txt = _isInst ? tr("An instrument comprising no samples is not compatible with this tool:") :
+                          tr("A preset comprising no instruments is not compatible with this tool:");
         txt += "<ul>";
         foreach (QString element, _elementsInError)
             txt += "<li>" + element + "</li>";

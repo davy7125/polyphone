@@ -74,80 +74,80 @@ RepositoryManager::~RepositoryManager()
 void RepositoryManager::fillPropertyTranslation()
 {
     // SAMPLE SOURCE
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["acoustic"] = trUtf8("acoustic instrument");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["electric"] = trUtf8("electronic instrument");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["records"] = trUtf8("various records");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["additive"] = trUtf8("additive synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["subtractive"] = trUtf8("subtrative synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["wavetable"] = trUtf8("wavetable synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["model"] = trUtf8("model synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["fm"] = trUtf8("FM synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["vector"] = trUtf8("vector synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["granular"] = trUtf8("granular synthesis");
-    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["other_synthesis"] = trUtf8("other synthesis");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["acoustic"] = tr("acoustic instrument");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["electric"] = tr("electronic instrument");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["records"] = tr("various records");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["additive"] = tr("additive synthesis");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["subtractive"] = tr("subtrative synthesis");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["wavetable"] = tr("wavetable synthesis");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["model"] = tr("model synthesis");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["fm"] = tr("FM synthesis");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["vector"] = tr("vector synthesis");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["granular"] = tr("granular synthesis");
+    _propertyTranslations[SoundfontInformation::Property::SAMPLE_SOURCE]["other_synthesis"] = tr("other synthesis");
 
     // TIMBRE
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["high"] = trUtf8("high");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["low"] = trUtf8("low");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["distorted"] = trUtf8("distorted");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["clean"] = trUtf8("clean");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["bright"] = trUtf8("bright");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["dark"] = trUtf8("dark");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["warm"] = trUtf8("warm");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["cold"] = trUtf8("cold");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["fat"] = trUtf8("fat");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["thin"] = trUtf8("thin");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["hard"] = trUtf8("hard");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["soft"] = trUtf8("soft");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["muted"] = trUtf8("muted");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["detuned"] = trUtf8("detuned");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["dissonant"] = trUtf8("dissonant");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["noisy"] = trUtf8("noisy");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["metallic"] = trUtf8("metallic");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["wooden"] = trUtf8("wooden");
-    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["exotic"] = trUtf8("exotic");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["high"] = tr("high");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["low"] = tr("low");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["distorted"] = tr("distorted");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["clean"] = tr("clean");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["bright"] = tr("bright");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["dark"] = tr("dark");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["warm"] = tr("warm");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["cold"] = tr("cold");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["fat"] = tr("fat");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["thin"] = tr("thin");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["hard"] = tr("hard");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["soft"] = tr("soft");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["muted"] = tr("muted");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["detuned"] = tr("detuned");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["dissonant"] = tr("dissonant");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["noisy"] = tr("noisy");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["metallic"] = tr("metallic");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["wooden"] = tr("wooden");
+    _propertyTranslations[SoundfontInformation::Property::TIMBRE]["exotic"] = tr("exotic");
 
     // ARTICULATION
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["slow_attack"] = trUtf8("slow attack");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["decaying"] = trUtf8("decaying");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["sustained"] = trUtf8("sustained");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["long_release"] = trUtf8("long release");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["percussive"] = trUtf8("percussive");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["long_evolving"] = trUtf8("long / evolving");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["pulsating"] = trUtf8("pulsating");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["echoing"] = trUtf8("echoing");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["pad"] = trUtf8("pad");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["lead"] = trUtf8("lead");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["monophonic"] = trUtf8("monophonic");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["chord"] = trUtf8("chord");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["glide_pitch_mod"] = trUtf8("glide / pitch mod");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["sweep_filter_mod"] = trUtf8("sweep / filter mod");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["arpeggiated"] = trUtf8("arpeggiated");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["expressive"] = trUtf8("expressive");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["complex"] = trUtf8("complex");
-    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["randomized"] = trUtf8("randomized");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["slow_attack"] = tr("slow attack");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["decaying"] = tr("decaying");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["sustained"] = tr("sustained");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["long_release"] = tr("long release");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["percussive"] = tr("percussive");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["long_evolving"] = tr("long / evolving");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["pulsating"] = tr("pulsating");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["echoing"] = tr("echoing");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["pad"] = tr("pad");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["lead"] = tr("lead");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["monophonic"] = tr("monophonic");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["chord"] = tr("chord");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["glide_pitch_mod"] = tr("glide / pitch mod");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["sweep_filter_mod"] = tr("sweep / filter mod");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["arpeggiated"] = tr("arpeggiated");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["expressive"] = tr("expressive");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["complex"] = tr("complex");
+    _propertyTranslations[SoundfontInformation::Property::ARTICULATION]["randomized"] = tr("randomized");
 
     // GENRE
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["classic"] = trUtf8("classic music");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["electronic"] = trUtf8("electronic music");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["trance"] = trUtf8("trance");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["ambient"] = trUtf8("ambient music");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["ambiant"] = trUtf8("ambient music");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["house"] = trUtf8("house");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["techno_electro"] = trUtf8("techno / electro");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["dnb_breaks"] = trUtf8("D'n'B / breaks");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["industrial"] = trUtf8("industrial");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["experimental"] = trUtf8("experimental");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["funk_soul"] = trUtf8("funk / soul");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["reggae_dub"] = trUtf8("reggae / dub");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["latin_afro_cuban"] = trUtf8("latin / afro-cuban");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["pop_rock"] = trUtf8("pop / rock");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["metal"] = trUtf8("metal music");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["hiphop_rap"] = trUtf8("hiphop / rap");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["jazz_swing"] = trUtf8("jazz / swing");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["folk_country"] = trUtf8("folk / country");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["ethnic_world"] = trUtf8("ethnic / world");
-    _propertyTranslations[SoundfontInformation::Property::GENRE]["ethnic / world"] = trUtf8("ethnic / world");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["classic"] = tr("classic music");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["electronic"] = tr("electronic music");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["trance"] = tr("trance");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["ambient"] = tr("ambient music");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["ambiant"] = tr("ambient music");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["house"] = tr("house");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["techno_electro"] = tr("techno / electro");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["dnb_breaks"] = tr("D'n'B / breaks");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["industrial"] = tr("industrial");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["experimental"] = tr("experimental");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["funk_soul"] = tr("funk / soul");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["reggae_dub"] = tr("reggae / dub");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["latin_afro_cuban"] = tr("latin / afro-cuban");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["pop_rock"] = tr("pop / rock");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["metal"] = tr("metal music");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["hiphop_rap"] = tr("hiphop / rap");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["jazz_swing"] = tr("jazz / swing");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["folk_country"] = tr("folk / country");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["ethnic_world"] = tr("ethnic / world");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["ethnic / world"] = tr("ethnic / world");
 
     // No translations for MIDI STANDARDS
     _propertyTranslations[SoundfontInformation::Property::MIDI_STANDARD]["no_standards"] = "no standards"; // Shouldn't be used
@@ -164,13 +164,13 @@ void RepositoryManager::fillPropertyTranslation()
 void RepositoryManager::fillLicenseLabelAndLink()
 {
     // Labels
-    _licenseLabels["public_domain"] = trUtf8("public domain");
-    _licenseLabels["give_credit"] = trUtf8("give credit");
-    _licenseLabels["give_credit_no_restrictions"] = trUtf8("give credit, don't distribute with more restrictions");
-    _licenseLabels["modifications_forbidden"] = trUtf8("don't distribute a modified version");
-    _licenseLabels["personal_use_and_share"] = trUtf8("personal use");
-    _licenseLabels["personal_use_and_share_no_restrictions"] = trUtf8("personal use, don't distribute with more restrictions");
-    _licenseLabels["personal_use_only"] = trUtf8("personal use, don't distribute a modified version");
+    _licenseLabels["public_domain"] = tr("public domain");
+    _licenseLabels["give_credit"] = tr("give credit");
+    _licenseLabels["give_credit_no_restrictions"] = tr("give credit, don't distribute with more restrictions");
+    _licenseLabels["modifications_forbidden"] = tr("don't distribute a modified version");
+    _licenseLabels["personal_use_and_share"] = tr("personal use");
+    _licenseLabels["personal_use_and_share_no_restrictions"] = tr("personal use, don't distribute with more restrictions");
+    _licenseLabels["personal_use_only"] = tr("personal use, don't distribute a modified version");
 
     // Links
     QString language = ContextManager::configuration()->getValue(
@@ -381,68 +381,68 @@ QString RepositoryManager::getCategoryName(int id)
     // Try to find a translated categories
     switch (id) {
     case 10:
-        result = trUtf8("piano");
+        result = tr("piano");
         break;
     case 11:
-        result = trUtf8("organ");
+        result = tr("organ");
         break;
     case 12:
-        result = trUtf8("synthesizer");
+        result = tr("synthesizer");
         break;
     case 13:
-        result = trUtf8("harpsichord");
+        result = tr("harpsichord");
         break;
     case 14:
-        result = trUtf8("guitar");
+        result = tr("guitar");
         break;
     case 15:
-        result = trUtf8("bass");
+        result = tr("bass");
         break;
     case 16:
-        result = trUtf8("plucked strings");
+        result = tr("plucked strings");
         break;
     case 17:
-        result = trUtf8("bowed strings");
+        result = tr("bowed strings");
         break;
     case 18:
-        result = trUtf8("flute");
+        result = tr("flute");
         break;
     case 19:
-        result = trUtf8("reed");
+        result = tr("reed");
         break;
     case 20:
-        result = trUtf8("brass");
+        result = tr("brass");
         break;
     case 21:
-        result = trUtf8("vocal");
+        result = tr("vocal");
         break;
     case 22:
-        result = trUtf8("unpitched percussion");
+        result = tr("unpitched percussion");
         break;
     case 23:
-        result = trUtf8("melodic percussion");
+        result = tr("melodic percussion");
         break;
     case 24:
-        result = trUtf8("sound effect");
+        result = tr("sound effect");
         break;
     case 25:
-        result = trUtf8("soundscape");
+        result = tr("soundscape");
         break;
     case 26:
-        result = trUtf8("loop / rythm");
+        result = tr("loop / rythm");
         break;
     case 27:
-        result = trUtf8("instrument set");
+        result = tr("instrument set");
         break;
     case 28:
-        result = trUtf8("unclassifiable");
+        result = tr("unclassifiable");
         break;
     default:
         // Search in the map
         if (_categoryNames.contains(id))
             result = _categoryNames[id];
         else
-            result = trUtf8("Category %1").arg(id);
+            result = tr("Category %1").arg(id);
         break;
     }
 
@@ -470,15 +470,15 @@ void RepositoryManager::openSoundfont(int soundfontId, bool daily)
         switch (UserManager::getInstance()->getConnectionState())
         {
         case UserManager::PENDING:
-            error = trUtf8("Please wait...");
+            error = tr("Please wait...");
             break;
         case UserManager::BANNED:
-            error = trUtf8("Your account has been banned.");
+            error = tr("Your account has been banned.");
             break;
         case UserManager::DISCONNECTED:
         case UserManager::CONNECTED:
         case UserManager::FAILED:
-            error = trUtf8("A Premium account allows you to browse and download all soundfonts available online.");
+            error = tr("A Premium account allows you to browse and download all soundfonts available online.");
             break;
         case UserManager::CONNECTED_PREMIUM:
             error = ""; // ok
@@ -487,7 +487,7 @@ void RepositoryManager::openSoundfont(int soundfontId, bool daily)
 
         if (!error.isEmpty())
         {
-            QMessageBox::warning(QApplication::activeWindow(), trUtf8("Warning"), error);
+            QMessageBox::warning(QApplication::activeWindow(), tr("Warning"), error);
             return;
         }
     }

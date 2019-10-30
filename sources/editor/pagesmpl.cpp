@@ -173,14 +173,14 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     ui->comboSampleRate->setCurrentIndex(sampleRateIndex);
     if (nombreElements == 1)
         ui->labelTaille->setText(QString::number(length) + " - " +
-                                 QString::number((double)length / sampleRate, 'f', 3) + trUtf8("s", "unit for seconds"));
+                                 QString::number((double)length / sampleRate, 'f', 3) + tr("s", "unit for seconds"));
     else
     {
         if (sampleRate > 0)
-            ui->labelTaille->setText(trUtf8("(min)", "minimum") + " " + QString::number(length) + " - " +
-                                     QString::number((double)length / sampleRate, 'f', 3) + trUtf8("s", "unit for seconds"));
+            ui->labelTaille->setText(tr("(min)", "minimum") + " " + QString::number(length) + " - " +
+                                     QString::number((double)length / sampleRate, 'f', 3) + tr("s", "unit for seconds"));
         else
-            ui->labelTaille->setText(trUtf8("(min)", "minimum") + " " + QString::number(length));
+            ui->labelTaille->setText(tr("(min)", "minimum") + " " + QString::number(length));
     }
     ui->spinStartLoop->blockSignals(true);
     ui->spinEndLoop->blockSignals(true);
@@ -255,7 +255,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     ui->comboLink->setEnabled(nombreElements == 1 && !ui->pushLecture->isChecked());
 
     // Types possibles et sélections
-    ui->comboType->addItem(trUtf8("mono", "opposite to stereo"));
+    ui->comboType->addItem(tr("mono", "opposite to stereo"));
     if (typeLink == monoSample || typeLink == RomMonoSample)
     {
         ui->comboType->setCurrentIndex(0);
@@ -265,9 +265,9 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     }
     else
     {
-        ui->comboType->addItem(trUtf8("right"));
-        ui->comboType->addItem(trUtf8("left"));
-        ui->comboType->addItem(trUtf8("link"));
+        ui->comboType->addItem(tr("right"));
+        ui->comboType->addItem(tr("left"));
+        ui->comboType->addItem(tr("link"));
         switch (typeLink)
         {
         case rightSample: case RomRightSample:
@@ -305,11 +305,11 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
         ui->widgetLinkedTo->initialize(id);
         int nbInst = ui->widgetLinkedTo->getLinkNumber();
         if (nbInst == 0)
-            ui->labelLinkedTo->setText(trUtf8("Sample not linked to an instrument yet."));
+            ui->labelLinkedTo->setText(tr("Sample not linked to an instrument yet."));
         else if (nbInst == 1)
-            ui->labelLinkedTo->setText(trUtf8("Sample linked to instrument:"));
+            ui->labelLinkedTo->setText(tr("Sample linked to instrument:"));
         else
-            ui->labelLinkedTo->setText(trUtf8("Sample linked to instruments:"));
+            ui->labelLinkedTo->setText(tr("Sample linked to instruments:"));
     }
 
     // Reprise de la lecture
@@ -508,8 +508,8 @@ void PageSmpl::on_pushFullLength_clicked()
         ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
 
     if (triggersMessage)
-        QMessageBox::information(this, trUtf8("Information"),
-                                 trUtf8("Change successfully applied to the different samples"));
+        QMessageBox::information(this, tr("Information"),
+                                 tr("Change successfully applied to the different samples"));
 }
 
 void PageSmpl::setRootKey()
@@ -638,7 +638,7 @@ void PageSmpl::setType(int index)
 
             // Mise à jour combobox
             ui->comboType->clear();
-            ui->comboType->addItem(trUtf8("mono", "opposite to stereo"));
+            ui->comboType->addItem(tr("mono", "opposite to stereo"));
             ui->comboLink->setCurrentIndex(0);
             ui->checkLectureLien->setEnabled(false);
             ui->checkLectureLien->setChecked(false);
@@ -776,10 +776,10 @@ void PageSmpl::setLinkedSmpl(int index)
 
             // Mise à jour combobox
             ui->comboType->clear();
-            ui->comboType->addItem(trUtf8("mono"));
-            ui->comboType->addItem(trUtf8("right"));
-            ui->comboType->addItem(trUtf8("left"));
-            ui->comboType->addItem(trUtf8("link"));
+            ui->comboType->addItem(tr("mono"));
+            ui->comboType->addItem(tr("right"));
+            ui->comboType->addItem(tr("left"));
+            ui->comboType->addItem(tr("link"));
             ui->comboType->setCurrentIndex(3);
         }
 
@@ -801,7 +801,7 @@ void PageSmpl::setLinkedSmpl(int index)
 
         // Mise à jour combobox
         ui->comboType->clear();
-        ui->comboType->addItem(trUtf8("mono"));
+        ui->comboType->addItem(tr("mono"));
         ui->comboLink->setCurrentIndex(0);
         ui->checkLectureLien->setEnabled(false);
         ui->checkLectureLien->setChecked(false);
@@ -1004,8 +1004,8 @@ void PageSmpl::on_pushAutoTune_clicked()
     _sf2->endEditing(getEditingSource() + ":update");
 
     if (triggersMessage)
-        QMessageBox::information(this, trUtf8("Information"),
-                                 trUtf8("Change successfully applied to the different samples"));
+        QMessageBox::information(this, tr("Information"),
+                                 tr("Change successfully applied to the different samples"));
 }
 
 void PageSmpl::autoTune(EltID id, int &pitch, int &correction)
@@ -1074,13 +1074,13 @@ void PageSmpl::updatePlayButton()
 {
     if (ui->pushLecture->isChecked())
     {
-        ui->pushLecture->setToolTip(trUtf8("Stop"));
+        ui->pushLecture->setToolTip(tr("Stop"));
         ui->pushLecture->setIcon(ContextManager::theme()->getColoredSvg(
                                      ":/icons/play.svg", QSize(36, 36), ThemeManager::HIGHLIGHTED_BACKGROUND));
     }
     else
     {
-        ui->pushLecture->setToolTip(trUtf8("Play"));
+        ui->pushLecture->setToolTip(tr("Play"));
         ui->pushLecture->setIcon(ContextManager::theme()->getColoredSvg(
                                      ":/icons/play.svg", QSize(36, 36), ThemeManager::WINDOW_TEXT));
     }
@@ -1093,11 +1093,11 @@ void PageSmpl::onCutOrdered(int start, int end)
 
     QMessageBox msgBox(this);
     msgBox.setIcon(QMessageBox::Warning);
-    msgBox.setWindowTitle(trUtf8("Warning"));
-    msgBox.setText(trUtf8("Are you sure to cut the sample from <b>%1</b> to <b>%2</b>?").arg(start).arg(end));
+    msgBox.setWindowTitle(tr("Warning"));
+    msgBox.setText(tr("Are you sure to cut the sample from <b>%1</b> to <b>%2</b>?").arg(start).arg(end));
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-    msgBox.button(QMessageBox::Yes)->setText(trUtf8("&Yes"));
-    msgBox.button(QMessageBox::No)->setText(trUtf8("&No"));
+    msgBox.button(QMessageBox::Yes)->setText(tr("&Yes"));
+    msgBox.button(QMessageBox::No)->setText(tr("&No"));
     msgBox.setDefaultButton(QMessageBox::No);
 
     if (msgBox.exec() == QMessageBox::No)

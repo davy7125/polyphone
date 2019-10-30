@@ -32,7 +32,7 @@ class InputSfArk : public AbstractInput
 {
 public:
     /// Description of the file type to open
-    QString getInputDescription() override { return QObject::trUtf8("sfArk archives"); }
+    QString getInputDescription() override { return QObject::tr("sfArk archives"); }
 
     /// Extension of the file type to open
     QString getInputExtension() override { return "sfArk"; }

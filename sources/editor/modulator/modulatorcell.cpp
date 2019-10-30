@@ -54,7 +54,7 @@ ModulatorCell::ModulatorCell(EltID id, QWidget *parent) :
             break;
         currentNumber++;
     }
-    ui->labelModNumber->setText(trUtf8("Modulator") + "<br/>#" + QString::number(currentNumber + 1));
+    ui->labelModNumber->setText(tr("Modulator") + "<br/>#" + QString::number(currentNumber + 1));
     ui->labelDetails->hide();
 
     // Comboboxes
@@ -95,7 +95,7 @@ ModulatorCell::ModulatorCell(ModulatorData modulatorData, QWidget * parent) :
     this->initializeStyle();
 
     // Load data
-    ui->labelModNumber->setText(trUtf8("Default mod.") + "<br/>#" + QString::number(modulatorData.index + 1));
+    ui->labelModNumber->setText(tr("Default mod.") + "<br/>#" + QString::number(modulatorData.index + 1));
     ui->labelDetails->hide();
     ui->spinAmount->setValue(modulatorData.amount);
     ui->comboSource1->initialize(modulatorData.srcOper);
@@ -145,16 +145,16 @@ void ModulatorCell::setOverwrittenBy(int otherModulator)
 {
     _overwrittenBy = true;
     setSelected(_isSelected);
-    ui->labelDetails->setText(trUtf8("overwritten by %1").arg(otherModulator + 1));
+    ui->labelDetails->setText(tr("overwritten by %1").arg(otherModulator + 1));
     ui->labelDetails->show();
 }
 
 void ModulatorCell::setOverridingDefault()
 {
     if (ui->spinAmount->value() == 0)
-        ui->labelDetails->setText(trUtf8("disabling\ndefault mod."));
+        ui->labelDetails->setText(tr("disabling\ndefault mod."));
     else
-        ui->labelDetails->setText(trUtf8("overriding\ndefault mod."));
+        ui->labelDetails->setText(tr("overriding\ndefault mod."));
     ui->labelDetails->show();
 }
 
@@ -347,7 +347,7 @@ void ModulatorCell::onOutputChanged(int dummy)
     case champ_modLfoToVolume:
     case champ_sustainVolEnv:
     case champ_initialAttenuation:
-        unit = trUtf8("dB");
+        unit = tr("dB");
         break;
     case champ_chorusEffectsSend:
     case champ_reverbEffectsSend:
@@ -355,10 +355,10 @@ void ModulatorCell::onOutputChanged(int dummy)
         unit = "%";
         break;
     case champ_coarseTune:
-        unit = trUtf8("semi-tones");
+        unit = tr("semi-tones");
         break;
     case champ_fineTune:
-        unit = trUtf8("cents", "hundredth of semi-tones");
+        unit = tr("cents", "hundredth of semi-tones");
         break;
     case champ_scaleTuning:
         unit = "cent / key";
@@ -367,9 +367,9 @@ void ModulatorCell::onOutputChanged(int dummy)
         break;
     }
 
-    ui->labelFinalRange->setText((isAddition ? trUtf8("Add from:") :
-                                               trUtf8("Multiply from:")) +
+    ui->labelFinalRange->setText((isAddition ? tr("Add from:") :
+                                               tr("Multiply from:")) +
                                  " " + QString::number(dMin) + " " + unit + "\n" +
-                                 trUtf8("To:") + " " + QString::number(dMax) + " " + unit);
+                                 tr("To:") + " " + QString::number(dMax) + " " + unit);
     this->repaint();
 }

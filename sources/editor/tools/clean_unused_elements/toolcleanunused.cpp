@@ -107,5 +107,5 @@ void ToolCleanUnused::process(SoundfontManager * sm, EltID id, AbstractToolParam
 
 QString ToolCleanUnused::getConfirmation()
 {
-    return trUtf8("%1 sample(s) and %2 instrument(s) have been deleted.").arg(_unusedSmpl).arg(_unusedInst);
+    return tr("%1 sample(s) and %2 instrument(s) have been deleted.").arg(_unusedSmpl).arg(_unusedInst);
 }

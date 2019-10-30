@@ -115,10 +115,10 @@ void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolP
     switch (QProcess::execute(program, arguments))
     {
     case -2:
-        _warning = trUtf8("Couldn't start the command.");
+        _warning = tr("Couldn't start the command.");
         break;
     case -1:
-        _warning = trUtf8("The execution of the command ended with an error.");
+        _warning = tr("The execution of the command ended with an error.");
         break;
     default:
     {

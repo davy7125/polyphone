@@ -95,7 +95,7 @@ void EnvelopEditor::on_pushVolume_clicked()
     {
         _isVolume = true;
         stopSignals(true);
-        ui->doubleSpinSustain->setSuffix(" " + trUtf8("dB", "unit for decibels"));
+        ui->doubleSpinSustain->setSuffix(" " + tr("dB", "unit for decibels"));
         ui->doubleSpinSustain->setMaximum(144);
         stopSignals(false);
         populate();
@@ -108,7 +108,7 @@ void EnvelopEditor::on_pushModulation_clicked()
     {
         _isVolume = false;
         stopSignals(true);
-        ui->doubleSpinSustain->setSuffix(trUtf8("%", "percentage"));
+        ui->doubleSpinSustain->setSuffix(tr("%", "percentage"));
         ui->doubleSpinSustain->setMaximum(100);
         stopSignals(false);
         populate();

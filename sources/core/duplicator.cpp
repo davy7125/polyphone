@@ -293,11 +293,11 @@ void Duplicator::copyGlobal(EltID idSource, EltID idDest)
         // Affichage warning
         QMessageBox msgBox(_parent);
         msgBox.setIcon(QMessageBox::Warning);
-        msgBox.setText("<b>" + trUtf8("Global parameters are already filled.") + "</b>");
-        msgBox.setInformativeText(trUtf8("The global division will not be copied."));
+        msgBox.setText("<b>" + tr("Global parameters are already filled.") + "</b>");
+        msgBox.setInformativeText(tr("The global division will not be copied."));
         msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::YesAll);
-        msgBox.button(QMessageBox::Yes)->setText(trUtf8("&Ok"));
-        msgBox.button(QMessageBox::YesAll)->setText(trUtf8("Ok, &disable this message"));
+        msgBox.button(QMessageBox::Yes)->setText(tr("&Ok"));
+        msgBox.button(QMessageBox::YesAll)->setText(tr("Ok, &disable this message"));
         msgBox.setDefaultButton(QMessageBox::Yes);
         if (msgBox.exec() == QMessageBox::YesAll)
             ContextManager::configuration()->setValue(ConfManager::SECTION_WARNINGS, "global_not_overwritten", false);
@@ -329,7 +329,7 @@ EltID Duplicator::copySmpl(EltID idSource, EltID idDest)
 
         // Remplacement ?
         if (_copieSmpl != REMPLACER_TOUT && _copieSmpl != IGNORER_TOUT && index != -1)
-            _copieSmpl = openDialog(trUtf8("The sample \"%1\" already exists.<br />Replace?").arg(nom.left(20)));
+            _copieSmpl = openDialog(tr("The sample \"%1\" already exists.<br />Replace?").arg(nom.left(20)));
     }
     if (index != -1 && _copieSmpl != DUPLIQUER_TOUT && _copieSmpl != DUPLIQUER)
     {
@@ -469,7 +469,7 @@ EltID Duplicator::copyInst(EltID idSource, EltID idDest, bool withSmpl)
 
         // Remplacement ?
         if (_copieInst != REMPLACER_TOUT && _copieInst != IGNORER_TOUT && (index != -1))
-            _copieInst = openDialog(trUtf8("The instrument \"%1\" already exists.<br />Replace?").arg(nom.left(20)));
+            _copieInst = openDialog(tr("The instrument \"%1\" already exists.<br />Replace?").arg(nom.left(20)));
     }
     if (index != -1 && _copieInst != DUPLIQUER_TOUT && _copieInst != DUPLIQUER)
     {
@@ -564,7 +564,7 @@ EltID Duplicator::copyPrst(EltID idSource, EltID idDest, bool withInst)
 
         // Remplacement ?
         if (_copiePrst != REMPLACER_TOUT && _copiePrst != IGNORER_TOUT && (index != -1))
-            _copiePrst = openDialog(trUtf8("The preset \"%1\" already exists.<br/>Replace?").arg(nom.left(20)));
+            _copiePrst = openDialog(tr("The preset \"%1\" already exists.<br/>Replace?").arg(nom.left(20)));
     }
     if (index != -1 && _copiePrst != DUPLIQUER_TOUT && _copiePrst != DUPLIQUER)
     {
@@ -586,8 +586,8 @@ EltID Duplicator::copyPrst(EltID idSource, EltID idDest, bool withInst)
             // Aucun preset disponible
             if (!_presetFull)
             {
-                QMessageBox::warning(_parent, trUtf8("Warning"),
-                                     trUtf8("No preset available."));
+                QMessageBox::warning(_parent, tr("Warning"),
+                                     tr("No preset available."));
                 _presetFull = true;
             }
             idDest.indexElt = -1;
@@ -785,12 +785,12 @@ Duplicator::EtatMessage Duplicator::openDialog(QString question)
     msgBox.setInformativeText("");
     msgBox.setStandardButtons(QMessageBox::YesAll | QMessageBox::Yes | QMessageBox::SaveAll | QMessageBox::Save |
                               QMessageBox::NoAll | QMessageBox::No);
-    msgBox.button(QMessageBox::Yes)->setText(trUtf8("&Replace"));
-    msgBox.button(QMessageBox::YesAll)->setText(trUtf8("R&eplace all"));
-    msgBox.button(QMessageBox::Save)->setText(trUtf8("&Duplicate"));
-    msgBox.button(QMessageBox::SaveAll)->setText(trUtf8("D&uplicate all"));
-    msgBox.button(QMessageBox::No)->setText(trUtf8("&Ignore"));
-    msgBox.button(QMessageBox::NoAll)->setText(trUtf8("I&gnore all"));
+    msgBox.button(QMessageBox::Yes)->setText(tr("&Replace"));
+    msgBox.button(QMessageBox::YesAll)->setText(tr("R&eplace all"));
+    msgBox.button(QMessageBox::Save)->setText(tr("&Duplicate"));
+    msgBox.button(QMessageBox::SaveAll)->setText(tr("D&uplicate all"));
+    msgBox.button(QMessageBox::No)->setText(tr("&Ignore"));
+    msgBox.button(QMessageBox::NoAll)->setText(tr("I&gnore all"));
     msgBox.setDefaultButton(QMessageBox::YesAll);
     EtatMessage reponse = IGNORER_TOUT;
     switch (msgBox.exec())

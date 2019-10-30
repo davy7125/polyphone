@@ -279,12 +279,12 @@ void ControllerArea::updateInput4Display()
 {
     if (_ledState)
     {
-        ui->labelValue4->setText(trUtf8("on"));
+        ui->labelValue4->setText(tr("on"));
         ui->push4->setIcon(_ledOn);
     }
     else
     {
-        ui->labelValue4->setText(trUtf8("off"));
+        ui->labelValue4->setText(tr("off"));
         ui->push4->setIcon(_ledOff);
     }
 }
