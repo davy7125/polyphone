@@ -40,38 +40,38 @@ public:
     static QByteArray bpsConversion(QByteArray baData, quint16 wBpsInit, quint16 wBpsFinal, bool bigEndian = false);
     static void bpsConversion(char *cDest, const char *cFrom, qint32 size, quint16 wBpsInit, quint16 wBpsFinal, bool bigEndian = false);
     static QByteArray from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, quint16 wBps, bool bigEndian = false);
-    static Complex * fromBaToComplex(QByteArray baData, quint16 wBps, unsigned long &size);
-    static Complex * fromBaToComplex(QVector<float> fData, unsigned long &size);
+    static Complex * fromBaToComplex(QByteArray baData, quint16 wBps, quint32 &size);
+    static Complex * fromBaToComplex(QVector<float> fData, quint32 &size);
     static QByteArray fromComplexToBa(Complex * cpxData, int size, quint16 wBps);
     static QVector<float> getFourierTransform(QVector<float> input);
     static QByteArray normaliser(QByteArray baData, double dVal, quint16 wBps, double &db);
     static QByteArray multiplier(QByteArray baData, double dMult, quint16 wBps, double &db);
-    static QByteArray enleveBlanc(QByteArray baData, double seuil, quint16 wBps, quint32 &pos);
-    static void regimePermanent(QByteArray baData, quint32 dwSmplRate, quint16 wBps, qint32 &posStart, qint32 &posEnd);
-    static void regimePermanent(QVector<float> fData, quint32 dwSmplRate, qint32 &posStart, qint32 &posEnd);
+    static QByteArray enleveBlanc(QByteArray baData, float seuil, quint16 wBps, quint32 &pos);
+    static void regimePermanent(QByteArray baData, quint32 dwSmplRate, quint16 wBps, quint32 &posStart, quint32 &posEnd);
+    static void regimePermanent(QVector<float> fData, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd);
     static QVector<float> correlation(const float *fData, quint32 size, quint32 dwSmplRate, quint32 fMin, quint32 fMax, quint32 &dMin);
-    static float correlation(const float *fData1, const float *fData2, int length, float *bestValue);
-    static QByteArray bouclage(QByteArray baData, quint32 dwSmplRate, qint32 &loopStart, qint32 &loopEnd, quint16 wBps);
-    static QList<int> findMins(QVector<float> vectData, int maxNb, double minFrac = 0);
-    static QList<quint32> findMax(QVector<float> vectData, int maxNb, double minFrac = 0);
+    static float correlation(const float *fData1, const float *fData2, quint32 length, float *bestValue);
+    static QByteArray loop(QByteArray baData, quint32 dwSmplRate, quint32 &loopStart, quint32 &loopEnd, quint16 wBps);
+    static QList<quint32> findMins(QVector<float> vectData, int maxNb, float minFrac = 0);
+    static QList<quint32> findMax(QVector<float> vectData, int maxNb, float minFrac = 0);
     static qint32 max(QByteArray baData, quint16 wBps);
     static double moyenneCarre(QByteArray baData, quint16 wBps);
     static int lastLettersToRemove(QString str1, QString str2);
 
 private:
-    static void FFT_calculate(Complex * x, long N /* must be a power of 2 */,
-            Complex * X, Complex * scratch, Complex * twiddles);
+    static void FFT_calculate(Complex * x, quint32 N /* must be a power of 2 */,
+                              Complex * X, Complex * scratch, Complex * twiddles);
     static double moyenne(QByteArray baData, quint16 wBps);
     static double gainEQ(double freq, int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10);
     static float mediane(QVector<float> data);
     static qint64 somme(QByteArray baData, quint16 wBps);
     static qint64 sommeCarre(QByteArray baData, quint16 wBps);
-    static void regimePermanent(QVector<float> data, quint32 dwSmplRate, qint32 &posStart, qint32 &posEnd, int nbOK, double coef);
+    static void regimePermanent(QVector<float> data, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd, quint32 nbOK, float coef);
     static double sinc(double x);
     static void KBDWindow(double* window, int size, double alpha);
     static double BesselI0(double x);
-    static Complex * FFT(Complex * x, int N); // N must be a power of 2
-    static Complex * IFFT(Complex * x, int N); // N must be a power of 2
+    static Complex * FFT(Complex * x, quint32 N); // N must be a power of 2
+    static Complex * IFFT(Complex * x, quint32 N); // N must be a power of 2
 };
 
 #endif // SAMPLEUTILS_H

@@ -39,11 +39,11 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
     // Get data, sample rate, start and end loop
     QByteArray baData = sm->getData(id, champ_sampleDataFull24);
     quint32 dwSmplRate = sm->get(id, champ_dwSampleRate).dwValue;
-    qint32 startLoop = sm->get(id, champ_dwStartLoop).dwValue;
-    qint32 endLoop = sm->get(id, champ_dwEndLoop).dwValue;
+    quint32 startLoop = sm->get(id, champ_dwStartLoop).dwValue;
+    quint32 endLoop = sm->get(id, champ_dwEndLoop).dwValue;
 
     // Loop
-    baData = SampleUtils::bouclage(baData, dwSmplRate, startLoop, endLoop, 24);
+    baData = SampleUtils::loop(baData, dwSmplRate, startLoop, endLoop, 24);
     if (!baData.isEmpty())
     {
         // Update data, length, startloop and endloop
@@ -53,7 +53,7 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
         sm->set(id, champ_dwStartLoop, val);
         val.dwValue = endLoop;
         sm->set(id, champ_dwEndLoop, val);
-        val.dwValue = baData.size() / 3;
+        val.dwValue = static_cast<quint32>(baData.size()) / 3;
         sm->set(id, champ_dwLength, val);
     }
     else

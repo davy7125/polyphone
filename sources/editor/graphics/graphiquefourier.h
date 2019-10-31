@@ -40,8 +40,8 @@ public:
     void setBackgroundColor(QColor color);
     void setData(QByteArray baData, quint32 dwSmplRate);
     void setSampleName(QString name) { _name = name; }
-    void setPos(qint32 posStart, qint32 posEnd, bool withReplot = true);
-    void setPos(qint32 posStart, qint32 posEnd, QList<double> &frequencies, QList<double> &factors,
+    void setPos(quint32 posStart, quint32 posEnd, bool withReplot = true);
+    void setPos(quint32 posStart, quint32 posEnd, QList<double> &frequencies, QList<double> &factors,
                 QList<int> &pitch, QList<int> &deltas, bool withReplot);
     void getEstimation(int &pitch, int &correction);
 

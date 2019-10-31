@@ -33,23 +33,23 @@ class ToolChords;
 class RunnableChordCreator: public QRunnable
 {
 public:
-    RunnableChordCreator(ToolChords * tool, EltID idInst, ChordInfo ci, int key, int minKey, bool loop, bool stereo, int side);
-    ~RunnableChordCreator();
+    RunnableChordCreator(ToolChords * tool, EltID idInst, ChordInfo ci, quint32 key, quint32 minKey, bool loop, bool stereo, int side);
+    ~RunnableChordCreator() override;
     void run() override;
 
 private:
     EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
-    QByteArray getSampleData(EltID idSmpl, qint32 nbRead);
+    QByteArray getSampleData(EltID idSmpl, quint32 nbRead);
     void addSampleData(QByteArray &baData1, QByteArray &baData2, double mult);
-    static QMap<int, int> getChordKeys(int key, ChordInfo& chordInfo);
+    static QMap<int, int> getChordKeys(quint32 key, ChordInfo& chordInfo);
 
     static double SAMPLE_DURATION; // In seconds
-    static int SAMPLE_RATE; // In samples per second
+    static quint32 SAMPLE_RATE; // In samples per second
 
     ToolChords * _tool;
     EltID _idInst;
     ChordInfo _ci;
-    int _key, _minKey;
+    quint32 _key, _minKey;
     bool _loop;
     bool _stereo;
     int _side;

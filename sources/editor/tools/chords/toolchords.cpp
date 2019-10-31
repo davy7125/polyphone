@@ -30,7 +30,8 @@
 ToolChords::ToolChords() : AbstractTool(new ToolChords_parameters(), new ToolChords_gui()),
     _waitingDialog(nullptr)
 {
-    connect(this, SIGNAL(elementProcessed(EltID, int, int, double)), this, SLOT(onElementProcessed(EltID, int, int, double)), Qt::QueuedConnection);
+    connect(this, SIGNAL(elementProcessed(EltID, quint32, quint32, double)),
+            this, SLOT(onElementProcessed(EltID, quint32, quint32, double)), Qt::QueuedConnection);
 }
 
 ToolChords::~ToolChords()
@@ -75,7 +76,7 @@ void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids
     }
 
     // Number of keys per sample
-    int keyNumber = 1;
+    quint32 keyNumber = 1;
     switch (params->getDensityType())
     {
     case 0: keyNumber = 1; break;
@@ -88,7 +89,7 @@ void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids
     // Compute the number of steps
     _currentStep = 0;
     RangesType range = this->getInstrumentRange(idInst);
-    _steps = qAbs(range.byHi - range.byLo) / keyNumber + 1;
+    _steps = static_cast<quint32>(qAbs(range.byHi - range.byLo)) / keyNumber + 1;
     _stereoSamples = params->getStereoSample();
     if (_stereoSamples)
         _steps *= 2;
@@ -101,26 +102,27 @@ void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids
     connect(_waitingDialog, SIGNAL(canceled()), this, SLOT(onCancel()));
 
     // For each division
-    int noteStart2 = range.byLo;
-    int noteEnd = range.byHi;
-    int noteStart = noteStart2 + (noteEnd - noteStart2) % keyNumber;
+    quint32 noteStart2 = range.byLo;
+    quint32 noteEnd = range.byHi;
+    quint32 noteStart = noteStart2 + (noteEnd - noteStart2) % keyNumber;
 
     // For each key
     ChordInfo ci = params->getChordConfiguration();
-    for (int key = noteStart; key <= noteEnd; key += keyNumber)
+    for (quint32 key = noteStart; key <= noteEnd; key += keyNumber)
     {
         // For each side (left / right)
         for (int side = 0; side < 1 + (_stereoSamples ? 1 : 0); side++)
         {
-            RunnableChordCreator * rcc = new RunnableChordCreator(this, idInst, ci, key,
-                                                                  qMax(noteStart2, key - keyNumber + 1), // min key
-                                                                  loopEnabled, _stereoSamples, side);
+            RunnableChordCreator * rcc = new RunnableChordCreator(
+                        this, idInst, ci, key,
+                        qMax(noteStart2, key - keyNumber + 1), // min key
+                        loopEnabled, _stereoSamples, side);
             QThreadPool::globalInstance()->start(rcc);
         }
     }
 }
 
-void ToolChords::onElementProcessed(EltID idSmpl, int key, int minKey, double minAtt)
+void ToolChords::onElementProcessed(EltID idSmpl, quint32 key, quint32 minKey, double minAtt)
 {
     if (_waitingDialog == nullptr)
         return; // Just in case
@@ -153,9 +155,9 @@ void ToolChords::onElementProcessed(EltID idSmpl, int key, int minKey, double mi
         if (_sampleKey.contains(key))
         {
             EltID idLink = _sampleKey.take(key);
-            value.wValue = idLink.indexElt;
+            value.wValue = static_cast<quint16>(idLink.indexElt);
             sm->set(idSmpl, champ_wSampleLink, value);
-            value.wValue = idSmpl.indexElt;
+            value.wValue = static_cast<quint16>(idSmpl.indexElt);
             sm->set(idLink, champ_wSampleLink, value);
         }
         else
@@ -168,10 +170,10 @@ void ToolChords::onElementProcessed(EltID idSmpl, int key, int minKey, double mi
     idInstSmpl.indexElt2 = sm->add(idInstSmpl);
 
     // Configuration
-    value.wValue = idSmpl.indexElt;
+    value.wValue = static_cast<quint16>(idSmpl.indexElt);
     sm->set(idInstSmpl, champ_sampleID, value);
-    value.rValue.byLo = minKey;
-    value.rValue.byHi = key;
+    value.rValue.byLo = static_cast<quint8>(minKey);
+    value.rValue.byHi = static_cast<quint8>(key);
     sm->set(idInstSmpl, champ_keyRange, value);
     if (_stereoSamples)
     {
@@ -183,11 +185,11 @@ void ToolChords::onElementProcessed(EltID idSmpl, int key, int minKey, double mi
     else
         value.shValue = 0;
     sm->set(idInstSmpl, champ_pan, value);
-    value.wValue = minAtt * 10;
+    value.wValue = static_cast<quint16>(minAtt * 10. + 0.5);
     sm->set(idInstSmpl, champ_initialAttenuation, value);
 
     // Update the waiting dialog
-    _waitingDialog->setValue(++_currentStep);
+    _waitingDialog->setValue(static_cast<int>(++_currentStep));
     if (_currentStep >= _steps)
     {
         delete _waitingDialog;

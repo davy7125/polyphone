@@ -78,7 +78,7 @@ void ToolBalanceAdjustment::process(SoundfontManager * sm, EltID id, AbstractToo
     QByteArray baData2 = sm->getData(id2, champ_sampleDataFull24);
 
     // Find steady areas
-    qint32 debut1, fin1;
+    quint32 debut1, fin1;
     if (sm->get(id, champ_dwStartLoop).dwValue == sm->get(id, champ_dwEndLoop).dwValue)
         SampleUtils::regimePermanent(baData1, sm->get(id, champ_dwSampleRate).dwValue, 24, debut1, fin1);
     else
@@ -86,9 +86,9 @@ void ToolBalanceAdjustment::process(SoundfontManager * sm, EltID id, AbstractToo
         debut1 = sm->get(id, champ_dwStartLoop).dwValue;
         fin1 = sm->get(id, champ_dwEndLoop).dwValue;
     }
-    qint32 debut2, fin2;
+    quint32 debut2, fin2;
     if (sm->get(id2, champ_dwStartLoop).dwValue == sm->get(id2, champ_dwEndLoop).dwValue)
-        SampleUtils::regimePermanent(baData2, sm->get(id2, champ_dwSampleRate).dwValue,24, debut2, fin2);
+        SampleUtils::regimePermanent(baData2, sm->get(id2, champ_dwSampleRate).dwValue, 24, debut2, fin2);
     else
     {
         debut2 = sm->get(id2, champ_dwStartLoop).dwValue;

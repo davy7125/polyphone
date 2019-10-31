@@ -28,9 +28,9 @@
 #include "sampleutils.h"
 
 double RunnableChordCreator::SAMPLE_DURATION = 7.0;
-int RunnableChordCreator::SAMPLE_RATE = 48000;
+quint32 RunnableChordCreator::SAMPLE_RATE = 48000;
 
-RunnableChordCreator::RunnableChordCreator(ToolChords * tool, EltID idInst, ChordInfo ci, int key, int minKey, bool loop, bool stereo, int side) : QRunnable(),
+RunnableChordCreator::RunnableChordCreator(ToolChords * tool, EltID idInst, ChordInfo ci, quint32 key, quint32 minKey, bool loop, bool stereo, int side) : QRunnable(),
     _tool(tool),
     _idInst(idInst),
     _ci(ci),
@@ -51,7 +51,7 @@ void RunnableChordCreator::run()
     // Data initialization
     SoundfontManager * sm = SoundfontManager::getInstance();
     QByteArray baData;
-    baData.resize(SAMPLE_DURATION * SAMPLE_RATE * 4);
+    baData.resize(static_cast<int>(SAMPLE_DURATION * SAMPLE_RATE * 4));
     baData.fill(0);
 
     // Get the different pitches with the corresponding attenuation
@@ -83,16 +83,16 @@ void RunnableChordCreator::run()
             EltID idSmpl = closestSample(_idInst, pitch, ecart, _side, idInstSmplTmp);
 
             // Fréquence d'échantillonnage initiale fictive (pour accordage)
-            double fEchInit = (double)sm->get(idSmpl, champ_dwSampleRate).dwValue * pow(2, ecart / 12.0);
+            double fEchInit = pow(2, ecart / 12.0) * sm->get(idSmpl, champ_dwSampleRate).dwValue;
 
             // Récupération du son
-            QByteArray baDataTmp = getSampleData(idSmpl, SAMPLE_DURATION * fEchInit);
+            QByteArray baDataTmp = getSampleData(idSmpl, static_cast<quint32>(fEchInit * SAMPLE_DURATION));
 
             // Prise en compte atténuation en dB
             double attenuation = 1;
             if (sm->isSet(idInstSmplTmp, champ_initialAttenuation))
             {
-                attenuation = 0.04 * sm->get(idInstSmplTmp, champ_initialAttenuation).shValue - attMini + (double)pitches[pitch] / 10.;
+                attenuation = 0.04 * sm->get(idInstSmplTmp, champ_initialAttenuation).shValue - attMini + 0.1 * pitches[pitch];
                 attenuation = pow(10, -attenuation / 20.0);
             }
             attenuation /= pitches.count();
@@ -106,11 +106,11 @@ void RunnableChordCreator::run()
     }
 
     // Loop sample if needed
-    qint32 loopStart = 0;
-    qint32 loopEnd = 0;
+    quint32 loopStart = 0;
+    quint32 loopEnd = 0;
     if (_loop)
     {
-        QByteArray baData2 = SampleUtils::bouclage(baData, SAMPLE_RATE, loopStart, loopEnd, 32);
+        QByteArray baData2 = SampleUtils::loop(baData, SAMPLE_RATE, loopStart, loopEnd, 32);
         if (!baData2.isEmpty())
             baData = baData2;
     }
@@ -128,11 +128,11 @@ void RunnableChordCreator::run()
 
     // Configuration
     AttributeValue value;
-    value.dwValue = baData.length() / 4;
+    value.dwValue = static_cast<quint32>(baData.length()) / 4;
     sm->set(idSmpl, champ_dwLength, value);
     value.dwValue = SAMPLE_RATE;
     sm->set(idSmpl, champ_dwSampleRate, value);
-    value.wValue = _key;
+    value.wValue = static_cast<quint16>(_key);
     sm->set(idSmpl, champ_byOriginalPitch, value);
     value.cValue = 0;
     sm->set(idSmpl, champ_chPitchCorrection, value);
@@ -174,7 +174,7 @@ EltID RunnableChordCreator::closestSample(EltID idInst, double pitch, double &ec
         // Hauteur du sample
         idSmpl.indexElt = sm->get(idInstSmplTmp, champ_sampleID).wValue;
         double pitchSmpl = sm->get(idSmpl, champ_byOriginalPitch).bValue
-                - (double)sm->get(idSmpl, champ_chPitchCorrection).cValue / 100.0;
+                - 0.01 * sm->get(idSmpl, champ_chPitchCorrection).cValue;
 
         // Mesure de l'écart
         double ecartTmp = pitchSmpl - pitch;
@@ -273,38 +273,39 @@ EltID RunnableChordCreator::closestSample(EltID idInst, double pitch, double &ec
     return idSmplRet;
 }
 
-QByteArray RunnableChordCreator::getSampleData(EltID idSmpl, qint32 nbRead)
+QByteArray RunnableChordCreator::getSampleData(EltID idSmpl, quint32 nbRead)
 {
     // Récupération de données provenant d'un sample, en prenant en compte la boucle
     SoundfontManager * sm = SoundfontManager::getInstance();
     QByteArray baData = sm->getData(idSmpl, champ_sampleData32);
-    qint64 loopStart = sm->get(idSmpl, champ_dwStartLoop).dwValue;
-    qint64 loopEnd = sm->get(idSmpl, champ_dwEndLoop).dwValue;
+    quint32 loopStart = sm->get(idSmpl, champ_dwStartLoop).dwValue;
+    quint32 loopEnd = sm->get(idSmpl, champ_dwEndLoop).dwValue;
     QByteArray baDataRet;
-    baDataRet.resize(nbRead * 4);
-    qint64 posInit = 0;
+    baDataRet.resize(static_cast<qint32>(nbRead * 4));
+    quint32 posInit = 0;
     const char * data = baData.constData();
     char * dataRet = baDataRet.data();
     if (loopStart != loopEnd)
     {
         // Boucle
-        qint64 total = 0;
-        while (nbRead - total > 0)
+        quint32 total = 0;
+        while (total < nbRead)
         {
-            const qint64 chunk = qMin(loopEnd - posInit, nbRead - total);
+            const quint32 chunk = qMin(loopEnd - posInit, nbRead - total);
             memcpy(dataRet + 4 * total, data + 4 * posInit, 4 * chunk);
             posInit += chunk;
-            if (posInit >= loopEnd) posInit = loopStart;
+            if (posInit >= loopEnd)
+                posInit = loopStart;
             total += chunk;
         }
     }
     else
     {
         // Pas de boucle
-        if (baData.size() / 4 < nbRead)
+        if (static_cast<quint32>(baData.size() / 4) < nbRead)
         {
             baDataRet.fill(0);
-            memcpy(dataRet, data, baData.size());
+            memcpy(dataRet, data, static_cast<quint32>(baData.size()));
         }
         else
             memcpy(dataRet, data, 4 * nbRead);
@@ -323,14 +324,14 @@ void RunnableChordCreator::addSampleData(QByteArray &baData1, QByteArray &baData
 }
 
 // List of all possible keys with their corresponding attenuation
-QMap<int, int> RunnableChordCreator::getChordKeys(int key, ChordInfo& chordInfo)
+QMap<int, int> RunnableChordCreator::getChordKeys(quint32 key, ChordInfo& chordInfo)
 {
     QMap<int, int> chordKeys;
     int shift = 0;
 
     // Root key (not impacted by the octave or inversion)
     if (chordInfo.chordType1 == 1)
-        chordKeys[key] = chordInfo.chordType1Attenuation;
+        chordKeys[static_cast<int>(key)] = chordInfo.chordType1Attenuation;
 
     // Third
     switch (chordInfo.chordType3)

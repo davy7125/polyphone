@@ -26,7 +26,7 @@
 #include "ui_waitingtooldialog.h"
 #include <QCloseEvent>
 
-WaitingToolDialog::WaitingToolDialog(QString title, int stepNumber, QWidget *parent) :
+WaitingToolDialog::WaitingToolDialog(QString title, quint32 stepNumber, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::WaitingToolDialog),
     _stepNumber(stepNumber),
@@ -57,7 +57,7 @@ void WaitingToolDialog::setValue(int value)
 {
     if (_isCanceled)
         return;
-    ui->progressBar->setMaximum(value == 0 ? 0 : _stepNumber);
+    ui->progressBar->setMaximum(value == 0 ? 0 : static_cast<int>(_stepNumber));
     ui->progressBar->setValue(value);
 }
 

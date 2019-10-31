@@ -116,14 +116,14 @@ void GraphiqueFourier::setData(QByteArray baData, quint32 dwSmplRate)
     this->dwSmplRate = dwSmplRate;
 }
 
-void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, bool withReplot)
+void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, bool withReplot)
 {
     QList<double> freq, factor;
     QList<int> pitch, corrections;
     setPos(posStart, posEnd, freq, factor, pitch, corrections, withReplot);
 }
 
-void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &frequencies, QList<double> &factors,
+void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &frequencies, QList<double> &factors,
                               QList<int> &pitch, QList<int> &deltas, bool withReplot)
 {
     _peaks.clear();
@@ -134,7 +134,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     {
         // Take the full sample in that case
         posStart = 0;
-        posEnd = _fData.size() - 1;
+        posEnd = static_cast<quint32>(_fData.size() - 1);
     }
 
     if (_fData.isEmpty())
@@ -147,15 +147,15 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     // Détermination du régime permanent pour transformée de Fourier et corrélation (max 0.5 seconde)
     if (posStart == posEnd)
         SampleUtils::regimePermanent(_fData, dwSmplRate, posStart, posEnd);
-    if (posEnd > Utils::round32(posStart + dwSmplRate / 2))
+    if (posEnd > static_cast<quint32>(0.5 * dwSmplRate) + posStart)
     {
-        qint32 offset = (posEnd - posStart - dwSmplRate / 2) / 2;
+        quint32 offset = (posEnd - posStart - dwSmplRate / 2) / 2;
         posStart += offset;
         posEnd -= offset;
     }
 
     // Extraction des données du régime permanent
-    QVector<float> baData2 = _fData.mid(posStart, (posEnd - posStart));
+    QVector<float> baData2 = _fData.mid(static_cast<int>(posStart), static_cast<int>(posEnd - posStart));
 
     // Corrélation du signal de 20 à 20000Hz
     quint32 dMin;
@@ -165,11 +165,11 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
 
     // Transformée de Fourier du signal
     QVector<float> vectFourier = SampleUtils::getFourierTransform(baData2);
-    unsigned long size = vectFourier.size() * 2;
+    quint32 size = static_cast<quint32>(vectFourier.size()) * 2;
 
     // Recherche des corrélations minimales (= plus grandes similitudes) et intensités fréquencielles maximales
-    QList<int> posMinCor = SampleUtils::findMins(vectCorrel, 20, 0.7);
-    QList<quint32> posMaxFFT = SampleUtils::findMax(vectFourier, 50, 0.05);
+    QList<quint32> posMinCor = SampleUtils::findMins(vectCorrel, 20, 0.7f);
+    QList<quint32> posMaxFFT = SampleUtils::findMax(vectFourier, 50, 0.05f);
     if (posMaxFFT.isEmpty())
     {
         graph(0)->data()->clear();
@@ -187,8 +187,8 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     }
 
     // Pour chaque minimum de corrélation (considéré comme la base), on cherche un pic de fréquence
-    double freq = 0;
-    double score = -1;
+    float freq = 0;
+    float score = -1;
     for (int i = 0; i < posMinCor.size(); i++)
     {
         // Portion de Fourier contenant la corrélation
@@ -233,32 +233,33 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
         if (rep)
         {
             // Fréquence et score corrélation
-            double freqCorrel = (double)((double)(size - 1) / (posMinCor[i] + dMin) * (double)dwSmplRate) / (double)(size - 1);
-            double scoreCorrel;
-            if (vectCorrel[posMinCor[i]] == 0)
+            float freqCorrel = (static_cast<float>(size - 1) / (posMinCor[i] + dMin) * dwSmplRate) / (size - 1);
+            float scoreCorrel;
+            if (vectCorrel[static_cast<int>(posMinCor[i])] <= 0)
                 scoreCorrel = 1;
             else
-                scoreCorrel = vectCorrel[posMinCor[0]] / vectCorrel[posMinCor[i]];
+                scoreCorrel = vectCorrel[static_cast<int>(posMinCor[0])] / vectCorrel[static_cast<int>(posMinCor[i])];
 
             // Fréquence et score Fourier
-            double freqFourier = (double)((double)posMaxFFT[numeroPic] * (double)dwSmplRate) / (double)(size - 1) / coefFourier;
-            double scoreFourier = vectFourier[posMaxFFT[numeroPic]] / vectFourier[posMaxFFT[0]];
+            float freqFourier = (static_cast<float>(posMaxFFT[numeroPic]) * dwSmplRate) / (size - 1) / coefFourier;
+            float scoreFourier = vectFourier[static_cast<int>(posMaxFFT[numeroPic])] /
+                    vectFourier[static_cast<int>(posMaxFFT[0])];
 
             // Score global
-            double scoreGlobal = scoreCorrel * scoreFourier;
+            float scoreGlobal = scoreCorrel * scoreFourier;
             if (scoreGlobal > score)
             {
                 score = scoreGlobal;
 
                 // Ajustement des scores en fonction de la hauteur de note
-                double noteTmp = 12 * qLn(freqCorrel) / 0.69314718056 - 36.3763;
+                float noteTmp = 12.0f * static_cast<float>(qLn(static_cast<double>(freqCorrel))) / 0.69314718056f - 36.3763f;
                 if (noteTmp < 40 || posEnd - posStart < 4096)
                     scoreFourier = 0;
                 else if (noteTmp < 90)
                 {
                     noteTmp = (noteTmp - 40) / 50;
                     scoreFourier *= noteTmp;
-                    scoreCorrel *=  1. - noteTmp;
+                    scoreCorrel *=  1.f - noteTmp;
                 }
                 else
                     scoreCorrel = 0;
@@ -271,10 +272,10 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
 
     // Si aucune note n'a été trouvée, on prend la note la plus probable d'après Fourier
     if (score < 0)
-        freq = (double)((double)posMaxFFT[0] * (double)dwSmplRate) / (double)(size - 1);
+        freq = static_cast<float>(posMaxFFT[0]) * dwSmplRate / (size - 1);
 
     // Numéro de la note correspondant à cette fréquence
-    double note3 = 12 * qLn(freq) / 0.69314718056 - 36.3763;
+    double note3 = 12 * qLn(static_cast<double>(freq)) / 0.69314718056 - 36.3763;
 
     // Note la plus proche
     int note = qRound(note3);
@@ -288,10 +289,11 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
         for (int i = 0; i < posMaxFFT.size(); i++)
         {
             // intensité
-            factors << vectFourier[posMaxFFT[i]] / vectFourier[posMaxFFT[0]];
+            factors << static_cast<double>(vectFourier[static_cast<int>(posMaxFFT[i])] /
+                       vectFourier[static_cast<int>(posMaxFFT[0])]);
 
             // fréquence
-            double freq = (double)(posMaxFFT[i] * dwSmplRate) / (size - 1);
+            double freq = static_cast<double>(posMaxFFT[i] * dwSmplRate) / (size - 1);
             frequencies << freq;
 
             // note la plus proche
@@ -515,7 +517,7 @@ void GraphiqueFourier::exportPng(QString fileName)
     QFile file(fileName);
     if (file.open(QIODevice::WriteOnly))
     {
-        QPixmap pix = QPixmap::grabWidget(this);
+        QPixmap pix = this->grab();
         pix.save(&file, "PNG");
         file.close();
     }

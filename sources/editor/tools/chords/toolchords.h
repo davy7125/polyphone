@@ -55,7 +55,7 @@ public:
     }
 
 signals:
-    void elementProcessed(EltID idSmpl, int key, int minKey, double minAtt);
+    void elementProcessed(EltID idSmpl, quint32 key, quint32 minKey, double minAtt);
 
 protected:
     QString getLabelInternal() const override
@@ -73,22 +73,22 @@ protected:
     QString getWarning() override;
 
 private slots:
-    void onElementProcessed(EltID idSmpl, int key, int minKey, double minAtt);
+    void onElementProcessed(EltID idSmpl, quint32 key, quint32 minKey, double minAtt);
     void onCancel();
 
 private:
     RangesType getInstrumentRange(EltID idInst);
 
     WaitingToolDialog * _waitingDialog;
-    int _steps;
-    int _currentStep;
+    quint32 _steps;
+    quint32 _currentStep;
     bool _canceled;
 
     EltID _idNewInst;
     QString _instrumentName;
     bool _stereoSamples;
     QString _warning;
-    QMap<int, EltID> _sampleKey;
+    QMap<quint32, EltID> _sampleKey;
 };
 
 #endif // TOOLCHORDS_H

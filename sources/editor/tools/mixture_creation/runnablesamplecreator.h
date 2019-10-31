@@ -34,16 +34,16 @@ class RunnableSampleCreator: public QRunnable
 {
 public:
     RunnableSampleCreator(ToolMixtureCreation * tool, EltID idInst, DivisionInfo di, int key, int minKey, bool loop, bool stereo, int side);
-    ~RunnableSampleCreator();
+    ~RunnableSampleCreator() override;
     void run() override;
 
 private:
     EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
-    QByteArray getSampleData(EltID idSmpl, qint32 nbRead);
+    QByteArray getSampleData(EltID idSmpl, quint32 nbRead);
     void addSampleData(QByteArray &baData1, QByteArray &baData2, double mult);
 
     static double SAMPLE_DURATION; // In seconds
-    static int SAMPLE_RATE; // In samples per second
+    static quint32 SAMPLE_RATE; // In samples per second
 
     ToolMixtureCreation * _tool;
     EltID _idInst;

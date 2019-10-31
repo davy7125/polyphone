@@ -28,7 +28,7 @@
 #include "sampleutils.h"
 
 double RunnableSampleCreator::SAMPLE_DURATION = 7.0;
-int RunnableSampleCreator::SAMPLE_RATE = 48000;
+quint32 RunnableSampleCreator::SAMPLE_RATE = 48000;
 
 RunnableSampleCreator::RunnableSampleCreator(ToolMixtureCreation * tool, EltID idInst, DivisionInfo di, int key, int minKey, bool loop, bool stereo, int side) : QRunnable(),
     _tool(tool),
@@ -50,14 +50,14 @@ void RunnableSampleCreator::run()
     // Data initialization
     SoundfontManager * sm = SoundfontManager::getInstance();
     QByteArray baData;
-    baData.resize(SAMPLE_DURATION * SAMPLE_RATE * 4);
+    baData.resize(static_cast<int>(SAMPLE_DURATION * SAMPLE_RATE * 4));
     baData.fill(0);
 
     // Minimum attenuation for all ranks
     double attMini = 1000000;
     foreach (RankInfo ri, _di.getRanks())
     {
-        double noteTmp = (double)_key + ri.getOffset();
+        double noteTmp = static_cast<double>(_key) + ri.getOffset();
         double ecart;
         EltID idInstSmplTmp;
         closestSample(_idInst, noteTmp, ecart, _side, idInstSmplTmp);
@@ -72,7 +72,7 @@ void RunnableSampleCreator::run()
     foreach (RankInfo ri, _di.getRanks())
     {
         // Calcul de la note à ajouter à la mixture
-        double noteTmp = (double)_key + ri.getOffset();
+        double noteTmp = static_cast<double>(_key) + ri.getOffset();
         if (noteTmp <= 120)
         {
             // Sample le plus proche et écart associé
@@ -81,10 +81,10 @@ void RunnableSampleCreator::run()
             EltID idSmpl = closestSample(_idInst, noteTmp, ecart, _side, idInstSmplTmp);
 
             // Fréquence d'échantillonnage initiale fictive (pour accordage)
-            double fEchInit = (double)sm->get(idSmpl, champ_dwSampleRate).dwValue * pow(2, ecart / 12.0);
+            double fEchInit = pow(2, ecart / 12.0) * sm->get(idSmpl, champ_dwSampleRate).dwValue;
 
             // Récupération du son
-            QByteArray baDataTmp = getSampleData(idSmpl, SAMPLE_DURATION * fEchInit);
+            QByteArray baDataTmp = getSampleData(idSmpl, static_cast<quint32>(SAMPLE_DURATION * fEchInit));
 
             // Prise en compte atténuation en dB
             double attenuation = 1;
@@ -103,11 +103,11 @@ void RunnableSampleCreator::run()
     }
 
     // Loop sample if needed
-    qint32 loopStart = 0;
-    qint32 loopEnd = 0;
+    quint32 loopStart = 0;
+    quint32 loopEnd = 0;
     if (_loop)
     {
-        QByteArray baData2 = SampleUtils::bouclage(baData, SAMPLE_RATE, loopStart, loopEnd, 32);
+        QByteArray baData2 = SampleUtils::loop(baData, SAMPLE_RATE, loopStart, loopEnd, 32);
         if (!baData2.isEmpty())
             baData = baData2;
     }
@@ -125,11 +125,11 @@ void RunnableSampleCreator::run()
 
     // Configuration
     AttributeValue value;
-    value.dwValue = baData.length() / 4;
+    value.dwValue = static_cast<quint32>(baData.length()) / 4;
     sm->set(idSmpl, champ_dwLength, value);
     value.dwValue = SAMPLE_RATE;
     sm->set(idSmpl, champ_dwSampleRate, value);
-    value.wValue = _key;
+    value.wValue = static_cast<quint16>(_key);
     sm->set(idSmpl, champ_byOriginalPitch, value);
     value.cValue = 0;
     sm->set(idSmpl, champ_chPitchCorrection, value);
@@ -171,7 +171,7 @@ EltID RunnableSampleCreator::closestSample(EltID idInst, double pitch, double &e
         // Hauteur du sample
         idSmpl.indexElt = sm->get(idInstSmplTmp, champ_sampleID).wValue;
         double pitchSmpl = sm->get(idSmpl, champ_byOriginalPitch).bValue
-                - (double)sm->get(idSmpl, champ_chPitchCorrection).cValue / 100.0;
+                - 0.01 * sm->get(idSmpl, champ_chPitchCorrection).cValue;
 
         // Mesure de l'écart
         double ecartTmp = pitchSmpl - pitch;
@@ -270,38 +270,39 @@ EltID RunnableSampleCreator::closestSample(EltID idInst, double pitch, double &e
     return idSmplRet;
 }
 
-QByteArray RunnableSampleCreator::getSampleData(EltID idSmpl, qint32 nbRead)
+QByteArray RunnableSampleCreator::getSampleData(EltID idSmpl, quint32 nbRead)
 {
     // Récupération de données provenant d'un sample, en prenant en compte la boucle
     SoundfontManager * sm = SoundfontManager::getInstance();
     QByteArray baData = sm->getData(idSmpl, champ_sampleData32);
-    qint64 loopStart = sm->get(idSmpl, champ_dwStartLoop).dwValue;
-    qint64 loopEnd = sm->get(idSmpl, champ_dwEndLoop).dwValue;
+    quint32 loopStart = sm->get(idSmpl, champ_dwStartLoop).dwValue;
+    quint32 loopEnd = sm->get(idSmpl, champ_dwEndLoop).dwValue;
     QByteArray baDataRet;
-    baDataRet.resize(nbRead * 4);
-    qint64 posInit = 0;
+    baDataRet.resize(static_cast<qint32>(nbRead) * 4);
+    quint32 posInit = 0;
     const char * data = baData.constData();
     char * dataRet = baDataRet.data();
     if (loopStart != loopEnd)
     {
         // Boucle
-        qint64 total = 0;
-        while (nbRead - total > 0)
+        quint32 total = 0;
+        while (total < nbRead)
         {
-            const qint64 chunk = qMin(loopEnd - posInit, nbRead - total);
+            const quint32 chunk = qMin(loopEnd - posInit, nbRead - total);
             memcpy(dataRet + 4 * total, data + 4 * posInit, 4 * chunk);
             posInit += chunk;
-            if (posInit >= loopEnd) posInit = loopStart;
+            if (posInit >= loopEnd)
+                posInit = loopStart;
             total += chunk;
         }
     }
     else
     {
-        // Pas de boucle
-        if (baData.size() / 4 < nbRead)
+        // No loop
+        if (static_cast<quint32>(baData.size()) / 4 < nbRead)
         {
             baDataRet.fill(0);
-            memcpy(dataRet, data, baData.size());
+            memcpy(dataRet, data, static_cast<quint32>(baData.size()));
         }
         else
             memcpy(dataRet, data, 4 * nbRead);
@@ -312,8 +313,8 @@ QByteArray RunnableSampleCreator::getSampleData(EltID idSmpl, qint32 nbRead)
 void RunnableSampleCreator::addSampleData(QByteArray &baData1, QByteArray &baData2, double mult)
 {
     // Ajout de baData2 multiplié par mult dans baData1
-    qint32 * data1 = (qint32 *)baData1.data();
-    qint32 * data2 = (qint32 *)baData2.data();
+    qint32 * data1 = reinterpret_cast<qint32 *>(baData1.data());
+    qint32 * data2 = reinterpret_cast<qint32 *>(baData2.data());
     for (int i = 0; i < qMin(baData1.size(), baData2.size()) / 4; i++)
         data1[i] += mult * data2[i];
 }
