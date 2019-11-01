@@ -1088,6 +1088,7 @@ void PageSmpl::updatePlayButton()
 
 void PageSmpl::onCutOrdered(int start, int end)
 {
+    qDebug() << start << end;
     if (_currentIds.count() != 1 || start < 0 || end <= 0 || start >= end)
         return;
 
@@ -1108,8 +1109,8 @@ void PageSmpl::onCutOrdered(int start, int end)
     EltID id2 = getRepercussionID(id);
     if (id2.indexElt != -1)
     {
-        // Both samples must have the same length
-        if (_sf2->get(id, champ_dwLength).dwValue != _sf2->get(id2, champ_dwLength).dwValue)
+        // The second sample must be long enough
+        if (_sf2->get(id, champ_dwLength).dwValue <= static_cast<quint32>(end))
             id2.indexElt = -1;
     }
 
