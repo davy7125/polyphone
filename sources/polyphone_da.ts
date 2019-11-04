@@ -25,12 +25,12 @@
 <context>
     <name>AbstractTool</name>
     <message>
-        <location filename="editor/tools/abstracttool.cpp" line="98"/>
+        <location filename="editor/tools/abstracttool.cpp" line="122"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
     </message>
     <message>
-        <location filename="editor/tools/abstracttool.cpp" line="103"/>
+        <location filename="editor/tools/abstracttool.cpp" line="127"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
@@ -38,394 +38,394 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="core/types/attribute.cpp" line="461"/>
+        <location filename="core/types/attribute.cpp" line="467"/>
         <source>absolute value</source>
         <translation>nøjagtig værdi</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="572"/>
+        <location filename="core/types/attribute.cpp" line="578"/>
         <source>unknown</source>
         <translation>ukendt</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="577"/>
+        <location filename="core/types/attribute.cpp" line="583"/>
         <source>Sample start offset</source>
         <translation>Sample start offset</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="583"/>
+        <location filename="core/types/attribute.cpp" line="589"/>
         <source>Sample end offset</source>
         <translation>Sample end offset</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="589"/>
+        <location filename="core/types/attribute.cpp" line="595"/>
         <source>Loop start offset</source>
         <translation>Loop start offset</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="595"/>
+        <location filename="core/types/attribute.cpp" line="601"/>
         <source>Loop end offset</source>
         <translation>Loop end offset</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="592"/>
+        <location filename="core/types/attribute.cpp" line="598"/>
         <source>Loop start offset (× 32768)</source>
         <translation>Loop start offset (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="601"/>
+        <location filename="core/types/attribute.cpp" line="607"/>
         <source>Mod LFO → pitch (c)</source>
         <translation>Mod LFO → pitch (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="604"/>
+        <location filename="core/types/attribute.cpp" line="610"/>
         <source>Vib LFO → pitch (c)</source>
         <translation>Vib LFO → pitch (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="607"/>
+        <location filename="core/types/attribute.cpp" line="613"/>
         <source>Mod env → pitch (c)</source>
         <translation>Mod env → pitch (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="610"/>
+        <location filename="core/types/attribute.cpp" line="616"/>
         <source>Filter, cutoff (×)</source>
         <translation>Filter, cutoff (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="611"/>
+        <location filename="core/types/attribute.cpp" line="617"/>
         <source>Filter, cutoff (Hz)</source>
         <translation>Filter, cutoff (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="614"/>
+        <location filename="core/types/attribute.cpp" line="620"/>
         <source>Filter, resonance (dB)</source>
         <translation>Filter, resonans (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="617"/>
+        <location filename="core/types/attribute.cpp" line="623"/>
         <source>Mod LFO → filter (c)</source>
         <translation>Mod LFO → filter (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="620"/>
+        <location filename="core/types/attribute.cpp" line="626"/>
         <source>Mod env → filter (c)</source>
         <translation>Mod env → filter (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="586"/>
+        <location filename="core/types/attribute.cpp" line="592"/>
         <source>Sample end offset (× 32768)</source>
         <translation>Sample end offset (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="580"/>
+        <location filename="core/types/attribute.cpp" line="586"/>
         <source>Sample start offset (× 32768)</source>
         <translation>Sample start offset (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="623"/>
+        <location filename="core/types/attribute.cpp" line="629"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>Mod LFO → volumen (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="626"/>
+        <location filename="core/types/attribute.cpp" line="632"/>
         <source>Chorus (%)</source>
         <translation>Chorus (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="629"/>
+        <location filename="core/types/attribute.cpp" line="635"/>
         <source>Reverb (%)</source>
         <translatorcomment>Runklang</translatorcomment>
         <translation>Reverb (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="632"/>
+        <location filename="core/types/attribute.cpp" line="638"/>
         <source>Pan [-100;100]</source>
         <translation>Pan [-100;100]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="633"/>
+        <location filename="core/types/attribute.cpp" line="639"/>
         <source>Pan [-50;50]</source>
         <translation>Pan [-50;50]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="636"/>
+        <location filename="core/types/attribute.cpp" line="642"/>
         <source>Mod LFO delay (×)</source>
         <translatorcomment>Mod LFO forsinkelse (×)</translatorcomment>
         <translation>Mod LFO delay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="637"/>
+        <location filename="core/types/attribute.cpp" line="643"/>
         <source>Mod LFO delay (s)</source>
         <translatorcomment>Mod LFO forsinkelse (s)</translatorcomment>
         <translation>Mod LFO delay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="640"/>
+        <location filename="core/types/attribute.cpp" line="646"/>
         <source>Mod LFO freq (×)</source>
         <translatorcomment>Mod LFO frekvens (×)</translatorcomment>
         <translation>Mod LFO freq (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="641"/>
+        <location filename="core/types/attribute.cpp" line="647"/>
         <source>Mod LFO freq (Hz)</source>
         <translatorcomment>Mod LFO frekvens (Hz)</translatorcomment>
         <translation>Mod LFO freq (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="644"/>
+        <location filename="core/types/attribute.cpp" line="650"/>
         <source>Vib LFO delay (×)</source>
         <translatorcomment>Vib LFO forsinkelse (×)</translatorcomment>
         <translation>Vib LFO delay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="645"/>
+        <location filename="core/types/attribute.cpp" line="651"/>
         <source>Vib LFO delay (s)</source>
         <translatorcomment>Vib LFO forsinkelse (s)</translatorcomment>
         <translation>Vib LFO delay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="648"/>
+        <location filename="core/types/attribute.cpp" line="654"/>
         <source>Vib LFO freq (×)</source>
         <translatorcomment>Vib LFO frekvens (×)</translatorcomment>
         <translation>Vib LFO frekv (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="649"/>
+        <location filename="core/types/attribute.cpp" line="655"/>
         <source>Vib LFO freq (Hz)</source>
         <translatorcomment>Vib LFO frekvens (Hz)</translatorcomment>
         <translation>Vib LFO frekv (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="652"/>
+        <location filename="core/types/attribute.cpp" line="658"/>
         <source>Mod env delay (×)</source>
         <translatorcomment>forsinkelse (×)</translatorcomment>
         <translation>Mod env delay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="653"/>
+        <location filename="core/types/attribute.cpp" line="659"/>
         <source>Mod env delay (s)</source>
         <translatorcomment>forsinkelse (s)</translatorcomment>
         <translation>Mod env delay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="656"/>
+        <location filename="core/types/attribute.cpp" line="662"/>
         <source>Mod env attack (×)</source>
         <translatorcomment>attack (x)</translatorcomment>
         <translation>Mod env attack (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="657"/>
+        <location filename="core/types/attribute.cpp" line="663"/>
         <source>Mod env attack (s)</source>
         <translatorcomment>attack, tid</translatorcomment>
         <translation>Mod env attack (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="660"/>
+        <location filename="core/types/attribute.cpp" line="666"/>
         <source>Mod env hold (×)</source>
         <translation>Mod env hold (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="661"/>
+        <location filename="core/types/attribute.cpp" line="667"/>
         <source>Mod env hold (s)</source>
         <translation>Mod env hold (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="664"/>
+        <location filename="core/types/attribute.cpp" line="670"/>
         <source>Mod env decay (×)</source>
         <translatorcomment>afrulning (×)</translatorcomment>
         <translation>Mod env decay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="665"/>
+        <location filename="core/types/attribute.cpp" line="671"/>
         <source>Mod env decay (s)</source>
         <translatorcomment>afrulning, tid</translatorcomment>
         <translation>Mod env decay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="668"/>
+        <location filename="core/types/attribute.cpp" line="674"/>
         <source>Mod env sustain (%)</source>
         <translatorcomment>udringning(%)</translatorcomment>
         <translation>Mod env sustain (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="671"/>
+        <location filename="core/types/attribute.cpp" line="677"/>
         <source>Mod env release (×)</source>
         <translatorcomment>efterklang(x)</translatorcomment>
         <translation>Mod env release (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="672"/>
+        <location filename="core/types/attribute.cpp" line="678"/>
         <source>Mod env release (s)</source>
         <translatorcomment>efterklang, tid</translatorcomment>
         <translation>Mod env release (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="675"/>
+        <location filename="core/types/attribute.cpp" line="681"/>
         <source>Key → Mod env hold (c)</source>
         <translation>Key → Mod env hold (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="678"/>
+        <location filename="core/types/attribute.cpp" line="684"/>
         <source>Key → Mod env decay (c)</source>
         <translatorcomment>mod. decay cutoff</translatorcomment>
         <translation>Key → Mod env decay (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="681"/>
+        <location filename="core/types/attribute.cpp" line="687"/>
         <source>Vol env delay (×)</source>
         <translatorcomment>Volumen afrulningstid (×)</translatorcomment>
         <translation>Vol env delay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="682"/>
+        <location filename="core/types/attribute.cpp" line="688"/>
         <source>Vol env delay (s)</source>
         <translatorcomment>Volumen afrulningstid (tid)</translatorcomment>
         <translation>Vol env delay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="685"/>
+        <location filename="core/types/attribute.cpp" line="691"/>
         <source>Vol env attack (×)</source>
         <translation>Vol env attack (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="686"/>
+        <location filename="core/types/attribute.cpp" line="692"/>
         <source>Vol env attack (s)</source>
         <translation>Vol env attack (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="689"/>
+        <location filename="core/types/attribute.cpp" line="695"/>
         <source>Vol env hold (×)</source>
         <translation>Vol env hold (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="690"/>
+        <location filename="core/types/attribute.cpp" line="696"/>
         <source>Vol env hold (s)</source>
         <translation>Vol env hold (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="693"/>
+        <location filename="core/types/attribute.cpp" line="699"/>
         <source>Vol env decay (×)</source>
         <translatorcomment>Volumen afrulning (×)</translatorcomment>
         <translation>Vol env decay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="694"/>
+        <location filename="core/types/attribute.cpp" line="700"/>
         <source>Vol env decay (s)</source>
         <translatorcomment>Volumen afrulning (tid)</translatorcomment>
         <translation>Vol env decay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="697"/>
+        <location filename="core/types/attribute.cpp" line="703"/>
         <source>Vol env sustain (dB)</source>
         <translatorcomment>Efterklang</translatorcomment>
         <translation>Vol env sustain (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="700"/>
+        <location filename="core/types/attribute.cpp" line="706"/>
         <source>Vol env release (×)</source>
         <translation>Vol env release (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="701"/>
+        <location filename="core/types/attribute.cpp" line="707"/>
         <source>Vol env release (s)</source>
         <translation>Vol env release (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="704"/>
+        <location filename="core/types/attribute.cpp" line="710"/>
         <source>Key → Vol env hold (c)</source>
         <translation>Key → Vol env hold (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="707"/>
+        <location filename="core/types/attribute.cpp" line="713"/>
         <source>Key → Vol env decay (c)</source>
         <translation>Key → Vol env decay (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="710"/>
+        <location filename="core/types/attribute.cpp" line="716"/>
         <source>Key range</source>
         <translation>Tangent område</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="713"/>
+        <location filename="core/types/attribute.cpp" line="719"/>
         <source>Velocity range</source>
         <translatorcomment>Anslagsstyrke-værdi</translatorcomment>
         <translation>Anslagsstyrke område</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="716"/>
+        <location filename="core/types/attribute.cpp" line="722"/>
         <source>Fixed key</source>
         <translatorcomment>ikke-transponeret tangent</translatorcomment>
         <translation>Låst tangent</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="719"/>
+        <location filename="core/types/attribute.cpp" line="725"/>
         <source>Fixed velocity</source>
         <translatorcomment>Låst anslagsværdi</translatorcomment>
         <translation>Låst anslagsstyrke</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="722"/>
+        <location filename="core/types/attribute.cpp" line="728"/>
         <source>Attenuation (dB)</source>
         <translation>Forstærkning (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="743"/>
+        <location filename="core/types/attribute.cpp" line="749"/>
         <source>Sample root key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="746"/>
+        <location filename="core/types/attribute.cpp" line="752"/>
         <source>Sample length</source>
         <translation>Sample længde</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="749"/>
+        <location filename="core/types/attribute.cpp" line="755"/>
         <source>Loop start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="752"/>
+        <location filename="core/types/attribute.cpp" line="758"/>
         <source>Loop end</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="755"/>
+        <location filename="core/types/attribute.cpp" line="761"/>
         <source>Pitch correction (cents)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="598"/>
+        <location filename="core/types/attribute.cpp" line="604"/>
         <source>Loop end offset (× 32768)</source>
         <translation>Loop end offset (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="725"/>
+        <location filename="core/types/attribute.cpp" line="731"/>
         <source>Tuning (semi-tones)</source>
         <translation>Tuning (halve toner)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="728"/>
+        <location filename="core/types/attribute.cpp" line="734"/>
         <source>Tuning (cents)</source>
         <translation>Tuning (procent)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="731"/>
+        <location filename="core/types/attribute.cpp" line="737"/>
         <source>Loop playback</source>
         <translation>Loop afspilning</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="734"/>
+        <location filename="core/types/attribute.cpp" line="740"/>
         <source>Scale tuning</source>
         <translation>Skaléret tuning</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="737"/>
+        <location filename="core/types/attribute.cpp" line="743"/>
         <source>Exclusive class</source>
         <translation>Exclusive class</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="740"/>
+        <location filename="core/types/attribute.cpp" line="746"/>
         <source>Root key</source>
         <translatorcomment>Root key</translatorcomment>
         <translation>Grundtangent</translation>
@@ -1666,12 +1666,13 @@ oversigt</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="51"/>
-        <source>Link selected presets</source>
+        <source>Link selected instruments</source>
+        <oldsource>Link selected isntruments</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialognewelement.cpp" line="51"/>
-        <source>Link selected instruments</source>
+        <location filename="dialogs/dialognewelement.cpp" line="52"/>
+        <source>Link selected samples</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1970,7 +1971,7 @@ oversigt</translation>
         <translation>Kan ikke åbne filen</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="204"/>
+        <location filename="editor/editor.cpp" line="208"/>
         <source>Untitled</source>
         <translation>Unavngiven</translation>
     </message>
@@ -2284,18 +2285,18 @@ oversigt</translation>
         <translation>Eksportér graf</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="464"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="466"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="484"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="486"/>
         <source>Export a graph</source>
         <translation>Eksportér en graf</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="485"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="487"/>
         <source>Png file</source>
         <translation>*.png fil</translation>
     </message>
@@ -2303,7 +2304,7 @@ oversigt</translation>
 <context>
     <name>InputParserGrandOrgue</name>
     <message>
-        <location filename="core/input/grandorgue/inputparsergrandorgue.cpp" line="71"/>
+        <location filename="core/input/grandorgue/inputparsergrandorgue.cpp" line="77"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>Kan ikke åbne filen &quot;%1&quot;</translation>
     </message>
@@ -3406,23 +3407,23 @@ frekvens</translation>
         <translation>Stop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1096"/>
+        <location filename="editor/pagesmpl.cpp" line="1097"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1097"/>
+        <location filename="editor/pagesmpl.cpp" line="1098"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1099"/>
+        <location filename="editor/pagesmpl.cpp" line="1100"/>
         <source>&amp;Yes</source>
         <translation>&amp;Ja</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1100"/>
+        <location filename="editor/pagesmpl.cpp" line="1101"/>
         <source>&amp;No</source>
         <translation>&amp;Nej</translation>
     </message>
@@ -3550,6 +3551,8 @@ frekvens</translation>
         <translation>Forvalg</translation>
     </message>
     <message>
+        <location filename="core/input/grandorgue/grandorguerank.cpp" line="138"/>
+        <location filename="core/input/grandorgue/grandorguestop.cpp" line="118"/>
         <location filename="core/output/outputfactory.cpp" line="104"/>
         <source>untitled</source>
         <translation>unavngiven</translation>
@@ -4558,17 +4561,22 @@ downloade indholdet</translation>
 <context>
     <name>TableHeaderView</name>
     <message>
-        <location filename="editor/widgets/tableheaderview.cpp" line="45"/>
+        <location filename="editor/widgets/tableheaderview.cpp" line="47"/>
         <source>mute</source>
         <translation>mute</translation>
     </message>
     <message>
-        <location filename="editor/widgets/tableheaderview.cpp" line="49"/>
-        <source>activate solo</source>
-        <translation>kun solo</translation>
+        <location filename="editor/widgets/tableheaderview.cpp" line="52"/>
+        <source>solo</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/tableheaderview.cpp" line="52"/>
+        <location filename="editor/widgets/tableheaderview.cpp" line="59"/>
+        <source>solo on selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/widgets/tableheaderview.cpp" line="55"/>
         <source>unmute all</source>
         <translation>unmute alt</translation>
     </message>
@@ -4865,7 +4873,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolChords</name>
     <message>
-        <location filename="editor/tools/chords/toolchords.cpp" line="60"/>
+        <location filename="editor/tools/chords/toolchords.cpp" line="61"/>
         <source>The instrument contains no samples.</source>
         <translation>Instrumentet indeholder ingen samples.</translation>
     </message>

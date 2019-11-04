@@ -68,7 +68,7 @@ void ToolTransposeSmpl::process(SoundfontManager * sm, EltID id, AbstractToolPar
     int deltaPitch = qRound(params->getSemiTones());
     int deltaCorrection = qRound(100. * (params->getSemiTones() - deltaPitch));
     int newPitch = sm->get(id, champ_byOriginalPitch).bValue + deltaPitch;
-    int newCorrection = sm->get(id, champ_chPitchCorrection).shValue + deltaCorrection;
+    int newCorrection = sm->get(id, champ_chPitchCorrection).cValue + deltaCorrection;
     while (newCorrection < -50)
     {
         newCorrection += 100;
@@ -89,6 +89,7 @@ void ToolTransposeSmpl::process(SoundfontManager * sm, EltID id, AbstractToolPar
         newPitch = 127;
         newCorrection = 0;
     }
+
     val.bValue = static_cast<quint8>(newPitch);
     sm->set(id, champ_byOriginalPitch, val);
     val.shValue = static_cast<qint8>(newCorrection);
