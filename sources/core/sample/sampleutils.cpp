@@ -324,12 +324,12 @@ QByteArray SampleUtils::EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, 
     // Filtrage
     double freq;
     double gain;
-    for (unsigned long i = 0; i < (size+1)/2; i++)
+    for (unsigned long i = 0; i < (size + 1) / 2; i++)
     {
         freq = static_cast<double>(i * dwSmplRate) / (size - 1);
         gain = gainEQ(freq, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10);
         fc_sortie_fft[i] *= gain;
-        fc_sortie_fft[size-1-i] *= gain;
+        fc_sortie_fft[size - 1 - i] *= gain;
     }
 
     // Calculer l'ifft du signal
@@ -1581,7 +1581,7 @@ double SampleUtils::gainEQ(double freq, int i1, int i2, int i3, int i4, int i5, 
     double val = a * freq + b;
 
     // Conversion
-    return pow(10.0, 0.015 * val);
+    return pow(10.0, 0.1 * val);
 }
 
 void SampleUtils::regimePermanent(QVector<float> data, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd, quint32 nbOK, float coef)
