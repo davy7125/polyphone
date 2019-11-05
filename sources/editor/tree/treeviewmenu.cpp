@@ -363,17 +363,6 @@ void TreeViewMenu::onRename(QString txt)
 
 void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int val1, int val2)
 {
-    if (renameType == 4)
-    {
-        if (val1 == val2)
-            return;
-    }
-    else
-    {
-        if (text1.isEmpty())
-            return;
-    }
-
     SoundfontManager * sm = SoundfontManager::getInstance();
     for (int i = 0; i < _currentIds.size(); i++)
     {
@@ -384,22 +373,38 @@ void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int 
         switch (renameType)
         {
         case 0:{
-            // Replace with the name as a suffix
-            QString suffix = " " + ContextManager::keyName()->getKeyName(sm->get(ID, champ_byOriginalPitch).bValue, false, true);
+            // Replace with the key name as a suffix
+            QString suffix = ContextManager::keyName()->getKeyName(sm->get(ID, champ_byOriginalPitch).bValue, false, true);
             SFSampleLink pos = sm->get(ID, champ_sfSampleType).sfLinkValue;
             if (pos == rightSample || pos == RomRightSample)
                 suffix += 'R';
             else if (pos == leftSample || pos == RomLeftSample)
                 suffix += 'L';
 
-            newName = text1.left(20 - suffix.size()) + suffix;
+            if (text1.isEmpty())
+                newName = suffix;
+            else
+            {
+                suffix = " " + suffix;
+                newName = text1.left(20 - suffix.size()) + suffix;
+            }
         }break;
         case 1:
-            // Replace with an index an a suffix
-            if ((i+1) % 100 < 10)
-                newName = text1.left(17) + "-0" + QString::number((i+1) % 100);
+            // Replace with an index as a suffix
+            if (text1.isEmpty())
+            {
+                if ((i+1) % 100 < 10)
+                    newName = "0" + QString::number((i+1) % 100);
+                else
+                    newName = QString::number((i+1) % 100);
+            }
             else
-                newName = text1.left(17) + "-" + QString::number((i+1) % 100);
+            {
+                if ((i+1) % 100 < 10)
+                    newName = text1.left(17) + "-0" + QString::number((i+1) % 100);
+                else
+                    newName = text1.left(17) + "-" + QString::number((i+1) % 100);
+            }
             break;
         case 2:
             // Replace a string
@@ -407,12 +412,16 @@ void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int 
             break;
         case 3:
             // Insert a string
+            if (text1.isEmpty())
+                return;
             if (val1 > newName.size())
                 val1 = newName.size();
             newName.insert(val1, text1);
             break;
         case 4:
             // Delete a part
+            if (val1 == val2)
+                return;
             if (val2 > val1)
                 newName.remove(val1, val2 - val1);
             else
@@ -422,7 +431,7 @@ void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int 
 
         newName = newName.left(20);
 
-        if (sm->getQstr(ID, champ_name).compare(newName, Qt::CaseSensitive))
+        if (sm->getQstr(ID, champ_name).compare(newName, Qt::CaseSensitive) != 0)
             sm->set(ID, champ_name, newName);
     }
     sm->endEditing("command:bulkRename");
