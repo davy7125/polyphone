@@ -80,6 +80,7 @@ private slots:
     void onLinkClicked(EltID id);
     void onCutOrdered(int start, int end);
     bool cutSample(EltID id, quint32 start, quint32 end);
+    void on_checkLectureBoucle_clicked(bool checked);
 
 private:
     Ui::PageSmpl *ui;

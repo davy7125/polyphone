@@ -1169,3 +1169,8 @@ bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end)
 
     return true;
 }
+
+void PageSmpl::on_checkLectureBoucle_clicked(bool checked)
+{
+    _synth->setLoopEnabled(checked);
+}
