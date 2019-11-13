@@ -1,4 +1,28 @@
-polyphone (2.1) unstable; urgency=low
+polyphone (2.2) unstable; urgency=low
+
+  * (new) tool for editing sample properties
+  * (new) solo mode focused on selection
+  * (new) basic loading of GrandOrgue sample sets
+  * (new) single instance of the application
+  * (improvement) resizable panes
+  * (improvement) stereo editing enabled for sample tools
+  * (improvement) new instrument or preset dialog can link selected samples or instruments
+  * (improvement) key "escape" cancels a drag & drop
+  * (improvement) automatic selection in the tree after an operation
+  * (improvement) sample tuning area redesigned
+  * (fix) EQ fix
+  * (fix) loop playing mode can be changed during playback
+  * (fix) loading sample pitch correction
+  * (fix) infinite loop in a table repaint
+  * (fix) renaming with a different case
+  * (fix) sample transposition tool correctly adapts rootkey / correction
+  * (fix) instrument transposition tool correctly adapts rootkey / correction
+  * (fix) playing state at the sample level
+
+ -- Davy Triponney <davy.triponney@gmail.com>  Wed, 13 Nov 2019 08:37:48 +0100
+
+
+polyphone (2.1) UNRELEASED; urgency=low
 
   * (new) Modulator support in the sound engine
   * (new) FLAC sample files can be imported
