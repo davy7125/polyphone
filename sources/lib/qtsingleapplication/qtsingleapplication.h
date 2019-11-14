@@ -95,6 +95,8 @@ public Q_SLOTS:
 Q_SIGNALS:
     void messageReceived(const QString &message);
 
+protected:
+    bool event(QEvent * event) override;
 
 private:
     void sysInit(const QString &appId = QString());

@@ -68,7 +68,7 @@ int launchApplication(QtSingleApplication * app, Options &options)
     // Application style
     QApplication::setStyle(QStyleFactory::create("Fusion"));
     try {
-        qApp->setPalette(ContextManager::theme()->getPalette());
+        app->setPalette(ContextManager::theme()->getPalette());
     } catch (...) { /* bug with mac */ }
 
     // Additional type used in signals
@@ -84,10 +84,6 @@ int launchApplication(QtSingleApplication * app, Options &options)
 
     // Open files passed as argument
     w.openFiles(options.getInputFiles().join('|'));
-
-#ifdef Q_OS_MAC
-    QObject::connect(qApp, SIGNAL(openFile(QString)), &w, SLOT(openFile(QString)));
-#endif
 
     return app->exec();
 }

@@ -42,6 +42,7 @@
 #include "qtsingleapplication.h"
 #include "qtlocalpeer.h"
 #include <QWidget>
+#include <QFileOpenEvent>
 
 
 /*!
@@ -135,7 +136,7 @@
 
 void QtSingleApplication::sysInit(const QString &appId)
 {
-    actWin = 0;
+    actWin = nullptr;
     peer = new QtLocalPeer(this, appId);
     connect(peer, SIGNAL(messageReceived(const QString&)), SIGNAL(messageReceived(const QString&)));
 }
@@ -345,3 +346,16 @@ void QtSingleApplication::activateWindow()
 
     \obsolete
 */
+
+bool QtSingleApplication::event(QEvent * event)
+{
+    if (event->type() == QEvent::FileOpen)
+    {
+        QFileOpenEvent * openEvent = dynamic_cast<QFileOpenEvent*>(event);
+        QString fileName = openEvent->file();
+        emit(messageReceived(fileName));
+    }
+
+    return QApplication::event(event);
+}
+
