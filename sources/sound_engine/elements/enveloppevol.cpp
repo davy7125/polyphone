@@ -196,7 +196,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             if (_isMod)
             {
                 // Linear decay
-                coef = -1.f / v_timeRelease;
+                coef = -1.f / timeDecay;
                 lastValue = _precValue + coef;
                 for (quint32 i = 0; i < duration; i++)
                 {

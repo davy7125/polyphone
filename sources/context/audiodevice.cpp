@@ -31,7 +31,7 @@
 #ifndef Q_OS_WIN
 #include "jack.h"
 
-// Callbacks de jack
+// Jack callbacks
 int jackProcess(jack_nframes_t nframes, void * arg)
 {
     // Récupération de l'instance de AudioDevice
@@ -50,7 +50,7 @@ int jackProcess(jack_nframes_t nframes, void * arg)
 void jack_shutdown(void *arg) {Q_UNUSED(arg); exit(1);}
 #endif
 
-// Callback portaudio
+// Portaudio callback
 int standardProcess(const void* inputBuffer, void* outputBuffer,
                     unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo,
                     PaStreamCallbackFlags statusFlags, void* userData)
