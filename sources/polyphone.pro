@@ -35,6 +35,8 @@ TRANSLATIONS = polyphone_fr.ts \
     polyphone_ru.ts \
     polyphone_tr.ts \
     polyphone_da.ts
+CONFIG += lrelease embed_translations
+QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
 
 
 QT += core gui printsupport svg network #testlib
