@@ -1337,7 +1337,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="50"/>
         <source>Davy Triponney</source>
-        <translation>Дејви Трипони (Davy Triponney)</translation>
+        <translation>Дейви Трипони (Davy Triponney)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="53"/>
@@ -1354,7 +1354,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>Davy Triponney</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Davy Triponney</translation>
+        <translation>Дейви Трипони (Davy Triponney)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="63"/>
@@ -1373,7 +1373,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="65"/>
         <source>Michael Schyllberg</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Мајкл Шилберг (Michael Schyllberg)</translation>
+        <translation>Майкл Шилберг (Michael Schyllberg)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="66"/>
@@ -1398,25 +1398,25 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="73"/>
         <source>F.J. Martínez Murcia</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Ф.Ј. Мартинез Мурција (F.J. Martínez Murcia)</translation>
+        <translation>Ф.Дж. Мартинес Мурсия (F.J. Martínez Murcia)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="74"/>
         <source>Georg Gergull</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Георг Гергулл (Georg Gergull)</translation>
+        <translation>Георг Гергул (Georg Gergull)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="75"/>
         <source>Jay Alexander Fleming</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Џеј Александар Флеминг</translation>
+        <translation>Джей Александр Флеминг (Jay Alexander Fleming)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="76"/>
         <source>Joel Gomes</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Џоел Гомес (Joel Gomes)</translation>
+        <translation>Джоэл Гомес (Joel Gomes)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="77"/>
@@ -1428,7 +1428,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="78"/>
         <source>Pavel Fric</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>павел Фриц (Pavel Fric)</translation>
+        <translation>Павел Фриц (Pavel Fric)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="71"/>
