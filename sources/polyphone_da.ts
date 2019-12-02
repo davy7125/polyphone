@@ -1355,7 +1355,7 @@ oversigt</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="61"/>
-        <location filename="dialogs/dialog_about.cpp" line="70"/>
+        <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>Davy Triponney</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Davy Triponney</translation>
@@ -1368,7 +1368,7 @@ oversigt</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="63"/>
-        <location filename="dialogs/dialog_about.cpp" line="69"/>
+        <location filename="dialogs/dialog_about.cpp" line="70"/>
         <source>Andrea Celani</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Andrea Celani</translation>
@@ -1393,49 +1393,55 @@ oversigt</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="67"/>
-        <location filename="dialogs/dialog_about.cpp" line="77"/>
+        <location filename="dialogs/dialog_about.cpp" line="79"/>
         <source>Steve Clarke</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Steve Clarke</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="71"/>
+        <location filename="dialogs/dialog_about.cpp" line="69"/>
+        <source>Aleksey Bobylev</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation>Aleksey Bobylev</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="73"/>
         <source>F.J. Martínez Murcia</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>F.J. Martínez Murcia</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="72"/>
+        <location filename="dialogs/dialog_about.cpp" line="74"/>
         <source>Georg Gergull</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Georg Gergull</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="73"/>
+        <location filename="dialogs/dialog_about.cpp" line="75"/>
         <source>Jay Alexander Fleming</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Jay Alexander Fleming</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="74"/>
+        <location filename="dialogs/dialog_about.cpp" line="76"/>
         <source>Joel Gomes</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Joel Gomes</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="75"/>
+        <location filename="dialogs/dialog_about.cpp" line="77"/>
         <source>Magson</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Magson</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="76"/>
+        <location filename="dialogs/dialog_about.cpp" line="78"/>
         <source>Pavel Fric</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Pavel Fric</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="78"/>
+        <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>Chris Hansen</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Chris Hansen</translation>
@@ -3558,22 +3564,22 @@ frekvens</translation>
         <translation>unavngiven</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="122"/>
+        <location filename="dialogs/dialog_about.cpp" line="123"/>
         <source>Created by</source>
         <translation>Udviklet af</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="123"/>
+        <location filename="dialogs/dialog_about.cpp" line="124"/>
         <source>Contributors</source>
         <translation>Bidragydere</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="124"/>
+        <location filename="dialogs/dialog_about.cpp" line="125"/>
         <source>Translated by</source>
         <translation>Oversat af</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="166"/>
+        <location filename="dialogs/dialog_about.cpp" line="167"/>
         <source>Icons</source>
         <translation>Ikoner</translation>
     </message>

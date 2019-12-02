@@ -90,18 +90,17 @@
     <message>
         <location filename="core/types/attribute.cpp" line="607"/>
         <source>Mod LFO → pitch (c)</source>
-        <translatorcomment>What is c?</translatorcomment>
-        <translation>Модулятор ГНЧ → высота тона (c)</translation>
+        <translation>Модулятор ГНЧ → высота тона (цент)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="610"/>
         <source>Vib LFO → pitch (c)</source>
-        <translation>Виб. ГНЧ → высота тона (c)</translation>
+        <translation>Виб. ГНЧ → высота тона (цент)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="613"/>
         <source>Mod env → pitch (c)</source>
-        <translation>Модулятор огибающей → высота тона (c)</translation>
+        <translation>Огибающая модуляции → высота тона (цент)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="616"/>
@@ -121,12 +120,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="623"/>
         <source>Mod LFO → filter (c)</source>
-        <translation>Модулятор ГНЧ → фильтр (c)</translation>
+        <translation>Модулятор ГНЧ → фильтр (цент)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="626"/>
         <source>Mod env → filter (c)</source>
-        <translation>Модулятор огибающей → фильтр (c)</translation>
+        <translation>Огибающая модуляции → фильтр (цент)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="629"/>
@@ -196,132 +195,132 @@
     <message>
         <location filename="core/types/attribute.cpp" line="658"/>
         <source>Mod env delay (×)</source>
-        <translation>Модулятор огибающей: задержка (×)</translation>
+        <translation>Огибающая модуляции: задержка (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="659"/>
         <source>Mod env delay (s)</source>
-        <translation>Модулятор огибающей: задержка (сек)</translation>
+        <translation>Огибающая модуляции: задержка (сек)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="662"/>
         <source>Mod env attack (×)</source>
-        <translation>Модулятор огибающей: атака (×)</translation>
+        <translation>Огибающая модуляции: атака (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="663"/>
         <source>Mod env attack (s)</source>
-        <translation>Модулятор огибающей: атака (сек)</translation>
+        <translation>Огибающая модуляции: атака (сек)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="666"/>
         <source>Mod env hold (×)</source>
-        <translation>Модулятор огибающей: удержание (×)</translation>
+        <translation>Огибающая модуляции: удержание (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="667"/>
         <source>Mod env hold (s)</source>
-        <translation>Модулятор огибающей: удержание (сек)</translation>
+        <translation>Огибающая модуляции: удержание (сек)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="670"/>
         <source>Mod env decay (×)</source>
-        <translation>Модулятор огибающей: спад (×)</translation>
+        <translation>Огибающая модуляции: спад (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="671"/>
         <source>Mod env decay (s)</source>
-        <translation>Модулятор огибающей: спад (сек)</translation>
+        <translation>Огибающая модуляции: спад (сек)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="674"/>
         <source>Mod env sustain (%)</source>
-        <translation>Модулятор огибающей: поддержка (%)</translation>
+        <translation>Огибающая модуляции: поддержка (%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="677"/>
         <source>Mod env release (×)</source>
-        <translation>Модулятор огибающей: затухание (×)</translation>
+        <translation>Огибающая модуляции: затухание (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="678"/>
         <source>Mod env release (s)</source>
-        <translation>Модулятор огибающей: затухание (сек)</translation>
+        <translation>Огибающая модуляции: затухание (сек)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="681"/>
         <source>Key → Mod env hold (c)</source>
-        <translation>Клавиша → Мод. огиб.: удержание (c)</translation>
+        <translation>Клавиша → Огиб. мод.: удержание (цент)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="684"/>
         <source>Key → Mod env decay (c)</source>
-        <translation>Клавиша → Мод. огиб.: спад (c)</translation>
+        <translation>Клавиша → Огиб. мод.: спад (цент)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="687"/>
         <source>Vol env delay (×)</source>
-        <translation>Громкость огибающей: затухание (×)</translation>
+        <translation>Огибающая громкости: затухание (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="688"/>
         <source>Vol env delay (s)</source>
-        <translation>Громкость огибающей: задержка (сек)</translation>
+        <translation>Огибающая громкости: задержка (сек)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="691"/>
         <source>Vol env attack (×)</source>
-        <translation>Громкость огибающей: атака (×)</translation>
+        <translation>Огибающая громкости: атака (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="692"/>
         <source>Vol env attack (s)</source>
-        <translation>Громкость огибающей: атака (сек)</translation>
+        <translation>Огибающая громкости: атака (сек)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="695"/>
         <source>Vol env hold (×)</source>
-        <translation>Громкость огибающей: удержание (×)</translation>
+        <translation>Огибающая громкости: удержание (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="696"/>
         <source>Vol env hold (s)</source>
-        <translation>Громкость огибающей: удержание (сек)</translation>
+        <translation>Огибающая громкости: удержание (сек)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="699"/>
         <source>Vol env decay (×)</source>
-        <translation>Громкость огибающей: спад (×)</translation>
+        <translation>Огибающая громкости: спад (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="700"/>
         <source>Vol env decay (s)</source>
-        <translation>Громкость огибающей: спад (сек)</translation>
+        <translation>Огибающая громкости: спад (сек)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="703"/>
         <source>Vol env sustain (dB)</source>
-        <translation>Громкость огибающей: поддержка (дБ)</translation>
+        <translation>Огибающая громкости: поддержка (дБ)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="706"/>
         <source>Vol env release (×)</source>
-        <translation>Громкость огибающей: затухание (×)</translation>
+        <translation>Огибающая громкости: затухание (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="707"/>
         <source>Vol env release (s)</source>
-        <translation>Громкость огибающей: затухание (сек)</translation>
+        <translation>Огибающая громкости: затухание (сек)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="710"/>
         <source>Key → Vol env hold (c)</source>
-        <translation>Клавиша → Громк. огиб.: удержание (c)</translation>
+        <translation>Клавиша → Огиб. громк.: удержание (цент)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="713"/>
         <source>Key → Vol env decay (c)</source>
-        <translation>Клавиша → Громк. огиб.: спад (c)</translation>
+        <translation>Клавиша → Огиб. громк.: спад (цент)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="716"/>
@@ -371,7 +370,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="743"/>
         <source>Exclusive class</source>
-        <translation>Исключительный класс</translation>
+        <translation>Исключающий класс</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="746"/>
@@ -792,7 +791,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="217"/>
         <source>Stereo editing</source>
-        <translation>Стерео правка</translation>
+        <translation>Правка стерео</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="230"/>
@@ -942,22 +941,22 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="45"/>
         <source>Octave #1</source>
-        <translation>Октава №1</translation>
+        <translation>1 октава</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="50"/>
         <source>Octave #2</source>
-        <translation>Октава №2</translation>
+        <translation>2 октава</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="55"/>
         <source>Octave #3</source>
-        <translation>Октава №3</translation>
+        <translation>3 октава</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="60"/>
         <source>Octave #4</source>
-        <translation>Октава №4</translation>
+        <translation>4 октава</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="133"/>
@@ -1037,7 +1036,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="207"/>
         <source>Select the destination directory</source>
-        <translation>Выбор каталог назначения</translation>
+        <translation>Выбор каталога назначения</translation>
     </message>
 </context>
 <context>
@@ -1106,7 +1105,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="404"/>
         <source>Room</source>
-        <translation>Комната</translation>
+        <translation>Помещение</translation>
     </message>
 </context>
 <context>
@@ -1338,7 +1337,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="50"/>
         <source>Davy Triponney</source>
-        <translation>Davy Triponney</translation>
+        <translation>Дејви Трипони (Davy Triponney)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="53"/>
@@ -1352,84 +1351,90 @@ repository</source>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="61"/>
-        <location filename="dialogs/dialog_about.cpp" line="70"/>
+        <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>Davy Triponney</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Davy Triponney</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="63"/>
-        <location filename="dialogs/dialog_about.cpp" line="69"/>
+        <location filename="dialogs/dialog_about.cpp" line="70"/>
         <source>Andrea Celani</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Andrea Celani</translation>
+        <translation>Андреа Челани (Andrea Celani)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="64"/>
         <source>Kinwie</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Kinwie</translation>
+        <translation>Кинви (Kinwie)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="65"/>
         <source>Michael Schyllberg</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Michael Schyllberg</translation>
+        <translation>Мајкл Шилберг (Michael Schyllberg)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="66"/>
         <source>Paul Stratman</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Paul Stratman</translation>
+        <translation>Пол Стратман (Paul Stratman)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="67"/>
-        <location filename="dialogs/dialog_about.cpp" line="77"/>
+        <location filename="dialogs/dialog_about.cpp" line="79"/>
         <source>Steve Clarke</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Steve Clarke</translation>
+        <translation>Стив Кларк (Steve Clarke)</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="71"/>
-        <source>F.J. Martínez Murcia</source>
+        <location filename="dialogs/dialog_about.cpp" line="69"/>
+        <source>Aleksey Bobylev</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>F.J. Martínez Murcia</translation>
-    </message>
-    <message>
-        <location filename="dialogs/dialog_about.cpp" line="72"/>
-        <source>Georg Gergull</source>
-        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Georg Gergull</translation>
+        <translation>Алексей Бобылёв</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="73"/>
-        <source>Jay Alexander Fleming</source>
+        <source>F.J. Martínez Murcia</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Jay Alexander Fleming</translation>
+        <translation>Ф.Ј. Мартинез Мурција (F.J. Martínez Murcia)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="74"/>
-        <source>Joel Gomes</source>
+        <source>Georg Gergull</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Joel Gomes</translation>
+        <translation>Георг Гергулл (Georg Gergull)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="75"/>
-        <source>Magson</source>
+        <source>Jay Alexander Fleming</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Magson</translation>
+        <translation>Џеј Александар Флеминг</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="76"/>
-        <source>Pavel Fric</source>
+        <source>Joel Gomes</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Pavel Fric</translation>
+        <translation>Џоел Гомес (Joel Gomes)</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="77"/>
+        <source>Magson</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation>Магсон (Magson)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="78"/>
+        <source>Pavel Fric</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation>павел Фриц (Pavel Fric)</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>Chris Hansen</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Chris Hansen</translation>
+        <translation>Крис Хансен (Chris Hansen)</translation>
     </message>
 </context>
 <context>
@@ -1510,7 +1515,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="80"/>
         <source>comprising the %1 samples</source>
-        <translation>включающий %1 семпл(а,ов)</translation>
+        <translation>один, включающий %1 семпл(а,ов)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="88"/>
@@ -1530,7 +1535,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="96"/>
         <source>comprising the %1 instruments</source>
-        <translation>включающий %1 инструмент(а,ов)</translation>
+        <translation>один, включающий %1 инструмент(а,ов)</translation>
     </message>
 </context>
 <context>
@@ -1709,7 +1714,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="61"/>
         <source>Overwrite existing name with numerical ascending suffix</source>
-        <translation>Заменить имеющееся имя цифровым суффиксом по возрастанию</translation>
+        <translation>Добавить в имеющееся имя цифровой суффикс по возрастанию</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="66"/>
@@ -2627,7 +2632,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatorcombosrc.cpp" line="93"/>
         <source>Link (invalid)</source>
-        <translation>Ссылка (недопустимая)</translation>
+        <translation>Ссылка (неправильная)</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcombosrc.cpp" line="96"/>
@@ -3050,7 +3055,7 @@ rate</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="133"/>
         <source>Invalid link</source>
-        <translation>недопустимая ссылка</translation>
+        <translation>неправильная ссылка</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
@@ -3076,7 +3081,7 @@ rate</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="165"/>
         <source>invalid</source>
-        <translation>недопустимая</translation>
+        <translation>неправильная</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="172"/>
@@ -3237,7 +3242,7 @@ rate</source>
         <location filename="editor/pagesf2.cpp" line="115"/>
         <source>kB</source>
         <comment>kilo byte</comment>
-        <translation>кБ</translation>
+        <translation>КБ</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.cpp" line="248"/>
@@ -3259,7 +3264,7 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="204"/>
         <source>Use the estimated pitch and correction as values</source>
-        <translation>Занести значения предполагаемой высоты тона и коррекции</translation>
+        <translation>Заполнить значениями предполагаемой высоты тона и коррекции</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="253"/>
@@ -3305,7 +3310,7 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="473"/>
         <source>Use the full length of the sample as loop</source>
-        <translation>Использовать полную длину семпла как петлю</translation>
+        <translation>Петля на полную длину семпла</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="489"/>
@@ -3650,22 +3655,22 @@ rate</source>
         <translation>Не удалось открыть файл «%1»</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="122"/>
+        <location filename="dialogs/dialog_about.cpp" line="123"/>
         <source>Created by</source>
         <translation>Автор</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="123"/>
+        <location filename="dialogs/dialog_about.cpp" line="124"/>
         <source>Contributors</source>
         <translation>Участники</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="124"/>
+        <location filename="dialogs/dialog_about.cpp" line="125"/>
         <source>Translated by</source>
         <translation>Переводчики</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="166"/>
+        <location filename="dialogs/dialog_about.cpp" line="167"/>
         <source>Icons</source>
         <translation>Значки</translation>
     </message>
@@ -3695,7 +3700,7 @@ rate</source>
         <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="57"/>
         <source>kB</source>
         <comment>kilobytes</comment>
-        <translation>кБ</translation>
+        <translation>КБ</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="59"/>
@@ -3963,14 +3968,12 @@ https://ru.wikipedia.org/wiki/FM-синтез</translatorcomment>
     <message>
         <location filename="repository/repositorymanager.cpp" line="123"/>
         <source>glide / pitch mod</source>
-        <translatorcomment>{glide / pitch} mod OR {glide} / {pitch mod}?</translatorcomment>
-        <translation>скольжение / модуляция высоты тона</translation>
+        <translation>модуляция тона</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="124"/>
         <source>sweep / filter mod</source>
-        <translatorcomment>{sweep / filter} mod OR {sweep} / {filter mod}?</translatorcomment>
-        <translation>размах / модуляция фильтра</translation>
+        <translation>модуляция фильтра</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="125"/>
@@ -5077,8 +5080,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="350"/>
         <source>Inversion number</source>
-        <translatorcomment>???</translatorcomment>
-        <translation>Количество инверсий</translation>
+        <translation>Вид обращения</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="379"/>
@@ -5671,7 +5673,6 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="265"/>
         <source>Ranks</source>
-        <translatorcomment>???</translatorcomment>
         <translation>Ряды</translation>
     </message>
     <message>
@@ -5774,7 +5775,6 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="551"/>
         <source>At least one rank must be specified.</source>
-        <translatorcomment>rank ???</translatorcomment>
         <translation>Должен быть указан хотя бы один ряд.</translation>
     </message>
 </context>
@@ -5821,7 +5821,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
         <source>Defined parameters</source>
-        <translation>Определённые параметры</translation>
+        <translation>Заданные параметры</translation>
     </message>
 </context>
 <context>
@@ -6218,7 +6218,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="27"/>
         <source>Adapt keyrange</source>
-        <translation>Адаптировать диапазон клавиш</translation>
+        <translation>Подогнать диапазон клавиш</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="36"/>
