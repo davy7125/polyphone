@@ -15,11 +15,6 @@
 DEFINES += SOFT_VERSION=\\\"2.2.0\\\"
 DEFINES += IDENTIFIER=\\\"\\\"
 
-OBJECTS_DIR=generated_files
-MOC_DIR=generated_files
-UI_DIR=generated_files
-RCC_DIR=generated_files
-
 # List to be completed if other translations are desired
 # Format: polyphone_XX.ts, XX being the language code
 TRANSLATIONS = polyphone_fr.ts \
@@ -77,7 +72,7 @@ unix:!macx {
     DESTDIR=bin
     
     # Install target
-    
+
     target.path = $$PREFIX/bin
     install_image_svg.path = $$PREFIX/share/icons/hicolor/scalable/apps
     install_image_svg.files = contrib/polyphone.svg

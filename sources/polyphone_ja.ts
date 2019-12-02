@@ -27,7 +27,7 @@
     <message>
         <location filename="editor/tools/abstracttool.cpp" line="122"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/tools/abstracttool.cpp" line="127"/>
@@ -427,13 +427,13 @@
         <location filename="context/confmanager.cpp" line="197"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
-        <translation type="unfinished">ニ</translation>
+        <translation>レ</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="198"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
-        <translation type="unfinished">ハ</translation>
+        <translation type="unfinished">ド</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="199"/>
@@ -445,13 +445,13 @@
         <location filename="context/confmanager.cpp" line="200"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
-        <translation type="unfinished">ト</translation>
+        <translation type="unfinished">ソ</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="201"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
-        <translation type="unfinished">ロ</translation>
+        <translation type="unfinished">シ</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="202"/>
@@ -511,7 +511,7 @@
         <location filename="context/confmanager.cpp" line="216"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
-        <translation type="unfinished">ホ</translation>
+        <translation type="unfinished">ミ</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="217"/>
@@ -723,27 +723,27 @@
     <message>
         <location filename="context/interface/configpanel.ui" line="81"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>一般</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="114"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>インタフェース</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="147"/>
         <source>Sound</source>
-        <translation type="unfinished"></translation>
+        <translation>サウンド</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="180"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>仮想キーボード</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="213"/>
         <source>Online repository</source>
-        <translation type="unfinished"></translation>
+        <translation>オンライン リポジトリ</translation>
     </message>
 </context>
 <context>
@@ -751,28 +751,28 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="26"/>
         <source>Input / Output</source>
-        <translation type="unfinished"></translation>
+        <translation>入力 / 出力</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="95"/>
         <source>Audio backend</source>
-        <translation type="unfinished"></translation>
+        <translation>オーディオ バックエンド</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="124"/>
         <source>Buffer size</source>
-        <translation type="unfinished"></translation>
+        <translation>バッファサイズ</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="147"/>
         <source>MIDI input</source>
         <oldsource>Midi input</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>MIDI入力</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="163"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>オプション</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="178"/>
@@ -806,7 +806,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="57"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>言語</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="44"/>
@@ -816,7 +816,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="26"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>オプション</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="113"/>
@@ -887,42 +887,42 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="212"/>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>テーマ</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="483"/>
         <source>Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>選択</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="245"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>テキスト</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="320"/>
         <source>Window</source>
-        <translation type="unfinished"></translation>
+        <translation>ウィンドウ</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="439"/>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>背景</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="420"/>
         <source>Button</source>
-        <translation type="unfinished"></translation>
+        <translation>ボタン</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="558"/>
         <source>List and table</source>
-        <translation type="unfinished"></translation>
+        <translation>リスト 及び テーブル</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="610"/>
         <source>This modification will be applied during the next start of the software.</source>
-        <translation type="unfinished"></translation>
+        <translation>この変更は、ソフトウェアの次回の起動時に適用されます。</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.cpp" line="161"/>
@@ -943,22 +943,22 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="45"/>
         <source>Octave #1</source>
-        <translation type="unfinished"></translation>
+        <translation>オクターブ #1</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="50"/>
         <source>Octave #2</source>
-        <translation type="unfinished"></translation>
+        <translation>オクターブ #2</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="55"/>
         <source>Octave #3</source>
-        <translation type="unfinished"></translation>
+        <translation>オクターブ #3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="60"/>
         <source>Octave #4</source>
-        <translation type="unfinished"></translation>
+        <translation>オクターブ #4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="133"/>
@@ -971,12 +971,12 @@
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="20"/>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザ名</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="67"/>
         <source>Create an account</source>
-        <translation type="unfinished"></translation>
+        <translation>アカウントの作成</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="114"/>
@@ -992,28 +992,28 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="255"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>パスワード</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="274"/>
         <source>Download directory</source>
-        <translation type="unfinished"></translation>
+        <translation>ダウンロード先</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="105"/>
         <location filename="context/interface/configsectionrepository.cpp" line="135"/>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>接続</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="108"/>
         <source>Connecting...</source>
-        <translation type="unfinished"></translation>
+        <translation>接続中...</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="112"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>元に戻す</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="115"/>
@@ -1045,7 +1045,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="191"/>
         <source>Reverb</source>
-        <translation type="unfinished"></translation>
+        <translation>リバーブ</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="249"/>
@@ -1097,7 +1097,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="32"/>
         <source>Chorus</source>
-        <translation type="unfinished"></translation>
+        <translation>コーラス</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="113"/>
@@ -1115,28 +1115,28 @@ Premium!</source>
     <message>
         <location filename="context/interface/configtoc.ui" line="59"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>一般</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="72"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>インタフェース</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="85"/>
         <source>Sound</source>
-        <translation type="unfinished"></translation>
+        <translation>サウンド</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="98"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>仮想キーボード</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="111"/>
         <source>Online
 repository</source>
-        <translation type="unfinished"></translation>
+        <translation>オンライン リポジトリ</translation>
     </message>
 </context>
 <context>
@@ -1276,7 +1276,7 @@ repository</source>
     <message>
         <location filename="repository/detailsmanager.cpp" line="136"/>
         <source>Subscribe to a Premium account to get all the features!</source>
-        <translation type="unfinished"></translation>
+        <translation>プレミアムアカウントに登録すると、すべての機能を利用できます！</translation>
     </message>
     <message>
         <location filename="repository/detailsmanager.cpp" line="139"/>
@@ -1291,17 +1291,17 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_about.ui" line="29"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Polyphoneについて</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.ui" line="177"/>
         <source>Credit</source>
-        <translation type="unfinished"></translation>
+        <translation>クレジット</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.ui" line="200"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>閉じる</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="36"/>
@@ -1311,17 +1311,17 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="49"/>
         <source>Copyright</source>
-        <translation type="unfinished"></translation>
+        <translation>著作権 / コピーライト</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="53"/>
         <source>Polyphone website</source>
-        <translation type="unfinished"></translation>
+        <translation>Polyphone ウェブサイト</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="57"/>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>寄付する</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="61"/>
@@ -1420,7 +1420,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogchangelog.ui" line="17"/>
         <source>Welcome</source>
-        <translation type="unfinished"></translation>
+        <translation>ようこそ</translation>
     </message>
     <message>
         <location filename="dialogs/dialogchangelog.ui" line="87"/>
@@ -1468,7 +1468,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcreateelements.ui" line="122"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.ui" line="102"/>
@@ -1521,7 +1521,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="14"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>仮想キーボード</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="108"/>
@@ -1589,7 +1589,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_list.ui" line="64"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_list.ui" line="44"/>
@@ -1602,7 +1602,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialognewelement.ui" line="51"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.ui" line="58"/>
@@ -1651,7 +1651,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogquestion.ui" line="42"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
 </context>
 <context>
@@ -1659,7 +1659,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogrecorder.ui" line="26"/>
         <source>Recorder</source>
-        <translation type="unfinished"></translation>
+        <translation>録音</translation>
     </message>
     <message>
         <location filename="dialogs/dialogrecorder.cpp" line="102"/>
@@ -1719,7 +1719,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="157"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="137"/>
@@ -1774,7 +1774,7 @@ repository</source>
         <location filename="dialogs/dialogselection.ui" line="66"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogselection.ui" line="46"/>
@@ -1793,7 +1793,7 @@ repository</source>
     <message>
         <location filename="repository/downloadmanager.cpp" line="144"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="145"/>
@@ -1825,7 +1825,7 @@ repository</source>
     <message>
         <location filename="repository/widgets/downloadprogresscell.cpp" line="89"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="repository/widgets/downloadprogresscell.cpp" line="90"/>
@@ -1878,7 +1878,7 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="589"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="590"/>
@@ -1921,7 +1921,7 @@ repository</source>
     <message>
         <location filename="editor/editor.ui" line="154"/>
         <source>Search...</source>
-        <translation type="unfinished"></translation>
+        <translation>検索...</translation>
     </message>
     <message>
         <location filename="editor/editor.ui" line="254"/>
@@ -2006,17 +2006,17 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="55"/>
         <source>Add a sample</source>
-        <translation type="unfinished"></translation>
+        <translation>サンプルを追加</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="59"/>
         <source>Add an instrument</source>
-        <translation type="unfinished"></translation>
+        <translation>インストゥルメントを追加</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="63"/>
         <source>Add a preset</source>
-        <translation type="unfinished"></translation>
+        <translation>プリセットを追加</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="67"/>
@@ -2026,12 +2026,12 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="74"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>元に戻す</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="78"/>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>やり直し</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="83"/>
@@ -2041,12 +2041,12 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="93"/>
         <source>Recorder</source>
-        <translation type="unfinished"></translation>
+        <translation>録音</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="99"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>仮想キーボード</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="257"/>
@@ -2066,7 +2066,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="374"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
 </context>
 <context>
@@ -2161,7 +2161,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/equalizer.ui" line="618"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>リセット</translation>
     </message>
     <message>
         <location filename="editor/widgets/equalizer.ui" line="644"/>
@@ -2197,7 +2197,7 @@ repository</source>
     <message>
         <location filename="repository/browser/filtertag.ui" line="32"/>
         <source>Tag name...</source>
-        <translation type="unfinished"></translation>
+        <translation>タグ名...</translation>
     </message>
 </context>
 <context>
@@ -2340,57 +2340,57 @@ repository</source>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="39"/>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>新規作成(&amp;N)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="44"/>
         <source>&amp;Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>開く...(&amp;O)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="51"/>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>保存(&amp;S)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="56"/>
         <source>Save &amp;as...</source>
-        <translation type="unfinished"></translation>
+        <translation>名前を付けて保存...(&amp;A)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="61"/>
         <source>&amp;Export soundfonts</source>
-        <translation type="unfinished"></translation>
+        <translation>SoundFontをエクスポート(&amp;E)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="68"/>
         <source>&amp;Full screen</source>
-        <translation type="unfinished"></translation>
+        <translation>フルスクリーン(&amp;F)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="76"/>
         <source>Se&amp;ttings</source>
-        <translation type="unfinished"></translation>
+        <translation>設定(&amp;T)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="80"/>
         <source>Online &amp;manual</source>
-        <translation type="unfinished"></translation>
+        <translation>オンライン マニュアル(&amp;M)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="86"/>
         <source>About &amp;Polyphone...</source>
-        <translation type="unfinished"></translation>
+        <translation>Polyphoneについて...(&amp;P)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="92"/>
         <source>&amp;Close file</source>
-        <translation type="unfinished"></translation>
+        <translation>閉じる(&amp;C)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="97"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>終了(&amp;Q)</translation>
     </message>
 </context>
 <context>
@@ -2398,12 +2398,12 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="200"/>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>保存(&amp;S)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="186"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="176"/>
@@ -2413,7 +2413,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="187"/>
         <source>Save before exiting?</source>
-        <translation type="unfinished"></translation>
+        <translation>閉じる前に保存しますか？</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="190"/>
@@ -2423,17 +2423,17 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="197"/>
         <source>File &quot;%1&quot; has been modified.</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル &quot;%1&quot; は変更されています。</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="201"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="202"/>
         <source>Do&amp;n&apos;t save</source>
-        <translation type="unfinished"></translation>
+        <translation>保存しない(&amp;N)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="246"/>
@@ -2461,26 +2461,26 @@ repository</source>
         <location filename="mainwindow/mainwindow.ui" line="104"/>
         <source>  Settings</source>
         <extracomment>prefixed with 2 spaces</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  設定</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="120"/>
         <source>  Documentation</source>
         <extracomment>prefixed with 2 spaces</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  資料</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="139"/>
         <source>  New
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  新規作成</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="172"/>
         <source>  Forum</source>
         <extracomment>prefixed with 2 spaces</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  フォーラム</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="191"/>
@@ -2492,24 +2492,24 @@ repository</source>
         <source>  Online
   repository</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  オンライン リポジトリ</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="218"/>
         <source>Search a soundfont...</source>
-        <translation type="unfinished"></translation>
+        <translation>SoundFontを検索...</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="228"/>
         <source>  Open
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  SoundFontを開く</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="248"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>履歴</translation>
     </message>
 </context>
 <context>
@@ -2694,7 +2694,7 @@ default mod.</source>
         <location filename="editor/modulator/modulatoreditor.cpp" line="638"/>
         <location filename="editor/modulator/modulatoreditor.cpp" line="647"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="639"/>
@@ -2809,7 +2809,7 @@ default mod.</source>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="32"/>
         <source>Instruments</source>
-        <translation type="unfinished"></translation>
+        <translation>インストゥルメント</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="38"/>
@@ -2854,12 +2854,12 @@ default mod.</source>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="46"/>
         <source>Chorus</source>
-        <translation type="unfinished"></translation>
+        <translation>コーラス</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="47"/>
         <source>Reverb</source>
-        <translation type="unfinished"></translation>
+        <translation>リバーブ</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="100"/>
@@ -2890,7 +2890,7 @@ default mod.</source>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="32"/>
         <source>Presets</source>
-        <translation type="unfinished"></translation>
+        <translation>プリセット</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="38"/>
@@ -2930,12 +2930,12 @@ default mod.</source>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="45"/>
         <source>Chorus</source>
-        <translation type="unfinished"></translation>
+        <translation>コーラス</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="46"/>
         <source>Reverb</source>
-        <translation type="unfinished"></translation>
+        <translation>リバーブ</translation>
     </message>
 </context>
 <context>
@@ -2943,7 +2943,7 @@ default mod.</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="32"/>
         <source>Samples</source>
-        <translation type="unfinished"></translation>
+        <translation>サンプル</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="38"/>
@@ -3078,75 +3078,75 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="72"/>
         <source>Title...</source>
-        <translation type="unfinished"></translation>
+        <translation>タイトル...</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="130"/>
         <source>Author...</source>
-        <translation type="unfinished"></translation>
+        <translation>作者名...</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="183"/>
         <source>Date...</source>
-        <translation type="unfinished"></translation>
+        <translation>作成日時...</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="202"/>
         <source>Current date</source>
-        <translation type="unfinished"></translation>
+        <translation>現在の日付</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="234"/>
         <source>Product</source>
-        <translation type="unfinished"></translation>
+        <translation>想定する製品名</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="248"/>
         <source>Copyright</source>
-        <translation type="unfinished"></translation>
+        <translation>著作権 / コピーライト</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="262"/>
         <source>Comments</source>
-        <translation type="unfinished"></translation>
+        <translation>コメント</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="327"/>
         <source>Soundfont version</source>
-        <translation type="unfinished"></translation>
+        <translation>SoundFontのバージョン</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="363"/>
         <source>ROM name and version</source>
-        <translation type="unfinished"></translation>
+        <translation>サウンドROM名 及び バージョン</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="399"/>
         <source>Sound engine</source>
-        <translation type="unfinished"></translation>
+        <translation>対象のサウンドエンジン</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="435"/>
         <source>Editing software</source>
-        <translation type="unfinished"></translation>
+        <translation>編集に使用したツール</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="538"/>
         <source>Presets</source>
-        <translation type="unfinished"></translation>
+        <translation>プリセット</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="560"/>
         <location filename="editor/pagesf2.ui" line="681"/>
         <location filename="editor/pagesf2.ui" line="1009"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>詳細</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="659"/>
         <location filename="editor/pagesf2.ui" line="758"/>
         <source>Samples</source>
-        <translation type="unfinished"></translation>
+        <translation>サンプル</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="744"/>
@@ -3158,12 +3158,12 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="772"/>
         <source>16 bits</source>
-        <translation type="unfinished"></translation>
+        <translation>16ビット</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="777"/>
         <source>24 bits</source>
-        <translation type="unfinished"></translation>
+        <translation>24ビット</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="806"/>
@@ -3180,7 +3180,7 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="987"/>
         <source>Instruments</source>
-        <translation type="unfinished"></translation>
+        <translation>インストゥルメント</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.cpp" line="105"/>
@@ -3364,7 +3364,7 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1097"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1098"/>
@@ -3411,7 +3411,7 @@ rate</source>
         <location filename="core/sample/sound.cpp" line="78"/>
         <location filename="core/sample/sound.cpp" line="192"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="117"/>
@@ -3488,22 +3488,22 @@ rate</source>
     <message>
         <location filename="core/model/soundfont.cpp" line="46"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>概要</translation>
     </message>
     <message>
         <location filename="core/model/soundfont.cpp" line="47"/>
         <source>Samples</source>
-        <translation type="unfinished"></translation>
+        <translation>サンプル</translation>
     </message>
     <message>
         <location filename="core/model/soundfont.cpp" line="48"/>
         <source>Instruments</source>
-        <translation type="unfinished"></translation>
+        <translation>インストゥルメント</translation>
     </message>
     <message>
         <location filename="core/model/soundfont.cpp" line="49"/>
         <source>Presets</source>
-        <translation type="unfinished"></translation>
+        <translation>プリセット</translation>
     </message>
     <message>
         <location filename="core/input/grandorgue/grandorguerank.cpp" line="138"/>
@@ -3542,109 +3542,109 @@ rate</source>
         <location filename="context/keynamemanager.cpp" line="82"/>
         <source>C</source>
         <comment>key name</comment>
-        <translation>ハ</translation>
+        <translation>ド</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="65"/>
         <source>D♭</source>
         <comment>key name</comment>
-        <translation>変ニ</translation>
+        <translation>レ♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="66"/>
         <location filename="context/keynamemanager.cpp" line="84"/>
         <source>D</source>
         <comment>key name</comment>
-        <translation>ニ</translation>
+        <translation>レ</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="67"/>
         <source>E♭</source>
         <comment>key name</comment>
-        <translation>変ホ</translation>
+        <translation>ミ♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="68"/>
         <location filename="context/keynamemanager.cpp" line="86"/>
         <source>E</source>
         <comment>key name</comment>
-        <translation>ホ</translation>
+        <translation>ミ</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="69"/>
         <location filename="context/keynamemanager.cpp" line="87"/>
         <source>F</source>
         <comment>key name</comment>
-        <translation>ヘ</translation>
+        <translation>ファ</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="70"/>
         <source>G♭</source>
         <comment>key name</comment>
-        <translation>変ト</translation>
+        <translation>ソ♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="71"/>
         <location filename="context/keynamemanager.cpp" line="89"/>
         <source>G</source>
         <comment>key name</comment>
-        <translation>ト</translation>
+        <translation>ソ</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="72"/>
         <source>A♭</source>
         <comment>key name</comment>
-        <translation>変イ</translation>
+        <translation>ラ♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="73"/>
         <location filename="context/keynamemanager.cpp" line="91"/>
         <source>A</source>
         <comment>key name</comment>
-        <translation>イ</translation>
+        <translation>ラ</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="74"/>
         <source>B♭</source>
         <comment>key name</comment>
-        <translation>変ロ</translation>
+        <translation>シ♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="75"/>
         <location filename="context/keynamemanager.cpp" line="93"/>
         <source>B</source>
         <comment>key name</comment>
-        <translation>ロ</translation>
+        <translation>シ</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="83"/>
         <source>C♯</source>
         <comment>key name</comment>
-        <translation>嬰ハ</translation>
+        <translation>ド♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="85"/>
         <source>D♯</source>
         <comment>key name</comment>
-        <translation>嬰ニ</translation>
+        <translation>レ♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="88"/>
         <source>F♯</source>
         <comment>key name</comment>
-        <translation>嬰へ</translation>
+        <translation>ファ♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="90"/>
         <source>G♯</source>
         <comment>key name</comment>
-        <translation>嬰ト</translation>
+        <translation>ソ♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="92"/>
         <source>A♯</source>
         <comment>key name</comment>
-        <translation>嬰イ</translation>
+        <translation>ラ♯</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="55"/>
@@ -4188,7 +4188,7 @@ rate</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="490"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
 </context>
 <context>
@@ -4205,87 +4205,87 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="172"/>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>カテゴリ</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="188"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>使用許諾 / ライセンス</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="204"/>
         <source>Sample source</source>
-        <translation type="unfinished"></translation>
+        <translation>サンプル元</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="220"/>
         <source>Timbre</source>
-        <translation type="unfinished"></translation>
+        <translation>音色 / 音色</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="236"/>
         <source>Articulation</source>
-        <translation type="unfinished"></translation>
+        <translation>アーティキュレーション</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="252"/>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation>ジャンル</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="268"/>
         <source>MIDI standard</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI規格</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="284"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>タグ</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="337"/>
         <source>Search a soundfont...</source>
-        <translation type="unfinished"></translation>
+        <translation>SoundFontを検索...</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="387"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>日付</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="392"/>
         <source>Downloads</source>
-        <translation type="unfinished"></translation>
+        <translation>ダウンロード数</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="397"/>
         <source>Rating score</source>
-        <translation type="unfinished"></translation>
+        <translation>評価</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="402"/>
         <source>Title (A→Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>タイトル (A→Z)</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="458"/>
         <source>Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>フィルター</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="487"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>リセット</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="506"/>
         <source>Subscribe to a Premium account to get all the features!</source>
-        <translation type="unfinished"></translation>
+        <translation>プレミアムアカウントに登録すると、すべての機能を利用できます！</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="528"/>
         <source>No results</source>
-        <translation type="unfinished"></translation>
+        <translation>何も見つかりませんでした</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="609"/>
@@ -4343,27 +4343,27 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="36"/>
         <source>Timbre</source>
-        <translation type="unfinished"></translation>
+        <translation>音色 / 音色</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="62"/>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation>ジャンル</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="94"/>
         <source>Articulation</source>
-        <translation type="unfinished"></translation>
+        <translation>アーティキュレーション</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="113"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>タグ</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="177"/>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>カテゴリ</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="184"/>
@@ -4373,12 +4373,12 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="197"/>
         <source>Sample source</source>
-        <translation type="unfinished"></translation>
+        <translation>サンプル元</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="245"/>
         <source>MIDI standard</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI規格</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="46"/>
@@ -4405,7 +4405,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditortop.ui" line="38"/>
         <source>Title...</source>
-        <translation type="unfinished"></translation>
+        <translation>タイトル...</translation>
     </message>
 </context>
 <context>
@@ -4418,7 +4418,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="48"/>
         <source>Title...</source>
-        <translation type="unfinished"></translation>
+        <translation>タイトル...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="58"/>
@@ -4465,12 +4465,12 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewercenter.ui" line="93"/>
         <source>Downloads</source>
-        <translation type="unfinished"></translation>
+        <translation>ダウンロード数</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewercenter.ui" line="129"/>
         <source>Comments</source>
-        <translation type="unfinished"></translation>
+        <translation>コメント</translation>
     </message>
 </context>
 <context>
@@ -4478,37 +4478,37 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="161"/>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>カテゴリ</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="177"/>
         <source>Sample source</source>
-        <translation type="unfinished"></translation>
+        <translation>サンプル元</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="193"/>
         <source>Timbre</source>
-        <translation type="unfinished"></translation>
+        <translation>音色 / 音色</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="209"/>
         <source>Articulation</source>
-        <translation type="unfinished"></translation>
+        <translation>アーティキュレーション</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="225"/>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation>ジャンル</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="241"/>
         <source>MIDI standard</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI規格</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="257"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>タグ</translation>
     </message>
 </context>
 <context>
@@ -4516,7 +4516,7 @@ download content</source>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="47"/>
         <source>mute</source>
-        <translation type="unfinished"></translation>
+        <translation>ミュート</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="52"/>
@@ -4557,12 +4557,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="context/thememanager.cpp" line="57"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>カスタム</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="376"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>デフォルト</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="396"/>
@@ -4572,32 +4572,32 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="context/thememanager.cpp" line="409"/>
         <source>Dark, blue</source>
-        <translation type="unfinished"></translation>
+        <translation>ダーク ブルー</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="422"/>
         <source>Dark, orange</source>
-        <translation type="unfinished"></translation>
+        <translation>ダーク オレンジ</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="435"/>
         <source>Dark, green</source>
-        <translation type="unfinished"></translation>
+        <translation>ダーク グリーン</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="448"/>
         <source>Dark, yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>ダーク イエロー</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="461"/>
         <source>Aqua</source>
-        <translation type="unfinished"></translation>
+        <translation>アクア</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="474"/>
         <source>Spring</source>
-        <translation type="unfinished"></translation>
+        <translation>春</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="487"/>
@@ -4617,7 +4617,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="context/thememanager.cpp" line="526"/>
         <source>Pink</source>
-        <translation type="unfinished"></translation>
+        <translation>ピンク</translation>
     </message>
 </context>
 <context>
@@ -4698,7 +4698,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="49"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="29"/>
@@ -4759,7 +4759,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="55"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="35"/>
@@ -4795,7 +4795,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="108"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="36"/>
@@ -4965,7 +4965,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="719"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="699"/>
@@ -5027,7 +5027,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="88"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
 </context>
 <context>
@@ -5063,7 +5063,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="143"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="123"/>
@@ -5109,7 +5109,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="87"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>履歴</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="94"/>
@@ -5124,7 +5124,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="150"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="130"/>
@@ -5145,7 +5145,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="116"/>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="123"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="116"/>
@@ -5181,7 +5181,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="42"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="67"/>
@@ -5217,7 +5217,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="101"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="81"/>
@@ -5433,7 +5433,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="278"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="271"/>
@@ -5612,7 +5612,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="498"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="478"/>
@@ -5623,7 +5623,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="535"/>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="551"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="535"/>
@@ -5721,7 +5721,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="113"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>閉じる</translation>
     </message>
 </context>
 <context>
@@ -5742,7 +5742,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="58"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="38"/>
@@ -5864,7 +5864,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="95"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="88"/>
@@ -5976,7 +5976,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="190"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="170"/>
@@ -5995,7 +5995,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="202"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="158"/>
@@ -6059,7 +6059,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="59"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="39"/>
@@ -6082,7 +6082,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="56"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="36"/>
@@ -6149,12 +6149,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="112"/>
         <source>Subscribe to a Premium account to get all the features!</source>
-        <translation type="unfinished"></translation>
+        <translation>プレミアムアカウントに登録すると、すべての機能を利用できます！</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="122"/>
         <source>Welcome %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ようこそ %1</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="127"/>
@@ -6177,7 +6177,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeview.cpp" line="917"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/tree/treeview.cpp" line="917"/>
@@ -6190,32 +6190,32 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="48"/>
         <source>&amp;Bind to...</source>
-        <translation type="unfinished"></translation>
+        <translation>...に関連付け(&amp;B)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="53"/>
         <source>&amp;Replace by...</source>
-        <translation type="unfinished"></translation>
+        <translation>...と置き換える(&amp;R)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="61"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>コピー(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="67"/>
         <source>&amp;Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>貼り付け(&amp;P)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="73"/>
         <source>D&amp;uplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>複製(&amp;U)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="79"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>削除(&amp;D)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="86"/>
@@ -6223,7 +6223,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tree/treeviewmenu.cpp" line="147"/>
         <source>Re&amp;name...</source>
         <oldsource>&amp;Rename...</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>名前の変更...(&amp;N)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="143"/>
@@ -6234,7 +6234,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tree/treeviewmenu.cpp" line="189"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="192"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="190"/>
@@ -6249,17 +6249,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="340"/>
         <source>Sample name</source>
-        <translation type="unfinished"></translation>
+        <translation>サンプル名</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="342"/>
         <source>Instrument name</source>
-        <translation type="unfinished"></translation>
+        <translation>インストゥルメント名</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="344"/>
         <source>Preset name</source>
-        <translation type="unfinished"></translation>
+        <translation>プリセット名</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="347"/>
@@ -6309,7 +6309,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="89"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>設定</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="125"/>
@@ -6319,12 +6319,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="183"/>
         <source>Online repository</source>
-        <translation type="unfinished"></translation>
+        <translation>オンライン リポジトリ</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="228"/>
         <source>Save before exiting?</source>
-        <translation type="unfinished"></translation>
+        <translation>閉じる前に保存しますか？</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="231"/>
@@ -6334,28 +6334,28 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="232"/>
         <source>File &quot;%1&quot; has been modified.</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル &quot;%1&quot; は変更されています。</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="124"/>
         <location filename="mainwindow/windowmanager.cpp" line="233"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="235"/>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>保存(&amp;S)</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="236"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>キャンセル(&amp;C)</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="237"/>
         <source>Do&amp;n&apos;t save</source>
-        <translation type="unfinished"></translation>
+        <translation>保存しない(&amp;N)</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="325"/>
