@@ -1367,7 +1367,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="69"/>
         <source>Aleksey Bobylev</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Алексей Бобылёв</translation>
+        <translation>Алексеј Бобиљов</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="73"/>
