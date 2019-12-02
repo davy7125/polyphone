@@ -28,18 +28,6 @@
 #include <QSpinBox>
 #include <QLineEdit>
 
-
-class SpinBoxCents : public QSpinBox
-{
-    Q_OBJECT
-
-public:
-    SpinBoxCents(QWidget * parent = nullptr);
-
-private slots:
-    void onValueChanged(int value);
-};
-
 class LineEditCents : public QLineEdit
 {
     Q_OBJECT
@@ -54,6 +42,17 @@ protected:
 private:
     QColor _textColor;
     QFont _textFont;
+};
+
+class SpinBoxCents : public QSpinBox
+{
+    Q_OBJECT
+
+public:
+    SpinBoxCents(QWidget * parent = nullptr);
+
+protected:
+    virtual QString textFromValue(int val) const;
 };
 
 #endif // SPINBOXCENTS_H

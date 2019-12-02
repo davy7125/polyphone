@@ -32,18 +32,14 @@ SpinBoxCents::SpinBoxCents(QWidget *parent) : QSpinBox(parent)
 {
     this->setMaximum(100);
     this->setMinimum(-100);
-    this->setPrefix("+");
 
     // Change the line edit
     this->setLineEdit(new LineEditCents(this));
-
-    // Connection
-    connect(this, SIGNAL(valueChanged(int)), this, SLOT(onValueChanged(int)));
 }
 
-void SpinBoxCents::onValueChanged(int value)
+QString SpinBoxCents::textFromValue(int val) const
 {
-    this->setPrefix(value >= 0 ? "+" : "");
+    return (val > 0 ? "+" : "") + QString::number(val);
 }
 
 LineEditCents::LineEditCents(QWidget * parent) : QLineEdit(parent)
@@ -73,6 +69,7 @@ void LineEditCents::keyPressEvent(QKeyEvent *event)
         int value = qAbs(this->text().toInt(&ok));
         if (ok)
             this->setText(QString::number(event->key() == Qt::Key_Minus ? -value : value));
+        this->setSelection(event->key() == Qt::Key_Minus && value != 0 ? 1 : 0, 4);
     }
     else
         QLineEdit::keyPressEvent(event);
