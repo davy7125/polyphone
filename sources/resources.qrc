@@ -87,21 +87,6 @@
         <file alias="info.svg">resources/info.svg</file>
         <file alias="left.svg">resources/left.svg</file>
     </qresource>
-    <qresource prefix="/translations">
-        <file>resources/translations/polyphone_cs.qm</file>
-        <file>resources/translations/polyphone_de.qm</file>
-        <file>resources/translations/polyphone_es.qm</file>
-        <file>resources/translations/polyphone_it.qm</file>
-        <file>resources/translations/polyphone_ja.qm</file>
-        <file>resources/translations/polyphone_nl.qm</file>
-        <file>resources/translations/polyphone_pt.qm</file>
-        <file>resources/translations/polyphone_ru.qm</file>
-        <file>resources/translations/polyphone_sr.qm</file>
-        <file>resources/translations/polyphone_tr.qm</file>
-        <file>resources/translations/polyphone_zh.qm</file>
-        <file>resources/translations/polyphone_fr.qm</file>
-        <file>resources/translations/polyphone_da.qm</file>
-    </qresource>
     <qresource prefix="/misc">
         <file>changelog</file>
         <file alias="background.png">resources/background.png</file>
