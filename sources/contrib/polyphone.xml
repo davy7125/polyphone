@@ -2,6 +2,7 @@
 <mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
   <mime-type type="audio/x-soundfont">
     <comment>SoundFont sf2</comment>
+    <comment xml:lang="ru">Файл SoundFont sf2</comment>
     <magic priority="50">
       <match type="string" offset="0" value="RIFF">
         <match type="string" offset="8" value="sfbk"/>
@@ -11,14 +12,17 @@
   </mime-type>
   <mime-type type="audio/x-soundfont">
     <comment>SoundFont sfz</comment>
+    <comment xml:lang="ru">Файл SoundFont sfz</comment>
     <glob pattern="*.sfz"/>
   </mime-type>
   <mime-type type="audio/x-soundfont">
     <comment>Compressed SoundFont sf3</comment>
+    <comment xml:lang="ru">Сжатый файл SoundFont sf3</comment>
     <glob pattern="*.sf3"/>
   </mime-type>
   <mime-type type="audio/x-soundfont">
     <comment>SoundFont archive sfArk</comment>
+    <comment xml:lang="ru">Архив SoundFont sfArk</comment>
     <glob pattern="*.sfArk"/>
   </mime-type>
 </mime-info>
