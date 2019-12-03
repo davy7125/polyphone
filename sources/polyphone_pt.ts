@@ -2664,17 +2664,13 @@ default mod.</source>
         <source>Expand the modulator section</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="256"/>
-        <source>1 modulator:</source>
-        <comment>singular form of modulator</comment>
-        <translation>1 modulador:</translation>
-    </message>
-    <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="258"/>
-        <source>%1 modulators:</source>
-        <comment>plural form of modulator</comment>
-        <translation>%1 moduladores:</translation>
+    <message numerus="yes">
+        <location filename="editor/modulator/modulatoreditor.cpp" line="254"/>
+        <source>%n modulator(s):</source>
+        <translation>
+            <numerusform>%n modulador:</numerusform>
+            <numerusform>%n moduladores:</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="344"/>
@@ -2804,15 +2800,13 @@ default mod.</source>
 </context>
 <context>
     <name>PageOverview</name>
-    <message>
+    <message numerus="yes">
         <location filename="editor/overview/pageoverview.cpp" line="83"/>
-        <source>elements</source>
-        <translation>elementos</translation>
-    </message>
-    <message>
-        <location filename="editor/overview/pageoverview.cpp" line="83"/>
-        <source>element</source>
-        <translation>elemento</translation>
+        <source>%n element(s)</source>
+        <translation>
+            <numerusform>%n elemento</numerusform>
+            <numerusform>%n elementos</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -3250,19 +3244,14 @@ inválida</translation>
         <comment>kilo byte</comment>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="editor/pagesf2.cpp" line="248"/>
-        <location filename="editor/pagesf2.cpp" line="261"/>
-        <source>%1 (unused: %2)</source>
-        <comment>plural form</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/pagesf2.cpp" line="250"/>
-        <location filename="editor/pagesf2.cpp" line="263"/>
-        <source>%1 (unused: %2)</source>
-        <comment>singular form</comment>
-        <translation type="unfinished"></translation>
+    <message numerus="yes">
+        <location filename="editor/pagesf2.cpp" line="247"/>
+        <location filename="editor/pagesf2.cpp" line="257"/>
+        <source>%1 (unused: %n)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -5029,8 +5018,25 @@ Other soundfont editors might display other units.</source>
     <name>ToolCleanUnused</name>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="110"/>
-        <source>%1 sample(s) and %2 instrument(s) have been deleted.</source>
+        <source>%1 and %2 have been deleted.</source>
+        <comment>[X sample(s)] and [Y instrument(s)] have been deleted.</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="111"/>
+        <source>%n sample(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="112"/>
+        <source>%n instrument(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="48"/>
@@ -5819,15 +5825,13 @@ Other soundfont editors might display other units.</source>
 </context>
 <context>
     <name>ToolRemoveMods</name>
-    <message>
-        <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="116"/>
-        <source>1 modulator has been deleted.</source>
-        <translation>1 modulador foi deletado.</translation>
-    </message>
-    <message>
+    <message numerus="yes">
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="118"/>
-        <source>%1 modulators have been deleted.</source>
-        <translation>%1 moduladores foram deletados.</translation>
+        <source>%n modulator(s) has(have) been deleted.</source>
+        <translation>
+            <numerusform>%n modulador foi deletado.</numerusform>
+            <numerusform>%n moduladores foram deletados.</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="125"/>

@@ -244,10 +244,7 @@ void PageSf2::countElements()
     // Display
     if (unusedSmpl)
     {
-        if (unusedSmpl > 1)
-            ui->label_nbSmpl->setText(tr("%1 (unused: %2)", "plural form").arg(usedSmpl).arg(unusedSmpl));
-        else
-            ui->label_nbSmpl->setText(tr("%1 (unused: %2)", "singular form").arg(usedSmpl).arg(unusedSmpl));
+        ui->label_nbSmpl->setText(tr("%1 (unused: %n)", "", unusedSmpl).arg(usedSmpl));
         ui->label_nbSmpl->setStyleSheet(redStr);
     }
     else
@@ -257,10 +254,7 @@ void PageSf2::countElements()
     }
     if (unusedInst)
     {
-        if (unusedInst > 1)
-            ui->label_nbInst->setText(tr("%1 (unused: %2)", "plural form").arg(usedInst).arg(unusedInst));
-        else
-            ui->label_nbInst->setText(tr("%1 (unused: %2)", "singular form").arg(usedInst).arg(unusedInst));
+        ui->label_nbInst->setText(tr("%1 (unused: %n)", "", unusedInst).arg(usedInst));
         ui->label_nbInst->setStyleSheet(redStr);
     }
     else

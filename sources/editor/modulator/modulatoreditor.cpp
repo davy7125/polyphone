@@ -251,12 +251,7 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes, bool keep
     }
     else
     {
-        summary = "<b>";
-        if (modCount == 1)
-            summary += tr("1 modulator:", "singular form of modulator");
-        else
-            summary += tr("%1 modulators:", "plural form of modulator").arg(modCount);
-        summary += "</b> ";
+        summary = "<b>" + tr("%n modulator(s):", "", modCount) + "</b> ";
         for (int i = 0; i < modTargets.count(); i++)
             summary += (i > 0 ? ", " : "") + modTargets[i];
         ui->labelModSummary->setStyleSheet("");
