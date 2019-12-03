@@ -20,7 +20,7 @@
   <mime-type type="audio/x-soundfont">
     <comment>Compressed SoundFont sf3</comment>
     <comment xml:lang="ru">Сжатый файл SoundFont sf3</comment>
-    <comment xml:lang="fr">Banque de son compressé sf3</comment>
+    <comment xml:lang="fr">Banque de son compressée sf3</comment>
     <glob pattern="*.sf3"/>
   </mime-type>
   <mime-type type="audio/x-soundfont">
