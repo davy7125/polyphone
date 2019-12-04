@@ -17,7 +17,8 @@ DEFINES += IDENTIFIER=\\\"\\\"
 
 # List to be completed if other translations are desired
 # Format: polyphone_XX.ts, XX being the language code
-TRANSLATIONS = polyphone_fr.ts \
+TRANSLATIONS = polyphone_en.ts \
+    polyphone_fr.ts \
     polyphone_es.ts \
     polyphone_it.ts \
     polyphone_sr.ts \
