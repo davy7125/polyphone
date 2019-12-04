@@ -77,18 +77,14 @@ void TranslationManager::translate()
                 ConfManager::SECTION_NONE, "language",
                 QLocale::system().name().section('_', 0, 0)).toString();
 
-    // If not english, the application is translated
-    if (language != "en")
-    {
-        if (!_languages.keys().contains(language))
-            language = DEFAULT_LANGUAGE;
+    if (!_languages.keys().contains(language))
+        language = DEFAULT_LANGUAGE;
 
-        // First try to find an additional file
-        QString fileName = "/polyphone_" + language + ".qm";
-        if (QFile::exists(QDir::currentPath() + "/" + TRANSLATION_DIRECTORY + fileName))
-            _translator->load(QDir::currentPath() + "/" + TRANSLATION_DIRECTORY + fileName);
-        else
-            _translator->load(RESOURCE_PATH + fileName);
-        QApplication::installTranslator(_translator);
-    }
+    // First try to find an additional file
+    QString fileName = "/polyphone_" + language + ".qm";
+    if (QFile::exists(QDir::currentPath() + "/" + TRANSLATION_DIRECTORY + fileName))
+        _translator->load(QDir::currentPath() + "/" + TRANSLATION_DIRECTORY + fileName);
+    else
+        _translator->load(RESOURCE_PATH + fileName);
+    QApplication::installTranslator(_translator);
 }

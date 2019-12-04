@@ -2665,17 +2665,14 @@ default mod.</source>
         <source>Expand the modulator section</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="256"/>
-        <source>1 modulator:</source>
-        <comment>singular form of modulator</comment>
-        <translation>1 modulátor:</translation>
-    </message>
-    <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="258"/>
-        <source>%1 modulators:</source>
-        <comment>plural form of modulator</comment>
-        <translation>%1 modulátory:</translation>
+    <message numerus="yes">
+        <location filename="editor/modulator/modulatoreditor.cpp" line="254"/>
+        <source>%n modulator(s):</source>
+        <translation>
+            <numerusform>%n modulátor:</numerusform>
+            <numerusform>%n modulátory:</numerusform>
+            <numerusform>%n modulátorů:</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="344"/>
@@ -2805,15 +2802,14 @@ default mod.</source>
 </context>
 <context>
     <name>PageOverview</name>
-    <message>
+    <message numerus="yes">
         <location filename="editor/overview/pageoverview.cpp" line="83"/>
-        <source>elements</source>
-        <translation>Prvky</translation>
-    </message>
-    <message>
-        <location filename="editor/overview/pageoverview.cpp" line="83"/>
-        <source>element</source>
-        <translation>Prvek</translation>
+        <source>%n element(s)</source>
+        <translation>
+            <numerusform>%n prvek</numerusform>
+            <numerusform>%n prvky</numerusform>
+            <numerusform>%n prvků</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -3231,19 +3227,15 @@ rate</source>
         <comment>kilo byte</comment>
         <translation>kB</translation>
     </message>
-    <message>
-        <location filename="editor/pagesf2.cpp" line="248"/>
-        <location filename="editor/pagesf2.cpp" line="261"/>
-        <source>%1 (unused: %2)</source>
-        <comment>plural form</comment>
-        <translation>%1 (nepoužíváno: %2)</translation>
-    </message>
-    <message>
-        <location filename="editor/pagesf2.cpp" line="250"/>
-        <location filename="editor/pagesf2.cpp" line="263"/>
-        <source>%1 (unused: %2)</source>
-        <comment>singular form</comment>
-        <translation>%1 (nepoužíváno: %2)</translation>
+    <message numerus="yes">
+        <location filename="editor/pagesf2.cpp" line="247"/>
+        <location filename="editor/pagesf2.cpp" line="257"/>
+        <source>%1 (unused: %n)</source>
+        <translation>
+            <numerusform>%1 (nepoužíváno: %n)</numerusform>
+            <numerusform>%1 (nepoužíváno: %n)</numerusform>
+            <numerusform>%1 (nepoužíváno: %n)</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -5011,9 +5003,28 @@ Other soundfont editors might display other units.</source>
     <name>ToolCleanUnused</name>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="110"/>
-        <source>%1 sample(s) and %2 instrument(s) have been deleted.</source>
-        <translatorcomment>Byl(o) smazán(o) %1 vzorek (vzorků) a %2 nástroj (nástrojů).</translatorcomment>
-        <translation></translation>
+        <source>%1 and %2 have been deleted.</source>
+        <comment>[X sample(s)] and [Y instrument(s)] have been deleted.</comment>
+        <translatorcomment>[Byl(o) smazán(o) X vzorek (vzorků)] a [Y nástroj (nástrojů)].</translatorcomment>
+        <translation>%1 a %2.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="111"/>
+        <source>%n sample(s)</source>
+        <translation>
+            <numerusform>Byl smazán %n vzorek</numerusform>
+            <numerusform>Byly smazány %n vzorky</numerusform>
+            <numerusform>Bylo smazáno %n vzorků</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="112"/>
+        <source>%n instrument(s)</source>
+        <translation>
+            <numerusform>%n nástroj</numerusform>
+            <numerusform>%n nástroje</numerusform>
+            <numerusform>%n nástrojů</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="48"/>
@@ -5802,15 +5813,14 @@ Other soundfont editors might display other units.</source>
 </context>
 <context>
     <name>ToolRemoveMods</name>
-    <message>
-        <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="116"/>
-        <source>1 modulator has been deleted.</source>
-        <translation>1 modulátor byl smazán.</translation>
-    </message>
-    <message>
+    <message numerus="yes">
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="118"/>
-        <source>%1 modulators have been deleted.</source>
-        <translation>Bylo smazáno %1 modulátorů.</translation>
+        <source>%n modulator(s) has(have) been deleted.</source>
+        <translation>
+            <numerusform>%n modulátor byl smazán.</numerusform>
+            <numerusform>Byly smazány %n modulátory.</numerusform>
+            <numerusform>Bylo smazáno %n modulátorů.</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="125"/>

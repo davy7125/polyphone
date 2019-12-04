@@ -112,11 +112,10 @@ void ToolRemoveMods::clearMod(SoundfontManager * sm, EltID idMod)
 
 QString ToolRemoveMods::getConfirmation()
 {
-    if (_count == 1)
-        return tr("1 modulator has been deleted.");
-    else if (_count > 1)
-        return tr("%1 modulators have been deleted.").arg(QString::number(_count));
-    return "";
+    if (_count == 0)
+        return "";
+    else
+        return tr("%n modulator(s) has(have) been deleted.", "", _count);
 }
 
 QString ToolRemoveMods::getWarning()
