@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>166</width>
+    <width>168</width>
     <height>35</height>
    </rect>
   </property>
@@ -67,8 +67,8 @@
    </item>
    <item>
     <widget class="QPushButton" name="pushUser">
-     <property name="enabled">
-      <bool>false</bool>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="toolTip">
       <string>User area</string>

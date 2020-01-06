@@ -22,49 +22,58 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SOUNDFONTVIEWER_H
-#define SOUNDFONTVIEWER_H
+#include "uploadingdialog.h"
+#include "ui_uploadingdialog.h"
+#include <QCloseEvent>
 
-#include <QWidget>
-class SoundfontFilter;
-class UrlReader;
-class UploadingDialog;
+UploadingDialog::UploadingDialog(quint32 stepNumber, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::UploadingDialog),
+    _stepNumber(stepNumber),
+    _isCanceled(false)
+{
+    ui->setupUi(this);
+    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
+    this->setWindowModality(Qt::WindowModal);
+    this->setFixedWidth(350);
 
-namespace Ui {
-class SoundfontViewer;
+    // Progress bar
+    ui->progressBar->setMinimum(0);
+    this->setValue(0);
 }
 
-class SoundfontViewer : public QWidget
+UploadingDialog::~UploadingDialog()
 {
-    Q_OBJECT
+    delete ui;
+}
 
-public:
-    explicit SoundfontViewer(QWidget *parent = nullptr);
-    ~SoundfontViewer();
+void UploadingDialog::on_pushCancel_clicked()
+{
+    this->cancel();
+}
 
-    void initialize(int soundfontId, bool forceReload);
-    int getSoundfontId() { return _soundfontId; }
+void UploadingDialog::setValue(int value)
+{
+    if (_isCanceled)
+        return;
+    ui->progressBar->setMaximum(value == 0 ? 0 : static_cast<int>(_stepNumber));
+    ui->progressBar->setValue(value);
+}
 
-signals:
-    void itemClicked(SoundfontFilter * filter);
+void UploadingDialog::closeEvent(QCloseEvent *event)
+{
+    this->cancel();
+    event->ignore();
+}
 
-private slots:
-    void onDetailsReady(int soundfontId);
-    void onDetailsFailed(int soundfontId, QString error);
-    void on_pushRetry_clicked();
-    void on_pushCancel_clicked();
-    void on_pushSave_clicked();
-    void on_pushEdit_clicked();
-    void postProgressChanged(int progress);
-    void postCompleted(QString error);
-    void onUploadCancel();
-    void onRefreshReady(QString error);
+void UploadingDialog::cancel()
+{
+    if (_isCanceled)
+        return;
 
-private:
-    Ui::SoundfontViewer *ui;
-    UrlReader * _urlReader;
-    int _soundfontId;
-    UploadingDialog * _waitingDialog;
-};
-
-#endif // SOUNDFONTVIEWER_H
+    ui->progressBar->setValue(0);
+    ui->progressBar->setMaximum(0);
+    ui->labelProcess->setText(tr("Canceling..."));
+    _isCanceled = true;
+    emit(canceled());
+}

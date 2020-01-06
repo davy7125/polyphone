@@ -25,7 +25,7 @@
 #include "urlreaderjson.h"
 #include <QJsonDocument>
 
-UrlReaderJson::UrlReaderJson(QString url) : UrlReader(url) {}
+UrlReaderJson::UrlReaderJson(QString url) : UrlReader(url, true) {}
 
 void UrlReaderJson::processData()
 {

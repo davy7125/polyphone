@@ -52,7 +52,7 @@ void DownloadManager::kill()
 }
 
 DownloadManager::DownloadManager() : QObject(),
-    _reader(new UrlReader(RepositoryManager::BASE_URL + "download")),
+    _reader(new UrlReader(RepositoryManager::BASE_URL + "download", true)),
     _currentDownloadId(-1)
 {
     // Downloader
@@ -90,7 +90,8 @@ void DownloadManager::processOne()
     // Build a url to download
     _reader->clearArguments();
     _reader->addArgument("id", QString::number(_currentDownloadId));
-    if (UserManager::getInstance()->getConnectionState() == UserManager::CONNECTED_PREMIUM)
+    if (UserManager::getInstance()->getConnectionState() == UserManager::CONNECTED_PREMIUM ||
+        UserManager::getInstance()->getConnectionState() == UserManager::CONNECTED_ADMIN)
     {
         _reader->addArgument("user", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString());
         _reader->addArgument("pass", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password", "").toString());

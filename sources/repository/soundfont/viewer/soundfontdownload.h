@@ -27,6 +27,7 @@
 
 #include <QWidget>
 class SoundfontDownloadData;
+class SoundfontDownloadCell;
 
 namespace Ui {
 class SoundfontDownload;
@@ -43,7 +44,10 @@ public:
     void display(QList<SoundfontDownloadData *> data);
 
 private:
+    void clear();
+
     Ui::SoundfontDownload *ui;
+    QList<SoundfontDownloadCell * > _cells;
 };
 
 #endif // SOUNDFONTDOWNLOAD_H

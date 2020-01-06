@@ -40,8 +40,15 @@ SoundfontViewerLeft::SoundfontViewerLeft(QWidget *parent) :
     ui->iconLicense->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/copyright.svg", QSize(16, 16), ThemeManager::ColorType::LIST_TEXT));
     ui->iconWebsite->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/globe.svg", QSize(16, 16), ThemeManager::ColorType::LIST_TEXT));
 
-    // Connection
+    // Connections
     connect(ui->labelAuthor, SIGNAL(linkActivated(QString)), this, SLOT(onAuthorClicked(QString)));
+    connect(ui->attributeCategory, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+    connect(ui->attributeSampleSource, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+    connect(ui->attributeTimbre, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+    connect(ui->attributeArticulation, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+    connect(ui->attributeGenre, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+    connect(ui->attributeMidiStandard, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+    connect(ui->attributeTag, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
 }
 
 SoundfontViewerLeft::~SoundfontViewerLeft()
@@ -83,14 +90,14 @@ void SoundfontViewerLeft::initialize(SoundfontInformation *soundfontInfo)
     }
 
     // Category
-    connect(ui->attributeCategory, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+    ui->attributeCategory->clear();
     ui->attributeCategory->addCategory(soundfontInfo->getCategoryId());
 
     // Properties
     SoundfontInformation::Property property = SoundfontInformation::SAMPLE_SOURCE;
     if (soundfontInfo->getProperties().contains(property) && !soundfontInfo->getProperties()[property].empty())
     {
-        connect(ui->attributeSampleSource, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+        ui->attributeSampleSource->clear();
         foreach (QString value, soundfontInfo->getProperties()[property])
             ui->attributeSampleSource->addProperty(property, value);
     }
@@ -103,7 +110,7 @@ void SoundfontViewerLeft::initialize(SoundfontInformation *soundfontInfo)
     property = SoundfontInformation::TIMBRE;
     if (soundfontInfo->getProperties().contains(property) && !soundfontInfo->getProperties()[property].empty())
     {
-        connect(ui->attributeTimbre, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+        ui->attributeTimbre->clear();
         foreach (QString value, soundfontInfo->getProperties()[property])
             ui->attributeTimbre->addProperty(property, value);
     }
@@ -116,7 +123,7 @@ void SoundfontViewerLeft::initialize(SoundfontInformation *soundfontInfo)
     property = SoundfontInformation::ARTICULATION;
     if (soundfontInfo->getProperties().contains(property) && !soundfontInfo->getProperties()[property].empty())
     {
-        connect(ui->attributeArticulation, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+        ui->attributeArticulation->clear();
         foreach (QString value, soundfontInfo->getProperties()[property])
             ui->attributeArticulation->addProperty(property, value);
     }
@@ -129,7 +136,7 @@ void SoundfontViewerLeft::initialize(SoundfontInformation *soundfontInfo)
     property = SoundfontInformation::GENRE;
     if (soundfontInfo->getProperties().contains(property) && !soundfontInfo->getProperties()[property].empty())
     {
-        connect(ui->attributeGenre, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+        ui->attributeGenre->clear();
         foreach (QString value, soundfontInfo->getProperties()[property])
             ui->attributeGenre->addProperty(property, value);
     }
@@ -142,7 +149,7 @@ void SoundfontViewerLeft::initialize(SoundfontInformation *soundfontInfo)
     property = SoundfontInformation::MIDI_STANDARD;
     if (soundfontInfo->getProperties().contains(property) && !soundfontInfo->getProperties()[property].empty())
     {
-        connect(ui->attributeMidiStandard, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+        ui->attributeMidiStandard->clear();
         foreach (QString value, soundfontInfo->getProperties()[property])
             ui->attributeMidiStandard->addProperty(property, value);
     }
@@ -160,7 +167,7 @@ void SoundfontViewerLeft::initialize(SoundfontInformation *soundfontInfo)
     }
     else
     {
-        connect(ui->attributeTag, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+        ui->attributeTag->clear();
         foreach (QString tag, soundfontInfo->getTags())
             ui->attributeTag->addTag(tag);
     }

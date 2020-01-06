@@ -44,7 +44,8 @@ public:
         FILE_TYPE_RECORD,
         FILE_TYPE_EXPORT,
         FILE_TYPE_FREQUENCIES,
-        FILE_TYPE_EXECUTABLE
+        FILE_TYPE_EXECUTABLE,
+        FILE_TYPE_UPLOAD
     };
 
     RecentFileManager(ConfManager * configuration);
@@ -69,7 +70,7 @@ private:
     ConfManager * _configuration;
     QStringList _listFiles;
     QList<QDateTime> _listDateTimes;
-    QString _recordFile, _sampleFile, _exportFile, _pngFile, _executableFile;
+    QString _recordFile, _sampleFile, _exportFile, _pngFile, _executableFile, _uploadFile;
 };
 
 #endif // RECENTFILEMANAGER_H

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>411</width>
-    <height>133</height>
+    <height>154</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -221,6 +221,32 @@ Premium!</string>
           </size>
          </property>
         </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="pageAdmin">
+      <layout class="QGridLayout" name="gridLayout_5">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="labelAdmin">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

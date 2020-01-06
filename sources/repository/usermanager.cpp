@@ -127,7 +127,9 @@ void UserManager::userDataAvailable(QString error)
                 break;
             case 2:
                 _error = "";
-                if (data.contains("isPremium") && data.value("isPremium").toBool())
+                if (data.contains("isAdmin") && data.value("isAdmin").toBool())
+                    _connectionState = CONNECTED_ADMIN;
+                else if (data.contains("isPremium") && data.value("isPremium").toBool())
                     _connectionState = CONNECTED_PREMIUM;
                 else
                     _connectionState = CONNECTED;
@@ -135,6 +137,10 @@ void UserManager::userDataAvailable(QString error)
                     _username = data.value("username").toString();
                 else
                     _username = "";
+                if (data.contains("userid"))
+                    _userId = data.value("userid").toString().toInt();
+                else
+                    _userId = -1;
                 break;
             case 3:
                 _error = "";

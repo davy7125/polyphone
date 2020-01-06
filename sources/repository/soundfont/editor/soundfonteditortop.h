@@ -43,6 +43,12 @@ public:
     // Initialize the interface with the soundfont information
     void initialize(SoundfontInformation * soundfontInfo);
 
+    // Possibly return an error if the editing is not valid
+    QString getEditingError();
+
+    // Get a description of the editing
+    void fillArguments(QMap<QString, QString> &arguments);
+
 private:
     Ui::SoundfontEditorTop *ui;
 };

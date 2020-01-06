@@ -61,3 +61,28 @@ void SoundfontEditorCenter::initialize(SoundfontDetails *details)
     ui->editorDescription->initialize(details->getDescription());
     ui->editorFiles->initialize(details->getDownloads());
 }
+
+void SoundfontEditorCenter::on_pushAddFile_clicked()
+{
+    ui->editorFiles->addFile();
+}
+
+QString SoundfontEditorCenter::getEditingError()
+{
+    // At least one file must be uploaded
+    if (ui->editorFiles->fileCount() == 0)
+        return tr("At least one file must be uploaded.");
+
+    return "";
+}
+
+void SoundfontEditorCenter::fillArguments(QMap<QString, QString> &arguments)
+{
+    arguments["details"] = ui->editorDescription->getPlainText();
+    ui->editorFiles->fillArguments(arguments);
+}
+
+QMap<QString, QString> SoundfontEditorCenter::getFileArguments()
+{
+    return ui->editorFiles->getFileArguments();
+}

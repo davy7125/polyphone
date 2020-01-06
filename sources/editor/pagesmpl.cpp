@@ -32,7 +32,6 @@
 #include <QProgressDialog>
 #include <QInputDialog>
 #include <QDesktopWidget>
-#include <QFileDialog>
 #include <QProcess>
 
 PageSmpl::PageSmpl(QWidget *parent) :

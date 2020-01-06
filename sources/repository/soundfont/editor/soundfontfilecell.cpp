@@ -37,6 +37,7 @@ SoundfontFileCell::SoundfontFileCell(QWidget *parent) :
     // Style
     ui->pushDelete->setStyleSheet("QPushButton{padding:4px;}");
     ui->pushDelete->setIcon(ContextManager::theme()->getColoredSvg(":/icons/close.svg", QSize(24, 24), ThemeManager::BUTTON_TEXT));
+    ui->pushReplace->setIcon(ContextManager::theme()->getColoredSvg(":/icons/exchange.svg", QSize(24, 24), ThemeManager::BUTTON_TEXT));
     ui->labelInfo->setStyleSheet("QLabel{color:" +
                                  ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
                                                    ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.5).name() + "}");
@@ -65,7 +66,7 @@ void SoundfontFileCell::initialize(SoundfontDownloadData * data)
     _filePath = "";
 }
 
-void SoundfontFileCell::initialize(QString filePath)
+void SoundfontFileCell::initialize(QString filePath, int id)
 {
     // Title based on the filePath
     QFileInfo fi(filePath);
@@ -77,7 +78,43 @@ void SoundfontFileCell::initialize(QString filePath)
     // Information
     ui->labelInfo->setText(filePath);
 
-    // Id is -1 for local files to upload
-    _id = -1;
+    // Id and filepath
+    _id = id;
     _filePath = filePath;
+}
+
+void SoundfontFileCell::fileReplaced(QString filePath)
+{
+    // Title based on the filePath if not already specified
+    if (ui->lineTitle->text().isEmpty())
+    {
+        QFileInfo fi(filePath);
+        ui->lineTitle->setText(fi.baseName());
+    }
+
+    // Information
+    ui->labelInfo->setText(filePath);
+
+    // The id is kept, filePath updated
+    _filePath = filePath;
+}
+
+void SoundfontFileCell::on_pushReplace_clicked()
+{
+    emit(replaced(_id, _filePath));
+}
+
+void SoundfontFileCell::on_pushDelete_clicked()
+{
+    emit(removed(_id));
+}
+
+QString SoundfontFileCell::getTitle()
+{
+    return ui->lineTitle->text();
+}
+
+QString SoundfontFileCell::getDescription()
+{
+    return ui->textDescription->toPlainText();
 }

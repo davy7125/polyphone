@@ -508,7 +508,8 @@ SOURCES	+= main.cpp \
     dialogs/dialognewelement.cpp \
     editor/tools/fast_edit_smpl/toolfasteditsmpl.cpp \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.cpp \
-    editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.cpp
+    editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.cpp \
+    repository/soundfont/uploadingdialog.cpp
 
 HEADERS += \
     core/input/grandorgue/grandorguedatathrough.h \
@@ -853,7 +854,8 @@ HEADERS += \
     dialogs/dialognewelement.h \
     editor/tools/fast_edit_smpl/toolfasteditsmpl.h \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.h \
-    editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.h
+    editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.h \
+    repository/soundfont/uploadingdialog.h
 
 FORMS += \
     dialogs/dialog_list.ui \
@@ -934,7 +936,8 @@ FORMS += \
     repository/soundfont/editor/editordialoginsertimage.ui \
     dialogs/dialogquestion.ui \
     dialogs/dialognewelement.ui \
-    editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui
+    editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui \
+    repository/soundfont/uploadingdialog.ui
 
 DISTFILES += \
     changelog

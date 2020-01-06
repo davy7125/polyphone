@@ -40,6 +40,7 @@ public:
         PENDING,
         CONNECTED,
         CONNECTED_PREMIUM,
+        CONNECTED_ADMIN,
         BANNED,
         FAILED
     };
@@ -63,6 +64,9 @@ public:
     /// Get the current user name
     QString getUsername() { return _username; }
 
+    /// Get the current user id
+    int getUserId() { return _userId; }
+
 signals:
     void connectionStateChanged(UserManager::ConnectionState state);
 
@@ -78,6 +82,7 @@ private:
     QMutex _mutex;
     UrlReaderJson * _userReaderJson;
     QString _username;
+    int _userId;
     static UserManager * s_instance;
 };
 

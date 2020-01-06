@@ -86,6 +86,8 @@
         <file alias="pen.svg">resources/pen.svg</file>
         <file alias="info.svg">resources/info.svg</file>
         <file alias="left.svg">resources/left.svg</file>
+        <file alias="shield.svg">resources/shield.svg</file>
+        <file alias="exchange.svg">resources/exchange.svg</file>
     </qresource>
     <qresource prefix="/misc">
         <file>changelog</file>

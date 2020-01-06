@@ -26,7 +26,7 @@
 #define SOUNDFONTEDITORFILES_H
 
 #include <QWidget>
-#include <QList>
+#include <QMap>
 class SoundfontDownloadData;
 class SoundfontFileCell;
 
@@ -45,9 +45,31 @@ public:
     // Initialize the file list
     void initialize(QList<SoundfontDownloadData *> data);
 
+    // Click on "add a file"
+    void addFile();
+
+    // Number of files
+    int fileCount() { return _cells.count(); }
+
+    // Get a description of the editing
+    void fillArguments(QMap<QString, QString> &arguments);
+
+    // Get the file list to upload
+    QMap<QString, QString> getFileArguments();
+
+private slots:
+    void replaceCell(int id, QString previousFilePath);
+    void deleteCell(int id);
+
 private:
+    QString getFilePath(QString path);
+
     Ui::SoundfontEditorFiles *ui;
-    QList<SoundfontFileCell*> _cells;
+    QMap<int, SoundfontFileCell*> _cells;
+    int _newFileIndex;
+
+    static const int MAX_FILES;
+    static const int MAX_MB;
 };
 
 #endif // SOUNDFONTEDITORFILES_H

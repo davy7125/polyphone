@@ -22,49 +22,40 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SOUNDFONTVIEWER_H
-#define SOUNDFONTVIEWER_H
+#ifndef UPLOADINGDIALOG_H
+#define UPLOADINGDIALOG_H
 
-#include <QWidget>
-class SoundfontFilter;
-class UrlReader;
-class UploadingDialog;
+#include <QDialog>
 
 namespace Ui {
-class SoundfontViewer;
+class UploadingDialog;
 }
 
-class SoundfontViewer : public QWidget
+class UploadingDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit SoundfontViewer(QWidget *parent = nullptr);
-    ~SoundfontViewer();
+    UploadingDialog(quint32 stepNumber, QWidget *parent = nullptr);
+    ~UploadingDialog();
 
-    void initialize(int soundfontId, bool forceReload);
-    int getSoundfontId() { return _soundfontId; }
+    void setValue(int value);
 
 signals:
-    void itemClicked(SoundfontFilter * filter);
+    void canceled();
+
+protected:
+    void closeEvent(QCloseEvent *event);
 
 private slots:
-    void onDetailsReady(int soundfontId);
-    void onDetailsFailed(int soundfontId, QString error);
-    void on_pushRetry_clicked();
     void on_pushCancel_clicked();
-    void on_pushSave_clicked();
-    void on_pushEdit_clicked();
-    void postProgressChanged(int progress);
-    void postCompleted(QString error);
-    void onUploadCancel();
-    void onRefreshReady(QString error);
 
 private:
-    Ui::SoundfontViewer *ui;
-    UrlReader * _urlReader;
-    int _soundfontId;
-    UploadingDialog * _waitingDialog;
+    void cancel();
+
+    Ui::UploadingDialog *ui;
+    quint32 _stepNumber;
+    bool _isCanceled;
 };
 
-#endif // SOUNDFONTVIEWER_H
+#endif // UPLOADINGDIALOG_H

@@ -122,3 +122,29 @@ void SoundfontEditorLeft::initialize(SoundfontInformation *soundfontInfo)
     // Tags
     ui->filterTag->select(soundfontInfo->getTags());
 }
+
+QString SoundfontEditorLeft::getEditingError()
+{
+    // A category must be selected
+    if (ui->comboCategory->currentIndex() <= 0)
+        return tr("A category must be selected.");
+
+    // A license must be selected
+    if (ui->comboLicense->currentIndex() <= 0)
+        return tr("A license must be selected.");
+
+    return "";
+}
+
+void SoundfontEditorLeft::fillArguments(QMap<QString, QString> &arguments)
+{
+    arguments["license"] = ui->comboLicense->currentData().toString();
+    arguments["category"] = QString::number(ui->comboCategory->currentData().toInt());
+    arguments["website"] = ui->lineWebsite->text();
+    arguments["sample_source"] = ui->filterSampleSource->getSelectedElements().join("|");
+    arguments["timbre"] = ui->filterTimbre->getSelectedElements().join("|");
+    arguments["articulation"] = ui->filterArticulation->getSelectedElements().join("|");
+    arguments["genre"] = ui->filterGenre->getSelectedElements().join("|");
+    arguments["midi_standard"] = ui->filterMidiStandard->getSelectedElements().join("|");
+    arguments["tags"] = ui->filterTag->getSelection().join("|");
+}

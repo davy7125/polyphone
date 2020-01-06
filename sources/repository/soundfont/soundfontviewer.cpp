@@ -29,9 +29,16 @@
 #include "detailsmanager.h"
 #include "soundfontfilter.h"
 #include "soundfontdetails.h"
+#include "soundfontdescriptiondata.h"
+#include "usermanager.h"
+#include "urlreader.h"
+#include "uploadingdialog.h"
+#include <QMessageBox>
 
 SoundfontViewer::SoundfontViewer(QWidget *parent) : QWidget(parent),
-    ui(new Ui::SoundfontViewer)
+    ui(new Ui::SoundfontViewer),
+    _urlReader(new UrlReader(RepositoryManager::BASE_URL + "upload", false)),
+    _waitingDialog(nullptr)
 {
     ui->setupUi(this);
 
@@ -59,6 +66,8 @@ SoundfontViewer::SoundfontViewer(QWidget *parent) : QWidget(parent),
     ui->pushCancel->setStyleSheet("QPushButton{border: 0; border-left: 1px solid " + border.name() + "; padding:0 5px 0 5px;" +
                                   "color:" + highlightedText.name() + "}" +
                                   "QPushButton:hover{background-color:" + highlightedHover.name() + "}");
+
+    // Hide the edit button
     ui->pushEdit->hide();
 
     // Style - left
@@ -81,33 +90,44 @@ SoundfontViewer::SoundfontViewer(QWidget *parent) : QWidget(parent),
     ui->pageWait->setStyleSheet("QWidget#pageWait{ background: " + ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() +
                                 ";color:" + ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name() + "; }");
 
-    // Connection
+    // Connections
     connect(ui->viewerLeft, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
+    connect(_urlReader, SIGNAL(downloadCompleted(QString)), this, SLOT(postCompleted(QString)), Qt::QueuedConnection);
+    connect(_urlReader, SIGNAL(progressChanged(int)), this, SLOT(postProgressChanged(int)));
+    connect(RepositoryManager::getInstance(), SIGNAL(ready(QString)), this, SLOT(onRefreshReady(QString)));
+    connect(DetailsManager::getInstance(), SIGNAL(detailsReady(int)), this, SLOT(onDetailsReady(int)));
+    connect(DetailsManager::getInstance(), SIGNAL(detailsFailed(int,QString)), this, SLOT(onDetailsFailed(int,QString)));
 }
 
 SoundfontViewer::~SoundfontViewer()
 {
+    delete _waitingDialog;
+    delete _urlReader;
     delete ui;
 }
 
-void SoundfontViewer::initialize(int soundfontId)
+void SoundfontViewer::initialize(int soundfontId, bool forceReload)
 {
     ui->spinner->startAnimation();
     ui->stackedWidget->setCurrentIndex(0);
+    ui->stackWidgetMain->setCurrentIndex(0);
+    ui->pushEdit->hide();
     _soundfontId = soundfontId;
 
     // Fill basic information
     SoundfontInformation * soundfontInfo = RepositoryManager::getInstance()->getSoundfontInformation(soundfontId);
-    if (soundfontInfo == nullptr)
-        return; // Should not be possible
+    if (soundfontInfo == nullptr) // Invalid id
+    {
+        delete _waitingDialog;
+        _waitingDialog = nullptr;
+        ui->stackedWidget->setCurrentIndex(2);
+        return;
+    }
     ui->viewerTop->initialize(soundfontInfo);
     ui->viewerLeft->initialize(soundfontInfo);
 
     // Ask for the details
-    DetailsManager * dm = DetailsManager::getInstance();
-    connect(dm, SIGNAL(detailsReady(int)), this, SLOT(onDetailsReady(int)));
-    connect(dm, SIGNAL(detailsFailed(int,QString)), this, SLOT(onDetailsFailed(int,QString)));
-    dm->askForSoundfontDetails(_soundfontId);
+    DetailsManager::getInstance()->askForSoundfontDetails(_soundfontId, forceReload);
 }
 
 void SoundfontViewer::onDetailsReady(int soundfontId)
@@ -115,13 +135,21 @@ void SoundfontViewer::onDetailsReady(int soundfontId)
     if (soundfontId != _soundfontId)
         return;
 
+    // A dialog can be open
+    delete _waitingDialog;
+    _waitingDialog = nullptr;
+
     // Get the details
     SoundfontDetails * sd = DetailsManager::getInstance()->getDetails(_soundfontId);
     if (sd != nullptr)
     {
         ui->viewerCenter->initialize(sd);
         ui->stackedWidget->setCurrentIndex(1);
-        //ui->pushEdit->show(); // No editing for now
+
+        // Check if it's possible for the user to edit the soundfont
+        ui->pushEdit->setVisible(UserManager::getInstance()->getConnectionState() == UserManager::CONNECTED_ADMIN ||
+                                 (sd->getDescription()->getCreatedBy() != -1 &&
+                sd->getDescription()->getCreatedBy() == UserManager::getInstance()->getUserId()));
     }
     else
         ui->stackedWidget->setCurrentIndex(2);
@@ -140,7 +168,7 @@ void SoundfontViewer::onDetailsFailed(int soundfontId, QString error)
 void SoundfontViewer::on_pushRetry_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
-    DetailsManager::getInstance()->askForSoundfontDetails(_soundfontId);
+    DetailsManager::getInstance()->askForSoundfontDetails(_soundfontId, false);
 }
 
 void SoundfontViewer::on_pushEdit_clicked()
@@ -166,8 +194,112 @@ void SoundfontViewer::on_pushCancel_clicked()
 
 void SoundfontViewer::on_pushSave_clicked()
 {
-    // Save the changes on the website
-    /// TODO
+    // Check the editing is valid
+    QString error = ui->editorTop->getEditingError();
+    if (!error.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Warning"), error);
+        return;
+    }
+    error = ui->editorLeft->getEditingError();
+    if (!error.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Warning"), error);
+        return;
+    }
+    error = ui->editorCenter->getEditingError();
+    if (!error.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Warning"), error);
+        return;
+    }
 
-    ui->stackWidgetMain->setCurrentIndex(0);
+    // Get a full description of the editing
+    QMap<QString, QString> arguments;
+    ui->editorTop->fillArguments(arguments);
+    ui->editorLeft->fillArguments(arguments);
+    ui->editorCenter->fillArguments(arguments);
+    QMap<QString, QString> files = ui->editorCenter->getFileArguments();
+
+    // Save the changes on the website
+    _urlReader->clearArguments();
+    _urlReader->addArgument("id", QString::number(_soundfontId));
+    _urlReader->addArgument("user", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString());
+    _urlReader->addArgument("pass", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password", "").toString());
+    foreach (QString key, arguments.keys())
+        _urlReader->addArgument(key, arguments[key]);
+    foreach (QString key, files.keys())
+        if (!files[key].isEmpty())
+            _urlReader->addFileAsArgument(key, files[key]);
+    _urlReader->download();
+
+    // Open a progress dialog
+    if (_waitingDialog != nullptr)
+        delete _waitingDialog;
+    _waitingDialog = new UploadingDialog(100, this);
+    _waitingDialog->show();
+    connect(_waitingDialog, SIGNAL(canceled()), this, SLOT(onUploadCancel()));
+}
+
+void SoundfontViewer::onUploadCancel()
+{
+    // Stop the query
+    _urlReader->stop();
+
+    // Delete the waiting dialog
+    delete _waitingDialog;
+    _waitingDialog = nullptr;
+}
+
+void SoundfontViewer::postProgressChanged(int progress)
+{
+    _waitingDialog->setValue(progress);
+}
+
+void SoundfontViewer::postCompleted(QString error)
+{
+    // Analyze the result
+    int currentId = -1;
+    if (error.isEmpty())
+    {
+        // The answer is either the soundfont id that has been updated / added or an error
+        QString answer = _urlReader->getRawData();
+        bool ok = false;
+        currentId = answer.toInt(&ok);
+        if (!ok)
+        {
+            currentId = -1;
+            error = answer;
+        }
+    }
+
+    if (error.isEmpty() && currentId >= 0)
+    {
+        // Successfully upload the soundfont: reload the soundfont list and the page
+        _soundfontId = currentId;
+        RepositoryManager::getInstance()->initialize();
+    }
+    else
+    {
+        // Delete the dialog and notify that the upload failed
+        delete _waitingDialog;
+        _waitingDialog = nullptr;
+        QMessageBox::warning(this, tr("Warning"), tr("The upload failed: %1").arg(error));
+    }
+}
+
+void SoundfontViewer::onRefreshReady(QString error)
+{
+    if (error.isEmpty())
+    {
+        // Refresh the page
+        this->initialize(_soundfontId, true);
+    }
+    else
+    {
+        // The page cannot be refreshed
+        delete _waitingDialog;
+        _waitingDialog = nullptr;
+        onDetailsFailed(_soundfontId, error);
+    }
 }

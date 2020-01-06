@@ -41,7 +41,7 @@ public:
     static void kill();
 
     // Ask for details. The signal "detailsReady" will be then emitted
-    void askForSoundfontDetails(int id);
+    void askForSoundfontDetails(int id, bool forceReload);
 
     // Get the details of a soundfont
     SoundfontDetails * getDetails(int id);

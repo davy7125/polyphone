@@ -137,7 +137,7 @@ void ToolMixtureCreation::runInternal(SoundfontManager * sm, QWidget * parent, I
 
 void ToolMixtureCreation::onElementProcessed(EltID idSmpl, int key, int minKey, double minAtt)
 {
-    if (_waitingDialog == NULL)
+    if (_waitingDialog == nullptr)
         return; // Just in case
     SoundfontManager * sm = SoundfontManager::getInstance();
 

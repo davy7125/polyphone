@@ -43,6 +43,9 @@ public:
     // Initialize the description
     void initialize(SoundfontDescriptionData *data);
 
+    // Get the edited text
+    QString getPlainText();
+
 private slots:
     void on_pushHtml_clicked(bool checked);
     void on_textEdit_cursorPositionChanged();

@@ -115,7 +115,7 @@ void TopRightWidget::userStateChanged(UserManager::ConnectionState state)
         ui->pushUser->hide();
         ui->spinner->hide();
         break;
-    case UserManager::CONNECTED_PREMIUM:
+    case UserManager::CONNECTED_PREMIUM: case UserManager::CONNECTED_ADMIN:
         // Show the user button
         ui->labelWarning->hide();
         ui->pushUser->show();

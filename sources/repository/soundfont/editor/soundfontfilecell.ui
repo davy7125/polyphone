@@ -29,7 +29,50 @@
    <property name="verticalSpacing">
     <number>3</number>
    </property>
-   <item row="2" column="0" colspan="2">
+   <item row="0" column="2">
+    <widget class="QPushButton" name="pushDelete">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string>Remove</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>12</width>
+       <height>12</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="3">
+    <widget class="QLabel" name="labelInfo">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <italic>true</italic>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true">size, date OR filepath</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="3">
     <widget class="QTextEdit" name="textDescription">
      <property name="placeholderText">
       <string>Description...</string>
@@ -50,12 +93,15 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QPushButton" name="pushDelete">
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
+    <widget class="QPushButton" name="pushReplace">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
      <property name="toolTip">
-      <string>Remove</string>
+      <string>Replace</string>
      </property>
      <property name="text">
       <string/>
@@ -65,24 +111,6 @@
        <width>12</width>
        <height>12</height>
       </size>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QLabel" name="labelInfo">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <italic>true</italic>
-      </font>
-     </property>
-     <property name="text">
-      <string notr="true">size, date OR filepath</string>
      </property>
     </widget>
    </item>

@@ -40,9 +40,23 @@ public:
     explicit SoundfontFileCell(QWidget *parent = nullptr);
     ~SoundfontFileCell();
 
-    // Initialize the cell
+    // Initialize / update the cell
     void initialize(SoundfontDownloadData * data);
-    void initialize(QString filePath);
+    void initialize(QString filePath, int id);
+    void fileReplaced(QString filePath);
+
+    // Read info
+    QString getTitle();
+    QString getDescription();
+    QString getFilePath() { return _filePath; }
+
+signals:
+    void replaced(int id, QString previousFilePath);
+    void removed(int id);
+
+private slots:
+    void on_pushReplace_clicked();
+    void on_pushDelete_clicked();
 
 private:
     Ui::SoundfontFileCell *ui;

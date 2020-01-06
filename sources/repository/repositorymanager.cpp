@@ -34,8 +34,8 @@
 #include <QDebug>
 #include "soundfontdetails.h"
 
-//const QString RepositoryManager::BASE_URL = "http://localhost/polyphone-soundfonts/fr/api/soundfonts/";
-const QString RepositoryManager::BASE_URL = "https://www.polyphone-soundfonts.com/en/api/soundfonts/";
+const QString RepositoryManager::BASE_URL = "http://localhost/polyphone-soundfonts/fr/api/soundfonts/";
+//const QString RepositoryManager::BASE_URL = "https://www.polyphone-soundfonts.com/en/api/soundfonts/";
 RepositoryManager * RepositoryManager::s_instance = nullptr;
 
 RepositoryManager * RepositoryManager::getInstance()
@@ -66,9 +66,7 @@ RepositoryManager::~RepositoryManager()
 {
     QList<int> keys = _soundfontInfos.keys();
     foreach (int key, keys)
-    {
         delete _soundfontInfos.take(key);
-    }
 }
 
 void RepositoryManager::fillPropertyTranslation()
@@ -182,6 +180,11 @@ void RepositoryManager::fillLicenseLabelAndLink()
 
 void RepositoryManager::initialize()
 {   
+    // Reset
+    QList<int> keys = _soundfontInfos.keys();
+    foreach (int key, keys)
+        delete _soundfontInfos.take(key);
+
     // Notify the list is downloading
     emit(initializing());
 
@@ -480,7 +483,7 @@ void RepositoryManager::openSoundfont(int soundfontId, bool daily)
         case UserManager::FAILED:
             error = tr("A Premium account allows you to browse and download all soundfonts available online.");
             break;
-        case UserManager::CONNECTED_PREMIUM:
+        case UserManager::CONNECTED_PREMIUM: case UserManager::CONNECTED_ADMIN:
             error = ""; // ok
             break;
         }

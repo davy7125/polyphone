@@ -43,6 +43,18 @@ public:
     // Fill the interface with the details
     void initialize(SoundfontDetails *details);
 
+    // Possibly return an error if the editing is not valid
+    QString getEditingError();
+
+    // Get a description of the editing
+    void fillArguments(QMap<QString, QString> &arguments);
+
+    // Get the file list to upload
+    QMap<QString, QString> getFileArguments();
+
+private slots:
+    void on_pushAddFile_clicked();
+
 private:
     Ui::SoundfontEditorCenter *ui;
 };

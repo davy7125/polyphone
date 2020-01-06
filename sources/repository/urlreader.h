@@ -26,11 +26,12 @@
 #define URLREADER_H
 
 #include <QObject>
+#include <QMap>
 class QNetworkAccessManager;
 class QNetworkReply;
+class QHttpMultiPart;
 class QTimer;
 class QMutex;
-#include <QMap>
 
 // Base class for downloading data
 class UrlReader: public QObject
@@ -38,14 +39,17 @@ class UrlReader: public QObject
     Q_OBJECT
 
 public:
-    // Constructor, destructor
-    explicit UrlReader(QString url);
+    /// Build a UrlReader, GET mode if true, POST otherwise
+    explicit UrlReader(QString url, bool getMode);
     ~UrlReader();
 
     // Set the url
     void setUrl(QString url) { _url = url; }
-    void clearArguments() { _arguments.clear(); }
+
+    // Add arguments
+    void clearArguments() { _arguments.clear(); _fileArguments.clear(); }
     void addArgument(QString key, QString value);
+    void addFileAsArgument(QString key, QString filePath); // POST mode only
 
     // Start the download. When this is finished, the signal "downloadCompleted" is emitted
     void download();
@@ -71,19 +75,22 @@ protected:
     virtual void processData() {}
 
 private slots:
-    void fileDownloaded(QNetworkReply* pReply);
+    void onFinished(QNetworkReply* pReply);
     void onTimeout();
-    void downloadProgressed(qint64 bytesReceived, qint64 bytesTotal);
+    void onProgress(qint64 bytesReceived, qint64 bytesTotal);
 
 private:
+    bool _getMode;
     QString _url;
     QMap<QString, QString> _arguments;
+    QMap<QString, QString> _fileArguments;
     QNetworkAccessManager * _webCtrl;
     QByteArray _data;
     QTimer * _timer;
     QNetworkReply* _reply;
     bool _queryProcessed;
     QMutex * _mutex;
+    QHttpMultiPart * _multiPart;
 
     static const int TIMEOUT_MS;
 };

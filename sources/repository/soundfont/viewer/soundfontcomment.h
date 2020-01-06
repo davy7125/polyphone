@@ -26,7 +26,9 @@
 #define SOUNDFONTCOMMENT_H
 
 #include <QWidget>
+class QLabel;
 class SoundfontCommentData;
+class SoundfontCommentCell;
 
 namespace Ui {
 class SoundfontComment;
@@ -43,7 +45,11 @@ public:
     void display(QList<SoundfontCommentData *> data, int level = 0);
 
 private:
+    void clear();
+
     Ui::SoundfontComment *ui;
+    QList<SoundfontCommentCell * > _cells;
+    QLabel * _label;
 };
 
 #endif // SOUNDFONTCOMMENT_H

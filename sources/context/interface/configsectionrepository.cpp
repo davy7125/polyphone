@@ -53,6 +53,9 @@ ConfigSectionRepository::ConfigSectionRepository(QWidget *parent) :
     // Style for "Ban"
     ui->labelBan1->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/skull.svg", QSize(48, 48), ThemeManager::WINDOW_TEXT));
 
+    // Style for "Admin"
+    ui->labelAdmin->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/shield.svg", QSize(64, 64), ThemeManager::HIGHLIGHTED_BACKGROUND));
+
     // Connection
     connect(UserManager::getInstance(), SIGNAL(connectionStateChanged(UserManager::ConnectionState)),
             this, SLOT(onConnectionStateChanged(UserManager::ConnectionState)));
@@ -123,6 +126,12 @@ void ConfigSectionRepository::onConnectionStateChanged(UserManager::ConnectionSt
         currentIndex = 2;
         buttonText = tr("Log out");
         break;
+    case UserManager::CONNECTED_ADMIN:
+        messageContent = tr("Connected");
+        messageColor = ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::WINDOW_BACKGROUND);
+        currentIndex = 4;
+        buttonText = tr("Log out");
+        break;
     case UserManager::BANNED:
         messageContent = "";
         currentIndex = 3;
@@ -174,6 +183,7 @@ void ConfigSectionRepository::on_pushConnect_clicked()
     case UserManager::PENDING:
     case UserManager::CONNECTED:
     case UserManager::CONNECTED_PREMIUM:
+    case UserManager::CONNECTED_ADMIN:
     case UserManager::BANNED:
         // Disconnect the user or stop the connection
         ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "auto_connect", false);

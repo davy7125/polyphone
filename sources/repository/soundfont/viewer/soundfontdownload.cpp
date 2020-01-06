@@ -36,6 +36,7 @@ SoundfontDownload::SoundfontDownload(QWidget *parent) :
 
 SoundfontDownload::~SoundfontDownload()
 {
+    this->clear();
     delete ui;
 }
 
@@ -44,8 +45,17 @@ static bool sortFunction(const SoundfontDownloadData *s1, const SoundfontDownloa
     return s1->getOrdering() < s2->getOrdering();
 }
 
+void SoundfontDownload::clear()
+{
+    while (!_cells.isEmpty())
+        delete _cells.takeFirst();
+}
+
 void SoundfontDownload::display(QList<SoundfontDownloadData *> data)
 {
+    // First clear everything
+    this->clear();
+
     // First order the list
     qSort(data.begin(), data.end(), sortFunction);
 
@@ -55,5 +65,6 @@ void SoundfontDownload::display(QList<SoundfontDownloadData *> data)
         SoundfontDownloadCell * cell = new SoundfontDownloadCell(this);
         cell->initialize(data[i]);
         ui->verticalLayout->addWidget(cell);
+        _cells << cell;
     }
 }

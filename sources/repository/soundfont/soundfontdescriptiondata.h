@@ -36,8 +36,12 @@ public:
     // Getters
     QString getText() { return _text; }
 
+    // Get the author id
+    int getCreatedBy() { return _createdBy; }
+
 private:
     QString _text;
+    int _createdBy;
 };
 
 #endif // SOUNDFONTDESCRIPTIONDATA_H

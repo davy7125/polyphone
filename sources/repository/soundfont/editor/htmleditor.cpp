@@ -159,6 +159,11 @@ void HtmlEditor::initialize(SoundfontDescriptionData * data)
     on_pushHtml_clicked(false);
 }
 
+QString HtmlEditor::getPlainText()
+{
+    return ui->plainTextEdit->toPlainText();
+}
+
 void HtmlEditor::on_pushHtml_clicked(bool checked)
 {
     if (checked)

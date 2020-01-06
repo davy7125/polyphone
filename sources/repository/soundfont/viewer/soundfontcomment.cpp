@@ -30,13 +30,15 @@
 
 SoundfontComment::SoundfontComment(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::SoundfontComment)
+    ui(new Ui::SoundfontComment),
+    _label(nullptr)
 {
     ui->setupUi(this);
 }
 
 SoundfontComment::~SoundfontComment()
 {
+    this->clear();
     delete ui;
 }
 
@@ -50,8 +52,19 @@ bool sortLastFirst(const SoundfontCommentData *s1, const SoundfontCommentData *s
     return s1->getCreationTime() < s2->getCreationTime();
 }
 
+void SoundfontComment::clear()
+{
+    while (!_cells.isEmpty())
+        delete _cells.takeFirst();
+    delete _label;
+    _label = nullptr;
+}
+
 void SoundfontComment::display(QList<SoundfontCommentData *> data, int level)
 {
+    // First clear everything
+    this->clear();
+
     // Order the list
     if (level == 0)
         qSort(data.begin(), data.end(), sortRecentFirst);
@@ -64,6 +77,7 @@ void SoundfontComment::display(QList<SoundfontCommentData *> data, int level)
         SoundfontCommentCell * cell = new SoundfontCommentCell(this);
         cell->initialize(data[i], level);
         ui->verticalLayout->addWidget(cell);
+        _cells << cell;
 
         // Display the children
         this->display(data[i]->getChildren(), level + 1);
@@ -71,8 +85,8 @@ void SoundfontComment::display(QList<SoundfontCommentData *> data, int level)
 
     if (level == 0 && data.isEmpty())
     {
-        QLabel * label = new QLabel(this);
-        label->setText(tr("No comments."));
-        ui->verticalLayout->addWidget(label);
+        _label = new QLabel(this);
+        _label->setText(tr("No comments."));
+        ui->verticalLayout->addWidget(_label);
     }
 }

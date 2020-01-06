@@ -357,6 +357,6 @@ void WindowManager::openRepositorySoundfont(int id)
     _viewers << viewer;
 
     // Initialize and display it
-    viewer->initialize(id);
+    viewer->initialize(id, false);
     _tabWidget->setCurrentIndex(index);
 }

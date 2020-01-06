@@ -24,7 +24,7 @@
 
 #include "urlreaderimage.h"
 
-UrlReaderImage::UrlReaderImage(QString url) : UrlReader(url) {}
+UrlReaderImage::UrlReaderImage(QString url) : UrlReader(url, true) {}
 
 void UrlReaderImage::processData()
 {

@@ -411,5 +411,5 @@ void SoundfontBrowser::on_pushBecomePremium_clicked()
 
 void SoundfontBrowser::userStatusChanged(UserManager::ConnectionState state)
 {
-    ui->pushBecomePremium->setVisible(state != UserManager::CONNECTED_PREMIUM);
+    ui->pushBecomePremium->setVisible(state != UserManager::CONNECTED_PREMIUM && state != UserManager::CONNECTED_ADMIN);
 }

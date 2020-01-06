@@ -29,4 +29,9 @@ SoundfontDescriptionData::SoundfontDescriptionData(const QJsonObject &data)
 {
     if (data.contains("introtext") && data.value("introtext").isString())
         _text = data.value("introtext").toString();
+
+    if (data.contains("created_by"))
+        _createdBy = data.value("created_by").toString().toInt();
+    else
+        _createdBy = -1;
 }

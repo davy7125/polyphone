@@ -29,18 +29,22 @@
 #include <QTimer>
 #include <QMutex>
 #include <QUrlQuery>
+#include <QHttpMultiPart>
+#include <QFile>
 
 const int UrlReader::TIMEOUT_MS = 10000;
 
-UrlReader::UrlReader(QString url) :
+UrlReader::UrlReader(QString url, bool getMode) : QObject(),
+    _getMode(getMode),
     _url(url),
     _webCtrl(new QNetworkAccessManager(this)),
     _timer(new QTimer(this)),
     _reply(nullptr),
-    _mutex(new QMutex())
+    _mutex(new QMutex()),
+    _multiPart(nullptr)
 {
     // Connect the network access manager
-    connect(_webCtrl, SIGNAL(finished(QNetworkReply*)), this, SLOT(fileDownloaded(QNetworkReply*)), Qt::DirectConnection);
+    connect(_webCtrl, SIGNAL(finished(QNetworkReply*)), this, SLOT(onFinished(QNetworkReply*)), Qt::DirectConnection);
     if (!QSslSocket::supportsSsl())
         qDebug() << "SSL not supported! Please provide the following library:" << QSslSocket::sslLibraryBuildVersionString();
 
@@ -57,6 +61,7 @@ UrlReader::~UrlReader()
         _reply->deleteLater();
     delete _webCtrl;
     delete _mutex;
+    delete _multiPart;
 }
 
 void UrlReader::addArgument(QString key, QString value)
@@ -64,27 +69,66 @@ void UrlReader::addArgument(QString key, QString value)
     _arguments[key] = QUrl::toPercentEncoding(value);
 }
 
+void UrlReader::addFileAsArgument(QString key, QString filePath)
+{
+    _fileArguments[key] = filePath;
+}
+
 void UrlReader::download()
 {
     _queryProcessed = false;
-
-    // Prepare the url
-    QUrl url(_url);
-
-    QUrlQuery query;
-    foreach (QString key, _arguments.keys())
-        query.addQueryItem(key, _arguments[key]);
-    url.setQuery(query.query());
-
-    // Send the query
     if (_reply != nullptr)
         _reply->deleteLater();
-    _reply = _webCtrl->get(QNetworkRequest(url));
-    connect(_reply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(downloadProgressed(qint64, qint64)));
+    if (_multiPart != nullptr)
+        _multiPart->deleteLater();
+
+    if (_getMode)
+    {
+        // Prepare the url
+        QUrl url(_url);
+        QUrlQuery query;
+        foreach (QString key, _arguments.keys())
+            query.addQueryItem(key, _arguments[key]);
+        url.setQuery(query.query());
+
+        // Send the query
+        _reply = _webCtrl->get(QNetworkRequest(url));
+        connect(_reply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(onProgress(qint64, qint64)));
+    }
+    else
+    {
+        _multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+
+        // Add arguments
+        foreach (QString key, _arguments.keys())
+        {
+            QHttpPart textPart;
+            textPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"" + key + "\""));
+            textPart.setBody(_arguments[key].toUtf8());
+            _multiPart->append(textPart);
+        }
+
+        // Add files
+        foreach (QString key, _fileArguments.keys())
+        {
+            QHttpPart filePart;
+            filePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"" + key + "\""));
+            QFile * file = new QFile(_fileArguments[key]);
+            file->open(QIODevice::ReadOnly);
+            filePart.setBodyDevice(file);
+            file->setParent(_multiPart); // It will be deleted with the multiPart
+            _multiPart->append(filePart);
+        }
+
+        // Send the query
+        _reply = _webCtrl->post(QNetworkRequest(_url), _multiPart);
+        connect(_reply, SIGNAL(uploadProgress(qint64,qint64)), this, SLOT(onProgress(qint64, qint64)));
+    }
+
     _timer->start(TIMEOUT_MS);
 }
 
-void UrlReader::fileDownloaded(QNetworkReply * pReply)
+void UrlReader::onFinished(QNetworkReply * pReply)
 {
     Q_UNUSED(pReply)
 
@@ -139,14 +183,14 @@ void UrlReader::onTimeout()
     _mutex->unlock();
 
     // Timeout
-    disconnect(_webCtrl, SIGNAL(finished(QNetworkReply*)), this, SLOT(fileDownloaded(QNetworkReply*)));
+    disconnect(_webCtrl, SIGNAL(finished(QNetworkReply*)), this, SLOT(onFinished(QNetworkReply*)));
     if (_reply != nullptr)
         _reply->abort();
 
     emit(downloadCompleted("timeout"));
 }
 
-void UrlReader::downloadProgressed(qint64 bytesReceived, qint64 bytesTotal)
+void UrlReader::onProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
     _timer->start(TIMEOUT_MS);
     if (bytesTotal != 0)

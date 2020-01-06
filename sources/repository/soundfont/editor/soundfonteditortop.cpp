@@ -48,3 +48,17 @@ void SoundfontEditorTop::initialize(SoundfontInformation * soundfontInfo)
     // Title
     ui->lineEdit_name->setText(soundfontInfo->getTitle());
 }
+
+QString SoundfontEditorTop::getEditingError()
+{
+    // A title must be provided
+    if (ui->lineEdit_name->text().isEmpty())
+        return tr("A title must be provided.");
+
+    return "";
+}
+
+void SoundfontEditorTop::fillArguments(QMap<QString, QString> &arguments)
+{
+    arguments["title"] = ui->lineEdit_name->text();
+}

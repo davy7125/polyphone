@@ -37,9 +37,14 @@ AttributeFlow::AttributeFlow(QWidget *parent) : QWidget(parent)
 
 AttributeFlow::~AttributeFlow()
 {
+    this->clear();
+    delete _layout;
+}
+
+void AttributeFlow::clear()
+{
     while (!_layout->isEmpty())
         delete _layout->takeAt(0);
-    delete _layout;
 }
 
 void AttributeFlow::addCategory(int id)

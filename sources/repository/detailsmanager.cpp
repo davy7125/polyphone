@@ -69,13 +69,19 @@ DetailsManager::~DetailsManager()
     _mutex.unlock();
 }
 
-void DetailsManager::askForSoundfontDetails(int id)
+void DetailsManager::askForSoundfontDetails(int id, bool forceReload)
 {
+    // Possibly delete existing data
     _mutex.lock();
+    if (forceReload)
+        delete _soundfontDetails.take(id);
+
+    // Add the id in the wish list
     if (!_stack.contains(id))
         _stack << id;
     _mutex.unlock();
 
+    // Launch the query
     this->run();
 }
 
@@ -95,7 +101,8 @@ void DetailsManager::run()
         _currentReaderDetailId = _stack.takeLast();
         _urlReaderDetails->clearArguments();
         _urlReaderDetails->addArgument("id", QString::number(_currentReaderDetailId));
-        if (UserManager::getInstance()->getConnectionState() == UserManager::CONNECTED_PREMIUM)
+        if (UserManager::getInstance()->getConnectionState() == UserManager::CONNECTED_PREMIUM ||
+            UserManager::getInstance()->getConnectionState() == UserManager::CONNECTED_ADMIN)
         {
             _urlReaderDetails->addArgument("user", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString());
             _urlReaderDetails->addArgument("pass", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password", "").toString());
