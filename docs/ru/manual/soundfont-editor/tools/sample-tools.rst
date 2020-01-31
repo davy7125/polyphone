@@ -3,14 +3,14 @@
 Обработка семплов
 =================
 
-When one or more samples are selected in the :ref:`tree <tree>`, the :ref:`tool menu <tool menu>` contains several tools sorted in 4 categories:
+Если в :ref:`дереве <tree>` выбран один или несколько семплов, :ref:`меню инструментов <tool menu>` содержит несколько средств, отсортированных по четырём категориям:
 
 * :ref:`sample tools analyze`
 * :ref:`sample tools files`
 * :ref:`sample tools processing`
 * :ref:`sample tools stereo`
 
-Using the tools simultaneously on several samples is possible (with a multi selection).
+Можно использовать средства одновременно с несколькими семплами (при множественном выборе).
 
 
 .. _sample tools analyze:
@@ -24,8 +24,8 @@ Using the tools simultaneously on several samples is possible (with a multi sele
 Показать пиковые частоты
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-This tool gathers the information on the peak frequencies of all selected samples, and the results can be exported in a .csv file.
-The peak frequencies are visible in the editing page of :ref:`samples <sample editor frequency>`.
+Это средство собирает информацию о пиковых частотах всех выбранных семплов, и может экспортировать результаты в файл .csv.
+Пиковые частоты видны на странице редактирования :ref:`семплов <sample editor frequency>`.
 
 
 .. figure:: images/tool_show_peak_frequencies.png
@@ -44,8 +44,7 @@ The peak frequencies are visible in the editing page of :ref:`samples <sample ed
 Экспортировать в wav
 ^^^^^^^^^^^^^^^^^^^^
 
-
-After having selected a destination directory, all selected samples will be exported as .wav files.
+После того, как вы укажете каталог назначения, все выбранные семплы будут экспортированы в файлы .wav.
 
 
 .. _sample tools processing:
@@ -59,34 +58,34 @@ After having selected a destination directory, all selected samples will be expo
 Авто-петля
 ^^^^^^^^^^
 
-The software seeks a stable area of the sample and then artificially creates a loop.
-A sound segment is copied with a cross-fade, so that the transition at the join location is as smooth as possible.
+Программа ищет стабильную область семпла, а затем искусственно создает петлю.
+Звуковой сегмент копируется с перекрёстным затуханием, поэтому переход в месте стыка будет максимально плавным.
 
-To assign loop points automatically:
+Чтобы назначить точки петли автоматически:
 
-#. click in the :ref:`tree <tree>` on the sample to be looped,
-#. in the editing page of :ref:`samples <sample editor>`:
+#. щёлкните в :ref:`дереве <tree>` по семплу, который нужно зациклить,
+#. на странице редактирования :ref:`семплов <sample editor>`:
 
-   * position the start and end of the loop in the graphic (WAV display area) around a stable area, or
-   * let the tool determine automatically a stable area by defining 0 as loop start and loop end,
+   * укажите начало и конец петли на графике (в области отображения WAV) в районе стабильной области, или
+   * позвольте программе автоматически определить стабильную область, указав 0 в качестве начала и конца петли,
 
-#. in the :guilabel:`Tools` menu select :guilabel:`Sample`, :guilabel:`Auto loop`,
-#. press the :guilabel:`Play` button with the loop option checked,
-#. if the loop points found are not suitable you can :ref:`undo <toolbar edit>` the operation, try repositioning them manually around a stable area and then use the :guilabel:`Auto loop` function again.
+#. в меню :guilabel:`Инструменты` выберите :guilabel:`Семпл`, :guilabel:`Авто-петля`,
+#. нажмите кнопку :guilabel:`Воспроизведение` с поставленной галочкой :guilabel:`петля`,
+#. если найденные точки петли вас не устраивают, можно :ref:`отменить <toolbar edit>` операцию, попробовать повторно установить их вручную в районе стабильной области, и затем снова использовать функцию :guilabel:`Авто-петля`.
 
-The tool needs to find a stable area of more than 0.25 seconds.
-If it fails, a warning message appears indicating that no loop can be found.
-In this case it is possible to specify manually a stable area of more than 0.25 seconds and retry the tool, or try to find the loop points manually.
+Программа должна найти стабильную область длительностью не менее 0,25 секунд.
+Если это не удается, выдаётся предупреждение о том, что петля не найдена.
+В этом случае можно вручную указать стабильную область длительностью не менее 0,25 секунд и повторить попытку или попытаться найти точки петли вручную.
 
 .. warning::
-   This tool modifies the original sample.
-   Modifications can be undone via the “:ref:`undo <toolbar edit>`” function, but if the file is saved and Polyphone is closed there is no way to step back.
+   Это средство изменяет исходный семпл.
+   Изменения можно отменить с помощью функции «:ref:`отмена <toolbar edit>`», но если сохранить файл и закрыть Polyphone, пути назад уже не будет.
 
 .. note::
-   By default, the looping is disabled in an instrument.
-   To hear it, you must select |loop on| in the Loop playback parameter row of either the Global or individual notes columns in the Parameters Table.
-   |loop on| turns it On, |loop off| turns it Off.
-   |loop on + end| turns the looping On and the sample will play to the end after a key is released.
+   По умолчанию зацикливание в инструменте отключено.
+   Чтобы услышать его, нужно выбрать значок |loop on| в строке :guilabel:`Играть петлю` в столбце :guilabel:`Глобальные` или в отдельных столбцах разделов инструмента в :guilabel:`Таблице параметров`.
+   |loop on| включает петлю, |loop off| выключает её.
+   |loop on + end| включает петлю, а после отпускания клавиши семпл будет проигран до конца.
 
 
 .. _sample tool volume:
@@ -94,11 +93,11 @@ In this case it is possible to specify manually a stable area of more than 0.25 
 Изменить громкость
 ^^^^^^^^^^^^^^^^^^
 
-You can change the volume in three different ways:
+Можно изменить громкость тремя разными способами:
 
-* in adding a certain amount of dB (positive or negative amount),
-* in multiplying the signal by a number,
-* in normalizing the signal so that the maximum of this signal represents some percentage of the maximum intensity.
+* добавив определённое количество дБ (как положительное так или отрицательное значение),
+* умножив сигнал на число,
+* нормализовав сигнал таким образом, чтобы его максимум составлял некоторый процент от максимальной интенсивности.
 
 
 .. figure:: images/tool_change_volume.png
@@ -111,15 +110,15 @@ You can change the volume in three different ways:
 Внешняя команда
 ^^^^^^^^^^^^^^^
 
-This tool allows you to use an external command or program to edit a sample.
-You don't need to export and re-import a sample into Polyphone anymore, everything is done automatically:
+Это средство позволяет использовать внешнюю команду или программу для редактирования семпла.
+Больше не нужно экспортировать и повторно импортировать семпл в Polyphone, всё делается автоматически:
 
-#. download an editing software for wav files such as ``audacity`` or ``sweep`` (Linux),
-#. use the tool :guilabel:`External command` for one or more samples,
-#. fill the command line in the right field to call the external software (you may need to read the documentation of this software),
-#. edit the sample(s) with the external tool,
-#. save the modified version of the wav file(s) with the external tool and close it,
-#. the sample(s) will be automatically loaded into the soundfont.
+#. загрузите программу для редактирования wav-файлов, например, :program:`Audacity` или :program:`Sweep` (Linux),
+#. выберите средство :guilabel:`Внешняя команда` для одного или нескольких семплов,
+#. укажите командную строку в поле ввода для вызова внешней программы (может потребоваться прочитать документацию по этой программе),
+#. отредактируйте семплы с помощью внешней программы,
+#. сохраните в этой программе изменённую версию wav-файлов и закройте её,
+#. семплы автоматически загрузятся в SoundFont.
 
 
 .. figure:: images/tool_external_command.png
@@ -132,9 +131,9 @@ You don't need to export and re-import a sample into Polyphone anymore, everythi
 Фильтровать частоты
 ^^^^^^^^^^^^^^^^^^^
 
-When you use this tool, a window will be displayed showing the frequencies contained in the sample(s) you selected.
-You can then use the mouse to draw a red area.
-Everything that is in this area will be removed: this means that you can manually decrease of remove some frequencies.
+При использовании этого средства отобразится окно с частотами, содержащимися в выбранных вами семплах.
+Мышью можно нарисовать красную область.
+Всё, что находится в этой области, будет удалено: это означает, что вы можете вручную приглушить или полностью удалить некоторые частоты.
 
 
 .. figure:: images/tool_filter_frequencies.png
@@ -143,8 +142,8 @@ Everything that is in this area will be removed: this means that you can manuall
 
 
 .. note::
-   This filter is not common since it cuts frequencies in a hard way.
-   This tool can be useful to design a brick-wall filter but in most cases you will probably want to use the :ref:`equalizer <sample editor equalizer>`.
+   Этот фильтр не для широкого использования, так как он жёстко обрезает частоты.
+   Это средство может быть полезно, чтобы создать «непробиваемый» фильтр, но в большинстве случаев вы, вероятно, захотите использовать :ref:`эквалайзер <sample editor equalizer>`.
 
 
 .. _sample tool removeblank:
@@ -152,8 +151,8 @@ Everything that is in this area will be removed: this means that you can manuall
 Убрать тишину в начале
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Any blank area before the sample begins is eliminated.
-This reduces the time before the sound is heard.
+Удаляется любая пустая область перед началом семпла.
+Это сокращает время до того, как семпл начнёт звучать.
 
 
 .. figure:: images/remove_blank.png
@@ -162,7 +161,7 @@ This reduces the time before the sound is heard.
 
 
 .. note::
-   This tool may be applied automatically each time a sample is imported, according to the software :ref:`preferences <general settings>`.
+   Это средство может применяться автоматически при каждом импорте семпла, если задать это в :ref:`настройках <general settings>` программы.
 
 
 .. _sample tool transpose:
@@ -170,7 +169,7 @@ This reduces the time before the sound is heard.
 Транспонировать
 ^^^^^^^^^^^^^^^
 
-The tool asks for a shift in semitones and then re-samples the sound to change the pitch.
+Запрашивается сдвиг в полутонах, а затем звук повторно сэмплируется для изменения высоты тона.
 
 
 .. figure:: images/tool_transpose_smpl.png
@@ -183,7 +182,7 @@ The tool asks for a shift in semitones and then re-samples the sound to change t
 Обрезать до конца петли
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-If a loop is defined for the selected sample, the software will cut the sound after the end of the loop (leaving a small margin at the end).
+Если для выбранного семпла задана петля, программа обрежет звук после окончания петли (оставив небольшое поле в конце).
 
 
 .. figure:: images/trim_to_loop.png
@@ -192,7 +191,7 @@ If a loop is defined for the selected sample, the software will cut the sound af
 
 
 .. note::
-   This tool may be applied automatically each time a sample is imported, according to the software :ref:`preferences <general settings>`.
+   Это средство может применяться автоматически при каждом импорте семпла, если задать это в :ref:`настройках <general settings>` программы.
 
 
 .. _sample tools stereo:
@@ -206,8 +205,8 @@ If a loop is defined for the selected sample, the software will cut the sound af
 Настройка баланса
 ^^^^^^^^^^^^^^^^^
 
-If the sample is linked to another one (stereo), the software can equalize the mean intensity of the two samples to adjust the balance.
-This will then be easier to accurately pan a sample in an :ref:`instrument <instrument editor>`.
+Если один семпл связан с другим (стерео), программа может отрегулировать баланс, выровняв среднюю интенсивность двух семплов.
+Это упростит точное панорамирование семпла в :ref:`инструменте <instrument editor>`.
 
 
 .. _sample tool link:
@@ -215,14 +214,14 @@ This will then be easier to accurately pan a sample in an :ref:`instrument <inst
 Связать все стерео-семплы
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Among the selected samples, samples whose names only differ by the last letter (R / L) are automatically linked.
-For example, if in a soundfont two samples are called ``bassoon45L`` and ``bassoon45R``, ``bassoon45L`` will be recognized as the left part of ``bassoon45R`` and ``bassoon45R`` will be recognized as the right part of ``bassoon45L``.
+Из всех выбранных семплов автоматически связываются те, названия которых отличаются только последней буквой (R/L).
+Например, если в SoundFont два семпла называются ``bassoon45L`` и ``bassoon45R``, то ``bassoon45L`` будет распознан как левая часть ``bassoon45R``, а ``bassoon45R`` будет распознан как правая часть ``bassoon45L``.
 
-With this information the right panning will be used when these samples are added in an instrument.
-You can also enjoy the simultaneous editing of left and right parts in the instrument :ref:`table <instrument editor table>` if the stereo editing is activated in the :ref:`settings <general settings>`.
+Учитывая эту информацию, при добавлении этих семплов в инструмент, будет использоваться правильное панорамирование.
+Вы также можете одновременно редактировать левую и правую части инструмента в :ref:`таблице <instrument editor table>`, если в :ref:`настройках <general settings>` включена стерео-правка.
 
 .. warning::
-   This tool can break existing links if the names don't match the rule above.
+   Это средство может поломать существующие ссылки, если имена не соответствуют указанному выше правилу.
 
 
 .. _sample tool unlink:
@@ -230,10 +229,10 @@ You can also enjoy the simultaneous editing of left and right parts in the instr
 Убрать связи со всех стерео-семплов
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-All selected samples that are linked (stereo) are unlinked.
+Со всех выбранных семплов (стерео) убираются связи.
 
-Thus, all samples will be processed as mono sounds and they will all have the same panning if they are added in an instrument.
-The stereo editing, if activated in the :ref:`settings <general settings>`, will not be applicable anymore.
+Таким образом, все семплы будут обрабатываться как монофонические звуки, и все они будут иметь одинаковое панорамирование при добавлении в инструмент.
+Стерео-правка, если она включена в :ref:`настройках <general settings>`, больше не будет применяться.
 
 
 .. inline images:

@@ -3,7 +3,7 @@
 Различные форматы SoundFont
 ===========================
 
-Polyphone can deal with several soundfont formats:
+Polyphone может работать с несколькими форматами SoundFont:
 
 * `sf2   <sf2 format_>`_,
 * `sf3   <sf3 format_>`_,
@@ -16,23 +16,23 @@ Polyphone can deal with several soundfont formats:
 Формат sf2
 ----------
 
-Sf2 soundfonts are the main files edited by Polyphone.
-Each sf2 file comprises one or more musical virtual instruments, made of audio samples and a lot of parameters.
-Parameters define how the samples should be played throughout the keyboard, possibly modulated by predefined signals (:ref:`modulators <instrument editor modulator>`).
-Sf2 files are built according to a 3-level structure:
+Формат sf2 — это основной формат, с которым работает Polyphone.
+Каждый файл sf2 содержит один или несколько виртуальных музыкальных инструментов, состоящих из звуковых семплов и множества параметров.
+Параметры определяют, как следует воспроизводить семплы на клавиатуре, возможно, модулируя предопределёнными сигналами (модуляторами).
+Файлы Sf2 построены в соответствии с трёхуровневой структурой:
 
-* :ref:`samples <sample editor>`, coming from a trumpet or a piano for instance,
-* :ref:`instruments <instrument editor>`, made of samples,
-* :ref:`presets <preset editor>`, made of instruments.
+* :ref:`семплы <sample editor>`, например, из трубы или фортепиано,
+* :ref:`инструменты <instrument editor>`, созданные из семплов,
+* :ref:`пресеты <preset editor>`, созданные из инструментов.
 
-Further to the definition and setting of these elements, a sf2 file contains also :ref:`general information <edit general>` (the author, copyright or edit time for instance).
+В дополнение к определению и настройке этих элементов файл sf2 также содержит :ref:`общую информацию <edit general>` (автор, авторское право, время редактирования и т.д.).
 
-Soundfonts are used by software synthesizers, such as Fluidsynth, using wave tables and driven by :abbr:`MIDI (Musical Instrument Digital Interface)` signals.
-It is also possible to use sf2 soundfonts to listen :abbr:`MIDI (Musical Instrument Digital Interface)` files with TiMidity_, WildMIDI_ or QuickTime and listen scores with MuseScore_.
-Hardware such as samplers, soundcards or even synthesizers may also support the .sf2 format.
+Файлы SoundFont используются программными синтезаторами, такими как Fluidsynth, воспроизводящими звук, используя волновые таблицы, и управляемые :abbr:`MIDI (Musical Instrument Digital Interface)`-сигналами.
+Также можно использовать SoundFont sf2 для прослушивания файлов :abbr:`MIDI (Musical Instrument Digital Interface)` с помощью TiMidity_, WildMIDI_ или QuickTime и прослушивания партитур с помощью MuseScore_.
+Аппаратные средства, такие как сэмплеры, звуковые карты или даже синтезаторы, также могут поддерживать формат .sf2.
 
-Further information on soundfonts may be found for example on `Wikipedia <SoundFont_>`_.
-The sf2 specifications are available `here <https://www.polyphone-soundfonts.com/downloads/sf_specifications_v2.01.pdf>`_ for version 2.01 and `there <https://www.polyphone-soundfonts.com/downloads/sf_specifications_v2.04.pdf>`_ for version 2.04.
+Дополнительную информацию о SoundFont можно найти, например, в `Википедии <SoundFont_>`_.
+Доступны спецификации sf2 для `версии 2.01 <https://www.polyphone-soundfonts.com/downloads/sf_specifications_v2.01.pdf>`_ и `версии 2.04 <https://www.polyphone-soundfonts.com/downloads/sf_specifications_v2.04.pdf>`_.
 
 
 .. _sf3 format:
@@ -40,18 +40,18 @@ The sf2 specifications are available `here <https://www.polyphone-soundfonts.com
 Формат sf3
 ----------
 
-The sf3 format, developed by MuseScore_, is similar in all respects to the sf2 format except that the :ref:`samples <sample editor>` are stored in the OGG format (like the MP3 format but open source) instead of being stored as raw data.
-The consequence is that the sf3 format is about 10 times lighter than the sf2 format for a comparable quality.
+Формат sf3, разработанный MuseScore_, во всех отношениях похож на формат sf2, за исключением того, что :ref:`семплы <sample editor>` хранятся в формате OGG (как MP3, но с открытым исходным кодом), а не в виде необработанных данных.
+В результате формат sf3 примерно в 10 раз легче формата sf2 при сопоставимом качестве.
 
-A soundfont exported in this format is not intended to be edited later because successive compressions would result in a lower sound quality.
-This format should be seen as a final product and is very interesting for all end users of soundfonts in that:
+SoundFont, экспортируемый в этом формате, не предназначен для последующего редактирования, поскольку последовательные сжатия приводят к снижению качества звука.
+Этот формат следует рассматривать как конечный продукт, и он очень интересен для всех конечных пользователей звуковых шрифтов своими качествами:
 
-* downloads are made easier on internet,
-* space is saved in computers,
-* the combination midi + sf3 provides a lightweight and powerful solution to play soundtracks (video games, mobile applications, …).
+* загрузка из интернета становится проще,
+* требуется меньше дискового пространства в компьютерах,
+* комбинация MIDI + sf3 обеспечивает лёгкое и мощное решение для воспроизведения саундтреков (видеоигры, мобильные приложения и т.д.).
 
-Unlike the sf2pack_ format which answers the same issues, the sf3 format is entirely open-source.
-The source code is available, thus ensuring its sustainability (let's avoid the mistakes done with sfArk or sfPack!).
+В отличие от формата sf2pack_, который решает те же проблемы, формат sf3 полностью открыт.
+Доступен исходный код, что обеспечивает его устойчивость (давайте избежим ошибок, допущенных sfArk и sfPack!).
 
 
 .. _sfz format:
@@ -59,43 +59,43 @@ The source code is available, thus ensuring its sustainability (let's avoid the 
 Формат sfz
 ----------
 
-The sfz format has the same goal than the sf2 format: create a musical instrument by disposing and configuring samples over the keyboard.
-The main difference is that while the sf2 format is only 1 file that contains everything, the sfz format is a text file delivered with a set of .wav samples.
-Since it was meant to be editable by a human, the main advantage was to edit the file without the need of a complex editor.
-But an editor is still highly recommended for big instruments, the quantity of parameters can indeed be quickly discouraging.
-The sfz format is also not defined as strictly as the sf2 format: differences may appear in the way to edit and in the way to play an sfz instrument.
+Формат sfz преследует ту же цель, что и формат sf2: создать музыкальный инструмент, расположить и настроить семплы на клавиатуре.
+Основное отличие состоит в том, что формат sf2 — это всего 1 файл, содержащий всё, а формат sfz — это текстовый файл, поставляемый с набором семплов .wav.
+Поскольку он предназначался для редактирования человеком, основным преимуществом было редактирование файла без необходимости в сложном редакторе.
+Но редактор по-прежнему настоятельно рекомендуется для больших инструментов, количество параметров действительно может быстро обескуражить.
+Формат sfz также определён не так строго, как формат sf2: могут возникнуть различия в способе редактирования и способах игры на инструменте sfz.
 
 
 Ограничения при импорте sfz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Only opcodes having a counterpart in :ref:`tables <instrument editor table>` are imported.
-* The envelope applied to pitch and filter being the same in sf2 files (Mod env), importing different envelopes for the pitch and filter is not possible (``fileg_*`` and ``pitcheg_*`` opcodes).
-* The LFO applied to volume and filter being the same in sf2 files (Mod LFO), importing different LFOs for the volume and filter is not possible (``amplfo_*`` and ``fillfo_*`` opcodes).
-* The only filter that can be imported is the second order low pass filter (``fil_type=lpf_2p``).
-* To be imported correctly, “group” and “off_by” opcodes must contain the same value within the same group.
+* Импортируются только коды операций, имеющие аналог в :ref:`таблицах <instrument editor table>`.
+* Огибающие, применяемые к высоте тона и к фильтру, становятся одной и той же огибающей в файлах sf2 (Mod env), импорт раздельных огибающих для высоты тона и для фильтра невозможен (коды операций ``fileg_*`` и ``pitcheg_*``).
+* Генераторы низкой частоты (ГНЧ, LFO), применяемые к громкости и к фильтру, становятся одним ГНЧ в файлах sf2 (Mod LFO), импорт раздельных ГНЧ для громкости и для фильтра невозможен (коды операций ``amplfo_*`` и ``fillfo_*``).
+* Единственный фильтр, который можно импортировать, это фильтр нижних частот (ФНЧ) второго порядка (``fil_type=lpf_2p``).
+* Для правильного импорта коды операций ``group`` и ``off_by`` должны содержать одно и то же значение в одной группе.
 
 .. warning::
-   ``width`` and ``position`` opcodes may not be interpreted correctly.
+   Коды операций ``width`` и ``position`` могут быть интерпретированы неправильно.
 
 
 Ограничения при экспорте sfz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* :ref:`Modulators <instrument editor modulator>` are currently not exported.
-* The sfz format (version 1) allowing only one pitch modulation, the two parameters :guilabel:`Vib LFO → pitch (c)` and :guilabel:`Mod LFO → pitch (c)` cannot be exported simultaneously.
-* A loop 0-1 can be exported but is ignored by most of the sfz players.
-* 24-bit may not be supported in some synthesizers, please refer to their specification manual.
+* В настоящее время :ref:`модуляторы <instrument editor modulator>` не экспортируются.
+* Формат sfz (версия 1) допускает только одну модуляцию высоты тона, два параметра :guilabel:`Виб. ГНЧ → высота тона (цент)` и :guilabel:`Модулятор ГНЧ → высота тона (цент)` не могут быть экспортированы одновременно.
+* Цикл 0-1 можно экспортировать, но он игнорируется большинством проигрывателей sfz.
+* 24-битный формат семплов может не поддерживаться некоторыми синтезаторами, пожалуйста, обратитесь к описанию поддерживаемых ими форматов.
 
 
 В целом
 ^^^^^^^
 
-The matching of sound levels (in dB), during the sfz / sf2 conversion process, has been tested with Sforzando software.
-There may however remain some differences.
+Соответствие уровней звука (в дБ) в процессе преобразования sfz / sf2 было протестировано с помощью программы Sforzando.
+Однако могут остаться некоторые различия.
 
-The way parameters change according to the key (via :guilabel:`key → Vol env hold / decay` and :guilabel:`key → Mod env hold / decay`) have no exact match.
-The sf2 format uses an exponential law to define the decay and hold durations according to the key, while the sfz format uses a linear law.
+Способ, которым параметры изменяются в соответствии с клавишей (используя :guilabel:`Клавиша → Огиб. громк.: удержание / спад` и :guilabel:`Клавиша → Огиб. мод.: удержание / спад`) не имеет точного соответствия.
+Формат sf2 использует экспоненциальный закон для определения продолжительности удержания и спада в соответствии с клавишей, в то время как формат sfz использует линейный закон.
 
 
 .. _sfark format:
@@ -103,12 +103,12 @@ The sf2 format uses an exponential law to define the decay and hold durations ac
 Архивы sfArk
 ------------
 
-SfArk archives, like the sf3 format, is a compressed format.
-This means that the quality of the sounds is a bit lowered (but often imperceptible).
-This format tends to be obsolete, that's why Polyphone only allows importing sfArk archives (not the export).
+Архивы sfArk, как и формат sf3, представляют собой сжатый формат.
+Это означает, что качество звука немного снижено (но, чаще всего, незаметно).
+Этот формат устарел, поэтому Polyphone позволяет только импортировать архивы sfArk (но не экспортировать).
 
 
-.. external links:
+.. внешние ссылки:
 
 .. _TiMidity:  https://sourceforge.net/projects/timidity
 .. _WildMIDI:  https://www.mindwerks.net/projects/wildmidi

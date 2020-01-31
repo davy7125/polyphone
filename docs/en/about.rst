@@ -7,7 +7,7 @@ Background
 
 
 .. figure:: _static/davy_triponney.jpg
-   :width: 50%
+   :figwidth: 33%
    :align: left
 
    The author Davy Triponney

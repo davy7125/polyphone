@@ -3,20 +3,20 @@
 Использование Qt Creator для сборки Polyphone
 =============================================
 
-Use these instructions to know how to build Polyphone with Qt Creator.
-It is assumed you already have on your computer Qt Creator installed with the Qt framework, a compiler and the necessary dependencies to build Polyphone (see related pages for this).
+Используйте эти указания, чтобы узнать, как собрать Polyphone с помощью Qt Creator.
+Предполагается, что на вашем компьютере уже установлен Qt Creator с фреймворком Qt, компилятором и необходимыми зависимостями для сборки Polyphone (см. соответствующие страницы).
 
 
 Перед тем как начать
 --------------------
 
-The following elements are required
+Требуются следующие элементы:
 
-* a C++ compiler (VC++, Clang, GCC, …)
-* Qt Creator with its framework
-* Polyphone dependencies
+* компилятор C++ (VC++, Clang, GCC, …)
+* Qt Creator с фреймворком
+* зависимости Polyphone
 
-The instructions for installing them are dependent on the OS you are using, see the related documentation pages for this.
+Инструкции по их установке зависят от используемой вами ОС, см. соответствующие страницы документации для этого.
 
 
 Сборка Polyphone
@@ -26,30 +26,30 @@ The instructions for installing them are dependent on the OS you are using, see 
 Скопируйте исходники
 ^^^^^^^^^^^^^^^^^^^^
 
-Get Polyphone Soundfont Editor sources from `here <download_>`_ or on `GitHub <on github_>`_.
+Загрузите исходники Polyphone `здесь <download_>`_ или на `GitHub <on github_>`_.
 
 
 Откройте и настройте проект
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-First, open the file :file:`polyphone.pro` and edit it to possibly use the distributed versions for rtmidi, stk and qcustomplot if your OS doesn't provide them.
-Uncomment the following lines by removing the leading ‘#’::
+Сначала измените файл :file:`polyphone.pro`, чтобы использовать локальные версии :program:`rtmidi`, :program:`stk` и :program:`qcustomplot`, поставляемые вместе с исходниками Polyphone, если ваша ОС их не предоставляет.
+Раскомментируйте следующие строки, удалив начальный символ «#»::
 
   DEFINES += USE_LOCAL_RTMIDI
   DEFINES += USE_LOCAL_STK
   DEFINES += USE_LOCAL_QCUSTOMPLOT
 
-You can skip these modifications if you want to use libraries already installed in your computer (make sure you have them!).
+Вы можете пропустить эти изменения, если хотите использовать библиотеки, уже установленные на вашем компьютере (убедитесь, что они у вас есть!).
 
-Start Qt Creator and open the file :file:`polyphone.pro`.
+Запустите Qt Creator и откройте файл :file:`polyphone.pro`.
 
 
 .. figure:: images/open-Qt-Creator.png
 
-   Open Qt Creator
+   Запуск Qt Creator
 
 
-Then configure the project.
+Затем настройте проект.
 
 .. figure:: images/configure-project.png
 
@@ -59,7 +59,7 @@ Then configure the project.
 Запустите qmake и соберите проект
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Go in the menu :guilabel:`Build` and choose the item :guilabel:`Run qmake`.
+Зайдите в меню :guilabel:`Build` и выберите пункт :guilabel:`Run qmake`.
 
 
 .. figure:: images/run-qmake.png
@@ -67,7 +67,7 @@ Go in the menu :guilabel:`Build` and choose the item :guilabel:`Run qmake`.
    Запуск qmake
 
 
-:command:`qmake` run is finished when the proceeding bar on the bottom right corner has reached the 100% green.
+Работа :command:`qmake` завершится, когда полоса в правом нижнем углу достигнет 100% зелёного цвета.
 
 
 .. figure:: images/qmake-finished.png
@@ -75,9 +75,9 @@ Go in the menu :guilabel:`Build` and choose the item :guilabel:`Run qmake`.
    Завершение работы qmake
 
 
-In the section :guilabel:`Project` in the left column, then in the section :guilabel:`Build&Run`, select the build configuration (Release is preferred).
+В разделе :guilabel:`Project` в левом столбце, затем в разделе :guilabel:`Build&Run` выберите конфигурацию сборки (предпочтительнее :guilabel:`Release`).
 
-Finally, click on the action :guilabel:`Build project Polyphone` in the menu :guilabel:`Build`.
+Наконец, нажмите на действие :guilabel:`Build project Polyphone` в меню :guilabel:`Build`.
 
 
 .. figure:: images/build-project.png
@@ -85,21 +85,21 @@ Finally, click on the action :guilabel:`Build project Polyphone` in the menu :gu
    Сборка проекта
 
 
-During project build you should see warnings but no errors.
+Во время сборки проекта вы можете увидеть предупреждения, но ошибок быть не должно.
 
-Now you should have the executable :file:`polyphone` either in the :file:`RELEASE` or :file:`DEBUG` subfolder of the source code, depending on your choice in QtCreator build configuration.
+Теперь у вас должен быть исполняемый файл :file:`polyphone` в подпапке :file:`RELEASE` или :file:`DEBUG` исходного кода, в зависимости от того, что вы выбрали в конфигурации сборки QtCreator.
 
 
 Отладка
 -------
 
-See this topic_ if you need more information or for getting some help.
+Просмотрите эту `тему <topic_>`_, если вам нужна дополнительная информация или помощь.
 
 .. note::
    Отдельное спасибо Tomotello_ за эту статью.
 
 
-.. external links:
+.. внешние ссылки:
 
 .. _download:  https://www.polyphone-soundfonts.com/en/download
 .. _on github: https://github.com/davy7125/polyphone

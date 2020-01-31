@@ -50,8 +50,8 @@ will become
 for instance (with no leading “#”).
 
 .. note::
-   if you are using Qt Creator, the project may be opened via its :file:`.pro` file present in the root directory.
-   Take care shadow build is not checked (project properties).
+   If you are using :program:`Qt Creator`, the project may be opened via its :file:`.pro` file present in the root directory.
+   Take care :guilabel:`shadow build` is not checked (project properties).
 
 
 .. external links:

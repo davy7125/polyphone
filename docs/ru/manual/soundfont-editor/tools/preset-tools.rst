@@ -3,15 +3,15 @@
 Обработка пресетов
 ==================
 
-When a preset or one of its division is selected in the :ref:`tree <tree>`, the :ref:`tool menu <tool menu>` contains several tools sorted in 4 categories:
+Когда в :ref:`дереве <tree>` выбран пресет или один из его разделов, :ref:`меню инструментов <tool menu>` содержит несколько средств, отсортированных по четырём категориям:
 
 * :ref:`preset tools analyze`
 * :ref:`preset tools fast`
 * :ref:`preset tools mod`
 * :ref:`preset tools transformation`
 
-Using the tools simultaneously on several presets is possible (with a multi selection), except for the visualizer.
-All tools are also available for the :ref:`instruments <instrument tools>`.
+Можно использовать средства с несколькими пресетами одновременно (с множественным выбором), за исключением средства визуализации.
+Все эти средства также доступны и для :ref:`инструментов <instrument tools>`.
 
 
 .. _preset tools analyze:
@@ -25,7 +25,7 @@ All tools are also available for the :ref:`instruments <instrument tools>`.
 Показать параметры
 ^^^^^^^^^^^^^^^^^^
 
-Same tool than “:ref:`instrument tool display`” for instruments.
+То же средство, что и «:ref:`instrument tool display`» для инструментов.
 
 
 .. _preset tools fast:
@@ -39,7 +39,7 @@ Same tool than “:ref:`instrument tool display`” for instruments.
 Изменить приглушение
 ^^^^^^^^^^^^^^^^^^^^
 
-Same tool than “:ref:`instrument tool attenuation`” for instruments.
+То же средство, что и «:ref:`instrument tool attenuation`» для инструментов.
 
 
 .. _preset tool global:
@@ -47,7 +47,7 @@ Same tool than “:ref:`instrument tool attenuation`” for instruments.
 Основанная на клавишах конфигурация
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Same tool than “:ref:`instrument tool global`” for instruments.
+То же средство, что и «:ref:`instrument tool global`» для инструментов.
 
 
 .. _preset tool spatialization:
@@ -55,7 +55,7 @@ Same tool than “:ref:`instrument tool global`” for instruments.
 Пространственная локализация звука
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Same tool than “:ref:`instrument tool spatialization`” for instruments.
+То же средство, что и «:ref:`instrument tool spatialization`» для инструментов.
 
 
 .. _preset tools mod:
@@ -69,7 +69,7 @@ Same tool than “:ref:`instrument tool spatialization`” for instruments.
 Удалить модуляторы
 ^^^^^^^^^^^^^^^^^^
 
-Same tool than “:ref:`instrument tool remove_mod`” for instruments.
+То же средство, что и «:ref:`instrument tool remove_mod`» для инструментов.
 
 
 .. _preset tools transformation:
@@ -83,4 +83,4 @@ Same tool than “:ref:`instrument tool remove_mod`” for instruments.
 Дублирование раздела
 ^^^^^^^^^^^^^^^^^^^^
 
-Same tool than “:ref:`instrument tool division`” for instruments.
+То же средство, что и «:ref:`instrument tool division`» для инструментов.

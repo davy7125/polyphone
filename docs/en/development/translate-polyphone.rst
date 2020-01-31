@@ -44,10 +44,10 @@ Three cases may appear depending on your confidence level.
 
 * If you don't know how to translate don't hesitate to skip the element.
   This is not an issue: other people can complete it.
-* You think you have the right translation but you are unsure: write your proposition and then use :kbd:`Ctrl+J`.
+* You think you have the right translation but you are unsure: write your proposition and then use :kbd:`Ctrl`\ +\ :kbd:`J`.
   The item will not be validated but the translation will nevertheless be used in the translated interface.
   It just tells other people improving the translation that you were unsure.
-* You have the right translation: write it and use :kbd:`Ctrl+Enter`.
+* You have the right translation: write it and use :kbd:`Ctrl`\ +\ :kbd:`Enter`.
   This item will be validated.
 
 A translation needs attention.
@@ -59,7 +59,7 @@ Please take care of:
 * singular and plural forms.
 
 A final advice: **take your time!**
-And don't forget to save your work with :kbd:`Ctrl+S`.
+And don't forget to save your work with :kbd:`Ctrl`\ +\ :kbd:`S`.
 
 
 Testing your work

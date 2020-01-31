@@ -84,7 +84,7 @@ In this case it is possible to specify manually a stable area of more than 0.25 
 
 .. note::
    By default, the looping is disabled in an instrument.
-   To hear it, you must select |loop on| in the Loop playback parameter row of either the Global or individual notes columns in the Parameters Table.
+   To hear it, you must select |loop on| in the :guilabel:`Loop playback` parameter row of either the :guilabel:`Global` or individual notes columns in the :guilabel:`Parameters Table`.
    |loop on| turns it On, |loop off| turns it Off.
    |loop on + end| turns the looping On and the sample will play to the end after a key is released.
 
@@ -114,7 +114,7 @@ External command
 This tool allows you to use an external command or program to edit a sample.
 You don't need to export and re-import a sample into Polyphone anymore, everything is done automatically:
 
-#. download an editing software for wav files such as ``audacity`` or ``sweep`` (Linux),
+#. download an editing software for wav files such as :program:`Audacity` or :program:`Sweep` (Linux),
 #. use the tool :guilabel:`External command` for one or more samples,
 #. fill the command line in the right field to call the external software (you may need to read the documentation of this software),
 #. edit the sample(s) with the external tool,

@@ -51,7 +51,7 @@ Samples for the example: :download:`sample 1 <https://www.polyphone-soundfonts.c
 If you have 2 samples, the first one containing the beginning and the sustained phase of the sound and the second one containing the release, you only need to make sure that the release begins with a very short blank (a couple of points) being close to 0.
 A short inaudible loop will thus be made with this portion.
 
-Tune and loop the first sample as explained :ref:`here <how to prepare a sample>`.
+Tune and loop the first sample as explained in the tutorial “:ref:`how to prepare a sample`”.
 
 Loop the second sample on a very short part at the beginning, for example from the point 1 to the point 2 or 3.
 Specify the same root key and correction than the first sample.
@@ -75,8 +75,8 @@ Second instrument: release
 Create a second instrument for the release comprising the release samples with a very short blank loop at the beginning.
 Configure it this way:
 
-* choose the loop option + release in loop playback (3rd choice),
-* select a high number such as 100 seconds in the volume envelop release so that the release is not attenuated,
+* choose the option :guilabel:`loop + release` in :guilabel:`loop playback` (3rd choice),
+* select a high number such as 100 seconds in the :guilabel:`Vol env release (s)` so that the release is not attenuated,
 * determine approximately the duration of the attack in the first sample and use this value in the volume envelop attack.
 
 Now you have an instrument remaining silent as long as you don't release a key, and then you can hear the release phase.

@@ -15,3 +15,10 @@ use
     .. image:: images/image.*
 
 And the image will be selected automatically among the existing `image.svg` and `image.pdf`.
+
+
+Also you can convert SVG to PDF via command line using any of three commands:
+
+    rsvg-convert -f pdf -o image.pdf image.svg
+    convert image.svg image.pdf
+    inkscape image.svg --export-pdf=image.pdf

@@ -1,3 +1,4 @@
+.. index:: tree
 .. _tree:
 
 Tree
@@ -9,6 +10,7 @@ It represents the architecture of the open soundfont and pilots the right part o
 The tree is always displayed with the same `structure <tree structure_>`_, provides a `contextual menu <tree menu_>`_ and has `drag & drop <tree dragdrop_>`_, `copy / paste <tree copypaste_>`_ and `search <tree search_>`_ features.
 
 
+.. index:: tree; structure
 .. _tree structure:
 
 Structure
@@ -54,6 +56,7 @@ A click on a preset or on one of its divisions shows the :ref:`preset editor <pr
 A click on the header :guilabel:`Presets` displays the :ref:`configuration summary <conf summ preset>` of all presets.
 
 
+.. index:: tree; contextual menu
 .. _tree menu:
 
 Contextual menu
@@ -64,10 +67,10 @@ A right click on an element shows a menu comprising the following actions:
 :Bind to…: Bind the selected sample(s) to an instrument, or the selected instrument(s) to a preset.
 :Replace by…: Replace a sample by another sample in an instrument, or replace an instrument by another instrument in a preset.
   The configuration of the sample or instrument is kept.
-:Copy: Copy the selected element(s), also accessible with :kbd:`Ctrl+C`.
-:Paste: Paste the previously copied element(s), also accessible with :kbd:`Ctrl+V`.
+:Copy: Copy the selected element(s), also accessible with :kbd:`Ctrl`\ +\ :kbd:`C`.
+:Paste: Paste the previously copied element(s), also accessible with :kbd:`Ctrl`\ +\ :kbd:`V`.
 :Duplicate: Duplicate the selected element(s) that can be samples, instruments, presets or divisions.
-  Also accessible with :kbd:`Ctrl+D`.
+  Also accessible with :kbd:`Ctrl`\ +\ :kbd:`D`.
 :Delete: Delete the selected element(s), also accessible with :kbd:`Del`.
 :Rename or bulk rename: Rename the selected element(s), also accessible with :kbd:`F2`.
 
@@ -85,6 +88,7 @@ A right click on an element shows a menu comprising the following actions:
    Tree: context menu
 
 
+.. index:: tree; drag & drop
 .. _tree dragdrop:
 
 Drag & drop
@@ -121,13 +125,14 @@ Preset division → preset or preset division
   Copy of the division of the source preset into the destination preset (it can be the same preset).
 
 
+.. index:: tree; copy / paste
 .. _tree copypaste:
 
 Copy / paste
 ------------
 
 Everything that is possible with a drag & drop as seen previously is also possible with a copy / paste.
-You can expect the same result with :kbd:`Ctrl+C` and :kbd:`Ctrl+V` in a tree.
+You can expect the same result with :kbd:`Ctrl`\ +\ :kbd:`C` and :kbd:`Ctrl`\ +\ :kbd:`V` in a tree.
 
 Copy / Paste is also allowed within different soundfonts.
 It is possible to copy one element in a first soundfont, and paste it in a second soundfont.
@@ -149,6 +154,7 @@ During a copy of elements between different soundfonts, if an element having the
 * duplicate the element, in which case the element is copied next to the existing element with a different name.
 
 
+.. index:: tree; search
 .. _tree search:
 
 Search

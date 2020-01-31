@@ -112,7 +112,7 @@ Distribution of divisions
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When samples are added to instruments, they appear as divisions (columns) in the :ref:`instrument editor table <instrument editor table>`.
-Each division must then be positioned on the keyboard by changing the “Key range” in the table.
+Each division must then be positioned on the keyboard by changing the :guilabel:`Key range` in the table.
 Generally, it is a good practice to have the range of a division include the root key of its represented sample.
 The entire surface of the keyboard must be covered (eg, key 36 to key 96 for a classic synthesizer keyboard).
 
@@ -122,7 +122,7 @@ The tool “:ref:`instrument tool position`” automatically distributes the sam
 Setting the divisions
 ^^^^^^^^^^^^^^^^^^^^^
 
-If the sample(s) are looped, to hear the looping in an instrument, select |loop on| in the Loop playback parameter row of either the Global or individual notes columns in the Parameters Table.
+If the sample(s) are looped, to hear the looping in an instrument, select |loop on| in the :guilabel:`Loop playback` parameter row of either the :guilabel:`Global` or individual notes columns in the :guilabel:`Parameters Table`.
 
 * |loop on| turns it On,
 * |loop off| or a blank turns it Off.
@@ -135,7 +135,7 @@ This means that the parameters of the standard divisions take precedence over th
 In the context of this simple tutorial, no other parameters have to be edited for the instrument to work.
 It should be already possible to play with the :ref:`virtual keyboard <toolbar keyboard>`.
 
-However, to improve the instrument it is advisable to enter a value in the “Vol env release (s)” row, which prevents the sound from stopping abruptly, as soon as a key is released.
+However, to improve the instrument it is advisable to enter a value in the :guilabel:`Vol env release (s)` row, which prevents the sound from stopping abruptly, as soon as a key is released.
 The other parameters are described in the description of :ref:`tables <instrument editor table>`.
 
 

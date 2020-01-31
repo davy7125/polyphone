@@ -73,7 +73,7 @@ Limitations on the sfz import
 * The envelope applied to pitch and filter being the same in sf2 files (Mod env), importing different envelopes for the pitch and filter is not possible (``fileg_*`` and ``pitcheg_*`` opcodes).
 * The LFO applied to volume and filter being the same in sf2 files (Mod LFO), importing different LFOs for the volume and filter is not possible (``amplfo_*`` and ``fillfo_*`` opcodes).
 * The only filter that can be imported is the second order low pass filter (``fil_type=lpf_2p``).
-* To be imported correctly, “group” and “off_by” opcodes must contain the same value within the same group.
+* To be imported correctly, ``group`` and ``off_by`` opcodes must contain the same value within the same group.
 
 .. warning::
    ``width`` and ``position`` opcodes may not be interpreted correctly.

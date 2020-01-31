@@ -3,15 +3,15 @@
 Командная строка
 ================
 
-Polyphone can be run with a command line to convert soundfonts in the format `sf2 <convert to sf2_>`_, `sf3 <convert to sf3_>`_ or `sfz <convert to sfz_>`_.
+Polyphone можно запустить в командной строке для преобразования SoundFont в формат `sf2 <convert to sf2_>`_, `sf3 <convert to sf3_>`_ или `sfz <convert to sfz_>`_.
 
-Supported file formats for the conversion are :ref:`sf2 <sf2 format>`, :ref:`sf3 <sf3 format>`, :ref:`sfz <sfz format>` and :ref:`sfArk <sfark format>`.
+Поддерживаемые форматы файлов для преобразования: :ref:`sf2 <sf2 format>`, :ref:`sf3 <sf3 format>`, :ref:`sfz <sfz format>` и :ref:`sfArk <sfark format>`.
 
 
 .. _convert to sf2:
 
-Конвертация в sf2
------------------
+Преобразование в sf2
+--------------------
 
 
 Командная строка
@@ -19,20 +19,20 @@ Supported file formats for the conversion are :ref:`sf2 <sf2 format>`, :ref:`sf3
 
 ::
 
-   polyphone -1 -i [file/to/convert] -d [output/directory] -o [output/file/name]
+   polyphone -1 -i <исходный/файл> -d <целевой/каталог> -o <целевое/имя/файла>
 
 .. note::
-   With Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.
+   В Windows вам нужно написать полный путь к Polyphone, а не просто :command:`polyphone`, например :command:`C:/Program files/Polyphone/polyphone.exe`.
 
 
 Аргументы
 ^^^^^^^^^
 
--1  Mode “1” is “convert to sf2”.
--d  Output directory in which the input file will be converted.
-    This argument is optional, by default this is the same directory than the input file.
--o  Output name of the converted file without the extension (the extension “.sf2” will be automatically added).
-    This argument is optional, by default this is the same name than the input file.
+-1  Режим «1» означает «конвертировать в sf2».
+-d  Целевой каталог, в который будет конвертирован исходный файл.
+    Этот аргумент является необязательным, по умолчанию это тот же каталог, в котором находится исходный файл.
+-o  Имя преобразованного файла без расширения (расширение «.sf2» будет добавлено автоматически).
+    Этот аргумент является необязательным, по умолчанию это то же имя, что и у исходного файла.
 
 
 Пример
@@ -40,13 +40,13 @@ Supported file formats for the conversion are :ref:`sf2 <sf2 format>`, :ref:`sf3
 
 ::
 
-   polyphone -1 -i /path/to/file.sfArk
+   polyphone -1 -i /путь/к/файлу.sfArk
 
 
 .. _convert to sf3:
 
-Конвертация в sf3
------------------
+Преобразование в sf3
+--------------------
 
 
 Командная строка
@@ -54,28 +54,28 @@ Supported file formats for the conversion are :ref:`sf2 <sf2 format>`, :ref:`sf3
 
 ::
 
-   polyphone -2 -i [file/to/convert] -d [output/directory] -o [output/file/name] -c [config]
+   polyphone -2 -i <исходный/файл> -d <целевой/каталог> -o <целевое/имя/файла> -c <параметры>
 
 .. note::
-   With Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.
+   В Windows вам нужно написать полный путь к Polyphone, а не просто :command:`polyphone`, например :command:`C:/Program files/Polyphone/polyphone.exe`.
 
 
 Аргументы
 ^^^^^^^^^
 
--2  Mode “2” is “convert to sf3”.
--d  Output directory in which the input file will be converted.
-    This argument is optional, by default this is the same directory than the input file.
--o  Output name of the converted file without the extension (the extension “.sf3” will be automatically added).
-    This argument is optional, by default this is the same name than the input file.
--c  Conversion configuration.
-    It is possible to specify the compression quality:
+-2  Режим «2» означает «конвертировать в sf3».
+-d  Целевой каталог, в который будет конвертирован исходный файл.
+    Этот аргумент является необязательным, по умолчанию это тот же каталог, в котором находится исходный файл.
+-o  Имя преобразованного файла без расширения (расширение «.sf3» будет добавлено автоматически).
+    Этот аргумент является необязательным, по умолчанию это то же имя, что и у исходного файла.
+-c  Параметры преобразования.
+    Можно указать качество сжатия:
 
-    * “0” is low,
-    * “1” is medium,
-    * “2” is high.
+    * «0» — низкое,
+    * «1» — среднее,
+    * «2» — высокое.
 
-    This argument is optional, by default this is “1” (medium quality).
+    Этот аргумент является необязательным, значение по умолчанию — «1» (среднее качество).
 
 
 Пример
@@ -83,13 +83,13 @@ Supported file formats for the conversion are :ref:`sf2 <sf2 format>`, :ref:`sf3
 
 ::
 
-   polyphone -2 -i /path/to/file.sf2 -c 2
+   polyphone -2 -i /путь/к/файлу.sf2 -c 2
 
 
 .. _convert to sfz:
 
-Конвертация в sfz
------------------
+Преобразование в sfz
+--------------------
 
 
 Командная строка
@@ -97,27 +97,27 @@ Supported file formats for the conversion are :ref:`sf2 <sf2 format>`, :ref:`sf3
 
 ::
 
-   polyphone -3 -i [file/to/convert] -d [output/directory] -o [output/file/name] -c [config]
+   polyphone -3 -i <исходный/файл> -d <целевой/каталог> -o <целевое/имя/файла> -c <параметры>
 
 .. note::
-   With Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.
+   В Windows вам нужно написать полный путь к Polyphone, а не просто :command:`polyphone`, например :command:`C:/Program files/Polyphone/polyphone.exe`.
 
 
 Аргументы
 ^^^^^^^^^
 
--3  Mode “3” is “convert to sfz”.
--d  Output directory in which the input file will be converted.
-    This argument is optional, by default this is the same directory than the input file.
--o  Output name of the converted file without the extension (the extension “.sfz” will be automatically added).
-    This argument is optional, by default this is the same name than the input file.
--c  Conversion configuration made of 3 characters.
+-3  Режим «3» означает «конвертировать в sfz».
+-d  Целевой каталог, в который будет конвертирован исходный файл.
+    Этот аргумент является необязательным, по умолчанию это тот же каталог, в котором находится исходный файл.
+-o  Имя преобразованного файла без расширения (расширение «.sfz» будет добавлено автоматически).
+    Этот аргумент является необязательным, по умолчанию это то же имя, что и у исходного файла.
+-c  Параметры преобразования, указываемые тремя цифрами.
 
-    1. The first character is “1” if each preset must be prefixed by its preset number, “0” otherwise.
-    2. The second character is “1” if a directory per bank must be created, “0” otherwise.
-    3. The third character is “1” if the General MIDI classification must be used to sort presets, “0” otherwise.
+    1. Первый символ «1», если перед каждым пресетом должен стоять его номер, иначе — «0».
+    2. Второй символ «1», если необходимо создать по каталогу для каждого банка, иначе — «0».
+    3. Третий символ «1», если для сортировки пресетов должна использоваться классификация General MIDI, иначе — «0».
 
-    This argument is optional, by default this is “000”.
+    Этот аргумент является необязательным, значение по умолчанию — «000».
 
 
 Пример
@@ -125,4 +125,4 @@ Supported file formats for the conversion are :ref:`sf2 <sf2 format>`, :ref:`sf3
 
 ::
 
-   polyphone -3 -i /path/to/file.sf3 -c 011
+   polyphone -3 -i /путь/к/файлу.sf3 -c 011

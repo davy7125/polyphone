@@ -3,101 +3,101 @@
 Использование заказного затухания в инструменте
 ===============================================
 
-The purpose of this tutorial is to create expressive instruments using looped samples whose releases have been recorded.
-You will learn how to fully use the capabilities of such a sample, by using the attack and sustain of the sample but also its release.
+Цель этого урока — создать выразительные инструменты, используя зацикленные семплы с записанными затуханими.
+Вы узнаете, как в полной мере использовать возможности таких семплов, используя не только атаку и поддержку семпла, но также и его затухание.
 
 
 Разница между обычным и заказным затуханием
 -------------------------------------------
 
-When you trigger a note you will hear first the beginning of the sample (the attack) and then, as long as you don't release the key, the loop within the sample will be played again and again (the sustained phase).
-When you release the key, the loop will still be used and the sound will progressively be attenuated until you cannot hear it anymore.
-This is the traditional way to do a release with soundfonts: easy to set but ignoring transient harmonics that could occur during the real release of an acoustic instrument.
-This type of release can be viewed as a simple extension of the sustained phase.
+Когда нота начинает играть, вы слышите начало семпла (атака), а затем, пока вы не отпустите клавишу, петля внутри семпла будет воспроизводиться снова и снова (фаза поддержки).
+Когда вы отпустите клавишу, петля всё равно будет использоваться, и звук будет постепенно затухать, пока вы его больше не услышите.
+Это традиционный способ сделать затухание в SoundFont: его легко установить, но он игнорирует переходные гармоники, которые могут возникнуть во время реального затухания акустического инструмента.
+Этот тип затухания можно рассматривать как простое продолжение фазы поддержки.
 
-A more realistic release would be to use the real release provided by the recorded sample.
-The attack and sustained phase will be done the same way but when the key is released the sustained phase will suddenly drop, leaving room for the recorded release that will begin to sound.
-A custom release is used instead of extending the sound of the sustained phase, adding details to the sound.
+Более реалистичным будет использование реального затухания, представленного записанным семплом.
+Атака и фаза поддержки будут выполняться точно так же, но когда клавиша будет отпущена, фаза поддержки резко оборвётся, уступая место для записанного затухания, которое начнёт звучать.
+Заказное затухание используется вместо продолжения звука фазы поддержки, добавляя детали к звуку.
 
-Creating such an instrument is made by splitting the problem in two:
+Задача создания такого инструмента разделяется на две части:
 
-* first defining the attack and sustained phase,
-* then triggering the release.
+* сначала определение атаки и фазы поддержки,
+* затем запуск затухания.
 
-The example that will be taken here is the sound of a trumpet in an organ, for its high harmonic content and audible progression.
+Пример, который будет взят здесь, — это звук трубы в органе, из-за его высокой гармонической составляющей и слышимого развития звука.
 
 
 Подготовка семплов
 ------------------
 
-Two cases may appear: you have a file comprising the full sample from the attack to the release, or you have an additional file containing only the release that has been already extracted.
+Могут быть два случая: у вас есть файл, содержащий полный семпл от атаки до затухания, или у вас есть дополнительный файл, содержащий только затухание, которое уже было извлечено.
 
 
 Полный семпл, включающий затухание
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Load the sample twice in Polyphone and then, in the second instance of the sample, remove everything in the sample except the release.
-The removal can be done by using the key :kbd:`Alt` and then defining an area on the :ref:`sample graph <sample editor graph>`.
-To find the point where the release begins, play the sample several times and try to define the point where you think no more power was inducing the sound.
-This last part will be the release.
-Then follow the instructions below.
+Загрузите семпл в Polyphone дважды, а затем, во втором экземпляре семпла удалите всё кроме затухания.
+Удаление можно выполнить, удерживая нажатой клавишу :kbd:`Alt` и указав область на :ref:`графике семпла <sample editor graph>`.
+Чтобы найти точку, где начинается затухание, воспроизведите семпл несколько раз и попытайтесь найти точку, в которой, по вашему мнению, больше нету силы, вызвавшей звук.
+Эта последняя часть и будет затуханием.
+Затем следуйте инструкциям ниже.
 
 
 Отдельный семпл с затуханием
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Samples for the example: :download:`sample 1 <https://www.polyphone-soundfonts.com/downloads/tutorials/trumpet.wav>`, :download:`sample 2 <https://www.polyphone-soundfonts.com/downloads/tutorials/trumpet-release.wav>`.
+Семплы для примера: :download:`семпл 1 <https://www.polyphone-soundfonts.com/downloads/tutorials/trumpet.wav>`, :download:`семпл 2 <https://www.polyphone-soundfonts.com/downloads/tutorials/trumpet-release.wav>`.
 
-If you have 2 samples, the first one containing the beginning and the sustained phase of the sound and the second one containing the release, you only need to make sure that the release begins with a very short blank (a couple of points) being close to 0.
-A short inaudible loop will thus be made with this portion.
+Если у вас есть 2 семпла, один из которых содержит начало и фазу поддержки звука, а другой содержит затухание, вам нужно только убедиться, что затухание начинается с очень короткой пустоты (достаточно пары точек), которая находится вблизи нуля.
+Из этой пустоты будет сделана короткая беззвучная петля.
 
-Tune and loop the first sample as explained :ref:`here <how to prepare a sample>`.
+Настройте и зациклите первый образец, как описано в уроке «:ref:`how to prepare a sample`».
 
-Loop the second sample on a very short part at the beginning, for example from the point 1 to the point 2 or 3.
-Specify the same root key and correction than the first sample.
+Зациклите второй семпл на очень короткой части в начале, например, от точки 1 до точки 2 или 3.
+Укажите ту же корневую клавишу и коррекцию, что и для первого семпла.
 
 
 Первый инструмент: фазы атаки и поддержки
 -----------------------------------------
 
-Create a first instrument with the samples comprising the attack and the sustained phase of the sound.
-Configure the global division this way:
+Создайте первый инструмент с семплами, включающими фазы атаки и поддержки звука.
+Настройте глобальный раздел следующим образом:
 
-* choose the loop option in loop playback (2nd choice),
-* specify 0.01s in the volume envelop release (very short release).
+* выберите опцию петли в цикле воспроизведения (2-й выбор),
+* укажите 0,01 с в затухании огибающей громкости (очень короткое затухание).
 
-Now you have an instrument comprising no releases.
+Теперь у вас есть инструмент без затухания.
 
 
 Второй инструмент: фаза затухания
 ---------------------------------
 
-Create a second instrument for the release comprising the release samples with a very short blank loop at the beginning.
-Configure it this way:
+Создайте второй инструмент для затухания, включающий семпл затухания с очень короткой пустой петлёй в начале.
+Настройте это таким образом:
 
-* choose the loop option + release in loop playback (3rd choice),
-* select a high number such as 100 seconds in the volume envelop release so that the release is not attenuated,
-* determine approximately the duration of the attack in the first sample and use this value in the volume envelop attack.
+* выберите опцию :guilabel:`петля + затухание` в :guilabel:`Играть петлю` (3-й выбор),
+* выберите большое число, например, 100 секунд, в :guilabel:`Огибающая громкости: затухание (сек)`, чтобы затухание не приглушалось,
+* приблизительно определите продолжительность атаки в первом семпле и используйте это значение в атаке огибающей громкости.
 
-Now you have an instrument remaining silent as long as you don't release a key, and then you can hear the release phase.
-You could also notice that a very fast shot on a key will trigger the release in an attenuated way.
-This is barely noticeable here with the example since the attack of a trumpet is very fast.
-The duration of the attack has been slightly augmented in the example.
+Теперь у вас есть инструмент, который молчит до тех пор, пока вы не отпустите клавишу, и тогда вы сможете услышать фазу затухания.
+Вы также можете заметить, что очень быстрый удар по клавише вызывает приглушение затухания.
+Это едва заметно здесь с примером, так как атака трубы очень быстрая.
+Продолжительность атаки была немного увеличена в примере.
 
 
 Объединение обоих инструментов
 ------------------------------
 
-Create a preset using these two instruments.
-The first instrument is heard when a key is triggered and the second instrument is triggered when the key is released.
-You can then listen to the result and try to make a smoother transition between the sustained phase and the release:
+Создайте пресет, используя эти два инструмента.
+Первый инструмент слышен при нажатии клавиши, а второй — при отпускании клавиши.
+Затем вы можете прослушать результат и попытаться сделать более плавный переход между фазой поддержки и затуханием:
 
-* by attenuating the first or second instrument,
-* by increasing the release duration of the first instrument.
+* приглушая первый или второй инструмент,
+* увеличивая продолжительности затухания первого инструмента.
 
-The result with the example files is :download:`here <https://www.polyphone-soundfonts.com/downloads/tutorials/custom%20release.sf2>`.
+Результат с файлами примеров можно загрузить :download:`здесь <https://www.polyphone-soundfonts.com/downloads/tutorials/custom%20release.sf2>`.
 
-You can listen here the differences between a classical and a custom release:
+А здесь вы можете услышать разницу между классическим и заказным затуханием:
 
-* :download:`classic release <https://www.polyphone-soundfonts.com/downloads/tutorials/classic-release.mp3>`
-* :download:`custom release  <https://www.polyphone-soundfonts.com/downloads/tutorials/custom-release.mp3>`
+* :download:`классическое затухание <https://www.polyphone-soundfonts.com/downloads/tutorials/classic-release.mp3>`
+* :download:`заказное затухание  <https://www.polyphone-soundfonts.com/downloads/tutorials/custom-release.mp3>`

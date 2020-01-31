@@ -1,3 +1,4 @@
+.. index:: home screen
 .. _home screen:
 
 Home screen
@@ -21,12 +22,14 @@ Left part
 ---------
 
 
+.. index:: open
+
 Opening a soundfont
 ^^^^^^^^^^^^^^^^^^^
 
 Three ways for opening a soundfont:
 
-* a click on :guilabel:`Open a file` opens a file browser, the allowed file to select having the extension sf2, sf3, sfArk or sfz (the different formats are described :ref:`here <sf formats>`);
+* a click on :guilabel:`Open soundfont` opens a file browser, the allowed file to select having the extension sf2, sf3, sfArk or sfz (the different formats are described :ref:`here <sf formats>`);
 * a click on :guilabel:`Create a soundfont` opens an empty soundfont, everything is to be done from scratch;
 * a double-click on a soundfont from the history re-open it.
 
@@ -38,9 +41,9 @@ Shortcuts
 
 Three buttons are located at the bottom of the left part:
 
-:Documentation: Open a web browser for reading the Polyphone documentation_.
-:Forum: Open a web browser with the URL of the Polyphone forum_.
-:Settings: Open the :ref:`settings <settings>` of the software in a new tab.
+* :guilabel:`Documentation`: open a web browser for reading the Polyphone documentation_.
+* :guilabel:`Forum`: open a web browser with the URL of the Polyphone forum_.
+* :guilabel:`Settings`: open the :ref:`settings <settings>` of the software in a new tab.
 
 
 .. _right part:
@@ -85,6 +88,7 @@ The tabs provide a quick access between:
 * the software :ref:`settings <settings>`,
 * the :ref:`soundfont browser <sf browser>`,
 * a :ref:`soundfont description <sf description>` from the repository.
+
 
 Menu
 ^^^^

@@ -23,14 +23,21 @@ Editing functions
 
 The elements in the left part of the toolbar are for common editing functions:
 
-:New sample: Add new :ref:`samples <sample editor>` to the soundfont.
+|sample| New sample
+  Add new :ref:`samples <sample editor>` to the soundfont.
   A dialog will be displayed for selecting audio files (``.wav`` and ``.flac`` files can be imported).
-:New instruments: Create a new :ref:`instrument <instrument editor>`.
-:New preset: Create a new :ref:`preset <preset editor>`.
-:Tools: Clicking on this button will show a menu containing all available :ref:`tools <tool menu>` for the selected element(s) in the :ref:`tree <tree>`.
-:Undo: Undo the last modification.
-:Redo: Redo the last undone modification.
-:Save file: Save the soundfont.
+|instrument| New instrument
+  Create a new :ref:`instrument <instrument editor>`.
+|preset| New preset
+  Create a new :ref:`preset <preset editor>`.
+|tools| Tools
+  Clicking on this button will show a menu containing all available :ref:`tools <tool menu>` for the selected element(s) in the :ref:`tree <tree>`.
+|undo| Undo
+  Undo the last modification.
+|redo| Redo
+  Redo the last undone modification.
+|save| Save file
+  Save the soundfont.
 
 
 .. _toolbar view:
@@ -40,8 +47,8 @@ Switch view
 
 In the right part of the toolbar, some icons may appear depending on which :ref:`editor <editing pages>` is displayed:
 
-* switching between the :ref:`table view <instrument editor table>`, the :ref:`range editor <instrument editor range>` and the :ref:`envelope editor <instrument editor envelope>` is possible when editing an instrument,
-* switching between the table view and the range editor is possible when editing a preset,
+* switching between the |table| :ref:`table view <instrument editor table>`, the |range| :ref:`range editor <instrument editor range>` and the |envelope| :ref:`envelope editor <instrument editor envelope>` is possible when editing an instrument,
+* switching between the |table| table view and the |range| range editor is possible when editing a preset,
 * nothing displayed otherwise.
 
 
@@ -50,7 +57,7 @@ In the right part of the toolbar, some icons may appear depending on which :ref:
 Recorder
 --------
 
-When clicking on the icon, a window opens showing the recorder that can record the output of Polyphone.
+When clicking on the icon |recorder|, a window opens showing the recorder that can record the output of Polyphone.
 
 
 .. figure:: images/recorder.png
@@ -75,7 +82,7 @@ The right button can also have two possible states (only accessible if the acqui
 Virtual keyboard
 ----------------
 
-When clicking on the icon, a window opens showing the virtual keyboard that has been made for testing samples, instruments and presets.
+When clicking on the icon |piano|, a window opens showing the virtual keyboard that has been made for testing samples, instruments and presets.
 This window triggers :abbr:`MIDI (Musical Instrument Digital Interface)` signals:
 
 * **note on** / **note off** / **after touch** with the piano keyboard,
@@ -117,15 +124,15 @@ Markers and colors
 Useful shortcuts
 ~~~~~~~~~~~~~~~~
 
-:kbd:`Ctrl+K`
+:kbd:`Ctrl`\ +\ :kbd:`K`
   This shortcut can put at any time the focus on the virtual keyboard.
   This allows, while editing in a table for instance, to use the computer to play instead of edit a cell.
   A glow effect on the virtual keyboard confirms that the focus is on it.
 
-:kbd:`Ctrl+1`, :kbd:`Ctrl+2`, … :kbd:`Ctrl+8`
+:kbd:`Ctrl`\ +\ :kbd:`1`, :kbd:`Ctrl`\ +\ :kbd:`2`, … :kbd:`Ctrl`\ +\ :kbd:`8`
   These shortcuts change the octaves played with the computer keyboard.
-  After the use of :kbd:`Ctrl+1`, the lowest octave can be played.
-  The highest octave is reached using :kbd:`Ctrl+8`.
+  After the use of :kbd:`Ctrl`\ +\ :kbd:`1`, the lowest octave can be played.
+  The highest octave is reached using :kbd:`Ctrl`\ +\ :kbd:`8`.
 
 :kbd:`→` / :kbd:`←`
   The right or left arrow will play the pitch just next or below the last key that has been played, with the same velocity.
@@ -160,3 +167,31 @@ This area is made of different buttons:
   For each knob you can specify a controller number and then its value.
 :On / off led: This led is to set a MIDI controller value to 0 or 127 (useful for the sustain pedal for instance).
   It is like a knob but with only two possible values.
+
+
+.. inline images:
+
+.. |sample|     image:: images/toolbar_sample.*
+   :scale: 50%
+.. |instrument| image:: images/toolbar_instrument.*
+   :scale: 50%
+.. |preset|     image:: images/toolbar_preset.*
+   :scale: 50%
+.. |tools|      image:: images/toolbar_toolbox.*
+   :scale: 50%
+.. |undo|       image:: images/toolbar_undo.*
+   :scale: 50%
+.. |redo|       image:: images/toolbar_redo.*
+   :scale: 50%
+.. |save|       image:: images/toolbar_save.*
+   :scale: 50%
+.. |table|      image:: images/toolbar_table.*
+   :scale: 50%
+.. |range|      image:: images/toolbar_range.*
+   :scale: 50%
+.. |envelope|   image:: images/toolbar_adsr.*
+   :scale: 50%
+.. |recorder|   image:: images/toolbar_recorder.*
+   :scale: 50%
+.. |piano|      image:: images/toolbar_piano.*
+   :scale: 50%

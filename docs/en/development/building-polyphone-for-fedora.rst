@@ -15,7 +15,6 @@ Qt installation
 
 After a base installation of Fedora, install the following packages (including a compiler) as pre-requisites for Qt development::
 
-
   sudo dnf update
   sudo dnf groupinstall "C Development Tools and Libraries"
   sudo dnf install gcc-c++
@@ -44,7 +43,7 @@ If you want to use Qt Creator install the Polyphone dependencies below and conti
 Polyphone dependencies
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Install the following dependencies (if you have synaptic installed you could alternatively use it for installation)::
+Install the following dependencies (if you have :program:`Synaptic` installed you could alternatively use it for installation)::
 
   sudo dnf install qt-devel
   sudo ln -s /usr/bin/qmake-qt4 /usr/bin/qmake
@@ -69,7 +68,7 @@ First, get Polyphone sources from `here <download_>`_ or from `Github <on github
 polyphone.pro modifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Modify the file :file:`polyphone.pro` to use distributed versions for rtmidi, stk and qcustomplot.
+Modify the file :file:`polyphone.pro` to use distributed versions for :program:`rtmidi`, :program:`stk` and :program:`qcustomplot`.
 Uncomment the following lines by removing the leading ‘#’::
 
   DEFINES += USE_LOCAL_RTMIDI
@@ -77,7 +76,7 @@ Uncomment the following lines by removing the leading ‘#’::
   DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 .. note::
-   instead of these modifications you could try to build Polyphone with the Fedora / RPM distributions for these packages.
+   Instead of these modifications you could try to build Polyphone with the Fedora / RPM distributions for these packages.
    The installation commands would be:
 
    ::
@@ -86,8 +85,8 @@ Uncomment the following lines by removing the leading ‘#’::
      sudo dnf install stk-devel
      sudo dnf install qcustomplot-devel
 
-However, running :command:`qmake` afterwards, it claimed to not recognize rtmidi on the system.
-As on Windows and Mac Systems the use of the local distributed rtmidi, stk and qcustomplot versions are forced you may not saw any benefit in sorting out the issue with the rtmidi.
+However, running :command:`qmake` afterwards, it claimed to not recognize :program:`rtmidi` on the system.
+As on Windows and Mac Systems the use of the local distributed :program:`rtmidi`, :program:`stk` and :program:`qcustomplot` versions are forced you may not saw any benefit in sorting out the issue with the :program:`rtmidi`.
 
 
 Getting the executable
@@ -97,7 +96,7 @@ Go into source directory (where the file :file:`polyphone.pro` is located), open
 
   qmake && make
 
-If everything goes well you will have the compiled polyphone in the :file:`RELEASE` subdirectory.
+If everything goes well you will have the compiled :file:`polyphone` in the :file:`RELEASE` subdirectory.
 
 
 Troubleshooting

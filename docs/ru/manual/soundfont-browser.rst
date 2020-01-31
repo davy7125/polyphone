@@ -3,8 +3,8 @@
 Браузер SoundFont
 =================
 
-The soundfont browser is a link between Polyphone and the soundfont repository of the Polyphone website.
-It allows you, directly in Polyphone, to download, test and possibly re-use soundfonts.
+Браузер SoundFont является связующим звеном между Polyphone и хранилищем SoundFont на сайте Polyphone.
+Он позволяет вам непосредственно в Polyphone загружать, тестировать и, при необходимости, повторно использовать файлы SoundFont.
 
 
 .. _sf browse:
@@ -12,46 +12,46 @@ It allows you, directly in Polyphone, to download, test and possibly re-use soun
 Обзор SoundFont
 ---------------
 
-To open the soundfont browser, click on :guilabel:`Online repository` or write a keyword on the :ref:`home screen <home screen>`.
-Once the soundfont browser is open in a new tab, it is possible to search, sort and filter the results.
+Чтобы открыть браузер SoundFont, щёлкните по кнопке :guilabel:`Онлайн-хранилище` или введите ключевое слово на :ref:`главном экране <home screen>`.
+Как только браузер SoundFont откроется в новой вкладке, можно искать, сортировать и фильтровать результаты.
 
 
 .. figure:: images/soundfont_browser_browsing.png
 
-   Browsing soundfonts
+   Обзор SoundFont
 
 
 Поиск SoundFont
 ^^^^^^^^^^^^^^^
 
-For searching a soundfont, write one or more keywords in the top bar and then press :kbd:`Enter`.
-It is possible to write :samp:`Author:{someone}` to search soundfonts of a specific author.
+Для поиска SoundFont введите одно или несколько ключевых слов в верхней панели и нажмите клавишу :kbd:`Ввод`.
+Можно написать :samp:`Author:{такой-то}` для поиска SoundFont указанного автора.
 
 
 Сортировка результатов
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Next to the search bar, a drop-down menu provides 4 ways to sort soundfont results:
+Рядом с панелью поиска, выпадающее меню предоставляет 4 способа сортировки результатов поиска Soundfont:
 
-:Date: Newest soundfonts are first.
-:Downloads: More downloaded soundfonts are first.
-:Rating score: Highest rated soundfonts are first.
-:Title (A→Z): Soundfonts results are sorted according to the alphabetical order.
+:Дата: Самые новые SoundFont в начале.
+:Загрузки: Больше всего загружаемые SoundFont в начале.
+:Рейтинг: Лучшие по рейтингу SoundFont в начале.
+:Заголовок (A→Z): Результаты поиска SoundFont сортируются в алфавитном порядке.
 
 
 Фильтрация результатов
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Results can be filtered in different ways:
+Результаты могут быть отфильтрованы разными способами:
 
-:Category: Kind of instrument.
-:License: It's possible to list soundfonts having a license allowing a commercial and / or a sharing after the soundfont is edited.
-:Sample source: Origin of the samples.
-:Timbre: Description of the timbre.
-:Articulation: Description of the articulation.
-:Genre: Genre targeted by the soundfont.
-:MIDI standard: Listing only soundfonts compliant with a standard is possible.
-:Tags: Show soundfonts having a specific tag.
+:Категория: Вид инструмента.
+:Лицензия: Можно перечислить SoundFont, имеющие лицензию, разрешающую коммерческое использование и распространение отредактированного SoundFont.
+:Источник образца: Происхождение семплов.
+:Тембр: Описание тембра.
+:Артикуляция: Описание артикуляции.
+:Жанр: Жанр, на который ориентирован SoundFont.
+:Стандарт MIDI: Можно перечислить только те SoundFont, которые соответствуют стандарту.
+:Метки: Показать SoundFont, имеющие определённую метку.
 
 
 .. _sf description:
@@ -59,21 +59,21 @@ Results can be filtered in different ways:
 Описание SoundFont
 ------------------
 
-Opening a soundfont description can be made with a double-click on a cell in the daily soundfonts of the :ref:`home screen <home screen>` or in the `soundfont browser <sf browse_>`_.
-A Premium account is required for soundfonts that are not in the daily soundfonts.
-Connecting Polyphone to your account is possible in the :ref:`settings <repository settings>` of the software.
+Чтобы открыть описание SoundFont, нужно выполнить двойной щелчок по ячейке в :guilabel:`Ежедневных SoundFont` на :ref:`главном экране <home screen>` или в `браузере SoundFont <sf browse_>`_.
+Чтобы открыть SoundFont не из :guilabel:`Ежедневных SoundFont`, требуется учётная запись Премиум.
+Подключение Polyphone к вашей учётной записи производится в :ref:`настройках <repository settings>` программы.
 
 
 .. figure:: images/soundfont_browser_description.png
 
-   Description page of a soundfont
+   Страница описания SoundFont
 
 
-The description of a soundfont is made of:
+Описание SoundFont состоит из:
 
-* a **header**, in which you can find the title, the number of comments, the number of downloads and the rating,
-* a **left part**, comprising the author name, a date, the license type (please take care of this), the category and other attributes that characterize the soundfont,
-* a **central part**, displaying a textual description, the list of files to download and possible comments.
+* **заголовка**, в котором вы можете найти название, количество комментариев, загрузок и рейтинг,
+* **левой части**, включающей имя автора, дату, тип лицензии (пожалуйста, не забывайте о ней), категорию и другие атрибуты, которые характеризуют SoundFont,
+* **центральной части**, отображающей текстовое описание, список файлов для загрузки и комментарии, если они имеются.
 
 
 .. _sf download:
@@ -81,14 +81,14 @@ The description of a soundfont is made of:
 Загрузка
 --------
 
-For downloading a file, click on the icon :guilabel:`download` next to its file name in the section :guilabel:`Downloads`.
-You will see the download progress in a menu next to the main menu, at the top right corner of the software.
-Once a file is downloaded and if the file is a soundfont, it is possible to open it in a :ref:`soundfont editor <sf editor>` by clicking on the icon :guilabel:`open`.
+Для загрузки файла нажмите на значок :guilabel:`Загрузка` рядом с его именем в разделе :guilabel:`Загрузки`.
+Вы увидите прогресс загрузки в меню рядом с главным меню, в верхнем правом углу программы.
+Как только файл будет загружен, и если он является SoundFont, его можно открыть в :ref:`редакторе SoundFont <sf editor>`, щелкнув значок :guilabel:`Открыть`.
 
-It is possible from the menu to clear the completed downloads.
-If everything is cleared, the download menu disappears.
+Из этого меню можно убрать завершённые загрузки.
+Когда всё убрано, меню загрузки исчезает.
 
 
 .. figure:: images/soundfont_browser_download.png
 
-   Dowloading soundfonts
+   Загрузка файлов SoundFont

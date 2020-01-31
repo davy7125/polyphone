@@ -20,9 +20,9 @@ General
 
 The :guilabel:`General` section allows the modification of the following parameters:
 
-:Audio back-end: Specifies the audio back-end used to play samples.
+:Audio backend: Specifies the audio backend used to play samples.
   :abbr:`JACK (JACK Audio Connection Kit)` and :abbr:`ASIO (Audio Stream Input/Output)` drivers (the latter for Windows only) may be chosen.
-:Buffer size: Specifies the buffer size used for :abbr:`JACK (JACK Audio Connection Kit)` and :abbr:`ASIO (Audio Stream Input/Output)` drivers.
+:Buffer size: Specifies the buffer size used for :abbr:`JACK` and :abbr:`ASIO` drivers.
   A small buffer results in a small latency, but the sound may become scratchy.
 :MIDI input: Specifies the :abbr:`MIDI (Musical Instrument Digital Interface)` input controlling the virtual keyboard.
 

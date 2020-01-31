@@ -3,7 +3,7 @@
 Сборка Polyphone для Fedora
 ===========================
 
-Use these instructions if you cannot install Polyphone on your Fedora distribution with the available installers in the section “Download_” (verified: Aug 7, 2016 on Fedora 24, 64bit).
+Используйте эти указания, если вы не можете установить Polyphone в свой дистрибутив Fedora с помощью доступных установщиков в разделе “Download_” (проверено: 7 августа 2016 г. для Fedora 24, 64-битная версия).
 
 
 Перед тем как начать
@@ -13,38 +13,37 @@ Use these instructions if you cannot install Polyphone on your Fedora distributi
 Установка Qt
 ^^^^^^^^^^^^
 
-After a base installation of Fedora, install the following packages (including a compiler) as pre-requisites for Qt development::
-
+После базовой установки Fedora установите следующие пакеты (включая компилятор), необходимые для разработки приложений, использующих Qt::
 
   sudo dnf update
   sudo dnf groupinstall "C Development Tools and Libraries"
   sudo dnf install gcc-c++
   sudo dnf install mesa-libGL-devel
 
-Then you can either install the default Qt framework with the following command::
+Затем вы можете установить стандартный фреймворк Qt с помощью следующей команды::
 
   sudo dnf install qt-creator
 
-or install the latest version of the Qt framework and Qt Creator available `here <get qt_>`_.
-Download the Qt installer and use these commands to add execution permission and run the installer (you may have to adjust the version number)::
+или установить последнюю версию фреймворка Qt и Qt Creator, доступные `здесь <get qt_>`_.
+Загрузите установщик Qt и выполните эти команды, чтобы добавить разрешение на выполнение и запустить установщик (возможно, вам придётся изменить номер версии)::
 
   chmod 755 qt-unified-linux-x64-2.0.3-1-online.run
   ./qt-unified-linux-x64-2.0.3-1-online.run
 
-Just select default components as proposed — unless you want more for other purposes.
+Выберите компоненты по умолчанию, как предлагается, если вам не нужно больше для других целей.
 
 
 .. figure:: images/qt-setup-fedora.png
 
-   Qt setup in Fedora
+   Установка Qt в Fedora
 
-If you want to use Qt Creator install the Polyphone dependencies below and continue with this document: :ref:`build with qt creator`.
+Если вы хотите использовать Qt Creator, установите зависимости Polyphone, как указано ниже, и продолжите работу по этому документу: :ref:`build with qt creator`.
 
 
 Зависимости Polyphone
 ^^^^^^^^^^^^^^^^^^^^^
 
-Install the following dependencies (if you have synaptic installed you could alternatively use it for installation)::
+Установите следующие зависимости (если у вас установлен :program:`Synaptic`, вы можете использовать его для установки)::
 
   sudo dnf install qt-devel
   sudo ln -s /usr/bin/qmake-qt4 /usr/bin/qmake
@@ -63,22 +62,22 @@ Install the following dependencies (if you have synaptic installed you could alt
 Исходники
 ^^^^^^^^^
 
-First, get Polyphone sources from `here <download_>`_ or from `Github <on github_>`_.
+Сначала загрузите исходники Polyphone `здесь <download_>`_ или на `Github <on github_>`_.
 
 
 Изменения в polyphone.pro
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Modify the file :file:`polyphone.pro` to use distributed versions for rtmidi, stk and qcustomplot.
-Uncomment the following lines by removing the leading ‘#’::
+Измените файл :file:`polyphone.pro`, чтобы использовать локальные версии :program:`rtmidi`, :program:`stk` и :program:`qcustomplot`, поставляемые вместе с исходниками Polyphone.
+Раскомментируйте следующие строки, удалив начальный символ «#»::
 
   DEFINES += USE_LOCAL_RTMIDI
   DEFINES += USE_LOCAL_STK
   DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 .. note::
-   instead of these modifications you could try to build Polyphone with the Fedora / RPM distributions for these packages.
-   The installation commands would be:
+   Вместо этих изменений вы можете попробовать собрать Polyphone с пакетами RPM, предлагаемыми дистрибутивом Fedora.
+   Команды установки будут следующими:
 
    ::
 
@@ -86,30 +85,30 @@ Uncomment the following lines by removing the leading ‘#’::
      sudo dnf install stk-devel
      sudo dnf install qcustomplot-devel
 
-However, running :command:`qmake` afterwards, it claimed to not recognize rtmidi on the system.
-As on Windows and Mac Systems the use of the local distributed rtmidi, stk and qcustomplot versions are forced you may not saw any benefit in sorting out the issue with the rtmidi.
+Однако после запуска :command:`qmake` сообщается, что не удалось найти :program:`rtmidi` в системе.
+В системах Windows и Mac локальные версии :program:`rtmidi`, :program:`stk` и :program:`qcustomplot` используются принудительно, вы можете не увидеть никакой выгоды в решении проблемы с :program:`rtmidi`.
 
 
 Компиляция
 ^^^^^^^^^^
 
-Go into source directory (where the file :file:`polyphone.pro` is located), open a terminal and build Polyphone with this command::
+Перейдите в каталог с исходниками (где находится файл :file:`polyphone.pro`), откройте терминал и соберите Polyphone с помощью этой команды::
 
   qmake && make
 
-If everything goes well you will have the compiled polyphone in the :file:`RELEASE` subdirectory.
+Если всё пойдёт хорошо, у вас появится скомпилированный :file:`polyphone` в подкаталоге :file:`RELEASE`.
 
 
 Отладка
 -------
 
-See this topic_ if you need more information or for getting some help.
+Просмотрите эту `тему <topic_>`_, если вам нужна дополнительная информация или помощь.
 
 .. note::
    Отдельное спасибо Tomotello_ за эту статью.
 
 
-.. external links:
+.. внешние ссылки:
 
 .. _get qt:    https://www.qt.io/download-open-source/
 .. _download:  https://www.polyphone-soundfonts.com/en/download

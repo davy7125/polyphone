@@ -3,7 +3,7 @@
 Меню
 ====
 
-The menu, located at the top right corner of the software, contains several items allowing you to access different features.
+Меню, расположенное в верхнем правом углу программы, содержит несколько пунктов, позволяющих получить доступ к различным функциям.
 
 
 .. figure:: images/menu.png
@@ -16,10 +16,10 @@ The menu, located at the top right corner of the software, contains several item
 Запуск редактора SoundFont
 --------------------------
 
-:Создать: Create a new .sf2 file from scratch.
-  Also accessible with the shortcut :kbd:`Ctrl+N`.
-:Открыть: Open an :ref:`.sf2 <sf2 format>`, :ref:`.sf3 <sf3 format>`, :ref:`.sfz <sfz format>` or :ref:`.sfArk <sfark format>` file.
-  Also accessible with the shortcut :kbd:`Ctrl+O`.
+:Создать: Создать новый файл .sf2 с нуля.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`\ +\ :kbd:`N`.
+:Открыть: Открыть файл :ref:`.sf2 <sf2 format>`, :ref:`.sf3 <sf3 format>`, :ref:`.sfz <sfz format>` или :ref:`.sfArk <sfark format>`.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`\ +\ :kbd:`O`.
 
 
 .. _menu save:
@@ -27,12 +27,12 @@ The menu, located at the top right corner of the software, contains several item
 Сохранение SoundFont
 --------------------
 
-:Сохранить: Save the current file.
-  Also accessible with the shortcut :kbd:`Ctrl+S`.
-:Сохранить как: Save the current file in another file.
-  Also accessible with the shortcut :kbd:`Ctrl+Shift+S`.
-:Экспортировать: Export and merge one or several presets from the open soundfonts in the :ref:`.sf2 <sf2 format>`, :ref:`.sf3 <sf3 format>` or :ref:`.sfz <sfz format>` format.
-  Also accessible with the shortcut :kbd:`Ctrl+E`.
+:Сохранить: Сохранить текущий файл.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`\ +\ :kbd:`S`.
+:Сохранить как: Сохранить текущий файл под другим именем.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`\ +\ :kbd:`Shift`\ +\ :kbd:`S`.
+:Экспортировать: Экспортировать и объединить один или несколько пресетов из открытых SoundFont в формат :ref:`.sf2 <sf2 format>`, :ref:`.sf3 <sf3 format>` или :ref:`.sfz <sfz format>`.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`\ +\ :kbd:`E`.
 
 
 .. figure:: images/export.png
@@ -45,8 +45,8 @@ The menu, located at the top right corner of the software, contains several item
 Варианты просмотра
 ------------------
 
-:На весь экран: Toggle the full screen mode.
-  Also accessible with the shortcut :kbd:`F11`.
+:На весь экран: Переключить в полноэкранный режим.
+  Также доступно при нажатии клавиши :kbd:`F11`.
 
 
 .. _menu shortcuts:
@@ -54,10 +54,10 @@ The menu, located at the top right corner of the software, contains several item
 Быстрый доступ
 --------------
 
-:Настройки: Open the software :ref:`settings <settings>`.
-:Документация: Show this user manual in a web browser.
-  Also accessible with the shortcut :kbd:`F1`.
-:О программе Polyphone…: Show the software version and the list of people who contributed to the project.
+:Настройки: Открыть :ref:`настройки <settings>` программы.
+:Документация: Показать это руководство пользователя в веб-браузере.
+  Также доступно при нажатии клавиши :kbd:`F1`.
+:О программе Polyphone…: Показать версию программы и список людей, которые внесли свой вклад в проект.
 
 
 .. _menu close:
@@ -65,7 +65,7 @@ The menu, located at the top right corner of the software, contains several item
 Завершение работы
 -----------------
 
-:Закрыть файл: Close the current file.
-  Also accessible with the shortcut :kbd:`Ctrl+W`.
-:Выход: Quit the software.
-  Also accessible with the shortcut :kbd:`Ctrl+Q`.
+:Закрыть файл: Закрыть текущий файл.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`\ +\ :kbd:`W`.
+:Выход: Выйти из программы.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`\ +\ :kbd:`Q`.

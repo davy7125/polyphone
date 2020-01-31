@@ -59,8 +59,8 @@ Results can be filtered in different ways:
 Soundfont description
 ---------------------
 
-Opening a soundfont description can be made with a double-click on a cell in the daily soundfonts of the :ref:`home screen <home screen>` or in the `soundfont browser <sf browse_>`_.
-A Premium account is required for soundfonts that are not in the daily soundfonts.
+Opening a soundfont description can be made with a double-click on a cell in the :guilabel:`Daily soundfonts` of the :ref:`home screen <home screen>` or in the `soundfont browser <sf browse_>`_.
+A Premium account is required for soundfonts that are not in the :guilabel:`Daily soundfonts`.
 Connecting Polyphone to your account is possible in the :ref:`settings <repository settings>` of the software.
 
 

@@ -3,24 +3,24 @@
 Как подготовить семпл
 =====================
 
-An instrument built in a soundfont is made of samples, coming for example from the recordings of a real instrument.
-This tutorial describes how to add and prepare a sample in a soundfont.
+Инструмент внутри SoundFont состоит из семплов, например, из записей реального инструмента.
+В этом уроке описывается, как добавить и подготовить семпл в SoundFont.
 
 
 Импортирование
 --------------
 
-You must first have samples on your computer.
-A lot of free samples can be found on internet, being either recorded from real instruments (from a flute, guitar, cello, …) or created with different kinds of audio synthesis.
+Сначала нужно получить семплы.
+В интернете можно найти множество бесплатных семплов, записанных либо с реальных инструментов (с флейты, гитары, виолончели и т.д.), либо созданных с использованием различных видов синтеза звука.
 
-For this tutorial this flute sample is provided: :download:`flute.wav <https://www.polyphone-soundfonts.com/downloads/tutorials/flute.wav>`.
+Для этого урока подготовлен семпл флейты: :download:`flute.wav <https://www.polyphone-soundfonts.com/downloads/tutorials/flute.wav>`.
 
-Once you have it, create a new soundfont with Polyphone (:menuselection:`File --> New`) and import the sample (:menuselection:`File --> Import samples`).
+Как только он у вас загрузится, создайте новый SoundFont с помощью Polyphone (:menuselection:`меню --> &Создать`) и импортируйте семпл (:guilabel:`Добавить семпл`).
 
 
 .. figure:: images/import-sample.png
 
-   Import sample
+   Импорт семпла
 
 
 Петля
@@ -30,129 +30,170 @@ Once you have it, create a new soundfont with Polyphone (:menuselection:`File --
 Введение
 ^^^^^^^^
 
-A loop is an area within a sample that can be repeated to extend the duration of the sample.
-Let's say a sample lasts only 0.5 second, with a nice loop the sound can be extended up to 10 seconds or more.
-This is useful only for samples of non-percussive instruments such as flutes, trumpets, organs, violins.
-To the opposite, drums require no loops.
-This might also be the case for a piano or a guitar, depending on how these sounds are synthesized.
+Петля — это область в семпле, которая может повторяться для увеличения длительности семпла.
+Допустим, семпл длится всего 0,5 секунды, с хорошей петлёй звук может быть продлён до 10 секунд и более.
+Это полезно только для семплов не ударных инструментов, таких как флейты, трубы, органы, скрипки.
+Наоборот, барабаны не требуют петель.
+Это также может иметь смысл для фортепиано или гитары, в зависимости от того, как эти звуки синтезируются.
 
-Thus, this section is necessary if and only if you feel the need of extending the original length of a sample.
-If not, go directly to the next section “Tuning”.
+Таким образом, этот раздел необходим тогда и только тогда, когда вы чувствуете необходимость увеличения исходной длины семпла.
+Если нет, перейдите непосредственно к следующему разделу «Настройка».
 
 
 Настройка петли
 ^^^^^^^^^^^^^^^
 
-In the tree, click on the sample you want to loop and focus on the loop parameters.
+В дереве щёлкните семпл, который хотите зациклить, и сфокусируйтесь на параметрах петли.
 
 
 .. figure:: images/loop-sample-1.png
 
-   Loop sample: loop parameters
+   Зацикливание семпла: параметры петли
 
 
-If you are lucky, these values were packaged in the .wav sample and these fields are already filled.
-If not, or if it's been badly configured (this can happen…), arbitrarily click left and right on the graphic (WAV display area) to define the beginning and the end of the loop.
-This is generally done on the steady phase of the sound, not within the attack or the release.
-Then, zoom around the beginning of the loop and try to superimpose the green (or red) and blue curves.
+Если вам повезёт, эти значения были сохранены в файле семпла .wav, и эти поля уже заполнены.
+Если нет, или если он был плохо настроен (это может произойти…), произвольно щёлкните слева и справа на графике (области отображения WAV), чтобы определить начало и конец петли.
+Это обычно делается на устойчивой фазе звука, а не в пределах атаки или затухания.
+Затем смасштабируйте начало цикла и попробуйте наложить зелёную (или красную) кривую с синей.
 
 
 .. figure:: images/loop-sample-2.png
 
-   Loop sample: wave alignment
+   Зацикливание семпла: выравнивание волны
 
 
 Прослушивание результата
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-When the loop is configured, press :guilabel:`play` on the player with the loop enabled to check the result.
+Когда петля настроена, нажмите кнопку :guilabel:`Воспроизведение` на проигрывателе с включённой опцией :guilabel:`петля`, чтобы прослушать результат.
 
 
 .. figure:: images/loop-sample-3.png
 
-   Loop sample: check the result
+   Зацикливание семпла: прослушивание результата
 
 
-If you don't hear the transition once the end of the loop is read, this means that the loop is good.
-Otherwise, keep the player on and slightly move the end and / or the beginning of the loop until you find points with a transition as smooth as possible.
-Try the next records to see the difference between a bad and a good loop:
+Если вы не слышите переход после окончания петли, это означает, что петля настроена правильно.
+В противном случае оставьте проигрыватель включённым и слегка перемещайте конец и начало петли, пока не найдёте точки, с которыми переход будет настолько плавным, насколько это возможно.
+Прослушайте следующие записи, чтобы увидеть разницу между плохим и хорошим зацикливанием:
 
-* :download:`bad loop <https://www.polyphone-soundfonts.com/downloads/tutorials/bad-loop.mp3>`
-* :download:`good loop <https://www.polyphone-soundfonts.com/downloads/tutorials/good-loop.mp3>`
+* :download:`плохое зацикливание <https://www.polyphone-soundfonts.com/downloads/tutorials/bad-loop.mp3>`
+
+  .. raw:: html
+
+     <audio controls="controls">
+     <source src="https://www.polyphone-soundfonts.com/downloads/tutorials/bad-loop.mp3" type="audio/mpeg"/>
+     Ваш браузер не поддерживает элемент audio.
+     </audio>
+
+* :download:`хорошее зацикливание <https://www.polyphone-soundfonts.com/downloads/tutorials/good-loop.mp3>`
+
+  .. raw:: html
+
+     <audio controls="controls">
+     <source src="https://www.polyphone-soundfonts.com/downloads/tutorials/good-loop.mp3" type="audio/mpeg"/>
+     Ваш браузер не поддерживает элемент audio.
+     </audio>
+
 
 .. note::
-   A tool exists to “cheat” if you cannot find a loop easily: the :ref:`auto-loop <sample tool autoloop>` tool.
-   It will automatically create a loop by cutting the sample and superimposing two sections, so that the end of the section will exactly match its beginning.
-   See the related documentation for more information.
+   Есть способ, которое позволяет «сжульничать», если вам не удаётся легко найти петлю: средство :ref:`авто-петля <sample tool autoloop>`.
+   Он автоматически создаст петлю, вырезав семпл и совместив две части, чтобы конец точно совпадал с началом.
+   Просмотрите соответствующую документацию для получения дополнительной информации.
 
 
 Настройка
 ---------
 
-All samples have to be tuned if you don't want an out-of-tune instrument.
-By indicating in the soundfont the exact pitch of all imported samples, the soundfont will be able to adapt them to keys.
-Some samples may already have these information, in which case you shouldn't have to change the values in :guilabel:`Root Key` and :guilabel:`Correction (cents)`.
-But as a precaution it is always good to check.
+Все семплы следует настроить, если вы не хотите получить некачественный инструмент.
+Указав точную высоту тона всех импортированных семплов, можно будет адаптировать их к клавишам.
+Некоторые семплы могут уже иметь эту информацию, и в этом случае вам не нужно менять значения в полях ввода :guilabel:`Корневая нота` и :guilabel:`Коррекция высоты тона (в центах)`.
+Но в качестве меры предосторожности всегда хорошо их проверить.
 
 
 .. figure:: images/tune-sample-1.png
 
-   Tune sample: pitch information
+   Настройка семпла: информация о высоте тона
 
 
-Enable the loop if the sample has one and press :guilabel:`play` on the player.
-Then add the calibration sinus and adjust its volume so that you can hear both sounds as clearly as possible.
+Включите петлю, если она имеется в семпле, и нажмите кнопку :guilabel:`Воспроизведение` на проигрывателе.
+Затем добавьте калибровочный синус и отрегулируйте его громкость, чтобы оба звука были слышны как можно более чётко.
 
 
 .. figure:: images/tune-sample-2.png
 
-   Tune sample: play sample along with calibration signal
+   Настройка семпла: воспроизведение семпла вместе с калибровочным сигналом
 
 
-Start the tuning by changing the root key until the two sounds most closely match.
-Continue by adjusting the correction.
-For this step, pay attention to any beats that occur and make sure they are as slow as possible.
-Here are examples containing the sound of a flute and a calibration sinus:
+Начните настройку с изменения корневой клавиши, пока два звука не будут наиболее близко совпадать.
+Продолжите, регулируя коррекцию.
+На этом этапе обратите внимание на слышимые биения звука, и сделайте их как можно медленнее.
+Вот примеры, содержащие звук флейты и калибровочного синуса:
 
-* :download:`very bad tune <https://www.polyphone-soundfonts.com/downloads/tutorials/very-bad-tune.mp3>` (the root key doesn't match)
-* :download:`bad tune <https://www.polyphone-soundfonts.com/downloads/tutorials/bad-tune.mp3>` (the correction is not correct and you can hear beats)
-* :download:`good tune <https://www.polyphone-soundfonts.com/downloads/tutorials/good-tune.mp3>` (both values are good)
+* :download:`очень плохая настройка <https://www.polyphone-soundfonts.com/downloads/tutorials/very-bad-tune.mp3>` (корневая клавиша не настроена)
+
+  .. raw:: html
+
+     <audio controls="controls">
+     <source src="https://www.polyphone-soundfonts.com/downloads/tutorials/very-bad-tune.mp3" type="audio/mpeg"/>
+     Ваш браузер не поддерживает элемент audio.
+     </audio>
+
+* :download:`плохая настройка <https://www.polyphone-soundfonts.com/downloads/tutorials/bad-tune.mp3>` (коррекция неверна и можно услышать биения)
+
+  .. raw:: html
+
+     <audio controls="controls">
+     <source src="https://www.polyphone-soundfonts.com/downloads/tutorials/bad-tune.mp3" type="audio/mpeg"/>
+     Ваш браузер не поддерживает элемент audio.
+     </audio>
+
+
+* :download:`хорошая настройка <https://www.polyphone-soundfonts.com/downloads/tutorials/good-tune.mp3>` (оба значения правильны)
+
+  .. raw:: html
+
+     <audio controls="controls">
+     <source src="https://www.polyphone-soundfonts.com/downloads/tutorials/good-tune.mp3" type="audio/mpeg"/>
+     Ваш браузер не поддерживает элемент audio.
+     </audio>
+
 
 .. note::
-   The :ref:`frequency <sample editor frequency>` analysis can be a good indicator to start tuning.
-   But keep in mind that no algorithm is perfect for this task and only your ears will find the right tune.
+   :ref:`Частотный анализ <sample editor frequency>` может быть хорошим индикатором для начала настройки.
+   Но имейте в виду, что ни один алгоритм не решит эту задачу настолько хорошо, как ваш слух.
 
 
 .. figure:: images/tune-sample-3.png
 
-   Tune sample: frequency analysis
+   Настройка семпла: частотный анализ
 
 
 Другие возможности
 ------------------
 
-Several tools are available in the menu :guilabel:`Tools`.
-You can edit samples by:
+Несколько средств доступны в меню :guilabel:`Инструментарий`.
+Вы можете редактировать семплы:
 
-* :ref:`removing blank <sample tool removeblank>` at start,
-* :ref:`equalizing <sample editor equalizer>` the sound,
-* :ref:`transposing <sample tool transpose>`,
-* :ref:`normalizing <sample tool volume>` the volume,
-* :ref:`adjusting the balance <sample tool balance>` for stereo samples.
+* :ref:`удалить тишину в начале <sample tool removeblank>`,
+* :ref:`выровнять звук <sample editor equalizer>`,
+* :ref:`транспонировать <sample tool transpose>`,
+* :ref:`нормализовать громкость <sample tool volume>`,
+* :ref:`отрегулировать баланс <sample tool balance>` стерео-семплов.
 
 
 Замечание о стерео-семплах
 --------------------------
 
-Stereo samples are made of two mono samples.
-The link is stored in the information of a sample.
+Стерео-семплы созданы из двух моно-семплов.
+Ссылка хранится в информации о семпле.
 
 
 .. figure:: images/stereo-sample.png
 
-   Stereo sample
+   Стерео-семпл
 
 
-Managing two mono samples may add difficulty to loop them because a loop can sound fine for one side and not for the other.
-In that case, don't hesitate to cheat by configuring two different loops on the right and left side.
-The quality of the sound will not be impaired.
+Управление двумя монофоническими семплами может усложнить их зацикливание, потому что петля может хорошо звучать для одной стороны, но не для другой.
+В этом случае, не стесняйтесь жульничать, настраивая две разных петли справа и слева.
+Качество звука не ухудшится.

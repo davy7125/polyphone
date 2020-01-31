@@ -19,7 +19,7 @@ Command line
 
 ::
 
-   polyphone -1 -i [file/to/convert] -d [output/directory] -o [output/file/name]
+   polyphone -1 -i <file/to/convert> -d <output/directory> -o <output/file/name>
 
 .. note::
    With Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.
@@ -54,7 +54,7 @@ Command line
 
 ::
 
-   polyphone -2 -i [file/to/convert] -d [output/directory] -o [output/file/name] -c [config]
+   polyphone -2 -i <file/to/convert> -d <output/directory> -o <output/file/name> -c [config]
 
 .. note::
    With Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.
@@ -97,7 +97,7 @@ Command line
 
 ::
 
-   polyphone -3 -i [file/to/convert] -d [output/directory] -o [output/file/name] -c [config]
+   polyphone -3 -i <file/to/convert> -d <output/directory> -o <output/file/name> -c [config]
 
 .. note::
    With Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.

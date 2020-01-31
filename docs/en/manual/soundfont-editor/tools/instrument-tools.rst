@@ -149,11 +149,11 @@ Several patterns can be selected:
 
 Other options are available:
 
-* number of pattern repetitions (divisions number),
-* intensity of the effect (spreading),
-* filling of a division (filling),
-* offset left — right if the spreading is not 100% (offset),
-* inversions.
+* number of pattern repetitions (:guilabel:`Divisions number`),
+* intensity of the effect (:guilabel:`Spreading`),
+* filling of a division (:guilabel:`Filling`),
+* offset left — right if the spreading is not 100% (:guilabel:`Offset`),
+* :guilabel:`Inversions`.
 
 The graph is updated every time a setting changes for a better visualization.
 On mouse over, the correspondence note number / balance is displayed.

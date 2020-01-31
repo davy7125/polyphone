@@ -3,12 +3,12 @@
 Как создать SoundFont с нуля
 ============================
 
-To create a :ref:`soundfont <sf2 format>`, click on :guilabel:`Create a soundfont` in the :ref:`home screen <left part>`.
-Soundfonts are made from a 3-level structure, so the creation of a new soundfont involves three fundamental steps:
+Чтобы создать :ref:`SoundFont <sf2 format>`, нажмите кнопку :guilabel:`Создать SoundFont` на :ref:`главном экране <left part>`.
+Файлы SoundFont содержат трёхуровневую структуру, поэтому создание нового SoundFont предполагает три основных этапа:
 
-* `sample preparation`_,
-* `instrument creation`_, comprising samples,
-* `preset creation`_, comprising instruments.
+* `подготовка семплов <sample preparation_>`_,
+* `создание инструментов <instrument creation_>`_, включающих семплы,
+* `создание пресетов <preset creation_>`_, включающих инструменты.
 
 
 .. _sample preparation:
@@ -20,70 +20,70 @@ Soundfonts are made from a 3-level structure, so the creation of a new soundfont
 Загрузка семплов
 ^^^^^^^^^^^^^^^^
 
-The sample preparation begins by **loading** .wav files.
-To do this first select the :guilabel:`Samples` category in the :ref:`tree <tree>` and select :guilabel:`Import samples` from the :ref:`toolbar <toolbar edit>`.
-Samples may be obtained:
+Подготовка семплов начинается с **загрузки** файлов .wav.
+Для этого сначала выберите категорию :guilabel:`Семплы` в :ref:`дереве <tree>` и выберите :guilabel:`Импортировать семплы` на :ref:`панели инструментов <toolbar edit>`.
+Семплы могут быть получены:
 
-* through Internet,
-* by recording a real musical instrument,
-* by synthesis using a specialized software.
+* через интернет,
+* записав настоящий музыкальный инструмент,
+* путём синтеза с использованием специализированного ПО.
 
 
 Закольцовка семплов
 ^^^^^^^^^^^^^^^^^^^
 
-Next, a **loop** may be required in the sample, if you would like it to sound longer than its normal length.
-An example of this would be if you only have a 1 second flute sample, but would like it to sound indefinitely.
-This can be done by manually or automatically assigning loop points (start + end) within the sample boundaries, so that the loop area can be repeated and thus make the sample play longer.
-While you can assign loop points manually, using the “:ref:`sample tool autoloop`“ function to assign them automatically usually produces better results and is a lot faster.
+Далее, семпл может потребоваться **закольцевать**, если вы хотите, чтобы он звучал дольше, чем его обычная длительность.
+Например, если у вас есть только 1-секундный семпл флейты, но вы хотите, чтобы он звучал постоянно.
+Это можно сделать, указав вручную или автоматически точки петли (начало и конец) в пределах границ семпла, чтобы область петли повторялась и семпл звучал дольше.
+Хотя вы можете назначить точки петли вручную, использование функции «:ref:`sample tool autoloop`» для их автоматического назначения обычно даёт лучшие результаты и намного быстрее.
 
-To assign loop points manually:
+Чтобы назначить точки петли вручную:
 
-#. click in the :ref:`tree <tree>` on the sample to be looped,
-#. in the :ref:`sample editor <sample editor>`, arbitrarily position the start and end of the loop in the :ref:`graphic <sample editor graph>` (WAV display area) unless a loop is already defined.
-   Use left-click for start and right-click for end.
-   The right loop point should be entered first (since the left point it by default at the position 0 and that it's not possible to assign a right point before the left point).
-#. press the :guilabel:`Play` button after having selected the loop function,
-#. adjust the start and / or end of the loop, while the sample is playing, until the transition between the two positions is as smooth as possible.
+#. щёлкните в :ref:`дереве <tree>` на семпле, который будет закольцован,
+#. в :ref:`редакторе семплов <sample editor>` произвольно расположите начало и конец петли на графике (область отображения WAV), если цикл ещё не определён.
+   Щёлкните левой кнопкой мыши в начале и правой кнопкой мыши в конце.
+   Правая точка петли должна быть указана первой (поскольку левая точка по умолчанию указывает на позицию 0, а правая точка не может стоять перед левой точкой).
+#. нажмите кнопку :guilabel:`Воспроизведение` после выбора функции петли,
+#. отрегулируйте начало и / или конец петли во время воспроизведения семпла, пока переход между двумя положениями не станет как можно более плавным.
 
 .. note::
-   To hear looping in an instrument, you must enter select |loop on| in the :guilabel:`Loop playback` parameter row of either the Global or individual notes columns in the :ref:`Parameters Table <instrument editor table>`.
+   Чтобы услышать петлю в инструменте, вы должны выбрать |loop on| в строке параметра :guilabel:`Играть петлю` в глобальном столбце или в столбце отдельных нот в :ref:`таблице параметров <instrument editor table>`.
 
-   |loop on| turns it On, |loop off| or a blank turns it Off.
+   |loop on| включает воспроизведение петли, |loop off| или пустая ячейка — отключает.
 
 
 .. figure:: images/loop_illustration.png
 
-   Loop illustration
+   Иллюстрация петли
 
 
 Подстройка семплов
 ^^^^^^^^^^^^^^^^^^
 
-Finally, a **tuning** has to be done.
-To do this, a calibration tool (Sinus) is available in the editing page of :ref:`samples <sample editor player>`.
-For each sample the method is as follows:
+Наконец, нужно **подстроить** семплы.
+Для этого на странице редактирования :ref:`семплов <sample editor player>` доступно средство калибровки (синус).
+Для каждого семпла метод выглядит следующим образом:
 
-#. begin the playback (press the :guilabel:`play` button), if possible with loop function selected,
-#. select the sinus function,
-#. adjust the volume slider to hear the two sounds as clearly as possible,
-#. change the Root key until the two sounds most closely match,
-#. adjust the Correction (cents) to tune the sample to the Rootkey.
-   To do this, pay attention to any beats that occur and make sure they are as slow as possible.
+#. начните воспроизведение (нажмите кнопку :guilabel:`Воспроизведение`), если возможно, с выбранной функцией петли,
+#. выберите функцию синуса,
+#. отрегулируйте ползунок громкости, чтобы слышать два звука как можно более чётко,
+#. меняйте корнеыую клавишу, пока два звука не будут наиболее близко совпадать,
+#. отрегулируйте поправку (в центах), чтобы окончательно подстроить семпл.
+   Для этого обратите внимание на любые слышимые биения и добейтесь, чтобы они были как можно медленнее.
 
-The :ref:`frequency <sample editor frequency>` analysis can be a good indicator to start tuning.
+:ref:`Частотный анализ <sample editor frequency>` может быть хорошим индикатором для начала настройки.
 
 
 Другие возможности
 ^^^^^^^^^^^^^^^^^^
 
-Several tools are available to edit samples like:
+При редактировании семплов доступно несколько средств:
 
-* :ref:`removing blank <sample tool removeblank>` at start,
-* :ref:`equalizing <sample editor equalizer>` the sound,
-* :ref:`transposing <sample tool transpose>`,
-* :ref:`normalizing <sample tool volume>` the volume,
-* :ref:`adjusting the balance <sample tool balance>` for stereo samples.
+* :ref:`удаление тишины <sample tool removeblank>` в начале,
+* :ref:`выравнивание <sample editor equalizer>` звука,
+* :ref:`транспонирование <sample tool transpose>`,
+* :ref:`нормализация <sample tool volume>` громкости,
+* :ref:`регулировка баланса <sample tool balance>` стерео семплов.
 
 
 .. _instrument creation:
@@ -91,52 +91,52 @@ Several tools are available to edit samples like:
 Создание инструмента
 --------------------
 
-For this step, it is assumed that one or more samples are available for the creation of an instrument.
+На этом этапе предполагается, что один или несколько семплов уже доступны для создания инструмента.
 
 
 Создание инструмента и добавление семплов
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-First, click on :guilabel:`New instrument` in the :ref:`toolbar <toolbar edit>`.
-A name must now be entered.
+Сначала нажмите :guilabel:`Новый инструмент` на :ref:`панели инструментов <toolbar edit>`.
+Теперь введите имя.
 
-Then add samples to the instrument using a “:ref:`drag & drop <tree dragdrop>`”.
-In the tree you will notice that divisions appear in the instrument.
+Затем добавьте семплы к инструменту с помощью :ref:`перетаскивания <tree dragdrop>`.
+В дереве вы заметите, что в инструменте появляются разделы.
 
 .. note::
-   When samples are created the divisions are not copied but linked.
-   There are no constraints on the number of divisions.
+   При создании семплов разделы не копируются, а связываются.
+   Количество разделов не ограничено.
 
 
-Предназначение разделов
-^^^^^^^^^^^^^^^^^^^^^^^
+Распределение разделов
+^^^^^^^^^^^^^^^^^^^^^^
 
-When samples are added to instruments, they appear as divisions (columns) in the :ref:`instrument editor table <instrument editor table>`.
-Each division must then be positioned on the keyboard by changing the “Key range” in the table.
-Generally, it is a good practice to have the range of a division include the root key of its represented sample.
-The entire surface of the keyboard must be covered (eg, key 36 to key 96 for a classic synthesizer keyboard).
+Когда семплы добавляются в инструменты, они отображаются в виде разделов (столбцов) в :ref:`таблице редактора инструментов <instrument editor table>`.
+Каждый раздел затем должен быть размещён на клавиатуре путём изменения значения :guilabel:`Диапазон клавиш` в таблице.
+Считается хорошим тоном, чтобы диапазон раздела включал корневую клавишу представленного семпла.
+Вся поверхность клавиатуры должна быть заполнена (например, с клавиши 36 по клавишу 96 для классической клавиатуры синтезатора).
 
-The tool “:ref:`instrument tool position`” automatically distributes the samples over the keyboard.
+Средство «:ref:`instrument tool position`» автоматически распределяет семплы по клавиатуре.
 
 
 Настройка разделов
 ^^^^^^^^^^^^^^^^^^
 
-If the sample(s) are looped, to hear the looping in an instrument, select |loop on| in the Loop playback parameter row of either the Global or individual notes columns in the Parameters Table.
+Если семпл зациклен, чтобы услышать зацикливание в инструменте, выберите значок |loop on| в строке параметра :guilabel:`Играть петлю` в столбце :guilabel:`Глобальные` или в отдельных столбцах разделов инструмента в :guilabel:`Таблице параметров`.
 
-* |loop on| turns it On,
-* |loop off| or a blank turns it Off.
-* |loop on and end| turns the looping On and the rest of the sample is read after the key is released.
+* |loop on| включает петлю,
+* |loop off| или пустое значение ячейки выключает её.
+* |loop on and end| включает петлю, а после отпускания клавиши семпл будет проигран до конца.
 
-The global division, as its name suggests, allows you to enter a parameter for the entire instrument.
-A global parameter applies only to the divisions whose same parameter is not specified.
-This means that the parameters of the standard divisions take precedence over the settings of the global division.
+Глобальный раздел, как следует из его названия, позволяет ввести параметр для всего инструмента.
+Глобальный параметр применяется только к разделам, в которых этот параметр не указан.
+Это означает, что параметры отдельных разделов имеют приоритет над настройками глобального раздела.
 
-In the context of this simple tutorial, no other parameters have to be edited for the instrument to work.
-It should be already possible to play with the :ref:`virtual keyboard <toolbar keyboard>`.
+В этом простом уроке мы не будем редактировать никакие другие параметры для работы инструмента.
+Уже можно играть с помощью :ref:`виртуальной клавиатуры <toolbar keyboard>`.
 
-However, to improve the instrument it is advisable to enter a value in the “Vol env release (s)” row, which prevents the sound from stopping abruptly, as soon as a key is released.
-The other parameters are described in the description of :ref:`tables <instrument editor table>`.
+Однако, чтобы улучшить инструмент, рекомендуется ввести значение в строку :guilabel:`Огибающая громкости: затухание (сек)`, что предотвратит резкое прекращение звука при отпускании клавиши.
+Другие параметры описаны в описании :ref:`таблиц <instrument editor table>`.
 
 
 .. _preset creation:
@@ -144,40 +144,40 @@ The other parameters are described in the description of :ref:`tables <instrumen
 Создание пресетов
 -----------------
 
-For this step, it is assumed that one or more instruments are available for the creation of a preset.
+На этом этапе предполагается, что один или несколько инструментов уже доступны для создания пресета.
 
 
 Что такое пресет?
 ^^^^^^^^^^^^^^^^^
 
-A preset is the equivalent of a sound patch name found in hardware synths.
-It is visible from outside a soundfont and is identified by a bank number and a preset number.
-A soundfont can have one or many presets.
-Each preset contains one or more instruments, just as instruments contain one or more samples.
+Пресет является эквивалентом имени звукового патча из аппаратных синтезаторов.
+Он виден снаружи SoundFont и идентифицируется номером банка и номером пресета.
+SoundFont может иметь один или несколько пресетов.
+Каждый пресет содержит один или несколько инструментов, так же как каждый инструмент содержит один или несколько семплов.
 
 
 Создание пресета и добавление инструментов
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-First, click on :guilabel:`New preset` in the :ref:`toolbar <toolbar edit>`.
-A name must now be entered.
+Во-первых, нажмите :guilabel:`Новый пресет` на :ref:`панели инструментов <toolbar edit>`.
+Введите имя.
 
-Then add instruments to the preset using a “:ref:`drag & drop <tree dragdrop>`”.
-In the tree you will notice that one or more divisions appear in the preset.
-Often there may only be one, as in the case of a preset containing a single intrument.
+Затем добавьте инструменты в пресет с помощью :ref:`перетаскивания <tree dragdrop>`.
+В дереве вы заметите, что в пресете появится один или несколько разделов.
+Часто раздел может быть только один, как в случае пресета, содержащего один инструмент.
 
-It is possible to create as many or more presets as instruments, and each preset can contain one or more instruments.
+Можно создать столько же (или больше) пресетов, сколько и инструментов, а каждый пресет может содержать один или несколько инструментов.
 
 
 Настройка пресета
 ^^^^^^^^^^^^^^^^^
 
-Changing the preset parameters may not be required since:
+Изменение параметров пресетов может не потребоваться, поскольку:
 
-* when creating a preset, the bank number and the preset number are automatically assigned,
-* when adding an instrument to a preset the key range is automatically calculated according to the instrument.
+* при создании пресета номер банка и номер пресета назначаются автоматически,
+* при добавлении инструмента в пресет диапазон клавиш автоматически рассчитывается в соответствии с инструментом.
 
-For the scope of this tutorial, the creation of a soundfont is finished!
+В рамках данного урока создание SoundFont завершено!
 
 
 .. inline images:

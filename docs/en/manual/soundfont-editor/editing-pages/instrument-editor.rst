@@ -93,7 +93,7 @@ To facilitate and speed up editing in the table, the following features have bee
 * the keys :kbd:`Del` and :kbd:`Backspace` clear the content of all selected cells,
 * stereo divisions may be edited simultaneously if the option is enables in the software :ref:`preferences <general settings>`,
 * key names may be numeric or as a text (having C3, C4 or C5 as middle C), depending on the option chosen in the :ref:`preferences <interface settings>`,
-* copy / paste / cut of a set of cells (not necessarily adjacent) may be done via :kbd:`Ctrl+C` / :kbd:`Ctrl+V` / :kbd:`Ctrl+X`.
+* copy / paste / cut of a set of cells (not necessarily adjacent) may be done via :kbd:`Ctrl`\ +\ :kbd:`C` / :kbd:`Ctrl`\ +\ :kbd:`V` / :kbd:`Ctrl`\ +\ :kbd:`X`.
 
 Do not forget the :ref:`tools <instrument tools>` available!
 In particular the tool allowing a :ref:`key-based configuration <instrument tool global>`.

@@ -10,7 +10,7 @@ It is assumed you already have on your computer Qt Creator installed with the Qt
 Prerequisite
 ------------
 
-The following elements are required
+The following elements are required:
 
 * a C++ compiler (VC++, Clang, GCC, …)
 * Qt Creator with its framework
@@ -75,7 +75,7 @@ Go in the menu :guilabel:`Build` and choose the item :guilabel:`Run qmake`.
    qmake finished
 
 
-In the section :guilabel:`Project` in the left column, then in the section :guilabel:`Build&Run`, select the build configuration (Release is preferred).
+In the section :guilabel:`Project` in the left column, then in the section :guilabel:`Build&Run`, select the build configuration (:guilabel:`Release` is preferred).
 
 Finally, click on the action :guilabel:`Build project Polyphone` in the menu :guilabel:`Build`.
 

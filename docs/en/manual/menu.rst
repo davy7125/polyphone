@@ -17,9 +17,9 @@ Opening a soundfont editor
 --------------------------
 
 :New: Create a new .sf2 file from scratch.
-  Also accessible with the shortcut :kbd:`Ctrl+N`.
+  Also accessible with the shortcut :kbd:`Ctrl`\ +\ :kbd:`N`.
 :Open: Open an :ref:`.sf2 <sf2 format>`, :ref:`.sf3 <sf3 format>`, :ref:`.sfz <sfz format>` or :ref:`.sfArk <sfark format>` file.
-  Also accessible with the shortcut :kbd:`Ctrl+O`.
+  Also accessible with the shortcut :kbd:`Ctrl`\ +\ :kbd:`O`.
 
 
 .. _menu save:
@@ -28,11 +28,11 @@ Saving a soundfont
 ------------------
 
 :Save: Save the current file.
-  Also accessible with the shortcut :kbd:`Ctrl+S`.
+  Also accessible with the shortcut :kbd:`Ctrl`\ +\ :kbd:`S`.
 :Save as: Save the current file in another file.
-  Also accessible with the shortcut :kbd:`Ctrl+Shift+S`.
+  Also accessible with the shortcut :kbd:`Ctrl`\ +\ :kbd:`Shift`\ +\ :kbd:`S`.
 :Export: Export and merge one or several presets from the open soundfonts in the :ref:`.sf2 <sf2 format>`, :ref:`.sf3 <sf3 format>` or :ref:`.sfz <sfz format>` format.
-  Also accessible with the shortcut :kbd:`Ctrl+E`.
+  Also accessible with the shortcut :kbd:`Ctrl`\ +\ :kbd:`E`.
 
 
 .. figure:: images/export.png
@@ -66,6 +66,6 @@ Closing
 -------
 
 :Close file: Close the current file.
-  Also accessible with the shortcut :kbd:`Ctrl+W`.
+  Also accessible with the shortcut :kbd:`Ctrl`\ +\ :kbd:`W`.
 :Quit: Quit the software.
-  Also accessible with the shortcut :kbd:`Ctrl+Q`.
+  Also accessible with the shortcut :kbd:`Ctrl`\ +\ :kbd:`Q`.

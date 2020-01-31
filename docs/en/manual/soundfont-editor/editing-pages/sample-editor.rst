@@ -122,7 +122,7 @@ A :ref:`tool <sample tool peakfrequencies>` is also available to export peak inf
 Equalizer
 ---------
 
-The equalizer makes it possible to increase or decrease some frequencies, from :math:`-15` to 15 dB.
+The equalizer makes it possible to increase or decrease some frequencies, from -15 to 15 dB.
 It is possible to listen to the effect with the option :guilabel:`preview` enabled and then definitely apply the effect by pressing the :guilabel:`Apply` button.
 Pressing :guilabel:`reset` resets all the buttons to 0 dB (but does not remove the effect on the sound: for that use the :guilabel:`undo` button in the :ref:`toolbar <toolbar>`).
 
@@ -145,7 +145,7 @@ Playback options are:
   At first the root key must be filled.
   At this level, beats can be heard if the frequency of the sinus differs slightly from the fundamental frequency of the sound.
   It remains to finely adjust the correction to make the beats as slow as possible, so that the sample is tuned at best.
-  See this :ref:`tutorial <how to prepare a sample>` for more information.
+  See the tutorial “:ref:`how to prepare a sample`” for more information.
 
 If a playback is in progress when switching from one sample to another through the :ref:`tree <tree>`, it automatically restarts.
 Also, pressing the key :kbd:`space` enables or disables playback if we are navigating in the tree.
