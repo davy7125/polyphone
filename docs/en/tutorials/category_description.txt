@@ -1,0 +1,1 @@
+New users can begin with tutorials to learn how to create soundfonts and how to use Polyphone. Tutorials presenting a technical solution to common issues may also be found here.

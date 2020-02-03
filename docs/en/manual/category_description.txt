@@ -1,0 +1,5 @@
+This section contains the description of the software Polyphone:
+
+* the soundfont editor,
+* the soundfont browser,
+* the configuration.

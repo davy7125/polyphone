@@ -1,0 +1,4 @@
+index.md=Tutorials
+|create-a-soundfont-from-scratch.md=Create a soundfont from scratch
+|how-to-prepare-a-sample.md=How to prepare a sample
+|using-custom-releases-in-an-instrument.md=Using custom releases in an instrument

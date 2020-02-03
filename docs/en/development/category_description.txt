@@ -1,0 +1,5 @@
+Here is the place for various information regarding the development of Polyphone:
+
+* how to build,
+* how to translate,
+* ...
