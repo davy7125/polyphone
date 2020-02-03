@@ -1,13 +1,8 @@
-# [Polyphone] SoundFont Editor Documentation
+# Polyphone SoundFont Editor Documentation
 
-[![Documentation Status](https://readthedocs.org/projects/polyphone/badge/?version=latest)](https://polyphone.readthedocs.io/)
+Here are the source files, written with the markdown syntax, of the [Polyphone documentation](https://www.polyphone-soundfonts.com/documentation). Feel free to improve everything you want:
+* edit an existing page,
+* create another page,
+* add a translation.
 
-Here you'll find documentation grabbed from the official web site.
-
-- [x] Make rst versions of all the doc pages
-- [x] Integrate with [Read the Docs]
-- [ ] Translate into Russian
-
-
-[Polyphone]:     https://www.polyphone-soundfonts.com/
-[Read the Docs]: https://readthedocs.org/
+After the pull-request is validated, the documentation of the website will be updated.
