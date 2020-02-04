@@ -56,12 +56,12 @@ A right click on an element shows a menu comprising the following actions:
   Replace a sample by another sample in an instrument, or replace an instrument by another instrument in a preset.
   The configuration of the sample or instrument is kept.
 * **Copy**\
-  Copy the selected element(s), also accessible with :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`C`.
+  Copy the selected element(s), also accessible with :kbd:`Ctrl`+:kbd:`C`.
 * **Paste**\
-  Paste the previously copied element(s), also accessible with :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`V`.
+  Paste the previously copied element(s), also accessible with :kbd:`Ctrl`+:kbd:`V`.
 * **Duplicate**\
   Duplicate the selected element(s) that can be samples, instruments, presets or divisions.
-  Also accessible with :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`D`.
+  Also accessible with :kbd:`Ctrl`+:kbd:`D`.
 * **Delete**\
   Delete the selected element(s), also accessible with :kbd:`Del`.
 * **Rename or bulk rename**\
@@ -108,7 +108,7 @@ Then, the result of a drag & drop depends on the kind of elements that are dragg
 
 
 Everything that is possible with a drag & drop as seen previously is also possible with a copy / paste.
-You can expect the same result with :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`C` and :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`V` in a tree.
+You can expect the same result with :kbd:`Ctrl`+:kbd:`C` and :kbd:`Ctrl`+:kbd:`V` in a tree.
 
 Copy / Paste is also allowed within different soundfonts.
 It is possible to copy one element in a first soundfont, and paste it in a second soundfont.

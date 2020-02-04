@@ -9,10 +9,10 @@ The menu, located at the top right corner of the software, contains several item
 
 * **New**\
   Create a new .sf2 file from scratch.
-  Also accessible with the shortcut :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`N`.
+  Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`N`.
 * **Open**\
   Open an [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) or [.sfark](manual/annexes/the-different-soundfont-formats.md#doc_sfark) file.
-  Also accessible with the shortcut :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`O`.
+  Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`O`.
 
 
 ## Saving a soundfont {#doc_save}
@@ -20,13 +20,13 @@ The menu, located at the top right corner of the software, contains several item
 
 * **Save**\
   Save the current file.
-  Also accessible with the shortcut :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`S`.
+  Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`S`.
 * **Save as**\
   Save the current file in another file.
-  Also accessible with the shortcut :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`Shift`&nbsp;+&nbsp;:kbd:`S`.
+  Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`S`.
 * **Export**\
   Export and merge one or several presets from the open soundfonts in the [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) or [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) format.
-  Also accessible with the shortcut :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`E`.
+  Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`E`.
 
 
 ![Export window](images/export.png "Export window")
@@ -57,7 +57,7 @@ The menu, located at the top right corner of the software, contains several item
 
 * **Close file**\
   Close the current file.
-  Also accessible with the shortcut :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`W`.
+  Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`W`.
 * **Quit**\
   Quit the software.
-  Also accessible with the shortcut :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`Q`.
+  Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`Q`.
