@@ -9,10 +9,10 @@
 
 * **Создать**\
   Создать новый файл .sf2 с нуля.
-  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`N`.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`N`.
 * **Открыть**\
   Открыть файл [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) или [.sfark](manual/annexes/the-different-soundfont-formats.md#doc_sfark).
-  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`O`.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`O`.
 
 
 ## Сохранение SoundFont {#doc_save}
@@ -20,13 +20,13 @@
 
 * **Сохранить**\
   Сохранить текущий файл.
-  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`S`.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`S`.
 * **Сохранить как**\
   Сохранить текущий файл под другим именем.
-  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`Shift`&nbsp;+&nbsp;:kbd:`S`.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`S`.
 * **Экспортировать**\
   Экспортировать и объединить один или несколько пресетов из открытых SoundFont в формат [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) или [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz).
-  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`E`.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`E`.
 
 
 ![Окно экспорта](images/export.png "Окно экспорта")
@@ -57,7 +57,7 @@
 
 * **Закрыть файл**\
   Закрыть текущий файл.
-  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`W`.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`W`.
 * **Выход**\
   Выйти из программы.
-  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`&nbsp;+&nbsp;:kbd:`Q`.
+  Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`Q`.
