@@ -24,8 +24,8 @@ This software can be found <a href="https://github.com/thurask/Qt-Linguist/relea
 
 
 Unzip the translation package you just downloaded.
-You will find a .ts file :file:`polyphone_{XX}.ts`, :file:`{XX}` being related to your language.
-With :program:`Qt Linguist`, open :file:`polyphone_{XX}.ts` and you will be able to start the translation.
+You will find a .ts file :file:`polyphone_XX.ts`, :file:`XX` being related to your language.
+With :program:`Qt Linguist`, open :file:`polyphone_XX.ts` and you will be able to start the translation.
 
 
 ## Translating

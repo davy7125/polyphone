@@ -17,15 +17,15 @@ Une nouvelle archive de traduction vous sera rapidement fournie.
 
 
 Le seul logiciel dont vous avez besoin est :program:`Qt Linguist`&nbsp;: un outil pour générer des fichiers de traduction.
-Ce logiciel peut être trouvé <a href="https://github.com/thurask/Qt-Linguist/releases" target="_blank">ici</a> pour les utilisateurs de Windows ou dans les dépôts pour les utilisateurs Linux (via :program:`Synaptic`, :program:`Yum`, …).
+Ce logiciel peut être trouvé <a href="https://github.com/thurask/Qt-Linguist/releases" target="_blank">ici</a> pour les utilisateurs de Windows ou dans les dépôts pour les utilisateurs de Linux (via :program:`Synaptic`, :program:`Yum`, …).
 
 
 ## Ouverture du fichier de traduction
 
 
 Décompressez l'archive de traduction que vous venez de télécharger.
-Vous trouverez à l'intérieur un fichier .ts :file:`polyphone_{XX}.ts`, :file:`{XX}` étant en lien avec votre langue.
-À l'aide de :program:`Qt Linguist`, ouvrez le fichier :file:`polyphone_{XX}.ts` et vous serez à même de débuter la traduction.
+Vous trouverez à l'intérieur un fichier .ts :file:`polyphone_XX.ts`, :file:`XX` étant en lien avec votre langue.
+À l'aide de :program:`Qt Linguist`, ouvrez le fichier :file:`polyphone_XX.ts` et vous serez à même de débuter la traduction.
 
 
 ## Traduction
@@ -70,5 +70,5 @@ Vous serez maintenant en mesure de passer en revue la traduction.
 ## Soumettre la traduction
 
 
-Lorsque vous terminé (ou si vous en avez marre&nbsp;!), envoyez le fichier .ts (pas le fichier compilé .qm&nbsp;!) que vous étiez en train d'éditer à <contact@polyphone-soundfonts.com>.
+Lorsque vous avez terminé (ou si vous en avez marre&nbsp;!), envoyez le fichier .ts (pas le fichier compilé .qm&nbsp;!) que vous étiez en train d'éditer à <contact@polyphone-soundfonts.com>.
 L'archive de traduction sur cette [page](download/translations) sera mis à jour.

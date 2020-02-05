@@ -22,14 +22,14 @@ sudo dnf install qt-creator
 ```
 
 ou installer la dernière version du framework Qt et Qt Creator disponibles <a href="https://www.qt.io/download-open-source/" target="_blank">ici</a>.
-Téléchargez l'installeur Qt et utilisez ces commandes pour ajouter les permessions d'exécution et lancer l'installer (le numéro de version est à ajuster selon votre configuration)&nbsp;:
+Téléchargez l'installeur Qt et utilisez ces commandes pour ajouter les permissions d'exécution et lancer l'installeur (le numéro de version est à ajuster selon votre configuration)&nbsp;:
 
 ```
 chmod 755 qt-unified-linux-x64-2.0.3-1-online.run
 ./qt-unified-linux-x64-2.0.3-1-online.run
 ```
 
-Sélectionnez les composants proposés par défaut — sauf raisons particulières.
+Sélectionnez les composants proposés par défaut — sauf raison particulière.
 
 
 ![Installation de Qt dans Fedora](images/qt-setup-fedora.png "Installation de Qt dans Fedora")
@@ -66,8 +66,8 @@ Premièrement, télécharger les sources de Polyphone <a href="download" target=
 ### Modifications du fichier "polyphone.pro"
 
 
-Modifiez le fichier :file:`polyphone.pro` de manière à utilisez les versions fournies de :program:`rtmidi`, :program:`stk` et :program:`qcustomplot`.
-Décommentez les lignes suivantes en enlevant le premier caractère ‘#’:
+Modifiez le fichier :file:`polyphone.pro` de manière à utiliser les versions fournies de :program:`rtmidi`, :program:`stk` et :program:`qcustomplot`.
+Décommentez les lignes suivantes en enlevant le premier caractère "#"&nbsp;:
 
 ```
 DEFINES += USE_LOCAL_RTMIDI

@@ -26,7 +26,7 @@ Téléchargez les sources de Polyphone <a href="download" target="_blank">ici</a
 ### Ouvrir et configurer le projet
 
 
-Au préalable, ouvrez le fichier :file:`polyphone.pro` et éditez le de manière à éventuellement utiliser les versions embarquées de :program:`rtmidi`, :program:`stk` et :program:`qcustomplot` si votre système d'exploitation ne les fournit pas.
+Au préalable, ouvrez le fichier :file:`polyphone.pro` et éditez-le de manière à éventuellement utiliser les versions embarquées de :program:`rtmidi`, :program:`stk` et :program:`qcustomplot` si votre système d'exploitation ne les fournit pas.
 Décommentez les lignes suivantes en enlevant le premier caractère ‘#’&nbsp;:
 
 ```
@@ -64,7 +64,7 @@ La commande :command:`qmake` se termine correctement lorsque la barre de progres
 ![qmake s'est bien terminé](images/qmake-finished.png "qmake s'est bien terminé")
 
 
-Dans la section :guilabel:`Project` dans la colonne de gauche, puis dans la section :guilabel:`Build&Run`, sélectionnez une configuration de compilation (:guilabel:`Release` est préféré).
+Dans la section :guilabel:`Project` de la colonne de gauche, puis dans la section :guilabel:`Build&Run`, sélectionnez une configuration de compilation (la configuration :guilabel:`Release` est préférée).
 
 Enfin, cliquez sur l'action :guilabel:`Build project Polyphone` dans le menu :guilabel:`Build`.
 
@@ -74,7 +74,7 @@ Enfin, cliquez sur l'action :guilabel:`Build project Polyphone` dans le menu :gu
 
 Pendant la compilation du projet il est possible de voir des avertissements mais normalement pas d'erreur.
 
-À présent vous devriez trouver le fichier exécutable :file:`polyphone` dans le sous-dossier :file:`RELEASE` ou :file:`DEBUG` du répertoire source, selon le choix de la configuration de compilation dans QtCreator.
+À présent vous devriez trouver le fichier exécutable :file:`polyphone` dans le sous-dossier :file:`RELEASE` ou :file:`DEBUG` du répertoire source, selon le choix de la configuration de compilation dans Qt Creator.
 
 
 ## Dépannage

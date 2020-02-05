@@ -1,4 +1,4 @@
-Voici l'endroit pour différentes informations concernant le développement de Polyphone:
+Voici l'endroit pour différentes informations concernant le développement de Polyphone&nbsp;:
 
 * comment compiler,
 * comment traduire,
