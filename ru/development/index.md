@@ -2,7 +2,7 @@
 <img src="images/github.png" style="float:left;margin:10px 0 0 10px">
 <div style="margin:5px 0 0 90px">
 <p>Все исходники программы размещены на <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>, если есть желание, вы можете помочь проекту.</p>
-<p>Некоторые указания можно найти ниже. Если что-то уже не актуально, не стесняйтесь сообщить об этом на <a href="https://www.polyphone-soundfonts.com/en/forum">форуме</a>.</p>
+<p>Некоторые указания можно найти ниже. Если что-то уже не актуально, не стесняйтесь сообщить об этом на <a href="forum">форуме</a>.</p>
 </div>
 </div>
 
@@ -12,7 +12,7 @@
 
 ### [Сборка Polyphone для Fedora](development/building-polyphone-for-fedora.md)
 
-Указания по сборке Polyphone на Fedora (проверено 7 августа 2016 года на Fedora 24, 64 бит).
+Указания по сборке Polyphone на Fedora.
 
 ### [Сборка Polyphone для Ubuntu](development/building-polyphone-for-ubuntu.md)
 

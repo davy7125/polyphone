@@ -20,7 +20,7 @@
 ### Скопируйте исходники
 
 
-Загрузите исходники Polyphone <a href="https://www.polyphone-soundfonts.com/en/download" target="_blank">здесь</a> или на <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a>.
+Загрузите исходники Polyphone <a href="download" target="_blank">здесь</a> или на <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a>.
 
 
 ### Откройте и настройте проект
@@ -79,6 +79,6 @@ DEFINES += USE_LOCAL_QCUSTOMPLOT
 ## Отладка
 
 
-Просмотрите эту [тему](https://www.polyphone-soundfonts.com/en/forum/polyphone/support-bug-reports), если вам нужна дополнительная информация или помощь.
+Просмотрите эту [тему](forum/polyphone/support-bug-reports), если вам нужна дополнительная информация или помощь.
 
-<p class="endpage">Отдельное спасибо <a href="https://www.polyphone-soundfonts.com/en/profile/820-tomotello">Tomotello</a> за эту статью.</p>
+<p class="endpage">Отдельное спасибо <a href="dashboard/820-tomotello">Tomotello</a> за эту статью.</p>

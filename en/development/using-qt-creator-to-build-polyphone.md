@@ -20,7 +20,7 @@ The instructions for installing them are dependent on the OS you are using, see 
 ### Copy the sources
 
 
-Get Polyphone sources from <a href="https://www.polyphone-soundfonts.com/en/download" target="_blank">here</a> or from <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a>.
+Get Polyphone sources from <a href="download" target="_blank">here</a> or from <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a>.
 
 
 ### Open and configure the project
@@ -79,7 +79,7 @@ Now you should have the executable :file:`polyphone` either in the :file:`RELEAS
 ## Troubleshooting
 
 
-See this [topic](https://www.polyphone-soundfonts.com/en/forum/polyphone/support-bug-reports) if you need more information or for getting some help.
+See this [topic](forum/polyphone/support-bug-reports) if you need more information or for getting some help.
 
 
-<p class="endpage">Special thanks to <a href="https://www.polyphone-soundfonts.com/en/profile/820-tomotello">Tomotello</a> for this article.</p>
+<p class="endpage">Special thanks to <a href="dashboard/820-tomotello">Tomotello</a> for this article.</p>

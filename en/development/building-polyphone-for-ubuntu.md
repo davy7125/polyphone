@@ -1,4 +1,4 @@
-Use these instructions if you cannot install Polyphone on your Linux distribution with the available installers in the section “[Download](https://www.polyphone-soundfonts.com/en/download)”.
+Use these instructions if you cannot install Polyphone on your Linux distribution with the available installers in the section “[Download](download)”.
 This method has been tested with Ubuntu 16.04 (Xenial).
 
 

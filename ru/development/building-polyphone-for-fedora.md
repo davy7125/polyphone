@@ -1,4 +1,4 @@
-Используйте эти указания, если вы не можете установить Polyphone в свой дистрибутив Fedora с помощью доступных установщиков в разделе “[Download](https://www.polyphone-soundfonts.com/en/download)” (проверено:&nbsp;7 августа 2016 г. для Fedora 24, 64-битная версия).
+Используйте эти указания, если вы не можете установить Polyphone в свой дистрибутив Fedora с помощью доступных установщиков в разделе “[Download](download)” (проверено:&nbsp;7 августа 2016 г. для Fedora 24, 64-битная версия).
 
 
 ## Перед тем как начать
@@ -63,7 +63,7 @@ sudo dnf install libvorbis-devel
 ### Исходники
 
 
-Сначала загрузите исходники Polyphone <a href="https://www.polyphone-soundfonts.com/en/download" target="_blank">здесь</a> или на <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a>.
+Сначала загрузите исходники Polyphone <a href="download" target="_blank">здесь</a> или на <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a>.
 
 
 ### Изменения в polyphone.pro
@@ -104,7 +104,7 @@ qmake && make
 ## Отладка
 
 
-Просмотрите эту [тему](https://www.polyphone-soundfonts.com/en/forum/support-bug-reports/9-success-polyphone-fedora-rpm-linux-build), если вам нужна дополнительная информация или помощь.
+Просмотрите эту [тему](forum/support-bug-reports/9-success-polyphone-fedora-rpm-linux-build), если вам нужна дополнительная информация или помощь.
 
 
-<p class="endpage">Отдельное спасибо <a href="https://www.polyphone-soundfonts.com/en/profile/820-tomotello">Tomotello</a> за эту статью.</p>
+<p class="endpage">Отдельное спасибо <a href="dashboard/820-tomotello">Tomotello</a> за эту статью.</p>
