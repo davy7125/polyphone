@@ -43,7 +43,7 @@ Three cases may appear depending on your confidence level.
 * You have the right translation: write it and use :kbd:`Ctrl`+:kbd:`Enter`.
   This item will be validated.
 
-A translation needs attention.
+A translation needs attention (in a world where everything is being made for <a href="https://medium.com/thrive-global/how-technology-hijacks-peoples-minds-from-a-magician-and-google-s-design-ethicist-56d62ef5edf3" target="_blank">soliciting it</a>).
 Please take care of:
 
 * the punctuation,

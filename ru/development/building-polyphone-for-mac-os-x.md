@@ -6,8 +6,8 @@
 
 Потребуются следующие приложения:
 
-* Xcode (доступно в Apple Store)
-* <a href="https://www.qt.io/download-open-source" target="_blank">Qt Creator с фреймворком</a>
+* Xcode (доступно в Apple Store),
+* <a href="https://www.qt.io/download-open-source" target="_blank">Qt Creator с фреймворком</a>.
 
 Вам также нужны исходники Polyphone, доступные <a href="download" target="_blank">здесь</a> или <a href="https://github.com/davy7125/polyphone" target="_blank">на GitHub</a>, а также необходимые библиотеки, которые вы можете скачать [здесь](downloads/lib_mac.zip).
 

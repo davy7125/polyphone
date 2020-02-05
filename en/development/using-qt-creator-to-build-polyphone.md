@@ -7,9 +7,9 @@ It is assumed you already have on your computer Qt Creator installed with the Qt
 
 The following elements are required:
 
-* a C++ compiler (VC++, Clang, GCC, …)
-* Qt Creator with its framework
-* Polyphone dependencies
+* a C++ compiler (VC++, Clang, GCC, …),
+* Qt Creator with its framework,
+* Polyphone dependencies.
 
 The instructions for installing them are dependent on the OS you are using, see the related documentation pages for this.
 

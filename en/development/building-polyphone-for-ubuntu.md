@@ -21,6 +21,8 @@ The following libraries are required:
 
 Use for example :program:`synaptic` to install them.
 
+You also need the sources of Polyphone, available <a href="download" target="_blank">here</a> or on <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>.
+
 
 ## Build
 
@@ -28,12 +30,12 @@ Use for example :program:`synaptic` to install them.
 In the root directory of the project, open a terminal and build Polyphone by running the following command:
 
 ```
-qmake && make
+qmake polyphone.pro PREFIX=/usr && make
 ```
 
 An executable file :file:`polyphone` in the directory :file:`RELEASE` should then appear if everything went right.
 
-In the case where libraries such as RtMidi, Stk, QCustomPlot are missing or are not in a compatible version in your distribution, you can edit the :file:`.pro` file to use local copies of them.
+In the case where libraries such as :program:`RtMidi`, :program:`Stk`, :program:`QCustomPlot` are missing or are not in a compatible version in your distribution, you can edit the :file:`.pro` file to use local copies of them.
 To do this, uncomment the corresponding lines. For instance
 
 ```
