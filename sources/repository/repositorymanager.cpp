@@ -34,8 +34,8 @@
 #include <QDebug>
 #include "soundfontdetails.h"
 
-const QString RepositoryManager::BASE_URL = "http://localhost/polyphone-soundfonts/fr/api/soundfonts/";
-//const QString RepositoryManager::BASE_URL = "https://www.polyphone-soundfonts.com/en/api/soundfonts/";
+//const QString RepositoryManager::BASE_URL = "http://localhost/polyphone-soundfonts/api/soundfonts/";
+const QString RepositoryManager::BASE_URL = "https://www.polyphone-soundfonts.com/api/soundfonts/";
 RepositoryManager * RepositoryManager::s_instance = nullptr;
 
 RepositoryManager * RepositoryManager::getInstance()

@@ -1416,11 +1416,6 @@ en línea</translation>
         <source>Davy Triponney</source>
         <translation>Davy Triponney</translation>
     </message>
-    <message>
-        <location filename="dialogs/dialog_about.cpp" line="47"/>
-        <source>https://www.polyphone-soundfonts.com/en</source>
-        <translation>https://www.polyphone-soundfonts.com/en</translation>
-    </message>
 </context>
 <context>
     <name>DialogChangeLog</name>

@@ -106,7 +106,7 @@ DialogChangeLog::~DialogChangeLog()
 
 void DialogChangeLog::on_pushDonate_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/en/make-a-donation"));
+    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/make-a-donation"));
 }
 
 void DialogChangeLog::on_pushOk_clicked()
