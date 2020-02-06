@@ -1361,12 +1361,6 @@ oversigt</translation>
         <translation>Davy Triponney</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="47"/>
-        <source>https://www.polyphone-soundfonts.com/en</source>
-        <translatorcomment>(Engelsk)</translatorcomment>
-        <translation>https://www.polyphone-soundfonts.com/en</translation>
-    </message>
-    <message>
         <location filename="dialogs/dialog_about.cpp" line="63"/>
         <location filename="dialogs/dialog_about.cpp" line="70"/>
         <source>Andrea Celani</source>

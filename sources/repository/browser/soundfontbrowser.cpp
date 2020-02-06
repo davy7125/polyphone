@@ -404,9 +404,9 @@ void SoundfontBrowser::keyPressEvent(QKeyEvent * event)
 void SoundfontBrowser::on_pushBecomePremium_clicked()
 {
     if (UserManager::getInstance()->getConnectionState() == UserManager::CONNECTED)
-        QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/en/subscribe"));
+        QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/subscribe"));
     else
-        QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/en/create-an-account"));
+        QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/create-an-account"));
 }
 
 void SoundfontBrowser::userStatusChanged(UserManager::ConnectionState state)

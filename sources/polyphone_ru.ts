@@ -1325,11 +1325,6 @@ repository</source>
         <translation>Polyphone</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="47"/>
-        <source>https://www.polyphone-soundfonts.com/en</source>
-        <translation>https://www.polyphone-soundfonts.com/en</translation>
-    </message>
-    <message>
         <location filename="dialogs/dialog_about.cpp" line="49"/>
         <source>Copyright</source>
         <translation>Авторское право</translation>

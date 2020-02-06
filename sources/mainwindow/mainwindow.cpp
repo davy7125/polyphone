@@ -243,12 +243,12 @@ void MainWindow::recentSf2Changed()
 
 void MainWindow::on_pushButtonDocumentation_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/" + tr("en/documentation", "path for the documentation online")));
+    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/documentation"));
 }
 
 void MainWindow::on_pushButtonForum_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/" + tr("en/forum", "path for the forum")));
+    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/forum"));
 }
 
 void MainWindow::on_pushButtonSettings_clicked()

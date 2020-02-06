@@ -1410,11 +1410,6 @@ repository</source>
         <source>Davy Triponney</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="dialogs/dialog_about.cpp" line="47"/>
-        <source>https://www.polyphone-soundfonts.com/en</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DialogChangeLog</name>
