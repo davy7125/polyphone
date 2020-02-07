@@ -39,7 +39,7 @@
 4. отрегулируйте начало и / или конец петли во время воспроизведения семпла, пока переход между двумя положениями не станет как можно более плавным.
 
 
-**Примечание:** Чтобы услышать петлю в инструменте, вы должны выбрать |loop on| в строке параметра :guilabel:`Играть петлю` в глобальном столбце или в столбце отдельных нот в [таблице параметров](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table). ![loop on](images/loop_on.png "loop on"){.inline} включает воспроизведение петли, ![loop off](images/loop_off.png "loop off"){.inline} или пустая ячейка — отключает.
+**Примечание:** Чтобы услышать петлю в инструменте, вы должны выбрать ![loop on](images/loop_on.png "loop on"){.inline} в строке параметра :guilabel:`Играть петлю` в глобальном столбце или в столбце отдельных нот в [таблице параметров](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table). ![loop on](images/loop_on.png "loop on"){.inline} включает воспроизведение петли, ![loop off](images/loop_off.png "loop off"){.inline} или пустая ячейка — отключает.
 
 
 ![Иллюстрация петли](images/loop_illustration.png "Иллюстрация петли")

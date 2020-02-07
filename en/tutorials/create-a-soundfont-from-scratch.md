@@ -33,13 +33,13 @@ To assign loop points manually:
 
 1. click in the [tree](manual/soundfont-editor/tree.md) on the sample to be looped,
 2. in the [sample editor](manual/soundfont-editor/editing-pages/sample-editor.md), arbitrarily position the start and end of the loop in the [graphic](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) (WAV display area) unless a loop is already defined.
-   Use left-click for start and right-click for end.
-   The right loop point should be entered first (since the left point it by default at the position 0 and that it's not possible to assign a right point before the left point).
+  Use left-click for start and right-click for end.
+  The right loop point should be entered first (since the right point is by default at the position 0 and that it's not possible to assign a left point after the right point).
 3. press the :guilabel:`Play` button after having selected the loop function,
 4. adjust the start and / or end of the loop, while the sample is playing, until the transition between the two positions is as smooth as possible.
 
 
-**Note:** to hear looping in an instrument, you must enter select |loop on| in the :guilabel:`Loop playback` parameter row of either the Global or individual notes columns in the [Parameters Table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table). ![loop on](images/loop_on.png "loop on"){.inline} turns it On, ![loop off](images/loop_off.png "loop off"){.inline} or a blank turns it Off.
+**Note:** to hear looping in an instrument, you must select ![loop on](images/loop_on.png "loop on"){.inline} in the :guilabel:`Loop playback` parameter row of either the Global or individual notes columns in the [Parameters Table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table). ![loop on](images/loop_on.png "loop on"){.inline} turns it On, ![loop off](images/loop_off.png "loop off"){.inline} or a blank turns it Off.
 
 
 ![Loop illustration](images/loop_illustration.png "Loop illustration")
@@ -55,8 +55,8 @@ For each sample the method is as follows:
 1. begin the playback (press the :guilabel:`play` button), if possible with loop function selected,
 2. select the sinus function,
 3. adjust the volume slider to hear the two sounds as clearly as possible,
-4. change the Root key until the two sounds most closely match,
-5. adjust the Correction (cents) to tune the sample to the Rootkey.
+4. change the :guilabel:`Root key` until the two sounds most closely match,
+5. adjust the :guilabel:`Correction (cents)` to tune the sample to the Rootkey.
    To do this, pay attention to any beats that occur and make sure they are as slow as possible.
 
 The [frequency](manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq) analysis can be a good indicator to start tuning.
@@ -89,7 +89,7 @@ A name must now be entered.
 Then add samples to the instrument using a “[drag & drop](manual/soundfont-editor/tree.md#doc_dragdrop)”.
 In the tree you will notice that divisions appear in the instrument.
 
-**Note:** When samples are created the divisions are not copied but linked. There are no constraints on the number of divisions.
+**Note:** When divisions are created the samples are not copied but linked. There are no constraints on the number of divisions.
 
 
 ### Distribution of divisions
@@ -106,7 +106,7 @@ The tool “[Sample auto-positioning](manual/soundfont-editor/tools/instrument-t
 ### Setting the divisions
 
 
-If the sample(s) are looped, to hear the looping in an instrument, select ![loop on](images/loop_on.png "loop on"){.inline} in the :guilabel:`Loop playback` parameter row of either the :guilabel:`Global` or individual notes columns in the :guilabel:`Parameters Table`.
+To enable the loop playing mode in an instrument containing looped samples, select ![loop on](images/loop_on.png "loop on"){.inline} in the :guilabel:`Loop playback` parameter row of either the :guilabel:`Global` or individual notes columns in the parameters table`.
 
 * ![loop on](images/loop_on.png "loop on"){.inline} turns it On,
 * ![loop off](images/loop_off.png "loop off"){.inline} or a blank turns it Off.

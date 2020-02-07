@@ -1,0 +1,4 @@
+index.md=Tutoriaux
+|create-a-soundfont-from-scratch.md=Créer une soundfont à partir de zéro
+|how-to-prepare-a-sample.md=Comment préparer un échantillon
+|using-custom-releases-in-an-instrument.md=Utiliser des échantillons pour la relâche d'une note

@@ -1,0 +1,5 @@
+Cette section contient la description du logiciel Polyphone:
+
+* l'éditeur de soundfonts,
+* la banque de soundfonts en ligne,
+* la configuration.

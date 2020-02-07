@@ -17,7 +17,13 @@ The root folder comprises this README file and one folder per language: "en" for
 
 ### Language folder
 
-Inside the language folder, you will find one folder per documentation category and the folder "images" that contains all images used in the documentation pages, in the .png format.
+Inside the language folder, you will find a file "config.txt", one folder per documentation category and the folder "images" that contains all images used in the documentation pages, in the .png format.
+
+The file "config.txt" comprises one pair {key}={value} which is the translation of the word "Documentation" in the related language. For example:
+
+```
+documentation_name=Documentation
+```
 
 ### Category folder
 
