@@ -20,7 +20,7 @@ Les instructions pour les installer dépendent de votre système d'exploitation,
 ### Copier les sources
 
 
-Téléchargez les sources de Polyphone <a href="download" target="_blank">ici</a> ou depuis <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a>.
+Téléchargez les sources de Polyphone [ici][download] ou depuis [Github][polyphone].
 
 
 ### Ouvrir et configurer le projet
@@ -84,3 +84,7 @@ Voir le [forum](forum/polyphone/support-bug-reports) pour plus d'information ou 
 
 
 <p class="endpage">Un grand merci à <a href="dashboard/820-tomotello">Tomotello</a> pour cet article.</p>
+
+
+[download]:  download                              {target=_blank}
+[polyphone]: https://github.com/davy7125/polyphone {target=_blank}

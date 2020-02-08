@@ -23,7 +23,7 @@ sudo dnf install mesa-libGL-devel
 sudo dnf install qt-creator
 ```
 
-или установить последнюю версию фреймворка Qt и Qt Creator, доступные <a href="https://www.qt.io/download-open-source/" target="_blank">здесь</a>.
+или установить последнюю версию фреймворка Qt и Qt Creator, доступные [здесь][get-qt].
 Загрузите установщик Qt и выполните эти команды, чтобы добавить разрешение на выполнение и запустить установщик (возможно, вам придётся изменить номер версии):
 
 ```
@@ -63,7 +63,7 @@ sudo dnf install libvorbis-devel
 ### Исходники
 
 
-Сначала загрузите исходники Polyphone <a href="download" target="_blank">здесь</a> или на <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a>.
+Сначала загрузите исходники Polyphone [здесь][download] или на [Github][polyphone].
 
 
 ### Изменения в polyphone.pro
@@ -108,3 +108,8 @@ qmake && make
 
 
 <p class="endpage">Отдельное спасибо <a href="dashboard/820-tomotello">Tomotello</a> за эту статью.</p>
+
+
+[get-qt]:    https://www.qt.io/download-open-source/ {target=_blank}
+[download]:  download                                {target=_blank}
+[polyphone]: https://github.com/davy7125/polyphone   {target=_blank}

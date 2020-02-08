@@ -21,7 +21,7 @@ The following libraries are required:
 
 Use for example :program:`synaptic` to install them.
 
-You also need the sources of Polyphone, available <a href="download" target="_blank">here</a> or on <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>.
+You also need the sources of Polyphone, available [here][download] or on [GitHub][polyphone].
 
 
 ## Build
@@ -51,3 +51,7 @@ DEFINES += USE_LOCAL_RTMIDI
 (with no leading “#”).
 
 **Note:** if you are using :program:`Qt Creator`, the project may be opened via its :file:`.pro` file present in the root directory.
+
+
+[download]:  download                              {target=_blank}
+[polyphone]: https://github.com/davy7125/polyphone {target=_blank}

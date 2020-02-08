@@ -20,7 +20,7 @@
 ### Скопируйте исходники
 
 
-Загрузите исходники Polyphone <a href="download" target="_blank">здесь</a> или на <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a>.
+Загрузите исходники Polyphone [здесь][download] или на [Github][polyphone].
 
 
 ### Откройте и настройте проект
@@ -82,3 +82,7 @@ DEFINES += USE_LOCAL_QCUSTOMPLOT
 Просмотрите эту [тему](forum/polyphone/support-bug-reports), если вам нужна дополнительная информация или помощь.
 
 <p class="endpage">Отдельное спасибо <a href="dashboard/820-tomotello">Tomotello</a> за эту статью.</p>
+
+
+[download]:  download                              {target=_blank}
+[polyphone]: https://github.com/davy7125/polyphone {target=_blank}

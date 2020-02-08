@@ -21,6 +21,8 @@
 
 Установите их с помощью :program:`synaptic`.
 
+Вам также нужны исходники Polyphone, доступные [здесь][download] или [на GitHub][polyphone].
+
 
 ## Сборка
 
@@ -49,3 +51,7 @@ DEFINES += USE_LOCAL_RTMIDI
 (без начального «#»).
 
 **Примечание:** Если вы используете :program:`Qt Creator`, проект можно открыть через его файл :file:`.pro`, находящийся в корневом каталоге.
+
+
+[download]:  download                              {target=_blank}
+[polyphone]: https://github.com/davy7125/polyphone {target=_blank}

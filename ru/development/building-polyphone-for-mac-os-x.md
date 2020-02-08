@@ -7,9 +7,9 @@
 Потребуются следующие приложения:
 
 * Xcode (доступно в Apple Store),
-* <a href="https://www.qt.io/download-open-source" target="_blank">Qt Creator с фреймворком</a>.
+* [Qt Creator с фреймворком][get-qt].
 
-Вам также нужны исходники Polyphone, доступные <a href="download" target="_blank">здесь</a> или <a href="https://github.com/davy7125/polyphone" target="_blank">на GitHub</a>, а также необходимые библиотеки, которые вы можете скачать [здесь](downloads/lib_mac.zip).
+Вам также нужны исходники Polyphone, доступные [здесь][download] или [на GitHub][polyphone], а также необходимые библиотеки, которые вы можете скачать [здесь](downloads/lib_mac.zip).
 
 
 ## Сборка
@@ -52,3 +52,8 @@ install_name_tool -change /System/Library/Frameworks/Jackmp.framework/Versions/A
 
 
 Просмотрите эту [тему](forum/support-bug-reports/8-success-build-polyphone-on-osx-10-11-6-qt-5-7), если вам нужна дополнительная информация или помощь.
+
+
+[get-qt]:    https://www.qt.io/download-open-source {target=_blank}
+[download]:  download                               {target=_blank}
+[polyphone]: https://github.com/davy7125/polyphone  {target=_blank}

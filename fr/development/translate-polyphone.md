@@ -17,7 +17,7 @@ Une nouvelle archive de traduction vous sera rapidement fournie.
 
 
 Le seul logiciel dont vous avez besoin est :program:`Qt Linguist`&nbsp;: un outil pour générer des fichiers de traduction.
-Ce logiciel peut être trouvé <a href="https://github.com/thurask/Qt-Linguist/releases" target="_blank">ici</a> pour les utilisateurs de Windows ou dans les dépôts pour les utilisateurs de Linux (via :program:`Synaptic`, :program:`Yum`, …).
+Ce logiciel peut être trouvé [ici][get-qt-linguist] pour les utilisateurs de Windows ou dans les dépôts pour les utilisateurs de Linux (via :program:`Synaptic`, :program:`Yum`, …).
 
 
 ## Ouverture du fichier de traduction
@@ -43,7 +43,7 @@ Trois cas de figure peuvent apparaître selon votre degré de confiance.
 * Vous avez la bonne traduction&nbsp;: écrivez-la et utilisez le raccourci :kbd:`Ctrl`+:kbd:`Enter`.
   L'élément sera validé.
 
-Une traduction a besoin d'attention (dans un monde où tout est en train d'être fait pour la <a href="https://medium.com/thrive-global/how-technology-hijacks-peoples-minds-from-a-magician-and-google-s-design-ethicist-56d62ef5edf3" target="_blank">solliciter</a>).
+Une traduction a besoin d'attention (dans un monde où tout est en train d'être fait pour la [solliciter][article]).
 Merci de faire attention&nbsp;:
 
 * à la ponctuation,
@@ -72,3 +72,7 @@ Vous serez maintenant en mesure de passer en revue la traduction.
 
 Lorsque vous avez terminé (ou si vous en avez marre&nbsp;!), envoyez le fichier .ts (pas le fichier compilé .qm&nbsp;!) que vous étiez en train d'éditer à <contact@polyphone-soundfonts.com>.
 L'archive de traduction sur cette [page](download/translations) sera mis à jour.
+
+
+[get-qt-linguist]: https://github.com/thurask/Qt-Linguist/releases {target=_blank}
+[article]:         https://medium.com/thrive-global/how-technology-hijacks-peoples-minds-from-a-magician-and-google-s-design-ethicist-56d62ef5edf3 {target=_blank}

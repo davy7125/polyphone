@@ -1,5 +1,5 @@
 Welcome to the **User Manual** of Polyphone! You will learn here how to use every feature of the software.
-If you need more help, or if the reading of these pages puts you off, you may find assistance in the [forum](forum), with [tutorials](tutorials/index.md), or on <a href="https://www.youtube.com/results?search_query=polyphone+sf2" target="_blank">YouTube</a> (special thanks to Polyphone users for their useful videos).
+If you need more help, or if the reading of these pages puts you off, you may find assistance in the [forum](forum), with [tutorials](tutorials/index.md), or on [YouTube]  (special thanks to Polyphone users for their useful videos).
 Extra information can also be found in the [annexes](manual/annexes/index.md).
 
 
@@ -83,3 +83,6 @@ The tabs provide a quick access between:
 
 
 The menu, located in the top right corner, contains general functions and is described [here](manual/menu.md).
+
+
+[YouTube]: https://www.youtube.com/results?search_query=polyphone+sf2 {target=_blank}

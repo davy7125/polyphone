@@ -20,18 +20,18 @@ Sf2 files are built according to a 3-level structure:
 
 Further to the definition and setting of these elements, a sf2 file contains also [general information](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md) (the author, copyright or edit time for instance).
 
-Soundfonts are used by software synthesizers, such as <a href="http://www.fluidsynth.org/" target="_blank">Fluidsynth</a>, using wave tables and driven by MIDI signals.
-It is also possible to use sf2 soundfonts to listen MIDI files with <a href="https://sourceforge.net/projects/timidity" target="_blank">TiMidity</a>, <a href="https://www.mindwerks.net/projects/wildmidi" target="_blank">WildMIDI</a> or QuickTime and listen scores with <a href="https://musescore.org/" target="_blank">MuseScore</a>.
+Soundfonts are used by software synthesizers, such as [Fluidsynth], using wave tables and driven by MIDI signals.
+It is also possible to use sf2 soundfonts to listen MIDI files with [TiMidity], [WildMIDI] or QuickTime and listen scores with [MuseScore].
 Hardware such as samplers, soundcards or even synthesizers may also support the .sf2 format.
 
-Further information on soundfonts may be found for example on <a href="https://en.wikipedia.org/wiki/SoundFont" target="_blank">Wikipedia</a>.
+Further information on soundfonts may be found for example on [Wikipedia][SoundFont].
 The sf2 specifications are available [here](downloads/sf_specifications_v2.01.pdf) for version 2.01 and [there](downloads/sf_specifications_v2.04.pdf) for version 2.04.
 
 
 ## Sf3 soundfonts {#doc_sf3}
 
 
-The sf3 format, developed by <a href="https://musescore.org/" target="_blank">MuseScore</a>, is similar in all respects to the sf2 format except that the [samples](manual/soundfont-editor/editing-pages/sample-editor.md) are stored in the OGG format (like the MP3 format but open source) instead of being stored as raw data.
+The sf3 format, developed by [MuseScore], is similar in all respects to the sf2 format except that the [samples](manual/soundfont-editor/editing-pages/sample-editor.md) are stored in the OGG format (like the MP3 format but open source) instead of being stored as raw data.
 The consequence is that the sf3 format is about 10 times lighter than the sf2 format for a comparable quality.
 
 A soundfont exported in this format is not intended to be edited later because successive compressions would result in a lower sound quality.
@@ -41,7 +41,7 @@ This format should be seen as a final product and is very interesting for all en
 * space is saved in computers,
 * the combination midi + sf3 provides a lightweight and powerful solution to play soundtracks (video games, mobile applications, …).
 
-Unlike the <a href="http://www.fmjsoft.com/fmt/sf2pack.htm" target="_blank">sf2pack</a> format which answers the same issues, the sf3 format is entirely open-source.
+Unlike the [sf2pack] format which answers the same issues, the sf3 format is entirely open-source.
 The source code is available, thus ensuring its sustainability (let's avoid the mistakes done with sfArk or sfPack!).
 
 
@@ -96,3 +96,11 @@ This format tends to be obsolete, that's why Polyphone only allows importing sfA
 
 
 *[MIDI]: Musical Instrument Digital Interface
+
+
+[Fluidsynth]: http://www.fluidsynth.org/                  {target=_blank}
+[TiMidity]:   https://sourceforge.net/projects/timidity   {target=_blank}
+[WildMIDI]:   https://www.mindwerks.net/projects/wildmidi {target=_blank}
+[MuseScore]:  https://musescore.org/                      {target=_blank}
+[SoundFont]:  https://en.wikipedia.org/wiki/SoundFont     {target=_blank}
+[sf2pack]:    http://www.fmjsoft.com/fmt/sf2pack.htm      {target=_blank}

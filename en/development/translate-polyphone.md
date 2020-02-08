@@ -17,7 +17,7 @@ You will quickly be provided with a new translation package.
 
 
 The only software you need to translate is :program:`Qt Linguist`: a tool for generating translation files.
-This software can be found <a href="https://github.com/thurask/Qt-Linguist/releases" target="_blank">here</a> for Windows users or in repositories for Linux users (via :program:`Synaptic`, :program:`Yum`, …).
+This software can be found [here][get-qt-linguist] for Windows users or in repositories for Linux users (via :program:`Synaptic`, :program:`Yum`, …).
 
 
 ## Opening the translation file
@@ -43,7 +43,7 @@ Three cases may appear depending on your confidence level.
 * You have the right translation: write it and use :kbd:`Ctrl`+:kbd:`Enter`.
   This item will be validated.
 
-A translation needs attention (in a world where everything is being made for <a href="https://medium.com/thrive-global/how-technology-hijacks-peoples-minds-from-a-magician-and-google-s-design-ethicist-56d62ef5edf3" target="_blank">soliciting it</a>).
+A translation needs attention (in a world where everything is being made for [soliciting it][article]).
 Please take care of:
 
 * the punctuation,
@@ -72,3 +72,7 @@ You will now be able to review your translation.
 
 Once you are done (or bothered!), send the .ts file (not .qm!) you were editing to <contact@polyphone-soundfonts.com>.
 The translation package of this [page](download/translations) will be updated.
+
+
+[get-qt-linguist]: https://github.com/thurask/Qt-Linguist/releases {target=_blank}
+[article]:         https://medium.com/thrive-global/how-technology-hijacks-peoples-minds-from-a-magician-and-google-s-design-ethicist-56d62ef5edf3 {target=_blank}

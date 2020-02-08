@@ -21,7 +21,7 @@ Then you can either install the default Qt framework with the following command:
 sudo dnf install qt-creator
 ```
 
-or install the latest version of the Qt framework and Qt Creator available <a href="https://www.qt.io/download-open-source/" target="_blank">here</a>.
+or install the latest version of the Qt framework and Qt Creator available [here][get-qt].
 Download the Qt installer and use these commands to add execution permission and run the installer (you may have to adjust the version number):
 
 ```
@@ -60,7 +60,7 @@ sudo dnf install libvorbis-devel
 ### Sources
 
 
-First, get Polyphone sources from <a href="download" target="_blank">here</a> or from <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a>.
+First, get Polyphone sources from [here][download] or from [Github][polyphone].
 
 
 ### polyphone.pro modifications
@@ -105,3 +105,8 @@ If everything goes well you will have the compiled file :file:`polyphone` in the
 See this [topic](forum/support-bug-reports/9-success-polyphone-fedora-rpm-linux-build) if you need more information or for getting some help.
 
 <p class="endpage">Special thanks to <a href="dashboard/820-tomotello">Tomotello</a> for this article.</p>
+
+
+[get-qt]:    https://www.qt.io/download-open-source/ {target=_blank}
+[download]:  download                                {target=_blank}
+[polyphone]: https://github.com/davy7125/polyphone   {target=_blank}
