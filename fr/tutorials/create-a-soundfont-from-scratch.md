@@ -39,7 +39,7 @@ Pour positionner des points de bouclage manuellement&nbsp;:
 4. ajustez le début et / ou la fin de la boucle, l'échantillon étant toujours en cours de lecture, jusqu'à ce que la transition entre les deux positions soit la plus douce possible.
 
 
-**Note&nbsp;:** pour entendre le bouclage dans un instrument, vous devez sélectionner ![loop on](images/loop_on.png "loop on"){.inline} dans :guilabel:`Lecture en boucle` pour soit la division globale soit la division de l'échantillon concerné dans la [table de paramétrage](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table). ![loop on](images/loop_on.png "loop on"){.inline} active la lecture en boucle, ![loop off](images/loop_off.png "loop off"){.inline} ou une cellule vide désactive la boucle.
+**Note&nbsp;:** pour entendre le bouclage dans un instrument, vous devez sélectionner ![loop on][loop_on] dans :guilabel:`Lecture en boucle` pour soit la division globale soit la division de l'échantillon concerné dans la [table de paramétrage](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table). ![loop on][loop_on] active la lecture en boucle, ![loop off][loop_off] ou une cellule vide désactive la boucle.
 
 
 ![Illustration d'une boucle](images/loop_illustration.png "Illustration d'une boucle")
@@ -106,11 +106,11 @@ L'outil «&nbsp;[Auto-positionnement des échantillons](manual/soundfont-editor/
 ### Paramétrer les divisions
 
 
-Pour autoriser la lecture en boucle dans un instrument contenant des échantillons bouclés, sélectionner ![loop on](images/loop_on.png "loop on"){.inline} dans la ligne correspondant au paramètre :guilabel:`Lecture en boucle` pour soit  :guilabel:`Global`, soit des colonnes individuelles dans la table des paramètres.
+Pour autoriser la lecture en boucle dans un instrument contenant des échantillons bouclés, sélectionner ![loop on][loop_on] dans la ligne correspondant au paramètre :guilabel:`Lecture en boucle` pour soit  :guilabel:`Global`, soit des colonnes individuelles dans la table des paramètres.
 
-* ![loop on](images/loop_on.png "loop on"){.inline} active la lecture en boucle,
-* ![loop off](images/loop_off.png "loop off"){.inline} ou une ligne vide la désactive.
-* ![loop on and end](images/loop_on_end.png "loop on and end"){.inline} active la lecture en boucle et lit le reste de l'échantillon une fois la touche relâchée.
+* ![loop on][loop_on] active la lecture en boucle,
+* ![loop off][loop_off] ou une ligne vide la désactive.
+* ![loop on and end][loop_on_end] active la lecture en boucle et lit le reste de l'échantillon une fois la touche relâchée.
 
 La division globale, comme son nom l'indique, vous permet d'entrer un paramètre qui sera valable pour l'instrument entier.
 Un paramètre global ne s'applique qu'aux divisions dont le même paramètre n'est pas spécifié.
@@ -160,3 +160,8 @@ Modifier les paramètres dans les ensembles peut ne pas être nécessaire étant
 * lors du lien entre un instrument et un ensemble, l'étendue de notes est automatiquement calculé en fonction de l'instrument.
 
 Dans le cadre de ce tutoriel, la création de la soundfont est terminée&nbsp;!
+
+
+[loop_on]:     images/loop_on.png     "loop on"         {.inline}
+[loop_off]:    images/loop_off.png    "loop off"        {.inline}
+[loop_on_end]: images/loop_on_end.png "loop on and end" {.inline}

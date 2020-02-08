@@ -39,7 +39,7 @@ To assign loop points manually:
 4. adjust the start and / or end of the loop, while the sample is playing, until the transition between the two positions is as smooth as possible.
 
 
-**Note:** to hear looping in an instrument, you must select ![loop on](images/loop_on.png "loop on"){.inline} in the :guilabel:`Loop playback` parameter row of either the Global or individual notes columns in the [Parameters Table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table). ![loop on](images/loop_on.png "loop on"){.inline} turns it On, ![loop off](images/loop_off.png "loop off"){.inline} or a blank turns it Off.
+**Note:** to hear looping in an instrument, you must select ![loop on][loop_on] in the :guilabel:`Loop playback` parameter row of either the Global or individual notes columns in the [Parameters Table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table). ![loop on][loop_on] turns it On, ![loop off][loop_off] or a blank turns it Off.
 
 
 ![Loop illustration](images/loop_illustration.png "Loop illustration")
@@ -106,11 +106,11 @@ The tool “[Sample auto-positioning](manual/soundfont-editor/tools/instrument-t
 ### Setting the divisions
 
 
-To enable the loop playing mode in an instrument containing looped samples, select ![loop on](images/loop_on.png "loop on"){.inline} in the :guilabel:`Loop playback` parameter row of either the :guilabel:`Global` or individual notes columns in the parameters table`.
+To enable the loop playing mode in an instrument containing looped samples, select ![loop on][loop_on] in the :guilabel:`Loop playback` parameter row of either the :guilabel:`Global` or individual notes columns in the parameters table`.
 
-* ![loop on](images/loop_on.png "loop on"){.inline} turns it On,
-* ![loop off](images/loop_off.png "loop off"){.inline} or a blank turns it Off.
-* ![loop on and end](images/loop_on_end.png "loop on and end"){.inline} turns the looping On and the rest of the sample is read after the key is released.
+* ![loop on][loop_on] turns it On,
+* ![loop off][loop_off] or a blank turns it Off.
+* ![loop on and end][loop_on_end] turns the looping On and the rest of the sample is read after the key is released.
 
 The global division, as its name suggests, allows you to enter a parameter for the entire instrument.
 A global parameter applies only to the divisions whose same parameter is not specified.
@@ -160,3 +160,8 @@ Changing the preset parameters may not be required since:
 * when adding an instrument to a preset the key range is automatically calculated according to the instrument.
 
 For the scope of this tutorial, the creation of a soundfont is finished!
+
+
+[loop_on]:     images/loop_on.png     "loop on"         {.inline}
+[loop_off]:    images/loop_off.png    "loop off"        {.inline}
+[loop_on_end]: images/loop_on_end.png "loop on and end" {.inline}

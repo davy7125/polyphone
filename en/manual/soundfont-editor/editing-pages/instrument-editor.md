@@ -41,9 +41,9 @@ The editable parameters are:
 * **Pan**\
   Balance applied to the sound, to hear it to the left or to the right in stereo.
 * **Loop playback**\
-  ![loop off](images/loop_off.png "loop off"){.inline} indicates a sound reproduced with no loop,
-  ![loop on](images/loop_on.png "loop on"){.inline} indicates a sound which loops continuously,
-  ![loop on and end](images/loop_on_end.png "loop on and end"){.inline} indicates a sound which loops for the duration of key depression and then proceeds to play the remainder of the sample.\
+  ![loop off][loop_off] indicates a sound reproduced with no loop,
+  ![loop on][loop_on] indicates a sound which loops continuously,
+  ![loop on and end][loop_on_end] indicates a sound which loops for the duration of key depression and then proceeds to play the remainder of the sample.\
   Note: The sf2 format had no plans for a special playback mode which triggers a sample when a key is released.
   One way to achieve this behavior is to double each sample with a sample containing a short silent loop followed by the sound to emit on the release.
   The added sample will be read with the playback parameter “loop on with end”.
@@ -203,3 +203,8 @@ Buttons on the left are made for:
 * copying / pasting / duplicating one or more modulators.
 
 When a modulator is added, the border of the corresponding cell in the table is thicker (see the tuning in the global column above).
+
+
+[loop_off]:    images/loop_off.png    "loop off"        {.inline}
+[loop_on]:     images/loop_on.png     "loop on"         {.inline}
+[loop_on_end]: images/loop_on_end.png "loop on and end" {.inline}

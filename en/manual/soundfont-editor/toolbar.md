@@ -14,20 +14,20 @@ The toolbar, located on the top of the editor, contains icons for:
 
 The elements in the left part of the toolbar are for common editing functions:
 
-* ![new sample](images/toolbar_sample.png "new sample"){.inline} **New sample**\
+* ![new sample][sample] **New sample**\
   Add new [samples](manual/soundfont-editor/editing-pages/sample-editor.md) to the soundfont.
   A dialog will be displayed for selecting audio files (:file:`.wav` and :file:`.flac` files can be imported).
-* ![new instrument](images/toolbar_instrument.png "new instrument"){.inline} **New instrument**\
+* ![new instrument][instrument] **New instrument**\
   Create a new [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md).
-* ![new preset](images/toolbar_preset.png "new preset"){.inline} **New preset**\
+* ![new preset][preset] **New preset**\
   Create a new [preset](manual/soundfont-editor/editing-pages/preset-editor.md).
-* ![tools](images/toolbar_toolbox.png "tools"){.inline} **Tools**\
+* ![tools][toolbox] **Tools**\
   Clicking on this button will show a menu containing all available [tools](manual/soundfont-editor/tools/index.md) for the selected element(s) in the [tree](manual/soundfont-editor/tree.md).
-* ![undo](images/toolbar_undo.png "undo"){.inline} **Undo**\
+* ![undo][undo] **Undo**\
   Undo the last modification.
-* ![redo](images/toolbar_redo.png "redo"){.inline} **Redo**\
+* ![redo][redo] **Redo**\
   Redo the last undone modification.
-* ![save](images/toolbar_save.png "save"){.inline} **Save file**\
+* ![save][save] **Save file**\
   Save the soundfont.
 
 
@@ -36,15 +36,15 @@ The elements in the left part of the toolbar are for common editing functions:
 
 In the right part of the toolbar, some icons may appear depending on which [editor](manual/soundfont-editor/editing-pages/index.md) is displayed:
 
-* switching between the ![table](images/toolbar_table.png "table"){.inline} [table view](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), the ![range](images/toolbar_range.png "range"){.inline} [range editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) and the ![envelope](images/toolbar_adsr.png "envelope"){.inline} [envelope editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) is possible when editing an instrument,
-* switching between the ![table](images/toolbar_table.png "table"){.inline} table view and the ![range](images/toolbar_range.png "range"){.inline} range editor is possible when editing a preset,
+* switching between the ![table][table] [table view](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), the ![range][range] [range editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) and the ![envelope][adsr] [envelope editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) is possible when editing an instrument,
+* switching between the ![table][table] table view and the ![range][range] range editor is possible when editing a preset,
 * nothing displayed otherwise.
 
 
 ## Recorder {#doc_recorder}
 
 
-When clicking on the icon ![recorder](images/toolbar_recorder.png "recorder"){.inline}, a window opens showing the recorder that can record the output of Polyphone.
+When clicking on the icon ![recorder][recorder], a window opens showing the recorder that can record the output of Polyphone.
 
 
 ![Recorder](images/recorder.png "Recorder")
@@ -69,7 +69,7 @@ The right button can also have two possible states (only accessible if the acqui
 ## Virtual keyboard {#doc_keyboard}
 
 
-When clicking on the icon [piano](images/toolbar_piano.png "piano"){.inline}, a window opens showing the virtual keyboard that has been made for testing samples, instruments and presets.
+When clicking on the icon ![piano][piano], a window opens showing the virtual keyboard that has been made for testing samples, instruments and presets.
 This window triggers MIDI signals:
 
 * **note on** / **note off** / **after touch** with the piano keyboard,
@@ -162,3 +162,17 @@ This area is made of different buttons:
 
 
 *[MIDI]: Musical Instrument Digital Interface
+
+
+[sample]:     images/toolbar_sample.png     "new sample"     {.inline}
+[instrument]: images/toolbar_instrument.png "new instrument" {.inline}
+[preset]:     images/toolbar_preset.png     "new preset"     {.inline}
+[toolbox]:    images/toolbar_toolbox.png    "tools"          {.inline}
+[undo]:       images/toolbar_undo.png       "undo"           {.inline}
+[redo]:       images/toolbar_redo.png       "redo"           {.inline}
+[save]:       images/toolbar_save.png       "save"           {.inline}
+[table]:      images/toolbar_table.png      "table"          {.inline}
+[range]:      images/toolbar_range.png      "range"          {.inline}
+[adsr]:       images/toolbar_adsr.png       "envelope"       {.inline}
+[recorder]:   images/toolbar_recorder.png   "recorder"       {.inline}
+[piano]:      images/toolbar_piano.png      "piano"          {.inline}

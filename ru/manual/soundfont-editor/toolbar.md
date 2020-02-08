@@ -6,7 +6,7 @@
 * отображения [виртуальной клавиатуры](#doc_keyboard).
 
 
-![анель инструментов](images/toolbar.png "анель инструментов")
+![Панель инструментов](images/toolbar.png "Панель инструментов")
 
 
 ## Функции редактирования {#doc_edit}
@@ -14,20 +14,20 @@
 
 Значки слева выполняют ходовые функции редактирования:
 
-* ![sample](images/toolbar_sample.png "sample"){.inline} **Новый семпл**\
+* ![sample][sample] **Новый семпл**\
   Добавить новые [семплы](manual/soundfont-editor/editing-pages/sample-editor.md) в SoundFont.
   Polyphone импортирует звуковые файлы в форматах :file:`.wav` и :file:`.flac`.
-* ![instrument](images/toolbar_instrument.png "instrument"){.inline} **Новый инструмент**\
+* ![instrument][instrument] **Новый инструмент**\
   Создать новый [инструмент](manual/soundfont-editor/editing-pages/instrument-editor.md).
-* ![preset](images/toolbar_preset.png "preset"){.inline} **Новый пресет**\
+* ![preset][preset] **Новый пресет**\
   Cоздать новый [пресет](manual/soundfont-editor/editing-pages/preset-editor.md).
-* ![tools](images/toolbar_toolbox.png "tools"){.inline} **Средства**\
+* ![tools][toolbox] **Средства**\
   В этом меню перечисляются [средства](manual/soundfont-editor/tools/index.md), доступные для выбранных в [дереве](manual/soundfont-editor/tree.md) элементов.
-* ![undo](images/toolbar_undo.png "undo"){.inline} **Отменить**\
+* ![undo][undo] **Отменить**\
   Отменить последние изменения.
-* ![redo](images/toolbar_redo.png "redo"){.inline} **Повторить**\
+* ![redo][redo] **Повторить**\
   Повторить последние отменённые изменения.
-* ![save](images/toolbar_save.png "save"){.inline} **Сохранить файл**\
+* ![save][save] **Сохранить файл**\
   Сохранить SoundFont.
 
 
@@ -36,15 +36,15 @@
 
 Значки справа переключают представление информации в зависимости от редактора](manual/soundfont-editor/editing-pages/index.md):
 
-* при редактировании инструмента переключайтесь между ![table](images/toolbar_table.png "table"){.inline} [табличным видом](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), ![range](images/toolbar_range.png "range"){.inline} [редактором диапазонов](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) и ![envelope](images/toolbar_adsr.png "envelope"){.inline} [редактором огибающей](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope),
-* при редактировании пресета переключайтесь между ![table](images/toolbar_table.png "table"){.inline} табличным видом и ![range](images/toolbar_range.png "range"){.inline} редактором диапазонов,
+* при редактировании инструмента переключайтесь между ![table][table] [табличным видом](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), ![range][range] [редактором диапазонов](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) и ![envelope][adsr] [редактором огибающей](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope),
+* при редактировании пресета переключайтесь между ![table][table] табличным видом и ![range][range] редактором диапазонов,
 * иначе ничего не отображается.
 
 
 ## Рекордер {#doc_recorder}
 
 
-При нажатии на значок ![recorder](images/toolbar_recorder.png "recorder"){.inline} открывается рекордер, который записывает звук на выходе Polyphone.
+При нажатии на значок ![recorder][recorder] открывается рекордер, который записывает звук на выходе Polyphone.
 
 
 ![Рекордер](images/recorder.png "Рекордер")
@@ -69,7 +69,7 @@
 ## Виртуальная клавиатура {#doc_keyboard}
 
 
-При нажатии на значок ![piano](images/toolbar_piano.png "piano"){.inline} открывается виртуальная клавиатура, которая предназначена для тестирования семплов, инструментов и пресетов.
+При нажатии на значок ![piano][piano] открывается виртуальная клавиатура, которая предназначена для тестирования семплов, инструментов и пресетов.
 Клавиатура посылает MIDI-сигналы:
 
 * **нота вкл.** / **нота выкл.** / **послекасание** при помощи клавиш фортепиано,
@@ -162,3 +162,17 @@
 
 
 *[MIDI]: Musical Instrument Digital Interface
+
+
+[sample]:     images/toolbar_sample.png     "new sample"     {.inline}
+[instrument]: images/toolbar_instrument.png "new instrument" {.inline}
+[preset]:     images/toolbar_preset.png     "new preset"     {.inline}
+[toolbox]:    images/toolbar_toolbox.png    "tools"          {.inline}
+[undo]:       images/toolbar_undo.png       "undo"           {.inline}
+[redo]:       images/toolbar_redo.png       "redo"           {.inline}
+[save]:       images/toolbar_save.png       "save"           {.inline}
+[table]:      images/toolbar_table.png      "table"          {.inline}
+[range]:      images/toolbar_range.png      "range"          {.inline}
+[adsr]:       images/toolbar_adsr.png       "envelope"       {.inline}
+[recorder]:   images/toolbar_recorder.png   "recorder"       {.inline}
+[piano]:      images/toolbar_piano.png      "piano"          {.inline}
