@@ -116,17 +116,21 @@ The player plays the sound.
 During playback, a white cursor runs across the graph to indicate the playback position.
 Playback options are:
 
-* **Loop**\
-  Plays the sound loop if the beginning and end of the loop are completed.
-* **Stereo**\
-  Plays the sample in stereo, with its linked sample.
+
+Loop
+: Plays the sound loop if the beginning and end of the loop are completed.
+
+Stereo
+: Plays the sample in stereo, with its linked sample.
   If looping is required, the two respective loops are used (they can be different).
-* **Sinus**\
-  A sinus calibration is added to the sound, allowing a sample tuning to the nearest pitch hundredth.
+
+Sinus
+: A sinus calibration is added to the sound, allowing a sample tuning to the nearest pitch hundredth.
   At first the root key must be filled.
   At this level, beats can be heard if the frequency of the sinus differs slightly from the fundamental frequency of the sound.
   It remains to finely adjust the correction to make the beats as slow as possible, so that the sample is tuned at best.
   See the tutorial “[How to prepare a sample](tutorials/how-to-prepare-a-sample.md)” for more information.
+
 
 If a playback is in progress when switching from one sample to another through the [tree](manual/soundfont-editor/tree.md), it automatically restarts.
 Also, pressing the key :kbd:`space` enables or disables playback if we are navigating in the tree.

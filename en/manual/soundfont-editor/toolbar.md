@@ -14,21 +14,28 @@ The toolbar, located on the top of the editor, contains icons for:
 
 The elements in the left part of the toolbar are for common editing functions:
 
-* ![new sample][sample] **New sample**\
-  Add new [samples](manual/soundfont-editor/editing-pages/sample-editor.md) to the soundfont.
+
+![new sample][sample] New sample
+: Add new [samples](manual/soundfont-editor/editing-pages/sample-editor.md) to the soundfont.
   A dialog will be displayed for selecting audio files (:file:`.wav` and :file:`.flac` files can be imported).
-* ![new instrument][instrument] **New instrument**\
-  Create a new [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md).
-* ![new preset][preset] **New preset**\
-  Create a new [preset](manual/soundfont-editor/editing-pages/preset-editor.md).
-* ![tools][toolbox] **Tools**\
-  Clicking on this button will show a menu containing all available [tools](manual/soundfont-editor/tools/index.md) for the selected element(s) in the [tree](manual/soundfont-editor/tree.md).
-* ![undo][undo] **Undo**\
-  Undo the last modification.
-* ![redo][redo] **Redo**\
-  Redo the last undone modification.
-* ![save][save] **Save file**\
-  Save the soundfont.
+
+![new instrument][instrument] New instrument
+: Create a new [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md).
+
+![new preset][preset] New preset
+: Create a new [preset](manual/soundfont-editor/editing-pages/preset-editor.md).
+
+![tools][toolbox] Tools
+: Clicking on this button will show a menu containing all available [tools](manual/soundfont-editor/tools/index.md) for the selected element(s) in the [tree](manual/soundfont-editor/tree.md).
+
+![undo][undo] Undo
+: Undo the last modification.
+
+![redo][redo] Redo
+: Redo the last undone modification.
+
+![save][save] Save file
+: Save the soundfont.
 
 
 ## Switch view {#doc_view}
@@ -52,18 +59,23 @@ When clicking on the icon ![recorder][recorder], a window opens showing the reco
 
 The left button can have two possible states:
 
-* **Record**\
-  Start a new record if the acquisition is off.
+
+Record
+: Start a new record if the acquisition is off.
   It is possible here to specify the file name in which the audio signal is to be recorded.
-* **Stop**\
-  Stop the current acquisition.
+
+Stop
+: Stop the current acquisition.
+
 
 The right button can also have two possible states (only accessible if the acquisition is on):
 
-* **Pause**\
-  Pause the current acquisition.
-* **Resume**\
-  Resume the current acquisition.
+
+Pause
+: Pause the current acquisition.
+
+Resume
+: Resume the current acquisition.
 
 
 ## Virtual keyboard {#doc_keyboard}
@@ -85,14 +97,17 @@ This window triggers MIDI signals:
 The piano keyboard triggers signals that contains key and velocity numbers.
 It can be controlled in three ways:
 
-* **with the mouse**\
-  The desired key may be clicked by the mouse.
+
+with the mouse
+: The desired key may be clicked by the mouse.
   The velocity is defined according to the vertical position of the click.
   After a click, following moves within the same key will trigger aftertouch signals.
-* **using the computer keyboard**\
-  The keys used are defined in the [settings](manual/settings.md#doc_keyboard).
-* **using an external MIDI keyboard**\
-  The MIDI input is defined in the [settings](manual/settings.md#doc_general).
+
+using the computer keyboard
+: The keys used are defined in the [settings](manual/settings.md#doc_keyboard).
+
+using an external MIDI keyboard
+: The MIDI input is defined in the [settings](manual/settings.md#doc_general).
   If the piano keyboard is visible, it will show what you are playing.
 
 
@@ -112,22 +127,22 @@ It can be controlled in three ways:
 #### Useful shortcuts
 
 
-* :kbd:`Ctrl`+:kbd:`K`\
-  This shortcut can put at any time the focus on the virtual keyboard.
+:kbd:`Ctrl`+:kbd:`K`
+: This shortcut can put at any time the focus on the virtual keyboard.
   This allows, while editing in a table for instance, to use the computer to play instead of edit a cell.
   A glow effect on the virtual keyboard confirms that the focus is on it.
 
-* :kbd:`Ctrl`+:kbd:`1`, :kbd:`Ctrl`+:kbd:`2`, … :kbd:`Ctrl`+:kbd:`8`\
-  These shortcuts change the octaves played with the computer keyboard.
+:kbd:`Ctrl`+:kbd:`1`, :kbd:`Ctrl`+:kbd:`2`, … :kbd:`Ctrl`+:kbd:`8`
+: These shortcuts change the octaves played with the computer keyboard.
   After the use of :kbd:`Ctrl`+:kbd:`1`, the lowest octave can be played.
   The highest octave is reached using :kbd:`Ctrl`+:kbd:`8`.
 
-* :kbd:`→` / :kbd:`←`\
-  The right or left arrow will play the pitch just next or below the last key that has been played, with the same velocity.
+:kbd:`→` / :kbd:`←`
+: The right or left arrow will play the pitch just next or below the last key that has been played, with the same velocity.
   The association of the key :kbd:`Shift` skips keys.
 
-* :kbd:`↑` / :kbd:`↓`\
-  The up or down arrow will play the same pitch than the last key played, but with a stronger or weaker velocity.
+:kbd:`↑` / :kbd:`↓`
+: The up or down arrow will play the same pitch than the last key played, but with a stronger or weaker velocity.
   The association of the key :kbd:`Shift` skips velocities.
 
 
@@ -143,20 +158,25 @@ If you are playing with modulators, it is advised that you use these features to
 
 This area is made of different buttons:
 
-* **Pitch wheel**\
-  The pitch wheel increases or decreases the pitch.
+
+Pitch wheel
+: The pitch wheel increases or decreases the pitch.
   It goes back automatically to the original position 0.
-* **Sensitivity**\
-  The sensitivity defines the modification range in semi-tones of the pitch wheel.
+
+Sensitivity
+: The sensitivity defines the modification range in semi-tones of the pitch wheel.
   By default this is 2 (one full tone).
-* **Pressure**\
-  The pressure is the amount of pressure on the keyboard.
+
+Pressure
+: The pressure is the amount of pressure on the keyboard.
   It can be compared to the aftertouch but while the aftertouch is key-specific, the pressure is a global signal for all keys.
-* **Knobs**\
-  3 knobs are here so that MIDI controller values can be changed.
+
+Knobs
+: 3 knobs are here so that MIDI controller values can be changed.
   For each knob you can specify a controller number and then its value.
-* **On / off led**\
-  This led is to set a MIDI controller value to 0 or 127 (useful for the sustain pedal for instance).
+
+On / off led
+: This led is to set a MIDI controller value to 0 or 127 (useful for the sustain pedal for instance).
   It is like a knob but with only two possible values.
 
 

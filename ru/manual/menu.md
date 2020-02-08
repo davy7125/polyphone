@@ -7,25 +7,28 @@
 ## Запуск редактора SoundFont {#doc_open}
 
 
-* **Создать**\
-  Создать новый файл .sf2 с нуля.
+Создать
+: Создать новый файл .sf2 с нуля.
   Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`N`.
-* **Открыть**\
-  Открыть файл [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) или [.sfark](manual/annexes/the-different-soundfont-formats.md#doc_sfark).
+
+Открыть
+: Открыть файл [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) или [.sfark](manual/annexes/the-different-soundfont-formats.md#doc_sfark).
   Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`O`.
 
 
 ## Сохранение SoundFont {#doc_save}
 
 
-* **Сохранить**\
-  Сохранить текущий файл.
+Сохранить
+: Сохранить текущий файл.
   Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`S`.
-* **Сохранить как**\
-  Сохранить текущий файл под другим именем.
+
+Сохранить как
+: Сохранить текущий файл под другим именем.
   Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`S`.
-* **Экспортировать**\
-  Экспортировать и объединить один или несколько пресетов из открытых SoundFont в формат [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) или [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz).
+
+Экспортировать
+: Экспортировать и объединить один или несколько пресетов из открытых SoundFont в формат [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) или [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz).
   Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`E`.
 
 
@@ -35,29 +38,32 @@
 ## Варианты просмотра {#doc_view}
 
 
-* **На весь экран**\
-  Переключить в полноэкранный режим.
+На весь экран
+: Переключить в полноэкранный режим.
   Также доступно при нажатии клавиши :kbd:`F11`.
 
 
 ## Быстрый доступ {#doc_shortcuts}
 
 
-* **Настройки**\
-  Открыть [настройки](manual/settings.md) программы.
-* **Документация**\
-  Показать это руководство пользователя в веб-браузере.
+Настройки
+: Открыть [настройки](manual/settings.md) программы.
+
+Документация
+: Показать это руководство пользователя в веб-браузере.
   Также доступно при нажатии клавиши :kbd:`F1`.
-* **О программе Polyphone…**\
-  Показать версию программы и список людей, которые внесли свой вклад в проект.
+
+О программе Polyphone…
+: Показать версию программы и список людей, которые внесли свой вклад в проект.
 
 
 ## Завершение работы {#doc_close}
 
 
-* **Закрыть файл**\
-  Закрыть текущий файл.
+Закрыть файл
+: Закрыть текущий файл.
   Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`W`.
-* **Выход**\
-  Выйти из программы.
+
+Выход
+: Выйти из программы.
   Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`Q`.
