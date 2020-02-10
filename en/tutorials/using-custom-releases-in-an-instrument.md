@@ -71,7 +71,7 @@ Create a second instrument for the release comprising the release samples with a
 Configure it this way:
 
 * choose the option :guilabel:`loop + release` in :guilabel:`loop playback` (3rd choice),
-* select a high number such as 100 seconds in the :guilabel:`Vol env release (s)` so that the release is not attenuated,
+* select a high number such as 100 seconds in the :guilabel:`Vol env release (s)` parameter so that the release is not attenuated,
 * determine approximately the duration of the attack in the first sample and use this value in the volume envelop attack.
 
 Now you have an instrument remaining silent as long as you don't release a key, and then you can hear the release phase.
@@ -94,7 +94,7 @@ The result with the example files is <a href="downloads/tutorials/custom%20relea
 
 You can listen here the differences between:
 
-* a <a href="downloads/tutorials/classic-release.mp3" download>classical realease</a>
+* a <a href="downloads/tutorials/classic-release.mp3" download>classical release</a>
 
 ![](downloads/tutorials/classic-release.mp3)
 

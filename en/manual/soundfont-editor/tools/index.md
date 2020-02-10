@@ -39,4 +39,4 @@ When one or more instruments (including the divisions) are selected in the [tree
 When one or more presets (including the divisions) are selected in the [tree](manual/soundfont-editor/tree.md), the tool menu is filled with [preset tools](manual/soundfont-editor/tools/preset-tools.md).
 
 
-![ Tool menu showing preset tools](images/tool_menu_preset.png " Tool menu showing preset tools")
+![Tool menu showing preset tools](images/tool_menu_preset.png "Tool menu showing preset tools")
