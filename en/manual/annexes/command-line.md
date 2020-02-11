@@ -1,6 +1,6 @@
 Polyphone can be run with a command line to convert soundfonts in the format [sf2](#doc_sf2), [sf3](#doc_sf3) or [sfz](#doc_sfz).
 
-Supported file formats for the conversion are [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) and [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark).
+Supported file formats for the conversion are [sf2], [sf3], [sfz] and [sfArk].
 
 
 ## Conversion to sf2 {#doc_sf2}
@@ -13,7 +13,9 @@ Supported file formats for the conversion are [sf2](manual/annexes/the-different
 polyphone -1 -i <file/to/convert> -d <output/directory> -o <output/file/name>
 ```
 
+<!-- note begin -->
 **Note:** with Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.
+<!-- note end -->
 
 
 ### Arguments
@@ -47,7 +49,9 @@ polyphone -1 -i /path/to/file.sfArk
 polyphone -2 -i <file/to/convert> -d <output/directory> -o <output/file/name> -c [config]
 ```
 
+<!-- note begin -->
 **Note:** with Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.
+<!-- note end -->
 
 
 ### Arguments
@@ -85,7 +89,9 @@ polyphone -2 -i /path/to/file.sf2 -c 2
 polyphone -3 -i <file/to/convert> -d <output/directory> -o <output/file/name> -c [config]
 ```
 
+<!-- note begin -->
 **Note:** with Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.
+<!-- note end -->
 
 
 ### Arguments
@@ -110,3 +116,9 @@ polyphone -3 -i <file/to/convert> -d <output/directory> -o <output/file/name> -c
 ```
 polyphone -3 -i /path/to/file.sf3 -c 011
 ```
+
+
+[sf2]:   manual/annexes/the-different-soundfont-formats.md#doc_sf2
+[sf3]:   manual/annexes/the-different-soundfont-formats.md#doc_sf3
+[sfArk]: manual/annexes/the-different-soundfont-formats.md#doc_sfark
+[sfz]:   manual/annexes/the-different-soundfont-formats.md#doc_sfz

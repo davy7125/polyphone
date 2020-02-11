@@ -1,4 +1,4 @@
-When clicking on one or more sample(s) in the [tree](manual/soundfont-editor/tree.md), the editing page of the samples appears.
+When clicking on one or more sample(s) in the [tree], the editing page of the samples appears.
 
 This page is divided into several parts:
 
@@ -55,7 +55,7 @@ Once an area is defined, a dialog appears to ask for a confirmation before cutti
 ### Colors of the graph
 
 
-Graph colors are editable in the software [preferences](manual/settings.md#doc_interface).
+Graph colors are editable in the software [preferences][settings-interface].
 
 
 ## Section “Information” {#doc_info}
@@ -74,8 +74,8 @@ In addition, the sample size in samples (number of values) and seconds is shown.
 A button automatically edits the start and end of the loop so that the loop is the entire sample.
 Another button automatically edits the root key and the correction so that they match with the evaluation of the [frequency](#doc_freq).
 
-Any change on a stereo sample may be applied on the linked sample if the option :guilabel:`Stereo editing` is ticked in the [preferences](manual/settings.md#doc_general).
-Via a multiple selection in the [tree](manual/soundfont-editor/tree.md), several samples may be edited simultaneously.
+Any change on a stereo sample may be applied on the linked sample if the option :guilabel:`Stereo editing` is ticked in the [preferences][settings-general].
+Via a multiple selection in the [tree], several samples may be edited simultaneously.
 
 
 ## Frequency analysis {#doc_freq}
@@ -93,7 +93,7 @@ From these data an estimate of the pitch of the sound is made.
 This estimate can be used for tuning.
 
 An export of the graph into a png image is possible by using the contextual menu of the graph (right click).
-A [tool](manual/soundfont-editor/tools/sample-tools.md#doc_peakfrequencies) is also available to export peak information of all samples.
+A [tool][s-tool-peak] is also available to export peak information of all samples.
 
 
 ![Fourier graph](images/fourier_graph.png "Fourier graph")
@@ -104,9 +104,9 @@ A [tool](manual/soundfont-editor/tools/sample-tools.md#doc_peakfrequencies) is a
 
 The equalizer makes it possible to increase or decrease some frequencies, from -15 to 15 dB.
 It is possible to listen to the effect with the option :guilabel:`preview` enabled and then definitely apply the effect by pressing the :guilabel:`Apply` button.
-Pressing :guilabel:`reset` resets all the buttons to 0 dB (but does not remove the effect on the sound: for that use the :guilabel:`undo` button in the [toolbar](manual/soundfont-editor/toolbar.md#doc_edit)).
+Pressing :guilabel:`reset` resets all the buttons to 0 dB (but does not remove the effect on the sound: for that use the :guilabel:`undo` button in the [toolbar][toolbar-edit]).
 
-Any change on a stereo sample may be automatically applied on the linked sample if the option is checked in the [preferences](manual/settings.md#doc_general).
+Any change on a stereo sample may be automatically applied on the linked sample if the option is checked in the [preferences][settings-general].
 
 
 ## Player {#doc_player}
@@ -129,8 +129,16 @@ Sinus
   At first the root key must be filled.
   At this level, beats can be heard if the frequency of the sinus differs slightly from the fundamental frequency of the sound.
   It remains to finely adjust the correction to make the beats as slow as possible, so that the sample is tuned at best.
-  See the tutorial “[How to prepare a sample](tutorials/how-to-prepare-a-sample.md)” for more information.
+  See the tutorial “[How to prepare a sample][howto-sample]” for more information.
 
 
-If a playback is in progress when switching from one sample to another through the [tree](manual/soundfont-editor/tree.md), it automatically restarts.
+If a playback is in progress when switching from one sample to another through the [tree], it automatically restarts.
 Also, pressing the key :kbd:`space` enables or disables playback if we are navigating in the tree.
+
+
+[howto-sample]:       tutorials/how-to-prepare-a-sample.md
+[s-tool-peak]:        manual/soundfont-editor/tools/sample-tools.md#doc_peakfrequencies
+[settings-general]:   manual/settings.md#doc_general
+[settings-interface]: manual/settings.md#doc_interface
+[toolbar-edit]:       manual/soundfont-editor/toolbar.md#doc_edit
+[tree]:               manual/soundfont-editor/tree.md

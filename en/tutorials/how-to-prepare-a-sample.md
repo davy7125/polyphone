@@ -71,10 +71,11 @@ Try the next records to see the difference between a bad and a good loop:
 
 ![](downloads/tutorials/good-loop.mp3)
 
-
-**Note:** A tool exists to “cheat” if you cannot find a loop easily: the [auto-loop](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) tool.
+<!-- note begin -->
+**Note:** A tool exists to “cheat” if you cannot find a loop easily: the [auto-loop][s-tool-autoloop] tool.
 It will automatically create a loop by cutting the sample and superimposing two sections, so that the end of the section will exactly match its beginning.
 See the related documentation for more information.
+<!-- note end -->
 
 
 ## Tuning
@@ -113,8 +114,9 @@ Here are examples containing the sound of a flute and a calibration sinus:
 
 ![](downloads/tutorials/good-tune.mp3)
 
-
-**Note:** The [frequency analysis](manual/soundfont-editor/editing-pages/sample-editor.md#doc_fred) can be a good indicator to start tuning. But keep in mind that no algorithm is perfect for this task and only your ears will find the right tune.
+<!-- note begin -->
+**Note:** The [frequency analysis][s-editor-freq] can be a good indicator to start tuning. But keep in mind that no algorithm is perfect for this task and only your ears will find the right tune.
+<!-- note end -->
 
 
 ![Tune sample: frequency analysis](images/tune-sample-3.png "Tune sample: frequency analysis")
@@ -126,11 +128,11 @@ Here are examples containing the sound of a flute and a calibration sinus:
 Several tools are available in the menu :guilabel:`Tools`.
 You can edit samples by:
 
-* [removing blank](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) at start,
-* [equalizing](manual/soundfont-editor/tools/sample-tools.md#doc_eq) the sound,
-* [transposing](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
-* [normalizing](manual/soundfont-editor/tools/sample-tools.md#doc_volume) the volume,
-* [adjusting the balance](manual/soundfont-editor/tools/sample-tools.md#doc_balance) for stereo samples.
+* [removing blank][s-tool-removeblank] at start,
+* [equalizing][s-tool-eq] the sound,
+* [transposing][s-tool-transpose],
+* [normalizing][s-tool-volume] the volume,
+* [adjusting the balance][s-tool-balance] for stereo samples.
 
 
 ## Note on the stereo samples
@@ -146,3 +148,12 @@ The link is stored in the information of a sample.
 Managing two mono samples may add difficulty to loop them because a loop can sound fine for one side and not for the other.
 In that case, don't hesitate to cheat by configuring two different loops on the right and left side.
 The quality of the sound will not be impaired.
+
+
+[s-editor-freq]:      manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq
+[s-tool-autoloop]:    manual/soundfont-editor/tools/sample-tools.md#doc_autoloop
+[s-tool-balance]:     manual/soundfont-editor/tools/sample-tools.md#doc_balance
+[s-tool-eq]:          manual/soundfont-editor/tools/sample-tools.md#doc_eq
+[s-tool-removeblank]: manual/soundfont-editor/tools/sample-tools.md#doc_removeblank
+[s-tool-transpose]:   manual/soundfont-editor/tools/sample-tools.md#doc_transpose
+[s-tool-volume]:      manual/soundfont-editor/tools/sample-tools.md#doc_volume

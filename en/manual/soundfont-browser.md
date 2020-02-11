@@ -5,7 +5,7 @@ It allows you, directly in Polyphone, to download, test and possibly re-use soun
 ## Browsing soundfonts {#doc_browse}
 
 
-To open the soundfont browser, click on :guilabel:`Online repository` or write a keyword on the [home screen](manual/index.md).
+To open the soundfont browser, click on :guilabel:`Online repository` or write a keyword on the [home screen][home-screen].
 Once the soundfont browser is open in a new tab, it is possible to search, sort and filter the results.
 
 
@@ -71,9 +71,9 @@ Tags
 ## Soundfont description {#doc_description}
 
 
-Opening a soundfont description can be made with a double-click on a cell in the :guilabel:`Daily soundfonts` of the [home screen](manual/index.md#doc_right) or in the [soundfont browser](#doc_browse).
+Opening a soundfont description can be made with a double-click on a cell in the :guilabel:`Daily soundfonts` of the [home screen][home-right] or in the [soundfont browser](#doc_browse).
 A Premium account is required for soundfonts that are not in the :guilabel:`Daily soundfonts`.
-Connecting Polyphone to your account is possible in the [settings](manual/settings.md#doc_repository) of the software.
+Connecting Polyphone to your account is possible in the [settings][settings-repo] of the software.
 
 
 ![Description page of a soundfont](images/soundfont_browser_description.png "Description page of a soundfont")
@@ -91,10 +91,16 @@ The description of a soundfont is made of:
 
 For downloading a file, click on the icon :guilabel:`download` next to its file name in the section :guilabel:`Downloads`.
 You will see the download progress in a menu next to the main menu, at the top right corner of the software.
-Once a file is downloaded and if the file is a soundfont, it is possible to open it in a [soundfont editor](manual/soundfont-editor/index.md) by clicking on the icon :guilabel:`open`.
+Once a file is downloaded and if the file is a soundfont, it is possible to open it in a [soundfont editor][sf-editor] by clicking on the icon :guilabel:`open`.
 
 It is possible from the menu to clear the completed downloads.
 If everything is cleared, the download menu disappears.
 
 
 ![Dowloading soundfonts](images/soundfont_browser_download.png "Dowloading soundfonts")
+
+
+[home-right]:    manual/index.md#doc_right
+[home-screen]:   manual/index.md
+[settings-repo]: manual/settings.md#doc_repository
+[sf-editor]:     manual/soundfont-editor/index.md

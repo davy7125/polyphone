@@ -1,5 +1,5 @@
 The configuration summaries provide an overview of all elements contained in a soundfont.
-They are accessible via the headers :guilabel:`Samples`, :guilabel:`Instruments` and :guilabel:`Presets` in the [tree](manual/soundfont-editor/tree.md), and allow the visualization of their corresponding elements.
+They are accessible via the headers :guilabel:`Samples`, :guilabel:`Instruments` and :guilabel:`Presets` in the [tree], and allow the visualization of their corresponding elements.
 
 Information gathered in these pages can be used to support inspections within large soundfonts.
 
@@ -7,7 +7,7 @@ Information gathered in these pages can be used to support inspections within la
 ## Samples {#doc_sample}
 
 
-When clicking on the :guilabel:`Samples` header of a soundfont in the [tree](manual/soundfont-editor/tree.md), the sample configuration summary appears.
+When clicking on the :guilabel:`Samples` header of a soundfont in the [tree], the sample configuration summary appears.
 
 
 ![Sample configuration summary](images/conf_summary_sample.png "Sample configuration summary")
@@ -25,7 +25,7 @@ For each sample, this page allows for example to perform the following checks:
 ## Instruments {#doc_instrument}
 
 
-When clicking on the :guilabel:`Instruments` header of a soundfont in the [tree](manual/soundfont-editor/tree.md), the instrument configuration summary appears.
+When clicking on the :guilabel:`Instruments` header of a soundfont in the [tree], the instrument configuration summary appears.
 
 
 ![Instrument configuration summary](images/conf_summary_instrument.png "Instrument configuration summary")
@@ -44,7 +44,7 @@ For each instrument, this page allows for example to perform the following check
 ## Presets {#doc_preset}
 
 
-When clicking on the :guilabel:`Presets` header of a soundfont in the [tree](manual/soundfont-editor/tree.md), the preset configuration summary appears.
+When clicking on the :guilabel:`Presets` header of a soundfont in the [tree], the preset configuration summary appears.
 
 
 ![Preset configuration summary](images/conf_summary_preset.png "Preset configuration summary")
@@ -57,3 +57,6 @@ For each preset, this page allows for example to perform the following checks:
 * Are the key and velocity ranges correct?
 * Have the instruments been accurately attenuated?
 * Have the chorus and reverb settings (as offset) not been forgotten?
+
+
+[tree]: manual/soundfont-editor/tree.md

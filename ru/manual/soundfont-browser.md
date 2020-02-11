@@ -5,7 +5,7 @@
 ## Обзор SoundFont {#doc_browse}
 
 
-Чтобы открыть браузер SoundFont, щёлкните по кнопке :guilabel:`Онлайн-хранилище` или введите ключевое слово на [главном экране](manual/index.md).
+Чтобы открыть браузер SoundFont, щёлкните по кнопке :guilabel:`Онлайн-хранилище` или введите ключевое слово на [главном экране][home-screen].
 Как только браузер SoundFont откроется в новой вкладке, можно искать, сортировать и фильтровать результаты.
 
 
@@ -72,9 +72,9 @@
 ## Описание SoundFont {#doc_description}
 
 
-Чтобы открыть описание SoundFont, нужно выполнить двойной щелчок по ячейке в :guilabel:`Ежедневных SoundFont` на [главном экране](manual/index.md#doc_right) или в [браузере SoundFont](#doc_browse).
+Чтобы открыть описание SoundFont, нужно выполнить двойной щелчок по ячейке в :guilabel:`Ежедневных SoundFont` на [главном экране][home-right] или в [браузере SoundFont](#doc_browse).
 Чтобы открыть SoundFont не из :guilabel:`Ежедневных SoundFont`, требуется учётная запись Премиум.
-Подключение Polyphone к вашей учётной записи производится в [настройках](manual/settings.md#doc_repository) программы.
+Подключение Polyphone к вашей учётной записи производится в [настройках][settings-repo] программы.
 
 
 ![Страница описания SoundFont](images/soundfont_browser_description.png "Страница описания SoundFont")
@@ -92,10 +92,16 @@
 
 Для загрузки файла нажмите на значок :guilabel:`Загрузка` рядом с его именем в разделе :guilabel:`Загрузки`.
 Вы увидите прогресс загрузки в меню рядом с главным меню, в верхнем правом углу программы.
-Как только файл будет загружен, и если он является SoundFont, его можно открыть в [редакторе SoundFont](manual/soundfont-editor/index.md), щелкнув значок :guilabel:`Открыть`.
+Как только файл будет загружен, и если он является SoundFont, его можно открыть в [редакторе SoundFont][sf-editor], щелкнув значок :guilabel:`Открыть`.
 
 Из этого меню можно убрать завершённые загрузки.
 Когда всё убрано, меню загрузки исчезает.
 
 
 ![Загрузка файлов SoundFont](images/soundfont_browser_download.png "Загрузка файлов SoundFont")
+
+
+[home-right]:    manual/index.md#doc_right
+[home-screen]:   manual/index.md
+[settings-repo]: manual/settings.md#doc_repository
+[sf-editor]:     manual/soundfont-editor/index.md

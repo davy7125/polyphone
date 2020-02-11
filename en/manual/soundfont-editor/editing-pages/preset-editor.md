@@ -1,10 +1,10 @@
-When clicking on one or more preset(s) in the [tree](manual/soundfont-editor/tree.md), the editing page of presets appears.
-A preset is a combination of one or more instruments and is the element visible from outside a [soundfont](manual/annexes/the-different-soundfont-formats.md#doc_sf2).
+When clicking on one or more preset(s) in the [tree], the editing page of presets appears.
+A preset is a combination of one or more instruments and is the element visible from outside a [soundfont][sf2].
 
-Similarly to the [instrument editor](manual/soundfont-editor/editing-pages/instrument-editor.md), several parts are present:
+Similarly to the [instrument editor][i-editor], several parts are present:
 
 * the table,
-* the range editor when the button :guilabel:`Edit ranges` of the [toolbar](manual/soundfont-editor/toolbar.md#doc_view) is clicked,
+* the range editor when the button :guilabel:`Edit ranges` of the [toolbar][toolbar-view] is clicked,
 * the modulator section.
 
 
@@ -34,3 +34,9 @@ A preset is identified by a preset number and bank number, this combination bein
 Each bank comprises 127 presets.
 
 The last bank (128) is usually used for percussion kits.
+
+
+[i-editor]:     manual/soundfont-editor/editing-pages/instrument-editor.md
+[sf2]:          manual/annexes/the-different-soundfont-formats.md#doc_sf2
+[toolbar-view]: manual/soundfont-editor/toolbar.md#doc_view
+[tree]:         manual/soundfont-editor/tree.md

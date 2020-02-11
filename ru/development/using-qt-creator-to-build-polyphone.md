@@ -45,6 +45,7 @@ DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 Затем настройте проект.
 
+
 ![Настройка проекта](images/configure-project.png "Настройка проекта")
 
 
@@ -79,10 +80,12 @@ DEFINES += USE_LOCAL_QCUSTOMPLOT
 ## Отладка
 
 
-Просмотрите эту [тему](forum/polyphone/support-bug-reports), если вам нужна дополнительная информация или помощь.
+Просмотрите эту [тему][topic], если вам нужна дополнительная информация или помощь.
 
 <p class="endpage">Отдельное спасибо <a href="dashboard/820-tomotello">Tomotello</a> за эту статью.</p>
 
 
 [download]:  download                              {target=_blank}
-[polyphone]: https://github.com/davy7125/polyphone {target=_blank}
+[polyphone]: https://github.com/davy7125/polyphone {target=_blank rel=noopener}
+
+[topic]: forum/polyphone/support-bug-reports

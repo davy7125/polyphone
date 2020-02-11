@@ -12,7 +12,7 @@ New
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`N`.
 
 Open
-: Open an [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) or [.sfark](manual/annexes/the-different-soundfont-formats.md#doc_sfark) file.
+: Open an [.sf2][sf2], [.sf3][sf3], [.sfz][sfz] or [.sfark][sfark] file.
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`O`.
 
 
@@ -28,7 +28,7 @@ Save as
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`S`.
 
 Export
-: Export and merge one or several presets from the open soundfonts in the [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) or [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) format.
+: Export and merge one or several presets from the open soundfonts in the [.sf2][sf2], [.sf3][sf3] or [.sfz][sfz] format.
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`E`.
 
 
@@ -47,7 +47,7 @@ Full screen
 
 
 Settings
-: Open the software [settings](manual/settings.md).
+: Open the software [settings].
 
 Online manual
 : Show this user manual in a web browser.
@@ -67,3 +67,10 @@ Close file
 Quit
 : Quit the software.
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`Q`.
+
+
+[settings]: manual/settings.md
+[sf2]:      manual/annexes/the-different-soundfont-formats.md#doc_sf2
+[sf3]:      manual/annexes/the-different-soundfont-formats.md#doc_sf3
+[sfark]:    manual/annexes/the-different-soundfont-formats.md#doc_sfark
+[sfz]:      manual/annexes/the-different-soundfont-formats.md#doc_sfz

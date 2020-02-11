@@ -6,6 +6,12 @@
 
 Редактор SoundFont состоит из:
 
-* [дерева](manual/soundfont-editor/tree.md) в левой части, которое отражает архитектуру SoundFont;
-* [панели инструментов](manual/soundfont-editor/toolbar.md) в верхней части;
-* главной области, которая содержит [страницу редактирования](manual/soundfont-editor/editing-pages/index.md) или [сводку конфигурации](manual/soundfont-editor/configuration-summaries.md), в зависимости от того, что выбрано в [дереве](manual/soundfont-editor/tree.md).
+* [дерева][tree] в левой части, которое отражает архитектуру SoundFont;
+* [панели инструментов][toolbar] в верхней части;
+* главной области, которая содержит [страницу редактирования][editors] или [сводку конфигурации][conf-summary], в зависимости от того, что выбрано в [дереве][tree].
+
+
+[conf-summary]: manual/soundfont-editor/configuration-summaries.md
+[editors]:      manual/soundfont-editor/editing-pages/index.md
+[toolbar]:      manual/soundfont-editor/toolbar.md
+[tree]:         manual/soundfont-editor/tree.md

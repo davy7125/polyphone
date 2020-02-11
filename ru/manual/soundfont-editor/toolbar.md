@@ -16,17 +16,17 @@
 
 
 ![sample][sample] Новый семпл
-: Добавить новые [семплы](manual/soundfont-editor/editing-pages/sample-editor.md) в SoundFont.
+: Добавить новые [семплы][s-editor] в SoundFont.
   Polyphone импортирует звуковые файлы в форматах :file:`.wav` и :file:`.flac`.
 
 ![instrument][instrument] Новый инструмент
-: Создать новый [инструмент](manual/soundfont-editor/editing-pages/instrument-editor.md).
+: Создать новый [инструмент][i-editor].
 
 ![preset][preset] Новый пресет
-: Cоздать новый [пресет](manual/soundfont-editor/editing-pages/preset-editor.md).
+: Cоздать новый [пресет][p-editor].
 
 ![tools][toolbox] Средства
-: В этом меню перечисляются [средства](manual/soundfont-editor/tools/index.md), доступные для выбранных в [дереве](manual/soundfont-editor/tree.md) элементов.
+: В этом меню перечисляются [средства][tools], доступные для выбранных в [дереве][tree] элементов.
 
 ![undo][undo] Отменить
 : Отменить последние изменения.
@@ -43,7 +43,7 @@
 
 Значки справа переключают представление информации в зависимости от редактора](manual/soundfont-editor/editing-pages/index.md):
 
-* при редактировании инструмента переключайтесь между ![table][table] [табличным видом](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), ![range][range] [редактором диапазонов](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) и ![envelope][adsr] [редактором огибающей](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope),
+* при редактировании инструмента переключайтесь между ![table][table] [табличным видом][i-editor-table], ![range][range] [редактором диапазонов][i-editor-range] и ![envelope][adsr] [редактором огибающей][i-editor-env],
 * при редактировании пресета переключайтесь между ![table][table] табличным видом и ![range][range] редактором диапазонов,
 * иначе ничего не отображается.
 
@@ -104,21 +104,21 @@
   Если не отпускать кнопку мыши, то последующие движения в пределах клавиши вызовут сигналы послекасания.
 
 с помощью клавиатуры компьютера
-: используемые клавиши определяются в [настройках](manual/settings.md#doc_keyboard).
+: используемые клавиши определяются в [настройках][settings-keyboard].
 
 с помощью внешней MIDI-клавиатуры
-: укажите вход MIDI в [настройках](manual/settings.md#doc_general).
+: укажите вход MIDI в [настройках][settings-general].
   При этом клавиши на виртуальной клавиатуре будут показывать ноты, проигрываемые на MIDI-клавиатуре.
 
 
 #### Маркеры и цвета
 
 
-* Когда выбран [инструмент](manual/soundfont-editor/editing-pages/instrument-editor.md) или [пресет](manual/soundfont-editor/editing-pages/preset-editor.md) — область, не охваченная разделами, становится **серой**.
+* Когда выбран [инструмент][i-editor] или [пресет][p-editor] — область, не охваченная разделами, становится **серой**.
   Так визуализируется полный диапазон инструмента или пресета.
 * Когда выбран раздел инструмента или пресета — его диапазон отображается так же, как и выше.
   Кроме того, его корневая клавиша обозначается **оранжевым маркером**.
-* Когда на клавиатуре нажата клавиша — она отображается **синим цветом** или цветом выделения, указанным в [настройках](manual/settings.md#doc_interface) программы.
+* Когда на клавиатуре нажата клавиша — она отображается **синим цветом** или цветом выделения, указанным в [настройках][settings-interface] программы.
   Диапазон, в который входит эта клавиша, отображается **голубым цветом**.
   Это относится только к уровню инструмента.
 * Среднее До (клавиша 60) обозначается **чёрным маркером**.
@@ -181,18 +181,30 @@
 
 
 
-*[MIDI]: Musical Instrument Digital Interface
+*[MIDI]: Musical Instrument Digital Interface — цифровой интерфейс музыкальных инструментов
 
 
-[sample]:     images/toolbar_sample.png     "new sample"     {.inline}
+[adsr]:       images/toolbar_adsr.png       "envelope"       {.inline}
 [instrument]: images/toolbar_instrument.png "new instrument" {.inline}
+[piano]:      images/toolbar_piano.png      "piano"          {.inline}
 [preset]:     images/toolbar_preset.png     "new preset"     {.inline}
-[toolbox]:    images/toolbar_toolbox.png    "tools"          {.inline}
-[undo]:       images/toolbar_undo.png       "undo"           {.inline}
+[range]:      images/toolbar_range.png      "range"          {.inline}
+[recorder]:   images/toolbar_recorder.png   "recorder"       {.inline}
 [redo]:       images/toolbar_redo.png       "redo"           {.inline}
+[sample]:     images/toolbar_sample.png     "new sample"     {.inline}
 [save]:       images/toolbar_save.png       "save"           {.inline}
 [table]:      images/toolbar_table.png      "table"          {.inline}
-[range]:      images/toolbar_range.png      "range"          {.inline}
-[adsr]:       images/toolbar_adsr.png       "envelope"       {.inline}
-[recorder]:   images/toolbar_recorder.png   "recorder"       {.inline}
-[piano]:      images/toolbar_piano.png      "piano"          {.inline}
+[toolbox]:    images/toolbar_toolbox.png    "tools"          {.inline}
+[undo]:       images/toolbar_undo.png       "undo"           {.inline}
+
+[i-editor-env]:       manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope
+[i-editor-range]:     manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range
+[i-editor-table]:     manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table
+[i-editor]:           manual/soundfont-editor/editing-pages/instrument-editor.md
+[p-editor]:           manual/soundfont-editor/editing-pages/preset-editor.md
+[s-editor]:           manual/soundfont-editor/editing-pages/sample-editor.md
+[settings-general]:   manual/settings.md#doc_general
+[settings-interface]: manual/settings.md#doc_interface
+[settings-keyboard]:  manual/settings.md#doc_keyboard
+[tools]:              manual/soundfont-editor/tools/index.md
+[tree]:               manual/soundfont-editor/tree.md

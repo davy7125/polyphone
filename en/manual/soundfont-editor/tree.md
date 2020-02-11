@@ -16,15 +16,15 @@ The structure of the tree is made of 4 headers and sub-content for the headers :
 ### Header “General”
 
 
-A click on the header :guilabel:`General` opens the editor of the [general information](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md).
+A click on the header :guilabel:`General` opens the editor of the [general information][edit-general].
 
 
 ### Section “Samples”
 
 
 This section lists all samples contained in the soundfont, which are the raw material upon which all instruments are built.
-A click on one or more samples leads to the [sample editor](manual/soundfont-editor/editing-pages/sample-editor.md).
-A click on the header :guilabel:`Samples` displays the [configuration summary](manual/soundfont-editor/configuration-summaries.md#doc_sample) of all samples.
+A click on one or more samples leads to the [sample editor][s-editor].
+A click on the header :guilabel:`Samples` displays the [configuration summary][conf-summary-s] of all samples.
 
 
 ### Section “Instruments”
@@ -32,8 +32,8 @@ A click on the header :guilabel:`Samples` displays the [configuration summary](m
 
 This section lists all instruments contained in the soundfont, an instrument being an intermediate element made of samples and used by presets.
 Instruments contain links to samples called “divisions”, displayed as a list below each instrument.
-A click on an instrument or on one of its divisions leads to the [instrument editor](manual/soundfont-editor/editing-pages/instrument-editor.md).
-A click on the header :guilabel:`Instruments` displays the [configuration summary](manual/soundfont-editor/configuration-summaries.md#doc_instrument) of all instruments.
+A click on an instrument or on one of its divisions leads to the [instrument editor][i-editor].
+A click on the header :guilabel:`Instruments` displays the [configuration summary][conf-summary-i] of all instruments.
 
 
 ### Section “Presets”
@@ -41,8 +41,8 @@ A click on the header :guilabel:`Instruments` displays the [configuration summar
 
 This section lists all presets contained in the soundfont, a preset being a final elements made of instruments and that are accessible outside the soundfont.
 Presets contain links to instruments called “divisions”, displayed as a list below each preset.
-A click on a preset or on one of its divisions shows the [preset editor](manual/soundfont-editor/editing-pages/preset-editor.md).
-A click on the header :guilabel:`Presets` displays the [configuration summary](manual/soundfont-editor/configuration-summaries.md#doc_preset) of all presets.
+A click on a preset or on one of its divisions shows the [preset editor][p-editor].
+A click on the header :guilabel:`Presets` displays the [configuration summary][conf-summary-p] of all presets.
 
 
 ## Contextual menu {#doc_menu}
@@ -163,3 +163,12 @@ Moreover:
 * if the string is included in the name of a preset, the instruments used by the preset and the samples used by the instruments used by the preset are displayed.
 
 A click on the cross to the right of the editable field cancels the filter.
+
+
+[conf-summary-i]: manual/soundfont-editor/configuration-summaries.md#doc_instrument
+[conf-summary-p]: manual/soundfont-editor/configuration-summaries.md#doc_preset
+[conf-summary-s]: manual/soundfont-editor/configuration-summaries.md#doc_sample
+[edit-general]:   manual/soundfont-editor/editing-pages/editing-of-the-general-information.md
+[i-editor]:       manual/soundfont-editor/editing-pages/instrument-editor.md
+[p-editor]:       manual/soundfont-editor/editing-pages/preset-editor.md
+[s-editor]:       manual/soundfont-editor/editing-pages/sample-editor.md

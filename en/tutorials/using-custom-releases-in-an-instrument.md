@@ -32,7 +32,7 @@ Two cases may appear: you have a file comprising the full sample from the attack
 
 
 Load the sample twice in Polyphone and then, in the second instance of the sample, remove everything in the sample except the release.
-The removal can be done by using the key :kbd:`Alt` and then defining an area on the [sample graph](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph).
+The removal can be done by using the key :kbd:`Alt` and then defining an area on the [sample graph][s-editor-graph].
 To find the point where the release begins, play the sample several times and try to define the point where you think no more power was inducing the sound.
 This last part will be the release.
 Then follow the instructions below.
@@ -46,7 +46,7 @@ Samples for the example: <a href="downloads/tutorials/trumpet.wav" download>samp
 If you have 2 samples, the first one containing the beginning and the sustained phase of the sound and the second one containing the release, you only need to make sure that the release begins with a very short blank (a couple of points) being close to 0.
 A short inaudible loop will thus be made with this portion.
 
-Tune and loop the first sample as explained in the tutorial “[how to prepare a sample](tutorials/how-to-prepare-a-sample.md)”.
+Tune and loop the first sample as explained in the tutorial “[how to prepare a sample][howto-sample]”.
 
 Loop the second sample on a very short part at the beginning, for example from the point 1 to the point 2 or 3.
 Specify the same root key and correction than the first sample.
@@ -101,3 +101,7 @@ You can listen here the differences between:
 * and a <a href="downloads/tutorials/custom-release.mp3" download>custom release</a>
 
 ![](downloads/tutorials/custom-release.mp3)
+
+
+[howto-sample]:   tutorials/how-to-prepare-a-sample.md
+[s-editor-graph]: manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph

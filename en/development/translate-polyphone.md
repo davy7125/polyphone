@@ -8,8 +8,8 @@ Everyone can help in this process.
 ### Translation file
 
 
-Download the translation package corresponding to the language you want to translate from this [page](download/translations).
-If the language is not in the list yet, use the [contact](contact) form to ask for it (you just need to specify the new language you want).
+Download the translation package corresponding to the language you want to translate from this [page][translations].
+If the language is not in the list yet, use the [contact] form to ask for it (you just need to specify the new language you want).
 You will quickly be provided with a new translation package.
 
 
@@ -61,18 +61,24 @@ And don't forget to save your work with :kbd:`Ctrl`+:kbd:`S`.
 At anytime you can check your work.
 In :program:`Qt Linguist` go to :menuselection:`File --> Release As…` and create a .qm file corresponding to the translation you are providing.
 Follow the instructions in the translation package to install it (:file:`readme.txt` file), then open Polyphone.
-Go to the configurations, select your translation and restart Polyphone.
+Go to the [configurations][settings-interface], select your translation and restart Polyphone.
 You will now be able to review your translation.
 
+<!-- note begin -->
 **Note:** the operation :guilabel:`Release As…` may translate only text comprising no accent. If this bug happens, open a terminal and use the following command: :command:`lrelease polyphone_XX.ts` (adapt it to your current file).
+<!-- note end -->
 
 
 ## Submitting the translation
 
 
 Once you are done (or bothered!), send the .ts file (not .qm!) you were editing to <contact@polyphone-soundfonts.com>.
-The translation package of this [page](download/translations) will be updated.
+The translation package of this [page][translations] will be updated.
 
 
-[get-qt-linguist]: https://github.com/thurask/Qt-Linguist/releases {target=_blank}
-[article]:         https://medium.com/thrive-global/how-technology-hijacks-peoples-minds-from-a-magician-and-google-s-design-ethicist-56d62ef5edf3 {target=_blank}
+[article]:         https://medium.com/thrive-global/how-technology-hijacks-peoples-minds-from-a-magician-and-google-s-design-ethicist-56d62ef5edf3 {target=_blank rel=noopener}
+[get-qt-linguist]: https://github.com/thurask/Qt-Linguist/releases {target=_blank rel=noopener}
+
+[contact]:            contact
+[settings-interface]: manual/settings.md#doc_interface
+[translations]:       download/translations

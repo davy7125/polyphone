@@ -45,6 +45,7 @@ Start Qt Creator and open the file :file:`polyphone.pro`.
 
 Then configure the project.
 
+
 ![Configure project](images/configure-project.png "Configure project")
 
 
@@ -79,11 +80,13 @@ Now you should have the executable :file:`polyphone` either in the :file:`RELEAS
 ## Troubleshooting
 
 
-See this [topic](forum/polyphone/support-bug-reports) if you need more information or for getting some help.
+See this [topic] if you need more information or for getting some help.
 
 
 <p class="endpage">Special thanks to <a href="dashboard/820-tomotello">Tomotello</a> for this article.</p>
 
 
 [download]:  download                              {target=_blank}
-[polyphone]: https://github.com/davy7125/polyphone {target=_blank}
+[polyphone]: https://github.com/davy7125/polyphone {target=_blank rel=noopener}
+
+[topic]: forum/polyphone/support-bug-reports

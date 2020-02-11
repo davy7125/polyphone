@@ -1,4 +1,4 @@
-Используйте эти указания, если вы не можете установить Polyphone в свой дистрибутив Linux с помощью доступных инсталляторов в разделе “[Download](download)”.
+Используйте эти указания, если вы не можете установить Polyphone в свой дистрибутив Linux с помощью доступных инсталляторов в разделе “[Download]”.
 Этот метод был протестирован с Ubuntu 16.04 (Xenial).
 
 
@@ -21,7 +21,7 @@
 
 Установите их с помощью :program:`synaptic`.
 
-Вам также нужны исходники Polyphone, доступные [здесь][download] или [на GitHub][polyphone].
+Вам также нужны исходники Polyphone, доступные [здесь][Download] или [на GitHub][polyphone].
 
 
 ## Сборка
@@ -50,8 +50,11 @@ DEFINES += USE_LOCAL_RTMIDI
 
 (без начального «#»).
 
-**Примечание:** Если вы используете :program:`Qt Creator`, проект можно открыть через его файл :file:`.pro`, находящийся в корневом каталоге.
+<!-- note begin -->
+**Примечание:**
+Если вы используете :program:`Qt Creator`, проект можно открыть через его файл :file:`.pro`, находящийся в корневом каталоге.
+<!-- note end -->
 
 
-[download]:  download                              {target=_blank}
-[polyphone]: https://github.com/davy7125/polyphone {target=_blank}
+[Download]:  download                              {target=_blank}
+[polyphone]: https://github.com/davy7125/polyphone {target=_blank rel=noopener}

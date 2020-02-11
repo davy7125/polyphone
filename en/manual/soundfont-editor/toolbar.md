@@ -16,17 +16,17 @@ The elements in the left part of the toolbar are for common editing functions:
 
 
 ![new sample][sample] New sample
-: Add new [samples](manual/soundfont-editor/editing-pages/sample-editor.md) to the soundfont.
+: Add new [samples][s-editor] to the soundfont.
   A dialog will be displayed for selecting audio files (:file:`.wav` and :file:`.flac` files can be imported).
 
 ![new instrument][instrument] New instrument
-: Create a new [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md).
+: Create a new [instrument][i-editor].
 
 ![new preset][preset] New preset
-: Create a new [preset](manual/soundfont-editor/editing-pages/preset-editor.md).
+: Create a new [preset][p-editor].
 
 ![tools][toolbox] Tools
-: Clicking on this button will show a menu containing all available [tools](manual/soundfont-editor/tools/index.md) for the selected element(s) in the [tree](manual/soundfont-editor/tree.md).
+: Clicking on this button will show a menu containing all available [tools] for the selected element(s) in the [tree].
 
 ![undo][undo] Undo
 : Undo the last modification.
@@ -41,9 +41,9 @@ The elements in the left part of the toolbar are for common editing functions:
 ## Switch view {#doc_view}
 
 
-In the right part of the toolbar, some icons may appear depending on which [editor](manual/soundfont-editor/editing-pages/index.md) is displayed:
+In the right part of the toolbar, some icons may appear depending on which [editor][editors] is displayed:
 
-* switching between the ![table][table] [table view](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), the ![range][range] [range editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) and the ![envelope][adsr] [envelope editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope) is possible when editing an instrument,
+* switching between the ![table][table] [table view][i-editor-table], the ![range][range] [range editor][i-editor-range] and the ![envelope][adsr] [envelope editor][i-editor-env] is possible when editing an instrument,
 * switching between the ![table][table] table view and the ![range][range] range editor is possible when editing a preset,
 * nothing displayed otherwise.
 
@@ -104,21 +104,21 @@ with the mouse
   After a click, following moves within the same key will trigger aftertouch signals.
 
 using the computer keyboard
-: The keys used are defined in the [settings](manual/settings.md#doc_keyboard).
+: The keys used are defined in the [settings][settings-keyboard].
 
 using an external MIDI keyboard
-: The MIDI input is defined in the [settings](manual/settings.md#doc_general).
+: The MIDI input is defined in the [settings][settings-general].
   If the piano keyboard is visible, it will show what you are playing.
 
 
 #### Markers and colors
 
 
-* When an [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md) or a [preset](manual/soundfont-editor/editing-pages/preset-editor.md) is selected, the area not covered by the divisions is **grayed**.
+* When an [instrument][i-editor] or a [preset][p-editor] is selected, the area not covered by the divisions is **grayed**.
   It is thus possible to visualize the full range of an instrument or a preset.
 * When a division of an instrument or a preset is selected, its range is displayed the same way than above.
   Moreover, its root key is identified by an **orange marker**.
-* When a key is selected on the keyboard, it appears in **blue** (or the selection color selected in the software [settings](manual/settings.md#doc_interface).
+* When a key is selected on the keyboard, it appears in **blue** (or the selection color selected in the software [settings][settings-interface].
   Moreover, the range of its corresponding range(s) appears in **light blue**.
   This applies only at the instrument level.
 * Middle C (key 60) is identified by a **black marker**.
@@ -180,19 +180,31 @@ On / off led
   It is like a knob but with only two possible values.
 
 
-
 *[MIDI]: Musical Instrument Digital Interface
 
 
-[sample]:     images/toolbar_sample.png     "new sample"     {.inline}
+[adsr]:       images/toolbar_adsr.png       "envelope"       {.inline}
 [instrument]: images/toolbar_instrument.png "new instrument" {.inline}
+[piano]:      images/toolbar_piano.png      "piano"          {.inline}
 [preset]:     images/toolbar_preset.png     "new preset"     {.inline}
-[toolbox]:    images/toolbar_toolbox.png    "tools"          {.inline}
-[undo]:       images/toolbar_undo.png       "undo"           {.inline}
+[range]:      images/toolbar_range.png      "range"          {.inline}
+[recorder]:   images/toolbar_recorder.png   "recorder"       {.inline}
 [redo]:       images/toolbar_redo.png       "redo"           {.inline}
+[sample]:     images/toolbar_sample.png     "new sample"     {.inline}
 [save]:       images/toolbar_save.png       "save"           {.inline}
 [table]:      images/toolbar_table.png      "table"          {.inline}
-[range]:      images/toolbar_range.png      "range"          {.inline}
-[adsr]:       images/toolbar_adsr.png       "envelope"       {.inline}
-[recorder]:   images/toolbar_recorder.png   "recorder"       {.inline}
-[piano]:      images/toolbar_piano.png      "piano"          {.inline}
+[toolbox]:    images/toolbar_toolbox.png    "tools"          {.inline}
+[undo]:       images/toolbar_undo.png       "undo"           {.inline}
+
+[editors]:            manual/soundfont-editor/editing-pages/index.md
+[i-editor-env]:       manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope
+[i-editor-range]:     manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range
+[i-editor-table]:     manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table
+[i-editor]:           manual/soundfont-editor/editing-pages/instrument-editor.md
+[p-editor]:           manual/soundfont-editor/editing-pages/preset-editor.md
+[s-editor]:           manual/soundfont-editor/editing-pages/sample-editor.md
+[settings-general]:   manual/settings.md#doc_general
+[settings-interface]: manual/settings.md#doc_interface
+[settings-keyboard]:  manual/settings.md#doc_keyboard
+[tools]:              manual/soundfont-editor/tools/index.md
+[tree]:               manual/soundfont-editor/tree.md

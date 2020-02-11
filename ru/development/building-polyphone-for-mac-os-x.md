@@ -1,4 +1,4 @@
-Используйте эти указания, если вы не можете установить Polyphone на Mac OS X используя установщики, доступные в разделе “[Download](download)”.
+Используйте эти указания, если вы не можете установить Polyphone на Mac OS X используя установщики, доступные в разделе “[Download][download]”.
 
 
 ## Перед тем как начать
@@ -9,7 +9,7 @@
 * Xcode (доступно в Apple Store),
 * [Qt Creator с фреймворком][get-qt].
 
-Вам также нужны исходники Polyphone, доступные [здесь][download] или [на GitHub][polyphone], а также необходимые библиотеки, которые вы можете скачать [здесь](downloads/lib_mac.zip).
+Вам также нужны исходники Polyphone, доступные [здесь][download] или [на GitHub][polyphone], а также необходимые библиотеки, которые вы можете скачать [здесь][lib_mac].
 
 
 ## Сборка
@@ -51,9 +51,12 @@ install_name_tool -change /System/Library/Frameworks/Jackmp.framework/Versions/A
 ## Отладка
 
 
-Просмотрите эту [тему](forum/support-bug-reports/8-success-build-polyphone-on-osx-10-11-6-qt-5-7), если вам нужна дополнительная информация или помощь.
+Просмотрите эту [тему][topic], если вам нужна дополнительная информация или помощь.
 
 
-[get-qt]:    https://www.qt.io/download-open-source {target=_blank}
 [download]:  download                               {target=_blank}
-[polyphone]: https://github.com/davy7125/polyphone  {target=_blank}
+[get-qt]:    https://www.qt.io/download-open-source {target=_blank rel=noopener}
+[polyphone]: https://github.com/davy7125/polyphone  {target=_blank rel=noopener}
+
+[lib_mac]:  downloads/lib_mac.zip
+[topic]:    forum/support-bug-reports/8-success-build-polyphone-on-osx-10-11-6-qt-5-7

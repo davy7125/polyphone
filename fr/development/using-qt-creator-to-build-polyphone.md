@@ -80,11 +80,13 @@ Pendant la compilation du projet il est possible de voir des avertissements mais
 ## Dépannage
 
 
-Voir le [forum](forum/polyphone/support-bug-reports) pour plus d'information ou pour obtenir de l'aide.
+Voir le [forum][topic] pour plus d'information ou pour obtenir de l'aide.
 
 
 <p class="endpage">Un grand merci à <a href="dashboard/820-tomotello">Tomotello</a> pour cet article.</p>
 
 
 [download]:  download                              {target=_blank}
-[polyphone]: https://github.com/davy7125/polyphone {target=_blank}
+[polyphone]: https://github.com/davy7125/polyphone {target=_blank rel=noopener}
+
+[topic]: forum/polyphone/support-bug-reports

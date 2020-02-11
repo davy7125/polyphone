@@ -1,4 +1,4 @@
-The software preferences are accessible either from the [home screen](manual/index.md) or from the [menu](manual/menu.md#doc_shortcuts).
+The software preferences are accessible either from the [home screen][home-screen] or from the [menu][menu-shortcuts].
 They are divided into five sections:
 
 * [General](#doc_general)
@@ -30,10 +30,10 @@ Moreover, it is possible to check the following options:
 
 
 Sample import: trim to loop
-: When importing a sample, data located after the end of loop are automatically removed (same effect as the tool “[Trim to end of loop](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)”).
+: When importing a sample, data located after the end of loop are automatically removed (same effect as the tool “[Trim to end of loop][s-tool-trimloop]”).
 
 Wav file import: remove blank at start
-: When importing a sample, any blank area located before the beginning of the attack is automatically removed (same effect as the tool “[Remove blank at start](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)”).
+: When importing a sample, any blank area located before the beginning of the attack is automatically removed (same effect as the tool “[Remove blank at start][s-tool-removeblank]”).
 
 Stereo editing: change linked sample
 : When editing one side of a stereo sample, the other side is automatically edited the same.
@@ -83,7 +83,7 @@ The global volume may be changed with the volume MIDI controller if an external 
 ## Virtual keyboard {#doc_keyboard}
 
 
-The keys of the computer keyboard used to control the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard) are defined in the :guilabel:`Keyboard` section.
+The keys of the computer keyboard used to control the [virtual keyboard][toolbar-keyboard] are defined in the :guilabel:`Keyboard` section.
 The pitch may be increased or decreased octave by octave.
 
 
@@ -93,15 +93,23 @@ The pitch may be increased or decreased octave by octave.
 ## Online repository {#doc_repository}
 
 
-Identifiers can be entered here to link Polyphone with an account, a Premium account unlocking the [soundfont browser](manual/soundfont-browser.md).
+Identifiers can be entered here to link Polyphone with an account, a Premium account unlocking the [soundfont browser][sf-browser].
 
-The download directory used by the [soundfont browser](manual/soundfont-browser.md) can be changed here.
+The download directory used by the [soundfont browser][sf-browser] can be changed here.
 
 
 ![Settings, repository](images/settings_repository.png "Settings, repository")
 
 
 
-*[JACK]: JACK Audio Connection Kit
 *[ASIO]: Audio Stream Input/Output
+*[JACK]: JACK Audio Connection Kit
 *[MIDI]: Musical Instrument Digital Interface
+
+
+[home-screen]:        manual/index.md
+[menu-shortcuts]:     manual/menu.md#doc_shortcuts
+[s-tool-removeblank]: manual/soundfont-editor/tools/sample-tools.md#doc_removeblank
+[s-tool-trimloop]:    manual/soundfont-editor/tools/sample-tools.md#doc_trimloop
+[sf-browser]:         manual/soundfont-browser.md
+[toolbar-keyboard]:   manual/soundfont-editor/toolbar.md#doc_keyboard

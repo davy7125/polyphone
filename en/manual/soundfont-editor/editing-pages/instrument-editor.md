@@ -1,10 +1,10 @@
-When clicking on one or more instrument(s) in the [tree](manual/soundfont-editor/tree.md), the editing page of instruments appears.
+When clicking on one or more instrument(s) in the [tree], the editing page of instruments appears.
 
 This page comprises several parts:
 
 * the [table](#doc_table),
-* the [range editor](#doc_range) when the button :guilabel:`Edit ranges` from the [toolbar](manual/soundfont-editor/toolbar.md#doc_view) is clicked,
-* the [envelope editor](#doc_envelope) when the button :guilabel:`Edit envelope` from the [toolbar](manual/soundfont-editor/toolbar.md#doc_view) is clicked,
+* the [range editor](#doc_range) when the button :guilabel:`Edit ranges` from the [toolbar][toolbar-view] is clicked,
+* the [envelope editor](#doc_envelope) when the button :guilabel:`Edit envelope` from the [toolbar][toolbar-view] is clicked,
 * the [modulator section](#doc_modulator).
 
 
@@ -40,7 +40,10 @@ Velocity range
 
 Attenuation
 : Attenuation in decibel applied to the sample.\
-  Note: the sf2 format doesn't allow this value to be negative, no amplification is thus possible.
+
+  <!-- note begin -->
+  **Note:** the sf2 format doesn't allow this value to be negative, no amplification is thus possible.
+  <!-- note end -->
 
 Pan
 : Balance applied to the sound, to hear it to the left or to the right in stereo.
@@ -49,9 +52,12 @@ Loop playback
 : ![loop off][loop_off] indicates a sound reproduced with no loop,
   ![loop on][loop_on] indicates a sound which loops continuously,
   ![loop on and end][loop_on_end] indicates a sound which loops for the duration of key depression and then proceeds to play the remainder of the sample.\
-  Note: The sf2 format had no plans for a special playback mode which triggers a sample when a key is released.
+
+  <!-- note begin -->
+  **Note:** The sf2 format had no plans for a special playback mode which triggers a sample when a key is released.
   One way to achieve this behavior is to double each sample with a sample containing a short silent loop followed by the sound to emit on the release.
   The added sample will be read with the playback parameter “loop on with end”.
+  <!-- note end -->
 
 Root key
 : Allows you to change the normal root key of a sample to a different note from that usually used.
@@ -81,7 +87,7 @@ Exclusive class:
 
 Chorus and reverb
 : Indicates the intensity of chorus and reverb effects.
-  The effects are configurable in the software [settings](manual/settings.md#doc_sound).
+  The effects are configurable in the software [settings][settings-sound].
 
 Fixed key and velocity
 : Can freeze the key and velocity on the key range specified by the linked sample.
@@ -100,12 +106,12 @@ To facilitate and speed up editing in the table, the following features have bee
 * a keyboard can be used to set the rootkey, key range and velocity range (the cell has to be in edit mode first),
 * a multiple selection, followed by the editing of the last cell, will edit all cells simultaneously,
 * the keys :kbd:`Del` and :kbd:`Backspace` clear the content of all selected cells,
-* stereo divisions may be edited simultaneously if the option is enables in the software [preferences](manual/settings.md#doc_general),
-* key names may be numeric or as a text (having C3, C4 or C5 as middle C), depending on the option chosen in the [preferences](manual/settings.md#doc_interface),
+* stereo divisions may be edited simultaneously if the option is enables in the software [preferences][settings-general],
+* key names may be numeric or as a text (having C3, C4 or C5 as middle C), depending on the option chosen in the [preferences][settings-interface],
 * copy / paste / cut of a set of cells (not necessarily adjacent) may be done via :kbd:`Ctrl`+:kbd:`C` / :kbd:`Ctrl`+:kbd:`V` / :kbd:`Ctrl`+:kbd:`X`.
 
-Do not forget the [tools](manual/soundfont-editor/tools/instrument-tools.md) available!
-In particular the tool allowing a [key-based configuration](manual/soundfont-editor/tools/instrument-tools.md#doc_global).
+Do not forget the [tools][i-tools] available!
+In particular the tool allowing a [key-based configuration][i-tool-global].
 
 
 ### Possibility to mute divisions
@@ -210,7 +216,7 @@ The right part represents the evolution of the envelope when a key is **released
 Only the **release** duration is involved in this representation.
 The envelope gradually returns to 0 during this duration.
 
-When only one division of an instrument is selected in the tree, the corresponding sound [sample](manual/soundfont-editor/editing-pages/sample-editor.md) is displayed on the background.
+When only one division of an instrument is selected in the tree, the corresponding sound [sample][s-editor] is displayed on the background.
 It is thus possible to better visualize the evolution of the envelope relative to the sample being played.
 
 
@@ -219,7 +225,7 @@ It is thus possible to better visualize the evolution of the envelope relative t
 
 The lower section of the editing page of instruments is intended for the creation of modulators, globally for an instrument or for a particular division.
 When you play an instrument, a modulator listens to one or two MIDI signal(s) and modify one of the parameters in the table according to the mathematical rule configured.
-The output of a modulator can also be used as input to another modulator (this function appeared in version 2.04 of the [sf2 format](manual/annexes/the-different-soundfont-formats.md#doc_sf2) and may not be supported by some synthesizers).
+The output of a modulator can also be used as input to another modulator (this function appeared in version 2.04 of the [sf2 format][sf2] and may not be supported by some synthesizers).
 
 
 ![Modulator editor](images/modulator_editor_2.png "Modulator editor")
@@ -237,3 +243,13 @@ When a modulator is added, the border of the corresponding cell in the table is 
 [loop_off]:    images/loop_off.png    "loop off"        {.inline}
 [loop_on]:     images/loop_on.png     "loop on"         {.inline}
 [loop_on_end]: images/loop_on_end.png "loop on and end" {.inline}
+
+[i-tool-global]:      manual/soundfont-editor/tools/instrument-tools.md#doc_global
+[i-tools]:            manual/soundfont-editor/tools/instrument-tools.md
+[s-editor]:           manual/soundfont-editor/editing-pages/sample-editor.md
+[settings-general]:   manual/settings.md#doc_general
+[settings-interface]: manual/settings.md#doc_interface
+[settings-sound]:     manual/settings.md#doc_sound
+[sf2]:                manual/annexes/the-different-soundfont-formats.md#doc_sf2
+[toolbar-view]:       manual/soundfont-editor/toolbar.md#doc_view
+[tree]:               manual/soundfont-editor/tree.md

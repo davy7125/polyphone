@@ -1,4 +1,4 @@
-Настройки программы можно открыть либо с [главного экрана](manual/index.md), либо из [меню](manual/menu.md#doc_shortcuts).
+Настройки программы можно открыть либо с [главного экрана][home-screen], либо из [меню][menu-shortcuts].
 Они разделены на пять разделов:
 
 * [Общие](#doc_general)
@@ -30,10 +30,10 @@
 
 
 Импорт семпла: обрезать до петли
-: При импорте семпла информация, расположенная после окончания петли, автоматически удаляется (тот же эффект, что и у средства «[Обрезать до конца петли](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)»).
+: При импорте семпла информация, расположенная после окончания петли, автоматически удаляется (тот же эффект, что и у средства «[Обрезать до конца петли][s-tool-trimloop]»).
 
 Импорт WAV-файла: убрать тишину в начале
-: При импорте семпла любая пустая область, расположенная перед началом атаки, автоматически удаляется (тот же эффект, что и у инструмента «[Убрать тишину в начале](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)»).
+: При импорте семпла любая пустая область, расположенная перед началом атаки, автоматически удаляется (тот же эффект, что и у инструмента «[Убрать тишину в начале][s-tool-removeblank]»).
 
 Редактирование стерео: изменить связанный семпл
 : При редактировании одной стороны стерео-семпла, другая сторона автоматически редактируется таким же образом.
@@ -83,7 +83,7 @@
 ## Виртуальная клавиатура {#doc_keyboard}
 
 
-Клавиши компьютерной клавиатуры, используемые для управления [виртуальной клавиатурой](manual/soundfont-editor/toolbar.md#doc_keyboard), определены в разделе :guilabel:`Клавиатура`.
+Клавиши компьютерной клавиатуры, используемые для управления [виртуальной клавиатурой][toolbar-keyboard], определены в разделе :guilabel:`Клавиатура`.
 Высота тона может быть увеличена или уменьшена на несколько октав.
 
 
@@ -93,15 +93,23 @@
 ## Онлайн-хранилище {#doc_repository}
 
 
-Здесь можно ввести параметры учётной записи, чтобы связать Polyphone с учётной записью, и если эта учётная запись Премиум, то будет разблокирован [браузер SoundFont](manual/soundfont-browser.md).
+Здесь можно ввести параметры учётной записи, чтобы связать Polyphone с учётной записью, и если эта учётная запись Премиум, то будет разблокирован [браузер SoundFont][sf-browser].
 
-Здесь можно изменить каталог загрузки, используемый [браузером SoundFont](manual/soundfont-browser.md).
+Здесь можно изменить каталог загрузки, используемый [браузером SoundFont][sf-browser].
 
 
 ![Настройки, хранилище](images/settings_repository.png "Настройки, хранилище")
 
 
 
-*[JACK]: JACK Audio Connection Kit
-*[ASIO]: Audio Stream Input/Output
-*[MIDI]: Musical Instrument Digital Interface
+*[ASIO]: Audio Stream Input/Output — протокол передачи данных с малой задержкой
+*[JACK]: JACK Audio Connection Kit — звуковой сервер-демон с низкой задержкой
+*[MIDI]: Musical Instrument Digital Interface — цифровой интерфейс музыкальных инструментов
+
+
+[home-screen]:        manual/index.md
+[menu-shortcuts]:     manual/menu.md#doc_shortcuts
+[s-tool-removeblank]: manual/soundfont-editor/tools/sample-tools.md#doc_removeblank
+[s-tool-trimloop]:    manual/soundfont-editor/tools/sample-tools.md#doc_trimloop
+[sf-browser]:         manual/soundfont-browser.md
+[toolbar-keyboard]:   manual/soundfont-editor/toolbar.md#doc_keyboard

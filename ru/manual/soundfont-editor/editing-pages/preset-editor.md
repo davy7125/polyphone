@@ -1,10 +1,10 @@
-При нажатии на один или несколько пресетов в [дереве](manual/soundfont-editor/tree.md) открывается страница редактирования пресетов.
-Пресет — это комбинация одного или нескольких инструментов и элемент, видимый снаружи [SoundFont](manual/annexes/the-different-soundfont-formats.md#doc_sf2).
+При нажатии на один или несколько пресетов в [дереве][tree] открывается страница редактирования пресетов.
+Пресет — это комбинация одного или нескольких инструментов и элемент, видимый снаружи [SoundFont][sf2].
 
-Как и в [редакторе инструментов](manual/soundfont-editor/editing-pages/instrument-editor.md), здесь есть несколько частей:
+Как и в [редакторе инструментов][i-editor], здесь есть несколько частей:
 
 * таблица,
-* редактор диапазонов, который открывается при нажатии кнопки :guilabel:`Диапазоны` на [панели инструментов](manual/soundfont-editor/toolbar.md#doc_view),
+* редактор диапазонов, который открывается при нажатии кнопки :guilabel:`Диапазоны` на [панели инструментов][toolbar-view],
 * раздел модуляторов.
 
 
@@ -34,3 +34,9 @@
 Каждый банк содержит 127 пресетов.
 
 Последний банк (128) обычно используется для наборов перкуссии.
+
+
+[i-editor]:     manual/soundfont-editor/editing-pages/instrument-editor.md
+[sf2]:          manual/annexes/the-different-soundfont-formats.md#doc_sf2
+[toolbar-view]: manual/soundfont-editor/toolbar.md#doc_view
+[tree]:         manual/soundfont-editor/tree.md

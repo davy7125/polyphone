@@ -1,4 +1,4 @@
-Когда в [дереве](manual/soundfont-editor/tree.md) выбран заголовок :guilabel:`Общее`, отображается страница редактирования общей информации.
+Когда в [дереве][tree] выбран заголовок :guilabel:`Общее`, отображается страница редактирования общей информации.
 Эта страница состоит из трех видов элементов:
 
 * [редактируемые поля](#doc_edit),
@@ -45,7 +45,7 @@
 
 
 Версия SoundFont
-: Версия [формата sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), используемого файлом.
+: Версия [формата sf2][sf2], используемого файлом.
 
 Имя и версия ПЗУ
 : Имя и версия ПЗУ семплов, если оно используется.
@@ -68,13 +68,24 @@
 
 Подсчитываются:
 
-* количество [семплов](manual/soundfont-editor/editing-pages/sample-editor.md) и неиспользуемых семплов,
-* количество [инструментов](manual/soundfont-editor/editing-pages/instrument-editor.md) и неиспользуемых инструментов,
-* количество [пресетов](manual/soundfont-editor/editing-pages/preset-editor.md),
+* количество [семплов][s-editor] и неиспользуемых семплов,
+* количество [инструментов][i-editor] и неиспользуемых инструментов,
+* количество [пресетов][p-editor],
 * количество параметров и модуляторов для инструментов,
 * количество параметров и модуляторов для пресетов.
 
-Неиспользуемые семплы и инструменты могут быть легко удалены с помощью инструмента «[Удалить неиспользуемые элементы](manual/soundfont-editor/tools/global-tools.md#doc_unused)».
+Неиспользуемые семплы и инструменты могут быть легко удалены с помощью инструмента «[Удалить неиспользуемые элементы][unused]».
 
-**Примечание:** Количество параметров как для инструментов, так и для пресетов, не должно превышать 65536.
+<!-- note begin -->
+**Примечание:**
+Количество параметров как для инструментов, так и для пресетов, не должно превышать 65536.
 Некоторые синтезаторы могут быть не способны прочитать их все.
+<!-- note end -->
+
+
+[i-editor]: manual/soundfont-editor/editing-pages/instrument-editor.md
+[p-editor]: manual/soundfont-editor/editing-pages/preset-editor.md
+[s-editor]: manual/soundfont-editor/editing-pages/sample-editor.md
+[sf2]:      manual/annexes/the-different-soundfont-formats.md#doc_sf2
+[tree]:     manual/soundfont-editor/tree.md
+[unused]:   manual/soundfont-editor/tools/global-tools.md#doc_unused

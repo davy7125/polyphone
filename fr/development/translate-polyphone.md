@@ -8,8 +8,8 @@ Tout le monde peut aider dans une traduction.
 ### Fichier de traduction
 
 
-Téléchargez l'archive de traduction correspondant à la langue que vous souhaitez sur cette [page](download/translations).
-Si la langue n'est pas dans la liste, utilisez le formulaire de [contact](contact) pour la demander (vous avez simplement besoin de mentionner la langue désirée).
+Téléchargez l'archive de traduction correspondant à la langue que vous souhaitez sur cette [page][translations].
+Si la langue n'est pas dans la liste, utilisez le formulaire de [contact] pour la demander (vous avez simplement besoin de mentionner la langue désirée).
 Une nouvelle archive de traduction vous sera rapidement fournie.
 
 
@@ -61,18 +61,24 @@ Et n'oubliez pas de sauvegarder votre travail avec :kbd:`Ctrl`+:kbd:`S`.
 À n'importe quel moment vous pouvez tester la traduction.
 Dans :program:`Qt Linguist` allez dans :menuselection:`File --> Release As…` et créez le fichier .qm correspondant à la traduction que vous souhaitez fournir.
 Suivez les indications contenues dans l'archive de traduction pour l'installer (fichier :file:`readme.txt`), ensuite ouvrez Polyphone.
-Allez dans les [configurations](manual/settings.md#doc_interface), sélectionnez la traduction et redémarrez Polyphone.
+Allez dans les [configurations], sélectionnez la traduction et redémarrez Polyphone.
 Vous serez maintenant en mesure de passer en revue la traduction.
 
+<!-- note begin -->
 **Note&nbsp;:** l'opération :guilabel:`Release As…` pourrait ne traduire que les textes ne comprenant aucun accent. Si ce bug apparait, ouvrez un terminal et utilisez la commande suivante&nbsp;: :command:`lrelease polyphone_XX.ts` (adaptez-la au fichier en cours).
+<!-- note end -->
 
 
 ## Soumettre la traduction
 
 
 Lorsque vous avez terminé (ou si vous en avez marre&nbsp;!), envoyez le fichier .ts (pas le fichier compilé .qm&nbsp;!) que vous étiez en train d'éditer à <contact@polyphone-soundfonts.com>.
-L'archive de traduction sur cette [page](download/translations) sera mis à jour.
+L'archive de traduction sur cette [page][translations] sera mis à jour.
 
 
-[get-qt-linguist]: https://github.com/thurask/Qt-Linguist/releases {target=_blank}
-[article]:         https://medium.com/thrive-global/how-technology-hijacks-peoples-minds-from-a-magician-and-google-s-design-ethicist-56d62ef5edf3 {target=_blank}
+[article]:         https://medium.com/thrive-global/how-technology-hijacks-peoples-minds-from-a-magician-and-google-s-design-ethicist-56d62ef5edf3 {target=_blank rel=noopener}
+[get-qt-linguist]: https://github.com/thurask/Qt-Linguist/releases {target=_blank rel=noopener}
+
+[configurations]: manual/settings.md#doc_interface
+[contact]:        contact
+[translations]:   download/translations

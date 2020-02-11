@@ -1,4 +1,4 @@
-When an instrument or one of its divisions is selected in the [tree](manual/soundfont-editor/tree.md), the [tool menu](manual/soundfont-editor/tools/index.md) contains several tools sorted in 4 categories:
+When an instrument or one of its divisions is selected in the [tree], the [tool menu][tools] contains several tools sorted in 4 categories:
 
 * [analyze](#doc_cat_analyze),
 * [fast editing](#doc_cat_fast),
@@ -159,8 +159,10 @@ This tool can create modulators that will override or disable them.
 
 All modulators of all selected instruments will be removed.
 
+<!-- note begin -->
 **Note:** Default modulators will still apply.
 The only way to disable a default modulator is to override it with the tool “[Override a default modulator](#doc_default_mod)”.
+<!-- note end -->
 
 
 ## Transformation {#doc_cat_transformation}
@@ -210,7 +212,7 @@ Types of possible ranks are very diverse, ranging from the octave to the 27th ha
 
 
 To work, this tool relies on all samples associated to the selected instrument, the range defined for each sample and the corresponding attenuation.
-Samples have to be tuned regardless the definition of the instrument (via the [sample editor](manual/soundfont-editor/editing-pages/sample-editor.md)), and the root key specified must not take into account membership in a stop (no transposition if the sound is a principal 4' for example).
+Samples have to be tuned regardless the definition of the instrument (via the [sample editor][s-editor]), and the root key specified must not take into account membership in a stop (no transposition if the sound is a principal 4' for example).
 
 An option allows the automatic loop of created samples, another sets the creation interval of samples.
 Finally, it is possible to choose the type of the created sounds: mono or stereo.
@@ -222,3 +224,8 @@ Here is an example, <a href="downloads/tutorials/mixture_base.mp3" download>befo
 And <a href="downloads/tutorials/mixture_done.mp3" download>after</a>:
 
 ![](downloads/tutorials/mixture_done.mp3)
+
+
+[s-editor]: manual/soundfont-editor/editing-pages/sample-editor.md
+[tools]:    manual/soundfont-editor/tools/index.md
+[tree]:     manual/soundfont-editor/tree.md

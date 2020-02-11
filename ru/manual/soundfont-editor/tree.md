@@ -16,15 +16,15 @@
 ### Заголовок «Общее»
 
 
-Щелчок по заголовку :guilabel:`Общее` открывает редактор [общей информации](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md).
+Щелчок по заголовку :guilabel:`Общее` открывает редактор [общей информации][edit-general].
 
 
 ### Раздел «Семплы»
 
 
 В этом разделе перечисляются семплы — исходный материал, из которого строятся инструменты.
-Щелчок по одному или нескольким семплам открывает [редактор семплов](manual/soundfont-editor/editing-pages/sample-editor.md).
-Щелчок по заголовку :guilabel:`Семплы` отображает [сводную информацию](manual/soundfont-editor/configuration-summaries.md#doc_sample) о настройках семплов.
+Щелчок по одному или нескольким семплам открывает [редактор семплов][s-editor].
+Щелчок по заголовку :guilabel:`Семплы` отображает [сводную информацию][conf-summary-s] о настройках семплов.
 
 
 ### Раздел «Инструменты»
@@ -32,8 +32,8 @@
 
 В этом разделе перечисляются инструменты — промежуточные элементы, которые создаются из семплов и используются в пресетах.
 Инструменты содержат ссылки на семплы — «разделы», которые отображаются в виде списка под каждым инструментом.
-Щелчок по инструменту или по разделу инструмента открывает [редактор инструмента](manual/soundfont-editor/editing-pages/instrument-editor.md).
-Щелчок по заголовку :guilabel:`Инструменты` отображает [сводную информацию](manual/soundfont-editor/configuration-summaries.md#doc_instrument) о настройках инструментов.
+Щелчок по инструменту или по разделу инструмента открывает [редактор инструмента][i-editor].
+Щелчок по заголовку :guilabel:`Инструменты` отображает [сводную информацию][conf-summary-i] о настройках инструментов.
 
 
 ### Раздел «Пресеты»
@@ -41,8 +41,8 @@
 
 В этом разделе перечисляются пресеты — итоговые элементы, которые создаются из инструментов и доступны извне SoundFont.
 Пресеты содержат ссылки на инструменты — «разделы», которые отображаются в виде списка под каждым пресетом.
-Щелчок по пресету или разделу пресета открывает [редактор пресетов](manual/soundfont-editor/editing-pages/preset-editor.md).
-Щелчок по заголовку :guilabel:`Пресеты` отображает [сводную информацию](manual/soundfont-editor/configuration-summaries.md#doc_preset) о настройках пресетов.
+Щелчок по пресету или разделу пресета открывает [редактор пресетов][p-editor].
+Щелчок по заголовку :guilabel:`Пресеты` отображает [сводную информацию][conf-summary-p] о настройках пресетов.
 
 
 ## Контекстное меню {#doc_menu}
@@ -162,3 +162,12 @@
 * если строка входит в название пресета — отображаются инструменты, которые входят в этот пресет, и семплы, которые входят в эти инструменты.
 
 Фильтр отключается щелчком по крестику справа в поле ввода.
+
+
+[conf-summary-i]: manual/soundfont-editor/configuration-summaries.md#doc_instrument
+[conf-summary-p]: manual/soundfont-editor/configuration-summaries.md#doc_preset
+[conf-summary-s]: manual/soundfont-editor/configuration-summaries.md#doc_sample
+[edit-general]:   manual/soundfont-editor/editing-pages/editing-of-the-general-information.md
+[i-editor]:       manual/soundfont-editor/editing-pages/instrument-editor.md
+[p-editor]:       manual/soundfont-editor/editing-pages/preset-editor.md
+[s-editor]:       manual/soundfont-editor/editing-pages/sample-editor.md

@@ -1,4 +1,4 @@
-Use these instructions if you cannot install Polyphone on your Linux distribution with the available installers in the section “[Download](download)”.
+Use these instructions if you cannot install Polyphone on your Linux distribution with the available installers in the section “[Download]”.
 This method has been tested with Ubuntu 16.04 (Xenial).
 
 
@@ -21,7 +21,7 @@ The following libraries are required:
 
 Use for example :program:`synaptic` to install them.
 
-You also need the sources of Polyphone, available [here][download] or on [GitHub][polyphone].
+You also need the sources of Polyphone, available [here][Download] or on [GitHub][polyphone].
 
 
 ## Build
@@ -50,8 +50,10 @@ DEFINES += USE_LOCAL_RTMIDI
 
 (with no leading “#”).
 
+<!-- note begin -->
 **Note:** if you are using :program:`Qt Creator`, the project may be opened via its :file:`.pro` file present in the root directory.
+<!-- note end -->
 
 
-[download]:  download                              {target=_blank}
-[polyphone]: https://github.com/davy7125/polyphone {target=_blank}
+[Download]:  download                              {target=_blank}
+[polyphone]: https://github.com/davy7125/polyphone {target=_blank rel=noopener}

@@ -6,6 +6,12 @@ When a soundfont is created or when an existing one is opened, a new tab contain
 
 A soundfont editor is made of:
 
-* a [tree](manual/soundfont-editor/tree.md) on the left, representing the architecture of the soundfont;
-* a [toolbar](manual/soundfont-editor/toolbar.md) on the top (in blue in the picture);
-* a main area that can either contain an [editing page](manual/soundfont-editor/editing-pages/index.md) or a [configuration summary](manual/soundfont-editor/configuration-summaries.md), depending on what is selected in the [tree](manual/soundfont-editor/tree.md).
+* a [tree] on the left, representing the architecture of the soundfont;
+* a [toolbar] on the top (in blue in the picture);
+* a main area that can either contain an [editing page][editors] or a [configuration summary][conf-summary], depending on what is selected in the [tree].
+
+
+[conf-summary]: manual/soundfont-editor/configuration-summaries.md
+[editors]:      manual/soundfont-editor/editing-pages/index.md
+[toolbar]:      manual/soundfont-editor/toolbar.md
+[tree]:         manual/soundfont-editor/tree.md

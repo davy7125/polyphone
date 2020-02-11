@@ -1,6 +1,6 @@
 Polyphone можно запустить в командной строке для преобразования SoundFont в формат [sf2](#doc_sf2), [sf3](#doc_sf3) или [sfz](#doc_sfz).
 
-Поддерживаемые форматы файлов для преобразования: [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) и [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark).
+Поддерживаемые форматы файлов для преобразования: [sf2], [sf3], [sfz] и [sfArk].
 
 
 ## Преобразование в sf2 {#doc_sf2}
@@ -13,7 +13,10 @@ Polyphone можно запустить в командной строке дл�
 polyphone -1 -i <исходный/файл> -d <целевой/каталог> -o <целевое/имя/файла>
 ```
 
-**Примечание:** В Windows вам нужно написать полный путь к Polyphone, а не просто :command:`polyphone`, например :command:`C:/Program files/Polyphone/polyphone.exe`.
+<!-- note begin -->
+**Примечание:**
+В Windows вам нужно написать полный путь к Polyphone, а не просто :command:`polyphone`, например :command:`C:/Program files/Polyphone/polyphone.exe`.
+<!-- note end -->
 
 
 ### Аргументы
@@ -47,7 +50,10 @@ polyphone -1 -i /путь/к/файлу.sfArk
 polyphone -2 -i <исходный/файл> -d <целевой/каталог> -o <целевое/имя/файла> -c <параметры>
 ```
 
-**Примечание:** В Windows вам нужно написать полный путь к Polyphone, а не просто :command:`polyphone`, например :command:`C:/Program files/Polyphone/polyphone.exe`.
+<!-- note begin -->
+**Примечание:**
+В Windows вам нужно написать полный путь к Polyphone, а не просто :command:`polyphone`, например :command:`C:/Program files/Polyphone/polyphone.exe`.
+<!-- note end -->
 
 
 ### Аргументы
@@ -85,7 +91,10 @@ polyphone -2 -i /путь/к/файлу.sf2 -c 2
 polyphone -3 -i <исходный/файл> -d <целевой/каталог> -o <целевое/имя/файла> -c <параметры>
 ```
 
-**Примечание:** В Windows вам нужно написать полный путь к Polyphone, а не просто :command:`polyphone`, например :command:`C:/Program files/Polyphone/polyphone.exe`.
+<!-- note begin -->
+**Примечание:**
+В Windows вам нужно написать полный путь к Polyphone, а не просто :command:`polyphone`, например :command:`C:/Program files/Polyphone/polyphone.exe`.
+<!-- note end -->
 
 
 ### Аргументы
@@ -110,3 +119,9 @@ polyphone -3 -i <исходный/файл> -d <целевой/каталог> -
 ```
 polyphone -3 -i /путь/к/файлу.sf3 -c 011
 ```
+
+
+[sf2]:   manual/annexes/the-different-soundfont-formats.md#doc_sf2
+[sf3]:   manual/annexes/the-different-soundfont-formats.md#doc_sf3
+[sfArk]: manual/annexes/the-different-soundfont-formats.md#doc_sfark
+[sfz]:   manual/annexes/the-different-soundfont-formats.md#doc_sfz

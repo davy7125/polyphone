@@ -12,7 +12,7 @@
   Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`N`.
 
 Открыть
-: Открыть файл [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) или [.sfark](manual/annexes/the-different-soundfont-formats.md#doc_sfark).
+: Открыть файл [.sf2][sf2], [.sf3][sf3], [.sfz][sfz] или [.sfark][sfark].
   Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`O`.
 
 
@@ -28,7 +28,7 @@
   Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`S`.
 
 Экспортировать
-: Экспортировать и объединить один или несколько пресетов из открытых SoundFont в формат [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) или [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz).
+: Экспортировать и объединить один или несколько пресетов из открытых SoundFont в формат [.sf2][sf2], [.sf3][sf3] или [.sfz][sfz].
   Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`E`.
 
 
@@ -47,7 +47,7 @@
 
 
 Настройки
-: Открыть [настройки](manual/settings.md) программы.
+: Открыть [настройки][settings] программы.
 
 Документация
 : Показать это руководство пользователя в веб-браузере.
@@ -67,3 +67,10 @@
 Выход
 : Выйти из программы.
   Также доступно с помощью комбинации клавиш :kbd:`Ctrl`+:kbd:`Q`.
+
+
+[settings]: manual/settings.md
+[sf2]:      manual/annexes/the-different-soundfont-formats.md#doc_sf2
+[sf3]:      manual/annexes/the-different-soundfont-formats.md#doc_sf3
+[sfark]:    manual/annexes/the-different-soundfont-formats.md#doc_sfark
+[sfz]:      manual/annexes/the-different-soundfont-formats.md#doc_sfz

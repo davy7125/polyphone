@@ -1,4 +1,4 @@
-Use these instructions if you cannot install Polyphone on your Mac OS X with the available installers in the section “[Download](download)”.
+Use these instructions if you cannot install Polyphone on your Mac OS X with the available installers in the section “[Download][download]”.
 
 
 ## Prerequisite
@@ -9,7 +9,7 @@ The following applications are required:
 * Xcode (available in the Apple Store),
 * [Qt Creator with its framework][get-qt].
 
-You also need the sources of Polyphone, available [here][download] or on [GitHub][polyphone], along with the necessary libraries you can download [here](downloads/lib_mac.zip).
+You also need the sources of Polyphone, available [here][download] or on [GitHub][polyphone], along with the necessary libraries you can download [here][lib_mac].
 
 
 ## Build
@@ -51,9 +51,12 @@ You can then execute the program or compress it as a .zip file to share it.
 ## Troubleshooting
 
 
-See this [topic](forum/support-bug-reports/8-success-build-polyphone-on-osx-10-11-6-qt-5-7) if you need more information or for getting some help.
+See this [topic] if you need more information or for getting some help.
 
 
-[get-qt]:    https://www.qt.io/download-open-source {target=_blank}
 [download]:  download                               {target=_blank}
-[polyphone]: https://github.com/davy7125/polyphone  {target=_blank}
+[get-qt]:    https://www.qt.io/download-open-source {target=_blank rel=noopener}
+[polyphone]: https://github.com/davy7125/polyphone  {target=_blank rel=noopener}
+
+[lib_mac]: downloads/lib_mac.zip
+[topic]:   forum/support-bug-reports/8-success-build-polyphone-on-osx-10-11-6-qt-5-7

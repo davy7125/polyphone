@@ -1,4 +1,4 @@
-Use these instructions if you cannot install Polyphone on your Fedora distribution with the available installers in the section “[Download](download)” (verified:&nbsp;Aug 7, 2016 on Fedora 24, 64bit).
+Use these instructions if you cannot install Polyphone on your Fedora distribution with the available installers in the section “[Download][download]” (verified:&nbsp;Aug 7, 2016 on Fedora 24, 64bit).
 
 
 ## Prerequisite
@@ -35,7 +35,7 @@ Just select default components as proposed — unless you want more for other pu
 ![Qt setup in Fedora](images/qt-setup-fedora.png "Qt setup in Fedora")
    
 
-If you want to use Qt Creator install the Polyphone dependencies below and continue with this document: [build with Qt Creator](development/using-qt-creator-to-build-polyphone.md).
+If you want to use Qt Creator install the Polyphone dependencies below and continue with this document: [build with Qt Creator][using-qt-creator].
 
 
 ### Polyphone dependencies
@@ -75,6 +75,7 @@ DEFINES += USE_LOCAL_STK
 DEFINES += USE_LOCAL_QCUSTOMPLOT
 ```
 
+<!-- note begin -->
 **Note:** instead of these modifications you could try to build Polyphone with the Fedora / RPM distributions for these packages. The installation commands would be:
 
 ```
@@ -85,6 +86,7 @@ sudo dnf install qcustomplot-devel
 
 However, running :command:`qmake` afterwards, it claimed to not recognize :program:`rtmidi` on the system.
 As on Windows and Mac Systems the use of the local distributed :program:`rtmidi`, :program:`stk` and :program:`qcustomplot` versions are forced you may not saw any benefit in sorting out the issue with the :program:`rtmidi`.
+<!-- note end -->
 
 
 ### Getting the executable
@@ -102,11 +104,14 @@ If everything goes well you will have the compiled file :file:`polyphone` in the
 ## Troubleshooting
 
 
-See this [topic](forum/support-bug-reports/9-success-polyphone-fedora-rpm-linux-build) if you need more information or for getting some help.
+See this [topic] if you need more information or for getting some help.
 
 <p class="endpage">Special thanks to <a href="dashboard/820-tomotello">Tomotello</a> for this article.</p>
 
 
-[get-qt]:    https://www.qt.io/download-open-source/ {target=_blank}
 [download]:  download                                {target=_blank}
-[polyphone]: https://github.com/davy7125/polyphone   {target=_blank}
+[get-qt]:    https://www.qt.io/download-open-source/ {target=_blank rel=noopener}
+[polyphone]: https://github.com/davy7125/polyphone   {target=_blank rel=noopener}
+
+[topic]:            forum/support-bug-reports/9-success-polyphone-fedora-rpm-linux-build
+[using-qt-creator]: development/using-qt-creator-to-build-polyphone.md

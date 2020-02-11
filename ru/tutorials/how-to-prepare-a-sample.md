@@ -72,9 +72,12 @@
 ![](downloads/tutorials/good-loop.mp3)
 
 
-**Примечание:** Есть способ, которое позволяет «сжульничать», если вам не удаётся легко найти петлю: средство [авто-петля](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop).
+<!-- note begin -->
+**Примечание:**
+Есть способ, которое позволяет «сжульничать», если вам не удаётся легко найти петлю: средство [авто-петля][s-tool-autoloop].
 Он автоматически создаст петлю, вырезав семпл и совместив две части, чтобы конец точно совпадал с началом.
 Просмотрите соответствующую документацию для получения дополнительной информации.
+<!-- note end -->
 
 
 ## Настройка
@@ -114,8 +117,11 @@
 ![](downloads/tutorials/good-tune.mp3)
 
 
-**Примечание:** [Частотный анализ](manual/soundfont-editor/editing-pages/sample-editor.md#doc_fred) может быть хорошим индикатором для начала настройки.
+<!-- note begin -->
+**Примечание:**
+[Частотный анализ][s-editor-freq] может быть хорошим индикатором для начала настройки.
 Но имейте в виду, что ни один алгоритм не решит эту задачу настолько хорошо, как ваш слух.
+<!-- note end -->
 
 
 ![Настройка семпла: частотный анализ](images/tune-sample-3.png "Настройка семпла: частотный анализ")
@@ -127,11 +133,11 @@
 Несколько средств доступны в меню :guilabel:`Инструментарий`.
 Вы можете редактировать семплы:
 
-* [удаление тишины](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) в начале,
-* [выравнивание](manual/soundfont-editor/tools/sample-tools.md#doc_eq) звука,
-* [транспонирование](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
-* [нормализация](manual/soundfont-editor/tools/sample-tools.md#doc_volume) громкости,
-* [регулировка баланса](manual/soundfont-editor/tools/sample-tools.md#doc_balance) стерео семплов.
+* [удаление тишины][s-tool-removeblank] в начале,
+* [выравнивание][s-tool-eq] звука,
+* [транспонирование][s-tool-transpose],
+* [нормализация][s-tool-volume] громкости,
+* [регулировка баланса][s-tool-balance] стерео семплов.
 
 
 ## Замечание о стерео-семплах
@@ -147,3 +153,12 @@
 Управление двумя монофоническими семплами может усложнить их зацикливание, потому что петля может хорошо звучать для одной стороны, но не для другой.
 В этом случае, не стесняйтесь жульничать, настраивая две разных петли справа и слева.
 Качество звука не ухудшится.
+
+
+[s-editor-freq]:      manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq
+[s-tool-autoloop]:    manual/soundfont-editor/tools/sample-tools.md#doc_autoloop
+[s-tool-balance]:     manual/soundfont-editor/tools/sample-tools.md#doc_balance
+[s-tool-eq]:          manual/soundfont-editor/tools/sample-tools.md#doc_eq
+[s-tool-removeblank]: manual/soundfont-editor/tools/sample-tools.md#doc_removeblank
+[s-tool-transpose]:   manual/soundfont-editor/tools/sample-tools.md#doc_transpose
+[s-tool-volume]:      manual/soundfont-editor/tools/sample-tools.md#doc_volume
