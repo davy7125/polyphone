@@ -50,11 +50,11 @@ To assign loop points manually:
 
 
 Finally, a **tuning** has to be done.
-To do this, a calibration tool (Sinus) is available in the editing page of [samples][s-editor-player].
+To do this, a calibration tool (sine) is available in the editing page of [samples][s-editor-player].
 For each sample the method is as follows:
 
 1. begin the playback (press the :guilabel:`play` button), if possible with loop function selected,
-2. select the sinus function,
+2. select the sine function,
 3. adjust the volume slider to hear the two sounds as clearly as possible,
 4. change the :guilabel:`Root key` until the two sounds most closely match,
 5. adjust the :guilabel:`Correction (cents)` to tune the sample to the Rootkey.
@@ -69,7 +69,7 @@ The [frequency][s-editor-freq] analysis can be a good indicator to start tuning.
 Several tools are available to edit samples like:
 
 * [removing blank][s-tool-removeblank] at start,
-* [equalizing][s-tool-eq] the sound,
+* [equalizing][s-editor-eq] the sound,
 * [transposing][s-tool-transpose],
 * [normalizing][s-tool-volume] the volume,
 * [adjusting the balance][s-tool-balance] for stereo samples.
@@ -172,17 +172,17 @@ For the scope of this tutorial, the creation of a soundfont is finished!
 [home-left]:          manual/index.md#doc_left
 [i-editor-table]:     manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table
 [i-tool-position]:    manual/soundfont-editor/tools/instrument-tools.md#doc_position
+[s-editor-eq]:        manual/soundfont-editor/editing-pages/sample-editor#doc_eq
 [s-editor-freq]:      manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq
 [s-editor-graph]:     manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph
 [s-editor-player]:    manual/soundfont-editor/editing-pages/sample-editor.md#doc_player
 [s-editor]:           manual/soundfont-editor/editing-pages/sample-editor.md
 [s-tool-autoloop]:    manual/soundfont-editor/tools/sample-tools.md#doc_autoloop
 [s-tool-balance]:     manual/soundfont-editor/tools/sample-tools.md#doc_balance
-[s-tool-eq]:          manual/soundfont-editor/tools/sample-tools.md#doc_eq
 [s-tool-removeblank]: manual/soundfont-editor/tools/sample-tools.md#doc_removeblank
 [s-tool-transpose]:   manual/soundfont-editor/tools/sample-tools.md#doc_transpose
 [s-tool-volume]:      manual/soundfont-editor/tools/sample-tools.md#doc_volume
-[sf2]:                manual/annexes/the-different-soundfont-formats.md#doc_sf2)
+[sf2]:                manual/annexes/the-different-soundfont-formats.md#doc_sf2
 [toolbar-edit]:       manual/soundfont-editor/toolbar.md#doc_edit
 [toolbar-keyboard]:   manual/soundfont-editor/toolbar.md#doc_keyboard
 [tree-dragdrop]:      manual/soundfont-editor/tree.md#doc_dragdrop

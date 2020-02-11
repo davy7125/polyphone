@@ -44,7 +44,7 @@ Dans l'arborescence, cliquez sur l'échantillon que vous voulez boucler et porte
 Si vous êtes chanceux, ces valeurs ont été enregistrées dans l'échantillon .wav et les champs sont déjà renseignés.
 Si ce n'est pas le cas, ou s'ils ont été mal déterminés (ce qui peut malheureusement arriver…), cliquez arbitrairement dans le graphique (zone de visualisation WAVE) avec le bouton de droite et avec le bouton de gauche pour définir une fin et un début de boucle.
 Ceci est généralement effectué dans la phase stationnaire du son, en excluant l'attaque et la relâche.
-Ensuite, zoomez autour du début de boucle et essayez de superposer la courbe verte (ou rouge) et la courbe bleue en modifiant légérement les paramètres de boucle.
+Ensuite, zoomez autour du début de boucle et essayez de superposer la courbe verte (ou rouge) et la courbe bleue en modifiant légèrement les paramètres de boucle.
 
 
 ![Bouclage d'un échantillon&nbsp;: alignement des ondes](images/loop-sample-2.png "Bouclage d'un échantillon&nbsp;: alignement des ondes")
@@ -60,7 +60,7 @@ Quand une boucle est configurée, appuyez sur :guilabel:`lecture` dans le lecteu
 
 
 Si vous n'entendez pas la transition entre le début et la fin de la boucle, cela signifie que la boucle est correcte.
-Sinon, maintenez la lecture de l'échantillon avec la boucle activée et modifiez légérement la fin et / ou le début de la boucle jusqu'à ce que vous trouviez la transition la plus douce possible.
+Sinon, maintenez la lecture de l'échantillon avec la boucle activée et modifiez légèrement la fin et / ou le début de la boucle jusqu'à ce que vous trouviez la transition la plus douce possible.
 Écoutez les enregistrements suivants pour entendre la différence entre une mauvaise et une bonne boucle&nbsp;:
 
 * <a href="downloads/tutorials/bad-loop.mp3" download>mauvaise boucle</a>
@@ -81,7 +81,7 @@ Voir la documentation en rapport avec l'outil pour plus d'informations.
 
 
 Tous les échantillons doivent être accordés si vous ne voulez pas vous retrouver avec un instrument désaccordé.
-En indiquant dans la soundfont la note exacte de l'échantillon importé, la soundfont sera capable de l'adapté pour n'importe quelle touche du clavier.
+En indiquant dans la soundfont la note exacte de l'échantillon importé, la soundfont sera capable de l'adapter pour n'importe quelle touche du clavier.
 Certains échantillons contiennent déjà ces informations, dans quel cas vous pourriez ne pas avoir besoin de modifier les valeurs dans :guilabel:`Note de base` and :guilabel:`Correction (centièmes)`.
 Mais en précaution il est toujours mieux de vérifier.
 
@@ -126,7 +126,7 @@ Voici des exemples contenant le son d'une flûte et le sinus de calibration&nbsp
 Différents outils sont disponibles pour l'édition des échantillons comme&nbsp;:
 
 * [supprimer le blanc](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) au démarrage,
-* [égaliser](manual/soundfont-editor/tools/sample-tools.md#doc_eq) le son,
+* [égaliser](manual/soundfont-editor/editing-pages/sample-editor#doc_eq) le son,
 * [transposer](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normaliser](manual/soundfont-editor/tools/sample-tools.md#doc_volume) le volume,
 * [ajuster la balance](manual/soundfont-editor/tools/sample-tools.md#doc_balance) pour les échantillons stéréo.

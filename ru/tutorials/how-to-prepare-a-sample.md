@@ -134,7 +134,7 @@
 Вы можете редактировать семплы:
 
 * [удаление тишины][s-tool-removeblank] в начале,
-* [выравнивание][s-tool-eq] звука,
+* [выравнивание][s-editor-eq] звука,
 * [транспонирование][s-tool-transpose],
 * [нормализация][s-tool-volume] громкости,
 * [регулировка баланса][s-tool-balance] стерео семплов.
@@ -155,10 +155,10 @@
 Качество звука не ухудшится.
 
 
+[s-editor-eq]:        manual/soundfont-editor/editing-pages/sample-editor#doc_eq
 [s-editor-freq]:      manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq
 [s-tool-autoloop]:    manual/soundfont-editor/tools/sample-tools.md#doc_autoloop
 [s-tool-balance]:     manual/soundfont-editor/tools/sample-tools.md#doc_balance
-[s-tool-eq]:          manual/soundfont-editor/tools/sample-tools.md#doc_eq
 [s-tool-removeblank]: manual/soundfont-editor/tools/sample-tools.md#doc_removeblank
 [s-tool-transpose]:   manual/soundfont-editor/tools/sample-tools.md#doc_transpose
 [s-tool-volume]:      manual/soundfont-editor/tools/sample-tools.md#doc_volume

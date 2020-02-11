@@ -70,7 +70,7 @@
 При редактировании семплов доступно несколько средств:
 
 * [удаление тишины][s-tool-removeblank] в начале,
-* [выравнивание][s-tool-eq] звука,
+* [выравнивание][s-editor-eq] звука,
 * [транспонирование][s-tool-transpose],
 * [нормализация][s-tool-volume] громкости,
 * [регулировка баланса][s-tool-balance] стерео семплов.
@@ -174,13 +174,13 @@ SoundFont может иметь один или несколько пресет�
 [home-left]:          manual/index.md#doc_left
 [i-editor-table]:     manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table
 [i-tool-position]:    manual/soundfont-editor/tools/instrument-tools.md#doc_position
+[s-editor-eq]:        manual/soundfont-editor/editing-pages/sample-editor#doc_eq
 [s-editor-freq]:      manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq
 [s-editor-graph]:     manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph
 [s-editor-player]:    manual/soundfont-editor/editing-pages/sample-editor.md#doc_player
 [s-editor]:           manual/soundfont-editor/editing-pages/sample-editor.md
 [s-tool-autoloop]:    manual/soundfont-editor/tools/sample-tools.md#doc_autoloop
 [s-tool-balance]:     manual/soundfont-editor/tools/sample-tools.md#doc_balance
-[s-tool-eq]:          manual/soundfont-editor/tools/sample-tools.md#doc_eq
 [s-tool-removeblank]: manual/soundfont-editor/tools/sample-tools.md#doc_removeblank
 [s-tool-transpose]:   manual/soundfont-editor/tools/sample-tools.md#doc_transpose
 [s-tool-volume]:      manual/soundfont-editor/tools/sample-tools.md#doc_volume

@@ -91,7 +91,7 @@ But as a precaution it is always good to check.
 
 
 Enable the loop if the sample has one and press :guilabel:`play` on the player.
-Then add the calibration sinus and adjust its volume so that you can hear both sounds as clearly as possible.
+Then add the calibration sine and adjust its volume so that you can hear both sounds as clearly as possible.
 
 
 ![Tune sample: play sample along with calibration signal](images/tune-sample-2.png "Tune sample: play sample along with calibration signal")
@@ -100,7 +100,7 @@ Then add the calibration sinus and adjust its volume so that you can hear both s
 Start the tuning by changing the root key until the two sounds most closely match.
 Continue by adjusting the correction.
 For this step, pay attention to any beats that occur and make sure they are as slow as possible.
-Here are examples containing the sound of a flute and a calibration sinus:
+Here are examples containing the sound of a flute and a calibration sine:
 
 * <a href="downloads/tutorials/very-bad-tune.mp3" download>very bad tune</a> (the root key doesn't match)
 
@@ -129,7 +129,7 @@ Several tools are available in the menu :guilabel:`Tools`.
 You can edit samples by:
 
 * [removing blank][s-tool-removeblank] at start,
-* [equalizing][s-tool-eq] the sound,
+* [equalizing][s-editor-eq] the sound,
 * [transposing][s-tool-transpose],
 * [normalizing][s-tool-volume] the volume,
 * [adjusting the balance][s-tool-balance] for stereo samples.
@@ -150,10 +150,10 @@ In that case, don't hesitate to cheat by configuring two different loops on the 
 The quality of the sound will not be impaired.
 
 
+[s-editor-eq]:        manual/soundfont-editor/editing-pages/sample-editor#doc_eq
 [s-editor-freq]:      manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq
 [s-tool-autoloop]:    manual/soundfont-editor/tools/sample-tools.md#doc_autoloop
 [s-tool-balance]:     manual/soundfont-editor/tools/sample-tools.md#doc_balance
-[s-tool-eq]:          manual/soundfont-editor/tools/sample-tools.md#doc_eq
 [s-tool-removeblank]: manual/soundfont-editor/tools/sample-tools.md#doc_removeblank
 [s-tool-transpose]:   manual/soundfont-editor/tools/sample-tools.md#doc_transpose
 [s-tool-volume]:      manual/soundfont-editor/tools/sample-tools.md#doc_volume
