@@ -90,7 +90,7 @@ But as a precaution it is always good to check.
 
 
 Enable the loop if the sample has one and press :guilabel:`play` on the player.
-Then add the calibration sinus and adjust its volume so that you can hear both sounds as clearly as possible.
+Then add the calibration sine and adjust its volume so that you can hear both sounds as clearly as possible.
 
 
 ![Tune sample: play sample along with calibration signal](images/tune-sample-2.png "Tune sample: play sample along with calibration signal")
@@ -99,7 +99,7 @@ Then add the calibration sinus and adjust its volume so that you can hear both s
 Start the tuning by changing the root key until the two sounds most closely match.
 Continue by adjusting the correction.
 For this step, pay attention to any beats that occur and make sure they are as slow as possible.
-Here are examples containing the sound of a flute and a calibration sinus:
+Here are examples containing the sound of a flute and a calibration sine:
 
 * <a href="downloads/tutorials/very-bad-tune.mp3" download>very bad tune</a> (the root key doesn't match)
 
@@ -127,7 +127,7 @@ Several tools are available in the menu :guilabel:`Tools`.
 You can edit samples by:
 
 * [removing blank](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) at start,
-* [equalizing](manual/soundfont-editor/tools/sample-tools.md#doc_eq) the sound,
+* [equalizing](manual/soundfont-editor/editing-pages/sample-editor#doc_eq) the sound,
 * [transposing](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normalizing](manual/soundfont-editor/tools/sample-tools.md#doc_volume) the volume,
 * [adjusting the balance](manual/soundfont-editor/tools/sample-tools.md#doc_balance) for stereo samples.

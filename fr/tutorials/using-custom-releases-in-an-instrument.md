@@ -11,12 +11,12 @@ Ceci est la méthode classique pour faire une relâche avec les soundfonts&nbsp;
 Ce type de relâche peut être vu comme une simple extension de la phase de maintien.
 
 Une relâche plus réaliste est d'utiliser la vraie relâche provenant d'un échantillon enregistré.
-L'attaque et la phase de maintien seront joués de la même manière mais lorsque vient la relâche d'une note, la phase de maintien s'arrête rapidement pour laisser place à la relâche enregistrée qui va alors commencer à être lue.
-Une relâche personnalisée est utilisée plutôt qu'une extension de la phase de maintien, ajoutant des détails au son.
+L'attaque et la phase de maintien seront jouées de la même manière mais lorsque vient la relâche d'une note, la phase de maintien s'arrête rapidement pour laisser place à la relâche enregistrée qui va alors commencer à être lue.
+Une relâche personnalisée est utilisée plutôt qu'une extension de la phase de maintien, ajoutant ainsi des détails au son.
 
 Créer un tel instrument est possible en séparant le problème en deux&nbsp;:
 
-* l'attaque et la phase de maintien sont définis dans un premier temps,
+* l'attaque et la phase de maintien sont définies dans un premier temps,
 * la relâche est ensuite déclenchée.
 
 L'exemple qui va être utilisé ici est le son d'une trompette sur l'orgue, pour son grand contenu harmonique et sa progression très perceptible.
@@ -25,7 +25,7 @@ L'exemple qui va être utilisé ici est le son d'une trompette sur l'orgue, pour
 ## Préparation des échantillons
 
 
-Deux cas peuvent apparaître&nbsp;: vous avez un fichier contenant l'échantillon complet de l'attaque jusqu'à la release, ou vous possédez un fichier additionnel contenant seulement la relâche qui a été extraite au préalable.
+Deux cas peuvent apparaître&nbsp;: vous avez un fichier contenant l'échantillon complet de l'attaque jusqu'à la relâche, ou vous possédez un fichier additionnel contenant seulement la relâche qui a été extraite au préalable.
 
 
 ### Échantillon complet avec relâche
@@ -33,7 +33,7 @@ Deux cas peuvent apparaître&nbsp;: vous avez un fichier contenant l'échantillo
 
 Chargez l'échantillon 2 fois dans Polyphone et ensuite, dans la seconde instance de l'échantillon, effacer tout dans l'échantillon sauf la relâche.
 La suppression peut être effectuée en utilisant la touche :kbd:`Alt` et en surlignant la zone à supprimer dans le [graphique](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) de l'échantillon.
-Pour trouver le point où la relâche commence, jouer l'échantillon plusieurs et essayez de trouver l'endroit où vous pensez qu'il n'y a plus d'énergie pour nourrir le son.
+Pour trouver le point où la relâche commence, jouer l'échantillon plusieurs fois et essayez de trouver l'endroit où vous pensez qu'il n'y a plus d'énergie pour nourrir le son.
 Cette dernière partie sera la relâche.
 Suivez ensuite les instructions ci-dessous.
 
@@ -52,7 +52,7 @@ Bouclez le second échantillon sur une partie très courte au début, par exempl
 Spécifiez la même note de base et la même correction que pour le premier échantillon.
 
 
-## First instrument&nbsp;: attaque et phase de maintien
+## Premier instrument&nbsp;: attaque et phase de maintien
 
 
 Créez un premier instrument avec les échantillons contenant l'attaque et la phase de maintien du son.
@@ -76,8 +76,8 @@ Configurez-le de cette manière&nbsp;:
 
 Vous avez à présent un instrument silencieux tant que vous ne relâchez pas la note et qui déclenche ensuite la relâche.
 Vous pouvez aussi noter qu'un appui très bref sur une note déclenche la relâche d'une manière atténuée.
-Ce point est peut être délicat à entendre dans le cas de notre trompette car son attaque est très rapide.
-La durée de l'attaque a donc été légérement augmentée dans l'exemple.
+Ce point est peut-être délicat à entendre dans le cas de notre trompette car son attaque est très rapide.
+La durée de l'attaque a donc été légèrement augmentée dans l'exemple.
 
 
 ## Assemblage des deux instruments
@@ -90,7 +90,7 @@ Vous pouvez ensuite entendre le résultat et essayer de rendre la transition plu
 * en atténuant le premier ou le second instrument,
 * en augmentant la durée de la relâche dans le premier instrument.
 
-Le résultat avec les fichiers en exemple peut être téléchargé <a href="downloads/tutorials/custom%20release.sf2" download>ici</a>.
+Le résultat avec les échantillons en exemple peut être téléchargé <a href="downloads/tutorials/custom%20release.sf2" download>ici</a>.
 
 Vous pouvez écouter ci-dessous la différence entre&nbsp;:
 

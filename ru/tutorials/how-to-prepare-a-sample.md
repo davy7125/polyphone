@@ -128,7 +128,7 @@
 Вы можете редактировать семплы:
 
 * [удаление тишины](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) в начале,
-* [выравнивание](manual/soundfont-editor/tools/sample-tools.md#doc_eq) звука,
+* [выравнивание](manual/soundfont-editor/editing-pages/sample-editor#doc_eq) звука,
 * [транспонирование](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [нормализация](manual/soundfont-editor/tools/sample-tools.md#doc_volume) громкости,
 * [регулировка баланса](manual/soundfont-editor/tools/sample-tools.md#doc_balance) стерео семплов.

@@ -49,11 +49,11 @@ To assign loop points manually:
 
 
 Finally, a **tuning** has to be done.
-To do this, a calibration tool (Sinus) is available in the editing page of [samples](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player).
+To do this, a calibration tool (sine) is available in the editing page of [samples](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player).
 For each sample the method is as follows:
 
 1. begin the playback (press the :guilabel:`play` button), if possible with loop function selected,
-2. select the sinus function,
+2. select the sine function,
 3. adjust the volume slider to hear the two sounds as clearly as possible,
 4. change the :guilabel:`Root key` until the two sounds most closely match,
 5. adjust the :guilabel:`Correction (cents)` to tune the sample to the Rootkey.
@@ -68,7 +68,7 @@ The [frequency](manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq)
 Several tools are available to edit samples like:
 
 * [removing blank](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) at start,
-* [equalizing](manual/soundfont-editor/tools/sample-tools.md#doc_eq) the sound,
+* [equalizing](manual/soundfont-editor/editing-pages/sample-editor#doc_eq) the sound,
 * [transposing](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normalizing](manual/soundfont-editor/tools/sample-tools.md#doc_volume) the volume,
 * [adjusting the balance](manual/soundfont-editor/tools/sample-tools.md#doc_balance) for stereo samples.

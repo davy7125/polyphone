@@ -49,7 +49,7 @@ Pour positionner des points de bouclage manuellement&nbsp;:
 
 
 Enfin, un **accordage** doit être effectué.
-Pour ce faire, un outil de calibration (Sinus) est disponible dans la page d'édition des [échantillons](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player).
+Pour ce faire, un outil de calibration (sinus) est disponible dans la page d'édition des [échantillons](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player).
 Pour chaque échantillon, la méthode est la suivante&nbsp;:
 
 1. démarrez la lecture (en appuyant sur le bouton :guilabel:`Lecture`), si possible avec la fonction de bouclage sélectionnée,
@@ -57,9 +57,9 @@ Pour chaque échantillon, la méthode est la suivante&nbsp;:
 3. ajustez le bouton de volume pour entendre les deux sons aussi clairement que possible,
 4. changez la :guilabel:`Note de base` jusqu'à ce que les deux sons se superposent à peu près,
 5. ajustez la :guilabel:`Correction (centièmes)` pour accorder l'échantillon sur sa note de base.
-   Pour y parvenir, faîtes attention aux battements qui pourraient apparaître et rendez-les aussi lents que possible.
+   Pour y parvenir, faites attention aux battements qui pourraient apparaître et rendez-les aussi lents que possible.
 
-L'[analyse fréquencielle](manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq) peut être un bon indicateur pour commencer l'accordage.
+L'[analyse fréquentielle](manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq) peut être un bon indicateur pour commencer l'accordage.
 
 
 ### Pour aller plus loin
@@ -68,7 +68,7 @@ L'[analyse fréquencielle](manual/soundfont-editor/editing-pages/sample-editor.m
 Différents outils sont disponibles pour l'édition des échantillons comme&nbsp;:
 
 * [supprimer le blanc](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) au démarrage,
-* [égaliser](manual/soundfont-editor/tools/sample-tools.md#doc_eq) le son,
+* [égaliser](manual/soundfont-editor/editing-pages/sample-editor#doc_eq) le son,
 * [transposer](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normaliser](manual/soundfont-editor/tools/sample-tools.md#doc_volume) le volume,
 * [ajuster la balance](manual/soundfont-editor/tools/sample-tools.md#doc_balance) pour les échantillons stéréo.
@@ -109,7 +109,7 @@ L'outil «&nbsp;[Auto-positionnement des échantillons](manual/soundfont-editor/
 Pour autoriser la lecture en boucle dans un instrument contenant des échantillons bouclés, sélectionner ![loop on](images/loop_on.png "loop on"){.inline} dans la ligne correspondant au paramètre :guilabel:`Lecture en boucle` pour soit  :guilabel:`Global`, soit des colonnes individuelles dans la table des paramètres.
 
 * ![loop on](images/loop_on.png "loop on"){.inline} active la lecture en boucle,
-* ![loop off](images/loop_off.png "loop off"){.inline} ou une ligne vide la désactive.
+* ![loop off](images/loop_off.png "loop off"){.inline} ou une cellule vide la désactive.
 * ![loop on and end](images/loop_on_end.png "loop on and end"){.inline} active la lecture en boucle et lit le reste de l'échantillon une fois la touche relâchée.
 
 La division globale, comme son nom l'indique, vous permet d'entrer un paramètre qui sera valable pour l'instrument entier.
