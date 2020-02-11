@@ -1,1 +1,2 @@
 documentation_name=Документация
+language_name=По-русски
