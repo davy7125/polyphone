@@ -12,7 +12,6 @@ Similarly to the [instrument editor][i-editor], several parts are present:
 
 
 If only one preset is selected, the page allows the editing of the global parameters of the preset and the parameters of all its divisions.
-
 In the case where several presets are selected, the global parameters of each of these presets can be edited.
 
 
