@@ -1,5 +1,5 @@
 En sélectionnant au moins un ensemble dans l'[arborescence](manual/soundfont-editor/tree.md), l'éditeur des ensembles apparait.
-Un ensemble est une combinaison d'un instrument ou plus et est l'élément visible de l'extérieur d'une [soundfont](manual/annexes/the-different-soundfont-formats.md#doc_sf2).
+Un ensemble est une combinaison d'un instrument ou plus et est l'élément visible de l'extérieur d'une [banque de sons](manual/annexes/the-different-soundfont-formats.md#doc_sf2).
 
 Tout comme l'[éditeur des instruments](manual/soundfont-editor/editing-pages/instrument-editor.md), vous y retrouverez plusieurs parties&nbsp;:
 

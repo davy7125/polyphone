@@ -1,5 +1,5 @@
-Pour créer une [soundfont](manual/annexes/the-different-soundfont-formats.md#doc_sf2), cliquez sur :guilabel:`Nouvelle soundfont` sur la [page de démarrage](manual/index.md#doc_left).
-Les soundfonts sont composées d'une structure à 3 niveaux et c'est ainsi que la création d'une soundfont implique 3 étapes fondamentales&nbsp;:
+Pour créer une [banque de sons](manual/annexes/the-different-soundfont-formats.md#doc_sf2), cliquez sur :guilabel:`Nouvelle banque de sons` sur l' [écran d'accueil](manual/index.md#doc_left).
+Les banques de sons sont composées d'une structure à 3 niveaux et c'est ainsi que la création d'une banque de sons implique 3 étapes fondamentales&nbsp;:
 
 * la [préparation des échantillons](#doc_sample),
 * la [création d'un instrument](#doc_instrument), faisant référence aux échantillons préalablement préparés,
@@ -133,8 +133,8 @@ Pour cette étape, il est supposé qu'au moins un instrument est disponible pour
 
 
 Un ensemble est l'équivalent d'un «&nbsp;sound patch name&nbsp;» que l'on peut trouver sur les synthétiseurs hardware.
-Les ensembles, chacun caractérisé par un numéro de banque, un numéro d'ensemble et un nom, constituent la partie visible extérieurement de la soundfont.
-Une soundfont peut avoir un ou plusieurs ensembles.
+Les ensembles, chacun caractérisé par un numéro de banque, un numéro d'ensemble et un nom, constituent la partie visible extérieurement de la banque de sons.
+Une banque de sons peut avoir un ou plusieurs ensembles.
 Chaque ensemble est lié à un ou plusieurs instruments, tout comme les instruments sont liés à un ou plusieurs échantillons.
 
 
@@ -159,4 +159,4 @@ Modifier les paramètres dans les ensembles peut ne pas être nécessaire étant
 * lors de la création d'un ensemble, les numéros de banque et d'ensemble sont automatiquement assignés,
 * lors du lien entre un instrument et un ensemble, l'étendue de notes est automatiquement calculé en fonction de l'instrument.
 
-Dans le cadre de ce tutoriel, la création de la soundfont est terminée&nbsp;!
+Dans le cadre de ce tutoriel, la création de la banque de sons est terminée&nbsp;!

@@ -1,4 +1,4 @@
-Lorsqu'une soundfont est ouverte, l'[arborescence](manual/soundfont-editor/tree.md) affiche le contenu de la soundfont.
+Lorsqu'une banque de sons est ouverte, l'[arborescence](manual/soundfont-editor/tree.md) affiche le contenu de la banque de sons.
 Les éditeurs apparaissent à droite de l'arborescence lorsque des éléments sont séléctionnés&nbsp;:
 
 * la sélection de l'entête :guilabel:`Général` ouvre l'éditeur des [informations générales](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md),

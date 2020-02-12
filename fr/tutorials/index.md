@@ -1,12 +1,12 @@
-### [Créer une soundfont à partir de zéro](tutorials/create-a-soundfont-from-scratch.md)
+### [Créer une banque de sons à partir de zéro](tutorials/create-a-soundfont-from-scratch.md)
 
-Apprenez les bases pour créer une nouvelle soundfont.
+Apprenez les bases pour créer une nouvelle banque de sons.
 
 
 ### [Comment préparer un échantillon](tutorials/how-to-prepare-a-sample.md)
 
-Un instrument construit dans une soundfont contient des échantillons, provenant par exemple de l'enregistrement d'un instrument réel.
-Ce tutoriel décrit comment ajouter et préparer un échantillon dans une soundfont.
+Un instrument construit dans une banque de sons contient des échantillons, provenant par exemple de l'enregistrement d'un instrument réel.
+Ce tutoriel décrit comment ajouter et préparer un échantillon dans une banque de sons.
 
 
 ### [Utiliser des échantillons pour la relâche d'une note](tutorials/using-custom-releases-in-an-instrument.md)

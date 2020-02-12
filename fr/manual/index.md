@@ -9,7 +9,7 @@ Des informations supplémentaires peuvent aussi être trouvées dans les [annexe
 À l'ouverture de Polyphone, vous trouverez grossièrement 3 parties&nbsp;:
 
 * une [partie gauche](#doc_left), contenant l'historique des fichiers et des raccourcis&nbsp;;
-* une [partie droite](#doc_right), dédiée aux banques de son&nbsp;;
+* une [partie droite](#doc_right), dédiée aux banques de sons en ligne&nbsp;;
 * une [partie haute](#doc_top), présentant des onglets et un menu.
 
 
@@ -19,16 +19,16 @@ Des informations supplémentaires peuvent aussi être trouvées dans les [annexe
 ## Partie gauche {#doc_left}
 
 
-### Ouverture d'une soundfont
+### Ouverture d'une banque de sons
 
 
-Trois manières d'ouvrir une soundfont (aussi appelée «&nbsp;banque de son&nbsp;»)&nbsp;:
+Trois manières d'ouvrir une banque de sons (aussi appelée «&nbsp;soundfont&nbsp;» en anglais)&nbsp;:
 
-* un clic sur :guilabel:`Ouvrir banque de son` ouvre un navigateur de fichiers, les fichiers sélectionnables ayant l'extension sf2, sf3, sfArk ou sfz (les différents formats sont décrits [ici](manual/annexes/the-different-soundfont-formats.md))&nbsp;;
-* un clic sur :guilabel:`Nouvelle banque de son` ouvre une soundfont vierge, tout devant être fait à partir de zéro&nbsp;;
-* un double-clic sur une soundfont de l'historique la ré-ouvre.
+* un clic sur :guilabel:`Ouvrir banque de sons` ouvre un navigateur de fichiers, les fichiers sélectionnables ayant l'extension sf2, sf3, sfArk ou sfz (les différents formats sont décrits [ici](manual/annexes/the-different-soundfont-formats.md))&nbsp;;
+* un clic sur :guilabel:`Nouvelle banque de sons` ouvre une banque de sons vide, tout devant être fait à partir de zéro&nbsp;;
+* un double-clic sur une banque de sons de l'historique la ré-ouvre.
 
-Lorsqu'une soundfont est ouverte un nouvel onglet apparaît, permettant d'accéder à un [éditeur de soundfont](manual/soundfont-editor/index.md).
+Lorsqu'une banque de sons est ouverte un nouvel onglet apparaît, permettant d'accéder à un [éditeur](manual/soundfont-editor/index.md).
 
 
 ### Raccourcis
@@ -44,23 +44,23 @@ Trois boutons sont localisés dans le bas de la partie gauche&nbsp;:
 ## Partie droite {#doc_right}
 
 
-### Banques de son en ligne
+### Banques de sons en ligne
 
 
-Un clic sur le bouton :guilabel:`Banques de son en ligne` ouvre un onglet avec l'[explorateur de banques de son](manual/soundfont-browser.md).
+Un clic sur le bouton :guilabel:`Banques de sons en ligne` ouvre un onglet avec l'[explorateur de banques de sons](manual/soundfont-browser.md).
 
 
-### Banques de son du jour
+### Banques de sons du jour
 
 
-Chaque jour 5 banques de son choisies aléatoirement sont affichées ici, de manière à vous inciter à découvrir de nouvelles banques de son.
+Chaque jour 5 banques de sons choisies aléatoirement sont affichées ici, de manière à vous inciter à découvrir de nouvelles banques de sons.
 Double-cliquer sur l'une d'elles ouvre un nouvel onglet avec la [page de description](manual/soundfont-browser.md#doc_description) correspondante.
 
 
 ### Recherche
 
 
-Il est possible d'écrire un mot-clef pour chercher des banques de son spécifiques et les résultats seront affichés dans l'[explorateur de banques de son](manual/soundfont-browser.md).
+Il est possible d'écrire un mot-clef pour chercher des banques de sons spécifiques et les résultats seront affichés dans l'[explorateur de banques de sons](manual/soundfont-browser.md).
 
 
 ## Partie haute {#doc_top}
@@ -72,10 +72,10 @@ Il est possible d'écrire un mot-clef pour chercher des banques de son spécifiq
 Les onglets permettent un accès rapide entre&nbsp;:
 
 * l'[écran d'accueil](#doc_home) (premier onglet — toujours ouvert),
-* l'[éditeur](manual/soundfont-editor/index.md) d'une banque de son ouverte,
+* l'[éditeur](manual/soundfont-editor/index.md) d'une banque de sons ouverte,
 * les [préférences](manual/settings.md) du logiciel,
-* l'[explorateur de banques de son](manual/soundfont-browser.md),
-* la [page de description](manual/soundfont-browser.md#doc_description) d'une banque de son en ligne.
+* l'[explorateur de banques de sons](manual/soundfont-browser.md),
+* la [page de description](manual/soundfont-browser.md#doc_description) d'une banque de sons en ligne.
 
 
 ### Menu

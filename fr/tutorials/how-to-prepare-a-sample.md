@@ -1,5 +1,5 @@
-Un instrument construit sous la forme d'une soundfont est composé d'échantillons, provenant par exemple de l'enregistrement d'un vrai instrument.
-Ce tutoriel décrit comment ajouter et préparer un échantillon dans une soundfont.
+Un instrument construit sous la forme d'une banque de sons est composé d'échantillons, provenant par exemple de l'enregistrement d'un vrai instrument.
+Ce tutoriel décrit comment ajouter et préparer un échantillon dans une banque de sons.
 
 
 ## Import
@@ -10,7 +10,7 @@ Beaucoup d'échantillons gratuits peuvent être trouvés sur internet, provenant
 
 Pour ce tutoriel, cet échantillon de flûte est fourni&nbsp;: <a href="downloads/tutorials/flute.wav" download>flute.wav</a>.
 
-Lorsque vous l'avez, créez une nouvelle soundfont avec Polyphone (:menuselection:`Menu --> Nouveau`) et importez l'échantillon (:guilabel:`Nouvel échantillon`).
+Lorsque vous l'avez, créez une nouvelle banque de sons avec Polyphone (:menuselection:`Menu --> Nouveau`) et importez l'échantillon (:guilabel:`Nouvel échantillon`).
 
 
 ![Import d'un échantillon](images/import-sample.png "Import d'un échantillon")
@@ -81,7 +81,7 @@ Voir la documentation en rapport avec l'outil pour plus d'informations.
 
 
 Tous les échantillons doivent être accordés si vous ne voulez pas vous retrouver avec un instrument désaccordé.
-En indiquant dans la soundfont la note exacte de l'échantillon importé, la soundfont sera capable de l'adapter pour n'importe quelle touche du clavier.
+En indiquant dans la banque de sons la note exacte de l'échantillon importé, le moteur de rendu du son sera capable de l'adapter pour n'importe quelle touche du clavier.
 Certains échantillons contiennent déjà ces informations, dans quel cas vous pourriez ne pas avoir besoin de modifier les valeurs dans :guilabel:`Note de base` and :guilabel:`Correction (centièmes)`.
 Mais en précaution il est toujours mieux de vérifier.
 

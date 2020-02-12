@@ -10,7 +10,7 @@ Supported file formats for the conversion are [sf2](manual/annexes/the-different
 
 
 ```
-polyphone -1 -i <file/to/convert> -d <output/directory> -o <output/file/name>
+polyphone -1 -i <file/to/convert> -d <output/directory> -o <output_file_name>
 ```
 
 **Note:** with Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.
@@ -44,7 +44,7 @@ polyphone -1 -i /path/to/file.sfArk
 
 
 ```
-polyphone -2 -i <file/to/convert> -d <output/directory> -o <output/file/name> -c [config]
+polyphone -2 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c <configuration>
 ```
 
 **Note:** with Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.
@@ -82,7 +82,7 @@ polyphone -2 -i /path/to/file.sf2 -c 2
 
 
 ```
-polyphone -3 -i <file/to/convert> -d <output/directory> -o <output/file/name> -c [config]
+polyphone -3 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c <configuration>
 ```
 
 **Note:** with Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.

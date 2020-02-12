@@ -1,4 +1,4 @@
-Lorsque vous avez compris comment les soundfonts fonctionnent (au travers les différents [éditeurs](manual/soundfont-editor/editing-pages/index.md)), les outils constituent probablement le prochain sujet d'intérêt.
+Lorsque vous avez compris comment les banques de sons fonctionnent (au travers les différents [éditeurs](manual/soundfont-editor/editing-pages/index.md)), les outils constituent probablement le prochain sujet d'intérêt.
 Ils ont tous été conçus pour accélérer / automatiser l'édition et pour éviter les erreurs courantes ou les imprécisions qu'un être humain fait habituellement.
 
 Les outils sont tous disponibles dans un menu qui est affiché en cliquant sur l'icône représentant une boîte à outils située dans la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_edit).

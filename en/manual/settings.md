@@ -24,9 +24,9 @@ The :guilabel:`General` section allows the modification of the following paramet
 
 Moreover, it is possible to check the following options:
 
-* **Sample import: trim to loop:**\
+* **Sample import: trim to loop**\
   When importing a sample, data located after the end of loop are automatically removed (same effect as the tool “[Trim to end of loop](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)”).
-* **Wav file import: remove blank at start**\
+* **Sample import: remove blank at start**\
   When importing a sample, any blank area located before the beginning of the attack is automatically removed (same effect as the tool “[Remove blank at start](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)”).
 * **Stereo editing: change linked sample**\
   When editing one side of a stereo sample, the other side is automatically edited the same.

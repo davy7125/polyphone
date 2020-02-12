@@ -10,7 +10,7 @@ The menu, located at the top right corner of the software, contains several item
 * **New**\
   Create a new .sf2 file from scratch.
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`N`.
-* **Open**\
+* **Open…**\
   Open an [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) or [.sfark](manual/annexes/the-different-soundfont-formats.md#doc_sfark) file.
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`O`.
 
@@ -21,11 +21,11 @@ The menu, located at the top right corner of the software, contains several item
 * **Save**\
   Save the current file.
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`S`.
-* **Save as**\
+* **Save as…**\
   Save the current file in another file.
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`S`.
-* **Export**\
-  Export and merge one or several presets from the open soundfonts in the [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) or [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) format.
+* **Export soundfonts…**\
+  Merge and export one or several presets from the open soundfonts in the [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) or [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) format.
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`E`.
 
 

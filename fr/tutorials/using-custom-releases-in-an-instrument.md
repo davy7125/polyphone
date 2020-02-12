@@ -7,7 +7,7 @@ Vous apprendrez comment utiliser pleinement les capacités d'un tel échantillon
 
 Lorsque vous appuyez sur une touche vous entendez tout d'abord le début de l'échantillon (l'attaque) et ensuite, aussi longtemps que vous ne relevez pas la touche, la boucle au sein de l'échantillon sera jouée encore et encore (la phase de maintien).
 Lorsque vous relevez la touche, la boucle sera encore utilisée et le son sera progressivement atténué jusqu'à ce qu'il ne soit plus audible.
-Ceci est la méthode classique pour faire une relâche avec les soundfonts&nbsp;: elle est facile à configurer mais elle ignore toutes les harmoniques transitoires qui pourraient apparaître lors de l'arrêt réel du son d'un instrument acoustique.
+Ceci est la méthode classique pour faire une relâche avec les banques de sons&nbsp;: elle est facile à configurer mais elle ignore toutes les harmoniques transitoires qui pourraient apparaître lors de l'arrêt réel du son d'un instrument acoustique.
 Ce type de relâche peut être vu comme une simple extension de la phase de maintien.
 
 Une relâche plus réaliste est d'utiliser la vraie relâche provenant d'un échantillon enregistré.

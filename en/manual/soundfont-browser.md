@@ -79,7 +79,7 @@ The description of a soundfont is made of:
 
 
 For downloading a file, click on the icon :guilabel:`download` next to its file name in the section :guilabel:`Downloads`.
-You will see the download progress in a menu next to the main menu, at the top right corner of the software.
+You will see the download progress in a menu next to the [main menu](manual/menu.md), at the top right corner of the software.
 Once a file is downloaded and if the file is a soundfont, it is possible to open it in a [soundfont editor](manual/soundfont-editor/index.md) by clicking on the icon :guilabel:`open`.
 
 It is possible from the menu to clear the completed downloads.
