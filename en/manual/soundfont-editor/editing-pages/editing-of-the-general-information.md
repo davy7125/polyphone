@@ -25,9 +25,9 @@ The editing page of the general information provides fields for changing the fol
 * **Copyright**\
   Mention to fill if the file is subject to copyright.
 * **Comments**\
-  Information not included in any of the preceding categories.
+  Information not included in any of the previous categories.
 * **Kind of samples**\
-  Indicates whether the samples should be recorded in 16 bits or 24 bits.
+  Indicates whether the samples are stored with a 16-bit or 24-bit resolution.
   Please note that 24-bit samples may not be supported in some synthesizers.
 
 
@@ -37,11 +37,11 @@ The editing page of the general information provides fields for changing the fol
 The editing page of the general information comprises the following non-editable information:
 
 * **Soundfont version**\
-  Corresponds the version of the [sf2 format](manual/annexes/the-different-soundfont-formats.md#doc_sf2) used by the file.
+  Version of the [sf2 format](manual/annexes/the-different-soundfont-formats.md#doc_sf2) used by the file.
 * **ROM name and version**\
   Name and version of a sample ROM if used.
 * **Sound engine**\
-  Corresponds to the name of a sound engine.
+  Name of a sound engine.
 * **Editing software**\
   Editing software used for the soundfont creation.
 * **File name**\

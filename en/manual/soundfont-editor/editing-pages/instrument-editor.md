@@ -26,16 +26,16 @@ In the case where several instruments are selected, the global parameters of eac
 
 
 The table allows a global view and the editing of an instrument configuration.
-A change of a parameter in the “global” division applies to all divisions, except for divisions whose same parameter is already specified.
+A change of a parameter in the “global” division applies to all divisions, except for divisions whose same parameter is already specified (local override).
 
 The editable parameters are:
 
 * **Key range**\
-  Key range for which the sound will be heard.
+  Key range for which the sample will be heard.
 * **Velocity range**\
-  Velocity range for which the sound will be heard.
+  Velocity range for which the sample will be heard.
   It is possible to set different sounds for the same note, with different velocity ranges (to distinguish different nuances of a piano key for example).
-* **Attenuation**\
+* **Attenuation (dB)**\
   Attenuation in decibel applied to the sample.\
   Note: the sf2 format doesn't allow this value to be negative, no amplification is thus possible.
 * **Pan**\
@@ -59,10 +59,10 @@ The editable parameters are:
 * **Modulation**\
   Set a modulation (envelope, delay, frequency, changes with the note) and its effect on the tone, filter and volume.
 * **Vibrato**\
-  Set a vibrato (time, frequency) and its effect on the tone.
-* **Exclusive class:**\
-  This parameter can define one or more exclusive classes, by assigning a set of sounds within a class the same parameter value other than 0.
-  When an exclusive class is defined, any note triggered from one of the sounds of the exclusive class ends all the other sounds of the same class.
+  Set a vibrato (delay, frequency) and its effect on the tone.
+* **Exclusive class**\
+  This parameter can define one or more exclusive classes, by assigning to a set of divisions within a class the same parameter value other than 0.
+  When an exclusive class is defined, any note triggered from one of the divisions of the exclusive class ends all the other sounds of the same class.
   The scope of an exclusive class is the preset in which the class is defined (a sound triggered in an instrument will end a sound of another instrument if the two instruments are in the same preset).
   This effect can be used for percussion instruments like a cymbal.
   Basically playing one note automatically terminates another in the same group.
@@ -70,7 +70,7 @@ The editable parameters are:
   Indicates the intensity of chorus and reverb effects.
   The effects are configurable in the software [settings](manual/settings.md#doc_sound).
 * **Fixed key and velocity**\
-  Can freeze the key and velocity on the key range specified by the linked sample.
+  Force the value of the key and of the velocity on the full extent of the division.
 * **Offsets**\
   Changes the positions of the start and end of a sound during playback, as well as the start and end of the loop.
   The unit of an offset is samples (number of values).
@@ -82,10 +82,10 @@ The editable parameters are:
 To facilitate and speed up editing in the table, the following features have been implemented:
 
 * the mouse wheel may be used to change a value (the cell has to be in edit mode first),
-* a keyboard can be used to set the rootkey, key range and velocity range (the cell has to be in edit mode first),
+* an external keyboard can be used to set the rootkey, key range and velocity range (the cell has to be in edit mode first),
 * a multiple selection, followed by the editing of the last cell, will edit all cells simultaneously,
 * the keys :kbd:`Del` and :kbd:`Backspace` clear the content of all selected cells,
-* stereo divisions may be edited simultaneously if the option is enables in the software [preferences](manual/settings.md#doc_general),
+* stereo divisions may be edited simultaneously if the option is enabled in the software [preferences](manual/settings.md#doc_general),
 * key names may be numeric or as a text (having C3, C4 or C5 as middle C), depending on the option chosen in the [preferences](manual/settings.md#doc_interface),
 * copy / paste / cut of a set of cells (not necessarily adjacent) may be done via :kbd:`Ctrl`+:kbd:`C` / :kbd:`Ctrl`+:kbd:`V` / :kbd:`Ctrl`+:kbd:`X`.
 
@@ -103,14 +103,14 @@ The options are accessible with a right click on the header of a division.
 ![Mute divisions in a table](images/table_mute_divisions.png "Mute divisions in a table")
 
 
-## Key range editor {#doc_range}
+## Range editor {#doc_range}
 
 
-The key range editor allows you to quickly and graphically dispose samples according to their key and velocity ranges.
+The range editor allows you to quickly and graphically dispose samples according to their key and velocity ranges.
 This graph further highlights configuration problems, such as zones free of samples or unwanted superpositions.
 
 
-![Key range editor](images/edit_range.png "Key range editor")
+![Range editor](images/edit_range.png "Range editor")
 
 
 Each sample is represented by a semitransparent rectangle, so that the superposition of several elements is identifiable.
@@ -161,7 +161,7 @@ The buttons above the graph select alternatively the volume envelope (displayed 
 During the editing of the modulation envelope, the volume envelope is displayed with a thin line.
 
 The left part of the graph represents the evolution of the envelope when a key is **triggered**.
-7 of the 8 parameters are involved in this representation:
+7 out of the 8 parameters are involved in this representation:
 
 * **Delay:** duration during which the envelope remains at 0 just after a key is triggered,
 * **Attack:** duration after **delay** during which the envelope grows from 0 to the maximum value,

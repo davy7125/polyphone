@@ -71,8 +71,8 @@ The section “Information” allows the editing of the following information:
 
 In addition, the sample size in samples (number of values) and seconds is shown.
 
-A button automatically edits the start and end of the loop so that the loop is the entire sample.
-Another button automatically edits the root key and the correction so that they match with the evaluation of the [frequency](#doc_freq).
+A button edits the start and end of the loop so that the loop is the entire sample.
+Another button edits the root key and the correction so that they match with the evaluation of the [frequency](#doc_freq).
 
 Any change on a stereo sample may be applied on the linked sample if the option :guilabel:`Stereo editing` is ticked in the [preferences](manual/settings.md#doc_general).
 Via a multiple selection in the [tree](manual/soundfont-editor/tree.md), several samples may be edited simultaneously.
@@ -86,8 +86,8 @@ On the right is shown the list of dominant peaks with the following information:
 
 * ratio between the peak intensity and the intensity of the maximum peak,
 * frequency,
-* corresponding key,
-* correction.
+* closest corresponding key,
+* correction (distance to the closest corresponding key).
 
 From these data an estimate of the pitch of the sound is made.
 This estimate can be used for tuning.
@@ -120,13 +120,13 @@ Playback options are:
   Plays the sound loop if the beginning and end of the loop are completed.
 * **Stereo**\
   Plays the sample in stereo, with its linked sample.
-  If looping is required, the two respective loops are used (they can be different).
-* **Sinus**\
-  A sinus calibration is added to the sound, allowing a sample tuning to the nearest pitch hundredth.
+  If looping is also required, the two respective loops are used (they can be different).
+* **Sine**\
+  A sine calibration signal is added to the sound, allowing a sample tuning to the nearest pitch hundredth.
   At first the root key must be filled.
-  At this level, beats can be heard if the frequency of the sinus differs slightly from the fundamental frequency of the sound.
+  At this level, beats can be heard if the frequency of the sine differs slightly from the fundamental frequency of the sound.
   It remains to finely adjust the correction to make the beats as slow as possible, so that the sample is tuned at best.
   See the tutorial “[How to prepare a sample](tutorials/how-to-prepare-a-sample.md)” for more information.
 
 If a playback is in progress when switching from one sample to another through the [tree](manual/soundfont-editor/tree.md), it automatically restarts.
-Also, pressing the key :kbd:`space` enables or disables playback if we are navigating in the tree.
+Also, pressing the key :kbd:`space` enables or disables playback if you are navigating in the tree.
