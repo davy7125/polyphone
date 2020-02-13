@@ -1,5 +1,5 @@
 The tree is the first element in the editor you should focus on.
-It represents the architecture of the open soundfont and pilots the right part of the software when you click on one or more elements.
+It represents the architecture of the open soundfont and pilots the right part of the software when you select one or more elements.
 
 The tree is always displayed with the same [structure](#doc_structure), provides a [contextual menu](#doc_menu) and has [drag & drop](#doc_dragdrop), [copy / paste](#doc_copypaste) and [search](#doc_search) features.
 
@@ -23,7 +23,7 @@ A click on the header :guilabel:`General` opens the editor of the [general infor
 
 
 This section lists all samples contained in the soundfont, which are the raw material upon which all instruments are built.
-A click on one or more samples leads to the [sample editor](manual/soundfont-editor/editing-pages/sample-editor.md).
+Selecting one or more samples leads to the [sample editor](manual/soundfont-editor/editing-pages/sample-editor.md).
 A click on the header :guilabel:`Samples` displays the [configuration summary](manual/soundfont-editor/configuration-summaries.md#doc_sample) of all samples.
 
 
@@ -32,7 +32,7 @@ A click on the header :guilabel:`Samples` displays the [configuration summary](m
 
 This section lists all instruments contained in the soundfont, an instrument being an intermediate element made of samples and used by presets.
 Instruments contain links to samples called “divisions”, displayed as a list below each instrument.
-A click on an instrument or on one of its divisions leads to the [instrument editor](manual/soundfont-editor/editing-pages/instrument-editor.md).
+Selecting an instrument or one of its divisions leads to the [instrument editor](manual/soundfont-editor/editing-pages/instrument-editor.md).
 A click on the header :guilabel:`Instruments` displays the [configuration summary](manual/soundfont-editor/configuration-summaries.md#doc_instrument) of all instruments.
 
 
@@ -41,7 +41,7 @@ A click on the header :guilabel:`Instruments` displays the [configuration summar
 
 This section lists all presets contained in the soundfont, a preset being a final elements made of instruments and that are accessible outside the soundfont.
 Presets contain links to instruments called “divisions”, displayed as a list below each preset.
-A click on a preset or on one of its divisions shows the [preset editor](manual/soundfont-editor/editing-pages/preset-editor.md).
+Selecting a preset or one of its divisions shows the [preset editor](manual/soundfont-editor/editing-pages/preset-editor.md).
 A click on the header :guilabel:`Presets` displays the [configuration summary](manual/soundfont-editor/configuration-summaries.md#doc_preset) of all presets.
 
 
@@ -54,7 +54,7 @@ A right click on an element shows a menu comprising the following actions:
   Bind the selected sample(s) to an instrument, or the selected instrument(s) to a preset.
 * **Replace by…**\
   Replace a sample by another sample in an instrument, or replace an instrument by another instrument in a preset.
-  The configuration of the sample or instrument is kept.
+  The configuration of the divisions is kept.
 * **Copy**\
   Copy the selected element(s), also accessible with :kbd:`Ctrl`+:kbd:`C`.
 * **Paste**\
@@ -80,7 +80,7 @@ A right click on an element shows a menu comprising the following actions:
 ## Drag & drop {#doc_dragdrop}
 
 
-The operation “drag & drop” in the tree enables quick associations or copies.
+L'opération “drag & drop” dans l'arborescence permet d'effectuer des associations ou copies rapides.
 Before a drag & drop you need to select elements.
 This can be a single element or a multiple selection made possible with the buttons :kbd:`Ctrl` and :kbd:`Shift`.
 
@@ -123,8 +123,8 @@ A multiple selection is allowed.
 
 During a copy of elements between different soundfonts, if an element having the same name already exists several options are provided:
 
-* ignore the operation, in which case the copy is canceled for the element having the same name,
-* replace the existing element, in which case the existing element is overwritten by the copied element,
+* ignore the operation, in which case the copy is canceled for the element having the same name;
+* replace the existing element, in which case the existing element is overwritten by the copied element;
 * duplicate the element, in which case the element is copied next to the existing element with a different name.
 
 
@@ -140,8 +140,8 @@ To facilitate the search for items in the tree, a search bar is available to fil
 When a string is inserted into the search bar, the elements containing it are shown.
 Moreover:
 
-* if the string is included in the name of sample, the instruments using the sample and the presets using the instruments using the sample are displayed,
-* if the string is included in the name of an instrument, the samples used by the instrument and the presets using the instrument are displayed,
-* if the string is included in the name of a preset, the instruments used by the preset and the samples used by the instruments used by the preset are displayed.
+* if the string is included in the name of sample, the instruments using the sample and the presets using these instruments are displayed;
+* if the string is included in the name of an instrument, the samples used by the instrument and the presets using the instrument are displayed;
+* if the string is included in the name of a preset, the instruments used by the preset and the samples used by these instruments are displayed.
 
 A click on the cross to the right of the editable field cancels the filter.

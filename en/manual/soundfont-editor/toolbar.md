@@ -54,7 +54,7 @@ The left button can have two possible states:
 
 * **Record**\
   Start a new record if the acquisition is off.
-  It is possible here to specify the file name in which the audio signal is to be recorded.
+  It is possible here to specify the name of the file that will contain the recorded audio signal.
 * **Stop**\
   Stop the current acquisition.
 
@@ -69,10 +69,10 @@ The right button can also have two possible states (only accessible if the acqui
 ## Virtual keyboard {#doc_keyboard}
 
 
-When clicking on the icon [piano](images/toolbar_piano.png "piano"){.inline}, a window opens showing the virtual keyboard that has been made for testing samples, instruments and presets.
+When clicking on the icon ![piano](images/toolbar_piano.png "piano"){.inline}, a window opens showing the virtual keyboard that has been made for testing samples, instruments and presets.
 This window triggers MIDI signals:
 
-* **note on** / **note off** / **after touch** with the piano keyboard,
+* **note on** / **note off** / **aftertouch** with the piano keyboard,
 * other MIDI signals if the **MIDI controller part** is expanded.
 
 
@@ -103,8 +103,8 @@ It can be controlled in three ways:
   It is thus possible to visualize the full range of an instrument or a preset.
 * When a division of an instrument or a preset is selected, its range is displayed the same way than above.
   Moreover, its root key is identified by an **orange marker**.
-* When a key is selected on the keyboard, it appears in **blue** (or the selection color selected in the software [settings](manual/settings.md#doc_interface).
-  Moreover, the range of its corresponding range(s) appears in **light blue**.
+* When a key is selected on the keyboard, it appears in **blue** (or the selection color selected in the software [settings](manual/settings.md#doc_interface)).
+  Moreover, the range of its corresponding division appears in **light blue**.
   This applies only at the instrument level.
 * Middle C (key 60) is identified by a **black marker**.
 
