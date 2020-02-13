@@ -1,4 +1,4 @@
-When one or more samples are selected in the [tree](manual/soundfont-editor/tree.md), [tool menu](manual/soundfont-editor/tools/index.md) contains several tools sorted in 4 categories:
+When one or more samples are selected in the [tree](manual/soundfont-editor/tree.md), the [tool menu](manual/soundfont-editor/tools/index.md) contains several tools sorted in 4 categories:
 
 * [analyze](#doc_cat_analyze),
 * [files](#doc_cat_files),
@@ -45,27 +45,26 @@ To assign loop points automatically:
 2. in the editing page of [samples](manual/soundfont-editor/editing-pages/sample-editor.md):
   * position the start and end of the loop in the graphic (WAV display area) around a stable area, or
   * let the tool determine automatically a stable area by defining 0 as loop start and loop end,
-3. in the :guilabel:`Tools` menu select :guilabel:`Sample`, :guilabel:`Auto loop`,
+3. in the :guilabel:`Tools` menu select :guilabel:`Auto loop`,
 4. press the :guilabel:`Play` button with the loop option checked,
 5. if the loop points found are not suitable you can [undo](manual/soundfont-editor/toolbar.md#doc_edit) the operation, try repositioning them manually around a stable area and then use the :guilabel:`Auto loop` function again.
 
 The tool needs to find a stable area of more than 0.25 seconds.
 If it fails, a warning message appears indicating that no loop can be found.
-In this case it is possible to specify manually a stable area of more than 0.25 seconds and retry the tool, or try to find the loop points manually.
 
 **Warning:** This tool modifies the original sample.
 Modifications can be undone via the “[undo](manual/soundfont-editor/toolbar.md#doc_edit)” function, but if the file is saved and Polyphone is closed there is no way to step back.
 
 **Note:** By default, the looping is disabled in an instrument.
-To hear it, you must select [loop on](images/loop_on.png "loop on"){.inline} in the :guilabel:`Loop playback` parameter row of either the :guilabel:`Global` or individual notes columns in the :guilabel:`Parameters Table`.
-[loop on](images/loop_on.png "loop on"){.inline} turns it On, [loop off](images/loop_off.png "loop off"){.inline} turns it Off.
-[loop on and end](images/loop_on_end.png "loop on and end"){.inline} turns the looping On and the sample will play to the end after a key is released.
+To hear it, you must select ![loop on](images/loop_on.png "loop on"){.inline} in the :guilabel:`Loop playback` parameter row of either the :guilabel:`Global` or individual notes columns in the [table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table).
+![loop on](images/loop_on.png "loop on"){.inline} turns it On, ![loop off](images/loop_off.png "loop off"){.inline} turns it Off.
+![loop on and end](images/loop_on_end.png "loop on and end"){.inline} turns the looping On and the sample will play to the end after a key is released.
 
 
 ### Change volume {#doc_volume}
 
 
-You can change the volume in three different ways:
+You can change the sample volume in three different ways:
 
 * in adding a certain amount of dB (positive or negative amount),
 * in multiplying the signal by a number,
@@ -81,7 +80,7 @@ You can change the volume in three different ways:
 This tool allows you to use an external command or program to edit a sample.
 You don't need to export and re-import a sample into Polyphone anymore, everything is done automatically:
 
-1. download an editing software for wav files such as :program:`Audacity` or :program:`Sweep` (Linux),
+1. download an editing software for .wav files such as :program:`Audacity` or :program:`Sweep` (Linux),
 2. use the tool :guilabel:`External command` for one or more samples,
 3. fill the command line in the right field to call the external software (you may need to read the documentation of this software),
 4. edit the sample(s) with the external tool,
@@ -117,7 +116,7 @@ This reduces the time before the sound is heard.
 ![Remove blank at start](images/remove_blank.png "Remove blank at start")
 
 
-**Note:** this tool may be applied automatically each time a sample is imported, according to the software [settings](manual/settings.md#doc_general).
+**Note:** this tool may be applied automatically each time a sample is imported, the option being in the software [settings](manual/settings.md#doc_general).
 
 
 ### Transpose {#doc_transpose}

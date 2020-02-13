@@ -27,7 +27,7 @@ A logarithmic scale is available (take care of values equal to or less than 0!).
 ### Change attenuations {#doc_attenuation}
 
 
-The tool computes the minimum and the maximum attenuations in all selected instruments, and gives you the possibility to safely add an offset to all attenuation values.
+The tool computes the minimum and the maximum attenuations in all selected instruments, and gives you the possibility to add an offset to all attenuation values without exceeding the limits.
 
 For example, if the lowest attenuation of the divisions within the selected instruments is 16 dB and if the desired minimal attenuation is 5 dB (to increase the general volume), the attenuation of all divisions of all instruments can be decreased by 11 dB.
 
@@ -38,7 +38,7 @@ For example, if the lowest attenuation of the divisions within the selected inst
 ### Detune {#doc_detune}
 
 
-This feature slightly detunes the instrument notes, so as to create an undulating effect.
+This feature slightly detunes the instrument notes, so as to create an undulating effect in conjunction with a tuned instrument.
 The intensity of the effect is adjustable.
 
 
@@ -76,7 +76,7 @@ It is possible to apply the changes only on divisions whose velocity range is co
 ### Natural release {#doc_release}
 
 
-This tool creates automatically a release for each division of the instrument.
+This tool creates a release for each division of the instrument.
 Release times are computed taking into account the first two parameters and a pitch modification may be added by using the third one.
 
 
@@ -86,10 +86,10 @@ Release times are computed taking into account the first two parameters and a pi
 ### Sample auto-positioning {#doc_position}
 
 
-The software automatically determines the key ranges of all divisions of an instrument, in order to optimize their use all over the keyboard.
+The software determines the key ranges of all divisions of an instrument, in order to optimize their use all over the keyboard.
 
 
-## #Sound spatialization {#doc_spatialization}
+### Sound spatialization {#doc_spatialization}
 
 
 This feature spatializes sounds according to their pitch, which can be useful for a piano for example (bass and treble left to right).
@@ -105,8 +105,8 @@ Each note is positioned in the space, the far left corresponding to a sound comi
 Several patterns can be selected:
 
 * **Ascending:** trebles are in the left side, basses are in the right side.
-* **Hollow:** basses are at both extremities, trebles are centered.
 * **Descending:** basses are in the left side, trebles are in the right side.
+* **Hollow:** basses are at both extremities, trebles are centered.
 * **Spike:** trebles are at both extremities, basses are centered.
 * **Random:** trebles and basses are positioned randomly.
 
@@ -119,7 +119,7 @@ Other options are available:
 * :guilabel:`Inversions`.
 
 The graph is updated every time a setting changes for a better visualization.
-On mouse over, the correspondence note number / balance is displayed.
+On mouse over, the correspondence note number / panning is displayed.
 
 
 ### Transpose {#doc_transpose}
@@ -189,7 +189,7 @@ And <a href="downloads/tutorials/chord_done.mp3" download>after</a>:
 
 
 This action has for effect the duplication of all divisions of an instrument.
-For example, if a sample linked to an instrument has a key range of 36-38, the software duplicates this division so as to have 3 times this linked sample for the key ranges 36-36, 37-37 and 38-38.
+For example, if a sample linked to an instrument has a key range of 36-38, the software duplicates this division so as to have this linked sample for the key ranges 36-36, 37-37 and 38-38.
 It makes then possible to thoroughly edit each sample parameter for each different note, instead of editing whole divisions with the same parameters.
 
 It is also possible to duplicate the divisions according to velocity ranges.
