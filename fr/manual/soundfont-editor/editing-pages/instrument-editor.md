@@ -25,18 +25,18 @@ Dans le cas où plusieurs instruments sont sélectionnés, les paramètres globa
 ### Présentation
 
 
-La table offre une vue globale de la configuration d'un instrument, et permet son édition.
-Une modification d'une paramètre dans la division “globale” s'applique à toutes les divisions, sauf à celles dont le même paramètre est déjà spécifié (surcharge locale).
+La table offre une vue globale de la configuration d'un instrument et permet son édition.
+Une modification d'un paramètre dans la division :guilabel:`Global` s'applique à toutes les divisions, sauf à celles dont le même paramètre est déjà spécifié (surcharge locale).
 
 Les paramètres éditables sont&nbsp;:
 
 * **Étendue de notes**\
   Étendue de notes sur laquelle l'échantillon sera entendu.
 * **Étendue de vélocités**\
-  Étendue de vélocité sur laquelle l'échantillon sera entendu.
-  Il est possible de configurer plusieurs sons sur la même note, avec différentes étendues de vélocités (pour distinguer différentes nuances d'une touche de piano par exemple).
+  Étendue de vélocités sur laquelle l'échantillon sera entendu.
+  Il est possible de configurer plusieurs sons sur la même note, avec différentes étendues de vélocités, pour distinguer différentes nuances d'une touche de piano par exemple.
 * **Atténuation (dB)**\
-  Atténuation in décibel appliqué à l'échantillon.\
+  Atténuation en décibels appliquée à l'échantillon.\
   Note&nbsp;: le format sf2 n'autorise pas cette valeur à être négative, aucune amplification n'est ainsi possible.
 * **Balance**\
   Balance appliquée au son, pour l'entendre à gauche ou à droite en stéréo.
@@ -44,20 +44,20 @@ Les paramètres éditables sont&nbsp;:
   ![boucle désactivée](images/loop_off.png "boucle désactivée"){.inline} indique un son reproduit sans boucle,
   ![boucle activée](images/loop_on.png "boucle activée"){.inline} indique un son reproduit avec une boucle continue,
   ![boucle activée + fin](images/loop_on_end.png "boucle activée + fin"){.inline} indique un son reproduit avec une boucle tant que la touche est appuyée et qui continue sa lecture jusqu'à la fin une fois la touche relâchée.\
-  Note&nbsp;: le format sf2 n'a pas prévu de mode spécial pour déclencher un son lorsqu'un touche est relevée.
-  Une manière d'y parvenir est de doubler chaque échantillon avec un échantillon contenant un silence très court suivi par le son à émettre lorsque de la relâche.
+  Note&nbsp;: le format sf2 n'a pas prévu de mode spécial pour déclencher un son lorsqu'une touche est relevée.
+  Une manière d'y parvenir est de doubler chaque échantillon avec un échantillon contenant un silence très court suivi du son à émettre lors de la relâche.
   L'échantillon ajouté sera lu avec le paramètre «&nbsp;boucle activée + fin&nbsp;».
 * **Note de base**\
   Permet de changer la note de base configurée dans un échantillon par une autre.
 * **Accordage**\
   Modifie l'accordage en demi-tons et en centièmes de demi-ton.
-  Le paramètre «&nbsp;scale&nbsp;» modifie la distance entre deux notes consécutives.
+  Le paramètre «&nbsp;Réglage de tonalité&nbsp;» modifie la distance entre deux notes consécutives.
 * **Filtre**\
   Applique un filtre passe-bas, en spécifiant la fréquence de coupure et la résonance.
 * **Enveloppe de volume**\
   Modifie l'enveloppe de volume et également la manière dont elle évolue en fonction de la note.
 * **Modulation**\
-  Configure une modulation (enveloppe, delai, fréquence, évolution en fonction de la note) et son effet sur le ton, le filtre et le volume.
+  Configure une modulation (enveloppe, délai, fréquence, évolution en fonction de la note) et son effet sur le ton, le filtre et le volume.
 * **Vibrato**\
   Configure un vibrato (délai, fréquence) et son effet sur le ton.
 * **Classe exclusive**\
@@ -72,8 +72,8 @@ Les paramètres éditables sont&nbsp;:
 * **Note fixe et vélocité fixe**\
   Force la valeur de la note et de la vélocité sur toute l'étendue de la division.
 * **Offsets**\
-  Change les positions de début et de fin d'un son pendant la lecture, aussi que les positions de début et fin de la boucle.
-  Un offset décrit un nombre de points.
+  Change les positions de début et de fin d'un son pendant la lecture, ainsi que les positions de début et fin de la boucle.
+  Un offset s'exprime en nombre de points.
 
 
 ### Facilités d'édition dans la table
@@ -84,8 +84,8 @@ Pour faciliter et accélérer l'édition dans une table, les fonctionnalités su
 * la molette de la souris peut être utilisée pour modifier une valeur (la cellule doit d'abord se trouver en mode édition),
 * un clavier externe peut être utilisé pour définir une note de base, une étendue de notes et une étendue de vélocités (la cellule doit d'abord se trouver en mode édition),
 * une sélection multiple, suivi de l'édition de la dernière cellule, éditera toutes les cellules simultanément,
-* les touches :kbd:`Suppr` and :kbd:`Backspace` effacent le contenu des cellules sélectionnées,
-* les divisions stéreo peuvent être éditées simultanément si l'option est cochée dans les [préférences](manual/settings.md#doc_general) du logiciel,
+* les touches :kbd:`Suppr` et :kbd:`Retour arrière` effacent le contenu des cellules sélectionnées,
+* les divisions stéréo peuvent être éditées simultanément si l'option est cochée dans les [préférences](manual/settings.md#doc_general) du logiciel,
 * les notes peuvent être nommées par un nombre ou un texte (le Do central pouvant être Do3, Do4 ou Do5), selon l'option choisie dans les [préférences](manual/settings.md#doc_interface),
 * copier / coller / couper un ensemble de cellules (pas forcément adjacentes) est possible avec :kbd:`Ctrl`+:kbd:`C` / :kbd:`Ctrl`+:kbd:`V` / :kbd:`Ctrl`+:kbd:`X`.
 
@@ -107,7 +107,7 @@ Les options sont accessibles par un clic droit sur l'entête d'une division.
 
 
 L'éditeur d'étendues vous permet de disposer rapidement et graphiquement les échantillons selon des étendues de notes et de vélocités.
-Le graphique met en avant certains problèmes de configuration, comme des zones non couvertes par des échantillons ou des superpositions.
+Le graphique met en avant certains problèmes de configuration, comme des zones non couvertes par des échantillons ou des superpositions non souhaitées.
 
 
 ![Éditeur d'étendues](images/edit_range.png "Éditeur d'étendues")
@@ -125,7 +125,7 @@ Si plusieurs rectangles sont superposés, des clics consécutifs changent la sé
 Une sélection multiple est possible&nbsp;:
 
 * en maintenant le bouton :kbd:`Ctrl` et ensuite en cliquant sur les différents rectangles pour les sélectionner un par un,
-* en utilisant le bouton :kbd:`Shift`&nbsp;: tous les rectangles entre le premier rectangle cliqué et le suivant seront sélectionnés.
+* en utilisant le bouton :kbd:`Maj`&nbsp;: tous les rectangles entre le premier rectangle cliqué et le suivant seront sélectionnés.
 
 
 ### Modifier les rectangles
@@ -160,13 +160,13 @@ C'est ainsi un outil permettant de mieux comprendre l'impact de chacun de ces pa
 Les boutons au-dessus du graphique sélectionnent alternativement l'enveloppe de volume (affichée en vert) ou l'enveloppe de modulation (affichée en rouge) pour l'édition.
 Pendant l'édition de l'enveloppe de modulation, l'enveloppe de volume est affichée en trait fin.
 
-Le partie gauche du graphique représente l'évolution de l'enveloppe lorsqu'une touche est **déclenchée**.
+Le partie gauche du graphique représente l'évolution de l'enveloppe lorsqu'une touche est **appuyée**.
 7 des 8 paramètres sont impliqués dans cette représentation&nbsp;:
 
-* **Delai&nbsp;:** durée pendant laquelle l'enveloppe reste à 0 juste après le déclenchement d'une touche,
+* **Délai&nbsp;:** durée pendant laquelle l'enveloppe reste à 0 juste après le déclenchement d'une touche,
 * **Attaque&nbsp;:** durée après le **délai** pendant laquelle l'enveloppe passe de 0 à sa valeur maximale,
-* **Maintien&nbsp;:** durée après **attaque** pendant laquelle l'enveloppe se maintien à sa valeur maximale,
-* **Déclin&nbsp;:** durée après **maintien** pendant laquelle l'enveloppe passe progressivement de sa valeur maximale à la valeur spécifiée dans **soutien**,
+* **Maintien&nbsp;:** durée après l'**attaque** pendant laquelle l'enveloppe se maintien à sa valeur maximale,
+* **Déclin&nbsp;:** durée après le **maintien** pendant laquelle l'enveloppe passe progressivement de sa valeur maximale à la valeur spécifiée dans le **soutien**,
 * **Soutien&nbsp;:** valeur maintenue après le **déclin** tant que la touche déclenchée n'est pas relevée,
 * **Note → Maintien&nbsp;:** modification de la durée de **maintien** en fonction de la note (voir ci-dessous),
 * **Note → Déclin&nbsp;:** modification de la durée de **déclin** en fonction de la note (voir ci-dessous).
@@ -193,7 +193,7 @@ Lorsque vous jouez d'un instrument, un modulateur écoute un ou deux signaux MID
 La sortie d'un modulateur peut aussi être utilisée comme entrée d'un autre modulateur (cette possibilité est apparue avec la version 2.04 du [format sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2) et peut ne pas être supportée par tous les synthétiseurs).
 
 
-![Éditeur de modulateurs](images/modulator_editor_2.png "Éditeur de modulateurs")
+![Édition des modulateurs](images/modulator_editor_2.png "Édition des modulateurs")
 
 
 Les boutons à gauche sont prévus pour&nbsp;:
@@ -202,4 +202,4 @@ Les boutons à gauche sont prévus pour&nbsp;:
 * ajouter / supprimer un modulateur,
 * copier / coller / dupliquer un modulateur ou plus.
 
-Lorsqu'un modulateur est ajouté, la bordure de la cellule correspondante dans la table s'épaissit (comme la cellule d'accordage dans la colonne globale ci-dessus).
+Lorsqu'un modulateur est ajouté, la bordure de la cellule correspondante dans la table s'épaissit (comme la cellule d'accordage dans la colonne :guilabel:`Global` ci-dessus).

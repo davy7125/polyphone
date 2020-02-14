@@ -107,8 +107,7 @@ Then, the result of a drag & drop depends on the kind of elements that are dragg
 ## Copy / paste {#doc_copypaste}
 
 
-Everything that is possible with a drag & drop as seen previously is also possible with a copy / paste.
-You can expect the same result with :kbd:`Ctrl`+:kbd:`C` and :kbd:`Ctrl`+:kbd:`V` in a tree.
+Everything that is possible with a drag & drop as seen previously is also possible with a copy / paste, accessible through the contextual menu or with the shortcuts :kbd:`Ctrl`+:kbd:`C` and :kbd:`Ctrl`+:kbd:`V`.
 
 Copy / Paste is also allowed within different soundfonts.
 It is possible to copy one element in a first soundfont, and paste it in a second soundfont.

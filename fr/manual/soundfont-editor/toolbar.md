@@ -26,7 +26,7 @@ Les éléments dans la partie gauche de la barre d'outils présentent des foncti
 * ![annuler](images/toolbar_undo.png "undo"){.inline} **Annuler**\
   Annule la dernière modification.
 * ![refaire](images/toolbar_redo.png "redo"){.inline} **Refaire**\
-  Restore la dernière modification annulée.
+  Restaure la dernière modification annulée.
 * ![sauvegarder](images/toolbar_save.png "save"){.inline} **Sauvegarder le fichier**\
   Sauvegarde la banque de sons.
 
@@ -58,7 +58,7 @@ Le bouton de gauche peut être dans deux états différents&nbsp;:
 * **Arrêter**\
   Arrête l'acquisition en cours.
 
-Le bouton de droite posséde également deux états différents (seulement accessibles lorsque l'acquisition est en cours)&nbsp;:
+Le bouton de droite possède également deux états différents (seulement accessibles lorsque l'acquisition est en cours)&nbsp;:
 
 * **Mettre en pause**\
   Met en pause l'acquisition en cours.
@@ -82,7 +82,7 @@ Cette fenêtre déclenche des signaux MIDI&nbsp;:
 ### Clavier de piano
 
 
-Le clavier du piano déclenche des signaux qui contiennent des valeurs de notes et de vélocités.
+Le clavier de piano déclenche des signaux qui contiennent des valeurs de notes et de vélocités.
 Il peut être piloté de trois manières différentes&nbsp;:
 
 * **avec la souris**\
@@ -118,9 +118,9 @@ Il peut être piloté de trois manières différentes&nbsp;:
   Un effet de surbrillance sur le clavier virtuel confirmera qu'il détient le focus.
 
 * :kbd:`Ctrl`+:kbd:`1`, :kbd:`Ctrl`+:kbd:`2`, … :kbd:`Ctrl`+:kbd:`8`\
-  Ces raccourcis change les octaves jouées par le clavier de l'ordinateur.
+  Ces raccourcis changent les octaves jouées par le clavier de l'ordinateur.
   Après l'utilisation de :kbd:`Ctrl`+:kbd:`1`, l'octave la plus grave sera jouée.
-  La plus haute octave sera atteinte en utilisant :kbd:`Ctrl`+:kbd:`8`.
+  L'octave la plus haute sera atteinte en utilisant :kbd:`Ctrl`+:kbd:`8`.
 
 * :kbd:`→` / :kbd:`←`\
   Les flèches droite et gauche joueront la note juste après ou juste avant la dernière qui a été jouée, en gardant la même vélocité.
@@ -144,11 +144,11 @@ Si vous jouez avec les modulateurs, utiliser ces fonctionnalités est conseillé
 Cette zone est composée de plusieurs boutons&nbsp;:
 
 * **Pitch Bend**\
-  Le "Pitch Bend" augmente ou diminue la hauteur de note.
+  Le Pitch Bend augmente ou diminue la hauteur de note.
   Il revient automatiquement à sa position d'origine 0.
 * **Sensibilité**\
   La sensibilité définit l'étendue des modifications en demi-tons du Pitch Bend.
-  La valeur par défaut est 2 (un ton complet).
+  La valeur par défaut est 2, soit un ton complet.
 * **Pression**\
   La pression est la quantité de pression sur le clavier.
   Elle peut être comparée à l'aftertouch, la différence étant que l'aftertouch est spécifique à une note alors que la pression est un signal global pour toutes les notes.

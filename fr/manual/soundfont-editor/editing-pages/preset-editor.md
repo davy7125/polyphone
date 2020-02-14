@@ -1,4 +1,4 @@
-En sélectionnant au moins un ensemble dans l'[arborescence](manual/soundfont-editor/tree.md), l'éditeur des ensembles apparait.
+En sélectionnant au moins un ensemble dans l'[arborescence](manual/soundfont-editor/tree.md), l'éditeur des ensembles apparaît.
 Un ensemble est une combinaison d'un instrument ou plus et est l'élément visible de l'extérieur d'une [banque de sons](manual/annexes/the-different-soundfont-formats.md#doc_sf2).
 
 Tout comme l'[éditeur des instruments](manual/soundfont-editor/editing-pages/instrument-editor.md), vous y retrouverez plusieurs parties&nbsp;:
@@ -19,7 +19,7 @@ Dans le cas où plusieurs ensembles sont sélectionnés, les paramètres globaux
 
 
 Les paramètres édités ici sont relatifs alors que les paramètres des instruments sont, sauf cas particulier, absolus.
-Les valeurs des paramètres d'un ensemble sont additionnés ou multipliés (selon le paramètre) aux paramètres des instruments qui le compose.
+Les valeurs des paramètres d'un ensemble sont additionnés ou multipliés (selon le paramètre) aux paramètres des instruments qui le composent.
 Certains paramètres ne sont pas éditables au niveau des ensembles&nbsp;:
 
 * lecture en boucle,
@@ -30,6 +30,6 @@ Certains paramètres ne sont pas éditables au niveau des ensembles&nbsp;:
 * les quatre offsets.
 
 Un ensemble est identifié par un numéro d'ensemble et un numéro de banque, cette combinaison étant unique et ajustable sous la table d'édition des paramètres.
-Chaque banque contient jusque 127 presets.
+Chaque banque contient jusque 127 ensembles.
 
 La dernière banque (128) est habituellement utilisée pour les kits de percussion.

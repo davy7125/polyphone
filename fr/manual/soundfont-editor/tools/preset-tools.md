@@ -5,7 +5,7 @@ Lorsqu'un ensemble ou l'une de ses divisions est sélectionné dans l'[arboresce
 * [modulateurs](#doc_cat_mod),
 * [transformation](#doc_cat_transformation).
 
-L'utilisation d'outils simulténament sur plusieurs ensembles est possible (avec une sélection multiple), sauf pour visualiser les paramètres.
+L'utilisation d'outils simultanément sur plusieurs ensembles est possible (avec une sélection multiple), sauf pour visualiser les paramètres.
 Tous les outils sont aussi disponibles pour les [instruments](manual/soundfont-editor/tools/instrument-tools.md).
 
 
@@ -24,13 +24,13 @@ Même outil que «&nbsp;[Visualiser les paramètres](manual/soundfont-editor/too
 ### Modifier les atténuations {#doc_attenuation}
 
 
-Même outil que «&nbsp;[Modifier les atténuations](manual/soundfont-editor/tools/instrument-tools.md)#doc_attenuation&nbsp;» pour les instruments.
+Même outil que «&nbsp;[Modifier les atténuations](manual/soundfont-editor/tools/instrument-tools.md#doc_attenuation)&nbsp;» pour les instruments.
 
 
-### Paramètrer en fonction des notes {#doc_global}
+### Paramétrer en fonction des notes {#doc_global}
 
 
-Même outil que «&nbsp;[Paramètrer en fonction des notes](manual/soundfont-editor/tools/instrument-tools.md#doc_global)&nbsp;» pour les instruments.
+Même outil que «&nbsp;[Paramétrer en fonction des notes](manual/soundfont-editor/tools/instrument-tools.md#doc_global)&nbsp;» pour les instruments.
 
 
 ### Spatialiser le son {#doc_spatialization}

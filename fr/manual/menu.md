@@ -1,7 +1,7 @@
-Le menu, situé dans le coin en haut à gauche du logiciel, contient plusieurs éléments vous permettant d'accéder à différentes fonctionnalités.
+Le menu, situé dans le coin en haut à droite du logiciel, contient plusieurs éléments vous permettant d'accéder à différentes fonctionnalités.
 
 
-![Menu](images/menu.png "Menu")
+![Menu principal](images/menu.png "Menu principal")
 
 
 ## Ouverture d'un éditeur de banques de sons {#doc_open}
@@ -11,7 +11,7 @@ Le menu, situé dans le coin en haut à gauche du logiciel, contient plusieurs �
   Crée un nouveau fichier .sf2 vierge.
   Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`N`.
 * **Ouvrir…**\
-  Ouvre un fichier [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) ou [.sfark](manual/annexes/the-different-soundfont-formats.md#doc_sfark).
+  Ouvre un fichier [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) ou [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark).
   Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`O`.
 
 
@@ -23,7 +23,7 @@ Le menu, situé dans le coin en haut à gauche du logiciel, contient plusieurs �
   Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`S`.
 * **Sauvegarder sous…**\
   Sauvegarde le fichier courant dans un autre fichier.
-  Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`S`.
+  Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`Maj`+:kbd:`S`.
 * **Exporter banques de sons…**\
   Fusionne et exporte un ou plusieurs ensembles depuis les banques de sons ouvertes dans le format [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) ou [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz).
   Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`E`.
@@ -36,7 +36,7 @@ Le menu, situé dans le coin en haut à gauche du logiciel, contient plusieurs �
 
 
 * **Plein écran**\
-  Active ou désactive le mode "plein écran".
+  Active ou désactive le mode «&nbsp;plein écran&nbsp;».
   Accessible également avec le raccourci clavier :kbd:`F11`.
 
 

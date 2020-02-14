@@ -71,7 +71,7 @@ The global volume may be changed with the volume MIDI controller if an external 
 ## Virtual keyboard {#doc_keyboard}
 
 
-The keys of the computer keyboard used to control the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard) are defined in the :guilabel:`Keyboard` section.
+The keys of the computer keyboard used to control the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard) are defined in the :guilabel:`Virtual keyboard` section.
 The pitch may be increased or decreased octave by octave.
 
 

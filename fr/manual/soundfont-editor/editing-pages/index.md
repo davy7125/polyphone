@@ -1,5 +1,5 @@
 Lorsqu'une banque de sons est ouverte, l'[arborescence](manual/soundfont-editor/tree.md) affiche le contenu de la banque de sons.
-Les éditeurs apparaissent à droite de l'arborescence lorsque des éléments sont séléctionnés&nbsp;:
+Les éditeurs apparaissent à droite de l'arborescence lorsque des éléments sont sélectionnés&nbsp;:
 
 * la sélection de l'entête :guilabel:`Général` ouvre l'éditeur des [informations générales](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md),
 * la sélection d'au moins un **échantillon** ouvre l'éditeur des [échantillons](manual/soundfont-editor/editing-pages/sample-editor.md),

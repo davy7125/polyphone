@@ -153,7 +153,7 @@ This will then be easier to accurately pan a sample in an [instrument](manual/so
 ### Link all stereo samples {#doc_link}
 
 
-Among the selected samples, samples whose names only differ by the last letter (R / L) are automatically linked.
+Among the selected samples, samples whose names only differ by the last letter (L&nbsp;/&nbsp;R) are automatically linked.
 For example, if in a soundfont two samples are called ``bassoon45L`` and ``bassoon45R``, ``bassoon45L`` will be recognized as the left part of ``bassoon45R`` and ``bassoon45R`` will be recognized as the right part of ``bassoon45L``.
 
 With this information the right panning will be used when these samples are added in an instrument.

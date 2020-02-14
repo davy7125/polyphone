@@ -32,8 +32,8 @@ Maintenir le bouton gauche de la souris permet un mouvement horizontal du graphi
 ### Positions de boucle et de lecture
 
 
-Une barre verticale verte indique la position de départ de la boucle (modifiable par un clic gauche), une barre verticale rouge indique la position de fin de la boucle (modifiable par un clic droit).
-Une ligne pointillé représentant une portion d'onde est associée à chaque barre verticale, ce qui est utile pour visualiser la superposition du début et de la fin de la boucle.
+Une barre verticale verte indique la position de départ de la boucle (modifiable par un clic gauche) et une barre verticale rouge indique la position de fin de la boucle (modifiable par un clic droit).
+Une ligne en pointillé représentant une portion d'onde est associée à chaque barre verticale, ce qui est utile pour visualiser la superposition du début et de la fin de la boucle.
 
 Pendant la lecture, une barre verticale blanche parcourt le graphique et indique la position de lecture en temps réel.
 
@@ -65,16 +65,16 @@ La section «&nbsp;Information&nbsp;» permet l'édition des informations suivan
 
 * début et fin de la boucle,
 * note de base d'un échantillon et sa correction à appliquer pour que le son soit accordé dans le tempérament égal,
-* fréquence d'échantillonage du son (une modification déclenchera un ré-échantillonage),
+* fréquence d'échantillonnage du son (une modification déclenchera un ré-échantillonnage),
 * type de son (non lié&nbsp;: mono, sinon gauche, droite ou lié),
 * l'échantillon lié si l'échantillon est stéréo.
 
 Par ailleurs, la taille de l'échantillon en nombre de valeurs et en secondes est affiché.
 
-Un bouton édite les position de début et de fin de la boucle de manière à ce que la boucle représente l'échantillon entier.
+Un bouton édite les positions de début et de fin de la boucle de manière à ce que la boucle représente l'échantillon entier.
 Un autre bouton édite la note de base et la correction de sorte que les valeurs concordent avec l'estimation de la [fréquence](#doc_freq).
 
-Chaque modification d'un échantillon stéréo peut être répercuté sur l'échantillon lié si l'option :guilabel:`Stereo editing` est cochée dans les [préférences](manual/settings.md#doc_general).
+Chaque modification d'un échantillon stéréo peut être répercutée sur l'échantillon lié si l'option :guilabel:`Édition stéréo` est cochée dans les [préférences](manual/settings.md#doc_general).
 Grâce à une sélection multiple dans l'[arborescence](manual/soundfont-editor/tree.md), plusieurs échantillons peuvent être édités simultanément.
 
 
@@ -82,7 +82,7 @@ Grâce à une sélection multiple dans l'[arborescence](manual/soundfont-editor/
 
 
 L'analyse fréquentielle inclut une transformée de Fourier (graphique présentant l'intensité des fréquences contenues dans le signal).
-La liste des pics dominant est affichée sur la droite, contenant les informations suivantes&nbsp;:
+La liste des pics dominants est affichée sur la droite, contenant les informations suivantes&nbsp;:
 
 * ratio entre l'intensité du pic courant et l'intensité du plus haut pic,
 * fréquence,
@@ -92,7 +92,7 @@ La liste des pics dominant est affichée sur la droite, contenant les informatio
 À partir de ces données, une estimation de la hauteur de note de l'échantillon est effectué.
 Cette estimation peut être utilisée pour l'accordage.
 
-Un export du graphique dans une image png est possible en utilisant le menu contextuel du graphique (clic droit).
+Un export du graphique dans une image .png est possible en utilisant le menu contextuel du graphique (clic droit).
 Un [outil](manual/soundfont-editor/tools/sample-tools.md#doc_peakfrequencies) est également disponible pour exporter les informations sur les pics de tous les échantillons.
 
 
@@ -103,7 +103,7 @@ Un [outil](manual/soundfont-editor/tools/sample-tools.md#doc_peakfrequencies) es
 
 
 L'égaliseur permet d'amplifier ou d'atténuer certaines fréquences, de -15 à 15 dB.
-Il est possible d'écouter l'effet en direct en activant l'option :guilabel:`aperçu` et ensuite appliquer définitivement l'effet avec le bouton :guilabel:`Appliquer`.
+Il est possible d'écouter l'effet en direct en activant l'option :guilabel:`aperçu` et ensuite d'appliquer définitivement l'effet avec le bouton :guilabel:`appliquer`.
 Le bouton :guilabel:`réinitialiser` réinitialise toutes les valeurs à 0 dB (mais n'enlève pas les effets sur le son&nbsp;: pour cela utilisez le bouton :guilabel:`annuler` dans la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_edit)).
 
 Chaque modification sur un échantillon stéréo peut être automatiquement répercutée sur l'échantillon lié si l'option est cochée dans les [préférences](manual/settings.md#doc_general).
@@ -117,7 +117,7 @@ Pendant la lecture, un curseur blanc parcourt le graphique pour indiquer la posi
 Les options de lecture sont&nbsp;:
 
 * **Boucle**\
-  Lit le son en boucle si les positions de début et fin de la boucle sont renseignés.
+  Lit le son en boucle si les positions de début et fin de la boucle sont renseignées.
 * **Stéréo**\
   Lit le son en stéréo, c'est à dire avec l'échantillon lié.
   Si la lecture en boucle est en plus requise, les deux boucles respectives seront utilisées (elles peuvent être différentes).

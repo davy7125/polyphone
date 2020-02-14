@@ -30,7 +30,7 @@ Tous les [modulateurs](manual/soundfont-editor/editing-pages/instrument-editor.m
 
 
 Avec cet outil, la liste de tous les [ensembles](manual/soundfont-editor/editing-pages/preset-editor.md) est mise sous forme d'un texte.
-Ce texte peut être formaté pour être intégré dans un fichier CSV ou en HTML pour être intégré dans un site web.
+Ce texte peut être formaté pour être intégré dans un fichier .csv ou en HTML pour être intégré dans un site web.
 
 
 ![Liste des ensembles](images/en_preset_list.png "Liste des ensembles")

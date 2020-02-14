@@ -7,7 +7,7 @@ L'arborescence est toujours affiché avec la même [structure](#doc_structure), 
 ## Structure {#doc_structure}
 
 
-La structure de l'arborecence est faites de 4 entêtes et du contenu sous les entêtes :guilabel:`Échantillons`, :guilabel:`Instruments` and :guilabel:`Ensembles`.
+La structure de l'arborescence est faites de 4 entêtes et de contenu sous les entêtes :guilabel:`Échantillons`, :guilabel:`Instruments` et :guilabel:`Ensembles`.
 
 
 ![Structure de l'arborescence](images/tree_1.png "Structure de l'arborescence")
@@ -65,7 +65,7 @@ Un clic droit sur un élément affiche un menu contenant les actions suivantes&n
 * **Supprimer**\
   Supprime les éléments sélectionnés, également accessible avec :kbd:`Del`.
 * **Renommer ou renommage de masse**\
-  Renommes les éléments sélectionnés, également accessible avec :kbd:`F2`.
+  Renomme les éléments sélectionnés, également accessible avec :kbd:`F2`.
   Lorsque plusieurs éléments sont sélectionnés, différentes options sont proposées&nbsp;:
   * écraser nom existant avec nom de la note en suffixe (pour les échantillons seulement),
   * écraser nom existant avec incrément en suffix,
@@ -84,7 +84,7 @@ L'opération «&nbsp;drag & drop&nbsp;» dans l'arborescence permet d'effectuer 
 Avant un drag & drop vous devez sélectionner des éléments.
 Ce peut être un élément seul ou une sélection multiple rendue possible par l'utilisation des boutons :kbd:`Ctrl` et :kbd:`Shift`.
 
-Ensuite, le résultat d'un drag & drop dépend du type d'éléments à l'origine et du type de l'élément ciblé.
+Ensuite, le résultat d'un drag & drop dépend du type d'élément à l'origine et du type de l'élément ciblé.
 
 * **Échantillon → instrument**\
   Association de l'échantillon dans l'instrument ciblé, créant ainsi une division d'instrument.
@@ -107,8 +107,7 @@ Ensuite, le résultat d'un drag & drop dépend du type d'éléments à l'origine
 ## Copier / coller {#doc_copypaste}
 
 
-Tout ce qui est possible avec un drag & drop comme vu précédemment est aussi possible avec une opération copier / coller.
-Vous pouvez vous attendre au même résultat avec :kbd:`Ctrl`+:kbd:`C` et :kbd:`Ctrl`+:kbd:`V` dans une arborescence.
+Tout ce qui est possible avec un drag & drop comme vu précédemment est aussi possible avec une opération copier / coller, accessible via le menu contextuel ou à l'aide des raccourcis clavier :kbd:`Ctrl`+:kbd:`C` et :kbd:`Ctrl`+:kbd:`V`.
 
 L'opération copier / coller est aussi permise au sein de différentes banques de sons.
 Il est possible de copier un élément d'une première banque de sons et le coller dans une deuxième banque de sons.
@@ -137,11 +136,11 @@ Pour facilier la recherche d'éléments dans l'arborescence, une barre de recher
 ![Barre de recherche](images/tree_3.png "Barre de recherche")
 
 
-Lorsqu'une chaîne de caractère est écrite dans la barre de recherche, les éléments la contenant sont affichés.
+Lorsqu'une chaîne de caractères est écrite dans la barre de recherche, les éléments la contenant sont affichés.
 De plus&nbsp;:
 
 * si le texte est inclus dans le nom d'un échantillon, les instruments qui utilisent l'échantillon et les ensembles qui utilisent ces instruments sont affichés&nbsp;;
-* si le texte est inclus dans le nom d'un instrument, the échantillons utilisés par l'instrument et les ensembles qui utilisent l'instrument sont affichés&nbsp;;
+* si le texte est inclus dans le nom d'un instrument, les échantillons utilisés par l'instrument et les ensembles qui utilisent l'instrument sont affichés&nbsp;;
 * si le texte est inclus dans le nom d'un ensemble, les instruments utilisés par l'ensemble et les échantillons utilisés par ces instruments sont affichés.
 
-Un clic sur la croix à droit du champ éditable annule le filtre.
+Un clic sur la croix à droite du champ éditable annule le filtre.

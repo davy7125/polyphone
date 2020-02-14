@@ -6,7 +6,7 @@ Il vous permet, directement dans Polyphone, de télécharger, tester et potentie
 
 
 Pour ouvrir l'explorateur, cliquez sur :guilabel:`Banques de sons en ligne` ou écrivez un mot-clef sur l'[écran d'accueil](manual/index.md).
-Un fois l'explorateur ouvert dans un nouvel onglet, il est possible de chercher, trier et filtrer les résultats.
+Une fois l'explorateur ouvert dans un nouvel onglet, il est possible de chercher, trier et filtrer les résultats.
 
 
 ![Explorer les banques de sons](images/soundfont_browser_browsing.png "Explorer les banques de sons")
@@ -22,7 +22,7 @@ Il est possible d'écrire :command:`Author:*someone*` pour chercher les banques 
 ### Trier les résultats
 
 
-À côté de la barre de recherche, un menu déroulant fournit 4 manières de trier les résultats&nbsp;:
+À côté de la barre de recherche, un menu déroulant fournit quatre manières de trier les résultats&nbsp;:
 
 * **Date**\
   Les banques de sons les plus récentes apparaissent en premier (choix par défaut).
@@ -72,7 +72,7 @@ Une page de présentation est composée&nbsp;:
 
 * d'un **entête**, dans lequel se trouve le titre, le nombre de commentaires, le nombre de téléchargements et l'évaluation&nbsp;;
 * d'une **partie gauche**, contenant le nom de l'auteur, une date, un type de licence (merci d'en tenir compte&nbsp;!), la catégorie et d'autres attributs pouvant caractériser les banques de sons,
-* d'une **partie centrale**, affichant une description textuelle, la liste de des fichiers téléchargeables et de possibles commentaires.
+* d'une **partie centrale**, affichant une description textuelle, la liste des fichiers téléchargeables et de possibles commentaires.
 
 
 ## Téléchargements {#doc_download}

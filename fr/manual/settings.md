@@ -1,5 +1,5 @@
 Les préférences du logiciel sont accessibles soit depuis l'[écran d'accueil](manual/index.md) soit depuis le [menu](manual/menu.md#doc_shortcuts).
-Elles sont divisées en 5 sections&nbsp;:
+Elles sont divisées en cinq sections&nbsp;:
 
 * [Général](#doc_general)
 * [Interface](#doc_interface)
@@ -71,7 +71,7 @@ Le volume général peut aussi être modifié avec le contrôleur MIDI du volume
 ## Clavier virtuel {#doc_keyboard}
 
 
-Les touches du clavier de l'ordinateur assignées pour contrôler le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard) sont définies dans la section :guilabel:`Keyboard`.
+Les touches du clavier de l'ordinateur assignées pour contrôler le [clavier virtuel](manual/soundfont-editor/toolbar.md#doc_keyboard) sont définies dans la section :guilabel:`Clavier virtuel`.
 Les hauteurs de notes peuvent être augmentées ou diminuées octave par octave.
 
 

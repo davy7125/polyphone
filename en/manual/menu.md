@@ -11,7 +11,7 @@ The menu, located at the top right corner of the software, contains several item
   Create a new .sf2 file from scratch.
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`N`.
 * **Open…**\
-  Open an [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) or [.sfark](manual/annexes/the-different-soundfont-formats.md#doc_sfark) file.
+  Open an [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) or [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) file.
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`O`.
 
 

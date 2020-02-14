@@ -51,26 +51,26 @@ L'intensité de l'effet est ajustable.
 Cet outil permet l'édition d'un paramètre pour toutes les divisions d'un instrument simultanément.
 
 
-![Outil de paramètrage en fonction des notes](images/tool_keybased_configuration.png "Outil de paramètrage en fonction des notes")
+![Outil de paramétrage en fonction des notes](images/tool_keybased_configuration.png "Outil de paramétrage en fonction des notes")
 
 
-Le graphique représente l'intensité de la modification, la première valeur sur la gauche correspondant à la modification appliquée à la division contenant la note 0, et la dernière valeur si la droite correspond à la modification appliquée à la division contenant la note 127.
+Le graphique représente l'intensité de la modification, la première valeur sur la gauche correspondant à la modification appliquée à la division contenant la note 0, et la dernière valeur sur la droite correspondant à la modification appliquée à la division contenant la note 127.
 En changeant le motif, il est possible d'éditer la courbe&nbsp;:
 
 * manuellement avec la souris,
-* en utilisant un loi linéaire,
+* en utilisant une loi linéaire,
 * en utilisant une loi exponentielle,
 * en utilisant une génération aléatoire.
 
-Dans le cas où une règle linéaire ou exponentielle est utilisée, un clic gauche sur le graphique définit le début de la zone linéaire ou exponentielle, une clic droit définit la fin.
+Dans le cas où une règle linéaire ou exponentielle est utilisée, un clic gauche sur le graphique définit le début de la zone linéaire ou exponentielle et un clic droit définit la fin.
 
-Le paramètre à modifier peut être sélectionné dans :guilabel:`Paramètres`, et le type de modification est choisi dans :guilabel:`Modification`&nbsp;:
+Le paramètre à modifier peut être sélectionné dans :guilabel:`Paramètres` et le type de modification est choisi dans :guilabel:`Modification`&nbsp;:
 
-* **Addition:** le modificateur est ajouté à la valeur du paramètre choisi.
-* **Multiplication:** le modificateur est multiplié avec la valeur du paramètre choisi.
-* **Remplacement:** le modificateur remplace la valeur du paramètre choisi.
+* **Addition&nbsp;:** le modificateur est ajouté à la valeur du paramètre choisi.
+* **Multiplication&nbsp;:** le modificateur est multiplié avec la valeur du paramètre choisi.
+* **Remplacement&nbsp;:** le modificateur remplace la valeur du paramètre choisi.
 
-Il est possible de n'appliquer les changements qu'aux divisions dont l'étendue de vélocités est comprise dans une étendue spécifique, utile par exemple pour le cas d'un piano qui auraient plusieurs zones de vélocités.
+Il est possible de n'appliquer les changements qu'aux divisions dont l'étendue de vélocités est comprise dans une étendue spécifique, utile par exemple pour le cas d'un piano qui auraient plusieurs couches de vélocités.
 
 
 ### Relâche naturelle {#doc_release}
@@ -80,7 +80,7 @@ Cet outil crée une relâche pour chaque division de l'instrument.
 Les durées de relâche sont calculées en fonction des deux premiers paramètres et une modification du ton peut être ajoutée en utilisant le troisième.
 
 
-![Relâchez-vous naturellement](images/tool_natural_release.png "Relâchez-vous naturellement")
+![Outil de relâche naturelle](images/tool_natural_release.png "Outil de relâche naturelle")
 
 
 ### Auto-positionnement des échantillons {#doc_position}
@@ -92,23 +92,23 @@ Le logiciel détermine une étendue de notes pour toutes les divisions d'un inst
 ### Spatialiser le son {#doc_spatialization}
 
 
-Cette fonctionnalité spatialise les sons en fonction de leur note, ce qui peut être utile pour un piano par exemple (les basses à gauche et les aigus à droite).
+Cet outil spatialise les sons en fonction de leur note, ce qui peut être utile pour un piano par exemple (les basses à gauche et les aigus à droite).
 
 
 ![Outil de spatialisation](images/tool_sound_spatialization.png "Outil de spatialisation")
 
 
 Les barres dans le graphique représentent chacune une corde ou un tuyau, ayant chacune une longueur en relation avec la hauteur de note.
-La barre la plus courte correspond à la note la plus haute et la barre la plus longue correspond à la note la plus grave.
+La barre la plus courte correspond à la note la plus aiguë et la barre la plus longue correspond à la note la plus grave.
 
-Chaque not est positionnée dans l'espace, l'extrême gauche correspondant à un son venant de la gauche et l'extrême droite correspondant à un son venant de la droite.
+Chaque note est positionnée dans l'espace, l'extrême gauche correspondant à un son venant de la gauche et l'extrême droite correspondant à un son venant de la droite.
 Plusieurs motifs peuvent être sélectionnés&nbsp;:
 
 * **Ascendant&nbsp;:** les aigus sont à gauche, les basses sont à droite.
 * **Descendant&nbsp;:** les basses sont à gauche, les aigus sont à droite.
 * **Creux&nbsp;:** les basses sont aux deux extrémités, les aigus sont centrés.
 * **Pointe&nbsp;:** les aigus sont aux deux extrémités, les basses sont centrées.
-* **Aléatoire&nbsp;:** les aigues et les basses sont positionnés aléatoirement.
+* **Aléatoire&nbsp;:** les aigus et les basses sont positionnés aléatoirement.
 
 D'autres options sont disponibles&nbsp;:
 
@@ -202,7 +202,7 @@ Il est également possible de dupliquer les divisions en fonction des étendues 
 
 
 Spécifique à l'orgue, cet outil permet la création de mixtures à partir d'un instrument existant.
-Une interface apparaît pour définir les différentes divisions de la mixture, et pour chacune d'elle la liste des rangs.
+Une interface apparaît pour définir les différentes divisions de la mixture et pour chacune d'elle la liste des rangs.
 Les types possibles des rangs sont très divers, allant de l'octave jusqu'à la 27ème harmonique.
 
 
@@ -210,7 +210,7 @@ Les types possibles des rangs sont très divers, allant de l'octave jusqu'à la 
 
 
 Pour fonctionner, cet outil s'appuie sur tous les échantillons associés à l'instrument sélectionné, l'étendue définie pour chaque échantillon et leur atténuation correspondante.
-Les échantillons doivent être accordés sans tenir compte du paramétrage de l'instrument (à l'aide de l'[éditeur des échantillons](manual/soundfont-editor/editing-pages/sample-editor.md)), et la note de base spécifiée ne doit pas tenir compte de l'appartenance à un jeu (pas de transposition si le son est un principal 4' par exemple).
+Les échantillons doivent être accordés sans tenir compte du paramétrage de l'instrument (à l'aide de l'[éditeur des échantillons](manual/soundfont-editor/editing-pages/sample-editor.md)) et la note de base spécifiée ne doit pas tenir compte de l'appartenance à un jeu (pas de transposition si le son est un principal 4' par exemple).
 
 Une option permet un bouclage automatique des échantillons créés, une autre modifie l'intervalle de création des échantillons.
 Enfin, il est possible de choisir le type des sons créés&nbsp;: mono ou stéréo.

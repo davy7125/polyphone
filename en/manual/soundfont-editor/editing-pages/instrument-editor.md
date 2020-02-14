@@ -26,7 +26,7 @@ In the case where several instruments are selected, the global parameters of eac
 
 
 The table allows a global view and the editing of an instrument configuration.
-A change of a parameter in the “global” division applies to all divisions, except for divisions whose same parameter is already specified (local override).
+A change of a parameter in the :guilabel:`Global` division applies to all divisions, except for divisions whose same parameter is already specified (local override).
 
 The editable parameters are:
 
@@ -34,7 +34,7 @@ The editable parameters are:
   Key range for which the sample will be heard.
 * **Velocity range**\
   Velocity range for which the sample will be heard.
-  It is possible to set different sounds for the same note, with different velocity ranges (to distinguish different nuances of a piano key for example).
+  It is possible to set different sounds for the same note, with different velocity ranges, to distinguish different nuances of a piano key for example.
 * **Attenuation (dB)**\
   Attenuation in decibel applied to the sample.\
   Note: the sf2 format doesn't allow this value to be negative, no amplification is thus possible.
@@ -202,4 +202,4 @@ Buttons on the left are made for:
 * adding / removing a modulator,
 * copying / pasting / duplicating one or more modulators.
 
-When a modulator is added, the border of the corresponding cell in the table is thicker (see the tuning in the global column above).
+When a modulator is added, the border of the corresponding cell in the table is thicker (see the tuning in the :guilabel:`Global` column above).

@@ -58,7 +58,7 @@ The sfz format is also not defined as strictly as the sf2 format: differences ma
 ### Limitations on the sfz import
 
 
-* Only opcodes having a counterpart in `tables <instrument editor table>` are imported.
+* Only opcodes having a counterpart in [tables](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) are imported.
 * The envelope applied to pitch and filter being the same in sf2 files (Mod env), importing different envelopes for the pitch and filter is not possible (``fileg_*`` and ``pitcheg_*`` opcodes).
 * The LFO applied to volume and filter being the same in sf2 files (Mod LFO), importing different LFOs for the volume and filter is not possible (``amplfo_*`` and ``fillfo_*`` opcodes).
 * The only filter that can be imported is the second order low pass filter (``fil_type=lpf_2p``).

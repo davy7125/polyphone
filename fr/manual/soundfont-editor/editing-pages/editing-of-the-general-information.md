@@ -15,7 +15,7 @@ Cet éditeur est composé de trois types d'éléments&nbsp;:
 L'éditeur des informations générales fournit des champs pour modifier les attributs suivants&nbsp;:
 
 * **Titre**\
-  Nom interne de la banque de sons, qui n'a pas forcément de rapport avec le nom de fichier.
+  Nom interne de la banque de sons, qui n'a pas forcément de rapport avec le nom du fichier.
 * **Auteur**\
   Nom de l'auteur de la banque de sons.
 * **Date**\
@@ -44,7 +44,7 @@ L'éditeur présente les informations non éditables suivantes&nbsp;:
   Nom d'un moteur de sons.
 * **Logiciel(s) d'édition**\
   Logiciels d'édition utilisés pour la création de la banque de sons.
-* **Nom de fichier**\
+* **Nom du fichier**\
   Adresse et nom du fichier.
 * **Taille du fichier**\
   Taille de la banque de sons après sauvegarde.

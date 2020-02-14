@@ -18,7 +18,7 @@ Pour chaque échantillon, ce résumé permet par exemple d'effectuer les vérifi
 * Est-il utilisé&nbsp;?
 * Est-ce que sa durée totale (et potentiellement sa durée de boucle) est suffisante&nbsp;?
 * L'accordage a-t-il été effectué&nbsp;?
-* Est-il properment lié en stéréo&nbsp;?
+* Est-il proprement lié en stéréo&nbsp;?
 * Le taux d'échantillonnage est-il suffisant pour une bonne qualité audio&nbsp;?
 
 
@@ -36,7 +36,7 @@ Pour chaque instrument, ce résumé permet par exemple d'effectuer les vérifica
 * Est-il utilisé&nbsp;?
 * Est-ce que les nombres d'échantillons liés, de paramètres et de modulateurs sont cohérents&nbsp;?
 * Les étendues de notes et de vélocités sont-elles correctes&nbsp;?
-* Have the samples been properly attenuated&nbsp;?
+* Les échantillons ont-ils été correctement atténués&nbsp;?
 * La lecture en boucle est-elle bien activée&nbsp;?
 * Les paramètres de chorus et de réverbération n'ont-ils pas été oubliés&nbsp;?
 
@@ -56,4 +56,4 @@ Pour chaque ensemble, ce résumé permet par exemple d'effectuer les vérificati
 * Est-ce que les nombres d'instruments liés, de paramètres et de modulateurs sont cohérents&nbsp;?
 * Les étendues de notes et de vélocités sont-elles correctes&nbsp;?
 * Les instruments ont-ils été correctement atténués&nbsp;?
-* Les paramètres de chorus et de réverbération (en tant qu'offset) n'ont-ils pas été oubliés&nbsp;?
+* Les paramètres de chorus et de réverbération (en tant qu'offsets) n'ont-ils pas été oubliés&nbsp;?

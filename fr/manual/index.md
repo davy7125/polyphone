@@ -6,7 +6,7 @@ Des informations supplémentaires peuvent aussi être trouvées dans les [annexe
 ## Écran d'accueil {#doc_home}
 
 
-À l'ouverture de Polyphone, vous trouverez grossièrement 3 parties&nbsp;:
+À l'ouverture de Polyphone, vous trouverez 3 parties&nbsp;:
 
 * une [partie gauche](#doc_left), contenant l'historique des fichiers et des raccourcis&nbsp;;
 * une [partie droite](#doc_right), dédiée aux banques de sons en ligne&nbsp;;
