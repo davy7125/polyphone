@@ -1,4 +1,4 @@
-Pour créer une [banque de sons](manual/annexes/the-different-soundfont-formats.md#doc_sf2), cliquez sur :guilabel:`Nouvelle banque de sons` sur l' [écran d'accueil](manual/index.md#doc_left).
+Pour créer une [banque de sons](manual/annexes/the-different-soundfont-formats.md#doc_sf2), cliquez sur :guilabel:`Nouvelle banque de sons` sur l'[écran d'accueil](manual/index.md#doc_left).
 Les banques de sons sont composées d'une structure à 3 niveaux et c'est ainsi que la création d'une banque de sons implique 3 étapes fondamentales&nbsp;:
 
 * la [préparation des échantillons](#doc_sample),
