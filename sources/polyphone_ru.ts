@@ -989,52 +989,54 @@ Premium!</source>
         <translation>Учётная запись заблокирована</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.ui" line="255"/>
+        <location filename="context/interface/configsectionrepository.ui" line="281"/>
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.ui" line="274"/>
+        <location filename="context/interface/configsectionrepository.ui" line="300"/>
         <source>Download directory</source>
         <translation>Загружать в каталог</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="105"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="135"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="108"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="144"/>
         <source>Connection</source>
         <translation>Соединение</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="108"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="111"/>
         <source>Connecting...</source>
         <translation>Соединение…</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="112"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="115"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="115"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="121"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="118"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="124"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="130"/>
         <source>Connected</source>
         <translation>Соединено</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="118"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="124"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="129"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="121"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="127"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="133"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="138"/>
         <source>Log out</source>
         <translation>Выйти</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="194"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="201"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="204"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="211"/>
         <source>Click on %1 to save parameters.</source>
         <translation>Нажмите на %1, чтобы сохранить параметры.</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="207"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="217"/>
         <source>Select the destination directory</source>
         <translation>Выбор каталога назначения</translation>
     </message>
@@ -1290,14 +1292,14 @@ repository</source>
 <context>
     <name>DetailsManager</name>
     <message>
-        <location filename="repository/detailsmanager.cpp" line="136"/>
+        <location filename="repository/detailsmanager.cpp" line="143"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation>Премиум-подписка откроет вам все возможности!</translation>
     </message>
     <message>
-        <location filename="repository/detailsmanager.cpp" line="139"/>
-        <location filename="repository/detailsmanager.cpp" line="142"/>
-        <location filename="repository/detailsmanager.cpp" line="148"/>
+        <location filename="repository/detailsmanager.cpp" line="146"/>
+        <location filename="repository/detailsmanager.cpp" line="149"/>
+        <location filename="repository/detailsmanager.cpp" line="155"/>
         <source>Server error</source>
         <translation>Ошибка сервера</translation>
     </message>
@@ -1800,18 +1802,18 @@ repository</source>
 <context>
     <name>DownloadManager</name>
     <message>
-        <location filename="repository/downloadmanager.cpp" line="110"/>
-        <location filename="repository/downloadmanager.cpp" line="158"/>
+        <location filename="repository/downloadmanager.cpp" line="111"/>
+        <location filename="repository/downloadmanager.cpp" line="159"/>
         <source>untitled</source>
         <translation>без заголовка</translation>
     </message>
     <message>
-        <location filename="repository/downloadmanager.cpp" line="144"/>
+        <location filename="repository/downloadmanager.cpp" line="145"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="repository/downloadmanager.cpp" line="145"/>
+        <location filename="repository/downloadmanager.cpp" line="146"/>
         <source>Couldn&apos;t download file &quot;%1&quot;: %2</source>
         <translation>Не удалось загрузить файл «%1»: %2</translation>
     </message>
@@ -2379,8 +2381,8 @@ repository</source>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="61"/>
-        <source>&amp;Export soundfonts</source>
-        <translation>&amp;Экспортировать SoundFont</translation>
+        <source>&amp;Export soundfonts...</source>
+        <translation>&amp;Экспортировать SoundFont…</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="68"/>
@@ -2516,18 +2518,6 @@ repository</source>
         <location filename="mainwindow/mainwindow.cpp" line="202"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Не сохранять</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="246"/>
-        <source>en/documentation</source>
-        <comment>path for the documentation online</comment>
-        <translation>en/documentation</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="251"/>
-        <source>en/forum</source>
-        <comment>path for the forum</comment>
-        <translation>en/forum</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="274"/>
@@ -2685,43 +2675,43 @@ default mod.</source>
         </translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="344"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="339"/>
         <source>Duplicate the selection toward...</source>
         <translation>Дублировать выделение в…</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="345"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="340"/>
         <source>Copy the selected modulators</source>
         <translation>Скопировать выделенные модуляторы</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="350"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="345"/>
         <source>Duplicate modulators toward...</source>
         <translation>Дублировать модуляторы в…</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="351"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="346"/>
         <source>Copy all modulators</source>
         <translation>Скопировать все модуляторы</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="628"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="623"/>
         <source>Forbidden action:</source>
         <translation>Запрещённое действие:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="638"/>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="647"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="633"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="642"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="639"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="634"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>смещения не могут быть модулированы в пресете.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="648"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="643"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation>%1 не может быть модулировано в пресете.</translation>
     </message>
@@ -3265,12 +3255,12 @@ rate</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="260"/>
-        <source>sinus</source>
+        <source>sine</source>
         <translation>синус</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="320"/>
-        <location filename="editor/pagesmpl.cpp" line="1083"/>
+        <location filename="editor/pagesmpl.cpp" line="1082"/>
         <source>Play</source>
         <translation>Воспроизведение</translation>
     </message>
@@ -3313,8 +3303,8 @@ rate</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="585"/>
-        <location filename="editor/pagesmpl.cpp" line="511"/>
-        <location filename="editor/pagesmpl.cpp" line="1007"/>
+        <location filename="editor/pagesmpl.cpp" line="510"/>
+        <location filename="editor/pagesmpl.cpp" line="1006"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
@@ -3324,93 +3314,93 @@ rate</source>
         <translation>Эквалайзер (±15 дБ)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="176"/>
-        <location filename="editor/pagesmpl.cpp" line="181"/>
+        <location filename="editor/pagesmpl.cpp" line="175"/>
+        <location filename="editor/pagesmpl.cpp" line="180"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>сек</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="180"/>
-        <location filename="editor/pagesmpl.cpp" line="183"/>
+        <location filename="editor/pagesmpl.cpp" line="179"/>
+        <location filename="editor/pagesmpl.cpp" line="182"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(мин.)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="258"/>
-        <location filename="editor/pagesmpl.cpp" line="641"/>
+        <location filename="editor/pagesmpl.cpp" line="257"/>
+        <location filename="editor/pagesmpl.cpp" line="640"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>моно</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="268"/>
-        <location filename="editor/pagesmpl.cpp" line="780"/>
+        <location filename="editor/pagesmpl.cpp" line="267"/>
+        <location filename="editor/pagesmpl.cpp" line="779"/>
         <source>right</source>
         <translation>справа</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="269"/>
-        <location filename="editor/pagesmpl.cpp" line="781"/>
+        <location filename="editor/pagesmpl.cpp" line="268"/>
+        <location filename="editor/pagesmpl.cpp" line="780"/>
         <source>left</source>
         <translation>слева</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="270"/>
-        <location filename="editor/pagesmpl.cpp" line="782"/>
+        <location filename="editor/pagesmpl.cpp" line="269"/>
+        <location filename="editor/pagesmpl.cpp" line="781"/>
         <source>link</source>
         <translation>ссылка</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="308"/>
+        <location filename="editor/pagesmpl.cpp" line="307"/>
         <source>Sample not linked to an instrument yet.</source>
         <translation>Семпл ещё не связан с инструментом.</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="310"/>
+        <location filename="editor/pagesmpl.cpp" line="309"/>
         <source>Sample linked to instrument:</source>
         <translation>Семпл связан с инструментом:</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="312"/>
+        <location filename="editor/pagesmpl.cpp" line="311"/>
         <source>Sample linked to instruments:</source>
         <translation>Семпл связан с инструментами:</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="512"/>
-        <location filename="editor/pagesmpl.cpp" line="1008"/>
+        <location filename="editor/pagesmpl.cpp" line="511"/>
+        <location filename="editor/pagesmpl.cpp" line="1007"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Изменения успешно применены к различным семплам</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="779"/>
-        <location filename="editor/pagesmpl.cpp" line="804"/>
+        <location filename="editor/pagesmpl.cpp" line="778"/>
+        <location filename="editor/pagesmpl.cpp" line="803"/>
         <source>mono</source>
         <translation>моно</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1077"/>
+        <location filename="editor/pagesmpl.cpp" line="1076"/>
         <source>Stop</source>
         <translation>Стоп</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1097"/>
+        <location filename="editor/pagesmpl.cpp" line="1096"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1098"/>
+        <location filename="editor/pagesmpl.cpp" line="1097"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <translation>Вырезать семпл с &lt;b&gt;%1&lt;/b&gt; по &lt;b&gt;%2&lt;/b&gt;?</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1100"/>
+        <location filename="editor/pagesmpl.cpp" line="1099"/>
         <source>&amp;Yes</source>
         <translation>&amp;Да</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1101"/>
+        <location filename="editor/pagesmpl.cpp" line="1100"/>
         <source>&amp;No</source>
         <translation>&amp;Нет</translation>
     </message>
@@ -3736,288 +3726,288 @@ rate</source>
 <context>
     <name>RepositoryManager</name>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="77"/>
+        <location filename="repository/repositorymanager.cpp" line="75"/>
         <source>acoustic instrument</source>
         <translation>акустический инструмент</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="78"/>
+        <location filename="repository/repositorymanager.cpp" line="76"/>
         <source>electronic instrument</source>
         <translation>электронный инструмент</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="79"/>
+        <location filename="repository/repositorymanager.cpp" line="77"/>
         <source>various records</source>
         <translation>различные записи</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="80"/>
+        <location filename="repository/repositorymanager.cpp" line="78"/>
         <source>additive synthesis</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Синтезатор#Суммирующий</translatorcomment>
         <translation>аддитивный синтез</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="81"/>
+        <location filename="repository/repositorymanager.cpp" line="79"/>
         <source>subtrative synthesis</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Синтезатор#Вычитающий</translatorcomment>
         <translation>субтрактивный синтез</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="82"/>
+        <location filename="repository/repositorymanager.cpp" line="80"/>
         <source>wavetable synthesis</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Синтезатор#Волновой</translatorcomment>
         <translation>волновой синтез</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="83"/>
+        <location filename="repository/repositorymanager.cpp" line="81"/>
         <source>model synthesis</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Синтезатор#Физический</translatorcomment>
         <translation>физический синтез</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="84"/>
+        <location filename="repository/repositorymanager.cpp" line="82"/>
         <source>FM synthesis</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Синтезатор#Операторный
 https://ru.wikipedia.org/wiki/FM-синтез</translatorcomment>
         <translation>FM-синтез</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="85"/>
+        <location filename="repository/repositorymanager.cpp" line="83"/>
         <source>vector synthesis</source>
         <translation>векторный синтез</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="86"/>
+        <location filename="repository/repositorymanager.cpp" line="84"/>
         <source>granular synthesis</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Гранулярный_синтез</translatorcomment>
         <translation>гранулярный синтез</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="87"/>
+        <location filename="repository/repositorymanager.cpp" line="85"/>
         <source>other synthesis</source>
         <translation>прочий синтез</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="90"/>
+        <location filename="repository/repositorymanager.cpp" line="88"/>
         <source>high</source>
         <translation>высокий</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="91"/>
+        <location filename="repository/repositorymanager.cpp" line="89"/>
         <source>low</source>
         <translation>низкий</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="92"/>
+        <location filename="repository/repositorymanager.cpp" line="90"/>
         <source>distorted</source>
         <translation>искажённый</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="93"/>
+        <location filename="repository/repositorymanager.cpp" line="91"/>
         <source>clean</source>
         <translation>чистый</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="94"/>
+        <location filename="repository/repositorymanager.cpp" line="92"/>
         <source>bright</source>
         <translation>светлый</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="95"/>
+        <location filename="repository/repositorymanager.cpp" line="93"/>
         <source>dark</source>
         <translation>тёмный</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="96"/>
+        <location filename="repository/repositorymanager.cpp" line="94"/>
         <source>warm</source>
         <translation>тёплый</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="97"/>
+        <location filename="repository/repositorymanager.cpp" line="95"/>
         <source>cold</source>
         <translation>холодный</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="98"/>
+        <location filename="repository/repositorymanager.cpp" line="96"/>
         <source>fat</source>
         <translation>толстый</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="99"/>
+        <location filename="repository/repositorymanager.cpp" line="97"/>
         <source>thin</source>
         <translation>тонкий</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="100"/>
+        <location filename="repository/repositorymanager.cpp" line="98"/>
         <source>hard</source>
         <translation>жёсткий</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="101"/>
+        <location filename="repository/repositorymanager.cpp" line="99"/>
         <source>soft</source>
         <translation>мягкий</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="102"/>
+        <location filename="repository/repositorymanager.cpp" line="100"/>
         <source>muted</source>
         <translation>приглушённый</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="103"/>
+        <location filename="repository/repositorymanager.cpp" line="101"/>
         <source>detuned</source>
         <translation>расстроенный</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="104"/>
+        <location filename="repository/repositorymanager.cpp" line="102"/>
         <source>dissonant</source>
         <translation>диссонирующий</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="105"/>
+        <location filename="repository/repositorymanager.cpp" line="103"/>
         <source>noisy</source>
         <translation>шумный</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="106"/>
+        <location filename="repository/repositorymanager.cpp" line="104"/>
         <source>metallic</source>
         <translation>металлический</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="107"/>
+        <location filename="repository/repositorymanager.cpp" line="105"/>
         <source>wooden</source>
         <translation>деревянный</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="108"/>
+        <location filename="repository/repositorymanager.cpp" line="106"/>
         <source>exotic</source>
         <translation>экзотический</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="111"/>
+        <location filename="repository/repositorymanager.cpp" line="109"/>
         <source>slow attack</source>
         <translation>медленная атака</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="112"/>
+        <location filename="repository/repositorymanager.cpp" line="110"/>
         <source>decaying</source>
         <translation>затухание</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="113"/>
+        <location filename="repository/repositorymanager.cpp" line="111"/>
         <source>sustained</source>
         <translation>долгий</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="114"/>
+        <location filename="repository/repositorymanager.cpp" line="112"/>
         <source>long release</source>
         <translation>долгое затухание</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="115"/>
+        <location filename="repository/repositorymanager.cpp" line="113"/>
         <source>percussive</source>
         <translation>ударный</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="116"/>
+        <location filename="repository/repositorymanager.cpp" line="114"/>
         <source>long / evolving</source>
         <translation>долгий / развивающийся</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="117"/>
+        <location filename="repository/repositorymanager.cpp" line="115"/>
         <source>pulsating</source>
         <translation>пульсирующий</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="118"/>
+        <location filename="repository/repositorymanager.cpp" line="116"/>
         <source>echoing</source>
         <translation>гулкий</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="119"/>
+        <location filename="repository/repositorymanager.cpp" line="117"/>
         <source>pad</source>
         <translation>подголосок</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="120"/>
+        <location filename="repository/repositorymanager.cpp" line="118"/>
         <source>lead</source>
         <translation>лидирующий</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="121"/>
+        <location filename="repository/repositorymanager.cpp" line="119"/>
         <source>monophonic</source>
         <translation>монофонический</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="122"/>
+        <location filename="repository/repositorymanager.cpp" line="120"/>
         <source>chord</source>
         <translation>аккорд</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="123"/>
+        <location filename="repository/repositorymanager.cpp" line="121"/>
         <source>glide / pitch mod</source>
         <translation>модуляция тона</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="124"/>
+        <location filename="repository/repositorymanager.cpp" line="122"/>
         <source>sweep / filter mod</source>
         <translation>модуляция фильтра</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="125"/>
+        <location filename="repository/repositorymanager.cpp" line="123"/>
         <source>arpeggiated</source>
         <translation>арпеджио</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="126"/>
+        <location filename="repository/repositorymanager.cpp" line="124"/>
         <source>expressive</source>
         <translation>выразительный</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="127"/>
+        <location filename="repository/repositorymanager.cpp" line="125"/>
         <source>complex</source>
         <translation>сложный</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="128"/>
+        <location filename="repository/repositorymanager.cpp" line="126"/>
         <source>randomized</source>
         <translation>непредсказуемый</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="131"/>
+        <location filename="repository/repositorymanager.cpp" line="129"/>
         <source>classic music</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Классическая_музыка</translatorcomment>
         <translation>классическая музыка</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="132"/>
+        <location filename="repository/repositorymanager.cpp" line="130"/>
         <source>electronic music</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Электронная_музыка</translatorcomment>
         <translation>электронная музыка</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="133"/>
+        <location filename="repository/repositorymanager.cpp" line="131"/>
         <source>trance</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Электронная_музыка →
 https://ru.wikipedia.org/wiki/Транс_(музыкальный_жанр)</translatorcomment>
         <translation>транс</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="134"/>
-        <location filename="repository/repositorymanager.cpp" line="135"/>
+        <location filename="repository/repositorymanager.cpp" line="132"/>
+        <location filename="repository/repositorymanager.cpp" line="133"/>
         <source>ambient music</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Электронная_музыка →
 https://ru.wikipedia.org/wiki/Эмбиент</translatorcomment>
         <translation>эмбиент</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="136"/>
+        <location filename="repository/repositorymanager.cpp" line="134"/>
         <source>house</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Электронная_музыка →
 https://ru.wikipedia.org/wiki/Хаус</translatorcomment>
         <translation>хаус</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="137"/>
+        <location filename="repository/repositorymanager.cpp" line="135"/>
         <source>techno / electro</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Электронная_музыка →
 https://ru.wikipedia.org/wiki/Техно
@@ -4025,7 +4015,7 @@ https://ru.wikipedia.org/wiki/Электро_(музыкальный_жанр)</
         <translation>техно / электро</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="138"/>
+        <location filename="repository/repositorymanager.cpp" line="136"/>
         <source>D&apos;n&apos;B / breaks</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Электронная_музыка →
 https://ru.wikipedia.org/wiki/Драм-н-бэйс
@@ -4033,20 +4023,20 @@ https://ru.wikipedia.org/wiki/Брейкбит</translatorcomment>
         <translation>драм-н-бэйс / брейкбит</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="139"/>
+        <location filename="repository/repositorymanager.cpp" line="137"/>
         <source>industrial</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Электронная_музыка →
 https://ru.wikipedia.org/wiki/Индастриал</translatorcomment>
         <translation>индастриал</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="140"/>
+        <location filename="repository/repositorymanager.cpp" line="138"/>
         <source>experimental</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей</translatorcomment>
         <translation>экспериментальная</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="141"/>
+        <location filename="repository/repositorymanager.cpp" line="139"/>
         <source>funk / soul</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Ритм-н-блюз →
 https://ru.wikipedia.org/wiki/Фанк
@@ -4054,7 +4044,7 @@ https://ru.wikipedia.org/wiki/Соул</translatorcomment>
         <translation>фанк / соул</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="142"/>
+        <location filename="repository/repositorymanager.cpp" line="140"/>
         <source>reggae / dub</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Регги →
 https://ru.wikipedia.org/wiki/Регги →
@@ -4062,7 +4052,7 @@ https://ru.wikipedia.org/wiki/Даб</translatorcomment>
         <translation>регги / даб</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="143"/>
+        <location filename="repository/repositorymanager.cpp" line="141"/>
         <source>latin / afro-cuban</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Латиноамериканская_музыка →
 https://ru.wikipedia.org/wiki/Латиноамериканская_музыка
@@ -4071,21 +4061,21 @@ https://ru.wikipedia.org/wiki/Афро-кубинский_джаз
         <translation>латиноамер. / афро-кубинская</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="144"/>
+        <location filename="repository/repositorymanager.cpp" line="142"/>
         <source>pop / rock</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Рок →
 https://ru.wikipedia.org/wiki/Поп-рок</translatorcomment>
         <translation>поп / рок</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="145"/>
+        <location filename="repository/repositorymanager.cpp" line="143"/>
         <source>metal music</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Рок →
 ttps://ru.wikipedia.org/wiki/Метал</translatorcomment>
         <translation>метал</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="146"/>
+        <location filename="repository/repositorymanager.cpp" line="144"/>
         <source>hiphop / rap</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Хип-хоп →
 https://ru.wikipedia.org/wiki/Хип-хоп_(музыкальный_жанр)
@@ -4093,7 +4083,7 @@ ttps://ru.wikipedia.org/wiki/Рэп</translatorcomment>
         <translation>хип-хоп / рэп</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="147"/>
+        <location filename="repository/repositorymanager.cpp" line="145"/>
         <source>jazz / swing</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Джаз →
 https://ru.wikipedia.org/wiki/Джаз
@@ -4101,147 +4091,147 @@ https://ru.wikipedia.org/wiki/Свинг_(жанр)</translatorcomment>
         <translation>джаз / свинг</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="148"/>
+        <location filename="repository/repositorymanager.cpp" line="146"/>
         <source>folk / country</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Фолк-музыка
 https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Кантри</translatorcomment>
         <translation>фолк / кантри</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="149"/>
-        <location filename="repository/repositorymanager.cpp" line="150"/>
+        <location filename="repository/repositorymanager.cpp" line="147"/>
+        <location filename="repository/repositorymanager.cpp" line="148"/>
         <source>ethnic / world</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Список_музыкальных_жанров,_направлений_и_стилей#Народная_музыка</translatorcomment>
         <translation>народная музыка</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="167"/>
+        <location filename="repository/repositorymanager.cpp" line="165"/>
         <source>public domain</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Лицензии_и_инструменты_Creative_Commons →
 https://ru.wikipedia.org/wiki/Общественное_достояние</translatorcomment>
         <translation>общественное достояние</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="168"/>
+        <location filename="repository/repositorymanager.cpp" line="166"/>
         <source>give credit</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Лицензии_и_инструменты_Creative_Commons#CC_Attribution_(сокращённо_CC_BY)</translatorcomment>
         <translation>с указанием авторства</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="169"/>
+        <location filename="repository/repositorymanager.cpp" line="167"/>
         <source>give credit, don&apos;t distribute with more restrictions</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Лицензии_и_инструменты_Creative_Commons#CC_Attribution_—_Share_Alike_(сокращённо_CC_BY-SA)</translatorcomment>
         <translation>с указанием авторства, с сохранением условий</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="170"/>
+        <location filename="repository/repositorymanager.cpp" line="168"/>
         <source>don&apos;t distribute a modified version</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Лицензии_и_инструменты_Creative_Commons#CC_Attribution_—_No_Derivative_Works_(сокращённо_CC_BY-ND)</translatorcomment>
         <translation>с указанием авторства, без производных</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="171"/>
+        <location filename="repository/repositorymanager.cpp" line="169"/>
         <source>personal use</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Лицензии_и_инструменты_Creative_Commons#CC_Attribution_—_Noncommercial_(сокращённо_CC_BY-NC)</translatorcomment>
         <translation>с указанием авторства, некоммерческая</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="172"/>
+        <location filename="repository/repositorymanager.cpp" line="170"/>
         <source>personal use, don&apos;t distribute with more restrictions</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Лицензии_и_инструменты_Creative_Commons#CC_Attribution_—_Noncommercial_—_Share_Alike_(сокращённо_CC_BY-NC-SA)</translatorcomment>
         <translation>с указанием авторства, некоммерческая, с сохранением условий</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="173"/>
+        <location filename="repository/repositorymanager.cpp" line="171"/>
         <source>personal use, don&apos;t distribute a modified version</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Лицензии_и_инструменты_Creative_Commons#CC_Attribution_—_Noncommercial_—_No_Derivative_Works_(сокращённо_CC_BY-NC-ND)</translatorcomment>
         <translation>с указанием авторства, некоммерческая, без производных</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="384"/>
+        <location filename="repository/repositorymanager.cpp" line="387"/>
         <source>piano</source>
         <translatorcomment>НЕ пианино: https://en.wikipedia.org/wiki/Piano → https://ru.wikipedia.org/wiki/Фортепиано
 https://ru.wikipedia.org/wiki/Музыкальные_инструменты#Струнные_клавишные → https://ru.wikipedia.org/wiki/Фортепиано</translatorcomment>
         <translation>фортепиано</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="387"/>
+        <location filename="repository/repositorymanager.cpp" line="390"/>
         <source>organ</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Музыкальные_инструменты#Духовые_клавишные →
 https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструмент)</translatorcomment>
         <translation>орган</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="390"/>
+        <location filename="repository/repositorymanager.cpp" line="393"/>
         <source>synthesizer</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Музыкальные_инструменты#Электромузыкальные →
 https://ru.wikipedia.org/wiki/Синтезатор</translatorcomment>
         <translation>синтезатор</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="393"/>
+        <location filename="repository/repositorymanager.cpp" line="396"/>
         <source>harpsichord</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Музыкальные_инструменты#Струнные_клавишные →
 https://ru.wikipedia.org/wiki/Клавесин</translatorcomment>
         <translation>клавесин</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="396"/>
+        <location filename="repository/repositorymanager.cpp" line="399"/>
         <source>guitar</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Музыкальные_инструменты#Щипковые_струнные →
 https://ru.wikipedia.org/wiki/Гитара</translatorcomment>
         <translation>гитара</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="399"/>
+        <location filename="repository/repositorymanager.cpp" line="402"/>
         <source>bass</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Музыкальные_инструменты → ?
 https://ru.wikipedia.org/wiki/Бас</translatorcomment>
         <translation>бас</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="402"/>
+        <location filename="repository/repositorymanager.cpp" line="405"/>
         <source>plucked strings</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Музыкальные_инструменты#Щипковые_струнные →
 https://ru.wikipedia.org/wiki/Струнные_щипковые_музыкальные_инструменты</translatorcomment>
         <translation>струнные щипковые</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="405"/>
+        <location filename="repository/repositorymanager.cpp" line="408"/>
         <source>bowed strings</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Музыкальные_инструменты#Смычковые_струнные →
 https://ru.wikipedia.org/wiki/Струнные_смычковые_музыкальные_инструменты</translatorcomment>
         <translation>струнные смычковые</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="408"/>
+        <location filename="repository/repositorymanager.cpp" line="411"/>
         <source>flute</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Музыкальные_инструменты#Лабиальные_деревянные_духовые →
 https://ru.wikipedia.org/wiki/Флейта</translatorcomment>
         <translation>флейта</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="411"/>
+        <location filename="repository/repositorymanager.cpp" line="414"/>
         <source>reed</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Музыкальные_инструменты#Язычковые_деревянные_духовые</translatorcomment>
         <translation>язычковые деревянные духовые</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="414"/>
+        <location filename="repository/repositorymanager.cpp" line="417"/>
         <source>brass</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Музыкальные_инструменты#Медные_духовые →
 https://ru.wikipedia.org/wiki/Медные_духовые_музыкальные_инструменты</translatorcomment>
         <translation>медные духовые</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="417"/>
+        <location filename="repository/repositorymanager.cpp" line="420"/>
         <source>vocal</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Музыкальные_инструменты → ?
 https://ru.wikipedia.org/wiki/Пение (перенаправлено с «Вокал»)</translatorcomment>
         <translation>пение</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="420"/>
+        <location filename="repository/repositorymanager.cpp" line="423"/>
         <source>unpitched percussion</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Музыкальные_инструменты#Ударные →
 С неопределенной высотой звучания
@@ -4249,7 +4239,7 @@ https://ru.wikipedia.org/wiki/Пение (перенаправлено с «Во
         <translation>ударные с неопред. высотой</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="423"/>
+        <location filename="repository/repositorymanager.cpp" line="426"/>
         <source>melodic percussion</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Музыкальные_инструменты#Ударные →
 С определённой высотой звучания
@@ -4257,56 +4247,56 @@ https://ru.wikipedia.org/wiki/Пение (перенаправлено с «Во
         <translation>ударные с опред. высотой</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="426"/>
+        <location filename="repository/repositorymanager.cpp" line="429"/>
         <source>sound effect</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Звуковой_эффект</translatorcomment>
         <translation>звуковой эффект</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="429"/>
+        <location filename="repository/repositorymanager.cpp" line="432"/>
         <source>soundscape</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Звуковой_ландшафт</translatorcomment>
         <translation>звуковой ландшафт</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="432"/>
+        <location filename="repository/repositorymanager.cpp" line="435"/>
         <source>loop / rythm</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Звуковая_петля (перенаправлено с «Луп»)
 https://ru.wikipedia.org/wiki/Ритм</translatorcomment>
         <translation>петля / ритм</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="435"/>
+        <location filename="repository/repositorymanager.cpp" line="438"/>
         <source>instrument set</source>
         <translation>набор инструментов</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="438"/>
+        <location filename="repository/repositorymanager.cpp" line="441"/>
         <source>unclassifiable</source>
         <translation>неклассифицируемые</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="445"/>
+        <location filename="repository/repositorymanager.cpp" line="448"/>
         <source>Category %1</source>
         <translation>Категория %1</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="473"/>
+        <location filename="repository/repositorymanager.cpp" line="476"/>
         <source>Please wait...</source>
         <translation>Пожалуйста, подождите…</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="476"/>
+        <location filename="repository/repositorymanager.cpp" line="479"/>
         <source>Your account has been banned.</source>
         <translation>Ваша учётная запись была заблокирована.</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="481"/>
+        <location filename="repository/repositorymanager.cpp" line="484"/>
         <source>A Premium account allows you to browse and download all soundfonts available online.</source>
         <translation>Учётная запись Премиум позволяет просматривать и загружать все SoundFont, доступные онлайн.</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="490"/>
+        <location filename="repository/repositorymanager.cpp" line="493"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -4429,7 +4419,7 @@ download the list</source>
 <context>
     <name>SoundfontComment</name>
     <message>
-        <location filename="repository/soundfont/viewer/soundfontcomment.cpp" line="75"/>
+        <location filename="repository/soundfont/viewer/soundfontcomment.cpp" line="89"/>
         <source>No comments.</source>
         <translation>Нет коментариев.</translation>
     </message>
@@ -4458,6 +4448,40 @@ download the list</source>
         <location filename="repository/soundfont/editor/soundfonteditorcenter.ui" line="128"/>
         <source>Add a file</source>
         <translation>Добавить файл</translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorcenter.cpp" line="74"/>
+        <source>At least one file must be uploaded.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SoundfontEditorFiles</name>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="80"/>
+        <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
+        <source>Warning</source>
+        <translation type="unfinished">Предупреждение</translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="80"/>
+        <source>The number of files cannot exceed %0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
+        <source>File to upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
+        <source>Files</source>
+        <translation type="unfinished">Файлы</translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
+        <source>The file size cannot exceed %0 MB.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4521,6 +4545,16 @@ download the list</source>
         <source>None</source>
         <translation>Отсутствует</translation>
     </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="130"/>
+        <source>A category must be selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="134"/>
+        <source>A license must be selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SoundfontEditorTop</name>
@@ -4529,21 +4563,31 @@ download the list</source>
         <source>Title...</source>
         <translation>Заголовок…</translation>
     </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditortop.cpp" line="56"/>
+        <source>A title must be provided.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SoundfontFileCell</name>
     <message>
-        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="35"/>
+        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="78"/>
         <source>Description...</source>
         <translation>Описание…</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="48"/>
+        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="91"/>
         <source>Title...</source>
         <translation>Заголовок…</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="58"/>
+        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="104"/>
+        <source>Replace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="44"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
@@ -4571,6 +4615,19 @@ download content</source>
         <location filename="repository/soundfont/soundfontviewer.ui" line="528"/>
         <source>Submit the changes</source>
         <translation>Подтвердить изменения</translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/soundfontviewer.cpp" line="201"/>
+        <location filename="repository/soundfont/soundfontviewer.cpp" line="207"/>
+        <location filename="repository/soundfont/soundfontviewer.cpp" line="213"/>
+        <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
+        <source>Warning</source>
+        <translation type="unfinished">Предупреждение</translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
+        <source>The upload failed: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5925,7 +5982,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
         </translation>
     </message>
     <message>
-        <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="125"/>
+        <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="124"/>
         <source>The selection contains no modulators.</source>
         <translation>Выделение не содержит модуляторов.</translation>
     </message>
@@ -6414,11 +6471,29 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     </message>
 </context>
 <context>
+    <name>UploadingDialog</name>
+    <message>
+        <location filename="repository/soundfont/uploadingdialog.ui" line="14"/>
+        <source>Information</source>
+        <translation type="unfinished">Информация</translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/uploadingdialog.ui" line="50"/>
+        <source>Uploading soundfont...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/uploadingdialog.cpp" line="76"/>
+        <source>Canceling...</source>
+        <translation type="unfinished">Отмена…</translation>
+    </message>
+</context>
+<context>
     <name>UserManager</name>
     <message>
         <location filename="repository/usermanager.cpp" line="118"/>
-        <location filename="repository/usermanager.cpp" line="144"/>
         <location filename="repository/usermanager.cpp" line="150"/>
+        <location filename="repository/usermanager.cpp" line="156"/>
         <source>Server error</source>
         <translation>Ошибка сервера</translation>
     </message>
@@ -6431,7 +6506,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
 <context>
     <name>WaitingToolDialog</name>
     <message>
-        <location filename="editor/tools/waitingtooldialog.ui" line="50"/>
+        <location filename="editor/tools/waitingtooldialog.ui" line="47"/>
         <source>Processing...</source>
         <translation>Обработка…</translation>
     </message>

@@ -1043,52 +1043,54 @@ werden!</translation>
         <translation>Gesperrter Account</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.ui" line="255"/>
+        <location filename="context/interface/configsectionrepository.ui" line="281"/>
         <source>Password</source>
         <translation>Passwort</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.ui" line="274"/>
+        <location filename="context/interface/configsectionrepository.ui" line="300"/>
         <source>Download directory</source>
         <translation>Download Ordner</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="105"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="135"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="108"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="144"/>
         <source>Connection</source>
         <translation>Verbindung</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="108"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="111"/>
         <source>Connecting...</source>
         <translation>verbinde...</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="112"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="115"/>
         <source>Cancel</source>
         <translation>Abbruch</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="115"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="121"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="118"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="124"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="130"/>
         <source>Connected</source>
         <translation>Verbunden</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="118"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="124"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="129"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="121"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="127"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="133"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="138"/>
         <source>Log out</source>
         <translation>Abmelden</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="194"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="201"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="204"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="211"/>
         <source>Click on %1 to save parameters.</source>
         <translation>Click auf %1 um Parameter zu sichern.</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="207"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="217"/>
         <source>Select the destination directory</source>
         <translation>Ziel-Ordner wählen</translation>
     </message>
@@ -1328,14 +1330,14 @@ Fundgrube</translation>
 <context>
     <name>DetailsManager</name>
     <message>
-        <location filename="repository/detailsmanager.cpp" line="136"/>
+        <location filename="repository/detailsmanager.cpp" line="143"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation>Abonniere ein Premium-Konto, um alle Funktionen zu erhalten!</translation>
     </message>
     <message>
-        <location filename="repository/detailsmanager.cpp" line="139"/>
-        <location filename="repository/detailsmanager.cpp" line="142"/>
-        <location filename="repository/detailsmanager.cpp" line="148"/>
+        <location filename="repository/detailsmanager.cpp" line="146"/>
+        <location filename="repository/detailsmanager.cpp" line="149"/>
+        <location filename="repository/detailsmanager.cpp" line="155"/>
         <source>Server error</source>
         <translation>Server Fehler</translation>
     </message>
@@ -1841,18 +1843,18 @@ Fundgrube</translation>
 <context>
     <name>DownloadManager</name>
     <message>
-        <location filename="repository/downloadmanager.cpp" line="110"/>
-        <location filename="repository/downloadmanager.cpp" line="158"/>
+        <location filename="repository/downloadmanager.cpp" line="111"/>
+        <location filename="repository/downloadmanager.cpp" line="159"/>
         <source>untitled</source>
         <translation>unbenannt</translation>
     </message>
     <message>
-        <location filename="repository/downloadmanager.cpp" line="144"/>
+        <location filename="repository/downloadmanager.cpp" line="145"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="repository/downloadmanager.cpp" line="145"/>
+        <location filename="repository/downloadmanager.cpp" line="146"/>
         <source>Couldn&apos;t download file &quot;%1&quot;: %2</source>
         <translation>Herunterladen der Datei &quot;%1&quot;: %2 fehlgeschlagen</translation>
     </message>
@@ -2415,8 +2417,8 @@ Fundgrube</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="61"/>
-        <source>&amp;Export soundfonts</source>
-        <translation>Soundfonts &amp;exportieren</translation>
+        <source>&amp;Export soundfonts...</source>
+        <translation>Soundfonts &amp;exportieren...</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="68"/>
@@ -2495,18 +2497,6 @@ Fundgrube</translation>
         <location filename="mainwindow/mainwindow.cpp" line="197"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>die Datei &quot;%1&quot; wurde geändert.</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="246"/>
-        <source>en/documentation</source>
-        <comment>path for the documentation online</comment>
-        <translation>en/Dokumentation</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="251"/>
-        <source>en/forum</source>
-        <comment>path for the forum</comment>
-        <translation>en/Forum / online</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="20"/>
@@ -2721,43 +2711,43 @@ default mod.</source>
         </translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="344"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="339"/>
         <source>Duplicate the selection toward...</source>
         <translation>Auswahl duplizieren zur...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="345"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="340"/>
         <source>Copy the selected modulators</source>
         <translation>selektierte Modulatoren kopieren</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="350"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="345"/>
         <source>Duplicate modulators toward...</source>
         <translation>Dupliziere Modulatoren zur...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="351"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="346"/>
         <source>Copy all modulators</source>
         <translation>alle Modulatoren kopieren</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="628"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="623"/>
         <source>Forbidden action:</source>
         <translation>Nicht erlaubt:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="638"/>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="647"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="633"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="642"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="639"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="634"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>Offsets können in einem Preset nicht moduliert werden.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="648"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="643"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation>%1 kann in einem Preset nicht moduliert werden.</translation>
     </message>
@@ -3310,13 +3300,13 @@ Frequenz</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="320"/>
-        <location filename="editor/pagesmpl.cpp" line="1083"/>
+        <location filename="editor/pagesmpl.cpp" line="1082"/>
         <source>Play</source>
         <translation>Wiedergabe</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="260"/>
-        <source>sinus</source>
+        <source>sine</source>
         <translation>Sinus</translation>
     </message>
     <message>
@@ -3371,100 +3361,100 @@ Frequenz</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="585"/>
-        <location filename="editor/pagesmpl.cpp" line="511"/>
-        <location filename="editor/pagesmpl.cpp" line="1007"/>
+        <location filename="editor/pagesmpl.cpp" line="510"/>
+        <location filename="editor/pagesmpl.cpp" line="1006"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="176"/>
-        <location filename="editor/pagesmpl.cpp" line="181"/>
+        <location filename="editor/pagesmpl.cpp" line="175"/>
+        <location filename="editor/pagesmpl.cpp" line="180"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="180"/>
-        <location filename="editor/pagesmpl.cpp" line="183"/>
+        <location filename="editor/pagesmpl.cpp" line="179"/>
+        <location filename="editor/pagesmpl.cpp" line="182"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(min)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="258"/>
-        <location filename="editor/pagesmpl.cpp" line="641"/>
+        <location filename="editor/pagesmpl.cpp" line="257"/>
+        <location filename="editor/pagesmpl.cpp" line="640"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>Mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="268"/>
-        <location filename="editor/pagesmpl.cpp" line="780"/>
+        <location filename="editor/pagesmpl.cpp" line="267"/>
+        <location filename="editor/pagesmpl.cpp" line="779"/>
         <source>right</source>
         <translation>rechts</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="269"/>
-        <location filename="editor/pagesmpl.cpp" line="781"/>
+        <location filename="editor/pagesmpl.cpp" line="268"/>
+        <location filename="editor/pagesmpl.cpp" line="780"/>
         <source>left</source>
         <translation>links</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="270"/>
-        <location filename="editor/pagesmpl.cpp" line="782"/>
+        <location filename="editor/pagesmpl.cpp" line="269"/>
+        <location filename="editor/pagesmpl.cpp" line="781"/>
         <source>link</source>
         <translation>Link</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="308"/>
+        <location filename="editor/pagesmpl.cpp" line="307"/>
         <source>Sample not linked to an instrument yet.</source>
         <translation>Instrument hat noch keinen Link zu einem Instrument.</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="310"/>
+        <location filename="editor/pagesmpl.cpp" line="309"/>
         <source>Sample linked to instrument:</source>
         <translation>Sample hat Link zum Instrument :</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="312"/>
+        <location filename="editor/pagesmpl.cpp" line="311"/>
         <source>Sample linked to instruments:</source>
         <translation>Sample hat Link zu Instrumenten :</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="512"/>
-        <location filename="editor/pagesmpl.cpp" line="1008"/>
+        <location filename="editor/pagesmpl.cpp" line="511"/>
+        <location filename="editor/pagesmpl.cpp" line="1007"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Änderung erfolgreich auf die verschiedenen Samples angewendet</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="779"/>
-        <location filename="editor/pagesmpl.cpp" line="804"/>
+        <location filename="editor/pagesmpl.cpp" line="778"/>
+        <location filename="editor/pagesmpl.cpp" line="803"/>
         <source>mono</source>
         <translation>Mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1077"/>
+        <location filename="editor/pagesmpl.cpp" line="1076"/>
         <source>Stop</source>
         <translation>Stop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1097"/>
+        <location filename="editor/pagesmpl.cpp" line="1096"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1098"/>
+        <location filename="editor/pagesmpl.cpp" line="1097"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation>Wollen Sie wirklich den sample von &lt;b&gt;%1&lt;/b&gt; bis &lt;b&gt;%2&lt;/b&gt; schneiden?&gt;</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1100"/>
+        <location filename="editor/pagesmpl.cpp" line="1099"/>
         <source>&amp;Yes</source>
         <translation>&amp;Ja</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1101"/>
+        <location filename="editor/pagesmpl.cpp" line="1100"/>
         <source>&amp;No</source>
         <translation>&amp;Nein</translation>
     </message>
@@ -3790,489 +3780,489 @@ Frequenz</translation>
 <context>
     <name>RepositoryManager</name>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="77"/>
+        <location filename="repository/repositorymanager.cpp" line="75"/>
         <source>acoustic instrument</source>
         <translation>akkustisches Instrument</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="78"/>
+        <location filename="repository/repositorymanager.cpp" line="76"/>
         <source>electronic instrument</source>
         <translation>elektronisches Instrument</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="79"/>
+        <location filename="repository/repositorymanager.cpp" line="77"/>
         <source>various records</source>
         <translation>Diverse Aufnahmen</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="80"/>
+        <location filename="repository/repositorymanager.cpp" line="78"/>
         <source>additive synthesis</source>
         <translation>Additive Synthese</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="81"/>
+        <location filename="repository/repositorymanager.cpp" line="79"/>
         <source>subtrative synthesis</source>
         <translation>Subtraktive Synthese</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="82"/>
+        <location filename="repository/repositorymanager.cpp" line="80"/>
         <source>wavetable synthesis</source>
         <translation>Wavetable Synthese</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="83"/>
+        <location filename="repository/repositorymanager.cpp" line="81"/>
         <source>model synthesis</source>
         <translation>Model Synthese</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="84"/>
+        <location filename="repository/repositorymanager.cpp" line="82"/>
         <source>FM synthesis</source>
         <translation>FM Synthese</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="85"/>
+        <location filename="repository/repositorymanager.cpp" line="83"/>
         <source>vector synthesis</source>
         <translation>Vector Synthese</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="86"/>
+        <location filename="repository/repositorymanager.cpp" line="84"/>
         <source>granular synthesis</source>
         <translation>granulare Synthese</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="87"/>
+        <location filename="repository/repositorymanager.cpp" line="85"/>
         <source>other synthesis</source>
         <translation>andere Synthese</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="90"/>
+        <location filename="repository/repositorymanager.cpp" line="88"/>
         <source>high</source>
         <translation>Hoch</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="91"/>
+        <location filename="repository/repositorymanager.cpp" line="89"/>
         <source>low</source>
         <translation>Tief</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="92"/>
+        <location filename="repository/repositorymanager.cpp" line="90"/>
         <source>distorted</source>
         <translation>verzerrt</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="93"/>
+        <location filename="repository/repositorymanager.cpp" line="91"/>
         <source>clean</source>
         <translation>rein</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="94"/>
+        <location filename="repository/repositorymanager.cpp" line="92"/>
         <source>bright</source>
         <translation>hell</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="95"/>
+        <location filename="repository/repositorymanager.cpp" line="93"/>
         <source>dark</source>
         <translation>dunkel</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="96"/>
+        <location filename="repository/repositorymanager.cpp" line="94"/>
         <source>warm</source>
         <translation>warm</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="97"/>
+        <location filename="repository/repositorymanager.cpp" line="95"/>
         <source>cold</source>
         <translation>kalt</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="98"/>
+        <location filename="repository/repositorymanager.cpp" line="96"/>
         <source>fat</source>
         <translation>fett</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="99"/>
+        <location filename="repository/repositorymanager.cpp" line="97"/>
         <source>thin</source>
         <translation>dünn</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="100"/>
+        <location filename="repository/repositorymanager.cpp" line="98"/>
         <source>hard</source>
         <translation>hart</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="101"/>
+        <location filename="repository/repositorymanager.cpp" line="99"/>
         <source>soft</source>
         <translation>weich</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="102"/>
+        <location filename="repository/repositorymanager.cpp" line="100"/>
         <source>muted</source>
         <translation>gedämpft</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="103"/>
+        <location filename="repository/repositorymanager.cpp" line="101"/>
         <source>detuned</source>
         <translation>verstimmt</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="104"/>
+        <location filename="repository/repositorymanager.cpp" line="102"/>
         <source>dissonant</source>
         <translation>dissonant</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="105"/>
+        <location filename="repository/repositorymanager.cpp" line="103"/>
         <source>noisy</source>
         <translation>rauschend</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="106"/>
+        <location filename="repository/repositorymanager.cpp" line="104"/>
         <source>metallic</source>
         <translation>metallisch</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="107"/>
+        <location filename="repository/repositorymanager.cpp" line="105"/>
         <source>wooden</source>
         <translation>hölzern</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="108"/>
+        <location filename="repository/repositorymanager.cpp" line="106"/>
         <source>exotic</source>
         <translation>exotisch</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="111"/>
+        <location filename="repository/repositorymanager.cpp" line="109"/>
         <source>slow attack</source>
         <translation>Weicher anfang</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="112"/>
+        <location filename="repository/repositorymanager.cpp" line="110"/>
         <source>decaying</source>
         <translation>Zerfallend</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="113"/>
+        <location filename="repository/repositorymanager.cpp" line="111"/>
         <source>sustained</source>
         <translation>Aushaltend</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="114"/>
+        <location filename="repository/repositorymanager.cpp" line="112"/>
         <source>long release</source>
         <translation>Langer Nachklang</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="115"/>
+        <location filename="repository/repositorymanager.cpp" line="113"/>
         <source>percussive</source>
         <translation>percussiv</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="116"/>
+        <location filename="repository/repositorymanager.cpp" line="114"/>
         <source>long / evolving</source>
         <translation>lang / entfaltend</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="117"/>
+        <location filename="repository/repositorymanager.cpp" line="115"/>
         <source>pulsating</source>
         <translation>pulsierend</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="118"/>
+        <location filename="repository/repositorymanager.cpp" line="116"/>
         <source>echoing</source>
         <translation>Echo</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="119"/>
+        <location filename="repository/repositorymanager.cpp" line="117"/>
         <source>pad</source>
         <translation>Pad</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="120"/>
+        <location filename="repository/repositorymanager.cpp" line="118"/>
         <source>lead</source>
         <translation>Lead</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="121"/>
+        <location filename="repository/repositorymanager.cpp" line="119"/>
         <source>monophonic</source>
         <translation>Monophon</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="122"/>
+        <location filename="repository/repositorymanager.cpp" line="120"/>
         <source>chord</source>
         <translation>Akkord</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="123"/>
+        <location filename="repository/repositorymanager.cpp" line="121"/>
         <source>glide / pitch mod</source>
         <translation>Glide / Pitch Modulation</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="124"/>
+        <location filename="repository/repositorymanager.cpp" line="122"/>
         <source>sweep / filter mod</source>
         <translation>Sweep / Filtermodulation</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="125"/>
+        <location filename="repository/repositorymanager.cpp" line="123"/>
         <source>arpeggiated</source>
         <translation>arpeggiert/gebrochen</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="126"/>
+        <location filename="repository/repositorymanager.cpp" line="124"/>
         <source>expressive</source>
         <translation>Expressiv</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="127"/>
+        <location filename="repository/repositorymanager.cpp" line="125"/>
         <source>complex</source>
         <translation>Komplex</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="128"/>
+        <location filename="repository/repositorymanager.cpp" line="126"/>
         <source>randomized</source>
         <translation>Zufallsgeneriert</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="131"/>
+        <location filename="repository/repositorymanager.cpp" line="129"/>
         <source>classic music</source>
         <translation>Klassische Musik</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="132"/>
+        <location filename="repository/repositorymanager.cpp" line="130"/>
         <source>electronic music</source>
         <translation>elektronische Musik</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="133"/>
+        <location filename="repository/repositorymanager.cpp" line="131"/>
         <source>trance</source>
         <translation>Trance</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="134"/>
-        <location filename="repository/repositorymanager.cpp" line="135"/>
+        <location filename="repository/repositorymanager.cpp" line="132"/>
+        <location filename="repository/repositorymanager.cpp" line="133"/>
         <source>ambient music</source>
         <translation>Hintergrundmusik</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="136"/>
+        <location filename="repository/repositorymanager.cpp" line="134"/>
         <source>house</source>
         <translation>House</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="137"/>
+        <location filename="repository/repositorymanager.cpp" line="135"/>
         <source>techno / electro</source>
         <translation>Techno / Elektro</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="138"/>
+        <location filename="repository/repositorymanager.cpp" line="136"/>
         <source>D&apos;n&apos;B / breaks</source>
         <translation>D&apos;n&apos;B / Breaks</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="139"/>
+        <location filename="repository/repositorymanager.cpp" line="137"/>
         <source>industrial</source>
         <translation>Industrial</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="140"/>
+        <location filename="repository/repositorymanager.cpp" line="138"/>
         <source>experimental</source>
         <translation>Experimental</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="141"/>
+        <location filename="repository/repositorymanager.cpp" line="139"/>
         <source>funk / soul</source>
         <translation>Funk / Soul</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="142"/>
+        <location filename="repository/repositorymanager.cpp" line="140"/>
         <source>reggae / dub</source>
         <translation>Reggae / Dub</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="143"/>
+        <location filename="repository/repositorymanager.cpp" line="141"/>
         <source>latin / afro-cuban</source>
         <translation>Latin / Afro-Cuban</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="144"/>
+        <location filename="repository/repositorymanager.cpp" line="142"/>
         <source>pop / rock</source>
         <translation>Pop / Rock</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="145"/>
+        <location filename="repository/repositorymanager.cpp" line="143"/>
         <source>metal music</source>
         <translation>Metal Musik</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="146"/>
+        <location filename="repository/repositorymanager.cpp" line="144"/>
         <source>hiphop / rap</source>
         <translation>Hiphop / Rap</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="147"/>
+        <location filename="repository/repositorymanager.cpp" line="145"/>
         <source>jazz / swing</source>
         <translation>Jazz / Swing</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="148"/>
+        <location filename="repository/repositorymanager.cpp" line="146"/>
         <source>folk / country</source>
         <translation>Folk / Country</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="149"/>
-        <location filename="repository/repositorymanager.cpp" line="150"/>
+        <location filename="repository/repositorymanager.cpp" line="147"/>
+        <location filename="repository/repositorymanager.cpp" line="148"/>
         <source>ethnic / world</source>
         <translation>Ethnic / World</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="167"/>
+        <location filename="repository/repositorymanager.cpp" line="165"/>
         <source>public domain</source>
         <translation>Public Domain</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="168"/>
+        <location filename="repository/repositorymanager.cpp" line="166"/>
         <source>give credit</source>
         <translation>gib Anerkennung</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="169"/>
+        <location filename="repository/repositorymanager.cpp" line="167"/>
         <source>give credit, don&apos;t distribute with more restrictions</source>
         <translation>gib Anerkennung, nicht mit weiteren Enschränkungen weitergeben</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="170"/>
+        <location filename="repository/repositorymanager.cpp" line="168"/>
         <source>don&apos;t distribute a modified version</source>
         <translation>Bitte keine modifizierte Version verbreiten</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="171"/>
+        <location filename="repository/repositorymanager.cpp" line="169"/>
         <source>personal use</source>
         <translation>private Nutzung</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="172"/>
+        <location filename="repository/repositorymanager.cpp" line="170"/>
         <source>personal use, don&apos;t distribute with more restrictions</source>
         <translation>Private Nutzung, nicht mit weiteren Enschränkungen weitergeben</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="173"/>
+        <location filename="repository/repositorymanager.cpp" line="171"/>
         <source>personal use, don&apos;t distribute a modified version</source>
         <translation>Private Nutzung, bitte keine modifizierte Version verbreiten</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="384"/>
+        <location filename="repository/repositorymanager.cpp" line="387"/>
         <source>piano</source>
         <translation>Klavier</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="387"/>
+        <location filename="repository/repositorymanager.cpp" line="390"/>
         <source>organ</source>
         <translation>Orgel</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="390"/>
+        <location filename="repository/repositorymanager.cpp" line="393"/>
         <source>synthesizer</source>
         <translation>Synthesizer</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="393"/>
+        <location filename="repository/repositorymanager.cpp" line="396"/>
         <source>harpsichord</source>
         <translation>Cembalo</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="396"/>
+        <location filename="repository/repositorymanager.cpp" line="399"/>
         <source>guitar</source>
         <translation>Gitarre</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="399"/>
+        <location filename="repository/repositorymanager.cpp" line="402"/>
         <source>bass</source>
         <translation>Bass</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="402"/>
+        <location filename="repository/repositorymanager.cpp" line="405"/>
         <source>plucked strings</source>
         <translation>Zupfinstrumente</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="405"/>
+        <location filename="repository/repositorymanager.cpp" line="408"/>
         <source>bowed strings</source>
         <translation>Streichinstrumente</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="408"/>
+        <location filename="repository/repositorymanager.cpp" line="411"/>
         <source>flute</source>
         <translation>Flöte</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="411"/>
+        <location filename="repository/repositorymanager.cpp" line="414"/>
         <source>reed</source>
         <translation>Holzbläser</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="414"/>
+        <location filename="repository/repositorymanager.cpp" line="417"/>
         <source>brass</source>
         <translation>Blechbläser</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="417"/>
+        <location filename="repository/repositorymanager.cpp" line="420"/>
         <source>vocal</source>
         <translation>Vokal</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="420"/>
+        <location filename="repository/repositorymanager.cpp" line="423"/>
         <source>unpitched percussion</source>
         <translation>Perkussion (ohne Tonhöhen)</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="423"/>
+        <location filename="repository/repositorymanager.cpp" line="426"/>
         <source>melodic percussion</source>
         <translation>melodische Perkussion</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="426"/>
+        <location filename="repository/repositorymanager.cpp" line="429"/>
         <source>sound effect</source>
         <translation>Sound Effekt</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="429"/>
+        <location filename="repository/repositorymanager.cpp" line="432"/>
         <source>soundscape</source>
         <translation>Geräuschkulisse</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="432"/>
+        <location filename="repository/repositorymanager.cpp" line="435"/>
         <source>loop / rythm</source>
         <translation>loop / rythmus</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="435"/>
+        <location filename="repository/repositorymanager.cpp" line="438"/>
         <source>instrument set</source>
         <translation>Instrumenten-Set</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="438"/>
+        <location filename="repository/repositorymanager.cpp" line="441"/>
         <source>unclassifiable</source>
         <translation>nicht klassifizierbar</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="445"/>
+        <location filename="repository/repositorymanager.cpp" line="448"/>
         <source>Category %1</source>
         <translation>Kategorie %1</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="473"/>
+        <location filename="repository/repositorymanager.cpp" line="476"/>
         <source>Please wait...</source>
         <translation>Bitte warten...</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="476"/>
+        <location filename="repository/repositorymanager.cpp" line="479"/>
         <source>Your account has been banned.</source>
         <translation>Ihr Konto wurde gesperrt.</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="481"/>
+        <location filename="repository/repositorymanager.cpp" line="484"/>
         <source>A Premium account allows you to browse and download all soundfonts available online.</source>
         <translation>Mit einem Premium-Account kannst du alle online verfügbaren Soundfonts durchsuchen und herunterladen.</translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="490"/>
+        <location filename="repository/repositorymanager.cpp" line="493"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
@@ -4394,7 +4384,7 @@ download the list</source>
 <context>
     <name>SoundfontComment</name>
     <message>
-        <location filename="repository/soundfont/viewer/soundfontcomment.cpp" line="75"/>
+        <location filename="repository/soundfont/viewer/soundfontcomment.cpp" line="89"/>
         <source>No comments.</source>
         <translation>keine Kommentare.</translation>
     </message>
@@ -4423,6 +4413,40 @@ download the list</source>
         <location filename="repository/soundfont/editor/soundfonteditorcenter.ui" line="128"/>
         <source>Add a file</source>
         <translation>Datei hinzufügen</translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorcenter.cpp" line="74"/>
+        <source>At least one file must be uploaded.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SoundfontEditorFiles</name>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="80"/>
+        <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
+        <source>Warning</source>
+        <translation type="unfinished">Warnung</translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="80"/>
+        <source>The number of files cannot exceed %0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
+        <source>File to upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
+        <source>Files</source>
+        <translation type="unfinished">Dateien</translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
+        <source>The file size cannot exceed %0 MB.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4486,6 +4510,16 @@ download the list</source>
         <source>None</source>
         <translation>Keine</translation>
     </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="130"/>
+        <source>A category must be selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="134"/>
+        <source>A license must be selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SoundfontEditorTop</name>
@@ -4494,21 +4528,31 @@ download the list</source>
         <source>Title...</source>
         <translation>Titel...</translation>
     </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfonteditortop.cpp" line="56"/>
+        <source>A title must be provided.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SoundfontFileCell</name>
     <message>
-        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="35"/>
+        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="78"/>
         <source>Description...</source>
         <translation>Beschreibung...</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="48"/>
+        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="91"/>
         <source>Title...</source>
         <translation>Titel...</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="58"/>
+        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="104"/>
+        <source>Replace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="44"/>
         <source>Remove</source>
         <translation>Entferne</translation>
     </message>
@@ -4535,6 +4579,19 @@ download content</source>
         <location filename="repository/soundfont/soundfontviewer.ui" line="528"/>
         <source>Submit the changes</source>
         <translation>Änderungen eingeben</translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/soundfontviewer.cpp" line="201"/>
+        <location filename="repository/soundfont/soundfontviewer.cpp" line="207"/>
+        <location filename="repository/soundfont/soundfontviewer.cpp" line="213"/>
+        <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
+        <source>Warning</source>
+        <translation type="unfinished">Warnung</translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
+        <source>The upload failed: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5881,7 +5938,7 @@ Other soundfont editors might display other units.</source>
         </translation>
     </message>
     <message>
-        <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="125"/>
+        <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="124"/>
         <source>The selection contains no modulators.</source>
         <translation>Die auswahl enthält keine Modulatoren.</translation>
     </message>
@@ -6371,11 +6428,29 @@ Other soundfont editors might display other units.</source>
     </message>
 </context>
 <context>
+    <name>UploadingDialog</name>
+    <message>
+        <location filename="repository/soundfont/uploadingdialog.ui" line="14"/>
+        <source>Information</source>
+        <translation type="unfinished">Information</translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/uploadingdialog.ui" line="50"/>
+        <source>Uploading soundfont...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/soundfont/uploadingdialog.cpp" line="76"/>
+        <source>Canceling...</source>
+        <translation type="unfinished">wird Abgebrochen...</translation>
+    </message>
+</context>
+<context>
     <name>UserManager</name>
     <message>
         <location filename="repository/usermanager.cpp" line="118"/>
-        <location filename="repository/usermanager.cpp" line="144"/>
         <location filename="repository/usermanager.cpp" line="150"/>
+        <location filename="repository/usermanager.cpp" line="156"/>
         <source>Server error</source>
         <translation>Server Fehler</translation>
     </message>
@@ -6388,7 +6463,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>WaitingToolDialog</name>
     <message>
-        <location filename="editor/tools/waitingtooldialog.ui" line="50"/>
+        <location filename="editor/tools/waitingtooldialog.ui" line="47"/>
         <source>Processing...</source>
         <oldsource>Processing..</oldsource>
         <translation>wird bearbeitet...</translation>

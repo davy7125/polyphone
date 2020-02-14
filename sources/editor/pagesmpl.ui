@@ -257,7 +257,7 @@
            <item row="0" column="3">
             <widget class="QCheckBox" name="checkLectureSinus">
              <property name="text">
-              <string>sinus</string>
+              <string>sine</string>
              </property>
             </widget>
            </item>

@@ -58,7 +58,7 @@ MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
     connect(_saveAsAction, SIGNAL(triggered()), this, SIGNAL(saveAs()));
     this->addAction(_saveAsAction);
 
-    _exportAction = new QAction(tr("&Export soundfonts"), this);
+    _exportAction = new QAction(tr("&Export soundfonts..."), this);
     _exportAction->setShortcut(QString("Ctrl+E"));
     connect(_exportAction, SIGNAL(triggered()), this, SLOT(onExport()));
     this->addAction(_exportAction);
