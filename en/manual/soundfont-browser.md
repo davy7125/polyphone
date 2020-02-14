@@ -24,14 +24,17 @@ It is possible to write :command:`Author:*someone*` to search soundfonts of a sp
 
 Next to the search bar, a drop-down menu provides 4 ways to sort soundfont results:
 
-* **Date**\
-  Newest soundfonts are first.
-* **Downloads**\
-  More downloaded soundfonts are first.
-* **Rating score**\
-  Highest rated soundfonts are first.
-* **Title (A→Z)**\
-  Soundfonts results are sorted according to the alphabetical order.
+Date
+: Newest soundfonts are first.
+
+Downloads
+: More downloaded soundfonts are first.
+
+Rating score
+: Highest rated soundfonts are first.
+
+Title (A→Z)
+: Soundfonts results are sorted according to the alphabetical order.
 
 
 ### Filtering the results
@@ -39,22 +42,29 @@ Next to the search bar, a drop-down menu provides 4 ways to sort soundfont resul
 
 Results can be filtered in different ways:
 
-* **Category**\
-  Kind of instrument.
-* **License**\
-  It's possible to list soundfonts having a license allowing a commercial and / or a sharing after the soundfont is edited.
-* **Sample source**\
-  Origin of the samples.
-* **Timbre**\
-  Description of the timbre.
-* **Articulation**\
-  Description of the articulation.
-* **Genre**\
-  Genre targeted by the soundfont.
-* **MIDI standard**\
-  Listing only soundfonts compliant with a standard is possible.
-* **Tags**\
-  Show soundfonts having a specific tag.
+Category
+: Kind of instrument.
+
+License
+: It's possible to list soundfonts having a license allowing a commercial and / or a sharing after the soundfont is edited.
+
+Sample source
+: Origin of the samples.
+
+Timbre
+: Description of the timbre.
+
+Articulation
+: Description of the articulation.
+
+Genre
+: Genre targeted by the soundfont.
+
+MIDI standard
+: Listing only soundfonts compliant with a standard is possible.
+
+Tags
+: Show soundfonts having a specific tag.
 
 
 ## Soundfont description {#doc_description}

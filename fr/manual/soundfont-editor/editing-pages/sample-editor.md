@@ -116,13 +116,15 @@ Le lecteur lit le son.
 Pendant la lecture, un curseur blanc parcourt le graphique pour indiquer la position de lecture.
 Les options de lecture sont&nbsp;:
 
-* **Boucle**\
-  Lit le son en boucle si les positions de début et fin de la boucle sont renseignées.
-* **Stéréo**\
-  Lit le son en stéréo, c'est à dire avec l'échantillon lié.
+Boucle
+: Lit le son en boucle si les positions de début et fin de la boucle sont renseignées.
+
+Stéréo
+: Lit le son en stéréo, c'est à dire avec l'échantillon lié.
   Si la lecture en boucle est en plus requise, les deux boucles respectives seront utilisées (elles peuvent être différentes).
-* **Sinus**\
-  Un signal sinusoïdal de calibration est ajouté au son, permettant l'accordage de l'échantillon au centième de demi-ton près.
+
+Sinus
+: Un signal sinusoïdal de calibration est ajouté au son, permettant l'accordage de l'échantillon au centième de demi-ton près.
   Tout d'abord la note de base doit être précisée.
   À ce stade, des battements peuvent être entendus si la fréquence du sinus diffère légèrement de la fréquence fondamentale du son.
   Il reste à ajuster finement la correction pour rendre les battements aussi lents que possible, de manière à accorder l'échantillon au mieux.

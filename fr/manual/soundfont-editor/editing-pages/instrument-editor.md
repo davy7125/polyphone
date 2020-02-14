@@ -30,49 +30,63 @@ Une modification d'un paramètre dans la division :guilabel:`Global` s'applique 
 
 Les paramètres éditables sont&nbsp;:
 
-* **Étendue de notes**\
-  Étendue de notes sur laquelle l'échantillon sera entendu.
-* **Étendue de vélocités**\
-  Étendue de vélocités sur laquelle l'échantillon sera entendu.
+Étendue de notes
+: Étendue de notes sur laquelle l'échantillon sera entendu.
+
+Étendue de vélocités
+: Étendue de vélocités sur laquelle l'échantillon sera entendu.
   Il est possible de configurer plusieurs sons sur la même note, avec différentes étendues de vélocités, pour distinguer différentes nuances d'une touche de piano par exemple.
-* **Atténuation (dB)**\
-  Atténuation en décibels appliquée à l'échantillon.\
+
+Atténuation (dB)
+: Atténuation en décibels appliquée à l'échantillon.\
   Note&nbsp;: le format sf2 n'autorise pas cette valeur à être négative, aucune amplification n'est ainsi possible.
-* **Balance**\
-  Balance appliquée au son, pour l'entendre à gauche ou à droite en stéréo.
-* **Lecture en boucle**\
-  ![boucle désactivée](images/loop_off.png "boucle désactivée"){.inline} indique un son reproduit sans boucle,
+
+Balance
+: Balance appliquée au son, pour l'entendre à gauche ou à droite en stéréo.
+
+Lecture en boucle
+: ![boucle désactivée](images/loop_off.png "boucle désactivée"){.inline} indique un son reproduit sans boucle,
   ![boucle activée](images/loop_on.png "boucle activée"){.inline} indique un son reproduit avec une boucle continue,
   ![boucle activée + fin](images/loop_on_end.png "boucle activée + fin"){.inline} indique un son reproduit avec une boucle tant que la touche est appuyée et qui continue sa lecture jusqu'à la fin une fois la touche relâchée.\
   Note&nbsp;: le format sf2 n'a pas prévu de mode spécial pour déclencher un son lorsqu'une touche est relevée.
   Une manière d'y parvenir est de doubler chaque échantillon avec un échantillon contenant un silence très court suivi du son à émettre lors de la relâche.
   L'échantillon ajouté sera lu avec le paramètre «&nbsp;boucle activée + fin&nbsp;».
-* **Note de base**\
-  Permet de changer la note de base configurée dans un échantillon par une autre.
-* **Accordage**\
-  Modifie l'accordage en demi-tons et en centièmes de demi-ton.
+
+Note de base
+: Permet de changer la note de base configurée dans un échantillon par une autre.
+
+Accordage
+: Modifie l'accordage en demi-tons et en centièmes de demi-ton.
   Le paramètre «&nbsp;Réglage de tonalité&nbsp;» modifie la distance entre deux notes consécutives.
-* **Filtre**\
-  Applique un filtre passe-bas, en spécifiant la fréquence de coupure et la résonance.
-* **Enveloppe de volume**\
-  Modifie l'enveloppe de volume et également la manière dont elle évolue en fonction de la note.
-* **Modulation**\
-  Configure une modulation (enveloppe, délai, fréquence, évolution en fonction de la note) et son effet sur le ton, le filtre et le volume.
-* **Vibrato**\
-  Configure un vibrato (délai, fréquence) et son effet sur le ton.
-* **Classe exclusive**\
-  Ce paramètre peut définir une ou plusieurs classes exclusives, en assignant à un ensemble de divisions au sein d'une même classe une même valeur différentes de 0.
+
+Filtre
+: Applique un filtre passe-bas, en spécifiant la fréquence de coupure et la résonance.
+
+Enveloppe de volume
+: Modifie l'enveloppe de volume et également la manière dont elle évolue en fonction de la note.
+
+Modulation
+: Configure une modulation (enveloppe, délai, fréquence, évolution en fonction de la note) et son effet sur le ton, le filtre et le volume.
+
+Vibrato
+: Configure un vibrato (délai, fréquence) et son effet sur le ton.
+
+Classe exclusive
+: Ce paramètre peut définir une ou plusieurs classes exclusives, en assignant à un ensemble de divisions au sein d'une même classe une même valeur différentes de 0.
   Quand une classe exclusive est définie, une note déclenchée par l'une des divisions de la classe exclusive termine tous les autres sons de la même classe.
   La portée d'une classe exclusive est l'ensemble dans lequel la classe est définie (un son produit dans un instrument terminera le son d'un autre instrument si les deux instruments se trouvent dans le même ensemble).
   Cet effet peut être utilisé pour des instruments de type percussion comme une cymbale.
   En résumé, jouer une note en termine automatiquement une autre dans le même groupe.
-* **Chorus et réverbération**\
-  Indique l'intensité du chorus et de la réverbération.
+
+Chorus et réverbération
+: Indique l'intensité du chorus et de la réverbération.
   Ces effets sont configurables dans les [préférences](manual/settings.md#doc_sound) du logiciel.
-* **Note fixe et vélocité fixe**\
-  Force la valeur de la note et de la vélocité sur toute l'étendue de la division.
-* **Offsets**\
-  Change les positions de début et de fin d'un son pendant la lecture, ainsi que les positions de début et fin de la boucle.
+
+Note fixe et vélocité fixe
+: Force la valeur de la note et de la vélocité sur toute l'étendue de la division.
+
+Offsets
+: Change les positions de début et de fin d'un son pendant la lecture, ainsi que les positions de début et fin de la boucle.
   Un offset s'exprime en nombre de points.
 
 
@@ -163,13 +177,27 @@ Pendant l'édition de l'enveloppe de modulation, l'enveloppe de volume est affic
 Le partie gauche du graphique représente l'évolution de l'enveloppe lorsqu'une touche est **appuyée**.
 7 des 8 paramètres sont impliqués dans cette représentation&nbsp;:
 
-* **Délai&nbsp;:** durée pendant laquelle l'enveloppe reste à 0 juste après le déclenchement d'une touche,
-* **Attaque&nbsp;:** durée après le **délai** pendant laquelle l'enveloppe passe de 0 à sa valeur maximale,
-* **Maintien&nbsp;:** durée après l'**attaque** pendant laquelle l'enveloppe se maintien à sa valeur maximale,
-* **Déclin&nbsp;:** durée après le **maintien** pendant laquelle l'enveloppe passe progressivement de sa valeur maximale à la valeur spécifiée dans le **soutien**,
-* **Soutien&nbsp;:** valeur maintenue après le **déclin** tant que la touche déclenchée n'est pas relevée,
-* **Note → Maintien&nbsp;:** modification de la durée de **maintien** en fonction de la note (voir ci-dessous),
-* **Note → Déclin&nbsp;:** modification de la durée de **déclin** en fonction de la note (voir ci-dessous).
+
+Délai
+: Durée pendant laquelle l'enveloppe reste à 0 juste après le déclenchement d'une touche.
+
+Attaque
+: Durée après le **délai** pendant laquelle l'enveloppe passe de 0 à sa valeur maximale.
+
+Maintien
+: Durée après l'**attaque** pendant laquelle l'enveloppe se maintien à sa valeur maximale.
+
+Déclin
+: Durée après le **maintien** pendant laquelle l'enveloppe passe progressivement de sa valeur maximale à la valeur spécifiée dans le **soutien**.
+
+Soutien
+: Valeur maintenue après le **déclin** tant que la touche déclenchée n'est pas relevée.
+
+Note → Maintien
+: Modification de la durée de **maintien** en fonction de la note (voir ci-dessous).
+
+Note → Déclin
+: Modification de la durée de **déclin** en fonction de la note (voir ci-dessous).
 
 Une valeur positive dans **Note → XXX** réduira progressivement la durée de XXX vers les aigus, alors qu'une valeur négative fera l'inverse.
 Par exemple&nbsp;:

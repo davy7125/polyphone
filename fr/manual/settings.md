@@ -13,23 +13,27 @@ Elles sont divisées en cinq sections&nbsp;:
 
 La section :guilabel:`Général` permet la modification des paramètres suivants&nbsp;:
 
-* **Sortie audio**\
-  Spécifie la sortie audio utilisée pour lire les échantillons.
+Sortie audio
+: Spécifie la sortie audio utilisée pour lire les échantillons.
   Les pilotes JACK et ASIO peuvent être choisis (le second pour Windows seulement).
-* **Taille du tampon**\
-  Spécifie la taille du tampon utilisé pour les pilotes JACK et ASIO.
+
+Taille du tampon
+: Spécifie la taille du tampon utilisé pour les pilotes JACK et ASIO.
   Une faible valeur induit une faible latence mais le son risque de craquer selon la performance de l'ordinateur.
-* **Entrée MIDI**\
-  Spécifie l'entrée MIDI qui contrôle le clavier virtuel.
+
+Entrée MIDI
+: Spécifie l'entrée MIDI qui contrôle le clavier virtuel.
 
 Par ailleurs, il est possible de cocher les options suivantes&nbsp;:
 
-* **Import d'échantillons&nbsp;: ajuster à la boucle**\
-  Lors de l'import d'un échantillon, les données situées après la fin de la boucle sont automatiquement enlevées (même effet que l'outil «&nbsp;[Ajuster à la fin de boucle](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)&nbsp;»).
-* **Import d'échantillons&nbsp;: enlever le blanc au départ**\
-  Lors de l'import d'un échantillon, la partie silencieuse située avant l'attaque est automatiquement enlevée (même effet que l'outil «&nbsp;[Enlever le silence initial](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)&nbsp;»).
-* **Édition stéréo&nbsp;: répercuter les modifications**\
-  Lors de l'édition d'un côté d'un échantillon stéréo, l'autre côté est automatiquement édité de la même manière.
+Import d'échantillons&nbsp;: ajuster à la boucle
+: Lors de l'import d'un échantillon, les données situées après la fin de la boucle sont automatiquement enlevées (même effet que l'outil «&nbsp;[Ajuster à la fin de boucle](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)&nbsp;»).
+
+Import d'échantillons&nbsp;: enlever le blanc au départ
+: Lors de l'import d'un échantillon, la partie silencieuse située avant l'attaque est automatiquement enlevée (même effet que l'outil «&nbsp;[Enlever le silence initial](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)&nbsp;»).
+
+Édition stéréo&nbsp;: répercuter les modifications
+: Lors de l'édition d'un côté d'un échantillon stéréo, l'autre côté est automatiquement édité de la même manière.
   L'option s'applique également lors de l'édition de divisions stéréo d'un instrument&nbsp;: la division correspondant à l'autre canal (et ayant les mêmes étendues de notes et de vélocités) est éditée de la même manière.
 
 
@@ -41,17 +45,21 @@ Par ailleurs, il est possible de cocher les options suivantes&nbsp;:
 
 Cette section présente des options concernant l'interface du logiciel&nbsp;:
 
-* **Langue**\
-  La langue peut être changée ici (un redémarrage du logiciel est requis).
-* **Nom des notes**\
-  Les notes peuvent être nommées selon leur numéro (en accord avec la spécification MIDI), ou selon le nom du Do central (Do3, Do4 ou Do5).
+Langue
+: La langue peut être changée ici (un redémarrage du logiciel est requis).
+
+Nom des notes
+: Les notes peuvent être nommées selon leur numéro (en accord avec la spécification MIDI), ou selon le nom du Do central (Do3, Do4 ou Do5).
   Le nom des notes peut contenir des dièses ou des bémols.
-* **Ordonner les divisions**\
-  L'ordre des divisions au sein d'un instrument ou d'un ensemble peut être changé ici.
-* **Décorations**\
-  Les décorations en arrière-plan de certaines listes peuvent être désactivées pour augmenter la lisibilité.
-* **Thème**\
-  Différents thèmes prédéfinis sont disponibles pour personnaliser l'apparence de Polyphone.
+
+Ordonner les divisions
+: L'ordre des divisions au sein d'un instrument ou d'un ensemble peut être changé ici.
+
+Décorations
+: Les décorations en arrière-plan de certaines listes peuvent être désactivées pour augmenter la lisibilité.
+
+Thème
+: Différents thèmes prédéfinis sont disponibles pour personnaliser l'apparence de Polyphone.
   Une sélection manuelle des couleurs est aussi possible.
 
 

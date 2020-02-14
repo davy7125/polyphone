@@ -24,14 +24,17 @@ Il est possible d'écrire :command:`Author:*someone*` pour chercher les banques 
 
 À côté de la barre de recherche, un menu déroulant fournit quatre manières de trier les résultats&nbsp;:
 
-* **Date**\
-  Les banques de sons les plus récentes apparaissent en premier (choix par défaut).
-* **Téléchargements**\
-  Les banques de sons les plus téléchargées apparaissent en premier.
-* **Évaluation**\
-  Les banques de sons les mieux évaluées apparaissent en premier.
-* **Titre (A→Z)**\
-  Les banques de sons sont affichées selon l'ordre alphabétique.
+Date
+: Les banques de sons les plus récentes apparaissent en premier (choix par défaut).
+
+Téléchargements
+: Les banques de sons les plus téléchargées apparaissent en premier.
+
+Évaluation
+: Les banques de sons les mieux évaluées apparaissent en premier.
+
+Titre (A→Z)
+: Les banques de sons sont affichées selon l'ordre alphabétique.
 
 
 ### Filtrer les résultats
@@ -39,22 +42,29 @@ Il est possible d'écrire :command:`Author:*someone*` pour chercher les banques 
 
 Les résultats peuvent être filtrés de plusieurs manières&nbsp;:
 
-* **Catégorie**\
-  Type d'instrument.
-* **Licence**\
-  Il est possible de lister les banques de sons ayant une licence permettant un usage commercial et / ou un partage si la banque de sons est modifiée.
-* **Source des échantillons**\
-  Origine des échantillons.
-* **Timbre**\
-  Description du timbre.
-* **Articulation**\
-  Description de l'articulation.
-* **Genre**\
-  Genre visé par la banque de sons.
-* **Standard MIDI**\
-  Pour ne lister que les banques de sons conformes à un standard.
-* **Tags**\
-  Pour afficher les banques de sons ayant un tag spécifique.
+Catégorie
+: Type d'instrument.
+
+Licence
+: Il est possible de lister les banques de sons ayant une licence permettant un usage commercial et / ou un partage si la banque de sons est modifiée.
+
+Source des échantillons
+: Origine des échantillons.
+
+Timbre
+: Description du timbre.
+
+Articulation
+: Description de l'articulation.
+
+Genre
+: Genre visé par la banque de sons.
+
+Standard MIDI
+: Pour ne lister que les banques de sons conformes à un standard.
+
+Tags
+: Pour afficher les banques de sons ayant un tag spécifique.
 
 
 ## Page de présentation {#doc_description}

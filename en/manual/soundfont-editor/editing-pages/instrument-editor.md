@@ -30,49 +30,63 @@ A change of a parameter in the :guilabel:`Global` division applies to all divisi
 
 The editable parameters are:
 
-* **Key range**\
-  Key range for which the sample will be heard.
-* **Velocity range**\
-  Velocity range for which the sample will be heard.
+Key range
+: Key range for which the sample will be heard.
+
+Velocity range
+: Velocity range for which the sample will be heard.
   It is possible to set different sounds for the same note, with different velocity ranges, to distinguish different nuances of a piano key for example.
-* **Attenuation (dB)**\
-  Attenuation in decibel applied to the sample.\
+
+Attenuation (dB)
+: Attenuation in decibel applied to the sample.\
   Note: the sf2 format doesn't allow this value to be negative, no amplification is thus possible.
-* **Pan**\
-  Balance applied to the sound, to hear it to the left or to the right in stereo.
-* **Loop playback**\
-  ![loop off](images/loop_off.png "loop off"){.inline} indicates a sound reproduced with no loop,
+
+Pan
+: Balance applied to the sound, to hear it to the left or to the right in stereo.
+
+Loop playback
+: ![loop off](images/loop_off.png "loop off"){.inline} indicates a sound reproduced with no loop,
   ![loop on](images/loop_on.png "loop on"){.inline} indicates a sound which loops continuously,
   ![loop on and end](images/loop_on_end.png "loop on and end"){.inline} indicates a sound which loops for the duration of key depression and then proceeds to play the remainder of the sample.\
   Note: The sf2 format had no plans for a special playback mode which triggers a sample when a key is released.
   One way to achieve this behavior is to double each sample with a sample containing a short silent loop followed by the sound to emit on the release.
   The added sample will be read with the playback parameter “loop on with end”.
-* **Root key**\
-  Allows you to change the normal root key of a sample to a different note from that usually used.
-* **Tuning**\
-  Change the tuning in semitones and cents of semitones.
+
+Root key
+: Allows you to change the normal root key of a sample to a different note from that usually used.
+
+Tuning
+: Change the tuning in semitones and cents of semitones.
   Changing “scale” plays on the difference between two consecutive notes.
-* **Filter**\
-  Apply a low-pass filter, by specifying the cutoff frequency and the resonance.
-* **Volume envelope**\
-  Change the volume envelope, and possibly how it changes with the note.
-* **Modulation**\
-  Set a modulation (envelope, delay, frequency, changes with the note) and its effect on the tone, filter and volume.
-* **Vibrato**\
-  Set a vibrato (delay, frequency) and its effect on the tone.
-* **Exclusive class**\
-  This parameter can define one or more exclusive classes, by assigning to a set of divisions within a class the same parameter value other than 0.
+
+Filter
+: Apply a low-pass filter, by specifying the cutoff frequency and the resonance.
+
+Volume envelope
+: Change the volume envelope, and possibly how it changes with the note.
+
+Modulation
+: Set a modulation (envelope, delay, frequency, changes with the note) and its effect on the tone, filter and volume.
+
+Vibrato
+: Set a vibrato (delay, frequency) and its effect on the tone.
+
+Exclusive class
+: This parameter can define one or more exclusive classes, by assigning to a set of divisions within a class the same parameter value other than 0.
   When an exclusive class is defined, any note triggered from one of the divisions of the exclusive class ends all the other sounds of the same class.
   The scope of an exclusive class is the preset in which the class is defined (a sound triggered in an instrument will end a sound of another instrument if the two instruments are in the same preset).
   This effect can be used for percussion instruments like a cymbal.
   Basically playing one note automatically terminates another in the same group.
-* **Chorus and reverb**\
-  Indicates the intensity of chorus and reverb effects.
+
+Chorus and reverb
+: Indicates the intensity of chorus and reverb effects.
   The effects are configurable in the software [settings](manual/settings.md#doc_sound).
-* **Fixed key and velocity**\
-  Force the value of the key and of the velocity on the full extent of the division.
-* **Offsets**\
-  Changes the positions of the start and end of a sound during playback, as well as the start and end of the loop.
+
+Fixed key and velocity
+: Force the value of the key and of the velocity on the full extent of the division.
+
+Offsets
+: Changes the positions of the start and end of a sound during playback, as well as the start and end of the loop.
   The unit of an offset is samples (number of values).
 
 
@@ -163,13 +177,26 @@ During the editing of the modulation envelope, the volume envelope is displayed 
 The left part of the graph represents the evolution of the envelope when a key is **triggered**.
 7 out of the 8 parameters are involved in this representation:
 
-* **Delay:** duration during which the envelope remains at 0 just after a key is triggered,
-* **Attack:** duration after **delay** during which the envelope grows from 0 to the maximum value,
-* **Hold:** duration after **attack** during which the envelope keeps its maximum value,
-* **Decay:** duration after **hold** during which the envelope progressively goes from the maximum value to the value specified by **sustain**,
-* **Sustain:** value after **decay** sustained as long as the triggered key is not released,
-* **Key → Hold:** change of the **hold** duration depending on the key (see below),
-* **Key → Decay:** change of the **decay** duration depending on the key (see below).
+Delay
+: Duration during which the envelope remains at 0 just after a key is triggered,
+
+Attack
+: Duration after **delay** during which the envelope grows from 0 to the maximum value,
+
+Hold
+: Duration after **attack** during which the envelope keeps its maximum value,
+
+Decay
+: Duration after **hold** during which the envelope progressively goes from the maximum value to the value specified by **sustain**,
+
+Sustain
+: Value after **decay** sustained as long as the triggered key is not released,
+
+Key → Hold
+: Change of the **hold** duration depending on the key (see below),
+
+Key → Decay
+: Change of the **decay** duration depending on the key (see below).
 
 A positive value in **Key → XXX** gradually decreases the duration of XXX toward the trebles, whereas a negative value does the opposite.
 For instance:

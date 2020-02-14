@@ -19,13 +19,15 @@ polyphone -1 -i <file/to/convert> -d <output/directory> -o <output_file_name>
 ### Arguments
 
 
-* **-1**\
-  Mode “1” is “convert to sf2”.
-* **-d**\
-  Output directory in which the input file will be converted.
+-1
+: Mode “1” is “convert to sf2”.
+
+-d
+: Output directory in which the input file will be converted.
   This argument is optional, by default this is the same directory than the input file.
-* **-o**\
-  Output name of the converted file without the extension (the extension “.sf2” will be automatically added).
+
+-o
+: Output name of the converted file without the extension (the extension “.sf2” will be automatically added).
   This argument is optional, by default this is the same name than the input file.
 
 
@@ -53,16 +55,19 @@ polyphone -2 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c
 ### Arguments
 
 
-* **-2**\
-  Mode “2” is “convert to sf3”.
-* **-d**
-  Output directory in which the input file will be converted.
+-2
+: Mode “2” is “convert to sf3”.
+
+-d
+: Output directory in which the input file will be converted.
   This argument is optional, by default this is the same directory than the input file.
-* **-o**\
-  Output name of the converted file without the extension (the extension “.sf3” will be automatically added).
+
+-o
+: Output name of the converted file without the extension (the extension “.sf3” will be automatically added).
   This argument is optional, by default this is the same name than the input file.
-* **-c**\
-  Conversion configuration.
+
+-c
+: Conversion configuration.
   It is possible to specify the compression quality: “0” is low, “1” is medium, “2” is high.
   This argument is optional, by default this is “1” (medium quality).
 
@@ -91,16 +96,19 @@ polyphone -3 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c
 ### Arguments
 
 
-* **-3**\
-  Mode “3” is “convert to sfz”.
-* **-d**\
-  Output directory in which the input file will be converted.
+-3
+: Mode “3” is “convert to sfz”.
+
+-d
+: Output directory in which the input file will be converted.
   This argument is optional, by default this is the same directory than the input file.
-* **-o**\
-  Output name of the converted file without the extension (the extension “.sfz” will be automatically added).
+
+-o
+: Output name of the converted file without the extension (the extension “.sfz” will be automatically added).
   This argument is optional, by default this is the same name than the input file.
-* **-c**\
-  Conversion configuration made of 3 characters. The first character is “1” if each preset must be prefixed by its preset number, “0” otherwise. The second character is “1” if a directory per bank must be created, “0” otherwise. The third character is “1” if the General MIDI classification must be used to sort presets, “0” otherwise.
+
+-c
+: Conversion configuration made of 3 characters. The first character is “1” if each preset must be prefixed by its preset number, “0” otherwise. The second character is “1” if a directory per bank must be created, “0” otherwise. The third character is “1” if the General MIDI classification must be used to sort presets, “0” otherwise.
   This argument is optional, by default this is “000”.
 
 

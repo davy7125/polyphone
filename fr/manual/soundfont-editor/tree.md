@@ -50,22 +50,28 @@ Un clic sur l'entête :guilabel:`Ensembles` affiche le [résumé de configuratio
 
 Un clic droit sur un élément affiche un menu contenant les actions suivantes&nbsp;:
 
-* **Lier à…**\
-  Lie les échantillons sélectionnés à un instrument, ou les instruments sélectionnés à un ensemble.
-* **Remplacer par…**\
-  Remplace un échantillon par un autre échantillon dans un instrument, ou remplace un instrument par un autre instrument dans un ensemble.
+Lier à…
+: Lie les échantillons sélectionnés à un instrument, ou les instruments sélectionnés à un ensemble.
+
+Remplacer par…
+: Remplace un échantillon par un autre échantillon dans un instrument, ou remplace un instrument par un autre instrument dans un ensemble.
   La configuration des divisions est préservée.
-* **Copier**\
-  Copie les éléments sélectionnés, également accessible avec :kbd:`Ctrl`+:kbd:`C`.
-* **Coller**\
-  Colle les éléments précédemment copiés, également accessible avec :kbd:`Ctrl`+:kbd:`V`.
-* **Dupliquer**\
-  Duplique les échantillons, instruments, ensembles ou divisions sélectionnés.
+
+Copier
+: Copie les éléments sélectionnés, également accessible avec :kbd:`Ctrl`+:kbd:`C`.
+
+Coller
+: Colle les éléments précédemment copiés, également accessible avec :kbd:`Ctrl`+:kbd:`V`.
+
+Dupliquer
+: Duplique les échantillons, instruments, ensembles ou divisions sélectionnés.
   Également accessible avec :kbd:`Ctrl`+:kbd:`D`.
-* **Supprimer**\
-  Supprime les éléments sélectionnés, également accessible avec :kbd:`Del`.
-* **Renommer ou renommage de masse**\
-  Renomme les éléments sélectionnés, également accessible avec :kbd:`F2`.
+
+Supprimer
+: Supprime les éléments sélectionnés, également accessible avec :kbd:`Del`.
+
+Renommer ou renommage de masse
+: Renomme les éléments sélectionnés, également accessible avec :kbd:`F2`.
   Lorsque plusieurs éléments sont sélectionnés, différentes options sont proposées&nbsp;:
   * écraser nom existant avec nom de la note en suffixe (pour les échantillons seulement),
   * écraser nom existant avec incrément en suffix,
@@ -86,22 +92,29 @@ Ce peut être un élément seul ou une sélection multiple rendue possible par l
 
 Ensuite, le résultat d'un drag & drop dépend du type d'élément à l'origine et du type de l'élément ciblé.
 
-* **Échantillon → instrument**\
-  Association de l'échantillon dans l'instrument ciblé, créant ainsi une division d'instrument.
-* **Échantillon → entête :guilabel:`Instruments`**\
-  Création d'un instrument qui contient tous les échantillons déplacés ou création d'un instrument par échantillon déplacé.
-* **Instrument → ensemble**\
-  Association de l'instrument dans l'ensemble ciblé, créant ainsi une division d'ensemble.
-* **Instrument → instrument**\
-  Copie de toutes les divisions de l'instrument source dans l'instrument de destination (ce peut être le même instrument).
-* **Division d'un instrument → instrument ou division d'un instrument**\
-  Copie des divisions sélectionnées de l'instrument source dans l'instrument de destination (ce peut être le même instrument).
-* **Instrument → entête :guilabel:`Ensembles`**\
-  Création d'un ensemble qui contient tous les instruments déplacés ou création d'un ensemble par instrument déplacé.
-* **Ensemble → ensemble**\
-  Copie de toutes les divisions de l'ensemble source dans l'ensemble de destination (ce peut être le même ensemble).
-* **Division d'un ensemble → ensemble ou division d'un ensemble**\
-  Copie des divisions sélectionnées de l'ensemble source dans l'ensemble de destination (ce peut être le même ensemble).
+Échantillon → instrument
+: Association de l'échantillon dans l'instrument ciblé, créant ainsi une division d'instrument.
+
+Échantillon → entête :guilabel:`Instruments`
+: Création d'un instrument qui contient tous les échantillons déplacés ou création d'un instrument par échantillon déplacé.
+
+Instrument → ensemble
+: Association de l'instrument dans l'ensemble ciblé, créant ainsi une division d'ensemble.
+
+Instrument → instrument
+: Copie de toutes les divisions de l'instrument source dans l'instrument de destination (ce peut être le même instrument).
+
+Division d'un instrument → instrument ou division d'un instrument
+: Copie des divisions sélectionnées de l'instrument source dans l'instrument de destination (ce peut être le même instrument).
+
+Instrument → entête :guilabel:`Ensembles`
+: Création d'un ensemble qui contient tous les instruments déplacés ou création d'un ensemble par instrument déplacé.
+
+Ensemble → ensemble
+: Copie de toutes les divisions de l'ensemble source dans l'ensemble de destination (ce peut être le même ensemble).
+
+Division d'un ensemble → ensemble ou division d'un ensemble
+: Copie des divisions sélectionnées de l'ensemble source dans l'ensemble de destination (ce peut être le même ensemble).
 
 
 ## Copier / coller {#doc_copypaste}
@@ -113,12 +126,14 @@ L'opération copier / coller est aussi permise au sein de différentes banques d
 Il est possible de copier un élément d'une première banque de sons et le coller dans une deuxième banque de sons.
 Une sélection multiple est autorisée.
 
-* **Sélection d'au moins un échantillon**\
-  Copie des échantillons sélectionnés.
-* **Sélection d'au moins un instrument**\
-  Copie des instruments sélectionnés en incluant tous les échantillons liés.
-* **Sélection d'au moins un ensemble**\
-  Copie des ensembles sélectionnés en incluant tous les instruments et échantillons liés.
+Sélection d'au moins un échantillon
+: Copie des échantillons sélectionnés.
+
+Sélection d'au moins un instrument
+: Copie des instruments sélectionnés en incluant tous les échantillons liés.
+
+Sélection d'au moins un ensemble
+: Copie des ensembles sélectionnés en incluant tous les instruments et échantillons liés.
 
 Lors de la copie d'éléments entre différentes banques de sons, si un élément ayant le même nom existe déjà plusieurs options seront proposées&nbsp;:
 

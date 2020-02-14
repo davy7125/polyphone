@@ -66,9 +66,14 @@ Dans le cas où une règle linéaire ou exponentielle est utilisée, un clic gau
 
 Le paramètre à modifier peut être sélectionné dans :guilabel:`Paramètres` et le type de modification est choisi dans :guilabel:`Modification`&nbsp;:
 
-* **Addition&nbsp;:** le modificateur est ajouté à la valeur du paramètre choisi.
-* **Multiplication&nbsp;:** le modificateur est multiplié avec la valeur du paramètre choisi.
-* **Remplacement&nbsp;:** le modificateur remplace la valeur du paramètre choisi.
+Addition
+: Le modificateur est ajouté à la valeur du paramètre choisi.
+
+Multiplication
+: Le modificateur est multiplié avec la valeur du paramètre choisi.
+
+Remplacement
+: Le modificateur remplace la valeur du paramètre choisi.
 
 Il est possible de n'appliquer les changements qu'aux divisions dont l'étendue de vélocités est comprise dans une étendue spécifique, utile par exemple pour le cas d'un piano qui auraient plusieurs couches de vélocités.
 
@@ -104,11 +109,20 @@ La barre la plus courte correspond à la note la plus aiguë et la barre la plus
 Chaque note est positionnée dans l'espace, l'extrême gauche correspondant à un son venant de la gauche et l'extrême droite correspondant à un son venant de la droite.
 Plusieurs motifs peuvent être sélectionnés&nbsp;:
 
-* **Ascendant&nbsp;:** les aigus sont à gauche, les basses sont à droite.
-* **Descendant&nbsp;:** les basses sont à gauche, les aigus sont à droite.
-* **Creux&nbsp;:** les basses sont aux deux extrémités, les aigus sont centrés.
-* **Pointe&nbsp;:** les aigus sont aux deux extrémités, les basses sont centrées.
-* **Aléatoire&nbsp;:** les aigus et les basses sont positionnés aléatoirement.
+Ascendant
+: Les aigus sont à gauche, les basses sont à droite.
+
+Descendant
+: Les basses sont à gauche, les aigus sont à droite.
+
+Creux
+: Les basses sont aux deux extrémités, les aigus sont centrés.
+
+Pointe
+: Les aigus sont aux deux extrémités, les basses sont centrées.
+
+Aléatoire
+: Les aigus et les basses sont positionnés aléatoirement.
 
 D'autres options sont disponibles&nbsp;:
 

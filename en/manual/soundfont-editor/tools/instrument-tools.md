@@ -66,9 +66,14 @@ In the case where a linear or exponential law is used, a left click in the graph
 
 The parameter to be modified is chosen in :guilabel:`Parameter`, and the modification type is chosen in :guilabel:`Modification`:
 
-* **Addition:** the modifier is added to the value of the selected parameter.
-* **Multiplication:** the modifier is multiplied with the value of the selected parameter.
-* **Replacement:** the modifier replaces the value of the selected parameter.
+Addition
+: The modifier is added to the value of the selected parameter.
+
+Multiplication
+: The modifier is multiplied with the value of the selected parameter.
+
+Replacement
+: The modifier replaces the value of the selected parameter.
 
 It is possible to apply the changes only on divisions whose velocity range is comprised in a specific range, useful for example in the case where a piano has several velocity layers.
 
@@ -104,11 +109,20 @@ The shortest bar corresponds to the highest note and the longest bar corresponds
 Each note is positioned in the space, the far left corresponding to a sound coming from the left and the extreme right corresponding to a sound coming from the right.
 Several patterns can be selected:
 
-* **Ascending:** trebles are in the left side, basses are in the right side.
-* **Descending:** basses are in the left side, trebles are in the right side.
-* **Hollow:** basses are at both extremities, trebles are centered.
-* **Spike:** trebles are at both extremities, basses are centered.
-* **Random:** trebles and basses are positioned randomly.
+Ascending
+: Trebles are in the left side, basses are in the right side.
+
+Descending
+: Basses are in the left side, trebles are in the right side.
+
+Hollow
+: Basses are at both extremities, trebles are centered.
+
+Spike
+: Trebles are at both extremities, basses are centered.
+
+Random
+: Trebles and basses are positioned randomly.
 
 Other options are available:
 

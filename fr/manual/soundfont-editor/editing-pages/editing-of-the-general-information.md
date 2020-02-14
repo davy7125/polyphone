@@ -14,20 +14,26 @@ Cet éditeur est composé de trois types d'éléments&nbsp;:
 
 L'éditeur des informations générales fournit des champs pour modifier les attributs suivants&nbsp;:
 
-* **Titre**\
-  Nom interne de la banque de sons, qui n'a pas forcément de rapport avec le nom du fichier.
-* **Auteur**\
-  Nom de l'auteur de la banque de sons.
-* **Date**\
-  Date de création du fichier.
-* **Produit**\
-  Produit pour lequel la banque de sons est conçue.
-* **Copyright**\
-  Mention à remplir si le fichier possède un copyright.
-* **Commentaires**\
-  Pour ajouter des informations non incluses dans les catégories précédentes.
-* **Type d'échantillons**\
-  Indique si les échantillons sont stockés avec une précision de 16 bits ou 24 bits.
+Titre
+: Nom interne de la banque de sons, qui n'a pas forcément de rapport avec le nom du fichier.
+
+Auteur
+: Nom de l'auteur de la banque de sons.
+
+Date
+: Date de création du fichier.
+
+Produit
+: Produit pour lequel la banque de sons est conçue.
+
+Copyright
+: Mention à remplir si le fichier possède un copyright.
+
+Commentaires
+: Pour ajouter des informations non incluses dans les catégories précédentes.
+
+Type d'échantillons
+: Indique si les échantillons sont stockés avec une précision de 16 bits ou 24 bits.
   Les échantillons 24 bits peuvent ne pas être supportés par tous les synthétiseurs.
 
 
@@ -36,18 +42,23 @@ L'éditeur des informations générales fournit des champs pour modifier les att
 
 L'éditeur présente les informations non éditables suivantes&nbsp;:
 
-* **Version de la banque de sons**\
-  Version du [format sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2) utilisé par le fichier.
-* **Nom et version ROM**\
-  Nom et version d'un échantillon ROM si utilisé.
-* **Moteur de son**\
-  Nom d'un moteur de sons.
-* **Logiciel(s) d'édition**\
-  Logiciels d'édition utilisés pour la création de la banque de sons.
-* **Nom du fichier**\
-  Adresse et nom du fichier.
-* **Taille du fichier**\
-  Taille de la banque de sons après sauvegarde.
+Version de la banque de sons
+: Version du [format sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2) utilisé par le fichier.
+
+Nom et version ROM
+: Nom et version d'un échantillon ROM si utilisé.
+
+Moteur de son
+: Nom d'un moteur de sons.
+
+Logiciel(s) d'édition
+: Logiciels d'édition utilisés pour la création de la banque de sons.
+
+Nom du fichier
+: Adresse et nom du fichier.
+
+Taille du fichier
+: Taille de la banque de sons après sauvegarde.
 
 
 ## Statistiques {#doc_stats}
