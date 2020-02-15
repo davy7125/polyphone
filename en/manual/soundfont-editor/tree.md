@@ -86,7 +86,7 @@ Rename or bulk rename
 ## Drag & drop {#doc_dragdrop}
 
 
-L'opération “drag & drop” dans l'arborescence permet d'effectuer des associations ou copies rapides.
+The operation “drag & drop” in the tree enables quick associations or copies.
 Before a drag & drop you need to select elements.
 This can be a single element or a multiple selection made possible with the buttons :kbd:`Ctrl` and :kbd:`Shift`.
 
