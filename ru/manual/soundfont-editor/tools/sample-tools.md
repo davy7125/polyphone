@@ -57,9 +57,9 @@
 Изменения можно отменить с помощью функции «[отмена](manual/soundfont-editor/toolbar.md)», но если сохранить файл и закрыть Polyphone, пути назад уже не будет.
 
 **Примечание:** По умолчанию зацикливание в инструменте отключено.
-Чтобы услышать его, нужно выбрать значок [loop on](images/loop_on.png "loop on"){.inline} в строке :guilabel:`Играть петлю` в столбце :guilabel:`Глобальные` или в отдельных столбцах разделов инструмента в :guilabel:`Таблице параметров`.
-[loop on](images/loop_on.png "loop on"){.inline} включает петлю, [loop off](images/loop_off.png "loop off"){.inline} выключает её.
-[loop on and end](images/loop_on_end.png "loop on and end"){.inline} включает петлю, а после отпускания клавиши семпл будет проигран до конца.
+Чтобы услышать его, нужно выбрать значок ![loop on](images/loop_on.png "loop on"){.inline} в строке :guilabel:`Играть петлю` в столбце :guilabel:`Глобальные` или в отдельных столбцах разделов инструмента в :guilabel:`Таблице параметров`.
+![loop on](images/loop_on.png "loop on"){.inline} включает петлю, ![loop off](images/loop_off.png "loop off"){.inline} выключает её.
+![loop on and end](images/loop_on_end.png "loop on and end"){.inline} включает петлю, а после отпускания клавиши семпл будет проигран до конца.
 
 
 ### Изменить громкость {#doc_volume}

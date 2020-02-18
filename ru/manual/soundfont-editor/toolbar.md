@@ -40,7 +40,7 @@
 ## Переключение представления {#doc_view}
 
 
-Значки справа переключают представление информации в зависимости от редактора](manual/soundfont-editor/editing-pages/index.md):
+Значки справа переключают представление информации в зависимости от [редактора](manual/soundfont-editor/editing-pages/index.md):
 
 * при редактировании инструмента переключайтесь между ![table](images/toolbar_table.png "table"){.inline} [табличным видом](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), ![range](images/toolbar_range.png "range"){.inline} [редактором диапазонов](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) и ![envelope](images/toolbar_adsr.png "envelope"){.inline} [редактором огибающей](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_envelope),
 * при редактировании пресета переключайтесь между ![table](images/toolbar_table.png "table"){.inline} табличным видом и ![range](images/toolbar_range.png "range"){.inline} редактором диапазонов,
