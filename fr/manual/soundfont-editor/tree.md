@@ -73,6 +73,7 @@ Supprimer
 Renommer ou renommage de masse
 : Renomme les éléments sélectionnés, également accessible avec :kbd:`F2`.
   Lorsque plusieurs éléments sont sélectionnés, différentes options sont proposées&nbsp;:
+  
   * écraser nom existant avec nom de la note en suffixe (pour les échantillons seulement),
   * écraser nom existant avec incrément en suffix,
   * remplacer une chaîne de caractères,

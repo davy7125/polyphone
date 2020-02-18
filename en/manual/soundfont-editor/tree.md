@@ -73,6 +73,7 @@ Delete
 Rename or bulk rename
 : Rename the selected element(s), also accessible with :kbd:`F2`.
   When several elements are selected, different options are provided:
+  
   * overwrite existing name with key name as suffix (for samples only),
   * overwrite existing name with numerical ascending suffix,
   * replace characters,
