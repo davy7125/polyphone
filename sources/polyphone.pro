@@ -979,6 +979,6 @@ macx {
     ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
 unix:!macx {
-    ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+    ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
 QMAKE_EXTRA_COMPILERS += ExtraCompiler
