@@ -29,7 +29,7 @@
 #include "contextmanager.h"
 
 #ifndef Q_OS_WIN
-#include "jack.h"
+#include "jack/jack.h"
 
 // Jack callbacks
 int jackProcess(jack_nframes_t nframes, void * arg)

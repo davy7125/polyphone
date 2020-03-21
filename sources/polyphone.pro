@@ -68,8 +68,7 @@ unix:!macx {
     isEmpty(PREFIX) {
         PREFIX = /usr/local
     }
-    INCLUDEPATH += $$PREFIX/include/jack \
-        lib/flac
+    INCLUDEPATH += lib/flac
     DESTDIR=bin
     
     # Install target
@@ -145,7 +144,6 @@ contains(DEFINES, USE_LOCAL_STK) {
     INCLUDEPATH += lib/stk
 } else {
     LIBS += -lstk
-    INCLUDEPATH += $$PREFIX/include/stk
 }
 
 # Location of QCustomplot

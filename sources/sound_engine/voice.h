@@ -29,8 +29,8 @@
 #include "sound.h"
 #include "enveloppevol.h"
 #include "oscsinus.h"
-#include "Chorus.h"
-#include "FreeVerb.h"
+#include "stk/Chorus.h"
+#include "stk/FreeVerb.h"
 
 class Voice : public QObject
 {
