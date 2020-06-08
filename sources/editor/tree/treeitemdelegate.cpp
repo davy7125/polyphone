@@ -24,6 +24,7 @@
 
 #include "treeitemdelegate.h"
 #include <QPainter>
+#include <QPainterPath>
 #include "treeview.h"
 #include "contextmanager.h"
 #include "basetypes.h"
