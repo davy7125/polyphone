@@ -2,6 +2,8 @@
 <mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
   <mime-type type="audio/x-soundfont">
     <comment>SoundFont</comment>
+    <comment xml:lang="ru">Файл SoundFont</comment>
+    <comment xml:lang="fr">Banque de son</comment>
   </mime-type>
 
   <mime-type type="audio/x-sf2">
