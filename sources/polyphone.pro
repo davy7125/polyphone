@@ -31,7 +31,8 @@ TRANSLATIONS = polyphone_en.ts \
     polyphone_ru.ts \
     polyphone_tr.ts \
     polyphone_da.ts \
-    polyphone_gr.ts
+    polyphone_gr.ts \
+    polyphone_ko.ts
 CONFIG += lrelease embed_translations
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
 
