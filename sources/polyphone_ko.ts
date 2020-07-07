@@ -90,12 +90,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="616"/>
         <source>Filter, cutoff (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">필터, 컷오프 (x)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="617"/>
         <source>Filter, cutoff (Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">필터, 컷오프 (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="620"/>
@@ -130,7 +130,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="632"/>
         <source>Chorus (%)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">코러스 (%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="635"/>
@@ -320,7 +320,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="716"/>
         <source>Key range</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키 범위</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="719"/>
@@ -350,17 +350,17 @@
     <message>
         <location filename="core/types/attribute.cpp" line="752"/>
         <source>Sample length</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플 길이</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="755"/>
         <source>Loop start</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">루프 시작</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="758"/>
         <source>Loop end</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">루프 종료</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="761"/>
@@ -409,31 +409,31 @@
         <location filename="context/confmanager.cpp" line="194"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Z</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="195"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">C</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="196"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">X</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="197"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">D</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="198"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">C</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="199"/>
@@ -445,277 +445,277 @@
         <location filename="context/confmanager.cpp" line="200"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">G</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="201"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">B</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="202"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">H</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="203"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">N</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="204"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">J</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="205"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">M</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="206"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">,</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="212"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Q</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="213"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">2</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="214"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">W</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="215"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">3</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="216"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">E</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="217"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">R</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="218"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">5</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="219"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">T</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="220"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">6</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="221"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Y</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="222"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">7</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="223"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">U</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="224"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">I</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="230"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+Z</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="231"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+S</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="232"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+X</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="233"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+D</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="234"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+C</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="235"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+V</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="236"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+G</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="237"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+B</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="238"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+H</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="239"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+N</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="240"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+J</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="241"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+M</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="242"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+&lt;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="248"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+Q</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="249"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+@</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="250"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+W</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="251"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+#</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="252"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+E</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="253"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+R</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="254"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+%</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="255"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+T</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="256"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+^</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="257"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+Y</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="258"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+&amp;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="259"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+U</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="260"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Shift+I</translation>
     </message>
 </context>
 <context>
@@ -723,27 +723,27 @@
     <message>
         <location filename="context/interface/configpanel.ui" line="81"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">일반</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="114"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">인터페이스</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="147"/>
         <source>Sound</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사운드</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="180"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">가상 건반</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="213"/>
         <source>Online repository</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">온라인 레퍼지토리</translation>
     </message>
 </context>
 <context>
@@ -783,7 +783,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="191"/>
         <source>change linked sample</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">연결된 샘플 교체</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="204"/>
@@ -877,7 +877,7 @@
         <location filename="context/interface/configsectioninterface.ui" line="92"/>
         <source>none</source>
         <comment>speaking of the &quot;sort divisions&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">없음</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="183"/>
@@ -887,7 +887,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="212"/>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">테마</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="483"/>
@@ -1039,7 +1039,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="217"/>
         <source>Select the destination directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">저장될 디렉토리 선택</translation>
     </message>
 </context>
 <context>
@@ -1174,12 +1174,12 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="53"/>
         <source>Cannot create directory &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 디렉토리를 생성할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="258"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제목없음</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="543"/>
@@ -1195,22 +1195,22 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="548"/>
         <source>Chromatic percussion</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">크로마틱 퍼커션</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="550"/>
         <source>Organ</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">오르간</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="552"/>
         <source>Guitar</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">기타</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="554"/>
         <source>Bass</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">베이스</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="556"/>
@@ -1270,7 +1270,7 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="578"/>
         <source>Percussion kit</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">퍼커션 키트</translation>
     </message>
 </context>
 <context>
@@ -1278,14 +1278,14 @@ repository</source>
     <message>
         <location filename="repository/detailsmanager.cpp" line="143"/>
         <source>Subscribe to a Premium account to get all the features!</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리미엄 계정을 구독해 모든 기능을 얻으세요!</translation>
     </message>
     <message>
         <location filename="repository/detailsmanager.cpp" line="146"/>
         <location filename="repository/detailsmanager.cpp" line="149"/>
         <location filename="repository/detailsmanager.cpp" line="155"/>
         <source>Server error</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">서버 오류</translation>
     </message>
 </context>
 <context>
@@ -1293,17 +1293,17 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_about.ui" line="29"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">정보</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.ui" line="177"/>
         <source>Credit</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제작진</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.ui" line="200"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">닫기</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="36"/>
@@ -1314,7 +1314,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="49"/>
         <source>Copyright</source>
         <oldsource>Copyright © </oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">저작권</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="53"/>
@@ -1424,7 +1424,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogchangelog.ui" line="17"/>
         <source>Welcome</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">환영합니다</translation>
     </message>
     <message>
         <location filename="dialogs/dialogchangelog.ui" line="87"/>
@@ -1439,7 +1439,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogchangelog.cpp" line="48"/>
         <source>Thank you for having installed</source>
-        <translation type="finished">설치해주셔서 감사합니다</translation>
+        <translation type="finished">설치해주셔서 감사합니다.</translation>
     </message>
     <message>
         <location filename="dialogs/dialogchangelog.cpp" line="49"/>
@@ -1525,32 +1525,32 @@ repository</source>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="14"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">가상 건반</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="108"/>
         <source>5 octaves</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">5 옥타브</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="113"/>
         <source>6 octaves</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">6 옥타브</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="118"/>
         <source>88 keys (piano)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">88 건반</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="123"/>
         <source>128 keys (full)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">128 건반</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="150"/>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="176"/>
@@ -1565,12 +1565,12 @@ repository</source>
     <message>
         <location filename="dialogs/dialogkeyboard.cpp" line="228"/>
         <source>Hide the controller area</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">컨트롤러 영역 숨기기</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.cpp" line="234"/>
         <source>Show the controller area</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">컨트롤러 영역 보이기</translation>
     </message>
 </context>
 <context>
@@ -1578,17 +1578,17 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_list.cpp" line="53"/>
         <source>Sample list</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플 목록</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_list.cpp" line="58"/>
         <source>Instrument list</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">악기 목록</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_list.cpp" line="63"/>
         <source>Preset list</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리셋 목록</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_list.ui" line="64"/>
@@ -1616,33 +1616,33 @@ repository</source>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="49"/>
         <source>Create a new preset</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">새 프리셋 생성</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="49"/>
         <source>Create a new instrument</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">새 악기 생성</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="50"/>
         <source>Name of the new preset</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">새 프리셋의 이름</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="50"/>
         <source>Name of the new instrument</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">새 악기의 이름</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="51"/>
         <source>Link selected instruments</source>
         <oldsource>Link selected isntruments</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">선택한 악기에 연결</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="52"/>
         <source>Link selected samples</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">선택한 샘플에 연결</translation>
     </message>
 </context>
 <context>
@@ -1663,23 +1663,23 @@ repository</source>
     <message>
         <location filename="dialogs/dialogrecorder.ui" line="26"/>
         <source>Recorder</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">녹음기</translation>
     </message>
     <message>
         <location filename="dialogs/dialogrecorder.cpp" line="102"/>
         <source>Save a record</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">녹음 저장</translation>
     </message>
     <message>
         <location filename="dialogs/dialogrecorder.cpp" line="103"/>
         <source>Wav file</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Wav 파일</translation>
     </message>
     <message>
         <location filename="dialogs/dialogrecorder.cpp" line="161"/>
         <location filename="dialogs/dialogrecorder.cpp" line="163"/>
         <source>record</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">녹음</translation>
     </message>
 </context>
 <context>
@@ -1687,28 +1687,28 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="23"/>
         <source>Bulk rename</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">대량 이름변경</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="66"/>
         <source>Replace characters</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">문자열 바꾸기</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="71"/>
         <source>Insert after a specific position</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">현재 위치 뒤에 삽입</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="76"/>
         <source>Delete character range</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">문자열 범위 삭제</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="121"/>
         <location filename="dialogs/dialog_rename.cpp" line="103"/>
         <source>Position</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">위치</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="157"/>
@@ -1734,17 +1734,17 @@ repository</source>
         <location filename="dialogs/dialog_rename.cpp" line="69"/>
         <location filename="dialogs/dialog_rename.cpp" line="80"/>
         <source>New name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">새 이름:</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.cpp" line="91"/>
         <source>Find:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">찾기:</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.cpp" line="94"/>
         <source>And replace by:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">다음으로 바꾸기:</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.cpp" line="104"/>
@@ -1754,7 +1754,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.cpp" line="115"/>
         <source>Range</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">범위</translation>
     </message>
 </context>
 <context>
@@ -1762,17 +1762,17 @@ repository</source>
     <message>
         <location filename="dialogs/dialogselection.ui" line="17"/>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">복제</translation>
     </message>
     <message>
         <location filename="dialogs/dialogselection.ui" line="30"/>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">전체선택</translation>
     </message>
     <message>
         <location filename="dialogs/dialogselection.ui" line="37"/>
         <source>Unselect all</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">선택해제</translation>
     </message>
     <message>
         <location filename="dialogs/dialogselection.ui" line="66"/>
@@ -1783,7 +1783,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogselection.ui" line="46"/>
         <source>&amp;Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">덮어쓰기(&amp;D)</translation>
     </message>
 </context>
 <context>
@@ -1792,7 +1792,7 @@ repository</source>
         <location filename="repository/downloadmanager.cpp" line="111"/>
         <location filename="repository/downloadmanager.cpp" line="159"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제목없음</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="145"/>
@@ -1802,7 +1802,7 @@ repository</source>
     <message>
         <location filename="repository/downloadmanager.cpp" line="146"/>
         <source>Couldn&apos;t download file &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일을 내려받을 수 없음: %2</translation>
     </message>
 </context>
 <context>
@@ -1810,7 +1810,7 @@ repository</source>
     <message>
         <location filename="repository/widgets/downloadprogressbutton.cpp" line="45"/>
         <source>Clear completed downloads</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">완료된 다운로드 </translation>
     </message>
 </context>
 <context>
@@ -1818,13 +1818,13 @@ repository</source>
     <message>
         <location filename="repository/widgets/downloadprogresscell.ui" line="51"/>
         <source>Cancel download</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">다운로드 취소</translation>
     </message>
     <message>
         <location filename="repository/widgets/downloadprogresscell.cpp" line="70"/>
         <source>Open &quot;%1&quot;</source>
         <oldsource>Open &quot;%0&quot;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%0&quot; 열기</translation>
     </message>
     <message>
         <location filename="repository/widgets/downloadprogresscell.cpp" line="89"/>
@@ -1834,12 +1834,12 @@ repository</source>
     <message>
         <location filename="repository/widgets/downloadprogresscell.cpp" line="90"/>
         <source>Couldn&apos;t open file &quot;%1&quot;. If this is an archive, you may have to extract it first.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일을 열 수 없음. 파일이 압축된 상태라면 압축을 해제해야 합니다.</translation>
     </message>
     <message>
         <location filename="repository/widgets/downloadprogresscell.cpp" line="107"/>
         <source>Download canceled</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">취소된 다운로드</translation>
     </message>
 </context>
 <context>
@@ -1887,22 +1887,22 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="590"/>
         <source>No preset available.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리셋이 없습니다.</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="788"/>
         <source>&amp;Replace</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">바꾸기 (&amp;R)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="789"/>
         <source>R&amp;eplace all</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모두 바꾸기 (&amp;E)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="790"/>
         <source>&amp;Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">복제 (D)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="791"/>
@@ -5868,7 +5868,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.cpp" line="41"/>
         <source>Choose a destination folder</source>
-        <translation type="finished">내보내질 경로 선택</translation>
+        <translation type="finished">저장할 경로 선택</translation>
     </message>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.h" line="68"/>
@@ -6265,7 +6265,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="53"/>
         <source>&amp;Replace by...</source>
-        <translation type="finished">덮어쓰기...</translation>
+        <translation type="finished">다음으로 바꾸기... (&amp;R)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="61"/>
