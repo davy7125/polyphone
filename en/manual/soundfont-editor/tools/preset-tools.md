@@ -24,7 +24,7 @@ Same tool than “[Display parameters](manual/soundfont-editor/tools/instrument-
 ### Change attenuations {#doc_attenuation}
 
 
-Same tool than “[Change attenuations](manual/soundfont-editor/tools/instrument-tools.md)#doc_attenuation” for instruments.
+Same tool than “[Change attenuations](manual/soundfont-editor/tools/instrument-tools.md#doc_attenuation)” for instruments.
 
 
 ### Key-based configuration {#doc_global}
