@@ -106,7 +106,7 @@ The tool “[Sample auto-positioning](manual/soundfont-editor/tools/instrument-t
 ### Setting the divisions
 
 
-To enable the loop playing mode in an instrument containing looped samples, select ![loop on](images/loop_on.png "loop on"){.inline} in the :guilabel:`Loop playback` parameter row of either the :guilabel:`Global` or individual notes columns in the parameters table`.
+To enable the loop playing mode in an instrument containing looped samples, select ![loop on](images/loop_on.png "loop on"){.inline} in the :guilabel:`Loop playback` parameter row of either the :guilabel:`Global` or individual notes columns in the parameter table.
 
 * ![loop on](images/loop_on.png "loop on"){.inline} turns it On,
 * ![loop off](images/loop_off.png "loop off"){.inline} or a blank turns it Off.
