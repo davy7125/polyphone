@@ -1,2 +1,3 @@
 documentation_name=Документация
 language_name=По-русски
+download_prompt=PDF версия
