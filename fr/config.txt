@@ -1,2 +1,3 @@
 documentation_name=Documentation
 language_name=Français
+download_prompt=Version PDF
