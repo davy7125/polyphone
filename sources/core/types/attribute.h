@@ -187,7 +187,7 @@ union AttributeValue
     SFSampleLink sfLinkValue;
     SFTransform sfTransValue;
 
-    AttributeValue() { memset(this, 0, sizeof(AttributeValue)); }
+    AttributeValue() { memset((void *)this, 0, sizeof(AttributeValue)); }
 };
 
 class Attribute: QObject

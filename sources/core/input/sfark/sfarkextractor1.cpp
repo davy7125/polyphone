@@ -296,7 +296,7 @@ static void lpcAddAcHist(const float * src, quint32 frameSize, float * dest)
 void SfArkExtractor1::lpcClear()
 {
     _sfArkInfo->v2.LpcCurrHistNum = 0;
-    memset(&_sfArkInfo->v2.Lpc, 0, sizeof(_sfArkInfo->v2.Lpc));
+    memset((void *)&_sfArkInfo->v2.Lpc, 0, sizeof(_sfArkInfo->v2.Lpc));
 }
 
 void SfArkExtractor1::lpcUnpack(quint32 dataSizeInWords, quint32 maskVal)
@@ -2220,7 +2220,7 @@ qint32 SfArkExtractor1::SfarkBeginExtract(const void * sfontName)
             // Init decomp routine vars
             _sfArkInfo->RunningChksum = _sfArkInfo->RunningUncompSize = _sfArkInfo->BitRegister = _sfArkInfo->NumBitsInRegister = _sfArkInfo->Percent = 0;
             _sfArkInfo->InputBufIndex = sizeof(_sfArkInfo->InputBuf)/sizeof(quint16);
-            memset(&_sfArkInfo->v2, 0, sizeof(_sfArkInfo->v2));
+            memset((void *)&_sfArkInfo->v2, 0, sizeof(_sfArkInfo->v2));
             _sfArkInfo->v2.BitFramePackMethod = 8;
             _sfArkInfo->v2.NumShortsInLpcBlock = 4096;
 
