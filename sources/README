@@ -15,7 +15,7 @@ The following libraries are required (the name may vary depending on your system
  - qcustomplot (libqcustomplot-dev)
  - vorbis      (libvorbis-dev)
  - ogg         (libogg-dev)
- - ssl         (libssl-dev)
+ - wolfssl     (libwolfssl-dev)
  - flac        (libflac-dev)
 
 Use your package manager to install them: apt, synaptic, yum,...
