@@ -438,7 +438,7 @@ void AudioDevice::closeConnections()
         {
             jack_client_close(_jack_client);
         }
-        catch (std::exception error)
+        catch (std::exception &error)
         {
             Q_UNUSED(error)
         }
