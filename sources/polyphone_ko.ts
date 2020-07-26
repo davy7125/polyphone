@@ -40,7 +40,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="467"/>
         <source>absolute value</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">절댓값</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="578"/>
@@ -75,17 +75,17 @@
     <message>
         <location filename="core/types/attribute.cpp" line="607"/>
         <source>Mod LFO → pitch (c)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">LFO 모듈레이션 → 피치 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="610"/>
         <source>Vib LFO → pitch (c)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">LFO 바이브레이터 → 피치 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="613"/>
         <source>Mod env → pitch (c)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션 → 피치 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="616"/>
@@ -100,17 +100,17 @@
     <message>
         <location filename="core/types/attribute.cpp" line="620"/>
         <source>Filter, resonance (dB)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">필터, 반향 (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="623"/>
         <source>Mod LFO → filter (c)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">LFO 모듈레이션 → 필터 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="626"/>
         <source>Mod env → filter (c)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션 → 필터 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="592"/>
@@ -125,7 +125,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="629"/>
         <source>Mod LFO → volume (dB)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LFO 모듈레이션 → 볼륨 (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="632"/>
@@ -150,97 +150,97 @@
     <message>
         <location filename="core/types/attribute.cpp" line="642"/>
         <source>Mod LFO delay (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">LFO 모듈레이션 딜레이 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="643"/>
         <source>Mod LFO delay (s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">LFO 모듈레이션 딜레이 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="646"/>
         <source>Mod LFO freq (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">LFO 모듈레이션 주파수 (x)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="647"/>
         <source>Mod LFO freq (Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">LFO 모듈레이션 주파수 (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="650"/>
         <source>Vib LFO delay (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">LFO 바이브레이터 딜레이 (x)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="651"/>
         <source>Vib LFO delay (s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">LFO 바이브레이터 딜레이 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="654"/>
         <source>Vib LFO freq (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">LFO 바이브레이터 주파수 (x)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="655"/>
         <source>Vib LFO freq (Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">LFO 바이브레이터 주파수 (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="658"/>
         <source>Mod env delay (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션 딜레이 (x)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="659"/>
         <source>Mod env delay (s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션 딜레이 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="662"/>
         <source>Mod env attack (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션 어택 (x)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="663"/>
         <source>Mod env attack (s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션 어택 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="666"/>
         <source>Mod env hold (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션 홀드 (x)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="667"/>
         <source>Mod env hold (s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션 홀드 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="670"/>
         <source>Mod env decay (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션 디케이 (x)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="671"/>
         <source>Mod env decay (s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션 디케이 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="674"/>
         <source>Mod env sustain (%)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션 서스테인 (%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="677"/>
         <source>Mod env release (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션 릴리즈 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="678"/>
         <source>Mod env release (s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션 릴리즈 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="681"/>
@@ -1783,7 +1783,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogselection.ui" line="46"/>
         <source>&amp;Duplicate</source>
-        <translation type="finished">덮어쓰기(&amp;D)</translation>
+        <translation type="finished">복제(&amp;D)</translation>
     </message>
 </context>
 <context>
@@ -1892,32 +1892,32 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="788"/>
         <source>&amp;Replace</source>
-        <translation type="finished">바꾸기 (&amp;R)</translation>
+        <translation type="finished">바꾸기(&amp;R)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="789"/>
         <source>R&amp;eplace all</source>
-        <translation type="finished">모두 바꾸기 (&amp;E)</translation>
+        <translation type="finished">모두 바꾸기(&amp;E)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="790"/>
         <source>&amp;Duplicate</source>
-        <translation type="finished">복제 (D)</translation>
+        <translation type="finished">복제(D)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="791"/>
         <source>D&amp;uplicate all</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모두 복제(&amp;U)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="792"/>
         <source>&amp;Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">무시(&amp;I)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="793"/>
         <source>I&amp;gnore all</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모두 무시(&amp;G)</translation>
     </message>
 </context>
 <context>
@@ -1925,22 +1925,22 @@ repository</source>
     <message>
         <location filename="editor/editor.ui" line="154"/>
         <source>Search...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">찾는 중...</translation>
     </message>
     <message>
         <location filename="editor/editor.ui" line="254"/>
         <source>Opening file...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">파일을 여는 중...</translation>
     </message>
     <message>
         <location filename="editor/editor.ui" line="385"/>
         <source>Cannot open the file</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">파일을 열 수 없음</translation>
     </message>
     <message>
         <location filename="editor/editor.cpp" line="208"/>
         <source>Untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제목없음</translation>
     </message>
 </context>
 <context>
@@ -6402,7 +6402,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="125"/>
         <source>Cannot open file &quot;%1&quot;</source>
-        <translation type="finished">&quot;%1&quot; 파일을 열 수 없습니다.</translation>
+        <translation type="finished">&quot;%1&quot; 파일을 열 수 없음</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="183"/>
