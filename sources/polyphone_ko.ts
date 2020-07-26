@@ -1190,7 +1190,7 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="546"/>
         <source>Piano</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">피아노</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="548"/>
@@ -1225,7 +1225,7 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="560"/>
         <source>Brass</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">브라스</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="562"/>
@@ -1245,12 +1245,12 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="568"/>
         <source>Synth pad</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">신스 패드</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="570"/>
         <source>Synth effects</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">신스 효과</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="572"/>
@@ -1260,12 +1260,12 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="574"/>
         <source>Percussive</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">퍼커시브</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="576"/>
         <source>Sound effects</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사운드 효과</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="578"/>
@@ -1338,7 +1338,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="70"/>
         <source>Andrea Celani</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">안드레아 셀라니</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="64"/>
@@ -1350,73 +1350,73 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="65"/>
         <source>Michael Schyllberg</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">마이클 쉴버그</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="66"/>
         <source>Paul Stratman</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">폴 스트랫먼</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="67"/>
         <location filename="dialogs/dialog_about.cpp" line="79"/>
         <source>Steve Clarke</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">스티브 클라크</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="69"/>
         <source>Aleksey Bobylev</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">알렉세이 보빌레프</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="73"/>
         <source>F.J. Martínez Murcia</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">F.J. 마르티네즈 무르시아</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="74"/>
         <source>Georg Gergull</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">게오르그</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="75"/>
         <source>Jay Alexander Fleming</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제이 알렉산더 플레밍</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="76"/>
         <source>Joel Gomes</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">조엘 고메스</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="77"/>
         <source>Magson</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">맥손</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="78"/>
         <source>Pavel Fric</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">파벨 프릭</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>Chris Hansen</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">크리스 한센</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="50"/>
         <source>Davy Triponney</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">데이비 트리포니</translation>
     </message>
 </context>
 <context>
@@ -1867,17 +1867,17 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="332"/>
         <source>The sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 샘플이 이미 존재합니다.&lt;br /&gt;덮어쓸까요?</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="472"/>
         <source>The instrument &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 악기가 이미 존재합니다.&lt;br /&gt;덮어쓸까요?</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="567"/>
         <source>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 프리셋이 이미 존재합니다.&lt;br /&gt;덮어쓸까요?</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="589"/>
@@ -1948,17 +1948,17 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertimage.ui" line="14"/>
         <source>Insert an image</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">그림 삽입</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertimage.ui" line="26"/>
         <source>Invalid URL (example: https://www.website.com/image.png)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">유효하지 않은 URL (예: https://www.website.com/image.png)</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertimage.ui" line="33"/>
         <source>URL of the image to insert...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">삽일할 그림의 URL...</translation>
     </message>
 </context>
 <context>
@@ -1966,17 +1966,17 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="14"/>
         <source>Insert a link</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">링크 삽입</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="20"/>
         <source>Text to display</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">표시할 이름</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="27"/>
         <source>Link</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">링크</translation>
     </message>
 </context>
 <context>
@@ -1984,17 +1984,17 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginserttable.ui" line="14"/>
         <source>Insert a table</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">테이블 삽입</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginserttable.ui" line="43"/>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">열</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginserttable.ui" line="63"/>
         <source>Rows</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">행</translation>
     </message>
 </context>
 <context>
@@ -2002,7 +2002,7 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertvideo.ui" line="14"/>
         <source>Insert a YouTube video</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">유튜브 비디오 삽입</translation>
     </message>
 </context>
 <context>
@@ -2010,62 +2010,62 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="55"/>
         <source>Add a sample</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플 추가</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="59"/>
         <source>Add an instrument</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">악기 추가</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="63"/>
         <source>Add a preset</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리셋 추가</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="67"/>
         <source>Toolbox</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">도구상자</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="74"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">취소</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="78"/>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">재실행</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="83"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">저장</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="93"/>
         <source>Recorder</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">녹음기</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="99"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">가상 건반</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="257"/>
         <source>Import an audio file</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">오디오 파일 가져오기</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="259"/>
         <source>Audio files</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">오디오 파일</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="374"/>
         <source>Cannot create more presets.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리셋을 더 생성할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="374"/>
@@ -2083,75 +2083,75 @@ repository</source>
         <location filename="editor/envelopeditor.ui" line="401"/>
         <source> s</source>
         <comment>unit for second</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished"> s</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="372"/>
         <source> dB</source>
         <comment>unit for decibels</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished"> dB</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="279"/>
         <source>Delay</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">딜레이</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="181"/>
         <source>Key → Decay</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키 → 디케이</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="128"/>
         <source>Decay</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">디케이</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="420"/>
         <source>Sustain</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">서스테인</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="391"/>
         <source>Key → Hold</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키 → 홀드</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="263"/>
         <source>Hold</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">홀드</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="138"/>
         <source>Release</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">릴리즈</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="329"/>
         <source>Attack</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">어택</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="458"/>
         <source>Volume envelope</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 볼륨</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="477"/>
         <source>Modulation envelope</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 모듈레이션</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.cpp" line="98"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">dB</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.cpp" line="111"/>
         <source>%</source>
         <comment>percentage</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">%</translation>
     </message>
 </context>
 <context>
@@ -2159,32 +2159,32 @@ repository</source>
     <message>
         <location filename="editor/widgets/equalizer.ui" line="586"/>
         <source>preview</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">미리보기</translation>
     </message>
     <message>
         <location filename="editor/widgets/equalizer.ui" line="618"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">초기화</translation>
     </message>
     <message>
         <location filename="editor/widgets/equalizer.ui" line="644"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">적용</translation>
     </message>
     <message>
         <location filename="editor/widgets/equalizer.cpp" line="144"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">정보</translation>
     </message>
     <message>
         <location filename="editor/widgets/equalizer.cpp" line="145"/>
         <source>Equalization successfully applied on 1 sample.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">1 샘플에 이퀄라이제이션이 적용됐습니다.</translation>
     </message>
     <message>
         <location filename="editor/widgets/equalizer.cpp" line="146"/>
         <source>Equalization successfully applied on %1 samples.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 샘플들에 이퀄라이제이션이 적용됐습니다.</translation>
     </message>
 </context>
 <context>
@@ -2200,7 +2200,7 @@ repository</source>
     <message>
         <location filename="repository/browser/filtertag.ui" line="32"/>
         <source>Tag name...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">꼬리표 이름...</translation>
     </message>
 </context>
 <context>
@@ -2209,13 +2209,13 @@ repository</source>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="76"/>
         <source>L</source>
         <comment>first letter of Left in your language</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">L</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="85"/>
         <source>R</source>
         <comment>first letter of Right in your language</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">R</translation>
     </message>
 </context>
 <context>
@@ -2239,7 +2239,7 @@ repository</source>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="57"/>
         <source>Frequency (Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">주파수 (Hz)</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="71"/>
@@ -2249,23 +2249,23 @@ repository</source>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="88"/>
         <source>Export graph</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">그래프 내보내기</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="466"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Hz</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="486"/>
         <source>Export a graph</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">그래프 내보내기</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="487"/>
         <source>Png file</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">PNG 파일</translation>
     </message>
 </context>
 <context>
@@ -2273,7 +2273,7 @@ repository</source>
     <message>
         <location filename="core/input/grandorgue/inputparsergrandorgue.cpp" line="77"/>
         <source>Cannot open file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일을 열 수 없음</translation>
     </message>
 </context>
 <context>
@@ -2281,7 +2281,7 @@ repository</source>
     <message>
         <location filename="core/input/not_supported/inputparsernotsupported.cpp" line="38"/>
         <source>This file format is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">지원되지 않는 파일 형식입니다.</translation>
     </message>
 </context>
 <context>
@@ -2289,7 +2289,7 @@ repository</source>
     <message>
         <location filename="core/input/sf2/inputparsersf2.cpp" line="48"/>
         <source>Cannot find file &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished"> &quot;%1&quot; 파일을 열 수 없습니다.</translation>
     </message>
     <message>
         <location filename="core/input/sf2/inputparsersf2.cpp" line="55"/>
@@ -2307,12 +2307,12 @@ repository</source>
     <message>
         <location filename="core/input/sf3/inputparsersf3.cpp" line="78"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일을 생성할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="core/input/sf3/inputparsersf3.cpp" line="81"/>
         <source>Cannot read file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일을 읽을 수 없음</translation>
     </message>
 </context>
 <context>
@@ -2325,17 +2325,17 @@ repository</source>
     <message>
         <location filename="core/input/sfz/inputparsersfz.cpp" line="111"/>
         <source>Cannot open file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일을 열 수 없음</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputparsersfz.cpp" line="288"/>
         <source>Sfz import</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Sfz 가져오기</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputparsersfz.cpp" line="459"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제목없음</translation>
     </message>
 </context>
 <context>
@@ -2343,57 +2343,57 @@ repository</source>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="39"/>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">새 작업(&amp;N)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="44"/>
         <source>&amp;Open...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">열기(&amp;O)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="51"/>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">저장(&amp;S)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="56"/>
         <source>Save &amp;as...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">다른 이름으로 저장(&amp;A)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="61"/>
         <source>&amp;Export soundfonts...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사운드폰트 내보내기(&amp;E)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="68"/>
         <source>&amp;Full screen</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">전차화면(&amp;F)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="76"/>
         <source>Se&amp;ttings</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">환경설정(&amp;T)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="80"/>
         <source>Online &amp;manual</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">온라인 설명서(&amp;M)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="86"/>
         <source>About &amp;Polyphone...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">폴리폰 정보(&amp;P)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="92"/>
         <source>&amp;Close file</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">파일 닫기(&amp;C)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="97"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">종료(&amp;Q)</translation>
     </message>
 </context>
 <context>
@@ -2401,7 +2401,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="200"/>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">저장(&amp;S)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="201"/>
@@ -2411,7 +2411,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="202"/>
         <source>Do&amp;n&apos;t save</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">저장하지 않음(&amp;N)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="186"/>
@@ -2421,44 +2421,44 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="176"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제목없음</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="187"/>
         <source>Save before exiting?</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">종료하기 전에 저장할까요?</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="190"/>
         <source>The following files have been modified:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">다음의 파일이 변경됐습니다:</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="197"/>
         <source>File &quot;%1&quot; has been modified.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일이 변경됐습니다.</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="274"/>
         <source>Opening files</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">파일 여는 중</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="20"/>
         <source>Polyphone Soundfont Editor</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">폴리폰 사운드폰트 편집기</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="104"/>
         <source>  Settings</source>
         <extracomment>prefixed with 2 spaces</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">  환경설정</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="120"/>
         <source>  Documentation</source>
         <extracomment>prefixed with 2 spaces</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">  문서</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="106"/>
@@ -2473,37 +2473,37 @@ repository</source>
         <source>  New
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">  새 사운드폰트</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="172"/>
         <source>  Forum</source>
         <extracomment>prefixed with 2 spaces</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">  포럼</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="191"/>
         <source>Daily soundfonts</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">오늘의 사운드폰트</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="201"/>
         <source>  Online
   repository</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">  온라인 레퍼지토리</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="218"/>
         <source>Search a soundfont...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사운드폰트 찾기...</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="228"/>
         <source>  Open
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">  사운드폰트 열기</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="248"/>
@@ -2526,12 +2526,12 @@ repository</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="57"/>
         <source>Modulator</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모듈레이터</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="98"/>
         <source>Default mod.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">기본 모듈레이터</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="148"/>
@@ -2543,7 +2543,7 @@ repository</source>
         <location filename="editor/modulator/modulatorcell.cpp" line="155"/>
         <source>disabling
 default mod.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">기본 모듈레이터 비활성화</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="157"/>
@@ -2554,7 +2554,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="350"/>
         <source>dB</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">dB</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="358"/>
@@ -2589,7 +2589,7 @@ default mod.</source>
         <location filename="editor/modulator/modulatorcombodest.cpp" line="134"/>
         <location filename="editor/modulator/modulatorcombodest.cpp" line="163"/>
         <source>Modulator</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모듈레이터</translation>
     </message>
 </context>
 <context>
@@ -2597,17 +2597,17 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatorcombosrc.cpp" line="64"/>
         <source>Link</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">링크</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcombosrc.cpp" line="93"/>
         <source>Link (invalid)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">링크 (유효하지 않음)</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcombosrc.cpp" line="96"/>
         <source>Modulator</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모듈레이터</translation>
     </message>
 </context>
 <context>
@@ -2615,7 +2615,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="74"/>
         <source>Add a modulator</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모듈레이터 추가</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="103"/>
@@ -2625,7 +2625,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="132"/>
         <source>Delete a modulator</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모듈레이터 삭제</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="161"/>
