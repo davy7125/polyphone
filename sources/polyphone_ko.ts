@@ -245,77 +245,77 @@
     <message>
         <location filename="core/types/attribute.cpp" line="681"/>
         <source>Key → Mod env hold (c)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키 → 엔벨로프 모듈레이션 홀드 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="684"/>
         <source>Key → Mod env decay (c)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키 → 엔벨로프 모듈레이션 디케이 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="687"/>
         <source>Vol env delay (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 볼륨 딜레이 (x)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="688"/>
         <source>Vol env delay (s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 볼륨 딜레이 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="691"/>
         <source>Vol env attack (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 볼륨 어택 (x)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="692"/>
         <source>Vol env attack (s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 볼륨 어택 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="695"/>
         <source>Vol env hold (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 볼륨 홀드 (x)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="696"/>
         <source>Vol env hold (s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 볼륨 홀드 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="699"/>
         <source>Vol env decay (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 볼륨 디케이 (x)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="700"/>
         <source>Vol env decay (s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 볼륨 디케이 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="703"/>
         <source>Vol env sustain (dB)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 볼륨 서스테인 (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="706"/>
         <source>Vol env release (×)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 볼륨 릴리즈 (x)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="707"/>
         <source>Vol env release (s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프 볼륨 릴리즈 (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="710"/>
         <source>Key → Vol env hold (c)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키 → 엔벨로프 볼륨 홀드 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="713"/>
         <source>Key → Vol env decay (c)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키 → 엔벨로프 볼륨 디케이 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="716"/>
@@ -325,27 +325,27 @@
     <message>
         <location filename="core/types/attribute.cpp" line="719"/>
         <source>Velocity range</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">벨로시티 범위</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="722"/>
         <source>Fixed key</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">결정된 키</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="725"/>
         <source>Fixed velocity</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">결정된 벨로시티</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="728"/>
         <source>Attenuation (dB)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">감쇠 (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="749"/>
         <source>Sample root key</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플 루트 키</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="752"/>
@@ -365,42 +365,42 @@
     <message>
         <location filename="core/types/attribute.cpp" line="761"/>
         <source>Pitch correction (cents)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">피치 보정 (센트)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="604"/>
         <source>Loop end offset (× 32768)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">루프 엔드 오프셋 (× 32768)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="731"/>
         <source>Tuning (semi-tones)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">튜닝 (세미톤)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="734"/>
         <source>Tuning (cents)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">튜닝 (센트)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="737"/>
         <source>Loop playback</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">루프 플레이백</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="740"/>
         <source>Scale tuning</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">스케일 튜닝</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="743"/>
         <source>Exclusive class</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">단독 클래스</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="746"/>
         <source>Root key</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">루트 키</translation>
     </message>
 </context>
 <context>
@@ -788,7 +788,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="204"/>
         <source>trim to loop</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">루프 다듬기</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="217"/>
@@ -798,7 +798,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="230"/>
         <source>remove blank at start</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">시작할 때 공백 제거</translation>
     </message>
 </context>
 <context>
@@ -821,57 +821,57 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="113"/>
         <source>Middle C → 60, then 61</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">중간 C → 61 그다음 60</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="118"/>
         <source>Middle C → C3, then C♯3</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">중간 C → C3, 그다음 C#3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="123"/>
         <source>Middle C → C3, then D♭3</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">중간 C → C3, 그다음 D♭3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="128"/>
         <source>Middle C → C4, then C♯4</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">중간 C → C4, 그다음 C#4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="133"/>
         <source>Middle C → C4, then D♭4</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">중간 C → C4, 그다음 D♭4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="138"/>
         <source>Middle C → C5, then C♯5</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">중간 C → C5, 그다음 C♯5</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="143"/>
         <source>Middle C → C5, then D♭5</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">중간 C → C5, 그다음 D♭5</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="157"/>
         <source>Sort divisions</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">정렬 방법</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="77"/>
         <source>by key range</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키 범위대로</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="82"/>
         <source>by velocity range</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">벨로시티 범위대로</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="87"/>
         <source>in alphabetical order</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">철자 순서대로</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="92"/>
@@ -882,7 +882,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="183"/>
         <source>Decorations</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">장식</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="212"/>
@@ -892,7 +892,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="483"/>
         <source>Selection</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">선택범위</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="245"/>
@@ -1034,7 +1034,7 @@ Premium!</source>
         <location filename="context/interface/configsectionrepository.cpp" line="204"/>
         <location filename="context/interface/configsectionrepository.cpp" line="211"/>
         <source>Click on %1 to save parameters.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">%1 클릭으로 파라미터 값을 저장합니다.</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="217"/>
@@ -1069,7 +1069,7 @@ Premium!</source>
         <location filename="context/interface/configsectionsound.ui" line="157"/>
         <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
         <oldsource>Modulator &quot;velocity → filter cutoff&quot;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">기본 모듈레이터 &quot;벨로시티 → 필터 컷오프&quot;</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="165"/>
@@ -1089,12 +1089,12 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="388"/>
         <source>Damp</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">댐프</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="404"/>
         <source>Room</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">룸</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="32"/>
@@ -1185,7 +1185,7 @@ repository</source>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="543"/>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="585"/>
         <source>other</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">그 외</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="546"/>
@@ -2002,7 +2002,7 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertvideo.ui" line="14"/>
         <source>Insert a YouTube video</source>
-        <translation type="finished">유튜브 비디오 삽입</translation>
+        <translation type="finished">유튜브 동영상 삽입</translation>
     </message>
 </context>
 <context>
