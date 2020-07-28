@@ -1034,7 +1034,7 @@ Premium!</source>
         <location filename="context/interface/configsectionrepository.cpp" line="204"/>
         <location filename="context/interface/configsectionrepository.cpp" line="211"/>
         <source>Click on %1 to save parameters.</source>
-        <translation type="finished">%1 클릭으로 파라미터 값을 저장합니다.</translation>
+        <translation type="finished">%1 클릭으로 매개변수 값을 저장합니다.</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="217"/>
@@ -1338,13 +1338,13 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="70"/>
         <source>Andrea Celani</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="finished">안드레아 셀라니</translation>
+        <translation type="finished">안드레아 칠라니</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="64"/>
         <source>Kinwie</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">킨위</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="65"/>
@@ -1381,7 +1381,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="74"/>
         <source>Georg Gergull</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">게오르그</translation>
+        <translation type="finished">게오르그 게어굴</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="75"/>
@@ -1399,7 +1399,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="77"/>
         <source>Magson</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">맥손</translation>
+        <translation type="unfinished">막센</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="78"/>
@@ -1847,12 +1847,12 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="296"/>
         <source>Global parameters are already filled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">전역 매개변수가 이미 채워졌습니다.</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="297"/>
         <source>The global division will not be copied.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished"></translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="299"/>
@@ -1862,7 +1862,7 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="300"/>
         <source>Ok, &amp;disable this message</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">확인, 이 메시지를 표시하지 않음(&amp;D)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="332"/>
@@ -1902,7 +1902,7 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="790"/>
         <source>&amp;Duplicate</source>
-        <translation type="finished">복제(D)</translation>
+        <translation type="finished">복제(&amp;D)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="791"/>
@@ -2368,7 +2368,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="68"/>
         <source>&amp;Full screen</source>
-        <translation type="finished">전차화면(&amp;F)</translation>
+        <translation type="finished">전체화면(&amp;F)</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="76"/>
@@ -5153,12 +5153,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="118"/>
         <source>Couldn&apos;t start the command.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">명령을 실행할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="121"/>
         <source>The execution of the command ended with an error.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">명령 실행이 오류로 종료됐습니다.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="48"/>
@@ -5168,7 +5168,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="66"/>
         <source>External command</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">확장 명령</translation>
     </message>
 </context>
 <context>
@@ -5176,22 +5176,22 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="80"/>
         <source>Command</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">명령</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="87"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">기록</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="94"/>
         <source>Authorize stereo editing</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">스테레오 편집 권한 부여</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="118"/>
         <source>Replace sample information if possible</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">가능한 경우 샘플 정보를 대체</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="150"/>
@@ -5206,12 +5206,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="50"/>
         <source>Command examples:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">명령 예:</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="99"/>
         <source>Executable file</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">실행 파일</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="116"/>
@@ -5258,17 +5258,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="67"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">더하기</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="74"/>
         <source>Multiply</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">곱하기</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="84"/>
         <source>Parameter</source>
-        <translation type="finished">파라미터</translation>
+        <translation type="finished">매개변수</translation>
     </message>
 </context>
 <context>
@@ -5281,7 +5281,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
         <source>Filter frequencies</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">주파수 필터</translation>
     </message>
 </context>
 <context>
@@ -5318,7 +5318,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="55"/>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">강도</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="55"/>
@@ -5333,7 +5333,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="56"/>
         <source>Correction</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">보정</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="81"/>
@@ -5349,7 +5349,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="45"/>
         <source>Analyze</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">분석</translation>
     </message>
 </context>
 <context>
@@ -5379,7 +5379,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="86"/>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">강도</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="87"/>
@@ -5394,7 +5394,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="89"/>
         <source>Correction</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">보정</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="151"/>
@@ -5404,7 +5404,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="175"/>
         <source>Export peak frequency</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">피크 주파수 내보내기</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="176"/>
@@ -5450,7 +5450,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="76"/>
         <source>Parameter</source>
-        <translation type="finished">파라미터</translation>
+        <translation type="finished">매개변수</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="96"/>
@@ -5741,18 +5741,18 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="221"/>
         <source>Default parameters</source>
-        <translation type="finished">기본 파라미터</translation>
+        <translation type="finished">기본 매개변수</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="250"/>
-        <source>Average value per key</source>
+        <source>Average value per key</sourc9e>
         <oldsource>Mean value per key</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
         <source>Defined parameters</source>
-        <translation type="finished">파라미터 정의</translation>
+        <translation type="finished">매개변수 정의</translation>
     </message>
 </context>
 <context>
@@ -6280,12 +6280,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="73"/>
         <source>D&amp;uplicate</source>
-        <translation type="finished">복제(U)</translation>
+        <translation type="finished">복제(&amp;U)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="79"/>
         <source>&amp;Delete</source>
-        <translation type="finished">제거(D)</translation>
+        <translation type="finished">제거(&amp;D)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="86"/>
