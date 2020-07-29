@@ -125,7 +125,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="629"/>
         <source>Mod LFO → volume (dB)</source>
-        <translation type="unfinished">LFO 모듈레이션 → 볼륨 (dB)</translation>
+        <translation type="finished">LFO 모듈레이션 → 볼륨 (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="632"/>
@@ -340,7 +340,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="728"/>
         <source>Attenuation (dB)</source>
-        <translation type="unfinished">감쇠 (dB)</translation>
+        <translation type="finished">감쇠 (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="749"/>
@@ -375,7 +375,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="731"/>
         <source>Tuning (semi-tones)</source>
-        <translation type="finished">튜닝 (세미톤)</translation>
+        <translation type="finished">튜닝 (반음)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="734"/>
@@ -439,7 +439,7 @@
         <location filename="context/confmanager.cpp" line="199"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">V</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="200"/>
@@ -565,157 +565,157 @@
         <location filename="context/confmanager.cpp" line="230"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
-        <translation type="finished">Shift+Z</translation>
+        <translation type="finished">쉬프트+Z</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="231"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
-        <translation type="finished">Shift+S</translation>
+        <translation type="finished">쉬프트+S</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="232"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
-        <translation type="finished">Shift+X</translation>
+        <translation type="finished">쉬프트+X</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="233"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
-        <translation type="finished">Shift+D</translation>
+        <translation type="finished">쉬프트+D</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="234"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
-        <translation type="finished">Shift+C</translation>
+        <translation type="finished">쉬프트+C</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="235"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
-        <translation type="finished">Shift+V</translation>
+        <translation type="finished">쉬프트+V</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="236"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
-        <translation type="finished">Shift+G</translation>
+        <translation type="finished">쉬프트+G</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="237"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
-        <translation type="finished">Shift+B</translation>
+        <translation type="finished">쉬프트+B</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="238"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
-        <translation type="finished">Shift+H</translation>
+        <translation type="finished">쉬프트+H</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="239"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
-        <translation type="finished">Shift+N</translation>
+        <translation type="finished">쉬프트+N</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="240"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
-        <translation type="finished">Shift+J</translation>
+        <translation type="finished">쉬프트+J</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="241"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
-        <translation type="finished">Shift+M</translation>
+        <translation type="finished">쉬프트+M</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="242"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
-        <translation type="finished">Shift+&lt;</translation>
+        <translation type="finished">쉬프트+&lt;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="248"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
-        <translation type="finished">Shift+Q</translation>
+        <translation type="finished">쉬프트+Q</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="249"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
-        <translation type="finished">Shift+@</translation>
+        <translation type="finished">쉬프트+@</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="250"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
-        <translation type="finished">Shift+W</translation>
+        <translation type="finished">쉬프트+W</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="251"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
-        <translation type="finished">Shift+#</translation>
+        <translation type="finished">쉬프트+#</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="252"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
-        <translation type="finished">Shift+E</translation>
+        <translation type="finished">쉬프트+E</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="253"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
-        <translation type="finished">Shift+R</translation>
+        <translation type="finished">쉬프트+R</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="254"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
-        <translation type="finished">Shift+%</translation>
+        <translation type="finished">쉬프트+%</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="255"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
-        <translation type="finished">Shift+T</translation>
+        <translation type="finished">쉬프트+T</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="256"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
-        <translation type="finished">Shift+^</translation>
+        <translation type="finished">쉬프트+^</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="257"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
-        <translation type="finished">Shift+Y</translation>
+        <translation type="finished">쉬프트+Y</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="258"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
-        <translation type="finished">Shift+&amp;</translation>
+        <translation type="finished">쉬프트+&amp;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="259"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
-        <translation type="finished">Shift+U</translation>
+        <translation type="finished">쉬프트+U</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="260"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
-        <translation type="finished">Shift+I</translation>
+        <translation type="finished">쉬프트+I</translation>
     </message>
 </context>
 <context>
@@ -1215,12 +1215,12 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="556"/>
         <source>Strings</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">스트링</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="558"/>
         <source>Ensemble</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">앙상블</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="560"/>
@@ -1230,17 +1230,17 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="562"/>
         <source>Reed</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">리드</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="564"/>
         <source>Pipe</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">파이프</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="566"/>
         <source>Synth lead</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">신스 리드</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="568"/>
@@ -1255,7 +1255,7 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="572"/>
         <source>Ethnic</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">소수 민족 전통악기</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="574"/>
@@ -1331,7 +1331,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>Davy Triponney</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">데이비 트리포니</translation>
+        <translation type="finished">데이비 트리포니</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="63"/>
@@ -1399,7 +1399,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="77"/>
         <source>Magson</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">막센</translation>
+        <translation type="finished">막센</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="78"/>
@@ -1482,42 +1482,42 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="72"/>
         <source>Create an instrument comprising the sample %1?</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">%1 샘플로 구성된 악기를 만드시겠습니까?</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="78"/>
         <source>Create an instrument</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">악기 생성</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="79"/>
         <source>for each sample</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">개별 샘플마다</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="80"/>
         <source>comprising the %1 samples</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">%1 샘플로 구성</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="88"/>
         <source>Create a preset comprising the instrument %1?</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">%1 악기로 구성된 프리셋을 만드시겠습니까?</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="94"/>
         <source>Create a preset</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리셋 생성</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="95"/>
         <source>for each instrument</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">개별 악기마다</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="96"/>
         <source>comprising the %1 instruments</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">%1 악기로 구성</translation>
     </message>
 </context>
 <context>
@@ -1555,12 +1555,12 @@ repository</source>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="176"/>
         <source>Velocity</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">벨로시티</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="202"/>
         <source>Aftertouch</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">애프터 터치</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.cpp" line="228"/>
@@ -1723,12 +1723,12 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="56"/>
         <source>Overwrite existing name with key name as suffix</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키 이름으로 기존 이름을 덮어쓰기</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="61"/>
         <source>Overwrite existing name with numerical ascending suffix</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">숫자 오름차순으로 기존 이름을 덮어쓰기</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.cpp" line="69"/>
@@ -1749,7 +1749,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.cpp" line="104"/>
         <source>Text to insert:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">삽입할 글자:</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.cpp" line="115"/>
@@ -1852,7 +1852,7 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="297"/>
         <source>The global division will not be copied.</source>
-        <translation type="finished"></translation>
+        <translation type="finished">전역 구분은 복사될 수 없습니다.</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="299"/>
@@ -2184,7 +2184,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/equalizer.cpp" line="146"/>
         <source>Equalization successfully applied on %1 samples.</source>
-        <translation type="unfinished">%1 샘플들에 이퀄라이제이션이 적용됐습니다.</translation>
+        <translation type="finished">%1 샘플들에 이퀄라이제이션이 적용됐습니다.</translation>
     </message>
 </context>
 <context>
@@ -2192,7 +2192,7 @@ repository</source>
     <message>
         <location filename="repository/browser/filterflow.cpp" line="63"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모두</translation>
     </message>
 </context>
 <context>
@@ -2223,7 +2223,7 @@ repository</source>
     <message>
         <location filename="editor/tools/monitor/graphvisualizer.cpp" line="236"/>
         <source>Cannot display all the values.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모든 값을 표시할 수 없습니다.</translation>
     </message>
 </context>
 <context>
@@ -2231,7 +2231,7 @@ repository</source>
     <message>
         <location filename="editor/graphics/graphicswave.cpp" line="181"/>
         <source>Multiple selection</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">다중 선택</translation>
     </message>
 </context>
 <context>
@@ -2244,7 +2244,7 @@ repository</source>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="71"/>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">강도</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="88"/>
@@ -2294,7 +2294,7 @@ repository</source>
     <message>
         <location filename="core/input/sf2/inputparsersf2.cpp" line="55"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일을 읽을 권한이 없습니다.</translation>
     </message>
 </context>
 <context>
@@ -2302,7 +2302,7 @@ repository</source>
     <message>
         <location filename="core/input/sf3/inputparsersf3.cpp" line="73"/>
         <source>Error during the sf3 =&gt; sf2 conversion</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">SF3 =&gt; SF2 변환에 오류가 발생했습니다.</translation>
     </message>
     <message>
         <location filename="core/input/sf3/inputparsersf3.cpp" line="78"/>
@@ -2320,7 +2320,7 @@ repository</source>
     <message>
         <location filename="core/input/sfz/inputparsersfz.cpp" line="103"/>
         <source>File recursion</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">파일 재귀</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputparsersfz.cpp" line="111"/>
@@ -2330,7 +2330,7 @@ repository</source>
     <message>
         <location filename="core/input/sfz/inputparsersfz.cpp" line="288"/>
         <source>Sfz import</source>
-        <translation type="finished">Sfz 가져오기</translation>
+        <translation type="finished">SFZ 가져오기</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputparsersfz.cpp" line="459"/>
@@ -2508,7 +2508,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="248"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">역사</translation>
     </message>
 </context>
 <context>
@@ -2516,12 +2516,12 @@ repository</source>
     <message>
         <location filename="editor/modulator/modulatorcell.ui" line="139"/>
         <source>no operation</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">작동하지 않음</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.ui" line="144"/>
         <source>absolute value</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">절댓값</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="57"/>
@@ -2537,7 +2537,7 @@ repository</source>
         <location filename="editor/modulator/modulatorcell.cpp" line="148"/>
         <source>overwritten by %1</source>
         <oldsource>overriden by %1</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">%1 덮어쓰기</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="155"/>
@@ -2549,7 +2549,7 @@ default mod.</source>
         <location filename="editor/modulator/modulatorcell.cpp" line="157"/>
         <source>overriding
 default mod.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">기본 모듈레이터를 덮어씁니다.</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="350"/>
@@ -2559,28 +2559,28 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="358"/>
         <source>semi-tones</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">반음</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="361"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">반음의 100 분의 1</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="370"/>
         <source>Add from:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">다음으로부터 더하기:</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="371"/>
         <source>Multiply from:</source>
-        <translation type="unfinished"></translation>
+        <translation type=nfinished">다음으로부터 곱하기:</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="373"/>
         <source>To:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">다음으로:</translation>
     </message>
 </context>
 <context>
@@ -2620,7 +2620,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="103"/>
         <source>Paste the copied modulators</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">복사된 모듈레이터 붙여넣기</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="132"/>
@@ -2630,25 +2630,25 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="161"/>
         <source>Collapse the modulator section</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">변조기 영역 축소</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="202"/>
         <location filename="editor/modulator/modulatoreditor.cpp" line="151"/>
         <location filename="editor/modulator/modulatoreditor.cpp" line="249"/>
         <source>No modulators</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모듈레이터 없음</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="234"/>
         <location filename="editor/modulator/modulatoreditor.cpp" line="158"/>
         <source>Select a single division to display the modulator list</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">단일 구분을 선택해 모듈레이터 목록 표시</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="317"/>
         <source>Expand the modulator section</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모듈레이터 영역 확장</translation>
     </message>
     <message numerus="yes">
         <location filename="editor/modulator/modulatoreditor.cpp" line="254"/>
@@ -2661,27 +2661,27 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="339"/>
         <source>Duplicate the selection toward...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">선택영역으로 복제...</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="340"/>
         <source>Copy the selected modulators</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">선택된 모듈레이터 복사</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="345"/>
         <source>Duplicate modulators toward...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모듈레이터로 복제...</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="346"/>
         <source>Copy all modulators</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모든 모듈레이터 복사</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="623"/>
         <source>Forbidden action:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">금지된 행동:</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="633"/>
@@ -2692,12 +2692,12 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="634"/>
         <source>offsets cannot be modulated in a preset.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리셋의 오프셋은 변조될 수 없습니다.</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="643"/>
         <source>%1 cannot be modulated in a preset.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리셋 %1은(는) 변조될 수 없습니다.</translation>
     </message>
 </context>
 <context>
@@ -2705,7 +2705,7 @@ default mod.</source>
     <message>
         <location filename="core/output/not_supported/outputnotsupported.cpp" line="39"/>
         <source>This file format is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">이 파일 형식은 지원되지 않습니다.</translation>
     </message>
 </context>
 <context>
@@ -5745,7 +5745,7 @@ Other soundfont editors might display other units.</source>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="250"/>
-        <source>Average value per key</sourc9e>
+        <source>Average value per key</source>
         <oldsource>Mean value per key</oldsource>
         <translation type="unfinished"></translation>
     </message>
@@ -5850,17 +5850,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="124"/>
         <source>The selection contains no modulators.</source>
-        <translation type="finished">선택한 부분에는 포함된 변조기가 없습니다.</translation>
+        <translation type="finished">선택 영역에는 포함된 모듈레이터가 없습니다.</translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.h" line="45"/>
         <source>Modulators</source>
-        <translation type="finished">변조기</translation>
+        <translation type="finished">모듈레이터</translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.h" line="82"/>
         <source>Remove modulators</source>
-        <translation type="finished">변조기 제거</translation>
+        <translation type="finished">모듈레이터 제거</translation>
     </message>
 </context>
 <context>
