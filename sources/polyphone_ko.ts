@@ -385,7 +385,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="737"/>
         <source>Loop playback</source>
-        <translation type="finished">루프 플레이백</translation>
+        <translation type="finished">루프 재생</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="740"/>
@@ -1966,7 +1966,7 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="14"/>
         <source>Insert a link</source>
-        <translation type="finished">링크 삽입</translation>
+        <translation type="finished">연결 삽입</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="20"/>
@@ -1976,7 +1976,7 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="27"/>
         <source>Link</source>
-        <translation type="finished">링크</translation>
+        <translation type="finished">연결</translation>
     </message>
 </context>
 <context>
@@ -2302,7 +2302,7 @@ repository</source>
     <message>
         <location filename="core/input/sf3/inputparsersf3.cpp" line="73"/>
         <source>Error during the sf3 =&gt; sf2 conversion</source>
-        <translation type="unfinished">SF3 =&gt; SF2 변환에 오류가 발생했습니다.</translation>
+        <translation type="finished">SF3 =&gt; SF2 변환에 오류가 발생했습니다.</translation>
     </message>
     <message>
         <location filename="core/input/sf3/inputparsersf3.cpp" line="78"/>
@@ -2597,12 +2597,12 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatorcombosrc.cpp" line="64"/>
         <source>Link</source>
-        <translation type="finished">링크</translation>
+        <translation type="finished">연결</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcombosrc.cpp" line="93"/>
         <source>Link (invalid)</source>
-        <translation type="finished">링크 (유효하지 않음)</translation>
+        <translation type="finished">연결 (유효하지 않음)</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcombosrc.cpp" line="96"/>
@@ -2630,7 +2630,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="161"/>
         <source>Collapse the modulator section</source>
-        <translation type="finished">변조기 영역 축소</translation>
+        <translation type="finished">모듈레이터 영역 축소</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="202"/>
@@ -2713,24 +2713,24 @@ default mod.</source>
     <message>
         <location filename="core/output/sf2/outputsf2.cpp" line="45"/>
         <source>Please close file before overriding it.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">덮어쓰기 전에 파일을 닫아주세요.</translation>
     </message>
     <message>
         <location filename="core/output/sf2/outputsf2.cpp" line="73"/>
         <source>Couldn&apos;t delete file &quot;%1&quot;.</source>
         <oldsource>Couldn&apos;t delete file &quot;%1&quot;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일을 삭제할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="core/output/sf2/outputsf2.cpp" line="83"/>
         <source>Couldn&apos;t rename file &quot;%1&quot;.</source>
         <oldsource>Couldn&apos;t rename file &quot;%1&quot;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일 이름을 변경할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="core/output/sf2/outputsf2.cpp" line="313"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일을 생성할 수 없음</translation>
     </message>
 </context>
 <context>
@@ -2738,17 +2738,17 @@ default mod.</source>
     <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="79"/>
         <source>Error during the sf3 conversion</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">SF3 변환 중 오류발생</translation>
     </message>
     <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="86"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일을 생성할 수 없음</translation>
     </message>
     <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="92"/>
         <source>Cannot read file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일을 읽을 수 없음</translation>
     </message>
 </context>
 <context>
@@ -2756,32 +2756,32 @@ default mod.</source>
     <message>
         <location filename="editor/pageinst.cpp" line="102"/>
         <source>Table</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">테이블</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="103"/>
         <source>Ranges</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">범위</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="104"/>
         <source>Envelopes</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">엔벨로프</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="141"/>
         <source>Instrument not linked to a preset yet.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">악기가 아직 프리셋에 연결되지 않았습ㄴ디ㅏ.</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="143"/>
         <source>Instrument linked to preset:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리셋에 연결된 악기:</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="145"/>
         <source>Instrument linked to presets:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리셋들에 연결된 악기:</translation>
     </message>
 </context>
 <context>
@@ -2800,81 +2800,81 @@ default mod.</source>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="32"/>
         <source>Instruments</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">악기들</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="38"/>
         <source>Used</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사용됨</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="39"/>
         <source>Sample number</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플 번호</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="40"/>
         <source>Parameter number</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">매개변수 번호</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="41"/>
         <source>Modulator number</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모듈레이터 번호</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="42"/>
         <source>Max key range</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">최대 키 범위</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="43"/>
         <source>Max velocity range</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">최대 벨로시티 범위</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="44"/>
         <source>Attenuation</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">감쇠</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="45"/>
         <source>Loop playback</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">루프 재생</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="46"/>
         <source>Chorus</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">코러스</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="47"/>
         <source>Reverb</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">리버브</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="100"/>
         <location filename="editor/overview/pageoverviewinst.cpp" line="286"/>
         <source>yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">네</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="100"/>
         <location filename="editor/overview/pageoverviewinst.cpp" line="284"/>
         <source>no</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">아니오</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="288"/>
         <source>yes, to the end</source>
         <translatorcomment>speaking about a loop mode</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">네, 끝까지</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="294"/>
         <source>several modes</source>
         <comment>speaking about loop modes</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">여러 모드</translation>
     </message>
 </context>
 <context>
@@ -2882,52 +2882,52 @@ default mod.</source>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="32"/>
         <source>Presets</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리셋들</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="38"/>
         <source>Bank - Preset</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">뱅크 - 프리셋</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="39"/>
         <source>Instrument number</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">악기 번호</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="40"/>
         <source>Parameter number</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">매개변수 번호</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="41"/>
         <source>Modulator number</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모듈레이터 번호</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="42"/>
         <source>Max key range</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">최대 키 범위</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="43"/>
         <source>Max velocity range</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">최대 벨로시티 범위</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="44"/>
         <source>Attenuation</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">감쇠</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="45"/>
         <source>Chorus</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">코러스</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="46"/>
         <source>Reverb</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">리버브</translation>
     </message>
 </context>
 <context>
@@ -2935,29 +2935,29 @@ default mod.</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="38"/>
         <source>Used</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사용됨</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="39"/>
         <source>Total
 duration</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">전체 지속시간</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="42"/>
         <source>Correction</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished"></translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="40"/>
         <source>Loop
 duration</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">루프 지속시간</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="32"/>
         <source>Samples</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플들</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="41"/>
@@ -3095,7 +3095,7 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="248"/>
         <source>Copyright</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">저작권</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="262"/>
@@ -3105,92 +3105,92 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="327"/>
         <source>Soundfont version</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사운드폰트 버전</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="363"/>
         <source>ROM name and version</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">롬(ROM) 이름과 버전</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="399"/>
         <source>Sound engine</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사운드 엔진</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="435"/>
         <source>Editing software</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">편집 소프트웨어</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="538"/>
         <source>Presets</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리셋들</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="560"/>
         <location filename="editor/pagesf2.ui" line="681"/>
         <location filename="editor/pagesf2.ui" line="1009"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">세부사항</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="659"/>
         <location filename="editor/pagesf2.ui" line="758"/>
         <source>Samples</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플들</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="744"/>
         <location filename="editor/pagesf2.ui" line="813"/>
         <location filename="editor/pagesf2.ui" line="876"/>
         <source>Number</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">번호</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="772"/>
         <source>16 bits</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">16 비트</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="777"/>
         <source>24 bits</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">24 비트</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="806"/>
         <location filename="editor/pagesf2.ui" line="904"/>
         <source>Modulators</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모듈레이터들</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="834"/>
         <location filename="editor/pagesf2.ui" line="869"/>
         <source>Parameters</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">매개변수들</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="987"/>
         <source>Instruments</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">악기들</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.cpp" line="105"/>
         <source>GB</source>
         <comment>giga byte</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">GB</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.cpp" line="110"/>
         <source>MB</source>
         <comment>mega byte</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">MB</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.cpp" line="115"/>
         <source>kB</source>
         <comment>kilo byte</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">kB</translation>
     </message>
     <message numerus="yes">
         <location filename="editor/pagesf2.cpp" line="247"/>
@@ -3208,7 +3208,7 @@ rate</source>
         <location filename="editor/pagesmpl.ui" line="320"/>
         <location filename="editor/pagesmpl.cpp" line="1082"/>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">재생</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="260"/>
@@ -3218,47 +3218,47 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="253"/>
         <source>loop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">반복</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="267"/>
         <source>stereo</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">스테레오</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="403"/>
         <source>Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">튜닝</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="450"/>
         <source>Loop</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">루프</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="473"/>
         <source>Use the full length of the sample as loop</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플 전체 길이를 루프로 사용</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="489"/>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">크기</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="548"/>
         <source>Sample rate</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플 레이트</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="433"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">유형</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="440"/>
         <source>Link</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">연결</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="204"/>
@@ -3270,51 +3270,51 @@ rate</source>
         <location filename="editor/pagesmpl.cpp" line="510"/>
         <location filename="editor/pagesmpl.cpp" line="1006"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">정보</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="626"/>
         <source>Equalizer (±15 dB)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">이퀄라이저 (±15 dB)</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="175"/>
         <location filename="editor/pagesmpl.cpp" line="180"/>
         <source>s</source>
         <comment>unit for seconds</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">초</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="179"/>
         <location filename="editor/pagesmpl.cpp" line="182"/>
         <source>(min)</source>
         <comment>minimum</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">(최소)</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="257"/>
         <location filename="editor/pagesmpl.cpp" line="640"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모노</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="267"/>
         <location filename="editor/pagesmpl.cpp" line="779"/>
         <source>right</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">오른쪽</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="268"/>
         <location filename="editor/pagesmpl.cpp" line="780"/>
         <source>left</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">왼쪽</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="269"/>
         <location filename="editor/pagesmpl.cpp" line="781"/>
         <source>link</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">연결</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="307"/>
@@ -3425,52 +3425,52 @@ rate</source>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="97"/>
         <source>&amp;Replace</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">바꾸기(&amp;R)</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="98"/>
         <source>R&amp;eplace all</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모두 바꾸기(&amp;E)</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="99"/>
         <source>&amp;Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">복제(&amp;D)</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="100"/>
         <source>D&amp;uplicate all</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모두 복제(&amp;U)</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="101"/>
         <source>&amp;Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">무시(&amp;I)</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="102"/>
         <source>I&amp;gnore all</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모두 무시(&amp;G)</translation>
     </message>
     <message>
         <location filename="core/model/soundfont.cpp" line="46"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">일반</translation>
     </message>
     <message>
         <location filename="core/model/soundfont.cpp" line="47"/>
         <source>Samples</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플들</translation>
     </message>
     <message>
         <location filename="core/model/soundfont.cpp" line="48"/>
         <source>Instruments</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">악기들</translation>
     </message>
     <message>
         <location filename="core/model/soundfont.cpp" line="49"/>
         <source>Presets</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리셋들</translation>
     </message>
     <message>
         <location filename="core/sample/sound.cpp" line="71"/>
