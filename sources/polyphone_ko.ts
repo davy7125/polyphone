@@ -982,7 +982,8 @@
         <location filename="context/interface/configsectionrepository.ui" line="114"/>
         <source>Become
 Premium!</source>
-        <translation type="finished">프리미엄 구독</translation>
+        <translation type="finished">프리미엄
+구독!</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="195"/>
@@ -1138,7 +1139,8 @@ Premium!</source>
         <location filename="context/interface/configtoc.ui" line="111"/>
         <source>Online
 repository</source>
-        <translation type="finished">온라인 레퍼지토리</translation>
+        <translation type="finished">온라인
+레퍼지토리</translation>
     </message>
 </context>
 <context>
@@ -1195,7 +1197,7 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="548"/>
         <source>Chromatic percussion</source>
-        <translation type="finished">크로마틱 퍼커션</translation>
+        <translation type="finished">크로마틱 타악기</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="550"/>
@@ -1270,7 +1272,7 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="578"/>
         <source>Percussion kit</source>
-        <translation type="finished">퍼커션 키트</translation>
+        <translation type="finished">타악기 키트</translation>
     </message>
 </context>
 <context>
@@ -2302,7 +2304,7 @@ repository</source>
     <message>
         <location filename="core/input/sf3/inputparsersf3.cpp" line="73"/>
         <source>Error during the sf3 =&gt; sf2 conversion</source>
-        <translation type="finished">SF3 =&gt; SF2 변환에 오류가 발생했습니다.</translation>
+        <translation type="finished">Sf3 =&gt; Sf2 변환에 오류가 발생했습니다.</translation>
     </message>
     <message>
         <location filename="core/input/sf3/inputparsersf3.cpp" line="78"/>
@@ -2330,7 +2332,7 @@ repository</source>
     <message>
         <location filename="core/input/sfz/inputparsersfz.cpp" line="288"/>
         <source>Sfz import</source>
-        <translation type="finished">SFZ 가져오기</translation>
+        <translation type="finished">Sfz 가져오기</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputparsersfz.cpp" line="459"/>
@@ -2503,7 +2505,8 @@ repository</source>
         <source>  Open
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation type="finished">  사운드폰트 열기</translation>
+        <translation type="finished">  사운드폰트
+열기</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="248"/>
@@ -2543,13 +2546,15 @@ repository</source>
         <location filename="editor/modulator/modulatorcell.cpp" line="155"/>
         <source>disabling
 default mod.</source>
-        <translation type="finished">기본 모듈레이터 비활성화</translation>
+        <translation type="finished">기본 모듈레이터
+비활성화</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="157"/>
         <source>overriding
 default mod.</source>
-        <translation type="finished">기본 모듈레이터를 덮어씁니다.</translation>
+        <translation type="finished">기본 모듈레이터를
+덮어씁니다.</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="350"/>
@@ -2738,7 +2743,7 @@ default mod.</source>
     <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="79"/>
         <source>Error during the sf3 conversion</source>
-        <translation type="finished">SF3 변환 중 오류발생</translation>
+        <translation type="finished">Sf3 변환 중 오류발생</translation>
     </message>
     <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="86"/>
@@ -2963,78 +2968,82 @@ duration</source>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="41"/>
         <source>Root
 key</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">루트
+키</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="43"/>
         <source>Sample
 type</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플
+유형</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="44"/>
         <source>Linked
 sample</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">연결된
+샘플</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="45"/>
         <source>Sample
 rate</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플
+레이트</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="94"/>
         <source>yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">네</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="94"/>
         <source>no</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">아니오</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="101"/>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="110"/>
         <source>s</source>
         <comment>unit for seconds</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">초</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="133"/>
         <source>Invalid link</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">유효하지 않은 연결</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
         <source>Mono</source>
         <comment>opposite to stereo</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모노</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="139"/>
         <source>Stereo right</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">우측 스테레오</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="142"/>
         <source>Stereo left</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">좌측 스테레오</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="145"/>
         <source>Stereo non defined</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">정의되지 않은 스테레오</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="165"/>
         <source>invalid</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">유효하지 않은</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="172"/>
         <source>Hz</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Hz</translation>
     </message>
 </context>
 <context>
@@ -3042,27 +3051,27 @@ rate</source>
     <message>
         <location filename="editor/pageprst.ui" line="166"/>
         <source>Bank</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">뱅크</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="198"/>
         <source>Preset</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리셋</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="237"/>
         <source>(percussion)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">(타악기)</translation>
     </message>
     <message>
         <location filename="editor/pageprst.cpp" line="96"/>
         <source>Table</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">테이블</translation>
     </message>
     <message>
         <location filename="editor/pageprst.cpp" line="97"/>
         <source>Ranges</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">범위</translation>
     </message>
 </context>
 <context>
@@ -3070,27 +3079,27 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="72"/>
         <source>Title...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제목...</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="130"/>
         <source>Author...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">작성자...</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="183"/>
         <source>Date...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">날짜...</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="202"/>
         <source>Current date</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">현재 날짜</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="234"/>
         <source>Product</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제품</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="248"/>
@@ -3100,7 +3109,7 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="262"/>
         <source>Comments</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">코멘트</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="327"/>
@@ -3213,7 +3222,7 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="260"/>
         <source>sine</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">기음</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="253"/>
@@ -3263,7 +3272,7 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="204"/>
         <source>Use the estimated pitch and correction as values</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">예측된 피치와 보정을 값으로 사용</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="585"/>
@@ -3319,34 +3328,34 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.cpp" line="307"/>
         <source>Sample not linked to an instrument yet.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플이 아직 악기에 연결되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="309"/>
         <source>Sample linked to instrument:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플이 연결된 악기들:</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="311"/>
         <source>Sample linked to instruments:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플이 연결된 악기들:</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="511"/>
         <location filename="editor/pagesmpl.cpp" line="1007"/>
         <source>Change successfully applied to the different samples</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">변경이 다른 샘플들에 적용됨</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="778"/>
         <location filename="editor/pagesmpl.cpp" line="803"/>
         <source>mono</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모노</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1076"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">중지</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1096"/>
@@ -3357,17 +3366,17 @@ rate</source>
         <location filename="editor/pagesmpl.cpp" line="1097"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&lt;b&gt;%1&lt;/b&gt;의 샘플을 &lt;b&gt;%2&lt;/b&gt;로 자르겠습니까? </translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1099"/>
         <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">네(&amp;Y)</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1100"/>
         <source>&amp;No</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">아니오(&amp;N)</translation>
     </message>
 </context>
 <context>
@@ -3375,7 +3384,7 @@ rate</source>
     <message>
         <location filename="editor/pagetable.cpp" line="106"/>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">전역</translation>
     </message>
 </context>
 <context>
@@ -3385,18 +3394,18 @@ rate</source>
         <location filename="core/input/grandorgue/grandorguestop.cpp" line="118"/>
         <location filename="core/output/outputfactory.cpp" line="104"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제목없음</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="117"/>
         <source>Save a soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사운드폰트 저장</translation>
     </message>
     <message>
         <location filename="core/input/sf2/inputsf2.h" line="35"/>
         <location filename="core/output/outputfactory.cpp" line="118"/>
         <source>Sf2 files</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Sf2 파일</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="139"/>
@@ -3410,17 +3419,17 @@ rate</source>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="71"/>
         <source>Sample &quot;%1L&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1L&quot; 샘플이 이미 존재합니다.&lt;br /&gt;덮어쓸까요?</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="76"/>
         <source>Sample &quot;%1R&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1R&quot; 샘플이 이미 존재합니다.&lt;br /&gt;덮어쓸까요?</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="84"/>
         <source>Sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&quot;%1&quot; 샘플이 이미 존재합니다.&lt;br /&gt;덮어쓸까요?</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="97"/>
@@ -3475,217 +3484,217 @@ rate</source>
     <message>
         <location filename="core/sample/sound.cpp" line="71"/>
         <source>Corrupted file: &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">손상된 파일: &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/sample/sound.cpp" line="75"/>
         <source>Cannot find file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일을 찾을 수 없음</translation>
     </message>
     <message>
         <location filename="core/sample/sound.cpp" line="79"/>
         <source>Cannot open file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 파일을 열 수 없음</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="117"/>
         <location filename="editor/graphics/graphicslegenditem2.cpp" line="66"/>
         <source>Key range:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키 범위:</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="136"/>
         <location filename="editor/graphics/graphicslegenditem2.cpp" line="69"/>
         <source>Velocity range:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">벨로시티 범위:</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="123"/>
         <source>Created by</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제작자</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="124"/>
         <source>Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">기여자</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="125"/>
         <source>Translated by</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">번역자</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="167"/>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">아이콘</translation>
     </message>
     <message>
         <location filename="repository/soundfontinformation.cpp" line="46"/>
         <source>Unknown author</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">작성자를 알 수 없음</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="64"/>
         <location filename="context/keynamemanager.cpp" line="82"/>
         <source>C</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">C</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="65"/>
         <source>D♭</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">D</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="66"/>
         <location filename="context/keynamemanager.cpp" line="84"/>
         <source>D</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">D</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="67"/>
         <source>E♭</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">E♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="68"/>
         <location filename="context/keynamemanager.cpp" line="86"/>
         <source>E</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">E</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="69"/>
         <location filename="context/keynamemanager.cpp" line="87"/>
         <source>F</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">F</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="70"/>
         <source>G♭</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">G♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="71"/>
         <location filename="context/keynamemanager.cpp" line="89"/>
         <source>G</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">G</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="72"/>
         <source>A♭</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">A♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="73"/>
         <location filename="context/keynamemanager.cpp" line="91"/>
         <source>A</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">A</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="74"/>
         <source>B♭</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">B♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="75"/>
         <location filename="context/keynamemanager.cpp" line="93"/>
         <source>B</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">B</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="83"/>
         <source>C♯</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">C♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="85"/>
         <source>D♯</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">D♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="88"/>
         <source>F♯</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">F♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="90"/>
         <source>G♯</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">G♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="92"/>
         <source>A♯</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">A♯</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="55"/>
         <source>bytes</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">바이트</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="57"/>
         <source>kB</source>
         <comment>kilobytes</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">kB</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="59"/>
         <source>MB</source>
         <comment>megabytes</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">MB</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="61"/>
         <source>GB</source>
         <comment>gigabytes</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">GB</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="62"/>
         <source>TB</source>
         <comment>terabytes</comment>
-        <translation type="unfinished"></translation>
+        <translation type="finished">TB</translation>
     </message>
     <message>
         <location filename="core/input/grandorgue/inputgrandorgue.h" line="35"/>
         <source>GrandOrgue sample sets</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">그랜드오르게(GrandOrgue) 샘플 세트</translation>
     </message>
     <message>
         <location filename="core/input/inputfactory.cpp" line="118"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모두</translation>
     </message>
     <message>
         <location filename="core/input/sf3/inputsf3.h" line="35"/>
         <source>Sf3 files</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Sf3 파일</translation>
     </message>
     <message>
         <location filename="core/input/sfark/inputsfark.h" line="35"/>
         <source>sfArk archives</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">sfArk 아카이브</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputsfz.h" line="35"/>
         <source>Sfz files</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">Sfz 파일</translation>
     </message>
 </context>
 <context>
@@ -3693,57 +3702,57 @@ rate</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="75"/>
         <source>acoustic instrument</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">생악기</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="76"/>
         <source>electronic instrument</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">전자악기</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="77"/>
         <source>various records</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">다양한 녹음</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="78"/>
         <source>additive synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">첨가 합성</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="79"/>
         <source>subtrative synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">감산 합성</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="80"/>
         <source>wavetable synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">웨이브테이블 합성</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="81"/>
         <source>model synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모델 합성</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="82"/>
         <source>FM synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">FM 합성</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="83"/>
         <source>vector synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">벡터 합성</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="84"/>
         <source>granular synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">세분화 합성</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="85"/>
         <source>other synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">그 외 합성</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="88"/>
@@ -3883,22 +3892,22 @@ rate</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="117"/>
         <source>pad</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">패드</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="118"/>
         <source>lead</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">리드</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="119"/>
         <source>monophonic</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">단음</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="120"/>
         <source>chord</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">코드</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="121"/>
@@ -3933,244 +3942,244 @@ rate</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="129"/>
         <source>classic music</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">고전 음악</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="130"/>
         <source>electronic music</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">전자 음악</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="131"/>
         <source>trance</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">트랜스</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="132"/>
         <location filename="repository/repositorymanager.cpp" line="133"/>
         <source>ambient music</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">은은한 음악</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="134"/>
         <source>house</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">하우스</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="135"/>
         <source>techno / electro</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">테크노 / 일렉트로</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="136"/>
         <source>D&apos;n&apos;B / breaks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">D&apos;n&apos;B / 브레이크</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="137"/>
         <source>industrial</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">도발적</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="138"/>
         <source>experimental</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">실험적</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="139"/>
         <source>funk / soul</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">펑크 / 소울</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="140"/>
         <source>reggae / dub</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">레게 / 더브</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="141"/>
         <source>latin / afro-cuban</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">라틴 / 쿠바</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="142"/>
         <source>pop / rock</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">팝 / 록</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="143"/>
         <source>metal music</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">메탈 음악</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="144"/>
         <source>hiphop / rap</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">힙합 / 랩</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="145"/>
         <source>jazz / swing</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">재즈 / 스윙</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="146"/>
         <source>folk / country</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">포크 / 컨트리</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="147"/>
         <location filename="repository/repositorymanager.cpp" line="148"/>
         <source>ethnic / world</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">민족 / 세계</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="165"/>
         <source>public domain</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">공공저작물</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="166"/>
         <source>give credit</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제작자 표시</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="167"/>
         <source>give credit, don&apos;t distribute with more restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제작자 표시, 다른 제한으로 배포 불가</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="168"/>
         <source>don&apos;t distribute a modified version</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">수정된 버전 배포 불가</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="169"/>
         <source>personal use</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">개인적 사용</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="170"/>
         <source>personal use, don&apos;t distribute with more restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">개인적 사용, 다른 제한으로 배포 불가</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="171"/>
         <source>personal use, don&apos;t distribute a modified version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">개인적 사용, 수정된 버전 배포 불가</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="387"/>
         <source>piano</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">피아노</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="390"/>
         <source>organ</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">오르간</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="393"/>
         <source>synthesizer</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">신디사이저</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="396"/>
         <source>harpsichord</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">하프시코드</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="399"/>
         <source>guitar</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">기타</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="402"/>
         <source>bass</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">베이스</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="405"/>
         <source>plucked strings</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">뜯는 현악기</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="408"/>
         <source>bowed strings</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">활 현악기</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="411"/>
         <source>flute</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">플루트</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="414"/>
         <source>reed</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">리드</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="417"/>
         <source>brass</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">브라스</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="420"/>
         <source>vocal</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">보컬</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="423"/>
         <source>unpitched percussion</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">무음계 타악기</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="426"/>
         <source>melodic percussion</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">음계 타악기</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="429"/>
         <source>sound effect</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사운드 효과</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="432"/>
         <source>soundscape</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">소리</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="435"/>
         <source>loop / rythm</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">루프 / 리듬</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="438"/>
         <source>instrument set</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">악기 세트</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="441"/>
         <source>unclassifiable</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">미분류 악기</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="448"/>
         <source>Category %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">카테고리 %1</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="476"/>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">잠시만 기다려주세요...</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="479"/>
         <source>Your account has been banned.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">당신의 계정은 정지됐습니다.</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="484"/>
         <source>A Premium account allows you to browse and download all soundfonts available online.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리미엄 계정을 사용하면 온라인에서 사용할 수있 는 모든 사운드폰트를 찾고 내려받을 수 있습니다.</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="493"/>
