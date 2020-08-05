@@ -2085,7 +2085,7 @@ repository</source>
         <location filename="editor/envelopeditor.ui" line="401"/>
         <source> s</source>
         <comment>unit for second</comment>
-        <translation type="finished"> s</translation>
+        <translation type="finished"> 초</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="372"/>
@@ -2951,7 +2951,7 @@ duration</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="42"/>
         <source>Correction</source>
-        <translation type="finished"></translation>
+        <translation type="finished">보정</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="40"/>
@@ -3227,7 +3227,7 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="253"/>
         <source>loop</source>
-        <translation type="unfinished">반복</translation>
+        <translation type="finished">반복</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="267"/>
@@ -3429,7 +3429,7 @@ rate</source>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="84"/>
         <source>Sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation type="unfinished">&quot;%1&quot; 샘플이 이미 존재합니다.&lt;br /&gt;덮어쓸까요?</translation>
+        <translation type="finished">&quot;%1&quot; 샘플이 이미 존재합니다.&lt;br /&gt;덮어쓸까요?</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="97"/>
@@ -3757,137 +3757,137 @@ rate</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="88"/>
         <source>high</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">높은</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="89"/>
         <source>low</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">낮은</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="90"/>
         <source>distorted</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">왜곡된</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="91"/>
         <source>clean</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">깨끗한</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="92"/>
         <source>bright</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">밝은</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="93"/>
         <source>dark</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">어두운</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="94"/>
         <source>warm</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">따뜻한</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="95"/>
         <source>cold</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">차가운</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="96"/>
         <source>fat</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">두꺼운</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="97"/>
         <source>thin</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">얇은</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="98"/>
         <source>hard</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">단단한</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="99"/>
         <source>soft</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">부드러운</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="100"/>
         <source>muted</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">음소거된</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="101"/>
         <source>detuned</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">조정된</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="102"/>
         <source>dissonant</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">불협화음</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="103"/>
         <source>noisy</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">시끄러운</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="104"/>
         <source>metallic</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">금속성</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="105"/>
         <source>wooden</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">목재</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="106"/>
         <source>exotic</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">이국적인</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="109"/>
         <source>slow attack</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">느린 어택</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="110"/>
         <source>decaying</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">디케잉</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="111"/>
         <source>sustained</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">서스테인된</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="112"/>
         <source>long release</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">긴 릴리즈 타임</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="113"/>
         <source>percussive</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">퍼커시브</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="114"/>
         <source>long / evolving</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">긴 / 진화하는</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="115"/>
         <source>pulsating</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">맥동치는</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="116"/>
         <source>echoing</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">메아리치는</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="117"/>
@@ -3912,32 +3912,32 @@ rate</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="121"/>
         <source>glide / pitch mod</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">글라이드 / 피치 모듈레이션</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="122"/>
         <source>sweep / filter mod</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">스윕 / 필터 모듈레이션</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="123"/>
         <source>arpeggiated</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">아르페지에이티드</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="124"/>
         <source>expressive</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">풍부한</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="125"/>
         <source>complex</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">복잡한</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="126"/>
         <source>randomized</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">무작위</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="129"/>
@@ -4064,7 +4064,7 @@ rate</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="171"/>
         <source>personal use, don&apos;t distribute a modified version</source>
-        <translation type="unfinished">개인적 사용, 수정된 버전 배포 불가</translation>
+        <translation type="finished">개인적 사용, 수정된 버전 배포 불가</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="387"/>
@@ -4193,7 +4193,8 @@ rate</source>
         <location filename="repository/daily/showsoundfonts.ui" line="217"/>
         <source>Oops! Cannot
 download the list</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">이런! 목록을
+내려받을 수 없음</translation>
     </message>
 </context>
 <context>
@@ -4201,104 +4202,105 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="172"/>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">범주</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="188"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">라이선스</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="204"/>
         <source>Sample source</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플 소스</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="220"/>
         <source>Timbre</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">음색</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="236"/>
         <source>Articulation</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">조음</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="252"/>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">장르</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="268"/>
         <source>MIDI standard</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">미디 표준</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="284"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">꼬리표</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="337"/>
         <source>Search a soundfont...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사운드폰트 찾기...</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="387"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">날짜</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="392"/>
         <source>Downloads</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">내려받기</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="397"/>
         <source>Rating score</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">점수</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="402"/>
         <source>Title (A→Z)</source>
         <oldsource>Title (A?Z)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제목 (A→Z)</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="458"/>
         <source>Filters</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">필터</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="487"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">초기화</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="506"/>
         <source>Subscribe to a Premium account to get all the features!</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">프리미엄 계정을 구독해 모든 기능을 얻으세요!</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="528"/>
         <source>No results</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">결과 없음</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="609"/>
         <source>Oops! Cannot
 download the list</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">이런! 목록을
+내려받을 수 없음</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.cpp" line="142"/>
         <source>commercial use</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">상업적 사용</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.cpp" line="143"/>
         <source>share after editing</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">수정한 후 공유</translation>
     </message>
 </context>
 <context>
@@ -4306,7 +4308,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontcomment.cpp" line="89"/>
         <source>No comments.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">댓글 없음.</translation>
     </message>
 </context>
 <context>
@@ -4314,7 +4316,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontdownloadcell.ui" line="61"/>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">내려받기</translation>
     </message>
 </context>
 <context>
@@ -4322,22 +4324,22 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorcenter.ui" line="42"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">설명</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorcenter.ui" line="112"/>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">파일</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorcenter.ui" line="128"/>
         <source>Add a file</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">파일 추가</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorcenter.cpp" line="74"/>
         <source>At least one file must be uploaded.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">하나 이상의 파일을 올려야 합니다.</translation>
     </message>
 </context>
 <context>
@@ -4351,22 +4353,22 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="80"/>
         <source>The number of files cannot exceed %0.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">파일 수는 %0개를 초과할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
         <source>File to upload</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">올리기할 파일</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">파일</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
         <source>The file size cannot exceed %0 MB.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">파일 크기는 %0 MB를 초과할 수 없습니다.</translation>
     </message>
 </context>
 <context>
@@ -4374,52 +4376,52 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="36"/>
         <source>Timbre</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">음색</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="62"/>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">장르</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="94"/>
         <source>Articulation</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">조음</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="113"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">꼬리표</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="177"/>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">범주</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="184"/>
         <source>Website...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">누리집...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="197"/>
         <source>Sample source</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플 소스</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="245"/>
         <source>MIDI standard</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">미디 표준</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="46"/>
         <source>Select a license...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">라이선스 선택...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="52"/>
         <source>Select a category...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">범주 선택...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="58"/>
@@ -4428,17 +4430,17 @@ download the list</source>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="73"/>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="78"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">없음</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="130"/>
         <source>A category must be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">범주는 반드시 선택해야 합니다.</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="134"/>
         <source>A license must be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">라이선스는 반드시 선택해야 합니다.</translation>
     </message>
 </context>
 <context>
@@ -4446,12 +4448,12 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditortop.ui" line="38"/>
         <source>Title...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제목...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditortop.cpp" line="56"/>
         <source>A title must be provided.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제목은 반드시 제공돼야 합니다.</translation>
     </message>
 </context>
 <context>
@@ -4459,22 +4461,22 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="78"/>
         <source>Description...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">설명...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="91"/>
         <source>Title...</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제목...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="104"/>
         <source>Replace</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">대체</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="44"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">제거</translation>
     </message>
 </context>
 <context>
@@ -4482,23 +4484,24 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="106"/>
         <source>Edit the soundfont description</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사운드폰트 설명 편집</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="354"/>
         <source>Oops! Cannot
 download content</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">이런! 콘텐츠를
+내려받을 수 없음</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="500"/>
         <source>Discard changes</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">변경사항을 취소</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="528"/>
         <source>Submit the changes</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">변경사항을 제출</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="201"/>
@@ -4511,7 +4514,7 @@ download content</source>
     <message>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
         <source>The upload failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">올리기 실패: %1</translation>
     </message>
 </context>
 <context>
@@ -4519,22 +4522,22 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewercenter.ui" line="51"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">설명</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewercenter.ui" line="67"/>
         <source>No description.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">설명 없음.</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewercenter.ui" line="93"/>
         <source>Downloads</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">내려받기</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewercenter.ui" line="129"/>
         <source>Comments</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">댓글</translation>
     </message>
 </context>
 <context>
@@ -4542,37 +4545,37 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="161"/>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">범주</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="177"/>
         <source>Sample source</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플 소스</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="193"/>
         <source>Timbre</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">음색</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="209"/>
         <source>Articulation</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">조음</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="225"/>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">장르</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="241"/>
         <source>MIDI standard</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">미디 표준</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="257"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">꼬리표</translation>
     </message>
 </context>
 <context>
@@ -4580,22 +4583,22 @@ download content</source>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="47"/>
         <source>mute</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">음소거</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="52"/>
         <source>solo</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">솔로</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="59"/>
         <source>solo on selection</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">선택 부분 솔로</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="55"/>
         <source>unmute all</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모두 음소거 해제</translation>
     </message>
 </context>
 <context>
@@ -4833,7 +4836,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="96"/>
         <source> dB</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished"> dB</translation>
     </message>
 </context>
 <context>
@@ -4854,7 +4857,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="56"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">더하기</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="108"/>
@@ -4864,17 +4867,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="36"/>
         <source> dB</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished"> dB</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="79"/>
         <source>Multiply</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">곱하기</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="49"/>
         <source>Normalize</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">정규화</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="88"/>
@@ -4884,7 +4887,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="66"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished"> %</translation>
     </message>
 </context>
 <context>
@@ -4897,7 +4900,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords.h" line="48"/>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">변환</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords.h" line="63"/>
@@ -4915,62 +4918,62 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="39"/>
         <source>Sample creation:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플 생성:</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="47"/>
         <source>for every key</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모든 키마다</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="52"/>
         <source>every 3 keys</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">세 키마다</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="57"/>
         <source>every 6 keys</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">여섯 키마다</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="65"/>
         <source>Auto loop</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">자동 반복</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="75"/>
         <source>Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">스테레오</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="90"/>
         <source>Chord</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">코드</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="115"/>
         <source>Seventh</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">세븐스</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="128"/>
         <source>Ninth</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">나인스</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="141"/>
         <source>Third</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">써드</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="179"/>
         <source>Root key</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">루트 키</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="192"/>
         <source>Fifth</source>
-        <translation type="unfinished">5</translation>
+        <translation type="finished">피프스</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="231"/>
@@ -5003,7 +5006,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="350"/>
         <source>Inversion number</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">반행 번호</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="379"/>
@@ -5014,12 +5017,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="424"/>
         <source>perfect</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">퍼펙트</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="434"/>
         <source>augmented</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">어그먼티드</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="687"/>
@@ -5077,12 +5080,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod.h" line="45"/>
         <source>Modulators</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모듈레이터</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod.h" line="60"/>
         <source>Override a default modulator</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">기본 모듈레이터 재정의</translation>
     </message>
 </context>
 <context>
@@ -5096,13 +5099,13 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="58"/>
         <source>&amp;Override</source>
         <oldsource>Override</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">재정의(&amp;O)</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="68"/>
         <source>&amp;Disable</source>
         <oldsource>Disable</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">비활성화(&amp;D)</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="88"/>
