@@ -1854,7 +1854,7 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="297"/>
         <source>The global division will not be copied.</source>
-        <translation type="finished">전역 구분은 복사될 수 없습니다.</translation>
+        <translation type="finished">전역 분류는 복사될 수 없습니다.</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="299"/>
@@ -2648,7 +2648,7 @@ default mod.</source>
         <location filename="editor/modulator/modulatoreditor.ui" line="234"/>
         <location filename="editor/modulator/modulatoreditor.cpp" line="158"/>
         <source>Select a single division to display the modulator list</source>
-        <translation type="finished">단일 구분을 선택해 모듈레이터 목록 표시</translation>
+        <translation type="finished">단일 분류를 선택해 모듈레이터 목록 표시</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="317"/>
@@ -3867,7 +3867,7 @@ rate</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="112"/>
         <source>long release</source>
-        <translation type="finished">긴 릴리즈 타임</translation>
+        <translation type="finished">길게 누름</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="113"/>
@@ -3973,7 +3973,7 @@ rate</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="136"/>
         <source>D&apos;n&apos;B / breaks</source>
-        <translation type="unfinished">D&apos;n&apos;B / 브레이크</translation>
+        <translation type="finished">D&apos;n&apos;B / 브레이크</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="137"/>
@@ -4607,7 +4607,8 @@ download content</source>
         <location filename="editor/pageinst.cpp" line="247"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">이 행의 값은 실제 dB로 표시됩니다.
+다른 사운드폰트 편집기는 다른 단위를 표시할 수 있습니다.</translation>
     </message>
 </context>
 <context>
@@ -4616,7 +4617,8 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/pageprst.cpp" line="246"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">이 행의 값은 실제 dB로 표시됩니다.
+다른 사운드폰트 편집기는 다른 단위를 표시할 수 있습니다.</translation>
     </message>
 </context>
 <context>
@@ -4624,67 +4626,67 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="context/thememanager.cpp" line="57"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사용자 정의</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="376"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">기본</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="396"/>
         <source>Gnome</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">그놈(Gnome)</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="409"/>
         <source>Dark, blue</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">어두운, 파랑</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="422"/>
         <source>Dark, orange</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">어두운, 오렌지</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="435"/>
         <source>Dark, green</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">어두운, 초록</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="448"/>
         <source>Dark, yellow</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">어두운, 노랑</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="461"/>
         <source>Aqua</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">아쿠아</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="474"/>
         <source>Spring</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">봄</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="487"/>
         <source>Windows 10</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">윈도우즈 10</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="500"/>
         <source>Ubuntu</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">우분투(Ubuntu)</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="513"/>
         <source>Good night</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">밤</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="526"/>
         <source>Pink</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">분홍</translation>
     </message>
 </context>
 <context>
@@ -4693,7 +4695,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
         <source>Sample auto-positioning</source>
         <oldsource>Automatically link the samples</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플을 자동으로 연결</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="45"/>
@@ -4706,22 +4708,22 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="75"/>
         <source>Failed to loop sample &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">&quot;%1&quot; 샘플의 반복에 실패했습니다.</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="78"/>
         <source>The following samples couldn&apos;t be looped:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">다음 샘플은 반복되지 않습니다:</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="83"/>
         <source>Possible reasons: too short or too turbulent.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">가능성: 너무 짧거나 난해합니다.</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="65"/>
         <source>Auto loop</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">자동 반복</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="47"/>
@@ -4734,17 +4736,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.cpp" line="121"/>
         <source>This tool cannot be used with mono samples:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">이 도구는 모노 샘플과 함께 사용할 수 없습니다:</translation>
     </message>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="65"/>
         <source>Balance adjustement</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">균형 조정</translation>
     </message>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="47"/>
         <source>Stereo samples</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">스테레오 샘플</translation>
     </message>
 </context>
 <context>
@@ -4757,7 +4759,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning.h" line="60"/>
         <source>Detune</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">디튠</translation>
     </message>
 </context>
 <context>
@@ -4775,22 +4777,22 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="97"/>
         <source>Division to the next octave</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">다음 옥타브로 분류</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="58"/>
         <source>The algebraic sign determines the tuning direction.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">대수 기호는 튜닝 방향을 결정합니다.</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
         <source>Number of beats per second</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">초당 비트 수</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
         <source>key</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키</translation>
     </message>
 </context>
 <context>
@@ -4803,7 +4805,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation.h" line="64"/>
         <source>Change attenuations</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">감쇠 변경</translation>
     </message>
 </context>
 <context>
@@ -4811,17 +4813,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="83"/>
         <source>Desired value</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">원하는 값</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="125"/>
         <source>Possible offset</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">가능한 오프셋</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="112"/>
         <source>Attenuation range</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">감쇠 범위</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="55"/>
@@ -4849,7 +4851,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="61"/>
         <source>Change volume</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">볼륨 변경</translation>
     </message>
 </context>
 <context>
@@ -4923,7 +4925,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="47"/>
         <source>for every key</source>
-        <translation type="finished">모든 키마다</translation>
+        <translation type="finished">모든 키에</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="52"/>
@@ -5067,12 +5069,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="69"/>
         <source>Remove unused elements</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">사용하지 않는 요소 제거</translation>
     </message>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="48"/>
         <source>Clean up</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">클린 업</translation>
     </message>
 </context>
 <context>
@@ -5093,7 +5095,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="20"/>
         <source>Here is the list of modulators automatically set for every instrument. You can override or disable them by selecting the corresponding modulators and action below.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">다음은 모든 악기에 대해 자동으로 설정되는 모듈레이터 목록입니다. 아래에서 해당 모듈레이터를 선택하여 이를 무시하거나 비활성화할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="58"/>
@@ -5119,22 +5121,22 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="84"/>
         <source>An instrument comprising no samples is not compatible with this tool:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플이 없는 악기는 이 도구와 호환되지 않습니다:</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="85"/>
         <source>A preset comprising no instruments is not compatible with this tool:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">악기가 없는 프리셋은 이 도구와 호환되지 않습니다:</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="45"/>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">변환</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="63"/>
         <source>Division duplication</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">분류 복제</translation>
     </message>
 </context>
 <context>
@@ -5142,7 +5144,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="30"/>
         <source>A division for each velocity range</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">각 벨로시티 범위에 대한 분류</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="143"/>
@@ -5157,7 +5159,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="20"/>
         <source>A division for each key</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">각 키에 대한 분류</translation>
     </message>
 </context>
 <context>
@@ -5234,12 +5236,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="116"/>
         <source>You must enter a command with at least {wav} as argument.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">최소 {wav} 인수를 사용하여 명령을 입력해야 합니다.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="123"/>
         <source>The command must contain the argument {wav}.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">명령에는 {wav} 인수가 포함돼야 합니다.</translation>
     </message>
 </context>
 <context>
@@ -5275,7 +5277,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="74"/>
         <source>Multiply</source>
-        <translation type="unfinished">곱하기</translation>
+        <translation type="finished">곱하기</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="84"/>
@@ -5312,7 +5314,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="32"/>
         <source>Mark with red color where you want to cut the frequencies:</source>
         <oldsource>Put in red the part of frequencies to filter:</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">주파수를 자를 곳에 빨간색으로 표시하십시오:</translation>
     </message>
 </context>
 <context>
@@ -5434,7 +5436,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings.h" line="64"/>
         <source>Key-based configuration</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키 기반의 환경설정</translation>
     </message>
 </context>
 <context>
@@ -5442,22 +5444,22 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="27"/>
         <source>Minimum</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">최소</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="35"/>
         <source>Addition</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">덧셈</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="40"/>
         <source>Multiplication</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">곱셈</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="45"/>
         <source>Replacement</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">교체</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="76"/>
@@ -5472,12 +5474,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="119"/>
         <source>Maximum</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">최대</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="126"/>
         <source>Modification</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">가감</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="153"/>
@@ -5487,22 +5489,22 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="158"/>
         <source>Linear ascending</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">선형 오름차순</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="163"/>
         <source>Linear descending</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">선형 내림차순</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="168"/>
         <source>Exponential ascending</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">지수 오름차순</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="173"/>
         <source>Exponential descending</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">지수 내림차순</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="178"/>
@@ -5512,7 +5514,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="249"/>
         <source>Apply to a velocity range</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">벨로시티 범위에 적용</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="278"/>
@@ -5527,12 +5529,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="243"/>
         <source>Stiffness</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">단단함</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="248"/>
         <source>Distribution</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">분배</translation>
     </message>
 </context>
 <context>
@@ -5540,7 +5542,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/link_sample/toollinksample.h" line="67"/>
         <source>Find a link</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">연결 찾기</translation>
     </message>
     <message>
         <location filename="editor/tools/link_sample/toollinksample.h" line="49"/>
@@ -5558,12 +5560,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="48"/>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">변환</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="63"/>
         <source>Mixture creation</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">혼합물 생성</translation>
     </message>
 </context>
 <context>
@@ -5571,27 +5573,27 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="25"/>
         <source>Name of the mixture:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">혼합물의 이름:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="39"/>
         <source>Sample creation:</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">샘플 생성:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="47"/>
         <source>for every key</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">모든 키에</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="52"/>
         <source>every 3 keys</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">세 키마다</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="57"/>
         <source>every 6 keys</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">여섯 키마다</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="65"/>
@@ -5606,7 +5608,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="89"/>
         <source>Divisions</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">분류</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="242"/>
@@ -5616,7 +5618,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="265"/>
         <source>Ranks</source>
-        <translation type="finished">점수</translation>
+        <translation type="finished">등급</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="338"/>
@@ -5631,67 +5633,67 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="351"/>
         <source>fifth</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">다섯 번째</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="356"/>
         <source>third</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">세 번째</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="361"/>
         <source>seventh</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">일곱 번째</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="366"/>
         <source>ninth</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">아홉 번째</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="371"/>
         <source>eleventh</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">열한 번째</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="376"/>
         <source>thirteenth</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">열세 번째</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="381"/>
         <source>fifteenth</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">열다섯 번째</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="386"/>
         <source>seventeenth</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">열일곱 번째</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="391"/>
         <source>nineteenth</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">열아홉 번째</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="396"/>
         <source>twenty-first</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">스물한 번째</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="401"/>
         <source>twenty-third</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">스물세 번째</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="406"/>
         <source>twenty-fifth</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">스물다섯 번째</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="411"/>
         <source>twenty-seventh</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">스물일곱 번째</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="498"/>
@@ -5717,7 +5719,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="551"/>
         <source>At least one rank must be specified.</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">하나 이상의 등급을 지정해야 합니다.</translation>
     </message>
 </context>
 <context>
@@ -5725,12 +5727,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor.h" line="45"/>
         <source>Analyze</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">분석</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor.h" line="57"/>
         <source>Display parameters</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">매개변수 표시</translation>
     </message>
 </context>
 <context>
@@ -5738,17 +5740,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="97"/>
         <source>Display options</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">옵션 표시</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="140"/>
         <source>Log scale</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">로그 스케일</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="162"/>
         <source>Legend</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">레전드</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="221"/>
@@ -5759,7 +5761,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="250"/>
         <source>Average value per key</source>
         <oldsource>Mean value per key</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="finished">키당 평균 값</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
@@ -5818,7 +5820,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/release/toolrelease.h" line="61"/>
         <source>Natural release</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">자연스럽게</translation>
     </message>
 </context>
 <context>
@@ -5836,17 +5838,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="67"/>
         <source>Division to the next octave</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">다음 옥타브로 분류</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="110"/>
         <source>Detuning induced (semi-tones)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">디튜닝 유도 (반음)</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.cpp" line="51"/>
         <source>Release time (key %1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="finished">누르는 시간 (키 %1)</translation>
     </message>
 </context>
 <context>
@@ -5961,7 +5963,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="66"/>
         <source>Division number</source>
-        <translation type="finished">구분 번호</translation>
+        <translation type="finished">분류 번호</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="121"/>
