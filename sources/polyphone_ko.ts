@@ -4955,17 +4955,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="115"/>
         <source>Seventh</source>
-        <translation type="finished">세븐스</translation>
+        <translation type="finished">7화음</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="128"/>
         <source>Ninth</source>
-        <translation type="finished">나인스</translation>
+        <translation type="finished">9화음</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="141"/>
         <source>Third</source>
-        <translation type="finished">써드</translation>
+        <translation type="finished">3화음</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="179"/>
@@ -4975,7 +4975,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="192"/>
         <source>Fifth</source>
-        <translation type="finished">피프스</translation>
+        <translation type="finished">5화음</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="231"/>
@@ -5633,67 +5633,67 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="351"/>
         <source>fifth</source>
-        <translation type="finished">다섯 번째</translation>
+        <translation type="finished">5화음</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="356"/>
         <source>third</source>
-        <translation type="finished">세 번째</translation>
+        <translation type="finished">3화음</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="361"/>
         <source>seventh</source>
-        <translation type="finished">일곱 번째</translation>
+        <translation type="finished">7화음</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="366"/>
         <source>ninth</source>
-        <translation type="finished">아홉 번째</translation>
+        <translation type="finished">9화음</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="371"/>
         <source>eleventh</source>
-        <translation type="finished">열한 번째</translation>
+        <translation type="finished">11화음</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="376"/>
         <source>thirteenth</source>
-        <translation type="finished">열세 번째</translation>
+        <translation type="finished">13화음</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="381"/>
         <source>fifteenth</source>
-        <translation type="finished">열다섯 번째</translation>
+        <translation type="finished">15화음</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="386"/>
         <source>seventeenth</source>
-        <translation type="finished">열일곱 번째</translation>
+        <translation type="finished">17화음</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="391"/>
         <source>nineteenth</source>
-        <translation type="finished">열아홉 번째</translation>
+        <translation type="finished">19화음</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="396"/>
         <source>twenty-first</source>
-        <translation type="finished">스물한 번째</translation>
+        <translation type="finished">21화음</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="401"/>
         <source>twenty-third</source>
-        <translation type="finished">스물세 번째</translation>
+        <translation type="finished">23화음</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="406"/>
         <source>twenty-fifth</source>
-        <translation type="finished">스물다섯 번째</translation>
+        <translation type="finished">25화음</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="411"/>
         <source>twenty-seventh</source>
-        <translation type="finished">스물일곱 번째</translation>
+        <translation type="finished">27화음</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="498"/>
