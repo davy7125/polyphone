@@ -117,7 +117,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     quint16 wTmp;
     quint8 byTmp;
     char charTmp;
-    char tcharTmp[20];
+    char tcharTmp[32];
     AttributeValue valTmp;
 
     // Modification du logiciel d'édition

@@ -29,12 +29,18 @@
 
 static float fastSqrt(float val)
 {
+    union {
+	float f;
+	quint32 u;
+    } I;
     if (val < 0.0001f)
         return 0.0001f;
-    quint32 i = *(quint32 *)&val;
+    I.f = val;
+#define i I.u
     i += 127L << 23; // adjust bias
     i >>= 1; // approximation of square root
-    return *(float *)&i;
+#undef i
+    return I.f;
 }
 
 static quint32 fastCeil(float val)

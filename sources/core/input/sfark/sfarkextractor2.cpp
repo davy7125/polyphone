@@ -157,7 +157,7 @@ void OpenInputFile(const char *FileName)
 
 int ReadInputFile(quint8 *Buf, int BytesToRead)
 {
-    unsigned long BytesRead;
+    int BytesRead;
 
     BytesRead = SfArkExtractor2::_fileManager.read(InputFileHandle, (char*)Buf, BytesToRead);
     if (BytesRead < 0)
