@@ -28,7 +28,6 @@
 #include "abstractinputparser.h"
 #include "abstractinput.h"
 #include "sf2/inputsf2.h"
-#include "sf3/inputsf3.h"
 #include "sfz/inputsfz.h"
 #include "sfark/inputsfark.h"
 #include "grandorgue/inputgrandorgue.h"
@@ -42,10 +41,6 @@ InputFactory::InputFactory()
 {
     // Load all kinds of input
     AbstractInput * input = new InputSf2();
-    _inputs[input->getInputExtension().toLower()] = input;
-    _orderedInputs << input;
-
-    input = new InputSf3();
     _inputs[input->getInputExtension().toLower()] = input;
     _orderedInputs << input;
 

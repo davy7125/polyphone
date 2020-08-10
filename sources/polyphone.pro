@@ -235,8 +235,6 @@ SOURCES	+= main.cpp \
     core/input/not_supported/inputparsernotsupported.cpp \
     core/input/sf2/inputparsersf2.cpp \
     core/input/sf2/inputsf2.cpp \
-    core/input/sf3/inputparsersf3.cpp \
-    core/input/sf3/inputsf3.cpp \
     core/input/sfark/inputparsersfark.cpp \
     core/input/sfark/inputsfark.cpp \
     core/input/sfz/inputparsersfz.cpp \
@@ -318,7 +316,6 @@ SOURCES	+= main.cpp \
     sound_engine/elements/calibrationsinus.cpp \
     sound_engine/elements/enveloppevol.cpp \
     sound_engine/elements/oscsinus.cpp \
-    lib/sf3/sfont.cpp \
     options.cpp \
     mainwindow/widgetshowhistory.cpp \
     mainwindow/widgetshowhistorycell.cpp \
@@ -469,7 +466,6 @@ SOURCES	+= main.cpp \
     core/output/not_supported/outputnotsupported.cpp \
     core/output/sfz/sfzparamlist.cpp \
     core/output/sf2/sf2indexconverter.cpp \
-    core/output/sf3/outputsf3.cpp \
     core/input/sfz/sfzparameter.cpp \
     core/input/sfz/sfzparametergroup.cpp \
     core/input/sfz/sfzparametergroupassembly.cpp \
@@ -556,8 +552,6 @@ HEADERS += \
     core/input/not_supported/inputparsernotsupported.h \
     core/input/sf2/inputparsersf2.h \
     core/input/sf2/inputsf2.h \
-    core/input/sf3/inputparsersf3.h \
-    core/input/sf3/inputsf3.h \
     core/input/sfark/inputparsersfark.h \
     core/input/sfark/inputsfark.h \
     core/input/sfz/inputparsersfz.h \
@@ -645,7 +639,6 @@ HEADERS += \
     sound_engine/elements/calibrationsinus.h \
     sound_engine/elements/enveloppevol.h \
     sound_engine/elements/oscsinus.h \
-    lib/sf3/sfont.h \
     options.h \
     mainwindow/widgetshowhistory.h \
     mainwindow/widgetshowhistorycell.h \
@@ -804,7 +797,6 @@ HEADERS += \
     core/output/not_supported/outputnotsupported.h \
     core/output/sfz/sfzparamlist.h \
     core/output/sf2/sf2indexconverter.h \
-    core/output/sf3/outputsf3.h \
     core/input/sfz/sfzparameter.h \
     core/input/sfz/sfzparametergroup.h \
     core/input/sfz/sfzparametergroupassembly.h \

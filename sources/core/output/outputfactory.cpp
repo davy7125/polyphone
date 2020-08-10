@@ -31,7 +31,6 @@
 #include "contextmanager.h"
 #include "abstractoutput.h"
 #include "sf2/outputsf2.h"
-#include "sf3/outputsf3.h"
 #include "sfz/outputsfz.h"
 #include "not_supported/outputnotsupported.h"
 #include "empty/outputdummy.h"
@@ -53,11 +52,6 @@ AbstractOutput * OutputFactory::getOutput(QString fileName)
         {
             // Format sf2
             output = new OutputSf2();
-        }
-        else if (extension == "sf3")
-        {
-            // Format sf3
-            output = new OutputSf3();
         }
         else if (extension == "sfz")
         {
