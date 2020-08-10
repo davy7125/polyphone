@@ -23,7 +23,7 @@
 ***************************************************************************/
 
 #include "samplereaderflac.h"
-#include "stream_decoder.h"
+#include "FLAC/stream_decoder.h"
 
 // https://xiph.org/flac/api/group__flac__stream__decoder.html
 
