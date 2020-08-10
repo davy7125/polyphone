@@ -168,6 +168,6 @@ QString Credit::getAwesomeCredit()
             "<td width='50%'>Most of the icons are provided by " +
             getFormattedLink("Awesome", "https://fontawesome.com/") +
             " under the license " +
-            getFormattedLink("CC BY 4.0", "https://creativecommons.org/licenses/by/4.0/") +
+            getFormattedLink("CC-BY 4.0", "https://creativecommons.org/licenses/by/4.0/") +
             " and have been colored to fit the themes.</td></tr>";
 }
