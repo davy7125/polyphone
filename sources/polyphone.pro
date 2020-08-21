@@ -91,7 +91,9 @@ unix:!macx {
     install_image_mimetype.path = $$PREFIX/share/icons/hicolor/scalable/mimetypes
     install_image_mimetype.files = contrib/audio-x-soundfont.svg
     install_desktop.path = $$PREFIX/share/applications
-    install_desktop.files = contrib/polyphone.desktop
+    install_desktop.files = contrib/com.polyphone_soundfonts.polyphone.desktop
+    install_appdata.path = $$PREFIX/share/metainfo
+    install_appdata.files = contrib/com.polyphone_soundfonts.polyphone.metainfo.xml
     install_mime.path = $$PREFIX/share/mime/packages
     install_mime.files = contrib/polyphone.xml
     install_man.path = $$PREFIX/share
@@ -100,7 +102,7 @@ unix:!macx {
     install_doc.files = ../README.md changelog
     
     INSTALLS += target install_image_svg install_image_png install_image_mimetype \
-                install_desktop install_mime install_man install_doc
+                install_desktop install_appdata install_mime install_man install_doc
 }
 macx {
     QMAKE_CXXFLAGS += -std=c++11
