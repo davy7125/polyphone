@@ -24,7 +24,6 @@
 
 #include "sfarkextractor2.h"
 #include "sfArkLib.h"
-#include "wcc.h"
 #include <QDebug>
 
 /////////////////////////////
@@ -92,7 +91,8 @@ int OutputFileHandle = -1;
 
 int ChkErr(const char *ErrorMsg, bool isInput)
 {
-    char ErrDesc[MAX_MSGTEXT];
+    char ErrDesc[SFARKLIB_MAX_MSGTEXT];
+    extern int GlobalErrorFlag;
 
     if (~GlobalErrorFlag)		// Prevent multiple error messages
     {
@@ -100,7 +100,7 @@ int ChkErr(const char *ErrorMsg, bool isInput)
             sprintf(ErrDesc, "Input: failed to %s", ErrorMsg);
         else
             sprintf(ErrDesc, "Output: failed to %s", ErrorMsg);
-        msg(ErrDesc, MSG_PopUp);
+        sfkl_msg(ErrDesc, SFARKLIB_MSG_PopUp);
         GlobalErrorFlag = SFARKLIB_ERR_FILEIO;
     }
 

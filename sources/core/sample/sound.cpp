@@ -31,7 +31,7 @@
 #include "qmath.h"
 #include <QFile>
 #include "contextmanager.h"
-#include "stream_decoder.h"
+#include "FLAC/stream_decoder.h"
 #include "sampleutils.h"
 #include "samplereader.h"
 #include "samplereaderfactory.h"

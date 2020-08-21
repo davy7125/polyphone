@@ -10,6 +10,8 @@
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
 #DEFINES += USE_LOCAL_QCUSTOMPLOT
+# only works on x86:
+DEFINES += USE_LOCAL_SFARKLIB
 
 # Uncomment this line to use wolfssl instead of openssl (for a license issue)
 #DEFINES += USE_WOLFSSL
@@ -956,39 +958,49 @@ RESOURCES += resources.qrc
 
 
 # SfArk extraction (what a mess!)
-DEFINES += __LITTLE_ENDIAN__
-INCLUDEPATH += lib/sfarklib
-HEADERS += lib/sfarklib/sfArkLib.h \
-    lib/sfarklib/wcc.h \
+HEADERS += \
     core/input/sfark/sfarkextractor2.h \
     core/input/sfark/abstractextractor.h
 
-SPECIAL_SOURCES = core/input/sfark/sfarkextractor1.cpp
-macx {
-    SOURCES += core/input/sfark/sfarkextractor2.cpp \
-        lib/sfarklib/sfklZip.cpp \
-        lib/sfarklib/sfklLPC.cpp \
-        lib/sfarklib/sfklDiff.cpp \
-        lib/sfarklib/sfklCrunch.cpp \
-        lib/sfarklib/sfklCoding.cpp
+contains(DEFINES, USE_LOCAL_SFARKLIB) {
+    DEFINES += __LITTLE_ENDIAN__
+    INCLUDEPATH += lib/sfarklib
+    HEADERS += lib/sfarklib/sfArkLib.h
+
+    SPECIAL_SOURCES = core/input/sfark/sfarkextractor1.cpp
+    macx {
+        SOURCES += core/input/sfark/sfarkextractor2.cpp \
+            lib/sfarklib/sfklZip.cpp \
+            lib/sfarklib/sfklLPC.cpp \
+            lib/sfarklib/sfklDiff.cpp \
+            lib/sfarklib/sfklCrunch.cpp \
+            lib/sfarklib/sfklCoding.cpp
+    } else {
+        SPECIAL_SOURCES += core/input/sfark/sfarkextractor2.cpp \
+            lib/sfarklib/sfklZip.cpp \
+            lib/sfarklib/sfklLPC.cpp \
+            lib/sfarklib/sfklDiff.cpp \
+            lib/sfarklib/sfklCrunch.cpp \
+            lib/sfarklib/sfklCoding.cpp
+    }
+    ExtraCompiler.input = SPECIAL_SOURCES
+    ExtraCompiler.variable_out = OBJECTS
+    ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
+    win32 {
+        ExtraCompiler.commands = $${QMAKE_CXX} -D__LITTLE_ENDIAN__ -MD -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
+    }
+    macx {
+        ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+    }
+    unix:!macx {
+        ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+    }
+    QMAKE_EXTRA_COMPILERS += ExtraCompiler
 } else {
-    SPECIAL_SOURCES += core/input/sfark/sfarkextractor2.cpp \
-        lib/sfarklib/sfklZip.cpp \
-        lib/sfarklib/sfklLPC.cpp \
-        lib/sfarklib/sfklDiff.cpp \
-        lib/sfarklib/sfklCrunch.cpp \
-        lib/sfarklib/sfklCoding.cpp
+    # use system-wide copy instead
+    LIBS += -lsfark
+
+    SOURCES += \
+        core/input/sfark/sfarkextractor1.cpp \
+        core/input/sfark/sfarkextractor2.cpp
 }
-ExtraCompiler.input = SPECIAL_SOURCES
-ExtraCompiler.variable_out = OBJECTS
-ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
-win32 {
-    ExtraCompiler.commands = $${QMAKE_CXX} -D__LITTLE_ENDIAN__ -MD -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
-}
-macx {
-    ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-}
-unix:!macx {
-    ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-}
-QMAKE_EXTRA_COMPILERS += ExtraCompiler
