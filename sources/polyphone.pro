@@ -11,6 +11,9 @@
 #DEFINES += USE_LOCAL_STK
 #DEFINES += USE_LOCAL_QCUSTOMPLOT
 
+# Uncomment this line to use wolfssl instead of openssl (for a license issue)
+#DEFINES += USE_WOLFSSL
+
 # Polyphone version
 DEFINES += SOFT_VERSION=\\\"2.2.0\\\"
 DEFINES += IDENTIFIER=\\\"\\\"
@@ -66,7 +69,12 @@ unix:!macx {
     QMAKE_CXXFLAGS += -std=c++11
     DEFINES += __LINUX_ALSASEQ__ __UNIX_JACK__
     CONFIG += link_pkgconfig
-    PKGCONFIG += alsa jack portaudio-2.0 zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0 wolfssl
+    PKGCONFIG += alsa jack portaudio-2.0 zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0
+    contains(DEFINES, USE_WOLFSSL) {
+        PKGCONFIG += wolfssl
+    } else {
+        PKGCONFIG += openssl
+    }
     isEmpty(PREFIX) {
         PREFIX = /usr/local
     }

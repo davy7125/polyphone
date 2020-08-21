@@ -2580,7 +2580,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="371"/>
         <source>Multiply from:</source>
-        <translation type=nfinished">다음으로부터 곱하기:</translation>
+        <translation type="finished">다음으로부터 곱하기:</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="373"/>
