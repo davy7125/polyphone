@@ -109,7 +109,7 @@ typedef struct
 const char	LicenseExt[] = ".license.txt";		// File extension for license file
 const char	NotesExt[] = ".txt";			// File extension for notes file
 
-static	BYTE *Zbuf1 = NULL, *Zbuf2 = nullptr;
+static	BYTE *Zbuf1 = nullptr, *Zbuf2 = nullptr;
 
 // Data per block, passed to ProcessNextBlock()
 typedef	struct
@@ -698,10 +698,10 @@ int Decode(const char *InFileName, const char *ReqOutFileName)
     static BYTE	Zbuf2[ZBUF_SIZE];				// Buffer2
 
 #else
-    if (Zbuf1 == NULL) Zbuf1 = (BYTE *) calloc(ZBUF_SIZE, sizeof(BYTE));
-    if (Zbuf2 == NULL) Zbuf2 = (BYTE *) calloc(ZBUF_SIZE, sizeof(BYTE));
+    if (Zbuf1 == nullptr) Zbuf1 = (BYTE *) calloc(ZBUF_SIZE, sizeof(BYTE));
+    if (Zbuf2 == nullptr) Zbuf2 = (BYTE *) calloc(ZBUF_SIZE, sizeof(BYTE));
 
-    if (Zbuf1 == NULL  ||  Zbuf2 == NULL)
+    if (Zbuf1 == nullptr  ||  Zbuf2 == nullptr)
         return EndProcess(SFARKLIB_ERR_MALLOC);
 #endif
 
@@ -720,7 +720,7 @@ int Decode(const char *InFileName, const char *ReqOutFileName)
 
     if (GlobalErrorFlag)  return EndProcess(GlobalErrorFlag);				// Something went wrong?
 
-    if (ReqOutFileName == NULL)							// If no output filename requested
+    if (ReqOutFileName == nullptr)							// If no output filename requested
         ReqOutFileName = FileHeader->FileName;
 
     if ((FileHeader->Flags & FLAGS_License) != 0)		// License file exists?

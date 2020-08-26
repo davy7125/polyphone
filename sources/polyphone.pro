@@ -10,7 +10,6 @@
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
 #DEFINES += USE_LOCAL_QCUSTOMPLOT
-# only works on x86:
 DEFINES += USE_LOCAL_SFARKLIB
 
 # Uncomment this line to use wolfssl instead of openssl (for a license issue)
