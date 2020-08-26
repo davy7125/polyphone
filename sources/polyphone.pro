@@ -49,10 +49,7 @@ include(lib/qtsingleapplication/qtsingleapplication.pri)
 
 win32 {
     DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
-    INCLUDEPATH += lib \
-        lib/ogg_vorbis \
-        lib/flac \
-        ../lib_windows/include
+    INCLUDEPATH += ../lib_windows/include
     RC_FILE = polyphone.rc
 
     !contains(QMAKE_TARGET.arch, x86_64) {
@@ -79,7 +76,6 @@ unix:!macx {
     isEmpty(PREFIX) {
         PREFIX = /usr/local
     }
-    INCLUDEPATH += lib/flac
     DESTDIR=bin
     
     # Install target
@@ -111,9 +107,6 @@ macx {
     QMAKE_MAC_SDK = macosx10.14
     DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
     INCLUDEPATH += ../lib_mac/Jackmp.framework/Headers \
-        lib \
-        lib/ogg_vorbis \
-        lib/flac \
         ../lib_mac/include
     LIBS += -L$$PWD/../lib_mac -lportaudio -logg -lFLAC -lvorbis -lssl -lcrypto -F$$PWD/../lib_mac/ -framework Jackmp \
         -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
@@ -128,7 +121,7 @@ DEFINES += SFTOOLS_NOXML
 contains(DEFINES, USE_LOCAL_RTMIDI) {
     HEADERS += lib/rtmidi/RtMidi.h
     SOURCES += lib/rtmidi/RtMidi.cpp
-    INCLUDEPATH += lib/rtmidi
+
 } else {
     PKGCONFIG += rtmidi
 }
@@ -154,7 +147,6 @@ contains(DEFINES, USE_LOCAL_STK) {
         lib/stk/FreeVerb.cpp \
         lib/stk/DelayL.cpp \
         lib/stk/Iir.cpp
-    INCLUDEPATH += lib/stk
 } else {
     LIBS += -lstk
 }
@@ -163,13 +155,64 @@ contains(DEFINES, USE_LOCAL_STK) {
 contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
     HEADERS += lib/qcustomplot/qcustomplot.h
     SOURCES += lib/qcustomplot/qcustomplot.cpp
-    INCLUDEPATH += lib/qcustomplot
 } else {
     LIBS += -lqcustomplot
-    INCLUDEPATH += $$PREFIX/include/qcustomplot
 }
 
-INCLUDEPATH += mainwindow \
+# Location of sfArk
+HEADERS += \
+    core/input/sfark/sfarkextractor2.h \
+    core/input/sfark/abstractextractor.h
+
+contains(DEFINES, USE_LOCAL_SFARKLIB) {
+    DEFINES += __LITTLE_ENDIAN__
+    HEADERS += lib/sfarklib/sfArkLib.h
+
+    # special compilation for the sfArk extraction (what a mess!)
+    SPECIAL_SOURCES = core/input/sfark/sfarkextractor1.cpp
+    macx {
+        SOURCES += core/input/sfark/sfarkextractor2.cpp \
+            lib/sfarklib/sfklZip.cpp \
+            lib/sfarklib/sfklLPC.cpp \
+            lib/sfarklib/sfklDiff.cpp \
+            lib/sfarklib/sfklCrunch.cpp \
+            lib/sfarklib/sfklCoding.cpp
+    } else {
+        SPECIAL_SOURCES += core/input/sfark/sfarkextractor2.cpp \
+            lib/sfarklib/sfklZip.cpp \
+            lib/sfarklib/sfklLPC.cpp \
+            lib/sfarklib/sfklDiff.cpp \
+            lib/sfarklib/sfklCrunch.cpp \
+            lib/sfarklib/sfklCoding.cpp
+    }
+    ExtraCompiler.input = SPECIAL_SOURCES
+    ExtraCompiler.variable_out = OBJECTS
+    ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
+    win32 {
+        ExtraCompiler.commands = $${QMAKE_CXX} -D__LITTLE_ENDIAN__ -MD -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
+    }
+    macx {
+        ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+    }
+    unix:!macx {
+        contains(QT_ARCH, i386) {
+            ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ -march=pentium3 -mfpmath=sse $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+        } else {
+            ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+        }
+    }
+    QMAKE_EXTRA_COMPILERS += ExtraCompiler
+} else {
+    LIBS += -lsfark
+
+    SOURCES += \
+        core/input/sfark/sfarkextractor1.cpp \
+        core/input/sfark/sfarkextractor2.cpp
+}
+
+
+INCLUDEPATH += lib \
+    mainwindow \
     dialogs \
     context \
     context/interface \
@@ -191,7 +234,6 @@ INCLUDEPATH += mainwindow \
     clavier \
     sound_engine \
     sound_engine/elements \
-    lib/sf3 \
     repository \
     repository/browser \
     repository/daily \
@@ -954,56 +996,3 @@ DISTFILES += \
     changelog
 
 RESOURCES += resources.qrc
-
-
-# SfArk extraction (what a mess!)
-HEADERS += \
-    core/input/sfark/sfarkextractor2.h \
-    core/input/sfark/abstractextractor.h
-
-contains(DEFINES, USE_LOCAL_SFARKLIB) {
-    DEFINES += __LITTLE_ENDIAN__
-    INCLUDEPATH += lib/sfarklib
-    HEADERS += lib/sfarklib/sfArkLib.h
-
-    SPECIAL_SOURCES = core/input/sfark/sfarkextractor1.cpp
-    macx {
-        SOURCES += core/input/sfark/sfarkextractor2.cpp \
-            lib/sfarklib/sfklZip.cpp \
-            lib/sfarklib/sfklLPC.cpp \
-            lib/sfarklib/sfklDiff.cpp \
-            lib/sfarklib/sfklCrunch.cpp \
-            lib/sfarklib/sfklCoding.cpp
-    } else {
-        SPECIAL_SOURCES += core/input/sfark/sfarkextractor2.cpp \
-            lib/sfarklib/sfklZip.cpp \
-            lib/sfarklib/sfklLPC.cpp \
-            lib/sfarklib/sfklDiff.cpp \
-            lib/sfarklib/sfklCrunch.cpp \
-            lib/sfarklib/sfklCoding.cpp
-    }
-    ExtraCompiler.input = SPECIAL_SOURCES
-    ExtraCompiler.variable_out = OBJECTS
-    ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
-    win32 {
-        ExtraCompiler.commands = $${QMAKE_CXX} -D__LITTLE_ENDIAN__ -MD -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
-    }
-    macx {
-        ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-    }
-    unix:!macx {
-        contains(QT_ARCH, i386) {
-            ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ -march=pentium3 -mfpmath=sse $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-        } else {
-            ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-        }
-    }
-    QMAKE_EXTRA_COMPILERS += ExtraCompiler
-} else {
-    # use system-wide copy instead
-    LIBS += -lsfark
-
-    SOURCES += \
-        core/input/sfark/sfarkextractor1.cpp \
-        core/input/sfark/sfarkextractor2.cpp
-}

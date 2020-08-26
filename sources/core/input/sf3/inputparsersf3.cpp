@@ -24,7 +24,7 @@
 
 #include "inputparsersf3.h"
 #include "soundfontmanager.h"
-#include "sfont.h"
+#include "sf3/sfont.h"
 #include "inputfactory.h"
 
 InputParserSf3::InputParserSf3() : AbstractInputParser() {}

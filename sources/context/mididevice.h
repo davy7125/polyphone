@@ -30,7 +30,7 @@
 #include <QObject>
 #include <QMap>
 #include <QMutex>
-#include "RtMidi.h"
+#include "rtmidi/RtMidi.h"
 class ConfManager;
 class RtMidiIn;
 class PianoKeybdCustom;

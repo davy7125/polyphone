@@ -25,7 +25,7 @@
 #ifndef GRAPHIQUEFOURIER_H
 #define GRAPHIQUEFOURIER_H
 
-#include "qcustomplot.h"
+#include "qcustomplot/qcustomplot.h"
 #include "basetypes.h"
 class QMenu;
 

@@ -27,7 +27,7 @@
 #include "toolmonitor_parameters.h"
 #include "soundfontmanager.h"
 #include "contextmanager.h"
-#include "qcustomplot.h"
+#include "qcustomplot/qcustomplot.h"
 
 ToolMonitor_gui::ToolMonitor_gui(QWidget *parent) :
     AbstractToolGui(parent),

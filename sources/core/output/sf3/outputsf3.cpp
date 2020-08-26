@@ -23,7 +23,7 @@
 ***************************************************************************/
 
 #include "outputsf3.h"
-#include "sfont.h"
+#include "sf3/sfont.h"
 #include "outputfactory.h"
 #include <QFile>
 #include <QVariant>

@@ -25,7 +25,7 @@
 #ifndef GRAPHFILTERFREQUENCIES_H
 #define GRAPHFILTERFREQUENCIES_H
 
-#include "qcustomplot.h"
+#include "qcustomplot/qcustomplot.h"
 
 class GraphFilterFrequencies : public QCustomPlot
 {
