@@ -119,42 +119,44 @@ DEFINES += SFTOOLS_NOXML
 
 # Location of RtMidi
 contains(DEFINES, USE_LOCAL_RTMIDI) {
-    HEADERS += lib/rtmidi/RtMidi.h
-    SOURCES += lib/rtmidi/RtMidi.cpp
-
+    INCLUDEPATH += lib/_option_rtmidi
+    HEADERS += lib/_option_rtmidi/RtMidi.h
+    SOURCES += lib/_option_rtmidi/RtMidi.cpp
 } else {
     PKGCONFIG += rtmidi
 }
 
 # Location of Stk
 contains(DEFINES, USE_LOCAL_STK) {
-    HEADERS += lib/stk/Stk.h \
-        lib/stk/SineWave.h \
-        lib/stk/OnePole.h \
-        lib/stk/Generator.h \
-        lib/stk/Filter.h \
-        lib/stk/Effect.h \
-        lib/stk/Delay.h \
-        lib/stk/Chorus.h \
-        lib/stk/FreeVerb.h \
-        lib/stk/DelayL.h \
-        lib/stk/Iir.h
-    SOURCES += lib/stk/Stk.cpp \
-        lib/stk/SineWave.cpp \
-        lib/stk/OnePole.cpp \
-        lib/stk/Delay.cpp \
-        lib/stk/Chorus.cpp \
-        lib/stk/FreeVerb.cpp \
-        lib/stk/DelayL.cpp \
-        lib/stk/Iir.cpp
+    INCLUDEPATH += lib/_option_stk
+    HEADERS += lib/_option_stk/stk/Stk.h \
+        lib/_option_stk/stk/SineWave.h \
+        lib/_option_stk/stk/OnePole.h \
+        lib/_option_stk/stk/Generator.h \
+        lib/_option_stk/stk/Filter.h \
+        lib/_option_stk/stk/Effect.h \
+        lib/_option_stk/stk/Delay.h \
+        lib/_option_stk/stk/Chorus.h \
+        lib/_option_stk/stk/FreeVerb.h \
+        lib/_option_stk/stk/DelayL.h \
+        lib/_option_stk/stk/Iir.h
+    SOURCES += lib/_option_stk/stk/Stk.cpp \
+        lib/_option_stk/stk/SineWave.cpp \
+        lib/_option_stk/stk/OnePole.cpp \
+        lib/_option_stk/stk/Delay.cpp \
+        lib/_option_stk/stk/Chorus.cpp \
+        lib/_option_stk/stk/FreeVerb.cpp \
+        lib/_option_stk/stk/DelayL.cpp \
+        lib/_option_stk/stk/Iir.cpp
 } else {
     LIBS += -lstk
 }
 
 # Location of QCustomplot
 contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
-    HEADERS += lib/qcustomplot/qcustomplot.h
-    SOURCES += lib/qcustomplot/qcustomplot.cpp
+    INCLUDEPATH += lib/_option_qcustomplot
+    HEADERS += lib/_option_qcustomplot/qcustomplot.h
+    SOURCES += lib/_option_qcustomplot/qcustomplot.cpp
 } else {
     LIBS += -lqcustomplot
 }
@@ -163,53 +165,20 @@ contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
 HEADERS += \
     core/input/sfark/sfarkextractor2.h \
     core/input/sfark/abstractextractor.h
-
+SPECIAL_SOURCES = core/input/sfark/sfarkextractor1.cpp \
+    core/input/sfark/sfarkextractor2.cpp
 contains(DEFINES, USE_LOCAL_SFARKLIB) {
     DEFINES += __LITTLE_ENDIAN__
-    HEADERS += lib/sfarklib/sfArkLib.h
-
-    # special compilation for the sfArk extraction (what a mess!)
-    SPECIAL_SOURCES = core/input/sfark/sfarkextractor1.cpp
-    macx {
-        SOURCES += core/input/sfark/sfarkextractor2.cpp \
-            lib/sfarklib/sfklZip.cpp \
-            lib/sfarklib/sfklLPC.cpp \
-            lib/sfarklib/sfklDiff.cpp \
-            lib/sfarklib/sfklCrunch.cpp \
-            lib/sfarklib/sfklCoding.cpp
-    } else {
-        SPECIAL_SOURCES += core/input/sfark/sfarkextractor2.cpp \
-            lib/sfarklib/sfklZip.cpp \
-            lib/sfarklib/sfklLPC.cpp \
-            lib/sfarklib/sfklDiff.cpp \
-            lib/sfarklib/sfklCrunch.cpp \
-            lib/sfarklib/sfklCoding.cpp
-    }
-    ExtraCompiler.input = SPECIAL_SOURCES
-    ExtraCompiler.variable_out = OBJECTS
-    ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
-    win32 {
-        ExtraCompiler.commands = $${QMAKE_CXX} -D__LITTLE_ENDIAN__ -MD -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
-    }
-    macx {
-        ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-    }
-    unix:!macx {
-        contains(QT_ARCH, i386) {
-            ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ -march=pentium3 -mfpmath=sse $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-        } else {
-            ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-        }
-    }
-    QMAKE_EXTRA_COMPILERS += ExtraCompiler
+    INCLUDEPATH += lib/_option_sfarklib
+    HEADERS += lib/_option_sfarklib/sfArkLib.h
+    SPECIAL_SOURCES += lib/_option_sfarklib/sfklZip.cpp \
+        lib/_option_sfarklib/sfklLPC.cpp \
+        lib/_option_sfarklib/sfklDiff.cpp \
+        lib/_option_sfarklib/sfklCrunch.cpp \
+        lib/_option_sfarklib/sfklCoding.cpp
 } else {
     LIBS += -lsfark
-
-    SOURCES += \
-        core/input/sfark/sfarkextractor1.cpp \
-        core/input/sfark/sfarkextractor2.cpp
 }
-
 
 INCLUDEPATH += lib \
     mainwindow \
@@ -880,7 +849,7 @@ HEADERS += \
     context/programevent.h \
     clavier/controllerarea.h \
     clavier/combocc.h \
-    lib/Iir_2.h \
+    lib/iir/Iir_2.h \
     lib/iir/Biquad.h \
     lib/iir/Butterworth.h \
     lib/iir/Cascade.h \
@@ -996,3 +965,22 @@ DISTFILES += \
     changelog
 
 RESOURCES += resources.qrc
+
+# Special build options for sfArk
+ExtraCompiler.input = SPECIAL_SOURCES
+ExtraCompiler.variable_out = OBJECTS
+ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
+win32 {
+    ExtraCompiler.commands = $${QMAKE_CXX} -D__LITTLE_ENDIAN__ -MD -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
+}
+macx {
+    ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+}
+unix:!macx {
+    contains(QT_ARCH, i386) {
+        ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ -march=pentium3 -mfpmath=sse $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+    } else {
+        ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+    }
+}
+QMAKE_EXTRA_COMPILERS += ExtraCompiler

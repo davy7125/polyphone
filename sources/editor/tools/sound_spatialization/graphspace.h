@@ -25,7 +25,7 @@
 #ifndef GRAPHSPACE_H
 #define GRAPHSPACE_H
 
-#include "qcustomplot/qcustomplot.h"
+#include "qcustomplot.h"
 
 class GraphSpace : public QCustomPlot
 {

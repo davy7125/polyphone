@@ -25,7 +25,7 @@
 #ifndef GRAPHVISUALIZER_H
 #define GRAPHVISUALIZER_H
 
-#include "qcustomplot/qcustomplot.h"
+#include "qcustomplot.h"
 
 class GraphVisualizer : public QCustomPlot
 {

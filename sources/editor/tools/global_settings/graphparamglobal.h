@@ -25,7 +25,7 @@
 #ifndef GRAPHPARAMGLOBAL_H
 #define GRAPHPARAMGLOBAL_H
 
-#include "qcustomplot/qcustomplot.h"
+#include "qcustomplot.h"
 
 class GraphParamGlobal : public QCustomPlot
 {

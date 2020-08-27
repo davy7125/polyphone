@@ -28,7 +28,7 @@
 
 #include <QVector>
 #include <QMutex>
-#include "lib/Iir_2.h"
+#include "iir/Iir_2.h"
 
 class LiveEQ
 {

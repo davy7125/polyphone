@@ -25,7 +25,7 @@
 #ifndef GRAPHLEGEND_H
 #define GRAPHLEGEND_H
 
-#include "qcustomplot/qcustomplot.h"
+#include "qcustomplot.h"
 
 class GraphLegend : public QCustomPlot
 {

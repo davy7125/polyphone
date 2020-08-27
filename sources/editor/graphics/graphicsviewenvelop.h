@@ -25,7 +25,7 @@
 #ifndef GRAPHICSVIEWENVELOPS_H
 #define GRAPHICSVIEWENVELOPS_H
 
-#include "qcustomplot/qcustomplot.h"
+#include "qcustomplot.h"
 #include "soundfontmanager.h"
 #include "envelop.h"
 

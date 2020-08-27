@@ -23,7 +23,7 @@
 ***************************************************************************/
 
 #include "sfarkextractor2.h"
-#include "sfarklib/sfArkLib.h"
+#include "sfArkLib.h"
 #include <QDebug>
 
 /////////////////////////////
