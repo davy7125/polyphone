@@ -58,7 +58,7 @@ DEFINES += USE_LOCAL_QCUSTOMPLOT
 sudo dnf install rtmidi-devel stk-devel qcustomplot-devel
 ```
 
-Cependant, l'exécution de **Polyphone** engendre a crash immédiat (bug dans PortAudio ?).
+Cependant, l'exécution de **Polyphone** engendre un crash immédiat (bug dans PortAudio ?).
 Étant donné que sur Windows et Mac l'utilisation des versions distribuées de :program:`rtmidi`, :program:`stk` et :program:`qcustomplot` est obligatoire, vous pouvez considérer qu'il n'y a aucun bénéfice à résoudre le problème de ces dépendances.
 
 

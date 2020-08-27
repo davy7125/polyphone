@@ -55,9 +55,7 @@ DEFINES += USE_LOCAL_QCUSTOMPLOT
 **Note:** instead of these modifications you could try to build Polyphone with the Fedora / RPM distributions for these packages. The installation command would be:
 
 ```
-sudo dnf install rtmidi-devel
-sudo dnf install stk-devel
-sudo dnf install qcustomplot-devel
+sudo dnf install rtmidi-devel stk-devel qcustomplot-devel
 ```
 
 However, running **Polyphone** afterwards results in an immediate crash (PortAudio bug?).
