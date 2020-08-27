@@ -23,9 +23,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include <ogg_vorbis/vorbis/vorbisenc.h>
-#include <ogg_vorbis/vorbis/codec.h>
-#include <ogg_vorbis/vorbis/vorbisfile.h>
+#include <vorbis/vorbisenc.h>
+#include <vorbis/codec.h>
+#include <vorbis/vorbisfile.h>
 
 #include "sfont.h"
 #include "time.h"
