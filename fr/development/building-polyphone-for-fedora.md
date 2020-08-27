@@ -25,7 +25,7 @@ sudo dnf install qt-creator qt5-qtsvg-devel qt5-qttools-devel
 Installez les dépendances suivantes (si vous avez :program:`Synaptic` installé vous pouvez aussi l'utiliser)&nbsp;:
 
 ```
-sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel portaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel
+sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel portaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel rtmidi-devel stk-devel qcustomplot-qt5-devel
 ```
 
 
@@ -43,23 +43,26 @@ Si vous souhaitez continuer la compilation avec Qt Creator, suivez maintenant ce
 ### Modifications du fichier "polyphone.pro"
 
 
-Modifiez le fichier :file:`polyphone.pro` de manière à utiliser les versions fournies de :program:`rtmidi`, :program:`stk` et :program:`qcustomplot`.
-Décommentez les lignes suivantes en enlevant le premier caractère "#"&nbsp;:
+Ouvrez le fichier :file:`polyphone.pro` et changez **-lqcustomplot** en **-lqcustomplot-qt5** (ajoutez "-qt5") dans le bloc suivant&nbsp;:
 
 ```
-DEFINES += USE_LOCAL_RTMIDI
-DEFINES += USE_LOCAL_STK
+# Location of QCustomplot
+contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
+    INCLUDEPATH += lib/_option_qcustomplot
+    HEADERS += lib/_option_qcustomplot/qcustomplot.h
+    SOURCES += lib/_option_qcustomplot/qcustomplot.cpp
+} else {
+    LIBS += -lqcustomplot
+}
+```
+
+Cette modification est requise sinon Polyphone plantera avec une segmentation fault au démarrage.
+
+Une autre solution est de décommenter (enlever le "#" au début d'une ligne) la ligne suivante pour utiliser une copie embarquée de la bibliothèque qcustomplot&nbsp;:
+
+```
 DEFINES += USE_LOCAL_QCUSTOMPLOT
 ```
-
-**Note&nbsp;:** au lieu d'introduire ces modifications vous pouvez essayer de compiler Polyphone avec les paquets distribués par Fedora / RPM. La commande d'installation est&nbsp;:
-
-```
-sudo dnf install rtmidi-devel stk-devel qcustomplot-devel
-```
-
-Cependant, l'exécution de **Polyphone** engendre un crash immédiat (bug dans PortAudio ?).
-Étant donné que sur Windows et Mac l'utilisation des versions distribuées de :program:`rtmidi`, :program:`stk` et :program:`qcustomplot` est obligatoire, vous pouvez considérer qu'il n'y a aucun bénéfice à résoudre le problème de ces dépendances.
 
 
 ### Obtenir l'exécutable

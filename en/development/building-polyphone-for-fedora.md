@@ -25,7 +25,7 @@ sudo dnf install qt-creator qt5-qtsvg-devel qt5-qttools-devel
 Install the following dependencies (if you have :program:`Synaptic` installed you could alternatively use it for installation):
 
 ```
-sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel portaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel
+sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel portaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel rtmidi-devel stk-devel qcustomplot-qt5-devel
 ```
 
 
@@ -43,23 +43,26 @@ If you want to continue the build with Qt Creator, follow now this tutorial: [bu
 ### polyphone.pro modifications
 
 
-Modify the file :file:`polyphone.pro` to use distributed versions for :program:`rtmidi`, :program:`stk` and :program:`qcustomplot`.
-Uncomment the following lines by removing the leading ‘#’:
+Open the file :file:`polyphone.pro` and change **-lqcustomplot** into **-lqcustomplot-qt5** (add "-qt5") in the following block:
 
 ```
-DEFINES += USE_LOCAL_RTMIDI
-DEFINES += USE_LOCAL_STK
+# Location of QCustomplot
+contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
+    INCLUDEPATH += lib/_option_qcustomplot
+    HEADERS += lib/_option_qcustomplot/qcustomplot.h
+    SOURCES += lib/_option_qcustomplot/qcustomplot.cpp
+} else {
+    LIBS += -lqcustomplot
+}
+```
+
+This is required otherwise Polyphone will crash with a segmentation fault during startup.
+
+Alternatively, you can uncomment (remove the leading "#") the following line so that you use an embedded copy of the qcustomplot library:
+
+```
 DEFINES += USE_LOCAL_QCUSTOMPLOT
 ```
-
-**Note:** instead of these modifications you could try to build Polyphone with the Fedora / RPM distributions for these packages. The installation command would be:
-
-```
-sudo dnf install rtmidi-devel stk-devel qcustomplot-devel
-```
-
-However, running **Polyphone** afterwards results in an immediate crash (PortAudio bug?).
-As on Windows and Mac Systems the use of the local distributed :program:`rtmidi`, :program:`stk` and :program:`qcustomplot` versions are forced you may not saw any benefit in sorting out the issue with the dependencies.
 
 
 ### Getting the executable
