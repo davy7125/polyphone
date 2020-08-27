@@ -68,7 +68,7 @@ Cependant, l'exécution de **Polyphone** engendre un crash immédiat (bug dans P
 Placez-vous dans le répertoire des sources (là où se trouve :file:`polyphone.pro`), ouvrez un terminal et compilez Polyphone avec cette commande&nbsp;:
 
 ```
-qmake && make
+qmake-qt5 && make
 ```
 
 Si tout se passe bien, vous aurez le fichier compilé :file:`polyphone` dans un répertoire :file:`build-XXX` à côté de :file:`sources`.

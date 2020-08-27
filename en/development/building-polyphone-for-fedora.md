@@ -68,7 +68,7 @@ As on Windows and Mac Systems the use of the local distributed :program:`rtmidi`
 Go into source directory (where the file :file:`polyphone.pro` is located), open a terminal and build Polyphone with this command:
 
 ```
-qmake && make
+qmake-qt5 && make
 ```
 
 If everything goes well you will have the compiled file :file:`polyphone` in the :file:`build-XXX` subdirectory next to :file:`sources`.
