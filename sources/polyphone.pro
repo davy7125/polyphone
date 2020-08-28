@@ -171,11 +171,19 @@ contains(DEFINES, USE_LOCAL_SFARKLIB) {
     DEFINES += __LITTLE_ENDIAN__
     INCLUDEPATH += lib/_option_sfarklib
     HEADERS += lib/_option_sfarklib/sfArkLib.h
-    SPECIAL_SOURCES += lib/_option_sfarklib/sfklZip.cpp \
-        lib/_option_sfarklib/sfklLPC.cpp \
-        lib/_option_sfarklib/sfklDiff.cpp \
-        lib/_option_sfarklib/sfklCrunch.cpp \
-        lib/_option_sfarklib/sfklCoding.cpp
+    macx {
+        SOURCES += lib/_option_sfarklib/sfklZip.cpp \
+            lib/_option_sfarklib/sfklLPC.cpp \
+            lib/_option_sfarklib/sfklDiff.cpp \
+            lib/_option_sfarklib/sfklCrunch.cpp \
+            lib/_option_sfarklib/sfklCoding.cpp
+    } else {
+        SPECIAL_SOURCES += lib/_option_sfarklib/sfklZip.cpp \
+            lib/_option_sfarklib/sfklLPC.cpp \
+            lib/_option_sfarklib/sfklDiff.cpp \
+            lib/_option_sfarklib/sfklCrunch.cpp \
+            lib/_option_sfarklib/sfklCoding.cpp
+    }
 } else {
     LIBS += -lsfark
 }
