@@ -123,7 +123,6 @@ contains(DEFINES, USE_LOCAL_RTMIDI) {
     HEADERS += lib/_option_rtmidi/rtmidi/RtMidi.h
     SOURCES += lib/_option_rtmidi/rtmidi/RtMidi.cpp
 } else {
-    INCLUDEPATH += rtmidi # Sometimes needed (for Ubuntu Xenial for instance)
     PKGCONFIG += rtmidi
 }
 
