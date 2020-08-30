@@ -1,10 +1,6 @@
 /sources/Makefile*
 /sources/polyphone.pro.user*
 /sources/.qmake.stash
-/sources/generated_files
 /build-*
-**/polyphone.exe
-deployment
 lib_*
 .DS_Store
-debian/*
