@@ -120,9 +120,10 @@ DEFINES += SFTOOLS_NOXML
 # Location of RtMidi
 contains(DEFINES, USE_LOCAL_RTMIDI) {
     INCLUDEPATH += lib/_option_rtmidi
-    HEADERS += lib/_option_rtmidi/RtMidi.h
-    SOURCES += lib/_option_rtmidi/RtMidi.cpp
+    HEADERS += lib/_option_rtmidi/rtmidi/RtMidi.h
+    SOURCES += lib/_option_rtmidi/rtmidi/RtMidi.cpp
 } else {
+    INCLUDEPATH += rtmidi # Sometimes needed (for Ubuntu Xenial for instance)
     PKGCONFIG += rtmidi
 }
 
