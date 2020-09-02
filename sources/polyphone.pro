@@ -178,7 +178,7 @@ contains(DEFINES, USE_LOCAL_SFARKLIB) {
             lib/_option_sfarklib/sfklCrunch.cpp \
             lib/_option_sfarklib/sfklCoding.cpp
     } else {
-        SPECIAL_SOURCES += lib/_option_sfarklib/sfklZip.cpp \
+        SOURCES += lib/_option_sfarklib/sfklZip.cpp \
             lib/_option_sfarklib/sfklLPC.cpp \
             lib/_option_sfarklib/sfklDiff.cpp \
             lib/_option_sfarklib/sfklCrunch.cpp \
@@ -973,15 +973,3 @@ DISTFILES += \
     changelog
 
 RESOURCES += resources.qrc
-
-# Special build options for sfArk
-ExtraCompiler.input = SPECIAL_SOURCES
-ExtraCompiler.variable_out = OBJECTS
-ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
-win32 {
-    ExtraCompiler.commands = $${QMAKE_CXX} -MD -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
-}
-unix {
-    ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -ffloat-store $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-}
-QMAKE_EXTRA_COMPILERS += ExtraCompiler
