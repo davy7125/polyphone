@@ -165,7 +165,7 @@ contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
 HEADERS += \
     core/input/sfark/sfarkextractor2.h \
     core/input/sfark/abstractextractor.h
-SPECIAL_SOURCES = core/input/sfark/sfarkextractor1.cpp \
+SOURCES += core/input/sfark/sfarkextractor1.cpp \
     core/input/sfark/sfarkextractor2.cpp
 contains(DEFINES, USE_LOCAL_SFARKLIB) {
     DEFINES += __LITTLE_ENDIAN__
