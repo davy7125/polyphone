@@ -181,11 +181,11 @@ AttributeValue Attribute::fromRealValue(AttributeType champ, bool isPrst, double
         break;
     case champ_startloopAddrsCoarseOffset: case champ_endloopAddrsCoarseOffset:
     case champ_startAddrsCoarseOffset: case champ_endAddrsCoarseOffset:
-        storedValue.shValue = Utils::round16(realValue) / 32768;
+        storedValue.shValue = static_cast<qint16>(qRound(realValue) / 32768);
         break;
     case champ_startloopAddrsOffset: case champ_startAddrsOffset:
     case champ_endloopAddrsOffset: case champ_endAddrsOffset:
-        storedValue.shValue = static_cast<qint16>(Utils::round16(realValue) % 32768);
+        storedValue.shValue = static_cast<qint16>(qRound(realValue) % 32768);
         break;
     case champ_keyRange: case champ_velRange:
         storedValue.rValue.byHi = static_cast<quint8>(0.001 * realValue);
