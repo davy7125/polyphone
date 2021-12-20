@@ -62,6 +62,7 @@ private:
     static int compareKey(SoundfontManager *sm, EltID idDiv1, EltID idDiv2);
     static int compareVelocity(SoundfontManager *sm, EltID idDiv1, EltID idDiv2);
     static int compareName(SoundfontManager *sm, EltID idDiv1, EltID idDiv2);
+    static QString removeSuffix(QString txt);
 
     static QString s_diacriticLetters;
     static QStringList s_noDiacriticLetters;

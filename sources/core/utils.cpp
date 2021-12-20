@@ -142,14 +142,15 @@ QString Utils::commonPart(QStringList list)
     if (list.empty())
         return "";
 
-    QString commonPart = list.takeFirst();
+    QString commonPart = removeSuffix(list.takeFirst());
     while (!list.empty())
     {
-        QString otherStr = list.takeFirst();
-        int maxCharNumber = qMin(commonPart.length(), otherStr.length());
-        while (maxCharNumber > 0 && commonPart.left(maxCharNumber) != otherStr.left(maxCharNumber))
-            maxCharNumber--;
-        commonPart = commonPart.left(maxCharNumber);
+        QString otherStr = removeSuffix(list.takeFirst());
+
+        int sameCharNumber = 0;
+        while (sameCharNumber < commonPart.length() && sameCharNumber < otherStr.length() && commonPart[sameCharNumber] == otherStr[sameCharNumber])
+            sameCharNumber++;
+        commonPart = commonPart.left(sameCharNumber);
     }
 
     // Remove the extra "-" or spaces at the end and return the result
@@ -302,6 +303,21 @@ int Utils::compareName(SoundfontManager *sm, EltID idDiv1, EltID idDiv2)
     if (name1 != name2)
         return naturalOrder(name1, name2);
     return 0;
+}
+
+QString Utils::removeSuffix(QString txt)
+{
+    // Detect a possible suffix like "-01" or " 061R" at the end and remove it
+    QRegExp regExp1("-[0-9]{2}");
+    QRegExp regExp2(" [0-9]{3}");
+    QRegExp regExp3(" [0-9]{3}[LR]");
+    if (txt.size() >= 3 && txt.lastIndexOf(regExp1) == txt.size() - 3)
+        return txt.left(txt.size() - 3);
+    if (txt.size() >= 4 && txt.lastIndexOf(regExp2) == txt.size() - 4)
+        return txt.left(txt.size() - 4);
+    if (txt.size() >= 5 && txt.lastIndexOf(regExp3) == txt.size() - 5)
+        return txt.left(txt.size() - 5);
+    return txt;
 }
 
 void Utils::prepareConversionTables()
