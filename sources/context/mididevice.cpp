@@ -224,7 +224,6 @@ void MidiDevice::openMidiPort(QString source)
     }
 
     // Associate a callback
-    _midiin->ignoreTypes(false, false, false);
     _midiin->setCallback(&midiCallback, this);
 
     // Initialize the midi connection
