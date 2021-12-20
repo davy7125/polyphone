@@ -864,8 +864,9 @@ bool Duplicator::isGlobalEmpty(EltID id)
     return isEmpty;
 }
 
-QString Duplicator::adaptName(QString nom, EltID idDest)
+QString Duplicator::adaptName(QString name, EltID idDest)
 {
+    // List of all existing names
     QStringList listName;
     QList<int> nbElt;
     if (idDest.typeElement == elementSmpl)
@@ -880,14 +881,25 @@ QString Duplicator::adaptName(QString nom, EltID idDest)
         listName << _sm->getQstr(idDest, champ_name);
     }
 
+    // If the name ends with a suffix such as "-1", possibly remove it
+    QRegExp regEx("-[0-9]+$");
+    int suffixPos = name.indexOf(regEx);
+    if (suffixPos >= 0)
+    {
+        // The name without the suffix must exist
+        QString tmp = name.left(suffixPos);
+        if (listName.contains(tmp))
+            name = tmp;
+    }
+
     int suffixNumber = 0;
-    while (listName.contains(getName(nom, 20, suffixNumber), Qt::CaseInsensitive) && suffixNumber < 100)
+    while (listName.contains(getName(name, 20, suffixNumber), Qt::CaseInsensitive) && suffixNumber < 100)
     {
         suffixNumber++;
     }
-    nom = getName(nom, 20, suffixNumber);
+    name = getName(name, 20, suffixNumber);
 
-    return nom;
+    return name;
 }
 
 QString Duplicator::getName(QString name, int maxCharacters, int suffixNumber)
