@@ -118,6 +118,9 @@ bool OutputFactory::save(int indexSf2, bool saveAs)
                                                 defaultPath, QObject::tr("Sf2 files") + " (*.sf2)");
         if (savePath.isNull())
             return false;
+
+        if (!savePath.endsWith(".sf2"))
+            savePath += ".sf2";
     }
     else
         savePath = filePathInitial;
