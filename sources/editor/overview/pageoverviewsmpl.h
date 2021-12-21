@@ -44,13 +44,16 @@ private:
     QString isUsed(EltID id, int &status);
     QString totalLength(EltID id);
     QString loopLength(EltID id, int &status);
-    QString rootKey(EltID id, bool orderMode);
-    QString correction(EltID id);
-    QString type(EltID id);
-    QString link(EltID id, int &status);
+    unsigned char rootKey(EltID id, int &status);
+    char correction(EltID id, int &status);
+    QString type(EltID id, int &status);
+    QString link(int &status);
     QString sampleRate(EltID id);
+    void findLinkedSample(EltID id);
 
     QList<int> _usedSmpl;
+    EltID _linkedSampleId;
+    int _linkedSampleStatus; // 0: none, 1: valid, 2: not valid
 };
 
 #endif // PAGEOVERVIEWSMPL_H

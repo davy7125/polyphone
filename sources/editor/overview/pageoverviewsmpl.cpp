@@ -69,6 +69,8 @@ void PageOverviewSmpl::prepare(EltID id)
 // Called for each smpl
 void PageOverviewSmpl::getInformation(EltID id, QStringList &info, QStringList &order, QList<int> &status)
 {
+    findLinkedSample(id);
+
     // Used sample
     int iTmp;
     QString strTmp = isUsed(id, iTmp);
@@ -76,39 +78,40 @@ void PageOverviewSmpl::getInformation(EltID id, QStringList &info, QStringList &
     order << strTmp;
     status << iTmp;
 
-    // Total length
+    // Total duration
     strTmp = totalLength(id);
     info << strTmp;
     order << strTmp;
     status << 0;
 
-    // Loop length and quality
+    // Loop duration and quality
     strTmp = loopLength(id, iTmp);
     info << strTmp;
     order << QString::number(2 - iTmp) + strTmp;
     status << iTmp;
 
     // Root key
-    info << rootKey(id, false);
-    order << rootKey(id, true);
-    status << 0;
+    unsigned char pitch = rootKey(id, iTmp);
+    info << ContextManager::keyName()->getKeyName(pitch);
+    order << QString::number(2 - iTmp) + QString::number(1000 + pitch);
+    status << iTmp;
 
     // Correction
-    strTmp = correction(id);
-    info << strTmp;
-    order << strTmp;
-    status << 0;
+    char tuning = correction(id, iTmp);
+    info << QString::number(tuning);
+    order << QString::number(2 - iTmp) + QString::number(2000 + tuning);
+    status << iTmp;
 
     // Type
-    strTmp = type(id);
+    strTmp = type(id, iTmp);
     info << strTmp;
-    order << strTmp;
-    status << 0;
+    order << QString::number(2 - iTmp) + strTmp;
+    status << iTmp;
 
     // Link
-    strTmp = link(id, iTmp);
+    strTmp = link(iTmp);
     info << strTmp;
-    order << strTmp;
+    order << QString::number(2 - iTmp) + strTmp;
     status << iTmp;
 
     // Sample rate
@@ -170,66 +173,118 @@ QString PageOverviewSmpl::loopLength(EltID id, int &status)
     return result;
 }
 
-QString PageOverviewSmpl::rootKey(EltID id, bool orderMode)
+unsigned char PageOverviewSmpl::rootKey(EltID id, int &status)
 {
-    unsigned char pitch = _sf2->get(id, champ_byOriginalPitch).bValue;
-    return orderMode ? QString::number(pitch) : ContextManager::keyName()->getKeyName(pitch);
+    status = 0;
+    unsigned char result = _sf2->get(id, champ_byOriginalPitch).bValue;
+
+    // Check the pitch of the possible linked sample
+    if (_linkedSampleStatus == 1)
+    {
+        if (result != _sf2->get(_linkedSampleId, champ_byOriginalPitch).bValue)
+            status = 1;
+    }
+
+    return result;
 }
 
-QString PageOverviewSmpl::correction(EltID id)
+char PageOverviewSmpl::correction(EltID id, int &status)
 {
-    return QString::number(_sf2->get(id, champ_chPitchCorrection).cValue);
+    status = 0;
+    char result = _sf2->get(id, champ_chPitchCorrection).cValue;
+
+    // Check the correction of the possible linked sample
+    if (_linkedSampleStatus == 1)
+    {
+        if (result != _sf2->get(_linkedSampleId, champ_chPitchCorrection).cValue)
+            status = 1;
+    }
+
+    return result;
 }
 
-QString PageOverviewSmpl::type(EltID id)
+QString PageOverviewSmpl::type(EltID id, int &status)
 {
     QString type;
+    status = 0;
+
+    // Linked sample type
+    SFSampleLink linkedSampleType = linkInvalid;
+    if (_linkedSampleStatus == 1)
+        linkedSampleType = _sf2->get(_linkedSampleId, champ_sfSampleType).sfLinkValue;
 
     switch (_sf2->get(id, champ_sfSampleType).sfLinkValue)
     {
     case linkInvalid:
         type = tr("Invalid link");
+        status = 2;
         break;
     case monoSample: case RomMonoSample:
         type = tr("Mono", "opposite to stereo");
         break;
-    case rightSample: case RomRightSample:
+    case rightSample:
         type = tr("Stereo right");
+        status = (linkedSampleType == leftSample ? 0 : 1);
         break;
-    case leftSample: case RomLeftSample:
+    case RomRightSample:
+        type = tr("Stereo right");
+        status = (linkedSampleType == RomLeftSample ? 0 : 1);
+        break;
+    case leftSample:
         type = tr("Stereo left");
+        status = (linkedSampleType == rightSample ? 0 : 1);
         break;
-    case linkedSample: case RomLinkedSample:
+    case RomLeftSample:
+        type = tr("Stereo left");
+        status = (linkedSampleType == RomRightSample ? 0 : 1);
+        break;
+    case linkedSample:
         type = tr("Stereo non defined");
+        status = (linkedSampleType == linkedSample ? 0 : 1);
+        break;
+    case RomLinkedSample:
+        type = tr("Stereo non defined");
+        status = (linkedSampleType == RomLinkedSample ? 0 : 1);
         break;
     }
 
     return type;
 }
 
-QString PageOverviewSmpl::link(EltID id, int &status)
+QString PageOverviewSmpl::link(int &status)
 {
-    status = 0;
-    SFSampleLink type = _sf2->get(id, champ_sfSampleType).sfLinkValue;
-
-    if (type == monoSample || type == RomMonoSample)
-        return "-";
-    else
+    switch (_linkedSampleStatus)
     {
-        EltID id2 = id;
-        id2.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
-        if (_sf2->isValid(id2))
-            return _sf2->getQstr(id2, champ_name);
-        else
-        {
-            status = 2; // Error
-            return tr("invalid");
-        }
+    case 0:
+        status = 0;
+        return "-";
+    case 1:
+        status = 0;
+        return _sf2->getQstr(_linkedSampleId, champ_name);
+    default:
+        break;
     }
+
+    status = 2;
+    return tr("invalid");
 }
 
 QString PageOverviewSmpl::sampleRate(EltID id)
 {
     unsigned int sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
     return QString::number(sampleRate) + " " + tr("Hz");
+}
+
+void PageOverviewSmpl::findLinkedSample(EltID id)
+{
+    SFSampleLink type = _sf2->get(id, champ_sfSampleType).sfLinkValue;
+
+    if (type == monoSample || type == RomMonoSample)
+        _linkedSampleStatus = 0;
+    else
+    {
+        _linkedSampleId = id;
+        _linkedSampleId.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
+        _linkedSampleStatus = _sf2->isValid(_linkedSampleId) ? 1 : 2;
+    }
 }
