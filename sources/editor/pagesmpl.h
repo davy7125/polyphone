@@ -90,6 +90,7 @@ private:
     void setRateElt(EltID id, quint32 echFinal);
     void autoTune(EltID id, int &pitch, int &correction);
     void updateSinus();
+    void updateLoopQuality();
 };
 
 #endif // PAGE_SMPL_H

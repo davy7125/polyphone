@@ -38,20 +38,19 @@ protected:
     QString getTitle();
     QStringList getHorizontalHeader();
     void prepare(EltID id);
-    void getInformation(EltID id, QStringList &info, QStringList &order);
+    void getInformation(EltID id, QStringList &info, QStringList &order, QList<int> &status);
 
 private:
-    QString isUsed(EltID id);
+    QString isUsed(EltID id, int &status);
     QString totalLength(EltID id);
-    QString loopLength(EltID id);
-    QString rootKey(EltID id);
+    QString loopLength(EltID id, int &status);
+    QString rootKey(EltID id, bool orderMode);
     QString correction(EltID id);
     QString type(EltID id);
-    QString link(EltID id);
+    QString link(EltID id, int &status);
     QString sampleRate(EltID id);
 
     QList<int> _usedSmpl;
-    bool _orderMode;
 };
 
 #endif // PAGEOVERVIEWSMPL_H

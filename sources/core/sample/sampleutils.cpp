@@ -1715,3 +1715,57 @@ double SampleUtils::BesselI0(double x)
 
     return -numerator/denominator;
 }
+
+float SampleUtils::computeLoopQuality(QByteArray baData, quint32 loopStart, quint32 loopEnd)
+{
+    qint16 * data = reinterpret_cast<qint16*>(baData.data());
+    quint32 length = baData.size() / 2;
+    if (loopStart < 2 || loopStart >= loopEnd || loopEnd >= length)
+        return 0;
+
+    // Compute the difference at the loop points and a bit before
+    int n = 1;
+    float result = getDiffForLoopQuality(data, loopStart, loopEnd);
+
+    if (loopStart > 7)
+    {
+        result += getDiffForLoopQuality(data, loopStart - 5, loopEnd - 5);
+        n++;
+    }
+
+    if (loopStart > 11)
+    {
+        result += getDiffForLoopQuality(data, loopStart - 9, loopEnd - 9);
+        n++;
+    }
+
+    // Maximum value inside the loop
+    float max = 15;
+    float tmp;
+    for (quint32 i = loopStart; i <= loopEnd; i++)
+    {
+       tmp = static_cast<float>(data[i]);
+       if (tmp > max)
+           max = tmp;
+       else if (-tmp > max)
+           max = -tmp;
+    }
+
+    // Differences are relative to the maximum
+    return result / (max * n);
+}
+
+float SampleUtils::getDiffForLoopQuality(qint16 * data, quint32 pos1, quint32 pos2)
+{
+    // Difference on the loop points
+    float diff0 = static_cast<float>(data[pos1] - data[pos2]);
+
+    // Difference on the slope
+    float diff1 = static_cast<float>(data[pos1 - 1] - data[pos2 - 1]) - diff0;
+
+    // Difference on the slope difference
+    float diff2 = static_cast<float>(data[pos1 - 2] - data[pos2 - 2]) - 2 * diff1 + diff0;
+
+    // Combine the values
+    return 0.45 * qAbs(diff0) + 0.33 * qAbs(diff1) + 0.22 * qAbs(diff2);
+}

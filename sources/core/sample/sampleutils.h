@@ -58,6 +58,11 @@ public:
     static double moyenneCarre(QByteArray baData, quint16 wBps);
     static int lastLettersToRemove(QString str1, QString str2);
 
+    // Compute the quality of a loop
+    // If the result if < 0.05 it can be considered as OK
+    // If > 0.150 => you will probably hear the loop point
+    static float computeLoopQuality(QByteArray baData, quint32 loopStart, quint32 loopEnd);
+
 private:
     static void FFT_calculate(Complex * x, quint32 N /* must be a power of 2 */,
                               Complex * X, Complex * scratch, Complex * twiddles);
@@ -72,6 +77,7 @@ private:
     static double BesselI0(double x);
     static Complex * FFT(Complex * x, quint32 N); // N must be a power of 2
     static Complex * IFFT(Complex * x, quint32 N); // N must be a power of 2
+    static float getDiffForLoopQuality(qint16 * data, quint32 pos1, quint32 pos2);
 };
 
 #endif // SAMPLEUTILS_H

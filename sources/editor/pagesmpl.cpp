@@ -193,7 +193,10 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     ui->spinRootKey->setValue(rootKey);
     ui->spinTune->setValue(correction);
 
-    // Graphiques
+    // Loop quality
+    updateLoopQuality();
+
+    // Graphics
     ui->grapheFourier->setSampleName(_sf2->getQstr(id, champ_name));
     if (nombreElements > 1)
     {
@@ -359,9 +362,10 @@ void PageSmpl::setStartLoop()
     }
     _sf2->endEditing(getEditingSource());
 
-    // Update the graph
+    // Update the page
     if (_currentIds.count() == 1)
         ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
+    updateLoopQuality();
 }
 
 void PageSmpl::setStartLoop(int val)
@@ -415,9 +419,10 @@ void PageSmpl::setEndLoop()
     }
     _sf2->endEditing(getEditingSource());
 
-    // Update the graph
+    // Update the page
     if (_currentIds.count() == 1)
         ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
+    updateLoopQuality();
 }
 
 void PageSmpl::setEndLoop(int val)
@@ -505,6 +510,7 @@ void PageSmpl::on_pushFullLength_clicked()
 
     if (_currentIds.count() == 1)
         ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
+    updateLoopQuality();
 
     if (triggersMessage)
         QMessageBox::information(this, tr("Information"),
@@ -1087,7 +1093,6 @@ void PageSmpl::updatePlayButton()
 
 void PageSmpl::onCutOrdered(int start, int end)
 {
-    qDebug() << start << end;
     if (_currentIds.count() != 1 || start < 0 || end <= 0 || start >= end)
         return;
 
@@ -1172,4 +1177,32 @@ bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end)
 void PageSmpl::on_checkLectureBoucle_clicked(bool checked)
 {
     _synth->setLoopEnabled(checked);
+}
+
+void PageSmpl::updateLoopQuality()
+{
+    QList<EltID> ids = _currentIds.getSelectedIds(elementSmpl);
+    if (ids.size() == 1 && ui->spinStartLoop->value() != ui->spinEndLoop->value())
+    {
+        QByteArray data = _sf2->getData(ids.first(), champ_sampleData16);
+        float loopQuality = SampleUtils::computeLoopQuality(data, ui->spinStartLoop->value(), ui->spinEndLoop->value());
+        if (loopQuality < 0.05)
+            ui->iconLoopWarning->setPixmap(QPixmap());
+        else if (loopQuality < 0.15)
+        {
+            QMap<QString, QString> replacement;
+            replacement["currentColor"] = ContextManager::theme()->getFixedColor(
+                        ThemeManager::FixedColorType::YELLOW, ThemeManager::WINDOW_BACKGROUND).name();
+            ui->iconLoopWarning->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/warning.svg", QSize(16, 16), replacement));
+        }
+        else
+        {
+            QMap<QString, QString> replacement;
+            replacement["currentColor"] = ContextManager::theme()->getFixedColor(
+                        ThemeManager::FixedColorType::RED, ThemeManager::WINDOW_BACKGROUND).name();
+            ui->iconLoopWarning->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/warning.svg", QSize(16, 16), replacement));
+        }
+    }
+    else
+       ui->iconLoopWarning->setPixmap(QPixmap());
 }

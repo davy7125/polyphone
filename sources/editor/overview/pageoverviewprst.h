@@ -38,20 +38,18 @@ protected:
     QString getTitle();
     QStringList getHorizontalHeader();
     void prepare(EltID id) { Q_UNUSED(id) }
-    void getInformation(EltID id, QStringList &info, QStringList &order);
+    void getInformation(EltID id, QStringList &info, QStringList &order, QList<int> &status);
 
 private:
-    QString getBankAndPreset(EltID id);
-    QString getSampleNumber(EltID id);
+    QString getBankAndPreset(EltID id, bool orderMode);
+    QString getInstrumentNumber(EltID id);
     QString getParameterNumber(EltID id);
     QString getModulatorNumber(EltID id);
-    QString getKeyRange(EltID id);
-    QString getVelocityRange(EltID id);
-    QString getAttenuation(EltID id);
-    QString getChorus(EltID id);
-    QString getReverb(EltID id);
-
-    bool _orderMode;
+    QString getKeyRange(EltID id, bool orderMode);
+    QString getVelocityRange(EltID id, bool orderMode);
+    QString getAttenuation(EltID id, bool orderMode);
+    QString getChorus(EltID id, bool orderMode);
+    QString getReverb(EltID id, bool orderMode);
 };
 
 #endif // PAGEOVERVIEWPRST_H

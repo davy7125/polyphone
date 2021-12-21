@@ -50,7 +50,7 @@ protected:
     virtual QString getTitle() = 0;
     virtual QStringList getHorizontalHeader() = 0;
     virtual void prepare(EltID id) = 0;
-    virtual void getInformation(EltID id, QStringList &info, QStringList &order) = 0;
+    virtual void getInformation(EltID id, QStringList &info, QStringList &order, QList<int> &status) = 0;
 
     QString getRange(bool orderMode, EltID id, AttributeType champ);
 

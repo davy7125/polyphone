@@ -111,12 +111,27 @@ bool PageOverview::updateInterface(QString editingSource, IdList selectedIds, in
 QString PageOverview::fillInformation(EltID id, int row)
 {
     QStringList info, order;
-    getInformation(id, info, order);
+    QList<int> status;
+    getInformation(id, info, order, status);
 
     for (int i = 0; i < info.count(); i++)
     {
         SortedTableWidgetItem * item = new SortedTableWidgetItem(info[i], order[i]);
         item->setTextAlignment(Qt::AlignHCenter | Qt::AlignCenter);
+        if (status[i] == 1) // Warning
+        {
+            QFont font = item->font();
+            font.setBold(true);
+            item->setFont(font);
+            item->setForeground(ContextManager::theme()->getFixedColor(ThemeManager::YELLOW, ThemeManager::LIST_BACKGROUND));
+        }
+        else if (status[i] == 2) // Error
+        {
+            QFont font = item->font();
+            font.setBold(true);
+            item->setFont(font);
+            item->setForeground(ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND));
+        }
         ui->table->setItem(row, i + 2, item);
     }
 

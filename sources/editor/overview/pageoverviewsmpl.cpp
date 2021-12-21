@@ -24,6 +24,7 @@
 
 #include "pageoverviewsmpl.h"
 #include "contextmanager.h"
+#include "sampleutils.h"
 
 PageOverviewSmpl::PageOverviewSmpl(QWidget * parent) : PageOverview(PAGE_SMPL, elementSmpl, parent) {}
 
@@ -66,32 +67,67 @@ void PageOverviewSmpl::prepare(EltID id)
 }
 
 // Called for each smpl
-void PageOverviewSmpl::getInformation(EltID id, QStringList &info, QStringList &order)
+void PageOverviewSmpl::getInformation(EltID id, QStringList &info, QStringList &order, QList<int> &status)
 {
-    _orderMode = false;
-    info << isUsed(id)
-         << totalLength(id)
-         << loopLength(id)
-         << rootKey(id)
-         << correction(id)
-         << type(id)
-         << link(id)
-         << sampleRate(id);
+    // Used sample
+    int iTmp;
+    QString strTmp = isUsed(id, iTmp);
+    info << strTmp;
+    order << strTmp;
+    status << iTmp;
 
-    _orderMode = true;
-    order << isUsed(id)
-          << totalLength(id)
-          << loopLength(id)
-          << rootKey(id)
-          << correction(id)
-          << type(id)
-          << link(id)
-          << sampleRate(id);
+    // Total length
+    strTmp = totalLength(id);
+    info << strTmp;
+    order << strTmp;
+    status << 0;
+
+    // Loop length and quality
+    strTmp = loopLength(id, iTmp);
+    info << strTmp;
+    order << QString::number(2 - iTmp) + strTmp;
+    status << iTmp;
+
+    // Root key
+    info << rootKey(id, false);
+    order << rootKey(id, true);
+    status << 0;
+
+    // Correction
+    strTmp = correction(id);
+    info << strTmp;
+    order << strTmp;
+    status << 0;
+
+    // Type
+    strTmp = type(id);
+    info << strTmp;
+    order << strTmp;
+    status << 0;
+
+    // Link
+    strTmp = link(id, iTmp);
+    info << strTmp;
+    order << strTmp;
+    status << iTmp;
+
+    // Sample rate
+    strTmp = sampleRate(id);
+    info << strTmp;
+    order << strTmp;
+    status << 0;
 }
 
-QString PageOverviewSmpl::isUsed(EltID id)
+QString PageOverviewSmpl::isUsed(EltID id, int &status)
 {
-    return _usedSmpl.contains(id.indexElt) ? tr("yes") : tr("no");
+    if (_usedSmpl.contains(id.indexElt))
+    {
+        status = 0;
+        return tr("yes");
+    }
+
+    status = 2; // Error
+    return tr("no");
 }
 
 QString PageOverviewSmpl::totalLength(EltID id)
@@ -101,21 +137,43 @@ QString PageOverviewSmpl::totalLength(EltID id)
     return QString::number((double)length / sampleRate, 'f', 3) + tr("s", "unit for seconds");
 }
 
-QString PageOverviewSmpl::loopLength(EltID id)
+QString PageOverviewSmpl::loopLength(EltID id, int &status)
 {
+    status = 0; // Info
+
+    // Possibly no loop
     quint32 startLoop = _sf2->get(id, champ_dwStartLoop).dwValue;
     quint32 endLoop = _sf2->get(id, champ_dwEndLoop).dwValue;
-    quint32 sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
-    if (startLoop != endLoop)
-        return QString::number((double)(endLoop - startLoop) / sampleRate, 'f', 3) + tr("s", "unit for seconds");
-    else
+    if (startLoop == endLoop)
         return "-";
+
+    // Length of the loop
+    QString result;
+    quint32 sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
+    result = QString::number((double)(endLoop - startLoop) / sampleRate, 'f', 3) + tr("s", "unit for seconds");
+
+    // Quality of the loop
+    quint32 length = _sf2->get(id, champ_dwLength).dwValue;
+    if (endLoop >= length || startLoop > endLoop)
+        result += " - /!\\";
+    else
+    {
+        // Get the sample data
+        QByteArray baData = _sf2->getData(id, champ_sampleData16);
+        float loopQuality = SampleUtils::computeLoopQuality(baData, startLoop, endLoop);
+        if (loopQuality >= 0.15)
+            status = 2; // Error
+        else if (loopQuality >= 0.05)
+            status = 1; // Warning
+    }
+
+    return result;
 }
 
-QString PageOverviewSmpl::rootKey(EltID id)
+QString PageOverviewSmpl::rootKey(EltID id, bool orderMode)
 {
     unsigned char pitch = _sf2->get(id, champ_byOriginalPitch).bValue;
-    return _orderMode ? QString::number(pitch) : ContextManager::keyName()->getKeyName(pitch);
+    return orderMode ? QString::number(pitch) : ContextManager::keyName()->getKeyName(pitch);
 }
 
 QString PageOverviewSmpl::correction(EltID id)
@@ -149,8 +207,9 @@ QString PageOverviewSmpl::type(EltID id)
     return type;
 }
 
-QString PageOverviewSmpl::link(EltID id)
+QString PageOverviewSmpl::link(EltID id, int &status)
 {
+    status = 0;
     SFSampleLink type = _sf2->get(id, champ_sfSampleType).sfLinkValue;
 
     if (type == monoSample || type == RomMonoSample)
@@ -162,7 +221,10 @@ QString PageOverviewSmpl::link(EltID id)
         if (_sf2->isValid(id2))
             return _sf2->getQstr(id2, champ_name);
         else
+        {
+            status = 2; // Error
             return tr("invalid");
+        }
     }
 }
 

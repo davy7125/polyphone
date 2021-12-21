@@ -68,36 +68,75 @@ void PageOverviewInst::prepare(EltID id)
 }
 
 // Called for each instrument
-void PageOverviewInst::getInformation(EltID id, QStringList &info, QStringList &order)
+void PageOverviewInst::getInformation(EltID id, QStringList &info, QStringList &order, QList<int> &status)
 {
-    _orderMode = false;
-    info << isUsed(id)
-         << getSampleNumber(id)
-         << getParameterNumber(id)
-         << getModulatorNumber(id)
-         << getKeyRange(id)
-         << getVelocityRange(id)
-         << getAttenuation(id)
-         << getLoop(id)
-         << getChorus(id)
-         << getReverb(id);
+    // Is used
+    int iTmp;
+    QString strTmp = isUsed(id, iTmp);
+    info << strTmp;
+    order << strTmp;
+    status << iTmp;
 
-    _orderMode = true;
-    order << isUsed(id)
-          << getSampleNumber(id)
-          << getParameterNumber(id)
-          << getModulatorNumber(id)
-          << getKeyRange(id)
-          << getVelocityRange(id)
-          << getAttenuation(id)
-          << getLoop(id)
-          << getChorus(id)
-          << getReverb(id);
+    // Sample number
+    strTmp = getSampleNumber(id);
+    info << strTmp;
+    order << strTmp;
+    status << 0;
+
+    // Parameter number
+    strTmp = getParameterNumber(id);
+    info << strTmp;
+    order << strTmp;
+    status << 0;
+
+    // Modulator number
+    strTmp = getModulatorNumber(id);
+    info << strTmp;
+    order << strTmp;
+    status << 0;
+
+    // Key range
+    info << getKeyRange(id, false);
+    order << getKeyRange(id, true);
+    status << 0;
+
+    // Velocity range
+    info << getVelocityRange(id, false);
+    order << getVelocityRange(id, true);
+    status << 0;
+
+    // Attenuation
+    info << getAttenuation(id, false);
+    order << getAttenuation(id, true);
+    status << 0;
+
+    // Loop
+    strTmp = getLoop(id);
+    info << strTmp;
+    order << strTmp;
+    status << 0;
+
+    // Chorus
+    info << getChorus(id, false);
+    order << getChorus(id, true);
+    status << 0;
+
+    // Reverb
+    info << getReverb(id, false);
+    order << getReverb(id, true);
+    status << 0;
 }
 
-QString PageOverviewInst::isUsed(EltID id)
+QString PageOverviewInst::isUsed(EltID id, int &status)
 {
-    return _usedInst.contains(id.indexElt) ? tr("yes") : tr("no");
+    if (_usedInst.contains(id.indexElt))
+    {
+        status = 0;
+        return tr("yes");
+    }
+
+    status = 2; // Error
+    return tr("no");
 }
 
 QString PageOverviewInst::getSampleNumber(EltID id)
@@ -148,7 +187,7 @@ QString PageOverviewInst::getModulatorNumber(EltID id)
     return QString::number(count);
 }
 
-QString PageOverviewInst::getKeyRange(EltID id)
+QString PageOverviewInst::getKeyRange(EltID id, bool orderMode)
 {
     // Global keyrange
     int globalMin = 0;
@@ -185,7 +224,7 @@ QString PageOverviewInst::getKeyRange(EltID id)
         str = "?";
     else
     {
-        if (_orderMode)
+        if (orderMode)
             str = QString("%1-%2").arg(min, 3, 10, QChar('0')).arg(max, 3, 10, QChar('0'));
         else
         {
@@ -198,7 +237,7 @@ QString PageOverviewInst::getKeyRange(EltID id)
     return str;
 }
 
-QString PageOverviewInst::getVelocityRange(EltID id)
+QString PageOverviewInst::getVelocityRange(EltID id, bool orderMode)
 {
     // Global velocity range
     int globalMin = 0;
@@ -235,7 +274,7 @@ QString PageOverviewInst::getVelocityRange(EltID id)
         str = "?";
     else
     {
-        if (_orderMode)
+        if (orderMode)
             str = QString("%1-%2").arg(min, 3, 10, QChar('0')).arg(max, 3, 10, QChar('0'));
         else
         {
@@ -248,9 +287,9 @@ QString PageOverviewInst::getVelocityRange(EltID id)
     return str;
 }
 
-QString PageOverviewInst::getAttenuation(EltID id)
+QString PageOverviewInst::getAttenuation(EltID id, bool orderMode)
 {
-    return getRange(_orderMode, id, champ_initialAttenuation);
+    return getRange(orderMode, id, champ_initialAttenuation);
 }
 
 QString PageOverviewInst::getLoop(EltID id)
@@ -294,12 +333,12 @@ QString PageOverviewInst::getLoop(EltID id)
         return tr("several modes", "speaking about loop modes");
 }
 
-QString PageOverviewInst::getChorus(EltID id)
+QString PageOverviewInst::getChorus(EltID id, bool orderMode)
 {
-    return getRange(_orderMode, id, champ_chorusEffectsSend);
+    return getRange(orderMode, id, champ_chorusEffectsSend);
 }
 
-QString PageOverviewInst::getReverb(EltID id)
+QString PageOverviewInst::getReverb(EltID id, bool orderMode)
 {
-    return getRange(_orderMode, id, champ_reverbEffectsSend);
+    return getRange(orderMode, id, champ_reverbEffectsSend);
 }
