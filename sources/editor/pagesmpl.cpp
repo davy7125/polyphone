@@ -198,6 +198,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
 
     // Graphics
     ui->grapheFourier->setSampleName(_sf2->getQstr(id, champ_name));
+    ui->waveDisplay->setCurrentSample(0);
     if (nombreElements > 1)
     {
         ui->waveDisplay->displayMultipleSelection(true);
