@@ -25,9 +25,10 @@
 #ifndef GRAPHSPACE_H
 #define GRAPHSPACE_H
 
-#include "qcustomplot.h"
+#include <QWidget>
+#include <QMouseEvent>
 
-class GraphSpace : public QCustomPlot
+class GraphSpace : public QWidget
 {
     Q_OBJECT
 
@@ -35,7 +36,7 @@ public:
     explicit GraphSpace(QWidget *parent = nullptr);
     void setData(QVector<double> x, QVector<int> y);
 
-    bool eventFilter(QObject* o, QEvent* e)
+    bool eventFilter(QObject* o, QEvent* e) override
     {
         if ((e->type() == QEvent::MouseMove ||
              e->type() == QEvent::MouseButtonPress ||
@@ -44,9 +45,8 @@ public:
                 && o == this)
         {
             QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(e);
-            QPoint pos = mouseEvent->pos();
             if (mouseEvent->type() == QEvent::MouseMove)
-                this->mouseMoved(pos);
+                this->mouseMoved(mouseEvent->pos());
             else if (mouseEvent->type() == QEvent::Leave)
                 this->mouseLeft();
             return true;
@@ -54,14 +54,23 @@ public:
         return false;
     }
 
+protected:
+    void paintEvent(QPaintEvent *event) override;
+
 private:
     void mouseMoved(QPoint pos);
     void mouseLeft();
 
-    void afficheCoord(double xPan, double yLength, int key);
+    // Configuration
+    QColor _backgroundColor;
+
+    // Data
     QVector<double> _xPan, _yLength;
     QVector<int> _yKey;
-    QCPItemText * labelCoord;
+
+    // Coordinates
+    QString _currentLabel;
+    double _currentPan, _currentLength;
 };
 
 #endif // GRAPHSPACE_H

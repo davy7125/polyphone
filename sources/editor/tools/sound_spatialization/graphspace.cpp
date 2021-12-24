@@ -24,83 +24,15 @@
 
 #include "graphspace.h"
 #include "contextmanager.h"
+#include "qmath.h"
+#include <QPainter>
 
-GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
+GraphSpace::GraphSpace(QWidget * parent) : QWidget(parent),
+    _backgroundColor(this->palette().color(QPalette::Base)),
+    _currentLabel("")
 {
-    this->setBackground(this->palette().color(QPalette::Base));
-
-    // Decoration layer
-    this->addGraph();
-    QPen graphPen;
-    graphPen.setWidthF(1);
-    QColor color = this->palette().color(QPalette::Text);
-    color.setAlpha(40);
-    graphPen.setColor(color);
-    graphPen.setStyle(Qt::DashDotLine);
-    graph(0)->setPen(graphPen);
-    QVector<double> x, y;
-    x << 0.5 << 0.5;
-    y << -10 << 10;
-    graph(0)->setData(x, y, true);
-
-    // Data layer
-    this->addGraph();
-    graphPen.setColor(this->palette().color(QPalette::Highlight));
-    graphPen.setWidthF(2);
-    graphPen.setStyle(Qt::SolidLine);
-    this->graph(1)->setPen(graphPen);
-    this->graph(1)->setLineStyle(QCPGraph::lsImpulse);
-    this->graph(1)->setAntialiased(true);
-
-    // Axis
-    this->xAxis->setRange(-0.01, 1.01);
-    this->yAxis->setRange(0, 1.05);
-    this->xAxis->setVisible(false);
-    this->xAxis->setTicks(false);
-    this->yAxis->setVisible(false);
-    this->yAxis->setTicks(false);
-
-    // Margins
-    this->axisRect()->setAutoMargins(QCP::msNone);
-    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
-
-    // Add L / R
-    QCPItemText * text = new QCPItemText(this);
-    text->position->setType(QCPItemPosition::ptAxisRectRatio);
-    text->position->setCoords(0, 0);
-    text->setPositionAlignment(Qt::AlignLeft | Qt::AlignTop);
-    text->setTextAlignment(Qt::AlignLeft);
-    text->setFont(QFont(font().family(), 10, 100));
-    color.setAlpha(180);
-    text->setColor(color);
-    text->setText(tr("L", "first letter of Left in your language"));
-
-    text = new QCPItemText(this);
-    text->position->setType(QCPItemPosition::ptAxisRectRatio);
-    text->position->setCoords(1, 0);
-    text->setPositionAlignment(Qt::AlignRight | Qt::AlignTop);
-    text->setTextAlignment(Qt::AlignRight);
-    text->setFont(QFont(font().family(), 10, 100));
-    text->setColor(color);
-    text->setText(tr("R", "first letter of Right in your language"));
-
-    // Overview values
-    this->addGraph();
-    color.setAlpha(255);
-    graphPen.setColor(color);
-    graphPen.setWidth(1);
-    this->graph(2)->setPen(graphPen);
-    this->graph(2)->setScatterStyle(QCPScatterStyle::ssPlus);
-    labelCoord = new QCPItemText(this);
-
-    labelCoord->position->setType(QCPItemPosition::ptPlotCoords);
-    labelCoord->setText("");
-    QFont fontLabel = QFont(font().family(), 9);
-    fontLabel.setBold(true);
-    labelCoord->setFont(fontLabel);
-    labelCoord->setColor(color);
-
     // Filter events
+    this->setMouseTracking(true);
     this->installEventFilter(this);
 }
 
@@ -121,22 +53,20 @@ void GraphSpace::setData(QVector<double> x, QVector<int> y)
     }
 
     // Display curve
-    this->graph(1)->setData(_xPan, _yLength, true);
-    this->replot();
+    this->repaint();
 }
 
 void GraphSpace::mouseMoved(QPoint pos)
 {
     // Convert coordinates
-    double x = xAxis->pixelToCoord(pos.x());
-    double y = yAxis->pixelToCoord(pos.y());
+    double x = static_cast<double>(pos.x()) / this->width();
 
     // Closest point
     double distanceMin = -1;
     int posX = -1;
     for (int i = 0; i < _xPan.size(); i++)
     {
-        double distanceTmp = 5 * qAbs(x - _xPan[i]) + qAbs(y - _yLength[i]);
+        double distanceTmp = qAbs(x - _xPan[i]);
         if (distanceMin < -0.5 || distanceTmp < distanceMin)
         {
             distanceMin = distanceTmp;
@@ -144,55 +74,98 @@ void GraphSpace::mouseMoved(QPoint pos)
         }
     }
     if (posX != -1)
-        this->afficheCoord(_xPan[posX], _yLength[posX], _yKey[posX]);
+    {
+        _currentPan = _xPan[posX];
+        _currentLength = _yLength[posX];
+        _currentLabel = ContextManager::keyName()->getKeyName(_yKey[posX]) + ":" +
+                QString::number(_currentPan * 100 - 50, 'f', 1);
+    }
     else
-        this->afficheCoord(-1, -1, -1);
+        _currentLabel = "";
+
+    repaint();
 }
 
 void GraphSpace::mouseLeft()
 {
-    this->afficheCoord(-1, -1, -1);
+    _currentLabel = "";
+    repaint();
 }
 
-void GraphSpace::afficheCoord(double xPan, double yLength, int key)
+void GraphSpace::paintEvent(QPaintEvent *event)
 {
-    QVector<double> xVector, yVector;
-    if (key != -1)
+    Q_UNUSED(event)
+    const int margin = 5;
+
+    // Background
+    QPainter painter(this);
+    painter.fillRect(this->rect(), _backgroundColor);
+
+    // Central vertical bar
+    QColor colorTmp = this->palette().color(QPalette::Text);
+    colorTmp.setAlpha(40);
+    painter.setPen(QPen(colorTmp, 1.0, Qt::DashDotLine));
+    painter.drawLine(0.5 * this->width(), -1, 0.5 * this->width(), this->height() + 1);
+
+    // Data
+    painter.setPen(QPen(this->palette().color(QPalette::Highlight), 2.0, Qt::SolidLine));
+    for (int i = 0; i < _xPan.size(); i++)
+        painter.drawLine(
+                    _xPan[i] * (this->width() - 2 * margin) + margin,
+                    this->height(),
+                    _xPan[i] * (this->width() - 2 * margin) + margin,
+                    margin + (this->height() - margin) * (1.0 - _yLength[i]));
+
+    // Add L / R
+    QFont font = this->font();
+    font.setPointSize(10);
+    painter.setFont(font);
+    colorTmp.setAlpha(180);
+    painter.setPen(colorTmp);
+
+    painter.drawText(2, 0, 50, 50,
+                     Qt::AlignLeft | Qt::AlignTop,
+                     tr("L", "first letter of Left in your language"));
+    painter.drawText(this->width() - 50 - 2, 0, 50, 50,
+                     Qt::AlignRight | Qt::AlignTop,
+                     tr("R", "first letter of Right in your language"));
+
+    // Current coordinates
+    if (!_currentLabel.isEmpty())
     {
-        // Point coordinates
-        xVector.resize(1);
-        yVector.resize(1);
-        xVector[0] = xPan;
-        yVector[0] = yLength;
+        colorTmp.setAlpha(255);
+        painter.setPen(QPen(colorTmp, 3.0));
+
+        font.setPointSize(9);
+        font.setBold(true);
+        painter.setFont(font);
+
+        // Size of the text to display
+        QFontMetrics fm(this->font());
+        QSize textSize = QSize(fm.horizontalAdvance(_currentLabel), fm.height());
+
+        // Display a cross
+        double posTextX = _currentPan * (this->width() - 2 * margin) + margin;
+        double posTextY = margin + (1.0 - _currentLength) * (this->height() - margin);
+        int crossLength = 3;
+        painter.drawLine(posTextX - crossLength, posTextY, posTextX + crossLength, posTextY);
+        painter.drawLine(posTextX, posTextY - crossLength, posTextX, posTextY + crossLength);
+
+        // Horizontal offset: half the text width
+        if (posTextX < textSize.width() / 2)
+            posTextX = textSize.width() / 2;
+        else if (posTextX > this->width() - textSize.width() / 2)
+            posTextX = this->width() - textSize.width() / 2;
+        posTextX -= textSize.width() / 2;
+
+        // Vertical offset: 2 pixels
+        if (_currentLength < 0.5)
+            posTextY -= 2.0 + textSize.height();
+        else
+            posTextY += 2.0;
 
         // Display text
-        if (yLength >= 0.5)
-            labelCoord->setPositionAlignment(Qt::AlignTop    | Qt::AlignHCenter);
-        else
-            labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
-        labelCoord->setText(ContextManager::keyName()->getKeyName(key) + ":" +
-                            QString::number(xPan * 100 - 50, 'f', 1));
-
-        // Adjust position
-        QFontMetrics fm(labelCoord->font());
-        double distX = xAxis->pixelToCoord(fm.width(labelCoord->text()) / 2 + 2);
-        if (xPan < distX)
-            xPan = distX;
-        else if (xPan > 1. - distX)
-            xPan = 1. - distX;
-        double distY = 1.05 - this->yAxis->pixelToCoord(2);
-        if (yLength >= 0.5)
-            yLength -= distY;
-        else
-            yLength += distY;
-        labelCoord->position->setCoords(xPan, yLength);
+        painter.drawText(posTextX, posTextY, textSize.width(), textSize.height(),
+                         Qt::AlignVCenter | Qt::AlignHCenter, _currentLabel);
     }
-    else
-    {
-        xVector.resize(0);
-        yVector.resize(0);
-        labelCoord->setText("");
-    }
-    this->graph(2)->setData(xVector, yVector, true);
-    this->replot();
 }
