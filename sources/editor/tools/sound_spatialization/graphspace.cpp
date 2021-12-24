@@ -108,7 +108,7 @@ void GraphSpace::paintEvent(QPaintEvent *event)
     painter.drawLine(0.5 * this->width(), -1, 0.5 * this->width(), this->height() + 1);
 
     // Data
-    painter.setPen(QPen(this->palette().color(QPalette::Highlight), 2.0, Qt::SolidLine));
+    painter.setPen(QPen(this->palette().color(QPalette::Highlight), 3.0, Qt::SolidLine));
     for (int i = 0; i < _xPan.size(); i++)
         painter.drawLine(
                     _xPan[i] * (this->width() - 2 * margin) + margin,
@@ -134,7 +134,7 @@ void GraphSpace::paintEvent(QPaintEvent *event)
     if (!_currentLabel.isEmpty())
     {
         colorTmp.setAlpha(255);
-        painter.setPen(QPen(colorTmp, 3.0));
+        painter.setPen(QPen(colorTmp, 1.0));
 
         font.setPointSize(9);
         font.setBold(true);
