@@ -36,6 +36,7 @@
 #include "sampleloader.h"
 #include "dialogcreateelements.h"
 #include "utils.h"
+#include "tools/auto_distribution/toolautodistribution.h"
 
 TreeView::TreeView(QWidget * parent) : QTreeView(parent),
     _fixingSelection(false),
@@ -923,19 +924,73 @@ EltID TreeView::createElement(IdList ids, QStringList &existingNames, Duplicator
     newElement.indexElt = sm->add(newElement);
     sm->set(newElement, champ_name, elementName);
 
-    // Possibly set a bank and preset number
-    if (!isSmpl)
+    if (isSmpl)
     {
+        bool sampleLooped = true;
+        bool samePitch = false;
+        QMap<unsigned char, QPair<bool, bool> > pitches;
+
+        // Link all dragged samples
+        foreach (EltID id, ids)
+        {
+            // Check the sample is looped
+            if (sm->get(id, champ_dwStartLoop).dwValue == sm->get(id, champ_dwEndLoop).dwValue)
+                sampleLooped = false;
+
+            // Store the pitch
+            int bPitch = sm->get(id, champ_byOriginalPitch).bValue;
+            SFSampleLink sampleType = sm->get(id, champ_sfSampleType).sfLinkValue;
+            if (!pitches.contains(bPitch))
+            {
+                pitches[bPitch].first = false;
+                pitches[bPitch].second = false;
+            }
+            if (sampleType != rightSample && sampleType != RomRightSample)
+            {
+                if (pitches[bPitch].first)
+                    samePitch = true;
+                else
+                    pitches[bPitch].first = true;
+            }
+            if (sampleType != leftSample && sampleType != RomLeftSample)
+            {
+                if (pitches[bPitch].second)
+                    samePitch = true;
+                else
+                    pitches[bPitch].second = true;
+            }
+
+            duplicator->copy(id, newElement);
+        }
+
+        // If all samples are looped, enable it in the instrument
+        if (!ids.empty() && sampleLooped)
+        {
+            AttributeValue val;
+            val.wValue = 1;
+            sm->set(newElement, champ_sampleModes, val);
+        }
+
+        // If there is more than 1 pitch and no more than 1 sample per pitch / side, distribute them
+        if (!samePitch && pitches.count() > 1)
+        {
+            ToolAutoDistribution tool;
+            tool.process(sm, newElement, NULL);
+        }
+    }
+    else
+    {
+        // Set a bank and preset number
         AttributeValue val;
         val.wValue = static_cast<quint16>(nBank);
         sm->set(newElement, champ_wBank, val);
         val.wValue = static_cast<quint16>(nPreset);
         sm->set(newElement, champ_wPreset, val);
-    }
 
-    // Link all dragged samples or intruments
-    foreach (EltID id, ids)
-        duplicator->copy(id, newElement);
+        // Link all dragged intruments
+        foreach (EltID id, ids)
+            duplicator->copy(id, newElement);
+    }
 
     // The element has been created
     return newElement;

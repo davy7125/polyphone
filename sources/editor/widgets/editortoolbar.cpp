@@ -35,6 +35,7 @@
 #include "outputfactory.h"
 #include "dialognewelement.h"
 #include "utils.h"
+#include "tools/auto_distribution/toolautodistribution.h"
 
 bool EditorToolBar::s_recorderOpen = false;
 bool EditorToolBar::s_keyboardOpen = false;
@@ -311,6 +312,9 @@ void EditorToolBar::onNewInstClicked(QString name, bool linkElements)
         EltID idLink = id;
         idLink.typeElement = elementInstSmpl;
         AttributeValue val;
+        bool sampleLooped = true;
+        bool samePitch = false;
+        QMap<unsigned char, QPair<bool, bool> > pitches;
         foreach (EltID idSrc, ids)
         {
             // Create a division
@@ -321,15 +325,54 @@ void EditorToolBar::onNewInstClicked(QString name, bool linkElements)
             sm->set(idLink, champ_sampleID, val);
 
             // Pan
-            if (sm->get(idSrc, champ_sfSampleType).sfLinkValue == rightSample ||
-                    sm->get(idSrc, champ_sfSampleType).sfLinkValue == RomRightSample)
+            SFSampleLink sampleType = sm->get(idSrc, champ_sfSampleType).sfLinkValue;
+            if (sampleType == rightSample || sampleType == RomRightSample)
                 val.shValue = 500;
-            else if (sm->get(idSrc, champ_sfSampleType).sfLinkValue == leftSample ||
-                     sm->get(idSrc, champ_sfSampleType).sfLinkValue == RomLeftSample)
+            else if (sampleType == leftSample || sampleType == RomLeftSample)
                 val.shValue = -500;
             else
                 val.shValue = 0;
             sm->set(idLink, champ_pan, val);
+
+            // Check the sample is looped
+            if (sm->get(idSrc, champ_dwStartLoop).dwValue == sm->get(idSrc, champ_dwEndLoop).dwValue)
+                sampleLooped = false;
+
+            // Store the pitch
+            int bPitch = sm->get(idSrc, champ_byOriginalPitch).bValue;
+            if (!pitches.contains(bPitch))
+            {
+                pitches[bPitch].first = false;
+                pitches[bPitch].second = false;
+            }
+            if (sampleType != rightSample && sampleType != RomRightSample)
+            {
+                if (pitches[bPitch].first)
+                    samePitch = true;
+                else
+                    pitches[bPitch].first = true;
+            }
+            if (sampleType != leftSample && sampleType != RomLeftSample)
+            {
+                if (pitches[bPitch].second)
+                    samePitch = true;
+                else
+                    pitches[bPitch].second = true;
+            }
+        }
+
+        // If all samples are looped, enable it in the instrument
+        if (!ids.empty() && sampleLooped)
+        {
+            val.wValue = 1;
+            sm->set(id, champ_sampleModes, val);
+        }
+
+        // If there is more than 1 pitch and no more than 1 sample per pitch / side, distribute them
+        if (!samePitch && pitches.count() > 1)
+        {
+            ToolAutoDistribution tool;
+            tool.process(sm, id, NULL);
         }
     }
 
