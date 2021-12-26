@@ -26,6 +26,7 @@
 #include "ui_pagesf2.h"
 #include "contextmanager.h"
 #include <QDateTime>
+#include "latinvalidator.h"
 
 PageSf2::PageSf2(QWidget * parent) :
     Page(parent, PAGE_SF2, "page:sf2"),
@@ -62,6 +63,13 @@ PageSf2::PageSf2(QWidget * parent) :
     ui->labelSample->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/sample.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
     ui->labelInstrument->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/instrument.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
     ui->labelPreset->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/preset.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
+
+    // Text validator
+    ui->lineEdit_name->setValidator(new LatinValidator(ui->lineEdit_name));
+    ui->lineEdit_author->setValidator(new LatinValidator(ui->lineEdit_author));
+    ui->lineEdit_date->setValidator(new LatinValidator(ui->lineEdit_date));
+    ui->lineEdit_product->setValidator(new LatinValidator(ui->lineEdit_product));
+    ui->lineEdit_copyright->setValidator(new LatinValidator(ui->lineEdit_copyright));
 
     // Button "set now" hidden by default
     ui->pushButton_setNow->hide();

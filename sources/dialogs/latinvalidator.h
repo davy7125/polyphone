@@ -19,51 +19,27 @@
 ****************************************************************************
 **           Author: Davy Triponney                                       **
 **  Website/Contact: https://www.polyphone-soundfonts.com                 **
-**             Date: 01.01.2013                                           **
+**             Date: 01.01.2021                                           **
 ***************************************************************************/
 
-#include "dialogquestion.h"
-#include "ui_dialogquestion.h"
-#include "latinvalidator.h"
+#ifndef LATINVALIDATOR_H
+#define LATINVALIDATOR_H
 
-DialogQuestion::DialogQuestion(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::DialogQuestion)
-{
-    ui->setupUi(this);
-    this->setAttribute(Qt::WA_DeleteOnClose);
-    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
-    ui->lineEdit->setValidator(new LatinValidator(ui->lineEdit));
-}
+#include <QValidator>
 
-DialogQuestion::~DialogQuestion()
+class LatinValidator : public QValidator
 {
-    delete ui;
-}
+public:
+    explicit LatinValidator(QObject *parent = nullptr) : QValidator(parent)
+    {
 
-void DialogQuestion::initialize(QString title, QString placeHolder, QString defaultValue)
-{
-    this->setWindowTitle(title);
-    ui->lineEdit->setPlaceholderText(placeHolder);
-    ui->lineEdit->setText(defaultValue);
-    ui->lineEdit->selectAll();
-    ui->lineEdit->setFocus();
-}
+    }
 
-void DialogQuestion::setTextLimit(int textLimit)
-{
-    ui->lineEdit->setMaxLength(textLimit);
-    ui->lineEdit->selectAll();
-    ui->lineEdit->setFocus();
-}
+    virtual State validate(QString &text, int &pos) const
+    {
+        Q_UNUSED(pos)
+        return QString::fromLatin1(text.toLatin1()) == text ? Acceptable : Invalid;
+    }
+};
 
-void DialogQuestion::on_pushCancel_clicked()
-{
-    QDialog::reject();
-}
-
-void DialogQuestion::on_pushOk_clicked()
-{
-    emit(onOk(ui->lineEdit->text()));
-    QDialog::close();
-}
+#endif // LATINVALIDATOR_H

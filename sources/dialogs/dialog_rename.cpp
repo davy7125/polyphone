@@ -25,6 +25,7 @@
 #include "dialog_rename.h"
 #include "ui_dialog_rename.h"
 #include "contextmanager.h"
+#include "latinvalidator.h"
 
 DialogRename::DialogRename(bool isSample, QString defaultText, QWidget *parent) :
     QDialog(parent),
@@ -42,7 +43,9 @@ DialogRename::DialogRename(bool isSample, QString defaultText, QWidget *parent) 
         ui->comboBox->removeItem(0);
 
     ui->lineText1->setText(defaultText);
+    ui->lineText1->setValidator(new LatinValidator(ui->lineText1));
     ui->lineText2->setText(defaultText);
+    ui->lineText2->setValidator(new LatinValidator(ui->lineText2));
     ui->spinPos1->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_BULK_RENAME, "int_1", 0).toInt());
     ui->spinPos2->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_BULK_RENAME, "int_2", 0).toInt());
 

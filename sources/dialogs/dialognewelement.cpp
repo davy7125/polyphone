@@ -25,6 +25,7 @@
 #include "dialognewelement.h"
 #include "ui_dialognewelement.h"
 #include "contextmanager.h"
+#include "latinvalidator.h"
 
 DialogNewElement::DialogNewElement(QWidget *parent) :
     QDialog(parent),
@@ -34,6 +35,7 @@ DialogNewElement::DialogNewElement(QWidget *parent) :
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
     ui->lineEdit->setMaxLength(20);
+    ui->lineEdit->setValidator(new LatinValidator(ui->lineEdit));
 
     // Restore the checkbox state
     ui->checkLink->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, "new_element", true).toBool());

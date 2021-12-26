@@ -164,7 +164,8 @@ contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
 # Location of sfArk
 HEADERS += \
     core/input/sfark/sfarkextractor2.h \
-    core/input/sfark/abstractextractor.h
+    core/input/sfark/abstractextractor.h \
+    dialogs/latinvalidator.h
 SPECIAL_SOURCES = core/input/sfark/sfarkextractor1.cpp \
     core/input/sfark/sfarkextractor2.cpp
 contains(DEFINES, USE_LOCAL_SFARKLIB) {
