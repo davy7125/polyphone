@@ -773,7 +773,9 @@ void PageTable::selected()
         QList<AttributeType> attributes;
         for (int i = 0; i < listItems.count(); i++)
             attributes << _table->getChamp(listItems.at(i)->row());
+        _modulatorEditor->blockSignals(true);
         _modulatorEditor->setIds(_currentIds, attributes);
+        _modulatorEditor->blockSignals(false);
     }
     else
         _modulatorEditor->setIds(_currentIds);
