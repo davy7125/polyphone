@@ -427,7 +427,6 @@ void EditorToolBar::onNewPrstClicked(QString name, bool linkElements)
     sm->set(id, champ_wPreset, val);
     val.wValue = nBank;
     sm->set(id, champ_wBank, val);
-    sm->endEditing("command:newPrst");
 
     if (linkElements)
     {
@@ -473,6 +472,8 @@ void EditorToolBar::onNewPrstClicked(QString name, bool linkElements)
             sm->set(idLink, champ_keyRange, value);
         }
     }
+
+    sm->endEditing("command:newPrst");
 
     // Selection
     selectionChanged(id);

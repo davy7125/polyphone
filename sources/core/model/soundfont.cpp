@@ -164,7 +164,7 @@ bool Soundfont::deleteSample(int index)
         // Update the row number of the following samples
         for (int i = index + 1; i < _smpl.indexCount(); i++)
         {
-            Smpl * elt = _smpl.atIndex(index);
+            Smpl * elt = _smpl.atIndex(i);
             if (elt != nullptr)
                 elt->decrementRow();
         }
@@ -197,24 +197,22 @@ bool Soundfont::deleteInstrument(int index)
         return false;
 
     InstPrst * inst = _inst.atIndex(index);
-    if (inst != nullptr)
+    if (inst == nullptr)
+        return false;
+
+    // Delete the instrument
+    inst->notifyDeletion();
+    delete _inst.takeAtIndex(index);
+
+    // Update the row number of the following instruments
+    for (int i = index + 1; i < _inst.indexCount(); i++)
     {
-        // Delete the instrument
-        inst->notifyDeletion();
-        delete _inst.takeAtIndex(index);
-
-        // Update the row number of the following samples
-        for (int i = index + 1; i < _inst.indexCount(); i++)
-        {
-            InstPrst * elt = _inst.atIndex(index);
-            if (elt != nullptr)
-                elt->decrementRow();
-        }
-
-        return true;
+        InstPrst * elt = _inst.atIndex(i);
+        if (elt != nullptr)
+            elt->decrementRow();
     }
 
-    return false;
+    return true;
 }
 
 int Soundfont::addPreset()
@@ -247,22 +245,20 @@ bool Soundfont::deletePreset(int index)
         return false;
 
     InstPrst * prst = _prst.atIndex(index);
-    if (prst != nullptr)
+    if (prst == nullptr)
+        return false;
+
+    // Delete the preset
+    prst->notifyDeletion();
+    delete _prst.takeAtIndex(index);
+
+    // Update the row number of the following presets
+    for (int i = index + 1; i < _prst.indexCount(); i++)
     {
-        // Delete the preset
-        prst->notifyDeletion();
-        delete _prst.takeAtIndex(index);
-
-        // Update the row number of the following samples
-        for (int i = index + 1; i < _prst.indexCount(); i++)
-        {
-            InstPrst * elt = _prst.atIndex(index);
-            if (elt != nullptr)
-                elt->decrementRow();
-        }
-
-        return true;
+        InstPrst * elt = _prst.atIndex(i);
+        if (elt != nullptr)
+            elt->decrementRow();
     }
 
-    return false;
+    return true;
 }
