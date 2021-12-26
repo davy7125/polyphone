@@ -232,6 +232,10 @@ public:
     // Textual description
     static QString getDescription(AttributeType champ, bool isPrst);
 
+    // Modulators
+    static QList<AttributeType> getAttributeListForMod(bool isPrst);
+    static bool isValidAttributeForMod(AttributeType attribute, bool isPrst);
+
 private:
     static int limit(int value, int min, int max);
     static double limit(double value, double min, double max);
@@ -240,6 +244,9 @@ private:
     bool _isPrst;
     double _realValue;
     AttributeValue _storedValue;
+
+    static QList<AttributeType> s_attributesForPrstMod;
+    static QList<AttributeType> s_attributesForInstMod;
 };
 
 #endif // ATTRIBUTE_H

@@ -45,7 +45,6 @@ void ModulatorListWidget::onSelectionChanged()
     }
 }
 
-
 void ModulatorListWidget::keyPressEvent(QKeyEvent * event)
 {
     if (event->key() == Qt::Key_Delete)

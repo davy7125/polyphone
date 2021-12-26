@@ -150,6 +150,8 @@ void ModulatorEditor::setIds(IdList ids, QList<AttributeType> attributes)
         ui->stackedWidget->setCurrentIndex(0);
         ui->labelModSummary->setText("<b>" + tr("No modulators") + "</b>");
         ui->labelModSummary->setStyleSheet("QLabel{color:" + _mixedColor.name() + ";}");
+
+        _lastAttributes.clear();
     }
     else if (ids.count() > 1)
     {
@@ -157,6 +159,8 @@ void ModulatorEditor::setIds(IdList ids, QList<AttributeType> attributes)
         ui->stackedWidget->setCurrentIndex(1);
         ui->labelModSummary->setText("<b>" + tr("Select a single division to display the modulator list") + "</b>");
         ui->labelModSummary->setStyleSheet("QLabel{color:" + _mixedColor.name() + ";}");
+
+        _lastAttributes.clear();
     }
     else
     {
@@ -181,6 +185,8 @@ void ModulatorEditor::setIds(IdList ids, QList<AttributeType> attributes)
 
         // Update the interface
         updateInterface(attributes, sameId);
+
+        _lastAttributes = attributes;
     }
 }
 
@@ -384,10 +390,18 @@ void ModulatorEditor::on_pushAdd_clicked()
     val.dwValue = 0;
     sm->set(modId, champ_sfModSrcOper, val);
     sm->set(modId, champ_sfModAmtSrcOper, val);
-    val.wValue = champ_fineTune; // An "easy" default value
+    val.wValue = getDefaultAttributeType();
     sm->set(modId, champ_sfModDestOper, val);
 
     sm->endEditing("modulatorEditor");
+}
+
+AttributeType ModulatorEditor::getDefaultAttributeType()
+{
+    for (int i = 0; i < _lastAttributes.count(); i++)
+        if (Attribute::isValidAttributeForMod(_lastAttributes[i], _isPrst))
+            return _lastAttributes[i];
+    return champ_fineTune; // An "easy" default value
 }
 
 void ModulatorEditor::on_pushCopy_clicked()

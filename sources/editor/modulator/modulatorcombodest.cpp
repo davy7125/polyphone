@@ -36,64 +36,16 @@ void ModulatorComboDest::initialize(EltID id)
     // Store the id
     _id = id;
 
-    // Combobox related to an instrument modulator?
-    bool isInst = (id.typeElement == elementInstMod || id.typeElement == elementInstSmplMod);
+    // Combobox related to a preset modulator?
+    bool isPrst = (id.typeElement == elementPrstMod || id.typeElement == elementPrstInstMod);
 
     // List of all possible attributes
-
-    _destIndex << champ_fineTune
-               << champ_coarseTune
-               << champ_scaleTuning;
-    if (isInst)
-        _destIndex << champ_overridingRootKey;
-    _destIndex << champ_initialAttenuation
-               << champ_initialFilterFc
-               << champ_initialFilterQ
-               << champ_pan
-               << champ_chorusEffectsSend
-               << champ_reverbEffectsSend
-               << champ_delayVolEnv
-               << champ_attackVolEnv
-               << champ_holdVolEnv
-               << champ_decayVolEnv
-               << champ_sustainVolEnv
-               << champ_releaseVolEnv
-               << champ_keynumToVolEnvHold
-               << champ_keynumToVolEnvDecay
-               << champ_delayModEnv
-               << champ_attackModEnv
-               << champ_holdModEnv
-               << champ_decayModEnv
-               << champ_sustainModEnv
-               << champ_releaseModEnv
-               << champ_keynumToModEnvHold
-               << champ_keynumToModEnvDecay
-               << champ_modEnvToPitch
-               << champ_modEnvToFilterFc
-               << champ_delayModLFO
-               << champ_freqModLFO
-               << champ_modLfoToPitch
-               << champ_modLfoToVolume
-               << champ_modLfoToFilterFc
-               << champ_delayVibLFO
-               << champ_freqVibLFO
-               << champ_vibLfoToPitch;
-    if (isInst)
-        _destIndex << champ_exclusiveClass
-                   << champ_sampleModes
-                   << champ_startAddrsOffset
-                   << champ_startAddrsCoarseOffset
-                   << champ_endAddrsOffset
-                   << champ_endAddrsCoarseOffset
-                   << champ_startloopAddrsOffset
-                   << champ_startloopAddrsCoarseOffset
-                   << champ_endloopAddrsOffset
-                   << champ_endloopAddrsCoarseOffset;
+    _destIndex = Attribute::getAttributeListForMod(isPrst);
 
     // Populate with the attribute list
     this->blockSignals(true);
     for (int i = 0; i < _destIndex.count(); i++)
-        this->addItem(Attribute::getDescription(_destIndex[i], !isInst), _destIndex[i]);
+        this->addItem(Attribute::getDescription(_destIndex[i], isPrst), _destIndex[i]);
     this->blockSignals(false);
 
     loadValue();
@@ -205,7 +157,6 @@ void ModulatorComboDest::onCurrentIndexChanged(int index)
     }
 
     // Compare with the old value
-
     SoundfontManager * sm = SoundfontManager::getInstance();
     AttributeValue val = sm->get(_id, champ_sfModDestOper);
     if (val.wValue != index)

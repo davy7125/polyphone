@@ -67,6 +67,7 @@ private:
     QList<EltID> getSelectedModulators();
     QList<ModulatorData> getModList(EltID id);
     void pasteMod(EltID id, QList<ModulatorData> modulators);
+    AttributeType getDefaultAttributeType();
 
     static QList<ModulatorEditor *> s_instInstances;
     static QList<ModulatorEditor *> s_prstInstances;
@@ -76,6 +77,7 @@ private:
     EltID _currentId;
     QColor _mixedColor;
     bool _isPrst;
+    QList<AttributeType> _lastAttributes;
 };
 
 #endif // MODULATOREDITOR_H

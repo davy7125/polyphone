@@ -27,6 +27,27 @@
 #include "utils.h"
 #include <qmath.h>
 
+QList<AttributeType> Attribute::s_attributesForPrstMod = QList<AttributeType>()
+        << champ_fineTune << champ_coarseTune << champ_scaleTuning
+        << champ_initialAttenuation << champ_initialFilterFc << champ_initialFilterQ
+        << champ_pan << champ_chorusEffectsSend << champ_reverbEffectsSend
+        << champ_delayVolEnv << champ_attackVolEnv << champ_holdVolEnv << champ_decayVolEnv << champ_sustainVolEnv << champ_releaseVolEnv
+        << champ_keynumToVolEnvHold << champ_keynumToVolEnvDecay
+        << champ_delayModEnv << champ_attackModEnv << champ_holdModEnv << champ_decayModEnv << champ_sustainModEnv << champ_releaseModEnv
+        << champ_keynumToModEnvHold << champ_keynumToModEnvDecay
+        << champ_modEnvToPitch << champ_modEnvToFilterFc
+        << champ_delayModLFO << champ_freqModLFO
+        << champ_modLfoToPitch << champ_modLfoToVolume << champ_modLfoToFilterFc
+        << champ_delayVibLFO << champ_freqVibLFO
+        << champ_vibLfoToPitch;;
+QList<AttributeType> Attribute::s_attributesForInstMod = QList<AttributeType>()
+        << champ_overridingRootKey // Extra stuff for inst
+        << s_attributesForPrstMod
+           // Extra stuff for inst
+        << champ_exclusiveClass << champ_sampleModes
+        << champ_startAddrsOffset << champ_startAddrsCoarseOffset << champ_endAddrsOffset << champ_endAddrsCoarseOffset
+        << champ_startloopAddrsOffset << champ_startloopAddrsCoarseOffset << champ_endloopAddrsOffset << champ_endloopAddrsCoarseOffset;
+
 Attribute::Attribute(AttributeType champ, bool isPrst) :
     _champ(champ),
     _isPrst(isPrst),
@@ -766,4 +787,14 @@ QString Attribute::getDescription(AttributeType champ, bool isPrst)
     }
 
     return result;
+}
+
+QList<AttributeType> Attribute::getAttributeListForMod(bool isPrst)
+{
+    return isPrst ? s_attributesForPrstMod : s_attributesForInstMod;
+}
+
+bool Attribute::isValidAttributeForMod(AttributeType attribute, bool isPrst)
+{
+    return isPrst ? s_attributesForPrstMod.contains(attribute) : s_attributesForInstMod.contains(attribute);
 }
