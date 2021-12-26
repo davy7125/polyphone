@@ -198,7 +198,10 @@ void WindowManager::onTabTitleChanged(QString title)
 {
     int index = _tabWidget->indexOf(dynamic_cast<Editor*>(QObject::sender()));
     if (index != -1)
-        _tabWidget->setTabText(index, title);
+    {
+        int maxTabTitleSize = 30;
+        _tabWidget->setTabText(index, title.size() > maxTabTitleSize ? title.left(maxTabTitleSize - 3) + "..." : title);
+    }
 }
 
 void WindowManager::onFilePathChanged(QString filePath)

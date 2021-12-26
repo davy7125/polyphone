@@ -108,7 +108,9 @@ int ColoredTabWidget::addColoredTab(QWidget *widget, QString iconName, const QSt
     _tabInfo[widget]._textColor = textColor;
     _tabInfo[widget]._iconName = iconName;
 
-    int indexTab = this->addTab(widget, label);
+    // Add a tab
+    int maxTabTitleSize = 30;
+    int indexTab = this->addTab(widget, label.size() > maxTabTitleSize ? label.left(maxTabTitleSize - 3) + "..." : label);
 
     // Style the close button
     QPushButton * button = new QPushButton();

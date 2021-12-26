@@ -91,7 +91,7 @@ PageSmpl::PageSmpl(QWidget *parent) :
         QTabWidget * tabWidget = new QTabWidget(ui->frame_5);
         QGridLayout * layout = dynamic_cast<QGridLayout *>(ui->frame_5->layout());
         layout->addWidget(tabWidget, 0, 0, 0, 1);
-        tabWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum );
+        tabWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         tabWidget->tabBar()->setMinimumWidth(240);
 
         // Populate the tab widget

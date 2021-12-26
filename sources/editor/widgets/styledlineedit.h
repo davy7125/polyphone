@@ -34,20 +34,27 @@ class StyledLineEdit : public QLineEdit
 public:
     StyledLineEdit(QWidget *parent = nullptr);
 
-    // Set it to false if you want the widget keeps the same size
-    // By default: true
+    /// Set the text to elide. The displayed text will be set automatically
+    void setTextToElide(const QString text);
+
+    /// Set it to false if you want the widget keeps the same size
+    /// By default: true
     void resizeAfterChange(bool resizeOn) { _resize = resizeOn; }
 
-    // Change the color of the text
+    /// Change the color of the text
     void setColor(QColor textColor);
+
+    /// Best size
+    QSize sizeHint() const override;
 
 signals:
     void focussed(bool hasFocus);
 
 protected:
-    virtual void focusInEvent(QFocusEvent *e);
-    virtual void focusOutEvent(QFocusEvent *e);
-    virtual void keyPressEvent(QKeyEvent * e);
+    void focusInEvent(QFocusEvent *e) override;
+    void focusOutEvent(QFocusEvent *e) override;
+    void keyPressEvent(QKeyEvent * e) override;
+    void resizeEvent(QResizeEvent * event) override;
 
 private slots:
     void onTextEdited(QString text);
@@ -55,8 +62,10 @@ private slots:
 private:
     void setStyle(bool hasFocus);
 
+    QString _fullText;
     bool _resize;
     QColor _textColor;
+    int _defaultWidth;
 };
 
 #endif // STYLEDLINEEDIT_H

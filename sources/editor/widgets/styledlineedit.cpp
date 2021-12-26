@@ -28,7 +28,8 @@
 #include <QKeyEvent>
 
 StyledLineEdit::StyledLineEdit(QWidget * parent) : QLineEdit(parent),
-    _resize(true)
+    _resize(true),
+    _defaultWidth(0)
 {
     connect(this, SIGNAL(textEdited(QString)), this, SLOT(onTextEdited(QString)));
     connect(this, SIGNAL(textChanged(QString)), this, SLOT(onTextEdited(QString)));
@@ -38,8 +39,19 @@ StyledLineEdit::StyledLineEdit(QWidget * parent) : QLineEdit(parent),
     this->setStyle(false);
 }
 
+void StyledLineEdit::setTextToElide(const QString text)
+{
+    this->setText(text);
+    this->resizeEvent(nullptr);
+}
+
 void StyledLineEdit::focusInEvent(QFocusEvent *e)
 {
+    // Restore the full text
+    this->blockSignals(true);
+    this->setText(_fullText);
+    this->blockSignals(false);
+
     this->setStyle(true);
     QLineEdit::focusInEvent(e);
     emit(focussed(true));
@@ -50,6 +62,9 @@ void StyledLineEdit::focusOutEvent(QFocusEvent *e)
     this->setStyle(false);
     QLineEdit::focusOutEvent(e);
     emit(focussed(false));
+
+    // Adapt the text
+    resizeEvent(nullptr);
 }
 
 void StyledLineEdit::keyPressEvent(QKeyEvent * e)
@@ -62,7 +77,7 @@ void StyledLineEdit::keyPressEvent(QKeyEvent * e)
 
 void StyledLineEdit::setColor(QColor textColor)
 {
-    _textColor = textColor;
+    _textColor = textColor;this->sizeHint();
     this->setStyle(this->hasFocus());
 }
 
@@ -85,10 +100,30 @@ void StyledLineEdit::onTextEdited(QString text)
     if (!_resize)
         return;
 
+    _fullText = text;
+
     // Adapt the width
     QFontMetrics fm(this->font());
-    int width = fm.width(text.isEmpty() ? this->placeholderText() : text) + 20;
+    _defaultWidth = fm.width(text.isEmpty() ? this->placeholderText() : text) + 20;
+}
 
-    this->setMaximumWidth(width);
-    this->setMinimumWidth(width);
+QSize StyledLineEdit::sizeHint() const
+{
+    return QSize(_defaultWidth, QLineEdit::sizeHint().height());
+}
+
+void StyledLineEdit::resizeEvent(QResizeEvent * event)
+{
+    // Compute the text to display
+    QFontMetrics metrics(this->font());
+    int width = (event == nullptr ? this->width() : event->size().width());
+    QString elidedText = metrics.elidedText(_fullText, Qt::ElideRight, width - 10);
+
+    // Display the elided text
+    this->blockSignals(true);
+    this->setText(elidedText);
+    this->blockSignals(false);
+
+    if (event != nullptr)
+        QLineEdit::resizeEvent(event);
 }
