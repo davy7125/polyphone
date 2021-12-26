@@ -105,7 +105,20 @@ QDataStream & operator >> (QDataStream &in, Sf2Header &header)
             QByteArray buffer(length, Qt::Uninitialized);
             if (in.readRawData(buffer.data(), length) != length)
                 return in;
-            header._infos[bloc] = QString::fromLatin1(buffer);
+
+            if (bloc == "ICMT")
+            {
+                // Consider first it is UTF-8 text
+                QTextCodec::ConverterState state;
+                QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+                header._infos[bloc] = codec->toUnicode(buffer.constData(), buffer.size(), &state);
+
+                // Or latin1 if there is an invalid char
+                if (state.invalidChars != 0)
+                    header._infos[bloc] = QString::fromLatin1(buffer);
+            }
+            else
+                header._infos[bloc] = QString::fromLatin1(buffer);
         }
 
         pos += 8 + size.value;

@@ -185,6 +185,13 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     dwTmp = sm->getQstr(id, champ_ICMT).length();
     if (dwTmp > 0)
     {
+        // The comment can be encoded as UTF-8 or Latin1
+        QString commentTxt = sm->getQstr(id, champ_ICMT);
+        QByteArray commentData = commentTxt.toLatin1();
+        if (QString::fromLatin1(commentData) != commentTxt)
+            commentData = commentTxt.toUtf8();
+        dwTmp = commentData.length();
+
         if (dwTmp > 65536) dwTmp = 65536;
         dwTmp2 = dwTmp + 2 - (dwTmp)%2;
         taille_info += dwTmp2 + 8;
@@ -461,11 +468,18 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     dwTmp = sm->getQstr(id, champ_ICMT).length(); // commentaires, champ optionnel
     if (dwTmp > 0)
     {
+        // Encode it as Latin1 or UTF-8 if this is not possible
+        QString commentTxt = sm->getQstr(id, champ_ICMT);
+        QByteArray commentData = commentTxt.toLatin1();
+        if (QString::fromLatin1(commentData) != commentTxt)
+            commentData = commentTxt.toUtf8();
+
+        dwTmp = commentData.length();
         if (dwTmp > 65536) dwTmp = 65536;
         dwTmp2 = dwTmp + 2 - (dwTmp)%2;
         fi.write("ICMT", 4);
         fi.write((char *)&dwTmp2, 4);
-        fi.write(sm->getQstr(id, champ_ICMT).toLatin1());
+        fi.write(commentData);
         charTmp = '\0';
         for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
             fi.write(&charTmp, 1);
