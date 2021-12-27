@@ -65,7 +65,7 @@ win32 {
     LIBS += -lzlib1 -lwinmm -llibogg -llibvorbis -llibvorbisfile -lcrypto -llibFLAC
 }
 unix:!macx {
-    QMAKE_CXXFLAGS += -std=c++11
+    QMAKE_CXXFLAGS += -std=c++11 -ffloat-store
     DEFINES += __LINUX_ALSASEQ__ __UNIX_JACK__
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa jack portaudio-2.0 zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0
@@ -103,7 +103,7 @@ unix:!macx {
                 install_desktop install_appdata install_mime install_man install_doc
 }
 macx {
-    QMAKE_CXXFLAGS += -std=c++11
+    QMAKE_CXXFLAGS += -std=c++11 -ffloat-store
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
     QMAKE_MAC_SDK = macosx10.14
     DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
@@ -165,30 +165,19 @@ contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
 # Location of sfArk
 HEADERS += \
     core/input/sfark/sfarkextractor2.h \
-    core/input/sfark/abstractextractor.h \
-    dialogs/latinvalidator.h \
-    editor/widgets/nullablespinbox.h
-SPECIAL_SOURCES = core/input/sfark/sfarkextractor1.cpp \
+    core/input/sfark/abstractextractor.h
+SOURCES += core/input/sfark/sfarkextractor1.cpp \
     core/input/sfark/sfarkextractor2.cpp
 contains(DEFINES, USE_LOCAL_SFARKLIB) {
     DEFINES += USE_MANUAL_ENDIANNESS MANUAL_LITTLE_ENDIAN
     INCLUDEPATH += lib/_option_sfarklib
     HEADERS += lib/_option_sfarklib/sfArkLib.h
-    macx {
-        SOURCES += lib/_option_sfarklib/sfklZip.cpp \
-            lib/_option_sfarklib/sfklLPC.cpp \
-            lib/_option_sfarklib/sfklDiff.cpp \
-            lib/_option_sfarklib/sfklCrunch.cpp \
-            lib/_option_sfarklib/sfklCoding.cpp \
-            lib/_option_sfarklib/sfklString.cpp
-    } else {
-        SPECIAL_SOURCES += lib/_option_sfarklib/sfklZip.cpp \
-            lib/_option_sfarklib/sfklLPC.cpp \
-            lib/_option_sfarklib/sfklDiff.cpp \
-            lib/_option_sfarklib/sfklCrunch.cpp \
-            lib/_option_sfarklib/sfklCoding.cpp \
-            lib/_option_sfarklib/sfklString.cpp
-    }
+    SOURCES += lib/_option_sfarklib/sfklZip.cpp \
+        lib/_option_sfarklib/sfklLPC.cpp \
+        lib/_option_sfarklib/sfklDiff.cpp \
+        lib/_option_sfarklib/sfklCrunch.cpp \
+        lib/_option_sfarklib/sfklCoding.cpp \
+        lib/_option_sfarklib/sfklString.cpp
 } else {
     LIBS += -lsfark
 }
@@ -891,7 +880,9 @@ HEADERS += \
     editor/tools/fast_edit_smpl/toolfasteditsmpl.h \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.h \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.h \
-    repository/soundfont/uploadingdialog.h
+    repository/soundfont/uploadingdialog.h \
+    dialogs/latinvalidator.h \
+    editor/widgets/nullablespinbox.h
 
 FORMS += \
     dialogs/dialog_list.ui \
@@ -979,22 +970,3 @@ DISTFILES += \
     changelog
 
 RESOURCES += resources.qrc
-
-# Special build options for sfArk
-ExtraCompiler.input = SPECIAL_SOURCES
-ExtraCompiler.variable_out = OBJECTS
-ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
-win32 {
-    ExtraCompiler.commands = $${QMAKE_CXX} -D__LITTLE_ENDIAN__ -MD -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
-}
-macx {
-    ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-}
-unix:!macx {
-    contains(QT_ARCH, i386) {
-        ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ -march=pentium3 -mfpmath=sse $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-    } else {
-        ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC -D__LITTLE_ENDIAN__ $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-    }
-}
-QMAKE_EXTRA_COMPILERS += ExtraCompiler
