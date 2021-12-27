@@ -105,6 +105,10 @@ void ConfigSectionInterface::initialize()
     ui->comboKeyName->setCurrentIndex((int)ContextManager::keyName()->getNameMiddleC());
     ui->comboKeyName->blockSignals(false);
 
+    ui->checkUniqueInstance->blockSignals(true);
+    ui->checkUniqueInstance->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "unique_instance", true).toBool());
+    ui->checkUniqueInstance->blockSignals(false);
+
     ui->checkDecorations->blockSignals(true);
     ui->checkDecorations->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "decoration", true).toBool());
     ui->checkDecorations->blockSignals(false);
@@ -285,3 +289,9 @@ void ConfigSectionInterface::on_checkDecorations_clicked()
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "decoration", ui->checkDecorations->isChecked());
     ui->labelRestart->show();
 }
+
+void ConfigSectionInterface::on_checkUniqueInstance_clicked()
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "unique_instance", ui->checkUniqueInstance->isChecked());
+}
+

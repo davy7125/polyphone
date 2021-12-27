@@ -60,9 +60,7 @@ void writeLine(QString line)
 
 int launchApplication(QtSingleApplication * app, Options &options)
 {
-    // Application name
-    QApplication::setApplicationName("Polyphone");
-    QApplication::setOrganizationName("polyphone");
+    // Application langage
     ContextManager::translation()->translate();
 
     // Application style
@@ -172,8 +170,6 @@ int resetConfig(Options &options)
 {
     Q_UNUSED(options)
 
-    QApplication::setApplicationName("Polyphone");
-    QApplication::setOrganizationName("polyphone");
     QSettings settings;
     settings.clear();
     writeLine("Previous configuration is now cleared.");
@@ -198,14 +194,20 @@ int main(int argc, char *argv[])
     Utils::prepareConversionTables();
 
     QtSingleApplication app("polyphone", argc, argv);
+    QApplication::setApplicationName("Polyphone");
+    QApplication::setOrganizationName("polyphone");
+
     Options options(argc, argv);
     int valRet = 0;
 
     // Possibly launch the application
     if (!options.error() && options.mode() == Options::MODE_GUI)
     {
+        QSettings settings;
+        bool uniqueInstance = settings.value("display/unique_instance", true).toBool();
+
         // Return immediately if there is already an instance
-        if (app.sendMessage(options.getInputFiles().join('|')))
+        if (uniqueInstance && app.sendMessage(options.getInputFiles().join('|')))
             return 0;
 
         // Or launch the application as a unique instance

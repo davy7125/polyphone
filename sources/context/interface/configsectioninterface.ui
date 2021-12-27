@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>553</width>
-    <height>382</height>
+    <height>398</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,6 +26,32 @@
       <string>Options</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Decorations</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Language</string>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_22">
         <property name="maximumSize">
@@ -45,8 +71,21 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_2">
+      <item row="0" column="1">
+       <widget class="QComboBox" name="comboLangue">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="currentIndex">
+         <number>-1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="checkDecorations">
         <property name="font">
          <font>
           <weight>50</weight>
@@ -54,7 +93,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Language</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -92,6 +131,19 @@
           <string comment="speaking of the &quot;sort divisions&quot;">none</string>
          </property>
         </item>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Sort divisions</string>
+        </property>
        </widget>
       </item>
       <item row="1" column="1">
@@ -145,34 +197,8 @@
         </item>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label">
-        <property name="font">
-         <font>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Sort divisions</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="comboLangue">
-        <property name="font">
-         <font>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="currentIndex">
-         <number>-1</number>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="0">
-       <widget class="QLabel" name="label_3">
+       <widget class="QLabel" name="label_4">
         <property name="font">
          <font>
           <weight>50</weight>
@@ -180,12 +206,12 @@
          </font>
         </property>
         <property name="text">
-         <string>Decorations</string>
+         <string>Unique instance</string>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QCheckBox" name="checkDecorations">
+       <widget class="QCheckBox" name="checkUniqueInstance">
         <property name="font">
          <font>
           <weight>50</weight>
