@@ -42,7 +42,7 @@ look at the file extenson in order to decide how to handle it.
 
 // Error codes...
 #define SFARKLIB_SUCCESS		 0	// No error
-#define	SFARKLIB_ERR_INIT		-1	// Failed to initialize
+#define	SFARKLIB_ERR_INIT		-1	// Failed to initialise
 #define	SFARKLIB_ERR_MALLOC		-2	// Failed to allocate memory
 #define	SFARKLIB_ERR_SIGNATURE		-3	// header does not contain "sfArk" signature
 #define	SFARKLIB_ERR_HEADERCHECK	-4	// sfArk file has a corrupt header

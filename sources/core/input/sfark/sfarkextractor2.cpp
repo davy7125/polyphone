@@ -72,6 +72,10 @@ bool sfkl_GetLicenseAgreement(const char *LicenseText, const char *LicenseFileNa
 {
     Q_UNUSED(LicenseText)
     Q_UNUSED(LicenseFileName)
+
+    // Delete the file that has been created
+    SfArkExtractor2::_fileManager.deleteFile(LicenseFileName);
+
     return true;
 }
 
@@ -79,7 +83,9 @@ bool sfkl_GetLicenseAgreement(const char *LicenseText, const char *LicenseFileNa
 void sfkl_DisplayNotes(const char *NotesText, const char *NotesFileName)
 {
     Q_UNUSED(NotesText)
-    Q_UNUSED(NotesFileName)
+
+    // Delete the file that has been created
+    SfArkExtractor2::_fileManager.deleteFile(NotesFileName);
 }
 
 

@@ -72,7 +72,7 @@ static BYTE nb[1 << (AWORD_BITS-1)]; // Array to hold number of bits needed to r
   bioBits = LOWBITS(bioBits, bioRemBits)		
   
 // =========================================================================
-#ifdef	__BIG_ENDIAN__
+#if BYTE_ORDER == BIG_ENDIAN
 
 #define	WFIX(I)		s = bp[I+0]; bp[I+0] = bp[I+1]; bp[I+1] = s;
 // Read from disk if needed, and fix endians

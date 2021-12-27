@@ -17,10 +17,30 @@
 // You should have received a copy of the GNU General Public License
 // along with sfArkLib.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef	__BIG_ENDIAN__
-#ifndef __LITTLE_ENDIAN__
+#if defined(USE_MANUAL_ENDIANNESS) && \
+    (defined(MANUAL_LITTLE_ENDIAN) || defined(MANUAL_BIG_ENDIAN))
+#define LITTLE_ENDIAN	1234
+#define BIG_ENDIAN	4321
+#ifdef MANUAL_LITTLE_ENDIAN
+#define BYTE_ORDER	LITTLE_ENDIAN
+#else
+#define BYTE_ORDER	BIG_ENDIAN
+#endif
+#elif defined(USE_SYS_ENDIAN_H)
+/* BSD */
+#include <sys/endian.h>
+#elif defined(USE_ENDIAN_H)
+/* GNU */
+#include <endian.h>
+#endif
+
+#if !defined(LITTLE_ENDIAN) || !defined(BIG_ENDIAN) || !defined(BYTE_ORDER)
 #error ENDIAN system undefined
 #endif
+
+#if (BYTE_ORDER != LITTLE_ENDIAN) && (BYTE_ORDER != BIG_ENDIAN)
+/* PDP endian or something */
+#error only big or little endian systems are supported
 #endif
 
 #include	"sfArkLib.h"
@@ -67,17 +87,17 @@
 // ----- typdefs -----
 typedef unsigned short		USHORT;
 typedef unsigned char		BYTE;
-typedef unsigned long		ULONG;
+typedef unsigned int		ULONG;
 //typedef int			bool;
 
-typedef short							AWORD;				// Audio word (i.e., 16-bit audio)
+typedef short			AWORD;		// Audio word, i.e. 16-bit audio
 typedef unsigned short		UAWORD;
-typedef long		 					LAWORD;				// "long" audio word i.e. 32 bits
-typedef unsigned long			ULAWORD;
+typedef int			LAWORD;		// "long" audio word, i.e. 32 bits
+typedef unsigned int		ULAWORD;
 
 // Types used by Bit I/O (BIO) routines...
-typedef USHORT					BIOWORD;   
-typedef ULONG						BIOWORD2;
+typedef USHORT					BIOWORD;
+typedef ULONG					BIOWORD2;
 
 // -------------------
 
@@ -109,7 +129,7 @@ typedef ULONG						BIOWORD2;
 #define COMPRESSION_v1Fast        1       // sfArk V1.1 "Fast" compression
 #define COMPRESSION_v1Full        2       // sfArk V1.1 "Full" compression
 
-#define	COMPRESSION_v2			  3       // Lowest value for V2 compression
+#define	COMPRESSION_v2						3				// Lowest value for V2 compression
 
 #define COMPRESSION_v2NonAudio    3       // sfArk V2 "NonAudio" (uses ZLib MemComp)
 #define COMPRESSION_v2Turbo       4       // sfArk V2 "Turbo" compression (BD2 only, maxloops 3)
@@ -126,7 +146,7 @@ typedef ULONG						BIOWORD2;
 #define	RETURN_ON_ERROR()	if (GlobalErrorFlag != SFARKLIB_SUCCESS)  return(GlobalErrorFlag)
 #define	JUMP_ON_ERROR(label)	if (GlobalErrorFlag != SFARKLIB_SUCCESS)  goto label
 
-#ifdef	__BIG_ENDIAN__
+#if BYTE_ORDER == BIG_ENDIAN
     #define FIX_ENDIAN16(w)	((((BYTE) w) << 8) | (((USHORT)w) >> 8))
 #else
     #define FIX_ENDIAN16(w)	(w)	
@@ -205,3 +225,7 @@ extern long	UnLPC(AWORD *OutBuf, AWORD *InBuf, short bufsize, short nc, ULONG *F
 
 // sfArkLib_Zip...
 extern ULONG	UnMemcomp(const BYTE *InBuf, int InBytes, BYTE *OutBuf, int OutBufLen);
+
+ // sfArkLib_String...
+extern char *StrncpyEnsureNul(char *destination, const char *source, int num);
+void ChangeFileExt(const char *path, const char *newExtension, char *out, int outSize);
