@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>576</width>
+    <width>681</width>
     <height>500</height>
    </rect>
   </property>
@@ -20,8 +20,8 @@
    <string>Polyphone Soundfont Editor</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/icons/icon</normaloff>:/icons/icon</iconset>
+   <iconset resource="../resources.qrc">
+    <normaloff>:/misc/polyphone.png</normaloff>:/misc/polyphone.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -305,6 +305,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

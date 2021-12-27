@@ -26,8 +26,8 @@
    <string>Recorder</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/icons/icon</normaloff>:/icons/icon</iconset>
+   <iconset resource="../resources.qrc">
+    <normaloff>:/misc/polyphone.png</normaloff>:/misc/polyphone.png</iconset>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="spacing">
@@ -154,6 +154,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

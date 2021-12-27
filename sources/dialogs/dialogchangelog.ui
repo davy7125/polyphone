@@ -17,8 +17,8 @@
    <string>Welcome</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/icons/icon</normaloff>:/icons/icon</iconset>
+   <iconset resource="../resources.qrc">
+    <normaloff>:/misc/polyphone.png</normaloff>:/misc/polyphone.png</iconset>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -117,6 +117,8 @@
   <tabstop>pushOk</tabstop>
   <tabstop>textChangelog</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

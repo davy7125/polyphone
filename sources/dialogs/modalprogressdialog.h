@@ -27,6 +27,7 @@
 
 #include <QProgressDialog>
 #include <QKeyEvent>
+#include <QIcon>
 
 class ModalProgressDialog : public QProgressDialog
 {
@@ -40,6 +41,7 @@ public:
         this->setWindowModality(Qt::WindowModal);
         this->setCancelButton(nullptr);
         this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint & ~Qt::WindowCloseButtonHint);
+        this->setWindowIcon(QIcon(":/misc/polyphone.png"));
         this->reset();
     }
 

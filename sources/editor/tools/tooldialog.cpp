@@ -26,11 +26,13 @@
 #include "abstracttoolgui.h"
 #include "abstracttool.h"
 #include <QGridLayout>
+#include <QIcon>
 
 ToolDialog::ToolDialog(AbstractToolGui *toolGui, AbstractTool * tool, QWidget *parent) : QDialog(parent)
 {
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
     this->setWindowModality(Qt::WindowModal);
+    this->setWindowIcon(QIcon(":/misc/polyphone.png"));
 
     // Connection of the GUI
     connect(toolGui, SIGNAL(validated()), this, SIGNAL(validated()));

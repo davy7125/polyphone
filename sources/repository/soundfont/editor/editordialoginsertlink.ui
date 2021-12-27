@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>298</width>
-    <height>101</height>
+    <height>138</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Insert a link</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../../resources.qrc">
+    <normaloff>:/misc/polyphone.png</normaloff>:/misc/polyphone.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -59,7 +63,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
