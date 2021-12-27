@@ -63,6 +63,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
     _credit.addContributor(tr("Andrea Celani", "translation needed if the alphabet is not the same (cyrillic for instance)"), "acelani74@gmail.com");
     _credit.addContributor(tr("Kinwie", "translation needed if the alphabet is not the same (cyrillic for instance)"), "kinwie@yahoo.com");
     _credit.addContributor(tr("Michael Schyllberg", "translation needed if the alphabet is not the same (cyrillic for instance)"), "michael.schyllberg@bredband.net");
+    _credit.addContributor(tr("Mirabilos", "translation needed if the alphabet is not the same (cyrillic for instance)"), "tg@debian.org");
     _credit.addContributor(tr("Paul Stratman", "translation needed if the alphabet is not the same (cyrillic for instance)"), "pcstratman@gmail.com");
     _credit.addContributor(tr("Steve Clarke", "translation needed if the alphabet is not the same (cyrillic for instance)"), "stevertyu@yahoo.com");
 
