@@ -43,10 +43,10 @@ DialogAbout::DialogAbout(QWidget *parent) :
     ui->labelIcon->setPixmap(ContextManager::theme()->getColoredSvg(":/misc/logo.svg", QSize(128, 128), replacement));
 
     // Description
-    QString annee = "2013 -" + QString::number(QDate::currentDate().year());
+    QString yearRange = QString("2013 - ") + CURRENT_YEAR;
     QString url = "https://www.polyphone-soundfonts.com";
     QString urlDonation = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted";
-    ui->labelDescription->setText("<html><head/><body><p align='center'>" + tr("Copyright") + " © " + annee +
+    ui->labelDescription->setText("<html><head/><body><p align='center'>" + tr("Copyright") + " © " + yearRange +
                                   " " + tr("Davy Triponney") + "<br/><br/><a href='" + url +
                                   "'><span style=' text-decoration: underline; color:" +
                                   replacement["secondColor"] + ";'>" +
@@ -168,6 +168,6 @@ QString Credit::getAwesomeCredit()
             "<td width='50%'>Most of the icons are provided by " +
             getFormattedLink("Awesome", "https://fontawesome.com/") +
             " under the license " +
-            getFormattedLink("CC-BY 4.0", "https://creativecommons.org/licenses/by/4.0/") +
+            getFormattedLink("CC-BY 4.0", "https://creativecommons.org/licenses/by/4.0/") +
             " and have been colored to fit the themes.</td></tr>";
 }

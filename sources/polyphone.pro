@@ -16,8 +16,9 @@ DEFINES += USE_LOCAL_SFARKLIB
 #DEFINES += USE_WOLFSSL
 
 # Polyphone version
-DEFINES += SOFT_VERSION=\\\"2.2.0\\\"
-DEFINES += IDENTIFIER=\\\"\\\"
+DEFINES += SOFT_VERSION=\\\"2.3.0\\\"
+DEFINES += IDENTIFIER=\\\"beta\\\"
+DEFINES += CURRENT_YEAR=\\\"2022\\\"
 
 # List to be completed if other translations are desired
 # Format: polyphone_XX.ts, XX being the language code
