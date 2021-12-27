@@ -39,6 +39,7 @@ public:
     virtual void stepBy(int steps);
     virtual QValidator::State validate(QString& input, int& pos) const;
 
+    bool isNull();
     int getValMin();
     int getValMax();
     void setText(QString text);
@@ -69,9 +70,10 @@ private:
         SectionNone
     };
     SpinboxSection getCurrentSection() const;
-    void stringToRange(QString input, int &valMin, int &valMax, QValidator::State &state) const;
+    void stringToRange(QString input, bool &isNull, int &valMin, int &valMax, QValidator::State &state) const;
     static int MINI;
     static int MAXI;
+    bool _isNull;
     int _valMin, _valMax;
     int _firstMidiKey;
 };

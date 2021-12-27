@@ -32,6 +32,7 @@ ComboBoxLoopMode::ComboBoxLoopMode(QWidget *parent) : QComboBox(parent),
     this->setView(new ComboView());
 
     // Different loop possibilities
+    this->addItem("", -1);
     if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
     {
         this->addItem(QIcon(":/icons/loop_off_w.png"), "", 0);

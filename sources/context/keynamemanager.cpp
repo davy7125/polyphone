@@ -109,37 +109,64 @@ QString KeyNameManager::getKeyName(unsigned int keyNum, bool forceTexte, bool wi
 
 int KeyNameManager::getKeyNum(QString keyName, bool forceC4)
 {
-    keyName = keyName.replace(",", ".").toLower();
+    keyName = keyName
+            .replace(",", ".")
+            .replace("♯", "#")
+            .replace("♭", "b")
+            .toLower();
     int note = qRound(keyName.toDouble());
     if (note == 0 && keyName != "0" && keyName.size() >= 2)
     {
-        switch (keyName.at(0).unicode())
-        {
-        case 'c': note = 60; break;
-        case 'd': note = 62; break;
-        case 'e': note = 64; break;
-        case 'f': note = 65; break;
-        case 'g': note = 67; break;
-        case 'a': case 'h': note = 69; break;
-        case 'b': note = 71; break;
-        default : return -1;
-        }
-        keyName = keyName.right(keyName.size() - 1);
-        if (keyName.at(0).unicode() == '#' || keyName.at(0) == QString::fromUtf8("♯").at(0))
-        {
-            note++;
-            keyName = keyName.right(keyName.size() - 1);
-        }
-        else if (keyName.at(0).unicode() == 'b' || keyName.at(0) == QString::fromUtf8("♭").at(0))
-        {
-            note --;
-            keyName = keyName.right(keyName.size() - 1);
-        }
+        // Separate the keyname from the octave number
+        int split = keyName.indexOf("-");
+        if (split == -1)
+            split = keyName.size() - 1;
+        QString octaveStr = keyName.right(keyName.size() - split);
+        keyName = keyName.left(split);
 
-        if (!keyName.isEmpty())
+        // Which key?
+        if (keyName == QObject::tr("C", "key name").toLower() || keyName == 'c')
+            note = 60;
+        else if (keyName == QObject::tr("C♯", "key name").toLower().replace("♯", "#") ||
+                 keyName == QObject::tr("D♭", "key name").toLower().replace("♭", "b") ||
+                 keyName == "c#" || keyName == "db")
+            note = 61;
+        else if (keyName == QObject::tr("D", "key name").toLower() || keyName == 'd')
+            note = 62;
+        else if (keyName == QObject::tr("D♯", "key name").toLower().replace("♯", "#") ||
+                 keyName == QObject::tr("E♭", "key name").toLower().replace("♭", "b") ||
+                 keyName == "d#" || keyName == "eb")
+            note = 63;
+        else if (keyName == QObject::tr("E", "key name").toLower() || keyName == 'e')
+            note = 64;
+        else if (keyName == QObject::tr("F", "key name").toLower() || keyName == 'f')
+            note = 65;
+        else if (keyName == QObject::tr("F♯", "key name").toLower().replace("♯", "#") ||
+                 keyName == QObject::tr("G♭", "key name").toLower().replace("♭", "b") ||
+                 keyName == "f#" || keyName == "gb")
+            note = 66;
+        else if (keyName == QObject::tr("G", "key name").toLower() || keyName == 'g')
+            note = 67;
+        else if (keyName == QObject::tr("G♯", "key name").toLower().replace("♯", "#") ||
+                 keyName == QObject::tr("A♭", "key name").toLower().replace("♭", "b") ||
+                 keyName == "g#" || keyName == "ab" || keyName == "hb")
+            note = 68;
+        else if (keyName == QObject::tr("A", "key name").toLower() || keyName == 'a' || keyName == 'h')
+            note = 69;
+        else if (keyName == QObject::tr("A♯", "key name").toLower().replace("♯", "#") ||
+                 keyName == QObject::tr("B♭", "key name").toLower().replace("♭", "b") ||
+                 keyName == "a#" || keyName == "h#" || keyName == "bb")
+            note = 70;
+        else if (keyName == QObject::tr("B", "key name").toLower() || keyName == 'b')
+            note = 71;
+        else
+            return -1;
+
+        // Include the octave
+        if (!octaveStr.isEmpty())
         {
-            int octave = keyName.toInt();
-            if ((octave == 0 && keyName != "0"))
+            int octave = octaveStr.toInt();
+            if ((octave == 0 && octaveStr != "0"))
                 return -1;
             else
                 note += (octave - 4) * 12;

@@ -25,6 +25,7 @@
 #include "tabledelegate.h"
 #include "spinboxkey.h"
 #include "spinboxrange.h"
+#include "nullablespinbox.h"
 #include "comboboxloopmode.h"
 #include "contextmanager.h"
 #include <QTableWidget>
@@ -59,52 +60,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
 
     QWidget * widget;
     QColor highlightColor = parent->palette().color(QPalette::Highlight);
-    if (isNumeric)
-    {
-        if (isLoop)
-        {
-            // Remove the icon from the model
-            QVariant previousDecoration = index.data(Qt::DecorationRole);
-            QAbstractItemModel * model = const_cast<QAbstractItemModel *>(index.model());
-            model->blockSignals(true);
-            model->setData(index, QImage(), Qt::DecorationRole);
-            model->blockSignals(false);
-
-            QComboBox * combobox = new ComboBoxLoopMode(parent);
-            combobox->setProperty(DECO_PROPERTY, previousDecoration);
-            widget = combobox;
-        }
-        else if (isKey)
-        {
-            SpinBoxKey * spin = new SpinBoxKey(parent);
-            spin->setMinimum(0);
-            spin->setMaximum(127);
-            spin->setStyleSheet("SpinBoxKey{ border: 3px solid " + highlightColor.name() + "; }" +
-                                "SpinBoxKey::down-button{width:0px;} SpinBoxKey::up-button{width:0px;} ");
-            widget = spin;
-        }
-        else if (nbDecimales == 0)
-        {
-            QSpinBox * spin = new QSpinBox(parent);
-            spin->setMinimum(-2147483647);
-            spin->setMaximum(2147483647);
-            spin->setStyleSheet("QSpinBox{ border: 3px solid " + highlightColor.name() + "; }" +
-                                "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
-            widget = spin;
-        }
-        else
-        {
-            QDoubleSpinBox * spin = new QDoubleSpinBox(parent);
-            spin->setMinimum(-1000000);
-            spin->setMaximum(1000000);
-            spin->setSingleStep(isAttenuation ? 0.04 : .1);
-            spin->setStyleSheet("QDoubleSpinBox{ border: 3px solid " + highlightColor.name() + "; }" +
-                                "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
-            spin->setDecimals(nbDecimales);
-            widget = spin;
-        }
-    }
-    else
+    if (!isNumeric)
     {
         // Range
         SpinBoxRange * spin;
@@ -114,6 +70,46 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             spin = new SpinBoxVelocityRange(parent);
         spin->setStyleSheet("SpinBoxRange{ border: 3px solid " + highlightColor.name() + "; }" +
                             "SpinBoxRange::down-button{width:0px;} SpinBoxRange::up-button{width:0px;} ");
+        widget = spin;
+    }
+    else if (isLoop)
+    {
+        // Remove the icon from the model
+        QVariant previousDecoration = index.data(Qt::DecorationRole);
+        QAbstractItemModel * model = const_cast<QAbstractItemModel *>(index.model());
+        model->blockSignals(true);
+        model->setData(index, QImage(), Qt::DecorationRole);
+        model->blockSignals(false);
+
+        QComboBox * combobox = new ComboBoxLoopMode(parent);
+        combobox->setProperty(DECO_PROPERTY, previousDecoration);
+        widget = combobox;
+    }
+    else if (isKey)
+    {
+        SpinBoxKey * spin = new SpinBoxKey(parent, true);
+        spin->setStyleSheet("SpinBoxKey{ border: 3px solid " + highlightColor.name() + "; }" +
+                            "SpinBoxKey::down-button{width:0px;} SpinBoxKey::up-button{width:0px;} ");
+        widget = spin;
+    }
+    else if (nbDecimales > 0)
+    {
+        NullableDoubleSpinBox * spin = new NullableDoubleSpinBox(parent);
+        spin->setMinimum(-1000000);
+        spin->setMaximum(1000000);
+        spin->setSingleStep(isAttenuation ? 0.04 : .1);
+        spin->setStyleSheet("QDoubleSpinBox{ border: 3px solid " + highlightColor.name() + "; }" +
+                            "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
+        spin->setDecimals(nbDecimales);
+        widget = spin;
+    }
+    else
+    {
+        QSpinBox * spin = new NullableSpinBox(parent);
+        spin->setMinimum(-2147483647);
+        spin->setMaximum(2147483647);
+        spin->setStyleSheet("QSpinBox{ border: 3px solid " + highlightColor.name() + "; }" +
+                            "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
         widget = spin;
     }
 
@@ -135,10 +131,7 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
     if (!isNumeric)
     {
         SpinBoxRange * spin = dynamic_cast<SpinBoxRange *>(editor);
-        if (index.data().isNull())
-            spin->setText("0" + SpinBoxRange::SEPARATOR + "127");
-        else
-            spin->setText(index.data().toString());
+        spin->setText(index.data().isNull() ? ("0" + SpinBoxRange::SEPARATOR + "127") : index.data().toString());
     }
     else if (isLoop)
     {
@@ -151,13 +144,13 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
             switch (index.data(Qt::UserRole).toInt())
             {
             case 1:
-                combobox->setCurrentIndex(1);
-                break;
-            case 3:
                 combobox->setCurrentIndex(2);
                 break;
+            case 3:
+                combobox->setCurrentIndex(3);
+                break;
             case 0: default:
-                combobox->setCurrentIndex(0);
+                combobox->setCurrentIndex(1);
                 break;
             }
         }
@@ -166,26 +159,17 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
     else if (isKey)
     {
         SpinBoxKey * spin = dynamic_cast<SpinBoxKey *>(editor);
-        if (index.data().isNull())
-            spin->setValue(60); // Default value
-        else
-            spin->setValue(ContextManager::keyName()->getKeyNum(index.data().toString()));
+        spin->setValue(index.data().isNull() ? 60 : ContextManager::keyName()->getKeyNum(index.data().toString()));
     }
     else if (nbDecimales > 0)
     {
-        QDoubleSpinBox * spin = dynamic_cast<QDoubleSpinBox *>(editor);
-        if (!index.data().isNull())
-            spin->setValue(index.data().toString().replace(",", ".").toDouble());
-        else
-            spin->setValue(0);
+        NullableDoubleSpinBox * spin = dynamic_cast<NullableDoubleSpinBox *>(editor);
+        spin->setValue(index.data().isNull() ? 0.0 : index.data().toString().replace(",", ".").toDouble());
     }
     else
     {
-        QSpinBox * spin = dynamic_cast<QSpinBox *>(editor);
-        if (!index.data().isNull())
-            spin->setValue(index.data().toString().toInt());
-        else
-            spin->setValue(0);
+        NullableSpinBox * spin = dynamic_cast<NullableSpinBox *>(editor);
+        spin->setValue(index.data().isNull() ? 0 : index.data().toString().toInt());
     }
 
     _isEditing = true;
@@ -197,51 +181,66 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
     int nbDecimales;
     getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed, isAttenuation);
 
-    if (isLoop)
+    if (!isNumeric)
+    {
+        // Range
+        SpinBoxRange * spin = dynamic_cast<SpinBoxRange *>(editor);
+        model->setData(index, spin->isNull() ? QVariant() : spin->text(), Qt::EditRole);
+    }
+    else if (isLoop)
     {
         ComboBoxLoopMode * combobox = dynamic_cast<ComboBoxLoopMode *>(editor);
-
         if (combobox->count() > 0)
         {
             int currentData = combobox->itemData(combobox->getIndex(), Qt::UserRole).toInt();
-            model->setData(index, currentData, Qt::UserRole);
+            model->setData(index, currentData == -1 ? QVariant() : currentData, Qt::UserRole);
 
             bool isDark = ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT);
             switch (currentData)
             {
+            case -1:
+                model->setData(index, QVariant(), Qt::DecorationRole);
+                break;
             case 0:
                 if (isDark)
                     model->setData(index, QImage(":/icons/loop_off_w.png"), Qt::DecorationRole);
                 else
                     model->setData(index, QImage(":/icons/loop_off.png"), Qt::DecorationRole);
-                editor->setProperty(DECO_PROPERTY, QVariant());
                 break;
             case 1:
                 if (isDark)
                     model->setData(index, QImage(":/icons/loop_on_w.png"), Qt::DecorationRole);
                 else
                     model->setData(index, QImage(":/icons/loop_on.png"), Qt::DecorationRole);
-                editor->setProperty(DECO_PROPERTY, QVariant());
                 break;
             case 3:
                 if (isDark)
                     model->setData(index, QImage(":/icons/loop_on_end_w.png"), Qt::DecorationRole);
                 else
                     model->setData(index, QImage(":/icons/loop_on_end.png"), Qt::DecorationRole);
-                editor->setProperty(DECO_PROPERTY, QVariant());
                 break;
             default:
                 break;
             }
+            editor->setProperty(DECO_PROPERTY, QVariant());
         }
     }
-    else if (nbDecimales > 0 && isNumeric)
+    else if (isKey)
     {
-        QDoubleSpinBox * spin = dynamic_cast<QDoubleSpinBox*>(editor);
-        model->setData(index, QString::number(spin->value(), 'f', nbDecimales), Qt::EditRole);
+        SpinBoxKey * spin = dynamic_cast<SpinBoxKey*>(editor);
+        model->setData(index, spin->isNull() ? QVariant() : QString::number(spin->value()), Qt::EditRole);
+    }
+    else if (nbDecimales > 0)
+    {
+        NullableDoubleSpinBox * spin = dynamic_cast<NullableDoubleSpinBox*>(editor);
+        model->setData(index, spin->isNull() ? QVariant() : QString::number(spin->value(), 'f', nbDecimales), Qt::EditRole);
     }
     else
-        QStyledItemDelegate::setModelData(editor, model, index);
+    {
+        NullableSpinBox * spin = dynamic_cast<NullableSpinBox*>(editor);
+        model->setData(index, spin->isNull() ? QVariant() : QString::number(spin->value()), Qt::EditRole);
+        //QStyledItemDelegate::setModelData(editor, model, index);
+    }
 
     _isEditing = false;
 }

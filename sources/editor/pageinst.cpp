@@ -233,7 +233,8 @@ TableWidgetInst::TableWidgetInst(QWidget *parent) : TableWidget(parent)
     this->setRowCount(_fieldList.count() + 1);
     for (int i = 1; i < this->rowCount(); i++)
     {
-        QTableWidgetItem * item = new QTableWidgetItem(Attribute::getDescription(_fieldList[i - 1], false));
+        QTableWidgetItem * item = new QTableWidgetItem(
+                    _fieldList[i - 1] == champ_dwStartLoop ? tr("Loop") : Attribute::getDescription(_fieldList[i - 1], false));
         if (i == 6 || i == 44 || i == 47)
         {
             // Different style for the fixed elements

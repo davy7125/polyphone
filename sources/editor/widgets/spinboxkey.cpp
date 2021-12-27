@@ -24,12 +24,15 @@
 
 #include "spinboxkey.h"
 #include "contextmanager.h"
+#include <QLineEdit>
 
-SpinBoxKey::SpinBoxKey(QWidget *parent) : QSpinBox(parent),
-    _alwaysShowKeyName(false)
+SpinBoxKey::SpinBoxKey(QWidget *parent, bool isNullable) : QSpinBox(parent),
+    _alwaysShowKeyName(false),
+    _isNullable(isNullable)
 {
     this->setMinimum(0);
     this->setMaximum(127);
+    this->lineEdit()->setText("60");
     this->setValue(60);
 
     connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), this, SLOT(onKeyPlayed(int,int)));
@@ -38,6 +41,9 @@ SpinBoxKey::SpinBoxKey(QWidget *parent) : QSpinBox(parent),
 QValidator::State SpinBoxKey::validate(QString &input, int &pos) const
 {
     Q_UNUSED(pos);
+
+    if (input.isEmpty() && _isNullable)
+        return QValidator::Acceptable;
 
     // Possibly remove extra information
     QString textToConvert = input;
@@ -55,12 +61,16 @@ QValidator::State SpinBoxKey::validate(QString &input, int &pos) const
 int SpinBoxKey::valueFromText(const QString &text) const
 {
     if (text.isEmpty())
-        return 0;
-    return ContextManager::keyName()->getKeyNum(text.split(' ').first());
+        return _isNullable ? -1 : 60;
+    int result = ContextManager::keyName()->getKeyNum(text.split(' ').first());
+    return result;
 }
 
 QString SpinBoxKey::textFromValue(int val) const
 {
+    if (this->text().isEmpty() && _isNullable)
+        return "";
+
     QString keyName = ContextManager::keyName()->getKeyName(static_cast<unsigned int>(val));
     if (_alwaysShowKeyName && ContextManager::keyName()->getNameMiddleC() == KeyNameManager::MIDDLE_C_60)
         keyName += " (" + ContextManager::keyName()->getKeyName(static_cast<unsigned int>(val), true, false, false, true) + ")";

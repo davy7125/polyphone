@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2020 Davy Triponney                                **
+**  Copyright (C) 2013-2021 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -19,33 +19,40 @@
 ****************************************************************************
 **           Author: Davy Triponney                                       **
 **  Website/Contact: https://www.polyphone-soundfonts.com                 **
-**             Date: 01.01.2013                                           **
+**             Date: 01.01.2021                                           **
 ***************************************************************************/
 
-#ifndef SPINBOXKEY_H
-#define SPINBOXKEY_H
+#ifndef NULLABLESPINBOX_H
+#define NULLABLESPINBOX_H
 
 #include <QSpinBox>
 
-class SpinBoxKey : public QSpinBox
+class NullableSpinBox : public QSpinBox
 {
     Q_OBJECT
+
 public:
-    explicit SpinBoxKey(QWidget *parent = nullptr, bool isNullable = false);
-    void setAlwaysShowKeyName(bool isOn);
+    NullableSpinBox(QWidget *parent = nullptr);
     bool isNull() { return this->text().isEmpty(); }
 
 protected:
     QValidator::State validate(QString &input, int &pos) const override;
     int valueFromText(const QString &text) const override;
     QString textFromValue(int val) const override;
-
-private slots:
-    void onKeyPlayed(int key, int vel);
-
-private:
-    bool _alwaysShowKeyName;
-    bool _isNullable;
 };
 
-#endif // SPINBOXKEY_H
+class NullableDoubleSpinBox : public QDoubleSpinBox
+{
+    Q_OBJECT
+
+public:
+    NullableDoubleSpinBox(QWidget *parent = nullptr);
+    bool isNull() { return this->text().isEmpty(); }
+
+protected:
+    QValidator::State validate(QString &input, int &pos) const override;
+    double valueFromText(const QString &text) const override;
+    QString textFromValue(double val) const override;
+};
+
+#endif // NULLABLESPINBOX_H

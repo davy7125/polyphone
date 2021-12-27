@@ -165,7 +165,8 @@ contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
 HEADERS += \
     core/input/sfark/sfarkextractor2.h \
     core/input/sfark/abstractextractor.h \
-    dialogs/latinvalidator.h
+    dialogs/latinvalidator.h \
+    editor/widgets/nullablespinbox.h
 SPECIAL_SOURCES = core/input/sfark/sfarkextractor1.cpp \
     core/input/sfark/sfarkextractor2.cpp
 contains(DEFINES, USE_LOCAL_SFARKLIB) {
@@ -290,6 +291,7 @@ SOURCES	+= main.cpp \
     editor/overview/tablepageoverview.cpp \
     editor/tree/treesplitter.cpp \
     editor/widgets/equalizer.cpp \
+    editor/widgets/nullablespinbox.cpp \
     editor/widgets/tableheaderviewv.cpp \
     editor/widgets/tablewidget.cpp \
     editor/widgets/tabledelegate.cpp \

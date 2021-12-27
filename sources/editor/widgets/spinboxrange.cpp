@@ -31,6 +31,7 @@ int SpinBoxRange::MINI = 0;
 int SpinBoxRange::MAXI = 127;
 
 SpinBoxRange::SpinBoxRange(QWidget *parent) : QAbstractSpinBox(parent),
+    _isNull(false),
     _valMin(MINI),
     _valMax(MAXI),
     _firstMidiKey(-1)
@@ -95,9 +96,15 @@ QValidator::State SpinBoxRange::validate(QString& input, int& pos) const
 {
     Q_UNUSED(pos);
     QValidator::State state = QValidator::Invalid;
+    bool isNull;
     int valMin, valMax;
-    stringToRange(input, valMin, valMax, state);
+    stringToRange(input, isNull, valMin, valMax, state);
     return state;
+}
+
+bool SpinBoxRange::isNull()
+{
+    return _isNull;
 }
 
 int SpinBoxRange::getValMin()
@@ -113,7 +120,7 @@ int SpinBoxRange::getValMax()
 void SpinBoxRange::setText(QString text)
 {
     QValidator::State state;
-    stringToRange(text, _valMin, _valMax, state);
+    stringToRange(text, _isNull, _valMin, _valMax, state);
     formatText();
 
     // Select all
@@ -194,14 +201,16 @@ SpinBoxRange::SpinboxSection SpinBoxRange::getCurrentSection() const
 void SpinBoxRange::updateValue()
 {
     QValidator::State state = QValidator::Invalid;
+    bool isNull;
     int valMin, valMax;
-    stringToRange(lineEdit()->text(), valMin, valMax, state);
+    stringToRange(lineEdit()->text(), isNull, valMin, valMax, state);
     if (state != QValidator::Acceptable)
         return;
 
-    if (valMin == _valMin && valMax == _valMax)
+    if (valMin == _valMin && valMax == _valMax && isNull == _isNull)
         return;
 
+    _isNull = isNull;
     _valMin = valMin;
     _valMax = valMax;
 
@@ -209,13 +218,14 @@ void SpinBoxRange::updateValue()
     emit(valueChanged());
 }
 
-void SpinBoxRange::stringToRange(QString input, int &valMin, int &valMax, QValidator::State &state) const
+void SpinBoxRange::stringToRange(QString input, bool &isNull, int &valMin, int &valMax, QValidator::State &state) const
 {
     input = input.replace('_', '-');
     int posSeparator = input.indexOf(QRegExp("[0-9]" + SEPARATOR)) + 1;
 
     bool ok = false;
     state = QValidator::Acceptable;
+    isNull = false;
     if (posSeparator != 0)
     {
         QString txtMin = input.left(posSeparator);
@@ -250,6 +260,7 @@ void SpinBoxRange::stringToRange(QString input, int &valMin, int &valMax, QValid
     {
         if (input.isEmpty())
         {
+            isNull = true;
             valMin = MINI;
             valMax = MAXI;
         }
@@ -266,7 +277,7 @@ void SpinBoxRange::stringToRange(QString input, int &valMin, int &valMax, QValid
 
 void SpinBoxRange::formatText()
 {
-    lineEdit()->setText(getText(_valMin) + SEPARATOR + getText(_valMax));
+    lineEdit()->setText(_isNull ? "" : (getText(_valMin) + SEPARATOR + getText(_valMax)));
 }
 
 
