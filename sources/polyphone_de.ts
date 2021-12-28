@@ -38,367 +38,367 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="core/types/attribute.cpp" line="467"/>
+        <location filename="core/types/attribute.cpp" line="488"/>
         <source>absolute value</source>
         <translation>Absoluter Wert</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="578"/>
+        <location filename="core/types/attribute.cpp" line="599"/>
         <source>unknown</source>
         <translation>unbekannt</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="583"/>
+        <location filename="core/types/attribute.cpp" line="604"/>
         <source>Sample start offset</source>
         <translation>Sample StartOffset</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="589"/>
+        <location filename="core/types/attribute.cpp" line="610"/>
         <source>Sample end offset</source>
         <translation>Sample EndOffset</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="595"/>
+        <location filename="core/types/attribute.cpp" line="616"/>
         <source>Loop start offset</source>
         <translation>Loop StartOffset</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="601"/>
+        <location filename="core/types/attribute.cpp" line="622"/>
         <source>Loop end offset</source>
         <translation>Loop.EndOffset</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="598"/>
+        <location filename="core/types/attribute.cpp" line="619"/>
         <source>Loop start offset (× 32768)</source>
         <translation>Loop.StartOffset.(× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="607"/>
+        <location filename="core/types/attribute.cpp" line="628"/>
         <source>Mod LFO → pitch (c)</source>
         <translation>Mod LFO → Pitch (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="610"/>
+        <location filename="core/types/attribute.cpp" line="631"/>
         <source>Vib LFO → pitch (c)</source>
         <translation>Vib LFO → Pitch (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="613"/>
+        <location filename="core/types/attribute.cpp" line="634"/>
         <source>Mod env → pitch (c)</source>
         <translation>Mod env → Pitch (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="616"/>
+        <location filename="core/types/attribute.cpp" line="637"/>
         <source>Filter, cutoff (×)</source>
         <translation>Filter, cutoff (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="617"/>
+        <location filename="core/types/attribute.cpp" line="638"/>
         <source>Filter, cutoff (Hz)</source>
         <translation>Filter, cutoff (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="620"/>
+        <location filename="core/types/attribute.cpp" line="641"/>
         <source>Filter, resonance (dB)</source>
         <translation>Filter, Resonanz (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="623"/>
+        <location filename="core/types/attribute.cpp" line="644"/>
         <source>Mod LFO → filter (c)</source>
         <translation>Mod LFO → Filter (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="626"/>
+        <location filename="core/types/attribute.cpp" line="647"/>
         <source>Mod env → filter (c)</source>
         <translation>Mod env → Filter (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="592"/>
+        <location filename="core/types/attribute.cpp" line="613"/>
         <source>Sample end offset (× 32768)</source>
         <translation>Sample EndOffset (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="586"/>
+        <location filename="core/types/attribute.cpp" line="607"/>
         <source>Sample start offset (× 32768)</source>
         <translation>Sample StartOffset (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="629"/>
+        <location filename="core/types/attribute.cpp" line="650"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>Mod LFO → Volume (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="632"/>
+        <location filename="core/types/attribute.cpp" line="653"/>
         <source>Chorus (%)</source>
         <translation>Chorus (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="635"/>
+        <location filename="core/types/attribute.cpp" line="656"/>
         <source>Reverb (%)</source>
         <translation>Hall (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="638"/>
+        <location filename="core/types/attribute.cpp" line="659"/>
         <source>Pan [-100;100]</source>
         <translation>Pan [-100;100]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="639"/>
+        <location filename="core/types/attribute.cpp" line="660"/>
         <source>Pan [-50;50]</source>
         <translation>Pan [-50;50]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="642"/>
+        <location filename="core/types/attribute.cpp" line="663"/>
         <source>Mod LFO delay (×)</source>
         <translation>Mod LFO delay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="643"/>
+        <location filename="core/types/attribute.cpp" line="664"/>
         <source>Mod LFO delay (s)</source>
         <translation>Mod LFO delay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="646"/>
+        <location filename="core/types/attribute.cpp" line="667"/>
         <source>Mod LFO freq (×)</source>
         <translation>Mod LFO freq (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="647"/>
+        <location filename="core/types/attribute.cpp" line="668"/>
         <source>Mod LFO freq (Hz)</source>
         <translation>Mod LFO freq (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="650"/>
+        <location filename="core/types/attribute.cpp" line="671"/>
         <source>Vib LFO delay (×)</source>
         <translation>Vib LFO delay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="651"/>
+        <location filename="core/types/attribute.cpp" line="672"/>
         <source>Vib LFO delay (s)</source>
         <translation>Vib LFO delay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="654"/>
+        <location filename="core/types/attribute.cpp" line="675"/>
         <source>Vib LFO freq (×)</source>
         <translation>Vib LFO freq (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="655"/>
+        <location filename="core/types/attribute.cpp" line="676"/>
         <source>Vib LFO freq (Hz)</source>
         <translation>Vib LFO freq (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="658"/>
+        <location filename="core/types/attribute.cpp" line="679"/>
         <source>Mod env delay (×)</source>
         <translation>Mod env delay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="659"/>
+        <location filename="core/types/attribute.cpp" line="680"/>
         <source>Mod env delay (s)</source>
         <translation>Mod env delay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="662"/>
+        <location filename="core/types/attribute.cpp" line="683"/>
         <source>Mod env attack (×)</source>
         <translation>Mod env attack (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="663"/>
+        <location filename="core/types/attribute.cpp" line="684"/>
         <source>Mod env attack (s)</source>
         <translation>Mod env attack (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="666"/>
+        <location filename="core/types/attribute.cpp" line="687"/>
         <source>Mod env hold (×)</source>
         <translation>Mod env hold (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="667"/>
+        <location filename="core/types/attribute.cpp" line="688"/>
         <source>Mod env hold (s)</source>
         <translation>Mod env hold (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="670"/>
+        <location filename="core/types/attribute.cpp" line="691"/>
         <source>Mod env decay (×)</source>
         <translation>Mod env decay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="671"/>
+        <location filename="core/types/attribute.cpp" line="692"/>
         <source>Mod env decay (s)</source>
         <translation>Mod env decay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="674"/>
+        <location filename="core/types/attribute.cpp" line="695"/>
         <source>Mod env sustain (%)</source>
         <translation>Mod env sustain (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="677"/>
+        <location filename="core/types/attribute.cpp" line="698"/>
         <source>Mod env release (×)</source>
         <translation>Mod env release (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="678"/>
+        <location filename="core/types/attribute.cpp" line="699"/>
         <source>Mod env release (s)</source>
         <translation>Mod env release (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="681"/>
+        <location filename="core/types/attribute.cpp" line="702"/>
         <source>Key → Mod env hold (c)</source>
         <translation>Key → Mod env hold (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="684"/>
+        <location filename="core/types/attribute.cpp" line="705"/>
         <source>Key → Mod env decay (c)</source>
         <translation>Key → Mod env decay (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="687"/>
+        <location filename="core/types/attribute.cpp" line="708"/>
         <source>Vol env delay (×)</source>
         <translation>Vol env delay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="688"/>
+        <location filename="core/types/attribute.cpp" line="709"/>
         <source>Vol env delay (s)</source>
         <translation>Vol env delay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="691"/>
+        <location filename="core/types/attribute.cpp" line="712"/>
         <source>Vol env attack (×)</source>
         <translation>Vol env attack (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="692"/>
+        <location filename="core/types/attribute.cpp" line="713"/>
         <source>Vol env attack (s)</source>
         <translation>Vol env attack (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="695"/>
+        <location filename="core/types/attribute.cpp" line="716"/>
         <source>Vol env hold (×)</source>
         <translation>Vol env hold (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="696"/>
+        <location filename="core/types/attribute.cpp" line="717"/>
         <source>Vol env hold (s)</source>
         <translation>Vol env hold (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="699"/>
+        <location filename="core/types/attribute.cpp" line="720"/>
         <source>Vol env decay (×)</source>
         <translation>Vol env decay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="700"/>
+        <location filename="core/types/attribute.cpp" line="721"/>
         <source>Vol env decay (s)</source>
         <translation>Vol env decay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="703"/>
+        <location filename="core/types/attribute.cpp" line="724"/>
         <source>Vol env sustain (dB)</source>
         <translation>Vol env sustain (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="706"/>
+        <location filename="core/types/attribute.cpp" line="727"/>
         <source>Vol env release (×)</source>
         <translation>Vol env release (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="707"/>
+        <location filename="core/types/attribute.cpp" line="728"/>
         <source>Vol env release (s)</source>
         <translation>Vol env release (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="710"/>
+        <location filename="core/types/attribute.cpp" line="731"/>
         <source>Key → Vol env hold (c)</source>
         <translation>Key → Vol env hold (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="713"/>
+        <location filename="core/types/attribute.cpp" line="734"/>
         <source>Key → Vol env decay (c)</source>
         <translation>Key → Vol env decay (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="716"/>
+        <location filename="core/types/attribute.cpp" line="737"/>
         <source>Key range</source>
         <translation>Tasten Bereich</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="719"/>
+        <location filename="core/types/attribute.cpp" line="740"/>
         <source>Velocity range</source>
         <translation>Velocity Bereich</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="722"/>
+        <location filename="core/types/attribute.cpp" line="743"/>
         <source>Fixed key</source>
         <translation>fixierte Note</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="725"/>
+        <location filename="core/types/attribute.cpp" line="746"/>
         <source>Fixed velocity</source>
         <translation>fixierte Velocity</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="728"/>
+        <location filename="core/types/attribute.cpp" line="749"/>
         <source>Attenuation (dB)</source>
         <translation>Dämpfung (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="749"/>
+        <location filename="core/types/attribute.cpp" line="770"/>
         <source>Sample root key</source>
         <translation>Sample Basis Note</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="752"/>
+        <location filename="core/types/attribute.cpp" line="773"/>
         <source>Sample length</source>
         <translation>Samplelänge</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="755"/>
+        <location filename="core/types/attribute.cpp" line="776"/>
         <source>Loop start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="758"/>
+        <location filename="core/types/attribute.cpp" line="779"/>
         <source>Loop end</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="761"/>
+        <location filename="core/types/attribute.cpp" line="782"/>
         <source>Pitch correction (cents)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="604"/>
+        <location filename="core/types/attribute.cpp" line="625"/>
         <source>Loop end offset (× 32768)</source>
         <translation>Loop.EndOffset.(× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="731"/>
+        <location filename="core/types/attribute.cpp" line="752"/>
         <source>Tuning (semi-tones)</source>
         <translation>Tuning (halb-töne)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="734"/>
+        <location filename="core/types/attribute.cpp" line="755"/>
         <source>Tuning (cents)</source>
         <translation>Tuning (cents)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="737"/>
+        <location filename="core/types/attribute.cpp" line="758"/>
         <source>Loop playback</source>
         <translation>Loop Wiedergabe</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="740"/>
+        <location filename="core/types/attribute.cpp" line="761"/>
         <source>Scale tuning</source>
         <translation>Stimmen (Tonleiter)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="743"/>
+        <location filename="core/types/attribute.cpp" line="764"/>
         <source>Exclusive class</source>
         <translation>exklusive Klasse</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="746"/>
+        <location filename="core/types/attribute.cpp" line="767"/>
         <source>Root key</source>
         <translation>Basis Note</translation>
     </message>
@@ -856,12 +856,12 @@
 <context>
     <name>ConfigSectionInterface</name>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="57"/>
+        <location filename="context/interface/configsectioninterface.ui" line="51"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="44"/>
+        <location filename="context/interface/configsectioninterface.ui" line="70"/>
         <source>Key names</source>
         <translation>Noten Namen</translation>
     </message>
@@ -871,121 +871,126 @@
         <translation>Optionen</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="113"/>
+        <location filename="context/interface/configsectioninterface.ui" line="165"/>
         <source>Middle C → 60, then 61</source>
         <translation>Mitte C → 60, dann 61</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="118"/>
+        <location filename="context/interface/configsectioninterface.ui" line="170"/>
         <source>Middle C → C3, then C♯3</source>
         <translation>Mitte C → C3, dann C♯3</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="123"/>
+        <location filename="context/interface/configsectioninterface.ui" line="175"/>
         <source>Middle C → C3, then D♭3</source>
         <translation>Mitte C → C3, dann D♭3</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="128"/>
+        <location filename="context/interface/configsectioninterface.ui" line="180"/>
         <source>Middle C → C4, then C♯4</source>
         <translation>Mitte C → C4, dann C♯4</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="133"/>
+        <location filename="context/interface/configsectioninterface.ui" line="185"/>
         <source>Middle C → C4, then D♭4</source>
         <translation>Mitte C → C4, dann D♭4</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="138"/>
+        <location filename="context/interface/configsectioninterface.ui" line="190"/>
         <source>Middle C → C5, then C♯5</source>
         <translation>Mitte C → C5, dann C♯5</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="143"/>
+        <location filename="context/interface/configsectioninterface.ui" line="195"/>
         <source>Middle C → C5, then D♭5</source>
         <translation>Mitte C → C5, dann D♭5</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="157"/>
+        <location filename="context/interface/configsectioninterface.ui" line="145"/>
         <source>Sort divisions</source>
         <translation>Aufeilungen sortieren</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="77"/>
+        <location filename="context/interface/configsectioninterface.ui" line="116"/>
         <source>by key range</source>
         <translation>nach Tastenbereich</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="82"/>
+        <location filename="context/interface/configsectioninterface.ui" line="121"/>
         <source>by velocity range</source>
         <translation>nach Velocitybereich</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="87"/>
+        <location filename="context/interface/configsectioninterface.ui" line="126"/>
         <source>in alphabetical order</source>
         <translation>alphabetische Reihenfolge</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="92"/>
+        <location filename="context/interface/configsectioninterface.ui" line="131"/>
         <source>none</source>
         <comment>speaking of the &quot;sort divisions&quot;</comment>
         <translation>keine</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="183"/>
+        <location filename="context/interface/configsectioninterface.ui" line="38"/>
         <source>Decorations</source>
         <translation>Dekorationen</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="212"/>
+        <location filename="context/interface/configsectioninterface.ui" line="209"/>
+        <source>Unique instance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="238"/>
         <source>Theme</source>
         <translation>Thema</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="483"/>
+        <location filename="context/interface/configsectioninterface.ui" line="509"/>
         <source>Selection</source>
         <translation>Auswahl</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="245"/>
+        <location filename="context/interface/configsectioninterface.ui" line="271"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="320"/>
+        <location filename="context/interface/configsectioninterface.ui" line="346"/>
         <source>Window</source>
         <translation>Fenster</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="439"/>
+        <location filename="context/interface/configsectioninterface.ui" line="465"/>
         <source>Background</source>
         <translation>Hintergrund</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="420"/>
+        <location filename="context/interface/configsectioninterface.ui" line="446"/>
         <source>Button</source>
         <translation>Button</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="558"/>
+        <location filename="context/interface/configsectioninterface.ui" line="584"/>
         <source>List and table</source>
         <translation>Liste und Tabelle</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="610"/>
+        <location filename="context/interface/configsectioninterface.ui" line="636"/>
         <source>This modification will be applied during the next start of the software.</source>
         <translation>Diese Änderung wird beim nächsten Start der Software angewendet.</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.cpp" line="161"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="173"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="185"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="197"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="209"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="221"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="233"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="245"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="257"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="165"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="177"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="189"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="201"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="213"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="225"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="237"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="249"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="261"/>
         <source>Select a color</source>
         <translation>Farbe wählen</translation>
     </message>
@@ -1381,14 +1386,14 @@ Fundgrube</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="61"/>
-        <location filename="dialogs/dialog_about.cpp" line="72"/>
+        <location filename="dialogs/dialog_about.cpp" line="73"/>
         <source>Davy Triponney</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Davy Triponney</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="63"/>
-        <location filename="dialogs/dialog_about.cpp" line="70"/>
+        <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>Andrea Celani</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Andrea Celani</translation>
@@ -1407,61 +1412,67 @@ Fundgrube</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="66"/>
+        <source>mirabilos</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="67"/>
         <source>Paul Stratman</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Paul Stratman</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="67"/>
-        <location filename="dialogs/dialog_about.cpp" line="79"/>
+        <location filename="dialogs/dialog_about.cpp" line="68"/>
+        <location filename="dialogs/dialog_about.cpp" line="80"/>
         <source>Steve Clarke</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Steve Clarke</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="69"/>
+        <location filename="dialogs/dialog_about.cpp" line="70"/>
         <source>Aleksey Bobylev</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Aleksey Bobylev</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="73"/>
+        <location filename="dialogs/dialog_about.cpp" line="74"/>
         <source>F.J. Martínez Murcia</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>F.J. Martínez Murcia</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="74"/>
+        <location filename="dialogs/dialog_about.cpp" line="75"/>
         <source>Georg Gergull</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Georg Gergull</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="75"/>
+        <location filename="dialogs/dialog_about.cpp" line="76"/>
         <source>Jay Alexander Fleming</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Jay Alexander Fleming</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="76"/>
+        <location filename="dialogs/dialog_about.cpp" line="77"/>
         <source>Joel Gomes</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Joel Gomes</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="77"/>
+        <location filename="dialogs/dialog_about.cpp" line="78"/>
         <source>Magson</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Magson</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="78"/>
+        <location filename="dialogs/dialog_about.cpp" line="79"/>
         <source>Pavel Fric</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Pavel Fric</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="71"/>
+        <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>Chris Hansen</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Chris Hansen</translation>
@@ -1657,43 +1668,43 @@ Fundgrube</translation>
 <context>
     <name>DialogNewElement</name>
     <message>
-        <location filename="dialogs/dialognewelement.ui" line="51"/>
+        <location filename="dialogs/dialognewelement.ui" line="55"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="dialogs/dialognewelement.ui" line="58"/>
+        <location filename="dialogs/dialognewelement.ui" line="62"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="dialogs/dialognewelement.cpp" line="49"/>
+        <location filename="dialogs/dialognewelement.cpp" line="51"/>
         <source>Create a new preset</source>
         <translation>Neuer Preset</translation>
     </message>
     <message>
-        <location filename="dialogs/dialognewelement.cpp" line="49"/>
+        <location filename="dialogs/dialognewelement.cpp" line="51"/>
         <source>Create a new instrument</source>
         <translation>Neues Instrument</translation>
     </message>
     <message>
-        <location filename="dialogs/dialognewelement.cpp" line="50"/>
+        <location filename="dialogs/dialognewelement.cpp" line="52"/>
         <source>Name of the new preset</source>
         <translation>Name des neuen Presets</translation>
     </message>
     <message>
-        <location filename="dialogs/dialognewelement.cpp" line="50"/>
+        <location filename="dialogs/dialognewelement.cpp" line="52"/>
         <source>Name of the new instrument</source>
         <translation>Name des neuen Instruments</translation>
     </message>
     <message>
-        <location filename="dialogs/dialognewelement.cpp" line="51"/>
+        <location filename="dialogs/dialognewelement.cpp" line="53"/>
         <source>Link selected instruments</source>
         <oldsource>Link selected isntruments</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialognewelement.cpp" line="52"/>
+        <location filename="dialogs/dialognewelement.cpp" line="54"/>
         <source>Link selected samples</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1701,12 +1712,12 @@ Fundgrube</translation>
 <context>
     <name>DialogQuestion</name>
     <message>
-        <location filename="dialogs/dialogquestion.ui" line="35"/>
+        <location filename="dialogs/dialogquestion.ui" line="39"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogquestion.ui" line="42"/>
+        <location filename="dialogs/dialogquestion.ui" line="46"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
@@ -1769,7 +1780,7 @@ Fundgrube</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="121"/>
-        <location filename="dialogs/dialog_rename.cpp" line="103"/>
+        <location filename="dialogs/dialog_rename.cpp" line="106"/>
         <source>Position</source>
         <translation>Position</translation>
     </message>
@@ -1784,28 +1795,28 @@ Fundgrube</translation>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="69"/>
-        <location filename="dialogs/dialog_rename.cpp" line="80"/>
+        <location filename="dialogs/dialog_rename.cpp" line="72"/>
+        <location filename="dialogs/dialog_rename.cpp" line="83"/>
         <source>New name:</source>
         <translation>neuer Name:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="91"/>
+        <location filename="dialogs/dialog_rename.cpp" line="94"/>
         <source>Find:</source>
         <translation>Finde:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="94"/>
+        <location filename="dialogs/dialog_rename.cpp" line="97"/>
         <source>And replace by:</source>
         <translation>und ersetze durch:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="104"/>
+        <location filename="dialogs/dialog_rename.cpp" line="107"/>
         <source>Text to insert:</source>
         <translation>EinfügeText:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="115"/>
+        <location filename="dialogs/dialog_rename.cpp" line="118"/>
         <source>Range</source>
         <translation>Bereich</translation>
     </message>
@@ -1924,52 +1935,52 @@ Fundgrube</translation>
         <translation>Sample &quot;%1&quot; existiert bereits.&lt;br /&gt;ersetzen?</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="472"/>
+        <location filename="core/duplicator.cpp" line="473"/>
         <source>The instrument &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>Das Instrument &quot;%1&quot; existiert bereits.&lt;br /&gt;ersetzen?</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="567"/>
+        <location filename="core/duplicator.cpp" line="568"/>
         <source>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</source>
         <translation>Der Preset &quot;%1&quot; existiert bereits.&lt;br /&gt;ersetzen?</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="589"/>
+        <location filename="core/duplicator.cpp" line="590"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="590"/>
+        <location filename="core/duplicator.cpp" line="591"/>
         <source>No preset available.</source>
         <translation>kein Preset verfügbar.</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="788"/>
+        <location filename="core/duplicator.cpp" line="789"/>
         <source>&amp;Replace</source>
         <translation>&amp;Ersetzen</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="789"/>
+        <location filename="core/duplicator.cpp" line="790"/>
         <source>R&amp;eplace all</source>
         <translation>&amp;Alle ersetzen</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="790"/>
+        <location filename="core/duplicator.cpp" line="791"/>
         <source>&amp;Duplicate</source>
         <translation>&amp;Duplizieren</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="791"/>
+        <location filename="core/duplicator.cpp" line="792"/>
         <source>D&amp;uplicate all</source>
         <translation>alle D&amp;uplizieren</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="792"/>
+        <location filename="core/duplicator.cpp" line="793"/>
         <source>&amp;Ignore</source>
         <translation>&amp;Ignorieren</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="793"/>
+        <location filename="core/duplicator.cpp" line="794"/>
         <source>I&amp;gnore all</source>
         <translation>alle I&amp;gnorieren</translation>
     </message>
@@ -2005,12 +2016,12 @@ Fundgrube</translation>
         <translation>Bild einfügen</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/editor/editordialoginsertimage.ui" line="26"/>
+        <location filename="repository/soundfont/editor/editordialoginsertimage.ui" line="30"/>
         <source>Invalid URL (example: https://www.website.com/image.png)</source>
         <translation>Ungültiger URL (Beispiel: https://www.website.de/bild.png)</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/editor/editordialoginsertimage.ui" line="33"/>
+        <location filename="repository/soundfont/editor/editordialoginsertimage.ui" line="37"/>
         <source>URL of the image to insert...</source>
         <translation>URL von das einzufügendes Bild...</translation>
     </message>
@@ -2023,12 +2034,12 @@ Fundgrube</translation>
         <translation>Verknüpfung einfügen</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="20"/>
+        <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="24"/>
         <source>Text to display</source>
         <translation>Darstellender Text</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="27"/>
+        <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="31"/>
         <source>Link</source>
         <translation>Verknüpfung</translation>
     </message>
@@ -2041,12 +2052,12 @@ Fundgrube</translation>
         <translation>Tabelle einfügen</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/editor/editordialoginserttable.ui" line="43"/>
+        <location filename="repository/soundfont/editor/editordialoginserttable.ui" line="47"/>
         <source>Columns</source>
         <translation>Spalten</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/editor/editordialoginserttable.ui" line="63"/>
+        <location filename="repository/soundfont/editor/editordialoginserttable.ui" line="67"/>
         <source>Rows</source>
         <translation>Zeilen</translation>
     </message>
@@ -2062,67 +2073,67 @@ Fundgrube</translation>
 <context>
     <name>EditorToolBar</name>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="55"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="56"/>
         <source>Add a sample</source>
         <translation>Sample hinzufügen</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="59"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="60"/>
         <source>Add an instrument</source>
         <translation>Instrument hinzufügen</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="63"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="64"/>
         <source>Add a preset</source>
         <translation>Preset hinzufügen</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="67"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="68"/>
         <source>Toolbox</source>
         <translation>Werkzeuge</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="74"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="75"/>
         <source>Cancel</source>
         <translation>Rückgängig</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="78"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="79"/>
         <source>Redo</source>
         <translation>Wiederherstellen</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="83"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="84"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="93"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="94"/>
         <source>Recorder</source>
         <translation>Rekorder</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="99"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="100"/>
         <source>Virtual keyboard</source>
         <translation>Virtuelle Tastatur</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="257"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="258"/>
         <source>Import an audio file</source>
         <translation>Audio Datei importieren</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="259"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="260"/>
         <source>Audio files</source>
         <translation>Audiodateien</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="374"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="417"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="374"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="417"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
@@ -2261,13 +2272,13 @@ Fundgrube</translation>
 <context>
     <name>GraphSpace</name>
     <message>
-        <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="76"/>
+        <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="128"/>
         <source>L</source>
         <comment>first letter of Left in your language</comment>
         <translation>L</translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="85"/>
+        <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="131"/>
         <source>R</source>
         <comment>first letter of Right in your language</comment>
         <translation>R</translation>
@@ -2388,7 +2399,7 @@ Fundgrube</translation>
         <translation>Sfz Import</translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="459"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="473"/>
         <source>untitled</source>
         <translation>unbenannt</translation>
     </message>
@@ -2602,34 +2613,34 @@ default mod.</source>
         <translation>StandardMod. aufheben</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="350"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="365"/>
         <source>dB</source>
         <translation>dB</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="358"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="373"/>
         <source>semi-tones</source>
         <translation>halb-töne</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="361"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="376"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
         <translation>cents</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="370"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="387"/>
         <source>Add from:</source>
         <oldsource>Add from: </oldsource>
         <translation>zufügen von:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="371"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="388"/>
         <source>Multiply from:</source>
         <translation>Multiplizieren von:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="373"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="390"/>
         <source>To:</source>
         <oldsource>To: </oldsource>
         <translation>Zu</translation>
@@ -2638,8 +2649,8 @@ default mod.</source>
 <context>
     <name>ModulatorComboDest</name>
     <message>
-        <location filename="editor/modulator/modulatorcombodest.cpp" line="134"/>
-        <location filename="editor/modulator/modulatorcombodest.cpp" line="163"/>
+        <location filename="editor/modulator/modulatorcombodest.cpp" line="86"/>
+        <location filename="editor/modulator/modulatorcombodest.cpp" line="115"/>
         <source>Modulator</source>
         <translation>Modulator</translation>
     </message>
@@ -2687,13 +2698,13 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="202"/>
         <location filename="editor/modulator/modulatoreditor.cpp" line="151"/>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="249"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="255"/>
         <source>No modulators</source>
         <translation>Kein Modulator</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="234"/>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="158"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="160"/>
         <source>Select a single division to display the modulator list</source>
         <translation>Wähle einen Split um die Modulator liste anzuzeigen</translation>
     </message>
@@ -2703,7 +2714,7 @@ default mod.</source>
         <translation>Modulator areal einblenden</translation>
     </message>
     <message numerus="yes">
-        <location filename="editor/modulator/modulatoreditor.cpp" line="254"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="260"/>
         <source>%n modulator(s):</source>
         <translation>
             <numerusform>%n Modulator:</numerusform>
@@ -2711,43 +2722,43 @@ default mod.</source>
         </translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="339"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="345"/>
         <source>Duplicate the selection toward...</source>
         <translation>Auswahl duplizieren zur...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="340"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="346"/>
         <source>Copy the selected modulators</source>
         <translation>selektierte Modulatoren kopieren</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="345"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="351"/>
         <source>Duplicate modulators toward...</source>
         <translation>Dupliziere Modulatoren zur...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="346"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="352"/>
         <source>Copy all modulators</source>
         <translation>alle Modulatoren kopieren</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="623"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="637"/>
         <source>Forbidden action:</source>
         <translation>Nicht erlaubt:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="633"/>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="642"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="647"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="656"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="634"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="648"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>Offsets können in einem Preset nicht moduliert werden.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="643"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="657"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation>%1 kann in einem Preset nicht moduliert werden.</translation>
     </message>
@@ -2780,7 +2791,7 @@ default mod.</source>
         <translation>die Datei &quot;%1&quot; konnte nicht umbenannt werden.</translation>
     </message>
     <message>
-        <location filename="core/output/sf2/outputsf2.cpp" line="313"/>
+        <location filename="core/output/sf2/outputsf2.cpp" line="320"/>
         <source>Cannot create file &quot;%1&quot;</source>
         <translation>die Datei &quot;%1&quot; konnte nicht erzeugt werden</translation>
     </message>
@@ -2918,24 +2929,24 @@ Wiedergabe</translation>
         <translation>Halleffekt</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="100"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="286"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="135"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="325"/>
         <source>yes</source>
         <translation>ja</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="100"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="284"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="139"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="323"/>
         <source>no</source>
         <translation>nein</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="288"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="327"/>
         <source>yes, to the end</source>
         <translation>ja, bis zum Ende</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="294"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="333"/>
         <source>several modes</source>
         <comment>speaking about loop modes</comment>
         <translation>mehrere Modi</translation>
@@ -3009,12 +3020,12 @@ Modulator</translation>
 <context>
     <name>PageOverviewSmpl</name>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="38"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="39"/>
         <source>Used</source>
         <translation>benutzt</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="39"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="40"/>
         <source>Total
 duration</source>
         <oldsource>Durée de la boucle</oldsource>
@@ -3022,24 +3033,24 @@ duration</source>
 Dauer</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="42"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="43"/>
         <source>Correction</source>
         <translation>Korrektur</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="40"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="41"/>
         <source>Loop
 duration</source>
         <translation>Loop
 dauer</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="32"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="33"/>
         <source>Samples</source>
         <translation>Samples</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="41"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="42"/>
         <source>Root
 key</source>
         <translatorcomment>Grund
@@ -3048,7 +3059,7 @@ Note</translatorcomment>
 Note</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="43"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="44"/>
         <source>Sample
 type</source>
         <oldsource>Échantillon lié</oldsource>
@@ -3056,72 +3067,75 @@ type</source>
 Typ</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="44"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="45"/>
         <source>Linked
 sample</source>
         <translation>Linked
 sample</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="45"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="46"/>
         <source>Sample
 rate</source>
         <translation>Sample
 Frequenz</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="94"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="129"/>
         <source>yes</source>
         <translation>ja</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="94"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="133"/>
         <source>no</source>
         <translation>nein</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="101"/>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="110"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="140"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="156"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="133"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="219"/>
         <source>Invalid link</source>
         <translation>ungültiger Link</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="223"/>
         <source>Mono</source>
         <comment>opposite to stereo</comment>
         <translation>Mono</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="139"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="226"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="230"/>
         <source>Stereo right</source>
         <oldsource>Stereo droit</oldsource>
         <translation>Stereo rechts</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="142"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="234"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="238"/>
         <source>Stereo left</source>
         <oldsource>Stereo gauche</oldsource>
         <translation>Stereo links</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="145"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="242"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="246"/>
         <source>Stereo non defined</source>
         <oldsource>Stereo non défini</oldsource>
         <translation>Stereo undefiniert</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="165"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="269"/>
         <source>invalid</source>
         <translation>ungültig</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="172"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="275"/>
         <source>Hz</source>
         <translation>Hz</translation>
     </message>
@@ -3264,26 +3278,26 @@ Frequenz</translation>
         <translation>Instrumente</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.cpp" line="105"/>
+        <location filename="editor/pagesf2.cpp" line="113"/>
         <source>GB</source>
         <comment>giga byte</comment>
         <translation>GB</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.cpp" line="110"/>
+        <location filename="editor/pagesf2.cpp" line="118"/>
         <source>MB</source>
         <comment>mega byte</comment>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.cpp" line="115"/>
+        <location filename="editor/pagesf2.cpp" line="123"/>
         <source>kB</source>
         <comment>kilo byte</comment>
         <translation>kB</translation>
     </message>
     <message numerus="yes">
-        <location filename="editor/pagesf2.cpp" line="247"/>
-        <location filename="editor/pagesf2.cpp" line="257"/>
+        <location filename="editor/pagesf2.cpp" line="255"/>
+        <location filename="editor/pagesf2.cpp" line="265"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (ungenutzt: %n)</numerusform>
@@ -3294,13 +3308,13 @@ Frequenz</translation>
 <context>
     <name>PageSmpl</name>
     <message>
-        <location filename="editor/pagesmpl.ui" line="626"/>
+        <location filename="editor/pagesmpl.ui" line="645"/>
         <source>Equalizer (±15 dB)</source>
         <translation>Equalizer (±15 dB)</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="320"/>
-        <location filename="editor/pagesmpl.cpp" line="1082"/>
+        <location filename="editor/pagesmpl.cpp" line="1089"/>
         <source>Play</source>
         <translation>Wiedergabe</translation>
     </message>
@@ -3325,32 +3339,32 @@ Frequenz</translation>
         <translation>Stimmung (Hz)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="450"/>
+        <location filename="editor/pagesmpl.ui" line="433"/>
         <source>Loop</source>
         <translation>Loop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="473"/>
+        <location filename="editor/pagesmpl.ui" line="511"/>
         <source>Use the full length of the sample as loop</source>
         <translation>Die ganze Länge des Sample als Loop nutzen</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="489"/>
+        <location filename="editor/pagesmpl.ui" line="553"/>
         <source>Size</source>
         <translation>Grösse</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="548"/>
+        <location filename="editor/pagesmpl.ui" line="560"/>
         <source>Sample rate</source>
         <translation>Sample Frequenz</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="433"/>
+        <location filename="editor/pagesmpl.ui" line="567"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="440"/>
+        <location filename="editor/pagesmpl.ui" line="574"/>
         <source>Link</source>
         <translation>Link</translation>
     </message>
@@ -3360,9 +3374,9 @@ Frequenz</translation>
         <translation>Verwende die geschätzte Tonhöhe und Korrektur als Werte</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="585"/>
-        <location filename="editor/pagesmpl.cpp" line="510"/>
-        <location filename="editor/pagesmpl.cpp" line="1006"/>
+        <location filename="editor/pagesmpl.ui" line="604"/>
+        <location filename="editor/pagesmpl.cpp" line="517"/>
+        <location filename="editor/pagesmpl.cpp" line="1013"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
@@ -3381,80 +3395,80 @@ Frequenz</translation>
         <translation>(min)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="257"/>
-        <location filename="editor/pagesmpl.cpp" line="640"/>
+        <location filename="editor/pagesmpl.cpp" line="261"/>
+        <location filename="editor/pagesmpl.cpp" line="647"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>Mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="267"/>
-        <location filename="editor/pagesmpl.cpp" line="779"/>
+        <location filename="editor/pagesmpl.cpp" line="271"/>
+        <location filename="editor/pagesmpl.cpp" line="786"/>
         <source>right</source>
         <translation>rechts</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="268"/>
-        <location filename="editor/pagesmpl.cpp" line="780"/>
+        <location filename="editor/pagesmpl.cpp" line="272"/>
+        <location filename="editor/pagesmpl.cpp" line="787"/>
         <source>left</source>
         <translation>links</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="269"/>
-        <location filename="editor/pagesmpl.cpp" line="781"/>
+        <location filename="editor/pagesmpl.cpp" line="273"/>
+        <location filename="editor/pagesmpl.cpp" line="788"/>
         <source>link</source>
         <translation>Link</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="307"/>
+        <location filename="editor/pagesmpl.cpp" line="311"/>
         <source>Sample not linked to an instrument yet.</source>
         <translation>Instrument hat noch keinen Link zu einem Instrument.</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="309"/>
+        <location filename="editor/pagesmpl.cpp" line="313"/>
         <source>Sample linked to instrument:</source>
         <translation>Sample hat Link zum Instrument :</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="311"/>
+        <location filename="editor/pagesmpl.cpp" line="315"/>
         <source>Sample linked to instruments:</source>
         <translation>Sample hat Link zu Instrumenten :</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="511"/>
-        <location filename="editor/pagesmpl.cpp" line="1007"/>
+        <location filename="editor/pagesmpl.cpp" line="518"/>
+        <location filename="editor/pagesmpl.cpp" line="1014"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Änderung erfolgreich auf die verschiedenen Samples angewendet</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="778"/>
-        <location filename="editor/pagesmpl.cpp" line="803"/>
+        <location filename="editor/pagesmpl.cpp" line="785"/>
+        <location filename="editor/pagesmpl.cpp" line="810"/>
         <source>mono</source>
         <translation>Mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1076"/>
+        <location filename="editor/pagesmpl.cpp" line="1083"/>
         <source>Stop</source>
         <translation>Stop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1096"/>
+        <location filename="editor/pagesmpl.cpp" line="1102"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1097"/>
+        <location filename="editor/pagesmpl.cpp" line="1103"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation>Wollen Sie wirklich den sample von &lt;b&gt;%1&lt;/b&gt; bis &lt;b&gt;%2&lt;/b&gt; schneiden?&gt;</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1099"/>
+        <location filename="editor/pagesmpl.cpp" line="1105"/>
         <source>&amp;Yes</source>
         <translation>&amp;Ja</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1100"/>
+        <location filename="editor/pagesmpl.cpp" line="1106"/>
         <source>&amp;No</source>
         <translation>&amp;Nein</translation>
     </message>
@@ -3481,7 +3495,7 @@ Frequenz</translation>
         <translation>sf2 Datei</translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="139"/>
+        <location filename="core/output/outputfactory.cpp" line="142"/>
         <location filename="core/sample/sound.cpp" line="70"/>
         <location filename="core/sample/sound.cpp" line="74"/>
         <location filename="core/sample/sound.cpp" line="78"/>
@@ -3589,22 +3603,22 @@ Frequenz</translation>
         <translation>Velocity Bereich:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="123"/>
+        <location filename="dialogs/dialog_about.cpp" line="124"/>
         <source>Created by</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="124"/>
+        <location filename="dialogs/dialog_about.cpp" line="125"/>
         <source>Contributors</source>
         <translation>Mitwirkende</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="125"/>
+        <location filename="dialogs/dialog_about.cpp" line="126"/>
         <source>Translated by</source>
         <translation>Übersetzt von</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="167"/>
+        <location filename="dialogs/dialog_about.cpp" line="168"/>
         <source>Icons</source>
         <translation>Icons</translation>
     </message>
@@ -3616,12 +3630,14 @@ Frequenz</translation>
     <message>
         <location filename="context/keynamemanager.cpp" line="64"/>
         <location filename="context/keynamemanager.cpp" line="82"/>
+        <location filename="context/keynamemanager.cpp" line="128"/>
         <source>C</source>
         <comment>key name</comment>
         <translation>C</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="65"/>
+        <location filename="context/keynamemanager.cpp" line="131"/>
         <source>D♭</source>
         <comment>key name</comment>
         <translation>D♭</translation>
@@ -3629,12 +3645,14 @@ Frequenz</translation>
     <message>
         <location filename="context/keynamemanager.cpp" line="66"/>
         <location filename="context/keynamemanager.cpp" line="84"/>
+        <location filename="context/keynamemanager.cpp" line="134"/>
         <source>D</source>
         <comment>key name</comment>
         <translation>D</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="67"/>
+        <location filename="context/keynamemanager.cpp" line="137"/>
         <source>E♭</source>
         <comment>key name</comment>
         <translation>E♭</translation>
@@ -3642,6 +3660,7 @@ Frequenz</translation>
     <message>
         <location filename="context/keynamemanager.cpp" line="68"/>
         <location filename="context/keynamemanager.cpp" line="86"/>
+        <location filename="context/keynamemanager.cpp" line="140"/>
         <source>E</source>
         <comment>key name</comment>
         <translation>E</translation>
@@ -3649,12 +3668,14 @@ Frequenz</translation>
     <message>
         <location filename="context/keynamemanager.cpp" line="69"/>
         <location filename="context/keynamemanager.cpp" line="87"/>
+        <location filename="context/keynamemanager.cpp" line="142"/>
         <source>F</source>
         <comment>key name</comment>
         <translation>F</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="70"/>
+        <location filename="context/keynamemanager.cpp" line="145"/>
         <source>G♭</source>
         <comment>key name</comment>
         <translation>G♭</translation>
@@ -3662,12 +3683,14 @@ Frequenz</translation>
     <message>
         <location filename="context/keynamemanager.cpp" line="71"/>
         <location filename="context/keynamemanager.cpp" line="89"/>
+        <location filename="context/keynamemanager.cpp" line="148"/>
         <source>G</source>
         <comment>key name</comment>
         <translation>G</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="72"/>
+        <location filename="context/keynamemanager.cpp" line="151"/>
         <source>A♭</source>
         <comment>key name</comment>
         <translation>A♭</translation>
@@ -3675,12 +3698,14 @@ Frequenz</translation>
     <message>
         <location filename="context/keynamemanager.cpp" line="73"/>
         <location filename="context/keynamemanager.cpp" line="91"/>
+        <location filename="context/keynamemanager.cpp" line="154"/>
         <source>A</source>
         <comment>key name</comment>
         <translation>A</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="74"/>
+        <location filename="context/keynamemanager.cpp" line="157"/>
         <source>B♭</source>
         <comment>key name</comment>
         <translation>B♭</translation>
@@ -3688,36 +3713,42 @@ Frequenz</translation>
     <message>
         <location filename="context/keynamemanager.cpp" line="75"/>
         <location filename="context/keynamemanager.cpp" line="93"/>
+        <location filename="context/keynamemanager.cpp" line="160"/>
         <source>B</source>
         <comment>key name</comment>
         <translation>H</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="83"/>
+        <location filename="context/keynamemanager.cpp" line="130"/>
         <source>C♯</source>
         <comment>key name</comment>
         <translation>C♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="85"/>
+        <location filename="context/keynamemanager.cpp" line="136"/>
         <source>D♯</source>
         <comment>key name</comment>
         <translation>D♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="88"/>
+        <location filename="context/keynamemanager.cpp" line="144"/>
         <source>F♯</source>
         <comment>key name</comment>
         <translation>F♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="90"/>
+        <location filename="context/keynamemanager.cpp" line="150"/>
         <source>G♯</source>
         <comment>key name</comment>
         <translation>G♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="92"/>
+        <location filename="context/keynamemanager.cpp" line="156"/>
         <source>A♯</source>
         <comment>key name</comment>
         <translation>A♯</translation>
@@ -4430,7 +4461,7 @@ download the list</source>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="80"/>
-        <source>The number of files cannot exceed %0.</source>
+        <source>The number of files cannot exceed %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4445,7 +4476,7 @@ download the list</source>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
-        <source>The file size cannot exceed %0 MB.</source>
+        <source>The file size cannot exceed %1 MB.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4681,7 +4712,12 @@ download content</source>
 <context>
     <name>TableWidgetInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="247"/>
+        <location filename="editor/pageinst.cpp" line="237"/>
+        <source>Loop</source>
+        <translation type="unfinished">Loop</translation>
+    </message>
+    <message>
+        <location filename="editor/pageinst.cpp" line="248"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
@@ -6325,22 +6361,22 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeView</name>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="896"/>
+        <location filename="editor/tree/treeview.cpp" line="897"/>
         <source>instrument</source>
         <translation>Instrument</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="896"/>
+        <location filename="editor/tree/treeview.cpp" line="897"/>
         <source>preset</source>
         <translation>Preset</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="917"/>
+        <location filename="editor/tree/treeview.cpp" line="918"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="917"/>
+        <location filename="editor/tree/treeview.cpp" line="918"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6435,7 +6471,7 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished">Information</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/uploadingdialog.ui" line="50"/>
+        <location filename="repository/soundfont/uploadingdialog.ui" line="54"/>
         <source>Uploading soundfont...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6463,7 +6499,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>WaitingToolDialog</name>
     <message>
-        <location filename="editor/tools/waitingtooldialog.ui" line="47"/>
+        <location filename="editor/tools/waitingtooldialog.ui" line="51"/>
         <source>Processing...</source>
         <oldsource>Processing..</oldsource>
         <translation>wird bearbeitet...</translation>
@@ -6500,43 +6536,43 @@ Other soundfont editors might display other units.</source>
         <translation>Online Fundgrube</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="228"/>
+        <location filename="mainwindow/windowmanager.cpp" line="231"/>
         <source>Save before exiting?</source>
         <translation>Sichern vor beenden?</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="231"/>
+        <location filename="mainwindow/windowmanager.cpp" line="234"/>
         <source>untitled</source>
         <translation>unbenannt</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="232"/>
+        <location filename="mainwindow/windowmanager.cpp" line="235"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>die Datei &quot;%1&quot; wurde geändert.</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="124"/>
-        <location filename="mainwindow/windowmanager.cpp" line="233"/>
+        <location filename="mainwindow/windowmanager.cpp" line="236"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="235"/>
+        <location filename="mainwindow/windowmanager.cpp" line="238"/>
         <source>&amp;Save</source>
         <translation>&amp;Speichern</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="236"/>
+        <location filename="mainwindow/windowmanager.cpp" line="239"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="237"/>
+        <location filename="mainwindow/windowmanager.cpp" line="240"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Nicht speichern</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="325"/>
+        <location filename="mainwindow/windowmanager.cpp" line="328"/>
         <source>User area</source>
         <translation>Benutzerbereich</translation>
     </message>

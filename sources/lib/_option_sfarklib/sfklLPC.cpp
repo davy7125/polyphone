@@ -349,7 +349,6 @@ void LPCinit()
 
 long UnLPC(AWORD *OutBuf, AWORD *InBuf, short bufsize, short nc, ULONG *Flags)
 {
-  long      OutBits = 0;
   LPC_WORD  lInBuf[MAX_BUFSIZE], lOutBuf[MAX_BUFSIZE];
   LPC_WORD  *inp = lInBuf, *bufend = inp + bufsize, *outp = lOutBuf;
 
@@ -374,7 +373,6 @@ long UnLPC(AWORD *OutBuf, AWORD *InBuf, short bufsize, short nc, ULONG *Flags)
     {
       long LPCout = UnLPC2(outp, inp, WinSize, nc, Flags);
       if (LPCout < 0)  return LPCout;
-      OutBits += LPCout;
     }
 
     inp += WinSize;

@@ -77,7 +77,7 @@ void SoundfontEditorFiles::addFile()
     // 10 files max
     if (_cells.count() >= MAX_FILES)
     {
-        QMessageBox::warning(this, tr("Warning"), tr("The number of files cannot exceed %0.").arg(MAX_FILES));
+        QMessageBox::warning(this, tr("Warning"), tr("The number of files cannot exceed %1.").arg(MAX_FILES));
         return;
     }
 
@@ -135,7 +135,7 @@ QString SoundfontEditorFiles::getFilePath(QString path)
     // Check the size
     if (info.size() > MAX_MB * 1000000)
     {
-        QMessageBox::warning(this, tr("Warning"), tr("The file size cannot exceed %0 MB.").arg(MAX_MB));
+        QMessageBox::warning(this, tr("Warning"), tr("The file size cannot exceed %1 MB.").arg(MAX_MB));
         return "";
     }
 
