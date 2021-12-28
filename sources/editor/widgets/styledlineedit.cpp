@@ -109,7 +109,13 @@ void StyledLineEdit::onTextEdited(QString text)
 
 QSize StyledLineEdit::sizeHint() const
 {
-    return QSize(_defaultWidth, QLineEdit::sizeHint().height());
+    int width = _defaultWidth;
+    if (width == 0 && this->text().isEmpty())
+    {
+        QFontMetrics fm(this->font());
+        width = fm.width(this->placeholderText()) + 20;
+    }
+    return QSize(width, QLineEdit::sizeHint().height());
 }
 
 void StyledLineEdit::resizeEvent(QResizeEvent * event)
