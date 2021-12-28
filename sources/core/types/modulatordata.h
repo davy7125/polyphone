@@ -77,6 +77,9 @@ public:
     bool operator==(const SFModulator& other);
     quint16 toWord();
 
+    // Apply a shape, input being from 0 and 127 and output being from 0 or -1 to 1
+    double applyShape(double value);
+
     quint8 Type : 6;
     bool isBipolar : 1;
     bool isDescending : 1;
@@ -110,6 +113,9 @@ public:
     SFTransform transOper;
     qint16 amount;
     quint16 index; // Global index of the modulator that may be referenced by others
+
+    // Get the range of the output values, allowing a normalization
+    void getRange(qint16 &min, qint16 &max);
 
     bool operator== (ModulatorData &other)
     {

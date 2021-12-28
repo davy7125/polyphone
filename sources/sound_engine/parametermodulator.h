@@ -45,15 +45,17 @@ public:
     void setOutput(ModulatedParameter * parameter);
     void setOutput(ParameterModulator * modulator);
 
-    // Compute the input based on midi values
-    void processInput();
+    // Initialize a computation
+    void initialize();
 
-    // Process the output and return true or return false if the input is not computed yet
-    bool processOutput();
+    // Compute the output
+    // Return true if OK
+    // Return false if at least one input is not known yet (linked modulators)
+    bool computeOutput();
 
 private:
     // Input coming from another modulator
-    void setInput(double value);
+    void setInput(double value, qint16 min, qint16 max);
 
     // Add 1 to the number of input to wait before computing the result
     void waitForAnInput() { _inputNumber++; }
@@ -63,9 +65,9 @@ private:
 
     ModulatorData _data;
 
-    int _inputNumber, _inputCount;
+    int _inputNumber, _inputCount, _minSum, _maxSum;
     bool _computed;
-    double _input1, _input2;
+    double _inputSum;
     ModulatedParameter * _outputParameter;
     ParameterModulator * _outputModulator;
     bool _isPrst;

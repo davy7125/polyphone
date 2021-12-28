@@ -24,6 +24,7 @@
 
 #include "modulatordata.h"
 #include "attribute.h"
+#include "utils.h"
 
 // 0 => version 2.01
 // 1 => version 2.04 (default)
@@ -48,6 +49,81 @@ quint16 SFModulator::toWord()
     //        CC    : 1,
     //        Index : 7;
     return ((Type << 10) + (isBipolar << 9) + (isDescending << 8) + (CC << 7) + Index) & 0xFFFF;
+}
+
+double SFModulator::applyShape(double value)
+{
+    switch (this->Type)
+    {
+    case typeLinear:
+        // Linearly increasing from 0 to 1
+        value /= 127.0;
+
+        // Possibly from 1 to 0 instead of 0 to 1
+        if (this->isDescending)
+            value = 1.0 - value;
+
+        // Possibly from -1 to 1 instead of 0 to 1
+        if (this->isBipolar)
+            value = 2.0 * value - 1.0;
+
+        break;
+    case typeConcave:
+        if (this->isDescending)
+        {
+            if (this->isBipolar)
+                // Concave, bipolar, negative
+                value = (value > 64) ? -Utils::concave(2 * (value - 64)) : Utils::concave(2 * (64 - value));
+            else
+                // Concave, unipolar, negative
+                value = Utils::concave(127 - value);
+        }
+        else
+        {
+            if (this->isBipolar)
+                // Concave, bipolar, positive
+                value = (value > 64) ? Utils::concave(2 * (value - 64)) : -Utils::concave(2 * (64 - value));
+            else
+                // Concave, unipolar, positive
+                value = Utils::concave(value);
+        }
+        break;
+    case typeConvex:
+        if (this->isDescending)
+        {
+            if (this->isBipolar)
+                // Convex, bipolar, negative
+                value = (value > 64) ? -Utils::convex(2 * (value - 64)) : Utils::convex(2 * (64 - value));
+            else
+                // Convex, unipolar, negative
+                value = Utils::convex(127 - value);
+        }
+        else
+        {
+            if (this->isBipolar)
+                // Convex, bipolar, positive
+                value = (value > 64) ? Utils::convex(2 * (value - 64)) : -Utils::convex(2 * (64 - value));
+            else
+                // Convex, unipolar, positive
+                value = Utils::convex(value);
+        }
+        break;
+    case typeSwitch:
+        // Switch
+        value = (value >= 64 ? 1.0 : 0.0);
+
+        // Possibly from 1 to 0 instead of 0 to 1
+        if (this->isDescending)
+            value = 1.0 - value;
+
+        // Possibly from -1 to 1 instead of 0 to 1
+        if (this->isBipolar)
+            value = 2.0 * value - 1.0;
+
+        break;
+    }
+
+    return value;
 }
 
 quint16 ModulatorData::defaultModulatorNumber()
@@ -139,5 +215,24 @@ void ModulatorData::loadDefaultModulator(quint16 num)
     default:
         // Nothing
         break;
+    }
+}
+
+void ModulatorData::getRange(qint16 &min, qint16 &max)
+{
+    if (this->transOper == absolute_value)
+    {
+        min = 0;
+        max = this->amount > 0 ? this->amount : -this->amount;
+    }
+    else if (this->amount < 0)
+    {
+        min = this->amount;
+        max = this->srcOper.isBipolar || this->amtSrcOper.isBipolar ? -this->amount : 0;
+    }
+    else
+    {
+        min = this->srcOper.isBipolar || this->amtSrcOper.isBipolar ? -this->amount : 0;
+        max = this->amount;
     }
 }

@@ -25,15 +25,15 @@
 #include "parametermodulator.h"
 #include "modulatedparameter.h"
 #include "contextmanager.h"
-#include "utils.h"
 
 ParameterModulator::ParameterModulator(ModulatorData &modData, bool isPrst, int initialKey, int keyForComputation, int velForComputation) :
     _data(modData),
     _inputNumber(0),
     _inputCount(0),
+    _minSum(0),
+    _maxSum(0),
     _computed(false),
-    _input1(0),
-    _input2(0),
+    _inputSum(0),
     _outputParameter(nullptr),
     _outputModulator(nullptr),
     _isPrst(isPrst),
@@ -68,35 +68,54 @@ void ParameterModulator::setOutput(ParameterModulator * modulator)
     _outputModulator->waitForAnInput();
 }
 
-void ParameterModulator::processInput()
+void ParameterModulator::initialize()
 {
-    if (_data.amount != 0)
-    {
-        _input1 = getValue(_data.srcOper);
-        _input2 = getValue(_data.amtSrcOper);
-    }
-
     _inputCount = 0;
+    _inputSum = 0.0;
+    _minSum = 0;
+    _maxSum = 0;
     _computed = false;
 }
 
-bool ParameterModulator::processOutput()
+bool ParameterModulator::computeOutput()
 {
     if (_inputCount < _inputNumber)
-        return false; // We need to wait
+        return false; // At least one input is not known yet, we need to wait
+
     if (_computed)
         return true; // Already computed
 
+    // Compute input1
+    double input1;
+    if (_inputNumber > 0)
+    {
+        // Normalize the external inputs between 0 and 127
+        input1 = _minSum != _maxSum ? 127.0 * (_inputSum - _minSum) / (_maxSum - _minSum) : 0;
+    }
+    else
+        input1 = getValue(_data.srcOper);
+
+    // Compute input2
+    double input2 = getValue(_data.amtSrcOper);
+
+    // Apply shapes
+    input1 = input1 < 0 ? 0 : _data.srcOper.applyShape(input1);
+    input2 = input2 < 0 ? 0 : _data.amtSrcOper.applyShape(input2);
+
     // Compute data
-    double result = _input1 * _input2 * _data.amount;
+    double result = input1 * input2 * _data.amount;
     if (_data.transOper == SFTransform::absolute_value && result < 0)
         result = -result;
 
-    // Output
+    // Apply the output
     if (_outputModulator != nullptr)
     {
+        // Compute min / max
+        qint16 min, max;
+        _data.getRange(min, max);
+
         // Send the value to another modulator
-        _outputModulator->setInput(result);
+        _outputModulator->setInput(result, min, max);
     }
     else if (_outputParameter != nullptr)
     {
@@ -112,16 +131,19 @@ bool ParameterModulator::processOutput()
     return true;
 }
 
-void ParameterModulator::setInput(double value)
+void ParameterModulator::setInput(double value, qint16 min, qint16 max)
 {
-    _input1 += value;
+    _inputSum += value;
+    _minSum += min;
+    _maxSum += max;
     _inputCount++;
 }
 
 double ParameterModulator::getValue(SFModulator sfMod)
 {
-    // Base value
+    // Default value
     double value = -1;
+
     if (sfMod.CC)
     {
         // Midi controllers
@@ -158,83 +180,9 @@ double ParameterModulator::getValue(SFModulator sfMod)
             break;
         case GC_link: default:
             // Link (the value will come later)
-            return 0;
+            break;
         }
     }
-//qDebug() << "base value:" << value << "CC" << sfMod.CC << "index" << sfMod.Index;
-    // The value might not be ready
-    if (value < 0)
-        return 0;
 
-    switch (sfMod.Type)
-    {
-    case typeLinear:
-        // Linearly increasing from 0 to 1
-        value /= 127.0;
-
-        // Possibly from 1 to 0 instead of 0 to 1
-        if (sfMod.isDescending)
-            value = 1.0 - value;
-
-        // Possibly from -1 to 1 instead of 0 to 1
-        if (sfMod.isBipolar)
-            value = 2.0 * value - 1.0;
-
-        break;
-    case typeConcave:
-        if (sfMod.isDescending)
-        {
-            if (sfMod.isBipolar)
-                // Concave, bipolar, negative
-                value = (value > 64) ? -Utils::concave(2 * (value - 64)) : Utils::concave(2 * (64 - value));
-            else
-                // Concave, unipolar, negative
-                value = Utils::concave(127 - value);
-        }
-        else
-        {
-            if (sfMod.isBipolar)
-                // Concave, bipolar, positive
-                value = (value > 64) ? Utils::concave(2 * (value - 64)) : -Utils::concave(2 * (64 - value));
-            else
-                // Concave, unipolar, positive
-                value = Utils::concave(value);
-        }
-        break;
-    case typeConvex:
-        if (sfMod.isDescending)
-        {
-            if (sfMod.isBipolar)
-                // Convex, bipolar, negative
-                value = (value > 64) ? -Utils::convex(2 * (value - 64)) : Utils::convex(2 * (64 - value));
-            else
-                // Convex, unipolar, negative
-                value = Utils::convex(127 - value);
-        }
-        else
-        {
-            if (sfMod.isBipolar)
-                // Convex, bipolar, positive
-                value = (value > 64) ? Utils::convex(2 * (value - 64)) : -Utils::convex(2 * (64 - value));
-            else
-                // Convex, unipolar, positive
-                value = Utils::convex(value);
-        }
-        break;
-    case typeSwitch:
-        // Switch
-        value = (value >= 64 ? 1.0 : 0.0);
-
-        // Possibly from 1 to 0 instead of 0 to 1
-        if (sfMod.isDescending)
-            value = 1.0 - value;
-
-        // Possibly from -1 to 1 instead of 0 to 1
-        if (sfMod.isBipolar)
-            value = 2.0 * value - 1.0;
-
-        break;
-    }
-//qDebug() << "after shape:" << value;
     return value;
 }

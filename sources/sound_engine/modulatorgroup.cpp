@@ -114,9 +114,9 @@ void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
 
 void ModulatorGroup::process()
 {
-    // Process the input of the modulators
+    // Initialize the modulator computation
     foreach (ParameterModulator * modulator, _modulators)
-        modulator->processInput();
+        modulator->initialize();
 
     // Compute the output of the modulators, as long as everything has not been completed
     // or until a maximum is reached (in the case of a loop)
@@ -125,6 +125,6 @@ void ModulatorGroup::process()
     do {
         ok = true;
         foreach (ParameterModulator * modulator, _modulators)
-            ok &= modulator->processOutput();
+            ok &= modulator->computeOutput();
     } while (!ok && count++ < _modulators.count());
 }
