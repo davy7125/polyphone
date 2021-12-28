@@ -285,7 +285,7 @@ void MainWindow::on_pushButtonNew_clicked()
 void MainWindow::openFiles(const QString& fileNames)
 {
     // Open all files
-    QStringList files = fileNames.split('|', QString::SkipEmptyParts);
+    QStringList files = fileNames.split('|', Qt::SkipEmptyParts);
     foreach (QString file, files)
        _windowManager->openSoundfont(file);
 }

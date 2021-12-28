@@ -35,7 +35,7 @@ class ModalProgressDialog : public QProgressDialog
 
 public:
     ModalProgressDialog(const QString &labelText, const QString &cancelButtonText,
-                        int minimum, int maximum, QWidget *parent = nullptr, Qt::WindowFlags flags = nullptr) :
+                        int minimum, int maximum, QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags()) :
         QProgressDialog(labelText, cancelButtonText, minimum, maximum, parent, flags)
     {
         this->setWindowModality(Qt::WindowModal);

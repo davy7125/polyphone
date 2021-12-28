@@ -160,7 +160,7 @@ void SpinBoxRange::onKeyPlayed(int key, int vel)
 
 QAbstractSpinBox::StepEnabled SpinBoxRange::stepEnabled() const
 {
-    StepEnabled stepEnabled = 0;
+    StepEnabled stepEnabled = QFlags<StepEnabledFlag>();
     switch (getCurrentSection())
     {
     case SectionMin:

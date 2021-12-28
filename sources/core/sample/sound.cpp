@@ -375,7 +375,7 @@ void Sound::determineRootKey()
     {
         // Then search the numeric name of the key
         QString name = nameNoExtension;
-        QStringList listeNum = name.replace(QRegExp("[^0-9]"), "-").split("-", QString::SkipEmptyParts);
+        QStringList listeNum = name.replace(QRegExp("[^0-9]"), "-").split("-", Qt::SkipEmptyParts);
         if (listeNum.size())
         {
             // 0n étudie le dernier

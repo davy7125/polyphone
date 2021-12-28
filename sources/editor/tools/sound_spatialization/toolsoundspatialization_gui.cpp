@@ -251,16 +251,13 @@ void ToolSoundSpatialization_gui::computeData(QVector<double> &x, QVector<int> &
         break;
     case 4:{
         // Mix keys
-        uint seed = 0;
         QList<int> listTmp;
         for (int i = 0; i < nbNotes; i++)
             listTmp << i;
 
         for (int i = 0; i < nbNotes; i++)
         {
-            seed += QTime(0, 0).msecsTo(QTime::currentTime());
-            qsrand(seed);
-            x[listTmp.takeAt(qrand() % listTmp.size())] = spaceLinear(i + _minKey,
+            x[listTmp.takeAt(QRandomGenerator::global()->generate() % listTmp.size())] = spaceLinear(i + _minKey,
                                ui->spinNbDivision->value(),
                                ui->spinSpreading->value(),
                                ui->spinFilling->value(),

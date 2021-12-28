@@ -558,7 +558,7 @@ QPixmap ThemeManager::getColoredSvg(QString filename, QSize maxSize, QMap<QStrin
 
     // Replace keywords
     foreach (QString key, replacement.keys())
-        fileContent.replace(key, replacement[key].toStdString().c_str());
+        fileContent.replace(key.toUtf8(), replacement[key].toUtf8());
 
     // Compute the size
     QSvgRenderer rr(fileContent);

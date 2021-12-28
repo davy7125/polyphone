@@ -69,7 +69,7 @@ public:
     QLayoutItem *itemAt(int index) const override;
 
     // Properties
-    Qt::Orientations expandingDirections() const override { return 0; }
+    Qt::Orientations expandingDirections() const override { return QFlags<Qt::Orientation>(); }
     bool hasHeightForWidth() const override { return true; }
 
     // Size management

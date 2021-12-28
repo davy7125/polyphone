@@ -126,7 +126,7 @@ void InputParserSfz::parseFile(QString filename, bool &success, QString &error)
             line = line.left(line.indexOf("//"));
 
         // Découpage
-        QStringList list = line.split(" ", QString::KeepEmptyParts);
+        QStringList list = line.split(" ", Qt::KeepEmptyParts);
         int length = list.size();
         for (int i = length - 1; i >= 1; i--)
         {
@@ -170,7 +170,7 @@ void InputParserSfz::parseFile(QString filename, bool &success, QString &error)
             }
             else if (str.indexOf("#define") == 0)
             {
-                QStringList splitTmp = str.split(' ', QString::SkipEmptyParts);
+                QStringList splitTmp = str.split(' ', Qt::SkipEmptyParts);
                 if (splitTmp.size() == 3)
                     _replacements[splitTmp[1]] = splitTmp[2];
             }

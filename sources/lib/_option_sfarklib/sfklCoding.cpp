@@ -851,14 +851,16 @@ int Decode(const char *InFileName, const char *ReqOutFileName)
 // ==============================================================
 
 // Adjust integer held at *num for this machine's endian system
+#if BYTE_ORDER == BIG_ENDIAN
 void FixEndian(void *num, int nsize)
 {
-#if BYTE_ORDER == BIG_ENDIAN
   int i;
   BYTE bb[4];
   for (i = 0; i < nsize; i++)  bb[i] = ((BYTE *) num)[i];
   for (i = 0; i < nsize; i++)  ((BYTE *) num)[i] = bb[nsize-1-i];
-#endif
 }
+#else
+void FixEndian(void */*num*/, int /*nsize*/) {}
+#endif
 
 // ==============================================================

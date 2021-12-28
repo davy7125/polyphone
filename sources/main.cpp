@@ -43,7 +43,6 @@
 #include "mainwindow.h"
 #include "translationmanager.h"
 #include <QDir>
-#include <QNetworkSession>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -68,7 +67,6 @@ int launchApplication(QtSingleApplication * app, Options &options)
 
     // Additional type used in signals
     qRegisterMetaType<EltID>();
-    qRegisterMetaType<QSharedPointer<QNetworkSession> >();
     qRegisterMetaType<QList<int> >();
 
     // Display the main window

@@ -42,7 +42,7 @@ QList<int> SfzParameterGroup::getSampleIndex(SoundfontManager *sf2, EltID idElt,
     QString fileName = pathSfz + "/" + filePath;
     if (!QFile(fileName).exists())
     {
-        QStringList list = getFullPath(pathSfz, filePath.split("/", QString::SkipEmptyParts));
+        QStringList list = getFullPath(pathSfz, filePath.split("/", Qt::SkipEmptyParts));
         if (!list.isEmpty())
             fileName = list.first();
         else
