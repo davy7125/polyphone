@@ -173,6 +173,33 @@ void ModulatorComboDest::onCurrentIndexChanged(int index)
             sm->set(otherModId, champ_sfModSrcOper, val2);
         }
 
+        // If this is not a link anymore, possibly change source 1 of the target modulator to "1"
+        // if there is no other input
+        if (val.wValue >= 32768 && index < 32768)
+        {
+            // Check that no other modulators are feeding the modulator that received the current output
+            EltID otherModId = _id;
+            bool stillLinked = false;
+            foreach (int modId, sm->getSiblings(_id))
+            {
+                otherModId.indexMod = modId;
+                if (otherModId.indexMod != _id.indexMod && sm->get(otherModId, champ_sfModDestOper).wValue == val.wValue)
+                {
+                    stillLinked = true;
+                    break;
+                }
+            }
+            if (!stillLinked)
+            {
+                otherModId.indexMod = val.wValue - 32768;
+                AttributeValue val2;
+                val2.sfModValue = sm->get(otherModId, champ_sfModSrcOper).sfModValue;
+                val2.sfModValue.Index = 0;
+                val2.sfModValue.CC = 0;
+                sm->set(otherModId, champ_sfModSrcOper, val2);
+            }
+        }
+
         val.wValue = static_cast<quint16>(index);
         sm->set(_id, champ_sfModDestOper, val);
         sm->endEditing("modulatorEditor");
