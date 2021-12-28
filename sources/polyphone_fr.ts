@@ -160,12 +160,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="667"/>
         <source>Mod LFO freq (×)</source>
-        <translation>Mod LFO fréq.(×)</translation>
+        <translation>Mod LFO fréq (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="668"/>
         <source>Mod LFO freq (Hz)</source>
-        <translation>Mod LFO fréq.(Hz)</translation>
+        <translation>Mod LFO fréq (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="671"/>
@@ -180,12 +180,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="675"/>
         <source>Vib LFO freq (×)</source>
-        <translation>Vib LFO fréq.(×)</translation>
+        <translation>Vib LFO fréq (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="676"/>
         <source>Vib LFO freq (Hz)</source>
-        <translation>Vib LFO fréq.(Hz)</translation>
+        <translation>Vib LFO fréq (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="679"/>
