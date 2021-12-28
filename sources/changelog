@@ -1,4 +1,25 @@
-polyphone (2.2) unstable; urgency=low
+polyphone (2.3) unstable; urgency=low
+
+  * (new) Russian and Korean translations
+  * (new) detection of bad loops, a warning being displayed at the sample level and in the sample summary
+  * (new) parameter inconsistencies displayed in the sample summary
+  * (new) option to allow multiple instances of Polyphone
+  * (improvement) creating a new instrument automatically set the loop mode and the key ranges
+  * (improvement) a table cell can be cleared more easily when editing the cell
+  * (improvement) UTF-8 text can be written in the comment field
+  * (fix) release time was taken into account instead of the modulation decay
+  * (fix) crash when closing Polyphone due to audio connections not closed
+  * (fix) crash when initializing a MIDI connection
+  * (fix) the graph in the spatialization tool was sometimes incomplete
+  * (fix) selecting a table cell linked to a modulator cleared the selection
+  * (fix) sfz import / export with 24-bit samples
+  * (fix) linked modulators now working properly
+  * (fix) interface glitches
+
+ -- Davy Triponney <davy.triponney@gmail.com>  Tue, 28 Dec 2021 23:20:08 +0100
+
+
+polyphone (2.2) UNRELEASED; urgency=low
 
   * (new) tool for editing sample properties
   * (new) solo mode focused on selection
@@ -347,6 +368,7 @@ polyphone (0.4) UNRELEASED; urgency=low
   
 
 polyphone (0.3) UNRELEASED; urgency=low
+
   * release creation tool
   * division duplication for preset
   * correction of parameter limits in the preset page
