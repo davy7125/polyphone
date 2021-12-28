@@ -276,21 +276,21 @@ void ConversionSfz::writeEntete(QFile * fichierSfz, EltID id)
     // Write header
     id.typeElement = elementSf2;
     QTextStream out(fichierSfz);
-    out << "// Sfz exported from a sf2 file with Polyphone" << endl
-        << "// Name      : " << _sf2->getQstr(id, champ_name).replace(QRegExp("[\r\n]"), " ") << endl
-        << "// Author    : " << _sf2->getQstr(id, champ_IENG).replace(QRegExp("[\r\n]"), " ") << endl
-        << "// Copyright : " << _sf2->getQstr(id, champ_ICOP).replace(QRegExp("[\r\n]"), " ") << endl
-        << "// Date      : " << QDate::currentDate().toString("yyyy/MM/dd") << endl
-        << "// Comment   : " << _sf2->getQstr(id, champ_ICMT).replace(QRegExp("[\r\n]"), " ") << endl;
+    out << "// Sfz exported from a sf2 file with Polyphone" << Qt::endl
+        << "// Name      : " << _sf2->getQstr(id, champ_name).replace(QRegExp("[\r\n]"), " ") << Qt::endl
+        << "// Author    : " << _sf2->getQstr(id, champ_IENG).replace(QRegExp("[\r\n]"), " ") << Qt::endl
+        << "// Copyright : " << _sf2->getQstr(id, champ_ICOP).replace(QRegExp("[\r\n]"), " ") << Qt::endl
+        << "// Date      : " << QDate::currentDate().toString("yyyy/MM/dd") << Qt::endl
+        << "// Comment   : " << _sf2->getQstr(id, champ_ICMT).replace(QRegExp("[\r\n]"), " ") << Qt::endl;
 }
 
 void ConversionSfz::writeGroup(QFile * fichierSfz, SfzParamList * listeParam, bool isPercKit)
 {
     // Ecriture de paramètres communs à plusieurs régions
     QTextStream out(fichierSfz);
-    out << endl << "<group>" << endl;
+    out << Qt::endl << "<group>" << Qt::endl;
     if (isPercKit)
-        out << "lochan=10 hichan=10" << endl;
+        out << "lochan=10 hichan=10" << Qt::endl;
     for (int i = 0; i < listeParam->size(); i++)
         writeElement(out, listeParam->getChamp(i), listeParam->getValeur(i));
 }
@@ -303,8 +303,8 @@ void ConversionSfz::writeRegion(QFile * fichierSfz, SfzParamList * listeParam, Q
     // Ecriture de paramètres spécifique à une région
     QTextStream out(fichierSfz);
 
-    out << endl << "<region>" << endl
-        << "sample=" << pathSample.replace("/", "\\") << endl;
+    out << Qt::endl << "<region>" << Qt::endl
+        << "sample=" << pathSample.replace("/", "\\") << Qt::endl;
     if (ignorePan && listeParam->findChamp(champ_initialAttenuation) == -1)
         writeElement(out, champ_initialAttenuation, -deltaVolumeIfIgnorePan / DB_SF2_TO_SFZ);
 
@@ -323,92 +323,92 @@ void ConversionSfz::writeElement(QTextStream &out, AttributeType champ, double v
     QString v2 = " // sfz v2";
     switch (champ)
     {
-    case champ_fineTune:                out << "tune=" << qRound(value) << endl;                    break;
-    case champ_coarseTune:              out << "transpose=" << qRound(value) << endl;               break;
-    case champ_scaleTuning:             out << "pitch_keytrack=" << qRound(value) << endl;          break;
-    case champ_startloopAddrsOffset:    out << "loop_start=" << qRound(value) << endl;              break;
-    case champ_startAddrsOffset:        out << "offset=" << qRound(value) << endl;                  break;
-    case champ_endloopAddrsOffset:      out << "loop_end=" << qRound(value) - 1 << endl;            break;
-    case champ_endAddrsOffset:          out << "end=" << qRound(value) - 1 << endl;                 break;
-    case champ_pan:                     out << "pan=" << 2 * value << endl;                         break;
-    case champ_initialAttenuation:      out << "volume=" << -value * DB_SF2_TO_SFZ << endl;         break;
-    case champ_initialFilterQ:          out << "resonance=" << value << endl;                       break;
-    case champ_sustainModEnv:           out << "fileg_sustain=" << 100. - value << endl
-                                            << "pitcheg_sustain=" << 100. - value << endl;          break;
-    case champ_delayModEnv:             out << "pitcheg_delay=" << value << endl
-                                            << "fileg_delay=" << value << endl;                     break;
-    case champ_attackModEnv:            out << "pitcheg_attack=" << value << endl
-                                            << "fileg_attack=" << value << endl;                    break;
-    case champ_holdModEnv:              out << "pitcheg_hold=" << value << endl
-                                            << "fileg_hold=" << value << endl;                      break;
-    case champ_decayModEnv:             out << "pitcheg_decay=" << value << endl
-                                            << "fileg_decay=" << value << endl;                     break;
-    case champ_releaseModEnv:           out << "pitcheg_release=" << value << endl
-                                            << "fileg_release=" << value << endl;                   break;
-    case champ_modEnvToPitch:           out << "pitcheg_depth=" << qRound(value) << endl;           break;
-    case champ_modEnvToFilterFc:        out << "fileg_depth=" << qRound(value) << endl;             break;
-    case champ_keynumToModEnvHold:      out << "pitcheg_holdcc133=" << value << v2 << endl
-                                            << "fileg_holdcc133=" << value << v2 << endl;           break;
-    case champ_keynumToModEnvDecay:     out << "pitcheg_decaycc133=" << value << v2 << endl
-                                            << "fileg_decaycc133=" << value << v2 << endl;          break;
-    case champ_delayModLFO:             out << "amplfo_delay=" << value << endl
-                                            << "fillfo_delay=" << value << endl;                    break;
-    case champ_freqModLFO:              out << "amplfo_freq=" << value << endl
-                                            << "fillfo_freq=" << value << endl;                     break;
-    case champ_modLfoToVolume:          out << "amplfo_depth=" << value << endl;                    break;
-    case champ_modLfoToFilterFc:        out << "fillfo_depth=" << value << endl;                    break;
+    case champ_fineTune:                out << "tune=" << qRound(value) << Qt::endl;                    break;
+    case champ_coarseTune:              out << "transpose=" << qRound(value) << Qt::endl;               break;
+    case champ_scaleTuning:             out << "pitch_keytrack=" << qRound(value) << Qt::endl;          break;
+    case champ_startloopAddrsOffset:    out << "loop_start=" << qRound(value) << Qt::endl;              break;
+    case champ_startAddrsOffset:        out << "offset=" << qRound(value) << Qt::endl;                  break;
+    case champ_endloopAddrsOffset:      out << "loop_end=" << qRound(value) - 1 << Qt::endl;            break;
+    case champ_endAddrsOffset:          out << "end=" << qRound(value) - 1 << Qt::endl;                 break;
+    case champ_pan:                     out << "pan=" << 2 * value << Qt::endl;                         break;
+    case champ_initialAttenuation:      out << "volume=" << -value * DB_SF2_TO_SFZ << Qt::endl;         break;
+    case champ_initialFilterQ:          out << "resonance=" << value << Qt::endl;                       break;
+    case champ_sustainModEnv:           out << "fileg_sustain=" << 100. - value << Qt::endl
+                                            << "pitcheg_sustain=" << 100. - value << Qt::endl;          break;
+    case champ_delayModEnv:             out << "pitcheg_delay=" << value << Qt::endl
+                                            << "fileg_delay=" << value << Qt::endl;                     break;
+    case champ_attackModEnv:            out << "pitcheg_attack=" << value << Qt::endl
+                                            << "fileg_attack=" << value << Qt::endl;                    break;
+    case champ_holdModEnv:              out << "pitcheg_hold=" << value << Qt::endl
+                                            << "fileg_hold=" << value << Qt::endl;                      break;
+    case champ_decayModEnv:             out << "pitcheg_decay=" << value << Qt::endl
+                                            << "fileg_decay=" << value << Qt::endl;                     break;
+    case champ_releaseModEnv:           out << "pitcheg_release=" << value << Qt::endl
+                                            << "fileg_release=" << value << Qt::endl;                   break;
+    case champ_modEnvToPitch:           out << "pitcheg_depth=" << qRound(value) << Qt::endl;           break;
+    case champ_modEnvToFilterFc:        out << "fileg_depth=" << qRound(value) << Qt::endl;             break;
+    case champ_keynumToModEnvHold:      out << "pitcheg_holdcc133=" << value << v2 << Qt::endl
+                                            << "fileg_holdcc133=" << value << v2 << Qt::endl;           break;
+    case champ_keynumToModEnvDecay:     out << "pitcheg_decaycc133=" << value << v2 << Qt::endl
+                                            << "fileg_decaycc133=" << value << v2 << Qt::endl;          break;
+    case champ_delayModLFO:             out << "amplfo_delay=" << value << Qt::endl
+                                            << "fillfo_delay=" << value << Qt::endl;                    break;
+    case champ_freqModLFO:              out << "amplfo_freq=" << value << Qt::endl
+                                            << "fillfo_freq=" << value << Qt::endl;                     break;
+    case champ_modLfoToVolume:          out << "amplfo_depth=" << value << Qt::endl;                    break;
+    case champ_modLfoToFilterFc:        out << "fillfo_depth=" << value << Qt::endl;                    break;
 
     case champ_modLfoToPitch:           /* IMPOSSIBLE !!! */                                        break;
     case champ_keynum:
         out << "pitch_keycenter="
-            << ContextManager::keyName()->getKeyName(qRound(value), false, false, true) << endl
-            << "pitch_keytrack=0" << endl;
+            << ContextManager::keyName()->getKeyName(qRound(value), false, false, true) << Qt::endl
+            << "pitch_keytrack=0" << Qt::endl;
         break;
-    case champ_reverbEffectsSend:       out << "effect1=" << value << endl;                         break;
-    case champ_chorusEffectsSend:       out << "effect2=" << value << endl;                         break;
-    case champ_delayVolEnv:             out << "ampeg_delay=" << value << endl;                     break;
-    case champ_attackVolEnv:            out << "ampeg_attack=" << value << endl;                    break;
-    case champ_sustainVolEnv:           out << "ampeg_sustain=" << dbToPercent(value) << endl;      break;
-    case champ_holdVolEnv:              out << "ampeg_hold=" << value << endl;                      break;
-    case champ_decayVolEnv:             out << "ampeg_decay=" << value << endl;                     break;
-    case champ_keynumToVolEnvHold:      out << "ampeg_holdcc133=" << value << v2 << endl;           break;
-    case champ_keynumToVolEnvDecay:     out << "ampeg_decaycc133=" << value << v2 << endl;          break;
-    case champ_releaseVolEnv:           out << "ampeg_release=" << value << endl;                   break;
+    case champ_reverbEffectsSend:       out << "effect1=" << value << Qt::endl;                         break;
+    case champ_chorusEffectsSend:       out << "effect2=" << value << Qt::endl;                         break;
+    case champ_delayVolEnv:             out << "ampeg_delay=" << value << Qt::endl;                     break;
+    case champ_attackVolEnv:            out << "ampeg_attack=" << value << Qt::endl;                    break;
+    case champ_sustainVolEnv:           out << "ampeg_sustain=" << dbToPercent(value) << Qt::endl;      break;
+    case champ_holdVolEnv:              out << "ampeg_hold=" << value << Qt::endl;                      break;
+    case champ_decayVolEnv:             out << "ampeg_decay=" << value << Qt::endl;                     break;
+    case champ_keynumToVolEnvHold:      out << "ampeg_holdcc133=" << value << v2 << Qt::endl;           break;
+    case champ_keynumToVolEnvDecay:     out << "ampeg_decaycc133=" << value << v2 << Qt::endl;          break;
+    case champ_releaseVolEnv:           out << "ampeg_release=" << value << Qt::endl;                   break;
     case champ_overridingRootKey:
         out << "pitch_keycenter="
-            << ContextManager::keyName()->getKeyName(qRound(value), false, false, true) << endl;
+            << ContextManager::keyName()->getKeyName(qRound(value), false, false, true) << Qt::endl;
         break;
-    case champ_delayVibLFO:             out << "pitchlfo_delay=" << value << endl;                  break;
-    case champ_freqVibLFO:              out << "pitchlfo_freq=" << value << endl;                   break;
-    case champ_vibLfoToPitch:           out << "pitchlfo_depth=" << qRound(value) << endl;          break;
-    case champ_velocity:                out << "amp_velcurve_1=" << value / 127. << endl
-                                            << "amp_velcurve_127=" << value / 127. << endl;         break;
+    case champ_delayVibLFO:             out << "pitchlfo_delay=" << value << Qt::endl;                  break;
+    case champ_freqVibLFO:              out << "pitchlfo_freq=" << value << Qt::endl;                   break;
+    case champ_vibLfoToPitch:           out << "pitchlfo_depth=" << qRound(value) << Qt::endl;          break;
+    case champ_velocity:                out << "amp_velcurve_1=" << value / 127. << Qt::endl
+                                            << "amp_velcurve_127=" << value / 127. << Qt::endl;         break;
     case champ_exclusiveClass:
         if (value != 0)
-            out << "group=" << qRound(value) << endl
-                << "off_by=" << qRound(value) << endl;
+            out << "group=" << qRound(value) << Qt::endl
+                << "off_by=" << qRound(value) << Qt::endl;
         break;
     case champ_initialFilterFc:
-        out << "fil_type=lpf_2p" << endl
-            << "cutoff="   << qRound(value) << endl;
+        out << "fil_type=lpf_2p" << Qt::endl
+            << "cutoff="   << qRound(value) << Qt::endl;
         break;
     case champ_keyRange:{
         QString lokey = ContextManager::keyName()->getKeyName(qRound(value / 1000.), false, false, true);
         QString hikey = ContextManager::keyName()->getKeyName(qRound(value - 1000. * qRound(value / 1000.)), false, false, true);
-        out << "lokey=" << lokey << " hikey=" << hikey << endl;
+        out << "lokey=" << lokey << " hikey=" << hikey << Qt::endl;
     }break;
     case champ_velRange:{
         int lovel = qRound(value / 1000.);
         int hivel = qRound(value - 1000. * lovel);
-        out << "lovel=" << lovel << " hivel=" << hivel << endl;
+        out << "lovel=" << lovel << " hivel=" << hivel << Qt::endl;
     }break;
     case champ_sampleModes:
         if (value == 0.)
-            out << "loop_mode=no_loop" << endl;
+            out << "loop_mode=no_loop" << Qt::endl;
         else if (value == 1.)
-            out << "loop_mode=loop_continuous" << endl;
+            out << "loop_mode=loop_continuous" << Qt::endl;
         else if (value == 3.)
-            out << "loop_mode=loop_sustain" << endl;
+            out << "loop_mode=loop_sustain" << Qt::endl;
         break;
     default:
         break;

@@ -60,7 +60,7 @@ CircularBuffer::~CircularBuffer()
 
 void CircularBuffer::stop()
 {
-    _interrupted.store(1);
+    _interrupted.storeRelaxed(1);
     _mutexSynchro.tryLock();
     _mutexSynchro.unlock();
 }
@@ -70,7 +70,7 @@ void CircularBuffer::start()
     quint32 avance = (_maxBuffer + _minBuffer) / 2;
 
     // Generate and copy data into the buffer after each reading
-    while (_interrupted.load() == 0)
+    while (_interrupted.loadRelaxed() == 0)
     {
         // Generate data
         _mutexBuffer.lock();
@@ -113,7 +113,7 @@ void CircularBuffer::writeData(const float *dataL, const float *dataR, float *da
 // Read data (audio thread)
 void CircularBuffer::addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, quint32 maxlen)
 {
-    quint32 readLen = qMin(maxlen, _currentLengthAvailable.load());
+    quint32 readLen = qMin(maxlen, _currentLengthAvailable.loadRelaxed());
     quint32 total = 0;
     while (total < readLen)
     {

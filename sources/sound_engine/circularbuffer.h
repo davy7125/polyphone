@@ -38,7 +38,7 @@ public:
     ~CircularBuffer();
 
     void addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, quint32 maxlen);
-    quint32 currentLengthAvailable() { return _currentLengthAvailable.load(); }
+    quint32 currentLengthAvailable() { return _currentLengthAvailable.loadRelaxed(); }
     void stop();
 
 public slots:

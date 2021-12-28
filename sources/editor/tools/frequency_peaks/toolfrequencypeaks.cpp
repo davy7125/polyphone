@@ -63,7 +63,7 @@ void ToolFrequencyPeaks::process(SoundfontManager * sm, IdList ids, AbstractTool
         int number = 1;
         foreach (FrequencyInfo fi, sfi.frequencies)
         {
-            stream << endl;
+            stream << Qt::endl;
             stream << "\"" << sampleName << "\"" << sep;
             stream << number << sep;
             stream << QString::number(fi.factor) << sep;
