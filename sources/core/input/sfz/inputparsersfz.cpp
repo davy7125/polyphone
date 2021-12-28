@@ -151,7 +151,7 @@ void InputParserSfz::parseFile(QString filename, bool &success, QString &error)
         // Store elements
         foreach (QString str, list)
         {
-            // Valide ?
+            // Valid?
             if (str.size() <= 2)
                 continue;
 
@@ -421,6 +421,20 @@ void InputParserSfz::createSf2(int &sf2Index, QString filename, bool isChannel10
         // Suppression keyrange et velocity range de la division globale de l'instrument
         sm->reset(idInst, champ_velRange);
         sm->reset(idInst, champ_keyRange);
+    }
+
+    // Possible mode 24-bit
+    EltID idSmpl(elementSmpl, sf2Index);
+    foreach (int i, sm->getSiblings(idSmpl))
+    {
+        idSmpl.indexElt = i;
+        if (sm->get(idSmpl, champ_bpsFile).wValue >= 24)
+        {
+            AttributeValue val;
+            val.wValue = 24;
+            sm->set(idSf2, champ_wBpsSave, val);
+            break;
+        }
     }
 }
 

@@ -144,6 +144,8 @@ QList<int> SfzParameterGroup::getSampleIndex(SoundfontManager *sf2, EltID idElt,
         sf2->set(idElt, champ_byOriginalPitch, val);
         val.cValue = (char)son.getInt32(champ_chPitchCorrection);
         sf2->set(idElt, champ_chPitchCorrection, val);
+        val.wValue = son.getUInt32(champ_bpsFile);
+        sf2->set(idElt, champ_bpsFile, val);
     }
 
     return sampleIndex;

@@ -208,11 +208,11 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
         case champ_dwSampleRate:
             value.dwValue = tmp->_sound.getUInt32(champ_dwSampleRate); break;
         case champ_bpsFile:
-            value.dwValue = tmp->_sound.getUInt32(champ_bpsFile); break;
+            value.wValue = tmp->_sound.getUInt32(champ_bpsFile); break;
         case champ_wChannel:
-            value.dwValue = tmp->_sound.getUInt32(champ_wChannel); break;
+            value.wValue = tmp->_sound.getUInt32(champ_wChannel); break;
         case champ_wChannels:
-            value.dwValue = tmp->_sound.getUInt32(champ_wChannels); break;
+            value.wValue = tmp->_sound.getUInt32(champ_wChannels); break;
         case champ_byOriginalPitch:
             value.bValue = tmp->_sound.getUInt32(champ_byOriginalPitch); break;
         case champ_chPitchCorrection:
