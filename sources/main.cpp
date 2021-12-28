@@ -51,11 +51,8 @@
 
 void writeLine(QString line)
 {
-#ifdef _WIN32
-    printf_s((line + "\n").toStdString().c_str());
-#else
-    qInfo() << line;
-#endif
+    QTextStream out(stdout);
+    out << line << Qt::endl;
 }
 
 int launchApplication(QtSingleApplication * app, Options &options)
@@ -181,9 +178,9 @@ int displayHelp(Options &options)
 {
     Q_UNUSED(options)
 #ifdef _WIN32
-    writeLine("see \"www.polyphone-soundfonts.com/documentation/en/manual/annexes/command-line\" for more information");
+    writeLine("See 'https://www.polyphone-soundfonts.com/documentation/en/manual/annexes/command-line' for more information");
 #else
-    writeLine("write \"man polyphone\" to show usage");
+    writeLine("Write 'man polyphone' to show usage");
 #endif
     return 0;
 }
@@ -201,7 +198,7 @@ int main(int argc, char *argv[])
     int valRet = 0;
 
     // Possibly launch the application
-    if (!options.error() && options.mode() == Options::MODE_GUI)
+    if (!options.error() && !options.help() && options.mode() == Options::MODE_GUI)
     {
         QSettings settings;
         bool uniqueInstance = settings.value("display/unique_instance", true).toBool();
