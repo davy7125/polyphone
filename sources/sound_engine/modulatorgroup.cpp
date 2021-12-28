@@ -63,6 +63,8 @@ void ModulatorGroup::loadDefaultModulators()
 
 void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
 {
+    int existingModulatorNumber = _modulators.count();
+
     // Create modulators
     foreach (ModulatorData modData, modulators)
     {
@@ -82,9 +84,10 @@ void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
             _modulators << new ParameterModulator(modData, _isPrst, _initialKey, _keyForComputation, _velForComputation);
     }
 
-    // Link outputs
-    foreach (ParameterModulator * modulator, _modulators)
+    // Link the outputs of the newly created modulators
+    for (int i = existingModulatorNumber; i < _modulators.count(); i++)
     {
+        ParameterModulator * modulator = _modulators[i];
         quint16 output = modulator->getOuputType();
         if (output < 32768)
         {
@@ -96,9 +99,10 @@ void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
         {
             // The target is another modulator
             int indexToFind = output - 32768;
-            foreach (ParameterModulator * otherMod, _modulators)
+            for (int j = existingModulatorNumber; j < _modulators.count(); i++)
             {
-                if (otherMod != modulator && otherMod->getIndex() == indexToFind)
+                ParameterModulator * otherMod = _modulators[j];
+                if (i != j && otherMod->getIndex() == indexToFind)
                 {
                     modulator->setOutput(otherMod);
                     break;
@@ -115,7 +119,7 @@ void ModulatorGroup::process()
         modulator->processInput();
 
     // Compute the output of the modulators, as long as everything has not been completed
-    // or until a maximum (reached in the case where we have a loop)
+    // or until a maximum is reached (in the case of a loop)
     bool ok;
     int count = 0;
     do {
