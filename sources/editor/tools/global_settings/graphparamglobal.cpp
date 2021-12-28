@@ -449,7 +449,7 @@ void GraphParamGlobal::afficheCoord(double x, double y)
                             QString::number(yMin + (yMax - yMin) * y, 'f', 2));
         // Ajustement position
         QFontMetrics fm(labelCoord->font());
-        double distX = this->xAxis->pixelToCoord(fm.width(labelCoord->text()) / 2 + 2);
+        double distX = this->xAxis->pixelToCoord(fm.horizontalAdvance(labelCoord->text()) / 2 + 2);
         if (x < distX)
             x = distX;
         else if (x > this->nbPoints - distX)

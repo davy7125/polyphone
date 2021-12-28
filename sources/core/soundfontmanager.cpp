@@ -62,7 +62,6 @@ QAbstractItemModel * SoundfontManager::getModel(int indexSf2)
 SoundfontManager::SoundfontManager() :
     _soundfonts(new Soundfonts()),
     _undoRedo(new ActionManager()),
-    _mutex(QMutex::Recursive),
     _solo(new SoloManager(this))
 {
     connect(_undoRedo, SIGNAL(dropId(EltID)), this, SLOT(onDropId(EltID)));

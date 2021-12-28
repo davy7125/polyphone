@@ -43,7 +43,7 @@ StyledSlider::StyledSlider(QWidget *parent) : QSlider(parent),
                         "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #22000000, stop:1 #00000000);}" +
                         "QSlider::handle:horizontal {" +
                         "background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 " +
-                        _backgroundColor.light().name() + ", stop:1 " + _backgroundColor.name() + ");" +
+                        _backgroundColor.lighter().name() + ", stop:1 " + _backgroundColor.name() + ");" +
                         "border: 1px solid " + borderColor.name() + ";" +
                         "width: 18px;margin: -4px 0;border-radius: 3px;}"
                         );

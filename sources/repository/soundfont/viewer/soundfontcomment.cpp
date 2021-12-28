@@ -67,9 +67,9 @@ void SoundfontComment::display(QList<SoundfontCommentData *> data, int level)
 
     // Order the list
     if (level == 0)
-        qSort(data.begin(), data.end(), sortRecentFirst);
+        std::sort(data.begin(), data.end(), sortRecentFirst);
     else
-        qSort(data.begin(), data.end(), sortLastFirst);
+        std::sort(data.begin(), data.end(), sortLastFirst);
 
     // Add each comment
     for (int i = 0; i < data.count(); i++)

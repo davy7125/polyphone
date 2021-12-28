@@ -291,7 +291,7 @@ int ReadHeader(V2_FILEHEADER *FileHeader, BYTE *fbuf, int bufsize)
 }
 
 // =================================================================================
-void InitFilenames(const char *OrigFileName, const char *InFileName, const char *ReqOutFileName)
+void InitFilenames(const char *OrigFileName, const char */*InFileName*/, const char *ReqOutFileName)
 {
 	if (ReqOutFileName)
 	{

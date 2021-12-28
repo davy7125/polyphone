@@ -169,7 +169,7 @@ void GraphicsLegendItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
     {
         if (_selectedLinesInTextTop.contains(i))
             painter->drawText(QPoint(s_border, fm.height() * (i + 1)), s_rightArrow);
-        painter->drawText(QPoint(static_cast<int>(1.5 * fm.width(s_rightArrow) + s_border),
+        painter->drawText(QPoint(static_cast<int>(1.5 * fm.horizontalAdvance(s_rightArrow) + s_border),
                                  fm.height() * (i + 1)), _textTop.at(i));
     }
     for (int i = 0; i < _textBottom.count(); i++)
@@ -180,7 +180,7 @@ void GraphicsLegendItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
         painter->setFont(_smallFont);
         QString text = QString::number(_selectionIndex + 1) + " / " + QString::number(_selectionNumber);
         double posY = fm.height() * (1.5 + _textTop.count() + _textBottom.count()) + 3;
-        double posX = 0.5 * (size.width() - QFontMetrics(_smallFont).width(text));
+        double posX = 0.5 * (size.width() - QFontMetrics(_smallFont).horizontalAdvance(text));
         painter->drawText(QPointF(posX, posY), text);
     }
 }
@@ -195,9 +195,9 @@ QSizeF GraphicsLegendItem::getTextSize() const
     double height = (0.5 + _textTop.count() + _textBottom.count()) * fm.height() + 2 * s_border;
     double width = 0;
     foreach (QString line, _textTop)
-        width = qMax(width, 1.5 * fm.width(s_rightArrow) + fm.width(line));
+        width = qMax(width, 1.5 * fm.horizontalAdvance(s_rightArrow) + fm.horizontalAdvance(line));
     foreach (QString line, _textBottom)
-        width = qMax(width, static_cast<double>(fm.width(line)));
+        width = qMax(width, static_cast<double>(fm.horizontalAdvance(line)));
     width += 2 * s_border;
 
     if (_selectionNumber > 1)

@@ -57,7 +57,7 @@ void SoundfontDownload::display(QList<SoundfontDownloadData *> data)
     this->clear();
 
     // First order the list
-    qSort(data.begin(), data.end(), sortFunction);
+    std::sort(data.begin(), data.end(), sortFunction);
 
     // Add each download
     for (int i = 0; i < data.count(); i++)

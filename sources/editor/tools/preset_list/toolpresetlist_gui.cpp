@@ -91,12 +91,12 @@ void ToolPresetList_gui::on_radioCsv_clicked()
     // Format a css
     QString str = "";
     QList<int> listBank = _mapName.keys();
-    qSort(listBank.begin(), listBank.end());
+    std::sort(listBank.begin(), listBank.end());
     for (int i = 0; i < listBank.count(); i++)
     {
         int bankNumber = listBank[i];
         QList<int> listPreset = _mapName[bankNumber].keys();
-        qSort(listPreset.begin(), listPreset.end());
+        std::sort(listPreset.begin(), listPreset.end());
         for (int j = 0; j < listPreset.count(); j++)
         {
             int presetNumber = listPreset[j];
@@ -116,12 +116,12 @@ void ToolPresetList_gui::on_radioHtml_clicked()
     // Format a html table
     QString str = "<table><thead><tr><th>Bank</th><th>Preset</th><th>Name</th></tr></thead><tbody>";
     QList<int> listBank = _mapName.keys();
-    qSort(listBank.begin(), listBank.end());
+    std::sort(listBank.begin(), listBank.end());
     for (int i = 0; i < listBank.count(); i++)
     {
         int bankNumber = listBank[i];
         QList<int> listPreset = _mapName[bankNumber].keys();
-        qSort(listPreset.begin(), listPreset.end());
+        std::sort(listPreset.begin(), listPreset.end());
         for (int j = 0; j < listPreset.count(); j++)
         {
             int presetNumber = listPreset[j];

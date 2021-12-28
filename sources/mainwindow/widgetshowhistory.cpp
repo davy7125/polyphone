@@ -55,9 +55,9 @@ WidgetShowHistory::WidgetShowHistory(QWidget *parent) :
         _decoration = ContextManager::theme()->getColoredSvg(":/misc/decoration.svg", QSize(SIZE, SIZE), replacements);
 
         // Flip the image
-        QMatrix matrix;
+        QTransform matrix;
         matrix = matrix.scale(-1, 1);
-        _decoration = _decoration.transformed(matrix);
+        _decoration = _decoration.transformed(matrix, Qt::SmoothTransformation);
     }
 
     // Drag & drop

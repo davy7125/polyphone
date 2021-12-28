@@ -56,7 +56,7 @@ static bool sortFunction(const SoundfontDownloadData *s1, const SoundfontDownloa
 void SoundfontEditorFiles::initialize(QList<SoundfontDownloadData *> data)
 {
     // First order the list
-    qSort(data.begin(), data.end(), sortFunction);
+    std::sort(data.begin(), data.end(), sortFunction);
 
     // Clear and add each file information
     while (!_cells.isEmpty())

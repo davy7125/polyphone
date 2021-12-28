@@ -124,8 +124,8 @@ void DuplicationTool::duplicateByVelocity(QMap<QPair<int, int>, QList<EltID> > e
 {
     // Sort ids and velocities by ascending velocity
     QList<QPair<int, int> > orderedOldVel = elts.keys();
-    qSort(orderedOldVel.begin(), orderedOldVel.end(), lessThan);
-    qSort(velocities.begin(), velocities.end(), lessThan);
+    std::sort(orderedOldVel.begin(), orderedOldVel.end(), lessThan);
+    std::sort(velocities.begin(), velocities.end(), lessThan);
 
     // Change the velocities of the existing ids
     int nbExisting = qMin(orderedOldVel.count(), velocities.count());

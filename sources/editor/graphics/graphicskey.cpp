@@ -37,7 +37,7 @@ GraphicsKey::GraphicsKey(QGraphicsItem *parent) : QObject(nullptr), QGraphicsIte
     QColor color = ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::LIST_BACKGROUND);
     color.setAlpha(4);
     _colorBrush = color;
-    _colorPen = color.dark(); // The outside of the circle is darker
+    _colorPen = color.darker(); // The outside of the circle is darker
 
     this->setFlag(QGraphicsItem::ItemIgnoresTransformations);
     QTimer::singleShot(30, this, SLOT(updateColor()));

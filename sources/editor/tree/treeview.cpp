@@ -384,7 +384,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
                 bool ok = false;
                 for (int i = indexInitial.row(); i < this->model()->rowCount(parent); i++)
                 {
-                    QModelIndex sibling = parent.child(i, 0);
+                    QModelIndex sibling = parent.model()->index(i, 0);
                     if (!sibling.data(Qt::UserRole + 1).toBool() && !proxy->isFiltered(sibling.data(Qt::UserRole).value<EltID>()))
                     {
                         this->setCurrentIndex(sibling);
@@ -398,7 +398,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
                 {
                     for (int i = indexInitial.row() - 1; i >= 0; i--)
                     {
-                        QModelIndex sibling = parent.child(i, 0);
+                        QModelIndex sibling = parent.model()->index(i, 0);
                         if (!sibling.data(Qt::UserRole + 1).toBool() && !proxy->isFiltered(sibling.data(Qt::UserRole).value<EltID>()))
                         {
                             this->setCurrentIndex(sibling);
@@ -571,14 +571,14 @@ void TreeView::expandAndScrollToSelection()
         {
             QModelIndex root = this->model()->index(2, 0);
             this->expand(root);
-            this->expand(root.child(index.parent().row(), 0));
+            this->expand(root.model()->index(index.parent().row(), 0));
         }
             break;
         case elementPrstInst:
         {
             QModelIndex root = this->model()->index(3, 0);
             this->expand(root);
-            this->expand(root.child(index.parent().row(), 0));
+            this->expand(root.model()->index(index.parent().row(), 0));
         }
             break;
         default:
@@ -620,7 +620,7 @@ QModelIndex TreeView::getIndex(EltID id)
         int nbElt = this->model()->rowCount(root);
         for (int i = 0; i < nbElt; i++)
         {
-            QModelIndex sub = root.child(i, 0);
+            QModelIndex sub = root.model()->index(i, 0);
             if (sub.isValid() && sub.data(Qt::UserRole).value<EltID>().indexElt == id.indexElt)
                 return sub;
         }
@@ -632,7 +632,7 @@ QModelIndex TreeView::getIndex(EltID id)
         int nbElt = this->model()->rowCount(root);
         for (int i = 0; i < nbElt; i++)
         {
-            QModelIndex sub = root.child(i, 0);
+            QModelIndex sub = root.model()->index(i, 0);
             if (sub.isValid() && sub.data(Qt::UserRole).value<EltID>().indexElt == id.indexElt)
                 return sub;
         }
@@ -644,13 +644,13 @@ QModelIndex TreeView::getIndex(EltID id)
         int nbElt = this->model()->rowCount(root);
         for (int i = 0; i < nbElt; i++)
         {
-            QModelIndex sub = root.child(i, 0);
+            QModelIndex sub = root.model()->index(i, 0);
             if (sub.isValid() && sub.data(Qt::UserRole).value<EltID>().indexElt == id.indexElt)
             {
                 int nbElt2 = this->model()->rowCount(sub);
                 for (int j = 0; j < nbElt2; j++)
                 {
-                    QModelIndex subSub = sub.child(j, 0);
+                    QModelIndex subSub = sub.model()->index(j, 0);
                     if (subSub.isValid() && subSub.data(Qt::UserRole).value<EltID>().indexElt2 == id.indexElt2)
                         return subSub;
                 }
@@ -664,7 +664,7 @@ QModelIndex TreeView::getIndex(EltID id)
         int nbElt = this->model()->rowCount(root);
         for (int i = 0; i < nbElt; i++)
         {
-            QModelIndex sub = root.child(i, 0);
+            QModelIndex sub = root.model()->index(i, 0);
             if (sub.isValid() && sub.data(Qt::UserRole).value<EltID>().indexElt == id.indexElt)
                 return sub;
         }
@@ -676,13 +676,13 @@ QModelIndex TreeView::getIndex(EltID id)
         int nbElt = this->model()->rowCount(root);
         for (int i = 0; i < nbElt; i++)
         {
-            QModelIndex sub = root.child(i, 0);
+            QModelIndex sub = root.model()->index(i, 0);
             if (sub.isValid() && sub.data(Qt::UserRole).value<EltID>().indexElt == id.indexElt)
             {
                 int nbElt2 = this->model()->rowCount(sub);
                 for (int j = 0; j < nbElt2; j++)
                 {
-                    QModelIndex subSub = sub.child(j, 0);
+                    QModelIndex subSub = sub.model()->index(j, 0);
                     if (subSub.isValid() && subSub.data(Qt::UserRole).value<EltID>().indexElt2 == id.indexElt2)
                         return subSub;
                 }
@@ -721,7 +721,7 @@ void TreeView::saveExpandedState()
     {
         for (int i = 0; i < this->model()->rowCount(elt); i++)
         {
-            QModelIndex child = elt.child(i, 0);
+            QModelIndex child = elt.model()->index(i, 0);
             if (child.isValid() && this->isExpanded(child))
                 _expandedIds << child.data(Qt::UserRole).value<EltID>();
         }
@@ -731,7 +731,7 @@ void TreeView::saveExpandedState()
     elt = this->model()->index(3, 0);
     for (int i = 0; i < this->model()->rowCount(elt); i++)
     {
-        QModelIndex child = elt.child(i, 0);
+        QModelIndex child = elt.model()->index(i, 0);
         if (child.isValid() && this->isExpanded(child))
             _expandedIds << child.data(Qt::UserRole).value<EltID>();
     }

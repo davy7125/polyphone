@@ -794,7 +794,7 @@ QRectF GraphicsViewRange::getCurrentRect()
 {
     QPointF tl(horizontalScrollBar()->value(), verticalScrollBar()->value());
     QPointF br = tl + viewport()->rect().bottomRight();
-    QMatrix mat = matrix().inverted();
+    QTransform mat = transform().inverted();
     return mat.mapRect(QRectF(tl,br));
 }
 

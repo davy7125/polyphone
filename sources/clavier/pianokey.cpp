@@ -59,7 +59,7 @@ void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
         painter->setBrush(m_brush);
 
     painter->setPen(blackPen);
-    painter->drawRoundRect(rect(), 15, 15);
+    painter->drawRoundedRect(rect(), 15, 15, Qt::RelativeSize);
     if (m_black)
         QSvgRenderer(QString(":/vpiano/blkey.svg")).render(painter, rect());
     else

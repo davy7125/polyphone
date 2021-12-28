@@ -335,7 +335,7 @@ void GraphFilterFrequencies::afficheCoord(double x, double y)
 
         // Ajustement position
         QFontMetrics fm(labelCoord->font());
-        double distX = this->xAxis->pixelToCoord(fm.width(labelCoord->text()) / 2 + 2);
+        double distX = this->xAxis->pixelToCoord(fm.horizontalAdvance(labelCoord->text()) / 2 + 2);
         if (x < distX)
             x = distX;
         else if (x > POINT_NUMBER - distX)

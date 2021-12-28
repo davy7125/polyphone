@@ -64,7 +64,7 @@ void ConfigSectionInterface::initComboLanguage()
     ui->comboLangue->blockSignals(true);
     QMap<QString, QString> languages = ContextManager::translation()->getLanguages();
     QStringList languageNames = languages.values();
-    qSort(languageNames.begin(), languageNames.end(), caseInsensitiveLessThan);
+    std::sort(languageNames.begin(), languageNames.end(), caseInsensitiveLessThan);
 
     foreach (QString languageName, languageNames)
         ui->comboLangue->addItem(languageName, languages.key(languageName));

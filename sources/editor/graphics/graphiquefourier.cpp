@@ -381,7 +381,7 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
     QString keyName = ContextManager::keyName()->getKeyName(static_cast<unsigned int>(_key));
     if (ContextManager::keyName()->getNameMiddleC() == KeyNameManager::MIDDLE_C_60)
         keyName += " (" + ContextManager::keyName()->getKeyName(static_cast<unsigned int>(_key), true, false, false, true) + ")";
-    int textWidth = fm.width(keyName);
+    int textWidth = fm.horizontalAdvance(keyName);
 
     // TUNING
 
@@ -421,7 +421,7 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
                         (50 * x3 + (x4 - x3) * _delta) / 50 :
                         (50 * x2 + (x2 - x1) * _delta) / 50;
             QString txt = QString::number(_delta < 0 ? -_delta : _delta);
-            int textWidth = fm.width(txt);
+            int textWidth = fm.horizontalAdvance(txt);
 
             painter.setBrush(highlightColor);
             painter.setPen(highlightColor);

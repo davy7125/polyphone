@@ -120,7 +120,7 @@ private:
     static SoundfontManager * s_instance;
     Soundfonts * _soundfonts;
     ActionManager * _undoRedo;
-    QMutex _mutex;
+    QRecursiveMutex _mutex;
     SoloManager * _solo;
 };
 

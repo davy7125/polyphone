@@ -48,7 +48,7 @@ GraphLegend::GraphLegend(QWidget *parent) : QCustomPlot(parent)
     this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
 
     // Couleur de fond
-    this->setBackground(parent->palette().background().color());
+    this->setBackground(parent->palette().window().color());
 }
 
 void GraphLegend::plot(QCPScatterStyle::ScatterShape style, QColor couleur, int size, int epaisseur, bool antiAliased)

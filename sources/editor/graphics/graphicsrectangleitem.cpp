@@ -48,7 +48,7 @@ GraphicsRectangleItem::GraphicsRectangleItem(EltID id, QGraphicsItem *parent) : 
     _brushRectangle = QBrush(color);
     color.setAlpha(140);
     _brushRectangleSelected = QBrush(color, Qt::DiagCrossPattern);
-    _brushRectangleSelected.setMatrix(QMatrix(1,0,1,0,0,0)); // Don't scale the pattern
+    _brushRectangleSelected.setTransform(QTransform(QMatrix(1,0,1,0,0,0))); // Don't scale the pattern
 
     initialize(id);
     _penBorderThin.setCosmetic(true);

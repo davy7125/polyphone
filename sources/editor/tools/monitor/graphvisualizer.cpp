@@ -358,7 +358,7 @@ void GraphVisualizer::afficheCoord(double x, double y)
 
         // Adjust the position on x
         QFontMetrics fm(labelCoord->font());
-        double distX = this->xAxis->pixelToCoord(fm.width(labelCoord->text()) / 2 + 4) - xMin;
+        double distX = this->xAxis->pixelToCoord(fm.horizontalAdvance(labelCoord->text()) / 2 + 4) - xMin;
         if (x < xMin + distX)
             x = xMin + distX;
         else if (x > xMax - distX)

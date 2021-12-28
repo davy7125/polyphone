@@ -17,7 +17,7 @@
 // You should have received a copy of the GNU General Public License
 // along with sfArkLib.  If not, see <http://www.gnu.org/licenses/>.
 
-#if defined(USE_MANUAL_ENDIANNESS) && \
+#if defined(USE_MANUAL_ENDIANNESS) && !defined(LITTLE_ENDIAN) && \
     (defined(MANUAL_LITTLE_ENDIAN) || defined(MANUAL_BIG_ENDIAN))
 #define LITTLE_ENDIAN	1234
 #define BIG_ENDIAN	4321

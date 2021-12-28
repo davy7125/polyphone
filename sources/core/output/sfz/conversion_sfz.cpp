@@ -87,7 +87,7 @@ QString ConversionSfz::convert(QString dirPath, EltID idSf2, bool presetPrefix, 
         if (_bankSortEnabled)
         {
             QString numText;
-            numText.sprintf("%.3u", numBank);
+            numText.asprintf("%.3u", numBank);
             sourceDir += "/" + numText;
             if (!QDir(sourceDir).exists())
                 QDir(sourceDir).mkdir(sourceDir);
@@ -117,7 +117,7 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
 {
     QString numText;
     if (presetPrefix)
-        numText.sprintf("%.3u_", _sf2->get(id, champ_wPreset).wValue);
+        numText.asprintf("%.3u_", _sf2->get(id, champ_wPreset).wValue);
     int numBank = _sf2->get(id, champ_wBank).wValue;
 
     QFile fichierSfz(getPathSfz(dir, numText + _sf2->getQstr(id, champ_name)) + ".sfz");

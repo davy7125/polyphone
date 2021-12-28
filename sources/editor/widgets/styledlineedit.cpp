@@ -104,7 +104,7 @@ void StyledLineEdit::onTextEdited(QString text)
 
     // Adapt the width
     QFontMetrics fm(this->font());
-    _defaultWidth = fm.width(text.isEmpty() ? this->placeholderText() : text) + 20;
+    _defaultWidth = fm.horizontalAdvance(text.isEmpty() ? this->placeholderText() : text) + 20;
 }
 
 QSize StyledLineEdit::sizeHint() const
@@ -113,7 +113,7 @@ QSize StyledLineEdit::sizeHint() const
     if (width == 0 && this->text().isEmpty())
     {
         QFontMetrics fm(this->font());
-        width = fm.width(this->placeholderText()) + 20;
+        width = fm.horizontalAdvance(this->placeholderText()) + 20;
     }
     return QSize(width, QLineEdit::sizeHint().height());
 }

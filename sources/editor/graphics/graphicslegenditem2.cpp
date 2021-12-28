@@ -112,7 +112,7 @@ QSizeF GraphicsLegendItem2::getTextSize() const
     int height = _text.count() * fm.height() + 2 * s_border;
     int width = 0;
     foreach (QString line, _text)
-        width = qMax(width, fm.width(line));
+        width = qMax(width, fm.horizontalAdvance(line));
     width += 2 * s_border;
 
     return QSizeF(width, height);

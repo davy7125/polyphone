@@ -300,16 +300,16 @@ void SoundfontBrowser::updateList2()
     switch (ui->comboSort->currentIndex())
     {
     case 0:
-        qSort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByDate);
+        std::sort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByDate);
         break;
     case 1:
-        qSort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByDownloads);
+        std::sort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByDownloads);
         break;
     case 2:
-        qSort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByScore);
+        std::sort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByScore);
         break;
     case 3:
-        qSort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByTitle);
+        std::sort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByTitle);
         break;
     }
 

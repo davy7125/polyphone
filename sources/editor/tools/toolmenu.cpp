@@ -58,7 +58,7 @@ void ToolMenu::selectionChanged(IdList ids)
 
     // Get the tools and sort them by category and labels
     QList<AbstractTool *> tools = _toolFactory->getTools(ids);
-    qSort(tools.begin(), tools.end(), lessThan);
+    std::sort(tools.begin(), tools.end(), lessThan);
 
     // Then populate
     QString currentCategory = "";
