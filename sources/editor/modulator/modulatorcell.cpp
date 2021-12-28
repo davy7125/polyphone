@@ -294,8 +294,6 @@ void ModulatorCell::onOutputChanged(int dummy)
     qint16 min2 = (ui->comboSource2->isOne() ? 1 : (ui->widgetShape2->isBipolar() ? -1 : 0));
     qint16 max = static_cast<qint16>(ui->spinAmount->value());
     qint16 min = max * qMin(min1, min2);
-    if (ui->comboTransform->currentIndex() == 1 && min < 0)
-        min = 0;
     if (min > max)
     {
         qint16 tmp = max;
@@ -304,16 +302,33 @@ void ModulatorCell::onOutputChanged(int dummy)
     }
     _intRange = QString::number(min) + s_doubleArrow + QString::number(max);
 
+    // Absolute value?
+    if (ui->comboTransform->currentIndex() == 1)
+    {
+        qint16 maxTmp = qMax(qAbs(min), qAbs(max));
+        if (min <= 0 && max >= 0)
+            min = 0;
+        else
+            min = qMin(qAbs(min), qAbs(max));
+        max = maxTmp;
+    }
+
     // Compute the new range in double
-    AttributeValue val;
-    val.shValue = min;
-    double dMin = Attribute::toRealValue(ui->comboDestination->getCurrentAttribute(), _isPrst, val);
-    val.shValue = max;
-    double dMax = Attribute::toRealValue(ui->comboDestination->getCurrentAttribute(), _isPrst, val);
+    AttributeType currentAttribute = ui->comboDestination->getCurrentAttribute();
+    double dMin = min;
+    double dMax = max;
+    if (currentAttribute != champ_unknown)
+    {
+        AttributeValue val;
+        val.shValue = min;
+        dMin = Attribute::toRealValue(currentAttribute, _isPrst, val);
+        val.shValue = max;
+        dMax = Attribute::toRealValue(currentAttribute, _isPrst, val);
+    }
 
     // Addition or multiplication?
     bool isAddition = true;
-    switch (ui->comboDestination->getCurrentAttribute())
+    switch (currentAttribute)
     {
     case champ_delayModEnv: case champ_delayVolEnv:
     case champ_attackModEnv: case champ_attackVolEnv:
@@ -366,10 +381,12 @@ void ModulatorCell::onOutputChanged(int dummy)
     default:
         break;
     }
+    if (!unit.isEmpty())
+        unit = " " + unit;
 
     ui->labelFinalRange->setText((isAddition ? tr("Add from:") :
                                                tr("Multiply from:")) +
-                                 " " + QString::number(dMin) + " " + unit + "\n" +
-                                 tr("To:") + " " + QString::number(dMax) + " " + unit);
+                                 " " + QString::number(dMin) + unit + "\n" +
+                                 tr("To:") + " " + QString::number(dMax) + unit);
     this->repaint();
 }
