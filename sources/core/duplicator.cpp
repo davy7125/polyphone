@@ -361,6 +361,7 @@ EltID Duplicator::copySmpl(EltID idSource, EltID idDest)
         _sm->set(idDest, champ_sfSampleType,       _sm->get(idSource, champ_sfSampleType));
         _sm->set(idDest, champ_byOriginalPitch,    _sm->get(idSource, champ_byOriginalPitch));
         _sm->set(idDest, champ_chPitchCorrection,  _sm->get(idSource, champ_chPitchCorrection));
+        _sm->set(idDest, champ_bpsFile,            _sm->get(idSource, champ_bpsFile));
         _sm->set(idDest, champ_name,               nom);
 
         // Lien
