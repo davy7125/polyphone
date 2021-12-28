@@ -155,6 +155,19 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
         value.wValue = 1;
         _sm->set(id, champ_wChannel, value);
         value.dwValue = SHDR._sampleRate.value;
+        if (value.dwValue == 0)
+        {
+            // Bad configuration in the sf2 file => we try to find a valid sample rate somewhere else
+            // to avoid future arythmetic exceptions (divisions by 0)
+            for (int i = 0; i < pdtaPart._shdrs.count() - 1; i++) // Terminal sample (EOS) is not read
+            {
+                value.dwValue = pdtaPart._shdrs[i]._sampleRate.value;
+                if (value.dwValue != 0)
+                    break;
+            }
+            if (value.dwValue == 0)
+                value.dwValue = 44100; // Nothing else has been found, 44100 is set since this is common
+        }
         _sm->set(id, champ_dwSampleRate, value);
         _sm->set(id, champ_filenameForData, _filename);
 
