@@ -232,7 +232,7 @@ void TableWidget::commitData(QWidget *editor)
             {
                 if (!(curRow == rows && curCol == cols))
                 {
-                    const QModelIndex idx = model()->index(rows, cols);
+                    const QModelIndex idx = this->model()->index(rows, cols);
 
                     if (this->rowCount() == 50 && curRow == 5)
                     {
@@ -405,7 +405,7 @@ void TableWidget::paste()
     {
         for (int indCol = 0; indCol < cellcols; indCol++)
         {
-            const QModelIndex idx = model()->index(indRow + minRow, indCol + minCol);
+            const QModelIndex idx = this->model()->index(indRow + minRow, indCol + minCol);
             QString text = cells.takeFirst();
             if (text != "?")
             {
