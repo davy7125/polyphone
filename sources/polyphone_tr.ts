@@ -1721,63 +1721,68 @@ repository</source>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="61"/>
-        <source>Overwrite existing name with numerical ascending suffix</source>
+        <source>Overwrite existing name with key name and velocity as suffix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="66"/>
-        <source>Replace characters</source>
+        <source>Overwrite existing name with numerical ascending suffix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="71"/>
-        <source>Insert after a specific position</source>
+        <source>Replace characters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="76"/>
+        <source>Insert after a specific position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_rename.ui" line="81"/>
         <source>Delete character range</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="121"/>
-        <location filename="dialogs/dialog_rename.cpp" line="106"/>
+        <location filename="dialogs/dialog_rename.ui" line="126"/>
+        <location filename="dialogs/dialog_rename.cpp" line="113"/>
         <source>Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="157"/>
+        <location filename="dialogs/dialog_rename.ui" line="162"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="137"/>
+        <location filename="dialogs/dialog_rename.ui" line="142"/>
         <source>&amp;Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="72"/>
-        <location filename="dialogs/dialog_rename.cpp" line="83"/>
+        <location filename="dialogs/dialog_rename.cpp" line="79"/>
+        <location filename="dialogs/dialog_rename.cpp" line="90"/>
         <source>New name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="94"/>
+        <location filename="dialogs/dialog_rename.cpp" line="101"/>
         <source>Find:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="97"/>
+        <location filename="dialogs/dialog_rename.cpp" line="104"/>
         <source>And replace by:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="107"/>
+        <location filename="dialogs/dialog_rename.cpp" line="114"/>
         <source>Text to insert:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="118"/>
+        <location filename="dialogs/dialog_rename.cpp" line="125"/>
         <source>Range</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6320,49 +6325,49 @@ Other soundfont editors might display other units.</source>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="86"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="143"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="147"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="149"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="153"/>
         <source>Re&amp;name...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="143"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="149"/>
         <source>Bulk re&amp;name...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="189"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="192"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="195"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="198"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="190"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="196"/>
         <source>Cannot delete a sample used by another instrument.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="193"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="199"/>
         <source>Cannot delete an instrument used by another preset.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="340"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="359"/>
         <source>Sample name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="342"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="361"/>
         <source>Instrument name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="344"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="363"/>
         <source>Preset name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="347"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="366"/>
         <source>Rename</source>
         <translation type="unfinished"></translation>
     </message>

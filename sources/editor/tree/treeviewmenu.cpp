@@ -129,15 +129,21 @@ void TreeViewMenu::initialize(IdList ids)
 
     // Rename
     bool rename = true;
+    bool renameInstOrPrst = false;
+    bool renameElementInInstOrPrst = false;
     foreach (EltID id, ids)
     {
-        if (id.typeElement != elementSmpl && id.typeElement != elementInst && id.typeElement != elementPrst)
+        if (id.typeElement == elementSmpl || id.typeElement == elementInst || id.typeElement == elementPrst)
+            renameInstOrPrst = true;
+        else if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
+            renameElementInInstOrPrst = true;
+        else
         {
             rename = false;
             break;
         }
     }
-    if (rename)
+    if (rename && ((renameInstOrPrst && !renameElementInInstOrPrst) || (!renameInstOrPrst && renameElementInInstOrPrst)))
     {
         _renameAction->setEnabled(true);
         _renameAction->setText(ids.count() == 1 ? tr("Re&name...") : tr("Bulk re&name..."));
@@ -313,21 +319,34 @@ void TreeViewMenu::replace(EltID idSrc, EltID idDest)
 
 void TreeViewMenu::rename()
 {
-    // Checkes
+    // Checks
     if (_currentIds.empty())
         return;
     ElementType type = _currentIds[0].typeElement;
-    if (type != elementSmpl && type != elementInst && type != elementPrst)
+    if (type != elementSmpl && type != elementInst && type != elementPrst &&
+            type != elementInstSmpl && type != elementPrstInst)
         return;
 
     if (_currentIds.count() > 1)
     {
-        // List of all names
-        QStringList currentNames;
-        foreach (EltID id, _currentIds)
-            currentNames << SoundfontManager::getInstance()->getQstr(id, champ_name);
+        // Default name
+        QString defaultName = "";
+        if (type == elementSmpl || type == elementInst || type == elementPrst)
+        {
+            // List of all names
+            QStringList currentNames;
+            foreach (EltID id, _currentIds)
+                currentNames << SoundfontManager::getInstance()->getQstr(id, champ_name);
+            defaultName = Utils::commonPart(currentNames);
+        }
+        else
+        {
+            EltID idParent = _currentIds[0];
+            idParent.typeElement = (type == elementInstSmpl ? elementInst : elementPrst);
+            defaultName = SoundfontManager::getInstance()->getQstr(idParent, champ_name);
+        }
 
-        DialogRename * dial = new DialogRename(type == elementSmpl, Utils::commonPart(currentNames),
+        DialogRename * dial = new DialogRename(type, defaultName,
                                                dynamic_cast<QWidget*>(this->parent()));
         connect(dial, SIGNAL(updateNames(int, QString, QString, int, int)),
                 this, SLOT(bulkRename(int, QString, QString, int, int)));
@@ -356,8 +375,21 @@ void TreeViewMenu::onRename(QString txt)
     if (txt.isEmpty() || _currentIds.empty())
         return;
 
+    // Element to rename
     SoundfontManager * sm = SoundfontManager::getInstance();
-    sm->set(_currentIds[0], champ_name, txt);
+    EltID id = _currentIds[0];
+    if (id.typeElement == elementInstSmpl)
+    {
+        id.indexElt = sm->get(id, champ_sampleID).wValue;
+        id.typeElement = elementSmpl;
+    }
+    else if (id.typeElement == elementPrstInst)
+    {
+        id.indexElt = sm->get(id, champ_instrument).wValue;
+        id.typeElement = elementInst;
+    }
+
+    sm->set(id, champ_name, txt);
     sm->endEditing("command:rename");
 }
 
@@ -366,16 +398,41 @@ void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int 
     SoundfontManager * sm = SoundfontManager::getInstance();
     for (int i = 0; i < _currentIds.size(); i++)
     {
-        EltID ID = _currentIds.at(i);
+        EltID id = _currentIds.at(i);
+        int rootkey = -1;
+        int velocity = -1;
+        if (id.typeElement == elementInstSmpl)
+        {
+            // Rootkey defined?
+            if (sm->isSet(id, champ_overridingRootKey))
+                rootkey = sm->get(id, champ_overridingRootKey).wValue;
+            // Velocity
+            if (sm->isSet(id, champ_velRange))
+                velocity = sm->get(id, champ_velRange).rValue.byLo;
+            else
+                velocity = 0;
+
+            // The element to rename is a sample
+            id.indexElt = sm->get(id, champ_sampleID).wValue;
+            id.typeElement = elementSmpl;
+        }
+        else if (id.typeElement == elementPrstInst)
+        {
+            // The element to rename is an instrument
+            id.indexElt = sm->get(id, champ_instrument).wValue;
+            id.typeElement = elementInst;
+        }
 
         // Compute the name
-        QString newName = sm->getQstr(ID, champ_name);
+        QString newName = sm->getQstr(id, champ_name);
         switch (renameType)
         {
         case 0:{
-            // Replace with the key name as a suffix
-            QString suffix = ContextManager::keyName()->getKeyName(sm->get(ID, champ_byOriginalPitch).bValue, false, true);
-            SFSampleLink pos = sm->get(ID, champ_sfSampleType).sfLinkValue;
+            // Overwrite existing name with key name as suffix
+            if (rootkey == -1)
+                rootkey = sm->get(id, champ_byOriginalPitch).bValue;
+            QString suffix = ContextManager::keyName()->getKeyName(rootkey, false, true);
+            SFSampleLink pos = sm->get(id, champ_sfSampleType).sfLinkValue;
             if (pos == rightSample || pos == RomRightSample)
                 suffix += 'R';
             else if (pos == leftSample || pos == RomLeftSample)
@@ -389,8 +446,36 @@ void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int 
                 newName = text1.left(20 - suffix.size()) + suffix;
             }
         }break;
-        case 1:
-            // Replace with an index as a suffix
+        case 1:{
+            // Overwrite existing name with key name and velocity as suffix
+            if (rootkey == -1)
+                rootkey = sm->get(id, champ_byOriginalPitch).bValue;
+            QString suffix = ContextManager::keyName()->getKeyName(rootkey, false, true);
+            SFSampleLink pos = sm->get(id, champ_sfSampleType).sfLinkValue;
+            if (pos == rightSample || pos == RomRightSample)
+                suffix += 'R';
+            else if (pos == leftSample || pos == RomLeftSample)
+                suffix += 'L';
+            else
+                suffix += "_";
+
+            if (velocity < 10)
+                suffix += "00" + QString::number(velocity);
+            else if (velocity < 100)
+                suffix += "0" + QString::number(velocity);
+            else
+                suffix += QString::number(velocity);
+
+            if (text1.isEmpty())
+                newName = suffix;
+            else
+            {
+                suffix = " " + suffix;
+                newName = text1.left(20 - suffix.size()) + suffix;
+            }
+        } break;
+        case 2:
+            // Overwrite existing name with numerical ascending suffix
             if (text1.isEmpty())
             {
                 if ((i+1) % 100 < 10)
@@ -406,20 +491,20 @@ void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int 
                     newName = text1.left(17) + "-" + QString::number((i+1) % 100);
             }
             break;
-        case 2:
-            // Replace a string
+        case 3:
+            // Replace characters
             newName.replace(text1, text2, Qt::CaseInsensitive);
             break;
-        case 3:
-            // Insert a string
+        case 4:
+            // Insert after a specific position
             if (text1.isEmpty())
                 return;
             if (val1 > newName.size())
                 val1 = newName.size();
             newName.insert(val1, text1);
             break;
-        case 4:
-            // Delete a part
+        case 5:
+            // Delete character range
             if (val1 == val2)
                 return;
             if (val2 > val1)
@@ -431,8 +516,8 @@ void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int 
 
         newName = newName.left(20);
 
-        if (sm->getQstr(ID, champ_name).compare(newName, Qt::CaseSensitive) != 0)
-            sm->set(ID, champ_name, newName);
+        if (sm->getQstr(id, champ_name).compare(newName, Qt::CaseSensitive) != 0)
+            sm->set(id, champ_name, newName);
     }
     sm->endEditing("command:bulkRename");
 }

@@ -1737,63 +1737,68 @@ repository</source>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="61"/>
+        <source>Overwrite existing name with key name and velocity as suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_rename.ui" line="66"/>
         <source>Overwrite existing name with numerical ascending suffix</source>
         <translation>Добавить в имеющееся имя цифровой суффикс по возрастанию</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="66"/>
+        <location filename="dialogs/dialog_rename.ui" line="71"/>
         <source>Replace characters</source>
         <translation>Заменить символы</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="71"/>
+        <location filename="dialogs/dialog_rename.ui" line="76"/>
         <source>Insert after a specific position</source>
         <translation>Вставить в указанной позиции</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="76"/>
+        <location filename="dialogs/dialog_rename.ui" line="81"/>
         <source>Delete character range</source>
         <translation>Удалить диапазон символов</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="121"/>
-        <location filename="dialogs/dialog_rename.cpp" line="106"/>
+        <location filename="dialogs/dialog_rename.ui" line="126"/>
+        <location filename="dialogs/dialog_rename.cpp" line="113"/>
         <source>Position</source>
         <translation>Позиция</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="137"/>
+        <location filename="dialogs/dialog_rename.ui" line="142"/>
         <source>&amp;Ok</source>
         <translation>&amp;ОК</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="157"/>
+        <location filename="dialogs/dialog_rename.ui" line="162"/>
         <source>&amp;Cancel</source>
         <translation>О&amp;тменить</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="72"/>
-        <location filename="dialogs/dialog_rename.cpp" line="83"/>
+        <location filename="dialogs/dialog_rename.cpp" line="79"/>
+        <location filename="dialogs/dialog_rename.cpp" line="90"/>
         <source>New name:</source>
         <translation>Новое имя:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="94"/>
+        <location filename="dialogs/dialog_rename.cpp" line="101"/>
         <source>Find:</source>
         <translation>Найти:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="97"/>
+        <location filename="dialogs/dialog_rename.cpp" line="104"/>
         <source>And replace by:</source>
         <translation>И заменить на:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="107"/>
+        <location filename="dialogs/dialog_rename.cpp" line="114"/>
         <source>Text to insert:</source>
         <translation>Вставить текст:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="118"/>
+        <location filename="dialogs/dialog_rename.cpp" line="125"/>
         <source>Range</source>
         <translation>Диапазон</translation>
     </message>
@@ -6475,49 +6480,49 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="86"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="143"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="147"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="149"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="153"/>
         <source>Re&amp;name...</source>
         <translation>&amp;Переименовать…</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="143"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="149"/>
         <source>Bulk re&amp;name...</source>
         <translation>&amp;Множественное переименование…</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="189"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="192"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="195"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="198"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="190"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="196"/>
         <source>Cannot delete a sample used by another instrument.</source>
         <translation>Нельзя удалить семпл, используемый другим инструментом.</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="193"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="199"/>
         <source>Cannot delete an instrument used by another preset.</source>
         <translation>Нельзя удалить инструмент, используемый другим пресетом.</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="340"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="359"/>
         <source>Sample name</source>
         <translation>Имя семпла</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="342"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="361"/>
         <source>Instrument name</source>
         <translation>Имя инструмента</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="344"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="363"/>
         <source>Preset name</source>
         <translation>Имя пресета</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="347"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="366"/>
         <source>Rename</source>
         <translation>Переименовать</translation>
     </message>

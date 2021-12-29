@@ -1718,33 +1718,38 @@ en línea</translation>
         <translation>Renombrado masivo</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="66"/>
+        <location filename="dialogs/dialog_rename.ui" line="61"/>
+        <source>Overwrite existing name with key name and velocity as suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_rename.ui" line="71"/>
         <source>Replace characters</source>
         <translation>Reemplazar caracteres</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="71"/>
+        <location filename="dialogs/dialog_rename.ui" line="76"/>
         <source>Insert after a specific position</source>
         <translation>Insertar después de la posición</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="76"/>
+        <location filename="dialogs/dialog_rename.ui" line="81"/>
         <source>Delete character range</source>
         <translation>Eliminar intervalo de caracteres</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="121"/>
-        <location filename="dialogs/dialog_rename.cpp" line="106"/>
+        <location filename="dialogs/dialog_rename.ui" line="126"/>
+        <location filename="dialogs/dialog_rename.cpp" line="113"/>
         <source>Position</source>
         <translation>Posición</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="157"/>
+        <location filename="dialogs/dialog_rename.ui" line="162"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Deshacer</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="137"/>
+        <location filename="dialogs/dialog_rename.ui" line="142"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
@@ -1754,33 +1759,33 @@ en línea</translation>
         <translation>Reemplazar el nombre actual con el nombre de la nota como sufijo</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="61"/>
+        <location filename="dialogs/dialog_rename.ui" line="66"/>
         <source>Overwrite existing name with numerical ascending suffix</source>
         <translation>Reemplazar el nombre actual con el incremento como sufijo</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="72"/>
-        <location filename="dialogs/dialog_rename.cpp" line="83"/>
+        <location filename="dialogs/dialog_rename.cpp" line="79"/>
+        <location filename="dialogs/dialog_rename.cpp" line="90"/>
         <source>New name:</source>
         <translation>Nuevo nombre:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="94"/>
+        <location filename="dialogs/dialog_rename.cpp" line="101"/>
         <source>Find:</source>
         <translation>Buscar:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="97"/>
+        <location filename="dialogs/dialog_rename.cpp" line="104"/>
         <source>And replace by:</source>
         <translation>Y reemplazar por:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="107"/>
+        <location filename="dialogs/dialog_rename.cpp" line="114"/>
         <source>Text to insert:</source>
         <translation>Texto para insertar:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.cpp" line="118"/>
+        <location filename="dialogs/dialog_rename.cpp" line="125"/>
         <source>Range</source>
         <translation>Rango</translation>
     </message>
@@ -6376,50 +6381,50 @@ Other soundfont editors might display other units.</source>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="86"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="143"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="147"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="149"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="153"/>
         <source>Re&amp;name...</source>
         <oldsource>&amp;Rename...</oldsource>
         <translation>Re&amp;nombrar...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="143"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="149"/>
         <source>Bulk re&amp;name...</source>
         <translation>Re&amp;nombrar a granel...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="189"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="192"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="195"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="198"/>
         <source>Warning</source>
         <translation>Atención</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="190"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="196"/>
         <source>Cannot delete a sample used by another instrument.</source>
         <translation>No se puede eliminar una muestra si ésta está siendo utilizada por un instrumento.</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="193"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="199"/>
         <source>Cannot delete an instrument used by another preset.</source>
         <translation>No se puede eliminar un instrumento si éste está siendo utilizado por un preset.</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="340"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="359"/>
         <source>Sample name</source>
         <translation>Nombre de muestra</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="342"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="361"/>
         <source>Instrument name</source>
         <translation>Nombre del instrumento</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="344"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="363"/>
         <source>Preset name</source>
         <translation>Nombre de preset</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="347"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="366"/>
         <source>Rename</source>
         <translation>Renombrar</translation>
     </message>

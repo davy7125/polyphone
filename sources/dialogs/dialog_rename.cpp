@@ -26,22 +26,29 @@
 #include "ui_dialog_rename.h"
 #include "contextmanager.h"
 #include "latinvalidator.h"
+#include <QListView>
 
-DialogRename::DialogRename(bool isSample, QString defaultText, QWidget *parent) :
+DialogRename::DialogRename(ElementType type, QString defaultText, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogRename),
-    _isSample(isSample)
+    _type(type)
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
 
-    ui->comboBox->blockSignals(true);
-    ui->comboBox->setCurrentIndex(ContextManager::configuration()->getValue(ConfManager::SECTION_BULK_RENAME, "option", 0).toInt());
-    ui->comboBox->blockSignals(false);
-    if (!_isSample)
-        ui->comboBox->removeItem(0);
+    // Possibly hide renaming options
+    QListView* view = qobject_cast<QListView *>(ui->comboBox->view());
+    view->setRowHidden(0, _type != elementSmpl && _type != elementInstSmpl); // Key as suffix
+    view->setRowHidden(1, _type != elementInstSmpl); // Key and velocity as suffix
 
+    // Select a row
+    int rowToSelect = ContextManager::configuration()->getValue(ConfManager::SECTION_BULK_RENAME, "option", 0).toInt();
+    ui->comboBox->blockSignals(true);
+    ui->comboBox->setCurrentIndex(view->isRowHidden(rowToSelect) ? 2 : rowToSelect);
+    ui->comboBox->blockSignals(false);
+
+    // Default text and values
     ui->lineText1->setText(defaultText);
     ui->lineText1->setValidator(new LatinValidator(ui->lineText1));
     ui->lineText2->setText(defaultText);
@@ -62,21 +69,10 @@ DialogRename::~DialogRename()
 
 void DialogRename::on_comboBox_currentIndexChanged(int index)
 {
-    switch (index + !_isSample)
+    switch (index)
     {
-    case 0:
-        // Remplacer avec note en suffixe
-        ui->labelPos->hide();
-        ui->spinPos1->hide();
-        ui->spinPos2->hide();
-        ui->labelString1->setText(tr("New name:"));
-        ui->labelString1->show();
-        ui->lineText1->show();
-        ui->labelString2->hide();
-        ui->lineText2->hide();
-        break;
-    case 1:
-        // Remplacer avec index en suffixe
+    case 0: case 1:
+        // Overwrite existing name with key name (and velocity) as suffix
         ui->labelPos->hide();
         ui->spinPos1->hide();
         ui->spinPos2->hide();
@@ -87,7 +83,18 @@ void DialogRename::on_comboBox_currentIndexChanged(int index)
         ui->lineText2->hide();
         break;
     case 2:
-        // Remplacer
+        // Overwrite existing name with numerical ascending suffix
+        ui->labelPos->hide();
+        ui->spinPos1->hide();
+        ui->spinPos2->hide();
+        ui->labelString1->setText(tr("New name:"));
+        ui->labelString1->show();
+        ui->lineText1->show();
+        ui->labelString2->hide();
+        ui->lineText2->hide();
+        break;
+    case 3:
+        // Replace characters
         ui->labelPos->hide();
         ui->spinPos1->hide();
         ui->spinPos2->hide();
@@ -98,8 +105,8 @@ void DialogRename::on_comboBox_currentIndexChanged(int index)
         ui->labelString2->show();
         ui->lineText2->show();
         break;
-    case 3:
-        // Insérer
+    case 4:
+        // Insert after a specific position
         ui->labelPos->show();
         ui->spinPos1->show();
         ui->spinPos2->hide();
@@ -110,8 +117,8 @@ void DialogRename::on_comboBox_currentIndexChanged(int index)
         ui->labelString2->hide();
         ui->lineText2->hide();
         break;
-    case 4:
-        // Supprimer
+    case 5:
+        // Delete character range
         ui->labelPos->show();
         ui->spinPos1->show();
         ui->spinPos2->show();
@@ -135,12 +142,12 @@ void DialogRename::on_pushCancel_clicked()
 
 void DialogRename::on_pushOk_clicked()
 {
-    int type = ui->comboBox->currentIndex() + !_isSample;
+    int type = ui->comboBox->currentIndex();
     this->updateNames(type, ui->lineText1->text(), ui->lineText2->text(),
                       ui->spinPos1->value(), ui->spinPos2->value());
 
     // Mémorisation des paramètres
-    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "option", ui->comboBox->currentIndex() + !_isSample);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "option", ui->comboBox->currentIndex());
     ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "int_1", ui->spinPos1->value());
     ContextManager::configuration()->setValue(ConfManager::SECTION_BULK_RENAME, "int_2", ui->spinPos2->value());
 

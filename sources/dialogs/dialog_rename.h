@@ -26,6 +26,7 @@
 #define DIALOG_RENAME_H
 
 #include <QDialog>
+#include "basetypes.h"
 
 namespace Ui {
 class DialogRename;
@@ -36,7 +37,7 @@ class DialogRename : public QDialog
     Q_OBJECT
     
 public:
-    DialogRename(bool isSample, QString defaultText, QWidget *parent = nullptr);
+    DialogRename(ElementType type, QString defaultText, QWidget *parent = nullptr);
     ~DialogRename();
     
 signals:
@@ -49,7 +50,7 @@ private slots:
 
 private:
     Ui::DialogRename *ui;
-    bool _isSample;
+    ElementType _type;
 };
 
 #endif // DIALOG_RENAME_H

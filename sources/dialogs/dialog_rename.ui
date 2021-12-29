@@ -58,6 +58,11 @@
      </item>
      <item>
       <property name="text">
+       <string>Overwrite existing name with key name and velocity as suffix</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>Overwrite existing name with numerical ascending suffix</string>
       </property>
      </item>
