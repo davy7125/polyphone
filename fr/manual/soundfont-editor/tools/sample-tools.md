@@ -91,7 +91,7 @@ Vous n'avez ainsi pas besoin d'exporter et de ré-importer l'échantillon dans P
 ![Outil d'appel à une commande externe](images/tool_external_command.png "Outil d'appel à une commande externe")
 
 
-Note&nbsp;: pendant le processus, Polyphone exporte un fichier .wav et réimportera ce même fichier après exécution de la commande externe. Si la commande externe crée d'autres fichiers ou si le résultat est sauvegardé dans un autre fichier, ces fichiers seront ignorés et Polyphone réimportera le fichier exporté initialement qui ne sera probablement pas modifié.
+**Note&nbsp;:** Pendant le processus, Polyphone exporte un fichier .wav et réimportera ce même fichier après exécution de la commande externe. Si la commande externe crée d'autres fichiers ou si le résultat est sauvegardé dans un autre fichier, ces fichiers seront ignorés et Polyphone réimportera le fichier exporté initialement qui ne sera probablement pas modifié.
 
 
 ### Filtrer des fréquences {#doc_filter}
