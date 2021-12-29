@@ -42,7 +42,7 @@ Cette fonction désaccorde légèrement les notes d'un instrument, de manière �
 L'intensité de l'effet s'exprime en nombre de battements par seconde et est ajustable&nbsp;:
 
 * nombre de battement par seconde au do 60, au milieu du clavier&nbsp;;
-* évolution du nombre de battements en fonction de la note, en divisant ou multipliant le nombre de battements par un facteur constant d'une octave à l'autre.
+* évolution du nombre de battements en fonction de la note, en divisant ou multipliant le nombre de battements par un facteur constant d'une octave à l'autre (une valeur de "1" signifie que le nombre de battements sera constant sur tout le clavier).
 
 
 ![Outil de désaccordage](images/tool_detune.png "Outil de désaccordage")

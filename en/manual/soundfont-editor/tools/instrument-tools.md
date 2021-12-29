@@ -42,7 +42,7 @@ This feature slightly detunes the instrument notes, so as to create an undulatin
 The intensity of the effect is expressed in number of beats per second and is adjustable:
 
 * number of beats per second at key 60, which is "C" in the middle of the keyboard;
-* evolution of the number of beats according to the note, dividing or multiplying the number of beats by a constant factor from one octave to another.
+* evolution of the number of beats according to the note, dividing or multiplying the number of beats by a constant factor from one octave to another (value "1" means that the number of beats will be constant all over the keyboard).
 
 
 ![Detuning tool](images/tool_detune.png "Detuning tool")
