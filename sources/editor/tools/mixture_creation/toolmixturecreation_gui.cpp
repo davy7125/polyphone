@@ -460,6 +460,23 @@ void ToolMixtureCreation_gui::on_pushAddRank_clicked()
     // Ajout d'un rang
     int type1 = ui->comboType1->currentIndex();
     int type2 = ui->comboType2->currentIndex();
+
+    // Possibly change type1 / type2 so that we go from fifth to octave and from octave to fifth
+    if (!ui->listRangs->selectedItems().isEmpty())
+    {
+        if (type1 == 0 && type2 >= 1 && type2 <= 9)
+        {
+            // Select the next fifth
+            type1 = 1;
+            type2--;
+        }
+        else if (type1 == 1)
+        {
+            // Select the next octave
+            type1 = 0;
+            type2 += 2;
+        }
+    }
     _divisions[numDiv].addRank(type1, type2);
 
     // Affichage
