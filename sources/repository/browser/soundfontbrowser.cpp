@@ -72,9 +72,6 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
                                         ";border-radius:2px;border:0;padding:2px 5px}" +
                                         "QPushButton:hover{background-color:" + resetHoverColor + "}");
     ui->lineSearch->setStyleSheet("QLineEdit{border:0;border-top-left-radius:2px;border-bottom-left-radius:2px}");
-    ui->pushClearSearch->setIcon(ContextManager::theme()->getColoredSvg(":/icons/close.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_BACKGROUND));
-    ui->pushClearSearch->setStyleSheet("QPushButton{border:0;border-top-right-radius:2px;border-bottom-right-radius:2px;background-color:" +
-                                       ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() + "}");
     QColor color = ThemeManager::mix(
                 ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
                 ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
@@ -373,11 +370,6 @@ void SoundfontBrowser::on_comboSort_currentIndexChanged(int index)
 {
     Q_UNUSED(index)
     this->updateList2();
-}
-
-void SoundfontBrowser::on_pushClearSearch_clicked()
-{
-    ui->lineSearch->clear();
 }
 
 void SoundfontBrowser::keyPressEvent(QKeyEvent * event)

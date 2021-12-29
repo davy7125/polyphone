@@ -1613,12 +1613,17 @@ repository</source>
         <translation>预设列表</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_list.ui" line="64"/>
+        <location filename="dialogs/dialog_list.ui" line="61"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_list.ui" line="44"/>
+        <location filename="dialogs/dialog_list.ui" line="73"/>
+        <source>Search...</source>
+        <translation type="unfinished">搜索...</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_list.ui" line="41"/>
         <source>&amp;Ok</source>
         <translation>确定(&amp;O)</translation>
     </message>
@@ -2275,18 +2280,18 @@ repository</source>
         <translation>导出图表</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="466"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="472"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>赫兹</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="486"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="492"/>
         <source>Export a graph</source>
         <translation>导出图表</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="487"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="493"/>
         <source>Png file</source>
         <translation>PNG 文件</translation>
     </message>
@@ -4288,63 +4293,63 @@ download the list</source>
         <translation>标签</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="337"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="332"/>
         <source>Search a soundfont...</source>
         <translation>搜索音色库...</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="387"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="364"/>
         <source>Date</source>
         <translation>日期</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="392"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="369"/>
         <source>Downloads</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="397"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="374"/>
         <source>Rating score</source>
         <translation>评分</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="402"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="379"/>
         <source>Title (A→Z)</source>
         <translation>标题(A→Z)</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="458"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="435"/>
         <source>Filters</source>
         <translation>筛选</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="487"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="464"/>
         <source>Reset</source>
         <translation>重设</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="506"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="483"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation>订阅高级账户获取所有功能!</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="528"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="505"/>
         <source>No results</source>
         <translation>无结果</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="609"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="586"/>
         <source>Oops! Cannot
 download the list</source>
         <translation>无法下载列表</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="142"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="139"/>
         <source>commercial use</source>
         <translation>商业使用</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="143"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="140"/>
         <source>share after editing</source>
         <translation>二次编辑后共享</translation>
     </message>
@@ -6295,22 +6300,22 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeView</name>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="897"/>
+        <location filename="editor/tree/treeview.cpp" line="927"/>
         <source>instrument</source>
         <translation>乐器</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="897"/>
+        <location filename="editor/tree/treeview.cpp" line="927"/>
         <source>preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="918"/>
+        <location filename="editor/tree/treeview.cpp" line="948"/>
         <source>Warning</source>
         <translation type="unfinished">警告</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="918"/>
+        <location filename="editor/tree/treeview.cpp" line="948"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>

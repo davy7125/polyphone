@@ -1615,12 +1615,17 @@ repository</source>
         <translation>Seznam přednastavení</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_list.ui" line="64"/>
+        <location filename="dialogs/dialog_list.ui" line="61"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Zrušit</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_list.ui" line="44"/>
+        <location filename="dialogs/dialog_list.ui" line="73"/>
+        <source>Search...</source>
+        <translation type="unfinished">Hledat...</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_list.ui" line="41"/>
         <source>&amp;Ok</source>
         <translation>&amp;OK</translation>
     </message>
@@ -2277,18 +2282,18 @@ repository</source>
         <translation>Vyvést graf</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="466"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="472"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="486"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="492"/>
         <source>Export a graph</source>
         <translation>Vyvést graf</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="487"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="493"/>
         <source>Png file</source>
         <translation>Soubor PNG</translation>
     </message>
@@ -4294,64 +4299,64 @@ Nelze stáhnout seznam</translation>
         <translation>Značky</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="337"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="332"/>
         <source>Search a soundfont...</source>
         <translation>Hledat zvukovou banku...</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="387"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="364"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="392"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="369"/>
         <source>Downloads</source>
         <translation>Stahování</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="397"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="374"/>
         <source>Rating score</source>
         <translation>Hodnocení</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="402"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="379"/>
         <source>Title (A→Z)</source>
         <translation>Název (A→Z)</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="458"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="435"/>
         <source>Filters</source>
         <translation>Filtry</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="487"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="464"/>
         <source>Reset</source>
         <translation>Nastavit znovu</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="506"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="483"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation>Předplaťte si prémiový účet a dostat všechny funkce!</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="528"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="505"/>
         <source>No results</source>
         <translation>Žádné výsledky</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="609"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="586"/>
         <source>Oops! Cannot
 download the list</source>
         <translation>Ale, ale!
 Nelze stáhnout seznam</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="142"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="139"/>
         <source>commercial use</source>
         <translation>Obchodní využití</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="143"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="140"/>
         <source>share after editing</source>
         <translation>Sdílet po upravení</translation>
     </message>
@@ -6309,22 +6314,22 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeView</name>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="897"/>
+        <location filename="editor/tree/treeview.cpp" line="927"/>
         <source>instrument</source>
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="897"/>
+        <location filename="editor/tree/treeview.cpp" line="927"/>
         <source>preset</source>
         <translation>Přednastavení</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="918"/>
+        <location filename="editor/tree/treeview.cpp" line="948"/>
         <source>Warning</source>
         <translation type="unfinished">Pozor</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="918"/>
+        <location filename="editor/tree/treeview.cpp" line="948"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>

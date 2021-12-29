@@ -1615,12 +1615,17 @@ repository</source>
         <translation>프리셋 목록</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_list.ui" line="64"/>
+        <location filename="dialogs/dialog_list.ui" line="61"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_list.ui" line="44"/>
+        <location filename="dialogs/dialog_list.ui" line="73"/>
+        <source>Search...</source>
+        <translation type="unfinished">찾는 중...</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_list.ui" line="41"/>
         <source>&amp;Ok</source>
         <translation>확인(&amp;O)</translation>
     </message>
@@ -2276,18 +2281,18 @@ repository</source>
         <translation>그래프 내보내기</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="466"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="472"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="486"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="492"/>
         <source>Export a graph</source>
         <translation>그래프 내보내기</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="487"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="493"/>
         <source>Png file</source>
         <translation>PNG 파일</translation>
     </message>
@@ -4279,65 +4284,65 @@ download the list</source>
         <translation>꼬리표</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="337"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="332"/>
         <source>Search a soundfont...</source>
         <translation>사운드폰트 찾기...</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="387"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="364"/>
         <source>Date</source>
         <translation>날짜</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="392"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="369"/>
         <source>Downloads</source>
         <translation>내려받기</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="397"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="374"/>
         <source>Rating score</source>
         <translation>점수</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="402"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="379"/>
         <source>Title (A→Z)</source>
         <oldsource>Title (A?Z)</oldsource>
         <translation>제목 (A→Z)</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="458"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="435"/>
         <source>Filters</source>
         <translation>필터</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="487"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="464"/>
         <source>Reset</source>
         <translation>초기화</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="506"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="483"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation>프리미엄 계정을 구독해 모든 기능을 얻으세요!</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="528"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="505"/>
         <source>No results</source>
         <translation>결과 없음</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="609"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="586"/>
         <source>Oops! Cannot
 download the list</source>
         <translation>이런! 목록을
 내려받을 수 없음</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="142"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="139"/>
         <source>commercial use</source>
         <translation>상업적 사용</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="143"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="140"/>
         <source>share after editing</source>
         <translation>수정한 후 공유</translation>
     </message>
@@ -6290,22 +6295,22 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeView</name>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="897"/>
+        <location filename="editor/tree/treeview.cpp" line="927"/>
         <source>instrument</source>
         <translation>악기</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="897"/>
+        <location filename="editor/tree/treeview.cpp" line="927"/>
         <source>preset</source>
         <translation>프리셋</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="918"/>
+        <location filename="editor/tree/treeview.cpp" line="948"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="918"/>
+        <location filename="editor/tree/treeview.cpp" line="948"/>
         <source>Cannot create more presets.</source>
         <translation>프리셋을 더 생성할 수 없습니다.</translation>
     </message>

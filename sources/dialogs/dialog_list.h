@@ -53,6 +53,8 @@ private slots:
     void on_pushCancel_clicked();
     void on_pushOk_clicked();
 
+    void on_lineSearch_textChanged(const QString &arg1);
+
 signals:
     void selectedID(EltID id);
 

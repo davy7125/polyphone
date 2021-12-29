@@ -57,7 +57,6 @@ private slots:
     void updateList();
     void on_listWidget_itemSelectionChanged();
     void on_comboSort_currentIndexChanged(int index);
-    void on_pushClearSearch_clicked();
     void on_pushBecomePremium_clicked();
     void userStatusChanged(UserManager::ConnectionState state);
 

@@ -74,6 +74,7 @@ void DialogList::showDialog(EltID idSrc, bool isAssociation)
     ui->listWidget->clear();
     ui->listWidget->clearSelection();
     ui->listWidget->scrollToTop();
+    ui->lineSearch->clear();
     EltID id(element, idSrc.indexSf2, 0, 0, 0);
     ListWidgetItem *item;
     ListWidgetItem * selectedItem = nullptr;
@@ -113,7 +114,7 @@ void DialogList::on_pushCancel_clicked()
 
 void DialogList::on_pushOk_clicked()
 {
-    // élément sélectionné ?
+    // An element is selected?
     if (ui->listWidget->selectedItems().count())
     {
         ListWidgetItem *item = dynamic_cast<ListWidgetItem *>(ui->listWidget->currentItem());
@@ -127,3 +128,11 @@ void DialogList::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
     Q_UNUSED(item)
     on_pushOk_clicked();
 }
+
+void DialogList::on_lineSearch_textChanged(const QString &arg1)
+{
+    QString filter = arg1.toLower();
+    for (int i = 0; i < ui->listWidget->count(); i++)
+        ui->listWidget->item(i)->setHidden(!ui->listWidget->item(i)->text().toLower().contains(filter));
+}
+
