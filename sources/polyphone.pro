@@ -41,12 +41,9 @@ TRANSLATIONS = polyphone_en.ts \
 CONFIG += lrelease embed_translations
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
 
-
 QT += core gui printsupport svg network #testlib
 TARGET = polyphone
 TEMPLATE = app
-
-include(lib/qtsingleapplication/qtsingleapplication.pri)
 
 win32 {
     DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
@@ -213,6 +210,7 @@ INCLUDEPATH += lib \
     repository/soundfont \
     repository/soundfont/viewer \
     repository/soundfont/editor \
+    lib/qtsingleapplication \
     .
 
 SOURCES	+= main.cpp \
@@ -534,7 +532,9 @@ SOURCES	+= main.cpp \
     editor/tools/fast_edit_smpl/toolfasteditsmpl.cpp \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.cpp \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.cpp \
-    repository/soundfont/uploadingdialog.cpp
+    repository/soundfont/uploadingdialog.cpp \
+    lib/qtsingleapplication/qtlocalpeer.cpp \
+    lib/qtsingleapplication/qtsingleapplication.cpp
 
 HEADERS += \
     core/input/grandorgue/grandorguedatathrough.h \
@@ -882,7 +882,9 @@ HEADERS += \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.h \
     repository/soundfont/uploadingdialog.h \
     dialogs/latinvalidator.h \
-    editor/widgets/nullablespinbox.h
+    editor/widgets/nullablespinbox.h \
+    lib/qtsingleapplication/qtlocalpeer.h \
+    lib/qtsingleapplication/qtsingleapplication.h
 
 FORMS += \
     dialogs/dialog_list.ui \
