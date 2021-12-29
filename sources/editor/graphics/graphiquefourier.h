@@ -70,7 +70,7 @@ private:
     };
 
     QVector<float> _fData;
-    quint32 dwSmplRate;
+    quint32 _dwSmplRate;
     QString _name;
     QSharedPointer<QCPAxisTickerFixed> _fixedTickerX;
     QSharedPointer<QCPAxisTickerFixed> _fixedTickerY;

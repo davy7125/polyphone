@@ -113,7 +113,7 @@ void GraphiqueFourier::setData(QByteArray baData, quint32 dwSmplRate)
     for (int i = 0; i < length; i++)
         _fData[i] = static_cast<float>(data[i]);
 
-    this->dwSmplRate = dwSmplRate;
+    this->_dwSmplRate = dwSmplRate;
 }
 
 void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, bool withReplot)
@@ -130,13 +130,6 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
     _delta = 0;
     _key = -1;
 
-    if (posEnd < 20 + posStart)
-    {
-        // Take the full sample in that case
-        posStart = 0;
-        posEnd = static_cast<quint32>(_fData.size() - 1);
-    }
-
     if (_fData.isEmpty())
     {
         graph(0)->data()->clear();
@@ -144,14 +137,27 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
         return;
     }
 
-    // Détermination du régime permanent pour transformée de Fourier et corrélation (max 0.5 seconde)
+    // If there is no loop, determine a stable portion for the Fourier transforme and the autocorrelation
     if (posStart == posEnd)
-        SampleUtils::regimePermanent(_fData, dwSmplRate, posStart, posEnd);
-    if (posEnd > static_cast<quint32>(0.5 * dwSmplRate) + posStart)
+        SampleUtils::regimePermanent(_fData, _dwSmplRate, posStart, posEnd);
+
+    // Limit or increase the portion to 0.5 second
+    if (posEnd > _dwSmplRate / 2 + posStart)
     {
-        quint32 offset = (posEnd - posStart - dwSmplRate / 2) / 2;
+        quint32 offset = (posEnd - _dwSmplRate / 2 - posStart) / 2;
         posStart += offset;
         posEnd -= offset;
+    }
+    else if (posEnd < _dwSmplRate / 2 + posStart)
+    {
+        quint32 offset = (posStart + _dwSmplRate / 2 - posEnd) / 2;
+        if (posStart < offset)
+            posStart = 0;
+        else
+            posStart -= offset;
+        posEnd += offset;
+        if (posEnd > static_cast<quint32>(_fData.size() - 1))
+            posEnd = _fData.size() - 1;
     }
 
     // Extraction des données du régime permanent
@@ -161,7 +167,7 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
     quint32 dMin;
     QVector<float> vectCorrel = SampleUtils::correlation(baData2.constData(),
                                                          qMin(static_cast<quint32>(baData2.size()), 4000u),
-                                                         dwSmplRate, 20, 20000, dMin);
+                                                         _dwSmplRate, 20, 20000, dMin);
 
     // Transformée de Fourier du signal
     QVector<float> vectFourier = SampleUtils::getFourierTransform(baData2);
@@ -233,7 +239,7 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
         if (rep)
         {
             // Fréquence et score corrélation
-            float freqCorrel = (static_cast<float>(size - 1) / (posMinCor[i] + dMin) * dwSmplRate) / (size - 1);
+            float freqCorrel = (static_cast<float>(size - 1) / (posMinCor[i] + dMin) * _dwSmplRate) / (size - 1);
             float scoreCorrel;
             if (vectCorrel[static_cast<int>(posMinCor[i])] <= 0)
                 scoreCorrel = 1;
@@ -241,7 +247,7 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
                 scoreCorrel = vectCorrel[static_cast<int>(posMinCor[0])] / vectCorrel[static_cast<int>(posMinCor[i])];
 
             // Fréquence et score Fourier
-            float freqFourier = (static_cast<float>(posMaxFFT[numeroPic]) * dwSmplRate) / (size - 1) / coefFourier;
+            float freqFourier = (static_cast<float>(posMaxFFT[numeroPic]) * _dwSmplRate) / (size - 1) / coefFourier;
             float scoreFourier = vectFourier[static_cast<int>(posMaxFFT[numeroPic])] /
                     vectFourier[static_cast<int>(posMaxFFT[0])];
 
@@ -272,7 +278,7 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
 
     // Si aucune note n'a été trouvée, on prend la note la plus probable d'après Fourier
     if (score < 0)
-        freq = static_cast<float>(posMaxFFT[0]) * dwSmplRate / (size - 1);
+        freq = static_cast<float>(posMaxFFT[0]) * _dwSmplRate / (size - 1);
 
     // Numéro de la note correspondant à cette fréquence
     double note3 = 12 * qLn(static_cast<double>(freq)) / 0.69314718056 - 36.3763;
@@ -293,7 +299,7 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
                        vectFourier[static_cast<int>(posMaxFFT[0])]);
 
             // fréquence
-            double freq = static_cast<double>(posMaxFFT[i] * dwSmplRate) / (size - 1);
+            double freq = static_cast<double>(posMaxFFT[i] * _dwSmplRate) / (size - 1);
             frequencies << freq;
 
             // note la plus proche
@@ -324,7 +330,7 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
 void GraphiqueFourier::dispFourier(QVector<float> vectFourier, float posMaxFourier)
 {
     this->graph(0)->data()->clear();
-    qint32 size_x = (vectFourier.size() * 40000) / static_cast<signed>(this->dwSmplRate);
+    qint32 size_x = (vectFourier.size() * 40000) / static_cast<signed>(this->_dwSmplRate);
     QVector<double> x(size_x), y(size_x);
     for (qint32 i = 0; i < size_x; i++)
     {
@@ -358,7 +364,7 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
     QSize size = this->size();
     int marginRight = 1;
     int marginTop = 1;
-    int tuneWidth = qMin(150, size.width() - marginRight);
+    int tuneWidth = qMin(160, size.width() - marginRight);
     int tuneCellPadding = 5;
     int tickHalfHeight = 3;
 
@@ -391,10 +397,10 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
     painter.setFont(fontMain);
     {
         int tuneCellMargin = fontHeight * 3 / 2;
-        int x1 = size.width() - marginRight - tuneWidth;
+        int x1 = size.width() - marginRight - tuneWidth + fontHeight / 2 + tuneCellPadding;
         int x2 = size.width() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellMargin - tuneCellPadding;
         int x3 = size.width() - marginRight - tuneWidth / 2 + textWidth / 2 + tuneCellMargin + tuneCellPadding;
-        int x4 = size.width() - marginRight;
+        int x4 = size.width() - marginRight - fontHeight / 2 - tuneCellPadding;
 
         // Horizontal line
         painter.drawLine(x1, marginTop + tuneCellPadding + fontHeight / 2, x2,
@@ -440,12 +446,12 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
     {
         QPainterPath path;
         textColor.setAlpha(255);
-        path.addRoundedRect(QRectF(size.width() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellPadding,
+        path.addRoundedRect(QRect(size.width() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellPadding,
                                    marginTop, textWidth + 2 * tuneCellPadding, fontHeight + 2 * tuneCellPadding), 3, 3);
         painter.fillPath(path, _delta == 0 ? highlightColor : textColor);
         painter.setPen(_delta == 0 ? highlightTextColor : backgroundColor);
-        painter.drawText(QRect(size.width() - marginRight - tuneWidth, marginTop + tuneCellPadding,
-                               tuneWidth - marginRight, fontHeight), Qt::AlignCenter, keyName);
+        painter.drawText(QRect(size.width() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellPadding, marginTop + tuneCellPadding,
+                               textWidth + 2 * tuneCellPadding, fontHeight), Qt::AlignCenter, keyName);
     }
 
     // MAIN FREQUENCY PEAKS
@@ -458,13 +464,13 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
         while (posY + fontHeight < size.height() && peakNumber < _peaks.count())
         {
             painter.setFont(fontInfo);
-            painter.drawText(QRect(0, posY, size.width() - 133 - marginRight, fontHeight),
+            painter.drawText(QRect(0, posY, size.width() - 142 - marginRight, fontHeight),
                              Qt::AlignRight,
                              QString::number(_peaks[peakNumber]._intensity, 'f', 2));
-            painter.drawText(QRect(0, posY, size.width() - 74 - marginRight, fontHeight),
+            painter.drawText(QRect(0, posY, size.width() - 80 - marginRight, fontHeight),
                              Qt::AlignRight,
                              QString::number(_peaks[peakNumber]._frequency, 'f', 2) + " " + tr("Hz", "unit for Herz"));
-            painter.drawText(QRect(0, posY, size.width() - 45 - marginRight, fontHeight),
+            painter.drawText(QRect(0, posY, size.width() - 48 - marginRight, fontHeight),
                              Qt::AlignRight,
                              ContextManager::keyName()->getKeyName(static_cast<unsigned int>(_peaks[peakNumber]._key)));
             painter.drawText(QRect(0, posY, size.width() - 20 - marginRight, fontHeight),
