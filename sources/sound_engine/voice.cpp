@@ -37,6 +37,7 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int ini
     _smplRate(smplRate),
     _audioSmplRate(audioSmplRate),
     _gain(0),
+    _tuningFork(440),
     _initialKey(initialKey),
     _voiceParam(voiceParam),
     _token(token),
@@ -126,7 +127,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     _vibLFO.getSinus(vibLfo, len, static_cast<float>(v_vibLfoFreq), v_vibLfoDelay);
 
     // Pitch modulation
-    double deltaPitchFixed = -12. * qLn(static_cast<double>(_audioSmplRate) / _smplRate) / 0.69314718056 +
+    double deltaPitchFixed = -12. * qLn(static_cast<double>(_audioSmplRate) / _smplRate * 440. / _tuningFork) / 0.69314718056 +
             (playedNote - v_rootkey) * 0.01 * v_scaleTune + 0.01 * v_fineTune + v_coarseTune;
     for (quint32 i = 0; i < len; i++)
         modPitch[i + 1] = static_cast<float>(
@@ -301,6 +302,13 @@ void Voice::setGain(double gain)
 {
     _mutexParam.lock();
     _gain = gain;
+    _mutexParam.unlock();
+}
+
+void Voice::setTuningFork(int tuningFork)
+{
+    _mutexParam.lock();
+    _tuningFork = tuningFork;
     _mutexParam.unlock();
 }
 

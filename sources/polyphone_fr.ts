@@ -1051,54 +1051,59 @@ Premium !</translation>
 <context>
     <name>ConfigSectionSound</name>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="191"/>
+        <location filename="context/interface/configsectionsound.ui" line="236"/>
         <source>Reverb</source>
         <translation>Réverbération</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="249"/>
+        <location filename="context/interface/configsectionsound.ui" line="294"/>
         <source>Gain (dB)</source>
         <translation>Gain (dB)</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="298"/>
+        <location filename="context/interface/configsectionsound.ui" line="343"/>
         <source>Width</source>
         <translation>Densité</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="65"/>
-        <location filename="context/interface/configsectionsound.ui" line="333"/>
+        <location filename="context/interface/configsectionsound.ui" line="378"/>
         <source>Level</source>
         <translation>Niveau</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="157"/>
+        <location filename="context/interface/configsectionsound.ui" line="176"/>
+        <source>Tuning fork</source>
+        <translation>Diapason</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="189"/>
         <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
         <oldsource>Modulator &quot;velocity → filter cutoff&quot;</oldsource>
         <translation>Mod. par défaut &quot;vélocité → fréquence de coupure&quot;</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="165"/>
+        <location filename="context/interface/configsectionsound.ui" line="210"/>
         <source>soundfont 2.01</source>
         <translation>soundfont 2.01</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="170"/>
+        <location filename="context/interface/configsectionsound.ui" line="215"/>
         <source>soundfont 2.04</source>
         <translation>soundfont 2.04</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="175"/>
+        <location filename="context/interface/configsectionsound.ui" line="220"/>
         <source>disabled</source>
         <translation>désactivé</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="388"/>
+        <location filename="context/interface/configsectionsound.ui" line="433"/>
         <source>Damp</source>
         <translation>Atténuation</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="404"/>
+        <location filename="context/interface/configsectionsound.ui" line="449"/>
         <source>Room</source>
         <translation>Profondeur</translation>
     </message>
@@ -1116,6 +1121,12 @@ Premium !</translation>
         <location filename="context/interface/configsectionsound.ui" line="129"/>
         <source>Depth</source>
         <translation>Amplitude</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.cpp" line="36"/>
+        <source>Hz</source>
+        <comment>unit for Herz</comment>
+        <translation>Hz</translation>
     </message>
 </context>
 <context>
@@ -5758,18 +5769,18 @@ D&apos;autres éditeurs de soundfonts pourraient utiliser d&apos;autres unités.
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="535"/>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="551"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="552"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="568"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="535"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="552"/>
         <source>The instrument name must be provided.</source>
         <translation>Un titre doit être renseigné.</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="551"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="568"/>
         <source>At least one rank must be specified.</source>
         <translation>Au moins un rang doit être renseigné.</translation>
     </message>

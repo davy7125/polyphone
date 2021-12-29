@@ -50,6 +50,8 @@ private slots:
     void on_dialChoFrequence_valueChanged(int value);
     void on_sliderGain_valueChanged(int value);
     void on_comboVelToFilter_currentIndexChanged(int index);
+    void on_spinTiningFork_valueChanged(int value);
+    void on_pushDefaultTuningFork_clicked();
 
 private:
     Ui::ConfigSectionSound *ui;

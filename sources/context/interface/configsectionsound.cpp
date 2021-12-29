@@ -31,6 +31,10 @@ ConfigSectionSound::ConfigSectionSound(QWidget *parent) :
     ui(new Ui::ConfigSectionSound)
 {
     ui->setupUi(this);
+
+    // Icon
+    ui->spinTiningFork->setSuffix(" " + tr("Hz", "unit for Herz"));
+    ui->pushDefaultTuningFork->setIcon(ContextManager::theme()->getColoredSvg(":/icons/left.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
 }
 
 ConfigSectionSound::~ConfigSectionSound()
@@ -81,6 +85,9 @@ void ConfigSectionSound::initialize()
     ui->comboVelToFilter->blockSignals(true);
     ui->comboVelToFilter->setCurrentIndex(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", 1).toInt());
     ui->comboVelToFilter->blockSignals(false);
+    ui->spinTiningFork->blockSignals(true);
+    ui->spinTiningFork->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", 440).toInt());
+    ui->spinTiningFork->blockSignals(false);
 }
 
 void ConfigSectionSound::on_dialRevNiveau_valueChanged(int value)
@@ -127,4 +134,14 @@ void ConfigSectionSound::on_sliderGain_valueChanged(int value)
 void ConfigSectionSound::on_comboVelToFilter_currentIndexChanged(int index)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", index);
+}
+
+void ConfigSectionSound::on_spinTiningFork_valueChanged(int value)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", value);
+}
+
+void ConfigSectionSound::on_pushDefaultTuningFork_clicked()
+{
+    ui->spinTiningFork->setValue(440);
 }

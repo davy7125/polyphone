@@ -202,6 +202,21 @@ void SoundEngine::setGainInstance(double gain)
     _mutexVoices.unlock();
 }
 
+void SoundEngine::setTuningFork(int tuningFork)
+{
+    for (int i = 0; i < _listInstances.size(); i++)
+        _listInstances.at(i)->setTuningForkInstance(tuningFork);
+}
+
+void SoundEngine::setTuningForkInstance(int tuningFork)
+{
+    _mutexVoices.lock();
+    for (int i = 0; i < _listVoices.size(); i++)
+        if (_listVoices.at(i)->getKey() >= 0)
+            _listVoices.at(i)->setTuningFork(tuningFork);
+    _mutexVoices.unlock();
+}
+
 void SoundEngine::setChorus(int level, int depth, int frequency)
 {
     for (int i = 0; i < _listInstances.size(); i++)

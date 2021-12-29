@@ -35,6 +35,7 @@ int Synth::s_sampleVoiceTokenCounter = 0;
 Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _sf2(SoundfontManager::getInstance()),
     _gain(0),
+    _tuningFork(440),
     _choLevel(0), _choDepth(0), _choFrequency(0),
     _clipCoef(1),
     _recordFile(nullptr),
@@ -282,6 +283,7 @@ int Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSmp
     {
         voiceTmp->setChorus(_choLevel, _choDepth, _choFrequency);
         voiceTmp->setGain(_gain);
+        voiceTmp->setTuningFork(_tuningFork);
     }
 
     // Add the voice in the list
@@ -331,9 +333,11 @@ void Synth::updateConfiguration()
     _reverb.setDamping(revDamping);
     _mutexReverb.unlock();
 
-    // Update gain
+    // Update gain and tuning fork
     _gain = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
     SoundEngine::setGain(_gain);
+    _tuningFork = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", 440).toInt();
+    SoundEngine::setTuningFork(_tuningFork);
 
     // Update buffer size
     quint32 bufferSize = 2 * _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();

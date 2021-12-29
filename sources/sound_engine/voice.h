@@ -48,6 +48,7 @@ public:
     int getToken() { return _token; }
     void release(bool quick = false);
     void setGain(double gain);
+    void setTuningFork(int tuningFork);
     void setChorus(int level, int depth, int frequency);
     bool isFinished() { return _isFinished; }
     bool isRunning() { return _isRunning; }
@@ -83,6 +84,7 @@ private:
     QByteArray _baData;
     quint32 _smplRate, _audioSmplRate;
     double _gain;
+    int _tuningFork;
     int _initialKey; // Only used to know which key triggered the sound, not for computing data
     VoiceParam * _voiceParam;
     int _token;
