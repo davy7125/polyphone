@@ -39,10 +39,24 @@ Par exemple, si l'atténuation minimale des divisions au sein des instruments s�
 
 
 Cette fonction désaccorde légèrement les notes d'un instrument, de manière à produire un effet ondulant en conjonction avec un instrument accordé.
-L'intensité de l'effet est ajustable.
+L'intensité de l'effet s'exprime en nombre de battements par seconde et est ajustable&nbsp;:
+
+* nombre de battement par seconde au do 60, au milieu du clavier&nbsp;;
+* évolution du nombre de battements en fonction de la note, en divisant ou multipliant le nombre de battements par un facteur constant d'une octave à l'autre.
 
 
 ![Outil de désaccordage](images/tool_detune.png "Outil de désaccordage")
+
+
+Voici l'exemple d'un instrument <a href="downloads/tutorials/mixture_base.mp3" download>accordé</a>&nbsp;:
+
+![](downloads/tutorials/celeste_tuning_off.mp3)
+
+Et cet instrument a été combiné avec ce même instrument <a href="downloads/tutorials/mixture_done.mp3" download>désaccordé</a>&nbsp;:
+
+![](downloads/tutorials/celeste_tuning_on.mp3)
+
+Le fichier .sf2 correspondant peut être téléchargé <a href="downloads/tutorials/celeste_tuning.sf2" download>ici</a>.
 
 
 ### Paramétrer en fonction des notes {#doc_global}
@@ -198,6 +212,8 @@ Et <a href="downloads/tutorials/chord_done.mp3" download>après</a>&nbsp;:
 
 ![](downloads/tutorials/chord_done.mp3)
 
+Un fichier .sf2 d'exemple, se basant sur une flûte, peut être téléchargé <a href="downloads/tutorials/chords.sf2" download>ici</a>.
+
 
 ### Dupliquer les divisions {#doc_division}
 
@@ -236,3 +252,5 @@ Voici un exemple, <a href="downloads/tutorials/mixture_base.mp3" download>avant<
 Et <a href="downloads/tutorials/mixture_done.mp3" download>après</a>&nbsp;:
 
 ![](downloads/tutorials/mixture_done.mp3)
+
+Un fichier .sf2 d'exemple, se basant sur un jeu d'orgue, peut être téléchargé <a href="downloads/tutorials/mixture.sf2" download>ici</a>.

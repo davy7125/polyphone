@@ -39,10 +39,24 @@ For example, if the lowest attenuation of the divisions within the selected inst
 
 
 This feature slightly detunes the instrument notes, so as to create an undulating effect in conjunction with a tuned instrument.
-The intensity of the effect is adjustable.
+The intensity of the effect is expressed in number of beats per second and is adjustable:
+
+* number of beats per second at key 60, which is "C" in the middle of the keyboard;
+* evolution of the number of beats according to the note, dividing or multiplying the number of beats by a constant factor from one octave to another.
 
 
 ![Detuning tool](images/tool_detune.png "Detuning tool")
+
+
+Here is an example of an instrument that is <a href="downloads/tutorials/mixture_base.mp3" download>tuned</a>:
+
+![](downloads/tutorials/celeste_tuning_off.mp3)
+
+And this instrument has been combined with itself in a version that is <a href="downloads/tutorials/mixture_done.mp3" download>detuned</a>:
+
+![](downloads/tutorials/celeste_tuning_on.mp3)
+
+The corresponding .sf2 file can be downloaded <a href="downloads/tutorials/celeste_tuning.sf2" download>here</a>.
 
 
 ### Key-based configuration {#doc_global}
@@ -198,6 +212,8 @@ And <a href="downloads/tutorials/chord_done.mp3" download>after</a>:
 
 ![](downloads/tutorials/chord_done.mp3)
 
+An example .sf2 file, based on a flute, can be downloaded <a href="downloads/tutorials/chords.sf2" download>here</a>.
+
 
 ### Division duplication {#doc_division}
 
@@ -236,3 +252,5 @@ Here is an example, <a href="downloads/tutorials/mixture_base.mp3" download>befo
 And <a href="downloads/tutorials/mixture_done.mp3" download>after</a>:
 
 ![](downloads/tutorials/mixture_done.mp3)
+
+An example .sf2 file, based on an organ stop, can be downloaded <a href="downloads/tutorials/mixture.sf2" download>here</a>.
