@@ -48,11 +48,11 @@ L'intensité de l'effet s'exprime en nombre de battements par seconde et est aju
 ![Outil de désaccordage](images/tool_detune.png "Outil de désaccordage")
 
 
-Voici l'exemple d'un instrument <a href="downloads/tutorials/mixture_base.mp3" download>accordé</a>&nbsp;:
+Voici l'exemple d'un instrument <a href="downloads/tutorials/celeste_tuning_off.mp3" download>accordé</a>&nbsp;:
 
 ![](downloads/tutorials/celeste_tuning_off.mp3)
 
-Et cet instrument a été combiné avec ce même instrument <a href="downloads/tutorials/mixture_done.mp3" download>désaccordé</a>&nbsp;:
+Et cet instrument a été combiné avec ce même instrument <a href="downloads/tutorials/celeste_tuning_on.mp3" download>désaccordé</a>&nbsp;:
 
 ![](downloads/tutorials/celeste_tuning_on.mp3)
 

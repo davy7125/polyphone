@@ -48,11 +48,11 @@ The intensity of the effect is expressed in number of beats per second and is ad
 ![Detuning tool](images/tool_detune.png "Detuning tool")
 
 
-Here is an example of an instrument that is <a href="downloads/tutorials/mixture_base.mp3" download>tuned</a>:
+Here is an example of an instrument that is <a href="downloads/tutorials/celeste_tuning_off.mp3" download>tuned</a>:
 
 ![](downloads/tutorials/celeste_tuning_off.mp3)
 
-And this instrument has been combined with itself in a version that is <a href="downloads/tutorials/mixture_done.mp3" download>detuned</a>:
+And this instrument has been combined with itself in a version that is <a href="downloads/tutorials/celeste_tuning_on.mp3" download>detuned</a>:
 
 ![](downloads/tutorials/celeste_tuning_on.mp3)
 
