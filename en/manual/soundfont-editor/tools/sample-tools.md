@@ -91,7 +91,7 @@ You don't need to export and re-import a sample into Polyphone anymore, everythi
 ![External command tool](images/tool_external_command.png "External command tool")
 
 
-**Note:** during the process, Polyphone exports a .wav file and will reimport this same file after the external command has been run. If the external command creates other files or save the result as another file, those files will be ignored and Polyphone will reimport the file initially exported that will probably be not modified.
+**Note:** during the process, Polyphone exports a .wav file and will reimport this same file after the external command has been run. If the external command creates other files or saves the result as another file, those files will be ignored and Polyphone will reimport the file initially exported that will probably be not modified.
 
 
 ### Filter frequencies {#doc_filter}
