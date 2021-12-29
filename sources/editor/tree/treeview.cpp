@@ -861,9 +861,39 @@ void TreeView::onCreateElements(IdList ids, bool oneForEach)
     IdList createdElements;
     if (oneForEach)
     {
-        foreach (EltID id, ids)
+        while (!ids.empty())
         {
-            EltID newId = createElement(id, names, &duplicator);
+            EltID id = ids.takeFirst();
+            EltID otherId = id;
+            otherId.indexElt = -1;
+
+            if (isSmpl)
+            {
+                // A linked sample is possibly in the list
+                SFSampleLink linkType = sm->get(id, champ_sfSampleType).sfLinkValue;
+                if (linkType != monoSample && linkType != RomMonoSample)
+                {
+                    quint16 otherSampleId = sm->get(id, champ_wSampleLink).wValue;
+                    foreach (EltID idTmp, ids)
+                    {
+                        if (idTmp.indexElt == otherSampleId)
+                        {
+                            otherId.indexElt = otherSampleId;
+                            ids.removeOne(idTmp);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // List of elements for the new instrument or preset
+            IdList tmpIds;
+            tmpIds << id;
+            if (otherId.indexElt != -1)
+                tmpIds << otherId;
+
+            // Create the element
+            EltID newId = createElement(tmpIds, names, &duplicator);
             if (newId.typeElement == elementUnknown)
                 break;
             createdElements << newId;

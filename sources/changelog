@@ -4,6 +4,7 @@ polyphone (2.3) unstable; urgency=low
   * (new) detection of bad loops, a warning being displayed at the sample level and in the sample summary
   * (new) parameter inconsistencies displayed in the sample summary
   * (new) option to allow multiple instances of Polyphone
+  * (new) option to change the tuning fork from 390 to 470 Hz
   * (improvement) creating a new instrument automatically set the loop mode and the key ranges
   * (improvement) a table cell can be cleared more easily when editing the cell
   * (improvement) UTF-8 text can be written in the comment field
