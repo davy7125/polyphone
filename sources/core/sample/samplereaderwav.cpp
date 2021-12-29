@@ -55,8 +55,12 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
     quint32Reversed val;
     in >> val;
     quint32 fullLength = val.value + 8;
-    if (val.value + 8 != fi.size())
-        return FILE_CORRUPT;
+    if (fullLength != fi.size())
+    {
+        // Should be corrupt but let's try to read more
+        fullLength = fi.size();
+        //return FILE_CORRUPT;
+    }
 
     // "WAVE"
     if (in.readRawData(char4, 4) != 4)
