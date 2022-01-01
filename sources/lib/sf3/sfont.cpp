@@ -25,7 +25,7 @@
 //=============================================================================
 
 #include <stdio.h>
-#include <unistd.h>
+//#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
@@ -63,8 +63,6 @@ using namespace SfTools;
 #define FOURCC(a, b, c, d) a << 24 | b << 16 | c << 8 | d
 
 #define BLOCK_SIZE 1024
-
-static const bool writeCompressed = true;
 
 //---------------------------------------------------------
 //   Sample

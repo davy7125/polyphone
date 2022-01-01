@@ -110,7 +110,7 @@ const char	LicenseExt[] = ".license.txt";		// File extension for license file
 const char	NotesExt[] = ".txt";			// File extension for notes file
 const char	SfExt[] = ".sf2";			// File extension for output file
 
-static	BYTE *Zbuf1 = NULL, *Zbuf2 = NULL;
+static	BYTE *Zbuf1 = nullptr, *Zbuf2 = nullptr;
 
 // Data per block, passed to ProcessNextBlock()
 	typedef	struct
@@ -291,7 +291,7 @@ int ReadHeader(V2_FILEHEADER *FileHeader, BYTE *fbuf, int bufsize)
 }
 
 // =================================================================================
-void InitFilenames(const char *OrigFileName, const char */*InFileName*/, const char *ReqOutFileName)
+void InitFilenames(const char *OrigFileName, const char * /*InFileName*/, const char *ReqOutFileName)
 {
 	if (ReqOutFileName)
 	{
@@ -860,7 +860,7 @@ void FixEndian(void *num, int nsize)
   for (i = 0; i < nsize; i++)  ((BYTE *) num)[i] = bb[nsize-1-i];
 }
 #else
-void FixEndian(void */*num*/, int /*nsize*/) {}
+void FixEndian(void * /*num*/, int /*nsize*/) {}
 #endif
 
 // ==============================================================

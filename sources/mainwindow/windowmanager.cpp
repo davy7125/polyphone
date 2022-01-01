@@ -114,7 +114,7 @@ void WindowManager::openSoundfont(QString fileName)
     if (fileName.left(7).compare("file://") == 0)
         fileName = fileName.right(fileName.length() - 7);
 #ifdef Q_OS_WIN
-    if (fileName.left(1).compare("/") == 0)
+    if (fileName.size() > 2 && fileName[0] == '/' && fileName[1] != '/')
         fileName = fileName.remove(0, 1);
 #endif
 
