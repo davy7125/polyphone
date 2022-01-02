@@ -39,9 +39,6 @@ PagePrst::PagePrst(QWidget *parent) :
     ui->frameBottom->setStyleSheet("QFrame{background-color:" +
                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";color:" +
                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "}");
-    ui->tablePrst->setStyleSheet("QTableWidget{border:1px solid " +
-                                 this->palette().dark().color().name() +
-                                 ";border-top:0;border-left:0;border-right:0}");
 
     this->contenant = elementPrst;
     this->contenantGen = elementPrstGen;
@@ -58,19 +55,6 @@ PagePrst::PagePrst(QWidget *parent) :
     // Initialization of spinBoxes
     ui->spinBank->init(this);
     ui->spinPreset->init(this);
-
-#ifdef Q_OS_MAC
-    _table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
-    QFont fontTmp = _table->font();
-    fontTmp.setPixelSize(10);
-    _table->setFont(fontTmp);
-#endif
-    ui->tablePrst->verticalHeader()->setDefaultSectionSize(QFontMetrics(ui->tablePrst->font()).height() + 8);
-
-    QFont font = ui->tablePrst->font();
-    font.setPixelSize(11);
-    ui->tablePrst->horizontalHeader()->setFont(font);
-    ui->tablePrst->verticalHeader()->setFont(font);
 
     connect(this->_table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->_table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));

@@ -37,8 +37,8 @@ public:
     int getIndex() { return _currentIndex; }
 
 protected:
-    void showEvent(QShowEvent * event);
-    void hidePopup();
+    void showEvent(QShowEvent * event) override;
+    void hidePopup() override;
 
 private slots:
     void onActivated(int index);
@@ -53,14 +53,7 @@ class ComboView : public QListView
     Q_OBJECT
 
 protected:
-    QStyleOptionViewItem viewOptions() const
-    {
-        // Set icon on the top and center of combo box item.
-        QStyleOptionViewItem option = QListView::viewOptions();
-        option.decorationAlignment = Qt::AlignHCenter | Qt::AlignVCenter;
-        option.decorationSize = QSize(37, 14);
-        return option;
-    }
+    QStyleOptionViewItem viewOptions() const;
 };
 
 #endif // COMBOBOXLOOPMODE_H

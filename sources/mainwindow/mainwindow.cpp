@@ -100,7 +100,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabWidget->tabBar()->tabButton(0, QTabBar::RightSide)->deleteLater();
     ui->tabWidget->tabBar()->setTabButton(0, QTabBar::RightSide, nullptr);
 
-
     //////////////////////
     /// INITIALIZATION ///
     //////////////////////
@@ -138,6 +137,7 @@ MainWindow::MainWindow(QWidget *parent) :
         QTimer::singleShot(500, dialog, SLOT(show()));
     }
     ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "last_version_installed", SOFT_VERSION);
+    ui->widgetShowHistory->setFocus();
 }
 
 MainWindow::~MainWindow()

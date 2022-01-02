@@ -239,7 +239,6 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
     {
         NullableSpinBox * spin = dynamic_cast<NullableSpinBox*>(editor);
         model->setData(index, spin->isNull() ? QVariant() : QString::number(spin->value()), Qt::EditRole);
-        //QStyledItemDelegate::setModelData(editor, model, index);
     }
 
     _isEditing = false;
@@ -280,6 +279,19 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
         QStyleOptionViewItemV4 opt(option);
 #endif
         initStyleOption(&opt, index);
+
+        // Hack: check if the index is selected because option.state might not contain QStyle::State_Selected
+        QList<QTableWidgetSelectionRange> ranges = _table->selectedRanges();
+        foreach (QTableWidgetSelectionRange range, ranges)
+        {
+            if (range.topRow() <= index.row() && range.bottomRow() >= index.row() &&
+                    range.leftColumn() <= index.column() && range.rightColumn() >= index.column())
+            {
+                opt.backgroundBrush = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+                break;
+            }
+        }
+
         painter->fillRect(option.rect, opt.backgroundBrush);
 
         // Image

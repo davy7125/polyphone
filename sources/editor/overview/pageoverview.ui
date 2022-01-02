@@ -33,7 +33,7 @@
     <widget class="TablePageOverview" name="table">
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="frameShape">
@@ -63,6 +63,9 @@
      <property name="sortingEnabled">
       <bool>true</bool>
      </property>
+     <property name="cornerButtonEnabled">
+      <bool>false</bool>
+     </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
       <number>110</number>
      </attribute>
@@ -72,11 +75,11 @@
      <attribute name="verticalHeaderVisible">
       <bool>false</bool>
      </attribute>
-     <attribute name="verticalHeaderDefaultSectionSize">
-      <number>20</number>
-     </attribute>
      <attribute name="verticalHeaderMinimumSectionSize">
       <number>19</number>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>20</number>
      </attribute>
     </widget>
    </item>

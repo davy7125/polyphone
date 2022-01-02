@@ -36,8 +36,11 @@ ToolMenu::ToolMenu(QWidget * parent) : QMenu(parent),
     // Colors for the separators
     _separatorTextColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name();
     _separatorBackgroundColor = ThemeManager::mix(
-                ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
-                ContextManager::theme()->getColor(ThemeManager::LIST_TEXT), 0.5).name();
+                ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
+                ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.5).name();
+
+    // Style of the menu
+    this->setStyleSheet(ContextManager::theme()->getMenuTheme());
 
     // Connection of the actions
     connect(this, SIGNAL(triggered(QAction*)), this, SLOT(onTriggered(QAction*)));
@@ -85,7 +88,7 @@ void ToolMenu::addCategory(QString categoryName)
 {
     // Create a styled label
     QLabel * label = new QLabel(categoryName);
-    label->setStyleSheet(QString("background: %1; color: %2; padding: 3px")
+    label->setStyleSheet(QString("background: %1; color: %2; padding: 5px")
                          .arg(_separatorBackgroundColor).arg(_separatorTextColor));
 
     // Add it as a separator

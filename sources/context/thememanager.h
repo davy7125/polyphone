@@ -104,6 +104,9 @@ public:
     /// Function to mix two colors
     static QColor mix(QColor color1, QColor color2, double fade);
 
+    /// Get the menu theme
+    QString getMenuTheme();
+
 private:
     class ColorTheme
     {

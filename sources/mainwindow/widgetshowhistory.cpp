@@ -168,3 +168,23 @@ void WidgetShowHistory::dropEvent(QDropEvent *event)
         }
     }
 }
+
+void WidgetShowHistory::keyPressEvent(QKeyEvent * event)
+{
+    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
+    {
+        // Open all active element
+        QStringList links;
+        for (int i = 0; i < ui->listWidget->count(); i++)
+        {
+            QListWidgetItem * item = ui->listWidget->item(i);
+            if (item->isSelected())
+                links << ((WidgetShowHistoryCell*)ui->listWidget->itemWidget(item))->getLink();
+        }
+
+        foreach (QString link, links)
+            emit(openFile(link));
+    }
+    else
+        QWidget::keyPressEvent(event);
+}

@@ -63,7 +63,7 @@ void Division::setGen(AttributeType champ, AttributeValue value)
 {
     _parameters[champ] = value;
     if (champ == champ_sampleID || champ == champ_instrument)
-        notifyRename();
+        notifyUpdate();
 }
 
 void Division::resetGen(AttributeType champ)
@@ -136,4 +136,10 @@ int Division::indexOfId(int id)
 {
     Q_UNUSED(id)
     return -1;
+}
+
+void Division::setMute(bool mute)
+{
+    _mute = mute;
+    notifyUpdate();
 }

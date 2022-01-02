@@ -141,8 +141,7 @@ void SoundfontCell::mouseDoubleClickEvent(QMouseEvent *event)
     {
         RepositoryManager::getInstance()->openSoundfont(_soundfontId, true);
         event->accept();
-        return;
     }
-
-    QWidget::mouseDoubleClickEvent(event);
+    else
+        QWidget::mouseDoubleClickEvent(event);
 }

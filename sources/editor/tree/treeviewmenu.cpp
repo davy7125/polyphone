@@ -39,10 +39,7 @@ TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
     _dialogList(new DialogList(parent))
 {   
     // Style
-    this->setStyleSheet(QString("QMenu::separator {background: ") +
-                        ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
-                                          ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.5).name() +
-                        ";margin: 10px 45px; height: 1px}");
+    this->setStyleSheet(ContextManager::theme()->getMenuTheme());
 
     // Associate
     _associateAction = new QAction(tr("&Bind to..."), this);
@@ -355,15 +352,34 @@ void TreeViewMenu::rename()
     else
     {
         QString msg;
-        if (type == elementSmpl)
+        if (type == elementSmpl || type == elementInstSmpl)
             msg = tr("Sample name");
-        else if (type == elementInst)
+        else if (type == elementInst || type == elementPrstInst)
             msg = tr("Instrument name");
         else if (type == elementPrst)
             msg = tr("Preset name");
 
+        // Default name
+        QString defaultName = "";
+        if (type == elementSmpl || type == elementInst || type == elementPrst)
+            defaultName = SoundfontManager::getInstance()->getQstr(_currentIds[0], champ_name);
+        else if (type == elementInstSmpl)
+        {
+            EltID idSmpl = _currentIds[0];
+            idSmpl.indexElt = SoundfontManager::getInstance()->get(idSmpl, champ_sampleID).wValue;
+            idSmpl.typeElement = elementSmpl;
+            defaultName = SoundfontManager::getInstance()->getQstr(idSmpl, champ_name);
+        }
+        else if (type == elementPrstInst)
+        {
+            EltID idInst = _currentIds[0];
+            idInst.indexElt = SoundfontManager::getInstance()->get(idInst, champ_instrument).wValue;
+            idInst.typeElement = elementInst;
+            defaultName = SoundfontManager::getInstance()->getQstr(idInst, champ_name);
+        }
+
         DialogQuestion * dial = new DialogQuestion(dynamic_cast<QWidget*>(this->parent()));
-        dial->initialize(tr("Rename"), msg + "...", SoundfontManager::getInstance()->getQstr(_currentIds[0], champ_name));
+        dial->initialize(tr("Rename"), msg + "...", defaultName);
         dial->setTextLimit(20);
         connect(dial, SIGNAL(onOk(QString)), this, SLOT(onRename(QString)));
         dial->show();

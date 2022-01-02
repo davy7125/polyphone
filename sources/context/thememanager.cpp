@@ -346,6 +346,9 @@ QPalette ThemeManager::getPalette()
     colorShadow.setHsv(colorTmp.hue(), (int)(0.75 * colorTmp.saturation()), qMin(255, (int)(0.2 * colorTmp.value())));
     palette.setColor(QPalette::Shadow, colorShadow);
 
+    QColor colorPlaceHolder = mix(getColor(BUTTON_BACKGROUND), getColor(BUTTON_TEXT), 0.3);
+    palette.setColor(QPalette::PlaceholderText, colorPlaceHolder);
+
     // Disabled colors
     palette.setColor(QPalette::Disabled, QPalette::ButtonText,
                      disabled1(palette.color(QPalette::ButtonText), palette.color(QPalette::Button)));
@@ -604,4 +607,17 @@ ThemeManager::ColorType ThemeManager::getAssociatedColorType(ColorType type)
         return HIGHLIGHTED_BACKGROUND;
     }
     return WINDOW_TEXT;
+}
+
+QString ThemeManager::getMenuTheme()
+{
+    QString middleColor = this->mix(this->getColor(ThemeManager::LIST_TEXT),
+                                    this->getColor(ThemeManager::LIST_BACKGROUND), 0.5).name();
+    return QString("QMenu {background-color: ") + this->getColor(ThemeManager::LIST_BACKGROUND).name() +
+            "; border: 1px solid " + middleColor + "}" +
+            "QMenu::item {padding: 5px 15px } QMenu::icon {padding-left: 20px;} " +
+            "QMenu::item:selected { background: " + this->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "; color: " +
+            this->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "; }" +
+            QString("QMenu::separator {background: ") + middleColor +
+            ";margin: 10px 45px; height: 1px}";
 }

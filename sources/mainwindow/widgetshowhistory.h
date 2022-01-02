@@ -54,6 +54,7 @@ protected:
     void resizeEvent(QResizeEvent * event) override;
     void dragEnterEvent(QDragEnterEvent * event) override;
     void dropEvent(QDropEvent *event) override;
+    void keyPressEvent(QKeyEvent * event) override;
 
 private slots:
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);

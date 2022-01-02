@@ -46,6 +46,13 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
     connect(this->horizontalHeader(), SIGNAL(sectionDoubleClicked(int)), this, SLOT(onSectionDoubleClicked(int)));
     connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(onItemSelectionChanged()));
+
+    // Style
+    this->setStyleSheet("QTableWidget QTableCornerButton::section {background: " + this->palette().button().color().name() +
+                        "; border: 1px solid " + this->palette().dark().color().name() + "; border-top: 0; border-left: 0;}QTableWidget{border:1px solid " +
+                        this->palette().dark().color().name() +
+                        ";border-top:0;border-left:0;border-right:0" +
+                        ";gridline-color: " + this->palette().dark().color().name() + "}");
 }
 
 void TableWidget::clear()
@@ -55,6 +62,7 @@ void TableWidget::clear()
             delete this->item(j, i);
     this->setColumnCount(0);
     _columnIds.clear();
+    _listColors.clear();
 }
 
 void TableWidget::addColumn(int column, QString title, EltID id)
@@ -66,7 +74,7 @@ void TableWidget::addColumn(int column, QString title, EltID id)
     this->setHorizontalHeaderItem(column, new QTableWidgetItem(title));
 
     // Add a colored element
-    QColor color = this->palette().color(QPalette::Text);
+    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     _listColors.insert(column, color);
     this->horizontalHeaderItem(column)->setForeground(color);
 
@@ -128,19 +136,6 @@ void TableWidget::updateColors()
     }
     if (toutPareil)
         _timer->stop();
-}
-
-void TableWidget::setColumnCount(int columns)
-{
-    QTableWidget::setColumnCount(columns);
-    _columnIds.clear();
-    for (int i = 0; i < columns; i++)
-        _columnIds.append(EltID());
-    _listColors.clear();
-    QPalette p = this->palette();
-    QColor color = p.color(QPalette::Text);
-    for (int i = 0; i < columns; i++)
-        _listColors << color;
 }
 
 void TableWidget::removeColumn(int column)

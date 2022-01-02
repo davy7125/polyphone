@@ -105,6 +105,11 @@ void ConfigSectionInterface::initialize()
     ui->comboKeyName->setCurrentIndex((int)ContextManager::keyName()->getNameMiddleC());
     ui->comboKeyName->blockSignals(false);
 
+    ui->comboStyle->blockSignals(true);
+    QString currentStyle = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "style", "Fusion").toString();
+    ui->comboStyle->setCurrentText(ui->comboStyle->findText(currentStyle) >= 0 ? currentStyle : "Fusion");
+    ui->comboStyle->blockSignals(false);
+
     ui->checkUniqueInstance->blockSignals(true);
     ui->checkUniqueInstance->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "unique_instance", true).toBool());
     ui->checkUniqueInstance->blockSignals(false);
@@ -295,3 +300,9 @@ void ConfigSectionInterface::on_checkUniqueInstance_clicked()
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "unique_instance", ui->checkUniqueInstance->isChecked());
 }
 
+
+void ConfigSectionInterface::on_comboStyle_currentIndexChanged(const QString &arg1)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "style", arg1);
+    ui->labelRestart->show();
+}

@@ -26,18 +26,31 @@
 #define TABLEPAGEOVERVIEW_H
 
 #include <QTableWidget>
+#include <QHeaderView>
 
 class TablePageOverview : public QTableWidget
 {
     Q_OBJECT
 public:
     explicit TablePageOverview(QWidget *parent = nullptr);
+};
 
-    // Colors every other row in yellow
-    void colorRows();
+class OverviewTableHeaderView : public QHeaderView
+{
+    Q_OBJECT
+public:
+    explicit OverviewTableHeaderView(QWidget *parent = nullptr);
 
-private slots:
-    void onSort(int column);
+protected:
+    QSize sizeHint() const override;
+    void paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const override;
+
+private:
+    int _height;
+    QPixmap _arrowDown, _arrowUp;
+    QColor _textColor;
+
+    static const int MARGIN;
 };
 
 #endif // TABLEPAGEOVERVIEW_H

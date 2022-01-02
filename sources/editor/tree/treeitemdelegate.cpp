@@ -234,14 +234,17 @@ void TreeItemDelegate::drawElement(QPainter *painter, const QStyleOptionViewItem
     // Text
     QRect rectText = rect;
     rectText.adjust(MARGIN + 20, 0, -MARGIN - rightAreaWidth, 0);
-    QString text = index.data().toString();
+    bool isMute = index.data(Qt::UserRole + 3).toBool();
+    QString text = index.data().toString() + (isMute ? " (" + tr("mute") + ")" : "") ;
     QFontMetrics metrics(option.font);
     text = metrics.elidedText(text, Qt::ElideMiddle, rectText.width() - 1);
 
     // Draw
     rectText.adjust(0, (rectText.height() - metrics.height()) / 2, 0, 0);
     painter->setPen(highlighted ? s_colors->_highlightColorText : s_colors->_textColor);
-    painter->setFont(option.font);
+    QFont font = option.font;
+    font.setItalic(isMute);
+    painter->setFont(font);
     painter->drawText(rectText, text);
 }
 

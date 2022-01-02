@@ -41,18 +41,20 @@ signals:
     void rightClick(QPoint pos);
 
 protected:
-    void mousePressEvent(QMouseEvent * e);
-    void paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const;
-    QSize sizeHint() const;
+    void mousePressEvent(QMouseEvent * e) override;
+    void paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const override;
+    QSize sizeHint() const override;
 
 private slots:
-    void mute(bool isMute);
+    void mute(bool unused);
     void activateSolo(bool unused);
     void unmuteAll(bool unused);
-    void soloOnSelection(bool isOn);
+    void soloOnSelection(bool unused);
 
 private:
+    QIcon _menuCheckIcon;
     QPixmap _muteIcon;
+    int _menuWidth;
     QMenu * _menu;
     QAction * _muteAction;
     QAction * _soloAction;

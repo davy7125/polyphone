@@ -48,9 +48,6 @@ PageInst::PageInst(QWidget *parent) :
                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
                                    ";border:0;padding:0px 5px}" +
                                    "QPushButton:hover{color:" + resetHoverColor + "}");
-    ui->tableInst->setStyleSheet("QTableWidget{border:1px solid " +
-                                 this->palette().dark().color().name() +
-                                 ";border-top:0;border-left:0;border-right:0}");
 
     this->contenant = elementInst;
     this->contenantGen = elementInstGen;
@@ -63,19 +60,6 @@ PageInst::PageInst(QWidget *parent) :
     _rangeEditor = ui->rangeEditor;
     _envelopEditor = ui->envelopEditor;
     _modulatorEditor = ui->modulatorEditor;
-
-#ifdef Q_OS_MAC
-    _table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
-    QFont fontTmp = _table->font();
-    fontTmp.setPixelSize(10);
-    _table->setFont(fontTmp);
-#endif
-    ui->tableInst->verticalHeader()->setDefaultSectionSize(QFontMetrics(ui->tableInst->font()).height() + 8);
-
-    QFont font = ui->tableInst->font();
-    font.setPixelSize(11);
-    ui->tableInst->horizontalHeader()->setFont(font);
-    ui->tableInst->verticalHeader()->setFont(font);
 
     connect(this->_table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->_table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));

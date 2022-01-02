@@ -38,6 +38,7 @@ protected:
     void paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const;
 
 private:
+    QColor _textColor;
     static const int MARGIN;
 };
 

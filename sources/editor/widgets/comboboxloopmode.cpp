@@ -24,12 +24,15 @@
 
 #include "comboboxloopmode.h"
 #include "contextmanager.h"
+#include <QKeyEvent>
 
 ComboBoxLoopMode::ComboBoxLoopMode(QWidget *parent) : QComboBox(parent),
     _ignoreFirstHide(true),
     _currentIndex(0)
 {
     this->setView(new ComboView());
+    this->setFocusPolicy(Qt::StrongFocus);
+    this->setFocus();
 
     // Different loop possibilities
     this->addItem("", -1);
@@ -58,24 +61,36 @@ void ComboBoxLoopMode::showEvent(QShowEvent * event)
 
 void ComboBoxLoopMode::hidePopup()
 {
+    _currentIndex = this->currentIndex();
     if (_ignoreFirstHide)
         _ignoreFirstHide = false;
     else
     {
-        this->blockSignals(true);
-        // Remove all elements
-        this->clear();
-
-        // End the editor
-        this->setDisabled(true);
+        if (this->hasFocus())
+        {
+            QComboBox::hidePopup();
+            this->setDisabled(true);
+        }
     }
 }
 
 void ComboBoxLoopMode::onActivated(int index)
 {
-    // Save the index
-    _currentIndex = index;
+    Q_UNUSED(index)
+
+    // Close the popup
+    _ignoreFirstHide = false;
+    hidePopup();
 
     // End the editor
     this->setDisabled(true);
+}
+
+QStyleOptionViewItem ComboView::viewOptions() const
+{
+    // Set icon on the top and center of combo box item.
+    QStyleOptionViewItem option = QListView::viewOptions();
+    option.decorationAlignment = Qt::AlignHCenter | Qt::AlignVCenter;
+    option.decorationSize = QSize(37, 14);
+    return option;
 }

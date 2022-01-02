@@ -24,6 +24,7 @@
 
 #include "tableheaderviewv.h"
 #include <QPainter>
+#include "contextmanager.h"
 
 const int TableHeaderViewV::MARGIN = 2;
 
@@ -32,6 +33,17 @@ TableHeaderViewV::TableHeaderViewV(QWidget *parent) : QHeaderView(Qt::Vertical, 
     this->setSectionResizeMode(QHeaderView::Fixed);
     this->setSectionsClickable(true);
     this->setHighlightSections(true);
+
+    // Style
+    this->setStyleSheet("QHeaderView::section{border:1px solid " + this->palette().dark().color().name() +
+                        ";border-left: 0; border-top: 0}");
+    _textColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+
+    // Font
+    QFont font = this->font();
+    font.setPointSize(10);
+    this->setFont(font);
+    this->setDefaultSectionSize(QFontMetrics(this->font()).height() + 8);
 }
 
 void TableHeaderViewV::paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const
@@ -62,9 +74,7 @@ void TableHeaderViewV::paintSection(QPainter *painter, const QRect &rect, int lo
     this->model()->blockSignals(false);
 
     // Then draw the text
-    QVariant foregroundBrush = model()->headerData(logicalIndex, this->orientation(), Qt::ForegroundRole);
-    if (foregroundBrush.canConvert<QBrush>())
-        painter->setPen(foregroundBrush.value<QBrush>().color());
+    painter->setPen(_textColor);
     painter->setClipRect(rect);
     painter->drawText(textRect, Qt::AlignLeft | Qt::AlignVCenter, adaptedText);
 

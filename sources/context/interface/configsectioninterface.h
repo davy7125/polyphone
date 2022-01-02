@@ -58,6 +58,8 @@ private slots:
     void on_checkDecorations_clicked();
     void on_checkUniqueInstance_clicked();
 
+    void on_comboStyle_currentIndexChanged(const QString &arg1);
+
 private:
     void initComboLanguage();
     void fillColors();

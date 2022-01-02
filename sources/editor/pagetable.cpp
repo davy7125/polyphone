@@ -65,6 +65,9 @@ void PageTable::afficheTable(bool justSelection)
             formatTable(_currentParentIds.count() > 1);
         }
     }
+    else
+        // Update the horizontal header if the solo on selection is enabled
+        _table->horizontalHeader()->viewport()->update();
 
     // Mods
     _modulatorEditor->setIds(_currentIds);

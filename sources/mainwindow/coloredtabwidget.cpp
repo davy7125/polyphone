@@ -94,9 +94,9 @@ void ColoredTabWidget::changeStyleSheet(QColor backgroundColor, QColor textColor
 
     // Max width of the first tab
     if (this->count() == 1)
-        styleSheet += "QTabBar::tab{max-width:33px;}";
+        styleSheet += "QTabBar::tab{max-width:41px;}";
     else
-        styleSheet += "QTabBar::tab:first{max-width:33px;}";
+        styleSheet += "QTabBar::tab:first{max-width:41px;}";
 
     this->setStyleSheet(styleSheet);
 }

@@ -28,41 +28,57 @@
 #include <QMenu>
 #include "soundfontmanager.h"
 #include "solomanager.h"
+#include <QLabel>
 #include <QPainter>
+#include <QWidgetAction>
 
 const int TableHeaderView::MARGIN = 2;
 
 TableHeaderView::TableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, parent),
+    _menuWidth(0),
     _solo(SoundfontManager::getInstance()->solo())
 {
     this->setSectionsClickable(true);
     this->setHighlightSections(true);
-    this->setDefaultSectionSize(70);
+    this->setDefaultSectionSize(80);
 
-    // Mute icon
+    // Icons
     _muteIcon = ContextManager::theme()->getColoredSvg(":/icons/volume-mute.svg", QSize(12, 12), ThemeManager::HIGHLIGHTED_BACKGROUND);
+    _menuCheckIcon.addPixmap(ContextManager::theme()->getColoredSvg(":/icons/check.svg", QSize(24, 24), ThemeManager::LIST_TEXT), QIcon::Normal);
+    _menuCheckIcon.addPixmap(ContextManager::theme()->getColoredSvg(":/icons/check.svg", QSize(24, 24), ThemeManager::HIGHLIGHTED_TEXT), QIcon::Active);
 
-    // Menu
+    // Menu with actions
     _menu = new QMenu(this);
-    _muteAction = _menu->addAction(tr("mute"));
-    _muteAction->setCheckable(true);
-    connect(_muteAction, SIGNAL(toggled(bool)), this, SLOT(mute(bool)));
+    _menu->setStyleSheet(ContextManager::theme()->getMenuTheme());
+    QFontMetrics fm(_menu->font());
 
-    _menu->addSeparator();
+    _muteAction = _menu->addAction(tr("mute"));
+    connect(_muteAction, SIGNAL(triggered(bool)), this, SLOT(mute(bool)));
+    _menuWidth = qMax(_menuWidth, fm.horizontalAdvance(_muteAction->text()));
+
     _soloAction = _menu->addAction(tr("solo"));
     connect(_soloAction, SIGNAL(triggered(bool)), this, SLOT(activateSolo(bool)));
+    _menuWidth = qMax(_menuWidth, fm.horizontalAdvance(_soloAction->text()));
 
     _clearAction = _menu->addAction(tr("unmute all"));
     connect(_clearAction, SIGNAL(triggered(bool)), this, SLOT(unmuteAll(bool)));
+    _menuWidth = qMax(_menuWidth, fm.horizontalAdvance(_clearAction->text()));
 
     _menu->addSeparator();
     _soloSelectionAction = _menu->addAction(tr("solo on selection"));
-    _soloSelectionAction->setCheckable(true);
     connect(_soloSelectionAction, SIGNAL(triggered(bool)), this, SLOT(soloOnSelection(bool)));
+    _menuWidth = qMax(_menuWidth, fm.horizontalAdvance(_soloSelectionAction->text()));
 
     // Height of the header
-    QFontMetrics fm(this->font());
-    _height = fm.height() * 2;
+    QFont font = this->font();
+    font.setPointSize(10);
+    this->setFont(font);
+    QFontMetrics fm2(this->font());
+    _height = fm2.height() * 2 + 8;
+
+    // Style
+    this->setStyleSheet("QHeaderView::section{border:1px solid " + this->palette().dark().color().name() +
+                        ";border-top: 0; border-left: 0}");
 }
 
 TableHeaderView::~TableHeaderView()
@@ -83,20 +99,24 @@ void TableHeaderView::mousePressEvent(QMouseEvent * e)
         {
             _muteAction->blockSignals(true);
             _soloSelectionAction->blockSignals(true);
-            _muteAction->setChecked(_solo->isMute(_currentId));
             if (_solo->isSoloOnSelectionEnabled(_currentId.indexSf2))
             {
                 _muteAction->setEnabled(false);
                 _soloAction->setEnabled(false);
                 _clearAction->setEnabled(false);
-                _soloSelectionAction->setChecked(true);
+                _soloSelectionAction->setIcon(_menuCheckIcon);
+                _muteAction->setIcon(QIcon());
+                _menu->setMinimumWidth(_menuWidth + 32 + 20);
             }
             else
             {
                 _muteAction->setEnabled(true);
                 _soloAction->setEnabled(true);
                 _clearAction->setEnabled(true);
-                _soloSelectionAction->setChecked(false);
+                _soloSelectionAction->setIcon(QIcon());
+                bool isMute = _solo->isMute(_currentId);
+                _muteAction->setIcon(isMute ? _menuCheckIcon : QIcon());
+                _menu->setMinimumWidth(_menuWidth + 32 + (isMute ? 20 : 0));
             }
             _soloSelectionAction->blockSignals(false);
             _muteAction->blockSignals(false);
@@ -107,26 +127,32 @@ void TableHeaderView::mousePressEvent(QMouseEvent * e)
         QHeaderView::mousePressEvent(e);
 }
 
-void TableHeaderView::mute(bool isMute)
+void TableHeaderView::mute(bool unused)
 {
-    _solo->setMute(_currentId, isMute);
+    Q_UNUSED(unused)
+    _solo->setMute(_currentId, !_solo->isMute(_currentId));
+    this->viewport()->update();
 }
 
 void TableHeaderView::activateSolo(bool unused)
 {
     Q_UNUSED(unused)
     _solo->activateSolo(_currentId);
+    this->viewport()->update();
 }
 
 void TableHeaderView::unmuteAll(bool unused)
 {
     Q_UNUSED(unused)
     _solo->unmuteAll(_currentId.indexSf2);
+    this->viewport()->update();
 }
 
-void TableHeaderView::soloOnSelection(bool isOn)
+void TableHeaderView::soloOnSelection(bool unused)
 {
-    _solo->setSoloOnSelection(isOn, _currentId.indexSf2);
+    Q_UNUSED(unused)
+    _solo->setSoloOnSelection(!_solo->isSoloOnSelectionEnabled(_currentId.indexSf2), _currentId.indexSf2);
+    this->viewport()->update();
 }
 
 QSize TableHeaderView::sizeHint() const

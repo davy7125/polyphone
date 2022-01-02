@@ -102,9 +102,6 @@ bool PageOverview::updateInterface(QString editingSource, IdList selectedIds, in
     // Vertical header
     ui->table->sortByColumn(1, Qt::AscendingOrder);
 
-    // Colors
-    ui->table->colorRows();
-
     return true;
 }
 

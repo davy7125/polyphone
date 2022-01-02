@@ -119,14 +119,14 @@ void InstPrst::setName(QString name)
 {
     _name = name;
     _nameSort = Utils::removeAccents(_name).toLower();
-    notifyRename();
+    notifyUpdate();
 }
 
 void InstPrst::setExtraField(AttributeType champ, int value)
 {
     _extraFields[champ] = value;
     if (champ == champ_wPreset || champ == champ_wBank)
-        notifyRename();
+        notifyUpdate();
 }
 
 int InstPrst::getExtraField(AttributeType champ)

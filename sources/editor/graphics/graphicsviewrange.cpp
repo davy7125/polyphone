@@ -600,7 +600,7 @@ void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
             {
                 // Update the modification legend
                 _legendItem2->setNewValues(highlightedRectangle->currentMinKey(), highlightedRectangle->currentMaxKey(),
-                        highlightedRectangle->currentMinVel(), highlightedRectangle->currentMaxVel());
+                                           highlightedRectangle->currentMinVel(), highlightedRectangle->currentMaxVel());
             }
         }
         else
@@ -626,7 +626,7 @@ void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
 
         // Update legend content
         updateHover(event->pos());
-    }
+    } break;
     }
 
     viewport()->update();

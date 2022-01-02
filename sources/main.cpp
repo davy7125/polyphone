@@ -60,7 +60,11 @@ int launchApplication(QtSingleApplication * app, Options &options)
     ContextManager::translation()->translate();
 
     // Application style
-    QApplication::setStyle(QStyleFactory::create("Fusion"));
+    QSettings settings;
+    QString styleName = settings.value("display/style", "Fusion").toString();
+    if (!QStyleFactory::keys().contains(styleName))
+        styleName = "Fusion";
+    QApplication::setStyle(QStyleFactory::create(styleName));
     try {
         app->setPalette(ContextManager::theme()->getPalette());
     } catch (...) { /* bug with mac */ }

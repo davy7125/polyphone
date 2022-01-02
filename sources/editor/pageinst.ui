@@ -88,15 +88,9 @@
          <property name="horizontalScrollMode">
           <enum>QAbstractItemView::ScrollPerPixel</enum>
          </property>
-         <attribute name="horizontalHeaderMinimumSectionSize">
-          <number>18</number>
-         </attribute>
-         <attribute name="verticalHeaderDefaultSectionSize">
-          <number>20</number>
-         </attribute>
-         <attribute name="verticalHeaderMinimumSectionSize">
-          <number>19</number>
-         </attribute>
+         <property name="cornerButtonEnabled">
+          <bool>false</bool>
+         </property>
         </widget>
        </item>
        <item>

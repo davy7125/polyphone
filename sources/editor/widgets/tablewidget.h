@@ -43,7 +43,6 @@ public:
     void addColumn(int column, QString title, EltID id);
     EltID getID(int column);
     void setEnlighted(int colonne, bool isEnlighted);
-    void setColumnCount(int columns);
     void removeColumn(int column);
     void resetModDisplay();
     void updateModDisplay(int column, QList<int> rows);

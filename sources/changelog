@@ -5,6 +5,8 @@ polyphone (2.3) unstable; urgency=low
   * (new) parameter inconsistencies displayed in the sample summary
   * (new) option to allow multiple instances of Polyphone
   * (new) option to change the tuning fork from 390 to 470 Hz
+  * (improvement) search filter in the list when selecting "replace by" or "linked to"
+  * (improvement) renaming samples linked to an instrument or instruments linked to a preset is now possible
   * (improvement) creating a new instrument automatically set the loop mode and the key ranges
   * (improvement) a table cell can be cleared more easily when editing the cell
   * (improvement) UTF-8 text can be written in the comment field

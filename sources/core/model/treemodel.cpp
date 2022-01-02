@@ -25,6 +25,7 @@
 #include "treemodel.h"
 #include "treeitem.h"
 #include "soundfontmanager.h"
+#include "division.h"
 
 TreeModel::TreeModel(TreeItem * rootItem) : QAbstractItemModel(),
     _rootItem(rootItem)
@@ -82,6 +83,12 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
         TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
         if (item != nullptr)
             return item->sortText();
+    }
+    else if (role == Qt::UserRole + 3)
+    {
+        TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
+        if (item != nullptr)
+            return item->isMute();
     }
 
     return QVariant();

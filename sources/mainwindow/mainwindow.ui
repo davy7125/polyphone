@@ -305,6 +305,17 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>pushButtonNew</tabstop>
+  <tabstop>pushButtonOpen</tabstop>
+  <tabstop>pushButtonDocumentation</tabstop>
+  <tabstop>pushButtonForum</tabstop>
+  <tabstop>pushButtonSettings</tabstop>
+  <tabstop>pushButtonSoundfonts</tabstop>
+  <tabstop>lineSearch</tabstop>
+  <tabstop>pushButtonSearch</tabstop>
+  <tabstop>tabWidget</tabstop>
+ </tabstops>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

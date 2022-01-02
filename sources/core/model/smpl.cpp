@@ -57,7 +57,7 @@ void Smpl::setName(QString name)
 {
     _name = name;
     _nameSort = Utils::removeAccents(_name).toLower();
-    notifyRename();
+    notifyUpdate();
 }
 
 int Smpl::indexOfId(int id)

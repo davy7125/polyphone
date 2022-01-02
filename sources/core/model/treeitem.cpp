@@ -43,7 +43,7 @@ void TreeItem::notifyCreated()
         _model->endOfAddition();
 }
 
-void TreeItem::notifyRename()
+void TreeItem::notifyUpdate()
 {
     if (_model)
         _model->elementUpdated(_id);

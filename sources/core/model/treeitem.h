@@ -56,10 +56,11 @@ public:
     EltID getId() { return _id; }
     void setHidden(bool isHidden);
     bool isHidden() { return _isHidden; }
+    virtual bool isMute() { return false; }
 
     // Trigger signals for updating the view
     void notifyCreated();
-    void notifyRename();
+    void notifyUpdate();
     void notifyDeletion(bool storeExpandedState = true);
 
 protected:

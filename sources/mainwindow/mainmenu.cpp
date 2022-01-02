@@ -30,10 +30,7 @@ MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
     _toolExport(new ToolSoundfontExport())
 {
     // Style
-    this->setStyleSheet(QString("QMenu::separator {background: ") +
-                        ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
-                                          ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.5).name() +
-                        ";margin: 10px 45px; height: 1px}");
+    this->setStyleSheet(ContextManager::theme()->getMenuTheme());
 
     // Elements
     _newAction = new QAction(tr("&New"), this);
@@ -67,7 +64,6 @@ MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
 
     _fullScreenAction = new QAction(tr("&Full screen"), this);
     _fullScreenAction->setShortcut(Qt::Key_F11);
-    _fullScreenAction->setCheckable(true);
     connect(_fullScreenAction, SIGNAL(triggered()), this, SIGNAL(fullScreenTriggered()));
     this->addAction(_fullScreenAction);
 

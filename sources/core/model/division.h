@@ -46,8 +46,8 @@ public:
     AttributeValue getGen(AttributeType champ);
     const QMap<AttributeType, AttributeValue> & getGens() { return _parameters; }
 
-    void setMute(bool mute) { _mute = mute; }
-    bool isMute() { return _mute; }
+    void setMute(bool mute);
+    bool isMute() override { return _mute; }
 
     // Operations on modulators
     int addMod();
