@@ -49,7 +49,7 @@ protected:
 
 private slots:
     void onToggled(bool isChecked);
-    void onClicked(bool isClicked);
+    void onClicked(bool unused);
 
 private:
     bool _isDisabled;
