@@ -32,7 +32,7 @@ StyledAction::StyledAction(QString label, QString iconName, QWidget *parent) : Q
     _data(-1)
 {
     connect(this, SIGNAL(toggled(bool)), this, SLOT(onToggled(bool)));
-    connect(this, SIGNAL(clicked(bool)), this, SLOT(onClicked(bool)));
+    connect(this, SIGNAL(actionClicked(bool)), this, SLOT(onClicked(bool)));
 
     // Style
     this->setStyleSheet("StyledAction{border:0}");
@@ -93,7 +93,7 @@ void StyledAction::onToggled(bool isChecked)
         this->setStyleSheet("StyledAction{border:0;border-radius:2px;background-color:" + _checkedBackgroundColor.name() + "}");
     else
         this->setStyleSheet("StyledAction{border:0}");
-    emit(clicked());
+    emit(actionClicked());
 }
 
 void StyledAction::onClicked(bool isClicked)
@@ -102,7 +102,7 @@ void StyledAction::onClicked(bool isClicked)
 
     if (_isDisabled || this->isCheckable())
         return;
-    emit(clicked());
+    emit(actionClicked());
 }
 
 void StyledAction::setData(int data)

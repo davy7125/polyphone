@@ -38,7 +38,7 @@ public:
     int getData();
 
 signals:
-    void clicked();
+    void actionClicked();
 
 protected:
     void leaveEvent(QEvent * event) override;
