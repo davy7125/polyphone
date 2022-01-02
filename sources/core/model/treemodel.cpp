@@ -271,8 +271,8 @@ QModelIndex TreeModel::getParentIndexWithPosition(EltID id, int &position)
     }
 
     // If -1, the element is going to be added at the end
-    if (position == -1 && item != nullptr)
-        position = item->childCount();
+    if (position == -1)
+        position = (item == nullptr ? 0 : item->childCount());
 
     return index;
 }
