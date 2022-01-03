@@ -312,10 +312,15 @@ QPalette ThemeManager::getPalette()
     // Window
     palette.setColor(QPalette::Window, getColor(WINDOW_BACKGROUND));
     palette.setColor(QPalette::WindowText, getColor(WINDOW_TEXT));
+    palette.setColor(QPalette::BrightText, isDark(WINDOW_BACKGROUND, WINDOW_TEXT) ?
+                getColor(WINDOW_TEXT).lighter() :
+                getColor(WINDOW_TEXT).darker());
 
-    // Button
+    // Button / Tooltip
     palette.setColor(QPalette::Button, getColor(BUTTON_BACKGROUND));
     palette.setColor(QPalette::ButtonText, getColor(BUTTON_TEXT));
+    palette.setColor(QPalette::ToolTipBase, getColor(BUTTON_BACKGROUND));
+    palette.setColor(QPalette::ToolTipText, getColor(BUTTON_TEXT));
 
     // List
     palette.setColor(QPalette::Base, getColor(LIST_BACKGROUND));

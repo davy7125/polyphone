@@ -287,7 +287,7 @@ void MainWindow::openFiles(const QString& fileNames)
     // Open all files
     QStringList files = fileNames.split('|', Qt::SkipEmptyParts);
     foreach (QString file, files)
-       _windowManager->openSoundfont(file);
+        _windowManager->openSoundfont(file);
 }
 
 void MainWindow::onKeyboardDisplayChange(bool isDisplayed)

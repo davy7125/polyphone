@@ -25,7 +25,6 @@
 #include "tooldivisionduplication_gui.h"
 #include "ui_tooldivisionduplication_gui.h"
 #include "tooldivisionduplication_parameters.h"
-#include "soundfontmanager.h"
 
 ToolDivisionDuplication_gui::ToolDivisionDuplication_gui(QWidget *parent) :
     AbstractToolGui(parent),
@@ -137,7 +136,7 @@ void ToolDivisionDuplication_gui::on_listVelocites_currentRowChanged(int current
 
 void ToolDivisionDuplication_gui::on_spinMinVel_valueChanged(int arg1)
 {
-    Q_UNUSED(arg1);
+    Q_UNUSED(arg1)
     int index = ui->listVelocites->currentRow();
     if (index >= 0)
     {
@@ -151,7 +150,7 @@ void ToolDivisionDuplication_gui::on_spinMinVel_valueChanged(int arg1)
 
 void ToolDivisionDuplication_gui::on_spinMaxVel_valueChanged(int arg1)
 {
-    Q_UNUSED(arg1);
+    Q_UNUSED(arg1)
     this->on_spinMinVel_valueChanged(0);
 }
 

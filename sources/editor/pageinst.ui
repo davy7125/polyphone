@@ -59,11 +59,6 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>

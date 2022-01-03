@@ -64,6 +64,8 @@ int launchApplication(QtSingleApplication * app, Options &options)
     QString styleName = settings.value("display/style", "Fusion").toString();
     if (!QStyleFactory::keys().contains(styleName))
         styleName = "Fusion";
+    //foreach (QString style, QStyleFactory::keys()) // Style list (windowsvista is buggy)
+    //    qWarning() << style;
     QApplication::setStyle(QStyleFactory::create(styleName));
     try {
         app->setPalette(ContextManager::theme()->getPalette());

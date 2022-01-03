@@ -105,13 +105,24 @@ ModulatorCell::ModulatorCell(ModulatorData modulatorData, QWidget * parent) :
     ui->comboTransform->setCurrentIndex(modulatorData.transOper == 2 ? 1 : 0);
     ui->comboDestination->initialize(modulatorData.destOper);
 
-    // Disable elements
+    // Disable elements, keeping the same colors
+    QString disabledStyleSheet = ":disabled{background-color:" + ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND).name() +
+        ";color:" + ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name() + ";}";
+    QString disabledStyleSheet2 = ":disabled{background-color:" + ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() +
+        ";color:" + ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name() + ";}";
+    ui->comboSource1->setStyleSheet(disabledStyleSheet);
     ui->comboSource1->setEnabled(false);
+    ui->widgetShape1->setStyleSheet(disabledStyleSheet);
     ui->widgetShape1->setEnabled(false);
+    ui->comboSource2->setStyleSheet(disabledStyleSheet);
     ui->comboSource2->setEnabled(false);
+    ui->widgetShape2->setStyleSheet(disabledStyleSheet);
     ui->widgetShape2->setEnabled(false);
+    ui->spinAmount->setStyleSheet(disabledStyleSheet2);
     ui->spinAmount->setEnabled(false);
+    ui->comboTransform->setStyleSheet(disabledStyleSheet);
     ui->comboTransform->setEnabled(false);
+    ui->comboDestination->setStyleSheet(disabledStyleSheet);
     ui->comboDestination->setEnabled(false);
 
     // Compute the range

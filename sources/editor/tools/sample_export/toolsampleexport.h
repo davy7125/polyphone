@@ -65,7 +65,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return tr("Wav export");
+        return tr("Wav export") + "...";
     }
 
 private:
