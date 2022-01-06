@@ -36,12 +36,12 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     labelCoord(nullptr),
     previousX(-1)
 {
-    this->setBackground(this->palette().color(QPalette::Base));
+    this->setBackground(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
 
     // Layer pour la position des octaves
     this->addGraph();
     QPen graphPen;
-    QColor color = this->palette().color(QPalette::Text);
+    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     color.setAlpha(40);
     graphPen.setColor(color);
     graphPen.setWidth(1);
@@ -79,7 +79,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     graphPen.setWidth(0);
     this->graph(1)->setPen(graphPen);
     this->graph(1)->setData(x, y, true);
-    color = this->palette().color(QPalette::Text);
+    color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     color.setAlpha(20);
     this->graph(1)->setBrush(QBrush(color));
     this->addGraph();
@@ -88,7 +88,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
 
     // Layer des valeurs
     this->addGraph();
-    graphPen.setColor(this->palette().color(QPalette::Highlight));
+    graphPen.setColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
     graphPen.setWidth(2);
     this->graph(3)->setPen(graphPen);
     this->graph(3)->setLineStyle(QCPGraph::lsNone);
@@ -98,7 +98,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
 
     // Layer aperçu valeurs
     this->addGraph();
-    graphPen.setColor(this->palette().color(QPalette::Text));
+    graphPen.setColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
     graphPen.setWidth(1);
     this->graph(4)->setPen(graphPen);
     this->graph(4)->setScatterStyle(QCPScatterStyle::ssPlus);
@@ -108,7 +108,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     QFont fontLabel = QFont(font().family(), 9);
     fontLabel.setBold(true);
     labelCoord->setFont(fontLabel);
-    labelCoord->setColor(this->palette().color(QPalette::Text));
+    labelCoord->setColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
 
     // Axes
     this->xAxis->setRange(0, this->nbPoints);

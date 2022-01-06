@@ -25,17 +25,21 @@
 #ifndef EDITORTOOLBAR_H
 #define EDITORTOOLBAR_H
 
-#include <QToolBar>
+#include <QWidget>
 #include "page.h"
 class ToolMenu;
 class StyledAction;
 
-class EditorToolBar : public QToolBar
+namespace Ui {
+class EditorToolBar;
+}
+
+class EditorToolBar : public QWidget
 {
     Q_OBJECT
 
 public:
-    EditorToolBar(QWidget *parent = nullptr);
+    explicit EditorToolBar(QWidget *parent = nullptr);
     ~EditorToolBar();
     void setSf2Index(int sf2index);
     void updateActions();
@@ -57,31 +61,23 @@ signals:
     void selectionChanged(IdList id);
 
 private slots:
-    void onNewSmplClicked();
-    void onNewInstClicked();
-    void onNewInstClicked(QString name, bool linkElements);
-    void onNewPrstClicked();
-    void onNewPrstClicked(QString name, bool linkElements);
-    void onSaveClicked();
     void onDisplayActionClicked();
-    void onRecorderActionClicked();
-    void onKeyboardActionClicked();
-    void onUndo();
-    void onRedo();
+
+    void on_pushAddSample_clicked();
+    void on_pushAddInstrument_clicked();
+    void onNewInstClicked(QString name, bool linkElements);
+    void on_pushAddPreset_clicked();
+    void onNewPrstClicked(QString name, bool linkElements);
+    void on_pushUndo_clicked();
+    void on_pushRedo_clicked();
+    void on_pushSave_clicked();
+    void on_pushShowRecorder_clicked();
+    void on_pushShowKeyboard_clicked();
 
 private:
-    StyledAction * _actionAddSample;
-    StyledAction * _actionAddInstrument;
-    StyledAction * _actionAddPreset;
-    StyledAction * _actionToolBox;
-    StyledAction * _actionUndo;
-    StyledAction * _actionRedo;
-    StyledAction * _actionSave;
-    StyledAction * _actionShowRecorder;
-    StyledAction * _actionShowKeyboard;
+    Ui::EditorToolBar *ui;
 
     int _sf2Index;
-    QAction * _displayActionSeparator;
     QList<StyledAction *> _displayActions;
     bool _updatingDisplayOptions;
     ToolMenu * _toolMenu;
@@ -91,5 +87,6 @@ private:
     static bool s_recorderOpen;
     static bool s_keyboardOpen;
 };
+
 
 #endif // EDITORTOOLBAR_H

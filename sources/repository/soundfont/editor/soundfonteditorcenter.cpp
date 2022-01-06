@@ -36,7 +36,7 @@ SoundfontEditorCenter::SoundfontEditorCenter(QWidget *parent) :
     // Colors
     QColor highlighted = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     QColor highlightedText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT);
-    QColor border = this->palette().dark().color();
+    QColor border = ContextManager::theme()->getColor(ThemeManager::BORDER);
     QColor highlightedHover = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND, ThemeManager::HOVERED);
 
     // Style

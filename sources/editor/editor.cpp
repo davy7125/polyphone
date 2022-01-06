@@ -33,8 +33,7 @@
 #include "treesplitter.h"
 #include "solomanager.h"
 
-Editor::Editor(QWidget *parent) :
-    QMainWindow(parent, Qt::Widget),
+Editor::Editor(QWidget *parent) : QWidget(parent),
     ui(new Ui::Editor),
     _sf2Index(-1)
 {
@@ -42,7 +41,7 @@ Editor::Editor(QWidget *parent) :
 
     // QSplitter for being able to resize the tree
     TreeSplitter * splitter = new TreeSplitter(this, ui->leftPart, ui->stackedWidget);
-    QHBoxLayout * layout = dynamic_cast<QHBoxLayout *>(ui->centralwidget->layout());
+    QVBoxLayout * layout = dynamic_cast<QVBoxLayout *>(this->layout());
     layout->addWidget(splitter);
 
     // General style
@@ -50,7 +49,7 @@ Editor::Editor(QWidget *parent) :
     ui->frameSearch->setStyleSheet("QFrame{background-color:" +
                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}");
     ui->treeView->setStyleSheet("TreeView{border:1px solid " +
-                                this->palette().dark().color().name() +
+                                ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                                 ";border-top:0;border-left:0;border-bottom:0}");
     ui->iconWarning->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/warning.svg", QSize(64, 64), ThemeManager::WINDOW_TEXT));
     ui->widgetBottom->setStyleSheet("QWidget{background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() +

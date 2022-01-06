@@ -18,7 +18,7 @@
 */
 
 #include "pianokey.h"
-#include <QApplication>
+#include "contextmanager.h"
 #include <QPainter>
 #include <QPalette>
 #include <QtSvg/QSvgRenderer>
@@ -53,7 +53,7 @@ void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
         if (m_selectedBrush.style() != Qt::NoBrush)
             painter->setBrush(m_selectedBrush);
         else
-            painter->setBrush(QApplication::palette().highlight());
+            painter->setBrush(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
     }
     else
         painter->setBrush(m_brush);

@@ -24,7 +24,6 @@
 
 #include "graphicslegenditem2.h"
 #include <QPainter>
-#include <QApplication>
 #include <QPalette>
 #include "contextmanager.h"
 
@@ -39,7 +38,7 @@ GraphicsLegendItem2::GraphicsLegendItem2(QString fontFamily, QGraphicsItem *pare
     _borderPen = QPen(color, 1, Qt::SolidLine);
     color.setAlpha(200);
     _foregroundBrush = QBrush(color);
-    _textPen         = QPen(QApplication::palette().color(QPalette::HighlightedText), 1, Qt::SolidLine);
+    _textPen = QPen(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT), 1, Qt::SolidLine);
 
     this->setFlag(QGraphicsItem::ItemIgnoresTransformations);
     setLeft(true);

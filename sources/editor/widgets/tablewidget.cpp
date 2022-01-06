@@ -48,11 +48,15 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
     connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(onItemSelectionChanged()));
 
     // Style
-    this->setStyleSheet("QTableWidget QTableCornerButton::section {background: " + this->palette().button().color().name() +
-                        "; border: 1px solid " + this->palette().dark().color().name() + "; border-top: 0; border-left: 0;}QTableWidget{border:1px solid " +
-                        this->palette().dark().color().name() +
+    this->setStyleSheet("QTableWidget QTableCornerButton::section {background: " + ContextManager::theme()->getColor(ThemeManager::BUTTON_BACKGROUND).name() +
+                        "; border: 1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + "; border-top: 0; border-left: 0;}QTableWidget{border:1px solid " +
+                        ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                         ";border-top:0;border-left:0;border-right:0" +
-                        ";gridline-color: " + this->palette().dark().color().name() + "}");
+                        ";gridline-color: " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + "}");
+
+    QFont font = this->font();
+    font.setPointSize(font.pointSize() - 1);
+    this->setFont(font);
 }
 
 void TableWidget::clear()
@@ -101,11 +105,10 @@ void TableWidget::setEnlighted(int colonne, bool isEnlighted)
     if (colonne >= this->columnCount())
         return;
 
-    QPalette p = this->palette();
     if (isEnlighted)
-        _listColors[colonne] = p.color(QPalette::Highlight);
+        _listColors[colonne] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     else
-        _listColors[colonne] = p.color(QPalette::Text);
+        _listColors[colonne] = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
 
     _timer->start(30);
 }
@@ -457,11 +460,11 @@ void TableWidget::onItemSelectionChanged()
         return;
 
     if (this->item(5, 0)->isSelected())
-        this->item(5, 0)->setBackground(this->palette().color(QPalette::Highlight));
-    else if (this->item(5, 0)->background() == this->palette().color(QPalette::Highlight))
+        this->item(5, 0)->setBackground(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
+    else if (this->item(5, 0)->background() == ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND))
     {
-        QColor color = this->palette().color(QPalette::Base);
-        QColor alternateColor = this->palette().color(QPalette::AlternateBase);
+        QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
+        QColor alternateColor = ContextManager::theme()->getColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND);
         QBrush brush(TableWidget::getPixMap(color, alternateColor));
         this->item(5, 0)->setBackground(brush);
     }

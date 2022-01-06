@@ -39,7 +39,7 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     // Configuration du graphe
     this->addGraph();
     QPen graphPen;
-    QColor color = this->palette().color(QPalette::WindowText);
+    QColor color = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT);
     color.setAlpha(150);
     graphPen.setColor(color);
     graphPen.setWidthF(1);
@@ -368,10 +368,10 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
     int tuneCellPadding = 5;
     int tickHalfHeight = 3;
 
-    QColor highlightColor = this->palette().color(QPalette::Highlight);
-    QColor highlightTextColor = this->palette().color(QPalette::HighlightedText);
-    QColor backgroundColor = this->palette().color(QPalette::Window);
-    QColor textColor = this->palette().color(QPalette::WindowText);
+    QColor highlightColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+    QColor highlightTextColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT);
+    QColor backgroundColor = ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND);
+    QColor textColor = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT);
 
     QFont fontInfo = QFont(font().family(), 7);
     QFont fontInfoSmall = QFont(font().family(), 6);
@@ -538,7 +538,7 @@ void GraphiqueFourier::exportPng(QString fileName)
     this->axisRect()->setAutoMargins(QCP::msNone);
     this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
     this->plotLayout()->remove(title);
-    graphPen.setColor(this->palette().color(QPalette::WindowText));
+    graphPen.setColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT));
     graphPen.setWidthF(1);
     this->graph(0)->setPen(graphPen);
 

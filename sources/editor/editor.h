@@ -25,7 +25,7 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
-#include <QMainWindow>
+#include <QWidget>
 #include "basetypes.h"
 class AbstractInputParser;
 
@@ -33,7 +33,7 @@ namespace Ui {
 class Editor;
 }
 
-class Editor : public QMainWindow
+class Editor : public QWidget
 {
     Q_OBJECT
 

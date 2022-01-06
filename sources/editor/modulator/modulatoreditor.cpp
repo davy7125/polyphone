@@ -54,7 +54,7 @@ ModulatorEditor::ModulatorEditor(QWidget *parent) :
 
     // Style
     ui->frameButtons->setStyleSheet("QFrame{border:1px solid " +
-                                    this->palette().dark().color().name() +
+                                    ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                                     ";border-top:0;border-bottom:0;border-left:0}");
     QColor labelColor = ThemeManager::mix(
                 ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),

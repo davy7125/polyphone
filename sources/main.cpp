@@ -56,20 +56,21 @@ void writeLine(QString line)
 
 int launchApplication(QtSingleApplication * app, Options &options)
 {
-    // Application langage
-    ContextManager::translation()->translate();
-
     // Application style
     QSettings settings;
     QString styleName = settings.value("display/style", "Fusion").toString();
+    if (styleName == "Windows Vista")
+        styleName = "windowsvista";
     if (!QStyleFactory::keys().contains(styleName))
         styleName = "Fusion";
-    //foreach (QString style, QStyleFactory::keys()) // Style list (windowsvista is buggy)
-    //    qWarning() << style;
     QApplication::setStyle(QStyleFactory::create(styleName));
+
     try {
         app->setPalette(ContextManager::theme()->getPalette());
     } catch (...) { /* bug with mac */ }
+
+    // Application langage
+    ContextManager::translation()->translate();
 
     // Additional type used in signals
     qRegisterMetaType<EltID>();

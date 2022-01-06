@@ -239,7 +239,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="1" column="0">
-       <widget class="QLabel" name="label_5">
+       <widget class="QLabel" name="labelColors">
         <property name="font">
          <font>
           <weight>50</weight>
@@ -268,9 +268,9 @@
        </widget>
       </item>
       <item row="2" column="0" colspan="2">
-       <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,2,2,2,1,1">
+       <layout class="QGridLayout" name="gridLayoutColors" columnstretch="0,2,2,2,1,1">
         <item row="1" column="0">
-         <widget class="QLabel" name="label_18">
+         <widget class="QLabel" name="labelColorText">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -348,7 +348,7 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLabel" name="label_28">
+         <widget class="QLabel" name="labelColorWindow">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -448,7 +448,7 @@
          </widget>
         </item>
         <item row="0" column="2">
-         <widget class="QLabel" name="label_29">
+         <widget class="QLabel" name="labelColorButton">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -464,7 +464,7 @@
          </widget>
         </item>
         <item row="2" column="0">
-         <widget class="QLabel" name="label_14">
+         <widget class="QLabel" name="labelColorBackground">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -511,7 +511,7 @@
          </widget>
         </item>
         <item row="0" column="3">
-         <widget class="QLabel" name="label_30">
+         <widget class="QLabel" name="labelColorSelection">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -586,7 +586,7 @@
          </widget>
         </item>
         <item row="0" column="4" colspan="2">
-         <widget class="QLabel" name="label_31">
+         <widget class="QLabel" name="labelColorList">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -658,11 +658,6 @@
         <item>
          <property name="text">
           <string notr="true">Fusion</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string notr="true">Windows</string>
          </property>
         </item>
        </widget>

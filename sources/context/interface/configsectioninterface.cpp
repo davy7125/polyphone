@@ -27,6 +27,7 @@
 #include "contextmanager.h"
 #include <QColorDialog>
 #include <QMessageBox>
+#include <QStyleFactory>
 
 ConfigSectionInterface::ConfigSectionInterface(QWidget *parent) :
     QWidget(parent),
@@ -34,12 +35,26 @@ ConfigSectionInterface::ConfigSectionInterface(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // Warning style
     ui->labelRestart->setStyleSheet("QLabel{color:" + ContextManager::theme()->getFixedColor(
                                         ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND).name() + "}");
     ui->labelRestart->hide();
 
     // Permanent initialization
     this->initComboLanguage();
+
+    // Populate the styles
+    ui->comboStyle->blockSignals(true);
+    QStringList possibleStyles = QStyleFactory::keys();
+    if (possibleStyles.contains("Adwaita"))
+        ui->comboStyle->addItem("Adwaita");
+    if (possibleStyles.contains("Adwaita-Dark"))
+        ui->comboStyle->addItem("Adwaita-Dark");
+    if (possibleStyles.contains("Windows"))
+        ui->comboStyle->addItem("Windows");
+    if (possibleStyles.contains("windowsvista"))
+        ui->comboStyle->addItem("Windows Vista");
+    ui->comboStyle->blockSignals(false);
 
     // Populate color themes and select the current one
     ui->comboColorTheme->blockSignals(true);
@@ -109,6 +124,7 @@ void ConfigSectionInterface::initialize()
     QString currentStyle = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "style", "Fusion").toString();
     ui->comboStyle->setCurrentText(ui->comboStyle->findText(currentStyle) >= 0 ? currentStyle : "Fusion");
     ui->comboStyle->blockSignals(false);
+    updateColorThemeState();
 
     ui->checkUniqueInstance->blockSignals(true);
     ui->checkUniqueInstance->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "unique_instance", true).toBool());
@@ -128,23 +144,23 @@ void ConfigSectionInterface::fillColors()
 {
     QString styleStart = "QPushButton{border: 1px solid #888; background-color: ";
     ui->pushColorWindowBackground->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND).name() + ";}");
+                styleStart + ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND, ThemeManager::NORMAL, true).name() + ";}");
     ui->pushColorWindowText->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name() + ";}");
+                styleStart + ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT, ThemeManager::NORMAL, true).name() + ";}");
     ui->pushColorButtonBackground->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::BUTTON_BACKGROUND).name() + ";}");
+                styleStart + ContextManager::theme()->getColor(ThemeManager::BUTTON_BACKGROUND, ThemeManager::NORMAL, true).name() + ";}");
     ui->pushColorButtonText->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::BUTTON_TEXT).name() + ";}");
+                styleStart + ContextManager::theme()->getColor(ThemeManager::BUTTON_TEXT, ThemeManager::NORMAL, true).name() + ";}");
     ui->pushColorSelectionBackground->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";}");
+                styleStart + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND, ThemeManager::NORMAL, true).name() + ";}");
     ui->pushColorSelectionText->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";}");
+                styleStart + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::NORMAL, true).name() + ";}");
     ui->pushColorListBackground->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() + ";}");
+                styleStart + ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND, ThemeManager::NORMAL, true).name() + ";}");
     ui->pushColorListAlternativeBackground->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND).name() + ";}");
+                styleStart + ContextManager::theme()->getColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND, ThemeManager::NORMAL, true).name() + ";}");
     ui->pushColorListText->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name() + ";}");
+                styleStart + ContextManager::theme()->getColor(ThemeManager::LIST_TEXT, ThemeManager::NORMAL, true).name() + ";}");
     ContextManager::theme()->selectIndex(ui->comboColorTheme);
 }
 
@@ -166,7 +182,7 @@ void ConfigSectionInterface::on_comboColorTheme_currentIndexChanged(int index)
 
 void ConfigSectionInterface::on_pushColorWindowBackground_clicked()
 {
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
+    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND, ThemeManager::NORMAL, true),
                                           this, tr("Select a color"));
     if (color.isValid())
     {
@@ -178,7 +194,7 @@ void ConfigSectionInterface::on_pushColorWindowBackground_clicked()
 
 void ConfigSectionInterface::on_pushColorButtonBackground_clicked()
 {
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::BUTTON_BACKGROUND),
+    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::BUTTON_BACKGROUND, ThemeManager::NORMAL, true),
                                           this, tr("Select a color"));
     if (color.isValid())
     {
@@ -190,7 +206,7 @@ void ConfigSectionInterface::on_pushColorButtonBackground_clicked()
 
 void ConfigSectionInterface::on_pushColorSelectionBackground_clicked()
 {
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND, ThemeManager::NORMAL, true),
                                           this, tr("Select a color"));
     if (color.isValid())
     {
@@ -202,7 +218,7 @@ void ConfigSectionInterface::on_pushColorSelectionBackground_clicked()
 
 void ConfigSectionInterface::on_pushColorListBackground_clicked()
 {
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
+    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND, ThemeManager::NORMAL, true),
                                           this, tr("Select a color"));
     if (color.isValid())
     {
@@ -214,7 +230,7 @@ void ConfigSectionInterface::on_pushColorListBackground_clicked()
 
 void ConfigSectionInterface::on_pushColorListAlternativeBackground_clicked()
 {
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND),
+    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND, ThemeManager::NORMAL, true),
                                           this, tr("Select a color"));
     if (color.isValid())
     {
@@ -226,7 +242,7 @@ void ConfigSectionInterface::on_pushColorListAlternativeBackground_clicked()
 
 void ConfigSectionInterface::on_pushColorWindowText_clicked()
 {
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
+    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT, ThemeManager::NORMAL, true),
                                           this, tr("Select a color"));
     if (color.isValid())
     {
@@ -238,7 +254,7 @@ void ConfigSectionInterface::on_pushColorWindowText_clicked()
 
 void ConfigSectionInterface::on_pushColorButtonText_clicked()
 {
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::BUTTON_TEXT),
+    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::BUTTON_TEXT, ThemeManager::NORMAL, true),
                                           this, tr("Select a color"));
     if (color.isValid())
     {
@@ -250,7 +266,7 @@ void ConfigSectionInterface::on_pushColorButtonText_clicked()
 
 void ConfigSectionInterface::on_pushColorSelectionText_clicked()
 {
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
+    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::NORMAL, true),
                                           this, tr("Select a color"));
     if (color.isValid())
     {
@@ -262,7 +278,7 @@ void ConfigSectionInterface::on_pushColorSelectionText_clicked()
 
 void ConfigSectionInterface::on_pushColorListText_clicked()
 {
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
+    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT, ThemeManager::NORMAL, true),
                                           this, tr("Select a color"));
     if (color.isValid())
     {
@@ -305,4 +321,32 @@ void ConfigSectionInterface::on_comboStyle_currentIndexChanged(const QString &ar
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "style", arg1);
     ui->labelRestart->show();
+    updateColorThemeState();
+}
+
+void ConfigSectionInterface::updateColorThemeState()
+{
+    QString selectedStyle = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "style", "Fusion").toString();
+    bool enabled = (selectedStyle == "Fusion" || selectedStyle == "Windows");
+    ui->comboColorTheme->setEnabled(enabled);
+    ui->labelColors->setEnabled(enabled);
+
+    // Color buttons
+    ui->pushColorWindowText->setEnabled(enabled);
+    ui->pushColorWindowBackground->setEnabled(enabled);
+    ui->pushColorButtonText->setEnabled(enabled);
+    ui->pushColorButtonBackground->setEnabled(enabled);
+    ui->pushColorSelectionText->setEnabled(enabled);
+    ui->pushColorSelectionBackground->setEnabled(enabled);
+    ui->pushColorListText->setEnabled(enabled);
+    ui->pushColorListBackground->setEnabled(enabled);
+    ui->pushColorListAlternativeBackground->setEnabled(enabled);
+
+    // Color labels
+    ui->labelColorBackground->setEnabled(enabled);
+    ui->labelColorText->setEnabled(enabled);
+    ui->labelColorWindow->setEnabled(enabled);
+    ui->labelColorButton->setEnabled(enabled);
+    ui->labelColorSelection->setEnabled(enabled);
+    ui->labelColorList->setEnabled(enabled);
 }

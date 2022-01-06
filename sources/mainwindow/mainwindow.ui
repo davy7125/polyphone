@@ -97,6 +97,12 @@
            </property>
            <item row="3" column="4" colspan="2">
             <widget class="QPushButton" name="pushButtonSettings">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="styleSheet">
               <string notr="true">padding: 10px;</string>
              </property>
@@ -113,6 +119,12 @@
            </item>
            <item row="3" column="0" colspan="2">
             <widget class="QPushButton" name="pushButtonDocumentation">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="styleSheet">
               <string notr="true">padding: 10px;</string>
              </property>
@@ -149,6 +161,12 @@
            </item>
            <item row="3" column="8">
             <widget class="QPushButton" name="pushButtonSearch">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="styleSheet">
               <string notr="true">padding: 10px;</string>
              </property>
@@ -165,6 +183,12 @@
            </item>
            <item row="3" column="2" colspan="2">
             <widget class="QPushButton" name="pushButtonForum">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="styleSheet">
               <string notr="true">padding: 10px;</string>
              </property>
@@ -211,6 +235,12 @@
            </item>
            <item row="3" column="7">
             <widget class="QLineEdit" name="lineSearch">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="styleSheet">
               <string notr="true">height:52px</string>
              </property>

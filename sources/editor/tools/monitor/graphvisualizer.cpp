@@ -31,12 +31,12 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
     QCustomPlot(parent),
     labelCoord(nullptr)
 {
-    this->setBackground(this->palette().color(QPalette::Base));
+    this->setBackground(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
 
     // Layer pour la position des octaves
     this->addGraph();
     QPen graphPen;
-    QColor color = this->palette().color(QPalette::Text);
+    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     color.setAlpha(40);
     graphPen.setColor(color);
     graphPen.setWidth(1);
@@ -67,7 +67,7 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
 
     // Layer des valeurs
     this->addGraph();
-    graphPen.setColor(this->palette().color(QPalette::Highlight));
+    graphPen.setColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
     graphPen.setWidth(2);
     this->graph(2)->setPen(graphPen);
     this->graph(2)->setLineStyle(QCPGraph::lsNone);
@@ -76,7 +76,7 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
 
     // Layer des valeurs par défaut
     this->addGraph();
-    graphPen.setColor(this->palette().color(QPalette::Highlight));
+    graphPen.setColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
     graphPen.setWidth(1);
     this->graph(3)->setPen(graphPen);
     this->graph(3)->setLineStyle(QCPGraph::lsNone);

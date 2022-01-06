@@ -29,7 +29,10 @@
 
 const QSize ColoredTabWidget::TAB_ICON_SIZE = QSize(24, 24);
 
-const QString ColoredTabWidget::s_styleSheetLastPart = "\
+QString ColoredTabWidget::s_styleSheetLastPart = "\
+QTabBar {\
+    background-color: transparent;\
+}\
 QTabWidget:pane {\
     border-right: 0px;\
     border-left: 0px;\
@@ -58,6 +61,10 @@ QTabBar::tab:last {\
 ColoredTabWidget::ColoredTabWidget(QWidget *parent) : QTabWidget(parent),
     _lastWidget(nullptr)
 {
+    // Tweak for Adwaita
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "style", "Fusion").toString().contains("Adwaita"))
+        s_styleSheetLastPart = s_styleSheetLastPart.replace("top: -1px;", "top: 0;");
+
     // First tab doesn't move
     this->setTabBar(new TabBar());
 
@@ -72,13 +79,22 @@ ColoredTabWidget::ColoredTabWidget(QWidget *parent) : QTabWidget(parent),
     QColor highlightColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
 
     // Compute the first part of the stylesheet
-    _styleSheetFirstPart = "QTabWidget:pane{border: 1px solid " + borderColor.name() + ";}" +
-            "QTabBar::tab{border: 1px solid " + borderColor.name() + ";" +
-            "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 " + listColor.name() + ", stop: 0.85 " + listColor.name() +
-            ", stop: 0.93 " + listColor2.name() + ", stop:1 " + listColor3.name() + ");}" +
-            "QTabBar::tab:selected{border: 1px solid " + borderColor.name() + ";" +
-            "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 " + highlightColor.name() + ", stop:0.10 " +
-            highlightColor.name() + ", stop:0.15 ";
+    _styleSheetFirstPart = QString("\
+        QTabWidget:pane{\
+            border: 1px solid %1;\
+        }\
+        QTabBar::tab{\
+            border: 1px solid %1;\
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 %2, stop: 0.85 %2, stop: 0.93 %3, stop:1 %4);\
+        }\
+        QTabBar::tab:selected{\
+            border: 1px solid %1;\
+            background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 %5, stop:0.10 %5, stop:0.15")
+                   .arg(borderColor.name())
+                   .arg(listColor.name())
+                   .arg(listColor2.name())
+                   .arg(listColor3.name())
+                   .arg(highlightColor.name());
 
     // Apply default stylesheet, based on windowColor
     this->changeStyleSheet(_defaultWindowColor, _defaultTextColor);
@@ -88,9 +104,13 @@ ColoredTabWidget::ColoredTabWidget(QWidget *parent) : QTabWidget(parent),
 
 void ColoredTabWidget::changeStyleSheet(QColor backgroundColor, QColor textColor)
 {
-    QString styleSheet = _styleSheetFirstPart + backgroundColor.name() +
-            ");border-bottom: 1px solid " + backgroundColor.name() +
-            ";color:" + textColor.name() + "}" + s_styleSheetLastPart;
+    QString styleSheet = _styleSheetFirstPart + QString("\
+        %1);\
+        border-bottom: 1px solid %1;\
+        color:%2\
+    }")
+       .arg(backgroundColor.name())
+       .arg(textColor.name()) + s_styleSheetLastPart;
 
     // Max width of the first tab
     if (this->count() == 1)
@@ -115,7 +135,7 @@ int ColoredTabWidget::addColoredTab(QWidget *widget, QString iconName, const QSt
     // Style the close button
     QPushButton * button = new QPushButton();
     button->setFlat(true);
-    button->setMaximumWidth(16);
+    button->setMaximumSize(TAB_ICON_SIZE);
     button->setCursor(Qt::PointingHandCursor);
     _tabInfo[widget]._closeButton = button;
     connect(button, SIGNAL(clicked()), this, SLOT(onCloseButtonClicked()));

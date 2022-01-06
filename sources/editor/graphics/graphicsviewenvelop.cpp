@@ -100,16 +100,16 @@ void GraphicsViewEnvelop::updateStyle()
     QColor backgroundColor;
     QColor textColor;
     QColor redColor = ContextManager::theme()->getFixedColor(ThemeManager::RED, true);
-    QColor highlightColor = this->palette().color(QPalette::Highlight);
+    QColor highlightColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
     {
-        backgroundColor = this->palette().color(QPalette::Base);
-        textColor = this->palette().color(QPalette::Text);
+        backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
+        textColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     }
     else
     {
-        backgroundColor = this->palette().color(QPalette::Text);
-        textColor = this->palette().color(QPalette::Base);
+        backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+        textColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
     }
     this->setBackground(backgroundColor);
 

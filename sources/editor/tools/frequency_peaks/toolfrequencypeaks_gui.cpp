@@ -144,7 +144,7 @@ void ToolFrequencyPeaks_gui::onPeakComputed(EltID id, const SampleFrequencyInfo 
                 if (i == 0)
                 {
                     ui->table->setItem(currentRow, 0, new QTableWidgetItem(sfi.name));
-                    ui->table->item(currentRow, 0)->setBackground(this->palette().color(QPalette::Base));
+                    ui->table->item(currentRow, 0)->setBackground(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
                 }
                 ui->table->setItem(currentRow + i, 1, new QTableWidgetItem(QString::number(i + 1)));
                 ui->table->setItem(currentRow + i, 2, new QTableWidgetItem(QString::number(fi.factor)));

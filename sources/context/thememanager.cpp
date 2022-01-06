@@ -29,15 +29,27 @@
 #include <QSvgRenderer>
 #include <QPainter>
 
-ThemeManager::ThemeManager(ConfManager * configuration)
+ThemeManager::ThemeManager(ConfManager * configuration) :
+    _configuration(configuration)
 {
-    _configuration = configuration;
+    // Custom palette enabled?
+    QString loadedStyle = _configuration->getValue(ConfManager::SECTION_DISPLAY, "style", "Fusion").toString();
+    _customPaletteEnabled = loadedStyle == "Windows" || loadedStyle == "Fusion";
 
     // Memorize the default theme
     _defaultPalette = QApplication::palette();
 
+    // Check that the alternate base is different
+    QColor colorAlternateBase = _defaultPalette.color(QPalette::AlternateBase);
+    QColor colorBase = _defaultPalette.color(QPalette::Base);
+    if (colorAlternateBase == colorBase)
+        _defaultPalette.setColor(QPalette::AlternateBase, mix(colorBase, _defaultPalette.color(QPalette::Text), 0.05));
+
     // Load themes
     _themes << getDefaultTheme() << getThemes();
+
+    // Create the current palette
+    computePalette();
 }
 
 void ThemeManager::populateCombobox(QComboBox * combobox)
@@ -62,19 +74,35 @@ void ThemeManager::populateCombobox(QComboBox * combobox)
 
 void ThemeManager::selectIndex(QComboBox *combobox)
 {
+    QString configuredStyle = _configuration->getValue(ConfManager::SECTION_DISPLAY, "style", "Fusion").toString();
+    bool customStyleDisabled = (configuredStyle != "Windows" && configuredStyle != "Fusion");
+    if (customStyleDisabled)
+    {
+        combobox->setCurrentIndex(0);
+        return;
+    }
+
     int themeId = -1;
-    QPalette currentPalette = getPalette();
     for (int i = 0; i < _themes.count(); i++)
     {
-        if (_themes[i].getColor(WINDOW_BACKGROUND) == currentPalette.color(getColorRole(WINDOW_BACKGROUND)) &&
-                _themes[i].getColor(WINDOW_TEXT) == currentPalette.color(getColorRole(WINDOW_TEXT)) &&
-                _themes[i].getColor(BUTTON_BACKGROUND) == currentPalette.color(getColorRole(BUTTON_BACKGROUND)) &&
-                _themes[i].getColor(BUTTON_TEXT) == currentPalette.color(getColorRole(BUTTON_TEXT)) &&
-                _themes[i].getColor(LIST_BACKGROUND) == currentPalette.color(getColorRole(LIST_BACKGROUND)) &&
-                _themes[i].getColor(LIST_ALTERNATIVE_BACKGROUND) == currentPalette.color(getColorRole(LIST_ALTERNATIVE_BACKGROUND)) &&
-                _themes[i].getColor(LIST_TEXT) == currentPalette.color(getColorRole(LIST_TEXT)) &&
-                _themes[i].getColor(HIGHLIGHTED_BACKGROUND) == currentPalette.color(getColorRole(HIGHLIGHTED_BACKGROUND)) &&
-                _themes[i].getColor(HIGHLIGHTED_TEXT) == currentPalette.color(getColorRole(HIGHLIGHTED_TEXT)))
+        if (_themes[i].getColor(WINDOW_BACKGROUND) == _configuration->getValue(
+                    ConfManager::SECTION_DISPLAY, getName(WINDOW_BACKGROUND), QColor()).value<QColor>() &&
+                _themes[i].getColor(WINDOW_TEXT) == _configuration->getValue(
+                    ConfManager::SECTION_DISPLAY, getName(WINDOW_TEXT), QColor()).value<QColor>() &&
+                _themes[i].getColor(BUTTON_BACKGROUND) == _configuration->getValue(
+                    ConfManager::SECTION_DISPLAY, getName(BUTTON_BACKGROUND), QColor()).value<QColor>() &&
+                _themes[i].getColor(BUTTON_TEXT) == _configuration->getValue(
+                    ConfManager::SECTION_DISPLAY, getName(BUTTON_TEXT), QColor()).value<QColor>() &&
+                _themes[i].getColor(LIST_BACKGROUND) == _configuration->getValue(
+                    ConfManager::SECTION_DISPLAY, getName(LIST_BACKGROUND), QColor()).value<QColor>() &&
+                _themes[i].getColor(LIST_ALTERNATIVE_BACKGROUND) == _configuration->getValue(
+                    ConfManager::SECTION_DISPLAY, getName(LIST_ALTERNATIVE_BACKGROUND), QColor()).value<QColor>() &&
+                _themes[i].getColor(LIST_TEXT) == _configuration->getValue(
+                    ConfManager::SECTION_DISPLAY, getName(LIST_TEXT), QColor()).value<QColor>() &&
+                _themes[i].getColor(HIGHLIGHTED_BACKGROUND) == _configuration->getValue(
+                    ConfManager::SECTION_DISPLAY, getName(HIGHLIGHTED_BACKGROUND), QColor()).value<QColor>() &&
+                _themes[i].getColor(HIGHLIGHTED_TEXT) == _configuration->getValue(
+                    ConfManager::SECTION_DISPLAY, getName(HIGHLIGHTED_TEXT), QColor()).value<QColor>())
         {
             themeId = _themes[i].getId();
             break;
@@ -103,27 +131,41 @@ void ThemeManager::selectIndex(QComboBox *combobox)
     }
 }
 
-QColor ThemeManager::getColor(ThemeManager::ColorType type, ColorContext context)
+QColor ThemeManager::getColor(ThemeManager::ColorType type, ColorContext context, bool fromSettingFile)
 {
-    QColor color = _configuration->getValue(
-                ConfManager::SECTION_DISPLAY, getName(type),
-                _defaultPalette.color(getColorRole(type))).value<QColor>();
+    // Color role
+    QPalette::ColorRole role = getColorRole(type);
 
-    if (context == HOVERED)
+    if (fromSettingFile)
     {
-        ColorType type2 = getAssociatedColorType(type);
-        QColor color2 = _configuration->getValue(
-                    ConfManager::SECTION_DISPLAY, getName(type2),
-                    _defaultPalette.color(getColorRole(type2))).value<QColor>();
-        color = mix(color, color2, 0.2);
+        // Read the color directly in the setting file
+        return _configuration->getValue(
+                    ConfManager::SECTION_DISPLAY, getName(type),
+                    _defaultPalette.color(role)).value<QColor>();
     }
-    else if (context == DISABLED)
+
+    // Take the right palette and get the color
+    QPalette currentPalette = _customPaletteEnabled ? _customPalette : _defaultPalette;
+    QColor color = currentPalette.color(context == DISABLED ? QPalette::Disabled : QPalette::Active, role);
+
+    // Apply a change if hovered
+    if (context == HOVERED)
+        color = mix(color, currentPalette.color(getColorRole(getAssociatedColorType(type))), 0.2);
+
+    // If AlternateBase, check that it's different from Base
+    if (role == QPalette::AlternateBase)
     {
-        ColorType type2 = getAssociatedColorType(type);
-        QColor color2 = _configuration->getValue(
-                    ConfManager::SECTION_DISPLAY, getName(type2),
-                    _defaultPalette.color(getColorRole(type2))).value<QColor>();
-        color = mix(color, color2, 0.8);
+        QColor baseColor = currentPalette.color(QPalette::Base);
+        if (color == baseColor)
+            color = mix(color, currentPalette.color(QPalette::Text), 0.05);
+    }
+
+    // If disabled, check it is different from enabled
+    if (context == DISABLED)
+    {
+        QColor enabledColor = currentPalette.color(QPalette::Active, role);
+        if (color == enabledColor)
+            color = mix(color, currentPalette.color(getColorRole(getAssociatedColorType(type))), 0.7);
     }
 
     return color;
@@ -235,6 +277,8 @@ QString ThemeManager::getName(ColorType type)
     case HIGHLIGHTED_TEXT:
         ret = "highlighted_text";
         break;
+    default:
+        break;
     }
 
     return ret;
@@ -273,6 +317,12 @@ QPalette::ColorRole ThemeManager::getColorRole(ColorType type)
     case HIGHLIGHTED_TEXT:
         ret = QPalette::HighlightedText;
         break;
+    case BORDER:
+        ret = QPalette::Dark;
+        break;
+    case LINK:
+        ret = QPalette::Link;
+        break;
     }
 
     return ret;
@@ -305,78 +355,101 @@ QColor ThemeManager::disabled2(QColor color, QColor limit)
     return QColor(newVal, newVal, newVal);
 }
 
-QPalette ThemeManager::getPalette()
+void ThemeManager::computePalette()
 {
-    QPalette palette;
+    _customPalette = _defaultPalette;
 
     // Window
-    palette.setColor(QPalette::Window, getColor(WINDOW_BACKGROUND));
-    palette.setColor(QPalette::WindowText, getColor(WINDOW_TEXT));
-    palette.setColor(QPalette::BrightText, isDark(WINDOW_BACKGROUND, WINDOW_TEXT) ?
-                getColor(WINDOW_TEXT).lighter() :
-                getColor(WINDOW_TEXT).darker());
+    _customPalette.setColor(QPalette::Window, _configuration->getValue(
+                                ConfManager::SECTION_DISPLAY, getName(WINDOW_BACKGROUND),
+                                _defaultPalette.color(getColorRole(WINDOW_BACKGROUND))).value<QColor>());
+    _customPalette.setColor(QPalette::WindowText, _configuration->getValue(
+                                ConfManager::SECTION_DISPLAY, getName(WINDOW_TEXT),
+                                _defaultPalette.color(getColorRole(WINDOW_TEXT))).value<QColor>());
+    _customPalette.setColor(QPalette::BrightText, isDark(WINDOW_BACKGROUND, WINDOW_TEXT) ?
+                                _customPalette.color(QPalette::WindowText).lighter() :
+                                _customPalette.color(QPalette::WindowText).darker());
 
     // Button / Tooltip
-    palette.setColor(QPalette::Button, getColor(BUTTON_BACKGROUND));
-    palette.setColor(QPalette::ButtonText, getColor(BUTTON_TEXT));
-    palette.setColor(QPalette::ToolTipBase, getColor(BUTTON_BACKGROUND));
-    palette.setColor(QPalette::ToolTipText, getColor(BUTTON_TEXT));
+    _customPalette.setColor(QPalette::Button, _configuration->getValue(
+                                ConfManager::SECTION_DISPLAY, getName(BUTTON_BACKGROUND),
+                                _defaultPalette.color(getColorRole(BUTTON_BACKGROUND))).value<QColor>());
+    _customPalette.setColor(QPalette::ButtonText, _configuration->getValue(
+                                ConfManager::SECTION_DISPLAY, getName(BUTTON_TEXT),
+                                _defaultPalette.color(getColorRole(BUTTON_TEXT))).value<QColor>());
+    _customPalette.setColor(QPalette::ToolTipBase, _customPalette.color(QPalette::Button));
+    _customPalette.setColor(QPalette::ToolTipText, _customPalette.color(QPalette::ButtonText));
+    QColor colorPlaceHolder = mix(_customPalette.color(QPalette::Button), _customPalette.color(QPalette::ButtonText), 0.3);
+    _customPalette.setColor(QPalette::PlaceholderText, colorPlaceHolder);
 
     // List
-    palette.setColor(QPalette::Base, getColor(LIST_BACKGROUND));
-    palette.setColor(QPalette::AlternateBase, getColor(LIST_ALTERNATIVE_BACKGROUND));
-    palette.setColor(QPalette::Text, getColor(LIST_TEXT));
-    palette.setColor(QPalette::Highlight, getColor(HIGHLIGHTED_BACKGROUND));
-    palette.setColor(QPalette::HighlightedText, getColor(HIGHLIGHTED_TEXT));
+    _customPalette.setColor(QPalette::Base, _configuration->getValue(
+                                ConfManager::SECTION_DISPLAY, getName(LIST_BACKGROUND),
+                                _defaultPalette.color(getColorRole(LIST_BACKGROUND))).value<QColor>());
+    _customPalette.setColor(QPalette::AlternateBase, _configuration->getValue(
+                                ConfManager::SECTION_DISPLAY, getName(LIST_ALTERNATIVE_BACKGROUND),
+                                _defaultPalette.color(getColorRole(LIST_ALTERNATIVE_BACKGROUND))).value<QColor>());
+    _customPalette.setColor(QPalette::Text, _configuration->getValue(
+                                ConfManager::SECTION_DISPLAY, getName(LIST_TEXT),
+                                _defaultPalette.color(getColorRole(LIST_TEXT))).value<QColor>());
+    _customPalette.setColor(QPalette::Highlight, _configuration->getValue(
+                                ConfManager::SECTION_DISPLAY, getName(HIGHLIGHTED_BACKGROUND),
+                                _defaultPalette.color(getColorRole(HIGHLIGHTED_BACKGROUND))).value<QColor>());
+    _customPalette.setColor(QPalette::HighlightedText, _configuration->getValue(
+                                ConfManager::SECTION_DISPLAY, getName(HIGHLIGHTED_TEXT),
+                                _defaultPalette.color(getColorRole(HIGHLIGHTED_TEXT))).value<QColor>());
 
     // Automatically complete colors
-    QColor colorTmp = palette.color(QPalette::Window);
+    QColor colorTmp = _customPalette.color(QPalette::Window);
     QColor colorLight = colorTmp;
     colorLight.setHsv(colorTmp.hue(), (int)(0.75 * colorTmp.saturation()), qMin(255, (int)(1.3 * colorTmp.value())));
-    palette.setColor(QPalette::Light, colorLight);
+    _customPalette.setColor(QPalette::Light, colorLight);
 
     QColor colorMidLight = colorTmp;
     colorMidLight.setHsv(colorTmp.hue(), (int)(0.75 * colorTmp.saturation()), qMin(255, (int)(1.15 * colorTmp.value())));
-    palette.setColor(QPalette::Midlight, colorMidLight);
+    _customPalette.setColor(QPalette::Midlight, colorMidLight);
 
     QColor colorDark = colorTmp;
     colorDark.setHsv(colorTmp.hue(), (int)(0.75 * colorTmp.saturation()), (int)(0.7 * colorTmp.value()));
-    palette.setColor(QPalette::Dark, colorDark);
+    _customPalette.setColor(QPalette::Dark, colorDark);
 
     QColor colorMid = colorTmp;
     colorMid.setHsv(colorTmp.hue(), (int)(0.75 * colorTmp.saturation()), qMin(255, (int)(0.4 * colorTmp.value())));
-    palette.setColor(QPalette::Mid, colorMid);
+    _customPalette.setColor(QPalette::Mid, colorMid);
 
     QColor colorShadow = colorTmp;
     colorShadow.setHsv(colorTmp.hue(), (int)(0.75 * colorTmp.saturation()), qMin(255, (int)(0.2 * colorTmp.value())));
-    palette.setColor(QPalette::Shadow, colorShadow);
-
-    QColor colorPlaceHolder = mix(getColor(BUTTON_BACKGROUND), getColor(BUTTON_TEXT), 0.3);
-    palette.setColor(QPalette::PlaceholderText, colorPlaceHolder);
+    _customPalette.setColor(QPalette::Shadow, colorShadow);
 
     // Disabled colors
-    palette.setColor(QPalette::Disabled, QPalette::ButtonText,
-                     disabled1(palette.color(QPalette::ButtonText), palette.color(QPalette::Button)));
-    palette.setColor(QPalette::Disabled, QPalette::Button,
-                     disabled2(palette.color(QPalette::Button), palette.color(QPalette::ButtonText)));
-    palette.setColor(QPalette::Disabled, QPalette::Text,
-                     disabled1(palette.color(QPalette::Text), palette.color(QPalette::Base)));
-    palette.setColor(QPalette::Disabled, QPalette::Base,
-                     disabled2(palette.color(QPalette::Base), palette.color(QPalette::Text)));
+    _customPalette.setColor(QPalette::Disabled, QPalette::WindowText,
+                            disabled1(_customPalette.color(QPalette::WindowText), _customPalette.color(QPalette::Window)));
+    _customPalette.setColor(QPalette::Disabled, QPalette::Window,
+                            disabled2(_customPalette.color(QPalette::Window), _customPalette.color(QPalette::WindowText)));
+    _customPalette.setColor(QPalette::Disabled, QPalette::ButtonText,
+                            disabled1(_customPalette.color(QPalette::ButtonText), _customPalette.color(QPalette::Button)));
+    _customPalette.setColor(QPalette::Disabled, QPalette::Button,
+                            disabled2(_customPalette.color(QPalette::Button), _customPalette.color(QPalette::ButtonText)));
+    _customPalette.setColor(QPalette::Disabled, QPalette::Text,
+                            disabled1(_customPalette.color(QPalette::Text), _customPalette.color(QPalette::Base)));
+    _customPalette.setColor(QPalette::Disabled, QPalette::Base,
+                            disabled2(_customPalette.color(QPalette::Base), _customPalette.color(QPalette::Text)));
+    _customPalette.setColor(QPalette::Disabled, QPalette::HighlightedText,
+                            disabled1(_customPalette.color(QPalette::HighlightedText), _customPalette.color(QPalette::Highlight)));
+    _customPalette.setColor(QPalette::Disabled, QPalette::Highlight,
+                            disabled2(_customPalette.color(QPalette::Highlight), _customPalette.color(QPalette::HighlightedText)));
 
     // Hyperlink
     if (isDark(LIST_BACKGROUND, LIST_TEXT))
     {
-        palette.setColor(QPalette::Link, QColor(100, 150, 255));
-        palette.setColor(QPalette::LinkVisited, QColor(120, 20, 220));
+        _customPalette.setColor(QPalette::Link, QColor(100, 150, 255));
+        _customPalette.setColor(QPalette::LinkVisited, QColor(120, 20, 220));
     }
     else
     {
-        palette.setColor(QPalette::Link, QColor(0, 0, 255));
-        palette.setColor(QPalette::LinkVisited, QColor(80, 0, 140));
+        _customPalette.setColor(QPalette::Link, QColor(0, 0, 255));
+        _customPalette.setColor(QPalette::LinkVisited, QColor(80, 0, 140));
     }
-
-    return palette;
 }
 
 ThemeManager::ColorTheme ThemeManager::getDefaultTheme()
@@ -610,19 +683,21 @@ ThemeManager::ColorType ThemeManager::getAssociatedColorType(ColorType type)
         return HIGHLIGHTED_TEXT;
     case HIGHLIGHTED_TEXT:
         return HIGHLIGHTED_BACKGROUND;
+    default:
+        break;
     }
-    return WINDOW_TEXT;
+    return type;
 }
 
 QString ThemeManager::getMenuTheme()
 {
-    QString middleColor = this->mix(this->getColor(ThemeManager::LIST_TEXT),
-                                    this->getColor(ThemeManager::LIST_BACKGROUND), 0.5).name();
-    return QString("QMenu {background-color: ") + this->getColor(ThemeManager::LIST_BACKGROUND).name() +
+    QString middleColor = this->mix(this->getColor(LIST_TEXT),
+                                    this->getColor(LIST_BACKGROUND), 0.5).name();
+    return QString("QMenu {background-color: ") + this->getColor(LIST_BACKGROUND).name() +
             "; border: 1px solid " + middleColor + "}" +
             "QMenu::item {padding: 5px 15px } QMenu::icon {padding-left: 20px;} " +
-            "QMenu::item:selected { background: " + this->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "; color: " +
-            this->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "; }" +
+            "QMenu::item:selected { background: " + this->getColor(HIGHLIGHTED_BACKGROUND).name() + "; color: " +
+            this->getColor(HIGHLIGHTED_TEXT).name() + "; }" +
             QString("QMenu::separator {background: ") + middleColor +
             ";margin: 10px 45px; height: 1px}";
 }

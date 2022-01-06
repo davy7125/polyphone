@@ -35,13 +35,13 @@ TableHeaderViewV::TableHeaderViewV(QWidget *parent) : QHeaderView(Qt::Vertical, 
     this->setHighlightSections(true);
 
     // Style
-    this->setStyleSheet("QHeaderView::section{border:1px solid " + this->palette().dark().color().name() +
+    this->setStyleSheet("QHeaderView::section{border:1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                         ";border-left: 0; border-top: 0}");
     _textColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
 
     // Font
     QFont font = this->font();
-    font.setPointSize(10);
+    font.setPointSize(font.pointSize() - 1);
     this->setFont(font);
     this->setDefaultSectionSize(QFontMetrics(this->font()).height() + 8);
 }

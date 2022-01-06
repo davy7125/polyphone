@@ -50,11 +50,11 @@ PageSmpl::PageSmpl(QWidget *parent) :
                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
                                    ";border:0;padding:0px 5px}" +
                                    "QPushButton:hover{color:" + resetHoverColor + "}");
-    ui->frameGraph->setStyleSheet("QFrame{border:0; border-bottom: 1px solid " + this->palette().dark().color().name() + "}");
+    ui->frameGraph->setStyleSheet("QFrame{border:0; border-bottom: 1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + "}");
     ui->framePlayArea->setStyleSheet("TransparentFrame{background-color: " +
                                      ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() +
                                      ";color: " + ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name() +
-                                     ";border: 1px solid " + this->palette().dark().color().name() + ";border-radius: 3px;}");
+                                     ";border: 1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + ";border-radius: 3px;}");
 
     // Icons
     ui->pushFullLength->setIcon(ContextManager::theme()->getColoredSvg(":/icons/range.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
@@ -76,7 +76,7 @@ PageSmpl::PageSmpl(QWidget *parent) :
     connect(ui->waveDisplay, SIGNAL(cutOrdered(int,int)), this, SLOT(onCutOrdered(int,int)));
 
     // Background color of the Fourier graph
-    ui->grapheFourier->setBackgroundColor(this->palette().window().color());
+    ui->grapheFourier->setBackgroundColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND));
 
     // Play area over the wave display
     ui->checkLectureLien->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "stereo_playback", false).toBool());

@@ -35,7 +35,7 @@ PageOverview::PageOverview(TypePage typePage, ElementType typeElement, QWidget *
     ui->setupUi(this);
 
     // Style
-    ui->frameBottom->setStyleSheet("QFrame{background-color:" +
+    ui->frameBottom->setStyleSheet("QFrame{border: 0; background-color:" +
                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";color:" +
                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "}");
 

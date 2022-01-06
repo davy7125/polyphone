@@ -336,8 +336,8 @@ void PageTable::addDivisions(EltID id)
 
 void PageTable::formatTable(bool multiGlobal)
 {
-    QColor color = this->palette().color(QPalette::Base);
-    QColor alternateColor = this->palette().color(QPalette::AlternateBase);
+    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
+    QColor alternateColor = ContextManager::theme()->getColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND);
     QBrush brush1(TableWidget::getPixMap(color, alternateColor));
     QBrush brush2(TableWidget::getPixMap(alternateColor, color));
     if (this->contenant == elementInst)
@@ -450,7 +450,8 @@ void PageTable::styleFixedRow(int numRow)
 {
     // Color, font
     QFont font(this->font().family(), 4 * this->font().pointSize() / 5, QFont::Normal, true);
-    QColor fixedColor = ThemeManager::mix(this->palette().color(QPalette::Text), this->palette().color(QPalette::Base), 0.35);
+    QColor fixedColor = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
+                                          ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.35);
 
     // Style the cells
     for (int i = 0; i < _table->columnCount(); i++)

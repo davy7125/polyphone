@@ -24,7 +24,6 @@
 
 #include "graphicsrectangleitem.h"
 #include <QGraphicsScene>
-#include <QApplication>
 #include <QPainter>
 #include <QGraphicsView>
 #include "contextmanager.h"
@@ -39,7 +38,7 @@ GraphicsRectangleItem::GraphicsRectangleItem(EltID id, QGraphicsItem *parent) : 
     _isSelected(false)
 {
     // Initialize pens and brushes
-    QColor color = QApplication::palette().color(QPalette::Highlight);
+    QColor color = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     color.setAlpha(180);
     _penBorderThin = QPen(color, 1);
     color.setAlpha(255);

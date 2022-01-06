@@ -35,8 +35,8 @@ ControllerArea::ControllerArea(QWidget *parent) :
 
     // Led on / off
     QMap<QString, QString> replacement;
-    replacement["border1"] = this->palette().dark().color().darker(130).name();
-    replacement["border2"] = this->palette().dark().color().name();
+    replacement["border1"] = ContextManager::theme()->getColor(ThemeManager::BORDER).darker(130).name();
+    replacement["border2"] = ContextManager::theme()->getColor(ThemeManager::BORDER).name();
     replacement["color1"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).darker(130).name();
     replacement["color2"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
     _ledOn = ContextManager::theme()->getColoredSvg(":/icons/led.svg", QSize(48, 48), replacement);

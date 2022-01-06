@@ -59,7 +59,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
         return nullptr;
 
     QWidget * widget;
-    QColor highlightColor = parent->palette().color(QPalette::Highlight);
+    QColor highlightColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     if (!isNumeric)
     {
         // Range

@@ -113,3 +113,11 @@ void EditKey::processKeyEvent(QKeyEvent * event)
         }
     }
 }
+
+QSize EditKey::sizeHint() const
+{
+    QSize size = QLineEdit::sizeHint();
+    QFontMetrics fm(this->font());
+    size.setWidth(fm.horizontalAdvance(this->text()) + this->contentsMargins().left() * 2 + this->textMargins().left() * 2 + 5);
+    return size;
+}

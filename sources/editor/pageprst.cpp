@@ -55,6 +55,8 @@ PagePrst::PagePrst(QWidget *parent) :
     // Initialization of spinBoxes
     ui->spinBank->init(this);
     ui->spinPreset->init(this);
+    ui->spinBank->setStyleSheet("QSpinBox{margin-top: 1px;}");
+    ui->spinPreset->setStyleSheet("QSpinBox{margin-top: 1px;}");
 
     connect(this->_table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->_table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));

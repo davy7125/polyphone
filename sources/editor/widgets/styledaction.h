@@ -25,14 +25,15 @@
 #ifndef STYLEDACTION_H
 #define STYLEDACTION_H
 
-#include <QToolButton>
+#include <QPushButton>
 
-class StyledAction : public QToolButton
+class StyledAction : public QPushButton
 {
     Q_OBJECT
 
 public:
-    StyledAction(QString label, QString iconName, QWidget *parent);
+    explicit StyledAction(QWidget *parent = nullptr);
+    void initialize(QString label, QString iconName);
     void disable(bool isDisabled);
     void setData(int data);
     int getData();

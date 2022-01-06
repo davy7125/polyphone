@@ -60,7 +60,7 @@ private:
     QColor _defaultWindowColor;
     QColor _defaultTextColor;
     QString _styleSheetFirstPart;
-    static const QString s_styleSheetLastPart;
+    static QString s_styleSheetLastPart;
     QMap<QWidget *, ColoredTabInfo> _tabInfo;
 };
 

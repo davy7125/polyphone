@@ -43,7 +43,7 @@ HtmlEditor::HtmlEditor(QWidget *parent) :
     // Colors
     QString buttonBackground = ContextManager::theme()->getColor(ThemeManager::BUTTON_BACKGROUND).name();
     QString buttonText = ContextManager::theme()->getColor(ThemeManager::BUTTON_TEXT).name();
-    QString border = this->palette().dark().color().name();
+    QString border = ContextManager::theme()->getColor(ThemeManager::BORDER).name();
     QString highlight = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
     QString highlightedText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
     bool isDark = ContextManager::theme()->isDark(ThemeManager::BUTTON_BACKGROUND, ThemeManager::BUTTON_TEXT);

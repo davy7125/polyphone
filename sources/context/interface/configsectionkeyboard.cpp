@@ -56,15 +56,21 @@ void ConfigSectionKeyboard::initialize()
 {
     // Name of the keys in the table
     for (quint32 i = 0; i <= 12; i++)
-    {
         ui->tableKeyboardMap->horizontalHeaderItem(static_cast<int>(i))->setText(
                     ContextManager::keyName()->getKeyName(i, true, false, false, true));
-    }
 
     // Populate the table
+    int maxWidth = 50;
     for (int j = 0; j < ui->tableKeyboardMap->columnCount(); j++)
+    {
         for (int i = 0; i < ui->tableKeyboardMap->rowCount(); i++)
-            (dynamic_cast<EditKey*>(ui->tableKeyboardMap->cellWidget(i, j)))->updateText();
+        {
+            EditKey* key = dynamic_cast<EditKey*>(ui->tableKeyboardMap->cellWidget(i, j));
+            key->updateText();
+            maxWidth = qMax(maxWidth, key->sizeHint().width());
+        }
+    }
+    ui->tableKeyboardMap->horizontalHeader()->setDefaultSectionSize(maxWidth);
 
     // Octave configuration
     initializeFirstC();

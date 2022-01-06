@@ -212,7 +212,8 @@ TableWidgetInst::TableWidgetInst(QWidget *parent) : TableWidget(parent)
                << champ_endloopAddrsOffset;
 
     // Vertical header
-    QColor fixedColor = ThemeManager::mix(this->palette().color(QPalette::Text), this->palette().color(QPalette::Base), 0.35);
+    QColor fixedColor = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
+                                          ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.35);
     QFont font(this->font().family(), 4 * this->font().pointSize() / 5, QFont::Normal, true);
     this->setRowCount(_fieldList.count() + 1);
     for (int i = 1; i < this->rowCount(); i++)

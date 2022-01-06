@@ -33,12 +33,12 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(p
     labelCoord(nullptr),
     previousX(-1)
 {
-    this->setBackground(this->palette().color(QPalette::Base));
+    this->setBackground(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
 
     // Layer for the position of frequencies
     this->addGraph();
     QPen graphPen;
-    QColor color = this->palette().color(QPalette::Text);
+    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     color.setAlpha(40);
     graphPen.setColor(color);
     graphPen.setWidth(1);
@@ -76,7 +76,7 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(p
 
     // Layer aperçu valeurs
     this->addGraph();
-    graphPen.setColor(this->palette().color(QPalette::Text));
+    graphPen.setColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
     graphPen.setWidth(1);
     this->graph(2)->setPen(graphPen);
     this->graph(2)->setScatterStyle(QCPScatterStyle::ssPlus);
@@ -86,7 +86,7 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(p
     QFont fontLabel = QFont(font().family(), 9);
     fontLabel.setBold(true);
     labelCoord->setFont(fontLabel);
-    labelCoord->setColor(this->palette().color(QPalette::Text));
+    labelCoord->setColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
 
     // Red color for what will be removed
     this->addGraph();
@@ -143,12 +143,12 @@ void GraphFilterFrequencies::addFourierTransform(QVector<float> fData, quint32 s
     x[0] = -1;
     x[1] = POINT_NUMBER + 1;
     y[0] = y[1] = -2;
-    QColor color = this->palette().color(QPalette::Text);
+    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     color.setAlpha(40 / _nbFourier);
     QPen graphPen;
     graphPen.setColor(color);
     graphPen.setWidth(0);
-    color = this->palette().color(QPalette::Highlight);
+    color = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     color.setAlpha(80 / _nbFourier);
 
     int nbGraphs = this->graphCount();

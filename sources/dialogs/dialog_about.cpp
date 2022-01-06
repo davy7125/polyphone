@@ -148,7 +148,7 @@ QString Credit::getFormattedName(QString name, QString email)
     QString text = "<p>";
     if (email.size())
         text += "<a href='mailto:" + email + "'><span style='text-decoration: underline; color:" +
-                QApplication::palette().color(QPalette::Link).name() + ";'>" +
+                ContextManager::theme()->getColor(ThemeManager::LINK).name() + ";'>" +
                 QString::fromUtf8(name.toStdString().c_str()) + "</span></a>";
     else
         text += "<span>" + QString::fromUtf8(name.toStdString().c_str()) + "</span>";
@@ -158,7 +158,7 @@ QString Credit::getFormattedName(QString name, QString email)
 QString Credit::getFormattedLink(QString text, QString link)
 {
     return "<a href='" + link + "'><span style='text-decoration: underline; color:" +
-            QApplication::palette().color(QPalette::Link).name() + ";'>" +
+            ContextManager::theme()->getColor(ThemeManager::LINK).name() + ";'>" +
             QString::fromUtf8(text.toStdString().c_str()) + "</span></a>";
 }
 

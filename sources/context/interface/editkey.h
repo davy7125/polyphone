@@ -38,11 +38,13 @@ public:
     EditKey(int octave, ConfManager::Key key, QWidget * parent = nullptr);
     void updateText();
 
+    QSize sizeHint() const override;
+
 protected:
-    void focusInEvent(QFocusEvent * event);
-    void keyPressEvent(QKeyEvent * event);
-    void keyReleaseEvent(QKeyEvent * event);
-    void focusOutEvent(QFocusEvent * event);
+    void focusInEvent(QFocusEvent * event) override;
+    void keyPressEvent(QKeyEvent * event) override;
+    void keyReleaseEvent(QKeyEvent * event) override;
+    void focusOutEvent(QFocusEvent * event) override;
 
 private:
     void processKeyEvent(QKeyEvent * event);

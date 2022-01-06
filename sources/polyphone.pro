@@ -9,7 +9,7 @@
 # Uncomment a line if your distribution doesn't come with some of the following libraries
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
-#DEFINES += USE_LOCAL_QCUSTOMPLOT
+DEFINES += USE_LOCAL_QCUSTOMPLOT
 DEFINES += USE_LOCAL_SFARKLIB
 
 # Uncomment this line to use wolfssl instead of openssl (for a license issue)
@@ -335,6 +335,7 @@ SOURCES	+= main.cpp \
     repository/widgets/fivestarswidget.cpp \
     repository/widgets/flowlayout.cpp \
     editor/editor.cpp \
+    editor/widgets/editortoolbar.cpp \
     editor/pageinst.cpp \
     editor/pagesf2.cpp \
     editor/pageprst.cpp \
@@ -356,7 +357,6 @@ SOURCES	+= main.cpp \
     editor/tree/treesortfilterproxy.cpp \
     core/model/treeitem.cpp \
     editor/widgets/styledaction.cpp \
-    editor/widgets/editortoolbar.cpp \
     core/actionset.cpp \
     core/action.cpp \
     editor/widgets/styledlineedit.cpp \
@@ -533,8 +533,9 @@ SOURCES	+= main.cpp \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.cpp \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.cpp \
     repository/soundfont/uploadingdialog.cpp \
-    lib/qtsingleapplication/qtlocalpeer.cpp \
-    lib/qtsingleapplication/qtsingleapplication.cpp
+    lib/qtsingleapplication/qtlocalpeer.cpp \ # problem here with lupdate
+    lib/qtsingleapplication/qtsingleapplication.cpp \
+    mainwindow/tabbar.cpp
 
 HEADERS += \
     core/input/grandorgue/grandorguedatathrough.h \
@@ -664,6 +665,7 @@ HEADERS += \
     repository/widgets/flowlayout.h \
     repository/widgets/fivestarswidget.h \
     editor/editor.h \
+    editor/widgets/editortoolbar.h\
     editor/pageinst.h \
     editor/pageprst.h \
     editor/pagesf2.h \
@@ -686,7 +688,6 @@ HEADERS += \
     editor/widgets/backgroundwidget.h \
     editor/tree/treesortfilterproxy.h \
     editor/widgets/styledaction.h \
-    editor/widgets/editortoolbar.h \
     core/actionset.h \
     core/action.h \
     editor/widgets/styledlineedit.h \
@@ -894,6 +895,7 @@ FORMS += \
     dialogs/dialogchangelog.ui \
     editor/envelopeditor.ui \
     editor/overview/pageoverview.ui \
+    editor/widgets/editortoolbar.ui \
     editor/widgets/equalizer.ui \
     mainwindow/widgetshowhistory.ui \
     mainwindow/widgetshowhistorycell.ui \

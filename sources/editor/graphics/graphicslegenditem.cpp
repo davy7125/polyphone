@@ -26,8 +26,8 @@
 #include "contextmanager.h"
 #include <QPen>
 #include <QPainter>
-#include <QApplication>
 #include "soundfontmanager.h"
+#include "contextmanager.h"
 
 const int GraphicsLegendItem::s_border = 5;
 static const QChar unicodeArrow[] = { 0xfeff, 0x279c };
@@ -38,11 +38,11 @@ GraphicsLegendItem::GraphicsLegendItem(QString fontFamily, QGraphicsItem * paren
     _smallFont(fontFamily, 6)
 {
     // Colors
-    QColor color = QApplication::palette().color(QPalette::Highlight);
+    QColor color = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     _borderPen = QPen(color, 1, Qt::SolidLine);
     color.setAlpha(200);
     _foregroundBrush = QBrush(color);
-    _textPen = QPen(QApplication::palette().color(QPalette::HighlightedText), 1, Qt::SolidLine);
+    _textPen = QPen(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT), 1, Qt::SolidLine);
 
     this->setFlag(QGraphicsItem::ItemIgnoresTransformations);
     setLeft(true);

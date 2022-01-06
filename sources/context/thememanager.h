@@ -47,7 +47,9 @@ public:
         LIST_ALTERNATIVE_BACKGROUND,
         LIST_TEXT,
         HIGHLIGHTED_BACKGROUND,
-        HIGHLIGHTED_TEXT
+        HIGHLIGHTED_TEXT,
+        BORDER,
+        LINK
     };
 
     /// Fixed colors that depends on the background but that cannot be changed by the user
@@ -75,7 +77,7 @@ public:
     void selectIndex(QComboBox * combobox);
 
     /// Get a color from the current theme
-    QColor getColor(ColorType type, ColorContext context = NORMAL);
+    QColor getColor(ColorType type, ColorContext context = NORMAL, bool fromSettingFile = false);
 
     /// Get a fixed color depending on a background or explicitely mentioned light or dark
     QColor getFixedColor(FixedColorType type, ColorType background);
@@ -91,7 +93,8 @@ public:
     void resetTheme();
 
     /// Get the palette of the application
-    QPalette getPalette();
+    QPalette getPalette() { return _customPaletteEnabled ? _customPalette : _defaultPalette; }
+    bool isCustomPaletteEnabled() { return _customPaletteEnabled; }
 
     /// Return true if the background is darker than the text
     bool isDark(ColorType backgroundType, ColorType textType);
@@ -123,6 +126,7 @@ private:
         QMap<ColorType, QColor> _colors;
     };
 
+    void computePalette();
     ColorTheme getDefaultTheme();
     QList<ColorTheme> getThemes();
     QString getName(ColorType type);
@@ -133,7 +137,8 @@ private:
 
     ConfManager * _configuration;
     QList<ColorTheme> _themes;
-    QPalette _defaultPalette;
+    QPalette _defaultPalette, _customPalette;
+    bool _customPaletteEnabled;
 };
 
 #endif // THEMEMANAGER_H

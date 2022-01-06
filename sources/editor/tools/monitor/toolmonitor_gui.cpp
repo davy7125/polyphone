@@ -101,8 +101,8 @@ void ToolMonitor_gui::updateInterface(AbstractToolParameters * parameters, IdLis
     this->on_comboParameter_currentIndexChanged(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
 
     // Legends
-    ui->widgetLegendDefined->plot(QCPScatterStyle::ssCross, this->palette().color(QPalette::Highlight), 5, 2, false);
-    ui->widgetLegendDefault->plot(QCPScatterStyle::ssCross, this->palette().color(QPalette::Highlight), 5, 1, false);
+    ui->widgetLegendDefined->plot(QCPScatterStyle::ssCross, ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND), 5, 2, false);
+    ui->widgetLegendDefault->plot(QCPScatterStyle::ssCross, ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND), 5, 1, false);
     ui->widgetLegendMoyenne->plot(QCPScatterStyle::ssCircle, ContextManager::theme()->getFixedColor(
                                       ThemeManager::GREEN, ThemeManager::LIST_BACKGROUND), 7, 2, true);
 }

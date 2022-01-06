@@ -34,10 +34,7 @@ TablePageOverview::TablePageOverview(QWidget *parent) : QTableWidget(parent)
 
     // Style of the table content
     this->setAlternatingRowColors(true);
-    this->setStyleSheet("QTableWidget{border:1px solid " +
-                        this->palette().dark().color().name() +
-                        ";border-top:0;border-left:0;border-right:0" +
-                        ";gridline-color: " + this->palette().dark().color().name() + "}");
+    this->setStyleSheet("QTableWidget{border:0;gridline-color: " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + "}");
 }
 
 OverviewTableHeaderView::OverviewTableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, parent)
@@ -65,7 +62,7 @@ OverviewTableHeaderView::OverviewTableHeaderView(QWidget *parent) : QHeaderView(
     _textColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
 
     // Style
-    this->setStyleSheet("QHeaderView::section{border:1px solid " + this->palette().dark().color().name() +
+    this->setStyleSheet("QHeaderView::section{border:1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                         ";border-top: 0; border-left: 0}" +
                         "QHeaderView::down-arrow {image: url(:/icons/empty)}" +
                         "QHeaderView::up-arrow {image: url(:/icons/empty)}");

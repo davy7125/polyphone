@@ -28,7 +28,7 @@
 #include <QPainter>
 
 GraphSpace::GraphSpace(QWidget * parent) : QWidget(parent),
-    _backgroundColor(this->palette().color(QPalette::Base)),
+    _backgroundColor(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND)),
     _currentLabel("")
 {
     // Filter events
@@ -102,13 +102,13 @@ void GraphSpace::paintEvent(QPaintEvent *event)
     painter.fillRect(this->rect(), _backgroundColor);
 
     // Central vertical bar
-    QColor colorTmp = this->palette().color(QPalette::Text);
+    QColor colorTmp = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     colorTmp.setAlpha(40);
     painter.setPen(QPen(colorTmp, 1.0, Qt::DashDotLine));
     painter.drawLine(0.5 * this->width(), -1, 0.5 * this->width(), this->height() + 1);
 
     // Data
-    painter.setPen(QPen(this->palette().color(QPalette::Highlight), 3.0, Qt::SolidLine));
+    painter.setPen(QPen(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND), 3.0, Qt::SolidLine));
     for (int i = 0; i < _xPan.size(); i++)
         painter.drawLine(
                     _xPan[i] * (this->width() - 2 * margin) + margin,

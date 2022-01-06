@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "editortoolbar.h"
+#include "ui_editortoolbar.h"
 #include "contextmanager.h"
 #include "styledaction.h"
 #include "soundfontmanager.h"
@@ -41,73 +42,54 @@ bool EditorToolBar::s_recorderOpen = false;
 bool EditorToolBar::s_keyboardOpen = false;
 QList<EditorToolBar *> EditorToolBar::s_instances;
 
-EditorToolBar::EditorToolBar(QWidget * parent) : QToolBar(parent),
+EditorToolBar::EditorToolBar(QWidget * parent) : QWidget(parent),
+    ui(new Ui::EditorToolBar),
     _sf2Index(-1),
     _updatingDisplayOptions(false)
 {
-    // Configuration
-    this->setContextMenuPolicy(Qt::PreventContextMenu); // no "close" option
+    ui->setupUi(this);
 
     // Style
-    QColor highlightColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
-    this->setStyleSheet("QToolBar{border:0;background-color:" + highlightColor.name() + "}");
+    setAttribute(Qt::WA_StyledBackground, true);
+    this->setStyleSheet("EditorToolBar{background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}");
+    QString separatorStyleSheet = "QFrame{border: 1px solid " +
+        ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
+        ";margin: 7px 3px;}";
+    ui->separator_1->setStyleSheet(separatorStyleSheet);
+    ui->separator_2->setStyleSheet(separatorStyleSheet);
+    ui->separator_3->setStyleSheet(separatorStyleSheet);
+    ui->separator_3->setVisible(false);
 
-    // Create the actions
-    _actionAddSample = new StyledAction(tr("Add a sample"), ":/icons/sample.svg", this);
-    connect(_actionAddSample, SIGNAL(clicked()), this, SLOT(onNewSmplClicked()));
-    this->addWidget(_actionAddSample);
+    // Initialize the actions
+    ui->pushAddSample->initialize(tr("Add a sample"), ":/icons/sample.svg");
+    ui->pushAddInstrument->initialize(tr("Add an instrument"), ":/icons/instrument.svg");
+    ui->pushAddPreset->initialize(tr("Add a preset"), ":/icons/preset.svg");
+    ui->pushUndo->initialize(tr("Cancel"), ":/icons/edit-undo.svg");
+    ui->pushRedo->initialize(tr("Redo"), ":/icons/edit-redo.svg");
+    ui->pushSave->initialize(tr("Save"), ":/icons/document-save.svg");
 
-    _actionAddInstrument = new StyledAction(tr("Add an instrument"), ":/icons/instrument.svg", this);
-    connect(_actionAddInstrument, SIGNAL(clicked()), this, SLOT(onNewInstClicked()));
-    this->addWidget(_actionAddInstrument);
+    ui->pushToolBox->initialize(tr("Toolbox"), ":/icons/toolbox.svg");
+    _toolMenu = new ToolMenu(ui->pushToolBox);
+    ui->pushToolBox->setMenu(_toolMenu);
+    ui->pushToolBox->setMinimumWidth(46);
+    ui->pushToolBox->setStyleSheet("StyledAction{padding-right: 6px;border:0} StyledAction::menu-indicator {image: url(:/icons/arrow_down.svg); width: 10px;}");
 
-    _actionAddPreset = new StyledAction(tr("Add a preset"), ":/icons/preset.svg", this);
-    connect(_actionAddPreset, SIGNAL(clicked()), this, SLOT(onNewPrstClicked()));
-    this->addWidget(_actionAddPreset);
+    ui->pushShowRecorder->initialize(tr("Recorder"), ":/icons/recorder.svg");
+    ui->pushShowRecorder->blockSignals(true);
+    ui->pushShowRecorder->setChecked(s_recorderOpen);
+    ui->pushShowRecorder->blockSignals(false);
 
-    _actionToolBox = new StyledAction(tr("Toolbox"), ":/icons/toolbox.svg", this);
-    this->addWidget(_actionToolBox);
-    _toolMenu = new ToolMenu(_actionToolBox);
-    _actionToolBox->setMenu(_toolMenu);
-    _actionToolBox->setPopupMode(QToolButton::InstantPopup);
-
-    this->addSeparator();
-    _actionUndo = new StyledAction(tr("Cancel"), ":/icons/edit-undo.svg", this);
-    connect(_actionUndo, SIGNAL(clicked()), this, SLOT(onUndo()));
-    this->addWidget(_actionUndo);
-
-    _actionRedo = new StyledAction(tr("Redo"), ":/icons/edit-redo.svg", this);
-    connect(_actionRedo, SIGNAL(clicked()), this, SLOT(onRedo()));
-    this->addWidget(_actionRedo);
-    this->addSeparator();
-
-    _actionSave = new StyledAction(tr("Save"), ":/icons/document-save.svg", this);
-    connect(_actionSave, SIGNAL(clicked()), this, SLOT(onSaveClicked()));
-    this->addWidget(_actionSave);
-
-    QWidget* empty = new QWidget();
-    empty->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    this->addWidget(empty);
-    _displayActionSeparator = this->addSeparator();
-    _displayActionSeparator->setVisible(false);
-
-    _actionShowRecorder = new StyledAction(tr("Recorder"), ":/icons/recorder.svg", this);
-    _actionShowRecorder->setCheckable(true);
-    _actionShowRecorder->setChecked(s_recorderOpen);
-    connect(_actionShowRecorder, SIGNAL(clicked()), this, SLOT(onRecorderActionClicked()));
-    this->addWidget(_actionShowRecorder);
-
-    _actionShowKeyboard = new StyledAction(tr("Virtual keyboard"), ":/icons/piano.svg", this);
-    _actionShowKeyboard->setCheckable(true);
-    _actionShowKeyboard->setChecked(s_keyboardOpen);
-    connect(_actionShowKeyboard, SIGNAL(clicked()), this, SLOT(onKeyboardActionClicked()));
-    this->addWidget(_actionShowKeyboard);
+    ui->pushShowKeyboard->initialize(tr("Virtual keyboard"), ":/icons/piano.svg");
+    ui->pushShowKeyboard->blockSignals(true);
+    ui->pushShowKeyboard->setChecked(s_keyboardOpen);
+    ui->pushShowKeyboard->blockSignals(false);
 
     s_instances << this;
 }
 
 EditorToolBar::~EditorToolBar()
 {
+    delete ui;
     s_instances.removeAll(this);
     if (s_instances.empty())
     {
@@ -126,40 +108,30 @@ void EditorToolBar::onSelectionChanged(IdList ids)
 {
     _currentSelection = ids;
     _toolMenu->selectionChanged(ids);
-    _actionToolBox->disable(_toolMenu->isEmpty());
+    ui->pushToolBox->disable(_toolMenu->isEmpty());
 }
 
 void EditorToolBar::updateActions()
 {
-    _actionAddSample->disable(false);
-    _actionAddInstrument->disable(false);
-    _actionAddPreset->disable(false);
+    ui->pushAddSample->disable(false);
+    ui->pushAddInstrument->disable(false);
+    ui->pushAddPreset->disable(false);
 
     SoundfontManager * sf2 = SoundfontManager::getInstance();
-    _actionSave->disable(!sf2->isEdited(_sf2Index));
-    _actionRedo->disable(!sf2->isRedoable(_sf2Index));
-    _actionUndo->disable(!sf2->isUndoable(_sf2Index));
+    ui->pushSave->disable(!sf2->isEdited(_sf2Index));
+    ui->pushRedo->disable(!sf2->isRedoable(_sf2Index));
+    ui->pushUndo->disable(!sf2->isUndoable(_sf2Index));
 }
 
 void EditorToolBar::disable()
 {
-    _actionAddSample->disable(true);
-    _actionAddInstrument->disable(true);
-    _actionAddPreset->disable(true);
-    _actionToolBox->disable(true);
-    _actionUndo->disable(true);
-    _actionRedo->disable(true);
-    _actionSave->disable(true);
-}
-
-void EditorToolBar::onUndo()
-{
-    SoundfontManager::getInstance()->undo(_sf2Index);
-}
-
-void EditorToolBar::onRedo()
-{
-    SoundfontManager::getInstance()->redo(_sf2Index);
+    ui->pushAddSample->disable(true);
+    ui->pushAddInstrument->disable(true);
+    ui->pushAddPreset->disable(true);
+    ui->pushToolBox->disable(true);
+    ui->pushUndo->disable(true);
+    ui->pushRedo->disable(true);
+    ui->pushSave->disable(true);
 }
 
 void EditorToolBar::setDisplayOptions(QList<Page::DisplayOption> displayOptions)
@@ -169,16 +141,17 @@ void EditorToolBar::setDisplayOptions(QList<Page::DisplayOption> displayOptions)
         delete _displayActions.takeFirst();
 
     // Then create new display options
-    _displayActionSeparator->setVisible(!displayOptions.isEmpty());
+    ui->separator_3->setVisible(!displayOptions.isEmpty());
     foreach (Page::DisplayOption displayOption, displayOptions)
     {
-        StyledAction * action = new StyledAction(displayOption._label, displayOption._iconName, this);
+        StyledAction * action = new StyledAction(this);
+        action->initialize(displayOption._label, displayOption._iconName);
         action->setCheckable(true);
         action->setData(displayOption._id);
         action->setEnabled(displayOption._isEnabled);
         action->setChecked(displayOption._isSelected);
         connect(action, SIGNAL(clicked()), this, SLOT(onDisplayActionClicked()));
-        this->insertWidget(_displayActionSeparator, action);
+        ui->layoutDisplay->addWidget(action);
         _displayActions << action;
     }
 }
@@ -208,17 +181,26 @@ void EditorToolBar::selectDisplayOption(int displayOption)
     _updatingDisplayOptions = false;
 }
 
-
-void EditorToolBar::onRecorderActionClicked()
+void EditorToolBar::on_pushUndo_clicked()
 {
-    bool isDisplayed = _actionShowRecorder->isChecked();
+    SoundfontManager::getInstance()->undo(_sf2Index);
+}
+
+void EditorToolBar::on_pushRedo_clicked()
+{
+    SoundfontManager::getInstance()->redo(_sf2Index);
+}
+
+void EditorToolBar::on_pushShowRecorder_clicked()
+{
+    bool isDisplayed = ui->pushShowRecorder->isChecked();
     updateRecorderButtonsState(isDisplayed);
     emit(recorderDisplayChanged(isDisplayed));
 }
 
-void EditorToolBar::onKeyboardActionClicked()
+void EditorToolBar::on_pushShowKeyboard_clicked()
 {
-    bool isDisplayed = _actionShowKeyboard->isChecked();
+    bool isDisplayed = ui->pushShowKeyboard->isChecked();
     updateKeyboardButtonsState(isDisplayed);
     emit(keyboardDisplayChanged(isDisplayed));
 }
@@ -229,7 +211,7 @@ void EditorToolBar::updateRecorderButtonsState(bool isChecked)
     foreach (EditorToolBar * toolBar, s_instances)
     {
         toolBar->blockSignals(true);
-        toolBar->_actionShowRecorder->setChecked(s_recorderOpen);
+        toolBar->ui->pushShowRecorder->setChecked(s_recorderOpen);
         toolBar->blockSignals(false);
     }
 }
@@ -240,12 +222,12 @@ void EditorToolBar::updateKeyboardButtonsState(bool isChecked)
     foreach (EditorToolBar * toolBar, s_instances)
     {
         toolBar->blockSignals(true);
-        toolBar->_actionShowKeyboard->setChecked(s_keyboardOpen);
+        toolBar->ui->pushShowKeyboard->setChecked(s_keyboardOpen);
         toolBar->blockSignals(false);
     }
 }
 
-void EditorToolBar::onNewSmplClicked()
+void EditorToolBar::on_pushAddSample_clicked()
 {
     // Other allowed format?
     QString ext = "";
@@ -274,7 +256,7 @@ void EditorToolBar::onNewSmplClicked()
     selectionChanged(smplList);
 }
 
-void EditorToolBar::onNewInstClicked()
+void EditorToolBar::on_pushAddInstrument_clicked()
 {
     EltID id(elementSf2, _sf2Index);
     if (!SoundfontManager::getInstance()->isValid(id))
@@ -382,7 +364,7 @@ void EditorToolBar::onNewInstClicked(QString name, bool linkElements)
     selectionChanged(id);
 }
 
-void EditorToolBar::onNewPrstClicked()
+void EditorToolBar::on_pushAddPreset_clicked()
 {
     EltID id(elementSf2, _sf2Index);
     if (!SoundfontManager::getInstance()->isValid(id))
@@ -479,7 +461,7 @@ void EditorToolBar::onNewPrstClicked(QString name, bool linkElements)
     selectionChanged(id);
 }
 
-void EditorToolBar::onSaveClicked()
+void EditorToolBar::on_pushSave_clicked()
 {
     // Remove the focus from the interface (so that all changes are taken into account)
     this->setFocus();

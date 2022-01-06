@@ -52,10 +52,10 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     ui->frameTitle->setStyleSheet(titleStyleSheet);
     ui->frameSearch->setStyleSheet(titleStyleSheet);
     ui->listWidget->setStyleSheet("QListWidget{border:1px solid " +
-                                  this->palette().dark().color().name() +
+                                  ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                                   ";border-top:0;border-right:0;border-bottom:0}");
     ui->pushBecomePremium->setStyleSheet("QPushButton{border:1px solid " +
-                                         this->palette().dark().color().name() +
+                                         ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                                          ";border-top:0;border-right:0;padding:4px;"
                                          "color:" + ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::BUTTON_BACKGROUND).name() + "}");
     ui->comboSort->view()->window()->setWindowFlags(Qt::Popup | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
@@ -77,7 +77,7 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
                 ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
                 0.5);
     ui->labelNoResult->setStyleSheet("QLabel{color:" + color.name() +
-                                     ";border:1px solid " + this->palette().dark().color().name() +
+                                     ";border:1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                                      ";border-top:0;border-right:0;border-bottom:0}");
 
     // Connection with the repository manager

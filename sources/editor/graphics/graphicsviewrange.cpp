@@ -67,7 +67,7 @@ GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
     _shiftRectangles(2, nullptr)
 {
     // Colors
-    QColor color = this->palette().color(QPalette::Text);
+    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     color.setAlpha(180);
     _textColor = color;
     color.setAlpha(40);

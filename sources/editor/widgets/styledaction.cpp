@@ -27,7 +27,7 @@
 
 const QSize StyledAction::ICON_SIZE = QSize(32, 32);
 
-StyledAction::StyledAction(QString label, QString iconName, QWidget *parent) : QToolButton(parent),
+StyledAction::StyledAction(QWidget *parent) : QPushButton(parent),
     _isDisabled(false),
     _data(-1)
 {
@@ -37,20 +37,28 @@ StyledAction::StyledAction(QString label, QString iconName, QWidget *parent) : Q
     // Style
     this->setStyleSheet("StyledAction{border:0}");
     this->setIconSize(ICON_SIZE);
-    this->setMinimumSize(39, 39);
     this->setCursor(Qt::PointingHandCursor);
+    this->setMinimumWidth(40);
+    this->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     _checkedBackgroundColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND, ThemeManager::HOVERED);
+}
 
+void StyledAction::initialize(QString label, QString iconName)
+{
     // Text
     this->setToolTip(label);
 
     // Icon
+    QColor color = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT);
+    QColor hoveredColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED);
+    QColor disabledColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::DISABLED);
+
     QMap<QString, QString> replacement;
-    replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
+    replacement["currentColor"] = color.name();
     _icon = ContextManager::theme()->getColoredSvg(iconName, ICON_SIZE, replacement);
-    replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name();
+    replacement["currentColor"] = hoveredColor.name();
     _iconHover = ContextManager::theme()->getColoredSvg(iconName, ICON_SIZE, replacement);
-    replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::DISABLED).name();
+    replacement["currentColor"] = disabledColor.name();
     _iconDisabled = ContextManager::theme()->getColoredSvg(iconName, ICON_SIZE, replacement);
     this->setIcon(_icon);
 }
