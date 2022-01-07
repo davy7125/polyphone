@@ -61,15 +61,15 @@ void ToolFrequencyPeaks::process(SoundfontManager * sm, IdList ids, AbstractTool
         QString sampleName = sfi.name.replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_");
 
         int number = 1;
-        foreach (FrequencyInfo fi, sfi.frequencies)
+        foreach (Peak fi, sfi.frequencies)
         {
             stream << Qt::endl;
             stream << "\"" << sampleName << "\"" << sep;
             stream << number << sep;
-            stream << QString::number(fi.factor) << sep;
-            stream << QString::number(fi.frequency) << sep;
-            stream << ContextManager::keyName()->getKeyName(fi.key) << sep;
-            stream << QString::number(fi.correction);
+            stream << QString::number(fi._factor) << sep;
+            stream << QString::number(fi._frequency) << sep;
+            stream << ContextManager::keyName()->getKeyName(fi._key) << sep;
+            stream << QString::number(fi._correction);
             number++;
         }
     }

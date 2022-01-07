@@ -79,7 +79,7 @@ void ToolMenu::selectionChanged(IdList ids)
         QIcon icon;
         icon.addPixmap(ContextManager::theme()->getColoredSvg(tool->getIconName(), QSize(24, 24), ThemeManager::LIST_TEXT), QIcon::Normal);
         icon.addPixmap(ContextManager::theme()->getColoredSvg(tool->getIconName(), QSize(24, 24), ThemeManager::HIGHLIGHTED_TEXT), QIcon::Active);
-        QAction * action = this->addAction(icon, tool->getLabel());
+        QAction * action = this->addAction(icon, tool->getLabel(true));
         _currentActions[action] = tool;
     }
 }

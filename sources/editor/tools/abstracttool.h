@@ -46,7 +46,7 @@ public:
 
     /// Icon, label and category displayed to the user to describe the tool
     virtual QString getIconName() const = 0;
-    QString getLabel() const;
+    QString getLabel(bool withPossibleEllipsis = false) const;
     virtual QString getCategory() const = 0;
 
     /// Internal identifier

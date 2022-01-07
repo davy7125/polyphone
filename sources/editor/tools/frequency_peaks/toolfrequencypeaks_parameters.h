@@ -26,26 +26,15 @@
 #define TOOLFREQUENCYPEAKS_PARAMETERS_H
 
 #include "abstracttoolparameters.h"
+#include "graphiquefourier.h"
 #include <QList>
 #include <QString>
-#include <QMetaType>
-
-class FrequencyInfo
-{
-public:
-    double frequency;
-    double factor;
-    int key;
-    int correction;
-};
-
-Q_DECLARE_METATYPE(FrequencyInfo)
 
 class SampleFrequencyInfo
 {
 public:
     QString name;
-    QList<FrequencyInfo> frequencies;
+    QList<Peak> frequencies;
 };
 
 Q_DECLARE_METATYPE(SampleFrequencyInfo)

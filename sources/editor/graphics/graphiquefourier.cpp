@@ -118,59 +118,69 @@ void GraphiqueFourier::setData(QByteArray baData, quint32 dwSmplRate)
 
 void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, bool withReplot)
 {
-    QList<double> freq, factor;
-    QList<int> pitch, corrections;
-    setPos(posStart, posEnd, freq, factor, pitch, corrections, withReplot);
-}
-
-void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &frequencies, QList<double> &factors,
-                              QList<int> &pitch, QList<int> &deltas, bool withReplot)
-{
     _peaks.clear();
-    _delta = 0;
     _key = -1;
+    _delta = 0;
 
     if (_fData.isEmpty())
-    {
         graph(0)->data()->clear();
-        replot();
-        return;
+    else
+    {
+        QVector<float> vectFourier;
+        int posMaxFourier;
+        _peaks = computePeaks(_fData, _dwSmplRate, posStart, posEnd, vectFourier, posMaxFourier, &_key, &_delta);
+
+        // Display the Fourier transform?
+        if (posMaxFourier == -1)
+            graph(0)->data()->clear();
+        else
+            this->dispFourier(vectFourier, posMaxFourier);
     }
 
+
+    if (withReplot)
+        this->replot();
+}
+
+QList<Peak> GraphiqueFourier::computePeaks(QVector<float> fData, quint32 dwSmplRate,
+                                           quint32 posStart, quint32 posEnd,
+                                           QVector<float> &vectFourier, int &posMaxFourier,
+                                           int *key, int *correction)
+{
     // If there is no loop, determine a stable portion for the Fourier transforme and the autocorrelation
     if (posStart == posEnd)
-        SampleUtils::regimePermanent(_fData, _dwSmplRate, posStart, posEnd);
+        SampleUtils::regimePermanent(fData, dwSmplRate, posStart, posEnd);
 
     // Limit or increase the portion to 0.5 second
-    if (posEnd > _dwSmplRate / 2 + posStart)
+    if (posEnd > dwSmplRate / 2 + posStart)
     {
-        quint32 offset = (posEnd - _dwSmplRate / 2 - posStart) / 2;
+        quint32 offset = (posEnd - dwSmplRate / 2 - posStart) / 2;
         posStart += offset;
         posEnd -= offset;
     }
-    else if (posEnd < _dwSmplRate / 2 + posStart)
+    else if (posEnd < dwSmplRate / 2 + posStart)
     {
-        quint32 offset = (posStart + _dwSmplRate / 2 - posEnd) / 2;
+        quint32 offset = (posStart + dwSmplRate / 2 - posEnd) / 2;
         if (posStart < offset)
             posStart = 0;
         else
             posStart -= offset;
         posEnd += offset;
-        if (posEnd > static_cast<quint32>(_fData.size() - 1))
-            posEnd = _fData.size() - 1;
+        if (posEnd > static_cast<quint32>(fData.size() - 1))
+            posEnd = fData.size() - 1;
     }
 
     // Extraction des données du régime permanent
-    QVector<float> baData2 = _fData.mid(static_cast<int>(posStart), static_cast<int>(posEnd - posStart));
+    QVector<float> baData2 = fData.mid(static_cast<int>(posStart), static_cast<int>(posEnd - posStart));
 
     // Corrélation du signal de 20 à 20000Hz
     quint32 dMin;
     QVector<float> vectCorrel = SampleUtils::correlation(baData2.constData(),
                                                          qMin(static_cast<quint32>(baData2.size()), 4000u),
-                                                         _dwSmplRate, 20, 20000, dMin);
+                                                         dwSmplRate, 20, 20000, dMin);
 
     // Transformée de Fourier du signal
-    QVector<float> vectFourier = SampleUtils::getFourierTransform(baData2);
+    vectFourier = SampleUtils::getFourierTransform(baData2);
     quint32 size = static_cast<quint32>(vectFourier.size()) * 2;
 
     // Recherche des corrélations minimales (= plus grandes similitudes) et intensités fréquencielles maximales
@@ -178,19 +188,14 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
     QList<quint32> posMaxFFT = SampleUtils::findMax(vectFourier, 50, 0.05f);
     if (posMaxFFT.isEmpty())
     {
-        graph(0)->data()->clear();
-        replot();
-        return;
+        posMaxFourier = -1;
+        return QList<Peak>();
     }
-
-    // Affichage transformée
-    this->dispFourier(vectFourier, posMaxFFT[0]);
+    else
+        posMaxFourier = posMaxFFT[0];
 
     if (posMinCor.isEmpty())
-    {
-        this->replot();
-        return;
-    }
+        return QList<Peak>();
 
     // Pour chaque minimum de corrélation (considéré comme la base), on cherche un pic de fréquence
     float freq = 0;
@@ -239,7 +244,7 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
         if (rep)
         {
             // Fréquence et score corrélation
-            float freqCorrel = (static_cast<float>(size - 1) / (posMinCor[i] + dMin) * _dwSmplRate) / (size - 1);
+            float freqCorrel = (static_cast<float>(size - 1) / (posMinCor[i] + dMin) * dwSmplRate) / (size - 1);
             float scoreCorrel;
             if (vectCorrel[static_cast<int>(posMinCor[i])] <= 0)
                 scoreCorrel = 1;
@@ -247,7 +252,7 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
                 scoreCorrel = vectCorrel[static_cast<int>(posMinCor[0])] / vectCorrel[static_cast<int>(posMinCor[i])];
 
             // Fréquence et score Fourier
-            float freqFourier = (static_cast<float>(posMaxFFT[numeroPic]) * _dwSmplRate) / (size - 1) / coefFourier;
+            float freqFourier = (static_cast<float>(posMaxFFT[numeroPic]) * dwSmplRate) / (size - 1) / coefFourier;
             float scoreFourier = vectFourier[static_cast<int>(posMaxFFT[numeroPic])] /
                     vectFourier[static_cast<int>(posMaxFFT[0])];
 
@@ -278,7 +283,7 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
 
     // Si aucune note n'a été trouvée, on prend la note la plus probable d'après Fourier
     if (score < 0)
-        freq = static_cast<float>(posMaxFFT[0]) * _dwSmplRate / (size - 1);
+        freq = static_cast<float>(posMaxFFT[0]) * dwSmplRate / (size - 1);
 
     // Numéro de la note correspondant à cette fréquence
     double note3 = 12 * qLn(static_cast<double>(freq)) / 0.69314718056 - 36.3763;
@@ -287,20 +292,24 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
     int note = qRound(note3);
 
     // Affichage
+    QList<Peak> result;
     if (note >= 0 && note <= 128)
     {
-        _key = note;
-        _delta = Utils::round32((note3 - static_cast<double>(note)) * 100.);
+        // Closest key with the associated correction
+        if (key != nullptr)
+            *key = note;
+        if (correction != nullptr)
+            *correction = Utils::round32((note3 - static_cast<double>(note)) * 100.);
 
+        // Peaks
         for (int i = 0; i < posMaxFFT.size(); i++)
         {
             // intensité
-            factors << static_cast<double>(vectFourier[static_cast<int>(posMaxFFT[i])] /
-                       vectFourier[static_cast<int>(posMaxFFT[0])]);
+            double factor = static_cast<double>(vectFourier[static_cast<int>(posMaxFFT[i])] /
+                            vectFourier[static_cast<int>(posMaxFFT[0])]);
 
             // fréquence
-            double freq = static_cast<double>(posMaxFFT[i] * _dwSmplRate) / (size - 1);
-            frequencies << freq;
+            double freq = static_cast<double>(posMaxFFT[i] * dwSmplRate) / (size - 1);
 
             // note la plus proche
             double note = 12. * qLn(freq) / 0.69314718056 - 36.3763;
@@ -310,21 +319,13 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, QList<double> &f
                 note = 128;
             int note2 = Utils::round32(note);
             int delta = Utils::round32((static_cast<double>(note2) - note) * 100.);
-            pitch << note2;
-            deltas << delta;
 
             // Prepare text
-            _peaks << Peak(factors.last(), freq, note2, delta);
+            result << Peak(factor, freq, note2, delta);
         }
     }
-    else
-    {
-        _key = -1;
-        _delta = 0;
-    }
 
-    if (withReplot)
-        this->replot();
+    return result;
 }
 
 void GraphiqueFourier::dispFourier(QVector<float> vectFourier, float posMaxFourier)
@@ -337,7 +338,7 @@ void GraphiqueFourier::dispFourier(QVector<float> vectFourier, float posMaxFouri
         x[i] = (20000. * i) / (size_x - 1); // Conversion Hz
         if (i < vectFourier.size())
             y[i] = static_cast<double>(vectFourier[i]) /
-                    static_cast<double>(vectFourier[static_cast<int>(posMaxFourier)]); // normalisation entre 0 et 1
+                   static_cast<double>(vectFourier[static_cast<int>(posMaxFourier)]); // normalisation entre 0 et 1
         else
             y[i] = 0;
     }
@@ -466,7 +467,7 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
             painter.setFont(fontInfo);
             painter.drawText(QRect(0, posY, size.width() - 142 - marginRight, fontHeight),
                              Qt::AlignRight,
-                             QString::number(_peaks[peakNumber]._intensity, 'f', 2));
+                             QString::number(_peaks[peakNumber]._factor, 'f', 2));
             painter.drawText(QRect(0, posY, size.width() - 80 - marginRight, fontHeight),
                              Qt::AlignRight,
                              QString::number(_peaks[peakNumber]._frequency, 'f', 2) + " " + tr("Hz", "unit for Herz"));
@@ -475,7 +476,7 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
                              ContextManager::keyName()->getKeyName(static_cast<unsigned int>(_peaks[peakNumber]._key)));
             painter.drawText(QRect(0, posY, size.width() - 20 - marginRight, fontHeight),
                              Qt::AlignRight,
-                             (_peaks[peakNumber]._delta > 0 ? "+" : "") + QString::number(_peaks[peakNumber]._delta));
+                             (_peaks[peakNumber]._correction > 0 ? "+" : "") + QString::number(_peaks[peakNumber]._correction));
             painter.setFont(fontInfoSmall);
             painter.drawText(QRect(0, posY, size.width() - marginRight, fontHeight),
                              Qt::AlignRight, "/ 100");
@@ -497,6 +498,7 @@ void GraphiqueFourier::exportPng()
         exportPng(fileName);
     }
 }
+
 void GraphiqueFourier::exportPng(QString fileName)
 {
     // Préparation

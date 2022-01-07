@@ -39,31 +39,26 @@ public:
 
     void run() override
     {
-        // Compute data
-        QList<double> frequencies;
-        QList<double> factors;
-        QList<int> keys;
-        QList<int> corrections;
+        // Get raw data
         SoundfontManager * sm = SoundfontManager::getInstance();
-        GraphiqueFourier graphTmp(nullptr);
-        graphTmp.setData(sm->getData(_id, champ_sampleData16), sm->get(_id, champ_dwSampleRate).dwValue);
-        graphTmp.setPos(sm->get(_id, champ_dwStartLoop).dwValue, sm->get(_id, champ_dwEndLoop).dwValue,
-                        frequencies, factors, keys, corrections, false);
+        QByteArray baData = sm->getData(_id, champ_sampleData16);
+        int length = baData.size() / 2;
+        QVector<float> fData(length);
+        qint16 * data = reinterpret_cast<qint16*>(baData.data());
+        for (int i = 0; i < length; i++)
+            fData[i] = static_cast<float>(data[i]);
 
-        // Store data
+        // Compute the peaks
+        QVector<float> vectFourier;
+        int posMaxFourier;
         SampleFrequencyInfo sampleInfo;
         sampleInfo.name = sm->getQstr(_id, champ_name);
-        for (int i = 0; i < frequencies.count(); i++)
-        {
-            FrequencyInfo info;
-            info.frequency = frequencies[i];
-            info.factor = factors[i];
-            info.key = keys[i];
-            info.correction = corrections[i];
-            sampleInfo.frequencies << info;
-        }
+        sampleInfo.frequencies = GraphiqueFourier::computePeaks(
+                    fData, sm->get(_id, champ_dwSampleRate).dwValue,
+                    sm->get(_id, champ_dwStartLoop).dwValue, sm->get(_id, champ_dwEndLoop).dwValue,
+                    vectFourier, posMaxFourier);
 
-        // Send the data to the tool gui
+        // Send everything to the tool gui
         _toolGui->peakComputed(_id, sampleInfo);
     }
 
@@ -140,17 +135,17 @@ void ToolFrequencyPeaks_gui::onPeakComputed(EltID id, const SampleFrequencyInfo 
             ui->table->setRowCount(currentRow + sfi.frequencies.count());
             for (int i = 0; i < sfi.frequencies.count(); i++)
             {
-                FrequencyInfo fi = sfi.frequencies[i];
+                Peak fi = sfi.frequencies[i];
                 if (i == 0)
                 {
                     ui->table->setItem(currentRow, 0, new QTableWidgetItem(sfi.name));
                     ui->table->item(currentRow, 0)->setBackground(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
                 }
                 ui->table->setItem(currentRow + i, 1, new QTableWidgetItem(QString::number(i + 1)));
-                ui->table->setItem(currentRow + i, 2, new QTableWidgetItem(QString::number(fi.factor)));
-                ui->table->setItem(currentRow + i, 3, new QTableWidgetItem(QString::number(fi.frequency) + " " + tr("Hz")));
-                ui->table->setItem(currentRow + i, 4, new QTableWidgetItem(ContextManager::keyName()->getKeyName(fi.key)));
-                ui->table->setItem(currentRow + i, 5, new QTableWidgetItem(QString::number(fi.correction)));
+                ui->table->setItem(currentRow + i, 2, new QTableWidgetItem(QString::number(fi._factor)));
+                ui->table->setItem(currentRow + i, 3, new QTableWidgetItem(QString::number(fi._frequency) + " " + tr("Hz")));
+                ui->table->setItem(currentRow + i, 4, new QTableWidgetItem(ContextManager::keyName()->getKeyName(fi._key)));
+                ui->table->setItem(currentRow + i, 5, new QTableWidgetItem(QString::number(fi._correction)));
             }
             ui->table->setSpan(currentRow, 0, sfi.frequencies.count(), 1);
         }

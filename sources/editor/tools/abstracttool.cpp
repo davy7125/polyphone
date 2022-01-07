@@ -130,7 +130,7 @@ void AbstractTool::onFinished(bool updateNeeded)
         s_sm->endEditing("tool:" + getIdentifier());
 }
 
-QString AbstractTool::getLabel() const
+QString AbstractTool::getLabel(bool withPossibleEllipsis) const
 {
-    return this->getLabelInternal() + (_toolGui == nullptr ? "" : "...");
+    return this->getLabelInternal() + (_toolGui != nullptr && withPossibleEllipsis ? "..." : "");
 }

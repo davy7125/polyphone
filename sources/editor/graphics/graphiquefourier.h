@@ -27,7 +27,32 @@
 
 #include "qcustomplot.h"
 #include "basetypes.h"
+#include <QMetaType>
 class QMenu;
+
+class Peak
+{
+public:
+    Peak() :
+        _factor(0),
+        _frequency(0),
+        _key(-1),
+        _correction(0)
+    {}
+
+    Peak(double factor, double frequency, int key, int correction) :
+        _factor(factor),
+        _frequency(frequency),
+        _key(key),
+        _correction(correction)
+    {}
+
+    double _factor;
+    double _frequency;
+    int _key;
+    int _correction;
+};
+Q_DECLARE_METATYPE(Peak)
 
 class GraphiqueFourier : public QCustomPlot
 {
@@ -41,9 +66,10 @@ public:
     void setData(QByteArray baData, quint32 dwSmplRate);
     void setSampleName(QString name) { _name = name; }
     void setPos(quint32 posStart, quint32 posEnd, bool withReplot = true);
-    void setPos(quint32 posStart, quint32 posEnd, QList<double> &frequencies, QList<double> &factors,
-                QList<int> &pitch, QList<int> &deltas, bool withReplot);
     void getEstimation(int &pitch, int &correction);
+    static QList<Peak> computePeaks(QVector<float> fData, quint32 dwSmplRate, quint32 posStart, quint32 posEnd,
+                                    QVector<float> &vectFourier, int &posMaxFourier,
+                                    int * key = nullptr, int * correction = nullptr);
 
 protected:
     void mousePressEvent(QMouseEvent *event);
@@ -53,21 +79,6 @@ private slots:
     void exportPng();
 
 private:
-    class Peak
-    {
-    public:
-        Peak(double intensity, double frequency, int key, int delta) :
-            _intensity(intensity),
-            _frequency(frequency),
-            _key(key),
-            _delta(delta)
-        {}
-
-        double _intensity;
-        double _frequency;
-        int _key;
-        int _delta;
-    };
 
     QVector<float> _fData;
     quint32 _dwSmplRate;
