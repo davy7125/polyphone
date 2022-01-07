@@ -53,10 +53,6 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
                         ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                         ";border-top:0;border-left:0;border-right:0" +
                         ";gridline-color: " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + "}");
-
-    QFont font = this->font();
-    font.setPointSize(font.pointSize() - 1);
-    this->setFont(font);
 }
 
 void TableWidget::clear()

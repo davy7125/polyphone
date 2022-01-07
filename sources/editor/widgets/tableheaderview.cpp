@@ -70,9 +70,6 @@ TableHeaderView::TableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, 
     _menuWidth = qMax(_menuWidth, fm.horizontalAdvance(_soloSelectionAction->text()));
 
     // Height of the header
-    QFont font = this->font();
-    font.setPointSize(font.pointSize() - 1);
-    this->setFont(font);
     QFontMetrics fm2(this->font());
     _height = fm2.height() * 2 + 8;
 
@@ -182,7 +179,7 @@ void TableHeaderView::paintSection(QPainter *painter, const QRect &rect, int log
     QString adaptedText = text;
     int lengthLine1 = text.length();
     QFontMetrics fm(this->font());
-    while (fm.horizontalAdvance(text.left(lengthLine1)) > textRect.width() && lengthLine1 > 0)
+    while (fm.horizontalAdvance(text.left(lengthLine1)) > textRect.width() - 2 * MARGIN && lengthLine1 > 0)
         lengthLine1--;
     if (lengthLine1 < text.length())
         adaptedText = text.left(lengthLine1) + "\n" + fm.elidedText(text.mid(lengthLine1), Qt::ElideRight, textRect.width());

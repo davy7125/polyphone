@@ -29,10 +29,11 @@
 #include "graphicsviewrange.h"
 #include "envelopeditor.h"
 #include "utils.h"
-#include <QScrollBar>
-#include <QMenu>
 #include "pianokeybdcustom.h"
 #include "modulatoreditor.h"
+#include <QMenu>
+#include <QScrollBar>
+#include <QFontMetrics>
 
 PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(parent, typePage, typePage == PAGE_INST ? "page:inst" : "page:prst"),
     _table(nullptr)
@@ -449,7 +450,7 @@ void PageTable::formatTable(bool multiGlobal)
 void PageTable::styleFixedRow(int numRow)
 {
     // Color, font
-    QFont font(this->font().family(), 4 * this->font().pointSize() / 5, QFont::Normal, true);
+    QFont font(this->font().family(), this->font().pointSize() - 1, QFont::Normal, true);
     QColor fixedColor = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
                                           ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.35);
 
@@ -463,7 +464,7 @@ void PageTable::styleFixedRow(int numRow)
 
     // Visibility of the row
     _table->showRow(numRow);
-    _table->setRowHeight(numRow, 2 * font.pointSize());
+    _table->setRowHeight(numRow, QFontMetrics(font).height() + 6);
 }
 
 void PageTable::afficheRanges(bool justSelection)

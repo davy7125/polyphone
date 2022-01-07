@@ -43,6 +43,8 @@ WidgetShowHistory::WidgetShowHistory(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->listWidget->viewport()->setAutoFillBackground(false);
+    ui->listWidget->setStyleSheet("QListWidget::item:selected {background-color: " +
+                                  ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}");
 
     // Decoration
     _withDecoration = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "decoration", true).toBool();

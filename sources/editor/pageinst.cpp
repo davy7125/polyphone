@@ -214,7 +214,7 @@ TableWidgetInst::TableWidgetInst(QWidget *parent) : TableWidget(parent)
     // Vertical header
     QColor fixedColor = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
                                           ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.35);
-    QFont font(this->font().family(), 4 * this->font().pointSize() / 5, QFont::Normal, true);
+    QFont font(this->font().family(), this->font().pointSize() - 1, QFont::Normal, true);
     this->setRowCount(_fieldList.count() + 1);
     for (int i = 1; i < this->rowCount(); i++)
     {

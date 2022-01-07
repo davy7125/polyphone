@@ -39,11 +39,8 @@ TableHeaderViewV::TableHeaderViewV(QWidget *parent) : QHeaderView(Qt::Vertical, 
                         ";border-left: 0; border-top: 0}");
     _textColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
 
-    // Font
-    QFont font = this->font();
-    font.setPointSize(font.pointSize() - 1);
-    this->setFont(font);
-    this->setDefaultSectionSize(QFontMetrics(this->font()).height() + 8);
+    // Section height
+    this->setDefaultSectionSize(QFontMetrics(this->font()).height() + 6);
 }
 
 void TableHeaderViewV::paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const

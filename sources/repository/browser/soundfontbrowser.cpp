@@ -79,6 +79,8 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     ui->labelNoResult->setStyleSheet("QLabel{color:" + color.name() +
                                      ";border:1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                                      ";border-top:0;border-right:0;border-bottom:0}");
+    ui->listWidget->setStyleSheet("QListWidget::item:selected {background-color: " +
+                                  ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}");
 
     // Connection with the repository manager
     RepositoryManager * rm = RepositoryManager::getInstance();

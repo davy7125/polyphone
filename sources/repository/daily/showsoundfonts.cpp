@@ -44,6 +44,8 @@ ShowSoundfonts::ShowSoundfonts(QWidget *parent) :
     ui->pushRetry->setStyleSheet("QPushButton{background-color:" +
                                  ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() +
                                  ";border-radius:5px;padding:5px}");
+    ui->listWidget->setStyleSheet("QListWidget::item:selected {background-color: " +
+                                  ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}");
 
     // Initialization
     _urlReaderJson = new UrlReaderJson(RepositoryManager::BASE_URL + "day");

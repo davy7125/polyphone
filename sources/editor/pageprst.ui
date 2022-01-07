@@ -74,6 +74,9 @@
          <property name="cornerButtonEnabled">
           <bool>false</bool>
          </property>
+         <attribute name="verticalHeaderMinimumSectionSize">
+          <number>10</number>
+         </attribute>
         </widget>
        </item>
        <item>
