@@ -35,11 +35,7 @@ TableHeaderViewV::TableHeaderViewV(QWidget *parent) : QHeaderView(Qt::Vertical, 
     this->setHighlightSections(true);
 
     // Style
-    this->setStyleSheet("QHeaderView::section{border:1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
-                        ";border-left: 0; border-top: 0}");
     _textColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
-
-    // Section height
     this->setDefaultSectionSize(QFontMetrics(this->font()).height() + 6);
 }
 

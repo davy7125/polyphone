@@ -72,10 +72,6 @@ TableHeaderView::TableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, 
     // Height of the header
     QFontMetrics fm2(this->font());
     _height = fm2.height() * 2 + 8;
-
-    // Style
-    this->setStyleSheet("QHeaderView::section{border:1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
-                        ";border-top: 0; border-left: 0}");
 }
 
 TableHeaderView::~TableHeaderView()

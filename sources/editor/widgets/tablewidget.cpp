@@ -48,11 +48,8 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
     connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(onItemSelectionChanged()));
 
     // Style
-    this->setStyleSheet("QTableWidget QTableCornerButton::section {background: " + ContextManager::theme()->getColor(ThemeManager::BUTTON_BACKGROUND).name() +
-                        "; border: 1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + "; border-top: 0; border-left: 0;}QTableWidget{border:1px solid " +
-                        ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
-                        ";border-top:0;border-left:0;border-right:0" +
-                        ";gridline-color: " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + "}");
+    this->setStyleSheet(ContextManager::theme()->getTableTheme() +
+                        "QTableWidget {border-top:0;border-left:0;border-right:0;}");
 }
 
 void TableWidget::clear()

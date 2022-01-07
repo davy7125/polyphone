@@ -82,6 +82,7 @@ ToolFrequencyPeaks_gui::ToolFrequencyPeaks_gui(QWidget *parent) :
     ui->table->setHorizontalHeaderItem(3, new QTableWidgetItem(tr("Frequency")));
     ui->table->setHorizontalHeaderItem(4, new QTableWidgetItem(tr("Key")));
     ui->table->setHorizontalHeaderItem(5, new QTableWidgetItem(tr("Correction")));
+    ui->table->setStyleSheet(ContextManager::theme()->getTableTheme());
 
     // Connection (do to different threads)
     qRegisterMetaType<SampleFrequencyInfo>();

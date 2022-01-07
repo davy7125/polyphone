@@ -34,7 +34,7 @@ TablePageOverview::TablePageOverview(QWidget *parent) : QTableWidget(parent)
 
     // Style of the table content
     this->setAlternatingRowColors(true);
-    this->setStyleSheet("QTableWidget{border:0;gridline-color: " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + "}");
+    this->setStyleSheet(ContextManager::theme()->getTableTheme() + "QTableWidget{border:0;}");
 }
 
 OverviewTableHeaderView::OverviewTableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, parent)
@@ -60,12 +60,6 @@ OverviewTableHeaderView::OverviewTableHeaderView(QWidget *parent) : QHeaderView(
     _arrowDown = ContextManager::theme()->getColoredSvg(":/icons/arrow_down.svg", QSize(12, 12), ThemeManager::LIST_TEXT);
     _arrowUp = ContextManager::theme()->getColoredSvg(":/icons/arrow_up.svg", QSize(12, 12), ThemeManager::LIST_TEXT);
     _textColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
-
-    // Style
-    this->setStyleSheet("QHeaderView::section{border:1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
-                        ";border-top: 0; border-left: 0}" +
-                        "QHeaderView::down-arrow {image: url(:/icons/empty)}" +
-                        "QHeaderView::up-arrow {image: url(:/icons/empty)}");
 
     // The sections can be clicked for sorting rows
     this->setSectionsClickable(true);

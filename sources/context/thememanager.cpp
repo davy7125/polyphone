@@ -693,11 +693,58 @@ QString ThemeManager::getMenuTheme()
 {
     QString middleColor = this->mix(this->getColor(LIST_TEXT),
                                     this->getColor(LIST_BACKGROUND), 0.5).name();
-    return QString("QMenu {background-color: ") + this->getColor(LIST_BACKGROUND).name() +
-            "; border: 1px solid " + middleColor + "}" +
-            "QMenu::item {padding: 5px 15px } QMenu::icon {padding-left: 20px;} " +
-            "QMenu::item:selected { background: " + this->getColor(HIGHLIGHTED_BACKGROUND).name() + "; color: " +
-            this->getColor(HIGHLIGHTED_TEXT).name() + "; }" +
-            QString("QMenu::separator {background: ") + middleColor +
-            ";margin: 10px 45px; height: 1px}";
+    return QString("\
+QMenu {\
+  background-color: %1;\
+  border: 1px solid %4;\
+}\
+QMenu::item {\
+  padding: 5px 15px;\
+}\
+QMenu::icon {\
+  padding-left: 20px;\
+}\
+QMenu::item:selected {\
+  background: %2;\
+  color: %3;\
+}\
+QMenu::separator {\
+  background: %4;\
+  margin: 10px 45px;\
+  height: 1px;\
+}")
+       .arg(this->getColor(LIST_BACKGROUND).name())
+       .arg(this->getColor(HIGHLIGHTED_BACKGROUND).name())
+       .arg(this->getColor(HIGHLIGHTED_TEXT).name())
+       .arg(middleColor);
+}
+
+QString ThemeManager::getTableTheme()
+{
+    return QString("\
+QTableWidget QTableCornerButton::section {\
+  background: %1;\
+  border: 1px solid %2;\
+  border-top: 0;\
+  border-left: 0;\
+}\
+QTableWidget {\
+  border:1px solid %2;\
+  gridline-color: %2;\
+}\
+QHeaderView::section {\
+  border:1px solid %2;\
+  padding-left: 2px;\
+  padding-right: 2px;\
+  border-top: 0;\
+  border-left: 0;\
+}\
+QHeaderView::down-arrow {\
+  image: url(:/icons/empty);\
+}\
+QHeaderView::up-arrow {\
+  image: url(:/icons/empty);\
+}")
+       .arg(this->getColor(ThemeManager::BUTTON_BACKGROUND).name())
+       .arg(this->getColor(ThemeManager::BORDER).name());
 }

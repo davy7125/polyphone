@@ -14,6 +14,60 @@
    <string notr="true">Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="1">
+    <widget class="QComboBox" name="comboFirstC">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <item>
+      <property name="text">
+       <string notr="true">0</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">12</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">24</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">36</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">48</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">60</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">72</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">84</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>First C</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0" colspan="2">
     <widget class="QTableWidget" name="tableKeyboardMap">
      <property name="sizePolicy">
@@ -25,6 +79,9 @@
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOn</enum>
+     </property>
      <property name="sizeAdjustPolicy">
       <enum>QAbstractScrollArea::AdjustToContents</enum>
      </property>
@@ -33,6 +90,9 @@
      </property>
      <property name="horizontalScrollMode">
       <enum>QAbstractItemView::ScrollPerPixel</enum>
+     </property>
+     <property name="cornerButtonEnabled">
+      <bool>false</bool>
      </property>
      <attribute name="verticalHeaderDefaultSectionSize">
       <number>25</number>
@@ -122,60 +182,6 @@
        <string notr="true">Do</string>
       </property>
      </column>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>First C</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QComboBox" name="comboFirstC">
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
-     <item>
-      <property name="text">
-       <string notr="true">0</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">12</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">24</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">36</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">48</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">60</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">72</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string notr="true">84</string>
-      </property>
-     </item>
     </widget>
    </item>
   </layout>
