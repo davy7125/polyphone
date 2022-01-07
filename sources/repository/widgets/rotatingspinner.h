@@ -26,6 +26,7 @@
 #define ROTATINGSPINNER_H
 
 #include <QWidget>
+#include "thememanager.h"
 class QPropertyAnimation;
 
 
@@ -37,6 +38,9 @@ public:
     explicit RotatingSpinner(QWidget *parent = nullptr);
     ~RotatingSpinner();
 
+    // Set the color type (default is window text color)
+    void setColorType(ThemeManager::ColorType colorType) { _colorType = colorType; }
+
     // Start or restart the animation
     void startAnimation();
 
@@ -47,6 +51,7 @@ private:
     QPropertyAnimation * _animation;
     QPixmap _pixmap;
     QSize _size;
+    ThemeManager::ColorType _colorType;
 };
 
 #endif // ROTATINGSPINNER_H

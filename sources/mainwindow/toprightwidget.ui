@@ -61,8 +61,14 @@
     <widget class="RotatingSpinner" name="spinner" native="true">
      <property name="minimumSize">
       <size>
-       <width>16</width>
+       <width>42</width>
        <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>42</width>
+       <height>20</height>
       </size>
      </property>
     </widget>
@@ -76,6 +82,18 @@
    </item>
    <item>
     <widget class="QPushButton" name="pushUser">
+     <property name="minimumSize">
+      <size>
+       <width>42</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>42</width>
+       <height>16777215</height>
+      </size>
+     </property>
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
@@ -98,6 +116,18 @@
    </item>
    <item>
     <widget class="DownloadProgressButton" name="toolButtonDownload">
+     <property name="minimumSize">
+      <size>
+       <width>42</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>42</width>
+       <height>16777215</height>
+      </size>
+     </property>
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
      </property>

@@ -62,6 +62,9 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
     ui->toolButtonDownload->setStyleSheet("QToolButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)} QToolButton{border:0;margin: 3px;padding: 3px;}");
     ui->toolButtonDownload->hide();
 
+    ui->spinner->setColorType(ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
+                                  ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND);
+
     // Add the main menu
     _menu = new MainMenu(ui->toolButton);
     _menu->setFullScreen(parent->windowState() & Qt::WindowFullScreen);

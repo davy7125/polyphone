@@ -28,7 +28,8 @@
 #include <QPainter>
 
 RotatingSpinner::RotatingSpinner(QWidget *parent) : QWidget(parent),
-    _animation(new QPropertyAnimation(this))
+    _animation(new QPropertyAnimation(this)),
+    _colorType(ThemeManager::WINDOW_TEXT)
 {
     // Configure the animation
     _animation->setTargetObject(this);
@@ -59,7 +60,7 @@ void RotatingSpinner::paintEvent(QPaintEvent * event)
     // Get the image and scale it if not already done or if the size changes
     if (_pixmap.isNull() || _size != this->size())
     {
-        _pixmap = ContextManager::theme()->getColoredSvg(":/misc/spinner.svg", this->size(), ThemeManager::WINDOW_TEXT);
+        _pixmap = ContextManager::theme()->getColoredSvg(":/misc/spinner.svg", this->size(), _colorType);
         _size = this->size();
     }
 
