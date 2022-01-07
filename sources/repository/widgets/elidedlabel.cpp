@@ -44,7 +44,7 @@ void ElidedLabel::setTextToElide(const QString text, const QString link)
 
     // Best width
     QFontMetrics metrics(this->font());
-    _fullSize = QSize(metrics.horizontalAdvance(_text), metrics.height());
+    _fullSize = QSize(metrics.horizontalAdvance(_text) + 6, metrics.height());
 
     this->resizeEvent(nullptr);
 }
