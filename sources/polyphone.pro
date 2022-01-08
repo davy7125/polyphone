@@ -9,7 +9,7 @@
 # Uncomment a line if your distribution doesn't come with some of the following libraries
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
-DEFINES += USE_LOCAL_QCUSTOMPLOT
+#DEFINES += USE_LOCAL_QCUSTOMPLOT
 DEFINES += USE_LOCAL_SFARKLIB
 
 # Uncomment this line to use wolfssl instead of openssl (for a license issue)
@@ -528,7 +528,7 @@ SOURCES	+= main.cpp \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.cpp \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_parameters.cpp \
     repository/soundfont/uploadingdialog.cpp \
-    lib/qtsingleapplication/qtlocalpeer.cpp \ # problem here with lupdate
+    lib/qtsingleapplication/qtlocalpeer.cpp \
     lib/qtsingleapplication/qtsingleapplication.cpp \
     mainwindow/tabbar.cpp \
     editor/tools/load_from_inst/toolloadfrominst.cpp \

@@ -68,7 +68,7 @@ protected:
     QString id;
     QString socketName;
     QLocalServer* server;
-    QtLP_Private::QtLockedFile lockFile;
+    QtLockedFile lockFile;
 
 private:
     static const char* ack;

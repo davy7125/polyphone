@@ -1863,7 +1863,7 @@ repository</source>
 <context>
     <name>DownloadProgressButton</name>
     <message>
-        <location filename="repository/widgets/downloadprogressbutton.cpp" line="42"/>
+        <location filename="repository/widgets/downloadprogressbutton.cpp" line="45"/>
         <source>Clear completed downloads</source>
         <translation>Скрыть завершённые загрузки</translation>
     </message>
@@ -1871,27 +1871,22 @@ repository</source>
 <context>
     <name>DownloadProgressCell</name>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.ui" line="51"/>
+        <location filename="repository/widgets/downloadprogresscell.ui" line="111"/>
         <source>Cancel download</source>
         <translation>Отменить загрузку</translation>
     </message>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="70"/>
-        <source>Open &quot;%1&quot;</source>
-        <translation>Открыть «%1»</translation>
-    </message>
-    <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="89"/>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="85"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="90"/>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="86"/>
         <source>Couldn&apos;t open file &quot;%1&quot;. If this is an archive, you may have to extract it first.</source>
         <translation>Не удалось открыть файл «%1». Если это архив, то сначала его нужно распаковать.</translation>
     </message>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="107"/>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="115"/>
         <source>Download canceled</source>
         <translation>Загрузка отменена</translation>
     </message>
@@ -6446,17 +6441,17 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
 <context>
     <name>TopRightWidget</name>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="101"/>
+        <location filename="mainwindow/toprightwidget.ui" line="174"/>
         <source>User area</source>
         <translation>Пользовательская зона</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="135"/>
+        <location filename="mainwindow/toprightwidget.ui" line="134"/>
         <source>Download status</source>
         <translation>Состояние загрузки</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="169"/>
+        <location filename="mainwindow/toprightwidget.ui" line="214"/>
         <source>Main menu</source>
         <translation>Главное меню</translation>
     </message>

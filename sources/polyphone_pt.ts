@@ -1851,7 +1851,7 @@ online</translation>
 <context>
     <name>DownloadProgressButton</name>
     <message>
-        <location filename="repository/widgets/downloadprogressbutton.cpp" line="42"/>
+        <location filename="repository/widgets/downloadprogressbutton.cpp" line="45"/>
         <source>Clear completed downloads</source>
         <translation>Limpar downloads concluídos</translation>
     </message>
@@ -1859,28 +1859,22 @@ online</translation>
 <context>
     <name>DownloadProgressCell</name>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.ui" line="51"/>
+        <location filename="repository/widgets/downloadprogresscell.ui" line="111"/>
         <source>Cancel download</source>
         <translation>Cancelar download</translation>
     </message>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="70"/>
-        <source>Open &quot;%1&quot;</source>
-        <oldsource>Open &quot;%0&quot;</oldsource>
-        <translation>Abrir &quot;%1&quot;</translation>
-    </message>
-    <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="89"/>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="85"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="90"/>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="86"/>
         <source>Couldn&apos;t open file &quot;%1&quot;. If this is an archive, you may have to extract it first.</source>
         <translation>Não foi possível abrir o arquivo &quot;%1&quot;. Se isso é um arquivo, talvez seja necessário extraí-lo primeiro.</translation>
     </message>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="107"/>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="115"/>
         <source>Download canceled</source>
         <translation>Download cancelado</translation>
     </message>
@@ -6349,17 +6343,17 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TopRightWidget</name>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="101"/>
+        <location filename="mainwindow/toprightwidget.ui" line="174"/>
         <source>User area</source>
         <translation>Área do usuário</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="135"/>
+        <location filename="mainwindow/toprightwidget.ui" line="134"/>
         <source>Download status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="169"/>
+        <location filename="mainwindow/toprightwidget.ui" line="214"/>
         <source>Main menu</source>
         <translation>Menu principal</translation>
     </message>

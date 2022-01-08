@@ -1852,7 +1852,7 @@ repository</source>
 <context>
     <name>DownloadProgressButton</name>
     <message>
-        <location filename="repository/widgets/downloadprogressbutton.cpp" line="42"/>
+        <location filename="repository/widgets/downloadprogressbutton.cpp" line="45"/>
         <source>Clear completed downloads</source>
         <translation>Vyprázdnit dokončená stahování</translation>
     </message>
@@ -1860,28 +1860,22 @@ repository</source>
 <context>
     <name>DownloadProgressCell</name>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.ui" line="51"/>
+        <location filename="repository/widgets/downloadprogresscell.ui" line="111"/>
         <source>Cancel download</source>
         <translation>Zrušit stahování</translation>
     </message>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="70"/>
-        <source>Open &quot;%1&quot;</source>
-        <oldsource>Open &quot;%0&quot;</oldsource>
-        <translation>Otevřít &quot;%1&quot;</translation>
-    </message>
-    <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="89"/>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="85"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="90"/>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="86"/>
         <source>Couldn&apos;t open file &quot;%1&quot;. If this is an archive, you may have to extract it first.</source>
         <translation>Nepodařilo se otevřít soubor &quot;%1&quot;. Pokud se jedná o archiv, možná jej budete muset nejprve rozbalit.</translation>
     </message>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="107"/>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="115"/>
         <source>Download canceled</source>
         <translation>Stahování zrušeno</translation>
     </message>
@@ -6339,17 +6333,17 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TopRightWidget</name>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="101"/>
+        <location filename="mainwindow/toprightwidget.ui" line="174"/>
         <source>User area</source>
         <translation>Uživatelská oblast</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="135"/>
+        <location filename="mainwindow/toprightwidget.ui" line="134"/>
         <source>Download status</source>
         <translation>Stav stahování</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="169"/>
+        <location filename="mainwindow/toprightwidget.ui" line="214"/>
         <source>Main menu</source>
         <translation>Hlavní nabídka</translation>
     </message>
