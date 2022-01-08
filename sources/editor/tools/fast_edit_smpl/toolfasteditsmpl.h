@@ -43,13 +43,13 @@ public:
 
     QString getCategory() const override
     {
-        return tr("Sample processing");
+        return tr("Fast editing");
     }
 
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "smpl:fastEdit";
+        return "smpl:shiftParam";
     }
 
     /// Process an element
@@ -58,7 +58,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return tr("Fast editing");
+        return tr("Shift a parameter");
     }
 };
 

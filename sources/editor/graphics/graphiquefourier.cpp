@@ -25,7 +25,9 @@
 #include "graphiquefourier.h"
 #include "sound.h"
 #include "sampleutils.h"
+#include "soundfontmanager.h"
 #include "contextmanager.h"
+#include "frequency_peaks/toolfrequencypeaks.h"
 #include "utils.h"
 #include <QMenu>
 #include <QFileDialog>
@@ -85,8 +87,11 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
 
     // Préparation du menu contextuel
     _menu = new QMenu(this);
-    QAction * action = _menu->addAction(tr("Export graph"));
-    connect(action, SIGNAL(triggered()), this, SLOT(exportPng()));
+    _menu->setStyleSheet(ContextManager::theme()->getMenuTheme());
+    QAction * action1 = _menu->addAction(tr("Export graph") + "...");
+    connect(action1, SIGNAL(triggered()), this, SLOT(exportPng()));
+    QAction * action2 = _menu->addAction(tr("Show peak frequencies") + "...");
+    connect(action2, SIGNAL(triggered()), this, SLOT(exportPeaks()));
 
     this->plotLayout()->insertRow(0);
     this->plotLayout()->setRowStretchFactors(QList<double>() << 1 << 100);
@@ -105,19 +110,44 @@ void GraphiqueFourier::setBackgroundColor(QColor color)
     this->setBackground(color);
 }
 
-void GraphiqueFourier::setData(QByteArray baData, quint32 dwSmplRate)
+void GraphiqueFourier::setCurrentIds(IdList ids)
 {
-    int length = baData.size() / 2;
-    _fData.resize(length);
-    qint16 * data = reinterpret_cast<qint16*>(baData.data());
-    for (int i = 0; i < length; i++)
-        _fData[i] = static_cast<float>(data[i]);
+    _currentIds = ids;
 
-    this->_dwSmplRate = dwSmplRate;
+    if (_currentIds.count() == 1)
+    {
+        // Sample rate
+        this->_dwSmplRate = SoundfontManager::getInstance()->get(_currentIds[0], champ_dwSampleRate).dwValue;
+
+        // Load data
+        QByteArray baData = SoundfontManager::getInstance()->getData(_currentIds[0], champ_sampleData16);
+        int length = baData.size() / 2;
+        _fData.resize(length);
+        qint16 * data = reinterpret_cast<qint16*>(baData.data());
+        for (int i = 0; i < length; i++)
+            _fData[i] = static_cast<float>(data[i]);
+
+        // Menu
+        _menu->actions()[0]->setEnabled(true);
+    }
+    else
+    {
+        this->_dwSmplRate = -1;
+        _fData.clear();
+        _peaks.clear();
+        graph(0)->data()->clear();
+        this->replot();
+
+        // Menu
+        _menu->actions()[0]->setEnabled(false);
+    }
 }
 
 void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, bool withReplot)
 {
+    if (_currentIds.count() != 1)
+        return;
+
     _peaks.clear();
     _key = -1;
     _delta = 0;
@@ -136,7 +166,6 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, bool withReplot)
         else
             this->dispFourier(vectFourier, posMaxFourier);
     }
-
 
     if (withReplot)
         this->replot();
@@ -546,6 +575,13 @@ void GraphiqueFourier::exportPng(QString fileName)
 
     // Redimensionnement
     this->setMinimumSize(minSize);
+}
+
+void GraphiqueFourier::exportPeaks()
+{
+    ToolFrequencyPeaks tool;
+    tool.setIds(_currentIds);
+    tool.run();
 }
 
 void GraphiqueFourier::getEstimation(int &pitch, int &correction)

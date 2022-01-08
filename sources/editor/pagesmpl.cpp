@@ -59,8 +59,6 @@ PageSmpl::PageSmpl(QWidget *parent) :
     // Icons
     ui->pushFullLength->setIcon(ContextManager::theme()->getColoredSvg(":/icons/range.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
     ui->pushAutoTune->setIcon(ContextManager::theme()->getColoredSvg(":/icons/left.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
-    ui->pushFullLength->setMaximumHeight(ui->spinStartLoop->height());
-    ui->pushAutoTune->setMaximumHeight(ui->spinTune->height());
 
     // Initialize spin box for the key names
     ui->spinRootKey->setAlwaysShowKeyName(true);
@@ -198,12 +196,11 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
 
     // Graphics
     ui->grapheFourier->setSampleName(_sf2->getQstr(id, champ_name));
+    ui->grapheFourier->setCurrentIds(selectedIds);
     ui->waveDisplay->setCurrentSample(0);
     if (nombreElements > 1)
     {
         ui->waveDisplay->displayMultipleSelection(true);
-        ui->grapheFourier->setData(QByteArray(), 0);
-        ui->grapheFourier->setPos(0, 0);
         ui->pushAutoTune->setEnabled(true);
     }
     else
@@ -215,8 +212,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
         ui->waveDisplay->setEndLoop(endLoop, false);
         ui->waveDisplay->repaint();
 
-        // Remplissage du graphe fourier
-        ui->grapheFourier->setData(baData, sampleRate);
+        // Loop points in the Fourier graph
         ui->grapheFourier->setPos(startLoop, endLoop);
 
         int pitch, correction;
@@ -364,8 +360,7 @@ void PageSmpl::setStartLoop()
     _sf2->endEditing(getEditingSource());
 
     // Update the page
-    if (_currentIds.count() == 1)
-        ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
+    ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
     updateLoopQuality();
 }
 
@@ -421,8 +416,7 @@ void PageSmpl::setEndLoop()
     _sf2->endEditing(getEditingSource());
 
     // Update the page
-    if (_currentIds.count() == 1)
-        ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
+    ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
     updateLoopQuality();
 }
 
@@ -508,9 +502,7 @@ void PageSmpl::on_pushFullLength_clicked()
     ui->spinStartLoop->setMaximum(displayedEndLoop);
     ui->spinEndLoop->setValue(displayedEndLoop);
     ui->spinEndLoop->setMinimum(0);
-
-    if (_currentIds.count() == 1)
-        ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
+    ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
     updateLoopQuality();
 
     if (triggersMessage)
@@ -1016,14 +1008,10 @@ void PageSmpl::on_pushAutoTune_clicked()
 
 void PageSmpl::autoTune(EltID id, int &pitch, int &correction)
 {
-    // Récupération des données
-    QByteArray baData = _sf2->getData(id, champ_sampleData16);
-    quint32 sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
+    // Remplissage du graphique Fourier
+    ui->grapheFourier->setCurrentIds(id);
     quint32 startLoop = _sf2->get(id, champ_dwStartLoop).dwValue;
     quint32 endLoop = _sf2->get(id, champ_dwEndLoop).dwValue;
-
-    // Remplissage du graphique Fourier
-    ui->grapheFourier->setData(baData, sampleRate);
     ui->grapheFourier->setPos(startLoop, endLoop, false);
 
     // Hauteur de note et correction

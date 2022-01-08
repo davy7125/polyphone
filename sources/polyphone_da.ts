@@ -749,27 +749,27 @@
 <context>
     <name>ConfigPanel</name>
     <message>
-        <location filename="context/interface/configpanel.ui" line="81"/>
+        <location filename="context/interface/configpanel.ui" line="87"/>
         <source>General</source>
         <translation>Generelt</translation>
     </message>
     <message>
-        <location filename="context/interface/configpanel.ui" line="114"/>
+        <location filename="context/interface/configpanel.ui" line="120"/>
         <source>Interface</source>
         <translation>Brugerflade</translation>
     </message>
     <message>
-        <location filename="context/interface/configpanel.ui" line="147"/>
+        <location filename="context/interface/configpanel.ui" line="153"/>
         <source>Sound</source>
         <translation>Lyd</translation>
     </message>
     <message>
-        <location filename="context/interface/configpanel.ui" line="180"/>
+        <location filename="context/interface/configpanel.ui" line="186"/>
         <source>Virtual keyboard</source>
         <translation>Virtuelt keyboard</translation>
     </message>
     <message>
-        <location filename="context/interface/configpanel.ui" line="213"/>
+        <location filename="context/interface/configpanel.ui" line="219"/>
         <source>Online repository</source>
         <translation>Online filoversigt</translation>
     </message>
@@ -837,103 +837,108 @@
         <translation>Sprog</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="70"/>
+        <location filename="context/interface/configsectioninterface.ui" line="69"/>
         <source>Key names</source>
         <translation>Tangentnavn</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="26"/>
+        <location filename="context/interface/configsectioninterface.ui" line="25"/>
         <source>Options</source>
         <translation>Muligheder</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="165"/>
+        <location filename="context/interface/configsectioninterface.ui" line="159"/>
         <source>Middle C → 60, then 61</source>
         <translation>Middel C → 60, derefter 61</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="170"/>
+        <location filename="context/interface/configsectioninterface.ui" line="164"/>
         <source>Middle C → C3, then C♯3</source>
         <translation>Middel C → C3, derefter C♯3</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="175"/>
+        <location filename="context/interface/configsectioninterface.ui" line="169"/>
         <source>Middle C → C3, then D♭3</source>
         <translation>Middel C → C3, derefter D♭3</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="180"/>
+        <location filename="context/interface/configsectioninterface.ui" line="174"/>
         <source>Middle C → C4, then C♯4</source>
         <translation>Middel C → C3, derefter C♯3</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="185"/>
+        <location filename="context/interface/configsectioninterface.ui" line="179"/>
         <source>Middle C → C4, then D♭4</source>
         <translation>Middel C → C4, derefter D♭4</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="190"/>
+        <location filename="context/interface/configsectioninterface.ui" line="184"/>
         <source>Middle C → C5, then C♯5</source>
         <translation>Middel C → C5, derefter C♯5</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="195"/>
+        <location filename="context/interface/configsectioninterface.ui" line="189"/>
         <source>Middle C → C5, then D♭5</source>
         <translation>Middel C → C5, derefter D♭5</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="145"/>
+        <location filename="context/interface/configsectioninterface.ui" line="140"/>
         <source>Sort divisions</source>
         <translation>Sorter opdelinger</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="116"/>
+        <location filename="context/interface/configsectioninterface.ui" line="112"/>
         <source>by key range</source>
         <translation>i tangentrækkefølge</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="121"/>
+        <location filename="context/interface/configsectioninterface.ui" line="117"/>
         <source>by velocity range</source>
         <translation>i anslagsstyrkefølge</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="126"/>
+        <location filename="context/interface/configsectioninterface.ui" line="122"/>
         <source>in alphabetical order</source>
         <translation>i alfabetisk orden</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="131"/>
+        <location filename="context/interface/configsectioninterface.ui" line="127"/>
         <source>none</source>
         <comment>speaking of the &quot;sort divisions&quot;</comment>
         <translation>ingen sortering</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="38"/>
+        <location filename="context/interface/configsectioninterface.ui" line="39"/>
         <source>Decorations</source>
         <translation>Dekorationer</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="209"/>
+        <location filename="context/interface/configsectioninterface.ui" line="202"/>
         <source>Unique instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="238"/>
+        <location filename="context/interface/configsectioninterface.ui" line="229"/>
         <source>Theme</source>
         <translation>Tema</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="509"/>
+        <location filename="context/interface/configsectioninterface.ui" line="243"/>
+        <source>Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="508"/>
         <source>Selection</source>
         <translation>Valg</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="271"/>
+        <location filename="context/interface/configsectioninterface.ui" line="275"/>
         <source>Text</source>
         <translation>Tekst</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="346"/>
+        <location filename="context/interface/configsectioninterface.ui" line="348"/>
         <source>Window</source>
         <translation>Vindue</translation>
     </message>
@@ -943,30 +948,35 @@
         <translation>Baggrund</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="446"/>
+        <location filename="context/interface/configsectioninterface.ui" line="447"/>
         <source>Button</source>
         <translation>Knap</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="584"/>
+        <location filename="context/interface/configsectioninterface.ui" line="581"/>
         <source>List and table</source>
         <translation>Rækker og tabeller</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="636"/>
+        <location filename="context/interface/configsectioninterface.ui" line="628"/>
+        <source>Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="657"/>
         <source>This modification will be applied during the next start of the software.</source>
         <translation>Ændringen bliver opdateret efter genstart.</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.cpp" line="165"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="177"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="189"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="201"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="213"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="225"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="237"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="249"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="261"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="186"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="198"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="210"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="222"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="234"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="246"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="258"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="270"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="282"/>
         <source>Select a color</source>
         <translation>Vælg en farve</translation>
     </message>
@@ -974,27 +984,27 @@
 <context>
     <name>ConfigSectionKeyboard</name>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="45"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="102"/>
         <source>Octave #1</source>
         <translation>Oktav #1</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="50"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="107"/>
         <source>Octave #2</source>
         <translation>Oktav #2</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="55"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="112"/>
         <source>Octave #3</source>
         <translation>Oktav #3</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="60"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="117"/>
         <source>Octave #4</source>
         <translation>Oktav #4</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="133"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="67"/>
         <source>First C</source>
         <translation>Første C</translation>
     </message>
@@ -1079,7 +1089,7 @@ Premiummedlem!</translation>
 <context>
     <name>ConfigSectionSound</name>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="236"/>
+        <location filename="context/interface/configsectionsound.ui" line="237"/>
         <source>Reverb</source>
         <translation>Rumklang</translation>
     </message>
@@ -1089,69 +1099,69 @@ Premiummedlem!</translation>
         <translation>Input niveau (dB)</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="343"/>
+        <location filename="context/interface/configsectionsound.ui" line="341"/>
         <source>Width</source>
         <translation>Bredde</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="65"/>
-        <location filename="context/interface/configsectionsound.ui" line="378"/>
+        <location filename="context/interface/configsectionsound.ui" line="63"/>
+        <location filename="context/interface/configsectionsound.ui" line="375"/>
         <source>Level</source>
         <translation>Styrke</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="176"/>
+        <location filename="context/interface/configsectionsound.ui" line="172"/>
         <source>Tuning fork</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="189"/>
+        <location filename="context/interface/configsectionsound.ui" line="185"/>
         <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
         <oldsource>Modulator &quot;velocity → filter cutoff&quot;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="210"/>
+        <location filename="context/interface/configsectionsound.ui" line="212"/>
         <source>soundfont 2.01</source>
         <translation>soundfont 2.01</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="215"/>
+        <location filename="context/interface/configsectionsound.ui" line="217"/>
         <source>soundfont 2.04</source>
         <translation>soundfont 2.04</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="220"/>
+        <location filename="context/interface/configsectionsound.ui" line="222"/>
         <source>disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="433"/>
+        <location filename="context/interface/configsectionsound.ui" line="429"/>
         <source>Damp</source>
         <translation>Dæmp</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="449"/>
+        <location filename="context/interface/configsectionsound.ui" line="444"/>
         <source>Room</source>
         <translation>Rum</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="32"/>
+        <location filename="context/interface/configsectionsound.ui" line="31"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="113"/>
+        <location filename="context/interface/configsectionsound.ui" line="110"/>
         <source>Frequency</source>
         <translation>Frekvens</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="129"/>
+        <location filename="context/interface/configsectionsound.ui" line="125"/>
         <source>Depth</source>
         <translation>Dybde</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.cpp" line="36"/>
+        <location filename="context/interface/configsectionsound.cpp" line="35"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation type="unfinished">Hz</translation>
@@ -1190,17 +1200,17 @@ oversigt</translation>
 <context>
     <name>ControllerArea</name>
     <message>
-        <location filename="clavier/controllerarea.ui" line="244"/>
+        <location filename="clavier/controllerarea.ui" line="243"/>
         <source>Pitch wheel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.ui" line="269"/>
+        <location filename="clavier/controllerarea.ui" line="267"/>
         <source>Sensitivity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.ui" line="294"/>
+        <location filename="clavier/controllerarea.ui" line="291"/>
         <source>Pressure</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1525,12 +1535,12 @@ oversigt</translation>
         <translation>Spørgsmål</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogcreateelements.ui" line="122"/>
+        <location filename="dialogs/dialogcreateelements.ui" line="121"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Afbryd</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogcreateelements.ui" line="102"/>
+        <location filename="dialogs/dialogcreateelements.ui" line="101"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
@@ -1874,7 +1884,7 @@ oversigt</translation>
 <context>
     <name>DownloadProgressButton</name>
     <message>
-        <location filename="repository/widgets/downloadprogressbutton.cpp" line="45"/>
+        <location filename="repository/widgets/downloadprogressbutton.cpp" line="42"/>
         <source>Clear completed downloads</source>
         <translation>Fjern filer der er downloaded</translation>
     </message>
@@ -1990,22 +2000,22 @@ oversigt</translation>
 <context>
     <name>Editor</name>
     <message>
-        <location filename="editor/editor.ui" line="154"/>
+        <location filename="editor/editor.ui" line="180"/>
         <source>Search...</source>
         <translation>Søg...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="254"/>
+        <location filename="editor/editor.ui" line="280"/>
         <source>Opening file...</source>
         <translation>Åben fil...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="385"/>
+        <location filename="editor/editor.ui" line="411"/>
         <source>Cannot open the file</source>
         <translation>Kan ikke åbne filen</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="208"/>
+        <location filename="editor/editor.cpp" line="207"/>
         <source>Untitled</source>
         <translation>Unavngiven</translation>
     </message>
@@ -2075,67 +2085,67 @@ oversigt</translation>
 <context>
     <name>EditorToolBar</name>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="56"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="64"/>
         <source>Add a sample</source>
         <translation>Tilføj sample</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="60"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="65"/>
         <source>Add an instrument</source>
         <translation>Tilføj instrument</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="64"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="66"/>
         <source>Add a preset</source>
         <translation>Tilføj forvalg</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="68"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Toolbox</source>
         <translation>Værktøjskasse</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="75"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="67"/>
         <source>Cancel</source>
         <translation>Afbryd</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="79"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="68"/>
         <source>Redo</source>
         <translation>Gentag</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="84"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="69"/>
         <source>Save</source>
         <translation>Gem</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="94"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="77"/>
         <source>Recorder</source>
         <translation>Optager</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="100"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="82"/>
         <source>Virtual keyboard</source>
         <translation>Virtuelt keyboard</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="258"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="240"/>
         <source>Import an audio file</source>
         <translation>Importér lydfil</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="260"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="242"/>
         <source>Audio files</source>
         <translation>Lydfiler</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="417"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="399"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="417"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="399"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
     </message>
@@ -2304,33 +2314,38 @@ oversigt</translation>
 <context>
     <name>GraphiqueFourier</name>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="57"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="59"/>
         <source>Frequency (Hz)</source>
         <translation>Frekvens (Hz)</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="71"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="73"/>
         <source>Intensity</source>
         <translation>Intensitet</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="88"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="91"/>
         <source>Export graph</source>
         <translation>Eksportér graf</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="472"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="93"/>
+        <source>Show peak frequencies</source>
+        <translation type="unfinished">Vis peak frekvens</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="502"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="492"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="522"/>
         <source>Export a graph</source>
         <translation>Eksportér en graf</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="493"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="523"/>
         <source>Png file</source>
         <translation>*.png fil</translation>
     </message>
@@ -2408,57 +2423,57 @@ oversigt</translation>
 <context>
     <name>MainMenu</name>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="39"/>
+        <location filename="mainwindow/mainmenu.cpp" line="36"/>
         <source>&amp;New</source>
         <translation>&amp;Ny</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="44"/>
+        <location filename="mainwindow/mainmenu.cpp" line="41"/>
         <source>&amp;Open...</source>
         <translation>&amp;Åbn...</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="51"/>
+        <location filename="mainwindow/mainmenu.cpp" line="48"/>
         <source>&amp;Save</source>
         <translation>&amp;Gem</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="56"/>
+        <location filename="mainwindow/mainmenu.cpp" line="53"/>
         <source>Save &amp;as...</source>
         <translation>Gem &amp;som...</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="61"/>
+        <location filename="mainwindow/mainmenu.cpp" line="58"/>
         <source>&amp;Export soundfonts...</source>
         <translation>&amp;Eksportér soundfonts...</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="68"/>
+        <location filename="mainwindow/mainmenu.cpp" line="65"/>
         <source>&amp;Full screen</source>
         <translation>F&amp;uld skærm</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="76"/>
+        <location filename="mainwindow/mainmenu.cpp" line="72"/>
         <source>Se&amp;ttings</source>
         <translation>&amp;Indstillinger</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="80"/>
+        <location filename="mainwindow/mainmenu.cpp" line="76"/>
         <source>Online &amp;manual</source>
         <translation>Online &amp;manual</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="86"/>
+        <location filename="mainwindow/mainmenu.cpp" line="82"/>
         <source>About &amp;Polyphone...</source>
         <translation>Om &amp;Polyphone...</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="92"/>
+        <location filename="mainwindow/mainmenu.cpp" line="88"/>
         <source>&amp;Close file</source>
         <translation>&amp;Luk fil</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="97"/>
+        <location filename="mainwindow/mainmenu.cpp" line="93"/>
         <source>&amp;Quit</source>
         <translation>A&amp;fslut</translation>
     </message>
@@ -2516,19 +2531,19 @@ oversigt</translation>
         <translation>Polyphone Soundfont Editor</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="104"/>
+        <location filename="mainwindow/mainwindow.ui" line="110"/>
         <source>  Settings</source>
         <extracomment>prefixed with 2 spaces</extracomment>
         <translation>  Indstillinger</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="120"/>
+        <location filename="mainwindow/mainwindow.ui" line="132"/>
         <source>  Documentation</source>
         <extracomment>prefixed with 2 spaces</extracomment>
         <translation>  Documentation</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="139"/>
+        <location filename="mainwindow/mainwindow.ui" line="151"/>
         <source>  New
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
@@ -2536,18 +2551,18 @@ oversigt</translation>
   soundfont</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="172"/>
+        <location filename="mainwindow/mainwindow.ui" line="196"/>
         <source>  Forum</source>
         <extracomment>prefixed with 2 spaces</extracomment>
         <translation>  Forum</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="191"/>
+        <location filename="mainwindow/mainwindow.ui" line="215"/>
         <source>Daily soundfonts</source>
         <translation>Daglige soundfonte</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="201"/>
+        <location filename="mainwindow/mainwindow.ui" line="225"/>
         <source>  Online
   repository</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
@@ -2555,12 +2570,12 @@ oversigt</translation>
   filoversigt</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="218"/>
+        <location filename="mainwindow/mainwindow.ui" line="248"/>
         <source>Search a soundfont...</source>
         <translation>Søg soundfont...</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="228"/>
+        <location filename="mainwindow/mainwindow.ui" line="258"/>
         <source>  Open
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
@@ -2568,7 +2583,7 @@ oversigt</translation>
   soundfont</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="248"/>
+        <location filename="mainwindow/mainwindow.ui" line="278"/>
         <source>History</source>
         <translation>Historik</translation>
     </message>
@@ -2596,52 +2611,52 @@ oversigt</translation>
         <translation>Standardmod.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="148"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="159"/>
         <source>overwritten by %1</source>
         <oldsource>overriden by %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="155"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="166"/>
         <source>disabling
 default mod.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="157"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="168"/>
         <source>overriding
 default mod.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="365"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="376"/>
         <source>dB</source>
         <translation>dB</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="373"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="384"/>
         <source>semi-tones</source>
         <translation>halve toner</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="376"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="387"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="387"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="398"/>
         <source>Add from:</source>
         <oldsource>Add from: </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="388"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="399"/>
         <source>Multiply from:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="390"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="401"/>
         <source>To:</source>
         <oldsource>To: </oldsource>
         <translation type="unfinished"></translation>
@@ -2818,32 +2833,32 @@ default mod.</source>
 <context>
     <name>PageInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="102"/>
+        <location filename="editor/pageinst.cpp" line="86"/>
         <source>Table</source>
         <translation>Oversigt</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="103"/>
+        <location filename="editor/pageinst.cpp" line="87"/>
         <source>Ranges</source>
         <translation>Inddelinger</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="104"/>
+        <location filename="editor/pageinst.cpp" line="88"/>
         <source>Envelopes</source>
         <translation>Kurver</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="141"/>
+        <location filename="editor/pageinst.cpp" line="125"/>
         <source>Instrument not linked to a preset yet.</source>
         <translation>Instrumentet mangler at blive forbundet til et forvalg.</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="143"/>
+        <location filename="editor/pageinst.cpp" line="127"/>
         <source>Instrument linked to preset:</source>
         <translation>Instrumentet er forbundet til forvalget:</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="145"/>
+        <location filename="editor/pageinst.cpp" line="129"/>
         <source>Instrument linked to presets:</source>
         <translation>Instrumentet er forbundet til følgendende forvalg:</translation>
     </message>
@@ -3111,27 +3126,27 @@ frekvens</translation>
 <context>
     <name>PagePrst</name>
     <message>
-        <location filename="editor/pageprst.ui" line="166"/>
+        <location filename="editor/pageprst.ui" line="158"/>
         <source>Bank</source>
         <translation>Bank</translation>
     </message>
     <message>
-        <location filename="editor/pageprst.ui" line="198"/>
+        <location filename="editor/pageprst.ui" line="190"/>
         <source>Preset</source>
         <translation>Forvalg</translation>
     </message>
     <message>
-        <location filename="editor/pageprst.ui" line="237"/>
+        <location filename="editor/pageprst.ui" line="229"/>
         <source>(percussion)</source>
         <translation>(percussion)</translation>
     </message>
     <message>
-        <location filename="editor/pageprst.cpp" line="96"/>
+        <location filename="editor/pageprst.cpp" line="82"/>
         <source>Table</source>
         <translation>Diagram</translation>
     </message>
     <message>
-        <location filename="editor/pageprst.cpp" line="97"/>
+        <location filename="editor/pageprst.cpp" line="83"/>
         <source>Ranges</source>
         <translation>Områder</translation>
     </message>
@@ -3276,167 +3291,177 @@ frekvens</translation>
 <context>
     <name>PageSmpl</name>
     <message>
-        <location filename="editor/pagesmpl.ui" line="645"/>
+        <location filename="editor/pagesmpl.ui" line="687"/>
         <source>Equalizer (±15 dB)</source>
         <translation>Equalizer (±15 dB)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="320"/>
-        <location filename="editor/pagesmpl.cpp" line="1089"/>
+        <location filename="editor/pagesmpl.ui" line="344"/>
+        <location filename="editor/pagesmpl.cpp" line="1077"/>
         <source>Play</source>
         <translation>Afspil</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="260"/>
+        <location filename="editor/pagesmpl.ui" line="284"/>
         <source>sine</source>
         <translation>sinus</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="253"/>
+        <location filename="editor/pagesmpl.ui" line="277"/>
         <source>loop</source>
         <translation>loop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="267"/>
+        <location filename="editor/pagesmpl.ui" line="187"/>
+        <source>Root key</source>
+        <translation type="unfinished">Grundtangent</translation>
+    </message>
+    <message>
+        <location filename="editor/pagesmpl.ui" line="206"/>
+        <source>Correction</source>
+        <translation type="unfinished">Korrektion</translation>
+    </message>
+    <message>
+        <location filename="editor/pagesmpl.ui" line="291"/>
         <source>stereo</source>
         <translation>stereo</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="403"/>
+        <location filename="editor/pagesmpl.ui" line="427"/>
         <source>Tuning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="433"/>
+        <location filename="editor/pagesmpl.ui" line="457"/>
         <source>Loop</source>
         <translation>Loop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="511"/>
+        <location filename="editor/pagesmpl.ui" line="553"/>
         <source>Use the full length of the sample as loop</source>
         <translation>Brug den fulde sample-længde som loop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="553"/>
+        <location filename="editor/pagesmpl.ui" line="595"/>
         <source>Size</source>
         <translation>Størrelse</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="560"/>
+        <location filename="editor/pagesmpl.ui" line="602"/>
         <source>Sample rate</source>
         <translation>Sample rate</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="567"/>
+        <location filename="editor/pagesmpl.ui" line="609"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="574"/>
+        <location filename="editor/pagesmpl.ui" line="616"/>
         <source>Link</source>
         <translation>Genvej</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="204"/>
+        <location filename="editor/pagesmpl.ui" line="228"/>
         <source>Use the estimated pitch and correction as values</source>
         <translation>Brug de estimerede pitch- og korrektionsværdier</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="604"/>
-        <location filename="editor/pagesmpl.cpp" line="517"/>
-        <location filename="editor/pagesmpl.cpp" line="1013"/>
+        <location filename="editor/pagesmpl.ui" line="646"/>
+        <location filename="editor/pagesmpl.cpp" line="509"/>
+        <location filename="editor/pagesmpl.cpp" line="1005"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="175"/>
-        <location filename="editor/pagesmpl.cpp" line="180"/>
+        <location filename="editor/pagesmpl.cpp" line="173"/>
+        <location filename="editor/pagesmpl.cpp" line="178"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="179"/>
-        <location filename="editor/pagesmpl.cpp" line="182"/>
+        <location filename="editor/pagesmpl.cpp" line="177"/>
+        <location filename="editor/pagesmpl.cpp" line="180"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(min)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="261"/>
-        <location filename="editor/pagesmpl.cpp" line="647"/>
+        <location filename="editor/pagesmpl.cpp" line="257"/>
+        <location filename="editor/pagesmpl.cpp" line="639"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="271"/>
-        <location filename="editor/pagesmpl.cpp" line="786"/>
+        <location filename="editor/pagesmpl.cpp" line="267"/>
+        <location filename="editor/pagesmpl.cpp" line="778"/>
         <source>right</source>
         <translation>højre</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="272"/>
-        <location filename="editor/pagesmpl.cpp" line="787"/>
+        <location filename="editor/pagesmpl.cpp" line="268"/>
+        <location filename="editor/pagesmpl.cpp" line="779"/>
         <source>left</source>
         <translation>venstre</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="273"/>
-        <location filename="editor/pagesmpl.cpp" line="788"/>
+        <location filename="editor/pagesmpl.cpp" line="269"/>
+        <location filename="editor/pagesmpl.cpp" line="780"/>
         <source>link</source>
         <translation>genvej</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="311"/>
+        <location filename="editor/pagesmpl.cpp" line="307"/>
         <source>Sample not linked to an instrument yet.</source>
         <translation>Denne sample er ikke forbundet til et instrument endnu.</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="313"/>
+        <location filename="editor/pagesmpl.cpp" line="309"/>
         <source>Sample linked to instrument:</source>
         <translation>Sample forbundet til instrument:</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="315"/>
+        <location filename="editor/pagesmpl.cpp" line="311"/>
         <source>Sample linked to instruments:</source>
         <translation>Sample forbundet til disse instrumenter:</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="518"/>
-        <location filename="editor/pagesmpl.cpp" line="1014"/>
+        <location filename="editor/pagesmpl.cpp" line="510"/>
+        <location filename="editor/pagesmpl.cpp" line="1006"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Ændringerne blev tilføjet de forskellige samples</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="785"/>
-        <location filename="editor/pagesmpl.cpp" line="810"/>
+        <location filename="editor/pagesmpl.cpp" line="777"/>
+        <location filename="editor/pagesmpl.cpp" line="802"/>
         <source>mono</source>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1083"/>
+        <location filename="editor/pagesmpl.cpp" line="1071"/>
         <source>Stop</source>
         <translation>Stop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1102"/>
+        <location filename="editor/pagesmpl.cpp" line="1090"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1103"/>
+        <location filename="editor/pagesmpl.cpp" line="1091"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1105"/>
+        <location filename="editor/pagesmpl.cpp" line="1093"/>
         <source>&amp;Yes</source>
         <translation>&amp;Ja</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1106"/>
+        <location filename="editor/pagesmpl.cpp" line="1094"/>
         <source>&amp;No</source>
         <translation>&amp;Nej</translation>
     </message>
@@ -3444,7 +3469,7 @@ frekvens</translation>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="editor/pagetable.cpp" line="106"/>
+        <location filename="editor/pagetable.cpp" line="110"/>
         <source>Global</source>
         <translation>Global</translation>
     </message>
@@ -3473,13 +3498,13 @@ frekvens</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="117"/>
-        <location filename="editor/graphics/graphicslegenditem2.cpp" line="66"/>
+        <location filename="editor/graphics/graphicslegenditem2.cpp" line="65"/>
         <source>Key range:</source>
         <translation>Tangentområde:</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="136"/>
-        <location filename="editor/graphics/graphicslegenditem2.cpp" line="69"/>
+        <location filename="editor/graphics/graphicslegenditem2.cpp" line="68"/>
         <source>Velocity range:</source>
         <translation>Anslagsstyrke område:</translation>
     </message>
@@ -4318,64 +4343,64 @@ download the list</source>
         <translation>Tags / kaldenavn</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="332"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="347"/>
         <source>Search a soundfont...</source>
         <translation>Søg soundfont...</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="364"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="379"/>
         <source>Date</source>
         <translation>Dato</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="369"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="384"/>
         <source>Downloads</source>
         <translation>Downloads</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="374"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="389"/>
         <source>Rating score</source>
         <translation>Vurderings score</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="379"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="394"/>
         <source>Title (A→Z)</source>
         <translation>Titel (A→Z)</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="435"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="465"/>
         <source>Filters</source>
         <translation>Filtre</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="464"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="494"/>
         <source>Reset</source>
         <translation>Nulstil</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="483"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="513"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation>Opret en Premium konto for at gøre brug af alle muligheder!</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="505"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="535"/>
         <source>No results</source>
         <translation>Ingen resultater</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="586"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="616"/>
         <source>Oops! Cannot
 download the list</source>
         <translation>Oops! Kan ikke
 downloade listen</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="139"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="141"/>
         <source>commercial use</source>
         <translation>kommerciel brug</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="140"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="142"/>
         <source>share after editing</source>
         <translation>del efter editering</translation>
     </message>
@@ -4559,24 +4584,24 @@ downloade listen</translation>
 <context>
     <name>SoundfontViewer</name>
     <message>
-        <location filename="repository/soundfont/soundfontviewer.ui" line="106"/>
+        <location filename="repository/soundfont/soundfontviewer.ui" line="112"/>
         <source>Edit the soundfont description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontviewer.ui" line="354"/>
+        <location filename="repository/soundfont/soundfontviewer.ui" line="360"/>
         <source>Oops! Cannot
 download content</source>
         <translation>Oops! kan ikke
 downloade indholdet</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontviewer.ui" line="500"/>
+        <location filename="repository/soundfont/soundfontviewer.ui" line="512"/>
         <source>Discard changes</source>
         <translation>Kassér ændringer</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontviewer.ui" line="528"/>
+        <location filename="repository/soundfont/soundfontviewer.ui" line="540"/>
         <source>Submit the changes</source>
         <translation>Indsend ændringerne</translation>
     </message>
@@ -4658,22 +4683,22 @@ downloade indholdet</translation>
 <context>
     <name>TableHeaderView</name>
     <message>
-        <location filename="editor/widgets/tableheaderview.cpp" line="47"/>
+        <location filename="editor/widgets/tableheaderview.cpp" line="55"/>
         <source>mute</source>
         <translation>mute</translation>
     </message>
     <message>
-        <location filename="editor/widgets/tableheaderview.cpp" line="52"/>
+        <location filename="editor/widgets/tableheaderview.cpp" line="59"/>
         <source>solo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/tableheaderview.cpp" line="59"/>
+        <location filename="editor/widgets/tableheaderview.cpp" line="68"/>
         <source>solo on selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/tableheaderview.cpp" line="55"/>
+        <location filename="editor/widgets/tableheaderview.cpp" line="63"/>
         <source>unmute all</source>
         <translation>unmute alt</translation>
     </message>
@@ -4681,12 +4706,12 @@ downloade indholdet</translation>
 <context>
     <name>TableWidgetInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="237"/>
+        <location filename="editor/pageinst.cpp" line="222"/>
         <source>Loop</source>
         <translation type="unfinished">Loop</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="248"/>
+        <location filename="editor/pageinst.cpp" line="233"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
@@ -4695,7 +4720,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TableWidgetPrst</name>
     <message>
-        <location filename="editor/pageprst.cpp" line="246"/>
+        <location filename="editor/pageprst.cpp" line="232"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
@@ -4704,67 +4729,67 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ThemeManager</name>
     <message>
-        <location filename="context/thememanager.cpp" line="57"/>
+        <location filename="context/thememanager.cpp" line="69"/>
         <source>Custom</source>
         <translation>Personlig</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="376"/>
+        <location filename="context/thememanager.cpp" line="457"/>
         <source>Default</source>
         <translation>Standard</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="396"/>
+        <location filename="context/thememanager.cpp" line="477"/>
         <source>Gnome</source>
         <translation>Gnom</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="409"/>
+        <location filename="context/thememanager.cpp" line="490"/>
         <source>Dark, blue</source>
         <translation>Mørkeblå</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="422"/>
+        <location filename="context/thememanager.cpp" line="503"/>
         <source>Dark, orange</source>
         <translation>Mørk orange</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="435"/>
+        <location filename="context/thememanager.cpp" line="516"/>
         <source>Dark, green</source>
         <translation>Mørkegrøn</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="448"/>
+        <location filename="context/thememanager.cpp" line="529"/>
         <source>Dark, yellow</source>
         <translation>Mørk gul</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="461"/>
+        <location filename="context/thememanager.cpp" line="542"/>
         <source>Aqua</source>
         <translation>Hav</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="474"/>
+        <location filename="context/thememanager.cpp" line="555"/>
         <source>Spring</source>
         <translation>Forår</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="487"/>
+        <location filename="context/thememanager.cpp" line="568"/>
         <source>Windows 10</source>
         <translation>Windows 10</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="500"/>
+        <location filename="context/thememanager.cpp" line="581"/>
         <source>Ubuntu</source>
         <translation>Ubuntu</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="513"/>
+        <location filename="context/thememanager.cpp" line="594"/>
         <source>Good night</source>
         <translation>Godnat</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="526"/>
+        <location filename="context/thememanager.cpp" line="607"/>
         <source>Pink</source>
         <translation>Lyserød</translation>
     </message>
@@ -5153,7 +5178,7 @@ Other soundfont editors might display other units.</source>
         <translation>Ryd op</translation>
     </message>
     <message>
-        <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="69"/>
+        <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="66"/>
         <source>Remove unused elements</source>
         <translation>Fjern ubrugte elementer</translation>
     </message>
@@ -5329,13 +5354,13 @@ Other soundfont editors might display other units.</source>
     <name>ToolFastEditSmpl</name>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl.h" line="46"/>
-        <source>Sample processing</source>
-        <translation type="unfinished">Arbejder på sampling</translation>
+        <source>Fast editing</source>
+        <translation type="unfinished">Hurtig editering</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl.h" line="61"/>
-        <source>Fast editing</source>
-        <translation type="unfinished">Hurtig editering</translation>
+        <source>Shift a parameter</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5462,47 +5487,47 @@ Other soundfont editors might display other units.</source>
         <translation>&amp;Luk</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="84"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="79"/>
         <source>Sample</source>
         <translation>Sample</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="85"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="80"/>
         <source>Peak</source>
         <translation>Peak</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="86"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="81"/>
         <source>Intensity</source>
         <translation>Intensitet</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="87"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="82"/>
         <source>Frequency</source>
         <translation>Frekvens</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="88"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="83"/>
         <source>Key</source>
         <translation>Tangent</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="89"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="84"/>
         <source>Correction</source>
         <translation>Korrektion</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="151"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="147"/>
         <source>Hz</source>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="175"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="171"/>
         <source>Export peak frequency</source>
         <translation>Eksportér peak frekvens</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="176"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="172"/>
         <source>Csv file</source>
         <translation>Csv fil</translation>
     </message>
@@ -5629,6 +5654,33 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/link_sample/toollinksample.h" line="67"/>
         <source>Find a link</source>
         <translation>Find et link</translation>
+    </message>
+</context>
+<context>
+    <name>ToolLoadFromInst</name>
+    <message>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="46"/>
+        <source>Fast editing</source>
+        <translation type="unfinished">Hurtig editering</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="61"/>
+        <source>Retrieve root key from instruments</source>
+        <oldsource>Load parameters from instrument</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="116"/>
+        <source>Successfully retrieved the root key of %n sample(s) from the instruments.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="121"/>
+        <source>No root keys could have been retrieved from the instruments.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5952,7 +6004,7 @@ Other soundfont editors might display other units.</source>
         <translation>Modulatorer</translation>
     </message>
     <message>
-        <location filename="editor/tools/remove_mods/toolremovemods.h" line="82"/>
+        <location filename="editor/tools/remove_mods/toolremovemods.h" line="76"/>
         <source>Remove modulators</source>
         <translation>Fjern modulationer</translation>
     </message>
@@ -6296,34 +6348,42 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TopRightWidget</name>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="74"/>
+        <location filename="mainwindow/toprightwidget.ui" line="101"/>
         <source>User area</source>
         <translation>Brugerområde</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="96"/>
+        <location filename="mainwindow/toprightwidget.ui" line="135"/>
         <source>Download status</source>
         <translation>Download-status</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="118"/>
+        <location filename="mainwindow/toprightwidget.ui" line="169"/>
         <source>Main menu</source>
         <translation>Hovedmenu</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="112"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="123"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation>Opret en Premium konto for at gøre brug af alle muligheder!</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="122"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="133"/>
         <source>Welcome %1</source>
         <translation>Velkommen %1</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="127"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="138"/>
         <source>Your account has been banned.</source>
         <translation>Din konto er blevet bannet.</translation>
+    </message>
+</context>
+<context>
+    <name>TreeItemDelegate</name>
+    <message>
+        <location filename="editor/tree/treeitemdelegate.cpp" line="238"/>
+        <source>mute</source>
+        <translation type="unfinished">mute</translation>
     </message>
 </context>
 <context>
@@ -6352,81 +6412,81 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeViewMenu</name>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="48"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="45"/>
         <source>&amp;Bind to...</source>
         <translation>&amp;Bind til...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="53"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="50"/>
         <source>&amp;Replace by...</source>
         <translation>&amp;Erstat med...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="61"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="58"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopiér</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="67"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="64"/>
         <source>&amp;Paste</source>
         <translation>&amp;Paste</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="73"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="70"/>
         <source>D&amp;uplicate</source>
         <translation>D&amp;uplikér</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="79"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="76"/>
         <source>&amp;Delete</source>
         <translation>&amp;Slet</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="86"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="149"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="153"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="83"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="146"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="150"/>
         <source>Re&amp;name...</source>
         <oldsource>&amp;Rename...</oldsource>
         <translation>Om&amp;døb...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="149"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="146"/>
         <source>Bulk re&amp;name...</source>
         <translation>Om&amp;døb alle...</translation>
     </message>
     <message>
+        <location filename="editor/tree/treeviewmenu.cpp" line="192"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="195"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="198"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="196"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="193"/>
         <source>Cannot delete a sample used by another instrument.</source>
         <translation>Kan ikke slette en sample som bruges af et andet instrument.</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="199"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="196"/>
         <source>Cannot delete an instrument used by another preset.</source>
         <translation>Kan ikke slette et instrument som bruges af et andet forvalg.</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="359"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="356"/>
         <source>Sample name</source>
         <translation>Sample navn</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="361"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="358"/>
         <source>Instrument name</source>
         <translation>Instrument navn</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="363"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="360"/>
         <source>Preset name</source>
         <translation>Forvalg navn</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="366"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="382"/>
         <source>Rename</source>
         <translation>Omdøb</translation>
     </message>

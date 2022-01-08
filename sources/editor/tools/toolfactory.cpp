@@ -42,7 +42,6 @@
 #include "auto_distribution/toolautodistribution.h"
 #include "clean_unused_elements/toolcleanunused.h"
 #include "division_duplication/tooldivisionduplication.h"
-#include "frequency_peaks/toolfrequencypeaks.h"
 #include "mixture_creation/toolmixturecreation.h"
 #include "monitor/toolmonitor.h"
 #include "preset_list/toolpresetlist.h"
@@ -54,6 +53,7 @@
 #include "sample_export/toolsampleexport.h"
 #include "default_mod/tooldefaultmod.h"
 #include "fast_edit_smpl/toolfasteditsmpl.h"
+#include "load_from_inst/toolloadfrominst.h"
 
 
 ToolFactory::~ToolFactory()
@@ -91,9 +91,9 @@ void ToolFactory::initialize()
            << new ToolTransposeSmpl()
            << new ToolLinkSample()
            << new ToolUnlinkSample()
-           << new ToolFrequencyPeaks()
            << new ToolSampleExport()
            << new ToolFastEditSmpl()
+           << new ToolLoadFromInst()
            << new ToolCelesteTuning() // Instruments
            << new ToolAutoDistribution()
            << new ToolMixtureCreation()

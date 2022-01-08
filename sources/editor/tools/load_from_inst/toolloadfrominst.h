@@ -22,59 +22,47 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLREMOVEMODS_H
-#define TOOLREMOVEMODS_H
+#ifndef TOOLLOADFROMINST_H
+#define TOOLLOADFROMINST_H
 
-#include "abstracttooliterating.h"
+#include "abstracttoolonestep.h"
+#include <QObject>
 
-class ToolRemoveMods: public AbstractToolIterating
+class ToolLoadFromInst: public AbstractToolOneStep
 {
     Q_OBJECT
 
 public:
-    ToolRemoveMods();
+    ToolLoadFromInst();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/remove_mods.svg";
+        return ":/tool/load_from_inst.svg";
     }
 
     QString getCategory() const override
     {
-        return tr("Modulators");
+        return tr("Fast editing");
     }
 
     /// Internal identifier
     QString getIdentifier() const override
     {
-        QString identifier;
-        switch (_deletionType)
-        {
-        case DeletionGlobal:
-            identifier = "sf2:removeMods";
-            break;
-        case DeletionForInstrument:
-            identifier = "inst:removeMods";
-            break;
-        case DeletionForPreset:
-            identifier = "prst:removeMods";
-            break;
-        }
-        return identifier;
+        return "smpl:loadFromInst";
     }
 
-    /// Method executed before the iterating process
-    void beforeProcess(IdList ids) override;
-
     /// Process an element
-    void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+    void process(SoundfontManager * sm, IdList ids, AbstractToolParameters * parameters) override;
 
 protected:
     QString getLabelInternal() const override
     {
-        return tr("Remove modulators");
+        return tr("Retrieve root key from instruments");
     }
+
+    /// Return true if the tool can be used on the specified ids
+    bool isCompatible(IdList ids) override;
 
     /// Get a confirmation message after the tool is run
     QString getConfirmation() override;
@@ -83,19 +71,7 @@ protected:
     QString getWarning() override;
 
 private:
-    enum DeletionType
-    {
-        DeletionGlobal,
-        DeletionForInstrument,
-        DeletionForPreset
-    };
-
-    void clearModInst(SoundfontManager *sm, EltID idInst);
-    void clearModPrst(SoundfontManager *sm, EltID idPrst);
-    void clearMod(SoundfontManager *sm, EltID idMod);
-
-    DeletionType _deletionType;
-    int _count;
+    QList<int> _smplIdsWithNoValues, _smplIdsWithOneValue, _smplIdsWithSeveralValues;
 };
 
-#endif // TOOLREMOVEMODS_H
+#endif // TOOLLOADFROMINST_H

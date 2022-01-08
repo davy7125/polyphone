@@ -177,6 +177,15 @@
         </property>
         <item row="2" column="0">
          <widget class="SpinBoxKey" name="spinRootKey">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>Root key</string>
+          </property>
           <property name="correctionMode">
            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
           </property>
@@ -187,6 +196,15 @@
         </item>
         <item row="2" column="1">
          <widget class="SpinBoxCents" name="spinTune">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>Correction</string>
+          </property>
           <property name="correctionMode">
            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
           </property>
@@ -200,6 +218,12 @@
         </item>
         <item row="2" column="2">
          <widget class="QPushButton" name="pushAutoTune">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="toolTip">
            <string>Use the estimated pitch and correction as values</string>
           </property>
@@ -436,6 +460,12 @@
            </item>
            <item row="1" column="3">
             <widget class="QSpinBox" name="spinEndLoop">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>65</width>
@@ -449,6 +479,12 @@
            </item>
            <item row="1" column="2">
             <widget class="QSpinBox" name="spinStartLoop">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>65</width>
@@ -507,6 +543,12 @@
            </item>
            <item row="1" column="4">
             <widget class="QPushButton" name="pushFullLength">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="toolTip">
               <string>Use the full length of the sample as loop</string>
              </property>

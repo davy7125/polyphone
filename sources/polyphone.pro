@@ -160,11 +160,6 @@ contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
 }
 
 # Location of sfArk
-HEADERS += \
-    core/input/sfark/sfarkextractor2.h \
-    core/input/sfark/abstractextractor.h
-SOURCES += core/input/sfark/sfarkextractor1.cpp \
-    core/input/sfark/sfarkextractor2.cpp
 contains(DEFINES, USE_LOCAL_SFARKLIB) {
     DEFINES += USE_MANUAL_ENDIANNESS MANUAL_LITTLE_ENDIAN
     INCLUDEPATH += lib/_option_sfarklib
@@ -535,7 +530,10 @@ SOURCES	+= main.cpp \
     repository/soundfont/uploadingdialog.cpp \
     lib/qtsingleapplication/qtlocalpeer.cpp \ # problem here with lupdate
     lib/qtsingleapplication/qtsingleapplication.cpp \
-    mainwindow/tabbar.cpp
+    mainwindow/tabbar.cpp \
+    editor/tools/load_from_inst/toolloadfrominst.cpp \
+    core/input/sfark/sfarkextractor1.cpp \
+    core/input/sfark/sfarkextractor2.cpp
 
 HEADERS += \
     core/input/grandorgue/grandorguedatathrough.h \
@@ -885,7 +883,10 @@ HEADERS += \
     dialogs/latinvalidator.h \
     editor/widgets/nullablespinbox.h \
     lib/qtsingleapplication/qtlocalpeer.h \
-    lib/qtsingleapplication/qtsingleapplication.h
+    lib/qtsingleapplication/qtsingleapplication.h \
+    editor/tools/load_from_inst/toolloadfrominst.h \
+    core/input/sfark/sfarkextractor2.h \
+    core/input/sfark/abstractextractor.h
 
 FORMS += \
     dialogs/dialog_list.ui \

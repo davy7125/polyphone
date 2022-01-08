@@ -63,7 +63,7 @@ public:
     ~GraphiqueFourier();
 
     void setBackgroundColor(QColor color);
-    void setData(QByteArray baData, quint32 dwSmplRate);
+    void setCurrentIds(IdList ids);
     void setSampleName(QString name) { _name = name; }
     void setPos(quint32 posStart, quint32 posEnd, bool withReplot = true);
     void getEstimation(int &pitch, int &correction);
@@ -77,9 +77,10 @@ protected:
 
 private slots:
     void exportPng();
+    void exportPeaks();
 
 private:
-
+    IdList _currentIds;
     QVector<float> _fData;
     quint32 _dwSmplRate;
     QString _name;

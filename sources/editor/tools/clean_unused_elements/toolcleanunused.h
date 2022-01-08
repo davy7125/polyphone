@@ -60,14 +60,14 @@ public:
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
-    /// Get a confirmation message after the tool is run
-    QString getConfirmation() override;
-
 protected:
     QString getLabelInternal() const override
     {
         return tr("Remove unused elements");
     }
+
+    /// Get a confirmation message after the tool is run
+    QString getConfirmation() override;
 
 private:
     int _unusedSmpl;
