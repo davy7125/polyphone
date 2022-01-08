@@ -35,7 +35,10 @@ ConfigSectionInterface::ConfigSectionInterface(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // Warning style
+    // Style
+    ui->labelSubTitle1->setStyleSheet("QLabel{margin: 20px 0;}");
+    ui->labelSubTitle2->setStyleSheet("QLabel{margin: 20px 0;}");
+    ui->labelSubTitle3->setStyleSheet("QLabel{margin: 20px 0;}");
     ui->labelRestart->setStyleSheet("QLabel{color:" + ContextManager::theme()->getFixedColor(
                                         ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND).name() + "}");
     ui->labelRestart->hide();

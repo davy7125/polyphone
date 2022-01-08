@@ -38,6 +38,10 @@ ConfigSectionRepository::ConfigSectionRepository(QWidget *parent) :
     ui->setupUi(this);
     ui->pushDirectory->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", QSize(16, 16), ThemeManager::WINDOW_TEXT));
 
+    // Style
+    ui->labelSubTitle1->setStyleSheet("QLabel{margin: 20px 0;}");
+    ui->labelSubTitle2->setStyleSheet("QLabel{margin: 20px 0;}");
+
     // Style for "Create an account"
     QString styleSheet = "QToolButton{border:none; background-color:" + ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND).name() + ";}";
     ui->buttonCreateAccount->setStyleSheet(styleSheet);
@@ -158,7 +162,7 @@ void ConfigSectionRepository::on_buttonCreateAccount_clicked()
 
 void ConfigSectionRepository::on_buttonBecomePremium_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/subscribe"));
+    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/component/payplans/plan/subscribe"));
 }
 
 void ConfigSectionRepository::on_pushConnect_clicked()

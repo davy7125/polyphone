@@ -36,12 +36,18 @@ ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
     connect(ContextManager::configuration(), SIGNAL(keyboardOctaveChanged()), this, SLOT(initializeFirstC()));
 
     // Style
+    ui->labelSubTitle1->setStyleSheet("QLabel{margin: 20px 0;}");
+    ui->labelSubTitle2->setStyleSheet("QLabel{margin: 20px 0;}");
     QFont font = this->font();
     font.setBold(true);
     ui->tableKeyboardMap->horizontalHeader()->setFont(font);
     ui->tableKeyboardMap->verticalHeader()->setFont(font);
     ui->tableKeyboardMap->verticalHeader()->setDefaultAlignment(Qt::AlignHCenter);
+    ui->tableKeyboardMap->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->tableKeyboardMap->setStyleSheet(ContextManager::theme()->getTableTheme());
+
+    ui->spinTuningFork->setSuffix(" " + tr("Hz", "unit for Herz"));
+    ui->pushDefaultTuningFork->setIcon(ContextManager::theme()->getColoredSvg(":/icons/edit-undo.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
 
     // Populate the table with all keys and all octaves
     for (int j = 0; j < ui->tableKeyboardMap->columnCount(); j++)
@@ -76,6 +82,11 @@ void ConfigSectionKeyboard::initialize()
 
     // Octave configuration
     initializeFirstC();
+
+    // Other
+    ui->spinTuningFork->blockSignals(true);
+    ui->spinTuningFork->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", 440).toInt());
+    ui->spinTuningFork->blockSignals(false);
 }
 
 void ConfigSectionKeyboard::initializeFirstC()
@@ -100,4 +111,14 @@ void ConfigSectionKeyboard::renameComboFirstC()
 void ConfigSectionKeyboard::on_comboFirstC_currentIndexChanged(int index)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "octave_offset", index);
+}
+
+void ConfigSectionKeyboard::on_spinTuningFork_valueChanged(int value)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", value);
+}
+
+void ConfigSectionKeyboard::on_pushDefaultTuningFork_clicked()
+{
+    ui->spinTuningFork->setValue(440);
 }

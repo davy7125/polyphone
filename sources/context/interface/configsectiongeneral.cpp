@@ -31,6 +31,10 @@ ConfigSectionGeneral::ConfigSectionGeneral(QWidget *parent) :
     ui(new Ui::ConfigSectionGeneral)
 {
     ui->setupUi(this);
+
+    // Style
+    ui->labelSubTitle1->setStyleSheet("QLabel{margin: 20px 0;}");
+    ui->labelSubTitle2->setStyleSheet("QLabel{margin: 20px 0;}");
 }
 
 ConfigSectionGeneral::~ConfigSectionGeneral()

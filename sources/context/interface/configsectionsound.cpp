@@ -32,8 +32,10 @@ ConfigSectionSound::ConfigSectionSound(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->spinTuningFork->setSuffix(" " + tr("Hz", "unit for Herz"));
-    ui->pushDefaultTuningFork->setIcon(ContextManager::theme()->getColoredSvg(":/icons/edit-undo.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
+    // Style
+    ui->labelSubTitle1->setStyleSheet("QLabel{margin: 20px 0;}");
+    ui->labelSubTitle2->setStyleSheet("QLabel{margin: 20px 0;}");
+    ui->labelSubTitle3->setStyleSheet("QLabel{margin: 20px 0;}");
 }
 
 ConfigSectionSound::~ConfigSectionSound()
@@ -48,7 +50,7 @@ void ConfigSectionSound::initialize()
     ui->sliderGain->blockSignals(true);
     ui->sliderGain->setValue(gain);
     ui->sliderGain->blockSignals(false);
-    ui->labelGain->setNum(gain);
+    ui->labelGain->setText((gain >= 0 ? "+" : "") + QString::number(gain) + " " + tr("dB", "unit for decibels"));
 
     // Reverb
     ui->dialRevNiveau->blockSignals(true);
@@ -84,9 +86,6 @@ void ConfigSectionSound::initialize()
     ui->comboVelToFilter->blockSignals(true);
     ui->comboVelToFilter->setCurrentIndex(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", 1).toInt());
     ui->comboVelToFilter->blockSignals(false);
-    ui->spinTuningFork->blockSignals(true);
-    ui->spinTuningFork->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", 440).toInt());
-    ui->spinTuningFork->blockSignals(false);
 }
 
 void ConfigSectionSound::on_dialRevNiveau_valueChanged(int value)
@@ -127,20 +126,10 @@ void ConfigSectionSound::on_dialChoFrequence_valueChanged(int value)
 void ConfigSectionSound::on_sliderGain_valueChanged(int value)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "gain", value);
-    ui->labelGain->setText(QString::number(value));
+    ui->labelGain->setText((value > 0 ? "+" : "") + QString::number(value) + " " + tr("dB", "unit for decibels"));
 }
 
 void ConfigSectionSound::on_comboVelToFilter_currentIndexChanged(int index)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", index);
-}
-
-void ConfigSectionSound::on_spinTuningFork_valueChanged(int value)
-{
-    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", value);
-}
-
-void ConfigSectionSound::on_pushDefaultTuningFork_clicked()
-{
-    ui->spinTuningFork->setValue(440);
 }

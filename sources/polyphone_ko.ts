@@ -737,8 +737,9 @@
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="186"/>
-        <source>Virtual keyboard</source>
-        <translation>가상 건반</translation>
+        <source>Keyboard</source>
+        <oldsource>Virtual keyboard</oldsource>
+        <translation type="unfinished">가상 건반</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="219"/>
@@ -749,54 +750,73 @@
 <context>
     <name>ConfigSectionGeneral</name>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="26"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="75"/>
         <source>Input / Output</source>
         <translation>입력 / 출력</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="95"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="55"/>
         <source>Audio backend</source>
         <translation>오디오 백엔드</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="124"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="62"/>
         <source>Buffer size</source>
         <translation>버퍼 크기</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="147"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="107"/>
+        <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
+(same effect as the tool “Remove blank at start”)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectiongeneral.ui" line="143"/>
+        <source>When importing a sample, data located after the end of loop are automatically removed.
+(same effect as the tool “Trim to end of loop”)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectiongeneral.ui" line="166"/>
+        <source>When editing one side of a stereo sample, the other side is automatically edited the same.
+The same applies when editing a stereo instrument division:
+the division corresponding to the other channel (with the same note and velocity ranges) is edited the same.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectiongeneral.ui" line="217"/>
         <source>MIDI input</source>
         <oldsource>Midi input</oldsource>
         <translation>미디 입력</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="163"/>
-        <source>Options</source>
-        <translation>옵션</translation>
+        <location filename="context/interface/configsectiongeneral.ui" line="230"/>
+        <source>Sample management</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="178"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="124"/>
         <source>Sample import</source>
         <oldsource>Wav file import</oldsource>
         <translation>샘플 불러오기</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="191"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="171"/>
         <source>change linked sample</source>
         <translation>연결된 샘플 교체</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="204"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="147"/>
         <source>trim to loop</source>
         <translation>루프 다듬기</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="217"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="88"/>
         <source>Stereo editing</source>
         <translation>스테레오 편집</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="230"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="111"/>
         <source>remove blank at start</source>
         <translation>시작할 때 공백 제거</translation>
     </message>
@@ -804,151 +824,152 @@
 <context>
     <name>ConfigSectionInterface</name>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="51"/>
+        <location filename="context/interface/configsectioninterface.ui" line="549"/>
         <source>Language</source>
         <translation>언어</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="69"/>
+        <location filename="context/interface/configsectioninterface.ui" line="505"/>
         <source>Key names</source>
         <translation>키 이름</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="25"/>
-        <source>Options</source>
-        <translation>옵션</translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="159"/>
+        <location filename="context/interface/configsectioninterface.ui" line="577"/>
         <source>Middle C → 60, then 61</source>
         <translation>중간 C → 61 그다음 60</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="164"/>
+        <location filename="context/interface/configsectioninterface.ui" line="582"/>
         <source>Middle C → C3, then C♯3</source>
         <translation>중간 C → C3, 그다음 C#3</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="169"/>
+        <location filename="context/interface/configsectioninterface.ui" line="587"/>
         <source>Middle C → C3, then D♭3</source>
         <translation>중간 C → C3, 그다음 D♭3</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="174"/>
+        <location filename="context/interface/configsectioninterface.ui" line="592"/>
         <source>Middle C → C4, then C♯4</source>
         <translation>중간 C → C4, 그다음 C#4</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="179"/>
+        <location filename="context/interface/configsectioninterface.ui" line="597"/>
         <source>Middle C → C4, then D♭4</source>
         <translation>중간 C → C4, 그다음 D♭4</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="184"/>
+        <location filename="context/interface/configsectioninterface.ui" line="602"/>
         <source>Middle C → C5, then C♯5</source>
         <translation>중간 C → C5, 그다음 C♯5</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="189"/>
+        <location filename="context/interface/configsectioninterface.ui" line="607"/>
         <source>Middle C → C5, then D♭5</source>
         <translation>중간 C → C5, 그다음 D♭5</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="140"/>
+        <location filename="context/interface/configsectioninterface.ui" line="621"/>
+        <source>Behaviour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="556"/>
         <source>Sort divisions</source>
         <translation>정렬 방법</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="112"/>
+        <location filename="context/interface/configsectioninterface.ui" line="526"/>
         <source>by key range</source>
         <translation>키 범위대로</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="117"/>
+        <location filename="context/interface/configsectioninterface.ui" line="531"/>
         <source>by velocity range</source>
         <translation>벨로시티 범위대로</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="122"/>
+        <location filename="context/interface/configsectioninterface.ui" line="536"/>
         <source>in alphabetical order</source>
         <translation>철자 순서대로</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="127"/>
+        <location filename="context/interface/configsectioninterface.ui" line="541"/>
         <source>none</source>
         <comment>speaking of the &quot;sort divisions&quot;</comment>
         <translation>없음</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="39"/>
+        <location filename="context/interface/configsectioninterface.ui" line="512"/>
         <source>Decorations</source>
         <translation>장식</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="202"/>
+        <location filename="context/interface/configsectioninterface.ui" line="43"/>
         <source>Unique instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="229"/>
+        <location filename="context/interface/configsectioninterface.ui" line="93"/>
         <source>Theme</source>
         <translation>테마</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="243"/>
+        <location filename="context/interface/configsectioninterface.ui" line="73"/>
         <source>Colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="508"/>
+        <location filename="context/interface/configsectioninterface.ui" line="349"/>
         <source>Selection</source>
         <translation>선택범위</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="275"/>
+        <location filename="context/interface/configsectioninterface.ui" line="26"/>
+        <location filename="context/interface/configsectioninterface.ui" line="111"/>
         <source>Text</source>
         <translation>글자</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="348"/>
+        <location filename="context/interface/configsectioninterface.ui" line="186"/>
         <source>Window</source>
         <translation>창</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="465"/>
+        <location filename="context/interface/configsectioninterface.ui" line="305"/>
         <source>Background</source>
         <translation>배경</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="447"/>
+        <location filename="context/interface/configsectioninterface.ui" line="286"/>
         <source>Button</source>
         <translation>버튼</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="581"/>
+        <location filename="context/interface/configsectioninterface.ui" line="424"/>
         <source>List and table</source>
         <translation>테이블 목록</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="628"/>
+        <location filename="context/interface/configsectioninterface.ui" line="66"/>
         <source>Style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="657"/>
+        <location filename="context/interface/configsectioninterface.ui" line="56"/>
         <source>This modification will be applied during the next start of the software.</source>
         <translation>이 변경사항은 다음 번에 소프트웨어를 시작하면 적용됩니다.</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.cpp" line="186"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="198"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="210"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="222"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="234"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="246"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="258"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="270"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="282"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="189"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="201"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="213"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="225"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="237"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="249"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="261"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="273"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="285"/>
         <source>Select a color</source>
         <translation>색상 선택</translation>
     </message>
@@ -956,35 +977,56 @@
 <context>
     <name>ConfigSectionKeyboard</name>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="102"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="26"/>
+        <source>Mapping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionkeyboard.ui" line="123"/>
         <source>Octave #1</source>
         <translation>옥타브 #1</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="107"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="128"/>
         <source>Octave #2</source>
         <translation>옥타브 #2</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="112"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="133"/>
         <source>Octave #3</source>
         <translation>옥타브 #3</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="117"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="138"/>
         <source>Octave #4</source>
         <translation>옥타브 #4</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="67"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="211"/>
         <source>First C</source>
         <translation>초기 C</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionkeyboard.ui" line="224"/>
+        <source>Tuning</source>
+        <translation type="unfinished">튜닝</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionkeyboard.ui" line="247"/>
+        <source>Tuning fork</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionkeyboard.cpp" line="49"/>
+        <source>Hz</source>
+        <comment>unit for Herz</comment>
+        <translation type="unfinished">Hz</translation>
     </message>
 </context>
 <context>
     <name>ConfigSectionRepository</name>
     <message>
-        <location filename="context/interface/configsectionrepository.ui" line="20"/>
+        <location filename="context/interface/configsectionrepository.ui" line="288"/>
         <source>Username</source>
         <translation>사용자 이름</translation>
     </message>
@@ -992,6 +1034,11 @@
         <location filename="context/interface/configsectionrepository.ui" line="67"/>
         <source>Create an account</source>
         <translation>계정 생성</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionrepository.ui" line="20"/>
+        <source>Directory</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="114"/>
@@ -1011,49 +1058,54 @@ Premium!</source>
         <translation>비밀번호</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.ui" line="300"/>
-        <source>Download directory</source>
-        <translation>내려받을 경로</translation>
+        <location filename="context/interface/configsectionrepository.ui" line="359"/>
+        <source>Account</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="108"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="144"/>
+        <location filename="context/interface/configsectionrepository.ui" line="372"/>
+        <source>Downloads</source>
+        <translation type="unfinished">내려받기</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionrepository.cpp" line="112"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="148"/>
         <source>Connection</source>
         <translation>연결</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="111"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="115"/>
         <source>Connecting...</source>
         <translation>연결하는 중...</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="115"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="119"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="118"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="124"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="130"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="122"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="128"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="134"/>
         <source>Connected</source>
         <translation>연결됨</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="121"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="127"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="133"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="138"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="125"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="131"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="137"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="142"/>
         <source>Log out</source>
         <translation>로그아웃</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="204"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="211"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="208"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="215"/>
         <source>Click on %1 to save parameters.</source>
         <translation>%1 클릭으로 매개변수 값을 저장합니다.</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="217"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="221"/>
         <source>Select the destination directory</source>
         <translation>저장될 디렉토리 선택</translation>
     </message>
@@ -1061,82 +1113,83 @@ Premium!</source>
 <context>
     <name>ConfigSectionSound</name>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="237"/>
+        <location filename="context/interface/configsectionsound.ui" line="375"/>
         <source>Reverb</source>
         <translation>리버브</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="294"/>
-        <source>Gain (dB)</source>
-        <translation>증폭 (dB)</translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectionsound.ui" line="341"/>
+        <location filename="context/interface/configsectionsound.ui" line="274"/>
         <source>Width</source>
         <translation>너비</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="63"/>
-        <location filename="context/interface/configsectionsound.ui" line="375"/>
+        <location filename="context/interface/configsectionsound.ui" line="64"/>
+        <location filename="context/interface/configsectionsound.ui" line="258"/>
         <source>Level</source>
         <translation>레벨</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="172"/>
-        <source>Tuning fork</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectionsound.ui" line="185"/>
+        <location filename="context/interface/configsectionsound.ui" line="333"/>
         <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
         <oldsource>Modulator &quot;velocity → filter cutoff&quot;</oldsource>
         <translation>기본 모듈레이터 &quot;벨로시티 → 필터 컷오프&quot;</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="212"/>
+        <location filename="context/interface/configsectionsound.ui" line="126"/>
         <source>soundfont 2.01</source>
         <translation>사운드폰트 2.01</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="217"/>
+        <location filename="context/interface/configsectionsound.ui" line="112"/>
+        <source>General volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="131"/>
         <source>soundfont 2.04</source>
         <translation>사운드폰트 2.04</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="222"/>
+        <location filename="context/interface/configsectionsound.ui" line="136"/>
         <source>disabled</source>
         <translation>비활성화됨</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="429"/>
+        <location filename="context/interface/configsectionsound.ui" line="168"/>
         <source>Damp</source>
         <translation>댐프</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="444"/>
+        <location filename="context/interface/configsectionsound.ui" line="242"/>
         <source>Room</source>
         <translation>룸</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="31"/>
+        <location filename="context/interface/configsectionsound.ui" line="362"/>
+        <source>Options</source>
+        <translation type="unfinished">옵션</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="388"/>
         <source>Chorus</source>
         <translation>코러스</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="110"/>
+        <location filename="context/interface/configsectionsound.ui" line="54"/>
         <source>Frequency</source>
         <translation>주파수</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="125"/>
+        <location filename="context/interface/configsectionsound.ui" line="100"/>
         <source>Depth</source>
         <translation>깊이</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.cpp" line="35"/>
-        <source>Hz</source>
-        <comment>unit for Herz</comment>
-        <translation type="unfinished">Hz</translation>
+        <location filename="context/interface/configsectionsound.cpp" line="53"/>
+        <location filename="context/interface/configsectionsound.cpp" line="129"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation type="unfinished">dB</translation>
     </message>
 </context>
 <context>
@@ -1158,8 +1211,9 @@ Premium!</source>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="98"/>
-        <source>Virtual keyboard</source>
-        <translation>가상 건반</translation>
+        <source>Keyboard</source>
+        <oldsource>Virtual keyboard</oldsource>
+        <translation type="unfinished">가상 건반</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="111"/>
@@ -2600,7 +2654,8 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="376"/>
         <source>dB</source>
-        <translation>dB</translation>
+        <comment>unit for decibels</comment>
+        <translation type="unfinished">dB</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="384"/>

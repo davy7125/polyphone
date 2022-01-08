@@ -373,7 +373,7 @@ void ModulatorCell::onOutputChanged(int dummy)
     case champ_modLfoToVolume:
     case champ_sustainVolEnv:
     case champ_initialAttenuation:
-        unit = tr("dB");
+        unit = tr("dB", "unit for decibels");
         break;
     case champ_chorusEffectsSend:
     case champ_reverbEffectsSend:

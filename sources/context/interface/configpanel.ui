@@ -183,7 +183,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Virtual keyboard</string>
+            <string>Keyboard</string>
            </property>
           </widget>
          </item>

@@ -43,6 +43,8 @@ public:
 private slots:
     void on_comboFirstC_currentIndexChanged(int index);
     void initializeFirstC();
+    void on_spinTuningFork_valueChanged(int value);
+    void on_pushDefaultTuningFork_clicked();
 
 private:
     void renameComboFirstC();

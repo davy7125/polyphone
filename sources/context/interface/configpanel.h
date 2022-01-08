@@ -45,7 +45,7 @@ public:
     void initializeInterface();
 
 private slots:
-    void goToSection(int sectionNumber);
+    void onSectionClicked(int sectionNumber);
 
 private:
     Ui::ConfigPanel * ui;

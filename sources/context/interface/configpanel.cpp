@@ -43,7 +43,7 @@ ConfigPanel::ConfigPanel(QWidget *parent) : QWidget(parent),
     ui->repositoryLabel->setStyleSheet(styleSheet);
 
     // Events
-    connect(ui->widgetToc, SIGNAL(sectionClicked(int)), this, SLOT(goToSection(int)));
+    connect(ui->widgetToc, SIGNAL(sectionClicked(int)), this, SLOT(onSectionClicked(int)));
 }
 
 ConfigPanel::~ConfigPanel()
@@ -60,7 +60,7 @@ void ConfigPanel::initializeInterface()
     ui->repositoryWidget->initialize();
 }
 
-void ConfigPanel::goToSection(int sectionNumber)
+void ConfigPanel::onSectionClicked(int sectionNumber)
 {
     QWidget * widget;
     switch (sectionNumber)
@@ -75,5 +75,7 @@ void ConfigPanel::goToSection(int sectionNumber)
     }
 
     const QPoint p = widget->mapTo(ui->scrollArea, QPoint(0,0));
-    ui->scrollArea->verticalScrollBar()->setValue(p.y() + ui->scrollArea->verticalScrollBar()->value() - ui->horizontalLayout->margin());
+    int topMargin;
+    ui->horizontalLayout->getContentsMargins(nullptr, &topMargin, nullptr, nullptr);
+    ui->scrollArea->verticalScrollBar()->setValue(p.y() + ui->scrollArea->verticalScrollBar()->value() - topMargin);
 }
