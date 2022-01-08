@@ -52,8 +52,11 @@ public:
 signals:
     void closeMenu();
 
+protected:
+    void mousePressEvent(QMouseEvent * event) override;
+    void paintEvent(QPaintEvent * event) override;
+
 private slots:
-    void on_pushOpen_clicked();
     void on_pushCancel_clicked();
 
 private:
@@ -62,6 +65,7 @@ private:
     QString _soundfontName;
     int _percent;
     QString _filename;
+    QPixmap _pixClose, _pixCloseHighlighted, _pixFile, _pixFileHighlighted;
 };
 
 #endif // DOWNLOADPROGRESSCELL_H

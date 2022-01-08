@@ -27,6 +27,7 @@
 #include "contextmanager.h"
 #include <QMenu>
 #include <QWidgetAction>
+#include <QMouseEvent>
 
 DownloadProgressButton::DownloadProgressButton(QWidget * parent) : QToolButton(parent)
 {
@@ -37,8 +38,10 @@ DownloadProgressButton::DownloadProgressButton(QWidget * parent) : QToolButton(p
 
     // Menu
     _menu = new QMenu(this);
+    _menu->installEventFilter(this);
     _menu->setStyleSheet(ContextManager::theme()->getMenuTheme());
     _menu->addSeparator();
+    connect(_menu, SIGNAL(aboutToHide()), this, SLOT(onMenuAboutToHide()));
     QAction * clearDownloadsAction = _menu->addAction(tr("Clear completed downloads"));
     connect(clearDownloadsAction, SIGNAL(triggered()), this, SLOT(clearCompletedDownloads()));
     this->setMenu(_menu);
@@ -57,7 +60,7 @@ void DownloadProgressButton::progressChanged(int percent, int soundfontId, QStri
         DownloadProgressCell * cell = new DownloadProgressCell(soundfontId, soundfontName);
         _cells[soundfontId] = cell;
         connect(cell, SIGNAL(closeMenu()), this, SLOT(onCloseMenu()));
-        QWidgetAction * wa = new QWidgetAction(_menu);
+        CustomQWidgetAction * wa = new CustomQWidgetAction(_menu);
         wa->setDefaultWidget(cell);
 
         // Insert the cell
@@ -78,9 +81,7 @@ void DownloadProgressButton::updatePercent()
     // Compute the percentage
     double percent = 0;
     foreach (int soundfontId, _cells.keys())
-    {
         percent += (double)_cells[soundfontId]->getPercent() / _cells.count();
-    }
 
     // Update the icon
     _svgReplacements["variable_max_1360"] = QString::number(percent >= 100 ? 0 : percent * 13.6);
@@ -132,4 +133,40 @@ void DownloadProgressButton::removeCell(DownloadProgressCell * cell)
 void DownloadProgressButton::onCloseMenu()
 {
     _menu->close();
+}
+
+void DownloadProgressButton::onMenuAboutToHide()
+{
+    if (_lastWa)
+    {
+        _lastWa->highlight(false);
+        _lastWa = nullptr;
+    }
+}
+
+bool DownloadProgressButton::eventFilter(QObject *obj, QEvent *evt)
+{
+    if (evt->type() == QEvent::Type::MouseMove && obj == _menu)
+    {
+        QMouseEvent *mouse_evt = static_cast<QMouseEvent*>(evt);
+        QAction *a = static_cast<QMenu*>(obj)->actionAt(mouse_evt->pos());
+        CustomQWidgetAction * wa = dynamic_cast<CustomQWidgetAction*>(a);
+        if (wa)
+        {
+            if (_lastWa && wa != _lastWa)
+                _lastWa->highlight(false);
+
+            wa->highlight(true);
+            _lastWa = wa;
+        }
+        else
+        {
+            if (_lastWa)
+            {
+                _lastWa->highlight(false);
+                _lastWa = nullptr;
+            }
+        }
+    }
+    return QObject::eventFilter(obj, evt);
 }

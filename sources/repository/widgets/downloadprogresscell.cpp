@@ -32,6 +32,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QMessageBox>
+#include <QMouseEvent>
 
 DownloadProgressCell::DownloadProgressCell(int soundfontId, QString soundfontName, QWidget *parent) :
     QWidget(parent),
@@ -41,12 +42,13 @@ DownloadProgressCell::DownloadProgressCell(int soundfontId, QString soundfontNam
     _percent(0)
 {
     ui->setupUi(this);
+    this->setMouseTracking(true);
 
-    // Style
-    ui->pushCancel->setIcon(ContextManager::theme()->getColoredSvg(":/icons/close.svg", QSize(16, 16), ThemeManager::LIST_TEXT));
-    ui->pushOpen->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", QSize(16, 16), ThemeManager::LIST_TEXT));
-    ui->pushOpen->hide();
-    ui->iconFile->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/file-description.svg", QSize(16, 16), ThemeManager::LIST_TEXT));
+    // Icons
+    _pixClose = ContextManager::theme()->getColoredSvg(":/icons/close.svg", QSize(16, 16), ThemeManager::LIST_TEXT);
+    _pixCloseHighlighted = ContextManager::theme()->getColoredSvg(":/icons/close.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT);
+    _pixFile = ContextManager::theme()->getColoredSvg(":/icons/file-description.svg", QSize(16, 16), ThemeManager::LIST_TEXT);
+    _pixFileHighlighted = ContextManager::theme()->getColoredSvg(":/icons/file-description.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT);
 
     // Data
     ui->labelTitle->setText(_soundfontName);
@@ -65,32 +67,38 @@ void DownloadProgressCell::progressChanged(int percent, QString finalFilename)
 
     // Update GUI
     ui->labelPercent->setText(QString::number(_percent) + "%");
-    if (finalFilename != "")
-    {
-        ui->pushOpen->setToolTip(tr("Open \"%1\"").arg(_filename));
-        ui->pushCancel->hide();
-        ui->pushOpen->show();
-    }
+    ui->pushCancel->setVisible(finalFilename.isEmpty());
 }
 
-void DownloadProgressCell::on_pushOpen_clicked()
+void DownloadProgressCell::mousePressEvent(QMouseEvent *event)
 {
-    if (_filename == "")
-        return;
-
-    // Is it possible to open the file?
-    if (InputFactory::isSuffixSupported(QFileInfo(_filename).suffix()))
-        WindowManager::getInstance()->openSoundfont(_filename);
-    else
+    if (event->button() == Qt::LeftButton && !_filename.isEmpty())
     {
-        if (!QDesktopServices::openUrl(QUrl(_filename, QUrl::TolerantMode)))
+        // Is it possible to open the file?
+        if (InputFactory::isSuffixSupported(QFileInfo(_filename).suffix()))
+            WindowManager::getInstance()->openSoundfont(_filename);
+        else
         {
-            // Warning message
-            QMessageBox::warning(QApplication::activeWindow(), tr("Warning"),
-                                 tr("Couldn't open file \"%1\". If this is an archive, you may have to extract it first.").arg(_filename));
+            if (!QDesktopServices::openUrl(QUrl(_filename, QUrl::TolerantMode)))
+            {
+                // Warning message
+                QMessageBox::warning(QApplication::activeWindow(), tr("Warning"),
+                                     tr("Couldn't open file \"%1\". If this is an archive, you may have to extract it first.").arg(_filename));
+            }
         }
+
+        emit(closeMenu());
     }
-    emit(closeMenu());
+
+    QWidget::mousePressEvent(event);
+}
+
+void DownloadProgressCell::paintEvent(QPaintEvent * event)
+{
+    // Adapt the icons before drawing the widget
+    ui->pushCancel->setIcon(this->backgroundRole() == QPalette::Highlight ? _pixCloseHighlighted : _pixClose);
+    ui->iconFile->setPixmap(this->backgroundRole() == QPalette::Highlight ? _pixFileHighlighted : _pixFile);
+    QWidget::paintEvent(event);
 }
 
 void DownloadProgressCell::on_pushCancel_clicked()

@@ -28,8 +28,22 @@
 #include <QToolButton>
 #include <QMap>
 #include <QMutex>
+#include <QWidgetAction>
 class DownloadProgressCell;
 class QMenu;
+
+class CustomQWidgetAction : public QWidgetAction
+{
+public:
+    CustomQWidgetAction(QObject *parent) : QWidgetAction(parent) {}
+
+    void highlight(bool isHighlighted)
+    {
+        QWidget * w = this->defaultWidget();
+        w->setBackgroundRole(isHighlighted ? QPalette::Highlight : QPalette::Window);
+        w->setAutoFillBackground(isHighlighted);
+    }
+};
 
 class DownloadProgressButton : public QToolButton
 {
@@ -45,9 +59,13 @@ public:
 signals:
     void cleared();
 
+protected:
+    bool eventFilter(QObject *obj, QEvent *evt) override;
+
 private slots:
     void clearCompletedDownloads();
     void onCloseMenu();
+    void onMenuAboutToHide();
 
 private:
     void updatePercent();
@@ -55,6 +73,7 @@ private:
 
     QMap<QString, QString> _svgReplacements;
     QMenu * _menu;
+    CustomQWidgetAction * _lastWa = nullptr;
     QMap<int, DownloadProgressCell *> _cells;
     QMutex _mutex;
 };
