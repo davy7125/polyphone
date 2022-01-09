@@ -174,8 +174,7 @@ void RepositoryManager::fillLicenseLabelAndLink()
     QString language = ContextManager::configuration()->getValue(
                 ConfManager::SECTION_NONE, "language",
                 QLocale::system().name().section('_', 0, 0)).toString();
-    _licenseUrl = "https://www.polyphone-soundfonts.com/";
-    _licenseUrl += QString(language != "fr" ? "en/license" : "fr/licence") + "#";
+    _licenseUrl = "https://www.polyphone-soundfonts.com/license#";
 }
 
 void RepositoryManager::initialize()
