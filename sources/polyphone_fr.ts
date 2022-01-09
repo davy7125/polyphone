@@ -750,36 +750,36 @@
 <context>
     <name>ConfigSectionGeneral</name>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="75"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="91"/>
         <source>Input / Output</source>
         <translation>Entrées / sorties</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="55"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="160"/>
         <source>Audio backend</source>
         <translation>Sortie audio</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="62"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="167"/>
         <source>Buffer size</source>
         <translation>Taille du tampon</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="107"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="133"/>
         <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool “Remove blank at start”)</source>
         <translation>Lors de l&apos;import d&apos;un échantillon, le silence situé avant le début de l&apos;attaque est automatiquement supprimé.
 (même effet que l&apos;outil &quot;Enlever le silence initial&quot;)</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="143"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="110"/>
         <source>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool “Trim to end of loop”)</source>
         <translation>Lors de l&apos;import d&apos;un échantillon, les données situées après la fin de la boucle sont automatiquement supprimées.
 (même effet que l&apos;outil &quot;Ajuster à la fin de boucle&quot;)</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="166"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="225"/>
         <source>When editing one side of a stereo sample, the other side is automatically edited the same.
 The same applies when editing a stereo instrument division:
 the division corresponding to the other channel (with the same note and velocity ranges) is edited the same.</source>
@@ -788,39 +788,39 @@ Ceci s&apos;applique également lors de l&apos;édition d&apos;une division sté
 la division correspondant à l&apos;autre canal (avec les mêmes étendues de notes et de vélocités) est éditée à l&apos;identique.</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="217"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="174"/>
         <source>MIDI input</source>
         <oldsource>Midi input</oldsource>
         <translation>Entrée MIDI</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="230"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="26"/>
         <source>Sample management</source>
         <translation>Gestion des échantillons</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="124"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="39"/>
         <source>Sample import</source>
         <oldsource>Wav file import</oldsource>
         <translation>Import d&apos;échantillons</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="171"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="230"/>
         <source>change linked sample</source>
         <translation>répercuter les modifications</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="147"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="114"/>
         <source>trim to loop</source>
         <translation>ajuster à la boucle</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="88"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="206"/>
         <source>Stereo editing</source>
         <translation>Édition stéréo</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="111"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="137"/>
         <source>remove blank at start</source>
         <translation>enlever le blanc au départ</translation>
     </message>
@@ -981,50 +981,67 @@ la division correspondant à l&apos;autre canal (avec les mêmes étendues de no
 <context>
     <name>ConfigSectionKeyboard</name>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="26"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="82"/>
         <source>Mapping</source>
         <translation>Mappage</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="123"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="214"/>
         <source>Octave #1</source>
         <translation>Octave 1</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="128"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="219"/>
         <source>Octave #2</source>
         <translation>Octave 2</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="133"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="224"/>
         <source>Octave #3</source>
         <translation>Octave 3</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="138"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="229"/>
         <source>Octave #4</source>
         <translation>Octave 4</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="211"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="302"/>
+        <source>Temperament</source>
+        <translation>Tempérament</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionkeyboard.ui" line="69"/>
         <source>First C</source>
         <translation>Premier Do</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="224"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="95"/>
+        <source>Back to default value</source>
+        <translation>Retour à la valeur par défaut</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionkeyboard.ui" line="158"/>
         <source>Tuning</source>
         <translation>Accordage</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="247"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Tuning fork</source>
         <translation>Diapason</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.cpp" line="49"/>
+        <location filename="context/interface/configsectionkeyboard.cpp" line="50"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionkeyboard.cpp" line="61"/>
+        <source>Equal</source>
+        <comment>Equal musical temperament</comment>
+        <translation>Égal</translation>
     </message>
 </context>
 <context>
@@ -1122,13 +1139,13 @@ Premium !</translation>
         <translation>Réverbération</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="274"/>
+        <location filename="context/interface/configsectionsound.ui" line="226"/>
         <source>Width</source>
         <translation>Densité</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="64"/>
-        <location filename="context/interface/configsectionsound.ui" line="258"/>
+        <location filename="context/interface/configsectionsound.ui" line="22"/>
+        <location filename="context/interface/configsectionsound.ui" line="197"/>
         <source>Level</source>
         <translation>Niveau</translation>
     </message>
@@ -1159,12 +1176,12 @@ Premium !</translation>
         <translation>désactivé</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="168"/>
+        <location filename="context/interface/configsectionsound.ui" line="242"/>
         <source>Damp</source>
         <translation>Atténuation</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="242"/>
+        <location filename="context/interface/configsectionsound.ui" line="181"/>
         <source>Room</source>
         <translation>Profondeur</translation>
     </message>
@@ -1179,7 +1196,7 @@ Premium !</translation>
         <translation>Chorus</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="54"/>
+        <location filename="context/interface/configsectionsound.ui" line="45"/>
         <source>Frequency</source>
         <translation>Fréquence</translation>
     </message>

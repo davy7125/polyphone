@@ -49,7 +49,7 @@ public:
     void release(bool quick = false);
     void setGain(double gain);
     void setTuningFork(int tuningFork);
-    void setTemperament(double temperament[12]);
+    void setTemperament(double temperament[12], int relativeKey);
     void setChorus(int level, int depth, int frequency);
     bool isFinished() { return _isFinished; }
     bool isRunning() { return _isRunning; }
@@ -87,6 +87,7 @@ private:
     double _gain;
     int _tuningFork;
     double _temperament[12]; // Fine tune in cents from each key from C to B
+    int _temperamentRelativeKey;
     int _initialKey; // Only used to know which key triggered the sound, not for computing data
     VoiceParam * _voiceParam;
     int _token;

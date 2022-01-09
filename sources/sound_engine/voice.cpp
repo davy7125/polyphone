@@ -38,6 +38,7 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int ini
     _audioSmplRate(audioSmplRate),
     _gain(0),
     _tuningFork(440),
+    _temperamentRelativeKey(0),
     _initialKey(initialKey),
     _voiceParam(voiceParam),
     _token(token),
@@ -130,8 +131,10 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     _vibLFO.getSinus(vibLfo, len, static_cast<float>(v_vibLfoFreq), v_vibLfoDelay);
 
     // Pitch modulation
+    qint32 temperamentFineTune = _temperament[(playedNote - _temperamentRelativeKey + 12) % 12] -
+            _temperament[(21 - _temperamentRelativeKey) % 12]; // Correction so that the tuning fork is accurate for A
     double deltaPitchFixed = -12. * qLn(static_cast<double>(_audioSmplRate) / _smplRate * 440. / _tuningFork) / 0.69314718056 +
-            (playedNote - v_rootkey) * 0.01 * v_scaleTune + 0.01 * (v_fineTune + _temperament[playedNote % 12]) + v_coarseTune;
+            (playedNote - v_rootkey) * 0.01 * v_scaleTune + 0.01 * (v_fineTune + temperamentFineTune) + v_coarseTune;
     for (quint32 i = 0; i < len; i++)
         modPitch[i + 1] = static_cast<float>(
                     deltaPitchFixed + 0.01 * static_cast<double>(
@@ -315,10 +318,11 @@ void Voice::setTuningFork(int tuningFork)
     _mutexParam.unlock();
 }
 
-void Voice::setTemperament(double temperament[12])
+void Voice::setTemperament(double temperament[12], int relativeKey)
 {
     _mutexParam.lock();
     memcpy(_temperament, temperament, 12 * sizeof(double));
+    _temperamentRelativeKey = relativeKey;
     _mutexParam.unlock();
 }
 

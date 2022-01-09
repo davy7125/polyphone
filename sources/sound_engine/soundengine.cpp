@@ -217,18 +217,18 @@ void SoundEngine::setTuningForkInstance(int tuningFork)
     _mutexVoices.unlock();
 }
 
-void SoundEngine::setTemperament(double temperament[12])
+void SoundEngine::setTemperament(double temperament[12], int relativeKey)
 {
     for (int i = 0; i < _listInstances.size(); i++)
-        _listInstances.at(i)->setTemperamentInstance(temperament);
+        _listInstances.at(i)->setTemperamentInstance(temperament, relativeKey);
 }
 
-void SoundEngine::setTemperamentInstance(double temperament[12])
+void SoundEngine::setTemperamentInstance(double temperament[12], int relativeKey)
 {
     _mutexVoices.lock();
     for (int i = 0; i < _listVoices.size(); i++)
         if (_listVoices.at(i)->getKey() >= 0)
-            _listVoices.at(i)->setTemperament(temperament);
+            _listVoices.at(i)->setTemperament(temperament, relativeKey);
     _mutexVoices.unlock();
 }
 

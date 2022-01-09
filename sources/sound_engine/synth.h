@@ -143,6 +143,7 @@ private:
     double _gain;
     int _tuningFork;
     double _temperament[12];
+    int _temperamentRelativeKey;
 
     // Effects
     int _choLevel, _choDepth, _choFrequency;

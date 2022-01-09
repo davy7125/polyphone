@@ -69,6 +69,12 @@ ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
             ui->comboTemperament->addItem(line.split(",")[0], line);
     }
     ui->comboTemperament->blockSignals(false);
+
+    // Temperament relative key
+    ui->comboTemperamentRelativeKey->blockSignals(true);
+    for (int i = 0; i < 12; i++)
+        ui->comboTemperamentRelativeKey->addItem(ContextManager::keyName()->getKeyName(i, true, false, false, true), QString::number(i));
+    ui->comboTemperamentRelativeKey->blockSignals(false);
 }
 
 ConfigSectionKeyboard::~ConfigSectionKeyboard()
@@ -106,12 +112,17 @@ void ConfigSectionKeyboard::initialize()
 
     // Temperament
     ui->comboTemperament->blockSignals(true);
-    QString currentTemperamentName = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString().split(",")[0];
-    if (currentTemperamentName.isEmpty() || ui->comboTemperament->findText(currentTemperamentName) == -1)
+    ui->comboTemperamentRelativeKey->blockSignals(true);
+    QStringList currentTemperamentConfig = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString().split(",");
+    if (currentTemperamentConfig[0].isEmpty() || ui->comboTemperament->findText(currentTemperamentConfig[0]) == -1)
         ui->comboTemperament->setCurrentIndex(0); // Equal temperament
     else
-        ui->comboTemperament->setCurrentText(currentTemperamentName);
+        ui->comboTemperament->setCurrentText(currentTemperamentConfig[0]);
+    ui->comboTemperamentRelativeKey->setCurrentIndex(currentTemperamentConfig.size() == 14 ? currentTemperamentConfig[13].toInt() : 0);
+    ui->comboTemperamentRelativeKey->setEnabled(ui->comboTemperament->currentIndex() != 0);
+
     ui->comboTemperament->blockSignals(false);
+    ui->comboTemperamentRelativeKey->blockSignals(false);
 }
 
 void ConfigSectionKeyboard::initializeFirstC()
@@ -151,12 +162,20 @@ void ConfigSectionKeyboard::on_pushDefaultTuningFork_clicked()
 void ConfigSectionKeyboard::on_comboTemperament_currentIndexChanged(int index)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "temperament",
-                                              ui->comboTemperament->itemData(index).toString());
+                                              ui->comboTemperament->itemData(index).toString() +
+                                              "," + ui->comboTemperamentRelativeKey->currentData().toString());
+    ui->comboTemperamentRelativeKey->setEnabled(index != 0);
 }
 
+void ConfigSectionKeyboard::on_comboTemperamentRelativeKey_currentIndexChanged(int index)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "temperament",
+                                              ui->comboTemperament->currentData().toString() +
+                                              "," + ui->comboTemperamentRelativeKey->itemData(index).toString());
+}
 
 void ConfigSectionKeyboard::on_pushDefaultTemperament_clicked()
 {
     ui->comboTemperament->setCurrentIndex(0);
+    ui->comboTemperamentRelativeKey->setCurrentIndex(0);
 }
-

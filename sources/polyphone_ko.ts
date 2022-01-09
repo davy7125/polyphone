@@ -750,73 +750,73 @@
 <context>
     <name>ConfigSectionGeneral</name>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="75"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="91"/>
         <source>Input / Output</source>
         <translation>입력 / 출력</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="55"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="160"/>
         <source>Audio backend</source>
         <translation>오디오 백엔드</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="62"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="167"/>
         <source>Buffer size</source>
         <translation>버퍼 크기</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="107"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="133"/>
         <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool “Remove blank at start”)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="143"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="110"/>
         <source>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool “Trim to end of loop”)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="166"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="225"/>
         <source>When editing one side of a stereo sample, the other side is automatically edited the same.
 The same applies when editing a stereo instrument division:
 the division corresponding to the other channel (with the same note and velocity ranges) is edited the same.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="217"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="174"/>
         <source>MIDI input</source>
         <oldsource>Midi input</oldsource>
         <translation>미디 입력</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="230"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="26"/>
         <source>Sample management</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="124"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="39"/>
         <source>Sample import</source>
         <oldsource>Wav file import</oldsource>
         <translation>샘플 불러오기</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="171"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="230"/>
         <source>change linked sample</source>
         <translation>연결된 샘플 교체</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="147"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="114"/>
         <source>trim to loop</source>
         <translation>루프 다듬기</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="88"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="206"/>
         <source>Stereo editing</source>
         <translation>스테레오 편집</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="111"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="137"/>
         <source>remove blank at start</source>
         <translation>시작할 때 공백 제거</translation>
     </message>
@@ -977,50 +977,67 @@ the division corresponding to the other channel (with the same note and velocity
 <context>
     <name>ConfigSectionKeyboard</name>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="26"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="82"/>
         <source>Mapping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="123"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="214"/>
         <source>Octave #1</source>
         <translation>옥타브 #1</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="128"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="219"/>
         <source>Octave #2</source>
         <translation>옥타브 #2</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="133"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="224"/>
         <source>Octave #3</source>
         <translation>옥타브 #3</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="138"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="229"/>
         <source>Octave #4</source>
         <translation>옥타브 #4</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="211"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="302"/>
+        <source>Temperament</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionkeyboard.ui" line="69"/>
         <source>First C</source>
         <translation>초기 C</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="224"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="95"/>
+        <source>Back to default value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionkeyboard.ui" line="158"/>
         <source>Tuning</source>
         <translation type="unfinished">튜닝</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="247"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Tuning fork</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.cpp" line="49"/>
+        <location filename="context/interface/configsectionkeyboard.cpp" line="50"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation type="unfinished">Hz</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionkeyboard.cpp" line="61"/>
+        <source>Equal</source>
+        <comment>Equal musical temperament</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1118,13 +1135,13 @@ Premium!</source>
         <translation>리버브</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="274"/>
+        <location filename="context/interface/configsectionsound.ui" line="226"/>
         <source>Width</source>
         <translation>너비</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="64"/>
-        <location filename="context/interface/configsectionsound.ui" line="258"/>
+        <location filename="context/interface/configsectionsound.ui" line="22"/>
+        <location filename="context/interface/configsectionsound.ui" line="197"/>
         <source>Level</source>
         <translation>레벨</translation>
     </message>
@@ -1155,12 +1172,12 @@ Premium!</source>
         <translation>비활성화됨</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="168"/>
+        <location filename="context/interface/configsectionsound.ui" line="242"/>
         <source>Damp</source>
         <translation>댐프</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="242"/>
+        <location filename="context/interface/configsectionsound.ui" line="181"/>
         <source>Room</source>
         <translation>룸</translation>
     </message>
@@ -1175,7 +1192,7 @@ Premium!</source>
         <translation>코러스</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="54"/>
+        <location filename="context/interface/configsectionsound.ui" line="45"/>
         <source>Frequency</source>
         <translation>주파수</translation>
     </message>

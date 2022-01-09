@@ -36,6 +36,7 @@ Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _sf2(SoundfontManager::getInstance()),
     _gain(0),
     _tuningFork(440),
+    _temperamentRelativeKey(0),
     _choLevel(0), _choDepth(0), _choFrequency(0),
     _clipCoef(1),
     _recordFile(nullptr),
@@ -287,7 +288,7 @@ int Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSmp
         voiceTmp->setChorus(_choLevel, _choDepth, _choFrequency);
         voiceTmp->setGain(_gain);
         voiceTmp->setTuningFork(_tuningFork);
-        voiceTmp->setTemperament(_temperament);
+        voiceTmp->setTemperament(_temperament, _temperamentRelativeKey);
     }
 
     // Add the voice in the list
@@ -345,12 +346,18 @@ void Synth::updateConfiguration()
     SoundEngine::setTuningFork(_tuningFork);
 
     QStringList temperamentArgs = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString().split(",");
-    if (temperamentArgs.count() == 13)
+    if (temperamentArgs.count() == 14)
+    {
         for (int i = 1; i < 13; i++)
             _temperament[i - 1] = temperamentArgs[i].toDouble();
+        _temperamentRelativeKey = temperamentArgs[13].toInt() % 12;
+    }
     else
+    {
         memset(_temperament, 0, 12 * sizeof(double));
-    SoundEngine::setTemperament(_temperament);
+        _temperamentRelativeKey = 0;
+    }
+    SoundEngine::setTemperament(_temperament, _temperamentRelativeKey);
 
     // Update buffer size
     quint32 bufferSize = 2 * _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();
