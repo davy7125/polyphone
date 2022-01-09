@@ -43,6 +43,7 @@ public:
     static void releaseNote(int numNote);
     static void setGain(double gain);
     static void setTuningFork(int tuningFork);
+    static void setTemperament(double temperament[12]);
     static void setChorus(int level, int depth, int frequency);
     static void setPitchCorrection(qint16 correction, bool repercute);
     static void setStartLoop(quint32 startLoop, bool repercute);
@@ -110,6 +111,7 @@ private:
     void releaseNoteInstance(int numNote);
     void setGainInstance(double gain);
     void setTuningForkInstance(int tuningFork);
+    void setTemperamentInstance(double temperament[12]);
     void setChorusInstance(int level, int depth, int frequency);
     void setPitchCorrectionInstance(qint16 correction, bool repercute);
     void setStartLoopInstance(quint32 startLoop, bool repercute);

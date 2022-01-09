@@ -142,6 +142,7 @@ private:
     // Global parameter
     double _gain;
     int _tuningFork;
+    double _temperament[12];
 
     // Effects
     int _choLevel, _choDepth, _choFrequency;

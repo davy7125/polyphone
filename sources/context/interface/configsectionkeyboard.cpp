@@ -26,6 +26,7 @@
 #include "ui_configsectionkeyboard.h"
 #include "contextmanager.h"
 #include "editkey.h"
+#include <QTextStream>
 
 ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
     QWidget(parent),
@@ -48,11 +49,26 @@ ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
 
     ui->spinTuningFork->setSuffix(" " + tr("Hz", "unit for Herz"));
     ui->pushDefaultTuningFork->setIcon(ContextManager::theme()->getColoredSvg(":/icons/edit-undo.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
+    ui->pushDefaultTemperament->setIcon(ContextManager::theme()->getColoredSvg(":/icons/edit-undo.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
 
     // Populate the table with all keys and all octaves
     for (int j = 0; j < ui->tableKeyboardMap->columnCount(); j++)
     for (int i = 0; i < ui->tableKeyboardMap->rowCount(); i++)
     ui->tableKeyboardMap->setCellWidget(i, j, new EditKey(i, static_cast<ConfManager::Key>(j)));
+
+    // Load the temperaments
+    ui->comboTemperament->blockSignals(true);
+    ui->comboTemperament->addItem(tr("Equal", "Equal musical temperament"), "Equal,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0");
+    QString temperamentFile = ":/misc/temperaments.csv";
+    QFile file(temperamentFile);
+    if (file.open(QIODevice::ReadOnly | QFile::Text))
+    {
+        QTextStream in(&file);
+        QString line;
+        while (!(line = in.readLine()).isEmpty())
+            ui->comboTemperament->addItem(line.split(",")[0], line);
+    }
+    ui->comboTemperament->blockSignals(false);
 }
 
 ConfigSectionKeyboard::~ConfigSectionKeyboard()
@@ -83,10 +99,19 @@ void ConfigSectionKeyboard::initialize()
     // Octave configuration
     initializeFirstC();
 
-    // Other
+    // Tuning fork
     ui->spinTuningFork->blockSignals(true);
     ui->spinTuningFork->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", 440).toInt());
     ui->spinTuningFork->blockSignals(false);
+
+    // Temperament
+    ui->comboTemperament->blockSignals(true);
+    QString currentTemperamentName = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString().split(",")[0];
+    if (currentTemperamentName.isEmpty() || ui->comboTemperament->findText(currentTemperamentName) == -1)
+        ui->comboTemperament->setCurrentIndex(0); // Equal temperament
+    else
+        ui->comboTemperament->setCurrentText(currentTemperamentName);
+    ui->comboTemperament->blockSignals(false);
 }
 
 void ConfigSectionKeyboard::initializeFirstC()
@@ -122,3 +147,16 @@ void ConfigSectionKeyboard::on_pushDefaultTuningFork_clicked()
 {
     ui->spinTuningFork->setValue(440);
 }
+
+void ConfigSectionKeyboard::on_comboTemperament_currentIndexChanged(int index)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "temperament",
+                                              ui->comboTemperament->itemData(index).toString());
+}
+
+
+void ConfigSectionKeyboard::on_pushDefaultTemperament_clicked()
+{
+    ui->comboTemperament->setCurrentIndex(0);
+}
+

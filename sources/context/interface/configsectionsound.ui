@@ -16,6 +16,39 @@
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="6" column="1" colspan="3">
     <layout class="QGridLayout" name="gridLayout_5">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>Level</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QDial" name="dialChoFrequence">
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="notchTarget">
+        <double>10.000000000000000</double>
+       </property>
+       <property name="notchesVisible">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="label_12">
+       <property name="text">
+        <string>Frequency</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="1">
       <widget class="QDial" name="dialChoAmplitude">
        <property name="maximum">
@@ -48,26 +81,6 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="2">
-      <widget class="QLabel" name="label_12">
-       <property name="text">
-        <string>Frequency</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_10">
-       <property name="text">
-        <string>Level</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="3">
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
@@ -80,19 +93,6 @@
         </size>
        </property>
       </spacer>
-     </item>
-     <item row="0" column="2">
-      <widget class="QDial" name="dialChoFrequence">
-       <property name="maximum">
-        <number>100</number>
-       </property>
-       <property name="notchTarget">
-        <double>10.000000000000000</double>
-       </property>
-       <property name="notchesVisible">
-        <bool>true</bool>
-       </property>
-      </widget>
      </item>
      <item row="1" column="1">
       <widget class="QLabel" name="label_11">
@@ -143,48 +143,6 @@
      <property name="topMargin">
       <number>5</number>
      </property>
-     <item row="0" column="2">
-      <widget class="QDial" name="dialRevDensite">
-       <property name="maximum">
-        <number>100</number>
-       </property>
-       <property name="notchTarget">
-        <double>10.000000000000000</double>
-       </property>
-       <property name="notchesVisible">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="3">
-      <widget class="QLabel" name="label_9">
-       <property name="font">
-        <font>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Damp</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="4">
-      <spacer name="horizontalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
      <item row="0" column="1">
       <widget class="QDial" name="dialRevProfondeur">
        <property name="maximum">
@@ -200,25 +158,6 @@
      </item>
      <item row="0" column="3">
       <widget class="QDial" name="dialRevAttenuation">
-       <property name="maximum">
-        <number>100</number>
-       </property>
-       <property name="notchTarget">
-        <double>10.000000000000000</double>
-       </property>
-       <property name="notchesVisible">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QDial" name="dialRevNiveau">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>100</height>
-        </size>
-       </property>
        <property name="maximum">
         <number>100</number>
        </property>
@@ -262,6 +201,19 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="2">
+      <widget class="QDial" name="dialRevDensite">
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="notchTarget">
+        <double>10.000000000000000</double>
+       </property>
+       <property name="notchesVisible">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="2">
       <widget class="QLabel" name="label_8">
        <property name="font">
@@ -277,6 +229,54 @@
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QLabel" name="label_9">
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Damp</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QDial" name="dialRevNiveau">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="notchTarget">
+        <double>10.000000000000000</double>
+       </property>
+       <property name="notchesVisible">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>

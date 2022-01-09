@@ -46,6 +46,9 @@ Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _bufferSize(0),
     _configuration(configuration)
 {
+    // Default temperament: equal
+    memset(_temperament, 0, 12 * sizeof(double));
+
     // Creation buffers and sound engines
     updateConfiguration();
 }
@@ -284,6 +287,7 @@ int Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSmp
         voiceTmp->setChorus(_choLevel, _choDepth, _choFrequency);
         voiceTmp->setGain(_gain);
         voiceTmp->setTuningFork(_tuningFork);
+        voiceTmp->setTemperament(_temperament);
     }
 
     // Add the voice in the list
@@ -333,11 +337,20 @@ void Synth::updateConfiguration()
     _reverb.setDamping(revDamping);
     _mutexReverb.unlock();
 
-    // Update gain and tuning fork
+    // Update gain, tuning fork and temperament
     _gain = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
     SoundEngine::setGain(_gain);
+
     _tuningFork = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", 440).toInt();
     SoundEngine::setTuningFork(_tuningFork);
+
+    QStringList temperamentArgs = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString().split(",");
+    if (temperamentArgs.count() == 13)
+        for (int i = 1; i < 13; i++)
+            _temperament[i - 1] = temperamentArgs[i].toDouble();
+    else
+        memset(_temperament, 0, 12 * sizeof(double));
+    SoundEngine::setTemperament(_temperament);
 
     // Update buffer size
     quint32 bufferSize = 2 * _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();

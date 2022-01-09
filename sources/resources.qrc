@@ -99,6 +99,7 @@
         <file alias="decoration.svg">resources/decoration.svg</file>
         <file alias="id_rsa.pub">repository/id_rsa.pub</file>
         <file alias="transparent.png">resources/transparent.png</file>
+        <file alias="temperaments.csv">resources/misc/temperaments.csv</file>
     </qresource>
     <qresource prefix="/tool">
         <file alias="trim_loop.svg">editor/tools/trim_end/trim_loop.svg</file>
