@@ -42,8 +42,8 @@ public slots:
     void filterChanged(QString filter);
 
 protected:
-    bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const;
-    bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
+    bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 
 private slots:
     void divisionSortChanged();

@@ -31,11 +31,15 @@
 #include "utils.h"
 #include <QResizeEvent>
 #include <QDesktopServices>
+#include <QScrollBar>
+
+const int SoundfontBrowser::ITEMS_PER_PAGE = 25;
 
 SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SoundfontBrowser),
-    _loadingFilter(false)
+    _loadingFilter(false),
+    _currentPage(0)
 {
     ui->setupUi(this);
 
@@ -51,9 +55,6 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
             "}";
     ui->frameTitle->setStyleSheet(titleStyleSheet);
     ui->frameSearch->setStyleSheet(titleStyleSheet);
-    ui->listWidget->setStyleSheet("QListWidget{border:1px solid " +
-                                  ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
-                                  ";border-top:0;border-right:0;border-bottom:0}");
     ui->pushBecomePremium->setStyleSheet("QPushButton{border:1px solid " +
                                          ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                                          ";border-top:0;border-right:0;padding:4px;"
@@ -79,8 +80,21 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     ui->labelNoResult->setStyleSheet("QLabel{color:" + color.name() +
                                      ";border:1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                                      ";border-top:0;border-right:0;border-bottom:0}");
-    ui->listWidget->setStyleSheet("QListWidget::item:selected {background-color: " +
-                                  ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}");
+    ui->listWidget->setStyleSheet("QListWidget{border:1px solid " +
+                                  ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
+                                  ";border-top:0;border-right:0;border-bottom:0}" +
+                                  "QListWidget::item:selected {background-color: " +
+                                  ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}" +
+                                  "QAbstractSckrollArea{margin: 100px; padding: 100px;}");
+
+    // Pagination style
+    ui->framePagination->setStyleSheet("QFrame#framePagination{background-color: " +
+                                       ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND).name() +
+                                       ";color: " + ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name() +
+                                       ";border: 1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + ";border-radius: 3px;}");
+    ui->framePagination->setParent(this);
+    ui->pushGoPrevious->setIcon(ContextManager::theme()->getColoredSvg(":/icons/arrow_left.svg", QSize(30, 30), ThemeManager::WINDOW_TEXT));
+    ui->pushGoNext->setIcon(ContextManager::theme()->getColoredSvg(":/icons/arrow_right.svg", QSize(30, 30), ThemeManager::WINDOW_TEXT));
 
     // Connection with the repository manager
     RepositoryManager * rm = RepositoryManager::getInstance();
@@ -88,15 +102,15 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     connect(rm, SIGNAL(ready(QString)), this, SLOT(soundfontListAvailable(QString)));
 
     // Filter connection
-    connect(ui->lineSearch, SIGNAL(textChanged(QString)), this, SLOT(updateList()));
-    connect(ui->filterCategory, SIGNAL(selectionChanged()), this, SLOT(updateList()));
-    connect(ui->filterLicense, SIGNAL(selectionChanged()), this, SLOT(updateList()));
-    connect(ui->filterSampleSource, SIGNAL(selectionChanged()), this, SLOT(updateList()));
-    connect(ui->filterTimbre, SIGNAL(selectionChanged()), this, SLOT(updateList()));
-    connect(ui->filterArticulation, SIGNAL(selectionChanged()), this, SLOT(updateList()));
-    connect(ui->filterGenre, SIGNAL(selectionChanged()), this, SLOT(updateList()));
-    connect(ui->filterMidiStandard, SIGNAL(selectionChanged()), this, SLOT(updateList()));
-    connect(ui->filterTag, SIGNAL(selectionChanged()), this, SLOT(updateList()));
+    connect(ui->lineSearch, SIGNAL(textChanged(QString)), this, SLOT(updateFilter()));
+    connect(ui->filterCategory, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
+    connect(ui->filterLicense, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
+    connect(ui->filterSampleSource, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
+    connect(ui->filterTimbre, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
+    connect(ui->filterArticulation, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
+    connect(ui->filterGenre, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
+    connect(ui->filterMidiStandard, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
+    connect(ui->filterTag, SIGNAL(selectionChanged()), this, SLOT(updateFilter()));
 
     // Connection with the user manager
     connect(UserManager::getInstance(), SIGNAL(connectionStateChanged(UserManager::ConnectionState)),
@@ -215,7 +229,7 @@ void SoundfontBrowser::applyFilter(SoundfontFilter * filter)
     _loadingFilter = false;
 
     // Update the soundfont list
-    updateList();
+    updateFilter();
 }
 
 void SoundfontBrowser::on_pushRetry_clicked()
@@ -258,7 +272,7 @@ SoundfontFilter * SoundfontBrowser::getFilter()
     return filter;
 }
 
-void SoundfontBrowser::updateList()
+void SoundfontBrowser::updateFilter()
 {
     if (_loadingFilter)
         return;
@@ -270,7 +284,11 @@ void SoundfontBrowser::updateList()
     _currentSoundfontInfos = RepositoryManager::getInstance()->getSoundfontInformation(filter);
     delete filter;
 
-    updateList2();
+    // Back to the first page
+    _currentPage = 0;
+
+    // Next step: sort the items
+    updateSort();
 }
 
 bool sortByDate(SoundfontInformation * si1, SoundfontInformation * si2)
@@ -293,7 +311,7 @@ bool sortByTitle(SoundfontInformation * si1, SoundfontInformation * si2)
     return Utils::naturalOrder(si1->getTitle().toLower(), si2->getTitle().toLower()) < 0;
 }
 
-void SoundfontBrowser::updateList2()
+void SoundfontBrowser::updateSort()
 {
     // Sort
     switch (ui->comboSort->currentIndex())
@@ -312,11 +330,22 @@ void SoundfontBrowser::updateList2()
         break;
     }
 
+    // Next step: fill the list according to the page
+    updatePage();
+}
+
+void SoundfontBrowser::updatePage()
+{
+    // Current page / Number of pages, previous and next buttons
+    ui->labelPagination->setText(QString("%1 / %2").arg(_currentPage + 1).arg(1 + (_currentSoundfontInfos.count() - 1) / ITEMS_PER_PAGE));
+    ui->pushGoPrevious->setEnabled(_currentPage > 0);
+    ui->pushGoNext->setEnabled(_currentPage < (_currentSoundfontInfos.count() - 1) / ITEMS_PER_PAGE);
+
     // Fill with the soundfonts
     ui->listWidget->clear();
-    foreach (SoundfontInformation * si, _currentSoundfontInfos)
+    for (int i = _currentPage * ITEMS_PER_PAGE; i < qMin((_currentPage + 1) * ITEMS_PER_PAGE, _currentSoundfontInfos.count()); i++)
     {
-        SoundfontCellFull * cell = new SoundfontCellFull(si, this);
+        SoundfontCellFull * cell = new SoundfontCellFull(_currentSoundfontInfos[i], this);
         connect(cell, SIGNAL(itemClicked(SoundfontFilter*)), this, SLOT(applyFilter(SoundfontFilter*)));
 
         QListWidgetItem * item = new QListWidgetItem();
@@ -328,15 +357,18 @@ void SoundfontBrowser::updateList2()
     {
         // Display "no results"
         ui->labelNoResult->show();
+        ui->framePagination->hide();
         ui->listWidget->hide();
     }
     else
     {
         // Display the list
         ui->listWidget->show();
+        ui->framePagination->show();
         ui->labelNoResult->hide();
     }
 
+    // Next step: adapt the height of the cells
     updateCellHeight();
 }
 
@@ -351,6 +383,10 @@ void SoundfontBrowser::updateCellHeight()
         cell->setMaximumWidth(viewPortWidth);
         item->setSizeHint(QSize(0, cell->heightForWidth(viewPortWidth)));
     }
+
+    // Pagination location
+    ui->framePagination->move(this->width() - ui->framePagination->width() - ui->listWidget->verticalScrollBar()->width() - 5,
+                              this->height() - ui->framePagination->height() - 5);
 }
 
 void SoundfontBrowser::resizeEvent(QResizeEvent * event)
@@ -371,7 +407,7 @@ void SoundfontBrowser::on_listWidget_itemSelectionChanged()
 void SoundfontBrowser::on_comboSort_currentIndexChanged(int index)
 {
     Q_UNUSED(index)
-    this->updateList2();
+    this->updateSort();
 }
 
 void SoundfontBrowser::keyPressEvent(QKeyEvent * event)
@@ -406,4 +442,22 @@ void SoundfontBrowser::on_pushBecomePremium_clicked()
 void SoundfontBrowser::userStatusChanged(UserManager::ConnectionState state)
 {
     ui->pushBecomePremium->setVisible(state != UserManager::CONNECTED_PREMIUM && state != UserManager::CONNECTED_ADMIN);
+}
+
+void SoundfontBrowser::on_pushGoPrevious_clicked()
+{
+    if (_currentPage > 0)
+    {
+        _currentPage--;
+        updatePage();
+    }
+}
+
+void SoundfontBrowser::on_pushGoNext_clicked()
+{
+    if (_currentPage < (_currentSoundfontInfos.count() - 1) / ITEMS_PER_PAGE)
+    {
+        _currentPage++;
+        updatePage();
+    }
 }

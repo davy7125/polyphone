@@ -162,7 +162,7 @@ void ConfigSectionRepository::on_buttonCreateAccount_clicked()
 
 void ConfigSectionRepository::on_buttonBecomePremium_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/component/payplans/plan/subscribe"));
+    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/subscribe"));
 }
 
 void ConfigSectionRepository::on_pushConnect_clicked()

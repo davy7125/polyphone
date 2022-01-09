@@ -54,21 +54,26 @@ protected:
 private slots:
     void on_pushRetry_clicked();
     void on_pushResetFilters_clicked();
-    void updateList();
+    void updateFilter();
     void on_listWidget_itemSelectionChanged();
     void on_comboSort_currentIndexChanged(int index);
     void on_pushBecomePremium_clicked();
     void userStatusChanged(UserManager::ConnectionState state);
+    void on_pushGoPrevious_clicked();
+    void on_pushGoNext_clicked();
 
 private:
     void fillFilter();
     SoundfontFilter * getFilter();
+    void updateSort();
+    void updatePage();
     void updateCellHeight();
-    void updateList2();
 
     Ui::SoundfontBrowser *ui;
     bool _loadingFilter;
     QList<SoundfontInformation *> _currentSoundfontInfos;
+    int _currentPage;
+    static const int ITEMS_PER_PAGE;
 };
 
 #endif // SOUNDFONTBROWSER_H
