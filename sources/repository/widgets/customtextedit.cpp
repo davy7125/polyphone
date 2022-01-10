@@ -315,7 +315,7 @@ QString CustomTextEdit::processHtmlToInsert(QString html)
     // Remove the space between cells in tables
     html = html.replace("<table>", "<table cellspacing=0>");
 
-    // Extract frames and images
+    // Extract frames, audio and images
     QRegExp rx_img1("<img([^<>]*)/>"); // Autoclosing FIRST (because we are creating similar elements)
     int pos = 0;
     while ((pos = rx_img1.indexIn(html, pos)) != -1)
@@ -329,6 +329,20 @@ QString CustomTextEdit::processHtmlToInsert(QString html)
     while ((pos = rx_img2.indexIn(html, pos)) != -1)
     {
         html = html.replace(pos, rx_img2.matchedLength(), extract("img", rx_img2.cap(1), rx_img2.cap(2)));
+        pos ++;
+    }
+
+    QRegExp rx_audio("<audio([^<>]*)>");
+    pos = 0;
+    while ((pos = rx_audio.indexIn(html, pos)) != -1)
+    {
+        // Position of the end of the bloc
+        int pos2 = html.indexOf("</audio>", pos + 1);
+        if (pos2 == -1)
+            break;
+
+        html = html.replace(pos, pos2 - pos + 8 /* size of "</audio>" */,
+                            extract("audio", rx_audio.cap(1), html.mid(pos + rx_audio.cap(1).length() + 7, pos2 - pos - rx_audio.cap(1).length() - 7)));
         pos ++;
     }
 
@@ -362,9 +376,19 @@ QString CustomTextEdit::extract(QString tagName, QString content1, QString conte
         if (rx_src.indexIn(content1) != -1)
             imageUrl = rx_src.cap(1);
     }
+    else if (tagName == "audio")
+    {
+        // Audio icon
+        defaultImage = ContextManager::theme()->getColoredSvg(":/icons/sound.svg", QSize(40, 40), _colorReplacement);
+
+        // Get the audio source
+        QRegExp rx_src("src=\"([^\"]*)\"");
+        if (rx_src.indexIn(content2) != -1)
+            link = rx_src.cap(1);
+    }
     else
     {
-        // Youtube frame?
+        // YouTube frame?
         QRegExp rx_youtube("youtube\\.com/embed/([0-9a-zA-Z-_]*)\"");
         if (rx_youtube.indexIn(content1) != -1)
         {

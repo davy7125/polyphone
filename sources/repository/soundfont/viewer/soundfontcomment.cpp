@@ -63,7 +63,8 @@ void SoundfontComment::clear()
 void SoundfontComment::display(QList<SoundfontCommentData *> data, int level)
 {
     // First clear everything
-    this->clear();
+    if (level == 0)
+        this->clear();
 
     // Order the list
     if (level == 0)
