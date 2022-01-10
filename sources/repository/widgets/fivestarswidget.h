@@ -53,6 +53,7 @@ private:
         IconContainer();
 
         QPixmap _baseStar;
+        QPixmap _selectedBaseStar;
         QPixmap _coloredStar;
         QPixmap _selectedColoredStar;
     };

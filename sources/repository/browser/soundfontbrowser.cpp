@@ -44,54 +44,43 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     ui->setupUi(this);
 
     // Style
+    QString highlightedBackground = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
+    QString highlightedText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
+    QString border = ContextManager::theme()->getColor(ThemeManager::BORDER).name();
+
     ui->pushRetry->setIcon(ContextManager::theme()->getColoredSvg(":/icons/reload.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
-    ui->pushRetry->setStyleSheet("QPushButton{background-color:" +
-                                 ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() +
-                                 ";border-radius:5px;padding:5px}");
-    ui->widgetColored->setStyleSheet("QWidget{background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}");
-    ui->widgetColored2->setStyleSheet("QWidget{background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}");
-    QString titleStyleSheet = "QFrame{background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() +
-            ";color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
-            "}";
+    ui->pushRetry->setStyleSheet("QPushButton{background-color:" + highlightedBackground + ";border-radius:5px;padding:5px}");
+    ui->widgetColored->setStyleSheet("QWidget{background-color:" + highlightedBackground + "}");
+    ui->widgetColored2->setStyleSheet("QWidget{background-color:" + highlightedBackground + "}");
+    QString titleStyleSheet = "QLabel#labelFilters, QFrame#frameTitle, QFrame#frameSearch{background-color:" + highlightedBackground + ";color:" + highlightedText+ "}";
     ui->frameTitle->setStyleSheet(titleStyleSheet);
     ui->frameSearch->setStyleSheet(titleStyleSheet);
-    ui->pushBecomePremium->setStyleSheet("QPushButton{border:1px solid " +
-                                         ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
-                                         ";border-top:0;border-right:0;padding:4px;"
-                                         "color:" + ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::BUTTON_BACKGROUND).name() + "}");
+    ui->pushBecomePremium->setStyleSheet("QPushButton{border:1px solid " + border + ";border-top:0;border-right:0;padding:4px;color:" +
+                                         ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::BUTTON_BACKGROUND).name() + "}");
     ui->comboSort->view()->window()->setWindowFlags(Qt::Popup | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
     ui->comboSort->setStyleSheet(QString("QComboBox,QComboBox::drop-down{border-top-right-radius: 2px;border-bottom-right-radius: 2px}") +
-                                 "QComboBox::drop-down{border-width:0}" +
-                                 "QComboBox{padding: 0;}");
+                                 "QComboBox::drop-down{border-width:0; } QComboBox{padding: 0;background-color:" + highlightedText +
+                                 ";color:" + highlightedBackground + "}");
     ui->labelSort->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/sort.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_BACKGROUND));
-    ui->labelSort->setStyleSheet("QLabel{border-top-left-radius:2px;border-bottom-left-radius:2px;padding: 0 5px;background-color:" +
-                                 ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "}");
-    QString resetHoverColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name();
+    ui->labelSort->setStyleSheet("QLabel{border-top-left-radius:2px;border-bottom-left-radius:2px;padding: 0 5px;background-color:" + highlightedText + "}");
 
-    ui->pushResetFilters->setStyleSheet("QPushButton{background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
-                                        ";color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() +
-                                        ";border-radius:2px;border:0;padding:2px 5px}" +
-                                        "QPushButton:hover{background-color:" + resetHoverColor + "}");
-    ui->lineSearch->setStyleSheet("QLineEdit{border:0;border-top-left-radius:2px;border-bottom-left-radius:2px}");
+    ui->pushResetFilters->setStyleSheet("QPushButton{background-color:" + highlightedText + ";color:" + highlightedBackground +
+                                        ";border-radius:2px;border:0;padding:2px 5px} QPushButton:hover{background-color:" +
+                                        ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name() + "}");
+    ui->lineSearch->setStyleSheet("QLineEdit{background-color:" + highlightedText + ";color:" + highlightedBackground + ";border:0;border-radius:2px;}");
     QColor color = ThemeManager::mix(
                 ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
-                ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
-                0.5);
-    ui->labelNoResult->setStyleSheet("QLabel{color:" + color.name() +
-                                     ";border:1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
-                                     ";border-top:0;border-right:0;border-bottom:0}");
-    ui->listWidget->setStyleSheet("QListWidget{border:1px solid " +
-                                  ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
-                                  ";border-top:0;border-right:0;border-bottom:0}" +
-                                  "QListWidget::item:selected {background-color: " +
-                                  ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}" +
+                ContextManager::theme()->getColor(ThemeManager::LIST_TEXT), 0.5);
+    ui->labelNoResult->setStyleSheet("QLabel{color:" + color.name() + ";border:1px solid " + border + ";border-top:0;border-right:0;border-bottom:0}");
+    ui->listWidget->setStyleSheet("QListWidget{border:1px solid " + border + ";border-top:0;border-right:0;border-bottom:0}" +
+                                  "QListWidget::item:selected {background-color: " + highlightedBackground + "}" +
                                   "QAbstractSckrollArea{margin: 100px; padding: 100px;}");
 
     // Pagination style
     ui->framePagination->setStyleSheet("QFrame#framePagination{background-color: " +
                                        ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND).name() +
                                        ";color: " + ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name() +
-                                       ";border: 1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + ";border-radius: 3px;}");
+                                       ";border: 1px solid " + border + ";border-radius: 3px;}");
     ui->framePagination->setParent(this);
     ui->pushGoPrevious->setIcon(ContextManager::theme()->getColoredSvg(":/icons/arrow_left.svg", QSize(30, 30), ThemeManager::WINDOW_TEXT));
     ui->pushGoNext->setIcon(ContextManager::theme()->getColoredSvg(":/icons/arrow_right.svg", QSize(30, 30), ThemeManager::WINDOW_TEXT));

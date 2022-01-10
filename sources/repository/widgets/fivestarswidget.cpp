@@ -81,7 +81,7 @@ void FiveStarsWidget::updateStars()
             percentage = 1;
 
         // Update the image
-        QPixmap mixedStar(s_icons->_baseStar);
+        QPixmap mixedStar(_isActive ? s_icons->_selectedBaseStar : s_icons->_baseStar);
         QPainter painter(&mixedStar);
         painter.drawPixmap(0, 0, mixedStar.width() * percentage, mixedStar.height(),
                            _isActive ? s_icons->_selectedColoredStar : s_icons->_coloredStar,
@@ -94,5 +94,17 @@ FiveStarsWidget::IconContainer::IconContainer()
 {
     _coloredStar = ContextManager::theme()->getColoredSvg(":/icons/star.svg", QSize(24, 24), ThemeManager::HIGHLIGHTED_BACKGROUND);
     _selectedColoredStar = ContextManager::theme()->getColoredSvg(":/icons/star.svg", QSize(24, 24), ThemeManager::HIGHLIGHTED_TEXT);
-    _baseStar = ContextManager::theme()->getColoredSvg(":/icons/star.svg", QSize(24, 24), ThemeManager::LIST_TEXT);
+
+    QColor baseColor = ThemeManager::mix(
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT), 0.2);
+    QMap<QString, QString> replacement;
+    replacement["currentColor"] = baseColor.name();
+    _selectedBaseStar = ContextManager::theme()->getColoredSvg(":/icons/star.svg", QSize(24, 24), replacement);
+
+    QColor selectedBaseColor = ThemeManager::mix(
+                ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
+                ContextManager::theme()->getColor(ThemeManager::LIST_TEXT), 0.2);
+    replacement["currentColor"] = selectedBaseColor.name();
+    _baseStar = ContextManager::theme()->getColoredSvg(":/icons/star.svg", QSize(24, 24), replacement);
 }
