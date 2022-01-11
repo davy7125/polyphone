@@ -110,9 +110,10 @@ void RunnableChordCreator::run()
     quint32 loopEnd = 0;
     if (_loop)
     {
-        QByteArray baData2 = SampleUtils::loop(baData, SAMPLE_RATE, loopStart, loopEnd, 32);
-        if (!baData2.isEmpty())
-            baData = baData2;
+        quint32 crossfadeLength;
+        bool result = SampleUtils::loopStep1(baData, SAMPLE_RATE, loopStart, loopEnd, crossfadeLength);
+        if (result)
+            baData = SampleUtils::loopStep2(baData, loopStart, loopEnd, crossfadeLength);
     }
 
     // Création d'un nouveau sample

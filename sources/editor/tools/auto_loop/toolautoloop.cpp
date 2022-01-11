@@ -43,11 +43,17 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
     quint32 endLoop = sm->get(id, champ_dwEndLoop).dwValue;
 
     // Loop
-    baData = SampleUtils::loop(baData, dwSmplRate, startLoop, endLoop, 24);
-    if (!baData.isEmpty())
+    baData = SampleUtils::bpsConversion(baData, 24, 32);
+    quint32 crossfadeLength;
+    bool result = SampleUtils::loopStep1(baData, dwSmplRate, startLoop, endLoop, crossfadeLength);
+    if (result)
     {
-        // Update data, length, startloop and endloop
+        // Update data
+        baData = SampleUtils::loopStep2(baData, startLoop, endLoop, crossfadeLength);
+        baData = SampleUtils::bpsConversion(baData, 32, 24);
         sm->set(id, champ_sampleDataFull24, baData);
+
+        // Update length, startloop and endloop
         AttributeValue val;
         val.dwValue = startLoop;
         sm->set(id, champ_dwStartLoop, val);

@@ -51,7 +51,8 @@ public:
     static void regimePermanent(QVector<float> fData, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd);
     static QVector<float> correlation(const float *fData, quint32 size, quint32 dwSmplRate, quint32 fMin, quint32 fMax, quint32 &dMin);
     static float correlation(const float *fData1, const float *fData2, quint32 length, float *bestValue);
-    static QByteArray loop(QByteArray baData, quint32 dwSmplRate, quint32 &loopStart, quint32 &loopEnd, quint16 wBps);
+    static bool loopStep1(QByteArray baData32, quint32 dwSmplRate, quint32 &loopStart, quint32 &loopEnd, quint32 &loopCrossfadeLength);
+    static QByteArray loopStep2(QByteArray baData32, quint32 loopStart, quint32 loopEnd, quint32 loopCrossfadeLength);
     static QList<quint32> findMins(QVector<float> vectData, int maxNb, float minFrac = 0);
     static QList<quint32> findMax(QVector<float> vectData, int maxNb, float minFrac = 0);
     static qint32 max(QByteArray baData, quint16 wBps);

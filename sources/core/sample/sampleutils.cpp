@@ -1147,16 +1147,13 @@ float SampleUtils::correlation(const float *fData1, const float* fData2, quint32
     return static_cast<float>(sum / size);
 }
 
-QByteArray SampleUtils::loop(QByteArray baData, quint32 dwSmplRate, quint32 &loopStart, quint32 &loopEnd, quint16 wBps)
+bool SampleUtils::loopStep1(QByteArray baData32, quint32 dwSmplRate, quint32 &loopStart, quint32 &loopEnd, quint32 &loopCrossfadeLength)
 {
-    if (wBps != 32)
-        baData = bpsConversion(baData, wBps, 32);
-
     // Conversion en float
-    qint32 size = baData.size() / 4;
+    qint32 size = baData32.size() / 4;
     QVector<float> fData;
     fData.resize(size);
-    qint32 * iData = reinterpret_cast<qint32*>(baData.data());
+    qint32 * iData = reinterpret_cast<qint32*>(baData32.data());
     for (int i = 0; i < size; i++)
         fData[i] = static_cast<float>(iData[i]);
 
@@ -1165,7 +1162,7 @@ QByteArray SampleUtils::loop(QByteArray baData, quint32 dwSmplRate, quint32 &loo
     if (posStart == loopEnd || loopEnd < dwSmplRate / 4 + posStart)
         regimePermanent(fData, dwSmplRate, posStart, loopEnd);
     if (loopEnd < dwSmplRate / 4 + posStart)
-        return QByteArray();
+        return false;
 
     // Extraction du segment B de 0.05s à la fin du régime permanent
     quint32 longueurSegmentB = static_cast<quint32>(0.05 * dwSmplRate);
@@ -1179,7 +1176,7 @@ QByteArray SampleUtils::loop(QByteArray baData, quint32 dwSmplRate, quint32 &loo
         quint32 nbCor = (loopEnd - posStart) / 2 - 2 * longueurSegmentB;
 
         if (nbCor == 0)
-            return QByteArray();
+            return false;
 
         const float * pointerSegB = segmentB.constData();
         const float * pointerData = fData.constData();
@@ -1197,37 +1194,37 @@ QByteArray SampleUtils::loop(QByteArray baData, quint32 dwSmplRate, quint32 &loo
         }
     }
 
-    // Calcul de posStartLoop
-    quint32 posStartLoop = 2 * longueurSegmentB + bestCorPos + posStart;
+    // Update loop start
+    loopStart = 2 * longueurSegmentB + bestCorPos + posStart;
 
     // Longueur du crossfade pour bouclage (augmente avec l'incohérence)
-    quint32 longueurBouclage = qMin(bestCorPos + 2 * longueurSegmentB,
-                                    static_cast<quint32>((2147483647.0f - minCorValue) * dwSmplRate * 4 / 2147483647 + 0.5f));
+    loopCrossfadeLength = qMin(bestCorPos + 2 * longueurSegmentB,
+                               static_cast<quint32>((2147483647.0f - minCorValue) * dwSmplRate * 4 / 2147483647 + 0.5f));
 
-    // Bouclage avec crossfade
-    for (quint32 i = 0; i < longueurBouclage; i++)
+    return true;
+}
+
+QByteArray SampleUtils::loopStep2(QByteArray baData32, quint32 loopStart, quint32 loopEnd, quint32 loopCrossfadeLength)
+{
+    // Loop with a crossfade
+    qint32 * iData = reinterpret_cast<qint32*>(baData32.data());
+    for (quint32 i = 0; i < loopCrossfadeLength; i++)
     {
-        float dTmp = static_cast<float>(i) / (longueurBouclage - 1);
-        iData[loopEnd - longueurBouclage + i] = static_cast<qint32>(
-                    (1.f - dTmp) * fData[static_cast<int>(loopEnd - longueurBouclage + i)] +
-                dTmp * fData[static_cast<int>(posStartLoop - longueurBouclage + i)]);
+        float dTmp = static_cast<float>(i) / static_cast<float>(loopCrossfadeLength - 1);
+        iData[loopEnd - loopCrossfadeLength + i] = static_cast<qint32>(
+                    (1.f - dTmp) * static_cast<float>(iData[loopEnd - loopCrossfadeLength + i]) +
+                dTmp * static_cast<float>(iData[loopStart - loopCrossfadeLength + i]));
     }
 
-    // Récupération de 8 valeurs
+    // Get 8 more points
     QByteArray baTmp;
     baTmp.resize(4 * 8);
     qint32 * dataTmp = reinterpret_cast<qint32 *>(baTmp.data());
     for (quint32 i = 0; i < 8; i++)
-        dataTmp[i] = static_cast<qint32>(fData[static_cast<int>(posStartLoop + i)]);
+        dataTmp[i] = iData[static_cast<int>(loopStart + i)];
 
     // Coupure et ajout de 8 valeurs
-    baData = baData.left(static_cast<int>(loopEnd * 4)).append(baTmp);
-
-    // Modification de loopStart et renvoi des données
-    loopStart = posStartLoop;
-    if (wBps != 32)
-        baData = bpsConversion(baData, 32, wBps);
-    return baData;
+    return baData32.left(static_cast<int>(loopEnd * 4)).append(baTmp);
 }
 
 QList<quint32> SampleUtils::findMins(QVector<float> vectData, int maxNb, float minFrac)
