@@ -57,7 +57,7 @@ bool AbstractTool::setIds(IdList ids)
     _currentIds = ids;
 
     // Possibly complete the id list if stereo samples are found and if stereo editing is enabled
-    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", false).toBool())
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool())
     {
         SoundfontManager * sm = SoundfontManager::getInstance();
         EltID idLinked;

@@ -26,6 +26,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include "modulatordata.h"
+#include "pushstereoediting.h"
 
 ConfManager::ConfManager(): QObject(),
     _settings(this)
@@ -102,6 +103,10 @@ void ConfManager::setValue(Section section, QString key, QVariant value)
     // Possibly update elements
     switch (section)
     {
+    case Section::SECTION_NONE:
+        if (key == "stereo_modification")
+            PushStereoEditing::SetState(value.toBool());
+        break;
     case Section::SECTION_SOUND_ENGINE:
         emit(soundEngineConfigurationChanged());
         if (key == "modulator_vel_to_filter")

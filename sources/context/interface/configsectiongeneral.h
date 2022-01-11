@@ -41,6 +41,9 @@ public:
 
     void initialize();
 
+protected:
+    void showEvent(QShowEvent * event) override;
+
 private slots:
     void on_comboAudioOuput_currentIndexChanged(int index);
     void on_comboBufferSize_currentIndexChanged(int index);

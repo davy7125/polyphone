@@ -88,3 +88,17 @@ void TranslationManager::translate()
         _translator->load(RESOURCE_PATH + fileName);
     QApplication::installTranslator(_translator);
 }
+
+QString TranslationManager::getTranslation(TranslationType translationType)
+{
+    QString result = "";
+
+    switch (translationType)
+    {
+    case TRANSLATION_STEREO_EDITING_HELP:
+        result = QObject::tr("When editing one side of a stereo sample, the other side is automatically edited the same.\nThis rule applies at the sample level and also when editing a division of an instrument:\nthe division corresponding to the other channel, if any, is edited the same.\nBoth divisions must share the same note and velocity ranges.");
+        break;
+    }
+
+    return result;
+}

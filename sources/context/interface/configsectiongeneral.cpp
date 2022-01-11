@@ -35,6 +35,9 @@ ConfigSectionGeneral::ConfigSectionGeneral(QWidget *parent) :
     // Style
     ui->labelSubTitle1->setStyleSheet("QLabel{margin: 20px 0;}");
     ui->labelSubTitle2->setStyleSheet("QLabel{margin: 20px 0;}");
+
+    // Tool tip
+    ui->checkRepercussionStereo->setToolTip(ContextManager::translation()->getTranslation(TranslationManager::TRANSLATION_STEREO_EDITING_HELP));
 }
 
 ConfigSectionGeneral::~ConfigSectionGeneral()
@@ -59,9 +62,21 @@ void ConfigSectionGeneral::initialize()
     ui->checkBlanc->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool());
     ui->checkBlanc->blockSignals(false);
 
+    // Other configuration that needs to be updated more often
+    showEvent(nullptr);
+}
+
+void ConfigSectionGeneral::showEvent(QShowEvent * event)
+{
+    Q_UNUSED(event)
+
+    // The stereo modification state may change
     ui->checkRepercussionStereo->blockSignals(true);
-    ui->checkRepercussionStereo->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", false).toBool());
+    ui->checkRepercussionStereo->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool());
     ui->checkRepercussionStereo->blockSignals(false);
+
+    if (event != nullptr)
+        QWidget::showEvent(event);
 }
 
 void ConfigSectionGeneral::initializeAudio()

@@ -229,7 +229,7 @@ GraphicsRectangleItem::EditingMode GraphicsRectangleItem::setHover(bool isHovere
 
 EltID GraphicsRectangleItem::findBrother()
 {
-    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", false).toBool() &&
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool() &&
             _id.typeElement == elementInstSmpl)
     {
         // Sample linked to the division

@@ -559,7 +559,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
 
     EltID id = _table->getID(colonne);
     if (allowPropagation && id.typeElement == elementInstSmpl && champ != champ_pan &&
-            ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", false).toBool())
+            ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool())
     {
         // Répercussion des modifications sur le sample stéréo s'il est présent
         EltID idSmpl = id;

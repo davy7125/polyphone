@@ -277,6 +277,7 @@ SOURCES	+= main.cpp \
     editor/tree/treesplitter.cpp \
     editor/widgets/equalizer.cpp \
     editor/widgets/nullablespinbox.cpp \
+    editor/widgets/pushstereoediting.cpp \
     editor/widgets/tableheaderviewv.cpp \
     editor/widgets/tablewidget.cpp \
     editor/widgets/tabledelegate.cpp \
@@ -609,6 +610,7 @@ HEADERS += \
     editor/overview/tablepageoverview.h \
     editor/tree/treesplitter.h \
     editor/widgets/equalizer.h \
+    editor/widgets/pushstereoediting.h \
     editor/widgets/tableheaderviewv.h \
     editor/widgets/tablewidget.h \
     editor/widgets/tabledelegate.h \

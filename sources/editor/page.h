@@ -129,8 +129,8 @@ protected:
 
     static QString getIndexName(quint16 iVal, int CC);
 
-    void showEvent(QShowEvent * event);
-    void hideEvent(QHideEvent * event);
+    void showEvent(QShowEvent * event) override;
+    void hideEvent(QHideEvent * event) override;
 
 private:
     QString _editingSource;

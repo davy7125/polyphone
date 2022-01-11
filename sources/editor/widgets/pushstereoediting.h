@@ -22,54 +22,28 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_INST_H
-#define PAGE_INST_H
+#ifndef PUSHSTEREOEDITING_H
+#define PUSHSTEREOEDITING_H
 
-#include <QWidget>
-#include "pagetable.h"
+#include <QPushButton>
 
-namespace Ui {
-class PageInst;
-}
-
-class PageInst : public PageTable
+class PushStereoEditing: public QPushButton
 {
     Q_OBJECT
 
 public:
-    explicit PageInst(QWidget *parent = nullptr);
-    ~PageInst() override;
+    explicit PushStereoEditing(QWidget *parent = nullptr);
+    ~PushStereoEditing();
 
-    // Display options
-    QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;
-
-protected:
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
-    void keyPlayedInternal2(int key, int velocity) override;
+    static void SetState(bool isOn);
 
 private slots:
-    void onLinkClicked(EltID id);
-    void updateStereoButtonState();
+    void onToggle(bool checked);
 
 private:
-    Ui::PageInst *ui;
+    void SetStateInstance(bool isOn);
+
+    static QList<PushStereoEditing *> s_instances;
 };
 
-// Classe TableWidget pour instruments
-class TableWidgetInst : public TableWidget
-{
-    Q_OBJECT
-
-public:
-    TableWidgetInst(QWidget *parent = nullptr);
-    ~TableWidgetInst();
-
-    // Association champ - ligne
-    AttributeType getChamp(int row);
-    int getRow(AttributeType champ);
-
-private:
-    QList<AttributeType> _fieldList;
-};
-
-#endif // PAGE_INST_H
+#endif // PUSHSTEREOEDITING_H

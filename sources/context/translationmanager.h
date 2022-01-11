@@ -34,6 +34,11 @@ class ConfManager;
 class TranslationManager
 {
 public:
+    enum TranslationType
+    {
+        TRANSLATION_STEREO_EDITING_HELP
+    };
+
     TranslationManager(ConfManager *configuration);
     ~TranslationManager();
 
@@ -42,6 +47,9 @@ public:
 
     /// Get all languages, key is two letters (en, fr, ...), value is the language native name
     QMap<QString, QString> getLanguages() { return _languages; }
+
+    /// Get a translation common to several elements
+    QString getTranslation(TranslationType translationType);
 
 private:
     void addTranslations(QString path);

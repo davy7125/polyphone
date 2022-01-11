@@ -64,6 +64,7 @@ PageInst::PageInst(QWidget *parent) :
     connect(this->_table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->_table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
     connect(this->_table, SIGNAL(openElement(EltID)), this, SLOT(onOpenElement(EltID)));
+    connect(this->_table, SIGNAL(itemSelectionChanged()), this, SLOT(updateStereoButtonState()));
     connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(customizeKeyboard()));
     connect(ui->rangeEditor, SIGNAL(divisionsSelected(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
     connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
@@ -154,6 +155,9 @@ bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int di
         return false;
     }
     customizeKeyboard();
+
+    // Update the state of the stereo editing button
+    updateStereoButtonState();
 
     return true;
 }
@@ -317,4 +321,34 @@ void PageInst::keyPlayedInternal2(int key, int velocity)
             }
         }
     }
+}
+
+void PageInst::updateStereoButtonState()
+{
+    if (_currentParentIds.count() == 1)
+    {
+        // Does the selection comprise at least one linked sample?
+        bool withLinkedSample = false;
+        EltID idSmpl = EltID(elementSmpl, _currentParentIds[0].indexSf2);
+        foreach (EltID id, _currentIds)
+        {
+            if (id.typeElement == elementInstSmpl)
+            {
+                // Type of the associated sample
+                idSmpl.indexElt = _sf2->get(id, champ_sampleID).wValue;
+                SFSampleLink linkType = _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
+
+                if (linkType != linkInvalid  && linkType != monoSample && linkType != RomMonoSample)
+                {
+                    withLinkedSample = true;
+                    break;
+                }
+            }
+        }
+
+        // Button visibility
+        ui->pushStereoEditing->setVisible(withLinkedSample);
+    }
+    else
+        ui->pushStereoEditing->hide();
 }

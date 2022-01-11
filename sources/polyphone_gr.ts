@@ -406,313 +406,313 @@
 <context>
     <name>ConfManager</name>
     <message>
-        <location filename="context/confmanager.cpp" line="194"/>
+        <location filename="context/confmanager.cpp" line="199"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="195"/>
+        <location filename="context/confmanager.cpp" line="200"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="196"/>
+        <location filename="context/confmanager.cpp" line="201"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="197"/>
+        <location filename="context/confmanager.cpp" line="202"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="198"/>
+        <location filename="context/confmanager.cpp" line="203"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="199"/>
+        <location filename="context/confmanager.cpp" line="204"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="200"/>
+        <location filename="context/confmanager.cpp" line="205"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="201"/>
+        <location filename="context/confmanager.cpp" line="206"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="202"/>
+        <location filename="context/confmanager.cpp" line="207"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="203"/>
+        <location filename="context/confmanager.cpp" line="208"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="204"/>
+        <location filename="context/confmanager.cpp" line="209"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="205"/>
+        <location filename="context/confmanager.cpp" line="210"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="206"/>
+        <location filename="context/confmanager.cpp" line="211"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="212"/>
+        <location filename="context/confmanager.cpp" line="217"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="213"/>
+        <location filename="context/confmanager.cpp" line="218"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="214"/>
+        <location filename="context/confmanager.cpp" line="219"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="215"/>
+        <location filename="context/confmanager.cpp" line="220"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="216"/>
+        <location filename="context/confmanager.cpp" line="221"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="217"/>
+        <location filename="context/confmanager.cpp" line="222"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="218"/>
+        <location filename="context/confmanager.cpp" line="223"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="219"/>
+        <location filename="context/confmanager.cpp" line="224"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="220"/>
+        <location filename="context/confmanager.cpp" line="225"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="221"/>
+        <location filename="context/confmanager.cpp" line="226"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="222"/>
+        <location filename="context/confmanager.cpp" line="227"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="223"/>
+        <location filename="context/confmanager.cpp" line="228"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="224"/>
+        <location filename="context/confmanager.cpp" line="229"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="230"/>
+        <location filename="context/confmanager.cpp" line="235"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="231"/>
+        <location filename="context/confmanager.cpp" line="236"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="232"/>
+        <location filename="context/confmanager.cpp" line="237"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="233"/>
+        <location filename="context/confmanager.cpp" line="238"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="234"/>
+        <location filename="context/confmanager.cpp" line="239"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="235"/>
+        <location filename="context/confmanager.cpp" line="240"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="236"/>
+        <location filename="context/confmanager.cpp" line="241"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="237"/>
+        <location filename="context/confmanager.cpp" line="242"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="238"/>
+        <location filename="context/confmanager.cpp" line="243"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="239"/>
+        <location filename="context/confmanager.cpp" line="244"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="240"/>
+        <location filename="context/confmanager.cpp" line="245"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="241"/>
+        <location filename="context/confmanager.cpp" line="246"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="242"/>
+        <location filename="context/confmanager.cpp" line="247"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="248"/>
+        <location filename="context/confmanager.cpp" line="253"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="249"/>
+        <location filename="context/confmanager.cpp" line="254"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="250"/>
+        <location filename="context/confmanager.cpp" line="255"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="251"/>
+        <location filename="context/confmanager.cpp" line="256"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="252"/>
+        <location filename="context/confmanager.cpp" line="257"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="253"/>
+        <location filename="context/confmanager.cpp" line="258"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="254"/>
+        <location filename="context/confmanager.cpp" line="259"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="255"/>
+        <location filename="context/confmanager.cpp" line="260"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="256"/>
+        <location filename="context/confmanager.cpp" line="261"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="257"/>
+        <location filename="context/confmanager.cpp" line="262"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="258"/>
+        <location filename="context/confmanager.cpp" line="263"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="259"/>
+        <location filename="context/confmanager.cpp" line="264"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="260"/>
+        <location filename="context/confmanager.cpp" line="265"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
@@ -750,71 +750,64 @@
 <context>
     <name>ConfigSectionGeneral</name>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="91"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="88"/>
         <source>Input / Output</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="160"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="157"/>
         <source>Audio backend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="167"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="164"/>
         <source>Buffer size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="133"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="130"/>
         <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool “Remove blank at start”)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="110"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="107"/>
         <source>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool “Trim to end of loop”)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="225"/>
-        <source>When editing one side of a stereo sample, the other side is automatically edited the same.
-The same applies when editing a stereo instrument division:
-the division corresponding to the other channel (with the same note and velocity ranges) is edited the same.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="174"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="171"/>
         <source>MIDI input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="26"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="23"/>
         <source>Sample management</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="39"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="36"/>
         <source>Sample import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="230"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="222"/>
         <source>change linked sample</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="114"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="111"/>
         <source>trim to loop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="206"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="203"/>
         <source>Stereo editing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="137"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="134"/>
         <source>remove blank at start</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2849,32 +2842,32 @@ default mod.</source>
 <context>
     <name>PageInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="86"/>
+        <location filename="editor/pageinst.cpp" line="87"/>
         <source>Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="87"/>
+        <location filename="editor/pageinst.cpp" line="88"/>
         <source>Ranges</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="88"/>
+        <location filename="editor/pageinst.cpp" line="89"/>
         <source>Envelopes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="125"/>
+        <location filename="editor/pageinst.cpp" line="126"/>
         <source>Instrument not linked to a preset yet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="127"/>
+        <location filename="editor/pageinst.cpp" line="128"/>
         <source>Instrument linked to preset:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="129"/>
+        <location filename="editor/pageinst.cpp" line="130"/>
         <source>Instrument linked to presets:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3321,7 +3314,7 @@ rate</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="344"/>
-        <location filename="editor/pagesmpl.cpp" line="1077"/>
+        <location filename="editor/pagesmpl.cpp" line="1081"/>
         <source>Play</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3372,8 +3365,8 @@ rate</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="646"/>
-        <location filename="editor/pagesmpl.cpp" line="509"/>
-        <location filename="editor/pagesmpl.cpp" line="1005"/>
+        <location filename="editor/pagesmpl.cpp" line="511"/>
+        <location filename="editor/pagesmpl.cpp" line="1009"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3398,78 +3391,78 @@ rate</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="257"/>
-        <location filename="editor/pagesmpl.cpp" line="639"/>
+        <location filename="editor/pagesmpl.cpp" line="642"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="267"/>
-        <location filename="editor/pagesmpl.cpp" line="778"/>
+        <location filename="editor/pagesmpl.cpp" line="268"/>
+        <location filename="editor/pagesmpl.cpp" line="782"/>
         <source>right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="268"/>
-        <location filename="editor/pagesmpl.cpp" line="779"/>
+        <location filename="editor/pagesmpl.cpp" line="269"/>
+        <location filename="editor/pagesmpl.cpp" line="783"/>
         <source>left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="269"/>
-        <location filename="editor/pagesmpl.cpp" line="780"/>
+        <location filename="editor/pagesmpl.cpp" line="270"/>
+        <location filename="editor/pagesmpl.cpp" line="784"/>
         <source>link</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="307"/>
+        <location filename="editor/pagesmpl.cpp" line="309"/>
         <source>Sample not linked to an instrument yet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="309"/>
+        <location filename="editor/pagesmpl.cpp" line="311"/>
         <source>Sample linked to instrument:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="311"/>
+        <location filename="editor/pagesmpl.cpp" line="313"/>
         <source>Sample linked to instruments:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="510"/>
-        <location filename="editor/pagesmpl.cpp" line="1006"/>
+        <location filename="editor/pagesmpl.cpp" line="512"/>
+        <location filename="editor/pagesmpl.cpp" line="1010"/>
         <source>Change successfully applied to the different samples</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="777"/>
-        <location filename="editor/pagesmpl.cpp" line="802"/>
+        <location filename="editor/pagesmpl.cpp" line="781"/>
+        <location filename="editor/pagesmpl.cpp" line="806"/>
         <source>mono</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1071"/>
+        <location filename="editor/pagesmpl.cpp" line="1075"/>
         <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1090"/>
+        <location filename="editor/pagesmpl.cpp" line="1094"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1091"/>
+        <location filename="editor/pagesmpl.cpp" line="1095"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1093"/>
+        <location filename="editor/pagesmpl.cpp" line="1097"/>
         <source>&amp;Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1094"/>
+        <location filename="editor/pagesmpl.cpp" line="1098"/>
         <source>&amp;No</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3806,6 +3799,14 @@ rate</source>
     <message>
         <location filename="repository/soundfontinformation.cpp" line="46"/>
         <source>Unknown author</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/translationmanager.cpp" line="99"/>
+        <source>When editing one side of a stereo sample, the other side is automatically edited the same.
+This rule applies at the sample level and also when editing a division of an instrument:
+the division corresponding to the other channel, if any, is edited the same.
+Both divisions must share the same note and velocity ranges.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4179,122 +4180,122 @@ rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="387"/>
+        <location filename="repository/repositorymanager.cpp" line="386"/>
         <source>piano</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="390"/>
+        <location filename="repository/repositorymanager.cpp" line="389"/>
         <source>organ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="393"/>
+        <location filename="repository/repositorymanager.cpp" line="392"/>
         <source>synthesizer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="396"/>
+        <location filename="repository/repositorymanager.cpp" line="395"/>
         <source>harpsichord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="399"/>
+        <location filename="repository/repositorymanager.cpp" line="398"/>
         <source>guitar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="402"/>
+        <location filename="repository/repositorymanager.cpp" line="401"/>
         <source>bass</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="405"/>
+        <location filename="repository/repositorymanager.cpp" line="404"/>
         <source>plucked strings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="408"/>
+        <location filename="repository/repositorymanager.cpp" line="407"/>
         <source>bowed strings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="411"/>
+        <location filename="repository/repositorymanager.cpp" line="410"/>
         <source>flute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="414"/>
+        <location filename="repository/repositorymanager.cpp" line="413"/>
         <source>reed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="417"/>
+        <location filename="repository/repositorymanager.cpp" line="416"/>
         <source>brass</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="420"/>
+        <location filename="repository/repositorymanager.cpp" line="419"/>
         <source>vocal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="423"/>
+        <location filename="repository/repositorymanager.cpp" line="422"/>
         <source>unpitched percussion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="426"/>
+        <location filename="repository/repositorymanager.cpp" line="425"/>
         <source>melodic percussion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="429"/>
+        <location filename="repository/repositorymanager.cpp" line="428"/>
         <source>sound effect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="432"/>
+        <location filename="repository/repositorymanager.cpp" line="431"/>
         <source>soundscape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="435"/>
+        <location filename="repository/repositorymanager.cpp" line="434"/>
         <source>loop / rythm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="438"/>
+        <location filename="repository/repositorymanager.cpp" line="437"/>
         <source>instrument set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="441"/>
+        <location filename="repository/repositorymanager.cpp" line="440"/>
         <source>unclassifiable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="448"/>
+        <location filename="repository/repositorymanager.cpp" line="447"/>
         <source>Category %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="476"/>
+        <location filename="repository/repositorymanager.cpp" line="475"/>
         <source>Please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="479"/>
+        <location filename="repository/repositorymanager.cpp" line="478"/>
         <source>Your account has been banned.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="484"/>
+        <location filename="repository/repositorymanager.cpp" line="483"/>
         <source>A Premium account allows you to browse and download all soundfonts available online.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/repositorymanager.cpp" line="493"/>
+        <location filename="repository/repositorymanager.cpp" line="492"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4311,103 +4312,113 @@ download the list</source>
 <context>
     <name>SoundfontBrowser</name>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="172"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="406"/>
         <source>Category</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="188"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="422"/>
         <source>License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="204"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="438"/>
         <source>Sample source</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="220"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="454"/>
         <source>Timbre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="236"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="470"/>
         <source>Articulation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="252"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="486"/>
         <source>Genre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="268"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="502"/>
         <source>MIDI standard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="284"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="518"/>
         <source>Tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="347"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="206"/>
         <source>Search a soundfont...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="379"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="238"/>
         <source>Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="384"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="243"/>
         <source>Downloads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="389"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="248"/>
         <source>Rating score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="394"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="253"/>
         <source>Title (A→Z)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="465"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="296"/>
         <source>Filters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="494"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="325"/>
         <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="513"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="344"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="535"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="160"/>
         <source>No results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="616"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="593"/>
+        <source>Go to the previous page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/browser/soundfontbrowser.ui" line="628"/>
+        <source>Go to the next page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/browser/soundfontbrowser.ui" line="718"/>
         <source>Oops! Cannot
 download the list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="141"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="144"/>
         <source>commercial use</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="142"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="145"/>
         <source>share after editing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4415,7 +4426,7 @@ download the list</source>
 <context>
     <name>SoundfontComment</name>
     <message>
-        <location filename="repository/soundfont/viewer/soundfontcomment.cpp" line="89"/>
+        <location filename="repository/soundfont/viewer/soundfontcomment.cpp" line="90"/>
         <source>No comments.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4712,12 +4723,12 @@ download content</source>
 <context>
     <name>TableWidgetInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="222"/>
+        <location filename="editor/pageinst.cpp" line="226"/>
         <source>Loop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="233"/>
+        <location filename="editor/pageinst.cpp" line="237"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>

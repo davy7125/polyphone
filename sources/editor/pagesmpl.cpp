@@ -261,6 +261,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
         ui->comboLink->setCurrentIndex(0);
         ui->checkLectureLien->setEnabled(false);
         ui->checkLectureLien->setChecked(false);
+        ui->pushStereoEditing->hide();
     }
     else
     {
@@ -290,6 +291,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
             ui->comboLink->setCurrentIndex(-1);
 
         ui->checkLectureLien->setEnabled(nombreElements == 1);
+        ui->pushStereoEditing->setVisible(nombreElements == 1);
     }
     ui->comboType->setEnabled(nombreElements == 1 && !ui->pushLecture->isChecked());
 
@@ -593,6 +595,7 @@ void PageSmpl::setType(int index)
     if (_preparingPage)
         return;
 
+    ui->pushStereoEditing->setVisible(_currentIds.count() == 1 && index > 0);
     EltID id = _currentIds.getFirstId(elementSmpl);
 
     // Ancien et nouveau types
@@ -669,6 +672,7 @@ void PageSmpl::setLinkedSmpl(int index)
     if (_preparingPage)
         return;
 
+    ui->pushStereoEditing->setVisible(_currentIds.count() == 1 && index > 0);
     EltID id = _currentIds.getFirstId(elementSmpl);
 
     // Ancien et nouveau samples liés
@@ -872,7 +876,7 @@ EltID PageSmpl::getRepercussionID(EltID id)
     // Recherche du sample associé, le cas échéant et si la répercussion est activée
     SFSampleLink typeLien = _sf2->get(id, champ_sfSampleType).sfLinkValue;
     if (typeLien != monoSample && typeLien != RomMonoSample &&
-            ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", false).toBool())
+            ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool())
         id2.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
     else
         id2.indexElt = -1;
