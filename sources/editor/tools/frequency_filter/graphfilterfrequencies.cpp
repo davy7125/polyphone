@@ -122,10 +122,38 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(p
     this->installEventFilter(this);
 
     // Affichage
-    this->replot();
+    this->replotGraph();
 }
 
 GraphFilterFrequencies::~GraphFilterFrequencies() {}
+
+bool GraphFilterFrequencies::eventFilter(QObject* o, QEvent* e)
+{
+    if ((e->type() == QEvent::MouseMove ||
+         e->type() == QEvent::MouseButtonPress ||
+         e->type() == QEvent::MouseButtonRelease ||
+         e->type() == QEvent::Leave)
+            && o == this)
+    {
+        QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(e);
+        QPoint pos = mouseEvent->pos();
+        if (mouseEvent->type() == QEvent::MouseMove)
+            this->mouseMoved(pos);
+        else if (mouseEvent->type() == QEvent::Leave)
+            this->mouseLeft();
+        else if (mouseEvent->button() == Qt::LeftButton)
+        {
+            if (mouseEvent->type() == QEvent::MouseButtonPress)
+                this->mousePressed(pos);
+            else if (mouseEvent->type() == QEvent::MouseButtonRelease)
+                this->mouseReleased(pos);
+        }
+        return true;
+    }
+
+    // Default event filter
+    return QCustomPlot::eventFilter(o, e);
+}
 
 void GraphFilterFrequencies::setNbFourier(int nbFourier)
 {
@@ -201,7 +229,7 @@ void GraphFilterFrequencies::setValues(QVector<double> val)
 {
     for (int i = 0; i < qMin(POINT_NUMBER, val.size()); i++)
         dValues[i] = val.at(i);
-    this->replot();
+    this->replotGraph();
 }
 
 // Méthodes privées
@@ -300,10 +328,10 @@ void GraphFilterFrequencies::write(QPoint pos)
     this->previousY = y;
 
     // Affichage
-    this->replot();
+    this->replotGraph();
 }
 
-void GraphFilterFrequencies::replot()
+void GraphFilterFrequencies::replotGraph()
 {
     QVector<double> x(POINT_NUMBER);
     for (int i = 0; i < POINT_NUMBER; i++)
@@ -311,7 +339,7 @@ void GraphFilterFrequencies::replot()
     this->graph(1)->setData(x, this->dValues, true);
 
     // Affichage
-    QCustomPlot::replot();
+    this->replot();
 }
 
 void GraphFilterFrequencies::afficheCoord(double x, double y)
@@ -349,5 +377,5 @@ void GraphFilterFrequencies::afficheCoord(double x, double y)
         labelCoord->setText("");
     }
     this->graph(2)->setData(xVector, yVector, true);
-    this->replot();
+    this->replotGraph();
 }

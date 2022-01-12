@@ -71,6 +71,7 @@ void ToolFrequencyFilter_gui::updateInterface(AbstractToolParameters * parameter
         // Display it
         ui->graphFilterFrequencies->addFourierTransform(fData, sampleRate);
     }
+    ui->graphFilterFrequencies->replot();
 }
 
 void ToolFrequencyFilter_gui::saveParameters(AbstractToolParameters * parameters)

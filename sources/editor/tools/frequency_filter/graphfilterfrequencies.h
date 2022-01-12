@@ -35,31 +35,7 @@ public:
     explicit GraphFilterFrequencies(QWidget *parent = nullptr);
     ~GraphFilterFrequencies();
 
-    bool eventFilter(QObject* o, QEvent* e)
-    {
-        if ((e->type() == QEvent::MouseMove ||
-             e->type() == QEvent::MouseButtonPress ||
-             e->type() == QEvent::MouseButtonRelease ||
-             e->type() == QEvent::Leave)
-                && o == this)
-        {
-            QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(e);
-            QPoint pos = mouseEvent->pos();
-            if (mouseEvent->type() == QEvent::MouseMove)
-                this->mouseMoved(pos);
-            else if (mouseEvent->type() == QEvent::Leave)
-                this->mouseLeft();
-            else if (mouseEvent->button() == Qt::LeftButton)
-            {
-                if (mouseEvent->type() == QEvent::MouseButtonPress)
-                    this->mousePressed(pos);
-                else if (mouseEvent->type() == QEvent::MouseButtonRelease)
-                    this->mouseReleased(pos);
-            }
-            return true;
-        }
-        return false;
-    }
+    bool eventFilter(QObject* o, QEvent* e);
 
     void setNbFourier(int nbFourier);
     void addFourierTransform(QVector<float> fData, quint32 sampleRate);
@@ -69,7 +45,7 @@ public:
 private:
     QVector<double> dValues;
     bool flagEdit;
-    void replot();
+    void replotGraph();
     double raideurExp;
     QCPItemText * labelCoord;
     int previousX;
