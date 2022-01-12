@@ -127,8 +127,8 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     _enveloppeMod.applyEnveloppe(dataMod, len, _release, playedNote, 1.0f, _voiceParam);
 
     /// LFOs ///
-    _modLFO.getSinus(modLfo, len, static_cast<float>(v_modLfoFreq), v_modLfoDelay);
-    _vibLFO.getSinus(vibLfo, len, static_cast<float>(v_vibLfoFreq), v_vibLfoDelay);
+    _modLFO.getData(modLfo, len, static_cast<float>(v_modLfoFreq), v_modLfoDelay);
+    _vibLFO.getData(vibLfo, len, static_cast<float>(v_vibLfoFreq), v_vibLfoDelay);
 
     // Pitch modulation
     qint32 temperamentFineTune = _temperament[(playedNote - _temperamentRelativeKey + 12) % 12] -

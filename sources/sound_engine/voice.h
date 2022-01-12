@@ -28,7 +28,7 @@
 #include <QMutex>
 #include "sound.h"
 #include "enveloppevol.h"
-#include "oscsinus.h"
+#include "osctriangle.h"
 #include "stk/Chorus.h"
 #include "stk/FreeVerb.h"
 
@@ -76,7 +76,7 @@ signals:
 
 private:
     // Oscillators, envelopes and chorus
-    OscSinus _modLFO, _vibLFO;
+    OscTriangle _modLFO, _vibLFO;
     EnveloppeVol _enveloppeVol, _enveloppeMod;
     stk::Chorus _chorus;
     int _chorusLevel;

@@ -22,11 +22,11 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "oscsinus.h"
+#include "osctriangle.h"
 #include "qmath.h"
 
 
-OscSinus::OscSinus(quint32 sampleRate) :
+OscTriangle::OscTriangle(quint32 sampleRate) :
     _sampleRate(sampleRate),
     _previousFreq(-1),
     _currentDelay(0),
@@ -34,8 +34,7 @@ OscSinus::OscSinus(quint32 sampleRate) :
 {
 }
 
-// Gordon-Smith Generator
-void OscSinus::getData(float * data, quint32 len, float freq, double delay)
+void OscTriangle::getData(float * data, quint32 len, float freq, double delay)
 {
     quint32 total = 0;
 
@@ -50,51 +49,71 @@ void OscSinus::getData(float * data, quint32 len, float freq, double delay)
         _delayEnded = (_currentDelay >= delayTime);
     }
 
-    // Sinus
+    // Triangle
     if (total != len)
     {
         if (_previousFreq < 0)
         {
             // Initialize the system
             _previousFreq = freq;
-            computeEpsilon(freq, _theta, _epsilon);
-            _posPrec = static_cast<float>(qSin(static_cast<double>(-_theta)));
-            _posPrecQuad = static_cast<float>(qCos(static_cast<double>(-_theta)));
+            computeDelta(freq, _delta);
+            _previousPoint = 0;
         }
-        if (_previousFreq != freq)
+        if (qAbs(_previousFreq - freq) > 0)
         {
-            float theta2, epsilon2;
-            computeEpsilon(freq, theta2, epsilon2);
+            float delta2;
+            computeDelta(freq, delta2);
+            if (_delta < 0)
+                delta2 = -delta2;
 
-            float progEpsilon;
+            float progDelta;
             for (quint32 i = total; i < len; i++)
             {
-                progEpsilon = static_cast<float>(len - i) / (len - total) * _epsilon
-                        + static_cast<float>(i - total) / (len - total) * epsilon2;
-                _posPrecQuad -= progEpsilon * _posPrec;
-                _posPrec     += progEpsilon * _posPrecQuad;
-                data[i] = _posPrec;
+                progDelta = static_cast<float>(len - i) / (len - total) * _delta
+                        + static_cast<float>(i - total) / (len - total) * delta2;
+
+                data[i] = _previousPoint + progDelta;
+                if (data[i] > 1.0f)
+                {
+                    data[i] = 2.0f - data[i];
+                    _delta = -_delta;
+                    delta2 = -delta2;
+                }
+                else if (data[i] < -1.0f)
+                {
+                    data[i] = -2.0f - data[i];
+                    _delta = -_delta;
+                    delta2 = -delta2;
+                }
+                _previousPoint = data[i];
             }
 
             // Update values
-            _theta = theta2;
-            _epsilon = epsilon2;
+            _delta = delta2;
             _previousFreq = freq;
         }
         else
         {
             for (quint32 i = total; i < len; i++)
             {
-                _posPrecQuad -= _epsilon * _posPrec;
-                _posPrec     += _epsilon * _posPrecQuad;
-                data[i] = _posPrec;
+                data[i] = _previousPoint + _delta;
+                if (data[i] > 1.0f)
+                {
+                    data[i] = 2.0f - data[i];
+                    _delta = -_delta;
+                }
+                else if (data[i] < -1.0f)
+                {
+                    data[i] = -2.0f - data[i];
+                    _delta = -_delta;
+                }
+                _previousPoint = data[i];
             }
         }
     }
 }
 
-void OscSinus::computeEpsilon(float freq, float &theta, float &epsilon)
+void OscTriangle::computeDelta(float freq, float &delta)
 {
-    theta = 2.f * static_cast<float>(M_PI) * freq / _sampleRate;
-    epsilon = 2.f * static_cast<float>(qSin(static_cast<double>(theta) / 2.));
+    delta = 4.0f * freq / _sampleRate;
 }

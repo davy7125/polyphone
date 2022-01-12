@@ -22,15 +22,15 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef OSCSINUS_H
-#define OSCSINUS_H
+#ifndef OSCTRIANGLE_H
+#define OSCTRIANGLE_H
 
 #include "sound.h"
 
-class OscSinus
+class OscTriangle
 {
 public:
-    OscSinus(quint32 sampleRate);
+    OscTriangle(quint32 sampleRate);
 
     // Freq in Hz, delay in s
     void getData(float *data, quint32 len, float freq, double delay);
@@ -39,11 +39,10 @@ private:
     quint32 _sampleRate;
     float _previousFreq;
     quint32 _currentDelay;
-    float _posPrec, _posPrecQuad;
-    float _theta, _epsilon;
     bool _delayEnded;
+    float _delta, _previousPoint;
 
-    void computeEpsilon(float freq, float &theta, float &epsilon);
+    void computeDelta(float freq, float &delta);
 };
 
-#endif // OSCSINUS_H
+#endif // OSCTRIANGLE_H
