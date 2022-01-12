@@ -179,19 +179,19 @@ Le partie gauche du graphique représente l'évolution de l'enveloppe lorsqu'une
 
 
 Délai
-: Durée pendant laquelle l'enveloppe reste à 0 juste après le déclenchement d'une touche.
+: Durée pendant laquelle l'enveloppe reste à 0 juste après le déclenchement d'une touche. Dans la majorité des cas, on souhaite entendre le son immédiatement après avoir pressé une touche et ce paramètre reste donc à 0. Cependant le délai peut être utile dans le cas d'un son évoluant au cours du temps, construit à partir de plusieurs couches sonores. Supposons que l'on souhaite un second son introduit 0.5 s après l'appui sur une touche, on entrera donc "0.5" dans cette section. Il est à noter qu'un délai ne retarde pas la lecture du son - il annule simplement son volume. Après avoir mis un délai de 0.5 s, le son sera entendu après une durée de 0.5 s pendant laquelle il aura été lu en interne.
 
 Attaque
-: Durée après le **délai** pendant laquelle l'enveloppe passe de 0 à sa valeur maximale.
+: Durée après le **délai** pendant laquelle l'enveloppe passe de 0 à sa valeur maximale. Par exemple, un son de corde frottée comme un violon possède une attaque relativement longue, alors qu'un son de corde frappée comme une guitare a une attaque courte. Même lorsque l'on souhaite utiliser une attaque aussi courte que possible, il est conseillé d'inscrire une valeur de 0.001, sans quoi un "clic" pourrait se faire entendre après avoir appuyé sur une touche.
 
 Maintien
 : Durée après l'**attaque** pendant laquelle l'enveloppe se maintien à sa valeur maximale.
 
 Déclin
-: Durée après le **maintien** pendant laquelle l'enveloppe passe progressivement de sa valeur maximale à la valeur spécifiée dans le **soutien**.
+: Durée après le **maintien** pendant laquelle l'enveloppe passe progressivement de sa valeur maximale à la valeur spécifiée dans le **soutien** (lorsque la valeur de soutien est à son maximum ou n'est pas spécifiée, the volume pendant le déclin reste à son maximum peu importe la valeur renseignée dans déclin).
 
 Soutien
-: Valeur maintenue après le **déclin** tant que la touche déclenchée n'est pas relevée.
+: Valeur maintenue après le **déclin** tant que la touche déclenchée n'est pas relevée. Tout comme l'**atténuation**, la valeur de soutien s'exprime en réduction de décibels. Dans le cas où l'on souhaite diminuer le son de moitié après la phase de déclin, une valeur de 6 dB devra être renseignée. Le nombre "144" peut être renseigné si l'on souhaite taire le son complètement.
 
 Note → Maintien
 : Modification de la durée de **maintien** en fonction de la note (voir ci-dessous).
@@ -205,9 +205,12 @@ Par exemple&nbsp;:
 * la valeur 100 réduit de moitié la durée de XXX pour chaque octave au-dessus du Do central (60) et double la durée de XXX pour chaque octave en dessous du Do central,
 * la valeur -100 double la durée de XXX pour chaque octave au-dessus du Do central (60) et réduit de moitié la durée de XXX pour chaque octave en dessous du Do central.
 
+Ces paramètres peuvent être utiles lors de la conception d'une guitare ou d'un piano avec la pédale sustain enfoncée&nbsp;: plus le son est grave et plus il dure avant de s'estomper entièrement.
+
 La partie droite représente l'évolution de l'enveloppe quand une touche est **relâchée**.
 Seule la durée de **relâche** est impliquée dans cette représentation.
 L'enveloppe retourne progressivement à la valeur 0 pendant cette durée.
+Les sons de violons ou de pads ont une durée de relâche relativement longue, alors que d'autres sons comme ceux de l'orgue s'arrêtent plus brutalement. Dans la pratique, pour des relâches courtes, il est conseillé d'utiliser une valeur d'environ 0.2 s car une valeur plus faible ne donne pas un rendu très plaisant ou naturel (mais cela dépend de l'instrument que l'on souhaite créer).
 
 Lorsqu'une seule division d'un instrument est sélectionnée dans l'arborescence, le son de l'[échantillon](manual/soundfont-editor/editing-pages/sample-editor.md) correspondant est affiché en fond.
 Il est ainsi possible de mieux visualiser l'évolution de l'enveloppe par rapport à l'échantillon en train d'être joué.
