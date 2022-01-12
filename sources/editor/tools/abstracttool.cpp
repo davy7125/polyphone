@@ -55,34 +55,34 @@ void AbstractTool::initialize(QWidget * parent)
 bool AbstractTool::setIds(IdList ids)
 {
     _currentIds = ids;
-
-    // Possibly complete the id list if stereo samples are found and if stereo editing is enabled
-    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool())
-    {
-        SoundfontManager * sm = SoundfontManager::getInstance();
-        EltID idLinked;
-        foreach (EltID id, ids)
-        {
-            // Skip if this is not a sample
-            if (id.typeElement != elementSmpl)
-                continue;
-
-            SFSampleLink typeLien = sm->get(id, champ_sfSampleType).sfLinkValue;
-            if (typeLien != monoSample && typeLien != RomMonoSample)
-            {
-                idLinked = id;
-                idLinked.indexElt = sm->get(id, champ_wSampleLink).wValue;
-                if (!_currentIds.contains(idLinked))
-                    _currentIds << idLinked;
-            }
-        }
-    }
-
     return this->isCompatible(_currentIds);
 }
 
 void AbstractTool::run()
 {
+    // Possibly complete the id list if stereo samples are found and if stereo editing is enabled
+    _idsToProcess = _currentIds;
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool())
+    {
+        SoundfontManager * sm = SoundfontManager::getInstance();
+        EltID idLinked;
+        foreach (EltID id, _currentIds)
+        {
+            // Check it is a sample
+            if (id.typeElement == elementSmpl)
+            {
+                SFSampleLink typeLien = sm->get(id, champ_sfSampleType).sfLinkValue;
+                if (typeLien != monoSample && typeLien != RomMonoSample)
+                {
+                    idLinked = id;
+                    idLinked.indexElt = sm->get(id, champ_wSampleLink).wValue;
+                    if (!_idsToProcess.contains(idLinked))
+                        _idsToProcess << idLinked;
+                }
+            }
+        }
+    }
+
     // Possibly create a dialog if not already done
     if (_toolGui != nullptr && _toolDialog == nullptr)
     {
@@ -96,7 +96,7 @@ void AbstractTool::run()
     else
     {
         _toolParameters->loadConfiguration();
-        _toolGui->updateInterface(_toolParameters, _currentIds);
+        _toolGui->updateInterface(_toolParameters, _idsToProcess);
         _toolDialog->show();
     }
 }
@@ -104,14 +104,15 @@ void AbstractTool::run()
 void AbstractTool::onParametersValidated()
 {
     // Get the tool parameters
-    if (_toolGui != nullptr) {
+    if (_toolGui != nullptr)
+    {
         _toolGui->saveParameters(_toolParameters);
         _toolParameters->saveConfiguration();
         _toolDialog->close();
     }
 
     // Run the tool, the signal "finished" will be sent
-    runInternal(s_sm, s_parent, _currentIds, _toolParameters);
+    runInternal(s_sm, s_parent, _idsToProcess, _toolParameters);
 }
 
 void AbstractTool::onFinished(bool updateNeeded)

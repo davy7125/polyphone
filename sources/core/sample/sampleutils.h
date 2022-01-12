@@ -46,7 +46,8 @@ public:
     static QVector<float> getFourierTransform(QVector<float> input);
     static QByteArray normaliser(QByteArray baData, double dVal, quint16 wBps, double &db);
     static QByteArray multiplier(QByteArray baData, double dMult, quint16 wBps, double &db);
-    static QByteArray enleveBlanc(QByteArray baData, float seuil, quint16 wBps, quint32 &pos);
+    static void removeBlankStep1(QByteArray baData24, quint32 &pos1, quint32 &pos2);
+    static QByteArray removeBlankStep2(QByteArray baData24, quint32 pos);
     static void regimePermanent(QByteArray baData, quint32 dwSmplRate, quint16 wBps, quint32 &posStart, quint32 &posEnd);
     static void regimePermanent(QVector<float> fData, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd);
     static QVector<float> correlation(const float *fData, quint32 size, quint32 dwSmplRate, quint32 fMin, quint32 fMax, quint32 &dMin);

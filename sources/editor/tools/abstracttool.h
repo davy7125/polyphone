@@ -77,6 +77,9 @@ protected:
     /// Get a confirmation message after the tool is run
     virtual QString getConfirmation() { return ""; }
 
+    /// Return true if the id is in the list of ids to be processed by the tool
+    bool isProcessed(EltID id) { return _idsToProcess.contains(id); }
+
 private slots:
     void onFinished(bool updateNeeded);
     void onParametersValidated();
@@ -85,7 +88,7 @@ private:
     AbstractToolParameters * _toolParameters;
     AbstractToolGui * _toolGui;
     ToolDialog * _toolDialog;
-    IdList _currentIds;
+    IdList _currentIds, _idsToProcess;
 
     static QWidget * s_parent; // For opening dialogs
     static SoundfontManager * s_sm;

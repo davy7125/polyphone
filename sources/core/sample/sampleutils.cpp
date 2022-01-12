@@ -1006,38 +1006,43 @@ QByteArray SampleUtils::multiplier(QByteArray baData, double dMult, quint16 wBps
     return baData;
 }
 
-QByteArray SampleUtils::enleveBlanc(QByteArray baData, float seuil, quint16 wBps, quint32 &pos)
+void SampleUtils::removeBlankStep1(QByteArray baData24, quint32 &pos1, quint32 &pos2)
 {
-    // Conversion 32 bits si nécessaire
-    if (wBps != 32)
-        baData = bpsConversion(baData, wBps, 32);
+    // Thresholds
+    const qint16 threshold1Int = 10;
+    const qint16 threshold2Int = 20;
 
-    // Calcul de la moyenne des valeurs absolues
-    quint32 size = static_cast<quint32>(baData.size()) / 4;
-    QVector<float> fData;
-    fData.resize(static_cast<int>(size));
-
-    qint32 * iData = reinterpret_cast<qint32*>(baData.data());
+    // Compute the number of elements to skip
+    pos1 = pos2 = 0;
+    bool pos1Found = false;
+    bool pos2Found = false;
+    quint32 size = static_cast<quint32>(baData24.size()) / 3;
     for (quint32 i = 0; i < size; i++)
-        fData[static_cast<int>(i)] = static_cast<float>(iData[i]);
+    {
+        qint16 value = reinterpret_cast<qint16*>(&baData24.data()[3 * i + 1])[0];
+        if (value < 0)
+            value = -value;
+        if (!pos1Found && value > threshold1Int)
+        {
+            pos1 = i;
+            pos1Found = true;
+        }
+        if (!pos2Found && value > threshold2Int)
+        {
+            pos2 = i;
+            pos2Found = true;
+        }
+        if (pos1Found && pos2Found)
+            break;
+    }
+}
 
-    for (quint32 i = 0; i < size; i++)
-        fData[static_cast<int>(i)] = qAbs(fData[static_cast<int>(i)]);
-    float median = mediane(fData);
-
-    // Calcul du nombre d'éléments à sauter
-    while (pos + 1 < size && (iData[pos] < seuil * median))
-        pos++;
-
-    // Saut
-    if (pos + 1 < static_cast<quint32>(baData.size()) / 4)
-        baData = baData.mid(static_cast<int>(pos) * 4, baData.size() - 4 * static_cast<int>(pos));
-
-    // Conversion format d'origine si nécessaie
-    if (wBps != 32)
-        baData = bpsConversion(baData, 32, wBps);
-
-    return baData;
+QByteArray SampleUtils::removeBlankStep2(QByteArray baData24, quint32 pos)
+{
+    // Skip the first points
+    if (3 * pos + 8 < static_cast<quint32>(baData24.size()))
+        baData24 = baData24.mid(static_cast<int>(pos) * 3, baData24.size() - 3 * static_cast<int>(pos));
+    return baData24;
 }
 
 void SampleUtils::regimePermanent(QByteArray baData, quint32 dwSmplRate, quint16 wBps, quint32 &posStart, quint32 &posEnd)
@@ -1588,11 +1593,19 @@ void SampleUtils::regimePermanent(QVector<float> data, quint32 dwSmplRate, quint
     quint32 len = static_cast<quint32>(data.size());
     if (len < sizePeriode)
     {
+        // Take the full length of the sample
         posStart = 0;
-        posEnd = len - 1;
+        posEnd = (len == 0 ? 0 : len - 1);
         return;
     }
     quint32 nbValeurs = (len - sizePeriode) / (dwSmplRate / 20);
+    if (nbValeurs == 0)
+    {
+        // Take also the full length of the sample
+        posStart = 0;
+        posEnd = (len == 0 ? 0 : len - 1);
+        return;
+    }
     QVector<float> tableauMoyennes;
     tableauMoyennes.resize(static_cast<int>(nbValeurs));
     for (quint32 i = 0; i < nbValeurs; i++)

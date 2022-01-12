@@ -340,8 +340,14 @@ void PageInst::updateStereoButtonState()
 
                 if (linkType != linkInvalid  && linkType != monoSample && linkType != RomMonoSample)
                 {
-                    withLinkedSample = true;
-                    break;
+                    // Check the linked sample
+                    EltID idSmpl2 = idSmpl;
+                    idSmpl2.indexElt = _sf2->get(idSmpl, champ_wSampleLink).wValue;
+                    if (_sf2->isValid(idSmpl2))
+                    {
+                        withLinkedSample = true;
+                        break;
+                    }
                 }
             }
         }

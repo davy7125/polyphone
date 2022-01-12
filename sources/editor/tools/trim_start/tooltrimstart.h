@@ -52,17 +52,24 @@ public:
         return "smpl:trimStart";
     }
 
+    /// Method executed before the iterating process
+    void beforeProcess(IdList ids) override;
+
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
     /// Trim a sample
-    static void trim(EltID id);
+    static void trim(IdList ids);
 
 protected:
     QString getLabelInternal() const override
     {
         return tr("Remove blank at start");
     }
+
+private:
+    QMutex _mutex;
+    IdList _processedSamples;
 };
 
 #endif // TOOLTRIMSTART_H

@@ -144,6 +144,7 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
         }
     }
 
+    IdList idsWithBlankToRemove;
     for (unsigned int j = 0; j < nChannels; j++)
     {
         if (*replace < 3 || (nChannels == 2 && j == 0 && indexL == -1) ||
@@ -167,6 +168,8 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                 QByteArray sm24 = son.getData(8);
                 sm->set(id, champ_sampleData16, smpl);
                 sm->set(id, champ_sampleData24, sm24);
+
+                idsWithBlankToRemove << id;
             }
             else
             {
@@ -225,15 +228,17 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
             val.cValue = static_cast<char>(son.getInt32(champ_chPitchCorrection));
             sm->set(id, champ_chPitchCorrection, val);
 
-            // Automatically remove leading blank?
-            if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool())
-                ToolTrimStart::trim(id);
+            idsWithBlankToRemove << id;
 
             // Automatically trim to loop?
             if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_auto_loop", false).toBool())
                 ToolTrimEnd::trim(id);
         }
     }
+
+    // Automatically remove leading blank?
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool())
+        ToolTrimStart::trim(idsWithBlankToRemove);
 
     return addedSmpl;
 }

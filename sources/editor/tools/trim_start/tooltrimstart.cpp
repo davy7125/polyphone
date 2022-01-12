@@ -26,43 +26,102 @@
 #include "soundfontmanager.h"
 #include "sampleutils.h"
 
+void ToolTrimStart::beforeProcess(IdList ids)
+{
+    Q_UNUSED(ids)
+    _processedSamples.clear();
+}
+
 void ToolTrimStart::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
     Q_UNUSED(parameters);
-    Q_UNUSED(sm);
+    bool withLink = false;
+    EltID id2 = id;
 
-    trim(id);
+    // Sample already processed?
+    _mutex.lock();
+    if (_processedSamples.contains(id))
+    {
+        _mutex.unlock();
+        return;
+    }
+    else
+    {
+        _processedSamples << id;
+
+        // The sample may be linked
+        SFSampleLink typeLien = sm->get(id, champ_sfSampleType).sfLinkValue;
+        if (typeLien != monoSample && typeLien != RomMonoSample)
+        {
+            id2.indexElt = sm->get(id, champ_wSampleLink).wValue;
+            if (this->isProcessed(id2))
+            {
+                withLink = true;
+                _processedSamples << id2;
+            }
+        }
+    }
+    _mutex.unlock();
+
+    // Elements to process
+    IdList ids(id);
+    if (withLink)
+        ids << id2;
+    trim(ids);
 }
 
-void ToolTrimStart::trim(EltID id)
+void ToolTrimStart::trim(IdList ids)
 {
-    // Get the sample data and trim it
+    if (ids.isEmpty())
+        return;
+
+    // Get the data of all samples and compute the position to remove the blank
     SoundfontManager * sm = SoundfontManager::getInstance();
-    QByteArray baData = sm->getData(id, champ_sampleDataFull24);
     quint32 pos = 0;
-    baData = SampleUtils::enleveBlanc(baData, 0.001f, 24, pos);
+    quint32 maxPos = 0;
+    QList<QByteArray> baData24;
+    for (int i = 0; i < ids.count(); i++)
+    {
+        quint32 tmp, maxTmp;
+        baData24 << sm->getData(ids[i], champ_sampleDataFull24);
+        SampleUtils::removeBlankStep1(baData24[i], tmp, maxTmp);
+
+        if (i == 0 || tmp > pos)
+            pos = tmp;
+        if (i == 0 || maxTmp < maxPos)
+            maxPos = maxTmp;
+    }
+    if (pos > maxPos)
+        pos = maxPos;
     if (pos == 0)
         return;
 
-    // Update data
-    sm->set(id, champ_sampleDataFull24, baData);
+    // Update the samples
+    for (int i = 0; i < ids.count(); i++)
+    {
+        EltID id = ids[i];
 
-    // Update length
-    AttributeValue val;
-    val.dwValue = baData.size()/3;
-    sm->set(id, champ_dwLength, val);
+        // Data
+        baData24[i] = SampleUtils::removeBlankStep2(baData24[i], pos);
+        sm->set(id, champ_sampleDataFull24, baData24[i]);
 
-    // Update loop start
-    if (sm->get(id, champ_dwStartLoop).dwValue > pos)
-        val.dwValue = sm->get(id, champ_dwStartLoop).dwValue - pos;
-    else
-        val.dwValue = 0;
-    sm->set(id, champ_dwStartLoop, val);
+        // Update length
+        AttributeValue val;
+        val.dwValue = baData24[i].size() / 3;
+        sm->set(id, champ_dwLength, val);
 
-    // Update loop end
-    if (sm->get(id, champ_dwEndLoop).dwValue > pos)
-        val.dwValue = sm->get(id, champ_dwEndLoop).dwValue - pos;
-    else
-        val.dwValue = 0;
-    sm->set(id, champ_dwEndLoop, val);
+        // Update loop start
+        if (sm->get(id, champ_dwStartLoop).dwValue > pos)
+            val.dwValue = sm->get(id, champ_dwStartLoop).dwValue - pos;
+        else
+            val.dwValue = 0;
+        sm->set(id, champ_dwStartLoop, val);
+
+        // Update loop end
+        if (sm->get(id, champ_dwEndLoop).dwValue > pos)
+            val.dwValue = sm->get(id, champ_dwEndLoop).dwValue - pos;
+        else
+            val.dwValue = 0;
+        sm->set(id, champ_dwEndLoop, val);
+    }
 }
