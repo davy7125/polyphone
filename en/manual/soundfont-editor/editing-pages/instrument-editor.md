@@ -178,19 +178,19 @@ The left part of the graph represents the evolution of the envelope when a key i
 7 out of the 8 parameters are involved in this representation:
 
 Delay
-: Duration during which the envelope remains at 0 just after a key is triggered. In the majority of cases we want to hear audio immediately after pressing the keys and then this parameter is left at zero. However delay comes in handy for example when we want to create richer pad sounds constructed with several layers. Suppose we want to introduce a second sound layer 0.5 seconds after the key is pressed, then we can set it by entering "0.5" in the delay-section. A delay does not hold the playback of the sound - it mutes the audio. If we have set the delay to 0.5 seconds, we will start hearing audio after 0.5 seconds of the sample that has already been played.
+: Duration during which the envelope remains at 0 just after a key is triggered. In the majority of cases we want to hear audio immediately after pressing the keys and then this parameter is left at zero. However **delay** comes in handy for example when we want to create richer pad sounds constructed with several layers. Suppose we want to introduce a second sound layer 0.5 seconds after the key is pressed, then we can set it by entering "0.5" in this -section. A delay does not hold the playback of the sound - it mutes the audio. If we have set the delay to 0.5 seconds, we will start hearing audio after 0.5 seconds of the sample that has already been played.
 
 Attack
-: Duration after **delay** during which the envelope grows from 0 to the maximum value. For example a bowed string sound like a violin has an attack which is relatively quite long, while a plucked string sound such as a guitar is very short. Even when we want to use an attack as short as possible, an advise is to at least enter a value of 0.001 otherwise a "clic" might be heard after pressing a key.
+: Duration after **delay** during which the envelope grows from 0 to the maximum value. For example a bowed string sound like a violin has an attack which is quite long, while a plucked string sound such as a guitar is very short. Even when we want to use an attack as short as possible, an advise is to at least enter a value of 0.001 otherwise a "click" might be heard after pressing a key.
 
 Hold
 : Duration after **attack** during which the envelope keeps its maximum value.
 
 Decay
-: Duration after **hold** during which the envelope progressively goes from the maximum value to the value specified by **sustain** (when the sustain value is set to its maximum or is not set, the volume during the decay will stay at its maximum no matter which decay-value is specified).
+: Duration after **hold** during which the envelope progressively goes from the maximum value to the value specified by **sustain**. When the **sustain** value is set to its maximum or is not set, the volume during the **decay** will stay at its maximum no matter which value is specified.
 
 Sustain
-: Value after **decay** sustained as long as the triggered key is not released. Just as "attenuation" the sustain value refers to the amount of decibel-reduction. In the case where we want to reduce the volume by its half after the decay-time, a parameter of 6 in the sustain-section must be set. Number "144" can be specified if we want to completely mute the sound.
+: Value after **decay** sustained as long as the triggered key is not released. Just as **attenuation** the sustain value refers to the amount of decibel-reduction. In the case where we want to reduce the volume by its half after the decay-time, a parameter of 6 in the sustain-section must be set. Number "144" can be specified if we want to completely mute the sound.
 
 Key → Hold
 : Change of the **hold** duration depending on the key (see below).
@@ -209,7 +209,7 @@ These parameters can be useful when designing a guitar or a piano with the susta
 The right part represents the evolution of the envelope when a key is **released**.
 Only the **release** duration is involved in this representation.
 The envelope gradually returns to 0 during this duration.
-Sounds of violins or synth-pads have a relatively long release time, while that of other sounds such as organs are relatively very short. In practice for short release times you still have to set its duration to at least 0.2 seconds, because a release time which is too short doesn't sound pleasant or natural (however it also depends what we have in mind about the construction of the instrument we want to create).
+Sounds of violins or synth-pads have a relatively long release time, while that of other sounds such as organs are very short. In practice for short release times we still have to set its duration to at least 0.2 seconds, because a release time which is too short doesn't sound pleasant or natural (however it also depends what we have in mind about the construction of the instrument we want to create).
 
 When only one division of an instrument is selected in the tree, the corresponding sound [sample](manual/soundfont-editor/editing-pages/sample-editor.md) is displayed on the background.
 It is thus possible to better visualize the evolution of the envelope relative to the sample being played.

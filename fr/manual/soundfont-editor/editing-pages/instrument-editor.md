@@ -179,7 +179,7 @@ Le partie gauche du graphique représente l'évolution de l'enveloppe lorsqu'une
 
 
 Délai
-: Durée pendant laquelle l'enveloppe reste à 0 juste après le déclenchement d'une touche. Dans la majorité des cas, on souhaite entendre le son immédiatement après avoir pressé une touche et ce paramètre reste donc à 0. Cependant le délai peut être utile dans le cas d'un son évoluant au cours du temps, construit à partir de plusieurs couches sonores. Supposons que l'on souhaite un second son introduit 0.5 s après l'appui sur une touche, on entrera donc "0.5" dans cette section. Il est à noter qu'un délai ne retarde pas la lecture du son - il annule simplement son volume. Après avoir mis un délai de 0.5 s, le son sera entendu après une durée de 0.5 s pendant laquelle il aura été lu en interne.
+: Durée pendant laquelle l'enveloppe reste à 0 juste après le déclenchement d'une touche. Dans la majorité des cas, on souhaite entendre le son immédiatement après avoir pressé une touche et ce paramètre reste donc à 0. Cependant le **délai** peut être utile dans le cas d'un son évoluant au cours du temps, construit à partir de plusieurs couches sonores. Supposons que l'on souhaite un second son introduit 0.5 s après l'appui sur une touche, on entrera donc "0.5" dans cette section. Il est à noter qu'un délai ne retarde pas la lecture du son - il annule simplement son volume. Après avoir mis un délai de 0.5 s, le son sera entendu après une durée de 0.5 s pendant laquelle il aura été lu en interne.
 
 Attaque
 : Durée après le **délai** pendant laquelle l'enveloppe passe de 0 à sa valeur maximale. Par exemple, un son de corde frottée comme un violon possède une attaque relativement longue, alors qu'un son de corde frappée comme une guitare a une attaque courte. Même lorsque l'on souhaite utiliser une attaque aussi courte que possible, il est conseillé d'inscrire une valeur de 0.001, sans quoi un "clic" pourrait se faire entendre après avoir appuyé sur une touche.
@@ -188,7 +188,7 @@ Maintien
 : Durée après l'**attaque** pendant laquelle l'enveloppe se maintien à sa valeur maximale.
 
 Déclin
-: Durée après le **maintien** pendant laquelle l'enveloppe passe progressivement de sa valeur maximale à la valeur spécifiée dans le **soutien** (lorsque la valeur de soutien est à son maximum ou n'est pas spécifiée, the volume pendant le déclin reste à son maximum peu importe la valeur renseignée dans déclin).
+: Durée après le **maintien** pendant laquelle l'enveloppe passe progressivement de sa valeur maximale à la valeur spécifiée dans le **soutien**. Lorsque la valeur de **soutien** est à son maximum ou n'est pas spécifiée, the volume pendant le **déclin** reste à son maximum peu importe la valeur renseignée.
 
 Soutien
 : Valeur maintenue après le **déclin** tant que la touche déclenchée n'est pas relevée. Tout comme l'**atténuation**, la valeur de soutien s'exprime en réduction de décibels. Dans le cas où l'on souhaite diminuer le son de moitié après la phase de déclin, une valeur de 6 dB devra être renseignée. Le nombre "144" peut être renseigné si l'on souhaite taire le son complètement.
