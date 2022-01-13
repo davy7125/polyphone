@@ -41,7 +41,7 @@ public:
     // Get information about the sample loaded
     InfoSound getInfo() { return _info; }
     QString getFileName() { return this->_fileName; }
-    QByteArray getData(quint16 wBps);
+    QByteArray getData(quint16 wBps, bool forceReload = false);
     quint32 getUInt32(AttributeType champ); // For everything but the pitch correction
     qint32 getInt32(AttributeType champ); // For the pitch correction
 

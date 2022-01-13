@@ -298,6 +298,7 @@ SOURCES	+= main.cpp \
     repository/soundfont/editor/soundfonteditorfiles.cpp \
     repository/soundfont/editor/soundfontfilecell.cpp \
     sound_engine/elements/liveeq.cpp \
+    sound_engine/elements/osctriangle.cpp \
     sound_engine/modulatedparameter.cpp \
     sound_engine/synth.cpp \
     sound_engine/voice.cpp \
@@ -632,6 +633,7 @@ HEADERS += \
     repository/soundfont/editor/soundfonteditorfiles.h \
     repository/soundfont/editor/soundfontfilecell.h \
     sound_engine/elements/liveeq.h \
+    sound_engine/elements/osctriangle.h \
     sound_engine/modulatedparameter.h \
     sound_engine/synth.h \
     sound_engine/voice.h \

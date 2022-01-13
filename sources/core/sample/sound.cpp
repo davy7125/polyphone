@@ -93,7 +93,7 @@ void Sound::setFileName(QString qStr, bool tryFindRootKey)
         determineRootKey();
 }
 
-QByteArray Sound::getData(quint16 wBps)
+QByteArray Sound::getData(quint16 wBps, bool forceReload)
 {
     // Copie des données dans data, résolution wBps
     // wBps = 16 : chargement smpl, 16 bits de poids fort
@@ -104,12 +104,16 @@ QByteArray Sound::getData(quint16 wBps)
     if (_reader != nullptr)
     {
         // Possibly load 16 bits
-        if (_smpl.isEmpty() && wBps != 8)
+        if ((_smpl.isEmpty() || forceReload) && wBps != 8)
+        {
+            _smpl.clear();
             _reader->getData16(_smpl);
+        }
 
         // Possibly load the 8 extra bits
-        if (_sm24.isEmpty() && wBps != 16)
+        if ((_sm24.isEmpty() || forceReload) && wBps != 16)
         {
+            _sm24.clear();
             if (_info.wBpsFile > 16)
                 _reader->getExtraData24(_sm24);
             else

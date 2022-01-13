@@ -523,6 +523,8 @@ bool TreeView::isSelectionValid()
 
 void TreeView::onSelectionChanged(const IdList &selectedIds)
 {
+    if (selectedIds.isEmpty())
+        return;
     _fixingSelection = true;
     for (int i = 0; i < selectedIds.count(); i++)
     {
@@ -825,7 +827,8 @@ void TreeView::dropEvent(QDropEvent *event)
             }
         }
         sm->endEditing("command:dropSmpl");
-        this->onSelectionChanged(smplList);
+        if (!smplList.isEmpty())
+            this->onSelectionChanged(smplList);
     }
     else if (!_draggedIds.empty())
     {

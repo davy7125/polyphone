@@ -253,7 +253,8 @@ void EditorToolBar::on_pushAddSample_clicked()
     SoundfontManager::getInstance()->endEditing("command:newSmpl");
 
     // Selection
-    selectionChanged(smplList);
+    if (!smplList.isEmpty())
+        selectionChanged(smplList);
 }
 
 void EditorToolBar::on_pushAddInstrument_clicked()

@@ -37,17 +37,25 @@ SampleLoader::SampleLoader(QWidget *parent) :
 
 }
 
+// Replace status
+// -1: duplicate all
+//  0: duplicate
+//  1: replace
+//  2: replace all
+//  3: ignore
+//  4: ignore all
+
 IdList SampleLoader::load(QString path, int numSf2, int *replace)
 {
     EltID id(elementSmpl, numSf2);
-    IdList addedSmpl;
+    IdList loadedSmpl;
 
     ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SAMPLE, path);
     QFileInfo qFileInfo = path;
 
     // Get information about a sample
-    Sound son(path);
-    unsigned int nChannels = son.getUInt32(champ_wChannels);
+    Sound sound(path);
+    unsigned int nChannels = sound.getUInt32(champ_wChannels);
 
     // Add a sample
     SoundfontManager * sm = SoundfontManager::getInstance();
@@ -144,7 +152,6 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
         }
     }
 
-    IdList idsWithBlankToRemove;
     for (unsigned int j = 0; j < nChannels; j++)
     {
         if (*replace < 3 || (nChannels == 2 && j == 0 && indexL == -1) ||
@@ -161,21 +168,14 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                     id.indexElt = indexR;
 
                 // Update data
-                AttributeValue valTmp;
-                valTmp.wValue = static_cast<quint16>(j);
-                son.set(champ_wChannel, valTmp);
-                QByteArray smpl = son.getData(16);
-                QByteArray sm24 = son.getData(8);
-                sm->set(id, champ_sampleData16, smpl);
-                sm->set(id, champ_sampleData24, sm24);
-
-                idsWithBlankToRemove << id;
+                val.wValue = static_cast<quint16>(j);
+                sound.set(champ_wChannel, val);
+                sm->set(id, champ_sampleDataFull24, sound.getData(24, true));
             }
             else
             {
                 // Add a sample
                 id.indexElt = sm->add(id);
-                addedSmpl << id;
                 if (nChannels == 2)
                 {
                     if (j == 0)
@@ -206,29 +206,29 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                     sm->set(id, champ_sfSampleType, val);
                 }
                 sm->set(id, champ_filenameForData, path);
-                val.dwValue = son.getUInt32(champ_dwStart16);
+                val.dwValue = sound.getUInt32(champ_dwStart16);
                 sm->set(id, champ_dwStart16, val);
-                val.dwValue = son.getUInt32(champ_dwStart24);
+                val.dwValue = sound.getUInt32(champ_dwStart24);
                 sm->set(id, champ_dwStart24, val);
             }
+
+            loadedSmpl << id;
 
             // Configuration du sample
             val.wValue = static_cast<quint16>(j);
             sm->set(id, champ_wChannel, val);
-            val.dwValue = son.getUInt32(champ_dwLength);
+            val.dwValue = sound.getUInt32(champ_dwLength);
             sm->set(id, champ_dwLength, val);
-            val.dwValue = son.getUInt32(champ_dwSampleRate);
+            val.dwValue = sound.getUInt32(champ_dwSampleRate);
             sm->set(id, champ_dwSampleRate, val);
-            val.dwValue = son.getUInt32(champ_dwStartLoop);
+            val.dwValue = sound.getUInt32(champ_dwStartLoop);
             sm->set(id, champ_dwStartLoop, val);
-            val.dwValue = son.getUInt32(champ_dwEndLoop);
+            val.dwValue = sound.getUInt32(champ_dwEndLoop);
             sm->set(id, champ_dwEndLoop, val);
-            val.bValue = static_cast<quint8>(son.getUInt32(champ_byOriginalPitch));
+            val.bValue = static_cast<quint8>(sound.getUInt32(champ_byOriginalPitch));
             sm->set(id, champ_byOriginalPitch, val);
-            val.cValue = static_cast<char>(son.getInt32(champ_chPitchCorrection));
+            val.cValue = static_cast<char>(sound.getInt32(champ_chPitchCorrection));
             sm->set(id, champ_chPitchCorrection, val);
-
-            idsWithBlankToRemove << id;
 
             // Automatically trim to loop?
             if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_auto_loop", false).toBool())
@@ -238,9 +238,9 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
 
     // Automatically remove leading blank?
     if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool())
-        ToolTrimStart::trim(idsWithBlankToRemove);
+        ToolTrimStart::trim(loadedSmpl);
 
-    return addedSmpl;
+    return loadedSmpl;
 }
 
 QString SampleLoader::getName(QString name, int maxCharacters, int suffixNumber)
