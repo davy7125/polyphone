@@ -26,6 +26,7 @@
 #include "samplereaderwav.h"
 #include "samplereadersf2.h"
 #include "samplereaderflac.h"
+#include "samplereaderogg.h"
 #include <QFileInfo>
 
 SampleReader * SampleReaderFactory::getSampleReader(QString filename)
@@ -44,6 +45,10 @@ SampleReader * SampleReaderFactory::getSampleReader(QString filename)
     // Flac file?
     if (ext.compare("flac") == 0)
         return new SampleReaderFlac(filename);
+
+    // Flac file?
+    if (ext.compare("ogg") == 0)
+        return new SampleReaderOgg(filename);
 
     // TODO: check if there is a library for reading extra formats
 

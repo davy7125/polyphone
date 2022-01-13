@@ -370,3 +370,15 @@ qint32 Utils::round32(double value)
 {
     return static_cast<qint32>(value > 0 ? (value + 0.5) : (value - 0.5));
 }
+
+QString Utils::FixFilePath(QString filePath)
+{
+    filePath = filePath.replace('\\', '/');
+    if (filePath.left(7).compare("file://") == 0)
+        filePath = filePath.right(filePath.length() - 7);
+#ifdef Q_OS_WIN
+    if (filePath.size() > 2 && filePath[0] == '/' && filePath[1] != '/')
+        filePath = filePath.remove(0, 1);
+#endif
+    return filePath;
+}

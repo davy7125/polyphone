@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2020 Davy Triponney                                **
+**  Copyright (C) 2013-2019 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,55 +22,33 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef SAMPLEREADEROGG_H
+#define SAMPLEREADEROGG_H
 
-#include <QString>
-#include "eltid.h"
-class SoundfontManager;
+#include "samplereader.h"
 
-class Utils
+class SampleReaderOgg : public SampleReader
 {
 public:
-    /// Return the natural comparison between two strings
-    /// -1 if a should be before b, 0 if equals, 1 is a should be after b
-    /// This is case insensitive
-    static int naturalOrder(QString a, QString b);
-    static int sortDivisions(EltID id1, EltID id2, int sortType);
+    SampleReaderOgg(QString filename);
+    ~SampleReaderOgg() override {}
 
-    /// Remove all accents
-    /// Can be useful for sorting strings
-    static QString removeAccents(QString s);
+    // Extract general information (sampling rate, ...)
+    SampleReaderResult getInfo(QFile &fi, InfoSound &info) override;
 
-    /// Return the first letters in common from a list of string
-    static QString commonPart(QStringList list);
+    // Get sample data (16 bits)
+    SampleReaderResult getData16(QFile &fi, QByteArray &smpl) override;
 
-    /// Encrypt / decrypt data
-    static QString rsaEncrypt(QString input);
-    static QString rsaDecrypt(QString input);
-
-    /// Conversion functions
-    static void prepareConversionTables(); // Call it once before concave(..) or convex(..)
-    static double concave(double value);
-    static double convex(double value);
-    static qint8 round8(double value);
-    static qint16 round16(double value);
-    static qint32 round32(double value);
-
-    static QString FixFilePath(QString filePath);
+    // Get sample data (extra 8 bits)
+    SampleReaderResult getExtraData24(QFile &fi, QByteArray &sm24) override;
 
 private:
-    static int getNumberPart(const QString &str, int &length);
-    static int compareKey(SoundfontManager *sm, EltID idDiv1, EltID idDiv2);
-    static int compareVelocity(SoundfontManager *sm, EltID idDiv1, EltID idDiv2);
-    static int compareName(SoundfontManager *sm, EltID idDiv1, EltID idDiv2);
-    static QString removeSuffix(QString txt);
+    SampleReaderResult launchDecoder(bool justMetadata);
 
-    static QString s_diacriticLetters;
-    static QStringList s_noDiacriticLetters;
-
-    static double s_concaveTable[128];
-    static double s_convexTable[128];
+    QFile * _file;
+    InfoSound * _info;
+    QByteArray * _data;
+    bool _readExtra8;
 };
 
-#endif // UTILS_H
+#endif // SAMPLEREADEROGG_H

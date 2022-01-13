@@ -35,6 +35,7 @@
 #include "inputfactory.h"
 #include "outputfactory.h"
 #include "repositorymanager.h"
+#include "utils.h"
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QAbstractButton>
@@ -110,13 +111,7 @@ void WindowManager::openNewSoundfont()
 
 void WindowManager::openSoundfont(QString fileName)
 {
-    fileName = fileName.replace('\\', '/');
-    if (fileName.left(7).compare("file://") == 0)
-        fileName = fileName.right(fileName.length() - 7);
-#ifdef Q_OS_WIN
-    if (fileName.size() > 2 && fileName[0] == '/' && fileName[1] != '/')
-        fileName = fileName.remove(0, 1);
-#endif
+    fileName = Utils::FixFilePath(fileName);
 
     // Extension supported?
     if (!InputFactory::isSuffixSupported(QFileInfo(fileName).suffix()))

@@ -26,6 +26,7 @@
 #include "ui_widgetshowhistory.h"
 #include "widgetshowhistorycell.h"
 #include "contextmanager.h"
+#include "utils.h"
 #include <QDateTime>
 #include <QPainter>
 #include <QMimeData>
@@ -159,12 +160,7 @@ void WidgetShowHistory::dropEvent(QDropEvent *event)
             if (!path.isEmpty())
             {
                 // Fix path
-                if (path.startsWith("file://"))
-                    path = path.mid(7);
-#ifdef Q_OS_WIN
-                if (path.startsWith("/"))
-                    path = path.mid(1);
-#endif
+                path = Utils::FixFilePath(path);
                 openFile(path);
             }
         }
