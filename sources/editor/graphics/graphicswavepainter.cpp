@@ -57,22 +57,23 @@ GraphicsWavePainter::GraphicsWavePainter(QWidget * widget) :
     _sampleData(nullptr),
     _pixels(nullptr),
     _image(nullptr),
-    _samplePlotMean(nullptr)
+    _samplePlotMean(nullptr),
+    _drawBackground(true),
+    _drawBottom(false)
 {
     // Initialize colors (always use the darkest color for the background of the graphic)
     if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
     {
         _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).rgb();
-        _gridColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).rgb();
+        _gridColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     }
     else
     {
         _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).rgb();
-        _gridColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).rgb();
+        _gridColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
     }
+    _gridColor.setAlpha(40);
 
-    _redColor = ContextManager::theme()->getFixedColor(ThemeManager::RED, true).rgb();
-    _greenColor = ContextManager::theme()->getFixedColor(ThemeManager::GREEN, true).rgb();
     _waveColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).rgb();
 }
 
@@ -102,7 +103,7 @@ void GraphicsWavePainter::setData(QByteArray baData)
     memcpy(_sampleData, data, _sampleSize * sizeof(qint16));
 }
 
-void GraphicsWavePainter::paint(quint32 start, quint32 end, float zoomY)
+void GraphicsWavePainter::paint(QPainter * painter, quint32 start, quint32 end, float zoomY)
 {
     if (start >= _sampleSize)
         start = _sampleSize - 1;
@@ -131,15 +132,7 @@ void GraphicsWavePainter::paint(quint32 start, quint32 end, float zoomY)
 
     // Draw the curve if valid
     if (_image != nullptr)
-    {
-        QPainter painter(_widget);
-        painter.drawImage(0, 0, *_image);
-
-        // Add the mean value
-        painter.setPen(QPen(QColor(_waveColor), 1.0, Qt::SolidLine));
-        painter.setRenderHint(QPainter::Antialiasing);
-        painter.drawPolyline(_samplePlotMean, _widget->width());
-    }
+        painter->drawImage(0, 0, *_image);
 }
 
 void GraphicsWavePainter::prepareImage()
@@ -231,8 +224,8 @@ void GraphicsWavePainter::prepareImage()
     }
 
     // Compute mean, standard deviation, adjust min / max
-    float coeff = -_zoomY * static_cast<float>(height) / (32768 * 2);
-    float offsetY = 0.5f * height;
+    float coeff = -_zoomY * static_cast<float>(height) / (32768 * (_drawBottom ? 1 : 2));
+    float offsetY = _drawBottom ? height : 0.5f * height;
     for (quint32 i = 0; i < width; i++)
     {
         _samplePlotMean[i].setX(i);
@@ -259,22 +252,26 @@ void GraphicsWavePainter::prepareImage()
     _image = new QImage(reinterpret_cast<uchar*>(_pixels), static_cast<int>(width), static_cast<int>(height), QImage::Format_ARGB32);
 
     // Background
-    for (quint32 i = 0; i < width * height; i++)
-        _pixels[i] = _backgroundColor;
+    if (_drawBackground)
+        for (quint32 i = 0; i < width * height; i++)
+            _pixels[i] = _backgroundColor;
+    else
+        memset(_pixels, 0 /* transparent */, width * height * sizeof(int));
 
     // Horizontal lines
-    QPainter painter(_image);
-    QColor color = _gridColor;
-    color.setAlpha(40);
-    painter.setPen(QPen(color, 1.0, Qt::SolidLine));
-    painter.drawLine(QPointF(-1, 0.5 * height), QPointF(width + 1, 0.5 * height));
-    painter.setPen(QPen(color, 1.0, Qt::DotLine));
-    painter.drawLine(QPointF(-1, 0.125 * height), QPointF(width + 1, 0.125 * height));
-    painter.drawLine(QPointF(-1, 0.25 * height), QPointF(width + 1, 0.25 * height));
-    painter.drawLine(QPointF(-1, 0.375 * height), QPointF(width + 1, 0.375 * height));
-    painter.drawLine(QPointF(-1, 0.625 * height), QPointF(width + 1, 0.625 * height));
-    painter.drawLine(QPointF(-1, 0.75 * height), QPointF(width + 1, 0.75 * height));
-    painter.drawLine(QPointF(-1, 0.875 * height), QPointF(width + 1, 0.875 * height));
+    if (_drawBackground)
+    {
+        QPainter painter(_image);
+        painter.setPen(QPen(_gridColor, 1.0, Qt::SolidLine));
+        painter.drawLine(QPointF(-1, 0.5 * height), QPointF(width + 1, 0.5 * height));
+        painter.setPen(QPen(_gridColor, 1.0, Qt::DotLine));
+        painter.drawLine(QPointF(-1, 0.125 * height), QPointF(width + 1, 0.125 * height));
+        painter.drawLine(QPointF(-1, 0.25 * height), QPointF(width + 1, 0.25 * height));
+        painter.drawLine(QPointF(-1, 0.375 * height), QPointF(width + 1, 0.375 * height));
+        painter.drawLine(QPointF(-1, 0.625 * height), QPointF(width + 1, 0.625 * height));
+        painter.drawLine(QPointF(-1, 0.75 * height), QPointF(width + 1, 0.75 * height));
+        painter.drawLine(QPointF(-1, 0.875 * height), QPointF(width + 1, 0.875 * height));
+    }
 
     // Waveform
     float mean, x;
@@ -293,6 +290,12 @@ void GraphicsWavePainter::prepareImage()
                 _pixels[currentPixelIndex] = mergeRgb(_pixels[currentPixelIndex], _waveColor, x);
         }
     }
+
+    // Add the mean value
+    QPainter painter(_image);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setPen(QPen(QColor::fromRgba(_waveColor), 1.0, Qt::SolidLine));
+    painter.drawPolyline(_samplePlotMean, _image->width());
 
     // Finally, clear data
     delete [] samplePlotMin;
@@ -316,6 +319,8 @@ QRgb GraphicsWavePainter::mergeRgb(QRgb color1, QRgb color2, float x)
 {
     if (x >= 1)
         return color2;
+    if (!_drawBackground)
+        return (static_cast<quint32>(x * color2 + 0.5) & 0xFF000000) | (color2 & 0x00FFFFFF);
     return 0xFF000000 +
             ((static_cast<quint32>((1.0f - x) * qRed(color1) + x * qRed(color2)) & 0xFF) << 16) +
             ((static_cast<quint32>((1.0f - x) * qGreen(color1) + x * qGreen(color2)) & 0xFF) << 8) +

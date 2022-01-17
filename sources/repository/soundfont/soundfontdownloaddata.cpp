@@ -54,12 +54,12 @@ QString SoundfontDownloadData::getFormattedSize()
     if (_size < 1024)
         return QString::number(_size) + " " + QObject::tr("bytes");
     if (_size < 1024 * 1024)
-        return QString::number(static_cast<double>(_size) / 1024, 'f', 2) + " " + QObject::tr("kB", "kilobytes");
+        return QLocale::system().toString(static_cast<double>(_size) / 1024, 'f', 2) + " " + QObject::tr("kB", "kilobytes");
     if (_size < 1024 * 1024 * 1024)
-        return QString::number(static_cast<double>(_size) / 1024 / 1024, 'f', 2) + " " + QObject::tr("MB", "megabytes");
+        return QLocale::system().toString(static_cast<double>(_size) / 1024 / 1024, 'f', 2) + " " + QObject::tr("MB", "megabytes");
     if (_size / 1024 < 1024 * 1024 * 1024)
-        return QString::number(static_cast<double>(_size) / 1024 / 1024 / 1024, 'f', 2) + " " + QObject::tr("GB", "gigabytes");
-    return QString::number(static_cast<double>(_size) / 1024 / 1024 / 1024 / 1024, 'f', 2) + " " + QObject::tr("TB", "terabytes");
+        return QLocale::system().toString(static_cast<double>(_size) / 1024 / 1024 / 1024, 'f', 2) + " " + QObject::tr("GB", "gigabytes");
+    return QLocale::system().toString(static_cast<double>(_size) / 1024 / 1024 / 1024 / 1024, 'f', 2) + " " + QObject::tr("TB", "terabytes");
 }
 
 QString SoundfontDownloadData::getLastDate()

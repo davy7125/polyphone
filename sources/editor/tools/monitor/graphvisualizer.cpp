@@ -345,15 +345,15 @@ void GraphVisualizer::afficheCoord(double x, double y)
             labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
         QString label = ContextManager::keyName()->getKeyName(qRound(x)) + ":";
         if (y == 0)
-            label += QString::number(y, 'f', 0);
+            label += QLocale::system().toString(y, 'f', 0);
         else if (y < 1)
-            label += QString::number(y, 'f', 3);
+            label += QLocale::system().toString(y, 'f', 3);
         else if (y < 10)
-            label += QString::number(y, 'f', 2);
+            label += QLocale::system().toString(y, 'f', 2);
         else if (y < 100)
-            label += QString::number(y, 'f', 1);
+            label += QLocale::system().toString(y, 'f', 1);
         else
-            label += QString::number(y, 'f', 0);
+            label += QLocale::system().toString(y, 'f', 0);
         labelCoord->setText(label);
 
         // Adjust the position on x

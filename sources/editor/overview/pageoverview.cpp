@@ -173,9 +173,9 @@ QString PageOverview::getRange(bool orderMode, EltID id, AttributeType champ)
         else
         {
             if (min == max)
-                str = QString::number((double)min / 10, 'f', 1);
+                str = QLocale::system().toString((double)min / 10, 'f', 1);
             else
-                str = QString::number((double)min / 10, 'f', 1) + " - " + QString::number((double)max / 10, 'f', 1);
+                str = QLocale::system().toString((double)min / 10, 'f', 1) + " - " + QLocale::system().toString((double)max / 10, 'f', 1);
         }
     }
     return str;

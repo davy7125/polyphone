@@ -25,11 +25,14 @@
 #ifndef GRAPHICSVIEWENVELOPS_H
 #define GRAPHICSVIEWENVELOPS_H
 
-#include "qcustomplot.h"
+#include <QWidget>
+#include <QPen>
 #include "soundfontmanager.h"
 #include "envelop.h"
+class GraphicsWavePainter;
+class QScrollBar;
 
-class GraphicsViewEnvelop : public QCustomPlot
+class GraphicsViewEnvelop : public QWidget
 {
     Q_OBJECT
 
@@ -49,14 +52,13 @@ public:
     // Set the value of an envelop
     void setValue(int index, Envelop::ValueType type, double value, bool isDefined = true);
     void setKeyRange(int index, int keyMin, int keyMax);
-    void setSample(QVector<double> data, int sampleRate, int loopMode, int startLoop, int endLoop);
+    void setSample(QByteArray data, int sampleRate, int loopMode, int startLoop, int endLoop);
 
     // Set the style of an envelop
     void setEnvelopStyle(int index, bool isGlobal, bool isVolume, bool isMain);
 
     // Compute all points of all envelops
-    void drawEnvelops();
-    void zoomDrag();
+    void computeEnvelops();
 
 public slots:
     void setPosX(int _posX);
@@ -71,35 +73,33 @@ protected:
     void mouseMoveEvent(QMouseEvent *event);
     void mouseDoubleClickEvent(QMouseEvent *) {}
     void wheelEvent(QWheelEvent *event);
-    void resizeEvent(QResizeEvent *event);
 
 private:
+    GraphicsWavePainter * _wavePainter;
+    int _sampleRate;
+
     int _index;
     QMap<int, Envelop *> _envelops;
     bool _dontRememberScroll;
     double _triggeredKeyDuration, _releasedKeyDuration;
-    int _posReleaseLine;
-    QPen _releaseLinePen;
+
+    QPen _releaseLinePen, _gridPen, _zoomLinePen;
     QImage _imageNoteOn, _imageNoteOff;
+    QColor _backgroundColor, _textColor, _redColor;
 
     double _sizeX;
     bool _zoomFlag;
     bool _dragFlag;
-    double _xInit, _yInit;
+    double _xInit, _yInit, _x, _y;
     double _zoomX, _posX;
     double _zoomXinit, _posXinit;
     bool _bFromExt;
     QScrollBar * _qScrollX;
-    QCPItemText * _textPositionL;
-    QCPItemText * _textPositionR;
-    QSharedPointer<QCPAxisTickerFixed> _fixedTicker;
 
     double getTickStep();
-    void updateStyle();
     void zoom(QPoint point);
     void drag(QPoint point);
-    void setZoomLine(double x1, double y1, double x2, double y2);
-    void displayCurrentRange();
+    QString doubleToString(double value, bool accurate);
 };
 
 #endif // GRAPHICSVIEWENVELOPS_H

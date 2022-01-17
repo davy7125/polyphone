@@ -33,11 +33,23 @@ public:
     GraphicsWavePainter(QWidget * widget);
     ~GraphicsWavePainter();
 
+    // Draw the background with the horizontal lines or not
+    // Default is true
+    void drawBackground(bool drawBackground) { _drawBackground = drawBackground; }
+
+    // Set the waveform color
+    // Default is Highlight color
+    void setWaveColor(QColor waveColor) { _waveColor = waveColor.rgb(); };
+
+    // Possibly draw the half top part of the wave in the bottom part of the area
+    // Default is false
+    void setDrawBottom(bool drawBottom) { _drawBottom = drawBottom; }
+
     // Configure the painter with data
     void setData(QByteArray baData);
 
     // Draw data
-    void paint(quint32 start, quint32 end, float zoomY);
+    void paint(QPainter *painter, quint32 start, quint32 end, float zoomY);
 
     // Get data around a central point
     QPointF * getDataAround(quint32 position, quint32 desiredLength, quint32 &pointNumber);
@@ -45,7 +57,7 @@ public:
 private:
     void prepareImage();
     float getValueX(float pos1, float value1, float pos2, float value2, float posX);
-    static QRgb mergeRgb(QRgb color1, QRgb color2, float x);
+    QRgb mergeRgb(QRgb color1, QRgb color2, float x);
 
     // Target widget
     QWidget * _widget;
@@ -61,8 +73,10 @@ private:
     quint32 _start, _end;
     float _zoomY;
 
-    // Colors
-    QRgb _backgroundColor, _waveColor, _gridColor, _greenColor, _redColor;
+    // Options and colors
+    bool _drawBackground, _drawBottom;
+    QRgb _backgroundColor, _waveColor;
+    QColor _gridColor;
 };
 
 #endif // GRAPHICSWAVEPAINTER_H

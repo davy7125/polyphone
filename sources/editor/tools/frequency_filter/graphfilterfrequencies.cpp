@@ -60,7 +60,7 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(p
         textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         textLabel->position->setType(QCPItemPosition::ptPlotCoords);
         textLabel->position->setCoords(pos, 0.0001);
-        textLabel->setText(QString::number(freq / 1000) + " kHz");
+        textLabel->setText(QLocale::system().toString(freq / 1000) + " " + tr("kHz", "unit for kilo Herz"));
         textLabel->setFont(QFont(font().family(), 8));
         textLabel->setColor(color);
     }
@@ -358,8 +358,8 @@ void GraphFilterFrequencies::afficheCoord(double x, double y)
             labelCoord->setPositionAlignment(Qt::AlignTop| Qt::AlignHCenter);
         else
             labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
-        labelCoord->setText(QString::number((int)(qRound(x)) * 20100 / POINT_NUMBER) + "Hz : " +
-                            QString::number(y, 'g', 2));
+        labelCoord->setText(QLocale::system().toString((int)(qRound(x)) * 20100 / POINT_NUMBER) + "Hz : " +
+                            QLocale::system().toString(y, 'g', 2));
 
         // Ajustement position
         QFontMetrics fm(labelCoord->font());

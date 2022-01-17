@@ -54,7 +54,7 @@ void SoundfontDownloadCell::initialize(SoundfontDownloadData * data)
         ui->labelDescription->setText(data->getDescription());
 
     // Format informations
-    ui->labelInfo->setText(QString("(%1, %2)").arg(data->getFormattedSize()).arg(data->getLastDate()));
+    ui->labelInfo->setText(QString("(%1 - %2)").arg(data->getFormattedSize()).arg(data->getLastDate()));
 
     // Store data
     _id = data->getId();

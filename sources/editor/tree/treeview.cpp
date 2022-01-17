@@ -43,7 +43,8 @@ TreeView::TreeView(QWidget * parent) : QTreeView(parent),
     _sf2Index(-1),
     _bestMatchSample(-1),
     _bestMatchInstrument(-1),
-    _bestMatchPreset(-1)
+    _bestMatchPreset(-1),
+    _expandClicked(false)
 {
     this->setItemDelegate(new TreeItemDelegate(this));
     this->viewport()->setAutoFillBackground(false);
@@ -68,6 +69,7 @@ TreeView::TreeView(QWidget * parent) : QTreeView(parent),
 
 void TreeView::mousePressEvent(QMouseEvent * event)
 {
+    _expandClicked = false;
     QModelIndex index = this->indexAt(event->pos());
     if (index.isValid())
     {
@@ -79,6 +81,7 @@ void TreeView::mousePressEvent(QMouseEvent * event)
             // Expand / collapse the element if the click is on the arrow
             if (event->pos().x() > this->viewport()->width() - 34) // 40 is the width of the arrow + 3 MARGINS
             {
+                _expandClicked = true;
                 if (this->isExpanded(index))
                     this->collapse(index);
                 else
@@ -90,6 +93,29 @@ void TreeView::mousePressEvent(QMouseEvent * event)
     }
 
     QTreeView::mousePressEvent(event);
+}
+
+void TreeView::mouseReleaseEvent(QMouseEvent *event)
+{
+    // Possibly ignore the event
+    if (_expandClicked)
+    {
+        _expandClicked = false;
+        event->accept();
+        return;
+    }
+    QTreeView::mouseReleaseEvent(event);
+}
+
+void TreeView::mouseMoveEvent(QMouseEvent *event)
+{
+    // Possibly ignore the event
+    if (_expandClicked)
+    {
+        event->accept();
+        return;
+    }
+    QTreeView::mouseReleaseEvent(event);
 }
 
 void TreeView::mouseDoubleClickEvent(QMouseEvent * event)

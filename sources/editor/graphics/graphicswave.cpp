@@ -168,10 +168,11 @@ void GraphicsWave::setCurrentSample(quint32 pos)
 void GraphicsWave::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
 
     if (_multipleSelection)
     {
-        QPainter painter(this);
         painter.fillRect(this->rect(), _backgroundColor);
         painter.setPen(_textColor);
         QFont font = _textFont;
@@ -189,19 +190,18 @@ void GraphicsWave::paintEvent(QPaintEvent *event)
     quint32 end = offsetX + etendueX < 0 ? 0 : static_cast<quint32>(offsetX + etendueX);
     if (start >= end)
         return;
-    _wavePainter->paint(start, end, static_cast<float>(_zoomY));
+    _wavePainter->paint(&painter, start, end, static_cast<float>(_zoomY));
 
     // Left and right limits
-    QPainter painter(this); // Must be after _wavePainter->paint(...)
     painter.setPen(_textColor);
     painter.setFont(_textFont);
     int fontHeight = 50;
     painter.drawText(TEXT_MARGIN, this->height() - fontHeight - TEXT_MARGIN,
                      this->width() - TEXT_MARGIN * 2, fontHeight, Qt::AlignLeft | Qt::AlignBottom,
-                     QString::number(static_cast<double>(start) / _sampleRate, 'f', 3) + " " + "s");
+                     QLocale::system().toString(static_cast<double>(start) / _sampleRate, 'f', 3) + " " + tr("s", "unit for seconds"));
     painter.drawText(TEXT_MARGIN, this->height() - fontHeight - TEXT_MARGIN,
                      this->width() - TEXT_MARGIN * 2, fontHeight, Qt::AlignRight | Qt::AlignBottom,
-                     QString::number(static_cast<double>(end) / _sampleRate, 'f', 3) + " " + "s");
+                     QLocale::system().toString(static_cast<double>(end) / _sampleRate, 'f', 3) + " " + tr("s", "unit for seconds"));
 
     // Ajout du trait de lecture
     double coeff = static_cast<double>(this->width()) / (end - start);
@@ -480,7 +480,13 @@ void GraphicsWave::zoom(QPoint point)
 
         // Update posX
         if (_zoomX > 1)
+        {
             _posX = (_zoomX * _posXinit * (_zoomXinit - 1) + _xInit*(_zoomX - _zoomXinit)) / (_zoomXinit * (_zoomX - 1));
+            if (_posX < 0)
+                _posX = 0;
+            else if (_posX > 1)
+                _posX = 1;
+        }
     }
 
     this->repaint();

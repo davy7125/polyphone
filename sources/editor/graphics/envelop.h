@@ -27,7 +27,7 @@
 
 #include <QMap>
 #include <QColor>
-class QCPGraph;
+#include <QWidget>
 
 class Envelop
 {
@@ -45,7 +45,7 @@ public:
         KEY_MAX
     };
 
-    Envelop(QCPGraph * graph1, QCPGraph *graph2);
+    Envelop();
 
     // Set a property of the envelop
     void set(ValueType type, double value, bool defined);
@@ -56,26 +56,29 @@ public:
     // True if the envelop is thick
     void setThick(bool isThick) { _isThick = isThick; }
 
-    // Get the graph used by the envelop
-    QCPGraph * graph1() { return _graph1; }
-    QCPGraph * graph2() { return _graph2; }
-
     // Get the attack duration (delay + attack + hold + decay)
     double getAttackDuration();
 
     // Get the release duration
     double getReleaseDuration();
 
+    // Compute the points of the envelop
+    void computePoints(double triggeredKeyDuration, double releasedKeyDuration);
+
     // Draw the envelop on the graph
-    void draw(double triggeredKeyDuration, double releasedKeyDuration);
+    void draw(QPainter * painter, const int width, const int height, const double xRange, const double xOffset);
 
 private:
     double getValueForKey(double value, double keyModifier, int key);
+    QPointF coordToPixels(QPointF pointF, const int width, const int height, const double xRange, const double xOffset);
+
     QMap<ValueType, double> _values;
     QMap<ValueType, bool> _defined;
     QColor _color;
     bool _isThick;
-    QCPGraph * _graph1, * _graph2;
+
+    QVector<QPointF> _vect1, _vect2;
+    QPolygonF _polygon;
 };
 
 #endif // ENVELOP_H

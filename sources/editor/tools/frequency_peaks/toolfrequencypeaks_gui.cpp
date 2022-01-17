@@ -144,7 +144,7 @@ void ToolFrequencyPeaks_gui::onPeakComputed(EltID id, const SampleFrequencyInfo 
                 }
                 ui->table->setItem(currentRow + i, 1, new QTableWidgetItem(QString::number(i + 1)));
                 ui->table->setItem(currentRow + i, 2, new QTableWidgetItem(QString::number(fi._factor)));
-                ui->table->setItem(currentRow + i, 3, new QTableWidgetItem(QString::number(fi._frequency) + " " + tr("Hz")));
+                ui->table->setItem(currentRow + i, 3, new QTableWidgetItem(QString::number(fi._frequency) + " " + tr("Hz", "unit for Herz")));
                 ui->table->setItem(currentRow + i, 4, new QTableWidgetItem(ContextManager::keyName()->getKeyName(fi._key)));
                 ui->table->setItem(currentRow + i, 5, new QTableWidgetItem(QString::number(fi._correction)));
             }

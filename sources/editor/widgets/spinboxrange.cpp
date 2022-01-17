@@ -285,7 +285,7 @@ void SpinBoxRange::formatText()
 
 QString SpinBoxVelocityRange::getText(int value) const
 {
-    return QString::number(value);
+    return QLocale::system().toString(value);
 }
 
 int SpinBoxVelocityRange::getValue(QString &text, bool &ok) const

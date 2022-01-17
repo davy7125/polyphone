@@ -59,7 +59,7 @@ void SoundfontFileCell::initialize(SoundfontDownloadData * data)
     ui->textDescription->setText(data->getDescription());
 
     // Information
-    ui->labelInfo->setText(QString("%1, %2").arg(data->getFormattedSize()).arg(data->getLastDate()));
+    ui->labelInfo->setText(QString("%1 - %2").arg(data->getFormattedSize()).arg(data->getLastDate()));
 
     // Keep the ID of the distant file
     _id = data->getId();

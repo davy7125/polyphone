@@ -170,12 +170,12 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     ui->comboSampleRate->setCurrentIndex(sampleRateIndex);
     if (nombreElements == 1)
         ui->labelTaille->setText(QString::number(length) + " - " +
-                                 QString::number((double)length / sampleRate, 'f', 3) + tr("s", "unit for seconds"));
+                                 QLocale::system().toString((double)length / sampleRate, 'f', 3) + " " + tr("s", "unit for seconds"));
     else
     {
         if (sampleRate > 0)
             ui->labelTaille->setText(tr("(min)", "minimum") + " " + QString::number(length) + " - " +
-                                     QString::number((double)length / sampleRate, 'f', 3) + tr("s", "unit for seconds"));
+                                     QLocale::system().toString((double)length / sampleRate, 'f', 3) + " " + tr("s", "unit for seconds"));
         else
             ui->labelTaille->setText(tr("(min)", "minimum") + " " + QString::number(length));
     }

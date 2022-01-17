@@ -144,7 +144,7 @@ void ControllerArea::updateBend(double value, bool stopTimer)
         ui->sliderPitchWheel->stopTimer();
     ui->sliderPitchWheel->blockSignals(false);
 
-    ui->labelWheelValue->setText(QString::number(value, 'f', 2));
+    ui->labelWheelValue->setText(QLocale::system().toString(value, 'f', 2));
 }
 
 void ControllerArea::updateBendSensitivity(double semitones)
@@ -158,7 +158,7 @@ void ControllerArea::updateBendSensitivity(double semitones)
     ui->sliderSensitivity->setValue(static_cast<int>(semitones * 100));
     ui->sliderSensitivity->blockSignals(false);
 
-    ui->labelSensitivityValue->setText(QString::number(semitones, 'f', 2));
+    ui->labelSensitivityValue->setText(QLocale::system().toString(semitones, 'f', 2));
 }
 
 void ControllerArea::on_sliderPitchWheel_valueChanged(int value)

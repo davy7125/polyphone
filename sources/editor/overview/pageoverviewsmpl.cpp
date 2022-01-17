@@ -137,7 +137,7 @@ QString PageOverviewSmpl::totalLength(EltID id)
 {
     quint32 length = _sf2->get(id, champ_dwLength).dwValue;
     quint32 sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
-    return QString::number((double)length / sampleRate, 'f', 3) + tr("s", "unit for seconds");
+    return QLocale::system().toString((double)length / sampleRate, 'f', 3) + " " + tr("s", "unit for seconds");
 }
 
 QString PageOverviewSmpl::loopLength(EltID id, int &status)
@@ -153,7 +153,7 @@ QString PageOverviewSmpl::loopLength(EltID id, int &status)
     // Length of the loop
     QString result;
     quint32 sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
-    result = QString::number((double)(endLoop - startLoop) / sampleRate, 'f', 3) + tr("s", "unit for seconds");
+    result = QLocale::system().toString((double)(endLoop - startLoop) / sampleRate, 'f', 3) + " " + tr("s", "unit for seconds");
 
     // Quality of the loop
     quint32 length = _sf2->get(id, champ_dwLength).dwValue;
@@ -272,7 +272,7 @@ QString PageOverviewSmpl::link(int &status)
 QString PageOverviewSmpl::sampleRate(EltID id)
 {
     unsigned int sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
-    return QString::number(sampleRate) + " " + tr("Hz");
+    return QString::number(sampleRate) + " " + tr("Hz", "unit for Herz");
 }
 
 void PageOverviewSmpl::findLinkedSample(EltID id)

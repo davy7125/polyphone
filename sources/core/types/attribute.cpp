@@ -446,13 +446,13 @@ QString Attribute::toString(AttributeType champ, bool isPrst, AttributeValue sto
         break;
     case champ_initialAttenuation:
         // Now with two digits since we have real dB (one step is 0.04 dB)
-        result = QString::number(toRealValue(champ, isPrst, storedValue), 'f', 2);
+        result = QLocale::system().toString(toRealValue(champ, isPrst, storedValue), 'f', 2);
         break;
     case champ_pan: case champ_initialFilterQ:
     case champ_modLfoToVolume:
     case champ_sustainVolEnv: case champ_sustainModEnv:
     case champ_chorusEffectsSend: case champ_reverbEffectsSend:
-        result = QString::number(toRealValue(champ, isPrst, storedValue), 'f', 1);
+        result = QLocale::system().toString(toRealValue(champ, isPrst, storedValue), 'f', 1);
         break;
     case champ_keynum: case champ_overridingRootKey:
         result = ContextManager::keyName()->getKeyName(storedValue.wValue);
@@ -475,13 +475,13 @@ QString Attribute::toString(AttributeType champ, bool isPrst, AttributeValue sto
         result = QString::number(storedValue.shValue);
         break;
     case champ_initialFilterFc:
-        result = QString::number(toRealValue(champ, isPrst, storedValue), 'f', isPrst ? 3 : 0);
+        result = QLocale::system().toString(toRealValue(champ, isPrst, storedValue), 'f', isPrst ? 3 : 0);
         break;
     case champ_freqModLFO: case champ_freqVibLFO:
     case champ_delayModEnv: case champ_attackModEnv: case champ_holdModEnv: case champ_decayModEnv: case champ_releaseModEnv:
     case champ_delayVolEnv: case champ_attackVolEnv: case champ_holdVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
     case champ_delayModLFO: case champ_delayVibLFO:
-        result = QString::number(toRealValue(champ, isPrst, storedValue), 'f', 3);
+        result = QLocale::system().toString(toRealValue(champ, isPrst, storedValue), 'f', 3);
         break;
     case champ_sfModTransOper:
         if (storedValue.wValue == 2)

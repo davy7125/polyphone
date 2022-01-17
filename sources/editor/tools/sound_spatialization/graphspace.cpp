@@ -78,7 +78,7 @@ void GraphSpace::mouseMoved(QPoint pos)
         _currentPan = _xPan[posX];
         _currentLength = _yLength[posX];
         _currentLabel = ContextManager::keyName()->getKeyName(_yKey[posX]) + ":" +
-                QString::number(_currentPan * 100 - 50, 'f', 1);
+                QLocale::system().toString(_currentPan * 100 - 50, 'f', 1);
     }
     else
         _currentLabel = "";

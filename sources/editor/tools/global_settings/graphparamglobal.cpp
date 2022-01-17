@@ -446,7 +446,7 @@ void GraphParamGlobal::afficheCoord(double x, double y)
         else
             labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
         labelCoord->setText(ContextManager::keyName()->getKeyName(qRound((double)x * 128. / this->nbPoints)) + ":" +
-                            QString::number(yMin + (yMax - yMin) * y, 'f', 2));
+                            QLocale::system().toString(yMin + (yMax - yMin) * y, 'f', 2));
         // Ajustement position
         QFontMetrics fm(labelCoord->font());
         double distX = this->xAxis->pixelToCoord(fm.horizontalAdvance(labelCoord->text()) / 2 + 2);

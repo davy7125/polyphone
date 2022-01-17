@@ -23,13 +23,15 @@
 ***************************************************************************/
 
 #include "graphicsviewenvelop.h"
+#include "graphicswavepainter.h"
 #include "contextmanager.h"
 #include <QResizeEvent>
 #include <QScrollBar>
+#include <QPainter>
 
-GraphicsViewEnvelop::GraphicsViewEnvelop(QWidget *parent) : QCustomPlot(parent),
+GraphicsViewEnvelop::GraphicsViewEnvelop(QWidget *parent) : QWidget(parent),
+    _wavePainter(new GraphicsWavePainter(this)),
     _dontRememberScroll(false),
-    _posReleaseLine(0),
     _zoomFlag(false),
     _dragFlag(false),
     _zoomX(1),
@@ -37,117 +39,42 @@ GraphicsViewEnvelop::GraphicsViewEnvelop(QWidget *parent) : QCustomPlot(parent),
     _zoomXinit(1),
     _posXinit(.5),
     _bFromExt(false),
-    _qScrollX(nullptr),
-    _textPositionL(nullptr),
-    _textPositionR(nullptr),
-    _fixedTicker(new QCPAxisTickerFixed())
+    _qScrollX(nullptr)
 {
     // Images
     _imageNoteOn = QImage(":/icons/note_on.png").scaled(36, 36, Qt::KeepAspectRatio);
     _imageNoteOff = QImage(":/icons/note_off.png").scaled(36, 36, Qt::KeepAspectRatio);
 
-    // Graphe 0 pour la ligne de zoom
-    this->addGraph();
+    // Colors
+    _redColor = ContextManager::theme()->getFixedColor(ThemeManager::RED, true);
+    if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
+    {
+        _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
+        _textColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+    }
+    else
+    {
+        _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+        _textColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
+    }
 
-    // Graphe 1 pour le sample
-    this->addGraph();
+    // Line styles
+    _releaseLinePen = QPen(_textColor, 2, Qt::DashLine);
+    _zoomLinePen = QPen(_redColor, 1, Qt::DashLine);
+    _textColor.setAlpha(70);
+    _gridPen = QPen(_textColor, 1, Qt::DotLine);
+    _textColor.setAlpha(255);
 
-    // Axes
-    this->xAxis2->setRange(0, 1);
-    this->yAxis2->setRange(0, 1);
-    this->yAxis->setRange(0, 1.2);
-    this->yAxis->setVisible(false);
-    _fixedTicker->setScaleStrategy(QCPAxisTickerFixed::ssNone);
-    this->xAxis->setTicker(_fixedTicker);
-    this->xAxis->setTickLength(0, 0);
-    this->xAxis->setSubTickLength(0, 0);
-    this->xAxis->setTickPen(QPen(QColor(255, 0, 255), 0));
-    this->xAxis->setTickLabelSide(QCPAxis::lsInside);
-
-    // Marges
-    this->axisRect()->setAutoMargins(QCP::msNone);
-    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
-
-    // Positions
-    _textPositionL = new QCPItemText(this);
-    _textPositionL->position->setType(QCPItemPosition::ptAxisRectRatio);
-    _textPositionL->setPositionAlignment(Qt::AlignLeft|Qt::AlignTop);
-    _textPositionL->position->setCoords(0, 0);
-    _textPositionL->setTextAlignment(Qt::AlignBottom);
-    _textPositionL->setFont(QFont(font().family(), 8, QFont::Bold));
-    _textPositionL->setText("");
-
-    _textPositionR = new QCPItemText(this);
-    _textPositionR->position->setType(QCPItemPosition::ptAxisRectRatio);
-    _textPositionR->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
-    _textPositionR->position->setCoords(1, 0);
-    _textPositionR->setTextAlignment(Qt::AlignBottom);
-    _textPositionR->setFont(QFont(font().family(), 8, QFont::Bold));
-    _textPositionR->setText("");
-
-    this->updateStyle();
+    // Wave configuration
+    _wavePainter->drawBackground(false);
+    _wavePainter->setWaveColor(ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND), _backgroundColor, 0.7));
+    _wavePainter->setDrawBottom(true);
 }
 
 GraphicsViewEnvelop::~GraphicsViewEnvelop()
 {
     clearEnvelops();
-    _fixedTicker.clear();
-}
-
-void GraphicsViewEnvelop::updateStyle()
-{
-    // Colors
-    QColor backgroundColor;
-    QColor textColor;
-    QColor redColor = ContextManager::theme()->getFixedColor(ThemeManager::RED, true);
-    QColor highlightColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
-    if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
-    {
-        backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
-        textColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
-    }
-    else
-    {
-        backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
-        textColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
-    }
-    this->setBackground(backgroundColor);
-
-    // Zoom line
-    QPen graphPen;
-    graphPen.setColor(redColor);
-    graphPen.setWidthF(1);
-    graphPen.setStyle(Qt::DashLine);
-    this->graph(0)->setPen(graphPen);
-
-    // Sample
-    highlightColor.setAlpha(40);
-    graphPen.setColor(highlightColor);
-    graphPen.setStyle(Qt::SolidLine);
-    this->graph(1)->setPen(graphPen);
-
-    // Text
-    textColor.setAlpha(180);
-    _textPositionL->setColor(textColor);
-    _textPositionR->setColor(textColor);
-
-    // Style of the release line
-    _releaseLinePen = QPen(textColor, 2);
-    _releaseLinePen.setStyle(Qt::DashLine);
-
-    // Grid
-    textColor.setAlpha(0);
-    graphPen.setColor(textColor);
-    this->xAxis->grid()->setZeroLinePen(graphPen);
-    textColor.setAlpha(70);
-    graphPen.setColor(textColor);
-    graphPen.setWidthF(1);
-    graphPen.setStyle(Qt::DotLine);
-    this->xAxis->grid()->setPen(graphPen);
-    textColor.setAlpha(255);
-    this->xAxis->setTickLabelColor(textColor);
-
-    this->replot();
+    delete _wavePainter;
 }
 
 void GraphicsViewEnvelop::linkSliderX(QScrollBar * qScrollX)
@@ -160,43 +87,13 @@ void GraphicsViewEnvelop::setPosX(int posX)
     if (this->_qScrollX)
     {
         _bFromExt = true;
-        if (this->_qScrollX->maximum() > 0)
-            this->_posX = (double)posX / this->_qScrollX->maximum();
+        if (_qScrollX->maximum() > 0)
+            _posX = static_cast<double>(posX) / this->_qScrollX->maximum();
         else
-            this->_posX = 0.5;
-        this->zoomDrag();
+            _posX = 0.5;
+        this->repaint();
         _bFromExt = false;
     }
-}
-
-void GraphicsViewEnvelop::zoomDrag()
-{
-    // Bornes des paramètres d'affichage
-    if (this->_posX < 0)
-        this->_posX = 0;
-    else if (this->_posX > 1)
-        this->_posX = 1;
-
-    // Application du drag et zoom
-    double etendueX = _sizeX / _zoomX;
-    double offsetX = (_sizeX - etendueX) * _posX;
-    this->xAxis->setRange(offsetX, offsetX + etendueX);
-
-    // Mise à jour
-    displayCurrentRange();
-    this->replot(QCustomPlot::rpQueuedReplot);
-    if (!_bFromExt && _qScrollX)
-    {
-        // Mise à jour du scrollbar
-        _qScrollX->blockSignals(true);
-        _qScrollX->setPageStep(10000. / _zoomX);
-        _qScrollX->setRange(0, 10000. - _qScrollX->pageStep());
-        _qScrollX->setValue(_qScrollX->maximum() * _posX);
-        _qScrollX->blockSignals(false);
-    }
-
-    // Position of the release line in pixel
-    _posReleaseLine = this->xAxis->coordToPixel(_triggeredKeyDuration);
 }
 
 double GraphicsViewEnvelop::getTickStep()
@@ -247,21 +144,16 @@ double GraphicsViewEnvelop::getTickStep()
 void GraphicsViewEnvelop::clearEnvelops()
 {
     // Delete all envelops
-    while (!_envelops.isEmpty()) {
-        Envelop * envelop = _envelops.take(_envelops.keys().first());
-        this->removeGraph(envelop->graph1());
-        this->removeGraph(envelop->graph2());
-        delete envelop;
-    }
-    this->graph(0)->data()->clear();
-    this->graph(1)->data()->clear();
+    while (!_envelops.isEmpty())
+        delete _envelops.take(_envelops.keys().first());
     _index = 0;
+    this->repaint();
 }
 
 int GraphicsViewEnvelop::addEnvelop()
 {
     _index++;
-    _envelops[_index] = new Envelop(this->addGraph(), this->addGraph());
+    _envelops[_index] = new Envelop();
     return _index;
 }
 
@@ -276,26 +168,32 @@ void GraphicsViewEnvelop::setKeyRange(int index, int keyMin, int keyMax)
     _envelops[index]->set(Envelop::KEY_MAX, keyMax, true);
 }
 
-void GraphicsViewEnvelop::setSample(QVector<double> data, int sampleRate, int loopMode, int startLoop, int endLoop)
+void GraphicsViewEnvelop::setSample(QByteArray data, int sampleRate, int loopMode, int startLoop, int endLoop)
 {
-    // Number of points to display
-    int size = _sizeX * sampleRate;
-    QVector<double> dataX(size), dataY(size);
+    _sampleRate = sampleRate;
 
-    // Compute the multiplier
-    double max = 0;
-    for (int i = 0; i < data.size(); i++)
-        max = qMax(max, data[i]);
-    double multiplier = (max == 0) ? 1 : (0.7 / max);
+    // Number of points to display
+    int dataSize = data.size() / 2;
+    int loopedDataSize = _sizeX * sampleRate;
+    QByteArray loopedData(loopedDataSize * 2, 0);
+
+    // Pointers to data
+    qint16 * data16 = reinterpret_cast<qint16*>(data.data());
+    qint16 * loopedData16 = reinterpret_cast<qint16*>(loopedData.data());
+
+    // Compute the multiplier to normalize data
+    qint16 max = 0;
+    for (int i = 0; i < dataSize; i++)
+        max = qMax(max, qAbs(data16[i]));
+    double multiplier = (max == 0) ? 1.0 : (23000. / max); // 23000 = 0.7 * max(int16)
 
     // Key on part
-    bool release = false;
     int currentSmplPos = 0;
     int nbRead = _triggeredKeyDuration * sampleRate;
 
-    if ((loopMode == 1 || loopMode == 2 || (loopMode == 3 && !release)) && startLoop != endLoop)
+    if ((loopMode == 1 || loopMode == 2 || loopMode == 3) && startLoop != endLoop)
     {
-        // Boucle
+        // Loop
         if (currentSmplPos >= endLoop)
             currentSmplPos = startLoop;
         int total = 0;
@@ -303,10 +201,7 @@ void GraphicsViewEnvelop::setSample(QVector<double> data, int sampleRate, int lo
         {
             const int chunk = qMin(endLoop - currentSmplPos, nbRead - total);
             for (int i = 0; i < chunk; i++)
-            {
-                dataX[total + i] = (double)(total + i) / sampleRate;
-                dataY[total + i] = data[currentSmplPos + i] * multiplier;
-            }
+                loopedData16[total + i] = multiplier * data16[currentSmplPos + i];
             currentSmplPos += chunk;
             if (currentSmplPos >= endLoop)
                 currentSmplPos = startLoop;
@@ -315,38 +210,28 @@ void GraphicsViewEnvelop::setSample(QVector<double> data, int sampleRate, int lo
     }
     else
     {
-        // Pas de boucle
-        if (data.size() - currentSmplPos < nbRead)
+        // No loop
+        if (dataSize - currentSmplPos < nbRead)
         {
-            for (int i = 0; i < data.size() - currentSmplPos; i++)
-            {
-                dataX[i] = (double)i / sampleRate;
-                dataY[i] = data[currentSmplPos + i] * multiplier;
-            }
-            for (int i = data.size() - currentSmplPos; i < nbRead; i++)
-            {
-                dataX[i] = (double)i / sampleRate;
-                dataY[i] = 0;
-            }
-            currentSmplPos = data.size();
+            for (int i = 0; i < dataSize - currentSmplPos; i++)
+                loopedData16[i] = multiplier * data16[currentSmplPos + i];
+            for (int i = dataSize - currentSmplPos; i < nbRead; i++)
+                loopedData16[i] = 0;
+            currentSmplPos = dataSize;
         }
         else
         {
             for (int i = 0; i < nbRead; i++)
-            {
-                dataX[i] = (double)i / sampleRate;
-                dataY[i] = data[currentSmplPos + i] * multiplier;
-            }
+                loopedData16[i] = multiplier * data16[currentSmplPos + i];
             currentSmplPos += nbRead;
         }
     }
 
     // Key off part
-    release = true;
     int offset = nbRead;
-    nbRead = _releasedKeyDuration * sampleRate;
+    nbRead = loopedDataSize - nbRead;
 
-    if ((loopMode == 1 || loopMode == 2 || (loopMode == 3 && !release)) && startLoop != endLoop)
+    if ((loopMode == 1 || loopMode == 2) && startLoop != endLoop)
     {
         // Boucle
         if (currentSmplPos >= endLoop)
@@ -356,10 +241,7 @@ void GraphicsViewEnvelop::setSample(QVector<double> data, int sampleRate, int lo
         {
             const int chunk = qMin(endLoop - currentSmplPos, nbRead - total);
             for (int i = 0; i < chunk; i++)
-            {
-                dataX[offset + total + i] = (double)(total + offset + i) / sampleRate;
-                dataY[offset + total + i] = data[currentSmplPos + i] * multiplier;
-            }
+                loopedData16[offset + total + i] = multiplier * data16[currentSmplPos + i];
             currentSmplPos += chunk;
             if (currentSmplPos >= endLoop)
                 currentSmplPos = startLoop;
@@ -369,32 +251,23 @@ void GraphicsViewEnvelop::setSample(QVector<double> data, int sampleRate, int lo
     else
     {
         // Pas de boucle
-        if (data.size() - currentSmplPos < nbRead)
+        if (dataSize - currentSmplPos < nbRead)
         {
-            for (int i = 0; i < data.size() - currentSmplPos; i++)
-            {
-                dataX[offset + i] = (double)(offset + i) / sampleRate;
-                dataY[offset + i] = data[currentSmplPos + i] * multiplier;
-            }
-            for (int i = data.size() - currentSmplPos; i < nbRead; i++)
-            {
-                dataX[offset + i] = (double)(offset + i) / sampleRate;
-                dataY[offset + i] = 0;
-            }
-            currentSmplPos = data.size();
+            for (int i = 0; i < dataSize - currentSmplPos; i++)
+                loopedData16[offset + i] = multiplier * data16[currentSmplPos + i];
+            for (int i = dataSize - currentSmplPos; i < nbRead; i++)
+                loopedData16[offset + i] = 0;
+            currentSmplPos = dataSize;
         }
         else
         {
             for (int i = 0; i < nbRead; i++)
-            {
-                dataX[offset + i] = (double)(offset + i) / sampleRate;
-                dataY[offset + i] = data[currentSmplPos + i] * multiplier;
-            }
+                loopedData16[offset + i] = multiplier * data16[currentSmplPos + i];
             currentSmplPos += nbRead;
         }
     }
 
-    this->graph(1)->setData(dataX, dataY, true);
+    _wavePainter->setData(loopedData);
 }
 
 void GraphicsViewEnvelop::setEnvelopStyle(int index, bool isGlobal, bool isVolume, bool isMain)
@@ -409,7 +282,7 @@ void GraphicsViewEnvelop::setEnvelopStyle(int index, bool isGlobal, bool isVolum
     _envelops[index]->setThick(isMain);
 }
 
-void GraphicsViewEnvelop::drawEnvelops()
+void GraphicsViewEnvelop::computeEnvelops()
 {
     // Compute the maximum attack duration and release
     double attackDuration = 0;
@@ -430,49 +303,103 @@ void GraphicsViewEnvelop::drawEnvelops()
     // Adapt the envelops and compute the size of the graph
     _triggeredKeyDuration = qMax(2., attackDuration + sustainDuration);
     _releasedKeyDuration = qMax(2., releaseDuration);
-    foreach (Envelop * env, _envelops)
-        env->draw(_triggeredKeyDuration, _releasedKeyDuration);
     _sizeX = _triggeredKeyDuration + _releasedKeyDuration;
+
+    // Compute the points
+    foreach (Envelop * env, _envelops)
+        env->computePoints(_triggeredKeyDuration, _releasedKeyDuration);
 }
 
 void GraphicsViewEnvelop::paintEvent(QPaintEvent *event)
 {
-    // Tick step
-    _fixedTicker->setTickStep(getTickStep());
-
-    QCustomPlot::paintEvent(event);
-
-    // Release line and images
+    Q_UNUSED(event)
     QPainter painter(this);
-    painter.setPen(_releaseLinePen);
-    painter.drawLine(QPointF(_posReleaseLine, -10000), QPointF(_posReleaseLine, 10000));
+    painter.setRenderHint(QPainter::Antialiasing);
 
     const int width = this->width();
-    const int minMargin = 50;
-    const int posY = 20;
-    if (_posReleaseLine > minMargin)
+    const int height = this->height();
+    const double etendueX = _sizeX / _zoomX; // In seconds
+    const double offsetX = (_sizeX - etendueX) * _posX; // In seconds
+
+    // Background
+    painter.fillRect(this->rect(), _backgroundColor);
+
+    // Paint the waveform
+    double start = offsetX < 0 ? 0 : offsetX;
+    double end = (offsetX + etendueX) < 0 ? 0 : (offsetX + etendueX);
+    _wavePainter->paint(&painter, start * _sampleRate + 0.5, end * _sampleRate + 0.5, 1.0);
+
+    // Grid
+    double tickStep = getTickStep();
+    painter.setPen(_gridPen);
+    for (int i = offsetX / tickStep; i < (offsetX + etendueX) / tickStep + 1; i++)
     {
-        int x = qMin(width, _posReleaseLine) / 2;
-        painter.drawImage(x - _imageNoteOn.width() / 2, posY - _imageNoteOn.height() / 2, _imageNoteOn);
+        double valueX = tickStep * i;
+        int pos = (valueX - offsetX) / etendueX * width + 0.5;
+        painter.drawLine(pos, 0, pos, height);
     }
-    if (_posReleaseLine < width - minMargin)
+
+    // Draw the envelops
+    foreach (Envelop * env, _envelops)
+        env->draw(&painter, width, height, etendueX, offsetX);
+
+    // Grid values
+    painter.setPen(_textColor);
+    for (int i = offsetX / tickStep; i < (offsetX + etendueX) / tickStep + 1; i++)
     {
-        int x = qMin(width, width - _posReleaseLine) / 2;
-        painter.drawImage(width - x - _imageNoteOff.width() / 2, posY - _imageNoteOff.height() / 2, _imageNoteOff);
+        double valueX = tickStep * i;
+        int pos = (valueX - offsetX) / etendueX * width + 0.5;
+        painter.drawText(QRectF(pos - 200, height - 105, 400, 100), Qt::AlignHCenter | Qt::AlignBottom,
+                         doubleToString(valueX, tickStep < 0.001) + " " + tr("s", "unit for seconds"));
+    }
+
+    // Release line and images
+    int posReleaseLine = (_triggeredKeyDuration - offsetX) / etendueX * width + 0.5;
+    painter.setPen(_releaseLinePen);
+    painter.drawLine(posReleaseLine, 0, posReleaseLine, height);
+    if (posReleaseLine > _imageNoteOn.width() * 2)
+        painter.drawImage(qMin(width, posReleaseLine) / 2 - _imageNoteOn.width() / 2,
+                          15, _imageNoteOn);
+    if (posReleaseLine < width - _imageNoteOff.width() * 2)
+        painter.drawImage(width - qMin(width, width - posReleaseLine) / 2 - _imageNoteOff.width() / 2,
+                          15, _imageNoteOff);
+
+    // Zoom line
+    if (_zoomFlag)
+    {
+        // Zoom line
+        if (_x != _xInit || _y != _yInit)
+        {
+            painter.setPen(QPen(_redColor, 1.0, Qt::DashLine));
+            painter.drawLine(QPointF(static_cast<double>(_xInit * this->width()), static_cast<double>(_yInit * this->height())),
+                             QPointF(static_cast<double>(_x * this->width()), static_cast<double>(_y * this->height())));
+        }
+    }
+
+    // Possibly update scrollbar
+    if (!_bFromExt && _qScrollX)
+    {
+        _qScrollX->blockSignals(true);
+        _qScrollX->setPageStep(static_cast<qint32>(10000 / _zoomX));
+        _qScrollX->setRange(0, static_cast<qint32>(10000. - _qScrollX->pageStep()));
+        _qScrollX->setValue(static_cast<qint32>(_qScrollX->maximum() * _posX));
+        _qScrollX->blockSignals(false);
     }
 }
 
-void GraphicsViewEnvelop::resizeEvent(QResizeEvent *event)
+QString GraphicsViewEnvelop::doubleToString(double value, bool accurate)
 {
-    QCustomPlot::resizeEvent(event);
-    _posReleaseLine = this->xAxis->coordToPixel(_triggeredKeyDuration);
+    QString txt = QLocale::system().toString(value, 'f', accurate ? 4 : 3);
+    while (txt.size() > 1 && (txt.endsWith("0") || txt.endsWith(".") || txt.endsWith(",")))
+        txt = txt.left(txt.size() - 1);
+    return txt;
 }
 
 void GraphicsViewEnvelop::mousePressEvent(QMouseEvent *event)
 {
     // Enregistrement situation
-    _xInit = this->xAxis2->pixelToCoord(event->x());
-    _yInit = this->yAxis2->pixelToCoord(event->y());
+    _xInit = static_cast<double>(event->x()) / this->width();
+    _yInit = static_cast<double>(event->y()) / this->height();
     _zoomXinit = _zoomX;
     _posXinit = _posX;
     if (event->button() == Qt::LeftButton && !_zoomFlag)
@@ -494,23 +421,19 @@ void GraphicsViewEnvelop::mouseReleaseEvent(QMouseEvent *event)
     else if (event->button() == Qt::RightButton)
     {
         _zoomFlag = false;
-        this->setZoomLine(-1, 0, 0, 0);
         this->setCursor(Qt::ArrowCursor);
-        this->replot();
+        this->repaint();
     }
 }
 
 void GraphicsViewEnvelop::mouseMoveEvent(QMouseEvent *event)
-{
+{    
+    _x = static_cast<double>(event->x()) / this->width();
+    _y = static_cast<double>(event->y()) / this->height();
+
     if (_zoomFlag)
     {
         this->setCursor(Qt::SizeAllCursor);
-
-        // Ligne de zoom
-        this->setZoomLine(_xInit, _yInit,
-                          this->xAxis2->pixelToCoord(event->x()),
-                          this->yAxis2->pixelToCoord(event->y()));
-
         this->zoom(event->pos());
     }
     else if (_dragFlag)
@@ -533,7 +456,7 @@ void GraphicsViewEnvelop::wheelEvent(QWheelEvent *event)
 void GraphicsViewEnvelop::zoom(QPoint point)
 {
     // Décalage
-    double decX = this->xAxis2->pixelToCoord(point.x()) - this->_xInit;
+    double decX = static_cast<double>(point.x()) / this->width() - this->_xInit;
 
     // Modification zoom & drag
     double newZoomX = _zoomXinit * pow(2, 25.0 * decX);
@@ -549,50 +472,31 @@ void GraphicsViewEnvelop::zoom(QPoint point)
 
         // Ajustement posX
         if (_zoomX > 1)
-            _posX = (_zoomX * _posXinit * (_zoomXinit - 1) + _xInit*(_zoomX - _zoomXinit)) / (_zoomXinit * (_zoomX - 1));
-
-        // Mise à jour
-        this->zoomDrag();
+        {
+            _posX = (_zoomX * _posXinit * (_zoomXinit - 1) + _xInit * (_zoomX - _zoomXinit)) / (_zoomXinit * (_zoomX - 1));
+            if (_posX < 0)
+                _posX = 0;
+            else if (_posX > 1)
+                _posX = 1;
+        }
     }
+
+    this->repaint();
 }
 
 void GraphicsViewEnvelop::drag(QPoint point)
 {
     // Décalage
-    double decX = this->xAxis2->pixelToCoord(point.x()) - this->_xInit;
+    double decX = static_cast<double>(point.x()) / this->width() - this->_xInit;
 
-    // Modification posX et posY
+    // Modification posX
     if (_zoomXinit > 1)
         _posX = _posXinit - decX / (_zoomXinit - 1);
+    if (_posX < 0)
+        _posX = 0;
+    else if (_posX > 1)
+        _posX = 1;
 
     // Mise à jour
-    this->zoomDrag();
-}
-
-void GraphicsViewEnvelop::setZoomLine(double x1, double y1, double x2, double y2)
-{
-    if (x1 >= 0)
-    {
-        // Conversion
-        QVector<double> x(2), y(2);
-        x[0] = _sizeX * (x1 + _posX * (_zoomX - 1)) / _zoomX;
-        x[1] = _sizeX * (x2 + _posX * (_zoomX - 1)) / _zoomX;
-        y[0] = 1.2 * y1;
-        y[1] = 1.2 * y2;
-        this->graph(0)->setData(x, y);
-    }
-    else
-        this->graph(0)->data()->clear();
-}
-
-void GraphicsViewEnvelop::displayCurrentRange()
-{
-    double etendueX = _sizeX / _zoomX;
-    double offsetX = (_sizeX - etendueX) * _posX;
-
-    double coordX1 = qMax(0., offsetX);
-    double coordX2 = qMax(0., offsetX + etendueX);
-
-    _textPositionL->setText(" " + QString::number(coordX1, 'f', 3) + "s");
-    _textPositionR->setText(QString::number(coordX2, 'f', 3) + "s ");
+    this->repaint();
 }

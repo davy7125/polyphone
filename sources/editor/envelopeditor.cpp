@@ -196,14 +196,13 @@ void EnvelopEditor::populate()
             addEnvelop(id, false, true);
         }
     }
-    ui->graphicsView->drawEnvelops();
+    ui->graphicsView->computeEnvelops();
 
     // Sample
     if (_displayedElt.count() == 1 && _displayedElt[0].typeElement == elementInstSmpl)
         addSample(_displayedElt[0]);
 
     ui->graphicsView->repaint();
-    ui->graphicsView->zoomDrag();
 
     stopSignals(false);
 }
@@ -244,6 +243,7 @@ void EnvelopEditor::addEnvelop(EltID id, bool isVolume, bool isMain)
         ui->graphicsView->setValue(index, Envelop::ATTACK, computeValue(id, champ_attackVolEnv, isOverridden), isOverridden);
         ui->graphicsView->setValue(index, Envelop::HOLD, computeValue(id, champ_holdVolEnv, isOverridden), isOverridden);
         ui->graphicsView->setValue(index, Envelop::DECAY, computeValue(id, champ_decayVolEnv, isOverridden), isOverridden);
+        //ui->graphicsView->setValue(index, Envelop::SUSTAIN, qPow(10, -0.05 * static_cast<double>(computeValue(id, champ_sustainVolEnv, isOverridden))), isOverridden); // Gain computed
         ui->graphicsView->setValue(index, Envelop::SUSTAIN, 1. - computeValue(id, champ_sustainVolEnv, isOverridden) / 144., isOverridden);
         ui->graphicsView->setValue(index, Envelop::RELEASE, computeValue(id, champ_releaseVolEnv, isOverridden), isOverridden);
         ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_HOLD, computeValue(id, champ_keynumToVolEnvHold, isOverridden), isOverridden);
@@ -294,11 +294,7 @@ void EnvelopEditor::addSample(EltID idInstSmpl)
     idSmpl.indexElt = _sf2->get(idInstSmpl, champ_sampleID).wValue;
 
     // Data
-    QByteArray data = _sf2->getData(idSmpl, champ_sampleData32);
-    const qint32 * dataSmpl = (qint32 *)data.constData();
-    QVector<double> dataD(data.length() / 4);
-    for (int i = 0; i < data.length() / 4; i++)
-        dataD[i] = (double)dataSmpl[i] / 2147483648.;
+    QByteArray data = _sf2->getData(idSmpl, champ_sampleData16);
 
     // Parameters
     int sampleRate = _sf2->get(idSmpl, champ_dwSampleRate).dwValue;
@@ -316,10 +312,10 @@ void EnvelopEditor::addSample(EltID idInstSmpl)
     }
 
     // Adjust values
-    if (startLoop < 0 || endLoop > dataD.size())
+    if (startLoop < 0 || endLoop > data.size() / 2)
         loopMode = 0;
 
-    ui->graphicsView->setSample(dataD, sampleRate, loopMode, startLoop, endLoop);
+    ui->graphicsView->setSample(data, sampleRate, loopMode, startLoop, endLoop);
 }
 
 void EnvelopEditor::enableEditor(bool isEnabled)

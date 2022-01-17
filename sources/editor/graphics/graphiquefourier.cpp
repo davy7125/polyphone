@@ -496,10 +496,10 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
             painter.setFont(fontInfo);
             painter.drawText(QRect(0, posY, size.width() - 142 - marginRight, fontHeight),
                              Qt::AlignRight,
-                             QString::number(_peaks[peakNumber]._factor, 'f', 2));
+                             QLocale::system().toString(_peaks[peakNumber]._factor, 'f', 2));
             painter.drawText(QRect(0, posY, size.width() - 80 - marginRight, fontHeight),
                              Qt::AlignRight,
-                             QString::number(_peaks[peakNumber]._frequency, 'f', 2) + " " + tr("Hz", "unit for Herz"));
+                             QLocale::system().toString(_peaks[peakNumber]._frequency, 'f', 2) + " " + tr("Hz", "unit for Herz"));
             painter.drawText(QRect(0, posY, size.width() - 48 - marginRight, fontHeight),
                              Qt::AlignRight,
                              ContextManager::keyName()->getKeyName(static_cast<unsigned int>(_peaks[peakNumber]._key)));

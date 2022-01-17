@@ -311,9 +311,9 @@ void InputParserSfz::createSf2(int &sf2Index, QString filename, bool isChannel10
         if (nomInst == "")
         {
             if (_listeEnsembles.size() > 9)
-                nomInst = nom.left(17) + "-" + QString::number(i+1);
+                nomInst = nom.left(17) + "-" + QString::number(i + 1);
             else if (_listeEnsembles.size() > 1)
-                nomInst = nom.left(18) + "-" + QString::number(i+1);
+                nomInst = nom.left(18) + "-" + QString::number(i + 1);
             else
                 nomInst = nom;
         }
