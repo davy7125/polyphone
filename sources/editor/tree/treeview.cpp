@@ -115,7 +115,7 @@ void TreeView::mouseMoveEvent(QMouseEvent *event)
         event->accept();
         return;
     }
-    QTreeView::mouseReleaseEvent(event);
+    QTreeView::mouseMoveEvent(event);
 }
 
 void TreeView::mouseDoubleClickEvent(QMouseEvent * event)
