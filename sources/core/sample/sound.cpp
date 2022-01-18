@@ -358,35 +358,60 @@ void Sound::determineRootKey()
 {
     // Try to find the root key with the help of the file name
     QFileInfo fileInfo(_fileName);
-    QString nameNoExtension = fileInfo.baseName();
+    QString nameNoExtension = fileInfo.baseName().toLower();
 
-    unsigned int key = 0;
+    // First attempt: find a note name (standard taken being C4 = 60)
+    QRegExp keyNameRegex("([a-g])([#b]?)(-?[0-9]+)");
     bool keyFound = false;
-    for (unsigned int i = 0; i <= 127; i++)
+    unsigned int key = 0;
+    if (keyNameRegex.indexIn(nameNoExtension) > -1)
     {
-        // First search the textual name of the key
-        QString nomNote = ContextManager::keyName()->getKeyName(i, true);
-
-        // Recherche de la note dans le nom de fichier
-        if (nameNoExtension.toUpper().contains(nomNote))
+        switch (keyNameRegex.cap(1)[0].toLatin1())
         {
-            key = i;
-            keyFound = true;
+        case 'c':
+            key = 0;
+            break;
+        case 'd':
+            key = 2;
+            break;
+        case 'e':
+            key = 4;
+            break;
+        case 'f':
+            key = 5;
+            break;
+        case 'g':
+            key = 7;
+            break;
+        case 'a':
+            key = 9;
+            break;
+        case 'b':
+            key = 11;
+            break;
+        default:
+            break;
         }
+        if (keyNameRegex.cap(2) == "b")
+            key--;
+        else if (keyNameRegex.cap(2) == "#")
+            key++;
+        key += 12 * (1 + keyNameRegex.cap(3).toInt());
+
+        if (key > 0 && key < 128)
+            keyFound = true;
     }
 
+    // Second attempt: search the numeric name of the key
     if (!keyFound)
     {
-        // Then search the numeric name of the key
-        QString name = nameNoExtension;
-        QStringList listeNum = name.replace(QRegExp("[^0-9]"), "-").split("-", Qt::SkipEmptyParts);
-        if (listeNum.size())
+        QStringList listeNum = nameNoExtension.replace(QRegExp("[^0-9]"), "-").split("-", Qt::SkipEmptyParts);
+        if (!listeNum.isEmpty())
         {
-            // 0n étudie le dernier
-            bool ok;
-            unsigned int numNote = listeNum.last().toUInt(&ok);
-            if (ok && numNote < 128)
-                key = numNote;
+            // We study the last part
+            key = listeNum.last().toUInt();
+            if (key < 128)
+                keyFound = true;
         }
     }
 

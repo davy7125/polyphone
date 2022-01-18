@@ -123,8 +123,6 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
                 in >> tmp32;
                 info.dwRootKey = tmp32.value;
                 info.pitchDefined = info.dwRootKey > 0 && info.dwRootKey < 128;
-                if (info.dwRootKey > 127)
-                    info.dwRootKey = 127;
                 if (!info.pitchDefined)
                     info.dwRootKey = 60; // back to middle C
 
