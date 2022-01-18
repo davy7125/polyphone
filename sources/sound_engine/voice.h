@@ -112,6 +112,14 @@ private:
 
     // Protect parameters
     QMutex _mutexParam;
+
+    // Arrays
+    float * _dataModArray;
+    float * _modLfoArray;
+    float * _vibLfoArray;
+    float * _modPitchArray;
+    double * _modFreqArray;
+    quint32 _arrayLength;
 };
 
 #endif // VOICE_H

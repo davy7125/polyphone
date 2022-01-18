@@ -41,8 +41,8 @@ Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _clipCoef(1),
     _recordFile(nullptr),
     _isRecording(true),
-    _fTmpSumRev1(nullptr),
-    _fTmpSumRev2(nullptr),
+    _fTmpSumRevL(nullptr),
+    _fTmpSumRevR(nullptr),
     _dataWav(nullptr),
     _bufferSize(0),
     _configuration(configuration)
@@ -78,15 +78,15 @@ void Synth::destroySoundEnginesAndBuffers()
         delete thread;
     }
 
-    delete [] _fTmpSumRev1;
-    delete [] _fTmpSumRev2;
+    delete [] _fTmpSumRevL;
+    delete [] _fTmpSumRevR;
     delete [] _dataWav;
 }
 
 void Synth::createSoundEnginesAndBuffers()
 {
-    _fTmpSumRev1 = new float [4 * _bufferSize];
-    _fTmpSumRev2 = new float [4 * _bufferSize];
+    _fTmpSumRevL = new float [4 * _bufferSize];
+    _fTmpSumRevR = new float [4 * _bufferSize];
     _dataWav = new float[8 * _bufferSize];
 
     int nbEngines = qMax(QThread::idealThreadCount() - 2, 1);
@@ -332,6 +332,7 @@ void Synth::updateConfiguration()
     double revDamping = 0.01 * _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", 0).toInt();
 
     _mutexReverb.lock();
+    _reverbOn = revLevel > 0.001;
     _reverb.setEffectMix(revLevel);
     _reverb.setRoomSize(revSize);
     _reverb.setWidth(revWidth);
@@ -533,35 +534,49 @@ void Synth::pause(bool isOn)
     _mutexRecord.unlock();
 }
 
-void Synth::readData(float *data1, float *data2, quint32 maxlen)
+void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
 {
-    for (quint32 i = 0; i < maxlen; i++)
-        data1[i] = data2[i] = _fTmpSumRev1[i] = _fTmpSumRev2[i] = 0;
+    memset(dataL, 0, maxlen * sizeof(float));
+    memset(dataR, 0, maxlen * sizeof(float));
+    memset(_fTmpSumRevL, 0, maxlen * sizeof(float));
+    memset(_fTmpSumRevR, 0, maxlen * sizeof(float));
 
     // Merge sound engines
     _mutexSynchro.lock();
     for (int i = 0; i < _soundEngines.size(); i++)
-        _soundEngines.at(i)->addData(data1, data2, _fTmpSumRev1, _fTmpSumRev2, maxlen);
+        _soundEngines.at(i)->addData(dataL, dataR, _fTmpSumRevL, _fTmpSumRevR, maxlen);
     _mutexSynchro.unlock();
 
     // EQ filter (live preview of filtered samples)
-    _eq.filterData(data1, data2, maxlen);
+    _eq.filterData(dataL, dataR, maxlen);
 
-    // Apply reverb and add data
-    _mutexReverb.lock();
-    for (quint32 i = 0; i < maxlen; i++)
+    if (_reverbOn)
     {
-        data1[i] += static_cast<float>(
-                    _reverb.tick(static_cast<double>(_fTmpSumRev1[i]), static_cast<double>(_fTmpSumRev2[i])));
-        data2[i] += static_cast<float>(_reverb.lastOut(1));
+        // Apply reverb and add data
+        _mutexReverb.lock();
+        for (quint32 i = 0; i < maxlen; i++)
+        {
+            dataL[i] += static_cast<float>(
+                        _reverb.tick(static_cast<double>(_fTmpSumRevL[i]), static_cast<double>(_fTmpSumRevR[i])));
+            dataR[i] += static_cast<float>(_reverb.lastOut(1));
+        }
+        _mutexReverb.unlock();
     }
-    _mutexReverb.unlock();
+    else
+    {
+        // Just add data
+        for (quint32 i = 0; i < maxlen; i++)
+        {
+            dataL[i] += _fTmpSumRevL[i];
+            dataR[i] += _fTmpSumRevR[i];
+        }
+    }
 
     // Add calibrating sinus
-    _sinus.addData(data1, data2, maxlen);
+    _sinus.addData(dataL, dataR, maxlen);
 
     // Clipping
-    clip(data1, data2, maxlen);
+    clip(dataL, dataR, maxlen);
 
     // Possibly record in a file
     _mutexRecord.lock();
@@ -570,8 +585,8 @@ void Synth::readData(float *data1, float *data2, quint32 maxlen)
         // Interleave and write
         for (quint32 i = 0; i < maxlen; i++)
         {
-            _dataWav[2 * i + 1] = data1[i];
-            _dataWav[2 * i]     = data2[i];
+            _dataWav[2 * i + 1] = dataL[i];
+            _dataWav[2 * i]     = dataR[i];
         }
         _recordStream.writeRawData(reinterpret_cast<char*>(_dataWav), static_cast<int>(maxlen * 8));
 

@@ -65,7 +65,7 @@ public:
     void pause(bool isOn);
 
     // Following functions are executed by the audio server (thread 2)
-    void readData(float *data1, float *data2, quint32 maxlen);
+    void readData(float *dataL, float *dataR, quint32 maxlen);
     void setFormat(AudioFormat format);
 
 signals:
@@ -148,6 +148,7 @@ private:
     // Effects
     int _choLevel, _choDepth, _choFrequency;
     stk::FreeVerb _reverb;
+    bool _reverbOn;
     QMutex _mutexReverb, _mutexSynchro;
 
     // Clipping state
@@ -160,7 +161,7 @@ private:
     quint32 _recordLength;
     QMutex _mutexRecord;
 
-    float * _fTmpSumRev1, * _fTmpSumRev2, * _dataWav;
+    float * _fTmpSumRevL, * _fTmpSumRevR, * _dataWav;
     quint32 _bufferSize;
 
     ConfManager * _configuration;

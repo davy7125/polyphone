@@ -41,7 +41,7 @@ public:
     void off();
 
     // Generate data
-    void addData(float * dataR, float * dataL, quint32 len);
+    void addData(float * dataL, float * dataR, quint32 len);
 
 private:
     void initBuffer(quint32 size);

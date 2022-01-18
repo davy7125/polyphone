@@ -61,8 +61,10 @@ protected:
     void generateData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, quint32 len)
     {
         // Initialize data
-        for (quint32 i = 0; i < len; i++)
-            dataL[i] = dataR[i] = dataRevL[i] = dataRevR[i] = 0;
+        memset(dataL, 0, len * sizeof(float));
+        memset(dataR, 0, len * sizeof(float));
+        memset(dataRevL, 0, len * sizeof(float));
+        memset(dataRevR, 0, len * sizeof(float));
 
         _mutexVoices.lock();
 

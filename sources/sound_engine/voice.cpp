@@ -51,7 +51,8 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int ini
     _isRunning(false),
     _deltaPos(0),
     _valPrec(0),
-    _x1(0), _x2(0), _y1(0), _y2(0)
+    _x1(0), _x2(0), _y1(0), _y2(0),
+    _arrayLength(0)
 {
     // Equal temperament by default
     memset(_temperament, 0, 12 * sizeof(double));
@@ -62,6 +63,14 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int ini
 
 Voice::~Voice()
 {
+    if (_arrayLength != 0)
+    {
+        delete [] _dataModArray;
+        delete [] _modLfoArray;
+        delete [] _vibLfoArray;
+        delete [] _modPitchArray;
+        delete [] _modFreqArray;
+    }
     delete _voiceParam;
 }
 
@@ -99,11 +108,8 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 
     // Synchronization delay (stereo samples)
     quint32 nbNullValues = qMin(len, _delayStart);
-    for (quint32 i = 0; i < nbNullValues; i++)
-    {
-        dataL[i] = 0;
-        dataR[i] = 0;
-    }
+    memset(dataL, 0, nbNullValues * sizeof(float));
+    memset(dataR, 0, nbNullValues * sizeof(float));
     _delayStart -= nbNullValues;
     len -= nbNullValues;
     if (len == 0)
@@ -117,18 +123,31 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     bool endSample = false;
 
     // Prepare arrays
-    float * dataMod = new float[len];
-    float * modLfo = new float[len];
-    float * vibLfo = new float[len];
-    float * modPitch = new float[len+1];
-    double * modFreq = new double[len];
+    if (len > _arrayLength)
+    {
+        if (_arrayLength != 0)
+        {
+            delete [] _dataModArray;
+            delete [] _modLfoArray;
+            delete [] _vibLfoArray;
+            delete [] _modPitchArray;
+            delete [] _modFreqArray;
+        }
+        _dataModArray = new float[len];
+        _modLfoArray = new float[len];
+        _vibLfoArray = new float[len];
+        _modPitchArray = new float[len+1];
+        _modFreqArray = new double[len];
+
+        _arrayLength = len;
+    }
 
     /// ENVELOPPE DE MODULATION ///
-    _enveloppeMod.applyEnveloppe(dataMod, len, _release, playedNote, 1.0f, _voiceParam);
+    _enveloppeMod.applyEnveloppe(_dataModArray, len, _release, playedNote, 1.0f, _voiceParam);
 
     /// LFOs ///
-    _modLFO.getData(modLfo, len, static_cast<float>(v_modLfoFreq), v_modLfoDelay);
-    _vibLFO.getData(vibLfo, len, static_cast<float>(v_vibLfoFreq), v_vibLfoDelay);
+    _modLFO.getData(_modLfoArray, len, static_cast<float>(v_modLfoFreq), v_modLfoDelay);
+    _vibLFO.getData(_vibLfoArray, len, static_cast<float>(v_vibLfoFreq), v_vibLfoDelay);
 
     // Pitch modulation
     qint32 temperamentFineTune = _temperament[(playedNote - _temperamentRelativeKey + 12) % 12] -
@@ -136,19 +155,19 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     double deltaPitchFixed = -12. * qLn(static_cast<double>(_audioSmplRate) / _smplRate * 440. / _tuningFork) / 0.69314718056 +
             (playedNote - v_rootkey) * 0.01 * v_scaleTune + 0.01 * (v_fineTune + temperamentFineTune) + v_coarseTune;
     for (quint32 i = 0; i < len; i++)
-        modPitch[i + 1] = static_cast<float>(
+        _modPitchArray[i + 1] = static_cast<float>(
                     deltaPitchFixed + 0.01 * static_cast<double>(
-                        dataMod[i] * v_modEnvToPitch + modLfo[i] * v_modLfoToPitch + vibLfo[i] * v_vibLfoToPitch));
+                        _dataModArray[i] * v_modEnvToPitch + _modLfoArray[i] * v_modLfoToPitch + _vibLfoArray[i] * v_vibLfoToPitch));
 
     // Convert into a cumulated distance between points
-    modPitch[0] = _deltaPos + 1;
+    _modPitchArray[0] = _deltaPos + 1;
     for (quint32 i = 1; i <= len; i++)
-        modPitch[i] = qMin(qMax(0.001f, EnveloppeVol::fastPow2(modPitch[i] / 12)), 64.f) + modPitch[i-1];
-    _deltaPos = modPitch[len];
+        _modPitchArray[i] = qMin(qMax(0.001f, EnveloppeVol::fastPow2(_modPitchArray[i] / 12)), 64.f) + _modPitchArray[i-1];
+    _deltaPos = _modPitchArray[len];
     _deltaPos = _deltaPos - ceil(_deltaPos);
 
     // Resample data
-    quint32 nbDataTmp = static_cast<quint32>(ceil(static_cast<double>(modPitch[len]))) - 1;
+    quint32 nbDataTmp = static_cast<quint32>(ceil(static_cast<double>(_modPitchArray[len]))) - 1;
     qint32 * dataTmp = new qint32[nbDataTmp + 2];
     dataTmp[0] = _valPrec;
     dataTmp[1] = _valBase;
@@ -159,7 +178,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     qint32 val1, val2;
     for (quint32 i = 0; i < len; i++)
     {
-        pos = static_cast<double>(modPitch[i]);
+        pos = static_cast<double>(_modPitchArray[i]);
         val1 = dataTmp[static_cast<quint32>(floor(pos))];
         val2 = dataTmp[static_cast<quint32>(ceil(pos))];
         pos -= floor(pos);
@@ -170,19 +189,19 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     // Low-pass filter
     for (quint32 i = 0; i < len; i++)
     {
-        modFreq[i] = v_filterFreq * static_cast<double>(
-                    EnveloppeVol::fastPow2((dataMod[i] * v_modEnvToFilterFc + modLfo[i] * v_modLfoToFilterFreq) / 1200));
-        if (modFreq[i] > 20000)
-            modFreq[i] = 20000;
-        else if (modFreq[i] < 20)
-            modFreq[i] = 20;
+        _modFreqArray[i] = v_filterFreq * static_cast<double>(
+                    EnveloppeVol::fastPow2((_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) / 1200));
+        if (_modFreqArray[i] > 20000)
+            _modFreqArray[i] = 20000;
+        else if (_modFreqArray[i] < 20)
+            _modFreqArray[i] = 20;
     }
     double a0, a1, a2, b1, b2, valTmp;
     double filterQ = v_filterQ - 3.01; // So that a value of 0 gives a non-resonant low pass
     double q_lin = qPow(10, filterQ / 20.); // If filterQ is -3.01, q_lin is 1/sqrt(2)
     for (quint32 i = 0; i < len; i++)
     {
-        biQuadCoefficients(a0, a1, a2, b1, b2, modFreq[i], q_lin);
+        biQuadCoefficients(a0, a1, a2, b1, b2, _modFreqArray[i], q_lin);
         valTmp = a0 * static_cast<double>(dataL[i]) + a1 * _x1 + a2 * _x2 - b1 * _y1 - b2 * _y2;
         _x2 = _x1;
         _x1 = static_cast<double>(dataL[i]);
@@ -194,14 +213,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     // Volume modulation with values from the mod LFO converted to dB
     if (v_modLfoToVolume <= 0.1 || v_modLfoToVolume >= 0.1)
         for (quint32 i = 0; i < len; i++)
-            dataL[i] *= static_cast<float>(qPow(10., 0.05 * v_modLfoToVolume * static_cast<double>(modLfo[i])));
-
-    // Destroy arrays
-    delete [] dataMod;
-    delete [] modLfo;
-    delete [] vibLfo;
-    delete [] modPitch;
-    delete [] modFreq;
+            dataL[i] *= static_cast<float>(qPow(10., 0.05 * v_modLfoToVolume * static_cast<double>(_modLfoArray[i])));
 
     // Apply the volume envelop
     bool bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release, playedNote,

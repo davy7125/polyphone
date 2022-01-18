@@ -76,7 +76,7 @@ void CalibrationSinus::off()
     _mutex.unlock();
 }
 
-void CalibrationSinus::addData(float * dataR, float * dataL, quint32 len)
+void CalibrationSinus::addData(float * dataL, float * dataR, quint32 len)
 {
     if (!_sinus)
         return;
@@ -113,7 +113,7 @@ void CalibrationSinus::addData(float * dataR, float * dataL, quint32 len)
         else if (_currentLevel < level)
             _currentLevel += 0.0002f;
 
-        dataR[i] += _currentLevel * _buf[i];
         dataL[i] += _currentLevel * _buf[i];
+        dataR[i] += _currentLevel * _buf[i];
     }
 }
