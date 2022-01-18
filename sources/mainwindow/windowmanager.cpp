@@ -102,6 +102,8 @@ void WindowManager::openNewSoundfont()
                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
     connect(editor, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
     connect(editor, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
+    connect(editor, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
+    connect(editor, SIGNAL(recorderDisplayChanged(bool)), this, SIGNAL(recorderDisplayChanged(bool)));
     _editors << editor;
 
     // Initialize and display it
