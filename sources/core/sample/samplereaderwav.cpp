@@ -81,14 +81,17 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
         pos += 4;
 
         // Section size
-        quint32Reversed sectionSize;
-        in >> sectionSize;
+        quint32Reversed sectionSizeTmp;
+        in >> sectionSizeTmp;
+        quint32 sectionSize = sectionSizeTmp.value;
+        if (sectionSize % 2 == 1)
+            sectionSize++; // Only even sizes
         pos += 4;
 
         if (!strcmp(section, "fmt "))
         {
             // Read format of the audio signal
-            if (sectionSize.value < 16 || sectionSize.value > 40)
+            if (sectionSize < 16 || sectionSize > 40)
                 return FILE_CORRUPT;
 
             quint16Reversed tmp16;
@@ -104,14 +107,14 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
             info.wBpsFile = tmp16.value;
 
             // Skip the rest
-            in.skipRawData(static_cast<int>(sectionSize.value) - 16);
+            in.skipRawData(static_cast<int>(sectionSize) - 16);
 
             smplOk = true;
         }
         else if (!strcmp(section, "smpl"))
         {
             // Informations about the sample
-            if (sectionSize.value >= 36)
+            if (sectionSize >= 36)
             {
                 in.skipRawData(12); // Manufacturer, Product, Sample period
 
@@ -138,7 +141,7 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
                 in.skipRawData(16); // SMPTE Format, SMPTE Offset, Num Sample Loops, Sampler Data
 
                 // Loop points defined?
-                if (sectionSize.value >= 60)
+                if (sectionSize >= 60)
                 {
                     in.skipRawData(8); // Cue Point ID, Type
 
@@ -148,34 +151,34 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
                     info.loops << QPair<quint32, quint32>(loopStart.value, loopEnd.value + 1);
 
                     // Skip the rest
-                    in.skipRawData(static_cast<int>(sectionSize.value) - 52);
+                    in.skipRawData(static_cast<int>(sectionSize) - 52);
                 }
                 else
-                    in.skipRawData(static_cast<int>(sectionSize.value) - 36);
+                    in.skipRawData(static_cast<int>(sectionSize) - 36);
             }
             else
-                in.skipRawData(static_cast<int>(sectionSize.value));
+                in.skipRawData(static_cast<int>(sectionSize));
         }
         else if (!strcmp(section, "data"))
         {
-            if (sectionSize.value == 0)
-                sectionSize.value = fullLength - pos;
+            if (sectionSize == 0)
+                sectionSize = fullLength - pos;
             info.dwStart = pos;
             if (info.wBpsFile != 0 && info.wChannels != 0)
-                info.dwLength = qMin(sectionSize.value, fullLength - pos) / (info.wBpsFile * info.wChannels / 8);
+                info.dwLength = qMin(sectionSize, fullLength - pos) / (info.wBpsFile * info.wChannels / 8);
             dataOk = true;
 
             // Skip it
-            in.skipRawData(static_cast<int>(sectionSize.value));
+            in.skipRawData(static_cast<int>(sectionSize));
         }
         else
         {
             // Skip the bloc
-            in.skipRawData(static_cast<int>(sectionSize.value));
+            in.skipRawData(static_cast<int>(sectionSize));
         }
 
         // Update position
-        pos += sectionSize.value;
+        pos += sectionSize;
     }
 
     // Check that we have what we need
