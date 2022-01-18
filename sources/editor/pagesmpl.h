@@ -79,7 +79,9 @@ private slots:
     void on_pushAutoTune_clicked();
     void onLinkClicked(EltID id);
     void onCutOrdered(int start, int end);
-    bool cutSample(EltID id, quint32 start, quint32 end);
+    bool cutSample(EltID id, quint32 start, quint32 end, EltID &createdSmplId);
+    QString findDuplicateName(EltID smplId);
+    QString getName(QString name, int maxCharacters, int suffixNumber);
     void on_checkLectureBoucle_clicked(bool checked);
 
 private:

@@ -947,8 +947,8 @@ void PageSmpl::setGainSample(int val)
 
 void PageSmpl::updateSinus()
 {
-     _synth->setSinus(_currentIds.count() == 1 && ui->pushLecture->isChecked() && ui->checkLectureSinus->isChecked(),
-                      ui->spinRootKey->value());
+    _synth->setSinus(_currentIds.count() == 1 && ui->pushLecture->isChecked() && ui->checkLectureSinus->isChecked(),
+                     ui->spinRootKey->value());
 }
 
 void PageSmpl::setStereo(bool val)
@@ -1093,12 +1093,14 @@ void PageSmpl::onCutOrdered(int start, int end)
     msgBox.setIcon(QMessageBox::Warning);
     msgBox.setWindowTitle(tr("Warning"));
     msgBox.setText(tr("Are you sure to cut the sample from <b>%1</b> to <b>%2</b>?").arg(start).arg(end));
-    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::YesAll);
     msgBox.button(QMessageBox::Yes)->setText(tr("&Yes"));
     msgBox.button(QMessageBox::No)->setText(tr("&No"));
+    msgBox.button(QMessageBox::YesAll)->setText(tr("Yes and &create another sample"));
     msgBox.setDefaultButton(QMessageBox::No);
 
-    if (msgBox.exec() == QMessageBox::No)
+    int dialogResult = msgBox.exec();
+    if (dialogResult == QMessageBox::No)
         return;
 
     // Current sample id, with possibly its stereo sample id
@@ -1111,19 +1113,41 @@ void PageSmpl::onCutOrdered(int start, int end)
             id2.indexElt = -1;
     }
 
+    EltID createdSmplId(elementUnknown);
+    if (dialogResult == QMessageBox::YesAll)
+        createdSmplId = id;
+
     // Cut between start and end
-    bool updateNeeded = cutSample(id, static_cast<quint32>(start), static_cast<quint32>(end));
+    bool updateNeeded = cutSample(id, static_cast<quint32>(start), static_cast<quint32>(end), createdSmplId);
     if (id2.indexElt != -1)
-        updateNeeded |= cutSample(id2, static_cast<quint32>(start), static_cast<quint32>(end));
+    {
+        EltID createdSmplId2 = createdSmplId;
+        updateNeeded |= cutSample(id2, static_cast<quint32>(start), static_cast<quint32>(end), createdSmplId2);
+        if (createdSmplId.typeElement != elementUnknown && createdSmplId2.typeElement != elementUnknown)
+        {
+            // Link the created samples
+            AttributeValue val = _sf2->get(id, champ_sfSampleType);
+            _sf2->set(createdSmplId, champ_sfSampleType, val);
+            val = _sf2->get(id2, champ_sfSampleType);
+            _sf2->set(createdSmplId2, champ_sfSampleType, val);
+            val.wValue = createdSmplId2.indexElt;
+            _sf2->set(createdSmplId, champ_wSampleLink, val);
+            val.wValue = createdSmplId.indexElt;
+            _sf2->set(createdSmplId2, champ_wSampleLink, val);
+        }
+    }
 
     if (updateNeeded)
         _sf2->endEditing(getEditingSource() + ":update");
 }
 
-bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end)
+bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end, EltID &createdSmplId)
 {
     if (end > _sf2->get(id, champ_dwLength).dwValue)
+    {
+        createdSmplId.typeElement = elementUnknown;
         return false;
+    }
 
     quint16 wBps = _sf2->get(id, champ_wBpsInit).wValue;
     if (wBps > 16)
@@ -1158,6 +1182,30 @@ bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end)
         _sf2->set(id, champ_dwEndLoop, val);
     }
 
+    // Possibly create another sample with the removed part
+    if (createdSmplId.typeElement != elementUnknown)
+    {
+        // Data
+        createdSmplId.indexElt = _sf2->add(createdSmplId);
+        QByteArray midData = baData.mid(start * wBps / 8, (end - start) * wBps / 8);
+        _sf2->set(createdSmplId, wBps == 24 ? champ_sampleDataFull24 : champ_sampleData16, midData);
+        val.dwValue = static_cast<quint32>(8 * midData.size()) / wBps;
+        _sf2->set(createdSmplId, champ_dwLength, val);
+        val.wValue = wBps;
+        _sf2->set(createdSmplId, champ_wBpsInit, val);
+        val = _sf2->get(id, champ_dwSampleRate);
+        _sf2->set(createdSmplId, champ_dwSampleRate, val);
+
+        // Copy some attributes
+        val = _sf2->get(id, champ_byOriginalPitch);
+        _sf2->set(createdSmplId, champ_byOriginalPitch, val);
+        val = _sf2->get(id, champ_chPitchCorrection);
+        _sf2->set(createdSmplId, champ_chPitchCorrection, val);
+
+        // Name
+        _sf2->set(createdSmplId, champ_name, findDuplicateName(id));
+    }
+
     // Remove data and update the sample
     baData = baData.left(start * wBps / 8) + baData.right(baData.size() - static_cast<int>(end * wBps / 8));
     _sf2->set(id, wBps == 24 ? champ_sampleDataFull24 : champ_sampleData16, baData);
@@ -1165,6 +1213,54 @@ bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end)
     _sf2->set(id, champ_dwLength, val);
 
     return true;
+}
+
+QString PageSmpl::findDuplicateName(EltID smplId)
+{
+    // Browse all names
+    QStringList listName;
+    QString currentName;
+    EltID idTmp = smplId;
+    foreach (int i, _sf2->getSiblings(smplId))
+    {
+        idTmp.indexElt = i;
+        if (i == smplId.indexElt)
+        {
+            currentName = _sf2->getQstr(idTmp, champ_name);
+            listName << currentName;
+        }
+        else
+            listName << _sf2->getQstr(idTmp, champ_name);
+    }
+
+    // If the name ends with a suffix such as "-1", possibly remove it
+    QRegExp regEx("-[0-9]+$");
+    int suffixPos = currentName.indexOf(regEx);
+    if (suffixPos >= 0)
+    {
+        // The name without the suffix must exist
+        QString tmp = currentName.left(suffixPos);
+        if (listName.contains(tmp))
+            currentName = tmp;
+    }
+
+    int suffixNumber = 0;
+    while (listName.contains(getName(currentName, 20, suffixNumber), Qt::CaseInsensitive) && suffixNumber < 100)
+    {
+        suffixNumber++;
+    }
+    return getName(currentName, 20, suffixNumber);
+}
+
+QString PageSmpl::getName(QString name, int maxCharacters, int suffixNumber)
+{
+    if (suffixNumber == 0)
+        return name.left(maxCharacters);
+    QString suffix = QString::number(suffixNumber);
+    int suffixSize = suffix.length();
+    if (suffixSize > 3 || maxCharacters < suffixSize + 1)
+        return name.left(maxCharacters);
+    return name.left(maxCharacters - suffixSize - 1) + "-" + suffix;
 }
 
 void PageSmpl::on_checkLectureBoucle_clicked(bool checked)
@@ -1197,5 +1293,5 @@ void PageSmpl::updateLoopQuality()
         }
     }
     else
-       ui->iconLoopWarning->setPixmap(QPixmap());
+        ui->iconLoopWarning->setPixmap(QPixmap());
 }

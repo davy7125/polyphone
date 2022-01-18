@@ -25,12 +25,12 @@
 <context>
     <name>AbstractTool</name>
     <message>
-        <location filename="editor/tools/abstracttool.cpp" line="122"/>
+        <location filename="editor/tools/abstracttool.cpp" line="123"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="editor/tools/abstracttool.cpp" line="127"/>
+        <location filename="editor/tools/abstracttool.cpp" line="128"/>
         <source>Information</source>
         <translation>Подаци</translation>
     </message>
@@ -2163,12 +2163,12 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="399"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="400"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="399"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="400"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
@@ -2305,6 +2305,15 @@ repository</source>
     </message>
 </context>
 <context>
+    <name>GraphFilterFrequencies</name>
+    <message>
+        <location filename="editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="63"/>
+        <source>kHz</source>
+        <comment>unit for kilo Herz</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GraphSpace</name>
     <message>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="128"/>
@@ -2328,11 +2337,27 @@ repository</source>
     </message>
 </context>
 <context>
+    <name>GraphicsViewEnvelop</name>
+    <message>
+        <location filename="editor/graphics/graphicsviewenvelop.cpp" line="353"/>
+        <source>s</source>
+        <comment>unit for seconds</comment>
+        <translation type="unfinished">s</translation>
+    </message>
+</context>
+<context>
     <name>GraphicsWave</name>
     <message>
-        <location filename="editor/graphics/graphicswave.cpp" line="181"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="182"/>
         <source>Multiple selection</source>
         <translation type="unfinished">Вишеструки одабир</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicswave.cpp" line="201"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="204"/>
+        <source>s</source>
+        <comment>unit for seconds</comment>
+        <translation type="unfinished">s</translation>
     </message>
 </context>
 <context>
@@ -3173,7 +3198,8 @@ rate</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="275"/>
         <source>Hz</source>
-        <translation>Hz</translation>
+        <comment>unit for Herz</comment>
+        <translation type="unfinished">Hz</translation>
     </message>
 </context>
 <context>
@@ -3519,6 +3545,12 @@ rate</source>
         <source>&amp;No</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="editor/pagesmpl.cpp" line="1099"/>
+        <source>Yes and &amp;create another sample</source>
+        <oldsource>Yes and create another &amp;sample</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PageTable</name>
@@ -3546,52 +3578,52 @@ rate</source>
         <location filename="core/sample/sound.cpp" line="70"/>
         <location filename="core/sample/sound.cpp" line="74"/>
         <location filename="core/sample/sound.cpp" line="78"/>
-        <location filename="core/sample/sound.cpp" line="192"/>
+        <location filename="core/sample/sound.cpp" line="196"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="71"/>
+        <location filename="core/sample/sampleloader.cpp" line="79"/>
         <source>Sample &quot;%1L&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="76"/>
+        <location filename="core/sample/sampleloader.cpp" line="84"/>
         <source>Sample &quot;%1R&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="84"/>
+        <location filename="core/sample/sampleloader.cpp" line="92"/>
         <source>Sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="97"/>
+        <location filename="core/sample/sampleloader.cpp" line="105"/>
         <source>&amp;Replace</source>
         <translation>За&amp;мени</translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="98"/>
+        <location filename="core/sample/sampleloader.cpp" line="106"/>
         <source>R&amp;eplace all</source>
         <translation>Замени св&amp;е</translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="99"/>
+        <location filename="core/sample/sampleloader.cpp" line="107"/>
         <source>&amp;Duplicate</source>
         <translation>У&amp;двостручи</translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="100"/>
+        <location filename="core/sample/sampleloader.cpp" line="108"/>
         <source>D&amp;uplicate all</source>
         <translation>&amp;Удвостручи све</translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="101"/>
+        <location filename="core/sample/sampleloader.cpp" line="109"/>
         <source>&amp;Ignore</source>
         <translation>Занемар&amp;и</translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="102"/>
+        <location filename="core/sample/sampleloader.cpp" line="110"/>
         <source>I&amp;gnore all</source>
         <translation>Занемари с&amp;ве</translation>
     </message>
@@ -4881,17 +4913,17 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolAutoLoop</name>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="75"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="199"/>
         <source>Failed to loop sample &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="78"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="202"/>
         <source>The following samples couldn&apos;t be looped:</source>
         <translation>Ови узорци не могу да се понављају (врте):</translation>
     </message>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="83"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="207"/>
         <source>Possible reasons: too short or too turbulent.</source>
         <translation>Могући узроци: прекратак или несталан.</translation>
     </message>
@@ -5590,7 +5622,8 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="147"/>
         <source>Hz</source>
-        <translation>Hz</translation>
+        <comment>unit for Herz</comment>
+        <translation type="unfinished">Hz</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="171"/>
@@ -6401,7 +6434,7 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/trim_start/tooltrimstart.h" line="64"/>
+        <location filename="editor/tools/trim_start/tooltrimstart.h" line="67"/>
         <source>Remove blank at start</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6463,22 +6496,22 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeView</name>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="927"/>
+        <location filename="editor/tree/treeview.cpp" line="951"/>
         <source>instrument</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="927"/>
+        <location filename="editor/tree/treeview.cpp" line="951"/>
         <source>preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="948"/>
+        <location filename="editor/tree/treeview.cpp" line="972"/>
         <source>Warning</source>
         <translation type="unfinished">Упозорење</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="948"/>
+        <location filename="editor/tree/treeview.cpp" line="972"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6623,58 +6656,58 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>WindowManager</name>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="89"/>
+        <location filename="mainwindow/windowmanager.cpp" line="90"/>
         <source>Settings</source>
         <translation>Подешавања</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="125"/>
+        <location filename="mainwindow/windowmanager.cpp" line="122"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="183"/>
+        <location filename="mainwindow/windowmanager.cpp" line="180"/>
         <source>Online repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="231"/>
+        <location filename="mainwindow/windowmanager.cpp" line="228"/>
         <source>Save before exiting?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="234"/>
+        <location filename="mainwindow/windowmanager.cpp" line="231"/>
         <source>untitled</source>
         <translation type="unfinished">без назива</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="235"/>
+        <location filename="mainwindow/windowmanager.cpp" line="232"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="124"/>
-        <location filename="mainwindow/windowmanager.cpp" line="236"/>
+        <location filename="mainwindow/windowmanager.cpp" line="121"/>
+        <location filename="mainwindow/windowmanager.cpp" line="233"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="238"/>
+        <location filename="mainwindow/windowmanager.cpp" line="235"/>
         <source>&amp;Save</source>
         <translation>&amp;Сачувај</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="239"/>
+        <location filename="mainwindow/windowmanager.cpp" line="236"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Поништи</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="240"/>
+        <location filename="mainwindow/windowmanager.cpp" line="237"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Изађи не сачувавши</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="328"/>
+        <location filename="mainwindow/windowmanager.cpp" line="325"/>
         <source>User area</source>
         <translation type="unfinished"></translation>
     </message>

@@ -25,12 +25,12 @@
 <context>
     <name>AbstractTool</name>
     <message>
-        <location filename="editor/tools/abstracttool.cpp" line="122"/>
+        <location filename="editor/tools/abstracttool.cpp" line="123"/>
         <source>Warning</source>
         <translation>Atención</translation>
     </message>
     <message>
-        <location filename="editor/tools/abstracttool.cpp" line="127"/>
+        <location filename="editor/tools/abstracttool.cpp" line="128"/>
         <source>Information</source>
         <translation>Información</translation>
     </message>
@@ -2164,12 +2164,12 @@ en línea</translation>
         <translation>Archivos de sonido</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="399"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="400"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="399"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="400"/>
         <source>Warning</source>
         <translation>Atención</translation>
     </message>
@@ -2306,6 +2306,15 @@ en línea</translation>
     </message>
 </context>
 <context>
+    <name>GraphFilterFrequencies</name>
+    <message>
+        <location filename="editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="63"/>
+        <source>kHz</source>
+        <comment>unit for kilo Herz</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GraphSpace</name>
     <message>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="128"/>
@@ -2329,11 +2338,27 @@ en línea</translation>
     </message>
 </context>
 <context>
+    <name>GraphicsViewEnvelop</name>
+    <message>
+        <location filename="editor/graphics/graphicsviewenvelop.cpp" line="353"/>
+        <source>s</source>
+        <comment>unit for seconds</comment>
+        <translation type="unfinished">s</translation>
+    </message>
+</context>
+<context>
     <name>GraphicsWave</name>
     <message>
-        <location filename="editor/graphics/graphicswave.cpp" line="181"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="182"/>
         <source>Multiple selection</source>
         <translation>Selección múltiple</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicswave.cpp" line="201"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="204"/>
+        <source>s</source>
+        <comment>unit for seconds</comment>
+        <translation type="unfinished">s</translation>
     </message>
 </context>
 <context>
@@ -3177,7 +3202,8 @@ de muestreo</translation>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="275"/>
         <source>Hz</source>
-        <translation>Hz</translation>
+        <comment>unit for Herz</comment>
+        <translation type="unfinished">Hz</translation>
     </message>
 </context>
 <context>
@@ -3522,6 +3548,12 @@ de muestreo</translation>
         <source>&amp;No</source>
         <translation>&amp;No</translation>
     </message>
+    <message>
+        <location filename="editor/pagesmpl.cpp" line="1099"/>
+        <source>Yes and &amp;create another sample</source>
+        <oldsource>Yes and create another &amp;sample</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PageTable</name>
@@ -3549,52 +3581,52 @@ de muestreo</translation>
         <location filename="core/sample/sound.cpp" line="70"/>
         <location filename="core/sample/sound.cpp" line="74"/>
         <location filename="core/sample/sound.cpp" line="78"/>
-        <location filename="core/sample/sound.cpp" line="192"/>
+        <location filename="core/sample/sound.cpp" line="196"/>
         <source>Warning</source>
         <translation>Atención</translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="71"/>
+        <location filename="core/sample/sampleloader.cpp" line="79"/>
         <source>Sample &quot;%1L&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="76"/>
+        <location filename="core/sample/sampleloader.cpp" line="84"/>
         <source>Sample &quot;%1R&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="84"/>
+        <location filename="core/sample/sampleloader.cpp" line="92"/>
         <source>Sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="97"/>
+        <location filename="core/sample/sampleloader.cpp" line="105"/>
         <source>&amp;Replace</source>
         <translation>&amp;Reemplazar</translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="98"/>
+        <location filename="core/sample/sampleloader.cpp" line="106"/>
         <source>R&amp;eplace all</source>
         <translation>R&amp;eemplazar todo</translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="99"/>
+        <location filename="core/sample/sampleloader.cpp" line="107"/>
         <source>&amp;Duplicate</source>
         <translation>&amp;Duplicar</translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="100"/>
+        <location filename="core/sample/sampleloader.cpp" line="108"/>
         <source>D&amp;uplicate all</source>
         <translation>D&amp;uplicar todo</translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="101"/>
+        <location filename="core/sample/sampleloader.cpp" line="109"/>
         <source>&amp;Ignore</source>
         <translation>&amp;Ignorar</translation>
     </message>
     <message>
-        <location filename="core/sample/sampleloader.cpp" line="102"/>
+        <location filename="core/sample/sampleloader.cpp" line="110"/>
         <source>I&amp;gnore all</source>
         <translation>I&amp;gnorar todo</translation>
     </message>
@@ -4886,17 +4918,17 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolAutoLoop</name>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="75"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="199"/>
         <source>Failed to loop sample &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="78"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="202"/>
         <source>The following samples couldn&apos;t be looped:</source>
         <translation>No se ha podido hacer loop en las siguientes muestras:</translation>
     </message>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="83"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="207"/>
         <source>Possible reasons: too short or too turbulent.</source>
         <translation>Posibles causas: muy corto o muy turbulento.</translation>
     </message>
@@ -5593,7 +5625,8 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="147"/>
         <source>Hz</source>
-        <translation>Hz</translation>
+        <comment>unit for Herz</comment>
+        <translation type="unfinished">Hz</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="171"/>
@@ -6402,7 +6435,7 @@ Other soundfont editors might display other units.</source>
         <translation>Procesamiento de muestras</translation>
     </message>
     <message>
-        <location filename="editor/tools/trim_start/tooltrimstart.h" line="64"/>
+        <location filename="editor/tools/trim_start/tooltrimstart.h" line="67"/>
         <source>Remove blank at start</source>
         <translation>Eliminar silencio al inicio</translation>
     </message>
@@ -6458,28 +6491,28 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeitemdelegate.cpp" line="238"/>
         <source>mute</source>
-        <translation type="unfinished">silenciar</translation>
+        <translation>silenciar</translation>
     </message>
 </context>
 <context>
     <name>TreeView</name>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="927"/>
+        <location filename="editor/tree/treeview.cpp" line="951"/>
         <source>instrument</source>
         <translation>instrumento</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="927"/>
+        <location filename="editor/tree/treeview.cpp" line="951"/>
         <source>preset</source>
         <translation>preset</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="948"/>
+        <location filename="editor/tree/treeview.cpp" line="972"/>
         <source>Warning</source>
-        <translation type="unfinished">Atención</translation>
+        <translation>Atención</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="948"/>
+        <location filename="editor/tree/treeview.cpp" line="972"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6624,58 +6657,58 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>WindowManager</name>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="89"/>
+        <location filename="mainwindow/windowmanager.cpp" line="90"/>
         <source>Settings</source>
         <translation>Preferencias</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="125"/>
+        <location filename="mainwindow/windowmanager.cpp" line="122"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>No puede abrir el archivo &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="183"/>
+        <location filename="mainwindow/windowmanager.cpp" line="180"/>
         <source>Online repository</source>
         <translation>Repositorio en línea</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="231"/>
+        <location filename="mainwindow/windowmanager.cpp" line="228"/>
         <source>Save before exiting?</source>
         <translation>Guardar antes de salir?</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="234"/>
+        <location filename="mainwindow/windowmanager.cpp" line="231"/>
         <source>untitled</source>
         <translation>sin nombre</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="235"/>
+        <location filename="mainwindow/windowmanager.cpp" line="232"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>El archivo &quot;%1&quot; ha sido modificado.</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="124"/>
-        <location filename="mainwindow/windowmanager.cpp" line="236"/>
+        <location filename="mainwindow/windowmanager.cpp" line="121"/>
+        <location filename="mainwindow/windowmanager.cpp" line="233"/>
         <source>Warning</source>
         <translation>Atención</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="238"/>
+        <location filename="mainwindow/windowmanager.cpp" line="235"/>
         <source>&amp;Save</source>
         <translation>&amp;Guardar</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="239"/>
+        <location filename="mainwindow/windowmanager.cpp" line="236"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Deshacer</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="240"/>
+        <location filename="mainwindow/windowmanager.cpp" line="237"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Salir sin guardar</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="328"/>
+        <location filename="mainwindow/windowmanager.cpp" line="325"/>
         <source>User area</source>
         <translation>Área de usuario</translation>
     </message>
