@@ -2038,7 +2038,7 @@ repository</source>
         <translation>Impossibile aprire il file</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="207"/>
+        <location filename="editor/editor.cpp" line="209"/>
         <source>Untitled</source>
         <translation>Senza Titolo</translation>
     </message>
@@ -2530,47 +2530,47 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="200"/>
+        <location filename="mainwindow/mainwindow.cpp" line="201"/>
         <source>&amp;Save</source>
         <translation>&amp;Salva</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="201"/>
+        <location filename="mainwindow/mainwindow.cpp" line="202"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annulla</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="202"/>
+        <location filename="mainwindow/mainwindow.cpp" line="203"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Esci senza salvare</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="186"/>
+        <location filename="mainwindow/mainwindow.cpp" line="187"/>
         <source>Warning</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="176"/>
-        <source>untitled</source>
-        <translation>senza titolo</translation>
+        <location filename="mainwindow/mainwindow.cpp" line="178"/>
+        <source>Untitled</source>
+        <translation type="unfinished">Senza Titolo</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="187"/>
+        <location filename="mainwindow/mainwindow.cpp" line="188"/>
         <source>Save before exiting?</source>
         <translation>Salvare prima di uscire?</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="190"/>
+        <location filename="mainwindow/mainwindow.cpp" line="191"/>
         <source>The following files have been modified:</source>
         <translation>I seguenti file sono stati modificati:</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="197"/>
+        <location filename="mainwindow/mainwindow.cpp" line="198"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Il file &quot;%1 è stato modificato.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="274"/>
+        <location filename="mainwindow/mainwindow.cpp" line="275"/>
         <source>Opening files</source>
         <translation>Apertura file</translation>
     </message>
@@ -6308,35 +6308,40 @@ Other soundfont editors might display other units.</source>
         <translation>&amp;Esporta</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="142"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="62"/>
+        <source>Untitled</source>
+        <translation type="unfinished">Senza Titolo</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="148"/>
         <source>Select the destination directory</source>
         <translation>Seleziona la cartella di destinazione</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="158"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="187"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="164"/>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="202"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="199"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
         <source>Warning</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="158"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="164"/>
         <source>Invalid directory.</source>
         <translation>Directory non valido.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="187"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
         <source>At least one preset must be selected.</source>
         <translation>Almeno un preset deve essere selezionato.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="199"/>
         <source>The maximal number of soundfont to export is 127.</source>
         <translation>Il numero massimo di soudfont da esportare è 127.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="202"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
         <translation>Nel caso in cui vengono esportati alcuni soundfonts, il numero massimo di preset per soundfont è 127.</translation>
     </message>

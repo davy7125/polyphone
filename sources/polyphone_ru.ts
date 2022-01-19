@@ -2051,7 +2051,7 @@ repository</source>
         <translation>Не удалось открыть файл</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="207"/>
+        <location filename="editor/editor.cpp" line="209"/>
         <source>Untitled</source>
         <translation>Без заголовка</translation>
     </message>
@@ -2611,47 +2611,47 @@ repository</source>
         <translation>История</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="176"/>
-        <source>untitled</source>
-        <translation>без заголовка</translation>
+        <location filename="mainwindow/mainwindow.cpp" line="178"/>
+        <source>Untitled</source>
+        <translation type="unfinished">Без заголовка</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="186"/>
+        <location filename="mainwindow/mainwindow.cpp" line="187"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="187"/>
+        <location filename="mainwindow/mainwindow.cpp" line="188"/>
         <source>Save before exiting?</source>
         <translation>Сохранить перед выходом?</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="190"/>
+        <location filename="mainwindow/mainwindow.cpp" line="191"/>
         <source>The following files have been modified:</source>
         <translation>Следующие файлы были изменены:</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="197"/>
+        <location filename="mainwindow/mainwindow.cpp" line="198"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Файл «%1» был изменён.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="200"/>
+        <location filename="mainwindow/mainwindow.cpp" line="201"/>
         <source>&amp;Save</source>
         <translation>Со&amp;хранить</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="201"/>
+        <location filename="mainwindow/mainwindow.cpp" line="202"/>
         <source>&amp;Cancel</source>
         <translation>О&amp;тменить</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="202"/>
+        <location filename="mainwindow/mainwindow.cpp" line="203"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Не сохранять</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="274"/>
+        <location filename="mainwindow/mainwindow.cpp" line="275"/>
         <source>Opening files</source>
         <translation>Открытые файлы</translation>
     </message>
@@ -6410,35 +6410,40 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
         <translation>О&amp;тменить</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="142"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="62"/>
+        <source>Untitled</source>
+        <translation type="unfinished">Без заголовка</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="148"/>
         <source>Select the destination directory</source>
         <translation>Выбор каталога назначения</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="158"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="187"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="164"/>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="202"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="199"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="158"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="164"/>
         <source>Invalid directory.</source>
         <translation>Недопустимый каталог.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="187"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
         <source>At least one preset must be selected.</source>
         <translation>Должен быть выбран хотя бы один пресет.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="199"/>
         <source>The maximal number of soundfont to export is 127.</source>
         <translation>Максимальное количество SoundFont при экспорте составляет 127.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="202"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
         <translation>В случае, когда экспортируется несколько SoundFont, максимальное количество пресетов на каждый SoundFont составляет 127.</translation>
     </message>

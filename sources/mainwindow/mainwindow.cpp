@@ -173,9 +173,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
         {
             QString name = sm->getQstr(id, champ_name);
             if (name.isEmpty())
-                fileNames << tr("untitled");
-            else
-                fileNames << sm->getQstr(id, champ_name);
+                name = sm->getQstr(id, champ_filenameInitial).split(QRegExp("(/|\\\\)")).last();
+            if (name.isEmpty())
+                name = tr("Untitled");
+            fileNames << name;
         }
     }
 

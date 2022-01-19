@@ -2038,7 +2038,7 @@ repository</source>
         <translation>无法打开文件</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="207"/>
+        <location filename="editor/editor.cpp" line="209"/>
         <source>Untitled</source>
         <translation>未命名</translation>
     </message>
@@ -2530,47 +2530,47 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="200"/>
+        <location filename="mainwindow/mainwindow.cpp" line="201"/>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="201"/>
+        <location filename="mainwindow/mainwindow.cpp" line="202"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="202"/>
+        <location filename="mainwindow/mainwindow.cpp" line="203"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>不保存(&amp;N)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="186"/>
+        <location filename="mainwindow/mainwindow.cpp" line="187"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="176"/>
-        <source>untitled</source>
-        <translation>未命名</translation>
+        <location filename="mainwindow/mainwindow.cpp" line="178"/>
+        <source>Untitled</source>
+        <translation type="unfinished">未命名</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="187"/>
+        <location filename="mainwindow/mainwindow.cpp" line="188"/>
         <source>Save before exiting?</source>
         <translation>退出前是否保存文件？</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="190"/>
+        <location filename="mainwindow/mainwindow.cpp" line="191"/>
         <source>The following files have been modified:</source>
         <translation>下列文件已被修改：</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="197"/>
+        <location filename="mainwindow/mainwindow.cpp" line="198"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>文件 &quot;%1&quot; 已被修改。</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="274"/>
+        <location filename="mainwindow/mainwindow.cpp" line="275"/>
         <source>Opening files</source>
         <translation>正在打开文件</translation>
     </message>
@@ -6286,35 +6286,40 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished">导出</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="142"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="62"/>
+        <source>Untitled</source>
+        <translation type="unfinished">未命名</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="148"/>
         <source>Select the destination directory</source>
         <translation>选择目标目录</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="158"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="187"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="164"/>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="202"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="199"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="158"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="164"/>
         <source>Invalid directory.</source>
         <translation>路径不合法。</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="187"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
         <source>At least one preset must be selected.</source>
         <translation>必须至少选择一个预设。</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="199"/>
         <source>The maximal number of soundfont to export is 127.</source>
         <translation>一次最多只能导出 127 个音色库。</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="202"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
         <translation>导出音色库时，每个音色库的预设数不能超过 127。</translation>
     </message>

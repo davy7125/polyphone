@@ -2040,7 +2040,7 @@ repository</source>
         <translation>Nelze otevřít soubor</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="207"/>
+        <location filename="editor/editor.cpp" line="209"/>
         <source>Untitled</source>
         <translation>Bez názvu</translation>
     </message>
@@ -2532,47 +2532,47 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="200"/>
+        <location filename="mainwindow/mainwindow.cpp" line="201"/>
         <source>&amp;Save</source>
         <translation>&amp;Uložit</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="201"/>
+        <location filename="mainwindow/mainwindow.cpp" line="202"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Zrušit</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="202"/>
+        <location filename="mainwindow/mainwindow.cpp" line="203"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Zavřít bez uložení</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="186"/>
+        <location filename="mainwindow/mainwindow.cpp" line="187"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="176"/>
-        <source>untitled</source>
-        <translation>Bez názvu</translation>
+        <location filename="mainwindow/mainwindow.cpp" line="178"/>
+        <source>Untitled</source>
+        <translation type="unfinished">Bez názvu</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="187"/>
+        <location filename="mainwindow/mainwindow.cpp" line="188"/>
         <source>Save before exiting?</source>
         <translation>Uložit před ukončením?</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="190"/>
+        <location filename="mainwindow/mainwindow.cpp" line="191"/>
         <source>The following files have been modified:</source>
         <translation>Následující soubory byly změněny: </translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="197"/>
+        <location filename="mainwindow/mainwindow.cpp" line="198"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Soubor &quot;%1&quot; byl změněn.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="274"/>
+        <location filename="mainwindow/mainwindow.cpp" line="275"/>
         <source>Opening files</source>
         <translation>Otevírají se soubory</translation>
     </message>
@@ -6302,35 +6302,40 @@ Other soundfont editors might display other units.</source>
         <translation>&amp;Vyvést</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="142"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="62"/>
+        <source>Untitled</source>
+        <translation type="unfinished">Bez názvu</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="148"/>
         <source>Select the destination directory</source>
         <translation>Vybrat cílový adresář</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="158"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="187"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="164"/>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="202"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="199"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="158"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="164"/>
         <source>Invalid directory.</source>
         <translation>Neplatný adresář.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="187"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
         <source>At least one preset must be selected.</source>
         <translation>Musí být vybráno alespoň jedno přednastavení.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="199"/>
         <source>The maximal number of soundfont to export is 127.</source>
         <translation>Největší počet zvukových bank k vyvedení je 127.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="202"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
         <translation>V případě, kdy je vyváděno několik zvukových bank je největší počet přednastavení na zvukovou banku 127.</translation>
     </message>

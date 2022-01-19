@@ -29,6 +29,7 @@
 #include "soundfontmanager.h"
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QRegExp>
 
 ToolSoundfontExport_gui::ToolSoundfontExport_gui(QWidget *parent) :
     AbstractToolGui(parent),
@@ -54,7 +55,12 @@ void ToolSoundfontExport_gui::updateInterface(AbstractToolParameters * parameter
     foreach (int i, sm->getSiblings(idSf2))
     {
         EltID id(elementSf2, i);
-        QTreeWidgetItem * rootItem = new QTreeWidgetItem(QStringList(sm->getQstr(id, champ_name)));
+        QString title = sm->getQstr(id, champ_name);
+        if (title.isEmpty())
+            title = sm->getQstr(id, champ_filenameInitial).split(QRegExp("(/|\\\\)")).last();
+        if (title.isEmpty())
+            title = tr("Untitled");
+        QTreeWidgetItem * rootItem = new QTreeWidgetItem(QStringList(title));
         ui->listPresets->addTopLevelItem(rootItem);
 
         id.typeElement = elementPrst;
