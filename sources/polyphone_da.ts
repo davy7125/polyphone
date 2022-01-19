@@ -5769,28 +5769,61 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolLoadFromInst</name>
     <message>
-        <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="46"/>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="47"/>
         <source>Fast editing</source>
         <translation type="unfinished">Hurtig editering</translation>
     </message>
     <message>
-        <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="61"/>
-        <source>Retrieve root key from instruments</source>
-        <oldsource>Load parameters from instrument</oldsource>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="62"/>
+        <source>Load a parameter from the instruments</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="251"/>
+        <source>Success</source>
+        <translation type="unfinished">Gennemført</translation>
+    </message>
     <message numerus="yes">
-        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="116"/>
-        <source>Successfully retrieved the root key of %n sample(s) from the instruments.</source>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="256"/>
+        <source>Couldn&apos;t configure %n sample(s).</source>
+        <oldsource>Couln&apos;t configure %n sample(s).</oldsource>
         <translation type="unfinished">
             <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
+</context>
+<context>
+    <name>ToolLoadFromInst_gui</name>
     <message>
-        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="121"/>
-        <source>No root keys could have been retrieved from the instruments.</source>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="20"/>
+        <source>Root key</source>
+        <translation type="unfinished">Grundtangent</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="27"/>
+        <source>Tuning (semi-tones)</source>
+        <translation type="unfinished">Tuning (halve toner)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="34"/>
+        <source>Tuning (cents)</source>
+        <translation type="unfinished">Tuning (procent)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="41"/>
+        <source>Loop start / loop end</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="63"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="83"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished">&amp;Afbryd</translation>
     </message>
 </context>
 <context>

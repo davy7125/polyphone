@@ -535,6 +535,8 @@ SOURCES	+= main.cpp \
     lib/qtsingleapplication/qtsingleapplication.cpp \
     mainwindow/tabbar.cpp \
     editor/tools/load_from_inst/toolloadfrominst.cpp \
+    editor/tools/load_from_inst/toolloadfrominst_gui.cpp \
+    editor/tools/load_from_inst/toolloadfrominst_parameters.cpp \
     core/input/sfark/sfarkextractor1.cpp \
     core/input/sfark/sfarkextractor2.cpp
 
@@ -891,6 +893,8 @@ HEADERS += \
     lib/qtsingleapplication/qtlocalpeer.h \
     lib/qtsingleapplication/qtsingleapplication.h \
     editor/tools/load_from_inst/toolloadfrominst.h \
+    editor/tools/load_from_inst/toolloadfrominst_gui.h \
+    editor/tools/load_from_inst/toolloadfrominst_parameters.h \
     core/input/sfark/sfarkextractor2.h \
     core/input/sfark/abstractextractor.h
 
@@ -975,6 +979,7 @@ FORMS += \
     dialogs/dialogquestion.ui \
     dialogs/dialognewelement.ui \
     editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui \
+    editor/tools/load_from_inst/toolloadfrominst_gui.ui \
     repository/soundfont/uploadingdialog.ui
 
 DISTFILES += \

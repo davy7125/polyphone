@@ -28,6 +28,7 @@
 #include "abstracttoolonestep.h"
 #include <QObject>
 
+
 class ToolLoadFromInst: public AbstractToolOneStep
 {
     Q_OBJECT
@@ -58,7 +59,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return tr("Retrieve root key from instruments");
+        return tr("Load a parameter from the instruments");
     }
 
     /// Return true if the tool can be used on the specified ids
@@ -71,7 +72,37 @@ protected:
     QString getWarning() override;
 
 private:
-    QList<int> _smplIdsWithNoValues, _smplIdsWithOneValue, _smplIdsWithSeveralValues;
+    class ScanResult
+    {
+    public:
+        ScanResult(EltID id) :
+            _id(id),
+            _value1(0),
+            _value2(0),
+            _value3(0),
+            _value4(0),
+            _isSet(false),
+            _cannotBeSet(false)
+        {}
+        ScanResult(EltID id, ScanResult &other) :
+            _id(id),
+            _value1(other._value1),
+            _value2(other._value2),
+            _value3(other._value3),
+            _value4(other._value4),
+            _isSet(other._isSet),
+            _cannotBeSet(other._cannotBeSet)
+        {}
+
+        EltID _id;
+        int _value1, _value2, _value3, _value4;
+        bool _isSet, _cannotBeSet;
+    };
+
+    void readParameter(SoundfontManager * sm, int parameter, ScanResult &scanResult);
+    bool processParameter(SoundfontManager *sm, int parameter, EltID id, QList<ScanResult> values);
+
+    int _failCount;
 };
 
 #endif // TOOLLOADFROMINST_H
