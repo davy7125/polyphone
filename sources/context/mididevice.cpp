@@ -121,6 +121,7 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
             break;
         case 7: case 11: // Main volume, expression
             defaultValue = 127;
+            forceDefault = true;
             break;
         default:
             break;
