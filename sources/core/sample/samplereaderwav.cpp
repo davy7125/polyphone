@@ -261,9 +261,18 @@ QByteArray SampleReaderWav::loadData(QFile &fi)
     if (_isIeeeFloat && _info->wBpsFile == 32)
     {
         float * dataF = reinterpret_cast<float *>(data.data());
-        qint32 * data32 = reinterpret_cast<qint32 *>(data.data());
+
+        // Get the maximum value (that can exceed 1)
+        float maxValue = 1.0;
         for (int i = 0; i < data.size() / 4; i++)
-            data32[i] = static_cast<qint32>(dataF[i] * 2147483647);
+            if (dataF[i] > maxValue)
+                maxValue = dataF[i];
+
+        // Convert to int32
+        qint32 * data32 = reinterpret_cast<qint32 *>(data.data());
+        int multiplier = static_cast<int>(2147483647. /* max of int */ / maxValue);
+        for (int i = 0; i < data.size() / 4; i++)
+            data32[i] = static_cast<qint32>(dataF[i] * multiplier);
     }
 
     return data;
