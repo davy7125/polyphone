@@ -103,7 +103,6 @@ void ModulatedParameter::computeValue()
         return;
 
     // Add all values and modulations before any conversion
-    // Special case for the attenuation: the value (not the modulation) must be stupidly multiplied by 0.4
     // Special case for keynum, overriding root key and velocity: only instrument values
     qint32 addition = 0;
     if (_type == champ_overridingRootKey || _type == champ_velocity || _type == champ_keynum)

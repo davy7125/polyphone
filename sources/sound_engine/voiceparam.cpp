@@ -275,7 +275,7 @@ double VoiceParam::getDouble(AttributeType type)
     if (_parameters.contains(type))
         return _parameters[type]->getRealValue();
 
-    qDebug() << "VoiceParam: type" << type << "-" << Attribute::getDescription(type, false) << "not found";
+    qWarning() << "VoiceParam: type" << type << "-" << Attribute::getDescription(type, false) << "not found";
     return 0.0;
 }
 
@@ -289,7 +289,7 @@ qint32 VoiceParam::getInteger(AttributeType type)
     if (type == champ_wPreset)
         return _wPresetNumber;
 
-    qDebug() << "VoiceParam: type" << type << "-" << Attribute::getDescription(type, false) << "not found";
+    qWarning() << "VoiceParam: type" << type << "-" << Attribute::getDescription(type, false) << "not found";
     return 0;
 }
 
@@ -349,7 +349,7 @@ quint32 VoiceParam::getPosition(AttributeType type)
         }
     } break;
     default:
-        qDebug() << "VoiceParam: type" << type << "is not readable with 'getPosition'";
+        qWarning() << "VoiceParam: type" << type << "is not readable with 'getPosition'";
     }
 
     return result;

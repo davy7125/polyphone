@@ -52,13 +52,15 @@ void ModulatorGroup::initialize(int initialKey, int keyForComputation, int velFo
 
 void ModulatorGroup::loadDefaultModulators()
 {
-    ModulatorData modData;
+    QList<ModulatorData> modDataList;
     int count = ModulatorData::defaultModulatorNumber();
     for (quint16 i = 0; i < count; i++)
     {
+        ModulatorData modData;
         modData.loadDefaultModulator(i);
-        _modulators << new ParameterModulator(modData, false, _initialKey, _keyForComputation, _velForComputation);
+        modDataList << modData;
     }
+    loadModulators(modDataList);
 }
 
 void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
