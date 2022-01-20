@@ -105,6 +105,9 @@ void DialogList::showDialog(EltID idSrc, bool isAssociation)
     // Scroll
     if (selectedItem != nullptr)
         ui->listWidget->scrollToItem(selectedItem, QAbstractItemView::PositionAtCenter);
+
+    // Focus on the filter
+    ui->lineSearch->setFocus();
 }
 
 void DialogList::on_pushCancel_clicked()

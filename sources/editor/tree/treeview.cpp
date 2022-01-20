@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2020 Davy Triponney                                **
@@ -1041,7 +1041,7 @@ EltID TreeView::createElement(IdList ids, QStringList &existingNames, Duplicator
         val.wValue = static_cast<quint16>(nPreset);
         sm->set(newElement, champ_wPreset, val);
 
-        // Link all dragged intruments
+        // Link all dragged instruments
         foreach (EltID id, ids)
             duplicator->copy(id, newElement);
     }

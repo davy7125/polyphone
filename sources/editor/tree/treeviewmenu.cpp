@@ -32,6 +32,7 @@
 #include "duplicator.h"
 #include "dialogquestion.h"
 #include "utils.h"
+#include "auto_distribution/toolautodistribution.h"
 
 IdList TreeViewMenu::s_copy = IdList();
 
@@ -214,81 +215,65 @@ void TreeViewMenu::itemSelectedFromList(EltID id, bool isAssociation)
 
 void TreeViewMenu::associate(IdList ids, EltID idDest)
 {
-    // Type of the element(s) that will be created
-    AttributeType champ;
-    if (idDest.typeElement == elementInst)
-    {
-        idDest.typeElement = elementInstSmpl;
-        champ = champ_sampleID;
-    }
-    else
-    {
-        idDest.typeElement = elementPrstInst;
-        champ = champ_instrument;
-    }
     AttributeValue val;
 
     // For each element to associate
     SoundfontManager * sm = SoundfontManager::getInstance();
-    foreach (EltID idSrc, ids)
+    Duplicator duplicator;
+    if (idDest.typeElement == elementInst)
     {
-        // Create a division
-        idDest.indexElt2 = sm->add(idDest);
+        // If the instrument is empty, the distribution tool will be triggered
+        EltID idInstSmpl = idDest;
+        idInstSmpl.typeElement = elementInstSmpl;
+        bool launchDistribution = sm->getSiblings(idInstSmpl).isEmpty();
+        bool samePitch = false;
+        QMap<unsigned char, QPair<bool, bool> > pitches;
 
-        // Association of idSrc in idDest
-        val.wValue = idSrc.indexElt;
-        sm->set(idDest, champ, val);
-        if (champ == champ_sampleID)
+        // Link all dragged samples
+        foreach (EltID id, ids)
         {
-            // Pan
-            if (sm->get(idSrc, champ_sfSampleType).sfLinkValue == rightSample ||
-                    sm->get(idSrc, champ_sfSampleType).sfLinkValue == RomRightSample)
-                val.shValue = 500;
-            else if (sm->get(idSrc, champ_sfSampleType).sfLinkValue == leftSample ||
-                     sm->get(idSrc, champ_sfSampleType).sfLinkValue == RomLeftSample)
-                val.shValue = -500;
-            else
-                val.shValue = 0;
-            sm->set(idDest, champ_pan, val);
+            // Store the pitch
+            int bPitch = sm->get(id, champ_byOriginalPitch).bValue;
+            SFSampleLink sampleType = sm->get(id, champ_sfSampleType).sfLinkValue;
+            if (!pitches.contains(bPitch))
+            {
+                pitches[bPitch].first = false;
+                pitches[bPitch].second = false;
+            }
+            if (sampleType != rightSample && sampleType != RomRightSample)
+            {
+                if (pitches[bPitch].first)
+                    samePitch = true;
+                else
+                    pitches[bPitch].first = true;
+            }
+            if (sampleType != leftSample && sampleType != RomLeftSample)
+            {
+                if (pitches[bPitch].second)
+                    samePitch = true;
+                else
+                    pitches[bPitch].second = true;
+            }
+
+            duplicator.copy(id, idDest);
         }
-        else
+
+        // If there is more than 1 pitch and no more than 1 sample per pitch / side, distribute them
+        if (launchDistribution && !samePitch && pitches.count() > 1)
         {
-            // Key range
-            int keyMin = 127;
-            int keyMax = 0;
-            EltID idLinked = idSrc;
-            idLinked.typeElement = elementInstSmpl;
-            foreach (int i, sm->getSiblings(idLinked))
-            {
-                idLinked.indexElt2 = i;
-                if (sm->isSet(idLinked, champ_keyRange))
-                {
-                    keyMin = qMin(keyMin, (int)sm->get(idLinked, champ_keyRange).rValue.byLo);
-                    keyMax = qMax(keyMax, (int)sm->get(idLinked, champ_keyRange).rValue.byHi);
-                }
-            }
-            AttributeValue value;
-            if (keyMin < keyMax)
-            {
-                value.rValue.byLo = keyMin;
-                value.rValue.byHi = keyMax;
-            }
-            else
-            {
-                value.rValue.byLo = 0;
-                value.rValue.byHi = 127;
-            }
-            sm->set(idDest, champ_keyRange, value);
+            ToolAutoDistribution tool;
+            tool.process(sm, idDest, NULL);
         }
     }
-
+    else
+    {
+        // Link all instruments in the preset
+        foreach (EltID idSrc, ids)
+            duplicator.copy(idSrc, idDest);
+    }
     sm->endEditing("command:associate");
 
     // Select the parent element of all children that have been linked
-    if (idDest.typeElement == elementInstSmpl)
-        idDest.typeElement = elementInst;
-    else
-        idDest.typeElement = elementPrst;
     emit(selectionChanged(idDest));
 }
 
