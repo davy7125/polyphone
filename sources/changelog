@@ -1,15 +1,26 @@
 polyphone (2.3) unstable; urgency=low
 
   * (new) Russian and Korean translations
+  * (new) button on the bottom right enabling the stereo editing, now enabled by default
   * (new) detection of bad loops, a warning being displayed at the sample level and in the sample summary
   * (new) parameter inconsistencies displayed in the sample summary
+  * (new) different native styles available in the options
   * (new) option to allow multiple instances of Polyphone
   * (new) option to change the tuning fork from 390 to 470 Hz
+  * (new) option to apply a temperament when playing
+  * (new) tool scanning the instruments for filling parameters at the sample level
+  * (new) after having cut a sample, possibility to create another one with the removed part
+  * (new) OGG file import
   * (improvement) search filter in the list when selecting "replace by" or "linked to"
   * (improvement) renaming samples linked to an instrument or instruments linked to a preset is now possible
   * (improvement) creating a new instrument automatically set the loop mode and the key ranges
   * (improvement) a table cell can be cleared more easily when editing the cell
   * (improvement) UTF-8 text can be written in the comment field
+  * (improvement) CPU usage decreased when the reverb is off
+  * (improvement) the auto-loop tool creates the same loop for both sides of a stereo sample
+  * (improvement) the tool "remove blank at start" removes the same length from both sides of a stereo sample
+  * (improvement) "mute" state now displayed in the tree view
+  * (improvement) pagination for viewing the soundfont browser results
   * (fix) release time was taken into account instead of the modulation decay
   * (fix) crash when closing Polyphone due to audio connections not closed
   * (fix) crash when initializing a MIDI connection
@@ -18,8 +29,11 @@ polyphone (2.3) unstable; urgency=low
   * (fix) sfz import / export with 24-bit samples
   * (fix) linked modulators now working properly
   * (fix) interface glitches
+  * (fix) WAV file import
+  * (fix) replacing stereo samples
+  * (fix) LFOs use now a triangle signal instead of a sine
 
- -- Davy Triponney <davy.triponney@gmail.com>  Tue, 28 Dec 2021 23:20:08 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  Tue, 18 Jan 2022 23:20:08 +0100
 
 
 polyphone (2.2) UNRELEASED; urgency=low
