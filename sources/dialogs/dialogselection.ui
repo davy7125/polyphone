@@ -72,11 +72,11 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>pushOk</tabstop>
-  <tabstop>pushCancel</tabstop>
   <tabstop>pushSelectAll</tabstop>
   <tabstop>pushSelectNone</tabstop>
   <tabstop>listWidget</tabstop>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
  </tabstops>
  <resources>
   <include location="../resources.qrc"/>

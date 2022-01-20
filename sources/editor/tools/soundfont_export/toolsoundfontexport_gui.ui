@@ -195,6 +195,19 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushTick</tabstop>
+  <tabstop>pushUntick</tabstop>
+  <tabstop>listPresets</tabstop>
+  <tabstop>lineFolder</tabstop>
+  <tabstop>comboFormat</tabstop>
+  <tabstop>checkPreset</tabstop>
+  <tabstop>checkBank</tabstop>
+  <tabstop>checkGM</tabstop>
+  <tabstop>comboQuality</tabstop>
+  <tabstop>pushExport</tabstop>
+  <tabstop>pushAnnuler</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -80,6 +80,7 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>lineSearch</tabstop>
   <tabstop>listWidget</tabstop>
   <tabstop>pushOk</tabstop>
   <tabstop>pushCancel</tabstop>

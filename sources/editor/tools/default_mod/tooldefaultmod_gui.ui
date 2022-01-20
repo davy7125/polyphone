@@ -99,10 +99,10 @@
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>listWidget</tabstop>
   <tabstop>pushOverride</tabstop>
   <tabstop>pushDisable</tabstop>
   <tabstop>pushCancel</tabstop>
-  <tabstop>listWidget</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -246,8 +246,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>pushOk</tabstop>
-  <tabstop>pushCancel</tabstop>
   <tabstop>comboPattern</tabstop>
   <tabstop>spinNbDivision</tabstop>
   <tabstop>spinFilling</tabstop>
@@ -255,6 +253,8 @@
   <tabstop>spinOffset</tabstop>
   <tabstop>checkFlip</tabstop>
   <tabstop>checkFlop</tabstop>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
  </tabstops>
  <resources/>
  <connections/>

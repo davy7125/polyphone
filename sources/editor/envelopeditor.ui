@@ -499,6 +499,26 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>pushVolume</tabstop>
+  <tabstop>pushModulation</tabstop>
+  <tabstop>doubleSpinDelay</tabstop>
+  <tabstop>pushDelay</tabstop>
+  <tabstop>doubleSpinAttack</tabstop>
+  <tabstop>pushAttack</tabstop>
+  <tabstop>doubleSpinHold</tabstop>
+  <tabstop>pushHold</tabstop>
+  <tabstop>spinKeyHold</tabstop>
+  <tabstop>pushKeyHold</tabstop>
+  <tabstop>doubleSpinSustain</tabstop>
+  <tabstop>pushSustain</tabstop>
+  <tabstop>doubleSpinRelease</tabstop>
+  <tabstop>pushRelease</tabstop>
+  <tabstop>doubleSpinDecay</tabstop>
+  <tabstop>pushDecay</tabstop>
+  <tabstop>spinKeyDecay</tabstop>
+  <tabstop>pushKeyDecay</tabstop>
+ </tabstops>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

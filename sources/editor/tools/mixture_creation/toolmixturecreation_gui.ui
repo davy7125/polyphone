@@ -511,8 +511,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>pushOk</tabstop>
-  <tabstop>pushCancel</tabstop>
   <tabstop>lineNom</tabstop>
   <tabstop>checkStereo</tabstop>
   <tabstop>comboFreq</tabstop>
@@ -527,6 +525,8 @@
   <tabstop>pushRemoveRank</tabstop>
   <tabstop>comboType1</tabstop>
   <tabstop>comboType2</tabstop>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
  </tabstops>
  <resources/>
  <connections/>

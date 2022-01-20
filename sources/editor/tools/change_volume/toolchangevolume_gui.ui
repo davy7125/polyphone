@@ -113,6 +113,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>radioAdd</tabstop>
+  <tabstop>doubleSpinAdd</tabstop>
+  <tabstop>radioMultiply</tabstop>
+  <tabstop>doubleSpinMultiply</tabstop>
+  <tabstop>radioNormalize</tabstop>
+  <tabstop>doubleSpinNormalize</tabstop>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

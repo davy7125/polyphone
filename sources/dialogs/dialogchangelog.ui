@@ -113,9 +113,9 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>textChangelog</tabstop>
   <tabstop>pushDonate</tabstop>
   <tabstop>pushOk</tabstop>
-  <tabstop>textChangelog</tabstop>
  </tabstops>
  <resources>
   <include location="../resources.qrc"/>

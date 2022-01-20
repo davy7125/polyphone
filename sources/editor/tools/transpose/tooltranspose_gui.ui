@@ -71,6 +71,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>spinTon</tabstop>
+  <tabstop>checkKeyRange</tabstop>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

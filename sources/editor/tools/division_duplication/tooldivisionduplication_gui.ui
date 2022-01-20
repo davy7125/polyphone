@@ -149,8 +149,6 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>pushOk</tabstop>
-  <tabstop>pushCancel</tabstop>
   <tabstop>checkForEachKey</tabstop>
   <tabstop>checkForEachVelocityRange</tabstop>
   <tabstop>listVelocites</tabstop>
@@ -158,6 +156,8 @@
   <tabstop>pushRemove</tabstop>
   <tabstop>spinMinVel</tabstop>
   <tabstop>spinMaxVel</tabstop>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
  </tabstops>
  <resources>
   <include location="../../../resources.qrc"/>

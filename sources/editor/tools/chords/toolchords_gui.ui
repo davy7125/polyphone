@@ -725,8 +725,6 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>pushOk</tabstop>
-  <tabstop>pushCancel</tabstop>
   <tabstop>lineName</tabstop>
   <tabstop>checkStereo</tabstop>
   <tabstop>comboFreq</tabstop>
@@ -743,6 +741,8 @@
   <tabstop>sliderType9</tabstop>
   <tabstop>spinInversions</tabstop>
   <tabstop>sliderOctave</tabstop>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
  </tabstops>
  <resources/>
  <connections/>

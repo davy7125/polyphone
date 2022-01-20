@@ -248,6 +248,10 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>comboType</tabstop>
+  <tabstop>pushExpand</tabstop>
+ </tabstops>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

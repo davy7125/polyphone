@@ -156,13 +156,13 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>pushOk</tabstop>
-  <tabstop>pushCancel</tabstop>
   <tabstop>lineCommand</tabstop>
   <tabstop>pushOpen</tabstop>
   <tabstop>comboPrevious</tabstop>
   <tabstop>checkStereo</tabstop>
   <tabstop>checkReplaceInfo</tabstop>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
  </tabstops>
  <resources>
   <include location="../../../resources.qrc"/>

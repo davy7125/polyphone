@@ -203,6 +203,13 @@
    <header>spinboxmultiply.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>comboSource1</tabstop>
+  <tabstop>comboSource2</tabstop>
+  <tabstop>spinAmount</tabstop>
+  <tabstop>comboTransform</tabstop>
+  <tabstop>comboDestination</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

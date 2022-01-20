@@ -308,6 +308,11 @@
    <header>pushstereoediting.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>tableInst</tabstop>
+  <tabstop>pushStereoEditing</tabstop>
+  <tabstop>rangeEditor</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

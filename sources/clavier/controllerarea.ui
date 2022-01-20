@@ -236,6 +236,7 @@
       <widget class="QLabel" name="label_3">
        <property name="font">
         <font>
+         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -260,6 +261,7 @@
       <widget class="QLabel" name="label_4">
        <property name="font">
         <font>
+         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -284,6 +286,7 @@
       <widget class="QLabel" name="label_5">
        <property name="font">
         <font>
+         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -320,6 +323,19 @@
    <header>styledslider.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>sliderPitchWheel</tabstop>
+  <tabstop>sliderSensitivity</tabstop>
+  <tabstop>sliderPressure</tabstop>
+  <tabstop>comboControl1</tabstop>
+  <tabstop>knob1</tabstop>
+  <tabstop>comboControl2</tabstop>
+  <tabstop>knob2</tabstop>
+  <tabstop>comboControl3</tabstop>
+  <tabstop>knob3</tabstop>
+  <tabstop>comboControl4</tabstop>
+  <tabstop>push4</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

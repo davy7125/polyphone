@@ -100,6 +100,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>doubleSpinHerz</tabstop>
+  <tabstop>doubleSpinDiv</tabstop>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

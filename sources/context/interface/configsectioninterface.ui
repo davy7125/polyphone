@@ -624,6 +624,15 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>comboLangue</tabstop>
+  <tabstop>comboKeyName</tabstop>
+  <tabstop>comboSortDivisions</tabstop>
+  <tabstop>checkUniqueInstance</tabstop>
+  <tabstop>comboStyle</tabstop>
+  <tabstop>comboColorTheme</tabstop>
+  <tabstop>checkDecorations</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

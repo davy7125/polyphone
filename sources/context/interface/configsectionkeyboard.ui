@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>451</width>
+    <width>465</width>
     <height>336</height>
    </rect>
   </property>
@@ -334,6 +334,15 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>tableKeyboardMap</tabstop>
+  <tabstop>comboFirstC</tabstop>
+  <tabstop>spinTuningFork</tabstop>
+  <tabstop>pushDefaultTuningFork</tabstop>
+  <tabstop>comboTemperament</tabstop>
+  <tabstop>comboTemperamentRelativeKey</tabstop>
+  <tabstop>pushDefaultTemperament</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

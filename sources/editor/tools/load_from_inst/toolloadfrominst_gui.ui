@@ -90,6 +90,9 @@
  </widget>
  <tabstops>
   <tabstop>radioRootKey</tabstop>
+  <tabstop>radioTuningSemiTones</tabstop>
+  <tabstop>radioTuningCents</tabstop>
+  <tabstop>radioLoop</tabstop>
   <tabstop>pushOk</tabstop>
   <tabstop>pushCancel</tabstop>
  </tabstops>

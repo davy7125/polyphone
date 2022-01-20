@@ -81,9 +81,9 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>table</tabstop>
   <tabstop>pushExport</tabstop>
   <tabstop>pushClose</tabstop>
-  <tabstop>table</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -292,8 +292,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>pushOk</tabstop>
-  <tabstop>pushCancel</tabstop>
   <tabstop>comboPattern</tabstop>
   <tabstop>doubleSpinParam</tabstop>
   <tabstop>doubleSpinMin</tabstop>
@@ -302,6 +300,8 @@
   <tabstop>comboAttribute</tabstop>
   <tabstop>spinVelMin</tabstop>
   <tabstop>spinVelMax</tabstop>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
  </tabstops>
  <resources/>
  <connections/>

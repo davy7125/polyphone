@@ -167,6 +167,15 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>comboBox</tabstop>
+  <tabstop>spinPos1</tabstop>
+  <tabstop>spinPos2</tabstop>
+  <tabstop>lineText1</tabstop>
+  <tabstop>lineText2</tabstop>
+  <tabstop>pushOk</tabstop>
+  <tabstop>pushCancel</tabstop>
+ </tabstops>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

@@ -375,6 +375,15 @@ Premium!</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineUser</tabstop>
+  <tabstop>linePassword</tabstop>
+  <tabstop>pushConnect</tabstop>
+  <tabstop>buttonCreateAccount</tabstop>
+  <tabstop>lineDownloadDirectory</tabstop>
+  <tabstop>pushDirectory</tabstop>
+  <tabstop>buttonBecomePremium</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

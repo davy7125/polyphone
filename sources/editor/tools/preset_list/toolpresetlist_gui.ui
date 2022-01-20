@@ -117,11 +117,11 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>pushCopy</tabstop>
-  <tabstop>pushClose</tabstop>
   <tabstop>radioCsv</tabstop>
   <tabstop>radioHtml</tabstop>
   <tabstop>plainTextEdit</tabstop>
+  <tabstop>pushCopy</tabstop>
+  <tabstop>pushClose</tabstop>
  </tabstops>
  <resources/>
  <connections/>

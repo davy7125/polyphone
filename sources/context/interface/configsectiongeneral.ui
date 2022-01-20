@@ -225,6 +225,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>comboAudioOuput</tabstop>
+  <tabstop>comboBufferSize</tabstop>
+  <tabstop>comboMidiInput</tabstop>
+  <tabstop>checkRepercussionStereo</tabstop>
+  <tabstop>checkBoucle</tabstop>
+  <tabstop>checkBlanc</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

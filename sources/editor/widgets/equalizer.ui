@@ -657,6 +657,21 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>verticalSlider_1</tabstop>
+  <tabstop>verticalSlider_2</tabstop>
+  <tabstop>verticalSlider_3</tabstop>
+  <tabstop>verticalSlider_4</tabstop>
+  <tabstop>verticalSlider_5</tabstop>
+  <tabstop>verticalSlider_6</tabstop>
+  <tabstop>verticalSlider_7</tabstop>
+  <tabstop>verticalSlider_8</tabstop>
+  <tabstop>verticalSlider_9</tabstop>
+  <tabstop>verticalSlider_10</tabstop>
+  <tabstop>checkEqualizerPreview</tabstop>
+  <tabstop>pushEgalRestore</tabstop>
+  <tabstop>pushEgaliser</tabstop>
+ </tabstops>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>

@@ -1091,6 +1091,19 @@
    <header>styledlineedit.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>lineEdit_name</tabstop>
+  <tabstop>lineEdit_author</tabstop>
+  <tabstop>lineEdit_date</tabstop>
+  <tabstop>pushButton_setNow</tabstop>
+  <tabstop>lineEdit_product</tabstop>
+  <tabstop>lineEdit_copyright</tabstop>
+  <tabstop>textEdit_Com</tabstop>
+  <tabstop>pushViewSamples</tabstop>
+  <tabstop>pushViewInstruments</tabstop>
+  <tabstop>pushViewPresets</tabstop>
+  <tabstop>comboBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

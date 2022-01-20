@@ -391,6 +391,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>sliderGain</tabstop>
+  <tabstop>comboVelToFilter</tabstop>
+  <tabstop>dialRevNiveau</tabstop>
+  <tabstop>dialRevProfondeur</tabstop>
+  <tabstop>dialRevDensite</tabstop>
+  <tabstop>dialRevAttenuation</tabstop>
+  <tabstop>dialChoNiveau</tabstop>
+  <tabstop>dialChoAmplitude</tabstop>
+  <tabstop>dialChoFrequence</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

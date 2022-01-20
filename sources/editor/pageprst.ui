@@ -260,8 +260,10 @@
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>tablePrst</tabstop>
   <tabstop>spinBank</tabstop>
   <tabstop>spinPreset</tabstop>
+  <tabstop>rangeEditor</tabstop>
  </tabstops>
  <resources/>
  <connections>
