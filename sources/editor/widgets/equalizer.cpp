@@ -42,9 +42,7 @@ Equalizer::Equalizer(QWidget *parent) :
     ui->pushEgalRestore->setIcon(ContextManager::theme()->getColoredSvg(":/icons/reset_eq.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
 
     // Initialize EQ
-    _initialization = true;
     loadEQ();
-    _initialization = false;
     _synth->setSmplEqValues(gatherEqVariables());
 }
 
@@ -97,17 +95,7 @@ void Equalizer::on_pushEgaliser_clicked()
         {
             listprocessedID << id;
             QByteArray baData = sm->getData(id, champ_sampleDataFull24);
-            baData = SampleUtils::EQ(baData, sm->get(id, champ_dwSampleRate).dwValue, 24,
-                               ui->verticalSlider_1->value(),
-                               ui->verticalSlider_2->value(),
-                               ui->verticalSlider_3->value(),
-                               ui->verticalSlider_4->value(),
-                               ui->verticalSlider_5->value(),
-                               ui->verticalSlider_6->value(),
-                               ui->verticalSlider_7->value(),
-                               ui->verticalSlider_8->value(),
-                               ui->verticalSlider_9->value(),
-                               ui->verticalSlider_10->value());
+            baData = SampleUtils::EQ(baData, sm->get(id, champ_dwSampleRate).dwValue, 24, gatherEqVariables());
             sm->set(id, champ_sampleDataFull24, baData);
 
             // Associated sample?
@@ -118,17 +106,7 @@ void Equalizer::on_pushEgaliser_clicked()
                 {
                     listprocessedID << id2;
                     QByteArray baData = sm->getData(id2, champ_sampleDataFull24);
-                    baData = SampleUtils::EQ(baData, sm->get(id2, champ_dwSampleRate).dwValue, 24,
-                                       ui->verticalSlider_1->value(),
-                                       ui->verticalSlider_2->value(),
-                                       ui->verticalSlider_3->value(),
-                                       ui->verticalSlider_4->value(),
-                                       ui->verticalSlider_5->value(),
-                                       ui->verticalSlider_6->value(),
-                                       ui->verticalSlider_7->value(),
-                                       ui->verticalSlider_8->value(),
-                                       ui->verticalSlider_9->value(),
-                                       ui->verticalSlider_10->value());
+                    baData = SampleUtils::EQ(baData, sm->get(id2, champ_dwSampleRate).dwValue, 24, gatherEqVariables());
                     sm->set(id2, champ_sampleDataFull24, baData);
                 }
             }
@@ -148,6 +126,7 @@ void Equalizer::on_pushEgaliser_clicked()
 
 void Equalizer::loadEQ()
 {
+    _initialization = true;
     ui->verticalSlider_1->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "01", 0).toInt());
     ui->verticalSlider_2->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "02", 0).toInt());
     ui->verticalSlider_3->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "03", 0).toInt());
@@ -158,6 +137,7 @@ void Equalizer::loadEQ()
     ui->verticalSlider_8->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "08", 0).toInt());
     ui->verticalSlider_9->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "09", 0).toInt());
     ui->verticalSlider_10->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "10", 0).toInt());
+    _initialization = false;
 }
 
 void Equalizer::saveEQ()
@@ -203,75 +183,18 @@ bool Equalizer::isPreviewEnabled()
 void Equalizer::on_checkEqualizerPreview_stateChanged(int arg1)
 {
     Q_UNUSED(arg1)
+    if (_initialization)
+        return;
+
     _synth->activateSmplEq(ui->checkEqualizerPreview->isChecked());
 }
 
-void Equalizer::on_verticalSlider_1_sliderMoved(int position)
+void Equalizer::on_verticalSliderMoved(int position)
 {
     Q_UNUSED(position)
-    _synth->setSmplEqValues(gatherEqVariables());
-    saveEQ();
-}
+    if (_initialization)
+        return;
 
-void Equalizer::on_verticalSlider_2_sliderMoved(int position)
-{
-    Q_UNUSED(position)
-    _synth->setSmplEqValues(gatherEqVariables());
-    saveEQ();
-}
-
-void Equalizer::on_verticalSlider_3_sliderMoved(int position)
-{
-    Q_UNUSED(position)
-    _synth->setSmplEqValues(gatherEqVariables());
-    saveEQ();
-}
-
-void Equalizer::on_verticalSlider_4_sliderMoved(int position)
-{
-    Q_UNUSED(position)
-    _synth->setSmplEqValues(gatherEqVariables());
-    saveEQ();
-}
-
-void Equalizer::on_verticalSlider_5_sliderMoved(int position)
-{
-    Q_UNUSED(position)
-    _synth->setSmplEqValues(gatherEqVariables());
-    saveEQ();
-}
-
-void Equalizer::on_verticalSlider_6_sliderMoved(int position)
-{
-    Q_UNUSED(position)
-    _synth->setSmplEqValues(gatherEqVariables());
-    saveEQ();
-}
-
-void Equalizer::on_verticalSlider_7_sliderMoved(int position)
-{
-    Q_UNUSED(position)
-    _synth->setSmplEqValues(gatherEqVariables());
-    saveEQ();
-}
-
-void Equalizer::on_verticalSlider_8_sliderMoved(int position)
-{
-    Q_UNUSED(position)
-    _synth->setSmplEqValues(gatherEqVariables());
-    saveEQ();
-}
-
-void Equalizer::on_verticalSlider_9_sliderMoved(int position)
-{
-    Q_UNUSED(position)
-    _synth->setSmplEqValues(gatherEqVariables());
-    saveEQ();
-}
-
-void Equalizer::on_verticalSlider_10_sliderMoved(int position)
-{
-    Q_UNUSED(position)
     _synth->setSmplEqValues(gatherEqVariables());
     saveEQ();
 }

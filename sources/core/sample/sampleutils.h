@@ -35,8 +35,7 @@ public:
     static QByteArray resampleMono(QByteArray data, double echInit, quint32 echFinal, quint16 wBps);
     static QByteArray bandFilter(QByteArray baData, quint16 wBps, double dwSmplRate, double fBas, double fHaut, int ordre);
     static QByteArray cutFilter(QByteArray baData, quint32 dwSmplRate, QVector<double> dValues, quint16 wBps, int maxFreq);
-    static QByteArray EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, int i1, int i2, int i3, int i4, int i5,
-                         int i6, int i7, int i8, int i9, int i10);
+    static QByteArray EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, QVector<int> eqGains);
     static QByteArray bpsConversion(QByteArray baData, quint16 wBpsInit, quint16 wBpsFinal, bool bigEndian = false);
     static void bpsConversion(char *cDest, const char *cFrom, qint32 size, quint16 wBpsInit, quint16 wBpsFinal, bool bigEndian = false);
     static QByteArray from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, quint16 wBps, bool bigEndian = false);
@@ -69,7 +68,7 @@ private:
     static void FFT_calculate(Complex * x, quint32 N /* must be a power of 2 */,
                               Complex * X, Complex * scratch, Complex * twiddles);
     static double moyenne(QByteArray baData, quint16 wBps);
-    static double gainEQ(double freq, int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10);
+    static double gainEQ(double freq, QVector<int> eqGains);
     static float mediane(QVector<float> data);
     static qint64 somme(QByteArray baData, quint16 wBps);
     static qint64 sommeCarre(QByteArray baData, quint16 wBps);

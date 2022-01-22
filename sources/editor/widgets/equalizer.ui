@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>223</width>
+    <width>260</width>
     <height>120</height>
    </rect>
   </property>
@@ -675,5 +675,169 @@
  <resources>
   <include location="../../resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>verticalSlider_1</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>Equalizer</receiver>
+   <slot>on_verticalSliderMoved(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>12</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_2</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>Equalizer</receiver>
+   <slot>on_verticalSliderMoved(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>38</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_3</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>Equalizer</receiver>
+   <slot>on_verticalSliderMoved(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>64</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_5</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>Equalizer</receiver>
+   <slot>on_verticalSliderMoved(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>116</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_7</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>Equalizer</receiver>
+   <slot>on_verticalSliderMoved(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>168</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_4</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>Equalizer</receiver>
+   <slot>on_verticalSliderMoved(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>90</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_6</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>Equalizer</receiver>
+   <slot>on_verticalSliderMoved(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>142</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_8</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>Equalizer</receiver>
+   <slot>on_verticalSliderMoved(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>194</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_9</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>Equalizer</receiver>
+   <slot>on_verticalSliderMoved(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>220</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_10</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>Equalizer</receiver>
+   <slot>on_verticalSliderMoved(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>on_verticalSliderMoved(int)</slot>
+ </slots>
 </ui>

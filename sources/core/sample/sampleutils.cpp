@@ -309,8 +309,7 @@ QByteArray SampleUtils::cutFilter(QByteArray baData, quint32 dwSmplRate, QVector
     return baRet;
 }
 
-QByteArray SampleUtils::EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, int i1, int i2, int i3, int i4, int i5,
-                           int i6, int i7, int i8, int i9, int i10)
+QByteArray SampleUtils::EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, QVector<int> eqGains)
 {
     quint32 size;
 
@@ -327,7 +326,7 @@ QByteArray SampleUtils::EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, 
     for (unsigned long i = 0; i < (size + 1) / 2; i++)
     {
         freq = static_cast<double>(i * dwSmplRate) / (size - 1);
-        gain = gainEQ(freq, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10);
+        gain = gainEQ(freq, eqGains);
         fc_sortie_fft[i] *= gain;
         fc_sortie_fft[size - 1 - i] *= gain;
     }
@@ -1515,7 +1514,7 @@ qint64 SampleUtils::sommeCarre(QByteArray baData, quint16 wBps)
     return valeur;
 }
 
-double SampleUtils::gainEQ(double freq, int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10)
+double SampleUtils::gainEQ(double freq, QVector<int> eqGains)
 {
     int x1 = 0;
     int x2 = 1;
@@ -1524,57 +1523,57 @@ double SampleUtils::gainEQ(double freq, int i1, int i2, int i3, int i4, int i5, 
     if (freq < 32)
     {
         x1 = 32; x2 = 64;
-        y1 = qMin(i1, i2); y2 = i2;
+        y1 = qMin(eqGains[0], eqGains[1]); y2 = eqGains[1];
     }
     else if (freq < 64)
     {
         x1 = 32; x2 = 64;
-        y1 = i1; y2 = i2;
+        y1 = eqGains[0]; y2 = eqGains[1];
     }
     else if (freq < 125)
     {
         x1 = 64; x2 = 125;
-        y1 = i2; y2 = i3;
+        y1 = eqGains[1]; y2 = eqGains[2];
     }
     else if (freq < 250)
     {
         x1 = 125; x2 = 250;
-        y1 = i3; y2 = i4;
+        y1 = eqGains[2]; y2 = eqGains[3];
     }
     else if (freq < 500)
     {
         x1 = 250; x2 = 500;
-        y1 = i4; y2 = i5;
+        y1 = eqGains[3]; y2 = eqGains[4];
     }
     else if (freq < 1000)
     {
         x1 = 500; x2 = 1000;
-        y1 = i5; y2 = i6;
+        y1 = eqGains[4]; y2 = eqGains[5];
     }
     else if (freq < 2000)
     {
         x1 = 1000; x2 = 2000;
-        y1 = i6; y2 = i7;
+        y1 = eqGains[5]; y2 = eqGains[6];
     }
     else if (freq < 4000)
     {
         x1 = 2000; x2 = 4000;
-        y1 = i7; y2 = i8;
+        y1 = eqGains[6]; y2 = eqGains[7];
     }
     else if (freq < 8000)
     {
         x1 = 4000; x2 = 8000;
-        y1 = i8; y2 = i9;
+        y1 = eqGains[7]; y2 = eqGains[8];
     }
     else if (freq < 16000)
     {
         x1 = 8000; x2 = 16000;
-        y1 = i9; y2 = i10;
+        y1 = eqGains[8]; y2 = eqGains[9];
     }
     else
     {
         x1 = 8000; x2 = 16000;
-        y1 = i9; y2 = qMin(i9, i10);
+        y1 = eqGains[8]; y2 = qMin(eqGains[8], eqGains[9]);
     }
     double a = static_cast<double>(y1 - y2) / (x1 - x2);
     double b = static_cast<double>(y2) - a * x2;

@@ -52,25 +52,18 @@ public:
     // Return true if the preview is enabled
     bool isPreviewEnabled();
 
+    // Return the EQ variables
+    QVector<int> gatherEqVariables();
+
 private slots:
     void on_pushEgalRestore_clicked();
     void on_pushEgaliser_clicked();
     void on_checkEqualizerPreview_stateChanged(int arg1);
-    void on_verticalSlider_1_sliderMoved(int position);
-    void on_verticalSlider_2_sliderMoved(int position);
-    void on_verticalSlider_3_sliderMoved(int position);
-    void on_verticalSlider_4_sliderMoved(int position);
-    void on_verticalSlider_5_sliderMoved(int position);
-    void on_verticalSlider_6_sliderMoved(int position);
-    void on_verticalSlider_7_sliderMoved(int position);
-    void on_verticalSlider_8_sliderMoved(int position);
-    void on_verticalSlider_9_sliderMoved(int position);
-    void on_verticalSlider_10_sliderMoved(int position);
+    void on_verticalSliderMoved(int position);
 
 private:
     void saveEQ();
     void loadEQ();
-    QVector<int> gatherEqVariables();
 
     Ui::Equalizer *ui;
     Synth * _synth;

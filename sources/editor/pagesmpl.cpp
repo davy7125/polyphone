@@ -893,6 +893,7 @@ void PageSmpl::lecture()
         QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
         if (listID.count() == 1)
         {
+            _synth->setSmplEqValues(ui->widgetEqualizer->gatherEqVariables());
             _synth->activateSmplEq(ui->widgetEqualizer->isPreviewEnabled());
             _currentPlayingToken = _synth->play(listID[0], -1, 127);
         }
