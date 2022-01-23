@@ -1,6 +1,7 @@
 /sources/Makefile*
 /sources/polyphone.pro.user*
 /sources/.qmake.stash
+/private
 /build-*
 lib_*
 .DS_Store
