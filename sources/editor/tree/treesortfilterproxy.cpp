@@ -118,7 +118,7 @@ bool TreeSortFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex &sou
         return false;
 
     // If the filter is empty, the item is visible
-    if (filterRegExp().isEmpty())
+    if (filterRegularExpression().pattern().isEmpty())
         return true;
 
     // Visibility, depending on the items that match
@@ -284,7 +284,7 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
 bool TreeSortFilterProxy::isFiltered(EltID id)
 {
     bool isFiltered = false;
-    if (!filterRegExp().isEmpty())
+    if (!filterRegularExpression().pattern().isEmpty())
     {
         switch (id.typeElement)
         {

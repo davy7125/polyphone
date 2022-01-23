@@ -212,7 +212,7 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
         l = 0;
         id.indexElt = _sm->add(id);
         id2.indexElt = id.indexElt;
-        _sm->set(id, champ_name, inst._name.trimmed());
+        _sm->set(id, champ_name, inst._name);
 
         // Indexes
         bagmin = inst._iBagIndex.value;
@@ -306,7 +306,7 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
         l = 0;
         id.indexElt = _sm->add(id);
         id2.indexElt = id.indexElt;
-        _sm->set(id, champ_name, prst._name.trimmed());
+        _sm->set(id, champ_name, prst._name);
         value.wValue = prst._preset.value;
         _sm->set(id, champ_wPreset, value);
         value.wValue = prst._bank.value;

@@ -79,13 +79,13 @@ void SpinBoxRange::stepBy(int steps)
     if (selection == -1)
     {
         QString txt = lineEdit()->text();
-        int posSeparator = txt.indexOf(QRegExp("[0-9]" + SEPARATOR)) + 1;
+        int posSeparator = txt.indexOf(QRegularExpression("[0-9]" + SEPARATOR)) + 1;
         lineEdit()->setSelection(0, posSeparator);
     }
     else if (selection == 1)
     {
         QString txt = lineEdit()->text();
-        int posSeparator = txt.indexOf(QRegExp("[0-9]" + SEPARATOR)) + 1;
+        int posSeparator = txt.indexOf(QRegularExpression("[0-9]" + SEPARATOR)) + 1;
         lineEdit()->setSelection(posSeparator + SEPARATOR.size(), txt.size() - posSeparator + SEPARATOR.size());
     }
 
@@ -187,7 +187,7 @@ SpinBoxRange::SpinboxSection SpinBoxRange::getCurrentSection() const
     int cursorPos = this->lineEdit()->cursorPosition();
     const QString str = lineEdit()->text();
 
-    int posSeparator = str.indexOf(QRegExp("[0-9]" + SEPARATOR)) + 1;
+    int posSeparator = str.indexOf(QRegularExpression("[0-9]" + SEPARATOR)) + 1;
     if (posSeparator == 0)
         return SectionNone;
 
@@ -221,7 +221,7 @@ void SpinBoxRange::updateValue()
 void SpinBoxRange::stringToRange(QString input, bool &isNull, int &valMin, int &valMax, QValidator::State &state) const
 {
     input = input.replace('_', '-');
-    int posSeparator = input.indexOf(QRegExp("[0-9]" + SEPARATOR)) + 1;
+    int posSeparator = input.indexOf(QRegularExpression("[0-9]" + SEPARATOR)) + 1;
 
     bool ok = false;
     state = QValidator::Acceptable;

@@ -57,7 +57,6 @@ void PianoKeybd::initialize()
     setCacheMode(CacheBackground);
     setViewportUpdateMode(MinimalViewportUpdate);
     setRenderHints(QPainter::Antialiasing|QPainter::TextAntialiasing|QPainter::SmoothPixmapTransform);
-    setOptimizationFlag(DontClipPainter, true);
     setOptimizationFlag(DontSavePainterState, true);
     setOptimizationFlag(DontAdjustForAntialiasing, true);
     this->setStyleSheet("background-color: transparent;");

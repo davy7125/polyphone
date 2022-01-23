@@ -128,12 +128,12 @@ QList<HostInfo> AudioDevice::getHostInfo()
                         indexHost = j;
                 if (indexHost == -1)
                 {
-                    listRet << HostInfo(QString::fromLatin1(hostInfo->name), hostInfo->type);
+                    listRet << HostInfo(QString(hostInfo->name), hostInfo->type);
                     indexHost = listRet.size() - 1;
                 }
 
                 // Device within an host
-                listRet[indexHost]._devices << HostInfo::DeviceInfo(QString::fromLatin1(deviceInfo->name), i,
+                listRet[indexHost]._devices << HostInfo::DeviceInfo(QString(deviceInfo->name), i,
                                                                     (i == hostInfo->defaultOutputDevice));
             }
         }

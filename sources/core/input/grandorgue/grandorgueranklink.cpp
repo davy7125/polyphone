@@ -27,11 +27,9 @@
 #include "soundfontmanager.h"
 #include <QDebug>
 
-GrandOrgueRankLink::GrandOrgueRankLink(GrandOrgueDataThrough *godt) :
-    _godt(godt),
+GrandOrgueRankLink::GrandOrgueRankLink() :
     _rankId(-1),
-    _firstKey(36),
-    _firstPipeIndex(1)
+    _firstKey(36)
 {
 
 }

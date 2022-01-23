@@ -152,7 +152,6 @@
          </property>
          <property name="font">
           <font>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -211,51 +210,14 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <property name="spacing">
-             <number>0</number>
+           <widget class="BrowserSortMenu" name="widgetSortMenu" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <item>
-             <widget class="QLabel" name="labelSort">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="comboSort">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <item>
-               <property name="text">
-                <string>Date</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Downloads</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Rating score</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Title (A→Z)</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-           </layout>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -288,7 +250,6 @@
            <widget class="QLabel" name="labelFilters">
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -333,7 +294,6 @@
         <widget class="QPushButton" name="pushBecomePremium">
          <property name="font">
           <font>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -398,7 +358,6 @@
             <widget class="QLabel" name="label">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -414,7 +373,6 @@
             <widget class="QLabel" name="label_5">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -430,7 +388,6 @@
             <widget class="QLabel" name="label_6">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -446,7 +403,6 @@
             <widget class="QLabel" name="label_7">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -462,7 +418,6 @@
             <widget class="QLabel" name="label_8">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -478,7 +433,6 @@
             <widget class="QLabel" name="label_9">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -494,7 +448,6 @@
             <widget class="QLabel" name="label_10">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -510,7 +463,6 @@
             <widget class="QLabel" name="label_11">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -769,6 +721,12 @@ download the list</string>
    <class>FilterTag</class>
    <extends>QWidget</extends>
    <header>filtertag.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BrowserSortMenu</class>
+   <extends>QWidget</extends>
+   <header>browsersortmenu.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

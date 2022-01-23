@@ -277,11 +277,11 @@ void ConversionSfz::writeEntete(QFile * fichierSfz, EltID id)
     id.typeElement = elementSf2;
     QTextStream out(fichierSfz);
     out << "// Sfz exported from a sf2 file with Polyphone" << Qt::endl
-        << "// Name      : " << _sf2->getQstr(id, champ_name).replace(QRegExp("[\r\n]"), " ") << Qt::endl
-        << "// Author    : " << _sf2->getQstr(id, champ_IENG).replace(QRegExp("[\r\n]"), " ") << Qt::endl
-        << "// Copyright : " << _sf2->getQstr(id, champ_ICOP).replace(QRegExp("[\r\n]"), " ") << Qt::endl
+        << "// Name      : " << _sf2->getQstr(id, champ_name).replace(QRegularExpression("[\r\n]"), " ") << Qt::endl
+        << "// Author    : " << _sf2->getQstr(id, champ_IENG).replace(QRegularExpression("[\r\n]"), " ") << Qt::endl
+        << "// Copyright : " << _sf2->getQstr(id, champ_ICOP).replace(QRegularExpression("[\r\n]"), " ") << Qt::endl
         << "// Date      : " << QDate::currentDate().toString("yyyy/MM/dd") << Qt::endl
-        << "// Comment   : " << _sf2->getQstr(id, champ_ICMT).replace(QRegExp("[\r\n]"), " ") << Qt::endl;
+        << "// Comment   : " << _sf2->getQstr(id, champ_ICMT).replace(QRegularExpression("[\r\n]"), " ") << Qt::endl;
 }
 
 void ConversionSfz::writeGroup(QFile * fichierSfz, SfzParamList * listeParam, bool isPercKit)
@@ -497,7 +497,7 @@ QString ConversionSfz::getLink(EltID idSmpl, bool enableStereo)
 
 QString ConversionSfz::escapeStr(QString str)
 {
-    return str.replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_");
+    return str.replace(QRegularExpression(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_");
 }
 
 int ConversionSfz::lastLettersToRemove(QString str1, QString str2)

@@ -363,14 +363,16 @@ void ToolMixtureCreation_gui::on_listDivisions_itemSelectionChanged()
 
 void ToolMixtureCreation_gui::on_pushAddDiv_pressed()
 {
-    // Ajdd a division
+    // Add a division
     _divisions << DivisionInfo(ui->spinDivStart->value(), ui->spinDivEnd->value());
 
     // Recopie des rangs précédents
     int numDiv = this->getNumDiv();
     if (numDiv >= 0)
+    {
         foreach (RankInfo ri, _divisions[numDiv].getRanks())
             _divisions[_divisions.size() - 1].addRank(ri.getOvertoneType(), ri.getOctave());
+    }
 
     // Affichage
     this->dispDiv();

@@ -103,7 +103,7 @@ void ToolFrequencyPeaks_gui::updateInterface(AbstractToolParameters * parameters
     SoundfontManager * sm = SoundfontManager::getInstance();
     if (!ids.empty())
         _sf2Name = sm->getQstr(EltID(elementSf2, ids[0].indexSf2), champ_name)
-                .replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".csv";
+                .replace(QRegularExpression(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".csv";
 
     // Initialize the table
     ui->table->clearContents();

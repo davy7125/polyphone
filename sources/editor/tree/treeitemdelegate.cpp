@@ -79,8 +79,6 @@ void TreeItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     if (!index.isValid())
         return;
 
-    painter->setRenderHint(QPainter::Qt4CompatiblePainting);
-
     // Draw an entry depending on the type of the element to display
     EltID currentId = index.data(Qt::UserRole).value<EltID>();
     bool highlighted = option.state & QStyle::State_Selected;

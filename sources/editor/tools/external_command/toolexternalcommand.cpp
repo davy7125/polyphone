@@ -61,7 +61,7 @@ void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolP
     bool replaceInfo = params->getReplaceInfo();
 
     // Prepare the command
-    QStringList arguments = command.split(QRegExp(" +(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"));
+    QStringList arguments = command.split(QRegularExpression(" +(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"));
     if (arguments.count() < 2)
     {
         _warning = "invalid command";

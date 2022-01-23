@@ -9,7 +9,7 @@
         <translation>아직 처리되지 않음</translation>
     </message>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="81"/>
+        <location filename="core/input/abstractinputparser.cpp" line="85"/>
         <source>This file is already open.</source>
         <translation>파일이 이미 열려있습니다.</translation>
     </message>
@@ -401,6 +401,29 @@
         <location filename="core/types/attribute.cpp" line="767"/>
         <source>Root key</source>
         <translation>루트 키</translation>
+    </message>
+</context>
+<context>
+    <name>BrowserSortMenu</name>
+    <message>
+        <location filename="repository/browser/browsersortmenu.cpp" line="52"/>
+        <source>Date</source>
+        <translation type="unfinished">날짜</translation>
+    </message>
+    <message>
+        <location filename="repository/browser/browsersortmenu.cpp" line="56"/>
+        <source>Downloads</source>
+        <translation type="unfinished">내려받기</translation>
+    </message>
+    <message>
+        <location filename="repository/browser/browsersortmenu.cpp" line="58"/>
+        <source>Rating score</source>
+        <translation type="unfinished">점수</translation>
+    </message>
+    <message>
+        <location filename="repository/browser/browsersortmenu.cpp" line="60"/>
+        <source>Title (A→Z)</source>
+        <translation type="unfinished">제목 (A→Z)</translation>
     </message>
 </context>
 <context>
@@ -954,15 +977,15 @@
         <translation>이 변경사항은 다음 번에 소프트웨어를 시작하면 적용됩니다.</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.cpp" line="189"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="201"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="213"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="225"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="237"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="249"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="261"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="273"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="285"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="191"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="203"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="215"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="227"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="239"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="251"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="263"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="275"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="287"/>
         <source>Select a color</source>
         <translation>색상 선택</translation>
     </message>
@@ -1021,13 +1044,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.cpp" line="50"/>
+        <location filename="context/interface/configsectionkeyboard.cpp" line="51"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation type="unfinished">Hz</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.cpp" line="61"/>
+        <location filename="context/interface/configsectionkeyboard.cpp" line="62"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
         <translation type="unfinished"></translation>
@@ -1078,44 +1101,44 @@ Premium!</source>
         <translation type="unfinished">내려받기</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="112"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="148"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="113"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="149"/>
         <source>Connection</source>
         <translation>연결</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="115"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="116"/>
         <source>Connecting...</source>
         <translation>연결하는 중...</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="119"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="120"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="122"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="128"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="134"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="123"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="129"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="135"/>
         <source>Connected</source>
         <translation>연결됨</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="125"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="131"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="137"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="142"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="126"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="132"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="138"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="143"/>
         <source>Log out</source>
         <translation>로그아웃</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="208"/>
-        <location filename="context/interface/configsectionrepository.cpp" line="215"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="209"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="216"/>
         <source>Click on %1 to save parameters.</source>
         <translation>%1 클릭으로 매개변수 값을 저장합니다.</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionrepository.cpp" line="221"/>
+        <location filename="context/interface/configsectionrepository.cpp" line="222"/>
         <source>Select the destination directory</source>
         <translation>저장될 디렉토리 선택</translation>
     </message>
@@ -1236,17 +1259,17 @@ repository</source>
 <context>
     <name>ControllerArea</name>
     <message>
-        <location filename="clavier/controllerarea.ui" line="243"/>
+        <location filename="clavier/controllerarea.ui" line="244"/>
         <source>Pitch wheel</source>
         <translation>피치 휠</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.ui" line="267"/>
+        <location filename="clavier/controllerarea.ui" line="269"/>
         <source>Sensitivity</source>
         <translation>감도</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.ui" line="291"/>
+        <location filename="clavier/controllerarea.ui" line="294"/>
         <source>Pressure</source>
         <translation>프레셔</translation>
     </message>
@@ -1545,17 +1568,17 @@ repository</source>
         <translation>폴리폰</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogchangelog.cpp" line="91"/>
+        <location filename="dialogs/dialogchangelog.cpp" line="94"/>
         <source>What is new</source>
         <translation>새로운 것</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogchangelog.cpp" line="94"/>
+        <location filename="dialogs/dialogchangelog.cpp" line="97"/>
         <source>What has improved</source>
         <translation>향상된 것</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogchangelog.cpp" line="97"/>
+        <location filename="dialogs/dialogchangelog.cpp" line="100"/>
         <source>What is fixed</source>
         <translation>고쳐진 것</translation>
     </message>
@@ -2274,17 +2297,17 @@ repository</source>
         <translation>적용</translation>
     </message>
     <message>
-        <location filename="editor/widgets/equalizer.cpp" line="144"/>
+        <location filename="editor/widgets/equalizer.cpp" line="122"/>
         <source>Information</source>
         <translation>정보</translation>
     </message>
     <message>
-        <location filename="editor/widgets/equalizer.cpp" line="145"/>
+        <location filename="editor/widgets/equalizer.cpp" line="123"/>
         <source>Equalization successfully applied on 1 sample.</source>
         <translation>1 샘플에 이퀄라이제이션이 적용됐습니다.</translation>
     </message>
     <message>
-        <location filename="editor/widgets/equalizer.cpp" line="146"/>
+        <location filename="editor/widgets/equalizer.cpp" line="124"/>
         <source>Equalization successfully applied on %1 samples.</source>
         <translation>%1 샘플들에 이퀄라이제이션이 적용됐습니다.</translation>
     </message>
@@ -2450,22 +2473,22 @@ repository</source>
 <context>
     <name>InputParserSfz</name>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="103"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="104"/>
         <source>File recursion</source>
         <translation>파일 재귀</translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="111"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="112"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 파일을 열 수 없음</translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="288"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="289"/>
         <source>Sfz import</source>
         <translation>Sfz 가져오기</translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="473"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="474"/>
         <source>untitled</source>
         <translation>제목없음</translation>
     </message>
@@ -2531,47 +2554,47 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="201"/>
+        <location filename="mainwindow/mainwindow.cpp" line="204"/>
         <source>&amp;Save</source>
         <translation>저장(&amp;S)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="202"/>
+        <location filename="mainwindow/mainwindow.cpp" line="205"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="203"/>
+        <location filename="mainwindow/mainwindow.cpp" line="206"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>저장하지 않음(&amp;N)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="187"/>
+        <location filename="mainwindow/mainwindow.cpp" line="190"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="178"/>
+        <location filename="mainwindow/mainwindow.cpp" line="181"/>
         <source>Untitled</source>
         <translation type="unfinished">제목없음</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="188"/>
+        <location filename="mainwindow/mainwindow.cpp" line="191"/>
         <source>Save before exiting?</source>
         <translation>종료하기 전에 저장할까요?</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="191"/>
+        <location filename="mainwindow/mainwindow.cpp" line="194"/>
         <source>The following files have been modified:</source>
         <translation>다음의 파일이 변경됐습니다:</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="198"/>
+        <location filename="mainwindow/mainwindow.cpp" line="201"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>&quot;%1&quot; 파일이 변경됐습니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="275"/>
+        <location filename="mainwindow/mainwindow.cpp" line="278"/>
         <source>Opening files</source>
         <translation>파일 여는 중</translation>
     </message>
@@ -2647,74 +2670,74 @@ repository</source>
 <context>
     <name>ModulatorCell</name>
     <message>
-        <location filename="editor/modulator/modulatorcell.ui" line="139"/>
+        <location filename="editor/modulator/modulatorcell.ui" line="141"/>
         <source>no operation</source>
         <translation>작동하지 않음</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.ui" line="144"/>
+        <location filename="editor/modulator/modulatorcell.ui" line="146"/>
         <source>absolute value</source>
         <translation>절댓값</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="57"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="58"/>
         <source>Modulator</source>
         <translation>모듈레이터</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="98"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="99"/>
         <source>Default mod.</source>
         <translation>기본 모듈레이터</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="159"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="162"/>
         <source>overwritten by %1</source>
         <oldsource>overriden by %1</oldsource>
         <translation>%1 덮어쓰기</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="166"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="169"/>
         <source>disabling
 default mod.</source>
         <translation>기본 모듈레이터
 비활성화</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="168"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="171"/>
         <source>overriding
 default mod.</source>
         <translation>기본 모듈레이터를
 덮어씁니다.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="376"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="387"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation type="unfinished">dB</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="384"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="395"/>
         <source>semi-tones</source>
         <translation>반음</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="387"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="398"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
         <translation>반음의 100 분의 1</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="398"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="409"/>
         <source>Add from:</source>
         <translation>다음으로부터 더하기:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="399"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="410"/>
         <source>Multiply from:</source>
         <translation>다음으로부터 곱하기:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="401"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="412"/>
         <source>To:</source>
         <translation>다음으로:</translation>
     </message>
@@ -2922,7 +2945,7 @@ default mod.</source>
 <context>
     <name>PageOverview</name>
     <message numerus="yes">
-        <location filename="editor/overview/pageoverview.cpp" line="83"/>
+        <location filename="editor/overview/pageoverview.cpp" line="76"/>
         <source>%n element(s)</source>
         <translation>
             <numerusform>%n element</numerusform>
@@ -3418,7 +3441,7 @@ rate</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="646"/>
-        <location filename="editor/pagesmpl.cpp" line="511"/>
+        <location filename="editor/pagesmpl.cpp" line="510"/>
         <location filename="editor/pagesmpl.cpp" line="1009"/>
         <source>Information</source>
         <translation>정보</translation>
@@ -3429,68 +3452,68 @@ rate</source>
         <translation>이퀄라이저 (±15 dB)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="173"/>
-        <location filename="editor/pagesmpl.cpp" line="178"/>
+        <location filename="editor/pagesmpl.cpp" line="172"/>
+        <location filename="editor/pagesmpl.cpp" line="177"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>초</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="177"/>
-        <location filename="editor/pagesmpl.cpp" line="180"/>
+        <location filename="editor/pagesmpl.cpp" line="176"/>
+        <location filename="editor/pagesmpl.cpp" line="179"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(최소)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="257"/>
-        <location filename="editor/pagesmpl.cpp" line="642"/>
+        <location filename="editor/pagesmpl.cpp" line="256"/>
+        <location filename="editor/pagesmpl.cpp" line="641"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>모노</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="268"/>
-        <location filename="editor/pagesmpl.cpp" line="782"/>
+        <location filename="editor/pagesmpl.cpp" line="267"/>
+        <location filename="editor/pagesmpl.cpp" line="781"/>
         <source>right</source>
         <translation>오른쪽</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="269"/>
-        <location filename="editor/pagesmpl.cpp" line="783"/>
+        <location filename="editor/pagesmpl.cpp" line="268"/>
+        <location filename="editor/pagesmpl.cpp" line="782"/>
         <source>left</source>
         <translation>왼쪽</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="270"/>
-        <location filename="editor/pagesmpl.cpp" line="784"/>
+        <location filename="editor/pagesmpl.cpp" line="269"/>
+        <location filename="editor/pagesmpl.cpp" line="783"/>
         <source>link</source>
         <translation>연결</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="309"/>
+        <location filename="editor/pagesmpl.cpp" line="308"/>
         <source>Sample not linked to an instrument yet.</source>
         <translation>샘플이 아직 악기에 연결되지 않았습니다.</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="311"/>
+        <location filename="editor/pagesmpl.cpp" line="310"/>
         <source>Sample linked to instrument:</source>
         <translation>샘플이 연결된 악기들:</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="313"/>
+        <location filename="editor/pagesmpl.cpp" line="312"/>
         <source>Sample linked to instruments:</source>
         <translation>샘플이 연결된 악기들:</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="512"/>
+        <location filename="editor/pagesmpl.cpp" line="511"/>
         <location filename="editor/pagesmpl.cpp" line="1010"/>
         <source>Change successfully applied to the different samples</source>
         <translation>변경이 다른 샘플들에 적용됨</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="781"/>
-        <location filename="editor/pagesmpl.cpp" line="806"/>
+        <location filename="editor/pagesmpl.cpp" line="780"/>
+        <location filename="editor/pagesmpl.cpp" line="805"/>
         <source>mono</source>
         <translation>모노</translation>
     </message>
@@ -3539,7 +3562,7 @@ rate</source>
     <name>QObject</name>
     <message>
         <location filename="core/input/grandorgue/grandorguerank.cpp" line="138"/>
-        <location filename="core/input/grandorgue/grandorguestop.cpp" line="118"/>
+        <location filename="core/input/grandorgue/grandorguestop.cpp" line="116"/>
         <location filename="core/output/outputfactory.cpp" line="104"/>
         <source>untitled</source>
         <translation>제목없음</translation>
@@ -3862,7 +3885,7 @@ rate</source>
         <translation>Sfz 파일</translation>
     </message>
     <message>
-        <location filename="context/translationmanager.cpp" line="99"/>
+        <location filename="context/translationmanager.cpp" line="105"/>
         <source>When editing one side of a stereo sample, the other side is automatically edited the same.
 This rule applies at the sample level and also when editing a division of an instrument:
 the division corresponding to the other channel, if any, is edited the same.
@@ -4373,115 +4396,94 @@ download the list</source>
 <context>
     <name>SoundfontBrowser</name>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="406"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="365"/>
         <source>Category</source>
         <translation>범주</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="422"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="380"/>
         <source>License</source>
         <translation>라이선스</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="438"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="395"/>
         <source>Sample source</source>
         <translation>샘플 소스</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="454"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="410"/>
         <source>Timbre</source>
         <translation>음색</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="470"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="425"/>
         <source>Articulation</source>
         <translation>조음</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="486"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="440"/>
         <source>Genre</source>
         <translation>장르</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="502"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="455"/>
         <source>MIDI standard</source>
         <translation>미디 표준</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="518"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="470"/>
         <source>Tags</source>
         <translation>꼬리표</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="206"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="205"/>
         <source>Search a soundfont...</source>
         <translation>사운드폰트 찾기...</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="238"/>
-        <source>Date</source>
-        <translation>날짜</translation>
-    </message>
-    <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="243"/>
-        <source>Downloads</source>
-        <translation>내려받기</translation>
-    </message>
-    <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="248"/>
-        <source>Rating score</source>
-        <translation>점수</translation>
-    </message>
-    <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="253"/>
-        <source>Title (A→Z)</source>
-        <oldsource>Title (A?Z)</oldsource>
-        <translation>제목 (A→Z)</translation>
-    </message>
-    <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="296"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="257"/>
         <source>Filters</source>
         <translation>필터</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="325"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="286"/>
         <source>Reset</source>
         <translation>초기화</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="344"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="304"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation>프리미엄 계정을 구독해 모든 기능을 얻으세요!</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="160"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="159"/>
         <source>No results</source>
         <translation>결과 없음</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="593"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="545"/>
         <source>Go to the previous page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="628"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="580"/>
         <source>Go to the next page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="718"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="670"/>
         <source>Oops! Cannot
 download the list</source>
         <translation>이런! 목록을
 내려받을 수 없음</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="144"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="140"/>
         <source>commercial use</source>
         <translation>상업적 사용</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="145"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="141"/>
         <source>share after editing</source>
         <translation>수정한 후 공유</translation>
     </message>
@@ -4497,7 +4499,7 @@ download the list</source>
 <context>
     <name>SoundfontDownloadCell</name>
     <message>
-        <location filename="repository/soundfont/viewer/soundfontdownloadcell.ui" line="61"/>
+        <location filename="repository/soundfont/viewer/soundfontdownloadcell.ui" line="72"/>
         <source>Download</source>
         <translation>내려받기</translation>
     </message>
@@ -4812,67 +4814,67 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ThemeManager</name>
     <message>
-        <location filename="context/thememanager.cpp" line="69"/>
+        <location filename="context/thememanager.cpp" line="83"/>
         <source>Custom</source>
         <translation>사용자 정의</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="457"/>
+        <location filename="context/thememanager.cpp" line="471"/>
         <source>Default</source>
         <translation>기본</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="477"/>
+        <location filename="context/thememanager.cpp" line="491"/>
         <source>Gnome</source>
         <translation>그놈(Gnome)</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="490"/>
+        <location filename="context/thememanager.cpp" line="504"/>
         <source>Dark, blue</source>
         <translation>어두운, 파랑</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="503"/>
+        <location filename="context/thememanager.cpp" line="517"/>
         <source>Dark, orange</source>
         <translation>어두운, 오렌지</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="516"/>
+        <location filename="context/thememanager.cpp" line="530"/>
         <source>Dark, green</source>
         <translation>어두운, 초록</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="529"/>
+        <location filename="context/thememanager.cpp" line="543"/>
         <source>Dark, yellow</source>
         <translation>어두운, 노랑</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="542"/>
+        <location filename="context/thememanager.cpp" line="556"/>
         <source>Aqua</source>
         <translation>아쿠아</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="555"/>
+        <location filename="context/thememanager.cpp" line="569"/>
         <source>Spring</source>
         <translation>봄</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="568"/>
+        <location filename="context/thememanager.cpp" line="582"/>
         <source>Windows 10</source>
         <translation>윈도우즈 10</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="581"/>
+        <location filename="context/thememanager.cpp" line="595"/>
         <source>Ubuntu</source>
         <translation>우분투(Ubuntu)</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="594"/>
+        <location filename="context/thememanager.cpp" line="608"/>
         <source>Good night</source>
         <translation>밤</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="607"/>
+        <location filename="context/thememanager.cpp" line="621"/>
         <source>Pink</source>
         <translation>분홍</translation>
     </message>
@@ -5409,23 +5411,23 @@ Other soundfont editors might display other units.</source>
         <translation>명령 예:</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="99"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="101"/>
         <source>Executable file</source>
         <translation>실행 파일</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="116"/>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="123"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="118"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="125"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="116"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="118"/>
         <source>You must enter a command with at least {wav} as argument.</source>
         <translation>최소 {wav} 인수를 사용하여 명령을 입력해야 합니다.</translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="123"/>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="125"/>
         <source>The command must contain the argument {wav}.</source>
         <translation>명령에는 {wav} 인수가 포함돼야 합니다.</translation>
     </message>
@@ -5750,12 +5752,12 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="251"/>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="296"/>
         <source>Success</source>
         <translation type="unfinished">성공</translation>
     </message>
     <message numerus="yes">
-        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="256"/>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="301"/>
         <source>Couldn&apos;t configure %n sample(s).</source>
         <oldsource>Couln&apos;t configure %n sample(s).</oldsource>
         <translation type="unfinished">
@@ -5952,18 +5954,18 @@ Other soundfont editors might display other units.</source>
         <translation>확인(&amp;O)</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="552"/>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="568"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="554"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="570"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="552"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="554"/>
         <source>The instrument name must be provided.</source>
         <translation>악기 이름을 제공해야 합니다.</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="568"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="570"/>
         <source>At least one rank must be specified.</source>
         <translation>하나 이상의 등급을 지정해야 합니다.</translation>
     </message>
@@ -6499,7 +6501,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeItemDelegate</name>
     <message>
-        <location filename="editor/tree/treeitemdelegate.cpp" line="238"/>
+        <location filename="editor/tree/treeitemdelegate.cpp" line="236"/>
         <source>mute</source>
         <translation type="unfinished">음소거</translation>
     </message>
@@ -6530,81 +6532,81 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeViewMenu</name>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="45"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="46"/>
         <source>&amp;Bind to...</source>
         <translation>악기에 바인딩하기(&amp;B)...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="50"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="51"/>
         <source>&amp;Replace by...</source>
         <translation>다음으로 바꾸기... (&amp;R)</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="58"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="59"/>
         <source>&amp;Copy</source>
         <translation>복사하기(&amp;C)</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="64"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="65"/>
         <source>&amp;Paste</source>
         <translation>붙여넣기(&amp;P)</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="70"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="71"/>
         <source>D&amp;uplicate</source>
         <translation>복제(&amp;U)</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="76"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="77"/>
         <source>&amp;Delete</source>
         <translation>제거(&amp;D)</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="83"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="146"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="150"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="84"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="147"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="151"/>
         <source>Re&amp;name...</source>
         <oldsource>&amp;Rename...</oldsource>
         <translation>이름변경(&amp;N)</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="146"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="147"/>
         <source>Bulk re&amp;name...</source>
         <translation>대량 이름변경(&amp;N)</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="192"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="195"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="193"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="196"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="193"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="194"/>
         <source>Cannot delete a sample used by another instrument.</source>
         <translation>다른 프리셋에서 사용되는 샘플은 제거할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="196"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="197"/>
         <source>Cannot delete an instrument used by another preset.</source>
         <translation>다른 프리셋에서 사용되는 악기는 제거할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="356"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="341"/>
         <source>Sample name</source>
         <translation>샘플 이름</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="358"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="343"/>
         <source>Instrument name</source>
         <translation>악기 이름</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="360"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="345"/>
         <source>Preset name</source>
         <translation>프리셋 이름</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="382"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="367"/>
         <source>Rename</source>
         <translation>이름변경</translation>
     </message>

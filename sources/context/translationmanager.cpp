@@ -29,6 +29,7 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QDirIterator>
+#include <QDebug>
 
 const QString TranslationManager::DEFAULT_LANGUAGE = "en"; // English is the default language;
 const QString TranslationManager::RESOURCE_PATH = ":/i18n";
@@ -83,9 +84,15 @@ void TranslationManager::translate()
     // First try to find an additional file
     QString fileName = "/polyphone_" + language + ".qm";
     if (QFile::exists(QDir::currentPath() + "/" + TRANSLATION_DIRECTORY + fileName))
-        _translator->load(QDir::currentPath() + "/" + TRANSLATION_DIRECTORY + fileName);
+    {
+        if (!_translator->load(QDir::currentPath() + "/" + TRANSLATION_DIRECTORY + fileName))
+            qWarning() << "Cannot load translation" << QDir::currentPath() + "/" + TRANSLATION_DIRECTORY + fileName;
+    }
     else
-        _translator->load(RESOURCE_PATH + fileName);
+    {
+        if (!_translator->load(RESOURCE_PATH + fileName))
+            qWarning() << "Cannot load translation" << RESOURCE_PATH + fileName;
+    }
     QApplication::installTranslator(_translator);
 }
 

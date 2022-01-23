@@ -883,7 +883,7 @@ QString Duplicator::adaptName(QString name, EltID idDest)
     }
 
     // If the name ends with a suffix such as "-1", possibly remove it
-    QRegExp regEx("-[0-9]+$");
+    QRegularExpression regEx("-[0-9]+$");
     int suffixPos = name.indexOf(regEx);
     if (suffixPos >= 0)
     {

@@ -28,6 +28,7 @@
 #include <QMap>
 #include <QObject>
 #include <QString>
+#include <QVariant>
 
 template<class T>
 class QFutureWatcher;

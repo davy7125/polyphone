@@ -65,7 +65,7 @@ void SoundfontViewerLeft::initialize(SoundfontInformation *soundfontInfo)
                              "\" href=\"" + author + "\">" + author + "</a>");
 
     // Date
-    ui->labelDate->setText(soundfontInfo->getDateTime().toString(Qt::SystemLocaleShortDate));
+    ui->labelDate->setText(soundfontInfo->getDateTime().toString(this->locale().dateFormat(QLocale::ShortFormat)));
 
     // License
     ui->labelLicense->setText("<a style=\"text-decoration:none;color:" +

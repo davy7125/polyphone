@@ -308,9 +308,9 @@ int Utils::compareName(SoundfontManager *sm, EltID idDiv1, EltID idDiv2)
 QString Utils::removeSuffix(QString txt)
 {
     // Detect a possible suffix like "-01" or " 061R" at the end and remove it
-    QRegExp regExp1("-[0-9]{2}");
-    QRegExp regExp2(" [0-9]{3}");
-    QRegExp regExp3(" [0-9]{3}[LR]");
+    QRegularExpression regExp1("-[0-9]{2}");
+    QRegularExpression regExp2(" [0-9]{3}");
+    QRegularExpression regExp3(" [0-9]{3}[LR]");
     if (txt.size() >= 3 && txt.lastIndexOf(regExp1) == txt.size() - 3)
         return txt.left(txt.size() - 3);
     if (txt.size() >= 4 && txt.lastIndexOf(regExp2) == txt.size() - 4)

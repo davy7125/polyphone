@@ -33,6 +33,9 @@ QString ColoredTabWidget::s_styleSheetLastPart = "\
 QTabBar {\
     background-color: transparent;\
 }\
+QTabWidget::tab-bar {\
+    left: 0;\
+}\
 QTabWidget:pane {\
     border-right: 0px;\
     border-left: 0px;\
@@ -140,6 +143,9 @@ int ColoredTabWidget::addColoredTab(QWidget *widget, QString iconName, const QSt
     _tabInfo[widget]._closeButton = button;
     connect(button, SIGNAL(clicked()), this, SLOT(onCloseButtonClicked()));
     this->tabBar()->setTabButton(indexTab, QTabBar::RightSide, button);
+    if (this->tabBar()->tabButton(indexTab, QTabBar::LeftSide))
+        this->tabBar()->tabButton(indexTab, QTabBar::LeftSide)->deleteLater();
+    this->tabBar()->setTabButton(indexTab, QTabBar::LeftSide, nullptr);
 
     return indexTab;
 }

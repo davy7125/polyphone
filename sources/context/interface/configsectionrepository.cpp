@@ -29,6 +29,7 @@
 #include <QUrl>
 #include <QDir>
 #include <QFileDialog>
+#include <QStandardPaths>
 #include "utils.h"
 
 ConfigSectionRepository::ConfigSectionRepository(QWidget *parent) :

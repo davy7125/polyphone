@@ -62,8 +62,8 @@ QString SoundfontDownloadData::getFormattedSize()
     return QLocale::system().toString(static_cast<double>(_size) / 1024 / 1024 / 1024 / 1024, 'f', 2) + " " + QObject::tr("TB", "terabytes");
 }
 
-QString SoundfontDownloadData::getLastDate()
+QDate SoundfontDownloadData::getLastDate()
 {
     QDateTime lastDate = (_updatedTime.isValid() ? _updatedTime : _createdTime);
-    return lastDate.date().toString(Qt::SystemLocaleShortDate);
+    return lastDate.date();
 }

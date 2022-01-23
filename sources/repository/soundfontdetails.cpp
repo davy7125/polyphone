@@ -39,17 +39,23 @@ SoundfontDetails::SoundfontDetails(const QJsonObject &data) :
     // Downloads
     if (data.contains("downloads") && data.value("downloads").isArray())
     {
-        foreach (QJsonValue value, data.value("downloads").toArray())
+        QJsonArray downloads = data.value("downloads").toArray();
+        for (int i = 0; i < downloads.count(); i++)
+        {
+            QJsonValue value = downloads[i];
             if (value.isObject())
                 _downloads << new SoundfontDownloadData(value.toObject());
+        }
     }
 
     // Comments
     if (data.contains("comments") && data.value("comments").isArray())
     {
         QJsonArray comments = data.value("comments").toArray();
-        foreach (QJsonValue value, comments)
+        for (int i = 0; i < comments.count(); i++)
         {
+            QJsonValue value = comments[i];
+
             // New comment
             SoundfontCommentData * orphan = new SoundfontCommentData(value.toObject());
 

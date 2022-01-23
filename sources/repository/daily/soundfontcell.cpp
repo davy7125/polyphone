@@ -127,7 +127,11 @@ void SoundfontCell::on_labelAuthor_linkActivated(const QString &link)
 int SoundfontCell::heightForWidth(int width) const
 {
     // 2 * 9px (margins) + 2 * 6px (spaces) => 30px
-    return 30 + ui->line1->height() + ui->line2->height() + ui->line3->heightForWidth(width - 18);
+    float coef = 1.0;
+#ifdef Q_OS_MAC
+    coef = 1.5; // Don't know why
+#endif
+    return 30 * coef + ui->line1->height() + ui->line2->height() + ui->line3->heightForWidth(width - 18 * coef);
 }
 
 bool SoundfontCell::hasHeightForWidth() const

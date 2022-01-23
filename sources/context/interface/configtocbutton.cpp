@@ -45,7 +45,11 @@ void ConfigTocButton::setIconName(QString iconName)
     this->setIcon(_icon);
 }
 
+#if QT_VERSION >= 0x060000
+void ConfigTocButton::enterEvent(QEnterEvent * event)
+#else
 void ConfigTocButton::enterEvent(QEvent * event)
+#endif
 {
     this->setIcon(_iconHovered);
     QToolButton::enterEvent(event);

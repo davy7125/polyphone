@@ -171,9 +171,6 @@ void RepositoryManager::fillLicenseLabelAndLink()
     _licenseLabels["personal_use_only"] = tr("personal use, don't distribute a modified version");
 
     // Links
-    QString language = ContextManager::configuration()->getValue(
-                ConfManager::SECTION_NONE, "language",
-                QLocale::system().name().section('_', 0, 0)).toString();
     _licenseUrl = "https://www.polyphone-soundfonts.com/license#";
 }
 
@@ -216,8 +213,10 @@ QString RepositoryManager::loadSoundfontInfo()
     QJsonArray jsonSoundfonts = object.value("soundfonts").toArray();
 
     // Load the information of all soundfonts
-    foreach (QJsonValue jsonSoundfont, jsonSoundfonts)
+    for (int i = 0; i < jsonSoundfonts.count(); i++)
     {
+        QJsonValue jsonSoundfont = jsonSoundfonts[i];
+
         // Get the object
         if (!jsonSoundfont.isObject())
         {
@@ -311,8 +310,9 @@ QString RepositoryManager::loadSoundfontInfo()
         if (valueTmp.isArray())
         {
             QJsonArray jsonTags = valueTmp.toArray();
-            foreach (QJsonValue jsonTag, jsonTags)
+            for (int j = 0; j < jsonTags.count(); j++)
             {
+                QJsonValue jsonTag = jsonTags[j];
                 if (jsonTag.isString())
                 {
                     QString tag = jsonTag.toString();

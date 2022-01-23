@@ -138,9 +138,9 @@ QString DialogRecorder::getDefaultPath()
     if (info.dir().exists() && defaultPath.size())
     {
         QString name = info.fileName();
-        QRegExp exp("^(.*)-[0-9][0-9]*.[wW][aA][vV]$");
-        if (exp.exactMatch(name))
-            name = exp.cap(1);
+        QRegularExpressionMatch match = QRegularExpression("^(.*)-[0-9][0-9]*.[wW][aA][vV]$").match(name);
+        if (match.hasMatch())
+            name = match.captured(1);
         else
             name = name.left(name.size() - 4);
 

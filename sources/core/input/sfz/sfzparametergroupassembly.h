@@ -47,7 +47,7 @@ public:
     }
     void moveOpcodesInGlobal(SfzParameterGroup &globalZone);
     void moveKeynumInSamples(SfzParameter::OpCode opCodeKeynum, SfzParameter::OpCode opCodeBase);
-    void moveOpcodeInSamples(SfzParameter::OpCode opcode, QVariant::Type type);
+    void moveOpcodeInSamples(SfzParameter::OpCode opcode, QMetaType::Type type);
     void moveModInSamples();
     void moveModInSamples(QList<SfzParameter::OpCode> opCodeList);
     void checkSampleValid(QString path);

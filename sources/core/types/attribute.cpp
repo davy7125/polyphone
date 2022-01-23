@@ -508,7 +508,7 @@ AttributeValue Attribute::fromString(AttributeType champ, bool isPrst, QString s
     switch (champ)
     {
     case champ_keyRange: case champ_velRange: {
-        int posSeparator = strValue.indexOf(QRegExp("[0-9]-")) + 1;
+        int posSeparator = strValue.indexOf(QRegularExpression("[0-9]-")) + 1;
         QString txtLeft, txtRight;
         if (posSeparator == 0)
             txtLeft = txtRight = strValue;

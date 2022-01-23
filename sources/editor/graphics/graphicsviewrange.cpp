@@ -113,7 +113,7 @@ void GraphicsViewRange::initItems()
         _scene->addItem(line);
         line->setPen(penVerticalLines);
         line->setZValue(0);
-        GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignHCenter + Qt::AlignBottom);
+        GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignHCenter | Qt::AlignBottom);
         _scene->addItem(text);
         text->setZValue(100);
         text->setBrush(_textColor);
@@ -132,7 +132,7 @@ void GraphicsViewRange::initItems()
         _scene->addItem(line);
         line->setPen(penHorizontalLines);
         line->setZValue(0);
-        GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignLeft + Qt::AlignVCenter);
+        GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignLeft | Qt::AlignVCenter);
         _scene->addItem(text);
         text->setZValue(100);
         text->setBrush(_textColor);
@@ -355,8 +355,8 @@ void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
             _posY = (_displayedRect.top() - OFFSET) / deltaY;
 
         // Remember situation
-        _xInit = normalizeX(event->x());
-        _yInit = normalizeY(event->y());
+        _xInit = normalizeX(event->pos().x());
+        _yInit = normalizeY(event->pos().y());
         _zoomXinit = _zoomX;
         _zoomYinit = _zoomY;
         _posXinit = _posX;
@@ -611,7 +611,7 @@ void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
     } break;
     case Qt::RightButton:
         this->setCursor(Qt::SizeAllCursor);
-        this->setZoomLine(_xInit, _yInit, normalizeX(event->x()), normalizeY(event->y()));
+        this->setZoomLine(_xInit, _yInit, normalizeX(event->pos().x()), normalizeY(event->pos().y()));
         this->zoom(event->pos());
         break;
     case Qt::NoButton: default: {

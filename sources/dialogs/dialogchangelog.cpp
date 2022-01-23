@@ -59,26 +59,29 @@ DialogChangeLog::DialogChangeLog(QWidget *parent) :
     QStringList listNew, listFix, listImprovement;
     QFile inputFile(":/misc/changelog");
     QString currentVersion = "";
-    QRegExp rx1("^polyphone \\(([0-9]+\\.[0-9]+)\\).*");
-    QRegExp rx2("^  \\* \\((new|fix|improvement)\\) (.*)");
+    QRegularExpression rx1("^polyphone \\(([0-9]+\\.[0-9]+)\\).*");
+    QRegularExpression rx2("^  \\* \\((new|fix|improvement)\\) (.*)");
     if (inputFile.open(QIODevice::ReadOnly))
     {
        QTextStream in(&inputFile);
        while (!in.atEnd())
        {
           QString line = in.readLine();
-          if (rx1.exactMatch(line))
-              currentVersion = rx1.cap(1);
+
+          QRegularExpressionMatch match = rx1.match(line);
+          if (match.hasMatch())
+              currentVersion = match.captured(1);
           else if (currentVersion == versionSmall)
           {
-              if (rx2.exactMatch(line))
+              match = rx1.match(line);
+              if (match.hasMatch())
               {
-                  if (rx2.cap(1) == "new")
-                      listNew << rx2.cap(2);
-                  else if (rx2.cap(1) == "improvement")
-                      listImprovement << rx2.cap(2);
-                  else if (rx2.cap(1) == "fix")
-                      listFix << rx2.cap(2);
+                  if (match.captured(1) == "new")
+                      listNew << match.captured(2);
+                  else if (match.captured(1) == "improvement")
+                      listImprovement << match.captured(2);
+                  else if (match.captured(1) == "fix")
+                      listFix << match.captured(2);
               }
           }
        }

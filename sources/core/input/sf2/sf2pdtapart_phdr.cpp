@@ -41,10 +41,11 @@ QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_phdr &phdr)
 {
     // Name
     int length = 20;
-    QByteArray buffer(length, Qt::Uninitialized);
+    QByteArray buffer(length + 1, Qt::Uninitialized);
     if (in.readRawData(buffer.data(), length) != length)
         return in;
-    phdr._name = QString::fromLatin1(buffer);
+    buffer[20] = 0;
+    phdr._name = QString::fromLatin1(buffer.data()).trimmed();
 
     // Preset, bank
     in >> phdr._preset;

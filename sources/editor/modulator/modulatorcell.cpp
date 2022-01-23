@@ -28,8 +28,9 @@
 #include <QPainter>
 #include "contextmanager.h"
 #include "soundfontmanager.h"
+#include <QAbstractItemView>
 
-static const QChar unicodeDoubleArrow[] = { 0xfeff, 0x27F7 };
+static const QChar unicodeDoubleArrow[] = { QChar(0xfeff), QChar(0x27F7) };
 const QString ModulatorCell::s_doubleArrow = " " + QString::fromRawData(unicodeDoubleArrow, 2) + " ";
 
 ModulatorCell::ModulatorCell(EltID id, QWidget *parent) :
@@ -150,6 +151,8 @@ void ModulatorCell::initializeStyle()
                 0.65);
     _fontHint = QFont(this->font().family(), qMax(7, this->font().pointSize() * 3 / 4));
     ui->labelFinalRange->setFont(_fontHint);
+
+    QString backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name();
 }
 
 void ModulatorCell::setOverwrittenBy(int otherModulator)
@@ -228,11 +231,20 @@ void ModulatorCell::paintEvent(QPaintEvent* event)
     int posMultiplicationSign = 44;
     p.setPen(QPen(_isSelected ? _labelColorSelected : _labelColor, 3));
     p.drawLine(ui->comboSource2->x() + ui->comboSource2->width(), ui->comboSource2->y() + ui->comboSource2->height() / 2,
-               ui->widgetShape2->x() + ui->widgetShape2->width() + posMultiplicationSign, ui->comboSource2->y() + ui->comboSource2->height() / 2);
-    p.drawLine(ui->comboSource1->x() + ui->comboSource1->width(), ui->comboSource1->y() + ui->comboSource1->height() / 2,
-               ui->comboDestination->x(), ui->comboSource1->y() + ui->comboSource1->height() / 2);
+                   ui->widgetShape2->x(), ui->comboSource2->y() + ui->comboSource2->height() / 2);
+    p.drawLine(ui->widgetShape2->x() + ui->widgetShape2->width(), ui->comboSource2->y() + ui->comboSource2->height() / 2,
+                   ui->widgetShape2->x() + ui->widgetShape2->width() + posMultiplicationSign, ui->comboSource2->y() + ui->comboSource2->height() / 2);
     p.drawLine(ui->widgetShape1->x() + ui->widgetShape1->width() + posMultiplicationSign, ui->comboSource1->y() + ui->comboSource1->height() / 2,
                ui->widgetShape1->x() + ui->widgetShape1->width() + posMultiplicationSign, ui->comboSource2->y() + ui->comboSource2->height() / 2);
+
+    p.drawLine(ui->comboSource1->x() + ui->comboSource1->width(), ui->comboSource1->y() + ui->comboSource1->height() / 2,
+               ui->widgetShape1->x(), ui->comboSource1->y() + ui->comboSource1->height() / 2);
+    p.drawLine(ui->widgetShape1->x() + ui->widgetShape1->width(), ui->comboSource1->y() + ui->comboSource1->height() / 2,
+               ui->spinAmount->x(), ui->comboSource1->y() + ui->comboSource1->height() / 2);
+    p.drawLine(ui->spinAmount->x() + ui->spinAmount->width(), ui->comboSource1->y() + ui->comboSource1->height() / 2,
+               ui->comboTransform->x(), ui->comboSource1->y() + ui->comboSource1->height() / 2);
+    p.drawLine(ui->comboTransform->x() + ui->comboTransform->width(), ui->comboSource1->y() + ui->comboSource1->height() / 2,
+               ui->comboDestination->x(), ui->comboSource1->y() + ui->comboSource1->height() / 2);
 
     // Add input range
     p.setFont(_fontHint);
@@ -246,7 +258,6 @@ void ModulatorCell::paintEvent(QPaintEvent* event)
 
     // Draw a multiplication sign
     p.setRenderHint(QPainter::Antialiasing);
-    p.setRenderHint(QPainter::HighQualityAntialiasing);
     p.setBrush(_isSelected ? _labelColorSelected : _labelColor);
     p.drawEllipse(ui->widgetShape1->x() + ui->widgetShape1->width() + posMultiplicationSign - 8, ui->comboSource1->y() + ui->comboSource1->height() / 2 - 8, 16, 16);
     p.setPen(QPen(_isSelected ? _computationAreaColorSelected : _computationAreaColor, 2));

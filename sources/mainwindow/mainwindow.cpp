@@ -35,7 +35,6 @@
 #include "toprightwidget.h"
 #include "editortoolbar.h"
 #include <QToolButton>
-#include <QDesktopWidget>
 #include <QDesktopServices>
 #include <QUrl>
 #include <QTimer>
@@ -97,8 +96,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(trw, SIGNAL(userClicked()), this, SLOT(onUserClicked()));
 
     // Remove the close button of the first tab "home"
-    ui->tabWidget->tabBar()->tabButton(0, QTabBar::RightSide)->deleteLater();
+    if (ui->tabWidget->tabBar()->tabButton(0, QTabBar::RightSide))
+        ui->tabWidget->tabBar()->tabButton(0, QTabBar::RightSide)->deleteLater();
     ui->tabWidget->tabBar()->setTabButton(0, QTabBar::RightSide, nullptr);
+    if (ui->tabWidget->tabBar()->tabButton(0, QTabBar::LeftSide))
+        ui->tabWidget->tabBar()->tabButton(0, QTabBar::LeftSide)->deleteLater();
+    ui->tabWidget->tabBar()->setTabButton(0, QTabBar::LeftSide, nullptr);
 
     //////////////////////
     /// INITIALIZATION ///
@@ -173,7 +176,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
         {
             QString name = sm->getQstr(id, champ_name);
             if (name.isEmpty())
-                name = sm->getQstr(id, champ_filenameInitial).split(QRegExp("(/|\\\\)")).last();
+                name = sm->getQstr(id, champ_filenameInitial).split(QRegularExpression("(/|\\\\)")).last();
             if (name.isEmpty())
                 name = tr("Untitled");
             fileNames << name;

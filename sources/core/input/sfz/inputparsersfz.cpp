@@ -24,6 +24,7 @@
 
 #include "inputparsersfz.h"
 #include "soundfontmanager.h"
+#include <QRegularExpression>
 
 InputParserSfz::InputParserSfz() : AbstractInputParser() {}
 
@@ -55,16 +56,16 @@ void InputParserSfz::processInternal(QString fileName, SoundfontManager * sm, bo
     for (int i = 0; i < _listeEnsembles.size(); i++)
     {
         _listeEnsembles[i].moveOpcodesInGlobal(_globalZone);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_sample, QVariant::String);
+        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_sample, QMetaType::QString);
         _listeEnsembles[i].checkSampleValid(QFileInfo(fileName).path());
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_offset, QVariant::Int);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_end, QVariant::Int);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_loop_start, QVariant::Int);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_loop_end, QVariant::Int);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_loop_mode, QVariant::String);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_pan, QVariant::Double);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_off_by, QVariant::Int);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_exclusiveClass, QVariant::Int);
+        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_offset, QMetaType::Int);
+        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_end, QMetaType::Int);
+        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_loop_start, QMetaType::Int);
+        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_loop_end, QMetaType::Int);
+        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_loop_mode, QMetaType::QString);
+        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_pan, QMetaType::Double);
+        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_off_by, QMetaType::Int);
+        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_exclusiveClass, QMetaType::Int);
         _listeEnsembles[i].moveModInSamples();
         _listeEnsembles[i].moveKeynumInSamples(SfzParameter::op_noteToVolEnvDecay, SfzParameter::op_ampeg_decay);
         _listeEnsembles[i].moveKeynumInSamples(SfzParameter::op_noteToVolEnvHold, SfzParameter::op_ampeg_hold);
@@ -130,7 +131,7 @@ void InputParserSfz::parseFile(QString filename, bool &success, QString &error)
         int length = list.size();
         for (int i = length - 1; i >= 1; i--)
         {
-            if (!list.at(i).contains(QRegExp("[<>=]")))
+            if (!list.at(i).contains(QRegularExpression("[<>=]")))
             {
                 list[i-1] += " " + list[i];
                 list.removeAt(i);
@@ -445,8 +446,8 @@ QString InputParserSfz::getInstrumentName(QString filePath, int &numBank, int &n
     QString nomDir = fileInfo.dir().dirName();
 
     // Numéro de preset
-    QRegExp regExp("^\\d\\d\\d.*");
-    if (regExp.exactMatch(nomFichier))
+    QRegularExpression regExp("^\\d\\d\\d.*");
+    if (regExp.match(nomFichier).hasMatch())
     {
         numPreset = nomFichier.left(3).toInt();
         if (numPreset < 0 || numPreset > 127)
@@ -461,7 +462,7 @@ QString InputParserSfz::getInstrumentName(QString filePath, int &numBank, int &n
     }
 
     // Numéro de banque
-    if (regExp.exactMatch(nomDir))
+    if (regExp.match(nomDir).hasMatch())
     {
         numBank = nomDir.left(3).toInt();
         if (numBank < 0 || numBank > 127)

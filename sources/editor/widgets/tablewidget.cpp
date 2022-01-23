@@ -361,7 +361,7 @@ void TableWidget::paste()
 {
     emit(actionBegin());
     QString selected_text = qApp->clipboard()->text();
-    QStringList cells = selected_text.split(QRegExp("[\n\t]"));
+    QStringList cells = selected_text.split(QRegularExpression("[\n\t]"));
 
     int cellrows = selected_text.count('\n') + 1;
     int cellcols = cells.size() / cellrows;

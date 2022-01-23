@@ -30,7 +30,7 @@
 #include "contextmanager.h"
 
 const int GraphicsLegendItem::s_border = 5;
-static const QChar unicodeArrow[] = { 0xfeff, 0x279c };
+static const QChar unicodeArrow[] = { QChar(0xfeff), QChar(0x279c) };
 const QString GraphicsLegendItem::s_rightArrow = QString::fromRawData(unicodeArrow, 2);
 
 GraphicsLegendItem::GraphicsLegendItem(QString fontFamily, QGraphicsItem * parent) : QGraphicsItem(parent),

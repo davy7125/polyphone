@@ -31,7 +31,7 @@
 AttributeFlow::AttributeFlow(QWidget *parent) : QWidget(parent)
 {
     _layout = new FlowLayout(this, 6, 6);
-    _layout->setMargin(0);
+    _layout->setContentsMargins(0, 0, 0, 0);
     this->setLayout(_layout);
 }
 

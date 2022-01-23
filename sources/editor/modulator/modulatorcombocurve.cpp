@@ -31,7 +31,7 @@
 #include <QHeaderView>
 #include "soundfontmanager.h"
 
-static const QChar unicodeArrow[] = { 0xfeff, 0x279c };
+static const QChar unicodeArrow[] = { QChar(0xfeff), QChar(0x279c) };
 const QString ModulatorComboCurve::s_rightArrow = " " + QString::fromRawData(unicodeArrow, 2) + " ";
 
 ModulatorComboCurve::ModulatorComboCurve(QWidget* parent) : QComboBox(parent)

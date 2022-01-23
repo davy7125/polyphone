@@ -31,7 +31,6 @@
 #include "pianokeybdcustom.h"
 #include <QProgressDialog>
 #include <QInputDialog>
-#include <QDesktopWidget>
 #include <QProcess>
 
 PageSmpl::PageSmpl(QWidget *parent) :
@@ -83,7 +82,7 @@ PageSmpl::PageSmpl(QWidget *parent) :
     ui->framePlayArea->move(5, 5);
 
     // Adapt the interface for small screens
-    if (QApplication::desktop()->width() <= 800)
+    if (QGuiApplication::primaryScreen()->geometry().width() <= 800)
     {
         // Add a tabwidget in an existing layout
         QTabWidget * tabWidget = new QTabWidget(ui->frame_5);
@@ -1235,7 +1234,7 @@ QString PageSmpl::findDuplicateName(EltID smplId)
     }
 
     // If the name ends with a suffix such as "-1", possibly remove it
-    QRegExp regEx("-[0-9]+$");
+    QRegularExpression regEx("-[0-9]+$");
     int suffixPos = currentName.indexOf(regEx);
     if (suffixPos >= 0)
     {

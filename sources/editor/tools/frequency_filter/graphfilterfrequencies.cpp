@@ -136,18 +136,22 @@ bool GraphFilterFrequencies::eventFilter(QObject* o, QEvent* e)
             && o == this)
     {
         QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(e);
-        QPoint pos = mouseEvent->pos();
-        if (mouseEvent->type() == QEvent::MouseMove)
-            this->mouseMoved(pos);
-        else if (mouseEvent->type() == QEvent::Leave)
+        if (mouseEvent->type() == QEvent::Leave)
             this->mouseLeft();
-        else if (mouseEvent->button() == Qt::LeftButton)
+        else
         {
-            if (mouseEvent->type() == QEvent::MouseButtonPress)
-                this->mousePressed(pos);
-            else if (mouseEvent->type() == QEvent::MouseButtonRelease)
-                this->mouseReleased(pos);
+            QPoint pos = mouseEvent->pos();
+            if (mouseEvent->type() == QEvent::MouseMove)
+                this->mouseMoved(pos);
+            else if (mouseEvent->button() == Qt::LeftButton)
+            {
+                if (mouseEvent->type() == QEvent::MouseButtonPress)
+                    this->mousePressed(pos);
+                else if (mouseEvent->type() == QEvent::MouseButtonRelease)
+                    this->mouseReleased(pos);
+            }
         }
+
         return true;
     }
 

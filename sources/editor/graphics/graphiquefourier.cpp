@@ -518,7 +518,7 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
 void GraphiqueFourier::exportPng()
 {
     QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" +
-            _name.replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".png";
+            _name.replace(QRegularExpression(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".png";
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export a graph"),
                                                     defaultFile, tr("Png file") + " (*.png)");
     if (!fileName.isEmpty())

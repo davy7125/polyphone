@@ -38,8 +38,12 @@ public:
     ~TransparentFrame();
 
 protected:
-    void enterEvent(QEvent * event);
-    void leaveEvent(QEvent * event);
+#if QT_VERSION >= 0x060000
+    void enterEvent(QEnterEvent * event) override;
+#else
+    void enterEvent(QEvent * event) override;
+#endif
+    void leaveEvent(QEvent * event) override;
 
 private:
     QGraphicsOpacityEffect * _opacity;

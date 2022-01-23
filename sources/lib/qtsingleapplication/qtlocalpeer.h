@@ -71,6 +71,7 @@ protected:
     QtLockedFile lockFile;
 
 private:
+    quint16 computeCheckSum(QString id);
     static const char* ack;
 };
 

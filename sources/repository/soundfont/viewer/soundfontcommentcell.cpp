@@ -56,7 +56,7 @@ void SoundfontCommentCell::initialize(SoundfontCommentData * data, int level)
 {
     // Info
     ui->labelUser->setText(data->getUserName());
-    ui->labelDate->setText(data->getCreationTime().toString(Qt::SystemLocaleShortDate));
+    ui->labelDate->setText(data->getCreationTime().toString(this->locale().dateFormat(QLocale::ShortFormat)));
     ui->textComment->setHtml(data->getText());
 
     // Level

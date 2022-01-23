@@ -57,13 +57,6 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     ui->frameSearch->setStyleSheet(titleStyleSheet);
     ui->pushBecomePremium->setStyleSheet("QPushButton{border:1px solid " + border + ";border-top:0;border-right:0;padding:4px;color:" +
                                          ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::BUTTON_BACKGROUND).name() + "}");
-    ui->comboSort->view()->window()->setWindowFlags(Qt::Popup | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
-    ui->comboSort->setStyleSheet(QString("QComboBox,QComboBox::drop-down{border-top-right-radius: 2px;border-bottom-right-radius: 2px}") +
-                                 "QComboBox::drop-down{border-width:0; } QComboBox{padding: 0;background-color:" + highlightedText +
-                                 ";color:" + highlightedBackground + "}");
-    ui->labelSort->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/sort.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_BACKGROUND));
-    ui->labelSort->setStyleSheet("QLabel{border-top-left-radius:2px;border-bottom-left-radius:2px;padding: 0 5px;background-color:" + highlightedText + "}");
-
     ui->pushResetFilters->setStyleSheet("QPushButton{background-color:" + highlightedText + ";color:" + highlightedBackground +
                                         ";border-radius:2px;border:0;padding:2px 5px} QPushButton:hover{background-color:" +
                                         ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name() + "}");
@@ -104,6 +97,9 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     // Connection with the user manager
     connect(UserManager::getInstance(), SIGNAL(connectionStateChanged(UserManager::ConnectionState)),
             this, SLOT(userStatusChanged(UserManager::ConnectionState)));
+
+    // Other connection
+    connect(ui->widgetSortMenu, SIGNAL(currentIndexChanged(int)), this, SLOT(onComboSortCurrentIndexChanged(int)));
 }
 
 SoundfontBrowser::~SoundfontBrowser()
@@ -303,7 +299,7 @@ bool sortByTitle(SoundfontInformation * si1, SoundfontInformation * si2)
 void SoundfontBrowser::updateSort()
 {
     // Sort
-    switch (ui->comboSort->currentIndex())
+    switch (ui->widgetSortMenu->currentIndex())
     {
     case 0:
         std::sort(_currentSoundfontInfos.begin(), _currentSoundfontInfos.end(), sortByDate);
@@ -393,10 +389,10 @@ void SoundfontBrowser::on_listWidget_itemSelectionChanged()
     }
 }
 
-void SoundfontBrowser::on_comboSort_currentIndexChanged(int index)
+void SoundfontBrowser::onComboSortCurrentIndexChanged(int index)
 {
     Q_UNUSED(index)
-    this->updateSort();
+    updateSort();
 }
 
 void SoundfontBrowser::keyPressEvent(QKeyEvent * event)

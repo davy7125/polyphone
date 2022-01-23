@@ -54,7 +54,7 @@ SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidge
     _authorTextNoColor = "<a style=\"text-decoration:none;color:%1;\" href=\"" + _authorTextNoColor + "\">" + _authorTextNoColor + "</a>";
 
     // Date
-    ui->labelDate->setText(soundfontInfo->getDateTime().toString(Qt::SystemLocaleShortDate));
+    ui->labelDate->setText(soundfontInfo->getDateTime().toString(this->locale().dateFormat(QLocale::ShortFormat)));
 
     // License
     ui->labelLicense->setTextToElide(RepositoryManager::getInstance()->getLicenseLabel(soundfontInfo->getLicense()),
@@ -164,7 +164,11 @@ void SoundfontCellFull::on_labelAuthor_linkActivated(const QString &link)
 int SoundfontCellFull::heightForWidth(int width) const
 {
     // 2 * 9px (margins) + 2 * 6px (spaces) => 30px
-    return 30 + ui->line1->height() + ui->line2->height() + ui->line3->heightForWidth(width - 18);
+    float coef = 1.0;
+#ifdef Q_OS_MAC
+    coef = 1.5; // Don't know why
+#endif
+    return 30 * coef + ui->line1->height() + ui->line2->height() + ui->line3->heightForWidth(width - 18 * coef);
 }
 
 bool SoundfontCellFull::hasHeightForWidth() const

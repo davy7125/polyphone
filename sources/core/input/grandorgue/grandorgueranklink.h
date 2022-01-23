@@ -33,7 +33,7 @@ class SoundfontManager;
 class GrandOrgueRankLink
 {
 public:
-    GrandOrgueRankLink(GrandOrgueDataThrough * godt);
+    GrandOrgueRankLink();
 
     void readData(QString key, QString value);
     void preProcess(int firstKey);
@@ -43,11 +43,9 @@ public:
     int getFirstPipeIndex();
 
 private:
-    GrandOrgueDataThrough * _godt;
     QMap<QString, QString> _properties;
     int _rankId;
     int _firstKey;
-    int _firstPipeIndex;
 };
 
 #endif // GRANDORGUERANKLINK_H

@@ -86,10 +86,12 @@ void ToolExternalCommand_gui::saveParameters(AbstractToolParameters * parameters
     params->setReplaceInfo(ui->checkReplaceInfo->isChecked());
 }
 
-void ToolExternalCommand_gui::on_comboPrevious_currentIndexChanged(const QString &arg1)
+void ToolExternalCommand_gui::on_comboPrevious_currentIndexChanged(int index)
 {
+    Q_UNUSED(index)
+
     // Recall a previous command
-    ui->lineCommand->setText(arg1);
+    ui->lineCommand->setText(ui->comboPrevious->currentText());
 }
 
 void ToolExternalCommand_gui::on_pushOpen_clicked()
@@ -108,7 +110,7 @@ void ToolExternalCommand_gui::on_pushOk_clicked()
     QString command = ui->lineCommand->text();
 
     // Split the command
-    QStringList split = command.split(QRegExp(" +(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"));
+    QStringList split = command.split(QRegularExpression(" +(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"));
 
     // Command with at least "wav" as argument
     if (split.count() < 2 || split.first() == "{wav}")

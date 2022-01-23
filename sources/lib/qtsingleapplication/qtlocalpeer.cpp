@@ -43,6 +43,7 @@
 #include <QCoreApplication>
 #include <QDataStream>
 #include <QTime>
+#include <QRegularExpression>
 
 #if defined(Q_OS_WIN)
 #include <QLibrary>
@@ -76,11 +77,10 @@ QtLocalPeer::QtLocalPeer(QObject* parent, const QString &appId)
 #endif
         prefix = id.section(QLatin1Char('/'), -1);
     }
-    prefix.remove(QRegExp("[^a-zA-Z]"));
+    prefix.remove(QRegularExpression("[^a-zA-Z]"));
     prefix.truncate(6);
 
-    QByteArray idc = id.toUtf8();
-    quint16 idNum = qChecksum(idc.constData(), idc.size());
+    quint16 idNum = computeCheckSum(id);
     socketName = QLatin1String("qtsingleapp-") + prefix
                  + QLatin1Char('-') + QString::number(idNum, 16);
 
@@ -106,7 +106,19 @@ QtLocalPeer::QtLocalPeer(QObject* parent, const QString &appId)
     lockFile.open(QIODevice::ReadWrite);
 }
 
-
+quint16 QtLocalPeer::computeCheckSum(QString id)
+{
+    QByteArray idc = id.toUtf8();
+    const char * data = idc.constData();
+    quint16 checkSum = 0;
+    int multiplier = 1;
+    for (int i = 0; i < idc.size(); i++)
+    {
+        checkSum += data[i] * multiplier;
+        multiplier = (multiplier % 23) + 1;
+    }
+    return checkSum;
+}
 
 bool QtLocalPeer::isClient()
 {

@@ -47,7 +47,7 @@ public:
     void saveParameters(AbstractToolParameters * parameters) override;
 
 private slots:
-    void on_comboPrevious_currentIndexChanged(const QString &arg1);
+    void on_comboPrevious_currentIndexChanged(int index);
     void on_pushOpen_clicked();
     void on_pushOk_clicked();
     void on_pushCancel_clicked();

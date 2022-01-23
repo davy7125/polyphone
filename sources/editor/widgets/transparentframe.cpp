@@ -41,7 +41,11 @@ TransparentFrame::~TransparentFrame()
     delete _opacity;
 }
 
-void TransparentFrame::enterEvent(QEvent * event)
+#if QT_VERSION >= 0x060000
+void TransparentFrame::enterEvent(QEnterEvent *event)
+#else
+void TransparentFrame::enterEvent(QEvent *event)
+#endif
 {
     QFrame::enterEvent(event);
 

@@ -30,8 +30,6 @@
 
 GrandOrgueStop::GrandOrgueStop(QString rootDir, GrandOrgueDataThrough *godt, int id) :
     _rootDir(rootDir),
-    _godt(godt),
-    _id(id),
     _anonymousRank(rootDir, godt, -id) // Stops that are also a rank have a negative id
 {
 
@@ -62,7 +60,7 @@ void GrandOrgueStop::readData(QString key, QString value)
 
         // Store data
         if (!_rankLinks.contains(number))
-            _rankLinks[number] = new GrandOrgueRankLink(_godt);
+            _rankLinks[number] = new GrandOrgueRankLink();
         _rankLinks[number]->readData(property, value);
     }
     else

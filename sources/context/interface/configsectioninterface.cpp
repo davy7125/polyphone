@@ -53,6 +53,8 @@ ConfigSectionInterface::ConfigSectionInterface(QWidget *parent) :
         ui->comboStyle->addItem("Adwaita");
     if (possibleStyles.contains("Adwaita-Dark"))
         ui->comboStyle->addItem("Adwaita-Dark");
+    if (possibleStyles.contains("macOS"))
+        ui->comboStyle->addItem("macOS");
     if (possibleStyles.contains("Windows"))
         ui->comboStyle->addItem("Windows");
     if (possibleStyles.contains("windowsvista"))
@@ -319,10 +321,11 @@ void ConfigSectionInterface::on_checkUniqueInstance_clicked()
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "unique_instance", ui->checkUniqueInstance->isChecked());
 }
 
-
-void ConfigSectionInterface::on_comboStyle_currentIndexChanged(const QString &arg1)
+void ConfigSectionInterface::on_comboStyle_currentIndexChanged(int index)
 {
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "style", arg1);
+    Q_UNUSED(index)
+
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "style", ui->comboStyle->currentText());
     ui->labelRestart->show();
     updateColorThemeState();
 }

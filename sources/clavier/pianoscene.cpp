@@ -368,10 +368,10 @@ void PianoScene::mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent)
     {
         PianoKey* key = getKeyForPos(mouseEvent->scenePos());
         if (key)
-            mouseOver(key->getNote() + m_transpose,
-                      getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
+            emit(mouseOver(key->getNote() + m_transpose,
+                 getPressureFromPos(mouseEvent->scenePos(), key->isBlack())));
         else
-            mouseOver(-1, -1);
+            emit(mouseOver(-1, -1));
     }
 }
 
@@ -496,40 +496,43 @@ bool PianoScene::event(QEvent *event)
     case QEvent::TouchEnd:
     case QEvent::TouchUpdate:
     {break; // Attempt to fix https://github.com/davy7125/polyphone/issues/31
+#if QT_VERSION >= 0x060000
         QTouchEvent *touchEvent = static_cast<QTouchEvent*>(event);
-        QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
+        QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->points();
         foreach (const QTouchEvent::TouchPoint& touchPoint, touchPoints)
         {
             // Make sure the touchpoint started in the scene
-            if (getKeyForPos(touchPoint.startScenePos()) == nullptr)
+            if (getKeyForPos(touchPoint.scenePressPosition()) == nullptr)
                 continue;
 
             switch (touchPoint.state())
             {
-            case Qt::TouchPointStationary: {
+            case QEventPoint::Unknown:
+                break;
+            case QEventPoint::Stationary: {
                 // Pressure changed maybe
-                PianoKey* key = getKeyForPos(touchPoint.scenePos());
+                PianoKey* key = getKeyForPos(touchPoint.scenePosition());
                 if (key != nullptr && key->isPressed())
                     polyPressureChanged(key->getNote(), 127 * touchPoint.pressure());
                 break;
             }
-            case Qt::TouchPointReleased: {
-                PianoKey* key = getKeyForPos(touchPoint.scenePos());
+            case QEventPoint::Released: {
+                PianoKey* key = getKeyForPos(touchPoint.scenePosition());
                 if (key != nullptr && key->isPressed())
                     keyOff(key);
                 break;
             }
-            case Qt::TouchPointPressed: {
-                PianoKey* key = getKeyForPos(touchPoint.scenePos());
+            case QEventPoint::Pressed: {
+                PianoKey* key = getKeyForPos(touchPoint.scenePosition());
                 if (key != nullptr && !key->isPressed()) {
                     keyOn(key, 127 * touchPoint.pressure());
                     key->ensureVisible();
                 }
                 break;
             }
-            case Qt::TouchPointMoved: {
-                PianoKey* key = getKeyForPos(touchPoint.scenePos());
-                PianoKey* lastkey = getKeyForPos(touchPoint.lastScenePos());
+            case QEventPoint::Updated: {
+                PianoKey* key = getKeyForPos(touchPoint.scenePosition());
+                PianoKey* lastkey = getKeyForPos(touchPoint.sceneLastPosition());
                 if (lastkey != nullptr && lastkey != key && lastkey->isPressed())
                     keyOff(lastkey);
                 if (key != nullptr && !key->isPressed())
@@ -540,6 +543,7 @@ bool PianoScene::event(QEvent *event)
         }
         event->accept();
         return true;
+#endif
     }
     case QEvent::Leave:
         mouseOver(-1, -1);
@@ -557,19 +561,6 @@ void PianoScene::allKeysOff()
     {
         key->setPressed(false);
     }
-}
-
-QString PianoScene::formatSequence(QKeySequence sequence)
-{
-    int key = sequence[0];
-    int keyWithNoModifier = key & ~Qt::ShiftModifier;
-    QString str = QKeySequence(keyWithNoModifier).toString();
-    if (key != keyWithNoModifier)
-    {
-        str.prepend("<u>");
-        str.append("</u>");
-    }
-    return str;
 }
 
 void PianoScene::refreshKeys()

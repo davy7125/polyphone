@@ -35,11 +35,6 @@
 #include "contextmanager.h"
 #include "utils.h"
 #include "qtsingleapplication.h"
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-#include <QDesktopWidget>
-#endif
-
 #include "mainwindow.h"
 #include "translationmanager.h"
 #include <QDir>

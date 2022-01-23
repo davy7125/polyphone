@@ -361,12 +361,13 @@ void Sound::determineRootKey()
     QString nameNoExtension = fileInfo.baseName().toLower();
 
     // First attempt: find a note name (standard taken being C4 = 60)
-    QRegExp keyNameRegex("([a-g])([#b]?)(-?[0-9]+)");
+    QRegularExpression keyNameRegex("([a-g])([#b]?)(-?[0-9]+)");
     bool keyFound = false;
     unsigned int key = 0;
-    if (keyNameRegex.indexIn(nameNoExtension) > -1)
+    QRegularExpressionMatch match = keyNameRegex.match(nameNoExtension);
+    if (match.hasMatch())
     {
-        switch (keyNameRegex.cap(1)[0].toLatin1())
+        switch (match.captured(1)[0].toLatin1())
         {
         case 'c':
             key = 0;
@@ -392,11 +393,11 @@ void Sound::determineRootKey()
         default:
             break;
         }
-        if (keyNameRegex.cap(2) == "b")
+        if (match.captured(2) == "b")
             key--;
-        else if (keyNameRegex.cap(2) == "#")
+        else if (match.captured(2) == "#")
             key++;
-        key += 12 * (1 + keyNameRegex.cap(3).toInt());
+        key += 12 * (1 + match.captured(3).toInt());
 
         if (key > 0 && key < 128)
             keyFound = true;
@@ -405,7 +406,7 @@ void Sound::determineRootKey()
     // Second attempt: search the numeric name of the key
     if (!keyFound)
     {
-        QStringList listeNum = nameNoExtension.replace(QRegExp("[^0-9]"), "-").split("-", Qt::SkipEmptyParts);
+        QStringList listeNum = nameNoExtension.replace(QRegularExpression("[^0-9]"), "-").split("-", Qt::SkipEmptyParts);
         if (!listeNum.isEmpty())
         {
             // We study the last part

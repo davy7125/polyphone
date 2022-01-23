@@ -45,6 +45,20 @@ ThemeManager::ThemeManager(ConfManager * configuration) :
     if (colorAlternateBase == colorBase)
         _defaultPalette.setColor(QPalette::AlternateBase, mix(colorBase, _defaultPalette.color(QPalette::Text), 0.05));
 
+    // Fix some colors for Mac OS
+    if (loadedStyle == "macOS")
+    {
+        QColor colorTmp = _customPalette.color(QPalette::Window);
+        colorTmp.setHsv(colorTmp.hue(), (int)(0.75 * colorTmp.saturation()), (int)(0.7 * colorTmp.value()));
+        _defaultPalette.setColor(QPalette::Dark, colorTmp);
+
+        colorTmp = mix(_defaultPalette.color(QPalette::Base), _defaultPalette.color(QPalette::Text), 0.05);
+        _defaultPalette.setColor(QPalette::AlternateBase, colorTmp);
+
+        colorTmp = mix(_defaultPalette.color(QPalette::HighlightedText), _defaultPalette.color(QPalette::Highlight), 0.7);
+        _defaultPalette.setColor(QPalette::Disabled, QPalette::HighlightedText, colorTmp);
+    }
+
     // Load themes
     _themes << getDefaultTheme() << getThemes();
 

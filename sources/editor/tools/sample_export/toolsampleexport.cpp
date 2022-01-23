@@ -106,10 +106,10 @@ QString ToolSampleExport::getFilePath(SoundfontManager * sm, EltID id1, EltID id
         QString fileName1 = sm->getQstr(id1, champ_name);
         QString fileName2 = sm->getQstr(id2, champ_name);
         int nb = SampleUtils::lastLettersToRemove(fileName1, fileName2);
-        fileName = fileName1.left(fileName1.size() - nb).replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
+        fileName = fileName1.left(fileName1.size() - nb).replace(QRegularExpression("[:<>\"/\\\\\\*\\?\\|]"), "_");
     }
     else
-        fileName = sm->getQstr(id1, champ_name).replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
+        fileName = sm->getQstr(id1, champ_name).replace(QRegularExpression("[:<>\"/\\\\\\*\\?\\|]"), "_");
 
     QString filePath = _dirPath + fileName;
 

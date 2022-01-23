@@ -51,7 +51,7 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
     IdList loadedSmpl;
 
     ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SAMPLE, path);
-    QFileInfo qFileInfo = path;
+    QFileInfo qFileInfo(path);
 
     // Get information about a sample
     Sound sound(path);

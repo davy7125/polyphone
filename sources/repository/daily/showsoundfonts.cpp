@@ -102,9 +102,12 @@ QString ShowSoundfonts::loadDailyIds()
 
     // Load all ids
     _dailyIds.clear();
-    foreach (QJsonValue value, dailyIds)
+    for (int i = 0; i < dailyIds.count(); i++)
+    {
+        QJsonValue value = dailyIds[i];
         if (value.isDouble())
             _dailyIds.append(static_cast<int>(value.toDouble()));
+    }
     if (_dailyIds.isEmpty())
         return "empty daily list";
 

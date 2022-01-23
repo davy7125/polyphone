@@ -45,7 +45,7 @@ public:
 
     // Format
     QString getFormattedSize();
-    QString getLastDate();
+    QDate getLastDate();
 
 private:
     QDateTime convertDate(QString txt);

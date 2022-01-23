@@ -60,7 +60,11 @@ void AbstractInputParser::process(bool async)
 {
     if (async)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QFuture<void> future = QtConcurrent::run(&AbstractInputParser::processAsync, this);
+#else
         QFuture<void> future = QtConcurrent::run(this, &AbstractInputParser::processAsync);
+#endif
         _futureWatcher->setFuture(future);
     }
     else

@@ -95,7 +95,7 @@ void SoundfontEditorLeft::initialize(SoundfontInformation *soundfontInfo)
     ui->labelAuthor->setText(soundfontInfo->getAuthor());
 
     // Date
-    ui->labelDate->setText(soundfontInfo->getDateTime().toString(Qt::SystemLocaleShortDate));
+    ui->labelDate->setText(soundfontInfo->getDateTime().toString(this->locale().dateFormat(QLocale::ShortFormat)));
 
     // License
     ui->comboLicense->setCurrentText(RepositoryManager::getInstance()->getLicenseLabel(soundfontInfo->getLicense()));

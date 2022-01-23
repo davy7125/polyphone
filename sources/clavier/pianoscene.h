@@ -99,7 +99,6 @@ private:
     void triggerNoteOff(const int note);
     static qreal sceneWidth(int startKey, int keys);
     static double getOffsetX(int numKey);
-    static QString formatSequence(QKeySequence sequence);
 
     int m_numKeys;
     int m_startKey;

@@ -9,7 +9,7 @@
 # Uncomment a line if your distribution doesn't come with some of the following libraries
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
-#DEFINES += USE_LOCAL_QCUSTOMPLOT
+DEFINES += USE_LOCAL_QCUSTOMPLOT
 DEFINES += USE_LOCAL_SFARKLIB
 
 # Uncomment this line to use wolfssl instead of openssl (for a license issue)
@@ -77,7 +77,6 @@ unix:!macx {
     DESTDIR=bin
     
     # Install target
-
     target.path = $$PREFIX/bin
     install_image_svg.path = $$PREFIX/share/icons/hicolor/scalable/apps
     install_image_svg.files = contrib/polyphone.svg
@@ -100,10 +99,10 @@ unix:!macx {
                 install_desktop install_appdata install_mime install_man install_doc
 }
 macx {
-    QMAKE_CXXFLAGS += -std=c++11 -ffloat-store
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
-    QMAKE_MAC_SDK = macosx10.14
-    DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
+    QMAKE_CXXFLAGS += -std=c++11
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.14
+    QMAKE_MAC_SDK = macosx12.1
+    DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT TARGET_OS_IPHONE=0
     INCLUDEPATH += ../lib_mac/Jackmp.framework/Headers \
         ../lib_mac/include
     LIBS += -L$$PWD/../lib_mac -lportaudio -logg -lFLAC -lvorbis -lssl -lcrypto -F$$PWD/../lib_mac/ -framework Jackmp \
@@ -292,6 +291,7 @@ SOURCES	+= main.cpp \
     clavier/pianokeybdcustom.cpp \
     clavier/keyboardmap.cpp \
     editor/widgets/transparentframe.cpp \
+    repository/browser/browsersortmenu.cpp \
     repository/widgets/customtextedit.cpp \
     repository/soundfont/editor/editordialoginsertlink.cpp \
     repository/soundfont/editor/editordialoginserttable.cpp \
@@ -630,6 +630,7 @@ HEADERS += \
     clavier/pianokeybdcustom.h \
     clavier/keyboardmap.h \
     editor/widgets/transparentframe.h \
+    repository/browser/browsersortmenu.h \
     repository/widgets/customtextedit.h \
     repository/soundfont/editor/editordialoginsertlink.h \
     repository/soundfont/editor/editordialoginserttable.h \
@@ -880,7 +881,6 @@ HEADERS += \
     repository/soundfont/editor/editordialoginsertvideo.h \
     repository/soundfont/editor/editordialoginsertimage.h \
     dialogs/dialogquestion.h \
-    editor/modulator/spinboxmultiply.h \
     editor/graphics/graphicswave.h \
     editor/graphics/graphicswavepainter.h \
     dialogs/dialognewelement.h \
@@ -911,6 +911,7 @@ FORMS += \
     mainwindow/widgetshowhistory.ui \
     mainwindow/widgetshowhistorycell.ui \
     mainwindow/mainwindow.ui \
+    repository/browser/browsersortmenu.ui \
     repository/browser/soundfontbrowser.ui \
     repository/browser/filtertag.ui \
     repository/browser/soundfontcellfull.ui \

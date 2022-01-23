@@ -63,7 +63,11 @@ void StyledAction::initialize(QString label, QString iconName)
     this->setIcon(_icon);
 }
 
-void StyledAction::enterEvent(QEvent * event)
+#if QT_VERSION >= 0x060000
+void StyledAction::enterEvent(QEnterEvent *event)
+#else
+void StyledAction::enterEvent(QEvent *event)
+#endif
 {
     Q_UNUSED(event)
     if (!_isDisabled)

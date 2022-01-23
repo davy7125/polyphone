@@ -62,8 +62,8 @@ public:
     EltID parent(bool includeRoot = false);
 
     /// Operator for comparison
-    bool operator !=(const EltID &other);
-    bool operator==(const EltID &other);
+    bool operator !=(const EltID &other) const;
+    bool operator==(const EltID &other) const;
 
     /// Textual description of the ID (for debug purposes)
     QString toString();

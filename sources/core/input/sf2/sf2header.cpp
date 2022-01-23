@@ -25,6 +25,7 @@
 #include "sf2header.h"
 #include <QDataStream>
 
+
 Sf2Header::Sf2Header() :
     _isValid(false),
     _size(0),
@@ -109,12 +110,20 @@ QDataStream & operator >> (QDataStream &in, Sf2Header &header)
             if (bloc == "ICMT")
             {
                 // Consider first it is UTF-8 text
+#if QT_VERSION >= 0x060000
+                QStringDecoder decoder(QStringDecoder::Utf8);
+                header._infos[bloc] = decoder.decode(buffer);
+
+                // Or latin1 if there is an invalid char
+                if (!decoder.isValid())
+#else
                 QTextCodec::ConverterState state;
                 QTextCodec *codec = QTextCodec::codecForName("UTF-8");
                 header._infos[bloc] = codec->toUnicode(buffer.constData(), buffer.size(), &state);
 
                 // Or latin1 if there is an invalid char
                 if (state.invalidChars != 0)
+#endif
                     header._infos[bloc] = QString::fromLatin1(buffer);
             }
             else

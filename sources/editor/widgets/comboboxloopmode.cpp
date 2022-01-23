@@ -89,7 +89,13 @@ void ComboBoxLoopMode::onActivated(int index)
 QStyleOptionViewItem ComboView::viewOptions() const
 {
     // Set icon on the top and center of combo box item.
-    QStyleOptionViewItem option = QListView::viewOptions();
+    QStyleOptionViewItem option;
+#if QT_VERSION >= 0x060000
+    QListView::initViewItemOption(&option);
+#else
+    option = QListView::viewOptions();
+#endif
+
     option.decorationAlignment = Qt::AlignHCenter | Qt::AlignVCenter;
     option.decorationSize = QSize(37, 14);
     return option;

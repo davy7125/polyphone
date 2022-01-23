@@ -65,7 +65,7 @@ OverviewTableHeaderView::OverviewTableHeaderView(QWidget *parent) : QHeaderView(
     this->setSectionsClickable(true);
 }
 
-const int OverviewTableHeaderView::MARGIN = 2;
+const int OverviewTableHeaderView::MARGIN = 4;
 
 QSize OverviewTableHeaderView::sizeHint() const
 {
@@ -83,7 +83,7 @@ void OverviewTableHeaderView::paintSection(QPainter *painter, const QRect &rect,
     // Sort icon?
     QPixmap icon;
     if (this->sortIndicatorSection() == logicalIndex)
-       icon = this->sortIndicatorOrder() == 0 ? _arrowDown : _arrowUp;
+       icon = this->sortIndicatorOrder() == 0 ? _arrowUp : _arrowDown;
 
     // Icon and text rect
     QRect iconRect = icon.rect();

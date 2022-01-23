@@ -113,12 +113,6 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
         widget = spin;
     }
 
-#ifdef Q_OS_MAC
-    QFont font = parent->font();
-    font.setPixelSize(10);
-    widget->setFont(font);
-#endif
-
     return widget;
 }
 

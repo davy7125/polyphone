@@ -170,7 +170,7 @@ QString ToolSoundfontExport::getName(SoundfontManager * sm, QList<int> sf2Indexe
         name = QFileInfo(sm->getQstr(idSf2, champ_filenameInitial)).baseName();
         if (name.isEmpty())
             name = sm->getQstr(idSf2, champ_name);
-        name = name.replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
+        name = name.replace(QRegularExpression("[:<>\"/\\\\\\*\\?\\|]"), "_");
     }
     if (name.isEmpty())
         name = "export";

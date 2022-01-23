@@ -53,26 +53,26 @@ void EditorDialogInsertVideo::accept()
     QString url = ui->lineUrl->text();
 
     // Example 1: https://www.youtube.com/watch?v=YOpa5Ec3i4s
-    QRegExp rx_1("www\\.youtube\\.com/watch\\?v=(\\w+)");
-    if (rx_1.indexIn(url) != -1)
+    QRegularExpressionMatch match = QRegularExpression("www\\.youtube\\.com/watch\\?v=(\\w+)").match(url);
+    if (match.hasMatch())
     {
-        emit(accepted(rx_1.cap(1)));
+        emit(accepted(match.captured(1)));
         QDialog::accept();
     }
 
     // Example 2: https://youtu.be/YOpa5Ec3i4s
-    QRegExp rx_2("youtu\\.be/(\\w+)");
-    if (rx_2.indexIn(url) != -1)
+    match = QRegularExpression("youtu\\.be/(\\w+)").match(url);
+    if (match.hasMatch())
     {
-        emit(accepted(rx_2.cap(1)));
+        emit(accepted(match.captured(1)));
         QDialog::accept();
     }
 
     // Example 3: https://www.youtube.com/embed/YOpa5Ec3i4s
-    QRegExp rx_3("youtube\\.com/embed/(\\w+)");
-    if (rx_3.indexIn(url) != -1)
+    match = QRegularExpression("youtube\\.com/embed/(\\w+)").match(url);
+    if (match.hasMatch())
     {
-        emit(accepted(rx_3.cap(1)));
+        emit(accepted(match.captured(1)));
         QDialog::accept();
     }
 

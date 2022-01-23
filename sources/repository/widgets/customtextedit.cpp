@@ -108,27 +108,28 @@ QString CustomTextEdit::toHtml()
     QString html = QTextEdit::toHtml();
 
     // Extract the body and trim the result
-    QRegExp rx_body("<body[^>]*>(.*)</body>");
-    if (rx_body.indexIn(html, 0) != -1)
-        html = rx_body.cap(1).trimmed();
+    QRegularExpression rx_body("<body[^>]*>(.*)</body>");
+    QRegularExpressionMatch match = rx_body.match(html);
+    if (match.hasMatch())
+        html = match.captured(1).trimmed();
 
     // 1. Clean useless things
-    html = html.replace(QRegExp(" *margin-top:[^;]+; *"), "")
-            .replace(QRegExp(" *margin-bottom:[^;]+; *"), "")
-            .replace(QRegExp(" *margin-right:[^;]+; *"), "")
-            .replace(QRegExp(" *margin-left: *\\d{1,3}px; *"), "") // Keep magic numbers > 999
-            .replace(QRegExp(" *padding-[^:]*:[^;]+; *"), "")
-            .replace(QRegExp(" *border-color:[^;]+; *"), "")
-            .replace(QRegExp(" *background-color:[^;]+; *"), "")
-            .replace(QRegExp(" *color:[^;]+; *"), "")
-            .replace(QRegExp(" *font-family:[^;]+; *"), "")
-            .replace(QRegExp(" *-qt-list-indent:[^;]+; *"), "")
-            .replace(QRegExp(" *-qt-block-indent:[^;]+; *"), "")
-            .replace(QRegExp(" *text-indent:[^;]+; *"), "")
-            .replace(QRegExp(" *cellspacing=\"[^\"]*\""), "")
-            .replace(QRegExp(" *cellpadding=\"[^\"]*\""), "")
-            .replace(QRegExp(" *border=\"[^\"]*\""), "")
-            .replace(QRegExp(" *style=\"\""), "");
+    html = html.replace(QRegularExpression(" *margin-top:[^;]+; *"), "")
+            .replace(QRegularExpression(" *margin-bottom:[^;]+; *"), "")
+            .replace(QRegularExpression(" *margin-right:[^;]+; *"), "")
+            .replace(QRegularExpression(" *margin-left: *\\d{1,3}px; *"), "") // Keep magic numbers > 999
+            .replace(QRegularExpression(" *padding-[^:]*:[^;]+; *"), "")
+            .replace(QRegularExpression(" *border-color:[^;]+; *"), "")
+            .replace(QRegularExpression(" *background-color:[^;]+; *"), "")
+            .replace(QRegularExpression(" *color:[^;]+; *"), "")
+            .replace(QRegularExpression(" *font-family:[^;]+; *"), "")
+            .replace(QRegularExpression(" *-qt-list-indent:[^;]+; *"), "")
+            .replace(QRegularExpression(" *-qt-block-indent:[^;]+; *"), "")
+            .replace(QRegularExpression(" *text-indent:[^;]+; *"), "")
+            .replace(QRegularExpression(" *cellspacing=\"[^\"]*\""), "")
+            .replace(QRegularExpression(" *cellpadding=\"[^\"]*\""), "")
+            .replace(QRegularExpression(" *border=\"[^\"]*\""), "")
+            .replace(QRegularExpression(" *style=\"\""), "");
 
     //qDebug() << "BEFORE >>" << html;
 
@@ -139,11 +140,12 @@ QString CustomTextEdit::toHtml()
     // 3. Browse all tags sequentially to continue the process
     _history.clear();
     _history << "body";
-    QRegExp rx_tag("<([^<>]*)>");
+    QRegularExpression rx_tag("<([^<>]*)>");
     pos = 0;
-    while ((pos = rx_tag.indexIn(html, pos)) != -1)
+    while ((match = rx_tag.match(html, pos)).hasMatch())
     {
-        QString tagContent = rx_tag.cap(1);
+        pos = match.capturedStart();
+        QString tagContent = match.captured(1);
         QString tagName = tagContent.split(" ").first();
 
         if (tagName.startsWith("/"))
@@ -205,19 +207,20 @@ QString CustomTextEdit::toHtml()
     }
 
     // 4. Restore frames and images
-    QRegExp rx_img("<img ([^<>]*)/>");
+    QRegularExpression rx_img("<img ([^<>]*)/>");
     pos = 0;
-    while ((pos = rx_img.indexIn(html, pos)) != -1)
+    while ((match = rx_img.match(html, pos)).hasMatch())
     {
-        QString imgContent = rx_img.cap(1);
+        pos = match.capturedStart();
+        QString imgContent = match.captured(1);
 
         // Get the source
-        QRegExp rx_src("src=\"(\\d+)\"");
-        if (rx_src.indexIn(imgContent) != -1)
+        QRegularExpressionMatch matchSrc = QRegularExpression("src=\"(\\d+)\"").match(imgContent);
+        if (matchSrc.hasMatch())
         {
             // Element id
             bool ok;
-            int id = rx_src.cap(1).toInt(&ok);
+            int id = matchSrc.captured(1).toInt(&ok);
             if (!ok)
             {
                 qWarning() << "Couldn't read element id in" << imgContent;
@@ -226,7 +229,7 @@ QString CustomTextEdit::toHtml()
 
             // Replace the content of the img
             if (_extractions.contains(id))
-                html = html.replace(pos, rx_img.matchedLength(), _extractions.take(id));
+                html = html.replace(pos, match.capturedLength(), _extractions.take(id));
             else
                 qWarning() << "Couldn't find id" << id << "in the extractions";
         }
@@ -237,7 +240,7 @@ QString CustomTextEdit::toHtml()
     }
 
     // 5. Final cleaning
-    html = html.replace(QRegExp(" *>"), ">");
+    html = html.replace(QRegularExpression(" *>"), ">");
 
     //qDebug() << "AFTER >>" << html;
 
@@ -316,42 +319,48 @@ QString CustomTextEdit::processHtmlToInsert(QString html)
     html = html.replace("<table>", "<table cellspacing=0>");
 
     // Extract frames, audio and images
-    QRegExp rx_img1("<img([^<>]*)/>"); // Autoclosing FIRST (because we are creating similar elements)
+    QRegularExpression rx_img1("<img([^<>]*)/>"); // Autoclosing FIRST (because we are creating similar elements)
+    QRegularExpressionMatch match;
     int pos = 0;
-    while ((pos = rx_img1.indexIn(html, pos)) != -1)
+    while ((match = rx_img1.match(html, pos)).hasMatch())
     {
-        html = html.replace(pos, rx_img1.matchedLength(), extract("img", rx_img1.cap(1), ""));
-        pos ++;
+        pos = match.capturedStart();
+        html = html.replace(pos, match.capturedLength(), extract("img", match.captured(1), ""));
+        pos++;
     }
 
-    QRegExp rx_img2("<img([^<>]*)>([^<>]*)</img>"); // Not autoclosing SECOND
+    QRegularExpression rx_img2("<img([^<>]*)>([^<>]*)</img>"); // Not autoclosing SECOND
     pos = 0;
-    while ((pos = rx_img2.indexIn(html, pos)) != -1)
+    while ((match = rx_img2.match(html, pos)).hasMatch())
     {
-        html = html.replace(pos, rx_img2.matchedLength(), extract("img", rx_img2.cap(1), rx_img2.cap(2)));
-        pos ++;
+        pos = match.capturedStart();
+        html = html.replace(pos, match.capturedLength(), extract("img", match.captured(1), match.captured(2)));
+        pos++;
     }
 
-    QRegExp rx_audio("<audio([^<>]*)>");
+    QRegularExpression rx_audio("<audio([^<>]*)>");
     pos = 0;
-    while ((pos = rx_audio.indexIn(html, pos)) != -1)
+    while ((match = rx_audio.match(html, pos)).hasMatch())
     {
+        pos = match.capturedStart();
+
         // Position of the end of the bloc
         int pos2 = html.indexOf("</audio>", pos + 1);
         if (pos2 == -1)
             break;
 
         html = html.replace(pos, pos2 - pos + 8 /* size of "</audio>" */,
-                            extract("audio", rx_audio.cap(1), html.mid(pos + rx_audio.cap(1).length() + 7, pos2 - pos - rx_audio.cap(1).length() - 7)));
-        pos ++;
+                            extract("audio", match.captured(1), html.mid(pos + match.capturedLength(1) + 7, pos2 - pos - match.capturedLength(1) - 7)));
+        pos++;
     }
 
-    QRegExp rx_frame("<iframe([^<>]*)>([^<>]*)</iframe>"); // Frame LAST
+    QRegularExpression rx_frame("<iframe([^<>]*)>([^<>]*)</iframe>"); // Frame LAST
     pos = 0;
-    while ((pos = rx_frame.indexIn(html, pos)) != -1)
+    while ((match = rx_frame.match(html, pos)).hasMatch())
     {
-        html = html.replace(pos, rx_frame.matchedLength(), extract("iframe", rx_frame.cap(1), rx_frame.cap(2)));
-        pos ++;
+        pos = match.capturedStart();
+        html = html.replace(pos, match.capturedLength(), extract("iframe", match.captured(1), match.captured(2)));
+        pos++;
     }
 
     return html;
@@ -372,9 +381,9 @@ QString CustomTextEdit::extract(QString tagName, QString content1, QString conte
         defaultImage = ContextManager::theme()->getColoredSvg(":/html_editor/image.svg", QSize(150, 150), _colorReplacement);
 
         // Get the real source
-        QRegExp rx_src("src=\"([^\"]*)\"");
-        if (rx_src.indexIn(content1) != -1)
-            imageUrl = rx_src.cap(1);
+        QRegularExpressionMatch match = QRegularExpression("src=\"([^\"]*)\"").match(content1);
+        if (match.hasMatch())
+            imageUrl = match.captured(1);
     }
     else if (tagName == "audio")
     {
@@ -382,19 +391,19 @@ QString CustomTextEdit::extract(QString tagName, QString content1, QString conte
         defaultImage = ContextManager::theme()->getColoredSvg(":/icons/sound.svg", QSize(40, 40), _colorReplacement);
 
         // Get the audio source
-        QRegExp rx_src("src=\"([^\"]*)\"");
-        if (rx_src.indexIn(content2) != -1)
-            link = rx_src.cap(1);
+        QRegularExpressionMatch match = QRegularExpression("src=\"([^\"]*)\"").match(content2);
+        if (match.hasMatch())
+            link = match.captured(1);
     }
     else
     {
         // YouTube frame?
-        QRegExp rx_youtube("youtube\\.com/embed/([0-9a-zA-Z-_]*)\"");
-        if (rx_youtube.indexIn(content1) != -1)
+        QRegularExpressionMatch match = QRegularExpression("youtube\\.com/embed/([0-9a-zA-Z-_]*)\"").match(content1);
+        if (match.hasMatch())
         {
             defaultImage = ContextManager::theme()->getColoredSvg(":/html_editor/video.svg", QSize(150, 150), _colorReplacement);
-            imageUrl = "https://img.youtube.com/vi/" + rx_youtube.cap(1) + "/hqdefault.jpg"; // Thumbnail corresponding to the video
-            link = "https://www.youtube.com/watch?v=" + rx_youtube.cap(1);
+            imageUrl = "https://img.youtube.com/vi/" + match.captured(1) + "/hqdefault.jpg"; // Thumbnail corresponding to the video
+            link = "https://www.youtube.com/watch?v=" + match.captured(1);
         }
         else
         {
@@ -431,24 +440,26 @@ QString CustomTextEdit::moveSpecialFontSizes(QString html, int &pos, int pTagLen
     QString replacement = "";
 
     // Find the next <p>, </p> or <span>
-    QRegExp rx("<(p|span|/p)( [^<>]*|)>");
-    while ((pos = rx.indexIn(html, pos)) != -1)
+    QRegularExpression rx("<(p|span|/p)( [^<>]*|)>");
+    QRegularExpressionMatch match;
+    while ((match = rx.match(html, pos)).hasMatch())
     {
-        if (rx.cap(1) == "p")
+        pos = match.capturedStart();
+        if (match.captured(1) == "p")
         {
             // Process another <p>
-            html = moveSpecialFontSizes(html, pos, rx.matchedLength());
+            html = moveSpecialFontSizes(html, pos, match.capturedLength());
         }
-        else if (rx.cap(1) == "/p")
+        else if (match.captured(1) == "/p")
         {
             // End of the <p>, tag name can change
             if (replacement != "")
             {
                 // Update the closing tag
-                html = html.replace(pos, rx.matchedLength(), "</" + replacement + ">");
+                html = html.replace(pos, match.capturedLength(), "</" + replacement + ">");
 
                 // Update the opening tag
-                replacement = html.mid(initialPosition, pTagLength).replace(QRegExp("<p"), "<" + replacement);
+                replacement = html.mid(initialPosition, pTagLength).replace(QRegularExpression("<p"), "<" + replacement);
                 html = html.replace(initialPosition, pTagLength, replacement);
 
                 // Update the position
@@ -456,10 +467,10 @@ QString CustomTextEdit::moveSpecialFontSizes(QString html, int &pos, int pTagLen
             }
             return html;
         }
-        else if (rx.cap(1) == "span")
+        else if (match.captured(1) == "span")
         {
             // Analyze the content of the span
-            QMap<QString, QString> styleAttributes = getStyleAttributes(rx.cap(2));
+            QMap<QString, QString> styleAttributes = getStyleAttributes(match.captured(2));
             if (styleAttributes.contains("font-size"))
             {
                 QString value = styleAttributes["font-size"];
@@ -487,22 +498,22 @@ QString CustomTextEdit::moveSpecialFontSizes(QString html, int &pos, int pTagLen
                         replacement = value;
 
                         // Remove the attributes "font-size" and "font-weight"
-                        QString newTag = "<span " + rx.cap(2).replace(QRegExp(" *font-size:[^;\"']+; *"), "") + ">";
+                        QString newTag = "<span " + match.captured(2).replace(QRegularExpression(" *font-size:[^;\"']+; *"), "") + ">";
                         if (replacement == "blockquote")
                         {
                             if (!newTag.contains("font-style"))
                                 newTag = newTag.replace("style=\"", "style=\"font-style:normal;");
                             else
-                                newTag = newTag.replace(QRegExp(" *font-style:italic; *"), "");
+                                newTag = newTag.replace(QRegularExpression(" *font-style:italic; *"), "");
                         }
                         else if (replacement.startsWith("h"))
                         {
                             if (!newTag.contains("font-weight"))
                                 newTag = newTag.replace("style=\"", "style=\"font-weight:400;");
                             else
-                                newTag = newTag.replace(QRegExp(" *font-weight:600; *"), "");
+                                newTag = newTag.replace(QRegularExpression(" *font-weight:600; *"), "");
                         }
-                        html = html.replace(pos, rx.matchedLength(), newTag.replace(QRegExp(" *style=\"\""), ""));
+                        html = html.replace(pos, match.capturedLength(), newTag.replace(QRegularExpression(" *style=\"\""), ""));
                     }
                 }
             }
@@ -605,10 +616,10 @@ QMap<QString, QString> CustomTextEdit::getStyleAttributes(QString tag)
     QMap<QString, QString> result;
 
     // Extract the style from the tag
-    QRegExp rx_style("style=[\"']([^\"']*)[\"']");
+    QRegularExpressionMatch match = QRegularExpression("style=[\"']([^\"']*)[\"']").match(tag);
     QString styleContent;
-    if (rx_style.indexIn(tag, 0) != -1)
-        styleContent = rx_style.cap(1);
+    if (match.hasMatch())
+        styleContent = match.captured(1);
 
     QStringList parts = styleContent.split(";");
     foreach (QString part, parts)
@@ -624,11 +635,13 @@ QMap<QString, QString> CustomTextEdit::getStyleAttributes(QString tag)
 QString CustomTextEdit::replaceTagEnd(QString html, QString tagnameToFind, QString replacement, int startPos)
 {
     QStringList openedTags;
-    QRegExp rx_tag("<([^<>]*)>");
+    QRegularExpression rx_tag("<([^<>]*)>");
     int pos = startPos;
-    while ((pos = rx_tag.indexIn(html, pos)) != -1)
+    QRegularExpressionMatch match;
+    while ((match = rx_tag.match(html, pos)).hasMatch())
     {
-        QString tagContent = rx_tag.cap(1);
+        pos = match.capturedStart();
+        QString tagContent = match.captured(1);
         QString tagname = tagContent.split(" ").first();
 
         if (tagname.startsWith("/"))
@@ -847,18 +860,20 @@ void CustomTextEdit::computeImageSize()
     QString html = QTextEdit::toHtml();
 
     // Browse all images
-    QRegExp rx_img("<img ([^<>]*)/>");
+    QRegularExpression rx_img("<img ([^<>]*)/>");
+    QRegularExpressionMatch match;
     int pos = 0;
-    while ((pos = rx_img.indexIn(html, pos)) != -1)
+    while ((match = rx_img.match(html, pos)).hasMatch())
     {
-        // Get the source of the image
-        QString imgContent = rx_img.cap(1);
-        QRegExp rx_src("src=\"([^\"]+)\"");
+        pos = match.capturedStart();
 
-        if (rx_src.indexIn(imgContent) != -1)
+        // Get the source of the image
+        QString imgContent = match.captured(1);
+        QRegularExpressionMatch matchSrc = QRegularExpression("src=\"([^\"]+)\"").match(imgContent);
+        if (matchSrc.hasMatch())
         {
             // Get the initial width of the image
-            QString src = rx_src.cap(1);
+            QString src = matchSrc.captured(1);
             int width = this->document()->resource(QTextDocument::ImageResource, QUrl(src)).value<QPixmap>().width();
 
             // Ideal width
@@ -869,7 +884,7 @@ void CustomTextEdit::computeImageSize()
             QString replacement = (width > 0) ?
                         "<img src=\"" + src + "\" width=\"" + QString::number(width) + "\" />" :
                         "<img src=\"" + src + "\" />";
-            html = html.replace(pos, rx_img.matchedLength(), replacement);
+            html = html.replace(pos, match.capturedLength(), replacement);
         }
 
         pos++;

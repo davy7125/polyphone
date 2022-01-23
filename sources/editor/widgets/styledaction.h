@@ -43,7 +43,11 @@ signals:
 
 protected:
     void leaveEvent(QEvent * event) override;
+#if QT_VERSION >= 0x060000
+    void enterEvent(QEnterEvent * event) override;
+#else
     void enterEvent(QEvent * event) override;
+#endif
     QPixmap _icon;
     QPixmap _iconHover;
     QPixmap _iconDisabled;

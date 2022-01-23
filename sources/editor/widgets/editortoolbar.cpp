@@ -72,7 +72,7 @@ EditorToolBar::EditorToolBar(QWidget * parent) : QWidget(parent),
     _toolMenu = new ToolMenu(ui->pushToolBox);
     ui->pushToolBox->setMenu(_toolMenu);
     ui->pushToolBox->setMinimumWidth(46);
-    ui->pushToolBox->setStyleSheet("StyledAction{padding-right: 6px;border:0} StyledAction::menu-indicator {image: url(:/icons/arrow_down.svg); width: 10px;}");
+    ui->pushToolBox->setStyleSheet("StyledAction{padding-right: 6px;border:0} StyledAction::menu-indicator {image: url(:/icons/arrow_down.svg); height: 12px; width: 12px;}");
 
     ui->pushShowRecorder->initialize(tr("Recorder"), ":/icons/recorder.svg");
     ui->pushShowRecorder->blockSignals(true);

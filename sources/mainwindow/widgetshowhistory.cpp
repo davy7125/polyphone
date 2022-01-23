@@ -115,7 +115,7 @@ void WidgetShowHistory::on_listWidget_itemSelectionChanged()
 void WidgetShowHistory::paintEvent(QPaintEvent *event)
 {
     QStyleOption opt;
-    opt.init(this);
+    opt.initFrom(this);
     QPainter p(this);
     p.fillRect(opt.rect, ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
     if (_withDecoration)

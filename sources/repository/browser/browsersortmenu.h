@@ -22,29 +22,52 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SPINBOXMULTIPLY_H
-#define SPINBOXMULTIPLY_H
+#ifndef BROWSERSORTMENU_H
+#define BROWSERSORTMENU_H
 
-#include <QSpinBox>
-#include <QPainter>
+#include <QWidget>
+#include <QIcon>
 
-class SpinBoxMultiply : public QSpinBox
+namespace Ui {
+class BrowserSortMenu;
+}
+
+class BrowserSortMenu : public QWidget
 {
     Q_OBJECT
 
 public:
-    SpinBoxMultiply(QWidget * parent = nullptr) : QSpinBox(parent)
-    {
-        this->setStyleSheet("QSpinBox{padding-left:10px;}");
-    }
+    explicit BrowserSortMenu(QWidget *parent = nullptr);
+    ~BrowserSortMenu();
+
+    int currentIndex();
+
+signals:
+    void currentIndexChanged(int index);
 
 protected:
-    void paintEvent(QPaintEvent *event)
-    {
-        QSpinBox::paintEvent(event);
-        QPainter p(this);
-        p.drawText(5, 0, this->width() - 2, this->height(), Qt::AlignVCenter | Qt::AlignLeft, "×");
-    }
+#if QT_VERSION >= 0x060000
+    void enterEvent(QEnterEvent * event) override;
+#else
+    void enterEvent(QEvent * event) override;
+#endif
+    void leaveEvent(QEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+
+private slots:
+    void element1Clicked();
+    void element2Clicked();
+    void element3Clicked();
+    void element4Clicked();
+    void onMenuClosed();
+
+private:
+    void elementClicked(int index);
+    void setStyle(bool hovered);
+
+    Ui::BrowserSortMenu *ui;
+    QIcon _checkIcon;
+    QString _textColor, _backgroundColor, _hoveredBackgroundColor;
 };
 
-#endif // SPINBOXMULTIPLY_H
+#endif // BROWSERSORTMENU_H

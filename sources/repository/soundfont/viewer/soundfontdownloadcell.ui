@@ -30,7 +30,6 @@
     <widget class="QLabel" name="labelTitle">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -54,6 +53,18 @@
    </item>
    <item row="0" column="2">
     <widget class="QPushButton" name="pushDownload">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>48</width>
+       <height>48</height>
+      </size>
+     </property>
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
      </property>

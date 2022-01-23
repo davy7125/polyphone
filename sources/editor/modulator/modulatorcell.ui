@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>634</width>
-    <height>78</height>
+    <width>845</width>
+    <height>94</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
    <item row="0" column="2">
     <widget class="ModulatorComboSrc" name="comboSource1">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -61,14 +61,7 @@
     </widget>
    </item>
    <item row="1" column="2">
-    <widget class="ModulatorComboSrc" name="comboSource2">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-    </widget>
+    <widget class="ModulatorComboSrc" name="comboSource2"/>
    </item>
    <item row="1" column="3">
     <spacer name="horizontalSpacer">
@@ -87,7 +80,16 @@
     </spacer>
    </item>
    <item row="0" column="6">
-    <widget class="SpinBoxMultiply" name="spinAmount">
+    <widget class="QSpinBox" name="spinAmount">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="prefix">
+      <string notr="true">× </string>
+     </property>
      <property name="minimum">
       <number>-32768</number>
      </property>
@@ -196,11 +198,6 @@
    <class>ModulatorComboDest</class>
    <extends>QComboBox</extends>
    <header>modulatorcombodest.h</header>
-  </customwidget>
-  <customwidget>
-   <class>SpinBoxMultiply</class>
-   <extends>QSpinBox</extends>
-   <header>spinboxmultiply.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

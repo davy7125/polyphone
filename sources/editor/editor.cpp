@@ -204,7 +204,7 @@ void Editor::updateTitleAndPath()
     SoundfontManager * sm = SoundfontManager::getInstance();
     QString title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_name);
     if (title.isEmpty())
-        title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial).split(QRegExp("(/|\\\\)")).last();
+        title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial).split(QRegularExpression("(/|\\\\)")).last();
     if (title.isEmpty())
         title = tr("Untitled");
     emit(tabTitleChanged((sm->isEdited(_sf2Index) ? "*" : "") + title));

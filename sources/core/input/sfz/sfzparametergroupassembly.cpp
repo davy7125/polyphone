@@ -50,11 +50,11 @@ void SfzParameterGroupAssembly::moveKeynumInSamples(SfzParameter::OpCode opCodeK
     }
 }
 
-void SfzParameterGroupAssembly::moveOpcodeInSamples(SfzParameter::OpCode opcode, QVariant::Type type)
+void SfzParameterGroupAssembly::moveOpcodeInSamples(SfzParameter::OpCode opcode, QMetaType::Type type)
 {
     switch (type)
     {
-    case QVariant::Double:
+    case QMetaType::Double:
         if (_paramGlobaux.isDefined(opcode))
         {
             double value = _paramGlobaux.getDoubleValue(opcode);
@@ -63,7 +63,7 @@ void SfzParameterGroupAssembly::moveOpcodeInSamples(SfzParameter::OpCode opcode,
                     _listeDivisions[i] << SfzParameter(opcode, value);
         }
         break;
-    case QVariant::Int:
+    case QMetaType::Int:
         if (_paramGlobaux.isDefined(opcode))
         {
             int value = _paramGlobaux.getIntValue(opcode);
@@ -72,7 +72,7 @@ void SfzParameterGroupAssembly::moveOpcodeInSamples(SfzParameter::OpCode opcode,
                     _listeDivisions[i] << SfzParameter(opcode, value);
         }
         break;
-    case QVariant::String:
+    case QMetaType::QString:
         if (_paramGlobaux.isDefined(opcode))
         {
             QString value = _paramGlobaux.getStrValue(opcode);

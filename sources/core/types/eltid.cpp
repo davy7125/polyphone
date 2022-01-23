@@ -86,7 +86,7 @@ EltID EltID::parent(bool includeRoot)
     return idParent;
 }
 
-bool EltID::operator==(const EltID &other)
+bool EltID::operator==(const EltID &other) const
 {
     // Check sf2 and element type
     if (this->typeElement != other.typeElement || this->indexSf2 != other.indexSf2 || typeElement == elementUnknown)
@@ -117,7 +117,7 @@ bool EltID::operator==(const EltID &other)
     return this->indexMod == other.indexMod;
 }
 
-bool EltID::operator !=(const EltID &other)
+bool EltID::operator !=(const EltID &other) const
 {
     return !((*this) == other);
 }

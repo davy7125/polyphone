@@ -48,9 +48,6 @@ private:
     RangesType getDefaultKeyRange();
 
     QString _rootDir;
-    GrandOrgueDataThrough * _godt;
-    int _id;
-
     GrandOrgueRank _anonymousRank;
     QMap<QString, QString> _properties;
     QMap<int, GrandOrgueRankLink *> _rankLinks;

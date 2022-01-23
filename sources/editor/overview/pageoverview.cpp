@@ -38,13 +38,6 @@ PageOverview::PageOverview(TypePage typePage, ElementType typeElement, QWidget *
     ui->frameBottom->setStyleSheet("QFrame{border: 0; background-color:" +
                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";color:" +
                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "}");
-
-#ifdef Q_OS_MAC
-    ui->table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
-    QFont font = ui->table->font();
-    font.setPixelSize(10);
-    ui->table->setFont(font);
-#endif
     ui->table->verticalHeader()->setDefaultSectionSize(QFontMetrics(ui->table->font()).height() + 8);
 }
 

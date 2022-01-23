@@ -57,7 +57,7 @@ private slots:
     void on_comboSortDivisions_currentIndexChanged(int index);
     void on_checkDecorations_clicked();
     void on_checkUniqueInstance_clicked();
-    void on_comboStyle_currentIndexChanged(const QString &arg1);
+    void on_comboStyle_currentIndexChanged(int index);
 
 private:
     void initComboLanguage();

@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "soundfontfilter.h"
+#include <QRegularExpression>
 
 SoundfontFilter::SoundfontFilter() :
     _searchText(""),
@@ -40,9 +41,9 @@ bool SoundfontFilter::match(SoundfontInformation * soundfontInformation)
         QString search = _searchText;
 
         // Author specified?
-        QRegExp regExp("Author:\"([^\"]*)\"");
-        regExp.indexIn(search);
-        QStringList capturedText = regExp.capturedTexts();
+        QRegularExpression regExp("Author:\"([^\"]*)\"");
+        QRegularExpressionMatch match = regExp.match(search);
+        QStringList capturedText = match.capturedTexts();
         if (capturedText.count() == 2 && !capturedText[1].isEmpty())
         {
             // Check that the author matched

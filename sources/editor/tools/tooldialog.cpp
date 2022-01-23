@@ -40,7 +40,7 @@ ToolDialog::ToolDialog(AbstractToolGui *toolGui, AbstractTool * tool, QWidget *p
 
     // Fill the dialog
     QGridLayout * layout = new QGridLayout(this);
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(toolGui);
     this->setLayout(layout);
 

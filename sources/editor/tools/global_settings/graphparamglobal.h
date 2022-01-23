@@ -53,26 +53,31 @@ public:
              e->type() == QEvent::Leave)
                 && o == this)
         {
+            qWarning() << e->type();
             QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(e);
-            QPoint pos = mouseEvent->pos();
-            if (mouseEvent->type() == QEvent::MouseMove)
-                this->mouseMoved(pos);
-            else if (mouseEvent->type() == QEvent::Leave)
+            if (mouseEvent->type() == QEvent::Leave)
                 this->mouseLeft();
-            else if (mouseEvent->button() == Qt::LeftButton)
+            else
             {
-                if (mouseEvent->type() == QEvent::MouseButtonPress)
-                    this->mousePressed(pos);
-                else if (mouseEvent->type() == QEvent::MouseButtonRelease)
-                    this->mouseReleased(pos);
+                QPoint pos = mouseEvent->pos();
+                if (mouseEvent->type() == QEvent::MouseMove)
+                    this->mouseMoved(pos);
+                else if (mouseEvent->button() == Qt::LeftButton)
+                {
+                    if (mouseEvent->type() == QEvent::MouseButtonPress)
+                        this->mousePressed(pos);
+                    else if (mouseEvent->type() == QEvent::MouseButtonRelease)
+                        this->mouseReleased(pos);
+                }
+                else if (mouseEvent->button() == Qt::RightButton)
+                {
+                    if (mouseEvent->type() == QEvent::MouseButtonPress)
+                        this->mouseRightPressed(pos);
+                    else if (mouseEvent->type() == QEvent::MouseButtonRelease)
+                        this->mouseRightReleased(pos);
+                }
             }
-            else if (mouseEvent->button() == Qt::RightButton)
-            {
-                if (mouseEvent->type() == QEvent::MouseButtonPress)
-                    this->mouseRightPressed(pos);
-                else if (mouseEvent->type() == QEvent::MouseButtonRelease)
-                    this->mouseRightReleased(pos);
-            }
+
             return true;
         }
         return false;

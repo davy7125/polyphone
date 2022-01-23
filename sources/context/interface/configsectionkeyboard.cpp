@@ -27,6 +27,7 @@
 #include "contextmanager.h"
 #include "editkey.h"
 #include <QTextStream>
+#include <QFile>
 
 ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
     QWidget(parent),
