@@ -73,7 +73,7 @@ DialogChangeLog::DialogChangeLog(QWidget *parent) :
               currentVersion = match.captured(1);
           else if (currentVersion == versionSmall)
           {
-              match = rx1.match(line);
+              match = rx2.match(line);
               if (match.hasMatch())
               {
                   if (match.captured(1) == "new")
