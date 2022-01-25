@@ -50,15 +50,15 @@ win32 {
     INCLUDEPATH += ../lib_windows/include
     RC_FILE = polyphone.rc
     QMAKE_CXXFLAGS += -std=c++11 -ffloat-store # Compiler is MinGW for the option -ffloat-store, required by sfArk
+    LIBS += -lzlib1 -lwinmm -logg -lvorbis -lvorbisfile -lvorbisenc.dll -lcrypto -lFLAC -lportaudio
 
     !contains(QMAKE_TARGET.arch, x86_64) {
-        LIBS += -L$$PWD/../lib_windows/32bits -lportaudio_x86
+        LIBS += -L$$PWD/../lib_windows/32bits
         DESTDIR = $$PWD/../lib_windows/32bits
     } else {
-        LIBS += -L$$PWD/../lib_windows/64bits -lportaudio_x64
+        LIBS += -L$$PWD/../lib_windows/64bits
         DESTDIR = $$PWD/../lib_windows/64bits
     }
-    LIBS += -lzlib1 -lwinmm -llibogg -llibvorbis -llibvorbisfile -lcrypto -llibFLAC
 }
 unix:!macx {
     QMAKE_CXXFLAGS += -std=c++11 -ffloat-store
