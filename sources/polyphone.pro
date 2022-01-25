@@ -49,13 +49,12 @@ win32 {
     DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
     INCLUDEPATH += ../lib_windows/include
     RC_FILE = polyphone.rc
+    QMAKE_CXXFLAGS += -std=c++11 -ffloat-store # Compiler is MinGW for the option -ffloat-store, required by sfArk
 
     !contains(QMAKE_TARGET.arch, x86_64) {
-        QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
         LIBS += -L$$PWD/../lib_windows/32bits -lportaudio_x86
         DESTDIR = $$PWD/../lib_windows/32bits
     } else {
-        QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.02
         LIBS += -L$$PWD/../lib_windows/64bits -lportaudio_x64
         DESTDIR = $$PWD/../lib_windows/64bits
     }
