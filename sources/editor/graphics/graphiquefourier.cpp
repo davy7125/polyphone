@@ -36,7 +36,8 @@
 GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     _fixedTickerX(new QCPAxisTickerFixed()),
     _fixedTickerY(new QCPAxisTickerFixed()),
-    _menu(nullptr)
+    _menu(nullptr),
+    _toolFrequencyPeak(new ToolFrequencyPeaks())
 {
     // Configuration du graphe
     this->addGraph();
@@ -102,6 +103,7 @@ GraphiqueFourier::~GraphiqueFourier()
 {
     _fixedTickerX.clear();
     _fixedTickerY.clear();
+    delete _toolFrequencyPeak;
 }
 
 void GraphiqueFourier::setBackgroundColor(QColor color)
@@ -579,9 +581,8 @@ void GraphiqueFourier::exportPng(QString fileName)
 
 void GraphiqueFourier::exportPeaks()
 {
-    ToolFrequencyPeaks tool;
-    tool.setIds(_currentIds);
-    tool.run();
+    _toolFrequencyPeak->setIds(_currentIds);
+    _toolFrequencyPeak->run();
 }
 
 void GraphiqueFourier::getEstimation(int &pitch, int &correction)

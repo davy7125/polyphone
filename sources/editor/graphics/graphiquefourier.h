@@ -29,6 +29,7 @@
 #include "basetypes.h"
 #include <QMetaType>
 class QMenu;
+class ToolFrequencyPeaks;
 
 class Peak
 {
@@ -60,7 +61,7 @@ class GraphiqueFourier : public QCustomPlot
 
 public:
     explicit GraphiqueFourier(QWidget *parent = nullptr);
-    ~GraphiqueFourier();
+    ~GraphiqueFourier() override;
 
     void setBackgroundColor(QColor color);
     void setCurrentIds(IdList ids);
@@ -72,8 +73,8 @@ public:
                                     int * key = nullptr, int * correction = nullptr);
 
 protected:
-    void mousePressEvent(QMouseEvent *event);
-    void paintEvent(QPaintEvent * event);
+    void mousePressEvent(QMouseEvent *event) override;
+    void paintEvent(QPaintEvent * event) override;
 
 private slots:
     void exportPng();
@@ -89,6 +90,7 @@ private:
     QMenu * _menu;
     int _key, _delta;
     QList<Peak> _peaks;
+    ToolFrequencyPeaks * _toolFrequencyPeak;
 
     void resized();
     void exportPng(QString fileName);
