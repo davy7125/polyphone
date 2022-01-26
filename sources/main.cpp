@@ -191,16 +191,19 @@ int main(int argc, char *argv[])
     // Prior to everything
     Utils::prepareConversionTables();
 
+#if QT_VERSION < 0x060000
     // Dpi scaling
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     qputenv("QT_ENABLE_HIGHDPI_SCALING", "1");
-
+#endif
     QtSingleApplication app("polyphone", argc, argv);
     QApplication::setApplicationName("Polyphone");
     QApplication::setOrganizationName("polyphone");
+#ifndef Q_OS_MAC
     QFont f = app.font(); // Global font size so that it scales
     f.setPointSize(9);
     app.setFont(f);
+#endif
 
     Options options(argc, argv);
     int valRet = 0;
