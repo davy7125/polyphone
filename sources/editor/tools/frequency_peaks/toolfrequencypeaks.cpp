@@ -41,7 +41,7 @@ void ToolFrequencyPeaks::process(SoundfontManager * sm, IdList ids, AbstractTool
 {
     Q_UNUSED(sm)
     Q_UNUSED(ids)
-    ToolFrequencyPeaks_parameters * params = (ToolFrequencyPeaks_parameters *) parameters;
+    ToolFrequencyPeaks_parameters * params = dynamic_cast<ToolFrequencyPeaks_parameters *>(parameters);
 
     // Création fichier csv
     QFile file(params->getFilePath());

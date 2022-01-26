@@ -38,7 +38,7 @@ class ToolFrequencyPeaks_gui : public AbstractToolGui
 
 public:
     explicit ToolFrequencyPeaks_gui(QWidget *parent = nullptr);
-    ~ToolFrequencyPeaks_gui();
+    ~ToolFrequencyPeaks_gui() override;
 
     /// Update the interface with the parameters
     void updateInterface(AbstractToolParameters * parameters, IdList ids) override;

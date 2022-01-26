@@ -143,8 +143,8 @@ void ToolFrequencyPeaks_gui::onPeakComputed(EltID id, const SampleFrequencyInfo 
                     ui->table->item(currentRow, 0)->setBackground(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
                 }
                 ui->table->setItem(currentRow + i, 1, new QTableWidgetItem(QString::number(i + 1)));
-                ui->table->setItem(currentRow + i, 2, new QTableWidgetItem(QString::number(fi._factor)));
-                ui->table->setItem(currentRow + i, 3, new QTableWidgetItem(QString::number(fi._frequency) + " " + tr("Hz", "unit for Herz")));
+                ui->table->setItem(currentRow + i, 2, new QTableWidgetItem(QLocale::system().toString(fi._factor, 'f', 3)));
+                ui->table->setItem(currentRow + i, 3, new QTableWidgetItem(QLocale::system().toString(fi._frequency) + " " + tr("Hz", "unit for Herz")));
                 ui->table->setItem(currentRow + i, 4, new QTableWidgetItem(ContextManager::keyName()->getKeyName(fi._key)));
                 ui->table->setItem(currentRow + i, 5, new QTableWidgetItem(QString::number(fi._correction)));
             }
@@ -158,7 +158,7 @@ void ToolFrequencyPeaks_gui::onPeakComputed(EltID id, const SampleFrequencyInfo 
 
 void ToolFrequencyPeaks_gui::saveParameters(AbstractToolParameters * parameters)
 {
-    ToolFrequencyPeaks_parameters * params = (ToolFrequencyPeaks_parameters *) parameters;
+    ToolFrequencyPeaks_parameters * params = dynamic_cast<ToolFrequencyPeaks_parameters *>(parameters);
 
     // Save the path and data
     params->setFilePath(_path);
@@ -170,6 +170,7 @@ void ToolFrequencyPeaks_gui::on_pushExport_clicked()
     QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" + _sf2Name;
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export peak frequency"),
                                                     defaultFile, tr("Csv file") + " (*.csv)");
+
     if (!fileName.isEmpty())
     {
         ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_FREQUENCIES, fileName);
