@@ -491,27 +491,61 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
     textColor.setAlpha(100);
     painter.setPen(textColor);
     {
+        // Compute the text
+        QList<QStringList> lines;
         int peakNumber = 0;
         int posY = 2 * tuneCellPadding + fontHeight * 3 / 2;
         while (posY + fontHeight < size.height() && peakNumber < _peaks.count())
         {
+            QStringList line;
+            line << QLocale::system().toString(_peaks[peakNumber]._factor, 'f', 2)
+                 << QLocale::system().toString(_peaks[peakNumber]._frequency, 'f', 2) + " " + tr("Hz", "unit for Herz")
+                 << ContextManager::keyName()->getKeyName(static_cast<unsigned int>(_peaks[peakNumber]._key))
+                 << (_peaks[peakNumber]._correction > 0 ? "+" : "") + QString::number(_peaks[peakNumber]._correction);
+            lines << line;
+
+            peakNumber++;
+            posY += fontHeight;
+        }
+        QString lastTextElement = "/ 100";
+
+        // Compute the column widths
+        int columnWidth[5];
+        QFontMetrics fm(fontInfo);
+        for (int col = 0; col < 4; col++)
+        {
+            columnWidth[col] = 0;
+            for (peakNumber = 0; peakNumber < lines.count(); peakNumber++)
+            {
+                int w = fm.horizontalAdvance(lines[peakNumber][col]);
+                if (w > columnWidth[col])
+                    columnWidth[col] = w;
+            }
+        }
+        columnWidth[4] = QFontMetrics(fontInfoSmall).horizontalAdvance(lastTextElement);
+
+        // Margins
+        columnWidth[1] += 10;
+        columnWidth[2] += 10;
+        columnWidth[3] += 10;
+        columnWidth[4] += 2;
+
+        // Write the text
+        posY = 2 * tuneCellPadding + fontHeight * 3 / 2;
+        for (peakNumber = 0; peakNumber < lines.count(); peakNumber++)
+        {
             painter.setFont(fontInfo);
-            painter.drawText(QRect(0, posY, size.width() - 142 - marginRight, fontHeight),
-                             Qt::AlignRight,
-                             QLocale::system().toString(_peaks[peakNumber]._factor, 'f', 2));
-            painter.drawText(QRect(0, posY, size.width() - 80 - marginRight, fontHeight),
-                             Qt::AlignRight,
-                             QLocale::system().toString(_peaks[peakNumber]._frequency, 'f', 2) + " " + tr("Hz", "unit for Herz"));
-            painter.drawText(QRect(0, posY, size.width() - 48 - marginRight, fontHeight),
-                             Qt::AlignRight,
-                             ContextManager::keyName()->getKeyName(static_cast<unsigned int>(_peaks[peakNumber]._key)));
-            painter.drawText(QRect(0, posY, size.width() - 20 - marginRight, fontHeight),
-                             Qt::AlignRight,
-                             (_peaks[peakNumber]._correction > 0 ? "+" : "") + QString::number(_peaks[peakNumber]._correction));
+            painter.drawText(QRect(0, posY, size.width() - columnWidth[1] - columnWidth[2] - columnWidth[3] - columnWidth[4] - marginRight, fontHeight),
+                             Qt::AlignRight, lines[peakNumber][0]);
+            painter.drawText(QRect(0, posY, size.width() - columnWidth[2] - columnWidth[3] - columnWidth[4] - marginRight, fontHeight),
+                             Qt::AlignRight, lines[peakNumber][1]);
+            painter.drawText(QRect(0, posY, size.width() - columnWidth[3] - columnWidth[4] - marginRight, fontHeight),
+                             Qt::AlignRight, lines[peakNumber][2]);
+            painter.drawText(QRect(0, posY, size.width() - columnWidth[4] - marginRight, fontHeight),
+                             Qt::AlignRight, lines[peakNumber][3]);
             painter.setFont(fontInfoSmall);
             painter.drawText(QRect(0, posY, size.width() - marginRight, fontHeight),
-                             Qt::AlignRight, "/ 100");
-            peakNumber++;
+                             Qt::AlignRight, lastTextElement);
             posY += fontHeight;
         }
     }
