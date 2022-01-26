@@ -68,6 +68,8 @@ ModulatorEditor::ModulatorEditor(QWidget *parent) :
                                            "}");
     _mixedColor = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
                                     ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND), 0.5);
+    ui->listWidget->setStyleSheet("QListWidget::item:selected {background-color: " +
+                                  ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}");
 
     // Buttons
     updateButtons(false);

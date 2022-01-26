@@ -45,7 +45,7 @@ public:
     // Initialization based on a default modulator
     ModulatorCell(ModulatorData modulatorData, QWidget * parent = nullptr);
 
-    ~ModulatorCell();
+    ~ModulatorCell() override;
 
     AttributeType getTargetAttribute();
     EltID getID() { return _id; }
@@ -60,7 +60,7 @@ public:
     ModulatorData getModulatorData();
 
 protected:
-    void paintEvent(QPaintEvent* event);
+    void paintEvent(QPaintEvent* event) override;
 
 private slots:
     void on_spinAmount_editingFinished();
@@ -70,6 +70,7 @@ private slots:
 private:
     void initializeStyle();
     void updateLabelModNumber();
+    static QString doubleToString(double value);
 
     Ui::ModulatorCell *ui;
     QColor _computationAreaColor, _computationAreaColorSelected;
