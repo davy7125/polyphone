@@ -35,7 +35,7 @@ class AbstractToolGui: public QWidget
 
 public:
     AbstractToolGui(QWidget * parent) : QWidget(parent) {}
-    virtual ~AbstractToolGui() {}
+    virtual ~AbstractToolGui() override {}
 
     /// Update the interface with the parameters
     virtual void updateInterface(AbstractToolParameters * parameters, IdList ids) = 0;

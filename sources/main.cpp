@@ -25,6 +25,8 @@
 #include <QFileInfo>
 #include <QStyleFactory>
 #include <QItemSelection>
+#include <QDir>
+#include <QScreen>
 #include <QDebug>
 #include "soundfontmanager.h"
 #include "inputfactory.h"
@@ -37,10 +39,9 @@
 #include "qtsingleapplication.h"
 #include "mainwindow.h"
 #include "translationmanager.h"
-#include <QDir>
 
 #ifdef _WIN32
-#include <Windows.h>
+#include "windows.h"
 #endif
 
 void writeLine(QString line)
@@ -190,9 +191,16 @@ int main(int argc, char *argv[])
     // Prior to everything
     Utils::prepareConversionTables();
 
+    // Dpi scaling
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    qputenv("QT_ENABLE_HIGHDPI_SCALING", "1");
+
     QtSingleApplication app("polyphone", argc, argv);
     QApplication::setApplicationName("Polyphone");
     QApplication::setOrganizationName("polyphone");
+    QFont f = app.font(); // Global font size so that it scales
+    f.setPointSize(9);
+    app.setFont(f);
 
     Options options(argc, argv);
     int valRet = 0;
