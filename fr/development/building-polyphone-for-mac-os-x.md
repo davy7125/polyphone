@@ -11,6 +11,16 @@ Les éléments suivants seront nécessaires&nbsp;:
 
 Vous aurez également besoin des sources de Polyphone, disponibles <a href="download" target="_blank">ici</a> ou sur <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>, ainsi que les dépendances téléchargeables [ici](downloads/lib_mac.zip).
 
+Pour pouvoir ouvrir correctement un projet avec Qt Creator, il faut au préalable lui donner la permission de lire tous les fichiers (dans "Sécurité et confidentialité => Accès complet au disque => ajouter "Qt creator.app" qui se trouve dans son répertoire d'installation).
+
+Si certaines des dépendances précédemment fournies ne sont pas à jour ou pas compatibles avec la version de Mac, comme PortAudio par exemple, il faudra aller chercher leurs sources sur internet et les recompiler en autorisant une liaison statique&nbsp;:
+```
+configure --enable-static --disable-shared --prefix=...
+make
+make install
+```
+Ensuite copier tous les .h (entêtes) et .a (bibliothèques statiques).
+
 
 ## Compilation
 
