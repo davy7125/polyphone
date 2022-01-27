@@ -199,7 +199,7 @@ int main(int argc, char *argv[])
     QtSingleApplication app("polyphone", argc, argv);
     QApplication::setApplicationName("Polyphone");
     QApplication::setOrganizationName("polyphone");
-#ifndef Q_OS_MAC
+#ifdef _WIN32
     QFont f = app.font(); // Global font size so that it scales
     f.setPointSize(9);
     app.setFont(f);
