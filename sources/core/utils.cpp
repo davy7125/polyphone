@@ -45,11 +45,8 @@
 #include "openssl/engine.h"
 #endif
 
-
 QString Utils::s_diacriticLetters;
 QStringList Utils::s_noDiacriticLetters;
-double Utils::s_concaveTable[128];
-double Utils::s_convexTable[128];
 
 int Utils::naturalOrder(QString str1, QString str2)
 {
@@ -318,42 +315,6 @@ QString Utils::removeSuffix(QString txt)
     if (txt.size() >= 5 && txt.lastIndexOf(regExp3) == txt.size() - 5)
         return txt.left(txt.size() - 5);
     return txt;
-}
-
-void Utils::prepareConversionTables()
-{
-    // Limits of the tables
-    s_concaveTable[0] = 0.0;
-    s_concaveTable[127] = 1.0;
-    s_convexTable[0] = 0;
-    s_convexTable[127] = 1.0;
-
-    // Compute values of the tables
-    double x;
-    for (int i = 1; i < 127; i++)
-    {
-        x = -20.0 / 96.0 * log((i * i) / (127.0 * 127.0)) / log(10.0);
-        s_convexTable[i] = 1.0 - x;
-        s_concaveTable[127 - i] = x;
-    }
-}
-
-double Utils::concave(double val)
-{
-  if (val < 0)
-    return 0;
-  if (val > 127)
-    return 1;
-  return s_concaveTable[static_cast<int>(val)];
-}
-
-double Utils::convex(double val)
-{
-  if (val < 0)
-    return 0;
-  if (val > 127)
-    return 1;
-  return s_convexTable[static_cast<int>(val)];
 }
 
 qint8 Utils::round8(double value)

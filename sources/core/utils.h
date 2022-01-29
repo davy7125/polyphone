@@ -50,9 +50,6 @@ public:
     static QString rsaDecrypt(QString input);
 
     /// Conversion functions
-    static void prepareConversionTables(); // Call it once before concave(..) or convex(..)
-    static double concave(double value);
-    static double convex(double value);
     static qint8 round8(double value);
     static qint16 round16(double value);
     static qint32 round32(double value);
@@ -68,9 +65,6 @@ private:
 
     static QString s_diacriticLetters;
     static QStringList s_noDiacriticLetters;
-
-    static double s_concaveTable[128];
-    static double s_convexTable[128];
 };
 
 #endif // UTILS_H

@@ -78,6 +78,7 @@ public:
     quint16 toWord();
 
     // Apply a shape, input being from 0 and 127 and output being from 0 or -1 to 1
+    static void prepareConversionTables(); // Call it once before applyShape(..)
     double applyShape(double value);
 
     quint8 Type : 6;
@@ -85,6 +86,13 @@ public:
     bool isDescending : 1;
     bool CC : 1;
     quint8 Index : 7;
+
+private:
+    static double concave(double value);
+    static double convex(double value);
+
+    static double s_concaveTable[128];
+    static double s_convexTable[128];
 };
 
 typedef enum

@@ -35,10 +35,11 @@
 #include "abstractoutput.h"
 #include "options.h"
 #include "contextmanager.h"
-#include "utils.h"
 #include "qtsingleapplication.h"
 #include "mainwindow.h"
 #include "translationmanager.h"
+#include "modulatordata.h"
+#include "voice.h"
 
 #ifdef _WIN32
 #include "windows.h"
@@ -52,6 +53,10 @@ void writeLine(QString line)
 
 int launchApplication(QtSingleApplication * app, Options &options)
 {
+    // Prepare arrays
+    SFModulator::prepareConversionTables();
+    Voice::prepareSincTable();
+
     // Application style
     QSettings settings;
     QString styleName = settings.value("display/style", "Fusion").toString();
@@ -188,9 +193,6 @@ int displayHelp(Options &options)
 
 int main(int argc, char *argv[])
 {
-    // Prior to everything
-    Utils::prepareConversionTables();
-
 #if QT_VERSION < 0x060000
     // Dpi scaling
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

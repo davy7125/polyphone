@@ -25,6 +25,36 @@
 #include "voice.h"
 #include "qmath.h"
 
+const int Voice::s_sinc_interpDivisions = 256;
+float Voice::s_sinc_table7[s_sinc_interpDivisions][7];
+
+void Voice::prepareSincTable()
+{
+    double v, i_shifted;
+    for (int i = 0; i < 7; i++) // i: Offset in terms of whole samples
+    {
+        // i2: Offset in terms of fractional samples ('subsamples')
+        for (int i2 = 0; i2 < s_sinc_interpDivisions; i2++)
+        {
+            // Center on middle of table
+            i_shifted = (double)i - ((double)7 / 2.0) + (double)i2 / (double)s_sinc_interpDivisions;
+
+            // sinc(0) cannot be calculated straightforward (limit needed for 0/0)
+            if (fabs (i_shifted) > 0.000001)
+            {
+                v = sin (i_shifted * M_PI) / (M_PI * i_shifted);
+
+                // Hamming window
+                v *= 0.5 * (1.0 + cos (2.0 * M_PI * i_shifted / 7));
+            }
+            else
+                v = 1.0;
+
+            s_sinc_table7[s_sinc_interpDivisions - i2 - 1][i] = v;
+        }
+    }
+}
+
 // Constructeur, destructeur
 Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int initialKey,
              VoiceParam * voiceParam, int token) : QObject(nullptr),
@@ -50,15 +80,18 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int ini
     _isFinished(false),
     _isRunning(false),
     _deltaPos(0),
-    _valPrec(0),
+    _valPrec3(0),
+    _valPrec2(0),
+    _valPrec1(0),
     _x1(0), _x2(0), _y1(0), _y2(0),
-    _arrayLength(0)
+    _arrayLength(0),
+    _srcDataLength(0)
 {
     // Equal temperament by default
     memset(_temperament, 0, 12 * sizeof(double));
 
-    // Initialisation resampling
-    takeData(&_valBase, 1);
+    // Resampling initialization
+    takeData(_firstVal, 3);
 }
 
 Voice::~Voice()
@@ -71,6 +104,8 @@ Voice::~Voice()
         delete [] _modPitchArray;
         delete [] _modFreqArray;
     }
+    if (_srcDataLength != 0)
+        delete [] _srcData;
     delete _voiceParam;
 }
 
@@ -162,29 +197,49 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     // Convert into a cumulated distance between points
     _modPitchArray[0] = _deltaPos + 1;
     for (quint32 i = 1; i <= len; i++)
-        _modPitchArray[i] = qMin(qMax(0.001f, EnveloppeVol::fastPow2(_modPitchArray[i] / 12)), 64.f) + _modPitchArray[i-1];
+        _modPitchArray[i] = qMin(qMax(0.001f, EnveloppeVol::fastPow2(_modPitchArray[i] / 12)), 64.f) + _modPitchArray[i - 1];
     _deltaPos = _modPitchArray[len];
     _deltaPos = _deltaPos - ceil(_deltaPos);
 
     // Resample data
     quint32 nbDataTmp = static_cast<quint32>(ceil(static_cast<double>(_modPitchArray[len]))) - 1;
-    qint32 * dataTmp = new qint32[nbDataTmp + 2];
-    dataTmp[0] = _valPrec;
-    dataTmp[1] = _valBase;
-    endSample = takeData(&dataTmp[2], nbDataTmp);
-    _valPrec = dataTmp[nbDataTmp];
-    _valBase = dataTmp[nbDataTmp + 1];
+    if (nbDataTmp > _srcDataLength)
+    {
+        if (_srcDataLength != 0)
+            delete [] _srcData;
+        _srcData = new qint32[nbDataTmp + 6];
+        _srcDataLength = nbDataTmp;
+    }
+    _srcData[0] = _valPrec3;
+    _srcData[1] = _valPrec2;
+    _srcData[2] = _valPrec1;
+    _srcData[3] = _firstVal[0];
+    _srcData[4] = _firstVal[1];
+    _srcData[5] = _firstVal[2];
+    endSample = takeData(&_srcData[6], nbDataTmp);
+    _valPrec3 = _srcData[nbDataTmp];
+    _valPrec2 = _srcData[nbDataTmp + 1];
+    _valPrec1 = _srcData[nbDataTmp + 2];
+    _firstVal[0] = _srcData[nbDataTmp + 3];
+    _firstVal[1] = _srcData[nbDataTmp + 4];
+    _firstVal[2] = _srcData[nbDataTmp + 5];
     double pos;
-    qint32 val1, val2;
+    float * coeffs;
     for (quint32 i = 0; i < len; i++)
     {
-        pos = static_cast<double>(_modPitchArray[i]);
-        val1 = dataTmp[static_cast<quint32>(floor(pos))];
-        val2 = dataTmp[static_cast<quint32>(ceil(pos))];
-        pos -= floor(pos);
-        dataL[i] = static_cast<float>(((1. - pos) * val1 + pos * val2) / 2147483648LL); // Cast to double from -1 to 1
+        pos = static_cast<double>(_modPitchArray[i]) + 3;
+
+        // Sinc interpolation 7th order
+        coeffs = s_sinc_table7[(int)((pos - floor(pos)) * s_sinc_interpDivisions)];
+        quint32 currentPos = (int)pos;
+        dataL[i] = (coeffs[0] * _srcData[currentPos - 3] +
+                coeffs[1] * _srcData[currentPos - 2] +
+                coeffs[2] * _srcData[currentPos - 1] +
+                coeffs[3] * _srcData[currentPos] +
+                coeffs[4] * _srcData[currentPos + 1] +
+                coeffs[5] * _srcData[currentPos + 2] +
+                coeffs[6] * _srcData[currentPos + 3]) / 2147483648LL;
     }
-    delete [] dataTmp;
 
     // Low-pass filter
     for (quint32 i = 0; i < len; i++)

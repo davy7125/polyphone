@@ -71,6 +71,8 @@ public:
     // Generate data
     void generateData(float *dataL, float *dataR, quint32 len);
 
+    static void prepareSincTable();
+
 signals:
     void currentPosChanged(quint32 pos);
 
@@ -102,7 +104,8 @@ private:
 
     // Save state for resampling
     float _deltaPos;
-    qint32 _valPrec, _valBase;
+    qint32 _valPrec3, _valPrec2, _valPrec1;
+    qint32 _firstVal[3];
 
     // Save state for low pass filter
     double _x1, _x2, _y1, _y2;
@@ -120,6 +123,11 @@ private:
     float * _modPitchArray;
     double * _modFreqArray;
     quint32 _arrayLength;
+    qint32 * _srcData;
+    quint32 _srcDataLength;
+
+    static const int s_sinc_interpDivisions;
+    static float s_sinc_table7[256][7];
 };
 
 #endif // VOICE_H

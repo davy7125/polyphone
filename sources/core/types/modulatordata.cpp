@@ -24,7 +24,9 @@
 
 #include "modulatordata.h"
 #include "attribute.h"
-#include "utils.h"
+
+double SFModulator::s_concaveTable[128];
+double SFModulator::s_convexTable[128];
 
 // 0 => version 2.01
 // 1 => version 2.04 (default)
@@ -51,6 +53,42 @@ quint16 SFModulator::toWord()
     return ((Type << 10) + (isBipolar << 9) + (isDescending << 8) + (CC << 7) + Index) & 0xFFFF;
 }
 
+void SFModulator::prepareConversionTables()
+{
+    // Limits of the tables
+    s_concaveTable[0] = 0.0;
+    s_concaveTable[127] = 1.0;
+    s_convexTable[0] = 0;
+    s_convexTable[127] = 1.0;
+
+    // Compute values of the tables
+    double x;
+    for (int i = 1; i < 127; i++)
+    {
+        x = -20.0 / 96.0 * log((i * i) / (127.0 * 127.0)) / log(10.0);
+        s_convexTable[i] = 1.0 - x;
+        s_concaveTable[127 - i] = x;
+    }
+}
+
+double SFModulator::concave(double val)
+{
+  if (val < 0)
+    return 0;
+  if (val > 127)
+    return 1;
+  return s_concaveTable[static_cast<int>(val)];
+}
+
+double SFModulator::convex(double val)
+{
+  if (val < 0)
+    return 0;
+  if (val > 127)
+    return 1;
+  return s_convexTable[static_cast<int>(val)];
+}
+
 double SFModulator::applyShape(double value)
 {
     switch (this->Type)
@@ -73,19 +111,19 @@ double SFModulator::applyShape(double value)
         {
             if (this->isBipolar)
                 // Concave, bipolar, negative
-                value = (value > 64) ? -Utils::concave(2 * (value - 64)) : Utils::concave(2 * (64 - value));
+                value = (value > 64) ? -SFModulator::concave(2 * (value - 64)) : SFModulator::concave(2 * (64 - value));
             else
                 // Concave, unipolar, negative
-                value = Utils::concave(127 - value);
+                value = SFModulator::concave(127 - value);
         }
         else
         {
             if (this->isBipolar)
                 // Concave, bipolar, positive
-                value = (value > 64) ? Utils::concave(2 * (value - 64)) : -Utils::concave(2 * (64 - value));
+                value = (value > 64) ? SFModulator::concave(2 * (value - 64)) : -SFModulator::concave(2 * (64 - value));
             else
                 // Concave, unipolar, positive
-                value = Utils::concave(value);
+                value = SFModulator::concave(value);
         }
         break;
     case typeConvex:
@@ -93,19 +131,19 @@ double SFModulator::applyShape(double value)
         {
             if (this->isBipolar)
                 // Convex, bipolar, negative
-                value = (value > 64) ? -Utils::convex(2 * (value - 64)) : Utils::convex(2 * (64 - value));
+                value = (value > 64) ? -SFModulator::convex(2 * (value - 64)) : SFModulator::convex(2 * (64 - value));
             else
                 // Convex, unipolar, negative
-                value = Utils::convex(127 - value);
+                value = SFModulator::convex(127 - value);
         }
         else
         {
             if (this->isBipolar)
                 // Convex, bipolar, positive
-                value = (value > 64) ? Utils::convex(2 * (value - 64)) : -Utils::convex(2 * (64 - value));
+                value = (value > 64) ? SFModulator::convex(2 * (value - 64)) : -SFModulator::convex(2 * (64 - value));
             else
                 // Convex, unipolar, positive
-                value = Utils::convex(value);
+                value = SFModulator::convex(value);
         }
         break;
     case typeSwitch:
