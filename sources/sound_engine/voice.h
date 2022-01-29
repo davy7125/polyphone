@@ -48,8 +48,6 @@ public:
     int getToken() { return _token; }
     void release(bool quick = false);
     void setGain(double gain);
-    void setTuningFork(int tuningFork);
-    void setTemperament(double temperament[12], int relativeKey);
     void setChorus(int level, int depth, int frequency);
     bool isFinished() { return _isFinished; }
     bool isRunning() { return _isRunning; }
@@ -71,6 +69,10 @@ public:
     // Generate data
     void generateData(float *dataL, float *dataR, quint32 len);
 
+    // Configuration
+    static void setTuningFork(int tuningFork);
+    static void setTemperament(float temperament[12], int relativeKey);
+
     static void prepareSincTable();
 
 signals:
@@ -87,9 +89,6 @@ private:
     QByteArray _baData;
     quint32 _smplRate, _audioSmplRate;
     double _gain;
-    int _tuningFork;
-    double _temperament[12]; // Fine tune in cents from each key from C to B
-    int _temperamentRelativeKey;
     int _initialKey; // Only used to know which key triggered the sound, not for computing data
     VoiceParam * _voiceParam;
     int _token;
@@ -108,10 +107,10 @@ private:
     qint32 _firstVal[3];
 
     // Save state for low pass filter
-    double _x1, _x2, _y1, _y2;
+    float _x1, _x2, _y1, _y2;
 
     bool takeData(qint32 *data, quint32 nbRead);
-    void biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, double &b2, double freq, double Q);
+    void biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float Q);
 
     // Protect parameters
     QMutex _mutexParam;
@@ -121,11 +120,14 @@ private:
     float * _modLfoArray;
     float * _vibLfoArray;
     float * _modPitchArray;
-    double * _modFreqArray;
+    float * _modFreqArray;
     quint32 _arrayLength;
     qint32 * _srcData;
     quint32 _srcDataLength;
 
+    static volatile int s_tuningFork;
+    static volatile float s_temperament[12]; // Fine tune in cents from each key from C to B
+    static volatile int s_temperamentRelativeKey;
     static const int s_sinc_interpDivisions;
     static float s_sinc_table7[256][7];
 };

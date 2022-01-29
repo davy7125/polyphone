@@ -57,7 +57,7 @@ public:
     void setSinus(bool isOn, int rootKey);
     void setPitchCorrection(qint16 correction, bool repercute);
     void activateSmplEq(bool isActivated);
-    void setSmplEqValues(QVector<int> values);
+    void setSmplEqValues(int values[10]);
 
     // Record
     void startNewRecord(QString fileName);
@@ -141,9 +141,6 @@ private:
 
     // Global parameter
     double _gain;
-    int _tuningFork;
-    double _temperament[12];
-    int _temperamentRelativeKey;
 
     // Effects
     int _choLevel, _choDepth, _choFrequency;

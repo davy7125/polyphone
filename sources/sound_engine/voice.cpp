@@ -25,6 +25,9 @@
 #include "voice.h"
 #include "qmath.h"
 
+volatile int Voice::s_tuningFork = 440;
+volatile float Voice::s_temperament[12] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+volatile int Voice::s_temperamentRelativeKey = 0;
 const int Voice::s_sinc_interpDivisions = 256;
 float Voice::s_sinc_table7[s_sinc_interpDivisions][7];
 
@@ -67,8 +70,6 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int ini
     _smplRate(smplRate),
     _audioSmplRate(audioSmplRate),
     _gain(0),
-    _tuningFork(440),
-    _temperamentRelativeKey(0),
     _initialKey(initialKey),
     _voiceParam(voiceParam),
     _token(token),
@@ -87,9 +88,6 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int ini
     _arrayLength(0),
     _srcDataLength(0)
 {
-    // Equal temperament by default
-    memset(_temperament, 0, 12 * sizeof(double));
-
     // Resampling initialization
     takeData(_firstVal, 3);
 }
@@ -172,7 +170,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         _modLfoArray = new float[len];
         _vibLfoArray = new float[len];
         _modPitchArray = new float[len+1];
-        _modFreqArray = new double[len];
+        _modFreqArray = new float[len];
 
         _arrayLength = len;
     }
@@ -185,13 +183,13 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     _vibLFO.getData(_vibLfoArray, len, static_cast<float>(v_vibLfoFreq), v_vibLfoDelay);
 
     // Pitch modulation
-    qint32 temperamentFineTune = _temperament[(playedNote - _temperamentRelativeKey + 12) % 12] -
-            _temperament[(21 - _temperamentRelativeKey) % 12]; // Correction so that the tuning fork is accurate for A
-    double deltaPitchFixed = -12. * qLn(static_cast<double>(_audioSmplRate) / _smplRate * 440. / _tuningFork) / 0.69314718056 +
-            (playedNote - v_rootkey) * 0.01 * v_scaleTune + 0.01 * (v_fineTune + temperamentFineTune) + v_coarseTune;
+    float temperamentFineTune = s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
+            s_temperament[(21 - s_temperamentRelativeKey) % 12]; // Correction so that the tuning fork is accurate for A
+    float deltaPitchFixed = -12.f * qLn(static_cast<double>(_audioSmplRate) / _smplRate * 440.f / s_tuningFork) / 0.69314718056f +
+            (playedNote - v_rootkey) * 0.01f * v_scaleTune + 0.01f * (temperamentFineTune + v_fineTune) + v_coarseTune;
     for (quint32 i = 0; i < len; i++)
         _modPitchArray[i + 1] = static_cast<float>(
-                    deltaPitchFixed + 0.01 * static_cast<double>(
+                    deltaPitchFixed + 0.01f * (
                         _dataModArray[i] * v_modEnvToPitch + _modLfoArray[i] * v_modLfoToPitch + _vibLfoArray[i] * v_vibLfoToPitch));
 
     // Convert into a cumulated distance between points
@@ -244,25 +242,25 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     // Low-pass filter
     for (quint32 i = 0; i < len; i++)
     {
-        _modFreqArray[i] = v_filterFreq * static_cast<double>(
-                    EnveloppeVol::fastPow2((_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) / 1200));
-        if (_modFreqArray[i] > 20000)
-            _modFreqArray[i] = 20000;
-        else if (_modFreqArray[i] < 20)
-            _modFreqArray[i] = 20;
+        _modFreqArray[i] = v_filterFreq *
+                    EnveloppeVol::fastPow2((_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) / 1200.f);
+        if (_modFreqArray[i] > 20000.0f)
+            _modFreqArray[i] = 20000.0f;
+        else if (_modFreqArray[i] < 20.0f)
+            _modFreqArray[i] = 20.0f;
     }
-    double a0, a1, a2, b1, b2, valTmp;
-    double filterQ = v_filterQ - 3.01; // So that a value of 0 gives a non-resonant low pass
-    double q_lin = qPow(10, filterQ / 20.); // If filterQ is -3.01, q_lin is 1/sqrt(2)
+    float a0, a1, a2, b1, b2, valTmp;
+    double filterQ = v_filterQ - 3.01f; // So that a value of 0 gives a non-resonant low pass
+    float q_lin = qPow(10, filterQ / 20.); // If filterQ is -3.01, q_lin is 1/sqrt(2)
     for (quint32 i = 0; i < len; i++)
     {
         biQuadCoefficients(a0, a1, a2, b1, b2, _modFreqArray[i], q_lin);
-        valTmp = a0 * static_cast<double>(dataL[i]) + a1 * _x1 + a2 * _x2 - b1 * _y1 - b2 * _y2;
+        valTmp = a0 * dataL[i] + a1 * _x1 + a2 * _x2 - b1 * _y1 - b2 * _y2;
         _x2 = _x1;
-        _x1 = static_cast<double>(dataL[i]);
+        _x1 = dataL[i];
         _y2 = _y1;
         _y1 = valTmp;
-        dataL[i] = static_cast<float>(valTmp);
+        dataL[i] = valTmp;
     }
 
     // Volume modulation with values from the mod LFO converted to dB
@@ -392,17 +390,16 @@ void Voice::setGain(double gain)
 
 void Voice::setTuningFork(int tuningFork)
 {
-    _mutexParam.lock();
-    _tuningFork = tuningFork;
-    _mutexParam.unlock();
+    // Atomic operation
+    s_tuningFork = tuningFork;
 }
 
-void Voice::setTemperament(double temperament[12], int relativeKey)
+void Voice::setTemperament(float temperament[12], int relativeKey)
 {
-    _mutexParam.lock();
-    memcpy(_temperament, temperament, 12 * sizeof(double));
-    _temperamentRelativeKey = relativeKey;
-    _mutexParam.unlock();
+    // Atomic operations
+    for (int i = 0; i < 12; i++)
+        s_temperament[i]  = temperament[i];
+    s_temperamentRelativeKey = relativeKey;
 }
 
 void Voice::setChorus(int level, int depth, int frequency)
@@ -414,10 +411,10 @@ void Voice::setChorus(int level, int depth, int frequency)
     _mutexParam.unlock();
 }
 
-void Voice::biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, double &b2, double freq, double Q)
+void Voice::biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float Q)
 {
     // Calcul des coefficients d'une structure bi-quad pour un passe-bas
-    double theta = 2. * M_PI * freq / _audioSmplRate;
+    float theta = 2.f * M_PI * freq / _audioSmplRate;
 
     if (Q <= 0)
     {
@@ -429,8 +426,8 @@ void Voice::biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, d
     }
     else
     {
-        double dTmp = sin(theta) / (2. * Q);
-        if (dTmp <= -1)
+        float dTmp = sin(theta) / (2.f * Q);
+        if (dTmp <= -1.0f)
         {
             a0 = 1;
             a1 = 0;
@@ -440,13 +437,13 @@ void Voice::biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, d
         }
         else
         {
-            double beta = 0.5 * (1. - dTmp) / (1. + dTmp);
-            double gamma = (0.5 + beta) * cos(theta);
-            a0 = (0.5 + beta - gamma) / 2.;
-            a1 = 2. * a0;
+            float beta = 0.5f * (1.f - dTmp) / (1.f + dTmp);
+            float gamma = (0.5f + beta) * cos(theta);
+            a0 = (0.5 + beta - gamma) / 2.f;
+            a1 = 2.f * a0;
             a2 = a0;
-            b1 = -2. * gamma;
-            b2 = 2. * beta;
+            b1 = -2.f * gamma;
+            b2 = 2.f * beta;
         }
     }
 }

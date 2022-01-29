@@ -27,21 +27,20 @@
 #include <qmath.h>
 
 int LiveEQ::CROSSFADE_LENGTH = 1000;
-double LiveEQ::CORRECTION = 0.85;
+float LiveEQ::CORRECTION = 0.85;
 
 LiveEQ::LiveEQ() :
     _isOn(false),
     _crossFade(0)
 {
-    _coeff.resize(10);
+
 }
 
-void LiveEQ::setSampleRate(quint32 sampleRate)
+void LiveEQ::setSampleRate(unsigned int sampleRate)
 {
     _sampleRate = sampleRate;
 
     // Prepare 10 pass bands per channel
-    _passBandsR.resize(10);
     _passBandsR[0].setup(_sampleRate, 32, 2*12);
     _passBandsR[1].setup(_sampleRate, 64, 2*20);
     _passBandsR[2].setup(_sampleRate, 125, 2*41);
@@ -53,7 +52,6 @@ void LiveEQ::setSampleRate(quint32 sampleRate)
     _passBandsR[8].setup(_sampleRate, 8000, 2*2666);
     _passBandsR[9].setup(_sampleRate, 16000, 2*5334);
 
-    _passBandsL.resize(10);
     _passBandsL[0].setup(_sampleRate, 32, 2*12);
     _passBandsL[1].setup(_sampleRate, 64, 2*20);
     _passBandsL[2].setup(_sampleRate, 125, 2*41);
@@ -68,57 +66,45 @@ void LiveEQ::setSampleRate(quint32 sampleRate)
 
 void LiveEQ::on()
 {
-    _mutex.lock();
     _isOn = true;
-    _mutex.unlock();
 }
 
 void LiveEQ::off()
 {
-    _mutex.lock();
     _isOn = false;
-    _mutex.unlock();
 }
 
-void LiveEQ::setValues(QVector<int> values)
+void LiveEQ::setValues(int values[10])
 {
-    _mutex.lock();
     for (int i = 0; i < 10; i++)
         _coeff[i] = qPow(10.0, 0.1 * values[i]);
-    _mutex.unlock();
 }
 
-void LiveEQ::filterData(float * dataR, float * dataL, quint32 len)
+void LiveEQ::filterData(float * dataR, float * dataL, unsigned int len)
 {
-    _mutex.lock();
-
     if (!_isOn && _crossFade == 0)
-    {
-        _mutex.unlock();
         return;
-    }
 
     // Filter
+    int j;
     for (quint32 i = 0; i < len; i++)
     {
         if (_isOn && _crossFade < CROSSFADE_LENGTH)
             _crossFade++;
         else if (!_isOn && _crossFade > 0)
             _crossFade--;
-        double pos = static_cast<double>(_crossFade) / CROSSFADE_LENGTH;
+        float pos = static_cast<float>(_crossFade) / CROSSFADE_LENGTH;
 
-        double value = static_cast<double>(dataR[i]);
-        double fTmp = 0;
-        for (int j = 0; j < 10; j++)
+        float value = dataR[i];
+        float fTmp = 0;
+        for (j = 0; j < 10; ++j)
             fTmp += _coeff[j] * _passBandsR[j].filter(value);
-        dataR[i] = static_cast<float>((1.0 - pos) * dataR[i] + pos * fTmp * CORRECTION);
+        dataR[i] = (1.0f - pos) * dataR[i] + pos * fTmp * CORRECTION;
 
-        value = static_cast<double>(dataL[i]);
+        value = dataL[i];
         fTmp = 0;
-        for (int j = 0; j < 10; j++)
+        for (j = 0; j < 10; ++j)
             fTmp += _coeff[j] * _passBandsL[j].filter(value);
-        dataL[i] = static_cast<float>((1.0 - pos) * dataL[i] + pos * fTmp * CORRECTION);
+        dataL[i] = (1.0f - pos) * dataL[i] + pos * fTmp * CORRECTION;
     }
-
-    _mutex.unlock();
 }

@@ -26,8 +26,6 @@
 #ifndef LIVEEQ_H
 #define LIVEEQ_H
 
-#include <QVector>
-#include <QMutex>
 #include "iir/Iir_2.h"
 
 class LiveEQ
@@ -36,25 +34,25 @@ public:
     LiveEQ();
 
     // Initialize the sample rate
-    void setSampleRate(quint32 sampleRate);
+    void setSampleRate(unsigned int sampleRate);
 
     // Configuration of the equalizer
     void on();
     void off();
-    void setValues(QVector<int> values);
+    void setValues(int values[10]);
 
     // Filter data
-    void filterData(float * dataR, float * dataL, quint32 len);
+    void filterData(float * dataR, float * dataL, unsigned int len);
 
 private:
-    quint32 _sampleRate;
-    bool _isOn;
-    QVector<Iir::Butterworth::BandPass<4> > _passBandsR, _passBandsL;
-    QVector<double> _coeff;
-    QMutex _mutex;
+    unsigned int _sampleRate;
+    volatile bool _isOn;
+    Iir::Butterworth::BandPass<4> _passBandsR[10];
+    Iir::Butterworth::BandPass<4> _passBandsL[10];
+    volatile float _coeff[10];
     int _crossFade;
     static int CROSSFADE_LENGTH;
-    static double CORRECTION;
+    static float CORRECTION;
 };
 
 #endif // LIVEEQ_H

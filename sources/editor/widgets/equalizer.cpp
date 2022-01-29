@@ -43,7 +43,7 @@ Equalizer::Equalizer(QWidget *parent) :
 
     // Initialize EQ
     loadEQ();
-    _synth->setSmplEqValues(gatherEqVariables());
+    _synth->setSmplEqValues(gatherEqVariables().data());
 }
 
 Equalizer::~Equalizer()
@@ -64,7 +64,7 @@ void Equalizer::on_pushEgalRestore_clicked()
     ui->verticalSlider_9->setValue(0);
     ui->verticalSlider_10->setValue(0);
     saveEQ();
-    _synth->setSmplEqValues(gatherEqVariables());
+    _synth->setSmplEqValues(gatherEqVariables().data());
 }
 
 void Equalizer::on_pushEgaliser_clicked()
@@ -195,6 +195,6 @@ void Equalizer::on_verticalSliderMoved(int position)
     if (_initialization)
         return;
 
-    _synth->setSmplEqValues(gatherEqVariables());
+    _synth->setSmplEqValues(gatherEqVariables().data());
     saveEQ();
 }
