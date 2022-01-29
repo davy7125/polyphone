@@ -286,13 +286,25 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     //// APPLY PAN AND CHORUS ////
 
     double pan = (v_pan + 50) * M_PI / 200.; // Between 0 and PI/2
-    double coef1 = sin(pan);
-    double coef2 = cos(pan);
-    _chorus.setEffectMix(0.005 * _chorusLevel * 0.01 * v_chorusEffect);
-    for (quint32 i = 0; i < len; i++)
+    double coefL = sin(pan);
+    double coefR = cos(pan);
+    if (_chorusLevel > 0)
     {
-        dataL[i] = static_cast<float>(coef1 * _chorus.tick(static_cast<double>(dataL[i])));
-        dataR[i] = static_cast<float>(coef2 * _chorus.lastOut(1));
+        _chorus.setEffectMix(0.005 * _chorusLevel * 0.01 * v_chorusEffect);
+        for (quint32 i = 0; i < len; i++)
+        {
+            dataL[i] = static_cast<float>(coefL * _chorus.tick(static_cast<double>(dataL[i])));
+            dataR[i] = static_cast<float>(coefR * _chorus.lastOut(1));
+        }
+    }
+    else
+    {
+        // Or just pan the sound
+        for (quint32 i = 0; i < len; i++)
+        {
+            dataR[i] = static_cast<float>(coefR * dataL[i]);
+            dataL[i] *= coefL;
+        }
     }
 
     _mutexParam.unlock();
