@@ -158,12 +158,12 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
     else if (nbDecimales > 0)
     {
         NullableDoubleSpinBox * spin = dynamic_cast<NullableDoubleSpinBox *>(editor);
-        spin->setValue(index.data().isNull() ? 0.0 : index.data().toString().replace(",", ".").toDouble());
+        spin->setValue(index.data().isNull() ? 0.0 : QLocale::system().toDouble(index.data().toString()));
     }
     else
     {
         NullableSpinBox * spin = dynamic_cast<NullableSpinBox *>(editor);
-        spin->setValue(index.data().isNull() ? 0 : index.data().toString().toInt());
+        spin->setValue(index.data().isNull() ? 0 : QLocale::system().toInt(index.data().toString()));
     }
 
     _isEditing = true;
@@ -227,7 +227,7 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
     else if (nbDecimales > 0)
     {
         NullableDoubleSpinBox * spin = dynamic_cast<NullableDoubleSpinBox*>(editor);
-        model->setData(index, spin->isNull() ? QVariant() : QString::number(spin->value(), 'f', nbDecimales), Qt::EditRole);
+        model->setData(index, spin->isNull() ? QVariant() : QLocale::system().toString(spin->value(), 'f', nbDecimales), Qt::EditRole);
     }
     else
     {

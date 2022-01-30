@@ -416,17 +416,10 @@ void ModulatorCell::onOutputChanged(int dummy)
 QString ModulatorCell::doubleToString(double value)
 {
     // Return a value as a string with 3 maximum characters after the decimal separator
-    QString result = QLocale::system().toString(value, 'f', 3);
-    if (!result.isEmpty() && (result.indexOf(".") != -1 || result.indexOf(",") != -1))
-    {
-        QChar lastChar = result[result.size() - 1];
-        while (lastChar == '.' || lastChar == ',' || lastChar == '0')
-        {
-            result = result.left(result.size() - 1);
-            if (result.isEmpty())
-                break;
-            lastChar = result[result.size() - 1];
-        }
-    }
-    return result;
+    QString txt = QLocale::system().toString(value, 'f', 3);
+    while (txt.size() > 1 && (txt.endsWith("0")))
+        txt = txt.left(txt.size() - 1);
+    if (txt.size() > 1 && (txt.endsWith(".") || txt.endsWith(",")))
+        txt = txt.left(txt.size() - 1);
+    return txt;
 }

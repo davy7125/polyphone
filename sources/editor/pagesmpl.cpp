@@ -819,7 +819,7 @@ void PageSmpl::setRate(int index)
         return;
 
     // Soundfont editing
-    quint32 echFinal = ui->comboSampleRate->currentText().toInt();
+    quint32 echFinal = QLocale::system().toInt(ui->comboSampleRate->currentText());
     QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
     foreach (EltID id, listID)
     {

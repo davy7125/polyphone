@@ -571,10 +571,10 @@ AttributeValue Attribute::fromString(AttributeType champ, bool isPrst, QString s
     case champ_endAddrsOffset: case champ_endloopAddrsOffset:
     case champ_startAddrsCoarseOffset: case champ_startloopAddrsCoarseOffset:
     case champ_endAddrsCoarseOffset: case champ_endloopAddrsCoarseOffset:
-        value = fromRealValue(champ, isPrst, strValue.toDouble(&ok));
+        value = fromRealValue(champ, isPrst, QLocale::system().toDouble(strValue, &ok));
         break;
     case champ_sampleModes: {
-        int iTmp = Utils::round16(strValue.toDouble(&ok));
+        int iTmp = Utils::round16(QLocale::system().toDouble(strValue, &ok));
         if (iTmp != 0 && iTmp != 1 && iTmp != 3)
             iTmp = 0;
         value.wValue = static_cast<quint16>(iTmp);

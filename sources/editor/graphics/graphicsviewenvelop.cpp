@@ -390,7 +390,9 @@ void GraphicsViewEnvelop::paintEvent(QPaintEvent *event)
 QString GraphicsViewEnvelop::doubleToString(double value, bool accurate)
 {
     QString txt = QLocale::system().toString(value, 'f', accurate ? 4 : 3);
-    while (txt.size() > 1 && (txt.endsWith("0") || txt.endsWith(".") || txt.endsWith(",")))
+    while (txt.size() > 1 && (txt.endsWith("0")))
+        txt = txt.left(txt.size() - 1);
+    if (txt.size() > 1 && (txt.endsWith(".") || txt.endsWith(",")))
         txt = txt.left(txt.size() - 1);
     return txt;
 }

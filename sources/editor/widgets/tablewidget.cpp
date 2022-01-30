@@ -210,7 +210,7 @@ void TableWidget::commitData(QWidget *editor)
     emit(actionBegin());
     QTableWidget::commitData(editor);
 
-    QVariant value = model()->data(currentIndex(), Qt::EditRole).toString().replace(",", ".");
+    QVariant value = model()->data(currentIndex(), Qt::EditRole).toString();
     int curRow = currentIndex().row();
     int curCol = currentIndex().column();
     QItemSelectionRange isr;
@@ -411,7 +411,7 @@ void TableWidget::paste()
                         setLoopModeImage(indRow + minRow, indCol + minCol, val);
                 }
                 else
-                    model()->setData(idx, text.replace(",", "."), Qt::EditRole);
+                    model()->setData(idx, text, Qt::EditRole);
             }
         }
     }

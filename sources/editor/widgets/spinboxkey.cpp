@@ -54,7 +54,7 @@ QValidator::State SpinBoxKey::validate(QString &input, int &pos) const
     // Get the key number
     int numKey = ContextManager::keyName()->getKeyNum(input);
     if (numKey < 0 || numKey > 127)
-        return QValidator::Invalid;
+        return QValidator::Intermediate;
     return QValidator::Acceptable;
 }
 
