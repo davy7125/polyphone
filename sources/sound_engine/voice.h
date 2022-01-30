@@ -102,7 +102,7 @@ private:
     bool _isRunning;
 
     // Save state for resampling
-    unsigned char _lastFraction;
+    float _lastFraction;
     qint32 _valPrec3, _valPrec2, _valPrec1;
     qint32 _firstVal[3];
 
