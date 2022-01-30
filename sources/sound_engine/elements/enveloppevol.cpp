@@ -150,7 +150,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                 coef = 1.f / v_timeAttack; // Target is 1.f
                 for (quint32 i = 0; i < duration; i++)
                 {
-                    data[avancement + i] = gain * lastValue * data[avancement + i];
+                    data[avancement + i] *= gain * lastValue ;
                     lastValue += coef;
                 }
             }
@@ -177,7 +177,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             else
             {
                 for (quint32 i = 0; i < duration; i++)
-                    data[avancement + i] = gain * data[avancement + i];
+                    data[avancement + i] *= gain;
             }
             break;
         case phase4decay:
@@ -213,7 +213,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                 lastValue = (_precValue - levelSustain) * coef + levelSustain;
                 for (quint32 i = 0; i < duration; i++)
                 {
-                    data[avancement + i] = gain * (data[avancement + i] * lastValue);
+                    data[avancement + i] = gain * lastValue;
                     lastValue = (lastValue - levelSustain) * coef + levelSustain;
                 }
             }
@@ -230,7 +230,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
             else
             {
                 for (quint32 i = 0; i < duration; i++)
-                    data[avancement + i] = gain * (data[avancement + i] * lastValue);
+                    data[avancement + i] *= gain * lastValue;
             }
             break;
         case phase6release:
@@ -266,7 +266,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                 lastValue = _precValue * coef;
                 for (quint32 i = 0; i < duration; i++)
                 {
-                    data[avancement + i] = gain * (data[avancement + i] * lastValue);
+                    data[avancement + i] *= gain * lastValue;
                     lastValue *= coef;
                 }
             }

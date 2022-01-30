@@ -28,8 +28,7 @@
 volatile int Voice::s_tuningFork = 440;
 volatile float Voice::s_temperament[12] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 volatile int Voice::s_temperamentRelativeKey = 0;
-const int Voice::s_sinc_interpDivisions = 256;
-float Voice::s_sinc_table7[s_sinc_interpDivisions][7];
+float Voice::s_sinc_table7[256][7];
 
 void Voice::prepareSincTable()
 {
@@ -37,10 +36,10 @@ void Voice::prepareSincTable()
     for (int i = 0; i < 7; i++) // i: Offset in terms of whole samples
     {
         // i2: Offset in terms of fractional samples ('subsamples')
-        for (int i2 = 0; i2 < s_sinc_interpDivisions; i2++)
+        for (int i2 = 0; i2 < 256; i2++)
         {
             // Center on middle of table
-            i_shifted = (double)i - ((double)7 / 2.0) + (double)i2 / (double)s_sinc_interpDivisions;
+            i_shifted = (double)i - (7.0 / 2.0) + (double)i2 / 256.0;
 
             // sinc(0) cannot be calculated straightforward (limit needed for 0/0)
             if (fabs (i_shifted) > 0.000001)
@@ -53,7 +52,7 @@ void Voice::prepareSincTable()
             else
                 v = 1.0;
 
-            s_sinc_table7[s_sinc_interpDivisions - i2 - 1][i] = v;
+            s_sinc_table7[256 - i2 - 1][i] = v;
         }
     }
 }
@@ -80,7 +79,7 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int ini
     _delayStart(0),
     _isFinished(false),
     _isRunning(false),
-    _deltaPos(0),
+    _lastFraction(0),
     _valPrec3(0),
     _valPrec2(0),
     _valPrec1(0),
@@ -99,8 +98,8 @@ Voice::~Voice()
         delete [] _dataModArray;
         delete [] _modLfoArray;
         delete [] _vibLfoArray;
-        delete [] _modPitchArray;
         delete [] _modFreqArray;
+        delete [] _pointDistanceArray;
     }
     if (_srcDataLength != 0)
         delete [] _srcData;
@@ -163,14 +162,14 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
             delete [] _dataModArray;
             delete [] _modLfoArray;
             delete [] _vibLfoArray;
-            delete [] _modPitchArray;
             delete [] _modFreqArray;
+            delete [] _pointDistanceArray;
         }
         _dataModArray = new float[len];
         _modLfoArray = new float[len];
         _vibLfoArray = new float[len];
-        _modPitchArray = new float[len+1];
         _modFreqArray = new float[len];
+        _pointDistanceArray = new quint32[len+1];
 
         _arrayLength = len;
     }
@@ -183,24 +182,26 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     _vibLFO.getData(_vibLfoArray, len, static_cast<float>(v_vibLfoFreq), v_vibLfoDelay);
 
     // Pitch modulation
-    float temperamentFineTune = s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
-            s_temperament[(21 - s_temperamentRelativeKey) % 12]; // Correction so that the tuning fork is accurate for A
+    float temperamentFineTune = _initialKey < 0 ? 0.0f : (s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
+                                                  s_temperament[(21 - s_temperamentRelativeKey) % 12]); // Correction so that the tuning fork is accurate
     float deltaPitchFixed = -12.f * qLn(static_cast<double>(_audioSmplRate) / _smplRate * 440.f / s_tuningFork) / 0.69314718056f +
             (playedNote - v_rootkey) * 0.01f * v_scaleTune + 0.01f * (temperamentFineTune + v_fineTune) + v_coarseTune;
-    for (quint32 i = 0; i < len; i++)
-        _modPitchArray[i + 1] = static_cast<float>(
-                    deltaPitchFixed + 0.01f * (
-                        _dataModArray[i] * v_modEnvToPitch + _modLfoArray[i] * v_modLfoToPitch + _vibLfoArray[i] * v_vibLfoToPitch));
 
-    // Convert into a cumulated distance between points
-    _modPitchArray[0] = _deltaPos + 1;
-    for (quint32 i = 1; i <= len; i++)
-        _modPitchArray[i] = qMin(qMax(0.001f, EnveloppeVol::fastPow2(_modPitchArray[i] / 12)), 64.f) + _modPitchArray[i - 1];
-    _deltaPos = _modPitchArray[len];
-    _deltaPos = _deltaPos - ceil(_deltaPos);
+    // Compute the distance of each point
+    _pointDistanceArray[0] = _lastFraction;
+    float currentDeltaPitch;
+    for (quint32 i = 0; i < len; i++)
+    {
+        currentDeltaPitch = deltaPitchFixed + 0.01f * (
+                    _dataModArray[i] * v_modEnvToPitch + _modLfoArray[i] * v_modLfoToPitch + _vibLfoArray[i] * v_vibLfoToPitch);
+        _pointDistanceArray[i + 1] = (int)(EnveloppeVol::fastPow2(currentDeltaPitch / 12.f + 8) + 0.5) + _pointDistanceArray[i];
+    }
+    _lastFraction = _pointDistanceArray[len] & 0xFF;
+    if (_lastFraction == 0)
+        _lastFraction = 1;
 
     // Resample data
-    quint32 nbDataTmp = static_cast<quint32>(ceil(static_cast<double>(_modPitchArray[len]))) - 1;
+    quint32 nbDataTmp = (_pointDistanceArray[len] >> 8) - ((_pointDistanceArray[len] & 0xFF) ? 0 : 1);
     if (nbDataTmp > _srcDataLength)
     {
         if (_srcDataLength != 0)
@@ -221,22 +222,22 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     _firstVal[0] = _srcData[nbDataTmp + 3];
     _firstVal[1] = _srcData[nbDataTmp + 4];
     _firstVal[2] = _srcData[nbDataTmp + 5];
-    double pos;
+
     float * coeffs;
+    quint32 currentPos;
     for (quint32 i = 0; i < len; i++)
     {
-        pos = static_cast<double>(_modPitchArray[i]) + 3;
-
         // Sinc interpolation 7th order
-        coeffs = s_sinc_table7[(int)((pos - floor(pos)) * s_sinc_interpDivisions)];
-        quint32 currentPos = (int)pos;
-        dataL[i] = (coeffs[0] * _srcData[currentPos - 3] +
-                coeffs[1] * _srcData[currentPos - 2] +
-                coeffs[2] * _srcData[currentPos - 1] +
-                coeffs[3] * _srcData[currentPos] +
-                coeffs[4] * _srcData[currentPos + 1] +
-                coeffs[5] * _srcData[currentPos + 2] +
-                coeffs[6] * _srcData[currentPos + 3]) / 2147483648LL;
+        coeffs = s_sinc_table7[_pointDistanceArray[i] & 0xFF];
+        currentPos = (_pointDistanceArray[i] >> 8);
+        dataL[i] = (coeffs[0] * _srcData[currentPos] +
+                coeffs[1] * _srcData[currentPos + 1] +
+                coeffs[2] * _srcData[currentPos + 2] +
+                coeffs[3] * _srcData[currentPos + 3] +
+                coeffs[4] * _srcData[currentPos + 4] +
+                coeffs[5] * _srcData[currentPos + 5] +
+                coeffs[6] * _srcData[currentPos + 6])
+                / 2147483648LL; // Convert to float from -1.0 to 1.0
     }
 
     // Low-pass filter
@@ -264,9 +265,8 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     }
 
     // Volume modulation with values from the mod LFO converted to dB
-    if (v_modLfoToVolume <= 0.1 || v_modLfoToVolume >= 0.1)
-        for (quint32 i = 0; i < len; i++)
-            dataL[i] *= static_cast<float>(qPow(10., 0.05 * v_modLfoToVolume * static_cast<double>(_modLfoArray[i])));
+    for (quint32 i = 0; i < len; i++)
+        dataL[i] *= static_cast<float>(qPow(10., 0.05 * v_modLfoToVolume * static_cast<double>(_modLfoArray[i])));
 
     // Apply the volume envelop
     bool bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release, playedNote,

@@ -102,7 +102,7 @@ private:
     bool _isRunning;
 
     // Save state for resampling
-    float _deltaPos;
+    unsigned char _lastFraction;
     qint32 _valPrec3, _valPrec2, _valPrec1;
     qint32 _firstVal[3];
 
@@ -119,8 +119,8 @@ private:
     float * _dataModArray;
     float * _modLfoArray;
     float * _vibLfoArray;
-    float * _modPitchArray;
     float * _modFreqArray;
+    quint32 * _pointDistanceArray;
     quint32 _arrayLength;
     qint32 * _srcData;
     quint32 _srcDataLength;
@@ -128,7 +128,6 @@ private:
     static volatile int s_tuningFork;
     static volatile float s_temperament[12]; // Fine tune in cents from each key from C to B
     static volatile int s_temperamentRelativeKey;
-    static const int s_sinc_interpDivisions;
     static float s_sinc_table7[256][7];
 };
 
