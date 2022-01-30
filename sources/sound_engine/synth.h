@@ -86,47 +86,6 @@ private:
     void destroySoundEnginesAndBuffers();
     void createSoundEnginesAndBuffers();
 
-    void clip(float *data1, float *data2, quint32 size)
-    {
-        // Find the maximum value
-        float dMax = 0;
-        quint32 pos = 0;
-        float dTmp;
-        for (quint32 i = 0; i < size; i++)
-        {
-            dTmp = qAbs(data1[i]);
-            if (dTmp > dMax)
-            {
-                dMax = dTmp;
-                pos = i;
-            }
-            dTmp = qAbs(data2[i]);
-            if (dTmp > dMax)
-            {
-                dMax = dTmp;
-                pos = i;
-            }
-        }
-
-        if (dMax > .99f)
-        {
-            float coef = .99f / dMax;
-            for (quint32 i = 0; i < pos; i++)
-            {
-                dTmp = static_cast<float>(pos - i) / pos * _clipCoef
-                        + static_cast<float>(i) / pos * coef;
-                data1[i] *= dTmp;
-                data2[i] *= dTmp;
-            }
-            _clipCoef = coef;
-            for (quint32 i = pos; i < size; i++)
-            {
-                data1[i] *= coef;
-                data2[i] *= coef;
-            }
-        }
-    }
-
     CalibrationSinus _sinus;
     LiveEQ _eq;
     SoundfontManager * _sf2;
@@ -147,9 +106,6 @@ private:
     stk::FreeVerb _reverb;
     bool _reverbOn;
     QMutex _mutexReverb, _mutexSynchro;
-
-    // Clipping state
-    float _clipCoef;
 
     // Record management
     QFile * _recordFile;

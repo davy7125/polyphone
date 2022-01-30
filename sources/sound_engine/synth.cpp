@@ -36,9 +36,8 @@ Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _sf2(SoundfontManager::getInstance()),
     _gain(0),
     _choLevel(0), _choDepth(0), _choFrequency(0),
-    _clipCoef(1),
     _recordFile(nullptr),
-    _isRecording(true),
+    _isRecording(false),
     _fTmpSumRevL(nullptr),
     _fTmpSumRevR(nullptr),
     _dataWav(nullptr),
@@ -462,6 +461,7 @@ void Synth::startNewRecord(QString fileName)
         _recordStream.writeRawData("RIFF", 4);
         _recordStream << static_cast<quint32>(_recordLength + 18 + 4 + 8 + 8);
         _recordStream.writeRawData("WAVE", 4);
+
         ///////////// BLOC FMT /////////////
         _recordStream.writeRawData("fmt ", 4);
         dwTemp = 18;
@@ -486,6 +486,7 @@ void Synth::startNewRecord(QString fileName)
         // Extra format bytes
         wTemp = 0;
         _recordStream << wTemp;
+
         ///////////// BLOC DATA /////////////
         _recordStream.writeRawData("data", 4);
         _recordStream << _recordLength;
@@ -571,7 +572,17 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
     _sinus.addData(dataL, dataR, maxlen);
 
     // Clipping
-    clip(dataL, dataR, maxlen);
+    for (unsigned int i = 0; i < maxlen; ++i)
+    {
+        if (dataL[i] > 1.0f)
+            dataL[i] = 1.0f;
+        else if (dataL[i] < -1.0f)
+            dataL[i] = -1.0f;
+        if (dataR[i] > 1.0f)
+            dataR[i] = 1.0f;
+        else if (dataR[i] < -1.0f)
+            dataR[i] = -1.0f;
+    }
 
     // Possibly record in a file
     _mutexRecord.lock();
@@ -581,7 +592,7 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
         for (quint32 i = 0; i < maxlen; i++)
         {
             _dataWav[2 * i + 1] = dataL[i];
-            _dataWav[2 * i]     = dataR[i];
+            _dataWav[2 * i] = dataR[i];
         }
         _recordStream.writeRawData(reinterpret_cast<char*>(_dataWav), static_cast<int>(maxlen * 8));
 
