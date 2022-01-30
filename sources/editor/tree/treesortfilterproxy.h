@@ -61,6 +61,7 @@ private:
     QString _bestMatchSampleName, _bestMatchInstrumentName, _bestMatchPresetName;
     SoundfontManager * _sm;
     int _sortType;
+    bool _emptyFilter;
 };
 
 #endif // TREESORTFILTERPROXY_H

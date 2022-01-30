@@ -34,7 +34,8 @@ TreeSortFilterProxy::TreeSortFilterProxy(int indexSf2, TreeView *treeView, QAbst
     _indexSf2(indexSf2),
     _treeView(treeView),
     _sm(SoundfontManager::getInstance()),
-    _sortType(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "division_sort", 0).toInt())
+    _sortType(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "division_sort", 0).toInt()),
+    _emptyFilter(true)
 {
     //new QAbstractItemModelTester(model, QAbstractItemModelTester::FailureReportingMode::Warning, this);
     this->setSourceModel(model);
@@ -104,6 +105,7 @@ void TreeSortFilterProxy::filterChanged(QString filter)
     _treeView->setBestMatch(_bestMatchSample, _bestMatchInstrument, _bestMatchPreset);
 
     // Change the filter
+    _emptyFilter = filter.isEmpty();
     setFilterFixedString(filter);
     emit(layoutChanged());
     _treeView->expandAndScrollToSelection();
@@ -118,7 +120,7 @@ bool TreeSortFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex &sou
         return false;
 
     // If the filter is empty, the item is visible
-    if (filterRegularExpression().pattern().isEmpty())
+    if (_emptyFilter)
         return true;
 
     // Visibility, depending on the items that match
@@ -196,10 +198,7 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
     foreach (int i, _sm->getSiblings(idPrst))
     {
         idPrst.indexElt = i;
-        QString name = QString("%1:%2 %3")
-                .arg(_sm->get(idPrst, champ_wBank).wValue, 3, 10, QChar('0'))
-                .arg(_sm->get(idPrst, champ_wPreset).wValue, 3, 10, QChar('0'))
-                .arg(_sm->getQstr(idPrst, champ_nameSort));
+        QString name = _sm->getQstr(idPrst, champ_nameSort);
         if (name.contains(filter))
         {
             if (!_matchingPresets.contains(i))
@@ -284,7 +283,7 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
 bool TreeSortFilterProxy::isFiltered(EltID id)
 {
     bool isFiltered = false;
-    if (!filterRegularExpression().pattern().isEmpty())
+    if (!_emptyFilter)
     {
         switch (id.typeElement)
         {

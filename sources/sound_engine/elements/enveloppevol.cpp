@@ -213,7 +213,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                 lastValue = (_precValue - levelSustain) * coef + levelSustain;
                 for (quint32 i = 0; i < duration; i++)
                 {
-                    data[avancement + i] = gain * lastValue;
+                    data[avancement + i] *= gain * lastValue;
                     lastValue = (lastValue - levelSustain) * coef + levelSustain;
                 }
             }
