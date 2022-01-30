@@ -110,9 +110,9 @@ private:
     // Record management
     QFile * _recordFile;
     QDataStream _recordStream;
-    bool _isRecording;
+    volatile bool _isRecording;
+    QAtomicInt _isWritingInStream;
     quint32 _recordLength;
-    QMutex _mutexRecord;
 
     float * _fTmpSumRevL, * _fTmpSumRevR, * _dataWav;
     quint32 _bufferSize;

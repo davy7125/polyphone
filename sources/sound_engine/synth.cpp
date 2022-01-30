@@ -38,6 +38,7 @@ Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _choLevel(0), _choDepth(0), _choFrequency(0),
     _recordFile(nullptr),
     _isRecording(false),
+    _isWritingInStream(0),
     _fTmpSumRevL(nullptr),
     _fTmpSumRevR(nullptr),
     _dataWav(nullptr),
@@ -445,9 +446,9 @@ void Synth::setFormat(AudioFormat format)
 
 void Synth::startNewRecord(QString fileName)
 {
-    _mutexRecord.lock();
     if (_recordFile)
         this->endRecord();
+
     _recordFile = new QFile(fileName);
     if (_recordFile->open(QIODevice::WriteOnly))
     {
@@ -457,7 +458,8 @@ void Synth::startNewRecord(QString fileName)
         _recordStream.setDevice(_recordFile);
         _recordStream.setByteOrder(QDataStream::LittleEndian);
         _recordLength = 0;
-        // header
+
+        // Write it
         _recordStream.writeRawData("RIFF", 4);
         _recordStream << static_cast<quint32>(_recordLength + 18 + 4 + 8 + 8);
         _recordStream.writeRawData("WAVE", 4);
@@ -498,12 +500,16 @@ void Synth::startNewRecord(QString fileName)
         delete _recordFile;
         _recordFile = nullptr;
     }
-    _mutexRecord.unlock();
 }
 
 void Synth::endRecord()
 {
-    _mutexRecord.lock();
+    _isRecording = false;
+
+    // Possibly wait if another thread is writing
+    while (!_isWritingInStream.testAndSetRelaxed(0, 1))
+        QThread::msleep(5);
+
     if (_recordFile)
     {
         // Adjust file dimensions
@@ -517,17 +523,15 @@ void Synth::endRecord()
         _recordFile->close();
         delete _recordFile;
         _recordFile = nullptr;
-
-        _isRecording = false;
     }
-    _mutexRecord.unlock();
+
+    // We are not writing anymore
+    _isWritingInStream.storeRelaxed(0);
 }
 
 void Synth::pause(bool isOn)
 {
-    _mutexRecord.lock();
     _isRecording = !isOn;
-    _mutexRecord.unlock();
 }
 
 void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
@@ -585,20 +589,25 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
     }
 
     // Possibly record in a file
-    _mutexRecord.lock();
-    if (_recordFile && _isRecording)
+    if (_isRecording)
     {
-        // Interleave and write
-        for (quint32 i = 0; i < maxlen; i++)
+        // If someone else is writing, do nothing
+        if (_recordFile && _isWritingInStream.testAndSetRelaxed(0, 1))
         {
-            _dataWav[2 * i + 1] = dataL[i];
-            _dataWav[2 * i] = dataR[i];
-        }
-        _recordStream.writeRawData(reinterpret_cast<char*>(_dataWav), static_cast<int>(maxlen * 8));
+            // Interleave and write
+            for (quint32 i = 0; i < maxlen; i++)
+            {
+                _dataWav[2 * i + 1] = dataL[i];
+                _dataWav[2 * i] = dataR[i];
+            }
+            _recordStream.writeRawData(reinterpret_cast<char*>(_dataWav), static_cast<int>(maxlen * 8));
 
-        // Prise en compte de l'avance
-        _recordLength += maxlen * 8;
-        emit(dataWritten(_format.sampleRate(), maxlen));
+            // Prise en compte de l'avance
+            _recordLength += maxlen * 8;
+            emit(dataWritten(_format.sampleRate(), maxlen));
+
+            // We are not writing anymore
+            _isWritingInStream.storeRelaxed(0);
+        }
     }
-    _mutexRecord.unlock();
 }
