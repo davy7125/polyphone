@@ -44,6 +44,8 @@ protected:
     void enterEvent(QEvent * event) override;
 #endif
     void leaveEvent(QEvent * event) override;
+    void mousePressEvent(QMouseEvent * event) override;
+    void mouseReleaseEvent(QMouseEvent * event) override;
 
 private:
     QGraphicsOpacityEffect * _opacity;

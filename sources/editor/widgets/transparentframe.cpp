@@ -25,6 +25,7 @@
 #include "transparentframe.h"
 #include <QGraphicsOpacityEffect>
 #include <QPropertyAnimation>
+#include <QMouseEvent>
 
 TransparentFrame::TransparentFrame(QWidget *parent) : QFrame(parent)
 {
@@ -64,4 +65,16 @@ void TransparentFrame::leaveEvent(QEvent * event)
     _animation->setEndValue(0.4);
     _animation->setDuration(300);
     _animation->start();
+}
+
+void TransparentFrame::mousePressEvent(QMouseEvent * event)
+{
+    // Accept the event so that widgets that would be behind don't receive it
+    event->accept();
+}
+
+void TransparentFrame::mouseReleaseEvent(QMouseEvent * event)
+{
+    // Accept the event so that widgets that would be behind don't receive it
+    event->accept();
 }
