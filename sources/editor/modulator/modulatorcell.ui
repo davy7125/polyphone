@@ -51,14 +51,7 @@
     </widget>
    </item>
    <item row="1" column="4">
-    <widget class="ModulatorComboCurve" name="widgetShape2" native="true">
-     <property name="maximumSize">
-      <size>
-       <width>53</width>
-       <height>16777215</height>
-      </size>
-     </property>
-    </widget>
+    <widget class="ModulatorComboCurve" name="widgetShape2" native="true"/>
    </item>
    <item row="1" column="2">
     <widget class="ModulatorComboSrc" name="comboSource2"/>
@@ -115,14 +108,7 @@
     </spacer>
    </item>
    <item row="0" column="4">
-    <widget class="ModulatorComboCurve" name="widgetShape1" native="true">
-     <property name="maximumSize">
-      <size>
-       <width>53</width>
-       <height>16777215</height>
-      </size>
-     </property>
-    </widget>
+    <widget class="ModulatorComboCurve" name="widgetShape1" native="true"/>
    </item>
    <item row="0" column="9">
     <widget class="ModulatorComboDest" name="comboDestination">

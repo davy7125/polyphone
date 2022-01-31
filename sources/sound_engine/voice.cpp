@@ -188,14 +188,14 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
             (playedNote - v_rootkey) * 0.01f * v_scaleTune + 0.01f * (temperamentFineTune + v_fineTune) + v_coarseTune;
 
     // Compute the distance of each point
-    _pointDistanceArray[0] = static_cast<quint32>(_lastFraction);
+    _pointDistanceArray[0] = static_cast<quint32>(_lastFraction + 0.5f);
     float currentDeltaPitch;
     for (quint32 i = 0; i < len; i++)
     {
         currentDeltaPitch = deltaPitchFixed + 0.01f * (
                     _dataModArray[i] * v_modEnvToPitch + _modLfoArray[i] * v_modLfoToPitch + _vibLfoArray[i] * v_vibLfoToPitch);
         _lastFraction += EnveloppeVol::fastPow2(currentDeltaPitch / 12.f + 8.0f /* multiply by 256, which is 2^8 */);
-        _pointDistanceArray[i + 1] = static_cast<quint32>(_lastFraction);
+        _pointDistanceArray[i + 1] = static_cast<quint32>(_lastFraction + 0.5f);
     }
     _lastFraction = (_pointDistanceArray[len] & 0xFF) ? static_cast<float>(_pointDistanceArray[len] & 0xFF) : 256.0f;
 
