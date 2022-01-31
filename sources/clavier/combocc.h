@@ -39,6 +39,9 @@ public:
     void selectCC(int number);
     int getCurrentCC();
 
+protected:
+    QSize minimumSizeHint() const override;
+
 private slots:
     void onCurrentIndexChanged(int index);
 

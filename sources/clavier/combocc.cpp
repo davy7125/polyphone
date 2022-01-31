@@ -111,3 +111,9 @@ void ComboCC::updateEnableState()
                            item->flags() & ~Qt::ItemIsEnabled);
     }
 }
+
+QSize ComboCC::minimumSizeHint() const
+{
+    QSize size = QComboBox::minimumSizeHint();
+    return QSize(150, size.height());
+}
