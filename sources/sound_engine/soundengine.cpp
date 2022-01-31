@@ -349,12 +349,12 @@ void SoundEngine::setGainSampleInstance(int gain)
         if (_listVoices.at(i)->getKey() == -1)
         {
             if (_isStereo)
-                _listVoices.at(i)->setGain(gain - 12);
+                _listVoices.at(i)->setGain(gain - 3);
             else
                 _listVoices.at(i)->setGain(gain);
         }
         else if (_listVoices.at(i)->getKey() == -2 && _isStereo)
-            _listVoices.at(i)->setGain(gain - 12);
+            _listVoices.at(i)->setGain(gain - 3);
     }
     _mutexVoices.unlock();
 }
