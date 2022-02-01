@@ -28,67 +28,54 @@
 
 OscSinus::OscSinus(quint32 sampleRate) :
     _sampleRate(sampleRate),
-    _previousFreq(-1),
-    _currentDelay(0),
-    _delayEnded(false)
+    _previousFreq(-1)
 {
 }
 
 // Gordon-Smith Generator
-void OscSinus::getData(float * data, quint32 len, float freq, double delay)
+void OscSinus::addData(float * data, quint32 len, float freq, float coef)
 {
     quint32 total = 0;
 
-    // Possible delay
-    quint32 delayTime = static_cast<quint32>(delay * _sampleRate);
-    if (!_delayEnded && _currentDelay < delayTime)
+    // Initialize the system
+    if (_previousFreq < 0)
     {
-        total = qMin(delayTime - _currentDelay, len);
-        for (quint32 i = 0; i < total; i++)
-            data[i] = 0;
-        _currentDelay += total;
-        _delayEnded = (_currentDelay >= delayTime);
+
+        _previousFreq = freq;
+        computeEpsilon(freq, _theta, _epsilon);
+        _posPrec = static_cast<float>(qSin(static_cast<double>(-_theta)));
+        _posPrecQuad = static_cast<float>(qCos(static_cast<double>(-_theta)));
     }
 
-    // Sinus
-    if (total != len)
+    if (_previousFreq != freq)
     {
-        if (_previousFreq < 0)
-        {
-            // Initialize the system
-            _previousFreq = freq;
-            computeEpsilon(freq, _theta, _epsilon);
-            _posPrec = static_cast<float>(qSin(static_cast<double>(-_theta)));
-            _posPrecQuad = static_cast<float>(qCos(static_cast<double>(-_theta)));
-        }
-        if (_previousFreq != freq)
-        {
-            float theta2, epsilon2;
-            computeEpsilon(freq, theta2, epsilon2);
+        // Sinus with a changing frequency (transition)
+        float theta2, epsilon2;
+        computeEpsilon(freq, theta2, epsilon2);
 
-            float progEpsilon;
-            for (quint32 i = total; i < len; i++)
-            {
-                progEpsilon = static_cast<float>(len - i) / (len - total) * _epsilon
-                        + static_cast<float>(i - total) / (len - total) * epsilon2;
-                _posPrecQuad -= progEpsilon * _posPrec;
-                _posPrec     += progEpsilon * _posPrecQuad;
-                data[i] = _posPrec;
-            }
-
-            // Update values
-            _theta = theta2;
-            _epsilon = epsilon2;
-            _previousFreq = freq;
-        }
-        else
+        float progEpsilon;
+        for (quint32 i = total; i < len; i++)
         {
-            for (quint32 i = total; i < len; i++)
-            {
-                _posPrecQuad -= _epsilon * _posPrec;
-                _posPrec     += _epsilon * _posPrecQuad;
-                data[i] = _posPrec;
-            }
+            progEpsilon = static_cast<float>(len - i) / (len - total) * _epsilon
+                    + static_cast<float>(i - total) / (len - total) * epsilon2;
+            _posPrecQuad -= progEpsilon * _posPrec;
+            _posPrec     += progEpsilon * _posPrecQuad;
+            data[i] += coef * _posPrec;
+        }
+
+        // Update values
+        _theta = theta2;
+        _epsilon = epsilon2;
+        _previousFreq = freq;
+    }
+    else
+    {
+        // Sinus with a fixed frequency
+        for (quint32 i = total; i < len; i++)
+        {
+            _posPrecQuad -= _epsilon * _posPrec;
+            _posPrec     += _epsilon * _posPrecQuad;
+            data[i] += coef * _posPrec;
         }
     }
 }

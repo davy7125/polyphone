@@ -26,11 +26,13 @@
 #include "qmath.h"
 
 CalibrationSinus::CalibrationSinus() :
-    _sinus(nullptr),
+    _sinus1(new OscSinus(48000)),
+    _sinus2(new OscSinus(48000)),
+    _sinus3(new OscSinus(48000)),
     _pitch(0),
-    _currentPitch(-1),
-    _level(0),
-    _currentLevel(0),
+    _currentPitch(-1.0f),
+    _level(0.0f),
+    _currentLevel(0.0f),
     _buf(nullptr)
 {
     initBuffer(1024);
@@ -38,7 +40,9 @@ CalibrationSinus::CalibrationSinus() :
 
 CalibrationSinus::~CalibrationSinus()
 {
-    delete _sinus;
+    delete _sinus1;
+    delete _sinus2;
+    delete _sinus3;
     delete [] _buf;
 }
 
@@ -51,59 +55,70 @@ void CalibrationSinus::initBuffer(quint32 size)
 
 void CalibrationSinus::setSampleRate(quint32 sampleRate)
 {
-    delete _sinus;
-    _sinus = new OscSinus(sampleRate);
+    delete _sinus1;
+    delete _sinus2;
+    delete _sinus3;
+    _sinus1 = new OscSinus(sampleRate);
+    _sinus2 = new OscSinus(sampleRate);
+    _sinus3 = new OscSinus(sampleRate);
 }
 
 void CalibrationSinus::setPitch(int numNote)
 {
-    _mutex.lock();
     _pitch = numNote;
-    _mutex.unlock();
 }
 
 void CalibrationSinus::on()
 {
-    _mutex.lock();
     _level = 0.7f;
-    _mutex.unlock();
 }
 
 void CalibrationSinus::off()
 {
-    _mutex.lock();
-    _level = 0;
-    _mutex.unlock();
+    _level = 0.0f;
 }
 
 void CalibrationSinus::addData(float * dataL, float * dataR, quint32 len)
 {
-    if (!_sinus)
-        return;
-
-    if (len > _bufSize)
-        initBuffer(len);
-
-    if (!_mutex.tryLock(1)) // Impossible ici d'attendre
-        return;
-    double pitch = _pitch;
+    // Copy data (they can be modified by another thread)
     float level = _level;
-    _mutex.unlock();
 
     // Possibly stop here
     if (level <= 0.0004f && _currentLevel <= 0.0004f)
         return;
 
+    if (len > _bufSize)
+        initBuffer(len);
+
     // Current frequency
-    if (_currentPitch < 0)
+    float pitch = static_cast<float>(_pitch); // Data copy
+    if (_currentPitch < 0.0f)
         _currentPitch = pitch;
-    if (_currentPitch - pitch < -1 || _currentPitch - pitch > 1)
-        _currentPitch += (pitch - _currentPitch) / 2; // fast transition
+    if (_currentPitch - pitch < -1 || _currentPitch - pitch > 1.0f)
+        _currentPitch += (pitch - _currentPitch) / 2.0f; // fast transition
     else
         _currentPitch = pitch; // smooth transition
 
     // Generate data and copy
-    _sinus->getData(_buf, len, 440.0f * static_cast<float>(qPow(2., (_currentPitch - 69.) / 12.)), 0);
+    memset(_buf, 0, len * sizeof(float));
+    if (_currentPitch > 84)
+    {
+        _sinus1->addData(_buf, len, 440.0f * static_cast<float>(qPow(2.0, (_currentPitch - 69.0) / 12.0)), 1.0f);
+        _sinus2->addData(_buf, len, 440.0f * static_cast<float>(qPow(2.0, (_currentPitch + 12 - 69.0) / 12.0)), 0.0f);
+        _sinus3->addData(_buf, len, 440.0f * static_cast<float>(qPow(2.0, (_currentPitch + 24 - 69.0) / 12.0)), 0.0f);
+    }
+    else if (_currentPitch > 60)
+    {
+        _sinus1->addData(_buf, len, 440.0f * static_cast<float>(qPow(2.0, (_currentPitch - 69.0) / 12.0)), 0.7f);
+        _sinus2->addData(_buf, len, 440.0f * static_cast<float>(qPow(2.0, (_currentPitch + 12 - 69.0) / 12.0)), 0.7f);
+        _sinus3->addData(_buf, len, 440.0f * static_cast<float>(qPow(2.0, (_currentPitch + 24 - 69.0) / 12.0)), 0.0f);
+    }
+    else
+    {
+        _sinus1->addData(_buf, len, 440.0f * static_cast<float>(qPow(2.0, (_currentPitch - 69.0) / 12.0)), 0.6f);
+        _sinus2->addData(_buf, len, 440.0f * static_cast<float>(qPow(2.0, (_currentPitch + 12 - 69.0) / 12.0)), 0.6f);
+        _sinus3->addData(_buf, len, 440.0f * static_cast<float>(qPow(2.0, (_currentPitch + 24 - 69.0) / 12.0)), 0.6f);
+    }
 
     for (quint32 i = 0; i < len; i++)
     {

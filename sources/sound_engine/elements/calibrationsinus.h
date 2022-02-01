@@ -26,7 +26,6 @@
 #define CALIBRATIONSINUS_H
 
 #include "oscsinus.h"
-#include <QMutex>
 
 class CalibrationSinus
 {
@@ -46,16 +45,15 @@ public:
 private:
     void initBuffer(quint32 size);
 
-    OscSinus * _sinus;
-    double _pitch, _currentPitch;
-    float _level, _currentLevel;
+    OscSinus * _sinus1, * _sinus2, * _sinus3;
+    volatile int _pitch;
+    float _currentPitch;
+    volatile float _level;
+    float _currentLevel;
 
     // Buffer de travail
     float * _buf;
     quint32 _bufSize;
-
-    // Protect against multiple access
-    QMutex _mutex;
 };
 
 #endif // CALIBRATIONSINUS_H

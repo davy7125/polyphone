@@ -32,16 +32,14 @@ class OscSinus
 public:
     OscSinus(quint32 sampleRate);
 
-    // Freq in Hz, delay in s
-    void getData(float *data, quint32 len, float freq, double delay);
+    // Freq in Hz
+    void addData(float *data, quint32 len, float freq, float coef);
 
 private:
     quint32 _sampleRate;
     float _previousFreq;
-    quint32 _currentDelay;
     float _posPrec, _posPrecQuad;
     float _theta, _epsilon;
-    bool _delayEnded;
 
     void computeEpsilon(float freq, float &theta, float &epsilon);
 };
