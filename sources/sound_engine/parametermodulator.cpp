@@ -102,6 +102,7 @@ bool ParameterModulator::computeOutput()
     input1 = input1 < 0 ? 0 : _data.srcOper.applyShape(input1);
     input2 = input2 < 0 ? 0 : _data.amtSrcOper.applyShape(input2);
 
+
     // Compute data
     double result = input1 * input2 * _data.amount;
     if (_data.transOper == SFTransform::absolute_value && result < 0)
@@ -173,7 +174,7 @@ double ParameterModulator::getValue(SFModulator sfMod)
             value = ContextManager::midi()->getMonoPressure();
             break;
         case GC_pitchWheel:
-            value = 64 * (ContextManager::midi()->getBendValue() + 1);
+            value = 64.0 * (ContextManager::midi()->getBendValue() + 1.0);
             break;
         case GC_pitchWheelSensitivity:
             value = ContextManager::midi()->getBendSensitivityValue();

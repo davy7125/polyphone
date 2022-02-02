@@ -95,7 +95,9 @@ double SFModulator::applyShape(double value)
     {
     case typeLinear:
         // Linearly increasing from 0 to 1
-        value /= 127.0;
+        // Note: min value is 0, middle value is 64, max value is 127 and 128 that would represent 1.0 is thus never reached.
+        //       See 9.5.3 Mappings of Modulator Sources to the SoundFont Controller Input Domain from the specifications
+        value /= 128.0;
 
         // Possibly from 1 to 0 instead of 0 to 1
         if (this->isDescending)
