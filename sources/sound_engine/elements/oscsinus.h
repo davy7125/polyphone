@@ -33,7 +33,7 @@ public:
     OscSinus(quint32 sampleRate);
 
     // Freq in Hz
-    void addData(float *data, quint32 len, float freq, float coef);
+    void getData(float *data, quint32 len, float freq = -1.0f);
 
 private:
     quint32 _sampleRate;

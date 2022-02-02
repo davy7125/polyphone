@@ -33,13 +33,15 @@ OscSinus::OscSinus(quint32 sampleRate) :
 }
 
 // Gordon-Smith Generator
-void OscSinus::addData(float * data, quint32 len, float freq, float coef)
+void OscSinus::getData(float * data, quint32 len, float freq)
 {
     quint32 total = 0;
 
     // Initialize the system
-    if (_previousFreq < 0)
+    if (_previousFreq < 0.0f)
     {
+        if (freq < 0.0f)
+            return;
 
         _previousFreq = freq;
         computeEpsilon(freq, _theta, _epsilon);
@@ -47,7 +49,17 @@ void OscSinus::addData(float * data, quint32 len, float freq, float coef)
         _posPrecQuad = static_cast<float>(qCos(static_cast<double>(-_theta)));
     }
 
-    if (_previousFreq != freq)
+    if (freq < 0.0f || _previousFreq == freq)
+    {
+        // Sinus with a fixed frequency
+        for (quint32 i = total; i < len; i++)
+        {
+            _posPrecQuad -= _epsilon * _posPrec;
+            _posPrec     += _epsilon * _posPrecQuad;
+            data[i] = _posPrec;
+        }
+    }
+    else
     {
         // Sinus with a changing frequency (transition)
         float theta2, epsilon2;
@@ -60,23 +72,13 @@ void OscSinus::addData(float * data, quint32 len, float freq, float coef)
                     + static_cast<float>(i - total) / (len - total) * epsilon2;
             _posPrecQuad -= progEpsilon * _posPrec;
             _posPrec     += progEpsilon * _posPrecQuad;
-            data[i] += coef * _posPrec;
+            data[i] = _posPrec;
         }
 
         // Update values
         _theta = theta2;
         _epsilon = epsilon2;
         _previousFreq = freq;
-    }
-    else
-    {
-        // Sinus with a fixed frequency
-        for (quint32 i = total; i < len; i++)
-        {
-            _posPrecQuad -= _epsilon * _posPrec;
-            _posPrec     += _epsilon * _posPrecQuad;
-            data[i] += coef * _posPrec;
-        }
     }
 }
 

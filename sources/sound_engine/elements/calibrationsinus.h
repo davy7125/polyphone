@@ -34,7 +34,7 @@ public:
     ~CalibrationSinus();
     void setSampleRate(quint32 sampleRate);
 
-    // Configuration du sinus
+    // Calibration sine configuration
     void setPitch(int numNote);
     void on();
     void off();
@@ -45,14 +45,19 @@ public:
 private:
     void initBuffer(quint32 size);
 
-    OscSinus * _sinus1, * _sinus2, * _sinus3;
-    volatile int _pitch;
-    float _currentPitch;
-    volatile float _level;
-    float _currentLevel;
+    // Oscillators
+    OscSinus * _sine1, * _sine2, * _sine4;
 
-    // Buffer de travail
-    float * _buf;
+    // Configuration
+    volatile int _pitch;
+    volatile float _level;
+
+    // Evolving values for smooth transitions
+    float _currentPitch;
+    float _currentLevel, _currentLevelSine1, _currentLevelSine2, _currentLevelSine4;
+
+    // Buffers
+    float * _buf1, * _buf2, * _buf4;
     quint32 _bufSize;
 };
 
