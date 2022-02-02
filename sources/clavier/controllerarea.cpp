@@ -131,7 +131,7 @@ void ControllerArea::updateController(int num, int value)
     }
 }
 
-void ControllerArea::updateBend(double value, bool stopTimer)
+void ControllerArea::updateBend(float value, bool stopTimer)
 {
     if (value < -1)
         value = -1;
@@ -147,7 +147,7 @@ void ControllerArea::updateBend(double value, bool stopTimer)
     ui->labelWheelValue->setText(QLocale::system().toString(value, 'f', 2));
 }
 
-void ControllerArea::updateBendSensitivity(double semitones)
+void ControllerArea::updateBendSensitivity(float semitones)
 {
     if (semitones < 0)
         semitones = 0;
@@ -163,14 +163,14 @@ void ControllerArea::updateBendSensitivity(double semitones)
 
 void ControllerArea::on_sliderPitchWheel_valueChanged(int value)
 {
-    double fVal = static_cast<double>(value - 64) / 64;
+    float fVal = static_cast<float>(value - 64) / 64.0f;
     updateBend(fVal, false);
     emit(bendChanged(fVal));
 }
 
 void ControllerArea::on_sliderSensitivity_valueChanged(int value)
 {
-    double semitones = 0.01 * value;
+    float semitones = 0.01f * value;
     updateBendSensitivity(semitones);
     emit(bendSensitivityChanged(semitones));
 }

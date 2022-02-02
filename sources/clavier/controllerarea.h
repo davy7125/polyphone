@@ -43,14 +43,14 @@ public:
 public slots:
     void updateMonoPressure(int value);
     void updateController(int num, int value);
-    void updateBend(double value, bool stopTimer = true);
-    void updateBendSensitivity(double semitones);
+    void updateBend(float value, bool stopTimer = true);
+    void updateBendSensitivity(float semitones);
 
 signals:
     void monoPressureChanged(int value);
     void controllerChanged(int num, int value);
-    void bendChanged(double value);
-    void bendSensitivityChanged(double semitones);
+    void bendChanged(float value);
+    void bendSensitivityChanged(float semitones);
 
 private slots:
     void on_sliderPitchWheel_valueChanged(int value);

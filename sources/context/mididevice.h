@@ -28,8 +28,7 @@
 #include <QString>
 #include <QStringList>
 #include <QObject>
-#include <QMap>
-#include <QMutex>
+#include <QList>
 #include "rtmidi/RtMidi.h"
 class ConfManager;
 class RtMidiIn;
@@ -61,8 +60,8 @@ public:
 
     // Get last values (-1 if not received yet)
     int getControllerValue(int controllerNumber);
-    double getBendValue();
-    double getBendSensitivityValue();
+    float getBendValue();
+    float getBendSensitivityValue();
     int getMonoPressure();
     int getPolyPressure(int key);
 
@@ -72,16 +71,16 @@ public slots:
     void processPolyPressureChanged(int key, int pressure, bool syncKeyboard = false);
     void processMonoPressureChanged(int value, bool syncControllerArea = false);
     void processControllerChanged(int num, int value, bool syncControllerArea = false);
-    void processBendChanged(double value, bool syncControllerArea = false);
-    void processBendSensitivityChanged(double semitones, bool syncControllerArea = false);
+    void processBendChanged(float value, bool syncControllerArea = false);
+    void processBendSensitivityChanged(float semitones, bool syncControllerArea = false);
 
 signals:
     void keyPlayed(int key, int vel);
     void polyPressureChanged(int key, int pressure);
     void monoPressureChanged(int value);
     void controllerChanged(int num, int value);
-    void bendChanged(double value);
-    void bendSensitivityChanged(double semitones);
+    void bendChanged(float value);
+    void bendSensitivityChanged(float semitones);
 
 protected:
     void customEvent(QEvent * event);
@@ -97,12 +96,11 @@ private:
     QList<QPair<int, int> > _rpnHistory;
 
     // Last values
-    QMutex _mutexValues;
-    QMap<int, int> _controllerValues;
-    double _bendValue;
-    double _bendSensitivityValue;
-    int _monoPressureValue;
-    QMap<int, int> _polyPressureValues;
+    volatile int _controllerValues[128];
+    volatile float _bendValue;
+    volatile float _bendSensitivityValue;
+    volatile int _monoPressureValue;
+    volatile int _polyPressureValues[128];
 
     // Sustain / Sostenuto pedals
     QList<int> _sustainedKeys;

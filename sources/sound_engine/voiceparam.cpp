@@ -29,9 +29,11 @@
 
 VoiceParam::VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int key, int vel) :
     _sm(SoundfontManager::getInstance()),
-    _modulatorGroupInst(&_parameters, false),
-    _modulatorGroupPrst(&_parameters, true)
+    _modulatorGroupInst(_parameters, false),
+    _modulatorGroupPrst(_parameters, true)
 {
+    memset(_parameters, 0, 140 * sizeof(ModulatedParameter *));
+
     // Prepare the parameters (everything to default)
     prepareParameters();
 
@@ -77,9 +79,8 @@ VoiceParam::VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int key
 
 VoiceParam::~VoiceParam()
 {
-    QList<AttributeType> attributeTypes = _parameters.keys();
-    foreach (AttributeType attributeType, attributeTypes)
-        delete _parameters.take(attributeType);
+    for (int i = 0; i < 140; i++)
+        delete _parameters[i];
 }
 
 void VoiceParam::prepareParameters()
@@ -176,7 +177,7 @@ void VoiceParam::readDivisionAttributes(EltID idDivision)
 
     // Configure with the global attributes
     for (int i = 0; i < globalAttributeTypes.count(); i++)
-        if (_parameters.contains(globalAttributeTypes[i]))
+        if (_parameters[globalAttributeTypes[i]])
             _parameters[globalAttributeTypes[i]]->initValue(globalAttributeValues[i], isPrst);
 
     // Load division attributes
@@ -186,7 +187,7 @@ void VoiceParam::readDivisionAttributes(EltID idDivision)
 
     // Configure with the division attributes (possibly overriding it)
     for (int i = 0; i < divisionAttributeTypes.count(); i++)
-        if (_parameters.contains(divisionAttributeTypes[i]))
+        if (_parameters[divisionAttributeTypes[i]])
             _parameters[divisionAttributeTypes[i]]->initValue(divisionAttributeValues[i], isPrst);
 }
 
@@ -272,7 +273,7 @@ void VoiceParam::setFineTune(qint16 val)
 
 double VoiceParam::getDouble(AttributeType type)
 {
-    if (_parameters.contains(type))
+    if (_parameters[type])
         return _parameters[type]->getRealValue();
 
     qWarning() << "VoiceParam: type" << type << "-" << Attribute::getDescription(type, false) << "not found";
@@ -284,7 +285,7 @@ qint32 VoiceParam::getInteger(AttributeType type)
     // Notes:
     // * if fineTune is required: add the finetune from the sample level
     // * if wPreset is required, it will be stored in a special variable
-    if (_parameters.contains(type))
+    if (_parameters[type])
         return (type == champ_fineTune ? _sampleFineTune : 0) + _parameters[type]->getIntValue();
     if (type == champ_wPreset)
         return _wPresetNumber;
@@ -358,8 +359,9 @@ quint32 VoiceParam::getPosition(AttributeType type)
 void VoiceParam::computeModulations()
 {
     // First clear all modulations
-    foreach (ModulatedParameter * parameter, _parameters)
-        parameter->clearModulations();
+    for (int i = 0; i < 140; i++)
+        if (_parameters[i])
+            _parameters[i]->clearModulations();
 
     // Process modulators
     _modulatorGroupInst.process();

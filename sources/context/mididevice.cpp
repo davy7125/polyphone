@@ -97,8 +97,11 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
     _isSustainOn(false),
     _isSostenutoOn(false)
 {
+    memset((int*)_controllerValues, 0, 128 * sizeof(int));
+    memset((int*)_polyPressureValues, 0, 128 * sizeof(int));
+
     // Initialize MIDI values
-    _bendSensitivityValue = _configuration->getValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", 2.0).toDouble();
+    _bendSensitivityValue = _configuration->getValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", 2.0).toFloat();
     _monoPressureValue = 0; // Always starts with 0
     for (int i = 0; i < 128; i++)
     {
@@ -293,9 +296,7 @@ void MidiDevice::customEvent(QEvent * event)
 
 void MidiDevice::processControllerChanged(int numController, int value, bool syncControllerArea)
 {
-    _mutexValues.lock();
     _controllerValues[numController] = value;
-    _mutexValues.unlock();
 
     if (numController == 64)
     {
@@ -347,7 +348,7 @@ void MidiDevice::processControllerChanged(int numController, int value, bool syn
                     _rpnHistory[2].first == 6 && // B0 06 XX => semitones
                     _rpnHistory[3].first == 38) // B0 38 YY => cents
             {
-                double pitch = 0.01 * _rpnHistory[3].second + _rpnHistory[2].second;
+                float pitch = 0.01f * _rpnHistory[3].second + _rpnHistory[2].second;
                 processBendSensitivityChanged(pitch, syncControllerArea);
             }
         }
@@ -359,11 +360,8 @@ void MidiDevice::processControllerChanged(int numController, int value, bool syn
 
 void MidiDevice::processKeyOn(int key, int vel, bool syncKeyboard)
 {
-    // Possibly initialize the poly pressure value
-    _mutexValues.lock();
-    if (!_polyPressureValues.contains(key) || _polyPressureValues[key] == -1)
-        _polyPressureValues[key] = vel;
-    _mutexValues.unlock();
+    // Initialize the poly pressure value
+    _polyPressureValues[key] = vel;
 
     // Display the note on the keyboard
     if (_keyboard && syncKeyboard)
@@ -410,40 +408,31 @@ void MidiDevice::processPolyPressureChanged(int key, int pressure, bool syncKeyb
 {
     Q_UNUSED(syncKeyboard) // No synchronization with the keyboard
 
-    _mutexValues.lock();
     _polyPressureValues[key] = pressure;
-    _mutexValues.unlock();
-
     emit(polyPressureChanged(key, pressure));
 }
 
 void MidiDevice::processMonoPressureChanged(int value, bool syncControllerArea)
 {
-    _mutexValues.lock();
     _monoPressureValue = value;
-    _mutexValues.unlock();
 
     emit(monoPressureChanged(value));
     if (syncControllerArea)
         _controllerArea->updateMonoPressure(value);
 }
 
-void MidiDevice::processBendChanged(double value, bool syncControllerArea)
+void MidiDevice::processBendChanged(float value, bool syncControllerArea)
 {
-    _mutexValues.lock();
     _bendValue = value;
-    _mutexValues.unlock();
 
     emit(bendChanged(value));
     if (syncControllerArea)
         _controllerArea->updateBend(value);
 }
 
-void MidiDevice::processBendSensitivityChanged(double semitones, bool syncControllerArea)
+void MidiDevice::processBendSensitivityChanged(float semitones, bool syncControllerArea)
 {
-    _mutexValues.lock();
     _bendSensitivityValue = semitones;
-    _mutexValues.unlock();
 
     emit(bendSensitivityChanged(semitones));
     if (syncControllerArea)
@@ -462,8 +451,8 @@ void MidiDevice::setControllerArea(ControllerArea * controllerArea)
 {
     connect(controllerArea, SIGNAL(monoPressureChanged(int)), this, SLOT(processMonoPressureChanged(int)));
     connect(controllerArea, SIGNAL(controllerChanged(int,int)), this, SLOT(processControllerChanged(int,int)));
-    connect(controllerArea, SIGNAL(bendChanged(double)), this, SLOT(processBendChanged(double)));
-    connect(controllerArea, SIGNAL(bendSensitivityChanged(double)), this, SLOT(processBendSensitivityChanged(double)));
+    connect(controllerArea, SIGNAL(bendChanged(float)), this, SLOT(processBendChanged(float)));
+    connect(controllerArea, SIGNAL(bendSensitivityChanged(float)), this, SLOT(processBendSensitivityChanged(float)));
     _controllerArea = controllerArea;
 }
 
@@ -489,40 +478,25 @@ void MidiDevice::stopAll()
 
 int MidiDevice::getControllerValue(int controllerNumber)
 {
-    _mutexValues.lock();
-    int result = _controllerValues.contains(controllerNumber) ? _controllerValues[controllerNumber] : -1;
-    _mutexValues.unlock();
-    return result;
+    return _controllerValues[controllerNumber];
 }
 
-double MidiDevice::getBendValue()
+float MidiDevice::getBendValue()
 {
-    _mutexValues.lock();
-    double result = _bendValue;
-    _mutexValues.unlock();
-    return result;
+    return _bendValue;
 }
 
-double MidiDevice::getBendSensitivityValue()
+float MidiDevice::getBendSensitivityValue()
 {
-    _mutexValues.lock();
-    double result = _bendSensitivityValue;
-    _mutexValues.unlock();
-    return result;
+    return _bendSensitivityValue;
 }
 
 int MidiDevice::getMonoPressure()
 {
-    _mutexValues.lock();
-    int result = _monoPressureValue;
-    _mutexValues.unlock();
-    return result;
+    return _monoPressureValue;
 }
 
 int MidiDevice::getPolyPressure(int key)
 {
-    _mutexValues.lock();
-    int result = _polyPressureValues.contains(key) ? _polyPressureValues[key] : -1;
-    _mutexValues.unlock();
-    return result;
+    return _polyPressureValues[key];
 }

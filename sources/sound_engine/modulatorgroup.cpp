@@ -27,7 +27,7 @@
 #include "modulatedparameter.h"
 #include "parametermodulator.h"
 
-ModulatorGroup::ModulatorGroup(QMap<AttributeType, ModulatedParameter *> * parameters, bool isPrst) :
+ModulatorGroup::ModulatorGroup(ModulatedParameter **parameters, bool isPrst) :
     _parameters(parameters),
     _isPrst(isPrst)
 {
@@ -94,8 +94,8 @@ void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
         if (output < 32768)
         {
             // The target is a parameter
-            if (_parameters->contains(static_cast<AttributeType>(output)))
-                modulator->setOutput(_parameters->value(static_cast<AttributeType>(output)));
+            if (_parameters[output])
+                modulator->setOutput(_parameters[output]);
         }
         else
         {

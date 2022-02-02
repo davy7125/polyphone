@@ -61,7 +61,7 @@ private:
     SoundfontManager * _sm;
 
     // All parameters
-    QMap<AttributeType, ModulatedParameter *> _parameters;
+    ModulatedParameter * _parameters[140];
     ModulatorGroup _modulatorGroupInst, _modulatorGroupPrst;
     qint32 _sampleLength, _sampleLoopStart, _sampleLoopEnd, _sampleFineTune;
     qint32 _wPresetNumber;

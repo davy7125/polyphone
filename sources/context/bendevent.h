@@ -36,10 +36,10 @@ public:
           _value((_value2 << 7) | _value1)
     {}
 
-    double getValue() const
+    float getValue() const
     {
         // Result between -1 and 1
-        return static_cast<double>(_value - 8192) / 8192.0;
+        return static_cast<float>(_value - 8192) / 8192.0f;
     }
 
 protected:
