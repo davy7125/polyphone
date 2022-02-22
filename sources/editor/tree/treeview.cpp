@@ -830,13 +830,15 @@ void TreeView::dropEvent(QDropEvent *event)
 {
     if (event->mimeData()->hasUrls() && event->source() == nullptr)
     {
+        QList<QUrl> urls = event->mimeData()->urls();
         SoundfontManager * sm = SoundfontManager::getInstance();
         int replace = 0;
         SampleLoader sl(dynamic_cast<QWidget*>(this->parent()));
         IdList smplList;
-        for (int i = 0; i < event->mimeData()->urls().count(); i++)
+
+        for (int i = 0; i < urls.count(); i++)
         {
-            QString path = QUrl::fromPercentEncoding(event->mimeData()->urls().at(i).toEncoded()).replace('\\', '/');
+            QString path = QUrl::fromPercentEncoding(urls.at(i).toEncoded()).replace('\\', '/');
             if (!path.isEmpty())
             {
                 QString extension = path.split(".").last().toLower();
