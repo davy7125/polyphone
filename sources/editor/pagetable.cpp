@@ -313,7 +313,7 @@ void PageTable::addDivisions(EltID id)
             int row = _table->getRow(champ_byOriginalPitch);
             if (row > -1)
             {
-                unsigned char pitch = _sf2->get(id3, champ_byOriginalPitch).bValue;
+                quint8 pitch = _sf2->get(id3, champ_byOriginalPitch).bValue;
                 _table->item(row, numCol)->setText(QString::number(pitch));
             }
 

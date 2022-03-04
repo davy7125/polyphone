@@ -916,6 +916,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
         // Finally delete sf2
         _soundfonts->deleteSoundfont(id.indexSf2);
         _undoRedo->dropSoundfont(id.indexSf2);
+        emit(soundfontClosed(id.indexSf2));
     }break;
     case elementSmpl:{
         // Check that no instruments use the sample

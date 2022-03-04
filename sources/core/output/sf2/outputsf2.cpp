@@ -67,7 +67,7 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
         if (!success)
             return;
 
-        // Delete the initial file and
+        // Delete the initial file
         if (!QFile(fileName).remove())
         {
             error = tr("Couldn't delete file \"%1\".").arg(fileName);

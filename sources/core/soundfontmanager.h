@@ -92,6 +92,9 @@ public:
     // Access to the solo manager
     SoloManager * solo() { return _solo; }
 
+    // Create a notification about a new soundfont that has been loaded
+    void emitNewSoundfontLoaded(int sf2Index) { emit(this->soundfontLoaded(sf2Index)); }
+
 signals:
     // Emitted when a group of actions is finished
     // "editingSource" can be:
@@ -99,6 +102,12 @@ signals:
     //   * tool:{tool kind}:{tool name}
     //   * page:{page name}
     void editingDone(QString editingSource, QList<int> sf2Indexes);
+
+    // Emitted when a new soundfont is loaded
+    void soundfontLoaded(int indexSf2);
+
+    // Emitted when a soundfont is closed
+    void soundfontClosed(int indexSf2);
 
 private slots:
     void onDropId(EltID id);

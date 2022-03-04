@@ -91,13 +91,13 @@ void PageOverviewSmpl::getInformation(EltID id, QStringList &info, QStringList &
     status << iTmp;
 
     // Root key
-    unsigned char pitch = rootKey(id, iTmp);
+    quint8 pitch = rootKey(id, iTmp);
     info << ContextManager::keyName()->getKeyName(pitch);
     order << QString::number(2 - iTmp) + QString::number(1000 + pitch);
     status << iTmp;
 
     // Correction
-    char tuning = correction(id, iTmp);
+    qint8 tuning = correction(id, iTmp);
     info << QString::number(tuning);
     order << QString::number(2 - iTmp) + QString::number(2000 + tuning);
     status << iTmp;
@@ -173,10 +173,10 @@ QString PageOverviewSmpl::loopLength(EltID id, int &status)
     return result;
 }
 
-unsigned char PageOverviewSmpl::rootKey(EltID id, int &status)
+quint8 PageOverviewSmpl::rootKey(EltID id, int &status)
 {
     status = 0;
-    unsigned char result = _sf2->get(id, champ_byOriginalPitch).bValue;
+    quint8 result = _sf2->get(id, champ_byOriginalPitch).bValue;
 
     // Check the pitch of the possible linked sample
     if (_linkedSampleStatus == 1)
@@ -188,10 +188,10 @@ unsigned char PageOverviewSmpl::rootKey(EltID id, int &status)
     return result;
 }
 
-char PageOverviewSmpl::correction(EltID id, int &status)
+qint8 PageOverviewSmpl::correction(EltID id, int &status)
 {
     status = 0;
-    char result = _sf2->get(id, champ_chPitchCorrection).cValue;
+    qint8 result = _sf2->get(id, champ_chPitchCorrection).cValue;
 
     // Check the correction of the possible linked sample
     if (_linkedSampleStatus == 1)

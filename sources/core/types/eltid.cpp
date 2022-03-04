@@ -40,10 +40,10 @@ EltID::EltID(EltID * other) :
 {}
 EltID::EltID() :
     typeElement(elementUnknown),
-    indexSf2(0),
-    indexElt(0),
-    indexElt2(0),
-    indexMod(0)
+    indexSf2(-1),
+    indexElt(-1),
+    indexElt2(-1),
+    indexMod(-1)
 {}
 
 EltID EltID::parent(bool includeRoot)

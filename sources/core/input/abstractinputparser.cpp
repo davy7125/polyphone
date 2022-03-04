@@ -104,4 +104,5 @@ void AbstractInputParser::processAsync()
 
     // The operation are not stored in the action manager
     _sm->clearNewEditing();
+    _sm->emitNewSoundfontLoaded(_sf2Index);
 }

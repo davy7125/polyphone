@@ -45,6 +45,7 @@ protected:
     void hideEvent(QHideEvent * event) override;
     void showEvent(QShowEvent * event) override;
     void closeEvent(QCloseEvent * event) override;
+    void keyPressEvent(QKeyEvent * event) override;
 
 private slots:
     void onDataWritten(quint32 sampleRate, quint32 number);

@@ -44,8 +44,8 @@ private:
     QString isUsed(EltID id, int &status);
     QString totalLength(EltID id);
     QString loopLength(EltID id, int &status);
-    unsigned char rootKey(EltID id, int &status);
-    char correction(EltID id, int &status);
+    quint8 rootKey(EltID id, int &status);
+    qint8 correction(EltID id, int &status);
     QString type(EltID id, int &status);
     QString link(int &status);
     QString sampleRate(EltID id);

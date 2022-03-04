@@ -29,18 +29,18 @@
 #include <QDir>
 #include <QDesktopServices>
 #include <QFileDialog>
+#include <QKeyEvent>
 #include "contextmanager.h"
 #include "synth.h"
 #include "editortoolbar.h"
 
 DialogRecorder::DialogRecorder(QWidget *parent) :
-    QDialog(parent),
+    QDialog(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint),
     ui(new Ui::DialogRecorder)
 {
     ui->setupUi(this);
     _synth = ContextManager::audio()->getSynth();
     connect(_synth, SIGNAL(dataWritten(quint32,quint32)), this, SLOT(onDataWritten(quint32,quint32)));
-    this->setWindowFlags(Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
     this->initialize();
 }
 
@@ -178,4 +178,11 @@ void DialogRecorder::showEvent(QShowEvent * event)
     QByteArray geometry = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "recorderGeometry", QByteArray()).toByteArray();
     if (!geometry.isEmpty())
         this->restoreGeometry(geometry);
+}
+
+void DialogRecorder::keyPressEvent(QKeyEvent * event)
+{
+    // Prevent the escape key from closing the window
+    if (event->key() != Qt::Key_Escape)
+          QDialog::keyPressEvent(event);
 }
