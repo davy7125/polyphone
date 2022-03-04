@@ -115,6 +115,13 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
                 // Update sample 2
                 updateSample(id2, baData2, startLoop2, endLoop2, crossfadeLength2);
             }
+            else if (!result && !result2)
+            {
+                // None of the samples could be looped
+                _mutex.lock();
+                _samplesNotLooped << sm->getQstr(id2, champ_name);
+                _mutex.unlock();
+            }
             else
             {
                 // Use the longest possible loop for both samples
