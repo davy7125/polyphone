@@ -76,6 +76,7 @@ int launchApplication(QtSingleApplication * app, Options &options)
     // Additional type used in signals
     qRegisterMetaType<EltID>();
     qRegisterMetaType<QList<int> >();
+    qRegisterMetaType<QVector<int> >();
 
     // Display the main window
     MainWindow w;
