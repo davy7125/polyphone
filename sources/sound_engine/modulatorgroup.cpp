@@ -39,8 +39,9 @@ ModulatorGroup::~ModulatorGroup()
         delete _modulators.takeFirst();
 }
 
-void ModulatorGroup::initialize(int initialKey, int keyForComputation, int velForComputation)
+void ModulatorGroup::initialize(int channel, int initialKey, int keyForComputation, int velForComputation)
 {
+    _channel = channel;
     _initialKey = initialKey;
     _keyForComputation = keyForComputation;
     _velForComputation = velForComputation;
@@ -83,7 +84,7 @@ void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
 
         // Or create another one
         if (!overwritten)
-            _modulators << new ParameterModulator(modData, _isPrst, _initialKey, _keyForComputation, _velForComputation);
+            _modulators << new ParameterModulator(modData, _isPrst, _channel, _initialKey, _keyForComputation, _velForComputation);
     }
 
     // Link the outputs of the newly created modulators

@@ -88,7 +88,7 @@ ConfManager::ConfManager(): QObject(),
 
 QVariant ConfManager::getValue(Section section, QString key, QVariant defaultValue) const
 {
-    return _settings.value(getFullKey(section, key), defaultValue);
+    return _settings.value(getFullKey(section, "", key), defaultValue);
 }
 
 QVariant ConfManager::getToolValue(ToolType toolType, QString toolName, QString key, QVariant defaultValue) const
@@ -96,9 +96,14 @@ QVariant ConfManager::getToolValue(ToolType toolType, QString toolName, QString 
     return _settings.value(getFullKey(toolType, toolName, key), defaultValue);
 }
 
+QVariant ConfManager::getExtensionValue(QString extensionId, QString key, QVariant defaultValue) const
+{
+    return _settings.value(getFullKey(Section::SECTION_EXTENSIONS, extensionId, key), defaultValue);
+}
+
 void ConfManager::setValue(Section section, QString key, QVariant value)
 {
-    _settings.setValue(getFullKey(section, key), value);
+    _settings.setValue(getFullKey(section, "", key), value);
 
     // Possibly update elements
     switch (section)
@@ -141,7 +146,12 @@ void ConfManager::setToolValue(ToolType toolType, QString toolName, QString key,
     _settings.setValue(getFullKey(toolType, toolName, key), value);
 }
 
-QString ConfManager::getFullKey(Section section, QString key) const
+void ConfManager::setExtensionValue(QString extensionId, QString key, QVariant value)
+{
+    _settings.setValue(getFullKey(Section::SECTION_EXTENSIONS, extensionId, key), value);
+}
+
+QString ConfManager::getFullKey(Section section, QString subSection, QString key) const
 {
     // First part depends on the section
     QString firstPart = "";
@@ -160,9 +170,13 @@ QString ConfManager::getFullKey(Section section, QString key) const
     case SECTION_TOOLS:        firstPart = "tools";       break;
     case SECTION_WARNINGS:     firstPart = "warnings";    break;
     case SECTION_REPOSITORY:   firstPart = "repository";  break;
+    case SECTION_EXTENSIONS:    firstPart = "extensions";   break;
     }
     if (firstPart != "")
         firstPart += "/";
+
+    if (!subSection.isEmpty())
+        firstPart += subSection + "/";
 
     return firstPart + key;
 }
@@ -178,7 +192,7 @@ QString ConfManager::getFullKey(ToolType toolType, QString toolName, QString key
     case TOOL_TYPE_PRESET:     subSection = "preset";     break;
     }
 
-    return getFullKey(SECTION_TOOLS, subSection + "/" + toolName + "_" + key);
+    return getFullKey(SECTION_TOOLS, subSection, toolName + "_" + key);
 }
 
 QString ConfManager::getConfigDir()

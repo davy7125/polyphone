@@ -30,23 +30,30 @@
 class PolyPressureEvent : public QEvent
 {
 public:
-    PolyPressureEvent(unsigned char note, unsigned char val) : QEvent((QEvent::Type)(QEvent::User+2)),
-          _note(note),
-          _pressure(val) {}
+    PolyPressureEvent(qint8 channel, quint8 note, quint8 val) : QEvent((QEvent::Type)(QEvent::User+2)),
+        _channel(channel),
+        _note(note),
+        _pressure(val) {}
 
-    unsigned char getNote() const
+    qint8 getChannel() const
+    {
+        return _channel;
+    }
+
+    quint8 getNote() const
     {
         return _note;
     }
 
-    unsigned char getPressure() const
+    quint8 getPressure() const
     {
         return _pressure;
     }
 
 protected:
-    unsigned char _note;
-    unsigned char _pressure;
+    qint8 _channel;
+    quint8 _note;
+    quint8 _pressure;
 };
 
 #endif // POLYPRESSUREEVENT_H

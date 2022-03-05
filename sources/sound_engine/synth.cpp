@@ -96,12 +96,13 @@ void Synth::createSoundEnginesAndBuffers()
     }
 }
 
-int Synth::play(EltID id, int key, int velocity)
+int Synth::play(EltID id, int channel, int key, int velocity)
 {
+    //qWarning() << "PLAY on channel" << channel << "key" << key << "vel" << velocity << id.toString();
     if (velocity == 0)
     {
-        // Release of a key
-        SoundEngine::releaseNote(key);
+        // Release of voices
+        SoundEngine::releaseVoices(id.indexSf2, id.indexElt, channel, key);
         return -1;
     }
 
@@ -110,13 +111,13 @@ int Synth::play(EltID id, int key, int velocity)
     switch (id.typeElement)
     {
     case elementSmpl:
-        playingToken = playSmpl(id.indexSf2, id.indexElt, key, velocity);
+        playingToken = playSmpl(id.indexSf2, id.indexElt, channel, key, velocity);
         break;
     case elementInst: case elementInstSmpl:
-        playInst(id.indexSf2, id.indexElt, key, velocity);
+        playInst(id.indexSf2, id.indexElt, channel, key, velocity);
         break;
     case elementPrst: case elementPrstInst:
-        playPrst(id.indexSf2, id.indexElt, key, velocity);
+        playPrst(id.indexSf2, id.indexElt, channel, key, velocity);
         break;
     default:
         return -1;
@@ -132,7 +133,7 @@ int Synth::play(EltID id, int key, int velocity)
     return playingToken;
 }
 
-void Synth::playPrst(int idSf2, int idElt, int key, int velocity)
+void Synth::playPrst(int idSf2, int idElt, int channel, int key, int velocity)
 {
     // Default preset range
     EltID idPrst(elementPrst, idSf2, idElt, 0, 0);
@@ -189,11 +190,11 @@ void Synth::playPrst(int idSf2, int idElt, int key, int velocity)
 
         // Check {key, vel} is in the division and go inside the instruments
         if (keyMin <= key && key <= keyMax && velMin <= velocity && velocity <= velMax)
-            this->playInst(idSf2, _sf2->get(idPrstInst, champ_instrument).wValue, key, velocity, idPrstInst);
+            this->playInst(idSf2, _sf2->get(idPrstInst, champ_instrument).wValue, channel, key, velocity, idPrstInst);
     }
 }
 
-void Synth::playInst(int idSf2, int idElt, int key, int velocity, EltID idPrstInst)
+void Synth::playInst(int idSf2, int idElt, int channel, int key, int velocity, EltID idPrstInst)
 {
     // Default instrument range
     EltID idInst(elementInst, idSf2, idElt, 0, 0);
@@ -251,20 +252,16 @@ void Synth::playInst(int idSf2, int idElt, int key, int velocity, EltID idPrstIn
 
         // Check {key, vel} is in the division and go inside the samples
         if (keyMin <= key && key <= keyMax && velMin <= velocity && velocity <= velMax)
-            this->playSmpl(idSf2, _sf2->get(idInstSmpl, champ_sampleID).wValue, key, velocity, idInstSmpl, idPrstInst);
+            this->playSmpl(idSf2, _sf2->get(idInstSmpl, champ_sampleID).wValue, channel, key, velocity, idInstSmpl, idPrstInst);
     }
 }
 
-int Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSmpl, EltID idPrstInst)
+int Synth::playSmpl(int idSf2, int idElt, int channel, int key, int velocity, EltID idInstSmpl, EltID idPrstInst)
 {
-    // Only one -1 or -2 at a time
-    if (key < 0)
-        SoundEngine::releaseNote(key);
-
     EltID idSmpl(elementSmpl, idSf2, idElt, 0, 0);
 
     // Prepare the parameters for the voice
-    VoiceParam * voiceParam = new VoiceParam(idPrstInst, idInstSmpl, idSmpl, key, velocity);
+    VoiceParam * voiceParam = new VoiceParam(idPrstInst, idInstSmpl, idSmpl, channel, key, velocity);
 
     if (key < 0) // Smpl area
         voiceParam->prepareForSmpl(key, _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue);
@@ -273,7 +270,7 @@ int Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSmp
     int currentToken = s_sampleVoiceTokenCounter++;
     Voice * voiceTmp = new Voice(_sf2->getData(idSmpl, champ_sampleData32),
                                  _sf2->get(idSmpl, champ_dwSampleRate).dwValue,
-                                 _format.sampleRate(), key, voiceParam, currentToken);
+                                 _format.sampleRate(), voiceParam, currentToken);
 
     // Initialize chorus and gain
     if (key < 0)
@@ -296,21 +293,21 @@ int Synth::playSmpl(int idSf2, int idElt, int key, int velocity, EltID idInstSmp
         // Stereo link?
         SFSampleLink typeLien = _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
         if (typeLien != monoSample && typeLien != RomMonoSample)
-            this->playSmpl(idSf2, _sf2->get(idSmpl, champ_wSampleLink).wValue, -2, 127);
+            this->playSmpl(idSf2, _sf2->get(idSmpl, champ_wSampleLink).wValue, channel, -2, 127);
     }
 
     return currentToken;
 }
 
-void Synth::stop()
+void Synth::stop(bool allChannels)
 {
     // Stop required for all voices
-    SoundEngine::stopAllVoices();
+    SoundEngine::stopAllVoices(allChannels);
 }
 
 void Synth::updateConfiguration()
 {
-    this->stop();
+    this->stop(true);
 
     // Update chorus
     _choLevel = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt();
@@ -436,12 +433,11 @@ void Synth::setFormat(AudioFormat format)
     _format = format;
 
     // Reset
-    this->stop();
+    this->stop(true);
 
     // Sample rate update
     _sinus.setSampleRate(format.sampleRate());
     _eq.setSampleRate(format.sampleRate());
-    this->sampleRateChanged(format.sampleRate());
 }
 
 void Synth::startNewRecord(QString fileName)

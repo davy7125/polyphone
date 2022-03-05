@@ -58,8 +58,7 @@ void Voice::prepareSincTable()
 }
 
 // Constructeur, destructeur
-Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int initialKey,
-             VoiceParam * voiceParam, int token) : QObject(nullptr),
+Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, VoiceParam * voiceParam, int token) : QObject(nullptr),
     _modLFO(audioSmplRate),
     _vibLFO(audioSmplRate),
     _enveloppeVol(audioSmplRate, false),
@@ -69,7 +68,6 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int ini
     _smplRate(smplRate),
     _audioSmplRate(audioSmplRate),
     _gain(0),
-    _initialKey(initialKey),
     _voiceParam(voiceParam),
     _token(token),
     _currentSmplPos(voiceParam->getPosition(champ_dwStart16)), // This value is read only once
@@ -182,7 +180,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     _vibLFO.getData(_vibLfoArray, len, static_cast<float>(v_vibLfoFreq), v_vibLfoDelay);
 
     // Pitch modulation
-    float temperamentFineTune = _initialKey < 0 ? 0.0f : (s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
+    float temperamentFineTune = _voiceParam->getKey() < 0 ? 0.0f : (s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
                                                   s_temperament[(21 - s_temperamentRelativeKey) % 12]); // Correction so that the tuning fork is accurate
     float deltaPitchFixed = -12.f * qLn(static_cast<double>(_audioSmplRate) / _smplRate * 440.f / s_tuningFork) / 0.69314718056f +
             (playedNote - v_rootkey) * 0.01f * v_scaleTune + 0.01f * (temperamentFineTune + v_fineTune) + v_coarseTune;

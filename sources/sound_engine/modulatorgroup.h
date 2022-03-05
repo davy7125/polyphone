@@ -36,7 +36,7 @@ public:
     ~ModulatorGroup();
 
     // Initialize with keys and vel
-    void initialize(int initialKey, int keyForComputation, int velForComputation);
+    void initialize(int channel, int initialKey, int keyForComputation, int velForComputation);
 
     // Load modulators from the instrument or preset level
     void loadModulators(QList<ModulatorData> &modulators);
@@ -49,7 +49,7 @@ private:
 
     ModulatedParameter ** _parameters;
     bool _isPrst;
-    int _initialKey, _keyForComputation, _velForComputation;
+    int _channel, _initialKey, _keyForComputation, _velForComputation;
     QList<ParameterModulator *> _modulators;
 };
 

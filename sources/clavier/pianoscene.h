@@ -39,8 +39,6 @@ public:
     double getRatio() const { return m_ratio; }
 
     // Color management
-    void setColorationType(PianoKeybd::ColorationType colorationType);
-    PianoKeybd::ColorationType getColorationType() { return m_colorationType; }
     void setColor(int num, QColor color);
     QColor getColor(int num) { return m_palette.value(num); }
     void triggerGlowEffect();
@@ -52,19 +50,12 @@ public:
     void resetCustomization(int key, PianoKeybd::CustomizationType type);
 
     void updateMapping();
-    int getTranspose() const { return m_transpose; }
-    void setTranspose(const int transpose);
-    void showNoteOn(const int note, int vel = -1, int channel = -1);
-    void showNoteOff(const int note, int channel = -1);
+    void showNoteOn(const int note, int vel = -1);
+    void showNoteOff(const int note);
     int numKeys() const { return m_numKeys; }
     int startKey() const { return m_startKey; }
-    void allKeysOff();
     void keyNoteOn( const int note, const int velo);
     void keyNoteOff( const int note);
-    int getVelocity() { return m_velocity; }
-    void setVelocity(const int velocity) { m_velocity = m_lastVelocity = velocity; }
-    int getChannel() const { return m_channel; }
-    void setChannel(const int channel) { m_channel = channel; }
 
 signals:
     void noteOn(int n, int v);
@@ -73,25 +64,23 @@ signals:
     void polyPressureChanged(int n, int p);
 
 protected:
-    void showKeyOn(PianoKey* key, int vel = -1, int channel = -1);
-    void showKeyOff( PianoKey* key );
-    void keyOn(PianoKey* key, qreal pressure);
-    void keyOff(PianoKey* key);
-    int getKeyVelocity();
-    PianoKey* getKeyForPos(const QPointF& p) const;
-    int getPressureFromPos(const QPointF& p, bool isBlack) const;
-
-    void mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent);
-    void mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent);
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent * mouseEvent);
-    void keyPressEvent(QKeyEvent * keyEvent);
-    void keyReleaseEvent(QKeyEvent * keyEvent);
-    bool event(QEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent * mouseEvent) override;
+    void keyPressEvent(QKeyEvent * keyEvent) override;
+    void keyReleaseEvent(QKeyEvent * keyEvent) override;
+    bool event(QEvent *event) override;
 
 protected slots:
     void updateGlowEffect();
 
 private:
+    void showKeyOn(PianoKey* key, int vel = -1);
+    void showKeyOff( PianoKey* key );
+    void keyOn(PianoKey* key, qreal pressure);
+    void keyOff(PianoKey* key);
+    PianoKey* getKeyForPos(const QPointF& p) const;
+    int getPressureFromPos(const QPointF& p, bool isBlack) const;
     void initConfiguration(PianoScene *previousScene);
     void createKeyboard();
     void refreshKeys();
@@ -104,19 +93,14 @@ private:
     int m_startKey;
     int m_minNote;
     int m_maxNote;
-    int m_transpose;
     bool m_mousePressed;
-    int m_velocity;
     int m_lastVelocity;
-    bool m_autoVelocity;
     int m_lastNote;
     int m_lastNoteUp;
     int m_lastNoteDown;
     int m_lastNoteLeft;
     int m_lastNoteRight;
     int m_currentArrow;
-    int m_channel;
-    PianoKeybd::ColorationType m_colorationType;
     QHash<int, PianoKey*> m_keys;
     QMap<int, QColor> m_palette;
     QMap<int, QColor> m_customColors;

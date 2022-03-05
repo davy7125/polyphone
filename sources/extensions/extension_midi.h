@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2019 Davy Triponney                                **
+**  Copyright (C) 2013-2020 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,61 +22,51 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef EXTENSION_MIDI_H
+#define EXTENSION_MIDI_H
 
-#include <QMainWindow>
-#include "basetypes.h"
-#include "dialog_about.h"
+#include "extension_midi_dialog.h"
 
-namespace Ui {
-class MainWindow;
-}
-class WindowManager;
-class DialogKeyboard;
-class DialogRecorder;
-
-class MainWindow : public QMainWindow
+class ExtensionMidi: public QObject
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ExtensionMidi() : QObject() {}
+    virtual ~ExtensionMidi()
+    {
+        delete _dialog;
+    }
 
-public slots:
-    void slotCloseTab(int index);
-    void recentSf2Changed();
-    void openFiles(const QString &fileNames);
+    /// Title of the extension
+    virtual QString getTitle() const = 0;
+
+    /// Internal identifier
+    virtual QString getIdentifier() const = 0;
+
+    /// Path of the icon
+    virtual QString getIconPath() const = 0;
+
+    QDialog * getDialog()
+    {
+        if (_dialog == nullptr)
+            _dialog = new ExtensionMidiDialog(this->getTitle(), this->getIdentifier(), this->getGui());
+        return _dialog;
+    }
+
+    virtual bool processKeyOn(int channel, int key, int vel) = 0;
+    virtual bool processKeyOff(int channel, int key) = 0;
+    virtual bool processPolyPressureChanged(int channel, int key, int pressure) = 0;
+    virtual bool processMonoPressureChanged(int channel, int value) = 0;
+    virtual bool processControllerChanged(int channel, int num, int value) = 0;
+    virtual bool processBendChanged(int channel, float value) = 0;
+    virtual bool processBendSensitivityChanged(int channel, float semitones) = 0;
 
 protected:
-    void closeEvent(QCloseEvent *event) override;
-    void keyPressEvent(QKeyEvent *event) override;
-
-private slots:
-    void on_pushButtonDocumentation_clicked();
-    void on_pushButtonForum_clicked();
-    void on_pushButtonSettings_clicked();
-    void on_pushButtonSearch_clicked();
-    void on_lineSearch_returnPressed();
-    void on_pushButtonSoundfonts_clicked();
-    void on_pushButtonOpen_clicked();
-    void on_pushButtonNew_clicked();
-    void onAboutClicked();
-    void onKeyboardDisplayChange(bool isDisplayed);
-    void onRecorderDisplayChange(bool isDisplayed);
-    void fullScreenTriggered();
-    void onCloseFile();
-    void onSave();
-    void onSaveAs();
-    void onUserClicked();
+    virtual QWidget * getGui() = 0;
 
 private:
-    Ui::MainWindow * ui;
-    WindowManager * _windowManager;
-    DialogKeyboard * _keyboard;
-    DialogRecorder * _recorder;
-    DialogAbout _dialogAbout;
+    QDialog * _dialog = nullptr;
 };
 
-#endif // WINDOW_H
+#endif // EXTENSION_MIDI_H

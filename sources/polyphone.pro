@@ -204,6 +204,7 @@ INCLUDEPATH += lib \
     repository/soundfont/viewer \
     repository/soundfont/editor \
     lib/qtsingleapplication \
+    extensions \
     .
 
 SOURCES	+= main.cpp \
@@ -290,6 +291,10 @@ SOURCES	+= main.cpp \
     clavier/pianokeybdcustom.cpp \
     clavier/keyboardmap.cpp \
     editor/widgets/transparentframe.cpp \
+    extensions/extension_midi_dialog.cpp \
+    extensions/extensionmanager.cpp \
+    extensions/extensionmanager_midi.cpp \
+    extensions/extensionmanager_view.cpp \
     repository/browser/browsersortmenu.cpp \
     repository/widgets/customtextedit.cpp \
     repository/soundfont/editor/editordialoginsertlink.cpp \
@@ -629,6 +634,12 @@ HEADERS += \
     clavier/pianokeybdcustom.h \
     clavier/keyboardmap.h \
     editor/widgets/transparentframe.h \
+    extensions/extension_midi.h \
+    extensions/extension_midi_dialog.h \
+    extensions/extension_view.h \
+    extensions/extensionmanager.h \
+    extensions/extensionmanager_midi.h \
+    extensions/extensionmanager_view.h \
     repository/browser/browsersortmenu.h \
     repository/widgets/customtextedit.h \
     repository/soundfont/editor/editordialoginsertlink.h \

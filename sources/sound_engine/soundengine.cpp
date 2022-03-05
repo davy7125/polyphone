@@ -91,22 +91,25 @@ void SoundEngine::addVoiceInstance(Voice * voice)
     _mutexVoices.unlock();
 }
 
-void SoundEngine::stopAllVoices()
+void SoundEngine::stopAllVoices(bool allChannels)
 {
     for (int i = 0; i < _listInstances.size(); i++)
-        _listInstances.at(i)->stopAllVoicesInstance();
+        _listInstances.at(i)->stopAllVoicesInstance(allChannels);
 }
 
-void SoundEngine::stopAllVoicesInstance()
+void SoundEngine::stopAllVoicesInstance(bool allChannels)
 {
     _mutexVoices.lock();
-    while (!_listVoices.isEmpty())
+    for (int i = _listVoices.count() - 1; i >= 0; i--)
     {
-        // Signal emitted for the sample player (voice -1)
-        if (_listVoices.last()->getKey() == -1)
-            emit(readFinished(_listVoices.last()->getToken()));
+        if (allChannels || _listVoices.at(i)->getChannel() == -1)
+        {
+            // Signal emitted for the sample player (voice -1)
+            if (_listVoices.at(i)->getKey() == -1)
+                emit(readFinished(_listVoices.at(i)->getToken()));
 
-        delete _listVoices.takeLast();
+            delete _listVoices.takeAt(i);
+        }
     }
     _mutexVoices.unlock();
 }
@@ -152,8 +155,9 @@ void SoundEngine::syncNewVoicesInstance(quint32 delay)
     }
 }
 
-void SoundEngine::releaseNote(int numNote)
+void SoundEngine::releaseVoices(int sf2Id, int presetId, int channel, int key)
 {
+    //qWarning() << "RELEASE on channel" << channel << "key" << key << "sf2" << sf2Id << "preset" << presetId;
     foreach (SoundEngine * engine, _listInstances)
         engine->_mutexBuffer.lock();
 
@@ -161,7 +165,7 @@ void SoundEngine::releaseNote(int numNote)
         engine->_mutexVoices.lock();
 
     for (int i = 0; i < _listInstances.size(); i++)
-        _listInstances.at(i)->releaseNoteInstance(numNote);
+        _listInstances.at(i)->releaseVoicesInstance(sf2Id, presetId, channel, key);
 
     foreach (SoundEngine * engine, _listInstances)
         engine->_mutexVoices.unlock();
@@ -170,20 +174,17 @@ void SoundEngine::releaseNote(int numNote)
         engine->_mutexBuffer.unlock();
 }
 
-void SoundEngine::releaseNoteInstance(int numNote)
+void SoundEngine::releaseVoicesInstance(int sf2Id, int presetId, int channel, int key)
 {
-    if (numNote == -1)
+    Voice * voice;
+    for (int i = 0; i < _listVoices.size(); i++)
     {
-        // Stop playing a sample
-        for (int i = 0; i < _listVoices.size(); i++)
-            if (_listVoices.at(i)->getKey() < 0)
-                _listVoices.at(i)->release();
-    }
-    else
-    {
-        for (int i = 0; i < _listVoices.size(); i++)
-            if (_listVoices.at(i)->getKey() == numNote)
-                _listVoices.at(i)->release();
+        voice = _listVoices.at(i);
+        if ((sf2Id == -1 || voice->getSf2Id() == sf2Id) &&
+                (channel == -1 || presetId == -1 || voice->getPresetId() == -1 || voice->getPresetId() == presetId) &&
+                (channel == -2 || voice->getChannel() == channel) &&
+                (key == -2 || (key == -1 && voice->getKey() < 0) || voice->getKey() == key))
+            voice->release();
     }
 }
 

@@ -36,7 +36,7 @@ class VoiceParam
 {
 public:
     // Initialize a set of parameters (idPrstInst and idInstSmpl can be unknown)
-    VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int key, int vel);
+    VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int channel, int key, int vel);
 
     // Sample reading
     void prepareForSmpl(int key, SFSampleLink link);
@@ -57,8 +57,20 @@ public:
     qint32 getInteger(AttributeType type);
     quint32 getPosition(AttributeType type);
 
+    // Identification
+    int getChannel() { return _channel; }
+    int getKey() { return _key; }
+    int getSf2Id() { return _sf2Id; }
+    int getPresetId() { return _presetId; }
+
 private:
     SoundfontManager * _sm;
+
+    // Identification
+    int _channel;
+    int _key;
+    int _sf2Id;
+    int _presetId;
 
     // All parameters
     ModulatedParameter * _parameters[140];

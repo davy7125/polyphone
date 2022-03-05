@@ -27,8 +27,12 @@
 #include "modulatedparameter.h"
 #include "soundfontmanager.h"
 
-VoiceParam::VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int key, int vel) :
+VoiceParam::VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int channel, int key, int vel) :
     _sm(SoundfontManager::getInstance()),
+    _channel(channel),
+    _key(key),
+    _sf2Id(idSmpl.indexSf2),
+    _presetId(idPrstInst.typeElement == elementUnknown ? -1 : idPrstInst.indexElt),
     _modulatorGroupInst(_parameters, false),
     _modulatorGroupPrst(_parameters, true)
 {
@@ -67,8 +71,8 @@ VoiceParam::VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int key
     // Initialize the modulator groups
     int keyForComputation = _parameters[champ_keynum]->getIntValue();
     int velForComputation = _parameters[champ_velocity]->getIntValue();
-    _modulatorGroupInst.initialize(key, keyForComputation, velForComputation);
-    _modulatorGroupPrst.initialize(key, keyForComputation, velForComputation);
+    _modulatorGroupInst.initialize(channel, key, keyForComputation, velForComputation);
+    _modulatorGroupPrst.initialize(channel, key, keyForComputation, velForComputation);
 
     // Load modulators from the instrument and preset levels, if possible
     if (idInstSmpl.typeElement != elementUnknown)

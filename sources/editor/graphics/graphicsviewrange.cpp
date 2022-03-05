@@ -30,6 +30,7 @@
 #include "graphicslegenditem2.h"
 #include "graphicszoomline.h"
 #include "graphicskey.h"
+#include "noteevent.h"
 #include <QScrollBar>
 #include <QMouseEvent>
 #include <QApplication>
@@ -336,7 +337,7 @@ void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
         int velocity = 127 - qRound(p.y());
         if (velocity > 0)
         {
-            ContextManager::midi()->processKeyOn(key, velocity, true);
+            QApplication::postEvent(ContextManager::midi(), new NoteEvent(-1, key, velocity));
             _keyTriggered = key;
         }
     }
@@ -445,7 +446,8 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
     {
         if (_keyTriggered != -1)
         {
-            ContextManager::midi()->processKeyOff(_keyTriggered, true);
+
+            QApplication::postEvent(ContextManager::midi(), new NoteEvent(-1, _keyTriggered, 0));
             _keyTriggered = -1;
         }
     }

@@ -35,29 +35,16 @@ public:
     {
         PROPERTY_KEY_MIN,
         PROPERTY_KEY_NUMBER,
-        PROPERTY_COLORATION_TYPE,
         PROPERTY_COLOR_1,
         PROPERTY_COLOR_WHITE_KEYS,
         PROPERTY_COLOR_BLACK_KEYS,
-        PROPERTY_ROTATION,
-        PROPERTY_TRANSPOSE,
-        PROPERTY_CHANNEL,
-        PROPERTY_VELOCITY
+        PROPERTY_CHANNEL
     };
 
     enum CustomizationType
     {
         CUSTOMIZATION_TYPE_COLOR,
         CUSTOMIZATION_TYPE_MARKER
-    };
-
-    enum ColorationType
-    {
-        COLORATION_TYPE_NONE,
-        COLORATION_TYPE_UNIQUE,
-        COLORATION_TYPE_DUAL,
-        COLORATION_TYPE_CHANNEL,
-        COLORATION_TYPE_DEGREE
     };
 
     enum MarkerType
@@ -82,35 +69,37 @@ public:
     void resetCustomization(int key, CustomizationType type);
     void clearCustomization();
 
-    QSize sizeHint() const;
+    QSize sizeHint() const override;
     double ratio() const;
 
-    void triggerNote(int key, int velocity);
     void triggerGlowEffect();
 
+    void inputNoteOn(int midiNote, int vel = -1);
+    void inputNoteOff(int midiNote);
+
 signals:
-    void noteOn(int midiNote, int vel);
-    void noteOff(int midiNote);
     void mouseOver(int midiNote, int vel);
-    void polyPressureChanged(int midiNote, int pressure);
 
 public slots:
-    void inputNoteOn(int midiNote, int vel = -1, int channel = -1);
-    void inputNoteOff(int midiNote, int channel = -1);
     void updateMapping();
+
+private slots:
+    void onNoteOn(int k, int v);
+    void onNoteOff(int k);
+    void onPolyPressureChanged(int k, int v);
 
 protected:
     void initialize();
     void initScene(int startKey, int numKeys);
-    void resizeEvent(QResizeEvent *event);
+    void resizeEvent(QResizeEvent *event) override;
+
+    PianoScene * m_scene;
 
 private:
-    void setRotation(int r);
     void setStartKey(int key);
     void setNumKeys(int numKeys);
 
-    int m_rotation;
-    PianoScene * m_scene;
+    int m_channel;
 };
 
 #endif // PIANOKEYBD_H

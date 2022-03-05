@@ -38,9 +38,15 @@ public:
     virtual ~SoundEngine();
 
     static void addVoice(Voice * voice, QList<Voice *> friends = QList<Voice*>());
-    static void stopAllVoices();
+    static void stopAllVoices(bool allChannels);
     static void syncNewVoices();
-    static void releaseNote(int numNote);
+
+    // sf2Id: -1 (no filter) or specific sf2 id
+    // presetId: -1 (no filter) or specific preset id
+    // channel: -2 (all channels), -1 (GUI channel) or [0 - 15] (MIDI channel)
+    // key: -2 (all keys), -1 (all keys < 0) or a specific key
+    static void releaseVoices(int sf2Id, int presetId, int channel, int key);
+
     static void setGain(double gain);
     static void setChorus(int level, int depth, int frequency);
     static void setPitchCorrection(qint16 correction, bool repercute);
@@ -106,9 +112,9 @@ private:
     int getNbVoices();
     void closeAllInstance(int exclusiveClass, int numPreset, QList<Voice*> friends);
     void addVoiceInstance(Voice * voice);
-    void stopAllVoicesInstance();
+    void stopAllVoicesInstance(bool allChannels);
     void syncNewVoicesInstance(quint32 delay);
-    void releaseNoteInstance(int numNote);
+    void releaseVoicesInstance(int sf2Id, int presetId, int channel, int key);
     void setGainInstance(double gain);
     void setChorusInstance(int level, int depth, int frequency);
     void setPitchCorrectionInstance(qint16 correction, bool repercute);

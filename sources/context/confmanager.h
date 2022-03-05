@@ -47,7 +47,8 @@ public:
         SECTION_SOUND_ENGINE,
         SECTION_TOOLS,
         SECTION_WARNINGS,
-        SECTION_REPOSITORY
+        SECTION_REPOSITORY,
+        SECTION_EXTENSIONS
     };
 
     enum ToolType
@@ -77,17 +78,17 @@ public:
 
     ConfManager();
 
-    /// Get a value from a section
+    /// Get / set a value for a section
     QVariant getValue(Section section, QString key, QVariant defaultValue) const;
-
-    /// Get a value from a tool
-    QVariant getToolValue(ToolType toolType, QString toolName, QString key, QVariant defaultValue) const;
-
-    /// Set a value in a section
     void setValue(Section section, QString key, QVariant value);
 
-    /// Set a value in a tool
+    /// Get / set a value for a tool
+    QVariant getToolValue(ToolType toolType, QString toolName, QString key, QVariant defaultValue) const;
     void setToolValue(ToolType toolType, QString toolName, QString key, QVariant value);
+
+    /// Get / set a value from an extension
+    QVariant getExtensionValue(QString extensionId, QString key, QVariant defaultValue) const;
+    void setExtensionValue(QString extensionId, QString key, QVariant value);
 
     /// Get the configuration file directory
     QString getConfigDir();
@@ -118,7 +119,7 @@ private:
     /// Clear everything
     void clear();
 
-    QString getFullKey(Section section, QString key) const;
+    QString getFullKey(Section section, QString subSection, QString key) const;
     QString getFullKey(ToolType toolType, QString toolName, QString key) const;
     QSettings _settings;
 };

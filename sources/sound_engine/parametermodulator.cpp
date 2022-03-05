@@ -26,7 +26,7 @@
 #include "modulatedparameter.h"
 #include "contextmanager.h"
 
-ParameterModulator::ParameterModulator(ModulatorData &modData, bool isPrst, int initialKey, int keyForComputation, int velForComputation) :
+ParameterModulator::ParameterModulator(ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation) :
     _data(modData),
     _inputNumber(0),
     _inputCount(0),
@@ -37,6 +37,7 @@ ParameterModulator::ParameterModulator(ModulatorData &modData, bool isPrst, int 
     _outputParameter(nullptr),
     _outputModulator(nullptr),
     _isPrst(isPrst),
+    _channel(channel),
     _initialKey(initialKey),
     _keyForComputation(keyForComputation),
     _velForComputation(velForComputation)
@@ -102,7 +103,6 @@ bool ParameterModulator::computeOutput()
     input1 = input1 < 0 ? 0 : _data.srcOper.applyShape(input1);
     input2 = input2 < 0 ? 0 : _data.amtSrcOper.applyShape(input2);
 
-
     // Compute data
     double result = input1 * input2 * _data.amount;
     if (_data.transOper == SFTransform::absolute_value && result < 0)
@@ -148,7 +148,7 @@ double ParameterModulator::getValue(SFModulator sfMod)
     if (sfMod.CC)
     {
         // Midi controllers
-        value = ContextManager::midi()->getControllerValue(sfMod.Index);
+        value = ContextManager::midi()->getControllerValue(_channel, sfMod.Index);
     }
     else
     {
@@ -167,17 +167,17 @@ double ParameterModulator::getValue(SFModulator sfMod)
             break;
         case GC_polypressure:
             // After touch by key
-            value = ContextManager::midi()->getPolyPressure(_initialKey);
+            value = ContextManager::midi()->getPolyPressure(_channel, _initialKey);
             break;
         case GC_channelPressure:
             // After touch for the whole keyboard
-            value = ContextManager::midi()->getMonoPressure();
+            value = ContextManager::midi()->getMonoPressure(_channel);
             break;
         case GC_pitchWheel:
-            value = 64.0 * (ContextManager::midi()->getBendValue() + 1.0);
+            value = 64.0 * (ContextManager::midi()->getBendValue(_channel) + 1.0);
             break;
         case GC_pitchWheelSensitivity:
-            value = ContextManager::midi()->getBendSensitivityValue();
+            value = ContextManager::midi()->getBendSensitivityValue(_channel);
             break;
         case GC_link: default:
             // Link (the value will come later)

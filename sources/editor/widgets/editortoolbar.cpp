@@ -37,9 +37,11 @@
 #include "dialognewelement.h"
 #include "utils.h"
 #include "tools/auto_distribution/toolautodistribution.h"
+#include "extensionmanager.h"
 
 bool EditorToolBar::s_recorderOpen = false;
 bool EditorToolBar::s_keyboardOpen = false;
+QMap<int, bool> EditorToolBar::s_midiExtensionOpen;
 QList<EditorToolBar *> EditorToolBar::s_instances;
 
 EditorToolBar::EditorToolBar(QWidget * parent) : QWidget(parent),
@@ -53,8 +55,8 @@ EditorToolBar::EditorToolBar(QWidget * parent) : QWidget(parent),
     setAttribute(Qt::WA_StyledBackground, true);
     this->setStyleSheet("EditorToolBar{background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}");
     QString separatorStyleSheet = "QFrame{border: 1px solid " +
-        ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
-        ";margin: 7px 3px;}";
+            ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
+            ";margin: 7px 3px;}";
     ui->separator_1->setStyleSheet(separatorStyleSheet);
     ui->separator_2->setStyleSheet(separatorStyleSheet);
     ui->separator_3->setStyleSheet(separatorStyleSheet);
@@ -84,6 +86,24 @@ EditorToolBar::EditorToolBar(QWidget * parent) : QWidget(parent),
     ui->pushShowKeyboard->setChecked(s_keyboardOpen);
     ui->pushShowKeyboard->blockSignals(false);
 
+    // Possible extensions
+    for (int i = 0; i < ExtensionManager::midi()->count(); i++)
+    {
+        StyledAction * action = new StyledAction(this);
+        action->setData(i);
+        action->setCheckable(true);
+        ui->horizontalLayout->addWidget(action);
+        action->initialize(ExtensionManager::midi()->getTitle(i), ExtensionManager::midi()->getIconPath(i));
+        if (!s_midiExtensionOpen.contains(i))
+            s_midiExtensionOpen[i] = false;
+        QDialog * dialog = ExtensionManager::midi()->getDialog(i);
+        connect(dialog, SIGNAL(finished(int)), this, SLOT(onExtensionDialogClosed(int)));
+
+        action->setChecked(s_midiExtensionOpen[i]);
+        connect(action, SIGNAL(clicked()), this, SLOT(onMidiExtensionActionClicked()));
+        _midiControllerActions << action;
+    }
+
     s_instances << this;
 }
 
@@ -95,6 +115,13 @@ EditorToolBar::~EditorToolBar()
     {
         s_keyboardOpen = false;
         s_recorderOpen = false;
+
+        for (int i = 0; i < ExtensionManager::midi()->count(); i++)
+        {
+            s_midiExtensionOpen[i] = false;
+            QDialog * dialog = ExtensionManager::midi()->getDialog(i);
+            dialog->setVisible(false);
+        }
     }
 }
 
@@ -468,4 +495,44 @@ void EditorToolBar::on_pushSave_clicked()
     this->setFocus();
 
     OutputFactory::save(WindowManager::getInstance()->getCurrentSf2(), false);
+}
+
+void EditorToolBar::onMidiExtensionActionClicked()
+{
+    // Update the state of the other buttons
+    StyledAction * action = dynamic_cast<StyledAction *>(QObject::sender());
+    updateMidiExtensionButtonsState(action->getData(), action->isChecked());
+
+    // Show or hide the dialog
+    QDialog * dialog = ExtensionManager::midi()->getDialog(action->getData());
+    dialog->setVisible(action->isChecked());
+}
+
+void EditorToolBar::onExtensionDialogClosed(int result)
+{
+    Q_UNUSED(result)
+
+    QDialog * sender = dynamic_cast<QDialog *>(QObject::sender());
+    for (int i = 0; i < ExtensionManager::midi()->count(); i++)
+    {
+        if (ExtensionManager::midi()->getDialog(i) == sender)
+        {
+            s_midiExtensionOpen[i] = false;
+            this->blockSignals(true);
+            this->_midiControllerActions[i]->setChecked(false);
+            this->blockSignals(false);
+            break;
+        }
+    }
+}
+
+void EditorToolBar::updateMidiExtensionButtonsState(int midiExtensionIndex, bool isChecked)
+{
+    s_midiExtensionOpen[midiExtensionIndex] = isChecked;
+    foreach (EditorToolBar * toolBar, s_instances)
+    {
+        toolBar->blockSignals(true);
+        toolBar->_midiControllerActions[midiExtensionIndex]->setChecked(isChecked);
+        toolBar->blockSignals(false);
+    }
 }

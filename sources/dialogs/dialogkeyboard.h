@@ -26,6 +26,8 @@
 #define DIALOGKEYBOARD_H
 
 #include <QDialog>
+class PianoKeybdCustom;
+class ControllerArea;
 
 namespace Ui {
 class DialogKeyboard;
@@ -42,14 +44,21 @@ public:
     // Focus on the keyboard and animate with a glow effect
     void glow();
 
+    // Elements of the dialog
+    PianoKeybdCustom * getKeyboard();
+    ControllerArea * getControllerArea();
+
+    // Update values
+    void updatePolyPressure(int key, int pressure);
+    void updateKeyPlayed(int key, int vel);
+
 protected:
     void closeEvent(QCloseEvent * event) override;
+    void keyPressEvent(QKeyEvent * event) override;
 
 private slots:
     void on_comboType_currentIndexChanged(int index);
     void onMouseHover(int key, int vel);
-    void keyPlayed(int key, int vel);
-    void polyPressureChanged(int key, int pressure);
     void on_pushExpand_clicked();
 
 private:

@@ -30,23 +30,30 @@
 class NoteEvent : public QEvent
 {
 public:
-    NoteEvent(unsigned char note, unsigned char val) : QEvent(QEvent::User),
-          _note(note),
-          _velocity(val) {}
+    NoteEvent(qint8 channel, qint8 note, qint8 val) : QEvent(QEvent::User),
+        _channel(channel),
+        _note(note),
+        _velocity(val) {}
 
-    unsigned char getNote() const
+    qint8 getChannel() const
+    {
+        return _channel;
+    }
+
+    qint8 getNote() const
     {
         return _note;
     }
 
-    unsigned char getVelocity() const
+    qint8 getVelocity() const
     {
         return _velocity;
     }
 
 protected:
-    unsigned char _note;
-    unsigned char _velocity;
+    qint8 _channel;
+    qint8 _note;
+    qint8 _velocity;
 };
 
 #endif // NOTEEVENT_H

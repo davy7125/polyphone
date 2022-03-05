@@ -27,9 +27,8 @@
 #include "contextmanager.h"
 #include "editortoolbar.h"
 
-// Note: cannot be Qt::Tool instead of Qt::Dialog because keys must be catched before the QActions of the QMainWindow
 DialogKeyboard::DialogKeyboard(QWidget *parent) :
-    QDialog(parent, Qt::Dialog | Qt::WindowCloseButtonHint),
+    QDialog(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint),
     ui(new Ui::DialogKeyboard)
 {
     ui->setupUi(this);
@@ -58,15 +57,11 @@ DialogKeyboard::DialogKeyboard(QWidget *parent) :
         ui->comboType->setCurrentIndex(2);
         break;
     }
-    ContextManager::midi()->setKeyboard(ui->keyboard);
-    ContextManager::midi()->setControllerArea(ui->controllerArea);
+    ContextManager::midi()->setKeyboard(this);
     connect(ContextManager::configuration(), SIGNAL(keyMapChanged()), ui->keyboard, SLOT(updateMapping()));
 
-    // Connections for displaying the current note, velocity and aftertouch
-    connect(ui->keyboard, SIGNAL(mouseOver(int, int)), this, SLOT(onMouseHover(int,int)));
-    connect(ui->keyboard, SIGNAL(polyPressureChanged(int, int)), this, SLOT(polyPressureChanged(int,int)));
-    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), this, SLOT(keyPlayed(int, int)));
-    connect(ContextManager::midi(), SIGNAL(polyPressureChanged(int,int)), this, SLOT(polyPressureChanged(int, int)));
+    // Connections for displaying the current note and velocity
+    connect(ui->keyboard, SIGNAL(mouseOver(int,int)), this, SLOT(onMouseHover(int,int)));
 
     // Visibility of the control area
     updateControlAreaVisibility();
@@ -85,7 +80,17 @@ DialogKeyboard::~DialogKeyboard()
     delete ui;
 }
 
-void DialogKeyboard::keyPlayed(int key, int vel)
+PianoKeybdCustom * DialogKeyboard::getKeyboard()
+{
+    return ui->keyboard;
+}
+
+ControllerArea * DialogKeyboard::getControllerArea()
+{
+    return ui->controllerArea;
+}
+
+void DialogKeyboard::updateKeyPlayed(int key, int vel)
 {
     if (key >= 0 && key <= 127)
     {
@@ -124,7 +129,7 @@ void DialogKeyboard::onMouseHover(int key, int vel)
     }
 }
 
-void DialogKeyboard::polyPressureChanged(int key, int pressure)
+void DialogKeyboard::updatePolyPressure(int key, int pressure)
 {
     if (_triggeredKeys.empty())
         return;
@@ -255,4 +260,11 @@ void DialogKeyboard::resizeWindow()
     // Resize the window
     this->adjustSize();
     this->resize(windowWidth, windowHeight + 3); // Adding a small offset (3) seems to be necessary...
+}
+
+void DialogKeyboard::keyPressEvent(QKeyEvent * event)
+{
+    // Prevent the escape key from closing the window
+    if (event->key() != Qt::Key_Escape)
+          QDialog::keyPressEvent(event);
 }

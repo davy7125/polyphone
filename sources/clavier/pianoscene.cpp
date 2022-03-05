@@ -92,14 +92,9 @@ void PianoScene::initConfiguration(PianoScene * previousScene)
     {
         // recovering configuration
         m_mousePressed = previousScene->m_mousePressed;
-        m_channel = previousScene->m_channel;
-        m_velocity = previousScene->m_velocity;
         m_lastVelocity = previousScene->m_lastVelocity;
         m_lastNote = previousScene->m_lastNote;
-        m_autoVelocity = previousScene->m_autoVelocity;
-        m_colorationType = previousScene->m_colorationType;
-        m_transpose = previousScene->m_transpose;
-        for (int i = -2; i < 16; i++)
+        for (int i = -2; i <= 0; i++)
             m_palette[i] = previousScene->m_palette.value(i);
         m_customColors = previousScene->m_customColors;
         m_markers = previousScene->m_markers;
@@ -114,35 +109,13 @@ void PianoScene::initConfiguration(PianoScene * previousScene)
     {
         // default configuration
         m_mousePressed = false;
-        m_channel = 0;
-        m_velocity = 127;
         m_lastVelocity = 127;
         m_lastNote = 48;
-        m_autoVelocity = true;
-        m_colorationType = PianoKeybd::COLORATION_TYPE_UNIQUE;
-        m_transpose = 0;
 
         // color initialisation
-        m_palette[-4] = QColor(255, 255, 255);
-        m_palette[-3] = QColor(  0,   0,   0);
         m_palette[-2] = QColor(  0,   0,   0);
         m_palette[-1] = QColor(255, 255, 255);
         m_palette[0]  = QColor(  0,   0, 255);
-        m_palette[1]  = QColor(255,   0,   0);
-        m_palette[2]  = QColor(  0, 255,   0);
-        m_palette[3]  = QColor(  0, 127, 127);
-        m_palette[4]  = QColor(127, 127,   0);
-        m_palette[5]  = QColor(  0,   0, 127);
-        m_palette[6]  = QColor(127,   0,   0);
-        m_palette[7]  = QColor(  0, 127,   0);
-        m_palette[8]  = QColor(  0, 255, 255);
-        m_palette[9]  = QColor(255, 255,   0);
-        m_palette[10] = QColor(255,   0, 255);
-        m_palette[11] = QColor(127, 127, 127);
-        m_palette[12] = QColor( 85, 170, 127);
-        m_palette[13] = QColor(255, 110, 110);
-        m_palette[14] = QColor( 85,  40, 210);
-        m_palette[15] = QColor(  0, 230, 160);
         
         m_lastNoteUp = 48;
         m_lastNoteDown = 48;
@@ -202,45 +175,13 @@ QSize PianoScene::sizeHint() const
     return QSize(sceneWidth(m_startKey, m_numKeys), KEYHEIGHT);
 }
 
-void PianoScene::showKeyOn(PianoKey* key, int vel, int channel)
+void PianoScene::showKeyOn(PianoKey* key, int vel)
 {
-    //    if (vel == -1)
-    //        vel = m_velocity;
-    if (channel == -1)
-        channel = m_channel;
     if (vel >= 0)
     {
-        if (m_colorationType == PianoKeybd::COLORATION_TYPE_NONE)
-        {
-            if (key->isBlack())
-                key->setPressedBrush(PianoKey::BLACK_BRUSH);
-            else
-                key->setPressedBrush(PianoKey::WHITE_BRUSH);
-        }
-        else
-        {
-            QColor color;
-            switch (m_colorationType)
-            {
-            case PianoKeybd::COLORATION_TYPE_UNIQUE:
-                color = m_palette.value(0);
-                break;
-            case PianoKeybd::COLORATION_TYPE_DUAL:
-                color = m_palette.value(key->isBlack());
-                break;
-            case PianoKeybd::COLORATION_TYPE_CHANNEL:
-                color = m_palette.value(channel % 16);
-                break;
-            case PianoKeybd::COLORATION_TYPE_DEGREE:
-                color = m_palette.value(key->getNote() % 12);
-                break;
-            default:
-                break;
-            }
-
-            QColor base = key->isBlack() ? m_palette.value(-1) : m_palette.value(-2);
-            key->setPressedBrush(ThemeManager::mix(base, color, (double)vel / 127.));
-        }
+        QColor color = m_palette.value(0);
+        QColor base = key->isBlack() ? m_palette.value(-2) : m_palette.value(-1);
+        key->setPressedBrush(ThemeManager::mix(base, color, (double)vel / 127.));
     }
 
     key->setPressed(true);
@@ -253,42 +194,31 @@ void PianoScene::showKeyOff(PianoKey* key)
     key->setPressed(false);
 }
 
-void PianoScene::showNoteOn(const int note, int vel, int channel)
+void PianoScene::showNoteOn(const int note, int vel)
 {
-    int n = note - m_transpose;
-    if ((note >= m_minNote) && (note <= m_maxNote) && m_keys.contains(n))
-        showKeyOn(m_keys.value(n), vel, channel);
+    if ((note >= m_minNote) && (note <= m_maxNote) && m_keys.contains(note))
+        showKeyOn(m_keys.value(note), vel);
 }
 
-void PianoScene::showNoteOff(const int note, int channel)
+void PianoScene::showNoteOff(const int note)
 {
-    Q_UNUSED(channel)
-
-    int n = note - m_transpose;
-    if ((note >= m_minNote) && (note <= m_maxNote) && m_keys.contains(n))
-        showKeyOff(m_keys.value(n));
+    if ((note >= m_minNote) && (note <= m_maxNote) && m_keys.contains(note))
+        showKeyOff(m_keys.value(note));
 }
 
 void PianoScene::triggerNoteOn(const int note, const int vel)
 {
-    int n = note + m_transpose;
-    if ((n >= m_minNote) && (n <= m_maxNote))
-        emit noteOn(n, vel);
+    if ((note >= m_minNote) && (note <= m_maxNote))
+        emit noteOn(note, vel);
     
     m_lastVelocity = vel;
     m_lastNote = note;
 }
 
-void PianoScene::triggerNoteOff( const int note )
+void PianoScene::triggerNoteOff(const int note)
 {
-    int n = note + m_transpose;
-    if (n >= m_minNote && n <= m_maxNote)
-        emit noteOff(n);
-}
-
-int PianoScene::getKeyVelocity()
-{
-    return m_autoVelocity ? m_lastVelocity : m_velocity;
+    if (note >= m_minNote && note <= m_maxNote)
+        emit noteOff(note);
 }
 
 void PianoScene::keyOn(PianoKey* key, qreal pressure)
@@ -368,8 +298,8 @@ void PianoScene::mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent)
     {
         PianoKey* key = getKeyForPos(mouseEvent->scenePos());
         if (key)
-            emit(mouseOver(key->getNote() + m_transpose,
-                 getPressureFromPos(mouseEvent->scenePos(), key->isBlack())));
+            emit(mouseOver(key->getNote(),
+                           getPressureFromPos(mouseEvent->scenePos(), key->isBlack())));
         else
             emit(mouseOver(-1, -1));
     }
@@ -443,7 +373,7 @@ void PianoScene::keyPressEvent(QKeyEvent * keyEvent)
             QString keyStr = QKeySequence(key).toString();
             int note = _keybdMap.getKey(QKeySequence(modifier + keyStr));
             if (note > -1)
-                keyNoteOn(note, getKeyVelocity());
+                keyNoteOn(note, m_lastVelocity);
         }
     }
     keyEvent->accept();
@@ -492,59 +422,6 @@ bool PianoScene::event(QEvent *event)
 {
     switch (event->type())
     {
-    case QEvent::TouchBegin:
-    case QEvent::TouchEnd:
-    case QEvent::TouchUpdate:
-    {break; // Attempt to fix https://github.com/davy7125/polyphone/issues/31
-#if QT_VERSION >= 0x060000
-        QTouchEvent *touchEvent = static_cast<QTouchEvent*>(event);
-        QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->points();
-        foreach (const QTouchEvent::TouchPoint& touchPoint, touchPoints)
-        {
-            // Make sure the touchpoint started in the scene
-            if (getKeyForPos(touchPoint.scenePressPosition()) == nullptr)
-                continue;
-
-            switch (touchPoint.state())
-            {
-            case QEventPoint::Unknown:
-                break;
-            case QEventPoint::Stationary: {
-                // Pressure changed maybe
-                PianoKey* key = getKeyForPos(touchPoint.scenePosition());
-                if (key != nullptr && key->isPressed())
-                    polyPressureChanged(key->getNote(), 127 * touchPoint.pressure());
-                break;
-            }
-            case QEventPoint::Released: {
-                PianoKey* key = getKeyForPos(touchPoint.scenePosition());
-                if (key != nullptr && key->isPressed())
-                    keyOff(key);
-                break;
-            }
-            case QEventPoint::Pressed: {
-                PianoKey* key = getKeyForPos(touchPoint.scenePosition());
-                if (key != nullptr && !key->isPressed()) {
-                    keyOn(key, 127 * touchPoint.pressure());
-                    key->ensureVisible();
-                }
-                break;
-            }
-            case QEventPoint::Updated: {
-                PianoKey* key = getKeyForPos(touchPoint.scenePosition());
-                PianoKey* lastkey = getKeyForPos(touchPoint.sceneLastPosition());
-                if (lastkey != nullptr && lastkey != key && lastkey->isPressed())
-                    keyOff(lastkey);
-                if (key != nullptr && !key->isPressed())
-                    keyOn(key, 127 * touchPoint.pressure());
-                break;
-            }
-            }
-        }
-        event->accept();
-        return true;
-#endif
-    }
     case QEvent::Leave:
         mouseOver(-1, -1);
         break;
@@ -553,14 +430,6 @@ bool PianoScene::event(QEvent *event)
     }
 
     return QGraphicsScene::event(event);
-}
-
-void PianoScene::allKeysOff()
-{
-    foreach (PianoKey* key, m_keys)
-    {
-        key->setPressed(false);
-    }
 }
 
 void PianoScene::refreshKeys()
@@ -582,20 +451,6 @@ void PianoScene::refreshKeys()
     }
 
     invalidate();
-}
-
-void PianoScene::setTranspose(const int transpose)
-{
-    if (m_transpose != transpose && transpose > -12 && transpose < 12)
-    {
-        m_transpose = transpose;
-    }
-}
-
-void PianoScene::setColorationType(PianoKeybd::ColorationType colorationType)
-{
-    if (m_colorationType != colorationType)
-        m_colorationType = colorationType;
 }
 
 void PianoScene::setColor(int num, QColor color)

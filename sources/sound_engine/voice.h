@@ -41,10 +41,13 @@ public:
     // * -1 when we use "play" for reading a sample
     // * -2 when we want to read the stereo part of a sample, with "play"
     // >= 0 otherwise (sample, instrument or preset level)
-    Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int initialKey, VoiceParam *voiceParam, int token);
+    Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, VoiceParam *voiceParam, int token);
     ~Voice();
 
-    int getKey() { return _initialKey; }
+    int getChannel() { return _voiceParam->getChannel(); }
+    int getSf2Id() { return _voiceParam->getSf2Id(); }
+    int getPresetId() { return _voiceParam->getPresetId(); }
+    int getKey() { return _voiceParam->getKey(); }
     int getToken() { return _token; }
     void release(bool quick = false);
     void setGain(double gain);
@@ -89,7 +92,6 @@ private:
     QByteArray _baData;
     quint32 _smplRate, _audioSmplRate;
     double _gain;
-    int _initialKey; // Only used to know which key triggered the sound, not for computing data
     VoiceParam * _voiceParam;
     int _token;
 

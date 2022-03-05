@@ -26,6 +26,7 @@
 #include "basetypes.h"
 #include <QApplication>
 #include "contextmanager.h"
+#include "pianoscene.h"
 
 // Keyboard colors
 QColor PianoKeybdCustom::COLOR_PRESSED;
@@ -72,8 +73,8 @@ PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent)
 
     /// CONNECTIONS
 
-    connect(this, SIGNAL(noteOn(int,int)), this, SLOT(setKey(int,int)));
-    connect(this, SIGNAL(noteOff(int)), this, SLOT(removeCurrentRange(int)));
+    connect(m_scene, SIGNAL(noteOn(int,int)), this, SLOT(setKey(int,int)));
+    connect(m_scene, SIGNAL(noteOff(int)), this, SLOT(removeCurrentRange(int)));
 }
 
 void PianoKeybdCustom::addRangeAndRootKey(int rootKey, int noteMin, int noteMax)

@@ -90,7 +90,7 @@ public:
 
 public slots:
     // A key is being played or not played anymore (if velocity is 0)
-    void keyPlayed(int key, int velocity)
+    void onKeyPlayed(int key, int velocity)
     {
         if (key != -1 && this->isVisible())
             this->keyPlayedInternal(key, velocity);

@@ -30,16 +30,23 @@
 class ProgramEvent : public QEvent
 {
 public:
-    ProgramEvent(unsigned char value) : QEvent((QEvent::Type)(QEvent::User+5)),
-          _value(value) {}
+    ProgramEvent(qint8 channel, quint8 value) : QEvent((QEvent::Type)(QEvent::User+5)),
+        _channel(channel),
+        _value(value) {}
 
-    unsigned char getValue() const
+    qint8 getChannel() const
+    {
+        return _channel;
+    }
+
+    quint8 getValue() const
     {
         return _value;
     }
 
 protected:
-    unsigned char _value;
+    qint8 _channel;
+    quint8 _value;
 };
 
 #endif // PROGRAMEVENT_H

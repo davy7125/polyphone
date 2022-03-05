@@ -30,16 +30,23 @@
 class MonoPressureEvent : public QEvent
 {
 public:
-    MonoPressureEvent(unsigned char val) : QEvent((QEvent::Type)(QEvent::User+3)),
-          _pressure(val) {}
+    MonoPressureEvent(qint8 channel, quint8 val) : QEvent((QEvent::Type)(QEvent::User+3)),
+        _channel(channel),
+        _pressure(val) {}
 
-    unsigned char getPressure() const
+    qint8 getChannel() const
+    {
+        return _channel;
+    }
+
+    quint8 getPressure() const
     {
         return _pressure;
     }
 
 protected:
-    unsigned char _pressure;
+    qint8 _channel;
+    quint8 _pressure;
 };
 
 #endif // MONOPRESSUREEVENT_H

@@ -48,6 +48,7 @@ public:
 
     static void updateRecorderButtonsState(bool isChecked);
     static void updateKeyboardButtonsState(bool isChecked);
+    static void updateMidiExtensionButtonsState(int midiExtensionIndex, bool isChecked);
 
 public slots:
     void onSelectionChanged(IdList ids);
@@ -74,11 +75,14 @@ private slots:
     void on_pushShowRecorder_clicked();
     void on_pushShowKeyboard_clicked();
 
+    void onMidiExtensionActionClicked();
+    void onExtensionDialogClosed(int result);
+
 private:
     Ui::EditorToolBar *ui;
 
     int _sf2Index;
-    QList<StyledAction *> _displayActions;
+    QList<StyledAction *> _displayActions, _midiControllerActions;
     bool _updatingDisplayOptions;
     ToolMenu * _toolMenu;
     IdList _currentSelection;
@@ -86,6 +90,7 @@ private:
     static QList<EditorToolBar *> s_instances;
     static bool s_recorderOpen;
     static bool s_keyboardOpen;
+    static QMap<int, bool> s_midiExtensionOpen;
 };
 
 

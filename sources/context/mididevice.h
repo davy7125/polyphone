@@ -26,15 +26,13 @@
 #define MIDIDEVICE_H
 
 #include <QString>
-#include <QStringList>
 #include <QObject>
-#include <QList>
 #include "rtmidi/RtMidi.h"
 class ConfManager;
 class RtMidiIn;
+class DialogKeyboard;
 class PianoKeybdCustom;
 class Synth;
-class ControllerArea;
 
 class MidiDevice: public QObject
 {
@@ -46,65 +44,65 @@ public:
 
     // Initialize the midi device
     QMap<QString, QString> getMidiList();
-    void openMidiPort(QString source); // Source in the form "{api type]#{port number}"
+    void openMidiPort(QString source); // Source in the form "{api type}#{port number}"
 
     // Connect the keyboard
-    void setKeyboard(PianoKeybdCustom * keyboard);
-    PianoKeybdCustom * keyboard() { return _keyboard; }
-
-    // Connect the controller area
-    void setControllerArea(ControllerArea * controllerArea);
+    void setKeyboard(DialogKeyboard * dialogKeyboard) { _dialogKeyboard = dialogKeyboard; }
+    PianoKeybdCustom * keyboard();
 
     // Stop all keys
     void stopAll();
 
     // Get last values (-1 if not received yet)
-    int getControllerValue(int controllerNumber);
-    float getBendValue();
-    float getBendSensitivityValue();
-    int getMonoPressure();
-    int getPolyPressure(int key);
-
-public slots:
-    void processKeyOn(int key, int vel, bool syncKeyboard = false);
-    void processKeyOff(int key, bool syncKeyboard = false);
-    void processPolyPressureChanged(int key, int pressure, bool syncKeyboard = false);
-    void processMonoPressureChanged(int value, bool syncControllerArea = false);
-    void processControllerChanged(int num, int value, bool syncControllerArea = false);
-    void processBendChanged(float value, bool syncControllerArea = false);
-    void processBendSensitivityChanged(float semitones, bool syncControllerArea = false);
+    int getControllerValue(int channel, int controllerNumber);
+    float getBendValue(int channel);
+    float getBendSensitivityValue(int channel);
+    int getMonoPressure(int channel);
+    int getPolyPressure(int channel, int key);
 
 signals:
+    // Emit key ON / OFF for the editor (channel -1)
     void keyPlayed(int key, int vel);
-    void polyPressureChanged(int key, int pressure);
-    void monoPressureChanged(int value);
-    void controllerChanged(int num, int value);
-    void bendChanged(float value);
-    void bendSensitivityChanged(float semitones);
 
 protected:
     void customEvent(QEvent * event);
 
 private:
-    void getMidiList(RtMidi::Api api, QMap<QString, QString> *map);
+    struct MIDI_State
+    {
+        // Configuration of a channel, the values being written and read by different threads
+        volatile int _controllerValues[128];
+        volatile float _bendValue;
+        volatile float _bendSensitivityValue;
+        volatile int _monoPressureValue;
+        volatile int _polyPressureValues[128];
 
-    PianoKeybdCustom * _keyboard;
-    ControllerArea * _controllerArea;
+        // RPN history since we need 4 messages to know what command it is
+        int _rpnHistoryControllers[4];
+        int _rpnHistoryValues[4];
+        quint8 _rpnHistoryPosition;
+    };
+
+    void getMidiList(RtMidi::Api api, QMap<QString, QString> *map);
+    void processKeyOn(int channel, int key, int vel);
+    void processKeyOff(int channel, int key);
+    void processPolyPressureChanged(int channel, int key, int pressure);
+    void processMonoPressureChanged(int channel, int value);
+    void processControllerChanged(int channel, int num, int value);
+    void processBendChanged(int channel, float value);
+    void processBendSensitivityChanged(int channel, float semitones);
+
+    DialogKeyboard * _dialogKeyboard;
     ConfManager * _configuration;
     RtMidiIn * _midiin;
     Synth * _synth;
-    QList<QPair<int, int> > _rpnHistory;
 
-    // Last values
-    volatile int _controllerValues[128];
-    volatile float _bendValue;
-    volatile float _bendSensitivityValue;
-    volatile int _monoPressureValue;
-    volatile int _polyPressureValues[128];
+    // Last values, first is channel -1 (for the editor) then channel 1 to 16
+    MIDI_State _midiStates[17];
 
-    // Sustain / Sostenuto pedals
-    QList<int> _sustainedKeys;
-    QList<int> _sostenutoMemoryKeys;
+    // Sustain / Sostenuto pedals (channel -1 only)
+    bool _sustainedKeys[128];
+    bool _sostenutoMemoryKeys[128];
     bool _isSustainOn, _isSostenutoOn;
 };
 

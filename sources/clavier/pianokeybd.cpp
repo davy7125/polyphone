@@ -20,11 +20,14 @@
 #include "pianokeybd.h"
 #include "pianoscene.h"
 #include "keyboardmap.h"
-
+#include "noteevent.h"
+#include "polypressureevent.h"
+#include "contextmanager.h"
+#include <QApplication>
 
 PianoKeybd::PianoKeybd(QWidget *parent, const int startKey, const int numKeys) : QGraphicsView(parent),
-      m_rotation(0),
-      m_scene(nullptr)
+    m_scene(nullptr),
+    m_channel(-1)
 {
     initialize();
     initScene(startKey, numKeys);
@@ -41,10 +44,10 @@ void PianoKeybd::initScene(int startKey, int numKeys)
     PianoScene * oldScene = m_scene;
     m_scene = new PianoScene(startKey, numKeys, oldScene, this);
     delete oldScene;
-    connect(m_scene, SIGNAL(noteOn(int,int)), SIGNAL(noteOn(int,int)));
-    connect(m_scene, SIGNAL(noteOff(int)), SIGNAL(noteOff(int)));
-    connect(m_scene, SIGNAL(mouseOver(int, int)), SIGNAL(mouseOver(int, int)));
-    connect(m_scene, SIGNAL(polyPressureChanged(int, int)), SIGNAL(polyPressureChanged(int, int)));
+    connect(m_scene, SIGNAL(noteOn(int,int)), this, SLOT(onNoteOn(int,int)));
+    connect(m_scene, SIGNAL(noteOff(int)), this, SLOT(onNoteOff(int)));
+    connect(m_scene, SIGNAL(mouseOver(int, int)), this, SIGNAL(mouseOver(int, int)));
+    connect(m_scene, SIGNAL(polyPressureChanged(int,int)), this, SLOT(onPolyPressureChanged(int,int)));
     setScene(m_scene);
 }
 
@@ -78,23 +81,11 @@ void PianoKeybd::set(KeyboardProperty keyboardProperty, QVariant value)
     case PROPERTY_KEY_NUMBER:
         setNumKeys(value.toInt());
         break;
-    case PROPERTY_COLORATION_TYPE:
-        m_scene->setColorationType((ColorationType)value.toInt());
-        break;
     case PROPERTY_COLOR_BLACK_KEYS: m_scene->setColor(-2, value.value<QColor>()); break;
     case PROPERTY_COLOR_WHITE_KEYS: m_scene->setColor(-1, value.value<QColor>()); break;
     case PROPERTY_COLOR_1:          m_scene->setColor(0,  value.value<QColor>()); break;
-    case PROPERTY_ROTATION:
-        setRotation(value.toInt());
-        break;
-    case PROPERTY_TRANSPOSE:
-        m_scene->setTranspose(value.toInt());
-        break;
     case PROPERTY_CHANNEL:
-        m_scene->setChannel(value.toInt());
-        break;
-    case PROPERTY_VELOCITY:
-        m_scene->setVelocity(value.toInt());
+        m_channel = value.toInt();
         break;
     }
 }
@@ -110,37 +101,14 @@ QVariant PianoKeybd::get(KeyboardProperty keyboardProperty)
     case PROPERTY_KEY_NUMBER:
         vRet = m_scene->numKeys();
         break;
-    case PROPERTY_COLORATION_TYPE:
-        vRet = (int)m_scene->getColorationType();
-        break;
     case PROPERTY_COLOR_BLACK_KEYS: vRet = m_scene->getColor(-2); break;
     case PROPERTY_COLOR_WHITE_KEYS: vRet = m_scene->getColor(-1); break;
     case PROPERTY_COLOR_1:          vRet = m_scene->getColor(0);  break;
-    case PROPERTY_ROTATION:
-        vRet = m_rotation;
-        break;
-    case PROPERTY_TRANSPOSE:
-        vRet = m_scene->getTranspose();
-        break;
     case PROPERTY_CHANNEL:
-        vRet = m_scene->getChannel();
-        break;
-    case PROPERTY_VELOCITY:
-        vRet = m_scene->getVelocity();
+        vRet = m_channel;
         break;
     }
     return vRet;
-}
-
-void PianoKeybd::setRotation(int r)
-{
-    if (r != m_rotation)
-    {
-        m_rotation = r;
-        resetTransform();
-        rotate(m_rotation);
-        fitInView(m_scene->sceneRect(), Qt::KeepAspectRatio);
-    }
 }
 
 void PianoKeybd::setStartKey(int startKey)
@@ -194,22 +162,14 @@ void PianoKeybd::clearCustomization()
     m_scene->clearCustomization();
 }
 
-void PianoKeybd::inputNoteOn(int midiNote, int vel, int channel)
+void PianoKeybd::inputNoteOn(int midiNote, int vel)
 {
-    m_scene->showNoteOn(midiNote, vel, channel);
+    m_scene->showNoteOn(midiNote, vel);
 }
 
-void PianoKeybd::inputNoteOff(int midiNote, int channel)
+void PianoKeybd::inputNoteOff(int midiNote)
 {
-    m_scene->showNoteOff(midiNote, channel);
-}
-
-void PianoKeybd::triggerNote(int key, int velocity)
-{
-    if (velocity > 0)
-        m_scene->keyNoteOn(key, velocity);
-    else
-        m_scene->keyNoteOff(key);
+    m_scene->showNoteOff(midiNote);
 }
 
 void PianoKeybd::triggerGlowEffect()
@@ -220,4 +180,19 @@ void PianoKeybd::triggerGlowEffect()
 void PianoKeybd::updateMapping()
 {
     m_scene->updateMapping();
+}
+
+void PianoKeybd::onNoteOn(int k,int v)
+{
+    QApplication::postEvent(ContextManager::midi(), new NoteEvent(m_channel, k, v));
+}
+
+void PianoKeybd::onNoteOff(int k)
+{
+    QApplication::postEvent(ContextManager::midi(), new NoteEvent(m_channel, k, 0));
+}
+
+void PianoKeybd::onPolyPressureChanged(int k,int v)
+{
+    QApplication::postEvent(ContextManager::midi(), new PolyPressureEvent(m_channel, k, v));
 }

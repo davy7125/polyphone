@@ -285,7 +285,7 @@ void PagePrst::keyPlayedInternal2(int key, int velocity)
 {
     IdList ids = _currentIds.getSelectedIds(elementPrst);
     if (ids.count() == 1)
-        ContextManager::audio()->getSynth()->play(ids[0], key, velocity);
+        ContextManager::audio()->getSynth()->play(ids[0], -1, key, velocity);
 }
 
 void PagePrst::setBank(quint16 desiredBank, int collisionResolution)

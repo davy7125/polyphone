@@ -885,6 +885,7 @@ EltID PageSmpl::getRepercussionID(EltID id)
 
 void PageSmpl::lecture()
 {
+    _synth->play(EltID(), -1, -1, 0);
     if (ui->pushLecture->isChecked())
     {
         _synth->setLoopEnabled(ui->checkLectureBoucle->isChecked());
@@ -894,7 +895,7 @@ void PageSmpl::lecture()
         {
             _synth->setSmplEqValues(ui->widgetEqualizer->gatherEqVariables().data());
             _synth->activateSmplEq(ui->widgetEqualizer->isPreviewEnabled());
-            _currentPlayingToken = _synth->play(listID[0], -1, 127);
+            _currentPlayingToken = _synth->play(listID[0], -1, -1, 127);
         }
 
         // Désactivations
@@ -903,8 +904,6 @@ void PageSmpl::lecture()
         ui->comboSampleRate->setEnabled(false);
         ui->widgetEqualizer->enableApply(false);
     }
-    else
-        _synth->play(EltID(), -1, 0);
 
     updatePlayButton();
     updateSinus();
@@ -1046,7 +1045,7 @@ void PageSmpl::keyPlayedInternal(int key, int velocity)
 {
     IdList ids = _currentIds.getSelectedIds(elementSmpl);
     if (ids.count() == 1)
-        ContextManager::audio()->getSynth()->play(ids[0], key, velocity);
+        ContextManager::audio()->getSynth()->play(ids[0], -1, key, velocity);
 }
 
 void PageSmpl::onSampleOnOff()

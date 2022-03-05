@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2019 Davy Triponney                                **
+**  Copyright (C) 2013-2020 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,61 +22,28 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef EXTENSIONMANAGER_VIEW_H
+#define EXTENSIONMANAGER_VIEW_H
 
-#include <QMainWindow>
-#include "basetypes.h"
-#include "dialog_about.h"
+#include <QString>
+#include <QList>
+class QWidget;
+class ExtensionView;
 
-namespace Ui {
-class MainWindow;
-}
-class WindowManager;
-class DialogKeyboard;
-class DialogRecorder;
-
-class MainWindow : public QMainWindow
+class ExtensionManagerView
 {
-    Q_OBJECT
-
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ExtensionManagerView();
+    ~ExtensionManagerView();
 
-public slots:
-    void slotCloseTab(int index);
-    void recentSf2Changed();
-    void openFiles(const QString &fileNames);
-
-protected:
-    void closeEvent(QCloseEvent *event) override;
-    void keyPressEvent(QKeyEvent *event) override;
-
-private slots:
-    void on_pushButtonDocumentation_clicked();
-    void on_pushButtonForum_clicked();
-    void on_pushButtonSettings_clicked();
-    void on_pushButtonSearch_clicked();
-    void on_lineSearch_returnPressed();
-    void on_pushButtonSoundfonts_clicked();
-    void on_pushButtonOpen_clicked();
-    void on_pushButtonNew_clicked();
-    void onAboutClicked();
-    void onKeyboardDisplayChange(bool isDisplayed);
-    void onRecorderDisplayChange(bool isDisplayed);
-    void fullScreenTriggered();
-    void onCloseFile();
-    void onSave();
-    void onSaveAs();
-    void onUserClicked();
+    void store(ExtensionView * extension) { _extensions << extension; }
+    int count() { return _extensions.count(); }
+    QString getName(int index);
+    QString getIconPath(int index);
+    QWidget * getGui(int index, QWidget *parent);
 
 private:
-    Ui::MainWindow * ui;
-    WindowManager * _windowManager;
-    DialogKeyboard * _keyboard;
-    DialogRecorder * _recorder;
-    DialogAbout _dialogAbout;
+    QList<ExtensionView *> _extensions;
 };
 
-#endif // WINDOW_H
+#endif // EXTENSIONMANAGER_VIEW_H

@@ -43,8 +43,8 @@ public:
     ~Synth();
 
     // Executed by the main thread (thread 1)
-    int play(EltID id, int key, int velocity);
-    void stop();
+    int play(EltID id, int channel, int key, int velocity);
+    void stop(bool allChannels);
     void setGain(double gain);
 
     // Parameters for reading samples
@@ -71,16 +71,15 @@ public:
 signals:
     void currentPosChanged(quint32 pos);
     void readFinished(int token);
-    void sampleRateChanged(quint32 sampleRate);
-    void dataWritten(quint32 sampleRate, quint32 number);
+    void dataWritten(quint32 sampleRate, quint32 number); // For updating the recorder
 
 public slots:
     void updateConfiguration();
 
 private:
-    void playPrst(int idSf2, int idElt, int key, int velocity);
-    void playInst(int idSf2, int idElt, int key, int velocity, EltID idPrstInst = EltID(elementUnknown));
-    int playSmpl(int idSf2, int idElt, int key, int velocity,
+    void playPrst(int idSf2, int idElt, int channel, int key, int velocity);
+    void playInst(int idSf2, int idElt, int channel, int key, int velocity, EltID idPrstInst = EltID(elementUnknown));
+    int playSmpl(int idSf2, int idElt, int channel, int key, int velocity,
                  EltID idInstSmpl = EltID(elementUnknown), EltID idPrstInst = EltID(elementUnknown));
 
     void destroySoundEnginesAndBuffers();

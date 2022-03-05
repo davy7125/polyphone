@@ -88,6 +88,8 @@
         <file alias="left.svg">resources/left.svg</file>
         <file alias="shield.svg">resources/shield.svg</file>
         <file alias="exchange.svg">resources/exchange.svg</file>
+        <file alias="MIDI.svg">resources/MIDI.svg</file>
+        <file alias="keyboards.svg">resources/keyboards.svg</file>
     </qresource>
     <qresource prefix="/misc">
         <file>changelog</file>

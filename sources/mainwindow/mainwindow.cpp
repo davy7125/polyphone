@@ -43,6 +43,7 @@
 #include <QCloseEvent>
 #include "outputfactory.h"
 #include "inputfactory.h"
+#include "extensionmanager.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -154,6 +155,7 @@ MainWindow::~MainWindow()
     RepositoryManager::kill();
     ContextManager::kill();
     InputFactory::clear();
+    ExtensionManager::kill();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)

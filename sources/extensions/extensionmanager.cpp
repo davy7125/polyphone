@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2019 Davy Triponney                                **
+**  Copyright (C) 2013-2020 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,61 +22,39 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#include "extensionmanager.h"
 
-#include <QMainWindow>
-#include "basetypes.h"
-#include "dialog_about.h"
+ExtensionManager * ExtensionManager::s_instance = nullptr;
 
-namespace Ui {
-class MainWindow;
-}
-class WindowManager;
-class DialogKeyboard;
-class DialogRecorder;
-
-class MainWindow : public QMainWindow
+ExtensionManagerMidi * ExtensionManager::midi()
 {
-    Q_OBJECT
+    if (s_instance == nullptr)
+        s_instance = new ExtensionManager();
+    return s_instance->_midi;
+}
 
-public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+ExtensionManagerView * ExtensionManager::view()
+{
+    if (s_instance == nullptr)
+        s_instance = new ExtensionManager();
+    return s_instance->_view;
+}
 
-public slots:
-    void slotCloseTab(int index);
-    void recentSf2Changed();
-    void openFiles(const QString &fileNames);
+void ExtensionManager::kill()
+{
+    delete s_instance;
+    s_instance = nullptr;
+}
 
-protected:
-    void closeEvent(QCloseEvent *event) override;
-    void keyPressEvent(QKeyEvent *event) override;
+ExtensionManager::ExtensionManager() :
+    _midi(new ExtensionManagerMidi()),
+    _view(new ExtensionManagerView())
+{
+    // ...
+}
 
-private slots:
-    void on_pushButtonDocumentation_clicked();
-    void on_pushButtonForum_clicked();
-    void on_pushButtonSettings_clicked();
-    void on_pushButtonSearch_clicked();
-    void on_lineSearch_returnPressed();
-    void on_pushButtonSoundfonts_clicked();
-    void on_pushButtonOpen_clicked();
-    void on_pushButtonNew_clicked();
-    void onAboutClicked();
-    void onKeyboardDisplayChange(bool isDisplayed);
-    void onRecorderDisplayChange(bool isDisplayed);
-    void fullScreenTriggered();
-    void onCloseFile();
-    void onSave();
-    void onSaveAs();
-    void onUserClicked();
-
-private:
-    Ui::MainWindow * ui;
-    WindowManager * _windowManager;
-    DialogKeyboard * _keyboard;
-    DialogRecorder * _recorder;
-    DialogAbout _dialogAbout;
-};
-
-#endif // WINDOW_H
+ExtensionManager::~ExtensionManager()
+{
+    delete _midi;
+    delete _view;
+}

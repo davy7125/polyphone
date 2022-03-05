@@ -32,7 +32,7 @@ class ParameterModulator
 {
 public:
     // Initialize a modulator
-    ParameterModulator(ModulatorData &modData, bool isPrst, int initialKey, int keyForComputation, int velForComputation);
+    ParameterModulator(ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation);
 
     // Try to merge an existing modulator with another one, return true if success
     bool merge(ModulatorData &modData);
@@ -74,7 +74,7 @@ private:
 
     // Distinction between the initial key that triggered the sound (still useful for the aftertouch)
     // and the value used for the modulators (keynum and velocity might be overridden)
-    int _initialKey, _keyForComputation, _velForComputation;
+    int _channel, _initialKey, _keyForComputation, _velForComputation;
 };
 
 #endif // PARAMETERMODULATOR_H

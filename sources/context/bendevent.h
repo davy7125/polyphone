@@ -30,11 +30,17 @@
 class BendEvent : public QEvent
 {
 public:
-    BendEvent(unsigned char val1, unsigned char val2) : QEvent((QEvent::Type)(QEvent::User+4)),
-          _value1(val1),
-          _value2(val2),
-          _value((_value2 << 7) | _value1)
+    BendEvent(qint8 channel, quint8 val1, quint8 val2) : QEvent((QEvent::Type)(QEvent::User+4)),
+        _channel(channel),
+        _value1(val1),
+        _value2(val2),
+        _value((_value2 << 7) | _value1)
     {}
+
+    qint8 getChannel() const
+    {
+        return _channel;
+    }
 
     float getValue() const
     {
@@ -43,7 +49,8 @@ public:
     }
 
 protected:
-    unsigned char _value1, _value2;
+    qint8 _channel;
+    quint8 _value1, _value2;
     qint32 _value;
 };
 

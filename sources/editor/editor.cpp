@@ -69,9 +69,9 @@ Editor::Editor(QWidget *parent) : QWidget(parent),
     connect(ui->treeView, SIGNAL(selectionChanged(IdList)), ui->toolBar, SLOT(onSelectionChanged(IdList)));
 
     // Midi event
-    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), ui->pageSmpl, SLOT(keyPlayed(int,int)));
-    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), ui->pageInst, SLOT(keyPlayed(int,int)));
-    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), ui->pagePrst, SLOT(keyPlayed(int,int)));
+    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), ui->pageSmpl, SLOT(onKeyPlayed(int,int)));
+    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), ui->pageInst, SLOT(onKeyPlayed(int,int)));
+    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), ui->pagePrst, SLOT(onKeyPlayed(int,int)));
 
     // Toolbar connections
     connect(ui->toolBar, SIGNAL(displayOptionChanged(int)), this, SLOT(displayOptionChanged(int)));
@@ -134,7 +134,7 @@ void Editor::inputProcessed()
 void Editor::onSelectionChanged(IdList ids)
 {
     // Sample play is muted
-    ContextManager::audio()->getSynth()->play(EltID(), -1, 0);
+    ContextManager::audio()->getSynth()->play(EltID(), -1, -1, 0);
 
     // Update the solo status
     SoundfontManager::getInstance()->solo()->selectionChanged(ids);

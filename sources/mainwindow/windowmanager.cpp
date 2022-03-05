@@ -36,6 +36,7 @@
 #include "outputfactory.h"
 #include "repositorymanager.h"
 #include "utils.h"
+#include "synth.h"
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QAbstractButton>
@@ -259,6 +260,9 @@ void WindowManager::onTabCloseRequested(int tabIndex)
         _editors.removeAll(editor);
         _tabWidget->removeTab(tabIndex);
         delete editor;
+
+        // Mute all sounds produced by the soundfont, if any
+        ContextManager::audio()->getSynth()->play(id, -2, -2, 0);
 
         // Delete the model linked to the soundfont
         if (id.indexSf2 >= 0)

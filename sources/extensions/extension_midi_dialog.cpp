@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2019 Davy Triponney                                **
+**  Copyright (C) 2013-2020 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,61 +22,47 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#include "extension_midi_dialog.h"
+#include <QIcon>
+#include <QGridLayout>
+#include <QKeyEvent>
+#include "contextmanager.h"
 
-#include <QMainWindow>
-#include "basetypes.h"
-#include "dialog_about.h"
-
-namespace Ui {
-class MainWindow;
-}
-class WindowManager;
-class DialogKeyboard;
-class DialogRecorder;
-
-class MainWindow : public QMainWindow
+ExtensionMidiDialog::ExtensionMidiDialog(QString title, QString identifier, QWidget * gui) :
+    QDialog(nullptr, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint),
+    _identifier(identifier)
 {
-    Q_OBJECT
+    // Icon and title
+    this->setWindowIcon(QIcon(":/misc/polyphone.png"));
+    this->setWindowTitle(title);
 
-public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    // Content
+    QGridLayout * layout = new QGridLayout(this);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->addWidget(gui);
+    this->setLayout(layout);
 
-public slots:
-    void slotCloseTab(int index);
-    void recentSf2Changed();
-    void openFiles(const QString &fileNames);
+    // Restore the geometry
+    QByteArray geometry = ContextManager::configuration()->getExtensionValue(_identifier, "geometry", QByteArray()).toByteArray();
+    if (!geometry.isEmpty())
+        this->restoreGeometry(geometry);
+}
 
-protected:
-    void closeEvent(QCloseEvent *event) override;
-    void keyPressEvent(QKeyEvent *event) override;
+ExtensionMidiDialog::~ExtensionMidiDialog()
+{
+    // Remove the GUI from the dialog
+    this->layout()->takeAt(0);
+}
 
-private slots:
-    void on_pushButtonDocumentation_clicked();
-    void on_pushButtonForum_clicked();
-    void on_pushButtonSettings_clicked();
-    void on_pushButtonSearch_clicked();
-    void on_lineSearch_returnPressed();
-    void on_pushButtonSoundfonts_clicked();
-    void on_pushButtonOpen_clicked();
-    void on_pushButtonNew_clicked();
-    void onAboutClicked();
-    void onKeyboardDisplayChange(bool isDisplayed);
-    void onRecorderDisplayChange(bool isDisplayed);
-    void fullScreenTriggered();
-    void onCloseFile();
-    void onSave();
-    void onSaveAs();
-    void onUserClicked();
+void ExtensionMidiDialog::closeEvent(QCloseEvent *event)
+{
+    ContextManager::configuration()->setExtensionValue(_identifier, "geometry", this->saveGeometry());
+    QDialog::closeEvent(event);
+}
 
-private:
-    Ui::MainWindow * ui;
-    WindowManager * _windowManager;
-    DialogKeyboard * _keyboard;
-    DialogRecorder * _recorder;
-    DialogAbout _dialogAbout;
-};
-
-#endif // WINDOW_H
+void ExtensionMidiDialog::keyPressEvent(QKeyEvent * event)
+{
+    // Prevent the escape key from closing the window
+    if (event->key() != Qt::Key_Escape)
+          QDialog::keyPressEvent(event);
+}

@@ -265,7 +265,7 @@ void PageInst::keyPlayedInternal2(int key, int velocity)
     IdList ids = _currentIds.getSelectedIds(elementInst);
     if (ids.count() == 1)
     {
-        ContextManager::audio()->getSynth()->play(ids[0], key, velocity);
+        ContextManager::audio()->getSynth()->play(ids[0], -1, key, velocity);
 
         if (velocity > 0)
         {
