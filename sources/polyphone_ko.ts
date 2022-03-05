@@ -429,313 +429,313 @@
 <context>
     <name>ConfManager</name>
     <message>
-        <location filename="context/confmanager.cpp" line="199"/>
+        <location filename="context/confmanager.cpp" line="213"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
         <translation>Z</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="200"/>
+        <location filename="context/confmanager.cpp" line="214"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="201"/>
+        <location filename="context/confmanager.cpp" line="215"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="202"/>
+        <location filename="context/confmanager.cpp" line="216"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="203"/>
+        <location filename="context/confmanager.cpp" line="217"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="204"/>
+        <location filename="context/confmanager.cpp" line="218"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
         <translation>V</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="205"/>
+        <location filename="context/confmanager.cpp" line="219"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
         <translation>G</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="206"/>
+        <location filename="context/confmanager.cpp" line="220"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="207"/>
+        <location filename="context/confmanager.cpp" line="221"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="208"/>
+        <location filename="context/confmanager.cpp" line="222"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
         <translation>N</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="209"/>
+        <location filename="context/confmanager.cpp" line="223"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
         <translation>J</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="210"/>
+        <location filename="context/confmanager.cpp" line="224"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="211"/>
+        <location filename="context/confmanager.cpp" line="225"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="217"/>
+        <location filename="context/confmanager.cpp" line="231"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
         <translation>Q</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="218"/>
+        <location filename="context/confmanager.cpp" line="232"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="219"/>
+        <location filename="context/confmanager.cpp" line="233"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
         <translation>W</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="220"/>
+        <location filename="context/confmanager.cpp" line="234"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="221"/>
+        <location filename="context/confmanager.cpp" line="235"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="222"/>
+        <location filename="context/confmanager.cpp" line="236"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="223"/>
+        <location filename="context/confmanager.cpp" line="237"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="224"/>
+        <location filename="context/confmanager.cpp" line="238"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
         <translation>T</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="225"/>
+        <location filename="context/confmanager.cpp" line="239"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="226"/>
+        <location filename="context/confmanager.cpp" line="240"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="227"/>
+        <location filename="context/confmanager.cpp" line="241"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="228"/>
+        <location filename="context/confmanager.cpp" line="242"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
         <translation>U</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="229"/>
+        <location filename="context/confmanager.cpp" line="243"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="235"/>
+        <location filename="context/confmanager.cpp" line="249"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
         <translation>쉬프트+Z</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="236"/>
+        <location filename="context/confmanager.cpp" line="250"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
         <translation>쉬프트+S</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="237"/>
+        <location filename="context/confmanager.cpp" line="251"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
         <translation>쉬프트+X</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="238"/>
+        <location filename="context/confmanager.cpp" line="252"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
         <translation>쉬프트+D</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="239"/>
+        <location filename="context/confmanager.cpp" line="253"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
         <translation>쉬프트+C</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="240"/>
+        <location filename="context/confmanager.cpp" line="254"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
         <translation>쉬프트+V</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="241"/>
+        <location filename="context/confmanager.cpp" line="255"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
         <translation>쉬프트+G</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="242"/>
+        <location filename="context/confmanager.cpp" line="256"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
         <translation>쉬프트+B</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="243"/>
+        <location filename="context/confmanager.cpp" line="257"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
         <translation>쉬프트+H</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="244"/>
+        <location filename="context/confmanager.cpp" line="258"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
         <translation>쉬프트+N</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="245"/>
+        <location filename="context/confmanager.cpp" line="259"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
         <translation>쉬프트+J</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="246"/>
+        <location filename="context/confmanager.cpp" line="260"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
         <translation>쉬프트+M</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="247"/>
+        <location filename="context/confmanager.cpp" line="261"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
         <translation>쉬프트+&lt;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="253"/>
+        <location filename="context/confmanager.cpp" line="267"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
         <translation>쉬프트+Q</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="254"/>
+        <location filename="context/confmanager.cpp" line="268"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
         <translation>쉬프트+@</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="255"/>
+        <location filename="context/confmanager.cpp" line="269"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
         <translation>쉬프트+W</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="256"/>
+        <location filename="context/confmanager.cpp" line="270"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
         <translation>쉬프트+#</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="257"/>
+        <location filename="context/confmanager.cpp" line="271"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
         <translation>쉬프트+E</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="258"/>
+        <location filename="context/confmanager.cpp" line="272"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
         <translation>쉬프트+R</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="259"/>
+        <location filename="context/confmanager.cpp" line="273"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
         <translation>쉬프트+%</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="260"/>
+        <location filename="context/confmanager.cpp" line="274"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
         <translation>쉬프트+T</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="261"/>
+        <location filename="context/confmanager.cpp" line="275"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
         <translation>쉬프트+^</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="262"/>
+        <location filename="context/confmanager.cpp" line="276"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
         <translation>쉬프트+Y</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="263"/>
+        <location filename="context/confmanager.cpp" line="277"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
         <translation>쉬프트+&amp;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="264"/>
+        <location filename="context/confmanager.cpp" line="278"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
         <translation>쉬프트+U</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="265"/>
+        <location filename="context/confmanager.cpp" line="279"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
         <translation>쉬프트+I</translation>
@@ -773,66 +773,66 @@
 <context>
     <name>ConfigSectionGeneral</name>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="88"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="85"/>
         <source>Input / Output</source>
         <translation>입력 / 출력</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="157"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="152"/>
         <source>Audio backend</source>
         <translation>오디오 백엔드</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="164"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="159"/>
         <source>Buffer size</source>
         <translation>버퍼 크기</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="130"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="125"/>
         <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool “Remove blank at start”)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="107"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="103"/>
         <source>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool “Trim to end of loop”)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="171"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="166"/>
         <source>MIDI input</source>
         <oldsource>Midi input</oldsource>
         <translation>미디 입력</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="23"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="22"/>
         <source>Sample management</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="36"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="34"/>
         <source>Sample import</source>
         <oldsource>Wav file import</oldsource>
         <translation>샘플 불러오기</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="222"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="215"/>
         <source>change linked sample</source>
         <translation>연결된 샘플 교체</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="111"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="107"/>
         <source>trim to loop</source>
         <translation>루프 다듬기</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="203"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="197"/>
         <source>Stereo editing</source>
         <translation>스테레오 편집</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="134"/>
+        <location filename="context/interface/configsectiongeneral.ui" line="129"/>
         <source>remove blank at start</source>
         <translation>시작할 때 공백 제거</translation>
     </message>
@@ -1259,27 +1259,27 @@ repository</source>
 <context>
     <name>ControllerArea</name>
     <message>
-        <location filename="clavier/controllerarea.ui" line="244"/>
+        <location filename="clavier/controllerarea.ui" line="216"/>
         <source>Pitch wheel</source>
         <translation>피치 휠</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.ui" line="269"/>
+        <location filename="clavier/controllerarea.ui" line="241"/>
         <source>Sensitivity</source>
         <translation>감도</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.ui" line="294"/>
+        <location filename="clavier/controllerarea.ui" line="266"/>
         <source>Pressure</source>
         <translation>프레셔</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="282"/>
+        <location filename="clavier/controllerarea.cpp" line="291"/>
         <source>on</source>
         <translation>켜기</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="287"/>
+        <location filename="clavier/controllerarea.cpp" line="296"/>
         <source>off</source>
         <translation>끄기</translation>
     </message>
@@ -1684,12 +1684,12 @@ repository</source>
         <translation>애프터 터치</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="228"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="233"/>
         <source>Hide the controller area</source>
         <translation>컨트롤러 영역 숨기기</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="234"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="239"/>
         <source>Show the controller area</source>
         <translation>컨트롤러 영역 보이기</translation>
     </message>
@@ -2133,67 +2133,67 @@ repository</source>
 <context>
     <name>EditorToolBar</name>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="64"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="66"/>
         <source>Add a sample</source>
         <translation>샘플 추가</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="65"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="67"/>
         <source>Add an instrument</source>
         <translation>악기 추가</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="66"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="68"/>
         <source>Add a preset</source>
         <translation>프리셋 추가</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="73"/>
         <source>Toolbox</source>
         <translation>도구상자</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="67"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="69"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="68"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="70"/>
         <source>Redo</source>
         <translation>재실행</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="69"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Save</source>
         <translation>저장</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="77"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="79"/>
         <source>Recorder</source>
         <translation>녹음기</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="82"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="84"/>
         <source>Virtual keyboard</source>
         <translation>가상 건반</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="240"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="267"/>
         <source>Import an audio file</source>
         <translation>오디오 파일 가져오기</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="242"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="269"/>
         <source>Audio files</source>
         <translation>오디오 파일</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="400"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="427"/>
         <source>Cannot create more presets.</source>
         <translation>프리셋을 더 생성할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="400"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="427"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
@@ -2387,22 +2387,22 @@ repository</source>
 <context>
     <name>GraphiqueFourier</name>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="59"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="60"/>
         <source>Frequency (Hz)</source>
         <translation>주파수 (Hz)</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="73"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="74"/>
         <source>Intensity</source>
         <translation>강도</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="91"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="92"/>
         <source>Export graph</source>
         <translation>그래프 내보내기</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="93"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="94"/>
         <source>Show peak frequencies</source>
         <translation type="unfinished">피크 주파수 보이기</translation>
     </message>
@@ -2413,12 +2413,12 @@ repository</source>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="522"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="558"/>
         <source>Export a graph</source>
         <translation>그래프 내보내기</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="523"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="559"/>
         <source>Png file</source>
         <translation>PNG 파일</translation>
     </message>
@@ -2554,47 +2554,47 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="204"/>
+        <location filename="mainwindow/mainwindow.cpp" line="206"/>
         <source>&amp;Save</source>
         <translation>저장(&amp;S)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="205"/>
+        <location filename="mainwindow/mainwindow.cpp" line="207"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="206"/>
+        <location filename="mainwindow/mainwindow.cpp" line="208"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>저장하지 않음(&amp;N)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="190"/>
+        <location filename="mainwindow/mainwindow.cpp" line="192"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="181"/>
+        <location filename="mainwindow/mainwindow.cpp" line="183"/>
         <source>Untitled</source>
         <translation type="unfinished">제목없음</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="191"/>
+        <location filename="mainwindow/mainwindow.cpp" line="193"/>
         <source>Save before exiting?</source>
         <translation>종료하기 전에 저장할까요?</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="194"/>
+        <location filename="mainwindow/mainwindow.cpp" line="196"/>
         <source>The following files have been modified:</source>
         <translation>다음의 파일이 변경됐습니다:</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="201"/>
+        <location filename="mainwindow/mainwindow.cpp" line="203"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>&quot;%1&quot; 파일이 변경됐습니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="278"/>
+        <location filename="mainwindow/mainwindow.cpp" line="280"/>
         <source>Opening files</source>
         <translation>파일 여는 중</translation>
     </message>
@@ -2670,12 +2670,12 @@ repository</source>
 <context>
     <name>ModulatorCell</name>
     <message>
-        <location filename="editor/modulator/modulatorcell.ui" line="141"/>
+        <location filename="editor/modulator/modulatorcell.ui" line="127"/>
         <source>no operation</source>
         <translation>작동하지 않음</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.ui" line="146"/>
+        <location filename="editor/modulator/modulatorcell.ui" line="132"/>
         <source>absolute value</source>
         <translation>절댓값</translation>
     </message>
@@ -2793,67 +2793,67 @@ default mod.</source>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="202"/>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="151"/>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="255"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="153"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="257"/>
         <source>No modulators</source>
         <translation>모듈레이터 없음</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="234"/>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="160"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="162"/>
         <source>Select a single division to display the modulator list</source>
         <translation>단일 분류를 선택해 모듈레이터 목록 표시</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.ui" line="317"/>
+        <location filename="editor/modulator/modulatoreditor.ui" line="320"/>
         <source>Expand the modulator section</source>
         <translation>모듈레이터 영역 확장</translation>
     </message>
     <message numerus="yes">
-        <location filename="editor/modulator/modulatoreditor.cpp" line="260"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="262"/>
         <source>%n modulator(s):</source>
         <translation>
             <numerusform>%n modulator:</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="345"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="347"/>
         <source>Duplicate the selection toward...</source>
         <translation>선택영역으로 복제...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="346"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="348"/>
         <source>Copy the selected modulators</source>
         <translation>선택된 모듈레이터 복사</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="351"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="353"/>
         <source>Duplicate modulators toward...</source>
         <translation>모듈레이터로 복제...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="352"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="354"/>
         <source>Copy all modulators</source>
         <translation>모든 모듈레이터 복사</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="637"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="639"/>
         <source>Forbidden action:</source>
         <translation>금지된 행동:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="647"/>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="656"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="649"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="658"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="648"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="650"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>프리셋의 오프셋은 변조될 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="657"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="659"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation>프리셋 %1은(는) 변조될 수 없습니다.</translation>
     </message>
@@ -3370,7 +3370,7 @@ rate</source>
     <name>PageSmpl</name>
     <message>
         <location filename="editor/pagesmpl.ui" line="344"/>
-        <location filename="editor/pagesmpl.cpp" line="1081"/>
+        <location filename="editor/pagesmpl.cpp" line="1080"/>
         <source>Play</source>
         <translation>재생</translation>
     </message>
@@ -3442,7 +3442,7 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="646"/>
         <location filename="editor/pagesmpl.cpp" line="510"/>
-        <location filename="editor/pagesmpl.cpp" line="1009"/>
+        <location filename="editor/pagesmpl.cpp" line="1008"/>
         <source>Information</source>
         <translation>정보</translation>
     </message>
@@ -3507,7 +3507,7 @@ rate</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="511"/>
-        <location filename="editor/pagesmpl.cpp" line="1010"/>
+        <location filename="editor/pagesmpl.cpp" line="1009"/>
         <source>Change successfully applied to the different samples</source>
         <translation>변경이 다른 샘플들에 적용됨</translation>
     </message>
@@ -3518,33 +3518,33 @@ rate</source>
         <translation>모노</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1075"/>
+        <location filename="editor/pagesmpl.cpp" line="1074"/>
         <source>Stop</source>
         <translation>중지</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1094"/>
+        <location filename="editor/pagesmpl.cpp" line="1093"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1095"/>
+        <location filename="editor/pagesmpl.cpp" line="1094"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation>&lt;b&gt;%1&lt;/b&gt;의 샘플을 &lt;b&gt;%2&lt;/b&gt;로 자르겠습니까? </translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1097"/>
+        <location filename="editor/pagesmpl.cpp" line="1096"/>
         <source>&amp;Yes</source>
         <translation>네(&amp;Y)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1098"/>
+        <location filename="editor/pagesmpl.cpp" line="1097"/>
         <source>&amp;No</source>
         <translation>아니오(&amp;N)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1099"/>
+        <location filename="editor/pagesmpl.cpp" line="1098"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
         <translation type="unfinished"></translation>
@@ -3885,7 +3885,7 @@ rate</source>
         <translation>Sfz 파일</translation>
     </message>
     <message>
-        <location filename="context/translationmanager.cpp" line="105"/>
+        <location filename="context/translationmanager.cpp" line="106"/>
         <source>When editing one side of a stereo sample, the other side is automatically edited the same.
 This rule applies at the sample level and also when editing a division of an instrument:
 the division corresponding to the other channel, if any, is edited the same.
@@ -4896,17 +4896,17 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolAutoLoop</name>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="199"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="206"/>
         <source>Failed to loop sample &quot;%1&quot;.</source>
         <translation>&quot;%1&quot; 샘플의 반복에 실패했습니다.</translation>
     </message>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="202"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="209"/>
         <source>The following samples couldn&apos;t be looped:</source>
         <translation>다음 샘플은 반복되지 않습니다:</translation>
     </message>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="207"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="214"/>
         <source>Possible reasons: too short or too turbulent.</source>
         <translation>가능성: 너무 짧거나 난해합니다.</translation>
     </message>
@@ -6509,22 +6509,22 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeView</name>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="951"/>
+        <location filename="editor/tree/treeview.cpp" line="953"/>
         <source>instrument</source>
         <translation>악기</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="951"/>
+        <location filename="editor/tree/treeview.cpp" line="953"/>
         <source>preset</source>
         <translation>프리셋</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="972"/>
+        <location filename="editor/tree/treeview.cpp" line="974"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="972"/>
+        <location filename="editor/tree/treeview.cpp" line="974"/>
         <source>Cannot create more presets.</source>
         <translation>프리셋을 더 생성할 수 없습니다.</translation>
     </message>
@@ -6669,58 +6669,58 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>WindowManager</name>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="90"/>
+        <location filename="mainwindow/windowmanager.cpp" line="91"/>
         <source>Settings</source>
         <translation>환경설정</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="122"/>
+        <location filename="mainwindow/windowmanager.cpp" line="123"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 파일을 열 수 없음</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="180"/>
+        <location filename="mainwindow/windowmanager.cpp" line="181"/>
         <source>Online repository</source>
         <translation>온라인 레퍼지토리</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="228"/>
+        <location filename="mainwindow/windowmanager.cpp" line="229"/>
         <source>Save before exiting?</source>
         <translation>종료하기 전에 저장하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="231"/>
+        <location filename="mainwindow/windowmanager.cpp" line="232"/>
         <source>untitled</source>
         <translation>제목없음</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="232"/>
+        <location filename="mainwindow/windowmanager.cpp" line="233"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>&quot;%1&quot; 파일이 수정됐습니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="121"/>
-        <location filename="mainwindow/windowmanager.cpp" line="233"/>
+        <location filename="mainwindow/windowmanager.cpp" line="122"/>
+        <location filename="mainwindow/windowmanager.cpp" line="234"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="235"/>
+        <location filename="mainwindow/windowmanager.cpp" line="236"/>
         <source>&amp;Save</source>
         <translation>저장(&amp;S)</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="236"/>
+        <location filename="mainwindow/windowmanager.cpp" line="237"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="237"/>
+        <location filename="mainwindow/windowmanager.cpp" line="238"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>저장하지 않음(&amp;N)</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="325"/>
+        <location filename="mainwindow/windowmanager.cpp" line="329"/>
         <source>User area</source>
         <translation>사용자 공간</translation>
     </message>
