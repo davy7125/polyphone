@@ -17,7 +17,7 @@ DEFINES += USE_LOCAL_SFARKLIB
 
 # Polyphone version
 DEFINES += SOFT_VERSION=\\\"2.3.0\\\"
-DEFINES += IDENTIFIER=\\\"beta\\\"
+DEFINES += IDENTIFIER=\\\"\\\"
 DEFINES += CURRENT_YEAR=\\\"2022\\\"
 
 # List to be completed if other translations are desired
