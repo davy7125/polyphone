@@ -1,4 +1,0 @@
-index.md=Учебные пособия
-|create-a-soundfont-from-scratch.md=Как создать SoundFont с нуля
-|how-to-prepare-a-sample.md=Как подготовить семпл
-|using-custom-releases-in-an-instrument.md=Использование заказного затухания в инструменте
