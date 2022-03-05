@@ -33,7 +33,6 @@ TRANSLATIONS = polyphone_en.ts \
     polyphone_ja.ts \
     polyphone_zh.ts \
     polyphone_nl.ts \
-    polyphone_ru.ts \
     polyphone_tr.ts \
     polyphone_da.ts \
     polyphone_gr.ts \
