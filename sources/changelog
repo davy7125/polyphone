@@ -1,5 +1,6 @@
 polyphone (2.3) unstable; urgency=low
 
+  * (new) Korean translation
   * (new) button on the bottom right enabling the stereo editing, now enabled by default
   * (new) detection of bad loops, a warning being displayed at the sample level and in the sample summary
   * (new) parameter inconsistencies displayed in the sample summary
@@ -10,7 +11,6 @@ polyphone (2.3) unstable; urgency=low
   * (new) tool scanning the instruments for filling parameters at the sample level
   * (new) after having cut a sample, possibility to create another one with the removed part
   * (new) OGG file import
-  * (new) Russian and Korean translations
   * (improvement) search filter in the list when selecting "replace by" or "linked to"
   * (improvement) renaming samples linked to an instrument or instruments linked to a preset is now possible
   * (improvement) creating a new instrument automatically set the loop mode and the key ranges
