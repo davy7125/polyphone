@@ -128,7 +128,7 @@ int SoundfontCell::heightForWidth(int width) const
 {
     float coef = 1.0;
 #ifdef Q_OS_MAC
-    coef = 1.5; // Don't know why
+    coef = 2; // Don't know why
 #endif
 
     int margin = ui->verticalLayout->contentsMargins().bottom() * 2;
