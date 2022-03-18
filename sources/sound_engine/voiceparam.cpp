@@ -289,10 +289,10 @@ qint32 VoiceParam::getInteger(AttributeType type)
     // Notes:
     // * if fineTune is required: add the finetune from the sample level
     // * if wPreset is required, it will be stored in a special variable
-    if (_parameters[type])
-        return (type == champ_fineTune ? _sampleFineTune : 0) + _parameters[type]->getIntValue();
     if (type == champ_wPreset)
         return _wPresetNumber;
+    if (_parameters[type])
+        return (type == champ_fineTune ? _sampleFineTune : 0) + _parameters[type]->getIntValue();
 
     qWarning() << "VoiceParam: type" << type << "-" << Attribute::getDescription(type, false) << "not found";
     return 0;
