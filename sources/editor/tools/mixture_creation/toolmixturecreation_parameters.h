@@ -69,11 +69,11 @@ public:
     {}
     
     // Start of the division
-    int getMinKey() { return _minKey; }
+    int getMinKey() { return qMin(_minKey, _maxKey); }
     void setMinKey(int minKey) { _minKey = minKey; }
     
     // End of the division
-    int getMaxKey() { return _maxKey; }
+    int getMaxKey() { return qMax(_minKey, _maxKey); }
     void setMaxKey(int maxKey) { _maxKey = maxKey; }
     
     // Add / remove a rank

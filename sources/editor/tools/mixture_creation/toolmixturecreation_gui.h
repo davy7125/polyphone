@@ -68,7 +68,7 @@ private:
     static QString getText(int overtoneType, int octave);
     int getNumDiv();
     int getNumRang();
-    void dispType2(int index);
+    void dispOctaves(int overtoneType);
 
     Ui::ToolMixtureCreation_gui *ui;
     QList<DivisionInfo> _divisions;

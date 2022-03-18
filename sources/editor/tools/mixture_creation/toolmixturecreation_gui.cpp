@@ -82,15 +82,14 @@ void ToolMixtureCreation_gui::dispDiv()
     // Clear the list
     ui->listDivisions->blockSignals(true);
     ui->listDivisions->clear();
-    ui->listRangs->clear();
 
     // Fill the list
     int valMin, valMax;
     foreach (DivisionInfo di, _divisions)
     {
         // Add an element
-        valMin = qMin(di.getMinKey(), di.getMaxKey());
-        valMax = qMax(di.getMinKey(), di.getMaxKey());
+        valMin = di.getMinKey();
+        valMax = di.getMaxKey();
         ui->listDivisions->addItem(ContextManager::keyName()->getKeyName(valMin) + " - " +
                                    ContextManager::keyName()->getKeyName(valMax));
     }
@@ -99,19 +98,21 @@ void ToolMixtureCreation_gui::dispDiv()
 
 void ToolMixtureCreation_gui::dispRang(int numDiv)
 {
+    // Current division
+    if (numDiv == -1)
+        numDiv = this->getNumDiv();
+    if (numDiv < 0)
+    {
+        ui->listRangs->clear();
+        return;
+    }
+
     // Effacement liste rangs
+    DivisionInfo di = _divisions.at(numDiv);
     ui->listRangs->blockSignals(true);
     ui->listRangs->clear();
-    if (ui->listDivisions->selectedItems().length() == 1)
-    {
-        // Numéro de la division
-        if (numDiv == -1)
-            numDiv = this->getNumDiv();
-        if (numDiv < 0) return;
-        DivisionInfo di = _divisions.at(numDiv);
-        foreach (RankInfo ri, di.getRanks())
-            ui->listRangs->addItem(getText(ri.getOvertoneType(), ri.getOctave()));
-    }
+    foreach (RankInfo ri, di.getRanks())
+        ui->listRangs->addItem(getText(ri.getOvertoneType(), ri.getOctave()));
     ui->listRangs->blockSignals(false);
 }
 
@@ -294,27 +295,27 @@ QString ToolMixtureCreation_gui::getText(int overtoneType, int octave)
     return text;
 }
 
-void ToolMixtureCreation_gui::dispType2(int index)
+void ToolMixtureCreation_gui::dispOctaves(int overtoneType)
 {
     // Reset du combobox 2
     ui->comboType2->blockSignals(true);
     ui->comboType2->clear();
 
     // Nombre d'éléments en fonction du type de mutation
-    int nbItem = 0;
-    if (index == 0)
-        nbItem = 11;
-    else if (index == 1)
-        nbItem = 9;
-    else if (index  < 4)
-        nbItem = 8;
-    else if (index < 8)
-        nbItem = 7;
+    int octaveNumber = 0;
+    if (overtoneType == 0)
+        octaveNumber = 11;
+    else if (overtoneType == 1)
+        octaveNumber = 9;
+    else if (overtoneType  < 4)
+        octaveNumber = 8;
+    else if (overtoneType < 8)
+        octaveNumber = 7;
     else
-        nbItem = 6;
+        octaveNumber = 6;
 
-    for (int i = 0; i < nbItem; i++)
-        ui->comboType2->addItem(getText(index, i));
+    for (int i = 0; i < octaveNumber; i++)
+        ui->comboType2->addItem(getText(overtoneType, i));
 
     ui->comboType2->blockSignals(false);
 }
@@ -349,11 +350,16 @@ void ToolMixtureCreation_gui::on_listDivisions_itemSelectionChanged()
     int currentRow = ui->listDivisions->currentRow();
 
     // Modification des spinboxes
-    DivisionInfo di = _divisions[currentRow];
     ui->spinDivStart->blockSignals(true);
     ui->spinDivEnd->blockSignals(true);
+
+    DivisionInfo di = _divisions[currentRow];
+    ui->spinDivStart->setRange(0, di.getMaxKey());
+    ui->spinDivEnd->setRange(di.getMinKey(), 127);
+
     ui->spinDivStart->setValue(di.getMinKey());
     ui->spinDivEnd->setValue(di.getMaxKey());
+
     ui->spinDivStart->blockSignals(false);
     ui->spinDivEnd->blockSignals(false);
 
@@ -384,7 +390,8 @@ void ToolMixtureCreation_gui::on_pushAddDiv_pressed()
 void ToolMixtureCreation_gui::on_pushRemoveDiv_pressed()
 {
     int numDiv = this->getNumDiv();
-    if (numDiv < 0) return;
+    if (numDiv < 0)
+        return;
     _divisions.removeAt(numDiv);
 
     // Affichage
@@ -406,6 +413,9 @@ void ToolMixtureCreation_gui::on_spinDivStart_valueChanged(int arg1)
         return;
     _divisions[numDiv].setMinKey(arg1);
 
+    ui->spinDivStart->setRange(0, _divisions[numDiv].getMaxKey());
+    ui->spinDivEnd->setRange(_divisions[numDiv].getMinKey(), 127);
+
     // Affichage
     this->dispDiv();
 
@@ -420,6 +430,9 @@ void ToolMixtureCreation_gui::on_spinDivEnd_valueChanged(int arg1)
     int numDiv = this->getNumDiv();
     if (numDiv < 0) return;
     _divisions[numDiv].setMaxKey(arg1);
+
+    ui->spinDivStart->setRange(0, _divisions[numDiv].getMaxKey());
+    ui->spinDivEnd->setRange(_divisions[numDiv].getMinKey(), 127);
 
     // Affichage
     this->dispDiv();
@@ -446,7 +459,7 @@ void ToolMixtureCreation_gui::on_listRangs_itemSelectionChanged()
     ui->comboType1->blockSignals(true);
     ui->comboType2->blockSignals(true);
     ui->comboType1->setCurrentIndex(_divisions[numDiv].getRanks()[currentRow].getOvertoneType());
-    this->dispType2(_divisions[numDiv].getRanks()[currentRow].getOvertoneType());
+    this->dispOctaves(_divisions[numDiv].getRanks()[currentRow].getOvertoneType());
     ui->comboType2->blockSignals(true);
     ui->comboType2->setCurrentIndex(_divisions[numDiv].getRanks()[currentRow].getOctave());
     ui->comboType1->blockSignals(false);
@@ -511,11 +524,14 @@ void ToolMixtureCreation_gui::on_pushRemoveRank_clicked()
 
 void ToolMixtureCreation_gui::on_comboType1_currentIndexChanged(int index)
 {
-    // Modification combobox type2
-    this->dispType2(index);
+    // Current octave
+    int currentOctave = ui->comboType2->currentIndex();
 
-    // Sélection du 4ème élément (fondamentale 8')
-    ui->comboType2->setCurrentIndex(3);
+    // Modification combobox type2
+    this->dispOctaves(index);
+
+    // Select the same octave or the 4th element (fondamental 8')
+    ui->comboType2->setCurrentIndex(ui->comboType2->count() > currentOctave ? currentOctave : 3);
 }
 
 void ToolMixtureCreation_gui::on_comboType2_currentIndexChanged(int index)
