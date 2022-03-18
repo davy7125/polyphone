@@ -132,23 +132,21 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     taille_info = 16; // INFO + champ ifil
     dwTmp = sm->getQstr(id, champ_ISNG).length();
     if (dwTmp > 255) dwTmp = 255;
-    dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+    dwTmp2 = dwTmp + 2 - dwTmp % 2;
     if (dwTmp != 0)
         taille_info += dwTmp2 + 8;
     else
         taille_info += 8 + 8;
     dwTmp = sm->getQstr(id, champ_name).length();
     if (dwTmp > 255) dwTmp = 255;
-    dwTmp2 = dwTmp + 2 - (dwTmp)%2;
-    if (dwTmp != 0)
-        taille_info += dwTmp2 + 8;
-    else
-        taille_info += 10 + 8;
+    dwTmp2 = dwTmp + 2 - dwTmp % 2;
+    taille_info += dwTmp2 + 8;
+
     dwTmp = sm->getQstr(id, champ_IROM).length();
     if (dwTmp > 0)
     {
         if (dwTmp > 255) dwTmp = 255;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         taille_info += dwTmp2 + 8;
     }
     sfVersionTmp = sm->get(id, champ_IVER).sfVerValue;
@@ -158,28 +156,28 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     if (dwTmp > 0)
     {
         if (dwTmp > 255) dwTmp = 255;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         taille_info += dwTmp2 + 8;
     }
     dwTmp = sm->getQstr(id, champ_IENG).length();
     if (dwTmp > 0)
     {
         if (dwTmp > 255) dwTmp = 255;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         taille_info += dwTmp2 + 8;
     }
     dwTmp = sm->getQstr(id, champ_IPRD).length();
     if (dwTmp > 0)
     {
         if (dwTmp > 255) dwTmp = 255;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         taille_info += dwTmp2 + 8;
     }
     dwTmp = sm->getQstr(id, champ_ICOP).length();
     if (dwTmp > 0)
     {
         if (dwTmp > 255) dwTmp = 255;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         taille_info += dwTmp2 + 8;
     }
     dwTmp = sm->getQstr(id, champ_ICMT).length();
@@ -193,14 +191,14 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
         dwTmp = commentData.length();
 
         if (dwTmp > 65536) dwTmp = 65536;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         taille_info += dwTmp2 + 8;
     }
     dwTmp = sm->getQstr(id, champ_ISFT).length();
     if (dwTmp > 0)
     {
         if (dwTmp > 255) dwTmp = 255;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         taille_info += dwTmp2 + 8;
     }
 
@@ -358,7 +356,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
         fi.write((char *)&dwTmp2, 4);
         fi.write(sm->getQstr(id, champ_ISNG).toLatin1());
         charTmp = '\0';
-        for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
+        for (quint32 i = 0; i < dwTmp2 - dwTmp; i++)
             fi.write(&charTmp, 1);
     }
     else
@@ -372,35 +370,23 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     fi.write("INAM", 4); // nom du sf2, champ obligatoire
     dwTmp = sm->getQstr(id, champ_name).length();
     if (dwTmp > 255) dwTmp = 255;
-    dwTmp2 = dwTmp + 2 - (dwTmp)%2;
-    if (dwTmp != 0)
-    {
-        fi.write((char *)&dwTmp2, 4);
-        fi.write(sm->getQstr(id, champ_name).toLatin1());
-        charTmp = '\0';
-        for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
-            fi.write(&charTmp, 1);
-    }
-    else
-    {
-        dwTmp2 = 10;
-        fi.write((char *)&dwTmp2, 4);
-        fi.write("no title", 8);
-        charTmp = '\0';
+    dwTmp2 = dwTmp + 2 - dwTmp % 2;
+    fi.write((char *)&dwTmp2, 4);
+    fi.write(sm->getQstr(id, champ_name).toLatin1());
+    charTmp = '\0';
+    for (quint32 i = 0; i < dwTmp2 - dwTmp; i++)
         fi.write(&charTmp, 1);
-        fi.write(&charTmp, 1);
-    }
 
     dwTmp = sm->getQstr(id, champ_IROM).length(); // identification d'une table d'onde, champ optionnel
     if (dwTmp > 0)
     {
         if (dwTmp > 255) dwTmp = 255;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         fi.write("irom", 4);
         fi.write((char *)&dwTmp2, 4);
         fi.write(sm->getQstr(id, champ_IROM).toLatin1());
         charTmp = '\0';
-        for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
+        for (quint32 i = 0; i < dwTmp2 - dwTmp; i++)
             fi.write(&charTmp, 1);
     }
 
@@ -417,12 +403,12 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     if (dwTmp > 0)
     {
         if (dwTmp > 255) dwTmp = 255;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         fi.write("ICRD", 4);
         fi.write((char *)&dwTmp2, 4);
         fi.write(sm->getQstr(id, champ_ICRD).toLatin1());
         charTmp = '\0';
-        for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
+        for (quint32 i = 0; i < dwTmp2 - dwTmp; i++)
             fi.write(&charTmp, 1);
     }
 
@@ -430,12 +416,12 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     if (dwTmp > 0)
     {
         if (dwTmp > 255) dwTmp = 255;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         fi.write("IENG", 4);
         fi.write((char *)&dwTmp2, 4);
         fi.write(sm->getQstr(id, champ_IENG).toLatin1());
         charTmp = '\0';
-        for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
+        for (quint32 i = 0; i < dwTmp2 - dwTmp; i++)
             fi.write(&charTmp, 1);
     }
 
@@ -443,12 +429,12 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     if (dwTmp > 0)
     {
         if (dwTmp > 255) dwTmp = 255;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         fi.write("IPRD", 4);
         fi.write((char *)&dwTmp2, 4);
         fi.write(sm->getQstr(id, champ_IPRD).toLatin1());
         charTmp = '\0';
-        for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
+        for (quint32 i = 0; i < dwTmp2 - dwTmp; i++)
             fi.write(&charTmp, 1);
     }
 
@@ -456,12 +442,12 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     if (dwTmp > 0)
     {
         if (dwTmp > 255) dwTmp = 255;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         fi.write("ICOP", 4);
         fi.write((char *)&dwTmp2, 4);
         fi.write(sm->getQstr(id, champ_ICOP).toLatin1());
         charTmp = '\0';
-        for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
+        for (quint32 i = 0; i < dwTmp2 - dwTmp; i++)
             fi.write(&charTmp, 1);
     }
 
@@ -476,12 +462,12 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
 
         dwTmp = commentData.length();
         if (dwTmp > 65536) dwTmp = 65536;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         fi.write("ICMT", 4);
         fi.write((char *)&dwTmp2, 4);
         fi.write(commentData);
         charTmp = '\0';
-        for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
+        for (quint32 i = 0; i < dwTmp2 - dwTmp; i++)
             fi.write(&charTmp, 1);
     }
 
@@ -489,12 +475,12 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     if (dwTmp > 0)
     {
         if (dwTmp > 255) dwTmp = 255;
-        dwTmp2 = dwTmp + 2 - (dwTmp)%2;
+        dwTmp2 = dwTmp + 2 - dwTmp % 2;
         fi.write("ISFT", 4);
         fi.write((char *)&dwTmp2, 4);
         fi.write(sm->getQstr(id, champ_ISFT).toLatin1());
         charTmp = '\0';
-        for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
+        for (quint32 i = 0; i < dwTmp2 - dwTmp; i++)
             fi.write(&charTmp, 1);
     }
 
