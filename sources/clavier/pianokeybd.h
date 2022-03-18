@@ -93,12 +93,14 @@ protected:
     void initScene(int startKey, int numKeys);
     void resizeEvent(QResizeEvent *event) override;
 
-    PianoScene * m_scene;
+    virtual void onNoteOnForChild(int k, int v) { Q_UNUSED(k) Q_UNUSED(v) }
+    virtual void onNoteOffForChild(int k) { Q_UNUSED(k) }
 
 private:
     void setStartKey(int key);
     void setNumKeys(int numKeys);
 
+    PianoScene * m_scene;
     int m_channel;
 };
 

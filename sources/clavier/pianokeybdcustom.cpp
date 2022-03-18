@@ -70,11 +70,21 @@ PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent)
     set(PROPERTY_COLOR_WHITE_KEYS, COLOR_WHITE_DISABLED);
     set(PROPERTY_COLOR_1, COLOR_PRESSED);
     setFrameStyle(0);
+}
 
-    /// CONNECTIONS
 
-    connect(m_scene, SIGNAL(noteOn(int,int)), this, SLOT(setKey(int,int)));
-    connect(m_scene, SIGNAL(noteOff(int)), this, SLOT(removeCurrentRange(int)));
+void PianoKeybdCustom::onNoteOnForChild(int k, int v)
+{
+    if (v > 0)
+        _mapPressed.insert(k, QList<int>());
+    else
+        _mapPressed.remove(k);
+    updateRanges();
+}
+
+void PianoKeybdCustom::onNoteOffForChild(int k)
+{
+    removeCurrentRange(k);
 }
 
 void PianoKeybdCustom::addRangeAndRootKey(int rootKey, int noteMin, int noteMax)
@@ -100,26 +110,17 @@ void PianoKeybdCustom::clearCustomization()
     updateRanges();
 }
 
-void PianoKeybdCustom::setKey(int num, int vel)
+void PianoKeybdCustom::removeCurrentRange(int key)
 {
-    if (vel > 0)
-        _mapPressed.insert(num, QList<int>());
-    else
-        _mapPressed.remove(num);
+    _mapPressed.remove(key);
     updateRanges();
 }
 
-void PianoKeybdCustom::removeCurrentRange(int num)
+void PianoKeybdCustom::addCurrentRange(int key, int keyMin, int keyMax)
 {
-    _mapPressed.remove(num);
-    updateRanges();
-}
-
-void PianoKeybdCustom::addCurrentRange(int note, int noteMin, int noteMax)
-{
-    for (int i = noteMin; i <= noteMax; i++)
-        if (!_mapPressed[note].contains(i))
-            _mapPressed[note] << i;
+    for (int i = keyMin; i <= keyMax; i++)
+        if (!_mapPressed[key].contains(i))
+            _mapPressed[key] << i;
     updateRanges();
 }
 
