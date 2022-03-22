@@ -355,17 +355,17 @@
     <message>
         <location filename="core/types/attribute.cpp" line="776"/>
         <source>Loop start</source>
-        <translation type="unfinished"></translation>
+        <translation>Inizio Loop</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="779"/>
         <source>Loop end</source>
-        <translation type="unfinished"></translation>
+        <translation>Fine Loop</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="782"/>
         <source>Pitch correction (cents)</source>
-        <translation type="unfinished"></translation>
+        <translation>Correzione altezza tono (cents)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="625"/>
@@ -408,22 +408,22 @@
     <message>
         <location filename="repository/browser/browsersortmenu.cpp" line="52"/>
         <source>Date</source>
-        <translation type="unfinished">Data</translation>
+        <translation>Data</translation>
     </message>
     <message>
         <location filename="repository/browser/browsersortmenu.cpp" line="56"/>
         <source>Downloads</source>
-        <translation type="unfinished">Downloads</translation>
+        <translation>Downloads</translation>
     </message>
     <message>
         <location filename="repository/browser/browsersortmenu.cpp" line="58"/>
         <source>Rating score</source>
-        <translation type="unfinished">Punteggio</translation>
+        <translation>Punteggio</translation>
     </message>
     <message>
         <location filename="repository/browser/browsersortmenu.cpp" line="60"/>
         <source>Title (A→Z)</source>
-        <translation type="unfinished">Titolo (A→Z)</translation>
+        <translation>Titolo (A→Z)</translation>
     </message>
 </context>
 <context>
@@ -762,7 +762,7 @@
         <location filename="context/interface/configpanel.ui" line="186"/>
         <source>Keyboard</source>
         <oldsource>Virtual keyboard</oldsource>
-        <translation type="unfinished">Tastiera virtuale</translation>
+        <translation>Tastiera virtuale</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="219"/>
@@ -791,13 +791,15 @@
         <location filename="context/interface/configsectiongeneral.ui" line="125"/>
         <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool “Remove blank at start”)</source>
-        <translation type="unfinished"></translation>
+        <translation>Quando si importa un campione, tutti silenzi prima del attacco sarano rimossi.
+(Stesso effetto che lo strumento di &quot;rimozzione dei silenzi a l&apos;inizio&quot;)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="103"/>
         <source>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool “Trim to end of loop”)</source>
-        <translation type="unfinished"></translation>
+        <translation>Quando si importa un campione , i dati situati dopo la fine del loop sarano automaticamente rimossi.
+(stesso effetto che lo strumento &quot;Taglia a fine loop&quot;)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="166"/>
@@ -808,7 +810,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="22"/>
         <source>Sample management</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestione di campioni</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="34"/>
@@ -887,7 +889,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="621"/>
         <source>Behaviour</source>
-        <translation type="unfinished"></translation>
+        <translation>Comportamento</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="556"/>
@@ -923,7 +925,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="43"/>
         <source>Unique instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Caso unico</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="93"/>
@@ -933,7 +935,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="73"/>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Colori</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="349"/>
@@ -969,7 +971,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="66"/>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Stile</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="56"/>
@@ -995,7 +997,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="82"/>
         <source>Mapping</source>
-        <translation type="unfinished"></translation>
+        <translation>Mappatura</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="214"/>
@@ -1020,7 +1022,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="302"/>
         <source>Temperament</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperamento</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="69"/>
@@ -1031,29 +1033,29 @@
         <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
         <location filename="context/interface/configsectionkeyboard.ui" line="95"/>
         <source>Back to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>ritorno a valore predefinito</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="158"/>
         <source>Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>accordatura</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Tuning fork</source>
-        <translation type="unfinished"></translation>
+        <translation>Diapason</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.cpp" line="51"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
-        <translation type="unfinished">Hz</translation>
+        <translation>Hz</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.cpp" line="62"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
-        <translation type="unfinished"></translation>
+        <translation>Temperamento musicale uguale</translation>
     </message>
 </context>
 <context>
@@ -1071,7 +1073,7 @@
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="20"/>
         <source>Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Dossier</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="114"/>
@@ -1092,12 +1094,12 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="359"/>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Account</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="372"/>
         <source>Downloads</source>
-        <translation type="unfinished">Downloads</translation>
+        <translation>Downloads</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="113"/>
@@ -1164,7 +1166,7 @@ Premium!</source>
         <location filename="context/interface/configsectionsound.ui" line="333"/>
         <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
         <oldsource>Modulator &quot;velocity → filter cutoff&quot;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>moduilatore predefinito &quot;velocita → filtro taglio&quot;</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="126"/>
@@ -1174,7 +1176,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="112"/>
         <source>General volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume Generale</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="131"/>
@@ -1184,7 +1186,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="136"/>
         <source>disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Disattivato</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="242"/>
@@ -1199,7 +1201,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="362"/>
         <source>Options</source>
-        <translation type="unfinished">Opzioni</translation>
+        <translation>Opzioni</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="388"/>
@@ -1221,7 +1223,8 @@ Premium!</source>
         <location filename="context/interface/configsectionsound.cpp" line="129"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
-        <translation type="unfinished">dB</translation>
+        <translatorcomment>unita per decibel</translatorcomment>
+        <translation>dB</translation>
     </message>
 </context>
 <context>
@@ -1245,7 +1248,7 @@ Premium!</source>
         <location filename="context/interface/configtoc.ui" line="98"/>
         <source>Keyboard</source>
         <oldsource>Virtual keyboard</oldsource>
-        <translation type="unfinished">Tastiera virtuale</translation>
+        <translation>Tastiera virtuale</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="111"/>
@@ -1259,27 +1262,27 @@ repository</source>
     <message>
         <location filename="clavier/controllerarea.ui" line="216"/>
         <source>Pitch wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruota di controlo di tono</translation>
     </message>
     <message>
         <location filename="clavier/controllerarea.ui" line="241"/>
         <source>Sensitivity</source>
-        <translation type="unfinished"></translation>
+        <translation>Sensibilita</translation>
     </message>
     <message>
         <location filename="clavier/controllerarea.ui" line="266"/>
         <source>Pressure</source>
-        <translation type="unfinished"></translation>
+        <translation>pressione</translation>
     </message>
     <message>
         <location filename="clavier/controllerarea.cpp" line="291"/>
         <source>on</source>
-        <translation type="unfinished"></translation>
+        <translation>accesso</translation>
     </message>
     <message>
         <location filename="clavier/controllerarea.cpp" line="296"/>
         <source>off</source>
-        <translation type="unfinished"></translation>
+        <translation>spento</translation>
     </message>
 </context>
 <context>
@@ -1468,7 +1471,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="66"/>
         <source>mirabilos</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="67"/>
@@ -1678,7 +1681,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="202"/>
         <source>Aftertouch</source>
-        <translation type="unfinished"></translation>
+        <translation>Rilacio tasto</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.cpp" line="233"/>
@@ -1717,7 +1720,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_list.ui" line="73"/>
         <source>Search...</source>
-        <translation type="unfinished">Trova...</translation>
+        <translation>Trova...</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_list.ui" line="41"/>
@@ -1730,43 +1733,43 @@ repository</source>
     <message>
         <location filename="dialogs/dialognewelement.ui" line="55"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Annulla</translation>
+        <translation>&amp;Annulla</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.ui" line="62"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="51"/>
         <source>Create a new preset</source>
-        <translation type="unfinished">Crea un nuovo preset</translation>
+        <translation>Crea un nuovo preset</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="51"/>
         <source>Create a new instrument</source>
-        <translation type="unfinished">Crea un nuovo strumento</translation>
+        <translation>Crea un nuovo strumento</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="52"/>
         <source>Name of the new preset</source>
-        <translation type="unfinished">Nome del nuovo preset</translation>
+        <translation>Nome del nuovo preset</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="52"/>
         <source>Name of the new instrument</source>
-        <translation type="unfinished">Nome del nuovo strumento</translation>
+        <translation>Nome del nuovo strumento</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="53"/>
         <source>Link selected instruments</source>
         <oldsource>Link selected isntruments</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Legare gli strumenti selezionati</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="54"/>
         <source>Link selected samples</source>
-        <translation type="unfinished"></translation>
+        <translation>Legare i Campioni selezionati</translation>
     </message>
 </context>
 <context>
@@ -1816,7 +1819,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="61"/>
         <source>Overwrite existing name with key name and velocity as suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Sovrascrivi il nome esistente usando il nome della chiave e della velocita come suffisso</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="71"/>
@@ -2081,7 +2084,7 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertimage.ui" line="37"/>
         <source>URL of the image to insert...</source>
-        <translation type="unfinished"></translation>
+        <translation>URL de l&apos;imagine da inserire</translation>
     </message>
 </context>
 <context>
@@ -2089,12 +2092,12 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="14"/>
         <source>Insert a link</source>
-        <translation type="unfinished"></translation>
+        <translation>inserire un collegamento</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="24"/>
         <source>Text to display</source>
-        <translation type="unfinished"></translation>
+        <translation>Testo da visualizzare</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="31"/>
@@ -2107,17 +2110,17 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginserttable.ui" line="14"/>
         <source>Insert a table</source>
-        <translation type="unfinished"></translation>
+        <translation>Insericre una tabella</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginserttable.ui" line="47"/>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>colonne</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginserttable.ui" line="67"/>
         <source>Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>Rige</translation>
     </message>
 </context>
 <context>
@@ -2125,7 +2128,7 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertvideo.ui" line="14"/>
         <source>Insert a YouTube video</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserire un video Youtube</translation>
     </message>
 </context>
 <context>
@@ -2188,7 +2191,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="427"/>
         <source>Cannot create more presets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non si puo creare altre preimpostazioni</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="427"/>
@@ -2298,17 +2301,17 @@ repository</source>
     <message>
         <location filename="editor/widgets/equalizer.cpp" line="122"/>
         <source>Information</source>
-        <translation type="unfinished">Informazione</translation>
+        <translation>Informazione</translation>
     </message>
     <message>
         <location filename="editor/widgets/equalizer.cpp" line="123"/>
         <source>Equalization successfully applied on 1 sample.</source>
-        <translation type="unfinished"></translation>
+        <translation>Equalizzazione applicata con successo su 1 campione.</translation>
     </message>
     <message>
         <location filename="editor/widgets/equalizer.cpp" line="124"/>
         <source>Equalization successfully applied on %1 samples.</source>
-        <translation type="unfinished"></translation>
+        <translation>Equalizzazione applicata con successo su %1 campione.</translation>
     </message>
 </context>
 <context>
@@ -2333,7 +2336,7 @@ repository</source>
         <location filename="editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="63"/>
         <source>kHz</source>
         <comment>unit for kilo Herz</comment>
-        <translation type="unfinished"></translation>
+        <translation>kHz</translation>
     </message>
 </context>
 <context>
@@ -2365,7 +2368,7 @@ repository</source>
         <location filename="editor/graphics/graphicsviewenvelop.cpp" line="353"/>
         <source>s</source>
         <comment>unit for seconds</comment>
-        <translation type="unfinished">s</translation>
+        <translation>s</translation>
     </message>
 </context>
 <context>
@@ -2373,14 +2376,14 @@ repository</source>
     <message>
         <location filename="editor/graphics/graphicswave.cpp" line="182"/>
         <source>Multiple selection</source>
-        <translation type="unfinished">Selezione multipla</translation>
+        <translation>Selezione multipla</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicswave.cpp" line="201"/>
         <location filename="editor/graphics/graphicswave.cpp" line="204"/>
         <source>s</source>
         <comment>unit for seconds</comment>
-        <translation type="unfinished">s</translation>
+        <translation>s</translation>
     </message>
 </context>
 <context>
@@ -2403,7 +2406,7 @@ repository</source>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="94"/>
         <source>Show peak frequencies</source>
-        <translation type="unfinished">Mostra i picchi di frequenza</translation>
+        <translation>Mostra i picchi di frequenza</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="502"/>
@@ -2575,7 +2578,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="183"/>
         <source>Untitled</source>
-        <translation type="unfinished">Senza Titolo</translation>
+        <translation>Senza Titolo</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="193"/>
@@ -2678,31 +2681,31 @@ repository</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="99"/>
         <source>Default mod.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modalita. predefinita.</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="162"/>
         <source>overwritten by %1</source>
         <oldsource>overriden by %1</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>sovracritto da %1</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="169"/>
         <source>disabling
 default mod.</source>
-        <translation type="unfinished"></translation>
+        <translation>disattivando modalita. predefinita</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="171"/>
         <source>overriding
 default mod.</source>
-        <translation type="unfinished"></translation>
+        <translation>sovrascrivendo modalita predefinita</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="387"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
-        <translation type="unfinished">dB</translation>
+        <translation>dB</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="395"/>
@@ -2713,24 +2716,25 @@ default mod.</source>
         <location filename="editor/modulator/modulatorcell.cpp" line="398"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>centesima di semi toni</translatorcomment>
+        <translation>cents</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="409"/>
         <source>Add from:</source>
         <oldsource>Add from: </oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungere da:</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="410"/>
         <source>Multiply from:</source>
-        <translation type="unfinished"></translation>
+        <translation>Multiplicare da:</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="412"/>
         <source>To:</source>
         <oldsource>To: </oldsource>
-        <translation type="unfinished"></translation>
+        <translation>A:</translation>
     </message>
 </context>
 <context>
@@ -2780,7 +2784,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="161"/>
         <source>Collapse the modulator section</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprimi la sezione del modulatore</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="202"/>
@@ -2793,12 +2797,12 @@ default mod.</source>
         <location filename="editor/modulator/modulatoreditor.ui" line="234"/>
         <location filename="editor/modulator/modulatoreditor.cpp" line="162"/>
         <source>Select a single division to display the modulator list</source>
-        <translation type="unfinished"></translation>
+        <translation>Selezionare una singola divisione per visualizzare l&apos;elenco dei modulatori</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="320"/>
         <source>Expand the modulator section</source>
-        <translation type="unfinished"></translation>
+        <translation>Espandi la sezione del modulatore</translation>
     </message>
     <message numerus="yes">
         <location filename="editor/modulator/modulatoreditor.cpp" line="262"/>
@@ -3223,7 +3227,7 @@ di campionamento</translation>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="275"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
-        <translation type="unfinished">Hz</translation>
+        <translation>Hz</translation>
     </message>
 </context>
 <context>
@@ -3417,12 +3421,12 @@ di campionamento</translation>
     <message>
         <location filename="editor/pagesmpl.ui" line="187"/>
         <source>Root key</source>
-        <translation type="unfinished">Nota di base</translation>
+        <translation>Nota di base</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="206"/>
         <source>Correction</source>
-        <translation type="unfinished">Correzione</translation>
+        <translation>Correzione</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="291"/>
@@ -3432,7 +3436,7 @@ di campionamento</translation>
     <message>
         <location filename="editor/pagesmpl.ui" line="427"/>
         <source>Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>Accordatura</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="457"/>
@@ -3556,7 +3560,7 @@ di campionamento</translation>
         <location filename="editor/pagesmpl.cpp" line="1094"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sei sicuro di tagliare il campione da &lt;b&gt;%1&lt;/b&gt; a &lt;b&gt;%2&lt;/b&gt;?</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1096"/>
@@ -3572,7 +3576,7 @@ di campionamento</translation>
         <location filename="editor/pagesmpl.cpp" line="1098"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Sì e &amp;crea un altro campione</translation>
     </message>
 </context>
 <context>
@@ -4488,12 +4492,12 @@ scaricare la lista</translation>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="545"/>
         <source>Go to the previous page</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai alla pagina precedente</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="580"/>
         <source>Go to the next page</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai alla pagina successiva</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="670"/>
@@ -4549,7 +4553,7 @@ scaricare la lista</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorcenter.cpp" line="74"/>
         <source>At least one file must be uploaded.</source>
-        <translation type="unfinished"></translation>
+        <translation>Almeno un file deve essere caricato.</translation>
     </message>
 </context>
 <context>
@@ -4558,27 +4562,27 @@ scaricare la lista</translation>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="80"/>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
         <source>Warning</source>
-        <translation type="unfinished">Attenzione</translation>
+        <translation>Attenzione</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="80"/>
         <source>The number of files cannot exceed %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il numero di file non può superare %1.</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
         <source>File to upload</source>
-        <translation type="unfinished"></translation>
+        <translation>File da caricare</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
         <source>Files</source>
-        <translation type="unfinished">Files</translation>
+        <translation>Files</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
         <source>The file size cannot exceed %1 MB.</source>
-        <translation type="unfinished"></translation>
+        <translation>La dimensione del file non può superare %1 MB.</translation>
     </message>
 </context>
 <context>
@@ -4645,12 +4649,12 @@ scaricare la lista</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="130"/>
         <source>A category must be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>È necessario selezionare una categoria.</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="134"/>
         <source>A license must be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>È necessario selezionare una licenza.</translation>
     </message>
 </context>
 <context>
@@ -4663,7 +4667,7 @@ scaricare la lista</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditortop.cpp" line="56"/>
         <source>A title must be provided.</source>
-        <translation type="unfinished"></translation>
+        <translation>È necessario fornire un titolo.</translation>
     </message>
 </context>
 <context>
@@ -4681,7 +4685,7 @@ scaricare la lista</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="104"/>
         <source>Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Sostituire</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="44"/>
@@ -4706,12 +4710,12 @@ scaricare il contenuto</translation>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="512"/>
         <source>Discard changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Non salvare le modifiche</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="540"/>
         <source>Submit the changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Invia le modifiche</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="201"/>
@@ -4719,12 +4723,12 @@ scaricare il contenuto</translation>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="213"/>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
         <source>Warning</source>
-        <translation type="unfinished">Attenzione</translation>
+        <translation>Attenzione</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
         <source>The upload failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Il caricamento non è riuscito: %1</translation>
     </message>
 </context>
 <context>
@@ -4822,7 +4826,8 @@ scaricare il contenuto</translation>
         <location filename="editor/pageinst.cpp" line="237"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
-        <translation type="unfinished"></translation>
+        <translation>I valori su questa riga sono espressi in dB reali.
+Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     </message>
 </context>
 <context>
@@ -4831,7 +4836,8 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/pageprst.cpp" line="232"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
-        <translation type="unfinished"></translation>
+        <translation>I valori su questa riga sono espressi in dB reali.
+Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     </message>
 </context>
 <context>
@@ -5476,27 +5482,27 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="22"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="42"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Annulla</translation>
+        <translation>&amp;Annulla</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="67"/>
         <source>Add</source>
-        <translation type="unfinished">Addizione</translation>
+        <translation>Addizione</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="74"/>
         <source>Multiply</source>
-        <translation type="unfinished">Multiplicazione</translation>
+        <translation>Multiplicazione</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="84"/>
         <source>Parameter</source>
-        <translation type="unfinished">Parametri</translation>
+        <translation>Parametri</translation>
     </message>
 </context>
 <context>
@@ -5628,7 +5634,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="147"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
-        <translation type="unfinished">Hz</translation>
+        <translation>Hz</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="171"/>
@@ -5780,7 +5786,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="296"/>
         <source>Success</source>
-        <translation type="unfinished">Successo</translation>
+        <translation>Successo</translation>
     </message>
     <message numerus="yes">
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="301"/>
@@ -5797,17 +5803,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="20"/>
         <source>Root key</source>
-        <translation type="unfinished">Nota di base</translation>
+        <translation>Nota di base</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="27"/>
         <source>Tuning (semi-tones)</source>
-        <translation type="unfinished">Accordatura (semi-toni)</translation>
+        <translation>Accordatura (semi-toni)</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="34"/>
         <source>Tuning (cents)</source>
-        <translation type="unfinished">Accordatura (centesimi)</translation>
+        <translation>Accordatura (centesimi)</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="41"/>
@@ -5817,12 +5823,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="63"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="83"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Annulla</translation>
+        <translation>&amp;Annulla</translation>
     </message>
 </context>
 <context>
@@ -6346,7 +6352,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="62"/>
         <source>Untitled</source>
-        <translation type="unfinished">Senza Titolo</translation>
+        <translation>Senza Titolo</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="148"/>
@@ -6549,7 +6555,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeview.cpp" line="974"/>
         <source>Warning</source>
-        <translation type="unfinished">Attenzione</translation>
+        <translation>Attenzione</translation>
     </message>
     <message>
         <location filename="editor/tree/treeview.cpp" line="974"/>
@@ -6644,7 +6650,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="repository/soundfont/uploadingdialog.ui" line="14"/>
         <source>Information</source>
-        <translation type="unfinished">Informazione</translation>
+        <translation>Informazione</translation>
     </message>
     <message>
         <location filename="repository/soundfont/uploadingdialog.ui" line="54"/>
@@ -6654,7 +6660,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="repository/soundfont/uploadingdialog.cpp" line="76"/>
         <source>Canceling...</source>
-        <translation type="unfinished">Cancellando...</translation>
+        <translation>Cancellando...</translation>
     </message>
 </context>
 <context>
