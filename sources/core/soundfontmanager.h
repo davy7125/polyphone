@@ -78,7 +78,7 @@ public:
     bool isEdited(int indexSf2);
 
     // Get all attributes or modulators related to inst, instsmpl, prst, prstinst
-    void getAllAttributes(EltID id, QList<AttributeType> &listeChamps, QList<AttributeValue> &listeValeurs);
+    void getAllAttributes(EltID id, bool *& attributeSet, AttributeValue *& attributeValues);
     void getAllModulators(EltID id, QList<ModulatorData> &modulators);
 
     // Find if an ID is valid (allowing or not browing in hidden ID, not allowed by default)

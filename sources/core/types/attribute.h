@@ -91,8 +91,11 @@ typedef enum
     champ_overridingRootKey = 58,
     champ_unused5 = 59,
     champ_endOper = 60,
+    END_OF_GEN = 61,
+
     champ_IFIL = 128,                   // Start of SF2 fields
     champ_IVER = 129,
+
     champ_bpsFile = 130,                // Start of sample fields
     champ_dwStart16 = 131,
     champ_dwStart24 = 132,
@@ -104,18 +107,20 @@ typedef enum
     champ_chPitchCorrection = 138,
     champ_wSampleLink = 139,
     champ_sfSampleType = 140,
+
     champ_wPreset = 141,                // Start of preset fields
     champ_wBank = 142,
     champ_dwLibrary = 143,
     champ_dwGenre = 144,
     champ_dwMorphology = 145,
+
     champ_sfModSrcOper = 146,           // Start of modulator fields
     champ_sfModDestOper = 147,
     champ_modAmount = 148,
     champ_sfModAmtSrcOper = 149,
     champ_sfModTransOper = 150,
 
-    champ_indexMod = 152,              // Misc
+    champ_indexMod = 152,               // Misc
     champ_son = 156,
     champ_wBpsInit = 157,
     champ_wBpsSave = 158,

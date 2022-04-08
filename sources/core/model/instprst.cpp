@@ -31,6 +31,13 @@ InstPrst::InstPrst(Soundfont * soundfont, int row, TreeItem * parent, EltID id) 
     _globalDivision(new Division(nullptr, _soundfont, nullptr, EltID())),
     _row(row)
 {
+    // Extra fields are -1 by default
+    // These values will remain for an instrument or will be updated for a preset
+    _extraFields[0] = -1;
+    _extraFields[1] = -1;
+    _extraFields[2] = -1;
+    _extraFields[3] = -1;
+    _extraFields[4] = -1;
 }
 
 InstPrst::~InstPrst()
@@ -100,8 +107,8 @@ TreeItem * InstPrst::child(int row)
 QString InstPrst::display()
 {
     QString display = "";
-    if (_extraFields.contains(champ_wBank) && _extraFields.contains(champ_wPreset))
-        display = QString("%1:%2 ").arg(_extraFields[champ_wBank], 3, 10, QChar('0')).arg(_extraFields[champ_wPreset], 3, 10, QChar('0'));
+    if (getExtraField(champ_wBank) != -1)
+        display = QString("%1:%2 ").arg(getExtraField(champ_wBank), 3, 10, QChar('0')).arg(getExtraField(champ_wPreset), 3, 10, QChar('0'));
     display += (_name.isEmpty() ? "..." : _name);
     return display;
 }
@@ -109,8 +116,8 @@ QString InstPrst::display()
 QString InstPrst::sortText()
 {
     QString sortText = "";
-    if (_extraFields.contains(champ_wBank) && _extraFields.contains(champ_wPreset))
-        sortText = QString("%1:%2 ").arg(_extraFields[champ_wBank], 3, 10, QChar('0')).arg(_extraFields[champ_wPreset], 3, 10, QChar('0'));
+    if (getExtraField(champ_wBank) != -1)
+        sortText = QString("%1:%2 ").arg(getExtraField(champ_wBank), 3, 10, QChar('0')).arg(getExtraField(champ_wPreset), 3, 10, QChar('0'));
     sortText += _nameSort;
     return sortText;
 }
@@ -124,12 +131,14 @@ void InstPrst::setName(QString name)
 
 void InstPrst::setExtraField(AttributeType champ, int value)
 {
-    _extraFields[champ] = value;
+    // champ_wPreset is the beginning of the extra fields
+    _extraFields[champ - champ_wPreset] = value;
     if (champ == champ_wPreset || champ == champ_wBank)
         notifyUpdate();
 }
 
 int InstPrst::getExtraField(AttributeType champ)
 {
-    return _extraFields.contains(champ) ? _extraFields[champ] : 0;
+    // champ_wPreset is the beginning of the extra fields
+    return _extraFields[champ - champ_wPreset];
 }

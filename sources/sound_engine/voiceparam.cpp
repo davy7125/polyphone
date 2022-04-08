@@ -175,24 +175,22 @@ void VoiceParam::readDivisionAttributes(EltID idDivision)
 
     // Load global attributes
     EltID id(isPrst ? elementPrst : elementInst, idDivision.indexSf2, idDivision.indexElt);
-    QList<AttributeType> globalAttributeTypes;
-    QList<AttributeValue> globalAttributeValues;
-    _sm->getAllAttributes(id, globalAttributeTypes, globalAttributeValues);
+    bool * attributeSet;
+    AttributeValue * attributeValues;
+    _sm->getAllAttributes(id, attributeSet, attributeValues);
 
     // Configure with the global attributes
-    for (int i = 0; i < globalAttributeTypes.count(); i++)
-        if (_parameters[globalAttributeTypes[i]])
-            _parameters[globalAttributeTypes[i]]->initValue(globalAttributeValues[i], isPrst);
+    for (int i = 0; i < END_OF_GEN; i++)
+        if (attributeSet[i] && _parameters[i])
+            _parameters[i]->initValue(attributeValues[i], isPrst);
 
     // Load division attributes
-    QList<AttributeType> divisionAttributeTypes;
-    QList<AttributeValue> divisionAttributeValues;
-    _sm->getAllAttributes(idDivision, divisionAttributeTypes, divisionAttributeValues);
+    _sm->getAllAttributes(idDivision, attributeSet, attributeValues);
 
     // Configure with the division attributes (possibly overriding it)
-    for (int i = 0; i < divisionAttributeTypes.count(); i++)
-        if (_parameters[divisionAttributeTypes[i]])
-            _parameters[divisionAttributeTypes[i]]->initValue(divisionAttributeValues[i], isPrst);
+    for (int i = 0; i < END_OF_GEN; i++)
+        if (attributeSet[i] && _parameters[i])
+            _parameters[i]->initValue(attributeValues[i], isPrst);
 }
 
 void VoiceParam::readDivisionModulators(EltID idDivision)

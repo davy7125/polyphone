@@ -25,7 +25,6 @@
 #ifndef INSTPRST_H
 #define INSTPRST_H
 
-#include <QMap>
 #include "basetypes.h"
 #include "treeitem.h"
 #include "division.h"
@@ -68,7 +67,7 @@ private:
     int _row;
     QString _name;
     QString _nameSort;
-    QMap<AttributeType, int> _extraFields; // Used for presets only
+    int _extraFields[5]; // Used for presets only
 };
 
 #endif // INSTPRST_H

@@ -480,7 +480,7 @@ QList<int> SoundfontManager::getSiblings(EltID &id)
     switch (id.typeElement)
     {
     case elementSf2:
-        result = _soundfonts->getSoundfonts().keys();
+        result = _soundfonts->getSoundfontIds();
         break;
     case elementSmpl: {
         QVectorIterator<Smpl*> i(_soundfonts->getSoundfont(id.indexSf2)->getSamples().values());
@@ -564,24 +564,28 @@ QList<int> SoundfontManager::getSiblings(EltID &id)
         }
     } break;
     case elementInstGen: {
-        QListIterator<AttributeType> i(_soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->getGens().keys());
-        while (i.hasNext())
-            result << (int)i.next();
+        Division * div = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision();
+        for (int i = 0; i < END_OF_GEN; i++)
+            if (div->isSet((AttributeType)i))
+                result << i;
     } break;
     case elementPrstGen: {
-        QListIterator<AttributeType> i(_soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision()->getGens().keys());
-        while (i.hasNext())
-            result << (int)i.next();
+        Division * div = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision();
+        for (int i = 0; i < END_OF_GEN; i++)
+            if (div->isSet((AttributeType)i))
+                result << i;
     } break;
     case elementInstSmplGen: {
-        QListIterator<AttributeType> i(_soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2)->getGens().keys());
-        while (i.hasNext())
-            result << (int)i.next();
+        Division * div = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2);
+        for (int i = 0; i < END_OF_GEN; i++)
+            if (div->isSet((AttributeType)i))
+                result << i;
     } break;
     case elementPrstInstGen: {
-        QListIterator<AttributeType> i(_soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->getGens().keys());
-        while (i.hasNext())
-            result << (int)i.next();
+        Division * div = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
+        for (int i = 0; i < END_OF_GEN; i++)
+            if (div->isSet((AttributeType)i))
+                result << i;
     } break;
     default:
         break;
@@ -741,7 +745,7 @@ bool SoundfontManager::isEdited(int indexSf2)
             !this->getQstr(EltID(elementSf2, indexSf2), champ_filenameInitial).toLower().endsWith(".sf2");
 }
 
-void SoundfontManager::getAllAttributes(EltID id, QList<AttributeType> &listeChamps, QList<AttributeValue> &listeValeurs)
+void SoundfontManager::getAllAttributes(EltID id, bool *& attributeSet, AttributeValue *& attributeValues)
 {
     QMutexLocker locker(&_mutex);
     if (!this->isValid(id))
@@ -766,8 +770,8 @@ void SoundfontManager::getAllAttributes(EltID id, QList<AttributeType> &listeCha
         return;
     }
 
-    listeChamps = division->getGens().keys();
-    listeValeurs = division->getGens().values();
+    attributeSet = division->getAttributeSet();
+    attributeValues = division->getAttributeValues();
 }
 
 void SoundfontManager::getAllModulators(EltID id, QList<ModulatorData> &modulators)
@@ -1159,21 +1163,23 @@ void SoundfontManager::supprGenAndStore(EltID id, int storeAction)
         return;
     }
 
-    const QMap<AttributeType, AttributeValue> parameters = division->getGens();
-    foreach (AttributeType champ, parameters.keys())
+    for (int i = 0; i < END_OF_GEN; i++)
     {
-        // Create and store an action
-        if (storeAction)
+        if (division->isSet((AttributeType)i))
         {
-            Action * action = new Action();
-            action->typeAction = Action::TypeChangeToDefault;
-            action->id = id;
-            action->champ = champ;
-            action->vOldValue = parameters[champ];
-            _undoRedo->add(action);
-        }
+            // Create and store an action
+            if (storeAction)
+            {
+                Action * action = new Action();
+                action->typeAction = Action::TypeChangeToDefault;
+                action->id = id;
+                action->champ = (AttributeType)i;
+                action->vOldValue = division->getGen((AttributeType)i);
+                _undoRedo->add(action);
+            }
 
-        division->resetGen(champ);
+            division->resetGen((AttributeType)i);
+        }
     }
 }
 
@@ -1813,23 +1819,32 @@ bool SoundfontManager::isValid(EltID &id, bool acceptHidden, bool justCheckParen
         }
 
         // Gens: based on the count only
-        return id.indexMod < div->getGens().count();
+        int genCount = 0;
+        for (int i = 0; i < END_OF_GEN; i++)
+            if (div->isSet((AttributeType)i))
+                genCount++;
+        return id.indexMod < genCount;
     }
     else if (id.typeElement == elementInstMod || id.typeElement == elementInstGen ||
              id.typeElement == elementPrstMod || id.typeElement == elementPrstGen)
     {
         if (id.indexMod < 0 || justCheckParentLevel)
             return true;
+        Division * div = instPrst->getGlobalDivision();
 
         // Check mods?
         if (id.typeElement == elementInstMod || id.typeElement == elementPrstMod)
         {
-            Modulator * mod = instPrst->getGlobalDivision()->getMod(id.indexMod);
+            Modulator * mod = div->getMod(id.indexMod);
             return mod != nullptr && (!mod->isHidden() || acceptHidden);
         }
 
         // Gens: based on the count only
-        return id.indexMod < instPrst->getGlobalDivision()->getGens().count();
+        int genCount = 0;
+        for (int i = 0; i < END_OF_GEN; i++)
+            if (div->isSet((AttributeType)i))
+                genCount++;
+        return id.indexMod < genCount;
     }
 
     // Not possible to be here

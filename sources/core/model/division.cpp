@@ -32,7 +32,12 @@ Division::Division(InstPrst * instPrst, Soundfont * soundfont, TreeItem * parent
     _instPrst(instPrst),
     _soundfont(soundfont),
     _mute(false)
-{}
+{
+    _attributeValues = new AttributeValue[END_OF_GEN];
+    memset((void *)_attributeValues, 0, END_OF_GEN * sizeof(AttributeValue));
+    _attributeSet = new bool[END_OF_GEN];
+    memset((void *)_attributeSet, 0, END_OF_GEN * sizeof(bool));
+}
 
 Division::~Division()
 {
@@ -42,33 +47,37 @@ Division::~Division()
         if (elt != nullptr)
             delete _modulators.takeAtIndex(i);
     }
+
+    delete [] _attributeValues;
+    delete [] _attributeSet;
 }
 
 bool Division::isSet(AttributeType champ)
 {
-    return _parameters.contains(champ);
+    return _attributeSet[champ];
 }
 
 AttributeValue Division::getGen(AttributeType champ)
 {
+    if (_attributeSet[champ])
+        return _attributeValues[champ];
+
     AttributeValue value;
-    if (_parameters.contains(champ))
-        value = _parameters[champ];
-    else
-        value.wValue = 0;
+    value.wValue = 0;
     return value;
 }
 
 void Division::setGen(AttributeType champ, AttributeValue value)
 {
-    _parameters[champ] = value;
+    _attributeSet[champ] = true;
+    _attributeValues[champ] = value;
     if (champ == champ_sampleID || champ == champ_instrument)
         notifyUpdate();
 }
 
 void Division::resetGen(AttributeType champ)
 {
-    _parameters.remove(champ);
+    _attributeSet[champ] = false;
 }
 
 int Division::addMod()

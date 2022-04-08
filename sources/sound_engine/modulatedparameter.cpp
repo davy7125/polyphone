@@ -79,9 +79,6 @@ qint32 ModulatedParameter::getIntValue()
 
 double ModulatedParameter::getRealValue()
 {
-    // Compute the value
-    computeValue();
-
     // Special case: attenuation
     if (_type == champ_initialAttenuation)
     {
@@ -91,6 +88,9 @@ double ModulatedParameter::getRealValue()
                 0.1 * (_instModulation + _prstModulation);
         return value < 0 ? 0 : (value > 144 ? 144 : value);
     }
+
+    // Compute the value
+    computeValue();
 
     // Return a possibly converted value
     return Attribute(_type, false, _computedValue).getRealValue();

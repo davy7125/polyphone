@@ -45,7 +45,7 @@ public:
     // Add, get or delete a sample
     int addSample();
     Smpl * getSample(int index);
-    const IndexedElementList<Smpl *> getSamples() { return _smpl; }
+    const IndexedElementList<Smpl *> & getSamples() { return _smpl; }
     bool deleteSample(int index);
 
     // Add, get or delete an instrument

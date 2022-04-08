@@ -37,7 +37,7 @@ public:
 
     int addSoundfont();
     Soundfont * getSoundfont(int index);
-    const QMap<int, Soundfont *> getSoundfonts() { return _soundfonts; }
+    const QList<int> getSoundfontIds() { return _soundfonts.keys(); }
     bool deleteSoundfont(int index);
     int indexOf(Soundfont * soundfont);
 

@@ -26,7 +26,6 @@
 #define DIVISION_H
 
 #include "basetypes.h"
-#include <QMap>
 #include "treeitem.h"
 #include "indexedelementlist.h"
 class Modulator;
@@ -44,7 +43,8 @@ public:
     void setGen(AttributeType champ, AttributeValue value);
     void resetGen(AttributeType champ);
     AttributeValue getGen(AttributeType champ);
-    const QMap<AttributeType, AttributeValue> & getGens() { return _parameters; }
+    bool * getAttributeSet() { return _attributeSet; }
+    AttributeValue * getAttributeValues() { return _attributeValues; }
 
     void setMute(bool mute);
     bool isMute() override { return _mute; }
@@ -66,7 +66,10 @@ private:
     InstPrst * _instPrst;
     Soundfont * _soundfont;
     IndexedElementList<Modulator *> _modulators;
-    QMap<AttributeType, AttributeValue> _parameters;
+
+    AttributeValue * _attributeValues;
+    bool * _attributeSet;
+
     bool _mute;
 };
 
