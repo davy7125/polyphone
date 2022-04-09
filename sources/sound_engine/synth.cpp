@@ -34,13 +34,13 @@ int Synth::s_sampleVoiceTokenCounter = 0;
 // Constructeur, destructeur
 Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _sf2(SoundfontManager::getInstance()),
+    _soundEngines(nullptr),
+    _soundEngineCount(0),
     _gain(0),
     _choLevel(0), _choDepth(0), _choFrequency(0),
     _recordFile(nullptr),
     _isRecording(false),
     _isWritingInStream(0),
-    _fTmpSumRevL(nullptr),
-    _fTmpSumRevR(nullptr),
     _dataWav(nullptr),
     _bufferSize(0),
     _configuration(configuration)
@@ -57,43 +57,43 @@ Synth::~Synth()
 void Synth::destroySoundEnginesAndBuffers()
 {
     // Stop sound engines
-    for (int i = 0; i < _soundEngines.size(); i++)
-        _soundEngines.at(i)->stop();
+    for (int i = 0; i < _soundEngineCount; i++)
+        _soundEngines[i]->stop();
 
     // Stop threads
-    for (int i = 0; i < _soundEngines.size(); i++)
-        _soundEngines.at(i)->thread()->quit();
+    for (int i = 0; i < _soundEngineCount; i++)
+        _soundEngines[i]->thread()->quit();
 
     // Delete sound engines and threads
-    while (_soundEngines.size())
+    for (int i = 0; i < _soundEngineCount; i++)
     {
-        QThread * thread = _soundEngines.last()->thread();
+        QThread * thread = _soundEngines[i]->thread();
         thread->wait(50);
-        delete _soundEngines.takeLast();
+        delete _soundEngines[i];
         delete thread;
     }
+    delete [] _soundEngines;
 
-    delete [] _fTmpSumRevL;
-    delete [] _fTmpSumRevR;
     delete [] _dataWav;
 }
 
 void Synth::createSoundEnginesAndBuffers()
 {
-    _fTmpSumRevL = new float [4 * _bufferSize];
-    _fTmpSumRevR = new float [4 * _bufferSize];
     _dataWav = new float[8 * _bufferSize];
 
-    int nbEngines = qMax(QThread::idealThreadCount() - 2, 1);
-    for (int i = 0; i < nbEngines; i++)
+    _soundEngineCount = qMax(QThread::idealThreadCount() - 2, 1);
+    _soundEngineCount = 3;
+    _soundEngines = new SoundEngine * [_soundEngineCount];
+    for (int i = 0; i < _soundEngineCount; i++)
     {
-        SoundEngine * soundEngine = new SoundEngine(_bufferSize);
+        SoundEngine * soundEngine = new SoundEngine(&_semRunningSoundEngines, _bufferSize);
         connect(soundEngine, SIGNAL(readFinished(int)), this, SIGNAL(readFinished(int)));
         soundEngine->moveToThread(new QThread());
         soundEngine->thread()->start(QThread::TimeCriticalPriority);
         QMetaObject::invokeMethod(soundEngine, "start");
-        _soundEngines << soundEngine;
+        _soundEngines[i] = soundEngine;
     }
+    SoundEngine::setInstanceList(_soundEngines, _soundEngineCount);
 }
 
 int Synth::play(EltID id, int channel, int key, int velocity)
@@ -122,11 +122,6 @@ int Synth::play(EltID id, int channel, int key, int velocity)
     default:
         return -1;
     }
-
-    // Synchronize all new voices that have been added
-    _mutexSynchro.lock();
-    SoundEngine::syncNewVoices();
-    _mutexSynchro.unlock();
 
     // Reset the list used for the exclusive class system
     _listVoixTmp.clear();
@@ -357,10 +352,8 @@ void Synth::updateConfiguration()
     if (_bufferSize != bufferSize)
     {
         _bufferSize = bufferSize;
-        _mutexSynchro.lock();
         destroySoundEnginesAndBuffers();
         createSoundEnginesAndBuffers();
-        _mutexSynchro.unlock();
     }
 }
 
@@ -534,39 +527,34 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
 {
     memset(dataL, 0, maxlen * sizeof(float));
     memset(dataR, 0, maxlen * sizeof(float));
-    memset(_fTmpSumRevL, 0, maxlen * sizeof(float));
-    memset(_fTmpSumRevR, 0, maxlen * sizeof(float));
 
-    // Merge sound engines
-    _mutexSynchro.lock();
-    for (int i = 0; i < _soundEngines.size(); i++)
-        _soundEngines.at(i)->addData(dataL, dataR, _fTmpSumRevL, _fTmpSumRevR, maxlen);
-    _mutexSynchro.unlock();
+    // Wake up the sound engines
+    for (int i = 0; i < _soundEngineCount; ++i)
+        _soundEngines[i]->prepareData(maxlen);
+    _semRunningSoundEngines.acquire(_soundEngineCount);
 
-    // EQ filter (live preview of filtered samples)
-    _eq.filterData(dataL, dataR, maxlen);
-
+    // Get the reverberated part of the sound
+    for (int i = 0; i < _soundEngineCount; i++)
+        _soundEngines[i]->addRevData(dataL, dataR, maxlen);
     if (_reverbOn)
     {
-        // Apply reverb and add data
+        // Apply reverb on the current data
         _mutexReverb.lock();
         for (quint32 i = 0; i < maxlen; i++)
         {
-            dataL[i] += static_cast<float>(
-                        _reverb.tick(static_cast<double>(_fTmpSumRevL[i]), static_cast<double>(_fTmpSumRevR[i])));
-            dataR[i] += static_cast<float>(_reverb.lastOut(1));
+            dataL[i] = static_cast<float>(
+                        _reverb.tick(static_cast<double>(dataL[i]), static_cast<double>(dataR[i])));
+            dataR[i] = static_cast<float>(_reverb.lastOut(1));
         }
         _mutexReverb.unlock();
     }
-    else
-    {
-        // Just add data
-        for (quint32 i = 0; i < maxlen; i++)
-        {
-            dataL[i] += _fTmpSumRevL[i];
-            dataR[i] += _fTmpSumRevR[i];
-        }
-    }
+
+    // Add the non-reverberated part of the sound
+    for (int i = 0; i < _soundEngineCount; i++)
+        _soundEngines[i]->addNonRevData(dataL, dataR, maxlen);
+
+    // EQ filter (live preview of filtered samples)
+    _eq.filterData(dataL, dataR, maxlen);
 
     // Add calibrating sinus
     _sinus.addData(dataL, dataR, maxlen);

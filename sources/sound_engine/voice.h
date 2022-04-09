@@ -53,8 +53,6 @@ public:
     void setGain(double gain);
     void setChorus(int level, int depth, int frequency);
     bool isFinished() { return _isFinished; }
-    bool isRunning() { return _isRunning; }
-    void runVoice(quint32 delay) { _isRunning = true; _delayStart = delay; }
 
     // Access to voiceParam properties
     double getPan();
@@ -99,7 +97,7 @@ private:
     quint32 _currentSmplPos;
     double _time;
     bool _release;
-    quint32 _delayEnd, _delayStart;
+    quint32 _delayEnd;
     bool _isFinished;
     bool _isRunning;
 

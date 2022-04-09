@@ -74,7 +74,6 @@ Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, VoicePa
     _time(0),
     _release(false),
     _delayEnd(10),
-    _delayStart(0),
     _isFinished(false),
     _isRunning(false),
     _lastFraction(0),
@@ -135,20 +134,6 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     double v_chorusEffect = _voiceParam->getDouble(champ_chorusEffectsSend);
 
     double v_attenuation = _voiceParam->getDouble(champ_initialAttenuation);
-
-    // Synchronization delay (stereo samples)
-    quint32 nbNullValues = qMin(len, _delayStart);
-    memset(dataL, 0, nbNullValues * sizeof(float));
-    memset(dataR, 0, nbNullValues * sizeof(float));
-    _delayStart -= nbNullValues;
-    len -= nbNullValues;
-    if (len == 0)
-    {
-        _mutexParam.unlock();
-        return;
-    }
-    dataL = &dataL[nbNullValues];
-    dataR = &dataR[nbNullValues];
 
     bool endSample = false;
 
@@ -303,9 +288,6 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     }
 
     _mutexParam.unlock();
-
-    dataL = &dataL[-static_cast<int>(nbNullValues)];
-    dataR = &dataR[-static_cast<int>(nbNullValues)];
 }
 
 bool Voice::takeData(qint32 * data, quint32 nbRead)

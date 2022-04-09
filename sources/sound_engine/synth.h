@@ -90,7 +90,9 @@ private:
     SoundfontManager * _sf2;
 
     // Liste des sound engines, voix temporaires (pour exclusive class)
-    QList<SoundEngine *> _soundEngines;
+    QSemaphore _semRunningSoundEngines;
+    SoundEngine ** _soundEngines;
+    int _soundEngineCount;
     QList<Voice *> _listVoixTmp;
     static int s_sampleVoiceTokenCounter;
 
@@ -104,7 +106,7 @@ private:
     int _choLevel, _choDepth, _choFrequency;
     stk::FreeVerb _reverb;
     bool _reverbOn;
-    QMutex _mutexReverb, _mutexSynchro;
+    QMutex _mutexReverb;
 
     // Record management
     QFile * _recordFile;
@@ -113,7 +115,7 @@ private:
     QAtomicInt _isWritingInStream;
     quint32 _recordLength;
 
-    float * _fTmpSumRevL, * _fTmpSumRevR, * _dataWav;
+    float * _dataWav;
     quint32 _bufferSize;
 
     ConfManager * _configuration;
