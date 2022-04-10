@@ -62,18 +62,8 @@ int SoundEngine::getNbVoices()
     return iRet;
 }
 
-void SoundEngine::addVoice(Voice * voice, QList<Voice*> friends)
+void SoundEngine::addVoice(Voice ** voicesToAdd, int numberOfVoicesToAdd)
 {
-    int key = voice->getKey();
-    if (key >= 0)
-    {
-        int exclusiveClass = voice->getExclusiveClass();
-        if (exclusiveClass != 0)
-            closeAll(exclusiveClass, voice->getPresetNumber(), friends);
-    }
-    else
-        voice->setLoopMode(_isLoopEnabled);
-
     // Find the less busy SoundEngine
     int index = -1;
     int minVoiceNumber = -1;
@@ -86,17 +76,34 @@ void SoundEngine::addVoice(Voice * voice, QList<Voice*> friends)
             minVoiceNumber = nbVoices;
         }
     }
-    if (index != -1)
-        _listInstances[index]->addVoiceInstance(voice);
 
-    if (key < 0)
+    bool sampleLevelIncluded = false;
+    for (int i = 0; i < numberOfVoicesToAdd; ++i)
+    {
+        if (voicesToAdd[i]->getKey() > 0)
+        {
+            // Exclusive class: possibly stop voices
+            if (voicesToAdd[i]->getExclusiveClass() > 0)
+                closeAll(voicesToAdd[i]->getChannel(), voicesToAdd[i]->getExclusiveClass(), voicesToAdd[i]->getPresetNumber());
+        }
+        else
+        {
+            sampleLevelIncluded = true;
+            voicesToAdd[i]->setLoopMode(_isLoopEnabled);
+        }
+    }
+
+    // Add the voices
+    _listInstances[index]->addVoiceInstance(voicesToAdd, numberOfVoicesToAdd);
+    if (sampleLevelIncluded)
         _listInstances[index]->setStereoInstance(_isStereo);
 }
 
-void SoundEngine::addVoiceInstance(Voice * voice)
+void SoundEngine::addVoiceInstance(Voice **voicesToAdd, int numberOfVoicesToAdd)
 {
     _mutexVoices.lock();
-    _listVoices << voice;
+    for (int i = 0; i < numberOfVoicesToAdd; i++)
+        _listVoices << voicesToAdd[i];
     _mutexVoices.unlock();
 }
 
@@ -322,20 +329,20 @@ void SoundEngine::setGainSampleInstance(int gain)
     _mutexVoices.unlock();
 }
 
-void SoundEngine::closeAll(int exclusiveClass, int numPreset, QList<Voice*> friends)
+void SoundEngine::closeAll(int channel, int exclusiveClass, int numPreset)
 {
     for (int i = 0; i < _instanceCount; i++)
-        _listInstances[i]->closeAllInstance(exclusiveClass, numPreset, friends);
+        _listInstances[i]->closeAllInstance(channel, exclusiveClass, numPreset);
 }
 
-void SoundEngine::closeAllInstance(int exclusiveClass, int numPreset, QList<Voice*> friends)
+void SoundEngine::closeAllInstance(int channel, int exclusiveClass, int numPreset)
 {
     _mutexVoices.lock();
     for (int i = 0; i < _listVoices.size(); i++)
     {
         if (_listVoices.at(i)->getExclusiveClass() == exclusiveClass &&
                 _listVoices.at(i)->getPresetNumber() == numPreset &&
-                !friends.contains(_listVoices.at(i)))
+                _listVoices.at(i)->getChannel() == channel)
             _listVoices.at(i)->release(true);
     }
     _mutexVoices.unlock();

@@ -89,11 +89,13 @@ private:
     LiveEQ _eq;
     SoundfontManager * _sf2;
 
-    // Liste des sound engines, voix temporaires (pour exclusive class)
+    // Sound engines
     QSemaphore _semRunningSoundEngines;
     SoundEngine ** _soundEngines;
     int _soundEngineCount;
-    QList<Voice *> _listVoixTmp;
+    Voice ** _voicesToAdd;
+    int _numberOfVoicesToAdd;
+    static const int MAX_NUMBER_OF_VOICES_TO_ADD;
     static int s_sampleVoiceTokenCounter;
 
     // Audio format

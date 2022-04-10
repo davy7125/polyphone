@@ -41,7 +41,7 @@ public:
         _instanceCount = count;
     }
 
-    static void addVoice(Voice * voice, QList<Voice *> friends = QList<Voice*>());
+    static void addVoice(Voice **voicesToAdd, int numberOfVoicesToAdd);
     static void stopAllVoices(bool allChannels);
 
     // sf2Id: -1 (no filter) or specific sf2 id
@@ -74,11 +74,11 @@ signals:
     void readFinished(int token);
 
 private:
-    static void closeAll(int exclusiveClass, int numPreset, QList<Voice *> friends);
+    static void closeAll(int channel, int exclusiveClass, int numPreset);
 
     int getNbVoices();
-    void closeAllInstance(int exclusiveClass, int numPreset, QList<Voice*> friends);
-    void addVoiceInstance(Voice * voice);
+    void closeAllInstance(int channel, int exclusiveClass, int numPreset);
+    void addVoiceInstance(Voice ** voicesToAdd, int numberOfVoicesToAdd);
     void stopAllVoicesInstance(bool allChannels);
     void releaseVoicesInstance(int sf2Id, int presetId, int channel, int key);
     void setGainInstance(double gain);

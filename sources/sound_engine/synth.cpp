@@ -30,12 +30,15 @@
 #include "soundfontmanager.h"
 
 int Synth::s_sampleVoiceTokenCounter = 0;
+const int Synth::MAX_NUMBER_OF_VOICES_TO_ADD = 128;
 
 // Constructeur, destructeur
 Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _sf2(SoundfontManager::getInstance()),
     _soundEngines(nullptr),
     _soundEngineCount(0),
+    _voicesToAdd(new Voice * [MAX_NUMBER_OF_VOICES_TO_ADD]),
+    _numberOfVoicesToAdd(0),
     _gain(0),
     _choLevel(0), _choDepth(0), _choFrequency(0),
     _recordFile(nullptr),
@@ -52,6 +55,7 @@ Synth::Synth(ConfManager *configuration) : QObject(nullptr),
 Synth::~Synth()
 {
     destroySoundEnginesAndBuffers();
+    delete [] _voicesToAdd;
 }
 
 void Synth::destroySoundEnginesAndBuffers()
@@ -99,6 +103,10 @@ void Synth::createSoundEnginesAndBuffers()
 int Synth::play(EltID id, int channel, int key, int velocity)
 {
     //qWarning() << "PLAY on channel" << channel << "key" << key << "vel" << velocity << id.toString();
+
+    // Reset the number of voices to add
+    _numberOfVoicesToAdd = 0;
+
     if (velocity == 0)
     {
         // Release of voices
@@ -123,8 +131,9 @@ int Synth::play(EltID id, int channel, int key, int velocity)
         return -1;
     }
 
-    // Reset the list used for the exclusive class system
-    _listVoixTmp.clear();
+    // Add all voices to the sound engines
+    SoundEngine::addVoice(_voicesToAdd, _numberOfVoicesToAdd);
+
     return playingToken;
 }
 
@@ -276,9 +285,14 @@ int Synth::playSmpl(int idSf2, int idElt, int channel, int key, int velocity, El
         voiceTmp->setGain(_gain);
     }
 
-    // Add the voice in the list
-    _listVoixTmp << voiceTmp;
-    SoundEngine::addVoice(voiceTmp, _listVoixTmp);
+    // Store the voice in the list of voices to add
+    if (_numberOfVoicesToAdd < MAX_NUMBER_OF_VOICES_TO_ADD)
+        _voicesToAdd[_numberOfVoicesToAdd++] = voiceTmp;
+    else
+    {
+        delete voiceTmp;
+        return currentToken;
+    }
 
     if (key == -1) // -2 is the linked sample
     {
