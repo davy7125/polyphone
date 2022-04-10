@@ -76,7 +76,6 @@ signals:
 private:
     static void closeAll(int channel, int exclusiveClass, int numPreset);
 
-    int getNbVoices();
     void closeAllInstance(int channel, int exclusiveClass, int numPreset);
     void addVoiceInstance(Voice ** voicesToAdd, int numberOfVoicesToAdd);
     void stopAllVoicesInstance(bool allChannels);
@@ -94,7 +93,9 @@ private:
     QAtomicInt _interrupted;
     QSemaphore * _semRunning;
     QMutex _mutexVoices, _mutexSynchro;
-    QList<Voice *> _listVoices;
+    Voice ** _voices;
+    int _numberOfVoices;
+    static const int MAX_NUMBER_OF_VOICES;
     float * _dataL, * _dataR, * _dataRevL, * _dataRevR;
     float * _dataTmpL, * _dataTmpR;
     volatile quint32 _lenToPrepare;
