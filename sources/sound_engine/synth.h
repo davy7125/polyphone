@@ -32,6 +32,8 @@
 #include "liveeq.h"
 #include <QDataStream>
 class SoundfontManager;
+class Soundfont;
+class InstPrst;
 class ConfManager;
 
 class Synth : public QObject
@@ -77,10 +79,11 @@ public slots:
     void updateConfiguration();
 
 private:
-    void playPrst(int idSf2, int idElt, int channel, int key, int velocity);
-    void playInst(int idSf2, int idElt, int channel, int key, int velocity, EltID idPrstInst = EltID(elementUnknown));
-    int playSmpl(int idSf2, int idElt, int channel, int key, int velocity,
-                 EltID idInstSmpl = EltID(elementUnknown), EltID idPrstInst = EltID(elementUnknown));
+    void playPrst(Soundfont * soundfont, InstPrst * prst, int channel, int key, int velocity);
+    void playInst(Soundfont * soundfont, InstPrst * inst, int channel, int key, int velocity,
+                  InstPrst * prst = nullptr, Division * prstDiv = nullptr);
+    int playSmpl(Soundfont * soundfont, Smpl * smpl, int channel, int key, int velocity,
+                 InstPrst * inst = nullptr, Division * instDiv = nullptr, InstPrst * prst = nullptr, Division * prstDiv = nullptr);
 
     void destroySoundEnginesAndBuffers();
     void createSoundEnginesAndBuffers();

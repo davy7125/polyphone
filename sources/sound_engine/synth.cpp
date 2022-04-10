@@ -28,6 +28,11 @@
 #include <QFile>
 #include "contextmanager.h"
 #include "soundfontmanager.h"
+#include "soundfonts.h"
+#include "soundfont.h"
+#include "instprst.h"
+#include "division.h"
+#include "smpl.h"
 
 int Synth::s_sampleVoiceTokenCounter = 0;
 const int Synth::MAX_NUMBER_OF_VOICES_TO_ADD = 128;
@@ -104,29 +109,47 @@ int Synth::play(EltID id, int channel, int key, int velocity)
 {
     //qWarning() << "PLAY on channel" << channel << "key" << key << "vel" << velocity << id.toString();
 
-    // Reset the number of voices to add
-    _numberOfVoicesToAdd = 0;
-
+    // Possibly release voices
     if (velocity == 0)
     {
-        // Release of voices
         SoundEngine::releaseVoices(id.indexSf2, id.indexElt, channel, key);
         return -1;
     }
+
+    // Corresponding soundfont
+    QMutexLocker(&_sf2->_mutex);
+    Soundfont * soundfont = _sf2->_soundfonts->getSoundfont(id.indexSf2);
+    if (soundfont == nullptr)
+        return -1;
+
+    // Reset the number of voices to add
+    _numberOfVoicesToAdd = 0;
 
     // A key is pressed
     int playingToken = -1;
     switch (id.typeElement)
     {
     case elementSmpl:
-        playingToken = playSmpl(id.indexSf2, id.indexElt, channel, key, velocity);
-        break;
+    {
+        Smpl * smpl = soundfont->getSample(id.indexElt);
+        if (smpl == nullptr)
+            return -1;
+        playingToken = playSmpl(soundfont, smpl, channel, key, velocity);
+    } break;
     case elementInst: case elementInstSmpl:
-        playInst(id.indexSf2, id.indexElt, channel, key, velocity);
-        break;
+    {
+        InstPrst * inst = soundfont->getInstrument(id.indexElt);
+        if (inst == nullptr)
+            return -1;
+        playInst(soundfont, inst, channel, key, velocity);
+    } break;
     case elementPrst: case elementPrstInst:
-        playPrst(id.indexSf2, id.indexElt, channel, key, velocity);
-        break;
+    {
+        InstPrst * prst = soundfont->getPreset(id.indexElt);
+        if (prst == nullptr)
+            return -1;
+        playPrst(soundfont, prst, channel, key, velocity);
+    } break;
     default:
         return -1;
     }
@@ -137,20 +160,19 @@ int Synth::play(EltID id, int channel, int key, int velocity)
     return playingToken;
 }
 
-void Synth::playPrst(int idSf2, int idElt, int channel, int key, int velocity)
+void Synth::playPrst(Soundfont * soundfont, InstPrst * prst, int channel, int key, int velocity)
 {
     // Default preset range
-    EltID idPrst(elementPrst, idSf2, idElt, 0, 0);
     RangesType defaultKeyRange, defaultVelRange;
-    if (_sf2->isSet(idPrst, champ_keyRange))
-        defaultKeyRange = _sf2->get(idPrst, champ_keyRange).rValue;
+    if (prst->getGlobalDivision()->isSet(champ_keyRange))
+        defaultKeyRange = prst->getGlobalDivision()->getGen(champ_keyRange).rValue;
     else
     {
         defaultKeyRange.byLo = 0;
         defaultKeyRange.byHi = 127;
     }
-    if (_sf2->isSet(idPrst, champ_velRange))
-        defaultVelRange = _sf2->get(idPrst, champ_velRange).rValue;
+    if (prst->getGlobalDivision()->isSet(champ_velRange))
+        defaultVelRange = prst->getGlobalDivision()->getGen(champ_velRange).rValue;
     else
     {
         defaultVelRange.byLo = 0;
@@ -158,20 +180,20 @@ void Synth::playPrst(int idSf2, int idElt, int channel, int key, int velocity)
     }
 
     // Browse the ranges of all linked instruments
-    EltID idPrstInst(elementPrstInst, idSf2, idElt, 0, 0);
     int keyMin, keyMax, velMin, velMax;
     RangesType rangeTmp;
-    foreach (int i, _sf2->getSiblings(idPrstInst))
+    QVector<Division *> divisions = prst->getDivisions().values();
+    for (int i = 0; i < divisions.count(); ++i)
     {
-        idPrstInst.indexElt2 = i;
+        Division * prstDiv = divisions[i];
 
-        // Skip muted divisions
-        if (_sf2->get(idPrstInst, champ_mute).bValue > 0)
+        // Skip hidden or muted divisions
+        if (prstDiv->isHidden() || prstDiv->isMute())
             continue;
 
-        if (_sf2->isSet(idPrstInst, champ_keyRange))
+        if (prstDiv->isSet(champ_keyRange))
         {
-            rangeTmp = _sf2->get(idPrstInst, champ_keyRange).rValue;
+            rangeTmp = prstDiv->getGen(champ_keyRange).rValue;
             keyMin = rangeTmp.byLo;
             keyMax = rangeTmp.byHi;
         }
@@ -180,9 +202,9 @@ void Synth::playPrst(int idSf2, int idElt, int channel, int key, int velocity)
             keyMin = defaultKeyRange.byLo;
             keyMax = defaultKeyRange.byHi;
         }
-        if (_sf2->isSet(idPrstInst, champ_velRange))
+        if (prstDiv->isSet(champ_velRange))
         {
-            rangeTmp = _sf2->get(idPrstInst, champ_velRange).rValue;
+            rangeTmp = prstDiv->getGen(champ_velRange).rValue;
             velMin = rangeTmp.byLo;
             velMax = rangeTmp.byHi;
         }
@@ -194,25 +216,28 @@ void Synth::playPrst(int idSf2, int idElt, int channel, int key, int velocity)
 
         // Check {key, vel} is in the division and go inside the instruments
         if (keyMin <= key && key <= keyMax && velMin <= velocity && velocity <= velMax)
-            this->playInst(idSf2, _sf2->get(idPrstInst, champ_instrument).wValue, channel, key, velocity, idPrstInst);
+        {
+            InstPrst * inst = soundfont->getInstrument(prstDiv->getGen(champ_instrument).wValue);
+            if (inst != nullptr)
+                this->playInst(soundfont, inst, channel, key, velocity, prst, prstDiv);
+        }
     }
 }
 
-void Synth::playInst(int idSf2, int idElt, int channel, int key, int velocity, EltID idPrstInst)
+void Synth::playInst(Soundfont * soundfont, InstPrst * inst, int channel, int key, int velocity,
+                     InstPrst * prst, Division * prstDiv)
 {
     // Default instrument range
-    EltID idInst(elementInst, idSf2, idElt, 0, 0);
-    idInst.typeElement = elementInst;
     RangesType defaultKeyRange, defaultVelRange;
-    if (_sf2->isSet(idInst, champ_keyRange))
-        defaultKeyRange = _sf2->get(idInst, champ_keyRange).rValue;
+    if (inst->getGlobalDivision()->isSet(champ_keyRange))
+        defaultKeyRange = inst->getGlobalDivision()->getGen(champ_keyRange).rValue;
     else
     {
         defaultKeyRange.byLo = 0;
         defaultKeyRange.byHi = 127;
     }
-    if (_sf2->isSet(idInst, champ_velRange))
-        defaultVelRange = _sf2->get(idInst, champ_velRange).rValue;
+    if (inst->getGlobalDivision()->isSet(champ_velRange))
+        defaultVelRange = inst->getGlobalDivision()->getGen(champ_velRange).rValue;
     else
     {
         defaultVelRange.byLo = 0;
@@ -220,20 +245,20 @@ void Synth::playInst(int idSf2, int idElt, int channel, int key, int velocity, E
     }
 
     // Browse the range of all linked samples
-    EltID idInstSmpl(elementInstSmpl, idSf2, idElt, 0, 0);
     int keyMin, keyMax, velMin, velMax;
     RangesType rangeTmp;
-    foreach (int i, _sf2->getSiblings(idInstSmpl))
+    QVector<Division *> divisions = inst->getDivisions().values();
+    for (int i = 0; i < divisions.count(); ++i)
     {
-        idInstSmpl.indexElt2 = i;
+        Division * instDiv = divisions[i];
 
-        // Skip muted divisions
-        if (_sf2->get(idInstSmpl, champ_mute).bValue > 0)
+        // Skip hidden or muted divisions
+        if (instDiv->isHidden() || instDiv->isMute())
             continue;
 
-        if (_sf2->isSet(idInstSmpl, champ_keyRange))
+        if (instDiv->isSet(champ_keyRange))
         {
-            rangeTmp = _sf2->get(idInstSmpl, champ_keyRange).rValue;
+            rangeTmp = instDiv->getGen(champ_keyRange).rValue;
             keyMin = rangeTmp.byLo;
             keyMax = rangeTmp.byHi;
         }
@@ -242,9 +267,9 @@ void Synth::playInst(int idSf2, int idElt, int channel, int key, int velocity, E
             keyMin = defaultKeyRange.byLo;
             keyMax = defaultKeyRange.byHi;
         }
-        if (_sf2->isSet(idInstSmpl, champ_velRange))
+        if (instDiv->isSet(champ_velRange))
         {
-            rangeTmp = _sf2->get(idInstSmpl, champ_velRange).rValue;
+            rangeTmp = instDiv->getGen(champ_velRange).rValue;
             velMin = rangeTmp.byLo;
             velMax = rangeTmp.byHi;
         }
@@ -256,24 +281,33 @@ void Synth::playInst(int idSf2, int idElt, int channel, int key, int velocity, E
 
         // Check {key, vel} is in the division and go inside the samples
         if (keyMin <= key && key <= keyMax && velMin <= velocity && velocity <= velMax)
-            this->playSmpl(idSf2, _sf2->get(idInstSmpl, champ_sampleID).wValue, channel, key, velocity, idInstSmpl, idPrstInst);
+        {
+            Smpl * smpl = soundfont->getSample(instDiv->getGen(champ_sampleID).wValue);
+            if (smpl != nullptr)
+                this->playSmpl(soundfont, smpl, channel, key, velocity,
+                               inst, instDiv, prst, prstDiv);
+        }
     }
 }
 
-int Synth::playSmpl(int idSf2, int idElt, int channel, int key, int velocity, EltID idInstSmpl, EltID idPrstInst)
+int Synth::playSmpl(Soundfont * soundfont, Smpl * smpl, int channel, int key, int velocity,
+                    InstPrst * inst, Division * instDiv,
+                    InstPrst * prst, Division * prstDiv)
 {
-    EltID idSmpl(elementSmpl, idSf2, idElt, 0, 0);
-
     // Prepare the parameters for the voice
-    VoiceParam * voiceParam = new VoiceParam(idPrstInst, idInstSmpl, idSmpl, channel, key, velocity);
+    VoiceParam * voiceParam = new VoiceParam(prst != nullptr ? prst->getGlobalDivision() : nullptr, prstDiv,
+                                             inst != nullptr ? inst->getGlobalDivision() : nullptr, instDiv,
+                                             smpl, prst != nullptr ? prst->getId().indexElt : -1,
+                                             prst != nullptr ? prst->getExtraField(champ_wPreset) : -1,
+                                             channel, key, velocity);
 
     if (key < 0) // Smpl area
-        voiceParam->prepareForSmpl(key, _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue);
+        voiceParam->prepareForSmpl(key, smpl->_sfSampleType);
 
     // Create a voice
     int currentToken = s_sampleVoiceTokenCounter++;
-    Voice * voiceTmp = new Voice(_sf2->getData(idSmpl, champ_sampleData32),
-                                 _sf2->get(idSmpl, champ_dwSampleRate).dwValue,
+    Voice * voiceTmp = new Voice(smpl->_sound.getData(32),
+                                 smpl->_sound.getUInt32(champ_dwSampleRate),
                                  _format.sampleRate(), voiceParam, currentToken);
 
     // Initialize chorus and gain
@@ -300,9 +334,12 @@ int Synth::playSmpl(int idSf2, int idElt, int channel, int key, int velocity, El
         connect(voiceTmp, SIGNAL(currentPosChanged(quint32)), this, SIGNAL(currentPosChanged(quint32)));
 
         // Stereo link?
-        SFSampleLink typeLien = _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
-        if (typeLien != monoSample && typeLien != RomMonoSample)
-            this->playSmpl(idSf2, _sf2->get(idSmpl, champ_wSampleLink).wValue, channel, -2, 127);
+        if (smpl->_sfSampleType != monoSample && smpl->_sfSampleType != RomMonoSample)
+        {
+            Smpl * otherSmpl = soundfont->getSample(smpl->_wSampleLink);
+            if (otherSmpl != nullptr)
+                this->playSmpl(soundfont, otherSmpl, channel, -2, 127, inst, instDiv, prst, prstDiv);
+        }
     }
 
     return currentToken;

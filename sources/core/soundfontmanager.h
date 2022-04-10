@@ -22,8 +22,8 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PILE_SF2_H
-#define PILE_SF2_H
+#ifndef SOUNDFONTMANAGER_H
+#define SOUNDFONTMANAGER_H
 
 #include "sound.h"
 #include "basetypes.h"
@@ -38,6 +38,7 @@ class SoloManager;
 class SoundfontManager : public QObject
 {
     Q_OBJECT
+    friend class Synth;
 
 public:
     static SoundfontManager * getInstance();
@@ -61,10 +62,10 @@ public:
     void reset(EltID id, AttributeType champ);
     void simplify(EltID id, AttributeType champ);
 
-    // Nombre de freres de id (id compris)
+    // Brother index list of ID (id included)
     QList<int> getSiblings(EltID &id);
 
-    // Gestionnaire d'actions
+    // Action management
     void endEditing(QString editingSource);
     void clearNewEditing(); // Keep the changes but don't make an undo
     void revertNewEditing(); // Doesn't keep the changes
@@ -73,13 +74,9 @@ public:
     void undo(int indexSf2);
     void redo(int indexSf2);
 
-    // Edition management
+    // Version management
     void markAsSaved(int indexSf2);
     bool isEdited(int indexSf2);
-
-    // Get all attributes or modulators related to inst, instsmpl, prst, prstinst
-    void getAllAttributes(EltID id, bool *& attributeSet, AttributeValue *& attributeValues);
-    void getAllModulators(EltID id, QList<ModulatorData> &modulators);
 
     // Find if an ID is valid (allowing or not browing in hidden ID, not allowed by default)
     bool isValid(EltID &id, bool acceptHidden = false, bool justCheckParentLevel = false);
@@ -133,4 +130,4 @@ private:
     SoloManager * _solo;
 };
 
-#endif // PILE_SF2_H
+#endif // SOUNDFONTMANAGER_H

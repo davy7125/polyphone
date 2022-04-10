@@ -32,7 +32,7 @@ class ParameterModulator
 {
 public:
     // Initialize a modulator
-    ParameterModulator(ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation);
+    ParameterModulator(const ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation);
 
     // Try to merge an existing modulator with another one, return true if success
     bool merge(ModulatorData &modData);

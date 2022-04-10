@@ -27,8 +27,9 @@
 
 #include "basetypes.h"
 #include "modulatorgroup.h"
-class SoundfontManager;
 class ModulatedParameter;
+class Division;
+class Smpl;
 
 // Class gathering all parameters useful to create a sound
 // Parameters can evolve in real-time depending on the modulators
@@ -36,7 +37,8 @@ class VoiceParam
 {
 public:
     // Initialize a set of parameters (idPrstInst and idInstSmpl can be unknown)
-    VoiceParam(EltID idPrstInst, EltID idInstSmpl, EltID idSmpl, int channel, int key, int vel);
+    VoiceParam(Division * prstGlobalDiv, Division * prstDiv, Division * instGlobalDiv, Division * instDiv,
+               Smpl * smpl, int presetId, int presetNumber, int channel, int key, int vel);
 
     // Sample reading
     void prepareForSmpl(int key, SFSampleLink link);
@@ -64,8 +66,6 @@ public:
     int getPresetId() { return _presetId; }
 
 private:
-    SoundfontManager * _sm;
-
     // Identification
     int _channel;
     int _key;
@@ -80,9 +80,9 @@ private:
 
     // Initialization of the parameters
     void prepareParameters();
-    void readSmpl(EltID idSmpl);
-    void readDivisionAttributes(EltID idDivision);
-    void readDivisionModulators(EltID idDivision);
+    void readSmpl(Smpl * smpl);
+    void readDivisionAttributes(Division * globalDivision, Division * division, bool isPrst);
+    void readDivisionModulators(Division * globalDivision, Division * division, bool isPrst);
 };
 
 #endif // VOICEPARAM_H

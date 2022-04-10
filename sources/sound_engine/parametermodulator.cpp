@@ -26,7 +26,7 @@
 #include "modulatedparameter.h"
 #include "contextmanager.h"
 
-ParameterModulator::ParameterModulator(ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation) :
+ParameterModulator::ParameterModulator(const ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation) :
     _data(modData),
     _inputNumber(0),
     _inputCount(0),

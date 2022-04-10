@@ -27,16 +27,21 @@
 #include "modulatedparameter.h"
 #include "parametermodulator.h"
 
+const int ModulatorGroup::MAX_NUMBER_OF_PARAMETER_MODULATORS = 64;
+
 ModulatorGroup::ModulatorGroup(ModulatedParameter **parameters, bool isPrst) :
     _parameters(parameters),
-    _isPrst(isPrst)
+    _isPrst(isPrst),
+    _modulators(new ParameterModulator * [MAX_NUMBER_OF_PARAMETER_MODULATORS]),
+    _numberOfParameterModulators(0)
 {
 }
 
 ModulatorGroup::~ModulatorGroup()
 {
-    while (!_modulators.empty())
-        delete _modulators.takeFirst();
+    for (int i = 0; i < _numberOfParameterModulators; ++i)
+        delete _modulators[i];
+    delete [] _modulators;
 }
 
 void ModulatorGroup::initialize(int channel, int initialKey, int keyForComputation, int velForComputation)
@@ -66,16 +71,16 @@ void ModulatorGroup::loadDefaultModulators()
 
 void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
 {
-    int existingModulatorNumber = _modulators.count();
+    int existingModulatorNumber = _numberOfParameterModulators;
 
     // Create modulators
     foreach (ModulatorData modData, modulators)
     {
         // Possibly overwrite an existing modulator
         bool overwritten = false;
-        foreach (ParameterModulator * modulator, _modulators)
+        for (int i = 0; i < _numberOfParameterModulators; ++i)
         {
-            if (modulator->merge(modData))
+            if (_modulators[i]->merge(modData))
             {
                 overwritten = true;
                 break;
@@ -83,12 +88,12 @@ void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
         }
 
         // Or create another one
-        if (!overwritten)
-            _modulators << new ParameterModulator(modData, _isPrst, _channel, _initialKey, _keyForComputation, _velForComputation);
+        if (!overwritten && _numberOfParameterModulators < MAX_NUMBER_OF_PARAMETER_MODULATORS)
+            _modulators[_numberOfParameterModulators++] = new ParameterModulator(modData, _isPrst, _channel, _initialKey, _keyForComputation, _velForComputation);
     }
 
     // Link the outputs of the newly created modulators
-    for (int i = existingModulatorNumber; i < _modulators.count(); i++)
+    for (int i = existingModulatorNumber; i < _numberOfParameterModulators; ++i)
     {
         ParameterModulator * modulator = _modulators[i];
         quint16 output = modulator->getOuputType();
@@ -102,7 +107,7 @@ void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
         {
             // The target is another modulator
             int indexToFind = output - 32768;
-            for (int j = existingModulatorNumber; j < _modulators.count(); i++)
+            for (int j = existingModulatorNumber; j < _numberOfParameterModulators; ++j)
             {
                 ParameterModulator * otherMod = _modulators[j];
                 if (i != j && otherMod->getIndex() == indexToFind)
@@ -118,8 +123,8 @@ void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
 void ModulatorGroup::process()
 {
     // Initialize the modulator computation
-    foreach (ParameterModulator * modulator, _modulators)
-        modulator->initialize();
+    for (int i = 0; i < _numberOfParameterModulators; ++i)
+        _modulators[i]->initialize();
 
     // Compute the output of the modulators, as long as everything has not been completed
     // or until a maximum is reached (in the case of a loop)
@@ -127,7 +132,7 @@ void ModulatorGroup::process()
     int count = 0;
     do {
         ok = true;
-        foreach (ParameterModulator * modulator, _modulators)
-            ok &= modulator->computeOutput();
-    } while (!ok && count++ < _modulators.count());
+        for (int i = 0; i < _numberOfParameterModulators; ++i)
+            ok &= _modulators[i]->computeOutput();
+    } while (!ok && count++ < _numberOfParameterModulators);
 }

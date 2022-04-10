@@ -745,67 +745,6 @@ bool SoundfontManager::isEdited(int indexSf2)
             !this->getQstr(EltID(elementSf2, indexSf2), champ_filenameInitial).toLower().endsWith(".sf2");
 }
 
-void SoundfontManager::getAllAttributes(EltID id, bool *& attributeSet, AttributeValue *& attributeValues)
-{
-    QMutexLocker locker(&_mutex);
-    if (!this->isValid(id))
-        return;
-
-    Division * division = nullptr;
-    switch (id.typeElement)
-    {
-    case elementInst:
-        division = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision();
-        break;
-    case elementInstSmpl:
-        division = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2);
-        break;
-    case elementPrst:
-        division = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision();
-        break;
-    case elementPrstInst:
-        division = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
-        break;
-    default:
-        return;
-    }
-
-    attributeSet = division->getAttributeSet();
-    attributeValues = division->getAttributeValues();
-}
-
-void SoundfontManager::getAllModulators(EltID id, QList<ModulatorData> &modulators)
-{
-    QMutexLocker locker(&_mutex);
-    if (!this->isValid(id))
-        return;
-
-    Division * division = nullptr;
-    switch (id.typeElement)
-    {
-    case elementInst:
-        division = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision();
-        break;
-    case elementInstSmpl:
-        division = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2);
-        break;
-    case elementPrst:
-        division = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision();
-        break;
-    case elementPrstInst:
-        division = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
-        break;
-    default:
-        return;
-    }
-
-    // Fill the lists with the modulators that are not hidden
-    QVector<Modulator *> mods = division->getMods().values();
-    foreach (Modulator * mod, mods)
-        if (!mod->isHidden())
-            modulators << mod->_data;
-}
-
 // Add a child to ID
 int SoundfontManager::add(EltID id)
 {

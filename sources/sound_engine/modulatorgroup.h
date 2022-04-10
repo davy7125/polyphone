@@ -50,7 +50,9 @@ private:
     ModulatedParameter ** _parameters;
     bool _isPrst;
     int _channel, _initialKey, _keyForComputation, _velForComputation;
-    QList<ParameterModulator *> _modulators;
+    ParameterModulator ** _modulators;
+    int _numberOfParameterModulators;
+    static const int MAX_NUMBER_OF_PARAMETER_MODULATORS;
 };
 
 #endif // MODULATORGROUP_H
