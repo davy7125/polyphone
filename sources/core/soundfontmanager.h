@@ -106,6 +106,9 @@ signals:
     // Emitted when a soundfont is closed
     void soundfontClosed(int indexSf2);
 
+    // Emitted when a modulator changed, useful for defining the CC default values
+    void inputModulatorChanged(int controllerNumber, bool isBipolar, bool isDescending);
+
 private slots:
     void onDropId(EltID id);
 

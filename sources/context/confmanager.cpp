@@ -49,7 +49,7 @@ ConfManager::ConfManager(): QObject(),
     }
     Q_UNUSED(v_fix)
 
-    // Possibly changes in the configurations
+    // Possible changes in the configurations
     if (v_major < 2)
     {
         // Clear everything if the previous version was < 2.0
@@ -80,6 +80,12 @@ ConfManager::ConfManager(): QObject(),
         foreach (QString key, keys)
             _settings.setValue("display/" + key, _settings.value("affichage/" + key));
         _settings.remove("affichage");
+    }
+    else if (v_major * 100 + v_minor <= 203)
+    {
+        // Remove the controller values
+        for (int i = 0; i < 128; i++)
+            _settings.remove("midi/CC_" + QString("%1").arg(i, 3, 10, QChar('0')));
     }
 
     // Special initialization here (for more speed when reading modulator_vel_to_filter)

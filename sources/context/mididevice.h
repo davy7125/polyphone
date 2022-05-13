@@ -67,11 +67,16 @@ signals:
 protected:
     void customEvent(QEvent * event);
 
+private slots:
+    // When using modulators, default values of controllers might change
+    void onInputModulatorChanged(int controllerNumber, bool isBipolar, bool isDescending);
+
 private:
     struct MIDI_State
     {
         // Configuration of a channel, the values being written and read by different threads
         volatile int _controllerValues[128];
+        volatile bool _controllerValueSpecified[128];
         volatile float _bendValue;
         volatile float _bendSensitivityValue;
         volatile int _monoPressureValue;

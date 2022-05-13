@@ -36,6 +36,7 @@
 #include <QApplication>
 #include "synth.h"
 #include "extensionmanager.h"
+#include "soundfontmanager.h"
 
 // Callback for MIDI signals
 void midiCallback(double deltatime, std::vector<unsigned char> *message, void *userData)
@@ -106,7 +107,6 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
         {
             // Default value, depending on the CC number
             int defaultValue = 0;
-            bool forceDefault = (channel > 0);
             switch (i)
             {
             case 8: // Balance
@@ -115,37 +115,44 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
                 break;
             case 4: case 64: case 65: case 66: case 67: case 68: case 69: // Pedals
                 defaultValue = 0;
-                forceDefault = true;
                 break;
             case 7: case 11: // Main volume, expression
                 defaultValue = 127;
-                forceDefault = true;
                 break;
             default:
                 break;
             }
 
-            _midiStates[channel]._controllerValues[i] = forceDefault ?
-                        defaultValue : _configuration->getValue(ConfManager::SECTION_MIDI, "CC_" + QString("%1").arg(i, 3, 10, QChar('0')), defaultValue).toInt();
+            _midiStates[channel]._controllerValues[i] = defaultValue;
+            _midiStates[channel]._controllerValueSpecified[i] = false;
         }
     }
 
     // Initialize the connection
     this->openMidiPort(_configuration->getValue(ConfManager::SECTION_MIDI, "index_port", "-1#-1").toString());
+
+    // Link to the soundfont manager to initialize the CC values
+    connect(SoundfontManager::getInstance(), SIGNAL(inputModulatorChanged(int, bool, bool)), this, SLOT(onInputModulatorChanged(int, bool, bool)));
 }
 
 MidiDevice::~MidiDevice()
 {
-    // Store some MIDI values from channel -1
+    // Store the wheel sensitivity from channel -1
     _configuration->setValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", _midiStates[0]._bendSensitivityValue);
-    for (int i = 0; i < 128; i++)
-        _configuration->setValue(ConfManager::SECTION_MIDI, "CC_" + QString("%1").arg(i, 3, 10, QChar('0')), _midiStates[0]._controllerValues[i]);
 
     if (_midiin != nullptr)
     {
         _midiin->closePort();
         delete _midiin;
     }
+}
+
+void MidiDevice::onInputModulatorChanged(int controllerNumber, bool isBipolar, bool isDescending)
+{
+    int defaultValue = isBipolar ? 64 : (isDescending ? 127 : 0);
+    for (int channel = 0; channel <= 16; channel++)
+        if (!_midiStates[channel]._controllerValueSpecified[controllerNumber])
+            _midiStates[channel]._controllerValues[controllerNumber] = defaultValue;
 }
 
 QMap<QString, QString> MidiDevice::getMidiList()
@@ -299,6 +306,7 @@ void MidiDevice::processControllerChanged(int channel, int numController, int va
 {
     // Update the current channel
     _midiStates[channel + 1]._controllerValues[numController] = value;
+    _midiStates[channel + 1]._controllerValueSpecified[numController] = true;
     if (numController == 101 || numController == 100 || numController == 6 || numController == 38)
     {
         // RPN reception, store the messages since they are grouped by 4
@@ -330,6 +338,7 @@ void MidiDevice::processControllerChanged(int channel, int numController, int va
 
         // The change has not been consumed, update channel -1 and the keyboard
         _midiStates[0]._controllerValues[numController] = value;
+        _midiStates[0]._controllerValueSpecified[numController] = true;
         _dialogKeyboard->getControllerArea()->updateController(numController, value);
     }
 

@@ -1276,7 +1276,7 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
         }
     }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
-        // Modification d'un mod d'un instrument
+        // Modification d'un mod
         Modulator *tmp = nullptr;
         switch (id.typeElement)
         {
@@ -1296,22 +1296,32 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
         {
         case champ_sfModSrcOper:
             oldValue.sfModValue = tmp->_data.srcOper;
-            tmp->_data.srcOper = value.sfModValue; break;
+            tmp->_data.srcOper = value.sfModValue;
+            if (value.sfModValue.CC)
+                inputModulatorChanged(value.sfModValue.Index, value.sfModValue.isBipolar, value.sfModValue.isDescending);
+            break;
         case champ_sfModDestOper:
             oldValue.wValue = tmp->_data.destOper;
-            tmp->_data.destOper = value.wValue; break;
+            tmp->_data.destOper = value.wValue;
+            break;
         case champ_modAmount:
             oldValue.shValue = tmp->_data.amount;
-            tmp->_data.amount = value.shValue; break;
+            tmp->_data.amount = value.shValue;
+            break;
         case champ_sfModAmtSrcOper:
             oldValue.sfModValue = tmp->_data.amtSrcOper;
-            tmp->_data.amtSrcOper = value.sfModValue; break;
+            tmp->_data.amtSrcOper = value.sfModValue;
+            if (value.sfModValue.CC)
+                inputModulatorChanged(value.sfModValue.Index, value.sfModValue.isBipolar, value.sfModValue.isDescending);
+            break;
         case champ_sfModTransOper:
             oldValue.sfTransValue = tmp->_data.transOper;
-            tmp->_data.transOper = value.sfTransValue; break;
+            tmp->_data.transOper = value.sfTransValue;
+            break;
         case champ_indexMod:
             oldValue.wValue = tmp->_data.index;
-            tmp->_data.index = value.wValue; break;
+            tmp->_data.index = value.wValue;
+            break;
         default:
             break;
         }
