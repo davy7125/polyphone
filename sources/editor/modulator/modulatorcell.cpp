@@ -335,20 +335,8 @@ void ModulatorCell::onOutputChanged(int dummy)
         max = maxTmp;
     }
 
-    // Compute the new range in double
-    AttributeType currentAttribute = ui->comboDestination->getCurrentAttribute();
-    double dMin = min;
-    double dMax = max;
-    if (currentAttribute != champ_unknown)
-    {
-        AttributeValue val;
-        val.shValue = min;
-        dMin = Attribute::toRealValue(currentAttribute, _isPrst, val);
-        val.shValue = max;
-        dMax = Attribute::toRealValue(currentAttribute, _isPrst, val);
-    }
-
     // Addition or multiplication?
+    AttributeType currentAttribute = ui->comboDestination->getCurrentAttribute();
     bool isAddition = true;
     switch (currentAttribute)
     {
@@ -363,6 +351,23 @@ void ModulatorCell::onOutputChanged(int dummy)
         break;
     default:
         break;
+    }
+
+    // Compute the new range in double
+    double dMin = min;
+    double dMax = max;
+    if (!isAddition)
+    {
+        dMin = qPow(2.0, 0.000833333 * min);
+        dMax = qPow(2.0, 0.000833333 * max);
+    }
+    else if (currentAttribute != champ_unknown)
+    {
+        AttributeValue val;
+        val.shValue = min;
+        dMin = Attribute::toRealValue(currentAttribute, _isPrst, val);
+        val.shValue = max;
+        dMax = Attribute::toRealValue(currentAttribute, _isPrst, val);
     }
 
     // Get the unit
