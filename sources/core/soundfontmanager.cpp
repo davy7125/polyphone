@@ -227,7 +227,15 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
     case elementInst:{
         // Analyse d'un instrument
         InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt);
-        value = tmp->getGlobalDivision()->getGen(champ);
+        switch (champ)
+        {
+        case champ_mute:
+            value.dwValue = 0;
+            break;
+        default:
+            value = tmp->getGlobalDivision()->getGen(champ);
+            break;
+        }
     }break;
     case elementPrst:{
         // Analyse d'un preset
@@ -239,6 +247,9 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
             break;
         case champ_dwLibrary: case champ_dwGenre: case champ_dwMorphology:
             value.dwValue = tmp->getExtraField(champ);
+            break;
+        case champ_mute:
+            value.dwValue = 0;
             break;
         default:
             value = tmp->getGlobalDivision()->getGen(champ);
