@@ -29,7 +29,7 @@ Complex::Complex()
 
 }
 
-Complex Complex::operator *= (const double factor)
+Complex Complex::operator *= (const float factor)
 {
     _real *= factor;
     _imag *= factor;

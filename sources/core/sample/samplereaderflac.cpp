@@ -96,10 +96,9 @@ FLAC__StreamDecoderWriteStatus writeCallback(const FLAC__StreamDecoder * decoder
 
     // Initialize variables
     InfoSound * info = static_cast<SampleReaderFlac*>(userData)->_info;
-    QByteArray * data = static_cast<SampleReaderFlac*>(userData)->_data;
+    float * data = static_cast<SampleReaderFlac*>(userData)->_data;
     quint32 minPosition = static_cast<SampleReaderFlac*>(userData)->_pos;
     quint32 maxPosition = minPosition + frame->header.blocksize;
-    bool readExtra8 = static_cast<SampleReaderFlac*>(userData)->_readExtra8;
     bool channel = info->wChannel;
 
     // Possibly return if nothing is to be stored
@@ -111,87 +110,39 @@ FLAC__StreamDecoderWriteStatus writeCallback(const FLAC__StreamDecoder * decoder
     {
     case 1:
         // 8-bit samples
-        if (readExtra8)
-            for (quint32 i = minPosition; i < maxPosition; i++)
-                (*data)[i] = 0;
-        else
+        for (quint32 i = minPosition; i < maxPosition; i++)
         {
-            for (quint32 i = minPosition; i < maxPosition; i++)
-            {
-                qint32 value = buffer[channel][i - minPosition];
-                (*data)[2 * i + 1] = static_cast<char>(value & 0xff);
-                (*data)[2 * i] = 0;
-            }
+            qint32 value = buffer[channel][i - minPosition];
+            data[i] = (0.5f + value) / (0.5f + 0x7f);
         }
         break;
     case 2:
         // 16-bit samples
-        if (readExtra8)
-            for (quint32 i = minPosition; i < maxPosition; i++)
-                (*data)[i] = 0;
-        else
+        for (quint32 i = minPosition; i < maxPosition; i++)
         {
-            for (quint32 i = minPosition; i < maxPosition; i++)
-            {
-                qint32 value = buffer[channel][i - minPosition];
-                (*data)[2 * i + 1] = static_cast<char>((value >> 8) & 0xff);
-                (*data)[2 * i] = static_cast<char>(value & 0xff);
-            }
+            qint32 value = buffer[channel][i - minPosition];
+            data[i] = (0.5f + value) / (0.5f + 0x7fff);
         }
         break;
     case 3:
         // 24-bit samples
-        if (readExtra8)
+        for (quint32 i = minPosition; i < maxPosition; i++)
         {
-            for (quint32 i = minPosition; i < maxPosition; i++)
-            {
-                qint32 value = buffer[channel][i - minPosition];
-                (*data)[i] = static_cast<char>(value & 0xff);
-            }
-        }
-        else
-        {
-            for (quint32 i = minPosition; i < maxPosition; i++)
-            {
-                qint32 value = buffer[channel][i - minPosition];
-                (*data)[2 * i + 1] = static_cast<char>((value >> 16) & 0xff);
-                (*data)[2 * i] = static_cast<char>((value >> 8) & 0xff);
-            }
+            qint32 value = buffer[channel][i - minPosition];
+            data[i] = (0.5F + value) / (0.5f + 0x7fffff);
         }
         break;
     case 4:
         // 32-bit samples
-        if (readExtra8)
+        for (quint32 i = minPosition; i < maxPosition; i++)
         {
-            for (quint32 i = minPosition; i < maxPosition; i++)
-            {
-                qint32 value = buffer[channel][i - minPosition];
-                (*data)[i] = static_cast<char>((value >> 8) & 0xff);
-            }
-        }
-        else
-        {
-            for (quint32 i = minPosition; i < maxPosition; i++)
-            {
-                qint32 value = buffer[channel][i - minPosition];
-                (*data)[2 * i + 1] = static_cast<char>((value >> 24) & 0xff);
-                (*data)[2 * i] = static_cast<char>((value >> 16) & 0xff);
-            }
+            qint32 value = buffer[channel][i - minPosition];
+            data[i] = (0.5f + (value / 256)) / (0.5f + 0x7fffff);
         }
         break;
     default:
         // Exotic samples?
-        if (readExtra8)
-            for (quint32 i = minPosition; i < maxPosition; i++)
-                (*data)[i] = 0;
-        else
-        {
-            for (quint32 i = minPosition; i < maxPosition; i++)
-            {
-                (*data)[2 * i + 1] = 0;
-                (*data)[2 * i] = 0;
-            }
-        }
+        memset(&data[minPosition], 0, (maxPosition - minPosition) * sizeof(float));
         break;
     }
 
@@ -272,6 +223,7 @@ void errorCallback(const FLAC__StreamDecoder * decoder, FLAC__StreamDecoderError
 SampleReaderFlac::SampleReaderFlac(QString filename) : SampleReader(filename),
     _file(nullptr),
     _info(nullptr),
+    _data(nullptr),
     _pos(0)
 {
 
@@ -291,26 +243,12 @@ SampleReaderFlac::SampleReaderResult SampleReaderFlac::getInfo(QFile &fi, InfoSo
     return launchDecoder(true);
 }
 
-SampleReaderFlac::SampleReaderResult SampleReaderFlac::getData16(QFile &fi, QByteArray &smpl)
+SampleReaderFlac::SampleReaderResult SampleReaderFlac::getData(QFile &fi, QVector<float> &smpl)
 {
     // Public access to the file, read data
     _file = &fi;
-    _data = &smpl;
-    _readExtra8 = false;
-    smpl.resize(static_cast<int>(_info->dwLength) * 2);
-    _pos = 0;
-
-    // Decode the file
-    return launchDecoder(false);
-}
-
-SampleReaderFlac::SampleReaderResult SampleReaderFlac::getExtraData24(QFile &fi, QByteArray &sm24)
-{
-    // Public access to the file, read data
-    _file = &fi;
-    _data = &sm24;
-    _readExtra8 = true;
-    sm24.resize(static_cast<int>(_info->dwLength));
+    smpl.resize(_info->dwLength);
+    _data = smpl.data();
     _pos = 0;
 
     // Decode the file

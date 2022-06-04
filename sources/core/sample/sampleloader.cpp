@@ -170,7 +170,7 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                 // Update data
                 val.wValue = static_cast<quint16>(j);
                 sound.set(champ_wChannel, val);
-                sm->set(id, champ_sampleDataFull24, sound.getData(24, true));
+                sm->set(id, sound.getData(true));
             }
             else
             {

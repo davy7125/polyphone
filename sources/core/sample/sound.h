@@ -41,21 +41,20 @@ public:
     // Get information about the sample loaded
     InfoSound getInfo() { return _info; }
     QString getFileName() { return this->_fileName; }
-    QByteArray getData(quint16 wBps, bool forceReload = false);
+    QVector<float> getData(bool forceReload = false);
     quint32 getUInt32(AttributeType champ); // For everything but the pitch correction
     qint32 getInt32(AttributeType champ); // For the pitch correction
 
     // Set data
     void set(AttributeType champ, AttributeValue value);
     void setFileName(QString qStr, bool tryFindRootKey = true);
-    void setData(QByteArray data, quint16 wBps);
+    void setData(QVector<float> data);
     void setRam(bool ram);
 
 private:
     QString _fileName;
     InfoSound _info;
-    QByteArray _smpl;
-    QByteArray _sm24;
+    QVector<float> _smpl;
     SampleReader * _reader;
 
     void determineRootKey();

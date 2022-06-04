@@ -39,21 +39,21 @@ void ToolChangeVolume::process(SoundfontManager * sm, EltID id, AbstractToolPara
     ToolChangeVolume_parameters * params = (ToolChangeVolume_parameters *)parameters;
 
     // Sample data
-    QByteArray baData = sm->getData(id, champ_sampleDataFull24);
+    QVector<float> vData = sm->getData(id);
 
     // Change the volume
-    double db = 0;
+    float db = 0;
     switch (params->getMode())
     {
     case 0: // Add dB
         // Compute the factor
-        baData = SampleUtils::multiplier(baData, qPow(10, params->getAddValue() / 20.0), 24, db);
+        vData = SampleUtils::multiply(vData, qPow(10, params->getAddValue() / 20.0), db);
         break;
     case 1: // Multiply by a factor
-        baData = SampleUtils::multiplier(baData, params->getMultiplyValue(), 24, db);
+        vData = SampleUtils::multiply(vData, params->getMultiplyValue(), db);
         break;
     case 2: // Normalize
-        baData = SampleUtils::normaliser(baData, params->getNormalizeValue() / 100, 24, db);
+        vData = SampleUtils::normalize(vData, params->getNormalizeValue() / 100, db);
         break;
     default:
         // Nothing
@@ -61,5 +61,5 @@ void ToolChangeVolume::process(SoundfontManager * sm, EltID id, AbstractToolPara
     }
 
     // Update the sample data
-    sm->set(id, champ_sampleDataFull24, baData);
+    sm->set(id, vData);
 }

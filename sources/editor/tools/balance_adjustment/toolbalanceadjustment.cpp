@@ -74,13 +74,13 @@ void ToolBalanceAdjustment::process(SoundfontManager * sm, EltID id, AbstractToo
     _mutex.unlock();
 
     // Get sample data
-    QByteArray baData1 = sm->getData(id, champ_sampleDataFull24);
-    QByteArray baData2 = sm->getData(id2, champ_sampleDataFull24);
+    QVector<float> vData1 = sm->getData(id);
+    QVector<float> vData2 = sm->getData(id2);
 
     // Find steady areas
     quint32 debut1, fin1;
     if (sm->get(id, champ_dwStartLoop).dwValue == sm->get(id, champ_dwEndLoop).dwValue)
-        SampleUtils::regimePermanent(baData1, sm->get(id, champ_dwSampleRate).dwValue, 24, debut1, fin1);
+        SampleUtils::regimePermanent(vData1, sm->get(id, champ_dwSampleRate).dwValue, debut1, fin1);
     else
     {
         debut1 = sm->get(id, champ_dwStartLoop).dwValue;
@@ -88,7 +88,7 @@ void ToolBalanceAdjustment::process(SoundfontManager * sm, EltID id, AbstractToo
     }
     quint32 debut2, fin2;
     if (sm->get(id2, champ_dwStartLoop).dwValue == sm->get(id2, champ_dwEndLoop).dwValue)
-        SampleUtils::regimePermanent(baData2, sm->get(id2, champ_dwSampleRate).dwValue, 24, debut2, fin2);
+        SampleUtils::regimePermanent(vData2, sm->get(id2, champ_dwSampleRate).dwValue, debut2, fin2);
     else
     {
         debut2 = sm->get(id2, champ_dwStartLoop).dwValue;
@@ -96,20 +96,20 @@ void ToolBalanceAdjustment::process(SoundfontManager * sm, EltID id, AbstractToo
     }
 
     // Compute intensities
-    double intensite1 = SampleUtils::moyenneCarre(baData1.mid(debut1 * 3, (fin1 - debut1) * 3), 24);
-    double intensite2 = SampleUtils::moyenneCarre(baData2.mid(debut2 * 3, (fin2 - debut2) * 3), 24);
+    float intensite1 = SampleUtils::meanSquare(vData1.mid(debut1, fin1 - debut1));
+    float intensite2 = SampleUtils::meanSquare(vData2.mid(debut2, fin2 - debut2));
 
     // Mean intensity
-    double intensiteMoy = sqrt(intensite1 * intensite2);
+    float intensiteMoy = sqrt(intensite1 * intensite2);
 
     // Adjust volume
-    double gain1, gain2;
-    baData1 = SampleUtils::multiplier(baData1, intensiteMoy / intensite1, 24, gain1);
-    baData2 = SampleUtils::multiplier(baData2, intensiteMoy / intensite2, 24, gain2);
+    float gain1, gain2;
+    vData1 = SampleUtils::multiply(vData1, intensiteMoy / intensite1, gain1);
+    vData2 = SampleUtils::multiply(vData2, intensiteMoy / intensite2, gain2);
 
     // Update sample data
-    sm->set(id, champ_sampleDataFull24, baData1);
-    sm->set(id2, champ_sampleDataFull24, baData2);
+    sm->set(id, vData1);
+    sm->set(id2, vData2);
 }
 
 QString ToolBalanceAdjustment::getWarning()

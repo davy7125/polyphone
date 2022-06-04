@@ -28,7 +28,8 @@
 
 SampleReaderOgg::SampleReaderOgg(QString filename) : SampleReader(filename),
     _file(nullptr),
-    _info(nullptr)
+    _info(nullptr),
+    _data(nullptr)
 {
 
 }
@@ -81,25 +82,12 @@ SampleReaderOgg::SampleReaderResult SampleReaderOgg::getInfo(QFile &fi, InfoSoun
     return launchDecoder(true);
 }
 
-SampleReaderOgg::SampleReaderResult SampleReaderOgg::getData16(QFile &fi, QByteArray &smpl)
+SampleReaderOgg::SampleReaderResult SampleReaderOgg::getData(QFile &fi, QVector<float> &smpl)
 {
     // Public access to the file, read data
     _file = &fi;
-    _data = &smpl;
-    _readExtra8 = false;
-    smpl.resize(static_cast<int>(_info->dwLength) * 2);
-
-    // Decode the file
-    return launchDecoder(false);
-}
-
-SampleReaderOgg::SampleReaderResult SampleReaderOgg::getExtraData24(QFile &fi, QByteArray &sm24)
-{
-    // Public access to the file, read data
-    _file = &fi;
-    _data = &sm24;
-    _readExtra8 = true;
-    sm24.resize(static_cast<int>(_info->dwLength));
+    smpl.resize(_info->dwLength);
+    _data = smpl.data();
 
     // Decode the file
     return launchDecoder(false);
@@ -142,51 +130,37 @@ SampleReaderOgg::SampleReaderResult SampleReaderOgg::launchDecoder(bool justMeta
 
     if (!justMetadata)
     {
-        if (_readExtra8)
+        // Load 16-bit data
+        int current_section;
+        float ** sound;
+        quint32 pos = 0;
+        while (pos < _info->dwLength)
         {
-            _data->fill(0);
-        }
-        else
-        {
-            // Load 16-bit data
-            int current_section;
-            char pcmOut[4096];
-            qint32 pos = 0;
-            while (pos < _data->size())
+            long ret = ov_read_float(&vf, &sound, 4096, &current_section);
+
+            // End of the stream?
+            if (ret == 0)
+                break;
+
+            // Error?
+            if (ret < 0)
             {
-                long ret = ov_read(&vf, pcmOut, 4096,
-                                   0, // 0: little endian, 1: big endian
-                                   2, // word size in bytes
-                                   1, // 0: unsigned, 1: signed
-                                   &current_section);
-
-                // End of the stream?
-                if (ret == 0)
-                    break;
-
-                // Error?
-                if (ret < 0)
-                {
-                    ov_clear(&vf);
-                    return FILE_CORRUPT;
-                }
-
-                // Extract data
-                int maxValue = ret / _info->wChannels / 2;
-                if (maxValue > (_data->size() - pos) / 2)
-                    maxValue = (_data->size() - pos) / 2;
-                for (int i = 0; i < maxValue; i++)
-                {
-                    _data->data()[pos + 2 * i] = pcmOut[2 * (i * _info->wChannels + _info->wChannel)];
-                    _data->data()[pos + 2 * i + 1] = pcmOut[2 * (i * _info->wChannels + _info->wChannel) + 1];
-                }
-                pos += ret / _info->wChannels;
+                ov_clear(&vf);
+                return FILE_CORRUPT;
             }
 
-            // Fill the remaining part of _data with 0
-            if (pos < _data->size())
-                memset(&_data->data()[pos], 0, _data->size() - pos);
+            // Copy data
+            int maxLength = ret;
+            if (maxLength + pos > _info->dwLength)
+                maxLength = _info->dwLength - pos;
+            memcpy(&_data[pos], sound[_info->wChannel], maxLength * sizeof(float));
+
+            pos += ret;
         }
+
+        // Fill the remaining part of _data with 0
+        if (pos < _info->dwLength)
+            memset(&_data[pos], 0, _info->dwLength - pos);
     }
 
     ov_clear(&vf);

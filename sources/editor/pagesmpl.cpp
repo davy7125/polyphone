@@ -205,7 +205,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     else
     {
         ui->waveDisplay->displayMultipleSelection(false);
-        QByteArray baData = _sf2->getData(id, champ_sampleData16);
+        QVector<float> baData = _sf2->getData(id);
         ui->waveDisplay->setData(baData, sampleRate); // prend du temps
         ui->waveDisplay->setStartLoop(startLoop, false);
         ui->waveDisplay->setEndLoop(endLoop, false);
@@ -848,15 +848,15 @@ void PageSmpl::setRateElt(EltID id, quint32 echFinal)
 {
     // Modification échantillonnage
     quint32 echInit = _sf2->get(id, champ_dwSampleRate).dwValue;
-    QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
-    baData = SampleUtils::resampleMono(baData, echInit, echFinal, 24);
-    _sf2->set(id, champ_sampleDataFull24, baData);
+    QVector<float> baData = _sf2->getData(id);
+    baData = SampleUtils::resampleMono(baData, echInit, echFinal);
+    _sf2->set(id, baData);
     AttributeValue val;
     val.dwValue = echFinal;
     _sf2->set(id, champ_dwSampleRate, val);
 
     // Ajustement de length, startLoop, endLoop
-    val.dwValue = baData.size()/3;
+    val.dwValue = baData.size();
     _sf2->set(id, champ_dwLength, val);
     quint32 dwTmp = _sf2->get(id, champ_dwStartLoop).dwValue;
     dwTmp = ((quint64)dwTmp * (quint64)echFinal) / (quint64)echInit;
@@ -1153,7 +1153,7 @@ bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end, EltID &createdSmp
         wBps = 24;
     else
         wBps = 16;
-    QByteArray baData = _sf2->getData(id, wBps == 24 ? champ_sampleDataFull24 : champ_sampleData16);
+    QVector<float> vData = _sf2->getData(id);
 
     // Possibly adapt start and end of loop
     quint32 startLoop = _sf2->get(id, champ_dwStartLoop).dwValue;
@@ -1186,9 +1186,9 @@ bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end, EltID &createdSmp
     {
         // Data
         createdSmplId.indexElt = _sf2->add(createdSmplId);
-        QByteArray midData = baData.mid(start * wBps / 8, (end - start) * wBps / 8);
-        _sf2->set(createdSmplId, wBps == 24 ? champ_sampleDataFull24 : champ_sampleData16, midData);
-        val.dwValue = static_cast<quint32>(8 * midData.size()) / wBps;
+        QVector<float> midData = vData.mid(start, end - start);
+        _sf2->set(createdSmplId, midData);
+        val.dwValue = static_cast<quint32>(midData.size());
         _sf2->set(createdSmplId, champ_dwLength, val);
         val.wValue = wBps;
         _sf2->set(createdSmplId, champ_wBpsInit, val);
@@ -1206,9 +1206,9 @@ bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end, EltID &createdSmp
     }
 
     // Remove data and update the sample
-    baData = baData.left(start * wBps / 8) + baData.right(baData.size() - static_cast<int>(end * wBps / 8));
-    _sf2->set(id, wBps == 24 ? champ_sampleDataFull24 : champ_sampleData16, baData);
-    val.dwValue = static_cast<quint32>(8 * baData.size()) / wBps;
+    vData.remove(start, end - start);
+    _sf2->set(id, vData);
+    val.dwValue = static_cast<quint32>(vData.size());
     _sf2->set(id, champ_dwLength, val);
 
     return true;
@@ -1272,8 +1272,8 @@ void PageSmpl::updateLoopQuality()
     QList<EltID> ids = _currentIds.getSelectedIds(elementSmpl);
     if (ids.size() == 1 && ui->spinStartLoop->value() != ui->spinEndLoop->value())
     {
-        QByteArray data = _sf2->getData(ids.first(), champ_sampleData16);
-        float loopQuality = SampleUtils::computeLoopQuality(data, ui->spinStartLoop->value(), ui->spinEndLoop->value());
+        QVector<float> vData = _sf2->getData(ids.first());
+        float loopQuality = SampleUtils::computeLoopQuality(vData, ui->spinStartLoop->value(), ui->spinEndLoop->value());
         if (loopQuality < 0.05)
             ui->iconLoopWarning->setPixmap(QPixmap());
         else if (loopQuality < 0.15)

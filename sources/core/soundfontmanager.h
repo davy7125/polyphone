@@ -55,10 +55,10 @@ public:
     AttributeValue get(EltID id, AttributeType champ);
     QString getQstr(EltID id, AttributeType champ);
     Sound *getSound(EltID id);
-    QByteArray getData(EltID id, AttributeType champ);
+    QVector<float> getData(EltID idSmpl);
     int set(EltID id, AttributeType champ, AttributeValue value);
     int set(EltID id, AttributeType champ, QString qStr);
-    int set(EltID id, AttributeType champ, QByteArray data);
+    int set(EltID idSmpl, QVector<float> data);
     void reset(EltID id, AttributeType champ);
     void simplify(EltID id, AttributeType champ);
 

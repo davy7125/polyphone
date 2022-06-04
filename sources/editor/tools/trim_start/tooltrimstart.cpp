@@ -79,12 +79,12 @@ void ToolTrimStart::trim(IdList ids)
     SoundfontManager * sm = SoundfontManager::getInstance();
     quint32 pos = 0;
     quint32 maxPos = 0;
-    QList<QByteArray> baData24;
+    QList<QVector<float> > vDataList;
     for (int i = 0; i < ids.count(); i++)
     {
         quint32 tmp, maxTmp;
-        baData24 << sm->getData(ids[i], champ_sampleDataFull24);
-        SampleUtils::removeBlankStep1(baData24[i], tmp, maxTmp);
+        vDataList << sm->getData(ids[i]);
+        SampleUtils::removeBlankStep1(vDataList[i], tmp, maxTmp);
 
         if (i == 0 || tmp > pos)
             pos = tmp;
@@ -102,12 +102,12 @@ void ToolTrimStart::trim(IdList ids)
         EltID id = ids[i];
 
         // Data
-        baData24[i] = SampleUtils::removeBlankStep2(baData24[i], pos);
-        sm->set(id, champ_sampleDataFull24, baData24[i]);
+        vDataList[i] = SampleUtils::removeBlankStep2(vDataList[i], pos);
+        sm->set(id, vDataList[i]);
 
         // Update length
         AttributeValue val;
-        val.dwValue = baData24[i].size() / 3;
+        val.dwValue = vDataList[i].size();
         sm->set(id, champ_dwLength, val);
 
         // Update loop start

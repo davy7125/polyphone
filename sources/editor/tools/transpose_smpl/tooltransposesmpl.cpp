@@ -39,19 +39,19 @@ void ToolTransposeSmpl::process(SoundfontManager * sm, EltID id, AbstractToolPar
     ToolTransposeSmpl_parameters * params = dynamic_cast<ToolTransposeSmpl_parameters *>(parameters);
 
     // Get sample data
-    QByteArray baData = sm->getData(id, champ_sampleDataFull24);
+    QVector<float> vData = sm->getData(id);
     quint32 echFinal = sm->get(id, champ_dwSampleRate).dwValue;
 
     // Compute the new initial sample rate
     double echInit = static_cast<double>(echFinal) * qPow(2, params->getSemiTones() / 12);
 
     // Resampling
-    baData = SampleUtils::resampleMono(baData, echInit, echFinal, 24);
-    sm->set(id, champ_sampleDataFull24, baData);
+    vData = SampleUtils::resampleMono(vData, echInit, echFinal);
+    sm->set(id, vData);
 
     // Update the length
     AttributeValue val;
-    val.dwValue = static_cast<quint32>(baData.size() / 3);
+    val.dwValue = static_cast<quint32>(vData.size());
     sm->set(id, champ_dwLength, val);
 
     // Update loop

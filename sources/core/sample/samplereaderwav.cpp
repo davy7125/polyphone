@@ -25,6 +25,8 @@
 #include "samplereaderwav.h"
 #include "basetypes.h"
 
+// http://soundfile.sapp.org/doc/WaveFormat/
+
 SampleReaderWav::SampleReaderWav(QString filename) : SampleReader(filename),
     _info(nullptr),
     _isIeeeFloat(false)
@@ -186,78 +188,20 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
     return FILE_OK;
 }
 
-SampleReaderWav::SampleReaderResult SampleReaderWav::getData16(QFile &fi, QByteArray &smpl)
-{
-    QByteArray data = loadData(fi);
-    quint32 sampleNumber = static_cast<unsigned int>(data.size()) / _info->wChannels / (_info->wBpsFile / 8);
-    if (sampleNumber == 0)
-        return FILE_CORRUPT;
-
-    // Resize the vector
-    smpl.resize(static_cast<int>(sampleNumber) * 2);
-
-    unsigned int bytePerValue = _info->wBpsFile / 8;
-    unsigned int bytePerSample = _info->wChannels * bytePerValue;
-    unsigned int channelShift =  _info->wChannel * bytePerValue;
-    char * dataResult = smpl.data();
-    const char * dataSource = data.constData();
-    if (bytePerValue == 1)
-    {
-        for (quint32 i = 0; i < sampleNumber; i++)
-        {
-            dataResult[2 * i] = 0;
-            dataResult[2 * i + 1] = dataSource[bytePerSample * i + channelShift] - 128;
-        }
-    }
-    else
-    {
-        unsigned int shift = bytePerValue - 2;
-        for (quint32 i = 0; i < sampleNumber; i++)
-        {
-            dataResult[2 * i] = dataSource[shift + bytePerSample * i + channelShift];
-            dataResult[2 * i + 1] = dataSource[1 + shift + bytePerSample * i + channelShift];
-        }
-    }
-
-    return FILE_OK;
-}
-
-SampleReaderWav::SampleReaderResult SampleReaderWav::getExtraData24(QFile &fi, QByteArray &sm24)
-{
-    QByteArray data = loadData(fi);
-    quint32 sampleNumber = static_cast<unsigned int>(data.size()) / _info->wChannels / (_info->wBpsFile / 8);
-    if (sampleNumber == 0)
-        return FILE_CORRUPT;
-
-    // Resize the vector
-    sm24.resize(static_cast<int>(sampleNumber));
-
-    unsigned int bytePerValue = _info->wBpsFile / 8;
-    unsigned int bytePerSample = _info->wChannels * bytePerValue;
-    unsigned int channelShift =  _info->wChannel * bytePerValue;
-    char * dataResult = sm24.data();
-    const char * dataSource = data.constData();
-    if (bytePerValue < 3)
-        sm24.fill(0);
-    else
-    {
-        unsigned int shift = bytePerValue - 3;
-        for (quint32 i = 0; i < sampleNumber; i++)
-            dataResult[i] = dataSource[shift + bytePerSample * i + channelShift];
-    }
-
-    return FILE_OK;
-}
-
-QByteArray SampleReaderWav::loadData(QFile &fi)
+SampleReaderWav::SampleReaderResult SampleReaderWav::getData(QFile &fi, QVector<float> &smpl)
 {
     // Skip the headers
     fi.seek(_info->dwStart);
 
     // Read data
     QByteArray data = fi.read(_info->dwLength * _info->wBpsFile / 8 * _info->wChannels);
+    if (data.size() == 0)
+        return FILE_CORRUPT;
 
-    // Possibly convert it from WAVE_FORMAT_IEEE_FLOAT to PCM 32
+    // Resize the vector
+    smpl.resize(_info->dwLength);
+    float * fData = smpl.data();
+
     if (_isIeeeFloat && _info->wBpsFile == 32)
     {
         float * dataF = reinterpret_cast<float *>(data.data());
@@ -268,12 +212,45 @@ QByteArray SampleReaderWav::loadData(QFile &fi)
             if (dataF[i] > maxValue)
                 maxValue = dataF[i];
 
-        // Convert to int32
-        qint32 * data32 = reinterpret_cast<qint32 *>(data.data());
-        int multiplier = static_cast<int>(2147483647. /* max of int */ / maxValue);
-        for (int i = 0; i < data.size() / 4; i++)
-            data32[i] = static_cast<qint32>(dataF[i] * multiplier);
+        // Clip and copy data
+        float multiplier = 1.0f / maxValue;
+        for (quint32 i = 0; i < _info->dwLength; i++)
+            fData[i] = dataF[i * _info->wChannels + _info->wChannel] * multiplier;
+    }
+    else
+    {
+        // Convert to float
+        if (_info->wBpsFile == 8)
+        {
+            const char * dataSource = data.constData();
+            for (quint32 i = 0; i < _info->dwLength; i++)
+                fData[i] = (0.5f + dataSource[_info->wChannels * i + _info->wChannel] - 128) / (0.5f + 0x7f);
+        }
+        else if (_info->wBpsFile == 16)
+        {
+            const qint16 * dataSource = (const qint16 *)data.constData();
+            for (quint32 i = 0; i < _info->dwLength; i++)
+                fData[i] = (0.5f + dataSource[_info->wChannels * i + _info->wChannel]) / (0.5f + 0x7fff);
+        }
+        else if (_info->wBpsFile == 32)
+        {
+            const qint32 * dataSource = (const qint32 *)data.constData();
+            for (quint32 i = 0; i < _info->dwLength; i++)
+                fData[i] = (0.5f + (dataSource[_info->wChannels * i + _info->wChannel] / 256)) / (0.5f + 0x7fffff);
+        }
+        else // 3, 5 or more...
+        {
+            unsigned int bytePerValue = _info->wBpsFile / 8;
+            unsigned int shift = bytePerValue - 3;
+            for (quint32 i = 0; i < _info->dwLength; i++)
+            {
+                const char * dataSource = data.constData();
+                fData[i] = (0.5f + (dataSource[(_info->wChannels * i + _info->wChannel) * bytePerValue + shift + 2] << 16) +
+                           (dataSource[(_info->wChannels * i + _info->wChannel) * bytePerValue + shift + 1] << 8) +
+                           dataSource[(_info->wChannels * i + _info->wChannel) * bytePerValue + shift]) / (0.5f + 0x7fffff);
+            }
+        }
     }
 
-    return data;
+    return FILE_OK;
 }

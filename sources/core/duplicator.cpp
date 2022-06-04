@@ -348,27 +348,23 @@ EltID Duplicator::copySmpl(EltID idSource, EltID idDest)
 
     if (index == -1 || (_copieSmpl != IGNORER && _copieSmpl != IGNORER_TOUT))
     {
-        // Configuration du sample
-        _sm->set(idDest, champ_sampleData16, _sm->getData(idSource, champ_sampleData16));
-        EltID id3 = idDest;
-        id3.typeElement = elementSf2;
-        if (_sm->get(id3, champ_wBpsSave).wValue == 24)
-            _sm->set(idDest, champ_sampleData24,   _sm->getData(idSource, champ_sampleData24));
-        _sm->set(idDest, champ_dwLength,           _sm->get(idSource, champ_dwLength));
-        _sm->set(idDest, champ_dwSampleRate,       _sm->get(idSource, champ_dwSampleRate));
-        _sm->set(idDest, champ_dwStartLoop,        _sm->get(idSource, champ_dwStartLoop));
-        _sm->set(idDest, champ_dwEndLoop,          _sm->get(idSource, champ_dwEndLoop));
-        _sm->set(idDest, champ_sfSampleType,       _sm->get(idSource, champ_sfSampleType));
-        _sm->set(idDest, champ_byOriginalPitch,    _sm->get(idSource, champ_byOriginalPitch));
-        _sm->set(idDest, champ_chPitchCorrection,  _sm->get(idSource, champ_chPitchCorrection));
-        _sm->set(idDest, champ_bpsFile,            _sm->get(idSource, champ_bpsFile));
-        _sm->set(idDest, champ_name,               nom);
+        // Sample configuration
+        _sm->set(idDest, _sm->getData(idSource));
+        _sm->set(idDest, champ_dwLength, _sm->get(idSource, champ_dwLength));
+        _sm->set(idDest, champ_dwSampleRate, _sm->get(idSource, champ_dwSampleRate));
+        _sm->set(idDest, champ_dwStartLoop, _sm->get(idSource, champ_dwStartLoop));
+        _sm->set(idDest, champ_dwEndLoop, _sm->get(idSource, champ_dwEndLoop));
+        _sm->set(idDest, champ_sfSampleType, _sm->get(idSource, champ_sfSampleType));
+        _sm->set(idDest, champ_byOriginalPitch, _sm->get(idSource, champ_byOriginalPitch));
+        _sm->set(idDest, champ_chPitchCorrection, _sm->get(idSource, champ_chPitchCorrection));
+        _sm->set(idDest, champ_bpsFile, _sm->get(idSource, champ_bpsFile));
+        _sm->set(idDest, champ_name, nom);
 
-        // Lien
+        // Link
         if (_sm->get(idSource, champ_sfSampleType).wValue != RomMonoSample &&
                 _sm->get(idSource, champ_sfSampleType).wValue != monoSample)
         {
-            // Possible ?
+            // Possible?
             EltID idSourceLink = idSource;
             idSourceLink.indexElt = _sm->get(idSource, champ_wSampleLink).wValue;
             AttributeValue val;

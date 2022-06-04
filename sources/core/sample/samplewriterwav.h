@@ -38,6 +38,9 @@ public:
 
 private:
     void write(QByteArray &baData, InfoSound &info);
+    static void convertTo16bit(QVector<float> dataSrc, QByteArray &dataDest);
+    static void convertTo24bit(QVector<float> dataSrc, QByteArray &dataDest);
+    static QByteArray from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, quint16 wBps, bool bigEndian = false);
 
     QString _fileName;
 };

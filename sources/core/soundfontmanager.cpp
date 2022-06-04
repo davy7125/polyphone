@@ -443,39 +443,15 @@ QString SoundfontManager::getQstr(EltID id, AttributeType champ)
     return ret;
 }
 
-QByteArray SoundfontManager::getData(EltID id, AttributeType champ)
+QVector<float> SoundfontManager::getData(EltID idSmpl)
 {
     QMutexLocker locker(&_mutex);
-    QByteArray baRet;
-    if (!this->isValid(id))
+    QVector<float> baRet;
+    if (!this->isValid(idSmpl))
         return baRet;
 
-    // Type d'élément à analyser
-    switch (id.typeElement)
-    {
-    case elementSmpl:{
-        Smpl *tmp = _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt);
-        switch (champ)
-        {
-        case champ_sampleData16:
-            baRet = tmp->_sound.getData(16);
-            break;
-        case champ_sampleData24:
-            baRet = tmp->_sound.getData(8);
-            break;
-        case champ_sampleDataFull24:
-            baRet = tmp->_sound.getData(24);
-            break;
-        case champ_sampleData32:
-            baRet = tmp->_sound.getData(32);
-            break;
-        default:
-            break;
-        }
-    }break;
-    default:
-        break;
-    }
+    Smpl *tmp = _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt);
+    baRet = tmp->_sound.getData();
 
     return baRet;
 }
@@ -672,12 +648,12 @@ QList<int> SoundfontManager::undo(QList<Action *> actions)
         case Action::TypeUpdate:
         case Action::TypeChangeToDefault:
             // Back to the old value
-            if (action->champ >= 0 && action->champ < 164)
-                this->set(action->id, action->champ, action->vOldValue); // Valeur
-            else if (action->champ >= 164 && action->champ < 200)
+            if (action->champ >= champ_filenameInitial && action->champ <= champ_nameSort)
                 this->set(action->id, action->champ, action->qOldValue); // QString
-            else if (action->champ >= 200)
-                this->set(action->id, action->champ, action->baOldValue); // char*
+            else if (action->champ == champ_sampleData)
+                this->set(action->id, action->fOldValue); // QVector<float>
+            else
+                this->set(action->id, action->champ, action->vOldValue); // Valeur
             break;
         case Action::TypeChangeFromDefault:
             // Retour to the old value, reset
@@ -719,12 +695,12 @@ void SoundfontManager::redo(int indexSf2)
         case Action::TypeUpdate:
         case Action::TypeChangeFromDefault:
             // Apply again the new value
-            if (action->champ >= 0 && action->champ < 164)
-                this->set(action->id, action->champ, action->vNewValue); // Valeur
-            else if (action->champ >= 164 && action->champ < 200)
+            if (action->champ >= champ_filenameInitial && action->champ <= champ_nameSort)
                 this->set(action->id, action->champ, action->qNewValue); // QString
-            else if (action->champ >= 200)
-                this->set(action->id, action->champ, action->baNewValue); // char*
+            else if (action->champ == champ_sampleData)
+                this->set(action->id, action->fNewValue); // QVector<float>
+            else
+                this->set(action->id, action->champ, action->vNewValue); // Valeur
             break;
         case Action::TypeChangeToDefault:
             // Apply the new value, reset
@@ -1276,7 +1252,7 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
         }
     }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
-        // Modification d'un mod
+        // Update a mod
         Modulator *tmp = nullptr;
         switch (id.typeElement)
         {
@@ -1471,62 +1447,26 @@ int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
     return 0;
 }
 
-int SoundfontManager::set(EltID id, AttributeType champ, QByteArray data)
+int SoundfontManager::set(EltID idSmpl, QVector<float> data)
 {
     QMutexLocker locker(&_mutex);
-    if (!this->isValid(id))
+    if (!this->isValid(idSmpl))
         return 1;
 
-    QByteArray oldData;
+    QVector<float> oldData;
     oldData.clear();
-    // Type d'élément à modifier
-    switch (id.typeElement)
-    {
-    case elementSmpl:
-        // Update a sample
-        switch (champ)
-        {
-        case champ_sampleData16:
-            oldData = _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt)->_sound.getData(16);
-            _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt)->_sound.setData(data, 16);
-            break;
-        case champ_sampleData24:
-            oldData = _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt)->_sound.getData(8);
-            _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt)->_sound.setData(data, 8);
-            break;
-        case champ_sampleDataFull24:{
-            // Modification 16 bits
-            QByteArray baData = SampleUtils::bpsConversion(data, 24, 16);
-            this->set(id, champ_sampleData16, baData);
 
-            // Modification 8 bits de poids faibles
-            baData = SampleUtils::bpsConversion(data, 24, 824);
-            this->set(id, champ_sampleData24, baData);
-        }break;
-        case champ_sampleData32:{
-            // Modification 16 bits
-            QByteArray baData = SampleUtils::bpsConversion(data, 32, 16);
-            this->set(id, champ_sampleData16, baData);
-
-            // Modification 8 bits de poids faibles
-            baData = SampleUtils::bpsConversion(data, 32, 824);
-            this->set(id, champ_sampleData24, baData);
-        }break;
-        default:
-            break;
-        }
-        break;
-    default:
-        return 0;
-    }
+    // Update sample data
+    oldData = _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt)->_sound.getData();
+    _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt)->_sound.setData(data);
 
     // Création et stockage de l'action
     Action *action = new Action();
     action->typeAction = Action::TypeUpdate;
-    action->id = id;
-    action->champ = champ;
-    action->baOldValue = oldData;
-    action->baNewValue = data;
+    action->id = idSmpl;
+    action->champ = champ_sampleData;
+    action->fOldValue = oldData;
+    action->fNewValue = data;
     this->_undoRedo->add(action);
 
     return 0;

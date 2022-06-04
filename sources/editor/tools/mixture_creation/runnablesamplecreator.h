@@ -39,8 +39,8 @@ public:
 
 private:
     EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
-    QByteArray getSampleData(EltID idSmpl, quint32 nbRead);
-    void addSampleData(QByteArray &baData1, QByteArray &baData2, double mult);
+    QVector<float> getSampleData(EltID idSmpl, quint32 nbRead);
+    void addSampleData(QVector<float> &vData1, QVector<float> &vData2, double mult);
 
     static double SAMPLE_DURATION; // In seconds
     static quint32 SAMPLE_RATE; // In samples per second

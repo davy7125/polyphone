@@ -168,24 +168,24 @@ void GraphicsViewEnvelop::setKeyRange(int index, int keyMin, int keyMax)
     _envelops[index]->set(Envelop::KEY_MAX, keyMax, true);
 }
 
-void GraphicsViewEnvelop::setSample(QByteArray data, int sampleRate, int loopMode, int startLoop, int endLoop)
+void GraphicsViewEnvelop::setSample(QVector<float> vData, int sampleRate, int loopMode, int startLoop, int endLoop)
 {
     _sampleRate = sampleRate;
 
     // Number of points to display
-    int dataSize = data.size() / 2;
+    int dataSize = vData.size();
     int loopedDataSize = _sizeX * sampleRate;
-    QByteArray loopedData(loopedDataSize * 2, 0);
+    QVector<float> loopedData(loopedDataSize, 0);
 
     // Pointers to data
-    qint16 * data16 = reinterpret_cast<qint16*>(data.data());
-    qint16 * loopedData16 = reinterpret_cast<qint16*>(loopedData.data());
+    const float * fData = vData.constData();
+    float * fLoopedData = loopedData.data();
 
     // Compute the multiplier to normalize data
-    qint16 max = 0;
+    float max = 0;
     for (int i = 0; i < dataSize; i++)
-        max = qMax(max, qAbs(data16[i]));
-    double multiplier = (max == 0) ? 1.0 : (23000. / max); // 23000 = 0.7 * max(int16)
+        max = qMax(max, qAbs(fData[i]));
+    float multiplier = (max == 0) ? 1.0f : (0.7f / max);
 
     // Key on part
     int currentSmplPos = 0;
@@ -201,7 +201,7 @@ void GraphicsViewEnvelop::setSample(QByteArray data, int sampleRate, int loopMod
         {
             const int chunk = qMin(endLoop - currentSmplPos, nbRead - total);
             for (int i = 0; i < chunk; i++)
-                loopedData16[total + i] = multiplier * data16[currentSmplPos + i];
+                fLoopedData[total + i] = multiplier * fData[currentSmplPos + i];
             currentSmplPos += chunk;
             if (currentSmplPos >= endLoop)
                 currentSmplPos = startLoop;
@@ -214,15 +214,15 @@ void GraphicsViewEnvelop::setSample(QByteArray data, int sampleRate, int loopMod
         if (dataSize - currentSmplPos < nbRead)
         {
             for (int i = 0; i < dataSize - currentSmplPos; i++)
-                loopedData16[i] = multiplier * data16[currentSmplPos + i];
+                fLoopedData[i] = multiplier * fData[currentSmplPos + i];
             for (int i = dataSize - currentSmplPos; i < nbRead; i++)
-                loopedData16[i] = 0;
+                fLoopedData[i] = 0;
             currentSmplPos = dataSize;
         }
         else
         {
             for (int i = 0; i < nbRead; i++)
-                loopedData16[i] = multiplier * data16[currentSmplPos + i];
+                fLoopedData[i] = multiplier * fData[currentSmplPos + i];
             currentSmplPos += nbRead;
         }
     }
@@ -233,7 +233,7 @@ void GraphicsViewEnvelop::setSample(QByteArray data, int sampleRate, int loopMod
 
     if ((loopMode == 1 || loopMode == 2) && startLoop != endLoop)
     {
-        // Boucle
+        // Loop
         if (currentSmplPos >= endLoop)
             currentSmplPos = startLoop;
         int total = 0;
@@ -241,7 +241,7 @@ void GraphicsViewEnvelop::setSample(QByteArray data, int sampleRate, int loopMod
         {
             const int chunk = qMin(endLoop - currentSmplPos, nbRead - total);
             for (int i = 0; i < chunk; i++)
-                loopedData16[offset + total + i] = multiplier * data16[currentSmplPos + i];
+                fLoopedData[offset + total + i] = multiplier * fData[currentSmplPos + i];
             currentSmplPos += chunk;
             if (currentSmplPos >= endLoop)
                 currentSmplPos = startLoop;
@@ -250,19 +250,19 @@ void GraphicsViewEnvelop::setSample(QByteArray data, int sampleRate, int loopMod
     }
     else
     {
-        // Pas de boucle
+        // No loop
         if (dataSize - currentSmplPos < nbRead)
         {
             for (int i = 0; i < dataSize - currentSmplPos; i++)
-                loopedData16[offset + i] = multiplier * data16[currentSmplPos + i];
+                fLoopedData[offset + i] = multiplier * fData[currentSmplPos + i];
             for (int i = dataSize - currentSmplPos; i < nbRead; i++)
-                loopedData16[offset + i] = 0;
+                fLoopedData[offset + i] = 0;
             currentSmplPos = dataSize;
         }
         else
         {
             for (int i = 0; i < nbRead; i++)
-                loopedData16[offset + i] = multiplier * data16[currentSmplPos + i];
+                fLoopedData[offset + i] = multiplier * fData[currentSmplPos + i];
             currentSmplPos += nbRead;
         }
     }

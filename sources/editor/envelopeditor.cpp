@@ -294,7 +294,7 @@ void EnvelopEditor::addSample(EltID idInstSmpl)
     idSmpl.indexElt = _sf2->get(idInstSmpl, champ_sampleID).wValue;
 
     // Data
-    QByteArray data = _sf2->getData(idSmpl, champ_sampleData16);
+    QVector<float> vData = _sf2->getData(idSmpl);
 
     // Parameters
     int sampleRate = _sf2->get(idSmpl, champ_dwSampleRate).dwValue;
@@ -312,10 +312,10 @@ void EnvelopEditor::addSample(EltID idInstSmpl)
     }
 
     // Adjust values
-    if (startLoop < 0 || endLoop > data.size() / 2)
+    if (startLoop < 0 || endLoop > vData.size())
         loopMode = 0;
 
-    ui->graphicsView->setSample(data, sampleRate, loopMode, startLoop, endLoop);
+    ui->graphicsView->setSample(vData, sampleRate, loopMode, startLoop, endLoop);
 }
 
 void EnvelopEditor::enableEditor(bool isEnabled)

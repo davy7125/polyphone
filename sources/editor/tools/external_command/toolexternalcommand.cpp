@@ -144,7 +144,7 @@ void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolP
 
 void ToolExternalCommand::import(EltID id, Sound &sound, SoundfontManager * sm, bool replaceInfo)
 {
-    sm->set(id, champ_sampleDataFull24, sound.getData(24, true));
+    sm->set(id, sound.getData(true));
 
     AttributeValue val;
     val.dwValue = sound.getUInt32(champ_dwStart16);

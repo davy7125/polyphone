@@ -85,7 +85,7 @@ GraphicsWave::~GraphicsWave()
     delete _wavePainter;
 }
 
-void GraphicsWave::setData(QByteArray baData, quint32 sampleRate)
+void GraphicsWave::setData(QVector<float> vData, quint32 sampleRate)
 {
     // Reset zoom & drag
     _zoomX = 1;
@@ -93,8 +93,8 @@ void GraphicsWave::setData(QByteArray baData, quint32 sampleRate)
     _posX = 0.5;
 
     // Set data
-    _wavePainter->setData(baData);
-    _sizeX = 0.5 * baData.size() - 1;
+    _wavePainter->setData(vData);
+    _sizeX = vData.size() - 1;
 
     // Save the sample rate
     _sampleRate = sampleRate;

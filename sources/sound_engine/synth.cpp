@@ -306,7 +306,7 @@ int Synth::playSmpl(Soundfont * soundfont, Smpl * smpl, int channel, int key, in
 
     // Create a voice
     int currentToken = s_sampleVoiceTokenCounter++;
-    Voice * voiceTmp = new Voice(smpl->_sound.getData(32),
+    Voice * voiceTmp = new Voice(smpl->_sound.getData(),
                                  smpl->_sound.getUInt32(champ_dwSampleRate),
                                  _format.sampleRate(), voiceParam, currentToken);
 

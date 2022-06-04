@@ -57,16 +57,10 @@ void ToolFrequencyFilter_gui::updateInterface(AbstractToolParameters * parameter
     {
         EltID id = ids[i];
         quint32 sampleRate = sm->get(id, champ_dwSampleRate).dwValue;
-        QByteArray baData = sm->getData(id, champ_sampleData16);
+        QVector<float> vData = sm->getData(id);
 
         // Get the Fourier transform of the sample
-        int length = baData.size() / 2;
-        QVector<float> fData;
-        fData.resize(length);
-        qint16 * data = reinterpret_cast<qint16*>(baData.data());
-        for (int i = 0; i < length; i++)
-            fData[i] = static_cast<float>(data[i]);
-        fData = SampleUtils::getFourierTransform(fData);
+        QVector<float> fData = SampleUtils::getFourierTransform(vData);
 
         // Display it
         ui->graphFilterFrequencies->addFourierTransform(fData, sampleRate);

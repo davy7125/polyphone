@@ -41,7 +41,7 @@ public:
     // * -1 when we use "play" for reading a sample
     // * -2 when we want to read the stereo part of a sample, with "play"
     // >= 0 otherwise (sample, instrument or preset level)
-    Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, VoiceParam *voiceParam, int token);
+    Voice(QVector<float> baData, quint32 smplRate, quint32 audioSmplRate, VoiceParam *voiceParam, int token);
     ~Voice();
 
     int getChannel() { return _voiceParam->getChannel(); }
@@ -87,7 +87,7 @@ private:
     int _chorusLevel;
 
     // Sound data and parameters
-    QByteArray _baData;
+    QVector<float> _baData;
     quint32 _smplRate, _audioSmplRate;
     double _gain;
     VoiceParam * _voiceParam;
@@ -104,12 +104,12 @@ private:
     // Save state for resampling
     float _lastFraction;
     qint32 _valPrec3, _valPrec2, _valPrec1;
-    qint32 _firstVal[3];
+    float _firstVal[3];
 
     // Save state for low pass filter
     float _x1, _x2, _y1, _y2;
 
-    bool takeData(qint32 *data, quint32 nbRead);
+    bool takeData(float * data, quint32 nbRead);
     void biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float Q);
 
     // Protect parameters
@@ -122,7 +122,7 @@ private:
     float * _modFreqArray;
     quint32 * _pointDistanceArray;
     quint32 _arrayLength;
-    qint32 * _srcData;
+    float * _srcData;
     quint32 _srcDataLength;
 
     static volatile int s_tuningFork;

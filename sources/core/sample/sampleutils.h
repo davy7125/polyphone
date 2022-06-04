@@ -32,53 +32,48 @@ class SampleUtils
 public:
     SampleUtils();
 
-    static QByteArray resampleMono(QByteArray data, double echInit, quint32 echFinal, quint16 wBps);
-    static QByteArray bandFilter(QByteArray baData, quint16 wBps, double dwSmplRate, double fBas, double fHaut, int ordre);
-    static QByteArray cutFilter(QByteArray baData, quint32 dwSmplRate, QVector<double> dValues, quint16 wBps, int maxFreq);
-    static QByteArray EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, QVector<int> eqGains);
-    static QByteArray bpsConversion(QByteArray baData, quint16 wBpsInit, quint16 wBpsFinal, bool bigEndian = false);
-    static void bpsConversion(char *cDest, const char *cFrom, qint32 size, quint16 wBpsInit, quint16 wBpsFinal, bool bigEndian = false);
-    static QByteArray from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, quint16 wBps, bool bigEndian = false);
-    static Complex * fromBaToComplex(QByteArray baData, quint16 wBps, quint32 &size);
-    static Complex * fromBaToComplex(QVector<float> fData, quint32 &size);
-    static QByteArray fromComplexToBa(Complex * cpxData, int size, quint16 wBps);
+    static QVector<float> resampleMono(QVector<float> vData, double echInit, quint32 echFinal);
+    static QVector<float> bandFilter(QVector<float> vData, double dwSmplRate, double fBas, double fHaut, int ordre);
+    static QVector<float> cutFilter(QVector<float> vData, quint32 dwSmplRate, QVector<double> dValues, int maxFreq);
+    static QVector<float> EQ(QVector<float> vData, quint32 dwSmplRate, QVector<int> eqGains);
+    static Complex * fromFloatToComplex(QVector<float> fData, quint32 &size);
+    static QVector<float> fromComplexToFloat(Complex * cpxData, int size);
     static QVector<float> getFourierTransform(QVector<float> input);
-    static QByteArray normaliser(QByteArray baData, double dVal, quint16 wBps, double &db);
-    static QByteArray multiplier(QByteArray baData, double dMult, quint16 wBps, double &db);
-    static void removeBlankStep1(QByteArray baData24, quint32 &pos1, quint32 &pos2);
-    static QByteArray removeBlankStep2(QByteArray baData24, quint32 pos);
-    static void regimePermanent(QByteArray baData, quint32 dwSmplRate, quint16 wBps, quint32 &posStart, quint32 &posEnd);
+    static QVector<float> normalize(QVector<float> vData, float dVal, float &db);
+    static QVector<float> multiply(QVector<float> vData, float dMult, float &db);
+    static void removeBlankStep1(QVector<float> vData, quint32 &pos1, quint32 &pos2);
+    static QVector<float> removeBlankStep2(QVector<float> vData, quint32 pos);
     static void regimePermanent(QVector<float> fData, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd);
     static QVector<float> correlation(const float *fData, quint32 size, quint32 dwSmplRate, quint32 fMin, quint32 fMax, quint32 &dMin);
     static float correlation(const float *fData1, const float *fData2, quint32 length, float *bestValue);
-    static bool loopStep1(QByteArray baData32, quint32 dwSmplRate, quint32 &loopStart, quint32 &loopEnd, quint32 &loopCrossfadeLength);
-    static QByteArray loopStep2(QByteArray baData32, quint32 loopStart, quint32 loopEnd, quint32 loopCrossfadeLength);
+    static bool loopStep1(QVector<float> vData, quint32 dwSmplRate, quint32 &loopStart, quint32 &loopEnd, quint32 &loopCrossfadeLength);
+    static QVector<float> loopStep2(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 loopCrossfadeLength);
     static QList<quint32> findMins(QVector<float> vectData, int maxNb, float minFrac = 0);
     static QList<quint32> findMax(QVector<float> vectData, int maxNb, float minFrac = 0);
-    static qint32 max(QByteArray baData, quint16 wBps);
-    static double moyenneCarre(QByteArray baData, quint16 wBps);
+    static float max(QVector<float> vData);
+    static float meanSquare(QVector<float> vData);
     static int lastLettersToRemove(QString str1, QString str2);
 
     // Compute the quality of a loop
     // If the result if < 0.05 it can be considered as OK
     // If > 0.150 => you will probably hear the loop point
-    static float computeLoopQuality(QByteArray baData, quint32 loopStart, quint32 loopEnd);
+    static float computeLoopQuality(QVector<float> vData, quint32 loopStart, quint32 loopEnd);
 
 private:
     static void FFT_calculate(Complex * x, quint32 N /* must be a power of 2 */,
                               Complex * X, Complex * scratch, Complex * twiddles);
-    static double moyenne(QByteArray baData, quint16 wBps);
+    static float mean(QVector<float> vData);
     static double gainEQ(double freq, QVector<int> eqGains);
-    static float mediane(QVector<float> data);
-    static qint64 somme(QByteArray baData, quint16 wBps);
-    static qint64 sommeCarre(QByteArray baData, quint16 wBps);
+    static float median(QVector<float> vData);
+    static float sum(QVector<float> vData);
+    static float sumSquare(QVector<float> vData);
     static void regimePermanent(QVector<float> data, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd, quint32 nbOK, float coef);
     static double sinc(double x);
     static void KBDWindow(double* window, int size, double alpha);
     static double BesselI0(double x);
     static Complex * FFT(Complex * x, quint32 N); // N must be a power of 2
     static Complex * IFFT(Complex * x, quint32 N); // N must be a power of 2
-    static float getDiffForLoopQuality(qint16 * data, quint32 pos1, quint32 pos2);
+    static float getDiffForLoopQuality(const float *data, quint32 pos1, quint32 pos2);
 };
 
 #endif // SAMPLEUTILS_H

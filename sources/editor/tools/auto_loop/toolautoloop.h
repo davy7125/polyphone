@@ -69,7 +69,7 @@ protected:
     QString getWarning() override;
 
 private:
-    void updateSample(EltID id, QByteArray &baData, quint32 startLoop, quint32 endLoop, quint32 crossfadeLength);
+    void updateSample(EltID id, QVector<float> vData, quint32 startLoop, quint32 endLoop, quint32 crossfadeLength);
 
     IdList _processedSamples;
     QStringList _samplesNotLooped;

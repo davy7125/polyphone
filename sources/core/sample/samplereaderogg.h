@@ -36,19 +36,15 @@ public:
     // Extract general information (sampling rate, ...)
     SampleReaderResult getInfo(QFile &fi, InfoSound &info) override;
 
-    // Get sample data (16 bits)
-    SampleReaderResult getData16(QFile &fi, QByteArray &smpl) override;
-
-    // Get sample data (extra 8 bits)
-    SampleReaderResult getExtraData24(QFile &fi, QByteArray &sm24) override;
+    // Get sample data
+    SampleReaderResult getData(QFile &fi, QVector<float> &smpl) override;
 
 private:
     SampleReaderResult launchDecoder(bool justMetadata);
 
     QFile * _file;
     InfoSound * _info;
-    QByteArray * _data;
-    bool _readExtra8;
+    float * _data;
 };
 
 #endif // SAMPLEREADEROGG_H

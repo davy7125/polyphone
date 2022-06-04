@@ -36,25 +36,21 @@ void ToolTrimEnd::process(SoundfontManager * sm, EltID id, AbstractToolParameter
 void ToolTrimEnd::trim(EltID id)
 {
     SoundfontManager * sm = SoundfontManager::getInstance();
-    QByteArray baData = sm->getData(id, champ_sampleDataFull24);
+    QVector<float> baData = sm->getData(id);
 
-    // Number of values to remove
-    qint32 size = baData.size() / 3;
+    // End of loop
     qint32 endLoop = sm->get(id, champ_dwEndLoop).dwValue;
-    if (endLoop == 0)
-        return;
 
-    if (endLoop < size - 8)
+    // Possibly resize data
+    if (endLoop != 0 && endLoop + 8 < baData.size())
     {
-        qint32 pos = size - (8 + endLoop);
-
         // Crop data
-        baData = baData.left(baData.size() - 3 * pos);
-        sm->set(id, champ_sampleDataFull24, baData);
+        baData.resize(endLoop + 8);
+        sm->set(id, baData);
 
         // Update length
         AttributeValue val;
-        val.dwValue = baData.size() / 3;
+        val.dwValue = baData.size();
         sm->set(id, champ_dwLength, val);
     }
 }

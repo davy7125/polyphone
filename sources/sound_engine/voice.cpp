@@ -58,7 +58,7 @@ void Voice::prepareSincTable()
 }
 
 // Constructeur, destructeur
-Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, VoiceParam * voiceParam, int token) : QObject(nullptr),
+Voice::Voice(QVector<float> baData, quint32 smplRate, quint32 audioSmplRate, VoiceParam * voiceParam, int token) : QObject(nullptr),
     _modLFO(audioSmplRate),
     _vibLFO(audioSmplRate),
     _enveloppeVol(audioSmplRate, false),
@@ -188,7 +188,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     {
         if (_srcDataLength != 0)
             delete [] _srcData;
-        _srcData = new qint32[nbDataTmp + 6];
+        _srcData = new float[nbDataTmp + 6];
         _srcDataLength = nbDataTmp;
     }
     _srcData[0] = _valPrec3;
@@ -212,14 +212,13 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         // Sinc interpolation 7th order
         coeffs = s_sinc_table7[_pointDistanceArray[i] & 0xFF];
         currentPos = (_pointDistanceArray[i] >> 8);
-        dataL[i] = (coeffs[0] * _srcData[currentPos] +
+        dataL[i] = coeffs[0] * _srcData[currentPos] +
                 coeffs[1] * _srcData[currentPos + 1] +
                 coeffs[2] * _srcData[currentPos + 2] +
                 coeffs[3] * _srcData[currentPos + 3] +
                 coeffs[4] * _srcData[currentPos + 4] +
                 coeffs[5] * _srcData[currentPos + 5] +
-                coeffs[6] * _srcData[currentPos + 6])
-                / 2147483648LL; // Convert to float from -1.0 to 1.0
+                coeffs[6] * _srcData[currentPos + 6];
     }
 
     // Low-pass filter
@@ -290,10 +289,10 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     _mutexParam.unlock();
 }
 
-bool Voice::takeData(qint32 * data, quint32 nbRead)
+bool Voice::takeData(float * data, quint32 nbRead)
 {
     bool endSample = false;
-    const qint32 * dataSmpl = reinterpret_cast<const qint32*>(_baData.constData());
+    const float * dataSmpl = _baData.constData();
 
     int loopMode = _voiceParam->getInteger(champ_sampleModes);
     quint32 loopStart = _voiceParam->getPosition(champ_dwStartLoop);
@@ -308,7 +307,7 @@ bool Voice::takeData(qint32 * data, quint32 nbRead)
         while (nbRead - total > 0)
         {
             const quint32 chunk = qMin(_currentSmplPos < loopEnd ? loopEnd - _currentSmplPos : 0, nbRead - total);
-            memcpy(&data[total], &dataSmpl[_currentSmplPos], chunk * sizeof(qint32));
+            memcpy(&data[total], &dataSmpl[_currentSmplPos], chunk * sizeof(float));
             _currentSmplPos += chunk;
             if (_currentSmplPos >= loopEnd)
                 _currentSmplPos = loopStart;
@@ -322,14 +321,14 @@ bool Voice::takeData(qint32 * data, quint32 nbRead)
         if (_currentSmplPos > sampleEnd)
         {
             // No more data, fill with 0
-            memset(data, 0, nbRead * sizeof(qint32));
+            memset(data, 0, nbRead * sizeof(float));
             endSample = true;
         }
         else if (sampleEnd - _currentSmplPos < nbRead)
         {
             // Copy what is possible to copy, fill the rest with 0
             memcpy(data, &dataSmpl[_currentSmplPos], sizeof(qint32) * (sampleEnd - _currentSmplPos));
-            memset(&data[sampleEnd - _currentSmplPos], 0, (nbRead - sampleEnd + _currentSmplPos) * sizeof(qint32));
+            memset(&data[sampleEnd - _currentSmplPos], 0, (nbRead - sampleEnd + _currentSmplPos) * sizeof(float));
 
             // We are now at the end
             _currentSmplPos = sampleEnd;
@@ -340,7 +339,7 @@ bool Voice::takeData(qint32 * data, quint32 nbRead)
         else
         {
             // Copy data
-            memcpy(data, &dataSmpl[_currentSmplPos], nbRead * sizeof(qint32));
+            memcpy(data, &dataSmpl[_currentSmplPos], nbRead * sizeof(float));
             _currentSmplPos += nbRead;
         }
     }

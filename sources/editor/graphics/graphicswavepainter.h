@@ -46,7 +46,7 @@ public:
     void setDrawBottom(bool drawBottom) { _drawBottom = drawBottom; }
 
     // Configure the painter with data
-    void setData(QByteArray baData);
+    void setData(QVector<float> vData);
 
     // Draw data
     void paint(QPainter *painter, quint32 start, quint32 end, float zoomY);
@@ -64,7 +64,7 @@ private:
 
     // Input data
     quint32 _sampleSize;
-    qint16 * _sampleData;
+    const float * _sampleData;
 
     // Buffered image and associated parameters
     QRgb * _pixels;

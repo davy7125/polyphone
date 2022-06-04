@@ -140,10 +140,7 @@ typedef enum
     champ_name = 173,                   // (sf2, smpl, inst et prst)
     champ_nameSort = 174,
 
-    champ_sampleData16 = 200,           // QByteArray
-    champ_sampleData24 = 201, // Only the extra 8 bits
-    champ_sampleDataFull24 = 202,
-    champ_sampleData32 = 203,
+    champ_sampleData = 200,             // QVector<float>
 
     champ_pitchDefined = 300, // if pitch defined in a sample (wav)
     champ_mute = 301 // Divisions can be muted for testing purposes

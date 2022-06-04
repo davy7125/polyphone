@@ -65,14 +65,14 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
     _mutex.unlock();
 
     // Get data, sample rate, start and end loop of sample 1
-    QByteArray baData = sm->getData(id, champ_sampleData32);
+    QVector<float> vData = sm->getData(id);
     quint32 dwSmplRate = sm->get(id, champ_dwSampleRate).dwValue;
     quint32 startLoop = sm->get(id, champ_dwStartLoop).dwValue;
     quint32 endLoop = sm->get(id, champ_dwEndLoop).dwValue;
 
     // Loop
     quint32 crossfadeLength;
-    bool result = SampleUtils::loopStep1(baData, dwSmplRate, startLoop, endLoop, crossfadeLength);
+    bool result = SampleUtils::loopStep1(vData, dwSmplRate, startLoop, endLoop, crossfadeLength);
 
     // Same for sample 2
     if (withLink)
@@ -81,18 +81,18 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
         quint32 dwSmplRate2 = sm->get(id2, champ_dwSampleRate).dwValue;
         if (dwSmplRate2 == dwSmplRate)
         {
-            QByteArray baData2 = sm->getData(id2, champ_sampleData32);
+            QVector<float> vData2 = sm->getData(id2);
             quint32 startLoop2 = sm->get(id2, champ_dwStartLoop).dwValue;
             quint32 endLoop2 = sm->get(id2, champ_dwEndLoop).dwValue;
 
             quint32 crossfadeLength2;
-            bool result2 = SampleUtils::loopStep1(baData2, dwSmplRate2, startLoop2, endLoop2, crossfadeLength2);
+            bool result2 = SampleUtils::loopStep1(vData2, dwSmplRate2, startLoop2, endLoop2, crossfadeLength2);
 
             if (result && !result2)
             {
                 // Take the values of sample 1, if possible
-                if (endLoop + 8 < baData2.size() / 4u)
-                    updateSample(id2, baData2, startLoop, endLoop, crossfadeLength);
+                if (endLoop + 8 < (unsigned int)vData2.size())
+                    updateSample(id2, vData2, startLoop, endLoop, crossfadeLength);
                 else
                 {
                     // Sample 2 cannot be processed
@@ -104,7 +104,7 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
             else if (!result && result2)
             {
                 // Use the values of sample 2 for sample 1, if possible
-                if (endLoop2 + 8 < baData.size() / 4u)
+                if (endLoop2 + 8 < (unsigned int)vData.size())
                 {
                     startLoop = startLoop2;
                     endLoop = endLoop2;
@@ -113,7 +113,7 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
                 }
 
                 // Update sample 2
-                updateSample(id2, baData2, startLoop2, endLoop2, crossfadeLength2);
+                updateSample(id2, vData2, startLoop2, endLoop2, crossfadeLength2);
             }
             else if (!result && !result2)
             {
@@ -127,7 +127,7 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
                 // Use the longest possible loop for both samples
                 if (endLoop < endLoop2)
                 {
-                    if (endLoop2 + 8 < baData.size() / 4u)
+                    if (endLoop2 + 8 < (unsigned int)vData.size())
                     {
                         // Use the values of sample 2 for both samples (long loop)
                         startLoop = startLoop2;
@@ -144,7 +144,7 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
                 }
                 else
                 {
-                    if (endLoop + 8 < baData2.size() / 4u)
+                    if (endLoop + 8 < (unsigned int)vData2.size())
                     {
                         // Use the values of sample 1 for both samples (long loop)
                         startLoop2 = startLoop;
@@ -161,13 +161,13 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
                 }
 
                 // Update sample 2
-                updateSample(id2, baData2, startLoop2, endLoop2, crossfadeLength2);
+                updateSample(id2, vData2, startLoop2, endLoop2, crossfadeLength2);
             }
         }
     }
 
     if (result)
-        updateSample(id, baData, startLoop, endLoop, crossfadeLength);
+        updateSample(id, vData, startLoop, endLoop, crossfadeLength);
     else
     {
         _mutex.lock();
@@ -176,14 +176,13 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
     }
 }
 
-void ToolAutoLoop::updateSample(EltID id, QByteArray &baData, quint32 startLoop, quint32 endLoop, quint32 crossfadeLength)
+void ToolAutoLoop::updateSample(EltID id, QVector<float> vData, quint32 startLoop, quint32 endLoop, quint32 crossfadeLength)
 {
     SoundfontManager * sm = SoundfontManager::getInstance();
 
     // Update data
-    baData = SampleUtils::loopStep2(baData, startLoop, endLoop, crossfadeLength);
-    baData = SampleUtils::bpsConversion(baData, 32, 24);
-    sm->set(id, champ_sampleDataFull24, baData);
+    vData = SampleUtils::loopStep2(vData, startLoop, endLoop, crossfadeLength);
+    sm->set(id, vData);
 
     // Update length, startloop and endloop
     AttributeValue val;
@@ -191,7 +190,7 @@ void ToolAutoLoop::updateSample(EltID id, QByteArray &baData, quint32 startLoop,
     sm->set(id, champ_dwStartLoop, val);
     val.dwValue = endLoop;
     sm->set(id, champ_dwEndLoop, val);
-    val.dwValue = static_cast<quint32>(baData.size()) / 3;
+    val.dwValue = static_cast<quint32>(vData.size());
     sm->set(id, champ_dwLength, val);
 }
 

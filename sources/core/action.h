@@ -51,8 +51,8 @@ public:
     QString qOldValue;
     AttributeValue vNewValue;
     AttributeValue vOldValue;
-    QByteArray baNewValue;
-    QByteArray baOldValue;
+    QVector<float> fNewValue;
+    QVector<float> fOldValue;
 };
 
 #endif // ACTION_H

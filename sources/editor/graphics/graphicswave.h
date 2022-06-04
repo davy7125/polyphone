@@ -38,7 +38,7 @@ public:
     explicit GraphicsWave(QWidget *parent = nullptr);
     ~GraphicsWave() override;
 
-    void setData(QByteArray baData, quint32 sampleRate);
+    void setData(QVector<float> vData, quint32 sampleRate);
     void linkSliderX(QScrollBar * qScrollX);
     void linkSpinBoxes(QSpinBox * spinStart, QSpinBox * spinEnd);
     void displayMultipleSelection(bool isOn);

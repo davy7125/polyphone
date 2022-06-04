@@ -162,7 +162,7 @@ QString PageOverviewSmpl::loopLength(EltID id, int &status)
     else
     {
         // Get the sample data
-        QByteArray baData = _sf2->getData(id, champ_sampleData16);
+        QVector<float> baData = _sf2->getData(id);
         float loopQuality = SampleUtils::computeLoopQuality(baData, startLoop, endLoop);
         if (loopQuality >= 0.15)
             status = 2; // Error

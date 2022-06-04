@@ -33,49 +33,62 @@ SampleWriterWav::SampleWriterWav(QString fileName) :
 
 void SampleWriterWav::write(Sound * sound)
 {
-    // Exportation d'un sample mono au format wav
-    quint16 wBps = sound->getInfo().wBpsFile;
-    if (wBps > 16)
-        wBps = 24;
-    else
-        wBps = 16;
-    QByteArray baData = sound->getData(wBps);
-
-    // Création d'un fichier
+    // Data as an array of integers
     InfoSound info = sound->getInfo();
-    info.wBpsFile = wBps;
+    QByteArray baData;
+    if (info.wBpsFile > 16)
+    {
+        info.wBpsFile = 24;
+        convertTo24bit(sound->getData(), baData);
+    }
+    else
+    {
+        info.wBpsFile = 16;
+        convertTo16bit(sound->getData(), baData);
+    }
+
+    // Exportation d'un sample mono au format wav
     info.wChannels = 1;
     write(baData, info);
 }
 
 void SampleWriterWav::write(Sound *leftSound, Sound *rightSound)
 {
-    // Exportation d'un sample stereo au format wav
-    // bps (max des 2 canaux)
-    quint16 wBps = leftSound->getInfo().wBpsFile;
-    if (rightSound->getInfo().wBpsFile > wBps)
-        wBps = rightSound->getInfo().wBpsFile;
-    if (wBps > 16)
-        wBps = 24;
-    else
-        wBps = 16;
+    QVector<float> dataLeft = leftSound->getData();
+    QVector<float> dataRight = rightSound->getData();
 
-    // Récupération des données
-    QByteArray channel1 = leftSound->getData(wBps);
-    QByteArray channel2 = rightSound->getData(wBps);
-
-    // sample rate (max des 2 canaux)
+    // Sample rate (max of the 2 channels)
     quint32 dwSmplRate = leftSound->getInfo().dwSampleRate;
     if (rightSound->getInfo().dwSampleRate > dwSmplRate)
     {
-        // Ajustement son1
-        channel1 = SampleUtils::resampleMono(channel1, dwSmplRate, rightSound->getInfo().dwSampleRate, wBps);
+        // Adapt sound 1
+        dataLeft = SampleUtils::resampleMono(dataLeft, dwSmplRate, rightSound->getInfo().dwSampleRate);
         dwSmplRate = rightSound->getInfo().dwSampleRate;
     }
     else if (rightSound->getInfo().dwSampleRate < dwSmplRate)
     {
-        // Ajustement son2
-        channel2 = SampleUtils::resampleMono(channel2, rightSound->getInfo().dwSampleRate, dwSmplRate, wBps);
+        // Adapt sound 2
+        dataRight = SampleUtils::resampleMono(dataRight, rightSound->getInfo().dwSampleRate, dwSmplRate);
+    }
+
+    // Data as arrays of integers
+    quint16 wBps = leftSound->getInfo().wBpsFile;
+    if (rightSound->getInfo().wBpsFile > wBps)
+        wBps = rightSound->getInfo().wBpsFile;
+
+    QByteArray channel1;
+    QByteArray channel2;
+    if (wBps > 16)
+    {
+        wBps = 24;
+        convertTo24bit(dataLeft, channel1);
+        convertTo24bit(dataRight, channel2);
+    }
+    else
+    {
+        wBps = 16;
+        convertTo16bit(dataLeft, channel1);
+        convertTo16bit(dataRight, channel2);
     }
 
     // Taille et mise en forme des données
@@ -99,7 +112,7 @@ void SampleWriterWav::write(Sound *leftSound, Sound *rightSound)
     }
 
     // Assemblage des canaux
-    QByteArray baData = SampleUtils::from2MonoTo1Stereo(channel1, channel2, wBps);
+    QByteArray baData = from2MonoTo1Stereo(channel1, channel2, wBps);
 
     // Création d'un fichier
     InfoSound info = leftSound->getInfo();
@@ -224,4 +237,140 @@ void SampleWriterWav::write(QByteArray &baData, InfoSound &info)
 
     // Fermeture du fichier
     fi.close();
+}
+
+void SampleWriterWav::convertTo16bit(QVector<float> dataSrc, QByteArray &dataDest)
+{
+    const float * data = dataSrc.constData();
+    int length = dataSrc.size();
+
+    dataDest.resize(2 * length);
+    qint16 * data16 = reinterpret_cast<qint16 *>(dataDest.data());
+    for (int i = 0; i < length; i++)
+        data16[i] = data[i] * (.5f + 0x7FFF) - .5f;
+}
+
+void SampleWriterWav::convertTo24bit(QVector<float> dataSrc, QByteArray &dataDest)
+{
+    const float * data = dataSrc.constData();
+    int length = dataSrc.size();
+
+    dataDest.resize(3 * length);
+    char * dataChar = dataDest.data();
+    for (int i = 0; i < length; i++)
+    {
+        qint32 tmp = data[i] * (.5f + 0x7FFFFF) - .5f;
+        dataChar[3 * i] = tmp & 0xFF;
+        dataChar[3 * i + 1] = (tmp >> 8) & 0xFF;
+        dataChar[3 * i + 2] = tmp >> 16;
+    }
+}
+
+QByteArray SampleWriterWav::from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, quint16 wBps, bool bigEndian)
+{
+    int size;
+
+    // Si tailles différentes, on complète le petit avec des 0
+    if (baData1.size() < baData2.size())
+    {
+        QByteArray baTmp;
+        baTmp.fill(0, baData2.size() - baData1.size());
+        baData1.append(baTmp);
+    }
+    else if (baData2.size() < baData1.size())
+    {
+        QByteArray baTmp;
+        baTmp.fill(0, baData1.size() - baData2.size());
+        baData2.append(baTmp);
+    }
+    size = baData1.size();
+
+    // Assemblage
+    QByteArray baRet;
+    baRet.resize(2 * size);
+    char * cDest = baRet.data();
+    const char * cFrom1 = baData1.constData();
+    const char * cFrom2 = baData2.constData();
+    if (wBps == 32)
+    {
+        if (bigEndian)
+        {
+            for (int i = 0; i < size/4; i++)
+            {
+                cDest[8*i] = cFrom1[4*i+3];
+                cDest[8*i+1] = cFrom1[4*i+2];
+                cDest[8*i+2] = cFrom1[4*i+1];
+                cDest[8*i+3] = cFrom1[4*i];
+                cDest[8*i+4] = cFrom2[4*i+3];
+                cDest[8*i+5] = cFrom2[4*i+2];
+                cDest[8*i+6] = cFrom2[4*i+1];
+                cDest[8*i+7] = cFrom2[4*i];
+            }
+        }
+        else
+        {
+            for (int i = 0; i < size/4; i++)
+            {
+                cDest[8*i] = cFrom1[4*i];
+                cDest[8*i+1] = cFrom1[4*i+1];
+                cDest[8*i+2] = cFrom1[4*i+2];
+                cDest[8*i+3] = cFrom1[4*i+3];
+                cDest[8*i+4] = cFrom2[4*i];
+                cDest[8*i+5] = cFrom2[4*i+1];
+                cDest[8*i+6] = cFrom2[4*i+2];
+                cDest[8*i+7] = cFrom2[4*i+3];
+            }
+        }
+    }
+    else if (wBps == 24)
+    {
+        if (bigEndian)
+        {
+            for (int i = 0; i < size/3; i++)
+            {
+                cDest[6*i] = cFrom1[3*i+2];
+                cDest[6*i+1] = cFrom1[3*i+1];
+                cDest[6*i+2] = cFrom1[3*i];
+                cDest[6*i+3] = cFrom2[3*i+2];
+                cDest[6*i+4] = cFrom2[3*i+1];
+                cDest[6*i+5] = cFrom2[3*i];
+            }
+        }
+        else
+        {
+            for (int i = 0; i < size/3; i++)
+            {
+                cDest[6*i] = cFrom1[3*i];
+                cDest[6*i+1] = cFrom1[3*i+1];
+                cDest[6*i+2] = cFrom1[3*i+2];
+                cDest[6*i+3] = cFrom2[3*i];
+                cDest[6*i+4] = cFrom2[3*i+1];
+                cDest[6*i+5] = cFrom2[3*i+2];
+            }
+        }
+    }
+    else // 16 bits
+    {
+        if (bigEndian)
+        {
+            for (int i = 0; i < size/2; i++)
+            {
+                cDest[4*i] = cFrom1[2*i+1];
+                cDest[4*i+1] = cFrom1[2*i];
+                cDest[4*i+2] = cFrom2[2*i+1];
+                cDest[4*i+3] = cFrom2[2*i];
+            }
+        }
+        else
+        {
+            for (int i = 0; i < size/2; i++)
+            {
+                cDest[4*i] = cFrom1[2*i];
+                cDest[4*i+1] = cFrom1[2*i+1];
+                cDest[4*i+2] = cFrom2[2*i];
+                cDest[4*i+3] = cFrom2[2*i+1];
+            }
+        }
+    }
+    return baRet;
 }

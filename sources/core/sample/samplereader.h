@@ -69,8 +69,8 @@ public:
         return _result;
     }
 
-    // Get sample data (16 bits)
-    SampleReaderResult getData16(QByteArray &smpl)
+    // Get sample data
+    SampleReaderResult getData(QVector<float> &smpl)
     {
         if (_result != FILE_OK)
             return _result;
@@ -80,30 +80,7 @@ public:
         {
             if (fi.open(QFile::ReadOnly | QFile::Unbuffered))
             {
-                _result = getData16(fi, smpl);
-                fi.close();
-            }
-            else
-                _result = FILE_NOT_READABLE;
-        }
-        else
-            _result = FILE_NOT_FOUND;
-
-        return _result;
-    }
-
-    // Get sample data (extra 8 bits)
-    SampleReaderResult getExtraData24(QByteArray &sm24)
-    {
-        if (_result != FILE_OK)
-            return _result;
-
-        QFile fi (_filename);
-        if (fi.exists())
-        {
-            if (fi.open(QFile::ReadOnly | QFile::Unbuffered))
-            {
-                _result = getExtraData24(fi, sm24);
+                _result = getData(fi, smpl);
                 fi.close();
             }
             else
@@ -117,8 +94,7 @@ public:
 
 protected:
     virtual SampleReaderResult getInfo(QFile &fi, InfoSound &info) = 0;
-    virtual SampleReaderResult getData16(QFile &fi, QByteArray &smpl) = 0;
-    virtual SampleReaderResult getExtraData24(QFile &fi, QByteArray &sm24) = 0;
+    virtual SampleReaderResult getData(QFile &fi, QVector<float> &smpl) = 0;
 
 private:
     QString _filename;

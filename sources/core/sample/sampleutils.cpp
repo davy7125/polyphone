@@ -30,24 +30,20 @@ SampleUtils::SampleUtils()
 
 }
 
-QByteArray SampleUtils::resampleMono(QByteArray baData, double echInit, quint32 echFinal, quint16 wBps)
+QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, quint32 echFinal)
 {
     // Paramètres
     double alpha = 3;
     qint32 nbPoints = 10;
 
     // Préparation signal d'entrée
-    baData = bpsConversion(baData, wBps, 32);
     if (echFinal < echInit)
     {
         // Filtre passe bas (voir sinc filter)
-        baData = SampleUtils::bandFilter(baData, 32, echInit, echFinal / 2, 0, -1);
+        vData = SampleUtils::bandFilter(vData, echInit, echFinal / 2, 0, -1);
     }
-    quint32 sizeInit = static_cast<quint32>(baData.size()) / 4;
-    qint32 * dataI = reinterpret_cast<qint32*>(baData.data());
-    double * data = new double[sizeInit]; // utilisation de new sinon possibilité de dépasser une limite de mémoire
-    for (quint32 i = 0; i < sizeInit; i++)
-        data[i] = static_cast<double>(dataI[i]) / 2147483648.;
+    quint32 sizeInit = static_cast<quint32>(vData.size());
+    const float * dataF = vData.constData();
 
     // Création fenêtre Kaiser-Bessel 2048 points
     double kbdWindow[2048];
@@ -55,13 +51,13 @@ QByteArray SampleUtils::resampleMono(QByteArray baData, double echInit, quint32 
 
     // Nombre de points à trouver
     quint32 sizeFinal = static_cast<quint32>(1. + (sizeInit - 1.0) * echFinal / echInit);
-    double * dataRet = new double[sizeFinal]; // utilisation de new : même raison
+    QVector<float> dataRet(sizeFinal);
 
     // Calcul des points par interpolation à bande limitée
-    double pos, delta;
+    float pos, delta;
     qint32 pos1, pos2;
-    double * sincCoef = new double[1 + 2 * static_cast<quint32>(nbPoints)];
-    double valMax = 0;
+    float * sincCoef = new float[1 + 2 * static_cast<quint32>(nbPoints)];
+    float valMax = 0;
     for (quint32 i = 0; i < sizeFinal; i++)
     {
         // Position à interpoler
@@ -86,34 +82,26 @@ QByteArray SampleUtils::resampleMono(QByteArray baData, double echInit, quint32 
         dataRet[i] = 0;
         for (int j = qMax(0, static_cast<qint32>(pos) - nbPoints);
              j <= qMin(static_cast<qint32>(sizeInit) - 1, static_cast<qint32>(pos) + nbPoints); j++)
-            dataRet[i] += sincCoef[j - static_cast<qint32>(pos) + nbPoints] * data[j];
+            dataRet[i] += sincCoef[j - static_cast<qint32>(pos) + nbPoints] * dataF[j];
 
         valMax = qMax(valMax, qAbs(dataRet[i]));
     }
     delete [] sincCoef;
 
-    // Passage qint32 et limitation si besoin
-    QByteArray baRet;
-    baRet.resize(static_cast<int>(sizeFinal) * 4);
-    qint32 * dataRetI = reinterpret_cast<qint32 *>(baRet.data());
-    double coef;
+    // Limitation si besoin
     if (valMax > 1)
-        coef = 2147483648. / valMax;
-    else
-        coef = 2147483648LL;
-    for (quint32 i = 0; i < sizeFinal; i++)
-        dataRetI[i] = static_cast<qint32>(dataRet[i] * coef);
-
-    delete [] dataRet;
-    delete [] data;
+    {
+        float coef = 1.0f / valMax;
+        for (quint32 i = 0; i < sizeFinal; i++)
+            dataRet[i] = static_cast<qint32>(dataRet[i] * coef);
+    }
 
     // Filtre passe bas après resampling
-    baRet = SampleUtils::bandFilter(baRet, 32, echFinal, echFinal / 2, 0, -1);
-    baRet = bpsConversion(baRet, 32, wBps);
-    return baRet;
+    dataRet = SampleUtils::bandFilter(dataRet, echFinal, echFinal / 2, 0, -1);
+    return dataRet;
 }
 
-QByteArray SampleUtils::bandFilter(QByteArray baData, quint16 wBps, double dwSmplRate, double fBas, double fHaut, int ordre)
+QVector<float> SampleUtils::bandFilter(QVector<float> vData, double dwSmplRate, double fBas, double fHaut, int ordre)
 {
     /******************************************************************************
      ***********************    passe_bande_frequentiel    ************************
@@ -134,14 +122,14 @@ QByteArray SampleUtils::bandFilter(QByteArray baData, quint16 wBps, double dwSmp
     if (dwSmplRate < 1 || (fHaut <= 0 && fBas <= 0) || 2 * fHaut > dwSmplRate || 2 * fBas > dwSmplRate)
     {
         // Controle des fréquences de coupures (il faut que Fc<Fe/2 )
-        return baData;
+        return vData;
     }
 
     quint32 size;
 
     // Conversion de baData en complexes
     Complex * cpxData;
-    cpxData = fromBaToComplex(baData, wBps, size);
+    cpxData = fromFloatToComplex(vData, size);
 
     // Calculer la fft du signal
     Complex * fc_sortie_fft = FFT(cpxData, size);
@@ -225,19 +213,16 @@ QByteArray SampleUtils::bandFilter(QByteArray baData, quint16 wBps, double dwSmp
         cpxData[i].real(cpxData[i].real() / size);
 
     // Retour en QByteArray
-    QByteArray baRet;
-    baRet = fromComplexToBa(cpxData, baData.size() * 8 / wBps, wBps);
+    QVector<float> vRet = fromComplexToFloat(cpxData, vData.size());
     delete [] cpxData;
-    return baRet;
+    return vRet;
 }
 
-QByteArray SampleUtils::cutFilter(QByteArray baData, quint32 dwSmplRate, QVector<double> dValues, quint16 wBps, int maxFreq)
+QVector<float> SampleUtils::cutFilter(QVector<float> vData, quint32 dwSmplRate, QVector<double> dValues, int maxFreq)
 {
     // Convert baData in complex
-    if (wBps != 32)
-        baData = bpsConversion(baData, wBps, 32);
     quint32 size;
-    Complex * cpxData = fromBaToComplex(baData, 32, size);
+    Complex * cpxData = fromFloatToComplex(vData, size);
 
     // Compute the fft
     Complex * fc_sortie_fft = FFT(cpxData, size);
@@ -299,23 +284,18 @@ QByteArray SampleUtils::cutFilter(QByteArray baData, quint32 dwSmplRate, QVector
         cpxData[i].real(cpxData[i].real() / size);
 
     // Retour en QByteArray
-    QByteArray baRet = fromComplexToBa(cpxData, baData.size() * 8 / 32, 32);
+    QVector<float> vRet = fromComplexToFloat(cpxData, vData.size());
     delete [] cpxData;
-
-    // retour wBps si nécessaire
-    if (wBps != 32)
-        baRet = bpsConversion(baRet, 32, wBps);
-
-    return baRet;
+    return vRet;
 }
 
-QByteArray SampleUtils::EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, QVector<int> eqGains)
+QVector<float> SampleUtils::EQ(QVector<float> vData, quint32 dwSmplRate, QVector<int> eqGains)
 {
     quint32 size;
 
     // Conversion de baData en complexes
     Complex * cpxData;
-    cpxData = fromBaToComplex(baData, wBps, size);
+    cpxData = fromFloatToComplex(vData, size);
 
     // Calculer la fft du signal
     Complex * fc_sortie_fft = FFT(cpxData, size);
@@ -340,10 +320,9 @@ QByteArray SampleUtils::EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, 
         cpxData[i].real(cpxData[i].real() / size);
 
     // Retour en QByteArray
-    QByteArray baRet;
-    baRet = fromComplexToBa(cpxData, baData.size() * 8 / wBps, wBps);
+    QVector<float> vRet = fromComplexToFloat(cpxData, vData.size());
     delete [] cpxData;
-    return baRet;
+    return vRet;
 }
 
 Complex * SampleUtils::FFT(Complex * x, quint32 N)
@@ -380,443 +359,10 @@ Complex * SampleUtils::IFFT(Complex * x, quint32 N)
     return out;
 }
 
-void SampleUtils::bpsConversion(char *cDest, const char *cFrom, qint32 size, quint16 wBpsInit, quint16 wBpsFinal, bool bigEndian)
-{
-    // Conversion entre formats 32, 24 et 16 bits
-    // Particularité : demander format 824 bits renvoie les 8 bits de poids faible
-    //                 dans les 24 bits de poids fort
-
-    // Remplissage
-    switch (wBpsInit)
-    {
-    case 8:
-        switch (wBpsFinal)
-        {
-        case 824:
-            // Remplissage de 0
-            for (int i = 0; i < size; i++)
-                cDest[i] = 0;
-            break;
-        case 8:
-            for (int i = 0; i < size; i++)
-                cDest[i] = cFrom[i];
-            break;
-        case 16:
-            if (bigEndian)
-            {
-                for (int i = 0; i < size; i++)
-                {
-                    cDest[2*i+1] = 0;
-                    cDest[2*i] = cFrom[i];
-                }
-            }
-            else
-            {
-                for (int i = 0; i < size; i++)
-                {
-                    cDest[2*i] = 0;
-                    cDest[2*i+1] = cFrom[i];
-                }
-            }
-            break;
-        case 24:
-            if (bigEndian)
-            {
-                for (int i = 0; i < size; i++)
-                {
-                    cDest[3*i+2] = 0;
-                    cDest[3*i+1] = 0;
-                    cDest[3*i] = cFrom[i];
-                }
-            }
-            else
-            {
-                for (int i = 0; i < size; i++)
-                {
-                    cDest[3*i] = 0;
-                    cDest[3*i+1] = 0;
-                    cDest[3*i+2] = cFrom[i];
-                }
-            }
-            break;
-        case 32:
-            if (bigEndian)
-            {
-                for (int i = 0; i < size; i++)
-                {
-                    cDest[4*i+3] = 0;
-                    cDest[4*i+2] = 0;
-                    cDest[4*i+1] = 0;
-                    cDest[4*i] = cFrom[i];
-                }
-            }
-            else
-            {
-                for (int i = 0; i < size; i++)
-                {
-                    cDest[4*i] = 0;
-                    cDest[4*i+1] = 0;
-                    cDest[4*i+2] = 0;
-                    cDest[4*i+3] = cFrom[i];
-                }
-            }
-            break;
-        }
-        break;
-    case 16:
-        switch (wBpsFinal)
-        {
-        case 824:
-            // Remplissage de 0
-            for (int i = 0; i < size/2; i++)
-                cDest[i] = 0;
-            break;
-        case 8:
-            for (int i = 0; i < size/2; i++)
-                cDest[i] = cFrom[2*i+1];
-            break;
-        case 16:
-            if (bigEndian)
-            {
-                for (int i = 0; i < size/2; i++)
-                {
-                    cDest[2*i+1] = cFrom[2*i];
-                    cDest[2*i] = cFrom[2*i+1];
-                }
-            }
-            else
-                for (int i = 0; i < size; i++)
-                    cDest[i] = cFrom[i];
-            break;
-        case 24:
-            if (bigEndian)
-            {
-                for (int i = 0; i < size/2; i++)
-                {
-                    cDest[3*i+2] = 0;
-                    cDest[3*i+1] = cFrom[2*i];
-                    cDest[3*i] = cFrom[2*i+1];
-                }
-            }
-            else
-            {
-                for (int i = 0; i < size/2; i++)
-                {
-                    cDest[3*i] = 0;
-                    cDest[3*i+1] = cFrom[2*i];
-                    cDest[3*i+2] = cFrom[2*i+1];
-                }
-            }
-            break;
-        case 32:
-            if (bigEndian)
-            {
-                for (int i = 0; i < size/2; i++)
-                {
-                    cDest[4*i+3] = 0;
-                    cDest[4*i+2] = 0;
-                    cDest[4*i+1] = cFrom[2*i];
-                    cDest[4*i] = cFrom[2*i+1];
-                }
-            }
-            else
-            {
-                for (int i = 0; i < size/2; i++)
-                {
-                    cDest[4*i] = 0;
-                    cDest[4*i+1] = 0;
-                    cDest[4*i+2] = cFrom[2*i];
-                    cDest[4*i+3] = cFrom[2*i+1];
-                }
-            }
-            break;
-        }
-        break;
-    case 24:
-        switch (wBpsFinal)
-        {
-        case 824:
-            // 8 bits de poids faible
-            for (int i = 0; i < size/3; i++)
-                cDest[i] = cFrom[3*i];
-            break;
-        case 8:
-            for (int i = 0; i < size/3; i++)
-                cDest[i] = cFrom[3*i+2];
-            break;
-        case 16:
-            if (bigEndian)
-            {
-                for (int i = 0; i < size/3; i++)
-                {
-                    cDest[2*i+1] = cFrom[3*i+1];
-                    cDest[2*i] = cFrom[3*i+2];
-                }
-            }
-            else
-            {
-                for (int i = 0; i < size/3; i++)
-                {
-                    cDest[2*i] = cFrom[3*i+1];
-                    cDest[2*i+1] = cFrom[3*i+2];
-                }
-            }
-            break;
-        case 24:
-            if (bigEndian)
-            {
-                for (int i = 0; i < size/3; i++)
-                {
-                    cDest[3*i+2] = cFrom[3*i];
-                    cDest[3*i+1] = cFrom[3*i+1];
-                    cDest[3*i] = cFrom[3*i+2];
-                }
-            }
-            else
-                for (int i = 0; i < size; i++)
-                    cDest[i] = cFrom[i];
-            break;
-        case 32:
-            if (bigEndian)
-            {
-                for (int i = 0; i < size/3; i++)
-                {
-                    cDest[4*i+3] = 0;
-                    cDest[4*i+2] = cFrom[3*i];
-                    cDest[4*i+1] = cFrom[3*i+1];
-                    cDest[4*i] = cFrom[3*i+2];
-                }
-            }
-            else
-            {
-                for (int i = 0; i < size/3; i++)
-                {
-                    cDest[4*i] = 0;
-                    cDest[4*i+1] = cFrom[3*i];
-                    cDest[4*i+2] = cFrom[3*i+1];
-                    cDest[4*i+3] = cFrom[3*i+2];
-                }
-            }
-            break;
-        }
-        break;
-    case 32:
-        switch (wBpsFinal)
-        {
-        case 824:
-            // 8 bits poids faible après 16
-            for (int i = 0; i < size/4; i++)
-                cDest[i] = cFrom[4*i+1];
-            break;
-        case 8:
-            for (int i = 0; i < size/4; i++)
-                cDest[i] = cFrom[4*i+3];
-            break;
-        case 16:
-            if (bigEndian)
-            {
-                for (int i = 0; i < size/4; i++)
-                {
-                    cDest[2*i+1] = cFrom[4*i+2];
-                    cDest[2*i] = cFrom[4*i+3];
-                }
-            }
-            else
-            {
-                for (int i = 0; i < size/4; i++)
-                {
-                    cDest[2*i] = cFrom[4*i+2];
-                    cDest[2*i+1] = cFrom[4*i+3];
-                }
-            }
-            break;
-        case 24:
-            if (bigEndian)
-            {
-                for (int i = 0; i < size/4; i++)
-                {
-                    cDest[3*i+2] = cFrom[4*i+1];
-                    cDest[3*i+1] = cFrom[4*i+2];
-                    cDest[3*i] = cFrom[4*i+3];
-                }
-            }
-            else
-            {
-                for (int i = 0; i < size/4; i++)
-                {
-                    cDest[3*i] = cFrom[4*i+1];
-                    cDest[3*i+1] = cFrom[4*i+2];
-                    cDest[3*i+2] = cFrom[4*i+3];
-                }
-            }
-            break;
-        case 32:
-            if (bigEndian)
-            {
-                for (int i = 0; i < size/4; i++)
-                {
-                    cDest[4*i+3] = cFrom[4*i];
-                    cDest[4*i+2] = cFrom[4*i+1];
-                    cDest[4*i+1] = cFrom[4*i+2];
-                    cDest[4*i] = cFrom[4*i+3];
-                }
-            }
-            else
-                for (int i = 0; i < size; i++)
-                    cDest[i] = cFrom[i];
-            break;
-        }
-        break;
-    }
-}
-
-QByteArray SampleUtils::bpsConversion(QByteArray baData, quint16 wBpsInit, quint16 wBpsFinal, bool bigEndian)
-{
-    // Conversion entre formats 32, 24 et 16 bits
-    // Particularité : demander format 824 bits renvoie les 8 bits de poids faible
-    //                 dans les 24 bits de poids fort
-    int size = baData.size();
-
-    // Données de retour
-    QByteArray baRet;
-
-    // Redimensionnement
-    int i = 1;
-    int j = 1;
-    switch (wBpsInit)
-    {
-    case 16: i = 2; break;
-    case 24: i = 3; break;
-    case 32: i = 4; break;
-    default: i = 1;
-    }
-    switch (wBpsFinal)
-    {
-    case 16: j = 2; break;
-    case 24: j = 3; break;
-    case 32: j = 4; break;
-    default: j = 1;
-    }
-    baRet.resize((size * j) / i);
-
-    // Remplissage
-    char * cDest = baRet.data();
-    const char * cFrom = baData.constData();
-    bpsConversion(cDest, cFrom, size, wBpsInit, wBpsFinal, bigEndian);
-    return baRet;
-}
-
-QByteArray SampleUtils::from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, quint16 wBps, bool bigEndian)
-{
-    int size;
-    // Si tailles différentes, on complète le petit avec des 0
-    if (baData1.size() < baData2.size())
-    {
-        QByteArray baTmp;
-        baTmp.fill(0, baData2.size() - baData1.size());
-        baData1.append(baTmp);
-    }
-    else if (baData2.size() < baData1.size())
-    {
-        QByteArray baTmp;
-        baTmp.fill(0, baData1.size() - baData2.size());
-        baData2.append(baTmp);
-    }
-    size = baData1.size();
-    // Assemblage
-    QByteArray baRet;
-    baRet.resize(2 * size);
-    char * cDest = baRet.data();
-    const char * cFrom1 = baData1.constData();
-    const char * cFrom2 = baData2.constData();
-    if (wBps == 32)
-    {
-        if (bigEndian)
-        {
-            for (int i = 0; i < size/4; i++)
-            {
-                cDest[8*i] = cFrom1[4*i+3];
-                cDest[8*i+1] = cFrom1[4*i+2];
-                cDest[8*i+2] = cFrom1[4*i+1];
-                cDest[8*i+3] = cFrom1[4*i];
-                cDest[8*i+4] = cFrom2[4*i+3];
-                cDest[8*i+5] = cFrom2[4*i+2];
-                cDest[8*i+6] = cFrom2[4*i+1];
-                cDest[8*i+7] = cFrom2[4*i];
-            }
-        }
-        else
-        {
-            for (int i = 0; i < size/4; i++)
-            {
-                cDest[8*i] = cFrom1[4*i];
-                cDest[8*i+1] = cFrom1[4*i+1];
-                cDest[8*i+2] = cFrom1[4*i+2];
-                cDest[8*i+3] = cFrom1[4*i+3];
-                cDest[8*i+4] = cFrom2[4*i];
-                cDest[8*i+5] = cFrom2[4*i+1];
-                cDest[8*i+6] = cFrom2[4*i+2];
-                cDest[8*i+7] = cFrom2[4*i+3];
-            }
-        }
-    }
-    else if (wBps == 24)
-    {
-        if (bigEndian)
-        {
-            for (int i = 0; i < size/3; i++)
-            {
-                cDest[6*i] = cFrom1[3*i+2];
-                cDest[6*i+1] = cFrom1[3*i+1];
-                cDest[6*i+2] = cFrom1[3*i];
-                cDest[6*i+3] = cFrom2[3*i+2];
-                cDest[6*i+4] = cFrom2[3*i+1];
-                cDest[6*i+5] = cFrom2[3*i];
-            }
-        }
-        else
-        {
-            for (int i = 0; i < size/3; i++)
-            {
-                cDest[6*i] = cFrom1[3*i];
-                cDest[6*i+1] = cFrom1[3*i+1];
-                cDest[6*i+2] = cFrom1[3*i+2];
-                cDest[6*i+3] = cFrom2[3*i];
-                cDest[6*i+4] = cFrom2[3*i+1];
-                cDest[6*i+5] = cFrom2[3*i+2];
-            }
-        }
-    }
-    else
-    {
-        if (bigEndian)
-        {
-            for (int i = 0; i < size/2; i++)
-            {
-                cDest[4*i] = cFrom1[2*i+1];
-                cDest[4*i+1] = cFrom1[2*i];
-                cDest[4*i+2] = cFrom2[2*i+1];
-                cDest[4*i+3] = cFrom2[2*i];
-            }
-        }
-        else
-        {
-            for (int i = 0; i < size/2; i++)
-            {
-                cDest[4*i] = cFrom1[2*i];
-                cDest[4*i+1] = cFrom1[2*i+1];
-                cDest[4*i+2] = cFrom2[2*i];
-                cDest[4*i+3] = cFrom2[2*i+1];
-            }
-        }
-    }
-    return baRet;
-}
-
 QVector<float> SampleUtils::getFourierTransform(QVector<float> input)
 {
     quint32 size = 0;
-    Complex * cpxData = fromBaToComplex(input, size);
+    Complex * cpxData = fromFloatToComplex(input, size);
     Complex * fc_sortie_fft = FFT(cpxData, size);
     delete [] cpxData;
     QVector<float> vectFourier;
@@ -835,7 +381,7 @@ QVector<float> SampleUtils::getFourierTransform(QVector<float> input)
     return vectFourier;
 }
 
-Complex * SampleUtils::fromBaToComplex(QVector<float> fData, quint32 &size)
+Complex * SampleUtils::fromFloatToComplex(QVector<float> fData, quint32 &size)
 {
     // Nombre de données (puissance de 2 la plus proche)
     quint32 nb = static_cast<quint32>(ceil(qLn(fData.size()) / 0.69314718056));
@@ -863,170 +409,82 @@ Complex * SampleUtils::fromBaToComplex(QVector<float> fData, quint32 &size)
     return cpxData;
 }
 
-Complex * SampleUtils::fromBaToComplex(QByteArray baData, quint16 wBps, quint32 &size)
+QVector<float> SampleUtils::fromComplexToFloat(Complex * cpxData, int size)
 {
-    Complex * cpxData;
-    // Création et remplissage d'un tableau de complexes
-    if (wBps == 16)
+    // Convert to real values
+    QVector<float> vRet(size);
+    float valMax = 0;
+    for (int i = 0; i < size; i++)
     {
-        qint16 * data = reinterpret_cast<qint16 *>(baData.data());
-
-        // Nombre de données (puissance de 2 la plus proche)
-        quint32 nb = static_cast<quint32>(ceil(qLn(baData.size() / 2) / 0.69314718056 /* ln(2) */));
-        size = 1;
-        for (quint32 i = 0; i < nb; i++)
-            size *= 2;
-
-        // Remplissage
-        cpxData = new Complex[size];
-        for (int i = 0; i < baData.size() / 2; i++)
-        {
-            cpxData[i].real(data[i]);
-            cpxData[i].imag(0);
-        }
-
-        // On complète avec des 0
-        for (quint32 i = static_cast<quint32>(baData.size()) / 2; i < size; i++)
-        {
-            cpxData[i].real(0);
-            cpxData[i].imag(0);
-        }
+        vRet[i] = cpxData[i].real();
+        valMax = qMax(valMax, qAbs(vRet[i]));
     }
-    else
+
+    // Possible attenuation
+    if (valMax > 1.0)
     {
-        // Passage 32 bits si nécessaire
-        if (wBps == 24)
-            baData = bpsConversion(baData, 24, 32);
-        qint32 * data = reinterpret_cast<qint32 *>(baData.data());
-
-        // Nombre de données (puissance de 2 la plus proche)
-        quint32 nb = static_cast<quint32>(ceil(qLn(baData.size()/4) / 0.69314718056 /* ln(2) */));
-        size = 1;
-        for (quint32 i = 0; i < nb; i++)
-            size *= 2;
-
-        // Remplissage
-        cpxData = new Complex[size];
-        for (int i = 0; i < baData.size()/4; i++)
-        {
-            cpxData[i].real(data[i]);
-            cpxData[i].imag(0);
-        }
-
-        // On complète avec des 0
-        for (quint32 i = static_cast<quint32>(baData.size()) / 4; i < size; i++)
-        {
-            cpxData[i].real(0);
-            cpxData[i].imag(0);
-        }
+        double att = 1.0f / valMax;
+        for (int i = 0; i < size; i++)
+            vRet[i] *= att;
     }
-    return cpxData;
+
+    return vRet;
 }
 
-QByteArray SampleUtils::fromComplexToBa(Complex * cpxData, int size, quint16 wBps)
+QVector<float> SampleUtils::normalize(QVector<float> vData, float dVal, float &db)
 {
-    QByteArray baData;
-    if (wBps == 16)
-    {
-        // Calcul du maximum
-        quint64 valMax = 0;
-        for (int i = 0; i < size; i++)
-            valMax = qMax(valMax, static_cast<quint64>(qAbs(cpxData[i].real())));
+    // Get the maximum value
+    float * data = vData.data();
+    float valMax = 0;
+    for (int i = 0; i < vData.size(); i++)
+        valMax = qMax(valMax, qAbs(data[i]));
 
-        // Atténuation si dépassement de la valeur max
-        double att = 1;
-        if (valMax > 32700)
-            att = 32700. / valMax;
+    // Compute the amplification
+    float mult = dVal / valMax;
+    db = 20.0f * log10(mult);
 
-        // Conversion qint16
-        baData.resize(size*2);
-        qint16 * data = reinterpret_cast<qint16 *>(baData.data());
-        for (int i = 0; i < size; i++)
-            data[i] = static_cast<qint16>(cpxData[i].real() * att);
-    }
-    else
-    {
-        // Calcul du maximum
-        quint64 valMax = 0;
-        for (int i = 0; i < size; i++)
-            valMax = qMax(valMax, static_cast<quint64>(qAbs(cpxData[i].real())));
+    // Amplify
+    for (int i = 0; i < vData.size(); i++)
+        data[i] *= mult;
 
-        // Atténuation si dépassement de la valeur max
-        double att = 1;
-        if (valMax > 2147483000)
-            att = 2147483000. / valMax;
-
-        // Conversion qint32
-        baData.resize(size*4);
-        qint32 * data = reinterpret_cast<qint32 *>(baData.data());
-        for (int i = 0; i < size; i++)
-            data[i] = static_cast<qint32>(cpxData[i].real() * att);
-
-        // Conversion 24 bits
-        if (wBps == 24)
-            baData = bpsConversion(baData, 32, 24);
-    }
-    return baData;
+    return vData;
 }
 
-QByteArray SampleUtils::normaliser(QByteArray baData, double dVal, quint16 wBps, double &db)
+QVector<float> SampleUtils::multiply(QVector<float> vData, float dMult, float &db)
 {
-    // Conversion 32 bits si nécessaire
-    if (wBps != 32)
-        baData = bpsConversion(baData, wBps, 32);
-    // Calcul valeur max
-    qint32 * data = reinterpret_cast<qint32 *>(baData.data());
-    qint32 valMax = 0;
-    for (int i = 0; i < baData.size()/4; i++) valMax = qMax(valMax, qAbs(data[i]));
-    // Calcul amplification
-    double mult = dVal * 2147483648. / valMax;
-    db = 20.0 * log10(mult);
-    // Amplification
-    for (int i = 0; i < baData.size()/4; i++) data[i] *= mult;
-    // Conversion format d'origine si nécessaie
-    if (wBps != 32)
-        baData = bpsConversion(baData, 32, wBps);
-    return baData;
+    // Compute the amplification
+    db = 20.0f * log10(dMult);
+
+    // Amplify
+    float * data = vData.data();
+    for (int i = 0; i < vData.size(); i++)
+        data[i] *= dMult;
+
+    return vData;
 }
 
-QByteArray SampleUtils::multiplier(QByteArray baData, double dMult, quint16 wBps, double &db)
-{
-    // Conversion 32 bits si nécessaire
-    if (wBps != 32)
-        baData = bpsConversion(baData, wBps, 32);
-    // Calcul amplification
-    db = 20.0 * log10(dMult);
-    // Amplification
-    qint32 * data = reinterpret_cast<qint32 *>(baData.data());
-    for (int i = 0; i < baData.size()/4; i++) data[i] *= dMult;
-    // Conversion format d'origine si nécessaie
-    if (wBps != 32)
-        baData = bpsConversion(baData, 32, wBps);
-    return baData;
-}
-
-void SampleUtils::removeBlankStep1(QByteArray baData24, quint32 &pos1, quint32 &pos2)
+void SampleUtils::removeBlankStep1(QVector<float> vData, quint32 &pos1, quint32 &pos2)
 {
     // Thresholds
-    const qint16 threshold1Int = 10;
-    const qint16 threshold2Int = 20;
+    const float threshold1 = 0.0000005f;
+    const float threshold2 = 0.0000010f;
 
     // Compute the number of elements to skip
     pos1 = pos2 = 0;
     bool pos1Found = false;
     bool pos2Found = false;
-    quint32 size = static_cast<quint32>(baData24.size()) / 3;
+    quint32 size = static_cast<quint32>(vData.size());
     for (quint32 i = 0; i < size; i++)
     {
-        qint16 value = reinterpret_cast<qint16*>(&baData24.data()[3 * i + 1])[0];
+        float value = vData.at(i);
         if (value < 0)
             value = -value;
-        if (!pos1Found && value > threshold1Int)
+        if (!pos1Found && value > threshold1)
         {
             pos1 = i;
             pos1Found = true;
         }
-        if (!pos2Found && value > threshold2Int)
+        if (!pos2Found && value > threshold2)
         {
             pos2 = i;
             pos2Found = true;
@@ -1036,28 +494,12 @@ void SampleUtils::removeBlankStep1(QByteArray baData24, quint32 &pos1, quint32 &
     }
 }
 
-QByteArray SampleUtils::removeBlankStep2(QByteArray baData24, quint32 pos)
+QVector<float> SampleUtils::removeBlankStep2(QVector<float> vData, quint32 pos)
 {
     // Skip the first points
-    if (3 * pos + 8 < static_cast<quint32>(baData24.size()))
-        baData24 = baData24.mid(static_cast<int>(pos) * 3, baData24.size() - 3 * static_cast<int>(pos));
-    return baData24;
-}
-
-void SampleUtils::regimePermanent(QByteArray baData, quint32 dwSmplRate, quint16 wBps, quint32 &posStart, quint32 &posEnd)
-{
-    // Recherche d'un régiment permanent (sans attaque ni release)
-    if (wBps != 32)
-        baData = bpsConversion(baData, wBps, 32);
-    qint32 size = baData.size() / 4;
-
-    QVector<float> fData;
-    fData.resize(size);
-    qint32 * iData = reinterpret_cast<qint32 *>(baData.data());
-    for (int i = 0; i < size; i++)
-        fData[i] = static_cast<float>(iData[i]);
-
-    regimePermanent(fData, dwSmplRate, posStart, posEnd);
+    if (static_cast<quint32>(vData.size()) > pos + 8)
+        vData = vData.mid(static_cast<int>(pos), vData.size() - static_cast<int>(pos));
+    return vData;
 }
 
 void SampleUtils::regimePermanent(QVector<float> fData, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd)
@@ -1151,26 +593,18 @@ float SampleUtils::correlation(const float *fData1, const float* fData2, quint32
     return static_cast<float>(sum / size);
 }
 
-bool SampleUtils::loopStep1(QByteArray baData32, quint32 dwSmplRate, quint32 &loopStart, quint32 &loopEnd, quint32 &loopCrossfadeLength)
+bool SampleUtils::loopStep1(QVector<float> vData, quint32 dwSmplRate, quint32 &loopStart, quint32 &loopEnd, quint32 &loopCrossfadeLength)
 {
-    // Conversion en float
-    qint32 size = baData32.size() / 4;
-    QVector<float> fData;
-    fData.resize(size);
-    qint32 * iData = reinterpret_cast<qint32*>(baData32.data());
-    for (int i = 0; i < size; i++)
-        fData[i] = static_cast<float>(iData[i]);
-
     // Recherche du régime permament
     quint32 posStart = loopStart;
     if (posStart == loopEnd || loopEnd < dwSmplRate / 4 + posStart)
-        regimePermanent(fData, dwSmplRate, posStart, loopEnd);
+        regimePermanent(vData, dwSmplRate, posStart, loopEnd);
     if (loopEnd < dwSmplRate / 4 + posStart)
         return false;
 
     // Extraction du segment B de 0.05s à la fin du régime permanent
     quint32 longueurSegmentB = static_cast<quint32>(0.05 * dwSmplRate);
-    QVector<float> segmentB = fData.mid(static_cast<int>(loopEnd - longueurSegmentB), static_cast<int>(longueurSegmentB));
+    QVector<float> segmentB = vData.mid(static_cast<int>(loopEnd - longueurSegmentB), static_cast<int>(longueurSegmentB));
 
     // Find the best correlation
     float minCorValue;
@@ -1183,7 +617,7 @@ bool SampleUtils::loopStep1(QByteArray baData32, quint32 dwSmplRate, quint32 &lo
             return false;
 
         const float * pointerSegB = segmentB.constData();
-        const float * pointerData = fData.constData();
+        const float * pointerData = vData.constData();
 
         minCorValue = correlation(pointerSegB, &pointerData[longueurSegmentB + posStart], longueurSegmentB, nullptr);
         bestCorPos = 0;
@@ -1203,32 +637,29 @@ bool SampleUtils::loopStep1(QByteArray baData32, quint32 dwSmplRate, quint32 &lo
 
     // Longueur du crossfade pour bouclage (augmente avec l'incohérence)
     loopCrossfadeLength = qMin(bestCorPos + 2 * longueurSegmentB,
-                               static_cast<quint32>((2147483647.0f - minCorValue) * dwSmplRate * 4 / 2147483647 + 0.5f));
+                               static_cast<quint32>((1.0f - minCorValue) * dwSmplRate * 4.0f + 0.5f));
 
     return true;
 }
 
-QByteArray SampleUtils::loopStep2(QByteArray baData32, quint32 loopStart, quint32 loopEnd, quint32 loopCrossfadeLength)
+QVector<float> SampleUtils::loopStep2(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 loopCrossfadeLength)
 {
     // Loop with a crossfade
-    qint32 * iData = reinterpret_cast<qint32*>(baData32.data());
+    float * fData = vData.data();
+    float dTmp;
     for (quint32 i = 0; i < loopCrossfadeLength; i++)
     {
-        float dTmp = static_cast<float>(i) / static_cast<float>(loopCrossfadeLength - 1);
-        iData[loopEnd - loopCrossfadeLength + i] = static_cast<qint32>(
-                    (1.f - dTmp) * static_cast<float>(iData[loopEnd - loopCrossfadeLength + i]) +
-                dTmp * static_cast<float>(iData[loopStart - loopCrossfadeLength + i]));
+        dTmp = static_cast<float>(i) / static_cast<float>(loopCrossfadeLength - 1);
+        fData[loopEnd - loopCrossfadeLength + i] =
+                (1.f - dTmp) * fData[loopEnd - loopCrossfadeLength + i] +
+                dTmp * fData[loopStart - loopCrossfadeLength + i];
     }
 
-    // Get 8 more points
-    QByteArray baTmp;
-    baTmp.resize(4 * 8);
-    qint32 * dataTmp = reinterpret_cast<qint32 *>(baTmp.data());
-    for (quint32 i = 0; i < 8; i++)
-        dataTmp[i] = iData[static_cast<int>(loopStart + i)];
-
     // Coupure et ajout de 8 valeurs
-    return baData32.left(static_cast<int>(loopEnd * 4)).append(baTmp);
+    vData.resize(loopEnd + 8);
+    for (quint32 i = 0; i < 8; i++)
+        vData[loopEnd + i] = fData[loopStart + i];
+    return vData;
 }
 
 QList<quint32> SampleUtils::findMins(QVector<float> vectData, int maxNb, float minFrac)
@@ -1299,17 +730,13 @@ QList<quint32> SampleUtils::findMax(QVector<float> vectData, int maxNb, float mi
     return listRet;
 }
 
-qint32 SampleUtils::max(QByteArray baData, quint16 wBps)
+float SampleUtils::max(QVector<float> vData)
 {
-    if (wBps != 32)
-        baData = bpsConversion(baData, wBps, 32);
-    qint32 * data = reinterpret_cast<qint32 *>(baData.data());
+    const float * data = vData.constData();
     qint32 maxi = data[0];
-    for (int i = 1; i < baData.size()/4; i++)
-    {
+    for (int i = 1; i < vData.size(); i++)
         if (data[i] > maxi)
             maxi = data[i];
-    }
     return maxi;
 }
 
@@ -1403,24 +830,23 @@ void SampleUtils::FFT_calculate(Complex * x, quint32 N /* must be a power of 2 *
     }
 }
 
-double SampleUtils::moyenne(QByteArray baData, quint16 wBps)
+float SampleUtils::mean(QVector<float> vData)
 {
-    if (baData.size())
-        return somme(baData, wBps) / (baData.size() / (wBps/8));
+    if (vData.size() > 0)
+        return sum(vData) / vData.size();
     else
         return 0;
 }
 
-double SampleUtils::moyenneCarre(QByteArray baData, quint16 wBps)
+float SampleUtils::meanSquare(QVector<float> vData)
 {
-    //return sommeAbs(baData, wBps) / (baData.size() / (wBps/8));
-    return qSqrt(sommeCarre(baData, wBps)) / (baData.size() / (wBps/8));
+    return qSqrt(sumSquare(vData)) / vData.size();
 }
 
-float SampleUtils::mediane(QVector<float> data)
+float SampleUtils::median(QVector<float> vData)
 {
-    float * arr = data.data();
-    qint32 n = data.size();
+    float * arr = vData.data();
+    qint32 n = vData.size();
     qint32 low, high;
     qint32 median;
     qint32 middle, ll, hh;
@@ -1429,7 +855,7 @@ float SampleUtils::mediane(QVector<float> data)
     for (;;)
     {
         if (high <= low) // One element only
-            return arr[median] ;
+            return arr[median];
 
         if (high == low + 1)
         {  // Two elements only
@@ -1439,8 +865,9 @@ float SampleUtils::mediane(QVector<float> data)
                 arr[low] = arr[high];
                 arr[high] = qTmp;
             }
-            return arr[median] ;
+            return arr[median];
         }
+
         // Find median of low, middle and high items; swap into position low
         middle = (low + high) / 2;
         if (arr[middle] > arr[high])
@@ -1461,27 +888,31 @@ float SampleUtils::mediane(QVector<float> data)
             arr[middle] = arr[low];
             arr[low] = qTmp;
         }
+
         // Swap low item (now in position middle) into position (low+1)
         qTmp = arr[middle];
         arr[middle] = arr[low+1];
         arr[low+1] = qTmp;
+
         // Nibble from each end towards middle, swapping items when stuck
         ll = low + 1;
         hh = high;
         for (;;)
         {
-            do ll++; while (arr[low] > arr[ll]) ;
-            do hh--; while (arr[hh]  > arr[low]) ;
+            do ll++; while (arr[low] > arr[ll]);
+            do hh--; while (arr[hh]  > arr[low]);
             if (hh < ll)
                 break;
             qTmp = arr[ll];
             arr[ll] = arr[hh];
             arr[hh] = qTmp;
         }
+
         // Swap middle item (in position low) back into correct position
         qTmp = arr[low];
         arr[low] = arr[hh];
         arr[hh] = qTmp;
+
         // Re-set active partition
         if (hh <= median)
             low = ll;
@@ -1490,28 +921,20 @@ float SampleUtils::mediane(QVector<float> data)
     }
 }
 
-qint64 SampleUtils::somme(QByteArray baData, quint16 wBps)
+float SampleUtils::sum(QVector<float> vData)
 {
-    if (wBps != 32)
-        baData = bpsConversion(baData, wBps, 32);
-    qint32 n = baData.size() / 4;
-    qint32 * arr = reinterpret_cast<qint32 *>(baData.data());
-    qint64 valeur = 0;
-    for (int i = 0; i < n; i++)
-        valeur += arr[i];
-    return valeur;
+    float result = 0;
+    for (int i = 0; i < vData.size(); i++)
+        result += vData.at(i);
+    return result;
 }
 
-qint64 SampleUtils::sommeCarre(QByteArray baData, quint16 wBps)
+float SampleUtils::sumSquare(QVector<float> vData)
 {
-    if (wBps != 32)
-        baData = bpsConversion(baData, wBps, 32);
-    qint32 n = baData.size() / 4;
-    qint32 * arr = reinterpret_cast<qint32 *>(baData.data());
-    qint64 valeur = 0;
-    for (int i = 0; i < n; i++)
-        valeur += (arr[i] / 47000) * (arr[i] / 47000);
-    return valeur;
+    float result = 0;
+    for (int i = 0; i < vData.size(); i++)
+        result += vData.at(i) * vData.at(i);
+    return result;
 }
 
 double SampleUtils::gainEQ(double freq, QVector<int> eqGains)
@@ -1616,13 +1039,13 @@ void SampleUtils::regimePermanent(QVector<float> data, quint32 dwSmplRate, quint
     }
 
     // Calcul de la médiane des valeurs
-    float median = mediane(tableauMoyennes);
+    float med = median(tableauMoyennes);
     posStart = 0;
     posEnd = nbValeurs - 1;
     quint32 count = 0;
     while (count < nbOK && posStart <= posEnd)
     {
-        if (data[static_cast<int>(posStart)] < coef * median && data[static_cast<int>(posStart)] > median / coef)
+        if (data[static_cast<int>(posStart)] < coef * med && data[static_cast<int>(posStart)] > med / coef)
             count++;
         else
             count = 0;
@@ -1632,7 +1055,7 @@ void SampleUtils::regimePermanent(QVector<float> data, quint32 dwSmplRate, quint
     count = 0;
     while (count < nbOK && posEnd > 0)
     {
-        if (data[static_cast<int>(posEnd)] < coef * median && data[static_cast<int>(posEnd)] > median / coef)
+        if (data[static_cast<int>(posEnd)] < coef * med && data[static_cast<int>(posEnd)] > med / coef)
             count++;
         else
             count = 0;
@@ -1725,10 +1148,10 @@ double SampleUtils::BesselI0(double x)
     return -numerator/denominator;
 }
 
-float SampleUtils::computeLoopQuality(QByteArray baData, quint32 loopStart, quint32 loopEnd)
+float SampleUtils::computeLoopQuality(QVector<float> vData, quint32 loopStart, quint32 loopEnd)
 {
-    qint16 * data = reinterpret_cast<qint16*>(baData.data());
-    quint32 length = baData.size() / 2;
+    const float * data = vData.constData();
+    quint32 length = vData.size();
     if (loopStart < 2 || loopStart >= loopEnd || loopEnd >= length)
         return 0;
 
@@ -1749,32 +1172,32 @@ float SampleUtils::computeLoopQuality(QByteArray baData, quint32 loopStart, quin
     }
 
     // Maximum value inside the loop
-    float max = 15;
+    float max = 0.00045f;
     float tmp;
     for (quint32 i = loopStart; i <= loopEnd; i++)
     {
-       tmp = static_cast<float>(data[i]);
-       if (tmp > max)
-           max = tmp;
-       else if (-tmp > max)
-           max = -tmp;
+        tmp = data[i];
+        if (tmp > max)
+            max = tmp;
+        else if (-tmp > max)
+            max = -tmp;
     }
 
     // Differences are relative to the maximum
     return result / (max * n);
 }
 
-float SampleUtils::getDiffForLoopQuality(qint16 * data, quint32 pos1, quint32 pos2)
+float SampleUtils::getDiffForLoopQuality(const float * data, quint32 pos1, quint32 pos2)
 {
     // Difference on the loop points
-    float diff0 = static_cast<float>(data[pos1] - data[pos2]);
+    float diff0 = data[pos1] - data[pos2];
 
     // Difference on the slope
-    float diff1 = static_cast<float>(data[pos1 - 1] - data[pos2 - 1]) - diff0;
+    float diff1 = data[pos1 - 1] - data[pos2 - 1] - diff0;
 
     // Difference on the slope difference
-    float diff2 = static_cast<float>(data[pos1 - 2] - data[pos2 - 2]) - 2 * diff1 + diff0;
+    float diff2 = data[pos1 - 2] - data[pos2 - 2] - 2 * diff1 + diff0;
 
     // Combine the values
-    return 0.45 * qAbs(diff0) + 0.33 * qAbs(diff1) + 0.22 * qAbs(diff2);
+    return 0.45f * qAbs(diff0) + 0.33f * qAbs(diff1) + 0.22f * qAbs(diff2);
 }

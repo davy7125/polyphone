@@ -41,12 +41,7 @@ public:
     {
         // Get raw data
         SoundfontManager * sm = SoundfontManager::getInstance();
-        QByteArray baData = sm->getData(_id, champ_sampleData16);
-        int length = baData.size() / 2;
-        QVector<float> fData(length);
-        qint16 * data = reinterpret_cast<qint16*>(baData.data());
-        for (int i = 0; i < length; i++)
-            fData[i] = static_cast<float>(data[i]);
+        QVector<float> vData = sm->getData(_id);
 
         // Compute the peaks
         QVector<float> vectFourier;
@@ -54,7 +49,7 @@ public:
         SampleFrequencyInfo sampleInfo;
         sampleInfo.name = sm->getQstr(_id, champ_name);
         sampleInfo.frequencies = GraphiqueFourier::computePeaks(
-                    fData, sm->get(_id, champ_dwSampleRate).dwValue,
+                    vData, sm->get(_id, champ_dwSampleRate).dwValue,
                     sm->get(_id, champ_dwStartLoop).dwValue, sm->get(_id, champ_dwEndLoop).dwValue,
                     vectFourier, posMaxFourier);
 

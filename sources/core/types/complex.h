@@ -33,16 +33,16 @@ public:
     Complex();
 
     /// Getters / Setters for real and imag parts of the complex number
-    void imag(double value) { _imag = value; }
-    void real(double value) { _real = value; }
-    double imag() { return _imag; }
-    double real() { return _real; }
+    void imag(float value) { _imag = value; }
+    void real(float value) { _real = value; }
+    float imag() { return _imag; }
+    float real() { return _real; }
 
     /// Multiplication
-    Complex operator *= (const double factor);
+    Complex operator *= (const float factor);
 
 private:
-    double _real, _imag;
+    float _real, _imag;
 };
 
 #endif // COMPLEX_H

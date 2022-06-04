@@ -94,9 +94,9 @@ void Equalizer::on_pushEgaliser_clicked()
         if (sm->isValid(id) && !listprocessedID.contains(id))
         {
             listprocessedID << id;
-            QByteArray baData = sm->getData(id, champ_sampleDataFull24);
-            baData = SampleUtils::EQ(baData, sm->get(id, champ_dwSampleRate).dwValue, 24, gatherEqVariables());
-            sm->set(id, champ_sampleDataFull24, baData);
+            QVector<float> baData = sm->getData(id);
+            baData = SampleUtils::EQ(baData, sm->get(id, champ_dwSampleRate).dwValue, gatherEqVariables());
+            sm->set(id, baData);
 
             // Associated sample?
             EltID id2 = PageSmpl::getRepercussionID(id);
@@ -105,9 +105,9 @@ void Equalizer::on_pushEgaliser_clicked()
                 if (sm->isValid(id2) && !listprocessedID.contains(id2))
                 {
                     listprocessedID << id2;
-                    QByteArray baData = sm->getData(id2, champ_sampleDataFull24);
-                    baData = SampleUtils::EQ(baData, sm->get(id2, champ_dwSampleRate).dwValue, 24, gatherEqVariables());
-                    sm->set(id2, champ_sampleDataFull24, baData);
+                    QVector<float> baData = sm->getData(id2);
+                    baData = SampleUtils::EQ(baData, sm->get(id2, champ_dwSampleRate).dwValue, gatherEqVariables());
+                    sm->set(id2, baData);
                 }
             }
         }

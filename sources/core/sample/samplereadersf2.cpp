@@ -45,46 +45,54 @@ SampleReaderSf2::SampleReaderResult SampleReaderSf2::getInfo(QFile &fi, InfoSoun
     return FILE_OK;
 }
 
-SampleReaderSf2::SampleReaderResult SampleReaderSf2::getData16(QFile &fi, QByteArray &smpl)
+SampleReaderSf2::SampleReaderResult SampleReaderSf2::getData(QFile &fi, QVector<float> &smpl)
 {
-    // Size of the vector
-    smpl.resize(static_cast<int>(_info->dwLength) * 2);
+    if (_info->dwLength == 0)
+        return FILE_OK;
 
-    // Load smpl part of an sf2
-    if (_info->dwLength > 0)
+    // Size of the vector
+    smpl.resize(_info->dwLength);
+    float * fData = smpl.data();
+
+    // Load the smpl part of an sf2
+    fi.seek(_info->dwStart);
+    qint16 * data = new qint16[_info->dwLength];
+    qint64 nb = fi.read((char *)data, _info->dwLength * 2);
+    if (nb == -1)
     {
-        // Copy data
-        fi.seek(_info->dwStart);
-        qint64 nb = fi.read(smpl.data(), _info->dwLength * 2);
-        if (nb == -1)
-            return FILE_NOT_READABLE;
-        if (nb != _info->dwLength * 2)
-            return FILE_CORRUPT;
+        delete [] data;
+        return FILE_NOT_READABLE;
     }
-    else
-        smpl.fill(0);
+    if (nb != _info->dwLength * 2)
+    {
+        delete [] data;
+        return FILE_CORRUPT;
+    }
 
-    return FILE_OK;
-}
-
-SampleReaderSf2::SampleReaderResult SampleReaderSf2::getExtraData24(QFile &fi, QByteArray &sm24)
-{
-    // Size of the vector
-    sm24.resize(static_cast<int>(_info->dwLength));
-
-    // Load sm24 part of an sf2
+    // Possibly load the sm24 part of an sf2
+    char * data24 = new char[_info->dwLength];
     if (_info->wBpsFile >= 24 && _info->dwLength > 0)
     {
         // Copy data
         fi.seek(_info->dwStart2);
-        qint64 nb = fi.read(sm24.data(), _info->dwLength);
+        qint64 nb = fi.read(data24, _info->dwLength);
         if (nb == -1)
+        {
+            delete [] data24;
             return FILE_NOT_READABLE;
-        if (nb != _info->dwLength * 2)
+        }
+        if (nb != _info->dwLength)
+        {
+            delete [] data24;
             return FILE_CORRUPT;
+        }
     }
     else
-        sm24.fill(0);
+        memset(data24, 0, _info->dwLength);
+
+    // Convert to float between -1 and 1
+    for (quint32 i = 0; i < _info->dwLength; i++)
+       fData[i] = (0.5f + (data[i] << 8) + data24[i]) / (0.5f + 0x7FFFFF);
 
     return FILE_OK;
 }

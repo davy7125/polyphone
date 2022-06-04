@@ -52,7 +52,7 @@ public:
     // Set the value of an envelop
     void setValue(int index, Envelop::ValueType type, double value, bool isDefined = true);
     void setKeyRange(int index, int keyMin, int keyMax);
-    void setSample(QByteArray data, int sampleRate, int loopMode, int startLoop, int endLoop);
+    void setSample(QVector<float> vData, int sampleRate, int loopMode, int startLoop, int endLoop);
 
     // Set the style of an envelop
     void setEnvelopStyle(int index, bool isGlobal, bool isVolume, bool isMain);

@@ -122,12 +122,7 @@ void GraphiqueFourier::setCurrentIds(IdList ids)
         this->_dwSmplRate = SoundfontManager::getInstance()->get(_currentIds[0], champ_dwSampleRate).dwValue;
 
         // Load data
-        QByteArray baData = SoundfontManager::getInstance()->getData(_currentIds[0], champ_sampleData16);
-        int length = baData.size() / 2;
-        _fData.resize(length);
-        qint16 * data = reinterpret_cast<qint16*>(baData.data());
-        for (int i = 0; i < length; i++)
-            _fData[i] = static_cast<float>(data[i]);
+        _fData = SoundfontManager::getInstance()->getData(_currentIds[0]);
 
         // Menu
         _menu->actions()[0]->setEnabled(true);

@@ -495,14 +495,17 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     fi.write((char *)&taille_smpl, 4);
     id2.typeElement = elementSmpl;
     dwTmp2 = 10 * 4 + taille_info;
+    QVector<float> fData;
     QByteArray baData;
+    bool export24bit = (sm->get(id, champ_wBpsSave).wValue == 24);
     foreach (int i, sm->getSiblings(id2))
     {
         // Copy each sample
         id2.indexElt = i;
         dwTmp = 2 * sm->get(id2, champ_dwLength).dwValue;
-        baData = sm->getData(id2, champ_sampleData16);
-        fi.write(baData.data(), dwTmp);
+        fData = sm->getData(id2);
+        convertTo16bit(fData, baData, export24bit);
+        fi.write(baData.constData(), dwTmp);
 
         // Add 46 null sample points
         charTmp = '\0';
@@ -522,25 +525,28 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
 
     // 24 bits
     id.typeElement = elementSf2;
-    if (sm->get(id, champ_wBpsSave).wValue == 24)
+    if (export24bit)
     {
         // Ajout données 24 bits
         fi.write("sm24", 4);
         taille_sm24 -= 8;
         fi.write((char *)&taille_sm24, 4);
-        dwTmp2 = 12*4 + taille_info + taille_smpl;
+        dwTmp2 = 12 * 4 + taille_info + taille_smpl;
         foreach (int i, sm->getSiblings(id2))
         {
             // copie de chaque sample
             id2.indexElt = i;
             dwTmp = sm->get(id2, champ_dwLength).dwValue;
-            baData = sm->getData(id2, champ_sampleData24);
-            fi.write(baData.data(), dwTmp);
-            // ajout de 46 zeros
+            fData = sm->getData(id2);
+            convertTo24bit(fData, baData);
+            fi.write(baData.constData(), dwTmp);
+
+            // Add 46 null sample points
             charTmp = '\0';
             for (quint32 i = 0; i < 46; i++)
                 fi.write(&charTmp, 1);
             dwTmp += 46;
+
             // Mise à jour du champ dwStart24
             if (sm->get(id2, champ_dwStart24).dwValue != dwTmp2)
             {
@@ -1235,4 +1241,31 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
 
     success = true;
     error = "";
+}
+
+void OutputSf2::convertTo16bit(QVector<float> dataSrc, QByteArray &dataDest, bool export24bit)
+{
+    const float * data = dataSrc.constData();
+    int length = dataSrc.size();
+
+    dataDest.resize(2 * length);
+    qint16 * data16 = reinterpret_cast<qint16 *>(dataDest.data());
+    if (export24bit)
+        for (int i = 0; i < length; i++)
+            data16[i] = static_cast<qint32>(data[i] * (.5f + 0x7FFFFF) - .5f) >> 8;
+    else
+        for (int i = 0; i < length; i++)
+            data16[i] = static_cast<qint16>(data[i] * (.5f + 0x7FFF) - .5f);
+}
+
+void OutputSf2::convertTo24bit(QVector<float> dataSrc, QByteArray &dataDest)
+{
+    const float * data = dataSrc.constData();
+    int length = dataSrc.size();
+
+    // Get only the last 8 bits of the 24 bits value
+    dataDest.resize(length);
+    char * dataChar = dataDest.data();
+    for (int i = 0; i < length; i++)
+        dataChar[i] = static_cast<qint32>(data[i] * (.5f + 0x7FFFFF) - .5f) & 0xFF;
 }

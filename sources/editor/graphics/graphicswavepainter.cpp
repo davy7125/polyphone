@@ -79,28 +79,23 @@ GraphicsWavePainter::GraphicsWavePainter(QWidget * widget) :
 
 GraphicsWavePainter::~GraphicsWavePainter()
 {
-    delete [] _sampleData;
     delete _image;
     delete [] _pixels;
     delete [] _samplePlotMean;
 }
 
-void GraphicsWavePainter::setData(QByteArray baData)
+void GraphicsWavePainter::setData(QVector<float> vData)
 {
-    delete [] _sampleData;
     delete _image;
     delete [] _pixels;
     delete [] _samplePlotMean;
-    _sampleData = nullptr;
     _image = nullptr;
     _pixels = nullptr;
     _samplePlotMean = nullptr;
 
     // Extract the waveform
-    _sampleSize = static_cast<quint32>(baData.size()) / 2;
-    qint16 * data = reinterpret_cast<qint16 *>(baData.data());
-    _sampleData = new qint16[_sampleSize];
-    memcpy(_sampleData, data, _sampleSize * sizeof(qint16));
+    _sampleSize = static_cast<quint32>(vData.size());
+    _sampleData = vData.constData();
 }
 
 void GraphicsWavePainter::paint(QPainter * painter, quint32 start, quint32 end, float zoomY)
@@ -167,8 +162,8 @@ void GraphicsWavePainter::prepareImage()
     float pointSpaceInv = 1.0f / pointSpace;
     float previousPosition = 0.0f;
     float currentPosition;
-    qint16 previousValue = _sampleData[_start];
-    qint16 currentValue;
+    float previousValue = _sampleData[_start];
+    float currentValue;
     quint32 previousPixelNumber = 999999;
 
     for (quint32 i = 1; i <= _end - _start; i++)
@@ -224,7 +219,7 @@ void GraphicsWavePainter::prepareImage()
     }
 
     // Compute mean, standard deviation, adjust min / max
-    float coeff = -_zoomY * static_cast<float>(height) / (32768 * (_drawBottom ? 1 : 2));
+    float coeff = -_zoomY * static_cast<float>(height) / (_drawBottom ? 1 : 2);
     float offsetY = _drawBottom ? height : 0.5f * height;
     for (quint32 i = 0; i < width; i++)
     {
@@ -339,7 +334,7 @@ QPointF * GraphicsWavePainter::getDataAround(quint32 position, quint32 desiredLe
         return nullptr;
 
     // Create data
-    float coeff = -_zoomY * static_cast<float>(_widget->height()) / (32768 * 2);
+    float coeff = -_zoomY * static_cast<float>(_widget->height()) / 2;
     float offsetY = 0.5f * _widget->height();
     pointNumber = rightIndex - leftIndex + 1;
     QPointF * array = new QPointF[pointNumber];
