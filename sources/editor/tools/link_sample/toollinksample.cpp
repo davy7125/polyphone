@@ -105,19 +105,13 @@ void ToolLinkSample::scan(SoundfontManager * sm, int indexSf2)
     QList<int> allSamples = sm->getSiblings(idSmpl);
     foreach (int i, allSamples)
     {
+        // Remove some characters from the sample name
         QString sampleName = sm->getQstr(EltID(elementSmpl, indexSf2, i), champ_name);
-        if (sampleName.right(1).toUpper() == "L")
-        {
-            _smplIds.append(i);
-            _names.append(sampleName.left(sampleName.size() - 1));
-            _leftRight.append(false);
-        }
-        else if (sampleName.right(1).toUpper() == "R")
-        {
-            _smplIds.append(i);
-            _names.append(sampleName.left(sampleName.size() - 1));
-            _leftRight.append(true);
-        }
+        sampleName = sampleName.remove(QRegExp("[-() |_\\]\\[{}]"));
+
+        _smplIds.append(i);
+        _leftRight.append(sampleName.right(1).toUpper() == "R");
+        _names.append(sampleName.left(sampleName.size() - 1));
     }
 }
 
