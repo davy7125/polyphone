@@ -144,7 +144,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     {
         EltID idTmp = ids[i];
         if (sampleRate != _sf2->get(idTmp, champ_dwSampleRate).dwValue)
-            sampleRate = -1;
+            sampleRate = 0;
         if (rootKey != _sf2->get(idTmp, champ_byOriginalPitch).bValue)
             rootKey = 0;
         if (correction != _sf2->get(idTmp, champ_chPitchCorrection).cValue)
@@ -162,8 +162,12 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     while (ui->comboSampleRate->count() > 7)
         ui->comboSampleRate->removeItem(7);
     int sampleRateIndex = ui->comboSampleRate->findText(QString::number(sampleRate));
-    if (sampleRateIndex == -1) {
-        ui->comboSampleRate->addItem(QString::number(sampleRate));
+    if (sampleRateIndex == -1)
+    {
+        if (sampleRate == 0)
+            ui->comboSampleRate->addItem("-");
+        else
+            ui->comboSampleRate->addItem(QString::number(sampleRate));
         sampleRateIndex = 7;
     }
     ui->comboSampleRate->setCurrentIndex(sampleRateIndex);
@@ -819,7 +823,10 @@ void PageSmpl::setRate(int index)
         return;
 
     // Soundfont editing
-    quint32 echFinal = QLocale::system().toInt(ui->comboSampleRate->currentText());
+    bool ok;
+    quint32 echFinal = QLocale::system().toInt(ui->comboSampleRate->currentText(), &ok);
+    if (echFinal == 0 || !ok)
+        return;
     QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
     foreach (EltID id, listID)
     {
