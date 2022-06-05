@@ -26,6 +26,7 @@
 #define WINDOWMANAGER_H
 
 #include <QObject>
+#include <QMutex>
 class ColoredTabWidget;
 class ConfigPanel;
 class SoundfontFilter;

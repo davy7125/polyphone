@@ -69,7 +69,7 @@ private:
     QMap<int, QDataStream *> _mapDataStream;
     QMap<int, QFile *> _mapFile;
 
-    static int _maxFileHandler;
+    int _maxFileHandler;
 };
 
 #endif // SFARKFILEMANAGER_H

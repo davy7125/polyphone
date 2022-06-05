@@ -165,8 +165,8 @@ void WindowManager::openSoundfont(QString fileName)
     _editors << editor;
 
     // Initialize and display it
-    editor->initialize(InputFactory::getInput(fileName));
     _tabWidget->setCurrentIndex(index);
+    editor->initialize(InputFactory::getInput(fileName));
 }
 
 void WindowManager::openRepository(SoundfontFilter *filter)

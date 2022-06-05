@@ -26,9 +26,8 @@
 #include <QFile>
 #include <QDataStream>
 
-int SfArkFileManager::_maxFileHandler = 0;
-
-SfArkFileManager::SfArkFileManager()
+SfArkFileManager::SfArkFileManager() :
+    _maxFileHandler(0)
 {}
 
 SfArkFileManager::~SfArkFileManager()

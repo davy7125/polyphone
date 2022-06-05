@@ -150,6 +150,19 @@ private:
     qint32 SfarkOpen(const char *sfarkName);
     void closeFile(qint32 fh);
 
+    void lpcCorrelation(quint32 frameSize, const float * src, quint32 totalFrames, float * dest);
+    void lpcAddAcHist(const float * src, quint32 frameSize, float * dest);
+    void delta1(qint16 * destptr, qint16 * srcptr, quint32 dataSizeInWords, qint16 * prevVal);
+    void delta2(qint16 * dest, qint16 * src, quint32 dataSizeInWords, qint16 * prevVal);
+    void delta3(qint16 * dest, qint16 * src, quint32 dataSizeInWords, qint16 * prevVal);
+    quint32 shiftBitsLookup(quint32 val);
+    void applyShift(qint16 * dataptr, quint32 dataSizeInWords, quint16 * srcptr);
+    quint32 get_ulong(unsigned char * ptr);
+    quint16 get_ushort(unsigned char * ptr);
+    void freeMemList(PackItem **list);
+    qint32 makePackItemList(quint32 * dataArray, quint32 dataArraySize, quint32 lowLimit, const quint16 * dataWordMap,
+                            const unsigned char *encodeCntMap, PackItem ** packArrayList, quint32 * encodeCntPtr);
+
     SfArkInfo * _sfArkInfo;
     SfArkFileManager _fileManager;
     SfArkError _error;

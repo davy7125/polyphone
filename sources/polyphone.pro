@@ -9,8 +9,7 @@
 # Uncomment a line if your distribution doesn't come with some of the following libraries
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
-#DEFINES += USE_LOCAL_QCUSTOMPLOT
-DEFINES += USE_LOCAL_SFARKLIB
+DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # Uncomment this line to use wolfssl instead of openssl (for a license issue)
 #DEFINES += USE_WOLFSSL
@@ -156,20 +155,6 @@ contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
     LIBS += -lqcustomplot
 }
 
-# Location of sfArk
-contains(DEFINES, USE_LOCAL_SFARKLIB) {
-    DEFINES += USE_MANUAL_ENDIANNESS MANUAL_LITTLE_ENDIAN
-    INCLUDEPATH += lib/_option_sfarklib
-    HEADERS += lib/_option_sfarklib/sfArkLib.h
-    SOURCES += lib/_option_sfarklib/sfklZip.cpp \
-        lib/_option_sfarklib/sfklLPC.cpp \
-        lib/_option_sfarklib/sfklDiff.cpp \
-        lib/_option_sfarklib/sfklCrunch.cpp \
-        lib/_option_sfarklib/sfklCoding.cpp \
-        lib/_option_sfarklib/sfklString.cpp
-} else {
-    LIBS += -lsfark
-}
 
 INCLUDEPATH += lib \
     mainwindow \

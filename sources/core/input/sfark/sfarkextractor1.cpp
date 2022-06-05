@@ -193,7 +193,7 @@ void SfArkExtractor1::schur(quint32 dataSize, qint32 * dest)
     }
 }
 
-static void lpcCorrelation(quint32 frameSize, const float * src, quint32 totalFrames, float * dest)
+void SfArkExtractor1::lpcCorrelation(quint32 frameSize, const float * src, quint32 totalFrames, float * dest)
 {
     quint32	i;
 
@@ -269,7 +269,7 @@ void SfArkExtractor1::lpcDecode(const qint32 * array, quint32 frameSize, quint32
     }
 }
 
-static void lpcAddAcHist(const float * src, quint32 frameSize, float * dest)
+void SfArkExtractor1::lpcAddAcHist(const float * src, quint32 frameSize, float * dest)
 {
     quint32	frameEnd;
     quint32	i;
@@ -373,7 +373,7 @@ void SfArkExtractor1::lpcUnpack(quint32 dataSizeInWords, quint32 maskVal)
 // Delta compression decoding, and Bit packing decoder
 // ===============================================================
 
-static void delta1(qint16 * destptr, qint16 * srcptr, quint32 dataSizeInWords, qint16 * prevVal)
+void SfArkExtractor1::delta1(qint16 * destptr, qint16 * srcptr, quint32 dataSizeInWords, qint16 * prevVal)
 {
     qint16 *	dataend;
 
@@ -389,7 +389,7 @@ static void delta1(qint16 * destptr, qint16 * srcptr, quint32 dataSizeInWords, q
     *prevVal = *(destptr - 1);
 }
 
-static void delta2(qint16 * dest, qint16 * src, quint32 dataSizeInWords, qint16 * prevVal)
+void SfArkExtractor1::delta2(qint16 * dest, qint16 * src, quint32 dataSizeInWords, qint16 * prevVal)
 {
     qint16 *	srcptr;
     qint16 *	destptr;
@@ -407,7 +407,7 @@ static void delta2(qint16 * dest, qint16 * src, quint32 dataSizeInWords, qint16 
     *prevVal = destptr[dataSizeInWords - 1];
 }
 
-static void delta3(qint16 * dest, qint16 * src, quint32 dataSizeInWords, qint16 * prevVal)
+void SfArkExtractor1::delta3(qint16 * dest, qint16 * src, quint32 dataSizeInWords, qint16 * prevVal)
 {
     qint16 *	srcEnd;
     qint16		prevVal2;
@@ -430,7 +430,7 @@ static void delta3(qint16 * dest, qint16 * src, quint32 dataSizeInWords, qint16 
     *prevVal = prevVal2;
 }
 
-static quint32 shiftBitsLookup(quint32 val)
+quint32 SfArkExtractor1::shiftBitsLookup(quint32 val)
 {
     quint32	low;
     unsigned char bitN;
@@ -450,7 +450,7 @@ static quint32 shiftBitsLookup(quint32 val)
     return val;
 }
 
-static void applyShift(qint16 * dataptr, quint32 dataSizeInWords, quint16 * srcptr)
+void SfArkExtractor1::applyShift(qint16 * dataptr, quint32 dataSizeInWords, quint16 * srcptr)
 {
     qint16 *		endptr;
 
@@ -886,12 +886,12 @@ swap:	tempptr = _sfArkInfo->WorkBuffer1;
     return 0;
 }
 
-static quint32 get_ulong(unsigned char * ptr)
+quint32 SfArkExtractor1::get_ulong(unsigned char * ptr)
 {
     return ((quint32)ptr[0]) | ((quint32)ptr[1] << 8) | ((quint32)ptr[2] << 16) | ((quint32)ptr[3] << 24);
 }
 
-static quint16 get_ushort(unsigned char * ptr)
+quint16 SfArkExtractor1::get_ushort(unsigned char * ptr)
 {
     return ((quint16)ptr[0]) | ((quint16)ptr[1] << 8);
 }
@@ -994,7 +994,7 @@ quint32 SfArkExtractor1::readSfarkBits(quint16 numOfBits)
     return result;
 }
 
-static void freeMemList(PackItem **list)
+void SfArkExtractor1::freeMemList(PackItem **list)
 {
     PackItem *	mem;
     PackItem *	next;
@@ -1010,7 +1010,8 @@ static void freeMemList(PackItem **list)
     *list = 0;
 }
 
-static qint32 makePackItemList(quint32 * dataArray, quint32 dataArraySize, quint32 lowLimit, const quint16 * dataWordMap, const unsigned char *encodeCntMap, PackItem ** packArrayList, quint32 * encodeCntPtr)
+qint32 SfArkExtractor1::makePackItemList(quint32 * dataArray, quint32 dataArraySize, quint32 lowLimit, const quint16 * dataWordMap,
+                                         const unsigned char *encodeCntMap, PackItem ** packArrayList, quint32 * encodeCntPtr)
 {
     int				result;
     quint32	i;
@@ -1805,11 +1806,11 @@ void SfArkExtractor1::getTempPartName(char partNum)
 
     // Append the file name
     strcpy(&buffer[len], (const char *)_sfArkInfo->WorkBuffer2 + 262144 - 1024);
-    len += _sfArkInfo->LeadingPadUncompSize;
+    len += strlen((const char *)_sfArkInfo->WorkBuffer2 + 262144 - 1024);//_sfArkInfo->LeadingPadUncompSize;
 
     // Followed by the part number
     buffer[len++] = partNum;
-    buffer[len] = 0;
+    buffer[len] = '\0';
 }
 
 
@@ -2511,7 +2512,17 @@ qint32 SfArkExtractor1::SfarkOpen(const char * sfarkName)
                 // recombine those 2 pieces into the soundfont. We need to save the original sf name
                 // somewhere permanent so let's use the 1024 bytes at the end of WorkBuffer2 since it's much
                 // larger than we need and won't be overwritten
-                strcpy((char *)_sfArkInfo->WorkBuffer2 + 262144 - 1024, (const char *)_sfArkInfo->WorkBuffer1 + 42);
+                int lastSep = 0;
+                int pos = 0;
+                while (sfarkName[pos] != '\0')
+                {
+                    if (sfarkName[pos] == '/' || sfarkName[pos] == '\\')
+                        lastSep = pos;
+                    pos++;
+                }
+                strcpy((char *)_sfArkInfo->WorkBuffer2 + 262144 - 1024, sfarkName + lastSep + 1);
+                unsigned char * name = &_sfArkInfo->WorkBuffer2[262144 - 1024];
+                strcpy((char *)_sfArkInfo->WorkBuffer2 + 262144 - 1024 + pos - lastSep - 7, "_tmp");
 
                 // Note the part file we're extracting first. Could be '1' or '2'
                 _sfArkInfo->v1.PartNum = _sfArkInfo->WorkBuffer1[0];
