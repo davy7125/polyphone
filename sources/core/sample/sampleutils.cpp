@@ -89,11 +89,11 @@ QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, q
     delete [] sincCoef;
 
     // Limitation si besoin
-    if (valMax > 1)
+    if (valMax > 1.0f)
     {
         float coef = 1.0f / valMax;
         for (quint32 i = 0; i < sizeFinal; i++)
-            dataRet[i] = static_cast<qint32>(dataRet[i] * coef);
+            dataRet[i] *= coef;
     }
 
     // Filtre passe bas après resampling
