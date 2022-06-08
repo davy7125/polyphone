@@ -722,12 +722,11 @@ bool SoundFont::write()
     return true;
 }
 
-bool SoundFont::compress(QFile* f, double oggQuality, double oggAmp, qint64 oggSerial)
+bool SoundFont::compress(QFile* f, double oggQuality, qint64 oggSerial)
 {
     file = f;
     _compress = true;
     _oggQuality = oggQuality;
-    _oggAmp = oggAmp;
     _oggSerial = oggSerial;
 
     return write();
@@ -817,9 +816,11 @@ void SoundFont::writeSmpl()
     qint64 pos = file->pos();
     writeDword(0);
     int currentSamplePos = 0;
-    if (_compress) {
+    if (_compress)
+    {
         // Compress wave data
-        foreach(Sample* s, samples) {
+        foreach(Sample* s, samples)
+        {
             // Loop start and end are now based on the beginning of each sample
             s->loopstart -= s->start;
             s->loopend -= s->start;
@@ -832,9 +833,11 @@ void SoundFont::writeSmpl()
             s->end = currentSamplePos;
         }
     }
-    else {
+    else
+    {
         // Uncompress from OGG data
-        foreach(Sample* s, samples) {
+        foreach(Sample* s, samples)
+        {
             // OGG flag is removed
             s->sampletype &= ~0x10;
             int len = writeUncompressedSample(s) / 2; // In sample data points (16 bits)
@@ -1093,9 +1096,6 @@ int SoundFont::writeCompressedSample(Sample* s)
     ogg_packet header_comm;
     ogg_packet header_code;
 
-    // Keep a track of the attenuation used before the compression
-    vorbis_comment_add(&vc, QString("AMP=%1\0").arg(_oggAmp).toStdString().c_str());
-
     vorbis_analysis_headerout(&vd, &vc, &header, &header_comm, &header_code);
     ogg_stream_packetin(&os, &header);
     ogg_stream_packetin(&os, &header_comm);
@@ -1116,14 +1116,16 @@ int SoundFont::writeCompressedSample(Sample* s)
 
     long i;
     int page = 0;
-    double linearAmp = pow(10.0, _oggAmp / 20.0);
     for(;;) {
-        int bufflength = qMin(BLOCK_SIZE, samples-page*BLOCK_SIZE);
+        int bufflength = qMin(BLOCK_SIZE, samples-page * BLOCK_SIZE);
         float **buffer = vorbis_analysis_buffer(&vd, bufflength);
+
+        // Convert int16 to float
         int j = 0;
-        int max = qMin((page+1)*BLOCK_SIZE, samples);
+        float coef = 1.0f / ((0.5f + 0x7fff) * 1.009f); // 1.009 seems to be necessary, but why?
+        int max = qMin((page + 1) * BLOCK_SIZE, samples);
         for (i = page * BLOCK_SIZE; i < max ; i++) {
-            buffer[0][j] = (ibuffer[i] / 32768.f) * linearAmp;
+            buffer[0][j] = (0.5f + ibuffer[i]) * coef;
             j++;
         }
 
@@ -1827,31 +1829,11 @@ int SoundFont::writeUncompressedSample(Sample* s)
     int length = 0;
     if (ov_open_callbacks(&_vorbisData, &vf, nullptr, 0, ovCallbacks) == 0)
     {
-        double attenuation = 0;
-        for (int i = 0; i < vf.vc->comments; i++)
-        {
-            QString comment(vf.vc->user_comments[i]);
-            if (comment.contains("AMP="))
-            {
-                QStringList split = comment.split('=');
-                if (split.size() == 2)
-                {
-                    bool ok = false;
-                    attenuation = split[1].toDouble(&ok);
-                    if (!ok)
-                        attenuation = 0;
-                }
-            }
-        }
-        double linearAmp = pow(10.0, attenuation / 20.0);
-
         short buffer[2048];
         int numberRead = 0;
         int section = 0;
         do {
             numberRead = ov_read(&vf, (char *)buffer, 2048 * sizeof(short), 0, 2, 1, &section);
-            for (unsigned int i = 0; i < numberRead / sizeof(short); i++)
-                buffer[i] = (double)buffer[i] / linearAmp;
             write((char *)buffer, numberRead);
             length += numberRead;
         } while (numberRead);

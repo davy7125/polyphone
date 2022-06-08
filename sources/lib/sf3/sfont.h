@@ -198,7 +198,6 @@ class SoundFont
 
     bool _compress;
     double _oggQuality;
-    double _oggAmp;
     qint64 _oggSerial;
 
     // Extra option
@@ -263,7 +262,7 @@ public:
     SoundFont(const QString&);
     ~SoundFont();
     bool read();
-    bool compress(QFile* f, double oggQuality, double oggAmp, qint64 oggSerial = rand());
+    bool compress(QFile* f, double oggQuality, qint64 oggSerial = rand());
     bool uncompress(QFile* f);
     bool writeCode(QList<int>);
     bool writeCode();

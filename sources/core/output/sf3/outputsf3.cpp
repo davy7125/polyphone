@@ -69,7 +69,7 @@ void OutputSf3::processInternal(QString fileName, SoundfontManager * sm, bool &s
         QFile fo(fileName);
         if (fo.open(QIODevice::WriteOnly))
         {
-            if (sf.compress(&fo, qualityValue, -1.0))
+            if (sf.compress(&fo, qualityValue))
             {
                 error = "";
                 success = true;
