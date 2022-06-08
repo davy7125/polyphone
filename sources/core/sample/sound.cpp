@@ -94,14 +94,17 @@ void Sound::setFileName(QString qStr, bool tryFindRootKey)
 
 QVector<float> Sound::getData(bool forceReload)
 {
-    if (forceReload)
+    if (_reader != nullptr)
     {
-        _smpl.clear();
-        _reader->getInfo(_info);
-    }
+        if (forceReload)
+        {
+            _smpl.clear();
+            _reader->getInfo(_info);
+        }
 
-    if (_smpl.isEmpty())
-        _reader->getData(_smpl);
+        if (_smpl.isEmpty())
+            _reader->getData(_smpl);
+    }
 
     return _smpl;
 }
