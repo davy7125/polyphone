@@ -29,7 +29,7 @@
 
 const int ModulatorGroup::MAX_NUMBER_OF_PARAMETER_MODULATORS = 64;
 
-ModulatorGroup::ModulatorGroup(ModulatedParameter **parameters, bool isPrst) :
+ModulatorGroup::ModulatorGroup(ModulatedParameter *parameters, bool isPrst) :
     _parameters(parameters),
     _isPrst(isPrst),
     _modulators(new ParameterModulator * [MAX_NUMBER_OF_PARAMETER_MODULATORS]),
@@ -100,8 +100,7 @@ void ModulatorGroup::loadModulators(QList<ModulatorData> &modulators)
         if (output < 32768)
         {
             // The target is a parameter
-            if (_parameters[output])
-                modulator->setOutput(_parameters[output]);
+            modulator->setOutput(&_parameters[output]);
         }
         else
         {

@@ -552,25 +552,25 @@ QList<int> SoundfontManager::getSiblings(EltID &id)
     } break;
     case elementInstGen: {
         Division * div = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision();
-        for (int i = 0; i < END_OF_GEN; i++)
+        for (int i = 0; i < champ_endOper; i++)
             if (div->isSet((AttributeType)i))
                 result << i;
     } break;
     case elementPrstGen: {
         Division * div = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision();
-        for (int i = 0; i < END_OF_GEN; i++)
+        for (int i = 0; i < champ_endOper; i++)
             if (div->isSet((AttributeType)i))
                 result << i;
     } break;
     case elementInstSmplGen: {
         Division * div = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2);
-        for (int i = 0; i < END_OF_GEN; i++)
+        for (int i = 0; i < champ_endOper; i++)
             if (div->isSet((AttributeType)i))
                 result << i;
     } break;
     case elementPrstInstGen: {
         Division * div = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
-        for (int i = 0; i < END_OF_GEN; i++)
+        for (int i = 0; i < champ_endOper; i++)
             if (div->isSet((AttributeType)i))
                 result << i;
     } break;
@@ -1089,7 +1089,7 @@ void SoundfontManager::supprGenAndStore(EltID id, int storeAction)
         return;
     }
 
-    for (int i = 0; i < END_OF_GEN; i++)
+    for (int i = 0; i < champ_endOper; i++)
     {
         if (division->isSet((AttributeType)i))
         {
@@ -1720,7 +1720,7 @@ bool SoundfontManager::isValid(EltID &id, bool acceptHidden, bool justCheckParen
 
         // Gens: based on the count only
         int genCount = 0;
-        for (int i = 0; i < END_OF_GEN; i++)
+        for (int i = 0; i < champ_endOper; i++)
             if (div->isSet((AttributeType)i))
                 genCount++;
         return id.indexMod < genCount;
@@ -1741,7 +1741,7 @@ bool SoundfontManager::isValid(EltID &id, bool acceptHidden, bool justCheckParen
 
         // Gens: based on the count only
         int genCount = 0;
-        for (int i = 0; i < END_OF_GEN; i++)
+        for (int i = 0; i < champ_endOper; i++)
             if (div->isSet((AttributeType)i))
                 genCount++;
         return id.indexMod < genCount;

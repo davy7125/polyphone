@@ -91,7 +91,6 @@ typedef enum
     champ_overridingRootKey = 58,
     champ_unused5 = 59,
     champ_endOper = 60,
-    END_OF_GEN = 61,
 
     champ_IFIL = 128,                   // Start of SF2 fields
     champ_IVER = 129,
@@ -201,9 +200,12 @@ public:
     // Champ: type of the parameter
     // isPrst: true if this parameter is for a preset
     // value: real value
+    Attribute();
     Attribute(AttributeType champ, bool isPrst);
     Attribute(AttributeType champ, bool isPrst, double value);
     Attribute(AttributeType champ, bool isPrst, AttributeValue storedValue);
+
+    void setType(AttributeType champ, bool isPrst);
 
     // Get / Set the real value
     // The stored value will be adapted accordingly

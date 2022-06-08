@@ -67,6 +67,18 @@ Attribute::Attribute(AttributeType champ, bool isPrst, AttributeValue storedValu
     setStoredValue(storedValue);
 }
 
+Attribute::Attribute() : _realValue(0)
+{
+
+}
+
+void Attribute::setType(AttributeType champ, bool isPrst)
+{
+    _champ = champ;
+    _isPrst = isPrst;
+    setStoredValue(getDefaultStoredValue(champ, isPrst));
+}
+
 void Attribute::setRealValue(double realValue)
 {
     _storedValue = fromRealValue(_champ, _isPrst, realValue);

@@ -33,10 +33,10 @@ Division::Division(InstPrst * instPrst, Soundfont * soundfont, TreeItem * parent
     _soundfont(soundfont),
     _mute(false)
 {
-    _attributeValues = new AttributeValue[END_OF_GEN];
-    memset((void *)_attributeValues, 0, END_OF_GEN * sizeof(AttributeValue));
-    _attributeSet = new bool[END_OF_GEN];
-    memset((void *)_attributeSet, 0, END_OF_GEN * sizeof(bool));
+    _attributeValues = new AttributeValue[champ_endOper];
+    memset((void *)_attributeValues, 0, champ_endOper * sizeof(AttributeValue));
+    _attributeSet = new bool[champ_endOper];
+    memset((void *)_attributeSet, 0, champ_endOper * sizeof(bool));
 }
 
 Division::~Division()

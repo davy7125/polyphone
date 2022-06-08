@@ -27,7 +27,7 @@
 
 #include "basetypes.h"
 #include "modulatorgroup.h"
-class ModulatedParameter;
+#include "modulatedparameter.h"
 class Division;
 class Smpl;
 
@@ -73,7 +73,7 @@ private:
     int _presetId;
 
     // All parameters
-    ModulatedParameter * _parameters[140];
+    ModulatedParameter _parameters[champ_endOper];
     ModulatorGroup _modulatorGroupInst, _modulatorGroupPrst;
     qint32 _sampleLength, _sampleLoopStart, _sampleLoopEnd, _sampleFineTune;
     qint32 _wPresetNumber;

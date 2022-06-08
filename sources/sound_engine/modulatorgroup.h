@@ -32,7 +32,7 @@ class ParameterModulator;
 class ModulatorGroup
 {
 public:
-    ModulatorGroup(ModulatedParameter ** parameters, bool isPrst);
+    ModulatorGroup(ModulatedParameter * parameters, bool isPrst);
     ~ModulatorGroup();
 
     // Initialize with keys and vel
@@ -47,7 +47,7 @@ public:
 private:
     void loadDefaultModulators();
 
-    ModulatedParameter ** _parameters;
+    ModulatedParameter * _parameters;
     bool _isPrst;
     int _channel, _initialKey, _keyForComputation, _velForComputation;
     ParameterModulator ** _modulators;

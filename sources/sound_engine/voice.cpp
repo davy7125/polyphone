@@ -81,11 +81,14 @@ Voice::Voice(QVector<float> baData, quint32 smplRate, quint32 audioSmplRate, Voi
     _valPrec2(0),
     _valPrec1(0),
     _x1(0), _x2(0), _y1(0), _y2(0),
-    _arrayLength(0),
-    _srcDataLength(0)
+    _arrayLength(0)
 {
     // Resampling initialization
     takeData(_firstVal, 3);
+
+    _srcDataLength = 512;
+    _srcData = new float[_srcDataLength + 6];
+    memset(_srcData, 0, _srcDataLength * sizeof(float));
 }
 
 Voice::~Voice()
@@ -98,8 +101,7 @@ Voice::~Voice()
         delete [] _modFreqArray;
         delete [] _pointDistanceArray;
     }
-    if (_srcDataLength != 0)
-        delete [] _srcData;
+    delete [] _srcData;
     delete _voiceParam;
 }
 
@@ -186,8 +188,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     quint32 nbDataTmp = (_pointDistanceArray[len] >> 8) - ((_pointDistanceArray[len] & 0xFF) ? 0 : 1);
     if (nbDataTmp > _srcDataLength)
     {
-        if (_srcDataLength != 0)
-            delete [] _srcData;
+        delete [] _srcData;
         _srcData = new float[nbDataTmp + 6];
         _srcDataLength = nbDataTmp;
     }

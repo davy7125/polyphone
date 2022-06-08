@@ -24,7 +24,6 @@
 
 #include "voiceparam.h"
 #include "qmath.h"
-#include "modulatedparameter.h"
 #include "soundfontmanager.h"
 #include "division.h"
 #include "smpl.h"
@@ -40,8 +39,6 @@ VoiceParam::VoiceParam(Division * prstGlobalDiv, Division * prstDiv, Division * 
     _modulatorGroupPrst(_parameters, true),
     _wPresetNumber(presetNumber)
 {
-    memset(_parameters, 0, 140 * sizeof(ModulatedParameter *));
-
     // Prepare the parameters (everything to default)
     prepareParameters();
 
@@ -49,15 +46,15 @@ VoiceParam::VoiceParam(Division * prstGlobalDiv, Division * prstDiv, Division * 
     readSmpl(smpl);
     AttributeValue value;
     if (key < 0)
-        value.wValue = static_cast<quint16>(_parameters[champ_overridingRootKey]->getIntValue());
+        value.wValue = static_cast<quint16>(_parameters[champ_overridingRootKey].getIntValue());
     else
         value.wValue = static_cast<quint16>(key);
-    _parameters[champ_keynum]->initValue(value, false);
+    _parameters[champ_keynum].initValue(value, false);
     if (vel < 0)
         value.wValue = 127;
     else
         value.wValue = static_cast<quint16>(vel);
-    _parameters[champ_velocity]->initValue(value, false);
+    _parameters[champ_velocity].initValue(value, false);
 
     // Possibly add the configuration of the instrument level
     if (instDiv)
@@ -68,8 +65,8 @@ VoiceParam::VoiceParam(Division * prstGlobalDiv, Division * prstDiv, Division * 
         readDivisionAttributes(prstGlobalDiv, prstDiv, true);
 
     // Initialize the modulator groups
-    int keyForComputation = _parameters[champ_keynum]->getIntValue();
-    int velForComputation = _parameters[champ_velocity]->getIntValue();
+    int keyForComputation = _parameters[champ_keynum].getIntValue();
+    int velForComputation = _parameters[champ_velocity].getIntValue();
     _modulatorGroupInst.initialize(channel, key, keyForComputation, velForComputation);
     _modulatorGroupPrst.initialize(channel, key, keyForComputation, velForComputation);
 
@@ -82,80 +79,79 @@ VoiceParam::VoiceParam(Division * prstGlobalDiv, Division * prstDiv, Division * 
 
 VoiceParam::~VoiceParam()
 {
-    for (int i = 0; i < 140; i++)
-        delete _parameters[i];
+
 }
 
 void VoiceParam::prepareParameters()
 {
     // Offsets
-    _parameters[champ_startAddrsOffset] = new ModulatedParameter(champ_startAddrsOffset);
-    _parameters[champ_startAddrsCoarseOffset] = new ModulatedParameter(champ_startAddrsCoarseOffset);
-    _parameters[champ_endAddrsOffset] = new ModulatedParameter(champ_endAddrsOffset);
-    _parameters[champ_endAddrsCoarseOffset] = new ModulatedParameter(champ_endAddrsCoarseOffset);
-    _parameters[champ_startloopAddrsOffset] = new ModulatedParameter(champ_startloopAddrsOffset);
-    _parameters[champ_startloopAddrsCoarseOffset] = new ModulatedParameter(champ_startloopAddrsCoarseOffset);
-    _parameters[champ_endloopAddrsOffset] = new ModulatedParameter(champ_endloopAddrsOffset);
-    _parameters[champ_endloopAddrsCoarseOffset] = new ModulatedParameter(champ_endloopAddrsCoarseOffset);
+    _parameters[champ_startAddrsOffset].setType(champ_startAddrsOffset);
+    _parameters[champ_startAddrsCoarseOffset].setType(champ_startAddrsCoarseOffset);
+    _parameters[champ_endAddrsOffset].setType(champ_endAddrsOffset);
+    _parameters[champ_endAddrsCoarseOffset].setType(champ_endAddrsCoarseOffset);
+    _parameters[champ_startloopAddrsOffset].setType(champ_startloopAddrsOffset);
+    _parameters[champ_startloopAddrsCoarseOffset].setType(champ_startloopAddrsCoarseOffset);
+    _parameters[champ_endloopAddrsOffset].setType(champ_endloopAddrsOffset);
+    _parameters[champ_endloopAddrsCoarseOffset].setType(champ_endloopAddrsCoarseOffset);
 
     // Volume envelop
-    _parameters[champ_delayVolEnv] = new ModulatedParameter(champ_delayVolEnv);
-    _parameters[champ_attackVolEnv] = new ModulatedParameter(champ_attackVolEnv);
-    _parameters[champ_holdVolEnv] = new ModulatedParameter(champ_holdVolEnv);
-    _parameters[champ_decayVolEnv] = new ModulatedParameter(champ_decayVolEnv);
-    _parameters[champ_sustainVolEnv] = new ModulatedParameter(champ_sustainVolEnv);
-    _parameters[champ_releaseVolEnv] = new ModulatedParameter(champ_releaseVolEnv);
+    _parameters[champ_delayVolEnv].setType(champ_delayVolEnv);
+    _parameters[champ_attackVolEnv].setType(champ_attackVolEnv);
+    _parameters[champ_holdVolEnv].setType(champ_holdVolEnv);
+    _parameters[champ_decayVolEnv].setType(champ_decayVolEnv);
+    _parameters[champ_sustainVolEnv].setType(champ_sustainVolEnv);
+    _parameters[champ_releaseVolEnv].setType(champ_releaseVolEnv);
 
-    _parameters[champ_keynumToVolEnvHold] = new ModulatedParameter(champ_keynumToVolEnvHold);
-    _parameters[champ_keynumToVolEnvDecay] = new ModulatedParameter(champ_keynumToVolEnvDecay);
+    _parameters[champ_keynumToVolEnvHold].setType(champ_keynumToVolEnvHold);
+    _parameters[champ_keynumToVolEnvDecay].setType(champ_keynumToVolEnvDecay);
 
     // Modulation envelop
-    _parameters[champ_delayModEnv] = new ModulatedParameter(champ_delayModEnv);
-    _parameters[champ_attackModEnv] = new ModulatedParameter(champ_attackModEnv);
-    _parameters[champ_holdModEnv] = new ModulatedParameter(champ_holdModEnv);
-    _parameters[champ_decayModEnv] = new ModulatedParameter(champ_decayModEnv);
-    _parameters[champ_sustainModEnv] = new ModulatedParameter(champ_sustainModEnv);
-    _parameters[champ_releaseModEnv] = new ModulatedParameter(champ_releaseModEnv);
+    _parameters[champ_delayModEnv].setType(champ_delayModEnv);
+    _parameters[champ_attackModEnv].setType(champ_attackModEnv);
+    _parameters[champ_holdModEnv].setType(champ_holdModEnv);
+    _parameters[champ_decayModEnv].setType(champ_decayModEnv);
+    _parameters[champ_sustainModEnv].setType(champ_sustainModEnv);
+    _parameters[champ_releaseModEnv].setType(champ_releaseModEnv);
 
-    _parameters[champ_keynumToModEnvHold] = new ModulatedParameter(champ_keynumToModEnvHold);
-    _parameters[champ_keynumToModEnvDecay] = new ModulatedParameter(champ_keynumToModEnvDecay);
+    _parameters[champ_keynumToModEnvHold].setType(champ_keynumToModEnvHold);
+    _parameters[champ_keynumToModEnvDecay].setType(champ_keynumToModEnvDecay);
 
-    _parameters[champ_modEnvToFilterFc] = new ModulatedParameter(champ_modEnvToFilterFc);
-    _parameters[champ_modEnvToPitch] = new ModulatedParameter(champ_modEnvToPitch);
+    _parameters[champ_modEnvToFilterFc].setType(champ_modEnvToFilterFc);
+    _parameters[champ_modEnvToPitch].setType(champ_modEnvToPitch);
 
     // Modulation LFO
-    _parameters[champ_delayModLFO] = new ModulatedParameter(champ_delayModLFO);
-    _parameters[champ_freqModLFO] = new ModulatedParameter(champ_freqModLFO);
-    _parameters[champ_modLfoToPitch] = new ModulatedParameter(champ_modLfoToPitch);
-    _parameters[champ_modLfoToFilterFc] = new ModulatedParameter(champ_modLfoToFilterFc);
-    _parameters[champ_modLfoToVolume] = new ModulatedParameter(champ_modLfoToVolume);
+    _parameters[champ_delayModLFO].setType(champ_delayModLFO);
+    _parameters[champ_freqModLFO].setType(champ_freqModLFO);
+    _parameters[champ_modLfoToPitch].setType(champ_modLfoToPitch);
+    _parameters[champ_modLfoToFilterFc].setType(champ_modLfoToFilterFc);
+    _parameters[champ_modLfoToVolume].setType(champ_modLfoToVolume);
 
     // Vibrato LFO
-    _parameters[champ_delayVibLFO] = new ModulatedParameter(champ_delayVibLFO);
-    _parameters[champ_freqVibLFO] = new ModulatedParameter(champ_freqVibLFO);
-    _parameters[champ_vibLfoToPitch] = new ModulatedParameter(champ_vibLfoToPitch);
+    _parameters[champ_delayVibLFO].setType(champ_delayVibLFO);
+    _parameters[champ_freqVibLFO].setType(champ_freqVibLFO);
+    _parameters[champ_vibLfoToPitch].setType(champ_vibLfoToPitch);
 
     // Low pass filter and attenuation
-    _parameters[champ_initialFilterFc] = new ModulatedParameter(champ_initialFilterFc);
-    _parameters[champ_initialFilterQ] = new ModulatedParameter(champ_initialFilterQ);
-    _parameters[champ_initialAttenuation] = new ModulatedParameter(champ_initialAttenuation);
+    _parameters[champ_initialFilterFc].setType(champ_initialFilterFc);
+    _parameters[champ_initialFilterQ].setType(champ_initialFilterQ);
+    _parameters[champ_initialAttenuation].setType(champ_initialAttenuation);
 
     // Effects, pan
-    _parameters[champ_chorusEffectsSend] = new ModulatedParameter(champ_chorusEffectsSend);
-    _parameters[champ_reverbEffectsSend] = new ModulatedParameter(champ_reverbEffectsSend);
-    _parameters[champ_pan] = new ModulatedParameter(champ_pan);
+    _parameters[champ_chorusEffectsSend].setType(champ_chorusEffectsSend);
+    _parameters[champ_reverbEffectsSend].setType(champ_reverbEffectsSend);
+    _parameters[champ_pan].setType(champ_pan);
 
     // Tuning
-    _parameters[champ_coarseTune] = new ModulatedParameter(champ_coarseTune);
-    _parameters[champ_fineTune] = new ModulatedParameter(champ_fineTune);
-    _parameters[champ_scaleTuning] = new ModulatedParameter(champ_scaleTuning);
+    _parameters[champ_coarseTune].setType(champ_coarseTune);
+    _parameters[champ_fineTune].setType(champ_fineTune);
+    _parameters[champ_scaleTuning].setType(champ_scaleTuning);
 
     // Other
-    _parameters[champ_overridingRootKey] = new ModulatedParameter(champ_overridingRootKey);
-    _parameters[champ_keynum] = new ModulatedParameter(champ_keynum);
-    _parameters[champ_velocity] = new ModulatedParameter(champ_velocity);
-    _parameters[champ_sampleModes] = new ModulatedParameter(champ_sampleModes);
-    _parameters[champ_exclusiveClass] = new ModulatedParameter(champ_exclusiveClass);
+    _parameters[champ_overridingRootKey].setType(champ_overridingRootKey);
+    _parameters[champ_keynum].setType(champ_keynum);
+    _parameters[champ_velocity].setType(champ_velocity);
+    _parameters[champ_sampleModes].setType(champ_sampleModes);
+    _parameters[champ_exclusiveClass].setType(champ_exclusiveClass);
 }
 
 void VoiceParam::readSmpl(Smpl *smpl)
@@ -163,7 +159,7 @@ void VoiceParam::readSmpl(Smpl *smpl)
     // Read sample properties
     AttributeValue val;
     val.bValue = smpl->_sound.getUInt32(champ_byOriginalPitch);
-    _parameters[champ_overridingRootKey]->initValue(val, false);
+    _parameters[champ_overridingRootKey].initValue(val, false);
     _sampleFineTune = smpl->_sound.getInt32(champ_chPitchCorrection);
     _sampleLength = static_cast<qint32>(smpl->_sound.getUInt32(champ_dwLength));
     _sampleLoopStart = static_cast<qint32>(smpl->_sound.getUInt32(champ_dwStartLoop));
@@ -175,16 +171,16 @@ void VoiceParam::readDivisionAttributes(Division * globalDivision, Division * di
     // Configure with the global attributes
     bool * attributeSet = globalDivision->getAttributeSet();
     AttributeValue * attributeValues = globalDivision->getAttributeValues();
-    for (int i = 0; i < END_OF_GEN; i++)
-        if (attributeSet[i] && _parameters[i])
-            _parameters[i]->initValue(attributeValues[i], isPrst);
+    for (int i = 0; i < champ_endOper; i++)
+        if (attributeSet[i])
+            _parameters[i].initValue(attributeValues[i], isPrst);
 
     // Configure with the division attributes (possibly overriding it)
     attributeSet = division->getAttributeSet();
     attributeValues = division->getAttributeValues();
-    for (int i = 0; i < END_OF_GEN; i++)
-        if (attributeSet[i] && _parameters[i])
-            _parameters[i]->initValue(attributeValues[i], isPrst);
+    for (int i = 0; i < champ_endOper; i++)
+        if (attributeSet[i])
+            _parameters[i].initValue(attributeValues[i], isPrst);
 }
 
 void VoiceParam::readDivisionModulators(Division * globalDivision, Division * division, bool isPrst)
@@ -219,26 +215,26 @@ void VoiceParam::prepareForSmpl(int key, SFSampleLink link)
     // Calling a second time the same sample mute the first one
     AttributeValue value;
     value.wValue = static_cast<quint16>(key); // Not a problem if -1 is translated into an unsigned
-    _parameters[champ_exclusiveClass]->initValue(value, false);
+    _parameters[champ_exclusiveClass].initValue(value, false);
 
     // Default release
     value.shValue = static_cast<qint16>(qRound(1200. * qLn(0.2) / M_LN2));
-    _parameters[champ_releaseVolEnv]->initValue(value, false);
+    _parameters[champ_releaseVolEnv].initValue(value, false);
 
     // Pan
     switch (link)
     {
     case leftSample: case RomLeftSample:
         value.shValue = -500;
-        _parameters[champ_pan]->initValue(value, false);
+        _parameters[champ_pan].initValue(value, false);
         break;
     case rightSample: case RomRightSample:
         value.shValue = 500;
-        _parameters[champ_pan]->initValue(value, false);
+        _parameters[champ_pan].initValue(value, false);
         break;
     default:
         value.shValue = 0;
-        _parameters[champ_pan]->initValue(value, false);
+        _parameters[champ_pan].initValue(value, false);
         break;
     }
 }
@@ -247,14 +243,14 @@ void VoiceParam::setPan(double val)
 {
     AttributeValue value;
     value.shValue = static_cast<qint16>(qRound(val * 10.));
-    _parameters[champ_pan]->initValue(value, false);
+    _parameters[champ_pan].initValue(value, false);
 }
 
 void VoiceParam::setLoopMode(quint16 val)
 {
     AttributeValue value;
     value.wValue = val;
-    _parameters[champ_sampleModes]->initValue(value, false);
+    _parameters[champ_sampleModes].initValue(value, false);
 }
 
 void VoiceParam::setLoopStart(quint32 val)
@@ -274,11 +270,7 @@ void VoiceParam::setFineTune(qint16 val)
 
 double VoiceParam::getDouble(AttributeType type)
 {
-    if (_parameters[type])
-        return _parameters[type]->getRealValue();
-
-    qWarning() << "VoiceParam: type" << type << "-" << Attribute::getDescription(type, false) << "not found";
-    return 0.0;
+    return _parameters[type].getRealValue();
 }
 
 qint32 VoiceParam::getInteger(AttributeType type)
@@ -288,11 +280,7 @@ qint32 VoiceParam::getInteger(AttributeType type)
     // * if wPreset is required, it will be stored in a special variable
     if (type == champ_wPreset)
         return _wPresetNumber;
-    if (_parameters[type])
-        return (type == champ_fineTune ? _sampleFineTune : 0) + _parameters[type]->getIntValue();
-
-    qWarning() << "VoiceParam: type" << type << "-" << Attribute::getDescription(type, false) << "not found";
-    return 0;
+    return (type == champ_fineTune ? _sampleFineTune : 0) + _parameters[type].getIntValue();
 }
 
 quint32 VoiceParam::getPosition(AttributeType type)
@@ -302,8 +290,8 @@ quint32 VoiceParam::getPosition(AttributeType type)
     switch (type)
     {
     case champ_dwStart16: { // Used here for computing the beginning
-        qint32 offset = _parameters[champ_startAddrsOffset]->getIntValue() +
-                32768 * _parameters[champ_startAddrsCoarseOffset]->getIntValue();
+        qint32 offset = _parameters[champ_startAddrsOffset].getIntValue() +
+                32768 * _parameters[champ_startAddrsCoarseOffset].getIntValue();
         if (offset < 0)
             result = 0;
         else
@@ -315,8 +303,8 @@ quint32 VoiceParam::getPosition(AttributeType type)
         }
     } break;
     case champ_dwLength: {
-        qint32 offset = _parameters[champ_endAddrsOffset]->getIntValue() +
-                32768 * _parameters[champ_endAddrsCoarseOffset]->getIntValue();
+        qint32 offset = _parameters[champ_endAddrsOffset].getIntValue() +
+                32768 * _parameters[champ_endAddrsCoarseOffset].getIntValue();
         if (_sampleLength + offset < 0)
             result = 0;
         else if (offset > 0)
@@ -325,8 +313,8 @@ quint32 VoiceParam::getPosition(AttributeType type)
             result = static_cast<quint32>(_sampleLength + offset);
     } break;
     case champ_dwStartLoop: {
-        qint32 offset = _parameters[champ_startloopAddrsOffset]->getIntValue() +
-                32768 * _parameters[champ_startloopAddrsCoarseOffset]->getIntValue();
+        qint32 offset = _parameters[champ_startloopAddrsOffset].getIntValue() +
+                32768 * _parameters[champ_startloopAddrsCoarseOffset].getIntValue();
         if (_sampleLoopStart + offset < 0)
             result = 0;
         else
@@ -338,8 +326,8 @@ quint32 VoiceParam::getPosition(AttributeType type)
         }
     } break;
     case champ_dwEndLoop: {
-        qint32 offset = _parameters[champ_endloopAddrsOffset]->getIntValue() +
-                32768 * _parameters[champ_endloopAddrsCoarseOffset]->getIntValue();
+        qint32 offset = _parameters[champ_endloopAddrsOffset].getIntValue() +
+                32768 * _parameters[champ_endloopAddrsCoarseOffset].getIntValue();
         if (_sampleLoopEnd + offset < 0)
             result = 0;
         else
@@ -360,9 +348,8 @@ quint32 VoiceParam::getPosition(AttributeType type)
 void VoiceParam::computeModulations()
 {
     // First clear all modulations
-    for (int i = 0; i < 140; i++)
-        if (_parameters[i])
-            _parameters[i]->clearModulations();
+    for (int i = 0; i < champ_endOper; i++)
+        _parameters[i].clearModulations();
 
     // Process modulators
     _modulatorGroupInst.process();

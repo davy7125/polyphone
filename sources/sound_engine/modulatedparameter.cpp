@@ -25,18 +25,22 @@
 #include "modulatedparameter.h"
 #include "utils.h"
 
-ModulatedParameter::ModulatedParameter(AttributeType type) :
-    _type(type),
-    _instValue(type, false),
-    _prstValue(type, true),
-    _instModulation(0),
-    _prstModulation(0),
+ModulatedParameter::ModulatedParameter() :
+    _type(champ_unknown),
     _computed(false)
 {
-    // Some parameters are computed only once
-    _notRealTime = (_type == champ_keynum || _type == champ_velocity || _type == champ_sampleModes ||
-                    _type == champ_scaleTuning || _type == champ_exclusiveClass || _type == champ_overridingRootKey ||
-                    _type == champ_keyRange || _type == champ_velRange);
+}
+
+void ModulatedParameter::setType(AttributeType type)
+{
+  _type = type;
+  _instValue.setType(type, false);
+  _prstValue.setType(type, true);
+
+  // Some parameters are computed only once
+  _notRealTime = (_type == champ_keynum || _type == champ_velocity || _type == champ_sampleModes ||
+                  _type == champ_scaleTuning || _type == champ_exclusiveClass || _type == champ_overridingRootKey ||
+                  _type == champ_keyRange || _type == champ_velRange);
 }
 
 void ModulatedParameter::initValue(AttributeValue value, bool isPrst)

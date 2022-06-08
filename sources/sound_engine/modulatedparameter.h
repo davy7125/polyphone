@@ -30,8 +30,10 @@
 class ModulatedParameter
 {
 public:
+    ModulatedParameter();
+
     // Initialize a modulated parameter
-    ModulatedParameter(AttributeType type);
+    void setType(AttributeType type);
 
     // Set the values from the instrument or preset level
     void initValue(AttributeValue value, bool isPrst);
