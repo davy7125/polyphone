@@ -56,7 +56,7 @@ SampleReaderSf2::SampleReaderResult SampleReaderSf2::getData(QFile &fi, QVector<
 
     // Load the smpl part of an sf2
     fi.seek(_info->dwStart);
-    qint16 * data = new qint16[_info->dwLength];
+    quint16 * data = new quint16[_info->dwLength];
     qint64 nb = fi.read((char *)data, _info->dwLength * 2);
     if (nb == -1)
     {
@@ -70,12 +70,12 @@ SampleReaderSf2::SampleReaderResult SampleReaderSf2::getData(QFile &fi, QVector<
     }
 
     // Possibly load the sm24 part of an sf2
-    char * data24 = new char[_info->dwLength];
+    unsigned char * data24 = new unsigned char[_info->dwLength];
     if (_info->wBpsFile >= 24 && _info->dwLength > 0)
     {
         // Copy data
         fi.seek(_info->dwStart2);
-        qint64 nb = fi.read(data24, _info->dwLength);
+        qint64 nb = fi.read((char *)data24, _info->dwLength);
         if (nb == -1)
         {
             delete [] data24;
@@ -91,8 +91,15 @@ SampleReaderSf2::SampleReaderResult SampleReaderSf2::getData(QFile &fi, QVector<
         memset(data24, 0, _info->dwLength);
 
     // Convert to float between -1 and 1
+    int tmp;
+    float coeff = 1.0f / (0.5f + 0x7FFFFF);
     for (quint32 i = 0; i < _info->dwLength; i++)
-       fData[i] = (0.5f + (data[i] << 8) + data24[i]) / (0.5f + 0x7FFFFF);
+    {
+        tmp = (data[i] << 8) | data24[i];
+        if (tmp & 0x800000)
+            tmp |= ~0xffffff;
+        fData[i] = (0.5f + tmp) * coeff;
+    }
 
     return FILE_OK;
 }

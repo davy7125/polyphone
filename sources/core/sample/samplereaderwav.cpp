@@ -242,12 +242,17 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getData(QFile &fi, QVector<
         {
             unsigned int bytePerValue = _info->wBpsFile / 8;
             unsigned int shift = bytePerValue - 3;
+            float coeff = 1.0f / (0.5 + 0x7fffff);
+            const unsigned char * dataSource = reinterpret_cast<const unsigned char *>(data.constData());
+            int tmp;
             for (quint32 i = 0; i < _info->dwLength; i++)
             {
-                const char * dataSource = data.constData();
-                fData[i] = (0.5f + (dataSource[(_info->wChannels * i + _info->wChannel) * bytePerValue + shift + 2] << 16) +
-                           (dataSource[(_info->wChannels * i + _info->wChannel) * bytePerValue + shift + 1] << 8) +
-                           dataSource[(_info->wChannels * i + _info->wChannel) * bytePerValue + shift]) / (0.5f + 0x7fffff);
+                tmp = dataSource[(_info->wChannels * i + _info->wChannel) * bytePerValue + shift + 2];
+                tmp = (tmp << 8) | dataSource[(_info->wChannels * i + _info->wChannel) * bytePerValue + shift + 1];
+                tmp = (tmp << 8) | dataSource[(_info->wChannels * i + _info->wChannel) * bytePerValue + shift];
+                if (tmp & 0x800000)
+                    tmp |= ~0xffffff;
+                fData[i] = (0.5f + tmp) * coeff;
             }
         }
     }
