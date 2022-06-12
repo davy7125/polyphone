@@ -74,8 +74,8 @@ public:
         Index(0)
     {}
 
-    bool operator==(const SFModulator& other);
-    quint16 toWord();
+    bool operator==(const SFModulator& other) const;
+    quint16 toWord() const;
 
     // Apply a shape, input being from 0 and 127 and output being from 0 or -1 to 1
     static void prepareConversionTables(); // Call it once before applyShape(..)
@@ -110,10 +110,9 @@ public:
         index(0)
     {}
 
-    // Load a default modulator
-    static int MODULATOR_VEL_TO_FILTER_TYPE; // Modified by confmanager
-    static quint16 defaultModulatorNumber();
-    void loadDefaultModulator(quint16 num);
+    // Default modulators
+    static void setModulatorVelToFilterType(int type); // Modified by confmanager
+    static ModulatorData * getDefaultModulators(int &number);
 
     SFModulator srcOper;
     quint16 destOper; // One of the AttributeType if < 32768, otherwise the index of another modulator
@@ -125,7 +124,7 @@ public:
     // Get the range of the output values, allowing a normalization
     void getRange(qint16 &min, qint16 &max);
 
-    bool operator== (ModulatorData &other)
+    bool operator== (const ModulatorData &other) const
     {
         // Everything equal except "amount" and "index"
         return srcOper.toWord() == other.srcOper.toWord() &&
@@ -133,6 +132,12 @@ public:
                 transOper == other.transOper &&
                 destOper == other.destOper;
     }
-} ;
+
+private:
+    void loadDefaultModulator(quint16 num);
+
+    static int s_modulatorVelToFilterType;
+    static ModulatorData s_defaultMods[10];
+};
 
 #endif // MODULATORDATA_H

@@ -39,7 +39,7 @@ public:
     void initialize(int channel, int initialKey, int keyForComputation, int velForComputation);
 
     // Load modulators from the instrument or preset level
-    void loadModulators(QList<ModulatorData> &modulators);
+    void loadModulators(const ModulatorData * const modData , int modulatorNumber);
 
     // Compute the modulations and apply them on the parameters
     void process();

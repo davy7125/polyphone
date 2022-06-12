@@ -31,9 +31,10 @@ double SFModulator::s_convexTable[128];
 // 0 => version 2.01
 // 1 => version 2.04 (default)
 // 2 => deactivated
-int ModulatorData::MODULATOR_VEL_TO_FILTER_TYPE = 1;
+int ModulatorData::s_modulatorVelToFilterType = 1;
+ModulatorData ModulatorData::s_defaultMods[10];
 
-bool SFModulator::operator==(const SFModulator& other)
+bool SFModulator::operator==(const SFModulator& other) const
 {
     return this->Type == other.Type &&
             this->isBipolar == other.isBipolar &&
@@ -42,7 +43,7 @@ bool SFModulator::operator==(const SFModulator& other)
             this->Index == other.Index;
 }
 
-quint16 SFModulator::toWord()
+quint16 SFModulator::toWord() const
 {
     //    quint16
     //        Type  : 6, // 6 bits for the type
@@ -166,9 +167,19 @@ double SFModulator::applyShape(double value)
     return value;
 }
 
-quint16 ModulatorData::defaultModulatorNumber()
+void ModulatorData::setModulatorVelToFilterType(int type)
 {
-    return MODULATOR_VEL_TO_FILTER_TYPE == 2 ? 9 : 10;
+    s_modulatorVelToFilterType = type;
+
+    // Prepare the list of default modulators
+    for (int i = 0; i < 10; i++)
+        s_defaultMods[i].loadDefaultModulator(i);
+}
+
+ModulatorData * ModulatorData::getDefaultModulators(int &number)
+{
+    number = (s_modulatorVelToFilterType == 2 ? 9 : 10);
+    return s_defaultMods;
 }
 
 void ModulatorData::loadDefaultModulator(quint16 num)
@@ -177,7 +188,7 @@ void ModulatorData::loadDefaultModulator(quint16 num)
     this->transOper = SFTransform::linear;
     this->index = 65535; // Max so that it has no interaction with possible links
 
-    if (MODULATOR_VEL_TO_FILTER_TYPE == 2 && num >= 1)
+    if (s_modulatorVelToFilterType == 2 && num >= 1)
         num++; // Skip the velocity to filter cutoff
 
     switch (num)
@@ -192,7 +203,7 @@ void ModulatorData::loadDefaultModulator(quint16 num)
     case 1:
         // 2. MIDI Note-On Velocity to Filter Cutoff
         this->srcOper = SFModulator(GC_noteOnVelocity, typeLinear, true, false);
-        this->amtSrcOper = MODULATOR_VEL_TO_FILTER_TYPE == 0 ? SFModulator(GC_noteOnVelocity, typeSwitch, true, false) : SFModulator();
+        this->amtSrcOper = s_modulatorVelToFilterType == 0 ? SFModulator(GC_noteOnVelocity, typeSwitch, true, false) : SFModulator();
         this->amount = -2400;
         this->destOper = champ_initialFilterFc;
         break;

@@ -187,27 +187,33 @@ void VoiceParam::readDivisionModulators(Division * globalDivision, Division * di
 {
     // Load global modulators
     QVector<Modulator *> modulators = globalDivision->getMods().values();
-    QList<ModulatorData> list;
-    foreach (Modulator * mod, modulators)
-        if (!mod->isHidden())
-            list << mod->_data;
-
     if (isPrst)
-        _modulatorGroupPrst.loadModulators(list);
+    {
+        foreach (Modulator * mod, modulators)
+            if (!mod->isHidden())
+                _modulatorGroupPrst.loadModulators(&mod->_data, 1);
+    }
     else
-        _modulatorGroupInst.loadModulators(list);
+    {
+        foreach (Modulator * mod, modulators)
+            if (!mod->isHidden())
+                _modulatorGroupInst.loadModulators(&mod->_data, 1);
+    }
 
     // Load division modulators
     modulators = division->getMods().values();
-    list.clear();
-    foreach (Modulator * mod, modulators)
-        if (!mod->isHidden())
-            list << mod->_data;
-
     if (isPrst)
-        _modulatorGroupPrst.loadModulators(list);
+    {
+        foreach (Modulator * mod, modulators)
+            if (!mod->isHidden())
+                _modulatorGroupPrst.loadModulators(&mod->_data, 1);
+    }
     else
-        _modulatorGroupInst.loadModulators(list);
+    {
+        foreach (Modulator * mod, modulators)
+            if (!mod->isHidden())
+                _modulatorGroupInst.loadModulators(&mod->_data, 1);
+    }
 }
 
 void VoiceParam::prepareForSmpl(int key, SFSampleLink link)

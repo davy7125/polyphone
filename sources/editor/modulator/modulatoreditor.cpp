@@ -277,10 +277,8 @@ void ModulatorEditor::updateInterface(QList<AttributeType> attributes, bool keep
 void ModulatorEditor::checkOverrides()
 {
     // List of default mods
-    quint16 defModCount = ModulatorData::defaultModulatorNumber();
-    QVector<ModulatorData> defaultMods(defModCount);
-    for (quint16 i = 0; i < defModCount; i++)
-        defaultMods[i].loadDefaultModulator(i);
+    int defModCount;
+    const ModulatorData * defaultMods = ModulatorData::getDefaultModulators(defModCount);
 
     // Browse all cells
     QList<ModulatorCell*> cells;
@@ -290,12 +288,12 @@ void ModulatorEditor::checkOverrides()
         // Get the mod
         QListWidgetItem * item = ui->listWidget->item(i);
         ModulatorCell * cell = dynamic_cast<ModulatorCell *>(ui->listWidget->itemWidget(item));
-        ModulatorData mod = cell->getModulatorData();
+        const ModulatorData mod = cell->getModulatorData();
 
         // Test if previous mods are overridden
         for (int j = mods.count() - 1; j >= 0; j--)
         {
-            if (mods[j] == mod)
+            if (mods.at(j) == mod)
             {
                 cells[j]->setOverwrittenBy(i);
                 break;

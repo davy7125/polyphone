@@ -43,7 +43,7 @@ ParameterModulator::ParameterModulator(const ModulatorData &modData, bool isPrst
     _velForComputation(velForComputation)
 {}
 
-bool ParameterModulator::merge(ModulatorData &modData)
+bool ParameterModulator::merge(const ModulatorData &modData)
 {
     if (modData.srcOper == _data.srcOper && modData.destOper == _data.destOper &&
             modData.amtSrcOper == _data.amtSrcOper && modData.transOper == _data.transOper)

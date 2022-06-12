@@ -89,7 +89,7 @@ ConfManager::ConfManager(): QObject(),
     }
 
     // Special initialization here (for more speed when reading modulator_vel_to_filter)
-    ModulatorData::MODULATOR_VEL_TO_FILTER_TYPE = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", 1).toInt();
+    ModulatorData::setModulatorVelToFilterType(this->getValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", 1).toInt());
 }
 
 QVariant ConfManager::getValue(Section section, QString key, QVariant defaultValue) const
@@ -121,7 +121,7 @@ void ConfManager::setValue(Section section, QString key, QVariant value)
     case Section::SECTION_SOUND_ENGINE:
         emit(soundEngineConfigurationChanged());
         if (key == "modulator_vel_to_filter")
-            ModulatorData::MODULATOR_VEL_TO_FILTER_TYPE = value.toInt();
+            ModulatorData::setModulatorVelToFilterType(value.toInt());
         break;
     case Section::SECTION_AUDIO:
         if (key != "stereo_playback")

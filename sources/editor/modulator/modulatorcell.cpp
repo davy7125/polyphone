@@ -81,7 +81,7 @@ ModulatorCell::ModulatorCell(EltID id, QWidget *parent) :
     onOutputChanged(-1);
 }
 
-ModulatorCell::ModulatorCell(ModulatorData modulatorData, QWidget * parent) :
+ModulatorCell::ModulatorCell(const ModulatorData &modulatorData, int index, QWidget * parent) :
     QWidget(parent),
     ui(new Ui::ModulatorCell),
     _isSelected(false),
@@ -96,7 +96,7 @@ ModulatorCell::ModulatorCell(ModulatorData modulatorData, QWidget * parent) :
     this->initializeStyle();
 
     // Load data
-    ui->labelModNumber->setText(tr("Default mod.") + "<br/>#" + QString::number(modulatorData.index + 1));
+    ui->labelModNumber->setText(tr("Default mod.") + "<br/>#" + QString::number(index + 1));
     ui->labelDetails->hide();
     ui->spinAmount->setValue(modulatorData.amount);
     ui->comboSource1->initialize(modulatorData.srcOper);

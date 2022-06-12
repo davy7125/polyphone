@@ -35,7 +35,7 @@ public:
     ParameterModulator(const ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation);
 
     // Try to merge an existing modulator with another one, return true if success
-    bool merge(ModulatorData &modData);
+    bool merge(const ModulatorData &modData);
 
     // Get info about the modulator
     quint16 getOuputType() { return _data.destOper; }

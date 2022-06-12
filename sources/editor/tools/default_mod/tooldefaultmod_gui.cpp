@@ -47,15 +47,12 @@ void ToolDefaultMod_gui::updateInterface(AbstractToolParameters * parameters, Id
 
     // Fill the list with all default modulators
     ui->listWidget->clear();
-    quint16 count = ModulatorData::defaultModulatorNumber();
-    ModulatorData modData;
-    for (quint16 i = 0; i < count; i++)
+    int number;
+    const ModulatorData * const modData = ModulatorData::getDefaultModulators(number);
+    for (quint16 i = 0; i < number; i++)
     {
-        modData.loadDefaultModulator(i);
-        modData.index = i;
-
         // Add a new cell
-        ModulatorCell * cell = new ModulatorCell(modData);
+        ModulatorCell * cell = new ModulatorCell(modData[i], i);
         QListWidgetItem * item = new QListWidgetItem();
         item->setSizeHint(cell->size());
         ui->listWidget->addItem(item);

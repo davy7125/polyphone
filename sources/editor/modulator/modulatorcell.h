@@ -43,7 +43,7 @@ public:
     ModulatorCell(EltID id, QWidget *parent = nullptr);
 
     // Initialization based on a default modulator
-    ModulatorCell(ModulatorData modulatorData, QWidget * parent = nullptr);
+    ModulatorCell(const ModulatorData &modulatorData, int index, QWidget * parent = nullptr);
 
     ~ModulatorCell() override;
 
