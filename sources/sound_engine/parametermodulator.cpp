@@ -167,7 +167,7 @@ double ParameterModulator::getValue(SFModulator sfMod)
             break;
         case GC_polypressure:
             // After touch by key
-            value = ContextManager::midi()->getPolyPressure(_channel, _initialKey);
+            value = (_initialKey >= 0 ? ContextManager::midi()->getPolyPressure(_channel, _initialKey) : 0);
             break;
         case GC_channelPressure:
             // After touch for the whole keyboard

@@ -46,9 +46,9 @@ int jackProcess(jack_nframes_t nframes, void * arg)
     if (instance->_output_port_R && instance->_output_port_L)
     {
         // Stéréo
-        float * out1 = (float *)jack_port_get_buffer(instance->_output_port_R, nframes);
-        float * out2 = (float *)jack_port_get_buffer(instance->_output_port_L, nframes);
-        instance->_synth->readData(out1, out2, nframes);
+        float * outL = (float *)jack_port_get_buffer(instance->_output_port_L, nframes);
+        float * outR = (float *)jack_port_get_buffer(instance->_output_port_R, nframes);
+        instance->_synth->readData(outL, outR, nframes);
     }
     return 0;
 }
@@ -70,7 +70,7 @@ int standardProcess(const void* inputBuffer, void* outputBuffer,
 
     // Envoi de données
     if (instance->_format.channelCount() == 2)
-        instance->_synth->readData(outputs[1], outputs[0], framesPerBuffer);
+        instance->_synth->readData(outputs[0], outputs[1], framesPerBuffer);
 
     return 0;
 }

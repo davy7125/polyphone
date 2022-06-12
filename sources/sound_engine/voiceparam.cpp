@@ -45,10 +45,10 @@ VoiceParam::VoiceParam(Division * prstGlobalDiv, Division * prstDiv, Division * 
     // Read sample properties and specify the default key / vel
     readSmpl(smpl);
     AttributeValue value;
-    if (key < 0)
+    if (_key < 0)
         value.wValue = static_cast<quint16>(_parameters[champ_overridingRootKey].getIntValue());
     else
-        value.wValue = static_cast<quint16>(key);
+        value.wValue = static_cast<quint16>(_key);
     _parameters[champ_keynum].initValue(value, false);
     if (vel < 0)
         value.wValue = 127;
@@ -67,8 +67,8 @@ VoiceParam::VoiceParam(Division * prstGlobalDiv, Division * prstDiv, Division * 
     // Initialize the modulator groups
     int keyForComputation = _parameters[champ_keynum].getIntValue();
     int velForComputation = _parameters[champ_velocity].getIntValue();
-    _modulatorGroupInst.initialize(channel, key, keyForComputation, velForComputation);
-    _modulatorGroupPrst.initialize(channel, key, keyForComputation, velForComputation);
+    _modulatorGroupInst.initialize(_channel, _key, keyForComputation, velForComputation);
+    _modulatorGroupPrst.initialize(_channel, _key, keyForComputation, velForComputation);
 
     // Load modulators from the instrument and preset levels, if possible
     if (instDiv)

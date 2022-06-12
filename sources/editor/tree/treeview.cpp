@@ -844,7 +844,7 @@ void TreeView::dropEvent(QDropEvent *event)
                 QString extension = path.split(".").last().toLower();
                 if (extension == "wav" || extension == "flac" || extension == "ogg")
                 {
-                    path = Utils::FixFilePath(path);
+                    path = Utils::fixFilePath(path);
                     smplList << sl.load(path, _sf2Index, &replace);
                 }
             }

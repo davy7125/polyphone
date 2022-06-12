@@ -160,7 +160,7 @@ void WidgetShowHistory::dropEvent(QDropEvent *event)
             if (!path.isEmpty())
             {
                 // Fix path
-                path = Utils::FixFilePath(path);
+                path = Utils::fixFilePath(path);
                 openFile(path);
             }
         }

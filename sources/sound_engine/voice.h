@@ -103,7 +103,7 @@ private:
 
     // Save state for resampling
     float _lastFraction;
-    qint32 _valPrec3, _valPrec2, _valPrec1;
+    float _valPrec3, _valPrec2, _valPrec1;
     float _firstVal[3];
 
     // Save state for low pass filter

@@ -84,23 +84,27 @@ Voice::Voice(QVector<float> baData, quint32 smplRate, quint32 audioSmplRate, Voi
     _arrayLength(0)
 {
     // Resampling initialization
-    takeData(_firstVal, 3);
+    memset(_firstVal, 0, 3 * sizeof(float));
 
+    // Array initialization
     _srcDataLength = 512;
     _srcData = new float[_srcDataLength + 6];
-    memset(_srcData, 0, _srcDataLength * sizeof(float));
+
+    _arrayLength = 512;
+    _dataModArray = new float[_arrayLength];
+    _modLfoArray = new float[_arrayLength];
+    _vibLfoArray = new float[_arrayLength];
+    _modFreqArray = new float[_arrayLength];
+    _pointDistanceArray = new quint32[_arrayLength + 1];
 }
 
 Voice::~Voice()
 {
-    if (_arrayLength != 0)
-    {
-        delete [] _dataModArray;
-        delete [] _modLfoArray;
-        delete [] _vibLfoArray;
-        delete [] _modFreqArray;
-        delete [] _pointDistanceArray;
-    }
+    delete [] _dataModArray;
+    delete [] _modLfoArray;
+    delete [] _vibLfoArray;
+    delete [] _modFreqArray;
+    delete [] _pointDistanceArray;
     delete [] _srcData;
     delete _voiceParam;
 }
@@ -139,7 +143,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 
     bool endSample = false;
 
-    // Prepare arrays
+    // Possible increase the length of arrays
     if (len > _arrayLength)
     {
         if (_arrayLength != 0)
@@ -154,7 +158,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         _modLfoArray = new float[len];
         _vibLfoArray = new float[len];
         _modFreqArray = new float[len];
-        _pointDistanceArray = new quint32[len+1];
+        _pointDistanceArray = new quint32[len + 1];
 
         _arrayLength = len;
     }
@@ -266,8 +270,8 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     //// APPLY PAN AND CHORUS ////
 
     double pan = (v_pan + 50) * M_PI / 200.; // Between 0 and PI/2
-    double coefL = sin(pan);
-    double coefR = cos(pan);
+    float coefL = cos(pan);
+    float coefR = sin(pan);
     if (_chorusLevel > 0)
     {
         _chorus.setEffectMix(0.005 * _chorusLevel * 0.01 * v_chorusEffect);

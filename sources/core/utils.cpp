@@ -332,7 +332,7 @@ qint32 Utils::round32(double value)
     return static_cast<qint32>(value > 0 ? (value + 0.5) : (value - 0.5));
 }
 
-QString Utils::FixFilePath(QString filePath)
+QString Utils::fixFilePath(QString filePath)
 {
     filePath = filePath.replace('\\', '/');
     if (filePath.left(7).compare("file://") == 0)

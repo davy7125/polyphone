@@ -54,7 +54,7 @@ public:
     static qint16 round16(double value);
     static qint32 round32(double value);
 
-    static QString FixFilePath(QString filePath);
+    static QString fixFilePath(QString filePath);
 
 private:
     static int getNumberPart(const QString &str, int &length);

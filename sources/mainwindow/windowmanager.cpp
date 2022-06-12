@@ -114,7 +114,7 @@ void WindowManager::openNewSoundfont()
 
 void WindowManager::openSoundfont(QString fileName)
 {
-    fileName = Utils::FixFilePath(fileName);
+    fileName = Utils::fixFilePath(fileName);
 
     // Extension supported?
     if (!InputFactory::isSuffixSupported(QFileInfo(fileName).suffix()))

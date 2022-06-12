@@ -29,6 +29,8 @@ ModulatedParameter::ModulatedParameter() :
     _type(champ_unknown),
     _computed(false)
 {
+    clearModulations();
+    _computedValue.dwValue = 0;
 }
 
 void ModulatedParameter::setType(AttributeType type)
