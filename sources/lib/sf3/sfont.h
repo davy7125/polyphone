@@ -251,11 +251,6 @@ class SoundFont
     bool writeCSample(Sample*, int);
     bool write();
 
-    bool checkInstrument(QList<int> pnums, QList<Preset*> presets, int instrIdx);
-    bool checkInstrument(QList<Preset*> presets, int instrIdx);
-    bool checkSample(QList<int> pnums, QList<Preset*> presets, QList<Instrument*> instruments, int sampleIdx);
-    bool checkSample(QList<Preset*> presets, QList<Instrument*> instruments, int sampleIdx);
-
     VorbisData _vorbisData;
 
 public:
@@ -264,9 +259,6 @@ public:
     bool read();
     bool compress(QFile* f, double oggQuality, qint64 oggSerial = rand());
     bool uncompress(QFile* f);
-    bool writeCode(QList<int>);
-    bool writeCode();
-    void dumpPresets();
 };
 }
 #endif
