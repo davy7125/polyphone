@@ -78,11 +78,13 @@ SampleReaderSf2::SampleReaderResult SampleReaderSf2::getData(QFile &fi, QVector<
         qint64 nb = fi.read((char *)data24, _info->dwLength);
         if (nb == -1)
         {
+            delete [] data;
             delete [] data24;
             return FILE_NOT_READABLE;
         }
         if (nb != _info->dwLength)
         {
+            delete [] data;
             delete [] data24;
             return FILE_CORRUPT;
         }
@@ -101,5 +103,7 @@ SampleReaderSf2::SampleReaderResult SampleReaderSf2::getData(QFile &fi, QVector<
         fData[i] = (0.5f + tmp) * coeff;
     }
 
+    delete [] data;
+    delete [] data24;
     return FILE_OK;
 }
