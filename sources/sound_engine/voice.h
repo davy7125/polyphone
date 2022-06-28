@@ -102,9 +102,7 @@ private:
     bool _isRunning;
 
     // Save state for resampling
-    float _lastFraction;
-    float _valPrec3, _valPrec2, _valPrec1;
-    float _firstVal[3];
+    float _firstVal[6];
 
     // Save state for low pass filter
     float _x1, _x2, _y1, _y2;

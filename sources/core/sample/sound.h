@@ -49,7 +49,7 @@ public:
     void set(AttributeType champ, AttributeValue value);
     void setFileName(QString qStr, bool tryFindRootKey = true);
     void setData(QVector<float> data);
-    void setRam(bool ram);
+    void loadInRam();
 
 private:
     QString _fileName;

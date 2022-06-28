@@ -76,15 +76,11 @@ Voice::Voice(QVector<float> baData, quint32 smplRate, quint32 audioSmplRate, Voi
     _delayEnd(10),
     _isFinished(false),
     _isRunning(false),
-    _lastFraction(0),
-    _valPrec3(0),
-    _valPrec2(0),
-    _valPrec1(0),
     _x1(0), _x2(0), _y1(0), _y2(0),
     _arrayLength(0)
 {
     // Resampling initialization
-    memset(_firstVal, 0, 3 * sizeof(float));
+    memset(_firstVal, 0, 6 * sizeof(float));
 
     // Array initialization
     _srcDataLength = 512;
@@ -96,6 +92,7 @@ Voice::Voice(QVector<float> baData, quint32 smplRate, quint32 audioSmplRate, Voi
     _vibLfoArray = new float[_arrayLength];
     _modFreqArray = new float[_arrayLength];
     _pointDistanceArray = new quint32[_arrayLength + 1];
+    _pointDistanceArray[0] = 0;
 }
 
 Voice::~Voice()
@@ -111,6 +108,9 @@ Voice::~Voice()
 
 void Voice::generateData(float *dataL, float *dataR, quint32 len)
 {
+    memset(dataL, 0, len * sizeof(float));
+    memset(dataR, 0, len * sizeof(float));
+
     // Get voice current parameters
     _mutexParam.lock();
     _voiceParam->computeModulations();
@@ -146,19 +146,20 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     // Possible increase the length of arrays
     if (len > _arrayLength)
     {
-        if (_arrayLength != 0)
-        {
-            delete [] _dataModArray;
-            delete [] _modLfoArray;
-            delete [] _vibLfoArray;
-            delete [] _modFreqArray;
-            delete [] _pointDistanceArray;
-        }
+        unsigned int tmp = _pointDistanceArray[0];
+
+        delete [] _dataModArray;
+        delete [] _modLfoArray;
+        delete [] _vibLfoArray;
+        delete [] _modFreqArray;
+        delete [] _pointDistanceArray;
+
         _dataModArray = new float[len];
         _modLfoArray = new float[len];
         _vibLfoArray = new float[len];
         _modFreqArray = new float[len];
         _pointDistanceArray = new quint32[len + 1];
+        _pointDistanceArray[0] = tmp;
 
         _arrayLength = len;
     }
@@ -173,42 +174,30 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     // Pitch modulation
     float temperamentFineTune = _voiceParam->getKey() < 0 ? 0.0f : (s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
                                                   s_temperament[(21 - s_temperamentRelativeKey) % 12]); // Correction so that the tuning fork is accurate
-    float deltaPitchFixed = -12.f * qLn(static_cast<double>(_audioSmplRate) / _smplRate * 440.f / s_tuningFork) / 0.69314718056f +
-            (playedNote - v_rootkey) * 0.01f * v_scaleTune + 0.01f * (temperamentFineTune + v_fineTune) + v_coarseTune;
+    float deltaPitchFixed = -1200.f * qLn(static_cast<double>(_audioSmplRate) / _smplRate * 440.f / s_tuningFork) / 0.69314718056f +
+            (playedNote - v_rootkey) * v_scaleTune + (temperamentFineTune + v_fineTune) + 100.0f * v_coarseTune;
 
     // Compute the distance of each point
-    _pointDistanceArray[0] = static_cast<quint32>(_lastFraction + 0.5f);
     float currentDeltaPitch;
     for (quint32 i = 0; i < len; i++)
     {
-        currentDeltaPitch = deltaPitchFixed + 0.01f * (
-                    _dataModArray[i] * v_modEnvToPitch + _modLfoArray[i] * v_modLfoToPitch + _vibLfoArray[i] * v_vibLfoToPitch);
-        _lastFraction += EnveloppeVol::fastPow2(currentDeltaPitch / 12.f + 8.0f /* multiply by 256, which is 2^8 */);
-        _pointDistanceArray[i + 1] = static_cast<quint32>(_lastFraction + 0.5f);
+        currentDeltaPitch = deltaPitchFixed + _dataModArray[i] * v_modEnvToPitch + _modLfoArray[i] * v_modLfoToPitch + _vibLfoArray[i] * v_vibLfoToPitch;
+        _pointDistanceArray[i + 1] = _pointDistanceArray[i] +
+                static_cast<int>(0.5f + EnveloppeVol::fastPow2(currentDeltaPitch * 0.000833333f /* 1:1200 */ + 8.0f /* multiply by 256, which is 2^8 */));
     }
-    _lastFraction = (_pointDistanceArray[len] & 0xFF) ? static_cast<float>(_pointDistanceArray[len] & 0xFF) : 256.0f;
 
     // Resample data
-    quint32 nbDataTmp = (_pointDistanceArray[len] >> 8) - ((_pointDistanceArray[len] & 0xFF) ? 0 : 1);
+    quint32 nbDataTmp = (_pointDistanceArray[len] >> 8);
     if (nbDataTmp > _srcDataLength)
     {
         delete [] _srcData;
         _srcData = new float[nbDataTmp + 6];
         _srcDataLength = nbDataTmp;
     }
-    _srcData[0] = _valPrec3;
-    _srcData[1] = _valPrec2;
-    _srcData[2] = _valPrec1;
-    _srcData[3] = _firstVal[0];
-    _srcData[4] = _firstVal[1];
-    _srcData[5] = _firstVal[2];
+
+    memcpy(_srcData, _firstVal, 6 * sizeof(float));
     endSample = takeData(&_srcData[6], nbDataTmp);
-    _valPrec3 = _srcData[nbDataTmp];
-    _valPrec2 = _srcData[nbDataTmp + 1];
-    _valPrec1 = _srcData[nbDataTmp + 2];
-    _firstVal[0] = _srcData[nbDataTmp + 3];
-    _firstVal[1] = _srcData[nbDataTmp + 4];
-    _firstVal[2] = _srcData[nbDataTmp + 5];
+    memcpy(_firstVal, &_srcData[nbDataTmp], 6 * sizeof(float));
 
     float * coeffs;
     quint32 currentPos;
@@ -225,6 +214,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
                 coeffs[5] * _srcData[currentPos + 5] +
                 coeffs[6] * _srcData[currentPos + 6];
     }
+    _pointDistanceArray[0] = (_pointDistanceArray[len] & 0xFF);
 
     // Low-pass filter
     for (quint32 i = 0; i < len; i++)

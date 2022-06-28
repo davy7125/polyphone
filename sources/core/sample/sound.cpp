@@ -232,18 +232,10 @@ void Sound::set(AttributeType champ, AttributeValue value)
     }
 }
 
-void Sound::setRam(bool ram)
+void Sound::loadInRam()
 {
-    if (ram)
-    {
-        if (_smpl.isEmpty())
-            _smpl = this->getData();
-    }
-    else
-    {
-        // Clear data
-        _smpl.clear();
-    }
+    if (_smpl.isEmpty())
+        _smpl = this->getData();
 }
 
 void Sound::determineRootKey()
