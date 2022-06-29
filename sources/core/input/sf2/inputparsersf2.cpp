@@ -255,8 +255,11 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
             }
             for (int k = genmin; k < genmax; k++)
             {
-                value.wValue = pdtaPart._igens[k]._genAmount.value;
-                _sm->set(id2, (AttributeType)pdtaPart._igens[k]._sfGenOper.value, value);
+                if (pdtaPart._igens[k]._sfGenOper.value < champ_endOper)
+                {
+                    value.wValue = pdtaPart._igens[k]._genAmount.value;
+                    _sm->set(id2, (AttributeType)pdtaPart._igens[k]._sfGenOper.value, value);
+                }
             }
 
             // Modulators
@@ -359,8 +362,11 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
             }
             for (int k = genmin; k < genmax; k++)
             {
-                value.wValue = pdtaPart._pgens[k]._genAmount.value;
-                _sm->set(id2, (AttributeType)pdtaPart._pgens[k]._sfGenOper.value, value);
+                if (pdtaPart._pgens[k]._sfGenOper.value < champ_endOper)
+                {
+                    value.wValue = pdtaPart._pgens[k]._genAmount.value;
+                    _sm->set(id2, (AttributeType)pdtaPart._pgens[k]._sfGenOper.value, value);
+                }
             }
 
             // Modulators

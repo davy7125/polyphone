@@ -114,8 +114,9 @@ int KeyNameManager::getKeyNum(QString keyName, bool forceC4)
             .replace("♯", "#")
             .replace("♭", "b")
             .toLower();
-    int note = qRound(keyName.toDouble());
-    if (note == 0 && keyName != "0" && keyName.size() >= 2)
+    bool isDouble;
+    int note = qRound(keyName.toDouble(&isDouble));
+    if (!isDouble && keyName.size() >= 2)
     {
         // Separate the keyname from the octave number
         int split = keyName.indexOf("-");
@@ -177,5 +178,5 @@ int KeyNameManager::getKeyNum(QString keyName, bool forceC4)
         else if ((_nameMiddleC == MIDDLE_C_C5_WITH_FLATS || _nameMiddleC == MIDDLE_C_C5_WITH_SHARPS) && !forceC4)
             note -= 12;
     }
-    return note;
+    return (note > 127 || note < -1) ? -1 : note;
 }

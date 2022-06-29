@@ -54,7 +54,7 @@ Division::~Division()
 
 bool Division::isSet(AttributeType champ)
 {
-    return _attributeSet[champ];
+    return champ < champ_endOper && _attributeSet[champ];
 }
 
 AttributeValue Division::getGen(AttributeType champ)
@@ -69,15 +69,19 @@ AttributeValue Division::getGen(AttributeType champ)
 
 void Division::setGen(AttributeType champ, AttributeValue value)
 {
-    _attributeSet[champ] = true;
-    _attributeValues[champ] = value;
-    if (champ == champ_sampleID || champ == champ_instrument)
-        notifyUpdate();
+    if (champ < champ_endOper)
+    {
+        _attributeSet[champ] = true;
+        _attributeValues[champ] = value;
+        if (champ == champ_sampleID || champ == champ_instrument)
+            notifyUpdate();
+    }
 }
 
 void Division::resetGen(AttributeType champ)
 {
-    _attributeSet[champ] = false;
+    if (champ < champ_endOper)
+        _attributeSet[champ] = false;
 }
 
 int Division::addMod()

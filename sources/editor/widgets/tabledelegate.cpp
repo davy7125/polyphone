@@ -153,7 +153,8 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
     else if (isKey)
     {
         SpinBoxKey * spin = dynamic_cast<SpinBoxKey *>(editor);
-        spin->setValue(index.data().isNull() ? 60 : ContextManager::keyName()->getKeyNum(index.data().toString()));
+        int keyNumber = ContextManager::keyName()->getKeyNum(index.data().toString());
+        spin->setValue(index.data().isNull() ? 60 : keyNumber < 0 ? 0 : keyNumber);
     }
     else if (nbDecimales > 0)
     {

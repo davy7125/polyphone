@@ -80,6 +80,8 @@ private:
     QTimer *_timer;
     QList<QColor> _listColors;
     TableDelegate * _tableDelegate;
+    bool isInstrumentLevel();
+    bool isGrayed(int numRow);
 
     void copy();
     void paste();

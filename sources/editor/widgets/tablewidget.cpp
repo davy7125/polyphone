@@ -217,25 +217,48 @@ void TableWidget::commitData(QWidget *editor)
 
     foreach (isr, selectionModel()->selection())
     {
-        for (int rows = isr.top(); rows <= isr.bottom(); rows++)
+        for (int row = isr.top(); row <= isr.bottom(); row++)
         {
-            for (int cols = isr.left(); cols <= isr.right(); cols++)
+            for (int col = isr.left(); col <= isr.right(); col++)
             {
-                if (!(curRow == rows && curCol == cols))
+                if (!(curRow == row && curCol == col))
                 {
-                    const QModelIndex idx = this->model()->index(rows, cols);
+                    const QModelIndex idx = this->model()->index(row, col);
 
-                    if (this->rowCount() == 50 && curRow == 5)
+                    if (this->isInstrumentLevel())
                     {
-                        // Copy the data in DecorationRole and UserRole
-                        model()->setData(idx, model()->data(currentIndex(), Qt::DecorationRole), Qt::DecorationRole);
-                        model()->setData(idx, model()->data(currentIndex(), Qt::UserRole), Qt::UserRole);
+                        // Copy the data but not in grayed columns
+                        if (!this->isGrayed(row))
+                        {
+                            if (curRow == 5)
+                            {
+                                if (row == 5)
+                                {
+                                    // Copy the data in DecorationRole and UserRole
+                                    model()->setData(idx, model()->data(currentIndex(), Qt::DecorationRole), Qt::DecorationRole);
+                                    model()->setData(idx, model()->data(currentIndex(), Qt::UserRole), Qt::UserRole);
+                                }
+                                else
+                                {
+                                    // Copy from the loop combobox to a regular cell => do nothing
+                                }
+                            }
+                            else
+                            {
+                                if (row == 5)
+                                {
+                                    // Copy to a regular cell to the loop combobox => do nothing
+                                }
+                                else
+                                {
+                                    model()->setData(idx, value, Qt::EditRole);
+                                }
+                            }
+
+                        }
                     }
                     else
-                    {
-                        // Copy the data in EditRole
-                        model()->setData(idx, value, Qt::EditRole);
-                    }
+                        model()->setData(idx, value, Qt::EditRole); // simple case
                 }
             }
         }
@@ -392,26 +415,34 @@ void TableWidget::paste()
     if (minRow < 1)
         minRow = 1;
 
+    int currentRow, currentCol;
     for (int indRow = 0; indRow < cellrows; indRow++)
     {
+        currentRow = indRow + minRow;
         for (int indCol = 0; indCol < cellcols; indCol++)
         {
-            const QModelIndex idx = this->model()->index(indRow + minRow, indCol + minCol);
+            currentCol = indCol + minCol;
+            const QModelIndex idx = this->model()->index(currentRow, currentCol);
             QString text = cells.takeFirst();
             if (text != "?")
             {
                 if (text == "!")
                     text = "";
 
-                if (this->rowCount() == 50 && indRow + minRow == 5)
+                if (this->isInstrumentLevel())
                 {
-                    bool ok;
-                    int val = text.toInt(&ok);
-                    if (ok && (val == -1 || val == 0 || val == 1 || val == 3))
-                        setLoopModeImage(indRow + minRow, indCol + minCol, val);
+                    if (currentRow == 5)
+                    {
+                        bool ok;
+                        int val = text.toInt(&ok);
+                        if (ok && (val == -1 || val == 0 || val == 1 || val == 3))
+                            setLoopModeImage(currentRow, currentCol, val);
+                    }
+                    else if (!isGrayed(currentRow))
+                        model()->setData(idx, text, Qt::EditRole);
                 }
                 else
-                    model()->setData(idx, text, Qt::EditRole);
+                    model()->setData(idx, text, Qt::EditRole); // Simple case
             }
         }
     }
@@ -514,4 +545,16 @@ void TableWidget::selectCells(EltID id, QList<AttributeType> attributes)
         }
     }
     this->blockSignals(false);
+}
+
+bool TableWidget::isInstrumentLevel()
+{
+    // Not nice...
+    return (this->rowCount() == 50);
+}
+
+bool TableWidget::isGrayed(int numRow)
+{
+    // Not nice...
+    return numRow == 6 || numRow == 44 || numRow == 47;
 }

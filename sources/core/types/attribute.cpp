@@ -593,8 +593,8 @@ AttributeValue Attribute::fromString(AttributeType champ, bool isPrst, QString s
     }break;
     case champ_overridingRootKey: case champ_keynum: {
         int keyNum = ContextManager::keyName()->getKeyNum(strValue);
-        ok = (keyNum >= -1 && keyNum <= 127);
-        value.shValue = static_cast<qint16>(keyNum);
+        ok = (keyNum > -1 && keyNum <= 127);
+        value.shValue = ok ? static_cast<qint16>(keyNum) : 0;
     }break;
     default:
         ok = false;

@@ -554,7 +554,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
 
     // Modification d'un élément du tableau
     AttributeType champ = _table->getChamp(ligne);
-    if (champ == champ_unknown)
+    if (champ == champ_unknown || champ >= champ_endOper)
         return;
 
     EltID id = _table->getID(colonne);
