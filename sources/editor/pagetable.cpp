@@ -509,7 +509,8 @@ void PageTable::setOffset(int ligne, int colonne, AttributeType champ1, Attribut
         int iVal = limit(32768 * genAmount2.shValue + genAmount.shValue, champ1, id);
         genAmount2.shValue = static_cast<qint16>(iVal / 32768);
         genAmount.shValue = static_cast<qint16>(iVal % 32768);
-        if (genAmount.shValue != _sf2->get(id, champ1).shValue ||
+        if (!_sf2->isSet(id, champ1) || !_sf2->isSet(id, champ2) ||
+                genAmount.shValue != _sf2->get(id, champ1).shValue ||
                 genAmount2.shValue != _sf2->get(id, champ2).shValue)
         {
             // Modification du sf2
