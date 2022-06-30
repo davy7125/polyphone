@@ -30,7 +30,9 @@
 class EnveloppeVol
 {
 public:
-    EnveloppeVol(quint32 sampleRate, bool isMod);
+    EnveloppeVol() {}
+
+    void initialize(quint32 sampleRate, bool isMod);
 
     // Apply an envelop on data
     // Return true if the end of the release is reached

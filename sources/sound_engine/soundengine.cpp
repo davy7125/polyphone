@@ -24,6 +24,7 @@
 ***************************************************************************/
 
 #include "soundengine.h"
+#include "division.h"
 #include <QThread>
 
 SoundEngine ** SoundEngine::_listInstances = nullptr;
@@ -31,12 +32,10 @@ int SoundEngine::_instanceCount = 0;
 int SoundEngine::_gainSmpl = 0;
 bool SoundEngine::_isStereo = false;
 bool SoundEngine::_isLoopEnabled = true;
-const int SoundEngine::MAX_NUMBER_OF_VOICES = 256;
 
 SoundEngine::SoundEngine(QSemaphore * semRunning, quint32 bufferSize) : QObject(),
     _interrupted(0),
     _semRunning(semRunning),
-    _voices(new Voice * [MAX_NUMBER_OF_VOICES]),
     _numberOfVoices(0)
 {
     _dataL = new float [4 * bufferSize];
@@ -45,6 +44,12 @@ SoundEngine::SoundEngine(QSemaphore * semRunning, quint32 bufferSize) : QObject(
     _dataRevR = new float [4 * bufferSize];
     _dataTmpL = new float [4 * bufferSize];
     _dataTmpR = new float [4 * bufferSize];
+
+    for (int i = 0; i < MAX_NUMBER_OF_VOICES; i++)
+    {
+        _voices[i] = new Voice();
+        connect(_voices[i], SIGNAL(currentPosChanged(quint32)), this, SIGNAL(currentPosChanged(quint32)));
+    }
 }
 
 SoundEngine::~SoundEngine()
@@ -55,10 +60,12 @@ SoundEngine::~SoundEngine()
     delete [] _dataRevR;
     delete [] _dataTmpL;
     delete [] _dataTmpR;
-    delete [] _voices;
+
+    for (int i = 0; i < MAX_NUMBER_OF_VOICES; i++)
+        delete _voices[i];
 }
 
-void SoundEngine::addVoice(Voice ** voicesToAdd, int numberOfVoicesToAdd)
+void SoundEngine::addVoices(VoiceInitializer * voiceInitializers, int numberOfVoicesToAdd)
 {
     // Find the less busy SoundEngine
     int index = -1;
@@ -75,34 +82,59 @@ void SoundEngine::addVoice(Voice ** voicesToAdd, int numberOfVoicesToAdd)
     bool sampleLevelIncluded = false;
     for (int i = 0; i < numberOfVoicesToAdd; ++i)
     {
-        if (voicesToAdd[i]->getKey() > 0)
+        if (voiceInitializers[i].key > 0)
         {
+            int presetNumber = (voiceInitializers[i].prst != nullptr ? voiceInitializers[i].prst->getExtraField(champ_wPreset) : -1);
+
             // Exclusive class: possibly stop voices
-            if (voicesToAdd[i]->getExclusiveClass() > 0)
-                closeAll(voicesToAdd[i]->getChannel(), voicesToAdd[i]->getExclusiveClass(), voicesToAdd[i]->getPresetNumber());
+            int exclusiveClass = 0;
+            if (voiceInitializers[i].inst != nullptr && voiceInitializers[i].inst->getGlobalDivision()->isSet(champ_exclusiveClass))
+                exclusiveClass = voiceInitializers[i].inst->getGlobalDivision()->getGen(champ_exclusiveClass).wValue;
+            if (voiceInitializers[i].instDiv != nullptr && voiceInitializers[i].instDiv->isSet(champ_exclusiveClass))
+                exclusiveClass = voiceInitializers[i].instDiv->getGen(champ_exclusiveClass).wValue;
+            if (exclusiveClass > 0)
+                closeAll(voiceInitializers[i].channel, exclusiveClass, presetNumber);
         }
         else
         {
             sampleLevelIncluded = true;
-            voicesToAdd[i]->setLoopMode(_isLoopEnabled);
+            voiceInitializers[i].loopEnabled = _isLoopEnabled;
         }
     }
 
     // Add the voices
-    _listInstances[index]->addVoiceInstance(voicesToAdd, numberOfVoicesToAdd);
+    _listInstances[index]->addVoicesInstance(voiceInitializers, numberOfVoicesToAdd);
     if (sampleLevelIncluded)
         _listInstances[index]->setStereoInstance(_isStereo);
 }
 
-void SoundEngine::addVoiceInstance(Voice ** voicesToAdd, int numberOfVoicesToAdd)
+void SoundEngine::addVoicesInstance(VoiceInitializer * voicesToAdd, int numberOfVoicesToAdd)
 {
     _mutexVoices.lock();
+    VoiceInitializer * voiceInitializer;
     for (int i = 0; i < numberOfVoicesToAdd; i++)
     {
         if (_numberOfVoices < MAX_NUMBER_OF_VOICES)
-            _voices[_numberOfVoices++] = voicesToAdd[i];
+        {
+            // Create a voice
+            voiceInitializer = &voicesToAdd[i];
+            _voices[_numberOfVoices]->initialize(voiceInitializer);
+
+            if (voiceInitializer->key < 0)
+            {
+                _voices[_numberOfVoices]->setChorus(0, 0, 0);
+                _voices[_numberOfVoices]->setLoopMode(voiceInitializer->loopEnabled ? 1 : 0);
+            }
+            else
+            {
+                _voices[_numberOfVoices]->setChorus(voiceInitializer->choLevel, voiceInitializer->choDepth, voiceInitializer->choFrequency);
+                _voices[_numberOfVoices]->setGain(voiceInitializer->gain);
+            }
+
+            _numberOfVoices++;
+        }
         else
-            delete voicesToAdd[i];
+            break;
     }
     _mutexVoices.unlock();
 }
@@ -124,8 +156,10 @@ void SoundEngine::stopAllVoicesInstance(bool allChannels)
             if (_voices[i]->getKey() == -1)
                 emit(readFinished(_voices[i]->getToken()));
 
-            delete _voices[i];
-            _voices[i] = _voices[--_numberOfVoices];
+            --_numberOfVoices;
+            Voice * voiceTmp = _voices[_numberOfVoices];
+            _voices[_numberOfVoices] = _voices[i];
+            _voices[i] = voiceTmp;
         }
     }
     _mutexVoices.unlock();
@@ -420,8 +454,10 @@ void SoundEngine::generateData()
             if (_voices[i]->getKey() == -1)
                 emit(readFinished(_voices[i]->getToken()));
 
-            delete _voices[i];
-            _voices[i] = _voices[--_numberOfVoices];
+            --_numberOfVoices;
+            Voice * voiceTmp = _voices[_numberOfVoices];
+            _voices[_numberOfVoices] = _voices[i];
+            _voices[i] = voiceTmp;
         }
     }
     _mutexVoices.unlock();

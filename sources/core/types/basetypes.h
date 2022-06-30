@@ -34,4 +34,16 @@
 
 #define DB_SF2_TO_SFZ 0.397
 
+// In synth.h
+#define MAX_NUMBER_OF_VOICES_TO_ADD 128
+
+// In soundengine.h
+#define MAX_NUMBER_OF_VOICES 256
+
+// In voice.h
+#define INITIAL_ARRAY_LENGTH 1024
+
+// In modulatorgroup.h
+#define MAX_NUMBER_OF_PARAMETER_MODULATORS 64
+
 #endif // BASETYPES_H

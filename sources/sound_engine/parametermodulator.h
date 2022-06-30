@@ -31,8 +31,10 @@ class ModulatedParameter;
 class ParameterModulator
 {
 public:
+    ParameterModulator() {}
+
     // Initialize a modulator
-    ParameterModulator(const ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation);
+    void initialize(const ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation);
 
     // Try to merge an existing modulator with another one, return true if success
     bool merge(const ModulatorData &modData);
@@ -46,7 +48,7 @@ public:
     void setOutput(ParameterModulator * modulator);
 
     // Initialize a computation
-    void initialize();
+    void initializeComputation();
 
     // Compute the output
     // Return true if OK

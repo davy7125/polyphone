@@ -26,14 +26,13 @@
 #define MODULATORGROUP_H
 
 #include "basetypes.h"
+#include "parametermodulator.h"
 class ModulatedParameter;
-class ParameterModulator;
 
 class ModulatorGroup
 {
 public:
     ModulatorGroup(ModulatedParameter * parameters, bool isPrst);
-    ~ModulatorGroup();
 
     // Initialize with keys and vel
     void initialize(int channel, int initialKey, int keyForComputation, int velForComputation);
@@ -50,9 +49,8 @@ private:
     ModulatedParameter * _parameters;
     bool _isPrst;
     int _channel, _initialKey, _keyForComputation, _velForComputation;
-    ParameterModulator ** _modulators;
+    ParameterModulator _modulators[MAX_NUMBER_OF_PARAMETER_MODULATORS];
     int _numberOfParameterModulators;
-    static const int MAX_NUMBER_OF_PARAMETER_MODULATORS;
 };
 
 #endif // MODULATORGROUP_H

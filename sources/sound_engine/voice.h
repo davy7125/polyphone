@@ -27,27 +27,54 @@
 
 #include <QMutex>
 #include "sound.h"
+#include "instprst.h"
 #include "enveloppevol.h"
 #include "osctriangle.h"
 #include "stk/Chorus.h"
 #include "stk/FreeVerb.h"
+
+class VoiceInitializer
+{
+public:
+    InstPrst * prst;
+    Division * prstDiv;
+    InstPrst * inst;
+    Division * instDiv;
+    Smpl * smpl;
+
+    int channel;
+    int key;
+    int vel;
+
+    int choLevel;
+    int choDepth;
+    int choFrequency;
+    float gain;
+
+    quint32 audioSmplRate;
+    int token;
+
+    bool loopEnabled;
+};
 
 class Voice : public QObject
 {
     Q_OBJECT
 
 public:
+    Voice();
+    ~Voice();
+
     // Initial key is:
     // * -1 when we use "play" for reading a sample
     // * -2 when we want to read the stereo part of a sample, with "play"
     // >= 0 otherwise (sample, instrument or preset level)
-    Voice(QVector<float> baData, quint32 smplRate, quint32 audioSmplRate, VoiceParam *voiceParam, int token);
-    ~Voice();
+    void initialize(VoiceInitializer * voiceInitializer);
 
-    int getChannel() { return _voiceParam->getChannel(); }
-    int getSf2Id() { return _voiceParam->getSf2Id(); }
-    int getPresetId() { return _voiceParam->getPresetId(); }
-    int getKey() { return _voiceParam->getKey(); }
+    int getChannel() { return _voiceParam.getChannel(); }
+    int getSf2Id() { return _voiceParam.getSf2Id(); }
+    int getPresetId() { return _voiceParam.getPresetId(); }
+    int getKey() { return _voiceParam.getKey(); }
     int getToken() { return _token; }
     void release(bool quick = false);
     void setGain(double gain);
@@ -90,7 +117,7 @@ private:
     QVector<float> _baData;
     quint32 _smplRate, _audioSmplRate;
     double _gain;
-    VoiceParam * _voiceParam;
+    VoiceParam _voiceParam;
     int _token;
 
     // Sample playback
@@ -114,14 +141,15 @@ private:
     QMutex _mutexParam;
 
     // Arrays
+    quint32 _arrayLength;
     float * _dataModArray;
     float * _modLfoArray;
     float * _vibLfoArray;
     float * _modFreqArray;
     quint32 * _pointDistanceArray;
-    quint32 _arrayLength;
-    float * _srcData;
+
     quint32 _srcDataLength;
+    float * _srcData;
 
     static volatile int s_tuningFork;
     static volatile float s_temperament[12]; // Fine tune in cents from each key from C to B

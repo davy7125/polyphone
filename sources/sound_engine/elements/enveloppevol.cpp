@@ -25,15 +25,14 @@
 #include "enveloppevol.h"
 #include "qmath.h"
 
-
-EnveloppeVol::EnveloppeVol(quint32 sampleRate, bool isMod) :
-    _currentSmpl(0),
-    _precValue(0),
-    _currentPhase(phase1delay),
-    _sampleRate(sampleRate),
-    _isMod(isMod),
-    _fastRelease(false)
+void EnveloppeVol::initialize(quint32 sampleRate, bool isMod)
 {
+    _currentSmpl = 0;
+    _precValue = 0.0f;
+    _currentPhase = phase1delay;
+    _sampleRate = sampleRate;
+    _isMod = isMod;
+    _fastRelease = false;
 }
 
 bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int note, float gain, VoiceParam * voiceParam)
@@ -90,7 +89,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
     quint32 timeDecay = static_cast<quint32>(v_timeDecay * fastPow2(v_noteToDecay * (60 - note)));
 
     // Avancement
-    bool fin = false;
+    bool end = false;
     quint32 avancement = 0;
     quint32 duration = 0;
     float lastValue = 0;
@@ -279,14 +278,14 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                 data[avancement + i] = 0;
 
             // End
-            fin = true;
+            end = true;
         }
 
         // We keep the last value and we go on
         _precValue = lastValue;
         avancement += duration;
     }
-    return fin;
+    return end;
 }
 
 void EnveloppeVol::quickRelease()

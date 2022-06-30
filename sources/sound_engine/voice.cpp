@@ -24,6 +24,7 @@
 
 #include "voice.h"
 #include "qmath.h"
+#include "smpl.h"
 
 volatile int Voice::s_tuningFork = 440;
 volatile float Voice::s_temperament[12] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
@@ -58,41 +59,18 @@ void Voice::prepareSincTable()
 }
 
 // Constructeur, destructeur
-Voice::Voice(QVector<float> baData, quint32 smplRate, quint32 audioSmplRate, VoiceParam * voiceParam, int token) : QObject(nullptr),
-    _modLFO(audioSmplRate),
-    _vibLFO(audioSmplRate),
-    _enveloppeVol(audioSmplRate, false),
-    _enveloppeMod(audioSmplRate, true),
-    _chorusLevel(0),
-    _baData(baData),
-    _smplRate(smplRate),
-    _audioSmplRate(audioSmplRate),
-    _gain(0),
-    _voiceParam(voiceParam),
-    _token(token),
-    _currentSmplPos(voiceParam->getPosition(champ_dwStart16)), // This value is read only once
-    _time(0),
-    _release(false),
-    _delayEnd(10),
-    _isFinished(false),
-    _isRunning(false),
-    _x1(0), _x2(0), _y1(0), _y2(0),
-    _arrayLength(0)
+Voice::Voice() : QObject(nullptr)
 {
-    // Resampling initialization
-    memset(_firstVal, 0, 6 * sizeof(float));
-
     // Array initialization
-    _srcDataLength = 512;
+    _srcDataLength = INITIAL_ARRAY_LENGTH;
     _srcData = new float[_srcDataLength + 6];
 
-    _arrayLength = 512;
+    _arrayLength = INITIAL_ARRAY_LENGTH;
     _dataModArray = new float[_arrayLength];
     _modLfoArray = new float[_arrayLength];
     _vibLfoArray = new float[_arrayLength];
     _modFreqArray = new float[_arrayLength];
     _pointDistanceArray = new quint32[_arrayLength + 1];
-    _pointDistanceArray[0] = 0;
 }
 
 Voice::~Voice()
@@ -103,7 +81,45 @@ Voice::~Voice()
     delete [] _modFreqArray;
     delete [] _pointDistanceArray;
     delete [] _srcData;
-    delete _voiceParam;
+}
+
+void Voice::initialize(VoiceInitializer * voiceInitializer)
+{
+    _voiceParam.initialize(voiceInitializer->prst,
+                           voiceInitializer->prstDiv,
+                           voiceInitializer->inst,
+                           voiceInitializer->instDiv,
+                           voiceInitializer->smpl,
+                           voiceInitializer->channel,
+                           voiceInitializer->key,
+                           voiceInitializer->vel);
+
+    _chorusLevel = 0;
+    _baData = voiceInitializer->smpl->_sound.getData();
+    _smplRate = voiceInitializer->smpl->_sound.getUInt32(champ_dwSampleRate);
+    _audioSmplRate = voiceInitializer->audioSmplRate;
+    _gain = 0;
+    _token = voiceInitializer->token;
+    _currentSmplPos = _voiceParam.getPosition(champ_dwStart16); // This value is read only once
+    _time = 0;
+    _release = false;
+    _delayEnd = 10;
+    _isFinished = false;
+    _isRunning = false;
+    _x1 = 0;
+    _x2 = 0;
+    _y1 = 0;
+    _y2 = 0;
+    _arrayLength = 0;
+
+    _modLFO.initialize(_audioSmplRate);
+    _vibLFO.initialize(_audioSmplRate);
+    _enveloppeVol.initialize(_audioSmplRate, false);
+    _enveloppeMod.initialize(_audioSmplRate, true);
+
+    // Resampling initialization
+    memset(_firstVal, 0, 6 * sizeof(float));
+    _pointDistanceArray[0] = 0;
 }
 
 void Voice::generateData(float *dataL, float *dataR, quint32 len)
@@ -113,33 +129,33 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 
     // Get voice current parameters
     _mutexParam.lock();
-    _voiceParam->computeModulations();
-    qint32 v_rootkey = _voiceParam->getInteger(champ_overridingRootKey);
-    qint32 playedNote = _voiceParam->getInteger(champ_keynum);
-    qint32 v_scaleTune = _voiceParam->getInteger(champ_scaleTuning);
-    qint32 v_fineTune = _voiceParam->getInteger(champ_fineTune);
-    qint32 v_coarseTune = _voiceParam->getInteger(champ_coarseTune);
+    _voiceParam.computeModulations();
+    qint32 v_rootkey = _voiceParam.getInteger(champ_overridingRootKey);
+    qint32 playedNote = _voiceParam.getInteger(champ_keynum);
+    qint32 v_scaleTune = _voiceParam.getInteger(champ_scaleTuning);
+    qint32 v_fineTune = _voiceParam.getInteger(champ_fineTune);
+    qint32 v_coarseTune = _voiceParam.getInteger(champ_coarseTune);
 
-    double v_modLfoFreq = _voiceParam->getDouble(champ_freqModLFO);
-    double v_modLfoDelay = _voiceParam->getDouble(champ_delayModLFO);
-    qint32 v_modLfoToPitch = _voiceParam->getInteger(champ_modLfoToPitch);
-    qint32 v_modLfoToFilterFreq = _voiceParam->getInteger(champ_modLfoToFilterFc);
-    double v_modLfoToVolume = _voiceParam->getDouble(champ_modLfoToVolume);
+    double v_modLfoFreq = _voiceParam.getDouble(champ_freqModLFO);
+    double v_modLfoDelay = _voiceParam.getDouble(champ_delayModLFO);
+    qint32 v_modLfoToPitch = _voiceParam.getInteger(champ_modLfoToPitch);
+    qint32 v_modLfoToFilterFreq = _voiceParam.getInteger(champ_modLfoToFilterFc);
+    double v_modLfoToVolume = _voiceParam.getDouble(champ_modLfoToVolume);
 
-    double v_vibLfoFreq = _voiceParam->getDouble(champ_freqVibLFO);
-    double v_vibLfoDelay = _voiceParam->getDouble(champ_delayVibLFO);
-    qint32 v_vibLfoToPitch = _voiceParam->getInteger(champ_vibLfoToPitch);
+    double v_vibLfoFreq = _voiceParam.getDouble(champ_freqVibLFO);
+    double v_vibLfoDelay = _voiceParam.getDouble(champ_delayVibLFO);
+    qint32 v_vibLfoToPitch = _voiceParam.getInteger(champ_vibLfoToPitch);
 
-    qint32 v_modEnvToPitch = _voiceParam->getInteger(champ_modEnvToPitch);
-    qint32 v_modEnvToFilterFc = _voiceParam->getInteger(champ_modEnvToFilterFc);
+    qint32 v_modEnvToPitch = _voiceParam.getInteger(champ_modEnvToPitch);
+    qint32 v_modEnvToFilterFc = _voiceParam.getInteger(champ_modEnvToFilterFc);
 
-    double v_filterQ = _voiceParam->getDouble(champ_initialFilterQ);
-    double v_filterFreq = _voiceParam->getDouble(champ_initialFilterFc);
-    qint32 v_loopMode = _voiceParam->getInteger(champ_sampleModes);
-    double v_pan = _voiceParam->getDouble(champ_pan);
-    double v_chorusEffect = _voiceParam->getDouble(champ_chorusEffectsSend);
+    double v_filterQ = _voiceParam.getDouble(champ_initialFilterQ);
+    double v_filterFreq = _voiceParam.getDouble(champ_initialFilterFc);
+    qint32 v_loopMode = _voiceParam.getInteger(champ_sampleModes);
+    double v_pan = _voiceParam.getDouble(champ_pan);
+    double v_chorusEffect = _voiceParam.getDouble(champ_chorusEffectsSend);
 
-    double v_attenuation = _voiceParam->getDouble(champ_initialAttenuation);
+    double v_attenuation = _voiceParam.getDouble(champ_initialAttenuation);
 
     bool endSample = false;
 
@@ -165,15 +181,15 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     }
 
     /// ENVELOPPE DE MODULATION ///
-    _enveloppeMod.applyEnveloppe(_dataModArray, len, _release, playedNote, 1.0f, _voiceParam);
+    _enveloppeMod.applyEnveloppe(_dataModArray, len, _release, playedNote, 1.0f, &_voiceParam);
 
     /// LFOs ///
     _modLFO.getData(_modLfoArray, len, static_cast<float>(v_modLfoFreq), v_modLfoDelay);
     _vibLFO.getData(_vibLfoArray, len, static_cast<float>(v_vibLfoFreq), v_vibLfoDelay);
 
     // Pitch modulation
-    float temperamentFineTune = _voiceParam->getKey() < 0 ? 0.0f : (s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
-                                                  s_temperament[(21 - s_temperamentRelativeKey) % 12]); // Correction so that the tuning fork is accurate
+    float temperamentFineTune = _voiceParam.getKey() < 0 ? 0.0f : (s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
+                                                            s_temperament[(21 - s_temperamentRelativeKey) % 12]); // Correction so that the tuning fork is accurate
     float deltaPitchFixed = -1200.f * qLn(static_cast<double>(_audioSmplRate) / _smplRate * 440.f / s_tuningFork) / 0.69314718056f +
             (playedNote - v_rootkey) * v_scaleTune + (temperamentFineTune + v_fineTune) + 100.0f * v_coarseTune;
 
@@ -220,7 +236,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     for (quint32 i = 0; i < len; i++)
     {
         _modFreqArray[i] = v_filterFreq *
-                    EnveloppeVol::fastPow2((_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) / 1200.f);
+                EnveloppeVol::fastPow2((_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) / 1200.f);
         if (_modFreqArray[i] > 20000.0f)
             _modFreqArray[i] = 20000.0f;
         else if (_modFreqArray[i] < 20.0f)
@@ -247,14 +263,15 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     // Apply the volume envelop
     bool bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release, playedNote,
                                               static_cast<float>(qPow(10, 0.05 * (_gain - v_attenuation))),
-                                              _voiceParam);
+                                              &_voiceParam);
 
     if ((bRet2 && v_loopMode != 3) || endSample)
     {
         _isFinished = true;
-        emit(currentPosChanged(0));
+        if (_voiceParam.getKey() == -1)
+            emit(currentPosChanged(0));
     }
-    else
+    else if (_voiceParam.getKey() == -1)
         emit(currentPosChanged(_currentSmplPos));
 
     //// APPLY PAN AND CHORUS ////
@@ -289,9 +306,9 @@ bool Voice::takeData(float * data, quint32 nbRead)
     bool endSample = false;
     const float * dataSmpl = _baData.constData();
 
-    int loopMode = _voiceParam->getInteger(champ_sampleModes);
-    quint32 loopStart = _voiceParam->getPosition(champ_dwStartLoop);
-    quint32 loopEnd = _voiceParam->getPosition(champ_dwEndLoop);
+    int loopMode = _voiceParam.getInteger(champ_sampleModes);
+    quint32 loopStart = _voiceParam.getPosition(champ_dwStartLoop);
+    quint32 loopEnd = _voiceParam.getPosition(champ_dwEndLoop);
 
     if ((loopMode == 1 || loopMode == 2 || (loopMode == 3 && !_release)) && loopStart < loopEnd)
     {
@@ -312,7 +329,7 @@ bool Voice::takeData(float * data, quint32 nbRead)
     else
     {
         // No loop
-        quint32 sampleEnd = _voiceParam->getPosition(champ_dwLength);
+        quint32 sampleEnd = _voiceParam.getPosition(champ_dwLength);
         if (_currentSmplPos > sampleEnd)
         {
             // No more data, fill with 0
@@ -424,7 +441,7 @@ void Voice::biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float
 double Voice::getPan()
 {
     _mutexParam.lock();
-    double val = _voiceParam->getDouble(champ_pan);
+    double val = _voiceParam.getDouble(champ_pan);
     _mutexParam.unlock();
     return val;
 }
@@ -432,7 +449,7 @@ double Voice::getPan()
 int Voice::getExclusiveClass()
 {
     _mutexParam.lock();
-    int val = _voiceParam->getInteger(champ_exclusiveClass);
+    int val = _voiceParam.getInteger(champ_exclusiveClass);
     _mutexParam.unlock();
     return val;
 }
@@ -440,7 +457,7 @@ int Voice::getExclusiveClass()
 int Voice::getPresetNumber()
 {
     _mutexParam.lock();
-    int val = _voiceParam->getInteger(champ_wPreset);
+    int val = _voiceParam.getInteger(champ_wPreset);
     _mutexParam.unlock();
     return val;
 }
@@ -448,7 +465,7 @@ int Voice::getPresetNumber()
 float Voice::getReverb()
 {
     _mutexParam.lock();
-    float val = static_cast<float>(_voiceParam->getDouble(champ_reverbEffectsSend));
+    float val = static_cast<float>(_voiceParam.getDouble(champ_reverbEffectsSend));
     _mutexParam.unlock();
     return val;
 }
@@ -456,34 +473,34 @@ float Voice::getReverb()
 void Voice::setPan(double val)
 {
     _mutexParam.lock();
-    _voiceParam->setPan(val);
+    _voiceParam.setPan(val);
     _mutexParam.unlock();
 }
 
 void Voice::setLoopMode(quint16 val)
 {
     _mutexParam.lock();
-    _voiceParam->setLoopMode(val);
+    _voiceParam.setLoopMode(val);
     _mutexParam.unlock();
 }
 
 void Voice::setLoopStart(quint32 val)
 {
     _mutexParam.lock();
-    _voiceParam->setLoopStart(val);
+    _voiceParam.setLoopStart(val);
     _mutexParam.unlock();
 }
 
 void Voice::setLoopEnd(quint32 val)
 {
     _mutexParam.lock();
-    _voiceParam->setLoopEnd(val);
+    _voiceParam.setLoopEnd(val);
     _mutexParam.unlock();
 }
 
 void Voice::setFineTune(qint16 val)
 {
     _mutexParam.lock();
-    _voiceParam->setFineTune(val);
+    _voiceParam.setFineTune(val);
     _mutexParam.unlock();
 }

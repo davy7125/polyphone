@@ -35,14 +35,12 @@
 #include "smpl.h"
 
 int Synth::s_sampleVoiceTokenCounter = 0;
-const int Synth::MAX_NUMBER_OF_VOICES_TO_ADD = 128;
 
 // Constructeur, destructeur
 Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _sf2(SoundfontManager::getInstance()),
     _soundEngines(nullptr),
     _soundEngineCount(0),
-    _voicesToAdd(new Voice * [MAX_NUMBER_OF_VOICES_TO_ADD]),
     _numberOfVoicesToAdd(0),
     _gain(0),
     _choLevel(0), _choDepth(0), _choFrequency(0),
@@ -60,7 +58,6 @@ Synth::Synth(ConfManager *configuration) : QObject(nullptr),
 Synth::~Synth()
 {
     destroySoundEnginesAndBuffers();
-    delete [] _voicesToAdd;
 }
 
 void Synth::destroySoundEnginesAndBuffers()
@@ -82,6 +79,7 @@ void Synth::destroySoundEnginesAndBuffers()
         delete thread;
     }
     delete [] _soundEngines;
+    _soundEngineCount = 0;
 
     delete [] _dataWav;
 }
@@ -91,12 +89,12 @@ void Synth::createSoundEnginesAndBuffers()
     _dataWav = new float[8 * _bufferSize];
 
     _soundEngineCount = qMax(QThread::idealThreadCount() - 2, 1);
-    _soundEngineCount = 3;
     _soundEngines = new SoundEngine * [_soundEngineCount];
     for (int i = 0; i < _soundEngineCount; i++)
     {
         SoundEngine * soundEngine = new SoundEngine(&_semRunningSoundEngines, _bufferSize);
         connect(soundEngine, SIGNAL(readFinished(int)), this, SIGNAL(readFinished(int)));
+        connect(soundEngine, SIGNAL(currentPosChanged(quint32)), this, SIGNAL(currentPosChanged(quint32)));
         soundEngine->moveToThread(new QThread());
         soundEngine->thread()->start(QThread::TimeCriticalPriority);
         QMetaObject::invokeMethod(soundEngine, "start");
@@ -155,7 +153,7 @@ int Synth::play(EltID id, int channel, int key, int velocity)
     }
 
     // Add all voices to the sound engines
-    SoundEngine::addVoice(_voicesToAdd, _numberOfVoicesToAdd);
+    SoundEngine::addVoices(_voiceInitializers, _numberOfVoicesToAdd);
 
     return playingToken;
 }
@@ -294,45 +292,29 @@ int Synth::playSmpl(Soundfont * soundfont, Smpl * smpl, int channel, int key, in
                     InstPrst * inst, Division * instDiv,
                     InstPrst * prst, Division * prstDiv)
 {
-    // Prepare the parameters for the voice
-    VoiceParam * voiceParam = new VoiceParam(prst != nullptr ? prst->getGlobalDivision() : nullptr, prstDiv,
-                                             inst != nullptr ? inst->getGlobalDivision() : nullptr, instDiv,
-                                             smpl, prst != nullptr ? prst->getId().indexElt : -1,
-                                             prst != nullptr ? prst->getExtraField(champ_wPreset) : -1,
-                                             channel, key, velocity);
-
-    if (key < 0) // Smpl area
-        voiceParam->prepareForSmpl(key, smpl->_sfSampleType);
-
-    // Create a voice
     int currentToken = s_sampleVoiceTokenCounter++;
-    Voice * voiceTmp = new Voice(smpl->_sound.getData(),
-                                 smpl->_sound.getUInt32(champ_dwSampleRate),
-                                 _format.sampleRate(), voiceParam, currentToken);
-
-    // Initialize chorus and gain
-    if (key < 0)
-        voiceTmp->setChorus(0, 0, 0);
-    else
-    {
-        voiceTmp->setChorus(_choLevel, _choDepth, _choFrequency);
-        voiceTmp->setGain(_gain);
-    }
-
-    // Store the voice in the list of voices to add
-    if (_numberOfVoicesToAdd < MAX_NUMBER_OF_VOICES_TO_ADD)
-        _voicesToAdd[_numberOfVoicesToAdd++] = voiceTmp;
-    else
-    {
-        delete voiceTmp;
+    if (_numberOfVoicesToAdd >= MAX_NUMBER_OF_VOICES_TO_ADD)
         return currentToken;
-    }
+
+    // Prepare the parameters for the voice
+    _voiceInitializers[_numberOfVoicesToAdd].prst = prst;
+    _voiceInitializers[_numberOfVoicesToAdd].prstDiv = prstDiv;
+    _voiceInitializers[_numberOfVoicesToAdd].inst = inst;
+    _voiceInitializers[_numberOfVoicesToAdd].instDiv = instDiv;
+    _voiceInitializers[_numberOfVoicesToAdd].smpl = smpl;
+    _voiceInitializers[_numberOfVoicesToAdd].channel = channel;
+    _voiceInitializers[_numberOfVoicesToAdd].key = key;
+    _voiceInitializers[_numberOfVoicesToAdd].vel = velocity;
+    _voiceInitializers[_numberOfVoicesToAdd].gain = (key < 0 ? 0 : _gain);
+    _voiceInitializers[_numberOfVoicesToAdd].choLevel = (key < 0 ? 0 : _choLevel);
+    _voiceInitializers[_numberOfVoicesToAdd].choDepth = (key < 0 ? 0 : _choDepth);
+    _voiceInitializers[_numberOfVoicesToAdd].choFrequency = (key < 0 ? 0 : _choFrequency);
+    _voiceInitializers[_numberOfVoicesToAdd].audioSmplRate = _format.sampleRate();
+    _voiceInitializers[_numberOfVoicesToAdd].token = currentToken;
+    _numberOfVoicesToAdd++;
 
     if (key == -1) // -2 is the linked sample
     {
-        // Position in the graphics
-        connect(voiceTmp, SIGNAL(currentPosChanged(quint32)), this, SIGNAL(currentPosChanged(quint32)));
-
         // Stereo link?
         if (smpl->_sfSampleType != monoSample && smpl->_sfSampleType != RomMonoSample)
         {

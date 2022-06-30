@@ -26,22 +26,22 @@
 #include "modulatedparameter.h"
 #include "contextmanager.h"
 
-ParameterModulator::ParameterModulator(const ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation) :
-    _data(modData),
-    _inputNumber(0),
-    _inputCount(0),
-    _minSum(0),
-    _maxSum(0),
-    _computed(false),
-    _inputSum(0),
-    _outputParameter(nullptr),
-    _outputModulator(nullptr),
-    _isPrst(isPrst),
-    _channel(channel),
-    _initialKey(initialKey),
-    _keyForComputation(keyForComputation),
-    _velForComputation(velForComputation)
-{}
+void ParameterModulator::initialize(const ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation)
+{
+    _data.srcOper = modData.srcOper;
+    _data.destOper = modData.destOper;
+    _data.amtSrcOper = modData.amtSrcOper;
+    _data.transOper = modData.transOper;
+    _data.amount = modData.amount;
+    _data.index = modData.index;
+
+    _inputNumber = 0;
+    _isPrst = isPrst;
+    _channel = channel;
+    _initialKey = initialKey;
+    _keyForComputation = keyForComputation;
+    _velForComputation = velForComputation;
+}
 
 bool ParameterModulator::merge(const ModulatorData &modData)
 {
@@ -60,16 +60,18 @@ bool ParameterModulator::merge(const ModulatorData &modData)
 
 void ParameterModulator::setOutput(ModulatedParameter * parameter)
 {
+    _outputModulator = nullptr;
     _outputParameter = parameter;
 }
 
 void ParameterModulator::setOutput(ParameterModulator * modulator)
 {
+    _outputParameter = nullptr;
     _outputModulator = modulator;
     _outputModulator->waitForAnInput();
 }
 
-void ParameterModulator::initialize()
+void ParameterModulator::initializeComputation()
 {
     _inputCount = 0;
     _inputSum = 0.0;

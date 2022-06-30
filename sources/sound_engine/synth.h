@@ -96,9 +96,8 @@ private:
     QSemaphore _semRunningSoundEngines;
     SoundEngine ** _soundEngines;
     int _soundEngineCount;
-    Voice ** _voicesToAdd;
+    VoiceInitializer _voiceInitializers[MAX_NUMBER_OF_VOICES_TO_ADD];
     int _numberOfVoicesToAdd;
-    static const int MAX_NUMBER_OF_VOICES_TO_ADD;
     static int s_sampleVoiceTokenCounter;
 
     // Audio format

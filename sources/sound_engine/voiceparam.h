@@ -30,26 +30,25 @@
 #include "modulatedparameter.h"
 class Division;
 class Smpl;
+class InstPrst;
 
 // Class gathering all parameters useful to create a sound
 // Parameters can evolve in real-time depending on the modulators
 class VoiceParam
 {
 public:
-    // Initialize a set of parameters (idPrstInst and idInstSmpl can be unknown)
-    VoiceParam(Division * prstGlobalDiv, Division * prstDiv, Division * instGlobalDiv, Division * instDiv,
-               Smpl * smpl, int presetId, int presetNumber, int channel, int key, int vel);
+    VoiceParam();
+    ~VoiceParam();
 
-    // Sample reading
-    void prepareForSmpl(int key, SFSampleLink link);
+    // Initialize a set of parameters (prst and inst can be unknown)
+    void initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv,
+                    Smpl * smpl, int channel, int key, int vel);
+
     void setPan(double val);
     void setLoopMode(quint16 val);
     void setLoopStart(quint32 val);
     void setLoopEnd(quint32 val);
     void setFineTune(qint16 val);
-
-    // Destructor
-    ~VoiceParam();
 
     // Update parameters before reading them (modulators)
     void computeModulations();
@@ -71,15 +70,16 @@ private:
     int _key;
     int _sf2Id;
     int _presetId;
+    qint32 _wPresetNumber;
 
     // All parameters
     ModulatedParameter _parameters[champ_endOper];
     ModulatorGroup _modulatorGroupInst, _modulatorGroupPrst;
     qint32 _sampleLength, _sampleLoopStart, _sampleLoopEnd, _sampleFineTune;
-    qint32 _wPresetNumber;
 
     // Initialization of the parameters
     void prepareParameters();
+    void prepareForSmpl(int key, SFSampleLink link);
     void readSmpl(Smpl * smpl);
     void readDivisionAttributes(Division * globalDivision, Division * division, bool isPrst);
     void readDivisionModulators(Division * globalDivision, Division * division, bool isPrst);

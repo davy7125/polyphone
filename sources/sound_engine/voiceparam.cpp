@@ -27,20 +27,34 @@
 #include "soundfontmanager.h"
 #include "division.h"
 #include "smpl.h"
+#include "instprst.h"
 #include "modulator.h"
 
-VoiceParam::VoiceParam(Division * prstGlobalDiv, Division * prstDiv, Division * instGlobalDiv, Division * instDiv,
-                       Smpl * smpl, int presetId, int presetNumber, int channel, int key, int vel) :
-    _channel(channel),
-    _key(key),
-    _sf2Id(smpl->getId().indexSf2),
-    _presetId(presetId),
+VoiceParam::VoiceParam() :
     _modulatorGroupInst(_parameters, false),
-    _modulatorGroupPrst(_parameters, true),
-    _wPresetNumber(presetNumber)
+    _modulatorGroupPrst(_parameters, true)
 {
     // Prepare the parameters (everything to default)
     prepareParameters();
+}
+
+VoiceParam::~VoiceParam()
+{
+
+}
+
+void VoiceParam::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv,
+                            Smpl * smpl, int channel, int key, int vel)
+{
+    _channel = channel;
+    _key = key;
+    _sf2Id = smpl->getId().indexSf2;
+    _presetId = (prst != nullptr ? prst->getId().indexElt : -1);
+    _wPresetNumber = (prst != nullptr ? prst->getExtraField(champ_wPreset) : -1);
+
+    // Reset the parameters
+    for (int i = 0; i < champ_endOper; i++)
+        _parameters[i].resetComputation();
 
     // Read sample properties and specify the default key / vel
     readSmpl(smpl);
@@ -57,10 +71,12 @@ VoiceParam::VoiceParam(Division * prstGlobalDiv, Division * prstDiv, Division * 
     _parameters[champ_velocity].initValue(value, false);
 
     // Possibly add the configuration of the instrument level
+    Division * instGlobalDiv = (inst != nullptr ? inst->getGlobalDivision() : nullptr);
     if (instDiv)
         readDivisionAttributes(instGlobalDiv, instDiv, false);
 
     // Possibly add the configuration of the preset level
+    Division * prstGlobalDiv = (prst != nullptr ? prst->getGlobalDivision() : nullptr);
     if (prstDiv)
         readDivisionAttributes(prstGlobalDiv, prstDiv, true);
 
@@ -75,11 +91,9 @@ VoiceParam::VoiceParam(Division * prstGlobalDiv, Division * prstDiv, Division * 
         readDivisionModulators(instGlobalDiv, instDiv, false);
     if (prstDiv)
         readDivisionModulators(prstGlobalDiv, prstDiv, true);
-}
 
-VoiceParam::~VoiceParam()
-{
-
+    if (key < 0) // Smpl area
+        this->prepareForSmpl(key, smpl->_sfSampleType);
 }
 
 void VoiceParam::prepareParameters()
@@ -172,15 +186,23 @@ void VoiceParam::readDivisionAttributes(Division * globalDivision, Division * di
     bool * attributeSet = globalDivision->getAttributeSet();
     AttributeValue * attributeValues = globalDivision->getAttributeValues();
     for (int i = 0; i < champ_endOper; i++)
+    {
+        if (i == champ_sampleModes)
+            i = champ_sampleModes;
         if (attributeSet[i])
             _parameters[i].initValue(attributeValues[i], isPrst);
+    }
 
     // Configure with the division attributes (possibly overriding it)
     attributeSet = division->getAttributeSet();
     attributeValues = division->getAttributeValues();
     for (int i = 0; i < champ_endOper; i++)
+    {
+        if (i == champ_sampleModes)
+            i = champ_sampleModes;
         if (attributeSet[i])
             _parameters[i].initValue(attributeValues[i], isPrst);
+    }
 }
 
 void VoiceParam::readDivisionModulators(Division * globalDivision, Division * division, bool isPrst)

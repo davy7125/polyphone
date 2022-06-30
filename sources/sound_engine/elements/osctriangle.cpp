@@ -25,13 +25,14 @@
 #include "osctriangle.h"
 #include "qmath.h"
 
-
-OscTriangle::OscTriangle(quint32 sampleRate) :
-    _sampleRate(sampleRate),
-    _previousFreq(-1),
-    _currentDelay(0),
-    _delayEnded(false)
+void OscTriangle::initialize(quint32 sampleRate)
 {
+    _sampleRate = sampleRate;
+    _previousFreq = -1.0f;
+    _currentDelay = 0;
+    _delayEnded = false;
+    _delta = 0.0f;
+    _previousPoint = 0.0f;
 }
 
 void OscTriangle::getData(float * data, quint32 len, float freq, double delay)

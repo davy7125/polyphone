@@ -27,21 +27,10 @@
 #include "modulatedparameter.h"
 #include "parametermodulator.h"
 
-const int ModulatorGroup::MAX_NUMBER_OF_PARAMETER_MODULATORS = 64;
-
 ModulatorGroup::ModulatorGroup(ModulatedParameter *parameters, bool isPrst) :
     _parameters(parameters),
-    _isPrst(isPrst),
-    _modulators(new ParameterModulator * [MAX_NUMBER_OF_PARAMETER_MODULATORS]),
-    _numberOfParameterModulators(0)
+    _isPrst(isPrst)
 {
-}
-
-ModulatorGroup::~ModulatorGroup()
-{
-    for (int i = 0; i < _numberOfParameterModulators; ++i)
-        delete _modulators[i];
-    delete [] _modulators;
 }
 
 void ModulatorGroup::initialize(int channel, int initialKey, int keyForComputation, int velForComputation)
@@ -52,6 +41,7 @@ void ModulatorGroup::initialize(int channel, int initialKey, int keyForComputati
     _velForComputation = velForComputation;
 
     // Load default modulators at the instrument level
+    _numberOfParameterModulators = 0;
     if (!_isPrst)
         loadDefaultModulators();
 }
@@ -74,7 +64,7 @@ void ModulatorGroup::loadModulators(const ModulatorData * const modData, int mod
         bool overwritten = false;
         for (int i = 0; i < _numberOfParameterModulators; ++i)
         {
-            if (_modulators[i]->merge(modData[i]))
+            if (_modulators[i].merge(modData[i]))
             {
                 overwritten = true;
                 break;
@@ -83,13 +73,13 @@ void ModulatorGroup::loadModulators(const ModulatorData * const modData, int mod
 
         // Or create another one
         if (!overwritten && _numberOfParameterModulators < MAX_NUMBER_OF_PARAMETER_MODULATORS)
-            _modulators[_numberOfParameterModulators++] = new ParameterModulator(modData[i], _isPrst, _channel, _initialKey, _keyForComputation, _velForComputation);
+            _modulators[_numberOfParameterModulators++].initialize(modData[i], _isPrst, _channel, _initialKey, _keyForComputation, _velForComputation);
     }
 
     // Link the outputs of the newly created modulators
     for (int i = existingModulatorNumber; i < _numberOfParameterModulators; ++i)
     {
-        ParameterModulator * modulator = _modulators[i];
+        ParameterModulator * modulator = &_modulators[i];
         quint16 output = modulator->getOuputType();
         if (output < 32768)
         {
@@ -102,7 +92,7 @@ void ModulatorGroup::loadModulators(const ModulatorData * const modData, int mod
             int indexToFind = output - 32768;
             for (int j = existingModulatorNumber; j < _numberOfParameterModulators; ++j)
             {
-                ParameterModulator * otherMod = _modulators[j];
+                ParameterModulator * otherMod = &_modulators[j];
                 if (i != j && otherMod->getIndex() == indexToFind)
                 {
                     modulator->setOutput(otherMod);
@@ -117,7 +107,7 @@ void ModulatorGroup::process()
 {
     // Initialize the modulator computation
     for (int i = 0; i < _numberOfParameterModulators; ++i)
-        _modulators[i]->initialize();
+        _modulators[i].initializeComputation();
 
     // Compute the output of the modulators, as long as everything has not been completed
     // or until a maximum is reached (in the case of a loop)
@@ -126,6 +116,6 @@ void ModulatorGroup::process()
     do {
         ok = true;
         for (int i = 0; i < _numberOfParameterModulators; ++i)
-            ok &= _modulators[i]->computeOutput();
+            ok &= _modulators[i].computeOutput();
     } while (!ok && count++ < _numberOfParameterModulators);
 }

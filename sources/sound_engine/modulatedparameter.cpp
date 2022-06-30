@@ -25,14 +25,6 @@
 #include "modulatedparameter.h"
 #include "utils.h"
 
-ModulatedParameter::ModulatedParameter() :
-    _type(champ_unknown),
-    _computed(false)
-{
-    clearModulations();
-    _computedValue.dwValue = 0;
-}
-
 void ModulatedParameter::setType(AttributeType type)
 {
   _type = type;
@@ -43,6 +35,13 @@ void ModulatedParameter::setType(AttributeType type)
   _notRealTime = (_type == champ_keynum || _type == champ_velocity || _type == champ_sampleModes ||
                   _type == champ_scaleTuning || _type == champ_exclusiveClass || _type == champ_overridingRootKey ||
                   _type == champ_keyRange || _type == champ_velRange);
+}
+
+void ModulatedParameter::resetComputation()
+{
+    _computed = false;
+    clearModulations();
+    _computedValue.dwValue = 0;
 }
 
 void ModulatedParameter::initValue(AttributeValue value, bool isPrst)

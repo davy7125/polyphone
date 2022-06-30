@@ -41,7 +41,7 @@ public:
         _instanceCount = count;
     }
 
-    static void addVoice(Voice **voicesToAdd, int numberOfVoicesToAdd);
+    static void addVoices(VoiceInitializer *voiceInitializers, int numberOfVoicesToAdd);
     static void stopAllVoices(bool allChannels);
 
     // sf2Id: -1 (no filter) or specific sf2 id
@@ -64,6 +64,7 @@ public:
     // Data generation
     void stop();
     void prepareData(quint32 len);
+    void generateData();
     void addRevData(float * dataL, float * dataR, quint32 len);
     void addNonRevData(float * dataL, float * dataR, quint32 len);
 
@@ -72,12 +73,13 @@ public slots:
 
 signals:
     void readFinished(int token);
+    void currentPosChanged(quint32 pos);
 
 private:
     static void closeAll(int channel, int exclusiveClass, int numPreset);
 
     void closeAllInstance(int channel, int exclusiveClass, int numPreset);
-    void addVoiceInstance(Voice ** voicesToAdd, int numberOfVoicesToAdd);
+    void addVoicesInstance(VoiceInitializer *voicesToAdd, int numberOfVoicesToAdd);
     void stopAllVoicesInstance(bool allChannels);
     void releaseVoicesInstance(int sf2Id, int presetId, int channel, int key);
     void setGainInstance(double gain);
@@ -88,14 +90,12 @@ private:
     void setLoopEnabledInstance(bool isEnabled);
     void setStereoInstance(bool isStereo);
     void setGainSampleInstance(int gain);
-    void generateData();
 
     QAtomicInt _interrupted;
     QSemaphore * _semRunning;
     QMutex _mutexVoices, _mutexSynchro;
-    Voice ** _voices;
+    Voice * _voices[MAX_NUMBER_OF_VOICES];
     int _numberOfVoices;
-    static const int MAX_NUMBER_OF_VOICES;
     float * _dataL, * _dataR, * _dataRevL, * _dataRevR;
     float * _dataTmpL, * _dataTmpR;
     volatile quint32 _lenToPrepare;
