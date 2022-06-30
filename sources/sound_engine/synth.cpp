@@ -62,22 +62,26 @@ Synth::~Synth()
 
 void Synth::destroySoundEnginesAndBuffers()
 {
+    if (_soundEngineCount == 0)
+        return;
+
     // Stop sound engines
-    for (int i = 0; i < _soundEngineCount; i++)
+    for (int i = 1; i < _soundEngineCount; i++)
         _soundEngines[i]->stop();
 
     // Stop threads
-    for (int i = 0; i < _soundEngineCount; i++)
+    for (int i = 1; i < _soundEngineCount; i++)
         _soundEngines[i]->thread()->quit();
 
     // Delete sound engines and threads
-    for (int i = 0; i < _soundEngineCount; i++)
+    for (int i = 1; i < _soundEngineCount; i++)
     {
         QThread * thread = _soundEngines[i]->thread();
         thread->wait(50);
         delete _soundEngines[i];
         delete thread;
     }
+    delete _soundEngines[0];
     delete [] _soundEngines;
     _soundEngineCount = 0;
 
@@ -90,14 +94,19 @@ void Synth::createSoundEnginesAndBuffers()
 
     _soundEngineCount = qMax(QThread::idealThreadCount() - 2, 1);
     _soundEngines = new SoundEngine * [_soundEngineCount];
+    //qWarning() << _soundEngineCount << "sound engines created";
+
     for (int i = 0; i < _soundEngineCount; i++)
     {
         SoundEngine * soundEngine = new SoundEngine(&_semRunningSoundEngines, _bufferSize);
         connect(soundEngine, SIGNAL(readFinished(int)), this, SIGNAL(readFinished(int)));
         connect(soundEngine, SIGNAL(currentPosChanged(quint32)), this, SIGNAL(currentPosChanged(quint32)));
-        soundEngine->moveToThread(new QThread());
-        soundEngine->thread()->start(QThread::TimeCriticalPriority);
-        QMetaObject::invokeMethod(soundEngine, "start");
+        if (i != 0) // The first one stays in the current thread
+        {
+            soundEngine->moveToThread(new QThread());
+            soundEngine->thread()->start(QThread::TimeCriticalPriority);
+            QMetaObject::invokeMethod(soundEngine, "start");
+        }
         _soundEngines[i] = soundEngine;
     }
     SoundEngine::setInstanceList(_soundEngines, _soundEngineCount);
@@ -560,11 +569,14 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
 {
     memset(dataL, 0, maxlen * sizeof(float));
     memset(dataR, 0, maxlen * sizeof(float));
+    if (_soundEngineCount == 0)
+        return;
 
     // Wake up the sound engines
-    for (int i = 0; i < _soundEngineCount; ++i)
+    for (int i = 1; i < _soundEngineCount; ++i)
         _soundEngines[i]->prepareData(maxlen);
-    _semRunningSoundEngines.acquire(_soundEngineCount);
+    _soundEngines[0]->generateData(maxlen);
+    _semRunningSoundEngines.acquire(_soundEngineCount - 1);
 
     // Get the reverberated part of the sound
     for (int i = 0; i < _soundEngineCount; i++)

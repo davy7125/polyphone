@@ -64,7 +64,7 @@ public:
     // Data generation
     void stop();
     void prepareData(quint32 len);
-    void generateData();
+    void generateData(quint32 len);
     void addRevData(float * dataL, float * dataR, quint32 len);
     void addNonRevData(float * dataL, float * dataR, quint32 len);
 

@@ -400,7 +400,7 @@ void SoundEngine::start()
         }
 
         // Generate data
-        generateData();
+        generateData(_lenToPrepare);
         _semRunning->release();
     }
 
@@ -421,25 +421,25 @@ void SoundEngine::prepareData(quint32 len)
     _mutexSynchro.unlock();
 }
 
-void SoundEngine::generateData()
+void SoundEngine::generateData(quint32 len)
 {
     // Initialize data
-    memset(_dataL, 0, _lenToPrepare * sizeof(float));
-    memset(_dataR, 0, _lenToPrepare * sizeof(float));
-    memset(_dataRevL, 0, _lenToPrepare * sizeof(float));
-    memset(_dataRevR, 0, _lenToPrepare * sizeof(float));
+    memset(_dataL, 0, len * sizeof(float));
+    memset(_dataR, 0, len * sizeof(float));
+    memset(_dataRevL, 0, len * sizeof(float));
+    memset(_dataRevR, 0, len * sizeof(float));
 
     _mutexVoices.lock();
 
     for (int i = _numberOfVoices - 1; i >= 0; i--)
     {
         // Get data
-        _voices[i]->generateData(_dataTmpL, _dataTmpR, _lenToPrepare);
+        _voices[i]->generateData(_dataTmpL, _dataTmpR, len);
         float coef1 = _voices[i]->getReverb() / 100.0f;
         float coef2 = 1.f - coef1;
 
         // Merge data
-        for (quint32 j = 0; j < _lenToPrepare; j++)
+        for (quint32 j = 0; j < len; j++)
         {
             _dataL   [j] += coef2 * _dataTmpL[j];
             _dataR   [j] += coef2 * _dataTmpR[j];
