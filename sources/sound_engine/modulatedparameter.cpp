@@ -28,8 +28,6 @@
 void ModulatedParameter::setType(AttributeType type)
 {
   _type = type;
-  _instValue.setType(type, false);
-  _prstValue.setType(type, true);
 
   // Some parameters are computed only once
   _notRealTime = (_type == champ_keynum || _type == champ_velocity || _type == champ_sampleModes ||
@@ -39,9 +37,16 @@ void ModulatedParameter::setType(AttributeType type)
 
 void ModulatedParameter::resetComputation()
 {
+    // Back to default value
+    _instValue.setType(_type, false);
+    _prstValue.setType(_type, true);
+
+    // Not computed yet
     _computed = false;
-    clearModulations();
     _computedValue.dwValue = 0;
+
+    // No modulation yet
+    clearModulations();
 }
 
 void ModulatedParameter::initValue(AttributeValue value, bool isPrst)
