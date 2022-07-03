@@ -137,9 +137,6 @@ private:
     bool takeData(float * data, quint32 nbRead);
     void biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float Q);
 
-    // Protect parameters
-    QMutex _mutexParam;
-
     // Arrays
     quint32 _arrayLength;
     float * _dataModArray;

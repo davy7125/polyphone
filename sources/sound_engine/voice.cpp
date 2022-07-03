@@ -128,7 +128,6 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     memset(dataR, 0, len * sizeof(float));
 
     // Get voice current parameters
-    _mutexParam.lock();
     _voiceParam.computeModulations();
     qint32 v_rootkey = _voiceParam.getInteger(champ_overridingRootKey);
     qint32 playedNote = _voiceParam.getInteger(champ_keynum);
@@ -297,8 +296,6 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
             dataL[i] *= coefL;
         }
     }
-
-    _mutexParam.unlock();
 }
 
 bool Voice::takeData(float * data, quint32 nbRead)
@@ -361,21 +358,17 @@ bool Voice::takeData(float * data, quint32 nbRead)
 
 void Voice::release(bool quick)
 {
-    _mutexParam.lock();
     if (quick)
     {
         // Stopped by an exclusive class => quick release
         _enveloppeVol.quickRelease();
     }
     _release = true;
-    _mutexParam.unlock();
 }
 
 void Voice::setGain(double gain)
 {
-    _mutexParam.lock();
     _gain = gain;
-    _mutexParam.unlock();
 }
 
 void Voice::setTuningFork(int tuningFork)
@@ -394,11 +387,9 @@ void Voice::setTemperament(float temperament[12], int relativeKey)
 
 void Voice::setChorus(int level, int depth, int frequency)
 {
-    _mutexParam.lock();
     _chorusLevel = level;
     _chorus.setModDepth(0.00025 * depth);
     _chorus.setModFrequency(0.06667 * frequency);
-    _mutexParam.unlock();
 }
 
 void Voice::biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float Q)
@@ -440,67 +431,49 @@ void Voice::biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float
 
 double Voice::getPan()
 {
-    _mutexParam.lock();
     double val = _voiceParam.getDouble(champ_pan);
-    _mutexParam.unlock();
     return val;
 }
 
 int Voice::getExclusiveClass()
 {
-    _mutexParam.lock();
     int val = _voiceParam.getInteger(champ_exclusiveClass);
-    _mutexParam.unlock();
     return val;
 }
 
 int Voice::getPresetNumber()
 {
-    _mutexParam.lock();
     int val = _voiceParam.getInteger(champ_wPreset);
-    _mutexParam.unlock();
     return val;
 }
 
 float Voice::getReverb()
 {
-    _mutexParam.lock();
     float val = static_cast<float>(_voiceParam.getDouble(champ_reverbEffectsSend));
-    _mutexParam.unlock();
     return val;
 }
 
 void Voice::setPan(double val)
 {
-    _mutexParam.lock();
     _voiceParam.setPan(val);
-    _mutexParam.unlock();
 }
 
 void Voice::setLoopMode(quint16 val)
 {
-    _mutexParam.lock();
     _voiceParam.setLoopMode(val);
-    _mutexParam.unlock();
 }
 
 void Voice::setLoopStart(quint32 val)
 {
-    _mutexParam.lock();
     _voiceParam.setLoopStart(val);
-    _mutexParam.unlock();
 }
 
 void Voice::setLoopEnd(quint32 val)
 {
-    _mutexParam.lock();
     _voiceParam.setLoopEnd(val);
-    _mutexParam.unlock();
 }
 
 void Voice::setFineTune(qint16 val)
 {
-    _mutexParam.lock();
     _voiceParam.setFineTune(val);
-    _mutexParam.unlock();
 }

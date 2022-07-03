@@ -95,7 +95,7 @@ private:
     QSemaphore * _semRunning;
     QMutex _mutexVoices, _mutexSynchro;
     Voice * _voices[MAX_NUMBER_OF_VOICES];
-    int _numberOfVoices;
+    volatile int _numberOfVoices;
     float * _dataL, * _dataR, * _dataRevL, * _dataRevR;
     float * _dataTmpL, * _dataTmpR;
     volatile quint32 _lenToPrepare;
