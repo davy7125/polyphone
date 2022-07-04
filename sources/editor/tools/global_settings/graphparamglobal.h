@@ -53,7 +53,6 @@ public:
              e->type() == QEvent::Leave)
                 && o == this)
         {
-            qWarning() << e->type();
             QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(e);
             if (mouseEvent->type() == QEvent::Leave)
                 this->mouseLeft();

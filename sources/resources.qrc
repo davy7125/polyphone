@@ -90,6 +90,7 @@
         <file alias="exchange.svg">resources/exchange.svg</file>
         <file alias="MIDI.svg">resources/MIDI.svg</file>
         <file alias="keyboards.svg">resources/keyboards.svg</file>
+        <file alias="bars.svg">resources/bars.svg</file>
     </qresource>
     <qresource prefix="/misc">
         <file>changelog</file>
