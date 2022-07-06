@@ -22,50 +22,60 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_PRST_H
-#define PAGE_PRST_H
+#include "footersf2.h"
+#include "ui_footersf2.h"
+#include "soundfontmanager.h"
 
-#include <QWidget>
-#include "pagetable.h"
-
-namespace Ui
+FooterSf2::FooterSf2(QWidget *parent) :
+    AbstractFooter(parent),
+    ui(new Ui::FooterSf2)
 {
-    class PagePrst;
+    ui->setupUi(this);
 }
 
-class PagePrst : public PageTable
+FooterSf2::~FooterSf2()
 {
-    Q_OBJECT
+    delete ui;
+}
 
-public:
-    explicit PagePrst(QWidget *parent = nullptr);
-    ~PagePrst() override;
-
-    // Display options
-    QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;
-
-protected:
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
-    void keyPlayedInternal2(int key, int velocity) override;
-
-private:
-    Ui::PagePrst *ui;
-};
-
-// Classe TableWidget pour presets
-class TableWidgetPrst : public TableWidget
+void FooterSf2::updateInterface()
 {
-    Q_OBJECT
-public:
-    TableWidgetPrst(QWidget *parent = nullptr);
-    ~TableWidgetPrst();
+    if (_currentIds.empty())
+    {
+        ui->label_filename->setText("");
+        return;
+    }
 
-    // Association champ - ligne
-    AttributeType getChamp(int row);
-    int getRow(AttributeType champ);
+    EltID id = _currentIds[0];
+    id.typeElement = elementSf2;
 
-private:
-    QList<AttributeType> _fieldList;
-};
+    // Informations (file name and size)
+    QString txt = SoundfontManager::getInstance()->getQstr(id, champ_filenameInitial);
+    if (!txt.isEmpty())
+    {
+        QFile file(txt);
+        if (file.open(QIODevice::ReadOnly))
+        {
+            int size = file.size();
+            file.close();
 
-#endif // PAGE_PRST_H
+            if (size > 1073741824)
+            {
+                // GB
+                txt += QString(" (%1 %2)").arg((double)size / 1073741824, 3, 'f', 2).arg(tr("GB", "giga byte"));
+            }
+            else if (size > 1048576)
+            {
+                // MB
+                txt += QString(" (%1 %2)").arg((double)size / 1048576, 3, 'f', 2).arg(tr("MB", "mega byte"));
+            }
+            else
+            {
+                // kB
+                txt += QString(" (%1 %2)").arg((double)size / 1024, 3, 'f', 2).arg(tr("kB", "kilo byte"));
+            }
+        }
+    }
+
+    ui->label_filename->setText(txt);
+}

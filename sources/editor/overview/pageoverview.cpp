@@ -35,9 +35,6 @@ PageOverview::PageOverview(TypePage typePage, ElementType typeElement, QWidget *
     ui->setupUi(this);
 
     // Style
-    ui->frameBottom->setStyleSheet("QFrame{border: 0; background-color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "}");
     ui->table->verticalHeader()->setDefaultSectionSize(QFontMetrics(ui->table->font()).height() + 8);
 }
 
@@ -73,7 +70,6 @@ bool PageOverview::updateInterface(QString editingSource, IdList selectedIds, in
     id.typeElement = _typeElement;
     QList<int> indexes = _sf2->getSiblings(id);
     ui->table->setRowCount(indexes.count());
-    ui->labelInformation->setText(tr("%n element(s)", "", indexes.count()));
 
     // Preparation (if needed by the overview page)
     this->prepare(id);

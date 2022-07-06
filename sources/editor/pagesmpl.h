@@ -77,7 +77,6 @@ private slots:
     void setGainSample(int val);
     void setStereo(bool val);
     void on_pushAutoTune_clicked();
-    void onLinkClicked(EltID id);
     void onCutOrdered(int start, int end);
     bool cutSample(EltID id, quint32 start, quint32 end, EltID &createdSmplId);
     QString findDuplicateName(EltID smplId);

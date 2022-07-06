@@ -41,14 +41,6 @@ PageSmpl::PageSmpl(QWidget *parent) :
     ui->setupUi(this);
 
     // Style
-    QString resetHoverColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name();
-    ui->frameBottom->setStyleSheet("QFrame{background-color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "}" +
-                                   "QPushButton{background-color:transparent;color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
-                                   ";border:0;padding:0px 5px}" +
-                                   "QPushButton:hover{color:" + resetHoverColor + "}");
     ui->frameGraph->setStyleSheet("QFrame{border:0; border-bottom: 1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + "}");
     ui->framePlayArea->setStyleSheet("TransparentFrame{background-color: " +
                                      ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() +
@@ -69,7 +61,6 @@ PageSmpl::PageSmpl(QWidget *parent) :
     // Connections
     ui->waveDisplay->connect(_synth, SIGNAL(currentPosChanged(quint32)), SLOT(setCurrentSample(quint32)));
     this->connect(_synth, SIGNAL(readFinished(int)), SLOT(lecteurFinished(int)));
-    connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
     connect(ui->waveDisplay, SIGNAL(cutOrdered(int,int)), this, SLOT(onCutOrdered(int,int)));
 
     // Background color of the Fourier graph
@@ -264,7 +255,6 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
         ui->comboLink->setCurrentIndex(0);
         ui->checkLectureLien->setEnabled(false);
         ui->checkLectureLien->setChecked(false);
-        ui->pushStereoEditing->hide();
     }
     else
     {
@@ -294,27 +284,8 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
             ui->comboLink->setCurrentIndex(-1);
 
         ui->checkLectureLien->setEnabled(nombreElements == 1);
-        ui->pushStereoEditing->setVisible(nombreElements == 1);
     }
     ui->comboType->setEnabled(nombreElements == 1 && !ui->pushLecture->isChecked());
-
-    // Instruments that use the sample
-    if (nombreElements > 1)
-    {
-        ui->widgetLinkedTo->clear();
-        ui->labelLinkedTo->setText("-");
-    }
-    else
-    {
-        ui->widgetLinkedTo->initialize(id);
-        int nbInst = ui->widgetLinkedTo->getLinkNumber();
-        if (nbInst == 0)
-            ui->labelLinkedTo->setText(tr("Sample not linked to an instrument yet."));
-        else if (nbInst == 1)
-            ui->labelLinkedTo->setText(tr("Sample linked to instrument:"));
-        else
-            ui->labelLinkedTo->setText(tr("Sample linked to instruments:"));
-    }
 
     // Reprise de la lecture
     _currentPlayingToken = 0;
@@ -598,7 +569,6 @@ void PageSmpl::setType(int index)
     if (_preparingPage)
         return;
 
-    ui->pushStereoEditing->setVisible(_currentIds.count() == 1 && index > 0);
     EltID id = _currentIds.getFirstId(elementSmpl);
 
     // Ancien et nouveau types
@@ -675,7 +645,6 @@ void PageSmpl::setLinkedSmpl(int index)
     if (_preparingPage)
         return;
 
-    ui->pushStereoEditing->setVisible(_currentIds.count() == 1 && index > 0);
     EltID id = _currentIds.getFirstId(elementSmpl);
 
     // Ancien et nouveau samples liés
@@ -1041,11 +1010,6 @@ void PageSmpl::autoTune(EltID id, int &pitch, int &correction)
         pitch = _sf2->get(id, champ_byOriginalPitch).bValue;
         correction = _sf2->get(id, champ_chPitchCorrection).cValue;
     }
-}
-
-void PageSmpl::onLinkClicked(EltID id)
-{
-    emit(selectedIdsChanged(id));
 }
 
 void PageSmpl::keyPlayedInternal(int key, int velocity)

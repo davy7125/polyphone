@@ -22,50 +22,27 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_PRST_H
-#define PAGE_PRST_H
+#ifndef FOOTEROVERVIEW_H
+#define FOOTEROVERVIEW_H
 
-#include <QWidget>
-#include "pagetable.h"
+#include "abstractfooter.h"
 
-namespace Ui
-{
-    class PagePrst;
+namespace Ui {
+class FooterOverview;
 }
 
-class PagePrst : public PageTable
+class FooterOverview : public AbstractFooter
 {
     Q_OBJECT
 
 public:
-    explicit PagePrst(QWidget *parent = nullptr);
-    ~PagePrst() override;
+    explicit FooterOverview(QWidget *parent = nullptr);
+    ~FooterOverview();
 
-    // Display options
-    QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;
-
-protected:
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
-    void keyPlayedInternal2(int key, int velocity) override;
+    void updateInterface() override;
 
 private:
-    Ui::PagePrst *ui;
+    Ui::FooterOverview *ui;
 };
 
-// Classe TableWidget pour presets
-class TableWidgetPrst : public TableWidget
-{
-    Q_OBJECT
-public:
-    TableWidgetPrst(QWidget *parent = nullptr);
-    ~TableWidgetPrst();
-
-    // Association champ - ligne
-    AttributeType getChamp(int row);
-    int getRow(AttributeType champ);
-
-private:
-    QList<AttributeType> _fieldList;
-};
-
-#endif // PAGE_PRST_H
+#endif // FOOTEROVERVIEW_H

@@ -40,7 +40,7 @@ Editor::Editor(QWidget *parent) : QWidget(parent),
     ui->setupUi(this);
 
     // QSplitter for being able to resize the tree
-    TreeSplitter * splitter = new TreeSplitter(this, ui->leftPart, ui->stackedWidget);
+    TreeSplitter * splitter = new TreeSplitter(this, ui->leftPart, ui->rightPart);
     QVBoxLayout * layout = dynamic_cast<QVBoxLayout *>(this->layout());
     layout->addWidget(splitter);
 
@@ -52,10 +52,14 @@ Editor::Editor(QWidget *parent) : QWidget(parent),
                                 ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                                 ";border-top:0;border-left:0;border-bottom:0}");
     ui->iconWarning->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/warning.svg", QSize(64, 64), ThemeManager::WINDOW_TEXT));
-    ui->widgetBottom->setStyleSheet("QWidget{background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() +
-                                    ";color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
-                                    "}");
-    ui->widgetBottom2->setStyleSheet(ui->widgetBottom->styleSheet());
+    QString resetHoverColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name();
+    ui->stackedFooter->setStyleSheet("QStackedWidget, QLabel{background-color:" +
+                                     ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";color:" +
+                                     ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "}" +
+                                     "QPushButton{background-color:transparent;color:" +
+                                     ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
+                                     ";border:0;padding:0px 5px}" +
+                                     "QPushButton:hover{color:" + resetHoverColor + "}");
 
     // Propagation of the selection
     connect(ui->pageGeneral, SIGNAL(selectedIdsChanged(IdList)), ui->treeView, SLOT(onSelectionChanged(IdList)));
@@ -65,6 +69,10 @@ Editor::Editor(QWidget *parent) : QWidget(parent),
     connect(ui->pageSmpl, SIGNAL(selectedIdsChanged(IdList)), ui->treeView, SLOT(onSelectionChanged(IdList)));
     connect(ui->pageInst, SIGNAL(selectedIdsChanged(IdList)), ui->treeView, SLOT(onSelectionChanged(IdList)));
     connect(ui->pagePrst, SIGNAL(selectedIdsChanged(IdList)), ui->treeView, SLOT(onSelectionChanged(IdList)));
+    connect(ui->footerSf2, SIGNAL(selectedIdsChanged(IdList)), ui->treeView, SLOT(onSelectionChanged(IdList)));
+    connect(ui->footerOverview, SIGNAL(selectedIdsChanged(IdList)), ui->treeView, SLOT(onSelectionChanged(IdList)));
+    connect(ui->footerLinkedTo, SIGNAL(selectedIdsChanged(IdList)), ui->treeView, SLOT(onSelectionChanged(IdList)));
+    connect(ui->footerPrst, SIGNAL(selectedIdsChanged(IdList)), ui->treeView, SLOT(onSelectionChanged(IdList)));
     connect(ui->treeView, SIGNAL(selectionChanged(IdList)), this, SLOT(onSelectionChanged(IdList)));
     connect(ui->treeView, SIGNAL(selectionChanged(IdList)), ui->toolBar, SLOT(onSelectionChanged(IdList)));
 
@@ -94,7 +102,6 @@ void Editor::initialize(AbstractInputParser * input)
     ui->toolBar->disable();
     ui->rotatingSpinner->startAnimation();
     ui->labelFileName->setText(input->getFileName());
-    ui->labelFileName2->setText(input->getFileName());
     connect(input, SIGNAL(finished()), this, SLOT(inputProcessed()));
     input->process(true);
 }
@@ -125,7 +132,7 @@ void Editor::inputProcessed()
     {
         // Display the error
         ui->labelReason->setText(input->getError());
-        ui->stackedWidget->setCurrentWidget(ui->pageError);
+        ui->stackedMain->setCurrentWidget(ui->pageError);
     }
 
     delete input;
@@ -145,28 +152,36 @@ void Editor::onSelectionChanged(IdList ids)
 
     // Find the view to display and update it
     Page * currentPage = nullptr;
+    QWidget * footer = nullptr;
     switch (ids[0].typeElement)
     {
     case elementSf2:
         currentPage = ui->pageGeneral;
+        footer = ui->footerSf2;
         break;
     case elementRootSmpl:
         currentPage = ui->pageAllSmpl;
+        footer = ui->footerOverview;
         break;
     case elementRootInst:
         currentPage = ui->pageAllInst;
+        footer = ui->footerOverview;
         break;
     case elementRootPrst:
         currentPage = ui->pageAllPrst;
+        footer = ui->footerOverview;
         break;
     case elementSmpl:
         currentPage = ui->pageSmpl;
+        footer = ui->footerLinkedTo;
         break;
     case elementInst: case elementInstSmpl:
         currentPage = ui->pageInst;
+        footer = ui->footerLinkedTo;
         break;
     case elementPrst: case elementPrstInst:
         currentPage = ui->pagePrst;
+        footer = ui->footerPrst;
         break;
     default:
         break;
@@ -174,14 +189,22 @@ void Editor::onSelectionChanged(IdList ids)
 
     if (currentPage != nullptr)
     {
-        if ((void *)currentPage == (void *)ui->stackedWidget->currentWidget())
+        if ((void *)currentPage == (void *)ui->stackedMain->currentWidget())
             currentPage->preparePage("command:selection", ids);
         else
             currentPage->preparePage("command:display", ids);
         ui->toolBar->setDisplayOptions(currentPage->getDisplayOptions());
 
         // Display the page
-        ui->stackedWidget->setCurrentWidget(currentPage);
+        ui->stackedMain->setCurrentWidget(currentPage);
+    }
+
+    if (footer != nullptr)
+    {
+        AbstractFooter * absFooter = dynamic_cast<AbstractFooter *>(footer);
+        absFooter->setCurrentIds(ids);
+        absFooter->updateInterface();
+        ui->stackedFooter->setCurrentWidget(footer);
     }
 }
 
@@ -191,8 +214,15 @@ void Editor::update(QString editingSource)
     ui->toolBar->updateActions();
 
     // Update the current page
-    Page * currentPage = dynamic_cast<Page*>(ui->stackedWidget->currentWidget());
+    Page * currentPage = dynamic_cast<Page*>(ui->stackedMain->currentWidget());
     currentPage->preparePage(editingSource);
+
+    // Update the footer
+    if (!editingSource.startsWith("footer"))
+    {
+        AbstractFooter * absFooter = dynamic_cast<AbstractFooter *>(ui->stackedFooter->currentWidget());
+        absFooter->updateInterface();
+    }
 
     // Tab title and filepath
     updateTitleAndPath();
@@ -216,6 +246,6 @@ void Editor::updateTitleAndPath()
 void Editor::displayOptionChanged(int displayOption)
 {
     // Update the current page
-    Page * currentPage = dynamic_cast<Page*>(ui->stackedWidget->currentWidget());
+    Page * currentPage = dynamic_cast<Page*>(ui->stackedMain->currentWidget());
     currentPage->setDisplayOption(displayOption);
 }

@@ -22,50 +22,61 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_PRST_H
-#define PAGE_PRST_H
+#ifndef FOOTERPRST_H
+#define FOOTERPRST_H
 
-#include <QWidget>
-#include "pagetable.h"
+#include "abstractfooter.h"
+#include <QSpinBox>
 
-namespace Ui
-{
-    class PagePrst;
+namespace Ui {
+class FooterPrst;
 }
 
-class PagePrst : public PageTable
+class SpinBox;
+
+class FooterPrst : public AbstractFooter
 {
     Q_OBJECT
 
 public:
-    explicit PagePrst(QWidget *parent = nullptr);
-    ~PagePrst() override;
+    explicit FooterPrst(QWidget *parent = nullptr);
+    ~FooterPrst();
 
-    // Display options
-    QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;
+    void updateInterface() override;
+    void spinUpDown(int steps, SpinBox *spin);
 
-protected:
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
-    void keyPlayedInternal2(int key, int velocity) override;
+private slots:
+    void setBank();
+    void setPreset();
 
 private:
-    Ui::PagePrst *ui;
+    QList<int> getUsedPresetsForBank(int sf2Index, quint16 wBank);
+    void setBank(quint16 desiredBank, int collisionResolution);
+    bool isBankAvailable(quint16 wBank);
+
+    QList<int> getUsedBanksForPreset(int sf2Index, quint16 wPreset);
+    void setPreset(quint16 desiredPreset, int collisionResolution);
+    bool isPresetAvailable(quint16 wPreset);
+
+    IdList _currentParentIds;
+    bool _initializing;
+    Ui::FooterPrst *ui;
 };
 
-// Classe TableWidget pour presets
-class TableWidgetPrst : public TableWidget
+// SpinBox
+class SpinBox : public QSpinBox
 {
     Q_OBJECT
 public:
-    TableWidgetPrst(QWidget *parent = nullptr);
-    ~TableWidgetPrst();
+    SpinBox(QWidget *parent = nullptr) : QSpinBox(parent) {}
+    void init(FooterPrst * footer) { _footer = footer; }
 
-    // Association champ - ligne
-    AttributeType getChamp(int row);
-    int getRow(AttributeType champ);
+public slots:
+    virtual void stepBy(int steps) { _footer->spinUpDown(steps, this); }
 
 private:
-    QList<AttributeType> _fieldList;
+    FooterPrst * _footer;
+    QList<AttributeType> _rows;
 };
 
-#endif // PAGE_PRST_H
+#endif // FOOTERPRST_H

@@ -47,10 +47,6 @@ protected:
     bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
     void keyPlayedInternal2(int key, int velocity) override;
 
-private slots:
-    void onLinkClicked(EltID id);
-    void updateStereoButtonState();
-
 private:
     Ui::PageInst *ui;
 };

@@ -35,11 +35,6 @@ PagePrst::PagePrst(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // Style
-    ui->frameBottom->setStyleSheet("QFrame{background-color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "}");
-
     this->contenant = elementPrst;
     this->contenantGen = elementPrstGen;
     this->contenantMod = elementPrstMod;
@@ -51,12 +46,6 @@ PagePrst::PagePrst(QWidget *parent) :
     _rangeEditor = ui->rangeEditor;
     _envelopEditor = nullptr;
     _modulatorEditor = ui->modulatorEditor;
-
-    // Initialization of spinBoxes
-    ui->spinBank->init(this);
-    ui->spinPreset->init(this);
-    ui->spinBank->setStyleSheet("QSpinBox{margin-top: 1px;}");
-    ui->spinPreset->setStyleSheet("QSpinBox{margin-top: 1px;}");
 
     connect(this->_table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->_table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
@@ -109,61 +98,8 @@ bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int di
     _currentParentIds = parentIds;
     _currentIds = selectedIds;
 
-    if (_currentParentIds.count() == 1)
-    {
-        ui->spinBank->setEnabled(true);
-        ui->spinPreset->setEnabled(true);
-        ui->modulatorEditor->show();
-        EltID id = _currentParentIds.first();
-        id.typeElement = elementPrst;
-        ui->spinBank->setValue(_sf2->get(id, champ_wBank).wValue);
-        ui->spinPreset->setValue(_sf2->get(id, champ_wPreset).wValue);
-        ui->labelPercussion->setVisible(_sf2->get(id, champ_wBank).wValue == 128);
-    }
-    else
-    {
-        // Check if the bank is the same in the selection
-        bool sameNumber = true;
-        int tmp = -1;
-        foreach (EltID id, _currentParentIds)
-        {
-            int number = _sf2->get(id, champ_wBank).wValue;
-            if (tmp == -1)
-                tmp = number;
-            else if (tmp != number)
-            {
-                sameNumber = false;
-                break;
-            }
-        }
-        ui->spinBank->setEnabled(sameNumber);
-        if (sameNumber)
-            ui->spinBank->setValue(tmp);
-
-        // Check if the preset is the same in the selection
-        sameNumber = true;
-        tmp = -1;
-        foreach (EltID id, _currentParentIds)
-        {
-            int number = _sf2->get(id, champ_wPreset).wValue;
-            if (tmp == -1)
-                tmp = number;
-            else if (tmp != number)
-            {
-                sameNumber = false;
-                break;
-            }
-        }
-        ui->spinPreset->setEnabled(sameNumber);
-        if (sameNumber)
-            ui->spinPreset->setValue(tmp);
-
-        // Hide modulators
-        ui->modulatorEditor->hide();
-
-        // Hide the percussion label
-        ui->labelPercussion->hide();
-    }
+    // Show or hide the modulator section
+    ui->modulatorEditor->setVisible(_currentParentIds.count() == 1);
 
     switch (displayOption)
     {
@@ -250,193 +186,9 @@ AttributeType TableWidgetPrst::getChamp(int row)
     return champ_unknown;
 }
 
-void PagePrst::spinUpDown(int steps, SpinBox *spin)
-{
-    if (_preparingPage || _currentParentIds.empty() || steps == 0)
-        return;
-
-    _preparingPage = true;
-    if (spin == ui->spinBank)
-        this->setBank(ui->spinBank->value(), steps > 0 ? 1 : -1);
-    else
-        this->setPreset(ui->spinPreset->value(), steps > 0 ? 1 : -1);
-    _preparingPage = false;
-}
-
-void PagePrst::setBank()
-{
-    if (_preparingPage)
-        return;
-    _preparingPage = true;
-    this->setBank(ui->spinBank->value(), 0);
-    _preparingPage = false;
-}
-
-void PagePrst::setPreset()
-{
-    if (_preparingPage)
-        return;
-    _preparingPage = true;
-    this->setPreset(ui->spinPreset->value(), 0);
-    _preparingPage = false;
-}
-
 void PagePrst::keyPlayedInternal2(int key, int velocity)
 {
     IdList ids = _currentIds.getSelectedIds(elementPrst);
     if (ids.count() == 1)
         ContextManager::audio()->getSynth()->play(ids[0], -1, key, velocity);
-}
-
-void PagePrst::setBank(quint16 desiredBank, int collisionResolution)
-{
-    // Previous bank
-    if (_currentParentIds.empty())
-        return;
-    quint16 previousBank = _sf2->get(_currentParentIds[0], champ_wBank).wValue;
-
-    // Find the bank to set, according to the collision resolution method
-    while (!isBankAvailable(desiredBank))
-    {
-        bool goBack = false;
-        if (collisionResolution == 0)
-            goBack = true;
-        else if (collisionResolution > 0)
-        {
-            if (desiredBank == 128) // Max is 128
-                goBack = true;
-            else
-                desiredBank++;
-        }
-        else if (collisionResolution < 0)
-        {
-            if (desiredBank == 0)
-                goBack = true;
-            else
-                desiredBank--;
-        }
-
-        if (goBack)
-        {
-            // Back to the previous bank
-            ui->spinBank->setValue(previousBank);
-            return;
-        }
-    }
-
-    // A bank has been found, the current ids are edited
-    AttributeValue v;
-    v.wValue = desiredBank;
-    foreach (EltID id, _currentParentIds)
-        _sf2->set(id, champ_wBank, v);
-    _sf2->endEditing(getEditingSource());
-
-    // GUI update
-    ui->spinBank->setValue(desiredBank);
-    ui->labelPercussion->setVisible(ui->spinBank->value() == 128);
-}
-
-bool PagePrst::isBankAvailable(quint16 wBank)
-{
-    // Current sf2
-    if (_currentParentIds.empty())
-        return false;
-    int indexSf2 = _currentParentIds[0].indexSf2;
-
-    // Is it possible to change the bank of all current ids?
-    QList<int> usePresets = getUsedPresetsForBank(indexSf2, wBank);
-    foreach (EltID id, _currentParentIds)
-        if (usePresets.contains(_sf2->get(id, champ_wPreset).wValue))
-            return false;
-
-    return true;
-}
-
-QList<int> PagePrst::getUsedPresetsForBank(int sf2Index, quint16 wBank)
-{
-    QList<int> ret;
-    EltID id(elementPrst, sf2Index);
-    foreach (int i, _sf2->getSiblings(id))
-    {
-        id.indexElt = i;
-        if (_sf2->get(id, champ_wBank).wValue == wBank)
-            ret << _sf2->get(id, champ_wPreset).wValue;
-    }
-    return ret;
-}
-
-void PagePrst::setPreset(quint16 desiredPreset, int collisionResolution)
-{
-    // Previous preset
-    if (_currentParentIds.empty())
-        return;
-    quint16 previousPreset = _sf2->get(_currentParentIds[0], champ_wPreset).wValue;
-
-    // Find the preset to set, according to the collision resolution method
-    while (!isPresetAvailable(desiredPreset))
-    {
-        bool goBack = false;
-        if (collisionResolution == 0)
-            goBack = true;
-        else if (collisionResolution > 0)
-        {
-            if (desiredPreset == 127) // Max is 127
-                goBack = true;
-            else
-                desiredPreset++;
-        }
-        else if (collisionResolution < 0)
-        {
-            if (desiredPreset == 0)
-                goBack = true;
-            else
-                desiredPreset--;
-        }
-
-        if (goBack)
-        {
-            // Back to the previous preset
-            ui->spinPreset->setValue(previousPreset);
-            return;
-        }
-    }
-
-    // A preset has been found, the current ids are edited
-    AttributeValue v;
-    v.wValue = desiredPreset;
-    foreach (EltID id, _currentParentIds)
-        _sf2->set(id, champ_wPreset, v);
-    _sf2->endEditing(getEditingSource());
-
-    // GUI update
-    ui->spinPreset->setValue(desiredPreset);
-}
-
-bool PagePrst::isPresetAvailable(quint16 wPreset)
-{
-    // Current sf2
-    if (_currentParentIds.empty())
-        return false;
-    int indexSf2 = _currentParentIds[0].indexSf2;
-
-    // Is it possible to change the preset of all current ids?
-    QList<int> useBanks = getUsedBanksForPreset(indexSf2, wPreset);
-    foreach (EltID id, _currentParentIds)
-        if (useBanks.contains(_sf2->get(id, champ_wBank).wValue))
-            return false;
-
-    return true;
-}
-
-QList<int> PagePrst::getUsedBanksForPreset(int sf2Index, quint16 wPreset)
-{
-    QList<int> ret;
-    EltID id(elementPrst, sf2Index);
-    foreach (int i, _sf2->getSiblings(id))
-    {
-        id.indexElt = i;
-        if (_sf2->get(id, champ_wPreset).wValue == wPreset)
-            ret << _sf2->get(id, champ_wBank).wValue;
-    }
-    return ret;
 }

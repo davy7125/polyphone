@@ -41,7 +41,6 @@ PageSf2::PageSf2(QWidget * parent) :
     QColor highlightedHover = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND, ThemeManager::HOVERED);
 
     // Style
-    ui->frameBottom->setStyleSheet("QFrame{background-color:" + highlighted.name() + ";color:" + highlightedText.name() + "}");
     connect(ui->lineEdit_date, SIGNAL(focussed(bool)), this, SLOT(dateFocussed(bool)), Qt::QueuedConnection);
 
     ui->frameSampleTitle->setStyleSheet("QFrame{border-radius: 2px;border:0;background-color:" + highlighted.name() + ";color:" + highlightedText.name() + "}");
@@ -98,39 +97,11 @@ bool PageSf2::updateInterface(QString editingSource, IdList selectedIds, int dis
     // Mode 24 bits ?
     ui->comboBox->setCurrentIndex(_sf2->get(_currentID, champ_wBpsSave).wValue == 24 ? 1 : 0);
 
-    // Informations (file name and size)
-    QString txt = _sf2->getQstr(_currentID, champ_filenameInitial);
-    if (!txt.isEmpty())
-    {
-        QFile file(txt);
-        if (file.open(QIODevice::ReadOnly)) {
-            int size = file.size();
-            file.close();
-
-            if (size > 1073741824)
-            {
-                // GB
-                txt += QString(" (%1 %2)").arg((double)size / 1073741824, 3, 'f', 2).arg(tr("GB", "giga byte"));
-            }
-            else if (size > 1048576)
-            {
-                // MB
-                txt += QString(" (%1 %2)").arg((double)size / 1048576, 3, 'f', 2).arg(tr("MB", "mega byte"));
-            }
-            else
-            {
-                // kB
-                txt += QString(" (%1 %2)").arg((double)size / 1024, 3, 'f', 2).arg(tr("kB", "kilo byte"));
-            }
-        }
-    }
-
-    ui->label_filename->setText(txt);
     ui->label_sfVersion->setText(QString("%1.%2")
                                  .arg(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMajor)
                                  .arg(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMinor, 2, 10, QChar('0')));
     ui->label_soundEngine->setText(_sf2->getQstr(_currentID, champ_ISNG));
-    txt = QString("%1.%2")
+    QString txt = QString("%1.%2")
             .arg(_sf2->get(_currentID, champ_IVER).sfVerValue.wMajor)
             .arg(_sf2->get(_currentID, champ_IVER).sfVerValue.wMinor, 2, 10, QChar('0'));
     if (_sf2->getQstr(_currentID, champ_IROM).isEmpty())

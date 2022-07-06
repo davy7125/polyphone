@@ -41,13 +41,6 @@ PageInst::PageInst(QWidget *parent) :
 
     // Style
     QString resetHoverColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name();
-    ui->frameBottom->setStyleSheet("QFrame{background-color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "}" +
-                                   "QPushButton{background-color:transparent;color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
-                                   ";border:0;padding:0px 5px}" +
-                                   "QPushButton:hover{color:" + resetHoverColor + "}");
 
     this->contenant = elementInst;
     this->contenantGen = elementInstGen;
@@ -64,10 +57,8 @@ PageInst::PageInst(QWidget *parent) :
     connect(this->_table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->_table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
     connect(this->_table, SIGNAL(openElement(EltID)), this, SLOT(onOpenElement(EltID)));
-    connect(this->_table, SIGNAL(itemSelectionChanged()), this, SLOT(updateStereoButtonState()));
     connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(customizeKeyboard()));
     connect(ui->rangeEditor, SIGNAL(divisionsSelected(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
-    connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
     connect(ui->modulatorEditor, SIGNAL(attributesSelected(QList<AttributeType>)), this, SLOT(onModSelectionChanged(QList<AttributeType>)));
 
     // QSplitter for being able to resize the modulator area
@@ -116,26 +107,8 @@ bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int di
     _currentParentIds = parentIds;
     _currentIds = selectedIds;
 
-    if (_currentParentIds.count() == 1)
-    {
-        // List of presets that use the instrument
-        ui->widgetLinkedTo->initialize(_currentParentIds[0]);
-        int nbPrst = ui->widgetLinkedTo->getLinkNumber();
-
-        if (nbPrst == 0)
-            ui->labelLinkedTo->setText(tr("Instrument not linked to a preset yet."));
-        else if (nbPrst == 1)
-            ui->labelLinkedTo->setText(tr("Instrument linked to preset:"));
-        else
-            ui->labelLinkedTo->setText(tr("Instrument linked to presets:"));
-        ui->modulatorEditor->show();
-    }
-    else
-    {
-        ui->labelLinkedTo->setText("-");
-        ui->widgetLinkedTo->clear();
-        ui->modulatorEditor->hide();
-    }
+    // Visibility of the modulator section
+    ui->modulatorEditor->setVisible(_currentParentIds.count() == 1);
 
     switch (displayOption)
     {
@@ -155,9 +128,6 @@ bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int di
         return false;
     }
     customizeKeyboard();
-
-    // Update the state of the stereo editing button
-    updateStereoButtonState();
 
     return true;
 }
@@ -255,11 +225,6 @@ AttributeType TableWidgetInst::getChamp(int row)
     return champ_unknown;
 }
 
-void PageInst::onLinkClicked(EltID id)
-{
-    emit(selectedIdsChanged(id));
-}
-
 void PageInst::keyPlayedInternal2(int key, int velocity)
 {
     IdList ids = _currentIds.getSelectedIds(elementInst);
@@ -323,38 +288,3 @@ void PageInst::keyPlayedInternal2(int key, int velocity)
     }
 }
 
-void PageInst::updateStereoButtonState()
-{
-    if (_currentParentIds.count() == 1)
-    {
-        // Does the selection comprise at least one linked sample?
-        bool withLinkedSample = false;
-        EltID idSmpl = EltID(elementSmpl, _currentParentIds[0].indexSf2);
-        foreach (EltID id, _currentIds)
-        {
-            if (id.typeElement == elementInstSmpl)
-            {
-                // Type of the associated sample
-                idSmpl.indexElt = _sf2->get(id, champ_sampleID).wValue;
-                SFSampleLink linkType = _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
-
-                if (linkType != linkInvalid  && linkType != monoSample && linkType != RomMonoSample)
-                {
-                    // Check the linked sample
-                    EltID idSmpl2 = idSmpl;
-                    idSmpl2.indexElt = _sf2->get(idSmpl, champ_wSampleLink).wValue;
-                    if (_sf2->isValid(idSmpl2))
-                    {
-                        withLinkedSample = true;
-                        break;
-                    }
-                }
-            }
-        }
-
-        // Button visibility
-        ui->pushStereoEditing->setVisible(withLinkedSample);
-    }
-    else
-        ui->pushStereoEditing->hide();
-}

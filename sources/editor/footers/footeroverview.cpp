@@ -22,50 +22,48 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_PRST_H
-#define PAGE_PRST_H
+#include "footeroverview.h"
+#include "ui_footeroverview.h"
+#include "soundfontmanager.h"
 
-#include <QWidget>
-#include "pagetable.h"
-
-namespace Ui
+FooterOverview::FooterOverview(QWidget *parent) :
+    AbstractFooter(parent),
+    ui(new Ui::FooterOverview)
 {
-    class PagePrst;
+    ui->setupUi(this);
 }
 
-class PagePrst : public PageTable
+FooterOverview::~FooterOverview()
 {
-    Q_OBJECT
+    delete ui;
+}
 
-public:
-    explicit PagePrst(QWidget *parent = nullptr);
-    ~PagePrst() override;
-
-    // Display options
-    QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;
-
-protected:
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
-    void keyPlayedInternal2(int key, int velocity) override;
-
-private:
-    Ui::PagePrst *ui;
-};
-
-// Classe TableWidget pour presets
-class TableWidgetPrst : public TableWidget
+void FooterOverview::updateInterface()
 {
-    Q_OBJECT
-public:
-    TableWidgetPrst(QWidget *parent = nullptr);
-    ~TableWidgetPrst();
+    // Number of rows
+    if (_currentIds.empty() || !_currentIds.isElementUnique(elementSf2))
+    {
+        ui->labelInformation->setText("");
+        return;
+    }
 
-    // Association champ - ligne
-    AttributeType getChamp(int row);
-    int getRow(AttributeType champ);
+    EltID id = _currentIds.getFirstId(elementSf2);
+    switch (_currentIds[0].typeElement)
+    {
+    case elementRootSmpl:
+        id.typeElement = elementSmpl;
+        break;
+    case elementRootInst:
+        id.typeElement = elementInst;
+        break;
+    case elementRootPrst:
+        id.typeElement = elementPrst;
+        break;
+    default:
+        ui->labelInformation->setText("");
+        return;
+    }
 
-private:
-    QList<AttributeType> _fieldList;
-};
-
-#endif // PAGE_PRST_H
+    QList<int> indexes = SoundfontManager::getInstance()->getSiblings(id);
+    ui->labelInformation->setText(tr("%n element(s)", "", indexes.count()));
+}

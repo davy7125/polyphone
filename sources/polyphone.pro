@@ -9,7 +9,7 @@
 # Uncomment a line if your distribution doesn't come with some of the following libraries
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
-DEFINES += USE_LOCAL_QCUSTOMPLOT
+#DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # Uncomment this line to use wolfssl instead of openssl (for a license issue)
 #DEFINES += USE_WOLFSSL
@@ -162,6 +162,7 @@ INCLUDEPATH += lib \
     context \
     context/interface \
     editor \
+    editor/footers \
     editor/graphics \
     editor/modulator \
     editor/overview \
@@ -240,6 +241,10 @@ SOURCES	+= main.cpp \
     dialogs/dialog_about.cpp \
     dialogs/dialogselection.cpp \
     dialogs/dialogchangelog.cpp \
+    editor/footers/footerlinkedto.cpp \
+    editor/footers/footeroverview.cpp \
+    editor/footers/footerprst.cpp \
+    editor/footers/footersf2.cpp \
     editor/modulator/modulatorsplitter.cpp \
     editor/page.cpp \
     editor/pagetable.cpp \
@@ -581,6 +586,11 @@ HEADERS += \
     dialogs/dialogselection.h \
     dialogs/dialogchangelog.h \
     dialogs/modalprogressdialog.h \
+    editor/footers/abstractfooter.h \
+    editor/footers/footerlinkedto.h \
+    editor/footers/footeroverview.h \
+    editor/footers/footerprst.h \
+    editor/footers/footersf2.h \
     editor/modulator/modulatorsplitter.h \
     editor/page.h \
     editor/pagetable.h \
@@ -897,6 +907,10 @@ FORMS += \
     dialogs/dialogselection.ui \
     dialogs/dialogchangelog.ui \
     editor/envelopeditor.ui \
+    editor/footers/footerlinkedto.ui \
+    editor/footers/footeroverview.ui \
+    editor/footers/footerprst.ui \
+    editor/footers/footersf2.ui \
     editor/overview/pageoverview.ui \
     editor/widgets/editortoolbar.ui \
     editor/widgets/equalizer.ui \

@@ -38,367 +38,367 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="core/types/attribute.cpp" line="488"/>
+        <location filename="core/types/attribute.cpp" line="500"/>
         <source>absolute value</source>
         <translation>absolutní hodnota</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="599"/>
+        <location filename="core/types/attribute.cpp" line="611"/>
         <source>unknown</source>
         <translation>neznámá</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="604"/>
+        <location filename="core/types/attribute.cpp" line="616"/>
         <source>Sample start offset</source>
         <translation>Posun začátku vzorku</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="610"/>
+        <location filename="core/types/attribute.cpp" line="622"/>
         <source>Sample end offset</source>
         <translation>Posun konce vzorku</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="616"/>
+        <location filename="core/types/attribute.cpp" line="628"/>
         <source>Loop start offset</source>
         <translation>Posun začátku smyčky</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="622"/>
+        <location filename="core/types/attribute.cpp" line="634"/>
         <source>Loop end offset</source>
         <translation>Posun konce smyčky</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="619"/>
+        <location filename="core/types/attribute.cpp" line="631"/>
         <source>Loop start offset (× 32768)</source>
         <translation>Posun začátku smyčky (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="628"/>
+        <location filename="core/types/attribute.cpp" line="640"/>
         <source>Mod LFO → pitch (c)</source>
         <translation>Mod LFO → výška tónu (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="631"/>
+        <location filename="core/types/attribute.cpp" line="643"/>
         <source>Vib LFO → pitch (c)</source>
         <translation>Vib LFO → výška tónu (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="634"/>
+        <location filename="core/types/attribute.cpp" line="646"/>
         <source>Mod env → pitch (c)</source>
         <translation>Mod env → výška tónu (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="637"/>
+        <location filename="core/types/attribute.cpp" line="649"/>
         <source>Filter, cutoff (×)</source>
         <translation>Filtr, odstřihnutí (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="638"/>
+        <location filename="core/types/attribute.cpp" line="650"/>
         <source>Filter, cutoff (Hz)</source>
         <translation>Filtr, odstřihnutí (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="641"/>
+        <location filename="core/types/attribute.cpp" line="653"/>
         <source>Filter, resonance (dB)</source>
         <translation>Filtr, ozvěna (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="644"/>
+        <location filename="core/types/attribute.cpp" line="656"/>
         <source>Mod LFO → filter (c)</source>
         <translation>Mod LFO → filtr (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="647"/>
+        <location filename="core/types/attribute.cpp" line="659"/>
         <source>Mod env → filter (c)</source>
         <translation>Mod env → filtr (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="613"/>
+        <location filename="core/types/attribute.cpp" line="625"/>
         <source>Sample end offset (× 32768)</source>
         <translation>Posun konce vzorku (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="607"/>
+        <location filename="core/types/attribute.cpp" line="619"/>
         <source>Sample start offset (× 32768)</source>
         <translation>Posun začátku vzorku (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="650"/>
+        <location filename="core/types/attribute.cpp" line="662"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>Mod LFO → hlasitost (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="653"/>
+        <location filename="core/types/attribute.cpp" line="665"/>
         <source>Chorus (%)</source>
         <translation>Sborový efekt (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="656"/>
+        <location filename="core/types/attribute.cpp" line="668"/>
         <source>Reverb (%)</source>
         <translation>Dozvuk (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="659"/>
+        <location filename="core/types/attribute.cpp" line="671"/>
         <source>Pan [-100;100]</source>
         <translation>Vyvážení [-100;100]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="660"/>
+        <location filename="core/types/attribute.cpp" line="672"/>
         <source>Pan [-50;50]</source>
         <translation>Vyvážení [-50;50]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="663"/>
+        <location filename="core/types/attribute.cpp" line="675"/>
         <source>Mod LFO delay (×)</source>
         <translation>Mod LFO zpoždění (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="664"/>
+        <location filename="core/types/attribute.cpp" line="676"/>
         <source>Mod LFO delay (s)</source>
         <translation>Mod LFO zpoždění (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="667"/>
+        <location filename="core/types/attribute.cpp" line="679"/>
         <source>Mod LFO freq (×)</source>
         <translation>Mod LFO kmitočet (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="668"/>
+        <location filename="core/types/attribute.cpp" line="680"/>
         <source>Mod LFO freq (Hz)</source>
         <translation>Mod LFO knitočet (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="671"/>
+        <location filename="core/types/attribute.cpp" line="683"/>
         <source>Vib LFO delay (×)</source>
         <translation>Vib LFO zpoždění (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="672"/>
+        <location filename="core/types/attribute.cpp" line="684"/>
         <source>Vib LFO delay (s)</source>
         <translation>Vib LFO zpoždění (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="675"/>
+        <location filename="core/types/attribute.cpp" line="687"/>
         <source>Vib LFO freq (×)</source>
         <translation>Vib LFO kmitočet (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="676"/>
+        <location filename="core/types/attribute.cpp" line="688"/>
         <source>Vib LFO freq (Hz)</source>
         <translation>Vib LFO knitočet (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="679"/>
+        <location filename="core/types/attribute.cpp" line="691"/>
         <source>Mod env delay (×)</source>
         <translation>Mod env zpoždění (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="680"/>
+        <location filename="core/types/attribute.cpp" line="692"/>
         <source>Mod env delay (s)</source>
         <translation>Mod env zpoždění (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="683"/>
+        <location filename="core/types/attribute.cpp" line="695"/>
         <source>Mod env attack (×)</source>
         <translation>Mod env náběh (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="684"/>
+        <location filename="core/types/attribute.cpp" line="696"/>
         <source>Mod env attack (s)</source>
         <translation>Mod env náběh (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="687"/>
+        <location filename="core/types/attribute.cpp" line="699"/>
         <source>Mod env hold (×)</source>
         <translation>Mod env držení (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="688"/>
+        <location filename="core/types/attribute.cpp" line="700"/>
         <source>Mod env hold (s)</source>
         <translation>Mod env držení (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="691"/>
+        <location filename="core/types/attribute.cpp" line="703"/>
         <source>Mod env decay (×)</source>
         <translation>Mod env pokles (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="692"/>
+        <location filename="core/types/attribute.cpp" line="704"/>
         <source>Mod env decay (s)</source>
         <translation>Mod env pokles (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="695"/>
+        <location filename="core/types/attribute.cpp" line="707"/>
         <source>Mod env sustain (%)</source>
         <translation>Mod env držení tónu (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="698"/>
+        <location filename="core/types/attribute.cpp" line="710"/>
         <source>Mod env release (×)</source>
         <translation>Mod env uvolnění (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="699"/>
+        <location filename="core/types/attribute.cpp" line="711"/>
         <source>Mod env release (s)</source>
         <translation>Mod env uvolnění (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="702"/>
+        <location filename="core/types/attribute.cpp" line="714"/>
         <source>Key → Mod env hold (c)</source>
         <translation>Nota → Mod env držení (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="705"/>
+        <location filename="core/types/attribute.cpp" line="717"/>
         <source>Key → Mod env decay (c)</source>
         <translation>Nota → Mod env pokles (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="708"/>
+        <location filename="core/types/attribute.cpp" line="720"/>
         <source>Vol env delay (×)</source>
         <translation>Vol env zpoždění (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="709"/>
+        <location filename="core/types/attribute.cpp" line="721"/>
         <source>Vol env delay (s)</source>
         <translation>Vol env zpoždění (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="712"/>
+        <location filename="core/types/attribute.cpp" line="724"/>
         <source>Vol env attack (×)</source>
         <translation>Vol env náběh (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="713"/>
+        <location filename="core/types/attribute.cpp" line="725"/>
         <source>Vol env attack (s)</source>
         <translation>Vol env náběh(s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="716"/>
+        <location filename="core/types/attribute.cpp" line="728"/>
         <source>Vol env hold (×)</source>
         <translation>Vol env držení (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="717"/>
+        <location filename="core/types/attribute.cpp" line="729"/>
         <source>Vol env hold (s)</source>
         <translation>Vol env držení (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="720"/>
+        <location filename="core/types/attribute.cpp" line="732"/>
         <source>Vol env decay (×)</source>
         <translation>Vol env pokles (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="721"/>
+        <location filename="core/types/attribute.cpp" line="733"/>
         <source>Vol env decay (s)</source>
         <translation>Vol env pokles (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="724"/>
+        <location filename="core/types/attribute.cpp" line="736"/>
         <source>Vol env sustain (dB)</source>
         <translation>Vol env držení tónu (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="727"/>
+        <location filename="core/types/attribute.cpp" line="739"/>
         <source>Vol env release (×)</source>
         <translation>Vol env uvolnění (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="728"/>
+        <location filename="core/types/attribute.cpp" line="740"/>
         <source>Vol env release (s)</source>
         <translation>Vol env uvolnění (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="731"/>
+        <location filename="core/types/attribute.cpp" line="743"/>
         <source>Key → Vol env hold (c)</source>
         <translation>Nota → Vol env držení (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="734"/>
+        <location filename="core/types/attribute.cpp" line="746"/>
         <source>Key → Vol env decay (c)</source>
         <translation>Nota → Vol env pokles (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="737"/>
+        <location filename="core/types/attribute.cpp" line="749"/>
         <source>Key range</source>
         <translation>Rozsah not</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="740"/>
+        <location filename="core/types/attribute.cpp" line="752"/>
         <source>Velocity range</source>
         <translation>Rozsah dynamiky</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="743"/>
+        <location filename="core/types/attribute.cpp" line="755"/>
         <source>Fixed key</source>
         <translation>Pevná nota</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="746"/>
+        <location filename="core/types/attribute.cpp" line="758"/>
         <source>Fixed velocity</source>
         <translation>Pevná dynamika</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="749"/>
+        <location filename="core/types/attribute.cpp" line="761"/>
         <source>Attenuation (dB)</source>
         <translation>Zeslabení (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="770"/>
+        <location filename="core/types/attribute.cpp" line="782"/>
         <source>Sample root key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="773"/>
+        <location filename="core/types/attribute.cpp" line="785"/>
         <source>Sample length</source>
         <translation>Délka vzorku</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="776"/>
+        <location filename="core/types/attribute.cpp" line="788"/>
         <source>Loop start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="779"/>
+        <location filename="core/types/attribute.cpp" line="791"/>
         <source>Loop end</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="782"/>
+        <location filename="core/types/attribute.cpp" line="794"/>
         <source>Pitch correction (cents)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="625"/>
+        <location filename="core/types/attribute.cpp" line="637"/>
         <source>Loop end offset (× 32768)</source>
         <translation>Posun konce smyčky (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="752"/>
+        <location filename="core/types/attribute.cpp" line="764"/>
         <source>Tuning (semi-tones)</source>
         <translation>Ladění (půltóny)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="755"/>
+        <location filename="core/types/attribute.cpp" line="767"/>
         <source>Tuning (cents)</source>
         <translation>Ladění (setiny)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="758"/>
+        <location filename="core/types/attribute.cpp" line="770"/>
         <source>Loop playback</source>
         <translation>Přehrávání ve smyčce</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="761"/>
+        <location filename="core/types/attribute.cpp" line="773"/>
         <source>Scale tuning</source>
         <translation>Ladění (stupnice)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="764"/>
+        <location filename="core/types/attribute.cpp" line="776"/>
         <source>Exclusive class</source>
         <translation>Výhradní třída</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="767"/>
+        <location filename="core/types/attribute.cpp" line="779"/>
         <source>Root key</source>
         <translation>Základní nota</translation>
     </message>
@@ -408,334 +408,334 @@
     <message>
         <location filename="repository/browser/browsersortmenu.cpp" line="52"/>
         <source>Date</source>
-        <translation type="unfinished">Datum</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <location filename="repository/browser/browsersortmenu.cpp" line="56"/>
         <source>Downloads</source>
-        <translation type="unfinished">Stahování</translation>
+        <translation>Stahování</translation>
     </message>
     <message>
         <location filename="repository/browser/browsersortmenu.cpp" line="58"/>
         <source>Rating score</source>
-        <translation type="unfinished">Hodnocení</translation>
+        <translation>Hodnocení</translation>
     </message>
     <message>
         <location filename="repository/browser/browsersortmenu.cpp" line="60"/>
         <source>Title (A→Z)</source>
-        <translation type="unfinished">Název (A→Z)</translation>
+        <translation>Název (A→Z)</translation>
     </message>
 </context>
 <context>
     <name>ConfManager</name>
     <message>
-        <location filename="context/confmanager.cpp" line="213"/>
+        <location filename="context/confmanager.cpp" line="219"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
         <translation>Z</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="214"/>
+        <location filename="context/confmanager.cpp" line="220"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="215"/>
+        <location filename="context/confmanager.cpp" line="221"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="216"/>
+        <location filename="context/confmanager.cpp" line="222"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="217"/>
+        <location filename="context/confmanager.cpp" line="223"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="218"/>
+        <location filename="context/confmanager.cpp" line="224"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
         <translation>V</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="219"/>
+        <location filename="context/confmanager.cpp" line="225"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
         <translation>G</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="220"/>
+        <location filename="context/confmanager.cpp" line="226"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="221"/>
+        <location filename="context/confmanager.cpp" line="227"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="222"/>
+        <location filename="context/confmanager.cpp" line="228"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
         <translation>N</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="223"/>
+        <location filename="context/confmanager.cpp" line="229"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
         <translation>J</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="224"/>
+        <location filename="context/confmanager.cpp" line="230"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="225"/>
+        <location filename="context/confmanager.cpp" line="231"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="231"/>
+        <location filename="context/confmanager.cpp" line="237"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
         <translation>Q</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="232"/>
+        <location filename="context/confmanager.cpp" line="238"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="233"/>
+        <location filename="context/confmanager.cpp" line="239"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
         <translation>W</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="234"/>
+        <location filename="context/confmanager.cpp" line="240"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="235"/>
+        <location filename="context/confmanager.cpp" line="241"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="236"/>
+        <location filename="context/confmanager.cpp" line="242"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="237"/>
+        <location filename="context/confmanager.cpp" line="243"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="238"/>
+        <location filename="context/confmanager.cpp" line="244"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
         <translation>T</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="239"/>
+        <location filename="context/confmanager.cpp" line="245"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="240"/>
+        <location filename="context/confmanager.cpp" line="246"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="241"/>
+        <location filename="context/confmanager.cpp" line="247"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="242"/>
+        <location filename="context/confmanager.cpp" line="248"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
         <translation>U</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="243"/>
+        <location filename="context/confmanager.cpp" line="249"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="249"/>
+        <location filename="context/confmanager.cpp" line="255"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
         <translation>Shift+Z</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="250"/>
+        <location filename="context/confmanager.cpp" line="256"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
         <translation>Shift+S</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="251"/>
+        <location filename="context/confmanager.cpp" line="257"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
         <translation>Shift+X</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="252"/>
+        <location filename="context/confmanager.cpp" line="258"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
         <translation>Shift+D</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="253"/>
+        <location filename="context/confmanager.cpp" line="259"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
         <translation>Shift+C</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="254"/>
+        <location filename="context/confmanager.cpp" line="260"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
         <translation>Shift+V</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="255"/>
+        <location filename="context/confmanager.cpp" line="261"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
         <translation>Shift+G</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="256"/>
+        <location filename="context/confmanager.cpp" line="262"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
         <translation>Shift+B</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="257"/>
+        <location filename="context/confmanager.cpp" line="263"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
         <translation>Shift+H</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="258"/>
+        <location filename="context/confmanager.cpp" line="264"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
         <translation>Shift+N</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="259"/>
+        <location filename="context/confmanager.cpp" line="265"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
         <translation>Shift+J</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="260"/>
+        <location filename="context/confmanager.cpp" line="266"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
         <translation>Shift+M</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="261"/>
+        <location filename="context/confmanager.cpp" line="267"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
         <translation>Shift+&lt;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="267"/>
+        <location filename="context/confmanager.cpp" line="273"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
         <translation>Shift+Q</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="268"/>
+        <location filename="context/confmanager.cpp" line="274"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
         <translation>Shift+@</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="269"/>
+        <location filename="context/confmanager.cpp" line="275"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
         <translation>Shift+W</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="270"/>
+        <location filename="context/confmanager.cpp" line="276"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
         <translation>Shift+#</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="271"/>
+        <location filename="context/confmanager.cpp" line="277"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
         <translation>Shift+E</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="272"/>
+        <location filename="context/confmanager.cpp" line="278"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
         <translation>Shift+R</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="273"/>
+        <location filename="context/confmanager.cpp" line="279"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
         <translation>Shift+%</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="274"/>
+        <location filename="context/confmanager.cpp" line="280"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
         <translation>Shift+T</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="275"/>
+        <location filename="context/confmanager.cpp" line="281"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
         <translation>Shift+^</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="276"/>
+        <location filename="context/confmanager.cpp" line="282"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
         <translation>Shift+Y</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="277"/>
+        <location filename="context/confmanager.cpp" line="283"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
         <translation>Shift+&amp;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="278"/>
+        <location filename="context/confmanager.cpp" line="284"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
         <translation>Shift+U</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="279"/>
+        <location filename="context/confmanager.cpp" line="285"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
         <translation>Shift+I</translation>
@@ -1036,7 +1036,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="158"/>
         <source>Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ladění</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
@@ -1098,7 +1098,7 @@ prémiový!</translation>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="372"/>
         <source>Downloads</source>
-        <translation type="unfinished">Stahování</translation>
+        <translation>Stahování</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="113"/>
@@ -1200,7 +1200,7 @@ prémiový!</translation>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="362"/>
         <source>Options</source>
-        <translation type="unfinished">Volby</translation>
+        <translation>Volby</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="388"/>
@@ -1222,7 +1222,7 @@ prémiový!</translation>
         <location filename="context/interface/configsectionsound.cpp" line="129"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
-        <translation type="unfinished">dB</translation>
+        <translation>dB</translation>
     </message>
 </context>
 <context>
@@ -1470,7 +1470,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="66"/>
         <source>mirabilos</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>mirabilos</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="67"/>
@@ -1480,7 +1480,7 @@ repository</source>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="68"/>
-        <location filename="dialogs/dialog_about.cpp" line="80"/>
+        <location filename="dialogs/dialog_about.cpp" line="81"/>
         <source>Steve Clarke</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Steve Clarke</translation>
@@ -1517,12 +1517,18 @@ repository</source>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="78"/>
+        <source>JuliusLC</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation>JuliusLC</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="79"/>
         <source>Magson</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Magson</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="79"/>
+        <location filename="dialogs/dialog_about.cpp" line="80"/>
         <source>Pavel Fric</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Pavel Fric</translation>
@@ -1719,7 +1725,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_list.ui" line="73"/>
         <source>Search...</source>
-        <translation type="unfinished">Hledat...</translation>
+        <translation>Hledat...</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_list.ui" line="41"/>
@@ -1732,32 +1738,32 @@ repository</source>
     <message>
         <location filename="dialogs/dialognewelement.ui" line="55"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Zrušit</translation>
+        <translation>&amp;Zrušit</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.ui" line="62"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;OK</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="51"/>
         <source>Create a new preset</source>
-        <translation type="unfinished">Vytvořit nové přednastavení</translation>
+        <translation>Vytvořit nové přednastavení</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="51"/>
         <source>Create a new instrument</source>
-        <translation type="unfinished">Vytvořit nový nástroj</translation>
+        <translation>Vytvořit nový nástroj</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="52"/>
         <source>Name of the new preset</source>
-        <translation type="unfinished">Název nového přednastavení</translation>
+        <translation>Název nového přednastavení</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="52"/>
         <source>Name of the new instrument</source>
-        <translation type="unfinished">Název nového nástroje</translation>
+        <translation>Název nového nástroje</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="53"/>
@@ -1995,52 +2001,52 @@ repository</source>
         <translation>Vzorek &quot;%1&quot; již existuje.&lt;br/&gt;Nahradit?</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="473"/>
+        <location filename="core/duplicator.cpp" line="469"/>
         <source>The instrument &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>Nástroj &quot;%1&quot; již existuje.&lt;br/&gt;Nahradit?</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="568"/>
+        <location filename="core/duplicator.cpp" line="564"/>
         <source>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</source>
         <translation>Přednastavení &quot;%1&quot; již existuje.&lt;br/&gt;Nahradit?</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="590"/>
+        <location filename="core/duplicator.cpp" line="586"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="591"/>
+        <location filename="core/duplicator.cpp" line="587"/>
         <source>No preset available.</source>
         <translation>Není dostupné žádné přednastavení.</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="789"/>
+        <location filename="core/duplicator.cpp" line="785"/>
         <source>&amp;Replace</source>
         <translation>&amp;Nahradit</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="790"/>
+        <location filename="core/duplicator.cpp" line="786"/>
         <source>R&amp;eplace all</source>
         <translation>N&amp;ahradit vše</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="791"/>
+        <location filename="core/duplicator.cpp" line="787"/>
         <source>&amp;Duplicate</source>
         <translation>&amp;Zdvojit</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="792"/>
+        <location filename="core/duplicator.cpp" line="788"/>
         <source>D&amp;uplicate all</source>
         <translation>Z&amp;dvojit vše</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="793"/>
+        <location filename="core/duplicator.cpp" line="789"/>
         <source>&amp;Ignore</source>
         <translation>Pře&amp;hlížet</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="794"/>
+        <location filename="core/duplicator.cpp" line="790"/>
         <source>I&amp;gnore all</source>
         <translation>Přehlíž&amp;et vše</translation>
     </message>
@@ -2053,17 +2059,17 @@ repository</source>
         <translation>Hledat...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="280"/>
+        <location filename="editor/editor.ui" line="259"/>
         <source>Opening file...</source>
         <translation>Otevírá se soubor...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="411"/>
+        <location filename="editor/editor.ui" line="382"/>
         <source>Cannot open the file</source>
         <translation>Nelze otevřít soubor</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="209"/>
+        <location filename="editor/editor.cpp" line="239"/>
         <source>Untitled</source>
         <translation>Bez názvu</translation>
     </message>
@@ -2300,7 +2306,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/equalizer.cpp" line="122"/>
         <source>Information</source>
-        <translation type="unfinished">Informace</translation>
+        <translation>Informace</translation>
     </message>
     <message>
         <location filename="editor/widgets/equalizer.cpp" line="123"/>
@@ -2330,12 +2336,96 @@ repository</source>
     </message>
 </context>
 <context>
+    <name>FooterLinkedTo</name>
+    <message>
+        <location filename="editor/footers/footerlinkedto.cpp" line="66"/>
+        <source>Sample not linked to an instrument yet.</source>
+        <translation>Vzorek ještě není spojen s žádným nástrojem.</translation>
+    </message>
+    <message>
+        <location filename="editor/footers/footerlinkedto.cpp" line="68"/>
+        <source>Sample linked to instrument:</source>
+        <translation>Vzorek spojen s nástrojem:</translation>
+    </message>
+    <message>
+        <location filename="editor/footers/footerlinkedto.cpp" line="70"/>
+        <source>Sample linked to instruments:</source>
+        <translation>Vzorek spojen s nástroji:</translation>
+    </message>
+    <message>
+        <location filename="editor/footers/footerlinkedto.cpp" line="75"/>
+        <source>Instrument not linked to a preset yet.</source>
+        <translation>Nástroj ještě není spojen s žádným přednastavením.</translation>
+    </message>
+    <message>
+        <location filename="editor/footers/footerlinkedto.cpp" line="77"/>
+        <source>Instrument linked to preset:</source>
+        <translation>Nástroj spojen s přednastavením:</translation>
+    </message>
+    <message>
+        <location filename="editor/footers/footerlinkedto.cpp" line="79"/>
+        <source>Instrument linked to presets:</source>
+        <translation>Nástroj spojen s přednastaveními:</translation>
+    </message>
+</context>
+<context>
+    <name>FooterOverview</name>
+    <message numerus="yes">
+        <location filename="editor/footers/footeroverview.cpp" line="68"/>
+        <source>%n element(s)</source>
+        <translation>
+            <numerusform>%n prvek</numerusform>
+            <numerusform>%n prvky</numerusform>
+            <numerusform>%n prvků</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
+    <name>FooterPrst</name>
+    <message>
+        <location filename="editor/footers/footerprst.ui" line="32"/>
+        <source>Bank</source>
+        <translation>Banka</translation>
+    </message>
+    <message>
+        <location filename="editor/footers/footerprst.ui" line="64"/>
+        <source>Preset</source>
+        <translation>Přednastavení</translation>
+    </message>
+    <message>
+        <location filename="editor/footers/footerprst.ui" line="103"/>
+        <source>(percussion)</source>
+        <translation>(bicí)</translation>
+    </message>
+</context>
+<context>
+    <name>FooterSf2</name>
+    <message>
+        <location filename="editor/footers/footersf2.cpp" line="65"/>
+        <source>GB</source>
+        <comment>giga byte</comment>
+        <translation>GB</translation>
+    </message>
+    <message>
+        <location filename="editor/footers/footersf2.cpp" line="70"/>
+        <source>MB</source>
+        <comment>mega byte</comment>
+        <translation>MB</translation>
+    </message>
+    <message>
+        <location filename="editor/footers/footersf2.cpp" line="75"/>
+        <source>kB</source>
+        <comment>kilo byte</comment>
+        <translation>kB</translation>
+    </message>
+</context>
+<context>
     <name>GraphFilterFrequencies</name>
     <message>
         <location filename="editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="63"/>
         <source>kHz</source>
         <comment>unit for kilo Herz</comment>
-        <translation type="unfinished"></translation>
+        <translation>kHz</translation>
     </message>
 </context>
 <context>
@@ -2367,7 +2457,7 @@ repository</source>
         <location filename="editor/graphics/graphicsviewenvelop.cpp" line="353"/>
         <source>s</source>
         <comment>unit for seconds</comment>
-        <translation type="unfinished">s</translation>
+        <translation>s</translation>
     </message>
 </context>
 <context>
@@ -2382,7 +2472,7 @@ repository</source>
         <location filename="editor/graphics/graphicswave.cpp" line="204"/>
         <source>s</source>
         <comment>unit for seconds</comment>
-        <translation type="unfinished">s</translation>
+        <translation>s</translation>
     </message>
 </context>
 <context>
@@ -2405,21 +2495,21 @@ repository</source>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="94"/>
         <source>Show peak frequencies</source>
-        <translation type="unfinished">Ukázat špičky kmitočtové křivky</translation>
+        <translation>Ukázat špičky kmitočtové křivky</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="502"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="497"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="558"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="553"/>
         <source>Export a graph</source>
         <translation>Vyvést graf</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="559"/>
+        <location filename="editor/graphics/graphiquefourier.cpp" line="554"/>
         <source>Png file</source>
         <translation>Soubor PNG</translation>
     </message>
@@ -2577,7 +2667,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="183"/>
         <source>Untitled</source>
-        <translation type="unfinished">Bez názvu</translation>
+        <translation>Bez názvu</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="193"/>
@@ -2703,35 +2793,35 @@ default mod.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="387"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="392"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
-        <translation type="unfinished">dB</translation>
+        <translation>dB</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="395"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="400"/>
         <source>semi-tones</source>
         <translation>půltóny</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="398"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="403"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="409"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="414"/>
         <source>Add from:</source>
         <oldsource>Add from: </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="410"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="415"/>
         <source>Multiply from:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="412"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="417"/>
         <source>To:</source>
         <oldsource>To: </oldsource>
         <translation type="unfinished"></translation>
@@ -2814,43 +2904,43 @@ default mod.</source>
         </translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="347"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="345"/>
         <source>Duplicate the selection toward...</source>
         <translation>Zdvojit výběr k...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="348"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="346"/>
         <source>Copy the selected modulators</source>
         <translation>Kopírovat vybrané modulátory</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="353"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="351"/>
         <source>Duplicate modulators toward...</source>
         <translation>Zdvojit modulátory k...</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="354"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="352"/>
         <source>Copy all modulators</source>
         <translation>Kopírovat všechny modulátory</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="639"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="637"/>
         <source>Forbidden action:</source>
         <translation>Zakázaná činnost:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="649"/>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="658"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="647"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="656"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="650"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="648"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>posuny nelze v přednastavení měnit.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatoreditor.cpp" line="659"/>
+        <location filename="editor/modulator/modulatoreditor.cpp" line="657"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation>%1 nelze měnit v přednastavení.</translation>
     </message>
@@ -2883,7 +2973,7 @@ default mod.</source>
         <translation>Nepodařilo se přejmenovat soubor &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="core/output/sf2/outputsf2.cpp" line="320"/>
+        <location filename="core/output/sf2/outputsf2.cpp" line="318"/>
         <source>Cannot create file &quot;%1&quot;</source>
         <translation>Nelze vytvořit soubor &quot;%1&quot;</translation>
     </message>
@@ -2909,46 +2999,19 @@ default mod.</source>
 <context>
     <name>PageInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="87"/>
+        <location filename="editor/pageinst.cpp" line="78"/>
         <source>Table</source>
         <translation>Tabulka</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="88"/>
+        <location filename="editor/pageinst.cpp" line="79"/>
         <source>Ranges</source>
         <translation>Rozsahy</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="89"/>
+        <location filename="editor/pageinst.cpp" line="80"/>
         <source>Envelopes</source>
         <translation>Obálky</translation>
-    </message>
-    <message>
-        <location filename="editor/pageinst.cpp" line="126"/>
-        <source>Instrument not linked to a preset yet.</source>
-        <translation>Nástroj ještě není spojen s žádným přednastavením.</translation>
-    </message>
-    <message>
-        <location filename="editor/pageinst.cpp" line="128"/>
-        <source>Instrument linked to preset:</source>
-        <translation>Nástroj spojen s přednastavením:</translation>
-    </message>
-    <message>
-        <location filename="editor/pageinst.cpp" line="130"/>
-        <source>Instrument linked to presets:</source>
-        <translation>Nástroj spojen s přednastaveními:</translation>
-    </message>
-</context>
-<context>
-    <name>PageOverview</name>
-    <message numerus="yes">
-        <location filename="editor/overview/pageoverview.cpp" line="76"/>
-        <source>%n element(s)</source>
-        <translation>
-            <numerusform>%n prvek</numerusform>
-            <numerusform>%n prvky</numerusform>
-            <numerusform>%n prvků</numerusform>
-        </translation>
     </message>
 </context>
 <context>
@@ -3212,33 +3275,18 @@ rate</source>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="275"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
-        <translation type="unfinished">Hz</translation>
+        <translation>Hz</translation>
     </message>
 </context>
 <context>
     <name>PagePrst</name>
     <message>
-        <location filename="editor/pageprst.ui" line="158"/>
-        <source>Bank</source>
-        <translation>Banka</translation>
-    </message>
-    <message>
-        <location filename="editor/pageprst.ui" line="190"/>
-        <source>Preset</source>
-        <translation>Přednastavení</translation>
-    </message>
-    <message>
-        <location filename="editor/pageprst.ui" line="229"/>
-        <source>(percussion)</source>
-        <translation>(bicí)</translation>
-    </message>
-    <message>
-        <location filename="editor/pageprst.cpp" line="82"/>
+        <location filename="editor/pageprst.cpp" line="71"/>
         <source>Table</source>
         <translation>Tabulka</translation>
     </message>
     <message>
-        <location filename="editor/pageprst.cpp" line="83"/>
+        <location filename="editor/pageprst.cpp" line="72"/>
         <source>Ranges</source>
         <translation>Rozsahy</translation>
     </message>
@@ -3246,133 +3294,115 @@ rate</source>
 <context>
     <name>PageSf2</name>
     <message>
-        <location filename="editor/pagesf2.ui" line="72"/>
+        <location filename="editor/pagesf2.ui" line="42"/>
         <source>Title...</source>
         <translation>Název...</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="130"/>
+        <location filename="editor/pagesf2.ui" line="100"/>
         <source>Author...</source>
         <translation>Autor...</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="183"/>
+        <location filename="editor/pagesf2.ui" line="153"/>
         <source>Date...</source>
         <translation>Datum...</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="202"/>
+        <location filename="editor/pagesf2.ui" line="172"/>
         <source>Current date</source>
         <translation>Běžné datum</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="234"/>
+        <location filename="editor/pagesf2.ui" line="204"/>
         <source>Product</source>
         <translation>Výrobek</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="248"/>
+        <location filename="editor/pagesf2.ui" line="218"/>
         <source>Copyright</source>
         <translation>Autorské právo</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="262"/>
+        <location filename="editor/pagesf2.ui" line="232"/>
         <source>Comments</source>
         <translation>Poznámky</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="327"/>
+        <location filename="editor/pagesf2.ui" line="297"/>
         <source>Soundfont version</source>
         <translation>Verze zvukové banky</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="363"/>
+        <location filename="editor/pagesf2.ui" line="333"/>
         <source>ROM name and version</source>
         <translation>Název a verze ROM</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="399"/>
+        <location filename="editor/pagesf2.ui" line="369"/>
         <source>Sound engine</source>
         <translation>Zvukový stroj</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="435"/>
+        <location filename="editor/pagesf2.ui" line="405"/>
         <source>Editing software</source>
         <translation>Program na úpravy</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="538"/>
+        <location filename="editor/pagesf2.ui" line="508"/>
         <source>Presets</source>
         <translation>Přednastavení</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="560"/>
-        <location filename="editor/pagesf2.ui" line="681"/>
-        <location filename="editor/pagesf2.ui" line="1009"/>
+        <location filename="editor/pagesf2.ui" line="530"/>
+        <location filename="editor/pagesf2.ui" line="651"/>
+        <location filename="editor/pagesf2.ui" line="979"/>
         <source>Details</source>
         <translation>Podrobnosti</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="659"/>
-        <location filename="editor/pagesf2.ui" line="758"/>
+        <location filename="editor/pagesf2.ui" line="629"/>
+        <location filename="editor/pagesf2.ui" line="728"/>
         <source>Samples</source>
         <translation>Vzorky</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="744"/>
-        <location filename="editor/pagesf2.ui" line="813"/>
-        <location filename="editor/pagesf2.ui" line="876"/>
+        <location filename="editor/pagesf2.ui" line="714"/>
+        <location filename="editor/pagesf2.ui" line="783"/>
+        <location filename="editor/pagesf2.ui" line="846"/>
         <source>Number</source>
         <translation>Číslo</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="772"/>
+        <location filename="editor/pagesf2.ui" line="742"/>
         <source>16 bits</source>
         <translation>24 bitů {16 ?}</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="777"/>
+        <location filename="editor/pagesf2.ui" line="747"/>
         <source>24 bits</source>
         <translation>24 bitů</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="806"/>
-        <location filename="editor/pagesf2.ui" line="904"/>
+        <location filename="editor/pagesf2.ui" line="776"/>
+        <location filename="editor/pagesf2.ui" line="874"/>
         <source>Modulators</source>
         <translation>Vlnové modulátory</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="834"/>
-        <location filename="editor/pagesf2.ui" line="869"/>
+        <location filename="editor/pagesf2.ui" line="804"/>
+        <location filename="editor/pagesf2.ui" line="839"/>
         <source>Parameters</source>
         <translation>Parametry</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="987"/>
+        <location filename="editor/pagesf2.ui" line="957"/>
         <source>Instruments</source>
         <translation>Nástroje</translation>
     </message>
-    <message>
-        <location filename="editor/pagesf2.cpp" line="113"/>
-        <source>GB</source>
-        <comment>giga byte</comment>
-        <translation>GB</translation>
-    </message>
-    <message>
-        <location filename="editor/pagesf2.cpp" line="118"/>
-        <source>MB</source>
-        <comment>mega byte</comment>
-        <translation>MB</translation>
-    </message>
-    <message>
-        <location filename="editor/pagesf2.cpp" line="123"/>
-        <source>kB</source>
-        <comment>kilo byte</comment>
-        <translation>kB</translation>
-    </message>
     <message numerus="yes">
-        <location filename="editor/pagesf2.cpp" line="255"/>
-        <location filename="editor/pagesf2.cpp" line="265"/>
+        <location filename="editor/pagesf2.cpp" line="226"/>
+        <location filename="editor/pagesf2.cpp" line="236"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (nepoužíváno: %n)</numerusform>
@@ -3390,7 +3420,7 @@ rate</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="344"/>
-        <location filename="editor/pagesmpl.cpp" line="1080"/>
+        <location filename="editor/pagesmpl.cpp" line="1051"/>
         <source>Play</source>
         <translation>Přehrávat</translation>
     </message>
@@ -3407,12 +3437,12 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="187"/>
         <source>Root key</source>
-        <translation type="unfinished">Základní nota</translation>
+        <translation>Základní nota</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="206"/>
         <source>Correction</source>
-        <translation type="unfinished">Oprava</translation>
+        <translation>Oprava</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="291"/>
@@ -3422,7 +3452,7 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="427"/>
         <source>Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladění</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="457"/>
@@ -3461,105 +3491,90 @@ rate</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="646"/>
-        <location filename="editor/pagesmpl.cpp" line="510"/>
-        <location filename="editor/pagesmpl.cpp" line="1008"/>
+        <location filename="editor/pagesmpl.cpp" line="485"/>
+        <location filename="editor/pagesmpl.cpp" line="984"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>
     <message>
+        <location filename="editor/pagesmpl.cpp" line="167"/>
         <location filename="editor/pagesmpl.cpp" line="172"/>
-        <location filename="editor/pagesmpl.cpp" line="177"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="176"/>
-        <location filename="editor/pagesmpl.cpp" line="179"/>
+        <location filename="editor/pagesmpl.cpp" line="171"/>
+        <location filename="editor/pagesmpl.cpp" line="174"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(min)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="256"/>
-        <location filename="editor/pagesmpl.cpp" line="641"/>
+        <location filename="editor/pagesmpl.cpp" line="251"/>
+        <location filename="editor/pagesmpl.cpp" line="615"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="267"/>
-        <location filename="editor/pagesmpl.cpp" line="781"/>
+        <location filename="editor/pagesmpl.cpp" line="261"/>
+        <location filename="editor/pagesmpl.cpp" line="754"/>
         <source>right</source>
         <translation>pravý</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="268"/>
-        <location filename="editor/pagesmpl.cpp" line="782"/>
+        <location filename="editor/pagesmpl.cpp" line="262"/>
+        <location filename="editor/pagesmpl.cpp" line="755"/>
         <source>left</source>
         <translation>levý</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="269"/>
-        <location filename="editor/pagesmpl.cpp" line="783"/>
+        <location filename="editor/pagesmpl.cpp" line="263"/>
+        <location filename="editor/pagesmpl.cpp" line="756"/>
         <source>link</source>
         <translation>spojení</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="308"/>
-        <source>Sample not linked to an instrument yet.</source>
-        <translation>Vzorek ještě není spojen s žádným nástrojem.</translation>
-    </message>
-    <message>
-        <location filename="editor/pagesmpl.cpp" line="310"/>
-        <source>Sample linked to instrument:</source>
-        <translation>Vzorek spojen s nástrojem:</translation>
-    </message>
-    <message>
-        <location filename="editor/pagesmpl.cpp" line="312"/>
-        <source>Sample linked to instruments:</source>
-        <translation>Vzorek spojen s nástroji:</translation>
-    </message>
-    <message>
-        <location filename="editor/pagesmpl.cpp" line="511"/>
-        <location filename="editor/pagesmpl.cpp" line="1009"/>
+        <location filename="editor/pagesmpl.cpp" line="486"/>
+        <location filename="editor/pagesmpl.cpp" line="985"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Změna úspěšně použita na různé vzorky</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="780"/>
-        <location filename="editor/pagesmpl.cpp" line="805"/>
+        <location filename="editor/pagesmpl.cpp" line="753"/>
+        <location filename="editor/pagesmpl.cpp" line="778"/>
         <source>mono</source>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1074"/>
+        <location filename="editor/pagesmpl.cpp" line="1045"/>
         <source>Stop</source>
         <translation>Zastavení</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1093"/>
+        <location filename="editor/pagesmpl.cpp" line="1064"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1094"/>
+        <location filename="editor/pagesmpl.cpp" line="1065"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1096"/>
+        <location filename="editor/pagesmpl.cpp" line="1067"/>
         <source>&amp;Yes</source>
         <translation>&amp;Ano</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1097"/>
+        <location filename="editor/pagesmpl.cpp" line="1068"/>
         <source>&amp;No</source>
         <translation>&amp;Ne</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1098"/>
+        <location filename="editor/pagesmpl.cpp" line="1069"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
         <translation type="unfinished"></translation>
@@ -3588,10 +3603,9 @@ rate</source>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="142"/>
-        <location filename="core/sample/sound.cpp" line="70"/>
-        <location filename="core/sample/sound.cpp" line="74"/>
-        <location filename="core/sample/sound.cpp" line="78"/>
-        <location filename="core/sample/sound.cpp" line="196"/>
+        <location filename="core/sample/sound.cpp" line="69"/>
+        <location filename="core/sample/sound.cpp" line="73"/>
+        <location filename="core/sample/sound.cpp" line="77"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
@@ -3661,17 +3675,17 @@ rate</source>
         <translation>Přednastavení</translation>
     </message>
     <message>
-        <location filename="core/sample/sound.cpp" line="71"/>
+        <location filename="core/sample/sound.cpp" line="70"/>
         <source>Corrupted file: &quot;%1&quot;</source>
         <translation>Soubor je poškozen: &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="core/sample/sound.cpp" line="75"/>
+        <location filename="core/sample/sound.cpp" line="74"/>
         <source>Cannot find file &quot;%1&quot;</source>
         <translation>Nelze najít soubor &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="core/sample/sound.cpp" line="79"/>
+        <location filename="core/sample/sound.cpp" line="78"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>Nelze otevřít soubor &quot;%1&quot;</translation>
     </message>
@@ -3695,22 +3709,22 @@ rate</source>
         <translation>Rozsah dynamiky:</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="124"/>
+        <location filename="dialogs/dialog_about.cpp" line="125"/>
         <source>Created by</source>
         <translation>Vytvořeno</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="125"/>
+        <location filename="dialogs/dialog_about.cpp" line="126"/>
         <source>Contributors</source>
         <translation>Přispěvatelé</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="126"/>
+        <location filename="dialogs/dialog_about.cpp" line="127"/>
         <source>Translated by</source>
         <translation>Přeloženo</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="168"/>
+        <location filename="dialogs/dialog_about.cpp" line="169"/>
         <source>Icons</source>
         <translation>Ikony</translation>
     </message>
@@ -3722,14 +3736,14 @@ rate</source>
     <message>
         <location filename="context/keynamemanager.cpp" line="64"/>
         <location filename="context/keynamemanager.cpp" line="82"/>
-        <location filename="context/keynamemanager.cpp" line="128"/>
+        <location filename="context/keynamemanager.cpp" line="129"/>
         <source>C</source>
         <comment>key name</comment>
         <translation>C</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="65"/>
-        <location filename="context/keynamemanager.cpp" line="131"/>
+        <location filename="context/keynamemanager.cpp" line="132"/>
         <source>D♭</source>
         <comment>key name</comment>
         <translation>D♭</translation>
@@ -3737,14 +3751,14 @@ rate</source>
     <message>
         <location filename="context/keynamemanager.cpp" line="66"/>
         <location filename="context/keynamemanager.cpp" line="84"/>
-        <location filename="context/keynamemanager.cpp" line="134"/>
+        <location filename="context/keynamemanager.cpp" line="135"/>
         <source>D</source>
         <comment>key name</comment>
         <translation>D</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="67"/>
-        <location filename="context/keynamemanager.cpp" line="137"/>
+        <location filename="context/keynamemanager.cpp" line="138"/>
         <source>E♭</source>
         <comment>key name</comment>
         <translation>E♭</translation>
@@ -3752,7 +3766,7 @@ rate</source>
     <message>
         <location filename="context/keynamemanager.cpp" line="68"/>
         <location filename="context/keynamemanager.cpp" line="86"/>
-        <location filename="context/keynamemanager.cpp" line="140"/>
+        <location filename="context/keynamemanager.cpp" line="141"/>
         <source>E</source>
         <comment>key name</comment>
         <translation>E</translation>
@@ -3760,14 +3774,14 @@ rate</source>
     <message>
         <location filename="context/keynamemanager.cpp" line="69"/>
         <location filename="context/keynamemanager.cpp" line="87"/>
-        <location filename="context/keynamemanager.cpp" line="142"/>
+        <location filename="context/keynamemanager.cpp" line="143"/>
         <source>F</source>
         <comment>key name</comment>
         <translation>F</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="70"/>
-        <location filename="context/keynamemanager.cpp" line="145"/>
+        <location filename="context/keynamemanager.cpp" line="146"/>
         <source>G♭</source>
         <comment>key name</comment>
         <translation>G♭</translation>
@@ -3775,14 +3789,14 @@ rate</source>
     <message>
         <location filename="context/keynamemanager.cpp" line="71"/>
         <location filename="context/keynamemanager.cpp" line="89"/>
-        <location filename="context/keynamemanager.cpp" line="148"/>
+        <location filename="context/keynamemanager.cpp" line="149"/>
         <source>G</source>
         <comment>key name</comment>
         <translation>G</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="72"/>
-        <location filename="context/keynamemanager.cpp" line="151"/>
+        <location filename="context/keynamemanager.cpp" line="152"/>
         <source>A♭</source>
         <comment>key name</comment>
         <translation>A♭</translation>
@@ -3790,14 +3804,14 @@ rate</source>
     <message>
         <location filename="context/keynamemanager.cpp" line="73"/>
         <location filename="context/keynamemanager.cpp" line="91"/>
-        <location filename="context/keynamemanager.cpp" line="154"/>
+        <location filename="context/keynamemanager.cpp" line="155"/>
         <source>A</source>
         <comment>key name</comment>
         <translation>A</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="74"/>
-        <location filename="context/keynamemanager.cpp" line="157"/>
+        <location filename="context/keynamemanager.cpp" line="158"/>
         <source>B♭</source>
         <comment>key name</comment>
         <translation>B</translation>
@@ -3805,42 +3819,42 @@ rate</source>
     <message>
         <location filename="context/keynamemanager.cpp" line="75"/>
         <location filename="context/keynamemanager.cpp" line="93"/>
-        <location filename="context/keynamemanager.cpp" line="160"/>
+        <location filename="context/keynamemanager.cpp" line="161"/>
         <source>B</source>
         <comment>key name</comment>
         <translation>H</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="83"/>
-        <location filename="context/keynamemanager.cpp" line="130"/>
+        <location filename="context/keynamemanager.cpp" line="131"/>
         <source>C♯</source>
         <comment>key name</comment>
         <translation>C♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="85"/>
-        <location filename="context/keynamemanager.cpp" line="136"/>
+        <location filename="context/keynamemanager.cpp" line="137"/>
         <source>D♯</source>
         <comment>key name</comment>
         <translation>D♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="88"/>
-        <location filename="context/keynamemanager.cpp" line="144"/>
+        <location filename="context/keynamemanager.cpp" line="145"/>
         <source>F♯</source>
         <comment>key name</comment>
         <translation>F♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="90"/>
-        <location filename="context/keynamemanager.cpp" line="150"/>
+        <location filename="context/keynamemanager.cpp" line="151"/>
         <source>G♯</source>
         <comment>key name</comment>
         <translation>G♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="92"/>
-        <location filename="context/keynamemanager.cpp" line="156"/>
+        <location filename="context/keynamemanager.cpp" line="157"/>
         <source>A♯</source>
         <comment>key name</comment>
         <translation>A♯</translation>
@@ -4563,7 +4577,7 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
         <source>Files</source>
-        <translation type="unfinished">Soubory</translation>
+        <translation>Soubory</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
@@ -4671,7 +4685,7 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="104"/>
         <source>Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahradit</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="44"/>
@@ -4709,7 +4723,7 @@ Nelze stáhnout obsah</translation>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="213"/>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
         <source>Warning</source>
-        <translation type="unfinished">Pozor</translation>
+        <translation>Pozor</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
@@ -4804,12 +4818,12 @@ Nelze stáhnout obsah</translation>
 <context>
     <name>TableWidgetInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="226"/>
+        <location filename="editor/pageinst.cpp" line="196"/>
         <source>Loop</source>
-        <translation type="unfinished">Smyčka</translation>
+        <translation>Smyčka</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="237"/>
+        <location filename="editor/pageinst.cpp" line="207"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
@@ -4818,7 +4832,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TableWidgetPrst</name>
     <message>
-        <location filename="editor/pageprst.cpp" line="232"/>
+        <location filename="editor/pageprst.cpp" line="168"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
@@ -4909,17 +4923,17 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolAutoLoop</name>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="206"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="205"/>
         <source>Failed to loop sample &quot;%1&quot;.</source>
         <translation>Nepodařilo se smyčkovat vzorek &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="209"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="208"/>
         <source>The following samples couldn&apos;t be looped:</source>
         <translation>Následující vzorky se nepodařilo smyčkovat:</translation>
     </message>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="214"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="213"/>
         <source>Possible reasons: too short or too turbulent.</source>
         <translation>Možné příčiny: příliš krátké nebo příliš vířivé.</translation>
     </message>
@@ -5455,7 +5469,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl.h" line="46"/>
         <source>Fast editing</source>
-        <translation type="unfinished">Rychlé úpravy</translation>
+        <translation>Rychlé úpravy</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl.h" line="61"/>
@@ -5468,27 +5482,27 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="22"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;OK</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="42"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Zrušit</translation>
+        <translation>&amp;Zrušit</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="67"/>
         <source>Add</source>
-        <translation type="unfinished">Přidat</translation>
+        <translation>Přidat</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="74"/>
         <source>Multiply</source>
-        <translation type="unfinished">Násobit</translation>
+        <translation>Násobit</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="84"/>
         <source>Parameter</source>
-        <translation type="unfinished">Parametr</translation>
+        <translation>Parametr</translation>
     </message>
 </context>
 <context>
@@ -5587,48 +5601,48 @@ Other soundfont editors might display other units.</source>
         <translation>&amp;Zavřít</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="79"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="74"/>
         <source>Sample</source>
         <translation>Vzorek</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="80"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="75"/>
         <source>Peak</source>
         <translation>Vrchol</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="81"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="76"/>
         <source>Intensity</source>
         <translation>Síla</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="82"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="77"/>
         <source>Frequency</source>
         <translation>Kmitočet</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="83"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="78"/>
         <source>Key</source>
         <translation>Nota</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="84"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="79"/>
         <source>Correction</source>
         <translation>Oprava</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="147"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="142"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
-        <translation type="unfinished">Hz</translation>
+        <translation>Hz</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="171"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="166"/>
         <source>Export peak frequency</source>
         <translation>Vyvést špičky kmitočtové křivky</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="172"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="167"/>
         <source>Csv file</source>
         <translation>Soubor CSV</translation>
     </message>
@@ -5762,7 +5776,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="47"/>
         <source>Fast editing</source>
-        <translation type="unfinished">Rychlé úpravy</translation>
+        <translation>Rychlé úpravy</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="62"/>
@@ -5772,7 +5786,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="296"/>
         <source>Success</source>
-        <translation type="unfinished">Úspěch</translation>
+        <translation>Úspěch</translation>
     </message>
     <message numerus="yes">
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="301"/>
@@ -5790,17 +5804,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="20"/>
         <source>Root key</source>
-        <translation type="unfinished">Základní nota</translation>
+        <translation>Základní nota</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="27"/>
         <source>Tuning (semi-tones)</source>
-        <translation type="unfinished">Ladění (půltóny)</translation>
+        <translation>Ladění (půltóny)</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="34"/>
         <source>Tuning (cents)</source>
-        <translation type="unfinished">Ladění (setiny)</translation>
+        <translation>Ladění (setiny)</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="41"/>
@@ -5810,12 +5824,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="63"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;OK</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="83"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Zrušit</translation>
+        <translation>&amp;Zrušit</translation>
     </message>
 </context>
 <context>
@@ -5974,18 +5988,18 @@ Other soundfont editors might display other units.</source>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="554"/>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="570"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="586"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="554"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="570"/>
         <source>The instrument name must be provided.</source>
         <translation>Musí být poskytnut název nástroje.</translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="570"/>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="586"/>
         <source>At least one rank must be specified.</source>
         <translation>Musí být zadána alespoň jedna řada.</translation>
     </message>
@@ -6340,7 +6354,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="62"/>
         <source>Untitled</source>
-        <translation type="unfinished">Bez názvu</translation>
+        <translation>Bez názvu</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="148"/>
@@ -6525,7 +6539,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeitemdelegate.cpp" line="236"/>
         <source>mute</source>
-        <translation type="unfinished">Ztlumit</translation>
+        <translation>Ztlumit</translation>
     </message>
 </context>
 <context>
@@ -6543,7 +6557,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeview.cpp" line="974"/>
         <source>Warning</source>
-        <translation type="unfinished">Pozor</translation>
+        <translation>Pozor</translation>
     </message>
     <message>
         <location filename="editor/tree/treeview.cpp" line="974"/>
@@ -6638,7 +6652,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="repository/soundfont/uploadingdialog.ui" line="14"/>
         <source>Information</source>
-        <translation type="unfinished">Informace</translation>
+        <translation>Informace</translation>
     </message>
     <message>
         <location filename="repository/soundfont/uploadingdialog.ui" line="54"/>
@@ -6648,7 +6662,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="repository/soundfont/uploadingdialog.cpp" line="76"/>
         <source>Canceling...</source>
-        <translation type="unfinished">Ruší se....</translation>
+        <translation>Ruší se....</translation>
     </message>
 </context>
 <context>

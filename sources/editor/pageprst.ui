@@ -116,123 +116,6 @@
      </widget>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QFrame" name="frameBottom">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>24</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>24</height>
-      </size>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <property name="spacing">
-       <number>6</number>
-      </property>
-      <property name="leftMargin">
-       <number>6</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>6</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>19</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Bank</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="SpinBox" name="spinBank">
-        <property name="minimumSize">
-         <size>
-          <width>70</width>
-          <height>23</height>
-         </size>
-        </property>
-        <property name="accelerated">
-         <bool>true</bool>
-        </property>
-        <property name="maximum">
-         <number>128</number>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="minimumSize">
-         <size>
-          <width>60</width>
-          <height>19</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Preset</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="SpinBox" name="spinPreset">
-        <property name="minimumSize">
-         <size>
-          <width>70</width>
-          <height>23</height>
-         </size>
-        </property>
-        <property name="accelerated">
-         <bool>true</bool>
-        </property>
-        <property name="maximum">
-         <number>127</number>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="labelPercussion">
-        <property name="text">
-         <string>(percussion)</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -253,16 +136,9 @@
    <extends>QTableWidget</extends>
    <header>pageprst.h</header>
   </customwidget>
-  <customwidget>
-   <class>SpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>pageprst.h</header>
-  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>tablePrst</tabstop>
-  <tabstop>spinBank</tabstop>
-  <tabstop>spinPreset</tabstop>
   <tabstop>rangeEditor</tabstop>
  </tabstops>
  <resources/>
@@ -296,38 +172,6 @@
     <hint type="destinationlabel">
      <x>159</x>
      <y>119</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBank</sender>
-   <signal>editingFinished()</signal>
-   <receiver>PagePrst</receiver>
-   <slot>setBank()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>85</x>
-     <y>12</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>310</x>
-     <y>213</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinPreset</sender>
-   <signal>editingFinished()</signal>
-   <receiver>PagePrst</receiver>
-   <slot>setPreset()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>204</x>
-     <y>12</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>310</x>
-     <y>213</y>
     </hint>
    </hints>
   </connection>

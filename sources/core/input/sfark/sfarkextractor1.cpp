@@ -2521,7 +2521,7 @@ qint32 SfArkExtractor1::SfarkOpen(const char * sfarkName)
                     pos++;
                 }
                 strcpy((char *)_sfArkInfo->WorkBuffer2 + 262144 - 1024, sfarkName + lastSep + 1);
-                unsigned char * name = &_sfArkInfo->WorkBuffer2[262144 - 1024];
+                //unsigned char * name = &_sfArkInfo->WorkBuffer2[262144 - 1024];
                 strcpy((char *)_sfArkInfo->WorkBuffer2 + 262144 - 1024 + pos - lastSep - 7, "_tmp");
 
                 // Note the part file we're extracting first. Could be '1' or '2'

@@ -22,50 +22,32 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_PRST_H
-#define PAGE_PRST_H
+#ifndef FOOTERLINKEDTO_H
+#define FOOTERLINKEDTO_H
 
-#include <QWidget>
-#include "pagetable.h"
+#include "abstractfooter.h"
 
-namespace Ui
-{
-    class PagePrst;
+namespace Ui {
+class FooterLinkedTo;
 }
 
-class PagePrst : public PageTable
+class FooterLinkedTo : public AbstractFooter
 {
     Q_OBJECT
 
 public:
-    explicit PagePrst(QWidget *parent = nullptr);
-    ~PagePrst() override;
+    explicit FooterLinkedTo(QWidget *parent = nullptr);
+    ~FooterLinkedTo();
 
-    // Display options
-    QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;
+    void updateInterface() override;
 
-protected:
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
-    void keyPlayedInternal2(int key, int velocity) override;
+private slots:
+    void onLinkClicked(EltID id);
 
 private:
-    Ui::PagePrst *ui;
+    void updateStereoButtonState();
+
+    Ui::FooterLinkedTo *ui;
 };
 
-// Classe TableWidget pour presets
-class TableWidgetPrst : public TableWidget
-{
-    Q_OBJECT
-public:
-    TableWidgetPrst(QWidget *parent = nullptr);
-    ~TableWidgetPrst();
-
-    // Association champ - ligne
-    AttributeType getChamp(int row);
-    int getRow(AttributeType champ);
-
-private:
-    QList<AttributeType> _fieldList;
-};
-
-#endif // PAGE_PRST_H
+#endif // FOOTERLINKEDTO_H
