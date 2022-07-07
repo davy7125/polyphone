@@ -53,8 +53,6 @@ static quint32 fastCeil(float val)
 
 GraphicsWavePainter::GraphicsWavePainter(QWidget * widget) :
     _widget(widget),
-    _sampleSize(0),
-    _sampleData(nullptr),
     _pixels(nullptr),
     _image(nullptr),
     _samplePlotMean(nullptr),
@@ -93,17 +91,16 @@ void GraphicsWavePainter::setData(QVector<float> vData)
     _pixels = nullptr;
     _samplePlotMean = nullptr;
 
-    // Extract the waveform
-    _sampleSize = static_cast<quint32>(vData.size());
-    _sampleData = vData.constData();
+    // Store the waveform
+    _sampleData = vData;
 }
 
 void GraphicsWavePainter::paint(QPainter * painter, quint32 start, quint32 end, float zoomY)
 {
-    if (start >= _sampleSize)
-        start = _sampleSize - 1;
-    if (end >= _sampleSize)
-        end = _sampleSize - 1;
+    if (start >= (unsigned int)_sampleData.size())
+        start = (unsigned int)_sampleData.size() - 1;
+    if (end >= (unsigned int)_sampleData.size())
+        end = (unsigned int)_sampleData.size() - 1;
     if (start == end)
         return;
 
@@ -142,7 +139,7 @@ void GraphicsWavePainter::prepareImage()
     delete [] _samplePlotMean;
     _samplePlotMean = nullptr;
 
-    if (_sampleSize <= 1)
+    if (_sampleData.empty())
         return;
 
     // Wave form larger than the number of pixels
@@ -327,8 +324,8 @@ QPointF * GraphicsWavePainter::getDataAround(quint32 position, quint32 desiredLe
     // Limits
     quint32 leftIndex = position > desiredLength ? position - desiredLength : 0;
     quint32 rightIndex = position + desiredLength;
-    if (rightIndex >= _sampleSize)
-        rightIndex = _sampleSize - 1;
+    if (rightIndex >= (unsigned int)_sampleData.size())
+        rightIndex = _sampleData.size() - 1;
 
     if (rightIndex <= leftIndex)
         return nullptr;

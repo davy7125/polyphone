@@ -38,6 +38,27 @@ PageTable::PageTable(bool isPrst, QWidget *parent) : Page(parent, isPrst ? "page
     _isPrst(isPrst)
 {
     connect(ContextManager::configuration(), SIGNAL(divisionSortChanged()), this, SLOT(divisionSortChanged()));
+
+    if (_isPrst)
+    {
+        this->contenant = elementPrst;
+        this->contenantGen = elementPrstGen;
+        this->contenantMod = elementPrstMod;
+        this->contenu = elementInst;
+        this->lien = elementPrstInst;
+        this->lienGen = elementPrstInstGen;
+        this->lienMod = elementPrstInstMod;
+    }
+    else
+    {
+        this->contenant = elementInst;
+        this->contenantGen = elementInstGen;
+        this->contenantMod = elementInstMod;
+        this->contenu = elementSmpl;
+        this->lien = elementInstSmpl;
+        this->lienGen = elementInstSmplGen;
+        this->lienMod = elementInstSmplMod;
+    }
 }
 
 void PageTable::updateInterface(QString editingSource)

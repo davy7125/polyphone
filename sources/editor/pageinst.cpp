@@ -42,14 +42,7 @@ PageInst::PageInst(QWidget *parent) :
     // Style
     QString resetHoverColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name();
 
-    this->contenant = elementInst;
-    this->contenantGen = elementInstGen;
-    this->contenantMod = elementInstMod;
-    this->contenu = elementSmpl;
-    this->lien = elementInstSmpl;
-    this->lienGen = elementInstSmplGen;
-    this->lienMod = elementInstSmplMod;
-    this->_table = ui->tableInst;
+    _table = ui->tableInst;
     _modulatorEditor = ui->modulatorEditor;
 
     connect(this->_table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));

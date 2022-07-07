@@ -63,8 +63,7 @@ private:
     QWidget * _widget;
 
     // Input data
-    quint32 _sampleSize;
-    const float * _sampleData;
+    QVector<float> _sampleData;
 
     // Buffered image and associated parameters
     QRgb * _pixels;

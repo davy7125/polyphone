@@ -191,7 +191,7 @@ void GraphicsViewEnvelop::setSample(QVector<float> vData, int sampleRate, int lo
     int currentSmplPos = 0;
     int nbRead = _triggeredKeyDuration * sampleRate;
 
-    if ((loopMode == 1 || loopMode == 2 || loopMode == 3) && startLoop != endLoop)
+    if (loopMode != 0 && startLoop != endLoop)
     {
         // Loop
         if (currentSmplPos >= endLoop)

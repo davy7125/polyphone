@@ -35,14 +35,7 @@ PagePrst::PagePrst(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->contenant = elementPrst;
-    this->contenantGen = elementPrstGen;
-    this->contenantMod = elementPrstMod;
-    this->contenu = elementInst;
-    this->lien = elementPrstInst;
-    this->lienGen = elementPrstInstGen;
-    this->lienMod = elementPrstInstMod;
-    this->_table = ui->tablePrst;
+    _table = ui->tablePrst;
     _modulatorEditor = ui->modulatorEditor;
 
     connect(this->_table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
