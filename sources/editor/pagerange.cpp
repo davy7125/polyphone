@@ -39,7 +39,7 @@ PageRange::~PageRange()
 }
 
 void PageRange::updateInterface(QString editingSource)
-{
+{    
     // Check if the new parents are the same
     IdList parentIds = _currentIds.getSelectedIds(elementInst);
     if (parentIds.empty())
@@ -60,9 +60,17 @@ void PageRange::updateInterface(QString editingSource)
         sameElement = false;
     bool justSelection = (sameElement && editingSource == "command:selection");
 
+    // Store the new parent ids
     _currentParentIds = parentIds;
 
-    ui->rangeEditor->display(_currentIds, justSelection);
+    // Multiple instruments or presets?
+    if (_currentParentIds.count() > 1)
+        ui->stackedWidget->setCurrentIndex(1);
+    else
+    {
+        ui->rangeEditor->display(_currentIds, justSelection);
+        ui->stackedWidget->setCurrentIndex(0);
+    }
 }
 
 void PageRange::keyPlayedInternal(int key, int velocity)

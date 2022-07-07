@@ -81,6 +81,7 @@ void PageTable::updateInterface(QString editingSource)
         sameElement = false;
     bool justSelection = (sameElement && editingSource == "command:selection");
 
+    // Store the new parent ids
     _currentParentIds = parentIds;
 
     // Show or hide the modulator section

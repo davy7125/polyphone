@@ -3340,6 +3340,13 @@ Frequenz</translation>
         <source>Ranges</source>
         <translation>Bereiche</translation>
     </message>
+    <message>
+        <location filename="editor/pagerange.ui" line="78"/>
+        <source>Select a single instrument or preset
+to display its division ranges</source>
+        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a single instrument or preset&lt;/p&gt;&lt;p&gt;to display its division ranges&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PageSf2</name>
@@ -3632,7 +3639,7 @@ Frequenz</translation>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="editor/pagetable.cpp" line="137"/>
+        <location filename="editor/pagetable.cpp" line="159"/>
         <source>Global</source>
         <translation>Global</translation>
     </message>
@@ -4870,12 +4877,12 @@ download content</source>
 <context>
     <name>TableWidgetInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="132"/>
+        <location filename="editor/pageinst.cpp" line="125"/>
         <source>Loop</source>
         <translation>Loop</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="143"/>
+        <location filename="editor/pageinst.cpp" line="136"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
@@ -4884,7 +4891,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TableWidgetPrst</name>
     <message>
-        <location filename="editor/pageprst.cpp" line="110"/>
+        <location filename="editor/pageprst.cpp" line="103"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
