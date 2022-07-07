@@ -161,26 +161,39 @@ void EditorToolBar::disable()
     ui->pushSave->disable(true);
 }
 
-void EditorToolBar::setDisplayOptions(QList<Page::DisplayOption> displayOptions)
+void EditorToolBar::clearDisplayOptions()
 {
-    // First clear all display options
     while (!_displayActions.isEmpty())
         delete _displayActions.takeFirst();
+}
 
-    // Then create new display options
-    ui->separator_3->setVisible(!displayOptions.isEmpty());
-    foreach (Page::DisplayOption displayOption, displayOptions)
+void EditorToolBar::setDisplayOptions(QList<Page *> possiblePages, Page *selectedPage)
+{
+    // First clear all display options
+    this->clearDisplayOptions();
+
+    // Then create new display options, only if there is more than one
+    if (possiblePages.length() > 1)
     {
-        StyledAction * action = new StyledAction(this);
-        action->initialize(displayOption._label, displayOption._iconName);
-        action->setCheckable(true);
-        action->setData(displayOption._id);
-        action->setEnabled(displayOption._isEnabled);
-        action->setChecked(displayOption._isSelected);
-        connect(action, SIGNAL(clicked()), this, SLOT(onDisplayActionClicked()));
-        ui->layoutDisplay->addWidget(action);
-        _displayActions << action;
+        ui->separator_3->show();
+        for (int i = 0; i < possiblePages.length(); i++)
+        {
+            Page * page = possiblePages[i];
+            StyledAction * action = new StyledAction(this);
+            QString iconName = page->getIconName();
+            if (iconName.isEmpty())
+                iconName = ":/icons/pen.svg";
+            action->initialize(page->getLabel(), iconName);
+            action->setCheckable(true);
+            action->setData(i);
+            action->setChecked(page == selectedPage);
+            connect(action, SIGNAL(clicked()), this, SLOT(onDisplayActionClicked()));
+            ui->layoutDisplay->addWidget(action);
+            _displayActions << action;
+        }
     }
+    else
+        ui->separator_3->hide();
 }
 
 void EditorToolBar::onDisplayActionClicked()

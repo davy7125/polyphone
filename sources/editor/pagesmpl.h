@@ -28,8 +28,7 @@
 #include <QWidget>
 #include "page.h"
 
-namespace Ui
-{
+namespace Ui {
     class PageSmpl;
 }
 
@@ -41,22 +40,20 @@ public:
     explicit PageSmpl(QWidget * parent = nullptr);
     ~PageSmpl() override;
 
+    bool isSuitableFor(ElementType elementType) override
+    {
+        return elementType == elementSmpl;
+    }
+
     void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
     static EltID getRepercussionID(EltID id);
 
-public slots:
-    // When the key "space" is pressed in the tree
-    void onSampleOnOff();
-
 protected:
     // Update the interface
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
+    void updateInterface(QString editingSource) override;
 
-    // Refresh things after a page is shown
-    void onShow() override;
-
-    // Reaction when a key is played
-    void keyPlayedInternal(int key, int velocity) override;
+    // Key "space" is pressed in the tree
+    void onSpacePressedInternal() override;
 
 private slots:
     void lecture();

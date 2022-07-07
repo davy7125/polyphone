@@ -37,18 +37,12 @@ ExtensionManagerView::~ExtensionManagerView()
         delete _extensions.takeFirst();
 }
 
-QString ExtensionManagerView::getName(int index)
+void ExtensionManagerView::store(ExtensionView *extension)
 {
-    return _extensions[index]->getName();
+    _extensions << extension;
 }
 
-QString ExtensionManagerView::getIconPath(int index)
+Page * ExtensionManagerView::createPage(int index)
 {
-    return _extensions[index]->getIconPath();
+    return _extensions[index]->createPage();
 }
-
-QWidget * ExtensionManagerView::getGui(int index, QWidget * parent)
-{
-    return _extensions[index]->getGui(parent);
-}
-

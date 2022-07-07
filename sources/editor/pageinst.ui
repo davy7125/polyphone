@@ -11,9 +11,12 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string notr="true">Form</string>
+   <string notr="true"/>
   </property>
-  <layout class="QGridLayout" name="gridLayout_5">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -26,125 +29,54 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <property name="verticalSpacing">
-    <number>0</number>
-   </property>
-   <item row="1" column="0">
-    <widget class="QStackedWidget" name="stackedWidget">
-     <property name="currentIndex">
-      <number>0</number>
+   <item>
+    <widget class="TableWidgetInst" name="tableInst">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <widget class="QWidget" name="page">
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="TableWidgetInst" name="tableInst">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="autoScroll">
-          <bool>true</bool>
-         </property>
-         <property name="editTriggers">
-          <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::SelectedClicked</set>
-         </property>
-         <property name="showDropIndicator" stdset="0">
-          <bool>false</bool>
-         </property>
-         <property name="dragDropOverwriteMode">
-          <bool>false</bool>
-         </property>
-         <property name="selectionMode">
-          <enum>QAbstractItemView::ExtendedSelection</enum>
-         </property>
-         <property name="textElideMode">
-          <enum>Qt::ElideMiddle</enum>
-         </property>
-         <property name="horizontalScrollMode">
-          <enum>QAbstractItemView::ScrollPerPixel</enum>
-         </property>
-         <property name="cornerButtonEnabled">
-          <bool>false</bool>
-         </property>
-         <attribute name="verticalHeaderMinimumSectionSize">
-          <number>10</number>
-         </attribute>
-        </widget>
-       </item>
-       <item>
-        <widget class="ModulatorEditor" name="modulatorEditor" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="page_2">
-      <layout class="QGridLayout" name="gridLayout_4">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item row="0" column="0">
-        <widget class="GraphicsViewRange" name="rangeEditor">
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="page_3">
-      <layout class="QGridLayout" name="gridLayout_6">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item row="0" column="0">
-        <widget class="EnvelopEditor" name="envelopEditor" native="true"/>
-       </item>
-      </layout>
-     </widget>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="autoScroll">
+      <bool>true</bool>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::SelectedClicked</set>
+     </property>
+     <property name="showDropIndicator" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="dragDropOverwriteMode">
+      <bool>false</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+     <property name="textElideMode">
+      <enum>Qt::ElideMiddle</enum>
+     </property>
+     <property name="horizontalScrollMode">
+      <enum>QAbstractItemView::ScrollPerPixel</enum>
+     </property>
+     <property name="cornerButtonEnabled">
+      <bool>false</bool>
+     </property>
+     <attribute name="verticalHeaderMinimumSectionSize">
+      <number>10</number>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <widget class="ModulatorEditor" name="modulatorEditor" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
     </widget>
    </item>
   </layout>
@@ -156,28 +88,12 @@
    <header>pageinst.h</header>
   </customwidget>
   <customwidget>
-   <class>GraphicsViewRange</class>
-   <extends>QGraphicsView</extends>
-   <header>graphicsviewrange.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>EnvelopEditor</class>
-   <extends>QWidget</extends>
-   <header>envelopeditor.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>ModulatorEditor</class>
    <extends>QWidget</extends>
    <header>modulatoreditor.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <tabstops>
-  <tabstop>tableInst</tabstop>
-  <tabstop>rangeEditor</tabstop>
- </tabstops>
  <resources/>
  <connections>
   <connection>

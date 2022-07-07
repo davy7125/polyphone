@@ -44,7 +44,8 @@ public:
     void setSf2Index(int sf2index);
     void updateActions();
     void disable();
-    void setDisplayOptions(QList<Page::DisplayOption> displayOptions);
+    void clearDisplayOptions();
+    void setDisplayOptions(QList<Page *> possiblePages, Page * selectedPage);
 
     static void updateRecorderButtonsState(bool isChecked);
     static void updateKeyboardButtonsState(bool isChecked);

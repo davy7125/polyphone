@@ -40,12 +40,10 @@ public:
     explicit PageInst(QWidget *parent = nullptr);
     ~PageInst() override;
 
-    // Display options
-    QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;
-
-protected:
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
-    void keyPlayedInternal2(int key, int velocity) override;
+    bool isSuitableFor(ElementType elementType) override
+    {
+        return elementType == elementInst || elementType == elementInstSmpl;
+    }
 
 private:
     Ui::PageInst *ui;

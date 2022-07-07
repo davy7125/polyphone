@@ -25,10 +25,9 @@
 #ifndef EXTENSIONMANAGER_VIEW_H
 #define EXTENSIONMANAGER_VIEW_H
 
-#include <QString>
 #include <QList>
-class QWidget;
 class ExtensionView;
+class Page;
 
 class ExtensionManagerView
 {
@@ -36,11 +35,9 @@ public:
     ExtensionManagerView();
     ~ExtensionManagerView();
 
-    void store(ExtensionView * extension) { _extensions << extension; }
+    void store(ExtensionView * extension);
     int count() { return _extensions.count(); }
-    QString getName(int index);
-    QString getIconPath(int index);
-    QWidget * getGui(int index, QWidget *parent);
+    Page * createPage(int index);
 
 private:
     QList<ExtensionView *> _extensions;

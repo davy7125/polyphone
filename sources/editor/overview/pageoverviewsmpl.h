@@ -34,11 +34,16 @@ class PageOverviewSmpl : public PageOverview
 public:
     PageOverviewSmpl(QWidget * parent = nullptr);
 
+    bool isSuitableFor(ElementType elementType) override
+    {
+        return elementType == elementRootSmpl;
+    }
+
 protected:
-    QString getTitle();
-    QStringList getHorizontalHeader();
-    void prepare(EltID id);
-    void getInformation(EltID id, QStringList &info, QStringList &order, QList<int> &status);
+    QString getTitle() override;
+    QStringList getHorizontalHeader() override;
+    void prepare(EltID id) override;
+    void getInformation(EltID id, QStringList &info, QStringList &order, QList<int> &status) override;
 
 private:
     QString isUsed(EltID id, int &status);

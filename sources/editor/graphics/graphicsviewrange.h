@@ -48,17 +48,17 @@ public:
     void playKey(int key, int velocity);
 
 signals:
-    void updateKeyboard();
     void divisionsSelected(IdList divisions);
 
 protected:
-    void resizeEvent(QResizeEvent * event);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
-    void wheelEvent(QWheelEvent * event);
-    void mouseDoubleClickEvent(QMouseEvent *) {}
-    void scrollContentsBy(int dx, int dy);
+    void showEvent(QShowEvent * event) override;
+    void resizeEvent(QResizeEvent * event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void wheelEvent(QWheelEvent * event) override;
+    void mouseDoubleClickEvent(QMouseEvent *) override {}
+    void scrollContentsBy(int dx, int dy) override;
 
 private:
     void initItems();

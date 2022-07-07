@@ -9,7 +9,7 @@
 # Uncomment a line if your distribution doesn't come with some of the following libraries
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
-#DEFINES += USE_LOCAL_QCUSTOMPLOT
+DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # Uncomment this line to use wolfssl instead of openssl (for a license issue)
 #DEFINES += USE_WOLFSSL
@@ -247,8 +247,10 @@ SOURCES	+= main.cpp \
     editor/footers/footersf2.cpp \
     editor/modulator/modulatorsplitter.cpp \
     editor/page.cpp \
+    editor/pageenvelope.cpp \
+    editor/pagerange.cpp \
+    editor/pageselector.cpp \
     editor/pagetable.cpp \
-    editor/envelopeditor.cpp \
     editor/graphics/graphiquefourier.cpp \
     editor/graphics/graphicsviewrange.cpp \
     editor/graphics/graphicslegenditem.cpp \
@@ -593,8 +595,10 @@ HEADERS += \
     editor/footers/footersf2.h \
     editor/modulator/modulatorsplitter.h \
     editor/page.h \
+    editor/pageenvelope.h \
+    editor/pagerange.h \
+    editor/pageselector.h \
     editor/pagetable.h \
-    editor/envelopeditor.h \
     editor/graphics/graphiquefourier.h \
     editor/graphics/graphicssimpletextitem.h \
     editor/graphics/graphicsviewrange.h \
@@ -906,12 +910,13 @@ FORMS += \
     dialogs/dialog_about.ui \
     dialogs/dialogselection.ui \
     dialogs/dialogchangelog.ui \
-    editor/envelopeditor.ui \
     editor/footers/footerlinkedto.ui \
     editor/footers/footeroverview.ui \
     editor/footers/footerprst.ui \
     editor/footers/footersf2.ui \
     editor/overview/pageoverview.ui \
+    editor/pageenvelope.ui \
+    editor/pagerange.ui \
     editor/widgets/editortoolbar.ui \
     editor/widgets/equalizer.ui \
     mainwindow/widgetshowhistory.ui \

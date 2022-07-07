@@ -961,7 +961,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="73"/>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Farver</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="349"/>
@@ -1059,12 +1059,12 @@
         <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
         <location filename="context/interface/configsectionkeyboard.ui" line="95"/>
         <source>Back to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilbage til standardværdien</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="158"/>
         <source>Tuning</source>
-        <translation type="unfinished">Tuning</translation>
+        <translation>Tuning</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
@@ -2097,12 +2097,12 @@ oversigt</translation>
         <translation>Åben fil...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="382"/>
+        <location filename="editor/editor.ui" line="375"/>
         <source>Cannot open the file</source>
         <translation>Kan ikke åbne filen</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="239"/>
+        <location filename="editor/editor.cpp" line="260"/>
         <source>Untitled</source>
         <translation>Unavngiven</translation>
     </message>
@@ -2217,105 +2217,24 @@ oversigt</translation>
         <translation>Virtuelt keyboard</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="267"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="280"/>
         <source>Import an audio file</source>
         <translation>Importér lydfil</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="269"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="282"/>
         <source>Audio files</source>
         <translation>Lydfiler</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="427"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="440"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="427"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="440"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
-    </message>
-</context>
-<context>
-    <name>EnvelopEditor</name>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="162"/>
-        <location filename="editor/envelopeditor.ui" line="205"/>
-        <location filename="editor/envelopeditor.ui" line="224"/>
-        <location filename="editor/envelopeditor.ui" line="339"/>
-        <location filename="editor/envelopeditor.ui" line="401"/>
-        <source> s</source>
-        <comment>unit for second</comment>
-        <translation> s</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="372"/>
-        <source> dB</source>
-        <comment>unit for decibels</comment>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="279"/>
-        <source>Delay</source>
-        <translation>Forsinkelse</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="128"/>
-        <source>Decay</source>
-        <translation>Dæmpning</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="420"/>
-        <source>Sustain</source>
-        <translation>Udtoning</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="263"/>
-        <source>Hold</source>
-        <translation>Hold</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="138"/>
-        <source>Release</source>
-        <translation>Release</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="181"/>
-        <source>Key → Decay</source>
-        <translation>Tangent → Dæmpning</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="329"/>
-        <source>Attack</source>
-        <translation>Stejlhed</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="391"/>
-        <source>Key → Hold</source>
-        <translation>Tangent → Hold</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="458"/>
-        <source>Volume envelope</source>
-        <translation>Styrke kurve</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="477"/>
-        <source>Modulation envelope</source>
-        <translation>Moduæerings kurve</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.cpp" line="98"/>
-        <source>dB</source>
-        <comment>unit for decibels</comment>
-        <translation>dB</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.cpp" line="111"/>
-        <source>%</source>
-        <comment>percentage</comment>
-        <translation>%</translation>
     </message>
 </context>
 <context>
@@ -3027,19 +2946,87 @@ default mod.</source>
     </message>
 </context>
 <context>
-    <name>PageInst</name>
+    <name>PageEnvelope</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="78"/>
-        <source>Table</source>
-        <translation>Oversigt</translation>
+        <location filename="editor/pageenvelope.ui" line="128"/>
+        <source>Decay</source>
+        <translation>Dæmpning</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="79"/>
-        <source>Ranges</source>
-        <translation>Inddelinger</translation>
+        <location filename="editor/pageenvelope.ui" line="138"/>
+        <source>Release</source>
+        <translation>Release</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="80"/>
+        <location filename="editor/pageenvelope.ui" line="162"/>
+        <location filename="editor/pageenvelope.ui" line="205"/>
+        <location filename="editor/pageenvelope.ui" line="224"/>
+        <location filename="editor/pageenvelope.ui" line="339"/>
+        <location filename="editor/pageenvelope.ui" line="401"/>
+        <source> s</source>
+        <comment>unit for second</comment>
+        <translation> s</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="181"/>
+        <source>Key → Decay</source>
+        <translation>Tangent → Dæmpning</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="263"/>
+        <source>Hold</source>
+        <translation>Hold</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="279"/>
+        <source>Delay</source>
+        <translation>Forsinkelse</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="329"/>
+        <source>Attack</source>
+        <translation>Stejlhed</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="372"/>
+        <source> dB</source>
+        <comment>unit for decibels</comment>
+        <translation> dB</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="391"/>
+        <source>Key → Hold</source>
+        <translation>Tangent → Hold</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="420"/>
+        <source>Sustain</source>
+        <translation>Udtoning</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="458"/>
+        <source>Volume envelope</source>
+        <translation>Styrke kurve</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="477"/>
+        <source>Modulation envelope</source>
+        <translation>Moduæerings kurve</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.cpp" line="93"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation>dB</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.cpp" line="106"/>
+        <source>%</source>
+        <comment>percentage</comment>
+        <translation>%</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.h" line="46"/>
         <source>Envelopes</source>
         <translation>Kurver</translation>
     </message>
@@ -3295,14 +3282,9 @@ frekvens</translation>
     </message>
 </context>
 <context>
-    <name>PagePrst</name>
+    <name>PageRange</name>
     <message>
-        <location filename="editor/pageprst.cpp" line="71"/>
-        <source>Table</source>
-        <translation>Diagram</translation>
-    </message>
-    <message>
-        <location filename="editor/pageprst.cpp" line="72"/>
+        <location filename="editor/pagerange.h" line="48"/>
         <source>Ranges</source>
         <translation>Områder</translation>
     </message>
@@ -3417,8 +3399,8 @@ frekvens</translation>
         <translation>Instrumenter</translation>
     </message>
     <message numerus="yes">
-        <location filename="editor/pagesf2.cpp" line="226"/>
-        <location filename="editor/pagesf2.cpp" line="236"/>
+        <location filename="editor/pagesf2.cpp" line="218"/>
+        <location filename="editor/pagesf2.cpp" line="228"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (ubrugt: %n)</numerusform>
@@ -3435,7 +3417,7 @@ frekvens</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="344"/>
-        <location filename="editor/pagesmpl.cpp" line="1051"/>
+        <location filename="editor/pagesmpl.cpp" line="1025"/>
         <source>Play</source>
         <translation>Afspil</translation>
     </message>
@@ -3506,90 +3488,90 @@ frekvens</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="646"/>
-        <location filename="editor/pagesmpl.cpp" line="485"/>
-        <location filename="editor/pagesmpl.cpp" line="984"/>
+        <location filename="editor/pagesmpl.cpp" line="476"/>
+        <location filename="editor/pagesmpl.cpp" line="975"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="167"/>
-        <location filename="editor/pagesmpl.cpp" line="172"/>
+        <location filename="editor/pagesmpl.cpp" line="160"/>
+        <location filename="editor/pagesmpl.cpp" line="165"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="171"/>
-        <location filename="editor/pagesmpl.cpp" line="174"/>
+        <location filename="editor/pagesmpl.cpp" line="164"/>
+        <location filename="editor/pagesmpl.cpp" line="167"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(min)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="251"/>
-        <location filename="editor/pagesmpl.cpp" line="615"/>
+        <location filename="editor/pagesmpl.cpp" line="244"/>
+        <location filename="editor/pagesmpl.cpp" line="606"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="261"/>
-        <location filename="editor/pagesmpl.cpp" line="754"/>
+        <location filename="editor/pagesmpl.cpp" line="254"/>
+        <location filename="editor/pagesmpl.cpp" line="745"/>
         <source>right</source>
         <translation>højre</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="262"/>
-        <location filename="editor/pagesmpl.cpp" line="755"/>
+        <location filename="editor/pagesmpl.cpp" line="255"/>
+        <location filename="editor/pagesmpl.cpp" line="746"/>
         <source>left</source>
         <translation>venstre</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="263"/>
-        <location filename="editor/pagesmpl.cpp" line="756"/>
+        <location filename="editor/pagesmpl.cpp" line="256"/>
+        <location filename="editor/pagesmpl.cpp" line="747"/>
         <source>link</source>
         <translation>genvej</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="486"/>
-        <location filename="editor/pagesmpl.cpp" line="985"/>
+        <location filename="editor/pagesmpl.cpp" line="477"/>
+        <location filename="editor/pagesmpl.cpp" line="976"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Ændringerne blev tilføjet de forskellige samples</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="753"/>
-        <location filename="editor/pagesmpl.cpp" line="778"/>
+        <location filename="editor/pagesmpl.cpp" line="744"/>
+        <location filename="editor/pagesmpl.cpp" line="769"/>
         <source>mono</source>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1045"/>
+        <location filename="editor/pagesmpl.cpp" line="1019"/>
         <source>Stop</source>
         <translation>Stop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1064"/>
+        <location filename="editor/pagesmpl.cpp" line="1038"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1065"/>
+        <location filename="editor/pagesmpl.cpp" line="1039"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1067"/>
+        <location filename="editor/pagesmpl.cpp" line="1041"/>
         <source>&amp;Yes</source>
         <translation>&amp;Ja</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1068"/>
+        <location filename="editor/pagesmpl.cpp" line="1042"/>
         <source>&amp;No</source>
         <translation>&amp;Nej</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1069"/>
+        <location filename="editor/pagesmpl.cpp" line="1043"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
         <translation type="unfinished"></translation>
@@ -3598,9 +3580,14 @@ frekvens</translation>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="editor/pagetable.cpp" line="110"/>
+        <location filename="editor/pagetable.cpp" line="137"/>
         <source>Global</source>
         <translation>Global</translation>
+    </message>
+    <message>
+        <location filename="editor/pagetable.h" line="41"/>
+        <source>Table</source>
+        <translation>Tabel</translation>
     </message>
 </context>
 <context>
@@ -4506,12 +4493,12 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="545"/>
         <source>Go to the previous page</source>
-        <translation type="unfinished"></translation>
+        <translation>Gå til forrige side</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="580"/>
         <source>Go to the next page</source>
-        <translation type="unfinished"></translation>
+        <translation>Gå til næste side</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="670"/>
@@ -4832,12 +4819,12 @@ downloade indholdet</translation>
 <context>
     <name>TableWidgetInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="196"/>
+        <location filename="editor/pageinst.cpp" line="132"/>
         <source>Loop</source>
         <translation>Loop</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="207"/>
+        <location filename="editor/pageinst.cpp" line="143"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
@@ -4846,7 +4833,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TableWidgetPrst</name>
     <message>
-        <location filename="editor/pageprst.cpp" line="168"/>
+        <location filename="editor/pageprst.cpp" line="110"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
@@ -6554,22 +6541,22 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeView</name>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="953"/>
+        <location filename="editor/tree/treeview.cpp" line="950"/>
         <source>instrument</source>
         <translation>instrument</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="953"/>
+        <location filename="editor/tree/treeview.cpp" line="950"/>
         <source>preset</source>
         <translation>forvalg</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="974"/>
+        <location filename="editor/tree/treeview.cpp" line="971"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="974"/>
+        <location filename="editor/tree/treeview.cpp" line="971"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>

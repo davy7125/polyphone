@@ -22,15 +22,14 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "envelopeditor.h"
-#include "ui_envelopeditor.h"
+#include "pageenvelope.h"
+#include "ui_pageenvelope.h"
 #include "contextmanager.h"
 #include <qmath.h>
 
-EnvelopEditor::EnvelopEditor(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::EnvelopEditor),
-    _sf2(SoundfontManager::getInstance()),
+PageEnvelope::PageEnvelope(QWidget *parent) :
+    Page(parent, "page:env"),
+    ui(new Ui::PageEnvelope),
     _isVolume(true)
 {
     ui->setupUi(this);
@@ -73,23 +72,19 @@ EnvelopEditor::EnvelopEditor(QWidget *parent) :
     ui->pushSustain->setIcon(revertIcon);
 }
 
-EnvelopEditor::~EnvelopEditor()
+PageEnvelope::~PageEnvelope()
 {
     delete ui;
 }
 
-void EnvelopEditor::display(QList<EltID> ids, bool justSelection)
+void PageEnvelope::updateInterface(QString editingSource)
 {
-    Q_UNUSED(justSelection)
-
-    // Reinitialization
-    _displayedElt = ids;
-
-    enableEditor(_displayedElt.count() == 1);
+    Q_UNUSED(editingSource)
+    enableEditor(_currentIds.count() == 1);
     populate();
 }
 
-void EnvelopEditor::on_pushVolume_clicked()
+void PageEnvelope::on_pushVolume_clicked()
 {
     if (!_isVolume)
     {
@@ -102,7 +97,7 @@ void EnvelopEditor::on_pushVolume_clicked()
     }
 }
 
-void EnvelopEditor::on_pushModulation_clicked()
+void PageEnvelope::on_pushModulation_clicked()
 {
     if (_isVolume)
     {
@@ -115,7 +110,7 @@ void EnvelopEditor::on_pushModulation_clicked()
     }
 }
 
-void EnvelopEditor::populate()
+void PageEnvelope::populate()
 {
     stopSignals(true);
 
@@ -125,9 +120,9 @@ void EnvelopEditor::populate()
     fontB.setBold(true);
 
     // Initialize the editor values
-    if (_displayedElt.count() == 1)
+    if (_currentIds.count() == 1)
     {
-        EltID id = _displayedElt[0];
+        EltID id = _currentIds[0];
         bool isOverridden;
 
         // Delay
@@ -175,9 +170,9 @@ void EnvelopEditor::populate()
     ui->graphicsView->clearEnvelops();
     if (_isVolume)
     {
-        for (int i = 0; i < _displayedElt.count(); i++)
+        for (int i = 0; i < _currentIds.count(); i++)
         {
-            EltID id = _displayedElt[i];
+            EltID id = _currentIds[i];
 
             // Volume envelop
             addEnvelop(id, true, true);
@@ -185,9 +180,9 @@ void EnvelopEditor::populate()
     }
     else
     {
-        for (int i = 0; i < _displayedElt.count(); i++)
+        for (int i = 0; i < _currentIds.count(); i++)
         {
-            EltID id = _displayedElt[i];
+            EltID id = _currentIds[i];
 
             // Corresponding volume envelop in secondary
             addEnvelop(id, true, false);
@@ -199,15 +194,15 @@ void EnvelopEditor::populate()
     ui->graphicsView->computeEnvelops();
 
     // Sample
-    if (_displayedElt.count() == 1 && _displayedElt[0].typeElement == elementInstSmpl)
-        addSample(_displayedElt[0]);
+    if (_currentIds.count() == 1 && _currentIds[0].typeElement == elementInstSmpl)
+        addSample(_currentIds[0]);
 
     ui->graphicsView->repaint();
 
     stopSignals(false);
 }
 
-double EnvelopEditor::computeValue(EltID id, AttributeType champ, bool &isOverridden)
+double PageEnvelope::computeValue(EltID id, AttributeType champ, bool &isOverridden)
 {
     if (_sf2->isSet(id, champ))
     {
@@ -231,7 +226,7 @@ double EnvelopEditor::computeValue(EltID id, AttributeType champ, bool &isOverri
     }
 }
 
-void EnvelopEditor::addEnvelop(EltID id, bool isVolume, bool isMain)
+void PageEnvelope::addEnvelop(EltID id, bool isVolume, bool isMain)
 {
     int index = ui->graphicsView->addEnvelop();
     ui->graphicsView->setEnvelopStyle(index, id.typeElement == elementInst, isVolume, isMain);
@@ -286,7 +281,7 @@ void EnvelopEditor::addEnvelop(EltID id, bool isVolume, bool isMain)
     ui->graphicsView->setKeyRange(index, keyMin, keyMax);
 }
 
-void EnvelopEditor::addSample(EltID idInstSmpl)
+void PageEnvelope::addSample(EltID idInstSmpl)
 {
     // Index of the sample
     EltID idSmpl = idInstSmpl;
@@ -318,17 +313,42 @@ void EnvelopEditor::addSample(EltID idInstSmpl)
     ui->graphicsView->setSample(vData, sampleRate, loopMode, startLoop, endLoop);
 }
 
-void EnvelopEditor::enableEditor(bool isEnabled)
+void PageEnvelope::enableEditor(bool isEnabled)
 {
-    for (int i = 0; i < ui->gridLayout_2->count(); ++i)
-    {
-        QWidget *widget = ui->gridLayout_2->itemAt(i)->widget();
-        if (widget != nullptr)
-            widget->setEnabled(isEnabled);
-    }
+    ui->labelDelay->setEnabled(isEnabled);
+    ui->doubleSpinDelay->setEnabled(isEnabled);
+    ui->pushDelay->setEnabled(isEnabled);
+
+    ui->labelAttack->setEnabled(isEnabled);
+    ui->doubleSpinAttack->setEnabled(isEnabled);
+    ui->pushAttack->setEnabled(isEnabled);
+
+    ui->labelHold->setEnabled(isEnabled);
+    ui->doubleSpinHold->setEnabled(isEnabled);
+    ui->pushHold->setEnabled(isEnabled);
+
+    ui->labelDecay->setEnabled(isEnabled);
+    ui->doubleSpinDecay->setEnabled(isEnabled);
+    ui->pushDecay->setEnabled(isEnabled);
+
+    ui->labelSustain->setEnabled(isEnabled);
+    ui->doubleSpinSustain->setEnabled(isEnabled);
+    ui->pushSustain->setEnabled(isEnabled);
+
+    ui->labelRelease->setEnabled(isEnabled);
+    ui->doubleSpinRelease->setEnabled(isEnabled);
+    ui->pushRelease->setEnabled(isEnabled);
+
+    ui->labelKeyDecay->setEnabled(isEnabled);
+    ui->spinKeyDecay->setEnabled(isEnabled);
+    ui->pushKeyDecay->setEnabled(isEnabled);
+
+    ui->labelKeyHold->setEnabled(isEnabled);
+    ui->spinKeyHold->setEnabled(isEnabled);
+    ui->pushKeyHold->setEnabled(isEnabled);
 }
 
-void EnvelopEditor::stopSignals(bool isStopped)
+void PageEnvelope::stopSignals(bool isStopped)
 {
     for (int i = 0; i < ui->gridLayout_2->count(); ++i)
     {
@@ -338,105 +358,105 @@ void EnvelopEditor::stopSignals(bool isStopped)
     }
 }
 
-void EnvelopEditor::on_doubleSpinDelay_editingFinished()
+void PageEnvelope::on_doubleSpinDelay_editingFinished()
 {
     processEdit(_isVolume ? champ_delayVolEnv : champ_delayModEnv, ui->doubleSpinDelay->value());
 }
 
-void EnvelopEditor::on_doubleSpinAttack_editingFinished()
+void PageEnvelope::on_doubleSpinAttack_editingFinished()
 {
     processEdit(_isVolume ? champ_attackVolEnv : champ_attackModEnv, ui->doubleSpinAttack->value());
 }
 
-void EnvelopEditor::on_doubleSpinHold_editingFinished()
+void PageEnvelope::on_doubleSpinHold_editingFinished()
 {
     processEdit(_isVolume ? champ_holdVolEnv : champ_holdModEnv, ui->doubleSpinHold->value());
 }
 
-void EnvelopEditor::on_doubleSpinDecay_editingFinished()
+void PageEnvelope::on_doubleSpinDecay_editingFinished()
 {
     processEdit(_isVolume ? champ_decayVolEnv : champ_decayModEnv, ui->doubleSpinDecay->value());
 }
 
-void EnvelopEditor::on_doubleSpinSustain_editingFinished()
+void PageEnvelope::on_doubleSpinSustain_editingFinished()
 {
     processEdit(_isVolume ? champ_sustainVolEnv : champ_sustainModEnv, ui->doubleSpinSustain->value());
 }
 
-void EnvelopEditor::on_doubleSpinRelease_editingFinished()
+void PageEnvelope::on_doubleSpinRelease_editingFinished()
 {
     processEdit(_isVolume ? champ_releaseVolEnv : champ_releaseModEnv, ui->doubleSpinRelease->value());
 }
 
-void EnvelopEditor::on_spinKeyHold_editingFinished()
+void PageEnvelope::on_spinKeyHold_editingFinished()
 {
     processEdit(_isVolume ? champ_keynumToVolEnvHold : champ_keynumToModEnvHold, ui->spinKeyHold->value());
 }
 
-void EnvelopEditor::on_spinKeyDecay_editingFinished()
+void PageEnvelope::on_spinKeyDecay_editingFinished()
 {
     processEdit(_isVolume ? champ_keynumToVolEnvDecay : champ_keynumToModEnvDecay, ui->spinKeyDecay->value());
 }
 
-void EnvelopEditor::processEdit(AttributeType champ, double value)
+void PageEnvelope::processEdit(AttributeType champ, double value)
 {
     bool isOverridden = true;
-    double oldValue = computeValue(_displayedElt[0], champ, isOverridden);
+    double oldValue = computeValue(_currentIds[0], champ, isOverridden);
     if (qAbs(value - oldValue) > 0.0005)
     {
         AttributeValue val = Attribute::fromRealValue(champ, false, value);
-        _sf2->set(_displayedElt[0], champ, val);
-        _sf2->endEditing("envelopEditor");
+        _sf2->set(_currentIds[0], champ, val);
+        _sf2->endEditing(_editingSource);
         populate();
     }
 }
 
-void EnvelopEditor::on_pushDelay_clicked()
+void PageEnvelope::on_pushDelay_clicked()
 {
     processClear(_isVolume ? champ_delayVolEnv : champ_delayModEnv);
 }
 
-void EnvelopEditor::on_pushAttack_clicked()
+void PageEnvelope::on_pushAttack_clicked()
 {
     processClear(_isVolume ? champ_attackVolEnv : champ_attackModEnv);
 }
 
-void EnvelopEditor::on_pushHold_clicked()
+void PageEnvelope::on_pushHold_clicked()
 {
     processClear(_isVolume ? champ_holdVolEnv : champ_holdModEnv);
 }
 
-void EnvelopEditor::on_pushSustain_clicked()
+void PageEnvelope::on_pushSustain_clicked()
 {
     processClear(_isVolume ? champ_sustainVolEnv : champ_sustainModEnv);
 }
 
-void EnvelopEditor::on_pushRelease_clicked()
+void PageEnvelope::on_pushRelease_clicked()
 {
     processClear(_isVolume ? champ_releaseVolEnv : champ_releaseModEnv);
 }
 
-void EnvelopEditor::on_pushDecay_clicked()
+void PageEnvelope::on_pushDecay_clicked()
 {
     processClear(_isVolume ? champ_decayVolEnv : champ_decayModEnv);
 }
 
-void EnvelopEditor::on_pushKeyHold_clicked()
+void PageEnvelope::on_pushKeyHold_clicked()
 {
     processClear(_isVolume ? champ_keynumToVolEnvHold : champ_keynumToModEnvHold);
 }
 
-void EnvelopEditor::on_pushKeyDecay_clicked()
+void PageEnvelope::on_pushKeyDecay_clicked()
 {
     processClear(_isVolume ? champ_keynumToVolEnvDecay : champ_keynumToModEnvDecay);
 }
 
-void EnvelopEditor::processClear(AttributeType champ)
+void PageEnvelope::processClear(AttributeType champ)
 {
-    if (_sf2->isSet(_displayedElt[0], champ))
+    if (_sf2->isSet(_currentIds[0], champ))
     {
-        _sf2->reset(_displayedElt[0], champ);
-        _sf2->endEditing("envelopEditor");
+        _sf2->reset(_currentIds[0], champ);
+        _sf2->endEditing(_editingSource);
         populate();
     }
 }

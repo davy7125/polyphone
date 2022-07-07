@@ -1,13 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   version="1.1"
-   height="136.53334"
-   width="136.53334">
+<svg xmlns="http://www.w3.org/2000/svg" height="136.53334" width="136.53334">
   <g transform="translate(0,-985.98633)">
     <path style="fill:currentColor"
        d="m 72.676086,1025.8048 c -7.125097,4.1799 -10.921541,11.7464 -8.586217,17.4385 2.491133,6.0715 11.051018,7.785 19.107157,3.8248 8.05614,-3.9603 12.572611,-12.1021 10.081479,-18.1736 -2.491133,-6.0715 -11.051019,-7.785 -19.107158,-3.8248 -0.503384,0.2475 -1.020206,0.4565 -1.495261,0.7351 z" />

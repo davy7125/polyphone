@@ -27,6 +27,8 @@
 
 #include <QWidget>
 #include "basetypes.h"
+
+class PageSelector;
 class AbstractInputParser;
 
 namespace Ui {
@@ -50,6 +52,9 @@ public:
     /// Notify that a change has been made somewhere
     void update(QString editingSource);
 
+protected:
+    void showEvent(QShowEvent* event) override;
+
 signals:
     void tabTitleChanged(QString title);
     void filePathChanged(QString filePath);
@@ -60,12 +65,18 @@ private slots:
     void inputProcessed();
     void onSelectionChanged(IdList ids);
     void displayOptionChanged(int displayOption);
+    void onKeyPlayed(int key, int vel);
+    void customizeKeyboard();
+    void onEditingDone(QString editingSource, QList<int> sf2Indexes);
 
 private:
     void updateTitleAndPath();
 
     Ui::Editor *ui;
     int _sf2Index;
+    PageSelector * _pageSelector;
+    ElementType _currentElementType;
+    IdList _currentIds;
 };
 
 #endif // EDITOR_H

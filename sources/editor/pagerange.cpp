@@ -22,42 +22,51 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGEOVERVIEWINST_H
-#define PAGEOVERVIEWINST_H
+#include "pagerange.h"
+#include "ui_pagerange.h"
 
-#include "pageoverview.h"
-
-class PageOverviewInst : public PageOverview
+PageRange::PageRange(QWidget *parent) :
+    Page(parent, "rangeEditor"),
+    ui(new Ui::PageRange)
 {
-    Q_OBJECT
+    ui->setupUi(this);
+    connect(ui->rangeEditor, SIGNAL(divisionsSelected(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
+}
 
-public:
-    PageOverviewInst(QWidget * parent = nullptr);
+PageRange::~PageRange()
+{
+    delete ui;
+}
 
-    bool isSuitableFor(ElementType elementType) override
+void PageRange::updateInterface(QString editingSource)
+{
+    // Check if the new parents are the same
+    IdList parentIds = _currentIds.getSelectedIds(elementInst);
+    if (parentIds.empty())
+        parentIds = _currentIds.getSelectedIds(elementPrst);
+    bool sameElement = true;
+    if (parentIds.count() == _currentParentIds.count())
     {
-        return elementType == elementRootInst;
+        for (int i = 0; i < parentIds.count(); i++)
+        {
+            if (parentIds[i] != _currentParentIds[i])
+            {
+                sameElement = false;
+                break;
+            }
+        }
     }
+    else
+        sameElement = false;
+    bool justSelection = (sameElement && editingSource == "command:selection");
 
-protected:
-    QString getTitle() override;
-    QStringList getHorizontalHeader() override;
-    void prepare(EltID id) override;
-    void getInformation(EltID id, QStringList &info, QStringList &order, QList<int> &status) override;
+    _currentParentIds = parentIds;
 
-private:
-    QString isUsed(EltID id, int &status);
-    QString getSampleNumber(EltID id);
-    QString getParameterNumber(EltID id);
-    QString getModulatorNumber(EltID id);
-    QString getKeyRange(EltID id, bool orderMode);
-    QString getVelocityRange(EltID id, bool orderMode);
-    QString getAttenuation(EltID id, bool orderMode);
-    QString getLoop(EltID id);
-    QString getChorus(EltID id, bool orderMode);
-    QString getReverb(EltID id, bool orderMode);
+    ui->rangeEditor->display(_currentIds, justSelection);
+}
 
-    QList<int> _usedInst;
-};
+void PageRange::keyPlayedInternal(int key, int velocity)
+{
+    ui->rangeEditor->playKey(key, velocity);
+}
 
-#endif // PAGEOVERVIEWINST_H

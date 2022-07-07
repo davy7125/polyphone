@@ -27,18 +27,45 @@
 #include "contextmanager.h"
 #include "dialogselection.h"
 #include "graphicsviewrange.h"
-#include "envelopeditor.h"
 #include "utils.h"
-#include "pianokeybdcustom.h"
 #include "modulatoreditor.h"
 #include <QMenu>
 #include <QScrollBar>
 #include <QFontMetrics>
 
-PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(parent, typePage, typePage == PAGE_INST ? "page:inst" : "page:prst"),
-    _table(nullptr)
+PageTable::PageTable(bool isPrst, QWidget *parent) : Page(parent, isPrst ? "page:prst" : "page:inst"),
+    _table(nullptr),
+    _isPrst(isPrst)
 {
     connect(ContextManager::configuration(), SIGNAL(divisionSortChanged()), this, SLOT(divisionSortChanged()));
+}
+
+void PageTable::updateInterface(QString editingSource)
+{
+    // Check if the new parents are the same
+    IdList parentIds = _currentIds.getSelectedIds(_isPrst ? elementPrst : elementInst);
+    bool sameElement = true;
+    if (parentIds.count() == _currentParentIds.count())
+    {
+        for (int i = 0; i < parentIds.count(); i++)
+        {
+            if (parentIds[i] != _currentParentIds[i])
+            {
+                sameElement = false;
+                break;
+            }
+        }
+    }
+    else
+        sameElement = false;
+    bool justSelection = (sameElement && editingSource == "command:selection");
+
+    _currentParentIds = parentIds;
+
+    // Show or hide the modulator section
+    _modulatorEditor->setVisible(_currentParentIds.count() == 1);
+
+    this->afficheTable(justSelection);
 }
 
 void PageTable::afficheTable(bool justSelection)
@@ -158,7 +185,7 @@ void PageTable::addGlobal(IdList listIds)
                     else
                         _table->item(row, numCol)->setText(
                                     Attribute::toString(static_cast<AttributeType>(i),
-                                                        _typePage == PAGE_PRST, genValTmp));
+                                                        _isPrst, genValTmp));
                 }
             }
         }
@@ -281,7 +308,7 @@ void PageTable::addDivisions(EltID id)
                     else
                         _table->item(row, numCol)->setText(
                                     Attribute::toString(static_cast<AttributeType>(champTmp),
-                                                        _typePage == PAGE_PRST, genValTmp));
+                                                        _isPrst, genValTmp));
                 }
             }
         }
@@ -467,18 +494,6 @@ void PageTable::styleFixedRow(int numRow)
     _table->setRowHeight(numRow, QFontMetrics(font).height() + 6);
 }
 
-void PageTable::afficheRanges(bool justSelection)
-{
-    if (!_currentIds.isEmpty())
-        _rangeEditor->display(_currentIds, justSelection);
-}
-
-void PageTable::afficheEnvelops(bool justSelection)
-{
-    if (_envelopEditor != nullptr)
-        _envelopEditor->display(_currentIds, justSelection);
-}
-
 void PageTable::resetChamp(int colonne, AttributeType champ1, AttributeType champ2)
 {
     EltID id = _table->getID(colonne);
@@ -501,11 +516,11 @@ void PageTable::setOffset(int ligne, int colonne, AttributeType champ1, Attribut
     EltID id = _table->getID(colonne);
     bool ok;
     QString texte = _table->item(ligne, colonne)->text().left(9);
-    AttributeValue genAmount = Attribute::fromString(champ1, _typePage == PAGE_PRST, texte, ok);
+    AttributeValue genAmount = Attribute::fromString(champ1, _isPrst, texte, ok);
     if (ok)
     {
         // Enregistrement de la nouvelle valeur
-        AttributeValue genAmount2 = Attribute::fromString(champ2, _typePage == PAGE_PRST, texte, ok);
+        AttributeValue genAmount2 = Attribute::fromString(champ2, _isPrst, texte, ok);
         int iVal = limit(32768 * genAmount2.shValue + genAmount.shValue, champ1, id);
         genAmount2.shValue = static_cast<qint16>(iVal / 32768);
         genAmount.shValue = static_cast<qint16>(iVal % 32768);
@@ -528,7 +543,7 @@ void PageTable::setOffset(int ligne, int colonne, AttributeType champ1, Attribut
         if (_sf2->isSet(id, champ1) || _sf2->isSet(id, champ2))
         {
             genAmount.shValue = _sf2->get(id, champ1).shValue + 32768 * _sf2->get(id, champ2).shValue;
-            _table->item(ligne, colonne)->setText(Attribute::toString(champ1, _typePage == PAGE_PRST, genAmount));
+            _table->item(ligne, colonne)->setText(Attribute::toString(champ1, _isPrst, genAmount));
         }
         else
             _table->item(ligne, colonne)->setText("");
@@ -545,7 +560,7 @@ void PageTable::actionFinished()
 {
     if (_preparingPage)
         return;
-    _sf2->endEditing(getEditingSource());
+    _sf2->endEditing(_editingSource);
 }
 
 void PageTable::set(int ligne, int colonne, bool allowPropagation)
@@ -683,7 +698,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
                 QString texte = _table->item(ligne, colonne)->text().left(9);
                 bool ok;
                 EltID id = _table->getID(colonne);
-                AttributeValue genAmount = Attribute::fromString(champ, _typePage == PAGE_PRST, texte, ok);
+                AttributeValue genAmount = Attribute::fromString(champ, _isPrst, texte, ok);
                 if (ok)
                 {
                     // Modification champ
@@ -693,13 +708,13 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
                         _sf2->set(id, champ, genAmount);
                     }
                     // Mise à jour de la valeur dans la cellule
-                    _table->item(ligne, colonne)->setText(Attribute::toString(champ, _typePage == PAGE_PRST, genAmount));
+                    _table->item(ligne, colonne)->setText(Attribute::toString(champ, _isPrst, genAmount));
                 }
                 else
                 {
                     // Restauration valeur précédente
                     if (_sf2->isSet(id, champ))
-                        _table->item(ligne, colonne)->setText(Attribute::toString(champ, _typePage == PAGE_PRST, _sf2->get(id, champ)));
+                        _table->item(ligne, colonne)->setText(Attribute::toString(champ, _isPrst, _sf2->get(id, champ)));
                     else _table->item(ligne, colonne)->setText("");
                 }
             }
@@ -710,8 +725,9 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
 
     // Mise à jour partie mod (car entre 2 des mods peuvent être définitivement détruits, et les index peuvent être mis à jour)
     _modulatorEditor->setIds(_currentIds);
-    if (champ == champ_overridingRootKey || champ == champ_keyRange)
-        customizeKeyboard();
+
+    //if (champ == champ_overridingRootKey || champ == champ_keyRange)
+    //    customizeKeyboard();
 }
 
 void PageTable::reselect()
@@ -789,90 +805,6 @@ void PageTable::selected()
     // Update the selection outside the table
     emit(selectedIdsChanged(ids));
     _preparingPage = false;
-
-    customizeKeyboard();
-}
-
-void PageTable::customizeKeyboard()
-{
-    ContextManager::midi()->keyboard()->clearCustomization();
-
-    QList<EltID> ids = _currentIds;
-    if (ids.isEmpty())
-        return;
-
-    // If the global division is in the list, exclude the rest
-    foreach (EltID id, ids)
-    {
-        if (id.typeElement == elementInst || id.typeElement == elementPrst)
-        {
-            ids.clear();
-            ids << id;
-            break;
-        }
-    }
-
-    // Affichage des étendues et rootkeys des divisions sélectionnées
-    foreach (EltID id, ids)
-    {
-        if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
-        {
-            int rootKey = -1;
-            if (id.typeElement == elementInstSmpl)
-            {
-                if (_sf2->isSet(id, champ_overridingRootKey))
-                    rootKey = _sf2->get(id, champ_overridingRootKey).wValue;
-                else
-                {
-                    EltID idSmpl = id;
-                    idSmpl.typeElement = elementSmpl;
-                    idSmpl.indexElt = _sf2->get(id, champ_sampleID).wValue;
-                    rootKey = _sf2->get(idSmpl, champ_byOriginalPitch).bValue;
-                }
-            }
-
-            RangesType keyRange;
-            keyRange.byLo = 0;
-            keyRange.byHi = 127;
-            if (_sf2->isSet(id, champ_keyRange))
-                keyRange = _sf2->get(id, champ_keyRange).rValue;
-            else
-            {
-                if (id.typeElement == elementInstSmpl)
-                    id.typeElement = elementInst;
-                else
-                    id.typeElement = elementPrst;
-                if (_sf2->isSet(id, champ_keyRange))
-                    keyRange = _sf2->get(id, champ_keyRange).rValue;
-            }
-            ContextManager::midi()->keyboard()->addRangeAndRootKey(rootKey, keyRange.byLo, keyRange.byHi);
-        }
-        else if (id.typeElement == elementInst || id.typeElement == elementPrst)
-        {
-            RangesType defaultKeyRange;
-            if (_sf2->isSet(id, champ_keyRange))
-                defaultKeyRange = _sf2->get(id, champ_keyRange).rValue;
-            else
-            {
-                defaultKeyRange.byLo = 0;
-                defaultKeyRange.byHi = 127;
-            }
-            if (id.typeElement == elementInst)
-                id.typeElement = elementInstSmpl;
-            else
-                id.typeElement = elementPrstInst;
-            foreach (int i, _sf2->getSiblings(id))
-            {
-                id.indexElt2 = i;
-                RangesType keyRange;
-                if (_sf2->isSet(id, champ_keyRange))
-                    keyRange = _sf2->get(id, champ_keyRange).rValue;
-                else
-                    keyRange = defaultKeyRange;
-                ContextManager::midi()->keyboard()->addRangeAndRootKey(-1, keyRange.byLo, keyRange.byHi);
-            }
-        }
-    }
 }
 
 int PageTable::limit(int iVal, AttributeType champ, EltID id)
@@ -1041,42 +973,33 @@ int PageTable::limit(int iVal, AttributeType champ, EltID id)
 void PageTable::keyPlayedInternal(int key, int velocity)
 {
     // Visualization on the table
-    if (_table->isVisible())
-    {
-        // Update triggered elements
-        if (velocity > 0 && _listKeyEnlighted.indexOf(key) == -1)
-            _listKeyEnlighted.append(key);
-        else
-            _listKeyEnlighted.removeAll(key);
 
-        // Color table
-        for (int i = 1; i < _table->columnCount(); i++)
+    // Update triggered elements
+    if (velocity > 0 && _listKeyEnlighted.indexOf(key) == -1)
+        _listKeyEnlighted.append(key);
+    else
+        _listKeyEnlighted.removeAll(key);
+
+    // Color table
+    for (int i = 1; i < _table->columnCount(); i++)
+    {
+        EltID id = _table->getID(i);
+        if (_sf2->isValid(id))
         {
-            EltID id = _table->getID(i);
-            if (_sf2->isValid(id))
+            bool enlighted = false;
+            int key1 = _sf2->get(id, champ_keyRange).rValue.byLo;
+            int key2 = _sf2->get(id, champ_keyRange).rValue.byHi;
+            if (!_sf2->isSet(id, champ_keyRange))
             {
-                bool enlighted = false;
-                int key1 = _sf2->get(id, champ_keyRange).rValue.byLo;
-                int key2 = _sf2->get(id, champ_keyRange).rValue.byHi;
-                if (!_sf2->isSet(id, champ_keyRange))
-                {
-                    key1 = 0;
-                    key2 = 128;
-                }
-                for (int j = 0; j < _listKeyEnlighted.size(); j++)
-                    enlighted = enlighted || (qMin(key1, key2) <= _listKeyEnlighted.at(j)
-                                              && qMax(key1, key2) >= _listKeyEnlighted.at(j));
-                _table->setEnlighted(i, enlighted);
+                key1 = 0;
+                key2 = 128;
             }
+            for (int j = 0; j < _listKeyEnlighted.size(); j++)
+                enlighted = enlighted || (qMin(key1, key2) <= _listKeyEnlighted.at(j)
+                                          && qMax(key1, key2) >= _listKeyEnlighted.at(j));
+            _table->setEnlighted(i, enlighted);
         }
     }
-
-    // Visualization on the range editor
-    if (_rangeEditor->isVisible())
-        _rangeEditor->playKey(key, velocity);
-
-    // Specific commands for instruments or presets
-    keyPlayedInternal2(key, velocity);
 }
 
 void PageTable::onOpenElement(EltID id)
@@ -1133,12 +1056,6 @@ void PageTable::displayModInTable()
             }
         }
     }
-}
-
-void PageTable::onShow()
-{
-    // Refresh the keyboard
-    customizeKeyboard();
 }
 
 void PageTable::divisionSortChanged()

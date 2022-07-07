@@ -25,7 +25,7 @@
 #include "pageoverviewinst.h"
 #include "contextmanager.h"
 
-PageOverviewInst::PageOverviewInst(QWidget * parent) : PageOverview(PAGE_INST, elementInst, parent) {}
+PageOverviewInst::PageOverviewInst(QWidget * parent) : PageOverview(elementInst, parent) {}
 
 QString PageOverviewInst::getTitle()
 {

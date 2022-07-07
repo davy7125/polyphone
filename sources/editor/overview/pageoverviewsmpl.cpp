@@ -26,7 +26,7 @@
 #include "contextmanager.h"
 #include "sampleutils.h"
 
-PageOverviewSmpl::PageOverviewSmpl(QWidget * parent) : PageOverview(PAGE_SMPL, elementSmpl, parent) {}
+PageOverviewSmpl::PageOverviewSmpl(QWidget * parent) : PageOverview(elementSmpl, parent) {}
 
 QString PageOverviewSmpl::getTitle()
 {

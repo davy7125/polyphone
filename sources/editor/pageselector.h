@@ -22,42 +22,26 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGEOVERVIEWINST_H
-#define PAGEOVERVIEWINST_H
+#ifndef PAGESELECTOR_H
+#define PAGESELECTOR_H
 
-#include "pageoverview.h"
+#include "page.h"
+#include "basetypes.h"
 
-class PageOverviewInst : public PageOverview
+class PageSelector
 {
-    Q_OBJECT
-
 public:
-    PageOverviewInst(QWidget * parent = nullptr);
+    PageSelector();
 
-    bool isSuitableFor(ElementType elementType) override
-    {
-        return elementType == elementRootInst;
-    }
-
-protected:
-    QString getTitle() override;
-    QStringList getHorizontalHeader() override;
-    void prepare(EltID id) override;
-    void getInformation(EltID id, QStringList &info, QStringList &order, QList<int> &status) override;
+    QList<Page *> getAllPages() { return _pages; }
+    QList<Page *> getPages(ElementType elementType);
+    Page * getLastPage(ElementType elementType);
+    void setLastPage(ElementType elementType, Page * page);
 
 private:
-    QString isUsed(EltID id, int &status);
-    QString getSampleNumber(EltID id);
-    QString getParameterNumber(EltID id);
-    QString getModulatorNumber(EltID id);
-    QString getKeyRange(EltID id, bool orderMode);
-    QString getVelocityRange(EltID id, bool orderMode);
-    QString getAttenuation(EltID id, bool orderMode);
-    QString getLoop(EltID id);
-    QString getChorus(EltID id, bool orderMode);
-    QString getReverb(EltID id, bool orderMode);
-
-    QList<int> _usedInst;
+    QList<Page *> _pages;
+    QMap<ElementType, QList<Page *> > _pagesPerType;
+    QMap<ElementType, Page *> _lastPagePerType;
 };
 
-#endif // PAGEOVERVIEWINST_H
+#endif // PAGESELECTOR_H

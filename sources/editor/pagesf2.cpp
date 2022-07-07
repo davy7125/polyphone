@@ -29,7 +29,7 @@
 #include "latinvalidator.h"
 
 PageSf2::PageSf2(QWidget * parent) :
-    Page(parent, PAGE_SF2, "page:sf2"),
+    Page(parent, "page:sf2"),
     ui(new Ui::PageSf2)
 {
     ui->setupUi(this);
@@ -79,19 +79,13 @@ PageSf2::~PageSf2()
     delete ui;
 }
 
-bool PageSf2::updateInterface(QString editingSource, IdList selectedIds, int displayOption)
+void PageSf2::updateInterface(QString editingSource)
 {
-    Q_UNUSED(displayOption)
-
-    if (editingSource == getEditingSource())
-        return true;
-
-    // Check the selection
-    if (!selectedIds.isElementUnique(elementSf2))
-        return false;
-    _currentID = selectedIds.getFirstId(elementSf2);
+    if (editingSource == _editingSource)
+        return;
 
     // Count everything
+    _currentID = _currentIds.getFirstId(elementSf2);
     this->countElements();
 
     // Mode 24 bits ?
@@ -115,8 +109,6 @@ bool PageSf2::updateInterface(QString editingSource, IdList selectedIds, int dis
     ui->lineEdit_date->setTextToElide(_sf2->getQstr(_currentID, champ_ICRD));
     ui->lineEdit_product->setText(_sf2->getQstr(_currentID, champ_IPRD));
     ui->textEdit_Com->setPlainText(_sf2->getQstr(_currentID, champ_ICMT));
-
-    return true;
 }
 
 void PageSf2::setName()
@@ -128,7 +120,7 @@ void PageSf2::setName()
     {
         // Soundfont editing
         _sf2->set(_currentID, champ_name, ui->lineEdit_name->text());
-        _sf2->endEditing(getEditingSource());
+        _sf2->endEditing(_editingSource);
     }
 }
 
@@ -141,7 +133,7 @@ void PageSf2::setCopyright()
     {
         // Soundfont editing
         _sf2->set(_currentID, champ_ICOP, ui->lineEdit_copyright->text());
-        _sf2->endEditing(getEditingSource());
+        _sf2->endEditing(_editingSource);
     }
 }
 
@@ -154,7 +146,7 @@ void PageSf2::setAuthor()
     {
         // Soundfont editing
         _sf2->set(_currentID, champ_IENG, ui->lineEdit_author->text());
-        _sf2->endEditing(getEditingSource());
+        _sf2->endEditing(_editingSource);
     }
 }
 
@@ -167,7 +159,7 @@ void PageSf2::setDate()
     {
         // Soundfont editing
         _sf2->set(_currentID, champ_ICRD, ui->lineEdit_date->text());
-        _sf2->endEditing(getEditingSource());
+        _sf2->endEditing(_editingSource);
     }
 }
 
@@ -180,7 +172,7 @@ void PageSf2::setProduct()
     {
         // Soundfont editing
         _sf2->set(_currentID, champ_IPRD, ui->lineEdit_product->text());
-        _sf2->endEditing(getEditingSource());
+        _sf2->endEditing(_editingSource);
     }
 }
 
@@ -198,7 +190,7 @@ void PageSf2::setCommentaire()
     {
         // Soundfont editing
         _sf2->set(_currentID, champ_ICMT, ui->textEdit_Com->toPlainText());
-        _sf2->endEditing(getEditingSource());
+        _sf2->endEditing(_editingSource);
     }
 }
 
@@ -405,10 +397,5 @@ void PageSf2::on_comboBox_currentIndexChanged(int index)
     AttributeValue valTmp;
     valTmp.wValue = (index == 1 ? 24 : 16);
     _sf2->set(_currentID, champ_wBpsSave, valTmp);
-    _sf2->endEditing(getEditingSource());
-}
-
-void PageSf2::onShow()
-{
-    // Nothing special
+    _sf2->endEditing(_editingSource);
 }

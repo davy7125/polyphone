@@ -234,11 +234,8 @@ void TreeView::keyPressEvent(QKeyEvent * event)
     }
     else if (event->key() == Qt::Key_Space)
     {
-        if (getSelectedIds().getSelectedIds(elementSmpl).count() == 1)
-        {
-            emit(sampleOnOff());
-            event->accept();
-        }
+        emit(spacePressed());
+        event->accept();
     }
     else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_D)
     {

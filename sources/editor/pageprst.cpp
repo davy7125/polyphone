@@ -30,7 +30,7 @@
 
 // Constructeur, destructeur
 PagePrst::PagePrst(QWidget *parent) :
-    PageTable(PAGE_PRST, parent),
+    PageTable(true, parent),
     ui(new Ui::PagePrst)
 {
     ui->setupUi(this);
@@ -43,80 +43,22 @@ PagePrst::PagePrst(QWidget *parent) :
     this->lienGen = elementPrstInstGen;
     this->lienMod = elementPrstInstMod;
     this->_table = ui->tablePrst;
-    _rangeEditor = ui->rangeEditor;
-    _envelopEditor = nullptr;
     _modulatorEditor = ui->modulatorEditor;
 
     connect(this->_table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->_table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
     connect(this->_table, SIGNAL(openElement(EltID)), this, SLOT(onOpenElement(EltID)));
-    connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(customizeKeyboard()));
-    connect(ui->rangeEditor, SIGNAL(divisionsSelected(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
     connect(ui->modulatorEditor, SIGNAL(attributesSelected(QList<AttributeType>)), this, SLOT(onModSelectionChanged(QList<AttributeType>)));
 
     // QSplitter for being able to resize the modulator area
-    ModulatorSplitter * splitter = new ModulatorSplitter(ui->page, ui->tablePrst, ui->modulatorEditor, true);
-    QVBoxLayout * layout = dynamic_cast<QVBoxLayout *>(ui->page->layout());
+    ModulatorSplitter * splitter = new ModulatorSplitter(this, ui->tablePrst, ui->modulatorEditor, true);
+    QVBoxLayout * layout = dynamic_cast<QVBoxLayout *>(ui->verticalLayout);
     layout->addWidget(splitter);
 }
 
 PagePrst::~PagePrst()
 {
     delete ui;
-}
-
-QList<Page::DisplayOption> PagePrst::getDisplayOptions(IdList selectedIds)
-{
-    return QList<DisplayOption>()
-            << DisplayOption(1, ":/icons/table.svg", tr("Table"))
-            << DisplayOption(2, ":/icons/range.svg", tr("Ranges"), selectedIds.isElementUnique(elementPrst));
-}
-
-bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int displayOption)
-{
-    if (selectedIds.empty())
-        return false;
-
-    // Check if the new parents are the same
-    IdList parentIds = selectedIds.getSelectedIds(elementPrst);
-    bool sameElement = true;
-    if (parentIds.count() == _currentParentIds.count())
-    {
-        for (int i = 0; i < parentIds.count(); i++)
-        {
-            if (parentIds[i] != _currentParentIds[i])
-            {
-                sameElement = false;
-                break;
-            }
-        }
-    }
-    else
-        sameElement = false;
-    bool justSelection = (sameElement && editingSource == "command:selection");
-
-    _currentParentIds = parentIds;
-    _currentIds = selectedIds;
-
-    // Show or hide the modulator section
-    ui->modulatorEditor->setVisible(_currentParentIds.count() == 1);
-
-    switch (displayOption)
-    {
-    case 1:
-        ui->stackedWidget->setCurrentIndex(0);
-        this->afficheTable(justSelection);
-        break;
-    case 2:
-        ui->stackedWidget->setCurrentIndex(1);
-        this->afficheRanges(justSelection);
-        break;
-    default:
-        return false;
-    }
-    customizeKeyboard();
-
-    return true;
 }
 
 // TableWidgetPrst
@@ -184,11 +126,4 @@ AttributeType TableWidgetPrst::getChamp(int row)
     if (row >= 0 && row < _fieldList.count())
         return _fieldList[row];
     return champ_unknown;
-}
-
-void PagePrst::keyPlayedInternal2(int key, int velocity)
-{
-    IdList ids = _currentIds.getSelectedIds(elementPrst);
-    if (ids.count() == 1)
-        ContextManager::audio()->getSynth()->play(ids[0], -1, key, velocity);
 }

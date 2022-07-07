@@ -34,11 +34,16 @@ class PageOverviewPrst : public PageOverview
 public:
     PageOverviewPrst(QWidget * parent = nullptr);
 
+    bool isSuitableFor(ElementType elementType) override
+    {
+        return elementType == elementRootPrst;
+    }
+
 protected:
-    QString getTitle();
-    QStringList getHorizontalHeader();
-    void prepare(EltID id) { Q_UNUSED(id) }
-    void getInformation(EltID id, QStringList &info, QStringList &order, QList<int> &status);
+    QString getTitle() override;
+    QStringList getHorizontalHeader() override;
+    void prepare(EltID id) override { Q_UNUSED(id) }
+    void getInformation(EltID id, QStringList &info, QStringList &order, QList<int> &status) override;
 
 private:
     QString getBankAndPreset(EltID id, bool orderMode);

@@ -47,7 +47,7 @@ public slots:
 
 signals:
     void selectionChanged(IdList selectedIds);
-    void sampleOnOff();
+    void spacePressed();
     void focusOnSearch();
 
 protected:

@@ -37,15 +37,12 @@ class PageOverview : public Page
     Q_OBJECT
 
 public:
-    PageOverview(TypePage typePage, ElementType typeElement, QWidget *parent = nullptr);
+    PageOverview(ElementType typeElement, QWidget *parent = nullptr);
     ~PageOverview() override;
 
 protected:
     // Update the interface
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
-
-    // Refresh things after a page is shown
-    void onShow() override;
+    void updateInterface(QString editingSource) override;
 
     virtual QString getTitle() = 0;
     virtual QStringList getHorizontalHeader() = 0;

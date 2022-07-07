@@ -34,7 +34,7 @@
 #include <QProcess>
 
 PageSmpl::PageSmpl(QWidget *parent) :
-    Page(parent, PAGE_SMPL, "page:smpl"),
+    Page(parent, "page:smpl"),
     ui(new Ui::PageSmpl),
     _currentPlayingToken(0)
 {
@@ -104,18 +104,11 @@ PageSmpl::~PageSmpl()
     delete ui;
 }
 
-bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int displayOption)
+void PageSmpl::updateInterface(QString editingSource)
 {
-    Q_UNUSED(displayOption)
-
     if (editingSource == "page:smpl" || editingSource == "tree:remove") // tree:remove comes with a new selection
-        return true;
+        return;
 
-    // Check the selection
-    if (!selectedIds.isElementUnique(elementSf2))
-        return false;
-
-    _currentIds = selectedIds;
     IdList ids = _currentIds.getSelectedIds(elementSmpl);
     int nombreElements = ids.size();
 
@@ -190,7 +183,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
 
     // Graphics
     ui->grapheFourier->setSampleName(_sf2->getQstr(id, champ_name));
-    ui->grapheFourier->setCurrentIds(selectedIds);
+    ui->grapheFourier->setCurrentIds(_currentIds);
     ui->waveDisplay->setCurrentSample(0);
     if (nombreElements > 1)
     {
@@ -299,8 +292,6 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     // Initialize the equalizer
     ui->widgetEqualizer->setCurrentIds(ids);
     ui->widgetEqualizer->enableApply(!ui->pushLecture->isChecked() || nombreElements > 1);
-
-    return true;
 }
 
 void PageSmpl::setStartLoop()
@@ -333,7 +324,7 @@ void PageSmpl::setStartLoop()
             }
         }
     }
-    _sf2->endEditing(getEditingSource());
+    _sf2->endEditing(_editingSource);
 
     // Update the page
     ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
@@ -389,7 +380,7 @@ void PageSmpl::setEndLoop()
             }
         }
     }
-    _sf2->endEditing(getEditingSource());
+    _sf2->endEditing(_editingSource);
 
     // Update the page
     ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
@@ -471,7 +462,7 @@ void PageSmpl::on_pushFullLength_clicked()
             }
         }
     }
-    _sf2->endEditing(getEditingSource());
+    _sf2->endEditing(_editingSource);
 
     // Update the page
     ui->spinStartLoop->setValue(0);
@@ -514,7 +505,7 @@ void PageSmpl::setRootKey()
             }
         }
     }
-    _sf2->endEditing(getEditingSource());
+    _sf2->endEditing(_editingSource);
 }
 
 void PageSmpl::setRootKey(int val)
@@ -554,7 +545,7 @@ void PageSmpl::setTune()
             }
         }
     }
-    _sf2->endEditing(getEditingSource());
+    _sf2->endEditing(_editingSource);
 }
 
 void PageSmpl::setTune(int val)
@@ -637,7 +628,7 @@ void PageSmpl::setType(int index)
     }
     _preparingPage = false;
 
-    _sf2->endEditing(getEditingSource());
+    _sf2->endEditing(_editingSource);
 }
 
 void PageSmpl::setLinkedSmpl(int index)
@@ -782,7 +773,7 @@ void PageSmpl::setLinkedSmpl(int index)
     }
     _preparingPage = false;
 
-    _sf2->endEditing(getEditingSource());
+    _sf2->endEditing(_editingSource);
 }
 
 void PageSmpl::setRate(int index)
@@ -817,7 +808,7 @@ void PageSmpl::setRate(int index)
             }
         }
     }
-    _sf2->endEditing(getEditingSource() + ":update");
+    _sf2->endEditing(_editingSource + ":update");
 }
 
 void PageSmpl::setRateElt(EltID id, quint32 echFinal)
@@ -978,7 +969,7 @@ void PageSmpl::on_pushAutoTune_clicked()
             }
         }
     }
-    _sf2->endEditing(getEditingSource() + ":update");
+    _sf2->endEditing(_editingSource + ":update");
 
     if (triggersMessage)
         QMessageBox::information(this, tr("Information"),
@@ -1012,30 +1003,13 @@ void PageSmpl::autoTune(EltID id, int &pitch, int &correction)
     }
 }
 
-void PageSmpl::keyPlayedInternal(int key, int velocity)
+void PageSmpl::onSpacePressedInternal()
 {
-    IdList ids = _currentIds.getSelectedIds(elementSmpl);
-    if (ids.count() == 1)
-        ContextManager::audio()->getSynth()->play(ids[0], -1, key, velocity);
-}
-
-void PageSmpl::onSampleOnOff()
-{
-    ui->pushLecture->toggle();
-    this->lecture();
-}
-
-void PageSmpl::onShow()
-{
-    // Initialize keyboard
-    QList<EltID> ids = _currentIds.getSelectedIds(elementSmpl);
-    if (ids.count() == 1)
+    if (_currentIds.getSelectedIds(elementSmpl).count() == 1)
     {
-        int rootKey = _sf2->get(ids.at(0), champ_byOriginalPitch).bValue;
-        ContextManager::midi()->keyboard()->addRangeAndRootKey(rootKey, 0, 127);
+        ui->pushLecture->toggle();
+        this->lecture();
     }
-    else
-        ContextManager::midi()->keyboard()->addRangeAndRootKey(-1, 0, 127);
 }
 
 void PageSmpl::updatePlayButton()
@@ -1108,7 +1082,7 @@ void PageSmpl::onCutOrdered(int start, int end)
     }
 
     if (updateNeeded)
-        _sf2->endEditing(getEditingSource() + ":update");
+        _sf2->endEditing(_editingSource + ":update");
 }
 
 bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end, EltID &createdSmplId)

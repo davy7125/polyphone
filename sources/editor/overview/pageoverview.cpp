@@ -27,8 +27,8 @@
 #include "contextmanager.h"
 #include "sortedtablewidgetitem.h"
 
-PageOverview::PageOverview(TypePage typePage, ElementType typeElement, QWidget *parent) :
-    Page(parent, typePage, typePage == PAGE_SMPL ? "page:ov_smpl" : (typePage == PAGE_INST ? "page:ov_inst" : "page:ov_prst")),
+PageOverview::PageOverview(ElementType typeElement, QWidget *parent) :
+    Page(parent, typeElement == elementSmpl ? "page:ov_smpl" : (typeElement == elementInst ? "page:ov_inst" : "page:ov_prst")),
     ui(new Ui::PageOverview),
     _typeElement(typeElement)
 {
@@ -43,10 +43,9 @@ PageOverview::~PageOverview()
     delete ui;
 }
 
-bool PageOverview::updateInterface(QString editingSource, IdList selectedIds, int displayOption)
+void PageOverview::updateInterface(QString editingSource)
 {
     Q_UNUSED(editingSource)
-    Q_UNUSED(displayOption)
 
     // Clear the table
     ui->table->clear();
@@ -63,10 +62,7 @@ bool PageOverview::updateInterface(QString editingSource, IdList selectedIds, in
     ui->table->setColumnHidden(0, true);
 
     // Number of rows
-    if (!selectedIds.isElementUnique(elementSf2))
-        return false;
-
-    EltID id = selectedIds.getFirstId(elementSf2);
+    EltID id = _currentIds.getFirstId(elementSf2);
     id.typeElement = _typeElement;
     QList<int> indexes = _sf2->getSiblings(id);
     ui->table->setRowCount(indexes.count());
@@ -90,8 +86,6 @@ bool PageOverview::updateInterface(QString editingSource, IdList selectedIds, in
 
     // Vertical header
     ui->table->sortByColumn(1, Qt::AscendingOrder);
-
-    return true;
 }
 
 QString PageOverview::fillInformation(EltID id, int row)
@@ -178,9 +172,4 @@ void PageOverview::on_table_cellDoubleClicked(int row, int column)
     QStringList listTmp = idStr.split(':');
     EltID id((ElementType)listTmp[0].toInt(), listTmp[1].toInt(), listTmp[2].toInt(), 0, 0);
     emit(selectedIdsChanged(IdList(id)));
-}
-
-void PageOverview::onShow()
-{
-    // Nothing special
 }

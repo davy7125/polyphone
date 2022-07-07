@@ -34,7 +34,7 @@
 
 
 PageInst::PageInst(QWidget *parent) :
-    PageTable(PAGE_INST, parent),
+    PageTable(false, parent),
     ui(new Ui::PageInst)
 {
     ui->setupUi(this);
@@ -50,86 +50,22 @@ PageInst::PageInst(QWidget *parent) :
     this->lienGen = elementInstSmplGen;
     this->lienMod = elementInstSmplMod;
     this->_table = ui->tableInst;
-    _rangeEditor = ui->rangeEditor;
-    _envelopEditor = ui->envelopEditor;
     _modulatorEditor = ui->modulatorEditor;
 
     connect(this->_table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->_table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
     connect(this->_table, SIGNAL(openElement(EltID)), this, SLOT(onOpenElement(EltID)));
-    connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(customizeKeyboard()));
-    connect(ui->rangeEditor, SIGNAL(divisionsSelected(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
     connect(ui->modulatorEditor, SIGNAL(attributesSelected(QList<AttributeType>)), this, SLOT(onModSelectionChanged(QList<AttributeType>)));
 
     // QSplitter for being able to resize the modulator area
-    ModulatorSplitter * splitter = new ModulatorSplitter(ui->page, ui->tableInst, ui->modulatorEditor, false);
-    QVBoxLayout * layout = dynamic_cast<QVBoxLayout *>(ui->page->layout());
+    ModulatorSplitter * splitter = new ModulatorSplitter(this, ui->tableInst, ui->modulatorEditor, false);
+    QVBoxLayout * layout = dynamic_cast<QVBoxLayout *>(ui->verticalLayout);
     layout->addWidget(splitter);
 }
 
 PageInst::~PageInst()
 {
     delete ui;
-}
-
-QList<Page::DisplayOption> PageInst::getDisplayOptions(IdList selectedIds)
-{
-    return QList<DisplayOption>()
-            << DisplayOption(1, ":/icons/table.svg", tr("Table"))
-            << DisplayOption(2, ":/icons/range.svg", tr("Ranges"), selectedIds.isElementUnique(elementInst))
-            << DisplayOption(3, ":/icons/adsr.svg", tr("Envelopes"), selectedIds.isElementUnique(elementInst));
-}
-
-bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int displayOption)
-{
-    if (selectedIds.empty())
-        return false;
-
-    // Check if the new parents are the same
-    IdList parentIds = selectedIds.getSelectedIds(elementInst);
-    bool sameElement = true;
-    if (parentIds.count() == _currentParentIds.count())
-    {
-        for (int i = 0; i < parentIds.count(); i++)
-        {
-            if (parentIds[i] != _currentParentIds[i])
-            {
-                sameElement = false;
-                break;
-            }
-        }
-    }
-    else
-        sameElement = false;
-    bool justSelection = (sameElement && editingSource == "command:selection");
-
-    // Update the selection
-    _currentParentIds = parentIds;
-    _currentIds = selectedIds;
-
-    // Visibility of the modulator section
-    ui->modulatorEditor->setVisible(_currentParentIds.count() == 1);
-
-    switch (displayOption)
-    {
-    case 1:
-        ui->stackedWidget->setCurrentIndex(0);
-        this->afficheTable(justSelection);
-        break;
-    case 2:
-        ui->stackedWidget->setCurrentIndex(1);
-        this->afficheRanges(justSelection);
-        break;
-    case 3:
-        ui->stackedWidget->setCurrentIndex(2);
-        this->afficheEnvelops(justSelection);
-        break;
-    default:
-        return false;
-    }
-    customizeKeyboard();
-
-    return true;
 }
 
 // TableWidgetInst
@@ -224,67 +160,3 @@ AttributeType TableWidgetInst::getChamp(int row)
         return _fieldList[row];
     return champ_unknown;
 }
-
-void PageInst::keyPlayedInternal2(int key, int velocity)
-{
-    IdList ids = _currentIds.getSelectedIds(elementInst);
-    if (ids.count() == 1)
-    {
-        ContextManager::audio()->getSynth()->play(ids[0], -1, key, velocity);
-
-        if (velocity > 0)
-        {
-            // Emphasize the related ranges
-            EltID idInst = ids[0];
-            idInst.typeElement = elementInst;
-            RangesType defaultKeyRange, defaultVelRange;
-            if (_sf2->isSet(idInst, champ_keyRange))
-                defaultKeyRange = _sf2->get(idInst, champ_keyRange).rValue;
-            else
-            {
-                defaultKeyRange.byLo = 0;
-                defaultKeyRange.byHi = 127;
-            }
-            if (_sf2->isSet(idInst, champ_velRange))
-                defaultVelRange = _sf2->get(idInst, champ_velRange).rValue;
-            else
-            {
-                defaultVelRange.byLo = 0;
-                defaultVelRange.byHi = 127;
-            }
-
-            EltID idInstSmpl = ids[0];
-            idInstSmpl.typeElement = elementInstSmpl;
-            foreach (int i, _sf2->getSiblings(idInstSmpl))
-            {
-                idInstSmpl.indexElt2 = i;
-                int keyMin, keyMax, velMin, velMax;
-                if (_sf2->isSet(idInstSmpl, champ_keyRange))
-                {
-                    RangesType rangeTmp = _sf2->get(idInstSmpl, champ_keyRange).rValue;
-                    keyMin = rangeTmp.byLo;
-                    keyMax = rangeTmp.byHi;
-                }
-                else
-                {
-                    keyMin = defaultKeyRange.byLo;
-                    keyMax = defaultKeyRange.byHi;
-                }
-                if (_sf2->isSet(idInstSmpl, champ_velRange))
-                {
-                    RangesType rangeTmp = _sf2->get(idInstSmpl, champ_velRange).rValue;
-                    velMin = rangeTmp.byLo;
-                    velMax = rangeTmp.byHi;
-                }
-                else
-                {
-                    velMin = defaultVelRange.byLo;
-                    velMax = defaultVelRange.byHi;
-                }
-                if (keyMin <= key && keyMax >= key && velMin <= velocity && velMax >= velocity)
-                    ContextManager::midi()->keyboard()->addCurrentRange(key, keyMin, keyMax);
-            }
-        }
-    }
-}
-

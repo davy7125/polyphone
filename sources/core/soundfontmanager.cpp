@@ -62,7 +62,8 @@ QAbstractItemModel * SoundfontManager::getModel(int indexSf2)
 SoundfontManager::SoundfontManager() :
     _soundfonts(new Soundfonts()),
     _undoRedo(new ActionManager()),
-    _solo(new SoloManager(this))
+    _solo(new SoloManager(this)),
+    _parameterForCustomizingKeyboardChanged(false)
 {
     connect(_undoRedo, SIGNAL(dropId(EltID)), this, SLOT(onDropId(EltID)));
 }
@@ -591,12 +592,20 @@ void SoundfontManager::endEditing(QString editingSource)
     QList<int> sf2Indexes = _undoRedo->commitActionSet();
     if (!sf2Indexes.empty())
         emit(editingDone(editingSource, sf2Indexes));
+
+    // Possibly notify that the keyboard needs to be updated
+    if (_parameterForCustomizingKeyboardChanged)
+    {
+        emit(parameterForCustomizingKeyboardChanged());
+        _parameterForCustomizingKeyboardChanged = false;
+    }
 }
 
 void SoundfontManager::clearNewEditing()
 {
     QMutexLocker locker(&_mutex);
     _undoRedo->clearCurrentActionSet();
+    _parameterForCustomizingKeyboardChanged = false;
 }
 
 void SoundfontManager::revertNewEditing()
@@ -604,6 +613,7 @@ void SoundfontManager::revertNewEditing()
     QMutexLocker locker(&_mutex);
     undo(_undoRedo->getCurrentActions());
     _undoRedo->clearCurrentActionSet();
+    _parameterForCustomizingKeyboardChanged = false;
 }
 
 bool SoundfontManager::isUndoable(int indexSf2)
@@ -676,7 +686,7 @@ void SoundfontManager::redo(int indexSf2)
     // Process actions in reverse order
     Action * action;
     QList<int> sf2Indexes;
-    for (int i = actions.count()-1; i >= 0; i--)
+    for (int i = actions.count() - 1; i >= 0; i--)
     {
         action = actions[i];
         if (!sf2Indexes.contains(action->id.indexSf2))
@@ -1169,7 +1179,9 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
             tmp->_sound.set(champ_dwSampleRate, value); break;
         case champ_byOriginalPitch:
             oldValue.bValue = tmp->_sound.getUInt32(champ_byOriginalPitch);
-            tmp->_sound.set(champ_byOriginalPitch, value); break;
+            tmp->_sound.set(champ_byOriginalPitch, value);
+            _parameterForCustomizingKeyboardChanged = true;
+            break;
         case champ_chPitchCorrection:
             oldValue.cValue = tmp->_sound.getInt32(champ_chPitchCorrection);
             tmp->_sound.set(champ_chPitchCorrection, value); break;
@@ -1199,6 +1211,8 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
             defaultValue = 1;
         oldValue = tmp->getGlobalDivision()->getGen(champ);
         tmp->getGlobalDivision()->setGen(champ, value);
+        if (champ == champ_overridingRootKey || champ == champ_keyRange)
+            _parameterForCustomizingKeyboardChanged = true;
     }break;
     case elementPrst:{
         // Update a preset
@@ -1217,6 +1231,9 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
             if (!tmp->getGlobalDivision()->isSet(champ)) defaultValue = 1;
             oldValue = tmp->getGlobalDivision()->getGen(champ);
             tmp->getGlobalDivision()->setGen(champ, value);
+            if (champ == champ_overridingRootKey || champ == champ_keyRange)
+                _parameterForCustomizingKeyboardChanged = true;
+            break;
         }
     }break;
     case elementInstSmpl:{
@@ -1233,6 +1250,8 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
                 defaultValue = 1;
             oldValue = tmp->getGen(champ);
             tmp->setGen(champ, value);
+            if (champ == champ_overridingRootKey || champ == champ_keyRange)
+                _parameterForCustomizingKeyboardChanged = true;
         }
     }break;
     case elementPrstInst:{
@@ -1249,6 +1268,8 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
                 defaultValue = 1;
             oldValue = tmp->getGen(champ);
             tmp->setGen(champ, value);
+            if (champ == champ_overridingRootKey || champ == champ_keyRange)
+                _parameterForCustomizingKeyboardChanged = true;
         }
     }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{

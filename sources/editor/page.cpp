@@ -25,16 +25,15 @@
 #include "page.h"
 #include "soundfontmanager.h"
 #include "contextmanager.h"
+#include "extensionmanager.h"
 #include <qmath.h>
 
 SoundfontManager * Page::_sf2 = nullptr;
 Synth * Page::_synth = nullptr;
 
-Page::Page(QWidget *parent, TypePage typePage, QString editingSource) : QWidget(parent),
+Page::Page(QWidget *parent, QString editingSource) : QWidget(parent),
     _preparingPage(false),
-    _typePage(typePage),
-    _editingSource(editingSource),
-    _currentDisplayOption(-1)
+    _editingSource(editingSource)
 {
     if (_sf2 == nullptr)
         _sf2 = SoundfontManager::getInstance();
@@ -42,72 +41,19 @@ Page::Page(QWidget *parent, TypePage typePage, QString editingSource) : QWidget(
         _synth = ContextManager::audio()->getSynth();
 }
 
-bool Page::preparePage(QString editingSource, IdList selectedIds)
+void Page::preparePage(QString editingSource, IdList selectedIds)
 {
-    if (_preparingPage || editingSource == this->getEditingSource())
-        return true;
+    if (_preparingPage || editingSource == _editingSource)
+        return;
     _preparingPage = true;
 
     // Possibly update the selected ids
     if (!selectedIds.empty())
         _currentIds = selectedIds;
 
-    // Find a suitable display option
-    _displayOptions = getDisplayOptions(_currentIds);
-    bool currentDisplayOptionValid = false;
-    foreach (DisplayOption displayOption, _displayOptions)
-    {
-        if (displayOption._id == _currentDisplayOption)
-        {
-            currentDisplayOptionValid = displayOption._isEnabled;
-            break;
-        }
-    }
-    if (!currentDisplayOptionValid)
-    {
-        // Take the first display option that is available
-        _currentDisplayOption = -1;
-        foreach (DisplayOption displayOption, _displayOptions)
-        {
-            if (displayOption._isEnabled)
-            {
-                _currentDisplayOption = displayOption._id;
-                break;
-            }
-        }
-    }
-
-    // Select the suitable display option
-    for (int i = 0; i < _displayOptions.count(); i++)
-        _displayOptions[i]._isSelected = (_displayOptions[i]._id == _currentDisplayOption);
-
     // Update the interface according to the selected display action
-    bool result = updateInterface(editingSource, _currentIds, _currentDisplayOption);
-
+    updateInterface(editingSource);
     _preparingPage = false;
-    return result;
-}
-
-QList<Page::DisplayOption> Page::getDisplayOptions(IdList selectedIds)
-{
-    Q_UNUSED(selectedIds)
-
-    // By default, no options
-    return QList<DisplayOption>();
-}
-
-void Page::setDisplayOption(int displayOption)
-{
-    _currentDisplayOption = displayOption;
-    preparePage("command:display");
-}
-
-void Page::showEvent(QShowEvent * event)
-{
-    // Specific display per page
-    this->onShow();
-
-    QWidget::showEvent(event);
 }
 
 void Page::hideEvent(QHideEvent * event)

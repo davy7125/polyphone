@@ -2064,12 +2064,12 @@ repository</source>
         <translation>Otevírá se soubor...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="382"/>
+        <location filename="editor/editor.ui" line="375"/>
         <source>Cannot open the file</source>
         <translation>Nelze otevřít soubor</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="239"/>
+        <location filename="editor/editor.cpp" line="260"/>
         <source>Untitled</source>
         <translation>Bez názvu</translation>
     </message>
@@ -2184,106 +2184,24 @@ repository</source>
         <translation>Virtuální klávesnice</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="267"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="280"/>
         <source>Import an audio file</source>
         <translation>Zavést zvukový soubor</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="269"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="282"/>
         <source>Audio files</source>
         <translation>Audio soubory</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="427"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="440"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="427"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="440"/>
         <source>Warning</source>
         <translation>Pozor</translation>
-    </message>
-</context>
-<context>
-    <name>EnvelopEditor</name>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="162"/>
-        <location filename="editor/envelopeditor.ui" line="205"/>
-        <location filename="editor/envelopeditor.ui" line="224"/>
-        <location filename="editor/envelopeditor.ui" line="339"/>
-        <location filename="editor/envelopeditor.ui" line="401"/>
-        <source> s</source>
-        <comment>unit for second</comment>
-        <translation> s</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="372"/>
-        <source> dB</source>
-        <comment>unit for decibels</comment>
-        <translation> dB</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="279"/>
-        <source>Delay</source>
-        <translation>Zpoždění</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="128"/>
-        <source>Decay</source>
-        <translation>Pokles</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="420"/>
-        <source>Sustain</source>
-        <translation>Držení tónu</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="263"/>
-        <source>Hold</source>
-        <translation>Držení</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="138"/>
-        <source>Release</source>
-        <translation>Uvolnění</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="181"/>
-        <source>Key → Decay</source>
-        <translation>Nota → Pokles</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="329"/>
-        <source>Attack</source>
-        <translation>Náběh</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="391"/>
-        <source>Key → Hold</source>
-        <translation>Nota → Držení</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="458"/>
-        <source>Volume envelope</source>
-        <translation>Hlasitost obálka </translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="477"/>
-        <source>Modulation envelope</source>
-        <oldsource>Modulation</oldsource>
-        <translation>Modulační obálka</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.cpp" line="98"/>
-        <source>dB</source>
-        <comment>unit for decibels</comment>
-        <translation>dB</translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.cpp" line="111"/>
-        <source>%</source>
-        <comment>percentage</comment>
-        <translation>%</translation>
     </message>
 </context>
 <context>
@@ -2997,19 +2915,87 @@ default mod.</source>
     </message>
 </context>
 <context>
-    <name>PageInst</name>
+    <name>PageEnvelope</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="78"/>
-        <source>Table</source>
-        <translation>Tabulka</translation>
+        <location filename="editor/pageenvelope.ui" line="128"/>
+        <source>Decay</source>
+        <translation>Pokles</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="79"/>
-        <source>Ranges</source>
-        <translation>Rozsahy</translation>
+        <location filename="editor/pageenvelope.ui" line="138"/>
+        <source>Release</source>
+        <translation>Uvolnění</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="80"/>
+        <location filename="editor/pageenvelope.ui" line="162"/>
+        <location filename="editor/pageenvelope.ui" line="205"/>
+        <location filename="editor/pageenvelope.ui" line="224"/>
+        <location filename="editor/pageenvelope.ui" line="339"/>
+        <location filename="editor/pageenvelope.ui" line="401"/>
+        <source> s</source>
+        <comment>unit for second</comment>
+        <translation> s</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="181"/>
+        <source>Key → Decay</source>
+        <translation>Nota → Pokles</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="263"/>
+        <source>Hold</source>
+        <translation>Držení</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="279"/>
+        <source>Delay</source>
+        <translation>Zpoždění</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="329"/>
+        <source>Attack</source>
+        <translation>Náběh</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="372"/>
+        <source> dB</source>
+        <comment>unit for decibels</comment>
+        <translation> dB</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="391"/>
+        <source>Key → Hold</source>
+        <translation>Nota → Držení</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="420"/>
+        <source>Sustain</source>
+        <translation>Držení tónu</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="458"/>
+        <source>Volume envelope</source>
+        <translation>Hlasitost obálka</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.ui" line="477"/>
+        <source>Modulation envelope</source>
+        <translation>Modulační obálka</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.cpp" line="93"/>
+        <source>dB</source>
+        <comment>unit for decibels</comment>
+        <translation>dB</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.cpp" line="106"/>
+        <source>%</source>
+        <comment>percentage</comment>
+        <translation>%</translation>
+    </message>
+    <message>
+        <location filename="editor/pageenvelope.h" line="46"/>
         <source>Envelopes</source>
         <translation>Obálky</translation>
     </message>
@@ -3279,14 +3265,9 @@ rate</source>
     </message>
 </context>
 <context>
-    <name>PagePrst</name>
+    <name>PageRange</name>
     <message>
-        <location filename="editor/pageprst.cpp" line="71"/>
-        <source>Table</source>
-        <translation>Tabulka</translation>
-    </message>
-    <message>
-        <location filename="editor/pageprst.cpp" line="72"/>
+        <location filename="editor/pagerange.h" line="48"/>
         <source>Ranges</source>
         <translation>Rozsahy</translation>
     </message>
@@ -3401,8 +3382,8 @@ rate</source>
         <translation>Nástroje</translation>
     </message>
     <message numerus="yes">
-        <location filename="editor/pagesf2.cpp" line="226"/>
-        <location filename="editor/pagesf2.cpp" line="236"/>
+        <location filename="editor/pagesf2.cpp" line="218"/>
+        <location filename="editor/pagesf2.cpp" line="228"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (nepoužíváno: %n)</numerusform>
@@ -3420,7 +3401,7 @@ rate</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="344"/>
-        <location filename="editor/pagesmpl.cpp" line="1051"/>
+        <location filename="editor/pagesmpl.cpp" line="1025"/>
         <source>Play</source>
         <translation>Přehrávat</translation>
     </message>
@@ -3491,90 +3472,90 @@ rate</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="646"/>
-        <location filename="editor/pagesmpl.cpp" line="485"/>
-        <location filename="editor/pagesmpl.cpp" line="984"/>
+        <location filename="editor/pagesmpl.cpp" line="476"/>
+        <location filename="editor/pagesmpl.cpp" line="975"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="167"/>
-        <location filename="editor/pagesmpl.cpp" line="172"/>
+        <location filename="editor/pagesmpl.cpp" line="160"/>
+        <location filename="editor/pagesmpl.cpp" line="165"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="171"/>
-        <location filename="editor/pagesmpl.cpp" line="174"/>
+        <location filename="editor/pagesmpl.cpp" line="164"/>
+        <location filename="editor/pagesmpl.cpp" line="167"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(min)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="251"/>
-        <location filename="editor/pagesmpl.cpp" line="615"/>
+        <location filename="editor/pagesmpl.cpp" line="244"/>
+        <location filename="editor/pagesmpl.cpp" line="606"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="261"/>
-        <location filename="editor/pagesmpl.cpp" line="754"/>
+        <location filename="editor/pagesmpl.cpp" line="254"/>
+        <location filename="editor/pagesmpl.cpp" line="745"/>
         <source>right</source>
         <translation>pravý</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="262"/>
-        <location filename="editor/pagesmpl.cpp" line="755"/>
+        <location filename="editor/pagesmpl.cpp" line="255"/>
+        <location filename="editor/pagesmpl.cpp" line="746"/>
         <source>left</source>
         <translation>levý</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="263"/>
-        <location filename="editor/pagesmpl.cpp" line="756"/>
+        <location filename="editor/pagesmpl.cpp" line="256"/>
+        <location filename="editor/pagesmpl.cpp" line="747"/>
         <source>link</source>
         <translation>spojení</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="486"/>
-        <location filename="editor/pagesmpl.cpp" line="985"/>
+        <location filename="editor/pagesmpl.cpp" line="477"/>
+        <location filename="editor/pagesmpl.cpp" line="976"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Změna úspěšně použita na různé vzorky</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="753"/>
-        <location filename="editor/pagesmpl.cpp" line="778"/>
+        <location filename="editor/pagesmpl.cpp" line="744"/>
+        <location filename="editor/pagesmpl.cpp" line="769"/>
         <source>mono</source>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1045"/>
+        <location filename="editor/pagesmpl.cpp" line="1019"/>
         <source>Stop</source>
         <translation>Zastavení</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1064"/>
+        <location filename="editor/pagesmpl.cpp" line="1038"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1065"/>
+        <location filename="editor/pagesmpl.cpp" line="1039"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1067"/>
+        <location filename="editor/pagesmpl.cpp" line="1041"/>
         <source>&amp;Yes</source>
         <translation>&amp;Ano</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1068"/>
+        <location filename="editor/pagesmpl.cpp" line="1042"/>
         <source>&amp;No</source>
         <translation>&amp;Ne</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1069"/>
+        <location filename="editor/pagesmpl.cpp" line="1043"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
         <translation type="unfinished"></translation>
@@ -3583,9 +3564,14 @@ rate</source>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="editor/pagetable.cpp" line="110"/>
+        <location filename="editor/pagetable.cpp" line="137"/>
         <source>Global</source>
         <translation>Celkové</translation>
+    </message>
+    <message>
+        <location filename="editor/pagetable.h" line="41"/>
+        <source>Table</source>
+        <translation>Tabulka</translation>
     </message>
 </context>
 <context>
@@ -4818,12 +4804,12 @@ Nelze stáhnout obsah</translation>
 <context>
     <name>TableWidgetInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="196"/>
+        <location filename="editor/pageinst.cpp" line="132"/>
         <source>Loop</source>
         <translation>Smyčka</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="207"/>
+        <location filename="editor/pageinst.cpp" line="143"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
@@ -4832,7 +4818,7 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TableWidgetPrst</name>
     <message>
-        <location filename="editor/pageprst.cpp" line="168"/>
+        <location filename="editor/pageprst.cpp" line="110"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
@@ -6545,22 +6531,22 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeView</name>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="953"/>
+        <location filename="editor/tree/treeview.cpp" line="950"/>
         <source>instrument</source>
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="953"/>
+        <location filename="editor/tree/treeview.cpp" line="950"/>
         <source>preset</source>
         <translation>Přednastavení</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="974"/>
+        <location filename="editor/tree/treeview.cpp" line="971"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="974"/>
+        <location filename="editor/tree/treeview.cpp" line="971"/>
         <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>

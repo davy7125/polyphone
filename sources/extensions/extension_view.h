@@ -25,18 +25,19 @@
 #ifndef EXTENSION_VIEW_H
 #define EXTENSION_VIEW_H
 
-#include <QString>
-class QWidget;
+#include <QObject>
+class Page;
 
-class ExtensionView
+class ExtensionView: public QObject
 {
+    Q_OBJECT
+
 public:
-    ExtensionView() {}
+    ExtensionView() : QObject() {}
     virtual ~ExtensionView() {}
 
-    virtual QString getName() = 0;
-    virtual QString getIconPath() = 0;
-    virtual QWidget * getGui(QWidget * parent) = 0;
+    /// Create a page
+    virtual Page * createPage() const = 0;
 };
 
 #endif // EXTENSION_VIEW_H

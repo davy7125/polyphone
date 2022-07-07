@@ -2,7 +2,6 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2020 Davy Triponney                                **
-**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -23,73 +22,67 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGETABLE_H
-#define PAGETABLE_H
+#ifndef PAGEENVELOPE_H
+#define PAGEENVELOPE_H
 
 #include "page.h"
-#include "tablewidget.h"
-class ModulatorEditor;
+#include "soundfontmanager.h"
+#include "graphicsviewenvelop.h"
+#include "envelop.h"
 
-// Common class for inst and prst
-class PageTable : public Page
+namespace Ui {
+class PageEnvelope;
+}
+
+class PageEnvelope : public Page
 {
     Q_OBJECT
 
 public:
-    PageTable(bool isPrst, QWidget *parent = nullptr);
+    explicit PageEnvelope(QWidget *parent = nullptr);
+    ~PageEnvelope();
 
-    QString getLabel() override { return tr("Table"); }
-    QString getIconName() override { return ":/icons/table.svg"; }
+    bool isSuitableFor(ElementType elementType) override { return elementType == elementInst || elementType == elementInstSmpl; }
+    QString getLabel() override { return tr("Envelopes"); }
+    QString getIconName() override { return ":/icons/adsr.svg"; }
 
-    void displayModInTable();
-
-public slots:
-    void set(int ligne, int colonne, bool allowPropagation = true);
-    void selected();
+    void init(SoundfontManager * sf2);
 
 protected:
     void updateInterface(QString editingSource) override;
-    void afficheTable(bool justSelection);
-    void keyPlayedInternal(int key, int velocity) override;
-
-    IdList _currentParentIds;
-
-    ElementType contenant;
-    ElementType contenantGen;
-    ElementType contenantMod;
-    ElementType lien;
-    ElementType lienGen;
-    ElementType lienMod;
-    ElementType contenu;
-    TableWidget *_table;
-    ModulatorEditor * _modulatorEditor;
-
-    void select(EltID id);
-    quint16 getSrcIndex(quint16 wVal, bool bVal);
-    quint16 getSrcNumber(quint16 wVal, bool &CC);
-
-protected slots:
-    void actionBegin();
-    void actionFinished();
-    void onOpenElement(EltID id);
-    void onModSelectionChanged(QList<AttributeType> attributes);
 
 private slots:
-    void divisionSortChanged();
+    void on_pushVolume_clicked();
+    void on_pushModulation_clicked();
+    void populate();
+    void on_doubleSpinDelay_editingFinished();
+    void on_doubleSpinAttack_editingFinished();
+    void on_doubleSpinHold_editingFinished();
+    void on_doubleSpinDecay_editingFinished();
+    void on_doubleSpinSustain_editingFinished();
+    void on_doubleSpinRelease_editingFinished();
+    void on_spinKeyHold_editingFinished();
+    void on_spinKeyDecay_editingFinished();
+    void on_pushAttack_clicked();
+    void on_pushDelay_clicked();
+    void on_pushHold_clicked();
+    void on_pushKeyHold_clicked();
+    void on_pushSustain_clicked();
+    void on_pushRelease_clicked();
+    void on_pushDecay_clicked();
+    void on_pushKeyDecay_clicked();
 
 private:
-    void reselect();
-    void addGlobal(IdList listIds);
-    void addDivisions(EltID id);
-    void formatTable(bool multiGlobal);
-    int limit(int iVal, AttributeType champ, EltID id);
-    void resetChamp(int colonne, AttributeType champ1, AttributeType champ2);
-    void setOffset(int ligne, int colonne, AttributeType champ1, AttributeType champ2);
-    void styleFixedRow(int numRow);
+    Ui::PageEnvelope *ui;
+    bool _isVolume;
 
-    QList<int> _listKeyEnlighted;
-    int _sortType;
-    bool _isPrst;
+    void enableEditor(bool isEnabled);
+    void stopSignals(bool isStopped);
+    void addEnvelop(EltID id, bool isVolume, bool isMain);
+    void addSample(EltID idInstSmpl);
+    double computeValue(EltID id, AttributeType champ, bool &isOverridden);
+    void processEdit(AttributeType champ, double value);
+    void processClear(AttributeType champ);
 };
 
-#endif // PAGETABLE_H
+#endif // PAGEENVELOPE_H

@@ -316,6 +316,12 @@ void GraphicsViewRange::display(IdList ids, bool justSelection)
     viewport()->update();
 }
 
+void GraphicsViewRange::showEvent(QShowEvent * event)
+{
+    QGraphicsView::showEvent(event);
+    updateLabelPosition();
+}
+
 void GraphicsViewRange::resizeEvent(QResizeEvent * event)
 {
     _dontRememberScroll = true;
@@ -467,10 +473,7 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
                     withChanges |= item->saveChanges();
 
             if (withChanges)
-            {
                 _sf2->endEditing("rangeEditor");
-                updateKeyboard();
-            }
         }
         else
         {
@@ -826,5 +829,4 @@ void GraphicsViewRange::triggerDivisionSelected()
     if (ids.empty())
         ids << _defaultID;
     divisionsSelected(ids);
-    updateKeyboard();
 }

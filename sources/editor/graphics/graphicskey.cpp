@@ -60,8 +60,8 @@ void GraphicsKey::paint(QPainter *painter, const QStyleOptionGraphicsItem * opti
 
 void GraphicsKey::updateColor()
 {
-    _colorBrush.setAlpha(qMin(255., 5 + 1.5 * _colorBrush.alpha()));
-    _colorPen.setAlpha(qMin(255., 5 + 1.5 * _colorPen.alpha()));
+    _colorBrush.setAlpha(qMin(255., 25 + 1.2 * _colorBrush.alpha()));
+    _colorPen.setAlpha(qMin(255., 25 + 1.2 * _colorPen.alpha()));
 
     if (_colorBrush.alpha() < 255)
         QTimer::singleShot(30, this, SLOT(updateColor()));

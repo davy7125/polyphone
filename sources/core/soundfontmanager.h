@@ -109,6 +109,9 @@ signals:
     // Emitted when a modulator changed, useful for defining the CC default values
     void inputModulatorChanged(int controllerNumber, bool isBipolar, bool isDescending);
 
+    // Emitted when a key range or a rootkey changed, useful for calling "customizeKeyboard" in editor.h
+    void parameterForCustomizingKeyboardChanged();
+
 private slots:
     void onDropId(EltID id);
 
@@ -131,6 +134,8 @@ private:
     ActionManager * _undoRedo;
     QRecursiveMutex _mutex;
     SoloManager * _solo;
+
+    bool _parameterForCustomizingKeyboardChanged;
 };
 
 #endif // SOUNDFONTMANAGER_H

@@ -72,6 +72,11 @@ public:
     explicit PageSf2(QWidget *parent = nullptr);
     ~PageSf2() override;
 
+    bool isSuitableFor(ElementType elementType) override
+    {
+        return elementType == elementSf2;
+    }
+
 private slots:
     void setName();
     void setCopyright();
@@ -88,10 +93,7 @@ private slots:
 
 protected:
     // Update the interface
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
-
-    // Refresh things after a page is shown
-    void onShow() override;
+    void updateInterface(QString editingSource) override;
 
 private:
     EltID _currentID;
