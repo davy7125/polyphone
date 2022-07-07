@@ -305,7 +305,6 @@ void Editor::customizeKeyboard()
         return;
 
     ContextManager::midi()->keyboard()->clearCustomization();
-
     if (_currentIds.isEmpty())
         return;
 
@@ -468,6 +467,8 @@ void Editor::onKeyPlayed(int key, int vel)
                     ContextManager::midi()->keyboard()->addCurrentRange(key, keyMin, keyMax);
             }
         }
+        else
+            ContextManager::midi()->keyboard()->removeCurrentRange(key);
     }
 
     // PRESET

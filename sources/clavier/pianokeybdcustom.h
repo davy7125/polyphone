@@ -45,13 +45,8 @@ public:
     // Add a current range around a key
     void addCurrentRange(int key, int keyMin, int keyMax);
 
-public slots:
     // Remove a current range around a key
     void removeCurrentRange(int key);
-
-protected:
-    virtual void onNoteOnForChild(int k, int v) override;
-    virtual void onNoteOffForChild(int k) override;
 
 private:
     void updateRanges();

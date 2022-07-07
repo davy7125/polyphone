@@ -185,13 +185,11 @@ void PianoKeybd::updateMapping()
 void PianoKeybd::onNoteOn(int k,int v)
 {
     QApplication::postEvent(ContextManager::midi(), new NoteEvent(m_channel, k, v));
-    onNoteOnForChild(k, v);
 }
 
 void PianoKeybd::onNoteOff(int k)
 {
     QApplication::postEvent(ContextManager::midi(), new NoteEvent(m_channel, k, 0));
-    onNoteOffForChild(k);
 }
 
 void PianoKeybd::onPolyPressureChanged(int k,int v)

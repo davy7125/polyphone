@@ -72,21 +72,6 @@ PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent)
     setFrameStyle(0);
 }
 
-
-void PianoKeybdCustom::onNoteOnForChild(int k, int v)
-{
-    if (v > 0)
-        _mapPressed.insert(k, QList<int>());
-    else
-        _mapPressed.remove(k);
-    updateRanges();
-}
-
-void PianoKeybdCustom::onNoteOffForChild(int k)
-{
-    removeCurrentRange(k);
-}
-
 void PianoKeybdCustom::addRangeAndRootKey(int rootKey, int noteMin, int noteMax)
 {
     // Save the range
@@ -129,9 +114,6 @@ void PianoKeybdCustom::updateRanges()
     // Reset decorations
     PianoKeybd::clearCustomization();
 
-    // List of triggered keys
-    QList<int> notePressed = _mapPressed.keys();
-
     // Extent of all ranges
     QList<int> noteRanges;
     foreach (QList<int> values, _mapPressed.values())
@@ -145,6 +127,7 @@ void PianoKeybdCustom::updateRanges()
     QList<int> noteCurrentRange = _currentRange;
 
     // Triggered keys must not be updated
+    QList<int> notePressed = _mapPressed.keys();
     foreach (int key, notePressed)
     {
         noteRanges.removeAll(key);
