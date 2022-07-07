@@ -75,7 +75,7 @@ public:
         if (_result != FILE_OK)
             return _result;
 
-        QFile fi (_filename);
+        QFile fi(_filename);
         if (fi.exists())
         {
             if (fi.open(QFile::ReadOnly | QFile::Unbuffered))

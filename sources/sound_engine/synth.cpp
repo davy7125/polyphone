@@ -301,6 +301,9 @@ int Synth::playSmpl(Soundfont * soundfont, Smpl * smpl, int channel, int key, in
                     InstPrst * inst, Division * instDiv,
                     InstPrst * prst, Division * prstDiv)
 {
+    // Load the sound
+    smpl->_sound.loadInRam();
+
     int currentToken = s_sampleVoiceTokenCounter++;
     if (_numberOfVoicesToAdd >= MAX_NUMBER_OF_VOICES_TO_ADD)
         return currentToken;
