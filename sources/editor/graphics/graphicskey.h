@@ -39,8 +39,8 @@ class GraphicsKey : public QObject, public QGraphicsItem
 public:
     GraphicsKey(QGraphicsItem *parent = nullptr);
 
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr);
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr) override;
 
 private slots:
     void updateColor();

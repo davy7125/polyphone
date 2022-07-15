@@ -38,10 +38,9 @@ public:
     void setNewValues(int minKey, int maxKey, int minVel, int maxVel);
     void setLeft(bool isLeft);
     void setOffsetY(double offsetY) { _offsetY = offsetY; }
-    bool isLeft();
 
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr);
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr) override;
 
 private:
     static const int s_border;

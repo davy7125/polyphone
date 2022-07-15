@@ -26,6 +26,7 @@
 #define GRAPHICSSIMPLETEXTITEM_H
 
 #include <QGraphicsSimpleTextItem>
+#include <QPainter>
 
 // QGraphicsSimpleTextItem with alignment and ignoring transformations
 class GraphicsSimpleTextItem : public QGraphicsSimpleTextItem

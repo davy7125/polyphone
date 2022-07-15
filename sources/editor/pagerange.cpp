@@ -30,7 +30,7 @@ PageRange::PageRange(QWidget *parent) :
     ui(new Ui::PageRange)
 {
     ui->setupUi(this);
-    connect(ui->rangeEditor, SIGNAL(divisionsSelected(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
+    connect(ui->rangeEditor, SIGNAL(selectionChanged(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
 }
 
 PageRange::~PageRange()

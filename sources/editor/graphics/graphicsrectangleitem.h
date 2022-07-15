@@ -45,19 +45,19 @@ public:
     GraphicsRectangleItem(EltID id, QGraphicsItem *parent = nullptr);
 
     EltID getID() { return _id; }
-    EltID findBrother();
-    EditingMode setHover(bool isHovered, const QPoint &point = QPoint());
+    void setHover(bool isHovered, const QPoint &point = QPoint());
     bool isHovered() { return _editingMode != EditingMode::NONE; }
+    EditingMode getHoverType() { return _editingMode; }
     static void syncHover(bool isSync) { s_synchronizeEditingMode = isSync; }
     void setSelected(bool isSelected) { _isSelected = isSelected; }
     bool isSelected() { return _isSelected; }
 
-    QRectF getRectF() const;
-    void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr);
-    bool contains(const QPointF &point) const;
+    void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr) override;
+    bool contains(const QPointF &point) const override;
 
     void computeNewRange(const QPointF &pointInit, const QPointF &pointFinal);
     bool saveChanges(); // Return true if changes have been made
+    void cancelChanges();
 
     bool operator==(const GraphicsRectangleItem& other) { return (_id == other._id); }
     bool operator==(const EltID &id) { return _id == id; }
@@ -68,6 +68,11 @@ public:
     int currentMaxVel() { return _maxVel; }
 
 private:
+    void initialize(EltID id);
+    EditingMode getEditingMode(const QPoint &point);
+    int limit(int value, int min, int max);
+    QRectF getRectF() const;
+
     QPen _penBorderThin;
     QPen _penBorderFat;
     QBrush _brushRectangle;
@@ -80,10 +85,6 @@ private:
     bool _isSelected;
     static EditingMode s_globalEditingMode;
     static bool s_synchronizeEditingMode;
-
-    void initialize(EltID id);
-    EditingMode getEditingMode(const QPoint &point);
-    int limit(int value, int min, int max);
 };
 
 #endif // RECTANGLEITEM_H

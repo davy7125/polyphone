@@ -34,7 +34,7 @@ const int GraphicsKey::s_radius = 5;
 GraphicsKey::GraphicsKey(QGraphicsItem *parent) : QObject(nullptr), QGraphicsItem(parent)
 {
     // Colors
-    QColor color = ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::LIST_BACKGROUND);
+    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     color.setAlpha(4);
     _colorBrush = color;
     _colorPen = color.darker(); // The outside of the circle is darker

@@ -75,7 +75,7 @@ void DuplicationTool::duplicateByKey()
 
 void DuplicationTool::duplicateByKey(QPair<int, int> keyRange, QPair<int, int> velRange, EltID id)
 {
-    // Keyrange of the sample
+    // Keyrange of the division
     int keyLow = keyRange.first;
     int keyHigh = keyRange.second;
 

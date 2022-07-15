@@ -24,7 +24,6 @@
 
 #include "graphicslegenditem2.h"
 #include <QPainter>
-#include <QPalette>
 #include "contextmanager.h"
 
 const int GraphicsLegendItem2::s_border = 5;
@@ -50,11 +49,6 @@ void GraphicsLegendItem2::setLeft(bool isLeft)
         _alignment = Qt::AlignLeft | Qt::AlignTop;
     else
         _alignment = Qt::AlignRight | Qt::AlignTop;
-}
-
-bool GraphicsLegendItem2::isLeft()
-{
-    return (_alignment & Qt::AlignLeft) != 0;
 }
 
 void GraphicsLegendItem2::setNewValues(int minKey, int maxKey, int minVel, int maxVel)

@@ -210,7 +210,7 @@ GraphicsRectangleItem::EditingMode GraphicsRectangleItem::getEditingMode(const Q
     return mode;
 }
 
-GraphicsRectangleItem::EditingMode GraphicsRectangleItem::setHover(bool isHovered, const QPoint &point)
+void GraphicsRectangleItem::setHover(bool isHovered, const QPoint &point)
 {
     if (isHovered)
     {
@@ -223,68 +223,6 @@ GraphicsRectangleItem::EditingMode GraphicsRectangleItem::setHover(bool isHovere
         _editingMode = NONE;
         this->setZValue(50);
     }
-
-    return _editingMode;
-}
-
-EltID GraphicsRectangleItem::findBrother()
-{
-    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool() &&
-            _id.typeElement == elementInstSmpl)
-    {
-        // Sample linked to the division
-        SoundfontManager * sm = SoundfontManager::getInstance();
-        EltID idSmpl = _id;
-        idSmpl.typeElement = elementSmpl;
-        idSmpl.indexElt = sm->get(_id, champ_sampleID).wValue;
-
-        // Sample linked to another one?
-        SFSampleLink typeLink = sm->get(idSmpl, champ_sfSampleType).sfLinkValue;
-        if (typeLink == rightSample || typeLink == leftSample || typeLink == linkedSample ||
-                typeLink == RomRightSample || typeLink == RomLeftSample || typeLink == RomLinkedSample)
-        {
-            // Characteristics to find in the other divisions
-            int numSmpl2 = sm->get(idSmpl, champ_wSampleLink).wValue;
-            RangesType keyRange = sm->get(_id, champ_keyRange).rValue;
-            RangesType velRange = sm->get(_id, champ_velRange).rValue;
-
-            // Search the brother
-            int numBrothers = 0;
-            EltID idBrother = _id;
-            EltID id2 = _id;
-            foreach (int i, sm->getSiblings(_id))
-            {
-                id2.indexElt2 = i;
-                if (i != _id.indexElt2)
-                {
-                    RangesType keyRange2 = sm->get(id2, champ_keyRange).rValue;
-                    RangesType velRange2 = sm->get(id2, champ_velRange).rValue;
-                    if (keyRange2.byLo == keyRange.byLo && keyRange2.byHi == keyRange.byHi &&
-                            velRange2.byLo == velRange.byLo && velRange2.byHi == velRange.byHi)
-                    {
-                        int iTmp = sm->get(id2, champ_sampleID).wValue;
-                        if (iTmp == idSmpl.indexElt)
-                            numBrothers = 2; // ambiguity, another sample is like id
-                        else if (iTmp == numSmpl2)
-                        {
-                            numBrothers++;
-                            idBrother.indexElt2 = i;
-                        }
-                    }
-                }
-            }
-
-            // Return the brother if there is only one (no ambiguity)
-            if (numBrothers == 1)
-                return idBrother;
-            else
-                return EltID(elementUnknown, 0, 0, 0, 0);
-        }
-        else
-            return EltID(elementUnknown, 0, 0, 0, 0);
-    }
-    else
-        return EltID(elementUnknown, 0, 0, 0, 0);
 }
 
 void GraphicsRectangleItem::computeNewRange(const QPointF &pointInit, const QPointF &pointFinal)
@@ -330,10 +268,10 @@ bool GraphicsRectangleItem::saveChanges()
 
     // Store the key range
     SoundfontManager * sm = SoundfontManager::getInstance();
-    bool changes = false;
+    bool hasChanged = false;
     if (_minKey != _minKeyInit || _maxKey != _maxKeyInit)
     {
-        changes = true;
+        hasChanged = true;
         if (_minKey == 0 && _maxKey == 127 && !sm->isSet(idGlobal, champ_keyRange))
             sm->reset(_id, champ_keyRange);
         else
@@ -348,7 +286,7 @@ bool GraphicsRectangleItem::saveChanges()
     // Store the velocity range
     if (_minVel != _minVelInit || _maxVel != _maxVelInit)
     {
-        changes = true;
+        hasChanged = true;
         if (_minVel == 0 && _maxVel == 127 && !sm->isSet(idGlobal, champ_velRange))
             sm->reset(_id, champ_velRange);
         else
@@ -365,9 +303,17 @@ bool GraphicsRectangleItem::saveChanges()
     _minVelInit = _minVel;
     _maxVelInit = _maxVel;
 
-    return changes;
+    return hasChanged;
 }
 
+void GraphicsRectangleItem::cancelChanges()
+{
+  _minKey = _minKeyInit;
+  _maxKey = _maxKeyInit;
+  _minVel = _minVelInit;
+  _maxVel = _maxVelInit;
+  this->setRect(getRectF());
+}
 
 int GraphicsRectangleItem::limit(int value, int min, int max)
 {

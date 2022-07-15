@@ -23,7 +23,6 @@
 ***************************************************************************/
 
 #include "graphicslegenditem.h"
-#include "contextmanager.h"
 #include <QPen>
 #include <QPainter>
 #include "soundfontmanager.h"

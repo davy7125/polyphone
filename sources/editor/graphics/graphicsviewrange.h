@@ -26,9 +26,9 @@
 #define GRAPHICSVIEWRANGE_H
 
 #include <QGraphicsView>
-#include "soundfontmanager.h"
 #include <QMap>
 #include "basetypes.h"
+class SoundfontManager;
 class GraphicsSimpleTextItem;
 class GraphicsRectangleItem;
 class GraphicsLegendItem;
@@ -46,9 +46,10 @@ public:
 
     void display(IdList ids, bool justSelection);
     void playKey(int key, int velocity);
+    static EltID findBrother(EltID id);
 
 signals:
-    void divisionsSelected(IdList divisions);
+    void selectionChanged(IdList selectedIds);
 
 protected:
     void showEvent(QShowEvent * event) override;
@@ -57,8 +58,9 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void wheelEvent(QWheelEvent * event) override;
-    void mouseDoubleClickEvent(QMouseEvent *) override {}
+    void mouseDoubleClickEvent(QMouseEvent *) override;
     void scrollContentsBy(int dx, int dy) override;
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
     void initItems();
@@ -78,14 +80,15 @@ private:
     GraphicsLegendItem * _legendItem;
     GraphicsLegendItem2 * _legendItem2;
     GraphicsZoomLine * _zoomLine;
+    QList<QGraphicsLineItem *> _lines;
     QMap<int, GraphicsKey*> _mapGraphicsKeys;
-    QList<QGraphicsLineItem *> _keyLines;
 
     // Various
     bool _dontRememberScroll;
     int _keyTriggered;
-    bool _keepIndexOnRelease;
+    bool _removeIndexOnRelease, _removeOtherIndexOnRelease;
     bool _editing;
+    bool _keepFirstShiftPoint;
 
     // Drag & zoom
     Qt::MouseButton _buttonPressed;
@@ -94,7 +97,7 @@ private:
     double _zoomX, _zoomY, _posX, _posY;
     double _zoomXinit, _zoomYinit, _posXinit, _posYinit;
     QRectF _displayedRect;
-    QVector<GraphicsRectangleItem *> _shiftRectangles;
+    QRectF _firstShiftRect;
     void zoom(QPoint point);
     void drag(QPoint point);
     void zoomDrag();

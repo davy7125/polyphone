@@ -40,8 +40,8 @@ public:
     void setLeft(bool isLeft);
     bool isLeft();
 
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr);
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr) override;
 
 private:
     static const int s_border;
