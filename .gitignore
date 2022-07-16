@@ -1,5 +1,6 @@
 /sources/Makefile*
 /sources/polyphone.pro.user*
+/sources/extensions/**/*
 /sources/.qmake.stash
 /private
 /build-*
