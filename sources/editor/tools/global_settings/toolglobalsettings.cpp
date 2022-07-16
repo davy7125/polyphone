@@ -90,13 +90,24 @@ void ToolGlobalSettings::process(SoundfontManager * sm, EltID id, AbstractToolPa
             else if (pos >= dValues.size())
                 pos = dValues.size() - 1;
 
-            // Apply modification
+            // Attribute to change
             AttributeType champ = static_cast<AttributeType>(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
 
+            // Current value
+            AttributeValue value;
+            if (sm->isSet(idLinked, champ))
+                value = sm->get(idLinked, champ);
+            else if (sm->isSet(id, champ)) // Global div
+                value = sm->get(id, champ);
+            else // Default value
+                value = Attribute::getDefaultStoredValue(champ, !_isInst);
+
+            // Apply the change
             if (champ == champ_keyRange || champ == champ_velRange)
             {
                 // Separately process left and right limits
-                RangesType range = sm->get(idLinked, champ).rValue;
+                RangesType range = value.rValue;
+
                 int lower = static_cast<int>(range.byLo);
                 int upper = static_cast<int>(range.byHi);
                 switch (_isInst ? params->getInstModifType() : params->getPrstModifType())
@@ -141,7 +152,8 @@ void ToolGlobalSettings::process(SoundfontManager * sm, EltID id, AbstractToolPa
             }
             else
             {
-                double amount = Attribute::toRealValue(champ, !_isInst, sm->get(idLinked, champ));
+                // Compute the new real value
+                double amount = Attribute::toRealValue(champ, !_isInst, value);
                 switch (_isInst ? params->getInstModifType() : params->getPrstModifType())
                 {
                 case 0: // Addition
