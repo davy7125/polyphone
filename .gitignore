@@ -3,6 +3,8 @@
 /sources/extensions/**/*
 /sources/.qmake.stash
 /private
-/build-*
+/build*
 lib_*
 .DS_Store
+/fedora
+/debian
