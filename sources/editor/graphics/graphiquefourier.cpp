@@ -155,7 +155,7 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, bool withReplot)
     {
         QVector<float> vectFourier;
         int posMaxFourier;
-        _peaks = computePeaks(_fData, _dwSmplRate, posStart, posEnd, vectFourier, posMaxFourier, &_key, &_delta);
+        _peaks = computePeaks(_fData, _dwSmplRate, posStart, posEnd, vectFourier, posMaxFourier, &_key, &_delta, &_score);
 
         // Display the Fourier transform?
         if (posMaxFourier == -1)
@@ -171,7 +171,7 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, bool withReplot)
 QList<Peak> GraphiqueFourier::computePeaks(QVector<float> fData, quint32 dwSmplRate,
                                            quint32 posStart, quint32 posEnd,
                                            QVector<float> &vectFourier, int &posMaxFourier,
-                                           int *key, int *correction)
+                                           int *key, int *correction, float * reliance)
 {
     // If there is no loop, determine a stable portion for the Fourier transforme and the autocorrelation
     if (posStart == posEnd)
@@ -309,7 +309,10 @@ QList<Peak> GraphiqueFourier::computePeaks(QVector<float> fData, quint32 dwSmplR
 
     // Si aucune note n'a été trouvée, on prend la note la plus probable d'après Fourier
     if (score < 0)
+    {
         freq = static_cast<float>(posMaxFFT[0]) * dwSmplRate / (size - 1);
+        score = 0;
+    }
 
     // Numéro de la note correspondant à cette fréquence
     double note3 = 12 * qLn(static_cast<double>(freq)) / 0.69314718056 - 36.3763;
@@ -326,6 +329,8 @@ QList<Peak> GraphiqueFourier::computePeaks(QVector<float> fData, quint32 dwSmplR
             *key = note;
         if (correction != nullptr)
             *correction = Utils::round32((note3 - static_cast<double>(note)) * 100.);
+        if (reliance != nullptr)
+            *reliance = score;
 
         // Peaks
         for (int i = 0; i < posMaxFFT.size(); i++)
@@ -349,6 +354,11 @@ QList<Peak> GraphiqueFourier::computePeaks(QVector<float> fData, quint32 dwSmplR
             // Prepare text
             result << Peak(factor, freq, note2, delta);
         }
+    }
+    else
+    {
+        if (reliance != nullptr)
+            *reliance = -1.0f;
     }
 
     return result;
@@ -614,8 +624,9 @@ void GraphiqueFourier::exportPeaks()
     _toolFrequencyPeak->run();
 }
 
-void GraphiqueFourier::getEstimation(int &pitch, int &correction)
+void GraphiqueFourier::getEstimation(int &pitch, int &correction, float &score)
 {
     pitch = _key;
     correction = -_delta;
+    score = _score;
 }

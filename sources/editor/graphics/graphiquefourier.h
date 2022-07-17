@@ -67,10 +67,10 @@ public:
     void setCurrentIds(IdList ids);
     void setSampleName(QString name) { _name = name; }
     void setPos(quint32 posStart, quint32 posEnd, bool withReplot = true);
-    void getEstimation(int &pitch, int &correction);
+    void getEstimation(int &pitch, int &correction, float &score);
     static QList<Peak> computePeaks(QVector<float> fData, quint32 dwSmplRate, quint32 posStart, quint32 posEnd,
                                     QVector<float> &vectFourier, int &posMaxFourier,
-                                    int * key = nullptr, int * correction = nullptr);
+                                    int * key = nullptr, int * correction = nullptr, float *reliance = nullptr);
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
@@ -89,6 +89,7 @@ private:
     QSharedPointer<QCPAxisTickerFixed> _fixedTickerY;
     QMenu * _menu;
     int _key, _delta;
+    float _score;
     QList<Peak> _peaks;
     ToolFrequencyPeaks * _toolFrequencyPeak;
 

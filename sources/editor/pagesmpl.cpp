@@ -203,7 +203,8 @@ void PageSmpl::updateInterface(QString editingSource)
         ui->grapheFourier->setPos(startLoop, endLoop);
 
         int pitch, correction;
-        ui->grapheFourier->getEstimation(pitch, correction);
+        float score;
+        ui->grapheFourier->getEstimation(pitch, correction, score);
         ui->pushAutoTune->setEnabled(pitch > 0);
     }
 
@@ -926,45 +927,65 @@ void PageSmpl::setStereo(bool val)
 
 void PageSmpl::on_pushAutoTune_clicked()
 {
-    // Soundfont editing
-
-    int displayedPitch = -1000, displayedCorrection = -1000;
     bool firstValue = true;
     bool triggersMessage = false;
 
     QList<int> listeSamplesProcessed;
-    QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);;
+    QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
     foreach (EltID id, listID)
     {
         if (_sf2->isValid(id) && !listeSamplesProcessed.contains(id.indexElt))
         {
+            if (firstValue)
+                firstValue = false;
+            else
+                triggersMessage = true;
+
             listeSamplesProcessed << id.indexElt;
 
             // Modification pitch / correction
-            int pitch, correction;
-            autoTune(id, pitch, correction);
-
-            if (firstValue)
-            {
-                firstValue = false;
-                displayedPitch = pitch;
-                displayedCorrection = correction;
-            }
-            else if (displayedPitch != pitch || displayedCorrection != correction)
-                triggersMessage = true;
+            int pitch1, correction1;
+            int pitch2 = -1;
+            int correction2 = 0;
+            float score1;
+            float score2 = -1;
+            autoTune(id, pitch1, correction1, score1);
 
             // Sample associé ?
             EltID id2 = getRepercussionID(id);
-            if (id2.indexElt != -1)
+            bool id2Valid = false;
+            if (id2.indexElt != -1 && _sf2->isValid(id2) && !listeSamplesProcessed.contains(id2.indexElt))
             {
-                if (_sf2->isValid(id2) && !listeSamplesProcessed.contains(id2.indexElt))
-                {
-                    listeSamplesProcessed << id2.indexElt;
+                id2Valid = true;
+                listeSamplesProcessed << id2.indexElt;
 
-                    // Modification pitch / correction
-                    autoTune(id2, pitch, correction);
-                    if (displayedPitch != pitch || displayedCorrection != correction)
-                        triggersMessage = true;
+                // Modification pitch / correction
+                autoTune(id2, pitch2, correction2, score2);
+            }
+
+            // Use the pitch / correction associated to the best score
+            if (score2 > score1)
+            {
+                pitch1 = pitch2;
+                correction1 = correction2;
+            }
+
+            if (pitch1 != -1)
+            {
+                // Modification du pitch et de la correction
+                AttributeValue val;
+                val.wValue = pitch1;
+                _sf2->set(id, champ_byOriginalPitch, val);
+                val.wValue = correction1;
+                _sf2->set(id, champ_chPitchCorrection, val);
+
+                // Other sample?
+                if (id2Valid)
+                {
+                    val.wValue = pitch1;
+                    _sf2->set(id2, champ_byOriginalPitch, val);
+                    val.wValue = correction1;
+                    _sf2->set(id2, champ_chPitchCorrection, val);
                 }
             }
         }
@@ -976,7 +997,7 @@ void PageSmpl::on_pushAutoTune_clicked()
                                  tr("Change successfully applied to the different samples"));
 }
 
-void PageSmpl::autoTune(EltID id, int &pitch, int &correction)
+void PageSmpl::autoTune(EltID id, int &pitch, int &correction, float &score)
 {
     // Remplissage du graphique Fourier
     ui->grapheFourier->setCurrentIds(id);
@@ -985,22 +1006,7 @@ void PageSmpl::autoTune(EltID id, int &pitch, int &correction)
     ui->grapheFourier->setPos(startLoop, endLoop, false);
 
     // Hauteur de note et correction
-    ui->grapheFourier->getEstimation(pitch, correction);
-
-    if (pitch != -1)
-    {
-        // Modification du pitch et de la correction
-        AttributeValue val;
-        val.wValue = pitch;
-        _sf2->set(id, champ_byOriginalPitch, val);
-        val.wValue = correction;
-        _sf2->set(id, champ_chPitchCorrection, val);
-    }
-    else
-    {
-        pitch = _sf2->get(id, champ_byOriginalPitch).bValue;
-        correction = _sf2->get(id, champ_chPitchCorrection).cValue;
-    }
+    ui->grapheFourier->getEstimation(pitch, correction, score);
 }
 
 void PageSmpl::onSpacePressedInternal()

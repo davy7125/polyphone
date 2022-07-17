@@ -86,7 +86,7 @@ private:
 
     void updatePlayButton();
     void setRateElt(EltID id, quint32 echFinal);
-    void autoTune(EltID id, int &pitch, int &correction);
+    void autoTune(EltID id, int &pitch, int &correction, float &score);
     void updateSinus();
     void updateLoopQuality();
 };
