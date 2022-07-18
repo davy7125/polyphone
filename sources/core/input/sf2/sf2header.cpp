@@ -107,6 +107,13 @@ QDataStream & operator >> (QDataStream &in, Sf2Header &header)
             if (in.readRawData(buffer.data(), length) != length)
                 return in;
 
+            // Keep only one '\0' at the end
+            int count = 0;
+            while (count < length && buffer[length - 1 - count] == '\0')
+                count++;
+            if (count > 1)
+                buffer.resize(length - count + 1);
+
             if (bloc == "ICMT")
             {
                 // Consider first it is UTF-8 text
