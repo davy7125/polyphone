@@ -24,6 +24,7 @@
 
 #include "samplereaderflac.h"
 #include "FLAC/stream_decoder.h"
+#include "utils.h"
 
 // https://xiph.org/flac/api/group__flac__stream__decoder.html
 
@@ -113,7 +114,7 @@ FLAC__StreamDecoderWriteStatus writeCallback(const FLAC__StreamDecoder * decoder
         for (quint32 i = minPosition; i < maxPosition; i++)
         {
             qint32 value = buffer[channel][i - minPosition];
-            data[i] = (0.5f + value) / (0.5f + 0x7f);
+            data[i] = Utils::int24ToFloat(value * 65536);
         }
         break;
     case 2:
@@ -121,7 +122,7 @@ FLAC__StreamDecoderWriteStatus writeCallback(const FLAC__StreamDecoder * decoder
         for (quint32 i = minPosition; i < maxPosition; i++)
         {
             qint32 value = buffer[channel][i - minPosition];
-            data[i] = (0.5f + value) / (0.5f + 0x7fff);
+            data[i] = Utils::int24ToFloat(value * 256);
         }
         break;
     case 3:
@@ -129,7 +130,7 @@ FLAC__StreamDecoderWriteStatus writeCallback(const FLAC__StreamDecoder * decoder
         for (quint32 i = minPosition; i < maxPosition; i++)
         {
             qint32 value = buffer[channel][i - minPosition];
-            data[i] = (0.5F + value) / (0.5f + 0x7fffff);
+            data[i] = Utils::int24ToFloat(value);
         }
         break;
     case 4:
@@ -137,7 +138,7 @@ FLAC__StreamDecoderWriteStatus writeCallback(const FLAC__StreamDecoder * decoder
         for (quint32 i = minPosition; i < maxPosition; i++)
         {
             qint32 value = buffer[channel][i - minPosition];
-            data[i] = (0.5f + (value / 256)) / (0.5f + 0x7fffff);
+            data[i] = Utils::int24ToFloat(value / 256);
         }
         break;
     default:

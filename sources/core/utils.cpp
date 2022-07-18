@@ -47,6 +47,18 @@
 
 QString Utils::s_diacriticLetters;
 QStringList Utils::s_noDiacriticLetters;
+float Utils::s_floatConversionCoef;
+
+void Utils::prepareStaticVariables()
+{
+
+    s_diacriticLetters = QString::fromUtf8("ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ");
+    s_noDiacriticLetters << "S"<<"OE"<<"Z"<<"s"<<"oe"<<"z"<<"Y"<<"Y"<<"u"<<"A"<<"A"<<"A"<<"A"<<"A"<<"A"<<"AE"<<"C"<<"E"
+                         <<"E"<<"E"<<"E"<<"I"<<"I"<<"I"<<"I"<<"D"<<"N"<<"O"<<"O"<<"O"<<"O"<<"O"<<"O"<<"U"<<"U"<<"U"<<"U"
+                        <<"Y"<<"s"<<"a"<<"a"<<"a"<<"a"<<"a"<<"a"<<"ae"<<"c"<<"e"<<"e"<<"e"<<"e"<<"i"<<"i"<<"i"<<"i"<<"o"
+                       <<"n"<<"o"<<"o"<<"o"<<"o"<<"o"<<"o"<<"u"<<"u"<<"u"<<"u"<<"y"<<"y";
+    s_floatConversionCoef = 1.0f / 8388607.5f; // (0.5f + 0x7FFFFF);
+}
 
 int Utils::naturalOrder(QString str1, QString str2)
 {
@@ -109,15 +121,6 @@ int Utils::getNumberPart(const QString &str, int &length)
 
 QString Utils::removeAccents(QString s)
 {
-    if (s_diacriticLetters.isEmpty())
-    {
-        s_diacriticLetters = QString::fromUtf8("ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ");
-        s_noDiacriticLetters << "S"<<"OE"<<"Z"<<"s"<<"oe"<<"z"<<"Y"<<"Y"<<"u"<<"A"<<"A"<<"A"<<"A"<<"A"<<"A"<<"AE"<<"C"<<"E"
-                             <<"E"<<"E"<<"E"<<"I"<<"I"<<"I"<<"I"<<"D"<<"N"<<"O"<<"O"<<"O"<<"O"<<"O"<<"O"<<"U"<<"U"<<"U"<<"U"
-                            <<"Y"<<"s"<<"a"<<"a"<<"a"<<"a"<<"a"<<"a"<<"ae"<<"c"<<"e"<<"e"<<"e"<<"e"<<"i"<<"i"<<"i"<<"i"<<"o"
-                           <<"n"<<"o"<<"o"<<"o"<<"o"<<"o"<<"o"<<"u"<<"u"<<"u"<<"u"<<"y"<<"y";
-    }
-
     QString output = "";
     for (int i = 0; i < s.length(); i++)
     {
@@ -330,6 +333,39 @@ qint16 Utils::round16(double value)
 qint32 Utils::round32(double value)
 {
     return static_cast<qint32>(value > 0 ? (value + 0.5) : (value - 0.5));
+}
+
+qint32 Utils::floatToInt24(float f)
+{
+    // Limit the input
+    if (f > 1.0)
+        f = 1.0;
+    else if (f < -1.0)
+        f = -1.0;
+
+    f = f * 8388607.5f /*(.5f + 0x7FFFFF)*/ - .5f;
+    qint32 result = static_cast<qint32>(f + (f > 0 ? 0.5f : -0.5f));
+
+    // Limit the output
+    if (result > 8388607)
+        return 8388607;
+    else if (result < -8388608)
+        return -8388608;
+
+    return result;
+}
+
+float Utils::int24ToFloat(qint32 i)
+{
+    float result = (0.5f + static_cast<float>(i)) * s_floatConversionCoef;
+
+    // Limit the output
+    if (result > 1.0f)
+        return 1.0f;
+    else if (result < -1.0f)
+        return -1.0f;
+
+    return result;
 }
 
 QString Utils::fixFilePath(QString filePath)

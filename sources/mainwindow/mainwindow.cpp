@@ -44,6 +44,7 @@
 #include "outputfactory.h"
 #include "inputfactory.h"
 #include "extensionmanager.h"
+#include "utils.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -130,6 +131,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ContextManager::recentFile(), SIGNAL(recentSf2Changed()), this, SLOT(recentSf2Changed()));
     connect(ui->widgetShowHistory, SIGNAL(openFile(const QString&)), this, SLOT(openFiles(const QString&)));
     recentSf2Changed();
+
+    // Utils
+    Utils::prepareStaticVariables();
 
     // Show changelog if one of the 2 first version number is not identical
     QStringList lastVersion = ContextManager::configuration()->getValue(

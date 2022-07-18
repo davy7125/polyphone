@@ -32,6 +32,8 @@ class SoundfontManager;
 class Utils
 {
 public:
+    static void prepareStaticVariables();
+
     /// Return the natural comparison between two strings
     /// -1 if a should be before b, 0 if equals, 1 is a should be after b
     /// This is case insensitive
@@ -53,6 +55,8 @@ public:
     static qint8 round8(double value);
     static qint16 round16(double value);
     static qint32 round32(double value);
+    static qint32 floatToInt24(float f);
+    static float int24ToFloat(qint32 i);
 
     static QString fixFilePath(QString filePath);
 
@@ -65,6 +69,7 @@ private:
 
     static QString s_diacriticLetters;
     static QStringList s_noDiacriticLetters;
+    static float s_floatConversionCoef;
 };
 
 #endif // UTILS_H

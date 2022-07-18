@@ -40,7 +40,7 @@ protected slots:
 
 private:
     void save(QString fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index);
-    static void convertTo16bit(QVector<float> dataSrc, QByteArray &dataDest, bool export24bit);
+    static void convertTo16bit(QVector<float> dataSrc, QByteArray &dataDest);
     static void convertTo24bit(QVector<float> dataSrc, QByteArray &dataDest);
 };
 

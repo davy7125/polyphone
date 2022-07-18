@@ -24,6 +24,7 @@
 
 #include "samplewriterwav.h"
 #include "sampleutils.h"
+#include "utils.h"
 
 SampleWriterWav::SampleWriterWav(QString fileName) :
     _fileName(fileName)
@@ -247,7 +248,7 @@ void SampleWriterWav::convertTo16bit(QVector<float> dataSrc, QByteArray &dataDes
     dataDest.resize(2 * length);
     qint16 * data16 = reinterpret_cast<qint16 *>(dataDest.data());
     for (int i = 0; i < length; i++)
-        data16[i] = data[i] * (.5f + 0x7FFF) - .5f;
+        data16[i] = (Utils::floatToInt24(data[i]) >> 8);
 }
 
 void SampleWriterWav::convertTo24bit(QVector<float> dataSrc, QByteArray &dataDest)
@@ -259,7 +260,7 @@ void SampleWriterWav::convertTo24bit(QVector<float> dataSrc, QByteArray &dataDes
     char * dataChar = dataDest.data();
     for (int i = 0; i < length; i++)
     {
-        qint32 tmp = data[i] * (.5f + 0x7FFFFF) - .5f;
+        qint32 tmp = Utils::floatToInt24(data[i]);
         dataChar[3 * i] = tmp & 0xFF;
         dataChar[3 * i + 1] = (tmp >> 8) & 0xFF;
         dataChar[3 * i + 2] = tmp >> 16;

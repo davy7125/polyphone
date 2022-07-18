@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "samplereadersf2.h"
+#include "utils.h"
 
 SampleReaderSf2::SampleReaderSf2(QString filename) : SampleReader(filename),
     _info(nullptr)
@@ -56,7 +57,7 @@ SampleReaderSf2::SampleReaderResult SampleReaderSf2::getData(QFile &fi, QVector<
 
     // Load the smpl part of an sf2
     fi.seek(_info->dwStart);
-    quint16 * data = new quint16[_info->dwLength];
+    qint16 * data = new qint16[_info->dwLength];
     qint64 nb = fi.read((char *)data, _info->dwLength * 2);
     if (nb == -1)
     {
@@ -93,14 +94,13 @@ SampleReaderSf2::SampleReaderResult SampleReaderSf2::getData(QFile &fi, QVector<
         memset(data24, 0, _info->dwLength);
 
     // Convert to float between -1 and 1
-    int tmp;
-    float coeff = 1.0f / (0.5f + 0x7FFFFF);
+    qint32 tmp;
     for (quint32 i = 0; i < _info->dwLength; i++)
     {
         tmp = (data[i] << 8) | data24[i];
         if (tmp & 0x800000)
-            tmp |= ~0xffffff;
-        fData[i] = (0.5f + tmp) * coeff;
+            tmp |= 0xff000000;
+        fData[i] = Utils::int24ToFloat(tmp);
     }
 
     delete [] data;

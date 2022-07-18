@@ -28,6 +28,7 @@
 #include "contextmanager.h"
 #include <QFile>
 #include <QFileInfo>
+#include "utils.h"
 
 OutputSf2::OutputSf2() : AbstractOutput() {}
 
@@ -497,14 +498,13 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     dwTmp2 = 10 * 4 + taille_info;
     QVector<float> fData;
     QByteArray baData;
-    bool export24bit = (sm->get(id, champ_wBpsSave).wValue == 24);
     foreach (int i, sm->getSiblings(id2))
     {
         // Copy each sample
         id2.indexElt = i;
         dwTmp = 2 * sm->get(id2, champ_dwLength).dwValue;
         fData = sm->getData(id2);
-        convertTo16bit(fData, baData, export24bit);
+        convertTo16bit(fData, baData);
         fi.write(baData.constData(), dwTmp);
 
         // Add 46 null sample points
@@ -525,7 +525,7 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
 
     // 24 bits
     id.typeElement = elementSf2;
-    if (export24bit)
+    if (sm->get(id, champ_wBpsSave).wValue == 24)
     {
         // Ajout données 24 bits
         fi.write("sm24", 4);
@@ -1243,19 +1243,16 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     error = "";
 }
 
-void OutputSf2::convertTo16bit(QVector<float> dataSrc, QByteArray &dataDest, bool export24bit)
+void OutputSf2::convertTo16bit(QVector<float> dataSrc, QByteArray &dataDest)
 {
     const float * data = dataSrc.constData();
     int length = dataSrc.size();
 
     dataDest.resize(2 * length);
     qint16 * data16 = reinterpret_cast<qint16 *>(dataDest.data());
-    if (export24bit)
-        for (int i = 0; i < length; i++)
-            data16[i] = static_cast<qint32>(data[i] * (.5f + 0x7FFFFF) - .5f) >> 8;
-    else
-        for (int i = 0; i < length; i++)
-            data16[i] = static_cast<qint16>(data[i] * (.5f + 0x7FFF) - .5f);
+
+    for (int i = 0; i < length; i++)
+        data16[i] = (Utils::floatToInt24(data[i]) >> 8);
 }
 
 void OutputSf2::convertTo24bit(QVector<float> dataSrc, QByteArray &dataDest)
@@ -1267,5 +1264,5 @@ void OutputSf2::convertTo24bit(QVector<float> dataSrc, QByteArray &dataDest)
     dataDest.resize(length);
     char * dataChar = dataDest.data();
     for (int i = 0; i < length; i++)
-        dataChar[i] = static_cast<qint32>(data[i] * (.5f + 0x7FFFFF) - .5f) & 0xFF;
+        dataChar[i] = (Utils::floatToInt24(data[i]) & 0xFF);
 }

@@ -24,6 +24,7 @@
 
 #include "samplereaderwav.h"
 #include "basetypes.h"
+#include "utils.h"
 
 // http://soundfile.sapp.org/doc/WaveFormat/
 
@@ -224,35 +225,34 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getData(QFile &fi, QVector<
         {
             const char * dataSource = data.constData();
             for (quint32 i = 0; i < _info->dwLength; i++)
-                fData[i] = (0.5f + dataSource[_info->wChannels * i + _info->wChannel] - 128) / (0.5f + 0x7f);
+                fData[i] = Utils::int24ToFloat((dataSource[_info->wChannels * i + _info->wChannel] - 128) * 65536);
         }
         else if (_info->wBpsFile == 16)
         {
             const qint16 * dataSource = (const qint16 *)data.constData();
             for (quint32 i = 0; i < _info->dwLength; i++)
-                fData[i] = (0.5f + dataSource[_info->wChannels * i + _info->wChannel]) / (0.5f + 0x7fff);
+                fData[i] = Utils::int24ToFloat(dataSource[_info->wChannels * i + _info->wChannel] * 256);
         }
         else if (_info->wBpsFile == 32)
         {
             const qint32 * dataSource = (const qint32 *)data.constData();
             for (quint32 i = 0; i < _info->dwLength; i++)
-                fData[i] = (0.5f + (dataSource[_info->wChannels * i + _info->wChannel] / 256)) / (0.5f + 0x7fffff);
+                fData[i] = Utils::int24ToFloat(dataSource[_info->wChannels * i + _info->wChannel] / 256);
         }
         else // 3, 5 or more...
         {
             unsigned int bytePerValue = _info->wBpsFile / 8;
             unsigned int shift = bytePerValue - 3;
-            float coeff = 1.0f / (0.5 + 0x7fffff);
             const unsigned char * dataSource = reinterpret_cast<const unsigned char *>(data.constData());
-            int tmp;
+            qint32 tmp;
             for (quint32 i = 0; i < _info->dwLength; i++)
             {
                 tmp = dataSource[(_info->wChannels * i + _info->wChannel) * bytePerValue + shift + 2];
                 tmp = (tmp << 8) | dataSource[(_info->wChannels * i + _info->wChannel) * bytePerValue + shift + 1];
                 tmp = (tmp << 8) | dataSource[(_info->wChannels * i + _info->wChannel) * bytePerValue + shift];
                 if (tmp & 0x800000)
-                    tmp |= ~0xffffff;
-                fData[i] = (0.5f + tmp) * coeff;
+                    tmp |= 0xff000000;
+                fData[i] = Utils::int24ToFloat(tmp);
             }
         }
     }
