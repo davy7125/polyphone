@@ -52,7 +52,7 @@
         <number>15</number>
        </property>
        <property name="pageStep">
-        <number>5</number>
+        <number>1</number>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -146,7 +146,7 @@
         <number>15</number>
        </property>
        <property name="pageStep">
-        <number>5</number>
+        <number>1</number>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -177,7 +177,7 @@
         <number>15</number>
        </property>
        <property name="pageStep">
-        <number>5</number>
+        <number>1</number>
        </property>
        <property name="value">
         <number>0</number>
@@ -211,7 +211,7 @@
         <number>15</number>
        </property>
        <property name="pageStep">
-        <number>5</number>
+        <number>1</number>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -284,7 +284,7 @@
         <number>15</number>
        </property>
        <property name="pageStep">
-        <number>5</number>
+        <number>1</number>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -336,7 +336,7 @@
         <number>15</number>
        </property>
        <property name="pageStep">
-        <number>5</number>
+        <number>1</number>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -367,7 +367,7 @@
         <number>15</number>
        </property>
        <property name="pageStep">
-        <number>5</number>
+        <number>1</number>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -419,7 +419,7 @@
         <number>15</number>
        </property>
        <property name="pageStep">
-        <number>5</number>
+        <number>1</number>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -450,7 +450,7 @@
         <number>15</number>
        </property>
        <property name="pageStep">
-        <number>5</number>
+        <number>1</number>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -523,7 +523,7 @@
         <number>15</number>
        </property>
        <property name="pageStep">
-        <number>5</number>
+        <number>1</number>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
