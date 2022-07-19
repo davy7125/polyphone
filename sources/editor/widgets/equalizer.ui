@@ -678,7 +678,7 @@
  <connections>
   <connection>
    <sender>verticalSlider_1</sender>
-   <signal>sliderMoved(int)</signal>
+   <signal>valueChanged(int)</signal>
    <receiver>Equalizer</receiver>
    <slot>on_verticalSliderMoved(int)</slot>
    <hints>
@@ -694,7 +694,7 @@
   </connection>
   <connection>
    <sender>verticalSlider_2</sender>
-   <signal>sliderMoved(int)</signal>
+   <signal>valueChanged(int)</signal>
    <receiver>Equalizer</receiver>
    <slot>on_verticalSliderMoved(int)</slot>
    <hints>
@@ -710,7 +710,7 @@
   </connection>
   <connection>
    <sender>verticalSlider_3</sender>
-   <signal>sliderMoved(int)</signal>
+   <signal>valueChanged(int)</signal>
    <receiver>Equalizer</receiver>
    <slot>on_verticalSliderMoved(int)</slot>
    <hints>
@@ -726,7 +726,7 @@
   </connection>
   <connection>
    <sender>verticalSlider_5</sender>
-   <signal>sliderMoved(int)</signal>
+   <signal>valueChanged(int)</signal>
    <receiver>Equalizer</receiver>
    <slot>on_verticalSliderMoved(int)</slot>
    <hints>
@@ -742,7 +742,7 @@
   </connection>
   <connection>
    <sender>verticalSlider_7</sender>
-   <signal>sliderMoved(int)</signal>
+   <signal>valueChanged(int)</signal>
    <receiver>Equalizer</receiver>
    <slot>on_verticalSliderMoved(int)</slot>
    <hints>
@@ -758,7 +758,7 @@
   </connection>
   <connection>
    <sender>verticalSlider_4</sender>
-   <signal>sliderMoved(int)</signal>
+   <signal>valueChanged(int)</signal>
    <receiver>Equalizer</receiver>
    <slot>on_verticalSliderMoved(int)</slot>
    <hints>
@@ -774,7 +774,7 @@
   </connection>
   <connection>
    <sender>verticalSlider_6</sender>
-   <signal>sliderMoved(int)</signal>
+   <signal>valueChanged(int)</signal>
    <receiver>Equalizer</receiver>
    <slot>on_verticalSliderMoved(int)</slot>
    <hints>
@@ -790,7 +790,7 @@
   </connection>
   <connection>
    <sender>verticalSlider_8</sender>
-   <signal>sliderMoved(int)</signal>
+   <signal>valueChanged(int)</signal>
    <receiver>Equalizer</receiver>
    <slot>on_verticalSliderMoved(int)</slot>
    <hints>
@@ -806,7 +806,7 @@
   </connection>
   <connection>
    <sender>verticalSlider_9</sender>
-   <signal>sliderMoved(int)</signal>
+   <signal>valueChanged(int)</signal>
    <receiver>Equalizer</receiver>
    <slot>on_verticalSliderMoved(int)</slot>
    <hints>
@@ -822,7 +822,7 @@
   </connection>
   <connection>
    <sender>verticalSlider_10</sender>
-   <signal>sliderMoved(int)</signal>
+   <signal>valueChanged(int)</signal>
    <receiver>Equalizer</receiver>
    <slot>on_verticalSliderMoved(int)</slot>
    <hints>
