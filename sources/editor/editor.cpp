@@ -437,6 +437,7 @@ void Editor::onKeyPlayed(int key, int vel)
 
             EltID idInstSmpl = ids[0];
             idInstSmpl.typeElement = elementInstSmpl;
+            IdList currentIds;
             foreach (int i, sf2->getSiblings(idInstSmpl))
             {
                 idInstSmpl.indexElt2 = i;
@@ -464,8 +465,15 @@ void Editor::onKeyPlayed(int key, int vel)
                     velMax = defaultVelRange.byHi;
                 }
                 if (keyMin <= key && keyMax >= key && velMin <= vel && velMax >= vel)
+                {
+                    currentIds << idInstSmpl;
                     ContextManager::midi()->keyboard()->addCurrentRange(key, keyMin, keyMax);
+                }
             }
+
+            // Possibly update the current selection
+            if (!currentIds.isEmpty() && (QApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0)
+                ui->treeView->onSelectionChanged(currentIds);
         }
         else
             ContextManager::midi()->keyboard()->removeCurrentRange(key);
@@ -474,5 +482,65 @@ void Editor::onKeyPlayed(int key, int vel)
     // PRESET
     ids = _currentIds.getSelectedIds(elementPrst);
     if (ids.count() == 1)
+    {
         ContextManager::audio()->getSynth()->play(ids[0], -1, key, vel);
+
+        // Possibly update the current selection
+        if (vel > 0 && (QApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0)
+        {
+            EltID idPrst = ids[0];
+            idPrst.typeElement = elementPrst;
+            RangesType defaultKeyRange, defaultVelRange;
+            if (sf2->isSet(idPrst, champ_keyRange))
+                defaultKeyRange = sf2->get(idPrst, champ_keyRange).rValue;
+            else
+            {
+                defaultKeyRange.byLo = 0;
+                defaultKeyRange.byHi = 127;
+            }
+            if (sf2->isSet(idPrst, champ_velRange))
+                defaultVelRange = sf2->get(idPrst, champ_velRange).rValue;
+            else
+            {
+                defaultVelRange.byLo = 0;
+                defaultVelRange.byHi = 127;
+            }
+
+            EltID idPrstInst = ids[0];
+            idPrstInst.typeElement = elementPrstInst;
+            IdList currentIds;
+            foreach (int i, sf2->getSiblings(idPrstInst))
+            {
+                idPrstInst.indexElt2 = i;
+                int keyMin, keyMax, velMin, velMax;
+                if (sf2->isSet(idPrstInst, champ_keyRange))
+                {
+                    RangesType rangeTmp = sf2->get(idPrstInst, champ_keyRange).rValue;
+                    keyMin = rangeTmp.byLo;
+                    keyMax = rangeTmp.byHi;
+                }
+                else
+                {
+                    keyMin = defaultKeyRange.byLo;
+                    keyMax = defaultKeyRange.byHi;
+                }
+                if (sf2->isSet(idPrstInst, champ_velRange))
+                {
+                    RangesType rangeTmp = sf2->get(idPrstInst, champ_velRange).rValue;
+                    velMin = rangeTmp.byLo;
+                    velMax = rangeTmp.byHi;
+                }
+                else
+                {
+                    velMin = defaultVelRange.byLo;
+                    velMax = defaultVelRange.byHi;
+                }
+                if (keyMin <= key && keyMax >= key && velMin <= vel && velMax >= vel)
+                    currentIds << idPrstInst;
+            }
+
+            if (!currentIds.isEmpty())
+                ui->treeView->onSelectionChanged(currentIds);
+        }
+    }
 }
