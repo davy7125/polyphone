@@ -193,12 +193,25 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
             (playedNote - v_rootkey) * v_scaleTune + (temperamentFineTune + v_fineTune) + 100.0f * v_coarseTune;
 
     // Compute the distance of each point
-    float currentDeltaPitch;
-    for (quint32 i = 0; i < len; i++)
+    if (v_modEnvToPitch == 0 && v_modLfoToPitch == 0 && v_vibLfoToPitch == 0)
     {
-        currentDeltaPitch = deltaPitchFixed + _dataModArray[i] * v_modEnvToPitch + _modLfoArray[i] * v_modLfoToPitch + _vibLfoArray[i] * v_vibLfoToPitch;
-        _pointDistanceArray[i + 1] = _pointDistanceArray[i] +
-                static_cast<int>(0.5f + EnveloppeVol::fastPow2(currentDeltaPitch * 0.000833333f /* 1:1200 */ + 8.0f /* multiply by 256, which is 2^8 */));
+        float tmp = static_cast<float>(_pointDistanceArray[0]);
+        for (quint32 i = 0; i < len; i++)
+        {
+            tmp += EnveloppeVol::fastPow2(deltaPitchFixed * 0.000833333f /* 1:1200 */ + 8.0f /* multiply by 256, which is 2^8 */);
+            _pointDistanceArray[i + 1] = static_cast<int>(0.5f + tmp);
+        }
+    }
+    else
+    {
+        float tmp = static_cast<float>(_pointDistanceArray[0]);
+        float currentDeltaPitch;
+        for (quint32 i = 0; i < len; i++)
+        {
+            currentDeltaPitch = deltaPitchFixed + _dataModArray[i] * v_modEnvToPitch + _modLfoArray[i] * v_modLfoToPitch + _vibLfoArray[i] * v_vibLfoToPitch;
+            tmp += EnveloppeVol::fastPow2(currentDeltaPitch * 0.000833333f /* 1:1200 */ + 8.0f /* multiply by 256, which is 2^8 */);
+            _pointDistanceArray[i + 1] = static_cast<int>(0.5f + tmp);
+        }
     }
 
     // Resample data
