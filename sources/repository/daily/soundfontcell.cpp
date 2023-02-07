@@ -38,7 +38,6 @@ SoundfontCell::SoundfontCell(SoundfontInformation* soundfontInfo, QWidget *paren
     _soundfontId(soundfontInfo->getId())
 {
     ui->setupUi(this);
-    this->installEventFilter(this);
 
     if (s_icons == nullptr)
         s_icons = new IconContainer();

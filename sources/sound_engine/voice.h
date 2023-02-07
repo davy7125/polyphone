@@ -121,7 +121,7 @@ private:
     int _token;
 
     // Sample playback
-    quint32 _currentSmplPos;
+    quint32 _currentSmplPos, _elapsedSmplPos;
     double _time;
     bool _release;
     quint32 _delayEnd;

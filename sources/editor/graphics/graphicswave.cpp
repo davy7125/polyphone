@@ -53,7 +53,6 @@ GraphicsWave::GraphicsWave(QWidget *parent) : QWidget(parent),
     _startLoop(0),
     _endLoop(0),
     _currentPosition(0),
-    _lastPositionUpdate(QDateTime::currentDateTime()),
     _multipleSelection(false),
     _qScrollX(nullptr),
     _spinStart(nullptr),
@@ -156,11 +155,6 @@ void GraphicsWave::setEndLoop(int pos, bool repaint)
 
 void GraphicsWave::setCurrentSample(quint32 pos)
 {
-    QDateTime now = QDateTime::currentDateTime();
-    if (_lastPositionUpdate.msecsTo(now) < 16 && pos != 0)
-        return;
-
-    _lastPositionUpdate = now;
     _currentPosition = pos;
     repaint();
 }

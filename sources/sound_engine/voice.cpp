@@ -101,6 +101,7 @@ void Voice::initialize(VoiceInitializer * voiceInitializer)
     _gain = 0;
     _token = voiceInitializer->token;
     _currentSmplPos = _voiceParam.getPosition(champ_dwStart16); // This value is read only once
+    _elapsedSmplPos = 0;
     _time = 0;
     _release = false;
     _delayEnd = 10;
@@ -281,10 +282,20 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     {
         _isFinished = true;
         if (_voiceParam.getKey() == -1)
+        {
             emit(currentPosChanged(0));
+            _elapsedSmplPos = 0;
+        }
     }
     else if (_voiceParam.getKey() == -1)
-        emit(currentPosChanged(_currentSmplPos));
+    {
+        _elapsedSmplPos += len;
+        if (_elapsedSmplPos > (_smplRate >> 5))
+        {
+            emit(currentPosChanged(_currentSmplPos));
+            _elapsedSmplPos = 0;
+        }
+    }
 
     //// APPLY PAN AND CHORUS ////
 

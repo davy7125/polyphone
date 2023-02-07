@@ -83,7 +83,6 @@ private:
 
     // Loop, playback position
     quint32 _startLoop, _endLoop, _currentPosition;
-    QDateTime _lastPositionUpdate;
 
     bool _multipleSelection;
     QScrollBar * _qScrollX;
