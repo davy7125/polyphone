@@ -118,6 +118,31 @@ void RecentFileManager::addRecentFile(FileType fileType, QString filePath)
     }
 }
 
+void RecentFileManager::removeRecentSoundfontFile(QString filePath)
+{
+    filePath = filePath.replace("\\", "/");
+    int position = _listFiles.indexOf(filePath);
+    if (position != -1)
+    {
+        for (int i = position; i < MAX_SF2_FILES - 1; i++)
+        {
+            _listFiles[i] = _listFiles.at(i + 1);
+            _listDateTimes[i] = _listDateTimes.at(i + 1);
+        }
+        _listFiles[MAX_SF2_FILES - 1] = "";
+        _listDateTimes[0] = QDateTime::currentDateTime();
+
+        for (int i = 0; i < MAX_SF2_FILES; i++)
+        {
+            _configuration->setValue(ConfManager::SECTION_RECENT_FILES, "file_" + QString::number(i), _listFiles.at(i));
+            _configuration->setValue(ConfManager::SECTION_RECENT_FILES, "file_time_" + QString::number(i),
+                                     _listDateTimes.at(i).toString("yyyy/MM/dd HH:mm:ss"));
+        }
+    }
+
+    emit(recentSf2Changed());
+}
+
 QString RecentFileManager::getLastFile(FileType fileType, int num)
 {
     QString lastFile;
@@ -149,7 +174,6 @@ QString RecentFileManager::getLastFile(FileType fileType, int num)
 
     return lastFile;
 }
-
 
 QDateTime RecentFileManager::getLastFileDateTime(FileType fileType, int num)
 {

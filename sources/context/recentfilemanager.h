@@ -60,8 +60,9 @@ public:
     /// Get the last directory for a specific type of file
     QString getLastDirectory(FileType fileType);
 
-    /// Add a recent file
+    /// Add or remove a recent file
     void addRecentFile(FileType fileType, QString filePath);
+    void removeRecentSoundfontFile(QString filePath);
 
 signals:
     void recentSf2Changed();

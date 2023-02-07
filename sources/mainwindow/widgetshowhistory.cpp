@@ -171,7 +171,7 @@ void WidgetShowHistory::keyPressEvent(QKeyEvent * event)
 {
     if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
     {
-        // Open all active element
+        // Open all active elements
         QStringList links;
         for (int i = 0; i < ui->listWidget->count(); i++)
         {
@@ -182,6 +182,19 @@ void WidgetShowHistory::keyPressEvent(QKeyEvent * event)
 
         foreach (QString link, links)
             emit(openFile(link));
+    }
+    else if (event->key() == Qt::Key_Delete)
+    {
+        // Remove the first active element
+        for (int i = 0; i < ui->listWidget->count(); i++)
+        {
+            QListWidgetItem * item = ui->listWidget->item(i);
+            if (item->isSelected())
+            {
+                ContextManager::recentFile()->removeRecentSoundfontFile(((WidgetShowHistoryCell*)ui->listWidget->itemWidget(item))->getLink());
+                return;
+            }
+        }
     }
     else
         QWidget::keyPressEvent(event);
