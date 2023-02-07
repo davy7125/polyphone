@@ -59,6 +59,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+#ifdef NO_SF2_CREATION
+    ui->pushButtonNew->hide();
+#endif
+
     // Window state
     restoreGeometry(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "windowGeometry", QByteArray()).toByteArray());
     restoreState(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "windowState", QByteArray()).toByteArray());
@@ -118,8 +122,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 #ifdef NO_SF2_REPOSITORY
     ui->widgetRepo->hide();
-    ui->gridLayout_2->setColumnMinimumWidth(4, 0);
-    ui->gridLayout_2->setColumnStretch(4, 0);
+    ui->gridLayout_2->setColumnMinimumWidth(1, 0);
+    ui->gridLayout_2->setColumnStretch(1, 0);
 #else
     // Initialize the repository
     RepositoryManager * rm = RepositoryManager::getInstance();

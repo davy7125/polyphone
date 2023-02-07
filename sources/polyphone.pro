@@ -14,13 +14,14 @@ DEFINES += USE_LOCAL_QCUSTOMPLOT
 # Uncomment this line to use wolfssl instead of openssl (for a license issue)
 #DEFINES += USE_WOLFSSL
 
-# Uncomment this line for hiding all repository features
+# Uncomment lines for hiding features
 #DEFINES += NO_SF2_REPOSITORY
+#DEFINES += NO_SF2_CREATION
 
 # Polyphone version
 DEFINES += SOFT_VERSION=\\\"2.3.1\\\"
 DEFINES += IDENTIFIER=\\\"\\\"
-DEFINES += CURRENT_YEAR=\\\"2022\\\"
+DEFINES += CURRENT_YEAR=\\\"2023\\\"
 
 # List to be completed if other translations are desired
 # Format: polyphone_XX.ts, XX being the language code

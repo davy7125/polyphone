@@ -33,11 +33,12 @@ MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
     this->setStyleSheet(ContextManager::theme()->getMenuTheme());
 
     // Elements
+#ifndef NO_SF2_CREATION
     _newAction = new QAction(tr("&New"), this);
     _newAction->setShortcut(QString("Ctrl+N"));
     connect(_newAction, SIGNAL(triggered()), this, SIGNAL(newClicked()));
     this->addAction(_newAction);
-
+#endif
     _openAction = new QAction(tr("&Open..."), this);
     _openAction->setShortcut(QString("Ctrl+O"));
     connect(_openAction, SIGNAL(triggered()), this, SIGNAL(openClicked()));

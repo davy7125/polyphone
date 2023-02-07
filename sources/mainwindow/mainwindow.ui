@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>694</width>
+    <width>659</width>
     <height>500</height>
    </rect>
   </property>
@@ -82,55 +82,46 @@
           <attribute name="title">
            <string/>
           </attribute>
-          <layout class="QGridLayout" name="gridLayout_2" columnstretch="2,1,1,2,4" columnminimumwidth="0,0,0,0,300">
-           <item row="3" column="0">
-            <widget class="QPushButton" name="pushButtonDocumentation">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">padding: 10px;</string>
-             </property>
-             <property name="text">
-              <string extracomment="prefixed with 2 spaces">  Documentation</string>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>36</width>
-               <height>36</height>
-              </size>
-             </property>
-            </widget>
+          <layout class="QGridLayout" name="gridLayout_2" columnstretch="6,4" columnminimumwidth="0,300">
+           <item row="0" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QPushButton" name="pushButtonNew">
+               <property name="styleSheet">
+                <string notr="true">padding: 10px;</string>
+               </property>
+               <property name="text">
+                <string extracomment="prefixed with 2 spaces for each line">  New
+  soundfont</string>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>36</width>
+                 <height>36</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonOpen">
+               <property name="styleSheet">
+                <string notr="true">padding: 10px;</string>
+               </property>
+               <property name="text">
+                <string extracomment="prefixed with 2 spaces for each line">  Open
+  soundfont</string>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>36</width>
+                 <height>36</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
-           <item row="2" column="0" colspan="4">
-            <widget class="WidgetShowHistory" name="widgetShowHistory" native="true"/>
-           </item>
-           <item row="3" column="3">
-            <widget class="QPushButton" name="pushButtonSettings">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">padding: 10px;</string>
-             </property>
-             <property name="text">
-              <string extracomment="prefixed with 2 spaces">  Settings</string>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>36</width>
-               <height>36</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="4" rowspan="4">
+           <item row="0" column="1" rowspan="4">
             <widget class="QWidget" name="widgetRepo" native="true">
              <property name="minimumSize">
               <size>
@@ -158,12 +149,6 @@
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>250</width>
-                  <height>0</height>
-                 </size>
                 </property>
                 <property name="styleSheet">
                  <string notr="true">height:52px</string>
@@ -245,7 +230,7 @@
              </layout>
             </widget>
            </item>
-           <item row="1" column="0" colspan="4">
+           <item row="1" column="0">
             <widget class="QLabel" name="label_2">
              <property name="font">
               <font>
@@ -261,61 +246,85 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="2" colspan="2">
-            <widget class="QPushButton" name="pushButtonOpen">
-             <property name="styleSheet">
-              <string notr="true">padding: 10px;</string>
-             </property>
-             <property name="text">
-              <string extracomment="prefixed with 2 spaces for each line">  Open
-  soundfont</string>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>36</width>
-               <height>36</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1" colspan="2">
-            <widget class="QPushButton" name="pushButtonForum">
+           <item row="2" column="0">
+            <widget class="WidgetShowHistory" name="widgetShowHistory" native="true">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
-             <property name="styleSheet">
-              <string notr="true">padding: 10px;</string>
-             </property>
-             <property name="text">
-              <string extracomment="prefixed with 2 spaces">  Forum</string>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>36</width>
-               <height>36</height>
-              </size>
-             </property>
             </widget>
            </item>
-           <item row="0" column="0" colspan="2">
-            <widget class="QPushButton" name="pushButtonNew">
-             <property name="styleSheet">
-              <string notr="true">padding: 10px;</string>
-             </property>
-             <property name="text">
-              <string extracomment="prefixed with 2 spaces for each line">  New
-  soundfont</string>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>36</width>
-               <height>36</height>
-              </size>
-             </property>
-            </widget>
+           <item row="3" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QPushButton" name="pushButtonDocumentation">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">padding: 10px;</string>
+               </property>
+               <property name="text">
+                <string extracomment="prefixed with 2 spaces">  Documentation</string>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>36</width>
+                 <height>36</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonForum">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">padding: 10px;</string>
+               </property>
+               <property name="text">
+                <string extracomment="prefixed with 2 spaces">  Forum</string>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>36</width>
+                 <height>36</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonSettings">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">padding: 10px;</string>
+               </property>
+               <property name="text">
+                <string extracomment="prefixed with 2 spaces">  Settings</string>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>36</width>
+                 <height>36</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
@@ -354,11 +363,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>pushButtonNew</tabstop>
-  <tabstop>pushButtonOpen</tabstop>
-  <tabstop>pushButtonDocumentation</tabstop>
-  <tabstop>pushButtonForum</tabstop>
-  <tabstop>pushButtonSettings</tabstop>
   <tabstop>tabWidget</tabstop>
  </tabstops>
  <resources>
