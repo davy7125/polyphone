@@ -44,6 +44,11 @@ ConfigPanel::ConfigPanel(QWidget *parent) : QWidget(parent),
 
     // Events
     connect(ui->widgetToc, SIGNAL(sectionClicked(int)), this, SLOT(onSectionClicked(int)));
+
+#ifdef NO_SF2_REPOSITORY
+    ui->repositoryLabel->hide();
+    ui->repositoryWidget->hide();
+#endif
 }
 
 ConfigPanel::~ConfigPanel()
@@ -57,7 +62,9 @@ void ConfigPanel::initializeInterface()
     ui->interfaceWidget->initialize();
     ui->soundWidget->initialize();
     ui->keyboardWidget->initialize();
+#ifndef NO_SF2_REPOSITORY
     ui->repositoryWidget->initialize();
+#endif
 }
 
 void ConfigPanel::onSectionClicked(int sectionNumber)

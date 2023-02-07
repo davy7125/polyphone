@@ -116,6 +116,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(_windowManager, SIGNAL(recorderDisplayChanged(bool)), this, SLOT(onRecorderDisplayChange(bool)));
     connect(_windowManager, SIGNAL(editorOpen(bool)), trw, SLOT(onEditorOpen(bool)));
 
+#ifdef NO_SF2_REPOSITORY
+    ui->widgetRepo->hide();
+    ui->gridLayout_2->setColumnMinimumWidth(4, 0);
+    ui->gridLayout_2->setColumnStretch(4, 0);
+#else
     // Initialize the repository
     RepositoryManager * rm = RepositoryManager::getInstance();
     connect(rm, SIGNAL(initializing()), ui->widgetShowSoundfonts, SLOT(initialize()));
@@ -126,6 +131,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Possibly initialize the user (must be done after the window manager creation)
     if (ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "auto_connect", false).toBool())
         UserManager::getInstance()->login();
+#endif
 
     // Recent files
     connect(ContextManager::recentFile(), SIGNAL(recentSf2Changed()), this, SLOT(recentSf2Changed()));

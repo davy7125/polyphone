@@ -14,6 +14,9 @@ DEFINES += USE_LOCAL_QCUSTOMPLOT
 # Uncomment this line to use wolfssl instead of openssl (for a license issue)
 #DEFINES += USE_WOLFSSL
 
+# Uncomment this line for hiding all repository features
+#DEFINES += NO_SF2_REPOSITORY
+
 # Polyphone version
 DEFINES += SOFT_VERSION=\\\"2.3.1\\\"
 DEFINES += IDENTIFIER=\\\"\\\"

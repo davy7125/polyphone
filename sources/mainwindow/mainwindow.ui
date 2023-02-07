@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>681</width>
+    <width>694</width>
     <height>500</height>
    </rect>
   </property>
@@ -82,42 +82,8 @@
           <attribute name="title">
            <string/>
           </attribute>
-          <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,1,1,1,1,1,1,3,0" columnminimumwidth="0,0,0,0,0,0,0,250,0">
-           <property name="leftMargin">
-            <number>9</number>
-           </property>
-           <property name="topMargin">
-            <number>9</number>
-           </property>
-           <property name="rightMargin">
-            <number>9</number>
-           </property>
-           <property name="bottomMargin">
-            <number>9</number>
-           </property>
-           <item row="3" column="4" colspan="2">
-            <widget class="QPushButton" name="pushButtonSettings">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">padding: 10px;</string>
-             </property>
-             <property name="text">
-              <string extracomment="prefixed with 2 spaces">  Settings</string>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>36</width>
-               <height>36</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0" colspan="2">
+          <layout class="QGridLayout" name="gridLayout_2" columnstretch="2,1,1,2,4" columnminimumwidth="0,0,0,0,300">
+           <item row="3" column="0">
             <widget class="QPushButton" name="pushButtonDocumentation">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -139,28 +105,11 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0" colspan="6">
+           <item row="2" column="0" colspan="4">
             <widget class="WidgetShowHistory" name="widgetShowHistory" native="true"/>
            </item>
-           <item row="0" column="0" colspan="3">
-            <widget class="QPushButton" name="pushButtonNew">
-             <property name="styleSheet">
-              <string notr="true">padding: 10px;</string>
-             </property>
-             <property name="text">
-              <string extracomment="prefixed with 2 spaces for each line">  New
-  soundfont</string>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>36</width>
-               <height>36</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="8">
-            <widget class="QPushButton" name="pushButtonSearch">
+           <item row="3" column="3">
+            <widget class="QPushButton" name="pushButtonSettings">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -171,7 +120,7 @@
               <string notr="true">padding: 10px;</string>
              </property>
              <property name="text">
-              <string/>
+              <string extracomment="prefixed with 2 spaces">  Settings</string>
              </property>
              <property name="iconSize">
               <size>
@@ -181,7 +130,155 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="2" colspan="2">
+           <item row="0" column="4" rowspan="4">
+            <widget class="QWidget" name="widgetRepo" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>29</width>
+               <height>0</height>
+              </size>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_4">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="lineSearch">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>250</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">height:52px</string>
+                </property>
+                <property name="placeholderText">
+                 <string>Search a soundfont...</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QPushButton" name="pushButtonSearch">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">padding: 10px;</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>36</width>
+                  <height>36</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1" colspan="2">
+               <widget class="ShowSoundfonts" name="widgetShowSoundfonts" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0" rowspan="4">
+               <widget class="Line" name="line">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1" colspan="2">
+               <widget class="QLabel" name="label">
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Daily soundfonts</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1" colspan="2">
+               <widget class="QPushButton" name="pushButtonSoundfonts">
+                <property name="styleSheet">
+                 <string notr="true">padding: 10px;</string>
+                </property>
+                <property name="text">
+                 <string extracomment="prefixed with 2 spaces for each line">  Online
+  repository</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>36</width>
+                  <height>36</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="4">
+            <widget class="QLabel" name="label_2">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>History</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2" colspan="2">
+            <widget class="QPushButton" name="pushButtonOpen">
+             <property name="styleSheet">
+              <string notr="true">padding: 10px;</string>
+             </property>
+             <property name="text">
+              <string extracomment="prefixed with 2 spaces for each line">  Open
+  soundfont</string>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>36</width>
+               <height>36</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1" colspan="2">
             <widget class="QPushButton" name="pushButtonForum">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -203,59 +300,13 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="7" colspan="2">
-            <widget class="QLabel" name="label">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>Daily soundfonts</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="7" colspan="2">
-            <widget class="QPushButton" name="pushButtonSoundfonts">
+           <item row="0" column="0" colspan="2">
+            <widget class="QPushButton" name="pushButtonNew">
              <property name="styleSheet">
               <string notr="true">padding: 10px;</string>
              </property>
              <property name="text">
-              <string extracomment="prefixed with 2 spaces for each line">  Online
-  repository</string>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>36</width>
-               <height>36</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="7">
-            <widget class="QLineEdit" name="lineSearch">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">height:52px</string>
-             </property>
-             <property name="placeholderText">
-              <string>Search a soundfont...</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="3" colspan="3">
-            <widget class="QPushButton" name="pushButtonOpen">
-             <property name="styleSheet">
-              <string notr="true">padding: 10px;</string>
-             </property>
-             <property name="text">
-              <string extracomment="prefixed with 2 spaces for each line">  Open
+              <string extracomment="prefixed with 2 spaces for each line">  New
   soundfont</string>
              </property>
              <property name="iconSize">
@@ -263,39 +314,6 @@
                <width>36</width>
                <height>36</height>
               </size>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="6">
-            <widget class="QLabel" name="label_2">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>History</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="7" colspan="2">
-            <widget class="ShowSoundfonts" name="widgetShowSoundfonts" native="true">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="6" rowspan="4">
-            <widget class="Line" name="line">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
              </property>
             </widget>
            </item>
@@ -341,9 +359,6 @@
   <tabstop>pushButtonDocumentation</tabstop>
   <tabstop>pushButtonForum</tabstop>
   <tabstop>pushButtonSettings</tabstop>
-  <tabstop>pushButtonSoundfonts</tabstop>
-  <tabstop>lineSearch</tabstop>
-  <tabstop>pushButtonSearch</tabstop>
   <tabstop>tabWidget</tabstop>
  </tabstops>
  <resources>

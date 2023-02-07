@@ -40,7 +40,11 @@ ConfigToc::ConfigToc(QWidget *parent) :
     ui->buttonInterface->setIconName(":/icons/flag.svg");
     ui->buttonSound->setIconName(":/icons/sound.svg");
     ui->buttonKeyboard->setIconName(":/icons/keyboard.svg");
+#ifdef NO_SF2_REPOSITORY
+    ui->buttonRepository->hide();
+#else
     ui->buttonRepository->setIconName(":/icons/globe.svg");
+#endif
 }
 
 ConfigToc::~ConfigToc()
