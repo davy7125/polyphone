@@ -133,7 +133,7 @@ void Options::processType2(QString arg)
     case STATE_CONFIG:
         if (_mode == MODE_CONVERSION_TO_SFZ)
         {
-            if (arg.count() == 3)
+            if (arg.length() == 3)
             {
                 if (arg[0] == '0' || arg[0] == '1')
                     _sfzPresetPrefix = (arg[0] == '1');
@@ -155,7 +155,7 @@ void Options::processType2(QString arg)
         }
         else if (_mode == MODE_CONVERSION_TO_SF3)
         {
-            if (arg.count() == 1)
+            if (arg.length() == 1)
             {
                 if (arg[0] == '0')
                     _sf3Quality = 0;

@@ -113,7 +113,11 @@ void TableHeaderView::mousePressEvent(QMouseEvent * e)
             }
             _soloSelectionAction->blockSignals(false);
             _muteAction->blockSignals(false);
+#if QT_VERSION < 0x060000
             _menu->exec(e->globalPos());
+#else
+            _menu->exec(e->globalPosition().toPoint());
+#endif
         }
     }
     else

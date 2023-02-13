@@ -84,7 +84,7 @@ GraphicsWave::~GraphicsWave()
     delete _wavePainter;
 }
 
-void GraphicsWave::setData(QVector<float> vData, quint32 sampleRate)
+void GraphicsWave::setData(const QVector<float> &vData, quint32 sampleRate)
 {
     // Reset zoom & drag
     _zoomX = 1;
@@ -93,7 +93,7 @@ void GraphicsWave::setData(QVector<float> vData, quint32 sampleRate)
 
     // Set data
     _wavePainter->setData(vData);
-    _sizeX = vData.size() - 1;
+    _sizeX = static_cast<double>(vData.size()) - 1.0;
 
     // Save the sample rate
     _sampleRate = sampleRate;
@@ -252,9 +252,9 @@ void GraphicsWave::paintEvent(QPaintEvent *event)
             color.setAlpha(100);
             painter.setPen(color);
             painter.drawRect(QRectF(qMin(_x, _xInit) * this->width(), -1,
-                             qAbs(_x - _xInit) * this->width(), this->height() + 2));
+                                    qAbs(_x - _xInit) * this->width(), this->height() + 2));
             painter.fillRect(QRectF(qMin(_x, _xInit) * this->width(), -1,
-                             qAbs(_x - _xInit) * this->width(), this->height() + 2),
+                                    qAbs(_x - _xInit) * this->width(), this->height() + 2),
                              QBrush(color, Qt::BDiagPattern));
         }
     }
@@ -289,8 +289,13 @@ void GraphicsWave::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton && !_zoomFlag)
     {
         // Save the initial state
+#if QT_VERSION < 0x060000
         _xInit = static_cast<double>(event->x()) / this->width();
         _yInit = static_cast<double>(event->y()) / this->height();
+#else
+        _xInit = static_cast<double>(event->position().x()) / this->width();
+        _yInit = static_cast<double>(event->position().y()) / this->height();
+#endif
         _zoomXinit = _zoomX;
         _zoomYinit = _zoomY;
         _posXinit = _posX;
@@ -304,8 +309,13 @@ void GraphicsWave::mousePressEvent(QMouseEvent *event)
     else if (event->button() == Qt::RightButton && !_dragFlag && !_cutFlag)
     {
         // Save the initial state
+#if QT_VERSION < 0x060000
         _xInit = static_cast<double>(event->x()) / this->width();
         _yInit = static_cast<double>(event->y()) / this->height();
+#else
+        _xInit = static_cast<double>(event->position().x()) / this->width();
+        _yInit = static_cast<double>(event->position().y()) / this->height();
+#endif
         _zoomXinit = _zoomX;
         _zoomYinit = _zoomY;
         _posXinit = _posX;
@@ -343,7 +353,14 @@ void GraphicsWave::mouseReleaseEvent(QMouseEvent *event)
         {
             if (_cutFlag)
             {
-                int endSamplePosition = getSamplePosX(_zoomX, _posX, static_cast<double>(event->x()) / this->width());
+                int endSamplePosition = getSamplePosX(
+                            _zoomX, _posX,
+#if QT_VERSION < 0x060000
+                            static_cast<double>(event->x()) / this->width()
+#else
+                            static_cast<double>(event->position().x()) / this->width()
+#endif
+                            );
                 if (startSamplePosition < endSamplePosition)
                     emit(cutOrdered(startSamplePosition, endSamplePosition));
                 else
@@ -391,9 +408,13 @@ void GraphicsWave::mouseMoveEvent(QMouseEvent *event)
 {
     if (_multipleSelection)
         return;
-
+#if QT_VERSION < 0x060000
     _x = static_cast<double>(event->x()) / this->width();
     _y = static_cast<double>(event->y()) / this->height();
+#else
+    _x = static_cast<double>(event->position().x()) / this->width();
+    _y = static_cast<double>(event->position().y()) / this->height();
+#endif
 
     if (_zoomFlag)
     {

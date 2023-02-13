@@ -98,7 +98,7 @@ void GraphicsViewEnvelop::setPosX(int posX)
 
 double GraphicsViewEnvelop::getTickStep()
 {
-    double widthPerUnit = (double)this->width() * _zoomX / _sizeX;
+    double widthPerUnit = static_cast<double>(this->width()) * _zoomX / _sizeX;
     double tickStep = 0.0001;
     if (widthPerUnit < 1)
         tickStep = 200;
@@ -400,8 +400,13 @@ QString GraphicsViewEnvelop::doubleToString(double value, bool accurate)
 void GraphicsViewEnvelop::mousePressEvent(QMouseEvent *event)
 {
     // Enregistrement situation
+#if QT_VERSION < 0x060000
     _xInit = static_cast<double>(event->x()) / this->width();
     _yInit = static_cast<double>(event->y()) / this->height();
+#else
+    _xInit = static_cast<double>(event->position().x()) / this->width();
+    _yInit = static_cast<double>(event->position().y()) / this->height();
+#endif
     _zoomXinit = _zoomX;
     _posXinit = _posX;
     if (event->button() == Qt::LeftButton && !_zoomFlag)
@@ -430,8 +435,13 @@ void GraphicsViewEnvelop::mouseReleaseEvent(QMouseEvent *event)
 
 void GraphicsViewEnvelop::mouseMoveEvent(QMouseEvent *event)
 {    
+#if QT_VERSION < 0x060000
     _x = static_cast<double>(event->x()) / this->width();
     _y = static_cast<double>(event->y()) / this->height();
+#else
+    _x = static_cast<double>(event->position().x()) / this->width();
+    _y = static_cast<double>(event->position().y()) / this->height();
+#endif
 
     if (_zoomFlag)
     {

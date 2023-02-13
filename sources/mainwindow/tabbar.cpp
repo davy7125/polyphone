@@ -39,8 +39,13 @@ void TabBar::mousePressEvent(QMouseEvent *event)
     int tabIndex = this->tabAt(event->pos());
 
     // Position in the current tab
-    _leftOffset = event->x() - this->tabRect(tabIndex).left() + 2;
-    _rightOffset = this->tabRect(tabIndex).right() - event->x() + 1;
+#if QT_VERSION < 0x060000
+    _leftOffset = static_cast<int>(event->x()) - this->tabRect(tabIndex).left() + 2;
+    _rightOffset = this->tabRect(tabIndex).right() - static_cast<int>(event->x()) + 1;
+#else
+    _leftOffset = static_cast<int>(event->position().x()) - this->tabRect(tabIndex).left() + 2;
+    _rightOffset = this->tabRect(tabIndex).right() - static_cast<int>(event->position().x()) + 1;
+#endif
 
     // All tabs movable except the first one
     setMovable(tabIndex != 0);
@@ -49,22 +54,30 @@ void TabBar::mousePressEvent(QMouseEvent *event)
 
 void TabBar::mouseMoveEvent(QMouseEvent *event)
 {
-    if (event->x() - _leftOffset < this->tabRect(0).right())
+#if QT_VERSION < 0x060000
+    QPoint pos = event->pos();
+    QPoint globalPos = event->globalPos();
+#else
+    QPoint pos = event->position().toPoint();
+    QPoint globalPos = event->globalPosition().toPoint();
+#endif
+
+    if (pos.x() - _leftOffset < this->tabRect(0).right())
     {
         // Too far on the left
         event->ignore();
         QMouseEvent newEvent(event->type(),
-                             QPointF(this->tabRect(0).right() + _leftOffset, event->y()),
-                             event->button(), event->buttons(), event->modifiers());
+                             QPointF(this->tabRect(0).right() + _leftOffset, pos.y()),
+                             globalPos, event->button(), event->buttons(), event->modifiers());
         QTabBar::mouseMoveEvent(&newEvent);
     }
-    else if (event->x() + _rightOffset > this->tabRect(this->count() - 1).right())
+    else if (pos.x() + _rightOffset > this->tabRect(this->count() - 1).right())
     {
         // Too far on the right
         event->ignore();
         QMouseEvent newEvent(event->type(),
-                             QPointF(this->tabRect(this->count() - 1).right() - _rightOffset, event->y()),
-                             event->button(), event->buttons(), event->modifiers());
+                             QPointF(this->tabRect(this->count() - 1).right() - _rightOffset, pos.y()),
+                             globalPos, event->button(), event->buttons(), event->modifiers());
         QTabBar::mouseMoveEvent(&newEvent);
     }
     else

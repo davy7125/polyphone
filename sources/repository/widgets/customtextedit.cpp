@@ -575,7 +575,7 @@ QString CustomTextEdit::processBlock(QString tagName, QString attributes)
     if (styleAttributes.contains("margin-left"))
     {
         QString value = styleAttributes["margin-left"];
-        if (value.count() > 2)
+        if (value.length() > 2)
         {
             int number = value.left(value.length() - 2).toInt();
             switch (static_cast<BlockType>(number))

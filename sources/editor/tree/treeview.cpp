@@ -850,7 +850,11 @@ void TreeView::dropEvent(QDropEvent *event)
     else if (!_draggedIds.empty())
     {
         // Destination
+#if QT_VERSION < 0x060000
         QModelIndex index = this->indexAt(event->pos());
+#else
+        QModelIndex index = this->indexAt(event->position().toPoint());
+#endif
 
         // Possibly prevent unwanted actions
         if (!index.isValid() || _startDrag.msecsTo(QDateTime::currentDateTime()) < 150)

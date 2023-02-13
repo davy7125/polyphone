@@ -25,7 +25,6 @@
 #include "graphicswavepainter.h"
 #include "contextmanager.h"
 #include <QPainter>
-#include "qmath.h"
 
 static float fastSqrt(float val)
 {
@@ -82,7 +81,7 @@ GraphicsWavePainter::~GraphicsWavePainter()
     delete [] _samplePlotMean;
 }
 
-void GraphicsWavePainter::setData(QVector<float> vData)
+void GraphicsWavePainter::setData(const QVector<float> &vData)
 {
     delete _image;
     delete [] _pixels;
@@ -325,14 +324,14 @@ QPointF * GraphicsWavePainter::getDataAround(quint32 position, quint32 desiredLe
     quint32 leftIndex = position > desiredLength ? position - desiredLength : 0;
     quint32 rightIndex = position + desiredLength;
     if (rightIndex >= (unsigned int)_sampleData.size())
-        rightIndex = _sampleData.size() - 1;
+        rightIndex = static_cast<quint32>(_sampleData.size()) - 1;
 
     if (rightIndex <= leftIndex)
         return nullptr;
 
     // Create data
     float coeff = -_zoomY * static_cast<float>(_widget->height()) / 2;
-    float offsetY = 0.5f * _widget->height();
+    float offsetY = 0.5f * static_cast<float>(_widget->height());
     pointNumber = rightIndex - leftIndex + 1;
     QPointF * array = new QPointF[pointNumber];
     for (quint32 i = 0; i < pointNumber; i++)

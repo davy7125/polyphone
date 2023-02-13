@@ -24,6 +24,7 @@
 
 #include "toollinksample.h"
 #include "soundfontmanager.h"
+#include <QRegularExpression>
 
 void ToolLinkSample::beforeProcess(IdList ids)
 {
@@ -41,7 +42,7 @@ void ToolLinkSample::beforeProcess(IdList ids)
 
 void ToolLinkSample::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
-    Q_UNUSED(parameters);
+    Q_UNUSED(parameters)
 
     // Return immediately if the sample has already been processed
     if (_processedIds.contains(id.indexElt))
@@ -107,7 +108,8 @@ void ToolLinkSample::scan(SoundfontManager * sm, int indexSf2)
     {
         // Remove some characters from the sample name
         QString sampleName = sm->getQstr(EltID(elementSmpl, indexSf2, i), champ_name);
-        sampleName = sampleName.remove(QRegExp("[-() |_\\]\\[{}]"));
+        const QRegularExpression re = QRegularExpression("[-() |_\\]\\[{}]");
+        sampleName = sampleName.remove(re);
 
         _smplIds.append(i);
         _leftRight.append(sampleName.right(1).toUpper() == "R");
@@ -125,12 +127,12 @@ void ToolLinkSample::associate(SoundfontManager * sm, EltID leftSmpl, EltID righ
     AttributeValue value;
     value.sfLinkValue = leftSample;
     sm->set(leftSmpl, champ_sfSampleType, value);
-    value.wValue = rightSmpl.indexElt;
+    value.wValue = static_cast<quint16>(rightSmpl.indexElt);
     sm->set(leftSmpl, champ_wSampleLink, value);
 
     value.sfLinkValue = rightSample;
     sm->set(rightSmpl, champ_sfSampleType, value);
-    value.wValue = leftSmpl.indexElt;
+    value.wValue = static_cast<quint16>(leftSmpl.indexElt);
     sm->set(rightSmpl, champ_wSampleLink, value);
 }
 

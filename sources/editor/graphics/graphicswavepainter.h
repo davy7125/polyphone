@@ -39,14 +39,14 @@ public:
 
     // Set the waveform color
     // Default is Highlight color
-    void setWaveColor(QColor waveColor) { _waveColor = waveColor.rgb(); };
+    void setWaveColor(QColor waveColor) { _waveColor = waveColor.rgb(); }
 
     // Possibly draw the half top part of the wave in the bottom part of the area
     // Default is false
     void setDrawBottom(bool drawBottom) { _drawBottom = drawBottom; }
 
     // Configure the painter with data
-    void setData(QVector<float> vData);
+    void setData(const QVector<float> &vData);
 
     // Draw data
     void paint(QPainter *painter, quint32 start, quint32 end, float zoomY);
