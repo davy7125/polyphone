@@ -25,11 +25,9 @@
 #include "soundfont.h"
 #include "smpl.h"
 #include "instprst.h"
-#include "soundfonts.h"
 #include "treemodel.h"
 #include "treeitemfirstlevel.h"
 #include "treeitemroot.h"
-#include "treesortfilterproxy.h"
 
 Soundfont::Soundfont(EltID id) :
     _id(id),

@@ -189,7 +189,7 @@ void MidiDevice::getMidiList(RtMidi::Api api, QMap<QString, QString> * map)
     }
     catch (std::exception &error)
     {
-        Q_UNUSED(error);
+        Q_UNUSED(error)
     }
 }
 
@@ -431,7 +431,7 @@ void MidiDevice::processKeyOff(int channel, int key)
         }
     }
 
-    // Stop a sample reading if key is -1
+    // Stop a sample playback if key is -1
     if (key == -1)
         _synth->play(EltID(), -1, -1, 0);
     else if (_isSustainOn)

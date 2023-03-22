@@ -25,7 +25,7 @@
 #ifndef MODULATEDPARAMETER_H
 #define MODULATEDPARAMETER_H
 
-#include "basetypes.h"
+#include "attribute.h"
 
 class ModulatedParameter
 {

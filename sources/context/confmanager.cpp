@@ -27,9 +27,11 @@
 #include <QDir>
 #include "modulatordata.h"
 #include "pushstereoediting.h"
+#include "synth.h"
 
 ConfManager::ConfManager(): QObject(),
-    _settings(this)
+    _settings(this),
+    _synthConfig(new SynthConfig())
 {
     // Get the previous version installed
     QStringList version = this->getValue(SECTION_NONE, "last_version_installed", "0.0").toString().split(".");
@@ -90,6 +92,11 @@ ConfManager::ConfManager(): QObject(),
 
     // Special initialization here (for more speed when reading modulator_vel_to_filter)
     ModulatorData::setModulatorVelToFilterType(this->getValue(ConfManager::SECTION_SOUND_ENGINE, "modulator_vel_to_filter", 1).toInt());
+}
+
+ConfManager::~ConfManager()
+{
+    delete _synthConfig;
 }
 
 QVariant ConfManager::getValue(Section section, QString key, QVariant defaultValue) const
@@ -297,4 +304,21 @@ QString ConfManager::getMapping(int numOctave, Key key)
 void ConfManager::clear()
 {
     _settings.clear();
+}
+
+SynthConfig * ConfManager::getSynthConfig()
+{
+    _synthConfig->choLevel = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt();
+    _synthConfig->choDepth = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_depth", 0).toInt();
+    _synthConfig->choFrequency = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_frequency", 0).toInt();
+    _synthConfig->revLevel = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", 0).toInt();
+    _synthConfig->revSize = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_size", 0).toInt();
+    _synthConfig->revWidth = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_width", 0).toInt();
+    _synthConfig->revDamping = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", 0).toInt();
+    _synthConfig->gain = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
+    _synthConfig->tuningFork = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", 440).toInt();
+    _synthConfig->temperament = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString().split(",");
+    _synthConfig->bufferSize =  this->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();
+
+    return _synthConfig;
 }

@@ -26,8 +26,6 @@
 #define UTILS_H
 
 #include <QString>
-#include "eltid.h"
-class SoundfontManager;
 
 class Utils
 {
@@ -38,7 +36,6 @@ public:
     /// -1 if a should be before b, 0 if equals, 1 is a should be after b
     /// This is case insensitive
     static int naturalOrder(QString a, QString b);
-    static int sortDivisions(EltID id1, EltID id2, int sortType);
 
     /// Remove all accents
     /// Can be useful for sorting strings
@@ -62,9 +59,6 @@ public:
 
 private:
     static int getNumberPart(const QString &str, int &length);
-    static int compareKey(SoundfontManager *sm, EltID idDiv1, EltID idDiv2);
-    static int compareVelocity(SoundfontManager *sm, EltID idDiv1, EltID idDiv2);
-    static int compareName(SoundfontManager *sm, EltID idDiv1, EltID idDiv2);
     static QString removeSuffix(QString txt);
 
     static QString s_diacriticLetters;

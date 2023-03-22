@@ -25,7 +25,8 @@
 #include "utils.h"
 #include <QStringList>
 #include <QFile>
-#include "soundfontmanager.h"
+#include <QDebug>
+#include <QRegularExpression>
 
 #ifdef USE_WOLFSSL
 
@@ -42,7 +43,7 @@
 #else
 #include "openssl/rsa.h"
 #include "openssl/pem.h"
-#include "openssl/engine.h"
+#include "openssl/err.h"
 #endif
 
 QString Utils::s_diacriticLetters;
@@ -234,75 +235,9 @@ QString Utils::rsaDecrypt(QString input)
     }
 
     // Convert the decryptedText to QString (base 64) and return it
-    QString result = QString::fromLatin1((char*) decryptedText, resultLen);
+    QString result = QString::fromLatin1((char*)decryptedText, resultLen);
     delete [] decryptedText;
     return result;
-}
-
-int Utils::sortDivisions(EltID id1, EltID id2, int sortType)
-{
-    int result = 0;
-    SoundfontManager * sm = SoundfontManager::getInstance();
-
-    switch (sortType)
-    {
-    case 1:
-        // Sort by velocity, by key, alphabetically
-        if ((result = compareVelocity(sm, id1, id2)) == 0)
-            if ((result = compareKey(sm, id1, id2)) == 0)
-                result = compareName(sm, id1, id2);
-        break;
-    case 2:
-        // Sort alphabetically, by key, by velocity
-        if ((result = compareName(sm, id1, id2)) == 0)
-            if ((result = compareKey(sm, id1, id2)) == 0)
-                result = compareVelocity(sm, id1, id2);
-        break;
-    case 3:
-        // Sort by id
-        if (id1.indexElt2 < id2.indexElt2)
-            result = -1;
-        else if (id1.indexElt2 > id2.indexElt2)
-            result = 1;
-        break;
-    default:
-        // Sort by key, by velocity, alphabetically
-        if ((result = compareKey(sm, id1, id2)) == 0)
-            if ((result = compareVelocity(sm, id1, id2)) == 0)
-                result = compareName(sm, id1, id2);
-        break;
-    }
-
-    return result;
-}
-
-int Utils::compareKey(SoundfontManager * sm, EltID idDiv1, EltID idDiv2)
-{
-    int lKey1 = sm->get(idDiv1, champ_keyRange).rValue.byLo;
-    int lKey2 = sm->get(idDiv2, champ_keyRange).rValue.byLo;
-    if (lKey1 != lKey2)
-        return (lKey1 < lKey2) ? -1 : 1;
-    return 0;
-}
-
-int Utils::compareVelocity(SoundfontManager *sm, EltID idDiv1, EltID idDiv2)
-{
-    int lVel1 = sm->get(idDiv1, champ_velRange).rValue.byLo;
-    int lVel2 = sm->get(idDiv2, champ_velRange).rValue.byLo;
-    if (lVel1 != lVel2)
-        return (lVel1 < lVel2) ? -1 : 1;
-    return 0;
-}
-
-int Utils::compareName(SoundfontManager *sm, EltID idDiv1, EltID idDiv2)
-{
-    AttributeType champId = (idDiv1.typeElement == elementInstSmpl ? champ_sampleID : champ_instrument);
-    ElementType divisionType = (idDiv1.typeElement == elementInstSmpl ? elementSmpl : elementInst);
-    QString name1 = sm->getQstr(EltID(divisionType, idDiv1.indexSf2, sm->get(idDiv1, champId).wValue), champ_nameSort);
-    QString name2 = sm->getQstr(EltID(divisionType, idDiv2.indexSf2, sm->get(idDiv2, champId).wValue), champ_nameSort);
-    if (name1 != name2)
-        return naturalOrder(name1, name2);
-    return 0;
 }
 
 QString Utils::removeSuffix(QString txt)
@@ -338,10 +273,10 @@ qint32 Utils::round32(double value)
 qint32 Utils::floatToInt24(float f)
 {
     // Limit the input
-    if (f > 1.0)
-        f = 1.0;
-    else if (f < -1.0)
-        f = -1.0;
+    if (f > 1.0f)
+        f = 1.0f;
+    else if (f < -1.0f)
+        f = -1.0f;
 
     f = f * 8388607.5f /*(.5f + 0x7FFFFF)*/ - .5f;
     qint32 result = static_cast<qint32>(f + (f > 0 ? 0.5f : -0.5f));

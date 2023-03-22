@@ -64,9 +64,12 @@ public:
     // FINALLY, kill everything that has been built
     static void kill();
 
+private slots:
+    void updateSynthConfiguration();
+
 private:
     ContextManager(bool withAudioAndMidi = true);
-    ~ContextManager();
+    ~ContextManager() override;
     static ContextManager * s_instance;
 
     ConfManager * _configuration;

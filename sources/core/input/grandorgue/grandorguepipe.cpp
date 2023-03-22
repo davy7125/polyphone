@@ -25,7 +25,6 @@
 #include "grandorguepipe.h"
 #include "grandorguedatathrough.h"
 #include "soundfontmanager.h"
-#include "utils.h"
 #include <QFile>
 #include <QDebug>
 
@@ -33,6 +32,7 @@ GrandOrguePipe::GrandOrguePipe(QString rootDir, GrandOrgueDataThrough * godt) :
     _rootDir(rootDir),
     _godt(godt),
     _filePath(""),
+    _error(""),
     _gain(0),
     _tuning(0)
 {
@@ -95,7 +95,7 @@ void GrandOrguePipe::mergeAmplitude(int amplitude)
 
 bool GrandOrguePipe::isValid()
 {
-    return _filePath != "";
+    return !_filePath.isEmpty() && _error.isEmpty();
 }
 
 void GrandOrguePipe::process(EltID parent, int key)
@@ -239,7 +239,9 @@ QList<int> GrandOrguePipe::getSampleIds(int sf2Id, QString filePath, bool isRele
         return sampleIndex;
 
     // Otherwise load a new sample
-    Sound sound(filePath, false);
+    Sound sound;
+    if (!sound.setFileName(filePath, false))
+        _error = sound.getError();
     quint32 nChannels = sound.getUInt32(champ_wChannels);
     QString name = QFileInfo(filePath).completeBaseName();
     QString name2 = name;

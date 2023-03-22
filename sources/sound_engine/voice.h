@@ -25,13 +25,11 @@
 #ifndef VOICE_H
 #define VOICE_H
 
-#include <QMutex>
-#include "sound.h"
 #include "instprst.h"
+#include "voiceparam.h"
 #include "enveloppevol.h"
 #include "osctriangle.h"
 #include "stk/Chorus.h"
-#include "stk/FreeVerb.h"
 
 class VoiceInitializer
 {
@@ -63,7 +61,7 @@ class Voice : public QObject
 
 public:
     Voice();
-    ~Voice();
+    ~Voice() override;
 
     // Initial key is:
     // * -1 when we use "play" for reading a sample

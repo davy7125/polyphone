@@ -24,7 +24,6 @@
 
 #include "voiceparam.h"
 #include "qmath.h"
-#include "soundfontmanager.h"
 #include "division.h"
 #include "smpl.h"
 #include "instprst.h"

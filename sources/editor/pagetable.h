@@ -87,6 +87,10 @@ private:
     void setOffset(int ligne, int colonne, AttributeType champ1, AttributeType champ2);
     void styleFixedRow(int numRow);
 
+    // Attribute <-> string conversion
+    static QString attributeToString(AttributeType champ, bool isPrst, AttributeValue storedValue);
+    static AttributeValue attributeFromString(AttributeType champ, bool isPrst, QString strValue, bool &ok);
+
     QList<int> _listKeyEnlighted;
     int _sortType;
     bool _isPrst;

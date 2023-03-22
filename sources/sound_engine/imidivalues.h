@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2019 Davy Triponney                                **
+**  Copyright (C) 2013-2023 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,44 +22,17 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SOUND_H
-#define SOUND_H
+#ifndef IMIDIVALUES_H
+#define IMIDIVALUES_H
 
-#include "basetypes.h"
-#include "infosound.h"
-
-class QFile;
-class QWidget;
-class SampleReader;
-
-class Sound
+class IMidiValues
 {
 public:
-    Sound();
-    ~Sound();
-
-    // Get information about the sample loaded
-    InfoSound getInfo() { return _info; }
-    QString getError() { return _error; }
-    QString getFileName() { return _fileName; }
-    QVector<float> getData(bool forceReload = false);
-    quint32 getUInt32(AttributeType champ); // For everything but the pitch correction
-    qint32 getInt32(AttributeType champ); // For the pitch correction
-
-    // Set data
-    void set(AttributeType champ, AttributeValue value);
-    bool setFileName(QString qStr, bool tryFindRootKey = true);
-    void setData(QVector<float> data);
-    void loadInRam();
-
-private:
-    QString _fileName;
-    QString _error;
-    InfoSound _info;
-    QVector<float> _smpl;
-    SampleReader * _reader;
-
-    void determineRootKey();
+    virtual int getControllerValue(int channel, int controllerNumber) = 0;
+    virtual float getBendValue(int channel) = 0;
+    virtual float getBendSensitivityValue(int channel) = 0;
+    virtual int getMonoPressure(int channel) = 0;
+    virtual int getPolyPressure(int channel, int key) = 0;
 };
 
-#endif // SOUND_H
+#endif // IMIDIVALUES_H

@@ -41,7 +41,7 @@ class Editor : public QWidget
 
 public:
     explicit Editor(QWidget *parent = nullptr);
-    ~Editor();
+    ~Editor() override;
 
     /// Initialize the editor with a parser that can extract data and build a soundfont
     void initialize(AbstractInputParser * input);
@@ -68,6 +68,7 @@ private slots:
     void onKeyPlayed(int key, int vel);
     void customizeKeyboard();
     void onEditingDone(QString editingSource, QList<int> sf2Indexes);
+    void onErrorEncountered(QString text);
 
 private:
     void updateTitleAndPath();

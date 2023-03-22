@@ -56,6 +56,7 @@ private:
 
     QMap<QString, QString> _properties;
     QString _filePath;
+    QString _error;
     double _gain;
     int _tuning;
 };

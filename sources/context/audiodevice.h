@@ -26,6 +26,7 @@
 #define AUDIODEVICE_H
 
 #include <QObject>
+#include "synth.h"
 
 class Synth;
 class ConfManager;
@@ -34,22 +35,6 @@ typedef struct _jack_port jack_port_t;
 typedef struct _jack_client jack_client_t;
 
 #define SAMPLE_RATE           44100
-
-class AudioFormat
-{
-public:
-    void setChannelCount(quint32 value)  {_channelCount = value;}
-    void setSampleRate(quint32 value)    {_sampleRate = value;}
-    void setSampleSize(quint32 value)    {_sampleSize = value;}
-    quint32 channelCount()               {return _channelCount;}
-    quint32 sampleRate()                 {return _sampleRate;}
-    quint32 sampleSize()                 {return _sampleSize;}
-
-private:
-    quint32 _channelCount;
-    quint32 _sampleRate;
-    quint32 _sampleSize;
-};
 
 class HostInfo
 {
@@ -87,7 +72,7 @@ class AudioDevice : public QObject
 public:
     AudioDevice(ConfManager * configuration);
     Synth * getSynth() { return _synth; }
-    ~AudioDevice();
+    ~AudioDevice() override;
 
     QList<HostInfo> getHostInfo();
 
@@ -97,7 +82,9 @@ public:
     Synth * _synth;
 
     // Public access to the audio format
-    AudioFormat _format;
+    quint32 _channelCount;
+    quint32 _sampleRate;
+    quint32 _sampleSize;
 
 public slots:
     void initAudio();

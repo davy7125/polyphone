@@ -24,7 +24,10 @@
 
 #include "parametermodulator.h"
 #include "modulatedparameter.h"
-#include "contextmanager.h"
+#include "imidivalues.h"
+
+IMidiValues * ParameterModulator::s_midiValues = nullptr;
+void ParameterModulator::setIMidiValues(IMidiValues * midiValues) { s_midiValues = midiValues;}
 
 void ParameterModulator::initialize(const ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation)
 {
@@ -150,7 +153,7 @@ double ParameterModulator::getValue(SFModulator sfMod)
     if (sfMod.CC)
     {
         // Midi controllers
-        value = ContextManager::midi()->getControllerValue(_channel, sfMod.Index);
+        value = s_midiValues->getControllerValue(_channel, sfMod.Index);
     }
     else
     {
@@ -169,17 +172,17 @@ double ParameterModulator::getValue(SFModulator sfMod)
             break;
         case GC_polypressure:
             // After touch by key
-            value = (_initialKey >= 0 ? ContextManager::midi()->getPolyPressure(_channel, _initialKey) : 0);
+            value = (_initialKey >= 0 ? s_midiValues->getPolyPressure(_channel, _initialKey) : 0);
             break;
         case GC_channelPressure:
             // After touch for the whole keyboard
-            value = ContextManager::midi()->getMonoPressure(_channel);
+            value = s_midiValues->getMonoPressure(_channel);
             break;
         case GC_pitchWheel:
-            value = 64.0 * (ContextManager::midi()->getBendValue(_channel) + 1.0);
+            value = 64.0 * (static_cast<double>(s_midiValues->getBendValue(_channel)) + 1.0);
             break;
         case GC_pitchWheelSensitivity:
-            value = ContextManager::midi()->getBendSensitivityValue(_channel);
+            value = static_cast<double>(s_midiValues->getBendSensitivityValue(_channel));
             break;
         case GC_link: default:
             // Link (the value will come later)

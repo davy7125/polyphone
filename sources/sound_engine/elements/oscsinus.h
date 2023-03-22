@@ -25,7 +25,7 @@
 #ifndef OSCSINUS_H
 #define OSCSINUS_H
 
-#include "sound.h"
+#include <QtGlobal>
 
 class OscSinus
 {

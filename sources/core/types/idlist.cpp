@@ -23,7 +23,6 @@
 ***************************************************************************/
 
 #include "idlist.h"
-#include "soundfontmanager.h"
 
 void IdList::resetComputedLists()
 {
@@ -157,46 +156,6 @@ bool IdList::areAllWithType(ElementType type)
     }
 
     return !this->empty();
-}
-
-bool IdList::areAllWithDivisions(ElementType type)
-{
-    if (type != elementInst && type != elementPrst)
-        return false;
-
-    // Check all elements
-    QList<EltID> ids = this->getSelectedIds(type);
-    foreach (EltID id, ids)
-    {
-        EltID idTmp = id;
-        idTmp.typeElement = (type == elementPrst) ? elementPrstInst : elementInstSmpl;
-        if (SoundfontManager::getInstance()->getSiblings(idTmp).empty())
-            return false;
-    }
-
-    return true;
-}
-
-bool IdList::areAllWithRange(ElementType type)
-{
-    if (type != elementInst && type != elementPrst)
-        return false;
-
-    QList<EltID> ids = this->getSelectedIds(type);
-    foreach (EltID id, ids)
-    {
-        EltID idTmp = id;
-        idTmp.typeElement = (type == elementPrst) ? elementPrstInst : elementInstSmpl;
-
-        foreach (int i, SoundfontManager::getInstance()->getSiblings(idTmp))
-        {
-            idTmp.indexElt2 = i;
-            if (!SoundfontManager::getInstance()->isSet(idTmp, champ_keyRange))
-                return false;
-        }
-    }
-
-    return true;
 }
 
 bool IdList::sameType()

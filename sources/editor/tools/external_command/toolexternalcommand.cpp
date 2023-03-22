@@ -123,7 +123,12 @@ void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolP
     default:
     {
         // Import the sample
-        Sound sound(pathTempFile, false);
+        Sound sound;
+        if (!sound.setFileName(pathTempFile, false))
+        {
+            _warning = sound.getError();
+            break;
+        }
         AttributeValue val;
         val.wValue = 0;
         sound.set(champ_wChannel, val);

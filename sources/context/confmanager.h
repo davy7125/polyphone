@@ -27,6 +27,7 @@
 
 #include <QSettings>
 #include <QString>
+class SynthConfig;
 
 class ConfManager: public QObject
 {
@@ -77,6 +78,7 @@ public:
     };
 
     ConfManager();
+    ~ConfManager() override;
 
     /// Get / set a value for a section
     QVariant getValue(Section section, QString key, QVariant defaultValue) const;
@@ -95,6 +97,9 @@ public:
 
     /// Get the keyboard combination associated to a specific note
     QString getMapping(int numOctave, Key key);
+
+    /// Gather all configurations for the synth
+    SynthConfig * getSynthConfig();
 
 signals:
     /// Emitted when the chorus or reverb configuration changed or the buffer size
@@ -122,6 +127,7 @@ private:
     QString getFullKey(Section section, QString subSection, QString key) const;
     QString getFullKey(ToolType toolType, QString toolName, QString key) const;
     QSettings _settings;
+    SynthConfig * _synthConfig;
 };
 
 #endif // CONFMANAGER_H

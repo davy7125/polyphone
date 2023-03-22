@@ -27,10 +27,13 @@
 
 #include "basetypes.h"
 class ModulatedParameter;
+class IMidiValues;
 
 class ParameterModulator
 {
 public:
+    static void setIMidiValues(IMidiValues * midiValues);
+
     ParameterModulator() {}
 
     // Initialize a modulator
@@ -77,6 +80,8 @@ private:
     // Distinction between the initial key that triggered the sound (still useful for the aftertouch)
     // and the value used for the modulators (keynum and velocity might be overridden)
     int _channel, _initialKey, _keyForComputation, _velForComputation;
+
+    static IMidiValues * s_midiValues;
 };
 
 #endif // PARAMETERMODULATOR_H

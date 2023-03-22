@@ -23,7 +23,6 @@
 ***************************************************************************/
 
 #include "modulatorgroup.h"
-#include "modulator.h"
 #include "modulatedparameter.h"
 #include "parametermodulator.h"
 

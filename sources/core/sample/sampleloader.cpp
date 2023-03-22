@@ -54,7 +54,12 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
     QFileInfo qFileInfo(path);
 
     // Get information about a sample
-    Sound sound(path);
+    Sound sound;
+    if (!sound.setFileName(path))
+    {
+        QMessageBox::warning(_parent, QObject::tr("Warning"), sound.getError());
+        return loadedSmpl;
+    }
     unsigned int nChannels = sound.getUInt32(champ_wChannels);
 
     // Add a sample

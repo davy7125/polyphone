@@ -25,7 +25,7 @@
 #ifndef INFOSOUND_H
 #define INFOSOUND_H
 
-#include "basetypes.h"
+#include <QtGlobal>
 
 class InfoSound
 {

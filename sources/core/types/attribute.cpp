@@ -23,7 +23,6 @@
 ***************************************************************************/
 
 #include "attribute.h"
-#include "contextmanager.h"
 #include "utils.h"
 #include <qmath.h>
 
@@ -50,8 +49,8 @@ QList<AttributeType> Attribute::s_attributesForInstMod = QList<AttributeType>()
 
 Attribute::Attribute(AttributeType champ, bool isPrst) :
     _champ(champ),
-    _isPrst(isPrst),
-    _realValue(0)
+    _realValue(0),
+    _isPrst(isPrst)
 {
     // Load the default value
     setStoredValue(getDefaultStoredValue(champ, isPrst));
@@ -435,174 +434,6 @@ double Attribute::limit(double value, double min, double max)
         return min;
     if (value > max)
         return max;
-    return value;
-}
-
-QString Attribute::toString(AttributeType champ, bool isPrst, AttributeValue storedValue)
-{
-    QString result = "";
-
-    switch (champ)
-    {
-    case champ_velRange:
-        if (storedValue.rValue.byLo == storedValue.rValue.byHi)
-            result = QString::number(storedValue.rValue.byLo);
-        else
-            result = QString::number(storedValue.rValue.byLo) + "-" + QString::number(storedValue.rValue.byHi);
-        break;
-    case champ_keyRange:
-        if (storedValue.rValue.byLo == storedValue.rValue.byHi)
-            result = ContextManager::keyName()->getKeyName(storedValue.rValue.byLo);
-        else
-            result = ContextManager::keyName()->getKeyName(storedValue.rValue.byLo) + "-" + ContextManager::keyName()->getKeyName(storedValue.rValue.byHi);
-        break;
-    case champ_initialAttenuation:
-        // Now with two digits since we have real dB (one step is 0.04 dB)
-        result = QLocale::system().toString(toRealValue(champ, isPrst, storedValue), 'f', 2);
-        break;
-    case champ_pan: case champ_initialFilterQ:
-    case champ_modLfoToVolume:
-    case champ_sustainVolEnv: case champ_sustainModEnv:
-    case champ_chorusEffectsSend: case champ_reverbEffectsSend:
-        result = QLocale::system().toString(toRealValue(champ, isPrst, storedValue), 'f', 1);
-        break;
-    case champ_keynum: case champ_overridingRootKey:
-        result = ContextManager::keyName()->getKeyName(storedValue.wValue);
-        break;
-    case champ_sampleModes: case champ_exclusiveClass: case champ_velocity: case champ_sfModDestOper:
-        result = QString::number(storedValue.wValue);
-        break;
-    case champ_byOriginalPitch: case champ_chPitchCorrection:
-    case champ_dwEndLoop: case champ_dwStartLoop:
-    case champ_scaleTuning: case champ_coarseTune: case champ_fineTune:
-    case champ_modLfoToFilterFc: case champ_modEnvToFilterFc:
-    case champ_modEnvToPitch: case champ_modLfoToPitch: case champ_vibLfoToPitch:
-    case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:
-    case champ_keynumToModEnvDecay: case champ_keynumToVolEnvDecay:
-    case champ_startAddrsOffset: case champ_startAddrsCoarseOffset:
-    case champ_startloopAddrsOffset: case champ_startloopAddrsCoarseOffset:
-    case champ_endAddrsOffset: case champ_endAddrsCoarseOffset:
-    case champ_endloopAddrsOffset: case champ_endloopAddrsCoarseOffset:
-    case champ_modAmount:
-        result = QString::number(storedValue.shValue);
-        break;
-    case champ_initialFilterFc:
-        result = QLocale::system().toString(toRealValue(champ, isPrst, storedValue), 'f', isPrst ? 3 : 0);
-        break;
-    case champ_freqModLFO: case champ_freqVibLFO:
-    case champ_delayModEnv: case champ_attackModEnv: case champ_holdModEnv: case champ_decayModEnv: case champ_releaseModEnv:
-    case champ_delayVolEnv: case champ_attackVolEnv: case champ_holdVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
-    case champ_delayModLFO: case champ_delayVibLFO:
-        result = QLocale::system().toString(toRealValue(champ, isPrst, storedValue), 'f', 3);
-        break;
-    case champ_sfModTransOper:
-        if (storedValue.wValue == 2)
-            result = ", " + tr("absolute value");
-        break;
-    case champ_indexMod:
-        result = QString::number(storedValue.wValue + 1);
-        break;
-    case champ_sfModAmtSrcOper: case champ_sfModSrcOper:
-        result = QString::number(storedValue.sfModValue.Index);
-        break;
-    default: break;
-    }
-
-    return result;
-}
-
-AttributeValue Attribute::fromString(AttributeType champ, bool isPrst, QString strValue, bool &ok)
-{
-    AttributeValue value;
-    value.wValue = 0;
-    ok = true;
-
-    switch (champ)
-    {
-    case champ_keyRange: case champ_velRange: {
-        int posSeparator = strValue.indexOf(QRegularExpression("[0-9]-")) + 1;
-        QString txtLeft, txtRight;
-        if (posSeparator == 0)
-            txtLeft = txtRight = strValue;
-        else
-        {
-            txtLeft = strValue.left(posSeparator);
-            txtRight = strValue.right(strValue.size() - posSeparator - 1);
-        }
-
-        int val1, val2;
-        if (champ == champ_velRange)
-        {
-            bool tmp;
-            val1 = txtLeft.toInt(&tmp);
-            val2 = txtRight.toInt(&ok);
-            ok &= tmp;
-        }
-        else
-        {
-            val1 = ContextManager::keyName()->getKeyNum(txtLeft);
-            val2 = ContextManager::keyName()->getKeyNum(txtRight);
-            ok = (val1 != -1) && (val2 != -1);
-        }
-
-        if (txtLeft.isEmpty())
-            val1 = 0;
-        if (txtRight.isEmpty())
-            val2 = 127;
-
-        if (val1 > val2)
-        {
-            int val3 = val1;
-            val1 = val2;
-            val2 = val3;
-        }
-
-        value.rValue.byLo = static_cast<quint8>(val1);
-        value.rValue.byHi = static_cast<quint8>(val2);
-        value = limit(champ, value, isPrst);
-    }; break;
-    case champ_chPitchCorrection: case champ_byOriginalPitch:
-    case champ_dwEndLoop: case champ_dwStartLoop:
-    case champ_initialAttenuation: case champ_sustainVolEnv: case champ_pan:
-    case champ_coarseTune: case champ_fineTune: case champ_scaleTuning:
-    case champ_initialFilterFc: case champ_initialFilterQ:
-    case champ_modEnvToPitch: case champ_modLfoToPitch: case champ_vibLfoToPitch:
-    case champ_modLfoToFilterFc: case champ_modEnvToFilterFc:
-    case champ_modLfoToVolume: case champ_sustainModEnv:
-    case champ_delayModEnv: case champ_holdModEnv:
-    case champ_delayVolEnv: case champ_holdVolEnv:
-    case champ_delayModLFO: case champ_delayVibLFO:
-    case champ_attackModEnv: case champ_decayModEnv: case champ_releaseModEnv:
-    case champ_attackVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
-    case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:
-    case champ_keynumToModEnvDecay: case champ_keynumToVolEnvDecay:
-    case champ_freqModLFO: case champ_freqVibLFO:
-    case champ_exclusiveClass: case champ_velocity:
-    case champ_chorusEffectsSend: case champ_reverbEffectsSend:
-    case champ_startAddrsOffset: case champ_startloopAddrsOffset:
-    case champ_endAddrsOffset: case champ_endloopAddrsOffset:
-    case champ_startAddrsCoarseOffset: case champ_startloopAddrsCoarseOffset:
-    case champ_endAddrsCoarseOffset: case champ_endloopAddrsCoarseOffset:
-        value = fromRealValue(champ, isPrst, QLocale::system().toDouble(strValue, &ok));
-        break;
-    case champ_sampleModes: {
-        int iTmp = Utils::round16(QLocale::system().toDouble(strValue, &ok));
-        if (iTmp != 0 && iTmp != 1 && iTmp != 3)
-            iTmp = 0;
-        value.wValue = static_cast<quint16>(iTmp);
-    }break;
-    case champ_overridingRootKey: case champ_keynum: {
-        int keyNum = ContextManager::keyName()->getKeyNum(strValue);
-        ok = (keyNum > -1 && keyNum <= 127);
-        value.shValue = ok ? static_cast<qint16>(keyNum) : 0;
-    }break;
-    default:
-        ok = false;
-    }
-
-    if (!ok)
-        value.dwValue = 0;
-
     return value;
 }
 

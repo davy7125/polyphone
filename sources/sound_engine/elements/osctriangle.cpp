@@ -23,7 +23,6 @@
 ***************************************************************************/
 
 #include "osctriangle.h"
-#include "qmath.h"
 
 void OscTriangle::initialize(quint32 sampleRate)
 {
@@ -70,8 +69,8 @@ void OscTriangle::getData(float * data, quint32 len, float freq, double delay)
             float progDelta;
             for (quint32 i = total; i < len; i++)
             {
-                progDelta = static_cast<float>(len - i) / (len - total) * _delta
-                        + static_cast<float>(i - total) / (len - total) * delta2;
+                progDelta = static_cast<float>(len - i) / static_cast<float>(len - total) * _delta
+                        + static_cast<float>(i - total) / static_cast<float>(len - total) * delta2;
 
                 data[i] = _previousPoint + progDelta;
                 if (data[i] > 1.0f)
@@ -116,5 +115,5 @@ void OscTriangle::getData(float * data, quint32 len, float freq, double delay)
 
 void OscTriangle::computeDelta(float freq, float &delta)
 {
-    delta = 4.0f * freq / _sampleRate;
+    delta = 4.0f * freq / static_cast<float>(_sampleRate);
 }

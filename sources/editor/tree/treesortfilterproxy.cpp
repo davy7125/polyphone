@@ -23,7 +23,6 @@
 ***************************************************************************/
 
 #include "treesortfilterproxy.h"
-#include "treeitem.h"
 #include "utils.h"
 #include "soundfontmanager.h"
 #include "treeview.h"
@@ -74,7 +73,7 @@ bool TreeSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &r
     case elementInstSmpl: case elementPrstInst:
     {
         EltID id2 = right.data(Qt::UserRole).value<EltID>();
-        result = (Utils::sortDivisions(id, id2, _sortType) < 0);
+        result = (_sm->sortDivisions(id, id2, _sortType) < 0);
     }
         break;
     case elementPrst:

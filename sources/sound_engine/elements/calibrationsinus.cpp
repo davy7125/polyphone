@@ -114,7 +114,7 @@ void CalibrationSinus::addData(float * dataL, float * dataR, quint32 len)
     if (tmp < _currentPitch)
     {
         // A lower sine is required: first change the frequencies and then adapt the levels
-        tmp = 440.0f * static_cast<float>(qPow(2.0, (_currentPitch - 69.0) / 12.0)); // Fondamental frequency
+        tmp = 440.0f * static_cast<float>(qPow(2.0, (static_cast<double>(_currentPitch) - 69.0) / 12.0)); // Fondamental frequency
 
         intensity1 = _currentLevelSine1;
         intensity2 = _currentLevelSine2;
@@ -123,7 +123,7 @@ void CalibrationSinus::addData(float * dataL, float * dataR, quint32 len)
     else
     {
         // A higher sine is required: first change the levels and then adapt the frequencies
-        tmp = 440.0f * static_cast<float>(qPow(2.0, (tmp - 69.0) / 12.0)); // Fondamental frequency
+        tmp = 440.0f * static_cast<float>(qPow(2.0, (static_cast<double>(tmp) - 69.0) / 12.0)); // Fondamental frequency
 
         // Level to reach for each sine
         if (_currentPitch <= 48)

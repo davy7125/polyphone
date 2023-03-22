@@ -38,12 +38,11 @@ class SoloManager;
 class SoundfontManager : public QObject
 {
     Q_OBJECT
-    friend class Synth;
 
 public:
     static SoundfontManager * getInstance();
     static void kill();
-    ~SoundfontManager();
+    ~SoundfontManager() override;
     QAbstractItemModel * getModel(int indexSf2);
 
     // Add / delete data
@@ -92,6 +91,18 @@ public:
     // Create a notification about a new soundfont that has been loaded
     void emitNewSoundfontLoaded(int sf2Index) { emit(this->soundfontLoaded(sf2Index)); }
 
+    // Get the division order
+    // Sort type: 0: key, 1: velocity, 2: name
+    // Result:
+    // * -1 if id1 should be before id2,
+    // * 0 if equals,
+    // * 1 if id1 should be after id2
+    int sortDivisions(EltID id1, EltID id2, int sortType);
+
+    // Get all data + mutex (for the synth)
+    Soundfonts * getSoundfonts() { return _soundfonts; }
+    QRecursiveMutex * getMutex() { return &_mutex; }
+
 signals:
     // Emitted when a group of actions is finished
     // "editingSource" can be:
@@ -112,6 +123,9 @@ signals:
     // Emitted when a key range or a rootkey changed, useful for calling "customizeKeyboard" in editor.h
     void parameterForCustomizingKeyboardChanged();
 
+    // Emitted when an error occurred
+    void errorEncountered(QString text);
+
 private slots:
     void onDropId(EltID id);
 
@@ -128,6 +142,11 @@ private:
     void supprGenAndStore(EltID id, int storeAction);
 
     QList<int> undo(QList<Action *> actions);
+
+    // Division order
+    int compareKey(EltID idDiv1, EltID idDiv2);
+    int compareVelocity(EltID idDiv1, EltID idDiv2);
+    int compareName(EltID idDiv1, EltID idDiv2);
 
     static SoundfontManager * s_instance;
     Soundfonts * _soundfonts;

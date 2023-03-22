@@ -644,6 +644,7 @@ HEADERS += \
     repository/soundfont/editor/soundfontfilecell.h \
     sound_engine/elements/liveeq.h \
     sound_engine/elements/osctriangle.h \
+    sound_engine/imidivalues.h \
     sound_engine/modulatedparameter.h \
     sound_engine/synth.h \
     sound_engine/voice.h \

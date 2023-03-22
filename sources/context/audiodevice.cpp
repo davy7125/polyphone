@@ -24,9 +24,9 @@
 
 #include <QDebug>
 #include "audiodevice.h"
-#include "synth.h"
 #include "portaudio.h"
-#include "contextmanager.h"
+#include "confmanager.h"
+#include "soundfontmanager.h"
 
 #ifndef Q_OS_WIN
 
@@ -60,16 +60,16 @@ int standardProcess(const void* inputBuffer, void* outputBuffer,
                     unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo,
                     PaStreamCallbackFlags statusFlags, void* userData)
 {
-    Q_UNUSED(inputBuffer);
-    Q_UNUSED(timeInfo);
-    Q_UNUSED(statusFlags);
+    Q_UNUSED(inputBuffer)
+    Q_UNUSED(timeInfo)
+    Q_UNUSED(statusFlags)
 
     // Récupération de l'instance de AudioDevice
     AudioDevice * instance = static_cast<AudioDevice*>(userData);
     float** outputs = reinterpret_cast<float**>(outputBuffer);
 
     // Envoi de données
-    if (instance->_format.channelCount() == 2)
+    if (instance->_channelCount == 2)
         instance->_synth->readData(outputs[0], outputs[1], framesPerBuffer);
 
     return 0;
@@ -82,7 +82,8 @@ AudioDevice::AudioDevice(ConfManager *configuration) : QObject(nullptr),
     _configuration(configuration),
     _initialized(false)
 {
-    _synth = new Synth(_configuration);
+    _synth = new Synth(SoundfontManager::getInstance()->getSoundfonts(), SoundfontManager::getInstance()->getMutex());
+    _synth->configure(_configuration->getSynthConfig());
     PaError err = Pa_Initialize();
     _initialized = (err == paNoError);
     if (!_initialized)
@@ -270,9 +271,9 @@ void AudioDevice::openJackConnection(quint32 bufferSize)
 {
 #ifndef Q_OS_WIN
     // Format audio à l'écoute
-    _format.setSampleRate(SAMPLE_RATE);
-    _format.setChannelCount(2);
-    _format.setSampleSize(32);
+    _sampleRate = SAMPLE_RATE;
+    _channelCount = 2;
+    _sampleSize = 32;
 
     // Nom du serveur
     const char *client_name = "Polyphone";
@@ -300,7 +301,7 @@ void AudioDevice::openJackConnection(quint32 bufferSize)
     jack_on_shutdown(_jack_client, jack_shutdown, nullptr);
 
     // Enregistrement fréquence d'échantillonnage
-    _format.setSampleRate((int)jack_get_sample_rate(_jack_client));
+    _sampleRate = (int)jack_get_sample_rate(_jack_client);
 
     // Modification taille buffer
     jack_set_buffer_size(_jack_client, bufferSize);
@@ -318,7 +319,7 @@ void AudioDevice::openJackConnection(quint32 bufferSize)
     // Création ports de sortie
     if (mono)
     {
-        _format.setChannelCount(1);
+        _channelCount = 1;
         _output_port_L = jack_port_register(_jack_client, "output mono",
                                             JACK_DEFAULT_AUDIO_TYPE,
                                             JackPortIsOutput, 0);
@@ -344,8 +345,8 @@ void AudioDevice::openJackConnection(quint32 bufferSize)
         }
     }
 
-    // Envoi du format au synthé
-    _synth->setFormat(_format);
+    // Configure synth
+    _synth->setSampleRate(_sampleRate);
 
     // Activation du serveur et connexion du port de sortie avec les hauts parleurs
     if (jack_activate(_jack_client))
@@ -379,9 +380,9 @@ void AudioDevice::openStandardConnection(int hostType, int device, quint32 buffe
         return;
 
     // Format audio à l'écoute
-    _format.setSampleRate(SAMPLE_RATE);
-    _format.setChannelCount(2);
-    _format.setSampleSize(32);
+    _sampleRate = SAMPLE_RATE;
+    _channelCount = 2;
+    _sampleSize = 32;
 
     // Sortie audio par défaut, nombre de canaux max
     PaStreamParameters outputParameters;
@@ -390,7 +391,7 @@ void AudioDevice::openStandardConnection(int hostType, int device, quint32 buffe
     outputParameters.channelCount = pdi->maxOutputChannels;
     if (outputParameters.channelCount > 2)
         outputParameters.channelCount = 2;
-    _format.setChannelCount(static_cast<quint32>(outputParameters.channelCount));
+    _channelCount = static_cast<quint32>(outputParameters.channelCount);
     outputParameters.sampleFormat = paFloat32 | paNonInterleaved;
     if (hostType == paASIO)
         outputParameters.suggestedLatency = qMin(0.04, pdi->defaultLowOutputLatency);
@@ -408,8 +409,8 @@ void AudioDevice::openStandardConnection(int hostType, int device, quint32 buffe
                                 standardProcess,    // callback
                                 this);              // instance d'audiodevice
 
-    // Envoi du format au synthé
-    _synth->setFormat(_format);
+    // Configure synth
+    _synth->setSampleRate( _sampleRate);
 
     // Début du son
     if (err == paNoError)

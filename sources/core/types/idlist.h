@@ -51,17 +51,11 @@ public:
     // Return true if the selection is only related to smpl / inst / prst / sf2
     bool areAllWithType(ElementType type);
 
-    // For instruments and presets only, return true if all elements comprises divisions (InstSmpl or PrstInst)
-    bool areAllWithDivisions(ElementType type);
-
-    // For instrument and preset only, return true if all their divisions have a range specified
-    bool areAllWithRange(ElementType type);
-
     // True if all elements have the same type
     bool sameType();
 
 private:
-    QMap<ElementType, IdList > _computedLists;
+    QMap<ElementType, IdList> _computedLists;
 };
 
 #endif // IDLIST_H

@@ -206,8 +206,8 @@ void PageTable::addGlobal(IdList listIds)
                         _table->setLoopModeImage(row, numCol, genValTmp.wValue);
                     else
                         _table->item(row, numCol)->setText(
-                                    Attribute::toString(static_cast<AttributeType>(i),
-                                                        _isPrst, genValTmp));
+                                    attributeToString(static_cast<AttributeType>(i),
+                                                      _isPrst, genValTmp));
                 }
             }
         }
@@ -268,7 +268,7 @@ void PageTable::addDivisions(EltID id)
                 .arg(_sf2->getQstr(id3, champ_name));
         for (int j = 1; j < nbSmplInst + 1; j++)
         {
-            if (Utils::sortDivisions(id, _table->getID(j), _sortType) > 0)
+            if (_sf2->sortDivisions(id, _table->getID(j), _sortType) > 0)
                 numCol++;
             else
                 break;
@@ -329,8 +329,8 @@ void PageTable::addDivisions(EltID id)
                         _table->setLoopModeImage(row, numCol, genValTmp.wValue);
                     else
                         _table->item(row, numCol)->setText(
-                                    Attribute::toString(static_cast<AttributeType>(champTmp),
-                                                        _isPrst, genValTmp));
+                                    attributeToString(static_cast<AttributeType>(champTmp),
+                                                      _isPrst, genValTmp));
                 }
             }
         }
@@ -538,11 +538,11 @@ void PageTable::setOffset(int ligne, int colonne, AttributeType champ1, Attribut
     EltID id = _table->getID(colonne);
     bool ok;
     QString texte = _table->item(ligne, colonne)->text().left(9);
-    AttributeValue genAmount = Attribute::fromString(champ1, _isPrst, texte, ok);
+    AttributeValue genAmount = attributeFromString(champ1, _isPrst, texte, ok);
     if (ok)
     {
         // Enregistrement de la nouvelle valeur
-        AttributeValue genAmount2 = Attribute::fromString(champ2, _isPrst, texte, ok);
+        AttributeValue genAmount2 = attributeFromString(champ2, _isPrst, texte, ok);
         int iVal = limit(32768 * genAmount2.shValue + genAmount.shValue, champ1, id);
         genAmount2.shValue = static_cast<qint16>(iVal / 32768);
         genAmount.shValue = static_cast<qint16>(iVal % 32768);
@@ -565,7 +565,7 @@ void PageTable::setOffset(int ligne, int colonne, AttributeType champ1, Attribut
         if (_sf2->isSet(id, champ1) || _sf2->isSet(id, champ2))
         {
             genAmount.shValue = _sf2->get(id, champ1).shValue + 32768 * _sf2->get(id, champ2).shValue;
-            _table->item(ligne, colonne)->setText(Attribute::toString(champ1, _isPrst, genAmount));
+            _table->item(ligne, colonne)->setText(attributeToString(champ1, _isPrst, genAmount));
         }
         else
             _table->item(ligne, colonne)->setText("");
@@ -720,7 +720,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
                 QString texte = _table->item(ligne, colonne)->text().left(9);
                 bool ok;
                 EltID id = _table->getID(colonne);
-                AttributeValue genAmount = Attribute::fromString(champ, _isPrst, texte, ok);
+                AttributeValue genAmount = attributeFromString(champ, _isPrst, texte, ok);
                 if (ok)
                 {
                     // Modification champ
@@ -730,13 +730,13 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
                         _sf2->set(id, champ, genAmount);
                     }
                     // Mise à jour de la valeur dans la cellule
-                    _table->item(ligne, colonne)->setText(Attribute::toString(champ, _isPrst, genAmount));
+                    _table->item(ligne, colonne)->setText(attributeToString(champ, _isPrst, genAmount));
                 }
                 else
                 {
                     // Restauration valeur précédente
                     if (_sf2->isSet(id, champ))
-                        _table->item(ligne, colonne)->setText(Attribute::toString(champ, _isPrst, _sf2->get(id, champ)));
+                        _table->item(ligne, colonne)->setText(attributeToString(champ, _isPrst, _sf2->get(id, champ)));
                     else _table->item(ligne, colonne)->setText("");
                 }
             }
@@ -1089,4 +1089,173 @@ void PageTable::onModSelectionChanged(QList<AttributeType> attributes)
 {
     if (!attributes.empty() && _currentIds.count() == 1)
         _table->selectCells(_currentIds[0], attributes);
+}
+
+QString PageTable::attributeToString(AttributeType champ, bool isPrst, AttributeValue storedValue)
+{
+    QString result = "";
+
+    switch (champ)
+    {
+    case champ_velRange:
+        if (storedValue.rValue.byLo == storedValue.rValue.byHi)
+            result = QString::number(storedValue.rValue.byLo);
+        else
+            result = QString::number(storedValue.rValue.byLo) + "-" + QString::number(storedValue.rValue.byHi);
+        break;
+    case champ_keyRange:
+        if (storedValue.rValue.byLo == storedValue.rValue.byHi)
+            result = ContextManager::keyName()->getKeyName(storedValue.rValue.byLo);
+        else
+            result = ContextManager::keyName()->getKeyName(storedValue.rValue.byLo) + "-" + ContextManager::keyName()->getKeyName(storedValue.rValue.byHi);
+        break;
+    case champ_initialAttenuation:
+        // Now with two digits since we have real dB (one step is 0.04 dB)
+        result = QLocale::system().toString(Attribute::toRealValue(champ, isPrst, storedValue), 'f', 2);
+        break;
+    case champ_pan: case champ_initialFilterQ:
+    case champ_modLfoToVolume:
+    case champ_sustainVolEnv: case champ_sustainModEnv:
+    case champ_chorusEffectsSend: case champ_reverbEffectsSend:
+        result = QLocale::system().toString(Attribute::toRealValue(champ, isPrst, storedValue), 'f', 1);
+        break;
+    case champ_keynum: case champ_overridingRootKey:
+        result = ContextManager::keyName()->getKeyName(storedValue.wValue);
+        break;
+    case champ_sampleModes: case champ_exclusiveClass: case champ_velocity: case champ_sfModDestOper:
+        result = QString::number(storedValue.wValue);
+        break;
+    case champ_byOriginalPitch: case champ_chPitchCorrection:
+    case champ_dwEndLoop: case champ_dwStartLoop:
+    case champ_scaleTuning: case champ_coarseTune: case champ_fineTune:
+    case champ_modLfoToFilterFc: case champ_modEnvToFilterFc:
+    case champ_modEnvToPitch: case champ_modLfoToPitch: case champ_vibLfoToPitch:
+    case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:
+    case champ_keynumToModEnvDecay: case champ_keynumToVolEnvDecay:
+    case champ_startAddrsOffset: case champ_startAddrsCoarseOffset:
+    case champ_startloopAddrsOffset: case champ_startloopAddrsCoarseOffset:
+    case champ_endAddrsOffset: case champ_endAddrsCoarseOffset:
+    case champ_endloopAddrsOffset: case champ_endloopAddrsCoarseOffset:
+    case champ_modAmount:
+        result = QString::number(storedValue.shValue);
+        break;
+    case champ_initialFilterFc:
+        result = QLocale::system().toString(Attribute::toRealValue(champ, isPrst, storedValue), 'f', isPrst ? 3 : 0);
+        break;
+    case champ_freqModLFO: case champ_freqVibLFO:
+    case champ_delayModEnv: case champ_attackModEnv: case champ_holdModEnv: case champ_decayModEnv: case champ_releaseModEnv:
+    case champ_delayVolEnv: case champ_attackVolEnv: case champ_holdVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
+    case champ_delayModLFO: case champ_delayVibLFO:
+        result = QLocale::system().toString(Attribute::toRealValue(champ, isPrst, storedValue), 'f', 3);
+        break;
+    case champ_sfModTransOper:
+        if (storedValue.wValue == 2)
+            result = ", " + tr("absolute value");
+        break;
+    case champ_indexMod:
+        result = QString::number(storedValue.wValue + 1);
+        break;
+    case champ_sfModAmtSrcOper: case champ_sfModSrcOper:
+        result = QString::number(storedValue.sfModValue.Index);
+        break;
+    default: break;
+    }
+
+    return result;
+}
+
+AttributeValue PageTable::attributeFromString(AttributeType champ, bool isPrst, QString strValue, bool &ok)
+{
+    AttributeValue value;
+    value.wValue = 0;
+    ok = true;
+
+    switch (champ)
+    {
+    case champ_keyRange: case champ_velRange: {
+        QRegularExpression regEx("[0-9]-");
+        int posSeparator = static_cast<int>(strValue.indexOf(regEx)) + 1;
+        QString txtLeft, txtRight;
+        if (posSeparator == 0)
+            txtLeft = txtRight = strValue;
+        else
+        {
+            txtLeft = strValue.left(posSeparator);
+            txtRight = strValue.right(strValue.size() - posSeparator - 1);
+        }
+
+        int val1, val2;
+        if (champ == champ_velRange)
+        {
+            bool tmp;
+            val1 = txtLeft.toInt(&tmp);
+            val2 = txtRight.toInt(&ok);
+            ok &= tmp;
+        }
+        else
+        {
+            val1 = ContextManager::keyName()->getKeyNum(txtLeft);
+            val2 = ContextManager::keyName()->getKeyNum(txtRight);
+            ok = (val1 != -1) && (val2 != -1);
+        }
+
+        if (txtLeft.isEmpty())
+            val1 = 0;
+        if (txtRight.isEmpty())
+            val2 = 127;
+
+        if (val1 > val2)
+        {
+            int val3 = val1;
+            val1 = val2;
+            val2 = val3;
+        }
+
+        value.rValue.byLo = static_cast<quint8>(val1);
+        value.rValue.byHi = static_cast<quint8>(val2);
+        value = Attribute::limit(champ, value, isPrst);
+    } break;
+    case champ_chPitchCorrection: case champ_byOriginalPitch:
+    case champ_dwEndLoop: case champ_dwStartLoop:
+    case champ_initialAttenuation: case champ_sustainVolEnv: case champ_pan:
+    case champ_coarseTune: case champ_fineTune: case champ_scaleTuning:
+    case champ_initialFilterFc: case champ_initialFilterQ:
+    case champ_modEnvToPitch: case champ_modLfoToPitch: case champ_vibLfoToPitch:
+    case champ_modLfoToFilterFc: case champ_modEnvToFilterFc:
+    case champ_modLfoToVolume: case champ_sustainModEnv:
+    case champ_delayModEnv: case champ_holdModEnv:
+    case champ_delayVolEnv: case champ_holdVolEnv:
+    case champ_delayModLFO: case champ_delayVibLFO:
+    case champ_attackModEnv: case champ_decayModEnv: case champ_releaseModEnv:
+    case champ_attackVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
+    case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:
+    case champ_keynumToModEnvDecay: case champ_keynumToVolEnvDecay:
+    case champ_freqModLFO: case champ_freqVibLFO:
+    case champ_exclusiveClass: case champ_velocity:
+    case champ_chorusEffectsSend: case champ_reverbEffectsSend:
+    case champ_startAddrsOffset: case champ_startloopAddrsOffset:
+    case champ_endAddrsOffset: case champ_endloopAddrsOffset:
+    case champ_startAddrsCoarseOffset: case champ_startloopAddrsCoarseOffset:
+    case champ_endAddrsCoarseOffset: case champ_endloopAddrsCoarseOffset:
+        value = Attribute::fromRealValue(champ, isPrst, QLocale::system().toDouble(strValue, &ok));
+        break;
+    case champ_sampleModes: {
+        int iTmp = Utils::round16(QLocale::system().toDouble(strValue, &ok));
+        if (iTmp != 0 && iTmp != 1 && iTmp != 3)
+            iTmp = 0;
+        value.wValue = static_cast<quint16>(iTmp);
+    } break;
+    case champ_overridingRootKey: case champ_keynum: {
+        int keyNum = ContextManager::keyName()->getKeyNum(strValue);
+        ok = (keyNum > -1 && keyNum <= 127);
+        value.shValue = ok ? static_cast<qint16>(keyNum) : 0;
+    } break;
+    default:
+        ok = false;
+    }
+
+    if (!ok)
+        value.dwValue = 0;
+
+    return value;
 }

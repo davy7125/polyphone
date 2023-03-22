@@ -27,7 +27,7 @@
 #include <qmath.h>
 
 int LiveEQ::CROSSFADE_LENGTH = 1000;
-float LiveEQ::CORRECTION = 0.85;
+float LiveEQ::CORRECTION = 0.85f;
 
 LiveEQ::LiveEQ() :
     _isOn(false),
@@ -77,7 +77,7 @@ void LiveEQ::off()
 void LiveEQ::setValues(int values[10])
 {
     for (int i = 0; i < 10; i++)
-        _coeff[i] = qPow(10.0, 0.1 * values[i]);
+        _coeff[i] = static_cast<float>(qPow(10.0, 0.1 * static_cast<double>(values[i])));
 }
 
 void LiveEQ::filterData(float * dataR, float * dataL, unsigned int len)
@@ -93,7 +93,7 @@ void LiveEQ::filterData(float * dataR, float * dataL, unsigned int len)
             _crossFade++;
         else if (!_isOn && _crossFade > 0)
             _crossFade--;
-        float pos = static_cast<float>(_crossFade) / CROSSFADE_LENGTH;
+        float pos = static_cast<float>(_crossFade) / static_cast<float>(CROSSFADE_LENGTH);
 
         float value = dataR[i];
         float fTmp = 0;

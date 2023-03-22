@@ -24,7 +24,6 @@
 
 #include "treemodel.h"
 #include "treeitem.h"
-#include "soundfontmanager.h"
 #include "division.h"
 
 TreeModel::TreeModel(TreeItem * rootItem) : QAbstractItemModel(),
@@ -155,47 +154,33 @@ void TreeModel::elementUpdated(EltID id)
     // Possibly update the name of the linked elements
     if (id.typeElement == elementSmpl)
     {
-        SoundfontManager * sf2 = SoundfontManager::getInstance();
-
-        EltID id2 = id;
-        id2.typeElement = elementInst;
-        foreach (int i, sf2->getSiblings(id2)) // Scan all instruments
+        // Search all occurrences of this sample in instruments
+        QModelIndex indexRoot = this->index(2, 0); // RootInst
+        for (int i = 0; i < this->rowCount(indexRoot); i++) // Scan all instruments
         {
-            id2.indexElt = i;
-            EltID id3 = id2;
-            id3.typeElement = elementInstSmpl;
-            foreach (int j, sf2->getSiblings(id3)) // Scan all samples linked
+            QModelIndex indexElt = this->index(i, 0, indexRoot);
+            for (int j = 0; j < this->rowCount(indexElt); j++) // Scan all samples linked
             {
-                id3.indexElt2 = j;
-                if (sf2->get(id3, champ_sampleID).wValue == id.indexElt)
-                {
-                    index = getParentIndexWithPosition(id3, position);
-                    index = this->index(position, 0, index);
-                    emit(dataChanged(index, index));
-                }
+                QModelIndex indexDiv = this->index(j, 0, indexElt);
+                Division * item = static_cast<Division*>(indexDiv.internalPointer());
+                if (item->getGen(champ_sampleID).wValue == id.indexElt)
+                    emit(dataChanged(indexDiv, indexDiv));
             }
         }
     }
     else if (id.typeElement == elementInst)
     {
-        SoundfontManager * sf2 = SoundfontManager::getInstance();
-
-        EltID id2 = id;
-        id2.typeElement = elementPrst;
-        foreach (int i, sf2->getSiblings(id2)) // Scan all presets
+        // Search all occurrences of this instrument in presets
+        QModelIndex indexRoot = this->index(3, 0); // RootPrst
+        for (int i = 0; i < this->rowCount(indexRoot); i++) // Scan all presets
         {
-            id2.indexElt = i;
-            EltID id3 = id2;
-            id3.typeElement = elementPrstInst;
-            foreach (int j, sf2->getSiblings(id3)) // Scan all instruments linked
+            QModelIndex indexElt = this->index(i, 0, indexRoot);
+            for (int j = 0; j < this->rowCount(indexElt); j++) // Scan all instruments linked
             {
-                id3.indexElt2 = j;
-                if (sf2->get(id3, champ_instrument).wValue == id.indexElt)
-                {
-                    index = getParentIndexWithPosition(id3, position);
-                    index = this->index(position, 0, index);
-                    emit(dataChanged(index, index));
-                }
+                QModelIndex indexDiv = this->index(j, 0, indexElt);
+                Division * item = static_cast<Division*>(indexDiv.internalPointer());
+                if (item->getGen(champ_instrument).wValue == id.indexElt)
+                    emit(dataChanged(indexDiv, indexDiv));
             }
         }
     }
@@ -233,34 +218,34 @@ QModelIndex TreeModel::getParentIndexWithPosition(EltID id, int &position)
     switch (id.typeElement)
     {
     case elementSmpl:
-        index = this->index(1, 0);
-        item = (TreeItem*)index.internalPointer();
+        index = this->index(1, 0); // RootSmpl
+        item = static_cast<TreeItem*>(index.internalPointer());
         position = item->indexOfId(id.indexElt);
         break;
     case elementInst:
-        index = this->index(2, 0);
-        item = (TreeItem*)index.internalPointer();
+        index = this->index(2, 0); // RootInst
+        item = static_cast<TreeItem*>(index.internalPointer());
         position = item->indexOfId(id.indexElt);
         break;
     case elementPrst:
-        index = this->index(3, 0);
-        item = (TreeItem*)index.internalPointer();
+        index = this->index(3, 0); // RootPrst
+        item = static_cast<TreeItem*>(index.internalPointer());
         position = item->indexOfId(id.indexElt);
         break;
     case elementInstSmpl:
-        index = this->index(2, 0);
-        item = (TreeItem*)index.internalPointer();
+        index = this->index(2, 0); // RootInst
+        item = static_cast<TreeItem*>(index.internalPointer());
         position = item->indexOfId(id.indexElt);
         index = this->index(position, 0, index);
-        item = (TreeItem*)index.internalPointer();
+        item = static_cast<TreeItem*>(index.internalPointer());
         position = item->indexOfId(id.indexElt2);
         break;
     case elementPrstInst:
-        index = this->index(3, 0);
-        item = (TreeItem*)index.internalPointer();
+        index = this->index(3, 0); // RootPrst
+        item = static_cast<TreeItem*>(index.internalPointer());
         position = item->indexOfId(id.indexElt);
         index = this->index(position, 0, index);
-        item = (TreeItem*)index.internalPointer();
+        item = static_cast<TreeItem*>(index.internalPointer());
         position = item->indexOfId(id.indexElt2);
         break;
     case elementSf2: case elementRootSmpl: case elementRootInst: case elementRootPrst:

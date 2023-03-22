@@ -188,7 +188,7 @@ union AttributeValue
     SFSampleLink sfLinkValue;
     SFTransform sfTransValue;
 
-    AttributeValue() { memset((void *)this, 0, sizeof(AttributeValue)); }
+    AttributeValue() { memset(static_cast<void *>(this), 0, sizeof(AttributeValue)); }
 };
 
 class Attribute: QObject
@@ -227,8 +227,6 @@ public:
     // Conversions
     static double toRealValue(AttributeType champ, bool isPrst, AttributeValue storedValue);
     static AttributeValue fromRealValue(AttributeType champ, bool isPrst, double realValue);
-    static QString toString(AttributeType champ, bool isPrst, AttributeValue storedValue);
-    static AttributeValue fromString(AttributeType champ, bool isPrst, QString strValue, bool &ok);
 
     // Limit
     static AttributeValue limit(AttributeType champ, AttributeValue value, bool isPrst);
@@ -245,9 +243,9 @@ private:
     static double limit(double value, double min, double max);
 
     AttributeType _champ;
-    bool _isPrst;
-    double _realValue;
     AttributeValue _storedValue;
+    double _realValue;
+    bool _isPrst;
 
     static QList<AttributeType> s_attributesForPrstMod;
     static QList<AttributeType> s_attributesForInstMod;

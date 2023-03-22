@@ -28,6 +28,7 @@
 #include "treesortfilterproxy.h"
 #include "soundfontmanager.h"
 #include <QFileInfo>
+#include <QMessageBox>
 #include "treemodel.h"
 #include "abstractinputparser.h"
 #include "treesplitter.h"
@@ -106,6 +107,7 @@ Editor::Editor(QWidget *parent) : QWidget(parent),
     connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), this, SLOT(onKeyPlayed(int,int)));
     connect(SoundfontManager::getInstance(), SIGNAL(parameterForCustomizingKeyboardChanged()), this, SLOT(customizeKeyboard()));
     connect(SoundfontManager::getInstance(), SIGNAL(editingDone(QString, QList<int>)), this, SLOT(onEditingDone(QString, QList<int>)));
+    connect(SoundfontManager::getInstance(), SIGNAL(errorEncountered(QString)), this, SLOT(onErrorEncountered(QString)));
 }
 
 Editor::~Editor()
@@ -543,4 +545,9 @@ void Editor::onKeyPlayed(int key, int vel)
                 ui->treeView->onSelectionChanged(currentIds);
         }
     }
+}
+
+void Editor::onErrorEncountered(QString text)
+{
+    QMessageBox::warning(this, tr("Warning"), text);
 }

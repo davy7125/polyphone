@@ -69,8 +69,7 @@ void ToolCleanUnused::process(SoundfontManager * sm, EltID id, AbstractToolParam
             _unusedInst++;
             id.typeElement = elementInst;
             id.indexElt = i;
-            int message;
-            sm->remove(id, &message);
+            sm->remove(id);
         }
     }
 
@@ -99,8 +98,7 @@ void ToolCleanUnused::process(SoundfontManager * sm, EltID id, AbstractToolParam
             _unusedSmpl++;
             id.typeElement = elementSmpl;
             id.indexElt = i;
-            int message;
-            sm->remove(id, &message);
+            sm->remove(id);
         }
     }
 }

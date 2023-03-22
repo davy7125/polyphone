@@ -25,6 +25,7 @@
 #include "samplereaderflac.h"
 #include "FLAC/stream_decoder.h"
 #include "utils.h"
+#include <QDebug>
 
 // https://xiph.org/flac/api/group__flac__stream__decoder.html
 

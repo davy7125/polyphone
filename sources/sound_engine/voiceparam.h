@@ -25,7 +25,6 @@
 #ifndef VOICEPARAM_H
 #define VOICEPARAM_H
 
-#include "basetypes.h"
 #include "modulatorgroup.h"
 #include "modulatedparameter.h"
 class Division;

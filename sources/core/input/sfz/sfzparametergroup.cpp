@@ -49,7 +49,7 @@ QList<int> SfzParameterGroup::getSampleIndex(SoundfontManager *sf2, EltID idElt,
             return sampleIndex;
     }
 
-    // Sample déjà chargé ?
+    // Sample already loaded?
     idElt.typeElement = elementSmpl;
     QStringList names;
     foreach (int i, sf2->getSiblings(idElt))
@@ -63,7 +63,11 @@ QList<int> SfzParameterGroup::getSampleIndex(SoundfontManager *sf2, EltID idElt,
         return sampleIndex;
 
     // Récupération des informations d'un sample
-    Sound son(fileName, false);
+    Sound son;
+    if (!son.setFileName(fileName, false))
+    {
+        return sampleIndex;
+    }
     int nChannels = son.getUInt32(champ_wChannels);
     QString nom = QFileInfo(fileName).completeBaseName();
     QString nom2 = nom;
@@ -171,7 +175,8 @@ void SfzParameterGroup::adjustStereoVolumeAndCorrection(QString path, int defaul
     QString sample = getStrValue(SfzParameter::op_sample);
     if (!sample.isEmpty())
     {
-        Sound son(path + "/" + sample);
+        Sound son;
+        son.setFileName(path + "/" + sample);
         if (son.getUInt32(champ_wChannels) == 2)
             adjustVolume(3.);
         int correctionSample = son.getInt32(champ_chPitchCorrection);

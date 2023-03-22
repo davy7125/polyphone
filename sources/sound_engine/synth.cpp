@@ -26,33 +26,30 @@
 #include "synth.h"
 #include <QThread>
 #include <QFile>
-#include "contextmanager.h"
-#include "soundfontmanager.h"
 #include "soundfonts.h"
 #include "soundfont.h"
 #include "instprst.h"
 #include "division.h"
 #include "smpl.h"
+#include "parametermodulator.h"
 
 int Synth::s_sampleVoiceTokenCounter = 0;
 
 // Constructeur, destructeur
-Synth::Synth(ConfManager *configuration) : QObject(nullptr),
-    _sf2(SoundfontManager::getInstance()),
+Synth::Synth(Soundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts) : QObject(nullptr),
+    _soundfonts(soundfonts),
+    _mutexSoundfonts(mutexSoundfonts),
     _soundEngines(nullptr),
     _soundEngineCount(0),
     _numberOfVoicesToAdd(0),
     _gain(0),
-    _choLevel(0), _choDepth(0), _choFrequency(0),
     _recordFile(nullptr),
     _isRecording(false),
     _isWritingInStream(0),
     _dataWav(nullptr),
-    _bufferSize(0),
-    _configuration(configuration)
+    _bufferSize(0)
 {
-    // Initial configuration
-    updateConfiguration();
+
 }
 
 Synth::~Synth()
@@ -124,8 +121,9 @@ int Synth::play(EltID id, int channel, int key, int velocity)
     }
 
     // Corresponding soundfont
-    QMutexLocker(&_sf2->_mutex);
-    Soundfont * soundfont = _sf2->_soundfonts->getSoundfont(id.indexSf2);
+    if (_mutexSoundfonts)
+        QMutexLocker<QRecursiveMutex> mutexLocker(_mutexSoundfonts);
+    Soundfont * soundfont = _soundfonts->getSoundfont(id.indexSf2);
     if (soundfont == nullptr)
         return -1;
 
@@ -317,11 +315,11 @@ int Synth::playSmpl(Soundfont * soundfont, Smpl * smpl, int channel, int key, in
     _voiceInitializers[_numberOfVoicesToAdd].channel = channel;
     _voiceInitializers[_numberOfVoicesToAdd].key = key;
     _voiceInitializers[_numberOfVoicesToAdd].vel = velocity;
-    _voiceInitializers[_numberOfVoicesToAdd].gain = (key < 0 ? 0 : _gain);
+    _voiceInitializers[_numberOfVoicesToAdd].gain = (key < 0 ? 0 : static_cast<float>(_gain));
     _voiceInitializers[_numberOfVoicesToAdd].choLevel = (key < 0 ? 0 : _choLevel);
     _voiceInitializers[_numberOfVoicesToAdd].choDepth = (key < 0 ? 0 : _choDepth);
     _voiceInitializers[_numberOfVoicesToAdd].choFrequency = (key < 0 ? 0 : _choFrequency);
-    _voiceInitializers[_numberOfVoicesToAdd].audioSmplRate = _format.sampleRate();
+    _voiceInitializers[_numberOfVoicesToAdd].audioSmplRate = _sampleRate;
     _voiceInitializers[_numberOfVoicesToAdd].token = currentToken;
     _numberOfVoicesToAdd++;
 
@@ -345,21 +343,21 @@ void Synth::stop(bool allChannels)
     SoundEngine::stopAllVoices(allChannels);
 }
 
-void Synth::updateConfiguration()
+void Synth::configure(SynthConfig *configuration)
 {
     this->stop(true);
 
     // Update chorus
-    _choLevel = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt();
-    _choDepth = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_depth", 0).toInt();
-    _choFrequency = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_frequency", 0).toInt();
+    _choLevel = configuration->choLevel;
+    _choDepth = configuration->choDepth;
+    _choFrequency = configuration->choFrequency;
     SoundEngine::setChorus(_choLevel, _choDepth, _choFrequency);
 
     // Update reverb
-    double revLevel = 0.01 * _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", 0).toInt();
-    double revSize = 0.01 * _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_size", 0).toInt();
-    double revWidth = 0.01 * _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_width", 0).toInt();
-    double revDamping = 0.01 * _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", 0).toInt();
+    double revLevel = 0.01 * configuration->revLevel;
+    double revSize = 0.01 * configuration->revSize;
+    double revWidth = 0.01 * configuration->revWidth;
+    double revDamping = 0.01 * configuration->revDamping;
 
     _mutexReverb.lock();
     _reverbOn = revLevel > 0.001;
@@ -370,19 +368,17 @@ void Synth::updateConfiguration()
     _mutexReverb.unlock();
 
     // Update gain, tuning fork and temperament
-    _gain = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
+    _gain = configuration->gain;
     SoundEngine::setGain(_gain);
 
-    int tuningFork = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", 440).toInt();
-    Voice::setTuningFork(tuningFork);
+    Voice::setTuningFork(configuration->tuningFork);
 
-    QStringList temperamentArgs = _configuration->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString().split(",");
-    if (temperamentArgs.count() == 14)
+    if (configuration->temperament.count() == 14)
     {
         float temperament[12];
         for (int i = 1; i < 13; i++)
-            temperament[i - 1] = temperamentArgs[i].toFloat();
-        int temperamentRelativeKey = temperamentArgs[13].toInt() % 12;
+            temperament[i - 1] = configuration->temperament[i].toFloat();
+        int temperamentRelativeKey = configuration->temperament[13].toInt() % 12;
         Voice::setTemperament(temperament, temperamentRelativeKey);
     }
     else
@@ -393,13 +389,18 @@ void Synth::updateConfiguration()
     }
 
     // Update buffer size
-    quint32 bufferSize = 2 * _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();
+    quint32 bufferSize = 2 * configuration->bufferSize;
     if (_bufferSize != bufferSize)
     {
         _bufferSize = bufferSize;
         destroySoundEnginesAndBuffers();
         createSoundEnginesAndBuffers();
     }
+}
+
+void Synth::setIMidiValues(IMidiValues * iMidiValues)
+{
+    ParameterModulator::setIMidiValues(iMidiValues);
 }
 
 void Synth::setGainSample(int gain)
@@ -465,17 +466,17 @@ void Synth::setSmplEqValues(int values[10])
     _eq.setValues(values);
 }
 
-void Synth::setFormat(AudioFormat format)
+void Synth::setSampleRate(quint32 sampleRate)
 {
     // Mutex not mandatory: no data generation when "setFormat" is called
-    _format = format;
+    _sampleRate = sampleRate;
 
     // Reset
     this->stop(true);
 
     // Sample rate update
-    _sinus.setSampleRate(format.sampleRate());
-    _eq.setSampleRate(format.sampleRate());
+    _sinus.setSampleRate(sampleRate);
+    _eq.setSampleRate(sampleRate);
 }
 
 void Synth::startNewRecord(QString fileName)
@@ -509,7 +510,7 @@ void Synth::startNewRecord(QString fileName)
         wTemp = 2;
         _recordStream << wTemp;
         // Sample rate
-        dwTemp = _format.sampleRate();
+        dwTemp = _sampleRate;
         _recordStream << dwTemp;
         // Average byte per second
         dwTemp *= 2 * 4;
@@ -636,7 +637,7 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
 
             // Prise en compte de l'avance
             _recordLength += maxlen * 8;
-            emit(dataWritten(_format.sampleRate(), maxlen));
+            emit(dataWritten(_sampleRate, maxlen));
 
             // We are not writing anymore
             _isWritingInStream.storeRelaxed(0);

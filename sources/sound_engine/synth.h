@@ -27,27 +27,43 @@
 #define SYNTH_H
 
 #include "soundengine.h"
-#include "audiodevice.h"
 #include "calibrationsinus.h"
 #include "liveeq.h"
+#include "stk/FreeVerb.h"
 #include <QDataStream>
-class SoundfontManager;
+class Soundfonts;
 class Soundfont;
 class InstPrst;
-class ConfManager;
+
+class SynthConfig
+{
+public:
+    int choLevel;
+    int choDepth;
+    int choFrequency;
+    int revLevel;
+    int revSize;
+    int revWidth;
+    int revDamping;
+    int gain;
+    int tuningFork;
+    QStringList temperament;
+    unsigned int bufferSize;
+};
 
 class Synth : public QObject
 {
     Q_OBJECT
 
 public:
-    Synth(ConfManager *configuration);
-    ~Synth();
+    Synth(Soundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts);
+    ~Synth() override;
 
     // Executed by the main thread (thread 1)
+    void configure(SynthConfig * configuration);
+    void setIMidiValues(IMidiValues * iMidiValues);
     int play(EltID id, int channel, int key, int velocity);
     void stop(bool allChannels);
-    void setGain(double gain);
 
     // Parameters for reading samples
     void setGainSample(int gain);
@@ -68,15 +84,12 @@ public:
 
     // Following functions are executed by the audio server (thread 2)
     void readData(float *dataL, float *dataR, quint32 maxlen);
-    void setFormat(AudioFormat format);
+    void setSampleRate(quint32 sampleRate);
 
 signals:
     void currentPosChanged(quint32 pos);
     void readFinished(int token);
     void dataWritten(quint32 sampleRate, quint32 number); // For updating the recorder
-
-public slots:
-    void updateConfiguration();
 
 private:
     void playPrst(Soundfont * soundfont, InstPrst * prst, int channel, int key, int velocity);
@@ -90,7 +103,8 @@ private:
 
     CalibrationSinus _sinus;
     LiveEQ _eq;
-    SoundfontManager * _sf2;
+    Soundfonts * _soundfonts;
+    QRecursiveMutex * _mutexSoundfonts;
 
     // Sound engines
     QSemaphore _semRunningSoundEngines;
@@ -100,10 +114,8 @@ private:
     int _numberOfVoicesToAdd;
     static int s_sampleVoiceTokenCounter;
 
-    // Audio format
-    AudioFormat _format;
-
     // Global parameter
+    quint32 _sampleRate;
     double _gain;
 
     // Effects
@@ -121,8 +133,6 @@ private:
 
     float * _dataWav;
     quint32 _bufferSize;
-
-    ConfManager * _configuration;
 };
 
 

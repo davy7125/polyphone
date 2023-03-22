@@ -403,9 +403,6 @@ void SoundEngine::start()
         generateData(_lenToPrepare);
         _semRunning->release();
     }
-
-    _mutexSynchro.tryLock();
-    _mutexSynchro.unlock();
 }
 
 void SoundEngine::stop()

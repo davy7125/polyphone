@@ -120,10 +120,11 @@ ContextManager::ContextManager(bool withAudioAndMidi) :
         // 6. Audio device
         _audio = new AudioDevice(_configuration);
         connect(_configuration, SIGNAL(audioServerConfigurationChanged()), _audio, SLOT(initAudio()));
-        connect(_configuration, SIGNAL(soundEngineConfigurationChanged()), _audio->getSynth(), SLOT(updateConfiguration()));
+        connect(_configuration, SIGNAL(soundEngineConfigurationChanged()), this, SLOT(updateSynthConfiguration()));
 
         // 7. Midi device
         _midi = new MidiDevice(_configuration, _audio->getSynth());
+        _audio->getSynth()->setIMidiValues(_midi);
     }
 }
 
@@ -137,4 +138,9 @@ ContextManager::~ContextManager()
     delete _recentFile;
     delete _theme;
     delete _configuration;
+}
+
+void ContextManager::updateSynthConfiguration()
+{
+    _audio->getSynth()->configure(_configuration->getSynthConfig());
 }

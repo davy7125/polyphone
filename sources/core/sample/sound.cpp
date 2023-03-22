@@ -23,26 +23,17 @@
 ***************************************************************************/
 
 #include "sound.h"
-#include <QMessageBox>
-#include <QLibrary>
-#include <QCoreApplication>
 #include <QFileInfo>
-#include <QApplication>
-#include "qmath.h"
-#include <QFile>
-#include "contextmanager.h"
-#include "FLAC/stream_decoder.h"
-#include "sampleutils.h"
 #include "samplereader.h"
 #include "samplereaderfactory.h"
 
-Sound::Sound(QString filename, bool tryFindRootkey) :
+Sound::Sound() :
+    _fileName(""),
+    _error(""),
     _reader(nullptr)
 {
     // Initialize data
     _smpl.clear();
-    if (!filename.isEmpty())
-        this->setFileName(filename, tryFindRootkey);
 }
 
 Sound::~Sound()
@@ -50,9 +41,10 @@ Sound::~Sound()
     delete _reader;
 }
 
-void Sound::setFileName(QString qStr, bool tryFindRootKey)
+bool Sound::setFileName(QString qStr, bool tryFindRootKey)
 {
     _fileName = qStr;
+    bool isOk = false;
 
     // Initialize the reader
     if (_reader != nullptr)
@@ -66,18 +58,16 @@ void Sound::setFileName(QString qStr, bool tryFindRootKey)
         switch (result)
         {
         case SampleReader::FILE_CORRUPT:
-            QMessageBox::warning(QApplication::activeWindow(), QObject::tr("Warning"),
-                                 QObject::tr("Corrupted file: \"%1\"").arg(_fileName));
+            _error = QObject::tr("Corrupted file: \"%1\"").arg(_fileName);
             break;
         case SampleReader::FILE_NOT_FOUND:
-            QMessageBox::warning(QApplication::activeWindow(), QObject::tr("Warning"),
-                                 QObject::tr("Cannot find file \"%1\"").arg(_fileName));
+            _error = QObject::tr("Cannot find file \"%1\"").arg(_fileName);
             break;
         case SampleReader::FILE_NOT_READABLE:
-            QMessageBox::warning(QApplication::activeWindow(), QObject::tr("Warning"),
-                                 QObject::tr("Cannot open file \"%1\"").arg(_fileName));
+            _error = QObject::tr("Cannot open file \"%1\"").arg(_fileName);
             break;
-        default:
+        case SampleReader::FILE_OK:
+            isOk = true;
             break;
         }
 
@@ -90,6 +80,8 @@ void Sound::setFileName(QString qStr, bool tryFindRootKey)
 
     if (!_info.pitchDefined && tryFindRootKey)
         determineRootKey();
+
+    return isOk;
 }
 
 QVector<float> Sound::getData(bool forceReload)

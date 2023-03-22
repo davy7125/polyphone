@@ -28,19 +28,20 @@
 #include <QString>
 #include <QObject>
 #include "rtmidi/RtMidi.h"
+#include "imidivalues.h"
 class ConfManager;
 class RtMidiIn;
 class DialogKeyboard;
 class PianoKeybdCustom;
 class Synth;
 
-class MidiDevice: public QObject
+class MidiDevice: public QObject, public IMidiValues
 {
     Q_OBJECT
 
 public:
     MidiDevice(ConfManager * configuration, Synth * synth);
-    ~MidiDevice();
+    ~MidiDevice() override;
 
     // Initialize the midi device
     QMap<QString, QString> getMidiList();
@@ -54,18 +55,18 @@ public:
     void stopAll();
 
     // Get last values (-1 if not received yet)
-    int getControllerValue(int channel, int controllerNumber);
-    float getBendValue(int channel);
-    float getBendSensitivityValue(int channel);
-    int getMonoPressure(int channel);
-    int getPolyPressure(int channel, int key);
+    int getControllerValue(int channel, int controllerNumber) override;
+    float getBendValue(int channel) override;
+    float getBendSensitivityValue(int channel) override;
+    int getMonoPressure(int channel) override;
+    int getPolyPressure(int channel, int key) override;
 
 signals:
     // Emit key ON / OFF for the editor (channel -1)
     void keyPlayed(int key, int vel);
 
 protected:
-    void customEvent(QEvent * event);
+    void customEvent(QEvent * event) override;
 
 private slots:
     // When using modulators, default values of controllers might change

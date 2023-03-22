@@ -23,7 +23,6 @@
 ***************************************************************************/
 
 #include "smpl.h"
-#include "soundfont.h"
 #include "utils.h"
 
 Smpl::Smpl(int row, TreeItem *parent, EltID id) : TreeItem(id, parent),

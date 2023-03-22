@@ -34,7 +34,7 @@ class SoundEngine: public QObject
 
 public:
     SoundEngine(QSemaphore * semRunning, quint32 bufferSize);
-    virtual ~SoundEngine();
+    virtual ~SoundEngine() override;
     static void setInstanceList(SoundEngine ** soundEngines, int count)
     {
         _listInstances = soundEngines;

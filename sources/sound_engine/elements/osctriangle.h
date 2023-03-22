@@ -25,7 +25,7 @@
 #ifndef OSCTRIANGLE_H
 #define OSCTRIANGLE_H
 
-#include "sound.h"
+#include <QtGlobal>
 
 class OscTriangle
 {

@@ -38,7 +38,7 @@ class AbstractInputParser: public QObject
 
 public:
     AbstractInputParser();
-    virtual ~AbstractInputParser();
+    virtual ~AbstractInputParser() override;
 
     /// Initialize the parser (done by the InputFactory)
     void initialize(QString fileName, SoundfontManager * sm);

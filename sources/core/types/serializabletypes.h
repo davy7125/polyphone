@@ -26,7 +26,7 @@
 #define SERIALIZABLETYPES_H
 
 #include "qglobal.h"
-#include "attribute.h"
+#include "modulatordata.h"
 class QDataStream;
 
 class quint32Reversed

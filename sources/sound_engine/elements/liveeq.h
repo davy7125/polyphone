@@ -26,7 +26,7 @@
 #ifndef LIVEEQ_H
 #define LIVEEQ_H
 
-#include "iir/Iir_2.h"
+#include "iir/Butterworth.h"
 
 class LiveEQ
 {

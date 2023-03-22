@@ -25,7 +25,8 @@
 #ifndef ENVELOPPEVOL_H
 #define ENVELOPPEVOL_H
 
-#include "voiceparam.h"
+#include <QtGlobal>
+class VoiceParam;
 
 class EnveloppeVol
 {
@@ -46,7 +47,7 @@ public:
         float offset = (p < 0) ? 1.0f : 0.0f;
         float clipp = (p < -126) ? -126.0f : p;
         int w = static_cast<int>(clipp);
-        float z = clipp - w + offset;
+        float z = clipp - static_cast<float>(w) + offset;
         union { quint32 i; float f; } v =
         { static_cast<quint32> ( (1 << 23) * (clipp + 121.2740575f + 27.7280233f / (4.84252568f - z) - 1.49012907f * z) ) };
         return v.f;
