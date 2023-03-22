@@ -77,20 +77,20 @@ SoundfontManager::~SoundfontManager()
 // Ajout / suppression des données
 void SoundfontManager::remove(EltID id, int *message)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     this->remove(id, false, true, message);
 }
 
 void SoundfontManager::onDropId(EltID id)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     this->remove(id, true, false);
 }
 
 // Accès / modification des propriétés
 bool SoundfontManager::isSet(EltID id, AttributeType champ)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     bool value = false;
     if (!this->isValid(id))
         return value;
@@ -159,7 +159,7 @@ bool SoundfontManager::isSet(EltID id, AttributeType champ)
 
 AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     AttributeValue value;
     value.dwValue = 0;
     if (!this->isValid(id))
@@ -341,7 +341,7 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
 
 Sound * SoundfontManager::getSound(EltID id)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     Sound * son = nullptr;
     if (!this->isValid(id))
         return son;
@@ -354,7 +354,7 @@ Sound * SoundfontManager::getSound(EltID id)
 
 QString SoundfontManager::getQstr(EltID id, AttributeType champ)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     if (!this->isValid(id))
         return "";
 
@@ -445,7 +445,7 @@ QString SoundfontManager::getQstr(EltID id, AttributeType champ)
 
 QVector<float> SoundfontManager::getData(EltID idSmpl)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     QVector<float> baRet;
     if (!this->isValid(idSmpl))
         return baRet;
@@ -458,7 +458,7 @@ QVector<float> SoundfontManager::getData(EltID idSmpl)
 
 QList<int> SoundfontManager::getSiblings(EltID &id)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
 
     if (!this->isValid(id, true, true))
         return QList<int>();
@@ -585,7 +585,7 @@ QList<int> SoundfontManager::getSiblings(EltID &id)
 
 void SoundfontManager::endEditing(QString editingSource)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
 
     // Close the action set and get the list of sf2 that have been edited
     QList<int> sf2Indexes = _undoRedo->commitActionSet();
@@ -602,14 +602,14 @@ void SoundfontManager::endEditing(QString editingSource)
 
 void SoundfontManager::clearNewEditing()
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     _undoRedo->clearCurrentActionSet();
     _parameterForCustomizingKeyboardChanged = false;
 }
 
 void SoundfontManager::revertNewEditing()
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     undo(_undoRedo->getCurrentActions());
     _undoRedo->clearCurrentActionSet();
     _parameterForCustomizingKeyboardChanged = false;
@@ -617,19 +617,19 @@ void SoundfontManager::revertNewEditing()
 
 bool SoundfontManager::isUndoable(int indexSf2)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     return _undoRedo->isUndoable(indexSf2);
 }
 
 bool SoundfontManager::isRedoable(int indexSf2)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     return _undoRedo->isRedoable(indexSf2);
 }
 
 void SoundfontManager::undo(int indexSf2)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     QList<int> sf2Indexes = undo(_undoRedo->undo(indexSf2));
     if (!sf2Indexes.empty())
         emit(editingDone("command:undo", sf2Indexes));
@@ -679,7 +679,7 @@ QList<int> SoundfontManager::undo(QList<Action *> actions)
 
 void SoundfontManager::redo(int indexSf2)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     QList<Action *> actions = _undoRedo->redo(indexSf2);
 
     // Process actions in reverse order
@@ -727,14 +727,14 @@ void SoundfontManager::redo(int indexSf2)
 
 void SoundfontManager::markAsSaved(int indexSf2)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     _soundfonts->getSoundfont(indexSf2)->_numEdition = this->_undoRedo->getEdition(indexSf2);
     emit(editingDone("command:save", QList<int>() << indexSf2));
 }
 
 bool SoundfontManager::isEdited(int indexSf2)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     if (_soundfonts->getSoundfont(indexSf2) == nullptr)
         return false;
     return this->_undoRedo->getEdition(indexSf2) != _soundfonts->getSoundfont(indexSf2)->_numEdition ||
@@ -744,7 +744,7 @@ bool SoundfontManager::isEdited(int indexSf2)
 // Add a child to ID
 int SoundfontManager::add(EltID id)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     if (!this->isValid(id, false, true))
         return -1;
 
@@ -1120,7 +1120,7 @@ void SoundfontManager::supprGenAndStore(EltID id, int storeAction)
 
 int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     if (!this->isValid(id))
         return 1;
     bool storeAction = true;
@@ -1346,7 +1346,7 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
 
 int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     if (!this->isValid(id))
         return 1;
 
@@ -1471,7 +1471,7 @@ int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
 
 int SoundfontManager::set(EltID idSmpl, QVector<float> data)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     if (!this->isValid(idSmpl))
         return 1;
 
@@ -1496,7 +1496,7 @@ int SoundfontManager::set(EltID idSmpl, QVector<float> data)
 
 void SoundfontManager::reset(EltID id, AttributeType champ)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     if (!this->isValid(id))
         return;
 
@@ -1555,7 +1555,7 @@ void SoundfontManager::reset(EltID id, AttributeType champ)
 
 void SoundfontManager::simplify(EltID id, AttributeType champ)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     EltID idElement = id;
     if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
     {
@@ -1669,7 +1669,7 @@ int SoundfontManager::display(EltID id)
 
 bool SoundfontManager::isValid(EltID &id, bool acceptHidden, bool justCheckParentLevel)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     if (id.typeElement < elementSf2 || id.typeElement > elementPrstInstGen)
         return false;
 
@@ -1775,7 +1775,7 @@ bool SoundfontManager::isValid(EltID &id, bool acceptHidden, bool justCheckParen
 
 void SoundfontManager::firstAvailablePresetBank(EltID id, int &nBank, int &nPreset)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     if (nBank != -1 && nPreset != -1)
     {
         // bank et preset par défaut disponibles ?
@@ -1810,7 +1810,7 @@ void SoundfontManager::firstAvailablePresetBank(EltID id, int &nBank, int &nPres
 
 int SoundfontManager::closestAvailablePreset(EltID id, quint16 wBank, quint16 wPreset)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     int initVal = wPreset;
     int delta = 0;
     int sens = 0;
@@ -1836,7 +1836,7 @@ int SoundfontManager::closestAvailablePreset(EltID id, quint16 wBank, quint16 wP
 
 bool SoundfontManager::isAvailable(EltID id, quint16 wBank, quint16 wPreset)
 {
-    QMutexLocker<QRecursiveMutex> locker(&_mutex);
+    QMutexLocker locker(&_mutex);
     id.typeElement = elementPrst;
     foreach (int i, this->getSiblings(id))
     {
