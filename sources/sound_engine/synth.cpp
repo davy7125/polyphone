@@ -92,7 +92,7 @@ void Synth::createSoundEnginesAndBuffers()
 {
     _dataWav = new float[8 * _bufferSize];
 
-    _soundEngineCount = qMax(QThread::idealThreadCount() - 2, 1);
+    _soundEngineCount = qMax(QThread::idealThreadCount(), 1);
     _soundEngines = new SoundEngine * [_soundEngineCount];
     //qWarning() << _soundEngineCount << "sound engines created";
 
