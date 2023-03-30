@@ -83,6 +83,9 @@ void Synth::destroySoundEnginesAndBuffers()
     _soundEngineCount = 0;
 
     delete [] _dataWav;
+
+    // Delete voices
+    SoundEngine::finalize();
 }
 
 void Synth::createSoundEnginesAndBuffers()
@@ -96,8 +99,6 @@ void Synth::createSoundEnginesAndBuffers()
     for (int i = 0; i < _soundEngineCount; i++)
     {
         SoundEngine * soundEngine = new SoundEngine(&_semRunningSoundEngines, _bufferSize);
-        connect(soundEngine, SIGNAL(readFinished(int)), this, SIGNAL(readFinished(int)));
-        connect(soundEngine, SIGNAL(currentPosChanged(quint32)), this, SIGNAL(currentPosChanged(quint32)));
         if (i != 0) // The first one stays in the current thread
         {
             soundEngine->moveToThread(new QThread());
@@ -106,7 +107,7 @@ void Synth::createSoundEnginesAndBuffers()
         }
         _soundEngines[i] = soundEngine;
     }
-    SoundEngine::setInstanceList(_soundEngines, _soundEngineCount);
+    SoundEngine::initialize(this);
 }
 
 int Synth::play(EltID id, int channel, int key, int velocity)
@@ -577,10 +578,12 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
         return;
 
     // Wake up the sound engines
+    SoundEngine::prepareComputation();
     for (int i = 1; i < _soundEngineCount; ++i)
         _soundEngines[i]->prepareData(maxlen);
     _soundEngines[0]->generateData(maxlen);
     _semRunningSoundEngines.acquire(_soundEngineCount - 1);
+    SoundEngine::endComputation();
 
     // Get the reverberated part of the sound
     for (int i = 0; i < _soundEngineCount; i++)

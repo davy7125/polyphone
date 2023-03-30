@@ -40,9 +40,7 @@ ActionManager::~ActionManager()
 
 void ActionManager::add(Action *action)
 {
-    _mutex.lock();
     _currentActions.insert(0, action);
-    _mutex.unlock();
 }
 
 QList<int> ActionManager::commitActionSet()

@@ -416,6 +416,11 @@ void Voice::setChorus(int level, int depth, int frequency)
     _chorus.setModFrequency(0.06667 * frequency);
 }
 
+void Voice::triggerReadFinishedSignal()
+{
+    emit(readFinished(_token));
+}
+
 void Voice::biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float Q)
 {
     // Calcul des coefficients d'une structure bi-quad pour un passe-bas

@@ -28,7 +28,6 @@
 #include <QList>
 #include <QMap>
 #include <QObject>
-#include <QMutex>
 #include "basetypes.h"
 class ActionSet;
 class Action;
@@ -39,7 +38,7 @@ class ActionManager: public QObject
 
 public:
     ActionManager();
-    ~ActionManager();
+    ~ActionManager() override;
 
     /// Add an action in the current action set
     void add(Action *action);
@@ -81,9 +80,6 @@ private:
 
     // Redo / undo and latest edition per soundfont
     QMap<int, ActionSet *> _actionSets;
-
-    // For protecting the insertion of action (if concurrent updates)
-    QMutex _mutex;
 };
 
 #endif // PILE_ACTIONS_H

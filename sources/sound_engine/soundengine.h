@@ -27,6 +27,7 @@
 #define SOUNDENGINE_H
 
 #include "voice.h"
+class Synth;
 
 class SoundEngine: public QObject
 {
@@ -35,14 +36,11 @@ class SoundEngine: public QObject
 public:
     SoundEngine(QSemaphore * semRunning, quint32 bufferSize);
     virtual ~SoundEngine() override;
-    static void setInstanceList(SoundEngine ** soundEngines, int count)
-    {
-        _listInstances = soundEngines;
-        _instanceCount = count;
-    }
 
+    static void initialize(Synth *synth);
     static void addVoices(VoiceInitializer *voiceInitializers, int numberOfVoicesToAdd);
     static void stopAllVoices(bool allChannels);
+    static void finalize();
 
     // sf2Id: -1 (no filter) or specific sf2 id
     // presetId: -1 (no filter) or specific preset id
@@ -58,52 +56,41 @@ public:
     static void setEndLoop(quint32 endLoop, bool repercute);
     static void setLoopEnabled(bool isEnabled);
     static void setStereo(bool isStereo);
-    static bool isStereo() { return _isStereo; }
+    static bool isStereo() { return s_isStereo; }
     static void setGainSample(int gain);
 
     // Data generation
     void stop();
+    static void prepareComputation();
     void prepareData(quint32 len);
     void generateData(quint32 len);
+    static void endComputation();
     void addRevData(float * dataL, float * dataR, quint32 len);
     void addNonRevData(float * dataL, float * dataR, quint32 len);
 
 public slots:
     void start();
 
-signals:
-    void readFinished(int token);
-    void currentPosChanged(quint32 pos);
-
 private:
     static void closeAll(int channel, int exclusiveClass, int numPreset);
+    static Voice * getNextVoiceToCompute();
+    static void configureStereoVoice1(Voice * voice1);
+    static void configureStereoVoice2(Voice * voice2);
 
-    void closeAllInstance(int channel, int exclusiveClass, int numPreset);
-    void addVoicesInstance(VoiceInitializer *voicesToAdd, int numberOfVoicesToAdd);
-    void stopAllVoicesInstance(bool allChannels);
-    void releaseVoicesInstance(int sf2Id, int presetId, int channel, int key);
-    void setGainInstance(double gain);
-    void setChorusInstance(int level, int depth, int frequency);
-    void setPitchCorrectionInstance(qint16 correction, bool repercute);
-    void setStartLoopInstance(quint32 startLoop, bool repercute);
-    void setEndLoopInstance(quint32 endLoop, bool repercute);
-    void setLoopEnabledInstance(bool isEnabled);
-    void setStereoInstance(bool isStereo);
-    void setGainSampleInstance(int gain);
-
-    QAtomicInt _interrupted;
+    volatile bool _interrupted;
     QSemaphore * _semRunning;
-    QMutex _mutexVoices, _mutexSynchro;
-    Voice * _voices[MAX_NUMBER_OF_VOICES];
-    volatile int _numberOfVoices;
+    QMutex _mutexSynchro;
     float * _dataL, * _dataR, * _dataRevL, * _dataRevR;
     float * _dataTmpL, * _dataTmpR;
     volatile quint32 _lenToPrepare;
 
-    static int _gainSmpl;
-    static bool _isStereo, _isLoopEnabled;
-    static SoundEngine** _listInstances;
-    static int _instanceCount;
+    static Voice * s_voices[MAX_NUMBER_OF_VOICES];
+    static int s_numberOfVoices;
+    static QAtomicInt s_indexVoice;
+    static QMutex s_mutexVoices;
+
+    static int s_gainSmpl;
+    static bool s_isStereo, s_isLoopEnabled;
 };
 
 #endif // SOUNDENGINE_H

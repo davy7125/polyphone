@@ -73,11 +73,11 @@ public:
     int getSf2Id() { return _voiceParam.getSf2Id(); }
     int getPresetId() { return _voiceParam.getPresetId(); }
     int getKey() { return _voiceParam.getKey(); }
-    int getToken() { return _token; }
     void release(bool quick = false);
     void setGain(double gain);
     void setChorus(int level, int depth, int frequency);
     bool isFinished() { return _isFinished; }
+    void triggerReadFinishedSignal();
 
     // Access to voiceParam properties
     double getPan();
@@ -103,6 +103,7 @@ public:
 
 signals:
     void currentPosChanged(quint32 pos);
+    void readFinished(int token);
 
 private:
     // Oscillators, envelopes and chorus
