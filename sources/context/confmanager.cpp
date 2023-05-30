@@ -318,7 +318,9 @@ SynthConfig * ConfManager::getSynthConfig()
     _synthConfig->gain = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
     _synthConfig->tuningFork = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", 440).toInt();
     _synthConfig->temperament = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString().split(",");
-    _synthConfig->bufferSize =  this->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();
+    _synthConfig->bufferSize =  this->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 0).toUInt();
+    if (_synthConfig->bufferSize == 0)
+        _synthConfig->bufferSize = 4096; // The maximum
 
     return _synthConfig;
 }

@@ -199,7 +199,7 @@ void AudioDevice::initAudio()
 
     //qDebug() << "AUDIO" << "host" << hostType << "device" << device;
 
-    quint32 bufferSize = _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toUInt();
+    quint32 bufferSize = _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 0).toUInt();
 
     // Arrêt des serveurs son si besoin
     this->closeConnections();
@@ -300,11 +300,12 @@ void AudioDevice::openJackConnection(quint32 bufferSize)
     jack_set_process_callback(_jack_client, jackProcess, this);
     jack_on_shutdown(_jack_client, jack_shutdown, nullptr);
 
-    // Enregistrement fréquence d'échantillonnage
+    // Get the sample rate
     _sampleRate = (int)jack_get_sample_rate(_jack_client);
 
-    // Modification taille buffer
-    jack_set_buffer_size(_jack_client, bufferSize);
+    // Possibly change the buffer size
+    if (bufferSize > 0)
+        jack_set_buffer_size(_jack_client, bufferSize);
 
     // Nombre de sorties audio
     const char ** ports = jack_get_ports(_jack_client, nullptr, nullptr,
@@ -404,7 +405,7 @@ void AudioDevice::openStandardConnection(int hostType, int device, quint32 buffe
                                 nullptr,            // pas d'entrée
                                 &outputParameters,  // paramètres
                                 SAMPLE_RATE,        // sample rate
-                                bufferSize,         // frame par buffer
+                                bufferSize,         // frame par buffer, can be 0
                                 paNoFlag, //paClipOff,     // avec clipping
                                 standardProcess,    // callback
                                 this);              // instance d'audiodevice

@@ -31,7 +31,7 @@
 Voice * SoundEngine::s_voices[MAX_NUMBER_OF_VOICES];
 int SoundEngine::s_numberOfVoices = 0;
 QAtomicInt SoundEngine::s_indexVoice = 0;
-QMutex SoundEngine::s_mutexVoices = QMutex();
+QMutex SoundEngine::s_mutexVoices;
 
 int SoundEngine::s_gainSmpl = 0;
 bool SoundEngine::s_isStereo = false;

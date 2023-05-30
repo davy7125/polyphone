@@ -15,6 +15,7 @@
     <widget class="QLabel" name="labelSubTitle2">
      <property name="font">
       <font>
+       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -27,6 +28,7 @@
     <widget class="QLabel" name="label_23">
      <property name="font">
       <font>
+       <weight>50</weight>
        <bold>false</bold>
       </font>
      </property>
@@ -37,6 +39,11 @@
    </item>
    <item row="2" column="2">
     <widget class="QComboBox" name="comboBufferSize">
+     <item>
+      <property name="text">
+       <string>Default</string>
+      </property>
+     </item>
      <item>
       <property name="text">
        <string notr="true">16</string>
@@ -72,12 +79,23 @@
        <string notr="true">1024</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string notr="true">2048</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string notr="true">4096</string>
+      </property>
+     </item>
     </widget>
    </item>
    <item row="0" column="0" colspan="3">
     <widget class="QLabel" name="labelSubTitle1">
      <property name="font">
       <font>
+       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -96,6 +114,7 @@
      </property>
      <property name="font">
       <font>
+       <weight>50</weight>
        <bold>false</bold>
       </font>
      </property>
@@ -118,6 +137,7 @@
      </property>
      <property name="font">
       <font>
+       <weight>50</weight>
        <bold>false</bold>
       </font>
      </property>
@@ -190,6 +210,7 @@
     <widget class="QLabel" name="label_24">
      <property name="font">
       <font>
+       <weight>50</weight>
        <bold>false</bold>
       </font>
      </property>
@@ -208,6 +229,7 @@
      </property>
      <property name="font">
       <font>
+       <weight>50</weight>
        <bold>false</bold>
       </font>
      </property>
