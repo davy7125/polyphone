@@ -114,7 +114,7 @@ Voici des exemples contenant le son d'une flûte et le sinus de calibration&nbsp
 ![](files/good-tune.mp3)
 
 
-**Note&nbsp;:** L'[analyse fréquentielle](manual/soundfont-editor/editing-pages/sample-editor.md#doc_fred) peut être un bon indicateur pour commencer l'accordage. Mais gardez en tête qu'il n'y a pas d'algorithme parfait pour cette tâche et que seules vos oreilles trouverons le bon accordage.
+**Note&nbsp;:** L'[analyse fréquentielle](manual/soundfont-editor/editing-pages/sample-editor.md#doc_fred) peut être un bon indicateur pour commencer l'accordage. Mais gardez en tête qu'il n'y a pas d'algorithme parfait pour cette tâche et que seules vos oreilles trouveront le bon accordage.
 
 
 ![Accordage des échantillons&nbsp;: analyse fréquentielle](images/tune-sample-3.png "Accordage des échantillons&nbsp;: analyse fréquentielle")
