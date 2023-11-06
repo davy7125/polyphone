@@ -1,4 +1,4 @@
-<div style="background-color:#FFEE99;padding:10px 10px 2px 10px;width:100%;font-weight:bold;border-radius:4px;margin-bottom:30px">
+<div style="background-color:#FFEE99;padding:10px 10px 2px 10px;width:100%;font-weight:bold;border-radius:4px;margin-bottom:30px;box-sizing:border-box">
 <img src="images/github.png" style="float:left;margin:10px 0 0 10px">
 <div style="margin:5px 0 0 90px">
 <p>Les sources du logiciel sont hébergées par GitHub et les développeurs peuvent se rendre <a href="https://github.com/davy7125/polyphone" target="_blank">ici</a> pour apporter de l'aide au projet.</p>

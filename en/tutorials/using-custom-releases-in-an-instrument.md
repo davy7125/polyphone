@@ -41,7 +41,7 @@ Then follow the instructions below.
 ### Separate sample and release
 
 
-Samples for the example: <a href="downloads/tutorials/trumpet.wav" download>sample 1</a>, <a href="downloads/tutorials/trumpet-release.wav" download>sample 2</a>.
+Samples for the example: <a href="files/trumpet.wav" download>sample 1</a>, <a href="files/trumpet-release.wav" download>sample 2</a>.
 
 If you have 2 samples, the first one containing the beginning and the sustained phase of the sound and the second one containing the release, you only need to make sure that the release begins with a very short blank (a couple of points) being close to 0.
 A short inaudible loop will thus be made with this portion.
@@ -90,14 +90,14 @@ You can then listen to the result and try to make a smoother transition between 
 * by attenuating the first or second instrument,
 * by increasing the release duration of the first instrument.
 
-The result with the example files is <a href="downloads/tutorials/custom%20release.sf2" download>here</a>.
+The result with the example files is <a href="files/custom%20release.sf2" download>here</a>.
 
 You can listen here the differences between:
 
-* a <a href="downloads/tutorials/classic-release.mp3" download>classical release</a>
+* a <a href="files/classic-release.mp3" download>classical release</a>
 
-![](downloads/tutorials/classic-release.mp3)
+![](files/classic-release.mp3)
 
-* and a <a href="downloads/tutorials/custom-release.mp3" download>custom release</a>
+* and a <a href="files/custom-release.mp3" download>custom release</a>
 
-![](downloads/tutorials/custom-release.mp3)
+![](files/custom-release.mp3)

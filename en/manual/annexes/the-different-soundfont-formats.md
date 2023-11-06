@@ -25,7 +25,7 @@ It is also possible to use sf2 soundfonts to listen MIDI files with <a href="htt
 Hardware such as samplers, soundcards or even synthesizers may also support the .sf2 format.
 
 Further information on soundfonts may be found for example on <a href="https://en.wikipedia.org/wiki/SoundFont" target="_blank">Wikipedia</a>.
-The sf2 specifications are available [here](downloads/sf_specifications_v2.01.pdf) for version 2.01 and [there](downloads/sf_specifications_v2.04.pdf) for version 2.04.
+The sf2 specifications are available [here](files/sf_specifications_v2.01.pdf) for version 2.01 and [there](files/sf_specifications_v2.04.pdf) for version 2.04.
 
 
 ## Sf3 soundfonts {#doc_sf3}

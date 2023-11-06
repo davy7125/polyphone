@@ -41,7 +41,7 @@ Suivez ensuite les instructions ci-dessous.
 ### Relâche séparée de l'échantillon principal
 
 
-Échantillons fournis pour l'exemple&nbsp;: <a href="downloads/tutorials/trumpet.wav" download>échantillon 1</a>, <a href="downloads/tutorials/trumpet-release.wav" download>échantillon 2</a>.
+Échantillons fournis pour l'exemple&nbsp;: <a href="files/trumpet.wav" download>échantillon 1</a>, <a href="files/trumpet-release.wav" download>échantillon 2</a>.
 
 Si vous avez 2 échantillons, le premier contenant le début et la phase de maintien du son et le second contenant la relâche du son, vous avez seulement besoin de vous assurer que la relâche commence avec un blanc très court&nbsp;: quelques points ayant une valeur proche de 0.
 Une boucle courte et inaudible sera ainsi faite sur cette portion.
@@ -90,14 +90,14 @@ Vous pouvez ensuite entendre le résultat et essayer de rendre la transition plu
 * en atténuant le premier ou le second instrument,
 * en augmentant la durée de la relâche dans le premier instrument.
 
-Le résultat avec les échantillons en exemple peut être téléchargé <a href="downloads/tutorials/custom%20release.sf2" download>ici</a>.
+Le résultat avec les échantillons en exemple peut être téléchargé <a href="files/custom%20release.sf2" download>ici</a>.
 
 Vous pouvez écouter ci-dessous la différence entre&nbsp;:
 
-* une <a href="downloads/tutorials/classic-release.mp3" download>relâche classique</a>
+* une <a href="files/classic-release.mp3" download>relâche classique</a>
 
-![](downloads/tutorials/classic-release.mp3)
+![](files/classic-release.mp3)
 
-* et une <a href="downloads/tutorials/custom-release.mp3" download>relâche personnalisée</a>
+* et une <a href="files/custom-release.mp3" download>relâche personnalisée</a>
 
-![](downloads/tutorials/custom-release.mp3)
+![](files/custom-release.mp3)

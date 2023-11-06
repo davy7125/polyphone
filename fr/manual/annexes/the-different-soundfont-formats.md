@@ -25,7 +25,7 @@ Il est aussi possible d'utiliser les banques de sons au format sf2 pour écouter
 Du matériel tel que sampleurs, cartes sons ou encore synthétiseurs peuvent aussi supporter le format .sf2.
 
 D'autres informations sur les banques de sons peuvent être trouvées par exemple sur <a href="https://fr.wikipedia.org/wiki/SoundFont" target="_blank">Wikipedia</a>.
-Les spécifications sf2 sont disponibles [ici](downloads/sf_specifications_v2.01.pdf) pour la version 2.01 et [là](downloads/sf_specifications_v2.04.pdf) pour la version 2.04.
+Les spécifications sf2 sont disponibles [ici](files/sf_specifications_v2.01.pdf) pour la version 2.01 et [là](files/sf_specifications_v2.04.pdf) pour la version 2.04.
 
 
 ## Banques de sons sf3 {#doc_sf3}

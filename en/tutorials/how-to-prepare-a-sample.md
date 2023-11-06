@@ -8,7 +8,7 @@ This tutorial describes how to add and prepare a sample in a soundfont.
 You must first have samples on your computer.
 A lot of free samples can be found on internet, being either recorded from real instruments (from a flute, guitar, cello, …) or created with different kinds of audio synthesis.
 
-For this tutorial this flute sample is provided: <a href="downloads/tutorials/flute.wav" download>flute.wav</a>.
+For this tutorial this flute sample is provided: <a href="files/flute.wav" download>flute.wav</a>.
 
 Once you have it, create a new soundfont with Polyphone (:menuselection:`Menu --> New`) and import the sample (:guilabel:`Add a sample`).
 
@@ -63,13 +63,13 @@ If you don't hear the transition once the end of the loop is read, this means th
 Otherwise, keep the player on and slightly move the end and / or the beginning of the loop until you find points with a transition as smooth as possible.
 Try the next records to see the difference between a bad and a good loop:
 
-* <a href="downloads/tutorials/bad-loop.mp3" download>bad loop</a>
+* <a href="files/bad-loop.mp3" download>bad loop</a>
 
-![](downloads/tutorials/bad-loop.mp3)
+![](files/bad-loop.mp3)
 
-* <a href="downloads/tutorials/good-loop.mp3" download>good loop</a>
+* <a href="files/good-loop.mp3" download>good loop</a>
 
-![](downloads/tutorials/good-loop.mp3)
+![](files/good-loop.mp3)
 
 
 **Note:** A tool exists to “cheat” if you cannot find a loop easily: the [auto-loop](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) tool.
@@ -101,17 +101,17 @@ Continue by adjusting the correction.
 For this step, pay attention to any beats that occur and make sure they are as slow as possible.
 Here are examples containing the sound of a flute and a calibration sine:
 
-* <a href="downloads/tutorials/very-bad-tune.mp3" download>very bad tune</a> (the root key doesn't match)
+* <a href="files/very-bad-tune.mp3" download>very bad tune</a> (the root key doesn't match)
 
-![](downloads/tutorials/very-bad-tune.mp3)
+![](files/very-bad-tune.mp3)
 
-* <a href="downloads/tutorials/bad-tune.mp3" download>bad tune</a> (the correction is not correct and you can hear beats)
+* <a href="files/bad-tune.mp3" download>bad tune</a> (the correction is not correct and you can hear beats)
 
-![](downloads/tutorials/bad-tune.mp3)
+![](files/bad-tune.mp3)
 
-* <a href="downloads/tutorials/good-tune.mp3" download>good tune</a> (both values are good)
+* <a href="files/good-tune.mp3" download>good tune</a> (both values are good)
 
-![](downloads/tutorials/good-tune.mp3)
+![](files/good-tune.mp3)
 
 
 **Note:** The [frequency analysis](manual/soundfont-editor/editing-pages/sample-editor.md#doc_fred) can be a good indicator to start tuning. But keep in mind that no algorithm is perfect for this task and only your ears will find the right tune.

@@ -8,7 +8,7 @@ Ce tutoriel décrit comment ajouter et préparer un échantillon dans une banque
 Tout d'abord, assurez-vous d'avoir des échantillons sur votre ordinateur.
 Beaucoup d'échantillons gratuits peuvent être trouvés sur internet, provenant de l'enregistrement d'instruments réels (comme une flûte, guitare, violoncelle, …) ou créés à l'aide de diverses méthodes de synthèse audio.
 
-Pour ce tutoriel, cet échantillon de flûte est fourni&nbsp;: <a href="downloads/tutorials/flute.wav" download>flute.wav</a>.
+Pour ce tutoriel, cet échantillon de flûte est fourni&nbsp;: <a href="files/flute.wav" download>flute.wav</a>.
 
 Lorsque vous l'avez, créez une nouvelle banque de sons avec Polyphone (:menuselection:`Menu --> Nouveau`) et importez l'échantillon (:guilabel:`Nouvel échantillon`).
 
@@ -63,13 +63,13 @@ Si vous n'entendez pas la transition entre le début et la fin de la boucle, cel
 Sinon, maintenez la lecture de l'échantillon avec la boucle activée et modifiez légèrement la fin et / ou le début de la boucle jusqu'à ce que vous trouviez la transition la plus douce possible.
 Écoutez les enregistrements suivants pour entendre la différence entre une mauvaise et une bonne boucle&nbsp;:
 
-* <a href="downloads/tutorials/bad-loop.mp3" download>mauvaise boucle</a>
+* <a href="files/bad-loop.mp3" download>mauvaise boucle</a>
 
-![](downloads/tutorials/bad-loop.mp3)
+![](files/bad-loop.mp3)
 
-* <a href="downloads/tutorials/good-loop.mp3" download>boucle correcte</a>
+* <a href="files/good-loop.mp3" download>boucle correcte</a>
 
-![](downloads/tutorials/good-loop.mp3)
+![](files/good-loop.mp3)
 
 
 **Note&nbsp;:** Un outil existe pour "tricher" si vous ne pouvez pas trouver de boucles facilement&nbsp;: l'outil de [bouclage automatique](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop).
@@ -101,17 +101,17 @@ Continuez en ajustant la correction.
 Pour cette étape, portez votre oreille sur les battements qui apparaissent et faites en sorte qu'ils soient le plus lent possible.
 Voici des exemples contenant le son d'une flûte et le sinus de calibration&nbsp;:
 
-* <a href="downloads/tutorials/very-bad-tune.mp3" download>très mauvais accordage</a> (la note de base est mauvaise)
+* <a href="files/very-bad-tune.mp3" download>très mauvais accordage</a> (la note de base est mauvaise)
 
-![](downloads/tutorials/very-bad-tune.mp3)
+![](files/very-bad-tune.mp3)
 
-* <a href="downloads/tutorials/bad-tune.mp3" download>mauvais accordage</a> (la correction n'est pas bonne et vous pouvez entendre des battements)
+* <a href="files/bad-tune.mp3" download>mauvais accordage</a> (la correction n'est pas bonne et vous pouvez entendre des battements)
 
-![](downloads/tutorials/bad-tune.mp3)
+![](files/bad-tune.mp3)
 
-* <a href="downloads/tutorials/good-tune.mp3" download>bon accordage</a> (les deux valeurs sont correctes)
+* <a href="files/good-tune.mp3" download>bon accordage</a> (les deux valeurs sont correctes)
 
-![](downloads/tutorials/good-tune.mp3)
+![](files/good-tune.mp3)
 
 
 **Note&nbsp;:** L'[analyse fréquentielle](manual/soundfont-editor/editing-pages/sample-editor.md#doc_fred) peut être un bon indicateur pour commencer l'accordage. Mais gardez en tête qu'il n'y a pas d'algorithme parfait pour cette tâche et que seules vos oreilles trouverons le bon accordage.
