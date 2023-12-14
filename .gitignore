@@ -1,6 +1,6 @@
-build*
-lib_*
-sources
-private
-debian
-fedora
+/build*
+/lib_*
+/sources
+/private
+/debian
+/fedora

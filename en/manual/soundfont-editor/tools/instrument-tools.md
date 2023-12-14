@@ -48,15 +48,15 @@ The intensity of the effect is expressed in number of beats per second and is ad
 ![Detuning tool](images/tool_detune.png "Detuning tool")
 
 
-Here is an example of an instrument that is <a href="downloads/tutorials/celeste_tuning_off.mp3" download>tuned</a>:
+Here is an example of an instrument that is <a href="files/celeste_tuning_off.mp3" download>tuned</a>:
 
-![](downloads/tutorials/celeste_tuning_off.mp3)
+![](files/celeste_tuning_off.mp3)
 
-And this instrument has been combined with itself in a version that is <a href="downloads/tutorials/celeste_tuning_on.mp3" download>detuned</a>:
+And this instrument has been combined with itself in a version that is <a href="files/celeste_tuning_on.mp3" download>detuned</a>:
 
-![](downloads/tutorials/celeste_tuning_on.mp3)
+![](files/celeste_tuning_on.mp3)
 
-The corresponding .sf2 file can be downloaded <a href="downloads/tutorials/celeste_tuning.sf2" download>here</a>.
+The corresponding .sf2 file can be downloaded <a href="files/celeste_tuning.sf2" download>here</a>.
 
 
 ### Key-based configuration {#doc_global}
@@ -204,15 +204,15 @@ This could be interesting for example for the creation of a choir or pads.
 ![Tool for creating chords](images/tool_create_chords.png "Tool for creating chords")
 
 
-Here is an example, <a href="downloads/tutorials/chord_base.mp3" download>before</a>:
+Here is an example, <a href="files/chord_base.mp3" download>before</a>:
 
-![](downloads/tutorials/chord_base.mp3)
+![](files/chord_base.mp3)
 
-And <a href="downloads/tutorials/chord_done.mp3" download>after</a>:
+And <a href="files/chord_done.mp3" download>after</a>:
 
-![](downloads/tutorials/chord_done.mp3)
+![](files/chord_done.mp3)
 
-An example .sf2 file, based on a flute, can be downloaded <a href="downloads/tutorials/chords.sf2" download>here</a>.
+An example .sf2 file, based on a flute, can be downloaded <a href="files/chords.sf2" download>here</a>.
 
 
 ### Division duplication {#doc_division}
@@ -245,12 +245,12 @@ Samples have to be tuned regardless the definition of the instrument (via the [s
 An option allows the automatic loop of created samples, another sets the creation interval of samples.
 Finally, it is possible to choose the type of the created sounds: mono or stereo.
 
-Here is an example, <a href="downloads/tutorials/mixture_base.mp3" download>before</a>:
+Here is an example, <a href="files/mixture_base.mp3" download>before</a>:
 
-![](downloads/tutorials/mixture_base.mp3)
+![](files/mixture_base.mp3)
 
-And <a href="downloads/tutorials/mixture_done.mp3" download>after</a>:
+And <a href="files/mixture_done.mp3" download>after</a>:
 
-![](downloads/tutorials/mixture_done.mp3)
+![](files/mixture_done.mp3)
 
-An example .sf2 file, based on an organ stop, can be downloaded <a href="downloads/tutorials/mixture.sf2" download>here</a>.
+An example .sf2 file, based on an organ stop, can be downloaded <a href="files/mixture.sf2" download>here</a>.

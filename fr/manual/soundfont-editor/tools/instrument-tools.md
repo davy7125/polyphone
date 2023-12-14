@@ -48,15 +48,15 @@ L'intensité de l'effet s'exprime en nombre de battements par seconde et est aju
 ![Outil de désaccordage](images/tool_detune.png "Outil de désaccordage")
 
 
-Voici l'exemple d'un instrument <a href="downloads/tutorials/celeste_tuning_off.mp3" download>accordé</a>&nbsp;:
+Voici l'exemple d'un instrument <a href="files/celeste_tuning_off.mp3" download>accordé</a>&nbsp;:
 
-![](downloads/tutorials/celeste_tuning_off.mp3)
+![](files/celeste_tuning_off.mp3)
 
-Et cet instrument a été combiné avec ce même instrument <a href="downloads/tutorials/celeste_tuning_on.mp3" download>désaccordé</a>&nbsp;:
+Et cet instrument a été combiné avec ce même instrument <a href="files/celeste_tuning_on.mp3" download>désaccordé</a>&nbsp;:
 
-![](downloads/tutorials/celeste_tuning_on.mp3)
+![](files/celeste_tuning_on.mp3)
 
-Le fichier .sf2 correspondant peut être téléchargé <a href="downloads/tutorials/celeste_tuning.sf2" download>ici</a>.
+Le fichier .sf2 correspondant peut être téléchargé <a href="files/celeste_tuning.sf2" download>ici</a>.
 
 
 ### Paramétrer en fonction des notes {#doc_global}
@@ -204,15 +204,15 @@ Ce peut être intéressant par exemple pour la création de chœurs ou de nappes
 ![Outil de création d'accords](images/tool_create_chords.png "Outil de création d'accords")
 
 
-Voici un exemple, <a href="downloads/tutorials/chord_base.mp3" download>avant</a>&nbsp;:
+Voici un exemple, <a href="files/chord_base.mp3" download>avant</a>&nbsp;:
 
-![](downloads/tutorials/chord_base.mp3)
+![](files/chord_base.mp3)
 
-Et <a href="downloads/tutorials/chord_done.mp3" download>après</a>&nbsp;:
+Et <a href="files/chord_done.mp3" download>après</a>&nbsp;:
 
-![](downloads/tutorials/chord_done.mp3)
+![](files/chord_done.mp3)
 
-Un fichier .sf2 d'exemple, se basant sur une flûte, peut être téléchargé <a href="downloads/tutorials/chords.sf2" download>ici</a>.
+Un fichier .sf2 d'exemple, se basant sur une flûte, peut être téléchargé <a href="files/chords.sf2" download>ici</a>.
 
 
 ### Dupliquer les divisions {#doc_division}
@@ -245,12 +245,12 @@ Les échantillons doivent être accordés sans tenir compte du paramétrage de l
 Une option permet un bouclage automatique des échantillons créés, une autre modifie l'intervalle de création des échantillons.
 Enfin, il est possible de choisir le type des sons créés&nbsp;: mono ou stéréo.
 
-Voici un exemple, <a href="downloads/tutorials/mixture_base.mp3" download>avant</a>&nbsp;:
+Voici un exemple, <a href="files/mixture_base.mp3" download>avant</a>&nbsp;:
 
-![](downloads/tutorials/mixture_base.mp3)
+![](files/mixture_base.mp3)
 
-Et <a href="downloads/tutorials/mixture_done.mp3" download>après</a>&nbsp;:
+Et <a href="files/mixture_done.mp3" download>après</a>&nbsp;:
 
-![](downloads/tutorials/mixture_done.mp3)
+![](files/mixture_done.mp3)
 
-Un fichier .sf2 d'exemple, se basant sur un jeu d'orgue, peut être téléchargé <a href="downloads/tutorials/mixture.sf2" download>ici</a>.
+Un fichier .sf2 d'exemple, se basant sur un jeu d'orgue, peut être téléchargé <a href="files/mixture.sf2" download>ici</a>.
