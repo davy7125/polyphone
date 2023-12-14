@@ -9,7 +9,7 @@ The following applications are required:
 * Xcode (available in the Apple Store),
 * <a href="https://www.qt.io/download-open-source" target="_blank">Qt Creator with its framework</a>.
 
-You also need the sources of Polyphone, available <a href="download" target="_blank">here</a> or on <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>, along with the necessary libraries you can download [here](downloads/lib_mac.zip).
+You also need the sources of Polyphone, available <a href="download" target="_blank">here</a> or on <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>, along with the necessary libraries you can download [here](files/lib_mac.zip).
 
 For correctly opening a project with Qt Creator, it must first be given the permission to read all files from your computer (in "Security and privacy" => "Full disk access" => add "Qt creator.app" which is in its installation directory).
 
