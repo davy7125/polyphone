@@ -42,6 +42,7 @@ TRANSLATIONS = polyphone_en.ts \
     polyphone_ko.ts
 CONFIG += lrelease embed_translations
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
+QMAKE_CXXFLAGS += -std=c++17
 
 QT += core gui printsupport svg network #testlib
 TARGET = polyphone
@@ -51,13 +52,13 @@ win32 {
     DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
     INCLUDEPATH += ../lib_windows/include
     RC_FILE = polyphone.rc
-    QMAKE_CXXFLAGS += -std=c++17 -ffloat-store # Compiler is MinGW for the option -ffloat-store, required by sfArk
+    QMAKE_CXXFLAGS += -ffloat-store # Compiler is MinGW for the option -ffloat-store, required by sfArk
     LIBS += -lzlib1 -lwinmm -logg -lvorbis -lvorbisfile -lvorbisenc.dll -lcrypto -lFLAC -lportaudio
     LIBS += -L$$PWD/../lib_windows/64bits
     DESTDIR = $$PWD/../lib_windows/64bits
 }
 unix:!macx {
-    QMAKE_CXXFLAGS += -std=c++11 -ffloat-store
+    QMAKE_CXXFLAGS += -ffloat-store
     DEFINES += __LINUX_ALSASEQ__ __UNIX_JACK__
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa jack portaudio-2.0 zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0
@@ -94,7 +95,6 @@ unix:!macx {
                 install_desktop install_appdata install_mime install_man install_doc
 }
 macx {
-    QMAKE_CXXFLAGS += -std=c++11
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.14
     QMAKE_MAC_SDK = macosx12.1
     DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT TARGET_OS_IPHONE=0
