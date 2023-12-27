@@ -34,7 +34,10 @@ TablePageOverview::TablePageOverview(QWidget *parent) : QTableWidget(parent)
 
     // Style of the table content
     this->setAlternatingRowColors(true);
-    this->setStyleSheet(ContextManager::theme()->getTableTheme() + "QTableWidget{border:0;}");
+    this->setStyleSheet(ContextManager::theme()->getTableTheme() +
+                        "QTableWidget{border:0;}" +
+                        "QHeaderView::down-arrow {image: url(:/icons/empty);}" +
+                        "QHeaderView::up-arrow {image: url(:/icons/empty);}");
 }
 
 OverviewTableHeaderView::OverviewTableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, parent)

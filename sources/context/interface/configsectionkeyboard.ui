@@ -74,7 +74,6 @@
     <widget class="QLabel" name="labelSubTitle2">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -150,7 +149,6 @@
     <widget class="QLabel" name="labelSubTitle1">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -178,9 +176,6 @@
      </property>
      <property name="horizontalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOn</enum>
-     </property>
-     <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContents</enum>
      </property>
      <property name="showDropIndicator" stdset="0">
       <bool>false</bool>

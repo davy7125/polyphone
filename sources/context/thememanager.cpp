@@ -752,12 +752,6 @@ QHeaderView::section {\
   padding-right: 2px;\
   border-top: 0;\
   border-left: 0;\
-}\
-QHeaderView::down-arrow {\
-  image: url(:/icons/empty);\
-}\
-QHeaderView::up-arrow {\
-  image: url(:/icons/empty);\
 }")
        .arg(this->getColor(ThemeManager::BUTTON_BACKGROUND).name())
        .arg(this->getColor(ThemeManager::BORDER).name());
