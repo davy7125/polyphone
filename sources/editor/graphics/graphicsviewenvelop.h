@@ -27,7 +27,6 @@
 
 #include <QWidget>
 #include <QPen>
-#include "soundfontmanager.h"
 #include "envelop.h"
 class GraphicsWavePainter;
 class QScrollBar;

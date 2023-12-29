@@ -24,7 +24,6 @@
 
 #include "envelop.h"
 #include <QPainter>
-#include "graphicsviewenvelop.h"
 
 Envelop::Envelop() :
     _vect1(8),
