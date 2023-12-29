@@ -284,6 +284,10 @@ SOURCES	+= main.cpp \
     extensions/extensionmanager.cpp \
     extensions/extensionmanager_midi.cpp \
     extensions/extensionmanager_view.cpp \
+    mainwindow/mainstackedwidget.cpp \
+    mainwindow/maintabbar.cpp \
+    mainwindow/maintabbarelement.cpp \
+    mainwindow/topbackground.cpp \
     repository/browser/browsersortmenu.cpp \
     repository/widgets/customtextedit.cpp \
     repository/soundfont/editor/editordialoginsertlink.cpp \
@@ -307,7 +311,6 @@ SOURCES	+= main.cpp \
     mainwindow/widgetshowhistorycell.cpp \
     mainwindow/mainwindow.cpp \
     mainwindow/windowmanager.cpp \
-    mainwindow/coloredtabwidget.cpp \
     repository/urlreader.cpp \
     repository/urlreaderjson.cpp \
     repository/repositorymanager.cpp \
@@ -491,7 +494,6 @@ SOURCES	+= main.cpp \
     repository/widgets/downloadprogresscell.cpp \
     editor/overview/sortedtablewidgetitem.cpp \
     repository/widgets/elidedlabel.cpp \
-    mainwindow/animatedbackground.cpp \
     editor/modulator/modulatoreditor.cpp \
     editor/modulator/modulatorcell.cpp \
     editor/modulator/modulatorcombocurve.cpp \
@@ -525,7 +527,6 @@ SOURCES	+= main.cpp \
     repository/soundfont/uploadingdialog.cpp \
     lib/qtsingleapplication/qtlocalpeer.cpp \
     lib/qtsingleapplication/qtsingleapplication.cpp \
-    mainwindow/tabbar.cpp \
     editor/tools/load_from_inst/toolloadfrominst.cpp \
     editor/tools/load_from_inst/toolloadfrominst_gui.cpp \
     editor/tools/load_from_inst/toolloadfrominst_parameters.cpp \
@@ -635,6 +636,10 @@ HEADERS += \
     extensions/extensionmanager.h \
     extensions/extensionmanager_midi.h \
     extensions/extensionmanager_view.h \
+    mainwindow/mainstackedwidget.h \
+    mainwindow/maintabbar.h \
+    mainwindow/maintabbarelement.h \
+    mainwindow/topbackground.h \
     repository/browser/browsersortmenu.h \
     repository/widgets/customtextedit.h \
     repository/soundfont/editor/editordialoginsertlink.h \
@@ -659,7 +664,6 @@ HEADERS += \
     mainwindow/widgetshowhistorycell.h \
     mainwindow/mainwindow.h \
     mainwindow/windowmanager.h \
-    mainwindow/coloredtabwidget.h \
     repository/urlreader.h \
     repository/urlreaderjson.h \
     repository/repositorymanager.h \
@@ -714,7 +718,6 @@ HEADERS += \
     core/input/sf2/sf2pdtapart_gen.h \
     core/input/sf2/sf2pdtapart_bag.h \
     repository/widgets/elidedlabel.h \
-    mainwindow/tabbar.h \
     editor/widgets/linkedtowidget.h \
     editor/tools/abstracttool.h \
     editor/tools/toolfactory.h \
@@ -852,7 +855,6 @@ HEADERS += \
     repository/widgets/downloadprogresscell.h \
     core/types/indexedelementlist.h \
     editor/overview/sortedtablewidgetitem.h \
-    mainwindow/animatedbackground.h \
     editor/modulator/modulatoreditor.h \
     editor/modulator/modulatorcell.h \
     editor/modulator/modulatorcombocurve.h \

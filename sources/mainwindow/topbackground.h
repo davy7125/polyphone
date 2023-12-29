@@ -22,24 +22,27 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TABBAR_H
-#define TABBAR_H
+#ifndef TOPBACKGROUND_H
+#define TOPBACKGROUND_H
 
-#include <QTabBar>
+#include <QWidget>
+class QPixmap;
 
-class TabBar : public QTabBar
+class TopBackground : public QWidget
 {
+    Q_OBJECT
+
 public:
-    TabBar(QWidget *parent = nullptr);
+    explicit TopBackground(QWidget *parent = nullptr);
+    ~TopBackground();
 
 protected:
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
 
 private:
-    int _leftOffset;
-    int _rightOffset;
+    QPixmap * _pixmapBack;
+    QPixmap * _pixmapFront;
+    QColor _bottomBorderColor;
 };
 
-#endif // TABBAR_H
+#endif // TOPBACKGROUND_H

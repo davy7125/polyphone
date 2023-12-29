@@ -45,7 +45,6 @@ public:
     ~MainWindow();
 
 public slots:
-    void slotCloseTab(int index);
     void recentSf2Changed();
     void openFiles(const QString &fileNames);
 

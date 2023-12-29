@@ -26,7 +26,7 @@
 #define WINDOWMANAGER_H
 
 #include <QObject>
-class ColoredTabWidget;
+class MainStackedWidget;
 class ConfigPanel;
 class SoundfontFilter;
 class SoundfontBrowser;
@@ -39,7 +39,7 @@ class WindowManager : public QObject
     Q_OBJECT
 
 public:
-    static WindowManager * getInstance(ColoredTabWidget * tabWidget = nullptr);
+    static WindowManager * getInstance(MainStackedWidget * stackedWidget = nullptr);
     static void kill();
 
 public slots:
@@ -86,16 +86,16 @@ private slots:
     void onFilePathChanged(QString filePath);
 
     /// Called when the user wants to close a tab
-    void onTabCloseRequested(int tabIndex);
+    void onTabCloseRequested(QWidget * widget);
 
     /// Called every time the tab changes
     void onTabIndexChanged(int tabIndex);
 
 private:
-    explicit WindowManager(ColoredTabWidget * tabWidget);
+    explicit WindowManager(MainStackedWidget * stackedWidget);
     ~WindowManager();
 
-    ColoredTabWidget * _tabWidget;
+    MainStackedWidget * _stackedWidget;
     ConfigPanel * _configTab;
     SoundfontBrowser * _browserTab;
     UserArea * _userTab;

@@ -22,46 +22,36 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef COLOREDTABWIDGET_H
-#define COLOREDTABWIDGET_H
+#ifndef MAINSTACKEDWIDGET_H
+#define MAINSTACKEDWIDGET_H
 
-#include <QTabWidget>
-#include <QMap>
-class QPushButton;
+#include <QStackedWidget>
+class MainTabBar;
 
-class ColoredTabInfo
-{
-public:
-    QColor _backgroundColor;
-    QColor _textColor;
-    QString _iconName;
-    QPushButton * _closeButton;
-};
-
-
-class ColoredTabWidget : public QTabWidget
+class MainStackedWidget : public QStackedWidget
 {
     Q_OBJECT
 
 public:
     static const QSize TAB_ICON_SIZE;
 
-    ColoredTabWidget(QWidget *parent = nullptr);
-    int addColoredTab(QWidget *widget, QString iconName, const QString &label, QColor backgroundColor, QColor textColor);
+    MainStackedWidget(QWidget *parent = nullptr);
+    void setTabBar(MainTabBar * tabBar);
+
+    int addWidgetWithTab(QWidget * widget, QString iconName, const QString &label, bool isColored);
+    void removeWidgetWithTab(QWidget * widget);
+    void setWidgetLabel(QWidget * widget, const QString &label);
+    void setWidgetToolTip(QWidget * widget, const QString &tip);
+
+signals:
+    void tabCloseRequested(QWidget * widget);
 
 private slots:
+    void onWidgetClicked(QWidget * widget);
     void onCurrentChanged(int index);
-    void onCloseButtonClicked();
 
 private:
-    void changeStyleSheet(QColor backgroundColor, QColor textColor);
-
-    QWidget * _lastWidget;
-    QColor _defaultWindowColor;
-    QColor _defaultTextColor;
-    QString _styleSheetFirstPart;
-    static QString s_styleSheetLastPart;
-    QMap<QWidget *, ColoredTabInfo> _tabInfo;
+    MainTabBar * _tabBar;
 };
 
-#endif // COLOREDTABWIDGET_H
+#endif // MAINSTACKEDWIDGET_H

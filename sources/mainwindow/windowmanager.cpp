@@ -26,7 +26,7 @@
 #include "contextmanager.h"
 #include "configpanel.h"
 #include "soundfontbrowser.h"
-#include "coloredtabwidget.h"
+#include "mainstackedwidget.h"
 #include "soundfontmanager.h"
 #include "soundfontfilter.h"
 #include "soundfontviewer.h"
@@ -44,10 +44,10 @@
 
 WindowManager * WindowManager::s_instance = nullptr;
 
-WindowManager * WindowManager::getInstance(ColoredTabWidget * tabWidget)
+WindowManager * WindowManager::getInstance(MainStackedWidget * stackedWidget)
 {
     if (s_instance == nullptr)
-        s_instance = new WindowManager(tabWidget);
+        s_instance = new WindowManager(stackedWidget);
     return s_instance;
 }
 
@@ -57,16 +57,16 @@ void WindowManager::kill()
     s_instance = nullptr;
 }
 
-WindowManager::WindowManager(ColoredTabWidget *tabWidget) : QObject(nullptr),
-    _tabWidget(tabWidget),
+WindowManager::WindowManager(MainStackedWidget * stackedWidget) : QObject(nullptr),
+    _stackedWidget(stackedWidget),
     _configTab(new ConfigPanel()),
     _browserTab(new SoundfontBrowser()),
     _userTab(new UserArea())
 {
     SoundfontManager * sf2 = SoundfontManager::getInstance();
     connect(sf2, SIGNAL(editingDone(QString,QList<int>)), this, SLOT(editingDone(QString,QList<int>)));
-    connect(_tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(onTabCloseRequested(int)));
-    connect(_tabWidget, SIGNAL(currentChanged(int)), this, SLOT(onTabIndexChanged(int)));
+    connect(_stackedWidget, SIGNAL(tabCloseRequested(QWidget*)), this, SLOT(onTabCloseRequested(QWidget*)));
+    connect(_stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(onTabIndexChanged(int)));
 }
 
 WindowManager::~WindowManager()
@@ -74,8 +74,11 @@ WindowManager::~WindowManager()
     delete _configTab;
     delete _browserTab;
     delete _userTab;
-    while (_tabWidget->count() > 0)
-        _tabWidget->removeTab(0);
+    while (_stackedWidget->count() > 0)
+    {
+        QWidget * widget = _stackedWidget->widget(0);
+        _stackedWidget->removeWidgetWithTab(widget);
+    }
     QApplication::processEvents();
     while (!_editors.isEmpty())
         delete _editors.takeFirst();
@@ -86,21 +89,17 @@ WindowManager::~WindowManager()
 void WindowManager::openConfiguration()
 {
     _configTab->initializeInterface();
-    int index = _tabWidget->indexOf(_configTab);
+    int index = _stackedWidget->indexOf(_configTab);
     if (index == -1)
-        index = _tabWidget->addColoredTab(_configTab, ":/icons/settings.svg", tr("Settings"),
-                                          ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
-                                          ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT));
-    _tabWidget->setCurrentIndex(index);
+        index = _stackedWidget->addWidgetWithTab(_configTab, ":/icons/settings.svg", tr("Settings"), false);
+    _stackedWidget->setCurrentIndex(index);
 }
 
 void WindowManager::openNewSoundfont()
 {
     // Create a new editor
     Editor * editor = new Editor();
-    int index = _tabWidget->addColoredTab(editor, ":/icons/file-audio.svg", "",
-                                          ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                                          ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
+    int index = _stackedWidget->addWidgetWithTab(editor, ":/icons/file-audio.svg", "", true);
     connect(editor, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
     connect(editor, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
     connect(editor, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
@@ -109,7 +108,7 @@ void WindowManager::openNewSoundfont()
 
     // Initialize and display it
     editor->initialize(InputFactory::getInput(""));
-    _tabWidget->setCurrentIndex(index);
+    _stackedWidget->setCurrentIndex(index);
 }
 
 void WindowManager::openSoundfont(QString fileName)
@@ -119,7 +118,7 @@ void WindowManager::openSoundfont(QString fileName)
     // Extension supported?
     if (!InputFactory::isSuffixSupported(QFileInfo(fileName).suffix()))
     {
-        QMessageBox::warning(_tabWidget, tr("Warning"),
+        QMessageBox::warning(_stackedWidget, tr("Warning"),
                              tr("Cannot open file \"%1\"").arg(fileName));
         return;
     }
@@ -146,8 +145,8 @@ void WindowManager::openSoundfont(QString fileName)
         {
             if (editor->getSf2Index() == indexSf2)
             {
-                int index = _tabWidget->indexOf(editor);
-                _tabWidget->setCurrentIndex(index);
+                int index = _stackedWidget->indexOf(editor);
+                _stackedWidget->setCurrentIndex(index);
                 return;
             }
         }
@@ -155,9 +154,7 @@ void WindowManager::openSoundfont(QString fileName)
 
     // Otherwise, create a new editor
     Editor * editor = new Editor();
-    int index = _tabWidget->addColoredTab(editor, ":/icons/file-audio.svg", QFileInfo(fileName).fileName(),
-                                          ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                                          ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
+    int index = _stackedWidget->addWidgetWithTab(editor, ":/icons/file-audio.svg", QFileInfo(fileName).fileName(), true);
     connect(editor, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
     connect(editor, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
     connect(editor, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
@@ -165,7 +162,7 @@ void WindowManager::openSoundfont(QString fileName)
     _editors << editor;
 
     // Initialize and display it
-    _tabWidget->setCurrentIndex(index);
+    _stackedWidget->setCurrentIndex(index);
     editor->initialize(InputFactory::getInput(fileName));
 }
 
@@ -176,12 +173,10 @@ void WindowManager::openRepository(SoundfontFilter *filter)
         _browserTab->applyFilter(filter);
         delete filter;
     }
-    int index = _tabWidget->indexOf(_browserTab);
+    int index = _stackedWidget->indexOf(_browserTab);
     if (index == -1)
-        index = _tabWidget->addColoredTab(_browserTab, ":/icons/globe.svg", tr("Online repository"),
-                                          ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                                          ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
-    _tabWidget->setCurrentIndex(index);
+        index = _stackedWidget->addWidgetWithTab(_browserTab, ":/icons/globe.svg", tr("Online repository"), true);
+    _stackedWidget->setCurrentIndex(index);
 }
 
 void WindowManager::editingDone(QString source, QList<int> sf2Indexes)
@@ -194,24 +189,17 @@ void WindowManager::editingDone(QString source, QList<int> sf2Indexes)
 
 void WindowManager::onTabTitleChanged(QString title)
 {
-    int index = _tabWidget->indexOf(dynamic_cast<Editor*>(QObject::sender()));
-    if (index != -1)
-    {
-        int maxTabTitleSize = 30;
-        _tabWidget->setTabText(index, title.size() > maxTabTitleSize ? title.left(maxTabTitleSize - 3) + "..." : title);
-    }
+    int maxTabTitleSize = 30;
+    _stackedWidget->setWidgetLabel(dynamic_cast<Editor*>(QObject::sender()), title.size() > maxTabTitleSize ? title.left(maxTabTitleSize - 3) + "..." : title);
 }
 
 void WindowManager::onFilePathChanged(QString filePath)
 {
-    int index = _tabWidget->indexOf(dynamic_cast<Editor*>(QObject::sender()));
-    if (index != -1)
-        _tabWidget->setTabToolTip(index, filePath);
+    _stackedWidget->setWidgetToolTip(dynamic_cast<Editor*>(QObject::sender()), filePath);
 }
 
-void WindowManager::onTabCloseRequested(int tabIndex)
+void WindowManager::onTabCloseRequested(QWidget * widget)
 {
-    QWidget * widget = _tabWidget->widget(tabIndex);
     SoundfontManager * sf2 = SoundfontManager::getInstance();
     if (_editors.contains(dynamic_cast<Editor*>(widget)))
     {
@@ -223,7 +211,7 @@ void WindowManager::onTabCloseRequested(int tabIndex)
         EltID id(elementSf2, editor->getSf2Index());
         if (sf2->isEdited(id.indexSf2))
         {
-            QMessageBox msgBox(_tabWidget);
+            QMessageBox msgBox(_stackedWidget);
             msgBox.setIcon(QMessageBox::Warning);
             id.typeElement = elementSf2;
             msgBox.setText("<b>" + tr("Save before exiting?") + "</b>");
@@ -258,7 +246,7 @@ void WindowManager::onTabCloseRequested(int tabIndex)
 
         // Delete the editor
         _editors.removeAll(editor);
-        _tabWidget->removeTab(tabIndex);
+        _stackedWidget->removeWidgetWithTab(widget);
         delete editor;
 
         // Mute all sounds produced by the soundfont, if any
@@ -270,38 +258,38 @@ void WindowManager::onTabCloseRequested(int tabIndex)
 
         if (_editors.empty())
         {
-            recorderDisplayChanged(false);
-            keyboardDisplayChanged(false);
+            emit(recorderDisplayChanged(false));
+            emit(keyboardDisplayChanged(false));
         }
     }
     else if (widget == dynamic_cast<QWidget*>(_configTab))
     {
         // Close the configurations
-        _tabWidget->removeTab(tabIndex);
+        _stackedWidget->removeWidgetWithTab(_configTab);
     }
     else if (widget == dynamic_cast<QWidget*>(_browserTab))
     {
         // Close the soundfont browser
-        _tabWidget->removeTab(tabIndex);
+        _stackedWidget->removeWidgetWithTab(_browserTab);
     }
     else if (widget == dynamic_cast<QWidget*>(_userTab))
     {
         // Close the user area
-        _tabWidget->removeTab(tabIndex);
+        _stackedWidget->removeWidgetWithTab(_userTab);
     }
     else if (_viewers.contains(dynamic_cast<SoundfontViewer*>(widget)))
     {
         // Close a soundfont from the repository
         SoundfontViewer * viewer = dynamic_cast<SoundfontViewer*>(widget);
         _viewers.removeAll(viewer);
-        _tabWidget->removeTab(tabIndex);
+        _stackedWidget->removeWidgetWithTab(widget);
         delete viewer;
     }
 }
 
 int WindowManager::getCurrentSf2()
 {
-    QWidget * widget = _tabWidget->currentWidget();
+    QWidget * widget = _stackedWidget->currentWidget();
     if (_editors.contains(dynamic_cast<Editor*>(widget)))
     {
         Editor * editor = dynamic_cast<Editor*>(widget);
@@ -312,24 +300,22 @@ int WindowManager::getCurrentSf2()
 
 void WindowManager::closeCurrentTab()
 {
-    this->onTabCloseRequested(_tabWidget->currentIndex());
+    this->onTabCloseRequested(_stackedWidget->currentWidget());
 }
 
 void WindowManager::onTabIndexChanged(int tabIndex)
 {
-    QWidget * widget = _tabWidget->widget(tabIndex);
+    QWidget * widget = _stackedWidget->widget(tabIndex);
     emit(editorOpen(_editors.contains(dynamic_cast<Editor*>(widget))));
 }
 
 void WindowManager::openUser()
 {
     _userTab->initializeInterface();
-    int index = _tabWidget->indexOf(_userTab);
+    int index = _stackedWidget->indexOf(_userTab);
     if (index == -1)
-        index = _tabWidget->addColoredTab(_userTab, ":/icons/user.svg", tr("User area"),
-                                          ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
-                                          ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT));
-    _tabWidget->setCurrentIndex(index);
+        index = _stackedWidget->addWidgetWithTab(_userTab, ":/icons/user.svg", tr("User area"), false);
+    _stackedWidget->setCurrentIndex(index);
 }
 
 void WindowManager::openRepositorySoundfont(int id)
@@ -339,8 +325,8 @@ void WindowManager::openRepositorySoundfont(int id)
     {
         if (viewer->getSoundfontId() == id)
         {
-            int index = _tabWidget->indexOf(viewer);
-            _tabWidget->setCurrentIndex(index);
+            int index = _stackedWidget->indexOf(viewer);
+            _stackedWidget->setCurrentIndex(index);
             return;
         }
     }
@@ -355,12 +341,10 @@ void WindowManager::openRepositorySoundfont(int id)
     // Create a new viewer
     SoundfontViewer * viewer = new SoundfontViewer();
     connect(viewer, SIGNAL(itemClicked(SoundfontFilter*)), this, SLOT(openRepository(SoundfontFilter*)));
-    int index = _tabWidget->addColoredTab(viewer, ":/icons/file-description.svg", title,
-                                          ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                                          ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
+    int index = _stackedWidget->addWidgetWithTab(viewer, ":/icons/file-description.svg", title, true);
     _viewers << viewer;
 
     // Initialize and display it
     viewer->initialize(id, false);
-    _tabWidget->setCurrentIndex(index);
+    _stackedWidget->setCurrentIndex(index);
 }

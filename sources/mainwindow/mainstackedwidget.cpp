@@ -22,38 +22,59 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "animatedbackground.h"
-#include <QPainter>
-#include <QDateTime>
+#include "mainstackedwidget.h"
+#include "maintabbar.h"
 
-AnimatedBackground::AnimatedBackground(QWidget *parent) : QWidget(parent),
-    _pixmap(nullptr)
+MainStackedWidget::MainStackedWidget(QWidget *parent) : QStackedWidget(parent),
+    _tabBar(nullptr)
 {
-    QDate today = QDateTime::currentDateTime().date();
 
-    if (today.month() == 12 && today.day() > 24) // Between christmas and new year
-        _pixmap = new QPixmap(":/banners/christmas.png");
-    else if (today.month() == 10 && today.day() == 31) // Halloween
-        _pixmap = new QPixmap(":/banners/halloween.png");
-    else if (today.month() == 2 && today.day() == 14) // Valentine's day
-        _pixmap = new QPixmap(":/banners/valentine.png");
-    else if (today.month() == 6 && today.day() == 21) // Summer
-        _pixmap = new QPixmap(":/banners/music.png");
 }
 
-AnimatedBackground::~AnimatedBackground()
+void MainStackedWidget::setTabBar(MainTabBar * tabBar)
 {
-    delete _pixmap;
+    // This stacked widget is driven by a tabBar
+    _tabBar = tabBar;
+    connect(_tabBar, SIGNAL(widgetClicked(QWidget*)), SLOT(onWidgetClicked(QWidget*)));
+    connect(_tabBar, SIGNAL(closeClicked(QWidget*)), this, SIGNAL(tabCloseRequested(QWidget*)));
+
+    // Notify the tabbar that the current index changes
+    connect(this, SIGNAL(currentChanged(int)), this, SLOT(onCurrentChanged(int)));
+
+    // Add the first tab: home
+    _tabBar->addWidget(this->widget(0), ":/icons/home.svg", "", false, true);
 }
 
-void AnimatedBackground::paintEvent(QPaintEvent *event)
+int MainStackedWidget::addWidgetWithTab(QWidget *widget, QString iconName, const QString &label, bool isColored)
 {
-    if (_pixmap)
-    {
-        QPainter p(this);
-        for (int i = 0; i < this->width() / _pixmap->width() + 1; i++)
-            p.drawPixmap(i * _pixmap->width(), 0, *_pixmap);
-    }
+    int index = this->addWidget(widget);
+    _tabBar->addWidget(widget, iconName, label, isColored, false);
+    return index;
+}
 
-    QWidget::paintEvent(event);
+void MainStackedWidget::removeWidgetWithTab(QWidget * widget)
+{
+    _tabBar->removeWidget(widget);
+    this->removeWidget(widget);
+}
+
+void MainStackedWidget::onWidgetClicked(QWidget * widget)
+{
+    // Change the current widget
+    this->setCurrentWidget(widget);
+}
+
+void MainStackedWidget::onCurrentChanged(int index)
+{
+    _tabBar->currentWidgetChanged(this->widget(index));
+}
+
+void MainStackedWidget::setWidgetLabel(QWidget * widget, const QString &label)
+{
+    _tabBar->setWidgetLabel(widget, label);
+}
+
+void MainStackedWidget::setWidgetToolTip(QWidget * widget, const QString &tip)
+{
+    _tabBar->setWidgetToolTip(widget, tip);
 }

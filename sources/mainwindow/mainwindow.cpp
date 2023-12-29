@@ -32,7 +32,6 @@
 #include "dialogchangelog.h"
 #include "dialogkeyboard.h"
 #include "dialogrecorder.h"
-#include "toprightwidget.h"
 #include "editortoolbar.h"
 #include <QToolButton>
 #include <QDesktopServices>
@@ -67,16 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
     restoreGeometry(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "windowGeometry", QByteArray()).toByteArray());
     restoreState(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "windowState", QByteArray()).toByteArray());
 
-    // Background
-    this->setStyleSheet(QString("#centralwidget{background-image: url(:/misc/") +
-                        (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
-                             "background_dark.png" : "background.png") + ");}");
-
     // Icons
-    QMap<QString, QString> replacement;
-    replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name();
-    replacement["secondColor"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
-    ui->tabWidget->setTabIcon(0, ContextManager::theme()->getColoredSvg(":/icons/home.svg", ColoredTabWidget::TAB_ICON_SIZE, replacement));
     QSize iconSize(36, 36);
     ui->pushButtonNew->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-new.svg", iconSize, ThemeManager::BUTTON_TEXT));
     ui->pushButtonOpen->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", iconSize, ThemeManager::BUTTON_TEXT));
@@ -87,38 +77,29 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButtonSoundfonts->setIcon(ContextManager::theme()->getColoredSvg(":/icons/globe.svg", iconSize, ThemeManager::BUTTON_TEXT));
 
     // Top right widget
-    TopRightWidget * trw = new TopRightWidget(this);
-    ui->tabWidget->setCornerWidget(trw, Qt::Corner::TopRightCorner);
-    connect(trw, SIGNAL(newClicked()), this, SLOT(on_pushButtonNew_clicked()));
-    connect(trw, SIGNAL(openClicked()), this, SLOT(on_pushButtonOpen_clicked()));
-    connect(trw, SIGNAL(openSettingsClicked()), this, SLOT(on_pushButtonSettings_clicked()));
-    connect(trw, SIGNAL(onlineHelpClicked()), this, SLOT(on_pushButtonDocumentation_clicked()));
-    connect(trw, SIGNAL(aboutClicked()), this, SLOT(onAboutClicked()));
-    connect(trw, SIGNAL(closeFileClicked()), this, SLOT(onCloseFile()));
-    connect(trw, SIGNAL(closeClicked()), this, SLOT(close()));
-    connect(trw, SIGNAL(save()), this, SLOT(onSave()));
-    connect(trw, SIGNAL(saveAs()), this, SLOT(onSaveAs()));
-    connect(trw, SIGNAL(fullScreenTriggered()), this, SLOT(fullScreenTriggered()));
-    connect(trw, SIGNAL(userClicked()), this, SLOT(onUserClicked()));
-
-    // Remove the close button of the first tab "home"
-    if (ui->tabWidget->tabBar()->tabButton(0, QTabBar::RightSide))
-        ui->tabWidget->tabBar()->tabButton(0, QTabBar::RightSide)->deleteLater();
-    ui->tabWidget->tabBar()->setTabButton(0, QTabBar::RightSide, nullptr);
-    if (ui->tabWidget->tabBar()->tabButton(0, QTabBar::LeftSide))
-        ui->tabWidget->tabBar()->tabButton(0, QTabBar::LeftSide)->deleteLater();
-    ui->tabWidget->tabBar()->setTabButton(0, QTabBar::LeftSide, nullptr);
+    connect(ui->topRightWidget, SIGNAL(newClicked()), this, SLOT(on_pushButtonNew_clicked()));
+    connect(ui->topRightWidget, SIGNAL(openClicked()), this, SLOT(on_pushButtonOpen_clicked()));
+    connect(ui->topRightWidget, SIGNAL(openSettingsClicked()), this, SLOT(on_pushButtonSettings_clicked()));
+    connect(ui->topRightWidget, SIGNAL(onlineHelpClicked()), this, SLOT(on_pushButtonDocumentation_clicked()));
+    connect(ui->topRightWidget, SIGNAL(aboutClicked()), this, SLOT(onAboutClicked()));
+    connect(ui->topRightWidget, SIGNAL(closeFileClicked()), this, SLOT(onCloseFile()));
+    connect(ui->topRightWidget, SIGNAL(closeClicked()), this, SLOT(close()));
+    connect(ui->topRightWidget, SIGNAL(save()), this, SLOT(onSave()));
+    connect(ui->topRightWidget, SIGNAL(saveAs()), this, SLOT(onSaveAs()));
+    connect(ui->topRightWidget, SIGNAL(fullScreenTriggered()), this, SLOT(fullScreenTriggered()));
+    connect(ui->topRightWidget, SIGNAL(userClicked()), this, SLOT(onUserClicked()));
 
     //////////////////////
     /// INITIALIZATION ///
     //////////////////////
 
     // Window manager
-    _windowManager = WindowManager::getInstance(ui->tabWidget);
+    ui->stackedWidget->setTabBar(ui->tabBar);
+    _windowManager = WindowManager::getInstance(ui->stackedWidget);
     connect(ui->widgetShowSoundfonts, SIGNAL(itemClicked(SoundfontFilter*)), _windowManager, SLOT(openRepository(SoundfontFilter*)));
     connect(_windowManager, SIGNAL(keyboardDisplayChanged(bool)), this, SLOT(onKeyboardDisplayChange(bool)));
     connect(_windowManager, SIGNAL(recorderDisplayChanged(bool)), this, SLOT(onRecorderDisplayChange(bool)));
-    connect(_windowManager, SIGNAL(editorOpen(bool)), trw, SLOT(onEditorOpen(bool)));
+    connect(_windowManager, SIGNAL(editorOpen(bool)), ui->topRightWidget, SLOT(onEditorOpen(bool)));
 
 #ifdef NO_SF2_REPOSITORY
     ui->widgetRepo->hide();
@@ -240,11 +221,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
             break;
         }
     }
-}
-
-void MainWindow::slotCloseTab(int index)
-{
-    delete ui->tabWidget->widget(index);
 }
 
 void MainWindow::recentSf2Changed()

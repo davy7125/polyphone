@@ -22,25 +22,47 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ANIMATEDBACKGROUND_H
-#define ANIMATEDBACKGROUND_H
+#ifndef MAINTABBAR_H
+#define MAINTABBAR_H
 
 #include <QWidget>
-class QPixmap;
+#include <QVector>
+class MainTabBarElement;
 
-class AnimatedBackground : public QWidget
+class MainTabBar : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit AnimatedBackground(QWidget *parent = nullptr);
-    ~AnimatedBackground();
+    MainTabBar(QWidget *parent = nullptr);
+
+    void addWidget(QWidget * widget, QString iconName, QString label, bool isColored, bool isFirst);
+    void removeWidget(QWidget * widget);
+    void setWidgetLabel(QWidget * widget, const QString &label);
+    void setWidgetToolTip(QWidget * widget, const QString &tip);
+    void currentWidgetChanged(QWidget * widget);
+
+    QSize minimumSizeHint() const override;
+
+signals:
+    void widgetClicked(QWidget * widget);
+    void closeClicked(QWidget * widget);
 
 protected:
+    bool event(QEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
-    QPixmap * _pixmap;
+    int itemAt(const QPoint &pos);
+    void moveItemTo(const QPoint &pos);
+
+    QVector<MainTabBarElement *> _tabs;
+    int _currentItemInMotion;
+    int _indexOfTabToClose;
 };
 
-#endif // ANIMATEDBACKGROUND_H
+#endif // MAINTABBAR_H
