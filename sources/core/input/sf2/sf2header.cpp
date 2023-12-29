@@ -114,6 +114,11 @@ QDataStream & operator >> (QDataStream &in, Sf2Header &header)
             if (count > 1)
                 buffer.resize(length - count + 1);
 
+            // Truncate if '\0' is found
+            int nullIndex = buffer.indexOf('\0');
+            if (nullIndex != -1)
+                buffer.truncate(nullIndex);
+
             if (bloc == "ICMT")
             {
                 // Consider first it is UTF-8 text
