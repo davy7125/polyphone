@@ -51,7 +51,6 @@ OverviewTableHeaderView::OverviewTableHeaderView(QWidget *parent) : QHeaderView(
     // Text in bold
     this->setHighlightSections(false);
     QFont font = this->font();
-    font.setPointSize(10);
     font.setBold(true);
     this->setFont(font);
 

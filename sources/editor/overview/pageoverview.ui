@@ -31,11 +31,6 @@
    </property>
    <item row="0" column="0">
     <widget class="TablePageOverview" name="table">
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
