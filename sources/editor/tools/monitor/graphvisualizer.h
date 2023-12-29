@@ -47,9 +47,8 @@ public:
                 && o == this)
         {
             QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(e);
-            QPoint pos = mouseEvent->pos();
             if (mouseEvent->type() == QEvent::MouseMove)
-                this->mouseMoved(pos);
+                this->mouseMoved(mouseEvent->pos());
             else if (mouseEvent->type() == QEvent::Leave)
                 this->mouseLeft();
             return true;
