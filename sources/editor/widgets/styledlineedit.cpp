@@ -42,7 +42,10 @@ StyledLineEdit::StyledLineEdit(QWidget * parent) : QLineEdit(parent),
 void StyledLineEdit::setTextToElide(const QString text)
 {
     this->setText(text);
-    this->resizeEvent(nullptr);
+
+    // Initial width
+    this->setMinimumWidth(sizeHint().width());
+    this->setMinimumWidth(0);
 }
 
 void StyledLineEdit::focusInEvent(QFocusEvent *e)
@@ -118,11 +121,11 @@ QSize StyledLineEdit::sizeHint() const
     return QSize(width, QLineEdit::sizeHint().height());
 }
 
-void StyledLineEdit::resizeEvent(QResizeEvent * event)
+void StyledLineEdit::resizeEvent(QResizeEvent * e)
 {
     // Compute the text to display
     QFontMetrics metrics(this->font());
-    int width = (event == nullptr ? this->width() : event->size().width());
+    int width = (e == nullptr ? this->width() : e->size().width());
     QString elidedText = metrics.elidedText(_fullText, Qt::ElideRight, width - 10);
 
     // Display the elided text
@@ -130,6 +133,6 @@ void StyledLineEdit::resizeEvent(QResizeEvent * event)
     this->setText(elidedText);
     this->blockSignals(false);
 
-    if (event != nullptr)
-        QLineEdit::resizeEvent(event);
+    if (e != nullptr)
+        QLineEdit::resizeEvent(e);
 }

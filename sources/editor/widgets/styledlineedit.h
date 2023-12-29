@@ -51,10 +51,10 @@ signals:
     void focussed(bool hasFocus);
 
 protected:
-    void focusInEvent(QFocusEvent *e) override;
-    void focusOutEvent(QFocusEvent *e) override;
+    void focusInEvent(QFocusEvent * e) override;
+    void focusOutEvent(QFocusEvent * e) override;
     void keyPressEvent(QKeyEvent * e) override;
-    void resizeEvent(QResizeEvent * event) override;
+    void resizeEvent(QResizeEvent * e) override;
 
 private slots:
     void onTextEdited(QString text);
