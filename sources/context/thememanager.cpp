@@ -599,7 +599,7 @@ QList<ThemeManager::ColorTheme> ThemeManager::getThemes()
     theme9.setColor(BUTTON_TEXT, QColor(76, 76, 76));
     theme9.setColor(LIST_BACKGROUND, QColor(255, 255, 255));
     theme9.setColor(LIST_ALTERNATIVE_BACKGROUND, QColor(247, 247, 247));
-    theme9.setColor(LIST_TEXT, QColor(76, 76, 76));
+    theme9.setColor(LIST_TEXT, QColor(32, 32, 32));
     theme9.setColor(HIGHLIGHTED_BACKGROUND, QColor(240, 131, 87));
     theme9.setColor(HIGHLIGHTED_TEXT, QColor(255, 255, 255));
     themes << theme9;

@@ -94,7 +94,6 @@ public:
 
     /// Get the palette of the application
     QPalette getPalette() { return _customPaletteEnabled ? _customPalette : _defaultPalette; }
-    bool isCustomPaletteEnabled() { return _customPaletteEnabled; }
 
     /// Return true if the background is darker than the text
     bool isDark(ColorType backgroundType, ColorType textType);

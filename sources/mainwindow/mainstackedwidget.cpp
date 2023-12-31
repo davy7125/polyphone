@@ -45,14 +45,13 @@ void MainStackedWidget::setControls(QPushButton * pushHome, MainTabBar * tabBar)
     // Home button style
     _homeIcon = ContextManager::theme()->getColoredSvg(
         ":/icons/home.svg", QSize(28, 28),
-        ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
-            ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND);
+        ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
+            ThemeManager::LIST_TEXT : ThemeManager::LIST_BACKGROUND);
     _homeIconEnabled = ContextManager::theme()->getColoredSvg(":/icons/home.svg", QSize(28, 28), ThemeManager::HIGHLIGHTED_BACKGROUND);
     _pushHome->setIcon(_homeIconEnabled);
-    if (ContextManager::theme()->isCustomPaletteEnabled())
-        pushHome->setStyleSheet("QPushButton{margin: 0 0 6px 0;padding: 3px;background-color:#000;border-radius: 3px;}");
-    else
-        pushHome->setStyleSheet("QPushButton{margin: 0 0 6px 0;padding: 3px;border-radius: 3px;}");
+    pushHome->setStyleSheet(QString("QPushButton{margin: 0 0 6px 0;padding: 3px;background-color:%1;border-radius: 3px;}")
+                                .arg(ContextManager::theme()->getColor(ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
+                                                                           ThemeManager::LIST_BACKGROUND : ThemeManager::LIST_TEXT).name()));
 
     // Notify the tabbar that the current index changes
     connect(this, SIGNAL(currentChanged(int)), this, SLOT(onCurrentChanged(int)));

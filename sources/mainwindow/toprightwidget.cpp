@@ -38,20 +38,12 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
     // Main menu button style
     _iconMenuOpen = ContextManager::theme()->getColoredSvg(
         ":/icons/menu.svg", QSize(28, 28), ThemeManager::HIGHLIGHTED_BACKGROUND);
-
-    if (ContextManager::theme()->isCustomPaletteEnabled())
-    {
-        _iconMenuClosed = ContextManager::theme()->getColoredSvg(
-            ":/icons/menu.svg", QSize(28, 28), ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
-                ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND);
-        ui->toolButton->setStyleSheet("QToolButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)} QToolButton{margin: 0 0 6px 0;padding: 3px;background-color:#000;border-radius: 3px}");
-    }
-    else
-    {
-        _iconMenuClosed = ContextManager::theme()->getColoredSvg(
-            ":/icons/menu.svg", QSize(28, 28), ThemeManager::WINDOW_TEXT);
-        ui->toolButton->setStyleSheet("QToolButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)} QToolButton{margin: 0 0 6px 0;padding: 3px;border-radius: 3px}");
-    }
+    _iconMenuClosed = ContextManager::theme()->getColoredSvg(
+        ":/icons/menu.svg", QSize(28, 28), ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
+            ThemeManager::LIST_TEXT : ThemeManager::LIST_BACKGROUND);
+    ui->toolButton->setStyleSheet(QString("QToolButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)} QToolButton{margin: 0 0 6px 0;padding: 3px;background-color:%1;border-radius: 3px}")
+                                      .arg(ContextManager::theme()->getColor(ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
+                                                                                 ThemeManager::LIST_BACKGROUND : ThemeManager::LIST_TEXT).name()));
     menuClosed();
 
     // User button
