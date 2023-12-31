@@ -78,7 +78,7 @@ private:
     QString _toolTip;
     bool _isEnabled;
 
-    // Colors, gradients and icons
+    // Colors and icons
     QColor _highlightColor;
     QColor _borderColor;
     QColor _textColor;

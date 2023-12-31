@@ -156,7 +156,7 @@ void MainTabBarElement::draw(QPainter &painter, int translateX, int height)
     else
     {
         // Bottom border visible
-        painter.setPen(QPen(_borderColor, 1));
+        painter.setPen(QPen(_borderColor, 2));
         painter.drawLine(x, height, x + _width, height);
     }
 
