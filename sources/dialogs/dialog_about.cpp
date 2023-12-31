@@ -40,7 +40,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
     QMap<QString, QString> replacement;
     replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name();
     replacement["secondColor"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
-    ui->labelIcon->setPixmap(ContextManager::theme()->getColoredSvg(":/misc/logo.svg", QSize(128, 128), replacement));
+    ui->labelIcon->setPixmap(QPixmap(":/misc/polyphone.png").scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     // Description
     QString yearRange = QString("2013 - ") + CURRENT_YEAR;

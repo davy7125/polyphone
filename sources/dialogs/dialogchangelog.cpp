@@ -42,7 +42,7 @@ DialogChangeLog::DialogChangeLog(QWidget *parent) :
     QMap<QString, QString> replacement;
     replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name();
     replacement["secondColor"] = highlightColor.name();
-    ui->labelLogo->setPixmap(ContextManager::theme()->getColoredSvg(":/misc/logo.svg", QSize(100, 100), replacement));
+    ui->labelLogo->setPixmap(QPixmap(":/misc/polyphone.png").scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     // Version
     ui->labelTitle->setText(tr("Thank you for having installed") + "\n" +

@@ -61,7 +61,7 @@ Editor::Editor(QWidget *parent) : QWidget(parent),
     QMap<QString, QString> replacement;
     replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name();
     replacement["secondColor"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
-    ui->iconLogo->setPixmap(ContextManager::theme()->getColoredSvg(":/misc/logo.svg", QSize(128, 128), replacement));
+    ui->iconLogo->setPixmap(QPixmap(":/misc/polyphone.png").scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     QString resetHoverColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name();
     ui->stackedFooter->setStyleSheet("QStackedWidget, QLabel{background-color:" +

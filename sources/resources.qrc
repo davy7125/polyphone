@@ -96,7 +96,6 @@
         <file>changelog</file>
         <file alias="background.png">resources/background.png</file>
         <file alias="background_dark.png">resources/background_dark.png</file>
-        <file alias="logo.svg">resources/logo.svg</file>
         <file alias="polyphone.png">resources/polyphone.png</file>
         <file alias="spinner.svg">resources/spinner.svg</file>
         <file alias="decoration.svg">resources/decoration.svg</file>
