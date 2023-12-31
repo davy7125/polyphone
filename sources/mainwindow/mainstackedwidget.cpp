@@ -86,6 +86,7 @@ void MainStackedWidget::onCurrentChanged(int index)
 {
     _tabBar->currentWidgetChanged(this->widget(index));
     _pushHome->setIcon(index == 0 ? _homeIconEnabled : _homeIcon);
+    _pushHome->setCursor(index == 0 ? Qt::ArrowCursor : Qt::PointingHandCursor);
 }
 
 void MainStackedWidget::setWidgetLabel(QWidget * widget, const QString &label)
