@@ -80,6 +80,7 @@ void TreeItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         return;
 
     // Draw an entry depending on the type of the element to display
+    painter->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
     EltID currentId = index.data(Qt::UserRole).value<EltID>();
     bool highlighted = option.state & QStyle::State_Selected;
     switch (currentId.typeElement)
