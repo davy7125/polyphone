@@ -64,11 +64,15 @@ private slots:
     void downloadCleared();
     void progressChanged(int percent, int soundfontId, QString soundfontName, QString finalFileName);
     void downloadCanceled(int soundfontId);
+    void menuOpened();
+    void menuClosed();
 
 private:
     Ui::TopRightWidget *ui;
     MainMenu * _menu;
     QMap<QString, QString> _colorReplacement;
+    QPixmap _iconMenuClosed;
+    QPixmap _iconMenuOpen;
 };
 
 #endif // TOPRIGHTWIDGET_H

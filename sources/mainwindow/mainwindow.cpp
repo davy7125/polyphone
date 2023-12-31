@@ -94,7 +94,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //////////////////////
 
     // Window manager
-    ui->stackedWidget->setTabBar(ui->tabBar);
+    ui->stackedWidget->setControls(ui->pushHome, ui->tabBar);
     _windowManager = WindowManager::getInstance(ui->stackedWidget);
     connect(ui->widgetShowSoundfonts, SIGNAL(itemClicked(SoundfontFilter*)), _windowManager, SLOT(openRepository(SoundfontFilter*)));
     connect(_windowManager, SIGNAL(keyboardDisplayChanged(bool)), this, SLOT(onKeyboardDisplayChange(bool)));

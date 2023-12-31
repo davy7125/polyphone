@@ -24,6 +24,8 @@
 
 #include "mainstackedwidget.h"
 #include "maintabbar.h"
+#include "qpushbutton.h"
+#include "contextmanager.h"
 
 MainStackedWidget::MainStackedWidget(QWidget *parent) : QStackedWidget(parent),
     _tabBar(nullptr)
@@ -31,24 +33,35 @@ MainStackedWidget::MainStackedWidget(QWidget *parent) : QStackedWidget(parent),
 
 }
 
-void MainStackedWidget::setTabBar(MainTabBar * tabBar)
+void MainStackedWidget::setControls(QPushButton * pushHome, MainTabBar * tabBar)
 {
-    // This stacked widget is driven by a tabBar
+    // This stacked widget is driven by a tabBar and a push button
     _tabBar = tabBar;
     connect(_tabBar, SIGNAL(widgetClicked(QWidget*)), SLOT(onWidgetClicked(QWidget*)));
     connect(_tabBar, SIGNAL(closeClicked(QWidget*)), this, SIGNAL(tabCloseRequested(QWidget*)));
+    _pushHome = pushHome;
+    connect(_pushHome, SIGNAL(clicked(bool)), SLOT(onHomeCliked(bool)));
+
+    // Home button style
+    _homeIcon = ContextManager::theme()->getColoredSvg(
+        ":/icons/home.svg", QSize(28, 28),
+        ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
+            ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND);
+    _homeIconEnabled = ContextManager::theme()->getColoredSvg(":/icons/home.svg", QSize(28, 28), ThemeManager::HIGHLIGHTED_BACKGROUND);
+    _pushHome->setIcon(_homeIconEnabled);
+    if (ContextManager::theme()->isCustomPaletteEnabled())
+        pushHome->setStyleSheet("QPushButton{margin: 0 0 6px 0;padding: 3px;background-color:#000;border-radius: 3px;}");
+    else
+        pushHome->setStyleSheet("QPushButton{margin: 0 0 6px 0;padding: 3px;border-radius: 3px;}");
 
     // Notify the tabbar that the current index changes
     connect(this, SIGNAL(currentChanged(int)), this, SLOT(onCurrentChanged(int)));
-
-    // Add the first tab: home
-    _tabBar->addWidget(this->widget(0), ":/icons/home.svg", "", false, true);
 }
 
 int MainStackedWidget::addWidgetWithTab(QWidget *widget, QString iconName, const QString &label, bool isColored)
 {
     int index = this->addWidget(widget);
-    _tabBar->addWidget(widget, iconName, label, isColored, false);
+    _tabBar->addWidget(widget, iconName, label, isColored);
     return index;
 }
 
@@ -56,6 +69,12 @@ void MainStackedWidget::removeWidgetWithTab(QWidget * widget)
 {
     _tabBar->removeWidget(widget);
     this->removeWidget(widget);
+}
+
+void MainStackedWidget::onHomeCliked(bool clicked)
+{
+    Q_UNUSED(clicked)
+    this->setCurrentIndex(0);
 }
 
 void MainStackedWidget::onWidgetClicked(QWidget * widget)
@@ -67,6 +86,7 @@ void MainStackedWidget::onWidgetClicked(QWidget * widget)
 void MainStackedWidget::onCurrentChanged(int index)
 {
     _tabBar->currentWidgetChanged(this->widget(index));
+    _pushHome->setIcon(index == 0 ? _homeIconEnabled : _homeIcon);
 }
 
 void MainStackedWidget::setWidgetLabel(QWidget * widget, const QString &label)

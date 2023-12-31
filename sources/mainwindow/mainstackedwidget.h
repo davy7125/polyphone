@@ -27,6 +27,7 @@
 
 #include <QStackedWidget>
 class MainTabBar;
+class QPushButton;
 
 class MainStackedWidget : public QStackedWidget
 {
@@ -36,7 +37,7 @@ public:
     static const QSize TAB_ICON_SIZE;
 
     MainStackedWidget(QWidget *parent = nullptr);
-    void setTabBar(MainTabBar * tabBar);
+    void setControls(QPushButton * pushHome, MainTabBar * tabBar);
 
     int addWidgetWithTab(QWidget * widget, QString iconName, const QString &label, bool isColored);
     void removeWidgetWithTab(QWidget * widget);
@@ -47,11 +48,16 @@ signals:
     void tabCloseRequested(QWidget * widget);
 
 private slots:
+    void onHomeCliked(bool clicked);
     void onWidgetClicked(QWidget * widget);
     void onCurrentChanged(int index);
 
 private:
+    QPushButton * _pushHome;
     MainTabBar * _tabBar;
+
+    QPixmap _homeIcon;
+    QPixmap _homeIconEnabled;
 };
 
 #endif // MAINSTACKEDWIDGET_H

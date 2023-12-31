@@ -36,7 +36,7 @@ class MainTabBar : public QWidget
 public:
     MainTabBar(QWidget *parent = nullptr);
 
-    void addWidget(QWidget * widget, QString iconName, QString label, bool isColored, bool isFirst);
+    void addWidget(QWidget * widget, QString iconName, QString label, bool isColored);
     void removeWidget(QWidget * widget);
     void setWidgetLabel(QWidget * widget, const QString &label);
     void setWidgetToolTip(QWidget * widget, const QString &tip);
@@ -58,11 +58,13 @@ protected:
 
 private:
     int itemAt(const QPoint &pos);
-    void moveItemTo(const QPoint &pos);
+    static QVector<QPair<int, MainTabBarElement *>> reorder(QVector<QPair<int, MainTabBarElement *>> &tabs, int itemIndex, int shift);
 
     QVector<MainTabBarElement *> _tabs;
-    int _currentItemInMotion;
-    int _indexOfTabToClose;
+    int _clickedItemIndex;
+    int _clickedInCloseButton;
+    int _clickedPosX;
+    int _xShift;
 };
 
 #endif // MAINTABBAR_H

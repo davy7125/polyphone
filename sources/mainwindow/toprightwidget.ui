@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>TopRightWidget</class>
  <widget class="QWidget" name="TopRightWidget">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>259</width>
-    <height>42</height>
-   </rect>
-  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
     <horstretch>0</horstretch>
@@ -33,7 +25,7 @@
     <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>9</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
     <number>0</number>
@@ -44,19 +36,6 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>1</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
    <item>
     <widget class="RotatingSpinner" name="spinner" native="true">
      <property name="sizePolicy">

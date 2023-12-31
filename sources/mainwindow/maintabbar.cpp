@@ -31,15 +31,15 @@
 #include "maintabbarelement.h"
 
 MainTabBar::MainTabBar(QWidget *parent) : QWidget(parent),
-    _currentItemInMotion(-1),
-    _indexOfTabToClose(-1)
+    _clickedItemIndex(-1),
+    _clickedInCloseButton(false)
 {
     setMouseTracking(true);
 }
 
-void MainTabBar::addWidget(QWidget * widget, QString iconName, QString label, bool isColored, bool isFirst)
+void MainTabBar::addWidget(QWidget * widget, QString iconName, QString label, bool isColored)
 {
-    MainTabBarElement * tab = new MainTabBarElement(widget, iconName, isColored, isFirst);
+    MainTabBarElement * tab = new MainTabBarElement(widget, iconName, isColored);
     tab->setLabel(label);
     _tabs.append(tab);
 
@@ -98,11 +98,6 @@ int MainTabBar::itemAt(const QPoint &pos)
     return -1;
 }
 
-void MainTabBar::moveItemTo(const QPoint &pos)
-{
-
-}
-
 bool MainTabBar::event(QEvent *event)
 {
     if (event->type() == QEvent::ToolTip)
@@ -123,22 +118,24 @@ bool MainTabBar::event(QEvent *event)
 
 void MainTabBar::mousePressEvent(QMouseEvent *event)
 {
-    // Reset state
-    _indexOfTabToClose = -1;
-    _currentItemInMotion = itemAt(event->pos());
+    // Save state
+    _clickedPosX = event->pos().x();
+    _clickedInCloseButton = false;
+    _clickedItemIndex = itemAt(event->pos());
+    _xShift = 0;
 
-    if (_currentItemInMotion != -1)
+    if (_clickedItemIndex != -1)
     {
         // Click on the close button?
-        if (_tabs[_currentItemInMotion]->getCloseButtonPath().contains(event->pos()))
+        if (_tabs[_clickedItemIndex]->getCloseButtonPath().contains(event->pos()))
         {
             // We are about to close the tab if the mouse stays in the button
-            _indexOfTabToClose = _currentItemInMotion;
+            _clickedInCloseButton = true;
         }
         else
         {
             // Select a new tab immediatly
-            emit(widgetClicked(_tabs[_currentItemInMotion]->getWidget()));
+            emit(widgetClicked(_tabs[_clickedItemIndex]->getWidget()));
         }
     }
 
@@ -147,27 +144,60 @@ void MainTabBar::mousePressEvent(QMouseEvent *event)
 
 void MainTabBar::mouseMoveEvent(QMouseEvent *event)
 {
-    bool hoverUpdate = false;
-    for (int i = 0; i < _tabs.count(); i++)
-        hoverUpdate |= _tabs[i]->mouseMoved(event->pos());
-    if (hoverUpdate)
-        this->repaint();
-
-    // this->setCursor(Qt::ArrowCursor);
-    // Qt::ClosedHandCursor
+    if (_clickedItemIndex == -1)
+    {
+        // Possibly hover a close button
+        bool hoverUpdate = false;
+        for (int i = 0; i < _tabs.count(); i++)
+            hoverUpdate |= _tabs[i]->mouseMoved(event->pos());
+        if (hoverUpdate)
+            this->repaint();
+    }
+    else if (!_clickedInCloseButton)
+    {
+        this->setCursor(Qt::ClosedHandCursor);
+        _xShift = event->pos().x() - _clickedPosX;
+        repaint();
+    }
 
     QWidget::mouseMoveEvent(event);
 }
 
 void MainTabBar::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (_indexOfTabToClose != -1 && _tabs[_indexOfTabToClose]->getCloseButtonPath().contains(event->pos()))
+    if (_clickedInCloseButton && _clickedItemIndex != -1 && _tabs[_clickedItemIndex]->getCloseButtonPath().contains(event->pos()))
     {
         // Select and close the tab
-        emit(widgetClicked(_tabs[_indexOfTabToClose]->getWidget()));
-        emit(closeClicked(_tabs[_indexOfTabToClose]->getWidget()));
+        emit(widgetClicked(_tabs[_clickedItemIndex]->getWidget()));
+        emit(closeClicked(_tabs[_clickedItemIndex]->getWidget()));
+    }
+    else if (_clickedItemIndex != -1 && !_clickedInCloseButton && _xShift != 0)
+    {
+        // Possibly reorder the tabs, taking into account their current paths
+        QVector<MainTabBarElement *> reorederedTabs;
+        bool itemPlaced = false;
+        for (int i = 0; i < _tabs.count(); i++)
+        {
+            if (i == _clickedItemIndex)
+                continue;
+            if (!itemPlaced && _tabs[_clickedItemIndex]->getXstart() + _tabs[_clickedItemIndex]->getCurrentShift() < _tabs[i]->getXstart() + _tabs[i]->getCurrentShift())
+            {
+                reorederedTabs.append(_tabs[_clickedItemIndex]);
+                itemPlaced = true;
+            }
+            reorederedTabs.append(_tabs[i]);
+        }
+        if (!itemPlaced)
+            reorederedTabs.append(_tabs[_clickedItemIndex]);
+        _tabs = reorederedTabs;
     }
 
+    // Reset state
+    _clickedInCloseButton = false;
+    _clickedItemIndex = -1;
+    this->setCursor(Qt::ArrowCursor);
+
+    this->repaint();
     QWidget::mouseReleaseEvent(event);
 }
 
@@ -192,14 +222,57 @@ void MainTabBar::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 
-    painter.setPen(QColor(0, 100, 100));
-
-    int x = -1; // Left border removed
+    // First compute all tab positions
+    int x = 0;
     for (int i = 0; i < _tabs.size(); i++)
+        x += _tabs[i]->computePosition(painter, x);
+
+    if (_clickedItemIndex != -1 && !_clickedInCloseButton)
     {
-        MainTabBarElement * tab = _tabs[i];
-        x += tab->draw(painter, x, this->height());
+        for (int i = 0; i < _tabs.size(); i++)
+        {
+            if (i < _clickedItemIndex)
+            {
+                // The tab is possibly sent to the right if its center is after the start of the moving tab
+                if (_tabs[i]->getXstart() + _tabs[i]->getWidth() / 2 > _tabs[_clickedItemIndex]->getXstart() + _xShift)
+                    _tabs[i]->draw(painter, _tabs[_clickedItemIndex]->getWidth(), this->height());
+                else
+                    _tabs[i]->draw(painter, 0, this->height());
+            }
+            else if (i > _clickedItemIndex)
+            {
+                // The tab is possibly sent to the left if its center is before the end of the moving tab
+                if (_tabs[i]->getXstart() + _tabs[i]->getWidth() / 2 < _tabs[_clickedItemIndex]->getXstart() + _tabs[_clickedItemIndex]->getWidth() + _xShift)
+                    _tabs[i]->draw(painter, -_tabs[_clickedItemIndex]->getWidth(), this->height());
+                else
+                    _tabs[i]->draw(painter, 0, this->height());
+            }
+        }
+
+        // Finally draw the moving tab inside the limits
+        if (_tabs[_clickedItemIndex]->getXstart() + _xShift < 0)
+            _tabs[_clickedItemIndex]->draw(painter, -_tabs[_clickedItemIndex]->getXstart(), this->height());
+        else if (_tabs[_clickedItemIndex]->getXstart() + _tabs[_clickedItemIndex]->getWidth() + _xShift > _tabs[_tabs.length() - 1]->getXstart() + _tabs[_tabs.length() - 1]->getWidth())
+            _tabs[_clickedItemIndex]->draw(
+                painter,
+                _tabs[_tabs.length() - 1]->getXstart() + _tabs[_tabs.length() - 1]->getWidth() - _tabs[_clickedItemIndex]->getXstart() - _tabs[_clickedItemIndex]->getWidth(),
+                this->height());
+        else
+            _tabs[_clickedItemIndex]->draw(painter, _xShift, this->height());
+    }
+    else
+    {
+        // Regular situation
+        for (int i = 0; i < _tabs.size(); i++)
+            _tabs[i]->draw(painter, 0, this->height());
     }
 
     QWidget::paintEvent(event);
+}
+
+QVector<QPair<int, MainTabBarElement *>> MainTabBar::reorder(QVector<QPair<int, MainTabBarElement *>> &tabs, int itemIndex, int shift)
+{
+    // Left and right positions of the item to move
+
+
 }

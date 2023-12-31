@@ -36,30 +36,35 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
     ui->setupUi(this);
 
     // Main menu button style
+    _iconMenuOpen = ContextManager::theme()->getColoredSvg(
+        ":/icons/menu.svg", QSize(28, 28), ThemeManager::HIGHLIGHTED_BACKGROUND);
+
     if (ContextManager::theme()->isCustomPaletteEnabled())
     {
-        ui->toolButton->setIcon(ContextManager::theme()->getColoredSvg(
-                                    ":/icons/menu.svg", QSize(28, 28),
-                                    ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
-                                        ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND));
-        ui->toolButton->setStyleSheet("QToolButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)} QToolButton{margin: 3px;padding: 3px;background-color:#000}");
+        _iconMenuClosed = ContextManager::theme()->getColoredSvg(
+            ":/icons/menu.svg", QSize(28, 28), ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
+                ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND);
+        ui->toolButton->setStyleSheet("QToolButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)} QToolButton{margin: 0 0 6px 0;padding: 3px;background-color:#000;border-radius: 3px}");
     }
     else
     {
-        ui->toolButton->setIcon(ContextManager::theme()->getColoredSvg(":/icons/menu.svg", QSize(28, 28), ThemeManager::WINDOW_TEXT));
-        ui->toolButton->setStyleSheet("QToolButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)} QToolButton{margin: 3px;padding: 3px}");
+        _iconMenuClosed = ContextManager::theme()->getColoredSvg(
+            ":/icons/menu.svg", QSize(28, 28), ThemeManager::WINDOW_TEXT);
+        ui->toolButton->setStyleSheet("QToolButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)} QToolButton{margin: 0 0 6px 0;padding: 3px;border-radius: 3px}");
     }
+    menuClosed();
 
     // User button
     ui->pushUser->setIcon(ContextManager::theme()->getColoredSvg(
-                              ":/icons/user.svg", QSize(22, 22),
-                              ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
-                                  ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND));
+        ":/icons/user.svg", QSize(22, 22),
+        ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
+            ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND));
+    ui->pushUser->setStyleSheet("QPushButton{margin:0 6px 6px 0}");
 
     // Red color for the warning icon
     _colorReplacement["currentColor"] = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND).name();
 
-    ui->toolButtonDownload->setStyleSheet("QToolButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)} QToolButton{border:0;margin: 3px;padding: 3px;}");
+    ui->toolButtonDownload->setStyleSheet("QToolButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)} QToolButton{border:0;margin: 0 6px 6px 0;padding: 3px;}");
     ui->toolButtonDownload->hide();
 
     ui->spinner->setColorType(ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
@@ -87,6 +92,8 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
             Qt::QueuedConnection);
     connect(DownloadManager::getInstance(), SIGNAL(downloadCanceled(int)), this, SLOT(downloadCanceled(int)));
     connect(ui->toolButtonDownload, SIGNAL(cleared()), this, SLOT(downloadCleared()));
+    connect(_menu, SIGNAL(aboutToShow()), this, SLOT(menuOpened()));
+    connect(_menu, SIGNAL(aboutToHide()), this, SLOT(menuClosed()));
 
     userStateChanged(UserManager::DISCONNECTED);
 }
@@ -171,4 +178,14 @@ void TopRightWidget::downloadCanceled(int soundfontId)
 void TopRightWidget::downloadCleared()
 {
     ui->toolButtonDownload->hide();
+}
+
+void TopRightWidget::menuOpened()
+{
+    ui->toolButton->setIcon(_iconMenuOpen);
+}
+
+void TopRightWidget::menuClosed()
+{
+    ui->toolButton->setIcon(_iconMenuClosed);
 }
