@@ -57,7 +57,7 @@ void MainTabBar::removeWidget(QWidget * widget)
 
 void MainTabBar::setWidgetLabel(QWidget * widget, const QString &label)
 {
-    for (int i = 0; i < _tabs.size(); i++)
+    for (int i = 0; i < _tabs.count(); i++)
     {
         if (_tabs[i]->getWidget() == widget)
         {
@@ -70,7 +70,7 @@ void MainTabBar::setWidgetLabel(QWidget * widget, const QString &label)
 
 void MainTabBar::setWidgetToolTip(QWidget * widget, const QString &tip)
 {
-    for (int i = 0; i < _tabs.size(); i++)
+    for (int i = 0; i < _tabs.count(); i++)
     {
         if (_tabs[i]->getWidget() == widget)
         {
@@ -201,17 +201,6 @@ void MainTabBar::mouseReleaseEvent(QMouseEvent *event)
     QWidget::mouseReleaseEvent(event);
 }
 
-void MainTabBar::resizeEvent(QResizeEvent *event)
-{
-    // int margin = style()->pixelMetric(QStyle::PM_DefaultTopLevelMargin);
-    // int x = width() - margin;
-    // int y = height() - margin;
-
-    // y = updateButtonGeometry(newCircleButton, x, y);
-    // y = updateButtonGeometry(newSquareButton, x, y);
-    // updateButtonGeometry(newTriangleButton, x, y);
-}
-
 QSize MainTabBar::minimumSizeHint() const
 {
     return QSize(0, MainTabBarElement::tabHeight());
@@ -222,14 +211,22 @@ void MainTabBar::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 
-    // First compute all tab positions
+    // First compute all tab widths
+    QVector<int> widths(_tabs.count());
+    for (int i = 0; i < _tabs.count(); i++)
+        widths[i] = _tabs[i]->computeFullWidth(painter);
+    adaptWidths(widths, this->width());
+
     int x = 0;
-    for (int i = 0; i < _tabs.size(); i++)
-        x += _tabs[i]->computePosition(painter, x);
+    for (int i = 0; i < _tabs.count(); i++)
+    {
+        _tabs[i]->setLimit(x, widths[i]);
+        x += widths[i];
+    }
 
     if (_clickedItemIndex != -1 && !_clickedInCloseButton)
     {
-        for (int i = 0; i < _tabs.size(); i++)
+        for (int i = 0; i < _tabs.count(); i++)
         {
             if (i < _clickedItemIndex)
             {
@@ -263,16 +260,70 @@ void MainTabBar::paintEvent(QPaintEvent *event)
     else
     {
         // Regular situation
-        for (int i = 0; i < _tabs.size(); i++)
+        for (int i = 0; i < _tabs.count(); i++)
             _tabs[i]->draw(painter, 0, this->height());
     }
 
     QWidget::paintEvent(event);
 }
 
-QVector<QPair<int, MainTabBarElement *>> MainTabBar::reorder(QVector<QPair<int, MainTabBarElement *>> &tabs, int itemIndex, int shift)
+void MainTabBar::adaptWidths(QVector<int> &widths, int maxWidth)
 {
-    // Left and right positions of the item to move
+    int sumWidth, firstBiggest, secondBiggest, firstBiggestCount;
+    while ((sumWidth = sum(widths)) > maxWidth)
+    {
+        // Reduce the biggest widths but not less than the second biggest widths
+        getTheTwoBiggestWidths(widths, firstBiggest, secondBiggest, firstBiggestCount);
 
+        // Number of pixels to remove, globally and for each biggest tabs
+        int delta = sumWidth - maxWidth;
+        int deltaPerBiggestWidth = delta / firstBiggestCount;
+        int deltaDelta = delta - deltaPerBiggestWidth * firstBiggestCount;
+        if (firstBiggest - deltaPerBiggestWidth < secondBiggest)
+            deltaPerBiggestWidth = firstBiggest - secondBiggest;
 
+        // Resize the biggest widths
+        for (int i = 0; i < widths.count(); i++)
+        {
+            if (widths[i] == firstBiggest)
+            {
+                widths[i] -= deltaPerBiggestWidth;
+                if (deltaDelta)
+                {
+                    deltaDelta--;
+                    widths[i] -= 1;
+                }
+            }
+        }
+    }
+}
+
+int MainTabBar::sum(QVector<int> &v)
+{
+    int sum = 0;
+    for (int i = 0; i < v.count(); i++)
+        sum += v[i];
+    return sum;
+}
+
+void MainTabBar::getTheTwoBiggestWidths(QVector<int> &v, int &firstBiggest, int &secondBiggest, int &firstBiggestCount)
+{
+    firstBiggest = 0;
+    secondBiggest = 0;
+    firstBiggestCount = 1;
+    for (int i = 0; i < v.count(); i++)
+    {
+        if (v[i] > firstBiggest)
+        {
+            secondBiggest = firstBiggest;
+            firstBiggest = v[i];
+            firstBiggestCount = 1;
+        }
+        else if (v[i] == firstBiggest)
+        {
+            firstBiggestCount++;
+        }
+        else if (v[i] > secondBiggest)
+            secondBiggest = v[i];
+    }
 }

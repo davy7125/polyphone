@@ -50,7 +50,6 @@ signals:
 
 protected:
     bool event(QEvent *event) override;
-    void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
@@ -58,7 +57,9 @@ protected:
 
 private:
     int itemAt(const QPoint &pos);
-    static QVector<QPair<int, MainTabBarElement *>> reorder(QVector<QPair<int, MainTabBarElement *>> &tabs, int itemIndex, int shift);
+    static void adaptWidths(QVector<int> &widths, int maxWidth);
+    static int sum(QVector<int> &v);
+    static void getTheTwoBiggestWidths(QVector<int> &v, int &firstBiggest, int &secondBiggest, int &firstBiggestCount);
 
     QVector<MainTabBarElement *> _tabs;
     int _clickedItemIndex;

@@ -40,8 +40,8 @@ MainTabBarElement::MainTabBarElement(QWidget * widget, QString iconName, bool is
     _iconName(iconName),
     _isEnabled(false),
     _gradient(QPointF(0, 0), QPointF(0, 1)),
-    _gradientEnabled(QPointF(0, 0), QPointF(0, 1)),
-    _fullWidth(0),
+    _xStart(0),
+    _width(0),
     _currentShift(0),
     _closeButtonHovered(false)
 {
@@ -99,50 +99,31 @@ MainTabBarElement::MainTabBarElement(QWidget * widget, QString iconName, bool is
         QSize(TAB_ICON_SIZE - 2 * TAB_CLOSE_ICON_PADDING, TAB_ICON_SIZE - 2 * TAB_CLOSE_ICON_PADDING),
         replacement);
 
-    // Gradients
+    // Gradient
     _gradient.setCoordinateMode(QGradient::ObjectMode);
     _gradient.setColorAt(0, _backgroundColor);
     _gradient.setColorAt(0.85, _backgroundColor);
     _gradient.setColorAt(0.93, _backgroundColor.darker(110));
     _gradient.setColorAt(1, _backgroundColor.darker(150));
-
-    _gradientEnabled.setCoordinateMode(QGradient::ObjectMode);
-    _gradientEnabled.setColorAt(0, _highlightColor);
-    _gradientEnabled.setColorAt(0.13, _highlightColor);
-    _gradientEnabled.setColorAt(0.18, _backgroundColorEnabled);
 }
 
-void MainTabBarElement::setLabel(QString label)
+int MainTabBarElement::computeFullWidth(QPainter &painter)
 {
-    int maxLabelSize = 30;
-    _label = (label.size() > maxLabelSize ? label.left(maxLabelSize - 3) + "..." : label);
-}
-
-
-void MainTabBarElement::setTooltip(QString toolTip)
-{
-    _toolTip = toolTip;
-}
-
-void MainTabBarElement::setIsEnabled(bool isEnabled)
-{
-    _isEnabled = isEnabled;
-}
-
-int MainTabBarElement::computePosition(QPainter &painter, int xStart)
-{
-    _xStart = xStart;
-
     // Full width of the tab
-    int textWidth = 0;
-    _fullWidth = 4 * MARGIN + _icon.width() + _closeIcon.width() + 2 * TAB_CLOSE_ICON_PADDING;
+    int fullWidth = 4 * MARGIN + _icon.width() + _closeIcon.width() + 2 * TAB_CLOSE_ICON_PADDING;
     if (!_label.isEmpty())
     {
-        textWidth = _label.isEmpty() ? 0 : painter.boundingRect(0, 0, 0, 0, 0, _label).width();
-        _fullWidth += 2 * MARGIN + textWidth;
+        int textWidth = _label.isEmpty() ? 0 : painter.boundingRect(0, 0, 0, 0, 0, _label).width();
+        fullWidth += 2 * MARGIN + textWidth;
     }
 
-    return _fullWidth;
+    return fullWidth;
+}
+
+void MainTabBarElement::setLimit(int xStart, int width)
+{
+    _xStart = xStart;
+    _width = width;
 }
 
 void MainTabBarElement::draw(QPainter &painter, int translateX, int height)
@@ -153,45 +134,50 @@ void MainTabBarElement::draw(QPainter &painter, int translateX, int height)
     // Draw the background with the border
     _tabPath.clear();
     _tabPath.moveTo(x, height); // Left border
-    _tabPath.lineTo(x, CORNER_RADIUS + (_isEnabled ? 0 : MARGIN));
-    _tabPath.arcTo(x, (_isEnabled ? 0 : MARGIN), 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 180, -90.0); // Top border
-    _tabPath.arcTo(x + _fullWidth - 2 * CORNER_RADIUS, (_isEnabled ? 0 : MARGIN), 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 90, -90.0);
-    _tabPath.lineTo(x + _fullWidth, height); // Right border
+    _tabPath.lineTo(x, CORNER_RADIUS);
+    _tabPath.arcTo(x, 1, 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 180, -90.0); // Top border
+    _tabPath.arcTo(x + _width - 2 * CORNER_RADIUS, 1, 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 90, -90.0);
+    _tabPath.lineTo(x + _width, height); // Right border
     _tabPath.lineTo(x, height); // Bottom
 
     painter.setPen(_borderColor);
-    painter.setBrush(_isEnabled ? QBrush(_gradientEnabled) : QBrush(_gradient));
+    if (_isEnabled)
+        painter.setBrush(_backgroundColorEnabled);
+    else
+        painter.setBrush(QBrush(_gradient));
     painter.drawPath(_tabPath);
 
     if (_isEnabled)
     {
         // Bottom border hidden
         painter.setPen(QPen(_backgroundColorEnabled, 2));
-        painter.drawLine(x, height, x + _fullWidth, height);
+        painter.drawLine(x, height, x + _width, height);
     }
     else
     {
         // Bottom border visible
         painter.setPen(QPen(_borderColor, 1));
-        painter.drawLine(x, height, x + _fullWidth, height);
+        painter.drawLine(x, height, x + _width, height);
     }
 
     // Draw the icon
     painter.drawPixmap(x + 2 * MARGIN,
-                       MARGIN + (height - MARGIN) / 2 - _icon.height() / 2,
+                       (height - _icon.height()) / 2,
                        _isEnabled ? _iconEnabled : _icon);
 
-    // Write the label
+    // Write the label, elide it in the middle if needed*
+    int labelWidth = _width - 6 * MARGIN - _icon.width() - _closeIcon.width() - 2 * TAB_CLOSE_ICON_PADDING;
+    QFontMetrics fontMetrics = painter.fontMetrics();
+    QString elidedLabel = fontMetrics.elidedText(_label, Qt::ElideMiddle, labelWidth);
     painter.setPen(_isEnabled ? _textColorEnabled : _textColor);
-    painter.drawText(x + 4 * MARGIN + _icon.width(), MARGIN,
-                     _fullWidth, height - MARGIN, Qt::AlignLeft | Qt::AlignVCenter,
-                     _label);
+    painter.drawText(x + 4 * MARGIN + _icon.width(), 0, labelWidth, height,
+                     Qt::AlignLeft | Qt::AlignVCenter, elidedLabel);
 
     // Shape of the close button
     _closeButtonPath.clear();
     _closeButtonPath.addRoundedRect(
-        x + _fullWidth - MARGIN - _closeIcon.width() - 2 * TAB_CLOSE_ICON_PADDING,
-        MARGIN + (height - MARGIN) / 2 - _closeIcon.height() / 2 - TAB_CLOSE_ICON_PADDING,
+        x + _width - MARGIN - _closeIcon.width() - 2 * TAB_CLOSE_ICON_PADDING,
+        (height - _closeIcon.height()) / 2 - TAB_CLOSE_ICON_PADDING,
         _closeIcon.width() + 2 * TAB_CLOSE_ICON_PADDING,
         _closeIcon.height() + 2 * TAB_CLOSE_ICON_PADDING,
         CORNER_RADIUS, CORNER_RADIUS);
@@ -205,8 +191,8 @@ void MainTabBarElement::draw(QPainter &painter, int translateX, int height)
     }
 
     // Close button icon
-    painter.drawPixmap(x + _fullWidth - MARGIN - _closeIcon.width() - TAB_CLOSE_ICON_PADDING,
-                       MARGIN + (height - MARGIN) / 2 - _closeIcon.height() / 2,
+    painter.drawPixmap(x + _width - MARGIN - _closeIcon.width() - TAB_CLOSE_ICON_PADDING,
+                       (height - _closeIcon.height()) / 2,
                        _isEnabled ? _closeIconEnabled : _closeIcon);
 }
 

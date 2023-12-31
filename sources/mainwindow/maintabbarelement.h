@@ -36,9 +36,9 @@ class MainTabBarElement: QObject
 public:
     MainTabBarElement(QWidget * widget, QString iconName, bool isColored);
 
-    void setLabel(QString label);
-    void setTooltip(QString toolTip);
-    void setIsEnabled(bool isEnabled);
+    void setLabel(QString label) { _label = label; }
+    void setTooltip(QString toolTip) { _toolTip = toolTip; }
+    void setIsEnabled(bool isEnabled) { _isEnabled = isEnabled; }
 
     QWidget * getWidget() { return _widget; }
     QString getToolTip() {  return _toolTip; }
@@ -46,8 +46,9 @@ public:
     QPainterPath getCloseButtonPath() { return _closeButtonPath; }
 
     // Compute the width and return it
-    int computePosition(QPainter &painter, int xStart);
-    int getWidth() { return _fullWidth; }
+    int computeFullWidth(QPainter &painter);
+    void setLimit(int xStart, int width);
+    int getWidth() { return _width; }
     int getXstart() { return _xStart; }
     int getCurrentShift() { return _currentShift; }
 
@@ -89,13 +90,12 @@ private:
     QColor _textColorEnabled;
     QColor _backgroundColorEnabled;
     QColor _closeButtonBackgroundColorEnabled;
-    QLinearGradient _gradientEnabled;
     QPixmap _iconEnabled;
     QPixmap _closeIconEnabled;
 
-    // Computed position and width of the tab
+    // Position / width
     int _xStart;
-    int _fullWidth;
+    int _width;
     int _currentShift;
 
     // Tab and close button shapes

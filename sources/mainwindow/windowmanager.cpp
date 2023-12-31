@@ -189,8 +189,7 @@ void WindowManager::editingDone(QString source, QList<int> sf2Indexes)
 
 void WindowManager::onTabTitleChanged(QString title)
 {
-    int maxTabTitleSize = 30;
-    _stackedWidget->setWidgetLabel(dynamic_cast<Editor*>(QObject::sender()), title.size() > maxTabTitleSize ? title.left(maxTabTitleSize - 3) + "..." : title);
+    _stackedWidget->setWidgetLabel(dynamic_cast<Editor*>(QObject::sender()), title);
 }
 
 void WindowManager::onFilePathChanged(QString filePath)
@@ -335,13 +334,11 @@ void WindowManager::openRepositorySoundfont(int id)
     SoundfontInformation * si = RepositoryManager::getInstance()->getSoundfontInformation(id);
     if (si == nullptr)
         return;
-    QFontMetrics fontMetrics(QApplication::font());
-    QString title = fontMetrics.elidedText(si->getTitle(), Qt::ElideMiddle, 150);
 
     // Create a new viewer
     SoundfontViewer * viewer = new SoundfontViewer();
     connect(viewer, SIGNAL(itemClicked(SoundfontFilter*)), this, SLOT(openRepository(SoundfontFilter*)));
-    int index = _stackedWidget->addWidgetWithTab(viewer, ":/icons/file-description.svg", title, true);
+    int index = _stackedWidget->addWidgetWithTab(viewer, ":/icons/file-description.svg", si->getTitle(), true);
     _viewers << viewer;
 
     // Initialize and display it
