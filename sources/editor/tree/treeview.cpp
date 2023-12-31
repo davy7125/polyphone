@@ -25,7 +25,6 @@
 #include "treeview.h"
 #include "treeitemdelegate.h"
 #include "treesortfilterproxy.h"
-#include "contextmanager.h"
 #include "soundfontmanager.h"
 #include <QMouseEvent>
 #include <QScrollBar>
