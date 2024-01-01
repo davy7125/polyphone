@@ -440,7 +440,6 @@ private:
     static const char ProgVersion[];			// e.g."2.10 "
     static const unsigned char ProgVersionMaj;		// 00-255 = V25.5x, etc.
     static const unsigned char ProgVersionMin;		// 00-99 = Vx.x99, etc.
-    unsigned SourceFileOffset;			// Set non-zero by app for self-extraction
 
     static const char LicenseExt[];		// File extension for license file
     static const char NotesExt[] ;			// File extension for notes file

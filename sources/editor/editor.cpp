@@ -260,6 +260,7 @@ void Editor::updateTitleAndPath()
         title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial).split(QRegularExpression("(/|\\\\)")).last();
     if (title.isEmpty())
         title = tr("Untitled");
+
     emit(tabTitleChanged((sm->isEdited(_sf2Index) ? "*" : "") + title));
 
     // Path

@@ -105,6 +105,7 @@ void StyledAction::onToggled(bool isChecked)
         this->setStyleSheet("StyledAction{border:0;border-radius:2px;background-color:" + _checkedBackgroundColor.name() + "}");
     else
         this->setStyleSheet("StyledAction{border:0}");
+
     emit(actionClicked());
 }
 
@@ -114,6 +115,7 @@ void StyledAction::onClicked(bool unused)
 
     if (_isDisabled || this->isCheckable())
         return;
+
     emit(actionClicked());
 }
 

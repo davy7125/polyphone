@@ -26,7 +26,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "basetypes.h"
 #include "dialog_about.h"
 
 namespace Ui {
