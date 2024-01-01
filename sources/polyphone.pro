@@ -58,7 +58,6 @@ win32 {
     DESTDIR = $$PWD/../lib_windows/64bits
 }
 unix:!macx {
-    QMAKE_CXXFLAGS += -ffloat-store
     DEFINES += __LINUX_ALSASEQ__ __UNIX_JACK__
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa jack portaudio-2.0 zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0
