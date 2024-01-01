@@ -26,7 +26,6 @@
 #include "graphicswavepainter.h"
 #include "contextmanager.h"
 #include <QPainter>
-#include "qmath.h"
 #include <QScrollBar>
 #include <QSpinBox>
 #include <QApplication>
@@ -77,6 +76,8 @@ GraphicsWave::GraphicsWave(QWidget *parent) : QWidget(parent),
     // Font
     _textFont = this->font();
     _textFont.setBold(true);
+
+    this->installEventFilter(this);
 }
 
 GraphicsWave::~GraphicsWave()
@@ -496,7 +497,7 @@ void GraphicsWave::zoom(QPoint point)
         // Update posX
         if (_zoomX > 1)
         {
-            _posX = (_zoomX * _posXinit * (_zoomXinit - 1) + _xInit*(_zoomX - _zoomXinit)) / (_zoomXinit * (_zoomX - 1));
+            _posX = (_zoomX * _posXinit * (_zoomXinit - 1) + _xInit * (_zoomX - _zoomXinit)) / (_zoomXinit * (_zoomX - 1));
             if (_posX < 0)
                 _posX = 0;
             else if (_posX > 1)
@@ -522,4 +523,52 @@ void GraphicsWave::drag(QPoint point)
         _posX = 1;
 
     this->repaint();
+}
+
+bool GraphicsWave::event(QEvent * event)
+{
+    if (event->type() == QEvent::NativeGesture)
+    {
+        QNativeGestureEvent * nge = dynamic_cast<QNativeGestureEvent *>(event);
+        if (nge->fingerCount() == 2)
+        {
+            if (nge->gestureType() == Qt::ZoomNativeGesture)
+            {
+                if (QApplication::keyboardModifiers() == Qt::ShiftModifier)
+                {
+                    _zoomY = _zoomY * (1 + nge->value());
+                    if (_zoomY < 1)
+                        _zoomY = 1;
+                    else if (_zoomY > 50)
+                        _zoomY = 50;
+                }
+                else
+                {
+                    // WARNING: not using nge->position() since it seems to return the global position
+                    _xInit = (nge->globalPosition().x() - this->mapToGlobal(QPoint(0, 0)).x()) / this->width();
+                    _posXinit = _posX;
+                    _zoomXinit = _zoomX;
+                    _zoomX = _zoomX * (1 + nge->value());
+
+                    if (_zoomX > 20 * _sizeX / this->width())
+                        _zoomX = 20 * _sizeX / this->width();
+                    if (_zoomX < 1)
+                        _zoomX = 1;
+
+                    // Update posX
+                    if (_zoomX > 1)
+                    {
+                        _posX = (_zoomX * _posXinit * (_zoomXinit - 1) + _xInit * (_zoomX - _zoomXinit)) / (_zoomXinit * (_zoomX - 1));
+                        if (_posX < 0)
+                            _posX = 0;
+                        else if (_posX > 1)
+                            _posX = 1;
+                    }
+                }
+
+                this->repaint();
+            }
+        }
+    }
+    return QWidget::event(event);
 }

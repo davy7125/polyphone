@@ -60,6 +60,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
+    bool event(QEvent* event) override;
 
 private:
     int getSamplePosX(double zoomX, double shiftX, double x);
