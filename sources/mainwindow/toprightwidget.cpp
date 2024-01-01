@@ -36,14 +36,9 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
     ui->setupUi(this);
 
     // Main menu button style
-    _iconMenuOpen = ContextManager::theme()->getColoredSvg(
-        ":/icons/menu.svg", QSize(28, 28), ThemeManager::HIGHLIGHTED_BACKGROUND);
-    _iconMenuClosed = ContextManager::theme()->getColoredSvg(
+    ui->toolButton->setIcon(ContextManager::theme()->getColoredSvg(
         ":/icons/menu.svg", QSize(28, 28), ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
-            ThemeManager::LIST_TEXT : ThemeManager::LIST_BACKGROUND);
-    ui->toolButton->setStyleSheet(QString("QToolButton::menu-indicator{width:0px;image:url(:/misc/transparent.png)} QToolButton{margin: 0 0 6px 0;padding: 3px;background-color:%1;border-radius: 3px}")
-                                      .arg(ContextManager::theme()->getColor(ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
-                                                                                 ThemeManager::LIST_BACKGROUND : ThemeManager::LIST_TEXT).name()));
+            ThemeManager::LIST_TEXT : ThemeManager::LIST_BACKGROUND));
     menuClosed();
 
     // User button
@@ -174,10 +169,35 @@ void TopRightWidget::downloadCleared()
 
 void TopRightWidget::menuOpened()
 {
-    ui->toolButton->setIcon(_iconMenuOpen);
+    styleMenuButton(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
 }
 
 void TopRightWidget::menuClosed()
 {
-    ui->toolButton->setIcon(_iconMenuClosed);
+    if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
+        styleMenuButton(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
+    else
+        styleMenuButton(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
+}
+
+void TopRightWidget::styleMenuButton(QColor backgroundColor)
+{
+    QString styleSheet = "\
+QToolButton::menu-indicator{\
+  width:0px;image:url(:/misc/transparent.png)\
+}\
+QToolButton{\
+  margin: 0 0 6px 0;\
+  padding: 2px;\
+  background-color:%1;\
+  border-radius: 3px;\
+  border:1px solid %2;\
+}";
+
+    ui->toolButton->setStyleSheet(styleSheet
+        .arg(backgroundColor.name())
+        .arg(ThemeManager::mix(
+            ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
+            ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
+            ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ? 0.2 : 0.7).name()));
 }

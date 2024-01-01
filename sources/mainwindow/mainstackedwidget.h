@@ -53,11 +53,10 @@ private slots:
     void onCurrentChanged(int index);
 
 private:
+    void styleHomeButton(QColor backgroundColor);
+
     QPushButton * _pushHome;
     MainTabBar * _tabBar;
-
-    QPixmap _homeIcon;
-    QPixmap _homeIconEnabled;
 };
 
 #endif // MAINSTACKEDWIDGET_H

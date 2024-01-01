@@ -43,15 +43,11 @@ void MainStackedWidget::setControls(QPushButton * pushHome, MainTabBar * tabBar)
     connect(_pushHome, SIGNAL(clicked(bool)), SLOT(onHomeCliked(bool)));
 
     // Home button style
-    _homeIcon = ContextManager::theme()->getColoredSvg(
+    _pushHome->setIcon(ContextManager::theme()->getColoredSvg(
         ":/icons/home.svg", QSize(28, 28),
         ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
-            ThemeManager::LIST_TEXT : ThemeManager::LIST_BACKGROUND);
-    _homeIconEnabled = ContextManager::theme()->getColoredSvg(":/icons/home.svg", QSize(28, 28), ThemeManager::HIGHLIGHTED_BACKGROUND);
-    _pushHome->setIcon(_homeIconEnabled);
-    pushHome->setStyleSheet(QString("QPushButton{margin: 0 0 6px 0;padding: 3px;background-color:%1;border-radius: 3px;}")
-                                .arg(ContextManager::theme()->getColor(ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
-                                                                           ThemeManager::LIST_BACKGROUND : ThemeManager::LIST_TEXT).name()));
+            ThemeManager::LIST_TEXT : ThemeManager::LIST_BACKGROUND));
+    styleHomeButton(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
 
     // Notify the tabbar that the current index changes
     connect(this, SIGNAL(currentChanged(int)), this, SLOT(onCurrentChanged(int)));
@@ -85,8 +81,22 @@ void MainStackedWidget::onWidgetClicked(QWidget * widget)
 void MainStackedWidget::onCurrentChanged(int index)
 {
     _tabBar->currentWidgetChanged(this->widget(index));
-    _pushHome->setIcon(index == 0 ? _homeIconEnabled : _homeIcon);
-    _pushHome->setCursor(index == 0 ? Qt::ArrowCursor : Qt::PointingHandCursor);
+
+    // Home button enabled?
+    if (index == 0)
+    {
+        styleHomeButton(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
+        _pushHome->setCursor(Qt::ArrowCursor);
+    }
+    else
+    {
+        if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
+            styleHomeButton(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
+        else
+            styleHomeButton(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
+
+        _pushHome->setCursor(Qt::PointingHandCursor);
+    }
 }
 
 void MainStackedWidget::setWidgetLabel(QWidget * widget, const QString &label)
@@ -97,4 +107,22 @@ void MainStackedWidget::setWidgetLabel(QWidget * widget, const QString &label)
 void MainStackedWidget::setWidgetToolTip(QWidget * widget, const QString &tip)
 {
     _tabBar->setWidgetToolTip(widget, tip);
+}
+
+void MainStackedWidget::styleHomeButton(QColor backgroundColor)
+{
+    QString styleSheet = "\
+QPushButton{\
+  margin: 0 0 6px 0;\
+  padding: 2px;\
+  background-color:%1;\
+  border-radius: 3px;\
+  border:1px solid %2;\
+}";
+    _pushHome->setStyleSheet(styleSheet
+        .arg(backgroundColor.name())
+        .arg(ThemeManager::mix(
+                 ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
+                 ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
+                 ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ? 0.2 : 0.7).name()));
 }
