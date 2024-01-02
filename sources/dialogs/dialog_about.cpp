@@ -98,7 +98,6 @@ void DialogAbout::on_pushClose_clicked()
     QDialog::close();
 }
 
-
 void Credit::addCreator(QString name, QString mail)
 {
     _listCreatorName << name;

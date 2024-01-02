@@ -4974,7 +4974,7 @@ D&apos;autres éditeurs de soundfonts pourraient utiliser d&apos;autres unités.
     <message>
         <location filename="context/thememanager.cpp" line="83"/>
         <source>Custom</source>
-        <translation>Personnalisé</translation>
+        <translation>Personnalisées</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="471"/>
