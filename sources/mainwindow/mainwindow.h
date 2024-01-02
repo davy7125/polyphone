@@ -25,7 +25,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include <QWidget>
 #include "dialog_about.h"
 
 namespace Ui {
@@ -35,7 +35,7 @@ class WindowManager;
 class DialogKeyboard;
 class DialogRecorder;
 
-class MainWindow : public QMainWindow
+class MainWindow : public QWidget
 {
     Q_OBJECT
 
@@ -77,4 +77,4 @@ private:
     DialogAbout _dialogAbout;
 };
 
-#endif // WINDOW_H
+#endif // MAINWINDOW_H

@@ -46,7 +46,7 @@
 #include "utils.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
+    QWidget(parent),
     ui(new Ui::MainWindow),
     _keyboard(new DialogKeyboard(this)),
     _recorder(new DialogRecorder(this)),
@@ -57,6 +57,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ///////////
 
     ui->setupUi(this);
+    this->setWindowTitle(tr("Polyphone SoundFont Editor"));
+    this->setWindowIcon(QIcon(":/misc/polyphone.png"));
 
 #ifdef NO_SF2_CREATION
     ui->pushButtonNew->hide();
@@ -64,7 +66,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Window state
     restoreGeometry(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "windowGeometry", QByteArray()).toByteArray());
-    restoreState(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "windowState", QByteArray()).toByteArray());
 
     // Icons
     QSize iconSize(36, 36);
@@ -128,7 +129,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Show changelog if one of the 2 first version number is not identical
     QStringList lastVersion = ContextManager::configuration()->getValue(
-                ConfManager::SECTION_NONE, "last_version_installed", "0.0.0").toString().split('.');
+                                                                 ConfManager::SECTION_NONE, "last_version_installed", "0.0.0").toString().split('.');
     QStringList currentVersion = QString(SOFT_VERSION).split('.');
     if (lastVersion.size() < 2 || lastVersion[0] != currentVersion[0] || lastVersion[1] != currentVersion[1])
     {
@@ -159,7 +160,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
     // Save state
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "windowGeometry", saveGeometry());
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "windowState", saveState());
 
     // Number of files not saved
     EltID id(elementSf2);
@@ -338,7 +338,7 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
         event->accept();
     }
 
-    QMainWindow::keyPressEvent(event);
+    QWidget::keyPressEvent(event);
 }
 
 void MainWindow::fullScreenTriggered()
