@@ -194,6 +194,10 @@ int displayHelp(Options &options)
 
 int main(int argc, char *argv[])
 {
+#ifdef Q_OS_LINUX
+    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::RoundPreferFloor);
+#endif
+
 #if QT_VERSION < 0x060000
     // Dpi scaling
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

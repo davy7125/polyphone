@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2020 Davy Triponney                                **
@@ -33,19 +33,13 @@
 #include <QPainter>
 
 const char * TableDelegate::DECO_PROPERTY = "deco";
+const float TableDelegate::MOD_BORDER_WIDTH = 2;
 
 TableDelegate::TableDelegate(QTableWidget * table, QObject * parent): QStyledItemDelegate(parent),
     _table(table),
     _isEditing(false)
 {
-    QColor color1 = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
-    QColor color2 = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
-    _modBorderColor = QColor((color1.red() + color2.red()) / 2,
-                             (color1.green() + color2.green()) / 2,
-                             (color1.blue() + color2.blue()) / 2);
-    _modBorderColor2 = QColor((color1.red() * 3 + color2.red()) / 4,
-                              (color1.green() * 3 + color2.green()) / 4,
-                              (color1.blue() * 3 + color2.blue()) / 4);
+    _modBorderColor = ContextManager::theme()->getColor(ThemeManager::BORDER);
 }
 
 QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -280,7 +274,7 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
         foreach (QTableWidgetSelectionRange range, ranges)
         {
             if (range.topRow() <= index.row() && range.bottomRow() >= index.row() &&
-                    range.leftColumn() <= index.column() && range.rightColumn() >= index.column())
+                range.leftColumn() <= index.column() && range.rightColumn() >= index.column())
             {
                 opt.backgroundBrush = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
                 break;
@@ -308,13 +302,14 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
             QStyleOptionViewItemV4 opt(option);
 #endif
             initStyleOption(&opt, index);
-            QRect rect1 = opt.rect;
+            QRectF rect1 = opt.rect.toRectF();
 
-            painter->setPen(QPen(QBrush(_modBorderColor), 1));
-            painter->drawRect(QRect(rect1.left(), rect1.top(), rect1.width() - 1, rect1.height() - 1));
-
-            painter->setPen(QPen(QBrush(_modBorderColor2), 1));
-            painter->drawRect(QRect(rect1.left() + 1, rect1.top() + 1, rect1.width() - 3, rect1.height() - 3));
+            painter->setBrush(_modBorderColor);
+            painter->setPen(Qt::transparent);
+            painter->drawRect(QRectF(rect1.left(), rect1.top(), rect1.width(), MOD_BORDER_WIDTH));
+            painter->drawRect(QRectF(rect1.left(), rect1.bottom() - MOD_BORDER_WIDTH, rect1.width(), MOD_BORDER_WIDTH));
+            painter->drawRect(QRectF(rect1.left(), rect1.top(), MOD_BORDER_WIDTH, rect1.height()));
+            painter->drawRect(QRectF(rect1.right() - MOD_BORDER_WIDTH, rect1.top(), MOD_BORDER_WIDTH, rect1.height()));
         }
     }
 }

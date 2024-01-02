@@ -53,10 +53,12 @@ private:
                  bool &isFixed, bool &isAttenuation) const;
     QTableWidget * _table;
 
-    static const char * DECO_PROPERTY;
     mutable bool _isEditing;
     QMap<int, QList<int> > _modDisplay;
-    QColor _modBorderColor, _modBorderColor2;
+    QColor _modBorderColor;
+
+    static const char * DECO_PROPERTY;
+    static const float MOD_BORDER_WIDTH;
 };
 
 #endif // TABLEDELEGATE_H
