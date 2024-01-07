@@ -38,11 +38,15 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
 
 private:
-    QPixmap * _pixmapBack;
-    QPixmap * _pixmapFront;
+    QColor _backgroundColor;
     QColor _bottomBorderColor;
+    QPixmap * _pixmapFront;
+    bool _aboutToMove;
 };
 
 #endif // TOPBACKGROUND_H

@@ -138,8 +138,8 @@ void MainTabBar::mousePressEvent(QMouseEvent *event)
             emit(widgetClicked(_tabs[_clickedItemIndex]->getWidget()));
         }
     }
-
-    QWidget::mousePressEvent(event);
+    else
+        QWidget::mousePressEvent(event);
 }
 
 void MainTabBar::mouseMoveEvent(QMouseEvent *event)
@@ -152,6 +152,8 @@ void MainTabBar::mouseMoveEvent(QMouseEvent *event)
             hoverUpdate |= _tabs[i]->mouseMoved(event->pos());
         if (hoverUpdate)
             this->repaint();
+
+        QWidget::mouseMoveEvent(event);
     }
     else if (!_clickedInCloseButton)
     {
@@ -159,8 +161,6 @@ void MainTabBar::mouseMoveEvent(QMouseEvent *event)
         _xShift = event->pos().x() - _clickedPosX;
         repaint();
     }
-
-    QWidget::mouseMoveEvent(event);
 }
 
 void MainTabBar::mouseReleaseEvent(QMouseEvent *event)
@@ -196,6 +196,10 @@ void MainTabBar::mouseReleaseEvent(QMouseEvent *event)
     _clickedInCloseButton = false;
     _clickedItemIndex = -1;
     this->setCursor(Qt::ArrowCursor);
+
+    // Update the state of the tabs
+    for (int i = 0; i < _tabs.count(); i++)
+        _tabs[i]->mouseMoved(event->pos());
 
     this->repaint();
     QWidget::mouseReleaseEvent(event);

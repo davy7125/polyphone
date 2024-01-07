@@ -43,11 +43,9 @@ void MainStackedWidget::setControls(QPushButton * pushHome, MainTabBar * tabBar)
     connect(_pushHome, SIGNAL(clicked(bool)), SLOT(onHomeCliked(bool)));
 
     // Home button style
-    _pushHome->setIcon(ContextManager::theme()->getColoredSvg(
-        ":/icons/home.svg", QSize(28, 28),
-        ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
-            ThemeManager::LIST_TEXT : ThemeManager::LIST_BACKGROUND));
-    styleHomeButton(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
+    _icon = ContextManager::theme()->getColoredSvg(":/icons/home.svg", QSize(28, 28), ThemeManager::BUTTON_TEXT);
+    _iconEnabled = ContextManager::theme()->getColoredSvg(":/icons/home.svg", QSize(28, 28), ThemeManager::HIGHLIGHTED_TEXT);
+    styleHomeButton(true);
 
     // Notify the tabbar that the current index changes
     connect(this, SIGNAL(currentChanged(int)), this, SLOT(onCurrentChanged(int)));
@@ -85,16 +83,12 @@ void MainStackedWidget::onCurrentChanged(int index)
     // Home button enabled?
     if (index == 0)
     {
-        styleHomeButton(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
+        styleHomeButton(true);
         _pushHome->setCursor(Qt::ArrowCursor);
     }
     else
     {
-        if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
-            styleHomeButton(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
-        else
-            styleHomeButton(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
-
+        styleHomeButton(false);
         _pushHome->setCursor(Qt::PointingHandCursor);
     }
 }
@@ -109,7 +103,7 @@ void MainStackedWidget::setWidgetToolTip(QWidget * widget, const QString &tip)
     _tabBar->setWidgetToolTip(widget, tip);
 }
 
-void MainStackedWidget::styleHomeButton(QColor backgroundColor)
+void MainStackedWidget::styleHomeButton(bool isEnabled)
 {
     QString styleSheet = "\
 QPushButton{\
@@ -119,10 +113,19 @@ QPushButton{\
   border-radius: 3px;\
   border:1px solid %2;\
 }";
-    _pushHome->setStyleSheet(styleSheet
-        .arg(backgroundColor.name())
-        .arg(ThemeManager::mix(
-                 ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
-                 ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
-                 ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ? 0.2 : 0.7).name()));
+
+    if (isEnabled)
+    {
+        _pushHome->setStyleSheet(styleSheet
+                                     .arg(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name())
+                                     .arg(ContextManager::theme()->getColor(ThemeManager::BORDER).name()));
+        _pushHome->setIcon(_iconEnabled);
+    }
+    else
+    {
+        _pushHome->setStyleSheet(styleSheet
+                                     .arg(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND).name())
+                                     .arg(ContextManager::theme()->getColor(ThemeManager::BORDER).name()));
+        _pushHome->setIcon(_icon);
+    }
 }

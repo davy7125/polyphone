@@ -26,15 +26,22 @@
 #include "contextmanager.h"
 #include <QPainter>
 #include <QDateTime>
+#include <QMouseEvent>
+#include <QWindow>
 
 TopBackground::TopBackground(QWidget *parent) : QWidget(parent),
-    _pixmapBack(nullptr),
-    _pixmapFront(nullptr)
+    _pixmapFront(nullptr),
+    _aboutToMove(false)
 {
-    // Background
-    _pixmapBack = ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
-                      new QPixmap(":/misc/background_dark.png") : new QPixmap(":/misc/background.png");
+    // Background color
+    _backgroundColor = ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
+                           ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND) :
+                           ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
 
+    // Bottom border color
+    _bottomBorderColor = ContextManager::theme()->getColor(ThemeManager::BORDER);
+
+    // Possible pattern
     QDate today = QDateTime::currentDateTime().date();
     if (today.month() == 12 && today.day() > 24) // Between christmas and new year
         _pixmapFront = new QPixmap(":/banners/christmas.png");
@@ -44,17 +51,10 @@ TopBackground::TopBackground(QWidget *parent) : QWidget(parent),
         _pixmapFront = new QPixmap(":/banners/valentine.png");
     else if (today.month() == 6 && today.day() == 21) // Summer
         _pixmapFront = new QPixmap(":/banners/music.png");
-
-    // Color of the bottom border
-    _bottomBorderColor = ThemeManager::mix(
-        ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
-        ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
-        ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ? 0.2 : 0.7);
 }
 
 TopBackground::~TopBackground()
 {
-    delete _pixmapBack;
     delete _pixmapFront;
 }
 
@@ -62,10 +62,15 @@ void TopBackground::paintEvent(QPaintEvent *event)
 {
     QPainter p(this);
 
-    // Background
-    for (int i = 0; i < this->width() / _pixmapBack->width() + 1; i++)
-        for (int j = 0; j < this->height() / _pixmapBack->height() + 1; j++)
-            p.drawPixmap(i * _pixmapBack->width(), j * _pixmapBack->height(), *_pixmapBack);
+    // Background color
+    p.setPen(_backgroundColor);
+    p.setBrush(_backgroundColor);
+    p.drawRect(this->rect());
+
+    // Background pattern
+    // for (int i = 0; i < this->width() / _pixmapBack->width() + 1; i++)
+    //     for (int j = 0; j < this->height() / _pixmapBack->height() + 1; j++)
+    //         p.drawPixmap(i * _pixmapBack->width(), j * _pixmapBack->height(), *_pixmapBack);
 
     // Possible pattern on top of it
     if (_pixmapFront)
@@ -79,4 +84,34 @@ void TopBackground::paintEvent(QPaintEvent *event)
     p.drawLine(0, this->height(), this->width(), this->height());
 
     QWidget::paintEvent(event);
+}
+
+void TopBackground::mousePressEvent(QMouseEvent *event)
+{
+    _aboutToMove = (event->buttons() == Qt::LeftButton);
+}
+
+void TopBackground::mouseMoveEvent(QMouseEvent *event)
+{
+    Q_UNUSED(event)
+    if (_aboutToMove)
+    {
+        QWindow * w = this->topLevelWidget()->windowHandle();
+        if (w != nullptr)
+        {
+            _aboutToMove = false;
+            w->startSystemMove();
+        }
+    }
+}
+
+void TopBackground::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        if (this->topLevelWidget()->isMaximized())
+            this->topLevelWidget()->showNormal();
+        else
+            this->topLevelWidget()->showMaximized();
+    }
 }

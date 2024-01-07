@@ -44,6 +44,9 @@
 #include "inputfactory.h"
 #include "extensionmanager.h"
 #include "utils.h"
+#include <QWindow>
+
+const int MainWindow::RESIZE_BORDER_WIDTH = 5;
 
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent),
@@ -59,6 +62,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle(tr("Polyphone SoundFont Editor"));
     this->setWindowIcon(QIcon(":/misc/polyphone.png"));
+    this->setWindowFlags(windowFlags() | Qt::Window | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint);
+    this->setAttribute(Qt::WA_TranslucentBackground, true);
+    QApplication::instance()->installEventFilter(this);
+
+    ui->stackedWidget->setStyleSheet(
+        QString("MainStackedWidget{border:1px solid %1;border-top: 0}")
+            .arg(ContextManager::theme()->getColor(ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
+                                                       ThemeManager::LIST_BACKGROUND : ThemeManager::LIST_TEXT).name())
+        );
 
 #ifdef NO_SF2_CREATION
     ui->pushButtonNew->hide();
@@ -382,4 +394,89 @@ void MainWindow::on_lineSearch_returnPressed()
 {
     if (!ui->lineSearch->text().isEmpty())
         on_pushButtonSearch_clicked();
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent * e)
+{
+    //e->ignore();
+}
+
+bool MainWindow::eventFilter(QObject *object, QEvent *event)
+{
+    Q_UNUSED(object)
+
+    if (event->type() == QEvent::MouseMove && !this->isMaximized())
+    {
+        QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+        if (mouseEvent->buttons() != Qt::NoButton)
+            return false;
+
+        _mousePositionEdges = QFlags<Qt::Edge>();
+        QPoint pos = mouseEvent->globalPosition().toPoint();
+        if (pos.x() <= RESIZE_BORDER_WIDTH)
+            _mousePositionEdges |= Qt::LeftEdge;
+        else if (pos.x() >= this->width() - RESIZE_BORDER_WIDTH)
+            _mousePositionEdges |= Qt::RightEdge;
+        if (pos.y() <= RESIZE_BORDER_WIDTH)
+            _mousePositionEdges |= Qt::TopEdge;
+        else if (pos.y() >= this->height() - RESIZE_BORDER_WIDTH)
+            _mousePositionEdges |= Qt::BottomEdge;
+
+        if (_mousePositionEdges.toInt() > 0)
+        {
+            switch (_mousePositionEdges)
+            {
+            case Qt::LeftEdge:
+                this->setCursor(Qt::SizeHorCursor);
+                break;
+            case Qt::LeftEdge | Qt::TopEdge:
+                this->setCursor(Qt::SizeFDiagCursor);
+                break;
+            case Qt::LeftEdge | Qt::BottomEdge:
+                this->setCursor(Qt::SizeBDiagCursor);
+                break;
+            case Qt::RightEdge:
+                this->setCursor(Qt::SizeHorCursor);
+                break;
+            case Qt::RightEdge | Qt::TopEdge:
+                this->setCursor(Qt::SizeBDiagCursor);
+                break;
+            case Qt::RightEdge | Qt::BottomEdge:
+                this->setCursor(Qt::SizeFDiagCursor);
+                break;
+            case Qt::TopEdge:
+                this->setCursor(Qt::SizeVerCursor);
+                break;
+            case Qt::BottomEdge:
+                this->setCursor(Qt::SizeVerCursor);
+                break;
+            default:
+                this->unsetCursor();
+                return false;
+            }
+            return true;
+        }
+
+        this->unsetCursor();
+        return false;
+    }
+    else if (event->type() == QEvent::MouseButtonPress)
+    {
+        QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+        if (mouseEvent->buttons() == Qt::LeftButton && _mousePositionEdges.toInt() > 0)
+        {
+            QWindow * w = this->topLevelWidget()->windowHandle();
+            if (w != nullptr)
+                w->startSystemResize(_mousePositionEdges);
+            return true;
+        }
+        return false;
+    }
+    else if (event->type() == QEvent::MouseButtonRelease)
+    {
+        _mousePositionEdges = QFlags<Qt::Edge>();
+        this->unsetCursor();
+    }
+
+    return false;
 }

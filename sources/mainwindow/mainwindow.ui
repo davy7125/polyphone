@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QWidget" name="MainWindow">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>400</width>
-    <height>300</height>
-   </rect>
-  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -33,7 +25,7 @@
     <widget class="TopBackground" name="topBackground" native="true">
      <layout class="QGridLayout" name="gridLayout_3">
       <property name="leftMargin">
-       <number>6</number>
+       <number>48</number>
       </property>
       <property name="topMargin">
        <number>6</number>
@@ -109,6 +101,9 @@
       </sizepolicy>
      </property>
      <widget class="QWidget" name="stackedWidgetPage1">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
       <layout class="QGridLayout" name="gridLayout_2" columnstretch="6,4" columnminimumwidth="0,300">
        <item row="0" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout">

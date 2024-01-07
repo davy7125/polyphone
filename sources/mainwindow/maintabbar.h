@@ -63,7 +63,7 @@ private:
 
     QVector<MainTabBarElement *> _tabs;
     int _clickedItemIndex;
-    int _clickedInCloseButton;
+    bool _clickedInCloseButton;
     int _clickedPosX;
     int _xShift;
 };

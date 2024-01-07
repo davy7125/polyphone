@@ -50,6 +50,7 @@ public slots:
 protected:
     void closeEvent(QCloseEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
+    void mouseMoveEvent(QMouseEvent* e) override;
 
 private slots:
     void on_pushButtonDocumentation_clicked();
@@ -70,11 +71,15 @@ private slots:
     void onUserClicked();
 
 private:
+    bool eventFilter(QObject *object, QEvent *event) override;
+    static const int RESIZE_BORDER_WIDTH;
+
     Ui::MainWindow * ui;
     WindowManager * _windowManager;
     DialogKeyboard * _keyboard;
     DialogRecorder * _recorder;
     DialogAbout _dialogAbout;
+    Qt::Edges _mousePositionEdges;
 };
 
 #endif // MAINWINDOW_H

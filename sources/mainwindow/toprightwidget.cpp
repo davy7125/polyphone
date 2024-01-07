@@ -36,9 +36,8 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
     ui->setupUi(this);
 
     // Main menu button style
-    ui->toolButton->setIcon(ContextManager::theme()->getColoredSvg(
-        ":/icons/menu.svg", QSize(28, 28), ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
-            ThemeManager::LIST_TEXT : ThemeManager::LIST_BACKGROUND));
+    _icon = ContextManager::theme()->getColoredSvg(":/icons/menu.svg", QSize(28, 28), ThemeManager::BUTTON_TEXT);
+    _iconEnabled = ContextManager::theme()->getColoredSvg(":/icons/menu.svg", QSize(28, 28), ThemeManager::HIGHLIGHTED_TEXT);
     menuClosed();
 
     // User button
@@ -47,6 +46,13 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
         ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
             ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND));
     ui->pushUser->setStyleSheet("QPushButton{margin:0 6px 6px 0}");
+
+    // Close button
+    ui->pushClose->setIcon(ContextManager::theme()->getColoredSvg(
+        ":/icons/close.svg", QSize(16, 16),
+        ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
+            ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND));
+    ui->pushClose->setStyleSheet("QPushButton{margin:0 0 6px 6px}");
 
     // Red color for the warning icon
     _colorReplacement["currentColor"] = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND).name();
@@ -169,18 +175,15 @@ void TopRightWidget::downloadCleared()
 
 void TopRightWidget::menuOpened()
 {
-    styleMenuButton(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
+    styleMenuButton(true);
 }
 
 void TopRightWidget::menuClosed()
 {
-    if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
-        styleMenuButton(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
-    else
-        styleMenuButton(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
+    styleMenuButton(false);
 }
 
-void TopRightWidget::styleMenuButton(QColor backgroundColor)
+void TopRightWidget::styleMenuButton(bool isEnabled)
 {
     QString styleSheet = "\
 QToolButton::menu-indicator{\
@@ -194,10 +197,23 @@ QToolButton{\
   border:1px solid %2;\
 }";
 
-    ui->toolButton->setStyleSheet(styleSheet
-        .arg(backgroundColor.name())
-        .arg(ThemeManager::mix(
-            ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
-            ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
-            ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ? 0.2 : 0.7).name()));
+    if (isEnabled)
+    {
+        ui->toolButton->setStyleSheet(styleSheet
+                                          .arg(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name())
+                                          .arg(ContextManager::theme()->getColor(ThemeManager::BORDER).name()));
+        ui->toolButton->setIcon(_iconEnabled);
+    }
+    else
+    {
+        ui->toolButton->setStyleSheet(styleSheet
+                                          .arg(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND).name())
+                                          .arg(ContextManager::theme()->getColor(ThemeManager::BORDER).name()));
+        ui->toolButton->setIcon(_icon);
+    }
+}
+
+void TopRightWidget::on_pushClose_clicked()
+{
+    emit(closeClicked());
 }

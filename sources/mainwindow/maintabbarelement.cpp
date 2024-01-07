@@ -47,10 +47,7 @@ MainTabBarElement::MainTabBarElement(QWidget * widget, QString iconName, bool is
 {
     // Colors
     _highlightColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
-    _borderColor = ThemeManager::mix(
-        ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
-        ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
-        ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ? 0.2 : 0.7);
+    _borderColor = ContextManager::theme()->getColor(ThemeManager::BORDER);
     _textColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
     _closeButtonBackgroundColor = ThemeManager::mix(

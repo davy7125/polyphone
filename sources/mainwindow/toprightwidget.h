@@ -67,12 +67,16 @@ private slots:
     void menuOpened();
     void menuClosed();
 
+    void on_pushClose_clicked();
+
 private:
-    void styleMenuButton(QColor backgroundColor);
+    void styleMenuButton(bool isEnabled);
 
     Ui::TopRightWidget *ui;
     MainMenu * _menu;
     QMap<QString, QString> _colorReplacement;
+    QPixmap _icon;
+    QPixmap _iconEnabled;
 };
 
 #endif // TOPRIGHTWIDGET_H
