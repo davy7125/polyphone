@@ -78,8 +78,8 @@ void TopBackground::paintEvent(QPaintEvent *event)
         QPainterPath path;
         path.moveTo(0, this->height()); // Left border
         path.lineTo(0, CORNER_RADIUS);
-        path.arcTo(0, 1, 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 180, -90.0); // Top border
-        path.arcTo(this->width() - 2 * CORNER_RADIUS, 1, 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 90, -90.0);
+        path.arcTo(0, 0, 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 180, -90.0); // Top border
+        path.arcTo(this->width() - 2 * CORNER_RADIUS, 0, 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 90, -90.0);
         path.lineTo(this->width(), this->height()); // Right border
         //path.lineTo(0, this->height()); // Bottom
 
