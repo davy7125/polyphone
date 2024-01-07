@@ -43,6 +43,8 @@ protected:
     void mouseDoubleClickEvent(QMouseEvent *event) override;
 
 private:
+    static const int CORNER_RADIUS;
+
     QColor _backgroundColor;
     QColor _bottomBorderColor;
     QPixmap * _pixmapFront;

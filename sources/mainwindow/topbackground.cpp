@@ -28,6 +28,9 @@
 #include <QDateTime>
 #include <QMouseEvent>
 #include <QWindow>
+#include <QPainterPath>
+
+const int TopBackground::CORNER_RADIUS = 10;
 
 TopBackground::TopBackground(QWidget *parent) : QWidget(parent),
     _pixmapFront(nullptr),
@@ -61,22 +64,35 @@ TopBackground::~TopBackground()
 void TopBackground::paintEvent(QPaintEvent *event)
 {
     QPainter p(this);
+    p.setPen(QPen(_backgroundColor, 1));
+    p.setBrush(QBrush(_backgroundColor.lighter(170)));
 
-    // Background color
-    p.setPen(_backgroundColor);
-    p.setBrush(_backgroundColor);
-    p.drawRect(this->rect());
+    if (this->parentWidget()->isMaximized())
+    {
+        // Draw the background with the border
+        p.drawRect(this->rect());
+    }
+    else
+    {
+        // Path of the window top border
+        QPainterPath path;
+        path.moveTo(0, this->height()); // Left border
+        path.lineTo(0, CORNER_RADIUS);
+        path.arcTo(0, 1, 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 180, -90.0); // Top border
+        path.arcTo(this->width() - 2 * CORNER_RADIUS, 1, 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 90, -90.0);
+        path.lineTo(this->width(), this->height()); // Right border
+        //path.lineTo(0, this->height()); // Bottom
 
-    // Background pattern
-    // for (int i = 0; i < this->width() / _pixmapBack->width() + 1; i++)
-    //     for (int j = 0; j < this->height() / _pixmapBack->height() + 1; j++)
-    //         p.drawPixmap(i * _pixmapBack->width(), j * _pixmapBack->height(), *_pixmapBack);
+        // Draw the background with the border
+        p.drawPath(path);
+        p.setClipPath(path);
+    }
 
     // Possible pattern on top of it
     if (_pixmapFront)
     {
         for (int i = 0; i < this->width() / _pixmapFront->width() + 1; i++)
-            p.drawPixmap(i * _pixmapFront->width(), 0, *_pixmapFront);
+            p.drawPixmap(i * _pixmapFront->width(), 1, *_pixmapFront);
     }
 
     // Bottom border
