@@ -50,7 +50,6 @@ public slots:
 protected:
     void closeEvent(QCloseEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
-    void mouseMoveEvent(QMouseEvent* e) override;
 
 private slots:
     void on_pushButtonDocumentation_clicked();

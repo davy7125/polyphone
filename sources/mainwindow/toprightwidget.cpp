@@ -48,11 +48,16 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
     ui->pushUser->setStyleSheet("QPushButton{margin:0 6px 6px 0}");
 
     // Close button
-    ui->pushClose->setIcon(ContextManager::theme()->getColoredSvg(
-        ":/icons/close.svg", QSize(16, 16),
-        ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
-            ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND));
-    ui->pushClose->setStyleSheet("QPushButton{margin:0 0 6px 6px}");
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "window_borders", false).toBool())
+        ui->pushClose->hide();
+    else
+    {
+        ui->pushClose->setIcon(ContextManager::theme()->getColoredSvg(
+            ":/icons/close.svg", QSize(16, 16),
+            ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
+                ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND));
+        ui->pushClose->setStyleSheet("QPushButton{margin:0 0 6px 6px}");
+    }
 
     // Red color for the warning icon
     _colorReplacement["currentColor"] = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND).name();

@@ -62,15 +62,27 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle(tr("Polyphone SoundFont Editor"));
     this->setWindowIcon(QIcon(":/misc/polyphone.png"));
-    this->setWindowFlags(windowFlags() | Qt::Window | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint);
-    this->setAttribute(Qt::WA_TranslucentBackground, true);
-    QApplication::instance()->installEventFilter(this);
 
-    ui->stackedWidget->setStyleSheet(
-        QString("MainStackedWidget{border:1px solid %1;border-top: 0}")
-            .arg(ContextManager::theme()->getColor(ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
-                                                       ThemeManager::LIST_BACKGROUND : ThemeManager::LIST_TEXT).name())
-        );
+    // Possibly remove the window borders
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "window_borders", false).toBool())
+    {
+        ui->gridLayoutTop->setContentsMargins(
+            ui->gridLayoutTop->contentsMargins().right(), // Left is smaller, right value is used
+            ui->gridLayoutTop->contentsMargins().top(),
+            ui->gridLayoutTop->contentsMargins().right(),
+            ui->gridLayoutTop->contentsMargins().bottom());
+    }
+    else
+    {
+        this->setWindowFlags(windowFlags() | Qt::Window | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint);
+        this->setAttribute(Qt::WA_TranslucentBackground, true);
+        QApplication::instance()->installEventFilter(this);
+        ui->stackedWidget->setStyleSheet(
+            QString("MainStackedWidget{border:1px solid %1;border-top: 0}")
+                .arg(ContextManager::theme()->getColor(ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
+                                                           ThemeManager::LIST_BACKGROUND : ThemeManager::LIST_TEXT).name())
+            );
+    }
 
 #ifdef NO_SF2_CREATION
     ui->pushButtonNew->hide();
@@ -394,11 +406,6 @@ void MainWindow::on_lineSearch_returnPressed()
 {
     if (!ui->lineSearch->text().isEmpty())
         on_pushButtonSearch_clicked();
-}
-
-void MainWindow::mouseMoveEvent(QMouseEvent * e)
-{
-    //e->ignore();
 }
 
 bool MainWindow::eventFilter(QObject *object, QEvent *event)

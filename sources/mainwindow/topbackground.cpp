@@ -36,6 +36,9 @@ TopBackground::TopBackground(QWidget *parent) : QWidget(parent),
     _pixmapFront(nullptr),
     _aboutToMove(false)
 {
+    // Window borders?
+    _withWindowBorders = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "window_borders", false).toBool();
+
     // Background color
     _backgroundColor = ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
                            ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND) :
@@ -67,7 +70,7 @@ void TopBackground::paintEvent(QPaintEvent *event)
     p.setPen(QPen(_backgroundColor, 1));
     p.setBrush(QBrush(_backgroundColor.lighter(170)));
 
-    if (this->parentWidget()->isMaximized())
+    if (this->parentWidget()->isMaximized() || _withWindowBorders)
     {
         // Draw the background with the border
         p.drawRect(this->rect());
@@ -81,7 +84,6 @@ void TopBackground::paintEvent(QPaintEvent *event)
         path.arcTo(0.5, 0.5, 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 180, -90.0); // Top border
         path.arcTo(this->width() - 2 * CORNER_RADIUS - 0.5, 0.5, 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 90, -90.0);
         path.lineTo(this->width() - 0.5, this->height()); // Right border
-        //path.lineTo(0, this->height()); // Bottom
 
         // Draw the background with the border
         p.drawPath(path);
@@ -96,7 +98,7 @@ void TopBackground::paintEvent(QPaintEvent *event)
     }
 
     // Bottom border
-    p.setPen(QPen(_bottomBorderColor, 1));
+    p.setPen(QPen(_bottomBorderColor, _withWindowBorders ? 0 : 1));
     p.drawLine(0, this->height(), this->width(), this->height());
 
     QWidget::paintEvent(event);
@@ -104,7 +106,7 @@ void TopBackground::paintEvent(QPaintEvent *event)
 
 void TopBackground::mousePressEvent(QMouseEvent *event)
 {
-    _aboutToMove = (event->buttons() == Qt::LeftButton);
+    _aboutToMove = !_withWindowBorders && (event->buttons() == Qt::LeftButton);
 }
 
 void TopBackground::mouseMoveEvent(QMouseEvent *event)
@@ -123,7 +125,7 @@ void TopBackground::mouseMoveEvent(QMouseEvent *event)
 
 void TopBackground::mouseDoubleClickEvent(QMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (!_withWindowBorders && event->button() == Qt::LeftButton)
     {
         if (this->topLevelWidget()->isMaximized())
             this->topLevelWidget()->showNormal();

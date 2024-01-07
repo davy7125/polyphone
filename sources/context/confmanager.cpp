@@ -101,6 +101,11 @@ ConfManager::~ConfManager()
 
 QVariant ConfManager::getValue(Section section, QString key, QVariant defaultValue) const
 {
+#if defined(Q_OS_MACOS)
+    // On MAC OS cannot resize window if the borders are hidden, so this option return always "true"
+    if (section == ConfManager::SECTION_DISPLAY && key == "window_borders")
+        return true;
+#endif
     return _settings.value(getFullKey(section, "", key), defaultValue);
 }
 

@@ -14,16 +14,39 @@
    <string notr="true">Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
-   <item row="0" column="0" colspan="3">
-    <widget class="QLabel" name="labelSubTitle1">
+   <item row="13" column="0" colspan="3">
+    <widget class="QLabel" name="labelRestart">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
      <property name="text">
-      <string>Text</string>
+      <string>This modification will be applied during the next start of the software.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="1">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Decorations</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Unique instance</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Sort divisions</string>
      </property>
     </widget>
    </item>
@@ -37,60 +60,10 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="1">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Unique instance</string>
-     </property>
-    </widget>
-   </item>
-   <item row="12" column="0" colspan="3">
-    <widget class="QLabel" name="labelRestart">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>This modification will be applied during the next start of the software.</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="1">
-    <widget class="QLabel" name="label_6">
-     <property name="text">
-      <string>Style</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="1">
-    <widget class="QLabel" name="labelColors">
-     <property name="text">
-      <string>Colors</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="2">
-    <widget class="QCheckBox" name="checkUniqueInstance">
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0" colspan="3">
-    <widget class="QLabel" name="labelSubTitle3">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Theme</string>
+   <item row="1" column="2">
+    <widget class="QComboBox" name="comboLangue">
+     <property name="currentIndex">
+      <number>-1</number>
      </property>
     </widget>
    </item>
@@ -100,7 +73,6 @@
       <widget class="QLabel" name="labelColorText">
        <property name="font">
         <font>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -125,7 +97,6 @@
        </property>
        <property name="font">
         <font>
-         <weight>50</weight>
          <bold>false</bold>
         </font>
        </property>
@@ -178,7 +149,6 @@
       <widget class="QLabel" name="labelColorWindow">
        <property name="font">
         <font>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -278,7 +248,6 @@
       <widget class="QLabel" name="labelColorButton">
        <property name="font">
         <font>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -294,7 +263,6 @@
       <widget class="QLabel" name="labelColorBackground">
        <property name="font">
         <font>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -341,7 +309,6 @@
       <widget class="QLabel" name="labelColorSelection">
        <property name="font">
         <font>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -391,7 +358,6 @@
        </property>
        <property name="font">
         <font>
-         <weight>50</weight>
          <bold>false</bold>
         </font>
        </property>
@@ -416,7 +382,6 @@
       <widget class="QLabel" name="labelColorList">
        <property name="font">
         <font>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -438,7 +403,6 @@
        </property>
        <property name="font">
         <font>
-         <weight>50</weight>
          <bold>false</bold>
         </font>
        </property>
@@ -461,22 +425,6 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="0">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
    <item row="8" column="2">
     <widget class="QComboBox" name="comboStyle">
      <item>
@@ -486,10 +434,60 @@
      </item>
     </widget>
    </item>
-   <item row="11" column="2">
+   <item row="0" column="0" colspan="3">
+    <widget class="QLabel" name="labelSubTitle1">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Text</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0" colspan="3">
+    <widget class="QLabel" name="labelSubTitle3">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Theme</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QLabel" name="labelColors">
+     <property name="text">
+      <string>Colors</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="3">
+    <widget class="QLabel" name="labelSubTitle2">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Behaviour</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="2">
     <widget class="QCheckBox" name="checkDecorations">
      <property name="text">
       <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Style</string>
      </property>
     </widget>
    </item>
@@ -506,43 +504,6 @@
      </property>
     </widget>
    </item>
-   <item row="11" column="1">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Decorations</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="2">
-    <widget class="QComboBox" name="comboSortDivisions">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <item>
-      <property name="text">
-       <string>by key range</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>by velocity range</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>in alphabetical order</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string comment="speaking of the &quot;sort divisions&quot;">none</string>
-      </property>
-     </item>
-    </widget>
-   </item>
    <item row="1" column="1">
     <widget class="QLabel" name="label_2">
      <property name="text">
@@ -550,19 +511,21 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="1">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Sort divisions</string>
+   <item row="1" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QComboBox" name="comboLangue">
-     <property name="currentIndex">
-      <number>-1</number>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
      </property>
-    </widget>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item row="2" column="2">
     <widget class="QComboBox" name="comboKeyName">
@@ -609,16 +572,54 @@
      </item>
     </widget>
    </item>
-   <item row="3" column="0" colspan="3">
-    <widget class="QLabel" name="labelSubTitle2">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
+   <item row="4" column="2">
+    <widget class="QComboBox" name="comboSortDivisions">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
+     <item>
+      <property name="text">
+       <string>by key range</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>by velocity range</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>in alphabetical order</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string comment="speaking of the &quot;sort divisions&quot;">none</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="QCheckBox" name="checkUniqueInstance">
      <property name="text">
-      <string>Behaviour</string>
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1">
+    <widget class="QLabel" name="labelBorders">
+     <property name="text">
+      <string>Window borders</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="2">
+    <widget class="QCheckBox" name="checkBorders">
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </item>

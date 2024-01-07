@@ -45,6 +45,7 @@ protected:
 private:
     static const int CORNER_RADIUS;
 
+    bool _withWindowBorders;
     QColor _backgroundColor;
     QColor _bottomBorderColor;
     QPixmap * _pixmapFront;

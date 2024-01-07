@@ -135,6 +135,16 @@ void ConfigSectionInterface::initialize()
     ui->checkUniqueInstance->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "unique_instance", true).toBool());
     ui->checkUniqueInstance->blockSignals(false);
 
+    ui->checkBorders->blockSignals(true);
+#if defined(Q_OS_MACOS)
+    ui->checkBorders->setVisible(false);
+    ui->labelBorders->setVisible(false);
+#else
+    ui->checkBorders->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "window_borders", false).toBool());
+#endif
+    ui->checkBorders->blockSignals(false);
+
+
     ui->checkDecorations->blockSignals(true);
     ui->checkDecorations->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "decoration", true).toBool());
     ui->checkDecorations->blockSignals(false);
@@ -308,6 +318,12 @@ void ConfigSectionInterface::on_comboKeyName_currentIndexChanged(int index)
 void ConfigSectionInterface::on_comboSortDivisions_currentIndexChanged(int index)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "division_sort", index);
+}
+
+void ConfigSectionInterface::on_checkBorders_clicked()
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "window_borders", ui->checkBorders->isChecked());
+    ui->labelRestart->show();
 }
 
 void ConfigSectionInterface::on_checkDecorations_clicked()

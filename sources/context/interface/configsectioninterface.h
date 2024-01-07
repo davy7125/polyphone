@@ -55,9 +55,11 @@ private slots:
     void on_comboLangue_currentIndexChanged(int index);
     void on_comboKeyName_currentIndexChanged(int index);
     void on_comboSortDivisions_currentIndexChanged(int index);
+    void on_checkBorders_clicked();
     void on_checkDecorations_clicked();
     void on_checkUniqueInstance_clicked();
     void on_comboStyle_currentIndexChanged(int index);
+
 
 private:
     void initComboLanguage();

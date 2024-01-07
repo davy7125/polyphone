@@ -2,8 +2,13 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QWidget" name="MainWindow">
-  <property name="windowTitle">
-   <string>Form</string>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>627</width>
+    <height>228</height>
+   </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -23,7 +28,7 @@
    </property>
    <item>
     <widget class="TopBackground" name="topBackground" native="true">
-     <layout class="QGridLayout" name="gridLayout_3">
+     <layout class="QGridLayout" name="gridLayoutTop">
       <property name="leftMargin">
        <number>48</number>
       </property>

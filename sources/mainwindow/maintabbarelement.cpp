@@ -135,7 +135,6 @@ void MainTabBarElement::draw(QPainter &painter, int translateX, int height)
     _tabPath.arcTo(x, 1, 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 180, -90.0); // Top border
     _tabPath.arcTo(x + _width - 2 * CORNER_RADIUS, 1, 2 * CORNER_RADIUS, 2 * CORNER_RADIUS, 90, -90.0);
     _tabPath.lineTo(x + _width, height); // Right border
-    //_tabPath.lineTo(x, height); // Bottom
 
     painter.setPen(QPen(_borderColor, 1));
     if (_isEnabled)
