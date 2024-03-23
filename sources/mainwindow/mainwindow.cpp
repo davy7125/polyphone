@@ -145,7 +145,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Recent files
     connect(ContextManager::recentFile(), SIGNAL(recentSf2Changed()), this, SLOT(recentSf2Changed()));
-    connect(ui->widgetShowHistory, SIGNAL(openFile(const QString&)), this, SLOT(openFiles(const QString&)));
+    connect(ui->widgetShowHistory, SIGNAL(openFile(const QString)), this, SLOT(openFiles(const QString)));
     recentSf2Changed();
 
     // Utils
@@ -302,7 +302,7 @@ void MainWindow::on_pushButtonNew_clicked()
     _windowManager->openNewSoundfont();
 }
 
-void MainWindow::openFiles(const QString& fileNames)
+void MainWindow::openFiles(const QString fileNames)
 {
     // Open all files
     QStringList files = fileNames.split('|', Qt::SkipEmptyParts);
@@ -414,19 +414,26 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
 
     if (event->type() == QEvent::MouseMove && !this->isMaximized())
     {
+        QWidget *w = qobject_cast<QWidget*>(object);
+        if (w == nullptr || w->window() != this)
+        {
+            this->unsetCursor();
+            return false;
+        }
+
         QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
         if (mouseEvent->buttons() != Qt::NoButton)
             return false;
 
         _mousePositionEdges = QFlags<Qt::Edge>();
-        QPoint pos = mouseEvent->globalPosition().toPoint();
-        if (pos.x() <= RESIZE_BORDER_WIDTH)
+        QPoint pos = this->mapFromGlobal(mouseEvent->globalPosition().toPoint());
+        if (pos.x() >= 0 && pos.x() <= RESIZE_BORDER_WIDTH)
             _mousePositionEdges |= Qt::LeftEdge;
-        else if (pos.x() >= this->width() - RESIZE_BORDER_WIDTH)
+        else if (pos.x() >= this->width() - RESIZE_BORDER_WIDTH && pos.x() <= this->width())
             _mousePositionEdges |= Qt::RightEdge;
-        if (pos.y() <= RESIZE_BORDER_WIDTH)
+        if (pos.y() >= 0 && pos.y() <= RESIZE_BORDER_WIDTH)
             _mousePositionEdges |= Qt::TopEdge;
-        else if (pos.y() >= this->height() - RESIZE_BORDER_WIDTH)
+        else if (pos.y() >= this->height() - RESIZE_BORDER_WIDTH && pos.y() <= this->height())
             _mousePositionEdges |= Qt::BottomEdge;
 
         if (_mousePositionEdges.toInt() > 0)
