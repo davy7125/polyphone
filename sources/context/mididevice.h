@@ -107,9 +107,10 @@ private:
     MIDI_State _midiStates[17];
 
     // Sustain / Sostenuto pedals (channel -1 only)
+    bool _currentKeys[128];
     bool _sustainedKeys[128];
     bool _sostenutoMemoryKeys[128];
-    bool _isSustainOn, _isSostenutoOn;
+    bool _isSustainOn;
 };
 
 #endif // MIDIDEVICE_H

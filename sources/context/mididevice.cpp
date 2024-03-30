@@ -346,15 +346,23 @@ void MidiDevice::processControllerChanged(int channel, int numController, int va
     {
         // Sustain pedal
         _isSustainOn = (value >= 64);
-        if (!_isSustainOn)
+        if (_isSustainOn)
         {
-            // Release all keys that have been sustained by the sustained pedal
+            // All current keys are now sustained
+            for (int key = 0; key < 128; key++)
+                _sustainedKeys[key] = _currentKeys[key] || _sostenutoMemoryKeys[key];
+        }
+        else
+        {
+            // Remove all keys that have been previously sustained
             for (int key = 0; key < 128; key++)
             {
                 if (_sustainedKeys[key])
                 {
                     _sustainedKeys[key] = false;
-                    if (!_isSostenutoOn || !_sostenutoMemoryKeys[key])
+
+                    // And release them if they are not currently triggered or held by the sostenuto
+                    if (!_currentKeys[key] && !_sostenutoMemoryKeys[key])
                         processKeyOff(-1, key);
                 }
             }
@@ -363,24 +371,26 @@ void MidiDevice::processControllerChanged(int channel, int numController, int va
     else if (numController == 66)
     {
         // Sostenuto pedal
-        if (_isSostenutoOn != (value >= 64))
+        if (value >= 64)
         {
-            _isSostenutoOn = (value >= 64);
-            if (!_isSostenutoOn)
+            // Remove all keys that have been held by the sostenuto pedal
+            for (int key = 0; key < 128; key++)
             {
-                // Release all keys that have been sustained by the sostenuto pedal
-                for (int key = 0; key < 128; key++)
+                if (_sostenutoMemoryKeys[key])
                 {
-                    if (_sostenutoMemoryKeys[key])
-                    {
-                        _sostenutoMemoryKeys[key] = false;
-                        if (!_isSustainOn)
-                            processKeyOff(-1, key);
-                        else
-                            _sustainedKeys[key] = true; // Will be released later with the sustained pedal
-                    }
+                    _sostenutoMemoryKeys[key] = false;
+
+                    // And release them if they are not currently triggered or activated by the sustain
+                    if (!_currentKeys[key] && !_sustainedKeys[key])
+                        processKeyOff(-1, key);
                 }
             }
+        }
+        else
+        {
+            // All current keys are now held by the sostenuto
+            for (int key = 0; key < 128; key++)
+                _sostenutoMemoryKeys[key] = _currentKeys[key] || _sustainedKeys[key];
         }
     }
 }
@@ -406,9 +416,15 @@ void MidiDevice::processKeyOn(int channel, int key, int vel)
         }
     }
 
-    // Update the memory list for the sostenuto
-    if (!_isSostenutoOn)
-        _sostenutoMemoryKeys[key] = true;
+    if (key != -1)
+    {
+        // Key currently activated
+        _currentKeys[key] = true;
+
+        // Possibly add it to the sustain
+        if (_isSustainOn)
+            _sustainedKeys[key] = true;
+    }
 
     // Notify about a key being played
     emit(keyPlayed(key, vel));
@@ -434,19 +450,14 @@ void MidiDevice::processKeyOff(int channel, int key)
     // Stop a sample playback if key is -1
     if (key == -1)
         _synth->play(EltID(), -1, -1, 0);
-    else if (_isSustainOn)
+    else
     {
-        // Add the key to the list of keys to release later when the pedal is released
-        _sustainedKeys[key] = true;
-    }
-    else if (!_isSostenutoOn || !_sostenutoMemoryKeys[key])
-    {
-        // Update the sostenuto memory
-        if (!_isSostenutoOn)
-            _sostenutoMemoryKeys[key] = false;
+        // Key currently deactivated
+        _currentKeys[key] = false;
 
-        // Notify about a key being not played anymore
-        emit(keyPlayed(key, 0));
+        // Release the key if it is not currently sustained or held by the sostenuto
+        if (!_sostenutoMemoryKeys[key] && !_sustainedKeys[key])
+            emit(keyPlayed(key, 0));
     }
 }
 
@@ -520,28 +531,15 @@ void MidiDevice::processBendSensitivityChanged(int channel, float semitones)
 
 void MidiDevice::stopAll()
 {
-    // Release all keys sustained
+    // Release all keys sustained or held by the sostenuto
     _isSustainOn = false;
     for (int key = 0; key < 128; key++)
     {
-        if (_sustainedKeys[key])
-        {
-            _sustainedKeys[key] = false;
-            processKeyOff(-1, key);
-        }
-    }
+        _currentKeys[key] = false;
+        _sustainedKeys[key] = false;
+        _sostenutoMemoryKeys[key] = false;
 
-    if (_isSostenutoOn)
-    {
-        _isSostenutoOn = false;
-        for (int key = 0; key < 128; key++)
-        {
-            if (_sostenutoMemoryKeys[key])
-            {
-                _sostenutoMemoryKeys[key] = false;
-                processKeyOff(-1, key);
-            }
-        }
+        processKeyOff(-1, key);
     }
 
     // Reset the keyboard
