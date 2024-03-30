@@ -374,6 +374,12 @@ void SoundfontBrowser::updateCellHeight()
                               this->height() - ui->framePagination->height() - 5);
 }
 
+void SoundfontBrowser::showEvent(QShowEvent * event)
+{
+     QWidget::showEvent(event);
+     updateCellHeight();
+}
+
 void SoundfontBrowser::resizeEvent(QResizeEvent * event)
 {
     QWidget::resizeEvent(event);
