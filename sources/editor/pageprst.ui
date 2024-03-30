@@ -58,14 +58,7 @@
     </widget>
    </item>
    <item>
-    <widget class="ModulatorEditor" name="modulatorEditor" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-    </widget>
+    <widget class="ModulatorEditor" name="modulatorEditor" native="true"/>
    </item>
   </layout>
  </widget>

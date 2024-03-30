@@ -28,7 +28,6 @@
 #include <QInputDialog>
 #include <QMenu>
 #include <qmath.h>
-#include "pianokeybdcustom.h"
 #include "contextmanager.h"
 #include "modulatorsplitter.h"
 
