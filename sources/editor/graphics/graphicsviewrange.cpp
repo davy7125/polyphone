@@ -1135,5 +1135,5 @@ bool GraphicsViewRange::event(QEvent* event)
             }
         }
     }
-    return QWidget::event(event);
+    return QGraphicsView::event(event);
 }

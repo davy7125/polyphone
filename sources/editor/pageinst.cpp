@@ -38,9 +38,6 @@ PageInst::PageInst(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // Style
-    QString resetHoverColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name();
-
     _table = ui->tableInst;
     _modulatorEditor = ui->modulatorEditor;
 
