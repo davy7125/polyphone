@@ -45,7 +45,7 @@ public:
 
 public slots:
     void recentSf2Changed();
-    void openFiles(const QString fileNames);
+    void openFiles(QString fileNames);
 
 protected:
     void closeEvent(QCloseEvent *event) override;

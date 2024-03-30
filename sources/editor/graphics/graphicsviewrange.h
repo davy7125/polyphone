@@ -81,7 +81,7 @@ private:
     GraphicsLegendItem * _legendItem;
     GraphicsLegendItem2 * _legendItem2;
     GraphicsZoomLine * _zoomLine;
-    QList<QGraphicsLineItem *> _lines;
+    QList<QGraphicsRectItem *> _lines;
     QMap<int, GraphicsKey*> _mapGraphicsKeys;
 
     // Various

@@ -71,11 +71,9 @@ GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
     _firstShiftRect(-100, 0, 0, 0)
 {
     // Colors
-    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
-    color.setAlpha(180);
-    _textColor = color;
-    color.setAlpha(40);
-    _lineColor = color;
+    _textColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+    _textColor.setAlpha(180);
+    _lineColor = ContextManager::theme()->getColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND);
 
     // Configuration
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
@@ -110,43 +108,44 @@ GraphicsViewRange::~GraphicsViewRange()
 
 void GraphicsViewRange::initItems()
 {
-    // Vertical lines
-    QPen penVerticalLines(_lineColor, 1);
-    penVerticalLines.setCosmetic(true);
-    for (quint32 note = 12; note <= 120; note += 12)
-    {
-        QGraphicsLineItem * line = new QGraphicsLineItem(note, OFFSET - MARGIN, note, OFFSET + WIDTH + MARGIN);
-        _scene->addItem(line);
-        line->setPen(penVerticalLines);
-        line->setZValue(0);
-        GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignHCenter | Qt::AlignBottom);
-        _scene->addItem(text);
-        text->setZValue(100);
-        text->setBrush(_textColor);
-        text->setText(ContextManager::keyName()->getKeyName(note));
-        text->setPos(note, OFFSET + WIDTH);
-        _bottomLabels << text;
-        _lines << line;
-    }
+    // // Vertical lines
+    // QBrush brushLines(_lineColor);
+    // QPen penLines(_lineColor);
+    // penLines.setCosmetic(true);
+    // for (quint32 note = 12; note <= 121; note += 12)
+    // {
+    //     QGraphicsRectItem * line = new QGraphicsRectItem(note - 0.5, OFFSET - MARGIN, 1, WIDTH + 2 * MARGIN);
+    //     _scene->addItem(line);
+    //     line->setBrush(brushLines);
+    //     line->setPen(penLines);
+    //     line->setZValue(0);
+    //     GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignHCenter | Qt::AlignBottom);
+    //     _scene->addItem(text);
+    //     text->setZValue(100);
+    //     text->setBrush(_textColor);
+    //     text->setText(ContextManager::keyName()->getKeyName(note));
+    //     text->setPos(note, OFFSET + WIDTH);
+    //     _bottomLabels << text;
+    //     _lines << line;
+    // }
 
-    // Horizontal lines
-    QPen penHorizontalLines(_lineColor, 1, Qt::DotLine);
-    penHorizontalLines.setCosmetic(true);
-    for (int vel = 10; vel <= 120; vel += 10)
-    {
-        QGraphicsLineItem * line = new QGraphicsLineItem(OFFSET - MARGIN, 127 - vel, OFFSET + WIDTH + MARGIN, 127 - vel);
-        _scene->addItem(line);
-        line->setPen(penHorizontalLines);
-        line->setZValue(0);
-        GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignLeft | Qt::AlignVCenter);
-        _scene->addItem(text);
-        text->setZValue(100);
-        text->setBrush(_textColor);
-        text->setText(QString::number(vel));
-        text->setPos(OFFSET, OFFSET + WIDTH - vel);
-        _leftLabels << text;
-        _lines << line;
-    }
+    // // Horizontal lines
+    // for (int vel = 10; vel <= 121; vel += 10)
+    // {
+    //     QGraphicsRectItem * line = new QGraphicsRectItem(OFFSET - MARGIN, 126.5 - vel, WIDTH + 2 * MARGIN, 1);
+    //     _scene->addItem(line);
+    //     line->setBrush(brushLines);
+    //     line->setPen(penLines);
+    //     line->setZValue(0);
+    //     GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignLeft | Qt::AlignVCenter);
+    //     _scene->addItem(text);
+    //     text->setZValue(100);
+    //     text->setBrush(_textColor);
+    //     text->setText(QString::number(vel));
+    //     text->setPos(OFFSET, 126.5 - vel);
+    //     _leftLabels << text;
+    //     _lines << line;
+    // }
 
     // Legends
     _legendItem = new GraphicsLegendItem(this->font().family());

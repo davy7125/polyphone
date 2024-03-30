@@ -145,7 +145,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Recent files
     connect(ContextManager::recentFile(), SIGNAL(recentSf2Changed()), this, SLOT(recentSf2Changed()));
-    connect(ui->widgetShowHistory, SIGNAL(openFile(const QString)), this, SLOT(openFiles(const QString)));
+    connect(ui->widgetShowHistory, SIGNAL(openFile(QString)), this, SLOT(openFiles(QString)));
     recentSf2Changed();
 
     // Utils
@@ -302,7 +302,7 @@ void MainWindow::on_pushButtonNew_clicked()
     _windowManager->openNewSoundfont();
 }
 
-void MainWindow::openFiles(const QString fileNames)
+void MainWindow::openFiles(QString fileNames)
 {
     // Open all files
     QStringList files = fileNames.split('|', Qt::SkipEmptyParts);
