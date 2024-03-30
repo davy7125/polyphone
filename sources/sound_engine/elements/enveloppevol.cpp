@@ -55,8 +55,8 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
         v_timeDecay = voiceParam->getDouble(champ_decayModEnv) * _sampleRate;
         v_levelSustain = voiceParam->getDouble(champ_sustainModEnv);
         v_timeRelease = voiceParam->getDouble(champ_releaseModEnv) * _sampleRate;
-        v_noteToHold = static_cast<float>(voiceParam->getInteger(champ_keynumToModEnvHold) / 1200);
-        v_noteToDecay = static_cast<float>(voiceParam->getInteger(champ_keynumToModEnvDecay) / 1200);
+        v_noteToHold = static_cast<float>(voiceParam->getInteger(champ_keynumToModEnvHold)) / 1200.f;
+        v_noteToDecay = static_cast<float>(voiceParam->getInteger(champ_keynumToModEnvDecay)) / 1200.f;
     }
     else
     {
@@ -66,8 +66,8 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
         v_timeDecay = voiceParam->getDouble(champ_decayVolEnv) * _sampleRate;
         v_levelSustain = voiceParam->getDouble(champ_sustainVolEnv);
         v_timeRelease = voiceParam->getDouble(champ_releaseVolEnv) * _sampleRate;
-        v_noteToHold = static_cast<float>(voiceParam->getInteger(champ_keynumToVolEnvHold) / 1200);
-        v_noteToDecay = static_cast<float>(voiceParam->getInteger(champ_keynumToVolEnvDecay) / 1200);
+        v_noteToHold = static_cast<float>(voiceParam->getInteger(champ_keynumToVolEnvHold)) / 1200.f;
+        v_noteToDecay = static_cast<float>(voiceParam->getInteger(champ_keynumToVolEnvDecay)) / 1200.f;
     }
 
     if (_fastRelease)
