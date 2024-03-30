@@ -57,13 +57,13 @@ void ModulatorGroup::loadModulators(const ModulatorData * const modData, int mod
     int existingModulatorNumber = _numberOfParameterModulators;
 
     // Create modulators
-    for (int i = 0; i < modulatorNumber; i++)
+    for (int i = 0; i < modulatorNumber; ++i)
     {
         // Possibly overwrite an existing modulator
         bool overwritten = false;
-        for (int i = 0; i < _numberOfParameterModulators; ++i)
+        for (int j = 0; j < _numberOfParameterModulators; ++j)
         {
-            if (_modulators[i].merge(modData[i]))
+            if (_modulators[j].merge(modData[i]))
             {
                 overwritten = true;
                 break;
