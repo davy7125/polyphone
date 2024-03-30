@@ -100,7 +100,7 @@ void Voice::initialize(VoiceInitializer * voiceInitializer)
     _audioSmplRate = voiceInitializer->audioSmplRate;
     _gain = 0;
     _token = voiceInitializer->token;
-    _currentSmplPos = _voiceParam.getPosition(champ_dwStart16); // This value is read only once
+    _currentSmplPos = 0xFFFFFFFF;
     _elapsedSmplPos = 0;
     _time = 0;
     _release = false;
@@ -130,6 +130,8 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 
     // Get voice current parameters
     _voiceParam.computeModulations();
+    if (_currentSmplPos == 0xFFFFFFFF)
+        _currentSmplPos = _voiceParam.getPosition(champ_dwStart16); // This value is read only once
     qint32 v_rootkey = _voiceParam.getInteger(champ_overridingRootKey);
     qint32 playedNote = _voiceParam.getInteger(champ_keynum);
     qint32 v_scaleTune = _voiceParam.getInteger(champ_scaleTuning);
