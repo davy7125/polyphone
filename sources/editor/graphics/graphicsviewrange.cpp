@@ -108,44 +108,44 @@ GraphicsViewRange::~GraphicsViewRange()
 
 void GraphicsViewRange::initItems()
 {
-    // // Vertical lines
-    // QBrush brushLines(_lineColor);
-    // QPen penLines(_lineColor);
-    // penLines.setCosmetic(true);
-    // for (quint32 note = 12; note <= 121; note += 12)
-    // {
-    //     QGraphicsRectItem * line = new QGraphicsRectItem(note - 0.5, OFFSET - MARGIN, 1, WIDTH + 2 * MARGIN);
-    //     _scene->addItem(line);
-    //     line->setBrush(brushLines);
-    //     line->setPen(penLines);
-    //     line->setZValue(0);
-    //     GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignHCenter | Qt::AlignBottom);
-    //     _scene->addItem(text);
-    //     text->setZValue(100);
-    //     text->setBrush(_textColor);
-    //     text->setText(ContextManager::keyName()->getKeyName(note));
-    //     text->setPos(note, OFFSET + WIDTH);
-    //     _bottomLabels << text;
-    //     _lines << line;
-    // }
+    // Vertical lines
+    QBrush brushLines(_lineColor);
+    QPen penLines(_lineColor);
+    penLines.setCosmetic(true);
+    for (quint32 note = 12; note <= 121; note += 12)
+    {
+        QGraphicsRectItem * line = new QGraphicsRectItem(note - 0.5, OFFSET - MARGIN, 1, WIDTH + 2 * MARGIN);
+        _scene->addItem(line);
+        line->setBrush(brushLines);
+        line->setPen(penLines);
+        line->setZValue(0);
+        GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignHCenter | Qt::AlignBottom);
+        _scene->addItem(text);
+        text->setZValue(100);
+        text->setBrush(_textColor);
+        text->setText(ContextManager::keyName()->getKeyName(note));
+        text->setPos(note, OFFSET + WIDTH);
+        _bottomLabels << text;
+        _lines << line;
+    }
 
-    // // Horizontal lines
-    // for (int vel = 10; vel <= 121; vel += 10)
-    // {
-    //     QGraphicsRectItem * line = new QGraphicsRectItem(OFFSET - MARGIN, 126.5 - vel, WIDTH + 2 * MARGIN, 1);
-    //     _scene->addItem(line);
-    //     line->setBrush(brushLines);
-    //     line->setPen(penLines);
-    //     line->setZValue(0);
-    //     GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignLeft | Qt::AlignVCenter);
-    //     _scene->addItem(text);
-    //     text->setZValue(100);
-    //     text->setBrush(_textColor);
-    //     text->setText(QString::number(vel));
-    //     text->setPos(OFFSET, 126.5 - vel);
-    //     _leftLabels << text;
-    //     _lines << line;
-    // }
+    // Horizontal lines
+    for (int vel = 10; vel <= 121; vel += 10)
+    {
+        QGraphicsRectItem * line = new QGraphicsRectItem(OFFSET - MARGIN, 126.5 - vel, WIDTH + 2 * MARGIN, 1);
+        _scene->addItem(line);
+        line->setBrush(brushLines);
+        line->setPen(penLines);
+        line->setZValue(0);
+        GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignLeft | Qt::AlignVCenter);
+        _scene->addItem(text);
+        text->setZValue(100);
+        text->setBrush(_textColor);
+        text->setText(QString::number(vel));
+        text->setPos(OFFSET, 126.5 - vel);
+        _leftLabels << text;
+        _lines << line;
+    }
 
     // Legends
     _legendItem = new GraphicsLegendItem(this->font().family());
