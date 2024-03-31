@@ -94,7 +94,9 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
     _dialogKeyboard(nullptr),
     _configuration(configuration),
     _midiin(nullptr),
-    _synth(synth)
+    _synth(synth),
+    _isSustainOn(false),
+    _isSostenutoOn(false)
 {
     memset((MIDI_State*)_midiStates, 0, 17 * sizeof(MIDI_State));
 
@@ -374,7 +376,15 @@ void MidiDevice::processControllerChanged(int channel, int numController, int va
     else if (numController == 66)
     {
         // Sostenuto pedal
-        if (value < 64 && _isSostenutoOn)
+        if (value >= 64 && !_isSostenutoOn)
+        {
+            _isSostenutoOn = true;
+
+            // All current keys are now held by the sostenuto
+            for (int key = 0; key < 128; key++)
+                _sostenutoMemoryKeys[key] = _currentKeys[key] || _sustainedKeys[key];
+        }
+        else if (value < 64 && _isSostenutoOn)
         {
             _isSostenutoOn = false;
             
@@ -390,14 +400,6 @@ void MidiDevice::processControllerChanged(int channel, int numController, int va
                         processKeyOff(-1, key);
                 }
             }
-        }
-        else if (value >= 64 && !_isSostenutoOn)
-        {
-            _isSostenutoOn = true;
-            
-            // All current keys are now held by the sostenuto
-            for (int key = 0; key < 128; key++)
-                _sostenutoMemoryKeys[key] = _currentKeys[key] || _sustainedKeys[key];
         }
     }
 }
@@ -540,6 +542,7 @@ void MidiDevice::stopAll()
 {
     // Release all keys sustained or held by the sostenuto
     _isSustainOn = false;
+    _isSostenutoOn = false;
     for (int key = 0; key < 128; key++)
     {
         _currentKeys[key] = false;
