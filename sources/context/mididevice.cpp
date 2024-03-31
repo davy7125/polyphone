@@ -345,15 +345,18 @@ void MidiDevice::processControllerChanged(int channel, int numController, int va
     if (numController == 64)
     {
         // Sustain pedal
-        _isSustainOn = (value >= 64);
-        if (_isSustainOn)
+        if (value >= 64 && !_isSustainOn)
         {
+            _isSustainOn = true;
+            
             // All current keys are now sustained
             for (int key = 0; key < 128; key++)
                 _sustainedKeys[key] = _currentKeys[key] || _sostenutoMemoryKeys[key];
         }
-        else
+        else if (value < 64 && _isSustainOn)
         {
+            _isSustainOn = false;
+            
             // Remove all keys that have been previously sustained
             for (int key = 0; key < 128; key++)
             {
@@ -371,8 +374,10 @@ void MidiDevice::processControllerChanged(int channel, int numController, int va
     else if (numController == 66)
     {
         // Sostenuto pedal
-        if (value >= 64)
+        if (value < 64 && _isSostenutoOn)
         {
+            _isSostenutoOn = false;
+            
             // Remove all keys that have been held by the sostenuto pedal
             for (int key = 0; key < 128; key++)
             {
@@ -386,8 +391,10 @@ void MidiDevice::processControllerChanged(int channel, int numController, int va
                 }
             }
         }
-        else
+        else if (value >= 64 && !_isSostenutoOn)
         {
+            _isSostenutoOn = true;
+            
             // All current keys are now held by the sostenuto
             for (int key = 0; key < 128; key++)
                 _sostenutoMemoryKeys[key] = _currentKeys[key] || _sustainedKeys[key];
