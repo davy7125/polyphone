@@ -110,7 +110,7 @@ private:
     bool _currentKeys[128];
     bool _sustainedKeys[128];
     bool _sostenutoMemoryKeys[128];
-    bool _isSustainOn;
+    bool _isSustainOn, _isSostenutoOn;
 };
 
 #endif // MIDIDEVICE_H
