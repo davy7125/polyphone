@@ -64,7 +64,7 @@ const char SfArkExtractor2::UpgradeMsg[] = "Please see Help/About for informatio
     _bioRemBits += BIO_WBITS;                    \
     }                                             \
     _bioRemBits -= n;                              \
-    w = (BIOWORD) (_bioBits >> _bioRemBits);        \
+    w = (quint16) (_bioBits >> _bioRemBits);        \
     _bioBits = LOWBITS(_bioBits, _bioRemBits)
 
 // =========================================================================
@@ -77,11 +77,11 @@ const char SfArkExtractor2::UpgradeMsg[] = "Please see Help/About for informatio
 {                                             \
     bioWholeBlocks++;                           \
     bioP = 0;                                   \
-    int ReadLen = ReadInputFile((BYTE *) bioBuf, BIOBUFSIZE * sizeof(BIOWORD)); \
+    int ReadLen = ReadInputFile((quint8 *) bioBuf, BIOBUFSIZE * sizeof(quint16)); \
     if (ReadLen <= 0)  return 0;		\
-    BYTE *bp = (BYTE *) bioBuf, *ep = (BYTE *) (bioBuf+BIOBUFSIZE); \
+    quint8 *bp = (quint8 *) bioBuf, *ep = (quint8 *) (bioBuf+BIOBUFSIZE); \
     do {					\
-    BYTE s;					\
+    quint8 s;					\
     WFIX(0); WFIX(2); WFIX(4); WFIX(6);	\
     WFIX(8); WFIX(10); WFIX(12); WFIX(14);	\
     bp += 16;				\
@@ -95,7 +95,7 @@ const char SfArkExtractor2::UpgradeMsg[] = "Please see Help/About for informatio
 {                                             \
     _bioWholeBlocks++;                           \
     _bioP = 0;                                   \
-    int ReadLen = ReadInputFile((BYTE *) _bioBuf, BIOBUFSIZE * sizeof(BIOWORD)); \
+    int ReadLen = ReadInputFile((quint8 *) _bioBuf, BIOBUFSIZE * sizeof(quint16)); \
     if (ReadLen <= 0)  return 0;				\
     }
 #endif
@@ -286,10 +286,10 @@ void SfArkExtractor2::BioDecompEnd()
     return;
 }
 
-BIOWORD SfArkExtractor2::BioRead(int n)
+quint16 SfArkExtractor2::BioRead(int n)
 // Read bits from input, return value
 {
-    BIOWORD w;
+    quint16 w;
     INBITS(w, n);
     return w;
 }
@@ -297,12 +297,12 @@ BIOWORD SfArkExtractor2::BioRead(int n)
 bool SfArkExtractor2::BioReadFlag(void)
 // Read single bit from input, return value as bool
 {
-    BIOWORD w;
+    quint16 w;
     INBITS(w, 1);
     return (w != 0);
 }
 
-long SfArkExtractor2::BioReadBuf(BYTE *buf, long n)
+long SfArkExtractor2::BioReadBuf(quint8 *buf, long n)
 // Read *bytes* to output, return number of BYTES
 {
     int SavebioP = _bioP;
@@ -310,18 +310,18 @@ long SfArkExtractor2::BioReadBuf(BYTE *buf, long n)
 
     while (n--)
     {
-        BIOWORD b;
+        quint16 b;
         INBITS(b, 8);
-        *buf++ = (BYTE) b;
+        *buf++ = (quint8) b;
     }
 
-    return (_bioP - SavebioP + _bioWholeBlocks * BIOBUFSIZE) * sizeof(BIOWORD);
+    return (_bioP - SavebioP + _bioWholeBlocks * BIOBUFSIZE) * sizeof(quint16);
 }
 
-AWORD SfArkExtractor2::InputDiff(AWORD Prev)
+qint16 SfArkExtractor2::InputDiff(qint16 Prev)
 // Read a value from input as difference from Previous value, return new value
 {
-    AWORD x;
+    qint16 x;
 
     GRP_INBITS(x);
     if (x != 0)								// If non-zero, check sign bit
@@ -332,10 +332,10 @@ AWORD SfArkExtractor2::InputDiff(AWORD Prev)
     return x + Prev;
 }
 
-long SfArkExtractor2::UnCrunch(AWORD *UnCompBuf, USHORT bufsize)
+long SfArkExtractor2::UnCrunch(qint16 *UnCompBuf, quint16 bufsize)
 {
     short     FixBits;
-    AWORD *bp = UnCompBuf, *endp = UnCompBuf+bufsize;
+    qint16 *bp = UnCompBuf, *endp = UnCompBuf+bufsize;
 
     FixBits = InputDiff(_bioPfb);
     _bioPfb = FixBits;
@@ -345,7 +345,7 @@ long SfArkExtractor2::UnCrunch(AWORD *UnCompBuf, USHORT bufsize)
         // Uncompress the block...
         short FSbits = FixBits + SIGNBIT;
         do {
-            UAWORD grp, LoBits;
+            quint16 grp, LoBits;
             INBITS(LoBits, FSbits);                       // Get LowBits & SignBit
             GRP_INBITS(grp);                              // Get group bits
             *bp = ((grp << FixBits) | (LoBits>>1)) ^ -(LoBits&1);    // NB: -Sign gives 0 or 0xFFFF
@@ -374,10 +374,10 @@ long SfArkExtractor2::UnCrunch(AWORD *UnCompBuf, USHORT bufsize)
     return 0;
 }
 
-long SfArkExtractor2::UnCrunchWin(AWORD *buf, USHORT bufsize, USHORT winsize)
+long SfArkExtractor2::UnCrunchWin(qint16 *buf, quint16 bufsize, quint16 winsize)
 {
-    USHORT finalwinsize = bufsize % winsize;
-    AWORD *endp = buf + bufsize - finalwinsize;
+    quint16 finalwinsize = bufsize % winsize;
+    qint16 *endp = buf + bufsize - finalwinsize;
 
     for ( ; buf < endp; buf += winsize)
     {
@@ -407,7 +407,7 @@ short SfArkExtractor2::GetNBits(short w)
     if (_nb_init == 0)
     {
         long first = 1, last, i;
-        BYTE nbits = 1;
+        quint8 nbits = 1;
         _nb_init = 1;
         _nb[0] = 0;
 
@@ -425,18 +425,18 @@ short SfArkExtractor2::GetNBits(short w)
 // SFKL CODING
 // ==============================================================
 
-USHORT SfArkExtractor2::GetsfArkLibVersion(void)
+quint16 SfArkExtractor2::GetsfArkLibVersion(void)
 {
     return (ProgVersionMaj * 10) + ProgVersionMin/10;
 }
 
 // Read the File Header....
-int SfArkExtractor2::ReadHeader(V2_FILEHEADER *FileHeader, BYTE *fbuf, int bufsize)
+int SfArkExtractor2::ReadHeader(V2_FILEHEADER *FileHeader, quint8 *fbuf, int bufsize)
 {
     int HeaderLen = 0, HdrOffset;
     char	CreatedByProg[HDR_NAME_LEN +1],  CreatedByVersion[HDR_VERS_LEN +1];
-    ULONG	CalcHdrCheck = 0;
-    BYTE *HdrBuf, *bpFileHeader = (BYTE *) FileHeader;
+    quint32	CalcHdrCheck = 0;
+    quint8 *HdrBuf, *bpFileHeader = (quint8 *) FileHeader;
 
     // Find and process the Header:  This could be a plain sfArk file, a self-extracting file or some other (invalid) file.
     // Also, it could be a sfArk V1 file, which we can't decompress, but should at least recognise.
@@ -461,7 +461,7 @@ int SfArkExtractor2::ReadHeader(V2_FILEHEADER *FileHeader, BYTE *fbuf, int bufsi
     {
         HdrOffset = (TryOffset == 0)? 0 : HEADER_MAX_OFFSET - TryOffset; // Check offset = 0 first, then backwards from end
 
-        BYTE *sigpos = fbuf + HdrOffset + HEADER_SIG_POS;
+        quint8 *sigpos = fbuf + HdrOffset + HEADER_SIG_POS;
         if (*sigpos != 's'  ||  memcmp(sigpos, "sfArk", 5) != 0)  continue;
 
         SigFound = true;					// Set a flag to remember that we at least got this far
@@ -470,7 +470,7 @@ int SfArkExtractor2::ReadHeader(V2_FILEHEADER *FileHeader, BYTE *fbuf, int bufsi
         if (V2_FILEHEADER_SIZE != sizeof(V2_FILEHEADER))	// Compare structure size to real size
         {
             // The compiler has messed with structure (alignment), so copy the data to the structure byte by byte...
-            BYTE *bptr = HdrBuf;		// Point to start
+            quint8 *bptr = HdrBuf;		// Point to start
             // Copy all fields...
 #define CPF(f) memcpy(&(FileHeader->f), bptr, sizeof(FileHeader->f)); bptr += sizeof(FileHeader->f)
             CPF(Flags); CPF(OriginalSize); CPF(CompressedSize); CPF(FileCheck); CPF(HdrCheck);
@@ -610,7 +610,7 @@ bool SfArkExtractor2::InvalidEncodeCount(int EncodeCount, int MaxLoops)
         return false;
 }
 
-int SfArkExtractor2::DecompressTurbo(BLOCK_DATA *Blk, USHORT NumWords)
+int SfArkExtractor2::DecompressTurbo(BLOCK_DATA *Blk, quint16 NumWords)
 {
     int EncodeCount = InputDiff(Blk->PrevEncodeCount);
     if (InvalidEncodeCount(EncodeCount, Blk->MaxLoops))  return (GlobalErrorFlag = SFARKLIB_ERR_CORRUPT);
@@ -628,12 +628,12 @@ int SfArkExtractor2::DecompressTurbo(BLOCK_DATA *Blk, USHORT NumWords)
     {
         if (j == 0)  Blk->FileCheck = (Blk->FileCheck << 1) + BufSum(Blk->SrcBuf, NumWords);
         UnBufDif2(Blk->DstBuf, Blk->SrcBuf, NumWords, &(Blk->PrevIn[j]));
-        AWORD *SwapBuf = Blk->SrcBuf;  Blk->SrcBuf = Blk->DstBuf; Blk->DstBuf = SwapBuf;
+        qint16 *SwapBuf = Blk->SrcBuf;  Blk->SrcBuf = Blk->DstBuf; Blk->DstBuf = SwapBuf;
     }
     return SFARKLIB_SUCCESS;
 }
 
-bool SfArkExtractor2::CheckShift(short *ShiftVal, USHORT NumWords, short *PrevShift, short *PrevUsedShift)
+bool SfArkExtractor2::CheckShift(short *ShiftVal, quint16 NumWords, short *PrevShift, short *PrevUsedShift)
 // Here we look to see if the current buffer has been rightshifted
 // There is a flag for the whole buffer to show if any shifted data exists,
 // and if so there further flags to show if the Shift value changes within each sub block
@@ -687,14 +687,14 @@ bool SfArkExtractor2::CheckShift(short *ShiftVal, USHORT NumWords, short *PrevSh
     return UsingShift;
 }
 
-int SfArkExtractor2::DecompressFast(BLOCK_DATA *Blk, USHORT NumWords)
+int SfArkExtractor2::DecompressFast(BLOCK_DATA *Blk, quint16 NumWords)
 {
     int	i, EncodeCount;
     short	ShiftVal[NSHIFTS];						// Shift values (one per SHIFTWIN words)
-    USHORT	Method[MAX_DIFF_LOOPS];				// Block processing methods used per iteration
+    quint16	Method[MAX_DIFF_LOOPS];				// Block processing methods used per iteration
 
 #if	DB_BLOCKCHECK											// If debug mode block check enabled
-    ULONG BlockCheck = BioRead(16);				// Read block check bits
+    quint32 BlockCheck = BioRead(16);				// Read block check bits
 #endif
 
     bool UsingShift = CheckShift(ShiftVal, NumWords, &Blk->PrevShift, &Blk->PrevUsedShift);
@@ -717,7 +717,7 @@ int SfArkExtractor2::DecompressFast(BLOCK_DATA *Blk, USHORT NumWords)
     }
 
     // If using LPC, check for and read flags...
-    ULONG LPCflags;
+    quint32 LPCflags;
     bool UsingLPC = (Blk->FileHeader.CompMethod != COMPRESSION_v2Fast);
     if (UsingLPC)
     {
@@ -738,7 +738,7 @@ int SfArkExtractor2::DecompressFast(BLOCK_DATA *Blk, USHORT NumWords)
     if (UsingLPC)
     {
         UnLPC(Blk->DstBuf, Blk->SrcBuf, NumWords, Blk->nc, &LPCflags);
-        AWORD *SwapBuf = Blk->SrcBuf;  Blk->SrcBuf = Blk->DstBuf; Blk->DstBuf = SwapBuf;
+        qint16 *SwapBuf = Blk->SrcBuf;  Blk->SrcBuf = Blk->DstBuf; Blk->DstBuf = SwapBuf;
     }
 
     if (UsingBD4)
@@ -746,7 +746,7 @@ int SfArkExtractor2::DecompressFast(BLOCK_DATA *Blk, USHORT NumWords)
         for (i = EncodeCount-1; i >= 0; i--)
         {
             UnBufDif4(Blk->DstBuf, Blk->SrcBuf, NumWords, &(Blk->PrevIn[i]));
-            AWORD *SwapBuf = Blk->SrcBuf;  Blk->SrcBuf = Blk->DstBuf; Blk->DstBuf = SwapBuf;
+            qint16 *SwapBuf = Blk->SrcBuf;  Blk->SrcBuf = Blk->DstBuf; Blk->DstBuf = SwapBuf;
         }
     }
     else
@@ -758,15 +758,15 @@ int SfArkExtractor2::DecompressFast(BLOCK_DATA *Blk, USHORT NumWords)
             case 0: UnBufDif2(Blk->DstBuf, Blk->SrcBuf, NumWords, &(Blk->PrevIn[i])); break;
             case 1: UnBufDif3(Blk->DstBuf, Blk->SrcBuf, NumWords, &(Blk->PrevIn[i])); break;
             }
-            AWORD *SwapBuf = Blk->SrcBuf;  Blk->SrcBuf = Blk->DstBuf; Blk->DstBuf = SwapBuf;
+            qint16 *SwapBuf = Blk->SrcBuf;  Blk->SrcBuf = Blk->DstBuf; Blk->DstBuf = SwapBuf;
         }
     }
 
     if (UsingShift)  UnBufShift(Blk->SrcBuf, NumWords, ShiftVal);
 
 #if	DB_BLOCKCHECK											// If debug mode block check enabled
-    ULONG CalcBlockCheck = adler32(0, (const BYTE *) Blk->SrcBuf, 2*NumWords) & 0xffff;
-    //ULONG CalcBlockCheck = Blk->FileCheck & 0xffff;
+    quint32 CalcBlockCheck = adler32(0, (const quint8 *) Blk->SrcBuf, 2*NumWords) & 0xffff;
+    //quint32 CalcBlockCheck = Blk->FileCheck & 0xffff;
     //printf("Audio Block Checks Read: %ld, Calc %ld  Length=%d\n", BlockCheck, CalcBlockCheck, 2*NumWords);
     //getc(stdin);
     if (BlockCheck != CalcBlockCheck)			// Compare to calculated cheksum
@@ -788,9 +788,9 @@ int SfArkExtractor2::ProcessNextBlock(BLOCK_DATA *Blk)
 
     uint32_t	n, m;							// NB: Must be 32-bit integer
 
-#define	AWBYTES	(sizeof(AWORD))
-    BYTE *zSrcBuf = (BYTE *) Blk->SrcBuf;
-    BYTE *zDstBuf = (BYTE *) Blk->DstBuf;
+#define	AWBYTES	(sizeof(qint16))
+    quint8 *zSrcBuf = (quint8 *) Blk->SrcBuf;
+    quint8 *zDstBuf = (quint8 *) Blk->DstBuf;
 
     switch (Blk->FileSection)
     {
@@ -813,12 +813,12 @@ int SfArkExtractor2::ProcessNextBlock(BLOCK_DATA *Blk)
         else																															// For all other methods
             DecompressFast(Blk, NumWords);										// Decompress
 
-        //printf("B4 WriteOutputFile: %ld\n", adler32(0, (const BYTE *) Blk->SrcBuf, n) & 0xffff);
+        //printf("B4 WriteOutputFile: %ld\n", adler32(0, (const quint8 *) Blk->SrcBuf, n) & 0xffff);
 #if BYTE_ORDER == BIG_ENDIAN
 #define	WFIX(I)		s = bp[I+0]; bp[I+0] = bp[I+1]; bp[I+1] = s;
-        BYTE *bp = (BYTE *) Blk->SrcBuf; BYTE *ep = bp + n;
+        quint8 *bp = (quint8 *) Blk->SrcBuf; quint8 *ep = bp + n;
         do {
-            BYTE s;
+            quint8 s;
             WFIX(0); WFIX(2); WFIX(4); WFIX(6);
             WFIX(8); WFIX(10); WFIX(12); WFIX(14);
             bp += 16;
@@ -826,14 +826,14 @@ int SfArkExtractor2::ProcessNextBlock(BLOCK_DATA *Blk)
 #undef WFIX
 #endif
 
-        WriteOutputFile((const BYTE *)Blk->SrcBuf, n);										// Write to output file
+        WriteOutputFile((const quint8 *)Blk->SrcBuf, n);										// Write to output file
         Blk->TotBytesWritten += n;																				// Accumulate total bytes written
         break;
     }
 
     case PRE_AUDIO: case POST_AUDIO: case NON_AUDIO:
     {
-        BioReadBuf((BYTE *) &n, sizeof(n));
+        BioReadBuf((quint8 *) &n, sizeof(n));
         FixEndian(&n, sizeof(n));
         //printf("Reading PRE/POST AUDIO block, compressed %ld bytes\n", n);
         if (n > ZBUF_SIZE)	// Check for valid block length
@@ -859,9 +859,9 @@ int SfArkExtractor2::ProcessNextBlock(BLOCK_DATA *Blk)
             return SFARKLIB_ERR_CORRUPT;
 
 #if	DB_BLOCKCHECK					// If debug mode block check enabled
-        ULONG BlockCheck = BioRead(16);				// Read block check bits
+        quint32 BlockCheck = BioRead(16);				// Read block check bits
         FixEndian(&BlockCheck, sizeof(Blockcheck));
-        ULONG CalcBlockCheck = adler32(0, zDstBuf, m) & 0xFFFF;
+        quint32 CalcBlockCheck = adler32(0, zDstBuf, m) & 0xFFFF;
         printf("NonAudio Block Checks Read: %ld, Calc %ld Length=%d\n", BlockCheck, CalcBlockCheck, m);
         if (BlockCheck != CalcBlockCheck)			// Compare to calculated cheksum
         {
@@ -896,11 +896,11 @@ int	SfArkExtractor2::EndProcess(int ErrorNum)
 
 // Extract License & Notes files
 // These are stored as 4-bytes length, followed by length-bytes of compressed data
-bool SfArkExtractor2::ExtractTextFile(BLOCK_DATA *Blk, ULONG FileType)
+bool SfArkExtractor2::ExtractTextFile(BLOCK_DATA *Blk, quint32 FileType)
 {
-    ULONG n, m;
-    BYTE *zSrcBuf = (BYTE *) Blk->SrcBuf;
-    BYTE *zDstBuf = (BYTE *) Blk->DstBuf;
+    quint32 n, m;
+    quint8 *zSrcBuf = (quint8 *) Blk->SrcBuf;
+    quint8 *zDstBuf = (quint8 *) Blk->DstBuf;
 
     const char *OutFileName = 0;
     if (FileType == FLAGS_License)
@@ -913,8 +913,8 @@ bool SfArkExtractor2::ExtractTextFile(BLOCK_DATA *Blk, ULONG FileType)
     // NB:Can't use BioReadBuf... aligment problems? Yet it works for ProcessNextBlock() !!??
     // Ok, can use ReadInputFile here cause everythjing is whole no. of bytes...
 
-    //BioReadBuf((BYTE *)&n, sizeof(n));					// Read length of block from file
-    ReadInputFile((BYTE *)&n, sizeof(n));					// Read length of block from file
+    //BioReadBuf((quint8 *)&n, sizeof(n));					// Read length of block from file
+    ReadInputFile((quint8 *)&n, sizeof(n));					// Read length of block from file
     FixEndian(&n, sizeof(n));										// Fix endian
 
     if (n <= 0  ||  n > ZBUF_SIZE)								// Check for valid block length
@@ -926,7 +926,7 @@ bool SfArkExtractor2::ExtractTextFile(BLOCK_DATA *Blk, ULONG FileType)
     }
 
     //BioReadBuf(zSrcBuf, n);																					// Read the block
-    ReadInputFile((BYTE *)zSrcBuf, n);																// Read the block
+    ReadInputFile((quint8 *)zSrcBuf, n);																// Read the block
     m = UnMemcomp(zSrcBuf, n, zDstBuf, ZBUF_SIZE);										// Uncompress
     Blk->FileCheck = adler32(Blk->FileCheck, zDstBuf, m);	   					// Accumulate checksum
     if (GlobalErrorFlag  ||  m > ZBUF_SIZE)														// Uncompressed ok & size is valid?
@@ -968,19 +968,19 @@ int SfArkExtractor2::Decode(const char *InFileName, const char *ReqOutFileName)
     // so that current data is always at SrcBuf
 
     // NB: On MacOS/GNU C, the following allocation of Zbuf1 and Zbuf2 causes "segmentation fault"
-    // BYTE	Zbuf1[ZBUF_SIZE];					// Buffer1
-    // BYTE	Zbuf2[ZBUF_SIZE];					// Buffer2
+    // quint8	Zbuf1[ZBUF_SIZE];					// Buffer1
+    // quint8	Zbuf2[ZBUF_SIZE];					// Buffer2
     // so instead...
 
     if (_zbuf1 == NULL)
-        _zbuf1 = (BYTE *) calloc(ZBUF_SIZE, sizeof(BYTE));
+        _zbuf1 = (quint8 *) calloc(ZBUF_SIZE, sizeof(quint8));
     if (_zbuf2 == NULL)
-        _zbuf2 = (BYTE *) calloc(ZBUF_SIZE, sizeof(BYTE));
+        _zbuf2 = (quint8 *) calloc(ZBUF_SIZE, sizeof(quint8));
     if (_zbuf1 == NULL  ||  _zbuf2 == NULL)
         return EndProcess(SFARKLIB_ERR_MALLOC);
 
-    Blk.SrcBuf = (AWORD *) _zbuf1;					// Point to Zbuf1
-    Blk.DstBuf = (AWORD *) _zbuf2;					// Point to Zbuf2
+    Blk.SrcBuf = (qint16 *) _zbuf1;					// Point to Zbuf1
+    Blk.DstBuf = (qint16 *) _zbuf2;					// Point to Zbuf2
 
     // Initialisation...
     BioDecompInit();						// Initialise bit i/o
@@ -1068,8 +1068,8 @@ int SfArkExtractor2::Decode(const char *InFileName, const char *ReqOutFileName)
     // Process the main file...
     Blk.FileSection = PRE_AUDIO;		// We start with pre-audio data
 
-    ULONG ProgressUpdateInterval = Blk.FileHeader.OriginalSize / 100; // Calculate progress update
-    ULONG NextProgressUpdate = ProgressUpdateInterval;
+    quint32 ProgressUpdateInterval = Blk.FileHeader.OriginalSize / 100; // Calculate progress update
+    quint32 NextProgressUpdate = ProgressUpdateInterval;
     int ProgressPercent = 0;
     UpdateProgress(0);
 
@@ -1116,9 +1116,9 @@ int SfArkExtractor2::Decode(const char *InFileName, const char *ReqOutFileName)
 void SfArkExtractor2::FixEndian(void *num, int nsize)
 {
     int i;
-    BYTE bb[4];
-    for (i = 0; i < nsize; i++)  bb[i] = ((BYTE *) num)[i];
-    for (i = 0; i < nsize; i++)  ((BYTE *) num)[i] = bb[nsize-1-i];
+    quint8 bb[4];
+    for (i = 0; i < nsize; i++)  bb[i] = ((quint8 *) num)[i];
+    for (i = 0; i < nsize; i++)  ((quint8 *) num)[i] = bb[nsize-1-i];
 }
 #else
 void SfArkExtractor2::FixEndian(void * /*num*/, int /*nsize*/) {}
@@ -1128,7 +1128,7 @@ void SfArkExtractor2::FixEndian(void * /*num*/, int /*nsize*/) {}
 // SFKL ZIP
 // ==============================================================
 
-ULONG SfArkExtractor2::UnMemcomp(const BYTE *InBuf, int InBytes, BYTE *OutBuf, int OutBufLen)
+quint32 SfArkExtractor2::UnMemcomp(const quint8 *InBuf, int InBytes, quint8 *OutBuf, int OutBufLen)
 {
     // Uncompress buffer using ZLIBs uncompress function...
     unsigned long OutBytes = OutBufLen;
@@ -1275,7 +1275,7 @@ LPC_CORR SfArkExtractor2::schur(             // returns the minimum mean square 
 }
 
 // Compute the autocorrelation
-void SfArkExtractor2::autocorrelation(int n, LPC_WORD const *ibuf, int nc, LPC_CORR *ac)
+void SfArkExtractor2::autocorrelation(int n, qint32 const *ibuf, int nc, LPC_CORR *ac)
 {
     int i;
 
@@ -1306,7 +1306,7 @@ void SfArkExtractor2::autocorrelation(int n, LPC_WORD const *ibuf, int nc, LPC_C
 }
 
 // Add the autocorrelation for the end section of previous Window / start of current window
-void SfArkExtractor2::AddAC (LPC_WORD const *hbuf, LPC_WORD const *ibuf, int nc, LPC_CORR *ac)
+void SfArkExtractor2::AddAC (qint32 const *hbuf, qint32 const *ibuf, int nc, LPC_CORR *ac)
 {
     int i;
 
@@ -1351,11 +1351,11 @@ void SfArkExtractor2::LPCdecode(
         LPC_PRAM const *ref,    //  in: [0...p-1] reflection coefficients
         int            nc,      //  in: number of coefficients
         int            n,       //      # of samples
-        LPC_WORD const *in,     //      [0...n-1] residual input
-        LPC_WORD       *out)    // out: [0...n-1] short-term signal
+        qint32 const *in,     //      [0...n-1] residual input
+        qint32       *out)    // out: [0...n-1] short-term signal
 
 {
-    LPC_WORD s;
+    qint32 s;
     int i;
 
     if (in == LAW_NULL)     // Initialise?
@@ -1376,7 +1376,7 @@ void SfArkExtractor2::LPCdecode(
     // ------------------------------------------------------
 
         LPC_PRAM const *refp = ref+nc-1;
-        LPC_WORD *up = LPCdecode_u+nc-1;
+        qint32 *up = LPCdecode_u+nc-1;
 
         while(refp >= ref)
         {
@@ -1412,13 +1412,13 @@ void SfArkExtractor2::LPCdecode(
 }
 
 // UnLPC2() is called by UnLPC() -- process one LPCWIN sized chunk
-long SfArkExtractor2::UnLPC2(LPC_WORD *OutBuf, LPC_WORD *InBuf, short bufsize, short nc, ULONG *Flags)
+long SfArkExtractor2::UnLPC2(qint32 *OutBuf, qint32 *InBuf, short bufsize, short nc, quint32 *Flags)
 {
     LPC_PRAM ref[PMAX];
     LPC_CORR ac[PMAX+1];
 
     int i, k;
-    ULONG FlagMask = 1;
+    quint32 FlagMask = 1;
     int zwin = ZWINMIN;
     if (nc > zwin)  zwin = ZWINMAX;
 
@@ -1478,13 +1478,13 @@ long SfArkExtractor2::UnLPC2(LPC_WORD *OutBuf, LPC_WORD *InBuf, short bufsize, s
 
 void SfArkExtractor2::LPCinit()
 {
-    UnLPC2(LAW_NULL, LAW_NULL, 0, 0, (ULONG *)0);
+    UnLPC2(LAW_NULL, LAW_NULL, 0, 0, (quint32 *)0);
 }
 
-long SfArkExtractor2::UnLPC(AWORD *OutBuf, AWORD *InBuf, short bufsize, short nc, ULONG *Flags)
+long SfArkExtractor2::UnLPC(qint16 *OutBuf, qint16 *InBuf, short bufsize, short nc, quint32 *Flags)
 {
-    LPC_WORD  lInBuf[MAX_BUFSIZE], lOutBuf[MAX_BUFSIZE];
-    LPC_WORD  *inp = lInBuf, *bufend = inp + bufsize, *outp = lOutBuf;
+    qint32  lInBuf[MAX_BUFSIZE], lOutBuf[MAX_BUFSIZE];
+    qint32  *inp = lInBuf, *bufend = inp + bufsize, *outp = lOutBuf;
 
     int i;
 
@@ -1518,7 +1518,7 @@ long SfArkExtractor2::UnLPC(AWORD *OutBuf, AWORD *InBuf, short bufsize, short nc
     // Copy 32 bit data to 16 bits...
     outp = lOutBuf; bufend = outp + bufsize;
     while (outp < bufend)
-        *OutBuf++ = (AWORD) *outp++;
+        *OutBuf++ = (qint16) *outp++;
 
     return 0;
 }
@@ -1527,14 +1527,14 @@ long SfArkExtractor2::UnLPC(AWORD *OutBuf, AWORD *InBuf, short bufsize, short nc
 // SFKL DIFF
 // ==============================================================
 
-void SfArkExtractor2::UnBufDif2(AWORD *OutBuf, const AWORD *InBuf, USHORT bufsize, AWORD *prev)
+void SfArkExtractor2::UnBufDif2(qint16 *OutBuf, const qint16 *InBuf, quint16 bufsize, qint16 *prev)
 {
     // NB: This code is optimised for speed - do not change order of operations or data types!!!
     // -----------------------------------------------------------------------------------------
-    const AWORD *bufend1 = OutBuf + bufsize;
+    const qint16 *bufend1 = OutBuf + bufsize;
 
     //for (int i = 0; i < bufsize; i++)  OutBuf[i] = InBuf[i];
-    memcpy(OutBuf, InBuf, bufsize*sizeof(AWORD));
+    memcpy(OutBuf, InBuf, bufsize*sizeof(qint16));
 
     // Process start of buffer...
     *OutBuf++ += *prev;
@@ -1544,7 +1544,7 @@ void SfArkExtractor2::UnBufDif2(AWORD *OutBuf, const AWORD *InBuf, USHORT bufsiz
 #define DO_ONE(N)     OutBuf[N] += OutBuf[N-1];
     // ----------------------------------------------------
 
-    const AWORD *bufend2 = bufend1 - STEPSIZE;
+    const qint16 *bufend2 = bufend1 - STEPSIZE;
     while (OutBuf < bufend2)
     {
         DO_ONE(0); DO_ONE(1); DO_ONE(2); DO_ONE(3);
@@ -1566,11 +1566,11 @@ void SfArkExtractor2::UnBufDif2(AWORD *OutBuf, const AWORD *InBuf, USHORT bufsiz
 #undef STEPSIZE
 }
 
-void SfArkExtractor2::old_UnBufDif3(AWORD *OutBuf, const AWORD *InBuf, USHORT bufsize, AWORD *prev)
+void SfArkExtractor2::old_UnBufDif3(qint16 *OutBuf, const qint16 *InBuf, quint16 bufsize, qint16 *prev)
 {
     // Decoding is done from the END of the buffer, backwards...
 
-    const AWORD *bufstart = InBuf;
+    const qint16 *bufstart = InBuf;
 
     InBuf += bufsize-1;
     OutBuf+= bufsize-1;
@@ -1591,12 +1591,12 @@ void SfArkExtractor2::old_UnBufDif3(AWORD *OutBuf, const AWORD *InBuf, USHORT bu
 #undef DO_ONE
 }
 
-void SfArkExtractor2::UnBufDif3(AWORD *OutBuf, const AWORD *InBuf, USHORT bufsize, AWORD *prev)
+void SfArkExtractor2::UnBufDif3(qint16 *OutBuf, const qint16 *InBuf, quint16 bufsize, qint16 *prev)
 {
     // Decoding is done from the END of the buffer, backwards...
 
 #define STEPSIZE 8
-    const AWORD *bufstart = InBuf, *bufstart1 = InBuf+STEPSIZE;
+    const qint16 *bufstart = InBuf, *bufstart1 = InBuf+STEPSIZE;
 
     InBuf += bufsize-1;
     OutBuf+= bufsize-1;
@@ -1629,15 +1629,15 @@ void SfArkExtractor2::UnBufDif3(AWORD *OutBuf, const AWORD *InBuf, USHORT bufsiz
 #undef STEPSIZE
 }
 
-void SfArkExtractor2::UnBufDif4(AWORD *OutBuf, const AWORD *InBuf, USHORT bufsize, AWORD *prev)
+void SfArkExtractor2::UnBufDif4(qint16 *OutBuf, const qint16 *InBuf, quint16 bufsize, qint16 *prev)
 {
-    AWORD avg = *prev;
-    const AWORD *bufend1 = InBuf + bufsize;
+    qint16 avg = *prev;
+    const qint16 *bufend1 = InBuf + bufsize;
 
     // Process rest of buffer...
     //-----------------------------------------
 #define STEPSIZE    8
-    const AWORD *bufend2 = bufend1 - STEPSIZE;
+    const qint16 *bufend2 = bufend1 - STEPSIZE;
 
 #define DO_ONE(N)                     \
     OutBuf[N] = InBuf[N] + avg;         \
@@ -1662,13 +1662,13 @@ void SfArkExtractor2::UnBufDif4(AWORD *OutBuf, const AWORD *InBuf, USHORT bufsiz
 #undef STEPSIZE
 }
 
-long SfArkExtractor2::BufSum(const AWORD *buf, USHORT bufsize)
+long SfArkExtractor2::BufSum(const qint16 *buf, quint16 bufsize)
 {
     // --- Optimised! ---
     long Total = 0;
 
-    const AWORD *endp1 = buf + bufsize - 7;
-    const AWORD *endp2 = buf + bufsize;
+    const qint16 *endp1 = buf + bufsize - 7;
+    const qint16 *endp2 = buf + bufsize;
 
     for (; buf < endp1; buf += 8)
     {
@@ -1682,13 +1682,13 @@ long SfArkExtractor2::BufSum(const AWORD *buf, USHORT bufsize)
     return Total;
 }
 
-void SfArkExtractor2::UnBufShift1(AWORD *InBuf, USHORT bufsize, short Shift)
+void SfArkExtractor2::UnBufShift1(qint16 *InBuf, quint16 bufsize, short Shift)
 {
 #define STEPSIZE 8
 
     // Ok, now we have a shift value - perform the shift...
-    AWORD *bps = InBuf, *bufend1s = bps + bufsize;
-    AWORD *bufend2s = bufend1s - STEPSIZE;
+    qint16 *bps = InBuf, *bufend1s = bps + bufsize;
+    qint16 *bufend2s = bufend1s - STEPSIZE;
 
 #define DO_ONE(I)     bps[I] <<= Shift
     while (bps < bufend2s)
@@ -1707,9 +1707,9 @@ void SfArkExtractor2::UnBufShift1(AWORD *InBuf, USHORT bufsize, short Shift)
 #undef STEPSIZE
 }
 
-void SfArkExtractor2::UnBufShift(AWORD *InBuf, USHORT bufsize, short *shift)
+void SfArkExtractor2::UnBufShift(qint16 *InBuf, quint16 bufsize, short *shift)
 {
-    for(AWORD *endp = InBuf + bufsize; InBuf < endp; InBuf+= SHIFTWIN)
+    for(qint16 *endp = InBuf + bufsize; InBuf < endp; InBuf+= SHIFTWIN)
     {
         short s = *shift++;
         if (s != 0)  UnBufShift1(InBuf, SHIFTWIN, s);

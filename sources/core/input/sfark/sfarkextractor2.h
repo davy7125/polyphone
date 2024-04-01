@@ -76,21 +76,6 @@
 #define Decode(a, b)		sfkl_Decode(a, b)
 // ------------------------------------------------------------------------------------
 
-// ----- typdefs -----
-typedef unsigned short		USHORT;
-typedef unsigned char		BYTE;
-typedef unsigned int		ULONG;
-
-typedef short			AWORD;		// Audio word, i.e. 16-bit audio
-typedef unsigned short		UAWORD;
-typedef int			LAWORD;		// "long" audio word, i.e. 32 bits
-typedef unsigned int		ULAWORD;
-
-// Types used by Bit I/O (BIO) routines...
-typedef USHORT					BIOWORD;
-typedef ULONG					BIOWORD2;
-
-
 // ----- Constants -----
 #ifndef true
 #define true    1
@@ -105,13 +90,13 @@ typedef ULONG					BIOWORD2;
 
 // Some max sizes...
 #define MAX_BUFSIZE		4096		// Largest buffer size
-#define MAX_AWORD   ( (1 << (AWORD_BITS-1)) -1 )    // 32767 for 16-Bit AWORD
-#define MAX_UAWORD  ( (1 << AWORD_BITS)-1 )         // 65535 for 16-Bit AWORD
+#define MAX_AWORD   ( (1 << (AWORD_BITS-1)) -1 )    // 32767 for 16-Bit qint16
+#define MAX_UAWORD  ( (1 << AWORD_BITS)-1 )         // 65535 for 16-Bit qint16
 
 // Typed NULLs ...
 #define FL_NULL					((float *) 0)
-#define AW_NULL					((AWORD *) 0)
-#define LAW_NULL				((LAWORD *) 0)
+#define AW_NULL					((qint16 *) 0)
+#define LAW_NULL				((qint32 *) 0)
 
 // Compression methods...
 #define COMPRESSION_v1            0       // sfArk V1 compression
@@ -136,13 +121,13 @@ typedef ULONG					BIOWORD2;
 #define	JUMP_ON_ERROR(label)	if (GlobalErrorFlag != SFARKLIB_SUCCESS)  goto label
 
 #if BYTE_ORDER == BIG_ENDIAN
-    #define FIX_ENDIAN16(w)	((((BYTE) w) << 8) | (((USHORT)w) >> 8))
+    #define FIX_ENDIAN16(w)	((((quint8) w) << 8) | (((quint16)w) >> 8))
 #else
     #define FIX_ENDIAN16(w)	(w)
 #endif
 
 #define BIT_SIZEOF(x)   (sizeof(x) * 8)
-#define AWORD_BITS      BIT_SIZEOF(AWORD)	// Number of bits in Audio Word
+#define AWORD_BITS      BIT_SIZEOF(qint16)	// Number of bits in Audio Word
 
 #define ABS(x)          ( ((x) > 0) ? (x) : -(x))
 
@@ -209,7 +194,7 @@ typedef ULONG					BIOWORD2;
 #define	FLAGS_Notes		(1 << 0)	// Notes file included
 #define	FLAGS_License		(1 << 1)	// License file included
 
-#define BIO_WBITS     ((signed) (8 * sizeof(BIOWORD)))
+#define BIO_WBITS     ((signed) (8 * sizeof(quint16)))
 #define BIOBUFSIZE    (16 * 1024)	// Disk-read buffer size, bigger may increased speed
 #define	HDR_NAME_LEN	5
 #define	HDR_VERS_LEN	5
@@ -244,8 +229,6 @@ typedef ULONG					BIOWORD2;
 // The following parameters determine the history sized used for LPC analysis (little impact on speed)
 // The history is the amount of prev
 #define HISTSIZE    (4*128/ZWINMIN)		// Multiple of number of ZWINs to use as history size (seems best value)
-
-typedef LAWORD  LPC_WORD;               // LPC_WORD must have (slightly) greater range than AWORD
 
 // There are compatibility issues in floating point calculations between Intel and Mac versions.  Not sure if this
 // is a compiler issue or a processor issue -- in short on Windows it seems that calculations performed on float
@@ -302,15 +285,15 @@ typedef	struct
     int	nc;		// Number of LPC parameters
     int	WinSize;	// Window size for CrunchWin
 
-    AWORD	*SrcBuf;	// Address of source buffer
-    AWORD	*DstBuf;	// Address of destination buffer
+    qint16	*SrcBuf;	// Address of source buffer
+    qint16	*DstBuf;	// Address of destination buffer
 
-    ULONG	TotBytesWritten;	// Total bytes written in file
-    ULONG	FileCheck;		// File checksum (accumulated)
-    AWORD	PrevIn[MAX_DIFF_LOOPS];	// Previous values (per loop)
+    quint32	TotBytesWritten;	// Total bytes written in file
+    quint32	FileCheck;		// File checksum (accumulated)
+    qint16	PrevIn[MAX_DIFF_LOOPS];	// Previous values (per loop)
 
-    USHORT	PrevEncodeCount;	// Previous number of loops used
-    USHORT	BD4PrevEncodeCount;	// Previous number of loops used for BD4
+    quint16	PrevEncodeCount;	// Previous number of loops used
+    quint16	BD4PrevEncodeCount;	// Previous number of loops used for BD4
     short	PrevShift;		// Previous Shift value
     short	PrevUsedShift;		// Previously used (non zero) Shift value
 } BLOCK_DATA;
@@ -360,28 +343,28 @@ private:
 
     void BioDecompInit();
     void BioDecompEnd();
-    BIOWORD BioRead(int n);
+    quint16 BioRead(int n);
     bool BioReadFlag(void);
-    long BioReadBuf(BYTE *buf, long n);
-    AWORD InputDiff(AWORD Prev);
-    long UnCrunch(AWORD *UnCompBuf, USHORT bufsize);
-    long UnCrunchWin(AWORD *buf, USHORT bufsize, USHORT winsize);
+    long BioReadBuf(quint8 *buf, long n);
+    qint16 InputDiff(qint16 Prev);
+    long UnCrunch(qint16 *UnCompBuf, quint16 bufsize);
+    long UnCrunchWin(qint16 *buf, quint16 bufsize, quint16 winsize);
     short GetNBits(short w);
 
-    USHORT GetsfArkLibVersion(void);
-    int ReadHeader(V2_FILEHEADER *FileHeader, BYTE *fbuf, int bufsize);
+    quint16 GetsfArkLibVersion(void);
+    int ReadHeader(V2_FILEHEADER *FileHeader, quint8 *fbuf, int bufsize);
     void InitFilenames(const char *OrigFileName, const char * /*InFileName*/, const char *ReqOutFileName);
     bool InvalidEncodeCount(int EncodeCount, int MaxLoops);
-    int DecompressTurbo(BLOCK_DATA *Blk, USHORT NumWords);
-    bool CheckShift(short *ShiftVal, USHORT NumWords, short *PrevShift, short *PrevUsedShift);
-    int DecompressFast(BLOCK_DATA *Blk, USHORT NumWords);
+    int DecompressTurbo(BLOCK_DATA *Blk, quint16 NumWords);
+    bool CheckShift(short *ShiftVal, quint16 NumWords, short *PrevShift, short *PrevUsedShift);
+    int DecompressFast(BLOCK_DATA *Blk, quint16 NumWords);
     int ProcessNextBlock(BLOCK_DATA *Blk);
     int	EndProcess(int ErrorNum);
-    bool ExtractTextFile(BLOCK_DATA *Blk, ULONG FileType);
+    bool ExtractTextFile(BLOCK_DATA *Blk, quint32 FileType);
     int Decode(const char *InFileName, const char *ReqOutFileName);
     void FixEndian(void * /*num*/, int /*nsize*/);
 
-    ULONG UnMemcomp(const BYTE *InBuf, int InBytes, BYTE *OutBuf, int OutBufLen);
+    quint32 UnMemcomp(const quint8 *InBuf, int InBytes, quint8 *OutBuf, int OutBufLen);
 
     char *GetFileExt(char *FileName);
     char *StrncpyEnsureNul(char *destination, const char *source, int num);
@@ -391,25 +374,25 @@ private:
         LPC_CORR const * ac,    //  in: [0...p] autocorrelation values
         int nc,                 //  in: number of ref. coeff
         LPC_PRAM        * ref);
-    void autocorrelation(int n, LPC_WORD const *ibuf, int nc, LPC_CORR *ac);
-    void AddAC (LPC_WORD const *hbuf, LPC_WORD const *ibuf, int nc, LPC_CORR *ac);
+    void autocorrelation(int n, qint32 const *ibuf, int nc, LPC_CORR *ac);
+    void AddAC (qint32 const *hbuf, qint32 const *ibuf, int nc, LPC_CORR *ac);
     void LPCdecode(
         LPC_PRAM const *ref,    //  in: [0...p-1] reflection coefficients
         int            nc,      //  in: number of coefficients
         int            n,       //      # of samples
-        LPC_WORD const *in,     //      [0...n-1] residual input
-        LPC_WORD       *out);
-    long UnLPC2(LPC_WORD *OutBuf, LPC_WORD *InBuf, short bufsize, short nc, ULONG *Flags);
+        qint32 const *in,     //      [0...n-1] residual input
+        qint32       *out);
+    long UnLPC2(qint32 *OutBuf, qint32 *InBuf, short bufsize, short nc, quint32 *Flags);
     void LPCinit();
-    long UnLPC(AWORD *OutBuf, AWORD *InBuf, short bufsize, short nc, ULONG *Flags);
+    long UnLPC(qint16 *OutBuf, qint16 *InBuf, short bufsize, short nc, quint32 *Flags);
 
-    void UnBufDif2(AWORD *OutBuf, const AWORD *InBuf, USHORT bufsize, AWORD *prev);
-    void old_UnBufDif3(AWORD *OutBuf, const AWORD *InBuf, USHORT bufsize, AWORD *prev);
-    void UnBufDif3(AWORD *OutBuf, const AWORD *InBuf, USHORT bufsize, AWORD *prev);
-    void UnBufDif4(AWORD *OutBuf, const AWORD *InBuf, USHORT bufsize, AWORD *prev);
-    long BufSum(const AWORD *buf, USHORT bufsize);
-    void UnBufShift1(AWORD *InBuf, USHORT bufsize, short Shift);
-    void UnBufShift(AWORD *InBuf, USHORT bufsize, short *shift);
+    void UnBufDif2(qint16 *OutBuf, const qint16 *InBuf, quint16 bufsize, qint16 *prev);
+    void old_UnBufDif3(qint16 *OutBuf, const qint16 *InBuf, quint16 bufsize, qint16 *prev);
+    void UnBufDif3(qint16 *OutBuf, const qint16 *InBuf, quint16 bufsize, qint16 *prev);
+    void UnBufDif4(qint16 *OutBuf, const qint16 *InBuf, quint16 bufsize, qint16 *prev);
+    long BufSum(const qint16 *buf, quint16 bufsize);
+    void UnBufShift1(qint16 *InBuf, quint16 bufsize, short Shift);
+    void UnBufShift(qint16 *InBuf, quint16 bufsize, short *shift);
 
     SfArkFileManager _fileManager;
     bool _error;
@@ -419,17 +402,17 @@ private:
     int	_inputFileHandle;
 
     // Static table to store number of bits per word...
-    BYTE _nb_init;
-    BYTE _nb[1 << (AWORD_BITS-1)]; // Array to hold number of bits needed to represent each unsigned short value
-    BIOWORD2 _bioBits;					// Bits not yet shifted from bioBuf (up to double length of BIOWORD)
-    BIOWORD _bioBuf[BIOBUFSIZE];		// Buffer
+    quint8 _nb_init;
+    quint8 _nb[1 << (AWORD_BITS-1)]; // Array to hold number of bits needed to represent each unsigned short value
+    quint32 _bioBits;					// Bits not yet shifted from bioBuf (up to double length of quint16)
+    quint16 _bioBuf[BIOBUFSIZE];		// Buffer
     int    _bioP;					// Count of output (index into bioBuf)
     int    _bioRemBits;				// Remaining bits left in bioBits
     int    _bioWholeBlocks;			// Count blocks read from disk
     short  _bioPfb;					// Previous "FixBits" value
 
-    BYTE * _zbuf1;
-    BYTE * _zbuf2;
+    quint8 * _zbuf1;
+    quint8 * _zbuf2;
     char _outFileNameMain[SFARKLIB_MAX_FILEPATH];
     char _outFileNameNotes[SFARKLIB_MAX_FILEPATH];
     char _outFileNameLicense[SFARKLIB_MAX_FILEPATH];
@@ -448,8 +431,8 @@ private:
     static const char UpgradeMsg[];
 
     // Static variables in functions...
-    LPC_WORD LPCdecode_u[PMAX+1];
-    LPC_WORD UnLPC2_HistBuf[PMAX*2];
+    qint32 LPCdecode_u[PMAX+1];
+    qint32 UnLPC2_HistBuf[PMAX*2];
     LPC_CORR UnLPC2_AcHist[HISTSIZE][PMAX+1];
     int UnLPC2_HistNum;
 };

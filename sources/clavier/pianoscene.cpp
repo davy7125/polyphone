@@ -434,8 +434,8 @@ bool PianoScene::event(QEvent *event)
 
 void PianoScene::refreshKeys()
 {
-    PianoKey::WHITE_BRUSH = QBrush(m_palette.value(-1));
-    PianoKey::BLACK_BRUSH = QBrush(m_palette.value(-2));
+    PianoKey::PIANO_WHITE_BRUSH = QBrush(m_palette.value(-1));
+    PianoKey::PIANO_BLACK_BRUSH = QBrush(m_palette.value(-2));
 
     foreach(PianoKey* key, m_keys)
     {

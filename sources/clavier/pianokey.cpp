@@ -24,14 +24,14 @@
 #include <QtSvg/QSvgRenderer>
 #include <qmath.h>
 
-QBrush PianoKey::BLACK_BRUSH = QBrush(Qt::black);
-QBrush PianoKey::WHITE_BRUSH = QBrush(Qt::white);
+QBrush PianoKey::PIANO_BLACK_BRUSH = QBrush(Qt::black);
+QBrush PianoKey::PIANO_WHITE_BRUSH = QBrush(Qt::white);
 double PianoKey::s_glowEffect = 0;
 
 PianoKey::PianoKey(const QRectF &rect, const bool black, const int note)
     : QGraphicsRectItem(rect),
     m_pressed(false),
-    m_brush(black ? BLACK_BRUSH : WHITE_BRUSH),
+    m_brush(black ? PIANO_BLACK_BRUSH : PIANO_WHITE_BRUSH),
     m_note(note),
     m_black(black),
     m_markerType(PianoKeybd::MARKER_TYPE_NONE)
@@ -109,7 +109,7 @@ void PianoKey::setPressed(bool p)
 
 void PianoKey::resetBrush()
 {
-    m_brush = m_black ? BLACK_BRUSH : WHITE_BRUSH;
+    m_brush = m_black ? PIANO_BLACK_BRUSH : PIANO_WHITE_BRUSH;
 }
 
 void PianoKey::setMarker(PianoKeybd::MarkerType type)

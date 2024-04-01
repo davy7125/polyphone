@@ -40,8 +40,8 @@ public:
     int isBlack() const { return m_black; }
     static void setGlowEffect(double glowEffect) { s_glowEffect = glowEffect; }
 
-    static QBrush BLACK_BRUSH;
-    static QBrush WHITE_BRUSH;
+    static QBrush PIANO_BLACK_BRUSH;
+    static QBrush PIANO_WHITE_BRUSH;
 
 private:
     void drawMarker(QPainter *painter, QRectF &rect, PianoKeybd::MarkerType type);
