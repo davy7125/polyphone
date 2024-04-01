@@ -60,7 +60,7 @@ ModulatorComboCurve::ModulatorComboCurve(QWidget* parent) : QComboBox(parent)
     {
         for (int j = 0; j < 4; j++)
         {
-            QString iconName = QString(":/icons/courbe%1.svg").arg(4*j+i+1, 2, 10, QChar('0'));
+            QString iconName = QString(":/icons/courbe%1.svg").arg(4 * j + i + 1, 2, 10, QChar('0'));
             QStandardItem * item = new QStandardItem("");
             item->setData(ContextManager::theme()->getColoredSvg(iconName, QSize(iconWidth, iconWidth), replacement), Qt::DecorationRole);
             model->setItem(i, j, item);
@@ -70,8 +70,13 @@ ModulatorComboCurve::ModulatorComboCurve(QWidget* parent) : QComboBox(parent)
     // Size
     for (int i = 0; i < 4; i++)
     {
-        view->setColumnWidth(i, iconWidth + margin);
+        view->verticalHeader()->setMinimumSectionSize(iconWidth + margin);
+        view->verticalHeader()->setMaximumSectionSize(iconWidth + margin);
         view->setRowHeight(i, iconWidth + margin);
+
+        view->horizontalHeader()->setMinimumSectionSize(iconWidth + margin);
+        view->horizontalHeader()->setMaximumSectionSize(iconWidth + margin);
+        view->setColumnWidth(i, iconWidth + margin);
     }
     view->setFixedSize(4 * (iconWidth + margin), 4 * (iconWidth + margin));
 
@@ -90,11 +95,14 @@ bool ModulatorComboCurve::eventFilter(QObject* object, QEvent* event)
 {
     if (event->type() == QEvent::MouseButtonPress && object == view()->viewport())
     {
-        this->setCurrentIndex(view()->currentIndex().row());
-        this->setModelColumn(view()->currentIndex().column());
+        int currentRow = view()->currentIndex().row();
+        int currentCol = view()->currentIndex().column();
+
+        this->setCurrentIndex(currentRow);
+        this->setModelColumn(currentCol);
 
         // Store the result
-        valueSelected(view()->currentIndex().row(), view()->currentIndex().column());
+        valueSelected(currentRow, currentCol);
     }
     return false;
 }
