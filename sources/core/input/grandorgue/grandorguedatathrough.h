@@ -44,19 +44,26 @@ public:
     // Maximum gain found in the sample set
     double getMaxGain() { return _maxGain; }
 
-    // Match between a sample name and a sample index (stereo samples have 2 ids)
-    void setSf2SmplId(QString filePath, QList<int> sf2ElementIds);
+    // Match between a sample name and a sample index / loop mode (stereo samples have 2 ids)
+    void setSf2SmplId(QString filePath, QList<int> sf2ElementIds, bool hasLoop);
     QList<int> getSf2SmplId(QString filePath);
+    bool hasLoop(QString filePath);
 
     // Store all created sample name and check if a name already exists
     void storeSampleName(QString sampleName);
     bool sampleNameExists(QString sampleName);
 
+    void useNextBank();
+    void getNextBankPreset(int &bank, int &preset);
+
 private:
     QMap<int, double> _maxGainPerRank;
     double _maxGain;
     QMap<QString, QList<int> > _smplIds;
+    QMap<QString, bool> _hasLoop;
     QList<QString> _sampleNames;
+    int _currentBank;
+    int _currentPreset;
 };
 
 #endif // GRANDORGUEDATATHROUGH_H

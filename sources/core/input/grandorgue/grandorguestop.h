@@ -41,16 +41,21 @@ public:
     void readData(QString key, QString value);
     bool isValid();
     void preProcess();
-    void process(SoundfontManager * sm, int sf2Index, QMap<int, GrandOrgueRank *> &ranks);
+    void process(SoundfontManager * sm, int sf2Index, QMap<int, GrandOrgueRank *> &ranks, int presetId = -1);
+    bool isTriggeredByThisSwitch(int switchNumber);
 
 private:
     int getFirstPipeNumber();
     RangesType getDefaultKeyRange();
 
     QString _rootDir;
+    GrandOrgueDataThrough * _godt;
     GrandOrgueRank _anonymousRank;
     QMap<QString, QString> _properties;
     QMap<int, GrandOrgueRankLink *> _rankLinks;
+    QList<int> _switches;
+
+    bool _writtenInSf2;
 };
 
 #endif // GRANDORGUESTOP_H

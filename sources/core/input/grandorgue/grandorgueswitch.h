@@ -22,52 +22,29 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef INPUTPARSERGRANDORGUE_H
-#define INPUTPARSERGRANDORGUE_H
+#ifndef GRANDORGUESWITCH_H
+#define GRANDORGUESWITCH_H
 
 #include <QMap>
-#include "abstractinputparser.h"
-class GrandOrgueRank;
-class GrandOrgueStop;
-class GrandOrgueSwitch;
+#include "basetypes.h"
+#include "grandorguerank.h"
 class GrandOrgueDataThrough;
 class SoundfontManager;
 
-class InputParserGrandOrgue : public AbstractInputParser
+#include "grandorgue/grandorguedatathrough.h"
+class GrandOrgueSwitch
 {
-    Q_OBJECT
-    
 public:
-    InputParserGrandOrgue();
-    ~InputParserGrandOrgue() override;
+    GrandOrgueSwitch(GrandOrgueDataThrough * godt, int id);
 
-protected slots:
-    void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
+    void readData(QString key, QString value);
+    void preProcess();
+    void process(SoundfontManager * sm, int sf2Index, QMap<int, GrandOrgueStop *> &stops, QMap<int, GrandOrgueRank *> &ranks);
 
 private:
-    enum Section
-    {
-        SECTION_UNKNOWN,
-        SECTION_STOP,
-        SECTION_ORGAN,
-        SECTION_RANK,
-        SECTION_SWITCH
-    };
-
-    void parseFile(QString filename, bool &success, QString &error);
-    void startSection(QString sectionName);
-    void processData(QString key, QString value);
-    void createSf2(int &sf2Index, QString filename);
-    QString getComment();
-
-    QString _rootDir;
-    Section _currentSection;
-    int _currentIndex; // Of a rank or stop, -1 if unknown
     GrandOrgueDataThrough * _godt;
-    QMap<int, GrandOrgueRank*> _ranks; // Pipes are included in ranks...
-    QMap<int, GrandOrgueStop*> _stops; // ...that are included in stops... (but pipes can be directly included in stops)
-    QMap<int, GrandOrgueSwitch*> _switches; // ...that are triggered by switches (but stops can also be triggered without switches)
-    QMap<QString, QString> _organProperties;
+    int _id;
+    QMap<QString, QString> _properties;
 };
 
-#endif // INPUTPARSERGRANDORGUE_H
+#endif // GRANDORGUESWITCH_H

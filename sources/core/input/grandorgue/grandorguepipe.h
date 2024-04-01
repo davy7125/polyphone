@@ -41,13 +41,14 @@ public:
     void addGain(double offset) { _gain += offset; }
     void mergeAmplitude(int amplitude);
     double gain() { return _gain; }
+    QString getRelativePath() { return _relativePath; }
 
     void addTuning(int offset) { _tuning += offset; }
 
     void process(EltID parent, int key);
 
 private:
-    QList<int> getSampleIds(int sf2Id, QString filePath, bool isRelease);
+    QList<int> getSampleIds(int sf2Id, QString relativeFilePath, bool isRelease);
     static QString getName(QString name, int maxCharacters, int suffixNumber, QString suffix = "");
     QString getReleaseFilePath();
 
@@ -55,7 +56,7 @@ private:
     GrandOrgueDataThrough * _godt;
 
     QMap<QString, QString> _properties;
-    QString _filePath;
+    QString _relativePath;
     QString _error;
     double _gain;
     int _tuning;

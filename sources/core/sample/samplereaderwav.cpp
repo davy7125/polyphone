@@ -91,7 +91,7 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
             sectionSize++; // Only even sizes
         pos += 4;
 
-        if (!strcmp(section, "fmt "))
+        if (strcmp(section, "fmt ") == 0)
         {
             // Read format of the audio signal
             if (sectionSize < 16 || sectionSize > 40)
@@ -114,7 +114,7 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
 
             smplOk = true;
         }
-        else if (!strcmp(section, "smpl"))
+        else if (strcmp(section, "smpl") == 0)
         {
             // Informations about the sample
             if (sectionSize >= 36)
@@ -160,7 +160,7 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
             else
                 in.skipRawData(static_cast<int>(sectionSize));
         }
-        else if (!strcmp(section, "data"))
+        else if (strcmp(section, "data") == 0)
         {
             if (sectionSize == 0)
                 sectionSize = fullLength - pos;

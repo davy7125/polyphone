@@ -31,7 +31,7 @@
 GrandOrguePipe::GrandOrguePipe(QString rootDir, GrandOrgueDataThrough * godt) :
     _rootDir(rootDir),
     _godt(godt),
-    _filePath(""),
+    _relativePath(""),
     _error(""),
     _gain(0),
     _tuning(0)
@@ -75,11 +75,11 @@ void GrandOrguePipe::readData(QString key, QString value)
         // TODO: read a reference to another pipe such as:
         // Pipe002=REF:001:001:002
 
-        _filePath = _rootDir + "/" + value;
-        if (!QFile::exists(_filePath))
+        _relativePath = value;
+        if (!QFile::exists(_rootDir + "/" + _relativePath))
         {
-            qDebug() << "couldn't find file:" << _filePath;
-            _filePath = "";
+            qDebug() << "couldn't find file:" << _rootDir + "/" + _relativePath;
+            _relativePath = "";
         }
     }
     else
@@ -95,7 +95,7 @@ void GrandOrguePipe::mergeAmplitude(int amplitude)
 
 bool GrandOrguePipe::isValid()
 {
-    return !_filePath.isEmpty() && _error.isEmpty();
+    return !_relativePath.isEmpty() && _error.isEmpty();
 }
 
 void GrandOrguePipe::process(EltID parent, int key)
@@ -105,7 +105,7 @@ void GrandOrguePipe::process(EltID parent, int key)
 
     // ATTACK
 
-    QList<int> sampleIds = this->getSampleIds(parent.indexSf2, _filePath, false);
+    QList<int> sampleIds = this->getSampleIds(parent.indexSf2, _relativePath, false);
     SoundfontManager * sm = SoundfontManager::getInstance();
     for (int i = 0; i < sampleIds.size(); i++)
     {
@@ -231,9 +231,10 @@ void GrandOrguePipe::process(EltID parent, int key)
     }
 }
 
-QList<int> GrandOrguePipe::getSampleIds(int sf2Id, QString filePath, bool isRelease)
+QList<int> GrandOrguePipe::getSampleIds(int sf2Id, QString relativeFilePath, bool isRelease)
 {
     // Samples already loaded?
+    QString filePath = _rootDir + "/" + relativeFilePath;
     QList<int> sampleIndex = _godt->getSf2SmplId(filePath);
     if (!sampleIndex.empty())
         return sampleIndex;
@@ -244,6 +245,15 @@ QList<int> GrandOrguePipe::getSampleIds(int sf2Id, QString filePath, bool isRele
         _error = sound.getError();
     quint32 nChannels = sound.getUInt32(champ_wChannels);
     QString name = QFileInfo(filePath).completeBaseName();
+    if (name.length() < 16)
+    {
+        // Include the last characters of the relative path with name
+        QString relPath = relativeFilePath.left(relativeFilePath.lastIndexOf("."));
+        int pos = relPath.lastIndexOf("./");
+        if (pos >= 0)
+            relPath = relPath.mid(relPath.lastIndexOf("./") + 2);
+        name = relPath.right(19);
+    }
     QString name2 = name;
 
     // Possibly adapt the name
@@ -275,6 +285,7 @@ QList<int> GrandOrguePipe::getSampleIds(int sf2Id, QString filePath, bool isRele
     SoundfontManager * sm = SoundfontManager::getInstance();
     EltID idElt(elementSmpl, sf2Id);
     AttributeValue val;
+    bool hasLoop = false;
     for (quint32 numChannel = 0; numChannel < nChannels; numChannel++)
     {
         idElt.indexElt = sm->add(idElt);
@@ -320,8 +331,10 @@ QList<int> GrandOrguePipe::getSampleIds(int sf2Id, QString filePath, bool isRele
         val.dwValue = sound.getUInt32(champ_dwSampleRate);
         sm->set(idElt, champ_dwSampleRate, val);
         val.dwValue = isRelease ? 0 : sound.getUInt32(champ_dwStartLoop);
+        quint32 startLoop = val.dwValue;
         sm->set(idElt, champ_dwStartLoop, val);
         val.dwValue = isRelease ? 1 : sound.getUInt32(champ_dwEndLoop);
+        hasLoop |= (startLoop != val.dwValue);
         sm->set(idElt, champ_dwEndLoop, val);
         val.bValue = (quint8)sound.getUInt32(champ_byOriginalPitch);
         sm->set(idElt, champ_byOriginalPitch, val);
@@ -329,7 +342,7 @@ QList<int> GrandOrguePipe::getSampleIds(int sf2Id, QString filePath, bool isRele
         sm->set(idElt, champ_chPitchCorrection, val);
     }
 
-    _godt->setSf2SmplId(filePath, sampleIndex);
+    _godt->setSf2SmplId(filePath, sampleIndex, hasLoop);
     return sampleIndex;
 }
 
@@ -360,12 +373,12 @@ QString GrandOrguePipe::getReleaseFilePath()
     if (!_properties.contains("release001"))
         return "";
 
-    QString filePath = _rootDir + "/" + _properties["release001"];
-    if (!QFile::exists(filePath))
+    QString relativeFilePath = _properties["release001"];
+    if (!QFile::exists(_rootDir + "/" + relativeFilePath))
     {
-        qDebug() << "couldn't find release file:" << filePath;
+        qDebug() << "couldn't find release file:" << _rootDir + "/" + relativeFilePath;
         return "";
     }
 
-    return filePath;
+    return relativeFilePath;
 }

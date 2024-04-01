@@ -30,7 +30,9 @@
 
 GrandOrgueStop::GrandOrgueStop(QString rootDir, GrandOrgueDataThrough *godt, int id) :
     _rootDir(rootDir),
-    _anonymousRank(rootDir, godt, -id) // Stops that are also a rank have a negative id
+    _godt(godt),
+    _anonymousRank(rootDir, godt, -id), // Stops are also a rank and have a negative id
+    _writtenInSf2(false)
 {
 
 }
@@ -62,6 +64,23 @@ void GrandOrgueStop::readData(QString key, QString value)
         if (!_rankLinks.contains(number))
             _rankLinks[number] = new GrandOrgueRankLink();
         _rankLinks[number]->readData(property, value);
+    }
+    else if (key.startsWith("switch"))
+    {
+        if (key.length() < 9)
+            return;
+
+        // If it's followed by a number
+        bool ok = false;
+        int number = key.right(key.length() - 6).toInt(&ok);
+        if (ok && number >= 0)
+        {
+            // Add the switch number, written in the value
+            ok = false;
+            number = value.toInt(&ok);
+            if (ok && number >= 0 && !_switches.contains(number))
+                _switches << number;
+        }
     }
     else
     {
@@ -102,29 +121,39 @@ void GrandOrgueStop::preProcess()
         link->preProcess(firstKey);
 }
 
-void GrandOrgueStop::process(SoundfontManager * sm, int sf2Index, QMap<int, GrandOrgueRank*> &ranks)
+void GrandOrgueStop::process(SoundfontManager * sm, int sf2Index, QMap<int, GrandOrgueRank*> &ranks, int presetId)
 {
     if (!isValid())
         return;
 
-    // Create a new preset
+    // If this stop is already written by a switch, and if this stop is not normally displayed, skip it
+    if (_writtenInSf2 && _properties.contains("displayed") && _properties["displayed"].toLower() == "n")
+        return;
+
     EltID idPrst(elementPrst, sf2Index);
-    idPrst.typeElement = elementPrst;
-    idPrst.indexElt = sm->add(idPrst);
-
-    // Name
-    sm->set(idPrst, champ_name, _properties.contains("name") ? _properties["name"] : QObject::tr("untitled"));
-
-    // Default keyrange
-    RangesType defaultRange = getDefaultKeyRange();
-    if (defaultRange.byLo != 0 || defaultRange.byHi != 127)
+    if (presetId == -1)
     {
-        AttributeValue val;
-        val.rValue = defaultRange;
-        sm->set(idPrst, champ_keyRange, val);
+        // Create a new preset
+        idPrst.typeElement = elementPrst;
+        idPrst.indexElt = sm->add(idPrst);
+
+        // Name
+        sm->set(idPrst, champ_name, _properties.contains("name") ? _properties["name"] : QObject::tr("untitled"));
+
+        // Bank and preset numbers
+        int bank, preset;
+        _godt->getNextBankPreset(bank, preset);
+        AttributeValue value;
+        value.wValue = bank;
+        sm->set(idPrst, champ_wBank, value);
+        value.wValue = preset;
+        sm->set(idPrst, champ_wPreset, value);
     }
+    else
+        idPrst.indexElt = presetId;
 
     // Possibly associate the pipes that are directly included in the stop
+    RangesType defaultRange = getDefaultKeyRange();
     if (_anonymousRank.isValid())
     {
         EltID idInst = _anonymousRank.process(sm, sf2Index, getFirstPipeNumber(),
@@ -136,6 +165,14 @@ void GrandOrgueStop::process(SoundfontManager * sm, int sf2Index, QMap<int, Gran
         AttributeValue val;
         val.wValue = static_cast<quint16>(idInst.indexElt);
         sm->set(idPrstInst, champ_instrument, val);
+
+        // Range
+        if (defaultRange.byLo != 0 || defaultRange.byHi != 127)
+        {
+            AttributeValue val;
+            val.rValue = defaultRange;
+            sm->set(idPrstInst, champ_keyRange, val);
+        }
     }
 
     // Possibly link to specific ranks
@@ -165,8 +202,7 @@ void GrandOrgueStop::process(SoundfontManager * sm, int sf2Index, QMap<int, Gran
         }
     }
 
-    // Simplification
-    sm->simplify(idPrst, champ_keyRange);
+    _writtenInSf2 = true;
 }
 
 int GrandOrgueStop::getFirstPipeNumber()
@@ -214,4 +250,9 @@ RangesType GrandOrgueStop::getDefaultKeyRange()
     }
 
     return defaultRange;
+}
+
+bool GrandOrgueStop::isTriggeredByThisSwitch(int switchNumber)
+{
+    return _switches.count() == 1 && _switches[0] == switchNumber;
 }

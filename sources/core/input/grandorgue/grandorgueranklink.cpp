@@ -23,8 +23,6 @@
 ***************************************************************************/
 
 #include "grandorgueranklink.h"
-#include "grandorguedatathrough.h"
-#include "soundfontmanager.h"
 #include <QDebug>
 
 GrandOrgueRankLink::GrandOrgueRankLink() :

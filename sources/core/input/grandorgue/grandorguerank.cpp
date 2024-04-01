@@ -26,14 +26,14 @@
 #include "grandorguepipe.h"
 #include "grandorguedatathrough.h"
 #include "soundfontmanager.h"
-#include "utils.h"
 
 GrandOrgueRank::GrandOrgueRank(QString rootDir, GrandOrgueDataThrough *godt, int id) :
     _rootDir(rootDir),
     _godt(godt),
     _id(id),
     _gain(0),
-    _tuning(0)
+    _tuning(0),
+    _instId(-1)
 {
 
 }
@@ -130,9 +130,13 @@ EltID GrandOrgueRank::process(SoundfontManager * sm, int sf2Index, int indexOfFi
     if (!isValid())
         return EltID();
 
+    // Already written?
+    if (_instId != -1)
+        return EltID(elementInst, sf2Index, _instId);
+
     // New instrument
     EltID idInst(elementInst, sf2Index);
-    idInst.indexElt = sm->add(idInst);
+    _instId = idInst.indexElt = sm->add(idInst);
 
     // Name
     sm->set(idInst, champ_name, _properties.contains("name") ? _properties["name"] : QObject::tr("untitled"));
@@ -163,13 +167,19 @@ EltID GrandOrgueRank::process(SoundfontManager * sm, int sf2Index, int indexOfFi
     // Disable default modulators
     disableModulators(sm, idInst);
 
-    // Loop mode
-    val.wValue = (_properties.contains("percussive") && _properties["percussive"].toLower() == "y") ? 0 : 1;
-    sm->set(idInst, champ_sampleModes, val);
-
     // Associate samples
+    bool withLoop = false;
     foreach (int index, _pipes.keys())
+    {
         _pipes[index]->process(idInst, index - indexOfFirstSample + keyOfFirstSample);
+        withLoop |= _godt->hasLoop(_rootDir + "/" + _pipes[index]->getRelativePath());
+    }
+    if (_properties.contains("percussive") && _properties["percussive"].toLower() == "y")
+        withLoop = false;
+
+    // Loop mode
+    val.wValue = withLoop ? 1 : 0;
+    sm->set(idInst, champ_sampleModes, val);
 
     // Simplifications
     sm->simplify(idInst, champ_fineTune);

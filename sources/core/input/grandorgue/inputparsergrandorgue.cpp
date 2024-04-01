@@ -26,6 +26,7 @@
 #include "soundfontmanager.h"
 #include "grandorguerank.h"
 #include "grandorguestop.h"
+#include "grandorgueswitch.h"
 #include "grandorguedatathrough.h"
 #include "utils.h"
 
@@ -41,6 +42,8 @@ InputParserGrandOrgue::~InputParserGrandOrgue()
         delete _ranks.take(_ranks.firstKey());
     while (!_stops.empty())
         delete _stops.take(_stops.firstKey());
+    while (!_switches.empty())
+        delete _switches.take(_switches.firstKey());
     delete _godt;
 }
 
@@ -54,6 +57,7 @@ void InputParserGrandOrgue::processInternal(QString fileName, SoundfontManager *
     _currentIndex = -1;
     _ranks.clear();
     _stops.clear();
+    _switches.clear();
 
     // Parse the file
     _rootDir = QFileInfo(fileName).dir().path();
@@ -123,7 +127,6 @@ void InputParserGrandOrgue::parseFile(QString filename, bool &success, QString &
 
 void InputParserGrandOrgue::startSection(QString sectionName)
 {
-    // Track ranks and stops
     if (sectionName.startsWith("rank"))
     {
         bool ok = false;
@@ -147,6 +150,18 @@ void InputParserGrandOrgue::startSection(QString sectionName)
         }
         else
             _currentSection = SECTION_STOP;
+    }
+    else if (sectionName.startsWith("switch"))
+    {
+        bool ok = false;
+        _currentIndex = sectionName.right(sectionName.length() - 6).toInt(&ok);
+        if (!ok)
+        {
+            _currentSection = SECTION_UNKNOWN;
+            _currentIndex = -1;
+        }
+        else
+            _currentSection = SECTION_SWITCH;
     }
     else if (sectionName == "organ")
     {
@@ -177,6 +192,14 @@ void InputParserGrandOrgue::processData(QString key, QString value)
             _stops[_currentIndex]->readData(key, value);
         }
         break;
+    case SECTION_SWITCH:
+        if (_currentIndex != -1)
+        {
+            if (!_switches.contains(_currentIndex))
+                _switches[_currentIndex] = new GrandOrgueSwitch(_godt, _currentIndex);
+            _switches[_currentIndex]->readData(key, value);
+        }
+        break;
     case SECTION_ORGAN:
         _organProperties[key] = value;
         break;
@@ -204,9 +227,14 @@ void InputParserGrandOrgue::createSf2(int &sf2Index, QString filename)
         rank->preProcess();
     foreach (GrandOrgueStop * stop, _stops)
         stop->preProcess();
+    foreach (GrandOrgueSwitch * goSwitch, _switches)
+        goSwitch->preProcess();
     _godt->finalizePreprocess();
 
-    // Process stops for creating presets and instruments
+    // Process switches and stops for creating presets and instruments
+    foreach (GrandOrgueSwitch * goSwitch, _switches)
+        goSwitch->process(sm, sf2Index, _stops, _ranks);
+    _godt->useNextBank();
     foreach (GrandOrgueStop * stop, _stops)
         stop->process(sm, sf2Index, _ranks);
 }

@@ -38,9 +38,9 @@ public:
     ~GrandOrgueRank();
 
     void readData(QString key, QString value);
+    bool isValid();
     void preProcess();
     EltID process(SoundfontManager * sm, int sf2Index, int indexOfFirstSample, int keyOfFirstSample);
-    bool isValid();
 
 private:
     void mergeAmplitude(int amplitude);
@@ -54,6 +54,8 @@ private:
     QMap<QString, QString> _properties;
     double _gain;
     int _tuning;
+
+    int _instId;
 };
 
 #endif // GRANDORGUERANK_H

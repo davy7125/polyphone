@@ -22,52 +22,71 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef INPUTPARSERGRANDORGUE_H
-#define INPUTPARSERGRANDORGUE_H
+#include "grandorgueswitch.h"
+#include "grandorguedatathrough.h"
+#include "soundfontmanager.h"
+#include "grandorguestop.h"
 
-#include <QMap>
-#include "abstractinputparser.h"
-class GrandOrgueRank;
-class GrandOrgueStop;
-class GrandOrgueSwitch;
-class GrandOrgueDataThrough;
-class SoundfontManager;
-
-class InputParserGrandOrgue : public AbstractInputParser
+GrandOrgueSwitch::GrandOrgueSwitch(GrandOrgueDataThrough * godt, int id) :
+    _godt(godt),
+    _id(id)
 {
-    Q_OBJECT
-    
-public:
-    InputParserGrandOrgue();
-    ~InputParserGrandOrgue() override;
 
-protected slots:
-    void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
+}
 
-private:
-    enum Section
+void GrandOrgueSwitch::readData(QString key, QString value)
+{
+    _properties[key] = value;
+}
+
+
+void GrandOrgueSwitch::preProcess()
+{
+
+}
+
+void GrandOrgueSwitch::process(SoundfontManager * sm, int sf2Index, QMap<int, GrandOrgueStop *> &stops, QMap<int, GrandOrgueRank *> &ranks)
+{
+    // Is this switch displayed?
+    if (_properties.contains("displayed") && _properties["displayed"].toLower() == "n")
+        return;
+
+    // At least one instrument directly triggered by this switch?
+    bool atLeastOne = false;
+    foreach (GrandOrgueStop * stop, stops.values())
     {
-        SECTION_UNKNOWN,
-        SECTION_STOP,
-        SECTION_ORGAN,
-        SECTION_RANK,
-        SECTION_SWITCH
-    };
+        if (stop->isTriggeredByThisSwitch(_id))
+        {
+            atLeastOne = true;
+            break;
+        }
+    }
+    if (!atLeastOne)
+        return;
 
-    void parseFile(QString filename, bool &success, QString &error);
-    void startSection(QString sectionName);
-    void processData(QString key, QString value);
-    void createSf2(int &sf2Index, QString filename);
-    QString getComment();
+    // Create a new preset
+    EltID idPrst(elementPrst, sf2Index);
+    idPrst.typeElement = elementPrst;
+    idPrst.indexElt = sm->add(idPrst);
 
-    QString _rootDir;
-    Section _currentSection;
-    int _currentIndex; // Of a rank or stop, -1 if unknown
-    GrandOrgueDataThrough * _godt;
-    QMap<int, GrandOrgueRank*> _ranks; // Pipes are included in ranks...
-    QMap<int, GrandOrgueStop*> _stops; // ...that are included in stops... (but pipes can be directly included in stops)
-    QMap<int, GrandOrgueSwitch*> _switches; // ...that are triggered by switches (but stops can also be triggered without switches)
-    QMap<QString, QString> _organProperties;
-};
+    // Name
+    sm->set(idPrst, champ_name, _properties.contains("name") ? _properties["name"] : QObject::tr("untitled"));
 
-#endif // INPUTPARSERGRANDORGUE_H
+    // Bank and preset numbers
+    int bank, preset;
+    _godt->getNextBankPreset(bank, preset);
+    AttributeValue value;
+    value.wValue = bank;
+    sm->set(idPrst, champ_wBank, value);
+    value.wValue = preset;
+    sm->set(idPrst, champ_wPreset, value);
+
+    // Search all stops triggered by this switch
+    foreach (GrandOrgueStop * stop, stops.values())
+    {
+        if (stop->isTriggeredByThisSwitch(_id))
+        {
+            stop->process(sm, sf2Index, ranks, idPrst.indexElt);
+        }
+    }
+}

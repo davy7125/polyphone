@@ -70,10 +70,6 @@ bool Sound::setFileName(QString qStr, bool tryFindRootKey)
             isOk = true;
             break;
         }
-
-        // Add default start and end loop if not specified
-        if (_info.loops.empty())
-            _info.loops << QPair<quint32, quint32>(0, _info.dwLength > 0 ? _info.dwLength - 1 : 0);
     }
     else
         _info.reset();

@@ -25,7 +25,9 @@
 #include "grandorguedatathrough.h"
 
 GrandOrgueDataThrough::GrandOrgueDataThrough() :
-    _maxGain(0)
+    _maxGain(0),
+    _currentBank(0),
+    _currentPreset(-1)
 {
 
 }
@@ -50,9 +52,15 @@ void GrandOrgueDataThrough::finalizePreprocess()
             _maxGain = val;
 }
 
-void GrandOrgueDataThrough::setSf2SmplId(QString filePath, QList<int> sf2ElementIds)
+void GrandOrgueDataThrough::setSf2SmplId(QString filePath, QList<int> sf2ElementIds, bool hasLoop)
 {
     _smplIds[filePath] = sf2ElementIds;
+    _hasLoop[filePath] = hasLoop;
+}
+
+bool GrandOrgueDataThrough::hasLoop(QString filePath)
+{
+    return _hasLoop.contains(filePath) && _hasLoop[filePath];
 }
 
 QList<int> GrandOrgueDataThrough::getSf2SmplId(QString filePath)
@@ -68,4 +76,26 @@ void GrandOrgueDataThrough::storeSampleName(QString sampleName)
 bool GrandOrgueDataThrough::sampleNameExists(QString sampleName)
 {
     return _sampleNames.contains(sampleName.toLower());
+}
+
+
+void GrandOrgueDataThrough::useNextBank()
+{
+    if (_currentPreset == -1)
+        return;
+    _currentBank++;
+    _currentPreset = -1;
+}
+
+void GrandOrgueDataThrough::getNextBankPreset(int &bank, int &preset)
+{
+    _currentPreset++;
+    if (_currentPreset >= 128)
+    {
+        _currentBank++;
+        _currentPreset = 0;
+    }
+
+    bank = _currentBank;
+    preset = _currentPreset;
 }
