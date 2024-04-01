@@ -314,3 +314,29 @@ QString Utils::fixFilePath(QString filePath)
 #endif
     return filePath;
 }
+
+bool Utils::isValidUtf8(QByteArray data)
+{
+    int inSequence = 0;
+    unsigned char c;
+    for (int i = 0; i < data.length(); i++)
+    {
+        c = (unsigned)data[i];
+        if (inSequence)
+        {
+            if ((c & 0b11000000) != 0b10000000)
+                return false; // Not possible with the utf8 format
+            inSequence--;
+        }
+        else if (c >= 0b11111000)
+            return false; // Not possible with the utf8 format
+        else if (c >= 0b11110000)
+            inSequence = 3;
+        else if (c >= 0b11100000)
+            inSequence = 2;
+        else if (c >= 0b11000000)
+            inSequence = 1;
+    }
+
+    return true;
+}

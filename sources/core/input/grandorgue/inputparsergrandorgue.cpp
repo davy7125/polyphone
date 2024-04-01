@@ -27,6 +27,7 @@
 #include "grandorguerank.h"
 #include "grandorguestop.h"
 #include "grandorguedatathrough.h"
+#include "utils.h"
 
 InputParserGrandOrgue::InputParserGrandOrgue() : AbstractInputParser(),
     _godt(new GrandOrgueDataThrough())
@@ -78,7 +79,11 @@ void InputParserGrandOrgue::parseFile(QString filename, bool &success, QString &
         return;
     }
 
+    bool utf8 = Utils::isValidUtf8(inputFile.readAll());
+    inputFile.seek(0);
+
     QTextStream in(&inputFile);
+    in.setEncoding(utf8 ? QStringConverter::Utf8 : QStringConverter::Latin1);
     while (!in.atEnd())
     {
         // Read one line, skip empty lines or comments

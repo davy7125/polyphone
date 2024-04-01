@@ -57,6 +57,8 @@ public:
 
     static QString fixFilePath(QString filePath);
 
+    static bool isValidUtf8(QByteArray data);
+
 private:
     static int getNumberPart(const QString &str, int &length);
     static QString removeSuffix(QString txt);
