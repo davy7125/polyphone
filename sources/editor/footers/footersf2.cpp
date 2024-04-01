@@ -77,5 +77,5 @@ void FooterSf2::updateInterface()
         }
     }
 
-    ui->label_filename->setText(txt);
+    ui->label_filename->setTextToElide(txt);
 }
