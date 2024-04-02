@@ -36,23 +36,21 @@ LinkedToWidget::LinkedToWidget(QWidget *parent) :
 
 LinkedToWidget::~LinkedToWidget()
 {
-    this->clear();
+    while (!_buttons.empty())
+        delete _buttons.takeFirst();
     delete _layout;
-}
-
-void LinkedToWidget::clear()
-{
-    QList<QWidget*> buttons = _buttonIds.keys();
-    while (!buttons.isEmpty())
-        delete buttons.takeFirst();
-    _buttonIds.clear();
 }
 
 void LinkedToWidget::initialize(EltID id)
 {
-    this->clear();
     if (id.typeElement != elementSmpl && id.typeElement != elementInst)
+    {
+        // Remove all buttons
+        while (!_buttons.empty())
+            delete _buttons.takeFirst();
+        _buttonIds.clear();
         return;
+    }
 
     EltID id2 = id;
     id2.typeElement = (id.typeElement == elementSmpl ? elementInst : elementPrst);
@@ -62,6 +60,7 @@ void LinkedToWidget::initialize(EltID id)
 
     // Browse all instruments or presets
     SoundfontManager * sf2 = SoundfontManager::getInstance();
+    int buttonIndex = 0;
     foreach (int i, sf2->getSiblings(id2))
     {
         id2.indexElt = i;
@@ -74,23 +73,38 @@ void LinkedToWidget::initialize(EltID id)
             if (sf2->get(id3, elementToFind).wValue == id.indexElt)
             {
                 // Add a link
-                this->addLink(id2, sf2->getQstr(id2, champ_name));
+                this->setLink(buttonIndex, id2, sf2->getQstr(id2, champ_name));
+                buttonIndex++;
                 break;
             }
         }
     }
+
+    // Delete all unnecessary buttons
+    while (_buttons.count() > buttonIndex)
+    {
+        delete _buttons.takeLast();
+        _buttonIds.removeLast();
+    }
 }
 
-void LinkedToWidget::addLink(EltID id, QString text)
+void LinkedToWidget::setLink(int buttonIndex, EltID id, QString text)
 {
-    QPushButton * button = new QPushButton(this);
-    button->setText(text);
-    button->setCursor(Qt::PointingHandCursor);
-    button->setMinimumHeight(24);
-    button->setMaximumHeight(24);
-    _buttonIds[button] = id;
-    connect(button, SIGNAL(clicked(bool)), this, SLOT(onClick(bool)));
-    _layout->addWidget(button);
+    // Possibly create buttons
+    while (_buttons.count() <= buttonIndex)
+    {
+        QPushButton * button = new QPushButton(this);
+        button->setCursor(Qt::PointingHandCursor);
+        button->setMinimumHeight(24);
+        button->setMaximumHeight(24);
+        connect(button, SIGNAL(clicked(bool)), this, SLOT(onClick(bool)));
+        _layout->addWidget(button);
+        _buttons << button;
+        _buttonIds << EltID();
+    }
+
+    _buttons[buttonIndex]->setText(text);
+    _buttonIds[buttonIndex] = id;
 }
 
 int LinkedToWidget::getLinkNumber()
@@ -101,5 +115,10 @@ int LinkedToWidget::getLinkNumber()
 void LinkedToWidget::onClick(bool isClicked)
 {
     Q_UNUSED(isClicked)
-    emit(itemClicked(_buttonIds[dynamic_cast<QWidget*>(QObject::sender())]));
+
+    // Index of the button
+    QPushButton * button = dynamic_cast<QPushButton*>(QObject::sender());
+    int buttonIndex = _buttons.indexOf(button);
+    if (buttonIndex != -1)
+        emit(itemClicked(_buttonIds[buttonIndex]));
 }

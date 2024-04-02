@@ -48,7 +48,7 @@ void FooterLinkedTo::updateInterface()
         ids = _currentIds.getSelectedIds(elementInst);
         if (ids.empty())
         {
-            ui->widgetLinkedTo->clear();
+            ui->widgetLinkedTo->initialize(EltID());
             ui->pushStereoEditing->hide();
             return;
         }
@@ -82,7 +82,7 @@ void FooterLinkedTo::updateInterface()
     else
     {
         ui->labelLinkedTo->setText("-");
-        ui->widgetLinkedTo->clear();
+        ui->widgetLinkedTo->initialize(EltID());
     }
 
     // Visibility of the stereo editing button

@@ -29,6 +29,7 @@
 #include <QMap>
 #include "basetypes.h"
 class FlowLayout;
+class QPushButton;
 
 class LinkedToWidget : public QWidget
 {
@@ -55,10 +56,11 @@ private slots:
     void onClick(bool isClicked);
 
 private:
-    void addLink(EltID id, QString text);
+    void setLink(int buttonIndex, EltID id, QString text);
 
     FlowLayout * _layout;
-    QMap<QWidget *, EltID> _buttonIds;
+    QList<QPushButton *> _buttons;
+    QList<EltID> _buttonIds;
 };
 
 #endif // LINKEDTOWIDGET_H
