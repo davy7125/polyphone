@@ -87,7 +87,11 @@ void InputParserGrandOrgue::parseFile(QString filename, bool &success, QString &
     inputFile.seek(0);
 
     QTextStream in(&inputFile);
+#if QT_VERSION < 0x060000
+    in.setCodec(utf8 ? "UTF-8" : "latin1");
+#else
     in.setEncoding(utf8 ? QStringConverter::Utf8 : QStringConverter::Latin1);
+#endif
     while (!in.atEnd())
     {
         // Read one line, skip empty lines or comments
