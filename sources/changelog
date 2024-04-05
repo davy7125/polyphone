@@ -1,4 +1,17 @@
-polyphone (2.3) unstable; urgency=low
+polyphone (2.4) unstable; urgency=low
+
+  * (improvement) the window borders are now an option
+  * (improvement) faster and more accurate sound engine
+  * (improvement) default controller values consistent with the modulators of the loaded soundfont
+  * (improvement) GrandOrgue parser - group instruments by presets if switches are defined
+  * (fix) loading multiple files asynchroneously
+  * (fix) support of the sustain and sostenuto pedals
+  * (fix) graphical bugs resolved
+
+ -- Davy Triponney <davy.triponney@gmail.com>  Sat, 5 Apr 2024 17:38:42 +0100
+ 
+
+polyphone (2.3) UNRELEASED; urgency=low
 
   * (new) Korean translation
   * (new) button on the bottom right enabling the stereo editing, now enabled by default

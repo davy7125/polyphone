@@ -19,8 +19,8 @@ DEFINES += USE_LOCAL_QCUSTOMPLOT
 #DEFINES += NO_SF2_CREATION
 
 # Polyphone version
-DEFINES += SOFT_VERSION=\\\"2.3.1\\\"
-DEFINES += IDENTIFIER=\\\"\\\"
+DEFINES += SOFT_VERSION=\\\"2.4.0\\\"
+DEFINES += IDENTIFIER=\\\"beta\\\"
 DEFINES += CURRENT_YEAR=\\\"2023\\\"
 
 # List to be completed if other translations are desired
