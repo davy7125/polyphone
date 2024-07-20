@@ -277,7 +277,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 
     // Apply the volume envelop
     bool bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release, playedNote,
-                                              static_cast<float>(qPow(10, 0.05 * (_gain - v_attenuation))),
+                                              static_cast<float>(qPow(10, 0.05 * (_gain - v_attenuation - v_filterQ / 2))),
                                               &_voiceParam);
 
     if ((bRet2 && v_loopMode != 3) || endSample)
