@@ -158,12 +158,12 @@ void ConfigSectionRepository::onConnectionStateChanged(UserManager::ConnectionSt
 
 void ConfigSectionRepository::on_buttonCreateAccount_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/create-an-account"));
+    QDesktopServices::openUrl(QUrl("https://www.polyphone.io/register"));
 }
 
 void ConfigSectionRepository::on_buttonBecomePremium_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/subscribe"));
+    QDesktopServices::openUrl(QUrl("https://www.polyphone.io/premium"));
 }
 
 void ConfigSectionRepository::on_pushConnect_clicked()

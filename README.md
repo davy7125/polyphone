@@ -22,11 +22,11 @@ Polyphone is an open-source soundfont editor for creating musical instruments, a
 
 ### Install
 
-Check this [page](https://www.polyphone-soundfonts.com/download) to find installers for your system.
+Check this [page](https://www.polyphone.io/software) to find installers for your system.
 
 ### Support
 
-See the [documentation](https://www.polyphone-soundfonts.com/documentation) and [forum](https://www.polyphone-soundfonts.com/forum).
+See the [documentation](https://www.polyphone.io/documentation) and [forum](https://www.polyphone.io/forum).
 
 - - - - 
 

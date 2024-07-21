@@ -547,8 +547,8 @@ QString CustomTextEdit::processTag(QString tagContent)
     if (tagName == "pre")
         return "pre";
 
-    // Add target="_blank" for all <a> that are not redirecting to polyphone-soundfonts.com
-    if (tagName == "a" && !tagContent.contains("polyphone-soundfonts.com"))
+    // Add target="_blank" for all <a> that are not redirecting to polyphone.io
+    if (tagName == "a" && !tagContent.contains("polyphone.io"))
         return tagContent + " target=\"_blank\"";
 
     // Nothing to do

@@ -58,7 +58,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
             "</p></body></html>");
 
     // Credits
-    _credit.addCreator(tr("Davy Triponney", "translation needed if the alphabet is not the same (cyrillic for instance)"), "contact@polyphone-soundfonts.com");
+    _credit.addCreator(tr("Davy Triponney", "translation needed if the alphabet is not the same (cyrillic for instance)"), "contact@polyphone.io");
 
     _credit.addContributor(tr("Andrea Celani", "translation needed if the alphabet is not the same (cyrillic for instance)"), "acelani74@gmail.com");
     _credit.addContributor(tr("Kinwie", "translation needed if the alphabet is not the same (cyrillic for instance)"), "kinwie@yahoo.com");
@@ -70,7 +70,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
     _credit.addTranslator(tr("Aleksey Bobylev", "translation needed if the alphabet is not the same (cyrillic for instance)"), "al.bobylev@gmail.com"); // Russian
     _credit.addTranslator(tr("Andrea Celani", "translation needed if the alphabet is not the same (cyrillic for instance)"), "acelani74@gmail.com"); // Italian
     _credit.addTranslator(tr("Chris Hansen", "translation needed if the alphabet is not the same (cyrillic for instance)"), "festmusik@gmail.com"); // Danish
-    _credit.addTranslator(tr("Davy Triponney", "translation needed if the alphabet is not the same (cyrillic for instance)"), "contact@polyphone-soundfonts.com"); // French
+    _credit.addTranslator(tr("Davy Triponney", "translation needed if the alphabet is not the same (cyrillic for instance)"), "contact@polyphone.io"); // French
     _credit.addTranslator(tr("F.J. Martínez Murcia", "translation needed if the alphabet is not the same (cyrillic for instance)"), "fjesusmartinez@ugr.es"); // Spanish
     _credit.addTranslator(tr("Georg Gergull", "translation needed if the alphabet is not the same (cyrillic for instance)"), "geoger@hotmail.de"); // German
     _credit.addTranslator(tr("Jay Alexander Fleming", "translation needed if the alphabet is not the same (cyrillic for instance)"), "tito.nehru.naser@gmail.com"); // Serbian

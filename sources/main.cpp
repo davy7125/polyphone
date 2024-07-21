@@ -185,7 +185,7 @@ int displayHelp(Options &options)
 {
     Q_UNUSED(options)
 #ifdef _WIN32
-    writeLine("See 'https://www.polyphone-soundfonts.com/documentation/en/manual/annexes/command-line' for more information");
+    writeLine("See 'https://www.polyphone.io/documentation/manual/annexes/command-line' for more information");
 #else
     writeLine("Write 'man polyphone' to show usage");
 #endif
