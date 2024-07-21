@@ -26,7 +26,7 @@
 #define TOOLFREQUENCYPEAKS_PARAMETERS_H
 
 #include "abstracttoolparameters.h"
-#include "graphiquefourier.h"
+#include "graphicsfourier.h"
 #include <QList>
 #include <QString>
 

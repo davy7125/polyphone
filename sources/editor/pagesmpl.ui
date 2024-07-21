@@ -395,7 +395,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="GraphiqueFourier" name="grapheFourier" native="true">
+            <widget class="GraphicsFourier" name="grapheFourier" native="true">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -419,7 +419,6 @@
         </property>
         <property name="font">
          <font>
-          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -638,7 +637,6 @@
         </property>
         <property name="font">
          <font>
-          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -679,7 +677,6 @@
         </property>
         <property name="font">
          <font>
-          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -700,9 +697,9 @@
    <header>spinboxkey.h</header>
   </customwidget>
   <customwidget>
-   <class>GraphiqueFourier</class>
+   <class>GraphicsFourier</class>
    <extends>QWidget</extends>
-   <header>graphiquefourier.h</header>
+   <header>graphicsfourier.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

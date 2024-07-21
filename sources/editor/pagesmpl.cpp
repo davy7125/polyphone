@@ -25,10 +25,11 @@
 #include "pagesmpl.h"
 #include "ui_pagesmpl.h"
 #include "sound.h"
-#include "graphiquefourier.h"
+#include "graphicsfourier.h"
 #include "sampleutils.h"
 #include "contextmanager.h"
 #include "pianokeybdcustom.h"
+#include <QMessageBox>
 #include <QProgressDialog>
 #include <QInputDialog>
 #include <QProcess>
@@ -62,9 +63,6 @@ PageSmpl::PageSmpl(QWidget *parent) :
     ui->waveDisplay->connect(_synth, SIGNAL(currentPosChanged(quint32)), SLOT(setCurrentSample(quint32)));
     this->connect(_synth, SIGNAL(readFinished(int)), SLOT(lecteurFinished(int)));
     connect(ui->waveDisplay, SIGNAL(cutOrdered(int,int)), this, SLOT(onCutOrdered(int,int)));
-
-    // Background color of the Fourier graph
-    ui->grapheFourier->setBackgroundColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND));
 
     // Play area over the wave display
     ui->checkLectureLien->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "stereo_playback", false).toBool());

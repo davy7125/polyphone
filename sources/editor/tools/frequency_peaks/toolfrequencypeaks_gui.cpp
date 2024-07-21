@@ -25,9 +25,10 @@
 #include "toolfrequencypeaks_gui.h"
 #include "ui_toolfrequencypeaks_gui.h"
 #include "contextmanager.h"
-#include "graphiquefourier.h"
+#include "graphicsfourier.h"
 #include "soundfontmanager.h"
 #include "utils.h"
+#include <QFileDialog>
 
 class RunnableTask: public QRunnable
 {
@@ -48,7 +49,7 @@ public:
         int posMaxFourier;
         SampleFrequencyInfo sampleInfo;
         sampleInfo.name = sm->getQstr(_id, champ_name);
-        sampleInfo.frequencies = GraphiqueFourier::computePeaks(
+        sampleInfo.frequencies = GraphicsFourier::computePeaks(
                     vData, sm->get(_id, champ_dwSampleRate).dwValue,
                     sm->get(_id, champ_dwStartLoop).dwValue, sm->get(_id, champ_dwEndLoop).dwValue,
                     vectFourier, posMaxFourier);

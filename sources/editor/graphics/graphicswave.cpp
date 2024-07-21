@@ -36,7 +36,7 @@ const int GraphicsWave::TEXT_MARGIN = 5;
 const int GraphicsWave::OVERLAY_SIZE = 20;
 
 GraphicsWave::GraphicsWave(QWidget *parent) : QWidget(parent),
-    _wavePainter(new GraphicsWavePainter(this)),
+    _wavePainter(new GraphicsWavePainter()),
     _zoomX(1),
     _zoomY(1),
     _posX(.5),
@@ -65,19 +65,25 @@ GraphicsWave::GraphicsWave(QWidget *parent) : QWidget(parent),
     {
         _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
         _textColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+        _gridColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     }
     else
     {
         _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
         _textColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
+        _gridColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
     }
     _textColor.setAlpha(180);
+    _gridColor.setAlpha(40);
 
     // Font
     _textFont = this->font();
     _textFont.setBold(true);
 
     this->installEventFilter(this);
+
+    // Wave configuration
+    _wavePainter->setWaveColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
 }
 
 GraphicsWave::~GraphicsWave()
@@ -166,9 +172,11 @@ void GraphicsWave::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
+    // Background color
+    painter.fillRect(this->rect(), _backgroundColor);
+
     if (_multipleSelection)
     {
-        painter.fillRect(this->rect(), _backgroundColor);
         painter.setPen(_textColor);
         QFont font = _textFont;
         font.setPointSize(12);
@@ -178,6 +186,17 @@ void GraphicsWave::paintEvent(QPaintEvent *event)
         return;
     }
 
+    // Horizontal lines
+    painter.setPen(QPen(_gridColor, 1.0, Qt::SolidLine));
+    painter.drawLine(QPointF(-1, 0.5 * this->height()), QPointF(this->width() + 1, 0.5 * this->height()));
+    painter.setPen(QPen(_gridColor, 1.0, Qt::DotLine));
+    painter.drawLine(QPointF(-1, 0.125 * this->height()), QPointF(this->width() + 1, 0.125 * this->height()));
+    painter.drawLine(QPointF(-1, 0.25 * this->height()), QPointF(this->width() + 1, 0.25 * this->height()));
+    painter.drawLine(QPointF(-1, 0.375 * this->height()), QPointF(this->width() + 1, 0.375 * this->height()));
+    painter.drawLine(QPointF(-1, 0.625 * this->height()), QPointF(this->width() + 1, 0.625 * this->height()));
+    painter.drawLine(QPointF(-1, 0.75 * this->height()), QPointF(this->width() + 1, 0.75 * this->height()));
+    painter.drawLine(QPointF(-1, 0.875 * this->height()), QPointF(this->width() + 1, 0.875 * this->height()));
+
     // Paint the waveform
     double etendueX = _sizeX / _zoomX;
     double offsetX = (_sizeX - etendueX) * _posX - 1;
@@ -185,7 +204,7 @@ void GraphicsWave::paintEvent(QPaintEvent *event)
     quint32 end = offsetX + etendueX < 0 ? 0 : static_cast<quint32>(offsetX + etendueX);
     if (start >= end)
         return;
-    _wavePainter->paint(&painter, start, end, static_cast<float>(_zoomY));
+    _wavePainter->paint(&painter, event->rect(), start, end, static_cast<float>(_zoomY));
 
     // Left and right limits
     painter.setPen(_textColor);

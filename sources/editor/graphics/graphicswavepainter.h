@@ -30,37 +30,35 @@
 class GraphicsWavePainter
 {
 public:
-    GraphicsWavePainter(QWidget * widget);
+    GraphicsWavePainter();
     ~GraphicsWavePainter();
 
-    // Draw the background with the horizontal lines or not
-    // Default is true
-    void drawBackground(bool drawBackground) { _drawBackground = drawBackground; }
-
     // Set the waveform color
-    // Default is Highlight color
+    // Default is not defined
     void setWaveColor(QColor waveColor) { _waveColor = waveColor.rgb(); }
 
-    // Possibly draw the half top part of the wave in the bottom part of the area
+    // If true, values ranging from [0; 1] are displayed
+    // If false, values ranging from [-1; 1] are displayed
     // Default is false
-    void setDrawBottom(bool drawBottom) { _drawBottom = drawBottom; }
+    void setOnlyPositiveValues(bool drawPositiveValues) { _drawPositiveValues = drawPositiveValues; }
+
+    // Add a curve representing the mean value for each pixel, making the curve more definite
+    // Default is true
+    void addMeanCurve(bool addMeanCurve) { _addMeanCurve = addMeanCurve; }
 
     // Configure the painter with data
     void setData(const QVector<float> &vData);
+    void clearData();
 
     // Draw data
-    void paint(QPainter *painter, quint32 start, quint32 end, float zoomY);
+    void paint(QPainter *painter, QRect rect, quint32 start, quint32 end, float zoomY);
 
     // Get data around a central point
     QPointF * getDataAround(quint32 position, quint32 desiredLength, quint32 &pointNumber);
 
 private:
-    void prepareImage();
+    void prepareImage(quint32 width, quint32 height);
     float getValueX(float pos1, float value1, float pos2, float value2, float posX);
-    QRgb mergeRgb(QRgb color1, QRgb color2, float x);
-
-    // Target widget
-    QWidget * _widget;
 
     // Input data
     QVector<float> _sampleData;
@@ -73,9 +71,8 @@ private:
     float _zoomY;
 
     // Options and colors
-    bool _drawBackground, _drawBottom;
-    QRgb _backgroundColor, _waveColor;
-    QColor _gridColor;
+    bool _drawPositiveValues, _addMeanCurve;
+    QRgb _waveColor;
 };
 
 #endif // GRAPHICSWAVEPAINTER_H

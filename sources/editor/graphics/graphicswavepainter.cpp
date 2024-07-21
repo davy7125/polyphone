@@ -23,14 +23,13 @@
 ***************************************************************************/
 
 #include "graphicswavepainter.h"
-#include "contextmanager.h"
 #include <QPainter>
 
 static float fastSqrt(float val)
 {
     union {
-	float f;
-	quint32 u;
+        float f;
+        quint32 u;
     } I;
     if (val < 0.0001f)
         return 0.0001f;
@@ -50,29 +49,13 @@ static quint32 fastCeil(float val)
     return i;
 }
 
-GraphicsWavePainter::GraphicsWavePainter(QWidget * widget) :
-    _widget(widget),
+GraphicsWavePainter::GraphicsWavePainter() :
     _pixels(nullptr),
     _image(nullptr),
     _samplePlotMean(nullptr),
-    _drawBackground(true),
-    _drawBottom(false)
-{
-    // Initialize colors (always use the darkest color for the background of the graphic)
-    if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
-    {
-        _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).rgb();
-        _gridColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
-    }
-    else
-    {
-        _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).rgb();
-        _gridColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
-    }
-    _gridColor.setAlpha(40);
-
-    _waveColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).rgb();
-}
+    _drawPositiveValues(false),
+    _addMeanCurve(true)
+{}
 
 GraphicsWavePainter::~GraphicsWavePainter()
 {
@@ -83,29 +66,38 @@ GraphicsWavePainter::~GraphicsWavePainter()
 
 void GraphicsWavePainter::setData(const QVector<float> &vData)
 {
+    this->clearData();
+
+    // Store the waveform
+    _sampleData = vData;
+}
+
+void GraphicsWavePainter::clearData()
+{
     delete _image;
     delete [] _pixels;
     delete [] _samplePlotMean;
     _image = nullptr;
     _pixels = nullptr;
     _samplePlotMean = nullptr;
-
-    // Store the waveform
-    _sampleData = vData;
+    _sampleData.clear();
 }
 
-void GraphicsWavePainter::paint(QPainter * painter, quint32 start, quint32 end, float zoomY)
+void GraphicsWavePainter::paint(QPainter * painter, QRect rect, quint32 start, quint32 end, float zoomY)
 {
     if (start >= (unsigned int)_sampleData.size())
         start = (unsigned int)_sampleData.size() - 1;
-    if (end >= (unsigned int)_sampleData.size())
+    if (end == 0 || end >= (unsigned int)_sampleData.size())
         end = (unsigned int)_sampleData.size() - 1;
     if (start == end)
         return;
 
+    int width = rect.width();
+    int height = rect.height();
+
     // Possibly update the image
     if (_image == nullptr || _start != start || _end != end || _zoomY != zoomY ||
-            _image->width() != _widget->width() || _image->height() != _widget->height())
+            _image->width() != width || _image->height() != height)
     {
         delete _image;
         delete [] _pixels;
@@ -118,19 +110,16 @@ void GraphicsWavePainter::paint(QPainter * painter, quint32 start, quint32 end, 
         _zoomY = zoomY;
 
         // Prepare a new image
-        prepareImage();
+        prepareImage(width, height);
     }
 
     // Draw the curve if valid
     if (_image != nullptr)
-        painter->drawImage(0, 0, *_image);
+        painter->drawImage(rect.left(), rect.top(), *_image);
 }
 
-void GraphicsWavePainter::prepareImage()
+void GraphicsWavePainter::prepareImage(quint32 width, quint32 height)
 {
-    quint32 width = static_cast<quint32>(_widget->width());
-    quint32 height = static_cast<quint32>(_widget->height());
-
     ////////////////////////////////
     /// FIRST STEP: compute data ///
     ////////////////////////////////
@@ -215,16 +204,13 @@ void GraphicsWavePainter::prepareImage()
     }
 
     // Compute mean, standard deviation, adjust min / max
-    float coeff = -_zoomY * static_cast<float>(height) / (_drawBottom ? 1 : 2);
-    float offsetY = _drawBottom ? height : 0.5f * height;
+    float coeff = -_zoomY * static_cast<float>(height) / (_drawPositiveValues ? 1 : 2);
+    float offsetY = _drawPositiveValues ? height : 0.5f * height;
     for (quint32 i = 0; i < width; i++)
     {
         _samplePlotMean[i].setX(i);
         _samplePlotMean[i].setY(static_cast<double>(coeff * samplePlotSum[i] + offsetY));
-        samplePlotDeviation[i] = coeff *
-                    //qSqrt(samplePlotSquareSum[i] - samplePlotSum[i] * samplePlotSum[i])
-                    fastSqrt(static_cast<float>(samplePlotSquareSum[i] - samplePlotSum[i] * samplePlotSum[i]))
-                ;
+        samplePlotDeviation[i] = coeff * fastSqrt(static_cast<float>(samplePlotSquareSum[i] - samplePlotSum[i] * samplePlotSum[i]));
         samplePlotMin[i] = coeff * samplePlotMin[i] + offsetY;
         samplePlotMax[i] = coeff * samplePlotMax[i] + offsetY;
     }
@@ -233,7 +219,6 @@ void GraphicsWavePainter::prepareImage()
     delete [] samplePlotSum;
     delete [] samplePlotSquareSum;
 
-
     //////////////////////////////////////
     /// SECOND STEP: compute the image ///
     //////////////////////////////////////
@@ -241,28 +226,7 @@ void GraphicsWavePainter::prepareImage()
     // Prepare a new image
     _pixels = new QRgb[width * height];
     _image = new QImage(reinterpret_cast<uchar*>(_pixels), static_cast<int>(width), static_cast<int>(height), QImage::Format_ARGB32);
-
-    // Background
-    if (_drawBackground)
-        for (quint32 i = 0; i < width * height; i++)
-            _pixels[i] = _backgroundColor;
-    else
-        memset(_pixels, 0 /* transparent */, width * height * sizeof(int));
-
-    // Horizontal lines
-    if (_drawBackground)
-    {
-        QPainter painter(_image);
-        painter.setPen(QPen(_gridColor, 1.0, Qt::SolidLine));
-        painter.drawLine(QPointF(-1, 0.5 * height), QPointF(width + 1, 0.5 * height));
-        painter.setPen(QPen(_gridColor, 1.0, Qt::DotLine));
-        painter.drawLine(QPointF(-1, 0.125 * height), QPointF(width + 1, 0.125 * height));
-        painter.drawLine(QPointF(-1, 0.25 * height), QPointF(width + 1, 0.25 * height));
-        painter.drawLine(QPointF(-1, 0.375 * height), QPointF(width + 1, 0.375 * height));
-        painter.drawLine(QPointF(-1, 0.625 * height), QPointF(width + 1, 0.625 * height));
-        painter.drawLine(QPointF(-1, 0.75 * height), QPointF(width + 1, 0.75 * height));
-        painter.drawLine(QPointF(-1, 0.875 * height), QPointF(width + 1, 0.875 * height));
-    }
+    memset(_pixels, 0 /* transparent */, width * height * sizeof(int));
 
     // Waveform
     float mean, x;
@@ -278,15 +242,18 @@ void GraphicsWavePainter::prepareImage()
             x = j < mean ? getValueX(samplePlotMax[i], 0, mean + samplePlotDeviation[i], 1, j) :
                             getValueX(mean - samplePlotDeviation[i], 1, samplePlotMin[i], 0, j);
             if (x > 0)
-                _pixels[currentPixelIndex] = mergeRgb(_pixels[currentPixelIndex], _waveColor, x);
+                _pixels[currentPixelIndex] = static_cast<quint32>(x * 255) << 24 | (_waveColor & RGB_MASK);
         }
     }
 
-    // Add the mean value
-    QPainter painter(_image);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.setPen(QPen(QColor::fromRgba(_waveColor), 1.0, Qt::SolidLine));
-    painter.drawPolyline(_samplePlotMean, _image->width());
+    // Possibly add the mean value
+    if (_addMeanCurve)
+    {
+        QPainter painter(_image);
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.setPen(QPen(QColor::fromRgba(_waveColor), 1.0, Qt::SolidLine));
+        painter.drawPolyline(_samplePlotMean, _image->width());
+    }
 
     // Finally, clear data
     delete [] samplePlotMin;
@@ -306,18 +273,6 @@ float GraphicsWavePainter::getValueX(float pos1, float value1, float pos2, float
     return ((posX - pos1) * value2 + (pos2 - posX) * value1) / (pos2 - pos1);
 }
 
-QRgb GraphicsWavePainter::mergeRgb(QRgb color1, QRgb color2, float x)
-{
-    if (x >= 1)
-        return color2;
-    if (!_drawBackground)
-        return (static_cast<quint32>(x * color2 + 0.5) & 0xFF000000) | (color2 & 0x00FFFFFF);
-    return 0xFF000000 +
-            ((static_cast<quint32>((1.0f - x) * qRed(color1) + x * qRed(color2)) & 0xFF) << 16) +
-            ((static_cast<quint32>((1.0f - x) * qGreen(color1) + x * qGreen(color2)) & 0xFF) << 8) +
-            (static_cast<quint32>((1.0f - x) * qBlue(color1) + x * qBlue(color2)) & 0xFF);
-}
-
 QPointF * GraphicsWavePainter::getDataAround(quint32 position, quint32 desiredLength, quint32 &pointNumber)
 {
     // Limits
@@ -330,8 +285,8 @@ QPointF * GraphicsWavePainter::getDataAround(quint32 position, quint32 desiredLe
         return nullptr;
 
     // Create data
-    float coeff = -_zoomY * static_cast<float>(_widget->height()) / 2;
-    float offsetY = 0.5f * static_cast<float>(_widget->height());
+    float coeff = -_zoomY * static_cast<float>(_image->height()) / 2;
+    float offsetY = 0.5f * static_cast<float>(_image->height());
     pointNumber = rightIndex - leftIndex + 1;
     QPointF * array = new QPointF[pointNumber];
     for (quint32 i = 0; i < pointNumber; i++)

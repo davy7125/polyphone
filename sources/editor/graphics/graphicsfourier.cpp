@@ -22,70 +22,26 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "graphiquefourier.h"
+#include "graphicsfourier.h"
+#include <QMouseEvent>
+#include <QPainterPath>
 #include "sound.h"
 #include "sampleutils.h"
 #include "soundfontmanager.h"
 #include "contextmanager.h"
 #include "frequency_peaks/toolfrequencypeaks.h"
+#include "graphicswavepainter.h"
 #include "utils.h"
 #include <QMenu>
 #include <QFileDialog>
 #include <QPainter>
 
-GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
-    _fixedTickerX(new QCPAxisTickerFixed()),
-    _fixedTickerY(new QCPAxisTickerFixed()),
+GraphicsFourier::GraphicsFourier(QWidget * parent) : QWidget(parent),
+    _wavePainter(new GraphicsWavePainter()),
     _menu(nullptr),
-    _toolFrequencyPeak(new ToolFrequencyPeaks())
+    _toolFrequencyPeak(new ToolFrequencyPeaks()),
+    _paintForPng(false)
 {
-    // Configuration du graphe
-    this->addGraph();
-    QPen graphPen;
-    QColor color = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT);
-    color.setAlpha(150);
-    graphPen.setColor(color);
-    graphPen.setWidthF(1);
-    this->graph(0)->setPen(graphPen);
-
-    // Axes
-    QPen penGrid = this->xAxis->grid()->pen();
-    QPen penSubGrid = this->xAxis->grid()->subGridPen();
-    penGrid.setColor(QColor(140, 140, 140));
-    penSubGrid.setColor(QColor(220, 220, 220));
-
-    this->xAxis->setRange(0, 20000);
-    this->xAxis->setVisible(false);
-    this->xAxis->setTicks(false);
-    this->xAxis->setLabel(tr("Frequency (Hz)"));
-    this->xAxis->grid()->setSubGridVisible(true);
-    this->xAxis->grid()->setPen(penGrid);
-    this->xAxis->grid()->setSubGridPen(penSubGrid);
-    this->xAxis->setTickLength(0);
-    this->xAxis->setSubTickLength(0);
-    this->xAxis->setBasePen(penGrid);
-    _fixedTickerX->setScaleStrategy(QCPAxisTickerFixed::ssNone);
-    _fixedTickerX->setTickStep(2000);
-    this->xAxis->setTicker(_fixedTickerX);
-
-    this->yAxis->setRange(0, 1.05);
-    this->yAxis->setVisible(false);
-    this->yAxis->setTicks(false);
-    this->yAxis->setLabel(tr("Intensity"));
-    this->yAxis->grid()->setSubGridVisible(true);
-    this->yAxis->grid()->setPen(penGrid);
-    this->yAxis->grid()->setSubGridPen(penSubGrid);
-    this->yAxis->setTickLength(0);
-    this->yAxis->setSubTickLength(0);
-    this->yAxis->setBasePen(penGrid);
-    _fixedTickerY->setScaleStrategy(QCPAxisTickerFixed::ssNone);
-    _fixedTickerY->setTickStep(0.2);
-    this->yAxis->setTicker(_fixedTickerY);
-
-    // Marges
-    this->axisRect()->setAutoMargins(QCP::msNone);
-    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
-
     // Préparation du menu contextuel
     _menu = new QMenu(this);
     _menu->setStyleSheet(ContextManager::theme()->getMenuTheme());
@@ -94,25 +50,21 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     QAction * action2 = _menu->addAction(tr("Show peak frequencies") + "...");
     connect(action2, SIGNAL(triggered()), this, SLOT(exportPeaks()));
 
-    this->plotLayout()->insertRow(0);
-    this->plotLayout()->setRowStretchFactors(QList<double>() << 1 << 100);
-    this->plotLayout()->setRowSpacing(0);
+    // Wave configuration
+    QColor color = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT);
+    color.setAlpha(150);
+    _wavePainter->setWaveColor(color);
+    _wavePainter->setOnlyPositiveValues(true);
+    _wavePainter->addMeanCurve(false);
 }
 
-GraphiqueFourier::~GraphiqueFourier()
+GraphicsFourier::~GraphicsFourier()
 {
-    _fixedTickerX.clear();
-    _fixedTickerY.clear();
     delete _toolFrequencyPeak;
+    delete _wavePainter;
 }
 
-void GraphiqueFourier::setBackgroundColor(QColor color)
-{
-    // Modification de la couleur de fond
-    this->setBackground(color);
-}
-
-void GraphiqueFourier::setCurrentIds(IdList ids)
+void GraphicsFourier::setCurrentIds(IdList ids)
 {
     _currentIds = ids;
 
@@ -132,15 +84,15 @@ void GraphiqueFourier::setCurrentIds(IdList ids)
         this->_dwSmplRate = -1;
         _fData.clear();
         _peaks.clear();
-        graph(0)->data()->clear();
-        this->replot();
+        _wavePainter->clearData();
+        this->repaint();
 
         // Menu
         _menu->actions()[0]->setEnabled(false);
     }
 }
 
-void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, bool withReplot)
+void GraphicsFourier::setPos(quint32 posStart, quint32 posEnd, bool withRepaint)
 {
     if (_currentIds.count() != 1)
         return;
@@ -150,7 +102,7 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, bool withReplot)
     _delta = 0;
 
     if (_fData.isEmpty())
-        graph(0)->data()->clear();
+        _wavePainter->clearData();
     else
     {
         QVector<float> vectFourier;
@@ -159,16 +111,16 @@ void GraphiqueFourier::setPos(quint32 posStart, quint32 posEnd, bool withReplot)
 
         // Display the Fourier transform?
         if (posMaxFourier == -1)
-            graph(0)->data()->clear();
+            _wavePainter->clearData();
         else
             this->dispFourier(vectFourier, posMaxFourier);
     }
 
-    if (withReplot)
-        this->replot();
+    if (withRepaint)
+        this->repaint();
 }
 
-QList<Peak> GraphiqueFourier::computePeaks(QVector<float> fData, quint32 dwSmplRate,
+QList<Peak> GraphicsFourier::computePeaks(QVector<float> fData, quint32 dwSmplRate,
                                            quint32 posStart, quint32 posEnd,
                                            QVector<float> &vectFourier, int &posMaxFourier,
                                            int *key, int *correction, float * reliance)
@@ -364,24 +316,21 @@ QList<Peak> GraphiqueFourier::computePeaks(QVector<float> fData, quint32 dwSmplR
     return result;
 }
 
-void GraphiqueFourier::dispFourier(QVector<float> vectFourier, float posMaxFourier)
+void GraphicsFourier::dispFourier(QVector<float> vectFourier, float posMaxFourier)
 {
-    this->graph(0)->data()->clear();
     qint32 size_x = (vectFourier.size() * 40000) / static_cast<signed>(this->_dwSmplRate);
-    QVector<double> x(size_x), y(size_x);
+    QVector<float> y(size_x);
     for (qint32 i = 0; i < size_x; i++)
     {
-        x[i] = (20000. * i) / (size_x - 1); // Conversion Hz
         if (i < vectFourier.size())
-            y[i] = static_cast<double>(vectFourier[i]) /
-                   static_cast<double>(vectFourier[static_cast<int>(posMaxFourier)]); // normalisation entre 0 et 1
+            y[i] = vectFourier[i] / vectFourier[static_cast<int>(posMaxFourier)]; // normalisation entre 0 et 1
         else
             y[i] = 0;
     }
-    this->graph(0)->setData(x, y, true);
+    _wavePainter->setData(y);
 }
 
-void GraphiqueFourier::mousePressEvent(QMouseEvent *event)
+void GraphicsFourier::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::RightButton)
     {
@@ -390,25 +339,96 @@ void GraphiqueFourier::mousePressEvent(QMouseEvent *event)
     }
 }
 
-void GraphiqueFourier::paintEvent(QPaintEvent * event)
+QRect GraphicsFourier::paintGrid(QPainter &painter, QRect rect)
 {
-    // Draw the graph
-    QCustomPlot::paintEvent(event);
+    QFont font = this->font();
+    QFontMetrics fm(font);
+    QPen penGrid = QPen(QColor(140, 140, 140), 1, Qt::DotLine);
+    QPen penSubGrid = QPen(QColor(220, 220, 220), 1, Qt::DotLine);
+    QColor textColor = Qt::black;
+
+    painter.setFont(font);
+    int margin = 5;
+    int verticalLegendWidth = fm.horizontalAdvance("0.8");
+    int textHeight = fm.height();
+
+    // x[i] = (20000. * i) / (size_x - 1); // Conversion Hz
+
+    QRect gridRect = rect;
+    gridRect.setLeft(rect.left() + verticalLegendWidth + textHeight + 3 * margin);
+    gridRect.setBottom(rect.bottom() - 2 * textHeight - 3 * margin);
+    gridRect.setRight(rect.right() - margin);
+    gridRect.setTop(rect.top() + 2 * margin + textHeight);
+
+    // Title
+    painter.setPen(textColor);
+    painter.drawText(
+        QRect(gridRect.left(), rect.top() + margin, gridRect.width(), textHeight),
+        Qt::AlignCenter | Qt::AlignTop, _name);
+
+    // Labels
+    painter.drawText(
+        QRect(gridRect.left(), rect.bottom() - textHeight - margin, gridRect.width(), textHeight),
+        Qt::AlignCenter | Qt::AlignTop, tr("Frequency (Hz)"));
+    painter.save();
+    painter.rotate(-90);
+    painter.drawText(
+        QRect(-gridRect.bottom(), margin, gridRect.height(), textHeight),
+        Qt::AlignCenter | Qt::AlignTop, tr("Intensity"));
+    painter.restore();
+
+    // Horizontal lines
+    for (int i = 0; i <= 20; i++)
+    {
+        painter.setPen(i % 4 == 0 ? penGrid : penSubGrid);
+        float posY = gridRect.top() + gridRect.height() * (static_cast<float>(i) / 20.);
+        painter.drawLine(QPointF(gridRect.left(), posY), QPointF(gridRect.right(), posY));
+
+        if (i % 4 == 0)
+        {
+            painter.setPen(textColor);
+            painter.drawText(
+                QRect(rect.left() + 2 * margin + textHeight, posY - textHeight / 2, verticalLegendWidth, textHeight),
+                Qt::AlignRight | Qt::AlignVCenter, QString::number(1.0f - static_cast<float>(i) / 20.0f));
+        }
+    }
+
+    // Vertical lines
+    for (int i = 0; i <= 40; i++)
+    {
+        painter.setPen(i % 4 == 0 ? penGrid : penSubGrid);
+        float posX = gridRect.left() + gridRect.width() * (static_cast<float>(i) / 40.);
+        painter.drawLine(QPointF(posX, gridRect.top()), QPointF(posX, gridRect.bottom()));
+
+        if (i % 4 == 0 && i < 40)
+        {
+            painter.setPen(textColor);
+            painter.drawText(
+                QRect(posX - 50, rect.bottom() - 2 * fm.height() - 2 * margin, 100, fm.height()),
+                Qt::AlignCenter | Qt::AlignTop, QString::number(20000 * i / 40));
+        }
+    }
+
+    return gridRect;
+}
+
+void GraphicsFourier::paintEvent(QPaintEvent * event)
+{
     if (_peaks.empty())
         return;
 
     // Helpful elements
-    QSize size = this->size();
+    QRect rect = event->rect();
     int marginRight = 1;
     int marginTop = 1;
-    int tuneWidth = qMin(160, size.width() - marginRight);
+    int tuneWidth = qMin(160, rect.width() - marginRight);
     int tuneCellPadding = 5;
     int tickHalfHeight = 3;
 
-    QColor highlightColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
-    QColor highlightTextColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT);
-    QColor backgroundColor = ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND);
-    QColor textColor = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT);
+    QColor highlightColor = _paintForPng ? QColor(240, 0, 0) : ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+    QColor highlightTextColor = _paintForPng ? Qt::white : ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT);
+    QColor backgroundColor = _paintForPng ? Qt::white : ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND);
+    QColor textColor = _paintForPng ? Qt::black : ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT);
 
     QFont fontInfo = QFont(font().family(), 7);
     QFont fontInfoSmall = QFont(font().family(), 6);
@@ -419,6 +439,20 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
 
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
+
+    // Full rect
+    if (_paintForPng)
+    {
+        // White background color
+        painter.fillRect(rect, backgroundColor);
+        _wavePainter->setWaveColor(highlightColor);
+
+        // Grid with legend
+        rect = this->paintGrid(painter, rect);
+    }
+
+    // Fourier transform
+    _wavePainter->paint(&painter, rect, 0, 0, 1);
 
     // Text to display
     QString keyName = ContextManager::keyName()->getKeyName(static_cast<unsigned int>(_key));
@@ -434,26 +468,26 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
     painter.setFont(fontMain);
     {
         int tuneCellMargin = fontHeight * 3 / 2;
-        int x1 = size.width() - marginRight - tuneWidth + fontHeight / 2 + tuneCellPadding;
-        int x2 = size.width() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellMargin - tuneCellPadding;
-        int x3 = size.width() - marginRight - tuneWidth / 2 + textWidth / 2 + tuneCellMargin + tuneCellPadding;
-        int x4 = size.width() - marginRight - fontHeight / 2 - tuneCellPadding;
+        int x1 = rect.right() - marginRight - tuneWidth + fontHeight / 2 + tuneCellPadding;
+        int x2 = rect.right() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellMargin - tuneCellPadding;
+        int x3 = rect.right() - marginRight - tuneWidth / 2 + textWidth / 2 + tuneCellMargin + tuneCellPadding;
+        int x4 = rect.right() - marginRight - fontHeight / 2 - tuneCellPadding;
 
         // Horizontal line
-        painter.drawLine(x1, marginTop + tuneCellPadding + fontHeight / 2, x2,
-                         marginTop + tuneCellPadding + fontHeight / 2);
-        painter.drawLine(x3, marginTop + tuneCellPadding + fontHeight / 2, x4,
-                         marginTop + tuneCellPadding + fontHeight / 2);
+        painter.drawLine(x1, rect.top() + marginTop + tuneCellPadding + fontHeight / 2, x2,
+                         rect.top() + marginTop + tuneCellPadding + fontHeight / 2);
+        painter.drawLine(x3, rect.top() + marginTop + tuneCellPadding + fontHeight / 2, x4,
+                         rect.top() + marginTop + tuneCellPadding + fontHeight / 2);
 
         // Ticks
         for (int i = 0; i < 6; i++)
         {
             int x = x1 + (x2 - x1) * i / 5;
-            painter.drawLine(x, marginTop + tuneCellPadding + fontHeight / 2 - tickHalfHeight,
-                             x, marginTop + tuneCellPadding + fontHeight / 2 + tickHalfHeight);
+            painter.drawLine(x, rect.top() + marginTop + tuneCellPadding + fontHeight / 2 - tickHalfHeight,
+                             x, rect.top() + marginTop + tuneCellPadding + fontHeight / 2 + tickHalfHeight);
             x = x3 + (x4 - x3) * i / 5;
-            painter.drawLine(x, marginTop + tuneCellPadding + fontHeight / 2 - tickHalfHeight,
-                             x, marginTop + tuneCellPadding + fontHeight / 2 + tickHalfHeight);
+            painter.drawLine(x, rect.top() + marginTop + tuneCellPadding + fontHeight / 2 - tickHalfHeight,
+                             x, rect.top() + marginTop + tuneCellPadding + fontHeight / 2 + tickHalfHeight);
         }
 
         // Delta
@@ -468,13 +502,13 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
 
             painter.setBrush(highlightColor);
             painter.setPen(highlightColor);
-            painter.drawEllipse(QPoint(pos, marginTop + tuneCellPadding + fontHeight / 2),
+            painter.drawEllipse(QPoint(pos, rect.top() + marginTop + tuneCellPadding + fontHeight / 2),
                                 fontHeight / 2 + tuneCellPadding, fontHeight / 2 + tuneCellPadding);
-            painter.fillRect(pos, marginTop + tuneCellPadding + fontHeight / 2 - tickHalfHeight,
-                             size.width() - marginRight - tuneWidth / 2 - pos, 2 * tickHalfHeight,
+            painter.fillRect(pos, rect.top() + marginTop + tuneCellPadding + fontHeight / 2 - tickHalfHeight,
+                             rect.right() - marginRight - tuneWidth / 2 - pos, 2 * tickHalfHeight,
                              highlightColor);
             painter.setPen(highlightTextColor);
-            painter.drawText(QRect(pos - textWidth / 2, marginTop + tuneCellPadding, textWidth, fontHeight),
+            painter.drawText(QRect(pos - textWidth / 2, rect.top() + marginTop + tuneCellPadding, textWidth, fontHeight),
                              Qt::AlignCenter, txt);
         }
     }
@@ -483,24 +517,25 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
     {
         QPainterPath path;
         textColor.setAlpha(255);
-        path.addRoundedRect(QRect(size.width() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellPadding,
-                                   marginTop, textWidth + 2 * tuneCellPadding, fontHeight + 2 * tuneCellPadding), 3, 3);
+        path.addRoundedRect(QRect(rect.right() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellPadding,
+                                   rect.top() + marginTop, textWidth + 2 * tuneCellPadding, fontHeight + 2 * tuneCellPadding), 3, 3);
         painter.fillPath(path, _delta == 0 ? highlightColor : textColor);
         painter.setPen(_delta == 0 ? highlightTextColor : backgroundColor);
-        painter.drawText(QRect(size.width() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellPadding, marginTop + tuneCellPadding,
+        painter.drawText(QRect(rect.right() - marginRight - tuneWidth / 2 - textWidth / 2 - tuneCellPadding,
+                               rect.top() + marginTop + tuneCellPadding,
                                textWidth + 2 * tuneCellPadding, fontHeight), Qt::AlignCenter, keyName);
     }
 
     // MAIN FREQUENCY PEAKS
 
-    textColor.setAlpha(100);
+    textColor.setAlpha(_paintForPng ? 255 : 100);
     painter.setPen(textColor);
     {
         // Compute the text
         QList<QStringList> lines;
         int peakNumber = 0;
-        int posY = 2 * tuneCellPadding + fontHeight * 3 / 2;
-        while (posY + fontHeight < size.height() && peakNumber < _peaks.count())
+        int posY = rect.top() + 2 * tuneCellPadding + fontHeight * 3 / 2;
+        while (posY + fontHeight < rect.bottom() && peakNumber < _peaks.count())
         {
             QStringList line;
             line << QLocale::system().toString(_peaks[peakNumber]._factor, 'f', 2)
@@ -536,27 +571,35 @@ void GraphiqueFourier::paintEvent(QPaintEvent * event)
         columnWidth[4] += 2;
 
         // Write the text
-        posY = 2 * tuneCellPadding + fontHeight * 3 / 2;
+        posY = rect.top() + 2 * tuneCellPadding + fontHeight * 3 / 2;
         for (peakNumber = 0; peakNumber < lines.count(); peakNumber++)
         {
             painter.setFont(fontInfo);
-            painter.drawText(QRect(0, posY, size.width() - columnWidth[1] - columnWidth[2] - columnWidth[3] - columnWidth[4] - marginRight, fontHeight),
-                             Qt::AlignRight, lines[peakNumber][0]);
-            painter.drawText(QRect(0, posY, size.width() - columnWidth[2] - columnWidth[3] - columnWidth[4] - marginRight, fontHeight),
-                             Qt::AlignRight, lines[peakNumber][1]);
-            painter.drawText(QRect(0, posY, size.width() - columnWidth[3] - columnWidth[4] - marginRight, fontHeight),
-                             Qt::AlignRight, lines[peakNumber][2]);
-            painter.drawText(QRect(0, posY, size.width() - columnWidth[4] - marginRight, fontHeight),
-                             Qt::AlignRight, lines[peakNumber][3]);
+            painter.drawText(QRect(0, posY, rect.right() - columnWidth[1] - columnWidth[2] - columnWidth[3] - columnWidth[4] - marginRight, fontHeight),
+                             Qt::AlignRight | Qt::AlignVCenter, lines[peakNumber][0]);
+            painter.drawText(QRect(0, posY, rect.right() - columnWidth[2] - columnWidth[3] - columnWidth[4] - marginRight, fontHeight),
+                             Qt::AlignRight | Qt::AlignVCenter, lines[peakNumber][1]);
+            painter.drawText(QRect(0, posY, rect.right() - columnWidth[3] - columnWidth[4] - marginRight, fontHeight),
+                             Qt::AlignRight | Qt::AlignVCenter, lines[peakNumber][2]);
+            painter.drawText(QRect(0, posY, rect.right() - columnWidth[4] - marginRight, fontHeight),
+                             Qt::AlignRight | Qt::AlignVCenter, lines[peakNumber][3]);
             painter.setFont(fontInfoSmall);
-            painter.drawText(QRect(0, posY, size.width() - marginRight, fontHeight),
-                             Qt::AlignRight, lastTextElement);
+            painter.drawText(QRect(0, posY, rect.right() - marginRight, fontHeight),
+                             Qt::AlignRight | Qt::AlignVCenter, lastTextElement);
             posY += fontHeight;
         }
     }
+
+    if (_paintForPng)
+    {
+        // Restore parameters
+        QColor color = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT);
+        color.setAlpha(150);
+        _wavePainter->setWaveColor(color);
+    }
 }
 
-void GraphiqueFourier::exportPng()
+void GraphicsFourier::exportPng()
 {
     QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" +
             _name.replace(QRegularExpression(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".png";
@@ -569,29 +612,14 @@ void GraphiqueFourier::exportPng()
     }
 }
 
-void GraphiqueFourier::exportPng(QString fileName)
+void GraphicsFourier::exportPng(QString fileName)
 {
-    // Préparation
-    this->yAxis->setRange(0, 1);
-    QColor backgroundColor = this->mBackgroundBrush.color();
-    this->setBackgroundColor(Qt::white);
-    this->xAxis->setVisible(true);
-    this->xAxis->setTicks(true);
-    this->yAxis->setVisible(true);
-    this->yAxis->setTicks(true);
-    this->axisRect()->setAutoMargins(QCP::msAll);
-    QCPTextElement * title = new QCPTextElement(this, _name);
-    this->plotLayout()->addElement(0, 0, title);
-    QPen graphPen;
-    graphPen.setColor(QColor(240, 0, 0));
-    graphPen.setWidthF(1);
-    this->graph(0)->setPen(graphPen);
-
-    // Redimensionnement
+    // Increase the size of this widget
+    _paintForPng = true;
     QSize minSize = this->minimumSize();
     this->setMinimumSize(1200, 400);
 
-    // Création fichier png
+    // Create the png file
     QFile file(fileName);
     if (file.open(QIODevice::WriteOnly))
     {
@@ -600,31 +628,18 @@ void GraphiqueFourier::exportPng(QString fileName)
         file.close();
     }
 
-    // Restauration du style du départ
-    this->yAxis->setRange(0, 1.05);
-    this->setBackgroundColor(backgroundColor);
-    this->xAxis->setVisible(false);
-    this->xAxis->setTicks(false);
-    this->yAxis->setVisible(false);
-    this->yAxis->setTicks(false);
-    this->axisRect()->setAutoMargins(QCP::msNone);
-    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
-    this->plotLayout()->remove(title);
-    graphPen.setColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT));
-    graphPen.setWidthF(1);
-    this->graph(0)->setPen(graphPen);
-
-    // Redimensionnement
+    // Restore this widget size
+    _paintForPng = false;
     this->setMinimumSize(minSize);
 }
 
-void GraphiqueFourier::exportPeaks()
+void GraphicsFourier::exportPeaks()
 {
     _toolFrequencyPeak->setIds(_currentIds);
     _toolFrequencyPeak->run();
 }
 
-void GraphiqueFourier::getEstimation(int &pitch, int &correction, float &score)
+void GraphicsFourier::getEstimation(int &pitch, int &correction, float &score)
 {
     pitch = _key;
     correction = -_delta;

@@ -8,3 +8,4 @@ lib_*
 .DS_Store
 /fedora
 /debian
+/sources/build

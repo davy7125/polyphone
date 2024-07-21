@@ -92,7 +92,7 @@ private:
     bool _bFromExt;
 
     // Style
-    QColor _redColor, _greenColor, _backgroundColor, _textColor;
+    QColor _redColor, _greenColor, _backgroundColor, _textColor, _gridColor;
     QFont _textFont;
 
     static const int TEXT_MARGIN;

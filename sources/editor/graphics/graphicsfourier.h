@@ -22,14 +22,15 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef GRAPHIQUEFOURIER_H
-#define GRAPHIQUEFOURIER_H
+#ifndef GRAPHICSFOURIER_H
+#define GRAPHICSFOURIER_H
 
-#include "qcustomplot.h"
-#include "basetypes.h"
+#include <QWidget>
 #include <QMetaType>
+#include "basetypes.h"
 class QMenu;
 class ToolFrequencyPeaks;
+class GraphicsWavePainter;
 
 class Peak
 {
@@ -55,18 +56,17 @@ public:
 };
 Q_DECLARE_METATYPE(Peak)
 
-class GraphiqueFourier : public QCustomPlot
+class GraphicsFourier : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit GraphiqueFourier(QWidget *parent = nullptr);
-    ~GraphiqueFourier() override;
+    explicit GraphicsFourier(QWidget *parent = nullptr);
+    ~GraphicsFourier() override;
 
-    void setBackgroundColor(QColor color);
     void setCurrentIds(IdList ids);
     void setSampleName(QString name) { _name = name; }
-    void setPos(quint32 posStart, quint32 posEnd, bool withReplot = true);
+    void setPos(quint32 posStart, quint32 posEnd, bool withRepaint = true);
     void getEstimation(int &pitch, int &correction, float &score);
     static QList<Peak> computePeaks(QVector<float> fData, quint32 dwSmplRate, quint32 posStart, quint32 posEnd,
                                     QVector<float> &vectFourier, int &posMaxFourier,
@@ -81,21 +81,23 @@ private slots:
     void exportPeaks();
 
 private:
+    void resized();
+    void exportPng(QString fileName);
+    void dispFourier(QVector<float> vectFourier, float posMaxFourier);
+    QRect paintGrid(QPainter &painter, QRect rect);
+
+    GraphicsWavePainter * _wavePainter;
+
     IdList _currentIds;
     QVector<float> _fData;
     quint32 _dwSmplRate;
     QString _name;
-    QSharedPointer<QCPAxisTickerFixed> _fixedTickerX;
-    QSharedPointer<QCPAxisTickerFixed> _fixedTickerY;
     QMenu * _menu;
     int _key, _delta;
     float _score;
     QList<Peak> _peaks;
     ToolFrequencyPeaks * _toolFrequencyPeak;
-
-    void resized();
-    void exportPng(QString fileName);
-    void dispFourier(QVector<float> vectFourier, float posMaxFourier);
+    bool _paintForPng;
 };
 
-#endif // GRAPHIQUEFOURIER_H
+#endif // GRAPHICSFOURIER_H

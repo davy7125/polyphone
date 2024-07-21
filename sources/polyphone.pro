@@ -21,7 +21,7 @@ DEFINES += USE_LOCAL_QCUSTOMPLOT
 # Polyphone version
 DEFINES += SOFT_VERSION=\\\"2.4.0\\\"
 DEFINES += IDENTIFIER=\\\"beta\\\"
-DEFINES += CURRENT_YEAR=\\\"2023\\\"
+DEFINES += CURRENT_YEAR=\\\"2024\\\"
 
 # List to be completed if other translations are desired
 # Format: polyphone_XX.ts, XX being the language code
@@ -38,7 +38,8 @@ TRANSLATIONS = polyphone_en.ts \
     polyphone_nl.ts \
     polyphone_da.ts \
     polyphone_ru.ts \
-    polyphone_ko.ts
+    polyphone_ko.ts \
+    polyphone_ca.ts
 PRECOMPILED_HEADER = precompiled_header.h
 CONFIG += lrelease embed_translations precompiled_header
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
@@ -243,13 +244,13 @@ SOURCES	+= main.cpp \
     editor/footers/footeroverview.cpp \
     editor/footers/footerprst.cpp \
     editor/footers/footersf2.cpp \
+    editor/graphics/graphicsfourier.cpp \
     editor/modulator/modulatorsplitter.cpp \
     editor/page.cpp \
     editor/pageenvelope.cpp \
     editor/pagerange.cpp \
     editor/pageselector.cpp \
     editor/pagetable.cpp \
-    editor/graphics/graphiquefourier.cpp \
     editor/graphics/graphicsviewrange.cpp \
     editor/graphics/graphicslegenditem.cpp \
     editor/graphics/graphicsrectangleitem.cpp \
@@ -593,13 +594,13 @@ HEADERS += \
     editor/footers/footeroverview.h \
     editor/footers/footerprst.h \
     editor/footers/footersf2.h \
+    editor/graphics/graphicsfourier.h \
     editor/modulator/modulatorsplitter.h \
     editor/page.h \
     editor/pageenvelope.h \
     editor/pagerange.h \
     editor/pageselector.h \
     editor/pagetable.h \
-    editor/graphics/graphiquefourier.h \
     editor/graphics/graphicssimpletextitem.h \
     editor/graphics/graphicsviewrange.h \
     editor/graphics/graphicslegenditem.h \

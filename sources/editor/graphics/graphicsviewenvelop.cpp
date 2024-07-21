@@ -30,7 +30,7 @@
 #include <QPainter>
 
 GraphicsViewEnvelop::GraphicsViewEnvelop(QWidget *parent) : QWidget(parent),
-    _wavePainter(new GraphicsWavePainter(this)),
+    _wavePainter(new GraphicsWavePainter()),
     _dontRememberScroll(false),
     _zoomFlag(false),
     _dragFlag(false),
@@ -61,14 +61,13 @@ GraphicsViewEnvelop::GraphicsViewEnvelop(QWidget *parent) : QWidget(parent),
     // Line styles
     _releaseLinePen = QPen(_textColor, 2, Qt::DashLine);
     _zoomLinePen = QPen(_redColor, 1, Qt::DashLine);
-    _textColor.setAlpha(70);
+    _textColor.setAlpha(40);
     _gridPen = QPen(_textColor, 1, Qt::DotLine);
-    _textColor.setAlpha(255);
+    _textColor.setAlpha(180);
 
     // Wave configuration
-    _wavePainter->drawBackground(false);
     _wavePainter->setWaveColor(ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND), _backgroundColor, 0.7));
-    _wavePainter->setDrawBottom(true);
+    _wavePainter->setOnlyPositiveValues(true);
 
     this->installEventFilter(this);
 }
@@ -326,11 +325,6 @@ void GraphicsViewEnvelop::paintEvent(QPaintEvent *event)
     // Background
     painter.fillRect(this->rect(), _backgroundColor);
 
-    // Paint the waveform
-    double start = offsetX < 0 ? 0 : offsetX;
-    double end = (offsetX + etendueX) < 0 ? 0 : (offsetX + etendueX);
-    _wavePainter->paint(&painter, start * _sampleRate + 0.5, end * _sampleRate + 0.5, 1.0);
-
     // Grid
     double tickStep = getTickStep();
     painter.setPen(_gridPen);
@@ -340,6 +334,11 @@ void GraphicsViewEnvelop::paintEvent(QPaintEvent *event)
         int pos = (valueX - offsetX) / etendueX * width + 0.5;
         painter.drawLine(pos, 0, pos, height);
     }
+
+    // Paint the waveform
+    double start = offsetX < 0 ? 0 : offsetX;
+    double end = (offsetX + etendueX) < 0 ? 0 : (offsetX + etendueX);
+    _wavePainter->paint(&painter, event->rect(), start * _sampleRate + 0.5, end * _sampleRate + 0.5, 1.0);
 
     // Draw the envelops
     foreach (Envelop * env, _envelops)
