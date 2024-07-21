@@ -19,7 +19,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: https://www.polyphone-soundfonts.com                 **
+**  Website/Contact: https://www.polyphone.io                             **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 

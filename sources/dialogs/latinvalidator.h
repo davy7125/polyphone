@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2020 Davy Triponney                                **
+**  Copyright (C) 2013-2024 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: https://www.polyphone-soundfonts.com                 **
+**  Website/Contact: https://www.polyphone.io                             **
 **             Date: 01.01.2021                                           **
 ***************************************************************************/
 
