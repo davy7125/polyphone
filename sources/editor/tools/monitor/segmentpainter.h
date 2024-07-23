@@ -22,27 +22,47 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef GRAPHLEGEND_H
-#define GRAPHLEGEND_H
+#ifndef SEGMENTPAINTER_H
+#define SEGMENTPAINTER_H
 
-#include <QWidget>
-#include <QPen>
+#include <QList>
+#include <QRect>
+#include <QColor>
+class QPainter;
+class Segment;
 
-class GraphLegend : public QWidget
+class SegmentPainter
 {
-    Q_OBJECT
-
 public:
-    explicit GraphLegend(QWidget *parent = nullptr);
-    void plot(QColor color, int thickness);
+    SegmentPainter();
 
-    QSize minimumSizeHint() const override { return QSize(20, 15); }
+    void setData(QList<Segment *> segments);
+    void setLogarithmicScale(bool isLog) { _isLog = isLog; }
+    void setLimits(int xMin, int xMax, float yMin, float yMax)
+    {
+        _xMin = xMin;
+        _xMax = xMax;
+        _yMin = yMin;
+        _yMax = yMax;
+    }
 
-protected:
-    void paintEvent(QPaintEvent *event) override;
+    void setColor(QColor color) { _color = color; }
+
+    // Draw data
+    void paint(QPainter *painter, QRect rect);
+
+    // Coordinate conversions
+    float keyToCoord(int key, QRect rect, float &width);
+    float valueToCoord(float y, QRect rect);
+
+    static const float MIN_LOG;
 
 private:
-    QPen _pen;
-    static const int MARGIN;
+    QList<Segment *> _segments;
+    QColor _color;
+    bool _isLog;
+    int _xMin, _xMax;
+    float _yMin, _yMax;
 };
-#endif // GRAPHLEGEND_H
+
+#endif // SEGMENTPAINTER_H

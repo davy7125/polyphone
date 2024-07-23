@@ -24,363 +24,235 @@
 
 #include "graphvisualizer.h"
 #include "contextmanager.h"
+#include "segmentpainter.h"
+#include "segment.h"
+#include <QPainter>
 
-const double GraphVisualizer::MIN_LOG = 0.0001;
 
-GraphVisualizer::GraphVisualizer(QWidget *parent) :
-    QCustomPlot(parent),
-    labelCoord(nullptr)
+GraphVisualizer::GraphVisualizer(QWidget *parent) : QWidget(parent),
+    _segmentPainter(new SegmentPainter()),
+    _isLog(false),
+    _dispWarning(false)
 {
-    this->setBackground(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
+    // Colors
+    _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
+    _gridColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+    _gridColor.setAlpha(40);
+    _textColor = _gridColor;
+    _textColor.setAlpha(255);
+    _curveColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+    _warningColor = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND);
+    _segmentPainter->setColor(_curveColor);
+    _defaultValueColor = _gridColor;
+    _defaultValueColor.setAlpha(180);
 
-    // Layer pour la position des octaves
-    this->addGraph();
-    QPen graphPen;
-    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
-    color.setAlpha(40);
-    graphPen.setColor(color);
-    graphPen.setWidth(1);
-    this->graph(0)->setPen(graphPen);
-    this->graph(0)->setLineStyle(QCPGraph::lsLine);
-    color.setAlpha(180);
-    for (int i = 0; i < 10; i++)
-    {
-        int note = 12 * (i + 1);
-        QCPItemText *textLabel = new QCPItemText(this);
-        listTextOctave << textLabel;
-        textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
-        textLabel->position->setType(QCPItemPosition::ptPlotCoords);
-        textLabel->position->setCoords(note, 0);
-        textLabel->setText(ContextManager::keyName()->getKeyName(note));
-        textLabel->setFont(QFont(font().family(), 8));
-        textLabel->setColor(color);
-    }
+    // Fonts
+    _fontLabels = QFont(font().family(), 9, QFont::Bold);
+    _fontWarning = QFont(font().family(), 10, QFont::Bold);
 
-    // Layer des moyennes
-    this->addGraph();
-    graphPen.setColor(ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::LIST_BACKGROUND));
-    graphPen.setWidth(2);
-    this->graph(1)->setPen(graphPen);
-    this->graph(1)->setLineStyle(QCPGraph::lsNone);
-    this->graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 7));
-    this->graph(1)->setAntialiasedScatters(true);
-
-    // Layer des valeurs
-    this->addGraph();
-    graphPen.setColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
-    graphPen.setWidth(2);
-    this->graph(2)->setPen(graphPen);
-    this->graph(2)->setLineStyle(QCPGraph::lsNone);
-    this->graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, 5));
-    this->graph(2)->setAntialiasedScatters(false);
-
-    // Layer des valeurs par défaut
-    this->addGraph();
-    graphPen.setColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
-    graphPen.setWidth(1);
-    this->graph(3)->setPen(graphPen);
-    this->graph(3)->setLineStyle(QCPGraph::lsNone);
-    this->graph(3)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, 5));
-    this->graph(3)->setAntialiasedScatters(false);
-
-    // Layer aperçu valeurs
-    this->addGraph();
-    color.setAlpha(255);
-    graphPen.setColor(color);
-    graphPen.setWidth(1);
-    this->graph(4)->setPen(graphPen);
-    this->graph(4)->setScatterStyle(QCPScatterStyle::ssPlus);
-    labelCoord = new QCPItemText(this);
-    labelCoord->position->setType(QCPItemPosition::ptPlotCoords);
-    labelCoord->setText("");
-    QFont fontLabel = QFont(font().family(), 9);
-    fontLabel.setBold(true);
-    labelCoord->setFont(fontLabel);
-    labelCoord->setColor(color);
-
-    // Message warning
-    textWarning = new QCPItemText(this);
-    textWarning->setPositionAlignment(Qt::AlignTop | Qt::AlignLeft);
-    textWarning->position->setType(QCPItemPosition::ptPlotCoords);
-    textWarning->position->setCoords(0, 0);
-    textWarning->setFont(QFont(font().family(), 10, 100));
-    textWarning->setColor(ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND));
-
-    // Axes
-    this->xAxis->setVisible(false);
-    this->xAxis->setTicks(false);
-    this->yAxis->setVisible(false);
-    this->yAxis->setTicks(false);
-
-    // Marges
-    this->axisRect()->setAutoMargins(QCP::msNone);
-    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
+    // Pen
+    _currentPointPen = QPen(_textColor, 2, Qt::SolidLine, Qt::RoundCap);
 
     // Filtre sur les événements
     this->installEventFilter(this);
+    this->setMouseTracking(true);
 }
 
 GraphVisualizer::~GraphVisualizer()
 {
 }
 
-void GraphVisualizer::setData(QVector<QList<double> > listPoints, QVector<QList<double> > listPointsDef)
+void GraphVisualizer::setData(float defaultValue, bool globalValueSet, QList<Segment *> segments)
 {
-    listX.clear();
-    listY.clear();
+    _defaultValue = defaultValue;
+    _globalValueSet = globalValueSet;
+    _segments = segments;
 
-    // Mise en forme des données, calcul de la moyenne
-    QVector<double> vectValX, vectValY, vectDefValX, vectDefValY, vectMoyX, vectMoyY;
-    int count;
-    double somme;
-    for (int i = 0; i < listPoints.size(); i++)
+    // Limits on X and Y
+    _xMin = -1;
+    _xMax = -1;
+    _fMin = 0;
+    _fMax = 0;
+    for (int i = 0; i < _segments.length(); i++)
     {
-        count = 0;
-        somme = 0;
-        for (int j = 0; j < listPoints.at(i).size(); j++)
-        {
-            count++;
-            somme += listPoints.at(i).at(j);
-            vectValX << i;
-            vectValY << listPoints.at(i).at(j);
-            listX << i;
-            listY << listPoints.at(i).at(j);
-        }
-        for (int j = 0; j < listPointsDef.at(i).size(); j++)
-        {
-            count++;
-            somme += listPointsDef.at(i).at(j);
-            vectDefValX << i;
-            vectDefValY << listPointsDef.at(i).at(j);
-            listX << i;
-            listY << listPointsDef.at(i).at(j);
-        }
-        if (count)
-        {
-            vectMoyX << i;
-            vectMoyY << somme / count;
-            listX << i;
-            listY << somme / count;
-        }
+        if (_xMin == -1 || _segments[i]->_value < _fMin)
+            _fMin = _segments[i]->_value;
+        if (_xMin == -1 || _segments[i]->_value > _fMax)
+            _fMax = _segments[i]->_value;
+        if (_xMin == -1 || _segments[i]->_keyMax > _xMax)
+            _xMax = _segments[i]->_keyMax;
+        if (_xMin == -1 || _segments[i]->_keyMin < _xMin)
+            _xMin = _segments[i]->_keyMin;
+    }
+    if (_xMin == -1)
+    {
+        _xMin = 0;
+        _xMax = 127;
+        _fMin = 0;
+        _fMax = 0;
     }
 
-    // Calcul des bornes
-    if (listY.size())
-    {
-        xMinDonnees = listX.first();
-        xMaxDonnees = listX.first();
-        yMinDonnees = listY.first();
-        yMaxDonnees = listY.first();
-        yMin2Donnees = listY.first();
-        for (int i = 1; i < listY.size(); i++)
-        {
-            xMinDonnees = qMin(xMinDonnees, listX.at(i));
-            xMaxDonnees = qMax(xMaxDonnees, listX.at(i));
-            yMinDonnees = qMin(yMinDonnees, listY.at(i));
-            yMaxDonnees = qMax(yMaxDonnees, listY.at(i));
-            if (yMin2Donnees < MIN_LOG)
-                yMin2Donnees = listY.at(i);
-            else
-                if (listY.at(i) >= MIN_LOG && listY.at(i) < yMin2Donnees)
-                    yMin2Donnees = listY.at(i);
-        }
-    }
-    else
-    {
-        xMinDonnees = 0;
-        xMaxDonnees = 127;
-        yMinDonnees = 0;
-        yMaxDonnees = 1;
-    }
-    if (yMin2Donnees < MIN_LOG)
-        yMin2Donnees = yMaxDonnees;
+    _segmentPainter->setData(_segments);
+    this->setScale();
+}
 
-    // Bornes sur x
-    this->xAxis->setRange(xMinDonnees - 1, xMaxDonnees + 1);
-
-    // Affichage
-    this->graph(1)->setData(vectMoyX, vectMoyY, true);
-    this->graph(2)->setData(vectValX, vectValY, true);
-    this->graph(3)->setData(vectDefValX, vectDefValY, true);
+void GraphVisualizer::setIsLog(bool isLog)
+{
+    _isLog = isLog;
     this->setScale();
 }
 
 void GraphVisualizer::setScale()
 {
-    double minY;
-    double maxY = this->yMaxDonnees;
-
-    if (isLog)
+    if (_isLog)
     {
-        // Axe y
-        this->yAxis->setScaleType(QCPAxis::stLogarithmic);
-
         // Bornes sur y
-        minY = qMax(this->yMin2Donnees, MIN_LOG);
-        maxY = qMax(maxY, MIN_LOG);
-        if (minY == maxY)
+        _yMin = qMax(_fMin, SegmentPainter::MIN_LOG);
+        _yMax = qMax(_fMax, SegmentPainter::MIN_LOG);
+        if (_yMin == _yMax)
         {
-            minY /= 2;
-            maxY *= 2;
+            _yMin /= 2;
+            _yMax *= 2;
         }
         else
         {
-            double delta = maxY / minY;
-            minY /= qPow(delta, 0.1);
-            maxY *= qPow(delta, 0.05);
+            double delta = _yMax / _yMin;
+            _yMin /= qPow(delta, 0.1);
+            _yMax *= qPow(delta, 0.05);
         }
 
-        if (this->yMinDonnees < minY)
-        {
-            // Affichage avertissement
-            textWarning->setText(tr("Cannot display all the values."));
-            textWarning->position->setCoords(this->xAxis->range().lower, maxY);
-        }
-        else
-            textWarning->setText("");
+        _dispWarning = _fMin < _yMin;
     }
     else
     {
-        // Axe y
-        this->yAxis->setScaleType(QCPAxis::stLinear);
-
         // Bornes sur y
-        minY = this->yMinDonnees;
-        if (minY == maxY)
+        _yMin = _fMin;
+        _yMax = _fMax;
+        if (_yMin == _yMax)
         {
-            minY -= 1;
-            maxY += 1;
+            _yMin -= 1;
+            _yMax += 1;
         }
         else
         {
-            double delta = maxY - minY;
-            minY -= delta * 0.1;
-            maxY += delta * 0.05;
+            double delta = _yMax - _yMin;
+            _yMin -= delta * 0.1;
+            _yMax += delta * 0.05;
         }
-        textWarning->setText("");
+        _dispWarning = false;
     }
-    this->yAxis->setRange(minY, maxY);
-
-    // Octaves
-    QPointF pointTmp;
-    for (int i = 0; i < listTextOctave.size(); i++)
-    {
-        pointTmp = listTextOctave.at(i)->position->coords();
-        pointTmp.setY(minY);
-        listTextOctave[i]->position->setCoords(pointTmp);
-    }
-    QVector<double> x, y;
-    x.resize(20);
-    y.resize(20);
-    y[0] = y[3] = y[4] = y[7] = y[8] = y[11] = y[12] = y[15] = y[16] = y[19] = maxY;
-    y[1] = y[2] = y[5] = y[6] = y[9] = y[10] = y[13] = y[14] = y[17] = y[18] = minY;
-    for (int i = 0; i < 10; i++)
-    {
-        x[2 * i] = x[2 * i + 1] = 12 * (i + 1);
-        x[2 * i + 1] += 0.0001;
-    }
-    this->graph(0)->setData(x, y, true);
-
-    this->replot();
-}
-
-void GraphVisualizer::setIsLog(bool isLog)
-{
-    this->isLog = isLog;
+    _segmentPainter->setLogarithmicScale(_isLog);
+    _segmentPainter->setLimits(_xMin, _xMax, _yMin, _yMax);
+    this->repaint();
 }
 
 void GraphVisualizer::mouseMoved(QPoint pos)
 {
-    int posX = pos.x();
-    int posY = pos.y();
-    // Point le plus proche
-    double distanceMin = -1;
-    int index = -1;
-    double distanceTmp;
-    double minY = yAxis->range().lower;
-    for (int i = 0; i < this->listX.size(); i++)
+    int posX = static_cast<float>(pos.x());
+    int posY = static_cast<float>(pos.y());
+    QRect rect = QRect(QPoint(0, 0), this->size());
+
+    // Find the closest point
+    float minDist = -1;
+    float w;
+    _currentKey = -1;
+    for (int i = 0; i < _segments.count(); i++)
     {
-        if (listY.at(i) >= minY)
+        float segY = _segmentPainter->valueToCoord(_segments[i]->_value, rect);
+        for (int j = _segments[i]->_keyMin; j <= _segments[i]->_keyMax; j++)
         {
-            distanceTmp = 10 * qAbs(posX - xAxis->coordToPixel(listX.at(i))) + qAbs(posY - yAxis->coordToPixel(listY.at(i)));
-            if (distanceMin == -1 || distanceTmp < distanceMin)
+            float segX = _segmentPainter->keyToCoord(j, rect, w);
+            float dist = qAbs(posX - segX) + qAbs(posY - segY);
+            if (_currentKey == -1 || dist < minDist)
             {
-                distanceMin = distanceTmp;
-                index = i;
+                minDist = dist;
+                _currentValue = _segments[i]->_value;
+                _currentKey = j;
             }
         }
     }
-    if (index != -1)
-        this->afficheCoord(this->listX.at(index), this->listY.at(index));
-    else
-        this->afficheCoord(-1, -1);
+
+    this->repaint();
 }
 
 void GraphVisualizer::mouseLeft()
 {
-    this->afficheCoord(-1, -1);
+    _currentKey = -1;
+    this->repaint();
 }
 
-void GraphVisualizer::afficheCoord(double x, double y)
+void GraphVisualizer::paintEvent(QPaintEvent *event)
 {
-    QVector<double> xVector, yVector;
-    if (x >= - 0.5)
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    // Background
+    QRect rect = event->rect();
+    painter.fillRect(rect, _backgroundColor);
+
+    // Octaves
+    painter.setPen(_textColor);
+    painter.setFont(_fontLabels);
+    float w;
+    for (int i = _xMin; i <= _xMax; i++)
     {
-        // Coordonnées du point
-        xVector.resize(1);
-        yVector.resize(1);
-        xVector[0] = x;
-        yVector[0] = y;
+        if (i % 12 != 0)
+            continue;
 
-        // Limites du graphique
-        double xMin = this->xAxis->range().lower;
-        double xMax = this->xAxis->range().upper;
-        double yMin = this->yAxis->range().lower;
-        double yMax = this->yAxis->range().upper;
-
-        // Affichage texte
-        if (y > (yMin + yMax) / 2)
-            labelCoord->setPositionAlignment(Qt::AlignTop    | Qt::AlignHCenter);
-        else
-            labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
-        QString label = ContextManager::keyName()->getKeyName(qRound(x)) + ":";
-        if (y == 0)
-            label += QLocale::system().toString(y, 'f', 0);
-        else if (y < 1)
-            label += QLocale::system().toString(y, 'f', 3);
-        else if (y < 10)
-            label += QLocale::system().toString(y, 'f', 2);
-        else if (y < 100)
-            label += QLocale::system().toString(y, 'f', 1);
-        else
-            label += QLocale::system().toString(y, 'f', 0);
-        labelCoord->setText(label);
-
-        // Adjust the position on x
-        QFontMetrics fm(labelCoord->font());
-        double distX = this->xAxis->pixelToCoord(fm.horizontalAdvance(labelCoord->text()) / 2 + 4) - xMin;
-        if (x < xMin + distX)
-            x = xMin + distX;
-        else if (x > xMax - distX)
-            x = xMax - distX;
-
-        // Ajustement position sur y
-        int pixelY = this->yAxis->coordToPixel(y);
-        if (y > (yMin + yMax) / 2)
-            pixelY += 3;
-        else
-            pixelY -= 3;
-        y = yAxis->pixelToCoord(pixelY);
-
-        // Positionnement du texte
-        labelCoord->position->setCoords(x, y);
+        float x = _segmentPainter->keyToCoord(i, rect, w);
+        painter.fillRect(x - 0.5 * w, rect.top(), w, rect.height(), _gridColor);
+        painter.drawText(QRect(x - 50 - 0.5 * w, rect.bottom() - 50, w + 100, 50), Qt::AlignHCenter | Qt::AlignBottom, ContextManager::keyName()->getKeyName(i));
     }
-    else
+
+    // Default value
+    painter.setPen(QPen(_globalValueSet ? _curveColor : _defaultValueColor, 2));
+    float y = _segmentPainter->valueToCoord(_defaultValue, rect);
+    painter.drawLine(rect.left(), y, rect.right(), y);
+
+    // Segments
+    _segmentPainter->paint(&painter, rect);
+
+    // Current point
+    painter.setPen(_currentPointPen);
+    if (_currentKey >= 0)
     {
-        xVector.resize(0);
-        yVector.resize(0);
-        labelCoord->setText("");
+        float x = _segmentPainter->keyToCoord(_currentKey, rect, w);
+        float y = _segmentPainter->valueToCoord(_currentValue, rect);
+
+        painter.drawLine(x - 5, y, x + 5, y);
+        painter.drawLine(x, y - 5, x, y + 5);
+
+        // Text to display with its size
+        QString label = ContextManager::keyName()->getKeyName(_currentKey) + ":";
+        if (_currentValue == 0)
+            label += QLocale::system().toString(_currentValue, 'f', 0);
+        else if (_currentValue < 1)
+            label += QLocale::system().toString(_currentValue, 'f', 3);
+        else if (_currentValue < 10)
+            label += QLocale::system().toString(_currentValue, 'f', 2);
+        else if (_currentValue < 100)
+            label += QLocale::system().toString(_currentValue, 'f', 1);
+        else
+            label += QLocale::system().toString(_currentValue, 'f', 0);
+
+        QFontMetrics fm(_fontLabels);
+        float textHalfWidth = 0.5f * fm.horizontalAdvance(label) + 2.f;
+        float textHeight = fm.height();
+
+        // Display the text
+        float textCenterX = x;
+        if (textCenterX + textHalfWidth > rect.width())
+            textCenterX = rect.width() - textHalfWidth;
+        if (textCenterX - textHalfWidth < 0)
+            textCenterX = textHalfWidth;
+        painter.drawText(textCenterX - textHalfWidth, 2 * y > rect.height() ? y - 1.5 * textHeight : y + 0.5f * textHeight,
+                         2 * textHalfWidth, textHeight, Qt::AlignVCenter | Qt::AlignHCenter, label);
     }
-    this->graph(4)->setData(xVector, yVector, true);
-    this->replot();
+
+    if (_dispWarning)
+    {
+        painter.setFont(_fontWarning);
+        painter.setPen(_warningColor);
+        painter.drawText(rect.left() + 2, rect.top() + 2, 2000, 200, Qt::AlignTop | Qt::AlignLeft, tr("Cannot display all the values."));
+    }
 }

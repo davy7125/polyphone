@@ -27,7 +27,7 @@
 #include "toolmonitor_parameters.h"
 #include "soundfontmanager.h"
 #include "contextmanager.h"
-#include "qcustomplot.h"
+#include "segment.h"
 
 ToolMonitor_gui::ToolMonitor_gui(QWidget *parent) :
     AbstractToolGui(parent),
@@ -101,10 +101,11 @@ void ToolMonitor_gui::updateInterface(AbstractToolParameters * parameters, IdLis
     this->on_comboParameter_currentIndexChanged(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
 
     // Legends
-    ui->widgetLegendDefined->plot(QCPScatterStyle::ssCross, ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND), 5, 2, false);
-    ui->widgetLegendDefault->plot(QCPScatterStyle::ssCross, ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND), 5, 1, false);
-    ui->widgetLegendMoyenne->plot(QCPScatterStyle::ssCircle, ContextManager::theme()->getFixedColor(
-                                      ThemeManager::GREEN, ThemeManager::LIST_BACKGROUND), 7, 2, true);
+    ui->widgetLegendDefined->plot(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND), 5);
+    ui->widgetLegendDefault->plot(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND), 2);
+    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+    color.setAlpha(180);
+    ui->widgetLegendMoyenne->plot(color, 2);
 }
 
 void ToolMonitor_gui::saveParameters(AbstractToolParameters * parameters)
@@ -126,76 +127,73 @@ void ToolMonitor_gui::on_comboParameter_currentIndexChanged(int index)
 {
     // Create data
     SoundfontManager * sm = SoundfontManager::getInstance();
-    QVector<QList<double> > vectListPoints, vectListPointsDef;
-    vectListPoints.resize(128);
-    vectListPointsDef.resize(128);
+    double globalValue = 0;
+    bool globalValueSet = false;
+    QList<Segment *> segments;
     AttributeType champ = static_cast<AttributeType>(ui->comboParameter->itemData(index).toInt());
 
-    // Default value
     EltID id = _initialID;
-    if (id.typeElement == elementUnknown)
+    if (id.typeElement != elementUnknown)
     {
-        for (int i = 0; i < 128; i++)
-        {
-            vectListPoints[i] << 0;
-            vectListPointsDef[i] << 0;
-        }
-    }
-    else
-    {
+        // Global value
         if (_isInst)
             id.typeElement = elementInst;
         else
             id.typeElement = elementPrst;
-        bool globDefined = sm->isSet(id, champ);
-        double globVal;
-        if (globDefined)
-            globVal = Attribute::toRealValue(champ, !_isInst, sm->get(id, champ));
+
+        if (sm->isSet(id, champ))
+        {
+            globalValueSet = true;
+            globalValue = Attribute::toRealValue(champ, !_isInst, sm->get(id, champ));
+        }
         else
-            globVal = Attribute::getDefaultRealValue(champ, !_isInst);
+        {
+            globalValueSet = false;
+            globalValue = Attribute::getDefaultRealValue(champ, !_isInst);
+        }
+
         if (_isInst)
             id.typeElement = elementInstSmpl;
         else
             id.typeElement = elementPrstInst;
 
+        // Overrides
         foreach (int i, sm->getSiblings(id))
         {
             id.indexElt2 = i;
-            RangesType keyRange = sm->get(id, champ_keyRange).rValue;
             if (sm->isSet(id, champ))
             {
-                // Specified field in division
-                double val = Attribute::toRealValue(champ, !_isInst, sm->get(id, champ));
-                for (int key = keyRange.byLo; key <= keyRange.byHi; key++)
+                // Add a segment for a value defined in a division
+                RangesType keyRange;
+                if (sm->isSet(id, champ_keyRange))
+                    keyRange = sm->get(id, champ_keyRange).rValue;
+                else
                 {
-                    if (key >= 0 && key < 128)
-                        vectListPoints[key] << val;
+                    keyRange.byLo = 0;
+                    keyRange.byHi = 127;
                 }
-            }
-            else if (globDefined)
-            {
-                // Globally specified field
-                for (int key = keyRange.byLo; key <= keyRange.byHi; key++)
-                    if (key >= 0 && key < 128)
-                        vectListPoints[key] << globVal;
-            }
-            else
-            {
-                // Default value of the field
-                for (int key = keyRange.byLo; key <= keyRange.byHi; key++)
-                    if (key >= 0 && key < 128)
-                        vectListPointsDef[key] << globVal;
+
+                RangesType velRange;
+                if (sm->isSet(id, champ_velRange))
+                    velRange = sm->get(id, champ_velRange).rValue;
+                else
+                {
+                    velRange.byLo = 0;
+                    velRange.byHi = 127;
+                }
+
+                float val = static_cast<float>(Attribute::toRealValue(champ, !_isInst, sm->get(id, champ)));
+                segments << new Segment(keyRange.byLo, keyRange.byHi, velRange.byLo, velRange.byHi, val);
             }
         }
     }
 
     // Send data to the graphics
-    ui->graphVisualizer->setData(vectListPoints, vectListPointsDef);
+    ui->graphVisualizer->setData(globalValue, globalValueSet, segments);
 }
 
 void ToolMonitor_gui::on_checkLog_stateChanged(int arg1)
 {
     // Update scale
     ui->graphVisualizer->setIsLog(arg1);
-    ui->graphVisualizer->setScale();
 }

@@ -264,6 +264,7 @@ SOURCES	+= main.cpp \
     editor/overview/pageoverviewinst.cpp \
     editor/overview/pageoverviewprst.cpp \
     editor/overview/tablepageoverview.cpp \
+    editor/tools/monitor/segmentpainter.cpp \
     editor/tree/treesplitter.cpp \
     editor/widgets/equalizer.cpp \
     editor/widgets/nullablespinbox.cpp \
@@ -615,6 +616,8 @@ HEADERS += \
     editor/overview/pageoverviewinst.h \
     editor/overview/pageoverviewprst.h \
     editor/overview/tablepageoverview.h \
+    editor/tools/monitor/segment.h \
+    editor/tools/monitor/segmentpainter.h \
     editor/tree/treesplitter.h \
     editor/widgets/equalizer.h \
     editor/widgets/pushstereoediting.h \

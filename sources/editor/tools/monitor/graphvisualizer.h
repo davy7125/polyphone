@@ -25,9 +25,14 @@
 #ifndef GRAPHVISUALIZER_H
 #define GRAPHVISUALIZER_H
 
-#include "qcustomplot.h"
+#include <QWidget>
+#include <QMouseEvent>
+#include <QPen>
+class SegmentPainter;
+class Segment;
 
-class GraphVisualizer : public QCustomPlot
+
+class GraphVisualizer : public QWidget
 {
     Q_OBJECT
 
@@ -35,10 +40,10 @@ public:
     explicit GraphVisualizer(QWidget *parent = nullptr);
     ~GraphVisualizer();
     void setScale();
-    void setData(QVector<QList<double> > listPoints, QVector<QList<double> > listPointsDef);
+    void setData(float defaultValue, bool globalValueSet, QList<Segment*> segments);
     void setIsLog(bool isLog);
 
-    bool eventFilter(QObject* o, QEvent* e)
+    bool eventFilter(QObject* o, QEvent* e) override
     {
         if ((e->type() == QEvent::MouseMove ||
              e->type() == QEvent::MouseButtonPress ||
@@ -56,18 +61,30 @@ public:
         return false;
     }
 
+protected:
+    void paintEvent(QPaintEvent *event) override;
+
 private:
     void mouseMoved(QPoint pos);
     void mouseLeft();
-    void afficheCoord(double x, double y);
+
+    SegmentPainter * _segmentPainter;
+    float _defaultValue;
+    bool _globalValueSet;
+    QList<Segment *> _segments;
+
+    QColor _backgroundColor, _gridColor, _textColor, _curveColor, _warningColor, _defaultValueColor;
+    QFont _fontLabels, _fontWarning;
+    QPen _currentPointPen;
 
     static const double MIN_LOG;
-    double xMinDonnees, xMaxDonnees, yMinDonnees, yMaxDonnees, yMin2Donnees;
-    bool isLog;
-    QList<QCPItemText *> listTextOctave;
-    QCPItemText * textWarning;
-    QList<double> listX, listY;
-    QCPItemText * labelCoord;
+    int _xMin, _xMax;
+    float _fMin, _fMax;
+    float _yMin, _yMax;
+    bool _isLog;
+    bool _dispWarning;
+    int _currentKey;
+    float _currentValue;
 };
 
 #endif // GRAPHVISUALIZER_H

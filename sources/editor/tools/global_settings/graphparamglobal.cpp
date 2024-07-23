@@ -50,7 +50,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QWidget(parent),
     _octaveNameColor = _octaveColor;
     _octaveNameColor.setAlpha(180);
     _keyRangeColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
-    _penCurve = QPen(_keyRangeColor, 4, Qt::SolidLine, Qt::RoundCap);
+    _penCurve = QPen(_keyRangeColor, 5, Qt::SolidLine, Qt::RoundCap);
     _keyRangeColor.setAlpha(20);
     _fontLabel = QFont(font().family(), 9, QFont::Bold);
 

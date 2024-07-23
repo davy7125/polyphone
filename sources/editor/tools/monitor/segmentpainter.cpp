@@ -22,27 +22,52 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef GRAPHLEGEND_H
-#define GRAPHLEGEND_H
+#include "segmentpainter.h"
+#include "segment.h"
+#include <QPainter>
+#include "thememanager.h"
 
-#include <QWidget>
-#include <QPen>
+const float SegmentPainter::MIN_LOG = 0.0001;
 
-class GraphLegend : public QWidget
+SegmentPainter::SegmentPainter() :
+    _isLog(false)
 {
-    Q_OBJECT
 
-public:
-    explicit GraphLegend(QWidget *parent = nullptr);
-    void plot(QColor color, int thickness);
+}
 
-    QSize minimumSizeHint() const override { return QSize(20, 15); }
+void SegmentPainter::setData(QList<Segment *> segments)
+{
+    _segments = segments;
+}
 
-protected:
-    void paintEvent(QPaintEvent *event) override;
+void SegmentPainter::paint(QPainter *painter, QRect rect)
+{
+    for (int i = 0; i < _segments.count(); i++)
+    {
+        painter->setPen(QPen(ThemeManager::mix(Qt::white, _color, (double)_segments[i]->_velMax / 127.), 5, Qt::SolidLine, Qt::RoundCap));
+        float w;
+        float x1 = keyToCoord(_segments[i]->_keyMin, rect, w);
+        float x2 = keyToCoord(_segments[i]->_keyMax, rect, w);
+        painter->drawLine(
+            x1 - 0.5 * w + 5,
+            valueToCoord(_segments[i]->_value, rect),
+            x2 + 0.5 * w - 5,
+            valueToCoord(_segments[i]->_value, rect));
+    }
+}
 
-private:
-    QPen _pen;
-    static const int MARGIN;
-};
-#endif // GRAPHLEGEND_H
+float SegmentPainter::keyToCoord(int key, QRect rect, float &width)
+{
+    width = static_cast<float>(rect.width()) / (_xMax - _xMin + 2);
+    return width * (key - _xMin + 1) + rect.left();
+}
+
+float SegmentPainter::valueToCoord(float y, QRect rect)
+{
+    if (_isLog && y < MIN_LOG)
+        return -100; // Out of sight
+    float tmp = _isLog ?
+        (log(y) - log(_yMin)) / (log(_yMax) - log(_yMin)) :
+        (y - _yMin) / (_yMax - _yMin);
+    return (1.0 - tmp) * rect.height() + rect.top();
+}

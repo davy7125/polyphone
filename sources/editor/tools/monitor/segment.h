@@ -22,27 +22,27 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef GRAPHLEGEND_H
-#define GRAPHLEGEND_H
+#ifndef SEGMENT_H
+#define SEGMENT_H
 
-#include <QWidget>
-#include <QPen>
+#include <QtGlobal>
 
-class GraphLegend : public QWidget
+class Segment
 {
-    Q_OBJECT
-
 public:
-    explicit GraphLegend(QWidget *parent = nullptr);
-    void plot(QColor color, int thickness);
+    Segment(quint8 keyMin, quint8 keyMax, quint8 velMin, quint8 velMax, float value) :
+        _keyMin(keyMin),
+        _keyMax(keyMax),
+        _velMin(velMin),
+        _velMax(velMax),
+        _value(value)
+    {}
 
-    QSize minimumSizeHint() const override { return QSize(20, 15); }
-
-protected:
-    void paintEvent(QPaintEvent *event) override;
-
-private:
-    QPen _pen;
-    static const int MARGIN;
+    quint8 _keyMin;
+    quint8 _keyMax;
+    quint8 _velMin;
+    quint8 _velMax;
+    float _value;
 };
-#endif // GRAPHLEGEND_H
+
+#endif // SEGMENT_H

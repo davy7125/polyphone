@@ -23,43 +23,26 @@
 ***************************************************************************/
 
 #include "graphlegend.h"
-#include "contextmanager.h"
+#include <QPainter>
+#include <QPaintEvent>
 
-GraphLegend::GraphLegend(QWidget *parent) : QCustomPlot(parent)
+const int GraphLegend::MARGIN = 5;
+
+GraphLegend::GraphLegend(QWidget *parent) : QWidget(parent) {}
+
+void GraphLegend::plot(QColor color, int thickness)
 {
-    // Couche pour le symbole
-    this->addGraph();
-
-    // Ajout d'un point
-    QVector<double> x, y;
-    x << 0;
-    y << 0;
-    this->graph(0)->setData(x, y, true);
-
-    // Axes
-    this->xAxis->setVisible(false);
-    this->xAxis->setTicks(false);
-    this->xAxis->setRange(-1, 1);
-    this->yAxis->setVisible(false);
-    this->yAxis->setTicks(false);
-    this->yAxis->setRange(-1, 1);
-
-    // Marges
-    this->axisRect()->setAutoMargins(QCP::msNone);
-    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
-
-    // Couleur de fond
-    this->setBackground(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND));
+    _pen = QPen(color, thickness, Qt::SolidLine, Qt::RoundCap);
+    this->repaint();
 }
 
-void GraphLegend::plot(QCPScatterStyle::ScatterShape style, QColor couleur, int size, int epaisseur, bool antiAliased)
+void GraphLegend::paintEvent(QPaintEvent *event)
 {
-    this->graph(0)->setScatterStyle(QCPScatterStyle(style, size));
-    this->graph(0)->setAntialiasedScatters(antiAliased);
-    QPen pen;
-    pen.setColor(couleur);
-    pen.setWidth(epaisseur);
-    this->graph(0)->setPen(pen);
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
 
-    this->replot();
+    QRect rect = event->rect();
+    painter.setPen(_pen);
+    int y = (rect.top() + rect.bottom()) / 2;
+    painter.drawLine(rect.left() + MARGIN, y, rect.right() - MARGIN, y);
 }
