@@ -103,17 +103,17 @@ void ToolGlobalSettings_parameters::saveConfiguration()
     ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "maxVel", _prstMaxVel);
 }
 
-QVector<double> ToolGlobalSettings_parameters::getStoredValues(ConfManager::ToolType toolType)
+QVector<float> ToolGlobalSettings_parameters::getStoredValues(ConfManager::ToolType toolType)
 {
     QList<QVariant> listTmp = ContextManager::configuration()->getToolValue(toolType, "global", "values", QList<QVariant>()).toList();
-    QVector<double> vectRet;
+    QVector<float> vectRet;
     vectRet.resize(listTmp.size());
     for (int i = 0; i < listTmp.size(); i++)
-        vectRet[i] = listTmp.at(i).toDouble();
+        vectRet[i] = listTmp.at(i).toFloat();
     return vectRet;
 }
 
-void ToolGlobalSettings_parameters::storeValues(QVector<double> values, ConfManager::ToolType toolType)
+void ToolGlobalSettings_parameters::storeValues(QVector<float> values, ConfManager::ToolType toolType)
 {
     QVariantList listTmp;
     for (int i = 0; i < values.size(); i++)

@@ -45,7 +45,7 @@ void ToolGlobalSettings::process(SoundfontManager * sm, EltID id, AbstractToolPa
     ToolGlobalSettings_parameters * params = static_cast<ToolGlobalSettings_parameters *>(parameters);
 
     // Format data
-    QVector<double> dValues = (_isInst ? params->getInstValues() : params->getPrstValues());
+    QVector<float> dValues = (_isInst ? params->getInstValues() : params->getPrstValues());
     double dMin = (_isInst ? params->getInstMin() : params->getPrstMin());
     double dMax = (_isInst ? params->getInstMax() : params->getPrstMax());
     for (int i = 0; i < dValues.size(); i++)

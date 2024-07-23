@@ -74,11 +74,11 @@ public:
     double getPrstMaxX() { return _prstMaxX; }
     void setPrstMaxX(double prstMaxX) { _prstMaxX = prstMaxX; }
 
-    QVector<double> getInstValues() { return _instValues; }
-    void setInstValues(QVector<double> instValues) { _instValues = instValues; }
+    QVector<float> getInstValues() { return _instValues; }
+    void setInstValues(QVector<float> instValues) { _instValues = instValues; }
 
-    QVector<double> getPrstValues() { return _prstValues; }
-    void setPrstValues(QVector<double> prstValues) { _prstValues = prstValues; }
+    QVector<float> getPrstValues() { return _prstValues; }
+    void setPrstValues(QVector<float> prstValues) { _prstValues = prstValues; }
 
     int getInstModifType() { return _instModifType; }
     void setInstModifType(int instModifType) { _instModifType = instModifType; }
@@ -105,8 +105,8 @@ public:
     void setPrstMaxVel(int prstMaxVel) { _prstMaxVel = prstMaxVel; }
 
 private:
-    static QVector<double> getStoredValues(ConfManager::ToolType toolType);
-    static void storeValues(QVector<double> values, ConfManager::ToolType toolType);
+    static QVector<float> getStoredValues(ConfManager::ToolType toolType);
+    static void storeValues(QVector<float> values, ConfManager::ToolType toolType);
 
     int _instPattern, _prstPattern;
     double _instParam, _prstParam;
@@ -115,7 +115,7 @@ private:
     double _instMinX, _prstMinX;
     double _instMaxX, _prstMaxX;
 
-    QVector<double> _instValues, _prstValues;
+    QVector<float> _instValues, _prstValues;
 
     int _instModifType, _prstModifType;
     int _instAttribute, _prstAttribute;

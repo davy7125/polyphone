@@ -25,9 +25,10 @@
 #ifndef GRAPHPARAMGLOBAL_H
 #define GRAPHPARAMGLOBAL_H
 
-#include "qcustomplot.h"
+#include <QWidget>
+class QMouseEvent;
 
-class GraphParamGlobal : public QCustomPlot
+class GraphParamGlobal : public QWidget
 {
     Q_OBJECT
 
@@ -45,76 +46,47 @@ public:
     explicit GraphParamGlobal(QWidget *parent = nullptr);
     ~GraphParamGlobal();
 
-    bool eventFilter(QObject* o, QEvent* e)
-    {
-        if ((e->type() == QEvent::MouseMove ||
-             e->type() == QEvent::MouseButtonPress ||
-             e->type() == QEvent::MouseButtonRelease ||
-             e->type() == QEvent::Leave)
-                && o == this)
-        {
-            QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(e);
-            if (mouseEvent->type() == QEvent::Leave)
-                this->mouseLeft();
-            else
-            {
-                QPoint pos = mouseEvent->pos();
-                if (mouseEvent->type() == QEvent::MouseMove)
-                    this->mouseMoved(pos);
-                else if (mouseEvent->button() == Qt::LeftButton)
-                {
-                    if (mouseEvent->type() == QEvent::MouseButtonPress)
-                        this->mousePressed(pos);
-                    else if (mouseEvent->type() == QEvent::MouseButtonRelease)
-                        this->mouseReleased(pos);
-                }
-                else if (mouseEvent->button() == Qt::RightButton)
-                {
-                    if (mouseEvent->type() == QEvent::MouseButtonPress)
-                        this->mouseRightPressed(pos);
-                    else if (mouseEvent->type() == QEvent::MouseButtonRelease)
-                        this->mouseRightReleased(pos);
-                }
-            }
-
-            return true;
-        }
-        return false;
-    }
-
     void indexMotifChanged(int index);
     void raideurChanged(double value);
     void setHighlightedRange(int minKey, int maxKey);
-    void setMinMax(double min, double max)  { yMin = qMin(min, max); yMax = qMax(min, max); }
-    void setMinMaxX(int min, int max)       { xMin = qMin(min, max); xMax = qMax(min, max); }
-    QVector<double> getValues();
-    void setValues(QVector<double> val);
-    int getXmin()                           { return xMin; }
-    int getXmax()                           { return xMax; }
+    void setMinMax(double min, double max)  { _patternYmin = qMin(min, max); _patternYmax = qMax(min, max); }
+    void setMinMaxX(int min, int max)       { _patternXmin = qMin(min, max); _patternXmax = qMax(min, max); }
+    QVector<float> getValues();
+    void setValues(QVector<float> val);
+    int getXmin()                           { return _patternXmin; }
+    int getXmax()                           { return _patternXmax; }
+
+protected:
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void leaveEvent(QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     TypeForme forme;
-    QVector<double> dValues;
+    QVector<float> _curve;
     bool flagEdit;
     int limitEdit;
-    void replot();
-    int nbPoints;
-    double raideurExp;
-    double yMin, yMax;
-    int xMin, xMax;
-    QCPItemText * labelCoord;
+    double _patternStiffnessExp;
+    double _patternYmin, _patternYmax;
+    int _patternXmin, _patternXmax;
     int previousX;
     double previousY;
+    int _highlightedRangeMin, _highlightedRangeMax;
+    float _currentValuePosX, _currentValuePosY;
 
-    void mousePressed(QPoint pos);
-    void mouseRightPressed(QPoint pos);
-    void mouseReleased(QPoint pos);
-    void mouseRightReleased(QPoint pos);
-    void mouseMoved(QPoint pos);
+    QColor _backgroundColor, _octaveColor, _octaveNameColor, _keyRangeColor, _curveColor;
+
+    int posToKey(int x);
+    float keyToPos(int key, float &w);
+    float posToValue(int y);
+    float valueToPos(float value);
+
     void mouseLeft();
-    void writeMotif();
+    void computePattern();
     void write(QPoint pos);
-    void afficheCoord(double x, double y);
+    void afficheCoord(float x, float y);
 };
 
 #endif // GRAPHPARAMGLOBAL_H

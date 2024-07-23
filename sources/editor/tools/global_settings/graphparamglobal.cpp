@@ -24,113 +24,36 @@
 
 #include "graphparamglobal.h"
 #include "contextmanager.h"
+#include <QPainter>
+#include <QPaintEvent>
 
-GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
+GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QWidget(parent),
     forme(FORME_MANUELLE),
     flagEdit(false),
     limitEdit(0),
-    nbPoints(140),
-    raideurExp(50.0),
-    yMin(0.), yMax(1.),
-    xMin(0), xMax(140),
-    labelCoord(nullptr),
-    previousX(-1)
+    _patternStiffnessExp(50.0),
+    _patternYmin(0.), _patternYmax(1.),
+    _patternXmin(0), _patternXmax(140),
+    previousX(-1),
+    _highlightedRangeMin(-1),
+    _highlightedRangeMax(-1)
 {
-    this->setBackground(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
+    // Prepare data
+    this->_curve.resize(128);
+    this->_curve.fill(0.5);
 
-    // Layer pour la position des octaves
-    this->addGraph();
-    QPen graphPen;
-    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
-    color.setAlpha(40);
-    graphPen.setColor(color);
-    graphPen.setWidth(1);
-    this->graph(0)->setPen(graphPen);
-    this->graph(0)->setLineStyle(QCPGraph::lsLine);
-    QVector<double> x, y;
-    x.resize(20);
-    y.resize(20);
-    y[0] = y[3] = y[4] = y[7] = y[8] = y[11] = y[12] = y[15] = y[16] = y[19] =  2;
-    y[1] = y[2] = y[5] = y[6] = y[9] = y[10] = y[13] = y[14] = y[17] = y[18] = -1;
-    color.setAlpha(180);
-    for (int i = 0; i < 10; i++)
-    {
-        int note = 12 * (i + 1);
-        double pos = (double)(note * this->nbPoints) / 127.;
-        x[2 * i] = x[2 * i + 1] = pos;
-        x[2 * i + 1] += 0.0001;
-        QCPItemText *textLabel = new QCPItemText(this);
-        textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
-        textLabel->position->setType(QCPItemPosition::ptPlotCoords);
-        textLabel->position->setCoords(pos, 0);
-        textLabel->setText(ContextManager::keyName()->getKeyName(note));
-        textLabel->setFont(QFont(font().family(), 8));
-        textLabel->setColor(color);
-    }
-    this->graph(0)->setData(x, y, true);
+    // Colors
+    _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
+    _octaveColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+    _octaveColor.setAlpha(40);
+    _octaveNameColor = _octaveColor;
+    _octaveNameColor.setAlpha(180);
+    _curveColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+    _keyRangeColor = _curveColor;
+    _keyRangeColor.setAlpha(20);
 
-    // Layers showing the key range
-    this->addGraph();
-    x.resize(2);
-    y.resize(2);
-    x[0] = -1;
-    x[1] = this->nbPoints + 1;
-    y[0] = y[1] = -2;
-    graphPen.setWidth(0);
-    this->graph(1)->setPen(graphPen);
-    this->graph(1)->setData(x, y, true);
-    color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
-    color.setAlpha(20);
-    this->graph(1)->setBrush(QBrush(color));
-    this->addGraph();
-    this->graph(2)->setPen(graphPen);
-    this->graph(1)->setChannelFillGraph(this->graph(2));
-
-    // Layer des valeurs
-    this->addGraph();
-    graphPen.setColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
-    graphPen.setWidth(2);
-    this->graph(3)->setPen(graphPen);
-    this->graph(3)->setLineStyle(QCPGraph::lsNone);
-    this->graph(3)->setScatterStyle(QCPScatterStyle::ssDot);
-    this->graph(3)->setAntialiased(true);
-    this->graph(3)->setAntialiasedScatters(true);
-
-    // Layer aperçu valeurs
-    this->addGraph();
-    graphPen.setColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
-    graphPen.setWidth(1);
-    this->graph(4)->setPen(graphPen);
-    this->graph(4)->setScatterStyle(QCPScatterStyle::ssPlus);
-    labelCoord = new QCPItemText(this);
-    labelCoord->position->setType(QCPItemPosition::ptPlotCoords);
-    labelCoord->setText("");
-    QFont fontLabel = QFont(font().family(), 9);
-    fontLabel.setBold(true);
-    labelCoord->setFont(fontLabel);
-    labelCoord->setColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
-
-    // Axes
-    this->xAxis->setRange(0, this->nbPoints);
-    this->yAxis->setRange(0, 1);
-    this->xAxis->setVisible(false);
-    this->xAxis->setTicks(false);
-    this->yAxis->setVisible(false);
-    this->yAxis->setTicks(false);
-
-    // Marges
-    this->axisRect()->setAutoMargins(QCP::msNone);
-    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
-
-    // Préparation des données
-    this->dValues.resize(this->nbPoints);
-    this->dValues.fill(0.5);
-
-    // Filtre sur les événements
-    this->installEventFilter(this);
-
-    // Affichage
-    this->replot();
+    // Enable the mouse tracking for the mouse move event
+    this->setMouseTracking(true);
 }
 
 GraphParamGlobal::~GraphParamGlobal()
@@ -139,30 +62,9 @@ GraphParamGlobal::~GraphParamGlobal()
 
 void GraphParamGlobal::setHighlightedRange(int minKey, int maxKey)
 {
-    // Prepare data
-    QVector<double> x, y;
-    if (minKey >= 0 && maxKey > minKey && maxKey <= 127)
-    {
-        x.resize(6);
-        y.resize(6);
-        y[0] = y[1] = y[4] = y[5] = 2;
-        y[2] = y[3] = -1;
-        x[0] = -1;
-        x[1] = static_cast<double>(minKey) * this->nbPoints / 127.;
-        x[2] = x[1] + 0.00001;
-        x[4] = static_cast<double>(maxKey) * this->nbPoints / 127.;
-        x[3] = x[4] - 0.00001;
-        x[5] = this->nbPoints + 1;
-    }
-    else
-    {
-        x.resize(0);
-        y.resize(0);
-    }
-
-    // Plot the range
-    this->graph(2)->setData(x, y, true);
-    this->replot();
+    _highlightedRangeMin = minKey;
+    _highlightedRangeMax = maxKey;
+    this->repaint();
 }
 
 void GraphParamGlobal::indexMotifChanged(int motif)
@@ -171,90 +73,168 @@ void GraphParamGlobal::indexMotifChanged(int motif)
     this->flagEdit = false;
     this->limitEdit = 0;
     this->previousX = -1;
-    this->xMin = 0;
-    this->xMax = this->nbPoints;
-    this->writeMotif();
+    this->_patternXmin = 0;
+    this->_patternXmax = 127;
+    this->computePattern();
 }
 
 void GraphParamGlobal::raideurChanged(double value)
 {
-    this->raideurExp = value;
-    this->writeMotif();
+    this->_patternStiffnessExp = value;
+    this->computePattern();
 }
 
-QVector<double> GraphParamGlobal::getValues()
+QVector<float> GraphParamGlobal::getValues()
 {
-    return this->dValues;
+    return this->_curve;
 }
 
-void GraphParamGlobal::setValues(QVector<double> val)
+void GraphParamGlobal::setValues(QVector<float> val)
 {
-    for (int i = 0; i < qMin(this->nbPoints, val.size()); i++)
-        dValues[i] = val.at(i);
+    for (int i = 0; i <= qMin(127, val.size()); i++)
+        _curve[i] = val.at(i);
 }
 
-void GraphParamGlobal::mousePressed(QPoint pos)
+void GraphParamGlobal::computePattern()
 {
-    this->afficheCoord(-1, -1);
-    if (this->forme == FORME_MANUELLE)
+    // Ecriture début et fin
+    if (this->forme == FORME_LINEAIRE_ASC || this->forme == FORME_EXP_ASC)
     {
-        this->flagEdit = true;
-        // Inscription du premier point
-        this->write(pos);
+        // Remplissage de 0 au début
+        for (int i = 0; i < this->_patternXmin; i++)
+            this->_curve[i] = 0;
+        // Remplissage de 1 à la fin
+        for (int i = this->_patternXmax; i <= 127; i++)
+            this->_curve[i] = 1;
     }
-    else
+    else if (this->forme == FORME_LINEAIRE_DESC || this->forme == FORME_EXP_DESC)
     {
-        // Modification min X
-        this->limitEdit = -1;
-        int x = this->xAxis->pixelToCoord(pos.x());
-        if (x < xMax)
+        // Remplissage de 1 au début
+        for (int i = 0; i < this->_patternXmin; i++)
+            this->_curve[i] = 1;
+        // Remplissage de 0 à la fin
+        for (int i = this->_patternXmax; i <= 127; i++)
+            this->_curve[i] = 0;
+    }
+
+    switch (this->forme)
+    {
+    case FORME_MANUELLE:
+        break;
+    case FORME_LINEAIRE_ASC:
+        for (int i = this->_patternXmin; i < this->_patternXmax; i++)
+            this->_curve[i] = (double)(i - this->_patternXmin) / (this->_patternXmax - this->_patternXmin);
+        break;
+    case FORME_LINEAIRE_DESC:
+        for (int i = this->_patternXmin; i < this->_patternXmax; i++)
+            this->_curve[i] = 1.0 - (double)(i - this->_patternXmin) / (this->_patternXmax - this->_patternXmin);
+        break;
+    case FORME_EXP_ASC:{
+        double baseExp = 1. + 1.0 / (101.0 - this->_patternStiffnessExp);
+        double alpha = 1.0 / (pow(baseExp, this->_patternXmax - this->_patternXmin) - 1.0);
+        for (int i = this->_patternXmin; i < this->_patternXmax; i++)
+            this->_curve[i] = alpha * (pow(baseExp, i - this->_patternXmin) - 1.0);
+    }break;
+    case FORME_EXP_DESC:{
+        double baseExp = 1. + 1.0 / (101.0 - this->_patternStiffnessExp);
+        double alpha = 1.0 / (pow(baseExp, this->_patternXmin - this->_patternXmax) - 1.0);
+        for (int i = this->_patternXmin; i < this->_patternXmax; i++)
+            this->_curve[i] = 1.0 - alpha * (pow(baseExp, this->_patternXmin - i) - 1.0);
+    }break;
+    case FORME_ALEATOIRE:
+        for (int i = 0; i <= 127; i++)
         {
-            xMin = x;
-            this->writeMotif();
+            double valTmp = (double)(QRandomGenerator::global()->generate() % 2000) / 1000. - 1.;
+            double exp = qExp((50. - this->_patternStiffnessExp) / 15.);
+            if (valTmp < 0)
+                this->_curve[i] = -qPow(qAbs(valTmp), exp);
+            else
+                this->_curve[i] = qPow(qAbs(valTmp), exp);
+            this->_curve[i] = (this->_curve[i] + 1.) / 2;
+        }
+        break;
+    }
+
+    // Display
+    this->repaint();
+}
+
+void GraphParamGlobal::write(QPoint pos)
+{
+    // Convert coordinate
+    int x = posToKey(pos.x());
+    double y = posToValue(pos.y());
+    if (x < 0)
+        x = 0;
+    else if (x > 127)
+        x = 127;
+    if (y < 0)
+        y = 0;
+    else if (y > 1)
+        y = 1;
+
+    // Change value
+    if (this->previousX >= 0 && this->previousX != x)
+    {
+        if (this->previousX < x)
+        {
+            for (int i = this->previousX + 1; i < x; i++)
+                this->_curve[i] = this->previousY +
+                    (y - previousY) * (i - this->previousX) / (x - this->previousX);
+        }
+        else
+        {
+            for (int i = this->previousX - 1; i > x; i--)
+                this->_curve[i] = this->previousY +
+                    (y - previousY) * (i - this->previousX) / (x - this->previousX);
         }
     }
+    this->_curve[x] = y;
+
+    // Store the point
+    this->previousX = x;
+    this->previousY = y;
+
+    // Display
+    this->repaint();
 }
 
-void GraphParamGlobal::mouseRightPressed(QPoint pos)
+void GraphParamGlobal::afficheCoord(float x, float y)
 {
-    if (this->forme != FORME_MANUELLE)
-    {
-        this->afficheCoord(-1, -1);
-        // Modification max X
-        this->limitEdit = 1;
-        int x = this->xAxis->pixelToCoord(pos.x());
-        if (x > xMin)
-        {
-            xMax = x;
-            this->writeMotif();
-        }
-    }
+    _currentValuePosX = x;
+    _currentValuePosY = y;
 }
 
-void GraphParamGlobal::mouseReleased(QPoint pos)
+int GraphParamGlobal::posToKey(int x)
 {
-    if (this->limitEdit == -1 || this->flagEdit)
-    {
-        this->limitEdit = 0;
-        this->flagEdit = false;
-        this->previousX = -1;
-        // Affichage coordonnées
-        this->mouseMoved(pos);
-    }
+    float tmp = static_cast<float>(x) / this->size().width();
+    int key = static_cast<int>(tmp * 129 + 0.5) - 1;
+    if (key <= 0)
+        return 0;
+    if (key > 127)
+        return 127;
+    return key;
 }
 
-void GraphParamGlobal::mouseRightReleased(QPoint pos)
+float GraphParamGlobal::keyToPos(int key, float &w)
 {
-    if (this->limitEdit == 1)
-    {
-        this->limitEdit = 0;
-        // Affichage coordonnées
-        this->mouseMoved(pos);
-    }
+    w = static_cast<float>(this->size().width()) / 129.;
+    return static_cast<float>(key + 1) * w + 0.5f;
 }
 
-void GraphParamGlobal::mouseMoved(QPoint pos)
+float GraphParamGlobal::posToValue(int y)
 {
+    return (1.0f - static_cast<float>(y) / this->size().height()) * 127.f;
+}
+
+float GraphParamGlobal::valueToPos(float value)
+{
+    return (1.0f - value / 127.f) * this->size().height();
+}
+
+void GraphParamGlobal::mouseMoveEvent(QMouseEvent *event)
+{
+    QPoint pos = event->pos();
     if (this->flagEdit)
     {
         this->afficheCoord(-1, -1);
@@ -263,42 +243,43 @@ void GraphParamGlobal::mouseMoved(QPoint pos)
     else if (this->limitEdit == -1 && forme != FORME_ALEATOIRE)
     {
         // Modification min X
-        int x = this->xAxis->pixelToCoord(pos.x());
+        int x = posToKey(pos.x());
         if (x < 0)
             x = 0;
-        else if (x >= this->nbPoints)
-            x = this->nbPoints - 1;
-        if (x < xMax)
+        else if (x > 127)
+            x = 127 ;
+        if (x < _patternXmax)
         {
-            xMin = x;
-            this->writeMotif();
+            _patternXmin = x;
+            this->computePattern();
         }
     }
     else if (this->limitEdit == 1 && forme != FORME_ALEATOIRE)
     {
         // Modification max X
-        int x = this->xAxis->pixelToCoord(pos.x());
+        int x = posToKey(pos.x());
         if (x < 0)
             x = 0;
-        else if (x >= this->nbPoints)
-            x = this->nbPoints - 1;
-        if (x > xMin)
+        else if (x > 127)
+            x = 127;
+        if (x > _patternXmin)
         {
-            xMax = x;
-            this->writeMotif();
+            _patternXmax = x;
+            this->computePattern();
         }
     }
     else
     {
-        // Conversion des coordonnées
-        double x = this->xAxis->pixelToCoord(pos.x());
-        double y = this->yAxis->pixelToCoord(pos.y());
-        // Point le plus proche
+        // Convert coordinates
+        double x = posToKey(pos.x());
+        double y = posToValue(pos.y());
+
+        // Closest point
         double distanceMin = -1;
         int posX = -1;
-        for (int i = 0; i < this->dValues.size(); i++)
+        for (int i = 0; i < this->_curve.size(); i++)
         {
-            double distanceTmp = 0.05 * qAbs(x - i) + qAbs(y - this->dValues[i]);
+            double distanceTmp = 0.05 * qAbs(x - i) + qAbs(y - this->_curve[i]);
             if (distanceMin == -1 || distanceTmp < distanceMin)
             {
                 distanceMin = distanceTmp;
@@ -306,167 +287,167 @@ void GraphParamGlobal::mouseMoved(QPoint pos)
             }
         }
         if (posX != -1)
-            this->afficheCoord(posX, this->dValues[posX]);
+            this->afficheCoord(posX, this->_curve[posX]);
         else
             this->afficheCoord(-1, -1);
     }
 }
-void GraphParamGlobal::mouseLeft()
+
+void GraphParamGlobal::mousePressEvent(QMouseEvent *event)
+{
+    QPoint pos = event->pos();
+    if (event->button() == Qt::LeftButton)
+    {
+        this->afficheCoord(-1, -1);
+        if (this->forme == FORME_MANUELLE)
+        {
+            this->flagEdit = true;
+            // Inscription du premier point
+            this->write(pos);
+        }
+        else
+        {
+            // Modification min X
+            this->limitEdit = -1;
+            int x = posToKey(pos.x());
+            if (x < _patternXmax)
+            {
+                _patternXmin = x;
+                this->computePattern();
+            }
+        }
+    }
+    else if (event->button() == Qt::RightButton)
+    {
+        if (this->forme != FORME_MANUELLE)
+        {
+            this->afficheCoord(-1, -1);
+            // Modification max X
+            this->limitEdit = 1;
+            int x = posToKey(pos.x());
+            if (x > _patternXmin)
+            {
+                _patternXmax = x;
+                this->computePattern();
+            }
+        }
+    }
+}
+
+void GraphParamGlobal::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        if (this->limitEdit == -1 || this->flagEdit)
+        {
+            this->limitEdit = 0;
+            this->flagEdit = false;
+            this->previousX = -1;
+            this->repaint();
+        }
+    }
+    else if (event->button() == Qt::RightButton)
+    {
+        if (this->limitEdit == 1)
+        {
+            this->limitEdit = 0;
+            this->repaint();
+        }
+    }
+}
+
+void GraphParamGlobal::leaveEvent(QEvent *event)
 {
     this->afficheCoord(-1, -1);
 }
 
-void GraphParamGlobal::writeMotif()
+void GraphParamGlobal::paintEvent(QPaintEvent *event)
 {
-    // Ecriture début et fin
-    if (this->forme == FORME_LINEAIRE_ASC || this->forme == FORME_EXP_ASC)
-    {
-        // Remplissage de 0 au début
-        for (int i = 0; i < this->xMin; i++)
-            this->dValues[i] = 0;
-        // Remplissage de 1 à la fin
-        for (int i = this->xMax; i < this->nbPoints; i++)
-            this->dValues[i] = 1;
-    }
-    else if (this->forme == FORME_LINEAIRE_DESC || this->forme == FORME_EXP_DESC)
-    {
-        // Remplissage de 1 au début
-        for (int i = 0; i < this->xMin; i++)
-            this->dValues[i] = 1;
-        // Remplissage de 0 à la fin
-        for (int i = this->xMax; i < this->nbPoints; i++)
-            this->dValues[i] = 0;
-    }
+    Q_UNUSED(event)
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+    QSize size = this->size();
 
-    switch (this->forme)
+    // Background color
+    painter.fillRect(this->rect(), _backgroundColor);
+
+    // Draw octaves
+    painter.setPen(_octaveNameColor);
+    painter.setFont(QFont(font().family(), 8, QFont::Bold));
+    float w;
+    for (int i = 12; i < 127; i += 12)
     {
-    case FORME_MANUELLE:
-        break;
-    case FORME_LINEAIRE_ASC:
-        for (int i = this->xMin; i < this->xMax; i++)
-            this->dValues[i] = (double)(i - this->xMin) / (this->xMax - this->xMin);
-        break;
-    case FORME_LINEAIRE_DESC:
-        for (int i = this->xMin; i < this->xMax; i++)
-            this->dValues[i] = 1.0 - (double)(i - this->xMin) / (this->xMax - this->xMin);
-        break;
-    case FORME_EXP_ASC:{
-        double baseExp = 1. + 1.0 / (101.0 - this->raideurExp);
-        double alpha = 1.0 / (pow(baseExp, this->xMax - this->xMin) - 1.0);
-        for (int i = this->xMin; i < this->xMax; i++)
-            this->dValues[i] = alpha * (pow(baseExp, i - this->xMin) - 1.0);
-    }break;
-    case FORME_EXP_DESC:{
-        double baseExp = 1. + 1.0 / (101.0 - this->raideurExp);
-        double alpha = 1.0 / (pow(baseExp, this->xMin - this->xMax) - 1.0);
-        for (int i = this->xMin; i < this->xMax; i++)
-            this->dValues[i] = 1.0 - alpha * (pow(baseExp, this->xMin - i) - 1.0);
-    }break;
-    case FORME_ALEATOIRE:
-        for (int i = 0; i < this->nbPoints; i++)
-        {
-            double valTmp = (double)(QRandomGenerator::global()->generate() % 2000) / 1000. - 1.;
-            double exp = qExp((50. - this->raideurExp) / 15.);
-            if (valTmp < 0)
-                this->dValues[i] = -qPow(qAbs(valTmp), exp);
-            else
-                this->dValues[i] = qPow(qAbs(valTmp), exp);
-            this->dValues[i] = (this->dValues[i] + 1.) / 2;
-        }
-        break;
+        float x = this->keyToPos(i, w);
+        painter.fillRect(QRectF(x - 0.5f * w, 0, w, size.height()), _octaveColor);
+        painter.drawText(x - 200, size.height() - 200, 400, 200, Qt::AlignBottom | Qt::AlignHCenter,
+            ContextManager::keyName()->getKeyName(i));
     }
 
-    // Affichage
-    this->replot();
-}
-
-void GraphParamGlobal::write(QPoint pos)
-{
-    // Conversion coordonnées
-    int x = (int)this->xAxis->pixelToCoord(pos.x());
-    double y = this->yAxis->pixelToCoord(pos.y());
-    if (x < 0)
-        x = 0;
-    else if (x > this->nbPoints-1)
-        x = this->nbPoints-1;
-    if (y < 0)
-        y = 0;
-    else if (y > 1)
-        y = 1;
-
-    // Modification valeur
-    if (this->previousX >= 0 && this->previousX != x)
+    // Highlighted range
+    if ((_highlightedRangeMin != 0 || _highlightedRangeMax != 127) && _highlightedRangeMin >= 0 &&
+        _highlightedRangeMin <= _highlightedRangeMax && _highlightedRangeMax <= 127)
     {
-        if (this->previousX < x)
-        {
-            for (int i = this->previousX + 1; i < x; i++)
-                this->dValues[i] = this->previousY +
-                    (y - previousY) * (i - this->previousX) / (x - this->previousX);
-        }
-        else
-        {
-            for (int i = this->previousX - 1; i > x; i--)
-                this->dValues[i] = this->previousY +
-                    (y - previousY) * (i - this->previousX) / (x - this->previousX);
-        }
+        float xMin = this->keyToPos(_highlightedRangeMin, w);
+        float xMax = this->keyToPos(_highlightedRangeMax, w);
+        painter.fillRect(QRectF(xMin - 0.5f * w, 0, xMax + 0.5f * w, size.height()), _keyRangeColor);
     }
-    this->dValues[x] = y;
 
-    // Mémorisation du point
-    this->previousX = x;
-    this->previousY = y;
+    // Curve
+    painter.setPen(QPen(_curveColor, 4));
+    for (int i = 0; i <= 127; i++)
+        painter.drawPoint(keyToPos(i, w), valueToPos(_curve[i]));
 
-    // Affichage
-    this->replot();
-}
+    // // Layer aperçu valeurs
+    // this->addGraph();
+    // graphPen.setColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
+    // graphPen.setWidth(1);
+    // this->graph(4)->setPen(graphPen);
+    // this->graph(4)->setScatterStyle(QCPScatterStyle::ssPlus);
+    // labelCoord = new QCPItemText(this);
+    // labelCoord->position->setType(QCPItemPosition::ptPlotCoords);
+    // labelCoord->setText("");
+    // QFont fontLabel = QFont(font().family(), 9);
+    // fontLabel.setBold(true);
+    // labelCoord->setFont(fontLabel);
+    // labelCoord->setColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
 
-void GraphParamGlobal::replot()
-{
-    QVector<double> x(this->nbPoints);
-    for (int i = 0; i < this->nbPoints; i++)
-        x[i] = i;
-    this->graph(3)->setData(x, this->dValues, true);
-    // Affichage
-    QCustomPlot::replot();
-}
 
-void GraphParamGlobal::afficheCoord(double x, double y)
-{
-    QVector<double> xVector, yVector;
-    if (x >= - 0.5)
-    {
-        // Coordonnées du point
-        xVector.resize(1);
-        yVector.resize(1);
-        xVector[0] = x;
-        yVector[0] = y;
-        // Affichage texte
-        if (y >= 0.5)
-            labelCoord->setPositionAlignment(Qt::AlignTop    | Qt::AlignHCenter);
-        else
-            labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
-        labelCoord->setText(ContextManager::keyName()->getKeyName(qRound((double)x * 128. / this->nbPoints)) + ":" +
-                            QLocale::system().toString(yMin + (yMax - yMin) * y, 'f', 2));
-        // Ajustement position
-        QFontMetrics fm(labelCoord->font());
-        double distX = this->xAxis->pixelToCoord(fm.horizontalAdvance(labelCoord->text()) / 2 + 2);
-        if (x < distX)
-            x = distX;
-        else if (x > this->nbPoints - distX)
-            x = this->nbPoints - distX;
-        double distY = 1. - this->yAxis->pixelToCoord(2);
-        if (y >= 0.5)
-            y -= distY;
-        else
-            y += distY;
-        labelCoord->position->setCoords(x, y);
-    }
-    else
-    {
-        xVector.resize(0);
-        yVector.resize(0);
-        labelCoord->setText("");
-    }
-    this->graph(4)->setData(xVector, yVector, true);
-    this->replot();
+    // Current coordinates
+    // QVector<double> xVector, yVector;
+    // if (x >= - 0.5)
+    // {
+    //     // Coordonnées du point
+    //     xVector.resize(1);
+    //     yVector.resize(1);
+    //     xVector[0] = x;
+    //     yVector[0] = y;
+    //     // Affichage texte
+    //     if (y >= 0.5)
+    //         labelCoord->setPositionAlignment(Qt::AlignTop    | Qt::AlignHCenter);
+    //     else
+    //         labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
+    //     labelCoord->setText(ContextManager::keyName()->getKeyName(qRound((double)x * 128. / this->nbPoints)) + ":" +
+    //                         QLocale::system().toString(yMin + (yMax - yMin) * y, 'f', 2));
+    //     // Ajustement position
+    //     QFontMetrics fm(labelCoord->font());
+    //     double distX = this->xAxis->pixelToCoord(fm.horizontalAdvance(labelCoord->text()) / 2 + 2);
+    //     if (x < distX)
+    //         x = distX;
+    //     else if (x > this->nbPoints - distX)
+    //         x = this->nbPoints - distX;
+    //     double distY = 1. - this->yAxis->pixelToCoord(2);
+    //     if (y >= 0.5)
+    //         y -= distY;
+    //     else
+    //         y += distY;
+    //     labelCoord->position->setCoords(x, y);
+    // }
+    // else
+    // {
+    //     xVector.resize(0);
+    //     yVector.resize(0);
+    //     labelCoord->setText("");
+    // }
+    // this->graph(4)->setData(xVector, yVector, true);
+    // this->replot();
 }
