@@ -26,6 +26,7 @@
 #define GRAPHPARAMGLOBAL_H
 
 #include <QWidget>
+#include <QPen>
 class QMouseEvent;
 
 class GraphParamGlobal : public QWidget
@@ -33,14 +34,14 @@ class GraphParamGlobal : public QWidget
     Q_OBJECT
 
 public:
-    enum TypeForme
+    enum PatternType
     {
-        FORME_MANUELLE,
-        FORME_LINEAIRE_ASC,
-        FORME_LINEAIRE_DESC,
-        FORME_EXP_ASC,
-        FORME_EXP_DESC,
-        FORME_ALEATOIRE
+        PATTERN_MANUAL,
+        PATTERN_LINEAR_ASC,
+        PATTERN_LINEAR_DESC,
+        PATTERN_EXP_ASC,
+        PATTERN_EXP_DESC,
+        PATTERN_RANDOM
     };
 
     explicit GraphParamGlobal(QWidget *parent = nullptr);
@@ -64,19 +65,22 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 
 private:
-    TypeForme forme;
+    PatternType _patternType;
     QVector<float> _curve;
-    bool flagEdit;
-    int limitEdit;
+    bool _flagEdit;
+    int _limitEdit;
     double _patternStiffnessExp;
     double _patternYmin, _patternYmax;
     int _patternXmin, _patternXmax;
     int previousX;
     double previousY;
     int _highlightedRangeMin, _highlightedRangeMax;
-    float _currentValuePosX, _currentValuePosY;
+    int _currentValueKey;
+    float _currentValue;
 
-    QColor _backgroundColor, _octaveColor, _octaveNameColor, _keyRangeColor, _curveColor;
+    QColor _backgroundColor, _octaveColor, _octaveNameColor, _keyRangeColor;
+    QPen _penCurve, _penCurrentValue;
+    QFont _fontLabel;
 
     int posToKey(int x);
     float keyToPos(int key, float &w);
@@ -86,7 +90,7 @@ private:
     void mouseLeft();
     void computePattern();
     void write(QPoint pos);
-    void afficheCoord(float x, float y);
+    void afficheCoord(int key, float value);
 };
 
 #endif // GRAPHPARAMGLOBAL_H

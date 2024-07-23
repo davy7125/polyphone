@@ -28,9 +28,9 @@
 #include <QPaintEvent>
 
 GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QWidget(parent),
-    forme(FORME_MANUELLE),
-    flagEdit(false),
-    limitEdit(0),
+    _patternType(PATTERN_MANUAL),
+    _flagEdit(false),
+    _limitEdit(0),
     _patternStiffnessExp(50.0),
     _patternYmin(0.), _patternYmax(1.),
     _patternXmin(0), _patternXmax(140),
@@ -42,15 +42,17 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QWidget(parent),
     this->_curve.resize(128);
     this->_curve.fill(0.5);
 
-    // Colors
+    // Colors / pens
     _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
     _octaveColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+    _penCurrentValue = QPen(_octaveColor, 2, Qt::SolidLine, Qt::RoundCap);
     _octaveColor.setAlpha(40);
     _octaveNameColor = _octaveColor;
     _octaveNameColor.setAlpha(180);
-    _curveColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
-    _keyRangeColor = _curveColor;
+    _keyRangeColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+    _penCurve = QPen(_keyRangeColor, 4, Qt::SolidLine, Qt::RoundCap);
     _keyRangeColor.setAlpha(20);
+    _fontLabel = QFont(font().family(), 9, QFont::Bold);
 
     // Enable the mouse tracking for the mouse move event
     this->setMouseTracking(true);
@@ -69,9 +71,9 @@ void GraphParamGlobal::setHighlightedRange(int minKey, int maxKey)
 
 void GraphParamGlobal::indexMotifChanged(int motif)
 {
-    this->forme = static_cast<TypeForme>(motif);
-    this->flagEdit = false;
-    this->limitEdit = 0;
+    this->_patternType = static_cast<PatternType>(motif);
+    this->_flagEdit = false;
+    this->_limitEdit = 0;
     this->previousX = -1;
     this->_patternXmin = 0;
     this->_patternXmax = 127;
@@ -98,7 +100,7 @@ void GraphParamGlobal::setValues(QVector<float> val)
 void GraphParamGlobal::computePattern()
 {
     // Ecriture début et fin
-    if (this->forme == FORME_LINEAIRE_ASC || this->forme == FORME_EXP_ASC)
+    if (this->_patternType == PATTERN_LINEAR_ASC || this->_patternType == PATTERN_EXP_ASC)
     {
         // Remplissage de 0 au début
         for (int i = 0; i < this->_patternXmin; i++)
@@ -107,7 +109,7 @@ void GraphParamGlobal::computePattern()
         for (int i = this->_patternXmax; i <= 127; i++)
             this->_curve[i] = 1;
     }
-    else if (this->forme == FORME_LINEAIRE_DESC || this->forme == FORME_EXP_DESC)
+    else if (this->_patternType == PATTERN_LINEAR_DESC || this->_patternType == PATTERN_EXP_DESC)
     {
         // Remplissage de 1 au début
         for (int i = 0; i < this->_patternXmin; i++)
@@ -117,31 +119,31 @@ void GraphParamGlobal::computePattern()
             this->_curve[i] = 0;
     }
 
-    switch (this->forme)
+    switch (this->_patternType)
     {
-    case FORME_MANUELLE:
+    case PATTERN_MANUAL:
         break;
-    case FORME_LINEAIRE_ASC:
+    case PATTERN_LINEAR_ASC:
         for (int i = this->_patternXmin; i < this->_patternXmax; i++)
             this->_curve[i] = (double)(i - this->_patternXmin) / (this->_patternXmax - this->_patternXmin);
         break;
-    case FORME_LINEAIRE_DESC:
+    case PATTERN_LINEAR_DESC:
         for (int i = this->_patternXmin; i < this->_patternXmax; i++)
             this->_curve[i] = 1.0 - (double)(i - this->_patternXmin) / (this->_patternXmax - this->_patternXmin);
         break;
-    case FORME_EXP_ASC:{
+    case PATTERN_EXP_ASC:{
         double baseExp = 1. + 1.0 / (101.0 - this->_patternStiffnessExp);
         double alpha = 1.0 / (pow(baseExp, this->_patternXmax - this->_patternXmin) - 1.0);
         for (int i = this->_patternXmin; i < this->_patternXmax; i++)
             this->_curve[i] = alpha * (pow(baseExp, i - this->_patternXmin) - 1.0);
     }break;
-    case FORME_EXP_DESC:{
+    case PATTERN_EXP_DESC:{
         double baseExp = 1. + 1.0 / (101.0 - this->_patternStiffnessExp);
         double alpha = 1.0 / (pow(baseExp, this->_patternXmin - this->_patternXmax) - 1.0);
         for (int i = this->_patternXmin; i < this->_patternXmax; i++)
             this->_curve[i] = 1.0 - alpha * (pow(baseExp, this->_patternXmin - i) - 1.0);
     }break;
-    case FORME_ALEATOIRE:
+    case PATTERN_RANDOM:
         for (int i = 0; i <= 127; i++)
         {
             double valTmp = (double)(QRandomGenerator::global()->generate() % 2000) / 1000. - 1.;
@@ -199,10 +201,11 @@ void GraphParamGlobal::write(QPoint pos)
     this->repaint();
 }
 
-void GraphParamGlobal::afficheCoord(float x, float y)
+void GraphParamGlobal::afficheCoord(int key, float value)
 {
-    _currentValuePosX = x;
-    _currentValuePosY = y;
+    _currentValueKey = key;
+    _currentValue = value;
+    this->repaint();
 }
 
 int GraphParamGlobal::posToKey(int x)
@@ -224,23 +227,23 @@ float GraphParamGlobal::keyToPos(int key, float &w)
 
 float GraphParamGlobal::posToValue(int y)
 {
-    return (1.0f - static_cast<float>(y) / this->size().height()) * 127.f;
+    return 1.0f - static_cast<float>(y) / this->size().height();
 }
 
 float GraphParamGlobal::valueToPos(float value)
 {
-    return (1.0f - value / 127.f) * this->size().height();
+    return (1.0f - value) * this->size().height();
 }
 
 void GraphParamGlobal::mouseMoveEvent(QMouseEvent *event)
 {
     QPoint pos = event->pos();
-    if (this->flagEdit)
+    if (this->_flagEdit)
     {
         this->afficheCoord(-1, -1);
         this->write(pos);
     }
-    else if (this->limitEdit == -1 && forme != FORME_ALEATOIRE)
+    else if (this->_limitEdit == -1 && _patternType != PATTERN_RANDOM)
     {
         // Modification min X
         int x = posToKey(pos.x());
@@ -254,7 +257,7 @@ void GraphParamGlobal::mouseMoveEvent(QMouseEvent *event)
             this->computePattern();
         }
     }
-    else if (this->limitEdit == 1 && forme != FORME_ALEATOIRE)
+    else if (this->_limitEdit == 1 && _patternType != PATTERN_RANDOM)
     {
         // Modification max X
         int x = posToKey(pos.x());
@@ -271,21 +274,22 @@ void GraphParamGlobal::mouseMoveEvent(QMouseEvent *event)
     else
     {
         // Convert coordinates
-        double x = posToKey(pos.x());
-        double y = posToValue(pos.y());
+        float x = posToKey(pos.x());
+        float y = posToValue(pos.y());
 
         // Closest point
-        double distanceMin = -1;
+        float distanceMin = -1;
         int posX = -1;
         for (int i = 0; i < this->_curve.size(); i++)
         {
-            double distanceTmp = 0.05 * qAbs(x - i) + qAbs(y - this->_curve[i]);
+            float distanceTmp = 0.05f * qAbs(x - i) + qAbs(y - this->_curve[i]);
             if (distanceMin == -1 || distanceTmp < distanceMin)
             {
                 distanceMin = distanceTmp;
                 posX = i;
             }
         }
+
         if (posX != -1)
             this->afficheCoord(posX, this->_curve[posX]);
         else
@@ -299,16 +303,16 @@ void GraphParamGlobal::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton)
     {
         this->afficheCoord(-1, -1);
-        if (this->forme == FORME_MANUELLE)
+        if (this->_patternType == PATTERN_MANUAL)
         {
-            this->flagEdit = true;
+            this->_flagEdit = true;
             // Inscription du premier point
             this->write(pos);
         }
         else
         {
             // Modification min X
-            this->limitEdit = -1;
+            this->_limitEdit = -1;
             int x = posToKey(pos.x());
             if (x < _patternXmax)
             {
@@ -319,11 +323,11 @@ void GraphParamGlobal::mousePressEvent(QMouseEvent *event)
     }
     else if (event->button() == Qt::RightButton)
     {
-        if (this->forme != FORME_MANUELLE)
+        if (this->_patternType != PATTERN_MANUAL)
         {
             this->afficheCoord(-1, -1);
             // Modification max X
-            this->limitEdit = 1;
+            this->_limitEdit = 1;
             int x = posToKey(pos.x());
             if (x > _patternXmin)
             {
@@ -338,19 +342,19 @@ void GraphParamGlobal::mouseReleaseEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        if (this->limitEdit == -1 || this->flagEdit)
+        if (this->_limitEdit == -1 || this->_flagEdit)
         {
-            this->limitEdit = 0;
-            this->flagEdit = false;
+            this->_limitEdit = 0;
+            this->_flagEdit = false;
             this->previousX = -1;
             this->repaint();
         }
     }
     else if (event->button() == Qt::RightButton)
     {
-        if (this->limitEdit == 1)
+        if (this->_limitEdit == 1)
         {
-            this->limitEdit = 0;
+            this->_limitEdit = 0;
             this->repaint();
         }
     }
@@ -373,7 +377,7 @@ void GraphParamGlobal::paintEvent(QPaintEvent *event)
 
     // Draw octaves
     painter.setPen(_octaveNameColor);
-    painter.setFont(QFont(font().family(), 8, QFont::Bold));
+    painter.setFont(_fontLabel);
     float w;
     for (int i = 12; i < 127; i += 12)
     {
@@ -393,61 +397,33 @@ void GraphParamGlobal::paintEvent(QPaintEvent *event)
     }
 
     // Curve
-    painter.setPen(QPen(_curveColor, 4));
+    painter.setPen(_penCurve);
     for (int i = 0; i <= 127; i++)
         painter.drawPoint(keyToPos(i, w), valueToPos(_curve[i]));
 
-    // // Layer aperçu valeurs
-    // this->addGraph();
-    // graphPen.setColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
-    // graphPen.setWidth(1);
-    // this->graph(4)->setPen(graphPen);
-    // this->graph(4)->setScatterStyle(QCPScatterStyle::ssPlus);
-    // labelCoord = new QCPItemText(this);
-    // labelCoord->position->setType(QCPItemPosition::ptPlotCoords);
-    // labelCoord->setText("");
-    // QFont fontLabel = QFont(font().family(), 9);
-    // fontLabel.setBold(true);
-    // labelCoord->setFont(fontLabel);
-    // labelCoord->setColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT));
+    // Current value
+    painter.setPen(_penCurrentValue);
+    if (_currentValueKey >= 0)
+    {
+        float x = keyToPos(_currentValueKey, w);
+        float y = valueToPos(_currentValue);
+        painter.drawLine(x - 5, y, x + 5, y);
+        painter.drawLine(x, y - 5, x, y + 5);
 
+        // Text to display with its size
+        QString text = ContextManager::keyName()->getKeyName(_currentValueKey) + ":" +
+                       QLocale::system().toString(_patternYmin + (_patternYmax - _patternYmin) * _currentValue, 'f', 2);
+        QFontMetrics fm(_fontLabel);
+        float textHalfWidth = 0.5f * fm.horizontalAdvance(text) + 2.f;
+        float textHeight = fm.height();
 
-    // Current coordinates
-    // QVector<double> xVector, yVector;
-    // if (x >= - 0.5)
-    // {
-    //     // Coordonnées du point
-    //     xVector.resize(1);
-    //     yVector.resize(1);
-    //     xVector[0] = x;
-    //     yVector[0] = y;
-    //     // Affichage texte
-    //     if (y >= 0.5)
-    //         labelCoord->setPositionAlignment(Qt::AlignTop    | Qt::AlignHCenter);
-    //     else
-    //         labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
-    //     labelCoord->setText(ContextManager::keyName()->getKeyName(qRound((double)x * 128. / this->nbPoints)) + ":" +
-    //                         QLocale::system().toString(yMin + (yMax - yMin) * y, 'f', 2));
-    //     // Ajustement position
-    //     QFontMetrics fm(labelCoord->font());
-    //     double distX = this->xAxis->pixelToCoord(fm.horizontalAdvance(labelCoord->text()) / 2 + 2);
-    //     if (x < distX)
-    //         x = distX;
-    //     else if (x > this->nbPoints - distX)
-    //         x = this->nbPoints - distX;
-    //     double distY = 1. - this->yAxis->pixelToCoord(2);
-    //     if (y >= 0.5)
-    //         y -= distY;
-    //     else
-    //         y += distY;
-    //     labelCoord->position->setCoords(x, y);
-    // }
-    // else
-    // {
-    //     xVector.resize(0);
-    //     yVector.resize(0);
-    //     labelCoord->setText("");
-    // }
-    // this->graph(4)->setData(xVector, yVector, true);
-    // this->replot();
+        // Display the text
+        float textCenterX = x;
+        if (textCenterX + textHalfWidth > size.width())
+            textCenterX = size.width() - textHalfWidth;
+        if (textCenterX - textHalfWidth < 0)
+            textCenterX = textHalfWidth;
+        painter.drawText(textCenterX - textHalfWidth, _currentValue < 0.5 ? y - 1.5 * textHeight : y + 0.5f * textHeight,
+                         2 * textHalfWidth, textHeight, Qt::AlignVCenter | Qt::AlignHCenter, text);
+    }
 }
