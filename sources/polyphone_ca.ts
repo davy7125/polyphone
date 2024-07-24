@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<TS version="2.1" language="ca_ES">
 <context>
     <name>AbstractInputParser</name>
     <message>
@@ -48,8 +48,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="core/types/attribute.cpp" line="450"/>
+        <source>Sample start offset (× 32768)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="core/types/attribute.cpp" line="453"/>
         <source>Sample end offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/types/attribute.cpp" line="456"/>
+        <source>Sample end offset (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -58,13 +68,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="core/types/attribute.cpp" line="462"/>
+        <source>Loop start offset (× 32768)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="core/types/attribute.cpp" line="465"/>
         <source>Loop end offset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="462"/>
-        <source>Loop start offset (× 32768)</source>
+        <location filename="core/types/attribute.cpp" line="468"/>
+        <source>Loop end offset (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -105,16 +120,6 @@
     <message>
         <location filename="core/types/attribute.cpp" line="490"/>
         <source>Mod env → filter (c)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/types/attribute.cpp" line="456"/>
-        <source>Sample end offset (× 32768)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/types/attribute.cpp" line="450"/>
-        <source>Sample start offset (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -338,36 +343,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="613"/>
-        <source>Sample root key</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/types/attribute.cpp" line="616"/>
-        <source>Sample length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/types/attribute.cpp" line="619"/>
-        <source>Loop start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/types/attribute.cpp" line="622"/>
-        <source>Loop end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/types/attribute.cpp" line="625"/>
-        <source>Pitch correction (cents)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/types/attribute.cpp" line="468"/>
-        <source>Loop end offset (× 32768)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="core/types/attribute.cpp" line="595"/>
         <source>Tuning (semi-tones)</source>
         <translation type="unfinished"></translation>
@@ -395,6 +370,31 @@
     <message>
         <location filename="core/types/attribute.cpp" line="610"/>
         <source>Root key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/types/attribute.cpp" line="613"/>
+        <source>Sample root key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/types/attribute.cpp" line="616"/>
+        <source>Sample length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/types/attribute.cpp" line="619"/>
+        <source>Loop start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/types/attribute.cpp" line="622"/>
+        <source>Loop end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/types/attribute.cpp" line="625"/>
+        <source>Pitch correction (cents)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -756,7 +756,6 @@
     <message>
         <location filename="context/interface/configpanel.ui" line="186"/>
         <source>Keyboard</source>
-        <oldsource>Virtual keyboard</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -768,8 +767,45 @@
 <context>
     <name>ConfigSectionGeneral</name>
     <message>
+        <location filename="context/interface/configsectiongeneral.ui" line="23"/>
+        <source>Sample management</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectiongeneral.ui" line="36"/>
+        <source>Sample import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectiongeneral.ui" line="44"/>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="103"/>
         <source>Input / Output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectiongeneral.ui" line="122"/>
+        <source>When importing a sample, data located after the end of loop are automatically removed.
+(same effect as the tool “Trim to end of loop”)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectiongeneral.ui" line="126"/>
+        <source>trim to loop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectiongeneral.ui" line="145"/>
+        <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
+(same effect as the tool “Remove blank at start”)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectiongeneral.ui" line="149"/>
+        <source>remove blank at start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -783,47 +819,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="145"/>
-        <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
-(same effect as the tool “Remove blank at start”)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="44"/>
-        <source>Default</source>
-        <oldsource>(default)</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="122"/>
-        <source>When importing a sample, data located after the end of loop are automatically removed.
-(same effect as the tool “Trim to end of loop”)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="186"/>
         <source>MIDI input</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="23"/>
-        <source>Sample management</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="36"/>
-        <source>Sample import</source>
-        <oldsource>Wav file import</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="237"/>
-        <source>change linked sample</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="126"/>
-        <source>trim to loop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -832,13 +829,94 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectiongeneral.ui" line="149"/>
-        <source>remove blank at start</source>
+        <location filename="context/interface/configsectiongeneral.ui" line="237"/>
+        <source>change linked sample</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ConfigSectionInterface</name>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="25"/>
+        <source>This modification will be applied during the next start of the software.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="35"/>
+        <source>Decorations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="42"/>
+        <source>Unique instance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="49"/>
+        <source>Sort divisions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="83"/>
+        <location filename="context/interface/configsectioninterface.ui" line="445"/>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="156"/>
+        <source>Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="255"/>
+        <source>Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="273"/>
+        <source>Background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="316"/>
+        <source>Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="389"/>
+        <source>List and table</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="457"/>
+        <source>Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="464"/>
+        <source>Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="476"/>
+        <source>Behaviour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="490"/>
+        <source>Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="503"/>
+        <source>Key names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="510"/>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="540"/>
         <source>Middle C → 60, then 61</source>
@@ -875,31 +953,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="615"/>
-        <source>Window borders</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="476"/>
-        <source>Behaviour</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="510"/>
-        <source>Language</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="503"/>
-        <source>Key names</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="49"/>
-        <source>Sort divisions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="context/interface/configsectioninterface.ui" line="585"/>
         <source>by key range</source>
         <translation type="unfinished"></translation>
@@ -921,64 +974,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="35"/>
-        <source>Decorations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="42"/>
-        <source>Unique instance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="457"/>
-        <source>Theme</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="464"/>
-        <source>Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="316"/>
-        <source>Selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="83"/>
-        <location filename="context/interface/configsectioninterface.ui" line="445"/>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="156"/>
-        <source>Window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="273"/>
-        <source>Background</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="255"/>
-        <source>Button</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="389"/>
-        <source>List and table</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="490"/>
-        <source>Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="25"/>
-        <source>This modification will be applied during the next start of the software.</source>
+        <location filename="context/interface/configsectioninterface.ui" line="615"/>
+        <source>Window borders</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -998,8 +995,29 @@
 <context>
     <name>ConfigSectionKeyboard</name>
     <message>
+        <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
+        <source>Tuning fork</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
+        <location filename="context/interface/configsectionkeyboard.ui" line="94"/>
+        <source>Back to default value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionkeyboard.ui" line="69"/>
+        <source>First C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="81"/>
         <source>Mapping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionkeyboard.ui" line="156"/>
+        <source>Tuning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1028,27 +1046,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="69"/>
-        <source>First C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
-        <location filename="context/interface/configsectionkeyboard.ui" line="94"/>
-        <source>Back to default value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="156"/>
-        <source>Tuning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
-        <source>Tuning fork</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="context/interface/configsectionkeyboard.cpp" line="51"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
@@ -1064,18 +1061,13 @@
 <context>
     <name>ConfigSectionRepository</name>
     <message>
-        <location filename="context/interface/configsectionrepository.ui" line="288"/>
-        <source>Username</source>
+        <location filename="context/interface/configsectionrepository.ui" line="20"/>
+        <source>Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="67"/>
         <source>Create an account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectionrepository.ui" line="20"/>
-        <source>Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1092,6 +1084,11 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="281"/>
         <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionrepository.ui" line="288"/>
+        <source>Username</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1150,35 +1147,29 @@ Premium!</source>
 <context>
     <name>ConfigSectionSound</name>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="375"/>
-        <source>Reverb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectionsound.ui" line="226"/>
-        <source>Width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="context/interface/configsectionsound.ui" line="22"/>
         <location filename="context/interface/configsectionsound.ui" line="197"/>
         <source>Level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="333"/>
-        <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
-        <oldsource>Modulator &quot;velocity → filter cutoff&quot;</oldsource>
+        <location filename="context/interface/configsectionsound.ui" line="45"/>
+        <source>Frequency</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="126"/>
-        <source>soundfont 2.01</source>
+        <location filename="context/interface/configsectionsound.ui" line="100"/>
+        <source>Depth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="112"/>
         <source>General volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="126"/>
+        <source>soundfont 2.01</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1192,13 +1183,23 @@ Premium!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="context/interface/configsectionsound.ui" line="181"/>
+        <source>Room</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectionsound.ui" line="226"/>
+        <source>Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="context/interface/configsectionsound.ui" line="242"/>
         <source>Damp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="181"/>
-        <source>Room</source>
+        <location filename="context/interface/configsectionsound.ui" line="333"/>
+        <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1207,18 +1208,13 @@ Premium!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="context/interface/configsectionsound.ui" line="375"/>
+        <source>Reverb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="context/interface/configsectionsound.ui" line="388"/>
         <source>Chorus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectionsound.ui" line="45"/>
-        <source>Frequency</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectionsound.ui" line="100"/>
-        <source>Depth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1249,7 +1245,6 @@ Premium!</source>
     <message>
         <location filename="context/interface/configtoc.ui" line="98"/>
         <source>Keyboard</source>
-        <oldsource>Virtual keyboard</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1426,7 +1421,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="36"/>
         <source>Polyphone</source>
-        <translation>Polyphone</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="49"/>
@@ -1436,7 +1431,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="50"/>
         <source>Davy Triponney</source>
-        <translation type="unfinished">Davy Triponney</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="53"/>
@@ -1453,26 +1448,26 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="73"/>
         <source>Davy Triponney</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Davy Triponney</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="63"/>
         <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>Andrea Celani</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Andrea Celani</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="64"/>
         <source>Kinwie</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Kinwie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="65"/>
         <source>Michael Schyllberg</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Michael Schyllberg</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="66"/>
@@ -1484,44 +1479,50 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="67"/>
         <source>Paul Stratman</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Paul Stratman</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="68"/>
         <location filename="dialogs/dialog_about.cpp" line="81"/>
         <source>Steve Clarke</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Steve Clarke</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="70"/>
         <source>Aleksey Bobylev</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Aleksey Bobylev</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="72"/>
+        <source>Chris Hansen</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="74"/>
         <source>F.J. Martínez Murcia</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>F.J. Martínez Murcia</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="75"/>
         <source>Georg Gergull</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Georg Gergull</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="76"/>
         <source>Jay Alexander Fleming</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Jay Alexander Fleming</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="77"/>
         <source>Joel Gomes</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Joel Gomes</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="78"/>
@@ -1533,19 +1534,13 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="79"/>
         <source>Magson</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Magson</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="80"/>
         <source>Pavel Fric</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Pavel Fric</translation>
-    </message>
-    <message>
-        <location filename="dialogs/dialog_about.cpp" line="72"/>
-        <source>Chris Hansen</source>
-        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation>Chris Hansen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1573,7 +1568,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogchangelog.cpp" line="49"/>
         <source>Polyphone</source>
-        <translation type="unfinished">Polyphone</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialogchangelog.cpp" line="94"/>
@@ -1599,13 +1594,13 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialogcreateelements.ui" line="121"/>
-        <source>&amp;Cancel</source>
+        <location filename="dialogs/dialogcreateelements.ui" line="101"/>
+        <source>&amp;Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialogcreateelements.ui" line="101"/>
-        <source>&amp;Ok</source>
+        <location filename="dialogs/dialogcreateelements.ui" line="121"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1705,18 +1700,8 @@ repository</source>
 <context>
     <name>DialogList</name>
     <message>
-        <location filename="dialogs/dialog_list.cpp" line="53"/>
-        <source>Sample list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="dialogs/dialog_list.cpp" line="58"/>
-        <source>Instrument list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="dialogs/dialog_list.cpp" line="63"/>
-        <source>Preset list</source>
+        <location filename="dialogs/dialog_list.ui" line="41"/>
+        <source>&amp;Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1730,8 +1715,18 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_list.ui" line="41"/>
-        <source>&amp;Ok</source>
+        <location filename="dialogs/dialog_list.cpp" line="53"/>
+        <source>Sample list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_list.cpp" line="58"/>
+        <source>Instrument list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_list.cpp" line="63"/>
+        <source>Preset list</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1770,7 +1765,6 @@ repository</source>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="53"/>
         <source>Link selected instruments</source>
-        <oldsource>Link selected isntruments</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1860,13 +1854,13 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="162"/>
-        <source>&amp;Cancel</source>
+        <location filename="dialogs/dialog_rename.ui" line="142"/>
+        <source>&amp;Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="142"/>
-        <source>&amp;Ok</source>
+        <location filename="dialogs/dialog_rename.ui" line="162"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1914,14 +1908,13 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialogselection.ui" line="66"/>
-        <source>&amp;Cancel</source>
-        <oldsource>Cancel</oldsource>
+        <location filename="dialogs/dialogselection.ui" line="46"/>
+        <source>&amp;Duplicate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialogselection.ui" line="46"/>
-        <source>&amp;Duplicate</source>
+        <location filename="dialogs/dialogselection.ui" line="66"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2161,11 +2154,6 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="73"/>
-        <source>Toolbox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="69"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
@@ -2178,6 +2166,11 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/widgets/editortoolbar.cpp" line="73"/>
+        <source>Toolbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2202,12 +2195,12 @@ repository</source>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="440"/>
-        <source>Cannot create more presets.</source>
+        <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="440"/>
-        <source>Warning</source>
+        <source>Cannot create more presets.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2569,18 +2562,6 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="342"/>
-        <source>  Settings</source>
-        <extracomment>prefixed with 2 spaces</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.ui" line="298"/>
-        <source>  Documentation</source>
-        <extracomment>prefixed with 2 spaces</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="mainwindow/mainwindow.ui" line="78"/>
         <source>Home screen</source>
         <translation type="unfinished"></translation>
@@ -2593,9 +2574,15 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="320"/>
-        <source>  Forum</source>
-        <extracomment>prefixed with 2 spaces</extracomment>
+        <location filename="mainwindow/mainwindow.ui" line="138"/>
+        <source>  Open
+  soundfont</source>
+        <extracomment>prefixed with 2 spaces for each line</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.ui" line="184"/>
+        <source>Search a soundfont...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2611,20 +2598,26 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="184"/>
-        <source>Search a soundfont...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.ui" line="138"/>
-        <source>  Open
-  soundfont</source>
-        <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="mainwindow/mainwindow.ui" line="267"/>
         <source>History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.ui" line="298"/>
+        <source>  Documentation</source>
+        <extracomment>prefixed with 2 spaces</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.ui" line="320"/>
+        <source>  Forum</source>
+        <extracomment>prefixed with 2 spaces</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.ui" line="342"/>
+        <source>  Settings</source>
+        <extracomment>prefixed with 2 spaces</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2703,7 +2696,6 @@ repository</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="162"/>
         <source>overwritten by %1</source>
-        <oldsource>overriden by %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2738,7 +2730,6 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="414"/>
         <source>Add from:</source>
-        <oldsource>Add from: </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2749,7 +2740,6 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="417"/>
         <source>To:</source>
-        <oldsource>To: </oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3253,15 +3243,14 @@ rate</source>
 <context>
     <name>PageRange</name>
     <message>
-        <location filename="editor/pagerange.h" line="48"/>
-        <source>Ranges</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="editor/pagerange.ui" line="78"/>
         <source>Select a single instrument or preset
 to display its division ranges</source>
-        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a single instrument or preset&lt;/p&gt;&lt;p&gt;to display its division ranges&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/pagerange.h" line="48"/>
+        <source>Ranges</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3387,27 +3376,6 @@ to display its division ranges</source>
 <context>
     <name>PageSmpl</name>
     <message>
-        <location filename="editor/pagesmpl.ui" line="684"/>
-        <source>Equalizer (±15 dB)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/pagesmpl.ui" line="344"/>
-        <location filename="editor/pagesmpl.cpp" line="1029"/>
-        <source>Play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/pagesmpl.ui" line="284"/>
-        <source>sine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/pagesmpl.ui" line="277"/>
-        <source>loop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="editor/pagesmpl.ui" line="187"/>
         <source>Root key</source>
         <translation type="unfinished"></translation>
@@ -3418,8 +3386,29 @@ to display its division ranges</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="editor/pagesmpl.ui" line="228"/>
+        <source>Use the estimated pitch and correction as values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/pagesmpl.ui" line="277"/>
+        <source>loop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/pagesmpl.ui" line="284"/>
+        <source>sine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="editor/pagesmpl.ui" line="291"/>
         <source>stereo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/pagesmpl.ui" line="344"/>
+        <location filename="editor/pagesmpl.cpp" line="1029"/>
+        <source>Play</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3458,15 +3447,15 @@ to display its division ranges</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="228"/>
-        <source>Use the estimated pitch and correction as values</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="editor/pagesmpl.ui" line="644"/>
         <location filename="editor/pagesmpl.cpp" line="475"/>
         <location filename="editor/pagesmpl.cpp" line="994"/>
         <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/pagesmpl.ui" line="684"/>
+        <source>Equalizer (±15 dB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3533,7 +3522,6 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1043"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
-        <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3549,7 +3537,6 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1047"/>
         <source>Yes and &amp;create another sample</source>
-        <oldsource>Yes and create another &amp;sample</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3700,6 +3687,53 @@ to display its division ranges</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="context/translationmanager.cpp" line="106"/>
+        <source>When editing one side of a stereo sample, the other side is automatically edited the same.
+This rule applies at the sample level and also when editing a division of an instrument:
+the division corresponding to the other channel, if any, is edited the same.
+Both divisions must share the same note and velocity ranges.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/input/grandorgue/grandorguerank.cpp" line="142"/>
+        <location filename="core/input/grandorgue/grandorguestop.cpp" line="141"/>
+        <location filename="core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
+        <location filename="core/output/outputfactory.cpp" line="104"/>
+        <source>untitled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/input/grandorgue/inputgrandorgue.h" line="35"/>
+        <source>GrandOrgue sample sets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/input/inputfactory.cpp" line="118"/>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/input/sf2/inputsf2.h" line="35"/>
+        <location filename="core/output/outputfactory.cpp" line="118"/>
+        <source>Sf2 files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/input/sf3/inputsf3.h" line="35"/>
+        <source>Sf3 files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/input/sfark/inputsfark.h" line="35"/>
+        <source>sfArk archives</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/input/sfz/inputsfz.h" line="35"/>
+        <source>Sfz files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="core/model/soundfont.cpp" line="44"/>
         <source>General</source>
         <translation type="unfinished"></translation>
@@ -3720,22 +3754,8 @@ to display its division ranges</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/input/grandorgue/grandorguerank.cpp" line="142"/>
-        <location filename="core/input/grandorgue/grandorguestop.cpp" line="141"/>
-        <location filename="core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
-        <location filename="core/output/outputfactory.cpp" line="104"/>
-        <source>untitled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="core/output/outputfactory.cpp" line="117"/>
         <source>Save a soundfont</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/input/sf2/inputsf2.h" line="35"/>
-        <location filename="core/output/outputfactory.cpp" line="118"/>
-        <source>Sf2 files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3837,11 +3857,6 @@ to display its division ranges</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/soundfontinformation.cpp" line="46"/>
-        <source>Unknown author</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="55"/>
         <source>bytes</source>
         <translation type="unfinished"></translation>
@@ -3871,36 +3886,8 @@ to display its division ranges</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/input/grandorgue/inputgrandorgue.h" line="35"/>
-        <source>GrandOrgue sample sets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/input/inputfactory.cpp" line="118"/>
-        <source>All</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/input/sf3/inputsf3.h" line="35"/>
-        <source>Sf3 files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/input/sfark/inputsfark.h" line="35"/>
-        <source>sfArk archives</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/input/sfz/inputsfz.h" line="35"/>
-        <source>Sfz files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/translationmanager.cpp" line="106"/>
-        <source>When editing one side of a stereo sample, the other side is automatically edited the same.
-This rule applies at the sample level and also when editing a division of an instrument:
-the division corresponding to the other channel, if any, is edited the same.
-Both divisions must share the same note and velocity ranges.</source>
+        <location filename="repository/soundfontinformation.cpp" line="46"/>
+        <source>Unknown author</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4406,6 +4393,31 @@ download the list</source>
 <context>
     <name>SoundfontBrowser</name>
     <message>
+        <location filename="repository/browser/soundfontbrowser.ui" line="159"/>
+        <source>No results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/browser/soundfontbrowser.ui" line="205"/>
+        <source>Search a soundfont...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/browser/soundfontbrowser.ui" line="257"/>
+        <source>Filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/browser/soundfontbrowser.ui" line="286"/>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/browser/soundfontbrowser.ui" line="304"/>
+        <source>Subscribe to a Premium account to get all the features!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="365"/>
         <source>Category</source>
         <translation type="unfinished"></translation>
@@ -4443,31 +4455,6 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="470"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="205"/>
-        <source>Search a soundfont...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="257"/>
-        <source>Filters</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="286"/>
-        <source>Reset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="304"/>
-        <source>Subscribe to a Premium account to get all the features!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="159"/>
-        <source>No results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4653,6 +4640,11 @@ download the list</source>
 <context>
     <name>SoundfontFileCell</name>
     <message>
+        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="44"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="78"/>
         <source>Description...</source>
         <translation type="unfinished"></translation>
@@ -4665,11 +4657,6 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="104"/>
         <source>Replace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="44"/>
-        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4784,13 +4771,13 @@ download content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/tableheaderview.cpp" line="68"/>
-        <source>solo on selection</source>
+        <location filename="editor/widgets/tableheaderview.cpp" line="63"/>
+        <source>unmute all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/tableheaderview.cpp" line="63"/>
-        <source>unmute all</source>
+        <location filename="editor/widgets/tableheaderview.cpp" line="68"/>
+        <source>solo on selection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4895,7 +4882,6 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
         <source>Sample auto-positioning</source>
-        <oldsource>Automatically link the samples</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4961,23 +4947,23 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolCelesteTuning_gui</name>
     <message>
-        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="49"/>
-        <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="29"/>
         <source>&amp;Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="97"/>
-        <source>Division to the next octave</source>
+        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="49"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="58"/>
         <source>The algebraic sign determines the tuning direction.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="97"/>
+        <source>Division to the next octave</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5007,18 +4993,8 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolChangeAttenuation_gui</name>
     <message>
-        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="83"/>
-        <source>Desired value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="125"/>
-        <source>Possible offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="112"/>
-        <source>Attenuation range</source>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="35"/>
+        <source>&amp;Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5027,13 +5003,23 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="35"/>
-        <source>&amp;Ok</source>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="83"/>
+        <source>Desired value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="96"/>
         <source> dB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="112"/>
+        <source>Attenuation range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="125"/>
+        <source>Possible offset</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5053,23 +5039,8 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolChangeVolume_gui</name>
     <message>
-        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="56"/>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="108"/>
-        <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="36"/>
         <source> dB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="79"/>
-        <source>Multiply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5078,13 +5049,28 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="88"/>
-        <source>&amp;Ok</source>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="56"/>
+        <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="66"/>
         <source> %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="79"/>
+        <source>Multiply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="88"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="108"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5228,13 +5214,13 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="719"/>
-        <source>&amp;Cancel</source>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="699"/>
+        <source>&amp;Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="699"/>
-        <source>&amp;Ok</source>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="719"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5296,19 +5282,16 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="58"/>
         <source>&amp;Override</source>
-        <oldsource>Override</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="68"/>
         <source>&amp;Disable</source>
-        <oldsource>Disable</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="88"/>
         <source>&amp;Cancel</source>
-        <oldsource>Cancel</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5338,13 +5321,13 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolDivisionDuplication_gui</name>
     <message>
-        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="30"/>
-        <source>A division for each velocity range</source>
+        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="20"/>
+        <source>A division for each key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="143"/>
-        <source>&amp;Cancel</source>
+        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="30"/>
+        <source>A division for each velocity range</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5353,8 +5336,8 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="20"/>
-        <source>A division for each key</source>
+        <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="143"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5384,6 +5367,11 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolExternalCommand_gui</name>
     <message>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="50"/>
+        <source>Command examples:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="80"/>
         <source>Command</source>
         <translation type="unfinished"></translation>
@@ -5404,18 +5392,13 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="150"/>
-        <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="130"/>
         <source>&amp;Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="50"/>
-        <source>Command examples:</source>
+        <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="150"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5497,8 +5480,8 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolFrequencyFilter_gui</name>
     <message>
-        <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="101"/>
-        <source>&amp;Cancel</source>
+        <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="32"/>
+        <source>Mark with red color where you want to cut the frequencies:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5507,8 +5490,8 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="32"/>
-        <source>Mark with red color where you want to cut the frequencies:</source>
+        <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="101"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5557,7 +5540,6 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="60"/>
         <source>Show peak frequencies</source>
-        <oldsource>Show peak frequency</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5566,13 +5548,11 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="26"/>
         <source>&amp;Export</source>
-        <oldsource>Export</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="33"/>
         <source>&amp;Close</source>
-        <oldsource>Close</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5713,13 +5693,13 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="278"/>
-        <source>&amp;Cancel</source>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="271"/>
+        <source>&amp;Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="271"/>
-        <source>&amp;Ok</source>
+        <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="278"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5749,6 +5729,19 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolLoadFromInst</name>
     <message>
+        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="296"/>
+        <source>Success</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="301"/>
+        <source>Couldn&apos;t configure %n sample(s).</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="47"/>
         <source>Fast editing</source>
         <translation type="unfinished"></translation>
@@ -5757,20 +5750,6 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="62"/>
         <source>Load a parameter from the instruments</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="296"/>
-        <source>Success</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message numerus="yes">
-        <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="301"/>
-        <source>Couldn&apos;t configure %n sample(s).</source>
-        <oldsource>Couln&apos;t configure %n sample(s).</oldsource>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
     </message>
 </context>
 <context>
@@ -5952,13 +5931,13 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="498"/>
-        <source>&amp;Cancel</source>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="478"/>
+        <source>&amp;Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="478"/>
-        <source>&amp;Ok</source>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="498"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6081,13 +6060,13 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolRelease_gui</name>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="58"/>
-        <source>&amp;Cancel</source>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="38"/>
+        <source>&amp;Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="38"/>
-        <source>&amp;Ok</source>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="58"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6166,16 +6145,6 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolSoundSpatialization_gui</name>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="138"/>
-        <source>Inversions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="59"/>
-        <source>Spreading (%)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="21"/>
         <source>Ascending</source>
         <translation type="unfinished"></translation>
@@ -6201,18 +6170,8 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="95"/>
-        <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="88"/>
-        <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="104"/>
-        <source>Pattern</source>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="59"/>
+        <source>Spreading (%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6221,8 +6180,28 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="88"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="95"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="104"/>
+        <source>Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="121"/>
         <source>Offset (0-100)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="138"/>
+        <source>Inversions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6312,15 +6291,13 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="190"/>
-        <source>&amp;Cancel</source>
-        <oldsource>Cancel</oldsource>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="170"/>
+        <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="170"/>
-        <source>&amp;Export</source>
-        <oldsource>Export</oldsource>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="190"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6401,13 +6378,13 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="59"/>
-        <source>&amp;Cancel</source>
+        <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="39"/>
+        <source>&amp;Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="39"/>
-        <source>&amp;Ok</source>
+        <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="59"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6424,13 +6401,13 @@ Other soundfont editors might display other units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="56"/>
-        <source>&amp;Cancel</source>
+        <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="36"/>
+        <source>&amp;Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="36"/>
-        <source>&amp;Ok</source>
+        <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="56"/>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6476,13 +6453,13 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TopRightWidget</name>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="153"/>
-        <source>User area</source>
+        <location filename="mainwindow/toprightwidget.ui" line="113"/>
+        <source>Download status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="113"/>
-        <source>Download status</source>
+        <location filename="mainwindow/toprightwidget.ui" line="153"/>
+        <source>User area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

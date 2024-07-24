@@ -2376,15 +2376,54 @@ en ligne</translation>
 <context>
     <name>GraphVisualizer</name>
     <message>
-        <location filename="editor/tools/monitor/graphvisualizer.cpp" line="236"/>
+        <location filename="editor/tools/monitor/graphvisualizer.cpp" line="256"/>
         <source>Cannot display all the values.</source>
         <translation>Impossible d&apos;afficher tous les points.</translation>
     </message>
 </context>
 <context>
+    <name>GraphicsFourier</name>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="48"/>
+        <source>Export graph</source>
+        <translation>Exporter graphique</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="50"/>
+        <source>Show peak frequencies</source>
+        <translation>Visualiser les pics de fréquences</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="372"/>
+        <source>Frequency (Hz)</source>
+        <translation>Fréquence (Hz)</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="377"/>
+        <source>Intensity</source>
+        <translation>Intensité</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="542"/>
+        <source>Hz</source>
+        <comment>unit for Herz</comment>
+        <translation>Hz</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="606"/>
+        <source>Export a graph</source>
+        <translation>Exporter un graphique</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="607"/>
+        <source>Png file</source>
+        <translation>Fichier .png</translation>
+    </message>
+</context>
+<context>
     <name>GraphicsViewEnvelop</name>
     <message>
-        <location filename="editor/graphics/graphicsviewenvelop.cpp" line="355"/>
+        <location filename="editor/graphics/graphicsviewenvelop.cpp" line="354"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
@@ -2393,61 +2432,22 @@ en ligne</translation>
 <context>
     <name>GraphicsWave</name>
     <message>
-        <location filename="editor/graphics/graphicswave.cpp" line="177"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="185"/>
         <source>Multiple selection</source>
         <translation>Sélection multiple</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphicswave.cpp" line="196"/>
-        <location filename="editor/graphics/graphicswave.cpp" line="199"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="215"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="218"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
 </context>
 <context>
-    <name>GraphiqueFourier</name>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="60"/>
-        <source>Frequency (Hz)</source>
-        <translation>Fréquence (Hz)</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="74"/>
-        <source>Intensity</source>
-        <translation>Intensité</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="92"/>
-        <source>Export graph</source>
-        <translation>Exporter graphique</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="94"/>
-        <source>Show peak frequencies</source>
-        <translation>Visualiser les pics de fréquences</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="507"/>
-        <source>Hz</source>
-        <comment>unit for Herz</comment>
-        <translation>Hz</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="563"/>
-        <source>Export a graph</source>
-        <translation>Exporter un graphique</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="564"/>
-        <source>Png file</source>
-        <translation>Fichier .png</translation>
-    </message>
-</context>
-<context>
     <name>InputParserGrandOrgue</name>
     <message>
-        <location filename="core/input/grandorgue/inputparsergrandorgue.cpp" line="77"/>
+        <location filename="core/input/grandorgue/inputparsergrandorgue.cpp" line="82"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>Impossible d&apos;ouvrir le fichier « %1 »</translation>
     </message>
@@ -3427,7 +3427,7 @@ pour afficher les étendues de ses divisions</translation>
     <name>PageSmpl</name>
     <message>
         <location filename="editor/pagesmpl.ui" line="344"/>
-        <location filename="editor/pagesmpl.cpp" line="1031"/>
+        <location filename="editor/pagesmpl.cpp" line="1029"/>
         <source>Play</source>
         <translation>Lecture</translation>
     </message>
@@ -3457,37 +3457,37 @@ pour afficher les étendues de ses divisions</translation>
         <translation>stéréo</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="427"/>
+        <location filename="editor/pagesmpl.ui" line="426"/>
         <source>Tuning</source>
         <translation>Accordage</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="457"/>
+        <location filename="editor/pagesmpl.ui" line="456"/>
         <source>Loop</source>
         <translation>Boucle</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="553"/>
+        <location filename="editor/pagesmpl.ui" line="552"/>
         <source>Use the full length of the sample as loop</source>
         <translation>Utilise la longueur totale de l&apos;échantillon comme boucle</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="595"/>
+        <location filename="editor/pagesmpl.ui" line="594"/>
         <source>Size</source>
         <translation>Taille</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="602"/>
+        <location filename="editor/pagesmpl.ui" line="601"/>
         <source>Sample rate</source>
         <translation>Échantillonnage</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="609"/>
+        <location filename="editor/pagesmpl.ui" line="608"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="616"/>
+        <location filename="editor/pagesmpl.ui" line="615"/>
         <source>Link</source>
         <translation>Lien</translation>
     </message>
@@ -3497,96 +3497,96 @@ pour afficher les étendues de ses divisions</translation>
         <translation>Utilise l&apos;estimation de la note comme valeur</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="646"/>
-        <location filename="editor/pagesmpl.cpp" line="477"/>
-        <location filename="editor/pagesmpl.cpp" line="996"/>
+        <location filename="editor/pagesmpl.ui" line="644"/>
+        <location filename="editor/pagesmpl.cpp" line="475"/>
+        <location filename="editor/pagesmpl.cpp" line="994"/>
         <source>Information</source>
         <translation>Informations</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="687"/>
+        <location filename="editor/pagesmpl.ui" line="684"/>
         <source>Equalizer (±15 dB)</source>
         <translation>Égaliseur (±15 dB)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="160"/>
-        <location filename="editor/pagesmpl.cpp" line="165"/>
+        <location filename="editor/pagesmpl.cpp" line="158"/>
+        <location filename="editor/pagesmpl.cpp" line="163"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="164"/>
-        <location filename="editor/pagesmpl.cpp" line="167"/>
+        <location filename="editor/pagesmpl.cpp" line="162"/>
+        <location filename="editor/pagesmpl.cpp" line="165"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(min)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="245"/>
-        <location filename="editor/pagesmpl.cpp" line="607"/>
+        <location filename="editor/pagesmpl.cpp" line="243"/>
+        <location filename="editor/pagesmpl.cpp" line="605"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="255"/>
-        <location filename="editor/pagesmpl.cpp" line="746"/>
+        <location filename="editor/pagesmpl.cpp" line="253"/>
+        <location filename="editor/pagesmpl.cpp" line="744"/>
         <source>right</source>
         <translation>droit</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="256"/>
-        <location filename="editor/pagesmpl.cpp" line="747"/>
+        <location filename="editor/pagesmpl.cpp" line="254"/>
+        <location filename="editor/pagesmpl.cpp" line="745"/>
         <source>left</source>
         <translation>gauche</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="257"/>
-        <location filename="editor/pagesmpl.cpp" line="748"/>
+        <location filename="editor/pagesmpl.cpp" line="255"/>
+        <location filename="editor/pagesmpl.cpp" line="746"/>
         <source>link</source>
         <translation>lien</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="478"/>
-        <location filename="editor/pagesmpl.cpp" line="997"/>
+        <location filename="editor/pagesmpl.cpp" line="476"/>
+        <location filename="editor/pagesmpl.cpp" line="995"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Modification appliquée avec succès aux différents échantillons</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="745"/>
-        <location filename="editor/pagesmpl.cpp" line="770"/>
+        <location filename="editor/pagesmpl.cpp" line="743"/>
+        <location filename="editor/pagesmpl.cpp" line="768"/>
         <source>mono</source>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1025"/>
+        <location filename="editor/pagesmpl.cpp" line="1023"/>
         <source>Stop</source>
         <translation>Arrêt</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1044"/>
+        <location filename="editor/pagesmpl.cpp" line="1042"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1045"/>
+        <location filename="editor/pagesmpl.cpp" line="1043"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation>Couper l&apos;échantillon de &lt;b&gt;%1&lt;/b&gt; à &lt;b&gt;%2&lt;/b&gt; ?</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1047"/>
+        <location filename="editor/pagesmpl.cpp" line="1045"/>
         <source>&amp;Yes</source>
         <translation>&amp;Oui</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1048"/>
+        <location filename="editor/pagesmpl.cpp" line="1046"/>
         <source>&amp;No</source>
         <translation>&amp;Non</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1049"/>
+        <location filename="editor/pagesmpl.cpp" line="1047"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
         <translation>Oui et &amp;créer un autre échantillon</translation>
@@ -3613,8 +3613,9 @@ pour afficher les étendues de ses divisions</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="core/input/grandorgue/grandorguerank.cpp" line="138"/>
-        <location filename="core/input/grandorgue/grandorguestop.cpp" line="116"/>
+        <location filename="core/input/grandorgue/grandorguerank.cpp" line="142"/>
+        <location filename="core/input/grandorgue/grandorguestop.cpp" line="141"/>
+        <location filename="core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
         <location filename="core/output/outputfactory.cpp" line="104"/>
         <source>untitled</source>
         <translation>sans titre</translation>
@@ -4841,12 +4842,12 @@ de télécharger le contenu</translation>
 <context>
     <name>TableWidgetInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="125"/>
+        <location filename="editor/pageinst.cpp" line="121"/>
         <source>Loop</source>
         <translation>Boucle</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="136"/>
+        <location filename="editor/pageinst.cpp" line="132"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation>Les valeurs sur cette ligne sont exprimées en dB réels.
@@ -5623,48 +5624,48 @@ D&apos;autres éditeurs de soundfonts pourraient utiliser d&apos;autres unités.
         <translation>&amp;Fermer</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="74"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="75"/>
         <source>Sample</source>
         <translation>Échantillon</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="75"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="76"/>
         <source>Peak</source>
         <translation>Pic</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="76"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="77"/>
         <source>Intensity</source>
         <translation>Intensité</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="77"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="78"/>
         <source>Frequency</source>
         <translation>Fréquence</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="78"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="79"/>
         <source>Key</source>
         <translation>Note</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="79"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="80"/>
         <source>Correction</source>
         <translation>Correction</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="142"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="143"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="166"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="167"/>
         <source>Export peak frequency</source>
         <translation>Exporter les pics de fréquence</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="167"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="168"/>
         <source>Csv file</source>
         <translation>Fichier .csv</translation>
     </message>
@@ -6041,35 +6042,34 @@ D&apos;autres éditeurs de soundfonts pourraient utiliser d&apos;autres unités.
 <context>
     <name>ToolMonitor_gui</name>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="97"/>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="80"/>
         <source>Display options</source>
         <translation>Visualisation</translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="140"/>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="121"/>
         <source>Log scale</source>
         <translation>échelle log</translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="162"/>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="142"/>
         <source>Legend</source>
         <translation>Légende</translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="221"/>
-        <source>Default parameters</source>
-        <translation>Paramètres par défaut</translation>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="174"/>
+        <source>Defined value in the global division</source>
+        <translation>Valeur définie dans la division globale</translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="250"/>
-        <source>Average value per key</source>
-        <oldsource>Mean value per key</oldsource>
-        <translation>Valeur moyenne par note</translation>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="189"/>
+        <source>Default value for the selected parameter</source>
+        <translation>Valeur par défaut pour le paramètre sélectionné</translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
-        <source>Defined parameters</source>
-        <translation>Paramètres définis</translation>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="201"/>
+        <source>Defined value in a division</source>
+        <translation>Valeur définie dans une division</translation>
     </message>
 </context>
 <context>

@@ -757,7 +757,7 @@
         <location filename="context/interface/configpanel.ui" line="186"/>
         <source>Keyboard</source>
         <oldsource>Virtual keyboard</oldsource>
-        <translation type="unfinished">가상 건반</translation>
+        <translation>가상 건반</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="219"/>
@@ -2373,15 +2373,54 @@ repository</source>
 <context>
     <name>GraphVisualizer</name>
     <message>
-        <location filename="editor/tools/monitor/graphvisualizer.cpp" line="236"/>
+        <location filename="editor/tools/monitor/graphvisualizer.cpp" line="256"/>
         <source>Cannot display all the values.</source>
         <translation>모든 값을 표시할 수 없습니다.</translation>
     </message>
 </context>
 <context>
+    <name>GraphicsFourier</name>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="48"/>
+        <source>Export graph</source>
+        <translation>그래프 내보내기</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="50"/>
+        <source>Show peak frequencies</source>
+        <translation>피크 주파수 보이기</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="372"/>
+        <source>Frequency (Hz)</source>
+        <translation>주파수 (Hz)</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="377"/>
+        <source>Intensity</source>
+        <translation>강도</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="542"/>
+        <source>Hz</source>
+        <comment>unit for Herz</comment>
+        <translation>Hz</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="606"/>
+        <source>Export a graph</source>
+        <translation>그래프 내보내기</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="607"/>
+        <source>Png file</source>
+        <translation>PNG 파일</translation>
+    </message>
+</context>
+<context>
     <name>GraphicsViewEnvelop</name>
     <message>
-        <location filename="editor/graphics/graphicsviewenvelop.cpp" line="355"/>
+        <location filename="editor/graphics/graphicsviewenvelop.cpp" line="354"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>초</translation>
@@ -2390,61 +2429,22 @@ repository</source>
 <context>
     <name>GraphicsWave</name>
     <message>
-        <location filename="editor/graphics/graphicswave.cpp" line="177"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="185"/>
         <source>Multiple selection</source>
         <translation>다중 선택</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphicswave.cpp" line="196"/>
-        <location filename="editor/graphics/graphicswave.cpp" line="199"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="215"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="218"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>초</translation>
     </message>
 </context>
 <context>
-    <name>GraphiqueFourier</name>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="60"/>
-        <source>Frequency (Hz)</source>
-        <translation>주파수 (Hz)</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="74"/>
-        <source>Intensity</source>
-        <translation>강도</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="92"/>
-        <source>Export graph</source>
-        <translation>그래프 내보내기</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="94"/>
-        <source>Show peak frequencies</source>
-        <translation>피크 주파수 보이기</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="507"/>
-        <source>Hz</source>
-        <comment>unit for Herz</comment>
-        <translation>Hz</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="563"/>
-        <source>Export a graph</source>
-        <translation>그래프 내보내기</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="564"/>
-        <source>Png file</source>
-        <translation>PNG 파일</translation>
-    </message>
-</context>
-<context>
     <name>InputParserGrandOrgue</name>
     <message>
-        <location filename="core/input/grandorgue/inputparsergrandorgue.cpp" line="77"/>
+        <location filename="core/input/grandorgue/inputparsergrandorgue.cpp" line="82"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 파일을 열 수 없음</translation>
     </message>
@@ -3405,7 +3405,7 @@ to display its division ranges</source>
     <name>PageSmpl</name>
     <message>
         <location filename="editor/pagesmpl.ui" line="344"/>
-        <location filename="editor/pagesmpl.cpp" line="1031"/>
+        <location filename="editor/pagesmpl.cpp" line="1029"/>
         <source>Play</source>
         <translation>재생</translation>
     </message>
@@ -3435,37 +3435,37 @@ to display its division ranges</source>
         <translation>스테레오</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="427"/>
+        <location filename="editor/pagesmpl.ui" line="426"/>
         <source>Tuning</source>
         <translation>튜닝</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="457"/>
+        <location filename="editor/pagesmpl.ui" line="456"/>
         <source>Loop</source>
         <translation>루프</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="553"/>
+        <location filename="editor/pagesmpl.ui" line="552"/>
         <source>Use the full length of the sample as loop</source>
         <translation>샘플 전체 길이를 루프로 사용</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="595"/>
+        <location filename="editor/pagesmpl.ui" line="594"/>
         <source>Size</source>
         <translation>크기</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="602"/>
+        <location filename="editor/pagesmpl.ui" line="601"/>
         <source>Sample rate</source>
         <translation>샘플 레이트</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="609"/>
+        <location filename="editor/pagesmpl.ui" line="608"/>
         <source>Type</source>
         <translation>유형</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="616"/>
+        <location filename="editor/pagesmpl.ui" line="615"/>
         <source>Link</source>
         <translation>연결</translation>
     </message>
@@ -3475,96 +3475,96 @@ to display its division ranges</source>
         <translation>예측된 피치와 보정을 값으로 사용</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="646"/>
-        <location filename="editor/pagesmpl.cpp" line="477"/>
-        <location filename="editor/pagesmpl.cpp" line="996"/>
+        <location filename="editor/pagesmpl.ui" line="644"/>
+        <location filename="editor/pagesmpl.cpp" line="475"/>
+        <location filename="editor/pagesmpl.cpp" line="994"/>
         <source>Information</source>
         <translation>정보</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="687"/>
+        <location filename="editor/pagesmpl.ui" line="684"/>
         <source>Equalizer (±15 dB)</source>
         <translation>이퀄라이저 (±15 dB)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="160"/>
-        <location filename="editor/pagesmpl.cpp" line="165"/>
+        <location filename="editor/pagesmpl.cpp" line="158"/>
+        <location filename="editor/pagesmpl.cpp" line="163"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>초</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="164"/>
-        <location filename="editor/pagesmpl.cpp" line="167"/>
+        <location filename="editor/pagesmpl.cpp" line="162"/>
+        <location filename="editor/pagesmpl.cpp" line="165"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(최소)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="245"/>
-        <location filename="editor/pagesmpl.cpp" line="607"/>
+        <location filename="editor/pagesmpl.cpp" line="243"/>
+        <location filename="editor/pagesmpl.cpp" line="605"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>모노</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="255"/>
-        <location filename="editor/pagesmpl.cpp" line="746"/>
+        <location filename="editor/pagesmpl.cpp" line="253"/>
+        <location filename="editor/pagesmpl.cpp" line="744"/>
         <source>right</source>
         <translation>오른쪽</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="256"/>
-        <location filename="editor/pagesmpl.cpp" line="747"/>
+        <location filename="editor/pagesmpl.cpp" line="254"/>
+        <location filename="editor/pagesmpl.cpp" line="745"/>
         <source>left</source>
         <translation>왼쪽</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="257"/>
-        <location filename="editor/pagesmpl.cpp" line="748"/>
+        <location filename="editor/pagesmpl.cpp" line="255"/>
+        <location filename="editor/pagesmpl.cpp" line="746"/>
         <source>link</source>
         <translation>연결</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="478"/>
-        <location filename="editor/pagesmpl.cpp" line="997"/>
+        <location filename="editor/pagesmpl.cpp" line="476"/>
+        <location filename="editor/pagesmpl.cpp" line="995"/>
         <source>Change successfully applied to the different samples</source>
         <translation>변경이 다른 샘플들에 적용됨</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="745"/>
-        <location filename="editor/pagesmpl.cpp" line="770"/>
+        <location filename="editor/pagesmpl.cpp" line="743"/>
+        <location filename="editor/pagesmpl.cpp" line="768"/>
         <source>mono</source>
         <translation>모노</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1025"/>
+        <location filename="editor/pagesmpl.cpp" line="1023"/>
         <source>Stop</source>
         <translation>중지</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1044"/>
+        <location filename="editor/pagesmpl.cpp" line="1042"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1045"/>
+        <location filename="editor/pagesmpl.cpp" line="1043"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
         <translation>&lt;b&gt;%1&lt;/b&gt;의 샘플을 &lt;b&gt;%2&lt;/b&gt;로 자르겠습니까? </translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1047"/>
+        <location filename="editor/pagesmpl.cpp" line="1045"/>
         <source>&amp;Yes</source>
         <translation>네(&amp;Y)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1048"/>
+        <location filename="editor/pagesmpl.cpp" line="1046"/>
         <source>&amp;No</source>
         <translation>아니오(&amp;N)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1049"/>
+        <location filename="editor/pagesmpl.cpp" line="1047"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
         <translation type="unfinished"></translation>
@@ -3591,8 +3591,9 @@ to display its division ranges</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="core/input/grandorgue/grandorguerank.cpp" line="138"/>
-        <location filename="core/input/grandorgue/grandorguestop.cpp" line="116"/>
+        <location filename="core/input/grandorgue/grandorguerank.cpp" line="142"/>
+        <location filename="core/input/grandorgue/grandorguestop.cpp" line="141"/>
+        <location filename="core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
         <location filename="core/output/outputfactory.cpp" line="104"/>
         <source>untitled</source>
         <translation>제목없음</translation>
@@ -4816,12 +4817,12 @@ download content</source>
 <context>
     <name>TableWidgetInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="125"/>
+        <location filename="editor/pageinst.cpp" line="121"/>
         <source>Loop</source>
         <translation>루프</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="136"/>
+        <location filename="editor/pageinst.cpp" line="132"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation>이 행의 값은 실제 dB로 표시됩니다.
@@ -5596,48 +5597,48 @@ Other soundfont editors might display other units.</source>
         <translation>닫기(&amp;C)</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="74"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="75"/>
         <source>Sample</source>
         <translation>샘플</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="75"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="76"/>
         <source>Peak</source>
         <translation>피크</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="76"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="77"/>
         <source>Intensity</source>
         <translation>강도</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="77"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="78"/>
         <source>Frequency</source>
         <translation>주파수</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="78"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="79"/>
         <source>Key</source>
         <translation>키</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="79"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="80"/>
         <source>Correction</source>
         <translation>보정</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="142"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="143"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Hz</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="166"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="167"/>
         <source>Export peak frequency</source>
         <translation>피크 주파수 내보내기</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="167"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="168"/>
         <source>Csv file</source>
         <translation>CSV 파일</translation>
     </message>
@@ -6013,35 +6014,34 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolMonitor_gui</name>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="97"/>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="80"/>
         <source>Display options</source>
         <translation>옵션 표시</translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="140"/>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="121"/>
         <source>Log scale</source>
         <translation>로그 스케일</translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="162"/>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="142"/>
         <source>Legend</source>
         <translation>레전드</translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="221"/>
-        <source>Default parameters</source>
-        <translation>기본 매개변수</translation>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="174"/>
+        <source>Defined value in the global division</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="250"/>
-        <source>Average value per key</source>
-        <oldsource>Mean value per key</oldsource>
-        <translation>키당 평균 값</translation>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="189"/>
+        <source>Default value for the selected parameter</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
-        <source>Defined parameters</source>
-        <translation>매개변수 정의</translation>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="201"/>
+        <source>Defined value in a division</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6512,7 +6512,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="233"/>
         <source>Close</source>
-        <translation type="unfinished">닫기</translation>
+        <translation>닫기</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="128"/>

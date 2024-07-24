@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>AbstractInputParser</name>
     <message>
@@ -403,22 +403,22 @@
     <message>
         <location filename="repository/browser/browsersortmenu.cpp" line="52"/>
         <source>Date</source>
-        <translation type="unfinished">Дата</translation>
+        <translation>Дата</translation>
     </message>
     <message>
         <location filename="repository/browser/browsersortmenu.cpp" line="56"/>
         <source>Downloads</source>
-        <translation type="unfinished">Загрузки</translation>
+        <translation>Загрузки</translation>
     </message>
     <message>
         <location filename="repository/browser/browsersortmenu.cpp" line="58"/>
         <source>Rating score</source>
-        <translation type="unfinished">Рейтинг</translation>
+        <translation>Рейтинг</translation>
     </message>
     <message>
         <location filename="repository/browser/browsersortmenu.cpp" line="60"/>
         <source>Title (A→Z)</source>
-        <translation type="unfinished">Заголовок (A→Z)</translation>
+        <translation>Заголовок (A→Z)</translation>
     </message>
 </context>
 <context>
@@ -757,7 +757,7 @@
         <location filename="context/interface/configpanel.ui" line="186"/>
         <source>Keyboard</source>
         <oldsource>Virtual keyboard</oldsource>
-        <translation type="unfinished">Виртуальная клавиатура</translation>
+        <translation>Клавиатура</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="219"/>
@@ -791,7 +791,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="44"/>
         <source>Default</source>
-        <translation type="unfinished">По умолчанию</translation>
+        <translation>По умолчанию</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="122"/>
@@ -1224,7 +1224,7 @@ Premium!</source>
         <location filename="context/interface/configsectionsound.cpp" line="129"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
-        <translation type="unfinished">дБ</translation>
+        <translation>дБ</translation>
     </message>
 </context>
 <context>
@@ -1248,7 +1248,7 @@ Premium!</source>
         <location filename="context/interface/configtoc.ui" line="98"/>
         <source>Keyboard</source>
         <oldsource>Virtual keyboard</oldsource>
-        <translation type="unfinished">Вирт. клавиатура</translation>
+        <translation>Клавиатура</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="111"/>
@@ -1733,7 +1733,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_list.ui" line="73"/>
         <source>Search...</source>
-        <translation type="unfinished">Искать…</translation>
+        <translation>Искать…</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_list.cpp" line="53"/>
@@ -2092,7 +2092,7 @@ repository</source>
     <message>
         <location filename="editor/editor.cpp" line="553"/>
         <source>Warning</source>
-        <translation type="unfinished">Предупреждение</translation>
+        <translation>Предупреждение</translation>
     </message>
 </context>
 <context>
@@ -2279,32 +2279,32 @@ repository</source>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="66"/>
         <source>Sample not linked to an instrument yet.</source>
-        <translation type="unfinished">Семпл ещё не связан с инструментом.</translation>
+        <translation>Семпл ещё не связан с инструментом.</translation>
     </message>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="68"/>
         <source>Sample linked to instrument:</source>
-        <translation type="unfinished">Семпл связан с инструментом:</translation>
+        <translation>Семпл связан с инструментом:</translation>
     </message>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="70"/>
         <source>Sample linked to instruments:</source>
-        <translation type="unfinished">Семпл связан с инструментами:</translation>
+        <translation>Семпл связан с инструментами:</translation>
     </message>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="75"/>
         <source>Instrument not linked to a preset yet.</source>
-        <translation type="unfinished">Инструмент ещё не связан с пресетом.</translation>
+        <translation>Инструмент ещё не связан с пресетом.</translation>
     </message>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="77"/>
         <source>Instrument linked to preset:</source>
-        <translation type="unfinished">Инструмент связан с пресетом:</translation>
+        <translation>Инструмент связан с пресетом:</translation>
     </message>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="79"/>
         <source>Instrument linked to presets:</source>
-        <translation type="unfinished">Инструмент связан с пресетами:</translation>
+        <translation>Инструмент связан с пресетами:</translation>
     </message>
 </context>
 <context>
@@ -2312,7 +2312,7 @@ repository</source>
     <message numerus="yes">
         <location filename="editor/footers/footeroverview.cpp" line="68"/>
         <source>%n element(s)</source>
-        <translation type="unfinished">
+        <translation>
             <numerusform>%n элемент</numerusform>
             <numerusform>%n элемента</numerusform>
             <numerusform>%n элементов</numerusform>
@@ -2324,17 +2324,17 @@ repository</source>
     <message>
         <location filename="editor/footers/footerprst.ui" line="32"/>
         <source>Bank</source>
-        <translation type="unfinished">Банк</translation>
+        <translation>Банк</translation>
     </message>
     <message>
         <location filename="editor/footers/footerprst.ui" line="64"/>
         <source>Preset</source>
-        <translation type="unfinished">Пресет</translation>
+        <translation>Пресет</translation>
     </message>
     <message>
         <location filename="editor/footers/footerprst.ui" line="103"/>
         <source>(percussion)</source>
-        <translation type="unfinished">(перкуссия)</translation>
+        <translation>(перкуссия)</translation>
     </message>
 </context>
 <context>
@@ -2343,19 +2343,19 @@ repository</source>
         <location filename="editor/footers/footersf2.cpp" line="65"/>
         <source>GB</source>
         <comment>giga byte</comment>
-        <translation type="unfinished">ГБ</translation>
+        <translation>ГБ</translation>
     </message>
     <message>
         <location filename="editor/footers/footersf2.cpp" line="70"/>
         <source>MB</source>
         <comment>mega byte</comment>
-        <translation type="unfinished">МБ</translation>
+        <translation>МБ</translation>
     </message>
     <message>
         <location filename="editor/footers/footersf2.cpp" line="75"/>
         <source>kB</source>
         <comment>kilo byte</comment>
-        <translation type="unfinished">КБ</translation>
+        <translation>КБ</translation>
     </message>
 </context>
 <context>
@@ -2364,7 +2364,7 @@ repository</source>
         <location filename="editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="63"/>
         <source>kHz</source>
         <comment>unit for kilo Herz</comment>
-        <translation type="unfinished"></translation>
+        <translation>КГц</translation>
     </message>
 </context>
 <context>
@@ -2385,79 +2385,78 @@ repository</source>
 <context>
     <name>GraphVisualizer</name>
     <message>
-        <location filename="editor/tools/monitor/graphvisualizer.cpp" line="236"/>
+        <location filename="editor/tools/monitor/graphvisualizer.cpp" line="256"/>
         <source>Cannot display all the values.</source>
         <translation>Не удалось показать все значения.</translation>
     </message>
 </context>
 <context>
-    <name>GraphicsViewEnvelop</name>
+    <name>GraphicsFourier</name>
     <message>
-        <location filename="editor/graphics/graphicsviewenvelop.cpp" line="355"/>
-        <source>s</source>
-        <comment>unit for seconds</comment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>GraphicsWave</name>
-    <message>
-        <location filename="editor/graphics/graphicswave.cpp" line="177"/>
-        <source>Multiple selection</source>
-        <translation>Множественный выбор</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphicswave.cpp" line="196"/>
-        <location filename="editor/graphics/graphicswave.cpp" line="199"/>
-        <source>s</source>
-        <comment>unit for seconds</comment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>GraphiqueFourier</name>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="60"/>
-        <source>Frequency (Hz)</source>
-        <translation>Частота (Гц)</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="74"/>
-        <source>Intensity</source>
-        <translatorcomment>или сила</translatorcomment>
-        <translation>интенсивность</translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="92"/>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="48"/>
         <source>Export graph</source>
         <translation>Экспортировать график</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="94"/>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="50"/>
         <source>Show peak frequencies</source>
-        <translation type="unfinished">Показать пиковые частоты</translation>
+        <translation>Показать пиковые частоты</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="507"/>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="372"/>
+        <source>Frequency (Hz)</source>
+        <translation>Частота (Гц)</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="377"/>
+        <source>Intensity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="542"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Гц</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="563"/>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="606"/>
         <source>Export a graph</source>
         <translation>Экспорт графика</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphiquefourier.cpp" line="564"/>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="607"/>
         <source>Png file</source>
         <translation>Изображение PNG</translation>
     </message>
 </context>
 <context>
+    <name>GraphicsViewEnvelop</name>
+    <message>
+        <location filename="editor/graphics/graphicsviewenvelop.cpp" line="354"/>
+        <source>s</source>
+        <comment>unit for seconds</comment>
+        <translation>сек</translation>
+    </message>
+</context>
+<context>
+    <name>GraphicsWave</name>
+    <message>
+        <location filename="editor/graphics/graphicswave.cpp" line="185"/>
+        <source>Multiple selection</source>
+        <translation>Множественный выбор</translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicswave.cpp" line="215"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="218"/>
+        <source>s</source>
+        <comment>unit for seconds</comment>
+        <translation>сек</translation>
+    </message>
+</context>
+<context>
     <name>InputParserGrandOrgue</name>
     <message>
-        <location filename="core/input/grandorgue/inputparsergrandorgue.cpp" line="77"/>
+        <location filename="core/input/grandorgue/inputparsergrandorgue.cpp" line="82"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>Не удалось открыть файл «%1»</translation>
     </message>
@@ -2742,7 +2741,7 @@ default mod.</source>
         <location filename="editor/modulator/modulatorcell.cpp" line="392"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
-        <translation type="unfinished">дБ</translation>
+        <translation>дБ</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="400"/>
@@ -2944,12 +2943,12 @@ default mod.</source>
     <message>
         <location filename="editor/pageenvelope.ui" line="128"/>
         <source>Decay</source>
-        <translation type="unfinished">Спад</translation>
+        <translation>Спад</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="138"/>
         <source>Release</source>
-        <translation type="unfinished">Затухание</translation>
+        <translation>Затухание</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="162"/>
@@ -2959,70 +2958,70 @@ default mod.</source>
         <location filename="editor/pageenvelope.ui" line="401"/>
         <source> s</source>
         <comment>unit for second</comment>
-        <translation type="unfinished"> сек</translation>
+        <translation> сек</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="181"/>
         <source>Key → Decay</source>
-        <translation type="unfinished">Клавиша → Спад</translation>
+        <translation>Клавиша → Спад</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="263"/>
         <source>Hold</source>
-        <translation type="unfinished">Удержание</translation>
+        <translation>Удержание</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="279"/>
         <source>Delay</source>
-        <translation type="unfinished">Задержка</translation>
+        <translation>Задержка</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="329"/>
         <source>Attack</source>
-        <translation type="unfinished">Атака</translation>
+        <translation>Атака</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="372"/>
         <source> dB</source>
         <comment>unit for decibels</comment>
-        <translation type="unfinished"> дБ</translation>
+        <translation> дБ</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="391"/>
         <source>Key → Hold</source>
-        <translation type="unfinished">Клавиша → Удерж…</translation>
+        <translation>Клавиша → Удерж</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="420"/>
         <source>Sustain</source>
-        <translation type="unfinished">Поддержка</translation>
+        <translation>Поддержка</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="458"/>
         <source>Volume envelope</source>
-        <translation type="unfinished">Огибающая громкости</translation>
+        <translation>Огибающая громкости</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="477"/>
         <source>Modulation envelope</source>
-        <translation type="unfinished">Огибающая модуляции</translation>
+        <translation>Огибающая модуляции</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.cpp" line="93"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
-        <translation type="unfinished">дБ</translation>
+        <translation>дБ</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.cpp" line="106"/>
         <source>%</source>
         <comment>percentage</comment>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.h" line="46"/>
         <source>Envelopes</source>
-        <translation type="unfinished">Огибающие</translation>
+        <translation>Огибающие</translation>
     </message>
 </context>
 <context>
@@ -3285,7 +3284,7 @@ rate</source>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="275"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
-        <translation type="unfinished">Гц</translation>
+        <translation>Гц</translation>
     </message>
 </context>
 <context>
@@ -3299,7 +3298,7 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagerange.h" line="48"/>
         <source>Ranges</source>
-        <translation type="unfinished">Диапазоны</translation>
+        <translation>Диапазоны</translation>
     </message>
 </context>
 <context>
@@ -3446,27 +3445,27 @@ to display its division ranges</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="344"/>
-        <location filename="editor/pagesmpl.cpp" line="1031"/>
+        <location filename="editor/pagesmpl.cpp" line="1029"/>
         <source>Play</source>
         <translation>Воспроизведение</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="427"/>
+        <location filename="editor/pagesmpl.ui" line="426"/>
         <source>Tuning</source>
         <translation>Подстройка</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="609"/>
+        <location filename="editor/pagesmpl.ui" line="608"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="616"/>
+        <location filename="editor/pagesmpl.ui" line="615"/>
         <source>Link</source>
         <translation>Ссылка</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="457"/>
+        <location filename="editor/pagesmpl.ui" line="456"/>
         <source>Loop</source>
         <translation>Петля</translation>
     </message>
@@ -3478,115 +3477,115 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="206"/>
         <source>Correction</source>
-        <translation type="unfinished">Коррекция</translation>
+        <translation>Коррекция</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="553"/>
+        <location filename="editor/pagesmpl.ui" line="552"/>
         <source>Use the full length of the sample as loop</source>
         <translation>Петля на полную длину семпла</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="595"/>
+        <location filename="editor/pagesmpl.ui" line="594"/>
         <source>Size</source>
         <translation>Размер</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="602"/>
+        <location filename="editor/pagesmpl.ui" line="601"/>
         <source>Sample rate</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/Частота_дискретизации
 Используется сокращение для того, чтобы интерфейс выглядел не таким растянутым.</translatorcomment>
         <translation>Частота дискр…</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="646"/>
-        <location filename="editor/pagesmpl.cpp" line="477"/>
-        <location filename="editor/pagesmpl.cpp" line="996"/>
+        <location filename="editor/pagesmpl.ui" line="644"/>
+        <location filename="editor/pagesmpl.cpp" line="475"/>
+        <location filename="editor/pagesmpl.cpp" line="994"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="687"/>
+        <location filename="editor/pagesmpl.ui" line="684"/>
         <source>Equalizer (±15 dB)</source>
         <translation>Эквалайзер (±15 дБ)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="160"/>
-        <location filename="editor/pagesmpl.cpp" line="165"/>
+        <location filename="editor/pagesmpl.cpp" line="158"/>
+        <location filename="editor/pagesmpl.cpp" line="163"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>сек</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="164"/>
-        <location filename="editor/pagesmpl.cpp" line="167"/>
+        <location filename="editor/pagesmpl.cpp" line="162"/>
+        <location filename="editor/pagesmpl.cpp" line="165"/>
         <source>(min)</source>
         <comment>minimum</comment>
         <translation>(мин.)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="245"/>
-        <location filename="editor/pagesmpl.cpp" line="607"/>
+        <location filename="editor/pagesmpl.cpp" line="243"/>
+        <location filename="editor/pagesmpl.cpp" line="605"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
         <translation>моно</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="255"/>
-        <location filename="editor/pagesmpl.cpp" line="746"/>
+        <location filename="editor/pagesmpl.cpp" line="253"/>
+        <location filename="editor/pagesmpl.cpp" line="744"/>
         <source>right</source>
         <translation>справа</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="256"/>
-        <location filename="editor/pagesmpl.cpp" line="747"/>
+        <location filename="editor/pagesmpl.cpp" line="254"/>
+        <location filename="editor/pagesmpl.cpp" line="745"/>
         <source>left</source>
         <translation>слева</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="257"/>
-        <location filename="editor/pagesmpl.cpp" line="748"/>
+        <location filename="editor/pagesmpl.cpp" line="255"/>
+        <location filename="editor/pagesmpl.cpp" line="746"/>
         <source>link</source>
         <translation>ссылка</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="478"/>
-        <location filename="editor/pagesmpl.cpp" line="997"/>
+        <location filename="editor/pagesmpl.cpp" line="476"/>
+        <location filename="editor/pagesmpl.cpp" line="995"/>
         <source>Change successfully applied to the different samples</source>
         <translation>Изменения успешно применены к различным семплам</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="745"/>
-        <location filename="editor/pagesmpl.cpp" line="770"/>
+        <location filename="editor/pagesmpl.cpp" line="743"/>
+        <location filename="editor/pagesmpl.cpp" line="768"/>
         <source>mono</source>
         <translation>моно</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1025"/>
+        <location filename="editor/pagesmpl.cpp" line="1023"/>
         <source>Stop</source>
         <translation>Стоп</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1044"/>
+        <location filename="editor/pagesmpl.cpp" line="1042"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1045"/>
+        <location filename="editor/pagesmpl.cpp" line="1043"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <translation>Вырезать семпл с &lt;b&gt;%1&lt;/b&gt; по &lt;b&gt;%2&lt;/b&gt;?</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1047"/>
+        <location filename="editor/pagesmpl.cpp" line="1045"/>
         <source>&amp;Yes</source>
         <translation>&amp;Да</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1048"/>
+        <location filename="editor/pagesmpl.cpp" line="1046"/>
         <source>&amp;No</source>
         <translation>&amp;Нет</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.cpp" line="1049"/>
+        <location filename="editor/pagesmpl.cpp" line="1047"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
         <translation type="unfinished"></translation>
@@ -3759,8 +3758,9 @@ to display its division ranges</source>
         <translation>Пресеты</translation>
     </message>
     <message>
-        <location filename="core/input/grandorgue/grandorguerank.cpp" line="138"/>
-        <location filename="core/input/grandorgue/grandorguestop.cpp" line="116"/>
+        <location filename="core/input/grandorgue/grandorguerank.cpp" line="142"/>
+        <location filename="core/input/grandorgue/grandorguestop.cpp" line="141"/>
+        <location filename="core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
         <location filename="core/output/outputfactory.cpp" line="104"/>
         <source>untitled</source>
         <translation>без заголовка</translation>
@@ -4926,12 +4926,12 @@ download content</source>
 <context>
     <name>TableWidgetInst</name>
     <message>
-        <location filename="editor/pageinst.cpp" line="125"/>
+        <location filename="editor/pageinst.cpp" line="121"/>
         <source>Loop</source>
         <translation type="unfinished">Петля</translation>
     </message>
     <message>
-        <location filename="editor/pageinst.cpp" line="136"/>
+        <location filename="editor/pageinst.cpp" line="132"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
         <translation>Значения в этой строке выражены в настоящих дБ.
@@ -5710,48 +5710,48 @@ Other soundfont editors might display other units.</source>
         <translation>Закр&amp;ыть</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="74"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="75"/>
         <source>Sample</source>
         <translation>Семпл</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="75"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="76"/>
         <source>Peak</source>
         <translation>Пик</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="76"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="77"/>
         <source>Intensity</source>
         <translation>Интенсивность</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="77"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="78"/>
         <source>Frequency</source>
         <translation>Частота</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="78"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="79"/>
         <source>Key</source>
         <translation>Клавиша</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="79"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="80"/>
         <source>Correction</source>
         <translation>Коррекция</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="142"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="143"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation type="unfinished">Гц</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="166"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="167"/>
         <source>Export peak frequency</source>
         <translation>Экспортировать пиковые частоты</translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="167"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="168"/>
         <source>Csv file</source>
         <translation>Файл CSV</translation>
     </message>
@@ -6134,34 +6134,34 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
 <context>
     <name>ToolMonitor_gui</name>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="97"/>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="80"/>
         <source>Display options</source>
         <translation>Что показывать</translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="140"/>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="121"/>
         <source>Log scale</source>
         <translation>Логарифмическая шкала</translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="162"/>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="142"/>
         <source>Legend</source>
         <translation>Условные обозначения</translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="221"/>
-        <source>Default parameters</source>
-        <translation>Параметры по умолчанию</translation>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="174"/>
+        <source>Defined value in the global division</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="250"/>
-        <source>Average value per key</source>
-        <translation>Среднее значение каждой клавиши</translation>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="189"/>
+        <source>Default value for the selected parameter</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
-        <source>Defined parameters</source>
-        <translation>Заданные параметры</translation>
+        <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="201"/>
+        <source>Defined value in a division</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6634,7 +6634,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="233"/>
         <source>Close</source>
-        <translation type="unfinished">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="128"/>
@@ -6657,7 +6657,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tree/treeitemdelegate.cpp" line="237"/>
         <source>mute</source>
-        <translation type="unfinished">выключить</translation>
+        <translation>выключить</translation>
     </message>
 </context>
 <context>
@@ -6769,7 +6769,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="repository/soundfont/uploadingdialog.ui" line="14"/>
         <source>Information</source>
-        <translation type="unfinished">Информация</translation>
+        <translation>Информация</translation>
     </message>
     <message>
         <location filename="repository/soundfont/uploadingdialog.ui" line="54"/>
@@ -6779,7 +6779,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="repository/soundfont/uploadingdialog.cpp" line="76"/>
         <source>Canceling...</source>
-        <translation type="unfinished">Отмена…</translation>
+        <translation>Отмена…</translation>
     </message>
 </context>
 <context>
