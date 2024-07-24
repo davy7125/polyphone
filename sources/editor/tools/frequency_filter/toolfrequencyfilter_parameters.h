@@ -37,11 +37,11 @@ public:
     /// Save the configuration in the ini file
     void saveConfiguration() override;
 
-    QVector<double> getCurve() { return _curve; }
-    void setCurve(QVector<double> curve) { _curve = curve; }
+    QVector<float> getCurve() { return _curve; }
+    void setCurve(QVector<float> curve) { _curve = curve; }
 
 private:
-    QVector<double> _curve;
+    QVector<float> _curve;
 };
 
 #endif // TOOLFREQUENCYFILTER_PARAMETERS_H

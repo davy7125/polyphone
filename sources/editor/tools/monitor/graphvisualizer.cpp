@@ -53,8 +53,7 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) : QWidget(parent),
     // Pen
     _currentPointPen = QPen(_textColor, 2, Qt::SolidLine, Qt::RoundCap);
 
-    // Filtre sur les événements
-    this->installEventFilter(this);
+    // Catch all mouse move events
     this->setMouseTracking(true);
 }
 
@@ -143,13 +142,14 @@ void GraphVisualizer::setScale()
     }
     _segmentPainter->setLogarithmicScale(_isLog);
     _segmentPainter->setLimits(_xMin, _xMax, _yMin, _yMax);
-    this->repaint();
+    this->update();
 }
 
-void GraphVisualizer::mouseMoved(QPoint pos)
+void GraphVisualizer::mouseMoveEvent(QMouseEvent *event)
 {
-    int posX = static_cast<float>(pos.x());
-    int posY = static_cast<float>(pos.y());
+    QPoint pos = event->pos();
+    float posX = static_cast<float>(pos.x());
+    float posY = static_cast<float>(pos.y());
     QRect rect = QRect(QPoint(0, 0), this->size());
 
     // Find the closest point
@@ -172,22 +172,24 @@ void GraphVisualizer::mouseMoved(QPoint pos)
         }
     }
 
-    this->repaint();
+    this->update();
 }
 
-void GraphVisualizer::mouseLeft()
+void GraphVisualizer::leaveEvent(QEvent *event)
 {
+    Q_UNUSED(event)
     _currentKey = -1;
-    this->repaint();
+    this->update();
 }
 
 void GraphVisualizer::paintEvent(QPaintEvent *event)
 {
+    Q_UNUSED(event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
     // Background
-    QRect rect = event->rect();
+    QRect rect = this->rect();
     painter.fillRect(rect, _backgroundColor);
 
     // Octaves
@@ -223,7 +225,7 @@ void GraphVisualizer::paintEvent(QPaintEvent *event)
         painter.drawLine(x, y - 5, x, y + 5);
 
         // Text to display with its size
-        QString label = ContextManager::keyName()->getKeyName(_currentKey) + ":";
+        QString label = ContextManager::keyName()->getKeyName(_currentKey) + " - ";
         if (_currentValue == 0)
             label += QLocale::system().toString(_currentValue, 'f', 0);
         else if (_currentValue < 1)

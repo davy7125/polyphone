@@ -37,7 +37,7 @@ void ToolFrequencyFilter::process(SoundfontManager * sm, EltID id, AbstractToolP
 {
     // Get the curve used to cut frequencies
     ToolFrequencyFilter_parameters * params = (ToolFrequencyFilter_parameters *)parameters;
-    QVector<double> dValues = params->getCurve();
+    QVector<float> dValues = params->getCurve();
 
     // Get data and sample rate of the sample
     QVector<float> vData = sm->getData(id);

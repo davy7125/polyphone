@@ -9,7 +9,6 @@
 # Uncomment a line if your distribution doesn't come with some of the following libraries
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
-DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # Uncomment this line to use wolfssl instead of openssl (for a license issue)
 #DEFINES += USE_WOLFSSL
@@ -143,16 +142,6 @@ contains(DEFINES, USE_LOCAL_STK) {
 } else {
     LIBS += -lstk
 }
-
-# Location of QCustomplot
-contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
-    INCLUDEPATH += lib/_option_qcustomplot
-    HEADERS += lib/_option_qcustomplot/qcustomplot.h
-    SOURCES += lib/_option_qcustomplot/qcustomplot.cpp
-} else {
-    LIBS += -lqcustomplot
-}
-
 
 INCLUDEPATH += lib \
     mainwindow \

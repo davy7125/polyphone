@@ -43,25 +43,9 @@ public:
     void setData(float defaultValue, bool globalValueSet, QList<Segment*> segments);
     void setIsLog(bool isLog);
 
-    bool eventFilter(QObject* o, QEvent* e) override
-    {
-        if ((e->type() == QEvent::MouseMove ||
-             e->type() == QEvent::MouseButtonPress ||
-             e->type() == QEvent::MouseButtonRelease ||
-             e->type() == QEvent::Leave)
-                && o == this)
-        {
-            QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(e);
-            if (mouseEvent->type() == QEvent::MouseMove)
-                this->mouseMoved(mouseEvent->pos());
-            else if (mouseEvent->type() == QEvent::Leave)
-                this->mouseLeft();
-            return true;
-        }
-        return false;
-    }
-
 protected:
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void leaveEvent(QEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
 
 private:

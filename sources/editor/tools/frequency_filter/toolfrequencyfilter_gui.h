@@ -26,7 +26,6 @@
 #define TOOLFREQUENCYFILTER_GUI_H
 
 #include "abstracttoolgui.h"
-#include "qcustomplot.h"
 
 namespace Ui {
 class ToolFrequencyFilter_gui;

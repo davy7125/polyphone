@@ -123,7 +123,7 @@ void GraphicsWave::displayMultipleSelection(bool isOn)
     _multipleSelection = isOn;
     if (isOn)
         _qScrollX->setRange(0, 0);
-    repaint();
+    update();
 }
 
 void GraphicsWave::setPosX(int posX)
@@ -135,7 +135,7 @@ void GraphicsWave::setPosX(int posX)
             _posX = static_cast<double>(posX) / this->_qScrollX->maximum();
         else
             _posX = 0.5;
-        this->repaint();
+        this->update();
         _bFromExt = false;
     }
 }
@@ -147,7 +147,7 @@ void GraphicsWave::setStartLoop(int pos, bool repaint)
 
     _startLoop = static_cast<quint32>(pos);
     if (repaint)
-        this->repaint();
+        this->update();
 }
 
 void GraphicsWave::setEndLoop(int pos, bool repaint)
@@ -157,13 +157,13 @@ void GraphicsWave::setEndLoop(int pos, bool repaint)
 
     _endLoop = static_cast<quint32>(pos);
     if (repaint)
-        this->repaint();
+        this->update();
 }
 
 void GraphicsWave::setCurrentSample(quint32 pos)
 {
     _currentPosition = pos;
-    repaint();
+    update();
 }
 
 void GraphicsWave::paintEvent(QPaintEvent *event)
@@ -173,7 +173,8 @@ void GraphicsWave::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::Antialiasing);
 
     // Background color
-    painter.fillRect(this->rect(), _backgroundColor);
+    QRect rect = this->rect();
+    painter.fillRect(rect, _backgroundColor);
 
     if (_multipleSelection)
     {
@@ -204,7 +205,7 @@ void GraphicsWave::paintEvent(QPaintEvent *event)
     quint32 end = offsetX + etendueX < 0 ? 0 : static_cast<quint32>(offsetX + etendueX);
     if (start >= end)
         return;
-    _wavePainter->paint(&painter, event->rect(), start, end, static_cast<float>(_zoomY));
+    _wavePainter->paint(&painter, rect, start, end, static_cast<float>(_zoomY));
 
     // Left and right limits
     painter.setPen(_textColor);
@@ -391,7 +392,7 @@ void GraphicsWave::mouseReleaseEvent(QMouseEvent *event)
 
         _dragFlag = false;
         _cutFlag = false;
-        this->repaint();
+        this->update();
     }
     else if (event->button() == Qt::RightButton)
     {
@@ -420,7 +421,7 @@ void GraphicsWave::mouseReleaseEvent(QMouseEvent *event)
         }
 
         _zoomFlag = false;
-        this->repaint();
+        this->update();
     }
 }
 
@@ -462,7 +463,7 @@ void GraphicsWave::mouseMoveEvent(QMouseEvent *event)
             _modifiedFlag = true;
             this->setCursor(Qt::UpArrowCursor);
         }
-        this->repaint();
+        this->update();
     }
 }
 
@@ -524,7 +525,7 @@ void GraphicsWave::zoom(QPoint point)
         }
     }
 
-    this->repaint();
+    this->update();
 }
 
 void GraphicsWave::drag(QPoint point)
@@ -541,7 +542,7 @@ void GraphicsWave::drag(QPoint point)
     else if (_posX > 1)
         _posX = 1;
 
-    this->repaint();
+    this->update();
 }
 
 bool GraphicsWave::event(QEvent * event)
@@ -585,7 +586,7 @@ bool GraphicsWave::event(QEvent * event)
                     }
                 }
 
-                this->repaint();
+                this->update();
             }
         }
     }

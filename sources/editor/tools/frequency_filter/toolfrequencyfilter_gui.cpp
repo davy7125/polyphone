@@ -49,7 +49,7 @@ void ToolFrequencyFilter_gui::updateInterface(AbstractToolParameters * parameter
 
     // Number of Fourier transforms to add
     int nbFourier = qMin(ids.count(), 6);
-    ui->graphFilterFrequencies->setNbFourier(nbFourier);
+    ui->graphFilterFrequencies->clearFourierTransforms();
 
     // Add the fourier transforms of the first samples in the graph
     SoundfontManager * sm = SoundfontManager::getInstance();
@@ -65,7 +65,6 @@ void ToolFrequencyFilter_gui::updateInterface(AbstractToolParameters * parameter
         // Display it
         ui->graphFilterFrequencies->addFourierTransform(fData, sampleRate);
     }
-    ui->graphFilterFrequencies->replot();
 }
 
 void ToolFrequencyFilter_gui::saveParameters(AbstractToolParameters * parameters)

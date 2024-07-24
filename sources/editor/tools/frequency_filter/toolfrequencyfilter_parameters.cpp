@@ -33,7 +33,7 @@ void ToolFrequencyFilter_parameters::loadConfiguration()
                 "filter_frequencies", "curve", QList<QVariant>()).toList();
     _curve.resize(listTmp.size());
     for (int i = 0; i < listTmp.size(); i++)
-        _curve[i] = listTmp.at(i).toDouble();
+        _curve[i] = listTmp.at(i).toFloat();
 }
 
 void ToolFrequencyFilter_parameters::saveConfiguration()

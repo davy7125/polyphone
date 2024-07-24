@@ -242,7 +242,7 @@ void GraphicsWavePainter::prepareImage(quint32 width, quint32 height)
             x = j < mean ? getValueX(samplePlotMax[i], 0, mean + samplePlotDeviation[i], 1, j) :
                             getValueX(mean - samplePlotDeviation[i], 1, samplePlotMin[i], 0, j);
             if (x > 0)
-                _pixels[currentPixelIndex] = static_cast<quint32>(x * 255) << 24 | (_waveColor & RGB_MASK);
+                _pixels[currentPixelIndex] = static_cast<quint32>(x * (_waveColor >> 24)) << 24 | (_waveColor & RGB_MASK);
         }
     }
 

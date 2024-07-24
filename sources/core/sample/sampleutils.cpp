@@ -218,7 +218,7 @@ QVector<float> SampleUtils::bandFilter(QVector<float> vData, double dwSmplRate, 
     return vRet;
 }
 
-QVector<float> SampleUtils::cutFilter(QVector<float> vData, quint32 dwSmplRate, QVector<double> dValues, int maxFreq)
+QVector<float> SampleUtils::cutFilter(QVector<float> vData, quint32 dwSmplRate, QVector<float> dValues, int maxFreq)
 {
     // Convert baData in complex
     quint32 size;
@@ -229,11 +229,11 @@ QVector<float> SampleUtils::cutFilter(QVector<float> vData, quint32 dwSmplRate, 
     delete [] cpxData;
 
     // Get the maximum module of the FFT
-    double moduleMax = 0;
+    float moduleMax = 0;
     for (unsigned long i = 0; i < (size + 1) / 2; i++)
     {
         // Left side
-        double module = sqrt(fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag() +
+        float module = sqrt(fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag() +
                              fc_sortie_fft[i].real() * fc_sortie_fft[i].real());
         moduleMax = qMax(moduleMax, module);
 
@@ -248,23 +248,23 @@ QVector<float> SampleUtils::cutFilter(QVector<float> vData, quint32 dwSmplRate, 
     for (unsigned long i = 0; i < (size + 1) / 2; i++)
     {
         // Current frequency and current module
-        double freq = static_cast<double>(dwSmplRate * i) / (size - 1);
-        double module1 = sqrt(fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag() +
+        float freq = static_cast<float>(dwSmplRate * i) / (size - 1);
+        float module1 = sqrt(fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag() +
                               fc_sortie_fft[i].real() * fc_sortie_fft[i].real());
-        double module2 = sqrt(fc_sortie_fft[size - 1 - i].imag() * fc_sortie_fft[size - 1 - i].imag() +
+        float module2 = sqrt(fc_sortie_fft[size - 1 - i].imag() * fc_sortie_fft[size - 1 - i].imag() +
                 fc_sortie_fft[size - 1 - i].real() * fc_sortie_fft[size - 1 - i].real());
 
         // Module max
-        double limit = moduleMax;
+        float limit = moduleMax;
         int index1 = static_cast<int>(freq / maxFreq * dValues.count());
         if (index1 >= nbValues - 1)
             limit *= dValues[nbValues - 1];
         else
         {
-            double x1 = static_cast<double>(index1) / nbValues * maxFreq;
-            double y1 = dValues[index1];
-            double x2 = static_cast<double>(index1 + 1) / nbValues * maxFreq;
-            double y2 = dValues[index1 + 1];
+            float x1 = static_cast<float>(index1) / nbValues * maxFreq;
+            float y1 = dValues[index1];
+            float x2 = static_cast<float>(index1 + 1) / nbValues * maxFreq;
+            float y2 = dValues[index1 + 1];
             limit *= ((freq - x1) / (x2 - x1)) * (y2 - y1) + y1;
         }
 

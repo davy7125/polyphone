@@ -25,9 +25,11 @@
 #ifndef GRAPHFILTERFREQUENCIES_H
 #define GRAPHFILTERFREQUENCIES_H
 
-#include "qcustomplot.h"
+#include <QWidget>
+#include <QPen>
+class GraphicsWavePainter;
 
-class GraphFilterFrequencies : public QCustomPlot
+class GraphFilterFrequencies : public QWidget
 {
     Q_OBJECT
 
@@ -35,31 +37,41 @@ public:
     explicit GraphFilterFrequencies(QWidget *parent = nullptr);
     ~GraphFilterFrequencies();
 
-    bool eventFilter(QObject* o, QEvent* e);
-
-    void setNbFourier(int nbFourier);
+    void clearFourierTransforms();
     void addFourierTransform(QVector<float> fData, quint32 sampleRate);
-    QVector<double> getValues();
-    void setValues(QVector<double> val);
+    QVector<float> getValues();
+    void setValues(QVector<float> val);
+
+protected:
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void leaveEvent(QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
-    QVector<double> dValues;
-    bool flagEdit;
-    void replotGraph();
-    double raideurExp;
-    QCPItemText * labelCoord;
-    int previousX;
-    double previousY;
-    int _nbFourier;
+    QVector<float> _dValues;
+    bool _flagEdit;
+    float _stiffnessExp;
+    int _previousX;
+    float _previousY;
+    QList<GraphicsWavePainter *> _wavePainters;
+    int _currentFreq;
+    float _currentValue;
 
-    void mousePressed(QPoint pos);
-    void mouseReleased(QPoint pos);
-    void mouseMoved(QPoint pos);
-    void mouseLeft();
+    QColor _backgroundColor, _textColor, _removedAreaColor;
+    QPen _frequencyPen, _penCurve, _currentPointPen;
+    QFont _fontLabels;
+
+    float freqToPos(int freq);
+    int posToFreq(int pos);
+    float posToValue(int pos);
+    float valueToPos(float value);
+
     void write(QPoint pos);
-    void afficheCoord(double x, double y);
 
     static const int POINT_NUMBER;
+    static const float MIN_Y;
 };
 
 #endif // GRAPHFILTERFREQUENCIES_H

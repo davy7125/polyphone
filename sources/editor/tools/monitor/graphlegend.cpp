@@ -33,7 +33,6 @@ GraphLegend::GraphLegend(QWidget *parent) : QWidget(parent) {}
 void GraphLegend::plot(QColor color, int thickness)
 {
     _pen = QPen(color, thickness, Qt::SolidLine, Qt::RoundCap);
-    this->repaint();
 }
 
 void GraphLegend::paintEvent(QPaintEvent *event)

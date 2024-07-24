@@ -34,7 +34,7 @@ public:
 
     static QVector<float> resampleMono(QVector<float> vData, double echInit, quint32 echFinal);
     static QVector<float> bandFilter(QVector<float> vData, double dwSmplRate, double fBas, double fHaut, int ordre);
-    static QVector<float> cutFilter(QVector<float> vData, quint32 dwSmplRate, QVector<double> dValues, int maxFreq);
+    static QVector<float> cutFilter(QVector<float> vData, quint32 dwSmplRate, QVector<float> dValues, int maxFreq);
     static QVector<float> EQ(QVector<float> vData, quint32 dwSmplRate, QVector<int> eqGains);
     static Complex * fromFloatToComplex(QVector<float> fData, quint32 &size);
     static QVector<float> fromComplexToFloat(Complex * cpxData, int size);

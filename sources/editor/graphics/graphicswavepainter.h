@@ -35,7 +35,7 @@ public:
 
     // Set the waveform color
     // Default is not defined
-    void setWaveColor(QColor waveColor) { _waveColor = waveColor.rgb(); }
+    void setWaveColor(QColor waveColor) { _waveColor = waveColor.rgba(); }
 
     // If true, values ranging from [0; 1] are displayed
     // If false, values ranging from [-1; 1] are displayed

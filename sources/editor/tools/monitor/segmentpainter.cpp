@@ -69,5 +69,5 @@ float SegmentPainter::valueToCoord(float y, QRect rect)
     float tmp = _isLog ?
         (log(y) - log(_yMin)) / (log(_yMax) - log(_yMin)) :
         (y - _yMin) / (_yMax - _yMin);
-    return (1.0 - tmp) * rect.height() + rect.top();
+    return (1.0 - tmp) * (rect.height() - 1) + rect.top();
 }

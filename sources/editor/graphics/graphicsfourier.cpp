@@ -85,7 +85,7 @@ void GraphicsFourier::setCurrentIds(IdList ids)
         _fData.clear();
         _peaks.clear();
         _wavePainter->clearData();
-        this->repaint();
+        this->update();
 
         // Menu
         _menu->actions()[0]->setEnabled(false);
@@ -117,7 +117,7 @@ void GraphicsFourier::setPos(quint32 posStart, quint32 posEnd, bool withRepaint)
     }
 
     if (withRepaint)
-        this->repaint();
+        this->update();
 }
 
 QList<Peak> GraphicsFourier::computePeaks(QVector<float> fData, quint32 dwSmplRate,
@@ -125,7 +125,7 @@ QList<Peak> GraphicsFourier::computePeaks(QVector<float> fData, quint32 dwSmplRa
                                            QVector<float> &vectFourier, int &posMaxFourier,
                                            int *key, int *correction, float * reliance)
 {
-    // If there is no loop, determine a stable portion for the Fourier transforme and the autocorrelation
+    // If there is no loop, determine a stable portion for the Fourier transform and the autocorrelation
     if (posStart == posEnd)
         SampleUtils::regimePermanent(fData, dwSmplRate, posStart, posEnd);
 
@@ -414,11 +414,12 @@ QRect GraphicsFourier::paintGrid(QPainter &painter, QRect rect)
 
 void GraphicsFourier::paintEvent(QPaintEvent * event)
 {
+    Q_UNUSED(event)
     if (_peaks.empty())
         return;
 
     // Helpful elements
-    QRect rect = event->rect();
+    QRect rect = this->rect();
     int marginRight = 1;
     int marginTop = 1;
     int tuneWidth = qMin(160, rect.width() - marginRight);

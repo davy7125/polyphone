@@ -90,7 +90,6 @@ private:
     void mouseLeft();
     void computePattern();
     void write(QPoint pos);
-    void afficheCoord(int key, float value);
 };
 
 #endif // GRAPHPARAMGLOBAL_H
