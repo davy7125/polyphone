@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-# Use local copies of RtMidi, Stk and QCustomplot libraries
+# Use local copies of RtMidi, and Stk libraries
 # (this is forced to true for Windows or Mac OS X)
 # Uncomment a line if your distribution doesn't come with some of the following libraries
 #DEFINES += USE_LOCAL_RTMIDI
@@ -49,7 +49,7 @@ TARGET = polyphone
 TEMPLATE = app
 
 win32 {
-    DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
+    DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK
     INCLUDEPATH += ../lib_windows/include
     RC_FILE = polyphone.rc
     QMAKE_CXXFLAGS += -ffloat-store # Compiler is MinGW for the option -ffloat-store, required by sfArk
@@ -96,7 +96,7 @@ unix:!macx {
 macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.14
     QMAKE_MAC_SDK = macosx12.1
-    DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT TARGET_OS_IPHONE=0
+    DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK TARGET_OS_IPHONE=0
     INCLUDEPATH += ../lib_mac/Jackmp.framework/Headers \
         ../lib_mac/include
     LIBS += -L$$PWD/../lib_mac -lportaudio -logg -lFLAC -lvorbis -lssl -lcrypto -F$$PWD/../lib_mac/ -framework Jackmp \
@@ -156,7 +156,6 @@ INCLUDEPATH += lib \
     editor/tools \
     editor/widgets \
     editor/tree \
-    qcustomplot \
     resources \
     core \
     core/input \
