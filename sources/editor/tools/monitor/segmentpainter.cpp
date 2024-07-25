@@ -42,16 +42,27 @@ void SegmentPainter::setData(QList<Segment *> segments)
 
 void SegmentPainter::paint(QPainter *painter, QRect rect)
 {
+    float w, x1, x2, negMargin;
     for (int i = 0; i < _segments.count(); i++)
     {
         painter->setPen(QPen(ThemeManager::mix(Qt::white, _color, (double)_segments[i]->_velMax / 127.), 5, Qt::SolidLine, Qt::RoundCap));
-        float w;
-        float x1 = keyToCoord(_segments[i]->_keyMin, rect, w);
-        float x2 = keyToCoord(_segments[i]->_keyMax, rect, w);
+        x1 = keyToCoord(_segments[i]->_keyMin, rect, w);
+        x2 = keyToCoord(_segments[i]->_keyMax, rect, w);
+        if (x1 > x2)
+        {
+            negMargin = x1;
+            x1 = x2;
+            x2 = negMargin;
+        }
+        x1 -= 0.5 * w;
+        x2 += 0.5 * w;
+        negMargin = qMin(4.f, qAbs(x2 - x1) / 2.f - 2.0);
+        if (negMargin < 0)
+            negMargin = 0;
         painter->drawLine(
-            x1 - 0.5 * w + 5,
+            x1 + negMargin,
             valueToCoord(_segments[i]->_value, rect),
-            x2 + 0.5 * w - 5,
+            x2 - negMargin,
             valueToCoord(_segments[i]->_value, rect));
     }
 }
@@ -60,6 +71,17 @@ float SegmentPainter::keyToCoord(int key, QRect rect, float &width)
 {
     width = static_cast<float>(rect.width()) / (_xMax - _xMin + 2);
     return width * (key - _xMin + 1) + rect.left();
+}
+
+int SegmentPainter::coordToKey(int coord, QRect rect)
+{
+    float width = static_cast<float>(rect.width()) / (_xMax - _xMin + 2);
+    int result = (coord - 0.5f * width) / width + _xMin;
+    if (result < _xMin)
+        return _xMin;
+    if (result > _xMax)
+        return _xMax;
+    return result;
 }
 
 float SegmentPainter::valueToCoord(float y, QRect rect)

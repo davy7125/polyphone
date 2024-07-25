@@ -78,7 +78,7 @@ private:
     int _currentValueKey;
     float _currentValue;
 
-    QColor _backgroundColor, _octaveColor, _octaveNameColor, _keyRangeColor;
+    QColor _backgroundColor, _octaveColor, _labelColor, _keyRangeColor;
     QPen _penCurve, _penCurrentValue;
     QFont _fontLabel;
 

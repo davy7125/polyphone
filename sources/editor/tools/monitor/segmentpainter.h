@@ -53,6 +53,7 @@ public:
 
     // Coordinate conversions
     float keyToCoord(int key, QRect rect, float &width);
+    int coordToKey(int coord, QRect rect);
     float valueToCoord(float y, QRect rect);
 
     static const float MIN_LOG;

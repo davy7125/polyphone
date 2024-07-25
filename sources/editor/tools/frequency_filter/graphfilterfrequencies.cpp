@@ -43,18 +43,21 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QWidget(paren
 
     // Colors and pens
     _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
-    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
-    color.setAlpha(40);
-    _frequencyPen = QPen(color, 1);
-    _textColor = color;
-    _textColor.setAlpha(255);
     _removedAreaColor = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND);
     _penCurve = QPen(_removedAreaColor, 2);
     _removedAreaColor.setAlpha(30);
-    _currentPointPen = QPen(_textColor, 2, Qt::SolidLine, Qt::RoundCap);
+    QColor color = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+    _currentPointPen = QPen(color, 2, Qt::SolidLine, Qt::RoundCap);
+    _labelColor = color;
+    _labelColor.setAlpha(180);
+    color.setAlpha(40);
+    _frequencyPen = QPen(color, 1);
 
     // Fonts
     _fontLabels = QFont(font().family(), 9, QFont::Bold);
+
+    // Translation
+    _kHzUnit = tr("kHz", "unit for kilo Herz");
 
     // Catch all mouse move events
     this->setMouseTracking(true);
@@ -273,17 +276,11 @@ void GraphFilterFrequencies::paintEvent(QPaintEvent *event)
         _wavePainters[i]->paint(&painter, rect, 0, 0, 1);
 
     // Frequencies
-    painter.setFont(_fontLabels);
+    painter.setPen(_frequencyPen);
     for (int f = 2000; f <= 18000; f += 2000)
     {
         float x = freqToPos(static_cast<float>(f) / 20000 * (POINT_NUMBER - 1));
-
-        painter.setPen(_frequencyPen);
         painter.drawLine(x, rect.top(), x, rect.bottom());
-
-        painter.setPen(_textColor);
-        painter.drawText(QRect(x - 200, rect.bottom() - 50, 400, 50), Qt::AlignHCenter | Qt::AlignBottom,
-                         QLocale::system().toString(f / 1000) + " " + tr("kHz", "unit for kilo Herz"));
     }
 
     // Values
@@ -308,6 +305,16 @@ void GraphFilterFrequencies::paintEvent(QPaintEvent *event)
     }
     painter.drawPath(path);
 
+    // Frequency values
+    painter.setPen(_labelColor);
+    painter.setFont(_fontLabels);
+    for (int f = 2000; f <= 18000; f += 2000)
+    {
+        float x = freqToPos(static_cast<float>(f) / 20000 * (POINT_NUMBER - 1));
+        painter.drawText(QRect(x - 200, rect.bottom() - 50, 400, 50), Qt::AlignHCenter | Qt::AlignBottom,
+                         QLocale::system().toString(f / 1000) + " " + _kHzUnit);
+    }
+
     // Current point
     painter.setPen(_currentPointPen);
     if (_currentFreq >= 0)
@@ -320,8 +327,8 @@ void GraphFilterFrequencies::paintEvent(QPaintEvent *event)
 
         // Text to display with its size
         float kHz = static_cast<float>(_currentFreq) / (POINT_NUMBER - 1) * 20;
-        QString label = QLocale::system().toString(kHz, 'f', 1) + " " + tr("kHz", "unit for kilo Herz");
-        label += " - " + QLocale::system().toString(_currentValue, 'g', 2);
+        QString label = QLocale::system().toString(kHz, 'f', 1) + " " + _kHzUnit;
+        label += " | " + QLocale::system().toString(_currentValue, 'g', 2);
 
         QFontMetrics fm(_fontLabels);
         float textHalfWidth = 0.5f * fm.horizontalAdvance(label) + 2.f;

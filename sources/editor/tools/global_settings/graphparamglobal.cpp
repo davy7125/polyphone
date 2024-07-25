@@ -47,8 +47,8 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QWidget(parent),
     _octaveColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
     _penCurrentValue = QPen(_octaveColor, 2, Qt::SolidLine, Qt::RoundCap);
     _octaveColor.setAlpha(40);
-    _octaveNameColor = _octaveColor;
-    _octaveNameColor.setAlpha(180);
+    _labelColor = _octaveColor;
+    _labelColor.setAlpha(180);
     _keyRangeColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     _penCurve = QPen(_keyRangeColor, 5, Qt::SolidLine, Qt::RoundCap);
     _keyRangeColor.setAlpha(20);
@@ -216,12 +216,22 @@ float GraphParamGlobal::keyToPos(int key, float &w)
 
 float GraphParamGlobal::posToValue(int y)
 {
-    return 1.0f - static_cast<float>(y) / (this->height() - 1);
+    float result = 1.0f - static_cast<float>(y) / (this->height() - 1);
+    if (result < 0.f)
+        return 0.f;
+    if (result > 1.f)
+        return 1.f;
+    return result;
 }
 
 float GraphParamGlobal::valueToPos(float value)
 {
-    return (1.0f - value) * (this->height() - 1);
+    float result = (1.0f - value) * (this->height() - 1);
+    if (result < 0.f)
+        return 0.f;
+    if (result > this->height() - 1)
+        return this->height() - 1;
+    return result;
 }
 
 void GraphParamGlobal::mouseMoveEvent(QMouseEvent *event)
@@ -368,15 +378,11 @@ void GraphParamGlobal::paintEvent(QPaintEvent *event)
     painter.fillRect(rect, _backgroundColor);
 
     // Draw octaves
-    painter.setPen(_octaveNameColor);
-    painter.setFont(_fontLabel);
     float w;
     for (int i = 12; i < 127; i += 12)
     {
         float x = this->keyToPos(i, w);
         painter.fillRect(QRectF(x - 0.5f * w, 0, w, rect.height()), _octaveColor);
-        painter.drawText(x - 200, rect.height() - 200, 400, 200, Qt::AlignBottom | Qt::AlignHCenter,
-            ContextManager::keyName()->getKeyName(i));
     }
 
     // Highlighted range
@@ -385,13 +391,23 @@ void GraphParamGlobal::paintEvent(QPaintEvent *event)
     {
         float xMin = this->keyToPos(_highlightedRangeMin, w);
         float xMax = this->keyToPos(_highlightedRangeMax, w);
-        painter.fillRect(QRectF(xMin - 0.5f * w, 0, xMax + 0.5f * w, rect.height()), _keyRangeColor);
+        painter.fillRect(QRectF(xMin - 0.5f * w, 0, xMax - xMin + w, rect.height()), _keyRangeColor);
     }
 
     // Curve
     painter.setPen(_penCurve);
     for (int i = 0; i <= 127; i++)
         painter.drawPoint(keyToPos(i, w), valueToPos(_curve[i]));
+
+    // Name of the octaves
+    painter.setPen(_labelColor);
+    painter.setFont(_fontLabel);
+    for (int i = 12; i < 127; i += 12)
+    {
+        float x = this->keyToPos(i, w);
+        painter.drawText(x - 200, rect.height() - 200, 400, 200, Qt::AlignBottom | Qt::AlignHCenter,
+                         ContextManager::keyName()->getKeyName(i));
+    }
 
     // Current value
     painter.setPen(_penCurrentValue);
@@ -403,7 +419,7 @@ void GraphParamGlobal::paintEvent(QPaintEvent *event)
         painter.drawLine(x, y - 5, x, y + 5);
 
         // Text to display with its size
-        QString text = ContextManager::keyName()->getKeyName(_currentValueKey) + " - " +
+        QString text = ContextManager::keyName()->getKeyName(_currentValueKey) + " | " +
                        QLocale::system().toString(_patternYmin + (_patternYmax - _patternYmin) * _currentValue, 'f', 2);
         QFontMetrics fm(_fontLabel);
         float textHalfWidth = 0.5f * fm.horizontalAdvance(text) + 2.f;

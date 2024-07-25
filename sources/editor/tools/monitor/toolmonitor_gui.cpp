@@ -133,6 +133,8 @@ void ToolMonitor_gui::on_comboParameter_currentIndexChanged(int index)
     AttributeType champ = static_cast<AttributeType>(ui->comboParameter->itemData(index).toInt());
 
     EltID id = _initialID;
+    int minKey = -1;
+    int maxKey = -1;
     if (id.typeElement != elementUnknown)
     {
         // Global value
@@ -161,18 +163,20 @@ void ToolMonitor_gui::on_comboParameter_currentIndexChanged(int index)
         foreach (int i, sm->getSiblings(id))
         {
             id.indexElt2 = i;
+            RangesType keyRange;
+            if (sm->isSet(id, champ_keyRange))
+                keyRange = sm->get(id, champ_keyRange).rValue;
+            else
+            {
+                keyRange.byLo = 0;
+                keyRange.byHi = 127;
+            }
+            minKey = minKey == -1 || keyRange.byLo < minKey ? keyRange.byLo : minKey;
+            maxKey = maxKey == -1 || keyRange.byHi > maxKey ? keyRange.byHi : maxKey;
+
             if (sm->isSet(id, champ))
             {
                 // Add a segment for a value defined in a division
-                RangesType keyRange;
-                if (sm->isSet(id, champ_keyRange))
-                    keyRange = sm->get(id, champ_keyRange).rValue;
-                else
-                {
-                    keyRange.byLo = 0;
-                    keyRange.byHi = 127;
-                }
-
                 RangesType velRange;
                 if (sm->isSet(id, champ_velRange))
                     velRange = sm->get(id, champ_velRange).rValue;
@@ -189,7 +193,7 @@ void ToolMonitor_gui::on_comboParameter_currentIndexChanged(int index)
     }
 
     // Send data to the graphics
-    ui->graphVisualizer->setData(globalValue, globalValueSet, segments);
+    ui->graphVisualizer->setData(globalValue, globalValueSet, segments, minKey, maxKey);
 }
 
 void ToolMonitor_gui::on_checkLog_stateChanged(int arg1)

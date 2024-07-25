@@ -34,12 +34,13 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) : QWidget(parent),
     _isLog(false),
     _dispWarning(false)
 {
-    // Colors
+    // Colors and pen
     _backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
     _gridColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+    _currentPointPen = QPen(_gridColor, 2, Qt::SolidLine, Qt::RoundCap);
     _gridColor.setAlpha(40);
-    _textColor = _gridColor;
-    _textColor.setAlpha(255);
+    _labelColor = _gridColor;
+    _labelColor.setAlpha(180);
     _curveColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     _warningColor = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND);
     _segmentPainter->setColor(_curveColor);
@@ -50,9 +51,6 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) : QWidget(parent),
     _fontLabels = QFont(font().family(), 9, QFont::Bold);
     _fontWarning = QFont(font().family(), 10, QFont::Bold);
 
-    // Pen
-    _currentPointPen = QPen(_textColor, 2, Qt::SolidLine, Qt::RoundCap);
-
     // Catch all mouse move events
     this->setMouseTracking(true);
 }
@@ -61,34 +59,23 @@ GraphVisualizer::~GraphVisualizer()
 {
 }
 
-void GraphVisualizer::setData(float defaultValue, bool globalValueSet, QList<Segment *> segments)
+void GraphVisualizer::setData(float defaultValue, bool globalValueSet, QList<Segment *> segments, int minKey, int maxKey)
 {
     _defaultValue = defaultValue;
     _globalValueSet = globalValueSet;
     _segments = segments;
 
     // Limits on X and Y
-    _xMin = -1;
-    _xMax = -1;
-    _fMin = 0;
-    _fMax = 0;
+    _xMin = minKey;
+    _xMax = maxKey;
+    _fMin = defaultValue;
+    _fMax = defaultValue;
     for (int i = 0; i < _segments.length(); i++)
     {
-        if (_xMin == -1 || _segments[i]->_value < _fMin)
+        if (_segments[i]->_value < _fMin)
             _fMin = _segments[i]->_value;
-        if (_xMin == -1 || _segments[i]->_value > _fMax)
+        if (_segments[i]->_value > _fMax)
             _fMax = _segments[i]->_value;
-        if (_xMin == -1 || _segments[i]->_keyMax > _xMax)
-            _xMax = _segments[i]->_keyMax;
-        if (_xMin == -1 || _segments[i]->_keyMin < _xMin)
-            _xMin = _segments[i]->_keyMin;
-    }
-    if (_xMin == -1)
-    {
-        _xMin = 0;
-        _xMax = 127;
-        _fMin = 0;
-        _fMax = 0;
     }
 
     _segmentPainter->setData(_segments);
@@ -119,7 +106,7 @@ void GraphVisualizer::setScale()
             _yMin /= qPow(delta, 0.1);
             _yMax *= qPow(delta, 0.05);
         }
-
+        qDebug() << _fMin << _yMin;
         _dispWarning = _fMin < _yMin;
     }
     else
@@ -153,9 +140,10 @@ void GraphVisualizer::mouseMoveEvent(QMouseEvent *event)
     QRect rect = QRect(QPoint(0, 0), this->size());
 
     // Find the closest point
-    float minDist = -1;
     float w;
-    _currentKey = -1;
+    _currentKey = _segmentPainter->coordToKey(posX, rect);
+    _currentValue = _defaultValue;
+    float minDist = qAbs(posY - _segmentPainter->valueToCoord(_defaultValue, rect));
     for (int i = 0; i < _segments.count(); i++)
     {
         float segY = _segmentPainter->valueToCoord(_segments[i]->_value, rect);
@@ -193,8 +181,6 @@ void GraphVisualizer::paintEvent(QPaintEvent *event)
     painter.fillRect(rect, _backgroundColor);
 
     // Octaves
-    painter.setPen(_textColor);
-    painter.setFont(_fontLabels);
     float w;
     for (int i = _xMin; i <= _xMax; i++)
     {
@@ -203,7 +189,6 @@ void GraphVisualizer::paintEvent(QPaintEvent *event)
 
         float x = _segmentPainter->keyToCoord(i, rect, w);
         painter.fillRect(x - 0.5 * w, rect.top(), w, rect.height(), _gridColor);
-        painter.drawText(QRect(x - 50 - 0.5 * w, rect.bottom() - 50, w + 100, 50), Qt::AlignHCenter | Qt::AlignBottom, ContextManager::keyName()->getKeyName(i));
     }
 
     // Default value
@@ -213,6 +198,18 @@ void GraphVisualizer::paintEvent(QPaintEvent *event)
 
     // Segments
     _segmentPainter->paint(&painter, rect);
+
+    // Name of the octaves
+    painter.setPen(_labelColor);
+    painter.setFont(_fontLabels);
+    for (int i = _xMin; i <= _xMax; i++)
+    {
+        if (i % 12 != 0)
+            continue;
+
+        float x = _segmentPainter->keyToCoord(i, rect, w);
+        painter.drawText(QRect(x - 50 - 0.5 * w, rect.bottom() - 50, w + 100, 50), Qt::AlignHCenter | Qt::AlignBottom, ContextManager::keyName()->getKeyName(i));
+    }
 
     // Current point
     painter.setPen(_currentPointPen);
@@ -225,7 +222,7 @@ void GraphVisualizer::paintEvent(QPaintEvent *event)
         painter.drawLine(x, y - 5, x, y + 5);
 
         // Text to display with its size
-        QString label = ContextManager::keyName()->getKeyName(_currentKey) + " - ";
+        QString label = ContextManager::keyName()->getKeyName(_currentKey) + " | ";
         if (_currentValue == 0)
             label += QLocale::system().toString(_currentValue, 'f', 0);
         else if (_currentValue < 1)

@@ -59,7 +59,8 @@ private:
     int _currentFreq;
     float _currentValue;
 
-    QColor _backgroundColor, _textColor, _removedAreaColor;
+    QString _kHzUnit;
+    QColor _backgroundColor, _labelColor, _removedAreaColor;
     QPen _frequencyPen, _penCurve, _currentPointPen;
     QFont _fontLabels;
 

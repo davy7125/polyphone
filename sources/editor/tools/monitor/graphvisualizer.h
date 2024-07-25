@@ -40,7 +40,7 @@ public:
     explicit GraphVisualizer(QWidget *parent = nullptr);
     ~GraphVisualizer();
     void setScale();
-    void setData(float defaultValue, bool globalValueSet, QList<Segment*> segments);
+    void setData(float defaultValue, bool globalValueSet, QList<Segment*> segments, int minKey, int maxKey);
     void setIsLog(bool isLog);
 
 protected:
@@ -57,7 +57,7 @@ private:
     bool _globalValueSet;
     QList<Segment *> _segments;
 
-    QColor _backgroundColor, _gridColor, _textColor, _curveColor, _warningColor, _defaultValueColor;
+    QColor _backgroundColor, _gridColor, _labelColor, _curveColor, _warningColor, _defaultValueColor;
     QFont _fontLabels, _fontWarning;
     QPen _currentPointPen;
 
