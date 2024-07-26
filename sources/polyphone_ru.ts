@@ -2361,7 +2361,7 @@ repository</source>
 <context>
     <name>GraphFilterFrequencies</name>
     <message>
-        <location filename="editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="63"/>
+        <location filename="editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="60"/>
         <source>kHz</source>
         <comment>unit for kilo Herz</comment>
         <translation>КГц</translation>
@@ -2385,7 +2385,7 @@ repository</source>
 <context>
     <name>GraphVisualizer</name>
     <message>
-        <location filename="editor/tools/monitor/graphvisualizer.cpp" line="256"/>
+        <location filename="editor/tools/monitor/graphvisualizer.cpp" line="255"/>
         <source>Cannot display all the values.</source>
         <translation>Не удалось показать все значения.</translation>
     </message>
@@ -2410,21 +2410,21 @@ repository</source>
     <message>
         <location filename="editor/graphics/graphicsfourier.cpp" line="377"/>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Интенсивность</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphicsfourier.cpp" line="542"/>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="543"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
         <translation>Гц</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphicsfourier.cpp" line="606"/>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="607"/>
         <source>Export a graph</source>
         <translation>Экспорт графика</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphicsfourier.cpp" line="607"/>
+        <location filename="editor/graphics/graphicsfourier.cpp" line="608"/>
         <source>Png file</source>
         <translation>Изображение PNG</translation>
     </message>
@@ -2441,13 +2441,13 @@ repository</source>
 <context>
     <name>GraphicsWave</name>
     <message>
-        <location filename="editor/graphics/graphicswave.cpp" line="185"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="186"/>
         <source>Multiple selection</source>
         <translation>Множественный выбор</translation>
     </message>
     <message>
-        <location filename="editor/graphics/graphicswave.cpp" line="215"/>
-        <location filename="editor/graphics/graphicswave.cpp" line="218"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="216"/>
+        <location filename="editor/graphics/graphicswave.cpp" line="219"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>сек</translation>
