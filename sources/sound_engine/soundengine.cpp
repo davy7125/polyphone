@@ -100,7 +100,7 @@ void SoundEngine::addVoices(VoiceInitializer * voiceInitializers, int numberOfVo
     VoiceInitializer * voiceInitializer;
     for (int i = 0; i < numberOfVoicesToAdd; i++)
     {
-        if (s_numberOfVoices < MAX_NUMBER_OF_VOICES)
+        if (s_numberOfVoices < MAX_NUMBER_OF_VOICES && s_voices[s_numberOfVoices] != nullptr)
         {
             // Create a voice
             voiceInitializer = &voiceInitializers[i];

@@ -4,14 +4,18 @@
 #
 #-------------------------------------------------
 
-# Use local copies of RtMidi, and Stk libraries
+# Use local copies of RtAudio, RtMidi, and Stk libraries
 # (this is forced to true for Windows or Mac OS X)
 # Uncomment a line if your distribution doesn't come with some of the following libraries
+#DEFINES += USE_LOCAL_RTAUDIO
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
 
 # Uncomment this line to use wolfssl instead of openssl (for a license issue)
 #DEFINES += USE_WOLFSSL
+
+# Uncomment this line to be compatible with RtAudio version 5.2 (instead of 6)
+DEFINES += RT_AUDIO_5_2
 
 # Uncomment lines for hiding features
 #DEFINES += NO_SF2_REPOSITORY
@@ -49,18 +53,19 @@ TARGET = polyphone
 TEMPLATE = app
 
 win32 {
-    DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK
+    DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
+        __WINDOWS_MM__ __WINDOWS_WASAPI__ __WINDOWS_ASIO__ #__WINDOWS_DS__
     INCLUDEPATH += ../lib_windows/include
     RC_FILE = polyphone.rc
     QMAKE_CXXFLAGS += -ffloat-store # Compiler is MinGW for the option -ffloat-store, required by sfArk
-    LIBS += -lzlib1 -lwinmm -logg -lvorbis -lvorbisfile -lvorbisenc.dll -lcrypto -lFLAC -lportaudio
+    LIBS += -lzlib1 -lwinmm -logg -lvorbis -lvorbisfile -lvorbisenc.dll -lcrypto -lFLAC
     LIBS += -L$$PWD/../lib_windows/64bits
     DESTDIR = $$PWD/../lib_windows/64bits
 }
 unix:!macx {
-    DEFINES += __LINUX_ALSASEQ__ __UNIX_JACK__
+    DEFINES += __LINUX_ALSASEQ__ __UNIX_JACK__ __LINUX_ALSA__ #__LINUX_PULSE__
     CONFIG += link_pkgconfig
-    PKGCONFIG += alsa jack portaudio-2.0 zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0
+    PKGCONFIG += alsa jack zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0
     contains(DEFINES, USE_WOLFSSL) {
         PKGCONFIG += wolfssl
     } else {
@@ -96,10 +101,11 @@ unix:!macx {
 macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.14
     QMAKE_MAC_SDK = macosx12.1
-    DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK TARGET_OS_IPHONE=0
+    DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
+        __MACOSX_CORE__ __UNIX_JACK__ TARGET_OS_IPHONE=0
     INCLUDEPATH += ../lib_mac/Jackmp.framework/Headers \
         ../lib_mac/include
-    LIBS += -L$$PWD/../lib_mac -lportaudio -logg -lFLAC -lvorbis -lssl -lcrypto -F$$PWD/../lib_mac/ -framework Jackmp \
+    LIBS += -L$$PWD/../lib_mac -logg -lFLAC -lvorbis -lssl -lcrypto -F$$PWD/../lib_mac/ -framework Jackmp \
         -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
         -framework AudioUnit -framework AudioToolbox -framework Cocoa -lz
     ICON = polyphone.icns
@@ -107,6 +113,15 @@ macx {
     DESTDIR = $$PWD/../lib_mac
 }
 DEFINES += SFTOOLS_NOXML
+
+# Location of RtAudio
+contains(DEFINES, USE_LOCAL_RTAUDIO) {
+    INCLUDEPATH += lib/_option_rtaudio
+    HEADERS += lib/_option_rtaudio/rtaudio/RtAudio.h
+    SOURCES += lib/_option_rtaudio/rtaudio/RtAudio.cpp
+} else {
+    PKGCONFIG += rtaudio
+}
 
 # Location of RtMidi
 contains(DEFINES, USE_LOCAL_RTMIDI) {

@@ -23,435 +23,302 @@
 ***************************************************************************/
 
 #include <QDebug>
+#include <unistd.h>
 #include "audiodevice.h"
-#include "portaudio.h"
+#include "rtaudio/RtAudio.h"
 #include "confmanager.h"
 #include "soundfontmanager.h"
 
-#ifndef Q_OS_WIN
-
-#if __APPLE__
-#include "jack.h"
-#else
-#include "jack/jack.h"
+#ifndef RT_AUDIO_5_2
+class RtAudioError {
+public:
+    void printMessage() {}
+};
 #endif
 
-// Jack callbacks
-int jackProcess(jack_nframes_t nframes, void * arg)
+QList<AudioDevice::HostInfo> AudioDevice::getAllHosts()
 {
-    // Récupération de l'instance de AudioDevice
-    AudioDevice * instance = static_cast<AudioDevice*>(arg);
+    QList<HostInfo> hosts;
 
-    // Envoi de données
-    if (instance->_output_port_R && instance->_output_port_L)
+    // Browse all hosts
+    std::vector<RtAudio::Api> apis;
+    RtAudio::getCompiledApi(apis);
+    RtAudio::DeviceInfo info;
+    for (unsigned int i = 0; i < apis.size(); i++)
     {
-        // Stéréo
-        float * outL = (float *)jack_port_get_buffer(instance->_output_port_L, nframes);
-        float * outR = (float *)jack_port_get_buffer(instance->_output_port_R, nframes);
-        instance->_synth->readData(outL, outR, nframes);
-    }
-    return 0;
-}
-void jack_shutdown(void *arg) {Q_UNUSED(arg); exit(1);}
-#endif
+        // Host details
+        RtAudio::Api currentApi = apis[i];
+        HostInfo hostInfo;
+        hostInfo.identifier = QString(RtAudio::getApiName(currentApi).c_str());
+        hostInfo.name = QString(RtAudio::getApiDisplayName(currentApi).c_str());
 
-// Portaudio callback
-int standardProcess(const void* inputBuffer, void* outputBuffer,
-                    unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo,
-                    PaStreamCallbackFlags statusFlags, void* userData)
+        // Browse devices
+        RtAudio * audio = nullptr;
+        try {
+            audio = new RtAudio(apis[i]);
+        } catch (RtAudioError &error) {
+            error.printMessage();
+        }
+        if (audio)
+        {
+            #ifdef RT_AUDIO_5_2
+            for (unsigned int j = 0, end = audio->getDeviceCount(); j < end; ++j)
+            #else
+            std::vector<unsigned int> deviceIds = audio->getDeviceIds();
+            for (unsigned int j: deviceIds)
+            #endif
+            {
+                try {
+                    info = audio->getDeviceInfo(j);
+                    if (info.outputChannels >= 2)
+                    {
+                        // Device details
+                        DeviceInfo deviceInfo;
+                        deviceInfo.name = QString(info.name.c_str());
+                        deviceInfo.channelCount = info.outputChannels;
+                        deviceInfo.isDefault = info.isDefaultOutput;
+                        hostInfo.devices << deviceInfo;
+                    }
+                } catch (RtAudioError &error) {
+                    error.printMessage();
+                }
+            }
+            delete audio;
+        }
+
+        if (!hostInfo.devices.empty())
+            hosts << hostInfo;
+    }
+
+    return hosts;
+}
+
+int AudioDevice::getCurrentDeviceIndex(QList<AudioDevice::HostInfo> hosts, QString config)
+{
+    if (config == "none")
+        return -1;
+
+    // Find the host identifier and device name
+    int api;
+    QString deviceName;
+    getApiAndDeviceNameFromConfig(config, api, deviceName);
+    QString hostIdentifier = QString(RtAudio::getApiName((RtAudio::Api)api).c_str());
+
+    int currentIndex = 0;
+    int exactMatch = -1;
+    int defaultMatch = -1;
+    HostInfo hostInfo;
+    DeviceInfo deviceInfo;
+    for (int i = 0; i < hosts.count(); i++)
+    {
+        hostInfo = hosts[i];
+        if (hostInfo.identifier == hostIdentifier)
+        {
+            for (int j = 0; j < hostInfo.devices.count(); j++)
+            {
+                deviceInfo = hostInfo.devices[j];
+                if (deviceInfo.name == deviceName)
+                {
+                    exactMatch = currentIndex;
+                    break;
+                }
+                if (deviceInfo.isDefault)
+                {
+                    if (deviceName == "")
+                    {
+                        exactMatch = currentIndex;
+                        break;
+                    }
+                    defaultMatch = currentIndex;
+                }
+                currentIndex++;
+            }
+            break;
+        }
+        else
+            currentIndex += hostInfo.devices.count();
+    }
+
+    return exactMatch != -1 ? exactMatch : defaultMatch;
+}
+
+void AudioDevice::getApiAndDeviceNameFromConfig(QString config, int &api, QString &deviceName)
+{
+    // Find the host identifier and device name
+    QString hostIdentifier = "";
+    deviceName = "";
+    QStringList configParts = config.split('|');
+    if (configParts.count() == 2)
+    {
+        hostIdentifier = configParts[0];
+        deviceName = configParts[1];
+    }
+
+    // Take the default API if the host identifier is not valid
+    api = RtAudio::getCompiledApiByName(hostIdentifier.toStdString());
+    if (api == RtAudio::UNSPECIFIED)
+#if __APPLE__
+        api = RtAudio::MACOSX_CORE;
+#elif Q_OS_WIN
+        api = RtAudio::WINDOWS_WASAPI;
+#else
+        api = RtAudio::LINUX_ALSA;
+#endif
+}
+
+// RtAudio callback
+int standardProcess(void *outputBuffer, void *inputBuffer, unsigned int nFrames,
+                    double streamTime, RtAudioStreamStatus status, void *userData)
 {
     Q_UNUSED(inputBuffer)
-    Q_UNUSED(timeInfo)
-    Q_UNUSED(statusFlags)
+    Q_UNUSED(streamTime)
+    Q_UNUSED(status)
 
-    // Récupération de l'instance de AudioDevice
+    memset(outputBuffer, 0, nFrames * 2 * 4);
+
+    // Get the AudioDevice instance
     AudioDevice * instance = static_cast<AudioDevice*>(userData);
-    float** outputs = reinterpret_cast<float**>(outputBuffer);
+    float* output = reinterpret_cast<float*>(outputBuffer);
 
-    // Envoi de données
-    if (instance->_channelCount == 2)
-        instance->_synth->readData(outputs[0], outputs[1], framesPerBuffer);
+    // Read data from the synth and write it in the buffer
+    instance->getSynth()->readData(&output[0], &output[nFrames], nFrames);
 
     return 0;
 }
 
 AudioDevice::AudioDevice(ConfManager *configuration) : QObject(nullptr),
-    _isStandardRunning(false),
-    _standardStream(nullptr),
-    _jack_client(nullptr),
-    _configuration(configuration),
-    _initialized(false)
+    _rtAudio(nullptr),
+    _configuration(configuration)
 {
     _synth = new Synth(SoundfontManager::getInstance()->getSoundfonts(), SoundfontManager::getInstance()->getMutex());
     _synth->configure(_configuration->getSynthConfig());
-    PaError err = Pa_Initialize();
-    _initialized = (err == paNoError);
-    if (!_initialized)
-        printf("Error during initialization: %s\n", Pa_GetErrorText(err));
-
-    this->initAudio();
+    initAudio();
 }
 
 AudioDevice::~AudioDevice()
 {
     closeConnections();
-    if (_initialized)
-        Pa_Terminate();
     delete _synth;
-}
-
-QList<HostInfo> AudioDevice::getHostInfo()
-{
-    QList<HostInfo> listRet;
-
-    // No sound
-    listRet << HostInfo("-", -1);
-
-    if (_initialized)
-    {
-        for (int i = 0, end = Pa_GetDeviceCount(); i < end; ++i)
-        {
-            const PaDeviceInfo * deviceInfo = Pa_GetDeviceInfo(i);
-            if (!deviceInfo)
-                continue;
-
-            const PaHostApiInfo * hostInfo  = Pa_GetHostApiInfo(deviceInfo->hostApi);
-
-            if (deviceInfo->maxOutputChannels > 0 &&
-                    (hostInfo->type == paDirectSound || hostInfo->type == paMME ||
-                     hostInfo->type == paASIO || hostInfo->type == paCoreAudio ||
-                     hostInfo->type == paALSA))
-            {
-                // Host
-                int indexHost = -1;
-                for (int j = 0; j < listRet.size(); j++)
-                    if (listRet[j]._type == hostInfo->type)
-                        indexHost = j;
-                if (indexHost == -1)
-                {
-                    listRet << HostInfo(QString(hostInfo->name), hostInfo->type);
-                    indexHost = listRet.size() - 1;
-                }
-
-                // Device within an host
-                listRet[indexHost]._devices << HostInfo::DeviceInfo(QString(deviceInfo->name), i,
-                                                                    (i == hostInfo->defaultOutputDevice));
-            }
-        }
-    }
-
-    // Default host
-    bool found = false;
-    for (int i = 0; i < listRet.size(); i++)
-    {
-        if (listRet[i]._type == paMME || listRet[i]._type == paALSA)
-        {
-            listRet[i]._isDefault = true;
-            found = true;
-            break;
-        }
-    }
-    if (!found)
-    {
-        for (int i = 0; i < listRet.size(); i++)
-        {
-            if (listRet[i]._type == paDirectSound || listRet[i]._type == paCoreAudio)
-            {
-                listRet[i]._isDefault = true;
-                found = true;
-                break;
-            }
-        }
-    }
-    if (!found)
-        listRet[0]._isDefault = true;
-
-#ifndef Q_OS_WIN
-    // Add jack if not windows
-    listRet << HostInfo("Jack", -2);
-#endif
-
-    return listRet;
 }
 
 void AudioDevice::initAudio()
 {
-//        for (int i = 0, end = Pa_GetDeviceCount(); i < end; ++i)
-//        {
-//            const PaDeviceInfo * deviceInfo = Pa_GetDeviceInfo(i);
-//            if (!deviceInfo)
-//                continue;
+    // Stop the possible existing connection
+    closeConnections();
 
-//            const PaHostApiInfo * hostInfo  = Pa_GetHostApiInfo(deviceInfo->hostApi);
-//            qDebug() << "host name" << hostInfo->name << "(" + QString::number(hostInfo->type) + ")"
-//                     << "device" << deviceInfo->name << "(" + QString::number(i) + ")"
-//                     << "output channels" << deviceInfo->maxOutputChannels
-//                     << "is default" << hostInfo->defaultOutputDevice;
-//        }
+    // Read the configuration
+    QString audioType = _configuration->getValue(ConfManager::SECTION_AUDIO, "type", "").toString();
+    int api;
+    QString deviceName;
+    getApiAndDeviceNameFromConfig(audioType, api, deviceName);
 
-    // ≥0 : standard
-    // -1 : none
-    // -2 : jack
-    QString audioTypeStr = _configuration->getValue(ConfManager::SECTION_AUDIO, "type", "0#0").toString();
-    QStringList listStr = audioTypeStr.split("#");
-    int hostType = listStr.size() >= 1 ? listStr[0].toInt() : 0;
-    int device = listStr.size() >= 2 ? listStr[1].toInt() : 0;
-
-    //qDebug() << "AUDIO" << "host" << hostType << "device" << device;
-
+    // Buffer size
     quint32 bufferSize = _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 0).toUInt();
+    if (bufferSize == 0)
+        bufferSize = 256;
 
-    // Arrêt des serveurs son si besoin
-    this->closeConnections();
-
-#ifdef Q_OS_WIN
-    // Asio cannot work without these two lines
-    if (hostType == paASIO)
-    {
-        Pa_Terminate();
-        Pa_Initialize();
-    }
-    // No jack support
-    if (hostType == -2)
-        hostType = -1;
-#endif
-
-    if (hostType == -1)
-    {
-        emit(connectionDone());
+    // Instanciate an RtAudio object with the selected api
+    try {
+        _rtAudio = new RtAudio((RtAudio::Api)api);
+    } catch (RtAudioError &error) {
+        error.printMessage();
         return;
     }
 
-    if (hostType == -2)
-        this->openJackConnection(bufferSize);
-    else
-        this->openStandardConnection(hostType, device, bufferSize);
-
-    if (!_jack_client && !_isStandardRunning)
+    // Browse the devices
+    int selectedDevice = -1;
+    int defaultDevice = -1;
+    std::vector<unsigned int> sampleRates;
+    #ifdef RT_AUDIO_5_2
+    for (unsigned int i = 0, end = _rtAudio->getDeviceCount(); i < end; ++i)
+    #else
+    std::vector<unsigned int> deviceIds = _rtAudio->getDeviceIds();
+    for (unsigned int i: deviceIds)
+    #endif
     {
-        this->openDefaultConnection(bufferSize);
-        if (!_jack_client && !_isStandardRunning)
-            emit(connectionProblem());
-        else
-            emit(connectionDefault());
-    }
-    else
-        emit(connectionDone());
-}
+        try {
+            RtAudio::DeviceInfo deviceInfo = _rtAudio->getDeviceInfo(i);
+            if (deviceInfo.outputChannels < 2)
+                continue;
 
-void AudioDevice::openDefaultConnection(quint32 bufferSize)
-{
-    QList<HostInfo> hostInfos = getHostInfo();
-
-    int hostType = -1;
-    int deviceIndex = -1;
-
-    for (int i = 1; i < hostInfos.size(); i++)
-    {
-        if (hostInfos[i]._isDefault)
-        {
-            for (int j = 0; j < hostInfos[i]._devices.count(); j++)
+            if (QString(deviceInfo.name.c_str()) == deviceName)
             {
-                if (hostInfos[i]._devices[j]._isDefault)
+                selectedDevice = i;
+                sampleRates = deviceInfo.sampleRates;
+                break;
+            }
+            if (deviceInfo.isDefaultOutput)
+            {
+                sampleRates = deviceInfo.sampleRates;
+                if (deviceName == "")
                 {
-                    hostType = hostInfos[i]._type;
-                    deviceIndex = hostInfos[i]._devices[j]._index;
+                    selectedDevice = i;
                     break;
                 }
+                defaultDevice = i;
             }
-            break;
-        }
-    }
-
-    if (hostType != -1 && deviceIndex != -1)
-        openStandardConnection(hostType, deviceIndex, bufferSize);
-}
-
-void AudioDevice::openJackConnection(quint32 bufferSize)
-{
-#ifndef Q_OS_WIN
-    // Format audio à l'écoute
-    _sampleRate = SAMPLE_RATE;
-    _channelCount = 2;
-    _sampleSize = 32;
-
-    // Nom du serveur
-    const char *client_name = "Polyphone";
-    jack_status_t status;
-
-    // Ouverture d'une session cliente au serveur Jack
-    _jack_client = jack_client_open(client_name, JackNullOption, &status);
-    if (_jack_client == nullptr)
-    {
-        printf ("jack_client_open() failed, status = 0x%2.0x\n", status);
-        if (status & JackServerFailed)
-            printf("Unable to connect to JACK server\n");
-        return;
-    }
-    if (status & JackServerStarted)
-        printf("JACK server started\n");
-    if (status & JackNameNotUnique)
-    {
-        client_name = jack_get_client_name(_jack_client);
-        printf("unique name '%s' assigned\n", client_name);
-    }
-
-    // Callback de jack pour la récupération de données et l'arrêt
-    jack_set_process_callback(_jack_client, jackProcess, this);
-    jack_on_shutdown(_jack_client, jack_shutdown, nullptr);
-
-    // Get the sample rate
-    _sampleRate = (int)jack_get_sample_rate(_jack_client);
-
-    // Possibly change the buffer size
-    if (bufferSize > 0)
-        jack_set_buffer_size(_jack_client, bufferSize);
-
-    // Nombre de sorties audio
-    const char ** ports = jack_get_ports(_jack_client, nullptr, nullptr,
-                                         JackPortIsPhysical|JackPortIsInput);
-    if (ports == nullptr)
-    {
-        printf("no physical playback ports\n");
-        return;
-    }
-    bool mono = ports[1] == nullptr;
-
-    // Création ports de sortie
-    if (mono)
-    {
-        _channelCount = 1;
-        _output_port_L = jack_port_register(_jack_client, "output mono",
-                                            JACK_DEFAULT_AUDIO_TYPE,
-                                            JackPortIsOutput, 0);
-        _output_port_R = nullptr;
-        if (!_output_port_L)
-        {
-            printf("no more JACK ports available\n");
-            return;
-        }
-    }
-    else
-    {
-        _output_port_L = jack_port_register(_jack_client, "output L",
-                                            JACK_DEFAULT_AUDIO_TYPE,
-                                            JackPortIsOutput, 0);
-        _output_port_R = jack_port_register(_jack_client, "output R",
-                                            JACK_DEFAULT_AUDIO_TYPE,
-                                            JackPortIsOutput, 0);
-        if (!_output_port_R || !_output_port_L)
-        {
-            printf("no more JACK ports available\n");
+        } catch (RtAudioError &error) {
+            error.printMessage();
             return;
         }
     }
 
-    // Configure synth
-    _synth->setSampleRate(_sampleRate);
-
-    // Activation du serveur et connexion du port de sortie avec les hauts parleurs
-    if (jack_activate(_jack_client))
+    // No exact match, the default device is selected
+    if (selectedDevice == -1)
     {
-        printf("cannot activate client\n");
-        return;
+        selectedDevice = defaultDevice;
+
+        // No default device either, so no audio output
+        if (selectedDevice == -1)
+        {
+            closeConnections();
+            return;
+        }
     }
 
-    if (jack_connect(_jack_client, jack_port_name(_output_port_L), ports[0]))
-        printf("cannot connect output port L\n");
-    if (!mono)
+    quint32 closestSampleRate = 0;
+    for (auto const sampleRate : sampleRates)
     {
-        if (jack_connect(_jack_client, jack_port_name(_output_port_R), ports[1]))
-            printf("cannot connect output port R\n");
+        // Find anything that is close to 48000
+        if (closestSampleRate == 0 || qAbs(sampleRate - 48000) < qAbs(closestSampleRate - 48000))
+            closestSampleRate = sampleRate;
     }
-    free(ports);
-#else
-    Q_UNUSED(bufferSize)
-#endif
+    if (closestSampleRate == 0)
+        closestSampleRate = 48000;
+
+    // Open the connection
+    openConnection(selectedDevice, bufferSize, closestSampleRate);
 }
 
-void AudioDevice::openStandardConnection(int hostType, int device, quint32 bufferSize)
+void AudioDevice::openConnection(unsigned int deviceNumber, quint32 bufferSize, quint32 sampleRate)
 {
-    if (!_initialized)
+    RtAudio::StreamParameters outParam;
+    outParam.deviceId = deviceNumber;
+    outParam.nChannels = 2;
+    outParam.firstChannel = 0;
+
+    RtAudio::StreamOptions options;
+    options.flags = RTAUDIO_NONINTERLEAVED;
+    options.streamName = "Polyphone";
+    try {
+        _rtAudio->openStream(&outParam, nullptr, RTAUDIO_FLOAT32, sampleRate, &bufferSize, standardProcess, this, &options);
+    } catch (RtAudioError &error) {
+        closeConnections();
         return;
-
-    if (device < 0 || device >= Pa_GetDeviceCount())
-        return;
-
-    if (Pa_GetHostApiInfo(Pa_GetDeviceInfo(device)->hostApi)->type != hostType)
-        return;
-
-    // Format audio à l'écoute
-    _sampleRate = SAMPLE_RATE;
-    _channelCount = 2;
-    _sampleSize = 32;
-
-    // Sortie audio par défaut, nombre de canaux max
-    PaStreamParameters outputParameters;
-    outputParameters.device = device;
-    const PaDeviceInfo* pdi = Pa_GetDeviceInfo(outputParameters.device);
-    outputParameters.channelCount = pdi->maxOutputChannels;
-    if (outputParameters.channelCount > 2)
-        outputParameters.channelCount = 2;
-    _channelCount = static_cast<quint32>(outputParameters.channelCount);
-    outputParameters.sampleFormat = paFloat32 | paNonInterleaved;
-    if (hostType == paASIO)
-        outputParameters.suggestedLatency = qMin(0.04, pdi->defaultLowOutputLatency);
-    else
-        outputParameters.suggestedLatency = qMin(0.2, pdi->defaultLowOutputLatency);
-    outputParameters.hostApiSpecificStreamInfo = nullptr;
-
-    // Ouverture du flux
-    PaError err = Pa_OpenStream(&_standardStream,
-                                nullptr,            // pas d'entrée
-                                &outputParameters,  // paramètres
-                                SAMPLE_RATE,        // sample rate
-                                bufferSize,         // frame par buffer, can be 0
-                                paNoFlag, //paClipOff,     // avec clipping
-                                standardProcess,    // callback
-                                this);              // instance d'audiodevice
-
-    // Configure synth
-    _synth->setSampleRate( _sampleRate);
-
-    // Début du son
-    if (err == paNoError)
-    {
-        err = Pa_StartStream(_standardStream); // Début du son
-        if (err != paNoError)
-        {
-            qDebug() << "Error when starting stream: " << Pa_GetErrorText(err);
-            Pa_CloseStream(_standardStream);
-        }
-        else
-            _isStandardRunning = true;
     }
-    else
-        qDebug() << "Error when opening stream:" << Pa_GetErrorText(err);
+
+    // Configure the synth
+    _synth->setSampleRateAndBufferSize(sampleRate, bufferSize);
+
+    try {
+        _rtAudio->startStream();
+    } catch (RtAudioError &error) {
+        closeConnections();
+    }
 }
 
 void AudioDevice::closeConnections()
 {
-    if (_isStandardRunning)
-    {
-        Pa_StopStream(_standardStream);
-        Pa_CloseStream(_standardStream);
-        _isStandardRunning = false;
-        _standardStream = nullptr;
-    }
-
-#ifndef Q_OS_WIN
-    if (_jack_client)
-    {
-        try
-        {
-            jack_client_close(_jack_client);
-        }
-        catch (std::exception &error)
-        {
-            Q_UNUSED(error)
-        }
-
-        _jack_client = nullptr;
-    }
-#endif
+    delete _rtAudio;
+    _rtAudio = nullptr;
 }

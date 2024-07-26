@@ -48,7 +48,6 @@ public:
     int gain;
     int tuningFork;
     QStringList temperament;
-    unsigned int bufferSize;
 };
 
 class Synth : public QObject
@@ -84,7 +83,7 @@ public:
 
     // Following functions are executed by the audio server (thread 2)
     void readData(float *dataL, float *dataR, quint32 maxlen);
-    void setSampleRate(quint32 sampleRate);
+    void setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize);
 
 signals:
     void currentPosChanged(quint32 pos);

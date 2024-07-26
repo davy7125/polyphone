@@ -84,62 +84,24 @@ void ConfigSectionGeneral::initializeAudio()
     ui->comboAudioOuput->blockSignals(true);
     ui->comboBufferSize->blockSignals(true);
 
-    QString audioTypeStr = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "type", "0#0").toString();
-    QStringList listStr = audioTypeStr.split("#");
-    int audioHostType = listStr.size() >= 1 ? listStr[0].toInt() : 0;
-    int audioDeviceIndex = listStr.size() >= 2 ? listStr[1].toInt() : 0;
-
-    QList<HostInfo> hostInfos = ContextManager::audio()->getHostInfo();
-    bool configFound = false;
-    int comboboxIndex = 0;
-    int comboboxDefaultIndex = 0;
+    // Current hosts with devices
+    QList<AudioDevice::HostInfo> hosts = AudioDevice::getAllHosts();
     ui->comboAudioOuput->clear();
-    for (int i = 0; i < hostInfos.size(); i++)
+    ui->comboAudioOuput->addItem("-", "none");
+    for (int i = 0; i < hosts.count(); i++)
     {
-        if (hostInfos[i]._type < 0)
+        QString hostIdentifier = hosts[i].identifier;
+        QString hostName = hosts[i].name;
+        for (int j = 0; j < hosts[i].devices.count(); j++)
         {
-            ui->comboAudioOuput->addItem(hostInfos[i]._name, QString::number(hostInfos[i]._type) + "#-1");
-            if (hostInfos[i]._type == audioHostType)
-            {
-                configFound = true;
-                comboboxIndex = ui->comboAudioOuput->count() - 1;
-            }
-        }
-        else
-        {
-            for (int j = 0; j < hostInfos[i]._devices.size(); j++)
-            {
-                // Display the entry only if it is a default device or if it's been selected
-                if (hostInfos[i]._devices[j]._isDefault ||
-                        (hostInfos[i]._type == audioHostType && hostInfos[i]._devices[j]._index == audioDeviceIndex))
-                {
-                    // Add an element
-                    ui->comboAudioOuput->addItem(hostInfos[i]._name + ": " + hostInfos[i]._devices[j]._name,
-                                                 QString::number(hostInfos[i]._type) + "#" +
-                                                 QString::number(hostInfos[i]._devices[j]._index));
-
-                    // Keep the default index somewhere
-                    if (hostInfos[i]._isDefault && hostInfos[i]._devices[j]._isDefault)
-                        comboboxDefaultIndex = ui->comboAudioOuput->count() - 1;
-
-                    // Possibly select it
-                    if (!configFound && hostInfos[i]._type == audioHostType)
-                    {
-                        if (hostInfos[i]._devices[j]._index == audioDeviceIndex)
-                        {
-                            configFound = true;
-                            comboboxIndex = ui->comboAudioOuput->count() - 1;
-                        }
-                        else if (hostInfos[i]._devices[j]._isDefault)
-                            comboboxIndex = ui->comboAudioOuput->count() - 1;
-                    }
-                }
-            }
+            QString deviceName = hosts[i].devices[j].name;
+            ui->comboAudioOuput->addItem(hostName + " - " + deviceName, hostIdentifier + "|" + deviceName);
         }
     }
-    if (!configFound)
-        comboboxIndex = comboboxDefaultIndex;
-    ui->comboAudioOuput->setCurrentIndex(comboboxIndex);
+
+    // Select the right device
+    QString audioType = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "type", "").toString();
+    ui->comboAudioOuput->setCurrentIndex(AudioDevice::getCurrentDeviceIndex(hosts, audioType) + 1);
 
     int bufferSize = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 0).toInt();
     switch (bufferSize)

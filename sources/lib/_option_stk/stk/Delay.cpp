@@ -10,7 +10,7 @@
     A non-interpolating delay line is typically used in fixed
     delay-length applications, such as for reverberation.
 
-    by Perry R. Cook and Gary P. Scavone, 1995--2014.
+    by Perry R. Cook and Gary P. Scavone, 1995--2023.
 */
 /***************************************************/
 
@@ -42,7 +42,7 @@ Delay :: ~Delay()
 void Delay :: setMaximumDelay( unsigned long delay )
 {
   if ( delay < inputs_.size() ) return;
-  inputs_.resize( delay + 1 );
+  inputs_.resize( delay + 1, 1, 0.0 );
 }
 
 void Delay :: setDelay( unsigned long delay )

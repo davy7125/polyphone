@@ -388,15 +388,6 @@ void Synth::configure(SynthConfig *configuration)
         memset(temperament, 0, 12 * sizeof(float));
         Voice::setTemperament(temperament, 0);
     }
-
-    // Update buffer size
-    quint32 bufferSize = 2 * configuration->bufferSize;
-    if (_bufferSize != bufferSize)
-    {
-        _bufferSize = bufferSize;
-        destroySoundEnginesAndBuffers();
-        createSoundEnginesAndBuffers();
-    }
 }
 
 void Synth::setIMidiValues(IMidiValues * iMidiValues)
@@ -467,7 +458,7 @@ void Synth::setSmplEqValues(int values[10])
     _eq.setValues(values);
 }
 
-void Synth::setSampleRate(quint32 sampleRate)
+void Synth::setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize)
 {
     // Mutex not mandatory: no data generation when "setFormat" is called
     _sampleRate = sampleRate;
@@ -478,6 +469,15 @@ void Synth::setSampleRate(quint32 sampleRate)
     // Sample rate update
     _sinus.setSampleRate(sampleRate);
     _eq.setSampleRate(sampleRate);
+
+    // Update buffer size
+    bufferSize *= 2;
+    if (_bufferSize != bufferSize)
+    {
+        _bufferSize = bufferSize;
+        destroySoundEnginesAndBuffers();
+        createSoundEnginesAndBuffers();
+    }
 }
 
 void Synth::startNewRecord(QString fileName)

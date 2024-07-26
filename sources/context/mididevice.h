@@ -27,7 +27,6 @@
 
 #include <QString>
 #include <QObject>
-#include "rtmidi/RtMidi.h"
 #include "imidivalues.h"
 class ConfManager;
 class RtMidiIn;
@@ -89,7 +88,7 @@ private:
         quint8 _rpnHistoryPosition;
     };
 
-    void getMidiList(RtMidi::Api api, QMap<QString, QString> *map);
+    void getMidiList(int api, QMap<QString, QString> *map);
     void processKeyOn(int channel, int key, int vel);
     void processKeyOff(int channel, int key);
     void processPolyPressureChanged(int channel, int key, int pressure);

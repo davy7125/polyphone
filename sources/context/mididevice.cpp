@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "mididevice.h"
+#include "rtmidi/RtMidi.h"
 #include "controllerevent.h"
 #include "noteevent.h"
 #include "bendevent.h"
@@ -134,7 +135,7 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
     this->openMidiPort(_configuration->getValue(ConfManager::SECTION_MIDI, "index_port", "-1#-1").toString());
 
     // Link to the soundfont manager to initialize the CC values
-    connect(SoundfontManager::getInstance(), SIGNAL(inputModulatorChanged(int, bool, bool)), this, SLOT(onInputModulatorChanged(int, bool, bool)));
+    connect(SoundfontManager::getInstance(), SIGNAL(inputModulatorChanged(int,bool,bool)), this, SLOT(onInputModulatorChanged(int,bool,bool)));
 }
 
 MidiDevice::~MidiDevice()
@@ -177,14 +178,14 @@ QMap<QString, QString> MidiDevice::getMidiList()
     return mapRet;
 }
 
-void MidiDevice::getMidiList(RtMidi::Api api, QMap<QString, QString> * map)
+void MidiDevice::getMidiList(int api, QMap<QString, QString> * map)
 {
     try
     {
-        RtMidiIn * midiInTmp = new RtMidiIn(api, "Polyphone");
+        RtMidiIn * midiInTmp = new RtMidiIn((RtMidi::Api)api, "Polyphone");
         for (unsigned int i = 0; i < midiInTmp->getPortCount(); i++)
         {
-            map->insert(QString::number(static_cast<int>(api)) + "#" + QString::number(i),
+            map->insert(QString::number(api) + "#" + QString::number(i),
                         QString(midiInTmp->getPortName(i).c_str()));
         }
         delete midiInTmp;

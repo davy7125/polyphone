@@ -30,85 +30,51 @@
 
 class Synth;
 class ConfManager;
-typedef void PaStream;
-typedef struct _jack_port jack_port_t;
-typedef struct _jack_client jack_client_t;
-
-#define SAMPLE_RATE           44100
-
-class HostInfo
-{
-public:
-    class DeviceInfo
-    {
-    public:
-        DeviceInfo(QString name, int index, bool isDefault) :
-            _name(name),
-            _index(index),
-            _isDefault(isDefault)
-        {}
-
-        QString _name;
-        int _index;
-        bool _isDefault;
-    };
-
-    HostInfo(QString name, int type) :
-        _name(name),
-        _type(type),
-        _isDefault(false)
-    {}
-
-    QString _name;
-    int _type; // -2 is jack, -1 is none, >= 0 are from port audio
-    bool _isDefault;
-    QList<DeviceInfo> _devices;
-};
+class RtAudio;
 
 class AudioDevice : public QObject
 {
     Q_OBJECT
 
 public:
+    //////////////// INFO ////////////////
+    class DeviceInfo
+    {
+    public:
+        QString name;
+        int channelCount;
+        bool isDefault;
+    };
+
+    class HostInfo
+    {
+    public:
+        QString identifier;
+        QString name;
+        QList<DeviceInfo> devices;
+    };
+
+    static QList<HostInfo> getAllHosts();
+    static int getCurrentDeviceIndex(QList<HostInfo> devices, QString config);
+    /////////////////////////////////////
+
     AudioDevice(ConfManager * configuration);
-    Synth * getSynth() { return _synth; }
     ~AudioDevice() override;
 
-    QList<HostInfo> getHostInfo();
-
-    // Jack needs a public access for the ports and the synth
-    jack_port_t * _output_port_R;
-    jack_port_t * _output_port_L;
-    Synth * _synth;
-
-    // Public access to the audio format
-    quint32 _channelCount;
-    quint32 _sampleRate;
-    quint32 _sampleSize;
+    Synth * getSynth() { return _synth; }
 
 public slots:
     void initAudio();
     void closeConnections();
 
-signals:
-    void connectionDone();
-    void connectionDefault();
-    void connectionProblem();
-
 private:
-    void openDefaultConnection(quint32 bufferSize);
-    void openJackConnection(quint32 bufferSize);
-    void openStandardConnection(int hostType, int device, quint32 bufferSize);
+    static void getApiAndDeviceNameFromConfig(QString config, int &api, QString &deviceName);
+    static int getDefaultApi();
+    void openConnection(unsigned int deviceNumber, quint32 bufferSize, quint32 sampleRate);
 
-    // Serveur son, sortie standard ou asio
-    bool _isStandardRunning;
-    PaStream * _standardStream;
-
-    // Serveur son, jack
-    jack_client_t * _jack_client;
-
+    RtAudio * _rtAudio;
     ConfManager * _configuration;
-    bool _initialized;
+    Synth * _synth;
 };
 
 #endif // AUDIODEVICE_H

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <stdexcept>
 //#include <cstdlib>
 
 /*! \namespace stk
@@ -40,7 +41,7 @@ namespace stk {
     STK WWW site: http://ccrma.stanford.edu/software/stk/
 
     The Synthesis ToolKit in C++ (STK)
-    Copyright (c) 1995--2014 Perry R. Cook and Gary P. Scavone
+    Copyright (c) 1995--2023 Perry R. Cook and Gary P. Scavone
 
     Permission is hereby granted, free of charge, to any person
     obtaining a copy of this software and associated documentation files
@@ -82,7 +83,7 @@ typedef double StkFloat;
   be sub-classes to take care of more specific error conditions ... or
   not.
 */
-class StkError
+class StkError : public std::exception
 {
 public:
   enum Type {
@@ -110,10 +111,10 @@ protected:
 public:
   //! The constructor.
   StkError(const std::string& message, Type type = StkError::UNSPECIFIED)
-    : message_(message), type_(type) {}
+    : std::exception(), message_(message), type_(type) {}
 
   //! The destructor.
-  virtual ~StkError(void) {};
+  virtual ~StkError(void) throw() {};
 
   //! Prints thrown error message to stderr.
   virtual void printMessage(void) { std::cerr << '\n' << message_ << "\n\n"; }
@@ -126,6 +127,8 @@ public:
 
   //! Returns the thrown error message as a C string.
   virtual const char *getMessageCString(void) { return message_.c_str(); }
+
+  virtual const char *what(void) const throw() { return message_.c_str(); }
 };
 
 
@@ -171,7 +174,10 @@ public:
     class basis.
   */
   void ignoreSampleRateChange( bool ignore = true ) { ignoreSampleRateChange_ = ignore; };
-
+  
+  //! Static method that frees memory from alertList_.
+  static void  clear_alertList(){std::vector<Stk *>().swap(alertList_);};
+  
   //! Static method that returns the current rawwave path.
   static std::string rawwavePath(void) { return rawwavepath_; }
 
@@ -265,7 +271,7 @@ protected:
     Possible future improvements in this class could include functions
     to convert to and return other data types.
 
-    by Perry R. Cook and Gary P. Scavone, 1995--2014.
+    by Perry R. Cook and Gary P. Scavone, 1995--2023.
 */
 /***************************************************/
 
@@ -280,13 +286,13 @@ public:
   StkFrames( const StkFloat& value, unsigned int nFrames, unsigned int nChannels );
 
   //! The destructor.
-  ~StkFrames();
+  virtual ~StkFrames();
 
   // A copy constructor.
   StkFrames( const StkFrames& f );
 
   // Assignment operator that returns a reference to self.
-  StkFrames& operator= ( const StkFrames& f );
+  virtual StkFrames& operator= ( const StkFrames& f );
 
   //! Subscript operator that returns a reference to element \c n of self.
   /*!
@@ -303,6 +309,14 @@ public:
     checking is performed unless _STK_DEBUG_ is defined.
   */
   StkFloat operator[] ( size_t n ) const;
+    
+  //! Sum operator
+  /*!
+    The dimensions of the argument are expected to be the same as
+    self.  No range checking is performed unless _STK_DEBUG_ is
+    defined.
+  */
+  StkFrames operator+(const StkFrames &frames) const;
 
   //! Assignment by sum operator into self.
   /*!
@@ -310,7 +324,7 @@ public:
     self.  No range checking is performed unless _STK_DEBUG_ is
     defined.
   */
-  void operator+= ( StkFrames& f );
+  StkFrames& operator+= ( StkFrames& f );
 
   //! Assignment by product operator into self.
   /*!
@@ -318,7 +332,16 @@ public:
     self.  No range checking is performed unless _STK_DEBUG_ is
     defined.
   */
-  void operator*= ( StkFrames& f );
+  StkFrames& operator*= ( StkFrames& f );
+
+  //! Scaling operator (StkFrame * StkFloat).
+  StkFrames operator* ( StkFloat v ) const;
+
+  //! Scaling operator (StkFloat * StkFrame)
+  friend StkFrames operator*(StkFloat v, const StkFrames& f);
+
+  //! Scaling operator (inline).
+  StkFrames& operator*= ( StkFloat v );
 
   //! Channel / frame subscript operator that returns a reference.
   /*!
@@ -361,7 +384,7 @@ public:
     size.  Further, no new memory is allocated when the new size is
     smaller or equal to a previously allocated size.
   */
-  void resize( size_t nFrames, unsigned int nChannels = 1 );
+  virtual void resize( size_t nFrames, unsigned int nChannels = 1 );
 
   //! Resize self to represent the specified number of channels and frames and perform element initialization.
   /*!
@@ -371,7 +394,23 @@ public:
     size.  Further, no new memory is allocated when the new size is
     smaller or equal to a previously allocated size.
   */
-  void resize( size_t nFrames, unsigned int nChannels, StkFloat value );
+  virtual void resize( size_t nFrames, unsigned int nChannels, StkFloat value );
+
+  //! Retrieves a single channel
+  /*!
+    Copies the specified \c channel into \c destinationFrames's \c destinationChannel. \c destinationChannel must be between 0 and destination.channels() - 1 and
+    \c channel must be between 0 and channels() - 1. destination.frames() must be >= frames().
+    No range checking is performed unless _STK_DEBUG_ is defined.
+  */
+  StkFrames& getChannel(unsigned int channel,StkFrames& destinationFrames, unsigned int destinationChannel) const;
+
+  //! Sets a single channel
+  /*!
+    Copies the \c sourceChannel of \c sourceFrames into the \c channel of self.
+    SourceFrames.frames() must be equal to frames().
+    No range checking is performed unless _STK_DEBUG_ is defined.
+  */
+  void setChannel(unsigned int channel,const StkFrames &sourceFrames,unsigned int sourceChannel);
 
   //! Return the number of channels represented by the data.
   unsigned int channels( void ) const { return nChannels_; };
@@ -393,7 +432,7 @@ public:
    */
   StkFloat dataRate( void ) const { return dataRate_; };
 
-private:
+protected:
 
   StkFloat *data_;
   StkFloat dataRate_;
@@ -461,8 +500,27 @@ inline StkFloat StkFrames :: operator() ( size_t frame, unsigned int channel ) c
 
   return data_[ frame * nChannels_ + channel ];
 }
+    
+inline StkFrames StkFrames::operator+(const StkFrames &f) const
+{
+#if defined(_STK_DEBUG_)
+  if ( f.frames() != nFrames_ || f.channels() != nChannels_ ) {
+    std::ostringstream error;
+    error << "StkFrames::operator+: frames argument must be of equal dimensions!";
+    Stk::handleError( error.str(), StkError::MEMORY_ACCESS );
+  }
+#endif
+  StkFrames sum((unsigned int)nFrames_,nChannels_);
+  StkFloat *sumPtr = &sum[0];
+  const StkFloat *fptr = f.data_;
+  const StkFloat *dPtr = data_;
+  for (unsigned int i = 0; i < size_; i++) {
+    *sumPtr++ = *fptr++ + *dPtr++;
+  }
+  return sum;
+}
 
-inline void StkFrames :: operator+= ( StkFrames& f )
+inline StkFrames& StkFrames :: operator+= ( StkFrames& f )
 {
 #if defined(_STK_DEBUG_)
   if ( f.frames() != nFrames_ || f.channels() != nChannels_ ) {
@@ -476,9 +534,10 @@ inline void StkFrames :: operator+= ( StkFrames& f )
   StkFloat *dptr = data_;
   for ( unsigned int i=0; i<size_; i++ )
     *dptr++ += *fptr++;
+  return *this;
 }
 
-inline void StkFrames :: operator*= ( StkFrames& f )
+inline StkFrames& StkFrames :: operator*= ( StkFrames& f )
 {
 #if defined(_STK_DEBUG_)
   if ( f.frames() != nFrames_ || f.channels() != nChannels_ ) {
@@ -492,7 +551,39 @@ inline void StkFrames :: operator*= ( StkFrames& f )
   StkFloat *dptr = data_;
   for ( unsigned int i=0; i<size_; i++ )
     *dptr++ *= *fptr++;
+  return *this;
 }
+
+inline StkFrames StkFrames::operator*(StkFloat v) const
+{
+  StkFrames res((unsigned int)nFrames_, nChannels_);
+  StkFloat *resPtr = &res[0];
+  const StkFloat *dPtr = data_;
+  for (unsigned int i = 0; i < size_; i++) {
+    *resPtr++ = v * *dPtr++;
+  }
+  return res;
+}
+
+inline StkFrames operator*(StkFloat v, const StkFrames& f)
+{
+  StkFrames res((unsigned int)f.nFrames_, f.nChannels_);
+  StkFloat *resPtr = &res[0];
+  StkFloat *dPtr = f.data_;
+  for (unsigned int i = 0; i < f.size_; i++) {
+    *resPtr++ = v * *dPtr++;
+  }
+  return res;
+}
+
+inline StkFrames& StkFrames :: operator*= ( StkFloat v )
+{
+  StkFloat *dptr = data_;
+  for ( unsigned int i=0; i<size_; i++ )
+    *dptr++ *= v;
+  return *this;
+}
+
 
 // Here are a few other useful typedefs.
 typedef unsigned short UINT16;
@@ -517,7 +608,7 @@ const unsigned int RT_BUFFER_SIZE = 512;
 // below.  The global STK rawwave path variable can be dynamically set
 // with the Stk::setRawwavePath() function.  This value is
 // concatenated to the beginning of all references to rawwave files in
-// the various STK core classes (ex. Clarinet.cpp).  If you wish to
+// the various STK core classes (e.g. Clarinet.cpp).  If you wish to
 // move the rawwaves directory to a different location in your file
 // system, you will need to set this path definition appropriately.
 #if !defined(RAWWAVE_PATH)
@@ -531,7 +622,7 @@ const StkFloat ONE_OVER_128 = 0.0078125;
 #if defined(__WINDOWS_DS__) || defined(__WINDOWS_ASIO__) || defined(__WINDOWS_MM__)
   #define __OS_WINDOWS__
   #define __STK_REALTIME__
-#elif defined(__LINUX_OSS__) || defined(__LINUX_ALSA__) || defined(__UNIX_JACK__)
+#elif defined(__LINUX_OSS__) || defined(__LINUX_ALSA__) || defined(__UNIX_JACK__) || defined(__LINUX_PULSE__)
   #define __OS_LINUX__
   #define __STK_REALTIME__
 #elif defined(__IRIX_AL__)
