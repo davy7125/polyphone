@@ -176,13 +176,8 @@ void TableHeaderView::paintSection(QPainter *painter, const QRect &rect, int log
     textRect.translate(MARGIN, 0);
 
     // Adapt the text
-    QString adaptedText = text;
-    int lengthLine1 = text.length();
-    QFontMetrics fm(this->font());
-    while (fm.horizontalAdvance(text.left(lengthLine1)) > textRect.width() - 2 * MARGIN && lengthLine1 > 0)
-        lengthLine1--;
-    if (lengthLine1 < text.length())
-        adaptedText = text.left(lengthLine1) + "\n" + fm.elidedText(text.mid(lengthLine1), Qt::ElideRight, textRect.width());
+    QString line1, line2;
+    splitText(text, textRect.width(), line1, line2);
 
     // First draw the cell without text for the background and border
     this->model()->blockSignals(true);
@@ -196,11 +191,51 @@ void TableHeaderView::paintSection(QPainter *painter, const QRect &rect, int log
     if (foregroundBrush.canConvert<QBrush>())
         painter->setPen(foregroundBrush.value<QBrush>().color());
     painter->setClipRect(rect);
-    painter->drawText(textRect, Qt::AlignCenter, adaptedText);
+    painter->drawText(textRect, Qt::AlignCenter, line1 + (line2 == "" ? "" : "\n" + line2));
 
     // Finally draw the icon on the right and vertically centered
     int iconHeight = iconRect.height();
     int headerHeight = rect.height();
     int offsetY = iconHeight < headerHeight ? (headerHeight - iconHeight) / 2 : 0;
     painter->drawPixmap(textRect.right() + MARGIN, rect.top() + offsetY, iconRect.width(), iconRect.height(), icon);
+}
+
+void TableHeaderView::splitText(QString text, int width, QString &line1, QString &line2) const
+{
+    line1 = text;
+    line2 = "";
+    QFontMetrics fm(this->font());
+
+    // Number of characters on the first line
+    int lengthLine1 = text.length();
+    while (fm.horizontalAdvance(text.left(lengthLine1)) > width && lengthLine1 > 0)
+        lengthLine1--;
+
+    // The first line cannot contain everything?
+    if (lengthLine1 < text.length())
+    {
+        // Try to split according to spaces
+        QStringList split = text.left(lengthLine1).split(" ");
+        if (split.count() > 1)
+        {
+            // When splitting with the last space, can the second line contain everything?
+            line2 = (split.last() + text.mid(lengthLine1)).trimmed();
+            if (fm.horizontalAdvance(line2) <= width)
+            {
+                line1 = split[0];
+                for (int i = 1; i < split.count() - 1; i++)
+                    line1 += " " + split[i];
+                line1 = line1.trimmed();
+                return;
+            }
+        }
+
+        // Otherwise put as much characters on the first line and elide the second line
+        line1 = text.left(lengthLine1);
+        line2 = fm.elidedText(text.mid(lengthLine1), Qt::ElideRight, width);
+    }
+
+    // Finally trim the lines
+    line1 = line1.trimmed();
+    line2 = line2.trimmed();
 }

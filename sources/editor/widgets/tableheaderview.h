@@ -66,6 +66,8 @@ private:
     SoloManager * _solo;
 
     static const int MARGIN;
+
+    void splitText(QString text, int width, QString &line1, QString &line2) const;
 };
 
 #endif // TABLEHEADERVIEW_H
