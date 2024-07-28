@@ -197,6 +197,8 @@ SOURCES	+= main.cpp \
     core/input/grandorgue/grandorguedatathrough.cpp \
     core/input/grandorgue/grandorgueranklink.cpp \
     core/input/grandorgue/grandorgueswitch.cpp \
+    core/input/sfz/sfzparametergroup.cpp \
+    core/input/sfz/sfzparameterregion.cpp \
     core/sample/samplereaderogg.cpp \
     core/solomanager.cpp \
     core/input/abstractinputparser.cpp \
@@ -462,8 +464,6 @@ SOURCES	+= main.cpp \
     core/output/sf2/sf2indexconverter.cpp \
     core/output/sf3/outputsf3.cpp \
     core/input/sfz/sfzparameter.cpp \
-    core/input/sfz/sfzparametergroup.cpp \
-    core/input/sfz/sfzparametergroupassembly.cpp \
     dialogs/dialogcreateelements.cpp \
     editor/widgets/tableheaderview.cpp \
     context/interface/configtoc.cpp \
@@ -542,6 +542,8 @@ HEADERS += \
     core/input/grandorgue/grandorguedatathrough.h \
     core/input/grandorgue/grandorgueranklink.h \
     core/input/grandorgue/grandorgueswitch.h \
+    core/input/sfz/sfzparametergroup.h \
+    core/input/sfz/sfzparameterregion.h \
     core/sample/samplereaderogg.h \
     core/solomanager.h \
     core/input/abstractinput.h \
@@ -825,8 +827,6 @@ HEADERS += \
     core/output/sf2/sf2indexconverter.h \
     core/output/sf3/outputsf3.h \
     core/input/sfz/sfzparameter.h \
-    core/input/sfz/sfzparametergroup.h \
-    core/input/sfz/sfzparametergroupassembly.h \
     dialogs/dialogcreateelements.h \
     editor/widgets/tableheaderview.h \
     context/interface/configtoc.h \

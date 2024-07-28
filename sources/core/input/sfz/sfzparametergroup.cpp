@@ -25,720 +25,335 @@
 #include "sfzparametergroup.h"
 #include "soundfontmanager.h"
 
-QList<int> SfzParameterGroup::getSampleIndex(SoundfontManager *sf2, EltID idElt, QString pathSfz) const
+void SfzParameterGroup::moveOpcodesInGlobal(SfzParameterRegion &globalZone)
 {
-    QList<int> sampleIndex;
+    _paramGlobaux.mergeIfNotDefined(globalZone);
+}
 
-    int indexOpSample = -1;
-    for (int i = 0; i < _listeParam.size(); i++)
-        if (_listeParam.at(i).getOpCode() == SfzParameter::op_sample)
-            indexOpSample = i;
-
-    if (indexOpSample == -1)
-        return sampleIndex;
-
-    // Reconstitution adresse du fichier
-    QString filePath =  _listeParam.at(indexOpSample).getStringValue();
-    QString fileName = pathSfz + "/" + filePath;
-    if (!QFile(fileName).exists())
+void SfzParameterGroup::moveKeynumInSamples(SfzParameter::OpCode opCodeKeynum, SfzParameter::OpCode opCodeBase)
+{
+    if (_paramGlobaux.isDefined(opCodeKeynum))
     {
-        QStringList list = getFullPath(pathSfz, filePath.split("/", Qt::SkipEmptyParts));
-        if (!list.isEmpty())
-            fileName = list.first();
-        else
-            return sampleIndex;
-    }
-
-    // Sample already loaded?
-    idElt.typeElement = elementSmpl;
-    QStringList names;
-    foreach (int i, sf2->getSiblings(idElt))
-    {
-        idElt.indexElt = i;
-        if (sf2->getQstr(idElt, champ_filenameForData) == fileName)
-            sampleIndex << i;
-        names << sf2->getQstr(idElt, champ_name);
-    }
-    if (!sampleIndex.isEmpty())
-        return sampleIndex;
-
-    // Récupération des informations d'un sample
-    Sound son;
-    if (!son.setFileName(fileName, false))
-    {
-        return sampleIndex;
-    }
-    int nChannels = son.getUInt32(champ_wChannels);
-    QString nom = QFileInfo(fileName).completeBaseName();
-    QString nom2 = nom;
-
-    // Adaptation du nom, éventuellement
-    int suffixNumber = 0;
-    if (nChannels == 2)
-    {
-        while ((names.contains(getName(nom, 20, suffixNumber, "L"), Qt::CaseInsensitive) ||
-                names.contains(getName(nom, 20, suffixNumber, "R"), Qt::CaseInsensitive)) &&
-               suffixNumber < 100)
+        double valueKeynum = _paramGlobaux.getDoubleValue(opCodeKeynum);
+        double valueBase = 0.001;
+        if (_paramGlobaux.isDefined(opCodeBase))
+            valueBase = _paramGlobaux.getDoubleValue(opCodeBase);
+        for (int i = 0; i < _regionList.size(); i++)
         {
-            suffixNumber++;
+            if (!_regionList.at(i).isDefined(opCodeKeynum))
+                _regionList[i] << SfzParameter(opCodeKeynum, valueKeynum);
+            if (!_regionList.at(i).isDefined(opCodeBase))
+                _regionList[i] << SfzParameter(opCodeBase, valueBase);
         }
-        nom2 = getName(nom, 20, suffixNumber, "L");
-        nom = getName(nom, 20, suffixNumber, "R");
-    }
-    else
-    {
-        while (names.contains(getName(nom, 20, suffixNumber), Qt::CaseInsensitive) && suffixNumber < 100)
-        {
-            suffixNumber++;
-        }
-        nom = getName(nom, 20, suffixNumber);
-    }
 
-    // Création d'un nouveau sample
-    AttributeValue val;
-    for (int numChannel = 0; numChannel < nChannels; numChannel++)
+        _paramGlobaux.removeOpCode(opCodeKeynum);
+    }
+}
+
+void SfzParameterGroup::moveOpcodeInSamples(SfzParameter::OpCode opcode, QMetaType::Type type)
+{
+    switch (type)
     {
-        idElt.indexElt = sf2->add(idElt);
-        sampleIndex << idElt.indexElt;
-        if (nChannels == 2)
+    case QMetaType::Double:
+        if (_paramGlobaux.isDefined(opcode))
         {
-            if (numChannel == 0)
+            double value = _paramGlobaux.getDoubleValue(opcode);
+            for (int i = 0; i < _regionList.size(); i++)
+                if (!_regionList.at(i).isDefined(opcode))
+                    _regionList[i] << SfzParameter(opcode, value);
+        }
+        break;
+    case QMetaType::Int:
+        if (_paramGlobaux.isDefined(opcode))
+        {
+            int value = _paramGlobaux.getIntValue(opcode);
+            for (int i = 0; i < _regionList.size(); i++)
+                if (!_regionList.at(i).isDefined(opcode))
+                    _regionList[i] << SfzParameter(opcode, value);
+        }
+        break;
+    case QMetaType::QString:
+        if (_paramGlobaux.isDefined(opcode))
+        {
+            QString value = _paramGlobaux.getStrValue(opcode);
+            for (int i = 0; i < _regionList.size(); i++)
+                if (!_regionList.at(i).isDefined(opcode))
+                    _regionList[i] << SfzParameter(opcode, value);
+        }
+        break;
+    default:
+        break;
+    }
+    _paramGlobaux.removeOpCode(opcode);
+}
+
+void SfzParameterGroup::moveModInSamples()
+{
+    QList<SfzParameter::OpCode> listTmp;
+    listTmp << SfzParameter::op_modEnvToTon
+            << SfzParameter::op_pitcheg_attack
+            << SfzParameter::op_pitcheg_decay
+            << SfzParameter::op_pitcheg_delay
+            << SfzParameter::op_pitcheg_hold
+            << SfzParameter::op_pitcheg_release
+            << SfzParameter::op_pitcheg_sustain;
+    moveModInSamples(listTmp);
+
+    listTmp.clear();
+    listTmp << SfzParameter::op_modEnvToFilter
+            << SfzParameter::op_fileg_attack
+            << SfzParameter::op_fileg_decay
+            << SfzParameter::op_fileg_delay
+            << SfzParameter::op_fileg_hold
+            << SfzParameter::op_fileg_release
+            << SfzParameter::op_fileg_sustain;
+    moveModInSamples(listTmp);
+
+    listTmp.clear();
+    listTmp << SfzParameter::op_modLFOtoVolume
+            << SfzParameter::op_modLFOdelay
+            << SfzParameter::op_modLFOfreq;
+    moveModInSamples(listTmp);
+
+    listTmp.clear();
+    listTmp << SfzParameter::op_modLFOtoFilter
+            << SfzParameter::op_filLFOdelay
+            << SfzParameter::op_filLFOfreq;
+    moveModInSamples(listTmp);
+}
+
+void SfzParameterGroup::moveModInSamples(QList<SfzParameter::OpCode> opCodeList)
+{
+    for (int i = 0; i < _regionList.size(); i++)
+    {
+        for (int j = 0; j < opCodeList.size(); j++)
+        {
+            SfzParameter::OpCode opCode = opCodeList.at(j);
+            if (!_regionList.at(i).isDefined(opCode) && _paramGlobaux.isDefined(opCode))
             {
-                // Gauche
-                sf2->set(idElt, champ_name, nom2);
-                val.wValue = idElt.indexElt + 1;
-                sf2->set(idElt, champ_wSampleLink, val);
-                val.sfLinkValue = leftSample;
-                sf2->set(idElt, champ_sfSampleType, val);
+                // On regarde si d'autres opcodes associés sont présents
+                bool isPresent = false;
+                for (int k = 0; k < opCodeList.size(); k++)
+                    if (k != j)
+                        isPresent |= _regionList.at(i).isDefined(opCodeList.at(k));
+                if (isPresent)
+                {
+                    if (opCode == SfzParameter::op_modEnvToTon || opCode == SfzParameter::op_modEnvToFilter ||
+                            opCode == SfzParameter::op_modLFOtoVolume || opCode == SfzParameter::op_modLFOtoFilter)
+                        _regionList[i] << SfzParameter(opCode, _paramGlobaux.getIntValue(opCode));
+                    else
+                        _regionList[i] << SfzParameter(opCode, _paramGlobaux.getDoubleValue(opCode));
+                }
             }
-            else
-            {
-                // Droite
-                sf2->set(idElt, champ_name, nom);
-                val.wValue = idElt.indexElt - 1;
-                sf2->set(idElt, champ_wSampleLink, val);
-                val.sfLinkValue = rightSample;
-                sf2->set(idElt, champ_sfSampleType, val);
-            }
-        }
-        else
-        {
-            sf2->set(idElt, champ_name, nom);
-            val.wValue = 0;
-            sf2->set(idElt, champ_wSampleLink, val);
-            val.sfLinkValue = monoSample;
-            sf2->set(idElt, champ_sfSampleType, val);
-        }
-        sf2->set(idElt, champ_filenameForData, fileName);
-        val.dwValue = son.getUInt32(champ_dwStart16);
-        sf2->set(idElt, champ_dwStart16, val);
-        val.dwValue = son.getUInt32(champ_dwStart24);
-        sf2->set(idElt, champ_dwStart24, val);
-        val.wValue = numChannel;
-        sf2->set(idElt, champ_wChannel, val);
-        val.dwValue = son.getUInt32(champ_dwLength);
-        sf2->set(idElt, champ_dwLength, val);
-        val.dwValue = son.getUInt32(champ_dwSampleRate);
-        sf2->set(idElt, champ_dwSampleRate, val);
-        val.dwValue = son.getUInt32(champ_dwStartLoop);
-        sf2->set(idElt, champ_dwStartLoop, val);
-        val.dwValue = son.getUInt32(champ_dwEndLoop);
-        sf2->set(idElt, champ_dwEndLoop, val);
-        val.bValue = (quint8)son.getUInt32(champ_byOriginalPitch);
-        sf2->set(idElt, champ_byOriginalPitch, val);
-        val.cValue = (char)son.getInt32(champ_chPitchCorrection);
-        sf2->set(idElt, champ_chPitchCorrection, val);
-        val.wValue = son.getUInt32(champ_bpsFile);
-        sf2->set(idElt, champ_bpsFile, val);
-    }
-
-    return sampleIndex;
-}
-
-void SfzParameterGroup::adaptOffsets(int startLoop, int endLoop, int length)
-{
-    for (int i = 0; i < _listeParam.size(); i++)
-    {
-        if (_listeParam.at(i).getOpCode() == SfzParameter::op_loop_start)
-            _listeParam[i].setIntValue(_listeParam.at(i).getIntValue() - startLoop);
-        else if (_listeParam.at(i).getOpCode() == SfzParameter::op_loop_end)
-            _listeParam[i].setIntValue(_listeParam.at(i).getIntValue() - endLoop);
-        else if (_listeParam.at(i).getOpCode() == SfzParameter::op_end)
-            _listeParam[i].setIntValue(_listeParam.at(i).getIntValue() - length);
-    }
-    if (startLoop != endLoop && !isDefined(SfzParameter::op_loop_mode) && (startLoop != 0 || endLoop != 1))
-        _listeParam << SfzParameter("loop_mode", "loop_continuous");
-}
-
-void SfzParameterGroup::adjustStereoVolumeAndCorrection(QString path, int defaultCorrection)
-{
-    QString sample = getStrValue(SfzParameter::op_sample);
-    if (!sample.isEmpty())
-    {
-        Sound son;
-        son.setFileName(path + "/" + sample);
-        if (son.getUInt32(champ_wChannels) == 2)
-            adjustVolume(3.);
-        int correctionSample = son.getInt32(champ_chPitchCorrection);
-        if (correctionSample != 0)
-            adjustCorrection(correctionSample, defaultCorrection);
-    }
-}
-
-bool SfzParameterGroup::sampleValid(QString path)
-{
-    bool bRet = false;
-    if (this->isDefined(SfzParameter::op_sample))
-    {
-        QString sample = getStrValue(SfzParameter::op_sample);
-        bRet = QFile(path + "/" + sample).exists();
-    }
-    return bRet;
-}
-
-void SfzParameterGroup::checkFilter()
-{
-    bool removeFilter = false;
-    if (isDefined(SfzParameter::op_filterType))
-    {
-        QString type = getStrValue(SfzParameter::op_filterType);
-        if (type != "lpf_2p" && type != "lpf_1p") // 1 pôle : acceptable
-            removeFilter = true;
-    }
-
-    if (removeFilter)
-    {
-        for (int i = _listeParam.size() - 1; i >= 0; i--)
-        {
-            if (_listeParam.at(i).getOpCode() == SfzParameter::op_filterFreq ||
-                    _listeParam.at(i).getOpCode() == SfzParameter::op_filterType ||
-                    _listeParam.at(i).getOpCode() == SfzParameter::op_filterQ)
-                _listeParam.removeAt(i);
         }
     }
 }
 
 void SfzParameterGroup::adjustVolume(double offset)
 {
-    bool isDefined = false;
-    for (int i = 0; i < _listeParam.size(); i++)
-    {
-        if (_listeParam.at(i).getOpCode() == SfzParameter::op_volume)
-        {
-            _listeParam[i].setDoubleValue(_listeParam.at(i).getDoubleValue() - offset);
-            isDefined = true;
-        }
-    }
-    if (!isDefined)
-        _listeParam << SfzParameter(SfzParameter::op_volume, -offset);
+    _paramGlobaux.adjustVolume(offset);
+    for (int i = 0; i < _regionList.size(); i++)
+        _regionList[i].adjustVolume(offset);
 }
 
-void SfzParameterGroup::adjustCorrection(int offset, int defaultCorrection)
+void SfzParameterGroup::adjustStereoVolumeAndCorrection(QString path)
 {
-    bool isDefined = false;
-    for (int i = 0; i < _listeParam.size(); i++)
-    {
-        if (_listeParam.at(i).getOpCode() == SfzParameter::op_tuningFine)
-        {
-            _listeParam[i].setIntValue(_listeParam.at(i).getIntValue() - offset);
-            isDefined = true;
-        }
-    }
-    if (!isDefined)
-        _listeParam << SfzParameter(SfzParameter::op_tuningFine, defaultCorrection - offset);
+    for (int i = 0; i < _regionList.size(); i++)
+        _regionList[i].adjustStereoVolumeAndCorrection(path, _paramGlobaux.getIntValue(SfzParameter::op_tuningFine));
 }
 
-QStringList SfzParameterGroup::getFullPath(QString base, QStringList directories)
+void SfzParameterGroup::adjustModulationVolume()
 {
-    QStringList listRet;
-    if (directories.isEmpty())
-        listRet << base;
-    else
+    double correctionGlobale = 0;
+    if (_paramGlobaux.isDefined(SfzParameter::op_modLFOtoVolume))
     {
-        QDir dir(base);
-        dir.setFilter(QDir::Dirs | QDir::Files | QDir::NoSymLinks | QDir::NoDotAndDotDot);
-        QStringList childs = dir.entryList();
-        QString nextDirectory = directories.takeFirst();
-        for (int i = 0; i < childs.size(); i++)
-            if (childs.at(i).compare(nextDirectory, Qt::CaseInsensitive) == 0)
-                listRet << getFullPath(base + "/" + childs.at(i), directories);
+        correctionGlobale = qAbs(_paramGlobaux.getDoubleValue(SfzParameter::op_modLFOtoVolume));
+        _paramGlobaux.adjustVolume(-correctionGlobale);
     }
-    return listRet;
+    for (int i = 0; i < _regionList.size(); i++)
+    {
+        double correction;
+        if (_regionList.at(i).isDefined(SfzParameter::op_modLFOtoVolume))
+            correction = qAbs(_regionList.at(i).getDoubleValue(SfzParameter::op_modLFOtoVolume));
+        else
+            correction = correctionGlobale;
+        if (correction != 0)
+            _regionList[i].adjustVolume(-correction);
+    }
 }
 
-void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idElt) const
+void SfzParameterGroup::checkSampleValid(QString path)
 {
-    AttributeValue val;
-    double dTmp;
-    for (int i = 0; i < _listeParam.size(); i++)
-    {
-        switch (_listeParam.at(i).getOpCode())
-        {
-        case SfzParameter::op_key:
-            val.rValue.byLo = _listeParam.at(i).getIntValue();
-            val.rValue.byHi = val.rValue.byLo;
-            sf2->set(idElt, champ_keyRange, val);
-            val.wValue = _listeParam.at(i).getIntValue();
-            sf2->set(idElt, champ_overridingRootKey, val);
-            break;
-        case SfzParameter::op_keyMin:
-            if (sf2->isSet(idElt, champ_keyRange))
-                val = sf2->get(idElt, champ_keyRange);
-            else
-                val.rValue.byHi = 127;
-            val.rValue.byLo = _listeParam.at(i).getIntValue();
-            sf2->set(idElt, champ_keyRange, val);
-            break;
-        case SfzParameter::op_keyMax:
-            if (sf2->isSet(idElt, champ_keyRange))
-                val = sf2->get(idElt, champ_keyRange);
-            else
-                val.rValue.byLo = 0;
-            val.rValue.byHi = _listeParam.at(i).getIntValue();
-            sf2->set(idElt, champ_keyRange, val);
-            break;
-        case SfzParameter::op_velMin:
-            if (sf2->isSet(idElt, champ_velRange))
-                val = sf2->get(idElt, champ_velRange);
-            else
-                val.rValue.byHi = 127;
-            val.rValue.byLo = _listeParam.at(i).getIntValue();
-            sf2->set(idElt, champ_velRange, val);
-            break;
-        case SfzParameter::op_velMax:
-            if (sf2->isSet(idElt, champ_velRange))
-                val = sf2->get(idElt, champ_velRange);
-            else
-                val.rValue.byLo = 0;
-            val.rValue.byHi = _listeParam.at(i).getIntValue();
-            sf2->set(idElt, champ_velRange, val);
-            break;
-        case SfzParameter::op_rootKey:
-            if (!isDefined(SfzParameter::op_key))
-            {
-                val.wValue = _listeParam.at(i).getIntValue();
-                sf2->set(idElt, champ_overridingRootKey, val);
-            }
-            break;
-        case SfzParameter::op_exclusiveClass:
-            val.wValue = _listeParam.at(i).getIntValue();
-            if (isDefined(SfzParameter::op_off_by) && getIntValue(SfzParameter::op_off_by) == val.wValue)
-                sf2->set(idElt, champ_exclusiveClass, val);
-            break;
-        case SfzParameter::op_tuningFine:
-            val.wValue = _listeParam.at(i).getIntValue();
-            sf2->set(idElt, champ_fineTune, val);
-            break;
-        case SfzParameter::op_tuningCoarse:
-            val.wValue = _listeParam.at(i).getIntValue();
-            sf2->set(idElt, champ_coarseTune, val);
-            break;
-        case SfzParameter::op_delay:
-            dTmp = _listeParam.at(i).getDoubleValue();
-            addSeconds(dTmp, champ_delayModEnv, sf2, idElt);
-            addSeconds(dTmp, champ_delayModLFO, sf2, idElt);
-            addSeconds(dTmp, champ_delayVibLFO, sf2, idElt);
-            addSeconds(dTmp, champ_delayVolEnv, sf2, idElt);
-            break;
-        case SfzParameter::op_offset:
-            if (idElt.typeElement == elementInstSmpl)
-            {
-                val.shValue = _listeParam.at(i).getIntValue() % 32768;
-                sf2->set(idElt, champ_startAddrsOffset, val);
-                val.shValue = _listeParam.at(i).getIntValue() / 32768;
-                sf2->set(idElt, champ_startAddrsCoarseOffset, val);
-            }
-            break;
-        case SfzParameter::op_end:
-            if (idElt.typeElement == elementInstSmpl)
-            {
-                val.shValue = _listeParam.at(i).getIntValue() % 32768;
-                sf2->set(idElt, champ_endAddrsOffset, val);
-                val.shValue = _listeParam.at(i).getIntValue() / 32768;
-                sf2->set(idElt, champ_endAddrsCoarseOffset, val);
-            }
-            break;
-        case SfzParameter::op_loop_start:
-            if (idElt.typeElement == elementInstSmpl)
-            {
-                val.shValue = _listeParam.at(i).getIntValue() % 32768;
-                sf2->set(idElt, champ_startloopAddrsOffset, val);
-                val.shValue = _listeParam.at(i).getIntValue() / 32768;
-                sf2->set(idElt, champ_startloopAddrsCoarseOffset, val);
-            }
-            break;
-        case SfzParameter::op_loop_end:
-            if (idElt.typeElement == elementInstSmpl)
-            {
-                val.shValue = _listeParam.at(i).getIntValue() % 32768;
-                sf2->set(idElt, champ_endloopAddrsOffset, val);
-                val.shValue = _listeParam.at(i).getIntValue() / 32768;
-                sf2->set(idElt, champ_endloopAddrsCoarseOffset, val);
-            }
-            break;
-        case SfzParameter::op_loop_mode:
-            if (_listeParam.at(i).getStringValue() == "no_loop")
-                val.wValue = 0;
-            else if (_listeParam.at(i).getStringValue() == "one_shot")
-            {
-                val.wValue = 0;
-                addSeconds(100, champ_releaseVolEnv, sf2, idElt);
-                addSeconds(100, champ_releaseModEnv, sf2, idElt);
-            }
-            else if (_listeParam.at(i).getStringValue() == "loop_continuous")
-                val.wValue = 1;
-            else if (_listeParam.at(i).getStringValue() == "loop_sustain")
-                val.wValue = 3;
-            sf2->set(idElt, champ_sampleModes, val);
-            break;
-        case SfzParameter::op_volume:
-            dTmp = -_listeParam.at(i).getDoubleValue() / DB_SF2_TO_SFZ;
-            if (sf2->isSet(idElt, champ_initialAttenuation))
-                dTmp += (double)sf2->get(idElt, champ_initialAttenuation).shValue / 10.;
-            val.shValue = qRound(10. * dTmp);
-            sf2->set(idElt, champ_initialAttenuation, val);
-            break;
-        case SfzParameter::op_tuningScale:
-            val.shValue = _listeParam.at(i).getIntValue();
-            sf2->set(idElt, champ_scaleTuning, val);
-            break;
-        case SfzParameter::op_ampeg_delay:
-            addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayVolEnv, sf2, idElt);
-            break;
-        case SfzParameter::op_ampeg_attack:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
-            sf2->set(idElt, champ_attackVolEnv, val);
-            break;
-        case SfzParameter::op_ampeg_hold:
-            if (!isDefined(SfzParameter::op_noteToVolEnvHold))
-            {
-                val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
-                sf2->set(idElt, champ_holdVolEnv, val);
-            }
-            break;
-        case SfzParameter::op_ampeg_decay:
-            if (!isDefined(SfzParameter::op_noteToVolEnvDecay))
-            {
-                val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
-                sf2->set(idElt, champ_decayVolEnv, val);
-            }
-            break;
-        case SfzParameter::op_ampeg_sustain:
-            dTmp = _listeParam.at(i).getDoubleValue();
-            if (dTmp >= 0.1)
-                val.shValue = qRound(-10. * percentToDB(dTmp));
-            else
-                val.shValue = 1440;
-            sf2->set(idElt, champ_sustainVolEnv, val);
-            break;
-        case SfzParameter::op_ampeg_release:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
-            sf2->set(idElt, champ_releaseVolEnv, val);
-            break;
-        case SfzParameter::op_noteToVolEnvHold:
-        {
-            double baseValue = 0.001;
-            int keynum = 0;
-            getKeynumValues(baseValue, keynum, SfzParameter::op_noteToVolEnvHold, SfzParameter::op_ampeg_hold);
-            val.shValue = keynum;
-            sf2->set(idElt, champ_keynumToVolEnvHold, val);
-            val.shValue = qRound(log2m1200(baseValue));
-            sf2->set(idElt, champ_holdVolEnv, val);
-        }break;
-        case SfzParameter::op_noteToVolEnvDecay:
-        {
-            double baseValue = 0.001;
-            int keynum = 0;
-            getKeynumValues(baseValue, keynum, SfzParameter::op_noteToVolEnvDecay, SfzParameter::op_ampeg_decay);
-            val.shValue = keynum;
-            sf2->set(idElt, champ_keynumToVolEnvDecay, val);
-            val.shValue = qRound(log2m1200(baseValue));
-            sf2->set(idElt, champ_decayVolEnv, val);
-        }break;
-        case SfzParameter::op_reverb:
-            val.wValue = qRound(10. * _listeParam.at(i).getDoubleValue());
-            sf2->set(idElt, champ_reverbEffectsSend, val);
-            break;
-        case SfzParameter::op_chorus:
-            val.wValue = qRound(10. * _listeParam.at(i).getDoubleValue());
-            sf2->set(idElt, champ_chorusEffectsSend, val);
-            break;
-        case SfzParameter::op_filterFreq:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue() / 8.176));
-            sf2->set(idElt, champ_initialFilterFc, val);
-            break;
-        case SfzParameter::op_filterQ:
-            val.shValue = qRound(10. * _listeParam.at(i).getDoubleValue());
-            sf2->set(idElt, champ_initialFilterQ, val);
-            break;
-        case SfzParameter::op_vibLFOdelay:
-            if (isDefined(SfzParameter::op_vibLFOtoTon))
-                addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayVibLFO, sf2, idElt);
-            break;
-        case SfzParameter::op_vibLFOfreq:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue() / 8.176));
-            sf2->set(idElt, champ_freqVibLFO, val);
-            break;
-        case SfzParameter::op_vibLFOtoTon:
-            val.shValue = _listeParam.at(i).getIntValue();
-            sf2->set(idElt, champ_vibLfoToPitch, val);
-            break;
-        case SfzParameter::op_pitcheg_delay:
-            if (isDefined(SfzParameter::op_modEnvToTon))
-                addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayModEnv, sf2, idElt);
-            break;
-        case SfzParameter::op_pitcheg_attack:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
-            sf2->set(idElt, champ_attackModEnv, val);
-            break;
-        case SfzParameter::op_pitcheg_hold:
-            if (!isDefined(SfzParameter::op_noteToModEnvHold))
-            {
-                val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
-                sf2->set(idElt, champ_holdModEnv, val);
-            }
-            break;
-        case SfzParameter::op_pitcheg_decay:
-            if (!isDefined(SfzParameter::op_noteToModEnvDecay))
-            {
-                val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
-                sf2->set(idElt, champ_decayModEnv, val);
-            }
-            break;
-        case SfzParameter::op_pitcheg_sustain:
-            val.shValue = qRound(1000. - 10. * _listeParam.at(i).getDoubleValue());
-            sf2->set(idElt, champ_sustainModEnv, val);
-            break;
-        case SfzParameter::op_pitcheg_release:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
-            sf2->set(idElt, champ_releaseModEnv, val);
-            break;
-        case SfzParameter::op_modEnvToTon:
-            val.shValue = _listeParam.at(i).getIntValue();
-            sf2->set(idElt, champ_modEnvToPitch, val);
-            break;
-        case SfzParameter::op_noteToModEnvHold:
-        {
-            double baseValue = 0.001;
-            int keynum = 0;
-            getKeynumValues(baseValue, keynum, SfzParameter::op_noteToModEnvHold, SfzParameter::op_pitcheg_hold);
-            val.shValue = keynum;
-            sf2->set(idElt, champ_keynumToModEnvHold, val);
-            val.shValue = qRound(log2m1200(baseValue));
-            sf2->set(idElt, champ_holdModEnv, val);
-        }break;
-        case SfzParameter::op_noteToModEnvDecay:
-        {
-            double baseValue = 0.001;
-            int keynum = 0;
-            getKeynumValues(baseValue, keynum, SfzParameter::op_noteToModEnvDecay, SfzParameter::op_pitcheg_decay);
-            val.shValue = keynum;
-            sf2->set(idElt, champ_keynumToModEnvDecay, val);
-            val.shValue = qRound(log2m1200(baseValue));
-            sf2->set(idElt, champ_decayModEnv, val);
-        }break;
-        case SfzParameter::op_modLFOdelay:
-            addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayModLFO, sf2, idElt);
-            break;
-        case SfzParameter::op_modLFOfreq:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue() / 8.176));
-            sf2->set(idElt, champ_freqModLFO, val);
-            break;
-        case SfzParameter::op_modLFOtoVolume:
-            val.shValue = qRound(10. * _listeParam.at(i).getDoubleValue());
-            sf2->set(idElt, champ_modLfoToVolume, val);
-            break;
-        default:
-            break;
-        }
-    }
+    int size = _regionList.size();
+    for (int i = size - 1; i >= 0; i--)
+        if (!_regionList[i].sampleValid(path))
+            _regionList.removeAt(i);
+}
 
-    // Vélocité fixe
-    if (isDefined(SfzParameter::op_amp_velcurve_1) && isDefined(SfzParameter::op_amp_velcurve_127))
-    {
-        int velMin = qRound(127. * getDoubleValue(SfzParameter::op_amp_velcurve_1));
-        int velMax = qRound(127. * getDoubleValue(SfzParameter::op_amp_velcurve_127));
-        if (velMin == velMax)
-        {
-            val.wValue = velMin;
-            sf2->set(idElt, champ_velocity, val);
-        }
-    }
+void SfzParameterGroup::checkFilter()
+{
+    _paramGlobaux.checkFilter();
+    for (int i = 0; i < _regionList.size(); i++)
+        _regionList[i].checkFilter();
+}
 
-    // Enveloppe pour le filtre
-    if (isDefined(SfzParameter::op_modEnvToFilter))
+void SfzParameterGroup::simplifyAttenuation()
+{
+    bool attenuationUnique = true;
+    double attenuation = -1;
+    double defaultAttenuation = _paramGlobaux.getDoubleValue(SfzParameter::op_volume);
+    for (int i = 0; i < _regionList.size(); i++)
     {
-        if (isDefined(SfzParameter::op_modEnvToTon))
-        {
-            // Mêmes paramètres ?
-            if (getDoubleValue(SfzParameter::op_fileg_delay) == getDoubleValue(SfzParameter::op_pitcheg_delay) &&
-                getDoubleValue(SfzParameter::op_fileg_attack) == getDoubleValue(SfzParameter::op_pitcheg_attack) &&
-                getDoubleValue(SfzParameter::op_fileg_hold) == getDoubleValue(SfzParameter::op_pitcheg_hold) &&
-                getDoubleValue(SfzParameter::op_fileg_decay) == getDoubleValue(SfzParameter::op_pitcheg_decay) &&
-                getDoubleValue(SfzParameter::op_fileg_sustain) == getDoubleValue(SfzParameter::op_pitcheg_sustain) &&
-                getDoubleValue(SfzParameter::op_fileg_release) == getDoubleValue(SfzParameter::op_pitcheg_release) &&
-                getDoubleValue(SfzParameter::op_fileg_holdcc133) == getDoubleValue(SfzParameter::op_noteToModEnvHold) &&
-                getDoubleValue(SfzParameter::op_fileg_decaycc133) == getDoubleValue(SfzParameter::op_noteToModEnvDecay))
-            {
-                val.shValue = getIntValue(SfzParameter::op_modEnvToFilter);
-                sf2->set(idElt, champ_modEnvToFilterFc, val);
-            }
-        }
+        double dTmp = defaultAttenuation;
+        if (_regionList[i].isDefined(SfzParameter::op_volume))
+            dTmp = _regionList[i].getDoubleValue(SfzParameter::op_volume);
+        if (attenuation == -1)
+            attenuation = dTmp;
         else
         {
-            if (isDefined(SfzParameter::op_fileg_delay))
-                addSeconds(getDoubleValue(SfzParameter::op_fileg_delay), champ_delayModEnv, sf2, idElt);
-            if (isDefined(SfzParameter::op_fileg_attack))
-            {
-                val.shValue = qRound(log2m1200(getDoubleValue(SfzParameter::op_fileg_attack)));
-                sf2->set(idElt, champ_attackModEnv, val);
-            }
-            if (isDefined(SfzParameter::op_fileg_hold) && !isDefined(SfzParameter::op_fileg_holdcc133))
-            {
-                val.shValue = qRound(log2m1200(getDoubleValue(SfzParameter::op_fileg_hold)));
-                sf2->set(idElt, champ_holdModEnv, val);
-            }
-            if (isDefined(SfzParameter::op_fileg_decay) && !isDefined(SfzParameter::op_fileg_decaycc133))
-            {
-                val.shValue = qRound(log2m1200(getDoubleValue(SfzParameter::op_fileg_decay)));
-                sf2->set(idElt, champ_decayModEnv, val);
-            }
-            if (isDefined(SfzParameter::op_fileg_sustain))
-            {
-                val.shValue = qRound(1000. - 10. * getDoubleValue(SfzParameter::op_fileg_sustain));
-                sf2->set(idElt, champ_sustainModEnv, val);
-            }
-            if (isDefined(SfzParameter::op_fileg_release))
-            {
-                val.shValue = qRound(log2m1200(getDoubleValue(SfzParameter::op_fileg_release)));
-                sf2->set(idElt, champ_releaseModEnv, val);
-            }
-            if (isDefined(SfzParameter::op_fileg_holdcc133))
-            {
-                double baseValue = 0.001;
-                int keynum = 0;
-                getKeynumValues(baseValue, keynum, SfzParameter::op_fileg_holdcc133, SfzParameter::op_fileg_hold);
-                val.shValue = keynum;
-                sf2->set(idElt, champ_keynumToModEnvHold, val);
-                val.shValue = qRound(log2m1200(baseValue));
-                sf2->set(idElt, champ_holdModEnv, val);
-            }
-            if (isDefined(SfzParameter::op_fileg_decaycc133))
-            {
-                double baseValue = 0.001;
-                int keynum = 0;
-                getKeynumValues(baseValue, keynum, SfzParameter::op_fileg_decaycc133, SfzParameter::op_fileg_decay);
-                val.shValue = keynum;
-                sf2->set(idElt, champ_keynumToModEnvDecay, val);
-                val.shValue = qRound(log2m1200(baseValue));
-                sf2->set(idElt, champ_decayModEnv, val);
-            }
-
-            val.shValue = getIntValue(SfzParameter::op_modEnvToFilter);
-            sf2->set(idElt, champ_modEnvToFilterFc, val);
+            if (attenuation != dTmp)
+                attenuationUnique = false;
         }
     }
-
-    // LFO filtre
-    if (isDefined(SfzParameter::op_modLFOtoFilter))
+    if (attenuationUnique)
     {
-        if (isDefined(SfzParameter::op_modLFOtoVolume))
-        {
-            // Mêmes paramètres ?
-            if (getDoubleValue(SfzParameter::op_filLFOdelay) == getDoubleValue(SfzParameter::op_modLFOdelay) &&
-                getDoubleValue(SfzParameter::op_filLFOfreq) == getDoubleValue(SfzParameter::op_modLFOfreq))
-            {
-                val.shValue = getIntValue(SfzParameter::op_modLFOtoFilter);
-                sf2->set(idElt, champ_modLfoToFilterFc, val);
-            }
-        }
+        for (int i = 0; i < _regionList.size(); i++)
+            _regionList[i].removeOpCode(SfzParameter::op_volume);
+        if (attenuation == 0)
+            _paramGlobaux.removeOpCode(SfzParameter::op_volume);
         else
         {
-            if (isDefined(SfzParameter::op_filLFOdelay))
-                addSeconds(getDoubleValue(SfzParameter::op_filLFOdelay), champ_delayModLFO, sf2, idElt);
-            if (isDefined(SfzParameter::op_filLFOfreq))
-            {
-                val.shValue = qRound(log2m1200(getDoubleValue(SfzParameter::op_filLFOfreq) / 8.176));
-                sf2->set(idElt, champ_freqModLFO, val);
-            }
-            val.shValue = getIntValue(SfzParameter::op_modLFOtoFilter);
-            sf2->set(idElt, champ_modLfoToFilterFc, val);
+            if (_paramGlobaux.isDefined(SfzParameter::op_volume))
+                _paramGlobaux.adjustVolume(_paramGlobaux.getDoubleValue(SfzParameter::op_volume) - attenuation);
+            else
+                _paramGlobaux << SfzParameter(SfzParameter::op_volume, attenuation);
         }
     }
 }
 
-void SfzParameterGroup::getKeynumValues(double &baseValue, int &keynum,
-                                       SfzParameter::OpCode opCodeKeynum, SfzParameter::OpCode opCodeBase) const
+bool SfzParameterGroup::isChannel10()
 {
-    // Etendue de la division
-    int noteMin = 0;
-    int noteMax = 127;
-    if (isDefined(SfzParameter::op_key))
-        noteMin = noteMax = getIntValue(SfzParameter::op_key);
-    if (isDefined(SfzParameter::op_keyMin))
-        noteMin = getIntValue(SfzParameter::op_keyMin);
-    if (isDefined(SfzParameter::op_keyMax))
-        noteMax = getIntValue(SfzParameter::op_keyMax);
-
-    // Valeur de base du paramètre
-    double valBase = 0.001;
-    if (isDefined(opCodeBase))
-        valBase = getDoubleValue(opCodeBase);
-
-    // Valeur aux positions min et max
-    double valKeynum = getDoubleValue(opCodeKeynum);
-    double valMin = valBase + (double)noteMin / 127. * valKeynum;
-    double valMax = valBase + (double)noteMax / 127. * valKeynum;
-
-    if (noteMin == noteMax || valMax <= 0 || valMin <= 0)
-    {
-        baseValue = valMin;
-        keynum = 0;
-    }
-    else
-    {
-        keynum = qRound(1200. * log2(valMin / valMax) / (noteMax - noteMin));
-        baseValue = valMin * qPow(valMin / valMax, (double)(noteMin - 60) / (noteMax - noteMin));
-    }
+    return (_paramGlobaux.getIntValue(SfzParameter::op_chanMin) == 10 &&
+            _paramGlobaux.getIntValue(SfzParameter::op_chanMax) == 10);
 }
 
-void SfzParameterGroup::addSeconds(double value, AttributeType champ, SoundfontManager * sf2, EltID id)
+double SfzParameterGroup::getAmpliMax()
 {
-    double dTmp;
+    double ampliMax = _paramGlobaux.getDoubleValue(SfzParameter::op_volume);
+    for (int i = 0; i < _regionList.size(); i++)
+        ampliMax = qMax(ampliMax, _regionList.at(i).getDoubleValue(SfzParameter::op_volume));
+    return ampliMax;
+}
+
+void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pathSfz)
+{
+    // Remplissage des paramètres globaux
+    _paramGlobaux.decode(sf2, idInst);
+
+    // Lien avec samples
+    EltID idInstSmpl = idInst;
+    idInstSmpl.typeElement = elementInstSmpl;
+    EltID idSmpl = idInst;
+    idSmpl.typeElement = elementSmpl;
     AttributeValue val;
-    if (sf2->isSet(id, champ))
-        dTmp = d1200e2(sf2->get(id, champ).shValue);
-    else
-        dTmp = 0;
-    val.shValue = qRound(log2m1200(dTmp + value));
-    sf2->set(id, champ, val);
-}
+    for (int i = 0; i < _regionList.size(); i++)
+    {
+        // Création des samples si besoin et récupération de leur index
+        QList<int> listeIndexSmpl = _regionList.at(i).getSampleIndex(sf2, idInst, pathSfz);
 
-QString SfzParameterGroup::getName(QString name, int maxCharacters, int suffixNumber, QString suffix)
-{
-    int suffixSize = suffix.size();
+        // Transformation des offsets si présents
+        if (!listeIndexSmpl.isEmpty())
+        {
+            idSmpl.indexElt = listeIndexSmpl.first();
+            _regionList[i].adaptOffsets(sf2->get(idSmpl, champ_dwStartLoop).dwValue,
+                                            sf2->get(idSmpl, champ_dwEndLoop).dwValue,
+                                            sf2->get(idSmpl, champ_dwLength).dwValue);
+        }
 
-    // Cas où la taille du suffix est supérieure au nombre de caractères max
-    if (suffixSize > maxCharacters)
-        return name.left(maxCharacters);
+        if (_regionList.at(i).isDefined(SfzParameter::op_pan) && listeIndexSmpl.size() == 2)
+        {
+            double pan = _regionList.at(i).getDoubleValue(SfzParameter::op_pan);
+            if (qAbs(pan) >= 99.9)
+            {
+                // Passage en mono
+                if (pan < 0)
+                    listeIndexSmpl.removeAt(1);
+                else
+                    listeIndexSmpl.removeAt(0);
+            }
+        }
 
-    // Cas où un numéro n'est pas nécessaire
-    if (suffixNumber == 0)
-        return name.left(maxCharacters - suffixSize) + suffix;
+        if (listeIndexSmpl.size() == 1) // Mono sample
+        {
+            // Création InstSmpl
+            idInstSmpl.indexElt2 = sf2->add(idInstSmpl);
 
-    QString suffixNum = QString::number(suffixNumber);
-    int suffixNumSize = suffixNum.length() + 1;
+            // Lien avec le sample
+            val.wValue = listeIndexSmpl.first();
+            sf2->set(idInstSmpl, champ_sampleID, val);
 
-    // Cas où le suffix numérique est trop grand
-    if (suffixNumSize > 3 || maxCharacters - suffixSize < suffixNumSize)
-        return name.left(maxCharacters - suffixSize) + suffix;
+            // Remplissage paramètres de la division
+            _regionList.at(i).decode(sf2, idInstSmpl);
 
-    return name.left(maxCharacters - suffixNumSize - suffixSize) + suffix + "-" + suffixNum;
-}
+            if (_regionList.at(i).isDefined(SfzParameter::op_pan))
+            {
+                val.shValue = 5 * _regionList.at(i).getDoubleValue(SfzParameter::op_pan);
+                sf2->set(idInstSmpl, champ_pan, val);
+            }
+        }
+        else if (listeIndexSmpl.size() == 2) // Sample stereo
+        {
+            // Gestion width / position
+            double width = 500;
+            if (_regionList.at(i).isDefined(SfzParameter::op_width))
+                width = 5. * _regionList.at(i).getDoubleValue(SfzParameter::op_width);
+            double position = 0;
+            if (_regionList.at(i).isDefined(SfzParameter::op_position))
+                position = _regionList.at(i).getDoubleValue(SfzParameter::op_position) / 100.;
+            if (position < 0)
+                position = -qAbs(position * (500 - qAbs(width)));
+            else
+                position = qAbs(position * (500 - qAbs(width)));
 
-void SfzParameterGroup::mergeIfNotDefined(SfzParameterGroup &groupToMerge)
-{
-    foreach (SfzParameter param, groupToMerge._listeParam)
-        if (!this->isDefined(param.getOpCode()))
-            _listeParam << param;
+            // Gestion pan
+            double attenuation = 0;
+            int panDefined = -1;
+            if (_regionList.at(i).isDefined(SfzParameter::op_pan))
+            {
+                double pan = _regionList.at(i).getDoubleValue(SfzParameter::op_pan);
+                attenuation = -SfzParameterRegion::percentToDB(100 - qAbs(pan)) * 1.7;
+                if (pan < 0)
+                    panDefined = 1;
+                else if (pan > 0)
+                    panDefined = 0;
+            }
+
+            for (int j = 0; j < listeIndexSmpl.size(); j++)
+            {
+                // Création InstSmpl
+                idInstSmpl.indexElt2 = sf2->add(idInstSmpl);
+
+                // Lien avec le sample
+                val.wValue = listeIndexSmpl.at(j);
+                sf2->set(idInstSmpl, champ_sampleID, val);
+
+                // Pan
+                if (panDefined == j)
+                {
+                    val.shValue = qRound(10. * attenuation);
+                    sf2->set(idInstSmpl, champ_initialAttenuation, val);
+                }
+
+                // Remplissage paramètres de la division
+                _regionList.at(i).decode(sf2, idInstSmpl);
+
+                // Width, position
+                if (j == 0)
+                    val.shValue = -width + position;
+                else
+                    val.shValue = width + position;
+                sf2->set(idInstSmpl, champ_pan, val);
+            }
+        }
+    }
 }

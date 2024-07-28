@@ -26,7 +26,7 @@
 #define INPUTPARSERSFZ_H
 
 #include "abstractinputparser.h"
-#include "sfzparametergroupassembly.h"
+#include "sfzparametergroup.h"
 class SoundfontManager;
 
 class InputParserSfz : public AbstractInputParser
@@ -49,9 +49,9 @@ private:
         BLOC_REGION
     };
 
-    QList<SfzParameterGroupAssembly> _listeEnsembles;
+    QList<SfzParameterGroup> _presetList;
     Bloc _currentBloc;
-    SfzParameterGroup _globalZone;
+    SfzParameterRegion _globalZone;
     QStringList _openFilePaths;
     QString _rootDir;
     QMap<QString, QString> _replacements;

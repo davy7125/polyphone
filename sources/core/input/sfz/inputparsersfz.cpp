@@ -53,41 +53,41 @@ void InputParserSfz::processInternal(QString fileName, SoundfontManager * sm, bo
     // Recherche de l'amplification max
     bool isChannel10 = true;
     double ampliMax = 0;
-    for (int i = 0; i < _listeEnsembles.size(); i++)
+    for (int i = 0; i < _presetList.size(); i++)
     {
-        _listeEnsembles[i].moveOpcodesInGlobal(_globalZone);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_sample, QMetaType::QString);
-        _listeEnsembles[i].checkSampleValid(QFileInfo(fileName).path());
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_offset, QMetaType::Int);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_end, QMetaType::Int);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_loop_start, QMetaType::Int);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_loop_end, QMetaType::Int);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_loop_mode, QMetaType::QString);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_pan, QMetaType::Double);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_off_by, QMetaType::Int);
-        _listeEnsembles[i].moveOpcodeInSamples(SfzParameter::op_exclusiveClass, QMetaType::Int);
-        _listeEnsembles[i].moveModInSamples();
-        _listeEnsembles[i].moveKeynumInSamples(SfzParameter::op_noteToVolEnvDecay, SfzParameter::op_ampeg_decay);
-        _listeEnsembles[i].moveKeynumInSamples(SfzParameter::op_noteToVolEnvHold, SfzParameter::op_ampeg_hold);
-        _listeEnsembles[i].moveKeynumInSamples(SfzParameter::op_noteToModEnvDecay, SfzParameter::op_pitcheg_decay);
-        _listeEnsembles[i].moveKeynumInSamples(SfzParameter::op_noteToModEnvHold, SfzParameter::op_pitcheg_hold);
-        _listeEnsembles[i].moveKeynumInSamples(SfzParameter::op_fileg_decaycc133, SfzParameter::op_fileg_decay);
-        _listeEnsembles[i].moveKeynumInSamples(SfzParameter::op_fileg_holdcc133, SfzParameter::op_fileg_hold);
-        _listeEnsembles[i].adjustStereoVolumeAndCorrection(QFileInfo(fileName).path());
-        _listeEnsembles[i].adjustModulationVolume();
-        _listeEnsembles[i].checkFilter();
-        ampliMax = qMax(ampliMax, _listeEnsembles[i].getAmpliMax());
-        isChannel10 &= _listeEnsembles[i].isChannel10();
+        _presetList[i].moveOpcodesInGlobal(_globalZone);
+        _presetList[i].moveOpcodeInSamples(SfzParameter::op_sample, QMetaType::QString);
+        _presetList[i].checkSampleValid(QFileInfo(fileName).path());
+        _presetList[i].moveOpcodeInSamples(SfzParameter::op_offset, QMetaType::Int);
+        _presetList[i].moveOpcodeInSamples(SfzParameter::op_end, QMetaType::Int);
+        _presetList[i].moveOpcodeInSamples(SfzParameter::op_loop_start, QMetaType::Int);
+        _presetList[i].moveOpcodeInSamples(SfzParameter::op_loop_end, QMetaType::Int);
+        _presetList[i].moveOpcodeInSamples(SfzParameter::op_loop_mode, QMetaType::QString);
+        _presetList[i].moveOpcodeInSamples(SfzParameter::op_pan, QMetaType::Double);
+        _presetList[i].moveOpcodeInSamples(SfzParameter::op_off_by, QMetaType::Int);
+        _presetList[i].moveOpcodeInSamples(SfzParameter::op_exclusiveClass, QMetaType::Int);
+        _presetList[i].moveModInSamples();
+        _presetList[i].moveKeynumInSamples(SfzParameter::op_noteToVolEnvDecay, SfzParameter::op_ampeg_decay);
+        _presetList[i].moveKeynumInSamples(SfzParameter::op_noteToVolEnvHold, SfzParameter::op_ampeg_hold);
+        _presetList[i].moveKeynumInSamples(SfzParameter::op_noteToModEnvDecay, SfzParameter::op_pitcheg_decay);
+        _presetList[i].moveKeynumInSamples(SfzParameter::op_noteToModEnvHold, SfzParameter::op_pitcheg_hold);
+        _presetList[i].moveKeynumInSamples(SfzParameter::op_fileg_decaycc133, SfzParameter::op_fileg_decay);
+        _presetList[i].moveKeynumInSamples(SfzParameter::op_fileg_holdcc133, SfzParameter::op_fileg_hold);
+        _presetList[i].adjustStereoVolumeAndCorrection(QFileInfo(fileName).path());
+        _presetList[i].adjustModulationVolume();
+        _presetList[i].checkFilter();
+        ampliMax = qMax(ampliMax, _presetList[i].getAmpliMax());
+        isChannel10 &= _presetList[i].isChannel10();
     }
 
     // Ajustement du volume si amplification max > 0
     if (ampliMax > 0)
-        for (int i = 0; i < _listeEnsembles.size(); i++)
-            _listeEnsembles[i].adjustVolume(ampliMax);
+        for (int i = 0; i < _presetList.size(); i++)
+            _presetList[i].adjustVolume(ampliMax);
 
     // Simplification des atténuations
-    for (int i = 0; i < _listeEnsembles.size(); i++)
-        _listeEnsembles[i].simplifyAttenuation();
+    for (int i = 0; i < _presetList.size(); i++)
+        _presetList[i].simplifyAttenuation();
 
     // Création d'un sf2
     createSf2(sf2Index, fileName, isChannel10);
@@ -226,14 +226,14 @@ void InputParserSfz::changeBloc(QString bloc)
     else if (bloc == "group")
     {
         _currentBloc = BLOC_GROUP;
-        _listeEnsembles << SfzParameterGroupAssembly();
+        _presetList << SfzParameterGroup();
     }
     else if (bloc == "region")
     {
         _currentBloc = BLOC_REGION;
-        if (_listeEnsembles.isEmpty())
-            _listeEnsembles << SfzParameterGroupAssembly();
-        _listeEnsembles.last().newGroup();
+        if (_presetList.isEmpty())
+            _presetList << SfzParameterGroup();
+        _presetList.last().newGroup();
     }
     else
     {
@@ -247,7 +247,7 @@ void InputParserSfz::addOpcode(QString opcode, QString value)
     switch (_currentBloc)
     {
     case BLOC_GROUP: case BLOC_REGION:
-        _listeEnsembles.last().addParam(opcode, value);
+        _presetList.last().addParam(opcode, value);
         break;
     case BLOC_CONTROL:
         if (opcode == "default_path")
@@ -305,15 +305,15 @@ void InputParserSfz::createSf2(int &sf2Index, QString filename, bool isChannel10
     // Création des instruments
     EltID idInst = idSf2;
     idInst.typeElement = elementInst;
-    for (int i = 0; i < _listeEnsembles.size(); i++)
+    for (int i = 0; i < _presetList.size(); i++)
     {
         idInst.indexElt = sm->add(idInst);
-        QString nomInst = _listeEnsembles[i].getLabel();
+        QString nomInst = _presetList[i].getLabel();
         if (nomInst == "")
         {
-            if (_listeEnsembles.size() > 9)
+            if (_presetList.size() > 9)
                 nomInst = nom.left(17) + "-" + QString::number(i + 1);
-            else if (_listeEnsembles.size() > 1)
+            else if (_presetList.size() > 1)
                 nomInst = nom.left(18) + "-" + QString::number(i + 1);
             else
                 nomInst = nom;
@@ -331,7 +331,7 @@ void InputParserSfz::createSf2(int &sf2Index, QString filename, bool isChannel10
         sm->set(idPrstInst, champ_instrument, val);
 
         // Remplissage de l'instrument et création des samples
-        _listeEnsembles[i].decode(sm, idInst, QFileInfo(filename).path());
+        _presetList[i].decode(sm, idInst, QFileInfo(filename).path());
 
         // Détermination keyRange et velRange du preset
         int keyMin = 127;
