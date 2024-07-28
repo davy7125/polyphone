@@ -45,7 +45,7 @@ ComboCC::ComboCC(QWidget *parent) : QComboBox(parent)
         this->addItem(ModulatorComboSrc::getIndexName(i, true), i);
         _controllerToIndex[i] = count++;
     }
-    for (int i = 64; i < 98; i++)
+    for (int i = 64; i < 96; i++)
     {
         this->addItem(ModulatorComboSrc::getIndexName(i, true), i);
         _controllerToIndex[i] = count++;

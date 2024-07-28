@@ -51,7 +51,7 @@ void ModulatorComboSrc::initialize(EltID id, bool source1)
         this->addItem(getIndexName(i, true), "CC#" + QString::number(i));
     for (int i = 7; i < 32; i++)
         this->addItem(getIndexName(i, true), "CC#" + QString::number(i));
-    for (int i = 64; i < 98; i++)
+    for (int i = 64; i < 96; i++)
         this->addItem(getIndexName(i, true), "CC#" + QString::number(i));
     for (int i = 102; i < 120; i++)
         this->addItem(getIndexName(i, true), "CC#" + QString::number(i));
