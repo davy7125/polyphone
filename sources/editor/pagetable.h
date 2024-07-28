@@ -91,7 +91,7 @@ private:
     static QString attributeToString(AttributeType champ, bool isPrst, AttributeValue storedValue);
     static AttributeValue attributeFromString(AttributeType champ, bool isPrst, QString strValue, bool &ok);
 
-    QList<int> _listKeyEnlighted;
+    QMap<int, int> _listKeyEnlighted;
     int _sortType;
     bool _isPrst;
 };

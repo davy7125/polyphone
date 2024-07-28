@@ -1544,6 +1544,9 @@ void SoundfontManager::reset(EltID id, AttributeType champ)
         return;
     }
 
+    if (champ == champ_overridingRootKey || champ == champ_keyRange)
+        _parameterForCustomizingKeyboardChanged = true;
+
     // Create and store the action
     Action *action = new Action();
     action->typeAction = Action::TypeChangeToDefault;

@@ -747,9 +747,6 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
 
     // Mise à jour partie mod (car entre 2 des mods peuvent être définitivement détruits, et les index peuvent être mis à jour)
     _modulatorEditor->setIds(_currentIds);
-
-    //if (champ == champ_overridingRootKey || champ == champ_keyRange)
-    //    customizeKeyboard();
 }
 
 void PageTable::reselect()
@@ -997,29 +994,58 @@ void PageTable::keyPlayedInternal(int key, int velocity)
     // Visualization on the table
 
     // Update triggered elements
-    if (velocity > 0 && _listKeyEnlighted.indexOf(key) == -1)
-        _listKeyEnlighted.append(key);
+    if (velocity > 0 && !_listKeyEnlighted.contains(key))
+        _listKeyEnlighted[key] = velocity;
     else
-        _listKeyEnlighted.removeAll(key);
+        _listKeyEnlighted.remove(key);
 
     // Color table
-    for (int i = 1; i < _table->columnCount(); i++)
+
+    if (_table->columnCount() >= 1)
     {
-        EltID id = _table->getID(i);
-        if (_sf2->isValid(id))
+        // Default ranges
+        EltID globalId = _table->getID(0);
+        RangesType defaultKeyRange, defaultVelRange;
+        if (_sf2->isSet(globalId, champ_keyRange))
+            defaultKeyRange = _sf2->get(globalId, champ_keyRange).rValue;
+        else
         {
-            bool enlighted = false;
-            int key1 = _sf2->get(id, champ_keyRange).rValue.byLo;
-            int key2 = _sf2->get(id, champ_keyRange).rValue.byHi;
-            if (!_sf2->isSet(id, champ_keyRange))
+            defaultKeyRange.byLo = 0;
+            defaultKeyRange.byHi = 128;
+        }
+        if (_sf2->isSet(globalId, champ_velRange))
+            defaultVelRange = _sf2->get(globalId, champ_velRange).rValue;
+        else
+        {
+            defaultVelRange.byLo = 0;
+            defaultVelRange.byHi = 128;
+        }
+
+        for (int i = 1; i < _table->columnCount(); i++)
+        {
+            EltID id = _table->getID(i);
+            if (_sf2->isValid(id))
             {
-                key1 = 0;
-                key2 = 128;
+                // Division range
+                RangesType keyRange = defaultKeyRange;
+                if (_sf2->isSet(id, champ_keyRange))
+                    keyRange = _sf2->get(id, champ_keyRange).rValue;
+                RangesType velRange = defaultVelRange;
+                if (_sf2->isSet(id, champ_velRange))
+                    velRange = _sf2->get(id, champ_velRange).rValue;
+
+                bool enlighted = false;
+                QMapIterator<int, int> it(_listKeyEnlighted);
+                while (it.hasNext()) {
+                    it.next();
+                    if (it.key() >= keyRange.byLo && it.key() <= keyRange.byHi && it.value() >= velRange.byLo && it.value() <= velRange.byHi)
+                    {
+                        enlighted = true;
+                        break;
+                    }
+                }
+                _table->setEnlighted(i, enlighted);
             }
-            for (int j = 0; j < _listKeyEnlighted.size(); j++)
-                enlighted = enlighted || (qMin(key1, key2) <= _listKeyEnlighted.at(j)
-                                          && qMax(key1, key2) >= _listKeyEnlighted.at(j));
-            _table->setEnlighted(i, enlighted);
         }
     }
 }
