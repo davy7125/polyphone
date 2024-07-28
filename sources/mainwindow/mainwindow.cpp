@@ -481,7 +481,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
     else if (event->type() == QEvent::MouseButtonPress)
     {
         QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
-        if (mouseEvent->buttons() == Qt::LeftButton && _mousePositionEdges.toInt() > 0)
+        if (mouseEvent->buttons() == Qt::LeftButton && (int)_mousePositionEdges > 0)
         {
             QWindow * w = this->topLevelWidget()->windowHandle();
             if (w != nullptr)
