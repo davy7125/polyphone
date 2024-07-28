@@ -311,88 +311,153 @@ void Editor::customizeKeyboard()
     if (_currentIds.isEmpty())
         return;
 
-    // If only one global division is in the list, exclude the rest
-    // If more than one global divison is in the list, don't customize
-    IdList ids = _currentIds;
-    for (int i = 0; i < ids.count(); i++)
+    // Browse all ids
+    SoundfontManager * sf2 = SoundfontManager::getInstance();
+    IdList ids  = _currentIds;
+    RangesType defaultKeyRange;
+    defaultKeyRange.byLo = 0;
+    defaultKeyRange.byHi = 127;
+    bool defaultDefined = false;
+    bool displayRootKeys = true;
+    for (int i = 0; i < _currentIds.count(); i++)
     {
-        EltID id = ids[i];
+        EltID id = _currentIds[i];
+
+        // Nothing to customize for headers
+        if (id.typeElement == elementSf2 || id.typeElement == elementRootSmpl ||
+            id.typeElement == elementRootInst || id.typeElement == elementRootPrst)
+            return;
+
+        if (id.typeElement == elementSmpl)
+        {
+            // Gather all sample root keys
+            QList<int> rootKeys;
+            bool uniqueSample = true;
+            rootKeys << sf2->get(id, champ_byOriginalPitch).bValue;
+            for (int j = i + 1; j < _currentIds.count(); j++)
+            {
+                if (_currentIds[j].typeElement == elementSmpl)
+                {
+                    uniqueSample = false;
+                    int rootKey = sf2->get(_currentIds[j], champ_byOriginalPitch).bValue;
+                    if (!rootKeys.contains(rootKey))
+                        rootKeys << rootKey;
+                }
+            }
+
+            // Show the rootkeys and enable the piano if there is only one sample
+            foreach (int rootKey, rootKeys)
+                ContextManager::midi()->keyboard()->addRangeAndRootKey(rootKey, uniqueSample ? 0 : -1, uniqueSample ? 127 : -1);
+            return;
+        }
+
         if (id.typeElement == elementInst || id.typeElement == elementPrst)
         {
-            for (int j = i + 1; j < ids.count(); j++)
-                if (ids[j].typeElement == elementInst || ids[j].typeElement == elementPrst)
+            // If more than one global divison are in the list, don't customize
+            for (int j = i + 1; j < _currentIds.count(); j++)
+                if (_currentIds[j].typeElement == elementInst || _currentIds[j].typeElement == elementPrst)
                     return;
+
+            // Default key range of the divisions
+            if (sf2->isSet(id, champ_keyRange))
+            {
+                defaultKeyRange = sf2->get(id, champ_keyRange).rValue;
+                defaultDefined = true;
+            }
+
+            // Only one instrument or preset: all related divisions are selected
             ids.clear();
-            ids << id;
+            id.typeElement = id.typeElement == elementInst ? elementInstSmpl : elementPrstInst;
+            foreach (int j, sf2->getSiblings(id))
+            {
+                id.indexElt2 = j;
+                ids << id;
+            }
+
+            // No root keys
+            displayRootKeys = false;
             break;
         }
+
+        // Default key range
+        if (!defaultDefined)
+        {
+            if (id.typeElement == elementInstSmpl)
+                id.typeElement = elementInst;
+            else
+                id.typeElement = elementPrst;
+            if (sf2->isSet(id, champ_keyRange))
+                defaultKeyRange = sf2->get(id, champ_keyRange).rValue;
+            defaultDefined = true;
+        }
+
+        // No root keys if a division of a preset is selected
+        if (id.typeElement == elementPrstInst)
+            displayRootKeys = false;
     }
 
-    // Affichage des étendues et rootkeys des divisions sélectionnées
-    SoundfontManager * sf2 = SoundfontManager::getInstance();
+    // Display the divisions
+    int rootKey = -1;
     foreach (EltID id, ids)
     {
-        if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
+        if (id.typeElement == elementInstSmpl)
         {
-            int rootKey = -1;
-            if (id.typeElement == elementInstSmpl)
+            // Corresponding root key, if needed
+            if (displayRootKeys)
             {
                 if (sf2->isSet(id, champ_overridingRootKey))
                     rootKey = sf2->get(id, champ_overridingRootKey).wValue;
                 else
                 {
-                    EltID idSmpl = id;
-                    idSmpl.typeElement = elementSmpl;
-                    idSmpl.indexElt = sf2->get(id, champ_sampleID).wValue;
+                    EltID idSmpl(elementSmpl, id.indexSf2, sf2->get(id, champ_sampleID).wValue);
                     rootKey = sf2->get(idSmpl, champ_byOriginalPitch).bValue;
                 }
             }
 
-            RangesType keyRange;
-            keyRange.byLo = 0;
-            keyRange.byHi = 127;
+            // Add the segment to the keyboard
+            RangesType keyRange = defaultKeyRange;
             if (sf2->isSet(id, champ_keyRange))
                 keyRange = sf2->get(id, champ_keyRange).rValue;
-            else
-            {
-                if (id.typeElement == elementInstSmpl)
-                    id.typeElement = elementInst;
-                else
-                    id.typeElement = elementPrst;
-                if (sf2->isSet(id, champ_keyRange))
-                    keyRange = sf2->get(id, champ_keyRange).rValue;
-            }
             ContextManager::midi()->keyboard()->addRangeAndRootKey(rootKey, keyRange.byLo, keyRange.byHi);
         }
-        else if (id.typeElement == elementInst || id.typeElement == elementPrst)
+        else // elementPrstInst
         {
-            RangesType defaultKeyRange;
+            // Maximum key range of this division
+            RangesType maxRange = defaultKeyRange;
             if (sf2->isSet(id, champ_keyRange))
-                defaultKeyRange = sf2->get(id, champ_keyRange).rValue;
+                maxRange = sf2->get(id, champ_keyRange).rValue;
+
+            // Instrument target by this division
+            EltID idInst(elementInst, id.indexSf2, sf2->get(id, champ_instrument).wValue);
+
+            // Default range of this instrument
+            RangesType defInstRange;
+            if (sf2->isSet(idInst, champ_keyRange))
+                defInstRange = sf2->get(idInst, champ_keyRange).rValue;
             else
             {
-                defaultKeyRange.byLo = 0;
-                defaultKeyRange.byHi = 127;
+                defInstRange.byLo = 0;
+                defInstRange.byHi = 127;
             }
-            if (id.typeElement == elementInst)
-                id.typeElement = elementInstSmpl;
-            else
-                id.typeElement = elementPrstInst;
-            foreach (int i, sf2->getSiblings(id))
+
+            // Browse all divisions inside the instrument
+            EltID idInstSmpl(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
+            foreach (int j, sf2->getSiblings(idInstSmpl))
             {
-                id.indexElt2 = i;
-                RangesType keyRange;
-                if (sf2->isSet(id, champ_keyRange))
-                    keyRange = sf2->get(id, champ_keyRange).rValue;
-                else
-                    keyRange = defaultKeyRange;
-                ContextManager::midi()->keyboard()->addRangeAndRootKey(-1, keyRange.byLo, keyRange.byHi);
+                idInstSmpl.indexElt2 = j;
+
+                // Range of this instrument division
+                RangesType instDivRange = defInstRange;
+                if (sf2->isSet(idInstSmpl, champ_keyRange))
+                    instDivRange = sf2->get(idInstSmpl, champ_keyRange).rValue;
+
+                // Is it inside the max range?
+                if (instDivRange.byHi >= maxRange.byLo && instDivRange.byLo <= maxRange.byHi)
+                {
+                    // Add the segment to the keyboard
+                    ContextManager::midi()->keyboard()->addRangeAndRootKey(-1, qMax(maxRange.byLo, instDivRange.byLo), qMin(instDivRange.byHi, maxRange.byHi));
+                }
             }
-        }
-        else if (id.typeElement == elementSmpl)
-        {
-            int rootKey = sf2->get(id, champ_byOriginalPitch).bValue;
-            ContextManager::midi()->keyboard()->addRangeAndRootKey(rootKey, 0, 127);
         }
     }
 }
