@@ -1097,42 +1097,47 @@ bool GraphicsViewRange::event(QEvent* event)
     if (event->type() == QEvent::NativeGesture)
     {
         QNativeGestureEvent * nge = dynamic_cast<QNativeGestureEvent *>(event);
-        if (nge->fingerCount() == 2)
+        if (nge->gestureType() == Qt::ZoomNativeGesture)
         {
-            if (nge->gestureType() == Qt::ZoomNativeGesture)
+            if (QApplication::keyboardModifiers() == Qt::ShiftModifier)
             {
-                if (QApplication::keyboardModifiers() == Qt::ShiftModifier)
+                _zoomYinit = _zoomY;
+                _zoomY = _zoomY * (1 + nge->value());
+
+                if (_zoomY > 1)
                 {
-                    _zoomYinit = _zoomY;
-                    _zoomY = _zoomY * (1 + nge->value());
-
-                    if (_zoomY > 1)
-                    {
-                        // WARNING: not using nge->position() since it seems to return the global position
-                        _yInit = (nge->globalPosition().y() - this->mapToGlobal(QPoint(0, 0)).y()) / this->height();
-                        qDebug() << _yInit;
-                        _posYinit = _posY;
-                        _posY = (_zoomY * _posYinit * (_zoomYinit - 1) +
-                                 _yInit * (_zoomY - _zoomYinit)) / (_zoomYinit * (_zoomY - 1));
-                    }
+                    // WARNING: not using nge->position() since it seems to return the global position
+#if QT_VERSION < 0x060000
+                    _yInit = (nge->globalPos().y() - this->mapToGlobal(QPoint(0, 0)).y()) / this->height();
+#else
+                    _yInit = (nge->globalPosition().y() - this->mapToGlobal(QPoint(0, 0)).y()) / this->height();
+#endif
+                    qDebug() << _yInit;
+                    _posYinit = _posY;
+                    _posY = (_zoomY * _posYinit * (_zoomYinit - 1) +
+                             _yInit * (_zoomY - _zoomYinit)) / (_zoomYinit * (_zoomY - 1));
                 }
-                else
-                {
-                    _zoomXinit = _zoomX;
-                    _zoomX = _zoomX * (1 + nge->value());
-
-                    if (_zoomX > 1)
-                    {
-                        // WARNING: not using nge->position() since it seems to return the global position
-                        _xInit = (nge->globalPosition().x() - this->mapToGlobal(QPoint(0, 0)).x()) / this->width();
-                        _posXinit = _posX;
-                        _posX = (_zoomX * _posXinit * (_zoomXinit - 1) +
-                                 _xInit * (_zoomX - _zoomXinit)) / (_zoomXinit * (_zoomX - 1));
-                    }
-                }
-
-                this->zoomDrag();
             }
+            else
+            {
+                _zoomXinit = _zoomX;
+                _zoomX = _zoomX * (1 + nge->value());
+
+                if (_zoomX > 1)
+                {
+                    // WARNING: not using nge->position() since it seems to return the global position
+#if QT_VERSION < 0x060000
+                    _xInit = (nge->globalPos().x() - this->mapToGlobal(QPoint(0, 0)).x()) / this->width();
+#else
+                    _xInit = (nge->globalPosition().x() - this->mapToGlobal(QPoint(0, 0)).x()) / this->width();
+#endif
+                    _posXinit = _posX;
+                    _posX = (_zoomX * _posXinit * (_zoomXinit - 1) +
+                             _xInit * (_zoomX - _zoomXinit)) / (_zoomXinit * (_zoomX - 1));
+                }
+            }
+
+            this->zoomDrag();
         }
     }
     return QGraphicsView::event(event);

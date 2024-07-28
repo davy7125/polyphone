@@ -9,10 +9,9 @@ The following libraries are required (the name may vary depending on your system
  - qt          (qtbase5-dev / qt5-devel) (also libqt5svg5-dev)
  - alsa        (libasound2-dev / alsa-lib-devel)
  - jack        (libjack-jack2-dev / jack-audio-connection-kit-devel)
- - portaudio   (portaudio19-dev / portaudio-devel)
+ - rtaudio     (librtaudio-dev / rtaudio-devel)
  - rtmidi      (librtmidi-dev)
  - stk         (libstk0-dev)
- - qcustomplot (libqcustomplot-dev)
  - vorbis      (libvorbis-dev)
  - ogg         (libogg-dev)
  - wolfssl     (libwolfssl-dev)
@@ -26,20 +25,20 @@ Use your package manager to install them: apt, synaptic, yum,...
 Run "qmake -qt5 && make" (or qmake-qt5 && make) in the root directory to compile the project. An
 executable file "polyphone" in the directory "RELEASE" should then appear if everything went right.
 
-Note: If you are using QT Creator, the project may be opened via its .pro file present in the root 
+Note: If you are using Qt Creator, the project may be opened via its .pro file present in the root 
 directory.
 
-If you experience compiling issues related to RtMidi, Stk, or QCustomplot you can opt to use the
+If you experience compiling issues related to RtAudio, RtMidi, or Stk you can opt to use the
 local copies that come with Polyphone by commenting out the related lines at the top of
 `polyphone.pro`:
 
 ```
-# Use local copies of RtMidi, Stk and QCustomplot libraries
+# Use local copies of RtAudio, RtMidi, and Stk libraries
 # (this is forced to true for Windows or Mac OS X)
 # Uncomment a line if your distribution doesn't come with some of the following libraries
 #DEFINES += USE_LOCAL_RTMIDI
+#DEFINES += USE_LOCAL_RTAUDIO
 #DEFINES += USE_LOCAL_STK
-#DEFINES += USE_LOCAL_QCUSTOMPLOT
 ```
 
 
@@ -52,12 +51,12 @@ local copies that come with Polyphone by commenting out the related lines at the
 
 The following applications are required:
  - Xcode (available in app store)
- - qt    (http://qt-project.org/downloads)
+ - Qt    (http://qt-project.org/downloads)
 
 
 ######### 2. Build #################################################################################
 
-Open polyphone.pro with QT Creator. When configuring the project, take care shadow build is not
+Open polyphone.pro with Qt Creator. When configuring the project, take care shadow build is not
 checked.
 Build the project, a bundle should appear in the directory "RELEASE".
 
@@ -87,4 +86,4 @@ If you want to provide a .dmg file, drag the file Polyphone.app onto the icon of
 
 
 If you want to add a new translation or improve an existing one, please see this page:
-https://www.polyphone-soundfonts.com/documentation/en/development/translate-polyphone
+https://www.polyphone.io/en/documentation/development/translate-polyphone

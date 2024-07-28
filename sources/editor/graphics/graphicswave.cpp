@@ -550,44 +550,45 @@ bool GraphicsWave::event(QEvent * event)
     if (event->type() == QEvent::NativeGesture)
     {
         QNativeGestureEvent * nge = dynamic_cast<QNativeGestureEvent *>(event);
-        if (nge->fingerCount() == 2)
+        if (nge->gestureType() == Qt::ZoomNativeGesture)
         {
-            if (nge->gestureType() == Qt::ZoomNativeGesture)
+            if (QApplication::keyboardModifiers() == Qt::ShiftModifier)
             {
-                if (QApplication::keyboardModifiers() == Qt::ShiftModifier)
-                {
-                    _zoomY = _zoomY * (1 + nge->value());
-                    if (_zoomY < 1)
-                        _zoomY = 1;
-                    else if (_zoomY > 50)
-                        _zoomY = 50;
-                }
-                else
-                {
-                    // WARNING: not using nge->position() since it seems to return the global position
-                    _xInit = (nge->globalPosition().x() - this->mapToGlobal(QPoint(0, 0)).x()) / this->width();
-                    _posXinit = _posX;
-                    _zoomXinit = _zoomX;
-                    _zoomX = _zoomX * (1 + nge->value());
-
-                    if (_zoomX > 20 * _sizeX / this->width())
-                        _zoomX = 20 * _sizeX / this->width();
-                    if (_zoomX < 1)
-                        _zoomX = 1;
-
-                    // Update posX
-                    if (_zoomX > 1)
-                    {
-                        _posX = (_zoomX * _posXinit * (_zoomXinit - 1) + _xInit * (_zoomX - _zoomXinit)) / (_zoomXinit * (_zoomX - 1));
-                        if (_posX < 0)
-                            _posX = 0;
-                        else if (_posX > 1)
-                            _posX = 1;
-                    }
-                }
-
-                this->update();
+                _zoomY = _zoomY * (1 + nge->value());
+                if (_zoomY < 1)
+                    _zoomY = 1;
+                else if (_zoomY > 50)
+                    _zoomY = 50;
             }
+            else
+            {
+                // WARNING: not using nge->position() since it seems to return the global position
+#if QT_VERSION < 0x060000
+                _xInit = (nge->globalPos().x() - this->mapToGlobal(QPoint(0, 0)).x()) / this->width();
+#else
+                _xInit = (nge->globalPosition().x() - this->mapToGlobal(QPoint(0, 0)).x()) / this->width();
+#endif
+                _posXinit = _posX;
+                _zoomXinit = _zoomX;
+                _zoomX = _zoomX * (1 + nge->value());
+
+                if (_zoomX > 20 * _sizeX / this->width())
+                    _zoomX = 20 * _sizeX / this->width();
+                if (_zoomX < 1)
+                    _zoomX = 1;
+
+                // Update posX
+                if (_zoomX > 1)
+                {
+                    _posX = (_zoomX * _posXinit * (_zoomXinit - 1) + _xInit * (_zoomX - _zoomXinit)) / (_zoomXinit * (_zoomX - 1));
+                    if (_posX < 0)
+                        _posX = 0;
+                    else if (_posX > 1)
+                        _posX = 1;
+                }
+            }
+
+            this->update();
         }
     }
     return QWidget::event(event);

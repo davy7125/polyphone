@@ -426,7 +426,11 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
             return false;
 
         _mousePositionEdges = QFlags<Qt::Edge>();
+#if QT_VERSION < 0x060000
+        QPoint pos = this->mapFromGlobal(mouseEvent->globalPos());
+#else
         QPoint pos = this->mapFromGlobal(mouseEvent->globalPosition().toPoint());
+#endif
         if (pos.x() >= 0 && pos.x() <= RESIZE_BORDER_WIDTH)
             _mousePositionEdges |= Qt::LeftEdge;
         else if (pos.x() >= this->width() - RESIZE_BORDER_WIDTH && pos.x() <= this->width())
