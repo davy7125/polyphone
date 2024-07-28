@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "envelop.h"
+#include <cmath>
 #include <QPainter>
 
 Envelop::Envelop() :
