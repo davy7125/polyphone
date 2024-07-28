@@ -398,6 +398,7 @@ void Editor::customizeKeyboard()
 
     // Display the divisions
     int rootKey = -1;
+    QMap<int, QVector<bool> > rangeByInst;
     foreach (EltID id, ids)
     {
         if (id.typeElement == elementInstSmpl)
@@ -428,38 +429,71 @@ void Editor::customizeKeyboard()
                 maxRange = sf2->get(id, champ_keyRange).rValue;
 
             // Instrument target by this division
-            EltID idInst(elementInst, id.indexSf2, sf2->get(id, champ_instrument).wValue);
+            int instId = sf2->get(id, champ_instrument).wValue;
+            if (!rangeByInst.contains(instId))
+                rangeByInst[instId] = getEnabledKeysForInstrument(EltID(elementInst, id.indexSf2, instId));
 
-            // Default range of this instrument
-            RangesType defInstRange;
-            if (sf2->isSet(idInst, champ_keyRange))
-                defInstRange = sf2->get(idInst, champ_keyRange).rValue;
-            else
+            // Find the instrument ranges within the max range
+            int startKey = -1;
+            for (int key = maxRange.byLo; key <= maxRange.byHi; key++)
             {
-                defInstRange.byLo = 0;
-                defInstRange.byHi = 127;
-            }
-
-            // Browse all divisions inside the instrument
-            EltID idInstSmpl(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
-            foreach (int j, sf2->getSiblings(idInstSmpl))
-            {
-                idInstSmpl.indexElt2 = j;
-
-                // Range of this instrument division
-                RangesType instDivRange = defInstRange;
-                if (sf2->isSet(idInstSmpl, champ_keyRange))
-                    instDivRange = sf2->get(idInstSmpl, champ_keyRange).rValue;
-
-                // Is it inside the max range?
-                if (instDivRange.byHi >= maxRange.byLo && instDivRange.byLo <= maxRange.byHi)
+                if (rangeByInst[instId][key])
                 {
-                    // Add the segment to the keyboard
-                    ContextManager::midi()->keyboard()->addRangeAndRootKey(-1, qMax(maxRange.byLo, instDivRange.byLo), qMin(instDivRange.byHi, maxRange.byHi));
+                    if (startKey == -1)
+                    {
+                        // Start a range
+                        startKey = key;
+                    }
+                }
+                else
+                {
+                    if (startKey != -1)
+                    {
+                        // Close a range
+                        ContextManager::midi()->keyboard()->addRangeAndRootKey(-1, startKey, key - 1);
+                        startKey = -1;
+                    }
                 }
             }
+
+            // Final range
+            if (startKey != -1)
+                ContextManager::midi()->keyboard()->addRangeAndRootKey(-1, startKey, maxRange.byHi);
         }
     }
+}
+
+QVector<bool> Editor::getEnabledKeysForInstrument(EltID idInst)
+{
+    SoundfontManager * sf2 = SoundfontManager::getInstance();
+    QVector<bool> result(128);
+    result.fill(false);
+
+    // Default range of this instrument
+    RangesType defInstRange;
+    if (sf2->isSet(idInst, champ_keyRange))
+        defInstRange = sf2->get(idInst, champ_keyRange).rValue;
+    else
+    {
+        defInstRange.byLo = 0;
+        defInstRange.byHi = 127;
+    }
+
+    // Browse all divisions inside the instrument
+    EltID idInstSmpl(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
+    foreach (int j, sf2->getSiblings(idInstSmpl))
+    {
+        idInstSmpl.indexElt2 = j;
+        RangesType instDivRange = defInstRange;
+        if (sf2->isSet(idInstSmpl, champ_keyRange))
+            instDivRange = sf2->get(idInstSmpl, champ_keyRange).rValue;
+
+        // And set all used keys to "true"
+        for (unsigned int key = instDivRange.byLo; key <= instDivRange.byHi; key++)
+            result[key] = true;
+    }
+
+    return result;
 }
 
 void Editor::onKeyPlayed(int key, int vel)

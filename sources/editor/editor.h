@@ -72,6 +72,7 @@ private slots:
 
 private:
     void updateTitleAndPath();
+    QVector<bool> getEnabledKeysForInstrument(EltID idInst);
 
     Ui::Editor *ui;
     int _sf2Index;
