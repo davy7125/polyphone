@@ -26,6 +26,7 @@
 #include "segment.h"
 #include <QPainter>
 #include "thememanager.h"
+#include <cmath>
 
 const float SegmentPainter::MIN_LOG = 0.0001;
 
@@ -56,7 +57,7 @@ void SegmentPainter::paint(QPainter *painter, QRect rect)
         }
         x1 -= 0.5 * w;
         x2 += 0.5 * w;
-        negMargin = qMin(4.f, qAbs(x2 - x1) / 2.f - 2.0);
+        negMargin = qMin(4.f, (float)qAbs(x2 - x1) / 2.f - 2.0f);
         if (negMargin < 0)
             negMargin = 0;
         painter->drawLine(
