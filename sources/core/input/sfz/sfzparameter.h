@@ -59,13 +59,16 @@ public:
         op_tuningScale,
         op_chorus,
         op_reverb,
+
+        // Filter
         op_filterType,
         op_filterFreq,
         op_filterQ,
-        op_amp_velcurve_1,
-        op_amp_velcurve_127,
+        op_fil_veltrack,
 
         // Envelop volume
+        op_amp_velcurve_1,
+        op_amp_velcurve_127,
         op_ampeg_delay,
         op_ampeg_attack,
         op_ampeg_hold,
