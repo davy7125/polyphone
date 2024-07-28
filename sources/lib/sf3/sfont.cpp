@@ -848,8 +848,31 @@ void SoundFont::writeSmpl()
         foreach(Sample* s, samples)
         {
             // OGG flag is removed
-            s->sampletype &= ~0x10;
-            int len = writeUncompressedSample(s) / 2; // In sample data points (16 bits)
+            int len = 0;
+            if (s->sampletype & 0x10)
+            {
+                s->sampletype &= ~0x10;
+                len = writeUncompressedSample(s) / 2; // In sample data points (16 bits)
+            }
+            else
+            {
+                // The sample is not compressed in the sf3 file
+
+                // Prepare input data
+                QFile f(path);
+                if (f.open(QIODevice::ReadOnly))
+                {
+                    f.seek(samplePos + s->start * sizeof(short));
+                    len = s->end - s->start;
+                    short * ibuffer = new short[len];
+                    f.read((char*)ibuffer, len * sizeof(short));
+                    f.close();
+
+                    write((char *)ibuffer, len * sizeof(short));
+                }
+                else
+                    fprintf(stderr, "cannot open <%s>\n", qPrintable(f.fileName()));
+            }
 
             s->start = currentSamplePos;
             currentSamplePos += len;
