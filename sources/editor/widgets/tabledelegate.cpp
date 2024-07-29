@@ -302,14 +302,14 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
             QStyleOptionViewItemV4 opt(option);
 #endif
             initStyleOption(&opt, index);
-            QRectF rect1 = opt.rect.toRectF();
+            QRect rect1 = opt.rect;
 
             painter->setBrush(_modBorderColor);
             painter->setPen(Qt::transparent);
-            painter->drawRect(QRectF(rect1.left(), rect1.top(), rect1.width(), MOD_BORDER_WIDTH));
-            painter->drawRect(QRectF(rect1.left(), rect1.bottom() - MOD_BORDER_WIDTH, rect1.width(), MOD_BORDER_WIDTH));
-            painter->drawRect(QRectF(rect1.left(), rect1.top(), MOD_BORDER_WIDTH, rect1.height()));
-            painter->drawRect(QRectF(rect1.right() - MOD_BORDER_WIDTH, rect1.top(), MOD_BORDER_WIDTH, rect1.height()));
+            painter->drawRect(QRect(rect1.left(), rect1.top(), rect1.width(), MOD_BORDER_WIDTH));
+            painter->drawRect(QRect(rect1.left(), rect1.bottom() - MOD_BORDER_WIDTH, rect1.width(), MOD_BORDER_WIDTH));
+            painter->drawRect(QRect(rect1.left(), rect1.top(), MOD_BORDER_WIDTH, rect1.height()));
+            painter->drawRect(QRect(rect1.right() - MOD_BORDER_WIDTH, rect1.top(), MOD_BORDER_WIDTH, rect1.height()));
         }
     }
 }
