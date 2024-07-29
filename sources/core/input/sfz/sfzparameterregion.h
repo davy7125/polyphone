@@ -44,6 +44,7 @@ public:
     void adjustStereoVolumeAndCorrection(QString path, int defaultCorrection);
     bool sampleValid(QString path);
     void checkFilter();
+    void checkKeyTrackedFilter(bool remove);
     void adjustVolume(double offset);
     void adjustCorrection(int offset, int defaultCorrection);
     void removeOpCode(SfzParameter::OpCode opcode)
@@ -92,7 +93,7 @@ private:
     QList<SfzParameter> _listeParam;
     static QStringList getFullPath(QString base, QStringList directories);
     static double log2m1200(double value) { return 1200. * qLn(qMax(0.001, value)) / 0.69314718056 /* ln(2) */; }
-    static double d1200e2(int value) { return qPow(2., value / 1200.); }
+    static double d1200e2(int value) { return qPow(2., static_cast<double>(value) / 1200.); }
     static void addSeconds(double value, AttributeType champ, SoundfontManager * sf2, EltID id);
     void getKeynumValues(double &baseValue, int &keynum, SfzParameter::OpCode opCodeKeynum, SfzParameter::OpCode opCodeBase) const;
     static QString getName(QString name, int maxCharacters, int suffixNumber, QString suffix = "");

@@ -197,6 +197,13 @@ void SfzParameterGroup::checkFilter()
         _regionList[i].checkFilter();
 }
 
+void SfzParameterGroup::checkKeyTrackedFilter()
+{
+    _paramGlobaux.checkKeyTrackedFilter(false);
+    for (int i = 0; i < _regionList.size(); i++)
+        _regionList[i].checkKeyTrackedFilter(true);
+}
+
 void SfzParameterGroup::simplifyAttenuation()
 {
     bool attenuationUnique = true;
@@ -247,10 +254,13 @@ double SfzParameterGroup::getAmpliMax()
 
 void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pathSfz)
 {
-    // Remplissage des paramètres globaux
+    // Fill the parameters of the global division
     _paramGlobaux.decode(sf2, idInst);
 
-    // Lien avec samples
+    // Deactivate default modulators
+    disableModulators(sf2, idInst);
+
+    // Link to samples
     EltID idInstSmpl = idInst;
     idInstSmpl.typeElement = elementInstSmpl;
     EltID idSmpl = idInst;
@@ -258,10 +268,10 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
     AttributeValue val;
     for (int i = 0; i < _regionList.size(); i++)
     {
-        // Création des samples si besoin et récupération de leur index
+        // Create samples if needed and get their index
         QList<int> listeIndexSmpl = _regionList.at(i).getSampleIndex(sf2, idInst, pathSfz);
 
-        // Transformation des offsets si présents
+        // Process possible offsets
         if (!listeIndexSmpl.isEmpty())
         {
             idSmpl.indexElt = listeIndexSmpl.first();
@@ -285,14 +295,14 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
 
         if (listeIndexSmpl.size() == 1) // Mono sample
         {
-            // Création InstSmpl
+            // Create a division InstSmpl
             idInstSmpl.indexElt2 = sf2->add(idInstSmpl);
 
-            // Lien avec le sample
+            // Link to the sample
             val.wValue = listeIndexSmpl.first();
             sf2->set(idInstSmpl, champ_sampleID, val);
 
-            // Remplissage paramètres de la division
+            // Fill the parameters of this division
             _regionList.at(i).decode(sf2, idInstSmpl);
 
             if (_regionList.at(i).isDefined(SfzParameter::op_pan))
@@ -303,7 +313,7 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
         }
         else if (listeIndexSmpl.size() == 2) // Sample stereo
         {
-            // Gestion width / position
+            // Process width / position
             double width = 500;
             if (_regionList.at(i).isDefined(SfzParameter::op_width))
                 width = 5. * _regionList.at(i).getDoubleValue(SfzParameter::op_width);
@@ -315,7 +325,7 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
             else
                 position = qAbs(position * (500 - qAbs(width)));
 
-            // Gestion pan
+            // Process pan
             double attenuation = 0;
             int panDefined = -1;
             if (_regionList.at(i).isDefined(SfzParameter::op_pan))
@@ -330,10 +340,10 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
 
             for (int j = 0; j < listeIndexSmpl.size(); j++)
             {
-                // Création InstSmpl
+                // Creation a division InstSmpl
                 idInstSmpl.indexElt2 = sf2->add(idInstSmpl);
 
-                // Lien avec le sample
+                // Link to the sample
                 val.wValue = listeIndexSmpl.at(j);
                 sf2->set(idInstSmpl, champ_sampleID, val);
 
@@ -344,7 +354,7 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
                     sf2->set(idInstSmpl, champ_initialAttenuation, val);
                 }
 
-                // Remplissage paramètres de la division
+                // Fill the parameters of this division
                 _regionList.at(i).decode(sf2, idInstSmpl);
 
                 // Width, position
@@ -356,4 +366,36 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
             }
         }
     }
+}
+
+void SfzParameterGroup::disableModulators(SoundfontManager * sm, EltID idInst)
+{
+    EltID idMod(elementInstMod, idInst.indexSf2, idInst.indexElt);
+    AttributeValue val;
+
+    // Disable "MIDI Note-On Velocity to Initial Attenuation"
+    idMod.indexMod = sm->add(idMod);
+    val.sfModValue = SFModulator(GeneralController::GC_noteOnVelocity, ModType::typeConcave, true, false);
+    sm->set(idMod, champ_sfModSrcOper, val);
+    val.wValue = champ_initialAttenuation;
+    sm->set(idMod, champ_sfModDestOper, val);
+    val.wValue = 0;
+    sm->set(idMod, champ_modAmount, val);
+    val.sfModValue = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
+    sm->set(idMod, champ_sfModAmtSrcOper, val);
+    val.sfTransValue = SFTransform::linear;
+    sm->set(idMod, champ_sfModTransOper, val);
+
+    // Disable "MIDI Note-On Velocity to Filter Cutoff"
+    idMod.indexMod = sm->add(idMod);
+    val.sfModValue = SFModulator(GeneralController::GC_noteOnVelocity, ModType::typeLinear, true, false);
+    sm->set(idMod, champ_sfModSrcOper, val);
+    val.wValue = champ_initialFilterFc;
+    sm->set(idMod, champ_sfModDestOper, val);
+    val.wValue = 0;
+    sm->set(idMod, champ_modAmount, val);
+    val.sfModValue = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
+    sm->set(idMod, champ_sfModAmtSrcOper, val);
+    val.sfTransValue = SFTransform::linear;
+    sm->set(idMod, champ_sfModTransOper, val);
 }

@@ -219,6 +219,39 @@ void SfzParameterRegion::checkFilter()
     }
 }
 
+void SfzParameterRegion::checkKeyTrackedFilter(bool remove)
+{
+    if (remove)
+    {
+        // Not the global division: remove op_fil_keytrack and op_fil_keycenter
+        removeOpCode(SfzParameter::op_fil_keytrack);
+        removeOpCode(SfzParameter::op_fil_keycenter);
+        return;
+    }
+
+    if (isDefined(SfzParameter::op_fil_keytrack) && isDefined(SfzParameter::op_filterFreq))
+    {
+        // Key center specified?
+        int keyCenter = 60; // Default value
+        if (isDefined(SfzParameter::op_fil_keycenter))
+            keyCenter = getIntValue(SfzParameter::op_fil_keycenter);
+
+        // The value of the filter is set for key "keyCenter" but we want the value for key 64
+        int diff = 64 - keyCenter;
+        int cents = getIntValue(SfzParameter::op_fil_keytrack);
+
+        for (int i = 0; i < _listeParam.size(); i++)
+        {
+            if (_listeParam.at(i).getOpCode() == SfzParameter::op_filterFreq)
+            {
+                int currentFreq = _listeParam.at(i).getDoubleValue();
+                _listeParam[i].setDoubleValue(d1200e2(diff * cents) * currentFreq);
+                break;
+            }
+        }
+    }
+}
+
 void SfzParameterRegion::adjustVolume(double offset)
 {
     bool isDefined = false;
@@ -472,6 +505,39 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
             val.shValue = qRound(10. * _listeParam.at(i).getDoubleValue());
             sf2->set(idElt, champ_initialFilterQ, val);
             break;
+        case SfzParameter::op_fil_veltrack: {
+            // Create a modulator modifying the filter frequency based on the velocity
+            EltID idMod(idElt.typeElement == elementInst ? elementInstMod : elementInstSmplMod, idElt.indexSf2, idElt.indexElt, idElt.indexElt2);
+            idMod.indexMod = sf2->add(idMod);
+            val.sfModValue = SFModulator(GeneralController::GC_noteOnVelocity, ModType::typeLinear, false, false);
+            sf2->set(idMod, champ_sfModSrcOper, val);
+            val.wValue = champ_initialFilterFc;
+            sf2->set(idMod, champ_sfModDestOper, val);
+            val.wValue = _listeParam.at(i).getIntValue();
+            sf2->set(idMod, champ_modAmount, val);
+            val.sfModValue = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
+            sf2->set(idMod, champ_sfModAmtSrcOper, val);
+            val.sfTransValue = SFTransform::linear;
+            sf2->set(idMod, champ_sfModTransOper, val);
+        } break;
+        case SfzParameter::op_fil_keycenter:
+            // Nothing here, already processed for changing the value of the filter if op_fil_keytrack is set
+            break;
+        case SfzParameter::op_fil_keytrack: {
+            // Create a modulator modifying the filter frequency based on the key (center has been changed to 64)
+            EltID idMod(idElt.typeElement == elementInst ? elementInstMod : elementInstSmplMod, idElt.indexSf2, idElt.indexElt, idElt.indexElt2);
+            idMod.indexMod = sf2->add(idMod);
+            val.sfModValue = SFModulator(GeneralController::GC_noteOnKeyNumber, ModType::typeLinear, false, true);
+            sf2->set(idMod, champ_sfModSrcOper, val);
+            val.wValue = champ_initialFilterFc;
+            sf2->set(idMod, champ_sfModDestOper, val);
+            val.wValue = 64 * _listeParam.at(i).getIntValue();
+            sf2->set(idMod, champ_modAmount, val);
+            val.sfModValue = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
+            sf2->set(idMod, champ_sfModAmtSrcOper, val);
+            val.sfTransValue = SFTransform::linear;
+            sf2->set(idMod, champ_sfModTransOper, val);
+        } break;
         case SfzParameter::op_vibLFOdelay:
             if (isDefined(SfzParameter::op_vibLFOtoTon))
                 addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayVibLFO, sf2, idElt);
@@ -645,7 +711,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
     {
         if (isDefined(SfzParameter::op_modLFOtoVolume))
         {
-            // Mêmes paramètres ?
+            // Same parameters?
             if (getDoubleValue(SfzParameter::op_filLFOdelay) == getDoubleValue(SfzParameter::op_modLFOdelay) &&
                 getDoubleValue(SfzParameter::op_filLFOfreq) == getDoubleValue(SfzParameter::op_modLFOfreq))
             {

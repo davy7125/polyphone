@@ -69,7 +69,7 @@ SfzParameter::SfzParameter(QString opcode, QString valeur) :
         _opcode = op_velMax;
         _intValue = valeurLow.toInt();
     }
-    else if (opcode == "pitch_keycenter")
+    else if (opcode == "pitchkeycenter")
     {
         _opcode = op_rootKey;
         _intValue = ContextManager::keyName()->getKeyNum(valeurLow, true);
@@ -369,10 +369,20 @@ SfzParameter::SfzParameter(QString opcode, QString valeur) :
         _opcode = op_chanMax;
         _intValue = valeurLow.toInt();
     }
-    else if (opcode == "fil_veltrack")
+    else if (opcode == "filveltrack")
     {
         _opcode = op_fil_veltrack;
         _intValue = valeurLow.toInt();
+    }
+    else if (opcode == "filkeytrack")
+    {
+        _opcode = op_fil_keytrack;
+        _intValue = valeurLow.toInt();
+    }
+    else if (opcode == "filkeycenter")
+    {
+        _opcode = op_fil_keycenter;
+        _intValue = ContextManager::keyName()->getKeyNum(valeurLow, true);
     }
     else if (opcode == "trigger" && valeur == "attack")
     {

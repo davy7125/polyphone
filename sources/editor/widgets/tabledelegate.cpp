@@ -39,7 +39,7 @@ TableDelegate::TableDelegate(QTableWidget * table, QObject * parent): QStyledIte
     _table(table),
     _isEditing(false)
 {
-    _modBorderColor = ContextManager::theme()->getColor(ThemeManager::BORDER);
+    _modBorderColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
 }
 
 QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -302,14 +302,10 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
             QStyleOptionViewItemV4 opt(option);
 #endif
             initStyleOption(&opt, index);
-            QRect rect1 = opt.rect;
-
-            painter->setBrush(_modBorderColor);
-            painter->setPen(Qt::transparent);
-            painter->drawRect(QRect(rect1.left(), rect1.top(), rect1.width(), MOD_BORDER_WIDTH));
-            painter->drawRect(QRect(rect1.left(), rect1.bottom() - MOD_BORDER_WIDTH, rect1.width(), MOD_BORDER_WIDTH));
-            painter->drawRect(QRect(rect1.left(), rect1.top(), MOD_BORDER_WIDTH, rect1.height()));
-            painter->drawRect(QRect(rect1.right() - MOD_BORDER_WIDTH, rect1.top(), MOD_BORDER_WIDTH, rect1.height()));
+            painter->setPen(QPen(_modBorderColor, 2 * MOD_BORDER_WIDTH));
+            painter->setClipRect(opt.rect);
+            painter->drawRect(opt.rect);
+            painter->setClipping(false);
         }
     }
 }

@@ -65,6 +65,8 @@ public:
         op_filterFreq,
         op_filterQ,
         op_fil_veltrack,
+        op_fil_keytrack,
+        op_fil_keycenter,
 
         // Envelop volume
         op_amp_velcurve_1,

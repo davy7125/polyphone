@@ -76,6 +76,7 @@ void InputParserSfz::processInternal(QString fileName, SoundfontManager * sm, bo
         _presetList[i].adjustStereoVolumeAndCorrection(QFileInfo(fileName).path());
         _presetList[i].adjustModulationVolume();
         _presetList[i].checkFilter();
+        _presetList[i].checkKeyTrackedFilter();
         ampliMax = qMax(ampliMax, _presetList[i].getAmpliMax());
         isChannel10 &= _presetList[i].isChannel10();
     }

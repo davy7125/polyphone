@@ -51,6 +51,7 @@ public:
     void moveModInSamples(QList<SfzParameter::OpCode> opCodeList);
     void checkSampleValid(QString path);
     void checkFilter();
+    void checkKeyTrackedFilter();
     void simplifyAttenuation();
     void adjustStereoVolumeAndCorrection(QString path);
     void adjustModulationVolume();
@@ -63,6 +64,8 @@ public:
     void decode(SoundfontManager * sf2, EltID idInst, QString pathSfz);
 
 private:
+    static void disableModulators(SoundfontManager * sm, EltID idInst);
+
     SfzParameterRegion _paramGlobaux;
     QList<SfzParameterRegion> _regionList;
     QString _label;
