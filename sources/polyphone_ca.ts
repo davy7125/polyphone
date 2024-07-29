@@ -6014,17 +6014,17 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="174"/>
         <source>Defined value in the global division</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor definit en la divisió global</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="189"/>
         <source>Default value for the selected parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor per defecte del paràmetre seleccionat</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="201"/>
         <source>Defined value in a division</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor definit en una divisió</translation>
     </message>
 </context>
 <context>
@@ -6163,7 +6163,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization.h" line="63"/>
         <source>Sound spatialization</source>
-        <translation>Espacialització del so</translation>
+        <translation>Espaiament del so</translation>
     </message>
 </context>
 <context>
@@ -6186,7 +6186,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="36"/>
         <source>Spike</source>
-        <translation type="unfinished"></translation>
+        <translation>Pic</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="41"/>
@@ -6196,7 +6196,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="59"/>
         <source>Spreading (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Extensió (%)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="66"/>
@@ -6231,7 +6231,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="181"/>
         <source>Filling (%)</source>
-        <translation>Emplenant (%)</translation>
+        <translation>Emplenament (%)</translation>
     </message>
 </context>
 <context>
