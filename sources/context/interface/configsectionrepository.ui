@@ -56,7 +56,6 @@
          </property>
          <property name="font">
           <font>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -103,7 +102,6 @@
          </property>
          <property name="font">
           <font>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -187,7 +185,6 @@ Premium!</string>
         <widget class="QLabel" name="labelBan2">
          <property name="font">
           <font>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -285,7 +282,7 @@ Premium!</string>
    <item row="1" column="1">
     <widget class="QLabel" name="label_5">
      <property name="text">
-      <string>Username</string>
+      <string>Email address</string>
      </property>
     </widget>
    </item>
@@ -351,7 +348,6 @@ Premium!</string>
     <widget class="QLabel" name="labelSubTitle1">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -364,7 +360,6 @@ Premium!</string>
     <widget class="QLabel" name="labelSubTitle2">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>

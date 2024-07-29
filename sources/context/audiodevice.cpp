@@ -224,6 +224,9 @@ void AudioDevice::initAudio()
         error.printMessage();
         return;
     }
+    #ifdef RT_AUDIO_5_2
+    _rtAudio->showWarnings(false);
+    #endif
 
     // Browse the devices
     int selectedDevice = -1;

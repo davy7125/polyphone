@@ -61,7 +61,7 @@ UserManager::~UserManager()
 void UserManager::login()
 {
     // Get username / password
-    QString username = ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString();
+    QString username = ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "email", "").toString();
     QString password = ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password", "").toString();
     if (username.isEmpty() || password.isEmpty())
     {

@@ -57,37 +57,45 @@ ConfManager::ConfManager(): QObject(),
         // Clear everything if the previous version was < 2.0
         this->clear();
     }
-    else if (v_major == 2 && v_minor == 0)
+    else
     {
-        // One key moved from "keyboard" to "midi"
-        _settings.setValue("midi/velocity", _settings.value("keyboard/velocity"));
-        _settings.remove("keyboard/velocity");
+        if (v_major == 2 && v_minor == 0)
+        {
+            // One key moved from "keyboard" to "midi"
+            _settings.setValue("midi/velocity", _settings.value("keyboard/velocity"));
+            _settings.remove("keyboard/velocity");
 
-        // 1 key moved from the general section to "display"
-        _settings.setValue("display/name_middle_c", _settings.value("name_middle_c"));
-        _settings.remove("name_middle_c");
+            // 1 key moved from the general section to "display"
+            _settings.setValue("display/name_middle_c", _settings.value("name_middle_c"));
+            _settings.remove("name_middle_c");
 
-        // Everything from "map" is now in "keyboard"
-        _settings.beginGroup("map");
-        QStringList keys = _settings.allKeys();
-        _settings.endGroup();
-        foreach (QString key, keys)
-            _settings.setValue("keyboard/" + key, _settings.value("map/" + key));
-        _settings.remove("map");
+            // Everything from "map" is now in "keyboard"
+            _settings.beginGroup("map");
+            QStringList keys = _settings.allKeys();
+            _settings.endGroup();
+            foreach (QString key, keys)
+                _settings.setValue("keyboard/" + key, _settings.value("map/" + key));
+            _settings.remove("map");
 
-        // "affichage" renamed in "display"
-        _settings.beginGroup("affichage");
-        keys = _settings.allKeys();
-        _settings.endGroup();
-        foreach (QString key, keys)
-            _settings.setValue("display/" + key, _settings.value("affichage/" + key));
-        _settings.remove("affichage");
-    }
-    else if (v_major * 100 + v_minor <= 203)
-    {
-        // Remove the controller values
-        for (int i = 0; i < 128; i++)
-            _settings.remove("midi/CC_" + QString("%1").arg(i, 3, 10, QChar('0')));
+            // "affichage" renamed in "display"
+            _settings.beginGroup("affichage");
+            keys = _settings.allKeys();
+            _settings.endGroup();
+            foreach (QString key, keys)
+                _settings.setValue("display/" + key, _settings.value("affichage/" + key));
+            _settings.remove("affichage");
+        }
+
+        if (v_major * 100 + v_minor <= 203)
+        {
+            // Remove the controller values
+            for (int i = 0; i < 128; i++)
+                _settings.remove("midi/CC_" + QString("%1").arg(i, 3, 10, QChar('0')));
+
+            // username becomes email
+            _settings.setValue("repository/email", _settings.value("repository/username"));
+            _settings.remove("repository/username");
+        }
     }
 
     // Special initialization here (for more speed when reading modulator_vel_to_filter)

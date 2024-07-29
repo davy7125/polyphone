@@ -74,7 +74,7 @@ ConfigSectionRepository::~ConfigSectionRepository()
 void ConfigSectionRepository::initialize()
 {
     // User identifier and password
-    ui->lineUser->setText(ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString());
+    ui->lineUser->setText(ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "email", "").toString());
     int passwordLength = ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password_length", 0).toInt();
     QString fake;
     fake.resize(passwordLength);
@@ -172,8 +172,8 @@ void ConfigSectionRepository::on_pushConnect_clicked()
     {
     case UserManager::DISCONNECTED:
     case UserManager::FAILED:
-        // Save the user name and the encrypted password
-        ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "username", ui->lineUser->text());
+        // Save the email address and the encrypted password
+        ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "email", ui->lineUser->text());
         if (!_fakePassword) // If it didn't change, keep the old encrypted password
         {
             QString password = ui->linePassword->text();

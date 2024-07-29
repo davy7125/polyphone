@@ -224,7 +224,7 @@ void SoundfontViewer::on_pushSave_clicked()
     // Save the changes on the website
     _urlReader->clearArguments();
     _urlReader->addArgument("id", QString::number(_soundfontId));
-    _urlReader->addArgument("user", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString());
+    _urlReader->addArgument("user", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "email", "").toString());
     _urlReader->addArgument("pass", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password", "").toString());
     foreach (QString key, arguments.keys())
         _urlReader->addArgument(key, arguments[key]);

@@ -104,7 +104,7 @@ void DetailsManager::run()
         if (UserManager::getInstance()->getConnectionState() == UserManager::CONNECTED_PREMIUM ||
             UserManager::getInstance()->getConnectionState() == UserManager::CONNECTED_ADMIN)
         {
-            _urlReaderDetails->addArgument("user", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString());
+            _urlReaderDetails->addArgument("user", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "email", "").toString());
             _urlReaderDetails->addArgument("pass", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password", "").toString());
         }
         _urlReaderDetails->download();
