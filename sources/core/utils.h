@@ -46,7 +46,6 @@ public:
 
     /// Encrypt / decrypt data
     static QString rsaEncrypt(QString input);
-    static QString rsaDecrypt(QString input);
 
     /// Conversion functions
     static qint8 round8(double value);

@@ -171,72 +171,37 @@ QString Utils::rsaEncrypt(QString input)
     }
     QByteArray publicKeyData = file.readAll();
     file.close();
+    QByteArray inputData = input.toLatin1();
 
-    // Create the RSA public key
-    BIO* bio = BIO_new_mem_buf((void*)publicKeyData.data(), publicKeyData.size());
-    BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL); // NO NL
-    RSA* publicKey = PEM_read_bio_RSA_PUBKEY(bio, nullptr, nullptr, nullptr);
-    BIO_free(bio);
-    if (publicKey == nullptr)
-    {
-        qWarning() << "Error when reading the public key:" << ERR_error_string(ERR_get_error(), nullptr);
-        return "";
-    }
 
-    // Encrypt data
-    int rsaLen = RSA_size(publicKey);
-    unsigned char* encryptedText = new unsigned char[rsaLen];
-    int resultLen = RSA_public_encrypt(input.size(), (const unsigned char*)input.toLatin1().data(), encryptedText, publicKey, RSA_PKCS1_PADDING);
-    RSA_free(publicKey);
-    if (resultLen == -1)
-    {
-        qWarning() << "Error when encrypting with RSA:" << ERR_error_string(ERR_get_error(), nullptr);
-        delete [] encryptedText;
-        return "";
-    }
+    BIO* bo = BIO_new(BIO_s_mem());
+    BIO_write(bo, publicKeyData.data(), publicKeyData.length());
 
-    // Convert the encryptedText to QString (base 64) and return it
-    QString result = QByteArray((char*)encryptedText, resultLen).toBase64();
-    delete [] encryptedText;
-    return result;
-}
+    EVP_PKEY* pkey = 0;
+    //PEM_read_bio_PrivateKey(bo, &pkey, 0, 0 );
+    PEM_read_bio_PUBKEY(bo, &pkey, 0, 0 );
+    BIO_free(bo);
 
-QString Utils::rsaDecrypt(QString input)
-{
-    // Load the public key from the resources
-    QFile file(":/misc/id_rsa.pub");
-    if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "Error when opening the public key file";
-        return "";
-    }
-    QByteArray publicKeyData = file.readAll();
-    file.close();
+    // Create/initialize context
+    EVP_PKEY_CTX* ctx;
+    ctx = EVP_PKEY_CTX_new(pkey, NULL);
+    EVP_PKEY_encrypt_init(ctx);
 
-    // Create the RSA public key
-    BIO *bio = BIO_new_mem_buf((void*)publicKeyData.data(), publicKeyData.size());
-    BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL); // NO NL
-    RSA* publicKey = PEM_read_bio_RSA_PUBKEY(bio, nullptr, nullptr, nullptr);
-    BIO_free(bio) ;
-    if (publicKey == nullptr)
-    {
-        qWarning() << "Error when reading the public key:" << ERR_error_string(ERR_get_error(), nullptr);
-        return "";
-    }
+    // Specify padding: default is PKCS#1 v1.5
+    // EVP_PKEY_CTX_set_rsa_padding(ctx, RSA_PKCS1_OAEP_PADDING); // for OAEP with SHA1 for both digests
 
-    // Decrypt data
-    int rsaLen = RSA_size(publicKey); // That's how many bytes the decrypted data would be
-    unsigned char * decryptedText = new unsigned char[rsaLen];
-    int resultLen = RSA_public_decrypt(RSA_size(publicKey), (unsigned char *)QByteArray::fromBase64(input.toUtf8()).data(), decryptedText, publicKey, RSA_PKCS1_PADDING);
-    if (resultLen == -1)
-    {
-        qWarning() << "Error when decrypting with RSA:" << ERR_error_string(ERR_get_error(), nullptr);
-        delete [] decryptedText;
-        return "";
-    }
+    // Encryption
+    size_t ciphertextLen;
+    EVP_PKEY_encrypt(ctx, NULL, &ciphertextLen, (const unsigned char*)inputData.constData(), inputData.length());
+    unsigned char* ciphertext = (unsigned char*)OPENSSL_malloc(ciphertextLen);
+    EVP_PKEY_encrypt(ctx, ciphertext, &ciphertextLen, (const unsigned char*)inputData.constData(), inputData.length());
+    QString result = QByteArray((char*)ciphertext, ciphertextLen).toBase64();
 
-    // Convert the decryptedText to QString (base 64) and return it
-    QString result = QString::fromLatin1((char*)decryptedText, resultLen);
-    delete [] decryptedText;
+    // Release memory
+    EVP_PKEY_free(pkey);
+    EVP_PKEY_CTX_free(ctx);
+    OPENSSL_free(ciphertext);
+
     return result;
 }
 
