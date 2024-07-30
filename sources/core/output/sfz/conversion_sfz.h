@@ -59,6 +59,7 @@ private:
     void writeGroup(QFile * fichierSfz, SfzParamList * listeParam, bool isPercKit);
     void writeRegion(QFile * fichierSfz, SfzParamList * listeParam, QString pathSample, bool ignorePan);
     void writeElement(QTextStream &out, AttributeType champ, double value);
+    void writeModulator(QTextStream &out, ModulatorData modData);
     bool isIncluded(SfzParamList * paramPrst, EltID idInstSmpl);
     static double dbToPercent(double dB) { return 100. * pow(10, -dB / 20); }
     static QString escapeStr(QString str);

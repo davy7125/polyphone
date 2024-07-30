@@ -313,7 +313,8 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
             val.rValue.byHi = val.rValue.byLo;
             sf2->set(idElt, champ_keyRange, val);
             val.wValue = _listeParam.at(i).getIntValue();
-            sf2->set(idElt, champ_overridingRootKey, val);
+            if (!isDefined(SfzParameter::op_rootKey))
+                sf2->set(idElt, champ_overridingRootKey, val);
             break;
         case SfzParameter::op_keyMin:
             if (sf2->isSet(idElt, champ_keyRange))
@@ -348,11 +349,8 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
             sf2->set(idElt, champ_velRange, val);
             break;
         case SfzParameter::op_rootKey:
-            if (!isDefined(SfzParameter::op_key))
-            {
-                val.wValue = _listeParam.at(i).getIntValue();
-                sf2->set(idElt, champ_overridingRootKey, val);
-            }
+            val.wValue = _listeParam.at(i).getIntValue();
+            sf2->set(idElt, champ_overridingRootKey, val);
             break;
         case SfzParameter::op_exclusiveClass:
             val.wValue = _listeParam.at(i).getIntValue();

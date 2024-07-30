@@ -52,20 +52,23 @@ QString ConversionSfz::convert(QString dirPath, EltID idSf2, bool presetPrefix, 
     if (!QDir().mkdir(dirPath))
         return tr("Cannot create directory \"%1\"").arg(dirPath);
 
-    // Plusieurs banques sont utilisées ?
-    int numBankUnique = -1;
+    // More than one bank in use?
+    int uniqueBankNumber = -1;
     _bankSortEnabled = false;
     EltID presetId(elementPrst, idSf2.indexSf2);
     foreach (int presetNumber, _sf2->getSiblings(presetId))
     {
         presetId.indexElt = presetNumber;
-        if (numBankUnique == -1)
-            numBankUnique = _sf2->get(presetId, champ_wBank).wValue;
-        else
-            _bankSortEnabled |= (numBankUnique != _sf2->get(presetId, champ_wBank).wValue);
+        if (uniqueBankNumber == -1)
+            uniqueBankNumber = _sf2->get(presetId, champ_wBank).wValue;
+        else if (uniqueBankNumber != _sf2->get(presetId, champ_wBank).wValue)
+        {
+            _bankSortEnabled = true;
+            uniqueBankNumber = -1;
+            break;
+        }
     }
-    if (_bankSortEnabled)
-        numBankUnique = -1; // Si numBankUnique est différent de -1, il nous donne le numéro unique de banque utilisée
+
     _bankSortEnabled &= bankDir;
     _gmSortEnabled = gmSort;
 
@@ -78,7 +81,7 @@ QString ConversionSfz::convert(QString dirPath, EltID idSf2, bool presetPrefix, 
     {
         presetId.indexElt = presetNumber;
 
-        // Répertoire allant contenir le fichier sfz
+        // Directory that will contain the sfz filee
         QString sourceDir = dirPath;
 
         int numBank = _sf2->get(presetId, champ_wBank).wValue;
@@ -96,7 +99,7 @@ QString ConversionSfz::convert(QString dirPath, EltID idSf2, bool presetPrefix, 
         {
             if (numBank == 128)
             {
-                if (_bankSortEnabled || numBankUnique == 128)
+                if (_bankSortEnabled || uniqueBankNumber == 128)
                     sourceDir += "/" + getDrumCategory(numPreset);
                 else
                     sourceDir += "/" + getDirectoryName(128);
@@ -131,23 +134,23 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
             id.indexElt2 = i;
             QList<EltID> listProcessedInstSmpl;
 
-            // Paramètres du prst
+            // Preset parameters
             SfzParamList * paramPrst = new SfzParamList(_sf2, id);
 
-            // ID de l'instrument lié
+            // ID of the linked instrument
             EltID idInst = id;
             idInst.typeElement = elementInst;
             idInst.indexElt = _sf2->get(id, champ_instrument).wValue;
 
-            // Paramètres globaux (groupe)
-            SfzParamList * paramGroupe = new SfzParamList(_sf2, paramPrst, idInst);
-            writeGroup(&fichierSfz, paramGroupe, numBank == 128);
-            delete paramGroupe;
+            // Instrument parameters
+            SfzParamList * paramInst = new SfzParamList(_sf2, paramPrst, idInst);
+            writeGroup(&fichierSfz, paramInst, numBank == 128);
+            delete paramInst;
 
-            // Ecriture de chaque élément présent dans l'instrument
+            // Write each element of the instrument
             idInst.typeElement = elementInstSmpl;
 
-            // Ordre des instSmpl
+            // instSmpl order
             QMultiMap<int, EltID> map;
             foreach (int j, _sf2->getSiblings(idInst))
             {
@@ -166,22 +169,22 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
                     idSmpl.typeElement = elementSmpl;
                     idSmpl.indexElt = _sf2->get(idInst, champ_sampleID).wValue;
 
-                    // Utilisation sample mono ou stéréo ?
+                    // Mono or stereo samples?
                     SFSampleLink typeSample = _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
                     double pan = 0;
-                    if (paramInstSmpl->findChamp(champ_pan) != -1)
-                        pan = paramInstSmpl->getValeur(paramInstSmpl->findChamp(champ_pan));
+                    if (paramInstSmpl->findAttribute(champ_pan) != -1)
+                        pan = paramInstSmpl->getValue(paramInstSmpl->findAttribute(champ_pan));
                     bool enableStereo = ((typeSample == leftSample || typeSample == RomLeftSample) && pan == -50) ||
                             ((typeSample == rightSample || typeSample == RomRightSample) && pan == 50);
 
                     bool ignorePan = false;
                     if (enableStereo)
                     {
-                        // Sample lié
+                        // Linked sample
                         EltID idSmplLinked = idSmpl;
                         idSmplLinked.indexElt = _sf2->get(idSmpl, champ_wSampleLink).wValue;
 
-                        // Vérification que les paramètres liés aux samples sont identiques
+                        // Check that the parameters linked to the samples are the same
                         if (_sf2->get(idSmpl, champ_dwStartLoop).dwValue == _sf2->get(idSmplLinked, champ_dwStartLoop).dwValue &&
                                 _sf2->get(idSmpl, champ_dwEndLoop).dwValue == _sf2->get(idSmplLinked, champ_dwEndLoop).dwValue &&
                                 _sf2->get(idSmpl, champ_dwLength).dwValue == _sf2->get(idSmplLinked, champ_dwLength).dwValue &&
@@ -189,7 +192,7 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
                                 _sf2->get(idSmpl, champ_byOriginalPitch).bValue == _sf2->get(idSmplLinked, champ_byOriginalPitch).bValue &&
                                 _sf2->get(idSmpl, champ_dwSampleRate).dwValue == _sf2->get(idSmplLinked, champ_dwSampleRate).dwValue)
                         {
-                            // Recherche d'un instSmpl correspondant exactement à l'autre canal
+                            // Search another instSmpl that exactly matches the other channel
                             int index = -1;
                             for (int k = j + 1; k < listInstSmpl.count(); k++)
                             {
@@ -286,36 +289,44 @@ void ConversionSfz::writeEntete(QFile * fichierSfz, EltID id)
 
 void ConversionSfz::writeGroup(QFile * fichierSfz, SfzParamList * listeParam, bool isPercKit)
 {
-    // Ecriture de paramètres communs à plusieurs régions
+    // Write the parameters in common for different regions
     QTextStream out(fichierSfz);
     out << Qt::endl << "<group>" << Qt::endl;
     if (isPercKit)
         out << "lochan=10 hichan=10" << Qt::endl;
-    for (int i = 0; i < listeParam->size(); i++)
-        writeElement(out, listeParam->getChamp(i), listeParam->getValeur(i));
+    for (int i = 0; i < listeParam->attributeCount(); i++)
+        writeElement(out, listeParam->getAttribute(i), listeParam->getValue(i));
+
+    // Associated modulators
+    for (int i = 0; i < listeParam->modulatorCount(); i++)
+        writeModulator(out, listeParam->getModulator(i));
 }
 
 void ConversionSfz::writeRegion(QFile * fichierSfz, SfzParamList * listeParam, QString pathSample, bool ignorePan)
 {
-    // Correction de volume lorsqu'un son passe en stéréo
+    // Fix the volume when a sound is stereo
     double deltaVolumeIfIgnorePan = 3.;
 
-    // Ecriture de paramètres spécifique à une région
+    // Write the parameters specific to a region
     QTextStream out(fichierSfz);
 
     out << Qt::endl << "<region>" << Qt::endl
         << "sample=" << pathSample.replace("/", "\\") << Qt::endl;
-    if (ignorePan && listeParam->findChamp(champ_initialAttenuation) == -1)
+    if (ignorePan && listeParam->findAttribute(champ_initialAttenuation) == -1)
         writeElement(out, champ_initialAttenuation, -deltaVolumeIfIgnorePan / DB_SF2_TO_SFZ);
 
-    for (int i = 0; i < listeParam->size(); i++)
+    for (int i = 0; i < listeParam->attributeCount(); i++)
     {
-        if (ignorePan && listeParam->getChamp(i) == champ_initialAttenuation)
-            writeElement(out, champ_initialAttenuation, listeParam->getValeur(i) -
+        if (ignorePan && listeParam->getAttribute(i) == champ_initialAttenuation)
+            writeElement(out, champ_initialAttenuation, listeParam->getValue(i) -
                          deltaVolumeIfIgnorePan / DB_SF2_TO_SFZ);
-        else if (!ignorePan || listeParam->getChamp(i) != champ_pan)
-            writeElement(out, listeParam->getChamp(i), listeParam->getValeur(i));
+        else if (!ignorePan || listeParam->getAttribute(i) != champ_pan)
+            writeElement(out, listeParam->getAttribute(i), listeParam->getValue(i));
     }
+
+    // Write the modulators
+    for (int i = 0; i < listeParam->modulatorCount(); i++)
+        writeModulator(out, listeParam->getModulator(i));
 }
 
 void ConversionSfz::writeElement(QTextStream &out, AttributeType champ, double value)
@@ -415,6 +426,50 @@ void ConversionSfz::writeElement(QTextStream &out, AttributeType champ, double v
     }
 }
 
+void ConversionSfz::writeModulator(QTextStream &out, ModulatorData modData)
+{
+    // If the second source of the modulator is not set
+    if (!modData.amtSrcOper.CC && modData.amtSrcOper.Index == GC_noController)
+    {
+        // If the first source is the key velocity
+        if (!modData.srcOper.CC && modData.srcOper.Index == GC_noteOnVelocity)
+        {
+            // Filter cutoff modulated by the velocity
+            if (modData.destOper == champ_initialFilterFc)
+            {
+                // Further checks
+                if (modData.srcOper.Type == typeSwitch || modData.srcOper.isBipolar || modData.srcOper.isDescending)
+                    return;
+
+                out << "fil_veltrack=" << modData.amount << Qt::endl;
+            }
+        }
+
+        // If the first source is the key number
+        if (!modData.srcOper.CC && modData.srcOper.Index == GC_noteOnKeyNumber)
+        {
+            // Filter cutoff modulated by the key number
+            if (modData.destOper == champ_initialFilterFc)
+            {
+                // Further checks
+                if (modData.srcOper.Type == typeSwitch)
+                    return;
+
+                // Key center and amount
+                int amount = modData.amount;
+                int keyCenter = 64;
+                if (modData.srcOper.isBipolar)
+                    amount = modData.srcOper.isDescending ? -amount : amount;
+                else
+                    keyCenter = modData.srcOper.isDescending ? 128  : 0;
+
+                out << "fil_keytrack=" << qRound(static_cast<double>(modData.amount) / (modData.srcOper.isBipolar ? 64 : 128)) << Qt::endl;
+                out << "fil_keycenter=" << keyCenter << Qt::endl;
+            }
+        }
+    }
+}
+
 QString ConversionSfz::getLink(EltID idSmpl, bool enableStereo)
 {
     QString path = "";
@@ -428,13 +483,13 @@ QString ConversionSfz::getLink(EltID idSmpl, bool enableStereo)
         EltID idSmpl2 = idSmpl;
         idSmpl2.indexElt = -1;
 
-        // Stéréo ?
+        // Stereo?
         if (enableStereo && _sf2->get(idSmpl, champ_sfSampleType).wValue != monoSample &&
                 _sf2->get(idSmpl, champ_sfSampleType).wValue != RomMonoSample)
         {
             idSmpl2.indexElt = _sf2->get(idSmpl, champ_wSampleLink).wValue;
 
-            // Nom du fichier
+            // File name
             QString nom1 = _sf2->getQstr(idSmpl, champ_name);
             QString nom2 = _sf2->getQstr(idSmpl2, champ_name);
             int nb = SampleUtils::lastLettersToRemove(nom1, nom2);
@@ -443,7 +498,7 @@ QString ConversionSfz::getLink(EltID idSmpl, bool enableStereo)
             if (_sf2->get(idSmpl, champ_sfSampleType).wValue != rightSample &&
                     _sf2->get(idSmpl, champ_sfSampleType).wValue != RomRightSample)
             {
-                // Inversion smpl1 smpl2
+                // Invert smpl1 smpl2
                 EltID idTmp = idSmpl;
                 idSmpl = idSmpl2;
                 idSmpl2 = idTmp;
@@ -468,7 +523,7 @@ QString ConversionSfz::getLink(EltID idSmpl, bool enableStereo)
         if (_gmSortEnabled)
             path.prepend("../");
 
-        // Export et sauvegarde
+        // Export and save
         SampleWriterWav writer(_dirSamples + "/" + name + ".wav");
         if (idSmpl.indexElt == -1 || idSmpl2.indexElt == -1)
         {
@@ -486,7 +541,7 @@ QString ConversionSfz::getLink(EltID idSmpl, bool enableStereo)
         }
         else
         {
-            // Stéréo
+            // Stereo
             _mapStereoSamples.insert(idSmpl.indexElt, path);
             _mapStereoSamples.insert(idSmpl2.indexElt, path);
             writer.write(_sf2->getSound(idSmpl2), _sf2->getSound(idSmpl));
@@ -622,22 +677,22 @@ QString ConversionSfz::getDrumCategory(int numPreset)
 
 bool ConversionSfz::isIncluded(SfzParamList * paramPrst, EltID idInstSmpl)
 {
-    // Etendues de la division globale
+    // Ranges of the preset global division
     int prstMinKey = 0, prstMaxKey = 127, prstMinVel = 0, prstMaxVel = 127;
-    int index = paramPrst->findChamp(champ_keyRange);
+    int index = paramPrst->findAttribute(champ_keyRange);
     if (index != -1)
     {
-        prstMinKey = qRound(paramPrst->getValeur(index) / 1000);
-        prstMaxKey = qRound(paramPrst->getValeur(index) - prstMinKey * 1000);
+        prstMinKey = qRound(paramPrst->getValue(index) / 1000);
+        prstMaxKey = qRound(paramPrst->getValue(index) - prstMinKey * 1000);
     }
-    index = paramPrst->findChamp(champ_velRange);
+    index = paramPrst->findAttribute(champ_velRange);
     if (index != -1)
     {
-        prstMinVel = qRound(paramPrst->getValeur(index) / 1000);
-        prstMaxVel = qRound(paramPrst->getValeur(index) - prstMinVel * 1000);
+        prstMinVel = qRound(paramPrst->getValue(index) / 1000);
+        prstMaxVel = qRound(paramPrst->getValue(index) - prstMinVel * 1000);
     }
 
-    // Etendues de la division de l'instrument
+    // Ranges of the instrument global division
     int instMinKey = 0, instMaxKey = 127, instMinVel = 0, instMaxVel = 127;
     if (_sf2->isSet(idInstSmpl, champ_keyRange))
     {
