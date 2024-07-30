@@ -74,7 +74,7 @@ private:
 
     Ui::ModulatorCell *ui;
     QColor _computationAreaColor, _computationAreaColorSelected;
-    QColor _labelColor, _labelColorSelected;
+    QColor _lineColor, _lineColorSelected;
     bool _isSelected;
     QFont _fontHint;
     EltID _id;

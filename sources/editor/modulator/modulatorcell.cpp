@@ -106,7 +106,7 @@ ModulatorCell::ModulatorCell(const ModulatorData &modulatorData, int index, QWid
     ui->comboTransform->setCurrentIndex(modulatorData.transOper == 2 ? 1 : 0);
     ui->comboDestination->initialize(modulatorData.destOper);
 
-    // Disable elements, keeping the same colors
+    // Disabled elements, keeping the same colors
     QString disabledStyleSheet = ":disabled{background-color:" + ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND).name() +
         ";color:" + ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name() + ";}";
     QString disabledStyleSheet2 = ":disabled{background-color:" + ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() +
@@ -133,22 +133,16 @@ ModulatorCell::ModulatorCell(const ModulatorData &modulatorData, int index, QWid
 void ModulatorCell::initializeStyle()
 {
     // Style
-    _labelColor = ThemeManager::mix(
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                0.75);
+    _lineColor = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name();
     _computationAreaColor = ThemeManager::mix(
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                0.35);
-    _labelColorSelected = ThemeManager::mix(
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                0.25);
+        ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
+        ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+        0.25);
+    _lineColorSelected = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
     _computationAreaColorSelected = ThemeManager::mix(
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
-                ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                0.65);
+        ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+        ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
+        0.25);
     _fontHint = QFont(this->font().family(), qMax(7, this->font().pointSize() * 3 / 4));
     ui->labelFinalRange->setFont(_fontHint);
 
@@ -178,14 +172,11 @@ void ModulatorCell::setSelected(bool isSelected)
     _isSelected = isSelected;
 
     // Load all possible colors
-    QString colorRed = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND).name();
-    QString colorSelected = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
-    QString colorNormal = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name();
-
-    ui->labelModNumber->setStyleSheet(QString("QLabel{color:%1}").arg(_isSelected ? colorSelected : colorNormal));
-    ui->labelFinalRange->setStyleSheet(QString("QLabel{color:%1}").arg(_isSelected ? colorSelected : colorNormal));
+    QColor colorRed = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND);
+    ui->labelModNumber->setStyleSheet(QString("QLabel{color:%1}").arg((_isSelected ? _lineColorSelected : _lineColor).name()));
+    ui->labelFinalRange->setStyleSheet(QString("QLabel{color:%1}").arg((_isSelected ? _lineColorSelected : _lineColor).name()));
     ui->labelDetails->setStyleSheet(QString("QLabel{color:%1}").arg(
-                                        _isSelected ? colorSelected : (_overwrittenBy ? colorRed : colorNormal)));
+        (_isSelected ? _lineColorSelected : (_overwrittenBy ? colorRed : _lineColor)).name()));
 }
 
 ModulatorCell::~ModulatorCell()
@@ -229,7 +220,7 @@ void ModulatorCell::paintEvent(QPaintEvent* event)
 
     // Draw lines
     int posMultiplicationSign = 44;
-    p.setPen(QPen(_isSelected ? _labelColorSelected : _labelColor, 3));
+    p.setPen(QPen(_isSelected ? _lineColorSelected : _lineColor, 3));
     p.drawLine(ui->comboSource2->x() + ui->comboSource2->width(), ui->comboSource2->y() + ui->comboSource2->height() / 2,
                    ui->widgetShape2->x(), ui->comboSource2->y() + ui->comboSource2->height() / 2);
     p.drawLine(ui->widgetShape2->x() + ui->widgetShape2->width(), ui->comboSource2->y() + ui->comboSource2->height() / 2,
@@ -258,7 +249,7 @@ void ModulatorCell::paintEvent(QPaintEvent* event)
 
     // Draw a multiplication sign
     p.setRenderHint(QPainter::Antialiasing);
-    p.setBrush(_isSelected ? _labelColorSelected : _labelColor);
+    p.setBrush(_isSelected ? _lineColorSelected : _lineColor);
     p.drawEllipse(ui->widgetShape1->x() + ui->widgetShape1->width() + posMultiplicationSign - 8, ui->comboSource1->y() + ui->comboSource1->height() / 2 - 8, 16, 16);
     p.setPen(QPen(_isSelected ? _computationAreaColorSelected : _computationAreaColor, 2));
     p.drawLine(ui->widgetShape1->x() + ui->widgetShape1->width() + posMultiplicationSign - 3, ui->comboSource1->y() + ui->comboSource1->height() / 2 - 3,
