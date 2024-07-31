@@ -348,7 +348,7 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
                     sf2->set(idInstSmpl, champ_initialAttenuation, val);
 
                     // Pan
-                    val.shValue = (positionLeft / M_PI * 2 - 0.5) * 1000;
+                    val.shValue = qRound((positionLeft / M_PI * 2 - 0.5) * 1000);
                     sf2->set(idInstSmpl, champ_pan, val);
                 }
                 else // Right
@@ -358,7 +358,7 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
                     sf2->set(idInstSmpl, champ_initialAttenuation, val);
 
                     // Pan
-                    val.shValue = (positionRight / M_PI * 2 - 0.5) * 1000;
+                    val.shValue = qRound((positionRight / M_PI * 2 - 0.5) * 1000);
                     sf2->set(idInstSmpl, champ_pan, val);
                 }
 
