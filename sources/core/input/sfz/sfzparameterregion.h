@@ -87,7 +87,7 @@ public:
                 strRet = _listeParam.at(i).getStringValue();
         return strRet;
     }
-    static double percentToDB(double percent) { return log10(percent / 100.) * 20.; }
+    static double gainToDB(double percent) { return log10(percent) * 20.; }
 
 private:
     QList<SfzParameter> _listeParam;

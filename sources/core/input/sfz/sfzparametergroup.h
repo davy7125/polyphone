@@ -64,6 +64,7 @@ public:
 
 private:
     static void disableModulators(SoundfontManager * sm, EltID idInst);
+    static double limit(double value, double min, double max);
 
     SfzParameterRegion _paramGlobaux;
     QList<SfzParameterRegion> _regionList;

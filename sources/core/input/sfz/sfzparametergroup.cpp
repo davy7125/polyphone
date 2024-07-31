@@ -131,7 +131,7 @@ void SfzParameterGroup::moveModInSamples(QList<SfzParameter::OpCode> opCodeList)
             SfzParameter::OpCode opCode = opCodeList.at(j);
             if (!_regionList.at(i).isDefined(opCode) && _paramGlobaux.isDefined(opCode))
             {
-                // On regarde si d'autres opcodes associés sont présents
+                // Other associated opcodes?
                 bool isPresent = false;
                 for (int k = 0; k < opCodeList.size(); k++)
                     if (k != j)
@@ -280,30 +280,57 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
         }
         else if (listeIndexSmpl.size() == 2) // Sample stereo
         {
-            // Process width / position
-            double width = 500;
+            // Width, between 0 and 1
+            double width = 1;
+            bool reversed = false;
             if (_regionList.at(i).isDefined(SfzParameter::op_width))
-                width = 5. * _regionList.at(i).getDoubleValue(SfzParameter::op_width);
-            double position = 0;
+            {
+                width = limit(_regionList.at(i).getDoubleValue(SfzParameter::op_width), -100, 100);
+                if (width < 0)
+                {
+                    width = -width;
+                    reversed = true;
+                }
+                width /= 100.;
+            }
+
+            // Position of left and right samples
+            double position = 0.5;
             if (_regionList.at(i).isDefined(SfzParameter::op_position))
-                position = _regionList.at(i).getDoubleValue(SfzParameter::op_position) / 100.;
-            if (position < 0)
-                position = -qAbs(position * (500 - qAbs(width)));
-            else
-                position = qAbs(position * (500 - qAbs(width)));
+            {
+                position = limit(_regionList.at(i).getDoubleValue(SfzParameter::op_position), -100, 100);
+                position = (position + 100.) / 200.;
+            }
+            double positionLeft = position * (1 - width);
+            double positionRight = 1 - (1 - position) * (1 - width);
 
             // Process pan
-            double attenuation = 0;
-            int panDefined = -1;
+            float coeffLeft, coeffRight;
             if (_regionList.at(i).isDefined(SfzParameter::op_pan))
             {
-                double pan = _regionList.at(i).getDoubleValue(SfzParameter::op_pan);
-                attenuation = -SfzParameterRegion::percentToDB(100 - qAbs(pan));
-                if (pan < 0)
-                    panDefined = 1;
-                else if (pan > 0)
-                    panDefined = 0;
+                double pan = limit(_regionList.at(i).getDoubleValue(SfzParameter::op_pan) + 100, 0, 200);
+                pan = pan * M_PI / 400.; // Between 0 and PI/2
+                coeffLeft = cos(pan);
+                coeffRight = sin(pan);
             }
+            else
+                coeffLeft = coeffRight = cos(M_PI / 4);
+
+            // Combine the coefficients
+            double coefLeftSampleToLeft = cos(positionLeft * M_PI / 2) * coeffLeft;
+            double coefLeftSampleToRight = sin(positionLeft * M_PI / 2) * coeffRight;
+            double coefRightSampleToLeft = cos(positionRight * M_PI / 2) * coeffLeft;
+            double coefRightSampleToRight = sin(positionRight * M_PI / 2) * coeffRight;
+
+            // Global gain and position for the left sample
+            double gainLeft = sqrt(coefLeftSampleToLeft * coefLeftSampleToLeft + coefLeftSampleToRight * coefLeftSampleToRight);
+            double attenuationLeft = -SfzParameterRegion::gainToDB(gainLeft);
+            positionLeft = acos(coefLeftSampleToLeft / gainLeft); // rad
+
+            // Global gain and position for the right sample
+            double gainRight = sqrt(coefRightSampleToLeft * coefRightSampleToLeft + coefRightSampleToRight * coefRightSampleToRight);
+            double attenuationRight = -SfzParameterRegion::gainToDB(gainRight);
+            positionRight = acos(coefRightSampleToLeft / gainRight); // rad
 
             for (int j = 0; j < listeIndexSmpl.size(); j++)
             {
@@ -314,22 +341,29 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
                 val.wValue = listeIndexSmpl.at(j);
                 sf2->set(idInstSmpl, champ_sampleID, val);
 
-                // Pan
-                if (panDefined == j)
+                if ((j == 0 && !reversed) || (j == 1 && reversed)) // Left, if not reversed
                 {
-                    val.shValue = qRound(10. * attenuation / DB_SF2_TO_REAL_DB);
+                    // Attenuation
+                    val.shValue = qRound(10.f * attenuationLeft / DB_SF2_TO_REAL_DB);
                     sf2->set(idInstSmpl, champ_initialAttenuation, val);
+
+                    // Pan
+                    val.shValue = (positionLeft / M_PI * 2 - 0.5) * 1000;
+                    sf2->set(idInstSmpl, champ_pan, val);
+                }
+                else // Right
+                {
+                    // Attenuation
+                    val.shValue = qRound(10.f * attenuationRight / DB_SF2_TO_REAL_DB);
+                    sf2->set(idInstSmpl, champ_initialAttenuation, val);
+
+                    // Pan
+                    val.shValue = (positionRight / M_PI * 2 - 0.5) * 1000;
+                    sf2->set(idInstSmpl, champ_pan, val);
                 }
 
                 // Fill the parameters of this division
                 _regionList.at(i).decode(sf2, idInstSmpl);
-
-                // Width, position
-                if (j == 0)
-                    val.shValue = -width + position;
-                else
-                    val.shValue = width + position;
-                sf2->set(idInstSmpl, champ_pan, val);
             }
         }
     }
@@ -365,4 +399,13 @@ void SfzParameterGroup::disableModulators(SoundfontManager * sm, EltID idInst)
     sm->set(idMod, champ_sfModAmtSrcOper, val);
     val.sfTransValue = SFTransform::linear;
     sm->set(idMod, champ_sfModTransOper, val);
+}
+
+double SfzParameterGroup::limit(double value, double min, double max)
+{
+    if (value < min)
+        return min;
+    if (value > max)
+        return max;
+    return value;
 }

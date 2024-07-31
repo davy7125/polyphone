@@ -61,6 +61,8 @@ void InputParserSfz::processInternal(QString fileName, SoundfontManager * sm, bo
 
         // Same for pan, samples, off_by et group
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_pan, QMetaType::Double);
+        _presetList[i].moveOpcodeInSamples(SfzParameter::op_width, QMetaType::Double);
+        _presetList[i].moveOpcodeInSamples(SfzParameter::op_position, QMetaType::Double);
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_off_by, QMetaType::Int);
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_exclusiveClass, QMetaType::Int);
         _presetList[i].moveModInSamples();

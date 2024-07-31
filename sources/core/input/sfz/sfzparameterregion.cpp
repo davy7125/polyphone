@@ -456,7 +456,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
         case SfzParameter::op_ampeg_sustain:
             dTmp = _listeParam.at(i).getDoubleValue();
             if (dTmp >= 0.1)
-                val.shValue = qRound(-10. * percentToDB(dTmp));
+                val.shValue = qRound(-10. * gainToDB(dTmp / 100.));
             else
                 val.shValue = 1440;
             sf2->set(idElt, champ_sustainVolEnv, val);
