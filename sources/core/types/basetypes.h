@@ -32,7 +32,7 @@
 #include "modulatordata.h"
 #include "serializabletypes.h"
 
-#define DB_SF2_TO_SFZ 0.397
+#define DB_SF2_TO_REAL_DB 0.4
 
 // In synth.h
 #define MAX_NUMBER_OF_VOICES_TO_ADD 128

@@ -41,7 +41,7 @@ public:
     void decode(SoundfontManager * sf2, EltID idElt) const;
     QList<int> getSampleIndex(SoundfontManager * sf2, EltID idElt, QString pathSfz) const;
     void adaptOffsets(int startLoop, int endLoop, int length);
-    void adjustStereoVolumeAndCorrection(QString path, int defaultCorrection);
+    void adjustCorrection(QString path, int defaultCorrection);
     bool sampleValid(QString path);
     void checkFilter();
     void checkKeyTrackedFilter(bool remove);

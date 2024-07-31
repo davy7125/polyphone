@@ -313,13 +313,13 @@ void ConversionSfz::writeRegion(QFile * fichierSfz, SfzParamList * listeParam, Q
     out << Qt::endl << "<region>" << Qt::endl
         << "sample=" << pathSample.replace("/", "\\") << Qt::endl;
     if (ignorePan && listeParam->findAttribute(champ_initialAttenuation) == -1)
-        writeElement(out, champ_initialAttenuation, -deltaVolumeIfIgnorePan / DB_SF2_TO_SFZ);
+        writeElement(out, champ_initialAttenuation, -deltaVolumeIfIgnorePan / DB_SF2_TO_REAL_DB);
 
     for (int i = 0; i < listeParam->attributeCount(); i++)
     {
         if (ignorePan && listeParam->getAttribute(i) == champ_initialAttenuation)
             writeElement(out, champ_initialAttenuation, listeParam->getValue(i) -
-                         deltaVolumeIfIgnorePan / DB_SF2_TO_SFZ);
+                         deltaVolumeIfIgnorePan / DB_SF2_TO_REAL_DB);
         else if (!ignorePan || listeParam->getAttribute(i) != champ_pan)
             writeElement(out, listeParam->getAttribute(i), listeParam->getValue(i));
     }
@@ -342,7 +342,7 @@ void ConversionSfz::writeElement(QTextStream &out, AttributeType champ, double v
     case champ_endloopAddrsOffset:      out << "loop_end=" << qRound(value) - 1 << Qt::endl;            break;
     case champ_endAddrsOffset:          out << "end=" << qRound(value) - 1 << Qt::endl;                 break;
     case champ_pan:                     out << "pan=" << 2 * value << Qt::endl;                         break;
-    case champ_initialAttenuation:      out << "volume=" << -value * DB_SF2_TO_SFZ << Qt::endl;         break;
+    case champ_initialAttenuation:      out << "volume=" << -value * DB_SF2_TO_REAL_DB << Qt::endl;         break;
     case champ_initialFilterQ:          out << "resonance=" << value << Qt::endl;                       break;
     case champ_sustainModEnv:           out << "fileg_sustain=" << 100. - value << Qt::endl
                                             << "pitcheg_sustain=" << 100. - value << Qt::endl;          break;

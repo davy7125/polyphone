@@ -156,10 +156,11 @@ void SfzParameterGroup::adjustVolume(double offset)
         _regionList[i].adjustVolume(offset);
 }
 
-void SfzParameterGroup::adjustStereoVolumeAndCorrection(QString path)
+void SfzParameterGroup::adjustCorrection(QString path)
 {
+    int defaultCorrection = _paramGlobaux.getIntValue(SfzParameter::op_tuningFine);
     for (int i = 0; i < _regionList.size(); i++)
-        _regionList[i].adjustStereoVolumeAndCorrection(path, _paramGlobaux.getIntValue(SfzParameter::op_tuningFine));
+        _regionList[i].adjustCorrection(path, defaultCorrection);
 }
 
 void SfzParameterGroup::adjustModulationVolume()
@@ -202,40 +203,6 @@ void SfzParameterGroup::checkKeyTrackedFilter()
     _paramGlobaux.checkKeyTrackedFilter(false);
     for (int i = 0; i < _regionList.size(); i++)
         _regionList[i].checkKeyTrackedFilter(true);
-}
-
-void SfzParameterGroup::simplifyAttenuation()
-{
-    bool attenuationUnique = true;
-    double attenuation = -1;
-    double defaultAttenuation = _paramGlobaux.getDoubleValue(SfzParameter::op_volume);
-    for (int i = 0; i < _regionList.size(); i++)
-    {
-        double dTmp = defaultAttenuation;
-        if (_regionList[i].isDefined(SfzParameter::op_volume))
-            dTmp = _regionList[i].getDoubleValue(SfzParameter::op_volume);
-        if (attenuation == -1)
-            attenuation = dTmp;
-        else
-        {
-            if (attenuation != dTmp)
-                attenuationUnique = false;
-        }
-    }
-    if (attenuationUnique)
-    {
-        for (int i = 0; i < _regionList.size(); i++)
-            _regionList[i].removeOpCode(SfzParameter::op_volume);
-        if (attenuation == 0)
-            _paramGlobaux.removeOpCode(SfzParameter::op_volume);
-        else
-        {
-            if (_paramGlobaux.isDefined(SfzParameter::op_volume))
-                _paramGlobaux.adjustVolume(_paramGlobaux.getDoubleValue(SfzParameter::op_volume) - attenuation);
-            else
-                _paramGlobaux << SfzParameter(SfzParameter::op_volume, attenuation);
-        }
-    }
 }
 
 bool SfzParameterGroup::isChannel10()
@@ -331,7 +298,7 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
             if (_regionList.at(i).isDefined(SfzParameter::op_pan))
             {
                 double pan = _regionList.at(i).getDoubleValue(SfzParameter::op_pan);
-                attenuation = -SfzParameterRegion::percentToDB(100 - qAbs(pan)) * 1.7;
+                attenuation = -SfzParameterRegion::percentToDB(100 - qAbs(pan));
                 if (pan < 0)
                     panDefined = 1;
                 else if (pan > 0)
@@ -350,7 +317,7 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
                 // Pan
                 if (panDefined == j)
                 {
-                    val.shValue = qRound(10. * attenuation);
+                    val.shValue = qRound(10. * attenuation / DB_SF2_TO_REAL_DB);
                     sf2->set(idInstSmpl, champ_initialAttenuation, val);
                 }
 

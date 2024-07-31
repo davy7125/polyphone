@@ -170,15 +170,13 @@ void SfzParameterRegion::adaptOffsets(int startLoop, int endLoop, int length)
         _listeParam << SfzParameter("loop_mode", "loop_continuous");
 }
 
-void SfzParameterRegion::adjustStereoVolumeAndCorrection(QString path, int defaultCorrection)
+void SfzParameterRegion::adjustCorrection(QString path, int defaultCorrection)
 {
     QString sample = getStrValue(SfzParameter::op_sample);
     if (!sample.isEmpty())
     {
         Sound son;
         son.setFileName(path + "/" + sample);
-        if (son.getUInt32(champ_wChannels) == 2)
-            adjustVolume(3.);
         int correctionSample = son.getInt32(champ_chPitchCorrection);
         if (correctionSample != 0)
             adjustCorrection(correctionSample, defaultCorrection);
@@ -424,7 +422,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
             sf2->set(idElt, champ_sampleModes, val);
             break;
         case SfzParameter::op_volume:
-            dTmp = -_listeParam.at(i).getDoubleValue() / DB_SF2_TO_SFZ;
+            dTmp = -_listeParam.at(i).getDoubleValue() / DB_SF2_TO_REAL_DB;
             if (sf2->isSet(idElt, champ_initialAttenuation))
                 dTmp += (double)sf2->get(idElt, champ_initialAttenuation).shValue / 10.;
             val.shValue = qRound(10. * dTmp);

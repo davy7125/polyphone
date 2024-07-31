@@ -52,8 +52,7 @@ public:
     void checkSampleValid(QString path);
     void checkFilter();
     void checkKeyTrackedFilter();
-    void simplifyAttenuation();
-    void adjustStereoVolumeAndCorrection(QString path);
+    void adjustCorrection(QString path);
     void adjustModulationVolume();
     bool isChannel10();
     double getAmpliMax();

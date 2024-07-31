@@ -43,26 +43,23 @@ void InputParserSfz::processInternal(QString fileName, SoundfontManager * sm, bo
     if (!success)
         return;
 
-    // Les samples doivent être valides
-    // Les offsets doivent se trouver à côté des samples, pas dans les divisions globales
-    // Idem pan, samples, off_by et group
-    // On ne garde que les filtres supportés par le format sf2
-    // Ajustement du volume des sons stéréo
-    // Ajustement du volume si le modulation de volume est appliqué
-    // Recherche du canal 10
-    // Recherche de l'amplification max
     bool isChannel10 = true;
     double ampliMax = 0;
     for (int i = 0; i < _presetList.size(); i++)
     {
+        // All samples must be valid
         _presetList[i].moveOpcodesInGlobal(_globalZone);
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_sample, QMetaType::QString);
         _presetList[i].checkSampleValid(QFileInfo(fileName).path());
+
+        // Offsets must be defined for samples, not in gloobal division
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_offset, QMetaType::Int);
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_end, QMetaType::Int);
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_loop_start, QMetaType::Int);
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_loop_end, QMetaType::Int);
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_loop_mode, QMetaType::QString);
+
+        // Same for pan, samples, off_by et group
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_pan, QMetaType::Double);
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_off_by, QMetaType::Int);
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_exclusiveClass, QMetaType::Int);
@@ -73,24 +70,28 @@ void InputParserSfz::processInternal(QString fileName, SoundfontManager * sm, bo
         _presetList[i].moveKeynumInSamples(SfzParameter::op_noteToModEnvHold, SfzParameter::op_pitcheg_hold);
         _presetList[i].moveKeynumInSamples(SfzParameter::op_fileg_decaycc133, SfzParameter::op_fileg_decay);
         _presetList[i].moveKeynumInSamples(SfzParameter::op_fileg_holdcc133, SfzParameter::op_fileg_hold);
-        _presetList[i].adjustStereoVolumeAndCorrection(QFileInfo(fileName).path());
+        _presetList[i].adjustCorrection(QFileInfo(fileName).path());
+
+        // Adapt the volume if a volume modulation applies
         _presetList[i].adjustModulationVolume();
+
+        // Process / reject filters
         _presetList[i].checkFilter();
         _presetList[i].checkKeyTrackedFilter();
+
+        // Maximum amplification
         ampliMax = qMax(ampliMax, _presetList[i].getAmpliMax());
+
+        // Search canal 10
         isChannel10 &= _presetList[i].isChannel10();
     }
 
-    // Ajustement du volume si amplification max > 0
+    // Adapt the volume if the max amplification is > 0
     if (ampliMax > 0)
         for (int i = 0; i < _presetList.size(); i++)
             _presetList[i].adjustVolume(ampliMax);
 
-    // Simplification des atténuations
-    for (int i = 0; i < _presetList.size(); i++)
-        _presetList[i].simplifyAttenuation();
-
-    // Création d'un sf2
+    // Create a soundfont
     createSf2(sf2Index, fileName, isChannel10);
 
     success = true;
@@ -127,7 +128,7 @@ void InputParserSfz::parseFile(QString filename, bool &success, QString &error)
         if (line.contains("//"))
             line = line.left(line.indexOf("//"));
 
-        // Découpage
+        // Cut the line
         QStringList list = line.split(" ", Qt::KeepEmptyParts);
         int length = list.size();
         for (int i = length - 1; i >= 1; i--)
@@ -292,7 +293,7 @@ void InputParserSfz::createSf2(int &sf2Index, QString filename, bool isChannel10
     sm->set(idSf2, champ_ICMT, QString("Sf2 imported from sfz by Polyphone"));
     sm->closestAvailablePreset(idSf2, numBank, numPreset);
 
-    // Création d'un preset
+    // Create a preset
     EltID idPrst = idSf2;
     idPrst.typeElement = elementPrst;
     idPrst.indexElt = sm->add(idPrst);
@@ -303,7 +304,7 @@ void InputParserSfz::createSf2(int &sf2Index, QString filename, bool isChannel10
     val.wValue = numPreset;
     sm->set(idPrst, champ_wPreset, val);
 
-    // Création des instruments
+    // Create instruments
     EltID idInst = idSf2;
     idInst.typeElement = elementInst;
     for (int i = 0; i < _presetList.size(); i++)
@@ -324,17 +325,17 @@ void InputParserSfz::createSf2(int &sf2Index, QString filename, bool isChannel10
         EltID idInstSmpl = idInst;
         idInstSmpl.typeElement = elementInstSmpl;
 
-        // Lien dans le preset
+        // Link to the preset
         EltID idPrstInst = idPrst;
         idPrstInst.typeElement = elementPrstInst;
         idPrstInst.indexElt2 = sm->add(idPrstInst);
         val.dwValue = idInst.indexElt;
         sm->set(idPrstInst, champ_instrument, val);
 
-        // Remplissage de l'instrument et création des samples
+        // Fill the instrument and create samples
         _presetList[i].decode(sm, idInst, QFileInfo(filename).path());
 
-        // Détermination keyRange et velRange du preset
+        // Find the preset keyRange and velRange
         int keyMin = 127;
         int keyMax = 0;
         int velMin = 127;
@@ -382,50 +383,19 @@ void InputParserSfz::createSf2(int &sf2Index, QString filename, bool isChannel10
             sm->set(idPrstInst, champ_velRange, val);
         }
 
-        // Suppression des atténuations, corrections, type loop et exclusive class inutiles
-        if (!sm->isSet(idInst, champ_initialAttenuation))
-        {
-            foreach (int i, sm->getSiblings(idInstSmpl))
-            {
-                idInstSmpl.indexElt2 = i;
-                if (sm->get(idInstSmpl, champ_initialAttenuation).wValue == 0)
-                    sm->reset(idInstSmpl, champ_initialAttenuation);
-            }
-        }
-        if (!sm->isSet(idInst, champ_fineTune))
-        {
-            foreach (int i, sm->getSiblings(idInstSmpl))
-            {
-                idInstSmpl.indexElt2 = i;
-                if (sm->get(idInstSmpl, champ_fineTune).shValue == 0)
-                    sm->reset(idInstSmpl, champ_fineTune);
-            }
-        }
-        int typeLoop = sm->get(idInst, champ_sampleModes).wValue;
-        if (typeLoop == 0)
-            sm->reset(idInst, champ_sampleModes);
-        foreach (int i, sm->getSiblings(idInstSmpl))
-        {
-            idInstSmpl.indexElt2 = i;
-            if (sm->get(idInstSmpl, champ_sampleModes).wValue == typeLoop)
-                sm->reset(idInstSmpl, champ_sampleModes);
-        }
-        if (!sm->isSet(idInst, champ_exclusiveClass))
-        {
-            foreach (int i, sm->getSiblings(idInstSmpl))
-            {
-                idInstSmpl.indexElt2 = i;
-                if (sm->get(idInstSmpl, champ_exclusiveClass).wValue == 0)
-                    sm->reset(idInstSmpl, champ_exclusiveClass);
-            }
-        }
+        // Simplify parameters in instruments
+        sm->simplify(idInst, champ_initialAttenuation);
+        sm->simplify(idInst, champ_fineTune);
+        sm->simplify(idInst, champ_sampleModes);
+        sm->simplify(idInst, champ_exclusiveClass);
+        sm->simplify(idInst, champ_releaseVolEnv);
 
-        // Suppression keyrange et velocity range de la division globale de l'instrument
+        // Delete keyrange and velocity range of the global division in the instrument
         sm->reset(idInst, champ_velRange);
         sm->reset(idInst, champ_keyRange);
     }
 
-    // Possible mode 24-bit
+    // Possible 24-bit mode
     EltID idSmpl(elementSmpl, sf2Index);
     foreach (int i, sm->getSiblings(idSmpl))
     {
@@ -446,7 +416,7 @@ QString InputParserSfz::getInstrumentName(QString filePath, int &numBank, int &n
     QString nomFichier = fileInfo.completeBaseName();
     QString nomDir = fileInfo.dir().dirName();
 
-    // Numéro de preset
+    // Preset number
     QRegularExpression regExp("^\\d\\d\\d.*");
     if (regExp.match(nomFichier).hasMatch())
     {
@@ -462,7 +432,7 @@ QString InputParserSfz::getInstrumentName(QString filePath, int &numBank, int &n
         }
     }
 
-    // Numéro de banque
+    // Bank number
     if (regExp.match(nomDir).hasMatch())
     {
         numBank = nomDir.left(3).toInt();
@@ -470,7 +440,7 @@ QString InputParserSfz::getInstrumentName(QString filePath, int &numBank, int &n
             numBank = 0;
     }
 
-    // Nom de l'instrument
+    // Instrument name
     if (nomFichier.isEmpty())
         nomFichier = tr("untitled");
     return nomFichier.left(20);

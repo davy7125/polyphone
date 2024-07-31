@@ -370,7 +370,7 @@ SfzParamList::SfzParamList(SoundfontManager * sf2, SfzParamList * paramPrst, Elt
         else
         {
             _attributes << champ_initialAttenuation;
-            _attributeValues << correction / DB_SF2_TO_SFZ;
+            _attributeValues << correction / DB_SF2_TO_REAL_DB;
         }
     }
 
