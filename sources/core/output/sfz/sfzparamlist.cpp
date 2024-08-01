@@ -218,7 +218,7 @@ SfzParamList::SfzParamList(SoundfontManager * sf2, SfzParamList * paramPrst, Elt
         // Adapt LFO
         adaptLfo(sf2, idInst);
 
-        // Volume attenuation of only defined in the global division
+        // Volume attenuation if only defined in the global division
         if (!_attributes.contains(champ_initialAttenuation))
         {
             EltID instGlob = idInst;
@@ -551,6 +551,10 @@ void SfzParamList::loadAttributes(SoundfontManager * sf2, EltID id)
     if (id.typeElement == elementInstSmplGen)
     {
         id.typeElement = elementInst;
+
+        // Load pan and attenuation
+        getGlobalValue(sf2, id, champ_pan);
+        getGlobalValue(sf2, id, champ_initialAttenuation);
 
         // Load the offsets from the global division
         getGlobalValue(sf2, id, champ_startAddrsCoarseOffset);

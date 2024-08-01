@@ -22,55 +22,41 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef CONVERSION_SFZ_H
-#define CONVERSION_SFZ_H
+#ifndef BALANCEPARAMETERS_H
+#define BALANCEPARAMETERS_H
 
-#include <QString>
-#include <QList>
-#include <QMap>
-#include <QTextStream>
-#include "qmath.h"
 #include "basetypes.h"
-class SfzParamList;
 class SoundfontManager;
-class QFile;
-class BalanceParameters;
 
-class ConversionSfz : public QObject
+class BalanceParameters
 {
-    Q_OBJECT
-    
 public:
-    ConversionSfz();
+    BalanceParameters(bool isMono);
+    void getAttenuationAndPan(SoundfontManager * sf2, EltID  idInstSmpl, int channel);
+    void computeSfzParameters();
 
-    /// Convert a soundfont
-    /// dirPath is the root directory and must be created yet (otherwise a suffix will be added)
-    QString convert(QString dirPath, EltID idSf2, bool presetPrefix, bool bankDir, bool gmSort);
+    bool isMono() { return _isMono; }
+
+    // SFZ computed parameters
+    int getPan() { return _pan; }
+    int getWidth() { return _width; }
+    int getPosition() { return _position; }
+    double getVolume() { return _volume; }
 
 private:
-    SoundfontManager * _sf2;
-    QMap<int, QPair<int, QString> > _mapSamples;
-    QMap<int, int> _stereoIds;
-    QString _dirSamples;
-    bool _bankSortEnabled, _gmSortEnabled;
+    bool _isMono;
+    bool _leftUsed;
+    double _leftPan;
+    double _leftAttenuation;
+    bool _rightUsed;
+    double _rightPan;
+    double _rightAttenuation;
 
-    void exportPrst(QString dir, EltID id, bool presetPrefix);
-    QString getPathSfz(QString dir, QString name);
-    QString getSamplePath(EltID idSmpl, int &sampleChannel, int &linkedSampleId);
-    QMap<AttributeType, AttributeValue> getInstSmplParameters(EltID idInstSmpl);
+    int _pan, _width, _position;
+    double _volume;
 
-    int findOtherChannel(EltID idSmpl);
-    void writeEntete(QFile * fichierSfz, EltID id);
-    void writeGroup(QFile * fichierSfz, SfzParamList * listeParam, bool isPercKit);
-    void writeRegion(QFile * fichierSfz, SfzParamList * listeParam, QString pathSample, BalanceParameters *balance);
-    void writeElement(QTextStream &out, AttributeType champ, double value, bool isGroup);
-    void writeModulator(QTextStream &out, ModulatorData modData);
-    bool isIncluded(SfzParamList * paramPrst, EltID idInstSmpl);
-    static double dbToPercent(double dB) { return 100. * pow(10, -dB / 20); }
-    static QString escapeStr(QString str);
-    static int lastLettersToRemove(QString str1, QString str2);
-    static QString getDirectoryName(int numPreset);
-    static QString getDrumCategory(int numPreset);
+    static int toInt(double value);
+    static double dBtoGain(double dB) { return pow(10., 0.05 * dB); }
 };
 
-#endif // CONVERSION_SFZ_H
+#endif // BALANCEPARAMETERS_H

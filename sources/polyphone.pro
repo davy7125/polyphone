@@ -191,6 +191,7 @@ SOURCES	+= main.cpp \
     core/input/grandorgue/grandorgueswitch.cpp \
     core/input/sfz/sfzparametergroup.cpp \
     core/input/sfz/sfzparameterregion.cpp \
+    core/output/sfz/balanceparameters.cpp \
     core/sample/samplereaderogg.cpp \
     core/solomanager.cpp \
     core/input/abstractinputparser.cpp \
@@ -536,6 +537,7 @@ HEADERS += \
     core/input/grandorgue/grandorgueswitch.h \
     core/input/sfz/sfzparametergroup.h \
     core/input/sfz/sfzparameterregion.h \
+    core/output/sfz/balanceparameters.h \
     core/sample/samplereaderogg.h \
     core/solomanager.h \
     core/input/abstractinput.h \
