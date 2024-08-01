@@ -11,6 +11,9 @@
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
 
+# Uncomment this line to use wolfssl instead of openssl
+#DEFINES += USE_WOLFSSL
+
 # Uncomment this line to be compatible with RtAudio version 5.2 (instead of 6)
 DEFINES += RT_AUDIO_5_2
 
@@ -62,7 +65,12 @@ win32 {
 unix:!macx {
     DEFINES += __LINUX_ALSASEQ__ __UNIX_JACK__ __LINUX_ALSA__ #__LINUX_PULSE__
     CONFIG += link_pkgconfig
-    PKGCONFIG += alsa jack zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0 wolfssl
+    PKGCONFIG += alsa jack zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0
+    contains(DEFINES, USE_WOLFSSL) {
+        PKGCONFIG += wolfssl
+    } else {
+        PKGCONFIG += openssl
+    }
     isEmpty(PREFIX) {
         PREFIX = /usr/local
     }
