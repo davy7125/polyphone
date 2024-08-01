@@ -25,6 +25,7 @@
 #include "attribute.h"
 #include "utils.h"
 #include <qmath.h>
+#include "basetypes.h"
 
 QList<AttributeType> Attribute::s_attributesForPrstMod = QList<AttributeType>()
         << champ_fineTune << champ_coarseTune << champ_scaleTuning
@@ -145,7 +146,7 @@ double Attribute::toRealValue(AttributeType champ, bool isPrst, AttributeValue s
         break;
     case champ_initialAttenuation:
         // Special case because of an extra coeff 0.4 (historical error)
-        realValue = 0.04 * static_cast<double>(storedValue.shValue);
+        realValue = 0.1 * DB_SF2_TO_REAL_DB * static_cast<double>(storedValue.shValue);
         break;
     case champ_pan: case champ_initialFilterQ: case champ_sustainVolEnv:
     case champ_sustainModEnv: case champ_modLfoToVolume: case champ_reverbEffectsSend:
@@ -200,8 +201,8 @@ AttributeValue Attribute::fromRealValue(AttributeType champ, bool isPrst, double
         storedValue.shValue = Utils::round16(realValue);
         break;
     case champ_initialAttenuation:
-        // Multiply by 10 and then divide by 0.4 => multiply by 25
-        storedValue.shValue = Utils::round16(realValue * 25.);
+        // Historical error
+        storedValue.shValue = Utils::round16(10. * realValue / DB_SF2_TO_REAL_DB);
         break;
     case champ_pan: case champ_initialFilterQ: case champ_sustainVolEnv:
     case champ_sustainModEnv: case champ_modLfoToVolume: case champ_reverbEffectsSend:

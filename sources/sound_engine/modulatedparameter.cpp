@@ -24,6 +24,7 @@
 
 #include "modulatedparameter.h"
 #include "utils.h"
+#include "basetypes.h"
 
 void ModulatedParameter::setType(AttributeType type)
 {
@@ -94,7 +95,7 @@ double ModulatedParameter::getRealValue()
     {
         // Historical error: extra coefficient 0.4 for the inst and prst values => multiplication by 0.04
         // no extra coefficient for the modulations => the conversion with the coeff 0.1 is kept
-        double value = 0.04 * (_instValue.getStoredValue().shValue + _prstValue.getStoredValue().shValue) +
+        double value = 0.1 * DB_SF2_TO_REAL_DB * (_instValue.getStoredValue().shValue + _prstValue.getStoredValue().shValue) +
                 0.1 * (_instModulation + _prstModulation);
         return value < 0 ? 0 : (value > 144 ? 144 : value);
     }

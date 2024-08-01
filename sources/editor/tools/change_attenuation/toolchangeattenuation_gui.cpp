@@ -72,8 +72,8 @@ void ToolChangeAttenuation_gui::updateInterface(AbstractToolParameters * paramet
     ui->labelRange->setText("[" + formatDouble(0.04 * minAttenuation) + " ; " + formatDouble(0.04 * maxAttenuation) + "]");
 
     // Compute the possible offset and show it
-    double minOffset = 0.4 * (-0.1 * minAttenuation - (_isInst ? 0 : 144.));
-    double maxOffset = 0.4 * (144. - 0.1 * maxAttenuation);
+    double minOffset = DB_SF2_TO_REAL_DB * (-0.1 * minAttenuation - (_isInst ? 0 : 144.));
+    double maxOffset = DB_SF2_TO_REAL_DB * (144. - 0.1 * maxAttenuation);
     ui->labelPossibleOffset->setText("[" + formatDouble(minOffset) + " ; " + formatDouble(maxOffset) + "]");
     ui->doubleSpinValue->setMinimum(minOffset);
     ui->doubleSpinValue->setMaximum(maxOffset);

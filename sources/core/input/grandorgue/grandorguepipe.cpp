@@ -126,7 +126,7 @@ void GrandOrguePipe::process(EltID parent, int key)
         }
 
         // Attenuation
-        val.wValue = static_cast<quint16>(25. * (_gain - _godt->getMaxGain()) + 0.5); // 25 is 10 divided by 0.4;
+        val.wValue = static_cast<quint16>(10. * (_gain - _godt->getMaxGain()) / DB_SF2_TO_REAL_DB + 0.5);
         sm->set(idInstSmpl, champ_initialAttenuation, val);
 
         // Tuning
@@ -192,7 +192,7 @@ void GrandOrguePipe::process(EltID parent, int key)
             }
 
             // Attenuation
-            val.wValue = static_cast<quint16>(25. * (_gain - _godt->getMaxGain()) + 0.5); // 25 is 10 divided by 0.4;
+            val.wValue = static_cast<quint16>(10. * (_gain - _godt->getMaxGain()) / DB_SF2_TO_REAL_DB + 0.5);
             sm->set(idInstSmpl, champ_initialAttenuation, val);
 
             // Tuning
