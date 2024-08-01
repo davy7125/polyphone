@@ -97,43 +97,26 @@ void BalanceParameters::computeSfzParameters()
         return;
     }
 
+    // Position / width
+    _width = toInt((_rightPan - _leftPan) * 50); // Value between -100 and 100
+    int delta = 100 - qAbs(_width);
+    if (_leftPan < _rightPan)
+        _position = toInt((((_leftPan + 1) * 50) / delta - 0.5) * 200);
+    else
+        _position = toInt((((_rightPan + 1) * 50) / delta - 0.5) * 200);
+
     // Coeff of each audio channel in each output
-    double coefLeftToLeft = dBtoGain(-_leftAttenuation) * cos((_leftPan + 1.) * M_PI / 4.);
-    double coefLeftToRight = dBtoGain(-_leftAttenuation) * sin((_leftPan + 1.) * M_PI / 4.);
-    double coefRightToLeft = dBtoGain(-_rightAttenuation) * cos((_rightPan + 1.) * M_PI / 4.);
-    double coefRightToRight = dBtoGain(-_rightAttenuation) * sin((_rightPan + 1.) * M_PI / 4.);
+    double coefLeft = dBtoGain(-_leftAttenuation);
+    double coefRight = dBtoGain(-_rightAttenuation);
 
     // Global gain
-    double gain = sqrt(coefLeftToLeft * coefLeftToLeft + coefRightToLeft * coefRightToLeft +
-        coefLeftToRight * coefLeftToRight + coefRightToRight * coefRightToRight);
+    double gain = sqrt(coefLeft * coefLeft + coefRight * coefRight);
     _volume = 0.1 * toInt(10. * log10(gain) * 20.);
 
     // Global pan
-    double panRad = acos(sqrt(coefLeftToLeft * coefLeftToLeft + coefRightToLeft * coefRightToLeft) / gain);
+    double tmp = coefLeft / gain;
+    double panRad = tmp >= 1 ? 0 : acos(tmp);
     _pan = toInt(100. * (panRad / M_PI * 4 - 1));
-
-    // Cancel the pan and gain on the coefficients
-    if (coefLeftToLeft > 0 || coefRightToLeft > 0)
-    {
-        coefLeftToLeft /= gain * cos(panRad);
-        coefRightToLeft /= gain * cos(panRad);
-    }
-    if (coefLeftToRight > 0 || coefRightToRight > 0)
-    {
-        coefLeftToRight /= gain * sin(panRad);
-        coefRightToRight /= gain * sin(panRad);
-    }
-
-    // It's now possible to find the width and position
-    double positionLeft = acos(coefLeftToLeft) / M_PI * 2;
-    double positionRight = acos(coefRightToLeft) / M_PI * 2;
-    _width = toInt(100. * (positionRight - positionLeft));
-    double delta = 1. - qAbs(positionLeft - positionRight);
-    if (delta > 0)
-    {
-        _position = positionLeft < positionRight ?
-            toInt(200. * (positionLeft / delta - 0.5)) : toInt(200. * (positionRight / delta - 0.5));
-    }
 }
 
 int BalanceParameters::toInt(double value)

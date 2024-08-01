@@ -294,7 +294,7 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
                 width /= 100.;
             }
 
-            // Position of left and right samples
+            // Position of left and right samples, between 0 and 1
             double position = 0.5;
             if (_regionList.at(i).isDefined(SfzParameter::op_position))
             {
@@ -316,21 +316,9 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
             else
                 coeffLeft = coeffRight = cos(M_PI / 4);
 
-            // Combine the coefficients
-            double coefLeftSampleToLeft = cos(positionLeft * M_PI / 2) * coeffLeft;
-            double coefLeftSampleToRight = sin(positionLeft * M_PI / 2) * coeffRight;
-            double coefRightSampleToLeft = cos(positionRight * M_PI / 2) * coeffLeft;
-            double coefRightSampleToRight = sin(positionRight * M_PI / 2) * coeffRight;
-
-            // Global gain and position for the left sample
-            double gainLeft = sqrt(coefLeftSampleToLeft * coefLeftSampleToLeft + coefLeftSampleToRight * coefLeftSampleToRight);
-            double attenuationLeft = -SfzParameterRegion::gainToDB(gainLeft);
-            positionLeft = acos(coefLeftSampleToLeft / gainLeft); // rad
-
-            // Global gain and position for the right sample
-            double gainRight = sqrt(coefRightSampleToLeft * coefRightSampleToLeft + coefRightSampleToRight * coefRightSampleToRight);
-            double attenuationRight = -SfzParameterRegion::gainToDB(gainRight);
-            positionRight = acos(coefRightSampleToLeft / gainRight); // rad
+            // Attenuation in dB for the left and right samples
+            double attenuationLeft = -SfzParameterRegion::gainToDB(coeffLeft);
+            double attenuationRight = -SfzParameterRegion::gainToDB(coeffRight);
 
             for (int j = 0; j < listeIndexSmpl.size(); j++)
             {
@@ -348,7 +336,7 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
                     sf2->set(idInstSmpl, champ_initialAttenuation, val);
 
                     // Pan
-                    val.shValue = qRound((positionLeft / M_PI * 2 - 0.5) * 1000);
+                    val.shValue = qRound((positionLeft - 0.5) * 1000);
                     sf2->set(idInstSmpl, champ_pan, val);
                 }
                 else // Right
@@ -358,7 +346,7 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
                     sf2->set(idInstSmpl, champ_initialAttenuation, val);
 
                     // Pan
-                    val.shValue = qRound((positionRight / M_PI * 2 - 0.5) * 1000);
+                    val.shValue = qRound((positionRight - 0.5) * 1000);
                     sf2->set(idInstSmpl, champ_pan, val);
                 }
 
