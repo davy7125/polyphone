@@ -27,23 +27,12 @@
 #include <QFile>
 #include <QDebug>
 #include <QRegularExpression>
-
-#ifdef USE_WOLFSSL
-
 #include <wolfssl/options.h>
-#include <wolfssl/openssl/rsa.h>
 #include <wolfssl/openssl/pem.h>
-#include <wolfssl/openssl/engine.h>
 
-/* Debian #962149, fixed in libwolfssl-dev (>= 4.4.0+dfsg-4~) */
+// Debian #962149, fixed in libwolfssl-dev (>= 4.4.0+dfsg-4~)
 #ifndef BIO_FLAGS_BASE64_NO_NL
 #define BIO_FLAGS_BASE64_NO_NL WOLFSSL_BIO_FLAG_BASE64_NO_NL
-#endif
-
-#else
-#include "openssl/rsa.h"
-#include "openssl/pem.h"
-#include "openssl/err.h"
 #endif
 
 QString Utils::s_diacriticLetters;
