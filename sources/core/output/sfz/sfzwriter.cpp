@@ -25,7 +25,7 @@
 #include "sfzwriter.h"
 #include <QFile>
 
-const QString SfzWriter::SUFFIX_V2 = " // sfz v2";
+const QString SfzWriter::Block::SUFFIX_V2 = " // sfz v2";
 
 SfzWriter::SfzWriter(QString filePath) :
     _filePath(filePath)
@@ -49,19 +49,19 @@ void SfzWriter::newRegion()
     _blocks << new Block("region");
 }
 
-void SfzWriter::addLine(QString left, QString right, bool v2suffix)
+void SfzWriter::addLine(QString left, QString right)
 {
     _blocks.last()->addElement(left, right);
 }
 
-void SfzWriter::addLine(QString left, double value, bool v2suffix)
+void SfzWriter::addLine(QString left, double value)
 {
-    _blocks.last()->addElement(left, QString::number(value));
+    addLine(left, QString::number(value));
 }
 
-void SfzWriter::addLine(QString left, int value, bool v2suffix)
+void SfzWriter::addLine(QString left, int value)
 {
-    _blocks.last()->addElement(left, QString::number(value));
+    addLine(left, QString::number(value));
 }
 
 bool SfzWriter::write()
@@ -70,11 +70,65 @@ bool SfzWriter::write()
     if (!sfzFile.open(QIODevice::WriteOnly))
         return false;
 
+    // Process opCodes
+    Block * currentGroup = nullptr;
+    QList<Block *> currentRegions;
+    for (int i = 0; i < _blocks.count(); i++)
+    {
+        if (_blocks[i]->getBlockName() == "group")
+        {
+            if (currentGroup != nullptr && !currentRegions.empty())
+            {
+                // Factorize the regions inside the group
+                factorizeOpCodes(currentGroup, currentRegions);
+
+                // Delete parameters if they are needed in no regions
+                cleanOpCodes(currentGroup, currentRegions);
+            }
+
+            // A new group is open
+            currentGroup = _blocks[i];
+            currentRegions.clear();
+        }
+        else
+            currentRegions << _blocks[i];
+    }
+
     QTextStream out(&sfzFile);
     foreach (Block * block, _blocks)
         block->write(out);
 
     return true;
+}
+
+void SfzWriter::factorizeOpCodes(Block * group, QList<Block *> regions)
+{
+    if (regions.count() < 2)
+        return;
+
+    QMap<QString, QString> base = regions[0]->getOpCodes();
+    for (int i = 1; i < regions.count(); i++)
+    {
+        QMap<QString, QString> other = regions[i]->getOpCodes();
+        QList<QString> baseKeys = base.keys();
+        foreach (QString key, baseKeys)
+        {
+            if (!other.contains(key) || other[key] != base[key])
+                base.remove(key);
+        }
+    }
+
+    foreach (QString key, base.keys())
+    {
+        group->addElement(key, base[key]);
+        foreach (Block * block, regions)
+            block->removeElement(key);
+    }
+}
+
+void SfzWriter::cleanOpCodes(Block * group, QList<Block *> regions)
+{
+
 }
 
 void SfzWriter::Block::addElement(QString left, QString right)
@@ -85,13 +139,46 @@ void SfzWriter::Block::addElement(QString left, QString right)
         _opCodes[left] = right;
 }
 
+void SfzWriter::Block::removeElement(QString left)
+{
+    _opCodes.remove(left);
+}
+
 void SfzWriter::Block::write(QTextStream &out)
 {
     if (!_blockName.isEmpty())
-        out << Qt::endl << "[" << _blockName << "]" << Qt::endl;
+    {
+        out << Qt::endl << "<" << _blockName << ">";
+        if (_opCodes.contains("sample"))
+        {
+            out << " sample=" << _opCodes["sample"];
+            _opCodes.remove("sample");
+        }
+        out << Qt::endl;
+    }
 
+    // Some opcodes can be written together
+    writeTogether(out, "lochan", "hichan");
+    writeTogether(out, "lokey", "hikey");
+    writeTogether(out, "lovel", "hivel");
     foreach (QString line, _lines)
         out << line << Qt::endl;
     foreach (QString key, _opCodes.keys())
-        out << key << "=" << _opCodes[key] << Qt::endl;
+    {
+        out << key << "=" << _opCodes[key];
+        if (key.endsWith("cc133"))
+            out << SUFFIX_V2;
+        out << Qt::endl;
+    }
+}
+
+void SfzWriter::Block::writeTogether(QTextStream &out, QString opCode1, QString opCode2)
+{
+    if (!_opCodes.contains(opCode1) || !_opCodes.contains(opCode2))
+        return;
+
+    out << opCode1 << "=" << _opCodes[opCode1] << " "
+        << opCode2 << "=" << _opCodes[opCode2] << Qt::endl;
+    _opCodes.remove(opCode1);
+    _opCodes.remove(opCode2);
 }

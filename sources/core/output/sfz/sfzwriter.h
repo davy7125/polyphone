@@ -38,9 +38,9 @@ public:
 
     void newGroup();
     void newRegion();
-    void addLine(QString left, QString right = "", bool v2suffix = false);
-    void addLine(QString left, double value, bool v2suffix = false);
-    void addLine(QString left, int value, bool v2suffix = false);
+    void addLine(QString left, QString right = "");
+    void addLine(QString left, double value);
+    void addLine(QString left, int value);
 
     bool write();
 
@@ -50,17 +50,24 @@ private:
     public:
         Block(QString blockName) : _blockName(blockName) {}
         void addElement(QString left, QString right);
+        void removeElement(QString left);
         void write(QTextStream &out);
+        QString getBlockName() { return _blockName; }
+        QMap<QString, QString> getOpCodes()  { return _opCodes; }
 
     private:
+        void writeTogether(QTextStream &out, QString opCode1, QString opCode2);
         QString _blockName;
         QStringList _lines;
         QMap<QString, QString> _opCodes;
+        static const QString SUFFIX_V2;
     };
+
+    void factorizeOpCodes(Block * group, QList<Block *> regions);
+    void cleanOpCodes(Block *group, QList<Block *> regions);
 
     QString _filePath;
     QList<Block *> _blocks;
-    static const QString SUFFIX_V2;
 };
 
 #endif // SFZWRITER_H

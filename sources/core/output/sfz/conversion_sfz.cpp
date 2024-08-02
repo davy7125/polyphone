@@ -368,12 +368,12 @@ void ConversionSfz::writeElement(AttributeType champ, double value)
     case champ_modEnvToPitch:           _sfzWriter->addLine("pitcheg_depth", qRound(value));           break;
     case champ_modEnvToFilterFc:        _sfzWriter->addLine("fileg_depth", qRound(value));             break;
     case champ_keynumToModEnvHold:
-        _sfzWriter->addLine("pitcheg_holdcc133", value, true);
-        _sfzWriter->addLine("fileg_holdcc133", value, true);
+        _sfzWriter->addLine("pitcheg_holdcc133", value);
+        _sfzWriter->addLine("fileg_holdcc133", value);
         break;
     case champ_keynumToModEnvDecay:
-        _sfzWriter->addLine("pitcheg_decaycc133", value, true);
-        _sfzWriter->addLine("fileg_decaycc133", value, true);
+        _sfzWriter->addLine("pitcheg_decaycc133", value);
+        _sfzWriter->addLine("fileg_decaycc133", value);
         break;
     case champ_delayModLFO:
         _sfzWriter->addLine("amplfo_delay", value);
@@ -397,8 +397,8 @@ void ConversionSfz::writeElement(AttributeType champ, double value)
     case champ_sustainVolEnv:           _sfzWriter->addLine("ampeg_sustain", dbToPercent(value));      break;
     case champ_holdVolEnv:              _sfzWriter->addLine("ampeg_hold", value);                      break;
     case champ_decayVolEnv:             _sfzWriter->addLine("ampeg_decay", value);                     break;
-    case champ_keynumToVolEnvHold:      _sfzWriter->addLine("ampeg_holdcc133", value, true);           break;
-    case champ_keynumToVolEnvDecay:     _sfzWriter->addLine("ampeg_decaycc133", value, true);          break;
+    case champ_keynumToVolEnvHold:      _sfzWriter->addLine("ampeg_holdcc133", value);                 break;
+    case champ_keynumToVolEnvDecay:     _sfzWriter->addLine("ampeg_decaycc133", value);                break;
     case champ_releaseVolEnv:           _sfzWriter->addLine("ampeg_release", value);                   break;
     case champ_overridingRootKey:
         _sfzWriter->addLine("pitch_keycenter", ContextManager::keyName()->getKeyName(qRound(value), false, false, true));
