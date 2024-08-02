@@ -200,6 +200,7 @@ SOURCES	+= main.cpp \
     core/input/sfz/sfzparametergroup.cpp \
     core/input/sfz/sfzparameterregion.cpp \
     core/output/sfz/balanceparameters.cpp \
+    core/output/sfz/sfzwriter.cpp \
     core/sample/samplereaderogg.cpp \
     core/solomanager.cpp \
     core/input/abstractinputparser.cpp \
@@ -546,6 +547,7 @@ HEADERS += \
     core/input/sfz/sfzparametergroup.h \
     core/input/sfz/sfzparameterregion.h \
     core/output/sfz/balanceparameters.h \
+    core/output/sfz/sfzwriter.h \
     core/sample/samplereaderogg.h \
     core/solomanager.h \
     core/input/abstractinput.h \

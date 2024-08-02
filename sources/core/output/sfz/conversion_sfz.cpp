@@ -34,10 +34,12 @@
 #include "attribute.h"
 #include "sfzparamlist.h"
 #include "balanceparameters.h"
+#include "sfzwriter.h"
 
 
 ConversionSfz::ConversionSfz() : QObject(),
-    _sf2(SoundfontManager::getInstance())
+    _sf2(SoundfontManager::getInstance()),
+    _sfzWriter(nullptr)
 {}
 
 QString ConversionSfz::convert(QString dirPath, EltID idSf2, bool presetPrefix, bool bankDir, bool gmSort)
@@ -124,112 +126,113 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
         numText.asprintf("%.3u_", _sf2->get(id, champ_wPreset).wValue);
     int numBank = _sf2->get(id, champ_wBank).wValue;
 
-    QFile fichierSfz(getPathSfz(dir, numText + _sf2->getQstr(id, champ_name)) + ".sfz");
-    if (fichierSfz.open(QIODevice::WriteOnly))
+    _sfzWriter = new SfzWriter(getPathSfz(dir, numText + _sf2->getQstr(id, champ_name)) + ".sfz");
+    writeEntete(id);
+    id.typeElement = elementPrstInst;
+    foreach (int i, _sf2->getSiblings(id))
     {
-        writeEntete(&fichierSfz, id);
-        id.typeElement = elementPrstInst;
+        id.indexElt2 = i;
+        QList<EltID> listProcessedInstSmpl;
 
-        foreach (int i, _sf2->getSiblings(id))
+        // Preset parameters
+        SfzParamList * paramPrst = new SfzParamList(_sf2, id);
+
+        // ID of the linked instrument
+        EltID idInst = EltID(elementInst, id.indexSf2, _sf2->get(id, champ_instrument).wValue);
+
+        // Instrument parameters
+        SfzParamList * paramInst = new SfzParamList(_sf2, paramPrst, idInst);
+        writeGroup(paramInst, numBank == 128);
+        delete paramInst;
+
+        // Write each division of the instrument, ordered by keyRange.byLo
+        QList<EltID> listInstSmpl;
         {
-            id.indexElt2 = i;
-            QList<EltID> listProcessedInstSmpl;
-
-            // Preset parameters
-            SfzParamList * paramPrst = new SfzParamList(_sf2, id);
-
-            // ID of the linked instrument
-            EltID idInst = EltID(elementInst, id.indexSf2, _sf2->get(id, champ_instrument).wValue);
-
-            // Instrument parameters
-            SfzParamList * paramInst = new SfzParamList(_sf2, paramPrst, idInst);
-            writeGroup(&fichierSfz, paramInst, numBank == 128);
-            delete paramInst;
-
-            // Write each division of the instrument, ordered by keyRange.byLo
-            QList<EltID> listInstSmpl;
+            EltID idInstSmpl(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
+            QMultiMap<int, EltID> map;
+            foreach (int j, _sf2->getSiblings(idInstSmpl))
             {
-                EltID idInstSmpl(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
-                QMultiMap<int, EltID> map;
-                foreach (int j, _sf2->getSiblings(idInstSmpl))
-                {
-                    idInstSmpl.indexElt2 = j;
-                    map.insert(_sf2->get(idInstSmpl, champ_keyRange).rValue.byLo, idInstSmpl);
-                }
-                listInstSmpl = map.values();
+                idInstSmpl.indexElt2 = j;
+                map.insert(_sf2->get(idInstSmpl, champ_keyRange).rValue.byLo, idInstSmpl);
             }
-
-            for (int j = 0; j < listInstSmpl.count(); j++)
-            {
-                // Already processed or not covered by the preset range?
-                EltID idInstSmpl = listInstSmpl.at(j);
-                if (listProcessedInstSmpl.contains(idInstSmpl) || !isIncluded(paramPrst, idInstSmpl))
-                    continue;
-
-                // Get the sample path
-                int sampleChannel, linkedSampleId;
-                QString samplePath = getSamplePath(EltID(elementSmpl, idInstSmpl.indexSf2, _sf2->get(idInstSmpl, champ_sampleID).wValue),
-                                                   sampleChannel, linkedSampleId);
-
-                // Balance parameters
-                BalanceParameters balance(sampleChannel == 0);
-                balance.getAttenuationAndPan(_sf2, idInstSmpl, sampleChannel);
-
-                // If the sample is stereo, search another instSmpl that exactly matches the other channel
-                if (sampleChannel != 0)
-                {
-                    // Parameters of the current InstSmpl
-                    QMap<AttributeType, AttributeValue> map = getInstSmplParameters(idInstSmpl);
-
-                    int index = -1;
-                    for (int k = j + 1; k < listInstSmpl.count(); k++)
-                    {
-                        if (_sf2->get(listInstSmpl.at(k), champ_sampleID).wValue != linkedSampleId)
-                            continue;
-
-                        // Parameters of the other InstSmpl
-                        QMap<AttributeType, AttributeValue> mapLinked = getInstSmplParameters(listInstSmpl.at(k));
-
-                        // Compare parameters
-                        if (map.keys().count() == mapLinked.keys().count())
-                        {
-                            bool isEqual = true;
-                            QList<AttributeType> attributes = map.keys();
-                            foreach (AttributeType attribute, attributes)
-                            {
-                                if (attribute != champ_sampleID && (!mapLinked.contains(attribute) || mapLinked[attribute].shValue != map[attribute].shValue))
-                                {
-                                    isEqual = false;
-                                    break;
-                                }
-                            }
-                            if (!isEqual)
-                                continue;
-                        }
-                        else
-                            continue;
-
-                        index = k;
-                        break;
-                    }
-
-                    if (index != -1)
-                    {
-                        listProcessedInstSmpl << listInstSmpl[index];
-                        balance.getAttenuationAndPan(_sf2, listInstSmpl[index], -sampleChannel);
-                    }
-                }
-
-                balance.computeSfzParameters();
-                SfzParamList * paramInstSmpl = new SfzParamList(_sf2, paramPrst, idInstSmpl);
-                writeRegion(&fichierSfz, paramInstSmpl, samplePath, &balance);
-                delete paramInstSmpl;
-                listProcessedInstSmpl << idInstSmpl;
-            }
-            delete paramPrst;
+            listInstSmpl = map.values();
         }
-        fichierSfz.close();
+
+        for (int j = 0; j < listInstSmpl.count(); j++)
+        {
+            // Already processed or not covered by the preset range?
+            EltID idInstSmpl = listInstSmpl.at(j);
+            if (listProcessedInstSmpl.contains(idInstSmpl) || !isIncluded(paramPrst, idInstSmpl))
+                continue;
+
+            // Get the sample path
+            int sampleChannel, linkedSampleId;
+            QString samplePath = getSamplePath(EltID(elementSmpl, idInstSmpl.indexSf2, _sf2->get(idInstSmpl, champ_sampleID).wValue),
+                                               sampleChannel, linkedSampleId);
+
+            // Balance parameters
+            BalanceParameters balance(sampleChannel == 0);
+            balance.getAttenuationAndPan(_sf2, idInstSmpl, sampleChannel);
+
+            // If the sample is stereo, search another instSmpl that exactly matches the other channel
+            if (sampleChannel != 0)
+            {
+                // Parameters of the current InstSmpl
+                QMap<AttributeType, AttributeValue> map = getInstSmplParameters(idInstSmpl);
+
+                int index = -1;
+                for (int k = j + 1; k < listInstSmpl.count(); k++)
+                {
+                    if (_sf2->get(listInstSmpl.at(k), champ_sampleID).wValue != linkedSampleId)
+                        continue;
+
+                    // Parameters of the other InstSmpl
+                    QMap<AttributeType, AttributeValue> mapLinked = getInstSmplParameters(listInstSmpl.at(k));
+
+                    // Compare parameters
+                    if (map.keys().count() == mapLinked.keys().count())
+                    {
+                        bool isEqual = true;
+                        QList<AttributeType> attributes = map.keys();
+                        foreach (AttributeType attribute, attributes)
+                        {
+                            if (attribute != champ_sampleID && (!mapLinked.contains(attribute) || mapLinked[attribute].shValue != map[attribute].shValue))
+                            {
+                                isEqual = false;
+                                break;
+                            }
+                        }
+                        if (!isEqual)
+                            continue;
+                    }
+                    else
+                        continue;
+
+                    index = k;
+                    break;
+                }
+
+                if (index != -1)
+                {
+                    listProcessedInstSmpl << listInstSmpl[index];
+                    balance.getAttenuationAndPan(_sf2, listInstSmpl[index], -sampleChannel);
+                }
+            }
+
+            balance.computeSfzParameters();
+            SfzParamList * paramInstSmpl = new SfzParamList(_sf2, paramPrst, idInstSmpl);
+            writeRegion(paramInstSmpl, samplePath, &balance);
+            delete paramInstSmpl;
+            listProcessedInstSmpl << idInstSmpl;
+        }
+        delete paramPrst;
     }
+
+    _sfzWriter->write();
+
+    // Delete the writer so that a new one can be created for the next preset
+    delete _sfzWriter;
+    _sfzWriter = nullptr;
 }
 
 QString ConversionSfz::getPathSfz(QString dir, QString name)
@@ -264,182 +267,191 @@ QMap<AttributeType, AttributeValue> ConversionSfz::getInstSmplParameters(EltID i
     return map;
 }
 
-void ConversionSfz::writeEntete(QFile * fichierSfz, EltID id)
+void ConversionSfz::writeEntete(EltID id)
 {
     // Write header
     id.typeElement = elementSf2;
-    QTextStream out(fichierSfz);
-    out << "// Sfz exported from a sf2 file with Polyphone" << Qt::endl
-        << "// Name      : " << _sf2->getQstr(id, champ_name).replace(QRegularExpression("[\r\n]"), " ") << Qt::endl
-        << "// Author    : " << _sf2->getQstr(id, champ_IENG).replace(QRegularExpression("[\r\n]"), " ") << Qt::endl
-        << "// Copyright : " << _sf2->getQstr(id, champ_ICOP).replace(QRegularExpression("[\r\n]"), " ") << Qt::endl
-        << "// Date      : " << QDate::currentDate().toString("yyyy/MM/dd") << Qt::endl
-        << "// Comment   : " << _sf2->getQstr(id, champ_ICMT).replace(QRegularExpression("[\r\n]"), " ") << Qt::endl;
+    _sfzWriter->addLine("// Sfz exported from a sf2 file with Polyphone");
+    _sfzWriter->addLine("// Name      : " + _sf2->getQstr(id, champ_name).replace(QRegularExpression("[\r\n]"), " "));
+    _sfzWriter->addLine("// Author    : " + _sf2->getQstr(id, champ_IENG).replace(QRegularExpression("[\r\n]"), " "));
+    _sfzWriter->addLine("// Copyright : " + _sf2->getQstr(id, champ_ICOP).replace(QRegularExpression("[\r\n]"), " "));
+    _sfzWriter->addLine("// Date      : " + QDate::currentDate().toString("yyyy/MM/dd"));
+    _sfzWriter->addLine("// Comment   : " + _sf2->getQstr(id, champ_ICMT).replace(QRegularExpression("[\r\n]"), " "));
 }
 
-void ConversionSfz::writeGroup(QFile * fichierSfz, SfzParamList * listeParam, bool isPercKit)
+void ConversionSfz::writeGroup(SfzParamList * listeParam, bool isPercKit)
 {
     // Write the parameters in common for different regions
-    QTextStream out(fichierSfz);
-    out << Qt::endl << "<group>" << Qt::endl;
+    _sfzWriter->newGroup();
     if (isPercKit)
-        out << "lochan=10 hichan=10" << Qt::endl;
+    {
+        _sfzWriter->addLine("lochan", 10);
+        _sfzWriter->addLine("hichan", 10);
+    }
     for (int i = 0; i < listeParam->attributeCount(); i++)
     {
         if (listeParam->getAttribute(i) != champ_pan && listeParam->getAttribute(i) != champ_initialAttenuation)
-            writeElement(out, listeParam->getAttribute(i), listeParam->getValue(i), true);
+            writeElement(listeParam->getAttribute(i), listeParam->getValue(i));
     }
 
     // Associated modulators
     for (int i = 0; i < listeParam->modulatorCount(); i++)
-        writeModulator(out, listeParam->getModulator(i));
+        writeModulator(listeParam->getModulator(i));
 }
 
-void ConversionSfz::writeRegion(QFile * fichierSfz, SfzParamList * listeParam, QString pathSample, BalanceParameters *balance)
+void ConversionSfz::writeRegion(SfzParamList * listeParam, QString pathSample, BalanceParameters *balance)
 {
     // Write the parameters specific to a region
-    QTextStream out(fichierSfz);
-
-    out << Qt::endl << "<region>" << Qt::endl
-        << "sample=" << pathSample.replace("/", "\\") << Qt::endl;
-
+    _sfzWriter->newRegion();
+    _sfzWriter->addLine("sample", pathSample.replace("/", "\\"));
     if (!balance->isMono() && balance->getWidth() != 100)
     {
-        out << "width=" << balance->getWidth() << Qt::endl;
+        _sfzWriter->addLine("width", balance->getWidth());
         if (balance->getPosition() != 0)
-            out << "position=" << balance->getPosition() << Qt::endl;
+            _sfzWriter->addLine("position", balance->getPosition());
     }
 
     // Sample pan and attenuation
-    out << "volume=" << balance->getVolume() << Qt::endl;
-    out << "pan=" << balance->getPan() << Qt::endl;
+    _sfzWriter->addLine("volume", balance->getVolume());
+    _sfzWriter->addLine("pan", balance->getPan());
 
     for (int i = 0; i < listeParam->attributeCount(); i++)
     {
         if (listeParam->getAttribute(i) == champ_initialAttenuation || listeParam->getAttribute(i) == champ_pan)
             continue; // Already processed with the balance
-        writeElement(out, listeParam->getAttribute(i), listeParam->getValue(i), false);
+        writeElement(listeParam->getAttribute(i), listeParam->getValue(i));
     }
 
     // Write the modulators
     for (int i = 0; i < listeParam->modulatorCount(); i++)
-        writeModulator(out, listeParam->getModulator(i));
+        writeModulator(listeParam->getModulator(i));
 }
 
-void ConversionSfz::writeElement(QTextStream &out, AttributeType champ, double value, bool isGroup)
+void ConversionSfz::writeElement(AttributeType champ, double value)
 {
-    QString v2 = " // sfz v2";
     switch (champ)
     {
-    case champ_fineTune:                out << "tune=" << qRound(value) << Qt::endl;                    break;
-    case champ_coarseTune:              out << "transpose=" << qRound(value) << Qt::endl;               break;
-    case champ_scaleTuning:             out << "pitch_keytrack=" << qRound(value) << Qt::endl;          break;
-    case champ_startloopAddrsOffset:    out << "loop_start=" << qRound(value) << Qt::endl;              break;
-    case champ_startAddrsOffset:        out << "offset=" << qRound(value) << Qt::endl;                  break;
-    case champ_endloopAddrsOffset:      out << "loop_end=" << qRound(value) - 1 << Qt::endl;            break;
-    case champ_endAddrsOffset:          out << "end=" << qRound(value) - 1 << Qt::endl;                 break;
-    case champ_pan:                     out << "pan=" << 2 * value << Qt::endl;                         break;
-    case champ_initialAttenuation:
-        if (value != 0)
-            out << "volume=" << -value * DB_SF2_TO_REAL_DB << Qt::endl;
+    case champ_fineTune:                _sfzWriter->addLine("tune", qRound(value));                    break;
+    case champ_coarseTune:              _sfzWriter->addLine("transpose", qRound(value));               break;
+    case champ_scaleTuning:             _sfzWriter->addLine("pitch_keytrack", qRound(value));          break;
+    case champ_startloopAddrsOffset:    _sfzWriter->addLine("loop_start", qRound(value));              break;
+    case champ_startAddrsOffset:        _sfzWriter->addLine("offset", qRound(value));                  break;
+    case champ_endloopAddrsOffset:      _sfzWriter->addLine("loop_end", qRound(value) - 1);            break;
+    case champ_endAddrsOffset:          _sfzWriter->addLine("end", qRound(value) - 1);                 break;
+    case champ_pan:                     _sfzWriter->addLine("pan", 2 * value);                         break;
+    case champ_initialAttenuation:      _sfzWriter->addLine("volume", -value * DB_SF2_TO_REAL_DB);     break;
+    case champ_initialFilterQ:          _sfzWriter->addLine("resonance", value);                       break;
+    case champ_sustainModEnv:
+        _sfzWriter->addLine("fileg_sustain", 100. - value);
+        _sfzWriter->addLine("pitcheg_sustain", 100. - value);
         break;
-    case champ_initialFilterQ:          out << "resonance=" << value << Qt::endl;                       break;
-    case champ_sustainModEnv:           out << "fileg_sustain=" << 100. - value << Qt::endl
-            << "pitcheg_sustain=" << 100. - value << Qt::endl;          break;
-    case champ_delayModEnv:             out << "pitcheg_delay=" << value << Qt::endl
-            << "fileg_delay=" << value << Qt::endl;                     break;
-    case champ_attackModEnv:            out << "pitcheg_attack=" << value << Qt::endl
-            << "fileg_attack=" << value << Qt::endl;                    break;
-    case champ_holdModEnv:              out << "pitcheg_hold=" << value << Qt::endl
-            << "fileg_hold=" << value << Qt::endl;                      break;
-    case champ_decayModEnv:             out << "pitcheg_decay=" << value << Qt::endl
-            << "fileg_decay=" << value << Qt::endl;                     break;
-    case champ_releaseModEnv:           out << "pitcheg_release=" << value << Qt::endl
-            << "fileg_release=" << value << Qt::endl;                   break;
-    case champ_modEnvToPitch:           out << "pitcheg_depth=" << qRound(value) << Qt::endl;           break;
-    case champ_modEnvToFilterFc:        out << "fileg_depth=" << qRound(value) << Qt::endl;             break;
-    case champ_keynumToModEnvHold:      out << "pitcheg_holdcc133=" << value << v2 << Qt::endl
-            << "fileg_holdcc133=" << value << v2 << Qt::endl;           break;
-    case champ_keynumToModEnvDecay:     out << "pitcheg_decaycc133=" << value << v2 << Qt::endl
-            << "fileg_decaycc133=" << value << v2 << Qt::endl;          break;
-    case champ_delayModLFO:             out << "amplfo_delay=" << value << Qt::endl
-            << "fillfo_delay=" << value << Qt::endl;                    break;
-    case champ_freqModLFO:              out << "amplfo_freq=" << value << Qt::endl
-            << "fillfo_freq=" << value << Qt::endl;                     break;
-    case champ_modLfoToVolume:          out << "amplfo_depth=" << value << Qt::endl;                    break;
-    case champ_modLfoToFilterFc:        out << "fillfo_depth=" << value << Qt::endl;                    break;
-    case champ_modLfoToPitch:           /* IMPOSSIBLE !!! */                                            break;
+    case champ_delayModEnv:
+        _sfzWriter->addLine("pitcheg_delay", value);
+        _sfzWriter->addLine("fileg_delay", value);
+        break;
+    case champ_attackModEnv:
+        _sfzWriter->addLine("pitcheg_attack", value);
+        _sfzWriter->addLine("fileg_attack", value);
+        break;
+    case champ_holdModEnv:
+        _sfzWriter->addLine("pitcheg_hold", value);
+        _sfzWriter->addLine("fileg_hold", value);
+        break;
+    case champ_decayModEnv:
+        _sfzWriter->addLine("pitcheg_decay", value);
+        _sfzWriter->addLine("fileg_decay", value);
+        break;
+    case champ_releaseModEnv:
+        _sfzWriter->addLine("pitcheg_release", value);
+        _sfzWriter->addLine("fileg_release", value);
+        break;
+    case champ_modEnvToPitch:           _sfzWriter->addLine("pitcheg_depth", qRound(value));           break;
+    case champ_modEnvToFilterFc:        _sfzWriter->addLine("fileg_depth", qRound(value));             break;
+    case champ_keynumToModEnvHold:
+        _sfzWriter->addLine("pitcheg_holdcc133", value, true);
+        _sfzWriter->addLine("fileg_holdcc133", value, true);
+        break;
+    case champ_keynumToModEnvDecay:
+        _sfzWriter->addLine("pitcheg_decaycc133", value, true);
+        _sfzWriter->addLine("fileg_decaycc133", value, true);
+        break;
+    case champ_delayModLFO:
+        _sfzWriter->addLine("amplfo_delay", value);
+        _sfzWriter->addLine("fillfo_delay", value);
+        break;
+    case champ_freqModLFO:
+        _sfzWriter->addLine("amplfo_freq", value);
+        _sfzWriter->addLine("fillfo_freq", value);
+        break;
+    case champ_modLfoToVolume:          _sfzWriter->addLine("amplfo_depth", value);                    break;
+    case champ_modLfoToFilterFc:        _sfzWriter->addLine("fillfo_depth", value);                    break;
+    case champ_modLfoToPitch:           /* IMPOSSIBLE !!! */                                           break;
     case champ_keynum:
-        out << "pitch_keycenter="
-            << ContextManager::keyName()->getKeyName(qRound(value), false, false, true) << Qt::endl
-            << "pitch_keytrack=0" << Qt::endl;
+        _sfzWriter->addLine("pitch_keycenter", ContextManager::keyName()->getKeyName(qRound(value), false, false, true));
+        _sfzWriter->addLine("pitch_keytrack", 0);
         break;
-    case champ_reverbEffectsSend:       out << "effect1=" << value << Qt::endl;                         break;
-    case champ_chorusEffectsSend:       out << "effect2=" << value << Qt::endl;                         break;
-    case champ_delayVolEnv:             out << "ampeg_delay=" << value << Qt::endl;                     break;
-    case champ_attackVolEnv:            out << "ampeg_attack=" << value << Qt::endl;                    break;
-    case champ_sustainVolEnv:           out << "ampeg_sustain=" << dbToPercent(value) << Qt::endl;      break;
-    case champ_holdVolEnv:              out << "ampeg_hold=" << value << Qt::endl;                      break;
-    case champ_decayVolEnv:             out << "ampeg_decay=" << value << Qt::endl;                     break;
-    case champ_keynumToVolEnvHold:      out << "ampeg_holdcc133=" << value << v2 << Qt::endl;           break;
-    case champ_keynumToVolEnvDecay:     out << "ampeg_decaycc133=" << value << v2 << Qt::endl;          break;
-    case champ_releaseVolEnv:           out << "ampeg_release=" << value << Qt::endl;                   break;
+    case champ_reverbEffectsSend:       _sfzWriter->addLine("effect1", value);                         break;
+    case champ_chorusEffectsSend:       _sfzWriter->addLine("effect2", value);                         break;
+    case champ_delayVolEnv:             _sfzWriter->addLine("ampeg_delay", value);                     break;
+    case champ_attackVolEnv:            _sfzWriter->addLine("ampeg_attack", value);                    break;
+    case champ_sustainVolEnv:           _sfzWriter->addLine("ampeg_sustain", dbToPercent(value));      break;
+    case champ_holdVolEnv:              _sfzWriter->addLine("ampeg_hold", value);                      break;
+    case champ_decayVolEnv:             _sfzWriter->addLine("ampeg_decay", value);                     break;
+    case champ_keynumToVolEnvHold:      _sfzWriter->addLine("ampeg_holdcc133", value, true);           break;
+    case champ_keynumToVolEnvDecay:     _sfzWriter->addLine("ampeg_decaycc133", value, true);          break;
+    case champ_releaseVolEnv:           _sfzWriter->addLine("ampeg_release", value);                   break;
     case champ_overridingRootKey:
-        out << "pitch_keycenter="
-            << ContextManager::keyName()->getKeyName(qRound(value), false, false, true) << Qt::endl;
+        _sfzWriter->addLine("pitch_keycenter", ContextManager::keyName()->getKeyName(qRound(value), false, false, true));
         break;
-    case champ_delayVibLFO:             out << "pitchlfo_delay=" << value << Qt::endl;                  break;
-    case champ_freqVibLFO:              out << "pitchlfo_freq=" << value << Qt::endl;                   break;
-    case champ_vibLfoToPitch:           out << "pitchlfo_depth=" << qRound(value) << Qt::endl;          break;
-    case champ_velocity:                out << "amp_velcurve_1=" << value / 127. << Qt::endl
-            << "amp_velcurve_127=" << value / 127. << Qt::endl;
+    case champ_delayVibLFO:             _sfzWriter->addLine("pitchlfo_delay", value);                  break;
+    case champ_freqVibLFO:              _sfzWriter->addLine("pitchlfo_freq", value);                   break;
+    case champ_vibLfoToPitch:           _sfzWriter->addLine("pitchlfo_depth", qRound(value));          break;
+    case champ_velocity:
+        _sfzWriter->addLine("amp_velcurve_1", value / 127.);
+        _sfzWriter->addLine("amp_velcurve_127", value / 127.);
         break;
     case champ_exclusiveClass:
         if (value != 0)
-            out << "group=" << qRound(value) << Qt::endl
-                << "off_by=" << qRound(value) << Qt::endl;
+        {
+            _sfzWriter->addLine("group", qRound(value));
+            _sfzWriter->addLine("off_by", qRound(value));
+        }
         break;
     case champ_initialFilterFc:
-        out << "fil_type=lpf_2p" << Qt::endl
-            << "cutoff="   << qRound(value) << Qt::endl;
+        _sfzWriter->addLine("fil_type=lpf_2p");
+        _sfzWriter->addLine("cutoff", qRound(value));
         break;
     case champ_keyRange:{
         int lokey = qRound(value / 1000.);
         int hikey = qRound(value - 1000. * qRound(value / 1000.));
         if (lokey != hikey)
         {
-            if (!isGroup || lokey != 0 || hikey != 127)
-                out << "lokey="
-                    << ContextManager::keyName()->getKeyName(lokey, false, false, true)
-                    << " hikey="
-                    << ContextManager::keyName()->getKeyName(hikey, false, false, true)
-                    << Qt::endl;
+            _sfzWriter->addLine("lokey", ContextManager::keyName()->getKeyName(lokey, false, false, true));
+            _sfzWriter->addLine("hikey", ContextManager::keyName()->getKeyName(hikey, false, false, true));
         }
         else
-            out << "key="
-                << ContextManager::keyName()->getKeyName(lokey, false, false, true)
-                << Qt::endl;
+            _sfzWriter->addLine("key", ContextManager::keyName()->getKeyName(lokey, false, false, true));
     }break;
     case champ_velRange:{
         int lovel = qRound(value / 1000.);
         int hivel = qRound(value - 1000. * lovel);
-        if (!isGroup || lovel != 0 || lovel != 127)
-            out << "lovel=" << lovel << " hivel=" << hivel << Qt::endl;
+        _sfzWriter->addLine("lovel", lovel);
+        _sfzWriter->addLine("hivel", hivel);
     }break;
     case champ_sampleModes:
         if (value == 0.)
-            out << "loop_mode=no_loop" << Qt::endl;
+            _sfzWriter->addLine("loop_mode=no_loop");
         else if (value == 1.)
-            out << "loop_mode=loop_continuous" << Qt::endl;
+            _sfzWriter->addLine("loop_mode=loop_continuous");
         else if (value == 3.)
-            out << "loop_mode=loop_sustain" << Qt::endl;
+            _sfzWriter->addLine("loop_mode=loop_sustain");
         break;
     default:
         break;
     }
 }
 
-void ConversionSfz::writeModulator(QTextStream &out, ModulatorData modData)
+void ConversionSfz::writeModulator(ModulatorData modData)
 {
     // If the second source of the modulator is not set
     if (!modData.amtSrcOper.CC && modData.amtSrcOper.Index == GC_noController)
@@ -454,7 +466,7 @@ void ConversionSfz::writeModulator(QTextStream &out, ModulatorData modData)
                 if (modData.srcOper.Type == typeSwitch || modData.srcOper.isBipolar || modData.srcOper.isDescending)
                     return;
 
-                out << "fil_veltrack=" << modData.amount << Qt::endl;
+                _sfzWriter->addLine("fil_veltrack", modData.amount);
             }
         }
 
@@ -476,8 +488,8 @@ void ConversionSfz::writeModulator(QTextStream &out, ModulatorData modData)
                 else
                     keyCenter = modData.srcOper.isDescending ? 128  : 0;
 
-                out << "fil_keytrack=" << qRound(static_cast<double>(modData.amount) / (modData.srcOper.isBipolar ? 64 : 128)) << Qt::endl;
-                out << "fil_keycenter=" << keyCenter << Qt::endl;
+                _sfzWriter->addLine("fil_keytrack", qRound(static_cast<double>(modData.amount) / (modData.srcOper.isBipolar ? 64 : 128)));
+                _sfzWriter->addLine("fil_keycenter", keyCenter);
             }
         }
     }
