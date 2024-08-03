@@ -64,7 +64,8 @@ private:
     };
 
     void factorizeOpCodes(Block * group, QList<Block *> regions);
-    void cleanOpCodes(Block *group, QList<Block *> regions);
+    void cleanOpCodes(Block * group, QList<Block *> regions);
+    void cleanOpCodes(Block * group, QList<Block *> regions, QString opCodeInGroup, QString opCodeCondition);
 
     QString _filePath;
     QList<Block *> _blocks;

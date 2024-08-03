@@ -289,6 +289,11 @@ SfzParameter::SfzParameter(QString opcode, QString valeur) :
         _opcode = op_modLFOtoVolume;
         _dblValue = valeurLow.toDouble();
     }
+    else if (opcode == "ampveltrack")
+    {
+        _opcode = op_amp_veltrack;
+        _intValue = valeurLow.toDouble();
+    }
     else if (opcode == "ampvelcurve1")
     {
         _opcode = op_amp_velcurve_1;

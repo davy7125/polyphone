@@ -418,7 +418,7 @@ void ConversionSfz::writeElement(AttributeType champ, double value)
         }
         break;
     case champ_initialFilterFc:
-        _sfzWriter->addLine("fil_type=lpf_2p");
+        _sfzWriter->addLine("fil_type", "lpf_2p");
         _sfzWriter->addLine("cutoff", qRound(value));
         break;
     case champ_keyRange:{
@@ -440,11 +440,11 @@ void ConversionSfz::writeElement(AttributeType champ, double value)
     }break;
     case champ_sampleModes:
         if (value == 0.)
-            _sfzWriter->addLine("loop_mode=no_loop");
+            _sfzWriter->addLine("loop_mode", "no_loop");
         else if (value == 1.)
-            _sfzWriter->addLine("loop_mode=loop_continuous");
+            _sfzWriter->addLine("loop_mode", "loop_continuous");
         else if (value == 3.)
-            _sfzWriter->addLine("loop_mode=loop_sustain");
+            _sfzWriter->addLine("loop_mode", "loop_sustain");
         break;
     default:
         break;
@@ -467,6 +467,20 @@ void ConversionSfz::writeModulator(ModulatorData modData)
                     return;
 
                 _sfzWriter->addLine("fil_veltrack", modData.amount);
+            }
+
+            // Attenuation modulated by the velocity
+            if (modData.destOper == champ_initialAttenuation)
+            {
+                // Further checks
+                if (modData.srcOper.Type == typeSwitch || modData.srcOper.isBipolar)
+                    return;
+
+                int value = static_cast<int>(modData.amount / 9.6 + 0.5);
+                if (!modData.srcOper.isDescending)
+                    value = -value;
+
+                _sfzWriter->addLine("amp_veltrack", value);
             }
         }
 

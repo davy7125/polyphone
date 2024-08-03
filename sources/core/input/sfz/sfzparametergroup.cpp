@@ -224,9 +224,6 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
     // Fill the parameters of the global division
     _paramGlobaux.decode(sf2, idInst);
 
-    // Deactivate default modulators
-    disableModulators(sf2, idInst);
-
     // Link to samples
     EltID idInstSmpl = idInst;
     idInstSmpl.typeElement = elementInstSmpl;
@@ -270,7 +267,7 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
             sf2->set(idInstSmpl, champ_sampleID, val);
 
             // Fill the parameters of this division
-            _regionList.at(i).decode(sf2, idInstSmpl);
+            _regionList[i].decode(sf2, idInstSmpl);
 
             if (_regionList.at(i).isDefined(SfzParameter::op_pan))
             {
@@ -351,42 +348,10 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
                 }
 
                 // Fill the parameters of this division
-                _regionList.at(i).decode(sf2, idInstSmpl);
+                _regionList[i].decode(sf2, idInstSmpl);
             }
         }
     }
-}
-
-void SfzParameterGroup::disableModulators(SoundfontManager * sm, EltID idInst)
-{
-    EltID idMod(elementInstMod, idInst.indexSf2, idInst.indexElt);
-    AttributeValue val;
-
-    // Disable "MIDI Note-On Velocity to Initial Attenuation"
-    idMod.indexMod = sm->add(idMod);
-    val.sfModValue = SFModulator(GeneralController::GC_noteOnVelocity, ModType::typeConcave, true, false);
-    sm->set(idMod, champ_sfModSrcOper, val);
-    val.wValue = champ_initialAttenuation;
-    sm->set(idMod, champ_sfModDestOper, val);
-    val.wValue = 0;
-    sm->set(idMod, champ_modAmount, val);
-    val.sfModValue = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
-    sm->set(idMod, champ_sfModAmtSrcOper, val);
-    val.sfTransValue = SFTransform::linear;
-    sm->set(idMod, champ_sfModTransOper, val);
-
-    // Disable "MIDI Note-On Velocity to Filter Cutoff"
-    idMod.indexMod = sm->add(idMod);
-    val.sfModValue = SFModulator(GeneralController::GC_noteOnVelocity, ModType::typeLinear, true, false);
-    sm->set(idMod, champ_sfModSrcOper, val);
-    val.wValue = champ_initialFilterFc;
-    sm->set(idMod, champ_sfModDestOper, val);
-    val.wValue = 0;
-    sm->set(idMod, champ_modAmount, val);
-    val.sfModValue = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
-    sm->set(idMod, champ_sfModAmtSrcOper, val);
-    val.sfTransValue = SFTransform::linear;
-    sm->set(idMod, champ_sfModTransOper, val);
 }
 
 double SfzParameterGroup::limit(double value, double min, double max)

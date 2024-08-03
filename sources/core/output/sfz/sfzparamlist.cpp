@@ -25,8 +25,6 @@
 #include "sfzparamlist.h"
 #include "soundfontmanager.h"
 
-int SfzParamList::_globalLoop = -2;
-
 SfzParamList::SfzParamList(SoundfontManager * sf2, EltID id)
 {
     if (id.typeElement == elementPrstInst)
@@ -48,52 +46,6 @@ SfzParamList::SfzParamList(SoundfontManager * sf2, SfzParamList * paramPrst, Elt
         // Load the global parameters of an instrument
         loadAttributes(sf2, EltID(elementInstGen, idInst.indexSf2, idInst.indexElt));
         loadModulators(sf2, EltID(elementInstMod, idInst.indexSf2, idInst.indexElt));
-
-        idInst.typeElement = elementInst;
-        if (sf2->isSet(idInst, champ_sampleModes))
-            _globalLoop = sf2->get(idInst, champ_sampleModes).wValue;
-        else
-        {
-            // All divisions have the same loop parameter?
-            idInst.typeElement = elementInstSmpl;
-            _globalLoop = -2;
-            foreach (int i, sf2->getSiblings(idInst))
-            {
-                idInst.indexElt2 = i;
-                int valTmp = 0;
-                if (sf2->isSet(idInst, champ_sampleModes))
-                    valTmp = sf2->get(idInst, champ_sampleModes).wValue;
-                if (_globalLoop == -2)
-                    _globalLoop = valTmp;
-                else if (_globalLoop != valTmp)
-                    _globalLoop = -1;
-            }
-            idInst.typeElement = elementInst;
-        }
-
-        if (_globalLoop >= 0)
-        {
-            // Adapt the global loop
-            if (!_attributes.contains(champ_sampleModes))
-            {
-                _attributes << champ_sampleModes;
-                _attributeValues << _globalLoop;
-            }
-            else
-                _attributeValues[_attributes.indexOf(champ_sampleModes)] = _globalLoop;
-        }
-        else
-        {
-            // No loop if not defined
-            if (!_attributes.contains(champ_sampleModes))
-            {
-                _attributes << champ_sampleModes;
-                _attributeValues << 0;
-                _globalLoop = 0;
-            }
-            else
-                _globalLoop = _attributeValues.at(_attributes.indexOf(champ_sampleModes));
-        }
     }
     else if (idInst.typeElement == elementInstSmpl)
     {
@@ -101,47 +53,27 @@ SfzParamList::SfzParamList(SoundfontManager * sf2, SfzParamList * paramPrst, Elt
         loadAttributes(sf2, EltID(elementInstSmplGen, idInst.indexSf2, idInst.indexElt, idInst.indexElt2));
         loadModulators(sf2, EltID(elementInstSmplMod, idInst.indexSf2, idInst.indexElt, idInst.indexElt2));
 
-        // Playback of the linked sample
-        EltID idSmpl = idInst;
-        idSmpl.typeElement = elementSmpl;
-        idSmpl.indexElt = sf2->get(idInst, champ_sampleID).wValue;
+        // Take into account the global parameters for this instrument
+        loadAttributes(sf2, EltID(elementInstGen, idInst.indexSf2, idInst.indexElt));
+        loadModulators(sf2, EltID(elementInstMod, idInst.indexSf2, idInst.indexElt));
 
+        // Properties of the linked sample
+        EltID idSmpl = EltID(elementSmpl, idInst.indexSf2, sf2->get(idInst, champ_sampleID).wValue);
         if (!_attributes.contains(champ_overridingRootKey))
         {
-            EltID instGlob = idInst;
-            instGlob.typeElement = elementInst;
-            if (!sf2->isSet(instGlob, champ_overridingRootKey))
-            {
-                _attributes << champ_overridingRootKey;
-                _attributeValues << sf2->get(idSmpl, champ_byOriginalPitch).bValue;
-            }
+            _attributes << champ_overridingRootKey;
+            _attributeValues << sf2->get(idSmpl, champ_byOriginalPitch).bValue;
         }
 
-        if (!_attributes.contains(champ_fineTune))
+        int fineTuneSample = sf2->get(idSmpl, champ_chPitchCorrection).cValue;
+        if (fineTuneSample != 0)
         {
-            int fineTuneSample = sf2->get(idSmpl, champ_chPitchCorrection).cValue;
-            if (fineTuneSample != 0)
+            if (_attributes.contains(champ_fineTune))
+                _attributeValues[_attributes.indexOf(champ_fineTune)] += fineTuneSample;
+            else
             {
                 _attributes << champ_fineTune;
-                EltID idInstGlobal = idInst;
-                idInstGlobal.typeElement = elementInst;
-                _attributeValues << sf2->get(idInstGlobal, champ_fineTune).shValue + fineTuneSample;
-            }
-        }
-        else
-        {
-            _attributeValues[_attributes.indexOf(champ_fineTune)] +=
-                    sf2->get(idSmpl, champ_chPitchCorrection).cValue;
-        }
-
-        // Delete the sample mode if the global division specifies the same
-        if (_attributes.contains(champ_sampleModes))
-        {
-            int index = _attributes.indexOf(champ_sampleModes);
-            if (_attributeValues.at(index) == _globalLoop)
-            {
-                _attributes.removeAt(index);
-                _attributeValues.removeAt(index);
+                _attributeValues << fineTuneSample;
             }
         }
 
@@ -217,18 +149,6 @@ SfzParamList::SfzParamList(SoundfontManager * sf2, SfzParamList * paramPrst, Elt
 
         // Adapt LFO
         adaptLfo(sf2, idInst);
-
-        // Volume attenuation if only defined in the global division
-        if (!_attributes.contains(champ_initialAttenuation))
-        {
-            EltID instGlob = idInst;
-            instGlob.typeElement = elementInst;
-            if (sf2->isSet(instGlob, champ_initialAttenuation))
-            {
-                _attributes << champ_initialAttenuation;
-                _attributeValues << Attribute::toRealValue(champ_initialAttenuation, false, sf2->get(instGlob, champ_initialAttenuation));
-            }
-        }
     }
 
     // Merge the two parameter lists
@@ -245,6 +165,7 @@ SfzParamList::SfzParamList(SoundfontManager * sf2, SfzParamList * paramPrst, Elt
                 merge(paramPrst->_attributes.at(i), paramPrst->_attributeValues.at(i));
     }
 
+    // Merge the modulators
     for (int i = 0; i < paramPrst->_modulators.size(); i++)
     {
         // Matching modulator at the instrument level?
@@ -373,6 +294,9 @@ SfzParamList::SfzParamList(SoundfontManager * sf2, SfzParamList * paramPrst, Elt
             _attributeValues << correction / DB_SF2_TO_REAL_DB;
         }
     }
+
+    // Modulator velocity => filter cutoff must be ascending
+    processDescendingVelocityModulators();
 
     // Order
     prepend(champ_velRange);
@@ -603,21 +527,38 @@ void SfzParamList::loadModulators(SoundfontManager *sf2, EltID id)
         modTmp.transOper = sf2->get(id, champ_sfModTransOper).sfTransValue;
         modTmp.index = static_cast<quint16>(id.indexMod);
 
-        // Skip modulators that are already in the list
-        bool inList = false;
-        foreach (ModulatorData modData, _modulators)
-        {
-            if (modData == modTmp)
-            {
-                inList = true;
-                break;
-            }
-        }
-        if (inList)
-            continue;
-
-        _modulators << modTmp;
+        // Add the modulator in the list
+        addModulator(modTmp);
     }
+
+    if (id.typeElement == elementInstMod)
+    {
+        // Add default modulator: note on velocity to attenuation
+        ModulatorData modTmp;
+        modTmp.srcOper = SFModulator(GeneralController::GC_noteOnVelocity, ModType::typeConcave, true, false);
+        modTmp.destOper = champ_initialAttenuation;
+        modTmp.amount = 960;
+        modTmp.amtSrcOper = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
+        modTmp.transOper = SFTransform::linear;
+        addModulator(modTmp);
+
+        // Add default modulator: note on velocity to filter cutoff
+        modTmp.srcOper = SFModulator(GeneralController::GC_noteOnVelocity, ModType::typeLinear, true, false);
+        modTmp.destOper = champ_initialFilterFc;
+        modTmp.amount = -2400;
+        modTmp.amtSrcOper = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
+        modTmp.transOper = SFTransform::linear;
+        addModulator(modTmp);
+    }
+}
+
+void SfzParamList::addModulator(ModulatorData &modData)
+{
+    // Do nothing if a similar modulator is already in the list
+    foreach (ModulatorData existingModData, _modulators)
+        if (existingModData == modData)
+            return;
+    _modulators << modData;
 }
 
 void SfzParamList::getGlobalValue(SoundfontManager * sf2, EltID id, AttributeType champ)
@@ -791,4 +732,31 @@ double SfzParamList::limit(double val, AttributeType champ)
     }
 
     return val;
+}
+
+void SfzParamList::processDescendingVelocityModulators()
+{
+    for (int i = 0; i < _modulators.count(); i++)
+    {
+        ModulatorData modData = _modulators[i];
+        if (!modData.srcOper.CC && modData.srcOper.Index == GeneralController::GC_noteOnVelocity &&
+            modData.srcOper.isDescending && !modData.srcOper.isBipolar && modData.srcOper.Type != ModType::typeSwitch &&
+            !modData.amtSrcOper.CC && modData.amtSrcOper.Index == GeneralController::GC_noController &&
+            modData.transOper == SFTransform::linear)
+        {
+            if (modData.destOper == champ_initialFilterFc)
+            {
+                // New filter cutoff
+                int attributePos = findAttribute(champ_initialFilterFc);
+                if (attributePos == -1)
+                    continue;
+                _attributeValues[attributePos] = getValue(attributePos) * pow(2, modData.amount / 1200);
+
+                // Change the modulator
+                modData.srcOper.isDescending = false;
+                modData.amount = -modData.amount;
+                _modulators[i] = modData;
+            }
+        }
+    }
 }

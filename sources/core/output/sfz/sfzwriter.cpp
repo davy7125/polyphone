@@ -73,9 +73,9 @@ bool SfzWriter::write()
     // Process opCodes
     Block * currentGroup = nullptr;
     QList<Block *> currentRegions;
-    for (int i = 0; i < _blocks.count(); i++)
+    for (int i = 0; i <= _blocks.count(); i++)
     {
-        if (_blocks[i]->getBlockName() == "group")
+        if (i == _blocks.count() || _blocks[i]->getBlockName() == "group")
         {
             if (currentGroup != nullptr && !currentRegions.empty())
             {
@@ -87,8 +87,11 @@ bool SfzWriter::write()
             }
 
             // A new group is open
-            currentGroup = _blocks[i];
-            currentRegions.clear();
+            if (i < _blocks.count())
+            {
+                currentGroup = _blocks[i];
+                currentRegions.clear();
+            }
         }
         else
             currentRegions << _blocks[i];
@@ -106,29 +109,68 @@ void SfzWriter::factorizeOpCodes(Block * group, QList<Block *> regions)
     if (regions.count() < 2)
         return;
 
-    QMap<QString, QString> base = regions[0]->getOpCodes();
+    // All parameter defined in the first region (taking into account the default parameters)
+    QMap<QString, QString> sameParameters = regions[0]->getOpCodes();
+    QMap<QString, QString> defaultParameters = group->getOpCodes();
+    foreach (QString key, defaultParameters.keys())
+        if (!sameParameters.contains(key))
+            sameParameters[key] = defaultParameters[key];
+
+    // Then compare with all other regions (still taking into account the default parameters)
     for (int i = 1; i < regions.count(); i++)
     {
-        QMap<QString, QString> other = regions[i]->getOpCodes();
-        QList<QString> baseKeys = base.keys();
-        foreach (QString key, baseKeys)
+        QMap<QString, QString> otherParameters = regions[i]->getOpCodes();
+        foreach (QString key, defaultParameters.keys())
+            if (!otherParameters.contains(key))
+                otherParameters[key] = defaultParameters[key];
+
+        QList<QString> keys = sameParameters.keys();
+        foreach (QString key, keys)
         {
-            if (!other.contains(key) || other[key] != base[key])
-                base.remove(key);
+            if (!otherParameters.contains(key) || otherParameters[key] != sameParameters[key])
+                sameParameters.remove(key);
         }
     }
 
-    foreach (QString key, base.keys())
+    // For all parameters that are the same accross all regions, define the value in the group only
+    foreach (QString key, sameParameters.keys())
     {
-        group->addElement(key, base[key]);
         foreach (Block * block, regions)
             block->removeElement(key);
+
+        // Detect default values (they don't need to be written)
+        bool isDefault = false;
+        if (key == "pan" || key == "tune" || key == "volume")
+            isDefault = sameParameters[key] == "0";
+
+        if (!isDefault)
+            group->addElement(key, sameParameters[key]);
     }
 }
 
 void SfzWriter::cleanOpCodes(Block * group, QList<Block *> regions)
 {
+    cleanOpCodes(group, regions, "amplfo_freq", "amplfo_depth");
+    cleanOpCodes(group, regions, "fillfo_freq", "fillfo_depth");
+    cleanOpCodes(group, regions, "pitchlfo_freq", "pitchlfo_depth");
+}
 
+void SfzWriter::cleanOpCodes(Block * group, QList<Block *> regions, QString opCodeInGroup, QString opCodeCondition)
+{
+    if (group->getOpCodes().contains(opCodeInGroup) && !group->getOpCodes().contains(opCodeCondition))
+    {
+        bool withDepth = false;
+        foreach (Block * block, regions)
+        {
+            if (block->getOpCodes().contains(opCodeCondition))
+            {
+                withDepth = true;
+                break;
+            }
+        }
+        if (!withDepth)
+            group->removeElement(opCodeInGroup);
+    }
 }
 
 void SfzWriter::Block::addElement(QString left, QString right)

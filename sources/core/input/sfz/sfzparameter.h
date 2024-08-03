@@ -69,6 +69,7 @@ public:
         op_fil_keycenter,
 
         // Envelop volume
+        op_amp_veltrack,
         op_amp_velcurve_1,
         op_amp_velcurve_127,
         op_ampeg_delay,

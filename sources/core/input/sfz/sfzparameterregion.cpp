@@ -298,7 +298,7 @@ QStringList SfzParameterRegion::getFullPath(QString base, QStringList directorie
     return listRet;
 }
 
-void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
+void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
 {
     AttributeValue val;
     double dTmp;
@@ -371,7 +371,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
             addSeconds(dTmp, champ_delayVolEnv, sf2, idElt);
             break;
         case SfzParameter::op_offset:
-            if (idElt.typeElement == elementInstSmpl)
+            if (idElt.typeElement == elementInstSmpl && _listeParam.at(i).getIntValue() != 0)
             {
                 val.shValue = _listeParam.at(i).getIntValue() % 32768;
                 sf2->set(idElt, champ_startAddrsOffset, val);
@@ -380,7 +380,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
             }
             break;
         case SfzParameter::op_end:
-            if (idElt.typeElement == elementInstSmpl)
+            if (idElt.typeElement == elementInstSmpl && _listeParam.at(i).getIntValue() != 0)
             {
                 val.shValue = _listeParam.at(i).getIntValue() % 32768;
                 sf2->set(idElt, champ_endAddrsOffset, val);
@@ -389,7 +389,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
             }
             break;
         case SfzParameter::op_loop_start:
-            if (idElt.typeElement == elementInstSmpl)
+            if (idElt.typeElement == elementInstSmpl && _listeParam.at(i).getIntValue() != 0)
             {
                 val.shValue = _listeParam.at(i).getIntValue() % 32768;
                 sf2->set(idElt, champ_startloopAddrsOffset, val);
@@ -398,7 +398,7 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
             }
             break;
         case SfzParameter::op_loop_end:
-            if (idElt.typeElement == elementInstSmpl)
+            if (idElt.typeElement == elementInstSmpl && _listeParam.at(i).getIntValue() != 0)
             {
                 val.shValue = _listeParam.at(i).getIntValue() % 32768;
                 sf2->set(idElt, champ_endloopAddrsOffset, val);
@@ -432,6 +432,16 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
             val.shValue = _listeParam.at(i).getIntValue();
             sf2->set(idElt, champ_scaleTuning, val);
             break;
+        case SfzParameter::op_amp_veltrack: {
+            // Create a modulator modifying the attenuation based on the velocity
+            ModulatorData modData;
+            modData.srcOper = SFModulator(GeneralController::GC_noteOnVelocity, ModType::typeConcave, true, false);
+            modData.amtSrcOper = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
+            modData.amount = 9.6 * _listeParam.at(i).getIntValue();
+            modData.transOper = SFTransform::linear;
+            modData.destOper = champ_initialAttenuation;
+            addModulator(modData);
+        } break;
         case SfzParameter::op_ampeg_delay:
             addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayVolEnv, sf2, idElt);
             break;
@@ -503,36 +513,26 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
             break;
         case SfzParameter::op_fil_veltrack: {
             // Create a modulator modifying the filter frequency based on the velocity
-            EltID idMod(idElt.typeElement == elementInst ? elementInstMod : elementInstSmplMod, idElt.indexSf2, idElt.indexElt, idElt.indexElt2);
-            idMod.indexMod = sf2->add(idMod);
-            val.sfModValue = SFModulator(GeneralController::GC_noteOnVelocity, ModType::typeLinear, false, false);
-            sf2->set(idMod, champ_sfModSrcOper, val);
-            val.wValue = champ_initialFilterFc;
-            sf2->set(idMod, champ_sfModDestOper, val);
-            val.wValue = _listeParam.at(i).getIntValue();
-            sf2->set(idMod, champ_modAmount, val);
-            val.sfModValue = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
-            sf2->set(idMod, champ_sfModAmtSrcOper, val);
-            val.sfTransValue = SFTransform::linear;
-            sf2->set(idMod, champ_sfModTransOper, val);
+            ModulatorData modData;
+            modData.srcOper = SFModulator(GeneralController::GC_noteOnVelocity, ModType::typeLinear, false, false);
+            modData.amtSrcOper = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
+            modData.amount = _listeParam.at(i).getIntValue();
+            modData.transOper = SFTransform::linear;
+            modData.destOper = champ_initialFilterFc;
+            addModulator(modData);
         } break;
         case SfzParameter::op_fil_keycenter:
             // Nothing here, already processed for changing the value of the filter if op_fil_keytrack is set
             break;
         case SfzParameter::op_fil_keytrack: {
             // Create a modulator modifying the filter frequency based on the key (center has been changed to 64)
-            EltID idMod(idElt.typeElement == elementInst ? elementInstMod : elementInstSmplMod, idElt.indexSf2, idElt.indexElt, idElt.indexElt2);
-            idMod.indexMod = sf2->add(idMod);
-            val.sfModValue = SFModulator(GeneralController::GC_noteOnKeyNumber, ModType::typeLinear, false, true);
-            sf2->set(idMod, champ_sfModSrcOper, val);
-            val.wValue = champ_initialFilterFc;
-            sf2->set(idMod, champ_sfModDestOper, val);
-            val.wValue = 64 * _listeParam.at(i).getIntValue();
-            sf2->set(idMod, champ_modAmount, val);
-            val.sfModValue = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
-            sf2->set(idMod, champ_sfModAmtSrcOper, val);
-            val.sfTransValue = SFTransform::linear;
-            sf2->set(idMod, champ_sfModTransOper, val);
+            ModulatorData modData;
+            modData.srcOper = SFModulator(GeneralController::GC_noteOnKeyNumber, ModType::typeLinear, false, true);
+            modData.amtSrcOper = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
+            modData.amount = 64 * _listeParam.at(i).getIntValue();
+            modData.transOper = SFTransform::linear;
+            modData.destOper = champ_initialFilterFc;
+            addModulator(modData);
         } break;
         case SfzParameter::op_vibLFOdelay:
             if (isDefined(SfzParameter::op_vibLFOtoTon))
@@ -728,6 +728,14 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt) const
             sf2->set(idElt, champ_modLfoToFilterFc, val);
         }
     }
+
+    // Disable the default modulators if they are not already defined and
+    if (idElt.typeElement == elementInst)
+        disableDefaultModulators();
+
+    // Save the modulator list in the soundfont
+    foreach (ModulatorData modData, _decodedModulators)
+        saveModulator(sf2, idElt, modData);
 }
 
 void SfzParameterRegion::getKeynumValues(double &baseValue, int &keynum,
@@ -804,4 +812,48 @@ void SfzParameterRegion::mergeIfNotDefined(SfzParameterRegion &groupToMerge)
     foreach (SfzParameter param, groupToMerge._listeParam)
     if (!this->isDefined(param.getOpCode()))
         _listeParam << param;
+}
+
+void SfzParameterRegion::addModulator(ModulatorData modData)
+{
+    // Store the modulator only if it's not already defined
+    foreach (ModulatorData existingModData, _decodedModulators)
+        if (existingModData == modData)
+            return;
+    _decodedModulators << modData;
+}
+
+void SfzParameterRegion::saveModulator(SoundfontManager * sf2, EltID idElt, ModulatorData &modData)
+{
+    EltID idMod(idElt.typeElement == elementInst ? elementInstMod : elementInstSmplMod, idElt.indexSf2, idElt.indexElt, idElt.indexElt2);
+    idMod.indexMod = sf2->add(idMod);
+
+    AttributeValue val;
+    val.sfModValue = modData.srcOper;
+    sf2->set(idMod, champ_sfModSrcOper, val);
+    val.wValue = modData.destOper;
+    sf2->set(idMod, champ_sfModDestOper, val);
+    val.wValue = modData.amount;
+    sf2->set(idMod, champ_modAmount, val);
+    val.sfModValue = modData.amtSrcOper;
+    sf2->set(idMod, champ_sfModAmtSrcOper, val);
+    val.sfTransValue = modData.transOper;
+    sf2->set(idMod, champ_sfModTransOper, val);
+}
+
+void SfzParameterRegion::disableDefaultModulators()
+{
+    // Disable "MIDI Note-On Velocity to Initial Attenuation"
+    ModulatorData modData;
+    modData.srcOper = SFModulator(GeneralController::GC_noteOnVelocity, ModType::typeConcave, true, false);
+    modData.amtSrcOper = SFModulator(GeneralController::GC_noController, ModType::typeLinear, false, false);
+    modData.amount = 0;
+    modData.transOper = SFTransform::linear;
+    modData.destOper = champ_initialAttenuation;
+    addModulator(modData);
+
+    // Disable "MIDI Note-On Velocity to Filter Cutoff"
+    modData.srcOper = SFModulator(GeneralController::GC_noteOnVelocity, ModType::typeLinear, true, false);
+    modData.destOper = champ_initialFilterFc;
+    addModulator(modData);
 }

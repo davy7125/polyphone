@@ -38,7 +38,7 @@ public:
     void mergeIfNotDefined(SfzParameterRegion &groupToMerge);
 
     // Decode
-    void decode(SoundfontManager * sf2, EltID idElt) const;
+    void decode(SoundfontManager * sf2, EltID idElt);
     QList<int> getSampleIndex(SoundfontManager * sf2, EltID idElt, QString pathSfz) const;
     void adaptOffsets(int startLoop, int endLoop, int length);
     void adjustCorrection(QString path, int defaultCorrection);
@@ -91,6 +91,12 @@ public:
 
 private:
     QList<SfzParameter> _listeParam;
+    QList<ModulatorData> _decodedModulators;
+
+    void addModulator(ModulatorData modData);
+    void disableDefaultModulators();
+    static void saveModulator(SoundfontManager * sf2, EltID idElt, ModulatorData &modData);
+
     static QStringList getFullPath(QString base, QStringList directories);
     static double log2m1200(double value) { return 1200. * qLn(qMax(0.001, value)) / 0.69314718056 /* ln(2) */; }
     static double d1200e2(int value) { return qPow(2., static_cast<double>(value) / 1200.); }

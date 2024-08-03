@@ -63,7 +63,6 @@ public:
     void decode(SoundfontManager * sf2, EltID idInst, QString pathSfz);
 
 private:
-    static void disableModulators(SoundfontManager * sm, EltID idInst);
     static double limit(double value, double min, double max);
 
     SfzParameterRegion _paramGlobaux;

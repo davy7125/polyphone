@@ -49,11 +49,11 @@ private:
     QList<AttributeType> _attributes;
     QList<double> _attributeValues;
     QList<ModulatorData> _modulators;
-    static int _globalLoop;
 
     double limit(double val, AttributeType champ);
     void loadAttributes(SoundfontManager *sf2, EltID id);
     void loadModulators(SoundfontManager *sf2, EltID id);
+    void addModulator(ModulatorData &modData);
     void getGlobalValue(SoundfontManager * sf2, EltID id, AttributeType champ);
     void mix(AttributeType champCoarse, AttributeType champFine, int addValue = 0);
     void merge(AttributeType attributeType, double value);
@@ -62,6 +62,7 @@ private:
     void adaptKeynum2(int minKey, int maxKey, AttributeType champBase, AttributeType champKeynum);
     void adaptLfo(SoundfontManager *sf2, EltID idInstSmpl);
     double getValKeynum(double valBase, int key, double keynum);
+    void processDescendingVelocityModulators();
 };
 
 #endif // SFZPARAMLIST_H

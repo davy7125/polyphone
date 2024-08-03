@@ -91,7 +91,7 @@ void InputParserSfz::processInternal(QString fileName, SoundfontManager * sm, bo
     // Adapt the volume if the max amplification is > 0
     if (ampliMax > 0)
         for (int i = 0; i < _presetList.size(); i++)
-            _presetList[i].adjustVolume(ampliMax);
+            _presetList[i].adjustVolume(-ampliMax);
 
     // Create a soundfont
     createSf2(sf2Index, fileName, isChannel10);
