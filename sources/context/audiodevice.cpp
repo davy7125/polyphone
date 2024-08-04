@@ -23,7 +23,6 @@
 ***************************************************************************/
 
 #include <QDebug>
-#include <unistd.h>
 #include "audiodevice.h"
 #include "rtaudio/RtAudio.h"
 #include "confmanager.h"
@@ -157,9 +156,9 @@ void AudioDevice::getApiAndDeviceNameFromConfig(QString config, int &api, QStrin
     // Take the default API if the host identifier is not valid
     api = RtAudio::getCompiledApiByName(hostIdentifier.toStdString());
     if (api == RtAudio::UNSPECIFIED)
-#if __APPLE__
+#if defined(Q_OS_MACX)
         api = RtAudio::MACOSX_CORE;
-#elif Q_OS_WIN
+#elif defined(Q_OS_WIN)
         api = RtAudio::WINDOWS_WASAPI;
 #else
         api = RtAudio::LINUX_ALSA;

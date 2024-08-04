@@ -46,7 +46,6 @@ TRANSLATIONS = polyphone_en.ts \
 PRECOMPILED_HEADER = precompiled_header.h
 CONFIG += lrelease embed_translations precompiled_header
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
-QMAKE_CXXFLAGS += -std=c++17
 
 QT += core gui printsupport svg network #testlib
 TARGET = polyphone
@@ -55,9 +54,9 @@ TEMPLATE = app
 win32 {
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __WINDOWS_MM__ __WINDOWS_WASAPI__ __WINDOWS_ASIO__ #__WINDOWS_DS__
+    DEFINES -= RT_AUDIO_5_2
     INCLUDEPATH += ../lib_windows/include
     RC_FILE = polyphone.rc
-    QMAKE_CXXFLAGS += -ffloat-store # Compiler is MinGW for the option -ffloat-store, required by sfArk
     LIBS += -lzlib1 -lwinmm -logg -lvorbis -lvorbisfile -lvorbisenc.dll -lcrypto -lFLAC
     LIBS += -L$$PWD/../lib_windows/64bits
     DESTDIR = $$PWD/../lib_windows/64bits
@@ -65,6 +64,7 @@ win32 {
 unix:!macx {
     DEFINES += __LINUX_ALSASEQ__ __UNIX_JACK__ __LINUX_ALSA__ #__LINUX_PULSE__
     CONFIG += link_pkgconfig
+    QMAKE_CXXFLAGS += -std=c++17
     PKGCONFIG += alsa jack zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0
     contains(DEFINES, USE_WOLFSSL) {
         PKGCONFIG += wolfssl
@@ -101,8 +101,10 @@ unix:!macx {
 macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.14
     QMAKE_MAC_SDK = macosx12.1
+    QMAKE_CXXFLAGS += -std=c++17
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __MACOSX_CORE__ __UNIX_JACK__ TARGET_OS_IPHONE=0
+    DEFINES -= RT_AUDIO_5_2
     INCLUDEPATH += ../lib_mac/Jackmp.framework/Headers \
         ../lib_mac/include
     LIBS += -L$$PWD/../lib_mac -logg -lFLAC -lvorbis -lssl -lcrypto -F$$PWD/../lib_mac/ -framework Jackmp \
