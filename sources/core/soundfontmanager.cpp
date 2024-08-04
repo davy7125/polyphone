@@ -1573,27 +1573,42 @@ void SoundfontManager::simplify(EltID id, AttributeType champ)
     else
         return;
 
-    bool firstValue = true;
-    AttributeValue valeur;
+    // Default value
+    AttributeValue defaultValue;
+    bool hasDefaultValue = this->isSet(id, champ);
+    if (hasDefaultValue)
+        defaultValue = this->get(id, champ);
 
+    bool withValue = false;
+    AttributeValue valeur;
     foreach (int i, this->getSiblings(idElement))
     {
         idElement.indexElt2 = i;
         if (this->isSet(idElement, champ))
         {
-            if (firstValue)
+            if (!withValue)
             {
                 valeur = this->get(idElement, champ);
-                firstValue = false;
+                withValue = true;
             }
             else if (valeur.dwValue != this->get(idElement, champ).dwValue)
                 return;
         }
-        else
+        else if (hasDefaultValue)
+        {
+            if (!withValue)
+            {
+                valeur = defaultValue;
+                withValue = true;
+            }
+            else if (valeur.dwValue != defaultValue.dwValue)
+                return;
+        }
+        else // Nothing set, return
             return;
     }
 
-    if (!firstValue)
+    if (withValue)
     {
         foreach (int i, this->getSiblings(idElement))
         {

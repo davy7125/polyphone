@@ -307,8 +307,7 @@ void InputParserSfz::createSf2(int &sf2Index, QString filename, bool isChannel10
     sm->set(idPrst, champ_wPreset, val);
 
     // Create instruments
-    EltID idInst = idSf2;
-    idInst.typeElement = elementInst;
+    EltID idInst(elementInst, idSf2.indexSf2);
     for (int i = 0; i < _presetList.size(); i++)
     {
         idInst.indexElt = sm->add(idInst);
@@ -387,9 +386,15 @@ void InputParserSfz::createSf2(int &sf2Index, QString filename, bool isChannel10
 
         // Simplify parameters in instruments
         sm->simplify(idInst, champ_initialAttenuation);
+        sm->simplify(idInst, champ_initialFilterFc);
         sm->simplify(idInst, champ_fineTune);
         sm->simplify(idInst, champ_sampleModes);
         sm->simplify(idInst, champ_exclusiveClass);
+        sm->simplify(idInst, champ_delayVolEnv);
+        sm->simplify(idInst, champ_attackVolEnv);
+        sm->simplify(idInst, champ_decayVolEnv);
+        sm->simplify(idInst, champ_holdVolEnv);
+        sm->simplify(idInst, champ_sustainVolEnv);
         sm->simplify(idInst, champ_releaseVolEnv);
 
         // Delete keyrange and velocity range of the global division in the instrument
