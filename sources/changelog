@@ -1,14 +1,21 @@
 polyphone (2.4) unstable; urgency=low
 
+  * (new) Catalan translation
+  * (new) sfz opcodes amp_veltrack, fil_veltrack, fil_keytrack, fil_keycenter can be imported / exported
   * (improvement) the window borders are now an option
   * (improvement) faster and more accurate sound engine
   * (improvement) default controller values consistent with the modulators of the loaded soundfont
   * (improvement) GrandOrgue parser - group instruments by presets if switches are defined
+  * (improvement) selecting a preset or preset divisions displays the corresponding instrument ranges on the keyboard
+  * (fix) reading sf3 with uncompressed samples
+  * (fix) processing pan / width / position during sfz import / export
+  * (fix) GrandOrgue files can be processed with the export command line
   * (fix) loading multiple files asynchroneously
   * (fix) support of the sustain and sostenuto pedals
   * (fix) graphical bugs resolved
+  * (fix) attenuation when using filter Q
 
- -- Davy Triponney <davy.triponney@gmail.com>  Sat, 5 Apr 2024 17:38:42 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  Mon, 5 Aug 2024 17:10:12 +0100
  
 
 polyphone (2.3) UNRELEASED; urgency=low
