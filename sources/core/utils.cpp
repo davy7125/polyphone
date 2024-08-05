@@ -167,7 +167,6 @@ QString Utils::rsaEncrypt(QString input)
     file.close();
     QByteArray inputData = input.toLatin1();
 
-
     BIO* bo = BIO_new(BIO_s_mem());
     BIO_write(bo, publicKeyData.data(), publicKeyData.length());
 

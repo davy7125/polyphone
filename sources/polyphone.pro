@@ -46,25 +46,45 @@ TRANSLATIONS = polyphone_en.ts \
 PRECOMPILED_HEADER = precompiled_header.h
 CONFIG += lrelease embed_translations precompiled_header
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
+QMAKE_CXXFLAGS += -std=c++17
 
 QT += core gui printsupport svg network #testlib
 TARGET = polyphone
 TEMPLATE = app
 
 win32 {
+    # Compiler must be MinGW for the option -ffloat-store, required by sfArk
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __WINDOWS_MM__ __WINDOWS_WASAPI__ __WINDOWS_ASIO__ #__WINDOWS_DS__
     DEFINES -= RT_AUDIO_5_2
     INCLUDEPATH += ../lib_windows/include
     RC_FILE = polyphone.rc
-    LIBS += -lzlib1 -lwinmm -logg -lvorbis -lvorbisfile -lvorbisenc.dll -lcrypto -lFLAC
+    QMAKE_CXXFLAGS += -ffloat-store
+    LIBS += -lzlib1 -lwinmm -logg -lvorbis -lvorbisfile -lvorbisenc.dll -lcrypto -lFLAC \
+        -lole32 -lwinmm -lksuser -lmfplat -lmfuuid -lwmcodecdspuuid # <- for RtAudio
     LIBS += -L$$PWD/../lib_windows/64bits
     DESTDIR = $$PWD/../lib_windows/64bits
+
+    # Files necessary for ASIO with RtAudio
+    HEADERS += lib/_option_rtaudio/rtaudio/include/asio.h \
+        lib/_option_rtaudio/rtaudio/include/asiodrivers.h \
+        lib/_option_rtaudio/rtaudio/include/asiodrvr.h \
+        lib/_option_rtaudio/rtaudio/include/asiolist.h \
+        lib/_option_rtaudio/rtaudio/include/asiosys.h \
+        lib/_option_rtaudio/rtaudio/include/dsound.h \
+        lib/_option_rtaudio/rtaudio/include/functiondiscoverykeys_devpkey.h \
+        lib/_option_rtaudio/rtaudio/include/ginclude.h \
+        lib/_option_rtaudio/rtaudio/include/iasiodrv.h \
+        lib/_option_rtaudio/rtaudio/include/iasiothiscallresolver.h \
+        lib/_option_rtaudio/rtaudio/include/soundcard.h
+    SOURCES += lib/_option_rtaudio/rtaudio/include/asio.cpp \
+        lib/_option_rtaudio/rtaudio/include/asiodrivers.cpp \
+        lib/_option_rtaudio/rtaudio/include/asiolist.cpp \
+        lib/_option_rtaudio/rtaudio/include/iasiothiscallresolver.cpp
 }
 unix:!macx {
     DEFINES += __LINUX_ALSASEQ__ __UNIX_JACK__ __LINUX_ALSA__ #__LINUX_PULSE__
     CONFIG += link_pkgconfig
-    QMAKE_CXXFLAGS += -std=c++17
     PKGCONFIG += alsa jack zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0
     contains(DEFINES, USE_WOLFSSL) {
         PKGCONFIG += wolfssl
@@ -101,7 +121,6 @@ unix:!macx {
 macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.14
     QMAKE_MAC_SDK = macosx12.1
-    QMAKE_CXXFLAGS += -std=c++17
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __MACOSX_CORE__ __UNIX_JACK__ TARGET_OS_IPHONE=0
     DEFINES -= RT_AUDIO_5_2
@@ -118,7 +137,8 @@ DEFINES += SFTOOLS_NOXML
 
 # Location of RtAudio
 contains(DEFINES, USE_LOCAL_RTAUDIO) {
-    INCLUDEPATH += lib/_option_rtaudio
+    INCLUDEPATH += lib/_option_rtaudio \
+        lib/_option_rtaudio/rtaudio/include
     HEADERS += lib/_option_rtaudio/rtaudio/RtAudio.h
     SOURCES += lib/_option_rtaudio/rtaudio/RtAudio.cpp
 } else {
