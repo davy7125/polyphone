@@ -159,7 +159,7 @@ void TopRightWidget::userStateChanged(UserManager::ConnectionState state)
 
 void TopRightWidget::on_pushUser_clicked()
 {
-    emit(userClicked());
+    //emit(userClicked());
 }
 
 void TopRightWidget::progressChanged(int percent, int soundfontId, QString soundfontName, QString finalFileName)

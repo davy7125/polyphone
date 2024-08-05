@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>TopRightWidget</class>
  <widget class="QWidget" name="TopRightWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>252</width>
+    <height>42</height>
+   </rect>
+  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
     <horstretch>0</horstretch>
@@ -147,7 +155,7 @@
       </size>
      </property>
      <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
+      <cursorShape>ArrowCursor</cursorShape>
      </property>
      <property name="toolTip">
       <string>User area</string>
