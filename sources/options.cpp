@@ -26,6 +26,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QCoreApplication>
+#include "inputfactory.h"
 
 Options::Options(int argc, char *argv[]) :
     _currentState(STATE_INPUT_FILE), // By default args are input files
@@ -183,8 +184,7 @@ void Options::checkErrors()
     // Input files
     foreach (QString inputFile, _inputFiles)
     {
-        QString extension = QFileInfo(inputFile).suffix().toLower();
-        if (extension != "sf2" && extension != "sf3" && extension != "sfark" && extension != "sfz")
+        if (!InputFactory::isSuffixSupported(QFileInfo(inputFile).suffix()))
         {
             _error = true;
             return;
@@ -217,7 +217,7 @@ void Options::postTreatment()
 
         // By default, the output file name is the same than the input file name
         if (_outputFile == "")
-            _outputFile = QFileInfo(_inputFiles[0]).baseName();
+            _outputFile = QFileInfo(_inputFiles[0]).completeBaseName();
     }
 }
 

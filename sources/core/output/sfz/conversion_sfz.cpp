@@ -237,6 +237,7 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
 
 QString ConversionSfz::getPathSfz(QString dir, QString name)
 {
+    name = name.replace(".", " ").trimmed();
     if (name.isEmpty())
         name = tr("untitled");
     name = escapeStr(name);

@@ -230,7 +230,7 @@ void Sound::determineRootKey()
 {
     // Try to find the root key with the help of the file name
     QFileInfo fileInfo(_fileName);
-    QString nameNoExtension = fileInfo.baseName().toLower();
+    QString nameNoExtension = fileInfo.completeBaseName().toLower();
 
     // First attempt: find a note name (standard taken being C4 = 60)
     QRegularExpression keyNameRegex("([a-g])([#b]?)(-?[0-9]+)");

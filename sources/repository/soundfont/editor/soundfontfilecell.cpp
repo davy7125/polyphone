@@ -71,7 +71,7 @@ void SoundfontFileCell::initialize(QString filePath, int id)
 {
     // Title based on the filePath
     QFileInfo fi(filePath);
-    ui->lineTitle->setText(fi.baseName());
+    ui->lineTitle->setText(fi.completeBaseName());
 
     // No description
     ui->textDescription->setText("");
@@ -90,7 +90,7 @@ void SoundfontFileCell::fileReplaced(QString filePath)
     if (ui->lineTitle->text().isEmpty())
     {
         QFileInfo fi(filePath);
-        ui->lineTitle->setText(fi.baseName());
+        ui->lineTitle->setText(fi.completeBaseName());
     }
 
     // Information
