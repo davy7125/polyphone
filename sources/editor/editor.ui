@@ -151,7 +151,7 @@
             <number>0</number>
            </property>
            <property name="topMargin">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="rightMargin">
             <number>0</number>
@@ -164,7 +164,7 @@
              <property name="minimumSize">
               <size>
                <width>0</width>
-               <height>23</height>
+               <height>24</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -175,6 +175,9 @@
              </property>
              <property name="text">
               <string/>
+             </property>
+             <property name="frame">
+              <bool>false</bool>
              </property>
              <property name="placeholderText">
               <string>Search...</string>
@@ -367,7 +370,6 @@
              <widget class="QLabel" name="labelError">
               <property name="font">
                <font>
-                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>

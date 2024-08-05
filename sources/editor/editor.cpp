@@ -50,9 +50,13 @@ Editor::Editor(QWidget *parent) : QWidget(parent),
     layout->addWidget(splitter);
 
     // General style
+    QString highlightColorBackground = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
+    QString highlightColorText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
+
     ui->editFilter->setStyleSheet("QLineEdit{border: 0}");
     ui->frameSearch->setStyleSheet("QFrame{background-color:" +
-                                   ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}");
+                                   highlightColorBackground + "}");
+    ui->editFilter->setStyleSheet("QLineEdit{background-color:" + highlightColorBackground + ";color:" + highlightColorText + ";}");
     ui->treeView->setStyleSheet("TreeView{border:1px solid " +
                                 ContextManager::theme()->getColor(ThemeManager::BORDER).name() +
                                 ";border-top:0;border-left:0;border-bottom:0}");
@@ -60,15 +64,15 @@ Editor::Editor(QWidget *parent) : QWidget(parent),
 
     QMap<QString, QString> replacement;
     replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name();
-    replacement["secondColor"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
+    replacement["secondColor"] = highlightColorBackground;
     ui->iconLogo->setPixmap(QPixmap(":/misc/polyphone.png").scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     QString resetHoverColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED).name();
     ui->stackedFooter->setStyleSheet("QStackedWidget, QLabel{background-color:" +
-                                     ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";color:" +
-                                     ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + "}" +
+                                     highlightColorBackground + ";color:" +
+                                     highlightColorText + "}" +
                                      "QPushButton{background-color:transparent;color:" +
-                                     ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
+                                     highlightColorText +
                                      ";border:0;padding:0px 5px}" +
                                      "QPushButton:hover{color:" + resetHoverColor + "}");
 
