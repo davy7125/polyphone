@@ -36,14 +36,10 @@ ThemeManager::ThemeManager(ConfManager * configuration) :
     QString loadedStyle = _configuration->getValue(ConfManager::SECTION_DISPLAY, "style", "Fusion").toString();
     _customPaletteEnabled = loadedStyle == "Windows" || loadedStyle == "Fusion";
 
-    // Memorize the default theme
+    // Prepare the default theme
     _defaultPalette = QApplication::palette();
-
-    // Check that the alternate base is different
-    QColor colorAlternateBase = _defaultPalette.color(QPalette::AlternateBase);
     QColor colorBase = _defaultPalette.color(QPalette::Base);
-    if (colorAlternateBase == colorBase)
-        _defaultPalette.setColor(QPalette::AlternateBase, mix(colorBase, _defaultPalette.color(QPalette::Text), 0.05));
+    _defaultPalette.setColor(QPalette::AlternateBase, mix(colorBase, _defaultPalette.color(QPalette::Text), 0.05));
 
     // Fix some colors for Mac OS
     if (loadedStyle == "macOS")
@@ -51,9 +47,6 @@ ThemeManager::ThemeManager(ConfManager * configuration) :
         QColor colorTmp = _customPalette.color(QPalette::Window);
         colorTmp.setHsv(colorTmp.hue(), (int)(0.75 * colorTmp.saturation()), (int)(0.7 * colorTmp.value()));
         _defaultPalette.setColor(QPalette::Dark, colorTmp);
-
-        colorTmp = mix(_defaultPalette.color(QPalette::Base), _defaultPalette.color(QPalette::Text), 0.05);
-        _defaultPalette.setColor(QPalette::AlternateBase, colorTmp);
 
         colorTmp = mix(_defaultPalette.color(QPalette::HighlightedText), _defaultPalette.color(QPalette::Highlight), 0.7);
         _defaultPalette.setColor(QPalette::Disabled, QPalette::HighlightedText, colorTmp);
