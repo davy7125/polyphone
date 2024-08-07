@@ -46,10 +46,30 @@ QList<AudioDevice::HostInfo> AudioDevice::getAllHosts()
     for (unsigned int i = 0; i < apis.size(); i++)
     {
         // Host details
-        RtAudio::Api currentApi = apis[i];
+        RtAudio::Api availableApi = apis[i];
         HostInfo hostInfo;
-        hostInfo.identifier = QString(RtAudio::getApiName(currentApi).c_str());
-        hostInfo.name = QString(RtAudio::getApiDisplayName(currentApi).c_str());
+        hostInfo.identifier = QString(RtAudio::getApiName(availableApi).c_str());
+        hostInfo.name = QString(RtAudio::getApiDisplayName(availableApi).c_str());
+
+        if (availableApi == _currentApi && !_currentDeviceName.isEmpty())
+        {
+            // ASIO cannot be probed while it is in use
+            if (_currentApi == RtAudio::Api::WINDOWS_ASIO)
+            {
+                DeviceInfo deviceInfo;
+                deviceInfo.name = _currentDeviceName;
+                deviceInfo.channelCount = 2;
+                deviceInfo.isDefault = true;
+                hostInfo.devices << deviceInfo;
+
+                hosts << hostInfo;
+                continue;
+            }
+        }
+
+        // No sound with WASAPI if we scan ASIO at the same time
+        if (_currentApi == RtAudio::Api::WINDOWS_WASAPI && availableApi == RtAudio::Api::WINDOWS_ASIO)
+            closeConnections();
 
         // Browse devices
         RtAudio * audio = nullptr;
@@ -84,6 +104,10 @@ QList<AudioDevice::HostInfo> AudioDevice::getAllHosts()
             }
             delete audio;
         }
+
+        // Possibly restore the sound
+        if (_currentApi == RtAudio::Api::WINDOWS_WASAPI && availableApi == RtAudio::Api::WINDOWS_ASIO)
+            initAudio();
 
         if (!hostInfo.devices.empty())
             hosts << hostInfo;
@@ -207,9 +231,9 @@ void AudioDevice::initAudio()
 
     // Read the configuration
     QString audioType = _configuration->getValue(ConfManager::SECTION_AUDIO, "type", "").toString();
-    int api;
-    QString deviceName;
-    getApiAndDeviceNameFromConfig(audioType, api, deviceName);
+    if (audioType == "none")
+        return;
+    getApiAndDeviceNameFromConfig(audioType, _currentApi, _currentDeviceName);
 
     // Buffer size
     quint32 bufferSize = _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 0).toUInt();
@@ -218,7 +242,7 @@ void AudioDevice::initAudio()
 
     // Instanciate an RtAudio object with the selected api
     try {
-        _rtAudio = new RtAudio((RtAudio::Api)api);
+        _rtAudio = new RtAudio((RtAudio::Api)_currentApi);
     } catch (RtAudioError &error) {
         error.printMessage();
         return;
@@ -243,7 +267,7 @@ void AudioDevice::initAudio()
             if (deviceInfo.outputChannels < 2)
                 continue;
 
-            if (QString(deviceInfo.name.c_str()) == deviceName)
+            if (QString(deviceInfo.name.c_str()) == _currentDeviceName)
             {
                 selectedDevice = i;
                 sampleRates = deviceInfo.sampleRates;
@@ -252,7 +276,7 @@ void AudioDevice::initAudio()
             if (deviceInfo.isDefaultOutput)
             {
                 sampleRates = deviceInfo.sampleRates;
-                if (deviceName == "")
+                if (_currentDeviceName == "")
                 {
                     selectedDevice = i;
                     break;

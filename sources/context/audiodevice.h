@@ -54,7 +54,7 @@ public:
         QList<DeviceInfo> devices;
     };
 
-    static QList<HostInfo> getAllHosts();
+    QList<HostInfo> getAllHosts();
     static int getCurrentDeviceIndex(QList<HostInfo> devices, QString config);
     /////////////////////////////////////
 
@@ -75,6 +75,8 @@ private:
     RtAudio * _rtAudio;
     ConfManager * _configuration;
     Synth * _synth;
+    int _currentApi;
+    QString _currentDeviceName;
 };
 
 #endif // AUDIODEVICE_H

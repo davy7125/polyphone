@@ -85,7 +85,7 @@ void ConfigSectionGeneral::initializeAudio()
     ui->comboBufferSize->blockSignals(true);
 
     // Current hosts with devices
-    QList<AudioDevice::HostInfo> hosts = AudioDevice::getAllHosts();
+    QList<AudioDevice::HostInfo> hosts = ContextManager::audio()->getAllHosts();
     ui->comboAudioOuput->clear();
     ui->comboAudioOuput->addItem("-", "none");
     for (int i = 0; i < hosts.count(); i++)
