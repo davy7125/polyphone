@@ -25,7 +25,7 @@ sudo dnf install qt-creator qt5-qtsvg-devel qt5-qttools-devel
 Install the following dependencies (if you have :program:`Synaptic` installed you could alternatively use it for installation):
 
 ```
-sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel portaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel rtmidi-devel stk-devel qcustomplot-qt5-devel
+sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel rtaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel rtmidi-devel stk-devel
 ```
 
 
@@ -38,31 +38,6 @@ sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel portaudio-devel 
 First, get Polyphone sources from <a href="download" target="_blank">here</a> or from <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a>.
 
 If you want to continue the build with Qt Creator, follow now this tutorial: [build with Qt Creator](development/using-qt-creator-to-build-polyphone.md). Otherwise, continue the reading of this document.
-
-
-### polyphone.pro modifications
-
-
-Open the file :file:`polyphone.pro` and change **-lqcustomplot** into **-lqcustomplot-qt5** (add "-qt5") in the following block:
-
-```
-# Location of QCustomplot
-contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
-    INCLUDEPATH += lib/_option_qcustomplot
-    HEADERS += lib/_option_qcustomplot/qcustomplot.h
-    SOURCES += lib/_option_qcustomplot/qcustomplot.cpp
-} else {
-    LIBS += -lqcustomplot
-}
-```
-
-This is required otherwise Polyphone will crash with a segmentation fault during startup.
-
-Alternatively, you can uncomment (remove the leading "#") the following line so that you use an embedded copy of the qcustomplot library:
-
-```
-DEFINES += USE_LOCAL_QCUSTOMPLOT
-```
 
 
 ### Getting the executable

@@ -26,13 +26,13 @@ Téléchargez les sources de Polyphone <a href="download" target="_blank">ici</a
 ### Ouvrir et configurer le projet
 
 
-Au préalable, ouvrez le fichier :file:`polyphone.pro` et éditez-le de manière à éventuellement utiliser les versions embarquées de :program:`rtmidi`, :program:`stk` et :program:`qcustomplot` si votre système d'exploitation ne les fournit pas.
+Au préalable, ouvrez le fichier :file:`polyphone.pro` et éditez-le de manière à éventuellement utiliser les versions embarquées de :program:`rtaudio`, :program:`rtmidi` et :program:`stk` si votre système d'exploitation ne les fournit pas.
 Décommentez les lignes suivantes en enlevant le premier caractère ‘#’&nbsp;:
 
 ```
+DEFINES += USE_LOCAL_RTAUDIO
 DEFINES += USE_LOCAL_RTMIDI
 DEFINES += USE_LOCAL_STK
-DEFINES += USE_LOCAL_QCUSTOMPLOT
 ```
 
 Vous pouvez sauter cette étape si vous souhaitez utiliser les dépendances déjà installées sur votre ordinateur (assurez-vous juste de les avoir&nbsp;!).
@@ -66,13 +66,7 @@ La commande :command:`qmake` se termine correctement lorsque la barre de progres
 
 Dans la section :guilabel:`Project` de la colonne de gauche, puis dans la section :guilabel:`Build&Run`, sélectionnez une configuration de compilation (la configuration :guilabel:`Release` est préférée).
 
-Enfin, cliquez sur l'action :guilabel:`Build project Polyphone` dans le menu :guilabel:`Build`.
-
-
-![Compilation du projet](images/build-project.png "Compilation du projet")
-
-
-Pendant la compilation du projet il est possible de voir des avertissements mais normalement pas d'erreur.
+Enfin, cliquez sur l'action :guilabel:`Build project Polyphone` dans le menu :guilabel:`Build`. Pendant la compilation du projet il est possible de voir des avertissements mais normalement pas d'erreur.
 
 À présent vous devriez trouver le fichier exécutable :file:`polyphone` dans le sous-dossier :file:`RELEASE` ou :file:`DEBUG` du répertoire source, selon le choix de la configuration de compilation dans Qt Creator.
 

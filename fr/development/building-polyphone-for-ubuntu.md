@@ -10,10 +10,9 @@ Les bibliothèques suivantes sont nécessaires&nbsp;:
 * qt (``qt5-default`` + ``libqt5svg5-dev``)
 * alsa (``libasound2-dev``)
 * jack (``libjack-jackd2-dev``)
-* portaudio (``portaudio19-dev``)
+* rtaudio (``librtaudio-dev``)
 * rtmidi (``librtmidi-dev``)
 * stk (``libstk0-dev``)
-* qcustomplot (``libqcustomplot-dev``)
 * vorbis (``libvorbis-dev``)
 * ogg (``libogg-dev``)
 * flac (``libflac-dev``)
@@ -35,7 +34,7 @@ qmake polyphone.pro PREFIX=/usr && make
 
 Un fichier exécutable :file:`polyphone` dans le répertoire :file:`RELEASE` devrait ensuite apparaître si tout s'est bien déroulé.
 
-Dans le cas où des bibliothèques comme :program:`RtMidi`, :program:`Stk`, :program:`QCustomPlot` sont manquantes ou ne sont pas dans une version compatible dans votre distribution, vous pouvez éditer le fichier :file:`.pro` pour utiliser la version fournie dans les sources.
+Dans le cas où des bibliothèques comme :program:`RtAudio`, :program:`RtMidi`, :program:`Stk` sont manquantes ou ne sont pas dans une version compatible dans votre distribution, vous pouvez éditer le fichier :file:`.pro` pour utiliser la version fournie dans les sources.
 Pour ce faire, décommentez les lignes correspondantes. Par exemple
 
 ```

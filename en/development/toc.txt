@@ -1,4 +1,5 @@
 index.md=Technical documentation
+|building-polyphone-for-windows.md=Building Polyphone for Windows
 |building-polyphone-for-mac-os-x.md=Building Polyphone for Mac OS X
 |building-polyphone-for-fedora.md=Building Polyphone for Fedora
 |building-polyphone-for-ubuntu.md=Building Polyphone for Ubuntu

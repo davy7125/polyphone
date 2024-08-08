@@ -6,6 +6,10 @@
 </div>
 </div>
 
+### [Compiler Polyphone pour Windows](development/building-polyphone-for-windows.md)
+
+Instructions pour compiler Polyphone avec Windows.
+
 ### [Compiler Polyphone pour Mac OS X](development/building-polyphone-for-mac-os-x.md)
 
 Instructions pour compiler Polyphone avec Mac OS X.

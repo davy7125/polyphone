@@ -26,13 +26,13 @@ Get Polyphone sources from <a href="download" target="_blank">here</a> or from <
 ### Open and configure the project
 
 
-First, open the file :file:`polyphone.pro` and edit it to possibly use the distributed versions for :program:`rtmidi`, :program:`stk` and :program:`qcustomplot` if your OS doesn't provide them.
+First, open the file :file:`polyphone.pro` and edit it to possibly use the distributed versions for :program:`rtaudio`, :program:`rtmidi` and :program:`stk` if your OS doesn't provide them.
 Uncomment the following lines by removing the leading ‘#’:
 
 ```
+DEFINES += USE_LOCAL_RTAUDIO
 DEFINES += USE_LOCAL_RTMIDI
 DEFINES += USE_LOCAL_STK
-DEFINES += USE_LOCAL_QCUSTOMPLOT
 ```
 
 You can skip these modifications if you want to use libraries already installed in your computer (make sure you have them!).
@@ -65,13 +65,7 @@ Go in the menu :guilabel:`Build` and choose the item :guilabel:`Run qmake`.
 
 In the section :guilabel:`Project` in the left column, then in the section :guilabel:`Build&Run`, select the build configuration (:guilabel:`Release` is preferred).
 
-Finally, click on the action :guilabel:`Build project Polyphone` in the menu :guilabel:`Build`.
-
-
-![Build project](images/build-project.png "Build project")
-
-
-During project build you should see warnings but no errors.
+Finally, click on the action :guilabel:`Build project Polyphone` in the menu :guilabel:`Build`. During the project build you should see warnings but no errors.
 
 Now you should have the executable :file:`polyphone` either in the :file:`RELEASE` or :file:`DEBUG` subfolder of the source code, depending on your choice in QtCreator build configuration.
 
