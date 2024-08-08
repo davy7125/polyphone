@@ -35,7 +35,7 @@ sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel rtaudio-devel zl
 ### Sources
 
 
-First, get Polyphone sources from <a href="download" target="_blank">here</a> or from <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a>.
+First, get Polyphone sources from <a href="download" target="_blank">here</a> or from <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>.
 
 If you want to continue the build with Qt Creator, follow now this tutorial: [build with Qt Creator](development/using-qt-creator-to-build-polyphone.md). Otherwise, continue the reading of this document.
 

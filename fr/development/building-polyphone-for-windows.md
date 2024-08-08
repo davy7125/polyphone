@@ -10,7 +10,7 @@ Polyphone est écrit en C++ avec l'environnement de développement Qt. Pour inst
 
 Lancer ensuite l'installateur et sélectionnez les éléments suivants&nbsp;:
 
-![éléments à sélectionner](images/select-qt-components.png "éléments à sélectionner")
+![Éléments à sélectionner](images/select-qt-components.png "Éléments à sélectionner")
 
 Prenez les versions les plus à jour si ces choix ne sont pas exactement les mêmes.
 
@@ -30,7 +30,7 @@ Dirigez-vous ensuite dans les configurations du système Windows pour ajouter le
 
 * ouvrez le menu Windows,
 * cherchez "variables d'environnement",
-* ouvrez les propriétés systèmes et cliquer sur "Variables d'environnement",
+* ouvrez les propriétés systèmes et cliquez sur "Variables d'environnement",
 * double-cliquez sur "Path" dans les variables système,
 * et ajoutez :file:`C:/mingw64/bin` parmi les répertoires listés dans la variable "Path".
 
@@ -47,9 +47,9 @@ Téléchargez les dépendances du projet disponibles [ici](files/lib_windows.zip
 
 ### Sources
 
-Tout d'abord, téléchargez les sources de Polyphone <a href="download" target="_blank">ici</a> ou depuis <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a> et désarchivez l'ensemble sur votre bureau Windows par exemple.
+Tout d'abord, téléchargez les sources de Polyphone <a href="download" target="_blank">ici</a> ou depuis <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a> et désarchivez l'ensemble sur votre bureau Windows par exemple.
 
-Ensuite, désarchivez les dépendences supplémentaires de Polyphone dans un dossier "lib_windows" qui doit se trouver à côté du dossier "sources".
+Ensuite, désarchivez les dépendences supplémentaires de Polyphone dans un dossier :file:`lib_windows` qui doit se trouver à côté du dossier :file:`sources`.
 
 Continuez maintenant avec ce tutoriel pour la compilation de Polyphone avec Qt Creator&nbsp;: [Compiler avec Qt Creator](development/using-qt-creator-to-build-polyphone.md). Aucune modification du fichier :file:`polyphone.pro` ne sera nécessaire.
 

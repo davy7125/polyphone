@@ -47,9 +47,9 @@ Download the project dependencies available [here](files/lib_windows.zip). These
 
 ### Sources
 
-Start by downloading the Polyphone sources <a href="download" target="_blank">here</a> or from <a href="https://github.com/davy7125/polyphone" target="_blank">Github</a> and unarchive the files on your Windows desktop, for example.
+Start by downloading the Polyphone sources <a href="download" target="_blank">here</a> or from <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a> and unarchive the files on your Windows desktop, for example.
 
-Then, unarchive the additional Polyphone dependencies in directory "lib_windows" that must be next to the "sources" folder.
+Then, unarchive the additional Polyphone dependencies in directory :file:`lib_windows` that must be next to the :file:`sources` folder.
 
 Continue now with this tutorial for building Polyphone with Qt Creator: [Using Qt Creator to build Polyphone](development/using-qt-creator-to-build-polyphone.md). No modification of the file :file:`polyphone.pro` will be necessary.
 
