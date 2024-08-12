@@ -1,6 +1,5 @@
-Welcome to the **User Manual** of Polyphone! You will learn here how to use every feature of the software.
-If you need more help, or if the reading of these pages puts you off, you may find assistance in the [forum](forum), with [tutorials](tutorials/index.md), or on <a href="https://www.youtube.com/results?search_query=polyphone+sf2" target="_blank">YouTube</a> (special thanks to Polyphone users for their useful videos).
-Extra information can also be found in the [annexes](manual/annexes/index.md).
+Welcome to the **User Manual** of Polyphone! To quickly discover what soundfonts are and how to edit them with Polyphone, you can start with [tutorials](tutorials/index.md) or watch videos on <a href="https://www.youtube.com/results?search_query=polyphone+sf2" target="_blank">YouTube</a> (special thanks to Polyphone users for their useful videos). And if you'd like to learn all about the software's features, simply read on.
+If you need more help, or if the reading of these pages puts you off, you may find assistance in the [forum](forum).
 
 
 ## Home screen {#doc_home}
