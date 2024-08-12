@@ -1,4 +1,5 @@
 Bienvenue dans le **Manuel utilisateur** de Polyphone&nbsp;! Pour découvrir rapidement ce que sont les soundfonts et comment les éditer avec Polyphone, il est possible de commencer par des [tutoriels](tutorials/index.md) ou de regarder des vidéos sur <a href="https://www.youtube.com/results?search_query=polyphone+sf2" target="_blank">YouTube</a> (un grand merci aux utilisateurs de Polyphone pour leurs vidéos très utiles). Et si vous souhaitez connaître toutes les fonctionnalités du logiciel, continuez simplement la lecture.
+
 Si vous avez besoin de plus d'aide, ou si la lecture de ces pages vous rebute, vous pouvez trouver de l'aide dans le [forum](forum).
 
 
