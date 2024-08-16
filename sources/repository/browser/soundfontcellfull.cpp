@@ -164,7 +164,7 @@ void SoundfontCellFull::on_labelAuthor_linkActivated(const QString &link)
 int SoundfontCellFull::heightForWidth(int width) const
 {
     float coef = 1.0;
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
     coef = 2; // Don't know why
 #endif
 
