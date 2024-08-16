@@ -13,7 +13,7 @@ Vous aurez également besoin des sources de Polyphone, disponibles <a href="down
 
 Pour pouvoir ouvrir correctement un projet avec Qt Creator, il faut au préalable lui donner la permission de lire tous les fichiers (dans "Sécurité et confidentialité => Accès complet au disque => ajouter "Qt creator.app" qui se trouve dans son répertoire d'installation).
 
-Si certaines des dépendances précédemment fournies ne sont pas à jour ou pas compatibles avec la version de Mac, comme PortAudio par exemple, il faudra aller chercher leurs sources sur internet et les recompiler en autorisant une liaison statique&nbsp;:
+Si certaines des dépendances précédemment fournies ne sont pas à jour ou pas compatibles avec la version de Mac, comme SSL par exemple, il faudra aller chercher leurs sources sur internet et les recompiler en autorisant une liaison statique&nbsp;:
 ```
 configure --enable-static --disable-shared --prefix=...
 make
@@ -33,8 +33,8 @@ Compiler le projet, un bundle :file:`polyphone.app` devrait apparaître dans le 
 Si le chemin du SDK ne peut être résolu, essayez de modifier le fichier :file:`polyphone.pro` pour y faire apparaître ces variables (après avoir ajusté la version de Mac OSX)&nbsp;:
 
 ```
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.11
-QMAKE_MAC_SDK = macosx10.11
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.15
+QMAKE_MAC_SDK = macosx10.15
 ```
 
 ## Compléter le bundle
