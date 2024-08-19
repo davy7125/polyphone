@@ -56,7 +56,6 @@ win32 {
     # Compiler must be MinGW for the option -ffloat-store, required by sfArk
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __WINDOWS_MM__ __WINDOWS_WASAPI__ __WINDOWS_ASIO__ #__WINDOWS_DS__
-    DEFINES -= RT_AUDIO_5_2
     INCLUDEPATH += ../lib_windows/include
     RC_FILE = polyphone.rc
     QMAKE_CXXFLAGS += -ffloat-store
@@ -119,11 +118,10 @@ unix:!macx {
                 install_desktop install_appdata install_mime install_man install_doc
 }
 macx {
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.14
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.15
     QMAKE_MAC_SDK = macosx12.1
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __MACOSX_CORE__ __UNIX_JACK__ TARGET_OS_IPHONE=0
-    DEFINES -= RT_AUDIO_5_2
     INCLUDEPATH += ../lib_mac/Jackmp.framework/Headers \
         ../lib_mac/include
     LIBS += -L$$PWD/../lib_mac -logg -lFLAC -lvorbis -lssl -lcrypto -F$$PWD/../lib_mac/ -framework Jackmp \
@@ -137,6 +135,7 @@ DEFINES += SFTOOLS_NOXML
 
 # Location of RtAudio
 contains(DEFINES, USE_LOCAL_RTAUDIO) {
+    DEFINES -= RT_AUDIO_5_2
     INCLUDEPATH += lib/_option_rtaudio \
         lib/_option_rtaudio/rtaudio/include
     HEADERS += lib/_option_rtaudio/rtaudio/RtAudio.h

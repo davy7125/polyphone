@@ -15,6 +15,7 @@
   				<string>SF3</string>
   				<string>SFZ</string>
   				<string>SFARK</string>
+  				<string>ORGAN</string>
 			</array>
 			<key>CFBundleTypeExtensions</key>
 			<array>
@@ -22,6 +23,7 @@
 				<string>sf3</string>
 				<string>sfz</string>
 				<string>sfArk</string>
+				<string>organ</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Soundfont</string>
@@ -44,11 +46,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-        <string>2.3.1</string>
+        <string>2.4.1</string>
 	<key>CFBundleSignature</key>
 	<string>pphn</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.6</string>
+	<string>10.15</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSServices</key>

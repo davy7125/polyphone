@@ -180,7 +180,7 @@ void AudioDevice::getApiAndDeviceNameFromConfig(QString config, int &api, QStrin
     // Take the default API if the host identifier is not valid
     api = RtAudio::getCompiledApiByName(hostIdentifier.toStdString());
     if (api == RtAudio::UNSPECIFIED)
-#if defined(Q_OS_MACX)
+#if defined(Q_OS_MACOS)
         api = RtAudio::MACOSX_CORE;
 #elif defined(Q_OS_WIN)
         api = RtAudio::WINDOWS_WASAPI;
