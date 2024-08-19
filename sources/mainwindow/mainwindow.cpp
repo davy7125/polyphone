@@ -26,7 +26,7 @@
 #include "ui_mainwindow.h"
 #include "repositorymanager.h"
 #include "usermanager.h"
-#include "windowmanager.h"
+#include "tabmanager.h"
 #include "contextmanager.h"
 #include "soundfontmanager.h"
 #include "dialogchangelog.h"
@@ -48,7 +48,7 @@
 
 const int MainWindow::RESIZE_BORDER_WIDTH = 5;
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(bool playerMode, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainWindow),
     _keyboard(new DialogKeyboard(this)),
@@ -59,6 +59,8 @@ MainWindow::MainWindow(QWidget *parent) :
     /// GUI ///
     ///////////
 
+    if (playerMode)
+        ContextManager::s_playerMode = true;
     ui->setupUi(this);
     this->setWindowTitle(tr("Polyphone SoundFont Editor"));
     this->setWindowIcon(QIcon(":/misc/polyphone.png"));
@@ -86,6 +88,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 #ifdef NO_SF2_CREATION
     ui->pushButtonNew->hide();
+#else
+    // Can still be hidden with the player mode
+    if (playerMode)
+        ui->pushButtonNew->hide();
 #endif
 
     // Window state
@@ -120,11 +126,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Window manager
     ui->stackedWidget->setControls(ui->pushHome, ui->tabBar);
-    _windowManager = WindowManager::getInstance(ui->stackedWidget);
+    _windowManager = TabManager::prepareInstance(ui->stackedWidget);
     connect(ui->widgetShowSoundfonts, SIGNAL(itemClicked(SoundfontFilter*)), _windowManager, SLOT(openRepository(SoundfontFilter*)));
     connect(_windowManager, SIGNAL(keyboardDisplayChanged(bool)), this, SLOT(onKeyboardDisplayChange(bool)));
     connect(_windowManager, SIGNAL(recorderDisplayChanged(bool)), this, SLOT(onRecorderDisplayChange(bool)));
-    connect(_windowManager, SIGNAL(editorOpen(bool)), ui->topRightWidget, SLOT(onEditorOpen(bool)));
+    connect(_windowManager, SIGNAL(tabOpen(bool)), ui->topRightWidget, SLOT(onTabOpen(bool)));
 
 #ifdef NO_SF2_REPOSITORY
     ui->widgetRepo->hide();
@@ -168,7 +174,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete _recorder;
-    WindowManager::kill();
+    TabManager::kill();
     _windowManager = nullptr;
     delete _keyboard;
     SoundfontManager::kill();
@@ -204,7 +210,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
         }
     }
 
-    if (!fileNames.empty())
+    if (!fileNames.empty() && !ContextManager::s_playerMode)
     {
         QMessageBox msgBox(this);
         msgBox.setIcon(QMessageBox::Warning);
@@ -290,7 +296,7 @@ void MainWindow::on_pushButtonSoundfonts_clicked()
 
 void MainWindow::on_pushButtonOpen_clicked()
 {
-    // Ouverture de fichiers
+    // Open files
     QStringList strList = QFileDialog::getOpenFileNames(this, tr("Opening files"),
                                                         ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SOUNDFONT),
                                                         InputFactory::getFileFilter());
@@ -304,7 +310,6 @@ void MainWindow::on_pushButtonNew_clicked()
 
 void MainWindow::openFiles(QString fileNames)
 {
-    // Open all files
     QStringList files = fileNames.split('|', Qt::SkipEmptyParts);
     foreach (QString file, files)
         _windowManager->openSoundfont(file);

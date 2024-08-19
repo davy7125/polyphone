@@ -22,53 +22,32 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef MAINMENU_H
-#define MAINMENU_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
-#include <QMenu>
-class AbstractTool;
+#include "tab.h"
+class AbstractInputParser;
 
-class MainMenu : public QMenu
+namespace Ui {
+class Player;
+}
+
+class Player : public Tab
 {
     Q_OBJECT
 
 public:
-    MainMenu(QWidget *parent = nullptr);
-    ~MainMenu();
-    void setFullScreen(bool isOn);
+    explicit Player(QWidget *parent = nullptr);
+    ~Player();
 
-public slots:
-    void onTabOpen(bool isOpen);
-
-signals:
-    void openClicked();
-    void newClicked();
-    void openSettingsClicked();
-    void onlineHelpClicked();
-    void aboutClicked();
-    void closeFileClicked();
-    void closeClicked();
-    void fullScreenTriggered();
-    void save();
-    void saveAs();
-
-private slots:
-    void onExport();
+protected:
+    void tabInitializing(QString filename) override;
+    void tabInError(QString errorMessage) override;
+    void tabInitialized(int indexSf2) override;
+    void tabUpdate(QString editingSource) override;
 
 private:
-    QAction * _newAction;
-    QAction * _openAction;
-    QAction * _saveAction;
-    QAction * _saveAsAction;
-    QAction * _exportAction;
-    QAction * _fullScreenAction;
-    QAction * _settingsAction;
-    QAction * _helpAction;
-    QAction * _aboutAction;
-    QAction * _closeFileAction;
-    QAction * _closeAction;
-
-    AbstractTool * _toolExport;
+    Ui::Player *ui;
 };
 
-#endif // MAINMENU_H
+#endif // PLAYER_H

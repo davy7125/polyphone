@@ -26,7 +26,7 @@
 #include "ui_downloadprogresscell.h"
 #include "contextmanager.h"
 #include "downloadmanager.h"
-#include "windowmanager.h"
+#include "tabmanager.h"
 #include "inputfactory.h"
 #include <QFileInfo>
 #include <QDesktopServices>
@@ -76,7 +76,7 @@ void DownloadProgressCell::mousePressEvent(QMouseEvent *event)
     {
         // Is it possible to open the file?
         if (InputFactory::isSuffixSupported(QFileInfo(_filename).suffix()))
-            WindowManager::getInstance()->openSoundfont(_filename);
+            TabManager::getInstance()->openSoundfont(_filename);
         else
         {
             if (!QDesktopServices::openUrl(QUrl(_filename, QUrl::TolerantMode)))

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>627</width>
-    <height>228</height>
+    <height>367</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -220,7 +220,7 @@
           <item row="0" column="0" rowspan="4">
            <widget class="Line" name="line">
             <property name="orientation">
-             <enum>Qt::Vertical</enum>
+             <enum>Qt::Orientation::Vertical</enum>
             </property>
            </widget>
           </item>
@@ -267,7 +267,7 @@
           <string>History</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
          </property>
         </widget>
        </item>

@@ -7,7 +7,7 @@
 # Use local copies of RtAudio, RtMidi, and Stk libraries
 # (this is forced to true for Windows or Mac OS X)
 # Uncomment a line if your distribution doesn't come with some of the following libraries
-#DEFINES += USE_LOCAL_RTAUDIO
+DEFINES += USE_LOCAL_RTAUDIO
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
 
@@ -15,7 +15,7 @@
 #DEFINES += USE_WOLFSSL
 
 # Uncomment this line to be compatible with RtAudio version 5.2 (instead of 6)
-DEFINES += RT_AUDIO_5_2
+#DEFINES += RT_AUDIO_5_2
 
 # Uncomment lines for hiding features
 #DEFINES += NO_SF2_REPOSITORY
@@ -213,6 +213,7 @@ INCLUDEPATH += lib \
     repository/soundfont/editor \
     lib/qtsingleapplication \
     extensions \
+    player \
     .
 
 SOURCES	+= main.cpp \
@@ -318,7 +319,10 @@ SOURCES	+= main.cpp \
     mainwindow/mainstackedwidget.cpp \
     mainwindow/maintabbar.cpp \
     mainwindow/maintabbarelement.cpp \
+    mainwindow/tab.cpp \
+    mainwindow/tabmanager.cpp \
     mainwindow/topbackground.cpp \
+    player/player.cpp \
     repository/browser/browsersortmenu.cpp \
     repository/widgets/customtextedit.cpp \
     repository/soundfont/editor/editordialoginsertlink.cpp \
@@ -341,7 +345,6 @@ SOURCES	+= main.cpp \
     mainwindow/widgetshowhistory.cpp \
     mainwindow/widgetshowhistorycell.cpp \
     mainwindow/mainwindow.cpp \
-    mainwindow/windowmanager.cpp \
     repository/urlreader.cpp \
     repository/urlreaderjson.cpp \
     repository/repositorymanager.cpp \
@@ -675,7 +678,10 @@ HEADERS += \
     mainwindow/mainstackedwidget.h \
     mainwindow/maintabbar.h \
     mainwindow/maintabbarelement.h \
+    mainwindow/tab.h \
+    mainwindow/tabmanager.h \
     mainwindow/topbackground.h \
+    player/player.h \
     repository/browser/browsersortmenu.h \
     repository/widgets/customtextedit.h \
     repository/soundfont/editor/editordialoginsertlink.h \
@@ -699,7 +705,6 @@ HEADERS += \
     mainwindow/widgetshowhistory.h \
     mainwindow/widgetshowhistorycell.h \
     mainwindow/mainwindow.h \
-    mainwindow/windowmanager.h \
     repository/urlreader.h \
     repository/urlreaderjson.h \
     repository/repositorymanager.h \
@@ -957,6 +962,7 @@ FORMS += \
     mainwindow/widgetshowhistory.ui \
     mainwindow/widgetshowhistorycell.ui \
     mainwindow/mainwindow.ui \
+    player/player.ui \
     repository/browser/browsersortmenu.ui \
     repository/browser/soundfontbrowser.ui \
     repository/browser/filtertag.ui \

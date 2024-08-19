@@ -101,9 +101,9 @@ TopRightWidget::~TopRightWidget()
     delete ui;
 }
 
-void TopRightWidget::onEditorOpen(bool isOpen)
+void TopRightWidget::onTabOpen(bool isOpen)
 {
-    _menu->onEditorOpen(isOpen);
+    _menu->onTabOpen(isOpen);
 }
 
 void TopRightWidget::userStateChanged(UserManager::ConnectionState state)

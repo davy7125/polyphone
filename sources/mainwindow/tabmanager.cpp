@@ -22,7 +22,7 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "windowmanager.h"
+#include "tabmanager.h"
 #include "contextmanager.h"
 #include "configpanel.h"
 #include "soundfontbrowser.h"
@@ -31,6 +31,7 @@
 #include "soundfontfilter.h"
 #include "soundfontviewer.h"
 #include "editor.h"
+#include "player.h"
 #include "userarea.h"
 #include "inputfactory.h"
 #include "outputfactory.h"
@@ -42,22 +43,27 @@
 #include <QAbstractButton>
 #include <QApplication>
 
-WindowManager * WindowManager::s_instance = nullptr;
+TabManager * TabManager::s_instance = nullptr;
 
-WindowManager * WindowManager::getInstance(MainStackedWidget * stackedWidget)
+TabManager * TabManager::prepareInstance(MainStackedWidget * stackedWidget)
 {
-    if (s_instance == nullptr)
-        s_instance = new WindowManager(stackedWidget);
+    delete s_instance;
+    s_instance = new TabManager(stackedWidget);
     return s_instance;
 }
 
-void WindowManager::kill()
+TabManager * TabManager::getInstance()
+{
+    return s_instance;
+}
+
+void TabManager::kill()
 {
     delete s_instance;
     s_instance = nullptr;
 }
 
-WindowManager::WindowManager(MainStackedWidget * stackedWidget) : QObject(nullptr),
+TabManager::TabManager(MainStackedWidget * stackedWidget) : QObject(nullptr),
     _stackedWidget(stackedWidget),
     _configTab(new ConfigPanel()),
     _browserTab(new SoundfontBrowser()),
@@ -69,7 +75,7 @@ WindowManager::WindowManager(MainStackedWidget * stackedWidget) : QObject(nullpt
     connect(_stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(onTabIndexChanged(int)));
 }
 
-WindowManager::~WindowManager()
+TabManager::~TabManager()
 {
     delete _configTab;
     delete _browserTab;
@@ -80,13 +86,13 @@ WindowManager::~WindowManager()
         _stackedWidget->removeWidgetWithTab(widget);
     }
     QApplication::processEvents();
-    while (!_editors.isEmpty())
-        delete _editors.takeFirst();
+    while (!_tabs.isEmpty())
+        delete _tabs.takeFirst();
     while (!_viewers.isEmpty())
         delete _viewers.takeFirst();
 }
 
-void WindowManager::openConfiguration()
+void TabManager::openConfiguration()
 {
     _configTab->initializeInterface();
     int index = _stackedWidget->indexOf(_configTab);
@@ -95,7 +101,7 @@ void WindowManager::openConfiguration()
     _stackedWidget->setCurrentIndex(index);
 }
 
-void WindowManager::openNewSoundfont()
+void TabManager::openNewSoundfont()
 {
     // Create a new editor
     Editor * editor = new Editor();
@@ -104,14 +110,14 @@ void WindowManager::openNewSoundfont()
     connect(editor, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
     connect(editor, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
     connect(editor, SIGNAL(recorderDisplayChanged(bool)), this, SIGNAL(recorderDisplayChanged(bool)));
-    _editors << editor;
+    _tabs << editor;
 
     // Initialize and display it
     editor->initialize(InputFactory::getInput(""));
     _stackedWidget->setCurrentIndex(index);
 }
 
-void WindowManager::openSoundfont(QString fileName)
+void TabManager::openSoundfont(QString fileName)
 {
     fileName = Utils::fixFilePath(fileName);
 
@@ -122,7 +128,6 @@ void WindowManager::openSoundfont(QString fileName)
                              tr("Cannot open file \"%1\"").arg(fileName));
         return;
     }
-
     ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, fileName);
 
     // Check if the file is not already open?
@@ -138,35 +143,35 @@ void WindowManager::openSoundfont(QString fileName)
         }
     }
 
-    // Find the corresponding editor if the file is already open
+    // Find the corresponding editor or player if the file is already open
     if (indexSf2 != -1)
     {
-        foreach (Editor * editor, _editors)
+        foreach (Tab * tab, _tabs)
         {
-            if (editor->getSf2Index() == indexSf2)
+            if (tab->getSf2Index() == indexSf2)
             {
-                int index = _stackedWidget->indexOf(editor);
+                int index = _stackedWidget->indexOf(tab);
                 _stackedWidget->setCurrentIndex(index);
                 return;
             }
         }
     }
 
-    // Otherwise, create a new editor
-    Editor * editor = new Editor();
-    int index = _stackedWidget->addWidgetWithTab(editor, ":/icons/file-audio.svg", QFileInfo(fileName).fileName(), true);
-    connect(editor, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
-    connect(editor, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
-    connect(editor, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
-    connect(editor, SIGNAL(recorderDisplayChanged(bool)), this, SIGNAL(recorderDisplayChanged(bool)));
-    _editors << editor;
+    // Otherwise, create a new editor or player
+    Tab * tab = ContextManager::s_playerMode ? (Tab *)(new Player()) : (Tab *)(new Editor());
+    int index = _stackedWidget->addWidgetWithTab(tab, ":/icons/file-audio.svg", QFileInfo(fileName).fileName(), !ContextManager::s_playerMode);
+    connect(tab, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
+    connect(tab, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
+    connect(tab, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
+    connect(tab, SIGNAL(recorderDisplayChanged(bool)), this, SIGNAL(recorderDisplayChanged(bool)));
+    _tabs << tab;
 
     // Initialize and display it
     _stackedWidget->setCurrentIndex(index);
-    editor->initialize(InputFactory::getInput(fileName));
+    tab->initialize(InputFactory::getInput(fileName));
 }
 
-void WindowManager::openRepository(SoundfontFilter *filter)
+void TabManager::openRepository(SoundfontFilter *filter)
 {
     if (filter)
     {
@@ -179,36 +184,36 @@ void WindowManager::openRepository(SoundfontFilter *filter)
     _stackedWidget->setCurrentIndex(index);
 }
 
-void WindowManager::editingDone(QString source, QList<int> sf2Indexes)
+void TabManager::editingDone(QString source, QList<int> sf2Indexes)
 {
     // Update all editing pages related to one of the edited sf2
-    foreach (Editor* editor, _editors)
-        if (sf2Indexes.contains(editor->getSf2Index()))
-            editor->update(source);
+    foreach (Tab * tab, _tabs)
+        if (sf2Indexes.contains(tab->getSf2Index()))
+            tab->update(source);
 }
 
-void WindowManager::onTabTitleChanged(QString title)
+void TabManager::onTabTitleChanged(QString title)
 {
-    _stackedWidget->setWidgetLabel(dynamic_cast<Editor*>(QObject::sender()), title);
+    _stackedWidget->setWidgetLabel(dynamic_cast<Tab *>(QObject::sender()), title);
 }
 
-void WindowManager::onFilePathChanged(QString filePath)
+void TabManager::onFilePathChanged(QString filePath)
 {
-    _stackedWidget->setWidgetToolTip(dynamic_cast<Editor*>(QObject::sender()), filePath);
+    _stackedWidget->setWidgetToolTip(dynamic_cast<Tab *>(QObject::sender()), filePath);
 }
 
-void WindowManager::onTabCloseRequested(QWidget * widget)
+void TabManager::onTabCloseRequested(QWidget * widget)
 {
     SoundfontManager * sf2 = SoundfontManager::getInstance();
-    if (_editors.contains(dynamic_cast<Editor*>(widget)))
+    if (_tabs.contains(dynamic_cast<Tab *>(widget)))
     {
         // Close a soundfont
-        Editor * editor = dynamic_cast<Editor*>(widget);
-        editor->setFocus();
+        Tab * tab = dynamic_cast<Tab *>(widget);
+        tab->setFocus();
 
         int ret;
-        EltID id(elementSf2, editor->getSf2Index());
-        if (sf2->isEdited(id.indexSf2))
+        EltID id(elementSf2, tab->getSf2Index());
+        if (sf2->isEdited(id.indexSf2) && !ContextManager::s_playerMode)
         {
             QMessageBox msgBox(_stackedWidget);
             msgBox.setIcon(QMessageBox::Warning);
@@ -243,10 +248,10 @@ void WindowManager::onTabCloseRequested(QWidget * widget)
             break;
         }
 
-        // Delete the editor
-        _editors.removeAll(editor);
+        // Delete the tab
+        _tabs.removeAll(tab);
         _stackedWidget->removeWidgetWithTab(widget);
-        delete editor;
+        delete tab;
 
         // Mute all sounds produced by the soundfont, if any
         ContextManager::audio()->getSynth()->play(id, -2, -2, 0);
@@ -255,7 +260,7 @@ void WindowManager::onTabCloseRequested(QWidget * widget)
         if (id.indexSf2 >= 0)
             sf2->remove(id);
 
-        if (_editors.empty())
+        if (_tabs.empty())
         {
             emit(recorderDisplayChanged(false));
             emit(keyboardDisplayChanged(false));
@@ -286,29 +291,29 @@ void WindowManager::onTabCloseRequested(QWidget * widget)
     }
 }
 
-int WindowManager::getCurrentSf2()
+int TabManager::getCurrentSf2()
 {
     QWidget * widget = _stackedWidget->currentWidget();
-    if (_editors.contains(dynamic_cast<Editor*>(widget)))
+    if (_tabs.contains(dynamic_cast<Tab *>(widget)))
     {
-        Editor * editor = dynamic_cast<Editor*>(widget);
-        return editor->getSf2Index();
+        Tab * tab = dynamic_cast<Tab *>(widget);
+        return tab->getSf2Index();
     }
     return -1;
 }
 
-void WindowManager::closeCurrentTab()
+void TabManager::closeCurrentTab()
 {
     this->onTabCloseRequested(_stackedWidget->currentWidget());
 }
 
-void WindowManager::onTabIndexChanged(int tabIndex)
+void TabManager::onTabIndexChanged(int tabIndex)
 {
     QWidget * widget = _stackedWidget->widget(tabIndex);
-    emit(editorOpen(_editors.contains(dynamic_cast<Editor*>(widget))));
+    emit(tabOpen(_tabs.contains(dynamic_cast<Tab*>(widget))));
 }
 
-void WindowManager::openUser()
+void TabManager::openUser()
 {
     _userTab->initializeInterface();
     int index = _stackedWidget->indexOf(_userTab);
@@ -317,7 +322,7 @@ void WindowManager::openUser()
     _stackedWidget->setCurrentIndex(index);
 }
 
-void WindowManager::openRepositorySoundfont(int id)
+void TabManager::openRepositorySoundfont(int id)
 {
     // Find the corresponding viewer if the file is already open
     foreach (SoundfontViewer * viewer, _viewers)

@@ -25,7 +25,7 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
-#include <QWidget>
+#include "tab.h"
 #include "basetypes.h"
 
 class PageSelector;
@@ -35,7 +35,7 @@ namespace Ui {
 class Editor;
 }
 
-class Editor : public QWidget
+class Editor : public Tab
 {
     Q_OBJECT
 
@@ -43,26 +43,14 @@ public:
     explicit Editor(QWidget *parent = nullptr);
     ~Editor() override;
 
-    /// Initialize the editor with a parser that can extract data and build a soundfont
-    void initialize(AbstractInputParser * input);
-
-    /// Index of the soundfont created
-    int getSf2Index() { return _sf2Index; }
-
-    /// Notify that a change has been made somewhere
-    void update(QString editingSource);
-
 protected:
     void showEvent(QShowEvent* event) override;
-
-signals:
-    void tabTitleChanged(QString title);
-    void filePathChanged(QString filePath);
-    void recorderDisplayChanged(bool isDisplayed);
-    void keyboardDisplayChanged(bool isDisplayed);
+    void tabInitializing(QString filename) override;
+    void tabInError(QString errorMessage) override;
+    void tabInitialized(int indexSf2) override;
+    void tabUpdate(QString editingSource) override;
 
 private slots:
-    void inputProcessed();
     void onSelectionChanged(IdList ids);
     void displayOptionChanged(int displayOption);
     void onKeyPlayed(int key, int vel);
@@ -71,11 +59,9 @@ private slots:
     void onErrorEncountered(QString text);
 
 private:
-    void updateTitleAndPath();
     QVector<bool> getEnabledKeysForInstrument(EltID idInst);
 
     Ui::Editor *ui;
-    int _sf2Index;
     PageSelector * _pageSelector;
     ElementType _currentElementType;
     IdList _currentIds;

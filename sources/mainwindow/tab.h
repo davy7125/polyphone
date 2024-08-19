@@ -22,53 +22,47 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef MAINMENU_H
-#define MAINMENU_H
+#ifndef TAB_H
+#define TAB_H
 
-#include <QMenu>
-class AbstractTool;
+#include <QWidget>
+class AbstractInputParser;
 
-class MainMenu : public QMenu
+class Tab : public QWidget
 {
     Q_OBJECT
 
 public:
-    MainMenu(QWidget *parent = nullptr);
-    ~MainMenu();
-    void setFullScreen(bool isOn);
+    explicit Tab(QWidget *parent = nullptr);
+    ~Tab();
 
-public slots:
-    void onTabOpen(bool isOpen);
+    /// Initialize the tab with a parser that can extract data and build a soundfont
+    void initialize(AbstractInputParser * input);
+
+    /// Index of the soundfont created
+    int getSf2Index() { return _sf2Index; }
+
+    /// Notify that a change has been made somewhere
+    void update(QString editingSource);
 
 signals:
-    void openClicked();
-    void newClicked();
-    void openSettingsClicked();
-    void onlineHelpClicked();
-    void aboutClicked();
-    void closeFileClicked();
-    void closeClicked();
-    void fullScreenTriggered();
-    void save();
-    void saveAs();
+    void tabTitleChanged(QString title);
+    void filePathChanged(QString filePath);
+    void recorderDisplayChanged(bool isDisplayed);
+    void keyboardDisplayChanged(bool isDisplayed);
+
+protected:
+    virtual void tabInitializing(QString filename) = 0;
+    virtual void tabInError(QString errorMessage) = 0;
+    virtual void tabInitialized(int indexSf2) = 0;
+    virtual void tabUpdate(QString editingSource) = 0;
 
 private slots:
-    void onExport();
+    void inputProcessed();
 
 private:
-    QAction * _newAction;
-    QAction * _openAction;
-    QAction * _saveAction;
-    QAction * _saveAsAction;
-    QAction * _exportAction;
-    QAction * _fullScreenAction;
-    QAction * _settingsAction;
-    QAction * _helpAction;
-    QAction * _aboutAction;
-    QAction * _closeFileAction;
-    QAction * _closeAction;
-
-    AbstractTool * _toolExport;
+    void updateTitleAndPath();
+    int _sf2Index;
 };
 
-#endif // MAINMENU_H
+#endif // TAB_H

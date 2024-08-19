@@ -43,7 +43,7 @@ public:
     ~TopRightWidget();
 
 public slots:
-    void onEditorOpen(bool isOpen);
+    void onTabOpen(bool isOpen);
 
 signals:
     void openClicked();

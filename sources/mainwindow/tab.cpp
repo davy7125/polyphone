@@ -22,53 +22,63 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef MAINMENU_H
-#define MAINMENU_H
+#include "tab.h"
+#include "abstractinputparser.h"
+#include "soundfontmanager.h"
+#include "contextmanager.h"
 
-#include <QMenu>
-class AbstractTool;
-
-class MainMenu : public QMenu
+Tab::Tab(QWidget *parent) : QWidget(parent),
+    _sf2Index(-1)
 {
-    Q_OBJECT
 
-public:
-    MainMenu(QWidget *parent = nullptr);
-    ~MainMenu();
-    void setFullScreen(bool isOn);
+}
 
-public slots:
-    void onTabOpen(bool isOpen);
+Tab::~Tab() {}
 
-signals:
-    void openClicked();
-    void newClicked();
-    void openSettingsClicked();
-    void onlineHelpClicked();
-    void aboutClicked();
-    void closeFileClicked();
-    void closeClicked();
-    void fullScreenTriggered();
-    void save();
-    void saveAs();
+void Tab::initialize(AbstractInputParser * input)
+{
+    tabInitializing(input->getFileName());
+    connect(input, SIGNAL(finished()), this, SLOT(inputProcessed()));
+    input->process(true);
+}
 
-private slots:
-    void onExport();
+void Tab::inputProcessed()
+{
+    // Get information from the input
+    AbstractInputParser * input = dynamic_cast<AbstractInputParser *>(QObject::sender());
+    if (input->isSuccess())
+    {
+        // Index of the opened soundfont
+        _sf2Index = input->getSf2Index();
+        tabInitialized(_sf2Index);
 
-private:
-    QAction * _newAction;
-    QAction * _openAction;
-    QAction * _saveAction;
-    QAction * _saveAsAction;
-    QAction * _exportAction;
-    QAction * _fullScreenAction;
-    QAction * _settingsAction;
-    QAction * _helpAction;
-    QAction * _aboutAction;
-    QAction * _closeFileAction;
-    QAction * _closeAction;
+        // Tab title and filepath
+        updateTitleAndPath();
+    }
+    else
+        tabInError(input->getError());
 
-    AbstractTool * _toolExport;
-};
+    delete input;
+}
 
-#endif // MAINMENU_H
+void Tab::update(QString editingSource)
+{
+    tabUpdate(editingSource);
+    updateTitleAndPath();
+}
+
+void Tab::updateTitleAndPath()
+{
+    // Title
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    QString title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_name);
+    if (title.isEmpty())
+        title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial).split(QRegularExpression("(/|\\\\)")).last();
+    if (title.isEmpty())
+        title = tr("Untitled");
+
+    emit(tabTitleChanged((sm->isEdited(_sf2Index) && !ContextManager::s_playerMode ? "*" : "") + title));
+
+    // Path
+    emit(filePathChanged(sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial)));
+}

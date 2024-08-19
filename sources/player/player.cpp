@@ -22,53 +22,49 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef MAINMENU_H
-#define MAINMENU_H
+#include "player.h"
+#include "ui_player.h"
+#include "contextmanager.h"
+#include "soundfontmanager.h"
 
-#include <QMenu>
-class AbstractTool;
-
-class MainMenu : public QMenu
+Player::Player(QWidget *parent) : Tab(parent),
+    ui(new Ui::Player)
 {
-    Q_OBJECT
+    ui->setupUi(this);
+}
 
-public:
-    MainMenu(QWidget *parent = nullptr);
-    ~MainMenu();
-    void setFullScreen(bool isOn);
+Player::~Player()
+{
+    delete ui;
+}
 
-public slots:
-    void onTabOpen(bool isOpen);
+void Player::tabInitializing(QString filename)
+{
+    ui->rotatingSpinner->startAnimation();
+}
 
-signals:
-    void openClicked();
-    void newClicked();
-    void openSettingsClicked();
-    void onlineHelpClicked();
-    void aboutClicked();
-    void closeFileClicked();
-    void closeClicked();
-    void fullScreenTriggered();
-    void save();
-    void saveAs();
+void Player::tabInError(QString errorMessage)
+{
+    // Display the error
+    ui->labelReason->setText(errorMessage);
+    ui->stackedMain->setCurrentWidget(ui->pageError);
+}
 
-private slots:
-    void onExport();
+void Player::tabInitialized(int indexSf2)
+{
+    // Prepare the list
+    QAbstractItemModel * model = SoundfontManager::getInstance()->getModel(indexSf2);
+    // TreeSortFilterProxy * proxy = new TreeSortFilterProxy(indexSf2, ui->treeView, model);
+    // connect(ui->editFilter, SIGNAL(textChanged(QString)), proxy, SLOT(filterChanged(QString)));
+    // connect(model, SIGNAL(saveExpandedState()), ui->treeView, SLOT(saveExpandedState()));
+    // connect(model, SIGNAL(restoreExpandedState()), ui->treeView, SLOT(restoreExpandedState()));
 
-private:
-    QAction * _newAction;
-    QAction * _openAction;
-    QAction * _saveAction;
-    QAction * _saveAsAction;
-    QAction * _exportAction;
-    QAction * _fullScreenAction;
-    QAction * _settingsAction;
-    QAction * _helpAction;
-    QAction * _aboutAction;
-    QAction * _closeFileAction;
-    QAction * _closeAction;
+    // Display the player controls
+    ui->stackedMain->setCurrentWidget(ui->pagePlay);
+}
 
-    AbstractTool * _toolExport;
-};
-
-#endif // MAINMENU_H
+void Player::tabUpdate(QString editingSource)
+{
+    // No editing in this mode
+    Q_UNUSED(editingSource)
+}

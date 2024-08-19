@@ -110,6 +110,9 @@ void Options::processType1(QString arg)
     case 'r':
         _mode = MODE_RESET_CONFIG;
         break;
+    case 'p':
+        _mode = MODE_PLAYER;
+        break;
     default:
         _error = true;
         break;
@@ -196,7 +199,7 @@ void Options::checkErrors()
     case MODE_RESET_CONFIG:
         _error = false;
         break;
-    case MODE_GUI:
+    case MODE_GUI: case MODE_PLAYER:
         if (_outputDirectory != "" || _outputFile != "")
             _error = true;
         break;
@@ -209,7 +212,7 @@ void Options::checkErrors()
 
 void Options::postTreatment()
 {
-    if (_mode > MODE_GUI)
+    if (_mode == MODE_CONVERSION_TO_SF2 || _mode == MODE_CONVERSION_TO_SF3 || _mode == MODE_CONVERSION_TO_SFZ)
     {
         // By default, the output directory is the same than the input file directory
         if (_outputDirectory == "")

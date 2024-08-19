@@ -26,6 +26,7 @@
 #include "synth.h"
 
 ContextManager * ContextManager::s_instance = nullptr;
+bool ContextManager::s_playerMode = false;
 
 void ContextManager::initializeNoAudioMidi()
 {

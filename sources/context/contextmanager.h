@@ -64,6 +64,9 @@ public:
     // FINALLY, kill everything that has been built
     static void kill();
 
+    // Polyphone open mode
+    static bool s_playerMode;
+
 private slots:
     void updateSynthConfiguration();
 

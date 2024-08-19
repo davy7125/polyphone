@@ -22,24 +22,25 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef WINDOWMANAGER_H
-#define WINDOWMANAGER_H
+#ifndef TABMANAGER_H
+#define TABMANAGER_H
 
 #include <QObject>
 class MainStackedWidget;
 class ConfigPanel;
 class SoundfontFilter;
 class SoundfontBrowser;
-class Editor;
+class Tab;
 class UserArea;
 class SoundfontViewer;
 
-class WindowManager : public QObject
+class TabManager : public QObject
 {
     Q_OBJECT
 
 public:
-    static WindowManager * getInstance(MainStackedWidget * stackedWidget = nullptr);
+    static TabManager * prepareInstance(MainStackedWidget * stackedWidget = nullptr);
+    static TabManager * getInstance();
     static void kill();
 
 public slots:
@@ -64,7 +65,7 @@ public slots:
     /// The function is called when pages have to be updated
     void editingDone(QString source, QList<int> sf2Indexes);
 
-    /// Get the current sf2 if an editor is displayed, or -1
+    /// Get the current sf2 if an editor or player is displayed, or -1
     int getCurrentSf2();
 
     /// Close the current tab
@@ -78,7 +79,7 @@ signals:
     void keyboardDisplayChanged(bool isDisplayed);
 
     /// Emitted when the current tab changed
-    void editorOpen(bool isOpen);
+    void tabOpen(bool isOpen);
 
 private slots:
     /// Called when the name or the filepath of a soundfont changed
@@ -92,17 +93,17 @@ private slots:
     void onTabIndexChanged(int tabIndex);
 
 private:
-    explicit WindowManager(MainStackedWidget * stackedWidget);
-    ~WindowManager();
+    explicit TabManager(MainStackedWidget * stackedWidget);
+    ~TabManager();
 
     MainStackedWidget * _stackedWidget;
     ConfigPanel * _configTab;
     SoundfontBrowser * _browserTab;
     UserArea * _userTab;
-    QList<Editor*> _editors;
+    QList<Tab*> _tabs;
     QList<SoundfontViewer*> _viewers;
 
-    static WindowManager * s_instance;
+    static TabManager * s_instance;
 };
 
-#endif // WINDOWMANAGER_H
+#endif // TABMANAGER_H

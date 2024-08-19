@@ -27,6 +27,17 @@
 #include "soundfont_export/toolsoundfontexport.h"
 
 MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
+    _newAction(nullptr),
+    _openAction(nullptr),
+    _saveAction(nullptr),
+    _saveAsAction(nullptr),
+    _exportAction(nullptr),
+    _fullScreenAction(nullptr),
+    _settingsAction(nullptr),
+    _helpAction(nullptr),
+    _aboutAction(nullptr),
+    _closeFileAction(nullptr),
+    _closeAction(nullptr),
     _toolExport(new ToolSoundfontExport())
 {
     // Style
@@ -34,11 +45,15 @@ MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
 
     // Elements
 #ifndef NO_SF2_CREATION
-    _newAction = new QAction(tr("&New"), this);
-    _newAction->setShortcut(QString("Ctrl+N"));
-    connect(_newAction, SIGNAL(triggered()), this, SIGNAL(newClicked()));
-    this->addAction(_newAction);
+    if (!ContextManager::s_playerMode)
+    {
+        _newAction = new QAction(tr("&New"), this);
+        _newAction->setShortcut(QString("Ctrl+N"));
+        connect(_newAction, SIGNAL(triggered()), this, SIGNAL(newClicked()));
+        this->addAction(_newAction);
+    }
 #endif
+
     _openAction = new QAction(tr("&Open..."), this);
     _openAction->setShortcut(QString("Ctrl+O"));
     connect(_openAction, SIGNAL(triggered()), this, SIGNAL(openClicked()));
@@ -46,22 +61,25 @@ MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
 
     this->addSeparator();
 
-    _saveAction = new QAction(tr("&Save"), this);
-    _saveAction->setShortcut(QString("Ctrl+S"));
-    connect(_saveAction, SIGNAL(triggered()), this, SIGNAL(save()));
-    this->addAction(_saveAction);
+    if (!ContextManager::s_playerMode)
+    {
+        _saveAction = new QAction(tr("&Save"), this);
+        _saveAction->setShortcut(QString("Ctrl+S"));
+        connect(_saveAction, SIGNAL(triggered()), this, SIGNAL(save()));
+        this->addAction(_saveAction);
 
-    _saveAsAction = new QAction(tr("Save &as..."), this);
-    _saveAsAction->setShortcut(QString("Ctrl+Shift+S"));
-    connect(_saveAsAction, SIGNAL(triggered()), this, SIGNAL(saveAs()));
-    this->addAction(_saveAsAction);
+        _saveAsAction = new QAction(tr("Save &as..."), this);
+        _saveAsAction->setShortcut(QString("Ctrl+Shift+S"));
+        connect(_saveAsAction, SIGNAL(triggered()), this, SIGNAL(saveAs()));
+        this->addAction(_saveAsAction);
 
-    _exportAction = new QAction(tr("&Export soundfonts..."), this);
-    _exportAction->setShortcut(QString("Ctrl+E"));
-    connect(_exportAction, SIGNAL(triggered()), this, SLOT(onExport()));
-    this->addAction(_exportAction);
+        _exportAction = new QAction(tr("&Export soundfonts..."), this);
+        _exportAction->setShortcut(QString("Ctrl+E"));
+        connect(_exportAction, SIGNAL(triggered()), this, SLOT(onExport()));
+        this->addAction(_exportAction);
 
-    this->addSeparator();
+        this->addSeparator();
+    }
 
     _fullScreenAction = new QAction(tr("&Full screen"), this);
     _fullScreenAction->setShortcut(Qt::Key_F11);
@@ -97,7 +115,7 @@ MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
     this->addAction(_closeAction);
 
     // Initialize the current sf2
-    onEditorOpen(false);
+    onTabOpen(false);
 }
 
 MainMenu::~MainMenu()
@@ -112,22 +130,16 @@ void MainMenu::setFullScreen(bool isOn)
     _fullScreenAction->blockSignals(false);
 }
 
-void MainMenu::onEditorOpen(bool isOpen)
+void MainMenu::onTabOpen(bool isOpen)
 {
-    if (isOpen)
-    {
-        _saveAction->setEnabled(true);
-        _saveAsAction->setEnabled(true);
-        _closeFileAction->setEnabled(true);
-        _exportAction->setEnabled(true);
-    }
-    else
-    {
-        _saveAction->setEnabled(false);
-        _saveAsAction->setEnabled(false);
-        _closeFileAction->setEnabled(false);
-        _exportAction->setEnabled(false);
-    }
+    if (_saveAction)
+        _saveAction->setEnabled(isOpen);
+    if (_saveAsAction)
+        _saveAsAction->setEnabled(isOpen);
+    if (_closeFileAction)
+        _closeFileAction->setEnabled(isOpen);
+    if (_exportAction)
+        _exportAction->setEnabled(isOpen);
 }
 
 void MainMenu::onExport()

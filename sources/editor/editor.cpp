@@ -36,15 +36,14 @@
 #include "pageselector.h"
 #include "pianokeybdcustom.h"
 
-Editor::Editor(QWidget *parent) : QWidget(parent),
+Editor::Editor(QWidget *parent) : Tab(parent),
     ui(new Ui::Editor),
-    _sf2Index(-1),
     _pageSelector(new PageSelector()),
     _currentElementType(elementUnknown)
 {
     ui->setupUi(this);
 
-    // QSplitter for being able to resize the tree
+    // QSplitter so that the tree is resizable
     TreeSplitter * splitter = new TreeSplitter(this, ui->leftPart, ui->rightPart);
     QVBoxLayout * layout = dynamic_cast<QVBoxLayout *>(this->layout());
     layout->addWidget(splitter);
@@ -120,45 +119,51 @@ Editor::~Editor()
     delete _pageSelector;
 }
 
-void Editor::initialize(AbstractInputParser * input)
+void Editor::tabInitializing(QString filename)
 {
     ui->toolBar->disable();
     ui->rotatingSpinner->startAnimation();
-    ui->labelFileName->setText(input->getFileName());
-    connect(input, SIGNAL(finished()), this, SLOT(inputProcessed()));
-    input->process(true);
+    ui->labelFileName->setText(filename);
 }
 
-void Editor::inputProcessed()
+void Editor::tabInError(QString errorMessage)
 {
-    // Get information from the input
-    AbstractInputParser * input = dynamic_cast<AbstractInputParser *>(QObject::sender());
-    if (input->isSuccess())
+    // Display the error
+    ui->labelReason->setText(errorMessage);
+    ui->stackedMain->setCurrentWidget(ui->pageError);
+}
+
+void Editor::tabInitialized(int indexSf2)
+{
+    // Prepare the tree
+    TreeModel * model = dynamic_cast<TreeModel*>(SoundfontManager::getInstance()->getModel(indexSf2));
+    TreeSortFilterProxy * proxy = new TreeSortFilterProxy(indexSf2, ui->treeView, model);
+    connect(ui->editFilter, SIGNAL(textChanged(QString)), proxy, SLOT(filterChanged(QString)));
+    connect(model, SIGNAL(saveExpandedState()), ui->treeView, SLOT(saveExpandedState()));
+    connect(model, SIGNAL(restoreExpandedState()), ui->treeView, SLOT(restoreExpandedState()));
+
+    // Prepare the actions
+    ui->toolBar->setSf2Index(indexSf2);
+}
+
+void Editor::tabUpdate(QString editingSource)
+{
+    // State of the toolbar
+    ui->toolBar->updateActions();
+
+    // Update the current page
+    if (ui->stackedMain->currentIndex() > 2)
     {
-        // Index of the opened soundfont
-        _sf2Index = input->getSf2Index();
-
-        // Prepare the tree
-        TreeModel * model = dynamic_cast<TreeModel*>(SoundfontManager::getInstance()->getModel(_sf2Index));
-        TreeSortFilterProxy * proxy = new TreeSortFilterProxy(_sf2Index, ui->treeView, model);
-        connect(ui->editFilter, SIGNAL(textChanged(QString)), proxy, SLOT(filterChanged(QString)));
-        connect(model, SIGNAL(saveExpandedState()), ui->treeView, SLOT(saveExpandedState()));
-        connect(model, SIGNAL(restoreExpandedState()), ui->treeView, SLOT(restoreExpandedState()));
-
-        // Prepare the actions
-        ui->toolBar->setSf2Index(_sf2Index);
-
-        // Tab title and filepath
-        updateTitleAndPath();
+        Page * currentPage = dynamic_cast<Page *>(ui->stackedMain->currentWidget());
+        currentPage->preparePage(editingSource);
     }
-    else
+
+    // Update the footer
+    if (!editingSource.startsWith("footer") && ui->stackedFooter->currentIndex() > 0)
     {
-        // Display the error
-        ui->labelReason->setText(input->getError());
-        ui->stackedMain->setCurrentWidget(ui->pageError);
+        AbstractFooter * absFooter = dynamic_cast<AbstractFooter *>(ui->stackedFooter->currentWidget());
+        absFooter->updateInterface();
     }
-
-    delete input;
 }
 
 void Editor::onSelectionChanged(IdList ids)
@@ -230,45 +235,6 @@ void Editor::onSelectionChanged(IdList ids)
 
     // Update the keyboard
     this->customizeKeyboard();
-}
-
-void Editor::update(QString editingSource)
-{
-    // State of the toolbar
-    ui->toolBar->updateActions();
-
-    // Update the current page
-    if (ui->stackedMain->currentIndex() > 2)
-    {
-        Page * currentPage = dynamic_cast<Page *>(ui->stackedMain->currentWidget());
-        currentPage->preparePage(editingSource);
-    }
-
-    // Update the footer
-    if (!editingSource.startsWith("footer") && ui->stackedFooter->currentIndex() > 0)
-    {
-        AbstractFooter * absFooter = dynamic_cast<AbstractFooter *>(ui->stackedFooter->currentWidget());
-        absFooter->updateInterface();
-    }
-
-    // Tab title and filepath
-    updateTitleAndPath();
-}
-
-void Editor::updateTitleAndPath()
-{
-    // Title
-    SoundfontManager * sm = SoundfontManager::getInstance();
-    QString title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_name);
-    if (title.isEmpty())
-        title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial).split(QRegularExpression("(/|\\\\)")).last();
-    if (title.isEmpty())
-        title = tr("Untitled");
-
-    emit(tabTitleChanged((sm->isEdited(_sf2Index) ? "*" : "") + title));
-
-    // Path
-    emit(filePathChanged(sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial)));
 }
 
 void Editor::displayOptionChanged(int displayOption)

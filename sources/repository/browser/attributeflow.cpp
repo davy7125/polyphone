@@ -25,7 +25,7 @@
 #include "attributeflow.h"
 #include "flowlayout.h"
 #include "repositorymanager.h"
-#include "windowmanager.h"
+#include "tabmanager.h"
 #include "elidedpushbutton.h"
 
 AttributeFlow::AttributeFlow(QWidget *parent) : QWidget(parent)

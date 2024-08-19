@@ -32,7 +32,7 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QFileDialog>
-#include "windowmanager.h"
+#include "tabmanager.h"
 #include "outputfactory.h"
 #include "dialognewelement.h"
 #include "utils.h"
@@ -507,7 +507,7 @@ void EditorToolBar::on_pushSave_clicked()
     // Remove the focus from the interface (so that all changes are taken into account)
     this->setFocus();
 
-    OutputFactory::save(WindowManager::getInstance()->getCurrentSf2(), false);
+    OutputFactory::save(TabManager::getInstance()->getCurrentSf2(), false);
 }
 
 void EditorToolBar::onMidiExtensionActionClicked()

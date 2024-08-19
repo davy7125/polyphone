@@ -31,7 +31,7 @@
 namespace Ui {
 class MainWindow;
 }
-class WindowManager;
+class TabManager;
 class DialogKeyboard;
 class DialogRecorder;
 
@@ -40,7 +40,7 @@ class MainWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(bool playerMode, QWidget *parent = nullptr);
     ~MainWindow();
 
 public slots:
@@ -74,7 +74,7 @@ private:
     static const int RESIZE_BORDER_WIDTH;
 
     Ui::MainWindow * ui;
-    WindowManager * _windowManager;
+    TabManager * _windowManager;
     DialogKeyboard * _keyboard;
     DialogRecorder * _recorder;
     DialogAbout _dialogAbout;
