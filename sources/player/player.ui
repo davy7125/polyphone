@@ -71,7 +71,7 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="TreeView" name="treeView">
+         <widget class="QTreeView" name="treeView">
           <property name="minimumSize">
            <size>
             <width>160</width>
@@ -79,37 +79,34 @@
            </size>
           </property>
           <property name="contextMenuPolicy">
-           <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
+           <enum>Qt::NoContextMenu</enum>
           </property>
           <property name="acceptDrops">
            <bool>true</bool>
           </property>
           <property name="frameShape">
-           <enum>QFrame::Shape::NoFrame</enum>
+           <enum>QFrame::NoFrame</enum>
           </property>
           <property name="horizontalScrollBarPolicy">
-           <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+           <enum>Qt::ScrollBarAsNeeded</enum>
           </property>
           <property name="editTriggers">
-           <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+           <set>QAbstractItemView::NoEditTriggers</set>
           </property>
           <property name="dragEnabled">
            <bool>true</bool>
           </property>
           <property name="dragDropMode">
-           <enum>QAbstractItemView::DragDropMode::DragDrop</enum>
+           <enum>QAbstractItemView::NoDragDrop</enum>
           </property>
           <property name="selectionMode">
-           <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
+           <enum>QAbstractItemView::NoSelection</enum>
           </property>
           <property name="verticalScrollMode">
-           <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
+           <enum>QAbstractItemView::ScrollPerItem</enum>
           </property>
           <property name="indentation">
            <number>0</number>
-          </property>
-          <property name="sortingEnabled">
-           <bool>true</bool>
           </property>
           <property name="headerHidden">
            <bool>true</bool>
@@ -172,7 +169,7 @@
             <item row="3" column="0">
              <spacer name="horizontalSpacer">
               <property name="orientation">
-               <enum>Qt::Orientation::Horizontal</enum>
+               <enum>Qt::Vertical</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -187,15 +184,12 @@
               <property name="text">
                <string>Opening file...</string>
               </property>
-              <property name="alignment">
-               <set>Qt::AlignmentFlag::AlignCenter</set>
-              </property>
              </widget>
             </item>
             <item row="0" column="1">
              <spacer name="verticalSpacer">
               <property name="orientation">
-               <enum>Qt::Orientation::Vertical</enum>
+               <enum>Qt::Vertical</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -208,7 +202,7 @@
             <item row="3" column="2">
              <spacer name="horizontalSpacer_2">
               <property name="orientation">
-               <enum>Qt::Orientation::Horizontal</enum>
+               <enum>Qt::Vertical</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -221,7 +215,7 @@
             <item row="4" column="1">
              <spacer name="verticalSpacer_2">
               <property name="orientation">
-               <enum>Qt::Orientation::Vertical</enum>
+               <enum>Qt::Vertical</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -270,7 +264,7 @@
             <item row="1" column="2">
              <spacer name="horizontalSpacer_4">
               <property name="orientation">
-               <enum>Qt::Orientation::Horizontal</enum>
+               <enum>Qt::Vertical</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -283,7 +277,7 @@
             <item row="4" column="1">
              <spacer name="verticalSpacer_4">
               <property name="orientation">
-               <enum>Qt::Orientation::Vertical</enum>
+               <enum>Qt::Vertical</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -303,15 +297,12 @@
               <property name="text">
                <string>Cannot open the file</string>
               </property>
-              <property name="alignment">
-               <set>Qt::AlignmentFlag::AlignCenter</set>
-              </property>
              </widget>
             </item>
             <item row="0" column="1">
              <spacer name="verticalSpacer_3">
               <property name="orientation">
-               <enum>Qt::Orientation::Vertical</enum>
+               <enum>Qt::Vertical</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -324,7 +315,7 @@
             <item row="1" column="0">
              <spacer name="horizontalSpacer_3">
               <property name="orientation">
-               <enum>Qt::Orientation::Horizontal</enum>
+               <enum>Qt::Vertical</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -338,9 +329,6 @@
              <widget class="QLabel" name="labelReason">
               <property name="text">
                <string notr="true">reason</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignmentFlag::AlignCenter</set>
               </property>
              </widget>
             </item>
@@ -377,11 +365,6 @@
    <extends>QWidget</extends>
    <header>rotatingspinner.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>TreeView</class>
-   <extends>QTreeView</extends>
-   <header>treeview.h</header>
   </customwidget>
   <customwidget>
    <class>BackgroundWidget</class>

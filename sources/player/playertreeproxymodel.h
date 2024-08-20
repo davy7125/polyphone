@@ -22,50 +22,33 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "player.h"
-#include "ui_player.h"
-#include "contextmanager.h"
-#include "soundfontmanager.h"
-#include "playertreeproxymodel.h"
+#ifndef PLAYERTREEPROXYMODEL_H
+#define PLAYERTREEPROXYMODEL_H
 
-Player::Player(QWidget *parent) : Tab(parent),
-    ui(new Ui::Player)
+#include <QAbstractProxyModel>
+class QTreeView;
+
+class PlayerTreeProxyModel : public QAbstractProxyModel
 {
-    ui->setupUi(this);
-}
+    Q_OBJECT
 
-Player::~Player()
-{
-    delete ui;
-}
+public:
+    PlayerTreeProxyModel(int indexSf2, QTreeView * treeView, QAbstractItemModel * model);
 
-void Player::tabInitializing(QString filename)
-{
-    Q_UNUSED(filename);
-    ui->rotatingSpinner->startAnimation();
-}
+    int columnCount(const QModelIndex &parent) const override;
+    int rowCount(const QModelIndex &parent) const override;
+    QModelIndex index(int row, int column, const QModelIndex &parent) const override;
+    QModelIndex parent(const QModelIndex &child) const override;
+    QModelIndex mapToSource(const QModelIndex &proxyIndex) const override;
+    QModelIndex mapFromSource(const QModelIndex &sourceIndex) const override;
+    QVariant data(const QModelIndex &proxyIndex, int role = Qt::DisplayRole) const override;
 
-void Player::tabInError(QString errorMessage)
-{
-    // Display the error
-    ui->labelReason->setText(errorMessage);
-    ui->stackedMain->setCurrentWidget(ui->pageError);
-}
+protected:
+    int getPresetId(const QModelIndex &index) const;
 
-void Player::tabInitialized(int indexSf2)
-{
-    // Prepare the list
-    QAbstractItemModel * model = SoundfontManager::getInstance()->getModel(indexSf2);
-    ui->treeView->setModel(model);
-    //ui->treeView->setRootIndex(model->index(3, 0));
-    new PlayerTreeProxyModel(indexSf2, ui->treeView, model);
+    QModelIndex _rootIndex;
+    QMap<quint16, QMap<quint16, int> > _idByBankPreset;
+    QMap<int, QPair<quint16, quint16> > _bankPresetById;
+};
 
-    // Display the player controls
-    ui->stackedMain->setCurrentWidget(ui->pagePlay);
-}
-
-void Player::tabUpdate(QString editingSource)
-{
-    // No editing in this mode
-    Q_UNUSED(editingSource)
-}
+#endif // PLAYERTREEPROXYMODEL_H
