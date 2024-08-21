@@ -445,7 +445,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
         else if (pos.y() >= this->height() - RESIZE_BORDER_WIDTH && pos.y() <= this->height())
             _mousePositionEdges |= Qt::BottomEdge;
 
-        if (_mousePositionEdges.toInt() > 0)
+        if ((int)_mousePositionEdges > 0)
         {
             switch (_mousePositionEdges)
             {

@@ -118,7 +118,7 @@ unix:!macx {
                 install_desktop install_appdata install_mime install_man install_doc
 }
 macx {
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.15
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.13
     QMAKE_MAC_SDK = macosx12.1
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __MACOSX_CORE__ __UNIX_JACK__ TARGET_OS_IPHONE=0
@@ -322,6 +322,7 @@ SOURCES	+= main.cpp \
     mainwindow/tabmanager.cpp \
     mainwindow/topbackground.cpp \
     player/player.cpp \
+    player/playertreeproxymodel.cpp \
     repository/browser/browsersortmenu.cpp \
     repository/widgets/customtextedit.cpp \
     repository/soundfont/editor/editordialoginsertlink.cpp \
@@ -681,6 +682,7 @@ HEADERS += \
     mainwindow/tabmanager.h \
     mainwindow/topbackground.h \
     player/player.h \
+    player/playertreeproxymodel.h \
     repository/browser/browsersortmenu.h \
     repository/widgets/customtextedit.h \
     repository/soundfont/editor/editordialoginsertlink.h \

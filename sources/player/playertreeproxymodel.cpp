@@ -25,14 +25,11 @@
 #include "playertreeproxymodel.h"
 #include <QTreeView>
 #include "basetypes.h"
-#include <QAbstractItemModelTester>
 #include "soundfontmanager.h"
 #include "treeitem.h"
 
 PlayerTreeProxyModel::PlayerTreeProxyModel(int indexSf2, QTreeView *treeView, QAbstractItemModel * model) : QAbstractProxyModel(treeView)
 {
-    new QAbstractItemModelTester(model, QAbstractItemModelTester::FailureReportingMode::Warning, this);
-
     // Get the root preset index
     _rootIndex = model->index(3, 0);
 

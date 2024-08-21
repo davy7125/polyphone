@@ -33,6 +33,7 @@
 #include <QProgressDialog>
 #include <QInputDialog>
 #include <QProcess>
+#include <QScreen>
 
 PageSmpl::PageSmpl(QWidget *parent) :
     Page(parent, "page:smpl"),
