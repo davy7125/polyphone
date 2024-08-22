@@ -28,7 +28,8 @@
 #include "soundfontmanager.h"
 #include "treeitem.h"
 
-PlayerTreeProxyModel::PlayerTreeProxyModel(int indexSf2, QTreeView *treeView, QAbstractItemModel * model) : QAbstractProxyModel(treeView)
+PlayerTreeProxyModel::PlayerTreeProxyModel(int indexSf2, QTreeView *treeView, QAbstractItemModel * model) : QAbstractProxyModel(treeView),
+    _indexSf2(indexSf2)
 {
     // Get the root preset index
     _rootIndex = model->index(3, 0);
@@ -48,7 +49,10 @@ PlayerTreeProxyModel::PlayerTreeProxyModel(int indexSf2, QTreeView *treeView, QA
 
     this->setSourceModel(model);
     treeView->setModel(this);
-    //treeView->setCurrentIndex(this->index(0, 0, QModelIndex()));
+
+    // Expand everything
+    foreach(int bank, _idByBankPreset.keys())
+        treeView->setExpanded(this->index(bank, 0, QModelIndex()), true);
 }
 
 int PlayerTreeProxyModel::columnCount(const QModelIndex &parent) const
@@ -66,7 +70,6 @@ int PlayerTreeProxyModel::rowCount(const QModelIndex &parent) const
     {
         // Root: as many children as banks
         result = _idByBankPreset.keys().count();
-        qDebug() << "count" << result << "banks";
     }
     else if (parent.internalPointer() == nullptr)
     {
@@ -75,18 +78,13 @@ int PlayerTreeProxyModel::rowCount(const QModelIndex &parent) const
             return 0;
         int bank = _idByBankPreset.keys()[parent.row()];
         result = _idByBankPreset[bank].count();
-        qDebug() << "count: bank" << bank << "has" << result << "preset(s)";
     }
-    else
-        qDebug() << "count 0";
 
     return result;
 }
 
 QModelIndex PlayerTreeProxyModel::index(int row, int column, const QModelIndex &parent) const
 {
-    qDebug() << "index";
-
     // Bank?
     if (!parent.isValid())
         return createIndex(row, column, nullptr);
@@ -106,8 +104,6 @@ QModelIndex PlayerTreeProxyModel::index(int row, int column, const QModelIndex &
 
 QModelIndex PlayerTreeProxyModel::parent(const QModelIndex &child) const
 {
-    qDebug() << "parent";
-
     // Parent of a bank?
     if (!child.isValid() || child.internalPointer() == nullptr)
         return QModelIndex();
@@ -125,8 +121,6 @@ QModelIndex PlayerTreeProxyModel::parent(const QModelIndex &child) const
 
 QModelIndex PlayerTreeProxyModel::mapToSource(const QModelIndex &proxyIndex) const
 {
-    qDebug() << "mapToSource" << proxyIndex.isValid() << proxyIndex.row() << proxyIndex.column();
-
     // Root or bank?
     if (!proxyIndex.isValid() || proxyIndex.internalPointer() == nullptr)
         return _rootIndex;
@@ -144,16 +138,28 @@ QModelIndex PlayerTreeProxyModel::mapFromSource(const QModelIndex &sourceIndex) 
     if (id == -1)
         return QModelIndex();
 
-    qDebug() << "mapFromSource" << sourceIndex.row() << sourceIndex.column() << id;
-
     QPair<quint16, quint16> bankPreset = _bankPresetById[id];
-    return createIndex(_idByBankPreset[bankPreset.first].keys().indexOf(bankPreset.second), 0, nullptr);
+    return createIndex(_idByBankPreset[bankPreset.first].keys().indexOf(bankPreset.second), 0, sourceIndex.internalPointer());
 }
 
 QVariant PlayerTreeProxyModel::data(const QModelIndex &proxyIndex, int role) const
 {
-    if (proxyIndex.isValid() && proxyIndex.internalPointer() == nullptr && role == Qt::DisplayRole)
-        return "pouf";
+    if (proxyIndex.isValid() && proxyIndex.internalPointer() == nullptr)
+    {
+        if (role == Qt::DisplayRole)
+        {
+            // Display the bank number
+            if (proxyIndex.row() < _idByBankPreset.count())
+                return tr("Bank %1").arg(_idByBankPreset.keys()[proxyIndex.row()]);
+        }
+        else if (role == Qt::UserRole)
+        {
+            // Preset header with the associated bank number
+            if (proxyIndex.row() < _idByBankPreset.count())
+                return QVariant::fromValue(EltID(elementRootPrst, _indexSf2, _idByBankPreset.keys()[proxyIndex.row()]));
+        }
+    }
+
     return QAbstractProxyModel::data(proxyIndex, role);
 }
 

@@ -46,6 +46,7 @@ public:
 protected:
     int getPresetId(const QModelIndex &index) const;
 
+    int _indexSf2;
     QModelIndex _rootIndex;
     QMap<quint16, QMap<quint16, int> > _idByBankPreset;
     QMap<int, QPair<quint16, quint16> > _bankPresetById;

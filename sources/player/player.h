@@ -25,6 +25,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <QItemSelection>
 #include "tab.h"
 class AbstractInputParser;
 
@@ -45,6 +46,9 @@ protected:
     void tabInError(QString errorMessage) override;
     void tabInitialized(int indexSf2) override;
     void tabUpdate(QString editingSource) override;
+
+private slots:
+    void onSelectionChanged(QItemSelection selected, QItemSelection deselected);
 
 private:
     Ui::Player *ui;

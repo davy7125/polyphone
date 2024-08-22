@@ -18,7 +18,7 @@ DEFINES += USE_LOCAL_RTAUDIO
 #DEFINES += RT_AUDIO_5_2
 
 # Uncomment lines for hiding features
-#DEFINES += NO_SF2_REPOSITORY
+DEFINES += NO_SF2_REPOSITORY
 #DEFINES += NO_SF2_CREATION
 
 # Polyphone version
@@ -48,7 +48,7 @@ CONFIG += lrelease embed_translations precompiled_header
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
 QMAKE_CXXFLAGS += -std=c++17
 
-QT += core gui printsupport svg network #testlib
+QT += core gui printsupport svg network testlib
 TARGET = polyphone
 TEMPLATE = app
 

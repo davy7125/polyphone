@@ -57,15 +57,31 @@ void Player::tabInitialized(int indexSf2)
     // Prepare the list
     QAbstractItemModel * model = SoundfontManager::getInstance()->getModel(indexSf2);
     ui->treeView->setModel(model);
-    //ui->treeView->setRootIndex(model->index(3, 0));
-    new PlayerTreeProxyModel(indexSf2, ui->treeView, model);
+    PlayerTreeProxyModel * proxyModel = new PlayerTreeProxyModel(indexSf2, ui->treeView, model);
+    connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+            this, SLOT(onSelectionChanged(QItemSelection,QItemSelection)));
 
     // Display the player controls
     ui->stackedMain->setCurrentWidget(ui->pagePlay);
+
+    // Select the first preset
+    QModelIndex firstBankIndex = proxyModel->index(0, 0, QModelIndex());
+    if (firstBankIndex.isValid())
+        ui->treeView->setCurrentIndex(proxyModel->index(0, 0, firstBankIndex));
 }
 
 void Player::tabUpdate(QString editingSource)
 {
     // No editing in this mode
     Q_UNUSED(editingSource)
+}
+
+void Player::onSelectionChanged(QItemSelection selected, QItemSelection deselected)
+{
+    QModelIndexList indexes = selected.indexes();
+    foreach (const QModelIndex &index, indexes)
+    {
+        EltID currentId = index.data(Qt::UserRole).value<EltID>();
+        qDebug() << currentId.toString();
+    }
 }
