@@ -74,7 +74,7 @@ private:
     static const int RESIZE_BORDER_WIDTH;
 
     Ui::MainWindow * ui;
-    TabManager * _windowManager;
+    TabManager * _tabManager;
     DialogKeyboard * _keyboard;
     DialogRecorder * _recorder;
     DialogAbout _dialogAbout;

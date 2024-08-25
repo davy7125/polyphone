@@ -70,7 +70,8 @@ public:
     void clearCustomization();
 
     QSize sizeHint() const override;
-    double ratio() const;
+    bool hasHeightForWidth() const override;
+    int heightForWidth(int w) const override;
 
     void triggerGlowEffect();
 
@@ -97,8 +98,8 @@ private:
     void setStartKey(int key);
     void setNumKeys(int numKeys);
 
-    PianoScene * m_scene;
-    int m_channel;
+    PianoScene * _scene;
+    int _channel;
 };
 
 #endif // PIANOKEYBD_H

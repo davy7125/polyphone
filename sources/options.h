@@ -26,6 +26,7 @@
 #define OPTIONS_H
 
 #include <QStringList>
+class PlayerOptions;
 
 class Options
 {
@@ -41,9 +42,13 @@ public:
     };
 
     Options(int argc, char *argv[]);
+    ~Options();
 
     /// Get all files that will be open (or the file to be converted)
     QStringList getInputFiles() { return _inputFiles; }
+
+    /// Get all files to open with possible options for the player
+    QString getInputFilesAsString();
 
     /// Return the output file name (in case of a conversion)
     QString getOutputFile() { return _outputFile; }
@@ -66,8 +71,11 @@ public:
     /// Sfz option: use general midi classement
     bool sfzGeneralMidi() { return _sfzGeneralMidi; }
 
-    /// Return the compression quality for sf3 conversion (0 is high, 1 is medium, 2 is high);
-    int quality()  { return _sf3Quality; }
+    /// Sf3 option: compression quality (0 is low, 1 is medium, 2 is high);
+    int sf3Quality() { return _sf3Quality; }
+
+    /// Player options
+    PlayerOptions * playerOptions() { return _playerOptions; }
 
     /// Return true in case of bad arguments
     bool error() { return _error; }
@@ -103,6 +111,9 @@ private:
     bool _sfzPresetPrefix;
     bool _sfzOneDirPerBank;
     bool _sfzGeneralMidi;
+
+    // Player options
+    PlayerOptions * _playerOptions;
 
     QString _appPath;
 };

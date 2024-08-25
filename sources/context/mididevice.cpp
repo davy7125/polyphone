@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "mididevice.h"
+#include <QApplication>
 #include "rtmidi/RtMidi.h"
 #include "controllerevent.h"
 #include "noteevent.h"
@@ -30,14 +31,9 @@
 #include "programevent.h"
 #include "monopressureevent.h"
 #include "polypressureevent.h"
-#include "dialogkeyboard.h"
-#include "pianokeybdcustom.h"
-#include "controllerarea.h"
 #include "confmanager.h"
-#include <QApplication>
-#include "synth.h"
-#include "extensionmanager.h"
 #include "soundfontmanager.h"
+#include "imidilistener.h"
 
 // Callback for MIDI signals
 void midiCallback(double deltatime, std::vector<unsigned char> *message, void *userData)
@@ -91,15 +87,12 @@ void midiCallback(double deltatime, std::vector<unsigned char> *message, void *u
     }
 }
 
-MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
-    _dialogKeyboard(nullptr),
+MidiDevice::MidiDevice(ConfManager * configuration) :
     _configuration(configuration),
-    _midiin(nullptr),
-    _synth(synth),
-    _isSustainOn(false),
-    _isSostenutoOn(false)
+    _midiIn(nullptr)
 {
-    memset((MIDI_State*)_midiStates, 0, 17 * sizeof(MIDI_State));
+    memset((MIDI_State *)_midiStates, 0, 17 * sizeof(MIDI_State));
+    memset((Sustain_State *)_sustainStates, 0, 17 * sizeof(Sustain_State));
 
     // Initialize MIDI values
     for (int channel = 0; channel <= 16; channel++)
@@ -143,10 +136,10 @@ MidiDevice::~MidiDevice()
     // Store the wheel sensitivity from channel -1
     _configuration->setValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", _midiStates[0]._bendSensitivityValue);
 
-    if (_midiin != nullptr)
+    if (_midiIn != nullptr)
     {
-        _midiin->closePort();
-        delete _midiin;
+        _midiIn->closePort();
+        delete _midiIn;
     }
 }
 
@@ -199,11 +192,11 @@ void MidiDevice::getMidiList(int api, QMap<QString, QString> * map)
 void MidiDevice::openMidiPort(QString source)
 {
     // Possibly close an existing midi input
-    if (_midiin)
+    if (_midiIn)
     {
-        _midiin->closePort();
-        delete _midiin;
-        _midiin = nullptr;
+        _midiIn->closePort();
+        delete _midiIn;
+        _midiIn = nullptr;
     }
 
     // Get the api and the port number
@@ -223,38 +216,33 @@ void MidiDevice::openMidiPort(QString source)
     // Create a MIDI input based on the selected API
     try
     {
-        _midiin = new RtMidiIn(static_cast<RtMidi::Api>(api), "Polyphone");
+        _midiIn = new RtMidiIn(static_cast<RtMidi::Api>(api), "Polyphone");
     }
     catch (std::exception &error)
     {
         Q_UNUSED(error)
-        delete _midiin;
-        _midiin = nullptr;
+        delete _midiIn;
+        _midiIn = nullptr;
         return;
     }
 
     // Associate a callback
-    _midiin->setCallback(&midiCallback, this);
+    _midiIn->setCallback(&midiCallback, this);
 
     // Initialize the midi connection
-    if (portNumber < static_cast<int>(_midiin->getPortCount()))
+    if (portNumber < static_cast<int>(_midiIn->getPortCount()))
     {
         try
         {
-            _midiin->openPort(static_cast<unsigned int>(portNumber));
+            _midiIn->openPort(static_cast<unsigned int>(portNumber));
         }
         catch (std::exception &error)
         {
             Q_UNUSED(error)
-            delete _midiin;
-            _midiin = nullptr;
+            delete _midiIn;
+            _midiIn = nullptr;
         }
     }
-}
-
-PianoKeybdCustom * MidiDevice::keyboard()
-{
-    return _dialogKeyboard != nullptr ? _dialogKeyboard->getKeyboard() : nullptr;
 }
 
 void MidiDevice::customEvent(QEvent * event)
@@ -272,7 +260,7 @@ void MidiDevice::customEvent(QEvent * event)
     else if (event->type() == QEvent::User + 1)
     {
         // A controller value changed
-        ControllerEvent *controllerEvent = dynamic_cast<ControllerEvent *>(event);
+        ControllerEvent * controllerEvent = dynamic_cast<ControllerEvent *>(event);
         processControllerChanged(controllerEvent->getChannel(), controllerEvent->getNumController(), controllerEvent->getValue());
         event->accept();
     }
@@ -307,69 +295,60 @@ void MidiDevice::customEvent(QEvent * event)
 
 void MidiDevice::processControllerChanged(int channel, int numController, int value)
 {
+    MIDI_State * midiState = &_midiStates[channel + 1];
+    Sustain_State * sustainState = &_sustainStates[channel + 1];
+
     // Update the current channel
-    _midiStates[channel + 1]._controllerValues[numController] = value;
-    _midiStates[channel + 1]._controllerValueSpecified[numController] = true;
+    midiState->_controllerValues[numController] = value;
+    midiState->_controllerValueSpecified[numController] = true;
     if (numController == 101 || numController == 100 || numController == 6 || numController == 38)
     {
         // RPN reception, store the messages since they are grouped by 4
         // http://midi.teragonaudio.com/tech/midispec/rpn.htm
-        _midiStates[channel + 1]._rpnHistoryControllers[_midiStates[channel + 1]._rpnHistoryPosition] = numController;
-        _midiStates[channel + 1]._rpnHistoryValues[_midiStates[channel + 1]._rpnHistoryPosition] = value;
-        _midiStates[channel + 1]._rpnHistoryPosition = (_midiStates[channel + 1]._rpnHistoryPosition + 1) % 4;
+        midiState->_rpnHistoryControllers[midiState->_rpnHistoryPosition] = numController;
+        midiState->_rpnHistoryValues[midiState->_rpnHistoryPosition] = value;
+        midiState->_rpnHistoryPosition = (midiState->_rpnHistoryPosition + 1) % 4;
 
         // Try to recognize an update in the bend sensitivity
         if (numController == 38)
         {
-            int pos = _midiStates[channel + 1]._rpnHistoryPosition;
-            if (_midiStates[channel + 1]._rpnHistoryControllers[pos] == 101 && _midiStates[channel + 1]._rpnHistoryValues[pos] == 0 && // B0 65 00
-                    _midiStates[channel + 1]._rpnHistoryControllers[(pos + 1) % 4] == 100 && _midiStates[channel + 1]._rpnHistoryValues[(pos + 1) % 4] == 0 && // B0 64 00
-                    _midiStates[channel + 1]._rpnHistoryControllers[(pos + 2) % 4] == 6 && // B0 06 XX => semitones
-                    _midiStates[channel + 1]._rpnHistoryControllers[(pos + 3) % 4] == 38) // B0 38 YY => cents
+            int pos = midiState->_rpnHistoryPosition;
+            if (midiState->_rpnHistoryControllers[pos] == 101 && midiState->_rpnHistoryValues[pos] == 0 && // B0 65 00
+                    midiState->_rpnHistoryControllers[(pos + 1) % 4] == 100 && midiState->_rpnHistoryValues[(pos + 1) % 4] == 0 && // B0 64 00
+                    midiState->_rpnHistoryControllers[(pos + 2) % 4] == 6 && // B0 06 XX => semitones
+                    midiState->_rpnHistoryControllers[(pos + 3) % 4] == 38) // B0 38 YY => cents
             {
-                float pitch = 0.01f * _midiStates[channel + 1]._rpnHistoryValues[(pos + 3) % 4] + _midiStates[channel + 1]._rpnHistoryValues[(pos + 2) % 4];
+                float pitch = 0.01f * midiState->_rpnHistoryValues[(pos + 3) % 4] + midiState->_rpnHistoryValues[(pos + 2) % 4];
                 processBendSensitivityChanged(channel, pitch);
             }
         }
     }
 
-    if (channel != -1)
-    {
-        // Trigger a possible extension
-        if (ExtensionManager::midi()->processControllerChanged(channel, numController, value))
-            return;
-
-        // The change has not been consumed, update channel -1 and the keyboard
-        _midiStates[0]._controllerValues[numController] = value;
-        _midiStates[0]._controllerValueSpecified[numController] = true;
-        _dialogKeyboard->getControllerArea()->updateController(numController, value);
-    }
-
     if (numController == 64)
     {
         // Sustain pedal
-        if (value >= 64 && !_isSustainOn)
+        if (value >= 64 && !sustainState->_isSustainOn)
         {
-            _isSustainOn = true;
+            sustainState->_isSustainOn = true;
             
             // All current keys are now sustained
             for (int key = 0; key < 128; key++)
-                _sustainedKeys[key] = _currentKeys[key] || _sostenutoMemoryKeys[key];
+                sustainState->_sustainedKeys[key] = sustainState->_currentKeys[key] || sustainState->_sostenutoMemoryKeys[key];
         }
-        else if (value < 64 && _isSustainOn)
+        else if (value < 64 && sustainState->_isSustainOn)
         {
-            _isSustainOn = false;
+            sustainState->_isSustainOn = false;
             
             // Remove all keys that have been previously sustained
             for (int key = 0; key < 128; key++)
             {
-                if (_sustainedKeys[key])
+                if (sustainState->_sustainedKeys[key])
                 {
-                    _sustainedKeys[key] = false;
+                    sustainState->_sustainedKeys[key] = false;
 
                     // And release them if they are not currently triggered or held by the sostenuto
-                    if (!_currentKeys[key] && !_sostenutoMemoryKeys[key])
-                        processKeyOff(-1, key);
+                    if (!sustainState->_currentKeys[key] && !sustainState->_sostenutoMemoryKeys[key])
+                        processKeyOff(channel, key);
                 }
             }
         }
@@ -377,187 +356,168 @@ void MidiDevice::processControllerChanged(int channel, int numController, int va
     else if (numController == 66)
     {
         // Sostenuto pedal
-        if (value >= 64 && !_isSostenutoOn)
+        if (value >= 64 && !sustainState->_isSostenutoOn)
         {
-            _isSostenutoOn = true;
+            sustainState->_isSostenutoOn = true;
 
             // All current keys are now held by the sostenuto
             for (int key = 0; key < 128; key++)
-                _sostenutoMemoryKeys[key] = _currentKeys[key] || _sustainedKeys[key];
+                sustainState->_sostenutoMemoryKeys[key] = sustainState->_currentKeys[key] || sustainState->_sustainedKeys[key];
         }
-        else if (value < 64 && _isSostenutoOn)
+        else if (value < 64 && sustainState->_isSostenutoOn)
         {
-            _isSostenutoOn = false;
+            sustainState->_isSostenutoOn = false;
             
             // Remove all keys that have been held by the sostenuto pedal
             for (int key = 0; key < 128; key++)
             {
-                if (_sostenutoMemoryKeys[key])
+                if (sustainState->_sostenutoMemoryKeys[key])
                 {
-                    _sostenutoMemoryKeys[key] = false;
+                    sustainState->_sostenutoMemoryKeys[key] = false;
 
                     // And release them if they are not currently triggered or activated by the sustain
-                    if (!_currentKeys[key] && !_sustainedKeys[key])
-                        processKeyOff(-1, key);
+                    if (!sustainState->_currentKeys[key] && !sustainState->_sustainedKeys[key])
+                        processKeyOff(channel, key);
                 }
             }
         }
     }
+
+    // Process the controller change for the current channel
+    for (int i = 0; i < _listeners.size(); ++i)
+    {
+        if (_listeners[i]->processControllerChanged(channel, numController, value))
+            return;
+    }
+
+    // And possibly update channel -1 if the change has not been consumed
+    if (channel != -1)
+        processControllerChanged(-1, numController, value);
 }
 
 void MidiDevice::processKeyOn(int channel, int key, int vel)
 {
+    Sustain_State * sustainState = &_sustainStates[channel + 1];
+
     // Initialize the poly pressure value
     _midiStates[channel + 1]._polyPressureValues[key] = vel;
 
-    if (channel != -1)
+    // Key currently activated
+    sustainState->_currentKeys[key] = true;
+
+    // Possibly stop the sound if the key is already on
+    bool stopFirst = sustainState->_sustainedKeys[key] || sustainState->_sostenutoMemoryKeys[key];
+
+    // Possibly add it to the sustain
+    if (sustainState->_isSustainOn)
+        sustainState->_sustainedKeys[key] = true;
+
+    // Process the change for the current channel
+    for (int i = 0; i < _listeners.size(); ++i)
     {
-        // Trigger a possible extension
-        if (ExtensionManager::midi()->processKeyOn(channel, key, vel))
+        if (stopFirst)
+            _listeners[i]->processKey(channel, key, 0);
+        if (_listeners[i]->processKey(channel, key, vel))
             return;
-
-        // The change has not been consumed, update channel -1 and the keyboard
-        _midiStates[0]._polyPressureValues[key] = vel;
-
-        if (_dialogKeyboard)
-        {
-            _dialogKeyboard->updateKeyPlayed(key, vel);
-            _dialogKeyboard->getKeyboard()->inputNoteOn(key, vel);
-        }
     }
 
-    if (key != -1)
-    {
-        // Key currently activated
-        _currentKeys[key] = true;
-
-        // Possibly add it to the sustain
-        if (_isSustainOn)
-            _sustainedKeys[key] = true;
-    }
-
-    // Notify about a key being played
-    emit(keyPlayed(key, vel));
+    // And possibly update channel -1 if the change has not been consumed
+    if (channel != -1)
+        processKeyOn(-1, key, vel);
 }
 
 void MidiDevice::processKeyOff(int channel, int key)
 {
-    if (channel != -1)
-    {
-        // Trigger a possible extension
-        if (ExtensionManager::midi()->processKeyOff(channel, key))
-            return;
+    Sustain_State * sustainState = &_sustainStates[channel + 1];
 
-        // The change has not been consumed, update the virtual keyboard
-        if (_dialogKeyboard)
+    // Key currently deactivated
+    sustainState->_currentKeys[key] = false;
+
+    // Release the key if it is not currently sustained or held by the sostenuto
+    if (!sustainState->_sostenutoMemoryKeys[key] && !sustainState->_sustainedKeys[key])
+    {
+        for (int i = 0; i < _listeners.size(); ++i)
         {
-            _dialogKeyboard->updateKeyPlayed(key, 0);
-            _dialogKeyboard->getKeyboard()->inputNoteOff(key);
-            _dialogKeyboard->getKeyboard()->removeCurrentRange(key);
+            if (_listeners[i]->processKey(channel, key, 0))
+                return;
         }
     }
 
-    // Stop a sample playback if key is -1
-    if (key == -1)
-        _synth->play(EltID(), -1, -1, 0);
-    else
-    {
-        // Key currently deactivated
-        _currentKeys[key] = false;
-
-        // Release the key if it is not currently sustained or held by the sostenuto
-        if (!_sostenutoMemoryKeys[key] && !_sustainedKeys[key])
-            emit(keyPlayed(key, 0));
-    }
+    // And possibly update channel -1 if the change has not been consumed
+    if (channel != -1)
+        processKeyOff(-1, key);
 }
 
 void MidiDevice::processPolyPressureChanged(int channel, int key, int pressure)
 {
-    // Update the channel state
+    // Update the current channel state
     _midiStates[channel + 1]._polyPressureValues[key] = pressure;
 
-    if (channel != -1)
+    for (int i = 0; i < _listeners.size(); ++i)
     {
-        // Trigger a possible extension
-        if (!ExtensionManager::midi()->processPolyPressureChanged(channel, key, pressure))
-        {
-            // The change has not been consumed, update channel -1 and the virtual keyboard
-            _midiStates[0]._polyPressureValues[key] = pressure;
-            _dialogKeyboard->updatePolyPressure(key, pressure);
-        }
+        if (_listeners[i]->processPolyPressureChanged(channel, key, pressure))
+            return;
     }
+
+    // And possibly update channel -1 if the change has not been consumed
+    if (channel != -1)
+        processPolyPressureChanged(-1, key, pressure);
 }
 
 void MidiDevice::processMonoPressureChanged(int channel, int value)
 {
-    // Update the channel state
+    // Update the current channel state
     _midiStates[channel + 1]._monoPressureValue = value;
 
-    if (channel != -1)
+    for (int i = 0; i < _listeners.size(); ++i)
     {
-        // Trigger a possible extension
-        if (!ExtensionManager::midi()->processMonoPressureChanged(channel, value))
-        {
-            // The change has not been consumed, update channel -1 and the virtual keyboard
-            _midiStates[0]._monoPressureValue = value;
-            _dialogKeyboard->getControllerArea()->updateMonoPressure(value);
-        }
+        if (_listeners[i]->processMonoPressureChanged(channel, value))
+            return;
     }
+
+    // And possibly update channel -1 if the change has not been consumed
+    if (channel != -1)
+        processMonoPressureChanged(-1, value);
 }
 
 void MidiDevice::processBendChanged(int channel, float value)
 {
-    // Update the channel state
+    // Update the current channel state
     _midiStates[channel + 1]._bendValue = value;
 
-    if (channel != -1)
+    for (int i = 0; i < _listeners.size(); ++i)
     {
-        // Trigger a possible extension
-        if (!ExtensionManager::midi()->processBendChanged(channel, value))
-        {
-            // The change has not been consumed, update channel -1 and the virtual keyboard
-            _midiStates[0]._bendValue = value;
-            _dialogKeyboard->getControllerArea()->updateBend(value);
-        }
+        if (_listeners[i]->processBendChanged(channel, value))
+            return;
     }
+
+    // And possibly update channel -1 if the change has not been consumed
+    if (channel != -1)
+        processBendChanged(-1, value);
 }
 
 void MidiDevice::processBendSensitivityChanged(int channel, float semitones)
 {
-    // Update the channel state
+    // Update the current channel state
     _midiStates[channel + 1]._bendSensitivityValue = semitones;
 
-    if (channel != -1)
+    for (int i = 0; i < _listeners.size(); ++i)
     {
-        // Trigger a possible extension
-        if (!ExtensionManager::midi()->processBendSensitivityChanged(channel, semitones))
-        {
-            // The change has not been consumed, update channel -1 and the virtual keyboard
-            _midiStates[0]._bendSensitivityValue = semitones;
-            _dialogKeyboard->getControllerArea()->updateBendSensitivity(semitones);
-        }
+        if (_listeners[i]->processBendSensitivityChanged(channel, semitones))
+            return;
     }
+
+    // And possibly update channel -1 if the change has not been consumed
+    if (channel != -1)
+        processBendSensitivityChanged(-1, semitones);
 }
 
 void MidiDevice::stopAll()
 {
     // Release all keys sustained or held by the sostenuto
-    _isSustainOn = false;
-    _isSostenutoOn = false;
+    memset((Sustain_State *)_sustainStates, 0, 17 * sizeof(Sustain_State));
     for (int key = 0; key < 128; key++)
-    {
-        _currentKeys[key] = false;
-        _sustainedKeys[key] = false;
-        _sostenutoMemoryKeys[key] = false;
-
         processKeyOff(-1, key);
-    }
-
-    // Reset the keyboard
-    _dialogKeyboard->getKeyboard()->clearCustomization();
-
-    // Stop all voices
-    _synth->stop(false);
 }
 
 int MidiDevice::getControllerValue(int channel, int controllerNumber)
@@ -583,4 +543,32 @@ int MidiDevice::getMonoPressure(int channel)
 int MidiDevice::getPolyPressure(int channel, int key)
 {
     return _midiStates[channel + 1]._polyPressureValues[key];
+}
+
+void MidiDevice::addListener(IMidiListener * listener, int priority)
+{
+    // Possibly insert a listener before another one
+    for (int i = 0; i < _listenerPriorities.size(); i++)
+    {
+        if (_listenerPriorities[i] < priority)
+        {
+            _listenerPriorities.insert(i, priority);
+            _listeners.insert(i, listener);
+            return;
+        }
+    }
+
+    // Or add it at the end of the list
+    _listenerPriorities.append(priority);
+    _listeners.append(listener);
+}
+
+void MidiDevice::removeListener(IMidiListener * listener)
+{
+    int pos = _listeners.indexOf(listener);
+    if (pos != -1)
+    {
+        _listenerPriorities.removeAt(pos);
+        _listeners.removeAt(pos);
+    }
 }

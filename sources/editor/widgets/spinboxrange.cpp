@@ -37,7 +37,12 @@ SpinBoxRange::SpinBoxRange(QWidget *parent) : QAbstractSpinBox(parent),
     _firstMidiKey(-1)
 {
     connect(this, SIGNAL(editingFinished()), this, SLOT(updateValue()));
-    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), this, SLOT(onKeyPlayed(int,int)));
+    ContextManager::midi()->addListener(this, 1000);
+}
+
+SpinBoxRange::~SpinBoxRange()
+{
+    ContextManager::midi()->removeListener(this);
 }
 
 void SpinBoxRange::stepBy(int steps)
@@ -135,8 +140,10 @@ void SpinBoxRange::clear()
     emit(valueChanged());
 }
 
-void SpinBoxRange::onKeyPlayed(int key, int vel)
+bool SpinBoxRange::processKey(int channel, int key, int vel)
 {
+    Q_UNUSED(channel)
+
     if (vel > 0 && this->hasFocus())
     {
         if (_firstMidiKey == -1)
@@ -156,6 +163,8 @@ void SpinBoxRange::onKeyPlayed(int key, int vel)
     }
     else
         _firstMidiKey = -1;
+
+    return false;
 }
 
 QAbstractSpinBox::StepEnabled SpinBoxRange::stepEnabled() const

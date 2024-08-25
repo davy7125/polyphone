@@ -30,10 +30,13 @@
 Tab::Tab(QWidget *parent) : QWidget(parent),
     _sf2Index(-1)
 {
-
+    ContextManager::midi()->addListener(this, 0);
 }
 
-Tab::~Tab() {}
+Tab::~Tab()
+{
+    ContextManager::midi()->removeListener(this);
+}
 
 void Tab::initialize(AbstractInputParser * input)
 {

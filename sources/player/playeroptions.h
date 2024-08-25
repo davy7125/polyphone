@@ -22,29 +22,41 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef EXTENSIONMANAGER_MIDI_H
-#define EXTENSIONMANAGER_MIDI_H
+#ifndef PLAYEROPTIONS_H
+#define PLAYEROPTIONS_H
 
 #include <QString>
-#include <QList>
-class QDialog;
-class QWidget;
-class ExtensionMidi;
 
-class ExtensionManagerMidi
+class PlayerOptions
 {
 public:
-    ExtensionManagerMidi();
-    ~ExtensionManagerMidi();
-    
-    void store(ExtensionMidi * extension);
-    int count() { return _extensions.count(); }
-    QString getTitle(int index);
-    QString getIconPath(int index);
-    QDialog * getDialog(int index);
+    PlayerOptions(PlayerOptions * options = nullptr);
+
+    bool parse(QString text);
+
+    /// Valid parameters?
+    bool isValid() { return _isValid; }
+
+    /// Player option: channel number (0 is all, otherwise 1 to 16)
+    int playerChannel() { return _playerChannel; }
+    void setPlayerChannel(int channel) { _playerChannel = channel; }
+
+    /// Player option: multiple selection
+    bool playerMultipleSelection() { return _playerMultipleSelection; }
+    void setMultipleSelection(bool isOn) { _playerMultipleSelection = isOn; }
+
+    /// Player option: preset selection by key (0 is off, 1 is on, 2 is toggle)
+    int playerKeySelection() { return _playerKeySelection; }
+    void setKeySelection(int keySelection) { _playerKeySelection = keySelection; }
+
+    /// Get the text describing the configurations
+    QString toString();
 
 private:
-    QList<ExtensionMidi *> _extensions;
+    bool _isValid;
+    int _playerChannel;
+    bool _playerMultipleSelection;
+    int _playerKeySelection;
 };
 
-#endif // EXTENSIONMANAGER_MIDI_H
+#endif // PLAYEROPTIONS_H

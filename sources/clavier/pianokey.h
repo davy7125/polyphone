@@ -27,17 +27,17 @@
 class PianoKey : public QGraphicsRectItem
 {
 public:
-    PianoKey(QGraphicsItem * parent = nullptr) : QGraphicsRectItem(parent), m_pressed(false) {}
+    PianoKey(QGraphicsItem * parent = nullptr) : QGraphicsRectItem(parent), _pressed(false) {}
     PianoKey(const QRectF &rect, const bool black, const int note);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);
-    int getNote() const { return m_note; }
-    void setBrush(const QBrush& b) { m_brush = b; }
-    void setPressedBrush(const QBrush& b) { m_selectedBrush = b; }
+    int getNote() const { return _note; }
+    void setBrush(const QBrush& b) { _brush = b; }
+    void setPressedBrush(const QBrush& b) { _selectedBrush = b; }
     void resetBrush();
-    bool isPressed() const { return m_pressed; }
+    bool isPressed() const { return _pressed; }
     void setPressed(bool p);
     void setMarker(PianoKeybd::MarkerType type);
-    int isBlack() const { return m_black; }
+    int isBlack() const { return _black; }
     static void setGlowEffect(double glowEffect) { s_glowEffect = glowEffect; }
 
     static QBrush PIANO_BLACK_BRUSH;
@@ -50,12 +50,12 @@ private:
     void flipPainter(QPainter * painter, QRectF &rect);
     QColor mergeColor(QColor color1, QColor color2, double fade);
 
-    bool m_pressed;
-    QBrush m_selectedBrush;
-    QBrush m_brush;
-    int m_note;
-    bool m_black;
-    PianoKeybd::MarkerType m_markerType;
+    bool _pressed;
+    QBrush _selectedBrush;
+    QBrush _brush;
+    int _note;
+    bool _black;
+    PianoKeybd::MarkerType _markerType;
 
     static double s_glowEffect;
 };

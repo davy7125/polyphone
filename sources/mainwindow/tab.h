@@ -26,9 +26,10 @@
 #define TAB_H
 
 #include <QWidget>
+#include "imidilistener.h"
 class AbstractInputParser;
 
-class Tab : public QWidget
+class Tab : public QWidget, public IMidiListener
 {
     Q_OBJECT
 

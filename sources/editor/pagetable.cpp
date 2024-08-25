@@ -836,9 +836,10 @@ int PageTable::limit(int iVal, AttributeType champ, EltID id)
     switch ((int)champ)
     {
     case champ_startAddrsOffset:
-        // Limite inférieure
+        // Lower limit
         if (ret < 0) ret = 0;
-        // Limite supérieure
+
+        // Upper limit
         limSup = 0;
         if (id.typeElement == elementInstSmpl)
         {
@@ -862,7 +863,7 @@ int PageTable::limit(int iVal, AttributeType champ, EltID id)
             ret = limSup;
         break;
     case champ_endAddrsOffset:
-        // Limite inférieure
+        // Lower limit
         limInf = 0;
         if (id.typeElement == elementInstSmpl)
         {
@@ -885,12 +886,12 @@ int PageTable::limit(int iVal, AttributeType champ, EltID id)
         if (ret < limInf)
             ret = limInf;
 
-        // Limite supérieure
+        // Upper limit
         if (ret > 0)
             ret = 0;
         break;
     case champ_startloopAddrsOffset:
-        // Limite inférieure
+        // Lower limit
         limInf = 0;
         if (id.typeElement == elementInstSmpl)
         {
@@ -911,7 +912,8 @@ int PageTable::limit(int iVal, AttributeType champ, EltID id)
             }
         }
         if (ret < limInf) ret = limInf;
-        // Limite supérieure
+
+        // Upper limit
         limSup = 0;
         if (id.typeElement == elementInstSmpl)
         {
@@ -937,7 +939,7 @@ int PageTable::limit(int iVal, AttributeType champ, EltID id)
         if (ret > limSup) ret = limSup;
         break;
     case champ_endloopAddrsOffset:
-        // Limite inférieure
+        // Lower limit
         limInf = 0;
         if (id.typeElement == elementInstSmpl)
         {
@@ -960,7 +962,7 @@ int PageTable::limit(int iVal, AttributeType champ, EltID id)
         if (ret < limInf)
             ret = limInf;
 
-        // Limite supérieure
+        // Upper limit
         limSup = 0;
         if (id.typeElement == elementInstSmpl)
         {

@@ -22,29 +22,18 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef EXTENSIONMANAGER_MIDI_H
-#define EXTENSIONMANAGER_MIDI_H
+#ifndef IMIDILISTENER_H
+#define IMIDILISTENER_H
 
-#include <QString>
-#include <QList>
-class QDialog;
-class QWidget;
-class ExtensionMidi;
-
-class ExtensionManagerMidi
+class IMidiListener
 {
 public:
-    ExtensionManagerMidi();
-    ~ExtensionManagerMidi();
-    
-    void store(ExtensionMidi * extension);
-    int count() { return _extensions.count(); }
-    QString getTitle(int index);
-    QString getIconPath(int index);
-    QDialog * getDialog(int index);
-
-private:
-    QList<ExtensionMidi *> _extensions;
+    virtual bool processKey(int channel, int key, int vel) = 0;
+    virtual bool processPolyPressureChanged(int channel, int key, int pressure) = 0;
+    virtual bool processMonoPressureChanged(int channel, int value) = 0;
+    virtual bool processControllerChanged(int channel, int num, int value) = 0;
+    virtual bool processBendChanged(int channel, float value) = 0;
+    virtual bool processBendSensitivityChanged(int channel, float semitones) = 0;
 };
 
-#endif // EXTENSIONMANAGER_MIDI_H
+#endif // IMIDILISTENER_H

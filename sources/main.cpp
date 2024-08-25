@@ -85,7 +85,7 @@ int launchApplication(QtSingleApplication * app, Options &options)
     w.show();
 
     // Open files passed as argument
-    w.openFiles(options.getInputFiles().join('|'));
+    w.openFiles(options.getInputFilesAsString());
 
     return app->exec();
 }
@@ -140,7 +140,7 @@ int convert(Options &options)
         writeLine("Saving file " + outputFile.filePath() + " ...");
         break;
     case Options::MODE_CONVERSION_TO_SF3:
-        output->setOption("quality", options.quality());
+        output->setOption("quality", options.sf3Quality());
         writeLine("Saving file " + outputFile.filePath() + "...");
         break;
     case Options::MODE_CONVERSION_TO_SFZ: {
@@ -222,7 +222,7 @@ int main(int argc, char *argv[])
         bool uniqueInstance = settings.value("display/unique_instance", true).toBool();
 
         // Return immediately if there is already an instance
-        if (uniqueInstance && app.sendMessage(options.getInputFiles().join('|')))
+        if (uniqueInstance && app.sendMessage(options.getInputFilesAsString()))
             return 0;
 
         // Or launch the application as a unique instance

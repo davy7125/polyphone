@@ -26,6 +26,7 @@
 #define DIALOGKEYBOARD_H
 
 #include <QDialog>
+#include "imidilistener.h"
 class PianoKeybdCustom;
 class ControllerArea;
 
@@ -33,7 +34,7 @@ namespace Ui {
 class DialogKeyboard;
 }
 
-class DialogKeyboard : public QDialog
+class DialogKeyboard : public QDialog, public IMidiListener
 {
     Q_OBJECT
 
@@ -44,13 +45,16 @@ public:
     // Focus on the keyboard and animate with a glow effect
     void glow();
 
-    // Elements of the dialog
+    // Keyboard
     PianoKeybdCustom * getKeyboard();
-    ControllerArea * getControllerArea();
 
-    // Update values
-    void updatePolyPressure(int key, int pressure);
-    void updateKeyPlayed(int key, int vel);
+    // Reaction to MIDI signals
+    bool processKey(int channel, int key, int vel) override;
+    bool processPolyPressureChanged(int channel, int key, int pressure) override;
+    bool processMonoPressureChanged(int channel, int value) override;
+    bool processControllerChanged(int channel, int num, int value) override;
+    bool processBendChanged(int channel, float value) override;
+    bool processBendSensitivityChanged(int channel, float semitones) override;
 
 protected:
     void closeEvent(QCloseEvent * event) override;
@@ -64,7 +68,6 @@ private slots:
 private:
     void displayKeyInfo();
     void updateControlAreaVisibility();
-    void resizeWindow();
 
     Ui::DialogKeyboard *ui;
     QList<QPair<int, QPair<int, int> > > _triggeredKeys; // velocity and aftertouch by key

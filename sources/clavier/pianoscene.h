@@ -36,7 +36,6 @@ public:
     PianoScene (const int startKey, const int numKeys, PianoScene * previousScene = nullptr, QObject * parent = nullptr);
     
     QSize sizeHint() const;
-    double getRatio() const { return m_ratio; }
 
     // Color management
     void setColor(int num, QColor color);
@@ -105,7 +104,6 @@ private:
     QMap<int, QColor> m_palette;
     QMap<int, QColor> m_customColors;
     QMap<int, PianoKeybd::MarkerType> m_markers;
-    double m_ratio;
 
     static int MIN_NOTE, MAX_NOTE, KEYWIDTH, KEYHEIGHT;
     KeyboardMap _keybdMap;

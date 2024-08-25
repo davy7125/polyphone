@@ -115,7 +115,6 @@ ContextManager::ContextManager(bool withAudioAndMidi) :
     // 5. Translations
     _translation = new TranslationManager(_configuration);
 
-
     if (withAudioAndMidi)
     {
         // 6. Audio device
@@ -124,7 +123,7 @@ ContextManager::ContextManager(bool withAudioAndMidi) :
         connect(_configuration, SIGNAL(soundEngineConfigurationChanged()), this, SLOT(updateSynthConfiguration()));
 
         // 7. Midi device
-        _midi = new MidiDevice(_configuration, _audio->getSynth());
+        _midi = new MidiDevice(_configuration);
         _audio->getSynth()->setIMidiValues(_midi);
     }
 }

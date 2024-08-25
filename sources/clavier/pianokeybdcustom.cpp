@@ -26,7 +26,6 @@
 #include "basetypes.h"
 #include <QApplication>
 #include "contextmanager.h"
-#include "pianoscene.h"
 
 // Keyboard colors
 QColor PianoKeybdCustom::COLOR_PRESSED;

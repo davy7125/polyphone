@@ -26,22 +26,30 @@
 #define SPINBOXKEY_H
 
 #include <QSpinBox>
+#include "imidilistener.h"
 
-class SpinBoxKey : public QSpinBox
+class SpinBoxKey : public QSpinBox, public IMidiListener
 {
     Q_OBJECT
 public:
-    explicit SpinBoxKey(QWidget *parent = nullptr, bool isNullable = false);
+    SpinBoxKey(QWidget *parent = nullptr, bool isNullable = false);
+    ~SpinBoxKey();
+
     void setAlwaysShowKeyName(bool isOn);
     bool isNull() { return this->text().isEmpty(); }
+
+    // MIDI signals
+    bool processKey(int channel, int key, int vel) override;
+    bool processPolyPressureChanged(int channel, int key, int pressure) override { Q_UNUSED(channel); Q_UNUSED(key); Q_UNUSED(pressure); return false; }
+    bool processMonoPressureChanged(int channel, int value) override { Q_UNUSED(channel); Q_UNUSED(value); return false; }
+    bool processControllerChanged(int channel, int num, int value) override { Q_UNUSED(channel); Q_UNUSED(num); Q_UNUSED(value); return false; }
+    bool processBendChanged(int channel, float value) override { Q_UNUSED(channel); Q_UNUSED(value); return false; }
+    bool processBendSensitivityChanged(int channel, float semitones) override { Q_UNUSED(channel); Q_UNUSED(semitones); return false; }
 
 protected:
     QValidator::State validate(QString &input, int &pos) const override;
     int valueFromText(const QString &text) const override;
     QString textFromValue(int val) const override;
-
-private slots:
-    void onKeyPlayed(int key, int vel);
 
 private:
     bool _alwaysShowKeyName;

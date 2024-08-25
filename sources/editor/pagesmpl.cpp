@@ -24,16 +24,15 @@
 
 #include "pagesmpl.h"
 #include "ui_pagesmpl.h"
-#include "sound.h"
-#include "graphicsfourier.h"
-#include "sampleutils.h"
-#include "contextmanager.h"
-#include "pianokeybdcustom.h"
 #include <QMessageBox>
 #include <QProgressDialog>
 #include <QInputDialog>
 #include <QProcess>
 #include <QScreen>
+#include "sound.h"
+#include "graphicsfourier.h"
+#include "sampleutils.h"
+#include "contextmanager.h"
 
 PageSmpl::PageSmpl(QWidget *parent) :
     Page(parent, "page:smpl"),
@@ -510,8 +509,8 @@ void PageSmpl::setRootKey()
 
 void PageSmpl::setRootKey(int val)
 {
-    ContextManager::midi()->keyboard()->clearCustomization();
-    ContextManager::midi()->keyboard()->addRangeAndRootKey(val, 0, 127);
+    // Send a signal for updating the keyboard
+    emit(rootKeyChanged(val));
 
     // Modif synth
     updateSinus();

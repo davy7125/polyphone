@@ -24,6 +24,7 @@
 
 #include "extensionmanager_midi.h"
 #include "extension_midi.h"
+#include "contextmanager.h"
 
 ExtensionManagerMidi::ExtensionManagerMidi()
 {
@@ -33,7 +34,17 @@ ExtensionManagerMidi::ExtensionManagerMidi()
 ExtensionManagerMidi::~ExtensionManagerMidi()
 {
     while (!_extensions.isEmpty())
-        delete _extensions.takeFirst();
+    {
+        ExtensionMidi * extension = _extensions.takeFirst();
+        ContextManager::midi()->removeListener(extension);
+        delete extension;
+    }
+}
+
+void ExtensionManagerMidi::store(ExtensionMidi * extension)
+{
+    _extensions << extension;
+    ContextManager::midi()->addListener(extension, extension->getMidiPriority());
 }
 
 QString ExtensionManagerMidi::getTitle(int index)
@@ -49,60 +60,4 @@ QString ExtensionManagerMidi::getIconPath(int index)
 QDialog * ExtensionManagerMidi::getDialog(int index)
 {
     return _extensions[index]->getDialog();
-}
-
-bool ExtensionManagerMidi::processKeyOn(int channel, int key, int vel)
-{
-    foreach (ExtensionMidi * ext, _extensions)
-        if (ext->processKeyOn(channel, key, vel))
-            return true;
-    return false;
-}
-
-bool ExtensionManagerMidi::processKeyOff(int channel, int key)
-{
-    foreach (ExtensionMidi * ext, _extensions)
-        if (ext->processKeyOff(channel, key))
-            return true;
-    return false;
-}
-
-bool ExtensionManagerMidi::processPolyPressureChanged(int channel, int key, int pressure)
-{
-    foreach (ExtensionMidi * ext, _extensions)
-        if (ext->processPolyPressureChanged(channel, key, pressure))
-            return true;
-    return false;
-}
-
-bool ExtensionManagerMidi::processMonoPressureChanged(int channel, int value)
-{
-    foreach (ExtensionMidi * ext, _extensions)
-        if (ext->processMonoPressureChanged(channel, value))
-            return true;
-    return false;
-}
-
-bool ExtensionManagerMidi::processControllerChanged(int channel, int num, int value)
-{
-    foreach (ExtensionMidi * ext, _extensions)
-        if (ext->processControllerChanged(channel, num, value))
-            return true;
-    return false;
-}
-
-bool ExtensionManagerMidi::processBendChanged(int channel, float value)
-{
-    foreach (ExtensionMidi * ext, _extensions)
-        if (ext->processBendChanged(channel, value))
-            return true;
-    return false;
-}
-
-bool ExtensionManagerMidi::processBendSensitivityChanged(int channel, float semitones)
-{
-    foreach (ExtensionMidi * ext, _extensions)
-        if (ext->processBendSensitivityChanged(channel, semitones))
-            return true;
-    return false;
 }

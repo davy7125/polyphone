@@ -30,6 +30,7 @@
 
 class PageSelector;
 class AbstractInputParser;
+class DialogKeyboard;
 
 namespace Ui {
 class Editor;
@@ -40,8 +41,16 @@ class Editor : public Tab
     Q_OBJECT
 
 public:
-    explicit Editor(QWidget *parent = nullptr);
+    Editor(DialogKeyboard * dialogKeyboard);
     ~Editor() override;
+
+    // MIDI signals
+    bool processKey(int channel, int key, int vel) override;
+    bool processPolyPressureChanged(int channel, int key, int pressure) override { Q_UNUSED(channel); Q_UNUSED(key); Q_UNUSED(pressure); return false; }
+    bool processMonoPressureChanged(int channel, int value) override { Q_UNUSED(channel); Q_UNUSED(value); return false; }
+    bool processControllerChanged(int channel, int num, int value) override { Q_UNUSED(channel); Q_UNUSED(num); Q_UNUSED(value); return false; }
+    bool processBendChanged(int channel, float value) override { Q_UNUSED(channel); Q_UNUSED(value); return false; }
+    bool processBendSensitivityChanged(int channel, float semitones) override { Q_UNUSED(channel); Q_UNUSED(semitones); return false; }
 
 protected:
     void showEvent(QShowEvent* event) override;
@@ -50,13 +59,16 @@ protected:
     void tabInitialized(int indexSf2) override;
     void tabUpdate(QString editingSource) override;
 
+    DialogKeyboard * _dialogKeyboard;
+
 private slots:
     void onSelectionChanged(IdList ids);
     void displayOptionChanged(int displayOption);
-    void onKeyPlayed(int key, int vel);
     void customizeKeyboard();
     void onEditingDone(QString editingSource, QList<int> sf2Indexes);
     void onErrorEncountered(QString text);
+    void onRootKeyChanged(int rootKey);
+    void onPageHidden();
 
 private:
     QVector<bool> getEnabledKeysForInstrument(EltID idInst);

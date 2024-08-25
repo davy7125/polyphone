@@ -24,19 +24,21 @@
 
 #include "editor.h"
 #include "ui_editor.h"
+#include <QFileInfo>
+#include <QMessageBox>
 #include "contextmanager.h"
 #include "treesortfilterproxy.h"
 #include "soundfontmanager.h"
-#include <QFileInfo>
-#include <QMessageBox>
 #include "treemodel.h"
 #include "abstractinputparser.h"
 #include "treesplitter.h"
 #include "solomanager.h"
 #include "pageselector.h"
+#include "dialogkeyboard.h"
 #include "pianokeybdcustom.h"
 
-Editor::Editor(QWidget *parent) : Tab(parent),
+Editor::Editor(DialogKeyboard *dialogKeyboard) : Tab(nullptr),
+    _dialogKeyboard(dialogKeyboard),
     ui(new Ui::Editor),
     _pageSelector(new PageSelector()),
     _currentElementType(elementUnknown)
@@ -84,11 +86,14 @@ Editor::Editor(QWidget *parent) : Tab(parent),
         // Reaction when the selection changed in the tree
         connect(page, SIGNAL(selectedIdsChanged(IdList)), ui->treeView, SLOT(onSelectionChanged(IdList)));
 
-        // Reaction to MIDI events
-        connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), page, SLOT(onKeyPlayed(int,int)));
-
         // Reaction when "space" is pressed in the tree
         connect(ui->treeView, SIGNAL(spacePressed()), page, SLOT(onSpacePressed()));
+
+        // Reaction when the rootkey of a sample changed
+        connect(page, SIGNAL(rootKeyChanged(int)), this, SLOT(onRootKeyChanged(int)));
+
+        // Reaction when a page is hidden
+        connect(page, SIGNAL(pageHidden()), this, SLOT(onPageHidden()));
     }
 
     // Propagation of the selection
@@ -107,7 +112,6 @@ Editor::Editor(QWidget *parent) : Tab(parent),
 
     // Other
     connect(ui->treeView, SIGNAL(focusOnSearch()), ui->editFilter, SLOT(setFocus()));
-    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), this, SLOT(onKeyPlayed(int,int)));
     connect(SoundfontManager::getInstance(), SIGNAL(parameterForCustomizingKeyboardChanged()), this, SLOT(customizeKeyboard()));
     connect(SoundfontManager::getInstance(), SIGNAL(editingDone(QString, QList<int>)), this, SLOT(onEditingDone(QString, QList<int>)));
     connect(SoundfontManager::getInstance(), SIGNAL(errorEncountered(QString)), this, SLOT(onErrorEncountered(QString)));
@@ -277,7 +281,7 @@ void Editor::customizeKeyboard()
     if (!this->isVisible())
         return;
 
-    ContextManager::midi()->keyboard()->clearCustomization();
+    _dialogKeyboard->getKeyboard()->clearCustomization();
     if (_currentIds.isEmpty())
         return;
 
@@ -317,7 +321,7 @@ void Editor::customizeKeyboard()
 
             // Show the rootkeys and enable the piano if there is only one sample
             foreach (int rootKey, rootKeys)
-                ContextManager::midi()->keyboard()->addRangeAndRootKey(rootKey, uniqueSample ? 0 : -1, uniqueSample ? 127 : -1);
+                _dialogKeyboard->getKeyboard()->addRangeAndRootKey(rootKey, uniqueSample ? 0 : -1, uniqueSample ? 127 : -1);
             return;
         }
 
@@ -389,7 +393,7 @@ void Editor::customizeKeyboard()
             RangesType keyRange = defaultKeyRange;
             if (sf2->isSet(id, champ_keyRange))
                 keyRange = sf2->get(id, champ_keyRange).rValue;
-            ContextManager::midi()->keyboard()->addRangeAndRootKey(rootKey, keyRange.byLo, keyRange.byHi);
+            _dialogKeyboard->getKeyboard()->addRangeAndRootKey(rootKey, keyRange.byLo, keyRange.byHi);
         }
         else // elementPrstInst
         {
@@ -420,7 +424,7 @@ void Editor::customizeKeyboard()
                     if (startKey != -1)
                     {
                         // Close a range
-                        ContextManager::midi()->keyboard()->addRangeAndRootKey(-1, startKey, key - 1);
+                        _dialogKeyboard->getKeyboard()->addRangeAndRootKey(-1, startKey, key - 1);
                         startKey = -1;
                     }
                 }
@@ -428,7 +432,7 @@ void Editor::customizeKeyboard()
 
             // Final range
             if (startKey != -1)
-                ContextManager::midi()->keyboard()->addRangeAndRootKey(-1, startKey, maxRange.byHi);
+                _dialogKeyboard->getKeyboard()->addRangeAndRootKey(-1, startKey, maxRange.byHi);
         }
     }
 }
@@ -466,11 +470,31 @@ QVector<bool> Editor::getEnabledKeysForInstrument(EltID idInst)
     return result;
 }
 
-void Editor::onKeyPlayed(int key, int vel)
+void Editor::onErrorEncountered(QString text)
 {
+    QMessageBox::warning(this, tr("Warning"), text);
+}
+
+void Editor::onRootKeyChanged(int rootKey)
+{
+    _dialogKeyboard->getKeyboard()->clearCustomization();
+    _dialogKeyboard->getKeyboard()->addRangeAndRootKey(rootKey, 0, 127);
+}
+
+void Editor::onPageHidden()
+{
+    ContextManager::audio()->getSynth()->play(EltID(), -1, -1, 0);
+    _dialogKeyboard->getKeyboard()->clearCustomization();
+}
+
+bool Editor::processKey(int channel, int key, int vel)
+{
+    if (channel != -1)
+        return false;
+
     // This editor may not be the one that is displayed
     if (!this->isVisible())
-        return;
+        return false;
 
     // SAMPLE
 
@@ -539,7 +563,7 @@ void Editor::onKeyPlayed(int key, int vel)
                 if (keyMin <= key && keyMax >= key && velMin <= vel && velMax >= vel)
                 {
                     currentIds << idInstSmpl;
-                    ContextManager::midi()->keyboard()->addCurrentRange(key, keyMin, keyMax);
+                    _dialogKeyboard->getKeyboard()->addCurrentRange(key, keyMin, keyMax);
                 }
             }
 
@@ -548,7 +572,7 @@ void Editor::onKeyPlayed(int key, int vel)
                 ui->treeView->onSelectionChanged(currentIds);
         }
         else
-            ContextManager::midi()->keyboard()->removeCurrentRange(key);
+            _dialogKeyboard->getKeyboard()->removeCurrentRange(key);
     }
 
     // PRESET
@@ -615,9 +639,9 @@ void Editor::onKeyPlayed(int key, int vel)
                 ui->treeView->onSelectionChanged(currentIds);
         }
     }
-}
 
-void Editor::onErrorEncountered(QString text)
-{
-    QMessageBox::warning(this, tr("Warning"), text);
+    // Inner page
+    _pageSelector->getLastPage(_currentElementType)->onKeyPlayed(key, vel);
+
+    return false;
 }

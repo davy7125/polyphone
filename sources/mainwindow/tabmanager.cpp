@@ -22,9 +22,14 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
+#include <QFileInfo>
+#include <QMessageBox>
+#include <QAbstractButton>
+#include <QApplication>
 #include "tabmanager.h"
 #include "contextmanager.h"
 #include "configpanel.h"
+#include "mainwindow.h"
 #include "soundfontbrowser.h"
 #include "mainstackedwidget.h"
 #include "soundfontmanager.h"
@@ -38,17 +43,13 @@
 #include "repositorymanager.h"
 #include "utils.h"
 #include "synth.h"
-#include <QFileInfo>
-#include <QMessageBox>
-#include <QAbstractButton>
-#include <QApplication>
 
 TabManager * TabManager::s_instance = nullptr;
 
-TabManager * TabManager::prepareInstance(MainStackedWidget * stackedWidget)
+TabManager * TabManager::prepareInstance(DialogKeyboard * dialogKeyboard, MainStackedWidget * stackedWidget)
 {
     delete s_instance;
-    s_instance = new TabManager(stackedWidget);
+    s_instance = new TabManager(dialogKeyboard, stackedWidget);
     return s_instance;
 }
 
@@ -63,7 +64,8 @@ void TabManager::kill()
     s_instance = nullptr;
 }
 
-TabManager::TabManager(MainStackedWidget * stackedWidget) : QObject(nullptr),
+TabManager::TabManager(DialogKeyboard * dialogKeyboard, MainStackedWidget * stackedWidget) : QObject(nullptr),
+    _dialogKeyboard(dialogKeyboard),
     _stackedWidget(stackedWidget),
     _configTab(new ConfigPanel()),
     _browserTab(new SoundfontBrowser()),
@@ -104,7 +106,7 @@ void TabManager::openConfiguration()
 void TabManager::openNewSoundfont()
 {
     // Create a new editor
-    Editor * editor = new Editor();
+    Editor * editor = new Editor(_dialogKeyboard);
     int index = _stackedWidget->addWidgetWithTab(editor, ":/icons/file-audio.svg", "", true);
     connect(editor, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
     connect(editor, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
@@ -117,7 +119,7 @@ void TabManager::openNewSoundfont()
     _stackedWidget->setCurrentIndex(index);
 }
 
-void TabManager::openSoundfont(QString fileName)
+void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions)
 {
     fileName = Utils::fixFilePath(fileName);
 
@@ -158,8 +160,8 @@ void TabManager::openSoundfont(QString fileName)
     }
 
     // Otherwise, create a new editor or player
-    Tab * tab = ContextManager::s_playerMode ? (Tab *)(new Player()) : (Tab *)(new Editor());
-    int index = _stackedWidget->addWidgetWithTab(tab, ":/icons/file-audio.svg", QFileInfo(fileName).fileName(), !ContextManager::s_playerMode);
+    Tab * tab = ContextManager::s_playerMode ? (Tab *)(new Player(playerOptions)) : (Tab *)(new Editor(_dialogKeyboard));
+    int index = _stackedWidget->addWidgetWithTab(tab, ":/icons/file-audio.svg", QFileInfo(fileName).fileName(), true);
     connect(tab, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
     connect(tab, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
     connect(tab, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));

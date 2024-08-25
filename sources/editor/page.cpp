@@ -25,7 +25,6 @@
 #include "page.h"
 #include "soundfontmanager.h"
 #include "contextmanager.h"
-#include "extensionmanager.h"
 #include <qmath.h>
 
 SoundfontManager * Page::_sf2 = nullptr;
@@ -60,6 +59,8 @@ void Page::hideEvent(QHideEvent * event)
 {
     // Stop all sounds
     ContextManager::midi()->stopAll();
+    _synth->stop(false);
+    emit(pageHidden());
 
     QWidget::hideEvent(event);
 }

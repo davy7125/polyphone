@@ -61,7 +61,6 @@ public:
     virtual QString getLabel() { return ""; }
     virtual QString getIconName() { return ""; }
 
-public slots:
     // A key is being played or not played anymore (if velocity is 0)
     void onKeyPlayed(int key, int velocity)
     {
@@ -69,6 +68,7 @@ public slots:
             this->keyPlayedInternal(key, velocity);
     }
 
+public slots:
     // Key "space" is pressed in the tree
     void onSpacePressed()
     {
@@ -79,6 +79,12 @@ public slots:
 signals:
     // Emitted when the selected ids changed
     void selectedIdsChanged(IdList ids);
+
+    // Emitted when the rootkey of a sample changed (for updating the keyboard)
+    void rootKeyChanged(int rootKey);
+
+    // Emitted when the page is hidden (clearing thus the customization of the keyboard)
+    void pageHidden();
 
 protected:
     // Update the interface

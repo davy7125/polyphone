@@ -27,7 +27,9 @@
 
 #include <QItemSelection>
 #include "tab.h"
+#include "basetypes.h"
 class AbstractInputParser;
+class PlayerOptions;
 
 namespace Ui {
 class Player;
@@ -38,8 +40,16 @@ class Player : public Tab
     Q_OBJECT
 
 public:
-    explicit Player(QWidget *parent = nullptr);
+    Player(PlayerOptions * playerOptions, QWidget * parent = nullptr);
     ~Player();
+
+    // MIDI signals
+    bool processKey(int channel, int key, int vel) override;
+    bool processPolyPressureChanged(int channel, int key, int pressure) override { Q_UNUSED(channel); Q_UNUSED(key); Q_UNUSED(pressure); return false; }
+    bool processMonoPressureChanged(int channel, int value) override { Q_UNUSED(channel); Q_UNUSED(value); return false; }
+    bool processControllerChanged(int channel, int num, int value) override { Q_UNUSED(channel); Q_UNUSED(num); Q_UNUSED(value); return false; }
+    bool processBendChanged(int channel, float value) override { Q_UNUSED(channel); Q_UNUSED(value); return false; }
+    bool processBendSensitivityChanged(int channel, float semitones) override { Q_UNUSED(channel); Q_UNUSED(semitones); return false; }
 
 protected:
     void tabInitializing(QString filename) override;
@@ -50,8 +60,17 @@ protected:
 private slots:
     void onSelectionChanged(QItemSelection selected, QItemSelection deselected);
 
+    void on_comboChannel_currentIndexChanged(int index);
+
+    void on_comboMultipleSelection_currentIndexChanged(int index);
+
+    void on_comboSelectionByKeys_currentIndexChanged(int index);
+
 private:
     Ui::Player *ui;
+    PlayerOptions * _playerOptions;
+    bool _initializing;
+    EltID _currentId;
 };
 
 #endif // PLAYER_H

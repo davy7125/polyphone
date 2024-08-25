@@ -57,7 +57,7 @@ DialogKeyboard::DialogKeyboard(QWidget *parent) :
         ui->comboType->setCurrentIndex(2);
         break;
     }
-    ContextManager::midi()->setKeyboard(this);
+    ContextManager::midi()->addListener(this, 0);
     connect(ContextManager::configuration(), SIGNAL(keyMapChanged()), ui->keyboard, SLOT(updateMapping()));
 
     // Connections for displaying the current note and velocity
@@ -75,40 +75,10 @@ DialogKeyboard::DialogKeyboard(QWidget *parent) :
 DialogKeyboard::~DialogKeyboard()
 {
     // Save the keyboard state
+    ContextManager::midi()->removeListener(this);
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboard_height", ui->keyboard->sizeHint().height());
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboardGeometry", this->saveGeometry());
     delete ui;
-}
-
-PianoKeybdCustom * DialogKeyboard::getKeyboard()
-{
-    return ui->keyboard;
-}
-
-ControllerArea * DialogKeyboard::getControllerArea()
-{
-    return ui->controllerArea;
-}
-
-void DialogKeyboard::updateKeyPlayed(int key, int vel)
-{
-    if (key >= 0 && key <= 127)
-    {
-        if (vel == 0)
-        {
-            // Remove a key from the list
-            for (int i = _triggeredKeys.count() - 1; i >= 0; i--)
-                if (_triggeredKeys[i].first == key)
-                    _triggeredKeys.removeAt(i);
-        }
-        else
-        {
-            // Add a key in the list to display
-            _triggeredKeys << QPair<int, QPair<int, int> >(key, QPair<int, int>(vel, vel));
-        }
-    }
-
-    displayKeyInfo();
 }
 
 void DialogKeyboard::onMouseHover(int key, int vel)
@@ -127,20 +97,6 @@ void DialogKeyboard::onMouseHover(int key, int vel)
         }
         ui->labelAftertouch->setText("-");
     }
-}
-
-void DialogKeyboard::updatePolyPressure(int key, int pressure)
-{
-    if (_triggeredKeys.empty())
-        return;
-
-    // Change the pressure of an existing key
-    for (int i = 0; i < _triggeredKeys.count(); i++)
-        if (_triggeredKeys[i].first == key)
-            _triggeredKeys[i].second.second = pressure;
-
-    if (_triggeredKeys.last().first == key)
-        displayKeyInfo();
 }
 
 void DialogKeyboard::glow()
@@ -188,7 +144,7 @@ void DialogKeyboard::on_comboType_currentIndexChanged(int index)
         break;
     }
 
-    this->resizeWindow();
+    this->adjustSize();
 }
 
 void DialogKeyboard::displayKeyInfo()
@@ -239,27 +195,7 @@ void DialogKeyboard::updateControlAreaVisibility()
         ui->pushExpand->setToolTip(tr("Show the controller area"));
     }
 
-    this->resizeWindow();
-}
-
-void DialogKeyboard::resizeWindow()
-{
-    // Resize the window so that the keyboard has the same height
-    int keyboardHeight = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "keyboard_height", 60).toInt();
-
-    // Keyboard corresponding width
-    int keyboardWidth = static_cast<int>(ui->keyboard->ratio() * keyboardHeight);
-
-    // Size of the window
-    int margin = ui->topLayout->contentsMargins().left(); // Vertical and horizontal are same
-    int windowWidth = keyboardWidth + 2 * margin;
-    int windowHeight = ui->frameBottom->height() + 2 * margin + keyboardHeight;
-    if (ui->controllerArea->isVisible())
-        windowHeight += ui->controllerArea->height(); // Vertical margin is included
-
-    // Resize the window
     this->adjustSize();
-    this->resize(windowWidth, windowHeight + 3); // Adding a small offset (3) seems to be necessary...
 }
 
 void DialogKeyboard::keyPressEvent(QKeyEvent * event)
@@ -267,4 +203,91 @@ void DialogKeyboard::keyPressEvent(QKeyEvent * event)
     // Prevent the escape key from closing the window
     if (event->key() != Qt::Key_Escape)
           QDialog::keyPressEvent(event);
+}
+
+bool DialogKeyboard::processKey(int channel, int key, int vel)
+{
+    if (channel != -1)
+        return false;
+
+    if (key >= 0 && key <= 127)
+    {
+        if (vel > 0)
+        {
+            // Add a key in the list to display
+            _triggeredKeys << QPair<int, QPair<int, int> >(key, QPair<int, int>(vel, vel));
+
+            // Update the keyboard
+            ui->keyboard->inputNoteOn(key, vel);
+        }
+        else
+        {
+            // Remove a key from the list
+            for (int i = _triggeredKeys.count() - 1; i >= 0; i--)
+                if (_triggeredKeys[i].first == key)
+                    _triggeredKeys.removeAt(i);
+
+            // Update the keyboard
+            ui->keyboard->inputNoteOff(key);
+            ui->keyboard->removeCurrentRange(key);
+        }
+    }
+
+    displayKeyInfo();
+    return false;
+}
+
+bool DialogKeyboard::processPolyPressureChanged(int channel, int key, int pressure)
+{
+    if (channel != -1 || _triggeredKeys.empty())
+        return false;
+
+    // Change the pressure of an existing key
+    for (int i = 0; i < _triggeredKeys.count(); i++)
+        if (_triggeredKeys[i].first == key)
+            _triggeredKeys[i].second.second = pressure;
+
+    if (_triggeredKeys.last().first == key)
+        displayKeyInfo();
+
+    return false;
+}
+
+bool DialogKeyboard::processMonoPressureChanged(int channel, int value)
+{
+    Q_UNUSED(channel)
+    ui->controllerArea->updateMonoPressure(value);
+    return false;
+}
+
+bool DialogKeyboard::processControllerChanged(int channel, int num, int value)
+{
+    if (channel != -1)
+        return false;
+
+    ui->controllerArea->updateController(num, value);
+    return false;
+}
+
+bool DialogKeyboard::processBendChanged(int channel, float value)
+{
+    if (channel != -1)
+        return false;
+
+    ui->controllerArea->updateBend(value, channel != -1);
+    return false;
+}
+
+bool DialogKeyboard::processBendSensitivityChanged(int channel, float semitones)
+{
+    if (channel != -1)
+        return false;
+
+    ui->controllerArea->updateBendSensitivity(semitones);
+    return false;
+}
+
+PianoKeybdCustom * DialogKeyboard::getKeyboard()
+{
+    return ui->keyboard;
 }

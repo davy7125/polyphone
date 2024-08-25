@@ -26,8 +26,9 @@
 #define EXTENSION_MIDI_H
 
 #include "extension_midi_dialog.h"
+#include "imidilistener.h"
 
-class ExtensionMidi: public QObject
+class ExtensionMidi: public QObject, public IMidiListener
 {
     Q_OBJECT
 
@@ -47,20 +48,15 @@ public:
     /// Path of the icon
     virtual QString getIconPath() const = 0;
 
+    /// Priority for processing MIDI signals
+    virtual int getMidiPriority() const = 0;
+
     QDialog * getDialog()
     {
         if (_dialog == nullptr)
             _dialog = new ExtensionMidiDialog(this->getTitle(), this->getIdentifier(), this->getGui());
         return _dialog;
     }
-
-    virtual bool processKeyOn(int channel, int key, int vel) = 0;
-    virtual bool processKeyOff(int channel, int key) = 0;
-    virtual bool processPolyPressureChanged(int channel, int key, int pressure) = 0;
-    virtual bool processMonoPressureChanged(int channel, int value) = 0;
-    virtual bool processControllerChanged(int channel, int num, int value) = 0;
-    virtual bool processBendChanged(int channel, float value) = 0;
-    virtual bool processBendSensitivityChanged(int channel, float semitones) = 0;
 
 protected:
     virtual QWidget * getGui() = 0;

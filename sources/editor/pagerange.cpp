@@ -77,4 +77,3 @@ void PageRange::keyPlayedInternal(int key, int velocity)
 {
     ui->rangeEditor->playKey(key, velocity);
 }
-

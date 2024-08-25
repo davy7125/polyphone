@@ -18,7 +18,7 @@ DEFINES += USE_LOCAL_RTAUDIO
 #DEFINES += RT_AUDIO_5_2
 
 # Uncomment lines for hiding features
-DEFINES += NO_SF2_REPOSITORY
+#DEFINES += NO_SF2_REPOSITORY
 #DEFINES += NO_SF2_CREATION
 
 # Polyphone version
@@ -322,6 +322,7 @@ SOURCES	+= main.cpp \
     mainwindow/tabmanager.cpp \
     mainwindow/topbackground.cpp \
     player/player.cpp \
+    player/playeroptions.cpp \
     player/playertreeproxymodel.cpp \
     repository/browser/browsersortmenu.cpp \
     repository/widgets/customtextedit.cpp \
@@ -566,6 +567,7 @@ SOURCES	+= main.cpp \
     core/input/sfark/sfarkextractor2.cpp
 
 HEADERS += \
+    context/imidilistener.h \
     core/input/grandorgue/grandorguedatathrough.h \
     core/input/grandorgue/grandorgueranklink.h \
     core/input/grandorgue/grandorgueswitch.h \
@@ -682,6 +684,7 @@ HEADERS += \
     mainwindow/tabmanager.h \
     mainwindow/topbackground.h \
     player/player.h \
+    player/playeroptions.h \
     player/playertreeproxymodel.h \
     repository/browser/browsersortmenu.h \
     repository/widgets/customtextedit.h \

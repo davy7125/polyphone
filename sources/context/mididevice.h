@@ -28,30 +28,28 @@
 #include <QString>
 #include <QObject>
 #include "imidivalues.h"
+class IMidiListener;
 class ConfManager;
 class RtMidiIn;
-class DialogKeyboard;
-class PianoKeybdCustom;
-class Synth;
 
 class MidiDevice: public QObject, public IMidiValues
 {
     Q_OBJECT
 
 public:
-    MidiDevice(ConfManager * configuration, Synth * synth);
+    MidiDevice(ConfManager * configuration);
     ~MidiDevice() override;
 
     // Initialize the midi device
     QMap<QString, QString> getMidiList();
     void openMidiPort(QString source); // Source in the form "{api type}#{port number}"
 
-    // Connect the keyboard
-    void setKeyboard(DialogKeyboard * dialogKeyboard) { _dialogKeyboard = dialogKeyboard; }
-    PianoKeybdCustom * keyboard();
-
     // Stop all keys
     void stopAll();
+
+    // Add / remove MIDI listener
+    void addListener(IMidiListener * listener, int priority);
+    void removeListener(IMidiListener * listener);
 
     // Get last values (-1 if not received yet)
     int getControllerValue(int channel, int controllerNumber) override;
@@ -59,10 +57,6 @@ public:
     float getBendSensitivityValue(int channel) override;
     int getMonoPressure(int channel) override;
     int getPolyPressure(int channel, int key) override;
-
-signals:
-    // Emit key ON / OFF for the editor (channel -1)
-    void keyPlayed(int key, int vel);
 
 protected:
     void customEvent(QEvent * event) override;
@@ -88,6 +82,15 @@ private:
         quint8 _rpnHistoryPosition;
     };
 
+    struct Sustain_State
+    {
+        bool _currentKeys[128];
+        bool _sustainedKeys[128];
+        bool _sostenutoMemoryKeys[128];
+        bool _isSustainOn;
+        bool _isSostenutoOn;
+    };
+
     void getMidiList(int api, QMap<QString, QString> *map);
     void processKeyOn(int channel, int key, int vel);
     void processKeyOff(int channel, int key);
@@ -97,19 +100,18 @@ private:
     void processBendChanged(int channel, float value);
     void processBendSensitivityChanged(int channel, float semitones);
 
-    DialogKeyboard * _dialogKeyboard;
     ConfManager * _configuration;
-    RtMidiIn * _midiin;
-    Synth * _synth;
+    RtMidiIn * _midiIn;
 
     // Last values, first is channel -1 (for the editor) then channel 1 to 16
     MIDI_State _midiStates[17];
 
-    // Sustain / Sostenuto pedals (channel -1 only)
-    bool _currentKeys[128];
-    bool _sustainedKeys[128];
-    bool _sostenutoMemoryKeys[128];
-    bool _isSustainOn, _isSostenutoOn;
+    // Sustain / Sostenuto pedals
+    Sustain_State _sustainStates[17];
+
+    // MIDI listeners
+    QVector<IMidiListener *> _listeners;
+    QVector<int> _listenerPriorities;
 };
 
 #endif // MIDIDEVICE_H

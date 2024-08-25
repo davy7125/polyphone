@@ -35,7 +35,12 @@ SpinBoxKey::SpinBoxKey(QWidget *parent, bool isNullable) : QSpinBox(parent),
     this->lineEdit()->setText("60");
     this->setValue(60);
 
-    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), this, SLOT(onKeyPlayed(int,int)));
+    ContextManager::midi()->addListener(this, 1000);
+}
+
+SpinBoxKey::~SpinBoxKey()
+{
+    ContextManager::midi()->removeListener(this);
 }
 
 QValidator::State SpinBoxKey::validate(QString &input, int &pos) const
@@ -77,10 +82,12 @@ QString SpinBoxKey::textFromValue(int val) const
     return keyName;
 }
 
-void SpinBoxKey::onKeyPlayed(int key, int vel)
+bool SpinBoxKey::processKey(int channel, int key, int vel)
 {
+    Q_UNUSED(channel)
     if (vel > 0 && this->hasFocus())
         this->setValue(key);
+    return false;
 }
 
 void SpinBoxKey::setAlwaysShowKeyName(bool isOn)

@@ -28,15 +28,14 @@ QBrush PianoKey::PIANO_BLACK_BRUSH = QBrush(Qt::black);
 QBrush PianoKey::PIANO_WHITE_BRUSH = QBrush(Qt::white);
 double PianoKey::s_glowEffect = 0;
 
-PianoKey::PianoKey(const QRectF &rect, const bool black, const int note)
-    : QGraphicsRectItem(rect),
-    m_pressed(false),
-    m_brush(black ? PIANO_BLACK_BRUSH : PIANO_WHITE_BRUSH),
-    m_note(note),
-    m_black(black),
-    m_markerType(PianoKeybd::MARKER_TYPE_NONE)
+PianoKey::PianoKey(const QRectF &rect, const bool black, const int note) : QGraphicsRectItem(rect),
+    _pressed(false),
+    _brush(black ? PIANO_BLACK_BRUSH : PIANO_WHITE_BRUSH),
+    _note(note),
+    _black(black),
+    _markerType(PianoKeybd::MARKER_TYPE_NONE)
 {
-    if (m_black)
+    if (_black)
         this->setZValue(1);
     setAcceptedMouseButtons(Qt::NoButton);
 }
@@ -48,33 +47,33 @@ void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
     const QPen blackPen(mergeColor(Qt::black, glowColor, s_glowEffect), 1);
     const QPen grayPen(QBrush(mergeColor(Qt::gray, glowColor, s_glowEffect)),
                        1, Qt::SolidLine,  Qt::RoundCap, Qt::RoundJoin);
-    if (m_pressed)
+    if (_pressed)
     {
-        if (m_selectedBrush.style() != Qt::NoBrush)
-            painter->setBrush(m_selectedBrush);
+        if (_selectedBrush.style() != Qt::NoBrush)
+            painter->setBrush(_selectedBrush);
         else
             painter->setBrush(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND));
     }
     else
-        painter->setBrush(m_brush);
+        painter->setBrush(_brush);
 
     painter->setPen(blackPen);
     painter->drawRoundedRect(rect(), 15, 15, Qt::RelativeSize);
-    if (m_black)
+    if (_black)
         QSvgRenderer(QString(":/vpiano/blkey.svg")).render(painter, rect());
     else
     {
         QPointF points[3] =
         {
-             QPointF(rect().left()+1.5, rect().bottom()-1),
-             QPointF(rect().right()-1, rect().bottom()-1),
-             QPointF(rect().right()-1, rect().top()+1),
+             QPointF(rect().left() + 1.5, rect().bottom() - 1),
+             QPointF(rect().right() - 1, rect().bottom() - 1),
+             QPointF(rect().right() - 1, rect().top()  +1),
         };
         painter->setPen(grayPen);
         painter->drawPolyline(points, 3);
     }
 
-    if (m_markerType != PianoKeybd::MARKER_TYPE_NONE)
+    if (_markerType != PianoKeybd::MARKER_TYPE_NONE)
     {
         QRectF rectMarker = rect();
         qreal w = rectMarker.width();
@@ -87,7 +86,7 @@ void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
             rectMarker.setBottom(rectMarker.bottom() - margin);
         rectMarker.setTop(rectMarker.bottom() - rectMarker.width());
 
-        drawMarker(painter, rectMarker, m_markerType);
+        drawMarker(painter, rectMarker, _markerType);
     }
 }
 
@@ -100,23 +99,23 @@ QColor PianoKey::mergeColor(QColor color1, QColor color2, double fade)
 
 void PianoKey::setPressed(bool p)
 {
-    if (p != m_pressed)
+    if (p != _pressed)
     {
-        m_pressed = p;
+        _pressed = p;
         update();
     }
 }
 
 void PianoKey::resetBrush()
 {
-    m_brush = m_black ? PIANO_BLACK_BRUSH : PIANO_WHITE_BRUSH;
+    _brush = _black ? PIANO_BLACK_BRUSH : PIANO_WHITE_BRUSH;
 }
 
 void PianoKey::setMarker(PianoKeybd::MarkerType type)
 {
-    if (m_markerType != type)
+    if (_markerType != type)
     {
-        m_markerType = type;
+        _markerType = type;
         update();
     }
 }

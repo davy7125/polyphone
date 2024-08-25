@@ -27,6 +27,7 @@
 #include <QDir>
 #include <QCoreApplication>
 #include "inputfactory.h"
+#include "playeroptions.h"
 
 Options::Options(int argc, char *argv[]) :
     _currentState(STATE_INPUT_FILE), // By default args are input files
@@ -36,7 +37,8 @@ Options::Options(int argc, char *argv[]) :
     _sf3Quality(1),
     _sfzPresetPrefix(false),
     _sfzOneDirPerBank(false),
-    _sfzGeneralMidi(false)
+    _sfzGeneralMidi(false),
+    _playerOptions(nullptr)
 {
     _appPath = QFileInfo(QCoreApplication::applicationFilePath()).path();
 
@@ -68,6 +70,11 @@ Options::Options(int argc, char *argv[]) :
     // Post-treatment
     if (!_error)
         postTreatment();
+}
+
+Options::~Options()
+{
+    delete _playerOptions;
 }
 
 void Options::processType1(QString arg)
@@ -173,6 +180,16 @@ void Options::processType2(QString arg)
             else
                 _error = true;
         }
+        else if (_mode == MODE_PLAYER)
+        {
+            if (_playerOptions == nullptr)
+            {
+                _playerOptions = new PlayerOptions();
+                _error = !_playerOptions->parse(arg);
+            }
+            else
+                _error = true;
+        }
         else
             _error = true;
         break;
@@ -248,4 +265,18 @@ QString Options::getOutputFileFullPath()
     }
 
     return strTmp + _outputFile + extension;
+}
+
+QString Options::getInputFilesAsString()
+{
+    // All files
+    QStringList filesToOpen = _inputFiles;
+    filesToOpen.removeAll("");
+    QString str = filesToOpen.join('|');
+
+    // Possible add the player options
+    if (_playerOptions != nullptr)
+        str += "||" + _playerOptions->toString();
+
+    return str;
 }

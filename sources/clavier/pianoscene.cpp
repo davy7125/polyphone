@@ -32,19 +32,10 @@ int PianoScene::KEYHEIGHT = 72;
 
 qreal PianoScene::sceneWidth(int startKey, int keys)
 {
+    // Number of white keys
     int nbWidth = 0;
-    if (getOffsetX(startKey) < 0.1)
-    {
-        nbWidth++;
-        startKey++;
-    }
-    if (getOffsetX(startKey + keys - 1) < 0.1)
-    {
-        nbWidth++;
-        keys--;
-    }
     for (int i = startKey; i < startKey + keys; i++)
-        if (getOffsetX(i) < 0.1)
+        if (getOffsetX(i) == 0)
             nbWidth++;
 
     return KEYWIDTH * nbWidth;
@@ -56,22 +47,21 @@ double PianoScene::getOffsetX(int numKey)
     switch (numKey % 12)
     {
     case 1:  offset = .425; break;
+    case 3:  offset = .575; break;
     case 6:  offset = .35;  break;
     case 8:  offset = .5;   break;
-    case 3:  offset = .575; break;
     case 10: offset = .65;  break;
     default: offset = 0;    break;
     }
     return offset;
 }
 
-PianoScene::PianoScene (const int startKey, const int numKeys, PianoScene *previousScene, QObject * parent ) :
+PianoScene::PianoScene(const int startKey, const int numKeys, PianoScene *previousScene, QObject * parent) :
     QGraphicsScene(QRectF(0, 0, sceneWidth(startKey, numKeys), KEYHEIGHT), parent),
     m_numKeys(numKeys),
     m_startKey(startKey),
     m_minNote(0),
     m_maxNote(127),
-    m_ratio((double)width() / (double)height()),
     _glowEffect(0)
 {
     _timer = new QTimer(this);

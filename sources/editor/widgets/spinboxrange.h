@@ -26,41 +26,49 @@
 #define SPINBOXRANGE_H
 
 #include <QAbstractSpinBox>
+#include "imidilistener.h"
 
-class SpinBoxRange : public QAbstractSpinBox
+class SpinBoxRange : public QAbstractSpinBox, public IMidiListener
 {
     Q_OBJECT
 
 public:
     SpinBoxRange(QWidget * parent);
-    ~SpinBoxRange() {}
+    ~SpinBoxRange();
 
     // QAbstractSpinBox virtual members
-    virtual void stepBy(int steps);
-    virtual QValidator::State validate(QString& input, int& pos) const;
+    void stepBy(int steps) override;
+    QValidator::State validate(QString& input, int& pos) const override;
 
     bool isNull();
     int getValMin();
     int getValMax();
     void setText(QString text);
 
+    // MIDI signals
+    bool processKey(int channel, int key, int vel) override;
+    bool processPolyPressureChanged(int channel, int key, int pressure) override { Q_UNUSED(channel); Q_UNUSED(key); Q_UNUSED(pressure); return false; }
+    bool processMonoPressureChanged(int channel, int value) override { Q_UNUSED(channel); Q_UNUSED(value); return false; }
+    bool processControllerChanged(int channel, int num, int value) override { Q_UNUSED(channel); Q_UNUSED(num); Q_UNUSED(value); return false; }
+    bool processBendChanged(int channel, float value) override { Q_UNUSED(channel); Q_UNUSED(value); return false; }
+    bool processBendSensitivityChanged(int channel, float semitones) override { Q_UNUSED(channel); Q_UNUSED(semitones); return false; }
+
     static QString SEPARATOR;
 
 public slots:
-    virtual void clear();
+    void clear() override;
 
 signals:
     void valueChanged();
 
 protected:
-    virtual StepEnabled stepEnabled() const;
+    StepEnabled stepEnabled() const override;
     virtual QString getText(int value) const = 0;
     virtual int getValue(QString &text, bool &ok) const = 0;
     void formatText();
 
 private slots:
     void updateValue();
-    void onKeyPlayed(int key, int vel);
 
 private:
     enum SpinboxSection

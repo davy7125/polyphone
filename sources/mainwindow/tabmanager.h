@@ -33,13 +33,15 @@ class SoundfontBrowser;
 class Tab;
 class UserArea;
 class SoundfontViewer;
+class PlayerOptions;
+class DialogKeyboard;
 
 class TabManager : public QObject
 {
     Q_OBJECT
 
 public:
-    static TabManager * prepareInstance(MainStackedWidget * stackedWidget = nullptr);
+    static TabManager * prepareInstance(DialogKeyboard * dialogKeyboard, MainStackedWidget * stackedWidget);
     static TabManager * getInstance();
     static void kill();
 
@@ -48,7 +50,7 @@ public slots:
     void openConfiguration();
 
     /// Open the soundfont browser
-    void openSoundfont(QString fileName);
+    void openSoundfont(QString fileName, PlayerOptions * playerOptions);
     void openNewSoundfont();
 
     /// Open the repository, initialized with a filter
@@ -93,9 +95,10 @@ private slots:
     void onTabIndexChanged(int tabIndex);
 
 private:
-    explicit TabManager(MainStackedWidget * stackedWidget);
+    explicit TabManager(DialogKeyboard * dialogKeyboard, MainStackedWidget * stackedWidget);
     ~TabManager();
 
+    DialogKeyboard * _dialogKeyboard;
     MainStackedWidget * _stackedWidget;
     ConfigPanel * _configTab;
     SoundfontBrowser * _browserTab;
