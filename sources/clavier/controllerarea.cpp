@@ -33,7 +33,8 @@
 ControllerArea::ControllerArea(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ControllerArea),
-    _ledState(false)
+    _ledState(false),
+    _channel(-1)
 {
     ui->setupUi(this);
 
@@ -50,15 +51,15 @@ ControllerArea::ControllerArea(QWidget *parent) :
     ui->push4->setIcon(_ledOff);
 
     // Initialization of the sensitivity slider
-    updateBendSensitivity(ContextManager::midi()->getBendSensitivityValue(-1));
+    processBendSensitivityChanged(-1, ContextManager::midi()->getBendSensitivityValue(-1));
 
     // Initialization of the pressure slider
-    updateMonoPressure(ContextManager::midi()->getMonoPressure(-1));
+    processMonoPressureChanged(-1, ContextManager::midi()->getMonoPressure(-1));
 
     // Initialization of the wheel
     ui->sliderPitchWheel->setColorFromMiddle(true);
     ui->sliderPitchWheel->setBackToValue(64);
-    updateBend(0); // Always in the middle
+    updateBend(-1, 0); // Always in the middle
 
     // Initialization of the controllers
     ui->comboControl1->blockSignals(true);
@@ -77,92 +78,19 @@ ControllerArea::ControllerArea(QWidget *parent) :
     ui->comboControl4->selectCC(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "controller_4", 64).toInt());
     on_comboControl4_currentIndexChanged(-1);
     ui->comboControl4->blockSignals(false);
+
+    ContextManager::midi()->addListener(this, 0);
+}
+
+void ControllerArea::setChannel(int channel)
+{
+    _channel = channel;
 }
 
 ControllerArea::~ControllerArea()
 {
+    ContextManager::midi()->removeListener(this);
     delete ui;
-}
-
-void ControllerArea::updateMonoPressure(int value)
-{
-    if (value < 0)
-        value = 0;
-    else if (value > 127)
-        value = 127;
-
-    ui->sliderPressure->blockSignals(true);
-    ui->sliderPressure->setValue(value);
-    ui->sliderPressure->blockSignals(false);
-
-    ui->labelPressureValue->setText(QString::number(value));
-}
-
-void ControllerArea::updateController(int num, int value)
-{
-    // Update first input?
-    if (ui->comboControl1->getCurrentCC() == num)
-    {
-        ui->knob1->blockSignals(true);
-        ui->knob1->setValue(value);
-        ui->labelValue1->setText(QString::number(value));
-        ui->knob1->blockSignals(false);
-    }
-
-    // Update second input?
-    if (ui->comboControl2->getCurrentCC() == num)
-    {
-        ui->knob2->blockSignals(true);
-        ui->knob2->setValue(value);
-        ui->labelValue2->setText(QString::number(value));
-        ui->knob2->blockSignals(false);
-    }
-
-    // Update third input?
-    if (ui->comboControl3->getCurrentCC() == num)
-    {
-        ui->knob3->blockSignals(true);
-        ui->knob3->setValue(value);
-        ui->labelValue3->setText(QString::number(value));
-        ui->knob3->blockSignals(false);
-    }
-
-    // Update fourth input?
-    if (ui->comboControl4->getCurrentCC() == num)
-    {
-        _ledState = (value >= 64);
-        updateInput4Display();
-    }
-}
-
-void ControllerArea::updateBend(float value, bool stopTimer)
-{
-    if (value < -1)
-        value = -1;
-    else if (value > 1)
-        value = 1;
-
-    ui->sliderPitchWheel->blockSignals(true);
-    ui->sliderPitchWheel->setValue(static_cast<int>((value + 1) * 64));
-    if (stopTimer)
-        ui->sliderPitchWheel->stopTimer();
-    ui->sliderPitchWheel->blockSignals(false);
-
-    ui->labelWheelValue->setText(QLocale::system().toString(value, 'f', 2));
-}
-
-void ControllerArea::updateBendSensitivity(float semitones)
-{
-    if (semitones < 0)
-        semitones = 0;
-    else if (semitones > 15.0)
-        semitones = 15.0;
-
-    ui->sliderSensitivity->blockSignals(true);
-    ui->sliderSensitivity->setValue(static_cast<int>(semitones * 100));
-    ui->sliderSensitivity->blockSignals(false);
-
-    ui->labelSensitivityValue->setText(QLocale::system().toString(semitones, 'f', 2));
 }
 
 void ControllerArea::on_sliderPitchWheel_valueChanged(int value)
@@ -175,7 +103,7 @@ void ControllerArea::on_sliderPitchWheel_valueChanged(int value)
 void ControllerArea::on_sliderSensitivity_valueChanged(int value)
 {
     float semitones = 0.01f * value;
-    updateBendSensitivity(semitones);
+    processBendSensitivityChanged(-1, semitones);
 
     // Combinaison of 4 controller events
     QApplication::postEvent(ContextManager::midi(), new ControllerEvent(-1, 101, 0));
@@ -186,7 +114,7 @@ void ControllerArea::on_sliderSensitivity_valueChanged(int value)
 
 void ControllerArea::on_sliderPressure_valueChanged(int value)
 {
-    updateMonoPressure(value);
+    processMonoPressureChanged(-1, value);
     QApplication::postEvent(ContextManager::midi(), new MonoPressureEvent(-1, value));
 }
 
@@ -296,4 +224,106 @@ void ControllerArea::updateInput4Display()
         ui->labelValue4->setText(tr("off"));
         ui->push4->setIcon(_ledOff);
     }
+}
+
+bool ControllerArea::processMonoPressureChanged(int channel, int value)
+{
+    if (channel != -1)
+        return false;
+
+    if (value < 0)
+        value = 0;
+    else if (value > 127)
+        value = 127;
+
+    ui->sliderPressure->blockSignals(true);
+    ui->sliderPressure->setValue(value);
+    ui->sliderPressure->blockSignals(false);
+
+    ui->labelPressureValue->setText(QString::number(value));
+    return false;
+}
+
+bool ControllerArea::processControllerChanged(int channel, int num, int value)
+{
+    if (channel != -1)
+        return false;
+
+    // Update first input?
+    if (ui->comboControl1->getCurrentCC() == num)
+    {
+        ui->knob1->blockSignals(true);
+        ui->knob1->setValue(value);
+        ui->labelValue1->setText(QString::number(value));
+        ui->knob1->blockSignals(false);
+    }
+
+    // Update second input?
+    if (ui->comboControl2->getCurrentCC() == num)
+    {
+        ui->knob2->blockSignals(true);
+        ui->knob2->setValue(value);
+        ui->labelValue2->setText(QString::number(value));
+        ui->knob2->blockSignals(false);
+    }
+
+    // Update third input?
+    if (ui->comboControl3->getCurrentCC() == num)
+    {
+        ui->knob3->blockSignals(true);
+        ui->knob3->setValue(value);
+        ui->labelValue3->setText(QString::number(value));
+        ui->knob3->blockSignals(false);
+    }
+
+    // Update fourth input?
+    if (ui->comboControl4->getCurrentCC() == num)
+    {
+        _ledState = (value >= 64);
+        updateInput4Display();
+    }
+    return false;
+}
+
+bool ControllerArea::processBendChanged(int channel, float value)
+{
+    updateBend(channel, value, channel != -1);
+    return false;
+}
+
+void ControllerArea::updateBend(int channel, float value, bool stopTimer)
+{
+    if (channel != -1)
+        return;
+
+    if (value < -1)
+        value = -1;
+    else if (value > 1)
+        value = 1;
+
+    ui->sliderPitchWheel->blockSignals(true);
+    ui->sliderPitchWheel->setValue(static_cast<int>((value + 1) * 64));
+    if (stopTimer)
+        ui->sliderPitchWheel->stopTimer();
+    ui->sliderPitchWheel->blockSignals(false);
+
+    ui->labelWheelValue->setText(QLocale::system().toString(value, 'f', 2));
+}
+
+bool ControllerArea::processBendSensitivityChanged(int channel, float semitones)
+{
+    if (channel != -1)
+        return false;
+
+    if (semitones < 0)
+        semitones = 0;
+    else if (semitones > 15.0)
+        semitones = 15.0;
+
+    ui->sliderSensitivity->blockSignals(true);
+    ui->sliderSensitivity->setValue(static_cast<int>(semitones * 100));
+    ui->sliderSensitivity->blockSignals(false);
+
+    ui->labelSensitivityValue->setText(QLocale::system().toString(semitones, 'f', 2));
+    return false;
 }

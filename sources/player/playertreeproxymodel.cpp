@@ -23,12 +23,12 @@
 ***************************************************************************/
 
 #include "playertreeproxymodel.h"
-#include <QTreeView>
+#include <QListView>
 #include "basetypes.h"
 #include "soundfontmanager.h"
 #include "treeitem.h"
 
-PlayerTreeProxyModel::PlayerTreeProxyModel(int indexSf2, QTreeView *treeView, QAbstractItemModel * model) : QAbstractProxyModel(treeView),
+PlayerTreeProxyModel::PlayerTreeProxyModel(int indexSf2, QAbstractItemModel * model) : QAbstractProxyModel(),
     _indexSf2(indexSf2)
 {
     // Get the root preset index
@@ -48,11 +48,6 @@ PlayerTreeProxyModel::PlayerTreeProxyModel(int indexSf2, QTreeView *treeView, QA
     }
 
     this->setSourceModel(model);
-    treeView->setModel(this);
-
-    // Expand everything
-    foreach(int bank, _idByBankPreset.keys())
-        treeView->setExpanded(this->index(bank, 0, QModelIndex()), true);
 }
 
 int PlayerTreeProxyModel::columnCount(const QModelIndex &parent) const
@@ -152,11 +147,26 @@ QVariant PlayerTreeProxyModel::data(const QModelIndex &proxyIndex, int role) con
             if (proxyIndex.row() < _idByBankPreset.count())
                 return tr("Bank %1").arg(_idByBankPreset.keys()[proxyIndex.row()]);
         }
-        else if (role == Qt::UserRole)
+        else if (role == Qt::UserRole + 1)
         {
-            // Preset header with the associated bank number
+            // Return the bank number
             if (proxyIndex.row() < _idByBankPreset.count())
-                return QVariant::fromValue(EltID(elementRootPrst, _indexSf2, _idByBankPreset.keys()[proxyIndex.row()]));
+                return _idByBankPreset.keys()[proxyIndex.row()];
+        }
+    }
+    else if (proxyIndex.isValid() && proxyIndex.internalPointer() != nullptr)
+    {
+        if (role == Qt::UserRole + 1)
+        {
+            // Current bank
+            if (proxyIndex.parent().row() < _idByBankPreset.count())
+            {
+                int bank = _idByBankPreset.keys()[proxyIndex.parent().row()];
+
+                // Return the preset number
+                if (proxyIndex.row() < _idByBankPreset[bank].count())
+                    return _idByBankPreset[bank].keys()[proxyIndex.row()];
+            }
         }
     }
 

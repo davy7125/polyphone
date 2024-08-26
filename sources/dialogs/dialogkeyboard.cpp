@@ -253,40 +253,6 @@ bool DialogKeyboard::processPolyPressureChanged(int channel, int key, int pressu
     return false;
 }
 
-bool DialogKeyboard::processMonoPressureChanged(int channel, int value)
-{
-    Q_UNUSED(channel)
-    ui->controllerArea->updateMonoPressure(value);
-    return false;
-}
-
-bool DialogKeyboard::processControllerChanged(int channel, int num, int value)
-{
-    if (channel != -1)
-        return false;
-
-    ui->controllerArea->updateController(num, value);
-    return false;
-}
-
-bool DialogKeyboard::processBendChanged(int channel, float value)
-{
-    if (channel != -1)
-        return false;
-
-    ui->controllerArea->updateBend(value, channel != -1);
-    return false;
-}
-
-bool DialogKeyboard::processBendSensitivityChanged(int channel, float semitones)
-{
-    if (channel != -1)
-        return false;
-
-    ui->controllerArea->updateBendSensitivity(semitones);
-    return false;
-}
-
 PianoKeybdCustom * DialogKeyboard::getKeyboard()
 {
     return ui->keyboard;

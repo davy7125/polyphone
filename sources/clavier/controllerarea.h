@@ -26,13 +26,14 @@
 #define CONTROLLERAREA_H
 
 #include <QWidget>
+#include "imidilistener.h"
 class QComboBox;
 
 namespace Ui {
 class ControllerArea;
 }
 
-class ControllerArea : public QWidget
+class ControllerArea : public QWidget, public IMidiListener
 {
     Q_OBJECT
 
@@ -40,10 +41,17 @@ public:
     explicit ControllerArea(QWidget *parent = nullptr);
     ~ControllerArea();
 
-    void updateMonoPressure(int value);
-    void updateController(int num, int value);
-    void updateBend(float value, bool stopTimer = true);
-    void updateBendSensitivity(float semitones);
+    void setChannel(int channel);
+
+    // Reaction to MIDI signals
+    bool processKey(int channel, int key, int vel) override { Q_UNUSED(channel); Q_UNUSED(key); Q_UNUSED(vel); return false; }
+    bool processPolyPressureChanged(int channel, int key, int pressure) override { Q_UNUSED(channel); Q_UNUSED(key); Q_UNUSED(pressure); return false; }
+    bool processMonoPressureChanged(int channel, int value) override;
+    bool processControllerChanged(int channel, int num, int value) override;
+    bool processBendChanged(int channel, float value) override;
+    bool processBendSensitivityChanged(int channel, float semitones) override;
+
+    void updateBend(int channel, float value, bool stopTimer = true);
 
 private slots:
     void on_sliderPitchWheel_valueChanged(int value);
@@ -65,6 +73,7 @@ private:
     QPixmap _ledOn;
     QPixmap _ledOff;
     bool _ledState;
+    int _channel;
 };
 
 #endif // CONTROLLERAREA_H

@@ -30,6 +30,7 @@
 #include "basetypes.h"
 class AbstractInputParser;
 class PlayerOptions;
+class Synth;
 
 namespace Ui {
 class Player;
@@ -58,19 +59,26 @@ protected:
     void tabUpdate(QString editingSource) override;
 
 private slots:
-    void onSelectionChanged(QItemSelection selected, QItemSelection deselected);
-
+    void onBankSelectionChanged(QItemSelection selected, QItemSelection deselected);
+    void onPresetSelectionChanged(QItemSelection selected, QItemSelection deselected);
     void on_comboChannel_currentIndexChanged(int index);
-
     void on_comboMultipleSelection_currentIndexChanged(int index);
-
     void on_comboSelectionByKeys_currentIndexChanged(int index);
 
 private:
+    void customizeKeyboard();
+    void scanPreset(EltID presetId, bool * keys);
+    QVector<bool> getEnabledKeysForInstrument(EltID idInst);
+
     Ui::Player *ui;
     PlayerOptions * _playerOptions;
+    Synth * _synth;
     bool _initializing;
-    EltID _currentId;
+    int _currentSoundfontId;
+    QList<EltID> _currentIds;
+    int _presetPositionByPresetNumber[128];
+    int _currentKeyVelocities[128];
+    QMap<int, QVector<bool> > _rangeByInst;
 };
 
 #endif // PLAYER_H

@@ -51,10 +51,10 @@ public:
     // Reaction to MIDI signals
     bool processKey(int channel, int key, int vel) override;
     bool processPolyPressureChanged(int channel, int key, int pressure) override;
-    bool processMonoPressureChanged(int channel, int value) override;
-    bool processControllerChanged(int channel, int num, int value) override;
-    bool processBendChanged(int channel, float value) override;
-    bool processBendSensitivityChanged(int channel, float semitones) override;
+    bool processMonoPressureChanged(int channel, int value) override { Q_UNUSED(channel); Q_UNUSED(value); return false; }
+    bool processControllerChanged(int channel, int num, int value) override { Q_UNUSED(channel); Q_UNUSED(num); Q_UNUSED(value); return false; }
+    bool processBendChanged(int channel, float value) override { Q_UNUSED(channel); Q_UNUSED(value); return false; }
+    bool processBendSensitivityChanged(int channel, float semitones) override { Q_UNUSED(channel); Q_UNUSED(semitones); return false; }
 
 protected:
     void closeEvent(QCloseEvent * event) override;

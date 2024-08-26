@@ -26,14 +26,14 @@
 #define PLAYERTREEPROXYMODEL_H
 
 #include <QAbstractProxyModel>
-class QTreeView;
+class QListView;
 
 class PlayerTreeProxyModel : public QAbstractProxyModel
 {
     Q_OBJECT
 
 public:
-    PlayerTreeProxyModel(int indexSf2, QTreeView * treeView, QAbstractItemModel * model);
+    PlayerTreeProxyModel(int indexSf2, QAbstractItemModel * model);
 
     int columnCount(const QModelIndex &parent) const override;
     int rowCount(const QModelIndex &parent) const override;

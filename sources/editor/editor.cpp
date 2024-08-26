@@ -413,11 +413,9 @@ void Editor::customizeKeyboard()
             {
                 if (rangeByInst[instId][key])
                 {
+                    // Possibly start a range
                     if (startKey == -1)
-                    {
-                        // Start a range
                         startKey = key;
-                    }
                 }
                 else
                 {
