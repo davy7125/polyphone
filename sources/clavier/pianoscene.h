@@ -49,7 +49,7 @@ public:
     void resetCustomization(int key, PianoKeybd::CustomizationType type);
 
     void updateMapping();
-    void showNoteOn(const int note, int vel = -1);
+    void showNoteOn(const int note, int vel);
     void showNoteOff(const int note);
     int numKeys() const { return m_numKeys; }
     int startKey() const { return m_startKey; }

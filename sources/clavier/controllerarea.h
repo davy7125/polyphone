@@ -28,6 +28,7 @@
 #include <QWidget>
 #include "imidilistener.h"
 class QComboBox;
+class ComboCC;
 
 namespace Ui {
 class ControllerArea;
@@ -74,6 +75,7 @@ private:
     QPixmap _ledOff;
     bool _ledState;
     int _channel;
+    QMap<ComboCC *, int> _comboGroup;
 };
 
 #endif // CONTROLLERAREA_H

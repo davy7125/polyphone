@@ -36,6 +36,7 @@ public:
     ComboCC(QWidget * parent = nullptr);
     ~ComboCC();
 
+    void setGroup(QMap<ComboCC *, int> * comboGroup);
     void selectCC(int number);
     int getCurrentCC();
 
@@ -48,7 +49,7 @@ private slots:
 private:
     void updateEnableState();
 
-    static QMap<ComboCC *, int> s_exclusions;
+    QMap<ComboCC *, int> * _comboGroup;
     QMap<int, int> _controllerToIndex;
 };
 

@@ -62,6 +62,11 @@ ControllerArea::ControllerArea(QWidget *parent) :
     updateBend(-1, 0); // Always in the middle
 
     // Initialization of the controllers
+    ui->comboControl1->setGroup(&_comboGroup);
+    ui->comboControl2->setGroup(&_comboGroup);
+    ui->comboControl3->setGroup(&_comboGroup);
+    ui->comboControl4->setGroup(&_comboGroup);
+
     ui->comboControl1->blockSignals(true);
     ui->comboControl1->selectCC(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "controller_1", 1).toInt());
     on_comboControl1_currentIndexChanged(-1);
@@ -228,7 +233,7 @@ void ControllerArea::updateInput4Display()
 
 bool ControllerArea::processMonoPressureChanged(int channel, int value)
 {
-    if (channel != -1)
+    if (channel != _channel)
         return false;
 
     if (value < 0)
@@ -246,7 +251,7 @@ bool ControllerArea::processMonoPressureChanged(int channel, int value)
 
 bool ControllerArea::processControllerChanged(int channel, int num, int value)
 {
-    if (channel != -1)
+    if (channel != _channel)
         return false;
 
     // Update first input?
@@ -293,7 +298,7 @@ bool ControllerArea::processBendChanged(int channel, float value)
 
 void ControllerArea::updateBend(int channel, float value, bool stopTimer)
 {
-    if (channel != -1)
+    if (channel != _channel)
         return;
 
     if (value < -1)
@@ -312,7 +317,7 @@ void ControllerArea::updateBend(int channel, float value, bool stopTimer)
 
 bool ControllerArea::processBendSensitivityChanged(int channel, float semitones)
 {
-    if (channel != -1)
+    if (channel != _channel)
         return false;
 
     if (semitones < 0)

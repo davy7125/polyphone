@@ -32,8 +32,8 @@
 Player::Player(PlayerOptions * playerOptions, QWidget * parent) : Tab(parent),
     ui(new Ui::Player),
     _playerOptions(new PlayerOptions(playerOptions)),
-    _initializing(true),
-    _synth(ContextManager::audio()->getSynth())
+    _synth(ContextManager::audio()->getSynth()),
+    _initializing(true)
 {
     memset(_currentKeyVelocities, 0, 128 * sizeof(int));
     ui->setupUi(this);
@@ -47,7 +47,7 @@ Player::Player(PlayerOptions * playerOptions, QWidget * parent) : Tab(parent),
     ui->keyboard->set(PianoKeybd::PROPERTY_KEY_NUMBER, 128);
 
     // Initialize the configuration
-    ui->comboChannel->setCurrentIndex(_playerOptions->playerChannel());
+    ui->comboChannel->setCurrentIndex(_playerOptions->playerChannel() + 1);
     ui->comboMultipleSelection->setCurrentIndex(_playerOptions->playerMultipleSelection() ? 1 : 0);
     ui->comboSelectionByKeys->setCurrentIndex(_playerOptions->playerKeySelection());
     _initializing = false;
@@ -165,7 +165,7 @@ void Player::onPresetSelectionChanged(QItemSelection selected, QItemSelection de
 
 bool Player::processKey(int channel, int key, int vel)
 {
-    if (channel != _playerOptions->playerChannel() - 1 && _playerOptions->playerChannel() != 0)
+    if (channel != _playerOptions->playerChannel() && _playerOptions->playerChannel() != -1)
         return false;
 
     if (_playerOptions->playerKeySelection() != 0 && _presetPositionByPresetNumber[key] != -1)
@@ -176,7 +176,7 @@ bool Player::processKey(int channel, int key, int vel)
         else if (vel > 0)
             selectionFlags = QItemSelectionModel::Toggle;
         else
-            return false;
+            return true;
 
         if (!_playerOptions->playerMultipleSelection())
             selectionFlags |= QItemSelectionModel::Clear;
@@ -184,7 +184,8 @@ bool Player::processKey(int channel, int key, int vel)
         ui->listPreset->selectionModel()->select(
             ui->listPreset->model()->index(_presetPositionByPresetNumber[key], 0, ui->listPreset->rootIndex()),
             selectionFlags);
-        return false;
+
+        return true;
     }
 
     // Update the current velocities
@@ -194,11 +195,11 @@ bool Player::processKey(int channel, int key, int vel)
         _synth->play(presetId, channel, key, vel);
 
     if (vel > 0)
-        ui->keyboard->inputNoteOn(key);
+        ui->keyboard->inputNoteOn(key, vel);
     else
         ui->keyboard->inputNoteOff(key);
 
-    return false;
+    return true;
 }
 
 void Player::on_comboChannel_currentIndexChanged(int index)
@@ -217,9 +218,10 @@ void Player::on_comboChannel_currentIndexChanged(int index)
         }
     }
 
-    _playerOptions->setPlayerChannel(index);
-    ui->keyboard->set(PianoKeybd::PROPERTY_CHANNEL, index - 1);
-    ui->controllerArea->setChannel(index - 1);
+    int newChannel = index - 1;
+    _playerOptions->setPlayerChannel(newChannel);
+    ui->keyboard->set(PianoKeybd::PROPERTY_CHANNEL, newChannel);
+    ui->controllerArea->setChannel(newChannel);
 }
 
 void Player::on_comboMultipleSelection_currentIndexChanged(int index)
@@ -229,7 +231,7 @@ void Player::on_comboMultipleSelection_currentIndexChanged(int index)
     _playerOptions->setMultipleSelection(index == 1);
     ui->listPreset->setSelectionMode(index == 1 ? QAbstractItemView::MultiSelection : QAbstractItemView::SingleSelection);
 
-    if (index == 0)
+    if (index == 0 && ui->listPreset->selectionModel() != nullptr)
     {
         // Keep only the last selected element
         QItemSelection selection = ui->listPreset->selectionModel()->selection();

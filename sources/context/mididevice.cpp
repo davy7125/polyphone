@@ -384,14 +384,12 @@ void MidiDevice::processControllerChanged(int channel, int numController, int va
     }
 
     // Process the controller change for the current channel
+    bool consumed = false;
     for (int i = 0; i < _listeners.size(); ++i)
-    {
-        if (_listeners[i]->processControllerChanged(channel, numController, value))
-            return;
-    }
+        consumed |= _listeners[i]->processControllerChanged(channel, numController, value);
 
     // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1)
+    if (channel != -1 && !consumed)
         processControllerChanged(-1, numController, value);
 }
 
@@ -413,16 +411,16 @@ void MidiDevice::processKeyOn(int channel, int key, int vel)
         sustainState->_sustainedKeys[key] = true;
 
     // Process the change for the current channel
+    bool consumed = false;
     for (int i = 0; i < _listeners.size(); ++i)
     {
         if (stopFirst)
             _listeners[i]->processKey(channel, key, 0);
-        if (_listeners[i]->processKey(channel, key, vel))
-            return;
+        consumed |= _listeners[i]->processKey(channel, key, vel);
     }
 
     // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1)
+    if (channel != -1 && !consumed)
         processKeyOn(-1, key, vel);
 }
 
@@ -434,17 +432,15 @@ void MidiDevice::processKeyOff(int channel, int key)
     sustainState->_currentKeys[key] = false;
 
     // Release the key if it is not currently sustained or held by the sostenuto
+    bool consumed = false;
     if (!sustainState->_sostenutoMemoryKeys[key] && !sustainState->_sustainedKeys[key])
     {
         for (int i = 0; i < _listeners.size(); ++i)
-        {
-            if (_listeners[i]->processKey(channel, key, 0))
-                return;
-        }
+            consumed |= _listeners[i]->processKey(channel, key, 0);
     }
 
     // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1)
+    if (channel != -1 && !consumed)
         processKeyOff(-1, key);
 }
 
@@ -453,14 +449,12 @@ void MidiDevice::processPolyPressureChanged(int channel, int key, int pressure)
     // Update the current channel state
     _midiStates[channel + 1]._polyPressureValues[key] = pressure;
 
+    bool consumed = false;
     for (int i = 0; i < _listeners.size(); ++i)
-    {
-        if (_listeners[i]->processPolyPressureChanged(channel, key, pressure))
-            return;
-    }
+        consumed |= _listeners[i]->processPolyPressureChanged(channel, key, pressure);
 
     // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1)
+    if (channel != -1 && !consumed)
         processPolyPressureChanged(-1, key, pressure);
 }
 
@@ -469,14 +463,12 @@ void MidiDevice::processMonoPressureChanged(int channel, int value)
     // Update the current channel state
     _midiStates[channel + 1]._monoPressureValue = value;
 
+    bool consumed = false;
     for (int i = 0; i < _listeners.size(); ++i)
-    {
-        if (_listeners[i]->processMonoPressureChanged(channel, value))
-            return;
-    }
+        consumed |= _listeners[i]->processMonoPressureChanged(channel, value);
 
     // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1)
+    if (channel != -1 && !consumed)
         processMonoPressureChanged(-1, value);
 }
 
@@ -485,14 +477,12 @@ void MidiDevice::processBendChanged(int channel, float value)
     // Update the current channel state
     _midiStates[channel + 1]._bendValue = value;
 
+    bool consumed = false;
     for (int i = 0; i < _listeners.size(); ++i)
-    {
-        if (_listeners[i]->processBendChanged(channel, value))
-            return;
-    }
+        consumed |= _listeners[i]->processBendChanged(channel, value);
 
     // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1)
+    if (channel != -1 && !consumed)
         processBendChanged(-1, value);
 }
 
@@ -501,14 +491,12 @@ void MidiDevice::processBendSensitivityChanged(int channel, float semitones)
     // Update the current channel state
     _midiStates[channel + 1]._bendSensitivityValue = semitones;
 
+    bool consumed = false;
     for (int i = 0; i < _listeners.size(); ++i)
-    {
-        if (_listeners[i]->processBendSensitivityChanged(channel, semitones))
-            return;
-    }
+        consumed |= _listeners[i]->processBendSensitivityChanged(channel, semitones);
 
     // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1)
+    if (channel != -1 && !consumed)
         processBendSensitivityChanged(-1, semitones);
 }
 

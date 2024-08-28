@@ -26,9 +26,8 @@
 #include "modulatorcombosrc.h"
 #include <QStandardItemModel>
 
-QMap<ComboCC *, int> ComboCC::s_exclusions;
-
-ComboCC::ComboCC(QWidget *parent) : QComboBox(parent)
+ComboCC::ComboCC(QWidget *parent) : QComboBox(parent),
+    _comboGroup(nullptr)
 {
     connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(onCurrentIndexChanged(int)));
 
@@ -56,16 +55,15 @@ ComboCC::ComboCC(QWidget *parent) : QComboBox(parent)
         _controllerToIndex[i] = count++;
     }
     this->blockSignals(false);
-
-    s_exclusions[this] = -1;
 }
 
-ComboCC::~ComboCC()
+void ComboCC::setGroup(QMap<ComboCC *, int> * comboGroup)
 {
-    s_exclusions.remove(this);
-    foreach (ComboCC * combo, s_exclusions.keys())
-        combo->updateEnableState();
+    _comboGroup = comboGroup;
+    _comboGroup->insert(this, -1);
 }
+
+ComboCC::~ComboCC() {}
 
 void ComboCC::selectCC(int number)
 {
@@ -87,19 +85,19 @@ void ComboCC::onCurrentIndexChanged(int index)
     Q_UNUSED(index)
 
     // Update exclusions
-    s_exclusions[this] = getCurrentCC();
-    foreach (ComboCC * combo, s_exclusions.keys())
+    _comboGroup->insert(this, getCurrentCC());
+    foreach (ComboCC * combo, _comboGroup->keys())
         if (combo != this)
             combo->updateEnableState();
 }
 
 void ComboCC::updateEnableState()
 {
-    // List of controllers excluded
+    // List of excluded controllers
     QList<int> excludedCCs;
-    foreach (ComboCC * combo, s_exclusions.keys())
+    foreach (ComboCC * combo, _comboGroup->keys())
         if (combo != this)
-            excludedCCs << s_exclusions[combo];
+            excludedCCs << _comboGroup->value(combo);
 
     // Set the enabled states
     QStandardItemModel * model = qobject_cast<QStandardItemModel *>(this->model());

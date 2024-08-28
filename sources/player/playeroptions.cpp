@@ -30,7 +30,7 @@ PlayerOptions::PlayerOptions(PlayerOptions * options) :
 {
     if (options == nullptr)
     {
-        _playerChannel = 0;
+        _playerChannel = -1;
         _playerMultipleSelection = false;
         _playerKeySelection = false;
     }
@@ -50,8 +50,8 @@ bool PlayerOptions::parse(QString text)
     // Channel
     if (configurations.length() >= 1 && configurations[0] != "all")
     {
-        _playerChannel = configurations[0].toInt(&_isValid);
-        if (!_isValid || _playerChannel < 1 || _playerChannel > 16)
+        _playerChannel = configurations[0].toInt(&_isValid) - 1;
+        if (!_isValid || _playerChannel < 0 || _playerChannel > 15)
         {
             _isValid = false;
             return false;
@@ -96,10 +96,10 @@ QString PlayerOptions::toString()
 {
     // Channel
     QString partChannel = "";
-    if (_playerChannel == 0)
+    if (_playerChannel == -1)
         partChannel = "all";
     else
-        partChannel = QString::number(_playerChannel);
+        partChannel = QString::number(_playerChannel + 1);
 
     // Multiple selection
     QString partMultipleSelection = _playerMultipleSelection ? "on" : "off";

@@ -75,7 +75,7 @@ public:
 
     void triggerGlowEffect();
 
-    void inputNoteOn(int midiNote, int vel = -1);
+    void inputNoteOn(int midiNote, int vel);
     void inputNoteOff(int midiNote);
 
 signals:
