@@ -50,16 +50,31 @@ ControllerArea::ControllerArea(QWidget *parent) :
     _ledOff = ContextManager::theme()->getColoredSvg(":/icons/led.svg", QSize(48, 48), replacement);
     ui->push4->setIcon(_ledOff);
 
+    // Initialize the channel
+    setChannel(-1);
+}
+
+ControllerArea::~ControllerArea()
+{
+    ContextManager::midi()->removeListener(this);
+    delete ui;
+}
+
+void ControllerArea::setChannel(int channel)
+{
+    ContextManager::midi()->removeListener(this);
+    _channel = channel;
+
     // Initialization of the sensitivity slider
-    processBendSensitivityChanged(-1, ContextManager::midi()->getBendSensitivityValue(-1));
+    processBendSensitivityChanged(_channel, ContextManager::midi()->getBendSensitivityValue(_channel));
 
     // Initialization of the pressure slider
-    processMonoPressureChanged(-1, ContextManager::midi()->getMonoPressure(-1));
+    processMonoPressureChanged(_channel, ContextManager::midi()->getMonoPressure(_channel));
 
     // Initialization of the wheel
     ui->sliderPitchWheel->setColorFromMiddle(true);
     ui->sliderPitchWheel->setBackToValue(64);
-    updateBend(-1, 0); // Always in the middle
+    updateBend(_channel, 0); // Always in the middle
 
     // Initialization of the controllers
     ui->comboControl1->setGroup(&_comboGroup);
@@ -87,40 +102,29 @@ ControllerArea::ControllerArea(QWidget *parent) :
     ContextManager::midi()->addListener(this, 0);
 }
 
-void ControllerArea::setChannel(int channel)
-{
-    _channel = channel;
-}
-
-ControllerArea::~ControllerArea()
-{
-    ContextManager::midi()->removeListener(this);
-    delete ui;
-}
-
 void ControllerArea::on_sliderPitchWheel_valueChanged(int value)
 {
     float fVal = static_cast<float>(value - 64) / 64.0f;
     updateBend(fVal, false);
-    QApplication::postEvent(ContextManager::midi(), new BendEvent(-1, 0, value));
+    QApplication::postEvent(ContextManager::midi(), new BendEvent(_channel, 0, value));
 }
 
 void ControllerArea::on_sliderSensitivity_valueChanged(int value)
 {
     float semitones = 0.01f * value;
-    processBendSensitivityChanged(-1, semitones);
+    processBendSensitivityChanged(_channel, semitones);
 
     // Combinaison of 4 controller events
-    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(-1, 101, 0));
-    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(-1, 100, 0));
-    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(-1, 6, value / 100));
-    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(-1, 38, value % 100));
+    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(false, _channel, 101, 0));
+    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(false, _channel, 100, 0));
+    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(false, _channel, 6, value / 100));
+    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(false, _channel, 38, value % 100));
 }
 
 void ControllerArea::on_sliderPressure_valueChanged(int value)
 {
-    processMonoPressureChanged(-1, value);
-    QApplication::postEvent(ContextManager::midi(), new MonoPressureEvent(-1, value));
+    processMonoPressureChanged(_channel, value);
+    QApplication::postEvent(ContextManager::midi(), new MonoPressureEvent(_channel, value));
 }
 
 void ControllerArea::on_comboControl1_currentIndexChanged(int index)
@@ -128,7 +132,7 @@ void ControllerArea::on_comboControl1_currentIndexChanged(int index)
     Q_UNUSED(index)
     ContextManager::configuration()->setValue(ConfManager::SECTION_MIDI, "controller_1", ui->comboControl1->getCurrentCC());
 
-    int previousValue = ContextManager::midi()->getControllerValue(-1, ui->comboControl1->getCurrentCC());
+    int previousValue = ContextManager::midi()->getControllerValue(_channel, ui->comboControl1->getCurrentCC());
     if (previousValue < 0) // Keep the current one
         on_knob1_valueChanged(ui->knob1->value());
     else
@@ -145,7 +149,7 @@ void ControllerArea::on_comboControl2_currentIndexChanged(int index)
     Q_UNUSED(index)
     ContextManager::configuration()->setValue(ConfManager::SECTION_MIDI, "controller_2", ui->comboControl2->getCurrentCC());
 
-    int previousValue = ContextManager::midi()->getControllerValue(-1, ui->comboControl2->getCurrentCC());
+    int previousValue = ContextManager::midi()->getControllerValue(_channel, ui->comboControl2->getCurrentCC());
     if (previousValue < 0) // Keep the current one
         on_knob2_valueChanged(ui->knob2->value());
     else
@@ -162,7 +166,7 @@ void ControllerArea::on_comboControl3_currentIndexChanged(int index)
     Q_UNUSED(index)
     ContextManager::configuration()->setValue(ConfManager::SECTION_MIDI, "controller_3", ui->comboControl3->getCurrentCC());
 
-    int previousValue = ContextManager::midi()->getControllerValue(-1, ui->comboControl3->getCurrentCC());
+    int previousValue = ContextManager::midi()->getControllerValue(_channel, ui->comboControl3->getCurrentCC());
     if (previousValue < 0) // Keep the current one
         on_knob3_valueChanged(ui->knob3->value());
     else
@@ -179,7 +183,7 @@ void ControllerArea::on_comboControl4_currentIndexChanged(int index)
     Q_UNUSED(index)
     ContextManager::configuration()->setValue(ConfManager::SECTION_MIDI, "controller_4", ui->comboControl4->getCurrentCC());
 
-    int previousValue = ContextManager::midi()->getControllerValue(-1, ui->comboControl4->getCurrentCC());
+    int previousValue = ContextManager::midi()->getControllerValue(_channel, ui->comboControl4->getCurrentCC());
     if (previousValue < 0) // Keep the current one
     {
         _ledState = !_ledState; // Will be back to the same value next line
@@ -195,26 +199,26 @@ void ControllerArea::on_comboControl4_currentIndexChanged(int index)
 void ControllerArea::on_knob1_valueChanged(int value)
 {
     ui->labelValue1->setText(QString::number(value));
-    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(-1, ui->comboControl1->getCurrentCC(), value));
+    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(false, _channel, ui->comboControl1->getCurrentCC(), value));
 }
 
 void ControllerArea::on_knob2_valueChanged(int value)
 {
     ui->labelValue2->setText(QString::number(value));
-    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(-1, ui->comboControl2->getCurrentCC(), value));
+    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(false, _channel, ui->comboControl2->getCurrentCC(), value));
 }
 
 void ControllerArea::on_knob3_valueChanged(int value)
 {
     ui->labelValue3->setText(QString::number(value));
-    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(-1, ui->comboControl3->getCurrentCC(), value));
+    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(false, _channel, ui->comboControl3->getCurrentCC(), value));
 }
 
 void ControllerArea::on_push4_clicked()
 {
     _ledState = !_ledState;
     updateInput4Display();
-    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(-1, ui->comboControl4->getCurrentCC(), _ledState ? 127 : 0));
+    QApplication::postEvent(ContextManager::midi(), new ControllerEvent(false, _channel, ui->comboControl4->getCurrentCC(), _ledState ? 127 : 0));
 }
 
 void ControllerArea::updateInput4Display()

@@ -71,6 +71,8 @@ private:
         // Configuration of a channel, the values being written and read by different threads
         volatile int _controllerValues[128];
         volatile bool _controllerValueSpecified[128];
+        volatile bool _controllerValueIsRelative[128];
+        volatile quint8 _controllerValueIsRelativeCounter[128];
         volatile float _bendValue;
         volatile float _bendSensitivityValue;
         volatile int _monoPressureValue;
@@ -96,7 +98,7 @@ private:
     void processKeyOff(int channel, int key);
     void processPolyPressureChanged(int channel, int key, int pressure);
     void processMonoPressureChanged(int channel, int value);
-    void processControllerChanged(int channel, int num, int value);
+    void processControllerChanged(bool external, int channel, int num, int value);
     void processBendChanged(int channel, float value);
     void processBendSensitivityChanged(int channel, float semitones);
 

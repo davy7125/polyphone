@@ -60,7 +60,7 @@ void midiCallback(double deltatime, std::vector<unsigned char> *message, void *u
         break;
     case 0xB0: // CONTROLLER CHANGE
         // First message is the controller number, second is its value
-        ev = new ControllerEvent(channel, message->at(1), message->at(2));
+        ev = new ControllerEvent(true, channel, message->at(1), message->at(2));
         break;
     case 0xC0: // PROGRAM CHANGED
         // First message is the program number
@@ -121,6 +121,8 @@ MidiDevice::MidiDevice(ConfManager * configuration) :
 
             _midiStates[channel]._controllerValues[i] = defaultValue;
             _midiStates[channel]._controllerValueSpecified[i] = false;
+            _midiStates[channel]._controllerValueIsRelative[i] = true; // Default is true, until an "absolute" value is encountered
+            _midiStates[channel]._controllerValueIsRelativeCounter[i] = 0;
         }
     }
 
@@ -261,7 +263,7 @@ void MidiDevice::customEvent(QEvent * event)
     {
         // A controller value changed
         ControllerEvent * controllerEvent = dynamic_cast<ControllerEvent *>(event);
-        processControllerChanged(controllerEvent->getChannel(), controllerEvent->getNumController(), controllerEvent->getValue());
+        processControllerChanged(controllerEvent->isExternal(), controllerEvent->getChannel(), controllerEvent->getNumController(), controllerEvent->getValue());
         event->accept();
     }
     else if (event->type() == QEvent::User + 2)
@@ -293,10 +295,55 @@ void MidiDevice::customEvent(QEvent * event)
     }
 }
 
-void MidiDevice::processControllerChanged(int channel, int numController, int value)
+void MidiDevice::processControllerChanged(bool external, int channel, int numController, int value)
 {
+    int initialValue = value;
     MIDI_State * midiState = &_midiStates[channel + 1];
     Sustain_State * sustainState = &_sustainStates[channel + 1];
+
+    if (external)
+    {
+        if (midiState->_controllerValueIsRelative[numController])
+        {
+            // Convert a possible relative value
+            if (value == 126 || value == 62) // -2
+                value = midiState->_controllerValues[numController] - 2;
+            else if (value == 127 || value == 63) // -1
+                value = midiState->_controllerValues[numController] - 1;
+            else if (value == 1 || value == 65) // +1
+                value = midiState->_controllerValues[numController] + 1;
+            else if (value == 2 || value == 66) // +2
+                value = midiState->_controllerValues[numController] + 2;
+            else
+            {
+                // Not a relative value
+                midiState->_controllerValueIsRelative[numController] = false;
+                midiState->_controllerValueIsRelativeCounter[numController] = 0;
+            }
+        }
+        else
+        {
+            // Possibly switch to the relative mode
+            if (value == 127 || value == 126 || value == 63 || value == 62 ||
+                value == 1 || value == 2 || value == 65 || value == 66)
+            {
+                midiState->_controllerValueIsRelativeCounter[numController]++;
+                if (midiState->_controllerValueIsRelativeCounter[numController] > 3)
+                {
+                    // Following values will be considered relative
+                    midiState->_controllerValueIsRelative[numController] = true;
+                }
+            }
+            else
+                midiState->_controllerValueIsRelativeCounter[numController] = 0;
+        }
+    }
+
+    // Limits
+    if (value < 0)
+        value = 0;
+    if (value > 127)
+        value = 127;
 
     // Update the current channel
     midiState->_controllerValues[numController] = value;
@@ -390,7 +437,7 @@ void MidiDevice::processControllerChanged(int channel, int numController, int va
 
     // And possibly update channel -1 if the change has not been consumed
     if (channel != -1 && !consumed)
-        processControllerChanged(-1, numController, value);
+        processControllerChanged(external, -1, numController, initialValue);
 }
 
 void MidiDevice::processKeyOn(int channel, int key, int vel)

@@ -30,10 +30,16 @@
 class ControllerEvent : public QEvent
 {
 public:
-    ControllerEvent(qint8 channel, quint8 numController, quint8 value) : QEvent((QEvent::Type)(QEvent::User+1)),
+    ControllerEvent(bool external, qint8 channel, quint8 numController, quint8 value) : QEvent((QEvent::Type)(QEvent::User+1)),
+        _external(external),
         _channel(channel),
         _numController(numController),
         _value(value) {}
+
+    bool isExternal() const
+    {
+        return _external;
+    }
 
     qint8 getChannel() const
     {
@@ -51,6 +57,7 @@ public:
     }
 
 protected:
+    bool _external;
     qint8 _channel;
     quint8 _numController;
     quint8 _value;
