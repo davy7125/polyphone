@@ -170,6 +170,12 @@ void ShowSoundfonts::on_pushRetry_clicked()
     RepositoryManager::getInstance()->initialize();
 }
 
+void ShowSoundfonts::showEvent(QShowEvent * event)
+{
+    QWidget::showEvent(event);
+    updateCellHeight();
+}
+
 void ShowSoundfonts::resizeEvent(QResizeEvent * event)
 {
     QWidget::resizeEvent(event);

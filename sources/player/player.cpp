@@ -28,6 +28,7 @@
 #include "soundfontmanager.h"
 #include "playertreeproxymodel.h"
 #include "playeroptions.h"
+#include "playerpresetlistdelegate.h"
 
 Player::Player(PlayerOptions * playerOptions, QWidget * parent) : Tab(parent),
     ui(new Ui::Player),
@@ -38,6 +39,7 @@ Player::Player(PlayerOptions * playerOptions, QWidget * parent) : Tab(parent),
     memset(_currentKeyVelocities, 0, 128 * sizeof(int));
     ui->setupUi(this);
 
+    ui->listPreset->setItemDelegate(new PlayerPresetListDelegate(ui->listPreset));
     QString highlightColorBackground = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
     QString highlightColorText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
     ui->topBar->setStyleSheet("QWidget#topBar{background-color:" + highlightColorBackground + "} QLabel{color:" + highlightColorText + "}");
@@ -109,25 +111,42 @@ void Player::onBankSelectionChanged(QItemSelection selected, QItemSelection dese
     if (indexes.count() != 1)
         return;
 
+    // Current selected preset numbers
+    QList<int> selectedPresetNumbers;
+    foreach (QModelIndex index, ui->listPreset->selectionModel()->selectedIndexes())
+        selectedPresetNumbers << index.data(Qt::UserRole + 1).toInt();
+
     // Mute everything
+    ui->listPreset->selectionModel()->clear();
     _currentIds.clear();
-    memset(_currentKeyVelocities, 0, 128 * sizeof(int));
     _synth->stop(true);
+    memset(_currentKeyVelocities, 0, 128 * sizeof(int));
 
     // Populate the preset list
     ui->listPreset->setRootIndex(indexes[0]);
 
-    // Select the first preset
-    ui->listPreset->selectionModel()->clear();
-    ui->listPreset->setCurrentIndex(ui->listPreset->model()->index(0, 0, indexes[0]));
-
     // Scan the presets within this bank
     for (int i = 0; i < 128; i++)
         _presetPositionByPresetNumber[i] = -1;
+    bool hasSelection = false;
     for (int i = 0; i < ui->listPreset->model()->rowCount(indexes[0]); i++)
     {
         QModelIndex presetIndex = ui->listPreset->model()->index(i, 0, indexes[0]);
-        _presetPositionByPresetNumber[presetIndex.data(Qt::UserRole + 1).toInt()] = i;
+        int presetNumber = presetIndex.data(Qt::UserRole + 1).toInt();
+        _presetPositionByPresetNumber[presetNumber] = i;
+
+        // Possibly select the preset
+        if (selectedPresetNumbers.contains(presetNumber))
+        {
+            ui->listPreset->selectionModel()->select(presetIndex, QItemSelectionModel::Select);
+            hasSelection = true;
+        }
+    }
+
+    if (!hasSelection && _playerOptions->playerKeySelection() == 0)
+    {
+        // Select the first preset
+        ui->listPreset->setCurrentIndex(ui->listPreset->model()->index(0, 0, indexes[0]));
     }
 }
 

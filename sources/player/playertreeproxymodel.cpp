@@ -24,7 +24,6 @@
 
 #include "playertreeproxymodel.h"
 #include <QListView>
-#include "basetypes.h"
 #include "soundfontmanager.h"
 #include "treeitem.h"
 
@@ -141,11 +140,19 @@ QVariant PlayerTreeProxyModel::data(const QModelIndex &proxyIndex, int role) con
 {
     if (proxyIndex.isValid() && proxyIndex.internalPointer() == nullptr)
     {
+        // Bank
         if (role == Qt::DisplayRole)
         {
             // Display the bank number
             if (proxyIndex.row() < _idByBankPreset.count())
-                return tr("Bank %1").arg(_idByBankPreset.keys()[proxyIndex.row()]);
+            {
+                int bankNumber = _idByBankPreset.keys()[proxyIndex.row()];
+                return tr("Bank %1").arg(bankNumber) + "\n(" + QString::number(_idByBankPreset[bankNumber].count()) + ")";
+            }
+        }
+        else if (role == Qt::TextAlignmentRole)
+        {
+            return Qt::AlignCenter;
         }
         else if (role == Qt::UserRole + 1)
         {
@@ -156,7 +163,17 @@ QVariant PlayerTreeProxyModel::data(const QModelIndex &proxyIndex, int role) con
     }
     else if (proxyIndex.isValid() && proxyIndex.internalPointer() != nullptr)
     {
-        if (role == Qt::UserRole + 1)
+        // Preset
+        if (role == Qt::DisplayRole)
+        {
+            QString text = QAbstractProxyModel::data(proxyIndex, role).toString();
+            QRegularExpression regex("[0-9]{3}:([0-9]{3}) (.*)");
+            QRegularExpressionMatch match = regex.match(text);
+            if (match.hasMatch())
+                return " " + match.captured(1) + "\n " + match.captured(2);
+            return text;
+        }
+        else if (role == Qt::UserRole + 1)
         {
             // Current bank
             if (proxyIndex.parent().row() < _idByBankPreset.count())

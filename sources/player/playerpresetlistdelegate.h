@@ -22,55 +22,26 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SHOWSOUNDFONTS_H
-#define SHOWSOUNDFONTS_H
+#ifndef PLAYERPRESETLISTDELEGATE_H
+#define PLAYERPRESETLISTDELEGATE_H
 
-#include <QWidget>
-#include <QMutex>
-class UrlReaderJson;
-class QListWidgetItem;
-class SoundfontFilter;
+#include "playerpresetlist.h"
+#include <QStyledItemDelegate>
+class PlayerPresetList;
 
-namespace Ui {
-class ShowSoundfonts;
-}
-
-class ShowSoundfonts : public QWidget
+class PlayerPresetListDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 
 public:
-    explicit ShowSoundfonts(QWidget *parent = nullptr);
-    ~ShowSoundfonts();
+    PlayerPresetListDelegate(PlayerPresetList * list);
 
-public slots:
-    void initialize();
-    void soundfontListAvailable(QString error);
-
-signals:
-    void itemClicked(SoundfontFilter * filter);
-
-protected:
-    void showEvent(QShowEvent * event) override;
-    void resizeEvent(QResizeEvent * event) override;
-    void keyPressEvent(QKeyEvent * event) override;
-
-private slots:
-    void dailyListAvailable(QString error);
-    void on_listWidget_itemSelectionChanged();
-    void on_pushRetry_clicked();
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 private:
-    void populate();
-    QString loadDailyIds();
-    void updateCellHeight();
-
-    Ui::ShowSoundfonts *ui;
-    UrlReaderJson * _urlReaderJson;
-    QList<int> _dailyIds;
-    bool _soundfontListOk, _dailyListOk;
-    QMutex _mutex; // Because two URL queries are concurrent
-    QString _error1, _error2;
+    PlayerPresetList * _presetList;
+    QColor _borderColor;
 };
 
-#endif // SHOWSOUNDFONTS_H
+#endif // PLAYERPRESETLISTDELEGATE_H

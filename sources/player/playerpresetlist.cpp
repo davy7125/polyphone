@@ -22,55 +22,43 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SHOWSOUNDFONTS_H
-#define SHOWSOUNDFONTS_H
+#include "playerpresetlist.h"
 
-#include <QWidget>
-#include <QMutex>
-class UrlReaderJson;
-class QListWidgetItem;
-class SoundfontFilter;
-
-namespace Ui {
-class ShowSoundfonts;
+PlayerPresetList::PlayerPresetList(QWidget *parent) : QListView(parent)
+{
+    QFontMetrics fm(this->font());
+    _minCellWidth = fm.horizontalAdvance("mmmmmmmmmmmmmmmmmmmm") + 12; // 20 characters + margin
+    _cellHeight = fm.height() * 2 + 12; // 2 lines + margin
 }
 
-class ShowSoundfonts : public QWidget
+PlayerPresetList::~PlayerPresetList()
 {
-    Q_OBJECT
 
-public:
-    explicit ShowSoundfonts(QWidget *parent = nullptr);
-    ~ShowSoundfonts();
+}
 
-public slots:
-    void initialize();
-    void soundfontListAvailable(QString error);
+void PlayerPresetList::showEvent(QShowEvent * event)
+{
+    resizeGrid();
+    QListView::showEvent(event);
+}
 
-signals:
-    void itemClicked(SoundfontFilter * filter);
+void PlayerPresetList::resizeEvent(QResizeEvent * event)
+{
+    resizeGrid();
+    QListView::resizeEvent(event);
+}
 
-protected:
-    void showEvent(QShowEvent * event) override;
-    void resizeEvent(QResizeEvent * event) override;
-    void keyPressEvent(QKeyEvent * event) override;
+void PlayerPresetList::resizeGrid()
+{
+    this->setGridSize(QSize(this->viewport()->width() / columnCount() - 1, rowHeight()));
+}
 
-private slots:
-    void dailyListAvailable(QString error);
-    void on_listWidget_itemSelectionChanged();
-    void on_pushRetry_clicked();
+int PlayerPresetList::columnCount()
+{
+    return static_cast<int>(ceil((double)this->viewport()->width() / _minCellWidth) + 0.5);
+}
 
-private:
-    void populate();
-    QString loadDailyIds();
-    void updateCellHeight();
-
-    Ui::ShowSoundfonts *ui;
-    UrlReaderJson * _urlReaderJson;
-    QList<int> _dailyIds;
-    bool _soundfontListOk, _dailyListOk;
-    QMutex _mutex; // Because two URL queries are concurrent
-    QString _error1, _error2;
-};
-
-#endif // SHOWSOUNDFONTS_H
+int PlayerPresetList::rowHeight()
+{
+    return _cellHeight;
+}

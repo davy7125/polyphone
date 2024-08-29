@@ -323,6 +323,8 @@ SOURCES	+= main.cpp \
     mainwindow/topbackground.cpp \
     player/player.cpp \
     player/playeroptions.cpp \
+    player/playerpresetlist.cpp \
+    player/playerpresetlistdelegate.cpp \
     player/playertreeproxymodel.cpp \
     repository/browser/browsersortmenu.cpp \
     repository/widgets/customtextedit.cpp \
@@ -685,6 +687,8 @@ HEADERS += \
     mainwindow/topbackground.h \
     player/player.h \
     player/playeroptions.h \
+    player/playerpresetlist.h \
+    player/playerpresetlistdelegate.h \
     player/playertreeproxymodel.h \
     repository/browser/browsersortmenu.h \
     repository/widgets/customtextedit.h \

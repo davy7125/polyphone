@@ -22,55 +22,29 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SHOWSOUNDFONTS_H
-#define SHOWSOUNDFONTS_H
+#ifndef PLAYERPRESETLIST_H
+#define PLAYERPRESETLIST_H
 
-#include <QWidget>
-#include <QMutex>
-class UrlReaderJson;
-class QListWidgetItem;
-class SoundfontFilter;
+#include <QListView>
 
-namespace Ui {
-class ShowSoundfonts;
-}
-
-class ShowSoundfonts : public QWidget
+class PlayerPresetList : public QListView
 {
-    Q_OBJECT
-
 public:
-    explicit ShowSoundfonts(QWidget *parent = nullptr);
-    ~ShowSoundfonts();
+    explicit PlayerPresetList(QWidget *parent = nullptr);
+    ~PlayerPresetList();
 
-public slots:
-    void initialize();
-    void soundfontListAvailable(QString error);
-
-signals:
-    void itemClicked(SoundfontFilter * filter);
+    int columnCount();
+    int rowHeight();
 
 protected:
     void showEvent(QShowEvent * event) override;
     void resizeEvent(QResizeEvent * event) override;
-    void keyPressEvent(QKeyEvent * event) override;
-
-private slots:
-    void dailyListAvailable(QString error);
-    void on_listWidget_itemSelectionChanged();
-    void on_pushRetry_clicked();
 
 private:
-    void populate();
-    QString loadDailyIds();
-    void updateCellHeight();
+    void resizeGrid();
 
-    Ui::ShowSoundfonts *ui;
-    UrlReaderJson * _urlReaderJson;
-    QList<int> _dailyIds;
-    bool _soundfontListOk, _dailyListOk;
-    QMutex _mutex; // Because two URL queries are concurrent
-    QString _error1, _error2;
+    int _minCellWidth;
+    int _cellHeight;
 };
 
-#endif // SHOWSOUNDFONTS_H
+#endif // PLAYERPRESETLIST_H

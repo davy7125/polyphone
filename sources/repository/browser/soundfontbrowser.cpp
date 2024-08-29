@@ -376,8 +376,8 @@ void SoundfontBrowser::updateCellHeight()
 
 void SoundfontBrowser::showEvent(QShowEvent * event)
 {
-     QWidget::showEvent(event);
-     updateCellHeight();
+    QWidget::showEvent(event);
+    updateCellHeight();
 }
 
 void SoundfontBrowser::resizeEvent(QResizeEvent * event)

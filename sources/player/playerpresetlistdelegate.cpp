@@ -22,55 +22,34 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SHOWSOUNDFONTS_H
-#define SHOWSOUNDFONTS_H
+#include "playerpresetlistdelegate.h"
+#include <QPainter>
+#include "playerpresetlist.h"
+#include "contextmanager.h"
 
-#include <QWidget>
-#include <QMutex>
-class UrlReaderJson;
-class QListWidgetItem;
-class SoundfontFilter;
-
-namespace Ui {
-class ShowSoundfonts;
+PlayerPresetListDelegate::PlayerPresetListDelegate(PlayerPresetList * list) : QStyledItemDelegate(),
+    _presetList(list)
+{
+    _borderColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
 }
 
-class ShowSoundfonts : public QWidget
+void PlayerPresetListDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    Q_OBJECT
+    QStyledItemDelegate::paint(painter, option, index);
 
-public:
-    explicit ShowSoundfonts(QWidget *parent = nullptr);
-    ~ShowSoundfonts();
+    // Draw a border
+    painter->setPen(QPen(_borderColor, 4));
+    painter->drawRect(option.rect);
+}
 
-public slots:
-    void initialize();
-    void soundfontListAvailable(QString error);
+QSize PlayerPresetListDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    Q_UNUSED(option)
+    Q_UNUSED(index)
 
-signals:
-    void itemClicked(SoundfontFilter * filter);
+    int columnNumber = _presetList->columnCount();
+    double columnWidth = (double)_presetList->viewport()->width() / columnNumber;
+    int rowHeight = _presetList->rowHeight();
 
-protected:
-    void showEvent(QShowEvent * event) override;
-    void resizeEvent(QResizeEvent * event) override;
-    void keyPressEvent(QKeyEvent * event) override;
-
-private slots:
-    void dailyListAvailable(QString error);
-    void on_listWidget_itemSelectionChanged();
-    void on_pushRetry_clicked();
-
-private:
-    void populate();
-    QString loadDailyIds();
-    void updateCellHeight();
-
-    Ui::ShowSoundfonts *ui;
-    UrlReaderJson * _urlReaderJson;
-    QList<int> _dailyIds;
-    bool _soundfontListOk, _dailyListOk;
-    QMutex _mutex; // Because two URL queries are concurrent
-    QString _error1, _error2;
-};
-
-#endif // SHOWSOUNDFONTS_H
+    return QSize(columnWidth - 1, rowHeight);
+}
