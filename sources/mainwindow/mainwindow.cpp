@@ -114,6 +114,7 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) :
     connect(ui->topRightWidget, SIGNAL(aboutClicked()), this, SLOT(onAboutClicked()));
     connect(ui->topRightWidget, SIGNAL(closeFileClicked()), this, SLOT(onCloseFile()));
     connect(ui->topRightWidget, SIGNAL(closeClicked()), this, SLOT(close()));
+    connect(ui->topRightWidget, SIGNAL(minimizeClicked()), this, SLOT(showMinimized()));
     connect(ui->topRightWidget, SIGNAL(save()), this, SLOT(onSave()));
     connect(ui->topRightWidget, SIGNAL(saveAs()), this, SLOT(onSaveAs()));
     connect(ui->topRightWidget, SIGNAL(fullScreenTriggered()), this, SLOT(fullScreenTriggered()));

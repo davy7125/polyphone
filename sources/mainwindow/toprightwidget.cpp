@@ -47,11 +47,20 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
             ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND));
     ui->pushUser->setStyleSheet("QPushButton{margin:0 6px 6px 0}");
 
-    // Close button
+    // Minimize and close buttons
     if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "window_borders", false).toBool())
+    {
+        ui->pushMinimize->hide();
         ui->pushClose->hide();
+    }
     else
     {
+        ui->pushMinimize->setIcon(ContextManager::theme()->getColoredSvg(
+            ":/icons/minus.svg", QSize(16, 16),
+            ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
+                ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND));
+        ui->pushMinimize->setStyleSheet("QPushButton{margin:0 0 6px 6px}");
+
         ui->pushClose->setIcon(ContextManager::theme()->getColoredSvg(
             ":/icons/close.svg", QSize(16, 16),
             ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
@@ -222,3 +231,9 @@ void TopRightWidget::on_pushClose_clicked()
 {
     emit(closeClicked());
 }
+
+void TopRightWidget::on_pushMinimize_clicked()
+{
+    emit(minimizeClicked());
+}
+

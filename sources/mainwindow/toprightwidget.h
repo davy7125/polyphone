@@ -53,6 +53,7 @@ signals:
     void aboutClicked();
     void closeFileClicked();
     void closeClicked();
+    void minimizeClicked();
     void fullScreenTriggered();
     void save();
     void saveAs();
@@ -68,6 +69,8 @@ private slots:
     void menuClosed();
 
     void on_pushClose_clicked();
+
+    void on_pushMinimize_clicked();
 
 private:
     void styleMenuButton(bool isEnabled);

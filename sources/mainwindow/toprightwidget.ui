@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>252</width>
+    <width>294</width>
     <height>42</height>
    </rect>
   </property>
@@ -90,7 +90,7 @@
       <string/>
      </property>
      <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
    </item>
@@ -130,7 +130,7 @@
       </size>
      </property>
      <property name="popupMode">
-      <enum>QToolButton::InstantPopup</enum>
+      <enum>QToolButton::ToolButtonPopupMode::InstantPopup</enum>
      </property>
     </widget>
    </item>
@@ -210,7 +210,41 @@
       </size>
      </property>
      <property name="popupMode">
-      <enum>QToolButton::InstantPopup</enum>
+      <enum>QToolButton::ToolButtonPopupMode::InstantPopup</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushMinimize">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>42</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>42</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>28</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
