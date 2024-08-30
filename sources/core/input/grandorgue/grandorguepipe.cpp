@@ -156,7 +156,7 @@ void GrandOrguePipe::process(EltID parent, int key)
         val.shValue = coarseTune;
         sm->set(idInstSmpl, champ_coarseTune, val);
 
-        // Loop + end?
+        // Release?
         if (_properties.contains("loadrelease") && _properties["loadrelease"].toLower() == "y")
         {
             val.wValue = 3;
@@ -233,13 +233,28 @@ void GrandOrguePipe::process(EltID parent, int key)
             val.rValue.byHi = key;
             sm->set(idInstSmpl, champ_keyRange, val);
 
+            // Short attack time (0.1s)
+            val.shValue = -3980;
+            sm->set(idInstSmpl, champ_attackVolEnv, val);
+
             // Long release time
             val.shValue = 8000;
             sm->set(idInstSmpl, champ_releaseVolEnv, val);
 
-            // Short attack time (0.1s)
-            val.shValue = -3980;
-            sm->set(idInstSmpl, champ_attackVolEnv, val);
+            // Possible end offset
+            if (_properties.contains("release001releaseend"))
+            {
+                bool ok;
+                quint32 desiredEnd = _properties["release001releaseend"].toUInt(&ok);
+                quint32 fullLength = sm->get(EltID(elementSmpl, idInstSmpl.indexSf2, sampleIds[i]), champ_dwLength).dwValue;
+                if (ok && fullLength > desiredEnd)
+                {
+                    val.shValue = -((fullLength - desiredEnd) % 32768);
+                    sm->set(idInstSmpl, champ_endAddrsOffset, val);
+                    val.shValue = -((fullLength - desiredEnd) / 32768);
+                    sm->set(idInstSmpl, champ_endAddrsCoarseOffset, val);
+                }
+            }
         }
     }
 }

@@ -185,6 +185,8 @@ void GrandOrgueStop::process(SoundfontManager * sm, int sf2Index, QMap<int, Gran
         RangesType keyRange = link->getKeyRange();
         EltID idInst = ranks[link->getRankId()]->process(sm, idPrst.indexSf2, link->getFirstPipeIndex(),
                                                          keyRange.byLo > 0 ? keyRange.byLo : 36);
+        if (idInst.indexElt == -1)
+            continue; // Skip the invalid instrument
 
         // Link it to the preset
         EltID idPrstInst(elementPrstInst, idPrst.indexSf2, idPrst.indexElt);
