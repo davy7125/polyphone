@@ -77,6 +77,7 @@ private:
     quint32 _sampleRate;
     bool _isMod;
     bool _quickRelease;
+    float _quickAttackTarget;
 };
 
 #endif // ENVELOPPEVOL_H

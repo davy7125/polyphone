@@ -48,7 +48,7 @@ public:
     void process(EltID parent, int key);
 
 private:
-    QList<int> getSampleIds(int sf2Id, QString relativeFilePath, bool isRelease);
+    QList<int> getSampleIds(int sf2Id, QString relativeFilePath);
     static QString getName(QString name, int maxCharacters, int suffixNumber, QString suffix = "");
     QString getReleaseFilePath();
 

@@ -72,11 +72,11 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
 
     // Duration of a quick release
     if (_quickRelease)
-        v_timeRelease = static_cast<quint32>(0.02 * _sampleRate);
+        v_timeRelease = static_cast<quint32>(0.04 * _sampleRate);
 
     // Duration of the attack for the release mode
     if (_currentPhase == phase6quickAttack)
-        v_timeAttack = static_cast<quint32>(1 * _sampleRate);
+        v_timeAttack = static_cast<quint32>(0.04 * _sampleRate);
 
     // Beginning of the release phase?
     if (release && _currentPhase != phase7off && _currentPhase != phase6release && _currentPhase != phase6quickAttack)
@@ -241,23 +241,23 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
         case phase6quickAttack:
             // Number of remaining points in the phase
             duration = _currentSmpl < v_timeAttack ? v_timeAttack - _currentSmpl : 0;
-            if (duration <= size - avancement)
+            if (duration > size - avancement)
+                duration = size - avancement;
+
+            lastValue = _precValue;
+            for (quint32 i = 0; i < duration; i++)
+            {
+                lastValue = (_currentSmpl + i) * _quickAttackTarget / (v_timeAttack - 1);
+                data[avancement + i] *= gain * lastValue;
+            }
+
+            if (duration == 0)
             {
                 _currentPhase = phase6release;
                 _currentSmpl = 0;
             }
             else
-            {
-                duration = size - avancement;
                 _currentSmpl += duration;
-            }
-
-            // Linear amplitude => convex attack (dB)
-            lastValue = _precValue;
-            for (quint32 i = 0; i < duration; i++)
-            {
-                data[avancement + i] *= gain * (avancement + i) * this->_precValue / duration;
-            }
             break;
         case phase6release:
             // Number of remaining points in the phase
@@ -326,6 +326,10 @@ void EnveloppeVol::quickRelease()
 void EnveloppeVol::quickAttack()
 {
     // Start of a sample in mode "release"
-    _currentPhase = phase6quickAttack;
-    _currentSmpl = 0;
+    if (_currentPhase <= phase5sustain)
+    {
+        _currentPhase = phase6quickAttack;
+        _currentSmpl = 0;
+        _quickAttackTarget = _precValue;
+    }
 }
