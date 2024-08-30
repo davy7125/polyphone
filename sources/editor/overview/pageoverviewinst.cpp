@@ -309,30 +309,33 @@ QString PageOverviewInst::getLoop(EltID id)
         if (_sf2->isSet(id, champ_sampleModes))
             value = _sf2->get(id, champ_sampleModes).wValue;
 
-        if (!modes.contains(value))
+        bool inserted = false;
+        for (int i = 0; i < modes.count(); i++)
+        {
+            if (modes[i] == value)
+            {
+                inserted = true;
+                break;
+            }
+            if (modes[i] > value)
+            {
+                modes.insert(i, value);
+                inserted = true;
+                break;
+            }
+        }
+        if (!inserted)
             modes << value;
     }
 
-    if (modes.count() == 0)
-        return "?";
-    else if (modes.count() == 1)
-    {
-        switch (modes[0])
-        {
-        case 0:
-            return tr("no");
-        case 1:
-            return tr("yes");
-        case 2:
-            return tr("release", "speaking about loop modes");
-        case 3:
-            return tr("yes, to the end");
-        }
 
-        return "?";
-    }
-    else
-        return tr("several modes", "speaking about loop modes");
+    if (modes.count() == 0)
+        return "";
+
+    QString result = QString::number(modes[0]);
+    for (int i = 1; i < modes.count(); i++)
+        result += "," + QString::number(modes[i]);
+    return result;
 }
 
 QString PageOverviewInst::getChorus(EltID id, bool orderMode)

@@ -275,6 +275,7 @@ SOURCES	+= main.cpp \
     editor/footers/footersf2.cpp \
     editor/graphics/graphicsfourier.cpp \
     editor/modulator/modulatorsplitter.cpp \
+    editor/overview/pageoverviewsampledelegate.cpp \
     editor/page.cpp \
     editor/pageenvelope.cpp \
     editor/pagerange.cpp \
@@ -635,6 +636,7 @@ HEADERS += \
     editor/footers/footersf2.h \
     editor/graphics/graphicsfourier.h \
     editor/modulator/modulatorsplitter.h \
+    editor/overview/pageoverviewsampledelegate.h \
     editor/page.h \
     editor/pageenvelope.h \
     editor/pagerange.h \

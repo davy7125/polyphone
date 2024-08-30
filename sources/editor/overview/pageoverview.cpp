@@ -26,6 +26,7 @@
 #include "ui_pageoverview.h"
 #include "contextmanager.h"
 #include "sortedtablewidgetitem.h"
+#include "pageoverviewsampledelegate.h"
 
 PageOverview::PageOverview(ElementType typeElement, QWidget *parent) :
     Page(parent, typeElement == elementSmpl ? "page:ov_smpl" : (typeElement == elementInst ? "page:ov_inst" : "page:ov_prst")),
@@ -36,6 +37,10 @@ PageOverview::PageOverview(ElementType typeElement, QWidget *parent) :
 
     // Style
     ui->table->verticalHeader()->setDefaultSectionSize(QFontMetrics(ui->table->font()).height() + 8);
+
+    // Custom display for sample modes
+    if (typeElement == elementInst)
+        ui->table->setItemDelegateForColumn(9, new PageOverviewSampleDelegate());
 }
 
 PageOverview::~PageOverview()

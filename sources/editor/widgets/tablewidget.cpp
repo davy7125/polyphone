@@ -402,7 +402,7 @@ void TableWidget::paste()
                     {
                         bool ok;
                         int val = text.toInt(&ok);
-                        if (ok && (val == -1 || val == 0 || val == 1 || val == 3))
+                        if (ok && (val >= -1 && val <= 3))
                             setLoopModeImage(currentRow, currentCol, val);
                     }
                     else if (!isGrayed(currentRow))
