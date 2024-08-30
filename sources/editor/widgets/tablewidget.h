@@ -28,7 +28,7 @@
 
 #include <QTableWidget>
 #include <QTimer>
-#include "soundfontmanager.h"
+#include "basetypes.h"
 class TableDelegate;
 
 // QTableWidget an id by column, double click triggers an event and blue effect on the header

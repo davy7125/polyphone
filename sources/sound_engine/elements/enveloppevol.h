@@ -42,6 +42,9 @@ public:
     // Call a quick release
     void quickRelease();
 
+    // Call a quick attack, just before the release (sample mode "release")
+    void quickAttack();
+
     static float fastPow2(float p)
     {
         float offset = (p < 0) ? 1.0f : 0.0f;
@@ -61,6 +64,7 @@ private:
         phase3hold,
         phase4decay,
         phase5sustain,
+        phase6quickAttack,
         phase6release,
         phase7off
     };
@@ -72,7 +76,7 @@ private:
 
     quint32 _sampleRate;
     bool _isMod;
-    bool _fastRelease;
+    bool _quickRelease;
 };
 
 #endif // ENVELOPPEVOL_H

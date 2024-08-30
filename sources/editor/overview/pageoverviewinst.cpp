@@ -323,6 +323,8 @@ QString PageOverviewInst::getLoop(EltID id)
             return tr("no");
         case 1:
             return tr("yes");
+        case 2:
+            return tr("release", "speaking about loop modes");
         case 3:
             return tr("yes, to the end");
         }

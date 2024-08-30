@@ -40,6 +40,15 @@ TableDelegate::TableDelegate(QTableWidget * table, QObject * parent): QStyledIte
     _isEditing(false)
 {
     _modBorderColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+
+    // Sample mode icons
+    QMap<QString, QString> replacement;
+    replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name();
+    replacement["secondColor"] = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT, ThemeManager::ColorContext::DISABLED).name();
+    _sampleModeIcons[0] = ContextManager::theme()->getColoredSvg(":/icons/sample_mode_loop_off.svg", QSize(50, 18), replacement);
+    _sampleModeIcons[1] = ContextManager::theme()->getColoredSvg(":/icons/sample_mode_loop_on.svg", QSize(50, 18), replacement);
+    _sampleModeIcons[2] = ContextManager::theme()->getColoredSvg(":/icons/sample_mode_release.svg", QSize(50, 18), replacement);
+    _sampleModeIcons[3] = ContextManager::theme()->getColoredSvg(":/icons/sample_mode_loop_on_end.svg", QSize(50, 18), replacement);
 }
 
 QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -68,16 +77,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
     }
     else if (isLoop)
     {
-        // Remove the icon from the model
-        QVariant previousDecoration = index.data(Qt::DecorationRole);
-        QAbstractItemModel * model = const_cast<QAbstractItemModel *>(index.model());
-        model->blockSignals(true);
-        model->setData(index, QImage(), Qt::DecorationRole);
-        model->blockSignals(false);
-
-        QComboBox * combobox = new ComboBoxLoopMode(parent);
-        combobox->setProperty(DECO_PROPERTY, previousDecoration);
-        widget = combobox;
+        widget = new ComboBoxLoopMode(parent);
     }
     else if (isKey)
     {
@@ -183,35 +183,6 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
         {
             int currentData = combobox->itemData(combobox->getIndex(), Qt::UserRole).toInt();
             model->setData(index, currentData == -1 ? QVariant() : currentData, Qt::UserRole);
-
-            bool isDark = ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT);
-            switch (currentData)
-            {
-            case -1:
-                model->setData(index, QVariant(), Qt::DecorationRole);
-                break;
-            case 0:
-                if (isDark)
-                    model->setData(index, QImage(":/icons/loop_off_w.png"), Qt::DecorationRole);
-                else
-                    model->setData(index, QImage(":/icons/loop_off.png"), Qt::DecorationRole);
-                break;
-            case 1:
-                if (isDark)
-                    model->setData(index, QImage(":/icons/loop_on_w.png"), Qt::DecorationRole);
-                else
-                    model->setData(index, QImage(":/icons/loop_on.png"), Qt::DecorationRole);
-                break;
-            case 3:
-                if (isDark)
-                    model->setData(index, QImage(":/icons/loop_on_end_w.png"), Qt::DecorationRole);
-                else
-                    model->setData(index, QImage(":/icons/loop_on_end.png"), Qt::DecorationRole);
-                break;
-            default:
-                break;
-            }
-            editor->setProperty(DECO_PROPERTY, QVariant());
         }
     }
     else if (isKey)
@@ -239,16 +210,6 @@ void TableDelegate::destroyEditor(QWidget * editor, const QModelIndex & index) c
     bool isNumeric, isKey, isLoop, isFixed, isAttenuation;
     int nbDecimales;
     getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed, isAttenuation);
-
-    if (isLoop && !editor->property(DECO_PROPERTY).isNull())
-    {
-        // Restore the previous decoration
-        QAbstractItemModel * model = const_cast<QAbstractItemModel *>(index.model());
-        model->blockSignals(true);
-        model->setData(index, editor->property(DECO_PROPERTY), Qt::DecorationRole);
-        model->blockSignals(false);
-    }
-
     QStyledItemDelegate::destroyEditor(editor, index);
 }
 #endif
@@ -284,10 +245,15 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
         painter->fillRect(option.rect, opt.backgroundBrush);
 
         // Image
-        QImage image = index.data(Qt::DecorationRole).value<QImage>();
-        painter->drawPixmap(opt.rect.left() + (opt.rect.width() - image.width()) / 2,
-                            opt.rect.top() + (opt.rect.height() - image.height()) / 2,
-                            image.width(), image.height(), QPixmap::fromImage(image));
+        bool ok;
+        int loopMode = index.data(Qt::UserRole).toInt(&ok);
+        if (ok)
+        {
+            QPixmap pix = _sampleModeIcons[loopMode];
+            painter->drawPixmap(opt.rect.left() + (opt.rect.width() - pix.width()) / 2,
+                                opt.rect.top() + (opt.rect.height() - pix.height()) / 2,
+                                pix.width(), pix.height(), pix);
+        }
     }
     else
     {

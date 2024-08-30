@@ -36,18 +36,13 @@ ComboBoxLoopMode::ComboBoxLoopMode(QWidget *parent) : QComboBox(parent),
 
     // Different loop possibilities
     this->addItem("", -1);
-    if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
-    {
-        this->addItem(QIcon(":/icons/loop_off_w.png"), "", 0);
-        this->addItem(QIcon(":/icons/loop_on_w.png"), "", 1);
-        this->addItem(QIcon(":/icons/loop_on_end_w.png"), "", 3);
-    }
-    else
-    {
-        this->addItem(QIcon(":/icons/loop_off.png"), "", 0);
-        this->addItem(QIcon(":/icons/loop_on.png"), "", 1);
-        this->addItem(QIcon(":/icons/loop_on_end.png"), "", 3);
-    }
+    QMap<QString, QString> replacement;
+    replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name();
+    replacement["secondColor"] = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT, ThemeManager::ColorContext::DISABLED).name();
+    this->addItem(ContextManager::theme()->getColoredSvg(":/icons/sample_mode_loop_off.svg", QSize(48, 48), replacement), "", 0);
+    this->addItem(ContextManager::theme()->getColoredSvg(":/icons/sample_mode_loop_on.svg", QSize(48, 48), replacement), "", 1);
+    this->addItem(ContextManager::theme()->getColoredSvg(":/icons/sample_mode_release.svg", QSize(48, 48), replacement), "", 2);
+    this->addItem(ContextManager::theme()->getColoredSvg(":/icons/sample_mode_loop_on_end.svg", QSize(48, 48), replacement), "", 3);
 
     QObject::connect(this, SIGNAL(activated(int)), this, SLOT(onActivated(int)));
     QObject::connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(onActivated(int)));
@@ -86,17 +81,22 @@ void ComboBoxLoopMode::onActivated(int index)
     this->setDisabled(true);
 }
 
+#if QT_VERSION >= 0x060000
+void ComboView::initViewItemOption(QStyleOptionViewItem *option) const
+{
+    QListView::initViewItemOption(option);
+#else
 QStyleOptionViewItem ComboView::viewOptions() const
 {
-    // Set icon on the top and center of combo box item.
-    QStyleOptionViewItem option;
-#if QT_VERSION >= 0x060000
-    QListView::initViewItemOption(&option);
-#else
-    option = QListView::viewOptions();
+    QStyleOptionViewItem optionObject = QListView::viewOptions();
+    QStyleOptionViewItem * option = &optionObject;
 #endif
 
-    option.decorationAlignment = Qt::AlignHCenter | Qt::AlignVCenter;
-    option.decorationSize = QSize(37, 14);
-    return option;
+    // Set icon on the top and center of combo box item
+    option->decorationSize = QSize(37, 37);
+
+#if QT_VERSION < 0x060000
+    return optionObject;
+#endif
 }
+

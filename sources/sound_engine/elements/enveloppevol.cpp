@@ -33,7 +33,7 @@ void EnveloppeVol::initialize(quint32 sampleRate, bool isMod)
     _currentPhase = phase1delay;
     _sampleRate = sampleRate;
     _isMod = isMod;
-    _fastRelease = false;
+    _quickRelease = false;
 }
 
 bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int note, float gain, VoiceParam * voiceParam)
@@ -70,11 +70,16 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
         v_noteToDecay = static_cast<float>(voiceParam->getInteger(champ_keynumToVolEnvDecay)) / 1200.f;
     }
 
-    if (_fastRelease)
+    // Duration of a quick release
+    if (_quickRelease)
         v_timeRelease = static_cast<quint32>(0.02 * _sampleRate);
 
+    // Duration of the attack for the release mode
+    if (_currentPhase == phase6quickAttack)
+        v_timeAttack = static_cast<quint32>(1 * _sampleRate);
+
     // Beginning of the release phase?
-    if (release && _currentPhase != phase7off && _currentPhase != phase6release)
+    if (release && _currentPhase != phase7off && _currentPhase != phase6release && _currentPhase != phase6quickAttack)
     {
         _currentPhase = phase6release;
         _currentSmpl = 0;
@@ -233,6 +238,27 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                     data[avancement + i] *= gain * lastValue;
             }
             break;
+        case phase6quickAttack:
+            // Number of remaining points in the phase
+            duration = _currentSmpl < v_timeAttack ? v_timeAttack - _currentSmpl : 0;
+            if (duration <= size - avancement)
+            {
+                _currentPhase = phase6release;
+                _currentSmpl = 0;
+            }
+            else
+            {
+                duration = size - avancement;
+                _currentSmpl += duration;
+            }
+
+            // Linear amplitude => convex attack (dB)
+            lastValue = _precValue;
+            for (quint32 i = 0; i < duration; i++)
+            {
+                data[avancement + i] *= gain * (avancement + i) * this->_precValue / duration;
+            }
+            break;
         case phase6release:
             // Number of remaining points in the phase
             duration = _currentSmpl < v_timeRelease ? v_timeRelease - _currentSmpl : 0;
@@ -292,7 +318,14 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
 void EnveloppeVol::quickRelease()
 {
     // Stopped by an exclusive class: very short release
-    _fastRelease = true;
+    _quickRelease = true;
     _currentPhase = phase6release;
+    _currentSmpl = 0;
+}
+
+void EnveloppeVol::quickAttack()
+{
+    // Start of a sample in mode "release"
+    _currentPhase = phase6quickAttack;
     _currentSmpl = 0;
 }

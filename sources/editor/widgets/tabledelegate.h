@@ -56,6 +56,7 @@ private:
     mutable bool _isEditing;
     QMap<int, QList<int> > _modDisplay;
     QColor _modBorderColor;
+    QMap<int, QPixmap> _sampleModeIcons;
 
     static const char * DECO_PROPERTY;
     static const float MOD_BORDER_WIDTH;

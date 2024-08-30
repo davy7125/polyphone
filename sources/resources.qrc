@@ -1,12 +1,6 @@
 <RCC>
     <qresource prefix="/icons">
         <file alias="external_link.gif">resources/external_link.gif</file>
-        <file alias="loop_off.png">resources/loop_off.png</file>
-        <file alias="loop_on.png">resources/loop_on.png</file>
-        <file alias="loop_on_end.png">resources/loop_on_end.png</file>
-        <file alias="loop_off_w.png">resources/loop_off_w.png</file>
-        <file alias="loop_on_end_w.png">resources/loop_on_end_w.png</file>
-        <file alias="loop_on_w.png">resources/loop_on_w.png</file>
         <file alias="note_off.png">resources/note_off.png</file>
         <file alias="note_on.png">resources/note_on.png</file>
         <file alias="file-audio.svg">resources/file-audio.svg</file>
@@ -91,6 +85,10 @@
         <file alias="MIDI.svg">resources/MIDI.svg</file>
         <file alias="keyboards.svg">resources/keyboards.svg</file>
         <file alias="bars.svg">resources/bars.svg</file>
+        <file alias="sample_mode_loop_off.svg">resources/sample_mode_loop_off.svg</file>
+        <file alias="sample_mode_loop_on.svg">resources/sample_mode_loop_on.svg</file>
+        <file alias="sample_mode_loop_on_end.svg">resources/sample_mode_loop_on_end.svg</file>
+        <file alias="sample_mode_release.svg">resources/sample_mode_release.svg</file>
     </qresource>
     <qresource prefix="/misc">
         <file>changelog</file>

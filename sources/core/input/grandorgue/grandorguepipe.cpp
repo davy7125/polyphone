@@ -63,8 +63,18 @@ void GrandOrguePipe::readData(QString key, QString value)
     else if (key == "pitchtuning")
     {
         bool ok = false;
+        float fValue = value.toFloat(&ok);
         _tuning = value.toInt(&ok);
-        if (!ok)
+        if (ok)
+        {
+            if (fValue < -0.5)
+                _tuning = static_cast<int>(fValue - 0.5f);
+            else if (fValue > 0.5)
+                _tuning = static_cast<int>(fValue + 0.5f);
+            else
+                _tuning = 0;
+        }
+        else
         {
             qDebug() << "couldn't read pipe tuning:" << value;
             _tuning = 0;

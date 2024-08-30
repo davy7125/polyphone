@@ -234,8 +234,7 @@ void TableWidget::commitData(QWidget *editor)
                             {
                                 if (row == 5)
                                 {
-                                    // Copy the data in DecorationRole and UserRole
-                                    model()->setData(idx, model()->data(currentIndex(), Qt::DecorationRole), Qt::DecorationRole);
+                                    // Copy the data in UserRole
                                     model()->setData(idx, model()->data(currentIndex(), Qt::UserRole), Qt::UserRole);
                                 }
                                 else
@@ -268,39 +267,7 @@ void TableWidget::commitData(QWidget *editor)
 
 void TableWidget::setLoopModeImage(int row, int column, int loopModeValue)
 {
-    bool isDark = ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT);
-    switch (loopModeValue)
-    {
-    case 0:
-        // no loop
-        if (isDark)
-            this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icons/loop_off_w.png"));
-        else
-            this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icons/loop_off.png"));
-        this->item(row, column)->setData(Qt::UserRole, 0);
-        break;
-    case 1:
-        // loop
-        if (isDark)
-            this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icons/loop_on_w.png"));
-        else
-            this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icons/loop_on.png"));
-        this->item(row, column)->setData(Qt::UserRole, 1);
-        break;
-    case 3:
-        // loop + end
-        if (isDark)
-            this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icons/loop_on_end_w.png"));
-        else
-            this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icons/loop_on_end.png"));
-        this->item(row, column)->setData(Qt::UserRole, 3);
-        break;
-    default:
-        // no image
-        this->item(row, column)->setData(Qt::DecorationRole, QImage());
-        this->item(row, column)->setData(Qt::UserRole, QVariant());
-        break;
-    }
+    this->item(row, column)->setData(Qt::UserRole, loopModeValue >= 0 && loopModeValue < 4 ? loopModeValue : QVariant());
 }
 
 void TableWidget::copy()
@@ -456,7 +423,6 @@ void TableWidget::deleteCells()
     foreach (QTableWidgetItem * item, listItems)
     {
         item->setText("");
-        item->setData(Qt::DecorationRole, QImage());
         item->setData(Qt::UserRole, QVariant());
     }
     emit(actionFinished());

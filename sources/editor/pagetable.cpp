@@ -645,10 +645,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
                 _table->blockSignals(true);
 
                 if (champ == champ_sampleModes)
-                {
-                    _table->item(ligne, numCol2)->setData(Qt::DecorationRole, _table->item(ligne, colonne)->data(Qt::DecorationRole));
                     _table->item(ligne, numCol2)->setData(Qt::UserRole, _table->item(ligne, colonne)->data(Qt::UserRole));
-                }
                 else
                     _table->item(ligne, numCol2)->setText(_table->item(ligne, colonne)->text());
                 _table->blockSignals(false);

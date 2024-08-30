@@ -53,7 +53,11 @@ class ComboView : public QListView
     Q_OBJECT
 
 protected:
+#if QT_VERSION >= 0x060000
+    void initViewItemOption(QStyleOptionViewItem *option) const override;
+#else
     QStyleOptionViewItem viewOptions() const;
+#endif
 };
 
 #endif // COMBOBOXLOOPMODE_H

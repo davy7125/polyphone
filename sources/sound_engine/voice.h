@@ -133,7 +133,7 @@ private:
     // Save state for low pass filter
     float _x1, _x2, _y1, _y2;
 
-    bool takeData(float * data, quint32 nbRead);
+    bool takeData(float * data, quint32 nbRead, qint32 loopMode);
     void biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float Q);
 
     // Arrays
