@@ -192,7 +192,7 @@ void GraphicsViewEnvelop::setSample(QVector<float> vData, int sampleRate, int lo
     int currentSmplPos = 0;
     int nbRead = _triggeredKeyDuration * sampleRate;
 
-    if (loopMode != 0 && startLoop != endLoop)
+    if ((loopMode == 1 || loopMode == 3) && startLoop != endLoop)
     {
         // Loop
         if (currentSmplPos >= endLoop)
@@ -209,7 +209,7 @@ void GraphicsViewEnvelop::setSample(QVector<float> vData, int sampleRate, int lo
             total += chunk;
         }
     }
-    else
+    else if (loopMode == 0)
     {
         // No loop
         if (dataSize - currentSmplPos < nbRead)
@@ -232,7 +232,7 @@ void GraphicsViewEnvelop::setSample(QVector<float> vData, int sampleRate, int lo
     int offset = nbRead;
     nbRead = loopedDataSize - nbRead;
 
-    if ((loopMode == 1 || loopMode == 2) && startLoop != endLoop)
+    if (loopMode == 1 && startLoop != endLoop)
     {
         // Loop
         if (currentSmplPos >= endLoop)
