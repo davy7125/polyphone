@@ -162,7 +162,7 @@ void Player::onPresetSelectionChanged(QItemSelection selected, QItemSelection de
         // Mute deselected presets
         for (int key = 0; key < 128; key++)
             if (_currentKeyVelocities[key] > 0)
-                _synth->play(id, _playerOptions->playerChannel(), key, 0);
+                stopPresetKey(id, key);
     }
 
     // Add selected ids
@@ -211,7 +211,7 @@ bool Player::processKey(int channel, int key, int vel)
     _currentKeyVelocities[key] = vel;
 
     foreach (EltID presetId, _currentIds)
-        _synth->play(presetId, channel, key, vel);
+        _synth->play(presetId, _playerOptions->playerChannel(), key, vel);
 
     if (vel > 0)
         ui->keyboard->inputNoteOn(key, vel);
@@ -233,7 +233,7 @@ void Player::on_comboChannel_currentIndexChanged(int index)
         {
             _currentKeyVelocities[key] = 0;
             foreach (EltID presetId, _currentIds)
-                _synth->play(presetId, _playerOptions->playerChannel(), key, 0);
+                stopPresetKey(presetId, key);
         }
     }
 
@@ -278,7 +278,7 @@ void Player::on_comboSelectionByKeys_currentIndexChanged(int index)
                 EltID id = index.data(Qt::UserRole).value<EltID>();
                 for (int key = 0; key < 128; key++)
                     if (_currentKeyVelocities[key] > 0)
-                        _synth->play(id, _playerOptions->playerChannel(), key, 0);
+                        stopPresetKey(id, key);
             }
         }
     }
@@ -384,4 +384,13 @@ QVector<bool> Player::getEnabledKeysForInstrument(EltID idInst)
     }
 
     return result;
+}
+
+void Player::stopPresetKey(EltID presetId, int key)
+{
+    if (_playerOptions->playerChannel() == -1)
+        for (int channel = -1; channel < 16; channel++)
+            _synth->play(presetId, channel, key, 0);
+    else
+        _synth->play(presetId, _playerOptions->playerChannel(), key, 0);
 }

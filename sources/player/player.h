@@ -69,6 +69,7 @@ private:
     void customizeKeyboard();
     void scanPreset(EltID presetId, bool * keys);
     QVector<bool> getEnabledKeysForInstrument(EltID idInst);
+    void stopPresetKey(EltID presetId, int key);
 
     Ui::Player *ui;
     PlayerOptions * _playerOptions;
