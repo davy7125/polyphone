@@ -506,12 +506,10 @@ void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int 
             break;
         case 5:
             // Delete character range
-            if (val1 == val2)
-                return;
             if (val2 > val1)
-                newName.remove(val1, val2 - val1);
+                newName.remove(val1, val2 - val1 + 1);
             else
-                newName.remove(val2, val1 - val2);
+                newName.remove(val2, val1 - val2 + 1);
             break;
         }
 
