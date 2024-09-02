@@ -150,6 +150,11 @@
           <string>16</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>detect...</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>

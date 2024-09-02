@@ -193,6 +193,14 @@ void Player::onPresetSelectionChanged(QItemSelection selected, QItemSelection de
 
 bool Player::processKey(int channel, int key, int vel)
 {
+    // Maybe we are listening for detecting the channel
+    if (ui->comboChannel->currentIndex() == 17)
+    {
+        if (channel != -1)
+            ui->comboChannel->setCurrentIndex(channel + 1);
+        return true;
+    }
+
     if (channel != _playerOptions->playerChannel() && _playerOptions->playerChannel() != -1)
         return false;
 
@@ -232,7 +240,7 @@ bool Player::processKey(int channel, int key, int vel)
 
 void Player::on_comboChannel_currentIndexChanged(int index)
 {
-    if (_initializing)
+    if (_initializing || index == 17)
         return;
 
     // Mute the current channel
