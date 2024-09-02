@@ -30,6 +30,9 @@
 #include "playeroptions.h"
 #include "playerpresetlistdelegate.h"
 
+bool Player::s_recorderOpen = false;
+QList<Player *> Player::s_instances;
+
 Player::Player(PlayerOptions * playerOptions, QWidget * parent) : Tab(parent),
     ui(new Ui::Player),
     _playerOptions(new PlayerOptions(playerOptions)),
@@ -44,6 +47,9 @@ Player::Player(PlayerOptions * playerOptions, QWidget * parent) : Tab(parent),
     QString highlightColorText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
     ui->topBar->setStyleSheet("QWidget#topBar{background-color:" + highlightColorBackground + "} QLabel{color:" + highlightColorText + "}");
 
+    ui->pushShowRecorder->initialize(tr("Recorder"), ":/icons/recorder.svg");
+    ui->pushShowRecorder->setChecked(s_recorderOpen);
+
     // Keyboard with all keys (128)
     ui->keyboard->set(PianoKeybd::PROPERTY_KEY_MIN, 0);
     ui->keyboard->set(PianoKeybd::PROPERTY_KEY_NUMBER, 128);
@@ -52,6 +58,8 @@ Player::Player(PlayerOptions * playerOptions, QWidget * parent) : Tab(parent),
     ui->comboChannel->setCurrentIndex(_playerOptions->playerChannel() + 1);
     ui->comboMultipleSelection->setCurrentIndex(_playerOptions->playerMultipleSelection() ? 1 : 0);
     ui->comboSelectionByKeys->setCurrentIndex(_playerOptions->playerKeySelection());
+
+    s_instances << this;
     _initializing = false;
 
     on_comboChannel_currentIndexChanged(ui->comboChannel->currentIndex());
@@ -60,6 +68,7 @@ Player::Player(PlayerOptions * playerOptions, QWidget * parent) : Tab(parent),
 
 Player::~Player()
 {
+    s_instances.removeAll(this);
     delete ui;
     delete _playerOptions;
 }
@@ -393,4 +402,24 @@ void Player::stopPresetKey(EltID presetId, int key)
             _synth->play(presetId, channel, key, 0);
     else
         _synth->play(presetId, _playerOptions->playerChannel(), key, 0);
+}
+
+void Player::on_pushShowRecorder_clicked()
+{
+    if (_initializing)
+        return;
+    bool isDisplayed = ui->pushShowRecorder->isChecked();
+    updateRecorderButtonsState(isDisplayed);
+    emit(recorderDisplayChanged(isDisplayed));
+}
+
+void Player::updateRecorderButtonsState(bool isChecked)
+{
+    s_recorderOpen = isChecked;
+    foreach (Player * player, s_instances)
+    {
+        player->blockSignals(true);
+        player->ui->pushShowRecorder->setChecked(s_recorderOpen);
+        player->blockSignals(false);
+    }
 }

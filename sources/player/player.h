@@ -52,6 +52,8 @@ public:
     bool processBendChanged(int channel, float value) override { Q_UNUSED(channel); Q_UNUSED(value); return false; }
     bool processBendSensitivityChanged(int channel, float semitones) override { Q_UNUSED(channel); Q_UNUSED(semitones); return false; }
 
+    static void updateRecorderButtonsState(bool isChecked);
+
 protected:
     void tabInitializing(QString filename) override;
     void tabInError(QString errorMessage) override;
@@ -64,6 +66,7 @@ private slots:
     void on_comboChannel_currentIndexChanged(int index);
     void on_comboMultipleSelection_currentIndexChanged(int index);
     void on_comboSelectionByKeys_currentIndexChanged(int index);
+    void on_pushShowRecorder_clicked();
 
 private:
     void customizeKeyboard();
@@ -80,6 +83,9 @@ private:
     int _presetPositionByPresetNumber[128];
     int _currentKeyVelocities[128];
     QMap<int, QVector<bool> > _rangeByInst;
+
+    static QList<Player *> s_instances;
+    static bool s_recorderOpen;
 };
 
 #endif // PLAYER_H

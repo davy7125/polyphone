@@ -75,13 +75,13 @@ private slots:
     void on_pushSave_clicked();
     void on_pushShowRecorder_clicked();
     void on_pushShowKeyboard_clicked();
-
     void onMidiExtensionActionClicked();
     void onExtensionDialogClosed(int result);
 
 private:
     Ui::EditorToolBar *ui;
 
+    bool _initializing;
     int _sf2Index;
     QList<StyledAction *> _displayActions, _midiControllerActions;
     bool _updatingDisplayOptions;

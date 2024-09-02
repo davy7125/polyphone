@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>471</width>
-    <height>28</height>
+    <width>535</width>
+    <height>30</height>
    </rect>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="topMargin">
+    <number>2</number>
+   </property>
+   <property name="rightMargin">
     <number>2</number>
    </property>
    <property name="bottomMargin">

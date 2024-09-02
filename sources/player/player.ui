@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>547</width>
-    <height>266</height>
+    <width>573</width>
+    <height>268</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,6 +47,15 @@
       </size>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="topMargin">
+       <number>2</number>
+      </property>
+      <property name="rightMargin">
+       <number>2</number>
+      </property>
+      <property name="bottomMargin">
+       <number>2</number>
+      </property>
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
@@ -193,7 +202,7 @@
       <item>
        <spacer name="horizontalSpacer_5">
         <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
+         <enum>Qt::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -202,6 +211,13 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="StyledAction" name="pushShowRecorder">
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -241,13 +257,7 @@
        <item row="3" column="0">
         <spacer name="horizontalSpacer">
          <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
+          <enum>Qt::Horizontal</enum>
          </property>
         </spacer>
        </item>
@@ -257,46 +267,28 @@
           <string>Opening file...</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
         <spacer name="verticalSpacer">
          <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
+          <enum>Qt::Vertical</enum>
          </property>
         </spacer>
        </item>
        <item row="3" column="2">
         <spacer name="horizontalSpacer_2">
          <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
+          <enum>Qt::Horizontal</enum>
          </property>
         </spacer>
        </item>
        <item row="4" column="1">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
+          <enum>Qt::Vertical</enum>
          </property>
         </spacer>
        </item>
@@ -347,43 +339,43 @@
           </sizepolicy>
          </property>
          <property name="contextMenuPolicy">
-          <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
+          <enum>Qt::NoContextMenu</enum>
          </property>
          <property name="acceptDrops">
           <bool>true</bool>
          </property>
          <property name="frameShape">
-          <enum>QFrame::Shape::NoFrame</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+          <enum>Qt::ScrollBarAlwaysOff</enum>
          </property>
          <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+          <enum>Qt::ScrollBarAsNeeded</enum>
          </property>
          <property name="editTriggers">
-          <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+          <set>QAbstractItemView::NoEditTriggers</set>
          </property>
          <property name="showDropIndicator" stdset="0">
           <bool>false</bool>
          </property>
          <property name="dragDropMode">
-          <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
+          <enum>QAbstractItemView::NoDragDrop</enum>
          </property>
          <property name="defaultDropAction">
-          <enum>Qt::DropAction::CopyAction</enum>
+          <enum>Qt::IgnoreAction</enum>
          </property>
          <property name="textElideMode">
-          <enum>Qt::TextElideMode::ElideMiddle</enum>
+          <enum>Qt::ElideMiddle</enum>
          </property>
          <property name="horizontalScrollMode">
-          <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
          </property>
          <property name="flow">
-          <enum>QListView::Flow::LeftToRight</enum>
+          <enum>QListView::LeftToRight</enum>
          </property>
          <property name="resizeMode">
-          <enum>QListView::ResizeMode::Adjust</enum>
+          <enum>QListView::Adjust</enum>
          </property>
          <property name="spacing">
           <number>2</number>
@@ -424,34 +416,34 @@
           </sizepolicy>
          </property>
          <property name="frameShape">
-          <enum>QFrame::Shape::NoFrame</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
+          <enum>Qt::ScrollBarAlwaysOn</enum>
          </property>
          <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+          <enum>Qt::ScrollBarAlwaysOff</enum>
          </property>
          <property name="editTriggers">
-          <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+          <set>QAbstractItemView::NoEditTriggers</set>
          </property>
          <property name="showDropIndicator" stdset="0">
           <bool>false</bool>
          </property>
          <property name="dragDropMode">
-          <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
+          <enum>QAbstractItemView::NoDragDrop</enum>
          </property>
          <property name="defaultDropAction">
-          <enum>Qt::DropAction::CopyAction</enum>
+          <enum>Qt::IgnoreAction</enum>
          </property>
          <property name="textElideMode">
-          <enum>Qt::TextElideMode::ElideMiddle</enum>
+          <enum>Qt::ElideMiddle</enum>
          </property>
          <property name="verticalScrollMode">
-          <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
          </property>
          <property name="flow">
-          <enum>QListView::Flow::LeftToRight</enum>
+          <enum>QListView::LeftToRight</enum>
          </property>
          <property name="isWrapping" stdset="0">
           <bool>true</bool>
@@ -512,26 +504,14 @@
        <item row="1" column="2">
         <spacer name="horizontalSpacer_4">
          <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
+          <enum>Qt::Horizontal</enum>
          </property>
         </spacer>
        </item>
        <item row="4" column="1">
         <spacer name="verticalSpacer_4">
          <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
+          <enum>Qt::Vertical</enum>
          </property>
         </spacer>
        </item>
@@ -546,33 +526,21 @@
           <string>Cannot open the file</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
         <spacer name="verticalSpacer_3">
          <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
+          <enum>Qt::Vertical</enum>
          </property>
         </spacer>
        </item>
        <item row="1" column="0">
         <spacer name="horizontalSpacer_3">
          <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
+          <enum>Qt::Horizontal</enum>
          </property>
         </spacer>
        </item>
@@ -582,7 +550,7 @@
           <string notr="true">reason</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -603,6 +571,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>StyledAction</class>
+   <extends>QPushButton</extends>
+   <header>styledaction.h</header>
+  </customwidget>
   <customwidget>
    <class>RotatingSpinner</class>
    <extends>QWidget</extends>

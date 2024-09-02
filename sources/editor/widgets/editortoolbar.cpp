@@ -46,6 +46,7 @@ QList<EditorToolBar *> EditorToolBar::s_instances;
 
 EditorToolBar::EditorToolBar(QWidget * parent) : QWidget(parent),
     ui(new Ui::EditorToolBar),
+    _initializing(true),
     _sf2Index(-1),
     _updatingDisplayOptions(false)
 {
@@ -77,14 +78,10 @@ EditorToolBar::EditorToolBar(QWidget * parent) : QWidget(parent),
     ui->pushToolBox->setStyleSheet("StyledAction{padding-right: 6px;border:0} StyledAction::menu-indicator {image: url(:/icons/arrow_down.svg); height: 12px; width: 12px;}");
 
     ui->pushShowRecorder->initialize(tr("Recorder"), ":/icons/recorder.svg");
-    ui->pushShowRecorder->blockSignals(true);
     ui->pushShowRecorder->setChecked(s_recorderOpen);
-    ui->pushShowRecorder->blockSignals(false);
 
     ui->pushShowKeyboard->initialize(tr("Virtual keyboard"), ":/icons/piano.svg");
-    ui->pushShowKeyboard->blockSignals(true);
     ui->pushShowKeyboard->setChecked(s_keyboardOpen);
-    ui->pushShowKeyboard->blockSignals(false);
 
     // Possible extensions
     for (int i = 0; i < ExtensionManager::midi()->count(); i++)
@@ -105,12 +102,13 @@ EditorToolBar::EditorToolBar(QWidget * parent) : QWidget(parent),
     }
 
     s_instances << this;
+    _initializing = false;
 }
 
 EditorToolBar::~EditorToolBar()
 {
-    delete ui;
     s_instances.removeAll(this);
+    delete ui;
     if (s_instances.empty())
     {
         s_keyboardOpen = false;
@@ -233,6 +231,8 @@ void EditorToolBar::on_pushRedo_clicked()
 
 void EditorToolBar::on_pushShowRecorder_clicked()
 {
+    if (_initializing)
+        return;
     bool isDisplayed = ui->pushShowRecorder->isChecked();
     updateRecorderButtonsState(isDisplayed);
     emit(recorderDisplayChanged(isDisplayed));
@@ -240,6 +240,8 @@ void EditorToolBar::on_pushShowRecorder_clicked()
 
 void EditorToolBar::on_pushShowKeyboard_clicked()
 {
+    if (_initializing)
+        return;
     bool isDisplayed = ui->pushShowKeyboard->isChecked();
     updateKeyboardButtonsState(isDisplayed);
     emit(keyboardDisplayChanged(isDisplayed));
