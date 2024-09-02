@@ -38,362 +38,362 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="core/types/attribute.cpp" line="442"/>
+        <location filename="core/types/attribute.cpp" line="443"/>
         <source>unknown</source>
         <translation>desconegut</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="447"/>
+        <location filename="core/types/attribute.cpp" line="448"/>
         <source>Sample start offset</source>
         <translation>Desplaçament d&apos;inici de la mostra</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="450"/>
+        <location filename="core/types/attribute.cpp" line="451"/>
         <source>Sample start offset (× 32768)</source>
         <translation>Desplaçament d&apos;inici de la mostra (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="453"/>
+        <location filename="core/types/attribute.cpp" line="454"/>
         <source>Sample end offset</source>
         <translation>Desplaçament del final de la mostra</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="456"/>
+        <location filename="core/types/attribute.cpp" line="457"/>
         <source>Sample end offset (× 32768)</source>
         <translation>Desplaçament del final de la mostra( × 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="459"/>
+        <location filename="core/types/attribute.cpp" line="460"/>
         <source>Loop start offset</source>
         <translation>Desplaçament d&apos;inici del bucle</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="462"/>
+        <location filename="core/types/attribute.cpp" line="463"/>
         <source>Loop start offset (× 32768)</source>
         <translation>Desplaçament d&apos;inici del bucle (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="465"/>
+        <location filename="core/types/attribute.cpp" line="466"/>
         <source>Loop end offset</source>
         <translation>Desplaçament del final del bucle</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="468"/>
+        <location filename="core/types/attribute.cpp" line="469"/>
         <source>Loop end offset (× 32768)</source>
         <translation>Desplaçament del final del bucle (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="471"/>
+        <location filename="core/types/attribute.cpp" line="472"/>
         <source>Mod LFO → pitch (c)</source>
         <translation>Mod LFO → pitch (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="474"/>
+        <location filename="core/types/attribute.cpp" line="475"/>
         <source>Vib LFO → pitch (c)</source>
         <translation>Vib LFO → pitch (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="477"/>
+        <location filename="core/types/attribute.cpp" line="478"/>
         <source>Mod env → pitch (c)</source>
         <translation>Mod env → pitch (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="480"/>
+        <location filename="core/types/attribute.cpp" line="481"/>
         <source>Filter, cutoff (×)</source>
         <translation>Filtre, freqüència de tall (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="481"/>
+        <location filename="core/types/attribute.cpp" line="482"/>
         <source>Filter, cutoff (Hz)</source>
         <translation>Filtre, freqüència de tall (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="484"/>
+        <location filename="core/types/attribute.cpp" line="485"/>
         <source>Filter, resonance (dB)</source>
         <translation>Filtre, resonància (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="487"/>
+        <location filename="core/types/attribute.cpp" line="488"/>
         <source>Mod LFO → filter (c)</source>
         <translation>Mod LFO → filtre (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="490"/>
+        <location filename="core/types/attribute.cpp" line="491"/>
         <source>Mod env → filter (c)</source>
         <translation>Mod env → filtre (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="493"/>
+        <location filename="core/types/attribute.cpp" line="494"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>Mod LFO → volum (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="496"/>
+        <location filename="core/types/attribute.cpp" line="497"/>
         <source>Chorus (%)</source>
         <translation>Chorus (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="499"/>
+        <location filename="core/types/attribute.cpp" line="500"/>
         <source>Reverb (%)</source>
         <translation>Reverb (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="502"/>
+        <location filename="core/types/attribute.cpp" line="503"/>
         <source>Pan [-100;100]</source>
         <translation>Pan [-100;100]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="503"/>
+        <location filename="core/types/attribute.cpp" line="504"/>
         <source>Pan [-50;50]</source>
         <translation>Pan [-50;50]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="506"/>
+        <location filename="core/types/attribute.cpp" line="507"/>
         <source>Mod LFO delay (×)</source>
         <translation>Mod LFO delay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="507"/>
+        <location filename="core/types/attribute.cpp" line="508"/>
         <source>Mod LFO delay (s)</source>
         <translation>Mod LFO delay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="510"/>
+        <location filename="core/types/attribute.cpp" line="511"/>
         <source>Mod LFO freq (×)</source>
         <translation>Mod LFO freq (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="511"/>
+        <location filename="core/types/attribute.cpp" line="512"/>
         <source>Mod LFO freq (Hz)</source>
         <translation>Mod LFO freq (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="514"/>
+        <location filename="core/types/attribute.cpp" line="515"/>
         <source>Vib LFO delay (×)</source>
         <translation>Vib LFO delay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="515"/>
+        <location filename="core/types/attribute.cpp" line="516"/>
         <source>Vib LFO delay (s)</source>
         <translation>Vib LFO delay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="518"/>
+        <location filename="core/types/attribute.cpp" line="519"/>
         <source>Vib LFO freq (×)</source>
         <translation>Vib LFO freq (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="519"/>
+        <location filename="core/types/attribute.cpp" line="520"/>
         <source>Vib LFO freq (Hz)</source>
         <translation>Vib LFO freq (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="522"/>
+        <location filename="core/types/attribute.cpp" line="523"/>
         <source>Mod env delay (×)</source>
         <translation>Mod env delay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="523"/>
+        <location filename="core/types/attribute.cpp" line="524"/>
         <source>Mod env delay (s)</source>
         <translation>Mod env delay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="526"/>
+        <location filename="core/types/attribute.cpp" line="527"/>
         <source>Mod env attack (×)</source>
         <translation>Mod env attack (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="527"/>
+        <location filename="core/types/attribute.cpp" line="528"/>
         <source>Mod env attack (s)</source>
         <translation>Mod env attack (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="530"/>
+        <location filename="core/types/attribute.cpp" line="531"/>
         <source>Mod env hold (×)</source>
         <translation>Mod env hold (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="531"/>
+        <location filename="core/types/attribute.cpp" line="532"/>
         <source>Mod env hold (s)</source>
         <translation>Mod env hold (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="534"/>
+        <location filename="core/types/attribute.cpp" line="535"/>
         <source>Mod env decay (×)</source>
         <translation>Mod env decay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="535"/>
+        <location filename="core/types/attribute.cpp" line="536"/>
         <source>Mod env decay (s)</source>
         <translation>Mod env decay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="538"/>
+        <location filename="core/types/attribute.cpp" line="539"/>
         <source>Mod env sustain (%)</source>
         <translation>Mod env sustain (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="541"/>
+        <location filename="core/types/attribute.cpp" line="542"/>
         <source>Mod env release (×)</source>
         <translation>Mod env release (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="542"/>
+        <location filename="core/types/attribute.cpp" line="543"/>
         <source>Mod env release (s)</source>
         <translation>Mod env release (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="545"/>
+        <location filename="core/types/attribute.cpp" line="546"/>
         <source>Key → Mod env hold (c)</source>
         <translation>Key → Mod env hold (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="548"/>
+        <location filename="core/types/attribute.cpp" line="549"/>
         <source>Key → Mod env decay (c)</source>
         <translation>Key → Mod env decay (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="551"/>
+        <location filename="core/types/attribute.cpp" line="552"/>
         <source>Vol env delay (×)</source>
         <translation>Vol env delay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="552"/>
+        <location filename="core/types/attribute.cpp" line="553"/>
         <source>Vol env delay (s)</source>
         <translation>Vol env delay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="555"/>
+        <location filename="core/types/attribute.cpp" line="556"/>
         <source>Vol env attack (×)</source>
         <translation>Vol env attack (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="556"/>
+        <location filename="core/types/attribute.cpp" line="557"/>
         <source>Vol env attack (s)</source>
         <translation>Vol env attack (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="559"/>
+        <location filename="core/types/attribute.cpp" line="560"/>
         <source>Vol env hold (×)</source>
         <translation>Vol env hold (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="560"/>
+        <location filename="core/types/attribute.cpp" line="561"/>
         <source>Vol env hold (s)</source>
         <translation>Vol env hold (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="563"/>
+        <location filename="core/types/attribute.cpp" line="564"/>
         <source>Vol env decay (×)</source>
         <translation>Vol env decay (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="564"/>
+        <location filename="core/types/attribute.cpp" line="565"/>
         <source>Vol env decay (s)</source>
         <translation>Vol env decay (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="567"/>
+        <location filename="core/types/attribute.cpp" line="568"/>
         <source>Vol env sustain (dB)</source>
         <translation>Vol env sustain (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="570"/>
+        <location filename="core/types/attribute.cpp" line="571"/>
         <source>Vol env release (×)</source>
         <translation>Vol env release (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="571"/>
+        <location filename="core/types/attribute.cpp" line="572"/>
         <source>Vol env release (s)</source>
         <translation>Vol env release (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="574"/>
+        <location filename="core/types/attribute.cpp" line="575"/>
         <source>Key → Vol env hold (c)</source>
         <translation>Key → Vol env hold (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="577"/>
+        <location filename="core/types/attribute.cpp" line="578"/>
         <source>Key → Vol env decay (c)</source>
         <translation>Key → Vol env decay (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="580"/>
+        <location filename="core/types/attribute.cpp" line="581"/>
         <source>Key range</source>
         <translation>Rang de notes</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="583"/>
+        <location filename="core/types/attribute.cpp" line="584"/>
         <source>Velocity range</source>
         <translation>Rang de velocitat</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="586"/>
+        <location filename="core/types/attribute.cpp" line="587"/>
         <source>Fixed key</source>
         <translation>Tecla fixada</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="589"/>
+        <location filename="core/types/attribute.cpp" line="590"/>
         <source>Fixed velocity</source>
         <translation>Velocitat fixada</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="592"/>
+        <location filename="core/types/attribute.cpp" line="593"/>
         <source>Attenuation (dB)</source>
         <translation>Atenuació (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="595"/>
+        <location filename="core/types/attribute.cpp" line="596"/>
         <source>Tuning (semi-tones)</source>
         <translation>Afinació (semitons)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="598"/>
+        <location filename="core/types/attribute.cpp" line="599"/>
         <source>Tuning (cents)</source>
         <translation>Afinació (cents)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="601"/>
+        <location filename="core/types/attribute.cpp" line="602"/>
         <source>Loop playback</source>
         <translation>Reproduir en bucle</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="604"/>
+        <location filename="core/types/attribute.cpp" line="605"/>
         <source>Scale tuning</source>
         <translation>Escala d&apos;afinació</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="607"/>
+        <location filename="core/types/attribute.cpp" line="608"/>
         <source>Exclusive class</source>
         <translation>Classe exclusiva</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="610"/>
+        <location filename="core/types/attribute.cpp" line="611"/>
         <source>Root key</source>
         <translation>Nota base</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="613"/>
+        <location filename="core/types/attribute.cpp" line="614"/>
         <source>Sample root key</source>
         <translation>Nota base de la mostra</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="616"/>
+        <location filename="core/types/attribute.cpp" line="617"/>
         <source>Sample length</source>
         <translation>Durada de la mostra</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="619"/>
+        <location filename="core/types/attribute.cpp" line="620"/>
         <source>Loop start</source>
         <translation>Inici del bucle</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="622"/>
+        <location filename="core/types/attribute.cpp" line="623"/>
         <source>Loop end</source>
         <translation>Final del bucle</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="625"/>
+        <location filename="core/types/attribute.cpp" line="626"/>
         <source>Pitch correction (cents)</source>
         <translation>Correcció del to (cents)</translation>
     </message>
@@ -1261,27 +1261,27 @@ en línia</translation>
 <context>
     <name>ControllerArea</name>
     <message>
-        <location filename="clavier/controllerarea.ui" line="216"/>
+        <location filename="clavier/controllerarea.ui" line="209"/>
         <source>Pitch wheel</source>
         <translation>Pitch wheel</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.ui" line="241"/>
+        <location filename="clavier/controllerarea.ui" line="233"/>
         <source>Sensitivity</source>
         <translation>Sensibilitat</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.ui" line="266"/>
+        <location filename="clavier/controllerarea.ui" line="257"/>
         <source>Pressure</source>
         <translation>Pressió</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="291"/>
+        <location filename="clavier/controllerarea.cpp" line="228"/>
         <source>on</source>
         <translation>activat</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="296"/>
+        <location filename="clavier/controllerarea.cpp" line="233"/>
         <source>off</source>
         <translation>desactivat</translation>
     </message>
@@ -1289,103 +1289,103 @@ en línia</translation>
 <context>
     <name>ConversionSfz</name>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="53"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="56"/>
         <source>Cannot create directory &quot;%1&quot;</source>
         <translation>No es pot crear el directory &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="258"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="242"/>
         <source>untitled</source>
         <translation>sense títol</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="543"/>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="585"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="662"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="704"/>
         <source>other</source>
         <translation>altres</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="546"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="665"/>
         <source>Piano</source>
         <translation>Piano</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="548"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="667"/>
         <source>Chromatic percussion</source>
         <translation>Percussió cromàtica</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="550"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="669"/>
         <source>Organ</source>
         <translation>Orgue</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="552"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="671"/>
         <source>Guitar</source>
         <translation>Guitarra</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="554"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="673"/>
         <source>Bass</source>
         <translation>Baix</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="556"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="675"/>
         <source>Strings</source>
         <translation>De corda</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="558"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="677"/>
         <source>Ensemble</source>
         <translation>Conjunt</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="560"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="679"/>
         <source>Brass</source>
         <translation>Vent-metall</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="562"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="681"/>
         <source>Reed</source>
         <translation>De canya</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="564"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="683"/>
         <source>Pipe</source>
         <translation>Tub</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="566"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="685"/>
         <source>Synth lead</source>
         <translation>Sintetitzador solista</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="568"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="687"/>
         <source>Synth pad</source>
         <translation>Sintetitzador de fons</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="570"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="689"/>
         <source>Synth effects</source>
         <translation>Efectes del sintetitzador</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="572"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="691"/>
         <source>Ethnic</source>
         <translation>Ètnica</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="574"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="693"/>
         <source>Percussive</source>
         <translation>De percussió</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="576"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="695"/>
         <source>Sound effects</source>
         <translation>Efectes de so</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="578"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="697"/>
         <source>Percussion kit</source>
         <translation>Kit de percussió</translation>
     </message>
@@ -1662,47 +1662,47 @@ en línia</translation>
         <translation>Teclat virtual</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="108"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="147"/>
         <source>5 octaves</source>
         <translation>5 octaves</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="113"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="152"/>
         <source>6 octaves</source>
         <translation>6 octaves</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="118"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="157"/>
         <source>88 keys (piano)</source>
         <translation>88 tecles (piano)</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="123"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="162"/>
         <source>128 keys (full)</source>
         <translation>128 tecles (sencer)</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="150"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="188"/>
         <source>Key</source>
         <translation>Tecla</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="176"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="213"/>
         <source>Velocity</source>
         <translation>Velocitat</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="202"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="238"/>
         <source>Aftertouch</source>
         <translation>Aftertouch</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="233"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="189"/>
         <source>Hide the controller area</source>
         <translation>Oculta l&apos;àrea del controlador</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="239"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="195"/>
         <source>Show the controller area</source>
         <translation>Mostra l&apos;àrea del controlador</translation>
     </message>
@@ -1849,8 +1849,9 @@ en línia</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="76"/>
-        <source>Insert after a specific position</source>
-        <translation>Insereix després de la posició especificada</translation>
+        <source>Insert at a specific position</source>
+        <oldsource>Insert after a specific position</oldsource>
+        <translation>Insereix a la posició especificada</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="81"/>
@@ -1858,18 +1859,18 @@ en línia</translation>
         <translation>Esborra el rang de caràcters</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="126"/>
+        <location filename="dialogs/dialog_rename.ui" line="129"/>
         <location filename="dialogs/dialog_rename.cpp" line="113"/>
         <source>Position</source>
         <translation>Posició</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="142"/>
+        <location filename="dialogs/dialog_rename.ui" line="148"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="162"/>
+        <location filename="dialogs/dialog_rename.ui" line="168"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel·la</translation>
     </message>
@@ -2059,27 +2060,22 @@ en línia</translation>
 <context>
     <name>Editor</name>
     <message>
-        <location filename="editor/editor.ui" line="180"/>
+        <location filename="editor/editor.ui" line="183"/>
         <source>Search...</source>
         <translation>Cerca...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="259"/>
+        <location filename="editor/editor.ui" line="262"/>
         <source>Opening file...</source>
         <translation>S&apos;està obrint el fitxer...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="375"/>
+        <location filename="editor/editor.ui" line="377"/>
         <source>Cannot open the file</source>
         <translation>No es pot obrir el fitxer</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="262"/>
-        <source>Untitled</source>
-        <translation>Sense títol</translation>
-    </message>
-    <message>
-        <location filename="editor/editor.cpp" line="652"/>
+        <location filename="editor/editor.cpp" line="473"/>
         <source>Warning</source>
         <translation>Atenció</translation>
     </message>
@@ -2149,67 +2145,67 @@ en línia</translation>
 <context>
     <name>EditorToolBar</name>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="66"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="67"/>
         <source>Add a sample</source>
         <translation>Afegeix una mostra</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="67"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="68"/>
         <source>Add an instrument</source>
         <translation>Afegeix un instrument</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="68"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="69"/>
         <source>Add a preset</source>
         <translation>Afegeix un preset</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="69"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="70"/>
         <source>Cancel</source>
         <translation>Cancel·la</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="70"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Redo</source>
         <translation>Refés</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
         <source>Save</source>
         <translation>Desa</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="73"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="74"/>
         <source>Toolbox</source>
         <translation>Caixa d&apos;eines</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="79"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="80"/>
         <source>Recorder</source>
         <translation>Gravadora</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="84"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="83"/>
         <source>Virtual keyboard</source>
         <translation>Teclat virtual</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="280"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="282"/>
         <source>Import an audio file</source>
         <translation>Importa un fitxer d&apos;àudio</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="282"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="284"/>
         <source>Audio files</source>
         <translation>Fitxers d&apos;àudio</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="440"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="442"/>
         <source>Warning</source>
         <translation>Atenció</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="440"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="442"/>
         <source>Cannot create more presets.</source>
         <translation>No es poden crear més presets.</translation>
     </message>
@@ -2491,22 +2487,22 @@ en línia</translation>
 <context>
     <name>InputParserSfz</name>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="104"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="108"/>
         <source>File recursion</source>
         <translation>Fitxer recursiu</translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="112"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="116"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>No es pot obrir el fitxer &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="289"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="293"/>
         <source>Sfz import</source>
         <translation>Importar sfz</translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="474"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="452"/>
         <source>untitled</source>
         <translation>sense títol</translation>
     </message>
@@ -2514,57 +2510,57 @@ en línia</translation>
 <context>
     <name>MainMenu</name>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="37"/>
+        <location filename="mainwindow/mainmenu.cpp" line="50"/>
         <source>&amp;New</source>
         <translation>&amp;Nou</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="42"/>
+        <location filename="mainwindow/mainmenu.cpp" line="57"/>
         <source>&amp;Open...</source>
         <translation>&amp;Obre...</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="49"/>
+        <location filename="mainwindow/mainmenu.cpp" line="66"/>
         <source>&amp;Save</source>
         <translation>De&amp;sa</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="54"/>
+        <location filename="mainwindow/mainmenu.cpp" line="71"/>
         <source>Save &amp;as...</source>
         <translation>Des&amp;a com a...</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="59"/>
+        <location filename="mainwindow/mainmenu.cpp" line="76"/>
         <source>&amp;Export soundfonts...</source>
         <translation>&amp;Exporta soundfonts...</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="66"/>
+        <location filename="mainwindow/mainmenu.cpp" line="84"/>
         <source>&amp;Full screen</source>
         <translation>Pantalla completa</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="73"/>
+        <location filename="mainwindow/mainmenu.cpp" line="91"/>
         <source>Se&amp;ttings</source>
         <translation>Configuració</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="77"/>
+        <location filename="mainwindow/mainmenu.cpp" line="95"/>
         <source>Online &amp;manual</source>
         <translation>&amp;Manual en línia</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="83"/>
+        <location filename="mainwindow/mainmenu.cpp" line="101"/>
         <source>About &amp;Polyphone...</source>
         <translation>Quant al &amp;Polyphone...</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="89"/>
+        <location filename="mainwindow/mainmenu.cpp" line="107"/>
         <source>&amp;Close file</source>
         <translation>Tan&amp;ca el fitxer</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="94"/>
+        <location filename="mainwindow/mainmenu.cpp" line="112"/>
         <source>&amp;Quit</source>
         <translation>Surt</translation>
     </message>
@@ -2634,52 +2630,52 @@ en línia</translation>
         <translation>  Configuració</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="63"/>
+        <location filename="mainwindow/mainwindow.cpp" line="64"/>
         <source>Polyphone SoundFont Editor</source>
         <translation>Editor de SoundFont Polyphone</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="202"/>
+        <location filename="mainwindow/mainwindow.cpp" line="211"/>
         <source>Untitled</source>
         <translation>Sense títol</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="211"/>
+        <location filename="mainwindow/mainwindow.cpp" line="220"/>
         <source>Warning</source>
         <translation>Atenció</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="212"/>
+        <location filename="mainwindow/mainwindow.cpp" line="221"/>
         <source>Save before exiting?</source>
         <translation>Voleu desar abans de sortir?</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="215"/>
+        <location filename="mainwindow/mainwindow.cpp" line="224"/>
         <source>The following files have been modified:</source>
         <translation>S&apos;han modificat els següents fitxers:</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="222"/>
+        <location filename="mainwindow/mainwindow.cpp" line="231"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>S&apos;ha modificat el fitxer &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="225"/>
+        <location filename="mainwindow/mainwindow.cpp" line="234"/>
         <source>&amp;Save</source>
         <translation>De&amp;sa</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="226"/>
+        <location filename="mainwindow/mainwindow.cpp" line="235"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel·la</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="227"/>
+        <location filename="mainwindow/mainwindow.cpp" line="236"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;No desar</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="294"/>
+        <location filename="mainwindow/mainwindow.cpp" line="303"/>
         <source>Opening files</source>
         <translation>S&apos;estan obirnt els fitxers</translation>
     </message>
@@ -2707,53 +2703,53 @@ en línia</translation>
         <translation>Modulador per defecte.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="162"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="156"/>
         <source>overwritten by %1</source>
         <translation>sobreescrit per %1</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="169"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="163"/>
         <source>disabling
 default mod.</source>
         <translation>desactiva el
 modulador per defecte.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="171"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="165"/>
         <source>overriding
 default mod.</source>
         <translation>sobreescriu 
 el modulador per defecte.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="392"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="383"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="400"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="391"/>
         <source>semi-tones</source>
         <translation>semitons</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="403"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="394"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
         <translation>cents</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="414"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="405"/>
         <source>Add from:</source>
         <translation>Afegeix de:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="415"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="406"/>
         <source>Multiply from:</source>
         <translation>Multiplicar a partir de:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="417"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="408"/>
         <source>To:</source>
         <translation>A:</translation>
     </message>
@@ -3069,26 +3065,13 @@ el modulador per defecte.</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="135"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="325"/>
         <source>yes</source>
         <translation>sí</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="139"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="323"/>
         <source>no</source>
         <translation>no</translation>
-    </message>
-    <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="327"/>
-        <source>yes, to the end</source>
-        <translation>sí, fins al final</translation>
-    </message>
-    <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="333"/>
-        <source>several modes</source>
-        <comment>speaking about loop modes</comment>
-        <translation>diversos modes</translation>
     </message>
 </context>
 <context>
@@ -3571,7 +3554,7 @@ per visualitzar els rangs de divisió</translation>
         <translation>Global</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1179"/>
+        <location filename="editor/pagetable.cpp" line="1178"/>
         <source>absolute value</source>
         <translation>valor absolut</translation>
     </message>
@@ -3579,6 +3562,85 @@ per visualitzar els rangs de divisió</translation>
         <location filename="editor/pagetable.h" line="41"/>
         <source>Table</source>
         <translation>Taula</translation>
+    </message>
+</context>
+<context>
+    <name>Player</name>
+    <message>
+        <location filename="player/player.ui" line="59"/>
+        <source>Channel</source>
+        <translation>Canal</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="67"/>
+        <source>all</source>
+        <translation>tot</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="152"/>
+        <source>detect...</source>
+        <translation>detectar...</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="160"/>
+        <source>Multiple selection</source>
+        <translation>Selecció múltiple</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="168"/>
+        <location filename="player/player.ui" line="189"/>
+        <source>off</source>
+        <translation>desactivat</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="173"/>
+        <location filename="player/player.ui" line="194"/>
+        <source>on</source>
+        <translation>activat</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="181"/>
+        <source>Selection by keys</source>
+        <translation>Selecció per note</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="199"/>
+        <source>toggle</source>
+        <translation>alternar</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="275"/>
+        <source>Opening file...</source>
+        <translation>S&apos;està obrint el fitxer...</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="353"/>
+        <source>Banks (number of instruments)</source>
+        <oldsource>Banques (nombre d&apos;instruments)</oldsource>
+        <translation>Bancs (nombre d&apos;instruments)</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="430"/>
+        <source>Instruments</source>
+        <translation>Instruments</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="564"/>
+        <source>Cannot open the file</source>
+        <translation>No es pot obrir el fitxer</translation>
+    </message>
+    <message>
+        <location filename="player/player.cpp" line="50"/>
+        <source>Recorder</source>
+        <translation>Gravadora</translation>
+    </message>
+</context>
+<context>
+    <name>PlayerTreeProxyModel</name>
+    <message>
+        <location filename="player/playertreeproxymodel.cpp" line="150"/>
+        <source>Bank %1</source>
+        <translation>Banc %1</translation>
     </message>
 </context>
 <context>
@@ -4787,6 +4849,73 @@ baixar el contingut</translation>
     </message>
 </context>
 <context>
+    <name>Tab</name>
+    <message>
+        <location filename="mainwindow/tab.cpp" line="81"/>
+        <source>Untitled</source>
+        <translation>Sense títol</translation>
+    </message>
+</context>
+<context>
+    <name>TabManager</name>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="102"/>
+        <source>Settings</source>
+        <translation>Configuració</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="129"/>
+        <location filename="mainwindow/tabmanager.cpp" line="228"/>
+        <source>Warning</source>
+        <translation>Atenció</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="130"/>
+        <source>Cannot open file &quot;%1&quot;</source>
+        <translation>No es pot obrir el fitxer &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="185"/>
+        <source>Online repository</source>
+        <translation>Repositori en línia</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="223"/>
+        <source>Save before exiting?</source>
+        <translation>Voleu desar abans de sortir?</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="226"/>
+        <source>untitled</source>
+        <translation>sense títol</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="227"/>
+        <source>File &quot;%1&quot; has been modified.</source>
+        <translation>S&apos;ha modificat el fitxer &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="230"/>
+        <source>&amp;Save</source>
+        <translation>De&amp;sa</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="231"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Cancel·la</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="232"/>
+        <source>Do&amp;n&apos;t save</source>
+        <translation>&amp;No desar</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="323"/>
+        <source>User area</source>
+        <translation>Àrea de l&apos;usuari</translation>
+    </message>
+</context>
+<context>
     <name>TableHeaderView</name>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="55"/>
@@ -4837,67 +4966,67 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
 <context>
     <name>ThemeManager</name>
     <message>
-        <location filename="context/thememanager.cpp" line="83"/>
+        <location filename="context/thememanager.cpp" line="76"/>
         <source>Custom</source>
         <translation>Personalitzat</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="471"/>
+        <location filename="context/thememanager.cpp" line="464"/>
         <source>Default</source>
         <translation>Per defecte</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="491"/>
+        <location filename="context/thememanager.cpp" line="484"/>
         <source>Gnome</source>
         <translation>Gnome</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="504"/>
+        <location filename="context/thememanager.cpp" line="497"/>
         <source>Dark, blue</source>
         <translation>Fosc, blau</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="517"/>
+        <location filename="context/thememanager.cpp" line="510"/>
         <source>Dark, orange</source>
         <translation>Fosc, taronja</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="530"/>
+        <location filename="context/thememanager.cpp" line="523"/>
         <source>Dark, green</source>
         <translation>Fosc, verd</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="543"/>
+        <location filename="context/thememanager.cpp" line="536"/>
         <source>Dark, yellow</source>
         <translation>Fosc, groc</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="556"/>
+        <location filename="context/thememanager.cpp" line="549"/>
         <source>Aqua</source>
         <translation>Blau marí</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="569"/>
+        <location filename="context/thememanager.cpp" line="562"/>
         <source>Spring</source>
         <translation>Primavera</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="582"/>
+        <location filename="context/thememanager.cpp" line="575"/>
         <source>Windows 10</source>
         <translation>Windows 10</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="595"/>
+        <location filename="context/thememanager.cpp" line="588"/>
         <source>Ubuntu</source>
         <translation>Ubuntu</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="608"/>
+        <location filename="context/thememanager.cpp" line="601"/>
         <source>Good night</source>
         <translation>Bona nit</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="621"/>
+        <location filename="context/thememanager.cpp" line="614"/>
         <source>Pink</source>
         <translation>Rosa</translation>
     </message>
@@ -6483,37 +6612,37 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
 <context>
     <name>TopRightWidget</name>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="113"/>
+        <location filename="mainwindow/toprightwidget.ui" line="121"/>
         <source>Download status</source>
         <translation>Estat de la baixada</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="153"/>
+        <location filename="mainwindow/toprightwidget.ui" line="161"/>
         <source>User area</source>
         <translation>Àrea de l&apos;usuari</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="193"/>
+        <location filename="mainwindow/toprightwidget.ui" line="201"/>
         <source>Main menu</source>
         <translation>Menú principal</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="233"/>
+        <location filename="mainwindow/toprightwidget.ui" line="275"/>
         <source>Close</source>
         <translation>Tanca</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="128"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="137"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation>Subscriure&apos;s a un compte Premium per obtenir totes les característiques!</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="138"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="147"/>
         <source>Welcome %1</source>
         <translation>Us donem la benvinguda %1</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="143"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="152"/>
         <source>Your account has been banned.</source>
         <translation>El vostre compte està bloquejat.</translation>
     </message>
@@ -6682,65 +6811,6 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <location filename="mainwindow/widgetshowhistory.ui" line="90"/>
         <source>Empty list</source>
         <translation>Llista buida</translation>
-    </message>
-</context>
-<context>
-    <name>WindowManager</name>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="94"/>
-        <source>Settings</source>
-        <translation>Configuració</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="121"/>
-        <location filename="mainwindow/windowmanager.cpp" line="221"/>
-        <source>Warning</source>
-        <translation>Atenció</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="122"/>
-        <source>Cannot open file &quot;%1&quot;</source>
-        <translation>No es pot obrir el fitxer &quot;%1&quot;</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="178"/>
-        <source>Online repository</source>
-        <translation>Repositori en línia</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="216"/>
-        <source>Save before exiting?</source>
-        <translation>Voleu desar abans de sortir?</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="219"/>
-        <source>untitled</source>
-        <translation>sense títol</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="220"/>
-        <source>File &quot;%1&quot; has been modified.</source>
-        <translation>S&apos;ha modificat el fitxer &quot;%1&quot;.</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="223"/>
-        <source>&amp;Save</source>
-        <translation>De&amp;sa</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="224"/>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Cancel·la</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="225"/>
-        <source>Do&amp;n&apos;t save</source>
-        <translation>&amp;No desar</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="316"/>
-        <source>User area</source>
-        <translation>Àrea de l&apos;usuari</translation>
     </message>
 </context>
 </TS>

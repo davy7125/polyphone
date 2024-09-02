@@ -38,362 +38,362 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="core/types/attribute.cpp" line="442"/>
+        <location filename="core/types/attribute.cpp" line="443"/>
         <source>unknown</source>
         <translation>알 수 없음</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="447"/>
+        <location filename="core/types/attribute.cpp" line="448"/>
         <source>Sample start offset</source>
         <translation>샘플 시작 여백</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="453"/>
+        <location filename="core/types/attribute.cpp" line="454"/>
         <source>Sample end offset</source>
         <translation>샘플 끝 여백</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="459"/>
+        <location filename="core/types/attribute.cpp" line="460"/>
         <source>Loop start offset</source>
         <translation>루프 시작 여백</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="465"/>
+        <location filename="core/types/attribute.cpp" line="466"/>
         <source>Loop end offset</source>
         <translation>루프 끝 여백</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="462"/>
+        <location filename="core/types/attribute.cpp" line="463"/>
         <source>Loop start offset (× 32768)</source>
         <translation>루프 시작 여백 (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="471"/>
+        <location filename="core/types/attribute.cpp" line="472"/>
         <source>Mod LFO → pitch (c)</source>
         <translation>LFO 모듈레이션 → 피치 (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="474"/>
+        <location filename="core/types/attribute.cpp" line="475"/>
         <source>Vib LFO → pitch (c)</source>
         <translation>LFO 바이브레이터 → 피치 (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="477"/>
+        <location filename="core/types/attribute.cpp" line="478"/>
         <source>Mod env → pitch (c)</source>
         <translation>엔벨로프 모듈레이션 → 피치 (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="480"/>
+        <location filename="core/types/attribute.cpp" line="481"/>
         <source>Filter, cutoff (×)</source>
         <translation>필터, 컷오프 (x)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="481"/>
+        <location filename="core/types/attribute.cpp" line="482"/>
         <source>Filter, cutoff (Hz)</source>
         <translation>필터, 컷오프 (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="484"/>
+        <location filename="core/types/attribute.cpp" line="485"/>
         <source>Filter, resonance (dB)</source>
         <translation>필터, 반향 (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="487"/>
+        <location filename="core/types/attribute.cpp" line="488"/>
         <source>Mod LFO → filter (c)</source>
         <translation>LFO 모듈레이션 → 필터 (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="490"/>
+        <location filename="core/types/attribute.cpp" line="491"/>
         <source>Mod env → filter (c)</source>
         <translation>엔벨로프 모듈레이션 → 필터 (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="456"/>
+        <location filename="core/types/attribute.cpp" line="457"/>
         <source>Sample end offset (× 32768)</source>
         <translation>샘플 끝 여백 (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="450"/>
+        <location filename="core/types/attribute.cpp" line="451"/>
         <source>Sample start offset (× 32768)</source>
         <translation>샘플 시작 여백 (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="493"/>
+        <location filename="core/types/attribute.cpp" line="494"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>LFO 모듈레이션 → 볼륨 (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="496"/>
+        <location filename="core/types/attribute.cpp" line="497"/>
         <source>Chorus (%)</source>
         <translation>코러스 (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="499"/>
+        <location filename="core/types/attribute.cpp" line="500"/>
         <source>Reverb (%)</source>
         <translation>리버브 (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="502"/>
+        <location filename="core/types/attribute.cpp" line="503"/>
         <source>Pan [-100;100]</source>
         <translation>팬 [-100;100]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="503"/>
+        <location filename="core/types/attribute.cpp" line="504"/>
         <source>Pan [-50;50]</source>
         <translation>팬 [-100;100]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="506"/>
+        <location filename="core/types/attribute.cpp" line="507"/>
         <source>Mod LFO delay (×)</source>
         <translation>LFO 모듈레이션 딜레이 (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="507"/>
+        <location filename="core/types/attribute.cpp" line="508"/>
         <source>Mod LFO delay (s)</source>
         <translation>LFO 모듈레이션 딜레이 (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="510"/>
+        <location filename="core/types/attribute.cpp" line="511"/>
         <source>Mod LFO freq (×)</source>
         <translation>LFO 모듈레이션 주파수 (x)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="511"/>
+        <location filename="core/types/attribute.cpp" line="512"/>
         <source>Mod LFO freq (Hz)</source>
         <translation>LFO 모듈레이션 주파수 (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="514"/>
+        <location filename="core/types/attribute.cpp" line="515"/>
         <source>Vib LFO delay (×)</source>
         <translation>LFO 바이브레이터 딜레이 (x)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="515"/>
+        <location filename="core/types/attribute.cpp" line="516"/>
         <source>Vib LFO delay (s)</source>
         <translation>LFO 바이브레이터 딜레이 (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="518"/>
+        <location filename="core/types/attribute.cpp" line="519"/>
         <source>Vib LFO freq (×)</source>
         <translation>LFO 바이브레이터 주파수 (x)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="519"/>
+        <location filename="core/types/attribute.cpp" line="520"/>
         <source>Vib LFO freq (Hz)</source>
         <translation>LFO 바이브레이터 주파수 (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="522"/>
+        <location filename="core/types/attribute.cpp" line="523"/>
         <source>Mod env delay (×)</source>
         <translation>엔벨로프 모듈레이션 딜레이 (x)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="523"/>
+        <location filename="core/types/attribute.cpp" line="524"/>
         <source>Mod env delay (s)</source>
         <translation>엔벨로프 모듈레이션 딜레이 (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="526"/>
+        <location filename="core/types/attribute.cpp" line="527"/>
         <source>Mod env attack (×)</source>
         <translation>엔벨로프 모듈레이션 어택 (x)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="527"/>
+        <location filename="core/types/attribute.cpp" line="528"/>
         <source>Mod env attack (s)</source>
         <translation>엔벨로프 모듈레이션 어택 (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="530"/>
+        <location filename="core/types/attribute.cpp" line="531"/>
         <source>Mod env hold (×)</source>
         <translation>엔벨로프 모듈레이션 홀드 (x)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="531"/>
+        <location filename="core/types/attribute.cpp" line="532"/>
         <source>Mod env hold (s)</source>
         <translation>엔벨로프 모듈레이션 홀드 (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="534"/>
+        <location filename="core/types/attribute.cpp" line="535"/>
         <source>Mod env decay (×)</source>
         <translation>엔벨로프 모듈레이션 디케이 (x)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="535"/>
+        <location filename="core/types/attribute.cpp" line="536"/>
         <source>Mod env decay (s)</source>
         <translation>엔벨로프 모듈레이션 디케이 (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="538"/>
+        <location filename="core/types/attribute.cpp" line="539"/>
         <source>Mod env sustain (%)</source>
         <translation>엔벨로프 모듈레이션 서스테인 (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="541"/>
+        <location filename="core/types/attribute.cpp" line="542"/>
         <source>Mod env release (×)</source>
         <translation>엔벨로프 모듈레이션 릴리즈 (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="542"/>
+        <location filename="core/types/attribute.cpp" line="543"/>
         <source>Mod env release (s)</source>
         <translation>엔벨로프 모듈레이션 릴리즈 (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="545"/>
+        <location filename="core/types/attribute.cpp" line="546"/>
         <source>Key → Mod env hold (c)</source>
         <translation>키 → 엔벨로프 모듈레이션 홀드 (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="548"/>
+        <location filename="core/types/attribute.cpp" line="549"/>
         <source>Key → Mod env decay (c)</source>
         <translation>키 → 엔벨로프 모듈레이션 디케이 (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="551"/>
+        <location filename="core/types/attribute.cpp" line="552"/>
         <source>Vol env delay (×)</source>
         <translation>엔벨로프 볼륨 딜레이 (x)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="552"/>
+        <location filename="core/types/attribute.cpp" line="553"/>
         <source>Vol env delay (s)</source>
         <translation>엔벨로프 볼륨 딜레이 (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="555"/>
+        <location filename="core/types/attribute.cpp" line="556"/>
         <source>Vol env attack (×)</source>
         <translation>엔벨로프 볼륨 어택 (x)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="556"/>
+        <location filename="core/types/attribute.cpp" line="557"/>
         <source>Vol env attack (s)</source>
         <translation>엔벨로프 볼륨 어택 (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="559"/>
+        <location filename="core/types/attribute.cpp" line="560"/>
         <source>Vol env hold (×)</source>
         <translation>엔벨로프 볼륨 홀드 (x)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="560"/>
+        <location filename="core/types/attribute.cpp" line="561"/>
         <source>Vol env hold (s)</source>
         <translation>엔벨로프 볼륨 홀드 (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="563"/>
+        <location filename="core/types/attribute.cpp" line="564"/>
         <source>Vol env decay (×)</source>
         <translation>엔벨로프 볼륨 디케이 (x)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="564"/>
+        <location filename="core/types/attribute.cpp" line="565"/>
         <source>Vol env decay (s)</source>
         <translation>엔벨로프 볼륨 디케이 (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="567"/>
+        <location filename="core/types/attribute.cpp" line="568"/>
         <source>Vol env sustain (dB)</source>
         <translation>엔벨로프 볼륨 서스테인 (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="570"/>
+        <location filename="core/types/attribute.cpp" line="571"/>
         <source>Vol env release (×)</source>
         <translation>엔벨로프 볼륨 릴리즈 (x)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="571"/>
+        <location filename="core/types/attribute.cpp" line="572"/>
         <source>Vol env release (s)</source>
         <translation>엔벨로프 볼륨 릴리즈 (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="574"/>
+        <location filename="core/types/attribute.cpp" line="575"/>
         <source>Key → Vol env hold (c)</source>
         <translation>키 → 엔벨로프 볼륨 홀드 (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="577"/>
+        <location filename="core/types/attribute.cpp" line="578"/>
         <source>Key → Vol env decay (c)</source>
         <translation>키 → 엔벨로프 볼륨 디케이 (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="580"/>
+        <location filename="core/types/attribute.cpp" line="581"/>
         <source>Key range</source>
         <translation>키 범위</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="583"/>
+        <location filename="core/types/attribute.cpp" line="584"/>
         <source>Velocity range</source>
         <translation>벨로시티 범위</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="586"/>
+        <location filename="core/types/attribute.cpp" line="587"/>
         <source>Fixed key</source>
         <translation>결정된 키</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="589"/>
+        <location filename="core/types/attribute.cpp" line="590"/>
         <source>Fixed velocity</source>
         <translation>결정된 벨로시티</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="592"/>
+        <location filename="core/types/attribute.cpp" line="593"/>
         <source>Attenuation (dB)</source>
         <translation>감쇠 (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="613"/>
+        <location filename="core/types/attribute.cpp" line="614"/>
         <source>Sample root key</source>
         <translation>샘플 루트 키</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="616"/>
+        <location filename="core/types/attribute.cpp" line="617"/>
         <source>Sample length</source>
         <translation>샘플 길이</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="619"/>
+        <location filename="core/types/attribute.cpp" line="620"/>
         <source>Loop start</source>
         <translation>루프 시작</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="622"/>
+        <location filename="core/types/attribute.cpp" line="623"/>
         <source>Loop end</source>
         <translation>루프 종료</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="625"/>
+        <location filename="core/types/attribute.cpp" line="626"/>
         <source>Pitch correction (cents)</source>
         <translation>피치 보정 (센트)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="468"/>
+        <location filename="core/types/attribute.cpp" line="469"/>
         <source>Loop end offset (× 32768)</source>
         <translation>루프 엔드 오프셋 (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="595"/>
+        <location filename="core/types/attribute.cpp" line="596"/>
         <source>Tuning (semi-tones)</source>
         <translation>튜닝 (반음)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="598"/>
+        <location filename="core/types/attribute.cpp" line="599"/>
         <source>Tuning (cents)</source>
         <translation>튜닝 (센트)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="601"/>
+        <location filename="core/types/attribute.cpp" line="602"/>
         <source>Loop playback</source>
         <translation>루프 재생</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="604"/>
+        <location filename="core/types/attribute.cpp" line="605"/>
         <source>Scale tuning</source>
         <translation>스케일 튜닝</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="607"/>
+        <location filename="core/types/attribute.cpp" line="608"/>
         <source>Exclusive class</source>
         <translation>단독 클래스</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="610"/>
+        <location filename="core/types/attribute.cpp" line="611"/>
         <source>Root key</source>
         <translation>루트 키</translation>
     </message>
@@ -1265,27 +1265,27 @@ repository</source>
 <context>
     <name>ControllerArea</name>
     <message>
-        <location filename="clavier/controllerarea.ui" line="216"/>
+        <location filename="clavier/controllerarea.ui" line="209"/>
         <source>Pitch wheel</source>
         <translation>피치 휠</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.ui" line="241"/>
+        <location filename="clavier/controllerarea.ui" line="233"/>
         <source>Sensitivity</source>
         <translation>감도</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.ui" line="266"/>
+        <location filename="clavier/controllerarea.ui" line="257"/>
         <source>Pressure</source>
         <translation>프레셔</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="291"/>
+        <location filename="clavier/controllerarea.cpp" line="228"/>
         <source>on</source>
         <translation>켜기</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="296"/>
+        <location filename="clavier/controllerarea.cpp" line="233"/>
         <source>off</source>
         <translation>끄기</translation>
     </message>
@@ -1293,103 +1293,103 @@ repository</source>
 <context>
     <name>ConversionSfz</name>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="53"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="56"/>
         <source>Cannot create directory &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 디렉토리를 생성할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="258"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="242"/>
         <source>untitled</source>
         <translation>제목없음</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="543"/>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="585"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="662"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="704"/>
         <source>other</source>
         <translation>그 외</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="546"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="665"/>
         <source>Piano</source>
         <translation>피아노</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="548"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="667"/>
         <source>Chromatic percussion</source>
         <translation>크로마틱 타악기</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="550"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="669"/>
         <source>Organ</source>
         <translation>오르간</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="552"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="671"/>
         <source>Guitar</source>
         <translation>기타</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="554"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="673"/>
         <source>Bass</source>
         <translation>베이스</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="556"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="675"/>
         <source>Strings</source>
         <translation>스트링</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="558"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="677"/>
         <source>Ensemble</source>
         <translation>앙상블</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="560"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="679"/>
         <source>Brass</source>
         <translation>브라스</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="562"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="681"/>
         <source>Reed</source>
         <translation>리드</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="564"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="683"/>
         <source>Pipe</source>
         <translation>파이프</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="566"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="685"/>
         <source>Synth lead</source>
         <translation>신스 리드</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="568"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="687"/>
         <source>Synth pad</source>
         <translation>신스 패드</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="570"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="689"/>
         <source>Synth effects</source>
         <translation>신스 효과</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="572"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="691"/>
         <source>Ethnic</source>
         <translation>소수 민족 전통악기</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="574"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="693"/>
         <source>Percussive</source>
         <translation>퍼커시브</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="576"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="695"/>
         <source>Sound effects</source>
         <translation>사운드 효과</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="578"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="697"/>
         <source>Percussion kit</source>
         <translation>타악기 키트</translation>
     </message>
@@ -1667,47 +1667,47 @@ repository</source>
         <translation>가상 건반</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="108"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="147"/>
         <source>5 octaves</source>
         <translation>5 옥타브</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="113"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="152"/>
         <source>6 octaves</source>
         <translation>6 옥타브</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="118"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="157"/>
         <source>88 keys (piano)</source>
         <translation>88 건반</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="123"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="162"/>
         <source>128 keys (full)</source>
         <translation>128 건반</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="150"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="188"/>
         <source>Key</source>
         <translation>키</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="176"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="213"/>
         <source>Velocity</source>
         <translation>벨로시티</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="202"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="238"/>
         <source>Aftertouch</source>
         <translation>애프터 터치</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="233"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="189"/>
         <source>Hide the controller area</source>
         <translation>컨트롤러 영역 숨기기</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="239"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="195"/>
         <source>Show the controller area</source>
         <translation>컨트롤러 영역 보이기</translation>
     </message>
@@ -1845,8 +1845,9 @@ repository</source>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="76"/>
-        <source>Insert after a specific position</source>
-        <translation>현재 위치 뒤에 삽입</translation>
+        <source>Insert at a specific position</source>
+        <oldsource>Insert after a specific position</oldsource>
+        <translation>특정 위치에 삽입</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="81"/>
@@ -1854,18 +1855,18 @@ repository</source>
         <translation>문자열 범위 삭제</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="126"/>
+        <location filename="dialogs/dialog_rename.ui" line="129"/>
         <location filename="dialogs/dialog_rename.cpp" line="113"/>
         <source>Position</source>
         <translation>위치</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="162"/>
+        <location filename="dialogs/dialog_rename.ui" line="168"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="142"/>
+        <location filename="dialogs/dialog_rename.ui" line="148"/>
         <source>&amp;Ok</source>
         <translation>확인(&amp;O)</translation>
     </message>
@@ -2066,27 +2067,22 @@ repository</source>
 <context>
     <name>Editor</name>
     <message>
-        <location filename="editor/editor.ui" line="180"/>
+        <location filename="editor/editor.ui" line="183"/>
         <source>Search...</source>
         <translation>찾는 중...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="259"/>
+        <location filename="editor/editor.ui" line="262"/>
         <source>Opening file...</source>
         <translation>파일을 여는 중...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="375"/>
+        <location filename="editor/editor.ui" line="377"/>
         <source>Cannot open the file</source>
         <translation>파일을 열 수 없음</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="262"/>
-        <source>Untitled</source>
-        <translation>제목없음</translation>
-    </message>
-    <message>
-        <location filename="editor/editor.cpp" line="652"/>
+        <location filename="editor/editor.cpp" line="473"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
@@ -2156,67 +2152,67 @@ repository</source>
 <context>
     <name>EditorToolBar</name>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="66"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="67"/>
         <source>Add a sample</source>
         <translation>샘플 추가</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="67"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="68"/>
         <source>Add an instrument</source>
         <translation>악기 추가</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="68"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="69"/>
         <source>Add a preset</source>
         <translation>프리셋 추가</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="73"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="74"/>
         <source>Toolbox</source>
         <translation>도구상자</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="69"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="70"/>
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="70"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Redo</source>
         <translation>재실행</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
         <source>Save</source>
         <translation>저장</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="79"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="80"/>
         <source>Recorder</source>
         <translation>녹음기</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="84"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="83"/>
         <source>Virtual keyboard</source>
         <translation>가상 건반</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="280"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="282"/>
         <source>Import an audio file</source>
         <translation>오디오 파일 가져오기</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="282"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="284"/>
         <source>Audio files</source>
         <translation>오디오 파일</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="440"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="442"/>
         <source>Cannot create more presets.</source>
         <translation>프리셋을 더 생성할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="440"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="442"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
@@ -2497,22 +2493,22 @@ repository</source>
 <context>
     <name>InputParserSfz</name>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="104"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="108"/>
         <source>File recursion</source>
         <translation>파일 재귀</translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="112"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="116"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 파일을 열 수 없음</translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="289"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="293"/>
         <source>Sfz import</source>
         <translation>Sfz 가져오기</translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="474"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="452"/>
         <source>untitled</source>
         <translation>제목없음</translation>
     </message>
@@ -2520,57 +2516,57 @@ repository</source>
 <context>
     <name>MainMenu</name>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="37"/>
+        <location filename="mainwindow/mainmenu.cpp" line="50"/>
         <source>&amp;New</source>
         <translation>새 작업(&amp;N)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="42"/>
+        <location filename="mainwindow/mainmenu.cpp" line="57"/>
         <source>&amp;Open...</source>
         <translation>열기(&amp;O)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="49"/>
+        <location filename="mainwindow/mainmenu.cpp" line="66"/>
         <source>&amp;Save</source>
         <translation>저장(&amp;S)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="54"/>
+        <location filename="mainwindow/mainmenu.cpp" line="71"/>
         <source>Save &amp;as...</source>
         <translation>다른 이름으로 저장(&amp;A)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="59"/>
+        <location filename="mainwindow/mainmenu.cpp" line="76"/>
         <source>&amp;Export soundfonts...</source>
         <translation>사운드폰트 내보내기(&amp;E)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="66"/>
+        <location filename="mainwindow/mainmenu.cpp" line="84"/>
         <source>&amp;Full screen</source>
         <translation>전체화면(&amp;F)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="73"/>
+        <location filename="mainwindow/mainmenu.cpp" line="91"/>
         <source>Se&amp;ttings</source>
         <translation>환경설정(&amp;T)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="77"/>
+        <location filename="mainwindow/mainmenu.cpp" line="95"/>
         <source>Online &amp;manual</source>
         <translation>온라인 설명서(&amp;M)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="83"/>
+        <location filename="mainwindow/mainmenu.cpp" line="101"/>
         <source>About &amp;Polyphone...</source>
         <translation>폴리폰 정보(&amp;P)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="89"/>
+        <location filename="mainwindow/mainmenu.cpp" line="107"/>
         <source>&amp;Close file</source>
         <translation>파일 닫기(&amp;C)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="94"/>
+        <location filename="mainwindow/mainmenu.cpp" line="112"/>
         <source>&amp;Quit</source>
         <translation>종료(&amp;Q)</translation>
     </message>
@@ -2578,52 +2574,52 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="225"/>
+        <location filename="mainwindow/mainwindow.cpp" line="234"/>
         <source>&amp;Save</source>
         <translation>저장(&amp;S)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="226"/>
+        <location filename="mainwindow/mainwindow.cpp" line="235"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="227"/>
+        <location filename="mainwindow/mainwindow.cpp" line="236"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>저장하지 않음(&amp;N)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="211"/>
+        <location filename="mainwindow/mainwindow.cpp" line="220"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="63"/>
+        <location filename="mainwindow/mainwindow.cpp" line="64"/>
         <source>Polyphone SoundFont Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="202"/>
+        <location filename="mainwindow/mainwindow.cpp" line="211"/>
         <source>Untitled</source>
         <translation>제목없음</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="212"/>
+        <location filename="mainwindow/mainwindow.cpp" line="221"/>
         <source>Save before exiting?</source>
         <translation>종료하기 전에 저장할까요?</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="215"/>
+        <location filename="mainwindow/mainwindow.cpp" line="224"/>
         <source>The following files have been modified:</source>
         <translation>다음의 파일이 변경됐습니다:</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="222"/>
+        <location filename="mainwindow/mainwindow.cpp" line="231"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>&quot;%1&quot; 파일이 변경됐습니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="294"/>
+        <location filename="mainwindow/mainwindow.cpp" line="303"/>
         <source>Opening files</source>
         <translation>파일 여는 중</translation>
     </message>
@@ -2719,54 +2715,54 @@ repository</source>
         <translation>기본 모듈레이터</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="162"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="156"/>
         <source>overwritten by %1</source>
         <oldsource>overriden by %1</oldsource>
         <translation>%1 덮어쓰기</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="169"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="163"/>
         <source>disabling
 default mod.</source>
         <translation>기본 모듈레이터
 비활성화</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="171"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="165"/>
         <source>overriding
 default mod.</source>
         <translation>기본 모듈레이터를
 덮어씁니다.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="392"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="383"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="400"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="391"/>
         <source>semi-tones</source>
         <translation>반음</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="403"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="394"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
         <translation>반음의 100 분의 1</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="414"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="405"/>
         <source>Add from:</source>
         <translation>다음으로부터 더하기:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="415"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="406"/>
         <source>Multiply from:</source>
         <translation>다음으로부터 곱하기:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="417"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="408"/>
         <source>To:</source>
         <translation>다음으로:</translation>
     </message>
@@ -3083,27 +3079,13 @@ default mod.</source>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="135"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="325"/>
         <source>yes</source>
         <translation>네</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="139"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="323"/>
         <source>no</source>
         <translation>아니오</translation>
-    </message>
-    <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="327"/>
-        <source>yes, to the end</source>
-        <translatorcomment>speaking about a loop mode</translatorcomment>
-        <translation>네, 끝까지</translation>
-    </message>
-    <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="333"/>
-        <source>several modes</source>
-        <comment>speaking about loop modes</comment>
-        <translation>여러 모드</translation>
     </message>
 </context>
 <context>
@@ -3584,14 +3566,93 @@ to display its division ranges</source>
         <translation>전역</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1179"/>
+        <location filename="editor/pagetable.cpp" line="1178"/>
         <source>absolute value</source>
-        <translation type="unfinished">절댓값</translation>
+        <translation>절댓값</translation>
     </message>
     <message>
         <location filename="editor/pagetable.h" line="41"/>
         <source>Table</source>
         <translation>테이블</translation>
+    </message>
+</context>
+<context>
+    <name>Player</name>
+    <message>
+        <location filename="player/player.ui" line="59"/>
+        <source>Channel</source>
+        <translation>채널</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="67"/>
+        <source>all</source>
+        <translation>모두</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="152"/>
+        <source>detect...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="160"/>
+        <source>Multiple selection</source>
+        <translation>다중 선택</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="168"/>
+        <location filename="player/player.ui" line="189"/>
+        <source>off</source>
+        <translation>끄기</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="173"/>
+        <location filename="player/player.ui" line="194"/>
+        <source>on</source>
+        <translation>켜기</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="181"/>
+        <source>Selection by keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="199"/>
+        <source>toggle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="275"/>
+        <source>Opening file...</source>
+        <translation>파일을 여는 중...</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="353"/>
+        <source>Banks (number of instruments)</source>
+        <oldsource>Banques (nombre d&apos;instruments)</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="430"/>
+        <source>Instruments</source>
+        <translation>악기들</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="564"/>
+        <source>Cannot open the file</source>
+        <translation>파일을 열 수 없음</translation>
+    </message>
+    <message>
+        <location filename="player/player.cpp" line="50"/>
+        <source>Recorder</source>
+        <translation>녹음기</translation>
+    </message>
+</context>
+<context>
+    <name>PlayerTreeProxyModel</name>
+    <message>
+        <location filename="player/playertreeproxymodel.cpp" line="150"/>
+        <source>Bank %1</source>
+        <translation>뱅크 %1</translation>
     </message>
 </context>
 <context>
@@ -4497,12 +4558,12 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="545"/>
         <source>Go to the previous page</source>
-        <translation type="unfinished"></translation>
+        <translation>이전 페이지로 이동</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="580"/>
         <source>Go to the next page</source>
-        <translation type="unfinished"></translation>
+        <translation>다음 페이지로 이동</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="670"/>
@@ -4798,6 +4859,73 @@ download content</source>
     </message>
 </context>
 <context>
+    <name>Tab</name>
+    <message>
+        <location filename="mainwindow/tab.cpp" line="81"/>
+        <source>Untitled</source>
+        <translation>제목없음</translation>
+    </message>
+</context>
+<context>
+    <name>TabManager</name>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="102"/>
+        <source>Settings</source>
+        <translation>환경설정</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="129"/>
+        <location filename="mainwindow/tabmanager.cpp" line="228"/>
+        <source>Warning</source>
+        <translation>경고</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="130"/>
+        <source>Cannot open file &quot;%1&quot;</source>
+        <translation>&quot;%1&quot; 파일을 열 수 없음</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="185"/>
+        <source>Online repository</source>
+        <translation>온라인 레퍼지토리</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="223"/>
+        <source>Save before exiting?</source>
+        <translation>종료하기 전에 저장할까요?</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="226"/>
+        <source>untitled</source>
+        <translation>제목없음</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="227"/>
+        <source>File &quot;%1&quot; has been modified.</source>
+        <translation>&quot;%1&quot; 파일이 변경됐습니다.</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="230"/>
+        <source>&amp;Save</source>
+        <translation>저장(&amp;S)</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="231"/>
+        <source>&amp;Cancel</source>
+        <translation>취소(&amp;C)</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="232"/>
+        <source>Do&amp;n&apos;t save</source>
+        <translation>저장하지 않음(&amp;N)</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="323"/>
+        <source>User area</source>
+        <translation>사용자 공간</translation>
+    </message>
+</context>
+<context>
     <name>TableHeaderView</name>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="55"/>
@@ -4848,67 +4976,67 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ThemeManager</name>
     <message>
-        <location filename="context/thememanager.cpp" line="83"/>
+        <location filename="context/thememanager.cpp" line="76"/>
         <source>Custom</source>
         <translation>사용자 정의</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="471"/>
+        <location filename="context/thememanager.cpp" line="464"/>
         <source>Default</source>
         <translation>기본</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="491"/>
+        <location filename="context/thememanager.cpp" line="484"/>
         <source>Gnome</source>
         <translation>그놈(Gnome)</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="504"/>
+        <location filename="context/thememanager.cpp" line="497"/>
         <source>Dark, blue</source>
         <translation>어두운, 파랑</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="517"/>
+        <location filename="context/thememanager.cpp" line="510"/>
         <source>Dark, orange</source>
         <translation>어두운, 오렌지</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="530"/>
+        <location filename="context/thememanager.cpp" line="523"/>
         <source>Dark, green</source>
         <translation>어두운, 초록</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="543"/>
+        <location filename="context/thememanager.cpp" line="536"/>
         <source>Dark, yellow</source>
         <translation>어두운, 노랑</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="556"/>
+        <location filename="context/thememanager.cpp" line="549"/>
         <source>Aqua</source>
         <translation>아쿠아</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="569"/>
+        <location filename="context/thememanager.cpp" line="562"/>
         <source>Spring</source>
         <translation>봄</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="582"/>
+        <location filename="context/thememanager.cpp" line="575"/>
         <source>Windows 10</source>
         <translation>윈도우즈 10</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="595"/>
+        <location filename="context/thememanager.cpp" line="588"/>
         <source>Ubuntu</source>
         <translation>우분투(Ubuntu)</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="608"/>
+        <location filename="context/thememanager.cpp" line="601"/>
         <source>Good night</source>
         <translation>밤</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="621"/>
+        <location filename="context/thememanager.cpp" line="614"/>
         <source>Pink</source>
         <translation>분홍</translation>
     </message>
@@ -5819,7 +5947,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="41"/>
         <source>Loop start / loop end</source>
-        <translation type="unfinished"></translation>
+        <translation>루프 시작 / 루프 끝까</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="63"/>
@@ -6501,37 +6629,37 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TopRightWidget</name>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="153"/>
+        <location filename="mainwindow/toprightwidget.ui" line="161"/>
         <source>User area</source>
         <translation>사용자 공간</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="113"/>
+        <location filename="mainwindow/toprightwidget.ui" line="121"/>
         <source>Download status</source>
         <translation>다운로드</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="193"/>
+        <location filename="mainwindow/toprightwidget.ui" line="201"/>
         <source>Main menu</source>
         <translation>메인 메뉴</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="233"/>
+        <location filename="mainwindow/toprightwidget.ui" line="275"/>
         <source>Close</source>
         <translation>닫기</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="128"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="137"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation>프리미엄 계정을 구독해 모든 기능을 얻으세요!</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="138"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="147"/>
         <source>Welcome %1</source>
         <translation>환영해요, %1</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="143"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="152"/>
         <source>Your account has been banned.</source>
         <translation>당신의 계정은 정지됐습니다.</translation>
     </message>
@@ -6702,65 +6830,6 @@ Other soundfont editors might display other units.</source>
         <location filename="mainwindow/widgetshowhistory.ui" line="90"/>
         <source>Empty list</source>
         <translation>빈 목록</translation>
-    </message>
-</context>
-<context>
-    <name>WindowManager</name>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="94"/>
-        <source>Settings</source>
-        <translation>환경설정</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="122"/>
-        <source>Cannot open file &quot;%1&quot;</source>
-        <translation>&quot;%1&quot; 파일을 열 수 없음</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="178"/>
-        <source>Online repository</source>
-        <translation>온라인 레퍼지토리</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="216"/>
-        <source>Save before exiting?</source>
-        <translation>종료하기 전에 저장하시겠습니까?</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="219"/>
-        <source>untitled</source>
-        <translation>제목없음</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="220"/>
-        <source>File &quot;%1&quot; has been modified.</source>
-        <translation>&quot;%1&quot; 파일이 수정됐습니다.</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="121"/>
-        <location filename="mainwindow/windowmanager.cpp" line="221"/>
-        <source>Warning</source>
-        <translation>경고</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="223"/>
-        <source>&amp;Save</source>
-        <translation>저장(&amp;S)</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="224"/>
-        <source>&amp;Cancel</source>
-        <translation>취소(&amp;C)</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="225"/>
-        <source>Do&amp;n&apos;t save</source>
-        <translation>저장하지 않음(&amp;N)</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="316"/>
-        <source>User area</source>
-        <translation>사용자 공간</translation>
     </message>
 </context>
 </TS>

@@ -38,362 +38,362 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="core/types/attribute.cpp" line="442"/>
+        <location filename="core/types/attribute.cpp" line="443"/>
         <source>unknown</source>
         <translation>неизвестно</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="447"/>
+        <location filename="core/types/attribute.cpp" line="448"/>
         <source>Sample start offset</source>
         <translation>Смещение начала семпла</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="450"/>
+        <location filename="core/types/attribute.cpp" line="451"/>
         <source>Sample start offset (× 32768)</source>
         <translation>Смещение начала семпла (×32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="453"/>
+        <location filename="core/types/attribute.cpp" line="454"/>
         <source>Sample end offset</source>
         <translation>Смещение конца семпла</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="456"/>
+        <location filename="core/types/attribute.cpp" line="457"/>
         <source>Sample end offset (× 32768)</source>
         <translation>Смещение конца семпла (×32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="459"/>
+        <location filename="core/types/attribute.cpp" line="460"/>
         <source>Loop start offset</source>
         <translation>Смещение начала петли</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="462"/>
+        <location filename="core/types/attribute.cpp" line="463"/>
         <source>Loop start offset (× 32768)</source>
         <translation>Смещение начала петли (×32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="465"/>
+        <location filename="core/types/attribute.cpp" line="466"/>
         <source>Loop end offset</source>
         <translation>Смещение конца петли</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="468"/>
+        <location filename="core/types/attribute.cpp" line="469"/>
         <source>Loop end offset (× 32768)</source>
         <translation>Смещение конца петли (×32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="471"/>
+        <location filename="core/types/attribute.cpp" line="472"/>
         <source>Mod LFO → pitch (c)</source>
         <translation>Модулятор ГНЧ → высота тона (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="474"/>
+        <location filename="core/types/attribute.cpp" line="475"/>
         <source>Vib LFO → pitch (c)</source>
         <translation>Виб. ГНЧ → высота тона (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="477"/>
+        <location filename="core/types/attribute.cpp" line="478"/>
         <source>Mod env → pitch (c)</source>
         <translation>Огибающая модуляции → высота тона (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="480"/>
+        <location filename="core/types/attribute.cpp" line="481"/>
         <source>Filter, cutoff (×)</source>
         <translation>Фильтр: срез (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="481"/>
+        <location filename="core/types/attribute.cpp" line="482"/>
         <source>Filter, cutoff (Hz)</source>
         <translation>Фильтр: срез (Гц)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="484"/>
+        <location filename="core/types/attribute.cpp" line="485"/>
         <source>Filter, resonance (dB)</source>
         <translation>Фильтр: коэф. передачи (дБ)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="487"/>
+        <location filename="core/types/attribute.cpp" line="488"/>
         <source>Mod LFO → filter (c)</source>
         <translation>Модулятор ГНЧ → фильтр (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="490"/>
+        <location filename="core/types/attribute.cpp" line="491"/>
         <source>Mod env → filter (c)</source>
         <translation>Огибающая модуляции → фильтр (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="493"/>
+        <location filename="core/types/attribute.cpp" line="494"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>Модулятор ГНЧ → громкость (дБ)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="496"/>
+        <location filename="core/types/attribute.cpp" line="497"/>
         <source>Chorus (%)</source>
         <translation>Хорус (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="499"/>
+        <location filename="core/types/attribute.cpp" line="500"/>
         <source>Reverb (%)</source>
         <translation>Реверберация (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="502"/>
+        <location filename="core/types/attribute.cpp" line="503"/>
         <source>Pan [-100;100]</source>
         <translation>Панорама [-100;100]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="503"/>
+        <location filename="core/types/attribute.cpp" line="504"/>
         <source>Pan [-50;50]</source>
         <translation>Панорама [-50;50]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="506"/>
+        <location filename="core/types/attribute.cpp" line="507"/>
         <source>Mod LFO delay (×)</source>
         <translation>Модулятор ГНЧ: задержка (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="507"/>
+        <location filename="core/types/attribute.cpp" line="508"/>
         <source>Mod LFO delay (s)</source>
         <translation>Модулятор ГНЧ: задержка (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="510"/>
+        <location filename="core/types/attribute.cpp" line="511"/>
         <source>Mod LFO freq (×)</source>
         <translation>Модулятор ГНЧ: частота (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="511"/>
+        <location filename="core/types/attribute.cpp" line="512"/>
         <source>Mod LFO freq (Hz)</source>
         <translation>Модулятор ГНЧ: частота (Гц)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="514"/>
+        <location filename="core/types/attribute.cpp" line="515"/>
         <source>Vib LFO delay (×)</source>
         <translation>Виб. ГНЧ: задержка (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="515"/>
+        <location filename="core/types/attribute.cpp" line="516"/>
         <source>Vib LFO delay (s)</source>
         <translation>Виб. ГНЧ: задержка (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="518"/>
+        <location filename="core/types/attribute.cpp" line="519"/>
         <source>Vib LFO freq (×)</source>
         <translation>Виб. ГНЧ: частота (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="519"/>
+        <location filename="core/types/attribute.cpp" line="520"/>
         <source>Vib LFO freq (Hz)</source>
         <translation>Виб. ГНЧ: частота (Гц)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="522"/>
+        <location filename="core/types/attribute.cpp" line="523"/>
         <source>Mod env delay (×)</source>
         <translation>Огибающая модуляции: задержка (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="523"/>
+        <location filename="core/types/attribute.cpp" line="524"/>
         <source>Mod env delay (s)</source>
         <translation>Огибающая модуляции: задержка (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="526"/>
+        <location filename="core/types/attribute.cpp" line="527"/>
         <source>Mod env attack (×)</source>
         <translation>Огибающая модуляции: атака (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="527"/>
+        <location filename="core/types/attribute.cpp" line="528"/>
         <source>Mod env attack (s)</source>
         <translation>Огибающая модуляции: атака (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="530"/>
+        <location filename="core/types/attribute.cpp" line="531"/>
         <source>Mod env hold (×)</source>
         <translation>Огибающая модуляции: удержание (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="531"/>
+        <location filename="core/types/attribute.cpp" line="532"/>
         <source>Mod env hold (s)</source>
         <translation>Огибающая модуляции: удержание (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="534"/>
+        <location filename="core/types/attribute.cpp" line="535"/>
         <source>Mod env decay (×)</source>
         <translation>Огибающая модуляции: спад (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="535"/>
+        <location filename="core/types/attribute.cpp" line="536"/>
         <source>Mod env decay (s)</source>
         <translation>Огибающая модуляции: спад (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="538"/>
+        <location filename="core/types/attribute.cpp" line="539"/>
         <source>Mod env sustain (%)</source>
         <translation>Огибающая модуляции: поддержка (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="541"/>
+        <location filename="core/types/attribute.cpp" line="542"/>
         <source>Mod env release (×)</source>
         <translation>Огибающая модуляции: затухание (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="542"/>
+        <location filename="core/types/attribute.cpp" line="543"/>
         <source>Mod env release (s)</source>
         <translation>Огибающая модуляции: затухание (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="545"/>
+        <location filename="core/types/attribute.cpp" line="546"/>
         <source>Key → Mod env hold (c)</source>
         <translation>Клавиша → Огиб. мод.: удержание (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="548"/>
+        <location filename="core/types/attribute.cpp" line="549"/>
         <source>Key → Mod env decay (c)</source>
         <translation>Клавиша → Огиб. мод.: спад (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="551"/>
+        <location filename="core/types/attribute.cpp" line="552"/>
         <source>Vol env delay (×)</source>
         <translation>Огибающая громкости: затухание (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="552"/>
+        <location filename="core/types/attribute.cpp" line="553"/>
         <source>Vol env delay (s)</source>
         <translation>Огибающая громкости: задержка (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="555"/>
+        <location filename="core/types/attribute.cpp" line="556"/>
         <source>Vol env attack (×)</source>
         <translation>Огибающая громкости: атака (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="556"/>
+        <location filename="core/types/attribute.cpp" line="557"/>
         <source>Vol env attack (s)</source>
         <translation>Огибающая громкости: атака (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="559"/>
+        <location filename="core/types/attribute.cpp" line="560"/>
         <source>Vol env hold (×)</source>
         <translation>Огибающая громкости: удержание (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="560"/>
+        <location filename="core/types/attribute.cpp" line="561"/>
         <source>Vol env hold (s)</source>
         <translation>Огибающая громкости: удержание (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="563"/>
+        <location filename="core/types/attribute.cpp" line="564"/>
         <source>Vol env decay (×)</source>
         <translation>Огибающая громкости: спад (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="564"/>
+        <location filename="core/types/attribute.cpp" line="565"/>
         <source>Vol env decay (s)</source>
         <translation>Огибающая громкости: спад (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="567"/>
+        <location filename="core/types/attribute.cpp" line="568"/>
         <source>Vol env sustain (dB)</source>
         <translation>Огибающая громкости: поддержка (дБ)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="570"/>
+        <location filename="core/types/attribute.cpp" line="571"/>
         <source>Vol env release (×)</source>
         <translation>Огибающая громкости: затухание (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="571"/>
+        <location filename="core/types/attribute.cpp" line="572"/>
         <source>Vol env release (s)</source>
         <translation>Огибающая громкости: затухание (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="574"/>
+        <location filename="core/types/attribute.cpp" line="575"/>
         <source>Key → Vol env hold (c)</source>
         <translation>Клавиша → Огиб. громк.: удержание (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="577"/>
+        <location filename="core/types/attribute.cpp" line="578"/>
         <source>Key → Vol env decay (c)</source>
         <translation>Клавиша → Огиб. громк.: спад (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="580"/>
+        <location filename="core/types/attribute.cpp" line="581"/>
         <source>Key range</source>
         <translation>Диапазон клавиш</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="583"/>
+        <location filename="core/types/attribute.cpp" line="584"/>
         <source>Velocity range</source>
         <translation>Диапазон силы нажатия</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="586"/>
+        <location filename="core/types/attribute.cpp" line="587"/>
         <source>Fixed key</source>
         <translation>Фиксированная клавиша</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="589"/>
+        <location filename="core/types/attribute.cpp" line="590"/>
         <source>Fixed velocity</source>
         <translation>Фиксированная сила нажатия</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="592"/>
+        <location filename="core/types/attribute.cpp" line="593"/>
         <source>Attenuation (dB)</source>
         <translation>Приглушение (дБ)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="595"/>
+        <location filename="core/types/attribute.cpp" line="596"/>
         <source>Tuning (semi-tones)</source>
         <translation>Подстройка (в полутонах)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="598"/>
+        <location filename="core/types/attribute.cpp" line="599"/>
         <source>Tuning (cents)</source>
         <translation>Подстройка (в центах)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="601"/>
+        <location filename="core/types/attribute.cpp" line="602"/>
         <source>Loop playback</source>
         <translation>Играть петлю</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="604"/>
+        <location filename="core/types/attribute.cpp" line="605"/>
         <source>Scale tuning</source>
         <translation>Подстройка звукоряда</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="607"/>
+        <location filename="core/types/attribute.cpp" line="608"/>
         <source>Exclusive class</source>
         <translation>Исключающий класс</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="610"/>
+        <location filename="core/types/attribute.cpp" line="611"/>
         <source>Root key</source>
         <translation>Корневая клавиша</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="613"/>
+        <location filename="core/types/attribute.cpp" line="614"/>
         <source>Sample root key</source>
         <translation>Корневая клавиша семпла</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="616"/>
+        <location filename="core/types/attribute.cpp" line="617"/>
         <source>Sample length</source>
         <translation>Длина семпла</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="619"/>
+        <location filename="core/types/attribute.cpp" line="620"/>
         <source>Loop start</source>
         <translation>Начало петли</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="622"/>
+        <location filename="core/types/attribute.cpp" line="623"/>
         <source>Loop end</source>
         <translation>Конец петли</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="625"/>
+        <location filename="core/types/attribute.cpp" line="626"/>
         <source>Pitch correction (cents)</source>
         <translation>Коррекция высоты тона (в центах)</translation>
     </message>
@@ -1101,7 +1101,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="367"/>
         <source>Downloads</source>
-        <translation type="unfinished">Загрузки</translation>
+        <translation>Загрузки</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="113"/>
@@ -1261,27 +1261,27 @@ repository</source>
 <context>
     <name>ControllerArea</name>
     <message>
-        <location filename="clavier/controllerarea.ui" line="216"/>
+        <location filename="clavier/controllerarea.ui" line="209"/>
         <source>Pitch wheel</source>
         <translation>Колесо высоты тона</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.ui" line="241"/>
+        <location filename="clavier/controllerarea.ui" line="233"/>
         <source>Sensitivity</source>
         <translation>Чувствительность</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.ui" line="266"/>
+        <location filename="clavier/controllerarea.ui" line="257"/>
         <source>Pressure</source>
         <translation>Давление</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="291"/>
+        <location filename="clavier/controllerarea.cpp" line="228"/>
         <source>on</source>
         <translation>вкл</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="296"/>
+        <location filename="clavier/controllerarea.cpp" line="233"/>
         <source>off</source>
         <translation>откл</translation>
     </message>
@@ -1289,119 +1289,119 @@ repository</source>
 <context>
     <name>ConversionSfz</name>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="53"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="56"/>
         <source>Cannot create directory &quot;%1&quot;</source>
         <translation>Не удалось создать каталог «%1»</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="258"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="242"/>
         <source>untitled</source>
         <translation>без заголовка</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="543"/>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="585"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="662"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="704"/>
         <source>other</source>
         <translation>прочие</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="546"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="665"/>
         <source>Piano</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Пианино</translatorcomment>
         <translation>Пианино</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="548"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="667"/>
         <source>Chromatic percussion</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Хроматическая_перкуссия</translatorcomment>
         <translation>Хроматическая перкуссия</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="550"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="669"/>
         <source>Organ</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Орган</translatorcomment>
         <translation>Орган</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="552"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="671"/>
         <source>Guitar</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Гитара</translatorcomment>
         <translation>Гитара</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="554"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="673"/>
         <source>Bass</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Бас</translatorcomment>
         <translation>Бас</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="556"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="675"/>
         <source>Strings</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Струнные_инструменты</translatorcomment>
         <translation>Струнные</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="558"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="677"/>
         <source>Ensemble</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Музыкальный_коллектив</translatorcomment>
         <translation>Музыкальный коллектив</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="560"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="679"/>
         <source>Brass</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Медные_духовые_инструменты</translatorcomment>
         <translation>Медные духовые</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="562"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="681"/>
         <source>Reed</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Язычковые_духовые_инструменты</translatorcomment>
         <translation>Язычковые духовые</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="564"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="683"/>
         <source>Pipe</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Деревянные_духовые_инструменты</translatorcomment>
         <translation>Деревянные духовые</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="566"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="685"/>
         <source>Synth lead</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Синтезаторный_ведущий_голос</translatorcomment>
         <translation>Синтезаторный ведущий голос</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="568"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="687"/>
         <source>Synth pad</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Синтезаторный_подголосок</translatorcomment>
         <translation>Синтезаторный подголосок</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="570"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="689"/>
         <source>Synth effects</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Синтезаторные_эффекты</translatorcomment>
         <translation>Синтезаторные эффекты</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="572"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="691"/>
         <source>Ethnic</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Этнические_музыкальные_инструменты</translatorcomment>
         <translation>Народные</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="574"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="693"/>
         <source>Percussive</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Ударные_музыкальные_инструменты</translatorcomment>
         <translation>Ударные</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="576"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="695"/>
         <source>Sound effects</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Звуковые_эффекты</translatorcomment>
         <translation>Звуковые эффекты</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="578"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="697"/>
         <source>Percussion kit</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Перкуссия</translatorcomment>
         <translation>Перкуссия</translation>
@@ -1679,47 +1679,47 @@ repository</source>
         <translation>Виртуальная клавиатура</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="108"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="147"/>
         <source>5 octaves</source>
         <translation>5 октав</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="113"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="152"/>
         <source>6 octaves</source>
         <translation>6 октав</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="118"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="157"/>
         <source>88 keys (piano)</source>
         <translation>88 клавиш (фортепиано)</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="123"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="162"/>
         <source>128 keys (full)</source>
         <translation>128 клавиш (полная)</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="150"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="188"/>
         <source>Key</source>
         <translation>Клавиша</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="176"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="213"/>
         <source>Velocity</source>
         <translation>Сила нажатия</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.ui" line="202"/>
+        <location filename="dialogs/dialogkeyboard.ui" line="238"/>
         <source>Aftertouch</source>
         <translation>Послекасание</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="233"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="189"/>
         <source>Hide the controller area</source>
         <translation>Скрыть область контроллеров</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="239"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="195"/>
         <source>Show the controller area</source>
         <translation>Показать область контроллеров</translation>
     </message>
@@ -1866,8 +1866,9 @@ repository</source>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="76"/>
-        <source>Insert after a specific position</source>
-        <translation>Вставить в указанной позиции</translation>
+        <source>Insert at a specific position</source>
+        <oldsource>Insert after a specific position</oldsource>
+        <translation>Вставить в определенное положение</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="81"/>
@@ -1875,18 +1876,18 @@ repository</source>
         <translation>Удалить диапазон символов</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="126"/>
+        <location filename="dialogs/dialog_rename.ui" line="129"/>
         <location filename="dialogs/dialog_rename.cpp" line="113"/>
         <source>Position</source>
         <translation>Позиция</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="142"/>
+        <location filename="dialogs/dialog_rename.ui" line="148"/>
         <source>&amp;Ok</source>
         <translation>&amp;ОК</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_rename.ui" line="162"/>
+        <location filename="dialogs/dialog_rename.ui" line="168"/>
         <source>&amp;Cancel</source>
         <translation>О&amp;тменить</translation>
     </message>
@@ -2076,27 +2077,22 @@ repository</source>
 <context>
     <name>Editor</name>
     <message>
-        <location filename="editor/editor.ui" line="180"/>
+        <location filename="editor/editor.ui" line="183"/>
         <source>Search...</source>
         <translation>Искать…</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="259"/>
+        <location filename="editor/editor.ui" line="262"/>
         <source>Opening file...</source>
         <translation>Открытый файл…</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="375"/>
+        <location filename="editor/editor.ui" line="377"/>
         <source>Cannot open the file</source>
         <translation>Не удалось открыть файл</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="262"/>
-        <source>Untitled</source>
-        <translation>Без заголовка</translation>
-    </message>
-    <message>
-        <location filename="editor/editor.cpp" line="652"/>
+        <location filename="editor/editor.cpp" line="473"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -2166,67 +2162,67 @@ repository</source>
 <context>
     <name>EditorToolBar</name>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="66"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="67"/>
         <source>Add a sample</source>
         <translation>Добавить семпл</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="67"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="68"/>
         <source>Add an instrument</source>
         <translation>Добавить инструмент</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="68"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="69"/>
         <source>Add a preset</source>
         <translation>Добавить пресет</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="73"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="74"/>
         <source>Toolbox</source>
         <translation>Инструментарий</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="69"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="70"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="70"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
         <source>Redo</source>
         <translation>Вернуть</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="79"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="80"/>
         <source>Recorder</source>
         <translation>Рекордер</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="84"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="83"/>
         <source>Virtual keyboard</source>
         <translation>Виртуальная клавиатура</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="280"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="282"/>
         <source>Import an audio file</source>
         <translation>Импортировать аудио файл</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="282"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="284"/>
         <source>Audio files</source>
         <translation>Аудио файлы</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="440"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="442"/>
         <source>Cannot create more presets.</source>
         <translation>Невозможно создать больше пресетов.</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="440"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="442"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -2509,22 +2505,22 @@ repository</source>
 <context>
     <name>InputParserSfz</name>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="104"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="108"/>
         <source>File recursion</source>
         <translation>Рекурсия файла</translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="112"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="116"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>Не удалось открыть файл «%1»</translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="289"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="293"/>
         <source>Sfz import</source>
         <translation>Импорт sfz</translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="474"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="452"/>
         <source>untitled</source>
         <translation>без заголовка</translation>
     </message>
@@ -2532,57 +2528,57 @@ repository</source>
 <context>
     <name>MainMenu</name>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="37"/>
+        <location filename="mainwindow/mainmenu.cpp" line="50"/>
         <source>&amp;New</source>
         <translation>&amp;Создать</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="42"/>
+        <location filename="mainwindow/mainmenu.cpp" line="57"/>
         <source>&amp;Open...</source>
         <translation>&amp;Открыть…</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="49"/>
+        <location filename="mainwindow/mainmenu.cpp" line="66"/>
         <source>&amp;Save</source>
         <translation>Со&amp;хранить</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="54"/>
+        <location filename="mainwindow/mainmenu.cpp" line="71"/>
         <source>Save &amp;as...</source>
         <translation>Сохранить &amp;как…</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="59"/>
+        <location filename="mainwindow/mainmenu.cpp" line="76"/>
         <source>&amp;Export soundfonts...</source>
         <translation>&amp;Экспортировать SoundFont…</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="66"/>
+        <location filename="mainwindow/mainmenu.cpp" line="84"/>
         <source>&amp;Full screen</source>
         <translation>На &amp;весь экран</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="73"/>
+        <location filename="mainwindow/mainmenu.cpp" line="91"/>
         <source>Se&amp;ttings</source>
         <translation>&amp;Настройки</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="77"/>
+        <location filename="mainwindow/mainmenu.cpp" line="95"/>
         <source>Online &amp;manual</source>
         <translation>Онлайн-р&amp;уководство</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="83"/>
+        <location filename="mainwindow/mainmenu.cpp" line="101"/>
         <source>About &amp;Polyphone...</source>
         <translation>О п&amp;рограмме Polyphone…</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="89"/>
+        <location filename="mainwindow/mainmenu.cpp" line="107"/>
         <source>&amp;Close file</source>
         <translation>&amp;Закрыть файл</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="94"/>
+        <location filename="mainwindow/mainmenu.cpp" line="112"/>
         <source>&amp;Quit</source>
         <translation>В&amp;ыход</translation>
     </message>
@@ -2652,52 +2648,52 @@ repository</source>
         <translation>История</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="63"/>
+        <location filename="mainwindow/mainwindow.cpp" line="64"/>
         <source>Polyphone SoundFont Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="202"/>
+        <location filename="mainwindow/mainwindow.cpp" line="211"/>
         <source>Untitled</source>
         <translation>Без заголовка</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="211"/>
+        <location filename="mainwindow/mainwindow.cpp" line="220"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="212"/>
+        <location filename="mainwindow/mainwindow.cpp" line="221"/>
         <source>Save before exiting?</source>
         <translation>Сохранить перед выходом?</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="215"/>
+        <location filename="mainwindow/mainwindow.cpp" line="224"/>
         <source>The following files have been modified:</source>
         <translation>Следующие файлы были изменены:</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="222"/>
+        <location filename="mainwindow/mainwindow.cpp" line="231"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Файл «%1» был изменён.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="225"/>
+        <location filename="mainwindow/mainwindow.cpp" line="234"/>
         <source>&amp;Save</source>
         <translation>Со&amp;хранить</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="226"/>
+        <location filename="mainwindow/mainwindow.cpp" line="235"/>
         <source>&amp;Cancel</source>
         <translation>О&amp;тменить</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="227"/>
+        <location filename="mainwindow/mainwindow.cpp" line="236"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Не сохранять</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="294"/>
+        <location filename="mainwindow/mainwindow.cpp" line="303"/>
         <source>Opening files</source>
         <translation>Открытые файлы</translation>
     </message>
@@ -2725,53 +2721,53 @@ repository</source>
         <translation>Модулятор по умолчанию</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="162"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="156"/>
         <source>overwritten by %1</source>
         <translation>заменён на %1</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="169"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="163"/>
         <source>disabling
 default mod.</source>
         <translation>отключённый
 мод. по умолчанию</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="171"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="165"/>
         <source>overriding
 default mod.</source>
         <translation>переопределённый
 мод. по умолчанию</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="392"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="383"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>дБ</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="400"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="391"/>
         <source>semi-tones</source>
         <translation>полутонов</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="403"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="394"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
         <translation>центов</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="414"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="405"/>
         <source>Add from:</source>
         <translation>Добавляет от:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="415"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="406"/>
         <source>Multiply from:</source>
         <translation>Умножает от:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="417"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="408"/>
         <source>To:</source>
         <translation>до:</translation>
     </message>
@@ -3095,26 +3091,13 @@ default mod.</source>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="135"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="325"/>
         <source>yes</source>
         <translation>да</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="139"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="323"/>
         <source>no</source>
         <translation>нет</translation>
-    </message>
-    <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="327"/>
-        <source>yes, to the end</source>
-        <translation>да, до конца</translation>
-    </message>
-    <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="333"/>
-        <source>several modes</source>
-        <comment>speaking about loop modes</comment>
-        <translation>несколько разных режимов</translation>
     </message>
 </context>
 <context>
@@ -3478,7 +3461,7 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="187"/>
         <source>Root key</source>
-        <translation type="unfinished"></translation>
+        <translation>Корневая клавиша</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="206"/>
@@ -3605,7 +3588,7 @@ to display its division ranges</source>
         <translation>Глобальные</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1179"/>
+        <location filename="editor/pagetable.cpp" line="1178"/>
         <source>absolute value</source>
         <translation>абсолютное значение</translation>
     </message>
@@ -3613,6 +3596,85 @@ to display its division ranges</source>
         <location filename="editor/pagetable.h" line="41"/>
         <source>Table</source>
         <translation>Таблица</translation>
+    </message>
+</context>
+<context>
+    <name>Player</name>
+    <message>
+        <location filename="player/player.ui" line="59"/>
+        <source>Channel</source>
+        <translation>Канал</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="67"/>
+        <source>all</source>
+        <translation>все</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="152"/>
+        <source>detect...</source>
+        <translation>обнаружить...</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="160"/>
+        <source>Multiple selection</source>
+        <translation>Множественный выбор</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="168"/>
+        <location filename="player/player.ui" line="189"/>
+        <source>off</source>
+        <translation>откл</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="173"/>
+        <location filename="player/player.ui" line="194"/>
+        <source>on</source>
+        <translation>вкл</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="181"/>
+        <source>Selection by keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="199"/>
+        <source>toggle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="275"/>
+        <source>Opening file...</source>
+        <translation>Открытый файл…</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="353"/>
+        <source>Banks (number of instruments)</source>
+        <oldsource>Banques (nombre d&apos;instruments)</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="430"/>
+        <source>Instruments</source>
+        <translation>Инструменты</translation>
+    </message>
+    <message>
+        <location filename="player/player.ui" line="564"/>
+        <source>Cannot open the file</source>
+        <translation>Не удалось открыть файл</translation>
+    </message>
+    <message>
+        <location filename="player/player.cpp" line="50"/>
+        <source>Recorder</source>
+        <translation>Рекордер</translation>
+    </message>
+</context>
+<context>
+    <name>PlayerTreeProxyModel</name>
+    <message>
+        <location filename="player/playertreeproxymodel.cpp" line="150"/>
+        <source>Bank %1</source>
+        <translation>Банк %1</translation>
     </message>
 </context>
 <context>
@@ -4606,12 +4668,12 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="545"/>
         <source>Go to the previous page</source>
-        <translation type="unfinished"></translation>
+        <translation>Перейти на предыдущую страницу</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="580"/>
         <source>Go to the next page</source>
-        <translation type="unfinished"></translation>
+        <translation>Перейти на следующую страницу</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="670"/>
@@ -4676,7 +4738,7 @@ download the list</source>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="80"/>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
         <source>Warning</source>
-        <translation type="unfinished">Предупреждение</translation>
+        <translation>Предупреждение</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="80"/>
@@ -4691,7 +4753,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
         <source>Files</source>
-        <translation type="unfinished">Файлы</translation>
+        <translation>Файлы</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
@@ -4837,7 +4899,7 @@ download content</source>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="213"/>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
         <source>Warning</source>
-        <translation type="unfinished">Предупреждение</translation>
+        <translation>Предупреждение</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
@@ -4907,6 +4969,73 @@ download content</source>
     </message>
 </context>
 <context>
+    <name>Tab</name>
+    <message>
+        <location filename="mainwindow/tab.cpp" line="81"/>
+        <source>Untitled</source>
+        <translation>Без заголовка</translation>
+    </message>
+</context>
+<context>
+    <name>TabManager</name>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="102"/>
+        <source>Settings</source>
+        <translation>Настройки</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="129"/>
+        <location filename="mainwindow/tabmanager.cpp" line="228"/>
+        <source>Warning</source>
+        <translation>Предупреждение</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="130"/>
+        <source>Cannot open file &quot;%1&quot;</source>
+        <translation>Не удалось открыть файл «%1»</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="185"/>
+        <source>Online repository</source>
+        <translation>Онлайн-хранилище</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="223"/>
+        <source>Save before exiting?</source>
+        <translation>Сохранить перед выходом?</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="226"/>
+        <source>untitled</source>
+        <translation>без заголовка</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="227"/>
+        <source>File &quot;%1&quot; has been modified.</source>
+        <translation>Файл «%1» был изменён.</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="230"/>
+        <source>&amp;Save</source>
+        <translation>Со&amp;хранить</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="231"/>
+        <source>&amp;Cancel</source>
+        <translation>О&amp;тменить</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="232"/>
+        <source>Do&amp;n&apos;t save</source>
+        <translation>&amp;Не сохранять</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/tabmanager.cpp" line="323"/>
+        <source>User area</source>
+        <translation>Пользовательская зона</translation>
+    </message>
+</context>
+<context>
     <name>TableHeaderView</name>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="55"/>
@@ -4957,67 +5086,67 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ThemeManager</name>
     <message>
-        <location filename="context/thememanager.cpp" line="83"/>
+        <location filename="context/thememanager.cpp" line="76"/>
         <source>Custom</source>
         <translation>Настраиваемая</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="471"/>
+        <location filename="context/thememanager.cpp" line="464"/>
         <source>Default</source>
         <translation>По умолчанию</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="491"/>
+        <location filename="context/thememanager.cpp" line="484"/>
         <source>Gnome</source>
         <translation>Gnome</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="504"/>
+        <location filename="context/thememanager.cpp" line="497"/>
         <source>Dark, blue</source>
         <translation>Тёмная, синяя</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="517"/>
+        <location filename="context/thememanager.cpp" line="510"/>
         <source>Dark, orange</source>
         <translation>Тёмная, оранжевая</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="530"/>
+        <location filename="context/thememanager.cpp" line="523"/>
         <source>Dark, green</source>
         <translation>Тёмная, зелёная</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="543"/>
+        <location filename="context/thememanager.cpp" line="536"/>
         <source>Dark, yellow</source>
         <translation>Тёмная, жёлтая</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="556"/>
+        <location filename="context/thememanager.cpp" line="549"/>
         <source>Aqua</source>
         <translation>Аква</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="569"/>
+        <location filename="context/thememanager.cpp" line="562"/>
         <source>Spring</source>
         <translation>Весна</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="582"/>
+        <location filename="context/thememanager.cpp" line="575"/>
         <source>Windows 10</source>
         <translation>Windows 10</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="595"/>
+        <location filename="context/thememanager.cpp" line="588"/>
         <source>Ubuntu</source>
         <translation>Ubuntu</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="608"/>
+        <location filename="context/thememanager.cpp" line="601"/>
         <source>Good night</source>
         <translation>Спокойной ночи</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="621"/>
+        <location filename="context/thememanager.cpp" line="614"/>
         <source>Pink</source>
         <translation>Розовая</translation>
     </message>
@@ -5934,7 +6063,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="41"/>
         <source>Loop start / loop end</source>
-        <translation type="unfinished"></translation>
+        <translation>Начало петли / конца петли</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="63"/>
@@ -6623,37 +6752,37 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
 <context>
     <name>TopRightWidget</name>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="153"/>
+        <location filename="mainwindow/toprightwidget.ui" line="161"/>
         <source>User area</source>
         <translation>Пользовательская зона</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="113"/>
+        <location filename="mainwindow/toprightwidget.ui" line="121"/>
         <source>Download status</source>
         <translation>Состояние загрузки</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="193"/>
+        <location filename="mainwindow/toprightwidget.ui" line="201"/>
         <source>Main menu</source>
         <translation>Главное меню</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="233"/>
+        <location filename="mainwindow/toprightwidget.ui" line="275"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="128"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="137"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation>Премиум-подписка откроет вам все возможности!</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="138"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="147"/>
         <source>Welcome %1</source>
         <translation>Добро пожаловать, %1</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="143"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="152"/>
         <source>Your account has been banned.</source>
         <translation>Ваша учётная запись была заблокирована.</translation>
     </message>
@@ -6822,65 +6951,6 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
         <location filename="mainwindow/widgetshowhistory.ui" line="90"/>
         <source>Empty list</source>
         <translation>Список пуст</translation>
-    </message>
-</context>
-<context>
-    <name>WindowManager</name>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="94"/>
-        <source>Settings</source>
-        <translation>Настройки</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="121"/>
-        <location filename="mainwindow/windowmanager.cpp" line="221"/>
-        <source>Warning</source>
-        <translation>Предупреждение</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="122"/>
-        <source>Cannot open file &quot;%1&quot;</source>
-        <translation>Не удалось открыть файл «%1»</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="178"/>
-        <source>Online repository</source>
-        <translation>Онлайн-хранилище</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="216"/>
-        <source>Save before exiting?</source>
-        <translation>Сохранить перед выходом?</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="219"/>
-        <source>untitled</source>
-        <translation>без названия</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="220"/>
-        <source>File &quot;%1&quot; has been modified.</source>
-        <translation>Файл «%1» был изменён.</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="223"/>
-        <source>&amp;Save</source>
-        <translation>Со&amp;хранить</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="224"/>
-        <source>&amp;Cancel</source>
-        <translation>О&amp;тменить</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="225"/>
-        <source>Do&amp;n&apos;t save</source>
-        <translation>&amp;Не сохранять</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/windowmanager.cpp" line="316"/>
-        <source>User area</source>
-        <translation>Пользовательская зона</translation>
     </message>
 </context>
 </TS>
