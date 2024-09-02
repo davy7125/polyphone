@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>362</width>
-    <height>159</height>
+    <width>451</width>
+    <height>169</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -73,7 +73,7 @@
      </item>
      <item>
       <property name="text">
-       <string>Insert after a specific position</string>
+       <string>Insert at a specific position</string>
       </property>
      </item>
      <item>
@@ -112,6 +112,9 @@
    </item>
    <item row="1" column="2">
     <widget class="QSpinBox" name="spinPos2">
+     <property name="minimum">
+      <number>1</number>
+     </property>
      <property name="maximum">
       <number>20</number>
      </property>
@@ -129,6 +132,9 @@
    </item>
    <item row="1" column="1">
     <widget class="QSpinBox" name="spinPos1">
+     <property name="minimum">
+      <number>1</number>
+     </property>
      <property name="maximum">
       <number>20</number>
      </property>

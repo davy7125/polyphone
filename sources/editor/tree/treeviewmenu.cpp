@@ -500,16 +500,18 @@ void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int 
             // Insert after a specific position
             if (text1.isEmpty())
                 return;
-            if (val1 > newName.size())
+            if (val1  < 1)
+                val1 = 1;
+            else if (val1 > newName.size())
                 val1 = newName.size();
-            newName.insert(val1, text1);
+            newName.insert(val1 - 1, text1);
             break;
         case 5:
             // Delete character range
             if (val2 > val1)
-                newName.remove(val1, val2 - val1 + 1);
+                newName.remove(val1 - 1, val2 - val1 + 1);
             else
-                newName.remove(val2, val1 - val2 + 1);
+                newName.remove(val2 - 1, val1 - val2 + 1);
             break;
         }
 
