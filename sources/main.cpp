@@ -79,7 +79,7 @@ int launchApplication(QtSingleApplication * app, Options &options)
     qRegisterMetaType<QVector<int> >();
 
     // Display the main window
-    MainWindow w(options.mode() == Options::MODE_PLAYER);
+    MainWindow w(options.mode() == Options::MODE_SYNTHESIZER);
     app->setActivationWindow(&w, true);
     QObject::connect(app, SIGNAL(messageReceived(const QString&)), &w, SLOT(openFiles(const QString&)));
     w.show();
@@ -216,7 +216,7 @@ int main(int argc, char *argv[])
     int valRet = 0;
 
     // Possibly launch the application
-    if (!options.error() && !options.help() && (options.mode() == Options::MODE_GUI || options.mode() == Options::MODE_PLAYER))
+    if (!options.error() && !options.help() && (options.mode() == Options::MODE_GUI || options.mode() == Options::MODE_SYNTHESIZER))
     {
         QSettings settings;
         bool uniqueInstance = settings.value("display/unique_instance", true).toBool();

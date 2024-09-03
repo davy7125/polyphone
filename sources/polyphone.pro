@@ -104,9 +104,9 @@ unix:!macx {
     install_image_mimetype.path = $$PREFIX/share/icons/hicolor/scalable/mimetypes
     install_image_mimetype.files = contrib/audio-x-soundfont.svg
     install_desktop.path = $$PREFIX/share/applications
-    install_desktop.files = contrib/com.polyphone_soundfonts.polyphone.desktop
+    install_desktop.files = contrib/io.polyphone.polyphone.desktop
     install_appdata.path = $$PREFIX/share/metainfo
-    install_appdata.files = contrib/com.polyphone_soundfonts.polyphone.metainfo.xml
+    install_appdata.files = contrib/io.polyphone.polyphone.metainfo.xml
     install_mime.path = $$PREFIX/share/mime/packages
     install_mime.files = contrib/polyphone.xml
     install_man.path = $$PREFIX/share

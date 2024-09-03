@@ -3,13 +3,13 @@
   <mime-type type="audio/x-soundfont">
     <comment>SoundFont</comment>
     <comment xml:lang="ru">Файл SoundFont</comment>
-    <comment xml:lang="fr">Banque de son</comment>
+    <comment xml:lang="fr">Banque de sons</comment>
   </mime-type>
 
   <mime-type type="audio/x-sf2">
     <comment>SoundFont sf2</comment>
     <comment xml:lang="ru">Файл SoundFont sf2</comment>
-    <comment xml:lang="fr">Banque de son sf2</comment>
+    <comment xml:lang="fr">Banque de sons sf2</comment>
     <magic priority="50">
       <match type="string" offset="0" value="RIFF">
         <match type="string" offset="8" value="sfbk"/>
@@ -22,7 +22,7 @@
   <mime-type type="audio/x-sf3">
     <comment>Compressed SoundFont sf3</comment>
     <comment xml:lang="ru">Сжатый файл SoundFont sf3</comment>
-    <comment xml:lang="fr">Banque de son compressée sf3</comment>
+    <comment xml:lang="fr">Banque de sons compressés sf3</comment>
     <magic priority="50">
       <match type="string" offset="0" value="RIFF">
         <match type="string" offset="8" value="sfbk"/>
@@ -35,7 +35,7 @@
   <mime-type type="audio/x-sfark">
     <comment>SoundFont archive sfArk</comment>
     <comment xml:lang="ru">Архив SoundFont sfArk</comment>
-    <comment xml:lang="fr">Banque de son archivée sfArk</comment>
+    <comment xml:lang="fr">Banque de sons compressés sfArk</comment>
     <glob pattern="*.sfArk"/>
     <sub-class-of type="audio/x-soundfont"/>
   </mime-type>
@@ -43,8 +43,15 @@
   <mime-type type="audio/x-sfz">
     <comment>SoundFont sfz</comment>
     <comment xml:lang="ru">Файл SoundFont sfz</comment>
-    <comment xml:lang="fr">Banque de son sfz</comment>
+    <comment xml:lang="fr">Banque de sons sfz</comment>
     <glob pattern="*.sfz"/>
+    <sub-class-of type="text/plain"/>
+  </mime-type>
+
+  <mime-type type="audio/x-organ">
+    <comment>GrandOrgue disposition</comment>
+    <comment xml:lang="fr">Disposition GrandOrgue</comment>
+    <glob pattern="*.organ"/>
     <sub-class-of type="text/plain"/>
   </mime-type>
 </mime-info>
