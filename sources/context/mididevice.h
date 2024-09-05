@@ -64,6 +64,7 @@ protected:
 private slots:
     // When using modulators, default values of controllers might change
     void onInputModulatorChanged(int controllerNumber, bool isBipolar, bool isDescending);
+    void check();
 
 private:
     struct MIDI_State
@@ -93,6 +94,8 @@ private:
         bool _isSostenutoOn;
     };
 
+    void openMidiPort();
+    bool readConfiguration(QString config);
     void getMidiList(int api, QMap<QString, QString> *map);
     void processKeyOn(int channel, int key, int vel);
     void processKeyOff(int channel, int key);
@@ -114,6 +117,10 @@ private:
     // MIDI listeners
     QVector<IMidiListener *> _listeners;
     QVector<int> _listenerPriorities;
+
+    // Current api and port number
+    int _api;
+    int _portNumber;
 };
 
 #endif // MIDIDEVICE_H

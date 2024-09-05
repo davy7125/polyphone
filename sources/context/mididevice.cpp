@@ -131,6 +131,10 @@ MidiDevice::MidiDevice(ConfManager * configuration) :
 
     // Link to the soundfont manager to initialize the CC values
     connect(SoundfontManager::getInstance(), SIGNAL(inputModulatorChanged(int,bool,bool)), this, SLOT(onInputModulatorChanged(int,bool,bool)));
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(check()));
+    timer->start(1000);
 }
 
 MidiDevice::~MidiDevice()
@@ -143,6 +147,42 @@ MidiDevice::~MidiDevice()
         _midiIn->closePort();
         delete _midiIn;
     }
+}
+
+bool MidiDevice::readConfiguration(QString config)
+{
+    _api = -1;
+    _portNumber = -1;
+    QStringList split = config.split('#');
+    if (split.count() != 2)
+        return false;
+
+    // Api number
+    bool ok;
+    _api = split[0].toInt(&ok);
+    if (!ok)
+    {
+        _api = -1;
+        return false;
+    }
+
+    // Port number
+    _portNumber = split[1].toInt(&ok);
+    if (!ok)
+    {
+        _api = -1;
+        _portNumber = -1;
+        return false;
+    }
+
+    if (_portNumber == -1 || _api == -1)
+    {
+        _api = -1;
+        _portNumber = -1;
+        return false;
+    }
+
+    return true;
 }
 
 void MidiDevice::onInputModulatorChanged(int controllerNumber, bool isBipolar, bool isDescending)
@@ -201,24 +241,16 @@ void MidiDevice::openMidiPort(QString source)
         _midiIn = nullptr;
     }
 
-    // Get the api and the port number
-    QStringList split = source.split('#');
-    if (split.count() != 2)
-        return;
-    bool ok;
-    int api = split[0].toInt(&ok);
-    if (!ok)
-        return;
-    int portNumber = split[1].toInt(&ok);
-    if (!ok)
-        return;
-    if (portNumber == -1 || api == -1)
-        return;
+    if (readConfiguration(source))
+        openMidiPort();
+}
 
+void MidiDevice::openMidiPort()
+{
     // Create a MIDI input based on the selected API
     try
     {
-        _midiIn = new RtMidiIn(static_cast<RtMidi::Api>(api), "Polyphone");
+        _midiIn = new RtMidiIn(static_cast<RtMidi::Api>(_api), "Polyphone");
     }
     catch (std::exception &error)
     {
@@ -232,11 +264,11 @@ void MidiDevice::openMidiPort(QString source)
     _midiIn->setCallback(&midiCallback, this);
 
     // Initialize the midi connection
-    if (portNumber < static_cast<int>(_midiIn->getPortCount()))
+    if (_portNumber < static_cast<int>(_midiIn->getPortCount()))
     {
         try
         {
-            _midiIn->openPort(static_cast<unsigned int>(portNumber));
+            _midiIn->openPort(static_cast<unsigned int>(_portNumber));
         }
         catch (std::exception &error)
         {
@@ -244,6 +276,33 @@ void MidiDevice::openMidiPort(QString source)
             delete _midiIn;
             _midiIn = nullptr;
         }
+    }
+}
+
+void MidiDevice::check()
+{
+    // Nothing to do if there is no configured connection
+    if (_api == -1 || _portNumber == -1)
+        return;
+
+    // Possibly create a MIDI input
+    if (_midiIn == nullptr)
+    {
+        openMidiPort();
+        return;
+    }
+
+    if (_midiIn->isPortOpen())
+    {
+        // Check that the port number is still valid
+        if ((unsigned int)_portNumber >= _midiIn->getPortCount())
+            _midiIn->closePort();
+    }
+    else
+    {
+        // Maybe we can open the port
+        if ((unsigned int)_portNumber < _midiIn->getPortCount())
+            openMidiPort();
     }
 }
 
