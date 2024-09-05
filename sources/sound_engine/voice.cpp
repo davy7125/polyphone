@@ -346,36 +346,10 @@ bool Voice::takeData(float * data, quint32 nbRead, qint32 loopMode)
         if (_currentSmplPos >= loopEnd)
             _currentSmplPos = loopStart;
         quint32 total = 0;
-        quint32 chunk;
-        bool endOfLoopReached;
         while (nbRead - total > 0)
         {
-            if (_currentSmplPos < loopEnd)
-            {
-                chunk = loopEnd - _currentSmplPos;
-                endOfLoopReached = (chunk <= nbRead - total);
-                if (!endOfLoopReached)
-                    chunk = nbRead - total;
-                memcpy(&data[total], &dataSmpl[_currentSmplPos], chunk * sizeof(float));
-
-                // Small crossfade to prevent loop artifacts
-                if (endOfLoopReached && loopStart >= 9)
-                {
-                    data[total + chunk - 9] = 0.9f * data[total + chunk - 9] + 0.1f * dataSmpl[loopStart - 9];
-                    data[total + chunk - 8] = 0.8f * data[total + chunk - 8] + 0.2f * dataSmpl[loopStart - 8];
-                    data[total + chunk - 7] = 0.7f * data[total + chunk - 7] + 0.3f * dataSmpl[loopStart - 7];
-                    data[total + chunk - 6] = 0.6f * data[total + chunk - 6] + 0.4f * dataSmpl[loopStart - 6];
-                    data[total + chunk - 5] = 0.5f * data[total + chunk - 5] + 0.5f * dataSmpl[loopStart - 5];
-                    data[total + chunk - 4] = 0.4f * data[total + chunk - 4] + 0.6f * dataSmpl[loopStart - 4];
-                    data[total + chunk - 3] = 0.3f * data[total + chunk - 3] + 0.7f * dataSmpl[loopStart - 3];
-                    data[total + chunk - 2] = 0.2f * data[total + chunk - 2] + 0.8f * dataSmpl[loopStart - 2];
-                    data[total + chunk - 1] = 0.1f * data[total + chunk - 1] + 0.9f * dataSmpl[loopStart - 1];
-                }
-            }
-
-            //chunk = qMin(_currentSmplPos < loopEnd ? loopEnd - _currentSmplPos : 0, nbRead - total);
-            //memcpy(&data[total], &dataSmpl[_currentSmplPos], chunk * sizeof(float));
-
+            const quint32 chunk = qMin(_currentSmplPos < loopEnd ? loopEnd - _currentSmplPos : 0, nbRead - total);
+            memcpy(&data[total], &dataSmpl[_currentSmplPos], chunk * sizeof(float));
             _currentSmplPos += chunk;
             if (_currentSmplPos >= loopEnd)
                 _currentSmplPos = loopStart;
