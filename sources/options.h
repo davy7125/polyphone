@@ -38,7 +38,7 @@ public:
         MODE_CONVERSION_TO_SF2 = 1,
         MODE_CONVERSION_TO_SF3 = 2,
         MODE_CONVERSION_TO_SFZ = 3,
-        MODE_PLAYER = 4
+        MODE_SYNTHESIZER = 4
     };
 
     Options(int argc, char *argv[]);

@@ -117,8 +117,8 @@ void Options::processType1(QString arg)
     case 'r':
         _mode = MODE_RESET_CONFIG;
         break;
-    case 'p':
-        _mode = MODE_PLAYER;
+    case 's':
+        _mode = MODE_SYNTHESIZER;
         break;
     default:
         _error = true;
@@ -180,7 +180,7 @@ void Options::processType2(QString arg)
             else
                 _error = true;
         }
-        else if (_mode == MODE_PLAYER)
+        else if (_mode == MODE_SYNTHESIZER)
         {
             if (_playerOptions == nullptr)
             {
@@ -216,7 +216,7 @@ void Options::checkErrors()
     case MODE_RESET_CONFIG:
         _error = false;
         break;
-    case MODE_GUI: case MODE_PLAYER:
+    case MODE_GUI: case MODE_SYNTHESIZER:
         if (_outputDirectory != "" || _outputFile != "")
             _error = true;
         break;

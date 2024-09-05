@@ -1,7 +1,7 @@
-.TH POLYPHONE "1" "14 novembre 2019" "polyphone 2.2" "Page de manuel pour Polyphone"
+.TH POLYPHONE "1" "3 septembre 2024" "polyphone 2.4" "Page de manuel pour Polyphone"
 
 .SH NOM
-\fBpolyphone\fP \- éditeur de banque de sons
+\fBpolyphone\fP \- éditeur de banques de sons
 
 .SH SYNOPSIS
 .B polyphone
@@ -20,16 +20,19 @@
 .br
 .B polyphone
 -3 [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-d\fR \fIRÉPERTOIRE_EN_SORTIE\fR] [\fB\-o\fR \fINOM_EN_SORTIE\fR] [\fB\-c\fR \fICONFIG\fR]
+.br
+.B polyphone
+-s [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-c\fR \fICONFIG\fR]
 
 .SH DESCRIPTION
 .B polyphone
 fournit une interface simple et efficace pour créer et éditer des fichiers .sf2 . Ce logiciel incorpore des outils pour faciliter et automatiser l'édition de différents paramètres, rendant possible la gestion de grandes quantités de données. 
 .br
 .PP
-Les formats sf2, sf3, sfz (import / export) et sfArk (import uniquement) sont supportés. Les conversions sont possibles en ligne de commande.
+Les formats sf2, sf3, sfz (import / export), sfArk (import uniquement) et GrandOrgue (import uniquement) sont supportés. Les lignes de commande peuvent être utilisées pour convertir des fichiers, ouvrir Polyphone en mode synthétiseur ou réinitialiser les configurations en cas de soucis.
 .br
 .PP
-Davantage d'informations peuvent être trouvées à https://www.polyphone.io .
+Davantage d'informations peuvent être trouvées sur le site https://www.polyphone.io .
 
 .SH OPTIONS
 .TP
@@ -37,31 +40,36 @@ Davantage d'informations peuvent être trouvées à https://www.polyphone.io .
 Spécifie le fichier à ouvrir quand
 .B polyphone
 démarre. Plusieurs fichiers peuvent être chargés s'ils sont séparés par des espaces.
-Les formats sf2 (version 2.01 ou 2.04), sf3, sfz et sfArk (version 1 ou 2) sont supportés.
+Les formats sf2 (version 2.01 ou 2.04), sf3, sfz, sfArk (version 1 ou 2) et GrandOrgue sont supportés.
 .TP
 .BR \fB-1\fR
-Utilisez
+Utiliser
 .B polyphone
 pour convertir un fichier dans le format sf2.
 .TP
 .BR \fB-2\fR
-Utilisez
+Utiliser
 .B polyphone
 pour convertir un fichier dans le format sf3.
 .TP
 .BR \fB-3\fR
-Utilisez
+Utiliser
 .B polyphone
 pour convertir un fichier dans le format sfz.
 .TP
+.BR \fB-s\fR
+Ouvrir
+.B polyphone
+en mode synthétiseur.
+.TP
 [\fB\-i\fR \fICHEMIN_DU_FICHIER_EN_ENTRÉE\fR]
-Chemin d'entrée à convertir. Le format du fichier d'entrée doit être sf2, sf3, sfz ou sfArk.
+Chemin du fichier d'entrée à convertir ou ouvrir. Le format du fichier d'entrée doit être sf2, sf3, sfz, sfArk ou organ.
 .TP
 [\fB\-d\fR \fIRÉPERTOIRE_DE_SORTIE\fR]
-Le répertoire de sortie dans lequel le fichier d'entrée sera converti. Par défaut, c'est le même répertoire que celui du fichier d'entrée.
+Le répertoire de sortie dans lequel le fichier d'entrée sera converti. Par défaut, le même répertoire que celui du fichier d'entrée est utilisé.
 .TP
 [\fB\-o\fR \fINOM_DE_SORTIE\fR]
-Le nom de sortie du fichier converti. L'extension sera ajoutée automatiquement suivant la conversion. Par défaut, c'est le même nom que le fichier d'entrée.
+Le nom de sortie du fichier converti. L'extension sera ajoutée automatiquement suivant la conversion. Par défaut, le même nom que le fichier d'entrée est utilisé.
 .TP
 [\fB\-c\fR \fICONFIG\fR]
 Configuration de la conversion, le contenu étant dépendant du type de conversion.
@@ -85,6 +93,12 @@ La configuration est faite avec un caractère indiquant la qualité de la compre
 .B conversion sfz
 .br
 La configuration est faite de trois caractères. Le premier caractère est '1' si chaque ensemble doit être préfixé par son numéro d'ensemble, '0' sinon. Le deuxième caractère est '1' si un répertoire par banque doit être créé, '0' sinon. Le troisième caractère est '1' si la classification General MIDI doit être utilisée pour trier les ensembles, '0' sinon. Par défaut, c'est '000'.
+.br
+.BR
+ * 
+.B mode synthétiseur
+.br
+La configuration est composée de 3 parties séparées d'un '/'. La première partie désigne le canal MIDI à écouter, qui peut être une valeur de 1 à 16 ou 'all'. La deuxième partie est 'on' ou 'off' pour rendre possible la lecture de plusieurs ensembles en même temps. La troisième partie est 'on', 'off' ou 'toggle' pour permettre l'activation ou la désactivation des ensembles par les notes les plus basses du clavier.
 .SH EXEMPLES
  * Conversion depuis sfArk vers sf2 :
 .br
@@ -102,6 +116,12 @@ La configuration est faite de trois caractères. Le premier caractère est '1' s
 .br
 .BR polyphone
 -3 -i /chemin/vers/le/fichier.sf3 -c 011
+.br
+.BR
+ * Ouverture de Polyphone en mode synthétiseur en permettant l'usage des touches basse pour la sélection de l'ensemble à jouer avec un clavier MIDI :
+.br
+.BR polyphone
+-s -i /chemin/vers/le/fichier.sf2 -c 'all/off/toggle'
 .SH AUTEUR
 Davy Triponney (davy.triponney@gmail.com)
 .br

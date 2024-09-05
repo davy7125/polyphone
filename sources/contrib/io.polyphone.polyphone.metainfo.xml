@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2020 Polyphone Developers -->
+<!-- Copyright 2024 Polyphone Developers -->
 <component type="desktop">
- <id>com.polyphone_soundfonts.polyphone</id>
+ <id>io.polyphone.polyphone</id>
  <metadata_license>CC0</metadata_license>
  <project_license>GPL-3.0+</project_license>
  <name>Polyphone</name>
- <summary>Create your own instruments to play your favorite music</summary>
+ <summary>Turn any sound into a musical instrument.</summary>
  <description>
    <p>
      Polyphone is a soundfont editor for quickly designing musical instruments.
@@ -31,11 +31,11 @@
  </screenshots>
  <translation type="qt">polyphone</translation>
  <content_rating type="oars-1.1" />
- ​<launchable type="desktop-id">com.polyphone_soundfonts.polyphone.desktop</launchable>
+ ​<launchable type="desktop-id">io.polyphone.polyphone.desktop</launchable>
  <url type="homepage">https://www.polyphone.io/</url>
  <releases>
-   <release type="stable" version="2.2" date="2019-11-14">
-     <url>https://www.polyphone-soundfonts.com/all-news/version-2-2/245</url>
+   <release type="stable" version="2.4" date="2024-09-03">
+     <url>https://www.polyphone.io/en/news/version-2-4</url>
    </release>
  </releases>
 </component>
