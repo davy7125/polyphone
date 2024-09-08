@@ -60,10 +60,6 @@ Player::Player(PlayerOptions * playerOptions, QWidget * parent) : Tab(parent),
     ui->comboSelectionByKeys->setCurrentIndex(_playerOptions->playerKeySelection());
 
     s_instances << this;
-    _initializing = false;
-
-    on_comboChannel_currentIndexChanged(ui->comboChannel->currentIndex());
-    on_comboMultipleSelection_currentIndexChanged(ui->comboMultipleSelection->currentIndex());
 }
 
 Player::~Player()
@@ -105,6 +101,11 @@ void Player::tabInitialized(int indexSf2)
 
     // Select the first bank
     ui->listBank->setCurrentIndex(ui->listBank->model()->index(0, 0, QModelIndex()));
+
+    _initializing = false;
+
+    on_comboChannel_currentIndexChanged(ui->comboChannel->currentIndex());
+    on_comboMultipleSelection_currentIndexChanged(ui->comboMultipleSelection->currentIndex());
 }
 
 void Player::tabUpdate(QString editingSource)
@@ -193,6 +194,9 @@ void Player::onPresetSelectionChanged(QItemSelection selected, QItemSelection de
 
 bool Player::processKey(int channel, int key, int vel)
 {
+    if (_initializing)
+        return false;
+
     // Maybe we are listening for detecting the channel
     if (ui->comboChannel->currentIndex() == 17)
     {
