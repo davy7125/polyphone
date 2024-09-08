@@ -26,6 +26,7 @@
 #include "basetypes.h"
 #include "soundfontmanager.h"
 #include <QFuture>
+#include "contextmanager.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #include <QtConcurrent/QtConcurrent>
@@ -92,12 +93,16 @@ void AbstractInputParser::processAsync()
     QString tempFilePath = "";
     this->processInternal(_fileName, _sm, _isSuccess, _error, _sf2Index, tempFilePath);
 
-    // Keep a track of the files
     if (_isSuccess)
     {
+        // Keep a track of the files
         EltID id(elementSf2, _sf2Index);
         _sm->set(id, champ_filenameInitial, _fileName);
         _sm->set(id, champ_filenameForData, tempFilePath.isEmpty() ? _fileName : tempFilePath);
+
+        // Possibly load all samples
+        if (ContextManager::s_playerMode)
+            _sm->loadAllSamples(_sf2Index);
     }
     else if (!tempFilePath.isEmpty())
         QFile::remove(tempFilePath);

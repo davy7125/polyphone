@@ -103,6 +103,9 @@ public:
     Soundfonts * getSoundfonts() { return _soundfonts; }
     QRecursiveMutex * getMutex() { return &_mutex; }
 
+    // Load all samples in RAM
+    void loadAllSamples(int sf2Index);
+
 signals:
     // Emitted when a group of actions is finished
     // "editingSource" can be:

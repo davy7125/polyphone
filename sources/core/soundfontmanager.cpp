@@ -1930,3 +1930,16 @@ int SoundfontManager::compareName(EltID idDiv1, EltID idDiv2)
         return Utils::naturalOrder(name1, name2);
     return 0;
 }
+
+void SoundfontManager::loadAllSamples(int sf2Index)
+{
+    QMutexLocker locker(&_mutex);
+
+    // Browse all samples
+    foreach (Smpl * smplTmp, _soundfonts->getSoundfont(sf2Index)->getSamples().values())
+    {
+        // And load data in RAM if it's not hidden
+        if (!smplTmp->isHidden())
+            smplTmp->_sound.loadInRam();
+    }
+}
