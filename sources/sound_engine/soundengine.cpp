@@ -158,11 +158,24 @@ void SoundEngine::releaseVoices(int sf2Id, int presetId, int channel, int key)
     for (int i = 0; i < s_numberOfVoices; i++)
     {
         voice = s_voices[i];
-        if ((sf2Id == -1 || voice->getSf2Id() == sf2Id) &&
-            (channel == -1 || presetId == -1 || voice->getPresetId() == -1 || voice->getPresetId() == presetId) &&
-            (channel == -2 || voice->getChannel() == channel) &&
-            (key == -2 || (key == -1 && voice->getKey() < 0) || voice->getKey() == key))
-            voice->release();
+
+        // Channel filter
+        if (channel != -2 && voice->getChannel() != channel)
+            continue;
+
+        // Sf2 filter
+        if (sf2Id != -1 && voice->getSf2Id() != sf2Id)
+            continue;
+
+        // Preset filter
+        if (presetId != -1 && voice->getPresetId() != -1 && voice->getPresetId() != presetId)
+            continue;
+
+        // Key filter
+        if (key != -2 && (key != -1 || voice->getKey() >= 0) && voice->getKey() != key)
+            continue;
+
+        voice->release();
     }
 
     s_mutexVoices.unlock();
