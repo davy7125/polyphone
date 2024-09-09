@@ -506,7 +506,10 @@ bool Editor::processKey(int channel, int key, int vel)
     SoundfontManager * sf2 = SoundfontManager::getInstance();
     if (ids.count() == 1)
     {
-        ContextManager::audio()->getSynth()->play(ids[0], -1, key, vel);
+        if (vel > 0)
+            ContextManager::audio()->getSynth()->play(ids[0], -1, key, vel);
+        else
+            ContextManager::audio()->getSynth()->play(EltID(elementSf2, ids[0].indexSf2), -1, key, 0);
 
         if (vel > 0)
         {
@@ -577,7 +580,10 @@ bool Editor::processKey(int channel, int key, int vel)
     ids = _currentIds.getSelectedIds(elementPrst);
     if (ids.count() == 1)
     {
-        ContextManager::audio()->getSynth()->play(ids[0], -1, key, vel);
+        if (vel > 0)
+            ContextManager::audio()->getSynth()->play(ids[0], -1, key, vel);
+        else
+            ContextManager::audio()->getSynth()->play(EltID(elementSf2, ids[0].indexSf2), -1, key, 0);
 
         // Possibly update the current selection
         if (vel > 0 && (QApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0)
