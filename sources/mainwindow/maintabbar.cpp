@@ -126,8 +126,8 @@ void MainTabBar::mousePressEvent(QMouseEvent *event)
 
     if (_clickedItemIndex != -1)
     {
-        // Click on the close button?
-        if (_tabs[_clickedItemIndex]->getCloseButtonPath().contains(event->pos()))
+        // Middle click or click on the close button?
+        if (event->button() == Qt::MouseButton::MiddleButton || _tabs[_clickedItemIndex]->getCloseButtonPath().contains(event->pos()))
         {
             // We are about to close the tab if the mouse stays in the button
             _clickedInCloseButton = true;
@@ -165,7 +165,8 @@ void MainTabBar::mouseMoveEvent(QMouseEvent *event)
 
 void MainTabBar::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (_clickedInCloseButton && _clickedItemIndex != -1 && _tabs[_clickedItemIndex]->getCloseButtonPath().contains(event->pos()))
+    if (_clickedInCloseButton && _clickedItemIndex != -1 &&
+        (_tabs[_clickedItemIndex]->getCloseButtonPath().contains(event->pos()) || event->button() == Qt::MouseButton::MiddleButton && _clickedItemIndex == itemAt(event->pos())))
     {
         // Select and close the tab
         emit(widgetClicked(_tabs[_clickedItemIndex]->getWidget()));
