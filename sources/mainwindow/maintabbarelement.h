@@ -44,6 +44,7 @@ public:
     QString getToolTip() {  return _toolTip; }
     QPainterPath getPath() { return _tabPath; }
     QPainterPath getCloseButtonPath() { return _closeButtonPath; }
+    bool isEnabled() { return _isEnabled; }
 
     // Compute the width and return it
     int computeFullWidth(QPainter &painter);

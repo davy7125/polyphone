@@ -376,6 +376,21 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
             ui->lineSearch->setFocus();
         event->accept();
     }
+    else if (event->modifiers() == Qt::ControlModifier && event->key() ==  Qt::Key_H)
+    {
+        _tabManager->showHome();
+        event->accept();
+    }
+    else if (event->modifiers() == Qt::ControlModifier && event->key() ==  Qt::Key_Tab)
+    {
+        _tabManager->setCurrentWidget(ui->tabBar->getNextWidget());
+        event->accept();
+    }
+    else if (event->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier) && event->key() ==  Qt::Key_Backtab)
+    {
+        _tabManager->setCurrentWidget(ui->tabBar->getPreviousWidget());
+        event->accept();
+    }
 
     QWidget::keyPressEvent(event);
 }

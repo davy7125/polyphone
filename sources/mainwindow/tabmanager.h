@@ -45,6 +45,9 @@ public:
     static TabManager * getInstance();
     static void kill();
 
+    void showHome();
+    void setCurrentWidget(QWidget * widget);
+
 public slots:
     /// Open the configuration
     void openConfiguration();

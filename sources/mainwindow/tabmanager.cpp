@@ -352,3 +352,14 @@ void TabManager::openRepositorySoundfont(int id)
     viewer->initialize(id, false);
     _stackedWidget->setCurrentIndex(index);
 }
+
+void TabManager::showHome()
+{
+    _stackedWidget->setCurrentIndex(0);
+}
+
+void TabManager::setCurrentWidget(QWidget * widget)
+{
+    if (widget != nullptr)
+        _stackedWidget->setCurrentWidget(widget);
+}

@@ -41,6 +41,8 @@ public:
     void setWidgetLabel(QWidget * widget, const QString &label);
     void setWidgetToolTip(QWidget * widget, const QString &tip);
     void currentWidgetChanged(QWidget * widget);
+    QWidget * getNextWidget();
+    QWidget * getPreviousWidget();
 
     QSize minimumSizeHint() const override;
 

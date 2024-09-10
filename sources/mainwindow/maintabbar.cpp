@@ -332,3 +332,21 @@ void MainTabBar::getTheTwoBiggestWidths(QVector<int> &v, int &firstBiggest, int 
             secondBiggest = v[i];
     }
 }
+
+QWidget * MainTabBar::getNextWidget()
+{
+    for (int i = 0; i < _tabs.count(); i++)
+        if (_tabs[i]->isEnabled())
+            return i < _tabs.count() - 1 ? _tabs[i + 1]->getWidget() : _tabs[0]->getWidget();
+
+    return _tabs.count() > 0 ? _tabs[0]->getWidget() : nullptr;
+}
+
+QWidget * MainTabBar::getPreviousWidget()
+{
+    for (int i = 0; i < _tabs.count(); i++)
+        if (_tabs[i]->isEnabled())
+            return i > 0 ? _tabs[i - 1]->getWidget() : _tabs[_tabs.count() - 1]->getWidget();
+
+    return _tabs.count() > 0 ? _tabs[_tabs.count() - 1]->getWidget() : nullptr;
+}
