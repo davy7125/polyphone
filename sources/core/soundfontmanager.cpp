@@ -737,8 +737,7 @@ bool SoundfontManager::isEdited(int indexSf2)
     QMutexLocker locker(&_mutex);
     if (_soundfonts->getSoundfont(indexSf2) == nullptr)
         return false;
-    return this->_undoRedo->getEdition(indexSf2) != _soundfonts->getSoundfont(indexSf2)->_numEdition ||
-            !this->getQstr(EltID(elementSf2, indexSf2), champ_filenameInitial).toLower().endsWith(".sf2");
+    return this->_undoRedo->getEdition(indexSf2) != _soundfonts->getSoundfont(indexSf2)->_numEdition;
 }
 
 // Add a child to ID
