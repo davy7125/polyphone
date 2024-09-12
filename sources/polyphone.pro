@@ -97,12 +97,8 @@ unix:!macx {
     
     # Install target
     target.path = $$PREFIX/bin
-    install_image_svg.path = $$PREFIX/share/icons/hicolor/scalable/apps
-    install_image_svg.files = contrib/polyphone.svg
     install_image_png.path = $$PREFIX/share/icons/hicolor/512x512/apps
     install_image_png.files = resources/polyphone.png
-    install_image_mimetype.path = $$PREFIX/share/icons/hicolor/scalable/mimetypes
-    install_image_mimetype.files = contrib/audio-x-soundfont.svg
     install_desktop.path = $$PREFIX/share/applications
     install_desktop.files = contrib/io.polyphone.polyphone.desktop
     install_appdata.path = $$PREFIX/share/metainfo
@@ -114,8 +110,11 @@ unix:!macx {
     install_doc.path = $$PREFIX/share/doc/polyphone
     install_doc.files = ../README.md changelog
     
-    INSTALLS += target install_image_svg install_image_png install_image_mimetype \
+    INSTALLS += target install_image_png \
                 install_desktop install_appdata install_mime install_man install_doc
+
+    # Remove the default RPATH
+    QMAKE_LFLAGS_RPATH=
 }
 macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.13
