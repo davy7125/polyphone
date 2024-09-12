@@ -370,7 +370,8 @@ void Player::scanPreset(EltID presetId, bool * keys)
             _rangeByInst[instId] = getEnabledKeysForInstrument(EltID(elementInst, prstInstId.indexSf2, instId));
 
         for (int key = 0; key < 128; key++)
-            keys[key] |= _rangeByInst[instId][key];
+            if (key >= maxRange.byLo && key <= maxRange.byHi)
+                keys[key] |= _rangeByInst[instId][key];
     }
 }
 
