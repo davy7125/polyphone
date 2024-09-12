@@ -502,8 +502,8 @@ void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int 
                 return;
             if (val1  < 1)
                 val1 = 1;
-            else if (val1 > newName.size())
-                val1 = newName.size();
+            else if (val1 > newName.size() + 1)
+                val1 = newName.size() + 1;
             newName.insert(val1 - 1, text1);
             break;
         case 5:
