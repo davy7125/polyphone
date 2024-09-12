@@ -26,6 +26,7 @@
 #define CONTROLLERAREA_H
 
 #include <QWidget>
+#include <QMap>
 #include "imidilistener.h"
 class QComboBox;
 class ComboCC;
