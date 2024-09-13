@@ -23,8 +23,8 @@
 ***************************************************************************/
 
 #include "samplereaderogg.h"
-#include <vorbis/codec.h>
-#include <vorbis/vorbisfile.h>
+#include "vorbis/codec.h"
+#include "vorbis/vorbisfile.h"
 #include <QDebug>
 
 SampleReaderOgg::SampleReaderOgg(QString filename) : SampleReader(filename),
