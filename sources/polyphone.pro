@@ -48,7 +48,7 @@ CONFIG += lrelease embed_translations precompiled_header
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
 QMAKE_CXXFLAGS += -std=c++17
 
-QT += core gui printsupport svg network testlib
+QT += core gui printsupport svg network #testlib
 TARGET = polyphone
 TEMPLATE = app
 
