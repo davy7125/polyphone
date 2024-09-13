@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "playerpresetlist.h"
+#include <qmath.h>
 
 PlayerPresetList::PlayerPresetList(QWidget *parent) : QListView(parent)
 {
@@ -55,7 +56,7 @@ void PlayerPresetList::resizeGrid()
 
 int PlayerPresetList::columnCount()
 {
-    return static_cast<int>(ceil((double)this->viewport()->width() / _minCellWidth) + 0.5);
+    return static_cast<int>(qCeil((double)this->viewport()->width() / _minCellWidth) + 0.5);
 }
 
 int PlayerPresetList::rowHeight()
