@@ -73,11 +73,21 @@ QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, q
 
             // Application fenêtre
             delta = static_cast<double>(j + nbPoints - delta) / (1 + 2 * nbPoints) * 2048;
-            pos1 = static_cast<qint32>(qMax(0.f, qMin(floor(delta), 2047.f)) + .5f);
-            pos2 = static_cast<qint32>(qMax(0.f, qMin(ceil (delta), 2047.f)) + .5f);
+            pos1 = static_cast<qint32>(floor(delta) + .5);
+            if (pos1 < 0)
+                pos1 = 0;
+            else if (pos1 > 2047)
+                pos1 = 2047;
+            pos2 = static_cast<qint32>(ceil (delta) + .5);
+            if (pos2 < 0)
+                pos2 = 0;
+            else if (pos2 > 2047)
+                pos2 = 2047;
+
             sincCoef[j + nbPoints] *= kbdWindow[pos1] * (ceil((delta)) - delta)
-                    + kbdWindow[pos2] * (1. - ceil((delta)) + delta);
+                    + kbdWindow[pos2] * (1.f - ceil((delta)) + delta);
         }
+
         // Valeur
         dataRet[i] = 0;
         for (int j = qMax(0, static_cast<qint32>(pos) - nbPoints);
