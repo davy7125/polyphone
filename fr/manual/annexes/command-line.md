@@ -1,6 +1,6 @@
-Polyphone peut être exécuté en ligne de commande pour convertir des banques de sons dans les formats [sf2](#doc_sf2), [sf3](#doc_sf3) ou [sfz](#doc_sfz).
+Polyphone peut être exécuté en ligne de commande pour convertir des banques de sons dans les formats [sf2](#doc_sf2), [sf3](#doc_sf3) ou [sfz](#doc_sfz). Les formats de fichiers supportés pour la conversion sont [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) et [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
 
-Les formats de fichiers supportés pour la conversion sont [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) et [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark).
+Une option peut être appelée pour ouvrir Polyphone en [mode synthé](#doc_synth).
 
 
 ## Conversion en sf2 {#doc_sf2}
@@ -117,4 +117,36 @@ polyphone -3 -i <fichier/à/convertir> -d <répertoire/de/destination> -o <nom_d
 
 ```
 polyphone -3 -i /adresse/du/fichier.sf3 -c 011
+```
+
+
+## Mode synthé {#doc_synth}
+
+
+### Ligne de commande
+
+
+```
+polyphone -s -i <fichier/à/lire> -c <configuration>
+```
+
+**Note&nbsp;:** avec Windows vous devez écrire l'adresse complète de Polyphone au lieu de simplement écrire :command:`polyphone`, ce qui nous donne par exemple :command:`C:/Program files/Polyphone/polyphone.exe`.
+
+
+### Arguments
+
+
+-s
+: Mode “s” est “ouvrir Polyphone en mode synthé”.
+
+-c
+: Configuration du synthé. Le champ comprend 3 champs séparés du caractère “|”. Le premier champ est le numéro du canal MIDI (entre 1 et 16) à écouter pour jouer, ou 0 pour indiquer que tous les canaux seront utilisés. Le deuxième champ est “off” ou “on”, rendant possible ou non la sélection de plusieurs ensembles pour jouer. Le troisième champ est “off”, “on”, ou “toggle”, autorisant ou non la sélection des ensembles par les touches correspondant au numéro de l'ensemble (la touche 0 permettant d'activer par exemple l'ensemble 0).
+  Cet argument est optionnel&nbsp;: par défaut la valeur utilisée est “0|off|off”. L'interface graphique permettra ensuite de changer ces paramètres.
+
+
+### Exemple
+
+
+```
+polyphone -s -i /adresse/du/fichier.sf2 -c '1|on|toggle'
 ```

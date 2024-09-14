@@ -1,6 +1,6 @@
-Polyphone can be run with a command line to convert soundfonts in the format [sf2](#doc_sf2), [sf3](#doc_sf3) or [sfz](#doc_sfz).
+Polyphone can be run with a command line to convert soundfonts in the format [sf2](#doc_sf2), [sf3](#doc_sf3) or [sfz](#doc_sfz). Supported file formats for the conversion are [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) and [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
 
-Supported file formats for the conversion are [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) and [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark).
+An option can also be called for opening Polyphone in [synth mode](#doc_synth).
 
 
 ## Conversion to sf2 {#doc_sf2}
@@ -117,4 +117,36 @@ polyphone -3 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c
 
 ```
 polyphone -3 -i /path/to/file.sf3 -c 011
+```
+
+
+## Synth mode {#doc_synth}
+
+
+### Command line
+
+
+```
+polyphone -s -i <file/to/read> -c <configuration>
+```
+
+**Note:** with Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.
+
+
+### Arguments
+
+
+-s
+: Mode “s” is “open Polyphone in synth mode”.
+
+-c
+: Synth configuration. The field consists of 3 fields separated by the “|” character. The first field is the MIDI channel number (between 1 and 16) to be listened to for playing, or 0 to indicate that all channels will be used. The second field is “off” or “on”, enabling or disabling the selection of multiple presets for playing. The third field is “off”, “on”, or “toggle”, enabling or disabling the selection of presets by the keys corresponding to the preset number (key 0 activates preset 0, for example).
+  This argument is optional, by default this is “0|off|off”. These parameters can then be changed via the graphical interface.
+
+
+### Example
+
+
+```
+polyphone -s -i /path/to/file.sf2 -c '1|on|toggle'
 ```

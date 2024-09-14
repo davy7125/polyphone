@@ -3,7 +3,8 @@ Polyphone supports several soundfont formats:
 * [sf2](#doc_sf2),
 * [sf3](#doc_sf3),
 * [sfz](#doc_sfz),
-* [sfArk](#doc_sfark).
+* [sfArk](#doc_sfark),
+* [organ](#doc_organ).
 
 
 ## Sf2 soundfonts {#doc_sf2}
@@ -93,6 +94,15 @@ SfArk archives, like the sf3 format, is a compressed format.
 This means that the quality of the sounds is a bit lowered (but often imperceptible).
 This format tends to be obsolete, that's why Polyphone only allows importing sfArk archives (not the export).
 
+
+## GrandOrgue dispositions {#doc_organ}
+
+
+GrandOrgue is a program whose main purpose is to emulate instruments like pipe organs. An organ is defined by a series of wav files, each containing the sound of a pipe, and a file with the extension ".organ" which contains all the parameters needed to create an organ based on all wav files. Basically, all samples are associated with specific keys and are grouped by stops, which can be activated or deactivated when playing the organ. Polyphone is able to create soundfonts based on this mapping, but do not support the conversion of soundfonts to the GrandOrgue format.
+
+### Import limitation
+
+Transpositions are currently not supported.
 
 
 *[MIDI]: Musical Instrument Digital Interface

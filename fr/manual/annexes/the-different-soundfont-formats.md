@@ -3,7 +3,8 @@ Polyphone est compatible avec plusieurs formats de banques de sons&nbsp;:
 * [sf2](#doc_sf2),
 * [sf3](#doc_sf3),
 * [sfz](#doc_sfz),
-* [sfArk](#doc_sfark).
+* [sfArk](#doc_sfark),
+* [organ](#doc_organ).
 
 
 ## Banques de sons sf2 {#doc_sf2}
@@ -55,7 +56,7 @@ Mais un éditeur est toutefois hautement recommandé pour des grands instruments
 Par ailleurs le format sfz est défini de manière moins stricte que le format sf2&nbsp;: des différences peuvent apparaître dans la manière d'éditer et dans la manière dont les instruments sfz sont joués. Mais par la même occasions, les capacités des instruments sfz ont été augmentées par rapport au standard sf2.
 
 
-### Limitations sur l'import sfz
+### Limitations sur l'importation sfz
 
 
 * Seuls les opcodes ayant une contrepartie dans les [tables](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) sont importés.
@@ -67,7 +68,7 @@ Par ailleurs le format sfz est défini de manière moins stricte que le format s
 **Attention&nbsp;:** les opcodes ``width`` et ``position`` peuvent ne pas être interprétés correctement.
 
 
-### Limitations sur l'export sfz
+### Limitations sur l'exportation sfz
 
 
 * Les [modulateurs](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator) ne sont pour l'instant pas exportés.
@@ -91,8 +92,17 @@ Le format sf2 utilise une loi exponentielle pour définir la durée des phases d
 
 Les archives sfArk, tout comme le format sf3, est un format utilisant la compression avec perte.
 Ce qui signifie que la qualité des sons est légèrement abaissée (mais souvent imperceptible).
-Ce format tend à être obsolète dû à de nombreux problèmes de conception, c'est pourquoi Polyphone ne propose que l'import des archives sfArk et non leur export.
+Ce format tend à être obsolète dû à de nombreux problèmes de conception, c'est pourquoi Polyphone ne propose que l'importation des archives sfArk et non leur exportation.
 
+
+## Dispositions GrandOrgue {#doc_organ}
+
+
+GrandOrgue est un logiciel dont le but principal est d'émuler des instruments tels que des orgues à tuyaux. La définition d'un orgue est faite par une série de fichiers wav, chaque fichier contenant le son d'un tuyau, et un fichier avec l'extension «&nbsp;.organ&nbsp;» qui contient tous les paramètres nécessaires pour créer un orgue basé sur tous les fichiers wav. Globalement, tous les échantillons sont associés à des touches spécifiques et sont regroupés par jeux, qui peuvent être activés ou désactivés lorsque l'on joue de l'orgue. Polyphone est capable de créer des soundfonts basées sur ce mapping mais ne supporte pas la conversion des soundfonts vers le format GrandOrgue.
+
+### Limitation sur l'importation
+
+Les transpositions ne sont pour l'instant pas supportées.
 
 
 *[MIDI]: Musical Instrument Digital Interface
