@@ -173,6 +173,6 @@ Led on / off
 : Cette led permet d'assigner la valeur 0 ou 127 à un contrôleur MIDI (utile pour la pédale sustain par exemple).
   Elle est comme un potentiomètre mais avec seulement deux valeurs possibles.
 
-
+Tous ces éléments peuvent être synchronisés avec un clavier MIDI qui serait raccordé à l'ordinateur si l'entrée MIDI est correctement renseignée dans les [préférences](manual/settings.md#doc_general). Les valeurs relatives pour les contrôleurs MIDI sont prises en charge pour piloter les potentiomètres. 
 
 *[MIDI]: Musical Instrument Digital Interface

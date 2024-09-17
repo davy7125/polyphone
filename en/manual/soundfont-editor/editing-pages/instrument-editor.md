@@ -44,13 +44,14 @@ Attenuation (dB)
 Pan
 : Balance applied to the sound, to hear it to the left or to the right in stereo.
 
-Loop playback
-: ![loop off](images/loop_off.png "loop off"){.inline} indicates a sound reproduced with no loop,
-  ![loop on](images/loop_on.png "loop on"){.inline} indicates a sound which loops continuously,
-  ![loop on and end](images/loop_on_end.png "loop on and end"){.inline} indicates a sound which loops for the duration of key depression and then proceeds to play the remainder of the sample.\
-  Note: The sf2 format had no plans for a special playback mode which triggers a sample when a key is released.
-  One way to achieve this behavior is to double each sample with a sample containing a short silent loop followed by the sound to emit on the release.
-  The added sample will be read with the playback parameter “loop on with end”.
+Sample playback
+: ![Loop off](images/loop_off.png "loop off"){.inline} indicates a sound reproduced with no loop.
+  ![Loop on](images/loop_on.png "loop on"){.inline} indicates a sound which loops continuously.
+  ![Release](images/sample_mode_release.png "release"){.inline} is for triggering a sample playback when a key is released. The volume envelop is still used for defining the volume and a short attack (0.2 ms) is added for smoothing the start of the sample on the release.
+  ![Loop on + release](images/loop_on_end.png "loop on and release"){.inline} indicates a sound which loops for the duration of key depression and then proceeds to play the remainder of the sample.\
+  Note: the playback mode “release” is NOT documented by the sf2 format, so other players such as FluidSynth may decide not to implement it.
+  The other way to achieve this behavior is to double each sample with a sample containing a short silent loop followed by the sound to emit on the release.
+  The added sample will be read with the playback parameter “loop on + release”.
 
 Root key
 : Allows you to change the normal root key of a sample to a different note from that usually used.

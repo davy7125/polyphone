@@ -26,15 +26,15 @@ MIDI input
 
 Moreover, it is possible to check the following options:
 
+Stereo editing: change linked sample
+: When editing one side of a stereo sample, the other side is automatically edited the same.
+  The same applies when editing a stereo instrument division: the division corresponding to the other channel (with the same note and velocity ranges) is edited the same.
+
 Sample import: trim to loop
 : When importing a sample, data located after the end of loop are automatically removed (same effect as the tool “[Trim to end of loop](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)”).
 
 Sample import: remove blank at start
 : When importing a sample, any blank area located before the beginning of the attack is automatically removed (same effect as the tool “[Remove blank at start](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)”).
-
-Stereo editing: change linked sample
-: When editing one side of a stereo sample, the other side is automatically edited the same.
-  The same applies when editing a stereo instrument division: the division corresponding to the other channel (with the same note and velocity ranges) is edited the same.
 
 
 ![Settings, general](images/settings_general.png "Settings, general")
@@ -55,12 +55,18 @@ Key names
 Sort divisions
 : The division order within an instrument or a preset can be changed here.
 
+Unique instance
+: Open all files in a single window.
+
+Theme
+: Different styles and predefined color sets are available for customizing the appearance of Polyphone.
+  A manual selection of colors is also possible.
+
+Window borders
+: Display or hide the window borders, for saving space on the screen.
+
 Decorations
 : Background decorations in some lists can be deactivated for readability.
-
-Color theme
-: Different predefined color themes are available for customizing the appearance of Polyphone.
-  A manual selection of colors is also possible.
 
 
 ![Settings, interface](images/settings_interface.png "Settings, interface")
@@ -72,6 +78,12 @@ Color theme
 The :guilabel:`Sound` section makes it possible to modify the chorus and reverb of the synth, along with its global volume.
 The global volume may be changed with the volume MIDI controller if an external keyboard is connected.
 
+Since the default modulator modifying the filter frequency has been changed between versions 2.01 and 2.04 of the sf2 specifications, it is possible to define here which version to take:
+
+* 2.01: use the rule "lower the filter frequency taking into account the velocity IF the velocity is less than 64" (we can hear a clear and problematic gap between velocities 63 and 64);
+* 2.04: use the rule "lower the filter frequency taking into account the velocity" (no more gap);
+* disabled: this default modulator is not set.
+
 
 ![Settings, sound](images/settings_sound.png "Settings, sound")
 
@@ -81,6 +93,8 @@ The global volume may be changed with the volume MIDI controller if an external 
 
 The keys of the computer keyboard used to control the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard) are defined in the :guilabel:`Virtual keyboard` section.
 The pitch may be increased or decreased octave by octave.
+
+For more advanced musicians, the tuning and temperament can be changed here.
 
 
 ![Settings, keyboard](images/settings_keyboard.png "Settings, keyboard")

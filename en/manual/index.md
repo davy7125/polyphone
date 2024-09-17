@@ -78,6 +78,11 @@ The tabs provide a quick access between:
 * the [soundfont browser](manual/soundfont-browser.md),
 * a [soundfont description](manual/soundfont-browser.md#doc_description) from the repository.
 
+Navigation between tabs can be performed using keyboard shortcuts:
+* :kbd:`Ctrl`+:kbd:`Tab` to go to the next tab, excluding the home screen tab,
+* :kbd:`Ctrl`+:kbd:`Maj`+:kbd:`Tab` to go to the previous tab, excluding the home screen tab,
+* :kbd:`Ctrl`+:kbd:`H` to go to the home screen.
+
 
 ### Menu
 

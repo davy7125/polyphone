@@ -44,13 +44,14 @@ Atténuation (dB)
 Balance
 : Balance appliquée au son, pour l'entendre à gauche ou à droite en stéréo.
 
-Lecture en boucle
-: ![boucle désactivée](images/loop_off.png "boucle désactivée"){.inline} indique un son reproduit sans boucle,
-  ![boucle activée](images/loop_on.png "boucle activée"){.inline} indique un son reproduit avec une boucle continue,
-  ![boucle activée + fin](images/loop_on_end.png "boucle activée + fin"){.inline} indique un son reproduit avec une boucle tant que la touche est appuyée et qui continue sa lecture jusqu'à la fin une fois la touche relâchée.\
-  Note&nbsp;: le format sf2 n'a pas prévu de mode spécial pour déclencher un son lorsqu'une touche est relevée.
-  Une manière d'y parvenir est de doubler chaque échantillon avec un échantillon contenant un silence très court suivi du son à émettre lors de la relâche.
-  L'échantillon ajouté sera lu avec le paramètre «&nbsp;boucle activée + fin&nbsp;».
+Mode de lecture
+: ![Boucle désactivée](images/loop_off.png "boucle désactivée"){.inline} indique un son reproduit sans boucle.
+  ![Boucle activée](images/loop_on.png "boucle activée"){.inline} indique un son reproduit avec une boucle continue.
+  ![Relâche](images/sample_mode_release.png "relâche"){.inline} permet de déclencher la lecture d'un échantillon lorsqu'une touche est relâchée. L'enveloppe de volume est toujours utilisée pour définir le volume et une courte attaque (0,2 ms) est ajoutée pour lisser le début de l'échantillon lors de la relâche.
+  ![Boucle activée + relâche](images/loop_on_end.png "boucle activée + relâche"){.inline} indique un son reproduit avec une boucle tant que la touche est appuyée et qui continue sa lecture jusqu'à la fin une fois la touche relâchée.\
+  Note&nbsp;: le mode de lecture «&nbsp;relâche&nbsp;» n'est PAS documenté par le format sf2 et d'autres synthétiseurs comme FluidSynth peuvent décider de ne pas le prendre en charge.
+  Une manière de parvenir au même comportement est de doubler chaque échantillon avec un échantillon contenant un silence très court suivi du son à émettre lors de la relâche.
+  L'échantillon ajouté sera lu avec le paramètre «&nbsp;boucle activée + relâche&nbsp;».
 
 Note de base
 : Permet de changer la note de base configurée dans un échantillon par une autre.

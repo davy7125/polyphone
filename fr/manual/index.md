@@ -77,6 +77,11 @@ Les onglets permettent un accès rapide entre&nbsp;:
 * l'[explorateur de banques de sons](manual/soundfont-browser.md),
 * la [page de description](manual/soundfont-browser.md#doc_description) d'une banque de sons en ligne.
 
+La navigation entre les onglets peut s'effectuer grâce à des raccourcis clavier&nbsp;:
+* :kbd:`Ctrl`+:kbd:`Tab` pour aller à l'onglet suivant, en excluant l'onglet de l'écran d'accueil,
+* :kbd:`Ctrl`+:kbd:`Maj`+:kbd:`Tab` pour aller à l'onglet précédent, en excluant l'onglet de l'écran d'accueil,
+* :kbd:`Ctrl`+:kbd:`H` pour aller à l'écran d'accueil.
+
 
 ### Menu
 

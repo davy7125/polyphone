@@ -173,6 +173,6 @@ On / off led
 : This led is to set a MIDI controller value to 0 or 127 (useful for the sustain pedal for instance).
   It is like a knob but with only two possible values.
 
-
+All these elements can be synchronized with a MIDI keyboard connected to the computer if the MIDI input is correctly set in the [settings](manual/settings.md#doc_general). Relative MIDI controller values are supported for driving the knobs.
 
 *[MIDI]: Musical Instrument Digital Interface

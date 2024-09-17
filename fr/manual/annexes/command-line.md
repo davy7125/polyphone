@@ -20,14 +20,14 @@ polyphone -1 -i <fichier/à/convertir> -d <répertoire/de/destination> -o <nom_d
 
 
 -1
-: Mode “1” est “convertir en sf2”.
+: Mode «&nbsp;1&nbsp;» est «&nbsp;convertir en sf2&nbsp;».
 
 -d
 : Répertoire de destination qui recevra la conversion du fichier d'entrée.
   Cet argument est optionnel&nbsp;: par défaut le même repertoire que celui qui contient le fichier d'entrée est utilisé.
 
 -o
-: Nom de sortie sans l'extension du fichier converti (l'extension “.sf2” sera ajoutée automatiquement).
+: Nom de sortie sans l'extension du fichier converti (l'extension «&nbsp;.sf2&nbsp;» sera ajoutée automatiquement).
   Cet argument est optionnel&nbsp;: par défaut le nom du fichier d'entrée est utilisé.
 
 
@@ -56,20 +56,20 @@ polyphone -2 -i <fichier/à/convertir> -d <répertoire/de/destination> -o <nom_d
 
 
 -2
-: Mode “2” est “convertir en sf3”.
+: Mode «&nbsp;2&nbsp;» est «&nbsp;convertir en sf3&nbsp;».
 
 -d
 : Répertoire de destination qui recevra la conversion du fichier d'entrée.
   Cet argument est optionnel&nbsp;: par défaut le même repertoire que celui qui contient le fichier d'entrée est utilisé.
 
 -o
-: Nom de sortie sans l'extension du fichier converti (l'extension “.sf3” sera ajoutée automatiquement).
+: Nom de sortie sans l'extension du fichier converti (l'extension «&nbsp;.sf3&nbsp;» sera ajoutée automatiquement).
   Cet argument est optionnel&nbsp;: par défaut le nom du fichier d'entrée est utilisé.
 
 -c
 : Configuration de la conversion.
-  Il est possible to spécifier la qualité de compression&nbsp;: “0” pour basse, “1” pour moyenne, “2” pour haute.
-  Cet argument est optionnel&nbsp;: par défaut le paramètre “1” (qualité moyenne) est utilisé.
+  Il est possible to spécifier la qualité de compression&nbsp;: «&nbsp;0&nbsp;» pour basse, «&nbsp;1&nbsp;» pour moyenne, «&nbsp;2&nbsp;» pour haute.
+  Cet argument est optionnel&nbsp;: par défaut le paramètre «&nbsp;1&nbsp;» (qualité moyenne) est utilisé.
 
 
 ### Exemple
@@ -97,19 +97,19 @@ polyphone -3 -i <fichier/à/convertir> -d <répertoire/de/destination> -o <nom_d
 
 
 -3
-: Mode “3” est “convertir en sfz”.
+: Mode «&nbsp;3&nbsp;» est «&nbsp;convertir en sfz&nbsp;».
 
 -d
 : Répertoire de destination qui recevra la conversion du fichier d'entrée.
   Cet argument est optionnel&nbsp;: par défaut le même repertoire que celui qui contient le fichier d'entrée est utilisé.
 
 -o
-: Nom de sortie sans l'extension du fichier converti (l'extension “.sfz” sera ajoutée automatiquement).
+: Nom de sortie sans l'extension du fichier converti (l'extension «&nbsp;.sfz&nbsp;» sera ajoutée automatiquement).
   Cet argument est optionnel&nbsp;: par défaut le nom du fichier d'entrée est utilisé.
 
 -c
-: Configuration de la conversion sur 3 caractères. Le premier caractère est “1” si chaque ensemble doit être préfixé par son numéro d'ensemble, “0” sinon. Le deuxième caractère est “1” si un répertoire par banque doit être créé, “0” sinon. Le troisième caractère est “1” si la classification General MIDI doit être utilisée pour trier les ensembles, “0” sinon.
-  Cet argument est optionnel&nbsp;: par défaut la valeur utilisée est “000”.
+: Configuration de la conversion sur 3 caractères. Le premier caractère est «&nbsp;1&nbsp;» si chaque ensemble doit être préfixé par son numéro d'ensemble, «&nbsp;0&nbsp;» sinon. Le deuxième caractère est «&nbsp;1&nbsp;» si un répertoire par banque doit être créé, «&nbsp;0&nbsp;» sinon. Le troisième caractère est «&nbsp;1&nbsp;» si la classification General MIDI doit être utilisée pour trier les ensembles, «&nbsp;0&nbsp;» sinon.
+  Cet argument est optionnel&nbsp;: par défaut la valeur utilisée est «&nbsp;000&nbsp;».
 
 
 ### Exemple
@@ -132,16 +132,18 @@ polyphone -s -i <fichier/à/lire> -c <configuration>
 
 **Note&nbsp;:** avec Windows vous devez écrire l'adresse complète de Polyphone au lieu de simplement écrire :command:`polyphone`, ce qui nous donne par exemple :command:`C:/Program files/Polyphone/polyphone.exe`.
 
+![Polyphone ouvert avec le mode «&nbsp;synthé&nbsp;»](images/synth_mode.png "Polyphone ouvert avec le mode «&nbsp;synthé&nbsp;»")
+
 
 ### Arguments
 
 
 -s
-: Mode “s” est “ouvrir Polyphone en mode synthé”.
+: Mode «&nbsp;s&nbsp;» est «&nbsp;ouvrir Polyphone en mode synthé&nbsp;».
 
 -c
-: Configuration du synthé. Le champ comprend 3 champs séparés du caractère “|”. Le premier champ est le numéro du canal MIDI (entre 1 et 16) à écouter pour jouer, ou 0 pour indiquer que tous les canaux seront utilisés. Le deuxième champ est “off” ou “on”, rendant possible ou non la sélection de plusieurs ensembles pour jouer. Le troisième champ est “off”, “on”, ou “toggle”, autorisant ou non la sélection des ensembles par les touches correspondant au numéro de l'ensemble (la touche 0 permettant d'activer par exemple l'ensemble 0).
-  Cet argument est optionnel&nbsp;: par défaut la valeur utilisée est “0|off|off”. L'interface graphique permettra ensuite de changer ces paramètres.
+: Configuration du synthé. Le champ comprend 3 champs séparés du caractère «&nbsp;|&nbsp;». Le premier champ est le numéro du canal MIDI (entre 1 et 16) à écouter pour jouer, ou 0 pour indiquer que tous les canaux seront utilisés. Le deuxième champ est «&nbsp;off&nbsp;» ou «&nbsp;on&nbsp;», rendant possible ou non la sélection de plusieurs ensembles pour jouer. Le troisième champ est «&nbsp;off&nbsp;», «&nbsp;on&nbsp;», ou «&nbsp;toggle&nbsp;», autorisant ou non la sélection des ensembles par les touches correspondant au numéro de l'ensemble (la touche 0 permettant d'activer par exemple l'ensemble 0).
+  Cet argument est optionnel&nbsp;: par défaut la valeur utilisée est «&nbsp;0|off|off&nbsp;». L'interface graphique permettra ensuite de changer ces paramètres.
 
 
 ### Exemple

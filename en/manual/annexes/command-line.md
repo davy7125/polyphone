@@ -132,6 +132,8 @@ polyphone -s -i <file/to/read> -c <configuration>
 
 **Note:** with Windows you need to write the full path of Polyphone instead of just :command:`polyphone`, which is for example :command:`C:/Program files/Polyphone/polyphone.exe`.
 
+![Polyphone opened with the synth mode option](images/synth_mode.png "Polyphone opened with the synth mode option")
+
 
 ### Arguments
 
