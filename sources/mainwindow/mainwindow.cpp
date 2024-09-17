@@ -337,59 +337,77 @@ void MainWindow::onRecorderDisplayChange(bool isDisplayed)
 
 void MainWindow::keyPressEvent(QKeyEvent * event)
 {
-    if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_K && _keyboard != nullptr)
+    if (event->modifiers() == Qt::ControlModifier)
     {
-        if (!_keyboard->isVisible())
+        switch (event->key())
         {
-            _keyboard->show();
-            _keyboard->activateWindow();
-            EditorToolBar::updateKeyboardButtonsState(true);
+        case Qt::Key_F: // Search
+            if (ui->lineSearch->isVisible())
+                ui->lineSearch->setFocus();
+            event->accept();
+            break;
+        case Qt::Key_H: // Go to home
+            _tabManager->showHome();
+            event->accept();
+            break;
+        case Qt::Key_K: // Display / focus keyboard
+            if (_keyboard != nullptr)
+            {
+                if (!_keyboard->isVisible())
+                {
+                    _keyboard->show();
+                    _keyboard->activateWindow();
+                    EditorToolBar::updateKeyboardButtonsState(true);
+                }
+                else
+                {
+                    _keyboard->activateWindow();
+                    _keyboard->glow();
+                }
+            }
+            event->accept();
+            break;
+        case Qt::Key_Y: { // Redo
+            int currentSf2 = _tabManager->getCurrentSf2();
+            if (currentSf2 != -1)
+                SoundfontManager::getInstance()->redo(currentSf2);
+            event->accept();
+        } break;
+        case Qt::Key_Z: { // Undo
+            int currentSf2 = _tabManager->getCurrentSf2();
+            if (currentSf2 != -1)
+                SoundfontManager::getInstance()->undo(currentSf2);
+            event->accept();
+        } break;
+        case Qt::Key_Tab: case Qt::Key_PageDown: // Go to next tab
+            _tabManager->setCurrentWidget(ui->tabBar->getNextWidget());
+            event->accept();
+            break;
+        case Qt::Key_PageUp: // Go to previous tab
+            _tabManager->setCurrentWidget(ui->tabBar->getPreviousWidget());
+            event->accept();
+            break;
+        default:
+            break;
         }
-        else
+    }
+    else if (event->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier))
+    {
+        switch (event->key())
         {
-            _keyboard->activateWindow();
-            _keyboard->glow();
+        case Qt::Key_Z: { // Redo
+            int currentSf2 = _tabManager->getCurrentSf2();
+            if (currentSf2 != -1)
+                SoundfontManager::getInstance()->redo(currentSf2);
+            event->accept();
+        } break;
+        case Qt::Key_Backtab: // Go to previous tab
+            _tabManager->setCurrentWidget(ui->tabBar->getPreviousWidget());
+            event->accept();
+            break;
+        default:
+            break;
         }
-        event->accept();
-    }
-    else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_Z)
-    {
-        // Undo
-        int currentSf2 = _tabManager->getCurrentSf2();
-        if (currentSf2 != -1)
-            SoundfontManager::getInstance()->undo(currentSf2);
-        event->accept();
-    }
-    else if ((event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_Y) ||
-             (event->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier) && event->key() == Qt::Key_Z))
-    {
-        // Redo
-        int currentSf2 = _tabManager->getCurrentSf2();
-        if (currentSf2 != -1)
-            SoundfontManager::getInstance()->redo(currentSf2);
-        event->accept();
-    }
-    else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_F)
-    {
-        // Search
-        if (ui->lineSearch->isVisible())
-            ui->lineSearch->setFocus();
-        event->accept();
-    }
-    else if (event->modifiers() == Qt::ControlModifier && event->key() ==  Qt::Key_H)
-    {
-        _tabManager->showHome();
-        event->accept();
-    }
-    else if (event->modifiers() == Qt::ControlModifier && event->key() ==  Qt::Key_Tab)
-    {
-        _tabManager->setCurrentWidget(ui->tabBar->getNextWidget());
-        event->accept();
-    }
-    else if (event->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier) && event->key() ==  Qt::Key_Backtab)
-    {
-        _tabManager->setCurrentWidget(ui->tabBar->getPreviousWidget());
-        event->accept();
     }
 
     QWidget::keyPressEvent(event);
