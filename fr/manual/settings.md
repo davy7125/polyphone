@@ -81,7 +81,7 @@ Le volume général peut aussi être modifié avec le contrôleur MIDI du volume
 Le modulateur par défaut modifiant la fréquence du filtre ayant été modifié entre les versions 2.01 et 2.04 des spécifications sf2, il est possible de définir ici quelle version utiliser&nbsp;:
 
 * 2.01&nbsp;: utilisation de la règle «&nbsp;abaisser la fréquence du filtre en tenant compte de la vélocité SI la vélocité est inférieure à 64&nbsp;» (on entend ici un écart net et problématique entre les vélocités 63 et 64)&nbsp;;
-2.04&nbsp;: utilisation de la règle «&nbsp;abaisser la fréquence du filtre en tenant compte de la vélocité&nbsp;» (plus d'écart)&nbsp;;
+* 2.04&nbsp;: utilisation de la règle «&nbsp;abaisser la fréquence du filtre en tenant compte de la vélocité&nbsp;» (plus d'écart)&nbsp;;
 * désactivé&nbsp;: ce modulateur par défaut n'est pas défini.
 
 
