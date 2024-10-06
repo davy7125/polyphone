@@ -171,7 +171,7 @@ void RepositoryManager::fillLicenseLabelAndLink()
     _licenseLabels["personal_use_only"] = tr("personal use, don't distribute a modified version");
 
     // Links
-    _licenseUrl = "https://www.polyphone-soundfonts.com/license#";
+    _licenseUrl = "https://www.polyphone.io/en/licenses#";
 }
 
 void RepositoryManager::initialize()
@@ -460,7 +460,7 @@ QString RepositoryManager::getLicenseLabel(QString licenseKey)
 
 QString RepositoryManager::getLicenseLink(QString licenseKey)
 {
-    return _licenseUrl + licenseKey;
+    return _licenseUrl + licenseKey.replace('_', '-').replace("no-restrictions", "no-more-restrictions");
 }
 
 void RepositoryManager::openSoundfont(int soundfontId, bool daily)

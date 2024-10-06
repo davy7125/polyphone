@@ -44,7 +44,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
 
     // Description
     QString yearRange = QString("2013 - ") + CURRENT_YEAR;
-    QString url = "https://www.polyphone-soundfonts.com";
+    QString url = "https://www.polyphone.io";
     QString urlDonation = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted";
     ui->labelDescription->setText("<html><head/><body><p align='center'>" + tr("Copyright") + " © " + yearRange +
                                   " " + tr("Davy Triponney") + "<br/><br/><a href='" + url +
