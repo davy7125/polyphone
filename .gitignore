@@ -1,3 +1,5 @@
 build-*
 sources/
 private/
+lib_mac/
+lib_windows/
