@@ -43,7 +43,8 @@ public:
     ~FooterPrst();
 
     void updateInterface() override;
-    void spinUpDown(int steps, SpinBox *spin);
+    void spinUpDown(int steps, SpinBox * spin);
+    void save(SpinBox * spin);
 
 private slots:
     void setBank();
@@ -51,11 +52,11 @@ private slots:
 
 private:
     QList<int> getUsedPresetsForBank(int sf2Index, quint16 wBank);
-    void setBank(quint16 desiredBank, int collisionResolution);
+    void setBank(quint16 currentValue, int upDown);
     bool isBankAvailable(quint16 wBank);
 
     QList<int> getUsedBanksForPreset(int sf2Index, quint16 wPreset);
-    void setPreset(quint16 desiredPreset, int collisionResolution);
+    void setPreset(quint16 currentValue, int upDown);
     bool isPresetAvailable(quint16 wPreset);
 
     IdList _currentParentIds;
@@ -68,11 +69,12 @@ class SpinBox : public QSpinBox
 {
     Q_OBJECT
 public:
-    SpinBox(QWidget *parent = nullptr) : QSpinBox(parent) {}
+    SpinBox(QWidget *parent = nullptr);
     void init(FooterPrst * footer) { _footer = footer; }
+    virtual void stepBy(int steps);
 
-public slots:
-    virtual void stepBy(int steps) { _footer->spinUpDown(steps, this); }
+private slots:
+    void onEditingFinished();
 
 private:
     FooterPrst * _footer;

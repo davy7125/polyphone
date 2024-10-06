@@ -57,7 +57,6 @@ void FooterPrst::updateInterface()
         ui->spinPreset->setEnabled(true);
 
         EltID id = _currentParentIds.first();
-        id.typeElement = elementPrst;
         ui->spinBank->setValue(sf2->get(id, champ_wBank).wValue);
         ui->spinPreset->setValue(sf2->get(id, champ_wPreset).wValue);
         ui->labelPercussion->setVisible(sf2->get(id, champ_wBank).wValue == 128);
@@ -145,59 +144,56 @@ QList<int> FooterPrst::getUsedPresetsForBank(int sf2Index, quint16 wBank)
     foreach (int i, sf2->getSiblings(id))
     {
         id.indexElt = i;
+        if (_currentParentIds.contains(id))
+            continue;
         if (sf2->get(id, champ_wBank).wValue == wBank)
             ret << sf2->get(id, champ_wPreset).wValue;
     }
     return ret;
 }
 
-void FooterPrst::setBank(quint16 desiredBank, int collisionResolution)
+void FooterPrst::setBank(quint16 currentValue, int upDown)
 {
-    // Previous bank
     if (_currentParentIds.empty())
         return;
 
-    SoundfontManager * sf2 = SoundfontManager::getInstance();
-    quint16 previousBank = sf2->get(_currentParentIds[0], champ_wBank).wValue;
+    // Desired bank
+    quint16 desiredValue = currentValue;
+    if (upDown < 0 && desiredValue > 0)
+        desiredValue--;
+    if (upDown > 0 && desiredValue < 128)
+        desiredValue++;
 
     // Find the bank to set, according to the collision resolution method
-    while (!isBankAvailable(desiredBank))
+    while (!isBankAvailable(desiredValue))
     {
-        bool goBack = false;
-        if (collisionResolution == 0)
-            goBack = true;
-        else if (collisionResolution > 0)
+        bool nothingFound = false;
+        if (upDown == 0)
+            nothingFound = true;
+        else if (upDown > 0)
         {
-            if (desiredBank == 128) // Max is 128
-                goBack = true;
+            if (desiredValue >= 128) // Max is 128
+                nothingFound = true;
             else
-                desiredBank++;
+                desiredValue++;
         }
-        else if (collisionResolution < 0)
+        else if (upDown < 0)
         {
-            if (desiredBank == 0)
-                goBack = true;
+            if (desiredValue == 0)
+                nothingFound = true;
             else
-                desiredBank--;
+                desiredValue--;
         }
 
-        if (goBack)
+        if (nothingFound)
         {
-            // Back to the previous bank
-            ui->spinBank->setValue(previousBank);
-            return;
+            desiredValue = currentValue;
+            break;
         }
     }
 
-    // A bank has been found, the current ids are edited
-    AttributeValue v;
-    v.wValue = desiredBank;
-    foreach (EltID id, _currentParentIds)
-        sf2->set(id, champ_wBank, v);
-    sf2->endEditing("footerPrst");
-
-    // GUI update
-    ui->spinBank->setValue(desiredBank);
+    // Update the GUI
+    ui->spinBank->setValue(desiredValue);
     ui->labelPercussion->setVisible(ui->spinBank->value() == 128);
 }
 
@@ -226,58 +222,56 @@ QList<int> FooterPrst::getUsedBanksForPreset(int sf2Index, quint16 wPreset)
     foreach (int i, sf2->getSiblings(id))
     {
         id.indexElt = i;
+        if (_currentParentIds.contains(id))
+            continue;
         if (sf2->get(id, champ_wPreset).wValue == wPreset)
             ret << sf2->get(id, champ_wBank).wValue;
     }
     return ret;
 }
 
-void FooterPrst::setPreset(quint16 desiredPreset, int collisionResolution)
+void FooterPrst::setPreset(quint16 currentValue, int upDown)
 {
-    // Previous preset
     if (_currentParentIds.empty())
         return;
-    SoundfontManager * sf2 = SoundfontManager::getInstance();
-    quint16 previousPreset = sf2->get(_currentParentIds[0], champ_wPreset).wValue;
+
+    // Desired preset
+    quint16 desiredValue = currentValue;
+    if (upDown < 0 && desiredValue > 0)
+        desiredValue--;
+    if (upDown > 0 && desiredValue < 127)
+        desiredValue++;
 
     // Find the preset to set, according to the collision resolution method
-    while (!isPresetAvailable(desiredPreset))
+    while (!isPresetAvailable(desiredValue))
     {
-        bool goBack = false;
-        if (collisionResolution == 0)
-            goBack = true;
-        else if (collisionResolution > 0)
+        bool nothingFound = false;
+        if (upDown == 0)
+            nothingFound = true;
+        else if (upDown > 0)
         {
-            if (desiredPreset == 127) // Max is 127
-                goBack = true;
+            if (desiredValue == 127) // Max is 127
+                nothingFound = true;
             else
-                desiredPreset++;
+                desiredValue++;
         }
-        else if (collisionResolution < 0)
+        else if (upDown < 0)
         {
-            if (desiredPreset == 0)
-                goBack = true;
+            if (desiredValue == 0)
+                nothingFound = true;
             else
-                desiredPreset--;
+                desiredValue--;
         }
 
-        if (goBack)
+        if (nothingFound)
         {
-            // Back to the previous preset
-            ui->spinPreset->setValue(previousPreset);
-            return;
+            desiredValue = currentValue;
+            break;
         }
     }
 
-    // A preset has been found, the current ids are edited
-    AttributeValue v;
-    v.wValue = desiredPreset;
-    foreach (EltID id, _currentParentIds)
-        sf2->set(id, champ_wPreset, v);
-    sf2->endEditing("footerPrst");
-
-    // GUI update
-    ui->spinPreset->setValue(desiredPreset);
+    // Update the GUI
+    ui->spinPreset->setValue(desiredValue);
 }
 
 bool FooterPrst::isPresetAvailable(quint16 wPreset)
@@ -295,4 +289,71 @@ bool FooterPrst::isPresetAvailable(quint16 wPreset)
             return false;
 
     return true;
+}
+
+void FooterPrst::save(SpinBox * spin)
+{
+    SoundfontManager * sf2 = SoundfontManager::getInstance();
+    if (spin == ui->spinBank)
+    {
+        // Has it changed?
+        quint16 previousBank = sf2->get(_currentParentIds[0], champ_wBank).wValue;
+        quint16 desiredBank = ui->spinBank->value();
+        if (previousBank != desiredBank)
+        {
+            // Save the bank if it is available
+            if (isBankAvailable(desiredBank))
+            {
+                AttributeValue v;
+                v.wValue = desiredBank;
+                foreach (EltID id, _currentParentIds)
+                    sf2->set(id, champ_wBank, v);
+                sf2->endEditing("footerPrst");
+            }
+            else
+            {
+                // Back to the previous bank
+                ui->spinBank->setValue(previousBank);
+            }
+        }
+    }
+    else
+    {
+        // Has it changed?
+        quint16 previousPreset = sf2->get(_currentParentIds[0], champ_wPreset).wValue;
+        quint16 desiredPreset = ui->spinPreset->value();
+        if (previousPreset != desiredPreset)
+        {
+            // Save the preset if it is available
+            if (isPresetAvailable(desiredPreset))
+            {
+                AttributeValue v;
+                v.wValue = desiredPreset;
+                foreach (EltID id, _currentParentIds)
+                    sf2->set(id, champ_wPreset, v);
+                sf2->endEditing("footerPrst");
+            }
+            else
+            {
+                // Back to the previous preset
+                ui->spinPreset->setValue(previousPreset);
+            }
+        }
+    }
+}
+
+SpinBox::SpinBox(QWidget * parent) : QSpinBox(parent)
+{
+    connect(this, SIGNAL(editingFinished()), this, SLOT(onEditingFinished()));
+}
+
+void SpinBox::stepBy(int steps)
+{
+    _footer->spinUpDown(steps, this);
+}
+
+void SpinBox::onEditingFinished()
+{
+    _footer->spinUpDown(0, this);
+    _footer->save(this);
 }

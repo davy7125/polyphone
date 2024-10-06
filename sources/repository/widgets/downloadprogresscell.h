@@ -42,7 +42,7 @@ public:
     // Update data
     void progressChanged(int percent, QString finalFilename);
 
-    // Download canceld
+    // Download canceled
     void cancel();
 
     // Get data
