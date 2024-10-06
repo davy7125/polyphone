@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_CN" sourcelanguage="en_US">
+<TS version="2.0" language="zh_CN" sourcelanguage="en_US">
 <context>
     <name>AbstractInputParser</name>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="42"/>
+        <location filename="core/input/abstractinputparser.cpp" line="43"/>
         <source>not processed yet</source>
         <translation>未处理</translation>
     </message>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="85"/>
+        <location filename="core/input/abstractinputparser.cpp" line="86"/>
         <source>This file is already open.</source>
         <translation>该文件已打开。</translation>
     </message>
@@ -1296,98 +1296,98 @@ repository</source>
         <translation>无法创建目录 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="242"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="241"/>
         <source>untitled</source>
         <translation>未命名</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="662"/>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="704"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="661"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="703"/>
         <source>other</source>
         <translation>其它</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="665"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="664"/>
         <source>Piano</source>
         <translation>钢琴</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="667"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="666"/>
         <source>Chromatic percussion</source>
         <translation>半音阶打击乐</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="669"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="668"/>
         <source>Organ</source>
         <translation>风琴</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="671"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="670"/>
         <source>Guitar</source>
         <translation>吉他</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="673"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="672"/>
         <source>Bass</source>
         <translation>低音</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="675"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="674"/>
         <source>Strings</source>
         <translation>弦乐</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="677"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="676"/>
         <source>Ensemble</source>
         <translation>和弦</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="679"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="678"/>
         <source>Brass</source>
         <translation>铜管乐</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="681"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="680"/>
         <source>Reed</source>
         <translation>簧乐</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="683"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="682"/>
         <source>Pipe</source>
         <translation>管乐</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="685"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="684"/>
         <source>Synth lead</source>
         <translation>合成主音</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="687"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="686"/>
         <source>Synth pad</source>
         <translation>合成柔音</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="689"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="688"/>
         <source>Synth effects</source>
         <translation>合成音效</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="691"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="690"/>
         <source>Ethnic</source>
         <translation>民乐</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="693"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="692"/>
         <source>Percussive</source>
         <translation>打击乐</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="695"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="694"/>
         <source>Sound effects</source>
         <translation>音效</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="697"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="696"/>
         <source>Percussion kit</source>
         <translation>打击乐组</translation>
     </message>
@@ -3751,7 +3751,7 @@ to display its division ranges</source>
     <message>
         <location filename="core/sample/sound.cpp" line="61"/>
         <source>Corrupted file: &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>损坏的文件: &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/sample/sound.cpp" line="64"/>
@@ -3762,6 +3762,12 @@ to display its division ranges</source>
         <location filename="core/sample/sound.cpp" line="67"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>无法打开文件 &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location filename="core/sample/sound.cpp" line="70"/>
+        <source>File not supported: &quot;%1&quot;</source>
+        <oldsource>File not supported &quot;%1&quot;</oldsource>
+        <translation>不支持文件: &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/input/grandorgue/grandorguerank.cpp" line="142"/>

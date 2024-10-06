@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR">
+<TS version="2.0" language="fr_FR">
 <context>
     <name>AbstractInputParser</name>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="42"/>
+        <location filename="core/input/abstractinputparser.cpp" line="43"/>
         <source>not processed yet</source>
         <translation>pas encore traité</translation>
     </message>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="85"/>
+        <location filename="core/input/abstractinputparser.cpp" line="86"/>
         <source>This file is already open.</source>
         <translation>Ce fichier est déjà ouvert.</translation>
     </message>
@@ -1300,98 +1300,98 @@ en ligne</translation>
         <translation>Impossible de créer le dossier « %1 »</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="242"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="241"/>
         <source>untitled</source>
         <translation>sans titre</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="662"/>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="704"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="661"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="703"/>
         <source>other</source>
         <translation>autre</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="665"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="664"/>
         <source>Piano</source>
         <translation>Piano</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="667"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="666"/>
         <source>Chromatic percussion</source>
         <translation>Percussions chromatiques</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="669"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="668"/>
         <source>Organ</source>
         <translation>Orgues</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="671"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="670"/>
         <source>Guitar</source>
         <translation>Guitares</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="673"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="672"/>
         <source>Bass</source>
         <translation>Basses</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="675"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="674"/>
         <source>Strings</source>
         <translation>Cordes</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="677"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="676"/>
         <source>Ensemble</source>
         <translation>Orchestre</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="679"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="678"/>
         <source>Brass</source>
         <translation>Cuivres</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="681"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="680"/>
         <source>Reed</source>
         <translation>Instrument à anches</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="683"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="682"/>
         <source>Pipe</source>
         <translation>Flûtes</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="685"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="684"/>
         <source>Synth lead</source>
         <translation>Synthétiseur solo</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="687"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="686"/>
         <source>Synth pad</source>
         <translation>Nappes de synthétiseur</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="689"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="688"/>
         <source>Synth effects</source>
         <translation>Effets de synthétiseur</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="691"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="690"/>
         <source>Ethnic</source>
         <translation>Instruments ethniques</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="693"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="692"/>
         <source>Percussive</source>
         <translation>Percussions</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="695"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="694"/>
         <source>Sound effects</source>
         <translation>Effets sonores</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="697"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="696"/>
         <source>Percussion kit</source>
         <translation>Kits de percussion</translation>
     </message>
@@ -3783,6 +3783,12 @@ pour afficher les étendues de ses divisions</translation>
         <location filename="core/sample/sound.cpp" line="67"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>Impossible d&apos;ouvrir le fichier « %1 »</translation>
+    </message>
+    <message>
+        <location filename="core/sample/sound.cpp" line="70"/>
+        <source>File not supported: &quot;%1&quot;</source>
+        <oldsource>File not supported &quot;%1&quot;</oldsource>
+        <translation>Fichier non pris en charge : &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="116"/>

@@ -100,7 +100,22 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
             quint16Reversed tmp16;
             quint32Reversed tmp32;
             in >> tmp16; // (1: PCM, 3: IEEE float)
-            _isIeeeFloat = (tmp16.value == 3);
+            switch (tmp16.value)
+            {
+            case 0x0001: // PCM
+                _isIeeeFloat = false;
+                break;
+            case 0x0003: // IEE float
+                _isIeeeFloat = true;
+                break;
+            case 0x0006: // 8-bit ITU-T G.711 A-law
+            case 0x0007: // 8-bit ITU-T G.711 µ-law
+            case 0xFFFE: // Determined by SubFormat
+            default:
+                return FILE_NOT_SUPPORTED;
+                break;
+            }
+
             in >> tmp16;
             info.wChannels = tmp16.value;
             in >> tmp32;
@@ -223,7 +238,7 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getData(QFile &fi, QVector<
         // Convert to float
         if (_info->wBpsFile == 8)
         {
-            const char * dataSource = data.constData();
+            const unsigned char * dataSource = (unsigned char *)data.constData();
             for (quint32 i = 0; i < _info->dwLength; i++)
                 fData[i] = Utils::int24ToFloat((dataSource[_info->wChannels * i + _info->wChannel] - 128) * 65536);
         }

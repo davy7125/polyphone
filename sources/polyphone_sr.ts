@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="sr_RS">
+<TS version="2.0" language="sr_RS">
 <context>
     <name>AbstractInputParser</name>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="42"/>
+        <location filename="core/input/abstractinputparser.cpp" line="43"/>
         <source>not processed yet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="85"/>
+        <location filename="core/input/abstractinputparser.cpp" line="86"/>
         <source>This file is already open.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1297,98 +1297,98 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="242"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="241"/>
         <source>untitled</source>
         <translation type="unfinished">без назива</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="662"/>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="704"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="661"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="703"/>
         <source>other</source>
         <translation>друго</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="665"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="664"/>
         <source>Piano</source>
         <translation>Клавир</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="667"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="666"/>
         <source>Chromatic percussion</source>
         <translation>Удараљке, хроматске</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="669"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="668"/>
         <source>Organ</source>
         <translation>Оргуље</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="671"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="670"/>
         <source>Guitar</source>
         <translation>Гитаре</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="673"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="672"/>
         <source>Bass</source>
         <translation>Бас гитаре</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="675"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="674"/>
         <source>Strings</source>
         <translation>Жичани</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="677"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="676"/>
         <source>Ensemble</source>
         <translation>Оркестар</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="679"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="678"/>
         <source>Brass</source>
         <translation>Дувачки, лимени</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="681"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="680"/>
         <source>Reed</source>
         <translation>Дувачки, дрвени</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="683"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="682"/>
         <source>Pipe</source>
         <translation>Дувачки, дрвени без језичка</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="685"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="684"/>
         <source>Synth lead</source>
         <translation>Синтесајзер — главни</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="687"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="686"/>
         <source>Synth pad</source>
         <translation>Синтесајзер — блок</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="689"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="688"/>
         <source>Synth effects</source>
         <translation>Синт-ефекти</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="691"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="690"/>
         <source>Ethnic</source>
         <translation>Традиционални</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="693"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="692"/>
         <source>Percussive</source>
         <translation>Удараљке</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="695"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="694"/>
         <source>Sound effects</source>
         <translation>Звучни ефекти</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="697"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="696"/>
         <source>Percussion kit</source>
         <translation>Скупина удараљки</translation>
     </message>
@@ -2304,8 +2304,6 @@ repository</source>
         <source>%n element(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
 </context>
@@ -2829,8 +2827,6 @@ default mod.</source>
         <location filename="editor/modulator/modulatoreditor.cpp" line="262"/>
         <source>%n modulator(s):</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -3409,8 +3405,6 @@ to display its division ranges</source>
         <source>%1 (unused: %n)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
 </context>
@@ -3780,6 +3774,12 @@ to display its division ranges</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="core/sample/sound.cpp" line="70"/>
+        <source>File not supported: &quot;%1&quot;</source>
+        <oldsource>File not supported &quot;%1&quot;</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="core/input/grandorgue/grandorguerank.cpp" line="142"/>
         <location filename="core/input/grandorgue/grandorguestop.cpp" line="141"/>
         <location filename="core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
@@ -3830,14 +3830,14 @@ to display its division ranges</source>
         <location filename="context/keynamemanager.cpp" line="129"/>
         <source>C</source>
         <comment>key name</comment>
-        <translation type="unfinished">До</translation>
+        <translation>До</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="65"/>
         <location filename="context/keynamemanager.cpp" line="132"/>
         <source>D♭</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ре♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="66"/>
@@ -3845,14 +3845,14 @@ to display its division ranges</source>
         <location filename="context/keynamemanager.cpp" line="135"/>
         <source>D</source>
         <comment>key name</comment>
-        <translation type="unfinished">Ре</translation>
+        <translation>Ре</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="67"/>
         <location filename="context/keynamemanager.cpp" line="138"/>
         <source>E♭</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ми♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="68"/>
@@ -3860,7 +3860,7 @@ to display its division ranges</source>
         <location filename="context/keynamemanager.cpp" line="141"/>
         <source>E</source>
         <comment>key name</comment>
-        <translation type="unfinished">Ми</translation>
+        <translation>Ми</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="69"/>
@@ -3868,14 +3868,14 @@ to display its division ranges</source>
         <location filename="context/keynamemanager.cpp" line="143"/>
         <source>F</source>
         <comment>key name</comment>
-        <translation type="unfinished">Фа</translation>
+        <translation>Фа</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="70"/>
         <location filename="context/keynamemanager.cpp" line="146"/>
         <source>G♭</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Сол♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="71"/>
@@ -3890,7 +3890,7 @@ to display its division ranges</source>
         <location filename="context/keynamemanager.cpp" line="152"/>
         <source>A♭</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ла♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="73"/>
@@ -3898,14 +3898,14 @@ to display its division ranges</source>
         <location filename="context/keynamemanager.cpp" line="155"/>
         <source>A</source>
         <comment>key name</comment>
-        <translation type="unfinished">Ла</translation>
+        <translation>Ла</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="74"/>
         <location filename="context/keynamemanager.cpp" line="158"/>
         <source>B♭</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ти♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="75"/>
@@ -3913,42 +3913,42 @@ to display its division ranges</source>
         <location filename="context/keynamemanager.cpp" line="161"/>
         <source>B</source>
         <comment>key name</comment>
-        <translation type="unfinished">Ти</translation>
+        <translation>Ти</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="83"/>
         <location filename="context/keynamemanager.cpp" line="131"/>
         <source>C♯</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation>До♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="85"/>
         <location filename="context/keynamemanager.cpp" line="137"/>
         <source>D♯</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ре♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="88"/>
         <location filename="context/keynamemanager.cpp" line="145"/>
         <source>F♯</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Фа♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="90"/>
         <location filename="context/keynamemanager.cpp" line="151"/>
         <source>G♯</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Сол♯</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="92"/>
         <location filename="context/keynamemanager.cpp" line="157"/>
         <source>A♯</source>
         <comment>key name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ла♯</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="55"/>
@@ -5427,16 +5427,12 @@ Other soundfont editors might display other units.</source>
         <source>%n sample(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="110"/>
         <source>%n instrument(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -5487,7 +5483,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="88"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
-        <translation type="unfinished">Поништи</translation>
+        <translation>&amp;Поништи</translation>
     </message>
 </context>
 <context>
@@ -5746,13 +5742,13 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="26"/>
         <source>&amp;Export</source>
         <oldsource>Export</oldsource>
-        <translation type="unfinished">Извези</translation>
+        <translation>&amp;Извези</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="33"/>
         <source>&amp;Close</source>
         <oldsource>Close</oldsource>
-        <translation type="unfinished">Затвори</translation>
+        <translation>&amp;Затвори</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="75"/>
@@ -5788,7 +5784,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="143"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
-        <translation type="unfinished">Hz</translation>
+        <translation>Hz</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="167"/>
@@ -5947,8 +5943,6 @@ Other soundfont editors might display other units.</source>
         <source>Couldn&apos;t configure %n sample(s).</source>
         <oldsource>Couln&apos;t configure %n sample(s).</oldsource>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>

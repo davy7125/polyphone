@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>AbstractInputParser</name>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="42"/>
+        <location filename="core/input/abstractinputparser.cpp" line="43"/>
         <source>not processed yet</source>
         <translation>ještě nezpracováno</translation>
     </message>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="85"/>
+        <location filename="core/input/abstractinputparser.cpp" line="86"/>
         <source>This file is already open.</source>
         <translation>Tento soubor je již otevřen.</translation>
     </message>
@@ -1298,98 +1298,98 @@ repository</source>
         <translation>Nelze vytvořit adresář &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="242"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="241"/>
         <source>untitled</source>
         <translation>Bez názvu</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="662"/>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="704"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="661"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="703"/>
         <source>other</source>
         <translation>jiné</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="665"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="664"/>
         <source>Piano</source>
         <translation>Klavír</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="667"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="666"/>
         <source>Chromatic percussion</source>
         <translation>Chromatická bicí</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="669"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="668"/>
         <source>Organ</source>
         <translation>Varhany</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="671"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="670"/>
         <source>Guitar</source>
         <translation>Kytara</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="673"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="672"/>
         <source>Bass</source>
         <translation>Basa</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="675"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="674"/>
         <source>Strings</source>
         <translation>Smyčce</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="677"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="676"/>
         <source>Ensemble</source>
         <translation>Orchestr</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="679"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="678"/>
         <source>Brass</source>
         <translation>Žestě</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="681"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="680"/>
         <source>Reed</source>
         <translation>Jazýčkové nástroje</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="683"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="682"/>
         <source>Pipe</source>
         <translation>Flétna</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="685"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="684"/>
         <source>Synth lead</source>
         <translation>Hlavní syntetizátor</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="687"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="686"/>
         <source>Synth pad</source>
         <translation>Doprovodný syntetizátor</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="689"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="688"/>
         <source>Synth effects</source>
         <translation>Efekty syntetizátoru</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="691"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="690"/>
         <source>Ethnic</source>
         <translation>Národní nástroje</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="693"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="692"/>
         <source>Percussive</source>
         <translation>Bicí</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="695"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="694"/>
         <source>Sound effects</source>
         <translation>Zvukové efekty</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="697"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="696"/>
         <source>Percussion kit</source>
         <translation>Bicí sada</translation>
     </message>
@@ -3770,6 +3770,12 @@ to display its division ranges</source>
         <translation>Nelze otevřít soubor &quot;%1&quot;</translation>
     </message>
     <message>
+        <location filename="core/sample/sound.cpp" line="70"/>
+        <source>File not supported: &quot;%1&quot;</source>
+        <oldsource>File not supported &quot;%1&quot;</oldsource>
+        <translation>Soubor není podporován: &quot;%1&quot;</translation>
+    </message>
+    <message>
         <location filename="core/input/grandorgue/grandorguerank.cpp" line="142"/>
         <location filename="core/input/grandorgue/grandorguestop.cpp" line="141"/>
         <location filename="core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
@@ -5941,8 +5947,6 @@ Other soundfont editors might display other units.</source>
         <source>Couldn&apos;t configure %n sample(s).</source>
         <oldsource>Couln&apos;t configure %n sample(s).</oldsource>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>

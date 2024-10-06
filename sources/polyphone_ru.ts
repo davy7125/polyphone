@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU">
+<TS version="2.0" language="ru_RU">
 <context>
     <name>AbstractInputParser</name>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="42"/>
+        <location filename="core/input/abstractinputparser.cpp" line="43"/>
         <source>not processed yet</source>
         <translation>ещё не обработан</translation>
     </message>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="85"/>
+        <location filename="core/input/abstractinputparser.cpp" line="86"/>
         <source>This file is already open.</source>
         <translation>Этот файл уже открыт.</translation>
     </message>
@@ -1294,114 +1294,114 @@ repository</source>
         <translation>Не удалось создать каталог «%1»</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="242"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="241"/>
         <source>untitled</source>
         <translation>без заголовка</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="662"/>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="704"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="661"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="703"/>
         <source>other</source>
         <translation>прочие</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="665"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="664"/>
         <source>Piano</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Пианино</translatorcomment>
         <translation>Пианино</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="667"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="666"/>
         <source>Chromatic percussion</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Хроматическая_перкуссия</translatorcomment>
         <translation>Хроматическая перкуссия</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="669"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="668"/>
         <source>Organ</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Орган</translatorcomment>
         <translation>Орган</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="671"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="670"/>
         <source>Guitar</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Гитара</translatorcomment>
         <translation>Гитара</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="673"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="672"/>
         <source>Bass</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Бас</translatorcomment>
         <translation>Бас</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="675"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="674"/>
         <source>Strings</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Струнные_инструменты</translatorcomment>
         <translation>Струнные</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="677"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="676"/>
         <source>Ensemble</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Музыкальный_коллектив</translatorcomment>
         <translation>Музыкальный коллектив</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="679"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="678"/>
         <source>Brass</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Медные_духовые_инструменты</translatorcomment>
         <translation>Медные духовые</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="681"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="680"/>
         <source>Reed</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Язычковые_духовые_инструменты</translatorcomment>
         <translation>Язычковые духовые</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="683"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="682"/>
         <source>Pipe</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Деревянные_духовые_инструменты</translatorcomment>
         <translation>Деревянные духовые</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="685"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="684"/>
         <source>Synth lead</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Синтезаторный_ведущий_голос</translatorcomment>
         <translation>Синтезаторный ведущий голос</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="687"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="686"/>
         <source>Synth pad</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Синтезаторный_подголосок</translatorcomment>
         <translation>Синтезаторный подголосок</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="689"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="688"/>
         <source>Synth effects</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Синтезаторные_эффекты</translatorcomment>
         <translation>Синтезаторные эффекты</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="691"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="690"/>
         <source>Ethnic</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Этнические_музыкальные_инструменты</translatorcomment>
         <translation>Народные</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="693"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="692"/>
         <source>Percussive</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Ударные_музыкальные_инструменты</translatorcomment>
         <translation>Ударные</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="695"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="694"/>
         <source>Sound effects</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Звуковые_эффекты</translatorcomment>
         <translation>Звуковые эффекты</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="697"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="696"/>
         <source>Percussion kit</source>
         <translatorcomment>https://ru.wikipedia.org/wiki/General_MIDI#Перкуссия</translatorcomment>
         <translation>Перкуссия</translation>
@@ -3911,6 +3911,12 @@ to display its division ranges</source>
         <translation>Не удалось открыть файл «%1»</translation>
     </message>
     <message>
+        <location filename="core/sample/sound.cpp" line="70"/>
+        <source>File not supported: &quot;%1&quot;</source>
+        <oldsource>File not supported &quot;%1&quot;</oldsource>
+        <translation>Файл не поддерживается: «%1»</translation>
+    </message>
+    <message>
         <location filename="dialogs/dialog_about.cpp" line="125"/>
         <source>Created by</source>
         <translation>Автор</translation>
@@ -6037,8 +6043,6 @@ Other soundfont editors might display other units.</source>
         <source>Couldn&apos;t configure %n sample(s).</source>
         <oldsource>Couln&apos;t configure %n sample(s).</oldsource>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>

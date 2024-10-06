@@ -66,6 +66,9 @@ bool Sound::setFileName(QString qStr, bool tryFindRootKey)
         case SampleReader::FILE_NOT_READABLE:
             _error = QObject::tr("Cannot open file \"%1\"").arg(_fileName);
             break;
+        case SampleReader::FILE_NOT_SUPPORTED:
+            _error = QObject::tr("File not supported: \"%1\"").arg(_fileName);
+            break;
         case SampleReader::FILE_OK:
             isOk = true;
             break;

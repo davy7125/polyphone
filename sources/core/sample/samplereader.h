@@ -35,7 +35,8 @@ public:
         FILE_OK,
         FILE_NOT_FOUND,
         FILE_NOT_READABLE,
-        FILE_CORRUPT
+        FILE_CORRUPT,
+        FILE_NOT_SUPPORTED
     };
 
     SampleReader(QString filename) :
