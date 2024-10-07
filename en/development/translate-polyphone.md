@@ -8,7 +8,7 @@ Everyone can help in this process.
 ### Translation file
 
 
-Download the translation package corresponding to the language you want to translate from this [page](download/translations).
+Download the translation package corresponding to the language you want to translate from this [page](software/translations).
 If the language is not in the list yet, use the [contact](contact) form to ask for it (you just need to specify the new language you want).
 You will quickly be provided with a new translation package.
 
@@ -70,5 +70,5 @@ You will now be able to review your translation.
 ## Submitting the translation
 
 
-Once you are done (or bothered!), send the .ts file (not .qm!) you were editing to <contact@polyphone-soundfonts.com>.
-The translation package of this [page](download/translations) will be updated.
+Once you are done (or bothered!), send the .ts file (not .qm!) you were editing to <contact@polyphone.io>.
+The translation package of this [page](software/translations) will be updated.

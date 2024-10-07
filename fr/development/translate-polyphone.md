@@ -8,7 +8,7 @@ Tout le monde peut aider dans une traduction.
 ### Fichier de traduction
 
 
-Téléchargez l'archive de traduction correspondant à la langue que vous souhaitez sur cette [page](download/translations).
+Téléchargez l'archive de traduction correspondant à la langue que vous souhaitez sur cette [page](software/translations).
 Si la langue n'est pas dans la liste, utilisez le formulaire de [contact](contact) pour la demander (vous avez simplement besoin de mentionner la langue désirée).
 Une nouvelle archive de traduction vous sera rapidement fournie.
 
@@ -70,5 +70,5 @@ Vous serez maintenant en mesure de passer en revue la traduction.
 ## Soumettre la traduction
 
 
-Lorsque vous avez terminé (ou si vous en avez marre&nbsp;!), envoyez le fichier .ts (pas le fichier compilé .qm&nbsp;!) que vous étiez en train d'éditer à <contact@polyphone-soundfonts.com>.
-L'archive de traduction sur cette [page](download/translations) sera mis à jour.
+Lorsque vous avez terminé (ou si vous en avez marre&nbsp;!), envoyez le fichier .ts (pas le fichier compilé .qm&nbsp;!) que vous étiez en train d'éditer à <contact@polyphone.io>.
+L'archive de traduction sur cette [page](software/translations) sera mis à jour.
