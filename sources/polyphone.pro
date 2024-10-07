@@ -42,7 +42,8 @@ TRANSLATIONS = polyphone_en.ts \
     polyphone_da.ts \
     polyphone_ru.ts \
     polyphone_ko.ts \
-    polyphone_ca.ts
+    polyphone_ca.ts \
+    polyphone_pl.ts
 PRECOMPILED_HEADER = precompiled_header.h
 CONFIG += lrelease embed_translations precompiled_header
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical

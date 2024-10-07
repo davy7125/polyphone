@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="nl_NL">
+<TS version="2.1" language="nl_NL">
 <context>
     <name>AbstractInputParser</name>
     <message>
@@ -2302,6 +2302,7 @@ repository</source>
         <source>%n element(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
 </context>
@@ -2329,19 +2330,19 @@ repository</source>
         <location filename="editor/footers/footersf2.cpp" line="65"/>
         <source>GB</source>
         <comment>giga byte</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">GB</translation>
     </message>
     <message>
         <location filename="editor/footers/footersf2.cpp" line="70"/>
         <source>MB</source>
         <comment>mega byte</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MB</translation>
     </message>
     <message>
         <location filename="editor/footers/footersf2.cpp" line="75"/>
         <source>kB</source>
         <comment>kilo byte</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">kB</translation>
     </message>
 </context>
 <context>
@@ -2636,7 +2637,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="211"/>
         <source>Untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zonder titel</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="220"/>
@@ -2825,6 +2826,7 @@ default mod.</source>
         <location filename="editor/modulator/modulatoreditor.cpp" line="262"/>
         <source>%n modulator(s):</source>
         <translation type="unfinished">
+            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -3366,6 +3368,7 @@ to display its division ranges</source>
         <location filename="editor/pagesf2.cpp" line="228"/>
         <source>%1 (unused: %n)</source>
         <translation type="unfinished">
+            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -5389,12 +5392,14 @@ Other soundfont editors might display other units.</source>
         <source>%n sample(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="110"/>
         <source>%n instrument(s)</source>
         <translation type="unfinished">
+            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -5905,6 +5910,7 @@ Other soundfont editors might display other units.</source>
         <oldsource>Couln&apos;t configure %n sample(s).</oldsource>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
 </context>
@@ -6248,6 +6254,7 @@ Other soundfont editors might display other units.</source>
         <source>%n modulator(s) has(have) been deleted.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -6460,7 +6467,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="62"/>
         <source>Untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zonder titel</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="148"/>
