@@ -79,6 +79,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
     _credit.addTranslator(tr("JuliusLC", "translation needed if the alphabet is not the same (cyrillic for instance)"), "wikter@gmail.com"); // Spanish
     _credit.addTranslator(tr("Magson", "translation needed if the alphabet is not the same (cyrillic for instance)"), "magsom@qq.com"); // Chinese
     _credit.addTranslator(tr("Pavel Fric", "translation needed if the alphabet is not the same (cyrillic for instance)"), "pavelfric@seznam.cz"); // Czech
+    _credit.addTranslator(tr("Spessasus", "translation needed if the alphabet is not the same (cyrillic for instance)"), "spesekspesek@gmail.com"); // Polish
     _credit.addTranslator(tr("Steve Clarke", "translation needed if the alphabet is not the same (cyrillic for instance)"), "stevertyu@yahoo.com"); // English
 
     ui->textBrowser->setHtml(_credit.getText());
