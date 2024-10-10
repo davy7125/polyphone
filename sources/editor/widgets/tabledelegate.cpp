@@ -378,6 +378,10 @@ void TableDelegate::getLimits(int numRow, double &min, double &max) const
     int rawMin, rawMax;
     Attribute::getLimit(champ, isPrst, rawMin, rawMax);
 
+    // Value -1 can be excluded as it refers to "not set"
+    if (champ == champ_overridingRootKey || champ == champ_keynum || champ == champ_velocity)
+        rawMin = 0;
+
     // Convert to real values
     AttributeValue val;
     val.shValue = rawMin;

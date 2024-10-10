@@ -56,6 +56,12 @@ QValidator::State SpinBoxKey::validate(QString &input, int &pos) const
             !textToConvert.isEmpty())
         textToConvert = textToConvert.split(' ').first();
 
+    // Accept if this is a number, even exceeding the range [0;127]
+    bool ok;
+    input.toInt(&ok);
+    if (ok)
+        return QValidator::Acceptable;
+
     // Get the key number
     int numKey = ContextManager::keyName()->getKeyNum(input);
     if (numKey < 0 || numKey > 127)
@@ -65,6 +71,19 @@ QValidator::State SpinBoxKey::validate(QString &input, int &pos) const
 
 int SpinBoxKey::valueFromText(const QString &text) const
 {
+    bool ok;
+
+    // Limit the range if the string is an int
+    int key = text.toInt(&ok);
+    if (ok)
+    {
+        if (key < 0)
+            return 0;
+        if (key > 127)
+            return 127;
+        return key;
+    }
+
     if (text.isEmpty())
         return _isNullable ? -1 : 60;
     int result = ContextManager::keyName()->getKeyNum(text.split(' ').first());

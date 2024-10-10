@@ -1219,14 +1219,36 @@ AttributeValue PageTable::attributeFromString(AttributeType champ, bool isPrst, 
         }
         else
         {
-            val1 = ContextManager::keyName()->getKeyNum(txtLeft);
-            val2 = ContextManager::keyName()->getKeyNum(txtRight);
-            ok = (val1 != -1) && (val2 != -1);
+            val1 = txtLeft.toInt(&ok);
+            if (!ok)
+            {
+                val1 = ContextManager::keyName()->getKeyNum(txtLeft);
+                ok = val1 != -1;
+            }
+
+            if (ok)
+            {
+                val2 = txtRight.toInt(&ok);
+                if (!ok)
+                {
+                    val2 = ContextManager::keyName()->getKeyNum(txtRight);
+                    ok = val2 != -1;
+                }
+            }
         }
 
         if (txtLeft.isEmpty())
             val1 = 0;
         if (txtRight.isEmpty())
+            val2 = 127;
+
+        if (val1 < 0)
+            val1 = 0;
+        else if (val1 > 127)
+            val1 = 127;
+        if (val2 < 0)
+            val2 = 0;
+        else if (val2 > 127)
             val2 = 127;
 
         if (val1 > val2)
@@ -1256,13 +1278,18 @@ AttributeValue PageTable::attributeFromString(AttributeType champ, bool isPrst, 
     case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:
     case champ_keynumToModEnvDecay: case champ_keynumToVolEnvDecay:
     case champ_freqModLFO: case champ_freqVibLFO:
-    case champ_exclusiveClass: case champ_velocity:
+    case champ_exclusiveClass:
     case champ_chorusEffectsSend: case champ_reverbEffectsSend:
     case champ_startAddrsOffset: case champ_startloopAddrsOffset:
     case champ_endAddrsOffset: case champ_endloopAddrsOffset:
     case champ_startAddrsCoarseOffset: case champ_startloopAddrsCoarseOffset:
     case champ_endAddrsCoarseOffset: case champ_endloopAddrsCoarseOffset:
         value = Attribute::fromRealValue(champ, isPrst, QLocale::system().toDouble(strValue, &ok));
+        break;
+    case champ_velocity:
+        value = Attribute::fromRealValue(champ, isPrst, QLocale::system().toDouble(strValue, &ok));
+        if (value.shValue < 0)
+            value.shValue = 0;
         break;
     case champ_sampleModes: {
         int iTmp = Utils::round16(QLocale::system().toDouble(strValue, &ok));
@@ -1271,8 +1298,19 @@ AttributeValue PageTable::attributeFromString(AttributeType champ, bool isPrst, 
         value.wValue = static_cast<quint16>(iTmp);
     } break;
     case champ_overridingRootKey: case champ_keynum: {
-        int keyNum = ContextManager::keyName()->getKeyNum(strValue);
-        ok = (keyNum > -1 && keyNum <= 127);
+        int keyNum = strValue.toInt(&ok);
+        if (ok)
+        {
+            if (keyNum < 0)
+                keyNum = 0;
+            else if (keyNum > 127)
+                keyNum = 127;
+        }
+        else
+        {
+            keyNum = ContextManager::keyName()->getKeyNum(strValue);
+            ok = (keyNum > -1 && keyNum <= 127);
+        }
         value.shValue = ok ? static_cast<qint16>(keyNum) : 0;
     } break;
     default:

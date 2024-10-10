@@ -299,7 +299,17 @@ QString SpinBoxVelocityRange::getText(int value) const
 
 int SpinBoxVelocityRange::getValue(QString &text, bool &ok) const
 {
-    return text.toInt(&ok);
+    int vel = text.toInt(&ok);
+    if (ok)
+    {
+        if (vel < 0)
+            return 0;
+        if (vel > 127)
+            return 127;
+        return vel;
+    }
+
+    return -1;
 }
 
 QString SpinBoxKeyRange::getText(int value) const
@@ -309,7 +319,18 @@ QString SpinBoxKeyRange::getText(int value) const
 
 int SpinBoxKeyRange::getValue(QString &text, bool &ok) const
 {
-    int key = ContextManager::keyName()->getKeyNum(text);
+    // If the text is an int, possibly change the result
+    int key = text.toInt(&ok);
+    if (ok)
+    {
+        if (key < 0)
+            return 0;
+        if (key > 127)
+            return 127;
+        return key;
+    }
+
+    key = ContextManager::keyName()->getKeyNum(text);
     ok = (key != -1);
     return key;
 }
