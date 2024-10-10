@@ -120,3 +120,8 @@ AttributeType TableWidgetPrst::getChamp(int row)
         return _fieldList[row];
     return champ_unknown;
 }
+
+bool TableWidgetPrst::isInstrumentLevel()
+{
+    return false;
+}

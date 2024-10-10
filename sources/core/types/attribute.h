@@ -229,6 +229,7 @@ public:
     static AttributeValue fromRealValue(AttributeType champ, bool isPrst, double realValue);
 
     // Limit
+    static void getLimit(AttributeType champ, bool isPrst, int &min, int &max);
     static AttributeValue limit(AttributeType champ, AttributeValue value, bool isPrst);
 
     // Textual description

@@ -69,19 +69,29 @@ AttributeValue Division::getGen(AttributeType champ)
 
 void Division::setGen(AttributeType champ, AttributeValue value)
 {
-    if (champ < champ_endOper)
+    if (champ >= champ_endOper)
+        return;
+
+    if (value.shValue == -1 && (champ == champ_overridingRootKey || champ == champ_keynum || champ == champ_velocity))
     {
-        _attributeSet[champ] = true;
-        _attributeValues[champ] = value;
-        if (champ == champ_sampleID || champ == champ_instrument)
-            notifyUpdate();
+        // Reset the parameter instead
+        resetGen(champ);
+        return;
     }
+
+    _attributeSet[champ] = true;
+    _attributeValues[champ] = value;
+    if (champ == champ_sampleID || champ == champ_instrument)
+        notifyUpdate();
+
 }
 
 void Division::resetGen(AttributeType champ)
 {
-    if (champ < champ_endOper)
-        _attributeSet[champ] = false;
+    if (champ >= champ_endOper)
+        return;
+
+    _attributeSet[champ] = false;
 }
 
 int Division::addMod()
@@ -98,12 +108,11 @@ Modulator * Division::getMod(int index)
 
 bool Division::deleteMod(int index)
 {
-    if (index < _modulators.indexCount())
-    {
-        delete _modulators.takeAtIndex(index);
-        return true;
-    }
-    return false;
+    if (index >= _modulators.indexCount())
+        return false;
+
+    delete _modulators.takeAtIndex(index);
+    return true;
 }
 
 int Division::childCount() const

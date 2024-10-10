@@ -55,6 +55,7 @@ public:
     // Association champ - ligne
     virtual AttributeType getChamp(int row) = 0;
     virtual int getRow(AttributeType champ) = 0;
+    virtual bool isInstrumentLevel() = 0;
 
     static QPixmap getPixMap(QColor backgroundColor, QColor dotColor);
 
@@ -80,7 +81,6 @@ private:
     QTimer *_timer;
     QList<QColor> _listColors;
     TableDelegate * _tableDelegate;
-    bool isInstrumentLevel();
     bool isGrayed(int numRow);
 
     void copy();

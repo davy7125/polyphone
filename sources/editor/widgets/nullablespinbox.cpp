@@ -35,18 +35,36 @@ QValidator::State NullableSpinBox::validate(QString &input, int &pos) const
 {
     Q_UNUSED(pos);
 
-    // An empty input is OK
+    // An empty input is "Acceptable"
     if (input.isEmpty())
         return QValidator::Acceptable;
 
-    return QSpinBox::validate(input, pos);
+    // "Intermediate" if we start writing a negative number
+    if (input == "-")
+        return QValidator::Intermediate;
+
+    // All values are "Acceptable", the other is invalid
+    bool ok;
+    input.toInt(&ok);
+    return ok ? QValidator::Acceptable : QValidator::Invalid;
 }
 
 int NullableSpinBox::valueFromText(const QString &text) const
 {
     if (text.isEmpty())
         return 0;
-    return QSpinBox::valueFromText(text);
+
+    bool ok;
+    int value = text.toInt(&ok);
+    if (!ok)
+        return 0;
+
+    if (value < this->minimum())
+        return this->minimum();
+    if (value > this->maximum())
+        return this->maximum();
+
+    return value;
 }
 
 QString NullableSpinBox::textFromValue(int val) const
@@ -68,18 +86,44 @@ QValidator::State NullableDoubleSpinBox::validate(QString &input, int &pos) cons
 {
     Q_UNUSED(pos);
 
-    // An empty input is OK
+    // An empty input is "Acceptable"
     if (input.isEmpty())
         return QValidator::Acceptable;
 
-    return QDoubleSpinBox::validate(input, pos);
+    // "Intermediate" if we start writing a negative number
+    if (input == "-")
+        return QValidator::Intermediate;
+
+    // Coma accepted as a decimal separator
+    QString tmp = input; // Work on a copy
+    tmp = tmp.replace(",", ".");
+
+    // All values are "Acceptable", the other is invalid
+    bool ok;
+    tmp.toDouble(&ok);
+    return ok ? QValidator::Acceptable : QValidator::Invalid;
 }
 
 double NullableDoubleSpinBox::valueFromText(const QString &text) const
 {
     if (text.isEmpty())
         return 0.0;
-    return QDoubleSpinBox::valueFromText(text);
+
+    // Coma accepted as a decimal separator
+    QString tmp = text; // Work on a copy
+    tmp = tmp.replace(",", ".");
+
+    bool ok;
+    double value = tmp.toDouble(&ok);
+    if (!ok)
+        return 0.0;
+
+    if (value < this->minimum())
+        return this->minimum();
+    if (value > this->maximum())
+        return this->maximum();
+
+    return value;
 }
 
 QString NullableDoubleSpinBox::textFromValue(double val) const

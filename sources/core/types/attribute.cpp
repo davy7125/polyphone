@@ -39,7 +39,7 @@ QList<AttributeType> Attribute::s_attributesForPrstMod = QList<AttributeType>()
         << champ_delayModLFO << champ_freqModLFO
         << champ_modLfoToPitch << champ_modLfoToVolume << champ_modLfoToFilterFc
         << champ_delayVibLFO << champ_freqVibLFO
-        << champ_vibLfoToPitch;;
+        << champ_vibLfoToPitch;
 QList<AttributeType> Attribute::s_attributesForInstMod = QList<AttributeType>()
         << champ_overridingRootKey // Extra stuff for inst
         << s_attributesForPrstMod
@@ -308,110 +308,149 @@ AttributeValue Attribute::getDefaultStoredValue(AttributeType champ, bool isPrst
     return value;
 }
 
-AttributeValue Attribute::limit(AttributeType champ, AttributeValue value, bool isPrst)
+void Attribute::getLimit(AttributeType champ, bool isPrst, int &min, int &max)
 {
     switch (champ)
     {
     case champ_chPitchCorrection:
-        value.cValue = limit(value.cValue, -99, 99);
+        min = -99;
+        max = 99;
         break;
+    case champ_exclusiveClass:
     case champ_byOriginalPitch:
-        value.bValue = limit(value.bValue, 0, 127);
-        break;
     case champ_keyRange: case champ_velRange:
-        value.rValue.byLo = limit(value.rValue.byLo, 0, 127);
-        value.rValue.byHi = limit(value.rValue.byHi, 0, 127);
+        min = 0;
+        max = 127;
         break;
     case champ_coarseTune:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -240, 240) :
-                    limit(value.shValue, -120, 120);
+        min = isPrst ? -240 : -120;
+        max = isPrst ? 240 : 120;
         break;
     case champ_fineTune:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -198, 198) :
-                    limit(value.shValue, -99, 99);
+        min = isPrst ? -198 : -99;
+        max = isPrst ? 198 : 99;
         break;
     case champ_scaleTuning:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -1200, 1200) :
-                    limit(value.shValue, 0, 1200);
+        min = isPrst ? -1200 : 0;
+        max = 1200;
         break;
     case champ_modEnvToPitch: case champ_modLfoToPitch: case champ_vibLfoToPitch:
     case champ_modLfoToFilterFc: case champ_modEnvToFilterFc:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -24000, 24000) :
-                    limit(value.shValue, -12000, 12000);
+        min = isPrst ? -24000 : -12000;
+        max = isPrst ? 24000 : 12000;
         break;
     case champ_pan:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -1000, 1000) :
-                    limit(value.shValue, -500, 500);
+        min = isPrst ? -1000 : -500;
+        max = isPrst ? 1000 : 500;
         break;
     case champ_sampleModes:
-        value.wValue = limit(value.wValue, 0, 3);
+        min = 0;
+        max = 3;
         break;
     case champ_initialFilterQ:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -960, 960) :
-                    limit(value.shValue, 0, 960);
+        min = isPrst ? -960 : 0;
+        max = 960;
         break;
     case champ_modLfoToVolume:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -1920, 1920) :
-                    limit(value.shValue, -960, 960);
-        break;
-    case champ_exclusiveClass:
-        value.wValue = limit(value.wValue, 0, 127);
+        min = isPrst ? -1920 : -960;
+        max = isPrst ? 1920 : 960;
         break;
     case champ_velocity: case champ_overridingRootKey: case champ_keynum:
-        value.shValue = limit(value.shValue, -1, 127);
+        min = -1; // -1 = default value which means "not set"
+        max = 127;
         break;
     case champ_startloopAddrsCoarseOffset: case champ_endloopAddrsCoarseOffset:
     case champ_startAddrsCoarseOffset: case champ_endAddrsCoarseOffset:
     case champ_startloopAddrsOffset: case champ_startAddrsOffset:
     case champ_endloopAddrsOffset: case champ_endAddrsOffset:
-        value.shValue = limit(value.shValue, -32767, 32767);
+        min = -32767;
+        max = 32767;
         break;
     case champ_delayModEnv: case champ_delayVolEnv:
     case champ_holdModEnv: case champ_holdVolEnv:
     case champ_delayModLFO: case champ_delayVibLFO:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -21000, 21000) :
-                    limit(value.shValue, -12000, 5000);
+        min = isPrst ? -21000 : -12000;
+        max = isPrst ? 21000 : 5000;
         break;
     case champ_initialFilterFc:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -21000, 21000) :
-                    limit(value.shValue, 1500, 13500);
+        min = isPrst ? -21000 : 1500;
+        max = isPrst ? 21000 : 13500;
         break;
     case champ_freqModLFO: case champ_freqVibLFO:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -21000, 21000) :
-                    limit(value.shValue, -16000, 4500);
+        min = isPrst ? -21000 : -16000;
+        max = isPrst ? 21000 : 4500;
         break;
     case champ_attackModEnv: case champ_attackVolEnv:
     case champ_decayModEnv: case champ_decayVolEnv:
     case champ_releaseModEnv: case champ_releaseVolEnv:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -21000, 21000) :
-                    limit(value.shValue, -12000, 8000);
+        min = isPrst ? -21000 : -12000;
+        max = isPrst ? 21000 : 8000;
         break;
     case champ_sustainVolEnv: case champ_initialAttenuation:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -1440, 1440) :
-                    limit(value.shValue, 0, 1440);
+        min = isPrst ? -1440 : 0;
+        max = 1440;
         break;
     case champ_sustainModEnv: case champ_reverbEffectsSend: case champ_chorusEffectsSend:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -1000, 1000) :
-                    limit(value.shValue, 0, 1000);
+        min = isPrst ? -1000 : 0;
+        max = 1000;
         break;
     case champ_keynumToModEnvDecay: case champ_keynumToVolEnvDecay:
     case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:
-        value.shValue = isPrst ?
-                    limit(value.shValue, -2400, 2400) :
-                    limit(value.shValue, -1200, 1200);
+        min = isPrst ? -2400 : -1200;
+        max = isPrst ? 2400 : 1200;
+        break;
+    default:
+        break;
+    }
+}
+
+AttributeValue Attribute::limit(AttributeType champ, AttributeValue value, bool isPrst)
+{
+    int min, max;
+    getLimit(champ, isPrst, min, max);
+
+    switch (champ)
+    {
+    case champ_chPitchCorrection:
+        value.cValue = limit(value.cValue, min, max);
+        break;
+    case champ_byOriginalPitch:
+        value.bValue = limit(value.bValue, min, max);
+        break;
+    case champ_keyRange: case champ_velRange:
+        value.rValue.byLo = limit(value.rValue.byLo, min, max);
+        value.rValue.byHi = limit(value.rValue.byHi, min, max);
+        break;
+    case champ_coarseTune:
+    case champ_fineTune:
+    case champ_scaleTuning:
+    case champ_modEnvToPitch: case champ_modLfoToPitch: case champ_vibLfoToPitch:
+    case champ_modLfoToFilterFc: case champ_modEnvToFilterFc:
+    case champ_pan:
+    case champ_initialFilterQ:
+    case champ_modLfoToVolume:
+    case champ_velocity: case champ_overridingRootKey: case champ_keynum:
+    case champ_startloopAddrsCoarseOffset: case champ_endloopAddrsCoarseOffset:
+    case champ_startAddrsCoarseOffset: case champ_endAddrsCoarseOffset:
+    case champ_startloopAddrsOffset: case champ_startAddrsOffset:
+    case champ_endloopAddrsOffset: case champ_endAddrsOffset:
+    case champ_delayModEnv: case champ_delayVolEnv:
+    case champ_holdModEnv: case champ_holdVolEnv:
+    case champ_delayModLFO: case champ_delayVibLFO:
+    case champ_initialFilterFc:
+    case champ_freqModLFO: case champ_freqVibLFO:
+    case champ_attackModEnv: case champ_attackVolEnv:
+    case champ_decayModEnv: case champ_decayVolEnv:
+    case champ_releaseModEnv: case champ_releaseVolEnv:
+    case champ_sustainVolEnv: case champ_initialAttenuation:
+    case champ_sustainModEnv: case champ_reverbEffectsSend: case champ_chorusEffectsSend:
+    case champ_keynumToModEnvDecay: case champ_keynumToVolEnvDecay:
+    case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:
+        value.shValue = limit(value.shValue, min, max);
+        break;
+    case champ_sampleModes:
+    case champ_exclusiveClass:
+        value.wValue = limit(value.wValue, min, max);
         break;
     default:
         break;

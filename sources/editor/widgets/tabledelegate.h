@@ -26,7 +26,7 @@
 #define TABLEDELEGATE_H
 
 #include <QStyledItemDelegate>
-class QTableWidget;
+class TableWidget;
 
 // Editors within the table
 class TableDelegate : public QStyledItemDelegate
@@ -34,7 +34,7 @@ class TableDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    TableDelegate(QTableWidget * table, QObject * parent = nullptr);
+    TableDelegate(TableWidget * table, QObject * parent = nullptr);
     bool isEditing() { return _isEditing; }
     void resetModDisplay();
     void updateModDisplay(int column, QList<int> rows);
@@ -49,9 +49,11 @@ protected:
 #endif
 
 private:
-    void getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow, bool &isLoop,
+    void getType(int numRow, bool &isNumeric, bool &isKey, int &nbDecimales, bool &isLoop,
                  bool &isFixed, bool &isAttenuation) const;
-    QTableWidget * _table;
+    void getLimits(int numRow, int &min, int &max) const;
+    void getLimits(int numRow, double &min, double &max) const;
+    TableWidget * _table;
 
     mutable bool _isEditing;
     QMap<int, QList<int> > _modDisplay;

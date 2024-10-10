@@ -28,14 +28,14 @@
 #include "nullablespinbox.h"
 #include "comboboxloopmode.h"
 #include "contextmanager.h"
-#include <QTableWidget>
+#include "tablewidget.h"
 #include <QApplication>
 #include <QPainter>
 
 const char * TableDelegate::DECO_PROPERTY = "deco";
 const float TableDelegate::MOD_BORDER_WIDTH = 2;
 
-TableDelegate::TableDelegate(QTableWidget * table, QObject * parent): QStyledItemDelegate(parent),
+TableDelegate::TableDelegate(TableWidget * table, QObject * parent): QStyledItemDelegate(parent),
     _table(table),
     _isEditing(false)
 {
@@ -57,7 +57,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
 
     bool isNumeric, isKey, isLoop, isFixed, isAttenuation;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed, isAttenuation);
+    getType(index.row(), isNumeric, isKey, nbDecimales, isLoop, isFixed, isAttenuation);
     if (isFixed)
         return nullptr;
 
@@ -89,8 +89,10 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
     else if (nbDecimales > 0)
     {
         NullableDoubleSpinBox * spin = new NullableDoubleSpinBox(parent);
-        spin->setMinimum(-1000000);
-        spin->setMaximum(1000000);
+        double min, max;
+        this->getLimits(index.row(), min, max);
+        spin->setMinimum(min);
+        spin->setMaximum(max);
         spin->setSingleStep(isAttenuation ? 0.04 : .1);
         spin->setStyleSheet("QDoubleSpinBox{ border: 3px solid " + highlightColor.name() + "; }" +
                             "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
@@ -100,8 +102,10 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
     else
     {
         QSpinBox * spin = new NullableSpinBox(parent);
-        spin->setMinimum(-2147483647);
-        spin->setMaximum(2147483647);
+        int min, max;
+        this->getLimits(index.row(), min, max);
+        spin->setMinimum(min);
+        spin->setMaximum(max);
         spin->setStyleSheet("QSpinBox{ border: 3px solid " + highlightColor.name() + "; }" +
                             "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
         widget = spin;
@@ -114,7 +118,7 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
 {
     bool isNumeric, isKey, isLoop, isFixed, isAttenuation;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed, isAttenuation);
+    getType(index.row(), isNumeric, isKey, nbDecimales, isLoop, isFixed, isAttenuation);
 
     if (!isNumeric)
     {
@@ -168,7 +172,7 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
 {
     bool isNumeric, isKey, isLoop, isFixed, isAttenuation;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed, isAttenuation);
+    getType(index.row(), isNumeric, isKey, nbDecimales, isLoop, isFixed, isAttenuation);
 
     if (!isNumeric)
     {
@@ -209,7 +213,7 @@ void TableDelegate::destroyEditor(QWidget * editor, const QModelIndex & index) c
 {
     bool isNumeric, isKey, isLoop, isFixed, isAttenuation;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed, isAttenuation);
+    getType(index.row(), isNumeric, isKey, nbDecimales, isLoop, isFixed, isAttenuation);
     QStyledItemDelegate::destroyEditor(editor, index);
 }
 #endif
@@ -218,7 +222,7 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
 {
     bool isNumeric, isKey, isLoop, isFixed, isAttenuation;
     int nbDecimales;
-    getType(isNumeric, isKey, nbDecimales, index.row(), isLoop, isFixed, isAttenuation);
+    getType(index.row(), isNumeric, isKey, nbDecimales, isLoop, isFixed, isAttenuation);
 
     if (isLoop)
     {
@@ -276,7 +280,7 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
     }
 }
 
-void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow, bool &isLoop,
+void TableDelegate::getType(int numRow, bool &isNumeric, bool &isKey, int &nbDecimales, bool &isLoop,
                             bool &isFixed, bool &isAttenuation) const
 {
     isNumeric = true;
@@ -286,7 +290,7 @@ void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int 
     isAttenuation = false;
     nbDecimales = 0;
 
-    if (_table->rowCount() == 50)
+    if (_table->isInstrumentLevel())
     {
         // Table instrument
         switch (numRow - 1)
@@ -353,6 +357,34 @@ void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int 
             break;
         }
     }
+}
+
+void TableDelegate::getLimits(int numRow, int &min, int &max) const
+{
+    // Min and max as double values
+    double dMin, dMax;
+    getLimits(numRow, dMin, dMax);
+
+    // Convert to int
+    min = (int)(dMin + 0.5 - (dMin < 0));
+    max = (int)(dMax + 0.5 - (dMax < 0));
+}
+
+void TableDelegate::getLimits(int numRow, double &min, double &max) const
+{
+    // Get min / max raw values of the parameter
+    AttributeType champ = _table->getChamp(numRow);
+    bool isPrst = !_table->isInstrumentLevel();
+    int rawMin, rawMax;
+    Attribute::getLimit(champ, isPrst, rawMin, rawMax);
+
+    // Convert to real values
+    AttributeValue val;
+    val.shValue = rawMin;
+    min = Attribute::toRealValue(champ, isPrst, val);
+
+    val.shValue = rawMax;
+    max = Attribute::toRealValue(champ, isPrst, val);
 }
 
 void TableDelegate::resetModDisplay()

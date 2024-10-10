@@ -59,8 +59,9 @@ public:
     ~TableWidgetInst();
 
     // Association champ - ligne
-    AttributeType getChamp(int row);
-    int getRow(AttributeType champ);
+    AttributeType getChamp(int row) override;
+    int getRow(AttributeType champ) override;
+    bool isInstrumentLevel() override;
 
 private:
     QList<AttributeType> _fieldList;

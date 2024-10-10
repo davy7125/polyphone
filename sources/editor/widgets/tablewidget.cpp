@@ -513,14 +513,7 @@ void TableWidget::selectCells(EltID id, QList<AttributeType> attributes)
     this->blockSignals(false);
 }
 
-bool TableWidget::isInstrumentLevel()
-{
-    // Not nice...
-    return (this->rowCount() == 50);
-}
-
 bool TableWidget::isGrayed(int numRow)
 {
-    // Not nice...
-    return numRow == 6 || numRow == 44 || numRow == 47;
+    return getChamp(numRow) > champ_endOper;
 }
