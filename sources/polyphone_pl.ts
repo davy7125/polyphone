@@ -130,7 +130,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="497"/>
         <source>Chorus (%)</source>
-        <translation>Pogłos (%)</translation>
+        <translation>Chór (%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="500"/>
@@ -180,7 +180,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="519"/>
         <source>Vib LFO freq (×)</source>
-        <translation>Częst osc. vibrato (×)</translation>
+        <translation>Częst. osc. vibrato (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="520"/>
@@ -190,133 +190,133 @@
     <message>
         <location filename="core/types/attribute.cpp" line="523"/>
         <source>Mod env delay (×)</source>
-        <translation>Opóźnienie obwiedni modulacji (×)</translation>
+        <translation>Opóźnienie obw. mod. (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="524"/>
         <source>Mod env delay (s)</source>
-        <translation>Opóźnienie obwiedni modulacji (s)</translation>
+        <translation>Opóźnienie obw. mod. (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="527"/>
         <source>Mod env attack (×)</source>
-        <translation>Atak obwiedni modulacji (×)</translation>
+        <translation>Atak obw. mod. (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="528"/>
         <source>Mod env attack (s)</source>
-        <translation>Atak obwiedni modulacji (s)</translation>
+        <translation>Atak obw. mod. (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="531"/>
         <source>Mod env hold (×)</source>
-        <translation>Utrzymanie obwiedni modulacji (×)</translation>
+        <translation>Utrzymanie obw. mod. (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="532"/>
         <source>Mod env hold (s)</source>
-        <translation>Utrzymanie obwiedni modulacji (×s)</translation>
+        <translation>Utrzymanie obw. mod. (×s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="535"/>
         <source>Mod env decay (×)</source>
-        <translation>Upadek obwiedni modulacji (×)</translation>
+        <translation>Upadek obw. mod. (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="536"/>
         <source>Mod env decay (s)</source>
-        <translation>Upadek obwiedni modulacji (s)</translation>
+        <translation>Upadek obw. mod. (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="539"/>
         <source>Mod env sustain (%)</source>
-        <translation>Wybrzmiewanie obwiedni modulacji (%)</translation>
+        <translation>Wybrzmiewanie obw. mod. (%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="542"/>
         <source>Mod env release (×)</source>
-        <translation>Wyciszenie obwiedni modulacji (×)</translation>
+        <translation>Wyciszenie obw. mod. (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="543"/>
         <source>Mod env release (s)</source>
-        <translation>Wyciszenie obwiedni modulacji (s)</translation>
+        <translation>Wyciszenie obw. mod. (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="546"/>
         <source>Key → Mod env hold (c)</source>
-        <translation>Klawisz → Utrzymanie obwiedni modulacji (c)</translation>
+        <translation>Klaw. → Utrzymanie obw. mod. (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="549"/>
         <source>Key → Mod env decay (c)</source>
-        <translation>Klawisz → Upadek obwiedni modulacji (c)</translation>
+        <translation>Klaw. → Upadek obw. mod. (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="552"/>
         <source>Vol env delay (×)</source>
-        <translation>Opóźnienie obwiedni głośności (×)</translation>
+        <translation>Opóźnienie obw. głośń. (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="553"/>
         <source>Vol env delay (s)</source>
-        <translation>Opóźnienie obwiedni głośności (s)</translation>
+        <translation>Opóźnienie obw. głośń. (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="556"/>
         <source>Vol env attack (×)</source>
-        <translation>Atak obwiedni głośności (×)</translation>
+        <translation>Atak obw. głośń. (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="557"/>
         <source>Vol env attack (s)</source>
-        <translation>Atak obwiedni głośności (s)</translation>
+        <translation>Atak obw. głośń. (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="560"/>
         <source>Vol env hold (×)</source>
-        <translation>Utrzymanie obwiedni głośności (×)</translation>
+        <translation>Utrzymanie obw. głośń. (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="561"/>
         <source>Vol env hold (s)</source>
-        <translation>Utrzymanie obwiedni głośności (s)</translation>
+        <translation>Utrzymanie obw. głośń. (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="564"/>
         <source>Vol env decay (×)</source>
-        <translation>Upadek obwiedni głośności (×)</translation>
+        <translation>Upadek obw. głośń. (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="565"/>
         <source>Vol env decay (s)</source>
-        <translation>Zanikanie obwiedni głośności (s)</translation>
+        <translation>Zanikanie obw. głośń. (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="568"/>
         <source>Vol env sustain (dB)</source>
-        <translation>Wybrzmiewanie obwiedni głośności (dB)</translation>
+        <translation>Wybrzmiewanie obw. głośń. (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="571"/>
         <source>Vol env release (×)</source>
         <translatorcomment>There really isn&apos;t a direct translation to &quot;envelope&quot; in polish that I can think of. I had to change it so it still makes sense</translatorcomment>
-        <translation>Zanikanie obwiedni głośności (×)</translation>
+        <translation>Zanikanie obw. głośń. (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="572"/>
         <source>Vol env release (s)</source>
-        <translation>Wyciszenie obwiedni głośności (dB)</translation>
+        <translation>Wyciszenie obw. głośń. (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="575"/>
         <source>Key → Vol env hold (c)</source>
-        <translation>Klawisz → Utrzymanie obwiedni głośności (c)</translation>
+        <translation>klaw. → Utrzymanie obw. głośń. (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="578"/>
         <source>Key → Vol env decay (c)</source>
-        <translation>Klawisz → Upadek obwiedni głośności (c)</translation>
+        <translation>klaw. → Upadek obw. głośń. (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="581"/>
@@ -2949,7 +2949,7 @@ domyślnego mod.</translation>
     <message>
         <location filename="editor/pageenvelope.ui" line="181"/>
         <source>Key → Decay</source>
-        <translation>Klawisz → Upadek</translation>
+        <translation>klaw. → Upadek</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="263"/>
@@ -2975,7 +2975,7 @@ domyślnego mod.</translation>
     <message>
         <location filename="editor/pageenvelope.ui" line="391"/>
         <source>Key → Hold</source>
-        <translation>Klawisz → Przytrzymanie</translation>
+        <translation>klaw. → Przytrzymanie</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="420"/>
