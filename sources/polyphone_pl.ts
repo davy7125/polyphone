@@ -311,12 +311,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="575"/>
         <source>Key → Vol env hold (c)</source>
-        <translation>klaw. → Utrzymanie obw. głośń. (c)</translation>
+        <translation>Klaw. → Utrzymanie obw. głośń. (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="578"/>
         <source>Key → Vol env decay (c)</source>
-        <translation>klaw. → Upadek obw. głośń. (c)</translation>
+        <translation>Klaw. → Upadek obw. głośń. (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="581"/>
@@ -2949,7 +2949,7 @@ domyślnego mod.</translation>
     <message>
         <location filename="editor/pageenvelope.ui" line="181"/>
         <source>Key → Decay</source>
-        <translation>klaw. → Upadek</translation>
+        <translation>Klaw. → Upadek</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="263"/>
@@ -2975,7 +2975,7 @@ domyślnego mod.</translation>
     <message>
         <location filename="editor/pageenvelope.ui" line="391"/>
         <source>Key → Hold</source>
-        <translation>klaw. → Przytrzymanie</translation>
+        <translation>Klaw. → Przytrzymanie</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="420"/>
