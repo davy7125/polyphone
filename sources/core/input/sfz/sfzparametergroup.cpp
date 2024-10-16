@@ -239,7 +239,7 @@ void SfzParameterGroup::decode(SoundfontManager * sf2, EltID idInst, QString pat
         if (!listeIndexSmpl.isEmpty())
         {
             idSmpl.indexElt = listeIndexSmpl.first();
-            _regionList[i].adaptOffsets(sf2->get(idSmpl, champ_dwStartLoop).dwValue,
+            _regionList[i].adaptLoop(sf2->get(idSmpl, champ_dwStartLoop).dwValue,
                                             sf2->get(idSmpl, champ_dwEndLoop).dwValue,
                                             sf2->get(idSmpl, champ_dwLength).dwValue);
         }

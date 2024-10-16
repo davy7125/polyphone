@@ -52,6 +52,7 @@ public:
         op_loop_start,
         op_loop_end,
         op_loop_mode,
+        op_trigger,
         op_volume,
         op_pan,
         op_width,

@@ -52,12 +52,13 @@ void InputParserSfz::processInternal(QString fileName, SoundfontManager * sm, bo
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_sample, QMetaType::QString);
         _presetList[i].checkSampleValid(QFileInfo(fileName).path());
 
-        // Offsets must be defined for samples, not in gloobal division
+        // Offsets must be defined for samples, not in global division
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_offset, QMetaType::Int);
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_end, QMetaType::Int);
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_loop_start, QMetaType::Int);
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_loop_end, QMetaType::Int);
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_loop_mode, QMetaType::QString);
+        _presetList[i].moveOpcodeInSamples(SfzParameter::op_trigger, QMetaType::QString);
 
         // Same for pan, samples, off_by et group
         _presetList[i].moveOpcodeInSamples(SfzParameter::op_pan, QMetaType::Double);

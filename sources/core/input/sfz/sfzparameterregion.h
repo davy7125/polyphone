@@ -40,7 +40,7 @@ public:
     // Decode
     void decode(SoundfontManager * sf2, EltID idElt);
     QList<int> getSampleIndex(SoundfontManager * sf2, EltID idElt, QString pathSfz) const;
-    void adaptOffsets(int startLoop, int endLoop, int length);
+    void adaptLoop(int startLoop, int endLoop, int length);
     void adjustCorrection(QString path, int defaultCorrection);
     bool sampleValid(QString path);
     void checkFilter();

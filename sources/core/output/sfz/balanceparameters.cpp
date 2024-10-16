@@ -24,6 +24,7 @@
 
 #include "balanceparameters.h"
 #include "soundfontmanager.h"
+#include "sfzparamlist.h"
 
 BalanceParameters::BalanceParameters(bool isMono) :
     _isMono(isMono),
@@ -41,14 +42,68 @@ BalanceParameters::BalanceParameters(bool isMono) :
 
 }
 
-void BalanceParameters::getAttenuationAndPan(SoundfontManager * sf2, EltID idInstSmpl, int channel)
+void BalanceParameters::storeAttenuationAndPan(SoundfontManager * sf2, EltID idInstSmpl, int channel, SfzParamList * paramInst, SfzParamList * paramPrst)
 {
-    double attenuationDb =
-        sf2->isSet(idInstSmpl, champ_initialAttenuation) ?
-            0.1 * DB_SF2_TO_REAL_DB * sf2->get(idInstSmpl, champ_initialAttenuation).shValue : 0.;
-    double pan =
-        sf2->isSet(idInstSmpl, champ_pan) ?
-            0.002 * sf2->get(idInstSmpl, champ_pan).shValue : 0.; // Divide by 500 => between -1 and 1
+    // Compute the attenuation
+    double attenuationDb = 0;
+    if (sf2->isSet(idInstSmpl, champ_initialAttenuation))
+    {
+        attenuationDb = Attribute::toRealValue(champ_initialAttenuation, false, sf2->get(idInstSmpl, champ_initialAttenuation));
+
+        // Merge the prst value
+        for (int i = 0; i < paramPrst->attributeCount(); i++)
+        {
+            if (paramPrst->getAttribute(i) == champ_initialAttenuation)
+            {
+                attenuationDb += paramPrst->getValue(i);
+
+                // Limit
+                AttributeValue value = Attribute::fromRealValue(champ_initialAttenuation, false, attenuationDb);
+                attenuationDb = Attribute::toRealValue(champ_initialAttenuation, false, value);
+            }
+        }
+    }
+    else
+    {
+        // Take the default attenuation of the inst (prst value already merged)
+        for (int i = 0; i < paramInst->attributeCount(); i++)
+        {
+            if (paramInst->getAttribute(i) == champ_initialAttenuation)
+                attenuationDb = paramInst->getValue(i);
+        }
+    }
+
+    // Compute the pan
+    double pan = 0;
+    if (sf2->isSet(idInstSmpl, champ_pan))
+    {
+        pan = Attribute::toRealValue(champ_pan, false, sf2->get(idInstSmpl, champ_pan));
+
+        // Merge the prst value
+        for (int i = 0; i < paramPrst->attributeCount(); i++)
+        {
+            if (paramPrst->getAttribute(i) == champ_pan)
+            {
+                pan += paramPrst->getValue(i);
+
+                // Limit
+                AttributeValue value = Attribute::fromRealValue(champ_pan, false, pan);
+                pan = Attribute::toRealValue(champ_pan, false, value);
+            }
+        }
+    }
+    else
+    {
+        // Take the default pan of the inst (prst value already merged)
+        for (int i = 0; i < paramInst->attributeCount(); i++)
+        {
+            if (paramInst->getAttribute(i) == champ_pan)
+                pan = paramInst->getValue(i);
+        }
+    }
+
+    // Divide by 50 => between -1 and 1
+    pan *= 0.02;
 
     if (channel == -1)
     {

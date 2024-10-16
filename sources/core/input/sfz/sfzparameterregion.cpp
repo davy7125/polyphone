@@ -155,7 +155,7 @@ QList<int> SfzParameterRegion::getSampleIndex(SoundfontManager *sf2, EltID idElt
     return sampleIndex;
 }
 
-void SfzParameterRegion::adaptOffsets(int startLoop, int endLoop, int length)
+void SfzParameterRegion::adaptLoop(int startLoop, int endLoop, int length)
 {
     for (int i = 0; i < _listeParam.size(); i++)
     {
@@ -166,8 +166,15 @@ void SfzParameterRegion::adaptOffsets(int startLoop, int endLoop, int length)
         else if (_listeParam.at(i).getOpCode() == SfzParameter::op_end)
             _listeParam[i].setIntValue(_listeParam.at(i).getIntValue() - length);
     }
+
     if (startLoop != endLoop && !isDefined(SfzParameter::op_loop_mode) && (startLoop != 0 || endLoop != 1))
         _listeParam << SfzParameter("loop_mode", "loop_continuous");
+
+    if (isDefined(SfzParameter::op_trigger) && getStrValue(SfzParameter::op_trigger).startsWith("release"))
+    {
+        removeOpCode(SfzParameter::op_loop_mode);
+        _listeParam << SfzParameter("loop_mode", "one_shot");
+    }
 }
 
 void SfzParameterRegion::adjustCorrection(QString path, int defaultCorrection)
@@ -407,7 +414,13 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
             }
             break;
         case SfzParameter::op_loop_mode:
-            if (_listeParam.at(i).getStringValue() == "no_loop")
+            if (this->isDefined(SfzParameter::op_trigger) && getStrValue(SfzParameter::op_trigger).startsWith("release"))
+            {
+                val.wValue = 2;
+                addSeconds(100, champ_releaseVolEnv, sf2, idElt);
+                addSeconds(100, champ_releaseModEnv, sf2, idElt);
+            }
+            else if (_listeParam.at(i).getStringValue() == "no_loop")
                 val.wValue = 0;
             else if (_listeParam.at(i).getStringValue() == "one_shot")
             {
@@ -420,6 +433,9 @@ void SfzParameterRegion::decode(SoundfontManager * sf2, EltID idElt)
             else if (_listeParam.at(i).getStringValue() == "loop_sustain")
                 val.wValue = 3;
             sf2->set(idElt, champ_sampleModes, val);
+            break;
+        case SfzParameter::op_trigger:
+            // Nothing here, processed in op_loop_mode
             break;
         case SfzParameter::op_volume:
             dTmp = -_listeParam.at(i).getDoubleValue() / DB_SF2_TO_REAL_DB;

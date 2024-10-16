@@ -142,7 +142,6 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
         // Instrument parameters
         SfzParamList * paramInst = new SfzParamList(_sf2, paramPrst, idInst);
         writeGroup(paramInst, numBank == 128);
-        delete paramInst;
 
         // Write each division of the instrument, ordered by keyRange.byLo
         QList<EltID> listInstSmpl;
@@ -171,7 +170,7 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
 
             // Balance parameters
             BalanceParameters balance(sampleChannel == 0);
-            balance.getAttenuationAndPan(_sf2, idInstSmpl, sampleChannel);
+            balance.storeAttenuationAndPan(_sf2, idInstSmpl, sampleChannel, paramInst, paramPrst);
 
             // If the sample is stereo, search another instSmpl that exactly matches the other channel
             if (sampleChannel != 0)
@@ -214,7 +213,7 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
                 if (index != -1)
                 {
                     listProcessedInstSmpl << listInstSmpl[index];
-                    balance.getAttenuationAndPan(_sf2, listInstSmpl[index], -sampleChannel);
+                    balance.storeAttenuationAndPan(_sf2, listInstSmpl[index], -sampleChannel, paramInst, paramPrst);
                 }
             }
 
@@ -224,6 +223,7 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
             delete paramInstSmpl;
             listProcessedInstSmpl << idInstSmpl;
         }
+        delete paramInst;
         delete paramPrst;
     }
 
@@ -443,6 +443,11 @@ void ConversionSfz::writeElement(AttributeType champ, double value)
             _sfzWriter->addLine("loop_mode", "no_loop");
         else if (value == 1.)
             _sfzWriter->addLine("loop_mode", "loop_continuous");
+        else if (value == 2.)
+        {
+            _sfzWriter->addLine("loop_mode", "one_shot");
+            _sfzWriter->addLine("trigger", "release");
+        }
         else if (value == 3.)
             _sfzWriter->addLine("loop_mode", "loop_sustain");
         break;

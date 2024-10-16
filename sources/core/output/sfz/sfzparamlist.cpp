@@ -246,30 +246,20 @@ SfzParamList::SfzParamList(SoundfontManager * sf2, SfzParamList * paramPrst, Elt
     // Default values
     if (idInst.typeElement == elementInst)
     {
-        // Default attack if not defined
-        if (!_attributes.contains(champ_attackVolEnv))
+        QList<AttributeType> defaultValuesToSet;
+        defaultValuesToSet
+            << champ_attackVolEnv
+            << champ_freqModLFO
+            << champ_freqVibLFO
+            << champ_initialFilterFc
+            << champ_sampleModes;
+        foreach (AttributeType attributeType, defaultValuesToSet)
         {
-            _attributes << champ_attackVolEnv;
-            _attributeValues << Attribute::getDefaultRealValue(champ_attackVolEnv, false);
-        }
-
-        // Default frequency if not defined
-        if (!_attributes.contains(champ_freqModLFO))
-        {
-            _attributes << champ_freqModLFO;
-            _attributeValues << Attribute::getDefaultRealValue(champ_freqModLFO, false);
-        }
-        if (!_attributes.contains(champ_freqVibLFO))
-        {
-            _attributes << champ_freqVibLFO;
-            _attributeValues << Attribute::getDefaultRealValue(champ_freqVibLFO, false);
-        }
-
-        // Default frequency cutoff if not defined
-        if (!_attributes.contains(champ_initialFilterFc))
-        {
-            _attributes << champ_initialFilterFc;
-            _attributeValues << Attribute::getDefaultRealValue(champ_initialFilterFc, false);
+            if (!_attributes.contains(attributeType))
+            {
+                _attributes << attributeType;
+                _attributeValues << Attribute::getDefaultRealValue(attributeType, false);
+            }
         }
     }
 
@@ -662,76 +652,9 @@ void SfzParamList::merge(AttributeType attributeType, double value)
 
 double SfzParamList::limit(double val, AttributeType champ)
 {
-    double min = 0;
-    double max = 0;
-
-    switch (champ)
-    {
-    case champ_fineTune:
-        min = -99; max = 99;
-        break;
-    case champ_coarseTune:
-        min = -120; max = 120;
-        break;
-    case champ_pan:
-        min = -50; max = 50;
-        break;
-    case champ_initialAttenuation: case champ_sustainVolEnv: case champ_sustainModEnv:
-        min = 0; max = 144;
-        break;
-    case champ_reverbEffectsSend: case champ_chorusEffectsSend:
-        min = 0; max = 100;
-        break;
-    case champ_scaleTuning:
-        min = 0; max = 1200;
-        break;
-    case champ_initialFilterFc:
-        min = 18; max = 19914;
-        break;
-    case champ_initialFilterQ:
-        min = 0; max = 96;
-        break;
-    case champ_delayVolEnv: case champ_holdVolEnv: case champ_holdModEnv:
-    case champ_delayModEnv:
-        min = 0.001; max = 18;
-        break;
-    case champ_delayModLFO: case champ_delayVibLFO:
-        min = 0.001; max = 20;
-        break;
-    case champ_freqModLFO: case champ_freqVibLFO:
-        min = 0.001; max = 100;
-        break;
-    case champ_attackVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv: case champ_releaseModEnv:
-    case champ_attackModEnv: case champ_decayModEnv:
-        min = 0.001; max = 101.6;
-        break;
-    case champ_keynumToVolEnvHold: case champ_keynumToVolEnvDecay:
-    case champ_keynumToModEnvHold: case champ_keynumToModEnvDecay:
-        min = -1200; max = 1200;
-        break;
-    case champ_modLfoToVolume:
-        min = -96; max = 96;
-        break;
-    case champ_modEnvToPitch: case champ_modEnvToFilterFc: case champ_modLfoToPitch:
-    case champ_modLfoToFilterFc: case champ_vibLfoToPitch:
-        min = -12000; max = 12000;
-        break;
-    case champ_keynum: case champ_overridingRootKey: case champ_velocity: case champ_exclusiveClass:
-        min = 0; max = 127;
-        break;
-    default:
-        break;
-    }
-
-    if (min != max)
-    {
-        if (val < min)
-            return min;
-        else if (val > max)
-            return max;
-    }
-
-    return val;
+    // Limits applied in method "fromRealValue"
+    AttributeValue value = Attribute::fromRealValue(champ, false, val);
+    return Attribute::toRealValue(champ, false, value);
 }
 
 void SfzParamList::processDescendingVelocityModulators()

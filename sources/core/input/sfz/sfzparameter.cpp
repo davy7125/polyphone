@@ -124,6 +124,11 @@ SfzParameter::SfzParameter(QString opcode, QString valeur) :
         _opcode = op_loop_mode;
         _strValue = valeurLow;
     }
+    else if (opcode == "trigger")
+    {
+        _opcode = op_trigger;
+        _strValue = valeurLow;
+    }
     else if (opcode == "pan")
     {
         _opcode = op_pan;

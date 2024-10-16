@@ -27,12 +27,13 @@
 
 #include "basetypes.h"
 class SoundfontManager;
+class SfzParamList;
 
 class BalanceParameters
 {
 public:
     BalanceParameters(bool isMono);
-    void getAttenuationAndPan(SoundfontManager * sf2, EltID  idInstSmpl, int channel);
+    void storeAttenuationAndPan(SoundfontManager * sf2, EltID  idInstSmpl, int channel, SfzParamList *paramInst, SfzParamList *paramPrst);
     void computeSfzParameters();
 
     bool isMono() { return _isMono; }
