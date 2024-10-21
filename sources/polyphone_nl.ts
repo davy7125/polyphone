@@ -38,362 +38,362 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="core/types/attribute.cpp" line="443"/>
+        <location filename="core/types/attribute.cpp" line="482"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="448"/>
+        <location filename="core/types/attribute.cpp" line="487"/>
         <source>Sample start offset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="454"/>
+        <location filename="core/types/attribute.cpp" line="493"/>
         <source>Sample end offset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="460"/>
+        <location filename="core/types/attribute.cpp" line="499"/>
         <source>Loop start offset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="466"/>
+        <location filename="core/types/attribute.cpp" line="505"/>
         <source>Loop end offset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="463"/>
+        <location filename="core/types/attribute.cpp" line="502"/>
         <source>Loop start offset (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="472"/>
+        <location filename="core/types/attribute.cpp" line="511"/>
         <source>Mod LFO → pitch (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="475"/>
+        <location filename="core/types/attribute.cpp" line="514"/>
         <source>Vib LFO → pitch (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="478"/>
+        <location filename="core/types/attribute.cpp" line="517"/>
         <source>Mod env → pitch (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="481"/>
+        <location filename="core/types/attribute.cpp" line="520"/>
         <source>Filter, cutoff (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="482"/>
+        <location filename="core/types/attribute.cpp" line="521"/>
         <source>Filter, cutoff (Hz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="485"/>
+        <location filename="core/types/attribute.cpp" line="524"/>
         <source>Filter, resonance (dB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="488"/>
+        <location filename="core/types/attribute.cpp" line="527"/>
         <source>Mod LFO → filter (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="491"/>
+        <location filename="core/types/attribute.cpp" line="530"/>
         <source>Mod env → filter (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="457"/>
+        <location filename="core/types/attribute.cpp" line="496"/>
         <source>Sample end offset (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="451"/>
+        <location filename="core/types/attribute.cpp" line="490"/>
         <source>Sample start offset (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="494"/>
+        <location filename="core/types/attribute.cpp" line="533"/>
         <source>Mod LFO → volume (dB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="497"/>
+        <location filename="core/types/attribute.cpp" line="536"/>
         <source>Chorus (%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="500"/>
+        <location filename="core/types/attribute.cpp" line="539"/>
         <source>Reverb (%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="503"/>
+        <location filename="core/types/attribute.cpp" line="542"/>
         <source>Pan [-100;100]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="504"/>
+        <location filename="core/types/attribute.cpp" line="543"/>
         <source>Pan [-50;50]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="507"/>
+        <location filename="core/types/attribute.cpp" line="546"/>
         <source>Mod LFO delay (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="508"/>
+        <location filename="core/types/attribute.cpp" line="547"/>
         <source>Mod LFO delay (s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="511"/>
+        <location filename="core/types/attribute.cpp" line="550"/>
         <source>Mod LFO freq (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="512"/>
+        <location filename="core/types/attribute.cpp" line="551"/>
         <source>Mod LFO freq (Hz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="515"/>
+        <location filename="core/types/attribute.cpp" line="554"/>
         <source>Vib LFO delay (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="516"/>
+        <location filename="core/types/attribute.cpp" line="555"/>
         <source>Vib LFO delay (s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="519"/>
+        <location filename="core/types/attribute.cpp" line="558"/>
         <source>Vib LFO freq (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="520"/>
+        <location filename="core/types/attribute.cpp" line="559"/>
         <source>Vib LFO freq (Hz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="523"/>
+        <location filename="core/types/attribute.cpp" line="562"/>
         <source>Mod env delay (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="524"/>
+        <location filename="core/types/attribute.cpp" line="563"/>
         <source>Mod env delay (s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="527"/>
+        <location filename="core/types/attribute.cpp" line="566"/>
         <source>Mod env attack (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="528"/>
+        <location filename="core/types/attribute.cpp" line="567"/>
         <source>Mod env attack (s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="531"/>
+        <location filename="core/types/attribute.cpp" line="570"/>
         <source>Mod env hold (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="532"/>
+        <location filename="core/types/attribute.cpp" line="571"/>
         <source>Mod env hold (s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="535"/>
+        <location filename="core/types/attribute.cpp" line="574"/>
         <source>Mod env decay (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="536"/>
+        <location filename="core/types/attribute.cpp" line="575"/>
         <source>Mod env decay (s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="539"/>
+        <location filename="core/types/attribute.cpp" line="578"/>
         <source>Mod env sustain (%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="542"/>
+        <location filename="core/types/attribute.cpp" line="581"/>
         <source>Mod env release (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="543"/>
+        <location filename="core/types/attribute.cpp" line="582"/>
         <source>Mod env release (s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="546"/>
+        <location filename="core/types/attribute.cpp" line="585"/>
         <source>Key → Mod env hold (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="549"/>
+        <location filename="core/types/attribute.cpp" line="588"/>
         <source>Key → Mod env decay (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="552"/>
+        <location filename="core/types/attribute.cpp" line="591"/>
         <source>Vol env delay (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="553"/>
+        <location filename="core/types/attribute.cpp" line="592"/>
         <source>Vol env delay (s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="556"/>
+        <location filename="core/types/attribute.cpp" line="595"/>
         <source>Vol env attack (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="557"/>
+        <location filename="core/types/attribute.cpp" line="596"/>
         <source>Vol env attack (s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="560"/>
+        <location filename="core/types/attribute.cpp" line="599"/>
         <source>Vol env hold (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="561"/>
+        <location filename="core/types/attribute.cpp" line="600"/>
         <source>Vol env hold (s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="564"/>
+        <location filename="core/types/attribute.cpp" line="603"/>
         <source>Vol env decay (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="565"/>
+        <location filename="core/types/attribute.cpp" line="604"/>
         <source>Vol env decay (s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="568"/>
+        <location filename="core/types/attribute.cpp" line="607"/>
         <source>Vol env sustain (dB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="571"/>
+        <location filename="core/types/attribute.cpp" line="610"/>
         <source>Vol env release (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="572"/>
+        <location filename="core/types/attribute.cpp" line="611"/>
         <source>Vol env release (s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="575"/>
+        <location filename="core/types/attribute.cpp" line="614"/>
         <source>Key → Vol env hold (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="578"/>
+        <location filename="core/types/attribute.cpp" line="617"/>
         <source>Key → Vol env decay (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="581"/>
+        <location filename="core/types/attribute.cpp" line="620"/>
         <source>Key range</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="584"/>
+        <location filename="core/types/attribute.cpp" line="623"/>
         <source>Velocity range</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="587"/>
+        <location filename="core/types/attribute.cpp" line="626"/>
         <source>Fixed key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="590"/>
+        <location filename="core/types/attribute.cpp" line="629"/>
         <source>Fixed velocity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="593"/>
+        <location filename="core/types/attribute.cpp" line="632"/>
         <source>Attenuation (dB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="614"/>
+        <location filename="core/types/attribute.cpp" line="653"/>
         <source>Sample root key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="617"/>
+        <location filename="core/types/attribute.cpp" line="656"/>
         <source>Sample length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="620"/>
+        <location filename="core/types/attribute.cpp" line="659"/>
         <source>Loop start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="623"/>
+        <location filename="core/types/attribute.cpp" line="662"/>
         <source>Loop end</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="626"/>
+        <location filename="core/types/attribute.cpp" line="665"/>
         <source>Pitch correction (cents)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="469"/>
+        <location filename="core/types/attribute.cpp" line="508"/>
         <source>Loop end offset (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="596"/>
+        <location filename="core/types/attribute.cpp" line="635"/>
         <source>Tuning (semi-tones)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="599"/>
+        <location filename="core/types/attribute.cpp" line="638"/>
         <source>Tuning (cents)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="602"/>
+        <location filename="core/types/attribute.cpp" line="641"/>
         <source>Loop playback</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="605"/>
+        <location filename="core/types/attribute.cpp" line="644"/>
         <source>Scale tuning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="608"/>
+        <location filename="core/types/attribute.cpp" line="647"/>
         <source>Exclusive class</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="611"/>
+        <location filename="core/types/attribute.cpp" line="650"/>
         <source>Root key</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1300,93 +1300,93 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="661"/>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="703"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="666"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="708"/>
         <source>other</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="664"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="669"/>
         <source>Piano</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="666"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="671"/>
         <source>Chromatic percussion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="668"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="673"/>
         <source>Organ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="670"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="675"/>
         <source>Guitar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="672"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="677"/>
         <source>Bass</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="674"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="679"/>
         <source>Strings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="676"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="681"/>
         <source>Ensemble</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="678"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="683"/>
         <source>Brass</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="680"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="685"/>
         <source>Reed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="682"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="687"/>
         <source>Pipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="684"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="689"/>
         <source>Synth lead</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="686"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="691"/>
         <source>Synth pad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="688"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="693"/>
         <source>Synth effects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="690"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="695"/>
         <source>Ethnic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="692"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="697"/>
         <source>Percussive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="694"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="699"/>
         <source>Sound effects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="696"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="701"/>
         <source>Percussion kit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1488,7 +1488,7 @@ repository</source>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="68"/>
-        <location filename="dialogs/dialog_about.cpp" line="82"/>
+        <location filename="dialogs/dialog_about.cpp" line="83"/>
         <source>Steve Clarke</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Steve Clarke</translation>
@@ -1546,6 +1546,12 @@ repository</source>
         <source>Pavel Fric</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
         <translation>Pavel Fric</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="82"/>
+        <source>Spessasus</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="72"/>
@@ -2490,22 +2496,22 @@ repository</source>
 <context>
     <name>InputParserSfz</name>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="108"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="109"/>
         <source>File recursion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="116"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="117"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="293"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="294"/>
         <source>Sfz import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/input/sfz/inputparsersfz.cpp" line="452"/>
+        <location filename="core/input/sfz/inputparsersfz.cpp" line="453"/>
         <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3879,22 +3885,22 @@ to display its division ranges</source>
         <translation>Niet-ondersteund bestand: &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="125"/>
+        <location filename="dialogs/dialog_about.cpp" line="126"/>
         <source>Created by</source>
         <translation>Gemaakt door</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="126"/>
+        <location filename="dialogs/dialog_about.cpp" line="127"/>
         <source>Contributors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="127"/>
+        <location filename="dialogs/dialog_about.cpp" line="128"/>
         <source>Translated by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="169"/>
+        <location filename="dialogs/dialog_about.cpp" line="170"/>
         <source>Icons</source>
         <translation>Iconen</translation>
     </message>
@@ -6655,8 +6661,13 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeItemDelegate</name>
     <message>
-        <location filename="editor/tree/treeitemdelegate.cpp" line="237"/>
+        <location filename="editor/tree/treeitemdelegate.cpp" line="240"/>
         <source>mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tree/treeitemdelegate.cpp" line="241"/>
+        <source>playing</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6686,80 +6697,96 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TreeViewMenu</name>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="46"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="47"/>
         <source>&amp;Bind to...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="51"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="52"/>
         <source>&amp;Replace by...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="59"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="62"/>
         <source>&amp;Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="65"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="68"/>
         <source>&amp;Paste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="71"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="74"/>
         <source>D&amp;uplicate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="77"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="80"/>
         <source>&amp;Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="84"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="147"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="151"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="89"/>
+        <source>Mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tree/treeviewmenu.cpp" line="95"/>
+        <source>Always play</source>
+        <oldsource>Play along</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tree/treeviewmenu.cpp" line="101"/>
+        <source>Restore playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tree/treeviewmenu.cpp" line="109"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="172"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="176"/>
         <source>Re&amp;name...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="147"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="172"/>
         <source>Bulk re&amp;name...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="193"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="196"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="260"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="263"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="194"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="261"/>
         <source>Cannot delete a sample used by another instrument.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="197"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="264"/>
         <source>Cannot delete an instrument used by another preset.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="341"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="408"/>
         <source>Sample name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="343"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="410"/>
         <source>Instrument name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="345"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="412"/>
         <source>Preset name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="367"/>
+        <location filename="editor/tree/treeviewmenu.cpp" line="434"/>
         <source>Rename</source>
         <translation type="unfinished"></translation>
     </message>

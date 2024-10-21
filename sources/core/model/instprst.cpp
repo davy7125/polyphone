@@ -29,7 +29,8 @@
 InstPrst::InstPrst(Soundfont * soundfont, int row, TreeItem * parent, EltID id) : TreeItem(id, parent),
     _soundfont(soundfont),
     _globalDivision(new Division(nullptr, _soundfont, nullptr, EltID())),
-    _row(row)
+    _row(row),
+    _alwaysPlay(false)
 {
     // Extra fields are -1 by default
     // These values will remain for an instrument or will be updated for a preset
@@ -141,4 +142,10 @@ int InstPrst::getExtraField(AttributeType champ)
 {
     // champ_wPreset is the beginning of the extra fields
     return _extraFields[champ - champ_wPreset];
+}
+
+void InstPrst::setAlwaysPlay(bool alwaysPlay)
+{
+    _alwaysPlay = alwaysPlay;
+    notifyUpdate();
 }

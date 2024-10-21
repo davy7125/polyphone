@@ -52,6 +52,13 @@ public:
     // Must be called every time the selection changes
     void selectionChanged(IdList ids);
 
+    // Restore everything
+    void restorePlayback(int sf2Index);
+
+    // Configure an instrument or preset for being played along
+    void setAlwaysPlayed(EltID id, bool isAlwaysPlayed);
+    bool isAlwaysPlayed(EltID id);
+
 private:
     SoundfontManager * _sm;
     QList<int> _soloOnSelectionEnabled;

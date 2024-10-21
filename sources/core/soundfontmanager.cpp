@@ -232,6 +232,9 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
         case champ_mute:
             value.dwValue = 0;
             break;
+        case champ_alwaysPlayed:
+            value.bValue = tmp->isAlwaysPlayed() ? 1 : 0;
+            break;
         default:
             value = tmp->getGlobalDivision()->getGen(champ);
             break;
@@ -251,6 +254,9 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
         case champ_mute:
             value.dwValue = 0;
             break;
+        case champ_alwaysPlayed:
+            value.bValue = tmp->isAlwaysPlayed() ? 1 : 0;
+            break;
         default:
             value = tmp->getGlobalDivision()->getGen(champ);
             break;
@@ -259,18 +265,34 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
     case elementInstSmpl:{
         // Analyse d'un sample lié à un instrument
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2);
-        if (champ == champ_mute)
+        switch (champ)
+        {
+        case champ_mute:
             value.bValue = (tmp->isMute() ? 1 : 0);
-        else
+            break;
+        case champ_alwaysPlayed:
+            value.dwValue = 0;
+            break;
+        default:
             value = tmp->getGen(champ);
+            break;
+        }
     }break;
     case elementPrstInst:{
         // Analyse d'un instrument lié à un preset
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
-        if (champ == champ_mute)
+        switch (champ)
+        {
+        case champ_mute:
             value.bValue = (tmp->isMute() ? 1 : 0);
-        else
+            break;
+        case champ_alwaysPlayed:
+            value.dwValue = 0;
+            break;
+        default:
             value = tmp->getGen(champ);
+            break;
+        }
     }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // Analyse d'un mod
@@ -1205,12 +1227,24 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
     case elementInst:{
         // Update an instrument
         InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt);
-        if (!tmp->getGlobalDivision()->isSet(champ))
-            defaultValue = 1;
-        oldValue = tmp->getGlobalDivision()->getGen(champ);
-        tmp->getGlobalDivision()->setGen(champ, value);
-        if (champ == champ_overridingRootKey || champ == champ_keyRange)
-            _parameterForCustomizingKeyboardChanged = true;
+        switch (champ)
+        {
+        case champ_mute:
+            storeAction = false;
+            break;
+        case champ_alwaysPlayed:
+            tmp->setAlwaysPlay(value.bValue > 0);
+            storeAction = false;
+            break;
+        default:
+            if (!tmp->getGlobalDivision()->isSet(champ))
+                defaultValue = 1;
+            oldValue = tmp->getGlobalDivision()->getGen(champ);
+            tmp->getGlobalDivision()->setGen(champ, value);
+            if (champ == champ_overridingRootKey || champ == champ_keyRange)
+                _parameterForCustomizingKeyboardChanged = true;
+            break;
+        }
     }break;
     case elementPrst:{
         // Update a preset
@@ -1225,8 +1259,16 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
             oldValue.dwValue = tmp->getExtraField(champ);
             tmp->setExtraField(champ, value.dwValue);
             break;
+        case champ_mute:
+            storeAction = false;
+            break;
+        case champ_alwaysPlayed:
+            tmp->setAlwaysPlay(value.bValue > 0);
+            storeAction = false;
+            break;
         default:
-            if (!tmp->getGlobalDivision()->isSet(champ)) defaultValue = 1;
+            if (!tmp->getGlobalDivision()->isSet(champ))
+                defaultValue = 1;
             oldValue = tmp->getGlobalDivision()->getGen(champ);
             tmp->getGlobalDivision()->setGen(champ, value);
             if (champ == champ_overridingRootKey || champ == champ_keyRange)
@@ -1237,31 +1279,38 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
     case elementInstSmpl:{
         // Modification of a sample linked to an instrument
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2);
-        if (champ == champ_mute)
+        switch (champ)
         {
+        case champ_mute:
             tmp->setMute(value.bValue > 0);
             storeAction = false;
-        }
-        else
-        {
+            break;
+        case champ_alwaysPlayed:
+            storeAction = false;
+            break;
+        default:
             if (!tmp->isSet(champ))
                 defaultValue = 1;
             oldValue = tmp->getGen(champ);
             tmp->setGen(champ, value);
             if (champ == champ_overridingRootKey || champ == champ_keyRange)
                 _parameterForCustomizingKeyboardChanged = true;
+            break;
         }
     }break;
     case elementPrstInst:{
         // Modification of an instrument linked to a preset
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
-        if (champ == champ_mute)
+        switch (champ)
         {
+        case champ_mute:
             tmp->setMute(value.bValue > 0);
             storeAction = false;
-        }
-        else
-        {
+            break;
+        case champ_alwaysPlayed:
+            storeAction = false;
+            break;
+        default:
             if (!tmp->isSet(champ))
                 defaultValue = 1;
             oldValue = tmp->getGen(champ);

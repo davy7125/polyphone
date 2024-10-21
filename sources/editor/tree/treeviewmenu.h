@@ -44,9 +44,6 @@ signals:
     void selectionChanged(IdList ids);
 
 public slots:
-    void associate();
-    void replace();
-    void itemSelectedFromList(EltID id, bool isAssociation);
     void copy();
     void paste();
     void duplicate();
@@ -54,8 +51,14 @@ public slots:
     void rename();
 
 private slots:
+    void associate();
+    void replace();
+    void itemSelectedFromList(EltID id, bool isAssociation);
     void bulkRename(int renameType, QString text1, QString text2, int val1, int val2);
     void onRename(QString txt);
+    void onMute(bool isOn);
+    void onAlwaysPlay(bool isOn);
+    void onRestorePlayback();
 
 private:
     void associate(IdList ids, EltID idDest);
@@ -69,6 +72,9 @@ private:
     QAction * _duplicateAction;
     QAction * _removeAction;
     QAction * _renameAction;
+    QAction * _muteAction;
+    QAction * _alwaysPlayAction;
+    QAction * _restorePlaybackAction;
     DialogList * _dialogList;
 
     // Same copy for all instances

@@ -57,6 +57,7 @@ public:
     void setHidden(bool isHidden);
     bool isHidden() { return _isHidden; }
     virtual bool isMute() { return false; }
+    virtual bool isAlwaysPlayed() { return false; }
 
     // Trigger signals for updating the view
     void notifyCreated();

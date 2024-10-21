@@ -233,3 +233,43 @@ void SoloManager::selectionChanged(IdList ids)
     if (_soloOnSelectionEnabled.contains(sf2Index))
         activateSolo(ids);
 }
+
+void SoloManager::restorePlayback(int sf2Index)
+{
+    // Remove solo
+    setSoloOnSelection(false, sf2Index);
+
+    // Unmute everything
+    unmuteAll(sf2Index);
+
+    // Remove "always played" of all instruments
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    AttributeValue val;
+    val.bValue = 0;
+    EltID idInst(elementInst, sf2Index);
+    foreach (int index, sm->getSiblings(idInst))
+    {
+        idInst.indexElt = index;
+        sm->set(idInst, champ_alwaysPlayed, val);
+    }
+
+    // Remove "always played" of all presets
+    EltID idPrst(elementPrst, sf2Index);
+    foreach (int index, sm->getSiblings(idPrst))
+    {
+        idPrst.indexElt = index;
+        sm->set(idPrst, champ_alwaysPlayed, val);
+    }
+}
+
+void SoloManager::setAlwaysPlayed(EltID id, bool isAlwaysPlayed)
+{
+    AttributeValue val;
+    val.bValue = (isAlwaysPlayed ? 1 : 0);
+    _sm->set(id, champ_alwaysPlayed, val);
+}
+
+bool SoloManager::isAlwaysPlayed(EltID id)
+{
+    return _sm->get(id, champ_alwaysPlayed).bValue > 0;
+}

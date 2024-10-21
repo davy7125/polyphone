@@ -89,6 +89,12 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
         if (item != nullptr)
             return item->isMute();
     }
+    else if (role == Qt::UserRole + 4)
+    {
+        TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
+        if (item != nullptr)
+            return item->isAlwaysPlayed();
+    }
 
     return QVariant();
 }

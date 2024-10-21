@@ -47,6 +47,9 @@ public:
     bool deleteDivision(int index);
     int indexOfId(int id) override;
 
+    void setAlwaysPlay(bool alwaysPlay);
+    bool isAlwaysPlayed() override { return _alwaysPlay; }
+
     // Name, extra fields
     void setName(QString name);
     QString getName() { return _name; }
@@ -68,6 +71,8 @@ private:
     QString _name;
     QString _nameSort;
     int _extraFields[5]; // Used for presets only
+
+    bool _alwaysPlay;
 };
 
 #endif // INSTPRST_H

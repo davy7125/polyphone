@@ -142,7 +142,8 @@ typedef enum
     champ_sampleData = 200,             // QVector<float>
 
     champ_pitchDefined = 300, // if pitch defined in a sample (wav)
-    champ_mute = 301 // Divisions can be muted for testing purposes
+    champ_mute = 301, // Divisions can be muted for testing purposes
+    champ_alwaysPlayed = 302 // Instruments and presets can be played along for testing purposes
 } AttributeType;
 
 typedef enum

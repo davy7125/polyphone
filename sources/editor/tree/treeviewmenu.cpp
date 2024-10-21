@@ -33,6 +33,7 @@
 #include "dialogquestion.h"
 #include "utils.h"
 #include "auto_distribution/toolautodistribution.h"
+#include "solomanager.h"
 
 IdList TreeViewMenu::s_copy = IdList();
 
@@ -54,6 +55,8 @@ TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
     this->addSeparator();
 
     connect(_dialogList, SIGNAL(elementSelected(EltID, bool)), this, SLOT(itemSelectedFromList(EltID, bool)));
+
+    /// ----------- ///
 
     // Copy
     _copyAction = new QAction(tr("&Copy"), this);
@@ -79,6 +82,28 @@ TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
     connect(_removeAction, SIGNAL(triggered()), this, SLOT(remove()));
     this->addAction(_removeAction);
     this->addSeparator();
+
+    /// ----------- ///
+
+    // Mute
+    _muteAction = new QAction(tr("Mute"), this);
+    _muteAction->setCheckable(true);
+    connect(_muteAction, SIGNAL(triggered(bool)), this, SLOT(onMute(bool)));
+    this->addAction(_muteAction);
+
+    // Always play
+    _alwaysPlayAction = new QAction(tr("Always play"), this);
+    _alwaysPlayAction->setCheckable(true);
+    connect(_alwaysPlayAction, SIGNAL(triggered(bool)), this, SLOT(onAlwaysPlay(bool)));
+    this->addAction(_alwaysPlayAction);
+
+    // Restore playback
+    _restorePlaybackAction = new QAction(tr("Restore playback"), this);
+    connect(_restorePlaybackAction, SIGNAL(triggered()), this, SLOT(onRestorePlayback()));
+    this->addAction(_restorePlaybackAction);
+    this->addSeparator();
+
+    /// ----------- ///
 
     // Rename
     _renameAction = new QAction(tr("Re&name..."), this);
@@ -163,6 +188,48 @@ void TreeViewMenu::initialize(IdList ids)
 
     // Delete
     _removeAction->setEnabled(sameElement);
+
+    // Mute / Always play / Restore
+    bool everythingMute = true;
+    bool everythingAlwaysPlayed = true;
+    bool hidePlaybackSection = false;
+    bool enableMute = true;
+    bool enableAlwaysPlayed = true;
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    foreach (EltID id, ids)
+    {
+        if (!sm->solo()->isMute(id))
+            everythingMute = false;
+        if (!sm->solo()->isAlwaysPlayed(id))
+            everythingAlwaysPlayed = false;
+
+        if (id.typeElement == elementInst || id.typeElement == elementPrst)
+            enableMute = false;
+        else if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
+            enableAlwaysPlayed = false;
+        else
+        {
+            hidePlaybackSection = true;
+            break;
+        }
+    }
+    if (hidePlaybackSection)
+    {
+        _muteAction->setVisible(false);
+        _alwaysPlayAction->setVisible(false);
+        _restorePlaybackAction->setVisible(false);
+    }
+    else
+    {
+        _muteAction->setVisible(true);
+        _alwaysPlayAction->setVisible(true);
+        _restorePlaybackAction->setVisible(true);
+
+        _muteAction->setChecked(everythingMute);
+        _muteAction->setEnabled(enableMute);
+        _alwaysPlayAction->setChecked(everythingAlwaysPlayed);
+        _alwaysPlayAction->setEnabled(enableAlwaysPlayed);
+    }
 }
 
 void TreeViewMenu::associate()
@@ -580,6 +647,47 @@ void TreeViewMenu::duplicate()
     if (!newIds.isEmpty())
     {
         sm->endEditing("command:duplicate");
-        emit(selectionChanged(newIds));
+        emit selectionChanged(newIds);
     }
+}
+
+void TreeViewMenu::onMute(bool isOn)
+{
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    QList<int> sf2Indexes;
+    foreach (EltID id, _currentIds)
+    {
+        sm->solo()->setMute(id, isOn);
+        if (!sf2Indexes.contains(id.indexSf2))
+            sf2Indexes << id.indexSf2;
+    }
+
+    // For updating the pages
+    if (!sf2Indexes.isEmpty())
+        emit sm->editingDone("command:mute", sf2Indexes);
+}
+
+void TreeViewMenu::onAlwaysPlay(bool isOn)
+{
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    foreach (EltID id, _currentIds)
+        sm->solo()->setAlwaysPlayed(id, isOn);
+}
+
+void TreeViewMenu::onRestorePlayback()
+{
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    QList<int> sf2Indexes;
+    foreach (EltID id, _currentIds)
+    {
+        if (!sf2Indexes.contains(id.indexSf2))
+        {
+            sm->solo()->restorePlayback(id.indexSf2);
+            sf2Indexes << id.indexSf2;
+        }
+    }
+
+    // For updating the pages
+    if (!sf2Indexes.isEmpty())
+        emit sm->editingDone("command:mute", sf2Indexes);
 }

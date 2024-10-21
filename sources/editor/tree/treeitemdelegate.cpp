@@ -203,6 +203,9 @@ void TreeItemDelegate::drawRoot(QPainter *painter, const QStyleOptionViewItem &o
 void TreeItemDelegate::drawElement(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index,
                                    const QPixmap &leftIcon, bool expandable, bool withIndent) const
 {
+    bool isMute = index.data(Qt::UserRole + 3).toBool();
+    bool isAlwaysPlayed = index.data(Qt::UserRole + 4).toBool();
+
     // Background
     bool highlighted = option.state & QStyle::State_Selected;
     if (highlighted)
@@ -233,8 +236,9 @@ void TreeItemDelegate::drawElement(QPainter *painter, const QStyleOptionViewItem
     // Text
     QRect rectText = rect;
     rectText.adjust(MARGIN + 20, 0, -MARGIN - rightAreaWidth, 0);
-    bool isMute = index.data(Qt::UserRole + 3).toBool();
-    QString text = index.data().toString() + (isMute ? " (" + tr("mute") + ")" : "") ;
+    QString text = index.data().toString() +
+                   (isMute ? " (" + tr("mute") + ")" : "") +
+                   (isAlwaysPlayed ? " (" + tr("playing") + ")" : "") ;
     QFontMetrics metrics(option.font);
     text = metrics.elidedText(text, Qt::ElideMiddle, rectText.width() - 1);
 
@@ -243,6 +247,7 @@ void TreeItemDelegate::drawElement(QPainter *painter, const QStyleOptionViewItem
     painter->setPen(highlighted ? s_colors->_highlightColorText : s_colors->_textColor);
     QFont font = option.font;
     font.setItalic(isMute);
+    font.setBold(isAlwaysPlayed);
     painter->setFont(font);
     painter->drawText(rectText, text);
 }
