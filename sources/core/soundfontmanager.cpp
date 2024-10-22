@@ -880,7 +880,8 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
     }break;
     case elementSmpl:{
         // Check that no instruments use the sample
-        foreach (InstPrst * instTmp, _soundfonts->getSoundfont(id.indexSf2)->getInstruments().values())
+        QVector<InstPrst *> instruments = _soundfonts->getSoundfont(id.indexSf2)->getInstruments().values();
+        foreach (InstPrst * instTmp, instruments)
         {
             if (!instTmp->isHidden())
             {
@@ -920,7 +921,8 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
     }break;
     case elementInst:{
         // Check that no presets use the instrument
-        foreach (InstPrst * prstTmp, _soundfonts->getSoundfont(id.indexSf2)->getPresets().values())
+        QVector<InstPrst *> presets = _soundfonts->getSoundfont(id.indexSf2)->getPresets().values();
+        foreach (InstPrst * prstTmp, presets)
         {
             if (!prstTmp->isHidden())
             {

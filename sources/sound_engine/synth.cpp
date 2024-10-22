@@ -144,17 +144,19 @@ int Synth::play(EltID id, int channel, int key, int velocity)
     } break;
     case elementInst: case elementInstSmpl:
     {
-        InstPrst * inst = soundfont->getInstrument(id.indexElt);
-        if (inst == nullptr)
-            return -1;
-        playInst(soundfont, inst, channel, key, velocity);
+        // Launch the instrument and all other instruments that are "always played"
+        QVector<InstPrst *> instruments = soundfont->getInstruments().values();
+        foreach (InstPrst * inst, instruments)
+            if (inst->isAlwaysPlayed() || inst->getId().indexElt == id.indexElt)
+                playInst(soundfont, inst, channel, key, velocity);
     } break;
     case elementPrst: case elementPrstInst:
     {
-        InstPrst * prst = soundfont->getPreset(id.indexElt);
-        if (prst == nullptr)
-            return -1;
-        playPrst(soundfont, prst, channel, key, velocity);
+        // Launch the preset and all other presets that are "always played"
+        QVector<InstPrst *> presets = soundfont->getPresets().values();
+        foreach (InstPrst * prst, presets)
+            if (prst->isAlwaysPlayed() || prst->getId().indexElt == id.indexElt)
+                playPrst(soundfont, prst, channel, key, velocity);
     } break;
     default:
         return -1;
