@@ -80,19 +80,21 @@ Editor::Editor(DialogKeyboard *dialogKeyboard) : Tab(nullptr),
     // List of possible pages
     QList<Page *> pages = _pageSelector->getAllPages();
     foreach (Page * page, pages)
-    {
         ui->stackedMain->addWidget(page);
 
-        // Reaction when the selection changed in the tree
+    // Reactions
+    foreach (Page * page, pages)
+    {
+        // When the selection changed in the tree
         connect(page, SIGNAL(selectedIdsChanged(IdList)), ui->treeView, SLOT(onSelectionChanged(IdList)));
 
-        // Reaction when "space" is pressed in the tree
+        // When "space" is pressed in the tree
         connect(ui->treeView, SIGNAL(spacePressed()), page, SLOT(onSpacePressed()));
 
-        // Reaction when the rootkey of a sample changed
+        // When the rootkey of a sample changed
         connect(page, SIGNAL(rootKeyChanged(int)), this, SLOT(onRootKeyChanged(int)));
 
-        // Reaction when a page is hidden
+        // When a page is hidden
         connect(page, SIGNAL(pageHidden()), this, SLOT(onPageHidden()));
     }
 
@@ -645,7 +647,9 @@ bool Editor::processKey(int channel, int key, int vel)
     }
 
     // Inner page
-    _pageSelector->getLastPage(_currentElementType)->onKeyPlayed(key, vel);
+    Page * page = _pageSelector->getLastPage(_currentElementType);
+    if (page != nullptr)
+        page->onKeyPlayed(key, vel);
 
     return false;
 }
