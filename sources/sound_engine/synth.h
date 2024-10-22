@@ -94,7 +94,7 @@ private:
     void playPrst(Soundfont * soundfont, InstPrst * prst, int channel, int key, int velocity);
     void playInst(Soundfont * soundfont, InstPrst * inst, int channel, int key, int velocity,
                   InstPrst * prst = nullptr, Division * prstDiv = nullptr);
-    int playSmpl(Soundfont * soundfont, Smpl * smpl, int channel, int key, int velocity,
+    int playSmpl(Smpl * smpl, int channel, int key, int velocity,
                  InstPrst * inst = nullptr, Division * instDiv = nullptr, InstPrst * prst = nullptr, Division * prstDiv = nullptr);
 
     void destroySoundEnginesAndBuffers();

@@ -140,7 +140,18 @@ int Synth::play(EltID id, int channel, int key, int velocity)
         Smpl * smpl = soundfont->getSample(id.indexElt);
         if (smpl == nullptr)
             return -1;
-        playingToken = playSmpl(soundfont, smpl, channel, key, velocity);
+        playingToken = playSmpl(smpl, channel, key, velocity);
+
+        if (key == -1) // -2 is the linked sample
+        {
+            // Stereo link?
+            if (smpl->_sfSampleType != monoSample && smpl->_sfSampleType != RomMonoSample)
+            {
+                Smpl * otherSmpl = soundfont->getSample(smpl->_wSampleLink);
+                if (otherSmpl != nullptr)
+                    playSmpl(otherSmpl, channel, -2, 127);
+            }
+        }
     } break;
     case elementInst: case elementInstSmpl:
     {
@@ -292,13 +303,13 @@ void Synth::playInst(Soundfont * soundfont, InstPrst * inst, int channel, int ke
         {
             Smpl * smpl = soundfont->getSample(instDiv->getGen(champ_sampleID).wValue);
             if (smpl != nullptr)
-                this->playSmpl(soundfont, smpl, channel, key, velocity,
+                this->playSmpl(smpl, channel, key, velocity,
                                inst, instDiv, prst, prstDiv);
         }
     }
 }
 
-int Synth::playSmpl(Soundfont * soundfont, Smpl * smpl, int channel, int key, int velocity,
+int Synth::playSmpl(Smpl * smpl, int channel, int key, int velocity,
                     InstPrst * inst, Division * instDiv,
                     InstPrst * prst, Division * prstDiv)
 {
@@ -325,17 +336,6 @@ int Synth::playSmpl(Soundfont * soundfont, Smpl * smpl, int channel, int key, in
     _voiceInitializers[_numberOfVoicesToAdd].audioSmplRate = _sampleRate;
     _voiceInitializers[_numberOfVoicesToAdd].token = currentToken;
     _numberOfVoicesToAdd++;
-
-    if (key == -1) // -2 is the linked sample
-    {
-        // Stereo link?
-        if (smpl->_sfSampleType != monoSample && smpl->_sfSampleType != RomMonoSample)
-        {
-            Smpl * otherSmpl = soundfont->getSample(smpl->_wSampleLink);
-            if (otherSmpl != nullptr)
-                this->playSmpl(soundfont, otherSmpl, channel, -2, 127, inst, instDiv, prst, prstDiv);
-        }
-    }
 
     return currentToken;
 }
