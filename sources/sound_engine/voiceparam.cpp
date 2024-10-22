@@ -80,12 +80,21 @@ void VoiceParam::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst
         readDivisionAttributes(prstGlobalDiv, prstDiv, true);
 
     // Initialize the modulator groups
-    int keyForComputation = _parameters[champ_keynum].getIntValue();
-    int velForComputation = _parameters[champ_velocity].getIntValue();
-    _modulatorGroupInst.initialize(_channel, _key, keyForComputation, velForComputation);
-    _modulatorGroupPrst.initialize(_channel, _key, keyForComputation, velForComputation);
+    if (instDiv)
+    {
+        int keyForComputation = _parameters[champ_keynum].getIntValue();
+        int velForComputation = _parameters[champ_velocity].getIntValue();
+        _modulatorGroupInst.initialize(_channel, _key, keyForComputation, velForComputation);
+        _modulatorGroupPrst.initialize(_channel, _key, keyForComputation, velForComputation);
+    }
+    else
+    {
+        // Sample level: no modulators
+        _modulatorGroupInst.clear();
+        _modulatorGroupPrst.clear();
+    }
 
-    // Load modulators from the instrument and preset levels, if possible
+    // Possibly load modulators from the instrument and preset levels
     if (instDiv)
         readDivisionModulators(instGlobalDiv, instDiv, false);
     if (prstDiv)

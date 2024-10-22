@@ -32,6 +32,11 @@ ModulatorGroup::ModulatorGroup(ModulatedParameter *parameters, bool isPrst) :
 {
 }
 
+void ModulatorGroup::clear()
+{
+    _numberOfParameterModulators = 0;
+}
+
 void ModulatorGroup::initialize(int channel, int initialKey, int keyForComputation, int velForComputation)
 {
     _channel = channel;

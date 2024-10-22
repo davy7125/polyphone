@@ -34,6 +34,9 @@ class ModulatorGroup
 public:
     ModulatorGroup(ModulatedParameter * parameters, bool isPrst);
 
+    // Remove all modulators (sample level)
+    void clear();
+
     // Initialize with keys and vel
     void initialize(int channel, int initialKey, int keyForComputation, int velForComputation);
 
