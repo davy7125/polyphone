@@ -38,6 +38,18 @@ class InstPrst;
 class SynthConfig
 {
 public:
+    SynthConfig() :
+        choLevel(0),
+        choDepth(0),
+        choFrequency(0),
+        revLevel(0),
+        revSize(0),
+        revWidth(0),
+        revDamping(0),
+        gain(0),
+        tuningFork(440),
+        temperament(QStringList())
+    {}
     int choLevel;
     int choDepth;
     int choFrequency;

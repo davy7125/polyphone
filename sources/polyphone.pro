@@ -294,6 +294,10 @@ SOURCES	+= main.cpp \
     editor/overview/pageoverviewinst.cpp \
     editor/overview/pageoverviewprst.cpp \
     editor/overview/tablepageoverview.cpp \
+    editor/tools/merge_samples/runnablemerger.cpp \
+    editor/tools/merge_samples/toolmergesamples.cpp \
+    editor/tools/merge_samples/toolmergesamples_gui.cpp \
+    editor/tools/merge_samples/toolmergesamples_parameters.cpp \
     editor/tools/monitor/segmentpainter.cpp \
     editor/tree/treesplitter.cpp \
     editor/widgets/equalizer.cpp \
@@ -656,6 +660,10 @@ HEADERS += \
     editor/overview/pageoverviewinst.h \
     editor/overview/pageoverviewprst.h \
     editor/overview/tablepageoverview.h \
+    editor/tools/merge_samples/runnablemerger.h \
+    editor/tools/merge_samples/toolmergesamples.h \
+    editor/tools/merge_samples/toolmergesamples_gui.h \
+    editor/tools/merge_samples/toolmergesamples_parameters.h \
     editor/tools/monitor/segment.h \
     editor/tools/monitor/segmentpainter.h \
     editor/tree/treesplitter.h \
@@ -967,6 +975,7 @@ FORMS += \
     editor/overview/pageoverview.ui \
     editor/pageenvelope.ui \
     editor/pagerange.ui \
+    editor/tools/merge_samples/toolmergesamples_gui.ui \
     editor/widgets/editortoolbar.ui \
     editor/widgets/equalizer.ui \
     mainwindow/widgetshowhistory.ui \

@@ -199,42 +199,19 @@ void Synth::playPrst(Soundfont * soundfont, InstPrst * prst, int channel, int ke
     }
 
     // Browse the ranges of all linked instruments
-    int keyMin, keyMax, velMin, velMax;
-    RangesType rangeTmp;
+    RangesType currentKeyRange, currentVelRange;
     QVector<Division *> divisions = prst->getDivisions().values();
     for (int i = 0; i < divisions.count(); ++i)
     {
-        Division * prstDiv = divisions[i];
-
         // Skip hidden or muted divisions
+        Division * prstDiv = divisions[i];
         if (prstDiv->isHidden() || prstDiv->isMute())
             continue;
 
-        if (prstDiv->isSet(champ_keyRange))
-        {
-            rangeTmp = prstDiv->getGen(champ_keyRange).rValue;
-            keyMin = rangeTmp.byLo;
-            keyMax = rangeTmp.byHi;
-        }
-        else
-        {
-            keyMin = defaultKeyRange.byLo;
-            keyMax = defaultKeyRange.byHi;
-        }
-        if (prstDiv->isSet(champ_velRange))
-        {
-            rangeTmp = prstDiv->getGen(champ_velRange).rValue;
-            velMin = rangeTmp.byLo;
-            velMax = rangeTmp.byHi;
-        }
-        else
-        {
-            velMin = defaultVelRange.byLo;
-            velMax = defaultVelRange.byHi;
-        }
-
-        // Check {key, vel} is in the division and go inside the instruments
-        if (keyMin <= key && key <= keyMax && velMin <= velocity && velocity <= velMax)
+        // Check that {key, vel} is in the division and go inside the instruments
+        currentKeyRange = prstDiv->isSet(champ_keyRange) ? prstDiv->getGen(champ_keyRange).rValue : defaultKeyRange;
+        currentVelRange = prstDiv->isSet(champ_velRange) ? prstDiv->getGen(champ_velRange).rValue : defaultVelRange;
+        if (currentKeyRange.byLo <= key && key <= currentKeyRange.byHi && currentVelRange.byLo <= velocity && velocity <= currentVelRange.byHi)
         {
             InstPrst * inst = soundfont->getInstrument(prstDiv->getGen(champ_instrument).wValue);
             if (inst != nullptr)
@@ -264,42 +241,19 @@ void Synth::playInst(Soundfont * soundfont, InstPrst * inst, int channel, int ke
     }
 
     // Browse the range of all linked samples
-    int keyMin, keyMax, velMin, velMax;
-    RangesType rangeTmp;
+    RangesType currentKeyRange, currentVelRange;
     QVector<Division *> divisions = inst->getDivisions().values();
     for (int i = 0; i < divisions.count(); ++i)
     {
-        Division * instDiv = divisions[i];
-
         // Skip hidden or muted divisions
+        Division * instDiv = divisions[i];
         if (instDiv->isHidden() || instDiv->isMute())
             continue;
 
-        if (instDiv->isSet(champ_keyRange))
-        {
-            rangeTmp = instDiv->getGen(champ_keyRange).rValue;
-            keyMin = rangeTmp.byLo;
-            keyMax = rangeTmp.byHi;
-        }
-        else
-        {
-            keyMin = defaultKeyRange.byLo;
-            keyMax = defaultKeyRange.byHi;
-        }
-        if (instDiv->isSet(champ_velRange))
-        {
-            rangeTmp = instDiv->getGen(champ_velRange).rValue;
-            velMin = rangeTmp.byLo;
-            velMax = rangeTmp.byHi;
-        }
-        else
-        {
-            velMin = defaultVelRange.byLo;
-            velMax = defaultVelRange.byHi;
-        }
-
-        // Check {key, vel} is in the division and go inside the samples
-        if (keyMin <= key && key <= keyMax && velMin <= velocity && velocity <= velMax)
+        // Check that {key, vel} is in the division and go inside the samples
+        currentKeyRange = instDiv->isSet(champ_keyRange) ? instDiv->getGen(champ_keyRange).rValue : defaultKeyRange;
+        currentVelRange = instDiv->isSet(champ_velRange) ? instDiv->getGen(champ_velRange).rValue : defaultVelRange;
+        if (currentKeyRange.byLo <= key && key <= currentKeyRange.byHi && currentVelRange.byLo <= velocity && velocity <= currentVelRange.byHi)
         {
             Smpl * smpl = soundfont->getSample(instDiv->getGen(champ_sampleID).wValue);
             if (smpl != nullptr)

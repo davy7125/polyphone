@@ -419,7 +419,7 @@ void Voice::setTemperament(float temperament[12], int relativeKey)
 {
     // Atomic operations
     for (int i = 0; i < 12; i++)
-        s_temperament[i]  = temperament[i];
+        s_temperament[i] = temperament[i];
     s_temperamentRelativeKey = relativeKey;
 }
 
@@ -432,7 +432,7 @@ void Voice::setChorus(int level, int depth, int frequency)
 
 void Voice::triggerReadFinishedSignal()
 {
-    emit(readFinished(_token));
+    emit readFinished(_token);
 }
 
 void Voice::biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float Q)

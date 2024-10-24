@@ -70,6 +70,7 @@ void ToolChords_parameters::saveConfiguration()
     
     // Chord configuration
     ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "chord", "type1", _chordInfo.chordType1);
+    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "chord", "type1att", _chordInfo.chordType1Attenuation);
 
     ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "chord", "type3", _chordInfo.chordType3);
     ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "chord", "type3att", _chordInfo.chordType3Attenuation);

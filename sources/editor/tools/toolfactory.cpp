@@ -54,6 +54,7 @@
 #include "default_mod/tooldefaultmod.h"
 #include "fast_edit_smpl/toolfasteditsmpl.h"
 #include "load_from_inst/toolloadfrominst.h"
+#include "merge_samples/toolmergesamples.h"
 
 
 ToolFactory::~ToolFactory()
@@ -107,6 +108,7 @@ void ToolFactory::initialize()
            << new ToolDivisionDuplication()
            << new ToolMonitor()
            << new ToolRemoveMods()
-           << new ToolCleanUnused()   // Sf2
+           << new ToolMergeSamples() // Presets
+           << new ToolCleanUnused() // Sf2
            << new ToolPresetList();
 }

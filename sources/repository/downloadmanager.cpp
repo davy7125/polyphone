@@ -73,7 +73,7 @@ void DownloadManager::download(int id, QString soundfontName)
     if (!_filesToDownload.contains(id))
     {
         _filesToDownload << id;
-        emit(progressChanged(0, id, soundfontName, ""));
+        emit progressChanged(0, id, soundfontName, "");
     }
     _mutex.unlock();
 
@@ -138,7 +138,7 @@ void DownloadManager::fileDownloaded(QString error)
         file.close();
 
         // The download is complete, notify it
-        emit(progressChanged(100, _currentDownloadId, currentDownload, pathWithoutExtension + "." + extension));
+        emit progressChanged(100, _currentDownloadId, currentDownload, pathWithoutExtension + "." + extension);
     }
     else
     {
@@ -160,7 +160,7 @@ void DownloadManager::progressChanged(int percent)
     _mutex.unlock();
 
     if (_currentDownloadId != -1)
-        emit(progressChanged(percent, _currentDownloadId, currentDownload, ""));
+        emit progressChanged(percent, _currentDownloadId, currentDownload, "");
 }
 
 void DownloadManager::cancel(int soundfontId)
@@ -179,5 +179,5 @@ void DownloadManager::cancel(int soundfontId)
     else
         _mutex.unlock();
 
-    emit(downloadCanceled(soundfontId));
+    emit downloadCanceled(soundfontId);
 }
