@@ -30,7 +30,7 @@
 class ModulatedParameter
 {
 public:
-    ModulatedParameter() {}
+    ModulatedParameter();
 
     // Initialize a modulated parameter
     void setType(AttributeType type);

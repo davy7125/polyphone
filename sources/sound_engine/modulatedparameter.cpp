@@ -26,6 +26,11 @@
 #include "utils.h"
 #include "basetypes.h"
 
+ModulatedParameter::ModulatedParameter() :
+    _type(champ_unknown),
+    _notRealTime(true)
+{}
+
 void ModulatedParameter::setType(AttributeType type)
 {
   _type = type;
