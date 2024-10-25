@@ -99,7 +99,7 @@ public:
     static void setTuningFork(int tuningFork);
     static void setTemperament(float temperament[12], int relativeKey);
 
-    static void prepareSincTable();
+    static void prepareTables();
 
 signals:
     void currentPosChanged(quint32 pos);
@@ -135,6 +135,9 @@ private:
 
     bool takeData(float * data, quint32 nbRead, qint32 loopMode);
     void biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float Q);
+    float fastSin(float value); // Range [0; 1] for [0; pi]
+    float fastCos(float value); // Range [0; 1] for [0; pi]
+    float getSinValue(float value); // Range [0; 0.5] for [0; pi / 2]
 
     // Arrays
     quint32 _arrayLength;
@@ -151,6 +154,7 @@ private:
     static volatile float s_temperament[12]; // Fine tune in cents from each key from C to B
     static volatile int s_temperamentRelativeKey;
     static float s_sinc_table7[256][7];
+    static float s_sin_table[256];
 };
 
 #endif // VOICE_H

@@ -55,7 +55,7 @@ int launchApplication(QtSingleApplication * app, Options &options)
 {
     // Prepare arrays
     SFModulator::prepareConversionTables();
-    Voice::prepareSincTable();
+    Voice::prepareTables();
 
     // Application style
     QSettings settings;

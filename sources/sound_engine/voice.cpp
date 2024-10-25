@@ -30,8 +30,9 @@ volatile int Voice::s_tuningFork = 440;
 volatile float Voice::s_temperament[12] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 volatile int Voice::s_temperamentRelativeKey = 0;
 float Voice::s_sinc_table7[256][7];
+float Voice::s_sin_table[256];
 
-void Voice::prepareSincTable()
+void Voice::prepareTables()
 {
     double v, i_shifted;
     for (int i = 0; i < 7; i++) // i: Offset in terms of whole samples
@@ -53,9 +54,13 @@ void Voice::prepareSincTable()
             else
                 v = 1.0;
 
-            s_sinc_table7[256 - i2 - 1][i] = v;
+            s_sinc_table7[256 - i2 - 1][i] = (float)v;
         }
     }
+
+    // Lookup table for sinus values in [0; pi/2[
+    for (int i = 0; i < 256; i++)
+        s_sin_table[i] = (float)sin(static_cast<double>(i) * M_PI_2 / 256.0);
 }
 
 // Constructeur, destructeur
@@ -164,7 +169,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     // Possible increase the length of arrays
     if (len > _arrayLength)
     {
-        unsigned int tmp = _pointDistanceArray[0];
+        quint32 tmp = _pointDistanceArray[0];
 
         delete [] _dataModArray;
         delete [] _modLfoArray;
@@ -195,7 +200,8 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         // Pitch modulation
         float temperamentFineTune = _voiceParam.getKey() < 0 ? 0.0f : (s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
                                                                 s_temperament[(21 - s_temperamentRelativeKey) % 12]); // Correction so that the tuning fork is accurate
-        float deltaPitchFixed = -1200.f * qLn(static_cast<double>(_audioSmplRate) / _smplRate * 440.f / s_tuningFork) / 0.69314718056f +
+        float deltaPitchFixed = -1731.234f /* -1200 / ln(2) */ *
+                qLn(static_cast<double>(_audioSmplRate) * 440.f / (_smplRate * s_tuningFork)) +
                 (playedNote - v_rootkey) * v_scaleTune + (temperamentFineTune + v_fineTune) + 100.0f * v_coarseTune;
 
         // Compute the distance of each point
@@ -255,14 +261,14 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         {
             _modFreqArray[i] = v_filterFreq *
                     EnveloppeVol::fastPow2((_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) / 1200.f);
-            if (_modFreqArray[i] > 20000.0f)
-                _modFreqArray[i] = 20000.0f;
+            if (_modFreqArray[i] > 0.5f * _audioSmplRate)
+                _modFreqArray[i] = 0.5f * _audioSmplRate;
             else if (_modFreqArray[i] < 20.0f)
                 _modFreqArray[i] = 20.0f;
         }
         float a0, a1, a2, b1, b2, valTmp;
         double filterQ = v_filterQ - 3.01f; // So that a value of 0 gives a non-resonant low pass
-        float q_lin = qPow(10, filterQ / 20.); // If filterQ is -3.01, q_lin is 1/sqrt(2)
+        float q_lin = qPow(10, 0.05 * filterQ); // If filterQ is -3.01, q_lin is 1/sqrt(2)
         for (quint32 i = 0; i < len; i++)
         {
             biQuadCoefficients(a0, a1, a2, b1, b2, _modFreqArray[i], q_lin);
@@ -281,7 +287,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 
     // Apply the volume envelop
     bool bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release, playedNote,
-                                              static_cast<float>(qPow(10, 0.05 * (_gain - v_attenuation - v_filterQ / 2))),
+                                              static_cast<float>(qPow(10, 0.05 * (_gain - v_attenuation - 0.5 * v_filterQ))),
                                               &_voiceParam);
 
     // No need to go further of only the release is needed
@@ -309,9 +315,9 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 
     //// APPLY PAN AND CHORUS ////
 
-    double pan = (v_pan + 50) * M_PI / 200.; // Between 0 and PI/2
-    float coefL = cos(pan);
-    float coefR = sin(pan);
+    float pan = 0.005f * (static_cast<float>(v_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]
+    float coefL = fastCos(pan);
+    float coefR = fastSin(pan);
     if (_chorusLevel > 0)
     {
         _chorus.setEffectMix(0.005 * _chorusLevel * 0.01 * v_chorusEffect);
@@ -438,7 +444,10 @@ void Voice::triggerReadFinishedSignal()
 void Voice::biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float Q)
 {
     // Calcul des coefficients d'une structure bi-quad pour un passe-bas
-    float theta = 2.f * M_PI * freq / _audioSmplRate;
+
+    // The maximum frequency is half the audio sample rate
+    // Range of theta is [0; 1] for [0; pi]
+    float theta = 2.f * freq / _audioSmplRate;
 
     if (Q <= 0)
     {
@@ -450,7 +459,7 @@ void Voice::biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float
     }
     else
     {
-        float dTmp = sin(theta) / (2.f * Q);
+        float dTmp = fastSin(theta) / (2.f * Q);
         if (dTmp <= -1.0f)
         {
             a0 = 1;
@@ -462,14 +471,41 @@ void Voice::biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float
         else
         {
             float beta = 0.5f * (1.f - dTmp) / (1.f + dTmp);
-            float gamma = (0.5f + beta) * cos(theta);
-            a0 = (0.5 + beta - gamma) / 2.f;
+            float gamma = (0.5f + beta) * fastCos(theta);
+            a0 = (0.5f + beta - gamma) * 0.5f;
             a1 = 2.f * a0;
             a2 = a0;
             b1 = -2.f * gamma;
             b2 = 2.f * beta;
         }
     }
+}
+
+float Voice::fastSin(float value)
+{
+    return value < 0.5f ? getSinValue(value) : getSinValue(1.f - value);
+}
+
+float Voice::fastCos(float value)
+{
+    return value < 0.5f ? getSinValue(0.5f - value) : -getSinValue(value - 0.5f);
+}
+
+float Voice::getSinValue(float value)
+{
+    if (value <= 0.f)
+        return 0.f;
+    if (value >= 0.5f)
+        return 1.f;
+
+    value *= 512;
+    int indexBefore = static_cast<int>(value);
+    float diff = value - static_cast<float>(indexBefore);
+
+    // Linear interpolation
+    return indexBefore >= 255 ?
+        s_sin_table[255] + (1.f - s_sin_table[255]) * diff :
+        s_sin_table[indexBefore] + (s_sin_table[indexBefore + 1] - s_sin_table[indexBefore]) * diff;
 }
 
 double Voice::getPan()
