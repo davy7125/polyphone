@@ -171,7 +171,6 @@ void SoundEngine::configureVoice(Voice * voice, SynthConfig * config, SynthInter
     // Chorus
     s_voices[s_numberOfVoices]->setChorus(config->choLevel, config->choDepth, config->choFrequency);
 
-    qDebug() << "voice type" << voice->getType();
     // Loop / gain
     if (voice->getType() == 0)
     {
