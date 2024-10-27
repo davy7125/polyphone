@@ -176,5 +176,5 @@ void PageOverview::on_table_cellDoubleClicked(int row, int column)
     QString idStr = ui->table->item(row, 0)->text();
     QStringList listTmp = idStr.split(':');
     EltID id((ElementType)listTmp[0].toInt(), listTmp[1].toInt(), listTmp[2].toInt(), 0, 0);
-    emit(selectedIdsChanged(IdList(id)));
+    emit selectedIdsChanged(IdList(id));
 }

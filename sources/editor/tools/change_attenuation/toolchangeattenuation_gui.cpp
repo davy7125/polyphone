@@ -106,10 +106,10 @@ QString ToolChangeAttenuation_gui::formatDouble(double value)
 
 void ToolChangeAttenuation_gui::on_pushCancel_clicked()
 {
-    emit(this->canceled());
+    emit this->canceled();
 }
 
 void ToolChangeAttenuation_gui::on_pushOk_clicked()
 {
-    emit(this->validated());
+    emit this->validated();
 }

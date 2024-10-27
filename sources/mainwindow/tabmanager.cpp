@@ -264,8 +264,8 @@ void TabManager::onTabCloseRequested(QWidget * widget)
 
         if (_tabs.empty())
         {
-            emit(recorderDisplayChanged(false));
-            emit(keyboardDisplayChanged(false));
+            emit recorderDisplayChanged(false);
+            emit keyboardDisplayChanged(false);
         }
     }
     else if (widget == dynamic_cast<QWidget*>(_configTab))
@@ -312,7 +312,7 @@ void TabManager::closeCurrentTab()
 void TabManager::onTabIndexChanged(int tabIndex)
 {
     QWidget * widget = _stackedWidget->widget(tabIndex);
-    emit(tabOpen(_tabs.contains(dynamic_cast<Tab*>(widget))));
+    emit tabOpen(_tabs.contains(dynamic_cast<Tab*>(widget)));
 }
 
 void TabManager::openUser()

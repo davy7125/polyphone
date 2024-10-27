@@ -77,10 +77,10 @@ void ToolFrequencyFilter_gui::saveParameters(AbstractToolParameters * parameters
 
 void ToolFrequencyFilter_gui::on_pushCancel_clicked()
 {
-    emit(this->canceled());
+    emit this->canceled();
 }
 
 void ToolFrequencyFilter_gui::on_pushOk_clicked()
 {
-    emit(this->validated());
+    emit this->validated();
 }

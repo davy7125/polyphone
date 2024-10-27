@@ -119,7 +119,7 @@ void ModulatorEditor::on_pushExpand_clicked()
     ContextManager::configuration()->setValue(
                 ConfManager::SECTION_DISPLAY,
                 _isPrst ? "prst_modulator_section_collapsed" : "inst_modulator_section_collapsed", false);
-    emit(expandedStateChanged(true));
+    emit expandedStateChanged(true);
 }
 
 void ModulatorEditor::on_pushCollapse_clicked()
@@ -133,7 +133,7 @@ void ModulatorEditor::on_pushCollapse_clicked()
     ContextManager::configuration()->setValue(
                 ConfManager::SECTION_DISPLAY,
                 _isPrst ? "prst_modulator_section_collapsed" : "inst_modulator_section_collapsed", true);
-    emit(expandedStateChanged(false));
+    emit expandedStateChanged(false);
 }
 
 void ModulatorEditor::setIds(IdList ids, QList<AttributeType> attributes)
@@ -332,7 +332,7 @@ void ModulatorEditor::on_listWidget_itemSelectionChanged()
     }
 
     // Notify the change
-    emit(attributesSelected(attributes));
+    emit attributesSelected(attributes);
 
     // Adapt the button tooltips
     updateButtons(!selection.isEmpty());

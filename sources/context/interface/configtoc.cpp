@@ -54,25 +54,25 @@ ConfigToc::~ConfigToc()
 
 void ConfigToc::on_buttonGeneral_clicked()
 {
-    emit(sectionClicked(0));
+    emit sectionClicked(0);
 }
 
 void ConfigToc::on_buttonInterface_clicked()
 {
-    emit(sectionClicked(1));
+    emit sectionClicked(1);
 }
 
 void ConfigToc::on_buttonSound_clicked()
 {
-    emit(sectionClicked(2));
+    emit sectionClicked(2);
 }
 
 void ConfigToc::on_buttonKeyboard_clicked()
 {
-    emit(sectionClicked(3));
+    emit sectionClicked(3);
 }
 
 void ConfigToc::on_buttonRepository_clicked()
 {
-    emit(sectionClicked(4));
+    emit sectionClicked(4);
 }

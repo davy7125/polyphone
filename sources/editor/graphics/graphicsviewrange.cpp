@@ -813,7 +813,7 @@ void GraphicsViewRange::mouseDoubleClickEvent(QMouseEvent * event)
 
         // Change the selection
         if (!childIds.empty())
-            emit(selectionChanged(childIds));
+            emit selectionChanged(childIds);
     }
 }
 
@@ -1028,7 +1028,7 @@ void GraphicsViewRange::triggerDivisionSelected()
     if (ids.empty())
         ids << _defaultID;
     _keepFirstShiftPoint = true;
-    emit(selectionChanged(ids));
+    emit selectionChanged(ids);
     _keepFirstShiftPoint = false;
 }
 

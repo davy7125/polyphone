@@ -182,7 +182,7 @@ void RepositoryManager::initialize()
         delete _soundfontInfos.take(key);
 
     // Notify the list is downloading
-    emit(initializing());
+    emit initializing();
 
     // Download the list
     _urlReaderJsonList->download();
@@ -201,7 +201,7 @@ void RepositoryManager::soundfontListAvailable(QString error)
     // Notify that the list is ready
     if (!error.isEmpty())
         qCritical() << "RepositoryManager::soundfontListAvailable() - received error" << error;
-    emit(ready(error));
+    emit ready(error);
 }
 
 QString RepositoryManager::loadSoundfontInfo()
@@ -495,5 +495,5 @@ void RepositoryManager::openSoundfont(int soundfontId, bool daily)
     }
 
     // Ask to open the page
-    emit(openSoundfont(soundfontId));
+    emit openSoundfont(soundfontId);
 }

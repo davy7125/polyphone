@@ -177,5 +177,5 @@ void SoundfontViewerLeft::onAuthorClicked(const QString &link)
 {
     SoundfontFilter * filter = new SoundfontFilter();
     filter->setSearchText(QString("Author:\"%1\"").arg(link));
-    emit(itemClicked(filter));
+    emit itemClicked(filter);
 }

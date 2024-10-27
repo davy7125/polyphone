@@ -288,10 +288,10 @@ void PianoScene::mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent)
     {
         PianoKey* key = getKeyForPos(mouseEvent->scenePos());
         if (key)
-            emit(mouseOver(key->getNote(),
-                           getPressureFromPos(mouseEvent->scenePos(), key->isBlack())));
+            emit mouseOver(key->getNote(),
+                           getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
         else
-            emit(mouseOver(-1, -1));
+            emit mouseOver(-1, -1);
     }
 }
 

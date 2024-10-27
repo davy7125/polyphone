@@ -112,7 +112,7 @@ void BrowserSortMenu::elementClicked(int index)
         else
             action->setIcon(QIcon());
     }
-    emit(currentIndexChanged(index));
+    emit currentIndexChanged(index);
 }
 
 #if QT_VERSION >= 0x060000

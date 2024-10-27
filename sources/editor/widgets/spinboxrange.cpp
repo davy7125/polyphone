@@ -94,7 +94,7 @@ void SpinBoxRange::stepBy(int steps)
         lineEdit()->setSelection(posSeparator + SEPARATOR.size(), txt.size() - posSeparator + SEPARATOR.size());
     }
 
-    emit(valueChanged());
+    emit valueChanged();
 }
 
 QValidator::State SpinBoxRange::validate(QString& input, int& pos) const
@@ -137,7 +137,7 @@ void SpinBoxRange::clear()
     _valMin = MINI;
     _valMax = MAXI;
     formatText();
-    emit(valueChanged());
+    emit valueChanged();
 }
 
 bool SpinBoxRange::processKey(int channel, int key, int vel)
@@ -224,7 +224,7 @@ void SpinBoxRange::updateValue()
     _valMax = valMax;
 
     formatText();
-    emit(valueChanged());
+    emit valueChanged();
 }
 
 void SpinBoxRange::stringToRange(QString input, bool &isNull, int &valMin, int &valMax, QValidator::State &state) const

@@ -139,27 +139,27 @@ void ConfManager::setValue(Section section, QString key, QVariant value)
             PushStereoEditing::SetState(value.toBool());
         break;
     case Section::SECTION_SOUND_ENGINE:
-        emit(soundEngineConfigurationChanged());
+        emit soundEngineConfigurationChanged();
         if (key == "modulator_vel_to_filter")
             ModulatorData::setModulatorVelToFilterType(value.toInt());
         break;
     case Section::SECTION_AUDIO:
         if (key != "stereo_playback")
         {
-            emit(soundEngineConfigurationChanged()); // First prepare the sound engine (the buffer can be adjusted)
-            emit(audioServerConfigurationChanged()); // Then update the audio server configuration
+            emit soundEngineConfigurationChanged(); // First prepare the sound engine (the buffer can be adjusted)
+            emit audioServerConfigurationChanged(); // Then update the audio server configuration
         }
         break;
     case Section::SECTION_KEYBOARD:
-        emit(keyMapChanged());
+        emit keyMapChanged();
         if (key == "octave_offset")
-            emit(keyboardOctaveChanged());
+            emit keyboardOctaveChanged();
         break;
     case Section::SECTION_DISPLAY:
         if (key == "division_sort")
-            emit(divisionSortChanged());
+            emit divisionSortChanged();
         else if (key == "name_middle_c")
-            emit(interfaceChanged());
+            emit interfaceChanged();
         break;
     default:
         // Nothing

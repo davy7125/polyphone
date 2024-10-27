@@ -120,5 +120,5 @@ void LinkedToWidget::onClick(bool isClicked)
     QPushButton * button = dynamic_cast<QPushButton*>(QObject::sender());
     int buttonIndex = _buttons.indexOf(button);
     if (buttonIndex != -1)
-        emit(itemClicked(_buttonIds[buttonIndex]));
+        emit itemClicked(_buttonIds[buttonIndex]);
 }

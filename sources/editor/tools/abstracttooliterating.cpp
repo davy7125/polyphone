@@ -118,7 +118,7 @@ void AbstractToolIterating::runInternal(SoundfontManager * sm, QWidget * parent,
 
     if (_steps == 0)
     {
-        emit(finished(false));
+        emit finished(false);
         return;
     }
     _currentStep = 0;
@@ -166,7 +166,7 @@ void AbstractToolIterating::onElementProcessed()
 
         // Revert everything that has been done until now
         SoundfontManager::getInstance()->revertNewEditing();
-        emit(finished(false));
+        emit finished(false);
     }
     else
     {
@@ -175,7 +175,7 @@ void AbstractToolIterating::onElementProcessed()
         {
             delete _waitingDialog;
             _waitingDialog = nullptr;
-             emit(finished(true));
+             emit finished(true);
         }
         else if (!_async && !_idsToProcess.empty())
         {

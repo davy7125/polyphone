@@ -56,7 +56,7 @@ void EditorDialogInsertVideo::accept()
     QRegularExpressionMatch match = QRegularExpression("www\\.youtube\\.com/watch\\?v=(\\w+)").match(url);
     if (match.hasMatch())
     {
-        emit(accepted(match.captured(1)));
+        emit accepted(match.captured(1));
         QDialog::accept();
     }
 
@@ -64,7 +64,7 @@ void EditorDialogInsertVideo::accept()
     match = QRegularExpression("youtu\\.be/(\\w+)").match(url);
     if (match.hasMatch())
     {
-        emit(accepted(match.captured(1)));
+        emit accepted(match.captured(1));
         QDialog::accept();
     }
 
@@ -72,7 +72,7 @@ void EditorDialogInsertVideo::accept()
     match = QRegularExpression("youtube\\.com/embed/(\\w+)").match(url);
     if (match.hasMatch())
     {
-        emit(accepted(match.captured(1)));
+        emit accepted(match.captured(1));
         QDialog::accept();
     }
 

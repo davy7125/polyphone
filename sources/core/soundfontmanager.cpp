@@ -612,12 +612,12 @@ void SoundfontManager::endEditing(QString editingSource)
     // Close the action set and get the list of sf2 that have been edited
     QList<int> sf2Indexes = _undoRedo->commitActionSet();
     if (!sf2Indexes.empty())
-        emit(editingDone(editingSource, sf2Indexes));
+        emit editingDone(editingSource, sf2Indexes);
 
     // Possibly notify that the keyboard needs to be updated
     if (_parameterForCustomizingKeyboardChanged)
     {
-        emit(parameterForCustomizingKeyboardChanged());
+        emit parameterForCustomizingKeyboardChanged();
         _parameterForCustomizingKeyboardChanged = false;
     }
 }
@@ -654,7 +654,7 @@ void SoundfontManager::undo(int indexSf2)
     QMutexLocker locker(&_mutex);
     QList<int> sf2Indexes = undo(_undoRedo->undo(indexSf2));
     if (!sf2Indexes.empty())
-        emit(editingDone("command:undo", sf2Indexes));
+        emit editingDone("command:undo", sf2Indexes);
 }
 
 QList<int> SoundfontManager::undo(QList<Action *> actions)
@@ -744,14 +744,14 @@ void SoundfontManager::redo(int indexSf2)
     _undoRedo->clearCurrentActionSet();
 
     if (!sf2Indexes.empty())
-        emit(editingDone("command:redo", sf2Indexes));
+        emit editingDone("command:redo", sf2Indexes);
 }
 
 void SoundfontManager::markAsSaved(int indexSf2)
 {
     QMutexLocker locker(&_mutex);
     _soundfonts->getSoundfont(indexSf2)->_numEdition = this->_undoRedo->getEdition(indexSf2);
-    emit(editingDone("command:save", QList<int>() << indexSf2));
+    emit editingDone("command:save", QList<int>() << indexSf2);
 }
 
 bool SoundfontManager::isEdited(int indexSf2)
@@ -876,7 +876,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
         // Finally delete sf2
         _soundfonts->deleteSoundfont(id.indexSf2);
         _undoRedo->dropSoundfont(id.indexSf2);
-        emit(soundfontClosed(id.indexSf2));
+        emit soundfontClosed(id.indexSf2);
     }break;
     case elementSmpl:{
         // Check that no instruments use the sample
@@ -1465,7 +1465,7 @@ int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
             qOldStr = tmp->_sound.getFileName();
             tmp->_sound.setFileName(qStr);
             if (!tmp->_sound.getError().isEmpty())
-                emit(errorEncountered(tmp->_sound.getError()));
+                emit errorEncountered(tmp->_sound.getError());
             break;
         default:
             break;

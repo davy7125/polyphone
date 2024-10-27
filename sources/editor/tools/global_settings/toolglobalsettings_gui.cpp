@@ -273,10 +273,10 @@ void ToolGlobalSettings_gui::on_doubleSpinMax_valueChanged(double arg1)
 
 void ToolGlobalSettings_gui::on_pushCancel_clicked()
 {
-    emit(this->canceled());
+    emit this->canceled();
 }
 
 void ToolGlobalSettings_gui::on_pushOk_clicked()
 {
-    emit(this->validated());
+    emit this->validated();
 }

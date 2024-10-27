@@ -67,6 +67,6 @@ void DialogNewElement::on_pushOk_clicked()
     // Save the checkbox state
     ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, "new_element", ui->checkLink->isChecked());
 
-    emit(onOk(ui->lineEdit->text(), ui->checkLink->isChecked() && ui->checkLink->isEnabled()));
+    emit onOk(ui->lineEdit->text(), ui->checkLink->isChecked() && ui->checkLink->isEnabled());
     QDialog::close();
 }

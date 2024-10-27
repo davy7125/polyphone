@@ -118,7 +118,7 @@ void AttributeFlow::onClick(bool checked)
         }
 
         // Notify the click with the filter
-        emit(itemClicked(filter));
+        emit itemClicked(filter);
     }
 }
 

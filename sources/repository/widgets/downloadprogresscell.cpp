@@ -87,7 +87,7 @@ void DownloadProgressCell::mousePressEvent(QMouseEvent *event)
             }
         }
 
-        emit(closeMenu());
+        emit closeMenu();
     }
 
     QWidget::mousePressEvent(event);

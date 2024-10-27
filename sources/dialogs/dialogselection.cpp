@@ -95,6 +95,6 @@ void DialogSelection::on_pushOk_clicked()
             listIndex << checkBoxItem->data(Qt::UserRole).toInt();
     }
 
-    emit(listChosen(listIndex));
+    emit listChosen(listIndex);
     QDialog::accept();
 }

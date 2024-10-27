@@ -1063,7 +1063,7 @@ void PageTable::onOpenElement(EltID id)
         id.typeElement = elementInst;
     }
 
-    emit(selectedIdsChanged(IdList(id)));
+    emit selectedIdsChanged(IdList(id));
 }
 
 void PageTable::displayModInTable()

@@ -142,5 +142,5 @@ void FooterLinkedTo::updateInterface()
 
 void FooterLinkedTo::onLinkClicked(EltID id)
 {
-    emit(selectedIdsChanged(id));
+    emit selectedIdsChanged(id);
 }

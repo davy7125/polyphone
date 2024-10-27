@@ -121,7 +121,7 @@ void ActionSet::clearRedo()
 
             // Definitely delete an element that has been created and then deleted
             if (actionToDelete->typeAction == Action::TypeCreation)
-                emit(dropId(actionToDelete->id));
+                emit dropId(actionToDelete->id);
 
             delete actionToDelete;
         }
@@ -139,7 +139,7 @@ void ActionSet::cleanUndo()
 
             // Definitely delete an element that has been deleted a long time ago
             if (actionToDelete->typeAction == Action::TypeRemoval)
-                emit(dropId(actionToDelete->id));
+                emit dropId(actionToDelete->id);
 
             delete actionToDelete;
         }

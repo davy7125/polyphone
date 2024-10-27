@@ -341,7 +341,7 @@ void TreeViewMenu::associate(IdList ids, EltID idDest)
     sm->endEditing("command:associate");
 
     // Select the parent element of all children that have been linked
-    emit(selectionChanged(idDest));
+    emit selectionChanged(idDest);
 }
 
 void TreeViewMenu::replace(EltID idSrc, EltID idDest)
@@ -620,7 +620,7 @@ void TreeViewMenu::paste()
         if (!newIds.isEmpty())
         {
             sm->endEditing("command:paste");
-            emit(selectionChanged(newIds));
+            emit selectionChanged(newIds);
         }
     }
 }

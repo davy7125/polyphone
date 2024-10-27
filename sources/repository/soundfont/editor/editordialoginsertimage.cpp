@@ -54,7 +54,7 @@ void EditorDialogInsertImage::accept()
     QUrl url(ui->lineUrl->text());
     if ((ui->lineUrl->text().startsWith("http://") || ui->lineUrl->text().startsWith("https://")) && url.isValid())
     {
-        emit(accepted(url.toString()));
+        emit accepted(url.toString());
         QDialog::accept();
     }
 

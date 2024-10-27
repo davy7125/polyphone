@@ -60,7 +60,7 @@ void Page::hideEvent(QHideEvent * event)
     // Stop all sounds
     ContextManager::midi()->stopAll();
     _synth->stop(false);
-    emit(pageHidden());
+    emit pageHidden();
 
     QWidget::hideEvent(event);
 }

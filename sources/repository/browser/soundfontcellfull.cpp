@@ -158,7 +158,7 @@ void SoundfontCellFull::on_labelAuthor_linkActivated(const QString &link)
 {
     SoundfontFilter * filter = new SoundfontFilter();
     filter->setSearchText(QString("Author:\"%1\"").arg(link));
-    emit(itemClicked(filter));
+    emit itemClicked(filter);
 }
 
 int SoundfontCellFull::heightForWidth(int width) const

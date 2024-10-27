@@ -510,7 +510,7 @@ void PageSmpl::setRootKey()
 void PageSmpl::setRootKey(int val)
 {
     // Send a signal for updating the keyboard
-    emit(rootKeyChanged(val));
+    emit rootKeyChanged(val);
 
     // Modif synth
     updateSinus();

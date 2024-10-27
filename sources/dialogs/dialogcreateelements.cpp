@@ -114,6 +114,6 @@ void DialogCreateElements::on_pushOk_clicked()
     // Store the option
     ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "create_element_dialog", ui->radioOnePerElement->isChecked() ? 1 : 0);
 
-    emit(createElements(_ids, ui->radioOnePerElement->isChecked() || _ids.count() == 1));
+    emit createElements(_ids, ui->radioOnePerElement->isChecked() || _ids.count() == 1);
     QDialog::accept();
 }

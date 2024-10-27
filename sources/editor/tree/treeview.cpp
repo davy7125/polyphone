@@ -230,7 +230,7 @@ void TreeView::keyPressEvent(QKeyEvent * event)
     }
     else if (event->key() == Qt::Key_Space)
     {
-        emit(spacePressed());
+        emit spacePressed();
         event->accept();
     }
     else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_D)
@@ -241,7 +241,7 @@ void TreeView::keyPressEvent(QKeyEvent * event)
     }
     else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_F)
     {
-        emit(focusOnSearch());
+        emit focusOnSearch();
         event->accept();
     }
     else
@@ -439,7 +439,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
         this->setCurrentIndex(this->model()->index(0, 0));
 
     _fixingSelection = false;
-    emit(selectionChanged(getSelectedIds()));
+    emit selectionChanged(getSelectedIds());
 }
 
 IdList TreeView::getSelectedIds()

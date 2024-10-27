@@ -45,7 +45,7 @@ private:
     void focusOutEvent(QFocusEvent *e)
     {
         if (e->lostFocus())
-            emit(editingFinished());
+            emit editingFinished();
         QTextEdit::focusOutEvent(e);
     }
 

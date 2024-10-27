@@ -113,7 +113,7 @@ void DetailsManager::run()
     _mutex.unlock();
 
     foreach (int availableId, availableIds)
-        emit(detailsReady(availableId));
+        emit detailsReady(availableId);
 }
 
 void DetailsManager::downloadCompleted(QString error)
@@ -160,9 +160,9 @@ void DetailsManager::downloadCompleted(QString error)
 
     // Notify the details are ready
     if (error.isEmpty())
-        emit(detailsReady(currentId));
+        emit detailsReady(currentId);
     else
-        emit(detailsFailed(currentId, error));
+        emit detailsFailed(currentId, error);
 
     // Check if something else is to be processed
     this->run();

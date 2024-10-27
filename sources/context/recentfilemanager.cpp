@@ -113,7 +113,7 @@ void RecentFileManager::addRecentFile(FileType fileType, QString filePath)
                                      _listDateTimes.at(i).toString("yyyy/MM/dd HH:mm:ss"));
         }
 
-        emit(recentSf2Changed());
+        emit recentSf2Changed();
     }break;
     }
 }
@@ -140,7 +140,7 @@ void RecentFileManager::removeRecentSoundfontFile(QString filePath)
         }
     }
 
-    emit(recentSf2Changed());
+    emit recentSf2Changed();
 }
 
 QString RecentFileManager::getLastFile(FileType fileType, int num)

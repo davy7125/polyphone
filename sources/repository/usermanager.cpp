@@ -67,13 +67,13 @@ void UserManager::login()
     {
         ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "auto_connect", false);
         _connectionState = DISCONNECTED;
-        emit(connectionStateChanged(_connectionState));
+        emit connectionStateChanged(_connectionState);
         return;
     }
 
     // State is now pending
     _connectionState = PENDING;
-    emit(connectionStateChanged(_connectionState));
+    emit connectionStateChanged(_connectionState);
 
     // Prepare the query for login
     _userReaderJson->clearArguments();
@@ -87,7 +87,7 @@ void UserManager::login()
 void UserManager::logout()
 {
     _connectionState = DISCONNECTED;
-    emit(connectionStateChanged(_connectionState));
+    emit connectionStateChanged(_connectionState);
 }
 
 UserManager::ConnectionState UserManager::getConnectionState()
@@ -163,5 +163,5 @@ void UserManager::userDataAvailable(QString error)
         _connectionState = FAILED;
     }
 
-    emit(connectionStateChanged(_connectionState));
+    emit connectionStateChanged(_connectionState);
 }

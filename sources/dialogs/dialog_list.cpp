@@ -121,7 +121,7 @@ void DialogList::on_pushOk_clicked()
     if (ui->listWidget->selectedItems().count())
     {
         ListWidgetItem *item = dynamic_cast<ListWidgetItem *>(ui->listWidget->currentItem());
-        emit(elementSelected(item->id, _isAssociation));
+        emit elementSelected(item->id, _isAssociation);
     }
     QDialog::accept();
 }

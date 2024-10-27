@@ -63,10 +63,10 @@ void ToolRelease_gui::saveParameters(AbstractToolParameters * parameters)
 
 void ToolRelease_gui::on_pushCancel_clicked()
 {
-    emit(this->canceled());
+    emit this->canceled();
 }
 
 void ToolRelease_gui::on_pushOk_clicked()
 {
-    emit(this->validated());
+    emit this->validated();
 }

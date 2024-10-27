@@ -60,10 +60,10 @@ void ToolTranspose_gui::saveParameters(AbstractToolParameters * parameters)
 
 void ToolTranspose_gui::on_pushCancel_clicked()
 {
-    emit(this->canceled());
+    emit this->canceled();
 }
 
 void ToolTranspose_gui::on_pushOk_clicked()
 {
-    emit(this->validated());
+    emit this->validated();
 }

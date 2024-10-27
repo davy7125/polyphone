@@ -48,11 +48,11 @@ void ModulatorListWidget::onSelectionChanged()
 void ModulatorListWidget::keyPressEvent(QKeyEvent * event)
 {
     if (event->key() == Qt::Key_Delete)
-        emit(deleted());
+        emit deleted();
     else if (event->key() == Qt::Key_C && (event->modifiers() & Qt::ControlModifier))
-        emit(copied());
+        emit copied();
     else if (event->key() == Qt::Key_V && (event->modifiers() & Qt::ControlModifier))
-        emit(pasted());
+        emit pasted();
 }
 
 QList<ModulatorData> ModulatorListWidget::getSelectedModulators()

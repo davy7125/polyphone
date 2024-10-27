@@ -352,10 +352,10 @@ double ToolSoundSpatialization_gui::getAxe(int note, int nbDiv, bool sens)
 
 void ToolSoundSpatialization_gui::on_pushCancel_clicked()
 {
-    emit(this->canceled());
+    emit this->canceled();
 }
 
 void ToolSoundSpatialization_gui::on_pushOk_clicked()
 {
-    emit(this->validated());
+    emit this->validated();
 }

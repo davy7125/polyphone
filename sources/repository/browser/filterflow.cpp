@@ -227,5 +227,5 @@ void FilterFlow::buttonClicked()
 
     // Notify about the change
     if (updateNeeded)
-        emit(selectionChanged());
+        emit selectionChanged();
 }

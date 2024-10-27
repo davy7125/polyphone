@@ -50,7 +50,7 @@ FilterTagCell::~FilterTagCell()
 
 void FilterTagCell::on_pushDelete_clicked()
 {
-    emit(onRemoveClicked());
+    emit onRemoveClicked();
 }
 
 void FilterTagCell::setTagName(QString tagName)

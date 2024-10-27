@@ -100,7 +100,7 @@ void WidgetShowHistory::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     // Corresponding widget
     WidgetShowHistoryCell * cell = (WidgetShowHistoryCell*)ui->listWidget->itemWidget(item);
-    emit(openFile(cell->getLink()));
+    emit openFile(cell->getLink());
 }
 
 void WidgetShowHistory::on_listWidget_itemSelectionChanged()
@@ -181,7 +181,7 @@ void WidgetShowHistory::keyPressEvent(QKeyEvent * event)
         }
 
         foreach (QString link, links)
-            emit(openFile(link));
+            emit openFile(link);
     }
     else if (event->key() == Qt::Key_Delete)
     {

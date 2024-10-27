@@ -89,7 +89,7 @@ public:
     SoloManager * solo() { return _solo; }
 
     // Create a notification about a new soundfont that has been loaded
-    void emitNewSoundfontLoaded(int sf2Index) { emit(this->soundfontLoaded(sf2Index)); }
+    void emitNewSoundfontLoaded(int sf2Index) { emit this->soundfontLoaded(sf2Index); }
 
     // Get the division order
     // Sort type: 0: key, 1: velocity, 2: name

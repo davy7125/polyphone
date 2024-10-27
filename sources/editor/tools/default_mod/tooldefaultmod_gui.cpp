@@ -78,19 +78,19 @@ void ToolDefaultMod_gui::saveParameters(AbstractToolParameters * parameters)
 
 void ToolDefaultMod_gui::on_pushCancel_clicked()
 {
-    emit(canceled());
+    emit canceled();
 }
 
 void ToolDefaultMod_gui::on_pushOverride_clicked()
 {
     _isActionDisable = false;
-    emit(validated());
+    emit validated();
 }
 
 void ToolDefaultMod_gui::on_pushDisable_clicked()
 {
     _isActionDisable = true;
-    emit(validated());
+    emit validated();
 }
 
 void ToolDefaultMod_gui::on_listWidget_itemSelectionChanged()

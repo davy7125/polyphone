@@ -375,17 +375,17 @@ void PageSf2::dateFocussed(bool hasFocus)
 
 void PageSf2::on_pushViewSamples_clicked()
 {
-    emit(selectedIdsChanged(EltID(elementRootSmpl, _currentID.indexSf2)));
+    emit selectedIdsChanged(EltID(elementRootSmpl, _currentID.indexSf2));
 }
 
 void PageSf2::on_pushViewInstruments_clicked()
 {
-    emit(selectedIdsChanged(EltID(elementRootInst, _currentID.indexSf2)));
+    emit selectedIdsChanged(EltID(elementRootInst, _currentID.indexSf2));
 }
 
 void PageSf2::on_pushViewPresets_clicked()
 {
-    emit(selectedIdsChanged(EltID(elementRootPrst, _currentID.indexSf2)));
+    emit selectedIdsChanged(EltID(elementRootPrst, _currentID.indexSf2));
 }
 
 void PageSf2::on_comboBox_currentIndexChanged(int index)

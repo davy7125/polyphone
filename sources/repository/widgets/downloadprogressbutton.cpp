@@ -109,7 +109,7 @@ void DownloadProgressButton::clearCompletedDownloads()
     }
     updatePercent();
     if (_cells.empty())
-        emit(cleared());
+        emit cleared();
 
     _mutex.unlock();
 }

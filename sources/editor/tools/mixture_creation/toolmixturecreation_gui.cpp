@@ -559,7 +559,7 @@ void ToolMixtureCreation_gui::on_comboType2_currentIndexChanged(int index)
 
 void ToolMixtureCreation_gui::on_pushCancel_clicked()
 {
-    emit(this->canceled());
+    emit this->canceled();
 }
 
 void ToolMixtureCreation_gui::on_pushOk_clicked()
@@ -587,5 +587,5 @@ void ToolMixtureCreation_gui::on_pushOk_clicked()
         return;
     }
 
-    emit(this->validated());
+    emit this->validated();
 }

@@ -353,7 +353,7 @@ bool QtSingleApplication::event(QEvent * event)
     {
         QFileOpenEvent * openEvent = dynamic_cast<QFileOpenEvent*>(event);
         QString fileName = openEvent->file();
-        emit(messageReceived(fileName));
+        emit messageReceived(fileName);
     }
 
     return QApplication::event(event);

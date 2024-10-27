@@ -197,10 +197,10 @@ void ToolChords::onElementProcessed(EltID idSmpl, quint32 key, quint32 minKey, d
         if (_canceled)
         {
             SoundfontManager::getInstance()->revertNewEditing();
-            emit(finished(false));
+            emit finished(false);
         }
         else
-            emit(finished(true));
+            emit finished(true);
     }
 }
 

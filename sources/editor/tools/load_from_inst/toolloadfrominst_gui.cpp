@@ -78,10 +78,10 @@ void ToolLoadFromInst_gui::saveParameters(AbstractToolParameters * parameters)
 
 void ToolLoadFromInst_gui::on_pushOk_clicked()
 {
-    emit(this->validated());
+    emit this->validated();
 }
 
 void ToolLoadFromInst_gui::on_pushCancel_clicked()
 {
-    emit(this->canceled());
+    emit this->canceled();
 }

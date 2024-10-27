@@ -64,6 +64,6 @@ void DialogQuestion::on_pushCancel_clicked()
 
 void DialogQuestion::on_pushOk_clicked()
 {
-    emit(onOk(ui->lineEdit->text()));
+    emit onOk(ui->lineEdit->text());
     QDialog::close();
 }

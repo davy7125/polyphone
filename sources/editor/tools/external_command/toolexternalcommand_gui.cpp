@@ -127,10 +127,10 @@ void ToolExternalCommand_gui::on_pushOk_clicked()
     }
 
     // Notify about the validation
-    emit(this->validated());
+    emit this->validated();
 }
 
 void ToolExternalCommand_gui::on_pushCancel_clicked()
 {
-    emit(this->canceled());
+    emit this->canceled();
 }

@@ -207,7 +207,7 @@ void TableWidget::wheelEvent(QWheelEvent * event)
 
 void TableWidget::commitData(QWidget *editor)
 {
-    emit(actionBegin());
+    emit actionBegin();
     QTableWidget::commitData(editor);
 
     QVariant value = model()->data(currentIndex(), Qt::EditRole).toString();
@@ -262,7 +262,7 @@ void TableWidget::commitData(QWidget *editor)
             }
         }
     }
-    emit(actionFinished());
+    emit actionFinished();
 }
 
 void TableWidget::setLoopModeImage(int row, int column, int loopModeValue)
@@ -349,7 +349,7 @@ void TableWidget::copy()
 
 void TableWidget::paste()
 {
-    emit(actionBegin());
+    emit actionBegin();
     QString selected_text = qApp->clipboard()->text();
     QStringList cells = selected_text.split(QRegularExpression("[\n\t]"));
 
@@ -413,19 +413,19 @@ void TableWidget::paste()
             }
         }
     }
-    emit(actionFinished());
+    emit actionFinished();
 }
 
 void TableWidget::deleteCells()
 {
-    emit(actionBegin());
+    emit actionBegin();
     QList<QTableWidgetItem*> listItems = selectedItems();
     foreach (QTableWidgetItem * item, listItems)
     {
         item->setText("");
         item->setData(Qt::UserRole, QVariant());
     }
-    emit(actionFinished());
+    emit actionFinished();
 }
 
 void TableWidget::onSectionDoubleClicked(int index)

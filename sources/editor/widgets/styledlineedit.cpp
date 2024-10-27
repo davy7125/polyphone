@@ -57,14 +57,14 @@ void StyledLineEdit::focusInEvent(QFocusEvent *e)
 
     this->setStyle(true);
     QLineEdit::focusInEvent(e);
-    emit(focussed(true));
+    emit focussed(true);
 }
 
 void StyledLineEdit::focusOutEvent(QFocusEvent *e)
 {
     this->setStyle(false);
     QLineEdit::focusOutEvent(e);
-    emit(focussed(false));
+    emit focussed(false);
 
     // Adapt the text
     resizeEvent(nullptr);

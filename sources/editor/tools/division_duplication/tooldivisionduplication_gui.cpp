@@ -166,10 +166,10 @@ void ToolDivisionDuplication_gui::on_checkForEachVelocityRange_clicked()
 
 void ToolDivisionDuplication_gui::on_pushCancel_clicked()
 {
-    emit(this->canceled());
+    emit this->canceled();
 }
 
 void ToolDivisionDuplication_gui::on_pushOk_clicked()
 {
-    emit(this->validated());
+    emit this->validated();
 }

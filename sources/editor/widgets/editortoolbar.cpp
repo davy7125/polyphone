@@ -201,7 +201,7 @@ void EditorToolBar::onDisplayActionClicked()
 
     StyledAction * action = dynamic_cast<StyledAction *>(QObject::sender());
     selectDisplayOption(action->getData());
-    emit(displayOptionChanged(action->getData()));
+    emit displayOptionChanged(action->getData());
 }
 
 void EditorToolBar::disableDisplayOption(QList<int> disabledOptions)
@@ -235,7 +235,7 @@ void EditorToolBar::on_pushShowRecorder_clicked()
         return;
     bool isDisplayed = ui->pushShowRecorder->isChecked();
     updateRecorderButtonsState(isDisplayed);
-    emit(recorderDisplayChanged(isDisplayed));
+    emit recorderDisplayChanged(isDisplayed);
 }
 
 void EditorToolBar::on_pushShowKeyboard_clicked()
@@ -244,7 +244,7 @@ void EditorToolBar::on_pushShowKeyboard_clicked()
         return;
     bool isDisplayed = ui->pushShowKeyboard->isChecked();
     updateKeyboardButtonsState(isDisplayed);
-    emit(keyboardDisplayChanged(isDisplayed));
+    emit keyboardDisplayChanged(isDisplayed);
 }
 
 void EditorToolBar::updateRecorderButtonsState(bool isChecked)

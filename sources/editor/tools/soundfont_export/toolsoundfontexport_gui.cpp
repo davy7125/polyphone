@@ -153,7 +153,7 @@ void ToolSoundfontExport_gui::on_pushFolder_clicked()
 
 void ToolSoundfontExport_gui::on_pushAnnuler_clicked()
 {
-    emit(this->canceled());
+    emit this->canceled();
 }
 
 void ToolSoundfontExport_gui::on_pushExport_clicked()
@@ -209,7 +209,7 @@ void ToolSoundfontExport_gui::on_pushExport_clicked()
         return;
     }
 
-    emit(this->validated());
+    emit this->validated();
 }
 
 void ToolSoundfontExport_gui::on_comboFormat_currentIndexChanged(int index)

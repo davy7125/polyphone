@@ -106,7 +106,7 @@ void TreeSortFilterProxy::filterChanged(QString filter)
     // Change the filter
     _emptyFilter = filter.isEmpty();
     setFilterFixedString(filter);
-    emit(layoutChanged());
+    emit layoutChanged();
     _treeView->expandAndScrollToSelection();
 }
 

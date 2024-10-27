@@ -167,7 +167,7 @@ void UrlReader::onFinished(QNetworkReply * pReply)
     }
 
     // Emit a signal
-    emit(downloadCompleted(error));
+    emit downloadCompleted(error);
 }
 
 void UrlReader::onTimeout()
@@ -187,14 +187,14 @@ void UrlReader::onTimeout()
     if (_reply != nullptr)
         _reply->abort();
 
-    emit(downloadCompleted("timeout"));
+    emit downloadCompleted("timeout");
 }
 
 void UrlReader::onProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
     _timer->start(TIMEOUT_MS);
     if (bytesTotal != 0)
-        emit(progressChanged(100 * bytesReceived / bytesTotal));
+        emit progressChanged(100 * bytesReceived / bytesTotal);
 }
 
 void UrlReader::stop()

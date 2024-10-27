@@ -423,7 +423,7 @@ void Player::on_pushShowRecorder_clicked()
         return;
     bool isDisplayed = ui->pushShowRecorder->isChecked();
     updateRecorderButtonsState(isDisplayed);
-    emit(recorderDisplayChanged(isDisplayed));
+    emit recorderDisplayChanged(isDisplayed);
 }
 
 void Player::updateRecorderButtonsState(bool isChecked)

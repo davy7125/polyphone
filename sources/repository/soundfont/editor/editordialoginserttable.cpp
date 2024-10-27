@@ -43,5 +43,5 @@ EditorDialogInsertTable::~EditorDialogInsertTable()
 
 void EditorDialogInsertTable::on_buttonBox_accepted()
 {
-    emit(accepted(ui->spinRows->value(), ui->spinColumns->value()));
+    emit accepted(ui->spinRows->value(), ui->spinColumns->value());
 }

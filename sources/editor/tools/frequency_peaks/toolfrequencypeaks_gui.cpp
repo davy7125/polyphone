@@ -172,12 +172,12 @@ void ToolFrequencyPeaks_gui::on_pushExport_clicked()
         ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_FREQUENCIES, fileName);
         _path = fileName;
         _idsToCompute.clear();
-        emit(this->validated());
+        emit this->validated();
     }
 }
 
 void ToolFrequencyPeaks_gui::on_pushClose_clicked()
 {
     _idsToCompute.clear();
-    emit(this->canceled());
+    emit this->canceled();
 }

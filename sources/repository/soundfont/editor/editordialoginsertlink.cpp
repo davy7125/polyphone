@@ -45,5 +45,5 @@ EditorDialogInsertLink::~EditorDialogInsertLink()
 
 void EditorDialogInsertLink::on_buttonBox_accepted()
 {
-    emit(accepted(ui->lineText->text(), ui->lineLink->text()));
+    emit accepted(ui->lineText->text(), ui->lineLink->text());
 }

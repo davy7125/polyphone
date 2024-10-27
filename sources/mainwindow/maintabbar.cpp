@@ -135,7 +135,7 @@ void MainTabBar::mousePressEvent(QMouseEvent *event)
         else
         {
             // Select a new tab immediatly
-            emit(widgetClicked(_tabs[_clickedItemIndex]->getWidget()));
+            emit widgetClicked(_tabs[_clickedItemIndex]->getWidget());
         }
     }
     else
@@ -169,8 +169,8 @@ void MainTabBar::mouseReleaseEvent(QMouseEvent *event)
         (_tabs[_clickedItemIndex]->getCloseButtonPath().contains(event->pos()) || event->button() == Qt::MouseButton::MiddleButton && _clickedItemIndex == itemAt(event->pos())))
     {
         // Select and close the tab
-        emit(widgetClicked(_tabs[_clickedItemIndex]->getWidget()));
-        emit(closeClicked(_tabs[_clickedItemIndex]->getWidget()));
+        emit widgetClicked(_tabs[_clickedItemIndex]->getWidget());
+        emit closeClicked(_tabs[_clickedItemIndex]->getWidget());
     }
     else if (_clickedItemIndex != -1 && !_clickedInCloseButton && _xShift != 0)
     {

@@ -102,12 +102,12 @@ void SoundfontFileCell::fileReplaced(QString filePath)
 
 void SoundfontFileCell::on_pushReplace_clicked()
 {
-    emit(replaced(_id, _filePath));
+    emit replaced(_id, _filePath);
 }
 
 void SoundfontFileCell::on_pushDelete_clicked()
 {
-    emit(removed(_id));
+    emit removed(_id);
 }
 
 QString SoundfontFileCell::getTitle()

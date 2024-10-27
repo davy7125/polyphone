@@ -364,7 +364,7 @@ void GraphicsWave::mouseReleaseEvent(QMouseEvent *event)
                 {
                     this->_spinEnd->setMinimum(startSamplePosition);
                     this->_spinStart->setValue(startSamplePosition);
-                    emit(startLoopChanged());
+                    emit startLoopChanged();
                 }
             }
             else
@@ -383,9 +383,9 @@ void GraphicsWave::mouseReleaseEvent(QMouseEvent *event)
 #endif
                             );
                 if (startSamplePosition < endSamplePosition)
-                    emit(cutOrdered(startSamplePosition, endSamplePosition));
+                    emit cutOrdered(startSamplePosition, endSamplePosition);
                 else
-                    emit(cutOrdered(endSamplePosition, startSamplePosition));
+                    emit cutOrdered(endSamplePosition, startSamplePosition);
             }
             this->setCursor(Qt::ArrowCursor);
         }
@@ -405,7 +405,7 @@ void GraphicsWave::mouseReleaseEvent(QMouseEvent *event)
                 {
                     this->_spinStart->setMaximum(startSamplePosition);
                     this->_spinEnd->setValue(startSamplePosition);
-                    emit(endLoopChanged());
+                    emit endLoopChanged();
                 }
             }
             else

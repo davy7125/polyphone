@@ -210,10 +210,10 @@ void ToolMixtureCreation::onElementProcessed(EltID idSmpl, int key, int minKey, 
         if (_canceled)
         {
             SoundfontManager::getInstance()->revertNewEditing();
-            emit(finished(false));
+            emit finished(false);
         }
         else
-            emit(finished(true));
+            emit finished(true);
     }
 }
 

@@ -101,7 +101,7 @@ void FilterTag::onCompletionSelected(QString completion)
         ui->tagArea->layout()->addWidget(cell);
 
         // Notify about the change
-        emit(selectionChanged());
+        emit selectionChanged();
     }
 }
 
@@ -120,5 +120,5 @@ void FilterTag::onCellDelete()
     cell->deleteLater();
 
     // Notify about the change
-    emit(selectionChanged());
+    emit selectionChanged();
 }

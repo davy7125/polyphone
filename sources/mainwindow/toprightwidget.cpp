@@ -168,7 +168,7 @@ void TopRightWidget::userStateChanged(UserManager::ConnectionState state)
 
 void TopRightWidget::on_pushUser_clicked()
 {
-    //emit(userClicked());
+    //emit userClicked();
 }
 
 void TopRightWidget::progressChanged(int percent, int soundfontId, QString soundfontName, QString finalFileName)
@@ -229,11 +229,11 @@ QToolButton{\
 
 void TopRightWidget::on_pushClose_clicked()
 {
-    emit(closeClicked());
+    emit closeClicked();
 }
 
 void TopRightWidget::on_pushMinimize_clicked()
 {
-    emit(minimizeClicked());
+    emit minimizeClicked();
 }
 

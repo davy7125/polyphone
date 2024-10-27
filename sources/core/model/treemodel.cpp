@@ -139,14 +139,14 @@ void TreeModel::elementBeingAdded(EltID id)
 {
     int position;
     QModelIndex index = getParentIndexWithPosition(id, position);
-    emit(saveExpandedState());
-    emit(beginInsertRows(index, position, position));
+    emit saveExpandedState();
+    emit beginInsertRows(index, position, position);
 }
 
 void TreeModel::endOfAddition()
 {
-    emit(endInsertRows());
-    emit(restoreExpandedState());
+    emit endInsertRows();
+    emit restoreExpandedState();
 }
 
 void TreeModel::elementUpdated(EltID id)
@@ -155,7 +155,7 @@ void TreeModel::elementUpdated(EltID id)
     QModelIndex index = getParentIndexWithPosition(id, position);
     index = this->index(position, 0, index);
 
-    emit(dataChanged(index, index));
+    emit dataChanged(index, index);
 
     // Possibly update the name of the linked elements
     if (id.typeElement == elementSmpl)
@@ -170,7 +170,7 @@ void TreeModel::elementUpdated(EltID id)
                 QModelIndex indexDiv = this->index(j, 0, indexElt);
                 Division * item = static_cast<Division*>(indexDiv.internalPointer());
                 if (item->getGen(champ_sampleID).wValue == id.indexElt)
-                    emit(dataChanged(indexDiv, indexDiv));
+                    emit dataChanged(indexDiv, indexDiv);
             }
         }
     }
@@ -186,7 +186,7 @@ void TreeModel::elementUpdated(EltID id)
                 QModelIndex indexDiv = this->index(j, 0, indexElt);
                 Division * item = static_cast<Division*>(indexDiv.internalPointer());
                 if (item->getGen(champ_instrument).wValue == id.indexElt)
-                    emit(dataChanged(indexDiv, indexDiv));
+                    emit dataChanged(indexDiv, indexDiv);
             }
         }
     }
@@ -198,14 +198,14 @@ void TreeModel::elementBeingDeleted(EltID id, bool storeExpandedState)
     QModelIndex index = getParentIndexWithPosition(id, position);
 
     if (storeExpandedState)
-        emit(saveExpandedState());
-    emit(beginRemoveRows(index, position, position));
+        emit saveExpandedState();
+    emit beginRemoveRows(index, position, position);
 }
 
 void TreeModel::endOfDeletion()
 {
-    emit(endRemoveRows());
-    emit(restoreExpandedState());
+    emit endRemoveRows();
+    emit restoreExpandedState();
 }
 
 void TreeModel::visibilityChanged(EltID id)
@@ -213,7 +213,7 @@ void TreeModel::visibilityChanged(EltID id)
     int position;
     QModelIndex indexParent = getParentIndexWithPosition(id, position);
     QModelIndex index = this->index(position, 0, indexParent);
-    emit(dataChanged(index, index));
+    emit dataChanged(index, index);
 }
 
 QModelIndex TreeModel::getParentIndexWithPosition(EltID id, int &position)

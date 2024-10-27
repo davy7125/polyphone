@@ -102,10 +102,10 @@ void ToolFastEditSmpl_gui::on_radioMultiply_toggled(bool checked)
 
 void ToolFastEditSmpl_gui::on_pushOk_clicked()
 {
-    emit(this->validated());
+    emit this->validated();
 }
 
 void ToolFastEditSmpl_gui::on_pushCancel_clicked()
 {
-    emit(this->canceled());
+    emit this->canceled();
 }

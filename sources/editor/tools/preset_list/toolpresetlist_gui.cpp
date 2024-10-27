@@ -144,5 +144,5 @@ void ToolPresetList_gui::on_pushCopy_clicked()
 
 void ToolPresetList_gui::on_pushClose_clicked()
 {
-    emit(this->validated());
+    emit this->validated();
 }
