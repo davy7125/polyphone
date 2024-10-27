@@ -40,19 +40,13 @@ public:
     Division * instDiv;
     Smpl * smpl;
 
-    int channel;
-    int key;
-    int vel;
-
-    int choLevel;
-    int choDepth;
-    int choFrequency;
-    float gain;
+    qint8 channel;
+    qint8 key;
+    qint8 vel;
+    qint8 type; // 0: normal, 1: sample, 2: associated sample
 
     quint32 audioSmplRate;
     int token;
-
-    bool loopEnabled;
 };
 
 class Voice : public QObject
@@ -65,7 +59,6 @@ public:
 
     // Initial key is:
     // * -1 when we use "play" for reading a sample
-    // * -2 when we want to read the stereo part of a sample, with "play"
     // >= 0 otherwise (sample, instrument or preset level)
     void initialize(VoiceInitializer * voiceInitializer);
 
@@ -73,11 +66,14 @@ public:
     int getSf2Id() { return _voiceParam.getSf2Id(); }
     int getPresetId() { return _voiceParam.getPresetId(); }
     int getKey() { return _voiceParam.getKey(); }
+    int getType() { return _voiceParam.getType(); }
+
     void release(bool quick = false);
-    void setGain(double gain);
-    void setChorus(int level, int depth, int frequency);
     bool isFinished() { return _isFinished; }
     void triggerReadFinishedSignal();
+
+    void setGain(double gain);
+    void setChorus(int level, int depth, int frequency);
 
     // Access to voiceParam properties
     double getPan();
@@ -113,7 +109,8 @@ private:
     int _chorusLevel;
 
     // Sound data and parameters
-    QVector<float> _baData;
+    float * _dataSmpl;
+    quint32 _dataSmplLength;
     quint32 _smplRate, _audioSmplRate;
     double _gain;
     VoiceParam _voiceParam;

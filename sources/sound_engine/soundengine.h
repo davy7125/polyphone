@@ -28,6 +28,8 @@
 
 #include "voice.h"
 class Synth;
+class SynthConfig;
+class SynthInternalConfig;
 
 class SoundEngine: public QObject
 {
@@ -38,7 +40,7 @@ public:
     virtual ~SoundEngine() override;
 
     static void initialize(Synth *synth);
-    static void addVoices(VoiceInitializer *voiceInitializers, int numberOfVoicesToAdd);
+    static void addVoices(VoiceInitializer *voiceInitializers, int numberOfVoicesToAdd, SynthConfig * config, SynthInternalConfig * internalConfig);
     static void stopAllVoices(bool allChannels);
     static void finalize();
 
@@ -49,15 +51,11 @@ public:
     static void releaseVoices(int sf2Id, int presetId, int channel, int key);
 
     // Configuration
-    static void setGain(double gain);
+    static void configureVoices(SynthConfig * config, SynthInternalConfig * internalConfig);
     static void setChorus(int level, int depth, int frequency);
-    static void setPitchCorrection(qint16 correction, bool repercute);
-    static void setStartLoop(quint32 startLoop, bool repercute);
-    static void setEndLoop(quint32 endLoop, bool repercute);
-    static void setLoopEnabled(bool isEnabled);
-    static void setStereo(bool isStereo);
-    static bool isStereo() { return s_isStereo; }
-    static void setGainSample(int gain);
+    static void setPitchCorrection(qint16 correction, bool withLinkedSample);
+    static void setStartLoop(quint32 startLoop, bool withLinkedSample);
+    static void setEndLoop(quint32 endLoop, bool withLinkedSample);
 
     // Data generation
     void stop();
@@ -74,8 +72,7 @@ public slots:
 private:
     static void closeAll(int channel, int exclusiveClass, int numPreset);
     static Voice * getNextVoiceToCompute();
-    static void configureStereoVoice1(Voice * voice1);
-    static void configureStereoVoice2(Voice * voice2);
+    static void configureVoice(Voice * voice, SynthConfig * config, SynthInternalConfig * internalConfig);
 
     volatile bool _interrupted;
     QSemaphore * _semRunning;
@@ -88,9 +85,6 @@ private:
     static int s_numberOfVoices;
     static QAtomicInt s_indexVoice;
     static QMutex s_mutexVoices;
-
-    static int s_gainSmpl;
-    static bool s_isStereo, s_isLoopEnabled;
 };
 
 #endif // SOUNDENGINE_H

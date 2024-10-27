@@ -46,20 +46,62 @@ public:
         revSize(0),
         revWidth(0),
         revDamping(0),
-        gain(0),
+        masterGain(0),
         tuningFork(440),
         temperament(QStringList())
     {}
+
+    void copy(SynthConfig * other)
+    {
+        choLevel = other->choLevel;
+        choDepth = other->choDepth;
+        choFrequency = other->choFrequency;
+        revLevel = other->revLevel;
+        revSize = other->revSize;
+        revWidth = other->revWidth;
+        revDamping = other->revDamping;
+        masterGain = other->masterGain;
+        tuningFork = other->tuningFork;
+        temperament = other->temperament;
+    }
+
+    // Effects
     int choLevel;
     int choDepth;
     int choFrequency;
+
     int revLevel;
     int revSize;
     int revWidth;
     int revDamping;
-    int gain;
+
+    // Master gain / tuning
+    double masterGain;
     int tuningFork;
     QStringList temperament;
+};
+
+class SynthInternalConfig
+{
+public:
+    SynthInternalConfig() :
+        reverbOn(false),
+        sampleRate(44100),
+        smplGain(0),
+        smplIsStereoEnabled(false),
+        smplIsLoopEnabled(true)
+    {}
+
+    // Effects
+    bool reverbOn;
+
+    // Global parameters
+    quint32 sampleRate;
+
+    // Sample parameters
+    double smplGain;
+    bool smplIsStereoEnabled;
+    bool smplIsLoopEnabled;
 };
 
 class Synth : public QObject
@@ -76,17 +118,19 @@ public:
     int play(EltID id, int channel, int key, int velocity);
     void stop(bool allChannels);
 
-    // Parameters for reading samples
-    void setGainSample(int gain);
-    void setStereo(bool isStereo);
-    bool isStereo();
-    void setStartLoop(quint32 startLoop, bool repercute);
-    void setEndLoop(quint32 endLoop, bool repercute);
+    // Configuration for reading samples
+    void setSampleGain(double gain);
+    void setStereo(bool isStereoEnabled);
+    bool isStereoEnabled();
     void setLoopEnabled(bool isEnabled);
     void setSinus(bool isOn, int rootKey);
-    void setPitchCorrection(qint16 correction, bool repercute);
     void activateSmplEq(bool isActivated);
     void setSmplEqValues(int values[10]);
+
+    // Editing parameters of the playing samples
+    void setStartLoop(quint32 startLoop, bool withLinkedSample);
+    void setEndLoop(quint32 endLoop, bool withLinkedSample);
+    void setPitchCorrection(qint16 correction, bool withLinkedSample);
 
     // Record
     void startNewRecord(QString fileName);
@@ -106,16 +150,19 @@ private:
     void playPrst(Soundfont * soundfont, InstPrst * prst, int channel, int key, int velocity);
     void playInst(Soundfont * soundfont, InstPrst * inst, int channel, int key, int velocity,
                   InstPrst * prst = nullptr, Division * prstDiv = nullptr);
-    int playSmpl(Smpl * smpl, int channel, int key, int velocity,
+    int playSmpl(Smpl * smpl, int channel, int key, int velocity, bool other,
                  InstPrst * inst = nullptr, Division * instDiv = nullptr, InstPrst * prst = nullptr, Division * prstDiv = nullptr);
 
     void destroySoundEnginesAndBuffers();
     void createSoundEnginesAndBuffers();
 
-    CalibrationSinus _sinus;
-    LiveEQ _eq;
+    // Soundfonts
     Soundfonts * _soundfonts;
     QRecursiveMutex * _mutexSoundfonts;
+
+    // Configuration
+    SynthConfig _configuration;
+    SynthInternalConfig _internalConfiguration;
 
     // Sound engines
     QSemaphore _semRunningSoundEngines;
@@ -125,14 +172,10 @@ private:
     int _numberOfVoicesToAdd;
     static int s_sampleVoiceTokenCounter;
 
-    // Global parameter
-    quint32 _sampleRate;
-    double _gain;
-
     // Effects
-    int _choLevel, _choDepth, _choFrequency;
+    CalibrationSinus _sinus;
+    LiveEQ _eq;
     stk::FreeVerb _reverb;
-    bool _reverbOn;
     QMutex _mutexReverb;
 
     // Record management
@@ -145,6 +188,5 @@ private:
     float * _dataWav;
     quint32 _bufferSize;
 };
-
 
 #endif // SYNTH_H

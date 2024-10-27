@@ -64,7 +64,8 @@ void Voice::prepareTables()
 }
 
 // Constructeur, destructeur
-Voice::Voice() : QObject(nullptr)
+Voice::Voice() : QObject(nullptr),
+    _dataSmpl(nullptr)
 {
     // Array initialization
     _srcDataLength = INITIAL_ARRAY_LENGTH;
@@ -86,10 +87,15 @@ Voice::~Voice()
     delete [] _modFreqArray;
     delete [] _pointDistanceArray;
     delete [] _srcData;
+    if (_voiceParam.getType() != 0)
+        delete [] _dataSmpl;
 }
 
 void Voice::initialize(VoiceInitializer * voiceInitializer)
 {
+    if (_voiceParam.getType() != 0)
+        delete [] _dataSmpl;
+
     _voiceParam.initialize(voiceInitializer->prst,
                            voiceInitializer->prstDiv,
                            voiceInitializer->inst,
@@ -97,10 +103,11 @@ void Voice::initialize(VoiceInitializer * voiceInitializer)
                            voiceInitializer->smpl,
                            voiceInitializer->channel,
                            voiceInitializer->key,
-                           voiceInitializer->vel);
+                           voiceInitializer->vel,
+                           voiceInitializer->type);
 
     _chorusLevel = 0;
-    _baData = voiceInitializer->smpl->_sound.getData();
+    _dataSmpl = voiceInitializer->smpl->_sound.getData(_dataSmplLength, false, _voiceParam.getType() != 0 /* copy data at the sample level */);
     _smplRate = voiceInitializer->smpl->_sound.getUInt32(champ_dwSampleRate);
     _audioSmplRate = voiceInitializer->audioSmplRate;
     _gain = 0;
@@ -227,7 +234,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         }
 
         // Resample data
-        quint32 nbDataTmp = (_pointDistanceArray[len] >> 8);
+        quint32 nbDataTmp = (_pointDistanceArray[len] >> 8);// + 1;
         if (nbDataTmp > _srcDataLength)
         {
             delete [] _srcData;
@@ -299,7 +306,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         _isFinished = true;
         if (_voiceParam.getKey() == -1)
         {
-            emit(currentPosChanged(0));
+            emit currentPosChanged(0);
             _elapsedSmplPos = 0;
         }
     }
@@ -308,7 +315,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         _elapsedSmplPos += len;
         if (_elapsedSmplPos > (_smplRate >> 5))
         {
-            emit(currentPosChanged(_currentSmplPos));
+            emit currentPosChanged(_currentSmplPos);
             _elapsedSmplPos = 0;
         }
     }
@@ -341,8 +348,6 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 bool Voice::takeData(float * data, quint32 nbRead, qint32 loopMode)
 {
     bool endSample = false;
-    const float * dataSmpl = _baData.constData();
-
     quint32 loopStart = _voiceParam.getPosition(champ_dwStartLoop);
     quint32 loopEnd = _voiceParam.getPosition(champ_dwEndLoop);
 
@@ -354,8 +359,8 @@ bool Voice::takeData(float * data, quint32 nbRead, qint32 loopMode)
         quint32 total = 0;
         while (nbRead - total > 0)
         {
-            const quint32 chunk = qMin(_currentSmplPos < loopEnd ? loopEnd - _currentSmplPos : 0, nbRead - total);
-            memcpy(&data[total], &dataSmpl[_currentSmplPos], chunk * sizeof(float));
+            const quint32 chunk = qMin(loopEnd - _currentSmplPos, nbRead - total);
+            memcpy(&data[total], &_dataSmpl[_currentSmplPos], chunk * sizeof(float));
             _currentSmplPos += chunk;
             if (_currentSmplPos >= loopEnd)
                 _currentSmplPos = loopStart;
@@ -365,7 +370,7 @@ bool Voice::takeData(float * data, quint32 nbRead, qint32 loopMode)
     else
     {
         // No loop
-        quint32 sampleEnd = _voiceParam.getPosition(champ_dwLength);
+        quint32 sampleEnd = _dataSmplLength;
         if (_currentSmplPos > sampleEnd)
         {
             // No more data, fill with 0
@@ -375,7 +380,7 @@ bool Voice::takeData(float * data, quint32 nbRead, qint32 loopMode)
         else if (sampleEnd - _currentSmplPos < nbRead)
         {
             // Copy what is possible to copy, fill the rest with 0
-            memcpy(data, &dataSmpl[_currentSmplPos], sizeof(qint32) * (sampleEnd - _currentSmplPos));
+            memcpy(data, &_dataSmpl[_currentSmplPos], sizeof(qint32) * (sampleEnd - _currentSmplPos));
             memset(&data[sampleEnd - _currentSmplPos], 0, (nbRead - sampleEnd + _currentSmplPos) * sizeof(float));
 
             // We are now at the end
@@ -387,7 +392,7 @@ bool Voice::takeData(float * data, quint32 nbRead, qint32 loopMode)
         else
         {
             // Copy data
-            memcpy(data, &dataSmpl[_currentSmplPos], nbRead * sizeof(float));
+            memcpy(data, &_dataSmpl[_currentSmplPos], nbRead * sizeof(float));
             _currentSmplPos += nbRead;
         }
     }
@@ -431,7 +436,7 @@ void Voice::setTemperament(float temperament[12], int relativeKey)
 
 void Voice::setChorus(int level, int depth, int frequency)
 {
-    _chorusLevel = level;
+    _chorusLevel = _voiceParam.getType() == 0 ? level : 0;
     _chorus.setModDepth(0.00025 * depth);
     _chorus.setModFrequency(0.06667 * frequency);
 }

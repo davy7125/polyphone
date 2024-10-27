@@ -40,12 +40,12 @@ void SampleWriterWav::write(Sound * sound)
     if (info.wBpsFile > 16)
     {
         info.wBpsFile = 24;
-        convertTo24bit(sound->getData(), baData);
+        convertTo24bit(sound->getDataVector(false), baData);
     }
     else
     {
         info.wBpsFile = 16;
-        convertTo16bit(sound->getData(), baData);
+        convertTo16bit(sound->getDataVector(false), baData);
     }
 
     // Exportation d'un sample mono au format wav
@@ -55,8 +55,8 @@ void SampleWriterWav::write(Sound * sound)
 
 void SampleWriterWav::write(Sound *leftSound, Sound *rightSound)
 {
-    QVector<float> dataLeft = leftSound->getData();
-    QVector<float> dataRight = rightSound->getData();
+    QVector<float> dataLeft = leftSound->getDataVector(false);
+    QVector<float> dataRight = rightSound->getDataVector(false);
 
     // Sample rate (max of the 2 channels)
     quint32 dwSmplRate = leftSound->getInfo().dwSampleRate;

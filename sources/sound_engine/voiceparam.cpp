@@ -43,10 +43,11 @@ VoiceParam::~VoiceParam()
 }
 
 void VoiceParam::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv,
-                            Smpl * smpl, int channel, int key, int vel)
+                            Smpl * smpl, qint8 channel, qint8 key, qint8 vel, qint8 type)
 {
     _channel = channel;
     _key = key;
+    _type = type;
     _sf2Id = smpl->getId().indexSf2;
     _presetId = (prst != nullptr ? prst->getId().indexElt : -1);
     _wPresetNumber = (prst != nullptr ? prst->getExtraField(champ_wPreset) : -1);

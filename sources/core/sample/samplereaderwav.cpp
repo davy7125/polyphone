@@ -35,13 +35,13 @@ SampleReaderWav::SampleReaderWav(QString filename) : SampleReader(filename),
 
 }
 
-SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSound &info)
+SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSound * info)
 {
     // Keep a track of the info
-    _info = &info;
+    _info = info;
 
     // Default info
-    info.reset();
+    info->reset();
 
     // Parse file
     QDataStream in(&fi);
@@ -117,12 +117,12 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
             }
 
             in >> tmp16;
-            info.wChannels = tmp16.value;
+            info->wChannels = tmp16.value;
             in >> tmp32;
-            info.dwSampleRate = tmp32.value;
+            info->dwSampleRate = tmp32.value;
             in.skipRawData(6); // BytePerSec and BytePerBloc
             in >> tmp16;
-            info.wBpsFile = tmp16.value;
+            info->wBpsFile = tmp16.value;
 
             // Skip the rest
             in.skipRawData(static_cast<int>(sectionSize) - 16);
@@ -139,19 +139,19 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
                 // Root key
                 quint32Reversed tmp32;
                 in >> tmp32;
-                info.dwRootKey = tmp32.value;
-                info.pitchDefined = info.dwRootKey > 0 && info.dwRootKey < 128;
-                if (!info.pitchDefined)
-                    info.dwRootKey = 60; // back to middle C
+                info->dwRootKey = tmp32.value;
+                info->pitchDefined = info->dwRootKey > 0 && info->dwRootKey < 128;
+                if (!info->pitchDefined)
+                    info->dwRootKey = 60; // back to middle C
 
                 // Tuning
                 quint32Reversed tmp32s;
                 in >> tmp32s;
-                info.iFineTune = qRound(static_cast<double>(tmp32s.value) / 0x80000000 * 50.);
-                if (info.iFineTune > 50)
+                info->iFineTune = qRound(static_cast<double>(tmp32s.value) / 0x80000000 * 50.);
+                if (info->iFineTune > 50)
                 {
-                    info.iFineTune -= 100;
-                    info.dwRootKey += 1;
+                    info->iFineTune -= 100;
+                    info->dwRootKey += 1;
                 }
 
                 in.skipRawData(16); // SMPTE Format, SMPTE Offset, Num Sample Loops, Sampler Data
@@ -164,7 +164,7 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
                     // Loop
                     quint32Reversed loopStart, loopEnd;
                     in >> loopStart >> loopEnd;
-                    info.loops << QPair<quint32, quint32>(loopStart.value, loopEnd.value + 1);
+                    info->loops << QPair<quint32, quint32>(loopStart.value, loopEnd.value + 1);
 
                     // Skip the rest
                     in.skipRawData(static_cast<int>(sectionSize) - 52);
@@ -179,9 +179,9 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
         {
             if (sectionSize == 0)
                 sectionSize = fullLength - pos;
-            info.dwStart = pos;
-            if (info.wBpsFile != 0 && info.wChannels != 0)
-                info.dwLength = qMin(sectionSize, fullLength - pos) / (info.wBpsFile * info.wChannels / 8);
+            info->dwStart = pos;
+            if (info->wBpsFile != 0 && info->wChannels != 0)
+                info->dwLength = qMin(sectionSize, fullLength - pos) / (info->wBpsFile * info->wChannels / 8);
             dataOk = true;
 
             // Skip it
@@ -204,7 +204,7 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getInfo(QFile &fi, InfoSoun
     return FILE_OK;
 }
 
-SampleReaderWav::SampleReaderResult SampleReaderWav::getData(QFile &fi, QVector<float> &smpl)
+float * SampleReaderWav::getData(SampleReaderResult &result, QFile &fi)
 {
     // Skip the headers
     fi.seek(_info->dwStart);
@@ -212,11 +212,13 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getData(QFile &fi, QVector<
     // Read data
     QByteArray data = fi.read(_info->dwLength * _info->wBpsFile / 8 * _info->wChannels);
     if (data.size() == 0)
-        return FILE_CORRUPT;
+    {
+        result = FILE_CORRUPT;
+        return nullptr;
+    }
 
     // Resize the vector
-    smpl.resize(_info->dwLength);
-    float * fData = smpl.data();
+    float * fData = new float[_info->dwLength];
 
     if (_isIeeeFloat && _info->wBpsFile == 32)
     {
@@ -272,5 +274,6 @@ SampleReaderWav::SampleReaderResult SampleReaderWav::getData(QFile &fi, QVector<
         }
     }
 
-    return FILE_OK;
+    result = FILE_OK;
+    return fData;
 }

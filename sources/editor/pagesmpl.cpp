@@ -282,7 +282,7 @@ void PageSmpl::updateInterface(QString editingSource)
     // Reprise de la lecture
     _currentPlayingToken = 0;
     ui->checkLectureLien->blockSignals(true);
-    ui->checkLectureLien->setChecked(_synth->isStereo());
+    ui->checkLectureLien->setChecked(_synth->isStereoEnabled());
     ui->checkLectureLien->blockSignals(false);
     if (ui->pushLecture->isChecked())
         this->lecture();
@@ -907,7 +907,7 @@ void PageSmpl::setSinusEnabled(bool val)
 void PageSmpl::setGainSample(int val)
 {
     // Modif synth
-    _synth->setGainSample(val);
+    _synth->setSampleGain((double)val);
 }
 
 void PageSmpl::updateSinus()

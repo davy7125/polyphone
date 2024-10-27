@@ -33,10 +33,6 @@ int SoundEngine::s_numberOfVoices = 0;
 QAtomicInt SoundEngine::s_indexVoice = 0;
 QMutex SoundEngine::s_mutexVoices;
 
-int SoundEngine::s_gainSmpl = 0;
-bool SoundEngine::s_isStereo = false;
-bool SoundEngine::s_isLoopEnabled = true;
-
 void SoundEngine::initialize(Synth * synth)
 {
     for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
@@ -51,12 +47,12 @@ SoundEngine::SoundEngine(QSemaphore * semRunning, quint32 bufferSize) : QObject(
     _interrupted(false),
     _semRunning(semRunning)
 {
-    _dataL = new float [4 * bufferSize];
-    _dataR = new float [4 * bufferSize];
-    _dataRevL = new float [4 * bufferSize];
-    _dataRevR = new float [4 * bufferSize];
-    _dataTmpL = new float [4 * bufferSize];
-    _dataTmpR = new float [4 * bufferSize];
+    _dataL = new float[4 * bufferSize];
+    _dataR = new float[4 * bufferSize];
+    _dataRevL = new float[4 * bufferSize];
+    _dataRevR = new float[4 * bufferSize];
+    _dataTmpL = new float[4 * bufferSize];
+    _dataTmpR = new float[4 * bufferSize];
 }
 
 SoundEngine::~SoundEngine()
@@ -75,12 +71,12 @@ void SoundEngine::finalize()
         delete s_voices[i];
 }
 
-void SoundEngine::addVoices(VoiceInitializer * voiceInitializers, int numberOfVoicesToAdd)
+void SoundEngine::addVoices(VoiceInitializer * voiceInitializers, int numberOfVoicesToAdd, SynthConfig * config, SynthInternalConfig * internalConfig)
 {
     // Possibly stop voices having the same exclusive class
     for (int i = 0; i < numberOfVoicesToAdd; ++i)
     {
-        if (voiceInitializers[i].key <= 0)
+        if (voiceInitializers[i].type != 0)
             continue;
 
         int presetNumber = (voiceInitializers[i].prst != nullptr ? voiceInitializers[i].prst->getExtraField(champ_wPreset) : -1);
@@ -97,34 +93,15 @@ void SoundEngine::addVoices(VoiceInitializer * voiceInitializers, int numberOfVo
 
     // Add the voices
     s_mutexVoices.lock();
-    VoiceInitializer * voiceInitializer;
     for (int i = 0; i < numberOfVoicesToAdd; i++)
     {
-        if (s_numberOfVoices < MAX_NUMBER_OF_VOICES && s_voices[s_numberOfVoices] != nullptr)
-        {
-            // Create a voice
-            voiceInitializer = &voiceInitializers[i];
-            s_voices[s_numberOfVoices]->initialize(voiceInitializer);
-
-            if (voiceInitializer->key < 0)
-            {
-                s_voices[s_numberOfVoices]->setChorus(0, 0, 0);
-                s_voices[s_numberOfVoices]->setLoopMode(s_isLoopEnabled);
-                if (voiceInitializer->key == -1)
-                    configureStereoVoice1(s_voices[s_numberOfVoices]);
-                else
-                    configureStereoVoice2(s_voices[s_numberOfVoices]);
-            }
-            else
-            {
-                s_voices[s_numberOfVoices]->setChorus(voiceInitializer->choLevel, voiceInitializer->choDepth, voiceInitializer->choFrequency);
-                s_voices[s_numberOfVoices]->setGain(voiceInitializer->gain);
-            }
-
-            s_numberOfVoices++;
-        }
-        else
+        if (s_numberOfVoices >= MAX_NUMBER_OF_VOICES || s_voices[s_numberOfVoices] == nullptr)
             break;
+
+        // Create a voice
+        s_voices[s_numberOfVoices]->initialize(&voiceInitializers[i]);
+        configureVoice(s_voices[s_numberOfVoices], config, internalConfig);
+        s_numberOfVoices++;
     }
     s_mutexVoices.unlock();
 }
@@ -181,126 +158,84 @@ void SoundEngine::releaseVoices(int sf2Id, int presetId, int channel, int key)
     s_mutexVoices.unlock();
 }
 
-void SoundEngine::setGain(double gain)
+void SoundEngine::configureVoices(SynthConfig * config, SynthInternalConfig * internalConfig)
 {
     s_mutexVoices.lock();
     for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getKey() >= 0)
-            s_voices[i]->setGain(gain);
+        configureVoice(s_voices[i], config, internalConfig);
     s_mutexVoices.unlock();
+}
+
+void SoundEngine::configureVoice(Voice * voice, SynthConfig * config, SynthInternalConfig * internalConfig)
+{
+    // Chorus
+    s_voices[s_numberOfVoices]->setChorus(config->choLevel, config->choDepth, config->choFrequency);
+
+    // Loop / gain
+    if (voice->getType() == 0)
+    {
+        // Sample triggered from the instrument or preset level
+        voice->setGain(config->masterGain);
+    }
+    else
+    {
+        // Sample triggered from the sample level
+        voice->setLoopMode(internalConfig->smplIsLoopEnabled ? 1 : 0);
+
+        double pan = voice->getPan();
+        if (internalConfig->smplIsStereoEnabled)
+        {
+            if (pan < 0)
+                voice->setPan(-50);
+            else if (pan > 0)
+                voice->setPan(50);
+
+            voice->setGain(config->masterGain + internalConfig->smplGain);
+        }
+        else
+        {
+            if (pan < 0)
+                voice->setPan(-1);
+            else if (pan > 0)
+                voice->setPan(1);
+
+            voice->setGain(voice->getType() == 1 ? config->masterGain + internalConfig->smplGain : -1000);
+        }
+    }
 }
 
 void SoundEngine::setChorus(int level, int depth, int frequency)
 {
     s_mutexVoices.lock();
     for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getKey() >= 0)
-            s_voices[i]->setChorus(level, depth, frequency);
+        s_voices[i]->setChorus(level, depth, frequency);
     s_mutexVoices.unlock();
 }
 
-void SoundEngine::setPitchCorrection(qint16 correction, bool repercute)
+void SoundEngine::setPitchCorrection(qint16 correction, bool withLinkedSample)
 {
     s_mutexVoices.lock();
     for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getKey() == -1 ||
-                (s_voices[i]->getKey() == -2 && repercute))
+        if (s_voices[i]->getType() == 1 || (s_voices[i]->getType() == 2 && withLinkedSample))
             s_voices[i]->setFineTune(correction);
     s_mutexVoices.unlock();
 }
 
-void SoundEngine::setStartLoop(quint32 startLoop, bool repercute)
+void SoundEngine::setStartLoop(quint32 startLoop, bool withLinkedSample)
 {
     s_mutexVoices.lock();
     for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getKey() == -1 ||
-                (s_voices[i]->getKey() == -2 && repercute))
+        if (s_voices[i]->getType() == 1 || (s_voices[i]->getType() == 2 && withLinkedSample))
             s_voices[i]->setLoopStart(startLoop);
     s_mutexVoices.unlock();
 }
 
-void SoundEngine::setEndLoop(quint32 endLoop, bool repercute)
+void SoundEngine::setEndLoop(quint32 endLoop, bool withLinkedSample)
 {
     s_mutexVoices.lock();
     for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getKey() == -1 ||
-                (s_voices[i]->getKey() == -2 && repercute))
+        if (s_voices[i]->getType() == 1 || (s_voices[i]->getType() == 2 && withLinkedSample))
             s_voices[i]->setLoopEnd(endLoop);
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::setLoopEnabled(bool isEnabled)
-{
-    s_isLoopEnabled = isEnabled;
-
-    // Update voices -1 and -2
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getKey() < 0)
-            s_voices[i]->setLoopMode(isEnabled);
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::setStereo(bool isStereo)
-{
-    s_isStereo = isStereo;
-
-    // Update voices -1 and -2
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-    {
-        if (s_voices[i]->getKey() == -1)
-            configureStereoVoice1(s_voices[i]);
-        else if (s_voices[i]->getKey() == -2)
-            configureStereoVoice2(s_voices[i]);
-    }
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::configureStereoVoice1(Voice * voice1)
-{
-    double pan = voice1->getPan();
-    if (s_isStereo)
-    {
-        if (pan < 0)
-            voice1->setPan(-50);
-        else if (pan > 0)
-            voice1->setPan(50);
-        voice1->setGain(s_gainSmpl - 3);
-    }
-    else
-    {
-        if (pan < 0)
-            voice1->setPan(-1);
-        else if (pan > 0)
-            voice1->setPan(1);
-        voice1->setGain(s_gainSmpl);
-    }
-}
-
-void SoundEngine::configureStereoVoice2(Voice * voice2)
-{
-    voice2->setGain(s_isStereo ? s_gainSmpl - 3 : -1000);
-}
-
-void SoundEngine::setGainSample(int gain)
-{
-    s_gainSmpl = gain;
-
-    // Update voices -1 and -2
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-    {
-        if (s_voices[i]->getKey() == -1)
-        {
-            if (s_isStereo)
-                s_voices[i]->setGain(gain - 3);
-            else
-                s_voices[i]->setGain(gain);
-        }
-        else if (s_voices[i]->getKey() == -2 && s_isStereo)
-            s_voices[i]->setGain(gain - 3);
-    }
     s_mutexVoices.unlock();
 }
 

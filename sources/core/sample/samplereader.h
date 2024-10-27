@@ -48,12 +48,12 @@ public:
     virtual ~SampleReader() {}
 
     // Extract general information (sampling rate, ...)
-    SampleReaderResult getInfo(InfoSound &info)
+    SampleReaderResult getInfo(InfoSound *info)
     {
         if (_result != FILE_OK)
             return _result;
 
-        QFile fi (_filename);
+        QFile fi(_filename);
         if (fi.exists())
         {
             if (fi.open(QFile::ReadOnly | QFile::Unbuffered))
@@ -71,31 +71,34 @@ public:
     }
 
     // Get sample data
-    SampleReaderResult getData(QVector<float> &smpl)
+    float * getData(SampleReaderResult &result)
     {
-        if (_result != FILE_OK)
-            return _result;
+        float * data = nullptr;
 
-        QFile fi(_filename);
-        if (fi.exists())
+        if (_result == FILE_OK)
         {
-            if (fi.open(QFile::ReadOnly | QFile::Unbuffered))
+            QFile fi(_filename);
+            if (fi.exists())
             {
-                _result = getData(fi, smpl);
-                fi.close();
+                if (fi.open(QFile::ReadOnly | QFile::Unbuffered))
+                {
+                    data = getData(_result, fi);
+                    fi.close();
+                }
+                else
+                    _result = FILE_NOT_READABLE;
             }
             else
-                _result = FILE_NOT_READABLE;
+                _result = FILE_NOT_FOUND;
         }
-        else
-            _result = FILE_NOT_FOUND;
 
-        return _result;
+        result = _result;
+        return data;
     }
 
 protected:
-    virtual SampleReaderResult getInfo(QFile &fi, InfoSound &info) = 0;
-    virtual SampleReaderResult getData(QFile &fi, QVector<float> &smpl) = 0;
+    virtual SampleReaderResult getInfo(QFile &fi, InfoSound *info) = 0;
+    virtual float * getData(SampleReaderResult &result, QFile &fi) = 0;
 
 private:
     QString _filename;

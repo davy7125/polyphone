@@ -40,6 +40,8 @@
 #include "translationmanager.h"
 #include "modulatordata.h"
 #include "voice.h"
+#include "tools/merge_samples/runnablemerger.h"
+
 
 #ifdef _WIN32
 #include "windows.h"
@@ -192,8 +194,39 @@ int displayHelp(Options &options)
     return 0;
 }
 
+int test()
+{
+    ContextManager::initializeNoAudioMidi();
+
+    QString filePath = "/home/davy/Téléchargements/POS - plein-jeu.sf2";
+    AbstractInputParser * input = InputFactory::getInput(filePath);
+    input->process(false);
+    if (!input->isSuccess())
+    {
+        writeLine("Couldn't load " + filePath + ": " + input->getError());
+        delete input;
+        return 1;
+    }
+    int sf2Index = input->getSf2Index();
+    delete input;
+    writeLine("File loaded");
+
+    // Launch a tool
+    for (int key = 36; key <= 40; key++)
+    {
+        writeLine("Key: " + QString::number(key));
+        RunnableMerger merger(nullptr, EltID(elementPrst, sf2Index, 2), key, key, false, true, 4, 2);
+        merger.run();
+        writeLine("ok");
+    }
+
+    return 0;
+}
+
 int main(int argc, char *argv[])
 {
+    //return test();
+
 #ifdef Q_OS_LINUX
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::RoundPreferFloor);
 #endif

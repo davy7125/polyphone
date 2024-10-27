@@ -34,17 +34,16 @@ public:
     ~SampleReaderOgg() override {}
 
     // Extract general information (sampling rate, ...)
-    SampleReaderResult getInfo(QFile &fi, InfoSound &info) override;
+    SampleReaderResult getInfo(QFile &fi, InfoSound * info) override;
 
     // Get sample data
-    SampleReaderResult getData(QFile &fi, QVector<float> &smpl) override;
+    float * getData(SampleReaderResult &result, QFile &fi) override;
 
 private:
-    SampleReaderResult launchDecoder(bool justMetadata);
+    SampleReaderResult launchDecoder(float * data);
 
     QFile * _file;
     InfoSound * _info;
-    float * _data;
 };
 
 #endif // SAMPLEREADEROGG_H

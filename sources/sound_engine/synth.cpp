@@ -42,7 +42,6 @@ Synth::Synth(Soundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts) : QObje
     _soundEngines(nullptr),
     _soundEngineCount(0),
     _numberOfVoicesToAdd(0),
-    _gain(0),
     _recordFile(nullptr),
     _isRecording(false),
     _isWritingInStream(0),
@@ -140,17 +139,14 @@ int Synth::play(EltID id, int channel, int key, int velocity)
         Smpl * smpl = soundfont->getSample(id.indexElt);
         if (smpl == nullptr)
             return -1;
-        playingToken = playSmpl(smpl, channel, key, velocity);
+        playingToken = playSmpl(smpl, channel, key, velocity, false);
 
-        if (key == -1) // -2 is the linked sample
+        // Stereo link?
+        if (smpl->_sfSampleType != monoSample && smpl->_sfSampleType != RomMonoSample)
         {
-            // Stereo link?
-            if (smpl->_sfSampleType != monoSample && smpl->_sfSampleType != RomMonoSample)
-            {
-                Smpl * otherSmpl = soundfont->getSample(smpl->_wSampleLink);
-                if (otherSmpl != nullptr)
-                    playSmpl(otherSmpl, channel, -2, 127);
-            }
+            Smpl * otherSmpl = soundfont->getSample(smpl->_wSampleLink);
+            if (otherSmpl != nullptr)
+                playSmpl(otherSmpl, channel, key, velocity, true);
         }
     } break;
     case elementInst: case elementInstSmpl:
@@ -174,7 +170,7 @@ int Synth::play(EltID id, int channel, int key, int velocity)
     }
 
     // Add all voices to the sound engines
-    SoundEngine::addVoices(_voiceInitializers, _numberOfVoicesToAdd);
+    SoundEngine::addVoices(_voiceInitializers, _numberOfVoicesToAdd, &_configuration, &_internalConfiguration);
 
     return playingToken;
 }
@@ -257,13 +253,13 @@ void Synth::playInst(Soundfont * soundfont, InstPrst * inst, int channel, int ke
         {
             Smpl * smpl = soundfont->getSample(instDiv->getGen(champ_sampleID).wValue);
             if (smpl != nullptr)
-                this->playSmpl(smpl, channel, key, velocity,
+                this->playSmpl(smpl, channel, key, velocity, false,
                                inst, instDiv, prst, prstDiv);
         }
     }
 }
 
-int Synth::playSmpl(Smpl * smpl, int channel, int key, int velocity,
+int Synth::playSmpl(Smpl * smpl, int channel, int key, int velocity, bool other,
                     InstPrst * inst, Division * instDiv,
                     InstPrst * prst, Division * prstDiv)
 {
@@ -283,11 +279,8 @@ int Synth::playSmpl(Smpl * smpl, int channel, int key, int velocity,
     _voiceInitializers[_numberOfVoicesToAdd].channel = channel;
     _voiceInitializers[_numberOfVoicesToAdd].key = key;
     _voiceInitializers[_numberOfVoicesToAdd].vel = velocity;
-    _voiceInitializers[_numberOfVoicesToAdd].gain = (key < 0 ? 0 : static_cast<float>(_gain));
-    _voiceInitializers[_numberOfVoicesToAdd].choLevel = (key < 0 ? 0 : _choLevel);
-    _voiceInitializers[_numberOfVoicesToAdd].choDepth = (key < 0 ? 0 : _choDepth);
-    _voiceInitializers[_numberOfVoicesToAdd].choFrequency = (key < 0 ? 0 : _choFrequency);
-    _voiceInitializers[_numberOfVoicesToAdd].audioSmplRate = _sampleRate;
+    _voiceInitializers[_numberOfVoicesToAdd].type = inst == nullptr ? (other ? 2 : 1) : 0;
+    _voiceInitializers[_numberOfVoicesToAdd].audioSmplRate = _internalConfiguration.sampleRate;
     _voiceInitializers[_numberOfVoicesToAdd].token = currentToken;
     _numberOfVoicesToAdd++;
 
@@ -300,42 +293,32 @@ void Synth::stop(bool allChannels)
     SoundEngine::stopAllVoices(allChannels);
 }
 
-void Synth::configure(SynthConfig *configuration)
+void Synth::configure(SynthConfig * configuration)
 {
     this->stop(true);
+    _configuration.copy(configuration);
 
     // Update chorus
-    _choLevel = configuration->choLevel;
-    _choDepth = configuration->choDepth;
-    _choFrequency = configuration->choFrequency;
-    SoundEngine::setChorus(_choLevel, _choDepth, _choFrequency);
+    SoundEngine::setChorus(_configuration.choLevel, _configuration.choDepth, _configuration.choFrequency);
 
     // Update reverb
-    double revLevel = 0.01 * configuration->revLevel;
-    double revSize = 0.01 * configuration->revSize;
-    double revWidth = 0.01 * configuration->revWidth;
-    double revDamping = 0.01 * configuration->revDamping;
-
     _mutexReverb.lock();
-    _reverbOn = revLevel > 0.001;
-    _reverb.setEffectMix(revLevel);
-    _reverb.setRoomSize(revSize);
-    _reverb.setWidth(revWidth);
-    _reverb.setDamping(revDamping);
+    _internalConfiguration.reverbOn = _configuration.revLevel > 0;
+    _reverb.setEffectMix(0.01 * _configuration.revLevel);
+    _reverb.setRoomSize(0.01 * _configuration.revSize);
+    _reverb.setWidth(0.01 * _configuration.revWidth);
+    _reverb.setDamping(0.01 * _configuration.revDamping);
     _mutexReverb.unlock();
 
-    // Update gain, tuning fork and temperament
-    _gain = configuration->gain;
-    SoundEngine::setGain(_gain);
+    // Update the tuning fork and temperament
+    Voice::setTuningFork(_configuration.tuningFork);
 
-    Voice::setTuningFork(configuration->tuningFork);
-
-    if (configuration->temperament.count() == 14)
+    if (_configuration.temperament.count() == 14)
     {
         float temperament[12];
         for (int i = 1; i < 13; i++)
-            temperament[i - 1] = configuration->temperament[i].toFloat();
-        int temperamentRelativeKey = configuration->temperament[13].toInt() % 12;
+            temperament[i - 1] = _configuration.temperament[i].toFloat();
+        int temperamentRelativeKey = _configuration.temperament[13].toInt() % 12;
         Voice::setTemperament(temperament, temperamentRelativeKey);
     }
     else
@@ -351,27 +334,30 @@ void Synth::setIMidiValues(IMidiValues * iMidiValues)
     ParameterModulator::setIMidiValues(iMidiValues);
 }
 
-void Synth::setGainSample(int gain)
+void Synth::setSampleGain(double gain)
 {
     // Modification du gain des samples
-    SoundEngine::setGainSample(gain);
+    _internalConfiguration.smplGain = gain;
+    SoundEngine::configureVoices(&_configuration, &_internalConfiguration);
 }
 
-void Synth::setStereo(bool isStereo)
+void Synth::setStereo(bool isStereoEnabled)
 {
     // Enable the stereo when playing a sample
-    SoundEngine::setStereo(isStereo);
+    _internalConfiguration.smplIsStereoEnabled = isStereoEnabled;
+    SoundEngine::configureVoices(&_configuration, &_internalConfiguration);
 }
 
-bool Synth::isStereo()
+bool Synth::isStereoEnabled()
 {
-    return SoundEngine::isStereo();
+    return _internalConfiguration.smplIsStereoEnabled;
 }
 
 void Synth::setLoopEnabled(bool isEnabled)
 {
     // Enable the loop when playing a sample
-    SoundEngine::setLoopEnabled(isEnabled);
+    _internalConfiguration.smplIsLoopEnabled = isEnabled;
+    SoundEngine::configureVoices(&_configuration, &_internalConfiguration);
 }
 
 void Synth::setSinus(bool isOn, int rootKey)
@@ -383,22 +369,22 @@ void Synth::setSinus(bool isOn, int rootKey)
         _sinus.off();
 }
 
-void Synth::setStartLoop(quint32 startLoop, bool repercute)
+void Synth::setStartLoop(quint32 startLoop, bool withLinkedSample)
 {
-    // Update voices -1 and -2 if repercussion
-    SoundEngine::setStartLoop(startLoop, repercute);
+    // Update voices coming from the sample level
+    SoundEngine::setStartLoop(startLoop, withLinkedSample);
 }
 
-void Synth::setEndLoop(quint32 endLoop, bool repercute)
+void Synth::setEndLoop(quint32 endLoop, bool withLinkedSample)
 {
-    // Update voices -1 and -2  if repercussion
-    SoundEngine::setEndLoop(endLoop, repercute);
+    // Update voices coming from the sample level
+    SoundEngine::setEndLoop(endLoop, withLinkedSample);
 }
 
-void Synth::setPitchCorrection(qint16 correction, bool repercute)
+void Synth::setPitchCorrection(qint16 correction, bool withLinkedSample)
 {
-    // Update voices -1 and -2  if repercussion
-    SoundEngine::setPitchCorrection(correction, repercute);
+    // Update voices coming from the sample level
+    SoundEngine::setPitchCorrection(correction, withLinkedSample);
 }
 
 void Synth::activateSmplEq(bool isActivated)
@@ -417,7 +403,7 @@ void Synth::setSmplEqValues(int values[10])
 void Synth::setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize)
 {
     // Mutex not mandatory: no data generation when "setFormat" is called
-    _sampleRate = sampleRate;
+    _internalConfiguration.sampleRate = sampleRate;
 
     // Reset
     this->stop(true);
@@ -467,7 +453,7 @@ void Synth::startNewRecord(QString fileName)
         wTemp = 2;
         _recordStream << wTemp;
         // Sample rate
-        dwTemp = _sampleRate;
+        dwTemp = _internalConfiguration.sampleRate;
         _recordStream << dwTemp;
         // Average byte per second
         dwTemp *= 2 * 4;
@@ -544,7 +530,7 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
     // Get the reverberated part of the sound
     for (int i = 0; i < _soundEngineCount; i++)
         _soundEngines[i]->addRevData(dataL, dataR, maxlen);
-    if (_reverbOn)
+    if (_internalConfiguration.reverbOn)
     {
         // Apply reverb on the current data
         _mutexReverb.lock();
@@ -596,7 +582,7 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
 
             // Prise en compte de l'avance
             _recordLength += maxlen * 8;
-            emit(dataWritten(_sampleRate, maxlen));
+            emit dataWritten(_internalConfiguration.sampleRate, maxlen);
 
             // We are not writing anymore
             _isWritingInStream.storeRelaxed(0);

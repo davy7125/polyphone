@@ -31,43 +31,49 @@ SampleReaderSf2::SampleReaderSf2(QString filename) : SampleReader(filename),
 
 }
 
-SampleReaderSf2::SampleReaderResult SampleReaderSf2::getInfo(QFile &fi, InfoSound &info)
+SampleReader::SampleReaderResult SampleReaderSf2::getInfo(QFile &fi, InfoSound * info)
 {
     Q_UNUSED(fi)
 
     // Info completed outside for an sf2: we keep the pointer
-    _info = &info;
+    _info = info;
 
     // Extra info
-    info.wChannel = 0;
-    info.wChannels = 1;
-    info.pitchDefined = true; // So that we don't try to find the key based on the filename
+    info->wChannel = 0;
+    info->wChannels = 1;
+    info->pitchDefined = true; // So that we don't try to find the key based on the filename
 
     return FILE_OK;
 }
 
-SampleReaderSf2::SampleReaderResult SampleReaderSf2::getData(QFile &fi, QVector<float> &smpl)
+float * SampleReaderSf2::getData(SampleReaderResult &result, QFile &fi)
 {
     if (_info->dwLength == 0)
-        return FILE_OK;
+    {
+        result = FILE_OK;
+        return nullptr;
+    }
 
-    // Size of the vector
-    smpl.resize(_info->dwLength);
-    float * fData = smpl.data();
+    // Sample data
+    float * fData = new float[_info->dwLength];
 
     // Load the smpl part of an sf2
     fi.seek(_info->dwStart);
     qint16 * data = new qint16[_info->dwLength];
-    qint64 nb = fi.read((char *)data, _info->dwLength * 2);
+    qint64 nb = fi.read((char *)data, _info->dwLength * sizeof(qint16));
     if (nb == -1)
     {
         delete [] data;
-        return FILE_NOT_READABLE;
+        delete [] fData;
+        result = FILE_NOT_READABLE;
+        return nullptr;
     }
-    if (nb != _info->dwLength * 2)
+    if (nb != _info->dwLength * sizeof(qint16))
     {
         delete [] data;
-        return FILE_CORRUPT;
+        delete [] fData;
+        result = FILE_CORRUPT;
+        return nullptr;
     }
 
     // Possibly load the sm24 part of an sf2
@@ -81,13 +87,17 @@ SampleReaderSf2::SampleReaderResult SampleReaderSf2::getData(QFile &fi, QVector<
         {
             delete [] data;
             delete [] data24;
-            return FILE_NOT_READABLE;
+            delete [] fData;
+            result = FILE_NOT_READABLE;
+            return nullptr;
         }
         if (nb != _info->dwLength)
         {
             delete [] data;
             delete [] data24;
-            return FILE_CORRUPT;
+            delete [] fData;
+            result = FILE_CORRUPT;
+            return nullptr;
         }
     }
     else
@@ -105,5 +115,6 @@ SampleReaderSf2::SampleReaderResult SampleReaderSf2::getData(QFile &fi, QVector<
 
     delete [] data;
     delete [] data24;
-    return FILE_OK;
+    result = FILE_OK;
+    return fData;
 }

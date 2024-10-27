@@ -473,7 +473,7 @@ QVector<float> SoundfontManager::getData(EltID idSmpl)
         return baRet;
 
     Smpl *tmp = _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt);
-    baRet = tmp->_sound.getData();
+    baRet = tmp->_sound.getDataVector(false);
 
     return baRet;
 }
@@ -1529,7 +1529,7 @@ int SoundfontManager::set(EltID idSmpl, QVector<float> data)
     oldData.clear();
 
     // Update sample data
-    oldData = _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt)->_sound.getData();
+    oldData = _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt)->_sound.getDataVector(false);
     _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt)->_sound.setData(data);
 
     // Création et stockage de l'action

@@ -819,7 +819,7 @@ void PageTable::selected()
         _modulatorEditor->setIds(_currentIds);
 
     // Update the selection outside the table
-    emit(selectedIdsChanged(ids));
+    emit selectedIdsChanged(ids);
     _preparingPage = false;
 }
 

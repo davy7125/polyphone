@@ -225,39 +225,40 @@ void errorCallback(const FLAC__StreamDecoder * decoder, FLAC__StreamDecoderError
 SampleReaderFlac::SampleReaderFlac(QString filename) : SampleReader(filename),
     _file(nullptr),
     _info(nullptr),
-    _data(nullptr),
     _pos(0)
 {
 
 }
 
-SampleReaderFlac::SampleReaderResult SampleReaderFlac::getInfo(QFile &fi, InfoSound &info)
+SampleReader::SampleReaderResult SampleReaderFlac::getInfo(QFile &fi, InfoSound * info)
 {
     // Initialize the info and keep a track of it
-    info.reset();
-    _info = &info;
+    info->reset();
+    _info = info;
 
     // Public access to the file, no data to store
     _file = &fi;
     _data = nullptr;
 
     // Decode the file
-    return launchDecoder(true);
+    return launchDecoder();
 }
 
-SampleReaderFlac::SampleReaderResult SampleReaderFlac::getData(QFile &fi, QVector<float> &smpl)
+float * SampleReaderFlac::getData(SampleReaderResult &result, QFile &fi)
 {
     // Public access to the file, read data
     _file = &fi;
-    smpl.resize(_info->dwLength);
-    _data = smpl.data();
+    _data = new float[_info->dwLength];
     _pos = 0;
 
     // Decode the file
-    return launchDecoder(false);
+    result = launchDecoder();
+    float * data = _data;
+    _data = nullptr;
+    return data;
 }
 
-SampleReaderFlac::SampleReaderResult SampleReaderFlac::launchDecoder(bool justMetadata)
+SampleReaderFlac::SampleReaderResult SampleReaderFlac::launchDecoder()
 {
     // Initialize a FLAC decoder
     FLAC__StreamDecoder * decoder = FLAC__stream_decoder_new();
@@ -272,7 +273,7 @@ SampleReaderFlac::SampleReaderResult SampleReaderFlac::launchDecoder(bool justMe
     }
 
     // Begin decoding the file
-    bool ok = justMetadata ?
+    bool ok = _data == nullptr ?
                 FLAC__stream_decoder_process_until_end_of_metadata(decoder) :
                 FLAC__stream_decoder_process_until_end_of_stream(decoder);
     FLAC__stream_decoder_finish(decoder);

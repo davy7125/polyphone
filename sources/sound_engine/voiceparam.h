@@ -41,7 +41,7 @@ public:
 
     // Initialize a set of parameters (prst and inst can be unknown)
     void initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv,
-                    Smpl * smpl, int channel, int key, int vel);
+                    Smpl * smpl, qint8 channel, qint8 key, qint8 vel, qint8 type);
 
     void setPan(double val);
     void setLoopMode(quint16 val);
@@ -58,15 +58,17 @@ public:
     quint32 getPosition(AttributeType type);
 
     // Identification
-    int getChannel() { return _channel; }
-    int getKey() { return _key; }
+    qint8 getChannel() { return _channel; }
+    qint8 getKey() { return _key; }
+    qint8 getType() { return _type; }
     int getSf2Id() { return _sf2Id; }
     int getPresetId() { return _presetId; }
 
 private:
     // Identification
-    int _channel;
-    int _key;
+    qint8 _channel;
+    qint8 _key;
+    qint8 _type;
     int _sf2Id;
     int _presetId;
     qint32 _wPresetNumber;

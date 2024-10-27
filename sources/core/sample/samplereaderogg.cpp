@@ -29,20 +29,19 @@
 
 SampleReaderOgg::SampleReaderOgg(QString filename) : SampleReader(filename),
     _file(nullptr),
-    _info(nullptr),
-    _data(nullptr)
+    _info(nullptr)
 {
 
 }
 
-size_t ogg_read(void* buffer, size_t elementSize, size_t elementCount, void* dataSource)
+size_t ogg_read(void* buffer, size_t elementSize, size_t elementCount, void * dataSource)
 {
-    QFile *file = static_cast<QFile*>(dataSource);
+    QFile * file = static_cast<QFile*>(dataSource);
     size_t bytesToRead = elementSize * elementCount;
     return file->read((char *)buffer, bytesToRead);
 }
 
-int ogg_seek(void* dataSource, ogg_int64_t offset, int origin)
+int ogg_seek(void * dataSource, ogg_int64_t offset, int origin)
 {
     QFile *file = static_cast<QFile*>(dataSource);
 
@@ -63,38 +62,37 @@ int ogg_seek(void* dataSource, ogg_int64_t offset, int origin)
     return 0;
 }
 
-long ogg_tell(void* dataSource)
+long ogg_tell(void * dataSource)
 {
-    QFile *file = static_cast<QFile*>(dataSource);
+    QFile * file = static_cast<QFile*>(dataSource);
     return file->pos();
 }
 
-SampleReaderOgg::SampleReaderResult SampleReaderOgg::getInfo(QFile &fi, InfoSound &info)
+SampleReader::SampleReaderResult SampleReaderOgg::getInfo(QFile &fi, InfoSound * info)
 {
     // Initialize the info and keep a track of it
-    info.reset();
-    _info = &info;
+    info->reset();
+    _info = info;
 
-    // Public access to the file, no data to store
+    // Access to the file
     _file = &fi;
-    _data = nullptr;
 
     // Decode the file
-    return launchDecoder(true);
+    return launchDecoder(nullptr);
 }
 
-SampleReaderOgg::SampleReaderResult SampleReaderOgg::getData(QFile &fi, QVector<float> &smpl)
+float * SampleReaderOgg::getData(SampleReaderResult &result, QFile &fi)
 {
-    // Public access to the file, read data
+    // Access to the file
     _file = &fi;
-    smpl.resize(_info->dwLength);
-    _data = smpl.data();
 
-    // Decode the file
-    return launchDecoder(false);
+    // Decode the file and read data
+    float * data = new float[_info->dwLength];
+    result = launchDecoder(data);
+    return data;
 }
 
-SampleReaderOgg::SampleReaderResult SampleReaderOgg::launchDecoder(bool justMetadata)
+SampleReader::SampleReaderResult SampleReaderOgg::launchDecoder(float * data)
 {
     OggVorbis_File vf;
 
@@ -129,7 +127,7 @@ SampleReaderOgg::SampleReaderResult SampleReaderOgg::launchDecoder(bool justMeta
     }
     fprintf(stderr,"Encoded by: %s\n\n", ov_comment(&vf, -1)->vendor);*/
 
-    if (!justMetadata)
+    if (data != nullptr)
     {
         // Load 16-bit data
         int current_section;
@@ -154,14 +152,14 @@ SampleReaderOgg::SampleReaderResult SampleReaderOgg::launchDecoder(bool justMeta
             int maxLength = ret;
             if (maxLength + pos > _info->dwLength)
                 maxLength = _info->dwLength - pos;
-            memcpy(&_data[pos], sound[_info->wChannel], maxLength * sizeof(float));
+            memcpy(&data[pos], sound[_info->wChannel], maxLength * sizeof(float));
 
             pos += ret;
         }
 
-        // Fill the remaining part of _data with 0
+        // Fill the remaining part of data with 0
         if (pos < _info->dwLength)
-            memset(&_data[pos], 0, _info->dwLength - pos);
+            memset(&data[pos], 0, _info->dwLength - pos);
     }
 
     ov_clear(&vf);

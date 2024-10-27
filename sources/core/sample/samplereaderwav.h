@@ -34,10 +34,10 @@ public:
     ~SampleReaderWav() override {}
 
     // Extract general information (sampling rate, ...)
-    SampleReaderResult getInfo(QFile &fi, InfoSound &info) override;
+    SampleReaderResult getInfo(QFile &fi, InfoSound * info) override;
 
     // Get sample data
-    SampleReaderResult getData(QFile &fi, QVector<float> &smpl) override;
+    float * getData(SampleReaderResult &result, QFile &fi) override;
 
 private:
     InfoSound * _info;

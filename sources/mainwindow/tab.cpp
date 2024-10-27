@@ -75,13 +75,14 @@ void Tab::updateTitleAndPath()
     // Title
     SoundfontManager * sm = SoundfontManager::getInstance();
     QString title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_name);
+    static QRegularExpression reg("(/|\\\\)");
     if (title.isEmpty())
-        title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial).split(QRegularExpression("(/|\\\\)")).last();
+        title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial).split(reg).last();
     if (title.isEmpty())
         title = tr("Untitled");
 
-    emit(tabTitleChanged((sm->isEdited(_sf2Index) && !ContextManager::s_playerMode ? "*" : "") + title));
+    emit tabTitleChanged((sm->isEdited(_sf2Index) && !ContextManager::s_playerMode ? "*" : "") + title);
 
     // Path
-    emit(filePathChanged(sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial)));
+    emit filePathChanged(sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial));
 }

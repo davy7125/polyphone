@@ -34,10 +34,10 @@ public:
     ~SampleReaderFlac() override {}
 
     // Extract general information (sampling rate, ...)
-    SampleReaderResult getInfo(QFile &fi, InfoSound &info) override;
+    SampleReaderResult getInfo(QFile &fi, InfoSound * info) override;
 
     // Get sample data
-    SampleReaderResult getData(QFile &fi, QVector<float> &smpl) override;
+    float * getData(SampleReaderResult &result, QFile &fi) override;
 
     // Public for an access in the callback
     QFile * _file;
@@ -46,7 +46,7 @@ public:
     quint32 _pos;
 
 private:
-    SampleReaderResult launchDecoder(bool justMetadata);
+    SampleReaderResult launchDecoder();
 };
 
 #endif // SAMPLEREADERFLAC_H

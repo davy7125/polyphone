@@ -42,7 +42,8 @@ public:
     InfoSound getInfo() { return _info; }
     QString getError() { return _error; }
     QString getFileName() { return _fileName; }
-    QVector<float> getData(bool forceReload = false);
+    float * getData(quint32 &length, bool forceReload, bool getCopy);
+    QVector<float> getDataVector(bool forceReload);
     quint32 getUInt32(AttributeType champ); // For everything but the pitch correction
     qint32 getInt32(AttributeType champ); // For the pitch correction
 
@@ -56,9 +57,10 @@ private:
     QString _fileName;
     QString _error;
     InfoSound _info;
-    QVector<float> _smpl;
+    float * _data;
     SampleReader * _reader;
 
+    void setData(float * newData, quint32 length); // Sound takes the ownership of data and will destroy it
     void determineRootKey();
 };
 

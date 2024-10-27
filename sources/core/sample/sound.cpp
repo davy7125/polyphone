@@ -30,15 +30,14 @@
 Sound::Sound() :
     _fileName(""),
     _error(""),
+    _data(nullptr),
     _reader(nullptr)
-{
-    // Initialize data
-    _smpl.clear();
-}
+{}
 
 Sound::~Sound()
 {
     delete _reader;
+    delete [] _data;
 }
 
 bool Sound::setFileName(QString qStr, bool tryFindRootKey)
@@ -54,7 +53,7 @@ bool Sound::setFileName(QString qStr, bool tryFindRootKey)
     // Get information about the sample
     if (_reader != nullptr)
     {
-        SampleReader::SampleReaderResult result = _reader->getInfo(_info);
+        SampleReader::SampleReaderResult result = _reader->getInfo(&_info);
         switch (result)
         {
         case SampleReader::FILE_CORRUPT:
@@ -83,21 +82,52 @@ bool Sound::setFileName(QString qStr, bool tryFindRootKey)
     return isOk;
 }
 
-QVector<float> Sound::getData(bool forceReload)
+float * Sound::getData(quint32 &length, bool forceReload, bool getCopy)
 {
     if (_reader != nullptr)
     {
+        SampleReader::SampleReaderResult result;
         if (forceReload)
         {
-            _smpl.clear();
-            _reader->getInfo(_info);
-        }
+            // Old / new lengths
+            quint32 oldLength = _info.dwLength;
+            _reader->getInfo(&_info);
+            quint32 newLength = _info.dwLength;
 
-        if (_smpl.isEmpty())
-            _reader->getData(_smpl);
+            // Write over the current data or replace the pointer
+            float * newData = _reader->getData(result);
+            _info.dwLength = oldLength;
+            this->setData(newData, newLength);
+        }
+        else if (_data == nullptr)
+        {
+            _data = _reader->getData(result);
+        }
     }
 
-    return _smpl;
+    length = _data == nullptr ? 0 : _info.dwLength;
+
+    if (getCopy && _data != nullptr)
+    {
+        float * copy = new float[_info.dwLength];
+        memcpy(copy, _data, _info.dwLength * sizeof(float));
+        return copy;
+    }
+
+    return _data;
+}
+
+QVector<float> Sound::getDataVector(bool forceReload)
+{
+    quint32 length;
+    float * data = this->getData(length, forceReload, false);
+    QVector<float> v;
+    if (length > 0)
+    {
+        v.reserve(length);
+        std::copy(data, data + length, std::back_inserter(v));
+    }
+    return v;
 }
 
 quint32 Sound::getUInt32(AttributeType champ)
@@ -160,8 +190,28 @@ qint32 Sound::getInt32(AttributeType champ)
 
 void Sound::setData(QVector<float> data)
 {
-    _smpl = data;
-    _info.dwLength = data.size();
+    // Create a copy of the data
+    float * copy = new float[data.size()];
+    memcpy(copy, data.constData(), data.size() * sizeof(float));
+    this->setData(copy, data.size());
+}
+
+void Sound::setData(float * newData, quint32 length)
+{
+    if (_data != nullptr && length == _info.dwLength)
+    {
+        // Copy data into the existing array (as a precaution if _data is being read by a voice in the synth)
+        memcpy(_data, newData, length * sizeof(float));
+
+        delete [] newData;
+    }
+    else
+    {
+        delete [] _data;
+        _data = newData;
+    }
+
+    _info.dwLength = length;
 }
 
 void Sound::set(AttributeType champ, AttributeValue value)
@@ -225,8 +275,11 @@ void Sound::set(AttributeType champ, AttributeValue value)
 
 void Sound::loadInRam()
 {
-    if (_smpl.isEmpty())
-        _smpl = this->getData();
+    if (_data == nullptr)
+    {
+        SampleReader::SampleReaderResult result;
+        _data = _reader->getData(result);
+    }
 }
 
 void Sound::determineRootKey()
@@ -236,13 +289,14 @@ void Sound::determineRootKey()
     QString nameNoExtension = fileInfo.completeBaseName().toLower();
 
     // First attempt: find a note name (standard taken being C4 = 60)
-    QRegularExpression keyNameRegex("([a-g])([#b]?)(-?[0-9]+)");
+    static QRegularExpression keyNameRegex("([a-g])([#b]?)(-?[0-9]+)");
     bool keyFound = false;
     unsigned int key = 0;
     QRegularExpressionMatch match = keyNameRegex.match(nameNoExtension);
     if (match.hasMatch())
     {
-        switch (match.captured(1)[0].toLatin1())
+        QString captured = match.captured(1);
+        switch (captured[0].toLatin1())
         {
         case 'c':
             key = 0;
@@ -281,7 +335,8 @@ void Sound::determineRootKey()
     // Second attempt: search the numeric name of the key
     if (!keyFound)
     {
-        QStringList listeNum = nameNoExtension.replace(QRegularExpression("[^0-9]"), "-").split("-", Qt::SkipEmptyParts);
+        static QRegularExpression reg = QRegularExpression("[^0-9]");
+        QStringList listeNum = nameNoExtension.replace(reg, "-").split("-", Qt::SkipEmptyParts);
         if (!listeNum.isEmpty())
         {
             // We study the last part

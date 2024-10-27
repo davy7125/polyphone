@@ -106,7 +106,7 @@ void StyledAction::onToggled(bool isChecked)
     else
         this->setStyleSheet("StyledAction{border:0}");
 
-    emit(actionClicked());
+    emit actionClicked();
 }
 
 void StyledAction::onClicked(bool unused)
@@ -116,7 +116,7 @@ void StyledAction::onClicked(bool unused)
     if (_isDisabled || this->isCheckable())
         return;
 
-    emit(actionClicked());
+    emit actionClicked();
 }
 
 void StyledAction::setData(int data)
