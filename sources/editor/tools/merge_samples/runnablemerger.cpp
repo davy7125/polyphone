@@ -213,6 +213,7 @@ void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Div
     voiceInitializer.vel = 127;
     voiceInitializer.audioSmplRate = SAMPLE_RATE;
     voiceInitializer.token = 0;
+    voiceInitializer.type = 0;
 
     Voice * voice = new Voice();
     voice->initialize(&voiceInitializer);

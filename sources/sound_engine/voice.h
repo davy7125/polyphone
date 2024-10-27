@@ -126,6 +126,7 @@ private:
 
     // Save state for resampling
     float _firstVal[6];
+    quint32 _lastDistanceFraction;
 
     // Save state for low pass filter
     float _x1, _x2, _y1, _y2;
