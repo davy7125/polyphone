@@ -101,7 +101,7 @@ void VoiceParam::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst
     if (prstDiv)
         readDivisionModulators(prstGlobalDiv, prstDiv, true);
 
-    if (key < 0) // Smpl area
+    if (type != 0) // Smpl level
         this->prepareForSmpl(key, smpl->_sfSampleType);
 }
 

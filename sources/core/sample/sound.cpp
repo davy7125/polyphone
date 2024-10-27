@@ -37,7 +37,11 @@ Sound::Sound() :
 Sound::~Sound()
 {
     delete _reader;
-    delete [] _data;
+    if (_data != nullptr)
+    {
+        delete [] _data;
+        _data = nullptr;
+    }
 }
 
 bool Sound::setFileName(QString qStr, bool tryFindRootKey)
@@ -207,7 +211,8 @@ void Sound::setData(float * newData, quint32 length)
     }
     else
     {
-        delete [] _data;
+        if (_data != nullptr)
+            delete [] _data;
         _data = newData;
     }
 

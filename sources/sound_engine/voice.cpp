@@ -355,6 +355,12 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
 
 bool Voice::takeData(float * data, quint32 nbRead, qint32 loopMode)
 {
+    if (_dataSmpl == nullptr)
+    {
+        memset(data, 0, nbRead * sizeof(float));
+        return true;
+    }
+
     bool endSample = false;
     quint32 loopStart = _voiceParam.getPosition(champ_dwStartLoop);
     quint32 loopEnd = _voiceParam.getPosition(champ_dwEndLoop);
