@@ -126,9 +126,10 @@ void ToolMixtureCreation::runInternal(SoundfontManager * sm, QWidget * parent, I
             // For each side (left / right)
             for (int side = 0; side < 1 + (_stereoSamples ? 1 : 0); side++)
             {
-                RunnableSampleCreator * rsc = new RunnableSampleCreator(this, idInst, di, key,
-                                                                        qMax(noteStart2, key - keyNumber + 1), // min key
-                                                                        loopEnabled, _stereoSamples, side);
+                RunnableSampleCreator * rsc = new RunnableSampleCreator(
+                    this, idInst, di, key,
+                    (key + 1 < noteStart2 + keyNumber) ? noteStart2 : (key - keyNumber + 1), // min key
+                    loopEnabled, _stereoSamples, side);
                 QThreadPool::globalInstance()->start(rsc);
             }
         }

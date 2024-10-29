@@ -114,9 +114,9 @@ void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids
         for (int side = 0; side < 1 + (_stereoSamples ? 1 : 0); side++)
         {
             RunnableChordCreator * rcc = new RunnableChordCreator(
-                        this, idInst, ci, key,
-                        qMax(noteStart2, key - keyNumber + 1), // min key
-                        loopEnabled, _stereoSamples, side);
+                this, idInst, ci, key,
+                (key + 1 < noteStart2 + keyNumber) ? noteStart2 : (key - keyNumber + 1), // min key
+                loopEnabled, _stereoSamples, side);
             QThreadPool::globalInstance()->start(rcc);
         }
     }

@@ -81,7 +81,7 @@ void Division::setGen(AttributeType champ, AttributeValue value)
 
     _attributeSet[champ] = true;
     _attributeValues[champ] = value;
-    if (champ == champ_sampleID || champ == champ_instrument)
+    if (champ == champ_sampleID || champ == champ_instrument || champ_keyRange)
         notifyUpdate();
 
 }
@@ -92,6 +92,8 @@ void Division::resetGen(AttributeType champ)
         return;
 
     _attributeSet[champ] = false;
+    if (champ == champ_keyRange)
+        notifyUpdate();
 }
 
 int Division::addMod()

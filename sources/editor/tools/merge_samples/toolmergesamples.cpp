@@ -100,6 +100,7 @@ void ToolMergeSamples::runInternal(SoundfontManager * sm, QWidget * parent, IdLi
     quint32 noteStart2 = range.byLo;
     quint32 noteEnd = range.byHi;
     quint32 noteStart = noteStart2 + (noteEnd - noteStart2) % keyNumber;
+
     int sustainDuration = params->getSampleSustainDuration();
     int releaseDuration = params->getSampleReleaseDuration();
     bool stereoSamples = params->getStereoSample();
@@ -107,7 +108,7 @@ void ToolMergeSamples::runInternal(SoundfontManager * sm, QWidget * parent, IdLi
     {
         RunnableMerger * rcc = new RunnableMerger(
             this, idPrst, key,
-            qMax(noteStart2, key - keyNumber + 1), // min key
+            (key + 1 < noteStart2 + keyNumber) ? noteStart2 : (key - keyNumber + 1), // min key
             loopEnabled, stereoSamples,
             sustainDuration, releaseDuration);
         QThreadPool::globalInstance()->start(rcc);
