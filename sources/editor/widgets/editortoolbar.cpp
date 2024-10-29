@@ -465,36 +465,9 @@ void EditorToolBar::onNewPrstClicked(QString name, bool linkElements)
             // Create a division
             idLink.indexElt2 = sm->add(idLink);
 
-            // Association of the sample in the instrument
+            // Association of the instrument in the preset
             val.wValue = idSrc.indexElt;
             sm->set(idLink, champ_instrument, val);
-
-            // Key range
-            int keyMin = 127;
-            int keyMax = 0;
-            EltID idInstSmpl = idSrc;
-            idInstSmpl.typeElement = elementInstSmpl;
-            foreach (int i, sm->getSiblings(idInstSmpl))
-            {
-                idInstSmpl.indexElt2 = i;
-                if (sm->isSet(idInstSmpl, champ_keyRange))
-                {
-                    keyMin = qMin(keyMin, (int)sm->get(idInstSmpl, champ_keyRange).rValue.byLo);
-                    keyMax = qMax(keyMax, (int)sm->get(idInstSmpl, champ_keyRange).rValue.byHi);
-                }
-            }
-            AttributeValue value;
-            if (keyMin < keyMax)
-            {
-                value.rValue.byLo = keyMin;
-                value.rValue.byHi = keyMax;
-            }
-            else
-            {
-                value.rValue.byLo = 0;
-                value.rValue.byHi = 127;
-            }
-            sm->set(idLink, champ_keyRange, value);
         }
     }
 

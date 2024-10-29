@@ -221,34 +221,6 @@ EltID Duplicator::linkInst(EltID idSource, EltID idDest)
     AttributeValue val;
     val.wValue = idSource.indexElt;
     _sm->set(idDest, champ_instrument, val);
-
-    // Keyrange
-    int keyMin = 127;
-    int keyMax = 0;
-    EltID idLinked = idSource;
-    idLinked.typeElement = elementInstSmpl;
-    foreach (int i, _sm->getSiblings(idLinked))
-    {
-        idLinked.indexElt2 = i;
-        if (_sm->isSet(idLinked, champ_keyRange))
-        {
-            keyMin = qMin(keyMin, (int)_sm->get(idLinked, champ_keyRange).rValue.byLo);
-            keyMax = qMax(keyMax, (int)_sm->get(idLinked, champ_keyRange).rValue.byHi);
-        }
-    }
-    AttributeValue value;
-    if (keyMin <= keyMax)
-    {
-        value.rValue.byLo = keyMin;
-        value.rValue.byHi = keyMax;
-    }
-    else
-    {
-        value.rValue.byLo = 0;
-        value.rValue.byHi = 127;
-    }
-    _sm->set(idDest, champ_keyRange, value);
-
     return idDest;
 }
 

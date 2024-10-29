@@ -165,8 +165,9 @@ void MainTabBar::mouseMoveEvent(QMouseEvent *event)
 
 void MainTabBar::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (_clickedInCloseButton && _clickedItemIndex != -1 &&
-        (_tabs[_clickedItemIndex]->getCloseButtonPath().contains(event->pos()) || event->button() == Qt::MouseButton::MiddleButton && _clickedItemIndex == itemAt(event->pos())))
+    if (_clickedInCloseButton && _clickedItemIndex != -1 && (
+            _tabs[_clickedItemIndex]->getCloseButtonPath().contains(event->pos()) ||
+            (event->button() == Qt::MouseButton::MiddleButton && _clickedItemIndex == itemAt(event->pos()))))
     {
         // Select and close the tab
         emit widgetClicked(_tabs[_clickedItemIndex]->getWidget());
