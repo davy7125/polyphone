@@ -514,8 +514,6 @@ void Synth::pause(bool isOn)
 
 void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
 {
-    memset(dataL, 0, maxlen * sizeof(float));
-    memset(dataR, 0, maxlen * sizeof(float));
     if (_soundEngineCount == 0)
         return;
 

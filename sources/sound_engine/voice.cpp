@@ -147,9 +147,6 @@ void Voice::initialize(VoiceInitializer * voiceInitializer)
 
 void Voice::generateData(float *dataL, float *dataR, quint32 len)
 {
-    memset(dataL, 0, len * sizeof(float));
-    memset(dataR, 0, len * sizeof(float));
-
     // Get voice current parameters
     _voiceParam.computeModulations();
     if (_currentSmplPos == 0xFFFFFFFF)
@@ -275,7 +272,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         for (quint32 i = 0; i < len; i++)
         {
             _modFreqArray[i] = v_filterFreq *
-                    EnveloppeVol::fastPow2((_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) / 1200.f);
+                    EnveloppeVol::fastPow2((_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) * 0.000833333f /* 1:1200 */);
             if (_modFreqArray[i] > 0.5f * _audioSmplRate)
                 _modFreqArray[i] = 0.5f * _audioSmplRate;
             else if (_modFreqArray[i] < 20.0f)

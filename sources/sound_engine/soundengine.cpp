@@ -336,7 +336,7 @@ void SoundEngine::generateData(quint32 len)
     {
         // Get data
         voice->generateData(_dataTmpL, _dataTmpR, len);
-        float coef1 = voice->getReverb() / 100.0f;
+        float coef1 = 0.01f * voice->getReverb();
         float coef2 = 1.f - coef1;
 
         // Merge data
