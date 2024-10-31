@@ -323,7 +323,7 @@ EltID ToolMergeSamples::createInstrumentInPreset(SoundfontManager * sm, QString 
     idNewPrst.indexElt = sm->add(idNewPrst);
     sm->set(idNewPrst, champ_name, name.left(20));
 
-    int numBank, numPreset;
+    int numBank = -1, numPreset = -1;
     sm->firstAvailablePresetBank(idNewPrst, numBank, numPreset);
     val.wValue = numBank;
     sm->set(idNewPrst, champ_wBank, val);

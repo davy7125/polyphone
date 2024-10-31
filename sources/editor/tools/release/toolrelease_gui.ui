@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>257</width>
-    <height>128</height>
+    <width>324</width>
+    <height>145</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,6 +24,9 @@
      </property>
      <property name="maximum">
       <double>10.000000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.100000000000000</double>
      </property>
      <property name="value">
       <double>0.300000000000000</double>
@@ -42,7 +45,7 @@
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -79,6 +82,9 @@
      <property name="maximum">
       <double>10.000000000000000</double>
      </property>
+     <property name="singleStep">
+      <double>0.100000000000000</double>
+     </property>
      <property name="value">
       <double>2.000000000000000</double>
      </property>
@@ -93,7 +99,7 @@
       <double>12.000000000000000</double>
      </property>
      <property name="singleStep">
-      <double>1.000000000000000</double>
+      <double>0.500000000000000</double>
      </property>
     </widget>
    </item>

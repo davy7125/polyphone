@@ -432,8 +432,7 @@ void EditorToolBar::onNewPrstClicked(QString name, bool linkElements)
         return;
 
     // Check that a preset is available
-    int nPreset = -1;
-    int nBank = -1;
+    int nPreset = -1, nBank = -1;
     SoundfontManager * sm = SoundfontManager::getInstance();
     EltID id(elementSf2, _sf2Index);
     sm->firstAvailablePresetBank(id, nBank, nPreset);
