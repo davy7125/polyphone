@@ -218,9 +218,13 @@ void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Div
     Voice * voice = new Voice();
     voice->initialize(&voiceInitializer);
 
+    // Pan coeffs
+    float tmp = 0.005f * (static_cast<float>(voice->getDoubleAttribute(champ_pan)) + 50.f); // Between 0 and 1/2 for [0; PI/2]
+    float coefR = Voice::fastSin(tmp);
+    float coefL = Voice::fastCos(tmp);
+
     // Buffers
-    float * bufferR = new float[BUFFER_LENGTH];
-    float * bufferL = new float[BUFFER_LENGTH];
+    float * buffer = new float[BUFFER_LENGTH];
 
     // Get the sustained data
     quint32 sustainLength = _sustainDuration * SAMPLE_RATE;
@@ -234,13 +238,13 @@ void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Div
             len = BUFFER_LENGTH;
 
         // Compute data in the sustain phase
-        voice->generateData(bufferL, bufferR, len);
+        voice->generateData(buffer, len);
 
         // Merge
         for (quint32 i = 0; i < len; i++)
         {
-            dataR[computedLength + i] += bufferR[i];
-            dataL[computedLength + i] += bufferL[i];
+            dataR[computedLength + i] += coefR * buffer[i];
+            dataL[computedLength + i] += coefL * buffer[i];
         }
 
         computedLength += len;
@@ -258,19 +262,18 @@ void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Div
             len = BUFFER_LENGTH;
 
         // Compute data in the release phase
-        voice->generateData(bufferL, bufferR, len);
+        voice->generateData(buffer, len);
 
         // Merge
         for (quint32 i = 0; i < len; i++)
         {
-            dataR[sustainLength + computedLength + i] += bufferR[i];
-            dataL[sustainLength + computedLength + i] += bufferL[i];
+            dataR[sustainLength + computedLength + i] += coefR * buffer[i];
+            dataL[sustainLength + computedLength + i] += coefL * buffer[i];
         }
 
         computedLength += len;
     }
 
-    delete [] bufferR;
-    delete [] bufferL;
+    delete [] buffer;
     delete voice;
 }

@@ -52,7 +52,6 @@ public:
 
     // Configuration
     static void configureVoices(SynthConfig * config, SynthInternalConfig * internalConfig);
-    static void setChorus(int level, int depth, int frequency);
     static void setPitchCorrection(qint16 correction, bool withLinkedSample);
     static void setStartLoop(quint32 startLoop, bool withLinkedSample);
     static void setEndLoop(quint32 endLoop, bool withLinkedSample);
@@ -63,8 +62,13 @@ public:
     void prepareData(quint32 len);
     void generateData(quint32 len);
     static void endComputation();
+    void addData(float * dataL, float * dataR, quint32 len);
     void addRevData(float * dataL, float * dataR, quint32 len);
-    void addNonRevData(float * dataL, float * dataR, quint32 len);
+    void addChoRevData(float * dataL, float * dataR, quint32 len);
+    void setChoRevData(float * dataL, float * dataR, quint32 len);
+    void addChoData(float * dataL, float * dataR, quint32 len);
+    float * getChoDataL();
+    float * getChoDataR();
 
 public slots:
     void start();
@@ -77,8 +81,8 @@ private:
     volatile bool _interrupted;
     QSemaphore * _semRunning;
     QMutex _mutexSynchro;
-    float * _dataL, * _dataR, * _dataRevL, * _dataRevR;
-    float * _dataTmpL, * _dataTmpR;
+    float * _dataL, * _dataR, * _dataRevL, * _dataRevR, * _dataChoL, * _dataChoR, * _dataChoRevL, * _dataChoRevR;
+    float * _dataTmp;
     volatile quint32 _lenToPrepare;
 
     static Voice * s_voices[MAX_NUMBER_OF_VOICES];

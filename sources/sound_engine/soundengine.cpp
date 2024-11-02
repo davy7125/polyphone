@@ -51,8 +51,11 @@ SoundEngine::SoundEngine(QSemaphore * semRunning, quint32 bufferSize) : QObject(
     _dataR = new float[4 * bufferSize];
     _dataRevL = new float[4 * bufferSize];
     _dataRevR = new float[4 * bufferSize];
-    _dataTmpL = new float[4 * bufferSize];
-    _dataTmpR = new float[4 * bufferSize];
+    _dataChoL = new float[4 * bufferSize];
+    _dataChoR = new float[4 * bufferSize];
+    _dataChoRevL = new float[4 * bufferSize];
+    _dataChoRevR = new float[4 * bufferSize];
+    _dataTmp = new float[4 * bufferSize];
 }
 
 SoundEngine::~SoundEngine()
@@ -61,8 +64,11 @@ SoundEngine::~SoundEngine()
     delete [] _dataR;
     delete [] _dataRevL;
     delete [] _dataRevR;
-    delete [] _dataTmpL;
-    delete [] _dataTmpR;
+    delete [] _dataChoL;
+    delete [] _dataChoR;
+    delete [] _dataChoRevL;
+    delete [] _dataChoRevR;
+    delete [] _dataTmp;
 }
 
 void SoundEngine::finalize()
@@ -168,9 +174,6 @@ void SoundEngine::configureVoices(SynthConfig * config, SynthInternalConfig * in
 
 void SoundEngine::configureVoice(Voice * voice, SynthConfig * config, SynthInternalConfig * internalConfig)
 {
-    // Chorus
-    s_voices[s_numberOfVoices]->setChorus(config->choLevel, config->choDepth, config->choFrequency);
-
     // Loop / gain
     if (voice->getType() == 0)
     {
@@ -182,7 +185,7 @@ void SoundEngine::configureVoice(Voice * voice, SynthConfig * config, SynthInter
         // Sample triggered from the sample level
         voice->setLoopMode(internalConfig->smplIsLoopEnabled ? 1 : 0);
 
-        double pan = voice->getPan();
+        double pan = voice->getDoubleAttribute(champ_pan);
         if (internalConfig->smplIsStereoEnabled)
         {
             if (pan < 0)
@@ -202,14 +205,6 @@ void SoundEngine::configureVoice(Voice * voice, SynthConfig * config, SynthInter
             voice->setGain(voice->getType() == 1 ? config->masterGain + internalConfig->smplGain : -1000);
         }
     }
-}
-
-void SoundEngine::setChorus(int level, int depth, int frequency)
-{
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-        s_voices[i]->setChorus(level, depth, frequency);
-    s_mutexVoices.unlock();
 }
 
 void SoundEngine::setPitchCorrection(qint16 correction, bool withLinkedSample)
@@ -244,8 +239,8 @@ void SoundEngine::closeAll(int channel, int exclusiveClass, int numPreset)
     s_mutexVoices.lock();
     for (int i = 0; i < s_numberOfVoices; i++)
     {
-        if (s_voices[i]->getExclusiveClass() == exclusiveClass &&
-                s_voices[i]->getPresetNumber() == numPreset &&
+        if (s_voices[i]->getIntAttribute(champ_exclusiveClass) == exclusiveClass &&
+                s_voices[i]->getIntAttribute(champ_wPreset) == numPreset &&
                 s_voices[i]->getChannel() == channel)
             s_voices[i]->release(true);
     }
@@ -325,45 +320,179 @@ void SoundEngine::prepareData(quint32 len)
 
 void SoundEngine::generateData(quint32 len)
 {
-    // Initialize data
-    memset(_dataL, 0, len * sizeof(float));
-    memset(_dataR, 0, len * sizeof(float));
-    memset(_dataRevL, 0, len * sizeof(float));
-    memset(_dataRevR, 0, len * sizeof(float));
+    bool initialized = false;
 
     Voice * voice;
+    float tmp, coefR, coefL, coefRev, coefNonRev, coefCho, coefNonCho;
+    quint32 i;
     while ((voice = getNextVoiceToCompute()) != nullptr)
     {
         // Get data
-        voice->generateData(_dataTmpL, _dataTmpR, len);
-        float coef1 = 0.01f * voice->getReverb();
-        float coef2 = 1.f - coef1;
+        voice->generateData(_dataTmp, len);
 
-        // Merge data
-        for (quint32 j = 0; j < len; j++)
+        tmp = 0.005f * (static_cast<float>(voice->getDoubleAttribute(champ_pan)) + 50.f); // Between 0 and 1/2 for [0; PI/2]
+        coefL = Voice::fastCos(tmp);
+        coefR = Voice::fastSin(tmp);
+
+        coefRev = 0.01f * static_cast<float>(voice->getDoubleAttribute(champ_reverbEffectsSend));
+        coefNonRev = 1.f - coefRev;
+
+        coefCho = 0.01f * static_cast<float>(voice->getDoubleAttribute(champ_chorusEffectsSend));
+        coefNonCho = 1.f - coefCho;
+
+        // Merge or initialize data
+        if (initialized)
         {
-            _dataL   [j] += coef2 * _dataTmpL[j];
-            _dataR   [j] += coef2 * _dataTmpR[j];
-            _dataRevL[j] += coef1 * _dataTmpL[j];
-            _dataRevR[j] += coef1 * _dataTmpR[j];
+            // Left, no reverb, no chorus
+            tmp = coefL * coefNonRev * coefNonCho;
+            for (i = 0; i < len; ++i)
+                _dataL[i] += tmp * _dataTmp[i];
+
+            // Right, no reverb, no chorus
+            tmp = coefR * coefNonRev * coefNonCho;
+            for (i = 0; i < len; ++i)
+                _dataR[i] += tmp * _dataTmp[i];
+
+            // Left, reverb, no chorus
+            tmp = coefL * coefRev * coefNonCho;
+            for (i = 0; i < len; ++i)
+                _dataRevL[i] += tmp * _dataTmp[i];
+
+            // Right, reverb, no chorus
+            tmp = coefR * coefRev * coefNonCho;
+            for (i = 0; i < len; ++i)
+                _dataRevR[i] += tmp * _dataTmp[i];
+
+            // Left, no reverb, chorus
+            tmp = coefL * coefNonRev * coefCho;
+            for (i = 0; i < len; ++i)
+                _dataChoL[i] += tmp * _dataTmp[i];
+
+            // Right, no reverb, chorus
+            tmp = coefR * coefNonRev * coefCho;
+            for (i = 0; i < len; ++i)
+                _dataChoR[i] += tmp * _dataTmp[i];
+
+            // Left, reverb, chorus
+            tmp = coefL * coefRev * coefCho;
+            for (i = 0; i < len; ++i)
+                _dataChoRevL[i] += tmp * _dataTmp[i];
+
+            // Right, reverb, chorus
+            tmp = coefR * coefRev * coefCho;
+            for (i = 0; i < len; ++i)
+                _dataChoRevR[i] += tmp * _dataTmp[i];
+        }
+        else
+        {
+            initialized = true;
+
+            // Left, no reverb, no chorus
+            tmp = coefL * coefNonRev * coefNonCho;
+            for (i = 0; i < len; ++i)
+                _dataL[i] = tmp * _dataTmp[i];
+
+            // Right, no reverb, no chorus
+            tmp = coefR * coefNonRev * coefNonCho;
+            for (i = 0; i < len; ++i)
+                _dataR[i] = tmp * _dataTmp[i];
+
+            // Left, reverb, no chorus
+            tmp = coefL * coefRev * coefNonCho;
+            for (i = 0; i < len; ++i)
+                _dataRevL[i] = tmp * _dataTmp[i];
+
+            // Right, reverb, no chorus
+            tmp = coefR * coefRev * coefNonCho;
+            for (i = 0; i < len; ++i)
+                _dataRevR[i] = tmp * _dataTmp[i];
+
+            // Left, no reverb, chorus
+            tmp = coefL * coefNonRev * coefCho;
+            for (i = 0; i < len; ++i)
+                _dataChoL[i] = tmp * _dataTmp[i];
+
+            // Right, no reverb, chorus
+            tmp = coefR * coefNonRev * coefCho;
+            for (i = 0; i < len; ++i)
+                _dataChoR[i] = tmp * _dataTmp[i];
+
+            // Left, reverb, chorus
+            tmp = coefL * coefRev * coefCho;
+            for (i = 0; i < len; ++i)
+                _dataChoRevL[i] = tmp * _dataTmp[i];
+
+            // Right, reverb, chorus
+            tmp = coefR * coefRev * coefCho;
+            for (i = 0; i < len; ++i)
+                _dataChoRevR[i] = tmp * _dataTmp[i];
         }
     }
+
+    if (!initialized)
+    {
+        memset(_dataL, 0, len * sizeof(float));
+        memset(_dataR, 0, len * sizeof(float));
+        memset(_dataRevL, 0, len * sizeof(float));
+        memset(_dataRevR, 0, len * sizeof(float));
+        memset(_dataChoL, 0, len * sizeof(float));
+        memset(_dataChoR, 0, len * sizeof(float));
+        memset(_dataChoRevL, 0, len * sizeof(float));
+        memset(_dataChoRevR, 0, len * sizeof(float));
+    }
+}
+
+void SoundEngine::addData(float * dataL, float * dataR, quint32 len)
+{
+    quint32 i;
+    for (i = 0; i < len; ++i)
+        dataL[i] += _dataL[i];
+    for (i = 0; i < len; ++i)
+        dataR[i] += _dataR[i];
 }
 
 void SoundEngine::addRevData(float * dataL, float * dataR, quint32 len)
 {
-    for (quint32 i = 0; i < len; i++)
-    {
+    quint32 i;
+    for (i = 0; i < len; ++i)
         dataL[i] += _dataRevL[i];
+    for (i = 0; i < len; ++i)
         dataR[i] += _dataRevR[i];
-    }
 }
 
-void SoundEngine::addNonRevData(float * dataL, float * dataR, quint32 len)
+void SoundEngine::addChoData(float * dataL, float * dataR, quint32 len)
 {
-    for (quint32 i = 0; i < len; i++)
-    {
-        dataL[i] += _dataL[i];
-        dataR[i] += _dataR[i];
-    }
+    quint32 i;
+    for (i = 0; i < len; ++i)
+        dataL[i] += _dataChoL[i];
+    for (i = 0; i < len; ++i)
+        dataR[i] += _dataChoR[i];
+}
+
+float * SoundEngine::getChoDataL()
+{
+    return _dataChoL;
+}
+
+float * SoundEngine::getChoDataR()
+{
+    return _dataChoR;
+}
+
+void SoundEngine::addChoRevData(float * dataL, float * dataR, quint32 len)
+{
+    quint32 i;
+    for (i = 0; i < len; ++i)
+        dataL[i] += _dataChoRevL[i];
+    for (i = 0; i < len; ++i)
+        dataR[i] += _dataChoRevR[i];
+}
+
+void SoundEngine::setChoRevData(float * dataL, float * dataR, quint32 len)
+{
+    quint32 i;
+    for (i = 0; i < len; ++i)
+        dataL[i] = _dataChoRevL[i];
+    for (i = 0; i < len; ++i)
+        dataR[i] = _dataChoRevR[i];
 }

@@ -197,8 +197,6 @@ int standardProcess(void *outputBuffer, void *inputBuffer, unsigned int nFrames,
     Q_UNUSED(streamTime)
     Q_UNUSED(status)
 
-    memset(outputBuffer, 0, nFrames * 2 * 4);
-
     // Get the AudioDevice instance
     AudioDevice * instance = static_cast<AudioDevice*>(userData);
     float* output = reinterpret_cast<float*>(outputBuffer);

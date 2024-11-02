@@ -112,7 +112,6 @@ void Voice::initialize(VoiceInitializer * voiceInitializer)
                            voiceInitializer->vel,
                            voiceInitializer->type);
 
-    _chorusLevel = 0;
     _dataSmpl = voiceInitializer->smpl->_sound.getData(_dataSmplLength, false, _voiceParam.getType() != 0 /* copy data at the sample level */);
     if (_dataSmpl == nullptr)
     {
@@ -145,7 +144,7 @@ void Voice::initialize(VoiceInitializer * voiceInitializer)
     _lastDistanceFraction = 0;
 }
 
-void Voice::generateData(float *dataL, float *dataR, quint32 len)
+void Voice::generateData(float * data, quint32 len)
 {
     // Get voice current parameters
     _voiceParam.computeModulations();
@@ -173,8 +172,6 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
     double v_filterQ = _voiceParam.getDouble(champ_initialFilterQ);
     double v_filterFreq = _voiceParam.getDouble(champ_initialFilterFc);
     qint32 v_loopMode = _voiceParam.getInteger(champ_sampleModes);
-    double v_pan = _voiceParam.getDouble(champ_pan);
-    double v_chorusEffect = _voiceParam.getDouble(champ_chorusEffectsSend);
 
     double v_attenuation = _voiceParam.getDouble(champ_initialAttenuation);
 
@@ -259,7 +256,7 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
             // Sinc interpolation 7th order
             coeffs = s_sinc_table7[_pointDistanceArray[i] & 0xFF];
             currentPos = (_pointDistanceArray[i] >> 8);
-            dataL[i] = coeffs[0] * _srcData[currentPos] +
+            data[i] = coeffs[0] * _srcData[currentPos] +
                     coeffs[1] * _srcData[currentPos + 1] +
                     coeffs[2] * _srcData[currentPos + 2] +
                     coeffs[3] * _srcData[currentPos + 3] +
@@ -281,24 +278,24 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         float a0, a1, a2, b1, b2, valTmp;
         double filterQ = v_filterQ - 3.01f; // So that a value of 0 gives a non-resonant low pass
         float q_lin = qPow(10, 0.05 * filterQ); // If filterQ is -3.01, q_lin is 1/sqrt(2)
-        for (quint32 i = 0; i < len; i++)
+        for (quint32 i = 0; i < len; ++i)
         {
             biQuadCoefficients(a0, a1, a2, b1, b2, _modFreqArray[i], q_lin);
-            valTmp = a0 * dataL[i] + a1 * _x1 + a2 * _x2 - b1 * _y1 - b2 * _y2;
+            valTmp = a0 * data[i] + a1 * _x1 + a2 * _x2 - b1 * _y1 - b2 * _y2;
             _x2 = _x1;
-            _x1 = dataL[i];
+            _x1 = data[i];
             _y2 = _y1;
             _y1 = valTmp;
-            dataL[i] = valTmp;
+            data[i] = valTmp;
         }
 
         // Volume modulation with values from the mod LFO converted to dB
-        for (quint32 i = 0; i < len; i++)
-            dataL[i] *= static_cast<float>(qPow(10., 0.05 * v_modLfoToVolume * static_cast<double>(_modLfoArray[i])));
+        for (quint32 i = 0; i < len; ++i)
+            data[i] *= static_cast<float>(qPow(10., 0.05 * v_modLfoToVolume * static_cast<double>(_modLfoArray[i])));
     }
 
     // Apply the volume envelop
-    bool bRet2 = _enveloppeVol.applyEnveloppe(dataL, len, _release, playedNote,
+    bool bRet2 = _enveloppeVol.applyEnveloppe(data, len, _release, playedNote,
                                               static_cast<float>(qPow(10, 0.05 * (_gain - v_attenuation - 0.5 * v_filterQ))),
                                               &_voiceParam);
 
@@ -322,30 +319,6 @@ void Voice::generateData(float *dataL, float *dataR, quint32 len)
         {
             emit currentPosChanged(_currentSmplPos);
             _elapsedSmplPos = 0;
-        }
-    }
-
-    //// APPLY PAN AND CHORUS ////
-
-    float pan = 0.005f * (static_cast<float>(v_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]
-    float coefL = fastCos(pan);
-    float coefR = fastSin(pan);
-    if (_chorusLevel > 0)
-    {
-        _chorus.setEffectMix(0.005 * _chorusLevel * 0.01 * v_chorusEffect);
-        for (quint32 i = 0; i < len; i++)
-        {
-            dataL[i] = static_cast<float>(coefL * _chorus.tick(static_cast<double>(dataL[i])));
-            dataR[i] = static_cast<float>(coefR * _chorus.lastOut(1));
-        }
-    }
-    else
-    {
-        // Or just pan the sound
-        for (quint32 i = 0; i < len; i++)
-        {
-            dataR[i] = static_cast<float>(coefR * dataL[i]);
-            dataL[i] *= coefL;
         }
     }
 }
@@ -445,13 +418,6 @@ void Voice::setTemperament(float temperament[12], int relativeKey)
     s_temperamentRelativeKey = relativeKey;
 }
 
-void Voice::setChorus(int level, int depth, int frequency)
-{
-    _chorusLevel = _voiceParam.getType() == 0 ? level : 0;
-    _chorus.setModDepth(0.00025 * depth);
-    _chorus.setModFrequency(0.06667 * frequency);
-}
-
 void Voice::triggerReadFinishedSignal()
 {
     emit readFinished(_token);
@@ -524,28 +490,14 @@ float Voice::getSinValue(float value)
         s_sin_table[indexBefore] + (s_sin_table[indexBefore + 1] - s_sin_table[indexBefore]) * diff;
 }
 
-double Voice::getPan()
+double Voice::getDoubleAttribute(AttributeType attribute)
 {
-    double val = _voiceParam.getDouble(champ_pan);
-    return val;
+    return _voiceParam.getDouble(attribute);
 }
 
-int Voice::getExclusiveClass()
+double Voice::getIntAttribute(AttributeType attribute)
 {
-    int val = _voiceParam.getInteger(champ_exclusiveClass);
-    return val;
-}
-
-int Voice::getPresetNumber()
-{
-    int val = _voiceParam.getInteger(champ_wPreset);
-    return val;
-}
-
-float Voice::getReverb()
-{
-    float val = static_cast<float>(_voiceParam.getDouble(champ_reverbEffectsSend));
-    return val;
+    return _voiceParam.getInteger(attribute);
 }
 
 void Voice::setPan(double val)

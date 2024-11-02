@@ -298,17 +298,28 @@ void Synth::configure(SynthConfig * configuration)
     this->stop(true);
     _configuration.copy(configuration);
 
-    // Update chorus
-    SoundEngine::setChorus(_configuration.choLevel, _configuration.choDepth, _configuration.choFrequency);
-
-    // Update reverb
-    _mutexReverb.lock();
+    // Update reverb and chorus
+    _mutexEffects.lock();
     _internalConfiguration.reverbOn = _configuration.revLevel > 0;
     _reverb.setEffectMix(0.01 * _configuration.revLevel);
     _reverb.setRoomSize(0.01 * _configuration.revSize);
     _reverb.setWidth(0.01 * _configuration.revWidth);
     _reverb.setDamping(0.01 * _configuration.revDamping);
-    _mutexReverb.unlock();
+
+    _internalConfiguration.chorusOn = _configuration.choLevel > 0;
+    _chorusRevL.setEffectMix(0.005 * _configuration.choLevel);
+    _chorusRevL.setModDepth(0.00025 * _configuration.choDepth);
+    _chorusRevL.setModFrequency(0.06667 * _configuration.choFrequency);
+    _chorusRevR.setEffectMix(0.005 * _configuration.choLevel);
+    _chorusRevR.setModDepth(0.00025 * _configuration.choDepth);
+    _chorusRevR.setModFrequency(0.06667 * _configuration.choFrequency);
+    _chorusL.setEffectMix(0.005 * _configuration.choLevel);
+    _chorusL.setModDepth(0.00025 * _configuration.choDepth);
+    _chorusL.setModFrequency(0.06667 * _configuration.choFrequency);
+    _chorusR.setEffectMix(0.005 * _configuration.choLevel);
+    _chorusR.setModDepth(0.00025 * _configuration.choDepth);
+    _chorusR.setModFrequency(0.06667 * _configuration.choFrequency);
+    _mutexEffects.unlock();
 
     // Update the tuning fork and temperament
     Voice::setTuningFork(_configuration.tuningFork);
@@ -515,7 +526,11 @@ void Synth::pause(bool isOn)
 void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
 {
     if (_soundEngineCount == 0)
+    {
+        memset(dataL, 0, maxlen * sizeof(float));
+        memset(dataR, 0, maxlen * sizeof(float));
         return;
+    }
 
     // Wake up the sound engines
     SoundEngine::prepareComputation();
@@ -525,25 +540,8 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
     _semRunningSoundEngines.acquire(_soundEngineCount - 1);
     SoundEngine::endComputation();
 
-    // Get the reverberated part of the sound
-    for (int i = 0; i < _soundEngineCount; i++)
-        _soundEngines[i]->addRevData(dataL, dataR, maxlen);
-    if (_internalConfiguration.reverbOn)
-    {
-        // Apply reverb on the current data
-        _mutexReverb.lock();
-        for (quint32 i = 0; i < maxlen; i++)
-        {
-            dataL[i] = static_cast<float>(
-                        _reverb.tick(static_cast<double>(dataL[i]), static_cast<double>(dataR[i])));
-            dataR[i] = static_cast<float>(_reverb.lastOut(1));
-        }
-        _mutexReverb.unlock();
-    }
-
-    // Add the non-reverberated part of the sound
-    for (int i = 0; i < _soundEngineCount; i++)
-        _soundEngines[i]->addNonRevData(dataL, dataR, maxlen);
+    // Get the data of all sound engines with effects on it (chorus / reverb)
+    gatherSoundEngineData(dataL, dataR, maxlen);
 
     // EQ filter (live preview of filtered samples)
     _eq.filterData(dataL, dataR, maxlen);
@@ -555,9 +553,15 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
     for (unsigned int i = 0; i < maxlen; ++i)
     {
         if (dataL[i] > 1.0f)
+        {
+            qDebug() << "supérieur gauche" << dataL[i];
             dataL[i] = 1.0f;
+        }
         else if (dataL[i] < -1.0f)
+        {
+            qDebug() << "inférieur gauche" << dataL[i];
             dataL[i] = -1.0f;
+        }
         if (dataR[i] > 1.0f)
             dataR[i] = 1.0f;
         else if (dataR[i] < -1.0f)
@@ -586,4 +590,63 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
             _isWritingInStream.storeRelaxed(0);
         }
     }
+}
+
+void Synth::gatherSoundEngineData(float *dataL, float *dataR, quint32 maxlen)
+{
+    // Add the part of the sound with chorus + reverb
+    _soundEngines[0]->setChoRevData(dataL, dataR, maxlen);
+    for (int i = 1; i < _soundEngineCount; i++)
+        _soundEngines[i]->addChoRevData(dataL, dataR, maxlen);
+
+    if (_internalConfiguration.chorusOn)
+    {
+        // Apply chorus
+        _mutexEffects.lock();
+        for (quint32 i = 0; i < maxlen; i++)
+            dataL[i] = static_cast<float>(_chorusRevL.tick(static_cast<double>(dataL[i])));
+        for (quint32 i = 0; i < maxlen; i++)
+            dataR[i] = static_cast<float>(_chorusRevR.tick(static_cast<double>(dataR[i])));
+        _mutexEffects.unlock();
+    }
+
+    // Add the part of the sound with reverb only
+    for (int i = 0; i < _soundEngineCount; i++)
+        _soundEngines[i]->addRevData(dataL, dataR, maxlen);
+
+    //if (_internalConfiguration.reverbOn)
+    {
+        // Apply reverb
+        _mutexEffects.lock();
+        for (quint32 i = 0; i < maxlen; i++)
+        {
+            dataL[i] = static_cast<float>(_reverb.tick(static_cast<double>(dataL[i]), static_cast<double>(dataR[i])));
+            dataR[i] = static_cast<float>(_reverb.lastOut(1));
+        }
+        _mutexEffects.unlock();
+    }
+
+    // Compute the part of the sound with chorus only (work in the buffers of the first sound engine)
+    float * choDataL = _soundEngines[0]->getChoDataL();
+    float * choDataR = _soundEngines[0]->getChoDataR();
+    for (int i = 1; i < _soundEngineCount; i++)
+        _soundEngines[i]->addChoData(choDataL, choDataR, maxlen);
+
+    if (_internalConfiguration.chorusOn)
+    {
+        // Apply chorus
+        _mutexEffects.lock();
+        for (quint32 i = 0; i < maxlen; i++)
+            choDataL[i] = static_cast<float>(_chorusL.tick(static_cast<double>(choDataL[i])));
+        for (quint32 i = 0; i < maxlen; i++)
+            choDataR[i] = static_cast<float>(_chorusR.tick(static_cast<double>(choDataR[i])));
+        _mutexEffects.unlock();
+    }
+
+    // Add the part of the sound with chorus only (computed in the buffers of the first sound engine)
+    _soundEngines[0]->addChoData(dataL, dataR, maxlen);
+
+    // Add the direct part of the sound
+    for (int i = 0; i < _soundEngineCount; i++)
+        _soundEngines[i]->addData(dataL, dataR, maxlen);
 }

@@ -29,7 +29,6 @@
 #include "voiceparam.h"
 #include "enveloppevol.h"
 #include "osctriangle.h"
-#include "stk/Chorus.h"
 
 class VoiceInitializer
 {
@@ -73,13 +72,10 @@ public:
     void triggerReadFinishedSignal();
 
     void setGain(double gain);
-    void setChorus(int level, int depth, int frequency);
 
-    // Access to voiceParam properties
-    double getPan();
-    int getExclusiveClass();
-    int getPresetNumber();
-    float getReverb();
+    // Get voiceParam attributes
+    double getDoubleAttribute(AttributeType attribute);
+    double getIntAttribute(AttributeType attribute);
 
     // Update voiceParam properties
     void setPan(double val);
@@ -88,25 +84,26 @@ public:
     void setLoopEnd(quint32 val);
     void setFineTune(qint16 val);
 
-    // Generate data
-    void generateData(float *dataL, float *dataR, quint32 len);
+    // Generate data (pan, chorus and reverb not done)
+    void generateData(float *data, quint32 len);
 
     // Configuration
     static void setTuningFork(int tuningFork);
     static void setTemperament(float temperament[12], int relativeKey);
 
+    // Maths
     static void prepareTables();
+    static float fastSin(float value); // Range [0; 1] for [0; pi]
+    static float fastCos(float value); // Range [0; 1] for [0; pi]
 
 signals:
     void currentPosChanged(quint32 pos);
     void readFinished(int token);
 
 private:
-    // Oscillators, envelopes and chorus
+    // Oscillators and envelopes
     OscTriangle _modLFO, _vibLFO;
     EnveloppeVol _enveloppeVol, _enveloppeMod;
-    stk::Chorus _chorus;
-    int _chorusLevel;
 
     // Sound data and parameters
     float * _dataSmpl;
@@ -133,9 +130,7 @@ private:
 
     bool takeData(float * data, quint32 nbRead, qint32 loopMode);
     void biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float Q);
-    float fastSin(float value); // Range [0; 1] for [0; pi]
-    float fastCos(float value); // Range [0; 1] for [0; pi]
-    float getSinValue(float value); // Range [0; 0.5] for [0; pi / 2]
+    static float getSinValue(float value); // Range [0; 0.5] for [0; pi / 2]
 
     // Arrays
     quint32 _arrayLength;

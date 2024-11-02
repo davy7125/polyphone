@@ -30,6 +30,7 @@
 #include "calibrationsinus.h"
 #include "liveeq.h"
 #include "stk/FreeVerb.h"
+#include "stk/Chorus.h"
 #include <QDataStream>
 class Soundfonts;
 class Soundfont;
@@ -86,6 +87,7 @@ class SynthInternalConfig
 public:
     SynthInternalConfig() :
         reverbOn(false),
+        chorusOn(false),
         sampleRate(44100),
         smplGain(0),
         smplIsStereoEnabled(false),
@@ -94,6 +96,7 @@ public:
 
     // Effects
     bool reverbOn;
+    bool chorusOn;
 
     // Global parameters
     quint32 sampleRate;
@@ -155,6 +158,7 @@ private:
 
     void destroySoundEnginesAndBuffers();
     void createSoundEnginesAndBuffers();
+    void gatherSoundEngineData(float * dataL, float * dataR, quint32 maxlen);
 
     // Soundfonts
     Soundfonts * _soundfonts;
@@ -176,7 +180,8 @@ private:
     CalibrationSinus _sinus;
     LiveEQ _eq;
     stk::FreeVerb _reverb;
-    QMutex _mutexReverb;
+    stk::Chorus _chorusRevL, _chorusRevR, _chorusL, _chorusR;
+    QMutex _mutexEffects;
 
     // Record management
     QFile * _recordFile;
