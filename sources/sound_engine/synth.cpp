@@ -62,25 +62,22 @@ void Synth::destroySoundEnginesAndBuffers()
         return;
 
     // Stop sound engines
-    for (int i = 1; i < _soundEngineCount; i++)
+    for (int i = 0; i < _soundEngineCount; i++)
         _soundEngines[i]->stop();
 
     // Stop threads
-    for (int i = 1; i < _soundEngineCount; i++)
+    for (int i = 0; i < _soundEngineCount; i++)
         _soundEngines[i]->thread()->quit();
 
     // Delete sound engines and threads
-    for (int i = 1; i < _soundEngineCount; i++)
+    for (int i = 0; i < _soundEngineCount; i++)
     {
         QThread * thread = _soundEngines[i]->thread();
         thread->wait(50);
         delete _soundEngines[i];
         delete thread;
     }
-    delete _soundEngines[0];
     delete [] _soundEngines;
-    _soundEngineCount = 0;
-
     delete [] _dataWav;
 
     // Delete voices
@@ -98,15 +95,17 @@ void Synth::createSoundEnginesAndBuffers()
     for (int i = 0; i < _soundEngineCount; i++)
     {
         SoundEngine * soundEngine = new SoundEngine(&_semRunningSoundEngines, _bufferSize);
-        if (i != 0) // The first one stays in the current thread
-        {
-            soundEngine->moveToThread(new QThread());
-            soundEngine->thread()->start(QThread::TimeCriticalPriority);
-            QMetaObject::invokeMethod(soundEngine, "start");
-        }
+        soundEngine->moveToThread(new QThread());
+        soundEngine->thread()->start(QThread::TimeCriticalPriority);
+        QMetaObject::invokeMethod(soundEngine, "start");
         _soundEngines[i] = soundEngine;
     }
+
     SoundEngine::initialize(this);
+
+    // Start producing data
+    for (int i = 0; i < _soundEngineCount; i++)
+        _soundEngines[i]->prepareData(_bufferSize);
 }
 
 int Synth::play(EltID id, int channel, int key, int velocity)
@@ -532,18 +531,19 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
         return;
     }
 
-    // Wake up the sound engines
-    SoundEngine::prepareComputation();
-    for (int i = 1; i < _soundEngineCount; ++i)
-        _soundEngines[i]->prepareData(maxlen);
-    _soundEngines[0]->generateData(maxlen);
-    _semRunningSoundEngines.acquire(_soundEngineCount - 1);
-    SoundEngine::endComputation();
+    // Stop the current computation, in case it's not finished yet
+    int uncomputedVoiceNumber = SoundEngine::endComputation();
+    _semRunningSoundEngines.acquire(_soundEngineCount);
 
     // Get the data of all sound engines with effects on it (chorus / reverb)
     gatherSoundEngineData(dataL, dataR, maxlen);
 
-    // EQ filter (live preview of filtered samples)
+    // Wake up the sound engines
+    SoundEngine::prepareComputation(uncomputedVoiceNumber);
+    for (int i = 0; i < _soundEngineCount; ++i)
+        _soundEngines[i]->prepareData(maxlen);
+
+    // EQ filter on the gathered data (live preview of filtered samples)
     _eq.filterData(dataL, dataR, maxlen);
 
     // Add calibrating sinus
@@ -553,15 +553,9 @@ void Synth::readData(float *dataL, float *dataR, quint32 maxlen)
     for (unsigned int i = 0; i < maxlen; ++i)
     {
         if (dataL[i] > 1.0f)
-        {
-            qDebug() << "supérieur gauche" << dataL[i];
             dataL[i] = 1.0f;
-        }
         else if (dataL[i] < -1.0f)
-        {
-            qDebug() << "inférieur gauche" << dataL[i];
             dataL[i] = -1.0f;
-        }
         if (dataR[i] > 1.0f)
             dataR[i] = 1.0f;
         else if (dataR[i] < -1.0f)
@@ -599,31 +593,30 @@ void Synth::gatherSoundEngineData(float *dataL, float *dataR, quint32 maxlen)
     for (int i = 1; i < _soundEngineCount; i++)
         _soundEngines[i]->addChoRevData(dataL, dataR, maxlen);
 
+    if (_internalConfiguration.chorusOn || _internalConfiguration.reverbOn)
+        _mutexEffects.lock();
+
     if (_internalConfiguration.chorusOn)
     {
         // Apply chorus
-        _mutexEffects.lock();
         for (quint32 i = 0; i < maxlen; i++)
             dataL[i] = static_cast<float>(_chorusRevL.tick(static_cast<double>(dataL[i])));
         for (quint32 i = 0; i < maxlen; i++)
             dataR[i] = static_cast<float>(_chorusRevR.tick(static_cast<double>(dataR[i])));
-        _mutexEffects.unlock();
     }
 
     // Add the part of the sound with reverb only
     for (int i = 0; i < _soundEngineCount; i++)
         _soundEngines[i]->addRevData(dataL, dataR, maxlen);
 
-    //if (_internalConfiguration.reverbOn)
+    if (_internalConfiguration.reverbOn)
     {
         // Apply reverb
-        _mutexEffects.lock();
         for (quint32 i = 0; i < maxlen; i++)
         {
             dataL[i] = static_cast<float>(_reverb.tick(static_cast<double>(dataL[i]), static_cast<double>(dataR[i])));
             dataR[i] = static_cast<float>(_reverb.lastOut(1));
         }
-        _mutexEffects.unlock();
     }
 
     // Compute the part of the sound with chorus only (work in the buffers of the first sound engine)
@@ -635,13 +628,14 @@ void Synth::gatherSoundEngineData(float *dataL, float *dataR, quint32 maxlen)
     if (_internalConfiguration.chorusOn)
     {
         // Apply chorus
-        _mutexEffects.lock();
         for (quint32 i = 0; i < maxlen; i++)
             choDataL[i] = static_cast<float>(_chorusL.tick(static_cast<double>(choDataL[i])));
         for (quint32 i = 0; i < maxlen; i++)
             choDataR[i] = static_cast<float>(_chorusR.tick(static_cast<double>(choDataR[i])));
-        _mutexEffects.unlock();
     }
+
+    if (_internalConfiguration.chorusOn || _internalConfiguration.reverbOn)
+        _mutexEffects.unlock();
 
     // Add the part of the sound with chorus only (computed in the buffers of the first sound engine)
     _soundEngines[0]->addChoData(dataL, dataR, maxlen);

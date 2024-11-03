@@ -182,9 +182,9 @@ MainWindow::~MainWindow()
     delete _keyboard;
     SoundfontManager::kill();
     RepositoryManager::kill();
+    ExtensionManager::kill();
     ContextManager::kill();
     InputFactory::clear();
-    ExtensionManager::kill();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)

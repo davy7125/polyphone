@@ -32,9 +32,12 @@ Voice * SoundEngine::s_voices[MAX_NUMBER_OF_VOICES];
 int SoundEngine::s_numberOfVoices = 0;
 QAtomicInt SoundEngine::s_indexVoice = 0;
 QMutex SoundEngine::s_mutexVoices;
+int SoundEngine::s_instanceCount = 0;
 
 void SoundEngine::initialize(Synth * synth)
 {
+    s_mutexVoices.lock();
+
     for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
     {
         s_voices[i] = new Voice();
@@ -56,6 +59,7 @@ SoundEngine::SoundEngine(QSemaphore * semRunning, quint32 bufferSize) : QObject(
     _dataChoRevL = new float[4 * bufferSize];
     _dataChoRevR = new float[4 * bufferSize];
     _dataTmp = new float[4 * bufferSize];
+    s_instanceCount++;
 }
 
 SoundEngine::~SoundEngine()
@@ -69,6 +73,7 @@ SoundEngine::~SoundEngine()
     delete [] _dataChoRevL;
     delete [] _dataChoRevR;
     delete [] _dataTmp;
+    s_instanceCount--;
 }
 
 void SoundEngine::finalize()
@@ -276,20 +281,18 @@ void SoundEngine::stop()
     _mutexSynchro.unlock();
 }
 
-void SoundEngine::prepareComputation()
+void SoundEngine::prepareComputation(int uncomputedVoiceNumber)
 {
     s_indexVoice.storeRelaxed(0);
-    s_mutexVoices.lock();
-}
+    s_mutexVoices.tryLock(); // Maybe it's still locked
 
-Voice * SoundEngine::getNextVoiceToCompute()
-{
-    int voiceIndex = s_indexVoice.fetchAndAddRelaxed(1);
-    return voiceIndex < s_numberOfVoices ? s_voices[voiceIndex] : nullptr;
-}
+    if (uncomputedVoiceNumber > 0)
+    {
+        // Some voices have not been computed
+        qDebug() << "NUMBER OF VOICES NOT COMPUTED:" << uncomputedVoiceNumber;
+        // TODO: quickRelease
+    }
 
-void SoundEngine::endComputation()
-{
     // Voices ended?
     Voice * voice;
     for (int i = 0; i < s_numberOfVoices; ++i)
@@ -308,8 +311,23 @@ void SoundEngine::endComputation()
             --i;
         }
     }
+}
 
-    s_mutexVoices.unlock();
+Voice * SoundEngine::getNextVoiceToCompute()
+{
+    int voiceIndex = s_indexVoice.fetchAndAddRelaxed(1);
+
+    // If this is the last sound engine to finish the computation series, release the lock on the voices
+    if (voiceIndex == s_numberOfVoices + s_instanceCount - 1)
+        s_mutexVoices.unlock();
+
+    return voiceIndex < s_numberOfVoices ? s_voices[voiceIndex] : nullptr;
+}
+
+int SoundEngine::endComputation()
+{
+    int currentIndex = s_indexVoice.fetchAndAddRelaxed(MAX_NUMBER_OF_VOICES);
+    return currentIndex < s_numberOfVoices ? s_numberOfVoices - currentIndex : 0;
 }
 
 void SoundEngine::prepareData(quint32 len)

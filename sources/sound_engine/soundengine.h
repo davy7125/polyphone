@@ -58,10 +58,10 @@ public:
 
     // Data generation
     void stop();
-    static void prepareComputation();
+    static void prepareComputation(int uncomputedVoiceNumber);
     void prepareData(quint32 len);
     void generateData(quint32 len);
-    static void endComputation();
+    static int endComputation();
     void addData(float * dataL, float * dataR, quint32 len);
     void addRevData(float * dataL, float * dataR, quint32 len);
     void addChoRevData(float * dataL, float * dataR, quint32 len);
@@ -89,6 +89,7 @@ private:
     static int s_numberOfVoices;
     static QAtomicInt s_indexVoice;
     static QMutex s_mutexVoices;
+    static int s_instanceCount;
 };
 
 #endif // SOUNDENGINE_H
