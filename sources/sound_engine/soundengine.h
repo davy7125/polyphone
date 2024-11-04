@@ -79,19 +79,22 @@ private:
     static Voice * getNextVoiceToCompute();
     static void configureVoice(Voice * voice, SynthConfig * config, SynthInternalConfig * internalConfig);
 
+    float * _dataTmp;
+    float * _dataL, * _dataR, * _dataRevL, * _dataRevR, * _dataChoL, * _dataChoR, * _dataChoRevL, * _dataChoRevR;
+
     volatile bool _interrupted;
     QSemaphore * _semRunning;
     QMutex _mutexSynchro;
-    float * _dataL, * _dataR, * _dataRevL, * _dataRevR, * _dataChoL, * _dataChoR, * _dataChoRevL, * _dataChoRevR;
-    float * _dataTmp;
     volatile quint32 _lenToPrepare;
 
     static Voice * s_voices[MAX_NUMBER_OF_VOICES];
     static int s_numberOfVoices;
     static int s_numberOfVoicesToCompute;
-    static QAtomicInt s_indexVoice;
     static QMutex s_mutexVoices;
     static int s_instanceCount;
+
+    // Variable kept apart (cache line) since it is modified by all threads
+    alignas(64) static QAtomicInt s_indexVoice;
 };
 
 #endif // SOUNDENGINE_H

@@ -31,9 +31,9 @@
 Voice * SoundEngine::s_voices[MAX_NUMBER_OF_VOICES];
 int SoundEngine::s_numberOfVoices = 0;
 int SoundEngine::s_numberOfVoicesToCompute = 0;
-QAtomicInt SoundEngine::s_indexVoice = 0;
 QMutex SoundEngine::s_mutexVoices;
 int SoundEngine::s_instanceCount = 0;
+alignas(64) QAtomicInt SoundEngine::s_indexVoice = 0;
 
 void SoundEngine::initialize(Synth * synth)
 {
