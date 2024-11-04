@@ -644,10 +644,8 @@ void Synth::applyChoRev(float * dataL, float * dataR, quint32 maxlen)
         _mutexEffects.lock();
 
     // Copy the data rev + chorus
-    for (quint32 i = 0; i < maxlen; i++)
-        dataL[i] = _dataChoRevL[i];
-    for (quint32 i = 0; i < maxlen; i++)
-        dataR[i] = _dataChoRevR[i];
+    memcpy(dataL, _dataChoRevL, maxlen * sizeof(float));
+    memcpy(dataR, _dataChoRevR, maxlen * sizeof(float));
 
     if (_internalConfiguration.chorusOn)
     {
