@@ -62,13 +62,14 @@ public:
     void prepareData(quint32 len);
     void generateData(quint32 len);
     static int endComputation();
+    void setData(float * dataL, float * dataR, quint32 len);
     void addData(float * dataL, float * dataR, quint32 len);
-    void addRevData(float * dataL, float * dataR, quint32 len);
-    void addChoRevData(float * dataL, float * dataR, quint32 len);
-    void setChoRevData(float * dataL, float * dataR, quint32 len);
+    void setChoData(float * dataL, float * dataR, quint32 len);
     void addChoData(float * dataL, float * dataR, quint32 len);
-    float * getChoDataL();
-    float * getChoDataR();
+    void setRevData(float * dataL, float * dataR, quint32 len);
+    void addRevData(float * dataL, float * dataR, quint32 len);
+    void setChoRevData(float * dataL, float * dataR, quint32 len);
+    void addChoRevData(float * dataL, float * dataR, quint32 len);
 
 public slots:
     void start();

@@ -158,7 +158,8 @@ private:
 
     void destroySoundEnginesAndBuffers();
     void createSoundEnginesAndBuffers();
-    void gatherSoundEngineData(float * dataL, float * dataR, quint32 maxlen);
+    void gatherSoundEngineData(quint32 maxlen);
+    void applyChoRev(float * dataL, float * dataR, quint32 maxlen);
 
     // Soundfonts
     Soundfonts * _soundfonts;
@@ -190,8 +191,12 @@ private:
     QAtomicInt _isWritingInStream;
     quint32 _recordLength;
 
-    float * _dataWav;
     quint32 _bufferSize;
+    float * _dataWav;
+
+    // Copy of the sound engine data
+    float * _dataL, * _dataR, * _dataChoL, * _dataChoR,
+          * _dataRevL, * _dataRevR, * _dataChoRevL, * _dataChoRevR;
 };
 
 #endif // SYNTH_H
