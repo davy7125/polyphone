@@ -38,7 +38,7 @@
 #define MAX_NUMBER_OF_VOICES_TO_ADD 128
 
 // In soundengine.h
-#define MAX_NUMBER_OF_VOICES 1024
+#define MAX_NUMBER_OF_VOICES 2048
 
 // In voice.h
 #define INITIAL_ARRAY_LENGTH 1024

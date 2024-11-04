@@ -81,9 +81,8 @@ void Division::setGen(AttributeType champ, AttributeValue value)
 
     _attributeSet[champ] = true;
     _attributeValues[champ] = value;
-    if (champ == champ_sampleID || champ == champ_instrument || champ_keyRange)
+    if (champ == champ_sampleID || champ == champ_instrument || champ == champ_keyRange)
         notifyUpdate();
-
 }
 
 void Division::resetGen(AttributeType champ)

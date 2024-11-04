@@ -30,6 +30,7 @@
 
 Voice * SoundEngine::s_voices[MAX_NUMBER_OF_VOICES];
 int SoundEngine::s_numberOfVoices = 0;
+int SoundEngine::s_numberOfVoicesToCompute = 0;
 QAtomicInt SoundEngine::s_indexVoice = 0;
 QMutex SoundEngine::s_mutexVoices;
 int SoundEngine::s_instanceCount = 0;
@@ -281,24 +282,21 @@ void SoundEngine::stop()
     _mutexSynchro.unlock();
 }
 
-void SoundEngine::prepareComputation(int uncomputedVoiceNumber)
+void SoundEngine::prepareComputation(int uncomputedVoiceNumber, bool voicesUnlocked)
 {
     s_indexVoice.storeRelaxed(0);
-    s_mutexVoices.tryLock(); // Maybe it's still locked
+    if (voicesUnlocked)
+        s_mutexVoices.lock();
 
-    if (uncomputedVoiceNumber > 0)
-    {
-        // Some voices have not been computed
-        qDebug() << "NUMBER OF VOICES NOT COMPUTED:" << uncomputedVoiceNumber;
-        // TODO: quickRelease
-    }
+    // Minimum number of voices to close
+    int numberOfVoicesToClose = uncomputedVoiceNumber > 0 ? uncomputedVoiceNumber + s_instanceCount : 0;
 
     // Voices ended?
     Voice * voice;
     for (int i = 0; i < s_numberOfVoices; ++i)
     {
         voice = s_voices[i];
-        if (voice->isFinished())
+        if (voice->isFinished() || (numberOfVoicesToClose > 0 && voice->isInRelease()))
         {
             // Signal emitted for the sample player (voice -1)
             if (voice->getKey() == -1)
@@ -309,8 +307,18 @@ void SoundEngine::prepareComputation(int uncomputedVoiceNumber)
             s_voices[s_numberOfVoices] = s_voices[i];
             s_voices[i] = voiceTmp;
             --i;
+
+            --numberOfVoicesToClose;
         }
     }
+
+    if (numberOfVoicesToClose > 0)
+    {
+        // Remove the last voices
+        s_numberOfVoices = s_numberOfVoices > numberOfVoicesToClose ? s_numberOfVoices - numberOfVoicesToClose : 0;
+    }
+
+    s_numberOfVoicesToCompute = s_numberOfVoices;
 }
 
 Voice * SoundEngine::getNextVoiceToCompute()
@@ -324,10 +332,11 @@ Voice * SoundEngine::getNextVoiceToCompute()
     return voiceIndex < s_numberOfVoices ? s_voices[voiceIndex] : nullptr;
 }
 
-int SoundEngine::endComputation()
+void SoundEngine::endComputation(int &uncomputedVoiceCount, bool &voicesUnLocked)
 {
     int currentIndex = s_indexVoice.fetchAndAddRelaxed(MAX_NUMBER_OF_VOICES);
-    return currentIndex < s_numberOfVoices ? s_numberOfVoices - currentIndex : 0;
+    uncomputedVoiceCount = currentIndex < s_numberOfVoicesToCompute ? s_numberOfVoicesToCompute - currentIndex : 0;
+    voicesUnLocked = (currentIndex >= s_numberOfVoicesToCompute + s_instanceCount);
 }
 
 void SoundEngine::prepareData(quint32 len)
@@ -468,6 +477,7 @@ void SoundEngine::setData(float * dataL, float * dataR, quint32 len)
     for (i = 0; i < len; ++i)
         dataR[i] = _dataR[i];
 }
+
 void SoundEngine::addData(float * dataL, float * dataR, quint32 len)
 {
     quint32 i;

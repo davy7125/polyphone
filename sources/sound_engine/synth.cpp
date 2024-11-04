@@ -556,14 +556,16 @@ void Synth::readData(float * dataL, float * dataR, quint32 maxlen)
     }
 
     // Stop the current computation, in case it's not finished yet
-    int uncomputedVoiceNumber = SoundEngine::endComputation();
+    int uncomputedVoiceNumber;
+    bool voicesUnlocked;
+    SoundEngine::endComputation(uncomputedVoiceNumber, voicesUnlocked);
     _semRunningSoundEngines.acquire(_soundEngineCount);
 
     // Get the data of all sound engines
     gatherSoundEngineData(maxlen);
 
     // Wake up the sound engines (as soon as possible)
-    SoundEngine::prepareComputation(uncomputedVoiceNumber);
+    SoundEngine::prepareComputation(uncomputedVoiceNumber, voicesUnlocked);
     for (int i = 0; i < _soundEngineCount; ++i)
         _soundEngines[i]->prepareData(maxlen);
 

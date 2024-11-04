@@ -58,10 +58,10 @@ public:
 
     // Data generation
     void stop();
-    static void prepareComputation(int uncomputedVoiceNumber);
+    static void prepareComputation(int uncomputedVoiceNumber, bool voicesUnlocked);
     void prepareData(quint32 len);
     void generateData(quint32 len);
-    static int endComputation();
+    static void endComputation(int &uncomputedVoiceCount, bool &voicesUnLocked);
     void setData(float * dataL, float * dataR, quint32 len);
     void addData(float * dataL, float * dataR, quint32 len);
     void setChoData(float * dataL, float * dataR, quint32 len);
@@ -88,6 +88,7 @@ private:
 
     static Voice * s_voices[MAX_NUMBER_OF_VOICES];
     static int s_numberOfVoices;
+    static int s_numberOfVoicesToCompute;
     static QAtomicInt s_indexVoice;
     static QMutex s_mutexVoices;
     static int s_instanceCount;

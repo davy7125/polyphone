@@ -68,6 +68,7 @@ public:
     int getType() { return _voiceParam.getType(); }
 
     void release(bool quick = false);
+    bool isInRelease() { return _release; }
     bool isFinished() { return _isFinished; }
     void triggerReadFinishedSignal();
 
