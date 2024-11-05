@@ -39,12 +39,11 @@ public:
 
 private:
     quint32 _sampleRate;
+    float _fourInvSampleRate;
     float _previousFreq;
     quint32 _currentDelay;
     bool _delayEnded;
     float _delta, _previousPoint;
-
-    void computeDelta(float freq, float &delta);
 };
 
 #endif // OSCTRIANGLE_H

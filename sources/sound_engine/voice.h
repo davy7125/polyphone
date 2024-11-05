@@ -72,7 +72,7 @@ public:
     bool isFinished() { return _isFinished; }
     void triggerReadFinishedSignal();
 
-    void setGain(double gain);
+    void setGain(float gain);
 
     // Get voiceParam attributes
     double getDoubleAttribute(AttributeType attribute);
@@ -96,6 +96,7 @@ public:
     static void prepareTables();
     static float fastSin(float value); // Range [0; 1] for [0; pi]
     static float fastCos(float value); // Range [0; 1] for [0; pi]
+    static float fastPow10(float value); // Range [-102.4; 102.3]
 
 signals:
     void currentPosChanged(quint32 pos);
@@ -110,7 +111,8 @@ private:
     float * _dataSmpl;
     quint32 _dataSmplLength;
     quint32 _smplRate, _audioSmplRate;
-    double _gain;
+    float _audioSmplRateInv;
+    float _gain;
     VoiceParam _voiceParam;
     int _token;
 
@@ -130,7 +132,7 @@ private:
     float _x1, _x2, _y1, _y2;
 
     bool takeData(float * data, quint32 nbRead, qint32 loopMode);
-    void biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float Q);
+    void biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float inv_Q);
     static float getSinValue(float value); // Range [0; 0.5] for [0; pi / 2]
 
     // Arrays
@@ -149,6 +151,7 @@ private:
     static volatile int s_temperamentRelativeKey;
     static float s_sinc_table7[256][7];
     static float s_sin_table[256];
+    static float s_pow10_table[2048];
 };
 
 #endif // VOICE_H

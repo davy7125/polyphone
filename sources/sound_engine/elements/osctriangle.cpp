@@ -23,10 +23,12 @@
 ***************************************************************************/
 
 #include "osctriangle.h"
+#include <string.h>
 
 void OscTriangle::initialize(quint32 sampleRate)
 {
     _sampleRate = sampleRate;
+    _fourInvSampleRate = sampleRate > 0 ? 4.0f / static_cast<float>(sampleRate) : 0.0f;
     _previousFreq = -1.0f;
     _currentDelay = 0;
     _delayEnded = false;
@@ -43,8 +45,7 @@ void OscTriangle::getData(float * data, quint32 len, float freq, double delay)
     if (!_delayEnded && _currentDelay < delayTime)
     {
         total = qMin(delayTime - _currentDelay, len);
-        for (quint32 i = 0; i < total; i++)
-            data[i] = 0;
+        memset(data, 0, total * sizeof(float));
         _currentDelay += total;
         _delayEnded = (_currentDelay >= delayTime);
     }
@@ -56,22 +57,22 @@ void OscTriangle::getData(float * data, quint32 len, float freq, double delay)
         {
             // Initialize the system
             _previousFreq = freq;
-            computeDelta(freq, _delta);
+            _delta = _fourInvSampleRate * freq;
             _previousPoint = 0;
         }
+
         if (qAbs(_previousFreq - freq) > 0)
         {
             float delta2;
-            computeDelta(freq, delta2);
+            delta2 = _fourInvSampleRate * freq;
             if (_delta < 0)
                 delta2 = -delta2;
 
             float progDelta;
+            float invTmp = 1.0f / static_cast<float>(len - total);
             for (quint32 i = total; i < len; i++)
             {
-                progDelta = static_cast<float>(len - i) / static_cast<float>(len - total) * _delta
-                        + static_cast<float>(i - total) / static_cast<float>(len - total) * delta2;
-
+                progDelta = (static_cast<float>(len - i) * _delta + static_cast<float>(i - total) * delta2) * invTmp;
                 data[i] = _previousPoint + progDelta;
                 if (data[i] > 1.0f)
                 {
@@ -111,9 +112,4 @@ void OscTriangle::getData(float * data, quint32 len, float freq, double delay)
             }
         }
     }
-}
-
-void OscTriangle::computeDelta(float freq, float &delta)
-{
-    delta = 4.0f * freq / static_cast<float>(_sampleRate);
 }
