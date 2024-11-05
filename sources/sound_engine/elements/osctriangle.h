@@ -35,7 +35,7 @@ public:
     void initialize(quint32 sampleRate);
 
     // Freq in Hz, delay in s
-    void getData(float *data, quint32 len, float freq, double delay);
+    void getData(float *data, quint32 len, float freq, float delay);
 
 private:
     quint32 _sampleRate;

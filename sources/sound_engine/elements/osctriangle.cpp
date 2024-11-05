@@ -36,7 +36,7 @@ void OscTriangle::initialize(quint32 sampleRate)
     _previousPoint = 0.0f;
 }
 
-void OscTriangle::getData(float * data, quint32 len, float freq, double delay)
+void OscTriangle::getData(float * data, quint32 len, float freq, float delay)
 {
     quint32 total = 0;
 

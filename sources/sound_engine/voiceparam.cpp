@@ -276,7 +276,7 @@ void VoiceParam::prepareForSmpl(int key, SFSampleLink link)
     }
 }
 
-void VoiceParam::setPan(double val)
+void VoiceParam::setPan(float val)
 {
     AttributeValue value;
     value.shValue = static_cast<qint16>(qRound(val * 10.));
@@ -305,7 +305,7 @@ void VoiceParam::setFineTune(qint16 val)
     _sampleFineTune = val;
 }
 
-double VoiceParam::getDouble(AttributeType type)
+float VoiceParam::getFloat(AttributeType type)
 {
     return _parameters[type].getRealValue();
 }

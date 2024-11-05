@@ -191,24 +191,24 @@ void SoundEngine::configureVoice(Voice * voice, SynthConfig * config, SynthInter
         // Sample triggered from the sample level
         voice->setLoopMode(internalConfig->smplIsLoopEnabled ? 1 : 0);
 
-        double pan = voice->getDoubleAttribute(champ_pan);
+        float pan = voice->getFloatAttribute(champ_pan);
         if (internalConfig->smplIsStereoEnabled)
         {
             if (pan < 0)
-                voice->setPan(-50);
-            else if (pan > 0)
-                voice->setPan(50);
+                voice->setPan(-50.0f);
+            else if (pan > 0.0f)
+                voice->setPan(50.0f);
 
             voice->setGain(config->masterGain + internalConfig->smplGain);
         }
         else
         {
-            if (pan < 0)
-                voice->setPan(-1);
-            else if (pan > 0)
-                voice->setPan(1);
+            if (pan < 0.0f)
+                voice->setPan(-1.0f);
+            else if (pan > 0.0f)
+                voice->setPan(1.0f);
 
-            voice->setGain(voice->getType() == 1 ? config->masterGain + internalConfig->smplGain : -1000);
+            voice->setGain(voice->getType() == 1 ? config->masterGain + internalConfig->smplGain : -1000.0f);
         }
     }
 }
@@ -357,14 +357,14 @@ void SoundEngine::generateData(quint32 len)
         // Get data
         voice->generateData(_dataTmp, len);
 
-        tmp = 0.005f * (static_cast<float>(voice->getDoubleAttribute(champ_pan)) + 50.f); // Between 0 and 1/2 for [0; PI/2]
+        tmp = 0.005f * (voice->getFloatAttribute(champ_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]
         coefL = Voice::fastCos(tmp);
         coefR = Voice::fastSin(tmp);
 
-        coefRev = 0.01f * static_cast<float>(voice->getDoubleAttribute(champ_reverbEffectsSend));
+        coefRev = 0.01f * voice->getFloatAttribute(champ_reverbEffectsSend);
         coefNonRev = 1.f - coefRev;
 
-        coefCho = 0.01f * static_cast<float>(voice->getDoubleAttribute(champ_chorusEffectsSend));
+        coefCho = 0.01f * voice->getFloatAttribute(champ_chorusEffectsSend);
         coefNonCho = 1.f - coefCho;
 
         // Merge or initialize data

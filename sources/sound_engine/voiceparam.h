@@ -43,7 +43,7 @@ public:
     void initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv,
                     Smpl * smpl, qint8 channel, qint8 key, qint8 vel, qint8 type);
 
-    void setPan(double val);
+    void setPan(float val);
     void setLoopMode(quint16 val);
     void setLoopStart(quint32 val);
     void setLoopEnd(quint32 val);
@@ -53,7 +53,7 @@ public:
     void computeModulations();
 
     // Get a param
-    double getDouble(AttributeType type);
+    float getFloat(AttributeType type);
     qint32 getInteger(AttributeType type);
     quint32 getPosition(AttributeType type);
 

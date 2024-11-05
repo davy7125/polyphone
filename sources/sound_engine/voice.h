@@ -75,11 +75,11 @@ public:
     void setGain(float gain);
 
     // Get voiceParam attributes
-    double getDoubleAttribute(AttributeType attribute);
-    double getIntAttribute(AttributeType attribute);
+    float getFloatAttribute(AttributeType attribute);
+    qint32 getIntAttribute(AttributeType attribute);
 
     // Update voiceParam properties
-    void setPan(double val);
+    void setPan(float val);
     void setLoopMode(quint16 val);
     void setLoopStart(quint32 val);
     void setLoopEnd(quint32 val);

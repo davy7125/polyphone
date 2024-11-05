@@ -41,19 +41,19 @@ public:
 
     // Clear or add modulations
     void clearModulations();
-    void addInstModulation(double value);
-    void addPrstModulation(double value);
+    void addInstModulation(float value);
+    void addPrstModulation(float value);
 
-    // Get the resulting value as an integer or a double (a conversion might occur)
+    // Get the resulting value as an integer or a float (a conversion might occur)
     qint32 getIntValue();
-    double getRealValue();
+    float getRealValue();
 
 private:
     void computeValue();
 
     AttributeType _type;
     Attribute _instValue, _prstValue;
-    double _instModulation, _prstModulation;
+    float _instModulation, _prstModulation;
 
     bool _notRealTime;
     bool _computed;

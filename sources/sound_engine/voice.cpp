@@ -118,10 +118,6 @@ void Voice::initialize(VoiceInitializer * voiceInitializer)
                            voiceInitializer->type);
 
     _dataSmpl = voiceInitializer->smpl->_sound.getData(_dataSmplLength, false, _voiceParam.getType() != 0 /* copy data at the sample level */);
-    if (_dataSmpl == nullptr)
-    {
-        qDebug() << "null data!";
-    }
     _smplRate = voiceInitializer->smpl->_sound.getUInt32(champ_dwSampleRate);
     _audioSmplRate = voiceInitializer->audioSmplRate;
     _audioSmplRateInv = 1.0f / _audioSmplRate;
@@ -162,24 +158,24 @@ void Voice::generateData(float * data, quint32 len)
     qint32 v_fineTune = _voiceParam.getInteger(champ_fineTune);
     qint32 v_coarseTune = _voiceParam.getInteger(champ_coarseTune);
 
-    double v_modLfoFreq = _voiceParam.getDouble(champ_freqModLFO);
-    double v_modLfoDelay = _voiceParam.getDouble(champ_delayModLFO);
+    float v_modLfoFreq = _voiceParam.getFloat(champ_freqModLFO);
+    float v_modLfoDelay = _voiceParam.getFloat(champ_delayModLFO);
     qint32 v_modLfoToPitch = _voiceParam.getInteger(champ_modLfoToPitch);
     qint32 v_modLfoToFilterFreq = _voiceParam.getInteger(champ_modLfoToFilterFc);
-    float v_modLfoToVolume = static_cast<float>(_voiceParam.getDouble(champ_modLfoToVolume));
+    float v_modLfoToVolume = _voiceParam.getFloat(champ_modLfoToVolume);
 
-    double v_vibLfoFreq = _voiceParam.getDouble(champ_freqVibLFO);
-    double v_vibLfoDelay = _voiceParam.getDouble(champ_delayVibLFO);
+    float v_vibLfoFreq = _voiceParam.getFloat(champ_freqVibLFO);
+    float v_vibLfoDelay = _voiceParam.getFloat(champ_delayVibLFO);
     qint32 v_vibLfoToPitch = _voiceParam.getInteger(champ_vibLfoToPitch);
 
     qint32 v_modEnvToPitch = _voiceParam.getInteger(champ_modEnvToPitch);
     qint32 v_modEnvToFilterFc = _voiceParam.getInteger(champ_modEnvToFilterFc);
 
-    float v_filterQ = static_cast<float>(_voiceParam.getDouble(champ_initialFilterQ));
-    float v_filterFreq = static_cast<float>(_voiceParam.getDouble(champ_initialFilterFc));
+    float v_filterQ = _voiceParam.getFloat(champ_initialFilterQ);
+    float v_filterFreq = _voiceParam.getFloat(champ_initialFilterFc);
     qint32 v_loopMode = _voiceParam.getInteger(champ_sampleModes);
 
-    float v_attenuation = static_cast<float>(_voiceParam.getDouble(champ_initialAttenuation));
+    float v_attenuation = _voiceParam.getFloat(champ_initialAttenuation);
 
     bool endSample = false;
 
@@ -204,8 +200,8 @@ void Voice::generateData(float * data, quint32 len)
     _enveloppeMod.applyEnveloppe(_dataModArray, len, _release, playedNote, 1.0f, &_voiceParam);
 
     /// LFOs ///
-    _modLFO.getData(_modLfoArray, len, static_cast<float>(v_modLfoFreq), v_modLfoDelay);
-    _vibLFO.getData(_vibLfoArray, len, static_cast<float>(v_vibLfoFreq), v_vibLfoDelay);
+    _modLFO.getData(_modLfoArray, len, v_modLfoFreq, v_modLfoDelay);
+    _vibLFO.getData(_vibLfoArray, len, v_vibLfoFreq, v_vibLfoDelay);
 
     // Skip steps if the sample is read only when the key is released
     if (_release || v_loopMode != 2)
@@ -511,17 +507,17 @@ float Voice::fastPow10(float value)
     return s_pow10_table[indexBefore] + (s_pow10_table[indexBefore + 1] - s_pow10_table[indexBefore]) * diff;
 }
 
-double Voice::getDoubleAttribute(AttributeType attribute)
+float Voice::getFloatAttribute(AttributeType attribute)
 {
-    return _voiceParam.getDouble(attribute);
+    return _voiceParam.getFloat(attribute);
 }
 
-double Voice::getIntAttribute(AttributeType attribute)
+qint32 Voice::getIntAttribute(AttributeType attribute)
 {
     return _voiceParam.getInteger(attribute);
 }
 
-void Voice::setPan(double val)
+void Voice::setPan(float val)
 {
     _voiceParam.setPan(val);
 }

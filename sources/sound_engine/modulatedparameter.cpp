@@ -72,12 +72,12 @@ void ModulatedParameter::clearModulations()
     _prstModulation = 0;
 }
 
-void ModulatedParameter::addInstModulation(double value)
+void ModulatedParameter::addInstModulation(float value)
 {
     _instModulation += value;
 }
 
-void ModulatedParameter::addPrstModulation(double value)
+void ModulatedParameter::addPrstModulation(float value)
 {
     // Some attributes cannot be modulated at the preset level
     if (_type != champ_overridingRootKey && _type != champ_velocity && _type != champ_keynum)
@@ -93,16 +93,16 @@ qint32 ModulatedParameter::getIntValue()
     return _computedValue.shValue;
 }
 
-double ModulatedParameter::getRealValue()
+float ModulatedParameter::getRealValue()
 {
     // Special case: attenuation
     if (_type == champ_initialAttenuation)
     {
         // Historical error: extra coefficient 0.4 for the inst and prst values => multiplication by 0.04
         // no extra coefficient for the modulations => the conversion with the coeff 0.1 is kept
-        double value = 0.1 * DB_SF2_TO_REAL_DB * (_instValue.getStoredValue().shValue + _prstValue.getStoredValue().shValue) +
-                0.1 * (_instModulation + _prstModulation);
-        return value < 0 ? 0 : (value > 144 ? 144 : value);
+        float value = 0.1f * DB_SF2_TO_REAL_DB * (_instValue.getStoredValue().shValue + _prstValue.getStoredValue().shValue) +
+                0.1f * (_instModulation + _prstModulation);
+        return value < 0 ? 0 : (value > 144.0f ? 144.0f : value);
     }
 
     // Compute the value

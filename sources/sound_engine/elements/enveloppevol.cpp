@@ -49,23 +49,23 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
 
     if (_isMod)
     {
-        v_timeDelay = voiceParam->getDouble(champ_delayModEnv) * _sampleRate;
-        v_timeAttack = voiceParam->getDouble(champ_attackModEnv) * _sampleRate;
-        v_timeHold = voiceParam->getDouble(champ_holdModEnv) * _sampleRate;
-        v_timeDecay = voiceParam->getDouble(champ_decayModEnv) * _sampleRate;
-        v_levelSustain = voiceParam->getDouble(champ_sustainModEnv);
-        v_timeRelease = voiceParam->getDouble(champ_releaseModEnv) * _sampleRate;
+        v_timeDelay = voiceParam->getFloat(champ_delayModEnv) * _sampleRate;
+        v_timeAttack = voiceParam->getFloat(champ_attackModEnv) * _sampleRate;
+        v_timeHold = voiceParam->getFloat(champ_holdModEnv) * _sampleRate;
+        v_timeDecay = voiceParam->getFloat(champ_decayModEnv) * _sampleRate;
+        v_levelSustain = voiceParam->getFloat(champ_sustainModEnv);
+        v_timeRelease = voiceParam->getFloat(champ_releaseModEnv) * _sampleRate;
         v_noteToHold = static_cast<float>(voiceParam->getInteger(champ_keynumToModEnvHold)) / 1200.f;
         v_noteToDecay = static_cast<float>(voiceParam->getInteger(champ_keynumToModEnvDecay)) / 1200.f;
     }
     else
     {
-        v_timeDelay = voiceParam->getDouble(champ_delayVolEnv) * _sampleRate;
-        v_timeAttack = voiceParam->getDouble(champ_attackVolEnv) * _sampleRate;
-        v_timeHold = voiceParam->getDouble(champ_holdVolEnv) * _sampleRate;
-        v_timeDecay = voiceParam->getDouble(champ_decayVolEnv) * _sampleRate;
-        v_levelSustain = voiceParam->getDouble(champ_sustainVolEnv);
-        v_timeRelease = voiceParam->getDouble(champ_releaseVolEnv) * _sampleRate;
+        v_timeDelay = voiceParam->getFloat(champ_delayVolEnv) * _sampleRate;
+        v_timeAttack = voiceParam->getFloat(champ_attackVolEnv) * _sampleRate;
+        v_timeHold = voiceParam->getFloat(champ_holdVolEnv) * _sampleRate;
+        v_timeDecay = voiceParam->getFloat(champ_decayVolEnv) * _sampleRate;
+        v_levelSustain = voiceParam->getFloat(champ_sustainVolEnv);
+        v_timeRelease = voiceParam->getFloat(champ_releaseVolEnv) * _sampleRate;
         v_noteToHold = static_cast<float>(voiceParam->getInteger(champ_keynumToVolEnvHold)) / 1200.f;
         v_noteToDecay = static_cast<float>(voiceParam->getInteger(champ_keynumToVolEnvDecay)) / 1200.f;
     }

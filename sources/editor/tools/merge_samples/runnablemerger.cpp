@@ -219,7 +219,7 @@ void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Div
     voice->initialize(&voiceInitializer);
 
     // Pan coeffs
-    float tmp = 0.005f * (static_cast<float>(voice->getDoubleAttribute(champ_pan)) + 50.f); // Between 0 and 1/2 for [0; PI/2]
+    float tmp = 0.005f * (voice->getFloatAttribute(champ_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]
     float coefR = Voice::fastSin(tmp);
     float coefL = Voice::fastCos(tmp);
 
