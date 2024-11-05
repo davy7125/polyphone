@@ -217,8 +217,8 @@ void Voice::generateData(float * data, quint32 len)
         if (v_modEnvToPitch == 0 && v_modLfoToPitch == 0 && v_vibLfoToPitch == 0)
         {
             // Double required for tuning accuracy
-            double initialDistance = static_cast<double>(_lastDistanceFraction);
             double gap = EnveloppeVol::fastPow2(deltaPitchFixed * 0.000833333f /* 1:1200 */ + 8.0f /* multiply by 256, which is 2^8 */);
+            double initialDistance = static_cast<double>(_lastDistanceFraction) + gap;
             for (quint32 i = 0; i < len; i++)
                 _pointDistanceArray[i] = static_cast<int>(0.5 + initialDistance + gap * i);
         }
