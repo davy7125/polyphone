@@ -988,7 +988,7 @@ int PageTable::limit(int iVal, AttributeType champ, EltID id)
     return ret;
 }
 
-void PageTable::keyPlayedInternal(int key, int velocity)
+bool PageTable::keyPlayedInternal(int key, int velocity)
 {
     // Visualization on the table
 
@@ -1047,6 +1047,8 @@ void PageTable::keyPlayedInternal(int key, int velocity)
             }
         }
     }
+
+    return false;
 }
 
 void PageTable::onOpenElement(EltID id)

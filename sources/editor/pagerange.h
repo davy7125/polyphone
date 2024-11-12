@@ -50,7 +50,7 @@ public:
 
 protected:
     void updateInterface(QString editingSource) override;
-    void keyPlayedInternal(int key, int velocity) override;
+    bool keyPlayedInternal(int key, int velocity) override;
 
 private:
     Ui::PageRange *ui;

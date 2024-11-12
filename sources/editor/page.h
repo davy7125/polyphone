@@ -62,10 +62,11 @@ public:
     virtual QString getIconName() { return ""; }
 
     // A key is being played or not played anymore (if velocity is 0)
-    void onKeyPlayed(int key, int velocity)
+    bool onKeyPlayed(int key, int velocity)
     {
         if (key != -1 && this->isVisible())
-            this->keyPlayedInternal(key, velocity);
+            return this->keyPlayedInternal(key, velocity);
+        return false;
     }
 
 public slots:
@@ -91,10 +92,12 @@ protected:
     virtual void updateInterface(QString editingSource) = 0;
 
     // A key is being played or not played anymore (if velocity is 0)
-    virtual void keyPlayedInternal(int key, int velocity)
+    // Return true if the signal must be caught before the synth plays something
+    virtual bool keyPlayedInternal(int key, int velocity)
     {
         Q_UNUSED(key)
         Q_UNUSED(velocity)
+        return false;
     }
 
     // Key "space" is pressed in the tree

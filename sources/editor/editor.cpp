@@ -496,6 +496,15 @@ bool Editor::processKey(int channel, int key, int vel)
     if (!this->isVisible())
         return false;
 
+    // Inner page
+    Page * page = _pageSelector->getLastPage(_currentElementType);
+    if (page != nullptr)
+    {
+        // The signal has possibly been caught
+        if (page->onKeyPlayed(key, vel) && vel > 0)
+            return false;
+    }
+
     // SAMPLE
 
     IdList ids = _currentIds.getSelectedIds(elementSmpl);
@@ -645,11 +654,6 @@ bool Editor::processKey(int channel, int key, int vel)
                 ui->treeView->onSelectionChanged(currentIds);
         }
     }
-
-    // Inner page
-    Page * page = _pageSelector->getLastPage(_currentElementType);
-    if (page != nullptr)
-        page->onKeyPlayed(key, vel);
 
     return false;
 }

@@ -50,7 +50,7 @@ public slots:
 protected:
     void updateInterface(QString editingSource) override;
     void afficheTable(bool justSelection);
-    void keyPlayedInternal(int key, int velocity) override;
+    bool keyPlayedInternal(int key, int velocity) override;
 
     IdList _currentParentIds;
 

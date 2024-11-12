@@ -73,7 +73,8 @@ void PageRange::updateInterface(QString editingSource)
     }
 }
 
-void PageRange::keyPlayedInternal(int key, int velocity)
+bool PageRange::keyPlayedInternal(int key, int velocity)
 {
     ui->rangeEditor->playKey(key, velocity);
+    return false;
 }
