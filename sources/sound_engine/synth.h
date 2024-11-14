@@ -32,6 +32,7 @@
 #include "stk/FreeVerb.h"
 #include "stk/Chorus.h"
 #include <QDataStream>
+#include "imidilistener.h"
 class Soundfonts;
 class Soundfont;
 class InstPrst;
@@ -107,7 +108,7 @@ public:
     bool smplIsLoopEnabled;
 };
 
-class Synth : public QObject
+class Synth : public QObject, public IMidiListener
 {
     Q_OBJECT
 
@@ -117,7 +118,7 @@ public:
 
     // Executed by the main thread (thread 1)
     void configure(SynthConfig * configuration);
-    void setIMidiValues(IMidiValues * iMidiValues);
+    void setIMidiValues(IMidiValues * midiValues);
     int play(EltID id, int channel, int key, int velocity);
     void stop(bool allChannels);
 
@@ -143,6 +144,14 @@ public:
     // Following functions are executed by the audio server (thread 2)
     void readData(float *dataL, float *dataR, quint32 maxlen);
     void setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize);
+
+    // MIDI signals
+    bool processKey(int channel, int key, int vel) override;
+    bool processPolyPressureChanged(int channel, int key, int pressure) override;
+    bool processMonoPressureChanged(int channel, int value) override;
+    bool processControllerChanged(int channel, int num, int value) override;
+    bool processBendChanged(int channel, float value) override;
+    bool processBendSensitivityChanged(int channel, float semitones) override;
 
 signals:
     void currentPosChanged(quint32 pos);

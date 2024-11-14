@@ -50,6 +50,16 @@ public:
     void setOutput(ModulatedParameter * parameter);
     void setOutput(ParameterModulator * modulator);
 
+    // Read all inputs (before the first computation)
+    void initializeInputs();
+
+    // Update from MIDI signals
+    bool processPolyPressureChanged(int pressure);
+    bool processMonoPressureChanged(int value);
+    bool processControllerChanged(int num, int value);
+    bool processBendChanged(float value);
+    bool processBendSensitivityChanged(float semitones);
+
     // Initialize a computation
     void initializeComputation();
 
@@ -72,7 +82,7 @@ private:
 
     int _inputNumber, _inputCount, _minSum, _maxSum;
     bool _computed;
-    double _inputSum;
+    double _input1, _input2;
     ModulatedParameter * _outputParameter;
     ParameterModulator * _outputModulator;
     bool _isPrst;

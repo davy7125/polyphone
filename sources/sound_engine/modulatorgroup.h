@@ -41,7 +41,17 @@ public:
     void initialize(int channel, int initialKey, int keyForComputation, int velForComputation);
 
     // Load modulators from the instrument or preset level
-    void loadModulators(const ModulatorData * const modData , int modulatorNumber);
+    void loadModulators(const ModulatorData * const modData, int modulatorNumber);
+
+    // Before the first computation, load all the input values
+    void initializeModulatorInputs();
+
+    // Possible updates from the MIDI input
+    bool processPolyPressureChanged(int pressure);
+    bool processMonoPressureChanged(int value);
+    bool processControllerChanged(int num, int value);
+    bool processBendChanged(float value);
+    bool processBendSensitivityChanged(float semitones);
 
     // Compute the modulations and apply them on the parameters
     void process();

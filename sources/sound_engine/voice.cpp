@@ -68,9 +68,9 @@ void Voice::prepareTables()
         s_pow10_table[i] = qPow(10.0, 0.1 * (double)(i - 1024));
 }
 
-// Constructeur, destructeur
-Voice::Voice() : QObject(nullptr),
-    _dataSmpl(nullptr)
+Voice::Voice(VoiceParam * voiceParam) : QObject(nullptr),
+    _dataSmpl(nullptr),
+    _voiceParam(voiceParam)
 {
     // Array initialization
     _srcDataLength = INITIAL_ARRAY_LENGTH;
@@ -92,7 +92,7 @@ Voice::~Voice()
     delete [] _modFreqArray;
     delete [] _pointDistanceArray;
     delete [] _srcData;
-    if (_voiceParam.getType() != 0 && _dataSmpl != nullptr)
+    if (_voiceParam->getType() != 0 && _dataSmpl != nullptr)
     {
         delete [] _dataSmpl;
         _dataSmpl = nullptr;
@@ -101,23 +101,23 @@ Voice::~Voice()
 
 void Voice::initialize(VoiceInitializer * voiceInitializer)
 {
-    if (_voiceParam.getType() != 0 && _dataSmpl != nullptr)
+    if (_voiceParam->getType() != 0 && _dataSmpl != nullptr)
     {
         delete [] _dataSmpl;
         _dataSmpl = nullptr;
     }
 
-    _voiceParam.initialize(voiceInitializer->prst,
-                           voiceInitializer->prstDiv,
-                           voiceInitializer->inst,
-                           voiceInitializer->instDiv,
-                           voiceInitializer->smpl,
-                           voiceInitializer->channel,
-                           voiceInitializer->key,
-                           voiceInitializer->vel,
-                           voiceInitializer->type);
+    _voiceParam->initialize(voiceInitializer->prst,
+                            voiceInitializer->prstDiv,
+                            voiceInitializer->inst,
+                            voiceInitializer->instDiv,
+                            voiceInitializer->smpl,
+                            voiceInitializer->channel,
+                            voiceInitializer->key,
+                            voiceInitializer->vel,
+                            voiceInitializer->type);
 
-    _dataSmpl = voiceInitializer->smpl->_sound.getData(_dataSmplLength, false, _voiceParam.getType() != 0 /* copy data at the sample level */);
+    _dataSmpl = voiceInitializer->smpl->_sound.getData(_dataSmplLength, false, _voiceParam->getType() != 0 /* copy data at the sample level */);
     _smplRate = voiceInitializer->smpl->_sound.getUInt32(champ_dwSampleRate);
     _audioSmplRate = voiceInitializer->audioSmplRate;
     _audioSmplRateInv = 1.0f / _audioSmplRate;
@@ -149,33 +149,32 @@ void Voice::initialize(VoiceInitializer * voiceInitializer)
 void Voice::generateData(float * data, quint32 len)
 {
     // Get voice current parameters
-    _voiceParam.computeModulations();
     if (_currentSmplPos == 0xFFFFFFFF)
-        _currentSmplPos = _voiceParam.getPosition(champ_dwStart16); // This value is read only once
-    qint32 v_rootkey = _voiceParam.getInteger(champ_overridingRootKey);
-    qint32 playedNote = _voiceParam.getInteger(champ_keynum);
-    qint32 v_scaleTune = _voiceParam.getInteger(champ_scaleTuning);
-    qint32 v_fineTune = _voiceParam.getInteger(champ_fineTune);
-    qint32 v_coarseTune = _voiceParam.getInteger(champ_coarseTune);
+        _currentSmplPos = _voiceParam->getPosition(champ_dwStart16); // This value is read only once
+    qint32 v_rootkey = _voiceParam->getInteger(champ_overridingRootKey);
+    qint32 playedNote = _voiceParam->getInteger(champ_keynum);
+    qint32 v_scaleTune = _voiceParam->getInteger(champ_scaleTuning);
+    qint32 v_fineTune = _voiceParam->getInteger(champ_fineTune);
+    qint32 v_coarseTune = _voiceParam->getInteger(champ_coarseTune);
 
-    float v_modLfoFreq = _voiceParam.getFloat(champ_freqModLFO);
-    float v_modLfoDelay = _voiceParam.getFloat(champ_delayModLFO);
-    qint32 v_modLfoToPitch = _voiceParam.getInteger(champ_modLfoToPitch);
-    qint32 v_modLfoToFilterFreq = _voiceParam.getInteger(champ_modLfoToFilterFc);
-    float v_modLfoToVolume = _voiceParam.getFloat(champ_modLfoToVolume);
+    float v_modLfoFreq = _voiceParam->getFloat(champ_freqModLFO);
+    float v_modLfoDelay = _voiceParam->getFloat(champ_delayModLFO);
+    qint32 v_modLfoToPitch = _voiceParam->getInteger(champ_modLfoToPitch);
+    qint32 v_modLfoToFilterFreq = _voiceParam->getInteger(champ_modLfoToFilterFc);
+    float v_modLfoToVolume = _voiceParam->getFloat(champ_modLfoToVolume);
 
-    float v_vibLfoFreq = _voiceParam.getFloat(champ_freqVibLFO);
-    float v_vibLfoDelay = _voiceParam.getFloat(champ_delayVibLFO);
-    qint32 v_vibLfoToPitch = _voiceParam.getInteger(champ_vibLfoToPitch);
+    float v_vibLfoFreq = _voiceParam->getFloat(champ_freqVibLFO);
+    float v_vibLfoDelay = _voiceParam->getFloat(champ_delayVibLFO);
+    qint32 v_vibLfoToPitch = _voiceParam->getInteger(champ_vibLfoToPitch);
 
-    qint32 v_modEnvToPitch = _voiceParam.getInteger(champ_modEnvToPitch);
-    qint32 v_modEnvToFilterFc = _voiceParam.getInteger(champ_modEnvToFilterFc);
+    qint32 v_modEnvToPitch = _voiceParam->getInteger(champ_modEnvToPitch);
+    qint32 v_modEnvToFilterFc = _voiceParam->getInteger(champ_modEnvToFilterFc);
 
-    float v_filterQ = _voiceParam.getFloat(champ_initialFilterQ);
-    float v_filterFreq = _voiceParam.getFloat(champ_initialFilterFc);
-    qint32 v_loopMode = _voiceParam.getInteger(champ_sampleModes);
+    float v_filterQ = _voiceParam->getFloat(champ_initialFilterQ);
+    float v_filterFreq = _voiceParam->getFloat(champ_initialFilterFc);
+    qint32 v_loopMode = _voiceParam->getInteger(champ_sampleModes);
 
-    float v_attenuation = _voiceParam.getFloat(champ_initialAttenuation);
+    float v_attenuation = _voiceParam->getFloat(champ_initialAttenuation);
 
     bool endSample = false;
 
@@ -197,7 +196,7 @@ void Voice::generateData(float * data, quint32 len)
     }
 
     /// ENVELOPPE DE MODULATION ///
-    _enveloppeMod.applyEnveloppe(_dataModArray, len, _release, playedNote, 1.0f, &_voiceParam);
+    _enveloppeMod.applyEnveloppe(_dataModArray, len, _release, playedNote, 1.0f, _voiceParam);
 
     /// LFOs ///
     _modLFO.getData(_modLfoArray, len, v_modLfoFreq, v_modLfoDelay);
@@ -207,11 +206,11 @@ void Voice::generateData(float * data, quint32 len)
     if (_release || v_loopMode != 2)
     {
         // Pitch modulation
-        float temperamentFineTune = _voiceParam.getKey() < 0 ? 0.0f : (s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
-                                                                s_temperament[(21 - s_temperamentRelativeKey) % 12]); // Correction so that the tuning fork is accurate
+        float temperamentFineTune = _voiceParam->getKey() < 0 ? 0.0f : (s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
+                                                                        s_temperament[(21 - s_temperamentRelativeKey) % 12]); // Correction so that the tuning fork is accurate
         float deltaPitchFixed = -1731.234f /* -1200 / ln(2) */ *
-                qLn(static_cast<double>(_audioSmplRate) * 440.f / (_smplRate * s_tuningFork)) +
-                (playedNote - v_rootkey) * v_scaleTune + (temperamentFineTune + v_fineTune) + 100.0f * v_coarseTune;
+                                    qLn(static_cast<double>(_audioSmplRate) * 440.f / (_smplRate * s_tuningFork)) +
+                                (playedNote - v_rootkey) * v_scaleTune + (temperamentFineTune + v_fineTune) + 100.0f * v_coarseTune;
 
         // Compute the distance of each point
         if (v_modEnvToPitch == 0 && v_modLfoToPitch == 0 && v_vibLfoToPitch == 0)
@@ -258,19 +257,19 @@ void Voice::generateData(float * data, quint32 len)
             coeffs = s_sinc_table7[_pointDistanceArray[i] & 0xFF];
             currentPos = (_pointDistanceArray[i] >> 8);
             data[i] = coeffs[0] * _srcData[currentPos] +
-                    coeffs[1] * _srcData[currentPos + 1] +
-                    coeffs[2] * _srcData[currentPos + 2] +
-                    coeffs[3] * _srcData[currentPos + 3] +
-                    coeffs[4] * _srcData[currentPos + 4] +
-                    coeffs[5] * _srcData[currentPos + 5] +
-                    coeffs[6] * _srcData[currentPos + 6];
+                      coeffs[1] * _srcData[currentPos + 1] +
+                      coeffs[2] * _srcData[currentPos + 2] +
+                      coeffs[3] * _srcData[currentPos + 3] +
+                      coeffs[4] * _srcData[currentPos + 4] +
+                      coeffs[5] * _srcData[currentPos + 5] +
+                      coeffs[6] * _srcData[currentPos + 6];
         }
 
         // Low-pass filter
         for (quint32 i = 0; i < len; i++)
         {
             _modFreqArray[i] = v_filterFreq *
-                    EnveloppeVol::fastPow2((_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) * 0.000833333f /* 1:1200 */);
+                               EnveloppeVol::fastPow2((_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) * 0.000833333f /* 1:1200 */);
             if (_modFreqArray[i] > 0.5f * _audioSmplRate)
                 _modFreqArray[i] = 0.5f * _audioSmplRate;
             else if (_modFreqArray[i] < 20.0f)
@@ -298,7 +297,7 @@ void Voice::generateData(float * data, quint32 len)
     // Apply the volume envelop
     bool bRet2 = _enveloppeVol.applyEnveloppe(data, len, _release, playedNote,
                                               fastPow10(0.05f * (_gain - v_attenuation - 0.5f * v_filterQ)),
-                                              &_voiceParam);
+                                              _voiceParam);
 
     // No need to go further if only the release is needed
     if (v_loopMode == 2 && !_release)
@@ -307,13 +306,13 @@ void Voice::generateData(float * data, quint32 len)
     if ((bRet2 && v_loopMode != 3) || endSample)
     {
         _isFinished = true;
-        if (_voiceParam.getKey() == -1)
+        if (_voiceParam->getKey() == -1)
         {
             emit currentPosChanged(0);
             _elapsedSmplPos = 0;
         }
     }
-    else if (_voiceParam.getKey() == -1)
+    else if (_voiceParam->getKey() == -1)
     {
         _elapsedSmplPos += len;
         if (_elapsedSmplPos > (_smplRate >> 5))
@@ -333,8 +332,8 @@ bool Voice::takeData(float * data, quint32 nbRead, qint32 loopMode)
     }
 
     bool endSample = false;
-    quint32 loopStart = _voiceParam.getPosition(champ_dwStartLoop);
-    quint32 loopEnd = _voiceParam.getPosition(champ_dwEndLoop);
+    quint32 loopStart = _voiceParam->getPosition(champ_dwStartLoop);
+    quint32 loopEnd = _voiceParam->getPosition(champ_dwEndLoop);
 
     if ((loopMode == 1 || (loopMode == 3 && !_release)) && loopStart < loopEnd)
     {
@@ -392,7 +391,7 @@ void Voice::release(bool quick)
         // Stopped by an exclusive class => quick release
         _enveloppeVol.quickRelease();
     }
-    else if (_voiceParam.getInteger(champ_sampleModes) == 2)
+    else if (_voiceParam->getInteger(champ_sampleModes) == 2)
     {
         // Start of a sample in the release mode
         _enveloppeVol.quickAttack();
@@ -487,8 +486,8 @@ float Voice::getSinValue(float value)
 
     // Linear interpolation
     return indexBefore >= 255 ?
-        s_sin_table[255] + (1.f - s_sin_table[255]) * diff :
-        s_sin_table[indexBefore] + (s_sin_table[indexBefore + 1] - s_sin_table[indexBefore]) * diff;
+               s_sin_table[255] + (1.f - s_sin_table[255]) * diff :
+               s_sin_table[indexBefore] + (s_sin_table[indexBefore + 1] - s_sin_table[indexBefore]) * diff;
 }
 
 float Voice::fastPow10(float value)
@@ -508,35 +507,35 @@ float Voice::fastPow10(float value)
 
 float Voice::getFloatAttribute(AttributeType attribute)
 {
-    return _voiceParam.getFloat(attribute);
+    return _voiceParam->getFloat(attribute);
 }
 
 qint32 Voice::getIntAttribute(AttributeType attribute)
 {
-    return _voiceParam.getInteger(attribute);
+    return _voiceParam->getInteger(attribute);
 }
 
 void Voice::setPan(float val)
 {
-    _voiceParam.setPan(val);
+    _voiceParam->setPan(val);
 }
 
 void Voice::setLoopMode(quint16 val)
 {
-    _voiceParam.setLoopMode(val);
+    _voiceParam->setLoopMode(val);
 }
 
 void Voice::setLoopStart(quint32 val)
 {
-    _voiceParam.setLoopStart(val);
+    _voiceParam->setLoopStart(val);
 }
 
 void Voice::setLoopEnd(quint32 val)
 {
-    _voiceParam.setLoopEnd(val);
+    _voiceParam->setLoopEnd(val);
 }
 
 void Voice::setFineTune(qint16 val)
 {
-    _voiceParam.setFineTune(val);
+    _voiceParam->setFineTune(val);
 }

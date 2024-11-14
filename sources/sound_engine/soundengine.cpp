@@ -29,6 +29,7 @@
 #include <QThread>
 
 Voice * SoundEngine::s_voices[MAX_NUMBER_OF_VOICES];
+VoiceParam * SoundEngine::s_voiceParameters[MAX_NUMBER_OF_VOICES];
 int SoundEngine::s_numberOfVoices = 0;
 int SoundEngine::s_numberOfVoicesToCompute = 0;
 QMutex SoundEngine::s_mutexVoices;
@@ -41,7 +42,8 @@ void SoundEngine::initialize(Synth * synth)
 
     for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
     {
-        s_voices[i] = new Voice();
+        s_voiceParameters[i] = new VoiceParam();
+        s_voices[i] = new Voice(s_voiceParameters[i]);
         connect(s_voices[i], SIGNAL(currentPosChanged(quint32)), synth, SIGNAL(currentPosChanged(quint32)));
         connect(s_voices[i], SIGNAL(readFinished(int)), synth, SIGNAL(readFinished(int)));
     }
@@ -80,7 +82,10 @@ SoundEngine::~SoundEngine()
 void SoundEngine::finalize()
 {
     for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
+    {
         delete s_voices[i];
+        delete s_voiceParameters[i];
+    }
 }
 
 void SoundEngine::addVoices(VoiceInitializer * voiceInitializers, int numberOfVoicesToAdd, SynthConfig * config, SynthInternalConfig * internalConfig)
@@ -237,6 +242,52 @@ void SoundEngine::setEndLoop(quint32 endLoop, bool withLinkedSample)
     for (int i = 0; i < s_numberOfVoices; i++)
         if (s_voices[i]->getType() == 1 || (s_voices[i]->getType() == 2 && withLinkedSample))
             s_voices[i]->setLoopEnd(endLoop);
+    s_mutexVoices.unlock();
+}
+
+
+void SoundEngine::processPolyPressureChanged(int channel, int key, int pressure)
+{
+    s_mutexVoices.lock();
+    for (int i = 0; i < s_numberOfVoices; i++)
+        if (s_voices[i]->getChannel() == channel && s_voices[i]->getKey() == key)
+            s_voiceParameters[i]->processPolyPressureChanged(pressure);
+    s_mutexVoices.unlock();
+}
+
+void SoundEngine::processMonoPressureChanged(int channel, int value)
+{
+    s_mutexVoices.lock();
+    for (int i = 0; i < s_numberOfVoices; i++)
+        if (s_voices[i]->getChannel() == channel)
+            s_voiceParameters[i]->processMonoPressureChanged(value);
+    s_mutexVoices.unlock();
+}
+
+void SoundEngine::processControllerChanged(int channel, int num, int value)
+{
+    s_mutexVoices.lock();
+    for (int i = 0; i < s_numberOfVoices; i++)
+        if (s_voices[i]->getChannel() == channel)
+            s_voiceParameters[i]->processControllerChanged(num, value);
+    s_mutexVoices.unlock();
+}
+
+void SoundEngine::processBendChanged(int channel, float value)
+{
+    s_mutexVoices.lock();
+    for (int i = 0; i < s_numberOfVoices; i++)
+        if (s_voices[i]->getChannel() == channel)
+            s_voiceParameters[i]->processBendChanged(value);
+    s_mutexVoices.unlock();
+}
+
+void SoundEngine::processBendSensitivityChanged(int channel, float semitones)
+{
+    s_mutexVoices.lock();
+    for (int i = 0; i < s_numberOfVoices; i++)
+        if (s_voices[i]->getChannel() == channel)
+            s_voiceParameters[i]->processBendSensitivityChanged(semitones);
     s_mutexVoices.unlock();
 }
 

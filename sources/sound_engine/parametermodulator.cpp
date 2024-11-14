@@ -27,7 +27,7 @@
 #include "imidivalues.h"
 
 IMidiValues * ParameterModulator::s_midiValues = nullptr;
-void ParameterModulator::setIMidiValues(IMidiValues * midiValues) { s_midiValues = midiValues;}
+void ParameterModulator::setIMidiValues(IMidiValues * midiValues) { s_midiValues = midiValues; }
 
 void ParameterModulator::initialize(const ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation)
 {
@@ -42,6 +42,8 @@ void ParameterModulator::initialize(const ModulatorData &modData, bool isPrst, i
     _isPrst = isPrst;
     _channel = channel;
     _initialKey = initialKey;
+    _input1 = 0.0;
+    _input2 = 0.0;
     _keyForComputation = keyForComputation;
     _velForComputation = velForComputation;
 }
@@ -74,10 +76,98 @@ void ParameterModulator::setOutput(ParameterModulator * modulator)
     _outputModulator->waitForAnInput();
 }
 
+void ParameterModulator::initializeInputs()
+{
+    if (_inputNumber == 0)
+        _input1 = getValue(_data.srcOper);
+    _input2 = getValue(_data.amtSrcOper);
+}
+
+bool ParameterModulator::processPolyPressureChanged(int pressure)
+{
+    bool change = false;
+    if (!_data.srcOper.CC && _data.srcOper.Index == GC_polypressure)
+    {
+        _input1 = pressure;
+        change = true;
+    }
+    if (!_data.amtSrcOper.CC && _data.amtSrcOper.Index == GC_polypressure)
+    {
+        _input2 = pressure;
+        change = true;
+    }
+    return change;
+}
+
+bool ParameterModulator::processMonoPressureChanged(int value)
+{
+    bool change = false;
+    if (!_data.srcOper.CC && _data.srcOper.Index == GC_channelPressure)
+    {
+        _input1 = value;
+        change = true;
+    }
+    if (!_data.amtSrcOper.CC && _data.amtSrcOper.Index == GC_channelPressure)
+    {
+        _input2 = value;
+        change = true;
+    }
+    return change;
+}
+
+bool ParameterModulator::processControllerChanged(int num, int value)
+{
+    bool change = false;
+    if (_data.srcOper.CC && _data.srcOper.Index == num)
+    {
+        _input1 = value;
+        change = true;
+    }
+    if (_data.amtSrcOper.CC && _data.amtSrcOper.Index == num)
+    {
+        _input2 = value;
+        change = true;
+    }
+    return change;
+}
+
+bool ParameterModulator::processBendChanged(float value)
+{
+    bool change = false;
+    if (!_data.srcOper.CC && _data.srcOper.Index == GC_pitchWheel)
+    {
+        _input1 = 64.0f * (value + 1.0f);
+        change = true;
+    }
+    if (!_data.amtSrcOper.CC && _data.amtSrcOper.Index == GC_pitchWheel)
+    {
+        _input2 = 64.0f * (value + 1.0f);
+        change = true;
+    }
+    return change;
+}
+
+bool ParameterModulator::processBendSensitivityChanged(float semitones)
+{
+    bool change = false;
+    if (!_data.srcOper.CC && _data.srcOper.Index == GC_pitchWheelSensitivity)
+    {
+        _input1 = semitones;
+        change = true;
+    }
+    if (!_data.amtSrcOper.CC && _data.amtSrcOper.Index == GC_pitchWheelSensitivity)
+    {
+        _input2 = semitones;
+        change = true;
+    }
+    return change;
+}
+
 void ParameterModulator::initializeComputation()
 {
+    if (_inputNumber > 0)
+        _input1 = 0;
     _inputCount = 0;
-    _inputSum = 0.0;
     _minSum = 0;
     _maxSum = 0;
     _computed = false;
@@ -96,17 +186,14 @@ bool ParameterModulator::computeOutput()
     if (_inputNumber > 0)
     {
         // Normalize the external inputs between 0 and 127
-        input1 = _minSum != _maxSum ? 127.0 * (_inputSum - _minSum) / (_maxSum - _minSum) : 0;
+        input1 = _minSum != _maxSum ? 127.0 * (_input1 - _minSum) / (_maxSum - _minSum) : 0;
     }
     else
-        input1 = getValue(_data.srcOper);
-
-    // Compute input2
-    double input2 = getValue(_data.amtSrcOper);
+        input1 = _input1;
 
     // Apply shapes
-    input1 = input1 < 0 ? 0 : _data.srcOper.applyShape(input1);
-    input2 = input2 < 0 ? 0 : _data.amtSrcOper.applyShape(input2);
+    input1 = input1 < 0 ? 0 : _data.srcOper.applyShape(_input1);
+    double input2 = _input2 < 0 ? 0 : _data.amtSrcOper.applyShape(_input2);
 
     // Compute data
     double result = input1 * input2 * _data.amount;
@@ -139,7 +226,7 @@ bool ParameterModulator::computeOutput()
 
 void ParameterModulator::setInput(double value, qint16 min, qint16 max)
 {
-    _inputSum += value;
+    _input1 += value;
     _minSum += min;
     _maxSum += max;
     _inputCount++;

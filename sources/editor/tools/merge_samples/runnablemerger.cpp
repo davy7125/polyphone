@@ -215,7 +215,8 @@ void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Div
     voiceInitializer.token = 0;
     voiceInitializer.type = 0;
 
-    Voice * voice = new Voice();
+    VoiceParam * voiceParam = new VoiceParam();
+    Voice * voice = new Voice(voiceParam);
     voice->initialize(&voiceInitializer);
 
     // Pan coeffs
@@ -276,4 +277,5 @@ void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Div
 
     delete [] buffer;
     delete voice;
+    delete voiceParam;
 }

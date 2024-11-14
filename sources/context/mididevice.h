@@ -28,7 +28,6 @@
 #include <QString>
 #include <QObject>
 #include "imidivalues.h"
-class IMidiListener;
 class ConfManager;
 class RtMidiIn;
 

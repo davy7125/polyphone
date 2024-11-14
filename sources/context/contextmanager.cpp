@@ -125,12 +125,14 @@ ContextManager::ContextManager(bool withAudioAndMidi) :
         // 7. Midi device
         _midi = new MidiDevice(_configuration);
         _audio->getSynth()->setIMidiValues(_midi);
+        _midi->addListener(_audio->getSynth(), 1000);
     }
 }
 
 ContextManager::~ContextManager()
 {
     // Delete everything in the reverse order
+    _midi->removeListener(_audio->getSynth());
     delete _midi;
     delete _audio;
     delete _translation;

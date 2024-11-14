@@ -68,6 +68,7 @@ private:
 class SpinBox : public QSpinBox
 {
     Q_OBJECT
+
 public:
     SpinBox(QWidget *parent = nullptr);
     void init(FooterPrst * footer) { _footer = footer; }

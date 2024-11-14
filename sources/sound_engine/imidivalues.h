@@ -25,6 +25,8 @@
 #ifndef IMIDIVALUES_H
 #define IMIDIVALUES_H
 
+class IMidiListener;
+
 class IMidiValues
 {
 public:

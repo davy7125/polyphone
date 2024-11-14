@@ -56,6 +56,13 @@ public:
     static void setStartLoop(quint32 startLoop, bool withLinkedSample);
     static void setEndLoop(quint32 endLoop, bool withLinkedSample);
 
+    // MIDI signals
+    static void processPolyPressureChanged(int channel, int key, int pressure);
+    static void processMonoPressureChanged(int channel, int value);
+    static void processControllerChanged(int channel, int num, int value);
+    static void processBendChanged(int channel, float value);
+    static void processBendSensitivityChanged(int channel, float semitones);
+
     // Data generation
     void stop();
     static void prepareComputation(int uncomputedVoiceNumber, bool voicesUnlocked);
@@ -88,6 +95,7 @@ private:
     volatile quint32 _lenToPrepare;
 
     static Voice * s_voices[MAX_NUMBER_OF_VOICES];
+    static VoiceParam * s_voiceParameters[MAX_NUMBER_OF_VOICES];
     static int s_numberOfVoices;
     static int s_numberOfVoicesToCompute;
     static QMutex s_mutexVoices;

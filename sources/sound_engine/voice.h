@@ -53,7 +53,7 @@ class Voice : public QObject
     Q_OBJECT
 
 public:
-    Voice();
+    Voice(VoiceParam * voiceParam);
     ~Voice() override;
 
     // Initial key is:
@@ -61,11 +61,11 @@ public:
     // >= 0 otherwise (sample, instrument or preset level)
     void initialize(VoiceInitializer * voiceInitializer);
 
-    int getChannel() { return _voiceParam.getChannel(); }
-    int getSf2Id() { return _voiceParam.getSf2Id(); }
-    int getPresetId() { return _voiceParam.getPresetId(); }
-    int getKey() { return _voiceParam.getKey(); }
-    int getType() { return _voiceParam.getType(); }
+    int getChannel() { return _voiceParam->getChannel(); }
+    int getSf2Id() { return _voiceParam->getSf2Id(); }
+    int getPresetId() { return _voiceParam->getPresetId(); }
+    int getKey() { return _voiceParam->getKey(); }
+    int getType() { return _voiceParam->getType(); }
 
     void release(bool quick = false);
     bool isInRelease() { return _release; }
@@ -113,7 +113,7 @@ private:
     quint32 _smplRate, _audioSmplRate;
     float _audioSmplRateInv;
     float _gain;
-    VoiceParam _voiceParam;
+    VoiceParam * _voiceParam;
     int _token;
 
     // Sample playback

@@ -49,9 +49,6 @@ public:
     void setLoopEnd(quint32 val);
     void setFineTune(qint16 val);
 
-    // Update parameters before reading them (modulators)
-    void computeModulations();
-
     // Get a param
     float getFloat(AttributeType type);
     qint32 getInteger(AttributeType type);
@@ -63,6 +60,13 @@ public:
     qint8 getType() { return _type; }
     int getSf2Id() { return _sf2Id; }
     int getPresetId() { return _presetId; }
+
+    // Update modulators with MIDI events
+    void processPolyPressureChanged(int pressure);
+    void processMonoPressureChanged(int value);
+    void processControllerChanged(int num, int value);
+    void processBendChanged(float value);
+    void processBendSensitivityChanged(float semitones);
 
 private:
     // Identification
@@ -84,6 +88,7 @@ private:
     void readSmpl(Smpl * smpl);
     void readDivisionAttributes(Division * globalDivision, Division * division, bool isPrst);
     void readDivisionModulators(Division * globalDivision, Division * division, bool isPrst);
+    void computeModulations();
 };
 
 #endif // VOICEPARAM_H

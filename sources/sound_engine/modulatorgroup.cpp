@@ -107,6 +107,12 @@ void ModulatorGroup::loadModulators(const ModulatorData * const modData, int mod
     }
 }
 
+void ModulatorGroup::initializeModulatorInputs()
+{
+    for (int i = 0; i < _numberOfParameterModulators; ++i)
+        _modulators[i].initializeInputs();
+}
+
 void ModulatorGroup::process()
 {
     // Initialize the modulator computation
@@ -122,4 +128,44 @@ void ModulatorGroup::process()
         for (int i = 0; i < _numberOfParameterModulators; ++i)
             ok &= _modulators[i].computeOutput();
     } while (!ok && count++ < _numberOfParameterModulators);
+}
+
+bool ModulatorGroup::processPolyPressureChanged(int pressure)
+{
+    bool change = false;
+    for (int i = 0; i < _numberOfParameterModulators; i++)
+        change |= _modulators[i].processPolyPressureChanged(pressure);
+    return change;
+}
+
+bool ModulatorGroup::processMonoPressureChanged(int value)
+{
+    bool change = false;
+    for (int i = 0; i < _numberOfParameterModulators; i++)
+        change |= _modulators[i].processMonoPressureChanged(value);
+    return change;
+}
+
+bool ModulatorGroup::processControllerChanged(int num, int value)
+{
+    bool change = false;
+    for (int i = 0; i < _numberOfParameterModulators; i++)
+        change |= _modulators[i].processControllerChanged(num, value);
+    return change;
+}
+
+bool ModulatorGroup::processBendChanged(float value)
+{
+    bool change = false;
+    for (int i = 0; i < _numberOfParameterModulators; i++)
+        change |= _modulators[i].processBendChanged(value);
+    return change;
+}
+
+bool ModulatorGroup::processBendSensitivityChanged(float semitones)
+{
+    bool change = false;
+    for (int i = 0; i < _numberOfParameterModulators; i++)
+        change |= _modulators[i].processBendSensitivityChanged(semitones);
+    return change;
 }

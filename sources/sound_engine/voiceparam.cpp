@@ -103,6 +103,11 @@ void VoiceParam::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst
 
     if (type != 0) // Smpl level
         this->prepareForSmpl(key, smpl->_sfSampleType);
+
+    // Initialize inputs and compute all modulations
+    _modulatorGroupInst.initializeModulatorInputs();
+    _modulatorGroupPrst.initializeModulatorInputs();
+    computeModulations();
 }
 
 void VoiceParam::prepareParameters()
@@ -391,4 +396,39 @@ void VoiceParam::computeModulations()
     // Process modulators
     _modulatorGroupInst.process();
     _modulatorGroupPrst.process();
+}
+
+void VoiceParam::processPolyPressureChanged(int pressure)
+{
+    if (_modulatorGroupInst.processPolyPressureChanged(pressure) ||
+        _modulatorGroupPrst.processPolyPressureChanged(pressure))
+        computeModulations();
+}
+
+void VoiceParam::processMonoPressureChanged(int value)
+{
+    if (_modulatorGroupInst.processMonoPressureChanged(value) ||
+        _modulatorGroupPrst.processMonoPressureChanged(value))
+        computeModulations();
+}
+
+void VoiceParam::processControllerChanged(int num, int value)
+{
+    if (_modulatorGroupInst.processControllerChanged(num, value) ||
+        _modulatorGroupPrst.processControllerChanged(num, value))
+        computeModulations();
+}
+
+void VoiceParam::processBendChanged(float value)
+{
+    if (_modulatorGroupInst.processBendChanged(value) ||
+        _modulatorGroupPrst.processBendChanged(value))
+        computeModulations();
+}
+
+void VoiceParam::processBendSensitivityChanged(float semitones)
+{
+    if (_modulatorGroupInst.processBendSensitivityChanged(semitones) ||
+        _modulatorGroupPrst.processBendSensitivityChanged(semitones))
+        computeModulations();
 }

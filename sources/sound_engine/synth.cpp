@@ -363,9 +363,9 @@ void Synth::configure(SynthConfig * configuration)
     }
 }
 
-void Synth::setIMidiValues(IMidiValues * iMidiValues)
+void Synth::setIMidiValues(IMidiValues * midiValues)
 {
-    ParameterModulator::setIMidiValues(iMidiValues);
+    ParameterModulator::setIMidiValues(midiValues);
 }
 
 void Synth::setSampleGain(double gain)
@@ -454,6 +454,45 @@ void Synth::setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize)
         destroySoundEnginesAndBuffers();
         createSoundEnginesAndBuffers();
     }
+}
+
+
+bool Synth::processKey(int channel, int key, int vel)
+{
+    Q_UNUSED(channel)
+    Q_UNUSED(key)
+    Q_UNUSED(vel)
+    return false;
+}
+
+bool Synth::processPolyPressureChanged(int channel, int key, int pressure)
+{
+    SoundEngine::processPolyPressureChanged(channel, key, pressure);
+    return false;
+}
+
+bool Synth::processMonoPressureChanged(int channel, int value)
+{
+    SoundEngine::processMonoPressureChanged(channel, value);
+    return false;
+}
+
+bool Synth::processControllerChanged(int channel, int num, int value)
+{
+    SoundEngine::processControllerChanged(channel, num, value);
+    return false;
+}
+
+bool Synth::processBendChanged(int channel, float value)
+{
+    SoundEngine::processBendChanged(channel, value);
+    return false;
+}
+
+bool Synth::processBendSensitivityChanged(int channel, float semitones)
+{
+    SoundEngine::processBendSensitivityChanged(channel, semitones);
+    return false;
 }
 
 void Synth::startNewRecord(QString fileName)
