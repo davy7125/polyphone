@@ -202,8 +202,12 @@ void Voice::generateData(float * data, quint32 len)
     _modLFO.getData(_modLfoArray, len, v_modLfoFreq, v_modLfoDelay);
     _vibLFO.getData(_vibLfoArray, len, v_vibLfoFreq, v_vibLfoDelay);
 
-    // Skip steps if the sample is read only when the key is released
-    if (_release || v_loopMode != 2)
+    if (v_loopMode == 2 && !_release)
+    {
+        // Blank
+        memset(data, 0, len * sizeof(float));
+    }
+    else
     {
         // Pitch modulation
         float temperamentFineTune = _voiceParam->getKey() < 0 ? 0.0f : (s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
