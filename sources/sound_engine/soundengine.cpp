@@ -34,6 +34,8 @@ int SoundEngine::s_numberOfVoices = 0;
 int SoundEngine::s_numberOfVoicesToCompute = 0;
 QMutex SoundEngine::s_mutexVoices;
 int SoundEngine::s_instanceCount = 0;
+int SoundEngine::s_firstIndexToCompute = 0;
+int SoundEngine::s_maxPossibleVoicesToCompute = 0;
 alignas(64) QAtomicInt SoundEngine::s_indexVoice = 0;
 
 void SoundEngine::initialize(Synth * synth)
@@ -297,8 +299,8 @@ void SoundEngine::closeAll(int channel, int exclusiveClass, int numPreset)
     for (int i = 0; i < s_numberOfVoices; i++)
     {
         if (s_voices[i]->getIntAttribute(champ_exclusiveClass) == exclusiveClass &&
-                s_voices[i]->getIntAttribute(champ_wPreset) == numPreset &&
-                s_voices[i]->getChannel() == channel)
+            s_voices[i]->getIntAttribute(champ_wPreset) == numPreset &&
+            s_voices[i]->getChannel() == channel)
             s_voices[i]->release(true);
     }
     s_mutexVoices.unlock();
@@ -335,12 +337,22 @@ void SoundEngine::stop()
 
 void SoundEngine::prepareComputation(int uncomputedVoiceNumber, bool voicesUnlocked)
 {
-    s_indexVoice.storeRelaxed(0);
     if (voicesUnlocked)
         s_mutexVoices.lock();
+    s_indexVoice.fetchAndStoreRelaxed(0);
+    if (uncomputedVoiceNumber > 0)
+        s_firstIndexToCompute += s_firstIndexToCompute > uncomputedVoiceNumber ? -uncomputedVoiceNumber : s_numberOfVoicesToCompute - uncomputedVoiceNumber;
+
+    // Update the reference of the maximum number of voices to compute
+    if (s_numberOfVoicesToCompute - uncomputedVoiceNumber > s_maxPossibleVoicesToCompute)
+        s_maxPossibleVoicesToCompute = s_numberOfVoicesToCompute - uncomputedVoiceNumber;
+    else if (s_maxPossibleVoicesToCompute > 0)
+        s_maxPossibleVoicesToCompute -= 2;
 
     // Minimum number of voices to close
     int numberOfVoicesToClose = uncomputedVoiceNumber > 0 ? uncomputedVoiceNumber + s_instanceCount : 0;
+    if (s_numberOfVoices - numberOfVoicesToClose < s_maxPossibleVoicesToCompute)
+        numberOfVoicesToClose = s_numberOfVoices - s_maxPossibleVoicesToCompute;
 
     // Voices ended?
     Voice * voice;
@@ -370,17 +382,26 @@ void SoundEngine::prepareComputation(int uncomputedVoiceNumber, bool voicesUnloc
     }
 
     s_numberOfVoicesToCompute = s_numberOfVoices;
+    if (s_firstIndexToCompute >= s_numberOfVoices)
+        s_firstIndexToCompute = 0;
 }
 
 Voice * SoundEngine::getNextVoiceToCompute()
 {
     int voiceIndex = s_indexVoice.fetchAndAddRelaxed(1);
 
-    // If this is the last sound engine to finish the computation series, release the lock on the voices
-    if (voiceIndex == s_numberOfVoices + s_instanceCount - 1)
-        s_mutexVoices.unlock();
+    // No more voices to compute?
+    if (voiceIndex >= s_numberOfVoices)
+    {
+        // If this is the last sound engine to finish the computation series, release the lock on the voices
+        if (voiceIndex == s_numberOfVoices + s_instanceCount - 1)
+            s_mutexVoices.unlock();
 
-    return voiceIndex < s_numberOfVoices ? s_voices[voiceIndex] : nullptr;
+        return nullptr;
+    }
+
+    voiceIndex += s_firstIndexToCompute;
+    return s_voices[voiceIndex >= s_numberOfVoices ? voiceIndex - s_numberOfVoices : voiceIndex];
 }
 
 void SoundEngine::endComputation(int &uncomputedVoiceCount, bool &voicesUnLocked)

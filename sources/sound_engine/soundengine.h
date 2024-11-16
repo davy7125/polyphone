@@ -100,6 +100,8 @@ private:
     static int s_numberOfVoicesToCompute;
     static QMutex s_mutexVoices;
     static int s_instanceCount;
+    static int s_firstIndexToCompute;
+    static int s_maxPossibleVoicesToCompute;
 
     // Variable kept apart (cache line) since it is modified by all threads
     alignas(64) static QAtomicInt s_indexVoice;
