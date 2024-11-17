@@ -404,6 +404,19 @@ void Synth::setSinus(bool isOn, int rootKey)
         _sinus.off();
 }
 
+void Synth::activateSmplEq(bool isActivated)
+{
+    if (isActivated)
+        _eq.on();
+    else
+        _eq.off();
+}
+
+void Synth::setSmplEqValues(int values[10])
+{
+    _eq.setValues(values);
+}
+
 void Synth::setStartLoop(quint32 startLoop, bool withLinkedSample)
 {
     // Update voices coming from the sample level
@@ -422,39 +435,19 @@ void Synth::setPitchCorrection(qint16 correction, bool withLinkedSample)
     SoundEngine::setPitchCorrection(correction, withLinkedSample);
 }
 
-void Synth::activateSmplEq(bool isActivated)
+void Synth::startNewRecord(QString fileName)
 {
-    if (isActivated)
-        _eq.on();
-    else
-        _eq.off();
+    _recorder.startNewRecord(fileName, _internalConfiguration.sampleRate);
 }
 
-void Synth::setSmplEqValues(int values[10])
+void Synth::endRecord()
 {
-    _eq.setValues(values);
+    _recorder.endRecord();
 }
 
-void Synth::setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize)
+void Synth::pause(bool isOn)
 {
-    // Mutex not mandatory: no data generation when "setFormat" is called
-    _internalConfiguration.sampleRate = sampleRate;
-
-    // Reset
-    this->stop(true);
-
-    // Sample rate update
-    _sinus.setSampleRate(sampleRate);
-    _eq.setSampleRate(sampleRate);
-
-    // Update buffer size
-    bufferSize *= 2;
-    if (_bufferSize != bufferSize)
-    {
-        _bufferSize = bufferSize;
-        destroySoundEnginesAndBuffers();
-        createSoundEnginesAndBuffers();
-    }
+    _recorder.pause(isOn);
 }
 
 bool Synth::processKey(int channel, int key, int vel)
@@ -493,6 +486,28 @@ bool Synth::processBendSensitivityChanged(int channel, float semitones)
 {
     SoundEngine::processBendSensitivityChanged(channel, semitones);
     return false;
+}
+
+void Synth::setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize)
+{
+    // Mutex not mandatory: no data generation when "setFormat" is called
+    _internalConfiguration.sampleRate = sampleRate;
+
+    // Reset
+    this->stop(true);
+
+    // Sample rate update
+    _sinus.setSampleRate(sampleRate);
+    _eq.setSampleRate(sampleRate);
+
+    // Update buffer size
+    bufferSize *= 2;
+    if (_bufferSize != bufferSize)
+    {
+        _bufferSize = bufferSize;
+        destroySoundEnginesAndBuffers();
+        createSoundEnginesAndBuffers();
+    }
 }
 
 void Synth::readData(float * dataL, float * dataR, quint32 maxlen)
@@ -549,25 +564,10 @@ void Synth::readData(float * dataL, float * dataR, quint32 maxlen)
 
 void Synth::gatherSoundEngineData(quint32 maxlen)
 {
-    // Gather the part of the sound with no effects
-    _soundEngines[0]->setData(_dataL, _dataR, maxlen);
+    // Gather the different parts of the sound
+    _soundEngines[0]->setData(_dataL, _dataR, _dataChoL, _dataChoR, _dataRevL, _dataRevR, _dataChoRevL, _dataChoRevR, maxlen);
     for (int i = 1; i < _soundEngineCount; i++)
-        _soundEngines[i]->addData(_dataL, _dataR, maxlen);
-
-    // Gather the part of the sound with chorus only
-    _soundEngines[0]->setChoData(_dataChoL, _dataChoR, maxlen);
-    for (int i = 1; i < _soundEngineCount; i++)
-        _soundEngines[i]->addChoData(_dataChoL, _dataChoR, maxlen);
-
-    // Gather the part of the sound with reverb only
-    _soundEngines[0]->setRevData(_dataRevL, _dataRevR, maxlen);
-    for (int i = 1; i < _soundEngineCount; i++)
-        _soundEngines[i]->addRevData(_dataRevL, _dataRevR, maxlen);
-
-    // Gather the part of the sound with chorus + reverb
-    _soundEngines[0]->setChoRevData(_dataChoRevL, _dataChoRevR, maxlen);
-    for (int i = 1; i < _soundEngineCount; i++)
-        _soundEngines[i]->addChoRevData(_dataChoRevL, _dataChoRevR, maxlen);
+        _soundEngines[i]->addData(_dataL, _dataR, _dataChoL, _dataChoR, _dataRevL, _dataRevR, _dataChoRevL, _dataChoRevR, maxlen);
 }
 
 void Synth::applyChoRev(float * dataL, float * dataR, quint32 maxlen)
@@ -627,20 +627,4 @@ void Synth::applyChoRev(float * dataL, float * dataR, quint32 maxlen)
         dataL[i] += _dataL[i];
     for (quint32 i = 0; i < maxlen; i++)
         dataR[i] += _dataR[i];
-}
-
-
-void Synth::startNewRecord(QString fileName)
-{
-    _recorder.startNewRecord(fileName, _internalConfiguration.sampleRate);
-}
-
-void Synth::endRecord()
-{
-    _recorder.endRecord();
-}
-
-void Synth::pause(bool isOn)
-{
-    _recorder.pause(isOn);
 }

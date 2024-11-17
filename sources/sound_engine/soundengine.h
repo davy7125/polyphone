@@ -69,14 +69,10 @@ public:
     void prepareData(quint32 len);
     void generateData(quint32 len);
     static void endComputation(int &uncomputedVoiceCount, bool &voicesUnLocked);
-    void setData(float * dataL, float * dataR, quint32 len);
-    void addData(float * dataL, float * dataR, quint32 len);
-    void setChoData(float * dataL, float * dataR, quint32 len);
-    void addChoData(float * dataL, float * dataR, quint32 len);
-    void setRevData(float * dataL, float * dataR, quint32 len);
-    void addRevData(float * dataL, float * dataR, quint32 len);
-    void setChoRevData(float * dataL, float * dataR, quint32 len);
-    void addChoRevData(float * dataL, float * dataR, quint32 len);
+    void setData(float * dataL, float * dataR, float * dataChoL, float * dataChoR,
+                 float * dataRevL, float * dataRevR, float * dataChoRevL, float * dataChoRevR, quint32 len);
+    void addData(float * dataL, float * dataR, float * dataChoL, float * dataChoR,
+                 float * dataRevL, float * dataRevR, float * dataChoRevL, float * dataChoRevR, quint32 len);
 
 public slots:
     void start();

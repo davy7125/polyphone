@@ -540,62 +540,40 @@ void SoundEngine::generateData(quint32 len)
     }
 }
 
-void SoundEngine::setData(float * dataL, float * dataR, quint32 len)
+void SoundEngine::setData(float * dataL, float * dataR, float * dataChoL, float * dataChoR,
+                          float * dataRevL, float * dataRevR, float * dataChoRevL, float * dataChoRevR, quint32 len)
 {
     memcpy(dataL, _dataL, len * sizeof(float));
     memcpy(dataR, _dataR, len * sizeof(float));
+    memcpy(dataChoL, _dataChoL, len * sizeof(float));
+    memcpy(dataChoR, _dataChoR, len * sizeof(float));
+    memcpy(dataRevL, _dataRevL, len * sizeof(float));
+    memcpy(dataRevR, _dataRevR, len * sizeof(float));
+    memcpy(dataChoRevL, _dataChoRevL, len * sizeof(float));
+    memcpy(dataChoRevR, _dataChoRevR, len * sizeof(float));
 }
 
-void SoundEngine::addData(float * dataL, float * dataR, quint32 len)
+void SoundEngine::addData(float * dataL, float * dataR, float * dataChoL, float * dataChoR,
+                          float * dataRevL, float * dataRevR, float * dataChoRevL, float * dataChoRevR, quint32 len)
 {
     quint32 i;
     for (i = 0; i < len; ++i)
         dataL[i] += _dataL[i];
     for (i = 0; i < len; ++i)
         dataR[i] += _dataR[i];
-}
 
-void SoundEngine::setChoData(float * dataL, float * dataR, quint32 len)
-{
-    memcpy(dataL, _dataChoL, len * sizeof(float));
-    memcpy(dataR, _dataChoR, len * sizeof(float));
-}
+    for (i = 0; i < len; ++i)
+        dataChoL[i] += _dataChoL[i];
+    for (i = 0; i < len; ++i)
+        dataChoR[i] += _dataChoR[i];
 
-void SoundEngine::addChoData(float * dataL, float * dataR, quint32 len)
-{
-    quint32 i;
     for (i = 0; i < len; ++i)
-        dataL[i] += _dataChoL[i];
+        dataRevL[i] += _dataRevL[i];
     for (i = 0; i < len; ++i)
-        dataR[i] += _dataChoR[i];
-}
+        dataRevR[i] += _dataRevR[i];
 
-void SoundEngine::setRevData(float * dataL, float * dataR, quint32 len)
-{
-    memcpy(dataL, _dataRevL, len * sizeof(float));
-    memcpy(dataR, _dataRevR, len * sizeof(float));
-}
-
-void SoundEngine::addRevData(float * dataL, float * dataR, quint32 len)
-{
-    quint32 i;
     for (i = 0; i < len; ++i)
-        dataL[i] += _dataRevL[i];
+        dataChoRevL[i] += _dataChoRevL[i];
     for (i = 0; i < len; ++i)
-        dataR[i] += _dataRevR[i];
-}
-
-void SoundEngine::setChoRevData(float * dataL, float * dataR, quint32 len)
-{
-    memcpy(dataL, _dataChoRevL, len * sizeof(float));
-    memcpy(dataR, _dataChoRevR, len * sizeof(float));
-}
-
-void SoundEngine::addChoRevData(float * dataL, float * dataR, quint32 len)
-{
-    quint32 i;
-    for (i = 0; i < len; ++i)
-        dataL[i] += _dataChoRevL[i];
-    for (i = 0; i < len; ++i)
-        dataR[i] += _dataChoRevR[i];
+        dataChoRevR[i] += _dataChoRevR[i];
 }

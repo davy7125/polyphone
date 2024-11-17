@@ -142,17 +142,17 @@ public:
     void endRecord();
     void pause(bool isOn);
 
-    // Following functions are executed by the audio server (thread 2)
-    void readData(float *dataL, float *dataR, quint32 maxlen);
-    void setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize);
-
-    // MIDI signals
+    // MIDI signals (thread 2)
     bool processKey(int channel, int key, int vel) override;
     bool processPolyPressureChanged(int channel, int key, int pressure) override;
     bool processMonoPressureChanged(int channel, int value) override;
     bool processControllerChanged(int channel, int num, int value) override;
     bool processBendChanged(int channel, float value) override;
     bool processBendSensitivityChanged(int channel, float semitones) override;
+
+    // Following functions are executed by the audio server (thread 3)
+    void setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize);
+    void readData(float *dataL, float *dataR, quint32 maxlen);
 
 signals:
     void currentPosChanged(quint32 pos);

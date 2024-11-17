@@ -44,10 +44,11 @@ TRANSLATIONS = polyphone_en.ts \
     polyphone_ko.ts \
     polyphone_ca.ts \
     polyphone_pl.ts
+
 PRECOMPILED_HEADER = precompiled_header.h
 CONFIG += lrelease embed_translations precompiled_header
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
-QMAKE_CXXFLAGS += -std=c++17 -O3 -ffast-math -Wnan-infinity-disabled -msse2
+QMAKE_CXXFLAGS += -std=c++17 -O3 -ffast-math -msse2
 #QMAKE_CXXFLAGS += -std=c++17 -O3 -ffast-math -mcpu=cortex-a76
 
 QT += core gui printsupport svg network #testlib
