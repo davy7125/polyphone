@@ -22,8 +22,8 @@ DEFINES += USE_LOCAL_RTAUDIO
 #DEFINES += NO_SF2_CREATION
 
 # Polyphone version
-DEFINES += SOFT_VERSION=\\\"2.4.1\\\"
-DEFINES += IDENTIFIER=\\\"\\\"
+DEFINES += SOFT_VERSION=\\\"2.5.0\\\"
+DEFINES += IDENTIFIER=\\\"DEVEL\\\"
 DEFINES += CURRENT_YEAR=\\\"2024\\\"
 
 # List to be completed if other translations are desired
@@ -47,8 +47,8 @@ TRANSLATIONS = polyphone_en.ts \
 PRECOMPILED_HEADER = precompiled_header.h
 CONFIG += lrelease embed_translations precompiled_header
 QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
-QMAKE_CXXFLAGS += -std=c++17 -Ofast -Wnan-infinity-disabled -msse2
-#QMAKE_CXXFLAGS += -std=c++17 -Ofast -Wnan-infinity-disabled -mavx2 -msse4.1 -march=native
+QMAKE_CXXFLAGS += -std=c++17 -O3 -ffast-math -Wnan-infinity-disabled -msse2
+#QMAKE_CXXFLAGS += -std=c++17 -O3 -ffast-math -mcpu=cortex-a76
 
 QT += core gui printsupport svg network #testlib
 TARGET = polyphone
@@ -341,6 +341,7 @@ SOURCES	+= main.cpp \
     repository/soundfont/editor/soundfontfilecell.cpp \
     sound_engine/elements/liveeq.cpp \
     sound_engine/elements/osctriangle.cpp \
+    sound_engine/elements/recorder.cpp \
     sound_engine/modulatedparameter.cpp \
     sound_engine/synth.cpp \
     sound_engine/voice.cpp \
@@ -710,6 +711,7 @@ HEADERS += \
     repository/soundfont/editor/soundfontfilecell.h \
     sound_engine/elements/liveeq.h \
     sound_engine/elements/osctriangle.h \
+    sound_engine/elements/recorder.h \
     sound_engine/imidivalues.h \
     sound_engine/modulatedparameter.h \
     sound_engine/synth.h \

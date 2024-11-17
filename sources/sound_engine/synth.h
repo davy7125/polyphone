@@ -33,6 +33,7 @@
 #include "stk/Chorus.h"
 #include <QDataStream>
 #include "imidilistener.h"
+#include "recorder.h"
 class Soundfonts;
 class Soundfont;
 class InstPrst;
@@ -186,22 +187,15 @@ private:
     int _numberOfVoicesToAdd;
     static int s_sampleVoiceTokenCounter;
 
-    // Effects
+    // Effects / post-processing
     CalibrationSinus _sinus;
     LiveEQ _eq;
     stk::FreeVerb _reverb;
     stk::Chorus _chorusRevL, _chorusRevR, _chorusL, _chorusR;
     QMutex _mutexEffects;
-
-    // Record management
-    QFile * _recordFile;
-    QDataStream _recordStream;
-    volatile bool _isRecording;
-    QAtomicInt _isWritingInStream;
-    quint32 _recordLength;
+    Recorder _recorder;
 
     quint32 _bufferSize;
-    float * _dataWav;
 
     // Copy of the sound engine data
     float * _dataL, * _dataR, * _dataChoL, * _dataChoR,

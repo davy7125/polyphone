@@ -42,11 +42,7 @@ Synth::Synth(Soundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts) : QObje
     _soundEngines(nullptr),
     _soundEngineCount(0),
     _numberOfVoicesToAdd(0),
-    _recordFile(nullptr),
-    _isRecording(false),
-    _isWritingInStream(0),
     _bufferSize(0),
-    _dataWav(nullptr),
     _dataL(nullptr),
     _dataR(nullptr),
     _dataChoL(nullptr),
@@ -56,7 +52,7 @@ Synth::Synth(Soundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts) : QObje
     _dataChoRevL(nullptr),
     _dataChoRevR(nullptr)
 {
-
+    connect(&_recorder, SIGNAL(dataWritten(quint32,quint32)), this, SIGNAL(dataWritten(quint32,quint32)));
 }
 
 Synth::~Synth()
@@ -86,7 +82,6 @@ void Synth::destroySoundEnginesAndBuffers()
         delete thread;
     }
     delete [] _soundEngines;
-    delete [] _dataWav;
     delete [] _dataL;
     delete [] _dataR;
     delete [] _dataChoL;
@@ -102,15 +97,15 @@ void Synth::destroySoundEnginesAndBuffers()
 
 void Synth::createSoundEnginesAndBuffers()
 {
-    _dataWav = new float[_bufferSize * sizeof(float) * 2];
-    _dataL = new float[_bufferSize * sizeof(float)];
-    _dataR = new float[_bufferSize * sizeof(float)];
-    _dataChoL = new float[_bufferSize * sizeof(float)];
-    _dataChoR = new float[_bufferSize * sizeof(float)];
-    _dataRevL = new float[_bufferSize * sizeof(float)];
-    _dataRevR = new float[_bufferSize * sizeof(float)];
-    _dataChoRevL = new float[_bufferSize * sizeof(float)];
-    _dataChoRevR = new float[_bufferSize * sizeof(float)];
+    _recorder.setBufferSize(_bufferSize);
+    _dataL = new float[_bufferSize];
+    _dataR = new float[_bufferSize];
+    _dataChoL = new float[_bufferSize];
+    _dataChoR = new float[_bufferSize];
+    _dataRevL = new float[_bufferSize];
+    _dataRevR = new float[_bufferSize];
+    _dataChoRevL = new float[_bufferSize];
+    _dataChoRevR = new float[_bufferSize];
 
     _soundEngineCount = qMax(QThread::idealThreadCount(), 1);
     _soundEngines = new SoundEngine * [_soundEngineCount];
@@ -495,96 +490,6 @@ bool Synth::processBendSensitivityChanged(int channel, float semitones)
     return false;
 }
 
-void Synth::startNewRecord(QString fileName)
-{
-    if (_recordFile)
-        this->endRecord();
-
-    _recordFile = new QFile(fileName);
-    if (_recordFile->open(QIODevice::WriteOnly))
-    {
-        // Create header
-        quint32 dwTemp = 0;
-        quint16 wTemp;
-        _recordStream.setDevice(_recordFile);
-        _recordStream.setByteOrder(QDataStream::LittleEndian);
-        _recordLength = 0;
-
-        // Write it
-        _recordStream.writeRawData("RIFF", 4);
-        _recordStream << static_cast<quint32>(_recordLength + 18 + 4 + 8 + 8);
-        _recordStream.writeRawData("WAVE", 4);
-
-        ///////////// BLOC FMT /////////////
-        _recordStream.writeRawData("fmt ", 4);
-        dwTemp = 18;
-        _recordStream << dwTemp;
-        // Compression code
-        wTemp = 3;
-        _recordStream << wTemp;
-        // Number of channels
-        wTemp = 2;
-        _recordStream << wTemp;
-        // Sample rate
-        dwTemp = _internalConfiguration.sampleRate;
-        _recordStream << dwTemp;
-        // Average byte per second
-        dwTemp *= 2 * 4;
-        _recordStream << dwTemp;
-        // Block align
-        wTemp = 2 * 4;
-        _recordStream << wTemp;
-        // Significants bits per smpl
-        _recordStream << static_cast<quint16>(32);
-        // Extra format bytes
-        wTemp = 0;
-        _recordStream << wTemp;
-
-        ///////////// BLOC DATA /////////////
-        _recordStream.writeRawData("data", 4);
-        _recordStream << _recordLength;
-
-        _isRecording = true;
-    }
-    else
-    {
-        delete _recordFile;
-        _recordFile = nullptr;
-    }
-}
-
-void Synth::endRecord()
-{
-    _isRecording = false;
-
-    // Possibly wait if another thread is writing
-    while (!_isWritingInStream.testAndSetRelaxed(0, 1))
-        QThread::msleep(5);
-
-    if (_recordFile)
-    {
-        // Adjust file dimensions
-        _recordFile->seek(4);
-        _recordStream << static_cast<quint32>(_recordLength + 18 + 4 + 8 + 8);
-        _recordFile->seek(42);
-        _recordStream << _recordLength;
-
-        // Close file
-        _recordStream.setDevice(nullptr);
-        _recordFile->close();
-        delete _recordFile;
-        _recordFile = nullptr;
-    }
-
-    // We are not writing anymore
-    _isWritingInStream.storeRelaxed(0);
-}
-
-void Synth::pause(bool isOn)
-{
-    _isRecording = !isOn;
-}
-
 void Synth::readData(float * dataL, float * dataR, quint32 maxlen)
 {
     if (_soundEngineCount == 0)
@@ -630,28 +535,8 @@ void Synth::readData(float * dataL, float * dataR, quint32 maxlen)
             dataR[i] = -1.0f;
     }
 
-    // Possibly record in a file
-    if (_isRecording)
-    {
-        // If someone else is writing, do nothing
-        if (_recordFile && _isWritingInStream.testAndSetRelaxed(0, 1))
-        {
-            // Interleave and write
-            for (quint32 i = 0; i < maxlen; i++)
-            {
-                _dataWav[2 * i + 1] = dataL[i];
-                _dataWav[2 * i] = dataR[i];
-            }
-            _recordStream.writeRawData(reinterpret_cast<char*>(_dataWav), static_cast<int>(maxlen * 8));
-
-            // Prise en compte de l'avance
-            _recordLength += maxlen * 8;
-            emit dataWritten(_internalConfiguration.sampleRate, maxlen);
-
-            // We are not writing anymore
-            _isWritingInStream.storeRelaxed(0);
-        }
-    }
+    // Possible recording
+    _recorder.process(dataL, dataR, maxlen);
 }
 
 void Synth::gatherSoundEngineData(quint32 maxlen)
@@ -734,4 +619,20 @@ void Synth::applyChoRev(float * dataL, float * dataR, quint32 maxlen)
         dataL[i] += _dataL[i];
     for (quint32 i = 0; i < maxlen; i++)
         dataR[i] += _dataR[i];
+}
+
+
+void Synth::startNewRecord(QString fileName)
+{
+    _recorder.startNewRecord(fileName, _internalConfiguration.sampleRate);
+}
+
+void Synth::endRecord()
+{
+    _recorder.endRecord();
+}
+
+void Synth::pause(bool isOn)
+{
+    _recorder.pause(isOn);
 }
