@@ -35,13 +35,13 @@
 
 int Synth::s_sampleVoiceTokenCounter = 0;
 
-// Constructeur, destructeur
 Synth::Synth(Soundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts) : QObject(nullptr),
     _soundfonts(soundfonts),
     _mutexSoundfonts(mutexSoundfonts),
     _soundEngines(nullptr),
     _soundEngineCount(0),
     _numberOfVoicesToAdd(0),
+    _effectsInUse(0),
     _bufferSize(0),
     _dataL(nullptr),
     _dataR(nullptr),
@@ -317,7 +317,13 @@ void Synth::configure(SynthConfig * configuration)
     _configuration.copy(configuration);
 
     // Update reverb and chorus
-    _mutexEffects.lock();
+
+    // Possibly wait if another thread is using the reverb or the chorus
+    _internalConfiguration.reverbOn = false;
+    _internalConfiguration.chorusOn = false;
+    while (!_effectsInUse.testAndSetRelaxed(0, 1))
+        QThread::msleep(2);
+
     _internalConfiguration.reverbOn = _configuration.revLevel > 0;
     _reverb.setEffectMix(0.01 * _configuration.revLevel);
     _reverb.setRoomSize(0.01 * _configuration.revSize);
@@ -337,7 +343,7 @@ void Synth::configure(SynthConfig * configuration)
     _chorusR.setEffectMix(0.005 * _configuration.choLevel);
     _chorusR.setModDepth(0.00025 * _configuration.choDepth);
     _chorusR.setModFrequency(0.06667 * _configuration.choFrequency);
-    _mutexEffects.unlock();
+    _effectsInUse.storeRelaxed(0);
 
     // Update the tuning fork and temperament
     Voice::setTuningFork(_configuration.tuningFork);
@@ -451,7 +457,6 @@ void Synth::setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize)
     }
 }
 
-
 bool Synth::processKey(int channel, int key, int vel)
 {
     Q_UNUSED(channel)
@@ -529,6 +534,9 @@ void Synth::readData(float * dataL, float * dataR, quint32 maxlen)
             dataL[i] = 1.0f;
         else if (dataL[i] < -1.0f)
             dataL[i] = -1.0f;
+    }
+    for (unsigned int i = 0; i < maxlen; ++i)
+    {
         if (dataR[i] > 1.0f)
             dataR[i] = 1.0f;
         else if (dataR[i] < -1.0f)
@@ -564,14 +572,14 @@ void Synth::gatherSoundEngineData(quint32 maxlen)
 
 void Synth::applyChoRev(float * dataL, float * dataR, quint32 maxlen)
 {
-    if (_internalConfiguration.chorusOn || _internalConfiguration.reverbOn)
-        _mutexEffects.lock();
-
     // Copy the data rev + chorus
     memcpy(dataL, _dataChoRevL, maxlen * sizeof(float));
     memcpy(dataR, _dataChoRevR, maxlen * sizeof(float));
 
-    if (_internalConfiguration.chorusOn)
+    bool lockAcquired = false;
+    if (_internalConfiguration.chorusOn || _internalConfiguration.reverbOn)
+        lockAcquired = _effectsInUse.testAndSetRelaxed(0, 1);
+    if (_internalConfiguration.chorusOn && lockAcquired)
     {
         // Apply chorus
         for (quint32 i = 0; i < maxlen; i++)
@@ -586,7 +594,7 @@ void Synth::applyChoRev(float * dataL, float * dataR, quint32 maxlen)
     for (quint32 i = 0; i < maxlen; i++)
         dataR[i] += _dataRevR[i];
 
-    if (_internalConfiguration.reverbOn)
+    if (_internalConfiguration.reverbOn && lockAcquired)
     {
         // Apply reverb
         for (quint32 i = 0; i < maxlen; i++)
@@ -597,7 +605,7 @@ void Synth::applyChoRev(float * dataL, float * dataR, quint32 maxlen)
     }
 
     // Add the data cho, process the effect first
-    if (_internalConfiguration.chorusOn)
+    if (_internalConfiguration.chorusOn && lockAcquired)
     {
         // Apply chorus
         for (quint32 i = 0; i < maxlen; i++)
@@ -606,13 +614,13 @@ void Synth::applyChoRev(float * dataL, float * dataR, quint32 maxlen)
             _dataChoR[i] = static_cast<float>(_chorusR.tick(static_cast<double>(_dataChoR[i])));
     }
 
+    if (lockAcquired)
+        _effectsInUse.storeRelaxed(0);
+
     for (quint32 i = 0; i < maxlen; i++)
         dataL[i] += _dataChoL[i];
     for (quint32 i = 0; i < maxlen; i++)
         dataR[i] += _dataChoR[i];
-
-    if (_internalConfiguration.chorusOn || _internalConfiguration.reverbOn)
-        _mutexEffects.unlock();
 
     // Add the data with no effects
     for (quint32 i = 0; i < maxlen; i++)

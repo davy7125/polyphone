@@ -114,7 +114,7 @@ void Recorder::endRecord()
 
     // Possibly wait if another thread is writing
     while (!_isWritingInStream.testAndSetRelaxed(0, 1))
-        QThread::msleep(5);
+        QThread::msleep(2);
 
     if (_recordFile)
     {

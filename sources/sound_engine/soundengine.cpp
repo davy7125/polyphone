@@ -84,10 +84,9 @@ SoundEngine::~SoundEngine()
 void SoundEngine::finalize()
 {
     for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
-    {
         delete s_voices[i];
+    for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
         delete s_voiceParameters[i];
-    }
 }
 
 void SoundEngine::addVoices(VoiceInitializer * voiceInitializers, int numberOfVoicesToAdd, SynthConfig * config, SynthInternalConfig * internalConfig)

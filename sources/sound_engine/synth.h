@@ -192,7 +192,7 @@ private:
     LiveEQ _eq;
     stk::FreeVerb _reverb;
     stk::Chorus _chorusRevL, _chorusRevR, _chorusL, _chorusR;
-    QMutex _mutexEffects;
+    QAtomicInt _effectsInUse;
     Recorder _recorder;
 
     quint32 _bufferSize;
