@@ -50,9 +50,8 @@ VoiceList::~VoiceList()
         delete _voiceParameters[i];
 }
 
-void VoiceList::initialize(Synth * synth, int threadCount)
+void VoiceList::initialize(Synth * synth)
 {
-    _threadCount = threadCount;
     for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
     {
         _voiceParameters[i] = new VoiceParam();

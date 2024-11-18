@@ -26,7 +26,6 @@
 #ifndef SOUNDENGINE_H
 #define SOUNDENGINE_H
 
-#include <QSemaphore>
 #include <QMutex>
 #include <QObject>
 class VoiceList;
@@ -36,13 +35,14 @@ class SoundEngine: public QObject
     Q_OBJECT
 
 public:
-    SoundEngine(QSemaphore * semRunning, quint32 bufferSize);
+    SoundEngine(quint32 bufferSize);
     virtual ~SoundEngine() override;
     static void initialize(VoiceList * voices) { s_voices = voices; }
 
     // Data generation
     void stop();
     void prepareData(quint32 len);
+    void endCurrentProcessing();
 
     // Get the result
     void setData(float * dataL, float * dataR, float * dataChoL, float * dataChoR,
@@ -60,7 +60,7 @@ private:
     float * _dataL, * _dataR, * _dataRevL, * _dataRevR, * _dataChoL, * _dataChoR, * _dataChoRevL, * _dataChoRevR;
 
     volatile bool _interrupted;
-    QSemaphore * _semRunning;
+    QAtomicInt _runningState; // 0: ready (waiting), 1: running, 2: pause required, 3: pause and continue
     QMutex _mutexSynchro;
     volatile quint32 _lenToPrepare;
 

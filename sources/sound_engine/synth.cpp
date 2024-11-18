@@ -53,6 +53,7 @@ Synth::Synth(Soundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts) : QObje
     _dataChoRevR(nullptr)
 {
     connect(&_recorder, SIGNAL(dataWritten(quint32,quint32)), this, SIGNAL(dataWritten(quint32,quint32)));
+    _voices.initialize(this);
 }
 
 Synth::~Synth()
@@ -110,14 +111,14 @@ void Synth::createSoundEnginesAndBuffers()
 
     for (int i = 0; i < _soundEngineCount; i++)
     {
-        SoundEngine * soundEngine = new SoundEngine(&_semRunningSoundEngines, _bufferSize);
+        SoundEngine * soundEngine = new SoundEngine(_bufferSize);
         soundEngine->moveToThread(new QThread());
         soundEngine->thread()->start(QThread::TimeCriticalPriority);
         QMetaObject::invokeMethod(soundEngine, "start");
         _soundEngines[i] = soundEngine;
     }
 
-    _voices.initialize(this, _soundEngineCount);
+    _voices.setThreadCount(_soundEngineCount);
     SoundEngine::initialize(&this->_voices);
 
     // Start producing data
@@ -692,14 +693,15 @@ void Synth::readData(float * dataL, float * dataR, quint32 maxlen)
         return;
     }
 
-    // Stop the current computation, in case it's not finished yet
+    // No more voice processing (will not stop immediately)
     _voices.endComputation();
-    _semRunningSoundEngines.acquire(_soundEngineCount);
+    for (int i = 0; i < _soundEngineCount; ++i)
+        _soundEngines[i]->endCurrentProcessing();
 
-    // Get the data of all sound engines
+    // Get the data of all sound engines, even if they are still working
     gatherSoundEngineData(maxlen);
 
-    // Wake up the sound engines (as soon as possible)
+    // Tell the sound engines to restart (or continue) the processing
     _voices.prepareComputation();
     for (int i = 0; i < _soundEngineCount; ++i)
         _soundEngines[i]->prepareData(maxlen);

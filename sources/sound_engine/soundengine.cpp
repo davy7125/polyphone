@@ -30,9 +30,9 @@
 
 VoiceList * SoundEngine::s_voices = nullptr;
 
-SoundEngine::SoundEngine(QSemaphore * semRunning, quint32 bufferSize) : QObject(),
+SoundEngine::SoundEngine(quint32 bufferSize) : QObject(),
     _interrupted(false),
-    _semRunning(semRunning)
+    _runningState(0)
 {
     _dataL = new float[bufferSize];
     _dataR = new float[bufferSize];
@@ -66,7 +66,10 @@ void SoundEngine::start()
     // Generate and copy data into the buffer after each reading
     while (true)
     {
-        _mutexSynchro.lock();
+        // Lock not needed if the running state if 3
+        if (!_runningState.testAndSetRelaxed(3, 1))
+            _mutexSynchro.lock();
+
         if (_interrupted)
         {
             _mutexSynchro.unlock();
@@ -75,7 +78,6 @@ void SoundEngine::start()
 
         // Generate data
         generateData(_lenToPrepare);
-        _semRunning->release();
     }
 }
 
@@ -89,7 +91,18 @@ void SoundEngine::stop()
 void SoundEngine::prepareData(quint32 len)
 {
     _lenToPrepare = len;
-    _mutexSynchro.unlock();
+    if (_runningState.testAndSetRelaxed(2, 3))
+    {
+        // Nothing else to do, unlock not needed since the mutex will not be locked
+    }
+    else if (_runningState.testAndSetRelaxed(0, 1))
+        _mutexSynchro.unlock();
+}
+
+void SoundEngine::endCurrentProcessing()
+{
+    // Can be paused only if running
+    _runningState.testAndSetRelaxed(1, 2);
 }
 
 void SoundEngine::generateData(quint32 len)
@@ -99,8 +112,24 @@ void SoundEngine::generateData(quint32 len)
     Voice * voice;
     float tmp, coefR, coefL, coefRev, coefNonRev, coefCho, coefNonCho;
     quint32 i;
-    while ((voice = s_voices->getNextVoiceToCompute()) != nullptr)
+    while (true)
     {
+        voice = s_voices->getNextVoiceToCompute();
+        if (voice == nullptr)
+        {
+            _runningState.storeRelaxed(0);
+            break;
+        }
+        else
+        {
+            // If paused, go to the ready state et quit the loop
+            int currentValue;
+            if (_runningState.testAndSetRelaxed(2, 0, currentValue))
+                return;
+            if (currentValue == 3)
+                return;
+        }
+
         // Get data
         voice->generateData(_dataTmp, len);
 

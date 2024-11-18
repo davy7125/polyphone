@@ -36,7 +36,8 @@ class VoiceList
 public:
     VoiceList();
     ~VoiceList();
-    void initialize(Synth * synth, int threadCount);
+    void initialize(Synth * synth);
+    void setThreadCount(int threadCount) { _threadCount = threadCount; }
 
     // Prepare multiple voice and then add them
     Voice * getVoiceToPrepare();

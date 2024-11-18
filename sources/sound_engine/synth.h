@@ -193,7 +193,6 @@ private:
 
     // Voices and sound engines
     VoiceList _voices;
-    QSemaphore _semRunningSoundEngines;
     SoundEngine ** _soundEngines;
     int _soundEngineCount;
     static int s_sampleVoiceTokenCounter;
