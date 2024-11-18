@@ -63,53 +63,98 @@ void OscTriangle::getData(float * data, quint32 len, float freq, float delay)
 
         if (qAbs(_previousFreq - freq) > 0)
         {
-            float delta2;
-            delta2 = _fourInvSampleRate * freq;
-            if (_delta < 0)
-                delta2 = -delta2;
-
             float progDelta;
             float invTmp = 1.0f / static_cast<float>(len - total);
-            for (quint32 i = total; i < len; i++)
+            float delta2;
+            delta2 = _fourInvSampleRate * freq;
+            int totalInit = total;
+            if (_delta < 0)
             {
-                progDelta = (static_cast<float>(len - i) * _delta + static_cast<float>(i - total) * delta2) * invTmp;
-                data[i] = _previousPoint + progDelta;
-                if (data[i] > 1.0f)
-                {
-                    data[i] = 2.0f - data[i];
-                    _delta = -_delta;
-                    delta2 = -delta2;
-                }
-                else if (data[i] < -1.0f)
-                {
-                    data[i] = -2.0f - data[i];
-                    _delta = -_delta;
-                    delta2 = -delta2;
-                }
-                _previousPoint = data[i];
+                delta2 = -delta2;
+                goto down1;
             }
 
+        up1:
+            while (total < len)
+            {
+                progDelta = (static_cast<float>(len - total) * _delta + static_cast<float>(total - totalInit) * delta2) * invTmp;
+                data[total] = _previousPoint + progDelta;
+
+                if (data[total] > 1.0f)
+                {
+                    data[total] = 2.0f - data[total];
+                    _delta = -_delta;
+                    delta2 = -delta2;
+                    _previousPoint = data[total++];
+                    goto down1;
+                }
+
+                _previousPoint = data[total++];
+            }
+            goto end1;
+
+        down1:
+            while (total < len)
+            {
+                progDelta = (static_cast<float>(len - total) * _delta + static_cast<float>(total - totalInit) * delta2) * invTmp;
+                data[total] = _previousPoint + progDelta;
+
+                if (data[total] < -1.0f)
+                {
+                    data[total] = -2.0f - data[total];
+                    _delta = -_delta;
+                    delta2 = -delta2;
+                    _previousPoint = data[total++];
+                    goto up1;
+                }
+
+                _previousPoint = data[total++];
+            }
+            goto end1;
+
+        end1:
             // Update values
             _delta = delta2;
             _previousFreq = freq;
         }
         else
         {
-            for (quint32 i = total; i < len; i++)
+            if (_delta < 0)
+                goto down2;
+
+        up2:
+            while (total < len)
             {
-                data[i] = _previousPoint + _delta;
-                if (data[i] > 1.0f)
+                data[total] = _previousPoint + _delta;
+
+                if (data[total] > 1.0f)
                 {
-                    data[i] = 2.0f - data[i];
+                    data[total] = 2.0f - data[total];
                     _delta = -_delta;
+                    _previousPoint = data[total++];
+                    goto down2;
                 }
-                else if (data[i] < -1.0f)
-                {
-                    data[i] = -2.0f - data[i];
-                    _delta = -_delta;
-                }
-                _previousPoint = data[i];
+
+                _previousPoint = data[total++];
             }
+            return;
+
+        down2:
+            while (total < len)
+            {
+                data[total] = _previousPoint + _delta;
+
+                if (data[total] < -1.0f)
+                {
+                    data[total] = -2.0f - data[total];
+                    _delta = -_delta;
+                    _previousPoint = data[total++];
+                    goto up2;
+                }
+
+                _previousPoint = data[total++];
+            }
+            return;
         }
     }
 }

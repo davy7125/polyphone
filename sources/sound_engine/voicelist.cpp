@@ -138,7 +138,7 @@ void VoiceList::prepareComputation()
         _maxPossibleVoicesToCompute -= 2;
 
     // Minimum number of voices to close
-    int numberOfVoicesToClose = _uncomputedVoiceCount > 0 ? _uncomputedVoiceCount : 0;
+    int numberOfVoicesToClose = _uncomputedVoiceCount > 0 ? _uncomputedVoiceCount + (_additionIndex - _lastRunningIndex) & VOICE_INDEX_MASK : 0;
     if (voiceCount - numberOfVoicesToClose < _maxPossibleVoicesToCompute)
         numberOfVoicesToClose = voiceCount - _maxPossibleVoicesToCompute;
 

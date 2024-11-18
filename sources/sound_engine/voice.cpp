@@ -264,14 +264,8 @@ void Voice::generateData(float * data, quint32 len)
 
         // Low-pass filter
         for (quint32 i = 0; i < len; i++)
-        {
             _modFreqArray[i] = v_filterFreq *
                                EnveloppeVol::fastPow2((_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) * 0.000833333f /* 1:1200 */);
-            if (_modFreqArray[i] > 0.5f * _audioSmplRate)
-                _modFreqArray[i] = 0.5f * _audioSmplRate;
-            else if (_modFreqArray[i] < 20.0f)
-                _modFreqArray[i] = 20.0f;
-        }
         float a0, a1, a2, b1, b2, valTmp;
         float filterQ = v_filterQ - 3.01f; // So that a value of 0 gives a non-resonant low pass
         float inv_q_lin = fastPow10(-0.05f * filterQ); // If filterQ is -3.01, inv_q_lin is sqrt(2)
