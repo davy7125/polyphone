@@ -38,7 +38,8 @@ VoiceList::VoiceList() :
     _maxPossibleVoicesToCompute(2),
     _uncomputedVoiceCount(0)
 {
-
+    memset(_voices, 0, MAX_NUMBER_OF_VOICES * sizeof(Voice *));
+    memset(_voiceParameters, 0, MAX_NUMBER_OF_VOICES * sizeof(VoiceParam *));
 }
 
 VoiceList::~VoiceList()
@@ -142,18 +143,57 @@ void VoiceList::prepareComputation()
     if (voiceCount - numberOfVoicesToClose < _maxPossibleVoicesToCompute)
         numberOfVoicesToClose = voiceCount - _maxPossibleVoicesToCompute;
 
-    // Include the added voices
-    _lastRunningIndex = _additionIndex;
+    // Gather the exclusive class close commands
+    _closeCommandNumber = 0;
+    VoiceParam * voiceParam;
+    int exclusiveClass;
+    for (int index = _lastRunningIndex; index != _additionIndex; index = (index + 1) & VOICE_INDEX_MASK)
+    {
+        voiceParam = _voices[index]->getParam();
+        if (voiceParam->getType() != 0)
+            continue;
 
-    // Voices ended?
+        exclusiveClass = voiceParam->getInteger(champ_exclusiveClass);
+        if (exclusiveClass != 0)
+        {
+            _closeCommands[_closeCommandNumber].channel = voiceParam->getChannel();
+            _closeCommands[_closeCommandNumber].exclusiveClass = exclusiveClass;
+            _closeCommands[_closeCommandNumber].numPreset = voiceParam->getPresetId();
+            _closeCommandNumber++;
+        }
+    }
+
+    // End of voices
     Voice * voice;
+    bool quickRelease, close;
     for (int index = first; index != last; index = (index + 1) & VOICE_INDEX_MASK)
     {
         voice = _voices[index];
-        if (voice->isFinished() || (numberOfVoicesToClose > 0 && voice->isInRelease()))
+        voiceParam = voice->getParam();
+
+        close = voice->isFinished() || (numberOfVoicesToClose > 0 && voice->isInRelease());
+        quickRelease = false;
+
+        if (!close)
+        {
+            // Maybe a quick release?
+            for (int  i = 0; i < _closeCommandNumber; i++)
+            {
+                if (_closeCommands[i].channel == voiceParam->getChannel() &&
+                    _closeCommands[i].numPreset == voiceParam->getPresetId() &&
+                    _closeCommands[i].exclusiveClass == voiceParam->getInteger(champ_exclusiveClass))
+                {
+                    close = numberOfVoicesToClose > 0;
+                    quickRelease = true;
+                    break;
+                }
+            }
+        }
+
+        if (close)
         {
             // Signal emitted for the sample player (voice -1)
-            if (voice->getParam()->getKey() == -1)
+            if (voiceParam->getKey() == -1)
                 voice->triggerReadFinishedSignal();
 
             Voice * voiceTmp = _voices[index];
@@ -163,7 +203,12 @@ void VoiceList::prepareComputation()
 
             --numberOfVoicesToClose;
         }
+        else if (quickRelease)
+            voice->release(true);
     }
+
+    // Include the added voices
+    _lastRunningIndex = _additionIndex;
 
     // Remove first voices if more of them must be closed
     if (numberOfVoicesToClose > 0)
@@ -194,4 +239,3 @@ Voice * VoiceList::getNextVoiceToCompute()
 
     return _voices[voiceIndex];
 }
-

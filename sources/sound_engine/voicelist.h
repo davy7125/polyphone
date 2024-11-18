@@ -63,6 +63,16 @@ private:
     QAtomicInt _lastRunningIndex;
     int _maxPossibleVoicesToCompute;
     int _uncomputedVoiceCount;
+
+    // Exclusive class management
+    struct ExclusiveClassCloseCommand
+    {
+        short channel;
+        unsigned short numPreset;
+        int exclusiveClass;
+    };
+    ExclusiveClassCloseCommand _closeCommands[MAX_NUMBER_OF_VOICES];
+    unsigned short _closeCommandNumber;
 };
 
 #endif // VOICELIST_H
