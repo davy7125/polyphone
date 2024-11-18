@@ -56,8 +56,8 @@ void VoiceList::initialize(Synth * synth)
     {
         _voiceParameters[i] = new VoiceParam();
         _voices[i] = new Voice(_voiceParameters[i]);
-        _voices[i]->connect(synth, SIGNAL(currentPosChanged(quint32)), SIGNAL(currentPosChanged(quint32)));
-        _voices[i]->connect(synth, SIGNAL(readFinished(int)), SIGNAL(readFinished(int)));
+        QObject::connect(_voices[i], SIGNAL(currentPosChanged(quint32)), synth, SIGNAL(currentPosChanged(quint32)));
+        QObject::connect(_voices[i], SIGNAL(readFinished(int)), synth, SIGNAL(readFinished(int)));
     }
 }
 

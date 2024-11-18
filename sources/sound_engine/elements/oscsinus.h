@@ -36,7 +36,7 @@ public:
     void getData(float *data, quint32 len, float freq = -1.0f);
 
 private:
-    quint32 _sampleRate;
+    float _invSampleRate;
     float _previousFreq;
     float _posPrec, _posPrecQuad;
     float _theta, _epsilon;

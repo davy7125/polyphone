@@ -27,7 +27,7 @@
 
 
 OscSinus::OscSinus(quint32 sampleRate) :
-    _sampleRate(sampleRate),
+    _invSampleRate(1.0f / static_cast<float>(sampleRate)),
     _previousFreq(-1)
 {
 }
@@ -66,10 +66,11 @@ void OscSinus::getData(float * data, quint32 len, float freq)
         computeEpsilon(freq, theta2, epsilon2);
 
         float progEpsilon;
+        float coef1 = _epsilon / (len - total);
+        float coef2 = epsilon2 / (len - total);
         for (quint32 i = total; i < len; i++)
         {
-            progEpsilon = static_cast<float>(len - i) / (len - total) * _epsilon
-                    + static_cast<float>(i - total) / (len - total) * epsilon2;
+            progEpsilon = static_cast<float>(len - i) * coef1 + static_cast<float>(i - total) * coef2;
             _posPrecQuad -= progEpsilon * _posPrec;
             _posPrec     += progEpsilon * _posPrecQuad;
             data[i] = _posPrec;
@@ -84,6 +85,6 @@ void OscSinus::getData(float * data, quint32 len, float freq)
 
 void OscSinus::computeEpsilon(float freq, float &theta, float &epsilon)
 {
-    theta = 2.f * static_cast<float>(M_PI) * freq / _sampleRate;
+    theta = 2.f * static_cast<float>(M_PI) * freq * _invSampleRate;
     epsilon = 2.f * static_cast<float>(qSin(static_cast<double>(theta) / 2.));
 }
