@@ -32,6 +32,7 @@
 #include "division.h"
 #include "smpl.h"
 #include "parametermodulator.h"
+#include "voice.h"
 
 int Synth::s_sampleVoiceTokenCounter = 0;
 
@@ -40,7 +41,6 @@ Synth::Synth(Soundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts) : QObje
     _mutexSoundfonts(mutexSoundfonts),
     _soundEngines(nullptr),
     _soundEngineCount(0),
-    _numberOfVoicesToAdd(0),
     _effectsInUse(0),
     _bufferSize(0),
     _dataL(nullptr),
@@ -90,9 +90,6 @@ void Synth::destroySoundEnginesAndBuffers()
     delete [] _dataRevR;
     delete [] _dataChoRevL;
     delete [] _dataChoRevR;
-
-    // Delete voices
-    SoundEngine::finalize();
 }
 
 void Synth::createSoundEnginesAndBuffers()
@@ -120,7 +117,8 @@ void Synth::createSoundEnginesAndBuffers()
         _soundEngines[i] = soundEngine;
     }
 
-    SoundEngine::initialize(this);
+    _voices.initialize(this, _soundEngineCount);
+    SoundEngine::initialize(&this->_voices);
 
     // Start producing data
     for (int i = 0; i < _soundEngineCount; i++)
@@ -134,7 +132,7 @@ int Synth::play(EltID id, int channel, int key, int velocity)
     // Possibly release voices
     if (velocity == 0)
     {
-        SoundEngine::releaseVoices(id.indexSf2, id.indexElt, channel, key);
+        releaseVoices(id.indexSf2, id.indexElt, channel, key);
         return -1;
     }
 
@@ -144,9 +142,6 @@ int Synth::play(EltID id, int channel, int key, int velocity)
     Soundfont * soundfont = _soundfonts->getSoundfont(id.indexSf2);
     if (soundfont == nullptr)
         return -1;
-
-    // Reset the number of voices to add
-    _numberOfVoicesToAdd = 0;
 
     // A key is pressed
     int playingToken = -1;
@@ -187,8 +182,8 @@ int Synth::play(EltID id, int channel, int key, int velocity)
         return -1;
     }
 
-    // Add all voices to the sound engines
-    SoundEngine::addVoices(_voiceInitializers, _numberOfVoicesToAdd, &_configuration, &_internalConfiguration);
+    // Prepared voices are now ready to be computed
+    _voices.addPreparedVoices();
 
     return playingToken;
 }
@@ -285,30 +280,126 @@ int Synth::playSmpl(Smpl * smpl, int channel, int key, int velocity, bool other,
     smpl->_sound.loadInRam();
 
     int currentToken = s_sampleVoiceTokenCounter++;
-    if (_numberOfVoicesToAdd >= MAX_NUMBER_OF_VOICES_TO_ADD)
+
+    // Get a new voice to prepare
+    Voice * voice = _voices.getVoiceToPrepare();
+    if (voice == nullptr) // Maybe nothing else can be added
         return currentToken;
 
-    // Prepare the parameters for the voice
-    _voiceInitializers[_numberOfVoicesToAdd].prst = prst;
-    _voiceInitializers[_numberOfVoicesToAdd].prstDiv = prstDiv;
-    _voiceInitializers[_numberOfVoicesToAdd].inst = inst;
-    _voiceInitializers[_numberOfVoicesToAdd].instDiv = instDiv;
-    _voiceInitializers[_numberOfVoicesToAdd].smpl = smpl;
-    _voiceInitializers[_numberOfVoicesToAdd].channel = channel;
-    _voiceInitializers[_numberOfVoicesToAdd].key = key;
-    _voiceInitializers[_numberOfVoicesToAdd].vel = velocity;
-    _voiceInitializers[_numberOfVoicesToAdd].type = inst == nullptr ? (other ? 2 : 1) : 0;
-    _voiceInitializers[_numberOfVoicesToAdd].audioSmplRate = _internalConfiguration.sampleRate;
-    _voiceInitializers[_numberOfVoicesToAdd].token = currentToken;
-    _numberOfVoicesToAdd++;
+    // Configure it
+    voice->initialize(prst, prstDiv, inst, instDiv, smpl,
+                      channel, key, velocity, inst == nullptr ? (other ? 2 : 1) : 0,
+                      _internalConfiguration.sampleRate, currentToken);
+    configureVoice(voice);
 
     return currentToken;
+}
+
+void Synth::configureVoice(Voice * voice)
+{
+    // Loop / gain
+    VoiceParam * voiceParam = voice->getParam();
+    if (voiceParam->getType() == 0)
+    {
+        // Sample triggered from the instrument or preset level
+        voice->setGain(_configuration.masterGain);
+    }
+    else
+    {
+        // Sample triggered from the sample level
+        voiceParam->setLoopMode(_internalConfiguration.smplIsLoopEnabled ? 1 : 0);
+
+        float pan = voiceParam->getFloat(champ_pan);
+        if (_internalConfiguration.smplIsStereoEnabled)
+        {
+            if (pan < 0)
+                voiceParam->setPan(-50.0f);
+            else if (pan > 0.0f)
+                voiceParam->setPan(50.0f);
+
+            voice->setGain(_configuration.masterGain + _internalConfiguration.smplGain);
+        }
+        else
+        {
+            if (pan < 0.0f)
+                voiceParam->setPan(-1.0f);
+            else if (pan > 0.0f)
+                voiceParam->setPan(1.0f);
+
+            voice->setGain(voiceParam->getType() == 1 ? _configuration.masterGain + _internalConfiguration.smplGain : -1000.0f);
+        }
+    }
+}
+
+void Synth::configureVoices()
+{
+    Voice ** voices1, ** voices2;
+    int count1, count2;
+    _voices.getVoices(voices1, count1, voices2, count2);
+
+    Voice * voice;
+    for (int i = 0; i < count1 + count2; ++i)
+    {
+        voice = i < count1 ? voices1[i] : voices2[i - count1];
+        configureVoice(voice);
+    }
+}
+
+void Synth::releaseVoices(int sf2Id, int presetId, int channel, int key)
+{
+    Voice ** voices1, ** voices2;
+    int count1, count2;
+    _voices.getVoices(voices1, count1, voices2, count2);
+
+    Voice * voice;
+    VoiceParam * voiceParam;
+    for (int i = 0; i < count1 + count2; ++i)
+    {
+        voice = i < count1 ? voices1[i] : voices2[i - count1];
+        voiceParam = voice->getParam();
+
+        // Channel filter
+        if (channel != -2 && voiceParam->getChannel() != channel)
+            continue;
+
+        // Sf2 filter
+        if (sf2Id != -1 && voiceParam->getSf2Id() != sf2Id)
+            continue;
+
+        // Preset filter
+        if (presetId != -1 && voiceParam->getPresetId() != -1 && voiceParam->getPresetId() != presetId)
+            continue;
+
+        // Key filter
+        if (key != -2 && (key != -1 || voiceParam->getKey() >= 0) && voiceParam->getKey() != key)
+            continue;
+
+        voice->release();
+    }
 }
 
 void Synth::stop(bool allChannels)
 {
     // Stop required for all voices
-    SoundEngine::stopAllVoices(allChannels);
+    releaseVoices(-1, -1, allChannels ? -2 : -1, -2);
+
+    //Voice ** voices1, ** voices2;
+    //int count1, count2;
+    //_voices.getVoices(voices1, count1, voices2, count2);
+    // for (int i = s_numberOfVoices - 1; i >= 0; i--)
+    // {
+    //     if (allChannels || s_voices[i]->getChannel() == -1)
+    //     {
+    //         // Signal emitted for the sample player (voice -1)
+    //         if (s_voices[i]->getKey() == -1)
+    //             s_voices[i]->triggerReadFinishedSignal();
+
+    //         --s_numberOfVoices;
+    //         Voice * voiceTmp = s_voices[s_numberOfVoices];
+    //         s_voices[s_numberOfVoices] = s_voices[i];
+    //         s_voices[i] = voiceTmp;
+    //     }
+    // }
 }
 
 void Synth::configure(SynthConfig * configuration)
@@ -373,14 +464,14 @@ void Synth::setSampleGain(double gain)
 {
     // Modification du gain des samples
     _internalConfiguration.smplGain = gain;
-    SoundEngine::configureVoices(&_configuration, &_internalConfiguration);
+    configureVoices();
 }
 
 void Synth::setStereo(bool isStereoEnabled)
 {
     // Enable the stereo when playing a sample
     _internalConfiguration.smplIsStereoEnabled = isStereoEnabled;
-    SoundEngine::configureVoices(&_configuration, &_internalConfiguration);
+    configureVoices();
 }
 
 bool Synth::isStereoEnabled()
@@ -392,7 +483,7 @@ void Synth::setLoopEnabled(bool isEnabled)
 {
     // Enable the loop when playing a sample
     _internalConfiguration.smplIsLoopEnabled = isEnabled;
-    SoundEngine::configureVoices(&_configuration, &_internalConfiguration);
+    configureVoices();
 }
 
 void Synth::setSinus(bool isOn, int rootKey)
@@ -419,20 +510,47 @@ void Synth::setSmplEqValues(int values[10])
 
 void Synth::setStartLoop(quint32 startLoop, bool withLinkedSample)
 {
-    // Update voices coming from the sample level
-    SoundEngine::setStartLoop(startLoop, withLinkedSample);
+    Voice ** voices1, ** voices2;
+    int count1, count2;
+    _voices.getVoices(voices1, count1, voices2, count2);
+
+    VoiceParam * voiceParam;
+    for (int i = 0; i < count1 + count2; ++i)
+    {
+        voiceParam = i < count1 ? voices1[i]->getParam() : voices2[i - count1]->getParam();
+        if (voiceParam->getType() == 1 || (voiceParam->getType() == 2 && withLinkedSample))
+            voiceParam->setLoopStart(startLoop);
+    }
 }
 
 void Synth::setEndLoop(quint32 endLoop, bool withLinkedSample)
 {
-    // Update voices coming from the sample level
-    SoundEngine::setEndLoop(endLoop, withLinkedSample);
+    Voice ** voices1, ** voices2;
+    int count1, count2;
+    _voices.getVoices(voices1, count1, voices2, count2);
+
+    VoiceParam * voiceParam;
+    for (int i = 0; i < count1 + count2; ++i)
+    {
+        voiceParam = i < count1 ? voices1[i]->getParam() : voices2[i - count1]->getParam();
+        if (voiceParam->getType() == 1 || (voiceParam->getType() == 2 && withLinkedSample))
+            voiceParam->setLoopEnd(endLoop);
+    }
 }
 
 void Synth::setPitchCorrection(qint16 correction, bool withLinkedSample)
 {
-    // Update voices coming from the sample level
-    SoundEngine::setPitchCorrection(correction, withLinkedSample);
+    Voice ** voices1, ** voices2;
+    int count1, count2;
+    _voices.getVoices(voices1, count1, voices2, count2);
+
+    VoiceParam * voiceParam;
+    for (int i = 0; i < count1 + count2; ++i)
+    {
+        voiceParam = i < count1 ? voices1[i]->getParam() : voices2[i - count1]->getParam();
+        if (voiceParam->getType() == 1 || (voiceParam->getType() == 2 && withLinkedSample))
+            voiceParam->setFineTune(correction);
+    }
 }
 
 void Synth::startNewRecord(QString fileName)
@@ -460,31 +578,86 @@ bool Synth::processKey(int channel, int key, int vel)
 
 bool Synth::processPolyPressureChanged(int channel, int key, int pressure)
 {
-    SoundEngine::processPolyPressureChanged(channel, key, pressure);
+    Voice ** voices1, ** voices2;
+    int count1, count2;
+    _voices.getVoices(voices1, count1, voices2, count2);
+
+    VoiceParam * voiceParam;
+    for (int i = 0; i < count1 + count2; ++i)
+    {
+        voiceParam = i < count1 ? voices1[i]->getParam() : voices2[i - count1]->getParam();
+        if (voiceParam->getChannel() == channel && voiceParam->getKey() == key)
+            voiceParam->processPolyPressureChanged(pressure);
+    }
+
     return false;
 }
 
 bool Synth::processMonoPressureChanged(int channel, int value)
 {
-    SoundEngine::processMonoPressureChanged(channel, value);
+    Voice ** voices1, ** voices2;
+    int count1, count2;
+    _voices.getVoices(voices1, count1, voices2, count2);
+
+    VoiceParam * voiceParam;
+    for (int i = 0; i < count1 + count2; ++i)
+    {
+        voiceParam = i < count1 ? voices1[i]->getParam() : voices2[i - count1]->getParam();
+        if (voiceParam->getChannel() == channel)
+            voiceParam->processMonoPressureChanged(value);
+    }
+
     return false;
 }
 
 bool Synth::processControllerChanged(int channel, int num, int value)
 {
-    SoundEngine::processControllerChanged(channel, num, value);
+    Voice ** voices1, ** voices2;
+    int count1, count2;
+    _voices.getVoices(voices1, count1, voices2, count2);
+
+    VoiceParam * voiceParam;
+    for (int i = 0; i < count1 + count2; ++i)
+    {
+        voiceParam = i < count1 ? voices1[i]->getParam() : voices2[i - count1]->getParam();
+        if (voiceParam->getChannel() == channel)
+            voiceParam->processControllerChanged(num, value);
+    }
+
     return false;
 }
 
 bool Synth::processBendChanged(int channel, float value)
 {
-    SoundEngine::processBendChanged(channel, value);
+    Voice ** voices1, ** voices2;
+    int count1, count2;
+    _voices.getVoices(voices1, count1, voices2, count2);
+
+    VoiceParam * voiceParam;
+    for (int i = 0; i < count1 + count2; ++i)
+    {
+        voiceParam = i < count1 ? voices1[i]->getParam() : voices2[i - count1]->getParam();
+        if (voiceParam->getChannel() == channel)
+            voiceParam->processBendChanged(value);
+    }
+
     return false;
 }
 
 bool Synth::processBendSensitivityChanged(int channel, float semitones)
 {
-    SoundEngine::processBendSensitivityChanged(channel, semitones);
+    Voice ** voices1, ** voices2;
+    int count1, count2;
+    _voices.getVoices(voices1, count1, voices2, count2);
+
+    VoiceParam * voiceParam;
+    for (int i = 0; i < count1 + count2; ++i)
+    {
+        voiceParam = i < count1 ? voices1[i]->getParam() : voices2[i - count1]->getParam();
+        if (voiceParam->getChannel() == channel)
+            voiceParam->processBendSensitivityChanged(semitones);
+    }
+
     return false;
 }
 
@@ -520,16 +693,14 @@ void Synth::readData(float * dataL, float * dataR, quint32 maxlen)
     }
 
     // Stop the current computation, in case it's not finished yet
-    int uncomputedVoiceNumber;
-    bool voicesUnlocked;
-    SoundEngine::endComputation(uncomputedVoiceNumber, voicesUnlocked);
+    _voices.endComputation();
     _semRunningSoundEngines.acquire(_soundEngineCount);
 
     // Get the data of all sound engines
     gatherSoundEngineData(maxlen);
 
     // Wake up the sound engines (as soon as possible)
-    SoundEngine::prepareComputation(uncomputedVoiceNumber, voicesUnlocked);
+    _voices.prepareComputation();
     for (int i = 0; i < _soundEngineCount; ++i)
         _soundEngines[i]->prepareData(maxlen);
 

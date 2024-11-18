@@ -30,24 +30,6 @@
 #include "enveloppevol.h"
 #include "osctriangle.h"
 
-class VoiceInitializer
-{
-public:
-    InstPrst * prst;
-    Division * prstDiv;
-    InstPrst * inst;
-    Division * instDiv;
-    Smpl * smpl;
-
-    qint8 channel;
-    qint8 key;
-    qint8 vel;
-    qint8 type; // 0: normal, 1: sample, 2: associated sample
-
-    quint32 audioSmplRate;
-    int token;
-};
-
 class Voice : public QObject
 {
     Q_OBJECT
@@ -59,13 +41,11 @@ public:
     // Initial key is:
     // * -1 when we use "play" for reading a sample
     // >= 0 otherwise (sample, instrument or preset level)
-    void initialize(VoiceInitializer * voiceInitializer);
+    void initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv, Smpl * smpl,
+                    qint8 channel, qint8 key, qint8 vel, qint8 type, quint32 audioSmplRate, int token);
 
-    int getChannel() { return _voiceParam->getChannel(); }
-    int getSf2Id() { return _voiceParam->getSf2Id(); }
-    int getPresetId() { return _voiceParam->getPresetId(); }
-    int getKey() { return _voiceParam->getKey(); }
-    int getType() { return _voiceParam->getType(); }
+    // Get the parameter object, for setting or retrieving values
+    VoiceParam * getParam() { return _voiceParam; }
 
     void release(bool quick = false);
     bool isInRelease() { return _release; }
@@ -73,17 +53,6 @@ public:
     void triggerReadFinishedSignal();
 
     void setGain(float gain);
-
-    // Get voiceParam attributes
-    float getFloatAttribute(AttributeType attribute);
-    qint32 getIntAttribute(AttributeType attribute);
-
-    // Update voiceParam properties
-    void setPan(float val);
-    void setLoopMode(quint16 val);
-    void setLoopStart(quint32 val);
-    void setLoopEnd(quint32 val);
-    void setFineTune(qint16 val);
 
     // Generate data (pan, chorus and reverb not done)
     void generateData(float *data, quint32 len);

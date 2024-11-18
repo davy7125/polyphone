@@ -26,10 +26,10 @@
 #ifndef SOUNDENGINE_H
 #define SOUNDENGINE_H
 
-#include "voice.h"
-class Synth;
-class SynthConfig;
-class SynthInternalConfig;
+#include <QSemaphore>
+#include <QMutex>
+#include <QObject>
+class VoiceList;
 
 class SoundEngine: public QObject
 {
@@ -38,37 +38,13 @@ class SoundEngine: public QObject
 public:
     SoundEngine(QSemaphore * semRunning, quint32 bufferSize);
     virtual ~SoundEngine() override;
-
-    static void initialize(Synth *synth);
-    static void addVoices(VoiceInitializer *voiceInitializers, int numberOfVoicesToAdd, SynthConfig * config, SynthInternalConfig * internalConfig);
-    static void stopAllVoices(bool allChannels);
-    static void finalize();
-
-    // sf2Id: -1 (no filter) or specific sf2 id
-    // presetId: -1 (no filter) or specific preset id
-    // channel: -2 (all channels), -1 (GUI channel) or [0 - 15] (MIDI channel)
-    // key: -2 (all keys), -1 (all keys < 0) or a specific key
-    static void releaseVoices(int sf2Id, int presetId, int channel, int key);
-
-    // Configuration
-    static void configureVoices(SynthConfig * config, SynthInternalConfig * internalConfig);
-    static void setPitchCorrection(qint16 correction, bool withLinkedSample);
-    static void setStartLoop(quint32 startLoop, bool withLinkedSample);
-    static void setEndLoop(quint32 endLoop, bool withLinkedSample);
-
-    // MIDI signals
-    static void processPolyPressureChanged(int channel, int key, int pressure);
-    static void processMonoPressureChanged(int channel, int value);
-    static void processControllerChanged(int channel, int num, int value);
-    static void processBendChanged(int channel, float value);
-    static void processBendSensitivityChanged(int channel, float semitones);
+    static void initialize(VoiceList * voices) { s_voices = voices; }
 
     // Data generation
     void stop();
-    static void prepareComputation(int uncomputedVoiceNumber, bool voicesUnlocked);
     void prepareData(quint32 len);
-    void generateData(quint32 len);
-    static void endComputation(int &uncomputedVoiceCount, bool &voicesUnLocked);
+
+    // Get the result
     void setData(float * dataL, float * dataR, float * dataChoL, float * dataChoR,
                  float * dataRevL, float * dataRevR, float * dataChoRevL, float * dataChoRevR, quint32 len);
     void addData(float * dataL, float * dataR, float * dataChoL, float * dataChoR,
@@ -78,9 +54,7 @@ public slots:
     void start();
 
 private:
-    static void closeAll(int channel, int exclusiveClass, int numPreset);
-    static Voice * getNextVoiceToCompute();
-    static void configureVoice(Voice * voice, SynthConfig * config, SynthInternalConfig * internalConfig);
+    void generateData(quint32 len);
 
     float * _dataTmp;
     float * _dataL, * _dataR, * _dataRevL, * _dataRevR, * _dataChoL, * _dataChoR, * _dataChoRevL, * _dataChoRevR;
@@ -90,17 +64,7 @@ private:
     QMutex _mutexSynchro;
     volatile quint32 _lenToPrepare;
 
-    static Voice * s_voices[MAX_NUMBER_OF_VOICES];
-    static VoiceParam * s_voiceParameters[MAX_NUMBER_OF_VOICES];
-    static int s_numberOfVoices;
-    static int s_numberOfVoicesToCompute;
-    static QMutex s_mutexVoices;
-    static int s_instanceCount;
-    static int s_firstIndexToCompute;
-    static int s_maxPossibleVoicesToCompute;
-
-    // Variable kept apart (cache line) since it is modified by all threads
-    alignas(64) static QAtomicInt s_indexVoice;
+    static VoiceList * s_voices;
 };
 
 #endif // SOUNDENGINE_H

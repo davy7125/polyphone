@@ -202,25 +202,12 @@ void RunnableMerger::playInst(float * dataR, float * dataL, Soundfont * soundfon
 void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv, Smpl * smpl)
 {
     // Initialize a voice
-    VoiceInitializer voiceInitializer;
-    voiceInitializer.prst = prst;
-    voiceInitializer.prstDiv = prstDiv;
-    voiceInitializer.inst = inst;
-    voiceInitializer.instDiv = instDiv;
-    voiceInitializer.smpl = smpl;
-    voiceInitializer.channel = 0;
-    voiceInitializer.key = _key;
-    voiceInitializer.vel = 127;
-    voiceInitializer.audioSmplRate = SAMPLE_RATE;
-    voiceInitializer.token = 0;
-    voiceInitializer.type = 0;
-
     VoiceParam * voiceParam = new VoiceParam();
     Voice * voice = new Voice(voiceParam);
-    voice->initialize(&voiceInitializer);
+    voice->initialize(prst, prstDiv, inst, instDiv, smpl, 0, _key, 127, 0, SAMPLE_RATE, 0);
 
     // Pan coeffs
-    float tmp = 0.005f * (voice->getFloatAttribute(champ_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]
+    float tmp = 0.005f * (voiceParam->getFloat(champ_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]
     float coefR = Voice::fastSin(tmp);
     float coefL = Voice::fastCos(tmp);
 

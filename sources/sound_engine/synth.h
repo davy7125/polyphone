@@ -26,6 +26,7 @@
 #ifndef SYNTH_H
 #define SYNTH_H
 
+#include "voicelist.h"
 #include "soundengine.h"
 #include "calibrationsinus.h"
 #include "liveeq.h"
@@ -33,10 +34,13 @@
 #include "stk/Chorus.h"
 #include <QDataStream>
 #include "imidilistener.h"
+#include "imidivalues.h"
 #include "recorder.h"
 class Soundfonts;
 class Soundfont;
 class InstPrst;
+class Division;
+class Smpl;
 
 class SynthConfig
 {
@@ -165,6 +169,14 @@ private:
                   InstPrst * prst = nullptr, Division * prstDiv = nullptr);
     int playSmpl(Smpl * smpl, int channel, int key, int velocity, bool other,
                  InstPrst * inst = nullptr, Division * instDiv = nullptr, InstPrst * prst = nullptr, Division * prstDiv = nullptr);
+    void configureVoice(Voice * voice);
+    void configureVoices();
+
+    // sf2Id: -1 (no filter) or specific sf2 id
+    // presetId: -1 (no filter) or specific preset id
+    // channel: -2 (all channels), -1 (GUI channel) or [0 - 15] (MIDI channel)
+    // key: -2 (all keys), -1 (all keys < 0) or a specific key
+    void releaseVoices(int sf2Id, int presetId, int channel, int key);
 
     void destroySoundEnginesAndBuffers();
     void createSoundEnginesAndBuffers();
@@ -179,12 +191,11 @@ private:
     SynthConfig _configuration;
     SynthInternalConfig _internalConfiguration;
 
-    // Sound engines
+    // Voices and sound engines
+    VoiceList _voices;
     QSemaphore _semRunningSoundEngines;
     SoundEngine ** _soundEngines;
     int _soundEngineCount;
-    VoiceInitializer _voiceInitializers[MAX_NUMBER_OF_VOICES_TO_ADD];
-    int _numberOfVoicesToAdd;
     static int s_sampleVoiceTokenCounter;
 
     // Effects / post-processing

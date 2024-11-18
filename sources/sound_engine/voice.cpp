@@ -99,7 +99,8 @@ Voice::~Voice()
     }
 }
 
-void Voice::initialize(VoiceInitializer * voiceInitializer)
+void Voice::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv, Smpl * smpl,
+                       qint8 channel, qint8 key, qint8 vel, qint8 type, quint32 audioSmplRate, int token)
 {
     if (_voiceParam->getType() != 0 && _dataSmpl != nullptr)
     {
@@ -107,22 +108,14 @@ void Voice::initialize(VoiceInitializer * voiceInitializer)
         _dataSmpl = nullptr;
     }
 
-    _voiceParam->initialize(voiceInitializer->prst,
-                            voiceInitializer->prstDiv,
-                            voiceInitializer->inst,
-                            voiceInitializer->instDiv,
-                            voiceInitializer->smpl,
-                            voiceInitializer->channel,
-                            voiceInitializer->key,
-                            voiceInitializer->vel,
-                            voiceInitializer->type);
+    _voiceParam->initialize(prst, prstDiv, inst, instDiv, smpl, channel, key, vel, type);
 
-    _dataSmpl = voiceInitializer->smpl->_sound.getData(_dataSmplLength, false, _voiceParam->getType() != 0 /* copy data at the sample level */);
-    _smplRate = voiceInitializer->smpl->_sound.getUInt32(champ_dwSampleRate);
-    _audioSmplRate = voiceInitializer->audioSmplRate;
+    _dataSmpl = smpl->_sound.getData(_dataSmplLength, false, _voiceParam->getType() != 0 /* copy data at the sample level */);
+    _smplRate = smpl->_sound.getUInt32(champ_dwSampleRate);
+    _audioSmplRate = audioSmplRate;
     _audioSmplRateInv = 1.0f / _audioSmplRate;
     _gain = 0.0f;
-    _token = voiceInitializer->token;
+    _token = token;
     _currentSmplPos = 0xFFFFFFFF;
     _elapsedSmplPos = 0;
     _time = 0;
@@ -507,39 +500,4 @@ float Voice::fastPow10(float value)
 
     // Linear interpolation
     return s_pow10_table[indexBefore] + (s_pow10_table[indexBefore + 1] - s_pow10_table[indexBefore]) * diff;
-}
-
-float Voice::getFloatAttribute(AttributeType attribute)
-{
-    return _voiceParam->getFloat(attribute);
-}
-
-qint32 Voice::getIntAttribute(AttributeType attribute)
-{
-    return _voiceParam->getInteger(attribute);
-}
-
-void Voice::setPan(float val)
-{
-    _voiceParam->setPan(val);
-}
-
-void Voice::setLoopMode(quint16 val)
-{
-    _voiceParam->setLoopMode(val);
-}
-
-void Voice::setLoopStart(quint32 val)
-{
-    _voiceParam->setLoopStart(val);
-}
-
-void Voice::setLoopEnd(quint32 val)
-{
-    _voiceParam->setLoopEnd(val);
-}
-
-void Voice::setFineTune(qint16 val)
-{
-    _voiceParam->setFineTune(val);
 }

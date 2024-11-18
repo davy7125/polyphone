@@ -24,47 +24,26 @@
 ***************************************************************************/
 
 #include "soundengine.h"
-#include "division.h"
-#include "synth.h"
+#include "voicelist.h"
+#include "voice.h"
 #include <QThread>
 
-Voice * SoundEngine::s_voices[MAX_NUMBER_OF_VOICES];
-VoiceParam * SoundEngine::s_voiceParameters[MAX_NUMBER_OF_VOICES];
-int SoundEngine::s_numberOfVoices = 0;
-int SoundEngine::s_numberOfVoicesToCompute = 0;
-QMutex SoundEngine::s_mutexVoices;
-int SoundEngine::s_instanceCount = 0;
-int SoundEngine::s_firstIndexToCompute = 0;
-int SoundEngine::s_maxPossibleVoicesToCompute = 0;
-alignas(64) QAtomicInt SoundEngine::s_indexVoice = 0;
-
-void SoundEngine::initialize(Synth * synth)
-{
-    s_mutexVoices.lock();
-
-    for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
-    {
-        s_voiceParameters[i] = new VoiceParam();
-        s_voices[i] = new Voice(s_voiceParameters[i]);
-        connect(s_voices[i], SIGNAL(currentPosChanged(quint32)), synth, SIGNAL(currentPosChanged(quint32)));
-        connect(s_voices[i], SIGNAL(readFinished(int)), synth, SIGNAL(readFinished(int)));
-    }
-}
+VoiceList * SoundEngine::s_voices = nullptr;
 
 SoundEngine::SoundEngine(QSemaphore * semRunning, quint32 bufferSize) : QObject(),
     _interrupted(false),
     _semRunning(semRunning)
 {
-    _dataL = new float[4 * bufferSize];
-    _dataR = new float[4 * bufferSize];
-    _dataRevL = new float[4 * bufferSize];
-    _dataRevR = new float[4 * bufferSize];
-    _dataChoL = new float[4 * bufferSize];
-    _dataChoR = new float[4 * bufferSize];
-    _dataChoRevL = new float[4 * bufferSize];
-    _dataChoRevR = new float[4 * bufferSize];
-    _dataTmp = new float[4 * bufferSize];
-    s_instanceCount++;
+    _dataL = new float[bufferSize];
+    _dataR = new float[bufferSize];
+    _dataRevL = new float[bufferSize];
+    _dataRevR = new float[bufferSize];
+    _dataChoL = new float[bufferSize];
+    _dataChoR = new float[bufferSize];
+    _dataChoRevL = new float[bufferSize];
+    _dataChoRevR = new float[bufferSize];
+    _dataTmp = new float[bufferSize];
+    _mutexSynchro.lock();
 }
 
 SoundEngine::~SoundEngine()
@@ -78,239 +57,12 @@ SoundEngine::~SoundEngine()
     delete [] _dataChoRevL;
     delete [] _dataChoRevR;
     delete [] _dataTmp;
-    s_instanceCount--;
-}
-
-void SoundEngine::finalize()
-{
-    for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
-        delete s_voices[i];
-    for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
-        delete s_voiceParameters[i];
-}
-
-void SoundEngine::addVoices(VoiceInitializer * voiceInitializers, int numberOfVoicesToAdd, SynthConfig * config, SynthInternalConfig * internalConfig)
-{
-    // Possibly stop voices having the same exclusive class
-    for (int i = 0; i < numberOfVoicesToAdd; ++i)
-    {
-        if (voiceInitializers[i].type != 0)
-            continue;
-
-        int presetNumber = (voiceInitializers[i].prst != nullptr ? voiceInitializers[i].prst->getExtraField(champ_wPreset) : -1);
-
-        // Exclusive class: possibly stop voices
-        int exclusiveClass = 0;
-        if (voiceInitializers[i].inst != nullptr && voiceInitializers[i].inst->getGlobalDivision()->isSet(champ_exclusiveClass))
-            exclusiveClass = voiceInitializers[i].inst->getGlobalDivision()->getGen(champ_exclusiveClass).wValue;
-        if (voiceInitializers[i].instDiv != nullptr && voiceInitializers[i].instDiv->isSet(champ_exclusiveClass))
-            exclusiveClass = voiceInitializers[i].instDiv->getGen(champ_exclusiveClass).wValue;
-        if (exclusiveClass > 0)
-            closeAll(voiceInitializers[i].channel, exclusiveClass, presetNumber);
-    }
-
-    // Add the voices
-    s_mutexVoices.lock();
-    for (int i = 0; i < numberOfVoicesToAdd; i++)
-    {
-        if (s_numberOfVoices >= MAX_NUMBER_OF_VOICES || s_voices[s_numberOfVoices] == nullptr)
-            break;
-
-        // Create a voice
-        s_voices[s_numberOfVoices]->initialize(&voiceInitializers[i]);
-        configureVoice(s_voices[s_numberOfVoices], config, internalConfig);
-        s_numberOfVoices++;
-    }
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::stopAllVoices(bool allChannels)
-{
-    s_mutexVoices.lock();
-    for (int i = s_numberOfVoices - 1; i >= 0; i--)
-    {
-        if (allChannels || s_voices[i]->getChannel() == -1)
-        {
-            // Signal emitted for the sample player (voice -1)
-            if (s_voices[i]->getKey() == -1)
-                s_voices[i]->triggerReadFinishedSignal();
-
-            --s_numberOfVoices;
-            Voice * voiceTmp = s_voices[s_numberOfVoices];
-            s_voices[s_numberOfVoices] = s_voices[i];
-            s_voices[i] = voiceTmp;
-        }
-    }
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::releaseVoices(int sf2Id, int presetId, int channel, int key)
-{
-    //qWarning() << "RELEASE on channel" << channel << "key" << key << "sf2" << sf2Id << "preset" << presetId;
-    s_mutexVoices.lock();
-
-    Voice * voice;
-    for (int i = 0; i < s_numberOfVoices; i++)
-    {
-        voice = s_voices[i];
-
-        // Channel filter
-        if (channel != -2 && voice->getChannel() != channel)
-            continue;
-
-        // Sf2 filter
-        if (sf2Id != -1 && voice->getSf2Id() != sf2Id)
-            continue;
-
-        // Preset filter
-        if (presetId != -1 && voice->getPresetId() != -1 && voice->getPresetId() != presetId)
-            continue;
-
-        // Key filter
-        if (key != -2 && (key != -1 || voice->getKey() >= 0) && voice->getKey() != key)
-            continue;
-
-        voice->release();
-    }
-
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::configureVoices(SynthConfig * config, SynthInternalConfig * internalConfig)
-{
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-        configureVoice(s_voices[i], config, internalConfig);
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::configureVoice(Voice * voice, SynthConfig * config, SynthInternalConfig * internalConfig)
-{
-    // Loop / gain
-    if (voice->getType() == 0)
-    {
-        // Sample triggered from the instrument or preset level
-        voice->setGain(config->masterGain);
-    }
-    else
-    {
-        // Sample triggered from the sample level
-        voice->setLoopMode(internalConfig->smplIsLoopEnabled ? 1 : 0);
-
-        float pan = voice->getFloatAttribute(champ_pan);
-        if (internalConfig->smplIsStereoEnabled)
-        {
-            if (pan < 0)
-                voice->setPan(-50.0f);
-            else if (pan > 0.0f)
-                voice->setPan(50.0f);
-
-            voice->setGain(config->masterGain + internalConfig->smplGain);
-        }
-        else
-        {
-            if (pan < 0.0f)
-                voice->setPan(-1.0f);
-            else if (pan > 0.0f)
-                voice->setPan(1.0f);
-
-            voice->setGain(voice->getType() == 1 ? config->masterGain + internalConfig->smplGain : -1000.0f);
-        }
-    }
-}
-
-void SoundEngine::setPitchCorrection(qint16 correction, bool withLinkedSample)
-{
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getType() == 1 || (s_voices[i]->getType() == 2 && withLinkedSample))
-            s_voices[i]->setFineTune(correction);
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::setStartLoop(quint32 startLoop, bool withLinkedSample)
-{
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getType() == 1 || (s_voices[i]->getType() == 2 && withLinkedSample))
-            s_voices[i]->setLoopStart(startLoop);
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::setEndLoop(quint32 endLoop, bool withLinkedSample)
-{
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getType() == 1 || (s_voices[i]->getType() == 2 && withLinkedSample))
-            s_voices[i]->setLoopEnd(endLoop);
-    s_mutexVoices.unlock();
-}
-
-
-void SoundEngine::processPolyPressureChanged(int channel, int key, int pressure)
-{
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getChannel() == channel && s_voices[i]->getKey() == key)
-            s_voiceParameters[i]->processPolyPressureChanged(pressure);
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::processMonoPressureChanged(int channel, int value)
-{
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getChannel() == channel)
-            s_voiceParameters[i]->processMonoPressureChanged(value);
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::processControllerChanged(int channel, int num, int value)
-{
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getChannel() == channel)
-            s_voiceParameters[i]->processControllerChanged(num, value);
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::processBendChanged(int channel, float value)
-{
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getChannel() == channel)
-            s_voiceParameters[i]->processBendChanged(value);
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::processBendSensitivityChanged(int channel, float semitones)
-{
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-        if (s_voices[i]->getChannel() == channel)
-            s_voiceParameters[i]->processBendSensitivityChanged(semitones);
-    s_mutexVoices.unlock();
-}
-
-void SoundEngine::closeAll(int channel, int exclusiveClass, int numPreset)
-{
-    s_mutexVoices.lock();
-    for (int i = 0; i < s_numberOfVoices; i++)
-    {
-        if (s_voices[i]->getIntAttribute(champ_exclusiveClass) == exclusiveClass &&
-            s_voices[i]->getIntAttribute(champ_wPreset) == numPreset &&
-            s_voices[i]->getChannel() == channel)
-            s_voices[i]->release(true);
-    }
-    s_mutexVoices.unlock();
 }
 
 // DATA GENERATION //
 
 void SoundEngine::start()
 {
-    _mutexSynchro.lock();
-
     // Generate and copy data into the buffer after each reading
     while (true)
     {
@@ -334,82 +86,6 @@ void SoundEngine::stop()
     _mutexSynchro.unlock();
 }
 
-void SoundEngine::prepareComputation(int uncomputedVoiceNumber, bool voicesUnlocked)
-{
-    if (voicesUnlocked)
-        s_mutexVoices.lock();
-    s_indexVoice.fetchAndStoreRelaxed(0);
-    if (uncomputedVoiceNumber > 0)
-        s_firstIndexToCompute += s_firstIndexToCompute > uncomputedVoiceNumber ? -uncomputedVoiceNumber : s_numberOfVoicesToCompute - uncomputedVoiceNumber;
-
-    // Update the reference of the maximum number of voices to compute
-    if (s_numberOfVoicesToCompute - uncomputedVoiceNumber > s_maxPossibleVoicesToCompute)
-        s_maxPossibleVoicesToCompute = s_numberOfVoicesToCompute - uncomputedVoiceNumber;
-    else if (s_maxPossibleVoicesToCompute > 0)
-        s_maxPossibleVoicesToCompute -= 2;
-
-    // Minimum number of voices to close
-    int numberOfVoicesToClose = uncomputedVoiceNumber > 0 ? uncomputedVoiceNumber + s_instanceCount : 0;
-    if (s_numberOfVoices - numberOfVoicesToClose < s_maxPossibleVoicesToCompute)
-        numberOfVoicesToClose = s_numberOfVoices - s_maxPossibleVoicesToCompute;
-
-    // Voices ended?
-    Voice * voice;
-    for (int i = 0; i < s_numberOfVoices; ++i)
-    {
-        voice = s_voices[i];
-        if (voice->isFinished() || (numberOfVoicesToClose > 0 && voice->isInRelease()))
-        {
-            // Signal emitted for the sample player (voice -1)
-            if (voice->getKey() == -1)
-                voice->triggerReadFinishedSignal();
-
-            --s_numberOfVoices;
-            Voice * voiceTmp = s_voices[s_numberOfVoices];
-            s_voices[s_numberOfVoices] = s_voices[i];
-            s_voices[i] = voiceTmp;
-            --i;
-
-            --numberOfVoicesToClose;
-        }
-    }
-
-    if (numberOfVoicesToClose > 0)
-    {
-        // Remove the last voices
-        s_numberOfVoices = s_numberOfVoices > numberOfVoicesToClose ? s_numberOfVoices - numberOfVoicesToClose : 0;
-    }
-
-    s_numberOfVoicesToCompute = s_numberOfVoices;
-    if (s_firstIndexToCompute >= s_numberOfVoices)
-        s_firstIndexToCompute = 0;
-}
-
-Voice * SoundEngine::getNextVoiceToCompute()
-{
-    int voiceIndex = s_indexVoice.fetchAndAddRelaxed(1);
-
-    // No more voices to compute?
-    if (voiceIndex >= s_numberOfVoices)
-    {
-        // If this is the last sound engine to finish the computation series, release the lock on the voices
-        if (voiceIndex == s_numberOfVoices + s_instanceCount - 1)
-            s_mutexVoices.unlock();
-
-        return nullptr;
-    }
-
-    voiceIndex += s_firstIndexToCompute;
-    return s_voices[voiceIndex >= s_numberOfVoices ? voiceIndex - s_numberOfVoices : voiceIndex];
-}
-
-void SoundEngine::endComputation(int &uncomputedVoiceCount, bool &voicesUnLocked)
-{
-    int currentIndex = s_indexVoice.fetchAndAddRelaxed(MAX_NUMBER_OF_VOICES);
-    uncomputedVoiceCount = currentIndex < s_numberOfVoicesToCompute ? s_numberOfVoicesToCompute - currentIndex : 0;
-    voicesUnLocked = (currentIndex >= s_numberOfVoicesToCompute + s_instanceCount);
-}
-
 void SoundEngine::prepareData(quint32 len)
 {
     _lenToPrepare = len;
@@ -423,19 +99,19 @@ void SoundEngine::generateData(quint32 len)
     Voice * voice;
     float tmp, coefR, coefL, coefRev, coefNonRev, coefCho, coefNonCho;
     quint32 i;
-    while ((voice = getNextVoiceToCompute()) != nullptr)
+    while ((voice = s_voices->getNextVoiceToCompute()) != nullptr)
     {
         // Get data
         voice->generateData(_dataTmp, len);
 
-        tmp = 0.005f * (voice->getFloatAttribute(champ_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]
+        tmp = 0.005f * (voice->getParam()->getFloat(champ_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]
         coefL = Voice::fastCos(tmp);
         coefR = Voice::fastSin(tmp);
 
-        coefRev = 0.01f * voice->getFloatAttribute(champ_reverbEffectsSend);
+        coefRev = 0.01f * voice->getParam()->getFloat(champ_reverbEffectsSend);
         coefNonRev = 1.f - coefRev;
 
-        coefCho = 0.01f * voice->getFloatAttribute(champ_chorusEffectsSend);
+        coefCho = 0.01f * voice->getParam()->getFloat(champ_chorusEffectsSend);
         coefNonCho = 1.f - coefCho;
 
         // Merge or initialize data

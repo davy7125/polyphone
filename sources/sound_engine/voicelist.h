@@ -2,6 +2,7 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2024 Davy Triponney                                **
+**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,26 +23,46 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef BASETYPES_H
-#define BASETYPES_H
+#ifndef VOICELIST_H
+#define VOICELIST_H
 
-#include "idlist.h"
-#include "eltid.h"
-#include "complex.h"
-#include "attribute.h"
-#include "modulatordata.h"
-#include "serializabletypes.h"
+#include "basetypes.h"
+class Synth;
+class Voice;
+class VoiceParam;
 
-#define DB_SF2_TO_REAL_DB 0.4
+class VoiceList
+{
+public:
+    VoiceList();
+    ~VoiceList();
+    void initialize(Synth * synth, int threadCount);
 
-// In soundengine.h
-#define MAX_NUMBER_OF_VOICES 2048
-#define VOICE_INDEX_MASK 0x7FF
+    // Prepare multiple voice and then add them
+    Voice * getVoiceToPrepare();
+    void addPreparedVoices();
 
-// In voice.h
-#define INITIAL_ARRAY_LENGTH 1024
+    // Return all voices currently running and prepared to be run
+    void getVoices(Voice ** &voices1, int &count1, Voice ** &voices2, int &count2);
 
-// In modulatorgroup.h
-#define MAX_NUMBER_OF_PARAMETER_MODULATORS 64
+    //
+    void endComputation();
+    void prepareComputation();
+    Voice * getNextVoiceToCompute();
 
-#endif // BASETYPES_H
+private:
+    Voice * _voices[MAX_NUMBER_OF_VOICES];
+    VoiceParam * _voiceParameters[MAX_NUMBER_OF_VOICES];
+    int _threadCount;
+
+    // Indexes
+    QAtomicInt _preparationIndex; // When voices are being added
+    QAtomicInt _additionIndex; // When a set of voices is complete
+    QAtomicInt _currentIndex;
+    QAtomicInt _firstRunningIndex;
+    QAtomicInt _lastRunningIndex;
+    int _maxPossibleVoicesToCompute;
+    int _uncomputedVoiceCount;
+};
+
+#endif // VOICELIST_H
