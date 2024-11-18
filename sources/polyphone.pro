@@ -346,6 +346,7 @@ SOURCES	+= main.cpp \
     sound_engine/modulatedparameter.cpp \
     sound_engine/synth.cpp \
     sound_engine/voice.cpp \
+    sound_engine/voicelist.cpp \
     sound_engine/voiceparam.cpp \
     sound_engine/soundengine.cpp \
     sound_engine/elements/calibrationsinus.cpp \
@@ -717,6 +718,7 @@ HEADERS += \
     sound_engine/modulatedparameter.h \
     sound_engine/synth.h \
     sound_engine/voice.h \
+    sound_engine/voicelist.h \
     sound_engine/voiceparam.h \
     sound_engine/soundengine.h \
     sound_engine/elements/calibrationsinus.h \
