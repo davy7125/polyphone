@@ -149,7 +149,7 @@ void VoiceList::prepareComputation()
     int exclusiveClass;
     for (int index = _lastRunningIndex; index != _additionIndex; index = (index + 1) & VOICE_INDEX_MASK)
     {
-        voiceParam = _voices[index]->getParam();
+        voiceParam = _voiceParameters[index];
         if (voiceParam->getType() != 0)
             continue;
 
@@ -169,7 +169,7 @@ void VoiceList::prepareComputation()
     for (int index = first; index != last; index = (index + 1) & VOICE_INDEX_MASK)
     {
         voice = _voices[index];
-        voiceParam = voice->getParam();
+        voiceParam = _voiceParameters[index];
 
         close = voice->isFinished() || (numberOfVoicesToClose > 0 && voice->isInRelease());
         quickRelease = false;

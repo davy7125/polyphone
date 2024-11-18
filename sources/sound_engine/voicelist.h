@@ -51,6 +51,15 @@ public:
     Voice * getNextVoiceToCompute();
 
 private:
+    struct ExclusiveClassCloseCommand
+    {
+        short channel;
+        unsigned short numPreset;
+        int exclusiveClass;
+    };
+
+    /// Variables shared by different threads
+
     Voice * _voices[MAX_NUMBER_OF_VOICES];
     VoiceParam * _voiceParameters[MAX_NUMBER_OF_VOICES];
     int _threadCount;
@@ -61,16 +70,11 @@ private:
     QAtomicInt _currentIndex;
     QAtomicInt _firstRunningIndex;
     QAtomicInt _lastRunningIndex;
+
+    /// Variables used by the audio thread only
+
     int _maxPossibleVoicesToCompute;
     int _uncomputedVoiceCount;
-
-    // Exclusive class management
-    struct ExclusiveClassCloseCommand
-    {
-        short channel;
-        unsigned short numPreset;
-        int exclusiveClass;
-    };
     ExclusiveClassCloseCommand _closeCommands[MAX_NUMBER_OF_VOICES];
     unsigned short _closeCommandNumber;
 };
