@@ -33,6 +33,7 @@ void ToolSoundfontExport_parameters::loadConfiguration()
     _presetPrefix = ContextManager::configuration()->getValue(ConfManager::SECTION_EXPORT, "preset_prefix", true).toBool();
     _bankDirectory = ContextManager::configuration()->getValue(ConfManager::SECTION_EXPORT, "bank_directory", false).toBool();
     _gmSort = ContextManager::configuration()->getValue(ConfManager::SECTION_EXPORT, "gm_sort", false).toBool();
+    _filePreset = ContextManager::configuration()->getValue(ConfManager::SECTION_EXPORT, "file_preset", false).toBool();
 }
 
 void ToolSoundfontExport_parameters::saveConfiguration()
@@ -43,4 +44,5 @@ void ToolSoundfontExport_parameters::saveConfiguration()
     ContextManager::configuration()->setValue(ConfManager::SECTION_EXPORT, "preset_prefix", _presetPrefix);
     ContextManager::configuration()->setValue(ConfManager::SECTION_EXPORT, "bank_directory", _bankDirectory);
     ContextManager::configuration()->setValue(ConfManager::SECTION_EXPORT, "gm_sort", _gmSort);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_EXPORT, "file_preset", _filePreset);
 }

@@ -94,6 +94,7 @@ void ToolSoundfontExport_gui::updateInterface(AbstractToolParameters * parameter
     ui->checkBank->setChecked(params->getBankDirectory());
     ui->checkPreset->setChecked(params->getPresetPrefix());
     ui->checkGM->setChecked(params->getGmSort());
+    ui->checkFilePreset->setChecked(params->getFilePreset());
 
     int exportQuality = params->getQuality();
     if (exportQuality < 0 || exportQuality >= ui->comboQuality->count())
@@ -112,6 +113,7 @@ void ToolSoundfontExport_gui::saveParameters(AbstractToolParameters * parameters
     params->setPresetPrefix(ui->checkPreset->isChecked());
     params->setBankDirectory(ui->checkBank->isChecked());
     params->setGmSort(ui->checkGM->isChecked());
+    params->setFilePreset(ui->checkFilePreset->isChecked());
 
     // Preset list
     params->setSelectedPresets(_presetList);
@@ -217,6 +219,9 @@ void ToolSoundfontExport_gui::on_comboFormat_currentIndexChanged(int index)
     // Options for sf3
     ui->labelQuality->setVisible(index == 1);
     ui->comboQuality->setVisible(index == 1);
+
+    // Options for sf2 and sf3
+    ui->checkFilePreset->setVisible(index == 0 || index == 1);
 
     // Options for sfz
     ui->checkBank->setVisible(index == 2);

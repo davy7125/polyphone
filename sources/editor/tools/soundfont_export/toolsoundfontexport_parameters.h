@@ -52,6 +52,9 @@ public:
     bool getBankDirectory() { return _bankDirectory; }
     void setBankDirectory(bool bankDirectory) { _bankDirectory = bankDirectory; }
 
+    bool getFilePreset() { return _filePreset; }
+    void setFilePreset(bool filePreset) { _filePreset = filePreset; }
+
     bool getGmSort() { return _gmSort; }
     void setGmSort(bool gmSort) { _gmSort = gmSort; }
     
@@ -66,6 +69,7 @@ private:
     bool _presetPrefix;
     bool _bankDirectory;
     bool _gmSort;
+    bool _filePreset;
 
     QMap<int, QList<int> > _selectedPresets;
 };

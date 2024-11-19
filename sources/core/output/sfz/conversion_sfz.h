@@ -70,7 +70,6 @@ private:
     void writeModulator(ModulatorData modData);
     bool isIncluded(SfzParamList * paramPrst, EltID idInstSmpl);
     static double dbToPercent(double dB) { return 100. * pow(10, -dB / 20); }
-    static QString escapeStr(QString str);
     static int lastLettersToRemove(QString str1, QString str2);
     static QString getDirectoryName(int numPreset);
     static QString getDrumCategory(int numPreset);

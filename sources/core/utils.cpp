@@ -273,6 +273,12 @@ QString Utils::fixFilePath(QString filePath)
     return filePath;
 }
 
+QString Utils::removeForbiddenFilePathCharacters(QString str)
+{
+    QRegularExpression reg = QRegularExpression(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]"));
+    return str.replace(reg, "_");
+}
+
 bool Utils::isValidUtf8(QByteArray data)
 {
     int inSequence = 0;

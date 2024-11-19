@@ -55,6 +55,7 @@ public:
     static float int24ToFloat(qint32 i);
 
     static QString fixFilePath(QString filePath);
+    static QString removeForbiddenFilePathCharacters(QString str);
 
     static bool isValidUtf8(QByteArray data);
 

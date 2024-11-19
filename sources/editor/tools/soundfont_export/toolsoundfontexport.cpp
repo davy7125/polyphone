@@ -29,6 +29,7 @@
 #include "duplicator.h"
 #include "outputfactory.h"
 #include "abstractoutput.h"
+#include "utils.h"
 
 ToolSoundfontExport::ToolSoundfontExport() : AbstractToolOneStep(new ToolSoundfontExport_parameters(), new ToolSoundfontExport_gui())
 {
@@ -53,11 +54,45 @@ void ToolSoundfontExport::process(SoundfontManager * sm, IdList ids, AbstractToo
     Q_UNUSED(ids)
     ToolSoundfontExport_parameters * params = (ToolSoundfontExport_parameters *)parameters;
     
+    QMap<int, QList<int> > presets = params->getSelectedPresets();
+    if (params->getFilePreset())
+    {
+        // One file per preset
+        foreach (int soundfontId, presets.keys())
+        {
+            foreach (int presetId, presets[soundfontId])
+            {
+                // Name of the file
+                EltID prstId = EltID(elementPrst, soundfontId, presetId);
+                QString name = QString("%1_%2 %3")
+                                   .arg(sm->get(prstId, champ_wBank).wValue, 3, 10, QLatin1Char('0'))
+                                   .arg(sm->get(prstId, champ_wPreset).wValue, 3, 10, QLatin1Char('0'))
+                                   .arg(sm->getQstr(prstId, champ_name));
+                name = Utils::removeForbiddenFilePathCharacters(name.trimmed());
+                if (name.isEmpty())
+                    name = getName(sm, presets.keys());
+
+                QMap<int,  QList<int> > preset;
+                preset[soundfontId] << presetId;
+                process(sm, name, preset, parameters);
+            }
+        }
+    }
+    else
+    {
+        // Export all presets together
+        process(sm, getName(sm, presets.keys()), presets, parameters);
+    }
+}
+
+void ToolSoundfontExport::process(SoundfontManager * sm, QString name, QMap<int,  QList<int> > presets, AbstractToolParameters * parameters)
+{
+    ToolSoundfontExport_parameters * params = (ToolSoundfontExport_parameters *)parameters;
+
     // Create a new soundfont with the presets to export
-    EltID idExport = mergeSoundfonts(sm, params->getSelectedPresets());
+    EltID idExport = mergeSoundfonts(sm, presets);
 
     // Destination
-    QString name = getName(sm, params->getSelectedPresets().keys());
     QString filePath = getFilePath(params->getDirectory(), name, params->getFormat());
 
     // Get a parser and configure it

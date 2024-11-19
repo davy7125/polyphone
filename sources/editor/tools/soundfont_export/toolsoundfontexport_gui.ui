@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>231</width>
-    <height>302</height>
+    <width>305</width>
+    <height>368</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,32 +55,6 @@
      <property name="verticalSpacing">
       <number>5</number>
      </property>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="pushFolder">
-       <property name="maximumSize">
-        <size>
-         <width>26</width>
-         <height>26</height>
-        </size>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Destination</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="1" colspan="2">
       <widget class="QComboBox" name="comboFormat">
        <item>
@@ -100,17 +74,40 @@
        </item>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label">
+     <item row="0" column="2">
+      <widget class="QPushButton" name="pushFolder">
+       <property name="maximumSize">
+        <size>
+         <width>26</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::FocusPolicy::NoFocus</enum>
+       </property>
        <property name="text">
-        <string>Format</string>
+        <string/>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="lineFolder"/>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Destination</string>
+       </property>
+      </widget>
      </item>
      <item row="4" column="1" colspan="2">
+      <widget class="QCheckBox" name="checkBank">
+       <property name="text">
+        <string>one directory per bank</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1" colspan="2">
       <widget class="QCheckBox" name="checkGM">
        <property name="text">
         <string>General MIDI classification</string>
@@ -118,20 +115,16 @@
       </widget>
      </item>
      <item row="3" column="1" colspan="2">
-      <widget class="QCheckBox" name="checkBank">
-       <property name="text">
-        <string>one directory per bank</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1" colspan="2">
       <widget class="QCheckBox" name="checkPreset">
        <property name="text">
         <string>preset number as prefix</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="1" colspan="2">
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lineFolder"/>
+     </item>
+     <item row="2" column="1" colspan="2">
       <widget class="QComboBox" name="comboQuality">
        <property name="currentIndex">
         <number>1</number>
@@ -153,7 +146,21 @@
        </item>
       </widget>
      </item>
-     <item row="5" column="0">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Format</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1" colspan="2">
+      <widget class="QCheckBox" name="checkFilePreset">
+       <property name="text">
+        <string>one file per preset</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
       <widget class="QLabel" name="labelQuality">
        <property name="text">
         <string>Quality</string>
@@ -174,7 +181,7 @@
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -204,7 +211,6 @@
   <tabstop>checkPreset</tabstop>
   <tabstop>checkBank</tabstop>
   <tabstop>checkGM</tabstop>
-  <tabstop>comboQuality</tabstop>
   <tabstop>pushExport</tabstop>
   <tabstop>pushAnnuler</tabstop>
  </tabstops>

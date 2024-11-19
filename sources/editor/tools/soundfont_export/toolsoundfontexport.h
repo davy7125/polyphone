@@ -71,6 +71,7 @@ protected:
     QString getConfirmation() override;
 
 private:
+    void process(SoundfontManager * sm, QString name, QMap<int,  QList<int> > presets, AbstractToolParameters *parameters);
     EltID mergeSoundfonts(SoundfontManager * sm, QMap<int,  QList<int> > presets);
     QString getName(SoundfontManager * sm, QList<int> sf2Indexes);
     QString getFilePath(QString directory, QString name, int format);

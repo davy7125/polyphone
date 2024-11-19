@@ -35,7 +35,7 @@
 #include "sfzparamlist.h"
 #include "balanceparameters.h"
 #include "sfzwriter.h"
-
+#include "utils.h"
 
 ConversionSfz::ConversionSfz() : QObject(),
     _sf2(SoundfontManager::getInstance()),
@@ -239,7 +239,7 @@ QString ConversionSfz::getPathSfz(QString dir, QString name)
     name = name.replace(".", " ").trimmed();
     if (name.isEmpty())
         name = tr("untitled");
-    name = escapeStr(name);
+    name = Utils::removeForbiddenFilePathCharacters(name);
     QFile file(dir + "/" + name + ".sfz");
     QDir dossier(dir + "/" + name);
     if (file.exists() || dossier.exists())
@@ -560,7 +560,7 @@ QString ConversionSfz::getSamplePath(EltID idSmpl, int &sampleChannel, int &link
     else
         name = _sf2->getQstr(idSmpl, champ_name);
 
-    name = escapeStr(name);
+    name = Utils::removeForbiddenFilePathCharacters(name);
     QFile file(_dirSamples + "/" + name + ".wav");
     if (file.exists())
     {
@@ -616,11 +616,6 @@ int ConversionSfz::findOtherChannel(EltID idSmpl)
 
     // Otherwise keep the two channels separate
     return -1;
-}
-
-QString ConversionSfz::escapeStr(QString str)
-{
-    return str.replace(QRegularExpression(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_");
 }
 
 int ConversionSfz::lastLettersToRemove(QString str1, QString str2)
