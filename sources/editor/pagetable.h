@@ -86,6 +86,7 @@ private:
     void resetChamp(int colonne, AttributeType champ1, AttributeType champ2);
     void setOffset(int ligne, int colonne, AttributeType champ1, AttributeType champ2);
     void styleFixedRow(int numRow);
+    bool isPlayingInInst(int key, int vel, EltID idInst);
 
     // Attribute <-> string conversion
     static QString attributeToString(AttributeType champ, bool isPrst, AttributeValue storedValue);

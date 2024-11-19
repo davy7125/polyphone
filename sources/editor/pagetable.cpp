@@ -206,8 +206,8 @@ void PageTable::addGlobal(IdList listIds)
                         _table->setLoopModeImage(row, numCol, genValTmp.wValue);
                     else
                         _table->item(row, numCol)->setText(
-                                    attributeToString(static_cast<AttributeType>(i),
-                                                      _isPrst, genValTmp));
+                            attributeToString(static_cast<AttributeType>(i),
+                                              _isPrst, genValTmp));
                 }
             }
         }
@@ -263,9 +263,9 @@ void PageTable::addDivisions(EltID id)
         id3.indexElt = _sf2->get(id, cElementLie).wValue;
 
         QString strOrder = QString("%1-%2-%3")
-                .arg(_sf2->get(id, champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
-                .arg(_sf2->get(id, champ_velRange).rValue.byLo, 3, 10, QChar('0'))
-                .arg(_sf2->getQstr(id3, champ_name));
+                               .arg(_sf2->get(id, champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
+                               .arg(_sf2->get(id, champ_velRange).rValue.byLo, 3, 10, QChar('0'))
+                               .arg(_sf2->getQstr(id3, champ_name));
         for (int j = 1; j < nbSmplInst + 1; j++)
         {
             if (_sf2->sortDivisions(id, _table->getID(j), _sortType) > 0)
@@ -329,8 +329,8 @@ void PageTable::addDivisions(EltID id)
                         _table->setLoopModeImage(row, numCol, genValTmp.wValue);
                     else
                         _table->item(row, numCol)->setText(
-                                    attributeToString(static_cast<AttributeType>(champTmp),
-                                                      _isPrst, genValTmp));
+                            attributeToString(static_cast<AttributeType>(champTmp),
+                                              _isPrst, genValTmp));
                 }
             }
         }
@@ -547,8 +547,8 @@ void PageTable::setOffset(int ligne, int colonne, AttributeType champ1, Attribut
         genAmount2.shValue = static_cast<qint16>(iVal / 32768);
         genAmount.shValue = static_cast<qint16>(iVal % 32768);
         if (!_sf2->isSet(id, champ1) || !_sf2->isSet(id, champ2) ||
-                genAmount.shValue != _sf2->get(id, champ1).shValue ||
-                genAmount2.shValue != _sf2->get(id, champ2).shValue)
+            genAmount.shValue != _sf2->get(id, champ1).shValue ||
+            genAmount2.shValue != _sf2->get(id, champ2).shValue)
         {
             // Modification du sf2
             id = _table->getID(colonne);
@@ -597,7 +597,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
 
     EltID id = _table->getID(colonne);
     if (allowPropagation && id.typeElement == elementInstSmpl && champ != champ_pan &&
-            ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool())
+        ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool())
     {
         // Répercussion des modifications sur le sample stéréo s'il est présent
         EltID idSmpl = id;
@@ -605,7 +605,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
         idSmpl.indexElt = _sf2->get(id, champ_sampleID).wValue;
         SFSampleLink typeLink = _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
         if (typeLink == rightSample || typeLink == leftSample || typeLink == linkedSample ||
-                typeLink == RomRightSample || typeLink == RomLeftSample || typeLink == RomLinkedSample)
+            typeLink == RomRightSample || typeLink == RomLeftSample || typeLink == RomLinkedSample)
         {
             int numSmpl2 = _sf2->get(idSmpl, champ_wSampleLink).wValue;
             RangesType keyRange = _sf2->get(id, champ_keyRange).rValue;
@@ -623,7 +623,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
                     RangesType keyRange2 = _sf2->get(idTmp, champ_keyRange).rValue;
                     RangesType velRange2 = _sf2->get(idTmp, champ_velRange).rValue;
                     if (keyRange2.byLo == keyRange.byLo && keyRange2.byHi == keyRange.byHi &&
-                            velRange2.byLo == velRange.byLo && velRange2.byHi == velRange.byHi)
+                        velRange2.byLo == velRange.byLo && velRange2.byHi == velRange.byHi)
                     {
                         int iTmp = _sf2->get(idTmp, champ_sampleID).wValue;
                         if (iTmp == idSmpl.indexElt)
@@ -768,7 +768,7 @@ void PageTable::select(EltID id)
     {
         id2 = _table->getID(i);
         if (id.typeElement == id2.typeElement && id.indexSf2 == id2.indexSf2 && id.indexElt == id2.indexElt &&
-                (id.indexElt2 == id2.indexElt2 || id.typeElement == elementInst || id.typeElement == elementPrst))
+            (id.indexElt2 == id2.indexElt2 || id.typeElement == elementInst || id.typeElement == elementPrst))
         {
             _table->blockSignals(true);
             _table->item(0, i)->setSelected(true);
@@ -927,10 +927,10 @@ int PageTable::limit(int iVal, AttributeType champ, EltID id)
                 id3.indexElt2 = i;
                 id2.indexElt = _sf2->get(id3, champ_sampleID).wValue;
                 if (i == 0 || \
-                        _sf2->get(id2, champ_dwLength).dwValue -
-                        _sf2->get(id2, champ_dwStartLoop).dwValue < (unsigned)limSup)
+                                      _sf2->get(id2, champ_dwLength).dwValue -
+                                      _sf2->get(id2, champ_dwStartLoop).dwValue < (unsigned)limSup)
                     limSup = _sf2->get(id2, champ_dwLength).dwValue -
-                            _sf2->get(id2, champ_dwStartLoop).dwValue;
+                             _sf2->get(id2, champ_dwStartLoop).dwValue;
             }
         }
         if (ret > limSup) ret = limSup;
@@ -976,10 +976,10 @@ int PageTable::limit(int iVal, AttributeType champ, EltID id)
                 id3.indexElt2 = i;
                 id2.indexElt = _sf2->get(id3, champ_sampleID).wValue;
                 if (i == 0 ||
-                        _sf2->get(id2, champ_dwLength).dwValue -
-                        _sf2->get(id2, champ_dwEndLoop).dwValue < (unsigned)limSup)
+                    _sf2->get(id2, champ_dwLength).dwValue -
+                            _sf2->get(id2, champ_dwEndLoop).dwValue < (unsigned)limSup)
                     limSup = _sf2->get(id2, champ_dwLength).dwValue -
-                            _sf2->get(id2, champ_dwEndLoop).dwValue;
+                             _sf2->get(id2, champ_dwEndLoop).dwValue;
             }
         }
         if (ret > limSup) ret = limSup;
@@ -1033,19 +1033,65 @@ bool PageTable::keyPlayedInternal(int key, int velocity)
                 if (_sf2->isSet(id, champ_velRange))
                     velRange = _sf2->get(id, champ_velRange).rValue;
 
+                // Enlight the column if at least one key / velocity matches a sample division
                 bool enlighted = false;
                 QMapIterator<int, int> it(_listKeyEnlighted);
-                while (it.hasNext()) {
+                while (it.hasNext())
+                {
                     it.next();
                     if (it.key() >= keyRange.byLo && it.key() <= keyRange.byHi && it.value() >= velRange.byLo && it.value() <= velRange.byHi)
                     {
-                        enlighted = true;
-                        break;
+                        // A division is played: possibly check the instrument at the preset level
+                        enlighted = !_isPrst ||
+                                    isPlayingInInst(it.key(), it.value(), EltID(elementInst, id.indexSf2, _sf2->get(id, champ_instrument).wValue));
+                        if (enlighted)
+                            break;
                     }
                 }
                 _table->setEnlighted(i, enlighted);
             }
         }
+    }
+
+    return false;
+}
+
+bool PageTable::isPlayingInInst(int key, int vel, EltID idInst)
+{
+    // Default instrument ranges
+    RangesType defaultKeyRange, defaultVelRange;
+    if (_sf2->isSet(idInst, champ_keyRange))
+        defaultKeyRange = _sf2->get(idInst, champ_keyRange).rValue;
+    else
+    {
+        defaultKeyRange.byLo = 0;
+        defaultKeyRange.byHi = 128;
+    }
+    if (_sf2->isSet(idInst, champ_velRange))
+        defaultVelRange = _sf2->get(idInst, champ_velRange).rValue;
+    else
+    {
+        defaultVelRange.byLo = 0;
+        defaultVelRange.byHi = 128;
+    }
+
+    // Browse all instrument divisions
+    EltID idInstSmpl = EltID(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
+    foreach (int i, _sf2->getSiblings(idInstSmpl))
+    {
+        idInstSmpl.indexElt2 = i;
+
+        // Division range
+        RangesType keyRange = defaultKeyRange;
+        if (_sf2->isSet(idInstSmpl, champ_keyRange))
+            keyRange = _sf2->get(idInstSmpl, champ_keyRange).rValue;
+        RangesType velRange = defaultVelRange;
+        if (_sf2->isSet(idInstSmpl, champ_velRange))
+            velRange = _sf2->get(idInstSmpl, champ_velRange).rValue;
+
+        // Check that {key, vel} is inside
+        if (key >= keyRange.byLo && key <= keyRange.byHi && vel >= velRange.byLo && vel <= velRange.byHi)
+            return true;
     }
 
     return false;
