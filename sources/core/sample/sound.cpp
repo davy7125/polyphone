@@ -93,13 +93,17 @@ float * Sound::getData(quint32 &length, bool forceReload, bool getCopy)
         SampleReader::SampleReaderResult result;
         if (forceReload)
         {
-            // Old / new lengths
+            // Current length / channel
             quint32 oldLength = _info.dwLength;
+            quint16 channel = _info.wChannel;
+
+            // Update the details and keep the channel number
             _reader->getInfo(&_info);
-            quint32 newLength = _info.dwLength;
+            _info.wChannel = channel;
 
             // Write over the current data or replace the pointer
             float * newData = _reader->getData(result);
+            quint32 newLength = _info.dwLength;
             _info.dwLength = oldLength;
             this->setData(newData, newLength);
         }
