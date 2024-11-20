@@ -50,6 +50,8 @@ public:
     static void updateRecorderButtonsState(bool isChecked);
     static void updateKeyboardButtonsState(bool isChecked);
     static void updateMidiExtensionButtonsState(int midiExtensionIndex, bool isChecked);
+    static bool isKeyboardOpen() { return s_keyboardOpen; }
+    static bool isRecorderOpen() { return s_recorderOpen; }
 
 public slots:
     void onSelectionChanged(IdList ids);

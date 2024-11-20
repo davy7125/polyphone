@@ -61,8 +61,8 @@ private slots:
     void on_pushButtonOpen_clicked();
     void on_pushButtonNew_clicked();
     void onAboutClicked();
-    void onKeyboardDisplayChange(bool isDisplayed);
-    void onRecorderDisplayChange(bool isDisplayed);
+    void onKeyboardDisplayChange(bool isDisplayed, bool propagate);
+    void onRecorderDisplayChange(bool isDisplayed, bool propagate);
     void fullScreenTriggered();
     void onCloseFile();
     void onSave();

@@ -41,6 +41,7 @@ class DialogKeyboard : public QDialog, public IMidiListener
 public:
     explicit DialogKeyboard(QWidget *parent = nullptr);
     ~DialogKeyboard() override;
+    void updateState(bool isOn) { _stateUpdate = isOn; }
 
     // Focus on the keyboard and animate with a glow effect
     void glow();
@@ -57,7 +58,8 @@ public:
     bool processBendSensitivityChanged(int channel, float semitones) override { Q_UNUSED(channel); Q_UNUSED(semitones); return false; }
 
 protected:
-    void closeEvent(QCloseEvent * event) override;
+    void showEvent(QShowEvent * event) override;
+    void hideEvent(QHideEvent * event) override;
     void keyPressEvent(QKeyEvent * event) override;
 
 private slots:
@@ -71,6 +73,7 @@ private:
 
     Ui::DialogKeyboard *ui;
     QList<QPair<int, QPair<int, int> > > _triggeredKeys; // velocity and aftertouch by key
+    bool _stateUpdate;
 };
 
 #endif // DIALOGKEYBOARD_H

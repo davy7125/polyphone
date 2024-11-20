@@ -29,7 +29,8 @@
 
 DialogKeyboard::DialogKeyboard(QWidget *parent) :
     QDialog(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint),
-    ui(new Ui::DialogKeyboard)
+    ui(new Ui::DialogKeyboard),
+    _stateUpdate(true)
 {
     ui->setupUi(this);
 
@@ -65,19 +66,11 @@ DialogKeyboard::DialogKeyboard(QWidget *parent) :
 
     // Visibility of the control area
     updateControlAreaVisibility();
-
-    // Restore the geometry
-    QByteArray geometry = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "keyboardGeometry", QByteArray()).toByteArray();
-    if (!geometry.isEmpty())
-        this->restoreGeometry(geometry);
 }
 
 DialogKeyboard::~DialogKeyboard()
 {
-    // Save the keyboard state
     ContextManager::midi()->removeListener(this);
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboard_height", ui->keyboard->sizeHint().height());
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboardGeometry", this->saveGeometry());
     delete ui;
 }
 
@@ -105,10 +98,27 @@ void DialogKeyboard::glow()
     ui->keyboard->triggerGlowEffect();
 }
 
-void DialogKeyboard::closeEvent(QCloseEvent * event)
+void DialogKeyboard::showEvent(QShowEvent * event)
 {
-    QDialog::closeEvent(event);
-    EditorToolBar::updateKeyboardButtonsState(false);
+    QDialog::showEvent(event);
+    if (_stateUpdate)
+        EditorToolBar::updateKeyboardButtonsState(true);
+
+    // Restore the geometry (not working with Wayland)
+    QByteArray geometry = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "keyboardGeometry", QByteArray()).toByteArray();
+    if (!geometry.isEmpty())
+        this->restoreGeometry(geometry);
+}
+
+void DialogKeyboard::hideEvent(QHideEvent * event)
+{
+    QDialog::hideEvent(event);
+    if (_stateUpdate)
+        EditorToolBar::updateKeyboardButtonsState(false);
+
+    // Save the geometry
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboard_height", ui->keyboard->sizeHint().height());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboardGeometry", this->saveGeometry());
 }
 
 void DialogKeyboard::on_comboType_currentIndexChanged(int index)

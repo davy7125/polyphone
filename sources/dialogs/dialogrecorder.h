@@ -40,11 +40,11 @@ class DialogRecorder : public QDialog
 public:
     explicit DialogRecorder(QWidget *parent = nullptr);
     ~DialogRecorder() override;
+    void updateState(bool isOn) { _stateUpdate = isOn; }
 
 protected:
-    void hideEvent(QHideEvent * event) override;
     void showEvent(QShowEvent * event) override;
-    void closeEvent(QCloseEvent * event) override;
+    void hideEvent(QHideEvent * event) override;
     void keyPressEvent(QKeyEvent * event) override;
 
 private slots:
@@ -53,14 +53,15 @@ private slots:
     void on_pushPlayPause_clicked();
 
 private:
+    void initialize();
+    QString getDefaultPath();
+
     Ui::DialogRecorder *ui;
     quint32 _currentSample;
     bool _isRecording;
     bool _isPaused;
     Synth * _synth;
-
-    void initialize();
-    QString getDefaultPath();
+    bool _stateUpdate;
 };
 
 #endif // DIALOGRECORDER_H

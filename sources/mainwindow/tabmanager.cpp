@@ -43,6 +43,7 @@
 #include "repositorymanager.h"
 #include "utils.h"
 #include "synth.h"
+#include "editortoolbar.h"
 
 TabManager * TabManager::s_instance = nullptr;
 
@@ -79,6 +80,9 @@ TabManager::TabManager(DialogKeyboard * dialogKeyboard, MainStackedWidget * stac
 
 TabManager::~TabManager()
 {
+    // Save the state of the keyboard and recorder windows
+    saveWindowState();
+
     delete _configTab;
     delete _browserTab;
     delete _userTab;
@@ -171,6 +175,15 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions)
     // Initialize and display it
     _stackedWidget->setCurrentIndex(index);
     tab->initialize(InputFactory::getInput(fileName));
+
+    // Possibly open the keyboard and recorder windows
+    if (_tabs.count() == 1)
+    {
+        if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "keyboard_open", false).toBool())
+            emit keyboardDisplayChanged(true);
+        if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "recorder_open", false).toBool())
+            emit recorderDisplayChanged(true);
+    }
 }
 
 void TabManager::openRepository(SoundfontFilter *filter)
@@ -264,8 +277,12 @@ void TabManager::onTabCloseRequested(QWidget * widget)
 
         if (_tabs.empty())
         {
-            emit recorderDisplayChanged(false);
-            emit keyboardDisplayChanged(false);
+            // Save the state of the keyboard and recorder windows
+            saveWindowState();
+
+            // Close them
+            emit keyboardDisplayChanged(false, false);
+            emit recorderDisplayChanged(false, false);
         }
     }
     else if (widget == dynamic_cast<QWidget*>(_configTab))
@@ -362,4 +379,10 @@ void TabManager::setCurrentWidget(QWidget * widget)
 {
     if (widget != nullptr)
         _stackedWidget->setCurrentWidget(widget);
+}
+
+void TabManager::saveWindowState()
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboard_open", EditorToolBar::isKeyboardOpen());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "recorder_open", EditorToolBar::isRecorderOpen());
 }

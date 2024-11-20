@@ -36,7 +36,8 @@
 
 DialogRecorder::DialogRecorder(QWidget *parent) :
     QDialog(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint),
-    ui(new Ui::DialogRecorder)
+    ui(new Ui::DialogRecorder),
+    _stateUpdate(true)
 {
     ui->setupUi(this);
     _synth = ContextManager::audio()->getSynth();
@@ -76,17 +77,6 @@ void DialogRecorder::onDataWritten(quint32 sampleRate, quint32 number)
     }
 }
 
-void DialogRecorder::closeEvent(QCloseEvent * event)
-{
-    QDialog::closeEvent(event);
-    EditorToolBar::updateRecorderButtonsState(false);
-
-    // Stop the recording if needed
-    if (_isRecording)
-        _synth->endRecord();
-    this->initialize();
-}
-
 void DialogRecorder::on_pushRecord_clicked()
 {
     if (_isRecording)
@@ -116,7 +106,6 @@ void DialogRecorder::on_pushRecord_clicked()
             ui->pushPlayPause->setEnabled(true);
         }
     }
-
 }
 
 void DialogRecorder::on_pushPlayPause_clicked()
@@ -166,18 +155,31 @@ QString DialogRecorder::getDefaultPath()
     return defaultPath + ".wav";
 }
 
-void DialogRecorder::hideEvent(QHideEvent * event)
-{
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "recorderGeometry", this->saveGeometry());
-    QDialog::hideEvent(event);
-}
-
 void DialogRecorder::showEvent(QShowEvent * event)
 {
     QDialog::showEvent(event);
+    if (_stateUpdate)
+        EditorToolBar::updateRecorderButtonsState(true);
+
+    // Restore the geometry (not working with Wayland)
     QByteArray geometry = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "recorderGeometry", QByteArray()).toByteArray();
     if (!geometry.isEmpty())
         this->restoreGeometry(geometry);
+}
+
+void DialogRecorder::hideEvent(QHideEvent * event)
+{
+    QDialog::hideEvent(event);
+    if (_stateUpdate)
+        EditorToolBar::updateRecorderButtonsState(false);
+
+    // Save the geometry
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "recorderGeometry", this->saveGeometry());
+
+    // Stop the recording if needed
+    if (_isRecording)
+        _synth->endRecord();
+    this->initialize();
 }
 
 void DialogRecorder::keyPressEvent(QKeyEvent * event)

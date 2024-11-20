@@ -131,8 +131,8 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) :
     ui->stackedWidget->setControls(ui->pushHome, ui->tabBar);
     _tabManager = TabManager::prepareInstance(_keyboard, ui->stackedWidget);
     connect(ui->widgetShowSoundfonts, SIGNAL(itemClicked(SoundfontFilter*)), _tabManager, SLOT(openRepository(SoundfontFilter*)));
-    connect(_tabManager, SIGNAL(keyboardDisplayChanged(bool)), this, SLOT(onKeyboardDisplayChange(bool)));
-    connect(_tabManager, SIGNAL(recorderDisplayChanged(bool)), this, SLOT(onRecorderDisplayChange(bool)));
+    connect(_tabManager, SIGNAL(keyboardDisplayChanged(bool,bool)), this, SLOT(onKeyboardDisplayChange(bool,bool)));
+    connect(_tabManager, SIGNAL(recorderDisplayChanged(bool,bool)), this, SLOT(onRecorderDisplayChange(bool,bool)));
     connect(_tabManager, SIGNAL(tabOpen(bool)), ui->topRightWidget, SLOT(onTabOpen(bool)));
 
 #ifdef NO_SF2_REPOSITORY
@@ -254,6 +254,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
             break;
         }
     }
+
+    if (_keyboard)
+        _keyboard->updateState(false);
+    _recorder->updateState(false);
 }
 
 void MainWindow::recentSf2Changed()
@@ -324,15 +328,23 @@ void MainWindow::openFiles(QString fileNames)
         _tabManager->openSoundfont(file, &playerOptions);
 }
 
-void MainWindow::onKeyboardDisplayChange(bool isDisplayed)
+void MainWindow::onKeyboardDisplayChange(bool isDisplayed, bool propagate)
 {
     if (_keyboard != nullptr)
+    {
+        if (!propagate)
+            _keyboard->updateState(false);
         _keyboard->setVisible(isDisplayed);
+        _keyboard->updateState(true);
+    }
 }
 
-void MainWindow::onRecorderDisplayChange(bool isDisplayed)
+void MainWindow::onRecorderDisplayChange(bool isDisplayed, bool propagate)
 {
+    if (!propagate)
+        _recorder->updateState(false);
     _recorder->setVisible(isDisplayed);
+    _recorder->updateState(true);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent * event)

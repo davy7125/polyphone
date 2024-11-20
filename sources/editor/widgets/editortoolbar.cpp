@@ -111,9 +111,6 @@ EditorToolBar::~EditorToolBar()
     delete ui;
     if (s_instances.empty())
     {
-        s_keyboardOpen = false;
-        s_recorderOpen = false;
-
         for (int i = 0; i < ExtensionManager::midi()->count(); i++)
         {
             s_midiExtensionOpen[i] = false;
@@ -234,7 +231,6 @@ void EditorToolBar::on_pushShowRecorder_clicked()
     if (_initializing)
         return;
     bool isDisplayed = ui->pushShowRecorder->isChecked();
-    updateRecorderButtonsState(isDisplayed);
     emit recorderDisplayChanged(isDisplayed);
 }
 
@@ -243,7 +239,6 @@ void EditorToolBar::on_pushShowKeyboard_clicked()
     if (_initializing)
         return;
     bool isDisplayed = ui->pushShowKeyboard->isChecked();
-    updateKeyboardButtonsState(isDisplayed);
     emit keyboardDisplayChanged(isDisplayed);
 }
 

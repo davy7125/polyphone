@@ -77,11 +77,9 @@ public slots:
     void closeCurrentTab();
 
 signals:
-    /// Emitted when the visibility of the recorder changes
-    void recorderDisplayChanged(bool isDisplayed);
-
-    /// Emitted when the visibility of the keyboard changes
-    void keyboardDisplayChanged(bool isDisplayed);
+    /// Emitted when the visibility of the keyboard or recorder changes
+    void keyboardDisplayChanged(bool isDisplayed, bool propagate = true);
+    void recorderDisplayChanged(bool isDisplayed, bool propagate = true);
 
     /// Emitted when the current tab changed
     void tabOpen(bool isOpen);
@@ -100,6 +98,7 @@ private slots:
 private:
     explicit TabManager(DialogKeyboard * dialogKeyboard, MainStackedWidget * stackedWidget);
     ~TabManager();
+    void saveWindowState();
 
     DialogKeyboard * _dialogKeyboard;
     MainStackedWidget * _stackedWidget;
