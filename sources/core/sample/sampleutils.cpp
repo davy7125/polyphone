@@ -512,7 +512,7 @@ QVector<float> SampleUtils::removeBlankStep2(QVector<float> vData, quint32 pos)
     return vData;
 }
 
-void SampleUtils::regimePermanent(QVector<float> fData, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd)
+bool SampleUtils::regimePermanent(QVector<float> fData, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd)
 {
     quint32 size = static_cast<quint32>(fData.size());
 
@@ -531,9 +531,11 @@ void SampleUtils::regimePermanent(QVector<float> fData, quint32 dwSmplRate, quin
                 // moitié du milieu
                 posStart = size / 4;
                 posEnd = size * 3 / 4;
+                return false;
             }
         }
     }
+    return true;
 }
 
 QVector<float> SampleUtils::correlation(const float * fData, quint32 size, quint32 dwSmplRate, quint32 fMin, quint32 fMax, quint32 &dMin)
@@ -572,83 +574,124 @@ QVector<float> SampleUtils::correlation(const float * fData, quint32 size, quint
     return vectCorrel;
 }
 
-float SampleUtils::correlation(const float *fData1, const float* fData2, quint32 size, float *bestValue)
+bool SampleUtils::loopStep1(QVector<float> vData, quint32 dwSmplRate, quint32 &loopStart, quint32 &loopEnd, quint32 &loopCrossfadeLength)
 {
-    // Mesure ressemblance
-    double sum = 0;
-    float tmp;
-    if (bestValue == nullptr)
+    // Search area
+    quint32 posStart, posEnd;
+    if (!regimePermanent(vData, dwSmplRate, posStart, posEnd))
+        posEnd = vData.count() - 1;
+    if (vData.count() > 40000)
     {
-        // Just compute the value
-        for (quint32 i = 0; i < size; ++i)
-        {
-            tmp = fData1[i] - fData2[i];
-            sum += static_cast<double>(tmp * tmp);
-        }
+        posStart = 4000;
+        if (posEnd > vData.count() - 400)
+            posEnd = vData.count() - 400;
+    }
+    else if (vData.count() > 4000)
+    {
+        posStart = 400;
+        if (posEnd > vData.count() - 400)
+            posEnd = vData.count() - 400;
     }
     else
     {
-        // If the sum exceeds bestValue, return immediately
-        double max = size * static_cast<double>(*bestValue);
-        for (quint32 i = 0; i < size; ++i)
+        posStart = 2;
+        if (posEnd > vData.count() - 1)
+            posEnd = vData.count() - 1;
+    }
+
+    // No manual input (previously it was possible to manually adapt the left limit for finding a loop)
+    // if (loopStart > posStart)
+    //     posStart = loopStart;
+
+    // Find all points crossing 0
+    QList<quint32> crossPositions;
+    for (quint32 i = posStart; i < posEnd; i++)
+        if (vData[i - 1] < 0 && vData[i] >= 0)
+            crossPositions << i;
+    if (crossPositions.count() < 2)
+        return false;
+
+    // Limit the area of the loop start
+    quint32 minLoopStart = posStart + 0.25 * (posEnd - posStart);
+    if (minLoopStart > dwSmplRate)
+        minLoopStart = dwSmplRate;
+    int minLoopStartIndex = 0;
+    for (int i = 0; i < crossPositions.count(); i++)
+    {
+        if (crossPositions[i] > minLoopStart)
         {
-            tmp = fData1[i] - fData2[i];
-            sum += static_cast<double>(tmp * tmp);
-            if (sum > max)
-                return *bestValue + 1; // Anything more than bestvalue is ok
+            minLoopStartIndex = i;
+            break;
         }
     }
 
-    // Normalisation et retour
-    return static_cast<float>(sum / size);
-}
-
-bool SampleUtils::loopStep1(QVector<float> vData, quint32 dwSmplRate, quint32 &loopStart, quint32 &loopEnd, quint32 &loopCrossfadeLength)
-{
-    // Recherche du régime permament
-    quint32 posStart = loopStart;
-    if (posStart == loopEnd || loopEnd < dwSmplRate / 4 + posStart)
-        regimePermanent(vData, dwSmplRate, posStart, loopEnd);
-    if (loopEnd < dwSmplRate / 4 + posStart)
-        return false;
-
-    // Extraction du segment B de 0.05s à la fin du régime permanent
-    quint32 longueurSegmentB = static_cast<quint32>(0.05 * dwSmplRate);
-    QVector<float> segmentB = vData.mid(static_cast<int>(loopEnd - longueurSegmentB), static_cast<int>(longueurSegmentB));
-
-    // Find the best correlation
-    float minCorValue;
-    quint32 bestCorPos;
+    // Limit the area of the loop end
+    quint32 minLoopEnd = posStart + 0.25 * (posEnd - posStart);
+    int minLoopEndIndex = 0;
+    for (int i = 0; i < crossPositions.count(); i++)
     {
-        float fTmp;
-        quint32 nbCor = (loopEnd - posStart) / 2 - 2 * longueurSegmentB;
-
-        if (nbCor == 0)
-            return false;
-
-        const float * pointerSegB = segmentB.constData();
-        const float * pointerData = vData.constData();
-
-        minCorValue = correlation(pointerSegB, &pointerData[longueurSegmentB + posStart], longueurSegmentB, nullptr);
-        bestCorPos = 0;
-        for (quint32 i = 1; i < nbCor; ++i)
+        if (crossPositions[i] > minLoopEnd)
         {
-            fTmp = correlation(pointerSegB, &pointerData[longueurSegmentB + posStart + i], longueurSegmentB, &minCorValue);
-            if (fTmp < minCorValue)
+            minLoopEndIndex = i;
+            break;
+        }
+    }
+
+    // Number of positions per seconds
+    float positionDensity = static_cast<float>(crossPositions.count()) / vData.count() * dwSmplRate;
+
+    // Absolute maximum value of the signal
+    float max = 0.00045f, tmp;
+    for (quint32 i = 0; i < vData.size(); i++)
+    {
+        tmp = vData[i];
+        if (tmp > max)
+            max = tmp;
+        else if (-tmp > max)
+            max = -tmp;
+    }
+
+    // Compute the quality of the different possible loops and keep the best, minimizing the error and maximizing the loop length
+    int checkNumber = 22 - positionDensity / 150;
+    if (checkNumber < 8)
+        checkNumber = 8;
+
+    float bestQuality = -1;
+    float bestRank = 999999; // Lower is better
+    quint32 bestLoopStart = 0;
+    quint32 bestLoopEnd = 0;
+    float currentQuality, currentRank, lengthScore;
+    quint32 currentPosStart, currentPosEnd;
+
+    for (int i = minLoopStartIndex; i <= crossPositions.count() - 2; i++)
+    {
+        currentPosStart = crossPositions[i];
+
+        for (int j = crossPositions.count() - 1; j >= qMax(minLoopEndIndex, i + 1); j--)
+        {
+            currentPosEnd = crossPositions[j];
+            lengthScore = qMax(3.0f, static_cast<float>(posEnd - posStart) / (currentPosEnd - currentPosStart));
+            if (lengthScore > bestRank)
+                continue; // No need to go further
+
+            currentQuality = computeLoopQuality(vData, currentPosStart, currentPosEnd, checkNumber, max);
+            currentRank = 200.0f * currentQuality + lengthScore;
+            if (currentRank < bestRank)
             {
-                minCorValue = fTmp;
-                bestCorPos = i;
+                bestQuality = currentQuality;
+                bestRank = currentRank;
+                bestLoopStart = currentPosStart;
+                bestLoopEnd = currentPosEnd;
             }
         }
     }
 
-    // Update loop start
-    loopStart = 2 * longueurSegmentB + bestCorPos + posStart;
-
-    // Longueur du crossfade pour bouclage (augmente avec l'incohérence)
-    loopCrossfadeLength = qMin(bestCorPos + 2 * longueurSegmentB,
-                               static_cast<quint32>((1.0f - minCorValue) * dwSmplRate * 4.0f + 0.5f));
-
+    // Result
+    loopStart = bestLoopStart;
+    loopEnd = bestLoopEnd;
+    loopCrossfadeLength = (bestQuality * dwSmplRate / (5 + 0.75 * checkNumber)) * (bestQuality * dwSmplRate / (5 + 0.75 * checkNumber));
+    if (loopCrossfadeLength > loopStart - posStart)
+        loopCrossfadeLength = loopStart - posStart;
     return true;
 }
 
@@ -789,9 +832,6 @@ int SampleUtils::lastLettersToRemove(QString str1, QString str2)
 
     return nbLetters;
 }
-
-
-// UTILITAIRES, PARTIE PRIVEE
 
 void SampleUtils::FFT_calculate(Complex * x, quint32 N /* must be a power of 2 */,
                                 Complex * X, Complex * scratch, Complex * twiddles)
@@ -1158,7 +1198,7 @@ double SampleUtils::BesselI0(double x)
     return -numerator/denominator;
 }
 
-float SampleUtils::computeLoopQuality(QVector<float> vData, quint32 loopStart, quint32 loopEnd)
+float SampleUtils::computeLoopQuality(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 checkNumber, float maxValue)
 {
     const float * data = vData.constData();
     quint32 length = vData.size();
@@ -1169,28 +1209,36 @@ float SampleUtils::computeLoopQuality(QVector<float> vData, quint32 loopStart, q
     int n = 1;
     float result = getDiffForLoopQuality(data, loopStart, loopEnd);
 
-    if (loopStart > 7)
+    quint32 offset = 3;
+    for (quint32 i = 1; i < checkNumber; i++)
     {
-        result += getDiffForLoopQuality(data, loopStart - 5, loopEnd - 5);
-        n++;
-    }
-
-    if (loopStart > 11)
-    {
-        result += getDiffForLoopQuality(data, loopStart - 9, loopEnd - 9);
-        n++;
+        offset += (M_PI_2 /* something irrational */ + i - 1) * i;
+        if (loopStart > 3 + offset)
+        {
+            result += getDiffForLoopQuality(data, loopStart - offset - 1, loopEnd - offset - 1);
+            n += 1;
+        }
+        if (loopEnd + 3 + offset < vData.size())
+        {
+            result += getDiffForLoopQuality(data, loopStart + offset - 1, loopEnd + offset - 1);
+            n += 1;
+        }
     }
 
     // Maximum value inside the loop
-    float max = 0.00045f;
-    float tmp;
-    for (quint32 i = loopStart; i <= loopEnd; i++)
+    float max = maxValue;
+    if (max < 0)
     {
-        tmp = data[i];
-        if (tmp > max)
-            max = tmp;
-        else if (-tmp > max)
-            max = -tmp;
+        max = 0.00045f;
+        float tmp;
+        for (quint32 i = loopStart; i <= loopEnd; i++)
+        {
+            tmp = data[i];
+            if (tmp > max)
+                max = tmp;
+            else if (-tmp > max)
+                max = -tmp;
+        }
     }
 
     // Differences are relative to the maximum

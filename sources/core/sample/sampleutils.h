@@ -43,9 +43,8 @@ public:
     static QVector<float> multiply(QVector<float> vData, float dMult, float &db);
     static void removeBlankStep1(QVector<float> vData, quint32 &pos1, quint32 &pos2);
     static QVector<float> removeBlankStep2(QVector<float> vData, quint32 pos);
-    static void regimePermanent(QVector<float> fData, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd);
+    static bool regimePermanent(QVector<float> fData, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd);
     static QVector<float> correlation(const float *fData, quint32 size, quint32 dwSmplRate, quint32 fMin, quint32 fMax, quint32 &dMin);
-    static float correlation(const float *fData1, const float *fData2, quint32 length, float *bestValue);
     static bool loopStep1(QVector<float> vData, quint32 dwSmplRate, quint32 &loopStart, quint32 &loopEnd, quint32 &loopCrossfadeLength);
     static QVector<float> loopStep2(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 loopCrossfadeLength);
     static QList<quint32> findMins(QVector<float> vectData, int maxNb, float minFrac = 0);
@@ -54,10 +53,12 @@ public:
     static float meanSquare(QVector<float> vData);
     static int lastLettersToRemove(QString str1, QString str2);
 
-    // Compute the quality of a loop
-    // If the result if < 0.05 it can be considered as OK
-    // If > 0.150 => you will probably hear the loop point
-    static float computeLoopQuality(QVector<float> vData, quint32 loopStart, quint32 loopEnd);
+    // Compute the quality of a loop:
+    // - if the result if < 0.05 it can be considered as OK
+    // - if > 0.150 => you will probably hear the loop point
+    // if maxValue is -1, the algorithm will compute it
+    // if checknumber is high, the accuracy is best but it needs more samples to compute
+    static float computeLoopQuality(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 checkNumber = 3, float maxValue = -1);
 
 private:
     static void FFT_calculate(Complex * x, quint32 N /* must be a power of 2 */,
