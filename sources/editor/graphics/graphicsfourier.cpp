@@ -129,27 +129,20 @@ QList<Peak> GraphicsFourier::computePeaks(QVector<float> fData, quint32 dwSmplRa
     if (posStart == posEnd)
         SampleUtils::regimePermanent(fData, dwSmplRate, posStart, posEnd);
 
-    // Limit or increase the portion to 0.5 second
+    // Limit the portion to 0.5 second
     if (posEnd > dwSmplRate / 2 + posStart)
     {
         quint32 offset = (posEnd - dwSmplRate / 2 - posStart) / 2;
         posStart += offset;
         posEnd -= offset;
     }
-    else if (posEnd < dwSmplRate / 2 + posStart)
-    {
-        quint32 offset = (posStart + dwSmplRate / 2 - posEnd) / 2;
-        if (posStart < offset)
-            posStart = 0;
-        else
-            posStart -= offset;
-        posEnd += offset;
-        if (posEnd > static_cast<quint32>(fData.size() - 1))
-            posEnd = fData.size() - 1;
-    }
 
-    // Extraction des données du régime permanent
+    // Extraction data from the stable portion
     QVector<float> baData2 = fData.mid(static_cast<int>(posStart), static_cast<int>(posEnd - posStart));
+
+    // Duplicate existing data in case the length is less then 0.5s
+    while (baData2.size() < 0.5 * dwSmplRate)
+        baData2 += fData.mid(static_cast<int>(posStart), static_cast<int>(posEnd - posStart));
 
     // Corrélation du signal de 20 à 20000Hz
     quint32 dMin;
@@ -197,7 +190,8 @@ QList<Peak> GraphicsFourier::computePeaks(QVector<float> fData, quint32 dwSmplRa
         while (rep == false && numeroPic < posMaxFFT.size())
         {
             rep = iMin < posMaxFFT[numeroPic] && posMaxFFT[numeroPic] < iMax;
-            if (!rep) numeroPic++;
+            if (!rep)
+                numeroPic++;
         }
 
         if (!rep)
@@ -210,12 +204,12 @@ QList<Peak> GraphicsFourier::computePeaks(QVector<float> fData, quint32 dwSmplRa
             if (iMax >= size / 2) iMax = size / 2;
 
             // Un pic s'y trouve-t-il ?
-            bool rep = false;
             numeroPic = 0;
-            while (rep == false && numeroPic < posMaxFFT.size())
+            while (!rep && numeroPic < posMaxFFT.size())
             {
                 rep = iMin < posMaxFFT[numeroPic] && posMaxFFT[numeroPic] < iMax;
-                if (!rep) numeroPic++;
+                if (!rep)
+                    numeroPic++;
             }
         }
 
