@@ -22,61 +22,36 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLEXTERNALCOMMAND_H
-#define TOOLEXTERNALCOMMAND_H
+#include "toolloopcrossfade.h"
+#include "toolloopcrossfade_gui.h"
+#include "toolloopcrossfade_parameters.h"
+#include "soundfontmanager.h"
+#include "sampleutils.h"
 
-#include "abstracttooliterating.h"
-#include <QObject>
-#include "sound.h"
-class QProcess;
-
-class ToolExternalCommand: public AbstractToolIterating
+ToolLoopCrossfade::ToolLoopCrossfade() : AbstractToolIterating(elementSmpl, new ToolLoopCrossfade_parameters(), new ToolLoopCrossfade_gui())
 {
-    Q_OBJECT
 
-public:
-    ToolExternalCommand();
+}
 
-    /// Icon, label and category displayed to the user to describe the tool
-    QString getIconName() const override
-    {
-        return ":/tool/command_line.svg";
-    }
+void ToolLoopCrossfade::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
+{
+    ToolLoopCrossfade_parameters * params = dynamic_cast<ToolLoopCrossfade_parameters *>(parameters);
 
-    QString getCategory() const override
-    {
-        return tr("Audio processing");
-    }
+    // Get sample data
+    QVector<float> vData = sm->getData(id);
+    quint32 sampleRate = sm->get(id, champ_dwSampleRate).dwValue;
+    quint32 loopStart = sm->get(id, champ_dwStartLoop).dwValue;
+    quint32 loopEnd = sm->get(id, champ_dwEndLoop).dwValue;
+    if (loopStart >= loopEnd)
+        return;
 
-    /// Internal identifier
-    QString getIdentifier() const override
-    {
-        return "smpl:command";
-    }
+    // Length of the crossfade
+    int durationMs = params->getDurationMs();
+    quint32 crossfadeLength = durationMs * sampleRate / 1000;
+    if (crossfadeLength > loopStart)
+        crossfadeLength = loopStart;
 
-    /// Method executed before the iterating process
-    void beforeProcess(IdList ids) override;
-
-    /// Process an element
-    void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
-
-protected:
-    QString getLabelInternal() const override
-    {
-        return tr("External command");
-    }
-
-    /// Get the warning to display after the tool is run
-    QString getWarning() override;
-
-private:
-    void storeStereoIds(QList<EltID> ids);
-    void import(EltID id, Sound &sound, SoundfontManager * sm, bool replaceInfo);
-
-    /// All samples than have been processed
-    QList<EltID> _processedIds;
-
-    QString _warning;
-};
-
-#endif // TOOLEXTERNALCOMMAND_H
+    // Apply the crossfade
+    vData = SampleUtils::loopStep2(vData, loopStart, loopEnd, crossfadeLength, false);
+    sm->set(id, vData);
+}

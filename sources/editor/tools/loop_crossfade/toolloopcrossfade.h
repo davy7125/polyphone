@@ -22,40 +22,35 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLEXTERNALCOMMAND_H
-#define TOOLEXTERNALCOMMAND_H
+#ifndef TOOLLOOPCROSSFADE_H
+#define TOOLLOOPCROSSFADE_H
 
 #include "abstracttooliterating.h"
 #include <QObject>
-#include "sound.h"
-class QProcess;
 
-class ToolExternalCommand: public AbstractToolIterating
+class ToolLoopCrossfade: public AbstractToolIterating
 {
     Q_OBJECT
 
 public:
-    ToolExternalCommand();
+    ToolLoopCrossfade();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/command_line.svg";
+        return ":/tool/loop_crossfade.svg";
     }
 
     QString getCategory() const override
     {
-        return tr("Audio processing");
+        return tr("Loop / playback");
     }
 
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "smpl:command";
+        return "smpl:loopCrossfade";
     }
-
-    /// Method executed before the iterating process
-    void beforeProcess(IdList ids) override;
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
@@ -63,20 +58,8 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return tr("External command");
+        return tr("Crossfade loop");
     }
-
-    /// Get the warning to display after the tool is run
-    QString getWarning() override;
-
-private:
-    void storeStereoIds(QList<EltID> ids);
-    void import(EltID id, Sound &sound, SoundfontManager * sm, bool replaceInfo);
-
-    /// All samples than have been processed
-    QList<EltID> _processedIds;
-
-    QString _warning;
 };
 
-#endif // TOOLEXTERNALCOMMAND_H
+#endif // TOOLLOOPCROSSFADE_H

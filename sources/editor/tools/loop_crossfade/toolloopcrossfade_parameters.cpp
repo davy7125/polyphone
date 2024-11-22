@@ -22,61 +22,17 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLEXTERNALCOMMAND_H
-#define TOOLEXTERNALCOMMAND_H
+#include "toolloopcrossfade_parameters.h"
+#include "contextmanager.h"
 
-#include "abstracttooliterating.h"
-#include <QObject>
-#include "sound.h"
-class QProcess;
-
-class ToolExternalCommand: public AbstractToolIterating
+void ToolLoopCrossfade_parameters::loadConfiguration()
 {
-    Q_OBJECT
+    // Duration (ms)
+    _durationMs = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "crossfade", "duration", 100).toInt();
+}
 
-public:
-    ToolExternalCommand();
-
-    /// Icon, label and category displayed to the user to describe the tool
-    QString getIconName() const override
-    {
-        return ":/tool/command_line.svg";
-    }
-
-    QString getCategory() const override
-    {
-        return tr("Audio processing");
-    }
-
-    /// Internal identifier
-    QString getIdentifier() const override
-    {
-        return "smpl:command";
-    }
-
-    /// Method executed before the iterating process
-    void beforeProcess(IdList ids) override;
-
-    /// Process an element
-    void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
-
-protected:
-    QString getLabelInternal() const override
-    {
-        return tr("External command");
-    }
-
-    /// Get the warning to display after the tool is run
-    QString getWarning() override;
-
-private:
-    void storeStereoIds(QList<EltID> ids);
-    void import(EltID id, Sound &sound, SoundfontManager * sm, bool replaceInfo);
-
-    /// All samples than have been processed
-    QList<EltID> _processedIds;
-
-    QString _warning;
-};
-
-#endif // TOOLEXTERNALCOMMAND_H
+void ToolLoopCrossfade_parameters::saveConfiguration()
+{
+    // Duration (ms)
+    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "crossfade", "duration", _durationMs);
+}

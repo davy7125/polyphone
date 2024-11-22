@@ -181,7 +181,7 @@ void ToolAutoLoop::updateSample(EltID id, QVector<float> vData, quint32 startLoo
     SoundfontManager * sm = SoundfontManager::getInstance();
 
     // Update data
-    vData = SampleUtils::loopStep2(vData, startLoop, endLoop, crossfadeLength);
+    vData = SampleUtils::loopStep2(vData, startLoop, endLoop, crossfadeLength, true);
     sm->set(id, vData);
 
     // Update length, startloop and endloop

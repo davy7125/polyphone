@@ -46,7 +46,7 @@ public:
     static bool regimePermanent(QVector<float> fData, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd);
     static QVector<float> correlation(const float *fData, quint32 size, quint32 dwSmplRate, quint32 fMin, quint32 fMax, quint32 &dMin);
     static bool loopStep1(QVector<float> vData, quint32 dwSmplRate, quint32 &loopStart, quint32 &loopEnd, quint32 &loopCrossfadeLength);
-    static QVector<float> loopStep2(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 loopCrossfadeLength);
+    static QVector<float> loopStep2(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 loopCrossfadeLength, bool withTrimEnd);
     static QList<quint32> findMins(QVector<float> vectData, int maxNb, float minFrac = 0);
     static QList<quint32> findMax(QVector<float> vectData, int maxNb, float minFrac = 0);
     static float max(QVector<float> vData);
@@ -58,7 +58,7 @@ public:
     // - if > 0.150 => you will probably hear the loop point
     // if maxValue is -1, the algorithm will compute it
     // if checknumber is high, the accuracy is best but it needs more samples to compute
-    static float computeLoopQuality(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 checkNumber = 3, float maxValue = -1);
+    static float computeLoopQuality(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 checkNumber, bool bipolar, float maxValue = -1);
 
 private:
     static void FFT_calculate(Complex * x, quint32 N /* must be a power of 2 */,

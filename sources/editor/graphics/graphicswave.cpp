@@ -257,10 +257,10 @@ void GraphicsWave::paintEvent(QPaintEvent *event)
         color.setAlpha(180);
         painter.setPen(QPen(color, 2.0, Qt::DotLine));
         points =_wavePainter->getDataAround(_startLoop, OVERLAY_SIZE, pointNumber);
-        // for (quint32 i = 0; i < pointNumber; i++)
-        //     points[i].setX(coeff * (points[i].x() - start - _startLoop + _endLoop));
-        // painter.drawPolyline(points, static_cast<int>(pointNumber));
-        // delete [] points;
+        for (quint32 i = 0; i < pointNumber; i++)
+            points[i].setX(coeff * (points[i].x() - start - _startLoop + _endLoop));
+        painter.drawPolyline(points, static_cast<int>(pointNumber));
+        delete [] points;
     }
 
     if (_cutFlag)

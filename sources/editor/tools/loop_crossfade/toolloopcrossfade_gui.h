@@ -22,61 +22,35 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLEXTERNALCOMMAND_H
-#define TOOLEXTERNALCOMMAND_H
+#ifndef TOOLLOOPCROSSFADE_GUI_H
+#define TOOLLOOPCROSSFADE_GUI_H
 
-#include "abstracttooliterating.h"
-#include <QObject>
-#include "sound.h"
-class QProcess;
+#include "abstracttoolgui.h"
 
-class ToolExternalCommand: public AbstractToolIterating
+namespace Ui {
+class ToolLoopCrossfade_gui;
+}
+
+class ToolLoopCrossfade_gui : public AbstractToolGui
 {
     Q_OBJECT
 
 public:
-    ToolExternalCommand();
+    explicit ToolLoopCrossfade_gui(QWidget *parent = nullptr);
+    ~ToolLoopCrossfade_gui() override;
 
-    /// Icon, label and category displayed to the user to describe the tool
-    QString getIconName() const override
-    {
-        return ":/tool/command_line.svg";
-    }
+    /// Update the interface with the parameters
+    void updateInterface(AbstractToolParameters * parameters, IdList ids) override;
 
-    QString getCategory() const override
-    {
-        return tr("Audio processing");
-    }
+    /// Save the parameters based on the interface
+    void saveParameters(AbstractToolParameters * parameters) override;
 
-    /// Internal identifier
-    QString getIdentifier() const override
-    {
-        return "smpl:command";
-    }
-
-    /// Method executed before the iterating process
-    void beforeProcess(IdList ids) override;
-
-    /// Process an element
-    void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
-
-protected:
-    QString getLabelInternal() const override
-    {
-        return tr("External command");
-    }
-
-    /// Get the warning to display after the tool is run
-    QString getWarning() override;
+private slots:
+    void on_pushCancel_clicked();
+    void on_pushOk_clicked();
 
 private:
-    void storeStereoIds(QList<EltID> ids);
-    void import(EltID id, Sound &sound, SoundfontManager * sm, bool replaceInfo);
-
-    /// All samples than have been processed
-    QList<EltID> _processedIds;
-
-    QString _warning;
+    Ui::ToolLoopCrossfade_gui *ui;
 };
 
-#endif // TOOLEXTERNALCOMMAND_H
+#endif // TOOLLOOPCROSSFADE_GUI_H

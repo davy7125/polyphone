@@ -44,7 +44,7 @@ public:
 
     QString getCategory() const override
     {
-        return tr("Sample processing");
+        return tr("Loop / playback");
     }
 
     /// Internal identifier

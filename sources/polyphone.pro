@@ -296,6 +296,9 @@ SOURCES	+= main.cpp \
     editor/overview/pageoverviewinst.cpp \
     editor/overview/pageoverviewprst.cpp \
     editor/overview/tablepageoverview.cpp \
+    editor/tools/loop_crossfade/toolloopcrossfade.cpp \
+    editor/tools/loop_crossfade/toolloopcrossfade_gui.cpp \
+    editor/tools/loop_crossfade/toolloopcrossfade_parameters.cpp \
     editor/tools/merge_samples/runnablemerger.cpp \
     editor/tools/merge_samples/toolmergesamples.cpp \
     editor/tools/merge_samples/toolmergesamples_gui.cpp \
@@ -664,6 +667,9 @@ HEADERS += \
     editor/overview/pageoverviewinst.h \
     editor/overview/pageoverviewprst.h \
     editor/overview/tablepageoverview.h \
+    editor/tools/loop_crossfade/toolloopcrossfade.h \
+    editor/tools/loop_crossfade/toolloopcrossfade_gui.h \
+    editor/tools/loop_crossfade/toolloopcrossfade_parameters.h \
     editor/tools/merge_samples/runnablemerger.h \
     editor/tools/merge_samples/toolmergesamples.h \
     editor/tools/merge_samples/toolmergesamples_gui.h \
@@ -981,6 +987,7 @@ FORMS += \
     editor/overview/pageoverview.ui \
     editor/pageenvelope.ui \
     editor/pagerange.ui \
+    editor/tools/loop_crossfade/toolloopcrossfade_gui.ui \
     editor/tools/merge_samples/toolmergesamples_gui.ui \
     editor/widgets/editortoolbar.ui \
     editor/widgets/equalizer.ui \

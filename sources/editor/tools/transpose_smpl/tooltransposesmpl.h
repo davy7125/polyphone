@@ -43,7 +43,7 @@ public:
 
     QString getCategory() const override
     {
-        return tr("Sample processing");
+        return tr("Audio processing");
     }
 
     /// Internal identifier

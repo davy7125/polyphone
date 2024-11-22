@@ -108,7 +108,7 @@ void RunnableSampleCreator::run()
         quint32 crossfadeLength;
         bool result = SampleUtils::loopStep1(vData, SAMPLE_RATE, loopStart, loopEnd, crossfadeLength);
         if (result)
-            vData = SampleUtils::loopStep2(vData, loopStart, loopEnd, crossfadeLength);
+            vData = SampleUtils::loopStep2(vData, loopStart, loopEnd, crossfadeLength, true);
     }
 
     // Création d'un nouveau sample

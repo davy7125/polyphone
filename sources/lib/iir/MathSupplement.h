@@ -70,7 +70,7 @@ inline std::complex<Real> solve_quadratic_2 (Real a, Real b, Real c)
 
 inline const complex_t infinity()
 {
-  return complex_t (std::numeric_limits<double>::max());
+  return complex_t (std::numeric_limits<double>::infinity());
 }
 
 inline const complex_t adjust_imag (const complex_t& c)

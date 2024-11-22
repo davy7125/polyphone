@@ -55,6 +55,7 @@
 #include "fast_edit_smpl/toolfasteditsmpl.h"
 #include "load_from_inst/toolloadfrominst.h"
 #include "merge_samples/toolmergesamples.h"
+#include "loop_crossfade/toolloopcrossfade.h"
 
 
 ToolFactory::~ToolFactory()
@@ -95,6 +96,7 @@ void ToolFactory::initialize()
            << new ToolSampleExport()
            << new ToolFastEditSmpl()
            << new ToolLoadFromInst()
+           << new ToolLoopCrossfade()
            << new ToolCelesteTuning() // Instruments
            << new ToolAutoDistribution()
            << new ToolMixtureCreation()

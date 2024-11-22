@@ -75,7 +75,7 @@ void RunnableChordCreator::run()
         if (pitch <= 120)
         {
             // Sample le plus proche et écart associé
-            double ecart;
+            double ecart = 0;
             EltID idInstSmplTmp;
             EltID idSmpl = closestSample(_idInst, pitch, ecart, _side, idInstSmplTmp);
 
@@ -110,7 +110,7 @@ void RunnableChordCreator::run()
         quint32 crossfadeLength;
         bool result = SampleUtils::loopStep1(vData, SAMPLE_RATE, loopStart, loopEnd, crossfadeLength);
         if (result)
-            vData = SampleUtils::loopStep2(vData, loopStart, loopEnd, crossfadeLength);
+            vData = SampleUtils::loopStep2(vData, loopStart, loopEnd, crossfadeLength, true);
     }
 
     // Création d'un nouveau sample
@@ -147,7 +147,7 @@ void RunnableChordCreator::run()
         value.sfLinkValue = monoSample;
     sm->set(idSmpl, champ_sfSampleType, value);
 
-    _tool->elementProcessed(idSmpl, _key, _minKey, attMini);
+    emit _tool->elementProcessed(idSmpl, _key, _minKey, attMini);
 }
 
 EltID RunnableChordCreator::closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl)

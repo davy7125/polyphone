@@ -674,7 +674,7 @@ bool SampleUtils::loopStep1(QVector<float> vData, quint32 dwSmplRate, quint32 &l
             if (lengthScore > bestRank)
                 continue; // No need to go further
 
-            currentQuality = computeLoopQuality(vData, currentPosStart, currentPosEnd, checkNumber, max);
+            currentQuality = computeLoopQuality(vData, currentPosStart, currentPosEnd, checkNumber, true, max);
             currentRank = 200.0f * currentQuality + lengthScore;
             if (currentRank < bestRank)
             {
@@ -695,7 +695,7 @@ bool SampleUtils::loopStep1(QVector<float> vData, quint32 dwSmplRate, quint32 &l
     return true;
 }
 
-QVector<float> SampleUtils::loopStep2(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 loopCrossfadeLength)
+QVector<float> SampleUtils::loopStep2(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 loopCrossfadeLength, bool withTrimEnd)
 {
     // Loop with a crossfade
     float * fData = vData.data();
@@ -708,10 +708,14 @@ QVector<float> SampleUtils::loopStep2(QVector<float> vData, quint32 loopStart, q
                 dTmp * fData[loopStart - loopCrossfadeLength + i];
     }
 
-    // Coupure et ajout de 8 valeurs
-    vData.resize(loopEnd + 8);
-    for (quint32 i = 0; i < 8; i++)
-        vData[loopEnd + i] = fData[loopStart + i];
+    if (withTrimEnd)
+    {
+        // Coupure et ajout de 8 valeurs
+        vData.resize(loopEnd + 8);
+        for (quint32 i = 0; i < 8; i++)
+            vData[loopEnd + i] = fData[loopStart + i];
+    }
+
     return vData;
 }
 
@@ -1198,7 +1202,7 @@ double SampleUtils::BesselI0(double x)
     return -numerator/denominator;
 }
 
-float SampleUtils::computeLoopQuality(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 checkNumber, float maxValue)
+float SampleUtils::computeLoopQuality(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 checkNumber, bool bipolar, float maxValue)
 {
     const float * data = vData.constData();
     quint32 length = vData.size();
@@ -1218,10 +1222,22 @@ float SampleUtils::computeLoopQuality(QVector<float> vData, quint32 loopStart, q
             result += getDiffForLoopQuality(data, loopStart - offset - 1, loopEnd - offset - 1);
             n += 1;
         }
-        if (loopEnd + 3 + offset < vData.size())
+
+    }
+
+    if (bipolar)
+    {
+        // Also take into account data following the loop point
+        offset = 3;
+        for (quint32 i = 1; i < checkNumber; i++)
         {
-            result += getDiffForLoopQuality(data, loopStart + offset - 1, loopEnd + offset - 1);
-            n += 1;
+            offset += (M_PI_2 /* something irrational */ + i - 1) * i;
+
+            if (loopEnd + 3 + offset < vData.size())
+            {
+                result += getDiffForLoopQuality(data, loopStart + offset - 1, loopEnd + offset - 1);
+                n += 1;
+            }
         }
     }
 

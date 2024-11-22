@@ -22,61 +22,41 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TOOLEXTERNALCOMMAND_H
-#define TOOLEXTERNALCOMMAND_H
+#include "toolloopcrossfade_gui.h"
+#include "ui_toolloopcrossfade_gui.h"
+#include "toolloopcrossfade_parameters.h"
 
-#include "abstracttooliterating.h"
-#include <QObject>
-#include "sound.h"
-class QProcess;
-
-class ToolExternalCommand: public AbstractToolIterating
+ToolLoopCrossfade_gui::ToolLoopCrossfade_gui(QWidget *parent) :
+    AbstractToolGui(parent),
+    ui(new Ui::ToolLoopCrossfade_gui)
 {
-    Q_OBJECT
+    ui->setupUi(this);
+}
 
-public:
-    ToolExternalCommand();
+ToolLoopCrossfade_gui::~ToolLoopCrossfade_gui()
+{
+    delete ui;
+}
 
-    /// Icon, label and category displayed to the user to describe the tool
-    QString getIconName() const override
-    {
-        return ":/tool/command_line.svg";
-    }
+void ToolLoopCrossfade_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
+{
+    Q_UNUSED(ids)
+    ToolLoopCrossfade_parameters * params = dynamic_cast<ToolLoopCrossfade_parameters *>(parameters);
+    ui->spinDuration->setValue(params->getDurationMs());
+}
 
-    QString getCategory() const override
-    {
-        return tr("Audio processing");
-    }
+void ToolLoopCrossfade_gui::saveParameters(AbstractToolParameters * parameters)
+{
+    ToolLoopCrossfade_parameters * params = dynamic_cast<ToolLoopCrossfade_parameters *>(parameters);
+    params->setDurationMs(ui->spinDuration->value());
+}
 
-    /// Internal identifier
-    QString getIdentifier() const override
-    {
-        return "smpl:command";
-    }
+void ToolLoopCrossfade_gui::on_pushCancel_clicked()
+{
+    emit this->canceled();
+}
 
-    /// Method executed before the iterating process
-    void beforeProcess(IdList ids) override;
-
-    /// Process an element
-    void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
-
-protected:
-    QString getLabelInternal() const override
-    {
-        return tr("External command");
-    }
-
-    /// Get the warning to display after the tool is run
-    QString getWarning() override;
-
-private:
-    void storeStereoIds(QList<EltID> ids);
-    void import(EltID id, Sound &sound, SoundfontManager * sm, bool replaceInfo);
-
-    /// All samples than have been processed
-    QList<EltID> _processedIds;
-
-    QString _warning;
-};
-
-#endif // TOOLEXTERNALCOMMAND_H
+void ToolLoopCrossfade_gui::on_pushOk_clicked()
+{
+    emit this->validated();
+}
