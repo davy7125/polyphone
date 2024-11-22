@@ -38,6 +38,7 @@
 #include "utils.h"
 #include "tools/auto_distribution/toolautodistribution.h"
 #include "extensionmanager.h"
+#include "samplereaderfactory.h"
 
 bool EditorToolBar::s_recorderOpen = false;
 bool EditorToolBar::s_keyboardOpen = false;
@@ -266,18 +267,18 @@ void EditorToolBar::updateKeyboardButtonsState(bool isChecked)
 
 void EditorToolBar::on_pushAddSample_clicked()
 {
-    // Other allowed format?
-    QString ext = "";
-    typedef QString (*MyPrototype)();
-    MyPrototype myFunction = reinterpret_cast<MyPrototype>(QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extensions", "getExtensionFilter"));
-    if (myFunction)
-        ext = myFunction();
+    // Possible sample extensions
+    QString extensions;
+    QStringList extensionList = SampleReaderFactory::getPossibleExtensions();
+    foreach (QString extension, extensionList)
+        extensions += "*." + extension + " ";
+    extensions = extensions.trimmed();
 
     // Display dialog
-    QStringList strList = QFileDialog::getOpenFileNames(this, tr("Import an audio file"),
-                                                        ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SAMPLE),
-                                                        tr("Audio files") + " (*.wav *.flac *.ogg" + ext + ")");
-
+    QStringList strList = QFileDialog::getOpenFileNames(
+        this, tr("Import an audio file"),
+        ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SAMPLE),
+        tr("Audio files") + " (" + extensions + ")");
     if (strList.count() == 0)
         return;
 
@@ -291,7 +292,7 @@ void EditorToolBar::on_pushAddSample_clicked()
 
     // Selection
     if (!smplList.isEmpty())
-        selectionChanged(smplList);
+        emit selectionChanged(smplList);
 }
 
 void EditorToolBar::on_pushAddInstrument_clicked()
@@ -309,7 +310,7 @@ void EditorToolBar::on_pushAddInstrument_clicked()
     // Open a dialog
     DialogNewElement * dial = new DialogNewElement(this);
     dial->initialize(false, !ids.isEmpty(), Utils::commonPart(names));
-    connect(dial, SIGNAL(onOk(QString, bool)), this, SLOT(onNewInstClicked(QString, bool)));
+    connect(dial, SIGNAL(onOk(QString,bool)), this, SLOT(onNewInstClicked(QString,bool)));
     dial->show();
 }
 
@@ -399,7 +400,7 @@ void EditorToolBar::onNewInstClicked(QString name, bool linkElements)
     sm->endEditing("command:newInst");
 
     // Selection
-    selectionChanged(id);
+    emit selectionChanged(id);
 }
 
 void EditorToolBar::on_pushAddPreset_clicked()
@@ -417,7 +418,7 @@ void EditorToolBar::on_pushAddPreset_clicked()
     // Open a dialog
     DialogNewElement * dial = new DialogNewElement(this);
     dial->initialize(true, !ids.isEmpty(), Utils::commonPart(names));
-    connect(dial, SIGNAL(onOk(QString, bool)), this, SLOT(onNewPrstClicked(QString, bool)));
+    connect(dial, SIGNAL(onOk(QString,bool)), this, SLOT(onNewPrstClicked(QString,bool)));
     dial->show();
 }
 
@@ -468,7 +469,7 @@ void EditorToolBar::onNewPrstClicked(QString name, bool linkElements)
     sm->endEditing("command:newPrst");
 
     // Selection
-    selectionChanged(id);
+    emit selectionChanged(id);
 }
 
 void EditorToolBar::on_pushSave_clicked()

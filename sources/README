@@ -6,23 +6,25 @@
 ######### 1. Prerequisite ##########################################################################
 
 The following libraries are required (the name may vary depending on your system):
- - qt          (qtbase5-dev / qt5-devel) (also libqt5svg5-dev)
- - alsa        (libasound2-dev / alsa-lib-devel)
- - jack        (libjack-jack2-dev / jack-audio-connection-kit-devel)
- - rtaudio     (librtaudio-dev / rtaudio-devel)
- - rtmidi      (librtmidi-dev)
- - stk         (libstk0-dev)
- - vorbis      (libvorbis-dev)
- - ogg         (libogg-dev)
- - wolfssl     (libwolfssl-dev)
- - flac        (libflac-dev)
+ - qt         (qt6-base-dev / qt6-qtbase-devel)
+ - qt svg     (qt6-svg-dev / qt6-qtsvg-devel)
+ - alsa       (libasound2-dev / alsa-lib-devel)
+ - jack       (libjack-jack2-dev / jack-audio-connection-kit-devel)
+ - rtaudio    (librtaudio-dev / rtaudio-devel)
+ - rtmidi     (librtmidi-dev / rtmidi-devel)
+ - stk        (libstk0-dev / stk-devel)
+ - sndfile    (libsndfile-dev / libsndfile-devel)
+ - vorbis     (libvorbis-dev / libvorbis-devel)
+ - ogg        (libogg-dev / libogg-devel)
+ - openssl    (libssl-dev / openssl-devel)
+ - OR wolfssl (libwolfssl-dev)
 
 Use your package manager to install them: apt, synaptic, yum,...
 
 
 ######### 2. Build #################################################################################
 
-Run "qmake -qt5 && make" (or qmake-qt5 && make) in the root directory to compile the project. An
+Run "qmake -qt6 && make" (or qmake-qt6 && make) in the root directory to compile the project. An
 executable file "polyphone" in the directory "RELEASE" should then appear if everything went right.
 
 Note: If you are using Qt Creator, the project may be opened via its .pro file present in the root 
@@ -63,17 +65,9 @@ Build the project, a bundle should appear in the directory "RELEASE".
 
 ######### 3. Complete the bundle ###################################################################
 
-Run the following command to include libraries and frameworks inside the bundle (adjust the path
+Run the following command to include libraries and frameworks inside the bundle (adjust the paths
 first!):
-/Path/To/Qt/5.2.0/clang_64/bin/macdeployqt /Path/To/trunk/RELEASE/Polyphone.app
-
-Copy / paste the framework Jackmp from trunk/lib/mac to:
-trunk/RELEASE/Polyphone.app/Contents/Frameworks
-
-Finally, run the following command in a single line (adjust the last path first!):
-install_name_tool -change /System/Library/Frameworks/Jackmp.framework/Versions/A/Jackmp 
-@executable_path/../Frameworks/Jackmp.framework/Versions/A/Jackmp 
-/Path/To/trunk/RELEASE/Polyphone.app/Contents/MacOS/Polyphone 
+/Path/To/Qt/6.6.0/clang_64/bin/macdeployqt /Path/To/trunk/RELEASE/Polyphone.app
 
 If you want to provide a .dmg file, drag the file Polyphone.app onto the icon of the application
 "Disk Utility".

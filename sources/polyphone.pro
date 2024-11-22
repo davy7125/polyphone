@@ -87,7 +87,7 @@ win32 {
 unix:!macx {
     DEFINES += __LINUX_ALSASEQ__ __UNIX_JACK__ __LINUX_ALSA__ #__LINUX_PULSE__
     CONFIG += link_pkgconfig
-    PKGCONFIG += alsa jack zlib ogg flac vorbis vorbisfile vorbisenc glib-2.0
+    PKGCONFIG += alsa jack zlib ogg vorbis vorbisfile vorbisenc sndfile
     contains(DEFINES, USE_WOLFSSL) {
         PKGCONFIG += wolfssl
     } else {
@@ -225,7 +225,7 @@ SOURCES	+= main.cpp \
     core/input/sfz/sfzparameterregion.cpp \
     core/output/sfz/balanceparameters.cpp \
     core/output/sfz/sfzwriter.cpp \
-    core/sample/samplereaderogg.cpp \
+    core/sample/samplereaderfile.cpp \
     core/solomanager.cpp \
     core/input/abstractinputparser.cpp \
     core/input/empty/inputparserempty.cpp \
@@ -244,9 +244,7 @@ SOURCES	+= main.cpp \
     core/input/sfz/inputparsersfz.cpp \
     core/input/sfz/inputsfz.cpp \
     core/sample/samplereaderfactory.cpp \
-    core/sample/samplereaderflac.cpp \
     core/sample/samplereadersf2.cpp \
-    core/sample/samplereaderwav.cpp \
     core/sample/sampleutils.cpp \
     core/sample/samplewriterwav.cpp \
     core/sample/sound.cpp \
@@ -589,7 +587,7 @@ HEADERS += \
     core/input/sfz/sfzparameterregion.h \
     core/output/sfz/balanceparameters.h \
     core/output/sfz/sfzwriter.h \
-    core/sample/samplereaderogg.h \
+    core/sample/samplereaderfile.h \
     core/solomanager.h \
     core/input/abstractinput.h \
     core/input/abstractinputparser.h \
@@ -611,9 +609,7 @@ HEADERS += \
     core/sample/infosound.h \
     core/sample/samplereader.h \
     core/sample/samplereaderfactory.h \
-    core/sample/samplereaderflac.h \
     core/sample/samplereadersf2.h \
-    core/sample/samplereaderwav.h \
     core/sample/sampleutils.h \
     core/sample/samplewriterwav.h \
     core/sample/sound.h \

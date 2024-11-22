@@ -4,6 +4,7 @@ polyphone (2.5) unstable; urgency=low
   * (new) sample tool for adding a crossfade around loop points
   * (new) tool for creating samples that are a merge of all instruments / samples inside a preset
   * (new) sfz support of trigger "release"
+  * (new) mp3, aiff and snd sample formats can be imported
   * (improvement) the autoloop tool is more accurate and is not based on the existing loop
   * (improvement) the state of the keyboard and recorder windows is restored
   * (improvement) the sf2 / sf3 export can now create one file per preset
@@ -14,6 +15,7 @@ polyphone (2.5) unstable; urgency=low
   * (fix) next available bank / preset correctly computed
   * (fix) no default modulators at the sample level
   * (fix) sfz attenuation export
+  * (fix) finding root keys of very short loops
 
  -- Davy Triponney <davy.triponney@gmail.com>  Fri, 22 Nov 2024 14:10:12 +0100
   

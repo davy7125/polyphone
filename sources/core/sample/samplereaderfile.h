@@ -22,16 +22,16 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SAMPLEREADEROGG_H
-#define SAMPLEREADEROGG_H
+#ifndef SAMPLEREADERFILE_H
+#define SAMPLEREADERFILE_H
 
 #include "samplereader.h"
 
-class SampleReaderOgg : public SampleReader
+class SampleReaderFile: public SampleReader
 {
 public:
-    SampleReaderOgg(QString filename);
-    ~SampleReaderOgg() override {}
+    SampleReaderFile(QString filename);
+    ~SampleReaderFile() override {}
 
     // Extract general information (sampling rate, ...)
     SampleReaderResult getInfo(QFile &fi, InfoSound * info) override;
@@ -46,4 +46,4 @@ private:
     InfoSound * _info;
 };
 
-#endif // SAMPLEREADEROGG_H
+#endif // SAMPLEREADERFILE_H

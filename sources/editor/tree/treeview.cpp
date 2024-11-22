@@ -36,6 +36,7 @@
 #include "dialogcreateelements.h"
 #include "utils.h"
 #include "tools/auto_distribution/toolautodistribution.h"
+#include "samplereaderfactory.h"
 
 TreeView::TreeView(QWidget * parent) : QTreeView(parent),
     _fixingSelection(false),
@@ -829,13 +830,14 @@ void TreeView::dropEvent(QDropEvent *event)
         SampleLoader sl(dynamic_cast<QWidget*>(this->parent()));
         IdList smplList;
 
+        QStringList possibleExtensions = SampleReaderFactory::getPossibleExtensions();
         for (int i = 0; i < urls.count(); i++)
         {
             QString path = QUrl::fromPercentEncoding(urls.at(i).toEncoded()).replace('\\', '/');
             if (!path.isEmpty())
             {
                 QString extension = path.split(".").last().toLower();
-                if (extension == "wav" || extension == "flac" || extension == "ogg")
+                if (possibleExtensions.contains(extension))
                 {
                     path = Utils::fixFilePath(path);
                     smplList << sl.load(path, _sf2Index, &replace);

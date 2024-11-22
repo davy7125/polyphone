@@ -23,10 +23,8 @@
 ***************************************************************************/
 
 #include "samplereaderfactory.h"
-#include "samplereaderwav.h"
 #include "samplereadersf2.h"
-#include "samplereaderflac.h"
-#include "samplereaderogg.h"
+#include "samplereaderfile.h"
 #include <QFileInfo>
 
 SampleReader * SampleReaderFactory::getSampleReader(QString filename)
@@ -38,19 +36,18 @@ SampleReader * SampleReaderFactory::getSampleReader(QString filename)
     if (ext.compare("sf2") == 0 || ext.compare("sf3") == 0)
         return new SampleReaderSf2(filename);
 
-    // Wav file?
-    if (ext.compare("wav") == 0)
-        return new SampleReaderWav(filename);
+    // Other kind of file => libsndfile
+    return new SampleReaderFile(filename);
+}
 
-    // Flac file?
-    if (ext.compare("flac") == 0)
-        return new SampleReaderFlac(filename);
-
-    // Flac file?
-    if (ext.compare("ogg") == 0)
-        return new SampleReaderOgg(filename);
-
-    // TODO: check if there is a library for reading extra formats
-
-    return nullptr;
+QStringList SampleReaderFactory::getPossibleExtensions()
+{
+    return QStringList() << "aif"
+                         << "aifc"
+                         << "aiff"
+                         << "flac"
+                         << "mp3"
+                         << "ogg"
+                         << "snd"
+                         << "wav";
 }

@@ -35,6 +35,9 @@ public:
 
     // Get a reader corresponding to a file
     static SampleReader * getSampleReader(QString filename);
+
+    // The extensions of the different sample formats that can be imported
+    static QStringList getPossibleExtensions();
 };
 
 #endif // SAMPLEREADERFACTORY_H
