@@ -1303,93 +1303,93 @@ repository</source>
         <translation>제목없음</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="666"/>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="708"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="661"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="703"/>
         <source>other</source>
         <translation>그 외</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="669"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="664"/>
         <source>Piano</source>
         <translation>피아노</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="671"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="666"/>
         <source>Chromatic percussion</source>
         <translation>크로마틱 타악기</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="673"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="668"/>
         <source>Organ</source>
         <translation>오르간</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="675"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="670"/>
         <source>Guitar</source>
         <translation>기타</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="677"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="672"/>
         <source>Bass</source>
         <translation>베이스</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="679"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="674"/>
         <source>Strings</source>
         <translation>스트링</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="681"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="676"/>
         <source>Ensemble</source>
         <translation>앙상블</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="683"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="678"/>
         <source>Brass</source>
         <translation>브라스</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="685"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="680"/>
         <source>Reed</source>
         <translation>리드</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="687"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="682"/>
         <source>Pipe</source>
         <translation>파이프</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="689"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="684"/>
         <source>Synth lead</source>
         <translation>신스 리드</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="691"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="686"/>
         <source>Synth pad</source>
         <translation>신스 패드</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="693"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="688"/>
         <source>Synth effects</source>
         <translation>신스 효과</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="695"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="690"/>
         <source>Ethnic</source>
         <translation>소수 민족 전통악기</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="697"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="692"/>
         <source>Percussive</source>
         <translation>퍼커시브</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="699"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="694"/>
         <source>Sound effects</source>
         <translation>사운드 효과</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="701"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="696"/>
         <source>Percussion kit</source>
         <translation>타악기 키트</translation>
     </message>
@@ -1708,12 +1708,12 @@ repository</source>
         <translation>애프터 터치</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="189"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="199"/>
         <source>Hide the controller area</source>
         <translation>컨트롤러 영역 숨기기</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="195"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="205"/>
         <source>Show the controller area</source>
         <translation>컨트롤러 영역 보이기</translation>
     </message>
@@ -1816,18 +1816,18 @@ repository</source>
         <translation>녹음기</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogrecorder.cpp" line="102"/>
+        <location filename="dialogs/dialogrecorder.cpp" line="92"/>
         <source>Save a record</source>
         <translation>녹음 저장</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogrecorder.cpp" line="103"/>
+        <location filename="dialogs/dialogrecorder.cpp" line="93"/>
         <source>Wav file</source>
         <translation>Wav 파일</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogrecorder.cpp" line="161"/>
-        <location filename="dialogs/dialogrecorder.cpp" line="163"/>
+        <location filename="dialogs/dialogrecorder.cpp" line="150"/>
+        <location filename="dialogs/dialogrecorder.cpp" line="152"/>
         <source>record</source>
         <translation>녹음</translation>
     </message>
@@ -1995,77 +1995,77 @@ repository</source>
 <context>
     <name>Duplicator</name>
     <message>
-        <location filename="core/duplicator.cpp" line="296"/>
+        <location filename="core/duplicator.cpp" line="268"/>
         <source>Global parameters are already filled.</source>
         <translation>전역 매개변수가 이미 채워졌습니다.</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="297"/>
+        <location filename="core/duplicator.cpp" line="269"/>
         <source>The global division will not be copied.</source>
         <translation>전역 분류는 복사될 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="299"/>
+        <location filename="core/duplicator.cpp" line="271"/>
         <source>&amp;Ok</source>
         <translation>확인(&amp;O)</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="300"/>
+        <location filename="core/duplicator.cpp" line="272"/>
         <source>Ok, &amp;disable this message</source>
         <translation>확인, 이 메시지를 표시하지 않음(&amp;D)</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="332"/>
+        <location filename="core/duplicator.cpp" line="304"/>
         <source>The sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>&quot;%1&quot; 샘플이 이미 존재합니다.&lt;br /&gt;덮어쓸까요?</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="469"/>
+        <location filename="core/duplicator.cpp" line="441"/>
         <source>The instrument &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>&quot;%1&quot; 악기가 이미 존재합니다.&lt;br /&gt;덮어쓸까요?</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="564"/>
+        <location filename="core/duplicator.cpp" line="536"/>
         <source>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</source>
         <translation>&quot;%1&quot; 프리셋이 이미 존재합니다.&lt;br /&gt;덮어쓸까요?</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="586"/>
+        <location filename="core/duplicator.cpp" line="558"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="587"/>
+        <location filename="core/duplicator.cpp" line="559"/>
         <source>No preset available.</source>
         <translation>프리셋이 없습니다.</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="785"/>
+        <location filename="core/duplicator.cpp" line="757"/>
         <source>&amp;Replace</source>
         <translation>바꾸기(&amp;R)</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="786"/>
+        <location filename="core/duplicator.cpp" line="758"/>
         <source>R&amp;eplace all</source>
         <translation>모두 바꾸기(&amp;E)</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="787"/>
+        <location filename="core/duplicator.cpp" line="759"/>
         <source>&amp;Duplicate</source>
         <translation>복제(&amp;D)</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="788"/>
+        <location filename="core/duplicator.cpp" line="760"/>
         <source>D&amp;uplicate all</source>
         <translation>모두 복제(&amp;U)</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="789"/>
+        <location filename="core/duplicator.cpp" line="761"/>
         <source>&amp;Ignore</source>
         <translation>무시(&amp;I)</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="790"/>
+        <location filename="core/duplicator.cpp" line="762"/>
         <source>I&amp;gnore all</source>
         <translation>모두 무시(&amp;G)</translation>
     </message>
@@ -2088,7 +2088,7 @@ repository</source>
         <translation>파일을 열 수 없음</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="473"/>
+        <location filename="editor/editor.cpp" line="475"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
@@ -2203,22 +2203,22 @@ repository</source>
         <translation>가상 건반</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="282"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="277"/>
         <source>Import an audio file</source>
         <translation>오디오 파일 가져오기</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="284"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="279"/>
         <source>Audio files</source>
         <translation>오디오 파일</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="442"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="436"/>
         <source>Cannot create more presets.</source>
         <translation>프리셋을 더 생성할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="442"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="436"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
@@ -2625,7 +2625,7 @@ repository</source>
         <translation>&quot;%1&quot; 파일이 변경됐습니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="303"/>
+        <location filename="mainwindow/mainwindow.cpp" line="307"/>
         <source>Opening files</source>
         <translation>파일 여는 중</translation>
     </message>
@@ -3572,7 +3572,7 @@ to display its division ranges</source>
         <translation>전역</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1178"/>
+        <location filename="editor/pagetable.cpp" line="1226"/>
         <source>absolute value</source>
         <translation>절댓값</translation>
     </message>
@@ -3754,22 +3754,22 @@ to display its division ranges</source>
         <translation>프리셋들</translation>
     </message>
     <message>
-        <location filename="core/sample/sound.cpp" line="61"/>
+        <location filename="core/sample/sound.cpp" line="64"/>
         <source>Corrupted file: &quot;%1&quot;</source>
         <translation>손상된 파일: &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="core/sample/sound.cpp" line="64"/>
+        <location filename="core/sample/sound.cpp" line="67"/>
         <source>Cannot find file &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 파일을 찾을 수 없음</translation>
     </message>
     <message>
-        <location filename="core/sample/sound.cpp" line="67"/>
+        <location filename="core/sample/sound.cpp" line="70"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 파일을 열 수 없음</translation>
     </message>
     <message>
-        <location filename="core/sample/sound.cpp" line="70"/>
+        <location filename="core/sample/sound.cpp" line="73"/>
         <source>File not supported: &quot;%1&quot;</source>
         <oldsource>File not supported &quot;%1&quot;</oldsource>
         <translation>지원되지 않는 파일: &quot;%1&quot;</translation>
@@ -4873,7 +4873,7 @@ download content</source>
 <context>
     <name>Tab</name>
     <message>
-        <location filename="mainwindow/tab.cpp" line="81"/>
+        <location filename="mainwindow/tab.cpp" line="82"/>
         <source>Untitled</source>
         <translation>제목없음</translation>
     </message>
@@ -4881,58 +4881,58 @@ download content</source>
 <context>
     <name>TabManager</name>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="102"/>
+        <location filename="mainwindow/tabmanager.cpp" line="106"/>
         <source>Settings</source>
         <translation>환경설정</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="129"/>
-        <location filename="mainwindow/tabmanager.cpp" line="228"/>
+        <location filename="mainwindow/tabmanager.cpp" line="133"/>
+        <location filename="mainwindow/tabmanager.cpp" line="241"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="130"/>
+        <location filename="mainwindow/tabmanager.cpp" line="134"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 파일을 열 수 없음</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="185"/>
+        <location filename="mainwindow/tabmanager.cpp" line="198"/>
         <source>Online repository</source>
         <translation>온라인 레퍼지토리</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="223"/>
+        <location filename="mainwindow/tabmanager.cpp" line="236"/>
         <source>Save before exiting?</source>
         <translation>종료하기 전에 저장할까요?</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="226"/>
+        <location filename="mainwindow/tabmanager.cpp" line="239"/>
         <source>untitled</source>
         <translation>제목없음</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="227"/>
+        <location filename="mainwindow/tabmanager.cpp" line="240"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>&quot;%1&quot; 파일이 변경됐습니다.</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="230"/>
+        <location filename="mainwindow/tabmanager.cpp" line="243"/>
         <source>&amp;Save</source>
         <translation>저장(&amp;S)</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="231"/>
+        <location filename="mainwindow/tabmanager.cpp" line="244"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="232"/>
+        <location filename="mainwindow/tabmanager.cpp" line="245"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>저장하지 않음(&amp;N)</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="323"/>
+        <location filename="mainwindow/tabmanager.cpp" line="340"/>
         <source>User area</source>
         <translation>사용자 공간</translation>
     </message>
@@ -5085,14 +5085,14 @@ Other soundfont editors might display other units.</source>
         <translation>가능성: 너무 짧거나 난해합니다.</translation>
     </message>
     <message>
+        <location filename="editor/tools/auto_loop/toolautoloop.h" line="47"/>
+        <source>Loop / playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="65"/>
         <source>Auto loop</source>
         <translation>자동 반복</translation>
-    </message>
-    <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.h" line="47"/>
-        <source>Sample processing</source>
-        <translation>샘플 처리</translation>
     </message>
 </context>
 <context>
@@ -5209,8 +5209,9 @@ Other soundfont editors might display other units.</source>
     <name>ToolChangeVolume</name>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="46"/>
-        <source>Sample processing</source>
-        <translation>샘플 처리</translation>
+        <source>Audio processing</source>
+        <oldsource>Sample processing</oldsource>
+        <translation type="unfinished">샘플 처리</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="61"/>
@@ -5312,96 +5313,96 @@ Other soundfont editors might display other units.</source>
         <translation>스테레오</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="90"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="89"/>
         <source>Chord</source>
         <translation>코드</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="115"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="112"/>
         <source>Seventh</source>
         <translation>7화음</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="128"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="124"/>
         <source>Ninth</source>
         <translation>9화음</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="141"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="136"/>
         <source>Third</source>
         <translation>3화음</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="179"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="172"/>
         <source>Root key</source>
         <translation>루트 키</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="192"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="184"/>
         <source>Fifth</source>
         <translation>5화음</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="231"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="256"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="301"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="364"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="419"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="221"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="245"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="288"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="348"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="401"/>
         <source>no</source>
         <translation>아니오</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="236"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="306"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="374"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="226"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="293"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="358"/>
         <source>major</source>
         <translation>메이저</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="241"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="311"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="369"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="231"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="298"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="353"/>
         <source>minor</source>
         <translation>마이너</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="261"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="250"/>
         <source>yes</source>
         <translation>네</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="350"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="335"/>
         <source>Inversion number</source>
         <translation>반행 번호</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="379"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="429"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="363"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="411"/>
         <source>diminished</source>
         <translation>디미니쉬드</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="424"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="406"/>
         <source>perfect</source>
         <translation>퍼펙트</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="434"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="416"/>
         <source>augmented</source>
         <translation>어그먼티드</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="687"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="656"/>
         <source>Octave</source>
         <translation>옥타브</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="719"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="701"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="699"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="681"/>
         <source>&amp;Ok</source>
         <translation>확인(&amp;O)</translation>
     </message>
@@ -5538,8 +5539,9 @@ Other soundfont editors might display other units.</source>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="48"/>
-        <source>Sample processing</source>
-        <translation>샘플 처리</translation>
+        <source>Audio processing</source>
+        <oldsource>Sample processing</oldsource>
+        <translation type="unfinished">샘플 처리</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="66"/>
@@ -5651,8 +5653,9 @@ Other soundfont editors might display other units.</source>
     <name>ToolFrequencyFilter</name>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
-        <source>Sample processing</source>
-        <translation>샘플 처리</translation>
+        <source>Audio processing</source>
+        <oldsource>Sample processing</oldsource>
+        <translation type="unfinished">샘플 처리</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
@@ -5973,6 +5976,126 @@ Other soundfont editors might display other units.</source>
     </message>
 </context>
 <context>
+    <name>ToolLoopCrossfade</name>
+    <message>
+        <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="46"/>
+        <source>Loop / playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
+        <source>Crossfade loop</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ToolLoopCrossfade_gui</name>
+    <message>
+        <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="20"/>
+        <source>Crossfade duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="29"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">확인(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="49"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished">취소(&amp;C)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="58"/>
+        <source> ms</source>
+        <comment>Unit for milliseconds</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ToolMergeSamples</name>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples.cpp" line="66"/>
+        <source>The preset doesn&apos;t trigger any samples.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples.h" line="47"/>
+        <source>Transformation</source>
+        <translation type="unfinished">변환</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples.h" line="62"/>
+        <source>Merge samples for each note</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ToolMergeSamples_gui</name>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="25"/>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="102"/>
+        <source> s</source>
+        <comment>unit for second</comment>
+        <translation type="unfinished"> 초</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="38"/>
+        <source>Sample creation:</source>
+        <translation type="unfinished">샘플 생성:</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="45"/>
+        <source>Stereo</source>
+        <translation type="unfinished">스테레오</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="59"/>
+        <source>Sustain duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="66"/>
+        <source>Auto loop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="77"/>
+        <source>for every key</source>
+        <translation type="unfinished">모든 키에</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="82"/>
+        <source>every 3 keys</source>
+        <translation type="unfinished">세 키마다</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="87"/>
+        <source>every 6 keys</source>
+        <translation type="unfinished">여섯 키마다</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="95"/>
+        <source>Preset name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="112"/>
+        <source>Release duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="136"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">확인(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="156"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished">취소(&amp;C)</translation>
+    </message>
+</context>
+<context>
     <name>ToolMixtureCreation</name>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.cpp" line="60"/>
@@ -6247,22 +6370,22 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolRelease_gui</name>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="58"/>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="61"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="38"/>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="41"/>
         <source>&amp;Ok</source>
         <translation>확인(&amp;O)</translation>
     </message>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="67"/>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="70"/>
         <source>Division to the next octave</source>
         <translation>다음 옥타브로 분류</translation>
     </message>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="110"/>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="116"/>
         <source>Detuning induced (semi-tones)</source>
         <translation>디튜닝 유도 (반음)</translation>
     </message>
@@ -6399,12 +6522,12 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolSoundfontExport</name>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="116"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="151"/>
         <source>Merge soudfonts:</source>
         <translation>사운드폰트 통합:</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="211"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="246"/>
         <source>Export successful!</source>
         <translation>내보내기를 완료했습니다!</translation>
     </message>
@@ -6432,58 +6555,63 @@ Other soundfont editors might display other units.</source>
         <translation>모두 선택해제</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="80"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="99"/>
         <source>Destination</source>
         <translation>경로</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="106"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="152"/>
         <source>Format</source>
         <translation>형식</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="116"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="113"/>
         <source>General MIDI classification</source>
         <translation>제너럴 MIDI 분류</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="123"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="106"/>
         <source>one directory per bank</source>
         <translation>뱅크당 경로</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="130"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="120"/>
         <source>preset number as prefix</source>
         <translation>프리셋 번호를 접두사로</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="141"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="134"/>
         <source>High</source>
         <translation>높음</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="146"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="139"/>
         <source>Medium</source>
         <translation>보통</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="151"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="144"/>
         <source>Low</source>
         <translation>낮음</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
+        <source>one file per preset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="166"/>
         <source>Quality</source>
         <translation>품질</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="190"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="197"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="170"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="177"/>
         <source>&amp;Export</source>
         <oldsource>Export</oldsource>
         <translation>내보내기(&amp;E)</translation>
@@ -6494,35 +6622,35 @@ Other soundfont editors might display other units.</source>
         <translation>제목없음</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="148"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="150"/>
         <source>Select the destination directory</source>
         <translation>저장할 경로 선택</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="164"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="199"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="166"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="195"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="201"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="210"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="164"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="166"/>
         <source>Invalid directory.</source>
         <translation>경로가 잘못됐습니다.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="195"/>
         <source>At least one preset must be selected.</source>
         <translation>하나 이상의 프리셋을 선택해야 합니다.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="199"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="201"/>
         <source>The maximal number of soundfont to export is 127.</source>
         <translation>내보낼 사운드 폰트의 최대 수는 127입니다.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="210"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
         <translation>여러 사운드폰트를 내보내는 경우 사운드폰트 당 최대 프리셋 수는 127입니다.</translation>
     </message>
@@ -6549,8 +6677,9 @@ Other soundfont editors might display other units.</source>
     <name>ToolTransposeSmpl</name>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="46"/>
-        <source>Sample processing</source>
-        <translation>샘플 처리</translation>
+        <source>Audio processing</source>
+        <oldsource>Sample processing</oldsource>
+        <translation type="unfinished">샘플 처리</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="61"/>
@@ -6602,27 +6731,27 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ToolTrimEnd</name>
     <message>
+        <location filename="editor/tools/trim_end/tooltrimend.h" line="46"/>
+        <source>Loop / playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="64"/>
         <source>Trim to end of loop</source>
         <translation>루프 끝까지 다듬기</translation>
-    </message>
-    <message>
-        <location filename="editor/tools/trim_end/tooltrimend.h" line="46"/>
-        <source>Sample processing</source>
-        <translation>샘플 처리</translation>
     </message>
 </context>
 <context>
     <name>ToolTrimStart</name>
     <message>
+        <location filename="editor/tools/trim_start/tooltrimstart.h" line="46"/>
+        <source>Loop / playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="67"/>
         <source>Remove blank at start</source>
         <translation>시작할 때 공백 제거</translation>
-    </message>
-    <message>
-        <location filename="editor/tools/trim_start/tooltrimstart.h" line="46"/>
-        <source>Sample processing</source>
-        <translation>샘플 처리</translation>
     </message>
 </context>
 <context>

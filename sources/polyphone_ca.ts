@@ -1299,93 +1299,93 @@ en línia</translation>
         <translation>sense títol</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="666"/>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="708"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="661"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="703"/>
         <source>other</source>
         <translation>altres</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="669"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="664"/>
         <source>Piano</source>
         <translation>Piano</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="671"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="666"/>
         <source>Chromatic percussion</source>
         <translation>Percussió cromàtica</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="673"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="668"/>
         <source>Organ</source>
         <translation>Orgue</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="675"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="670"/>
         <source>Guitar</source>
         <translation>Guitarra</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="677"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="672"/>
         <source>Bass</source>
         <translation>Baix</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="679"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="674"/>
         <source>Strings</source>
         <translation>De corda</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="681"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="676"/>
         <source>Ensemble</source>
         <translation>Conjunt</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="683"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="678"/>
         <source>Brass</source>
         <translation>Vent-metall</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="685"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="680"/>
         <source>Reed</source>
         <translation>De canya</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="687"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="682"/>
         <source>Pipe</source>
         <translation>Tub</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="689"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="684"/>
         <source>Synth lead</source>
         <translation>Sintetitzador solista</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="691"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="686"/>
         <source>Synth pad</source>
         <translation>Sintetitzador de fons</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="693"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="688"/>
         <source>Synth effects</source>
         <translation>Efectes del sintetitzador</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="695"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="690"/>
         <source>Ethnic</source>
         <translation>Ètnica</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="697"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="692"/>
         <source>Percussive</source>
         <translation>De percussió</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="699"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="694"/>
         <source>Sound effects</source>
         <translation>Efectes de so</translation>
     </message>
     <message>
-        <location filename="core/output/sfz/conversion_sfz.cpp" line="701"/>
+        <location filename="core/output/sfz/conversion_sfz.cpp" line="696"/>
         <source>Percussion kit</source>
         <translation>Kit de percussió</translation>
     </message>
@@ -1703,12 +1703,12 @@ en línia</translation>
         <translation>Aftertouch</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="189"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="199"/>
         <source>Hide the controller area</source>
         <translation>Oculta l&apos;àrea del controlador</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="195"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="205"/>
         <source>Show the controller area</source>
         <translation>Mostra l&apos;àrea del controlador</translation>
     </message>
@@ -1810,18 +1810,18 @@ en línia</translation>
         <translation>Gravadora</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogrecorder.cpp" line="102"/>
+        <location filename="dialogs/dialogrecorder.cpp" line="92"/>
         <source>Save a record</source>
         <translation>Desa la gravació</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogrecorder.cpp" line="103"/>
+        <location filename="dialogs/dialogrecorder.cpp" line="93"/>
         <source>Wav file</source>
         <translation>Fitxer wav</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogrecorder.cpp" line="161"/>
-        <location filename="dialogs/dialogrecorder.cpp" line="163"/>
+        <location filename="dialogs/dialogrecorder.cpp" line="150"/>
+        <location filename="dialogs/dialogrecorder.cpp" line="152"/>
         <source>record</source>
         <translation>gravació</translation>
     </message>
@@ -1988,77 +1988,77 @@ en línia</translation>
 <context>
     <name>Duplicator</name>
     <message>
-        <location filename="core/duplicator.cpp" line="296"/>
+        <location filename="core/duplicator.cpp" line="268"/>
         <source>Global parameters are already filled.</source>
         <translation>Els paràmetres globals ja estan emplenats.</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="297"/>
+        <location filename="core/duplicator.cpp" line="269"/>
         <source>The global division will not be copied.</source>
         <translation>La divisió global no es copiarà.</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="299"/>
+        <location filename="core/duplicator.cpp" line="271"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="300"/>
+        <location filename="core/duplicator.cpp" line="272"/>
         <source>Ok, &amp;disable this message</source>
         <translation>D&apos;acord, &amp;desactiva aquest missatge</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="332"/>
+        <location filename="core/duplicator.cpp" line="304"/>
         <source>The sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>La mostra &quot;%1&quot; ja existeix.&lt;br /&gt;Voleu reemplaçar-la?</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="469"/>
+        <location filename="core/duplicator.cpp" line="441"/>
         <source>The instrument &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>L&apos;instrument &quot;%1&quot; ja existeix.&lt;br /&gt;Voleu reemplaçar-lo?</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="564"/>
+        <location filename="core/duplicator.cpp" line="536"/>
         <source>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</source>
         <translation>El preset &quot;%1&quot; ja existeix.&lt;br /&gt;Voleu reemplaçar-lo?</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="586"/>
+        <location filename="core/duplicator.cpp" line="558"/>
         <source>Warning</source>
         <translation>Atenció</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="587"/>
+        <location filename="core/duplicator.cpp" line="559"/>
         <source>No preset available.</source>
         <translation>No hi ha cap preset disponible.</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="785"/>
+        <location filename="core/duplicator.cpp" line="757"/>
         <source>&amp;Replace</source>
         <translation>&amp;Reemplaça</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="786"/>
+        <location filename="core/duplicator.cpp" line="758"/>
         <source>R&amp;eplace all</source>
         <translation>R&amp;eemplaça tot</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="787"/>
+        <location filename="core/duplicator.cpp" line="759"/>
         <source>&amp;Duplicate</source>
         <translation>&amp;Duplica</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="788"/>
+        <location filename="core/duplicator.cpp" line="760"/>
         <source>D&amp;uplicate all</source>
         <translation>D&amp;uplica tot</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="789"/>
+        <location filename="core/duplicator.cpp" line="761"/>
         <source>&amp;Ignore</source>
         <translation>&amp;Ignora</translation>
     </message>
     <message>
-        <location filename="core/duplicator.cpp" line="790"/>
+        <location filename="core/duplicator.cpp" line="762"/>
         <source>I&amp;gnore all</source>
         <translation>I&amp;gnora tot</translation>
     </message>
@@ -2081,7 +2081,7 @@ en línia</translation>
         <translation>No es pot obrir el fitxer</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="473"/>
+        <location filename="editor/editor.cpp" line="475"/>
         <source>Warning</source>
         <translation>Atenció</translation>
     </message>
@@ -2196,22 +2196,22 @@ en línia</translation>
         <translation>Teclat virtual</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="282"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="277"/>
         <source>Import an audio file</source>
         <translation>Importa un fitxer d&apos;àudio</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="284"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="279"/>
         <source>Audio files</source>
         <translation>Fitxers d&apos;àudio</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="442"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="436"/>
         <source>Warning</source>
         <translation>Atenció</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="442"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="436"/>
         <source>Cannot create more presets.</source>
         <translation>No es poden crear més presets.</translation>
     </message>
@@ -2681,7 +2681,7 @@ en línia</translation>
         <translation>&amp;No desar</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="303"/>
+        <location filename="mainwindow/mainwindow.cpp" line="307"/>
         <source>Opening files</source>
         <translation>S&apos;estan obirnt els fitxers</translation>
     </message>
@@ -3560,7 +3560,7 @@ per visualitzar els rangs de divisió</translation>
         <translation>Global</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1178"/>
+        <location filename="editor/pagetable.cpp" line="1226"/>
         <source>absolute value</source>
         <translation>valor absolut</translation>
     </message>
@@ -3904,22 +3904,22 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
         <translation>I&amp;gnora tot</translation>
     </message>
     <message>
-        <location filename="core/sample/sound.cpp" line="61"/>
+        <location filename="core/sample/sound.cpp" line="64"/>
         <source>Corrupted file: &quot;%1&quot;</source>
         <translation>El fitxer &quot;%1&quot; està malmès</translation>
     </message>
     <message>
-        <location filename="core/sample/sound.cpp" line="64"/>
+        <location filename="core/sample/sound.cpp" line="67"/>
         <source>Cannot find file &quot;%1&quot;</source>
         <translation>No s&apos;ha pogut trobar el fitxer &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="core/sample/sound.cpp" line="67"/>
+        <location filename="core/sample/sound.cpp" line="70"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>No es pot obrir el fitxer &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="core/sample/sound.cpp" line="70"/>
+        <location filename="core/sample/sound.cpp" line="73"/>
         <source>File not supported: &quot;%1&quot;</source>
         <oldsource>File not supported &quot;%1&quot;</oldsource>
         <translation>Fitxer no compatible: &quot;%1&quot;</translation>
@@ -4863,7 +4863,7 @@ baixar el contingut</translation>
 <context>
     <name>Tab</name>
     <message>
-        <location filename="mainwindow/tab.cpp" line="81"/>
+        <location filename="mainwindow/tab.cpp" line="82"/>
         <source>Untitled</source>
         <translation>Sense títol</translation>
     </message>
@@ -4871,58 +4871,58 @@ baixar el contingut</translation>
 <context>
     <name>TabManager</name>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="102"/>
+        <location filename="mainwindow/tabmanager.cpp" line="106"/>
         <source>Settings</source>
         <translation>Configuració</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="129"/>
-        <location filename="mainwindow/tabmanager.cpp" line="228"/>
+        <location filename="mainwindow/tabmanager.cpp" line="133"/>
+        <location filename="mainwindow/tabmanager.cpp" line="241"/>
         <source>Warning</source>
         <translation>Atenció</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="130"/>
+        <location filename="mainwindow/tabmanager.cpp" line="134"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>No es pot obrir el fitxer &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="185"/>
+        <location filename="mainwindow/tabmanager.cpp" line="198"/>
         <source>Online repository</source>
         <translation>Repositori en línia</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="223"/>
+        <location filename="mainwindow/tabmanager.cpp" line="236"/>
         <source>Save before exiting?</source>
         <translation>Voleu desar abans de sortir?</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="226"/>
+        <location filename="mainwindow/tabmanager.cpp" line="239"/>
         <source>untitled</source>
         <translation>sense títol</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="227"/>
+        <location filename="mainwindow/tabmanager.cpp" line="240"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>S&apos;ha modificat el fitxer &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="230"/>
+        <location filename="mainwindow/tabmanager.cpp" line="243"/>
         <source>&amp;Save</source>
         <translation>De&amp;sa</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="231"/>
+        <location filename="mainwindow/tabmanager.cpp" line="244"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel·la</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="232"/>
+        <location filename="mainwindow/tabmanager.cpp" line="245"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;No desar</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="323"/>
+        <location filename="mainwindow/tabmanager.cpp" line="340"/>
         <source>User area</source>
         <translation>Àrea de l&apos;usuari</translation>
     </message>
@@ -5075,8 +5075,8 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="47"/>
-        <source>Sample processing</source>
-        <translation>Processament de la mostra</translation>
+        <source>Loop / playback</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="65"/>
@@ -5198,8 +5198,9 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <name>ToolChangeVolume</name>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="46"/>
-        <source>Sample processing</source>
-        <translation>Processament de la mostra</translation>
+        <source>Audio processing</source>
+        <oldsource>Sample processing</oldsource>
+        <translation type="unfinished">Processament de la mostra</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="61"/>
@@ -5301,96 +5302,96 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <translation>Estèreo</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="90"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="89"/>
         <source>Chord</source>
         <translation>Acord</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="115"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="112"/>
         <source>Seventh</source>
         <translation>Setena</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="128"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="124"/>
         <source>Ninth</source>
         <translation>Novena</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="141"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="136"/>
         <source>Third</source>
         <translation>Tercera</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="179"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="172"/>
         <source>Root key</source>
         <translation>Nota base</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="192"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="184"/>
         <source>Fifth</source>
         <translation>Cinquena</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="231"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="256"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="301"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="364"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="419"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="221"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="245"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="288"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="348"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="401"/>
         <source>no</source>
         <translation>no</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="236"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="306"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="374"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="226"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="293"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="358"/>
         <source>major</source>
         <translation>major</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="241"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="311"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="369"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="231"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="298"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="353"/>
         <source>minor</source>
         <translation>menor</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="261"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="250"/>
         <source>yes</source>
         <translation>sí</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="350"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="335"/>
         <source>Inversion number</source>
         <translation>Número d&apos;inversió</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="379"/>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="429"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="363"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="411"/>
         <source>diminished</source>
         <translation>disminuït</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="424"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="406"/>
         <source>perfect</source>
         <translation>perfecte</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="434"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="416"/>
         <source>augmented</source>
         <translation>augmentat</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="687"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="656"/>
         <source>Octave</source>
         <translation>Octava</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="699"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="681"/>
         <source>&amp;Ok</source>
         <translation>D&apos;ac&amp;ord</translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords_gui.ui" line="719"/>
+        <location filename="editor/tools/chords/toolchords_gui.ui" line="701"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel·la</translation>
     </message>
@@ -5526,8 +5527,9 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="48"/>
-        <source>Sample processing</source>
-        <translation>Processament de la mostra</translation>
+        <source>Audio processing</source>
+        <oldsource>Sample processing</oldsource>
+        <translation type="unfinished">Processament de la mostra</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="66"/>
@@ -5639,8 +5641,9 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <name>ToolFrequencyFilter</name>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
-        <source>Sample processing</source>
-        <translation>Processament de la mostra</translation>
+        <source>Audio processing</source>
+        <oldsource>Sample processing</oldsource>
+        <translation type="unfinished">Processament de la mostra</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
@@ -5957,6 +5960,126 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     </message>
 </context>
 <context>
+    <name>ToolLoopCrossfade</name>
+    <message>
+        <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="46"/>
+        <source>Loop / playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
+        <source>Crossfade loop</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ToolLoopCrossfade_gui</name>
+    <message>
+        <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="20"/>
+        <source>Crossfade duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="29"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="49"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished">&amp;Cancel·la</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="58"/>
+        <source> ms</source>
+        <comment>Unit for milliseconds</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ToolMergeSamples</name>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples.cpp" line="66"/>
+        <source>The preset doesn&apos;t trigger any samples.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples.h" line="47"/>
+        <source>Transformation</source>
+        <translation type="unfinished">Transformació</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples.h" line="62"/>
+        <source>Merge samples for each note</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ToolMergeSamples_gui</name>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="25"/>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="102"/>
+        <source> s</source>
+        <comment>unit for second</comment>
+        <translation type="unfinished"> s</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="38"/>
+        <source>Sample creation:</source>
+        <translation type="unfinished">Mostra creada:</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="45"/>
+        <source>Stereo</source>
+        <translation type="unfinished">Estèreo</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="59"/>
+        <source>Sustain duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="66"/>
+        <source>Auto loop</source>
+        <translation type="unfinished">Bucle automàtic</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="77"/>
+        <source>for every key</source>
+        <translation type="unfinished">per cada nota</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="82"/>
+        <source>every 3 keys</source>
+        <translation type="unfinished">cada 3 notes</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="87"/>
+        <source>every 6 keys</source>
+        <translation type="unfinished">cada 6 notes</translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="95"/>
+        <source>Preset name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="112"/>
+        <source>Release duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="136"/>
+        <source>&amp;Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="156"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished">&amp;Cancel·la</translation>
+    </message>
+</context>
+<context>
     <name>ToolMixtureCreation</name>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.cpp" line="60"/>
@@ -6231,22 +6354,22 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
 <context>
     <name>ToolRelease_gui</name>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="38"/>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="41"/>
         <source>&amp;Ok</source>
         <translation>D&apos;ac&amp;ord</translation>
     </message>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="58"/>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="61"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel·la</translation>
     </message>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="67"/>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="70"/>
         <source>Division to the next octave</source>
         <translation>Divisió de l&apos;octava següent</translation>
     </message>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="110"/>
+        <location filename="editor/tools/release/toolrelease_gui.ui" line="116"/>
         <source>Detuning induced (semi-tones)</source>
         <translation>Desafinació induïda (semitons)</translation>
     </message>
@@ -6384,12 +6507,12 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
 <context>
     <name>ToolSoundfontExport</name>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="116"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="151"/>
         <source>Merge soudfonts:</source>
         <translation>Fusiona els soundfonts:</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="211"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="246"/>
         <source>Export successful!</source>
         <translation>L&apos;exportació ha finalitzat amb èxit!</translation>
     </message>
@@ -6417,57 +6540,62 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <translation>Desselecciona tot</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="80"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="99"/>
         <source>Destination</source>
         <translation>Destí</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="106"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="152"/>
         <source>Format</source>
         <translation>Format</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="116"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="113"/>
         <source>General MIDI classification</source>
         <translation>Classificació General MIDI</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="123"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="106"/>
         <source>one directory per bank</source>
         <translation>un directori per cada banc</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="130"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="120"/>
         <source>preset number as prefix</source>
         <translation>número de preset com a prefix</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="141"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="134"/>
         <source>High</source>
         <translation>Alt</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="146"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="139"/>
         <source>Medium</source>
         <translation>Mitjà</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="151"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="144"/>
         <source>Low</source>
         <translation>Baix</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
+        <source>one file per preset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="166"/>
         <source>Quality</source>
         <translation>Qualitat</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="170"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="177"/>
         <source>&amp;Export</source>
         <translation>&amp;Exporta</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="190"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="197"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel·la</translation>
     </message>
@@ -6477,35 +6605,35 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <translation>Sense títol</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="148"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="150"/>
         <source>Select the destination directory</source>
         <translation>Seleccioneu el directori de destí</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="164"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="199"/>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="166"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="195"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="201"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="210"/>
         <source>Warning</source>
         <translation>Atenció</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="164"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="166"/>
         <source>Invalid directory.</source>
         <translation>El directori no és vàlid.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="193"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="195"/>
         <source>At least one preset must be selected.</source>
         <translation>Almenys heu de seleccionar un preset.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="199"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="201"/>
         <source>The maximal number of soundfont to export is 127.</source>
         <translation>El nombre màxim de soundfonts per exportar és de 127.</translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="208"/>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="210"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
         <translation>En cas d&apos;exportar diversos soundfonts, el nombre màxim de presets per soundfont és de 127.</translation>
     </message>
@@ -6532,8 +6660,9 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <name>ToolTransposeSmpl</name>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="46"/>
-        <source>Sample processing</source>
-        <translation>Processament de la mostra</translation>
+        <source>Audio processing</source>
+        <oldsource>Sample processing</oldsource>
+        <translation type="unfinished">Processament de la mostra</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="61"/>
@@ -6586,8 +6715,8 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <name>ToolTrimEnd</name>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="46"/>
-        <source>Sample processing</source>
-        <translation>Processament de la mostra</translation>
+        <source>Loop / playback</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="64"/>
@@ -6599,8 +6728,8 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <name>ToolTrimStart</name>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="46"/>
-        <source>Sample processing</source>
-        <translation>Processament de la mostra</translation>
+        <source>Loop / playback</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="67"/>
