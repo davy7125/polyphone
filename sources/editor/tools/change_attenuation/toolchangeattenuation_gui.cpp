@@ -79,7 +79,7 @@ void ToolChangeAttenuation_gui::updateInterface(AbstractToolParameters * paramet
     ui->doubleSpinValue->setMaximum(maxOffset);
 
     // Recall the last value
-    double previousValue = _isInst ? params->getInstValue() : params->getPrstValue();
+    double previousValue = params->getValue();
     if (previousValue < minOffset)
         ui->doubleSpinValue->setValue(minOffset);
     else if (previousValue > maxOffset)
@@ -93,10 +93,7 @@ void ToolChangeAttenuation_gui::saveParameters(AbstractToolParameters * paramete
     ToolChangeAttenuation_parameters * params = dynamic_cast<ToolChangeAttenuation_parameters *>(parameters);
 
     // Value
-    if (_isInst)
-        params->setInstValue(ui->doubleSpinValue->value());
-    else
-        params->setPrstValue(ui->doubleSpinValue->value());
+    params->setValue(ui->doubleSpinValue->value());
 }
 
 QString ToolChangeAttenuation_gui::formatDouble(double value)

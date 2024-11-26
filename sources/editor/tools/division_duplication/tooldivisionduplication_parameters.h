@@ -37,25 +37,18 @@ public:
     /// Save the configuration in the ini file
     void saveConfiguration() override;
     
-    bool getInstDuplicKey() { return _instDuplicKey; }
-    void setInstDuplicKey(bool instDuplicKey) { _instDuplicKey = instDuplicKey; }
-    bool getPrstDuplicKey() { return _prstDuplicKey; }
-    void setPrstDuplicKey(bool prstDuplicKey) { _prstDuplicKey = prstDuplicKey; }
+    bool getDuplicKey() { return _duplicKey; }
+    void setDuplicKey(bool duplicKey) { _duplicKey = duplicKey; }
     
-    bool getInstDuplicVel() { return _instDuplicVel; }
-    void setInstDuplicVel(bool instDuplicVel) { _instDuplicVel = instDuplicVel; }
-    bool getPrstDuplicVel() { return _prstDuplicVel; }
-    void setPrstDuplicVel(bool prstDuplicVel) { _prstDuplicVel = prstDuplicVel; }
+    bool getDuplicVel() { return _duplicVel; }
+    void setDuplicVel(bool duplicVel) { _duplicVel = duplicVel; }
     
-    QList<QPair<int, int> > getInstVelocityRanges() { return _instVelocityRanges; }
-    void setInstVelocityRanges(QList<QPair<int, int> > instVelocityRanges) { _instVelocityRanges = instVelocityRanges; }
-    QList<QPair<int, int> > getPrstVelocityRanges() { return _prstVelocityRanges; }
-    void setPrstVelocityRanges(QList<QPair<int, int> > prstVelocityRanges) { _prstVelocityRanges = prstVelocityRanges; }
+    QList<QPair<int, int> > getVelocityRanges() { return _velocityRanges; }
+    void setVelocityRanges(QList<QPair<int, int> > velocityRanges) { _velocityRanges = velocityRanges; }
 
 private:
-    bool _instDuplicKey, _prstDuplicKey;
-    bool _instDuplicVel, _prstDuplicVel;
-    QList<QPair<int, int> > _instVelocityRanges, _prstVelocityRanges;
+    bool _duplicKey, _duplicVel;
+    QList<QPair<int, int> > _velocityRanges;
 };
 
 #endif // TOOLDIVISIONDUPLICATION_PARAMETERS_H

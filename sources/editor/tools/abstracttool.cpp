@@ -43,6 +43,7 @@ AbstractTool::AbstractTool(AbstractToolParameters *parameters, AbstractToolGui *
 
 AbstractTool::~AbstractTool()
 {
+    delete _toolDialog;
     delete _toolParameters;
 }
 
@@ -56,6 +57,13 @@ bool AbstractTool::setIds(IdList ids)
 {
     _currentIds = ids;
     return this->isCompatible(_currentIds);
+}
+
+ElementType AbstractTool::getCurrentType() const
+{
+    if (_currentIds.isEmpty())
+        return elementUnknown;
+    return _currentIds[0].typeElement;
 }
 
 void AbstractTool::run()
@@ -95,6 +103,7 @@ void AbstractTool::run()
         onParametersValidated();
     else
     {
+        _toolParameters->setConfigurationSubSection(this->getIdentifier(true));
         _toolParameters->loadConfiguration();
         _toolGui->updateInterface(_toolParameters, _idsToProcess);
         _toolDialog->show();
@@ -128,7 +137,31 @@ void AbstractTool::onFinished(bool updateNeeded)
         QMessageBox::information(s_parent, tr("Information"), info);
 
     if (updateNeeded)
-        s_sm->endEditing("tool:" + getIdentifier());
+        s_sm->endEditing("tool:" + getIdentifier(false));
+}
+
+QString AbstractTool::getIdentifier(bool forConfig) const
+{
+    QString currentType = "";
+    switch (getCurrentType())
+    {
+    case elementSf2: case elementRootSmpl: case elementRootInst: case elementRootPrst:
+        currentType = "sf2";
+        break;
+    case elementSmpl:
+        currentType = "sample";
+        break;
+    case elementInst: case elementInstSmpl:
+        currentType = "instrument";
+        break;
+    case elementPrst: case elementPrstInst:
+        currentType = "preset";
+        break;
+    default:
+        currentType = "unknown";
+        break;
+    }
+    return currentType + (forConfig ? "_" : ":") + getToolName();
 }
 
 QString AbstractTool::getLabel(bool withPossibleEllipsis) const

@@ -45,10 +45,10 @@ public:
         return tr("Transformation");
     }
 
-    /// Internal identifier
-    QString getIdentifier() const override
+    /// Internal identification
+    QString getToolName() const override
     {
-        return _isInst ? "inst:divisionDuplication" : "prst:divisionDuplication";
+        return "duplication";
     }
 
     /// Method executed before the iterating process

@@ -42,8 +42,15 @@ public:
 signals:
     void validated();
 
+protected:
+    virtual void showEvent(QShowEvent *event) override;
+    virtual void closeEvent(QCloseEvent *event) override;
+
 private slots:
     void canceled();
+
+private:
+    AbstractTool * _tool;
 };
 
 #endif // TOOLDIALOG_H

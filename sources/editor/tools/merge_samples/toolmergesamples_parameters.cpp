@@ -28,29 +28,29 @@
 void ToolMergeSamples_parameters::loadConfiguration()
 {
     // Preset property
-    _presetName = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "merger", "name", "").toString();
+    _presetName = getToolValue("name", "").toString();
 
     // Instrument property
-    _densityType = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "merger", "density", 1).toInt();
+    _densityType = getToolValue("density", 1).toInt();
     
     // Sample properties
-    _stereoSample = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "merger", "stereo", true).toBool();
-    _loopSample = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "merger", "loop", true).toBool();
-    _sustainDuration = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "merger", "sustain_duration", 5).toInt();
-    _releaseDuration = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "merger", "release_duration", 2).toInt();
+    _stereoSample = getToolValue("stereo", true).toBool();
+    _loopSample = getToolValue("loop", true).toBool();
+    _sustainDuration = getToolValue("sustain_duration", 5).toInt();
+    _releaseDuration = getToolValue("release_duration", 2).toInt();
 }
 
 void ToolMergeSamples_parameters::saveConfiguration()
 {
     // Preset property
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "merger", "name", _presetName);
+    setToolValue("name", _presetName);
 
     // Instrument property
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "merger", "density", _densityType);
+    setToolValue("density", _densityType);
     
     // Sample properties
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "merger", "stereo", _stereoSample);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "merger", "loop", _loopSample);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "merger", "sustain_duration", _sustainDuration);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "merger", "release_duration", _releaseDuration);
+    setToolValue("stereo", _stereoSample);
+    setToolValue("loop", _loopSample);
+    setToolValue("sustain_duration", _sustainDuration);
+    setToolValue("release_duration", _releaseDuration);
 }

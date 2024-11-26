@@ -76,31 +76,31 @@ void ToolSoundSpatialization_gui::updateInterface(AbstractToolParameters * param
 
     // Recall parameters
     ui->comboPattern->blockSignals(true);
-    ui->comboPattern->setCurrentIndex(_isInst ? params->getInstPattern() : params->getPrstPattern());
+    ui->comboPattern->setCurrentIndex(params->getPattern());
     ui->comboPattern->blockSignals(false);
 
     ui->spinNbDivision->blockSignals(true);
-    ui->spinNbDivision->setValue(_isInst ? params->getInstDivisionNumber() : params->getPrstDivisionNumber());
+    ui->spinNbDivision->setValue(params->getDivisionNumber());
     ui->spinNbDivision->blockSignals(false);
 
     ui->spinSpreading->blockSignals(true);
-    ui->spinSpreading->setValue(_isInst ? params->getInstSpreading() : params->getPrstSpreading());
+    ui->spinSpreading->setValue(params->getSpreading());
     ui->spinSpreading->blockSignals(false);
 
     ui->spinFilling->blockSignals(true);
-    ui->spinFilling->setValue(_isInst ? params->getInstFilling() : params->getPrstFilling());
+    ui->spinFilling->setValue(params->getFilling());
     ui->spinFilling->blockSignals(false);
 
     ui->spinOffset->blockSignals(true);
-    ui->spinOffset->setValue(_isInst ? params->getInstOffset() : params->getPrstOffset());
+    ui->spinOffset->setValue(params->getOffset());
     ui->spinOffset->blockSignals(false);
 
     ui->checkFlip->blockSignals(true);
-    ui->checkFlip->setChecked(_isInst ? params->getInstFlip() : params->getPrstFlip());
+    ui->checkFlip->setChecked(params->getFlip());
     ui->checkFlip->blockSignals(false);
 
     ui->checkFlop->blockSignals(true);
-    ui->checkFlop->setChecked(_isInst ? params->getInstFlop() : params->getPrstFlop());
+    ui->checkFlop->setChecked(params->getFlop());
     ui->checkFlop->blockSignals(false);
 
     // Activation des renversements et remplissage du graphique
@@ -113,26 +113,13 @@ void ToolSoundSpatialization_gui::saveParameters(AbstractToolParameters * parame
     ToolSoundSpatialization_parameters * params = (ToolSoundSpatialization_parameters *) parameters;
 
     // Save configuration
-    if (_isInst)
-    {
-        params->setInstPattern(ui->comboPattern->currentIndex());
-        params->setInstDivisionNumber(ui->spinNbDivision->value());
-        params->setInstSpreading(ui->spinSpreading->value());
-        params->setInstFilling(ui->spinFilling->value());
-        params->setInstOffset(ui->spinOffset->value());
-        params->setInstFlip(ui->checkFlip->isChecked());
-        params->setInstFlop(ui->checkFlop->isChecked());
-    }
-    else
-    {
-        params->setPrstPattern(ui->comboPattern->currentIndex());
-        params->setPrstDivisionNumber(ui->spinNbDivision->value());
-        params->setPrstSpreading(ui->spinSpreading->value());
-        params->setPrstFilling(ui->spinFilling->value());
-        params->setPrstOffset(ui->spinOffset->value());
-        params->setPrstFlip(ui->checkFlip->isChecked());
-        params->setPrstFlop(ui->checkFlop->isChecked());
-    }
+    params->setPattern(ui->comboPattern->currentIndex());
+    params->setDivisionNumber(ui->spinNbDivision->value());
+    params->setSpreading(ui->spinSpreading->value());
+    params->setFilling(ui->spinFilling->value());
+    params->setOffset(ui->spinOffset->value());
+    params->setFlip(ui->checkFlip->isChecked());
+    params->setFlop(ui->checkFlop->isChecked());
 
     // Store the curve
     QVector<double> x;

@@ -49,8 +49,9 @@ public:
     QString getLabel(bool withPossibleEllipsis = false) const;
     virtual QString getCategory() const = 0;
 
-    /// Internal identifier
-    virtual QString getIdentifier() const = 0;
+    // Name of the tool (internal identification)
+    virtual QString getToolName() const = 0;
+    QString getIdentifier(bool forConfig) const;
 
     /// Set the ids and return true if the tool can be used on the specified ids
     bool setIds(IdList ids);
@@ -79,6 +80,10 @@ protected:
 
     /// Return true if the id is in the list of ids to be processed by the tool
     bool isProcessed(EltID id) { return _idsToProcess.contains(id); }
+
+    /// Return the currently edited type
+    /// It is defined by default by the first element in "setIds"
+    virtual ElementType getCurrentType() const;
 
 private slots:
     void onFinished(bool updateNeeded);

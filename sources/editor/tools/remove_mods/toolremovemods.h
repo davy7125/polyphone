@@ -45,23 +45,10 @@ public:
         return tr("Modulators");
     }
 
-    /// Internal identifier
-    QString getIdentifier() const override
+    /// Internal identification
+    QString getToolName() const override
     {
-        QString identifier;
-        switch (_deletionType)
-        {
-        case DeletionGlobal:
-            identifier = "sf2:removeMods";
-            break;
-        case DeletionForInstrument:
-            identifier = "inst:removeMods";
-            break;
-        case DeletionForPreset:
-            identifier = "prst:removeMods";
-            break;
-        }
-        return identifier;
+        return "removeMods";
     }
 
     /// Method executed before the iterating process

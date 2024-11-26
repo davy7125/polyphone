@@ -123,7 +123,7 @@ void UserManager::userDataAvailable(QString error)
                 _connectionState = FAILED;
 
                 // Stop the auto-connect
-                ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "autoconnect", false);
+                ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "auto_connect", false);
                 break;
             case 2:
                 _error = "";

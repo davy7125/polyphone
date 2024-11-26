@@ -127,31 +127,31 @@ void Equalizer::on_pushEgaliser_clicked()
 void Equalizer::loadEQ()
 {
     _initialization = true;
-    ui->verticalSlider_1->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "01", 0).toInt());
-    ui->verticalSlider_2->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "02", 0).toInt());
-    ui->verticalSlider_3->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "03", 0).toInt());
-    ui->verticalSlider_4->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "04", 0).toInt());
-    ui->verticalSlider_5->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "05", 0).toInt());
-    ui->verticalSlider_6->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "06", 0).toInt());
-    ui->verticalSlider_7->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "07", 0).toInt());
-    ui->verticalSlider_8->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "08", 0).toInt());
-    ui->verticalSlider_9->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "09", 0).toInt());
-    ui->verticalSlider_10->setValue(ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "10", 0).toInt());
+    ui->verticalSlider_1->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, "sample_EQ", "01", 0).toInt());
+    ui->verticalSlider_2->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, "sample_EQ", "02", 0).toInt());
+    ui->verticalSlider_3->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, "sample_EQ", "03", 0).toInt());
+    ui->verticalSlider_4->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, "sample_EQ", "04", 0).toInt());
+    ui->verticalSlider_5->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, "sample_EQ", "05", 0).toInt());
+    ui->verticalSlider_6->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, "sample_EQ", "06", 0).toInt());
+    ui->verticalSlider_7->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, "sample_EQ", "07", 0).toInt());
+    ui->verticalSlider_8->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, "sample_EQ", "08", 0).toInt());
+    ui->verticalSlider_9->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, "sample_EQ", "09", 0).toInt());
+    ui->verticalSlider_10->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, "sample_EQ", "10", 0).toInt());
     _initialization = false;
 }
 
 void Equalizer::saveEQ()
 {
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "01", ui->verticalSlider_1->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "02", ui->verticalSlider_2->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "03", ui->verticalSlider_3->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "04", ui->verticalSlider_4->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "05", ui->verticalSlider_5->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "06", ui->verticalSlider_6->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "07", ui->verticalSlider_7->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "08", ui->verticalSlider_8->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "09", ui->verticalSlider_9->value());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "10", ui->verticalSlider_10->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, "sample_EQ", "01", ui->verticalSlider_1->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, "sample_EQ", "02", ui->verticalSlider_2->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, "sample_EQ", "03", ui->verticalSlider_3->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, "sample_EQ", "04", ui->verticalSlider_4->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, "sample_EQ", "05", ui->verticalSlider_5->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, "sample_EQ", "06", ui->verticalSlider_6->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, "sample_EQ", "07", ui->verticalSlider_7->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, "sample_EQ", "08", ui->verticalSlider_8->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, "sample_EQ", "09", ui->verticalSlider_9->value());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, "sample_EQ", "10", ui->verticalSlider_10->value());
 }
 
 void Equalizer::enableApply(bool isEnabled)

@@ -45,8 +45,8 @@ void ToolDivisionDuplication::process(SoundfontManager * sm, EltID id, AbstractT
 {
     ToolDivisionDuplication_parameters * params = (ToolDivisionDuplication_parameters *)parameters;
 
-    bool duplicKey = _isInst ? params->getInstDuplicKey() : params->getPrstDuplicKey();
-    bool duplicVel = _isInst ? params->getInstDuplicVel() : params->getPrstDuplicVel();
+    bool duplicKey = params->getDuplicKey();
+    bool duplicVel = params->getDuplicVel();
     if (!duplicKey && !duplicVel)
         return;
 
@@ -71,7 +71,7 @@ void ToolDivisionDuplication::process(SoundfontManager * sm, EltID id, AbstractT
         if (duplicKey)
             tool.duplicateByKey();
         if (duplicVel)
-            tool.duplicateByVelocity(_isInst ? params->getInstVelocityRanges() : params->getPrstVelocityRanges());
+            tool.duplicateByVelocity(params->getVelocityRanges());
     }
 }
 

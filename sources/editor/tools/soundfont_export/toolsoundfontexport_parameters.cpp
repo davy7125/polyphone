@@ -28,21 +28,21 @@
 void ToolSoundfontExport_parameters::loadConfiguration()
 {
     _directory = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_EXPORT);
-    _format = ContextManager::configuration()->getValue(ConfManager::SECTION_EXPORT, "type", 0).toInt();
-    _quality = ContextManager::configuration()->getValue(ConfManager::SECTION_EXPORT, "quality", 1).toInt();
-    _presetPrefix = ContextManager::configuration()->getValue(ConfManager::SECTION_EXPORT, "preset_prefix", true).toBool();
-    _bankDirectory = ContextManager::configuration()->getValue(ConfManager::SECTION_EXPORT, "bank_directory", false).toBool();
-    _gmSort = ContextManager::configuration()->getValue(ConfManager::SECTION_EXPORT, "gm_sort", false).toBool();
-    _filePreset = ContextManager::configuration()->getValue(ConfManager::SECTION_EXPORT, "file_preset", false).toBool();
+    _format = getToolValue("type", 0).toInt();
+    _quality = getToolValue("quality", 1).toInt();
+    _presetPrefix = getToolValue("preset_prefix", true).toBool();
+    _bankDirectory = getToolValue("bank_directory", false).toBool();
+    _gmSort = getToolValue("gm_sort", false).toBool();
+    _filePreset = getToolValue("file_preset", false).toBool();
 }
 
 void ToolSoundfontExport_parameters::saveConfiguration()
 {
     ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_EXPORT, _directory + "/soundfont.sfz");
-    ContextManager::configuration()->setValue(ConfManager::SECTION_EXPORT, "type", _format);
-    ContextManager::configuration()->setValue(ConfManager::SECTION_EXPORT, "quality", _quality);
-    ContextManager::configuration()->setValue(ConfManager::SECTION_EXPORT, "preset_prefix", _presetPrefix);
-    ContextManager::configuration()->setValue(ConfManager::SECTION_EXPORT, "bank_directory", _bankDirectory);
-    ContextManager::configuration()->setValue(ConfManager::SECTION_EXPORT, "gm_sort", _gmSort);
-    ContextManager::configuration()->setValue(ConfManager::SECTION_EXPORT, "file_preset", _filePreset);
+    setToolValue("type", _format);
+    setToolValue("quality", _quality);
+    setToolValue("preset_prefix", _presetPrefix);
+    setToolValue("bank_directory", _bankDirectory);
+    setToolValue("gm_sort", _gmSort);
+    setToolValue("file_preset", _filePreset);
 }

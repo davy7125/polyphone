@@ -36,15 +36,11 @@ public:
     /// Save the configuration in the ini file
     void saveConfiguration() override;
 
-    double getInstValue() { return _instValue; }
-    void setInstValue(double instValue) { _instValue = instValue; }
-
-    double getPrstValue() { return _prstValue; }
-    void setPrstValue(double prstValue) { _prstValue = prstValue; }
+    double getValue() { return _value; }
+    void setValue(double value) { _value = value; }
 
 private:
-    double _instValue;
-    double _prstValue;
+    double _value;
 };
 
 #endif // TOOLCHANGEATTENUATION_PARAMETERS_H

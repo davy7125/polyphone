@@ -28,84 +28,62 @@
 void ToolGlobalSettings_parameters::loadConfiguration()
 {
     // Pattern
-    _instPattern = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "pattern", 0).toInt();
-    _prstPattern = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "pattern", 0).toInt();
+    _pattern = getToolValue("pattern", 0).toInt();
 
     // Pattern parameter
-    _instParam = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "param", 50.).toDouble();
-    _prstParam = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "param", 50.).toDouble();
+    _param = getToolValue("param", 50.).toDouble();
 
     // Min / max
-    _instMin = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "min", 0.).toDouble();
-    _prstMin = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "min", 0.).toDouble();
-    _instMax = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "max", 1.).toDouble();
-    _prstMax = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "max", 1.).toDouble();
-    _instMinX = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "minX", 0).toInt();
-    _prstMinX = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "minX", 0).toInt();
-    _instMaxX = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "maxX", 127).toInt();
-    _prstMaxX = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "maxX", 127).toInt();
+    _min = getToolValue("min", 0.).toDouble();
+    _max = getToolValue("max", 1.).toDouble();
+    _minX = getToolValue("minX", 0).toInt();
+    _maxX = getToolValue("maxX", 127).toInt();
 
     // Curve
-    _instValues = getStoredValues(ConfManager::TOOL_TYPE_INSTRUMENT);
-    _prstValues = getStoredValues(ConfManager::TOOL_TYPE_PRESET);
+    _values = getStoredValues();
 
     // Modification type
-    _instModifType = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "modification", 0).toInt();
-    _prstModifType = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "modification", 0).toInt();
+    _modifType = getToolValue("modification", 0).toInt();
 
     // Attribute to change
-    _instAttribute = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "attribute", champ_initialAttenuation).toInt();
-    _prstAttribute = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "attribute", champ_initialAttenuation).toInt();
+    _attribute = getToolValue("attribute", champ_initialAttenuation).toInt();
 
     // Min / max velocity
-    _instMinVel = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "minVel", 0).toInt();
-    _prstMinVel = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "minVel", 0).toInt();
-    _instMaxVel = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "maxVel", 127).toInt();
-    _prstMaxVel = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "maxVel", 127).toInt();
+    _minVel = getToolValue("minVel", 0).toInt();
+    _maxVel = getToolValue("maxVel", 127).toInt();
 }
 
 void ToolGlobalSettings_parameters::saveConfiguration()
 {
     // Pattern
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "pattern", _instPattern);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "pattern", _prstPattern);
+    setToolValue("pattern", _pattern);
 
     // Pattern parameter
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "param", _instParam);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "param", _prstParam);
+    setToolValue("param", _param);
 
     // Min / max
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "min", _instMin);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "min", _prstMin);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "max", _instMax);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "max", _prstMax);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "minX", _instMinX);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "minX", _prstMinX);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "maxX", _instMaxX);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "maxX", _prstMaxX);
+    setToolValue("min", _min);
+    setToolValue("max", _max);
+    setToolValue("minX", _minX);
+    setToolValue("maxX", _maxX);
 
     // Curve
-    storeValues(_instValues, ConfManager::TOOL_TYPE_INSTRUMENT);
-    storeValues(_prstValues, ConfManager::TOOL_TYPE_PRESET);
+    storeValues(_values);
 
     // Modification type
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "modification", _instModifType);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "modification", _prstModifType);
+    setToolValue("modification", _modifType);
 
     // Attribute to change
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "attribute", _instAttribute);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "attribute", _prstAttribute);
+    setToolValue("attribute", _attribute);
 
     // Min / max velocity
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "minVel", _instMinVel);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "minVel", _prstMinVel);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "global", "maxVel", _instMaxVel);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_PRESET, "global", "maxVel", _prstMaxVel);
+    setToolValue("minVel", _minVel);
+    setToolValue("maxVel", _maxVel);
 }
 
-QVector<float> ToolGlobalSettings_parameters::getStoredValues(ConfManager::ToolType toolType)
+QVector<float> ToolGlobalSettings_parameters::getStoredValues()
 {
-    QList<QVariant> listTmp = ContextManager::configuration()->getToolValue(toolType, "global", "values", QList<QVariant>()).toList();
+    QList<QVariant> listTmp = getToolValue("values", QList<QVariant>()).toList();
     QVector<float> vectRet;
     vectRet.resize(listTmp.size());
     for (int i = 0; i < listTmp.size(); i++)
@@ -113,10 +91,10 @@ QVector<float> ToolGlobalSettings_parameters::getStoredValues(ConfManager::ToolT
     return vectRet;
 }
 
-void ToolGlobalSettings_parameters::storeValues(QVector<float> values, ConfManager::ToolType toolType)
+void ToolGlobalSettings_parameters::storeValues(QVector<float> values)
 {
     QVariantList listTmp;
     for (int i = 0; i < values.size(); i++)
         listTmp << values.at(i);
-    ContextManager::configuration()->setToolValue(toolType, "global", "values", listTmp);
+    setToolValue("values", listTmp);
 }

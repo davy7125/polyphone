@@ -43,7 +43,7 @@ ExtensionMidiDialog::ExtensionMidiDialog(QString title, QString identifier, QWid
     this->setLayout(layout);
 
     // Restore the geometry
-    QByteArray geometry = ContextManager::configuration()->getExtensionValue(_identifier, "geometry", QByteArray()).toByteArray();
+    QByteArray geometry = ContextManager::configuration()->getValue(ConfManager::SECTION_EXTENSIONS, _identifier, "geometry", QByteArray()).toByteArray();
     if (!geometry.isEmpty())
         this->restoreGeometry(geometry);
 }
@@ -56,7 +56,7 @@ ExtensionMidiDialog::~ExtensionMidiDialog()
 
 void ExtensionMidiDialog::closeEvent(QCloseEvent *event)
 {
-    ContextManager::configuration()->setExtensionValue(_identifier, "geometry", this->saveGeometry());
+    ContextManager::configuration()->setValue(ConfManager::SECTION_EXTENSIONS, _identifier, "geometry", this->saveGeometry());
     QDialog::closeEvent(event);
 }
 

@@ -95,7 +95,7 @@ void ToolGlobalSettings_gui::updateInterface(AbstractToolParameters * parameters
         ui->comboAttribute->addItem(Attribute::getDescription(paramTypeList.at(i), !_isInst));
         ui->comboAttribute->setItemData(i, static_cast<int>(paramTypeList.at(i)));
     }
-    AttributeType attributeToSelect = static_cast<AttributeType>(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
+    AttributeType attributeToSelect = static_cast<AttributeType>(params->getAttribute());
     ui->comboAttribute->setCurrentIndex(paramTypeList.indexOf(attributeToSelect));
     if (ui->comboAttribute->currentIndex() == -1)
         ui->comboAttribute->setCurrentIndex(paramTypeList.indexOf(champ_initialAttenuation));
@@ -103,39 +103,39 @@ void ToolGlobalSettings_gui::updateInterface(AbstractToolParameters * parameters
 
     // Pattern type
     ui->comboPattern->blockSignals(true);
-    ui->comboPattern->setCurrentIndex(_isInst ? params->getInstPattern() : params->getPrstPattern());
+    ui->comboPattern->setCurrentIndex(params->getPattern());
     ui->comboPattern->blockSignals(false);
 
     // Pattern parameter
     ui->doubleSpinParam->blockSignals(true);
-    ui->doubleSpinParam->setValue(_isInst ? params->getInstParam() : params->getPrstParam());
+    ui->doubleSpinParam->setValue(params->getParam());
     ui->doubleSpinParam->blockSignals(false);
 
     // Min / max
     ui->doubleSpinMin->blockSignals(true);
-    ui->doubleSpinMin->setValue(_isInst ? params->getInstMin() : params->getPrstMin());
+    ui->doubleSpinMin->setValue(params->getMin());
     ui->doubleSpinMin->blockSignals(false);
 
     ui->doubleSpinMax->blockSignals(true);
-    ui->doubleSpinMax->setValue(_isInst ? params->getInstMax() : params->getPrstMax());
+    ui->doubleSpinMax->setValue(params->getMax());
     ui->doubleSpinMax->blockSignals(false);
 
     ui->graphParamGlobal->setMinMax(ui->doubleSpinMin->value(), ui->doubleSpinMax->value());
 
     // Modification type
     ui->comboModif->blockSignals(true);
-    ui->comboModif->setCurrentIndex(_isInst ? params->getInstModifType() : params->getPrstModifType());
+    ui->comboModif->setCurrentIndex(params->getModifType());
     ui->comboModif->blockSignals(false);
 
     // Velocity range
-    ui->spinVelMin->setValue(_isInst ? params->getInstMinVel() : params->getPrstMinVel());
-    ui->spinVelMax->setValue(_isInst ? params->getInstMaxVel() : params->getPrstMaxVel());
+    ui->spinVelMin->setValue(params->getMinVel());
+    ui->spinVelMax->setValue(params->getMaxVel());
 
     // Draw graph
     this->on_comboPattern_currentIndexChanged(ui->comboPattern->currentIndex());
-    ui->graphParamGlobal->setMinMaxX(Utils::round32(_isInst ? params->getInstMinX() : params->getPrstMinX()),
-                                     Utils::round32(_isInst ? params->getInstMaxX() : params->getPrstMaxX()));
-    ui->graphParamGlobal->setValues(_isInst ? params->getInstValues() : params->getPrstValues());
+    ui->graphParamGlobal->setMinMaxX(Utils::round32(params->getMinX()),
+                                     Utils::round32(params->getMaxX()));
+    ui->graphParamGlobal->setValues(params->getValues());
 
     // Key range to highlight
     int minKey = -1;
@@ -196,44 +196,23 @@ void ToolGlobalSettings_gui::saveParameters(AbstractToolParameters * parameters)
     ToolGlobalSettings_parameters * params = dynamic_cast<ToolGlobalSettings_parameters *>(parameters);
 
     // Store data
-    if (_isInst)
-    {
-        // Curve description
-        params->setInstPattern(ui->comboPattern->currentIndex());
-        params->setInstParam(ui->doubleSpinParam->value());
-        params->setInstMin(ui->doubleSpinMin->value());
-        params->setInstMax(ui->doubleSpinMax->value());
-        params->setInstMinX(ui->graphParamGlobal->getXmin());
-        params->setInstMaxX(ui->graphParamGlobal->getXmax());
 
-        // Values
-        params->setInstValues(ui->graphParamGlobal->getValues());
+    // Curve description
+    params->setPattern(ui->comboPattern->currentIndex());
+    params->setParam(ui->doubleSpinParam->value());
+    params->setMin(ui->doubleSpinMin->value());
+    params->setMax(ui->doubleSpinMax->value());
+    params->setMinX(ui->graphParamGlobal->getXmin());
+    params->setMaxX(ui->graphParamGlobal->getXmax());
 
-        // Modification
-        params->setInstModifType(ui->comboModif->currentIndex());
-        params->setInstAttribute(ui->comboAttribute->itemData(ui->comboAttribute->currentIndex()).toInt());
-        params->setInstMinVel(ui->spinVelMin->value());
-        params->setInstMaxVel(ui->spinVelMax->value());
-    }
-    else
-    {
-        // Curve description
-        params->setPrstPattern(ui->comboPattern->currentIndex());
-        params->setPrstParam(ui->doubleSpinParam->value());
-        params->setPrstMin(ui->doubleSpinMin->value());
-        params->setPrstMax(ui->doubleSpinMax->value());
-        params->setPrstMinX(ui->graphParamGlobal->getXmin());
-        params->setPrstMaxX(ui->graphParamGlobal->getXmax());
+    // Values
+    params->setValues(ui->graphParamGlobal->getValues());
 
-        // Values
-        params->setPrstValues(ui->graphParamGlobal->getValues());
-
-        // Modification
-        params->setPrstModifType(ui->comboModif->currentIndex());
-        params->setPrstAttribute(ui->comboAttribute->itemData(ui->comboAttribute->currentIndex()).toInt());
-        params->setPrstMinVel(ui->spinVelMin->value());
-        params->setPrstMaxVel(ui->spinVelMax->value());
-    }
+    // Modification
+    params->setModifType(ui->comboModif->currentIndex());
+    params->setAttribute(ui->comboAttribute->itemData(ui->comboAttribute->currentIndex()).toInt());
+    params->setMinVel(ui->spinVelMin->value());
+    params->setMaxVel(ui->spinVelMax->value());
 }
 
 void ToolGlobalSettings_gui::on_comboPattern_currentIndexChanged(int index)

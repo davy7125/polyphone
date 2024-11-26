@@ -66,7 +66,6 @@ AbstractToolIterating::AbstractToolIterating(ElementType elementType, AbstractTo
     connect(this, SIGNAL(elementProcessed()), this, SLOT(onElementProcessed()), Qt::QueuedConnection);
 }
 
-
 AbstractToolIterating::AbstractToolIterating(QList<ElementType> elementTypes, AbstractToolParameters * parameters, AbstractToolGui * gui) :
     AbstractTool(parameters, gui),
     _openWaitDialogJustInProcess(false),

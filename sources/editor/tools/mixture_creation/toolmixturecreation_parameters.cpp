@@ -28,16 +28,16 @@
 void ToolMixtureCreation_parameters::loadConfiguration()
 {
     // Instrument properties
-    _instrumentName = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "name", "").toString();
-    _densityType = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "density", 1).toInt();
+    _instrumentName = getToolValue("name", "").toString();
+    _densityType = getToolValue("density", 1).toInt();
     
     // Sample properties
-    _stereoSample = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "stereo", true).toBool();
-    _loopSample = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "loop", true).toBool();
+    _stereoSample = getToolValue("stereo", true).toBool();
+    _loopSample = getToolValue("loop", true).toBool();
     
     // Divisions
     _divisions.clear();
-    QStringList listDivision = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "divisions", QList<QVariant>()).toStringList();
+    QStringList listDivision = getToolValue("divisions", QList<QVariant>()).toStringList();
     foreach (QString divisionStr, listDivision)
     {
         QStringList listTmp = divisionStr.split(' ');
@@ -58,12 +58,12 @@ void ToolMixtureCreation_parameters::loadConfiguration()
 void ToolMixtureCreation_parameters::saveConfiguration()
 {
     // Instrument properties
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "name", _instrumentName);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "density", _densityType);
+    setToolValue("name", _instrumentName);
+    setToolValue("density", _densityType);
     
     // Sample properties
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "stereo", _stereoSample);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "loop", _loopSample);
+    setToolValue("stereo", _stereoSample);
+    setToolValue("loop", _loopSample);
     
     // Divisions
     QStringList listDivision;
@@ -80,5 +80,5 @@ void ToolMixtureCreation_parameters::saveConfiguration()
         
         listDivision << divisionStr.join(' ');
     }
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "divisions", listDivision);
+    setToolValue("divisions", listDivision);
 }

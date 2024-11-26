@@ -46,10 +46,10 @@ public:
         return tr("Fast editing");
     }
 
-    /// Internal identifier
-    QString getIdentifier() const override
+    /// Internal identification
+    QString getToolName() const override
     {
-        return "inst:release";
+        return "release";
     }
 
     /// Process an element

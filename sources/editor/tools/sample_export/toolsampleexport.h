@@ -50,10 +50,10 @@ public:
         return tr("Files");
     }
 
-    /// Internal identifier
-    QString getIdentifier() const override
+    /// Internal identification
+    QString getToolName() const override
     {
-        return "smpl:wavExport";
+        return "wavExport";
     }
 
     /// Method executed before the iterating process

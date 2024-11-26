@@ -45,10 +45,10 @@ public:
         return tr("Analyze");
     }
 
-    /// Internal identifier
-    QString getIdentifier() const override
+    /// Internal identification
+    QString getToolName() const override
     {
-        return _isInst ? "inst:monitor" : "prst:monitor";
+        return "monitor";
     }
 
 protected:

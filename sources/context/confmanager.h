@@ -25,6 +25,7 @@
 #ifndef CONFMANAGER_H
 #define CONFMANAGER_H
 
+#include "basetypes.h"
 #include <QSettings>
 #include <QString>
 class SynthConfig;
@@ -41,7 +42,6 @@ public:
         SECTION_AUDIO,
         SECTION_BULK_RENAME,
         SECTION_COLORS,
-        SECTION_EXPORT,
         SECTION_KEYBOARD,
         SECTION_MIDI,
         SECTION_RECENT_FILES,
@@ -50,14 +50,6 @@ public:
         SECTION_WARNINGS,
         SECTION_REPOSITORY,
         SECTION_EXTENSIONS
-    };
-
-    enum ToolType
-    {
-        TOOL_TYPE_SF2,
-        TOOL_TYPE_SAMPLE,
-        TOOL_TYPE_INSTRUMENT,
-        TOOL_TYPE_PRESET
     };
 
     enum Key
@@ -80,17 +72,11 @@ public:
     ConfManager();
     ~ConfManager() override;
 
-    /// Get / set a value for a section
+    /// Get / set a value for a section with a possible subsection
     QVariant getValue(Section section, QString key, QVariant defaultValue) const;
     void setValue(Section section, QString key, QVariant value);
-
-    /// Get / set a value for a tool
-    QVariant getToolValue(ToolType toolType, QString toolName, QString key, QVariant defaultValue) const;
-    void setToolValue(ToolType toolType, QString toolName, QString key, QVariant value);
-
-    /// Get / set a value from an extension
-    QVariant getExtensionValue(QString extensionId, QString key, QVariant defaultValue) const;
-    void setExtensionValue(QString extensionId, QString key, QVariant value);
+    QVariant getValue(Section section, QString subSection, QString key, QVariant defaultValue) const;
+    void setValue(Section section, QString subSection, QString key, QVariant value);
 
     /// Get the configuration file directory
     QString getConfigDir();
@@ -125,7 +111,6 @@ private:
     void clear();
 
     QString getFullKey(Section section, QString subSection, QString key) const;
-    QString getFullKey(ToolType toolType, QString toolName, QString key) const;
     QSettings _settings;
     SynthConfig * _synthConfig;
 };

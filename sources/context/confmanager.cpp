@@ -109,27 +109,27 @@ ConfManager::~ConfManager()
 
 QVariant ConfManager::getValue(Section section, QString key, QVariant defaultValue) const
 {
+    return getValue(section, "", key, defaultValue);
+}
+
+QVariant ConfManager::getValue(Section section, QString subSection, QString key, QVariant defaultValue) const
+{
 #if defined(Q_OS_MACOS)
     // On MAC OS cannot resize window if the borders are hidden, so this option return always "true"
     if (section == ConfManager::SECTION_DISPLAY && key == "window_borders")
         return true;
 #endif
-    return _settings.value(getFullKey(section, "", key), defaultValue);
-}
-
-QVariant ConfManager::getToolValue(ToolType toolType, QString toolName, QString key, QVariant defaultValue) const
-{
-    return _settings.value(getFullKey(toolType, toolName, key), defaultValue);
-}
-
-QVariant ConfManager::getExtensionValue(QString extensionId, QString key, QVariant defaultValue) const
-{
-    return _settings.value(getFullKey(Section::SECTION_EXTENSIONS, extensionId, key), defaultValue);
+    return _settings.value(getFullKey(section, subSection, key), defaultValue);
 }
 
 void ConfManager::setValue(Section section, QString key, QVariant value)
 {
-    _settings.setValue(getFullKey(section, "", key), value);
+    setValue(section, "", key, value);
+}
+
+void ConfManager::setValue(Section section, QString subSection, QString key, QVariant value)
+{
+    _settings.setValue(getFullKey(section, subSection, key), value);
 
     // Possibly update elements
     switch (section)
@@ -167,36 +167,25 @@ void ConfManager::setValue(Section section, QString key, QVariant value)
     }
 }
 
-void ConfManager::setToolValue(ToolType toolType, QString toolName, QString key, QVariant value)
-{
-    _settings.setValue(getFullKey(toolType, toolName, key), value);
-}
-
-void ConfManager::setExtensionValue(QString extensionId, QString key, QVariant value)
-{
-    _settings.setValue(getFullKey(Section::SECTION_EXTENSIONS, extensionId, key), value);
-}
-
 QString ConfManager::getFullKey(Section section, QString subSection, QString key) const
 {
     // First part depends on the section
     QString firstPart = "";
     switch (section)
     {
-    case SECTION_NONE:         firstPart = "";            break;
-    case SECTION_DISPLAY:      firstPart = "display";     break;
-    case SECTION_AUDIO:        firstPart = "audio";       break;
-    case SECTION_BULK_RENAME:  firstPart = "bulk_rename"; break;
-    case SECTION_COLORS:       firstPart = "colors";      break;
-    case SECTION_EXPORT:       firstPart = "export";      break;
-    case SECTION_KEYBOARD:     firstPart = "keyboard";    break;
-    case SECTION_MIDI:         firstPart = "midi";        break;
-    case SECTION_RECENT_FILES: firstPart = "recent_file"; break;
-    case SECTION_SOUND_ENGINE: firstPart = "synth";       break;
-    case SECTION_TOOLS:        firstPart = "tools";       break;
-    case SECTION_WARNINGS:     firstPart = "warnings";    break;
-    case SECTION_REPOSITORY:   firstPart = "repository";  break;
-    case SECTION_EXTENSIONS:    firstPart = "extensions";   break;
+    case SECTION_NONE:         firstPart = "";              break;
+    case SECTION_DISPLAY:      firstPart = "display";       break;
+    case SECTION_AUDIO:        firstPart = "audio";         break;
+    case SECTION_BULK_RENAME:  firstPart = "bulk_rename";   break;
+    case SECTION_COLORS:       firstPart = "colors";        break;
+    case SECTION_KEYBOARD:     firstPart = "keyboard";      break;
+    case SECTION_MIDI:         firstPart = "midi";          break;
+    case SECTION_RECENT_FILES: firstPart = "recent_file";   break;
+    case SECTION_SOUND_ENGINE: firstPart = "synth";         break;
+    case SECTION_TOOLS:        firstPart = "tools";         break;
+    case SECTION_WARNINGS:     firstPart = "warnings";      break;
+    case SECTION_REPOSITORY:   firstPart = "repository";    break;
+    case SECTION_EXTENSIONS:   firstPart = "extensions";    break;
     }
     if (firstPart != "")
         firstPart += "/";
@@ -205,20 +194,6 @@ QString ConfManager::getFullKey(Section section, QString subSection, QString key
         firstPart += subSection + "/";
 
     return firstPart + key;
-}
-
-QString ConfManager::getFullKey(ToolType toolType, QString toolName, QString key) const
-{
-    QString subSection = "";
-    switch (toolType)
-    {
-    case TOOL_TYPE_SF2:        subSection = "sf2";        break;
-    case TOOL_TYPE_SAMPLE:     subSection = "sample";     break;
-    case TOOL_TYPE_INSTRUMENT: subSection = "instrument"; break;
-    case TOOL_TYPE_PRESET:     subSection = "preset";     break;
-    }
-
-    return getFullKey(SECTION_TOOLS, subSection, toolName + "_" + key);
 }
 
 QString ConfManager::getConfigDir()

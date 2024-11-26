@@ -47,10 +47,10 @@ public:
         return tr("Loop / playback");
     }
 
-    /// Internal identifier
-    QString getIdentifier() const override
+    /// Internal identification
+    QString getToolName() const override
     {
-        return "smpl:autoLoop";
+        return "autoLoop";
     }
 
     /// Method executed before the iterating process

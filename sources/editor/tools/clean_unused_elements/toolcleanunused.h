@@ -48,10 +48,10 @@ public:
         return tr("Clean up");
     }
 
-    /// Internal identifier
-    QString getIdentifier() const override
+    /// Internal identification
+    QString getToolName() const override
     {
-        return "sf2:cleanUnused";
+        return "cleanUnused";
     }
 
     /// Method executed before the iterating process

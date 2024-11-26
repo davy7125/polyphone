@@ -90,15 +90,15 @@ void ToolMonitor_gui::updateInterface(AbstractToolParameters * parameters, IdLis
         ui->comboParameter->addItem(Attribute::getDescription(_attributeList.at(i), !_isInst));
         ui->comboParameter->setItemData(i, static_cast<int>(_attributeList.at(i)));
     }
-    ui->comboParameter->setCurrentIndex(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
+    ui->comboParameter->setCurrentIndex(params->getAttribute());
     ui->comboParameter->blockSignals(false);
     ui->checkLog->blockSignals(true);
-    ui->checkLog->setChecked(_isInst ? params->getInstLog() : params->getPrstLog());
+    ui->checkLog->setChecked(params->getLog());
     ui->checkLog->blockSignals(false);
 
     // Draw
-    this->on_checkLog_stateChanged(_isInst ? params->getInstLog() : params->getPrstLog());
-    this->on_comboParameter_currentIndexChanged(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
+    this->on_checkLog_stateChanged(params->getLog());
+    this->on_comboParameter_currentIndexChanged(params->getAttribute());
 
     // Legends
     ui->widgetLegendDefined->plot(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND), 5);
@@ -111,16 +111,8 @@ void ToolMonitor_gui::updateInterface(AbstractToolParameters * parameters, IdLis
 void ToolMonitor_gui::saveParameters(AbstractToolParameters * parameters)
 {
     ToolMonitor_parameters * params = dynamic_cast<ToolMonitor_parameters *>(parameters);
-    if (_isInst)
-    {
-        params->setInstLog(ui->checkLog->isChecked());
-        params->setInstAttribute(ui->comboParameter->currentIndex());
-    }
-    else
-    {
-        params->setPrstLog(ui->checkLog->isChecked());
-        params->setPrstAttribute(ui->comboParameter->currentIndex());
-    }
+    params->setLog(ui->checkLog->isChecked());
+    params->setAttribute(ui->comboParameter->currentIndex());
 }
 
 void ToolMonitor_gui::on_comboParameter_currentIndexChanged(int index)

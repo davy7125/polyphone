@@ -46,10 +46,10 @@ public:
         return tr("Files");
     }
 
-    /// Internal identifier
-    QString getIdentifier() const override
+    /// Internal identification
+    QString getToolName() const override
     {
-        return "sf2:export";
+        return "export";
     }
 
     /// Process asynchronously run
@@ -69,6 +69,11 @@ protected:
 
     /// Get a confirmation message after the tool is run
     QString getConfirmation() override;
+
+    virtual ElementType getCurrentType() const override
+    {
+        return elementSf2;
+    }
 
 private:
     void process(SoundfontManager * sm, QString name, QMap<int,  QList<int> > presets, AbstractToolParameters *parameters);

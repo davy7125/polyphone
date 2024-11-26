@@ -27,8 +27,10 @@
 #include "abstracttool.h"
 #include <QGridLayout>
 #include <QIcon>
+#include "contextmanager.h"
 
-ToolDialog::ToolDialog(AbstractToolGui *toolGui, AbstractTool * tool, QWidget *parent) : QDialog(parent)
+ToolDialog::ToolDialog(AbstractToolGui *toolGui, AbstractTool * tool, QWidget *parent) : QDialog(parent),
+    _tool(tool)
 {
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
     this->setWindowModality(Qt::WindowModal);
@@ -45,7 +47,25 @@ ToolDialog::ToolDialog(AbstractToolGui *toolGui, AbstractTool * tool, QWidget *p
     this->setLayout(layout);
 
     // Title
-    this->setWindowTitle(tool->getLabel());
+    this->setWindowTitle(_tool->getLabel());
+}
+
+void ToolDialog::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent(event);
+
+    // Restore the geometry
+    QByteArray geometry = ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, _tool->getIdentifier(true), "dialogGeometry", QByteArray()).toByteArray();
+    if (!geometry.isEmpty())
+        this->restoreGeometry(geometry);
+}
+
+void ToolDialog::closeEvent(QCloseEvent *event)
+{
+    // Save the geometry
+    ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, _tool->getIdentifier(true), "dialogGeometry", this->saveGeometry());
+
+    QDialog::closeEvent(event);
 }
 
 void ToolDialog::canceled()

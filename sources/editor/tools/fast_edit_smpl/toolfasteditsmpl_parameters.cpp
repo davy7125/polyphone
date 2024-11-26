@@ -29,25 +29,25 @@
 void ToolFastEditSmpl_parameters::loadConfiguration()
 {
     // Mode
-    _mode = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "mode", 0).toInt();
+    _mode = getToolValue("mode", 0).toInt();
 
     // Values
-    _addValue = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "add", 0.).toInt();
-    _multiplyValue = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "multiply", 1.).toDouble();
+    _addValue = getToolValue("add", 0.).toInt();
+    _multiplyValue = getToolValue("multiply", 1.).toDouble();
 
     // Parameter
-    _parameter = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "parameter", champ_chPitchCorrection).toInt();
+    _parameter = getToolValue("parameter", champ_chPitchCorrection).toInt();
 }
 
 void ToolFastEditSmpl_parameters::saveConfiguration()
 {
     // Mode
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "mode", _mode);
+    setToolValue("mode", _mode);
 
     // Values
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "add", _addValue);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "multiply", _multiplyValue);
+    setToolValue("add", _addValue);
+    setToolValue("multiply", _multiplyValue);
 
     // Parameter
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "fast_edit", "parameter", _parameter);
+    setToolValue("parameter", _parameter);
 }

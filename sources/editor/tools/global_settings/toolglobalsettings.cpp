@@ -45,15 +45,15 @@ void ToolGlobalSettings::process(SoundfontManager * sm, EltID id, AbstractToolPa
     ToolGlobalSettings_parameters * params = static_cast<ToolGlobalSettings_parameters *>(parameters);
 
     // Format data
-    QVector<float> dValues = (_isInst ? params->getInstValues() : params->getPrstValues());
-    double dMin = (_isInst ? params->getInstMin() : params->getPrstMin());
-    double dMax = (_isInst ? params->getInstMax() : params->getPrstMax());
+    QVector<float> dValues = params->getValues();
+    double dMin = params->getMin();
+    double dMax = params->getMax();
     for (int i = 0; i < dValues.size(); i++)
         dValues[i] = dValues.at(i) * (dMax - dMin) + dMin;
 
     // Velocity range
-    int velMin = (_isInst ? params->getInstMinVel() : params->getPrstMinVel());
-    int velMax = (_isInst ? params->getInstMaxVel() : params->getPrstMaxVel());
+    int velMin = params->getMinVel();
+    int velMax = params->getMaxVel();
 
     // Update all elements in id
     EltID idLinked(_isInst ? elementInstSmpl : elementPrstInst, id.indexSf2, id.indexElt);
@@ -91,7 +91,7 @@ void ToolGlobalSettings::process(SoundfontManager * sm, EltID id, AbstractToolPa
                 pos = dValues.size() - 1;
 
             // Attribute to change
-            AttributeType champ = static_cast<AttributeType>(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
+            AttributeType champ = static_cast<AttributeType>(params->getAttribute());
 
             // Current value
             AttributeValue value;
@@ -110,7 +110,7 @@ void ToolGlobalSettings::process(SoundfontManager * sm, EltID id, AbstractToolPa
 
                 int lower = static_cast<int>(range.byLo);
                 int upper = static_cast<int>(range.byHi);
-                switch (_isInst ? params->getInstModifType() : params->getPrstModifType())
+                switch (params->getModifType())
                 {
                 case 0: // Addition
                     lower = Utils::round32(dValues.at(pos) + lower);
@@ -154,7 +154,7 @@ void ToolGlobalSettings::process(SoundfontManager * sm, EltID id, AbstractToolPa
             {
                 // Compute the new real value
                 double amount = Attribute::toRealValue(champ, !_isInst, value);
-                switch (_isInst ? params->getInstModifType() : params->getPrstModifType())
+                switch (params->getModifType())
                 {
                 case 0: // Addition
                     amount += dValues.at(pos);

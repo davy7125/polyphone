@@ -28,11 +28,11 @@
 void ToolLoopCrossfade_parameters::loadConfiguration()
 {
     // Duration (ms)
-    _durationMs = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "crossfade", "duration", 100).toInt();
+    _durationMs = getToolValue("duration", 100).toInt();
 }
 
 void ToolLoopCrossfade_parameters::saveConfiguration()
 {
     // Duration (ms)
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "crossfade", "duration", _durationMs);
+    setToolValue("duration", _durationMs);
 }

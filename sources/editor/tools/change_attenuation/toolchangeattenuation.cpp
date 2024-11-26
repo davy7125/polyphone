@@ -45,7 +45,7 @@ void ToolChangeAttenuation::process(SoundfontManager * sm, EltID id, AbstractToo
     ToolChangeAttenuation_parameters * params = static_cast<ToolChangeAttenuation_parameters *>(parameters);
 
     // Compute the attenuation offset
-    int offset = Utils::round32(25.0 * (_isInst ? params->getInstValue() : params->getPrstValue()));
+    int offset = Utils::round32(25.0 * (params->getValue()));
     if (offset == 0)
         return;
 

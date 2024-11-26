@@ -45,10 +45,10 @@ public:
         return tr("Modulators");
     }
 
-    /// Internal identifier
-    QString getIdentifier() const override
+    /// Internal identification
+    QString getToolName() const override
     {
-        return "inst:default_mod";
+        return "defaultMod";
     }
 
     /// Process an element

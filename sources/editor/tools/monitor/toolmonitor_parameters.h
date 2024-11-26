@@ -36,18 +36,15 @@ public:
     /// Save the configuration in the ini file
     void saveConfiguration() override;
     
-    int getInstAttribute() { return _instAttribute; }
-    void setInstAttribute(int instAttribute) { _instAttribute = instAttribute; }
-    int getPrstAttribute() { return _prstAttribute; }
-    void setPrstAttribute(int prstAttribute) { _prstAttribute = prstAttribute; }
+    int getAttribute() { return _attribute; }
+    void setAttribute(int attribute) { _attribute = attribute; }
 
-    bool getInstLog() { return _instLog; }
-    void setInstLog(bool instLog) { _instLog = instLog; }
-    bool getPrstLog() { return _prstLog; }
-    void setPrstLog(bool prstLog) { _prstLog = prstLog; }
+    bool getLog() { return _log; }
+    void setLog(bool log) { _log = log; }
+
 private:
-    int _instAttribute, _prstAttribute;
-    bool _instLog, _prstLog;
+    int _attribute;
+    bool _log;
 };
 
 #endif // TOOLMONITOR_PARAMETERS_H

@@ -47,10 +47,10 @@ public:
         return tr("Transformation");
     }
 
-    /// Internal identifier
-    QString getIdentifier() const override
+    /// Internal identification
+    QString getToolName() const override
     {
-        return "prst:merger";
+        return "merger";
     }
 
 signals:

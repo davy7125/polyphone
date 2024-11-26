@@ -28,11 +28,11 @@
 void ToolLoadFromInst_parameters::loadConfiguration()
 {
     // Parameter
-    _parameter = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "load_from_inst", "parameter", 0).toInt();
+    _parameter = getToolValue("parameter", 0).toInt();
 }
 
 void ToolLoadFromInst_parameters::saveConfiguration()
 {
     // Parameter
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "load_from_inst", "parameter", _parameter);
+    setToolValue("parameter", _parameter);
 }

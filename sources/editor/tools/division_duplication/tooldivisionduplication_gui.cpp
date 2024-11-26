@@ -44,9 +44,9 @@ void ToolDivisionDuplication_gui::updateInterface(AbstractToolParameters * param
     ToolDivisionDuplication_parameters * params = dynamic_cast<ToolDivisionDuplication_parameters *>(parameters);
 
     // Recall values
-    _listeVelocites = _isInst ? params->getInstVelocityRanges() : params->getPrstVelocityRanges();
-    ui->checkForEachKey->setChecked(_isInst ? params->getInstDuplicKey() : params->getPrstDuplicKey());
-    ui->checkForEachVelocityRange->setChecked(_isInst ? params->getInstDuplicVel() : params->getPrstDuplicVel());
+    _listeVelocites = params->getVelocityRanges();
+    ui->checkForEachKey->setChecked(params->getDuplicKey());
+    ui->checkForEachVelocityRange->setChecked(params->getDuplicVel());
 
     this->on_checkForEachVelocityRange_clicked();
     if (_listeVelocites.size() >= 1)
@@ -91,18 +91,9 @@ void ToolDivisionDuplication_gui::saveParameters(AbstractToolParameters * parame
     ToolDivisionDuplication_parameters * params = dynamic_cast<ToolDivisionDuplication_parameters *>(parameters);
 
     // Save values
-    if (_isInst)
-    {
-        params->setInstVelocityRanges(_listeVelocites);
-        params->setInstDuplicKey(ui->checkForEachKey->isChecked());
-        params->setInstDuplicVel(ui->checkForEachVelocityRange->isChecked());
-    }
-    else
-    {
-        params->setPrstVelocityRanges(_listeVelocites);
-        params->setPrstDuplicKey(ui->checkForEachKey->isChecked());
-        params->setPrstDuplicVel(ui->checkForEachVelocityRange->isChecked());
-    }
+    params->setVelocityRanges(_listeVelocites);
+    params->setDuplicKey(ui->checkForEachKey->isChecked());
+    params->setDuplicVel(ui->checkForEachVelocityRange->isChecked());
 }
 
 void ToolDivisionDuplication_gui::on_pushAdd_clicked()

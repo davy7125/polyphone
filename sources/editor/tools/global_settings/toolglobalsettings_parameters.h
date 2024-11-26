@@ -38,89 +38,56 @@ public:
     /// Save the configuration in the ini file
     void saveConfiguration() override;
 
-    int getInstPattern() { return _instPattern; }
-    void setInstPattern(int instPattern) { _instPattern = instPattern; }
+    int getPattern() { return _pattern; }
+    void setPattern(int pattern) { _pattern = pattern; }
 
-    int getPrstPattern() { return _prstPattern; }
-    void setPrstPattern(int prstPattern) { _prstPattern = prstPattern; }
+    double getParam() { return _param; }
+    void setParam(double param) { _param = param; }
 
-    double getInstParam() { return _instParam; }
-    void setInstParam(double instParam) { _instParam = instParam; }
+    double getMin() { return qMin(_min, _max); }
+    void setMin(double min) { _min = min; }
 
-    double getPrstParam() { return _prstParam; }
-    void setPrstParam(double prstParam) { _prstParam = prstParam; }
+    double getMax() { return qMax(_min, _max); }
+    void setMax(double max) { _max = max; }
 
-    double getInstMin() { return qMin(_instMin, _instMax); }
-    void setInstMin(double instMin) { _instMin = instMin; }
+    double getMinX() { return _minX; }
+    void setMinX(double minX) { _minX = minX; }
 
-    double getPrstMin() { return qMin(_prstMin, _prstMax); }
-    void setPrstMin(double prstMin) { _prstMin = prstMin; }
+    double getMaxX() { return _maxX; }
+    void setMaxX(double maxX) { _maxX = maxX; }
 
-    double getInstMax() { return qMax(_instMin, _instMax); }
-    void setInstMax(double instMax) { _instMax = instMax; }
+    QVector<float> getValues() { return _values; }
+    void setValues(QVector<float> values) { _values = values; }
 
-    double getPrstMax() { return qMax(_prstMin, _prstMax); }
-    void setPrstMax(double prstMax) { _prstMax = prstMax; }
+    int getModifType() { return _modifType; }
+    void setModifType(int modifType) { _modifType = modifType; }
 
-    double getInstMinX() { return _instMinX; }
-    void setInstMinX(double instMinX) { _instMinX = instMinX; }
+    int getAttribute() { return _attribute; }
+    void setAttribute(int attribute) { _attribute = attribute; }
 
-    double getPrstMinX() { return _prstMinX; }
-    void setPrstMinX(double prstMinX) { _prstMinX = prstMinX; }
+    int getMinVel() { return qMin(_minVel, _maxVel); }
+    void setMinVel(int minVel) { _minVel = minVel; }
 
-    double getInstMaxX() { return _instMaxX; }
-    void setInstMaxX(double instMaxX) { _instMaxX = instMaxX; }
-
-    double getPrstMaxX() { return _prstMaxX; }
-    void setPrstMaxX(double prstMaxX) { _prstMaxX = prstMaxX; }
-
-    QVector<float> getInstValues() { return _instValues; }
-    void setInstValues(QVector<float> instValues) { _instValues = instValues; }
-
-    QVector<float> getPrstValues() { return _prstValues; }
-    void setPrstValues(QVector<float> prstValues) { _prstValues = prstValues; }
-
-    int getInstModifType() { return _instModifType; }
-    void setInstModifType(int instModifType) { _instModifType = instModifType; }
-
-    int getPrstModifType() { return _prstModifType; }
-    void setPrstModifType(int prstModifType) { _prstModifType = prstModifType; }
-
-    int getInstAttribute() { return _instAttribute; }
-    void setInstAttribute(int instAttribute) { _instAttribute = instAttribute; }
-
-    int getPrstAttribute() { return _prstAttribute; }
-    void setPrstAttribute(int prstAttribute) { _prstAttribute = prstAttribute; }
-
-    int getInstMinVel() { return qMin(_instMinVel, _instMaxVel); }
-    void setInstMinVel(int instMinVel) { _instMinVel = instMinVel; }
-
-    int getPrstMinVel() { return qMin(_prstMinVel, _prstMaxVel); }
-    void setPrstMinVel(int prstMinVel) { _prstMinVel = prstMinVel; }
-
-    int getInstMaxVel() { return qMax(_instMinVel, _instMaxVel); }
-    void setInstMaxVel(int instMaxVel) { _instMaxVel = instMaxVel; }
-
-    int getPrstMaxVel() { return qMax(_prstMinVel, _prstMaxVel); }
-    void setPrstMaxVel(int prstMaxVel) { _prstMaxVel = prstMaxVel; }
+    int getMaxVel() { return qMax(_minVel, _maxVel); }
+    void setMaxVel(int maxVel) { _maxVel = maxVel; }
 
 private:
-    static QVector<float> getStoredValues(ConfManager::ToolType toolType);
-    static void storeValues(QVector<float> values, ConfManager::ToolType toolType);
+    QVector<float> getStoredValues();
+    void storeValues(QVector<float> values);
 
-    int _instPattern, _prstPattern;
-    double _instParam, _prstParam;
-    double _instMin, _prstMin;
-    double _instMax, _prstMax;
-    double _instMinX, _prstMinX;
-    double _instMaxX, _prstMaxX;
+    int _pattern;
+    double _param;
+    double _min;
+    double _max;
+    double _minX;
+    double _maxX;
 
-    QVector<float> _instValues, _prstValues;
+    QVector<float> _values;
 
-    int _instModifType, _prstModifType;
-    int _instAttribute, _prstAttribute;
-    int _instMinVel, _prstMinVel;
-    int _instMaxVel, _prstMaxVel;
+    int _modifType;
+    int _attribute;
+    int _minVel;
+    int _maxVel;
 };
 
 #endif // TOOLGLOBALSETTINGS_PARAMETERS_H

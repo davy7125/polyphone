@@ -45,10 +45,10 @@ public:
         return tr("Utility");
     }
 
-    /// Internal identifier
-    QString getIdentifier() const override
+    /// Internal identification
+    QString getToolName() const override
     {
-        return "sf2:presetList";
+        return "presetList";
     }
 
     /// Process an element

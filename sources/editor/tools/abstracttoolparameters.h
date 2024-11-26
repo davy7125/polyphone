@@ -25,6 +25,8 @@
 #ifndef ABSTRACTTOOLPARAMETERS_H
 #define ABSTRACTTOOLPARAMETERS_H
 
+#include "contextmanager.h"
+#include <QVariant>
 
 class AbstractToolParameters
 {
@@ -32,11 +34,31 @@ public:
     AbstractToolParameters() {}
     virtual ~AbstractToolParameters() {}
 
+    /// Set the configuration for loading / saving parameters
+    void setConfigurationSubSection(QString configurationSubSection)
+    {
+        _configurationSubSection = configurationSubSection;
+    }
+
     /// Load the configuration from the ini file
     virtual void loadConfiguration() = 0;
 
     /// Save the configuration in the ini file
     virtual void saveConfiguration() = 0;
+
+protected:
+    QVariant getToolValue(QString key, QVariant defaultValue)
+    {
+        return ContextManager::configuration()->getValue(ConfManager::SECTION_TOOLS, _configurationSubSection, key, defaultValue);
+    }
+
+    void setToolValue(QString key, QVariant value)
+    {
+        ContextManager::configuration()->setValue(ConfManager::SECTION_TOOLS, _configurationSubSection, key, value);
+    }
+
+private:
+    QString _configurationSubSection;
 };
 
 #endif // ABSTRACTTOOLPARAMETERS_H

@@ -49,10 +49,10 @@ public:
         return tr("Stereo samples");
     }
 
-    /// Internal identifier
-    QString getIdentifier() const override
+    /// Internal identification
+    QString getToolName() const override
     {
-        return "smpl:unlink";
+        return "unlink";
     }
 
     /// Process an element

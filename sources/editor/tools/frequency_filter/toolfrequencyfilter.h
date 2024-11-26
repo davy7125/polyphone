@@ -46,10 +46,10 @@ public:
         return tr("Audio processing");
     }
 
-    /// Internal identifier
-    QString getIdentifier() const override
+    /// Internal identification
+    QString getToolName() const override
     {
-        return "smpl:removeFrequencies";
+        return "filterFrequencies";
     }
 
     /// Process an element
