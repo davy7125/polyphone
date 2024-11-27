@@ -221,6 +221,7 @@ SOURCES	+= main.cpp \
     core/input/grandorgue/grandorguedatathrough.cpp \
     core/input/grandorgue/grandorgueranklink.cpp \
     core/input/grandorgue/grandorgueswitch.cpp \
+    core/input/sf/inputsf.cpp \
     core/input/sfz/sfzparametergroup.cpp \
     core/input/sfz/sfzparameterregion.cpp \
     core/output/sfz/balanceparameters.cpp \
@@ -235,10 +236,8 @@ SOURCES	+= main.cpp \
     core/input/grandorgue/inputgrandorgue.cpp \
     core/input/grandorgue/inputparsergrandorgue.cpp \
     core/input/not_supported/inputparsernotsupported.cpp \
-    core/input/sf2/inputparsersf2.cpp \
-    core/input/sf2/inputsf2.cpp \
-    core/input/sf3/inputparsersf3.cpp \
-    core/input/sf3/inputsf3.cpp \
+    core/input/sf/inputparsersf2.cpp \
+    core/input/sf/inputparsersf3.cpp \
     core/input/sfark/inputparsersfark.cpp \
     core/input/sfark/inputsfark.cpp \
     core/input/sfz/inputparsersfz.cpp \
@@ -401,15 +400,15 @@ SOURCES	+= main.cpp \
     core/action.cpp \
     editor/widgets/styledlineedit.cpp \
     core/input/inputfactory.cpp \
-    core/input/sf2/sf2header.cpp \
-    core/input/sf2/sf2sdtapart.cpp \
-    core/input/sf2/sf2pdtapart.cpp \
-    core/input/sf2/sf2pdtapart_phdr.cpp \
-    core/input/sf2/sf2pdtapart_inst.cpp \
-    core/input/sf2/sf2pdtapart_shdr.cpp \
-    core/input/sf2/sf2pdtapart_mod.cpp \
-    core/input/sf2/sf2pdtapart_gen.cpp \
-    core/input/sf2/sf2pdtapart_bag.cpp \
+    core/input/sf/sf2header.cpp \
+    core/input/sf/sf2sdtapart.cpp \
+    core/input/sf/sf2pdtapart.cpp \
+    core/input/sf/sf2pdtapart_phdr.cpp \
+    core/input/sf/sf2pdtapart_inst.cpp \
+    core/input/sf/sf2pdtapart_shdr.cpp \
+    core/input/sf/sf2pdtapart_mod.cpp \
+    core/input/sf/sf2pdtapart_gen.cpp \
+    core/input/sf/sf2pdtapart_bag.cpp \
     editor/widgets/linkedtowidget.cpp \
     editor/tools/abstracttool.cpp \
     editor/tools/toolfactory.cpp \
@@ -583,6 +582,7 @@ HEADERS += \
     core/input/grandorgue/grandorguedatathrough.h \
     core/input/grandorgue/grandorgueranklink.h \
     core/input/grandorgue/grandorgueswitch.h \
+    core/input/sf/inputsf.h \
     core/input/sfz/sfzparametergroup.h \
     core/input/sfz/sfzparameterregion.h \
     core/output/sfz/balanceparameters.h \
@@ -598,10 +598,8 @@ HEADERS += \
     core/input/grandorgue/inputgrandorgue.h \
     core/input/grandorgue/inputparsergrandorgue.h \
     core/input/not_supported/inputparsernotsupported.h \
-    core/input/sf2/inputparsersf2.h \
-    core/input/sf2/inputsf2.h \
-    core/input/sf3/inputparsersf3.h \
-    core/input/sf3/inputsf3.h \
+    core/input/sf/inputparsersf2.h \
+    core/input/sf/inputparsersf3.h \
     core/input/sfark/inputparsersfark.h \
     core/input/sfark/inputsfark.h \
     core/input/sfz/inputparsersfz.h \
@@ -775,15 +773,15 @@ HEADERS += \
     core/action.h \
     editor/widgets/styledlineedit.h \
     core/input/inputfactory.h \
-    core/input/sf2/sf2header.h \
-    core/input/sf2/sf2sdtapart.h \
-    core/input/sf2/sf2pdtapart.h \
-    core/input/sf2/sf2pdtapart_phdr.h \
-    core/input/sf2/sf2pdtapart_inst.h \
-    core/input/sf2/sf2pdtapart_shdr.h \
-    core/input/sf2/sf2pdtapart_mod.h \
-    core/input/sf2/sf2pdtapart_gen.h \
-    core/input/sf2/sf2pdtapart_bag.h \
+    core/input/sf/sf2header.h \
+    core/input/sf/sf2sdtapart.h \
+    core/input/sf/sf2pdtapart.h \
+    core/input/sf/sf2pdtapart_phdr.h \
+    core/input/sf/sf2pdtapart_inst.h \
+    core/input/sf/sf2pdtapart_shdr.h \
+    core/input/sf/sf2pdtapart_mod.h \
+    core/input/sf/sf2pdtapart_gen.h \
+    core/input/sf/sf2pdtapart_bag.h \
     repository/widgets/elidedlabel.h \
     editor/widgets/linkedtowidget.h \
     editor/tools/abstracttool.h \

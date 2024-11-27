@@ -22,23 +22,30 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef INPUTSF2_H
-#define INPUTSF2_H
+#include "inputsf.h"
+#include "inputparsersf2.h"
+#include "inputparsersf3.h"
+#include "sf2header.h"
 
-#include <QObject>
-#include "abstractinput.h"
-
-class InputSf2 : public AbstractInput
+AbstractInputParser * InputSf::getParser(QString filename)
 {
-public:
-    /// Description of the file type to open
-    QString getInputDescription() override { return QObject::tr("Sf2 files"); }
+    // Find the right parser depending on the sf version
+    QFile fi(filename);
+    if (!fi.exists())
+        return nullptr;
 
-    /// Extension of the file type to open
-    QString getInputExtension() override { return "sf2"; }
+    if (!fi.open(QIODevice::ReadOnly))
+        return nullptr;
 
-    /// Return a parser
-    AbstractInputParser * getParser() override;
-};
+    // Parse the header of the file
+    QDataStream stream(&fi);
+    Sf2Header header;
+    stream >> header;
 
-#endif // INPUTSF2_H
+    // Close the file
+    fi.close();
+
+    return header.getVersion("ifil").wMajor > 2 ?
+               (AbstractInputParser *)(new InputParserSf3()) :
+               (AbstractInputParser *)(new InputParserSf2());
+}

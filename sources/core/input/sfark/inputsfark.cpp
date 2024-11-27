@@ -25,8 +25,9 @@
 #include "inputsfark.h"
 #include "inputparsersfark.h"
 
-AbstractInputParser * InputSfArk::getParser()
+AbstractInputParser * InputSfArk::getParser(QString filename)
 {
+    Q_UNUSED(filename)
     return new InputParserSfArk();
 }
 

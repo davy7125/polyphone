@@ -25,7 +25,8 @@
 #include "inputsfz.h"
 #include "inputparsersfz.h"
 
-AbstractInputParser * InputSfz::getParser()
+AbstractInputParser * InputSfz::getParser(QString filename)
 {
+    Q_UNUSED(filename)
     return new InputParserSfz();
 }

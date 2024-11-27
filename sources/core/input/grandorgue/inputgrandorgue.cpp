@@ -25,7 +25,8 @@
 #include "inputgrandorgue.h"
 #include "inputparsergrandorgue.h"
 
-AbstractInputParser * InputGrandOrgue::getParser()
+AbstractInputParser * InputGrandOrgue::getParser(QString filename)
 {
+    Q_UNUSED(filename)
     return new InputParserGrandOrgue();
 }

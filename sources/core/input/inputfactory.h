@@ -52,8 +52,8 @@ private:
     static InputFactory * s_instance;
 
     // All inputs sorted by extension, with no uppercase
-    QMap<QString, AbstractInput *> _inputs;
-    QList<AbstractInput *> _orderedInputs;
+    QMap<QString, AbstractInput *> _mapToInput;
+    QList<AbstractInput *> _inputs;
 };
 
 #endif // INPUTFACTORY_H

@@ -35,10 +35,10 @@ public:
     QString getInputDescription() override { return QObject::tr("sfArk archives"); }
 
     /// Extension of the file type to open
-    QString getInputExtension() override { return "sfArk"; }
+    QStringList getInputExtensions() override { return QStringList() << "sfArk"; }
 
     /// Return a parser
-    AbstractInputParser * getParser() override;
+    AbstractInputParser * getParser(QString filename) override;
 };
 
 #endif // INPUTSFARK_H

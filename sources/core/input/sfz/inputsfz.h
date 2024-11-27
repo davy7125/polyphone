@@ -35,10 +35,10 @@ public:
     QString getInputDescription() override { return QObject::tr("Sfz files"); }
 
     /// Extension of the file type to open
-    QString getInputExtension() override { return "sfz"; }
+    QStringList getInputExtensions() override { return QStringList() << "sfz"; }
 
     /// Return a parser
-    AbstractInputParser * getParser() override;
+    AbstractInputParser * getParser(QString filename) override;
 };
 
 #endif // INPUTSFZ_H

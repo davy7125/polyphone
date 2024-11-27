@@ -38,10 +38,10 @@ public:
     virtual QString getInputDescription() = 0;
 
     /// Extension of the file type to open
-    virtual QString getInputExtension() = 0;
+    virtual QStringList getInputExtensions() = 0;
 
     /// Return a parser
-    virtual AbstractInputParser * getParser() = 0;
+    virtual AbstractInputParser * getParser(QString filename) = 0;
 };
 
 #endif // ABSTRACTINPUT_H

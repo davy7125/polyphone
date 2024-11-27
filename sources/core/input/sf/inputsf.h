@@ -22,23 +22,23 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef INPUTSF3_H
-#define INPUTSF3_H
+#ifndef INPUTSF_H
+#define INPUTSF_H
 
-#include "abstractinput.h"
 #include <QObject>
+#include "abstractinput.h"
 
-class InputSf3 : public AbstractInput
+class InputSf : public AbstractInput
 {
 public:
     /// Description of the file type to open
-    QString getInputDescription() override { return QObject::tr("Sf3 files"); }
+    QString getInputDescription() override { return QObject::tr("Soundfont files"); }
 
     /// Extension of the file type to open
-    QString getInputExtension() override { return "sf3"; }
+    QStringList getInputExtensions() override { return QStringList() << "sf2" << "sf3"; }
 
     /// Return a parser
-    AbstractInputParser * getParser() override;
+    AbstractInputParser * getParser(QString filename) override;
 };
 
-#endif // INPUTSF3_H
+#endif // INPUTSF_H

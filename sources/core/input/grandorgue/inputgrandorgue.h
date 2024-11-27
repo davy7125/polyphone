@@ -35,10 +35,10 @@ public:
     QString getInputDescription() override { return QObject::tr("GrandOrgue sample sets"); }
 
     /// Extension of the file type to open
-    QString getInputExtension() override { return "organ"; }
+    QStringList getInputExtensions() override { return QStringList() << "organ"; }
 
     /// Return a parser
-    AbstractInputParser * getParser() override;
+    AbstractInputParser * getParser(QString filename) override;
 };
 
 #endif // INPUTGRANDORGUE_H
