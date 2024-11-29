@@ -121,25 +121,10 @@ void TreeView::mouseDoubleClickEvent(QMouseEvent * event)
     if (index.isValid())
     {
         EltID currentId = index.data(Qt::UserRole).value<EltID>();
-        if (currentId.typeElement == elementInstSmpl)
+        if (currentId.typeElement == elementInstSmpl || currentId.typeElement == elementPrstInst)
         {
-            // Find the corresponding sample
-            EltID id(elementSmpl, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_sampleID).wValue, -1, -1);
-            TreeSortFilterProxy * proxy = dynamic_cast<TreeSortFilterProxy *>(this->model());
-            if (!proxy->isFiltered(id))
-                this->onSelectionChanged(IdList(id));
+            QApplication::postEvent(this, new QKeyEvent(QEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
             event->accept();
-            return;
-        }
-        else if (currentId.typeElement == elementPrstInst)
-        {
-            // Find the corresponding instrument
-            EltID id(elementInst, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_instrument).wValue, -1, -1);
-            TreeSortFilterProxy * proxy = dynamic_cast<TreeSortFilterProxy *>(this->model());
-            if (!proxy->isFiltered(id))
-                this->onSelectionChanged(IdList(id));
-            event->accept();
-            return;
         }
     }
 
@@ -148,60 +133,48 @@ void TreeView::mouseDoubleClickEvent(QMouseEvent * event)
 
 void TreeView::keyPressEvent(QKeyEvent * event)
 {
-    // Validate or cancel a drag & drop
-    if (event->modifiers() == Qt::NoModifier && event->key() == Qt::Key_Enter)
-    {
-        if (_dropDestID.typeElement == elementRootInst)
-        {
-            // Possibly create one or more instruments based on samples
-            foreach (EltID idSource, _draggedIds)
-                if (idSource.typeElement != elementSmpl && idSource.typeElement != elementInstSmpl)
-                    return;
-            DialogCreateElements * dial = new DialogCreateElements(this);
-            dial->initialize(_draggedIds);
-            connect(dial, SIGNAL(createElements(IdList,bool)), this, SLOT(onCreateElements(IdList,bool)));
-            dial->open();
-        }
-        else if (_dropDestID.typeElement == elementRootPrst)
-        {
-            // Possibly create one or more presets based on instruments
-            foreach (EltID idSource, _draggedIds)
-                if (idSource.typeElement != elementInst && idSource.typeElement != elementPrstInst)
-                    return;
-            DialogCreateElements * dial = new DialogCreateElements(this);
-            dial->initialize(_draggedIds);
-            connect(dial, SIGNAL(createElements(IdList,bool)), this, SLOT(onCreateElements(IdList,bool)));
-            dial->open();
-        }
-        else
-        {
-            SoundfontManager * sm = SoundfontManager::getInstance();
-            Duplicator duplicator;
-            IdList newIds;
-            foreach (EltID idSource, _draggedIds)
-            {
-                if ((idSource.typeElement == elementSmpl || idSource.typeElement == elementInst || idSource.typeElement == elementPrst ||
-                     idSource.typeElement == elementInstSmpl || idSource.typeElement == elementPrstInst) && sm->isValid(idSource))
-                {
-                    EltID id = duplicator.copy(idSource, _dropDestID);
-                    if (id.typeElement != elementUnknown)
-                        newIds << id;
-                }
-            }
-
-            if (!newIds.isEmpty())
-            {
-                sm->endEditing("command:drop");
-                onSelectionChanged(newIds);
-            }
-        }
-    }
-
     // No more drag & drop
     _draggedIds.clear();
     _dropDestID.typeElement = elementUnknown;
 
-    if (event->key() == Qt::Key_Delete)
+    if (event->modifiers() == Qt::NoModifier && (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return))
+    {
+        QModelIndexList selectedIndexes = this->selectedIndexes();
+        if (selectedIndexes.count() == 1)
+        {
+            QModelIndex index = selectedIndexes[0];
+            EltID currentId = index.data(Qt::UserRole).value<EltID>();
+            switch (currentId.typeElement)
+            {
+            case elementRootSmpl: case elementRootInst: case elementRootPrst:
+            case elementInst: case elementPrst:
+                // Expand or collapse the element
+                this->setExpanded(index, !this->isExpanded(index));
+                break;
+            case elementInstSmpl: {
+                // Find the corresponding sample
+                EltID id(elementSmpl, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_sampleID).wValue, -1, -1);
+                TreeSortFilterProxy * proxy = dynamic_cast<TreeSortFilterProxy *>(this->model());
+
+                // Open the sample
+                if (!proxy->isFiltered(id))
+                    this->onSelectionChanged(IdList(id));
+            } break;
+            case elementPrstInst: {
+                // Find the corresponding instrument
+                EltID id(elementInst, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_instrument).wValue, -1, -1);
+                TreeSortFilterProxy * proxy = dynamic_cast<TreeSortFilterProxy *>(this->model());
+                if (!proxy->isFiltered(id))
+                    this->onSelectionChanged(IdList(id));
+            } break;
+            default:
+                // Nothing
+                break;
+            }
+        }
+        event->accept();
+    }
+    else if (event->key() == Qt::Key_Delete)
     {
         // Delete the selection
         _menu->initialize(getSelectedIds());
@@ -862,9 +835,50 @@ void TreeView::dropEvent(QDropEvent *event)
             return;
 
         _dropDestID = index.data(Qt::UserRole).value<EltID>();
+        if (_dropDestID.typeElement == elementRootInst)
+        {
+            // Possibly create one or more instruments based on samples
+            foreach (EltID idSource, _draggedIds)
+                if (idSource.typeElement != elementSmpl && idSource.typeElement != elementInstSmpl)
+                    return;
+            DialogCreateElements * dial = new DialogCreateElements(this);
+            dial->initialize(_draggedIds);
+            connect(dial, SIGNAL(createElements(IdList,bool)), this, SLOT(onCreateElements(IdList,bool)));
+            dial->open();
+        }
+        else if (_dropDestID.typeElement == elementRootPrst)
+        {
+            // Possibly create one or more presets based on instruments
+            foreach (EltID idSource, _draggedIds)
+                if (idSource.typeElement != elementInst && idSource.typeElement != elementPrstInst)
+                    return;
+            DialogCreateElements * dial = new DialogCreateElements(this);
+            dial->initialize(_draggedIds);
+            connect(dial, SIGNAL(createElements(IdList,bool)), this, SLOT(onCreateElements(IdList,bool)));
+            dial->open();
+        }
+        else
+        {
+            SoundfontManager * sm = SoundfontManager::getInstance();
+            Duplicator duplicator;
+            IdList newIds;
+            foreach (EltID idSource, _draggedIds)
+            {
+                if ((idSource.typeElement == elementSmpl || idSource.typeElement == elementInst || idSource.typeElement == elementPrst ||
+                     idSource.typeElement == elementInstSmpl || idSource.typeElement == elementPrstInst) && sm->isValid(idSource))
+                {
+                    EltID id = duplicator.copy(idSource, _dropDestID);
+                    if (id.typeElement != elementUnknown)
+                        newIds << id;
+                }
+            }
 
-        // Trick: trigger a key "enter" event that will validate the drag & drop
-        QApplication::postEvent(this, new QKeyEvent(QEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier));
+            if (!newIds.isEmpty())
+            {
+                sm->endEditing("command:drop");
+                onSelectionChanged(newIds);
+            }
+        }
     }
 }
 
