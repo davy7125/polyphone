@@ -315,12 +315,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="620"/>
         <source>Key range</source>
-        <translation>Tasten Bereich</translation>
+        <translation>Tastenbereich</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="623"/>
         <source>Velocity range</source>
-        <translation>Velocity Bereich</translation>
+        <translation>Anschlagsbereich</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="626"/>
@@ -330,7 +330,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="629"/>
         <source>Fixed velocity</source>
-        <translation>fixierte Velocity</translation>
+        <translation>fixierte Anschlag</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="632"/>
@@ -370,7 +370,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="635"/>
         <source>Tuning (semi-tones)</source>
-        <translation>Tuning (halb-töne)</translation>
+        <translation>Tuning (Halbtöne)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="638"/>
@@ -793,7 +793,7 @@
     <message>
         <location filename="context/interface/configpanel.ui" line="87"/>
         <source>General</source>
-        <translation>Generell</translation>
+        <translation>Allgemein</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="120"/>
@@ -960,7 +960,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="590"/>
         <source>by velocity range</source>
-        <translation>nach Velocitybereich</translation>
+        <translation>nach Anschlagsbereich</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="595"/>
@@ -1223,7 +1223,7 @@ werden!</translation>
         <location filename="context/interface/configsectionsound.ui" line="333"/>
         <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
         <oldsource>Modulator &quot;velocity → filter cutoff&quot;</oldsource>
-        <translation>StandardMod. &quot;velocity → Filterfrequenz&quot;</translation>
+        <translation>StandardMod. &quot;Anschlag → Filterfrequenz&quot;</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="126"/>
@@ -1751,7 +1751,7 @@ Fundgrube</translation>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="213"/>
         <source>Velocity</source>
-        <translation>Velocity</translation>
+        <translation>Anschlag</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="238"/>
@@ -2592,7 +2592,7 @@ Fundgrube</translation>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="71"/>
         <source>Save &amp;as...</source>
-        <translation>speichern &amp;unter...</translation>
+        <translation>Speichern &amp;unter...</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="76"/>
@@ -2602,22 +2602,22 @@ Fundgrube</translation>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="84"/>
         <source>&amp;Full screen</source>
-        <translation>Voll&amp;Bild</translation>
+        <translation>Voll&amp;bild</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="91"/>
         <source>Se&amp;ttings</source>
-        <translation>&amp;Voreinstellungen</translation>
+        <translation>E&amp;instellungen </translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="95"/>
         <source>Online &amp;manual</source>
-        <translation>Online &amp;Handbuch</translation>
+        <translation>Online-&amp;Handbuch</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="101"/>
         <source>About &amp;Polyphone...</source>
-        <translation>&amp;über Polyphone...</translation>
+        <translation>&amp;Über Polyphone...</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="107"/>
@@ -2686,7 +2686,7 @@ Fundgrube</translation>
         <location filename="mainwindow/mainwindow.ui" line="342"/>
         <source>  Settings</source>
         <extracomment>prefixed with 2 spaces</extracomment>
-        <translation>  Voreinstellungen</translation>
+        <translation>  Einstellungen</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="298"/>
@@ -2716,7 +2716,7 @@ Fundgrube</translation>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="235"/>
         <source>Daily soundfonts</source>
-        <translation>Daily soundfonts</translation>
+        <translation>Tägliche Soundfonts</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="245"/>
@@ -2742,7 +2742,7 @@ Fundgrube</translation>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="267"/>
         <source>History</source>
-        <translation>History</translation>
+        <translation>Verlauf</translation>
     </message>
 </context>
 <context>
@@ -2794,7 +2794,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="391"/>
         <source>semi-tones</source>
-        <translation>halb-töne</translation>
+        <translation>Halbtöne</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="394"/>
@@ -3118,8 +3118,7 @@ Anzahl</translation>
         <location filename="editor/overview/pageoverviewinst.cpp" line="43"/>
         <source>Max velocity range</source>
         <oldsource>Étendue totale (vélocité)</oldsource>
-        <translation>Max Bereich
-(Velocity)</translation>
+        <translation>Max Anschlagsbereich</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="44"/>
@@ -3200,8 +3199,7 @@ Modulator</translation>
         <location filename="editor/overview/pageoverviewprst.cpp" line="43"/>
         <source>Max velocity range</source>
         <oldsource>Étendue totale (vélocité)</oldsource>
-        <translation>Max Bereich
-(Velocity)</translation>
+        <translation>Max Anschlagsbereich</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="44"/>
@@ -3811,7 +3809,7 @@ to display its division ranges</source>
     <message>
         <location filename="core/model/soundfont.cpp" line="44"/>
         <source>General</source>
-        <translation>Generell</translation>
+        <translation>Allgemein</translation>
     </message>
     <message>
         <location filename="core/model/soundfont.cpp" line="45"/>
@@ -3868,7 +3866,7 @@ to display its division ranges</source>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="135"/>
         <location filename="editor/graphics/graphicslegenditem2.cpp" line="62"/>
         <source>Velocity range:</source>
-        <translation>Velocity Bereich:</translation>
+        <translation>Anschlagsbereich:</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="126"/>
@@ -4426,12 +4424,12 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="166"/>
         <source>give credit</source>
-        <translation>gib Anerkennung</translation>
+        <translation>Anerkennung</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="167"/>
         <source>give credit, don&apos;t distribute with more restrictions</source>
-        <translation>gib Anerkennung, nicht mit weiteren Enschränkungen weitergeben</translation>
+        <translation>Anerkennung, nicht mit weiteren Enschränkungen weitergeben</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="168"/>
@@ -4598,7 +4596,7 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="395"/>
         <source>Sample source</source>
-        <translation>Sample Quelle</translation>
+        <translation>Sample-Quelle</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="410"/>
@@ -4618,7 +4616,7 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="455"/>
         <source>MIDI standard</source>
-        <translation>MIDI standard</translation>
+        <translation>MIDI-Standard</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="470"/>
@@ -4781,7 +4779,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="197"/>
         <source>Sample source</source>
-        <translation>Sample Quelle</translation>
+        <translation>Sample-Quelle</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="245"/>
@@ -4924,7 +4922,7 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="177"/>
         <source>Sample source</source>
-        <translation>Sample Quelle</translation>
+        <translation>Sample-Quelle</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="193"/>
@@ -5590,7 +5588,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="30"/>
         <source>A division for each velocity range</source>
-        <translation>Ein Split für jeden Velocity - Bereich</translation>
+        <translation>Ein Split für jeden Anschlagsbereich</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="143"/>
@@ -5963,7 +5961,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="249"/>
         <source>Apply to a velocity range</source>
-        <translation>Auf diesen Velocity Bereich anwenden</translation>
+        <translation>Auf diesen Anschlagsbereich anwenden</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="278"/>
@@ -6036,7 +6034,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="27"/>
         <source>Tuning (semi-tones)</source>
-        <translation>Tuning (halb-töne)</translation>
+        <translation>Tuning (Halbtöne)</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="34"/>
