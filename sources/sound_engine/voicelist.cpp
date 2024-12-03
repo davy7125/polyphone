@@ -176,7 +176,7 @@ void VoiceList::prepareComputation()
         if (!close)
         {
             // Maybe a quick release?
-            for (int  i = 0; i < _closeCommandNumber; i++)
+            for (int i = 0; i < _closeCommandNumber; i++)
             {
                 if (_closeCommands[i].channel == voiceParam->getChannel() &&
                     _closeCommands[i].numPreset == voiceParam->getPresetId() &&

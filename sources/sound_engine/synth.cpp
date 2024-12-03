@@ -383,24 +383,6 @@ void Synth::stop(bool allChannels)
 {
     // Stop required for all voices
     releaseVoices(-1, -1, allChannels ? -2 : -1, -2);
-
-    //Voice ** voices1, ** voices2;
-    //int count1, count2;
-    //_voices.getVoices(voices1, count1, voices2, count2);
-    // for (int i = s_numberOfVoices - 1; i >= 0; i--)
-    // {
-    //     if (allChannels || s_voices[i]->getChannel() == -1)
-    //     {
-    //         // Signal emitted for the sample player (voice -1)
-    //         if (s_voices[i]->getKey() == -1)
-    //             s_voices[i]->triggerReadFinishedSignal();
-
-    //         --s_numberOfVoices;
-    //         Voice * voiceTmp = s_voices[s_numberOfVoices];
-    //         s_voices[s_numberOfVoices] = s_voices[i];
-    //         s_voices[i] = voiceTmp;
-    //     }
-    // }
 }
 
 void Synth::configure(SynthConfig * configuration)

@@ -55,7 +55,7 @@ private:
     struct ExclusiveClassCloseCommand
     {
         short channel;
-        unsigned short numPreset;
+        short numPreset;
         int exclusiveClass;
     };
 
