@@ -59,10 +59,10 @@ MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
     connect(_openAction, SIGNAL(triggered()), this, SIGNAL(openClicked()));
     this->addAction(_openAction);
 
-    this->addSeparator();
-
     if (!ContextManager::s_playerMode)
     {
+        this->addSeparator();
+
         _saveAction = new QAction(tr("&Save"), this);
         _saveAction->setShortcut(QString("Ctrl+S"));
         connect(_saveAction, SIGNAL(triggered()), this, SIGNAL(save()));
@@ -77,9 +77,14 @@ MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
         _exportAction->setShortcut(QString("Ctrl+E"));
         connect(_exportAction, SIGNAL(triggered()), this, SLOT(onExport()));
         this->addAction(_exportAction);
-
-        this->addSeparator();
     }
+
+    _closeFileAction = new QAction(tr("&Close file"), this);
+    _closeFileAction->setShortcut(QString("Ctrl+W"));
+    connect(_closeFileAction, SIGNAL(triggered()), this, SIGNAL(closeFileClicked()));
+    this->addAction(_closeFileAction);
+
+    this->addSeparator();
 
     _fullScreenAction = new QAction(tr("&Full screen"), this);
     _fullScreenAction->setShortcut(Qt::Key_F11);
@@ -103,11 +108,6 @@ MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
     this->addAction(_helpAction);
 
     this->addSeparator();
-
-    _closeFileAction = new QAction(tr("&Close file"), this);
-    _closeFileAction->setShortcut(QString("Ctrl+W"));
-    connect(_closeFileAction, SIGNAL(triggered()), this, SIGNAL(closeFileClicked()));
-    this->addAction(_closeFileAction);
 
     _closeAction = new QAction(tr("&Quit"), this);
     _closeAction->setShortcut(QString("Ctrl+Q"));
