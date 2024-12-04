@@ -45,6 +45,14 @@ void Tab::initialize(AbstractInputParser * input)
     input->process(true);
 }
 
+void Tab::initializeWithSoundfontIndex(int indexSf2)
+{
+    // File already loaded
+    _sf2Index = indexSf2;
+    tabInitialized(indexSf2);
+    updateTitleAndPath();
+}
+
 void Tab::inputProcessed()
 {
     // Get information from the input

@@ -149,16 +149,19 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions)
         }
     }
 
-    // Find the corresponding editor or player if the file is already open
-    if (indexSf2 != -1)
+    // Find the corresponding editor if the file is already open (not in synth mode)
+    if (!ContextManager::s_playerMode)
     {
-        foreach (Tab * tab, _tabs)
+        if (indexSf2 != -1)
         {
-            if (tab->getSf2Index() == indexSf2)
+            foreach (Tab * tab, _tabs)
             {
-                int index = _stackedWidget->indexOf(tab);
-                _stackedWidget->setCurrentIndex(index);
-                return;
+                if (tab->getSf2Index() == indexSf2)
+                {
+                    int index = _stackedWidget->indexOf(tab);
+                    _stackedWidget->setCurrentIndex(index);
+                    return;
+                }
             }
         }
     }
@@ -174,7 +177,10 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions)
 
     // Initialize and display it
     _stackedWidget->setCurrentIndex(index);
-    tab->initialize(InputFactory::getInput(fileName));
+    if (indexSf2 == -1)
+        tab->initialize(InputFactory::getInput(fileName));
+    else
+        tab->initializeWithSoundfontIndex(indexSf2);
 
     // Possibly open the keyboard and recorder windows
     if (_tabs.count() == 1)

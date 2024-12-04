@@ -39,6 +39,7 @@ public:
 
     /// Initialize the tab with a parser that can extract data and build a soundfont
     void initialize(AbstractInputParser * input);
+    void initializeWithSoundfontIndex(int indexSf2);
 
     /// Index of the soundfont created
     int getSf2Index() { return _sf2Index; }
