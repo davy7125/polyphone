@@ -60,6 +60,7 @@ protected:
     void tabInError(QString errorMessage) override;
     void tabInitialized(int indexSf2) override;
     void tabUpdate(QString editingSource) override;
+    QString getTabTitlePrefix() override;
 
 private slots:
     void onBankSelectionChanged(QItemSelection selected, QItemSelection deselected);
@@ -68,6 +69,8 @@ private slots:
     void on_comboMultipleSelection_currentIndexChanged(int index);
     void on_comboSelectionByKeys_currentIndexChanged(int index);
     void on_pushShowRecorder_clicked();
+
+    void on_pushPanic_clicked();
 
 private:
     void customizeKeyboard();

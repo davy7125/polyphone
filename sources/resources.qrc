@@ -89,6 +89,7 @@
         <file alias="sample_mode_loop_on.svg">resources/sample_mode_loop_on.svg</file>
         <file alias="sample_mode_loop_on_end.svg">resources/sample_mode_loop_on_end.svg</file>
         <file alias="sample_mode_release.svg">resources/sample_mode_release.svg</file>
+        <file alias="MIDI_panic.svg">resources/MIDI_panic.svg</file>
     </qresource>
     <qresource prefix="/misc">
         <file>changelog</file>

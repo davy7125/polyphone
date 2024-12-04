@@ -47,6 +47,7 @@ Player::Player(PlayerOptions * playerOptions, QWidget * parent) : Tab(parent),
     QString highlightColorText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
     ui->topBar->setStyleSheet("QWidget#topBar{background-color:" + highlightColorBackground + "} QLabel{color:" + highlightColorText + "}");
 
+    ui->pushPanic->initialize(tr("MIDI panic"), ":/icons/MIDI_panic.svg");
     ui->pushShowRecorder->initialize(tr("Recorder"), ":/icons/recorder.svg");
     ui->pushShowRecorder->setChecked(s_recorderOpen);
 
@@ -303,6 +304,7 @@ void Player::on_comboChannel_currentIndexChanged(int index)
     _playerOptions->setPlayerChannel(newChannel);
     ui->keyboard->set(PianoKeybd::PROPERTY_CHANNEL, newChannel);
     ui->controllerArea->setChannel(newChannel);
+    update("channel");
 }
 
 void Player::on_comboMultipleSelection_currentIndexChanged(int index)
@@ -476,4 +478,18 @@ void Player::updateRecorderButtonsState(bool isChecked)
         player->ui->pushShowRecorder->setChecked(s_recorderOpen);
         player->blockSignals(false);
     }
+}
+
+QString Player::getTabTitlePrefix()
+{
+    // Add the channel number if specified
+    if (_playerOptions->playerChannel() == -1)
+        return "";
+    return "[" + QString::number(_playerOptions->playerChannel() + 1) + "] ";
+}
+
+void Player::on_pushPanic_clicked()
+{
+    _synth->stop(true);
+    ContextManager::midi()->stopAll();
 }

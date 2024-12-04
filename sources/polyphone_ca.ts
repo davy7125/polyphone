@@ -3615,28 +3615,33 @@ per visualitzar els rangs de divisió</translation>
         <translation>alternar</translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="275"/>
+        <location filename="player/player.ui" line="278"/>
         <source>Opening file...</source>
         <translation>S&apos;està obrint el fitxer...</translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="353"/>
+        <location filename="player/player.ui" line="356"/>
         <source>Banks (number of instruments)</source>
         <oldsource>Banques (nombre d&apos;instruments)</oldsource>
         <translation>Bancs (nombre d&apos;instruments)</translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="430"/>
+        <location filename="player/player.ui" line="433"/>
         <source>Instruments</source>
         <translation>Instruments</translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="564"/>
+        <location filename="player/player.ui" line="567"/>
         <source>Cannot open the file</source>
         <translation>No es pot obrir el fitxer</translation>
     </message>
     <message>
         <location filename="player/player.cpp" line="50"/>
+        <source>MIDI panic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="player/player.cpp" line="51"/>
         <source>Recorder</source>
         <translation>Gravadora</translation>
     </message>
@@ -4862,7 +4867,7 @@ baixar el contingut</translation>
 <context>
     <name>Tab</name>
     <message>
-        <location filename="mainwindow/tab.cpp" line="82"/>
+        <location filename="mainwindow/tab.cpp" line="90"/>
         <source>Untitled</source>
         <translation>Sense títol</translation>
     </message>
@@ -4876,7 +4881,7 @@ baixar el contingut</translation>
     </message>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="133"/>
-        <location filename="mainwindow/tabmanager.cpp" line="241"/>
+        <location filename="mainwindow/tabmanager.cpp" line="247"/>
         <source>Warning</source>
         <translation>Atenció</translation>
     </message>
@@ -4886,42 +4891,42 @@ baixar el contingut</translation>
         <translation>No es pot obrir el fitxer &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="198"/>
+        <location filename="mainwindow/tabmanager.cpp" line="204"/>
         <source>Online repository</source>
         <translation>Repositori en línia</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="236"/>
+        <location filename="mainwindow/tabmanager.cpp" line="242"/>
         <source>Save before exiting?</source>
         <translation>Voleu desar abans de sortir?</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="239"/>
+        <location filename="mainwindow/tabmanager.cpp" line="245"/>
         <source>untitled</source>
         <translation>sense títol</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="240"/>
+        <location filename="mainwindow/tabmanager.cpp" line="246"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>S&apos;ha modificat el fitxer &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="243"/>
+        <location filename="mainwindow/tabmanager.cpp" line="249"/>
         <source>&amp;Save</source>
         <translation>De&amp;sa</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="244"/>
+        <location filename="mainwindow/tabmanager.cpp" line="250"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel·la</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="245"/>
+        <location filename="mainwindow/tabmanager.cpp" line="251"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;No desar</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="340"/>
+        <location filename="mainwindow/tabmanager.cpp" line="346"/>
         <source>User area</source>
         <translation>Àrea de l&apos;usuari</translation>
     </message>

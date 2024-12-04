@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>599</width>
+    <width>619</width>
     <height>268</height>
    </rect>
   </property>
@@ -203,13 +203,19 @@
       </item>
       <item>
        <spacer name="horizontalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>20</width>
-          <height>40</height>
+          <width>40</width>
+          <height>20</height>
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="StyledAction" name="pushPanic"/>
       </item>
       <item>
        <widget class="StyledAction" name="pushShowRecorder">

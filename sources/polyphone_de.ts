@@ -3708,28 +3708,33 @@ to display its division ranges</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="275"/>
+        <location filename="player/player.ui" line="278"/>
         <source>Opening file...</source>
         <translation>Datei öffnen...</translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="353"/>
+        <location filename="player/player.ui" line="356"/>
         <source>Banks (number of instruments)</source>
         <oldsource>Banques (nombre d&apos;instruments)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="430"/>
+        <location filename="player/player.ui" line="433"/>
         <source>Instruments</source>
         <translation>Instrumente</translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="564"/>
+        <location filename="player/player.ui" line="567"/>
         <source>Cannot open the file</source>
         <translation>Datei kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="player/player.cpp" line="50"/>
+        <source>MIDI panic</source>
+        <translation>MIDI-Panik</translation>
+    </message>
+    <message>
+        <location filename="player/player.cpp" line="51"/>
         <source>Recorder</source>
         <translation>Rekorder</translation>
     </message>
@@ -4078,7 +4083,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="core/input/sf/inputsf.h" line="35"/>
         <source>Soundfont files</source>
-        <translation type="unfinished"></translation>
+        <translation>Soundfonts</translation>
     </message>
 </context>
 <context>
@@ -4952,7 +4957,7 @@ download content</source>
 <context>
     <name>Tab</name>
     <message>
-        <location filename="mainwindow/tab.cpp" line="82"/>
+        <location filename="mainwindow/tab.cpp" line="90"/>
         <source>Untitled</source>
         <translation>Unbenannt</translation>
     </message>
@@ -4966,7 +4971,7 @@ download content</source>
     </message>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="133"/>
-        <location filename="mainwindow/tabmanager.cpp" line="241"/>
+        <location filename="mainwindow/tabmanager.cpp" line="247"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
@@ -4976,42 +4981,42 @@ download content</source>
         <translation>die Datei &quot;%1&quot; kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="198"/>
+        <location filename="mainwindow/tabmanager.cpp" line="204"/>
         <source>Online repository</source>
         <translation>Online Fundgrube</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="236"/>
+        <location filename="mainwindow/tabmanager.cpp" line="242"/>
         <source>Save before exiting?</source>
         <translation>Sichern vor beenden?</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="239"/>
+        <location filename="mainwindow/tabmanager.cpp" line="245"/>
         <source>untitled</source>
         <translation>unbenannt</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="240"/>
+        <location filename="mainwindow/tabmanager.cpp" line="246"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Die Datei &quot;%1&quot; wurde geändert.</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="243"/>
+        <location filename="mainwindow/tabmanager.cpp" line="249"/>
         <source>&amp;Save</source>
         <translation>&amp;Speichern</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="244"/>
+        <location filename="mainwindow/tabmanager.cpp" line="250"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="245"/>
+        <location filename="mainwindow/tabmanager.cpp" line="251"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Nicht speichern</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="340"/>
+        <location filename="mainwindow/tabmanager.cpp" line="346"/>
         <source>User area</source>
         <translation>Benutzerbereich</translation>
     </message>
@@ -5288,7 +5293,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Sample in Bearbeitung</translation>
+        <translation>Audiobearbeitung</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="61"/>
@@ -5621,7 +5626,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="48"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Sample in Bearbeitung</translation>
+        <translation>Audiobearbeitung</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="66"/>
@@ -5735,7 +5740,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Sample in Bearbeitung</translation>
+        <translation>Audiobearbeitung</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
@@ -6079,18 +6084,18 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="29"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="49"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Abbrechen</translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="58"/>
         <source> ms</source>
         <comment>Unit for milliseconds</comment>
-        <translation type="unfinished"></translation>
+        <translation> ms</translation>
     </message>
 </context>
 <context>
@@ -6103,7 +6108,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="47"/>
         <source>Transformation</source>
-        <translation type="unfinished">Transformation</translation>
+        <translation>Transformation</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="62"/>
@@ -6118,17 +6123,17 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="102"/>
         <source> s</source>
         <comment>unit for second</comment>
-        <translation type="unfinished"> s</translation>
+        <translation> s</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="38"/>
         <source>Sample creation:</source>
-        <translation type="unfinished">Sample erzeugen :</translation>
+        <translation>Sample erzeugen :</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="45"/>
         <source>Stereo</source>
-        <translation type="unfinished">Stereo</translation>
+        <translation>Stereo</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="59"/>
@@ -6138,27 +6143,27 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="66"/>
         <source>Auto loop</source>
-        <translation type="unfinished">Auto Loop</translation>
+        <translation>Auto Loop</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="77"/>
         <source>for every key</source>
-        <translation type="unfinished">für jede Note</translation>
+        <translation>für jede Note</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="82"/>
         <source>every 3 keys</source>
-        <translation type="unfinished">jede 3. Note</translation>
+        <translation>jede 3. Note</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="87"/>
         <source>every 6 keys</source>
-        <translation type="unfinished">jede 6. Note</translation>
+        <translation>jede 6. Note</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="95"/>
         <source>Preset name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Presetname :</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="112"/>
@@ -6168,12 +6173,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="136"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="156"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Abbrechen</translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
 </context>
 <context>
@@ -6761,7 +6766,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Sample in Bearbeitung</translation>
+        <translation>Audiobearbeitung</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="61"/>

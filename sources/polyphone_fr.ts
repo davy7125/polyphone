@@ -3649,28 +3649,33 @@ pour afficher les étendues de ses divisions</translation>
         <translation>basculer</translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="275"/>
+        <location filename="player/player.ui" line="278"/>
         <source>Opening file...</source>
         <translation>Ouverture du fichier en cours...</translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="353"/>
+        <location filename="player/player.ui" line="356"/>
         <source>Banks (number of instruments)</source>
         <oldsource>Banques (nombre d&apos;instruments)</oldsource>
         <translation>Banques (nombre d&apos;instruments)</translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="430"/>
+        <location filename="player/player.ui" line="433"/>
         <source>Instruments</source>
         <translation>Instruments</translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="564"/>
+        <location filename="player/player.ui" line="567"/>
         <source>Cannot open the file</source>
         <translation>Impossible d&apos;ouvrir le fichier</translation>
     </message>
     <message>
         <location filename="player/player.cpp" line="50"/>
+        <source>MIDI panic</source>
+        <translation>Panique MIDI</translation>
+    </message>
+    <message>
+        <location filename="player/player.cpp" line="51"/>
         <source>Recorder</source>
         <translation>Magnétophone</translation>
     </message>
@@ -4897,7 +4902,7 @@ de télécharger le contenu</translation>
 <context>
     <name>Tab</name>
     <message>
-        <location filename="mainwindow/tab.cpp" line="82"/>
+        <location filename="mainwindow/tab.cpp" line="90"/>
         <source>Untitled</source>
         <translation>Sans titre</translation>
     </message>
@@ -4911,7 +4916,7 @@ de télécharger le contenu</translation>
     </message>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="133"/>
-        <location filename="mainwindow/tabmanager.cpp" line="241"/>
+        <location filename="mainwindow/tabmanager.cpp" line="247"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -4921,42 +4926,42 @@ de télécharger le contenu</translation>
         <translation>Impossible d&apos;ouvrir le fichier « %1 »</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="198"/>
+        <location filename="mainwindow/tabmanager.cpp" line="204"/>
         <source>Online repository</source>
         <translation>Banques de sons en ligne</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="236"/>
+        <location filename="mainwindow/tabmanager.cpp" line="242"/>
         <source>Save before exiting?</source>
         <translation>Sauvegarder avant de quitter ?</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="239"/>
+        <location filename="mainwindow/tabmanager.cpp" line="245"/>
         <source>untitled</source>
         <translation>sans titre</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="240"/>
+        <location filename="mainwindow/tabmanager.cpp" line="246"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Le fichier « %1 » a été modifié.</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="243"/>
+        <location filename="mainwindow/tabmanager.cpp" line="249"/>
         <source>&amp;Save</source>
         <translation>&amp;Sauvegarder</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="244"/>
+        <location filename="mainwindow/tabmanager.cpp" line="250"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="245"/>
+        <location filename="mainwindow/tabmanager.cpp" line="251"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Quitter sans enregistrer</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="340"/>
+        <location filename="mainwindow/tabmanager.cpp" line="346"/>
         <source>User area</source>
         <translation>Espace utilisateur</translation>
     </message>

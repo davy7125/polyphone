@@ -58,6 +58,7 @@ protected:
     virtual void tabInError(QString errorMessage) = 0;
     virtual void tabInitialized(int indexSf2) = 0;
     virtual void tabUpdate(QString editingSource) = 0;
+    virtual QString getTabTitlePrefix() { return ""; }
 
 private slots:
     void inputProcessed();

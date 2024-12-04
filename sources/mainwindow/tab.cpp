@@ -89,7 +89,7 @@ void Tab::updateTitleAndPath()
     if (title.isEmpty())
         title = tr("Untitled");
 
-    emit tabTitleChanged((sm->isEdited(_sf2Index) && !ContextManager::s_playerMode ? "*" : "") + title);
+    emit tabTitleChanged((sm->isEdited(_sf2Index) && !ContextManager::s_playerMode ? "*" : "") + getTabTitlePrefix() + title);
 
     // Path
     emit filePathChanged(sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial));

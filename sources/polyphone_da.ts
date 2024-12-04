@@ -3658,28 +3658,33 @@ to display its division ranges</source>
         <translation>skifte</translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="275"/>
+        <location filename="player/player.ui" line="278"/>
         <source>Opening file...</source>
         <translation>Åben fil...</translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="353"/>
+        <location filename="player/player.ui" line="356"/>
         <source>Banks (number of instruments)</source>
         <oldsource>Banques (nombre d&apos;instruments)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="430"/>
+        <location filename="player/player.ui" line="433"/>
         <source>Instruments</source>
         <translation>Instrumenter</translation>
     </message>
     <message>
-        <location filename="player/player.ui" line="564"/>
+        <location filename="player/player.ui" line="567"/>
         <source>Cannot open the file</source>
         <translation>Kan ikke åbne filen</translation>
     </message>
     <message>
         <location filename="player/player.cpp" line="50"/>
+        <source>MIDI panic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="player/player.cpp" line="51"/>
         <source>Recorder</source>
         <translation>Optager</translation>
     </message>
@@ -4902,7 +4907,7 @@ downloade indholdet</translation>
 <context>
     <name>Tab</name>
     <message>
-        <location filename="mainwindow/tab.cpp" line="82"/>
+        <location filename="mainwindow/tab.cpp" line="90"/>
         <source>Untitled</source>
         <translation>Unavngiven</translation>
     </message>
@@ -4916,7 +4921,7 @@ downloade indholdet</translation>
     </message>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="133"/>
-        <location filename="mainwindow/tabmanager.cpp" line="241"/>
+        <location filename="mainwindow/tabmanager.cpp" line="247"/>
         <source>Warning</source>
         <translation>Advarsel</translation>
     </message>
@@ -4926,42 +4931,42 @@ downloade indholdet</translation>
         <translation>Kan ikke åbne filen &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="198"/>
+        <location filename="mainwindow/tabmanager.cpp" line="204"/>
         <source>Online repository</source>
         <translation>Online filoversigt</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="236"/>
+        <location filename="mainwindow/tabmanager.cpp" line="242"/>
         <source>Save before exiting?</source>
         <translation>Gem før afslut?</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="239"/>
+        <location filename="mainwindow/tabmanager.cpp" line="245"/>
         <source>untitled</source>
         <translation>unavngiven</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="240"/>
+        <location filename="mainwindow/tabmanager.cpp" line="246"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Filen &quot;%1&quot; er blevet ændret.</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="243"/>
+        <location filename="mainwindow/tabmanager.cpp" line="249"/>
         <source>&amp;Save</source>
         <translation>&amp;Gem</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="244"/>
+        <location filename="mainwindow/tabmanager.cpp" line="250"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Afbryd</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="245"/>
+        <location filename="mainwindow/tabmanager.cpp" line="251"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>Ge&amp;m ikke</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="340"/>
+        <location filename="mainwindow/tabmanager.cpp" line="346"/>
         <source>User area</source>
         <translation>Bruger-område</translation>
     </message>
