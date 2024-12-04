@@ -76,7 +76,7 @@ void DownloadProgressCell::mousePressEvent(QMouseEvent *event)
     {
         // Is it possible to open the file?
         if (InputFactory::isSuffixSupported(QFileInfo(_filename).suffix()))
-            TabManager::getInstance()->openSoundfont(_filename, nullptr);
+            TabManager::getInstance()->openSoundfont(_filename, nullptr, true);
         else
         {
             if (!QDesktopServices::openUrl(QUrl(_filename, QUrl::TolerantMode)))

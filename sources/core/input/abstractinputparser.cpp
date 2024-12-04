@@ -69,7 +69,10 @@ void AbstractInputParser::process(bool async)
         _futureWatcher->setFuture(future);
     }
     else
+    {
         processAsync();
+        emit finished();
+    }
 }
 
 void AbstractInputParser::processAsync()

@@ -119,11 +119,11 @@ void TabManager::openNewSoundfont()
     _tabs << editor;
 
     // Initialize and display it
-    editor->initialize(InputFactory::getInput(""));
+    editor->initialize(InputFactory::getInput(""), true);
     _stackedWidget->setCurrentIndex(index);
 }
 
-void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions)
+void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, bool async)
 {
     fileName = Utils::fixFilePath(fileName);
 
@@ -178,7 +178,7 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions)
     // Initialize and display it
     _stackedWidget->setCurrentIndex(index);
     if (indexSf2 == -1)
-        tab->initialize(InputFactory::getInput(fileName));
+        tab->initialize(InputFactory::getInput(fileName), async);
     else
         tab->initializeWithSoundfontIndex(indexSf2);
 
@@ -277,9 +277,24 @@ void TabManager::onTabCloseRequested(QWidget * widget)
         // Mute all sounds produced by the soundfont, if any
         ContextManager::audio()->getSynth()->play(id, -2, -2, 0);
 
-        // Delete the model linked to the soundfont
+        // Delete the model linked to the soundfont if no other tabs use it
         if (id.indexSf2 >= 0)
-            sf2->remove(id);
+        {
+            bool used = false;
+            foreach (Tab * otherTab, _tabs)
+            {
+                if (otherTab == tab)
+                    continue;
+
+                if (otherTab->getSf2Index() == id.indexSf2)
+                {
+                    used = true;
+                    break;
+                }
+            }
+            if (!used)
+                sf2->remove(id);
+        }
 
         if (_tabs.empty())
         {

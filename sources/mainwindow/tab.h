@@ -38,7 +38,7 @@ public:
     ~Tab();
 
     /// Initialize the tab with a parser that can extract data and build a soundfont
-    void initialize(AbstractInputParser * input);
+    void initialize(AbstractInputParser * input, bool async);
     void initializeWithSoundfontIndex(int indexSf2);
 
     /// Index of the soundfont created

@@ -325,7 +325,19 @@ void MainWindow::openFiles(QString fileNames)
 
     QStringList files = split[0].split('|', Qt::SkipEmptyParts);
     foreach (QString file, files)
-        _tabManager->openSoundfont(file, &playerOptions);
+    {
+        if (playerOptions.playerChannel() == -2)
+        {
+            for (int channel = 0; channel < 16; channel++)
+            {
+                PlayerOptions duplicatedOptions(&playerOptions);
+                duplicatedOptions.setPlayerChannel(channel);
+                _tabManager->openSoundfont(file, &duplicatedOptions, false);
+            }
+        }
+        else
+            _tabManager->openSoundfont(file, &playerOptions, true);
+    }
 }
 
 void MainWindow::onKeyboardDisplayChange(bool isDisplayed, bool propagate)

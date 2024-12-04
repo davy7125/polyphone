@@ -53,7 +53,7 @@ public slots:
     void openConfiguration();
 
     /// Open the soundfont browser
-    void openSoundfont(QString fileName, PlayerOptions * playerOptions);
+    void openSoundfont(QString fileName, PlayerOptions * playerOptions, bool async);
     void openNewSoundfont();
 
     /// Open the repository, initialized with a filter

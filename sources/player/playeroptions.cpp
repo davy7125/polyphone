@@ -48,13 +48,24 @@ bool PlayerOptions::parse(QString text)
     QStringList configurations = text.split('|');
 
     // Channel
-    if (configurations.length() >= 1 && configurations[0] != "all")
+    if (configurations.length() >= 1)
     {
-        _playerChannel = configurations[0].toInt(&_isValid) - 1;
-        if (!_isValid || _playerChannel < 0 || _playerChannel > 15)
+        if (configurations[0] == "each")
         {
-            _isValid = false;
-            return false;
+            _playerChannel = -2;
+        }
+        else if (configurations[0] == "all")
+        {
+            _playerChannel = -1;
+        }
+        else
+        {
+            _playerChannel = configurations[0].toInt(&_isValid) - 1;
+            if (!_isValid || _playerChannel < -2 || _playerChannel > 15)
+            {
+                _isValid = false;
+                return false;
+            }
         }
     }
 

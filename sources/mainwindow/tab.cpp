@@ -38,11 +38,11 @@ Tab::~Tab()
     ContextManager::midi()->removeListener(this);
 }
 
-void Tab::initialize(AbstractInputParser * input)
+void Tab::initialize(AbstractInputParser * input, bool async)
 {
     tabInitializing(input->getFileName());
     connect(input, SIGNAL(finished()), this, SLOT(inputProcessed()));
-    input->process(true);
+    input->process(async);
 }
 
 void Tab::initializeWithSoundfontIndex(int indexSf2)
@@ -88,7 +88,6 @@ void Tab::updateTitleAndPath()
         title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial).split(reg).last();
     if (title.isEmpty())
         title = tr("Untitled");
-
     emit tabTitleChanged((sm->isEdited(_sf2Index) && !ContextManager::s_playerMode ? "*" : "") + getTabTitlePrefix() + title);
 
     // Path

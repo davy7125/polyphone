@@ -37,7 +37,7 @@ public:
     /// Valid parameters?
     bool isValid() { return _isValid; }
 
-    /// Player option: channel number (0 is all, otherwise 1 to 16)
+    /// Player option: channel number (-2 will duplicate each channel, -1 is all, otherwise 0 to 15)
     int playerChannel() { return _playerChannel; }
     void setPlayerChannel(int channel) { _playerChannel = channel; }
 
