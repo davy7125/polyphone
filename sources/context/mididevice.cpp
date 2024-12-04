@@ -98,7 +98,7 @@ MidiDevice::MidiDevice(ConfManager * configuration) :
     for (int channel = 0; channel <= 16; channel++)
     {
         _midiStates[channel]._bendSensitivityValue = (channel == 0) ?
-                    _configuration->getValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", 2.0f).toFloat() : 2.0f;
+                                                         _configuration->getValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", 2.0f).toFloat() : 2.0f;
         for (int i = 0; i < 128; i++)
         {
             // Default value, depending on the CC number
@@ -349,7 +349,8 @@ void MidiDevice::customEvent(QEvent * event)
     else if (event->type() == QEvent::User + 5)
     {
         // The program changed (no need for now)
-        //ProgramEvent *programEvent = dynamic_cast<ProgramEvent *>(event);
+        ProgramEvent *programEvent = dynamic_cast<ProgramEvent *>(event);
+        processProgramChanged(programEvent->getChannel(), programEvent->getValue());
         event->accept();
     }
 }
@@ -420,9 +421,9 @@ void MidiDevice::processControllerChanged(bool external, int channel, int numCon
         {
             int pos = midiState->_rpnHistoryPosition;
             if (midiState->_rpnHistoryControllers[pos] == 101 && midiState->_rpnHistoryValues[pos] == 0 && // B0 65 00
-                    midiState->_rpnHistoryControllers[(pos + 1) % 4] == 100 && midiState->_rpnHistoryValues[(pos + 1) % 4] == 0 && // B0 64 00
-                    midiState->_rpnHistoryControllers[(pos + 2) % 4] == 6 && // B0 06 XX => semitones
-                    midiState->_rpnHistoryControllers[(pos + 3) % 4] == 38) // B0 38 YY => cents
+                midiState->_rpnHistoryControllers[(pos + 1) % 4] == 100 && midiState->_rpnHistoryValues[(pos + 1) % 4] == 0 && // B0 64 00
+                midiState->_rpnHistoryControllers[(pos + 2) % 4] == 6 && // B0 06 XX => semitones
+                midiState->_rpnHistoryControllers[(pos + 3) % 4] == 38) // B0 38 YY => cents
             {
                 float pitch = 0.01f * midiState->_rpnHistoryValues[(pos + 3) % 4] + midiState->_rpnHistoryValues[(pos + 2) % 4];
                 processBendSensitivityChanged(channel, pitch);
@@ -604,6 +605,24 @@ void MidiDevice::processBendSensitivityChanged(int channel, float semitones)
     // And possibly update channel -1 if the change has not been consumed
     if (channel != -1 && !consumed)
         processBendSensitivityChanged(-1, semitones);
+}
+
+void MidiDevice::processProgramChanged(int channel, quint8 preset)
+{
+    // Compute the corresponding bank for the current channel
+    quint16 bankNumber = 256 * _midiStates[channel + 1]._controllerValues[32] +
+                         _midiStates[channel + 1]._controllerValues[0];
+
+    // Update the current channel state
+    _midiStates[channel + 1]._preset = preset;
+
+    bool consumed = false;
+    for (int i = 0; i < _listeners.size(); ++i)
+        consumed |= _listeners[i]->processProgramChanged(channel, bankNumber, preset);
+
+    // And possibly update channel -1 if the change has not been consumed
+    if (channel != -1 && !consumed)
+        processProgramChanged(-1, preset);
 }
 
 void MidiDevice::stopAll()

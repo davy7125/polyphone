@@ -51,6 +51,7 @@ public:
     bool processControllerChanged(int channel, int num, int value) override { Q_UNUSED(channel); Q_UNUSED(num); Q_UNUSED(value); return false; }
     bool processBendChanged(int channel, float value) override { Q_UNUSED(channel); Q_UNUSED(value); return false; }
     bool processBendSensitivityChanged(int channel, float semitones) override { Q_UNUSED(channel); Q_UNUSED(semitones); return false; }
+    bool processProgramChanged(int channel, quint16 bank, quint8 preset) override;
 
     static void updateRecorderButtonsState(bool isChecked);
 
@@ -80,6 +81,7 @@ private:
     bool _initializing;
     int _currentSoundfontId;
     QList<EltID> _currentIds;
+    int _bankPositionByBankNumber[16384];
     int _presetPositionByPresetNumber[128];
     int _currentKeyVelocities[128];
     QMap<int, QVector<bool> > _rangeByInst;

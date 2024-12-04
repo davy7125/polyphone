@@ -5,6 +5,7 @@ polyphone (2.5) unstable; urgency=low
   * (new) tool for creating samples that are a merge of all instruments / samples inside a preset
   * (new) sfz support of trigger "release"
   * (new) mp3, aiff and snd sample formats can be imported
+  * (new) bank / preset selection with MIDI signals (CC0 / program change)
   * (improvement) the autoloop tool is more accurate and is not based on the existing loop
   * (improvement) the state of the keyboard and recorder windows is restored
   * (improvement) the sf2 / sf3 export can now create one file per preset
@@ -17,7 +18,7 @@ polyphone (2.5) unstable; urgency=low
   * (fix) sfz attenuation export
   * (fix) finding root keys of very short loops
 
- -- Davy Triponney <davy.triponney@gmail.com>  Fri, 22 Nov 2024 14:10:12 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  Wed, 4 Dec 2024 14:10:12 +0100
   
 
 polyphone (2.4) UNRELEASED; urgency=low

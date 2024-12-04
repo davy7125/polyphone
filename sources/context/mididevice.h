@@ -82,6 +82,9 @@ private:
         int _rpnHistoryControllers[4];
         int _rpnHistoryValues[4];
         quint8 _rpnHistoryPosition;
+
+        // Preset selection
+        quint8 _preset;
     };
 
     struct Sustain_State
@@ -103,6 +106,7 @@ private:
     void processControllerChanged(bool external, int channel, int num, int value);
     void processBendChanged(int channel, float value);
     void processBendSensitivityChanged(int channel, float semitones);
+    void processProgramChanged(int channel, quint8 preset);
 
     ConfManager * _configuration;
     RtMidiIn * _midiIn;

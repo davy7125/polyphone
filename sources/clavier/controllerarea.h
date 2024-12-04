@@ -52,6 +52,7 @@ public:
     bool processControllerChanged(int channel, int num, int value) override;
     bool processBendChanged(int channel, float value) override;
     bool processBendSensitivityChanged(int channel, float semitones) override;
+    bool processProgramChanged(int channel, quint16 bank, quint8 preset) override { Q_UNUSED(channel); Q_UNUSED(bank); Q_UNUSED(preset); return false; }
 
     void updateBend(int channel, float value, bool stopTimer = true);
 

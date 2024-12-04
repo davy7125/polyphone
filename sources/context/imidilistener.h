@@ -34,6 +34,7 @@ public:
     virtual bool processControllerChanged(int channel, int num, int value) = 0;
     virtual bool processBendChanged(int channel, float value) = 0;
     virtual bool processBendSensitivityChanged(int channel, float semitones) = 0;
+    virtual bool processProgramChanged(int channel, quint16 bank, quint8 preset) = 0;
 };
 
 #endif // IMIDILISTENER_H

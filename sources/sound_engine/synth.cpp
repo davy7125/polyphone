@@ -644,6 +644,14 @@ bool Synth::processBendSensitivityChanged(int channel, float semitones)
     return false;
 }
 
+bool Synth::processProgramChanged(int channel, quint16 bank, quint8 preset)
+{
+    Q_UNUSED(channel)
+    Q_UNUSED(bank)
+    Q_UNUSED(preset)
+    return false;
+}
+
 void Synth::setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize)
 {
     // Mutex not mandatory: no data generation when "setFormat" is called

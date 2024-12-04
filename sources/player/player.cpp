@@ -96,11 +96,21 @@ void Player::tabInitialized(int indexSf2)
     connect(ui->listPreset->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
             this, SLOT(onPresetSelectionChanged(QItemSelection,QItemSelection)));
 
+    // Scan the banks
+    for (int i = 0; i < 16384; i++)
+        _bankPositionByBankNumber[i] = -1;
+    for (int i = 0; i < ui->listBank->model()->rowCount(); i++)
+    {
+        QModelIndex bankIndex = ui->listBank->model()->index(i, 0);
+        int bankNumber = bankIndex.data(Qt::UserRole + 1).toInt();
+        _bankPositionByBankNumber[bankNumber] = i;
+    }
+
     // Display the player controls
     ui->stackedMain->setCurrentWidget(ui->pagePlay);
 
     // Select the first bank
-    ui->listBank->setCurrentIndex(ui->listBank->model()->index(0, 0, QModelIndex()));
+    ui->listBank->setCurrentIndex(ui->listBank->model()->index(0, 0));
 
     _initializing = false;
 
@@ -238,6 +248,37 @@ bool Player::processKey(int channel, int key, int vel)
         ui->keyboard->inputNoteOn(key, vel);
     else
         ui->keyboard->inputNoteOff(key);
+
+    return true;
+}
+
+bool Player::processProgramChanged(int channel, quint16 bank, quint8 preset)
+{
+    if (_initializing)
+        return false;
+
+    if (channel != _playerOptions->playerChannel() && _playerOptions->playerChannel() != -1)
+        return false;
+
+    if (_bankPositionByBankNumber[bank] == -1)
+        return true; // The bank doesn't exist
+
+    // Possibly change the bank
+    QModelIndexList indexes = ui->listBank->selectionModel()->selection().indexes();
+    int currentBank = indexes.empty() ? -1 : indexes[0].data(Qt::UserRole + 1).toInt();
+    if (currentBank != bank)
+    {
+        ui->listBank->selectionModel()->select(
+            ui->listBank->model()->index(_bankPositionByBankNumber[bank], 0),
+            QItemSelectionModel::Select | QItemSelectionModel::Clear);
+    }
+
+    if (_presetPositionByPresetNumber[preset] != -1)
+    {
+        ui->listPreset->selectionModel()->select(
+            ui->listPreset->model()->index(_presetPositionByPresetNumber[preset], 0, ui->listPreset->rootIndex()),
+            QItemSelectionModel::Select | QItemSelectionModel::Clear);
+    }
 
     return true;
 }
