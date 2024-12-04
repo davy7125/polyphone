@@ -11,6 +11,7 @@ polyphone (2.5) unstable; urgency=low
   * (improvement) the sf2 / sf3 export can now create one file per preset
   * (improvement) sound engine still playing faster
   * (improvement) a sound engine overflow is not stopping all voices anymore
+  * (improvement) management of multiple tabs
   * (fix) divisions are correctly enlighted at the preset level when playing
   * (fix) the treeview sort is updated after a key range change
   * (fix) next available bank / preset correctly computed

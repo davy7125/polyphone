@@ -56,18 +56,30 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
 
 private:
     int itemAt(const QPoint &pos);
-    static void adaptWidths(QVector<int> &widths, int maxWidth);
+    int adaptWidths(QVector<int> &widths, int maxWidth);
+    void goLeft();
+    void goRight();
     static int sum(QVector<int> &v);
     static void getTheTwoBiggestWidths(QVector<int> &v, int &firstBiggest, int &secondBiggest, int &firstBiggestCount);
+
+    QPixmap _leftArrowIcon;
+    QPixmap _rightArrowIcon;
 
     QVector<MainTabBarElement *> _tabs;
     int _clickedItemIndex;
     bool _clickedInCloseButton;
     int _clickedPosX;
     int _xShift;
+    int _firstTabDisplayed; // 0 is first tab, -1 is align the right tab with the right border
+    bool _withArrows;
+
+    static const int TAB_MIN_WIDTH;
+    static const int ARROW_WIDTH;
+    static const int ARROW_INNER_MARGIN;
 };
 
 #endif // MAINTABBAR_H

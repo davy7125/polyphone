@@ -62,6 +62,7 @@ public:
     bool mouseMoved(QPoint pos);
 
     static int tabHeight();
+    bool isCloseButtonDisplayed();
 
 signals:
     void closeClicked();
@@ -71,6 +72,7 @@ private:
     static const int TAB_CLOSE_ICON_PADDING;
     static const int CORNER_RADIUS;
     static const int MARGIN;
+    static const int CLOSE_BUTTON_MIN_WIDTH_CONDITION;
 
     // Configuration
     QWidget * _widget;

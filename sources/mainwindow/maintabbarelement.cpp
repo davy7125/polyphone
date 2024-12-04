@@ -29,6 +29,7 @@ const int MainTabBarElement::TAB_ICON_SIZE = 24;
 const int MainTabBarElement::TAB_CLOSE_ICON_PADDING = 5;
 const int MainTabBarElement::CORNER_RADIUS = 3;
 const int MainTabBarElement::MARGIN = 5;
+const int MainTabBarElement::CLOSE_BUTTON_MIN_WIDTH_CONDITION = 125;
 
 int MainTabBarElement::tabHeight()
 {
@@ -107,11 +108,11 @@ MainTabBarElement::MainTabBarElement(QWidget * widget, QString iconName, bool is
 int MainTabBarElement::computeFullWidth(QPainter &painter)
 {
     // Full width of the tab
-    int fullWidth = 4 * MARGIN + _icon.width() + _closeIcon.width() + 2 * TAB_CLOSE_ICON_PADDING;
+    int fullWidth = 3 * MARGIN + _icon.width() + _closeIcon.width() + 2 * TAB_CLOSE_ICON_PADDING;
     if (!_label.isEmpty())
     {
         int textWidth = _label.isEmpty() ? 0 : painter.boundingRect(0, 0, 0, 0, 0, _label).width();
-        fullWidth += 2 * MARGIN + textWidth;
+        fullWidth += textWidth + MARGIN;
     }
 
     return fullWidth;
@@ -157,44 +158,55 @@ void MainTabBarElement::draw(QPainter &painter, int translateX, int height)
     }
 
     // Draw the icon
-    painter.drawPixmap(x + 2 * MARGIN,
+    painter.drawPixmap(x + MARGIN,
                        (height - _icon.height()) / 2,
                        _isEnabled ? _iconEnabled : _icon);
 
-    // Write the label, elide it in the middle if needed*
-    int labelWidth = _width - 6 * MARGIN - _icon.width() - _closeIcon.width() - 2 * TAB_CLOSE_ICON_PADDING;
-    QFontMetrics fontMetrics = painter.fontMetrics();
-    QString elidedLabel = fontMetrics.elidedText(_label, Qt::ElideMiddle, labelWidth);
-    painter.setPen(_isEnabled ? _textColorEnabled : _textColor);
-    painter.drawText(x + 4 * MARGIN + _icon.width(), 0, labelWidth, height,
-                     Qt::AlignLeft | Qt::AlignVCenter, elidedLabel);
-
-    // Shape of the close button
-    _closeButtonPath.clear();
-    _closeButtonPath.addRoundedRect(
-        x + _width - MARGIN - _closeIcon.width() - 2 * TAB_CLOSE_ICON_PADDING,
-        (height - _closeIcon.height()) / 2 - TAB_CLOSE_ICON_PADDING,
-        _closeIcon.width() + 2 * TAB_CLOSE_ICON_PADDING,
-        _closeIcon.height() + 2 * TAB_CLOSE_ICON_PADDING,
-        CORNER_RADIUS, CORNER_RADIUS);
-
-    // Possible hover color the close button
-    if (_closeButtonHovered)
+    // Write the label, elide it in the middle if needed
+    bool closeIconDisplayed = isCloseButtonDisplayed();
+    if (!_label.isEmpty())
     {
-        painter.setBrush(_isEnabled ? _closeButtonBackgroundColorEnabled : _closeButtonBackgroundColor);
-        painter.setPen(Qt::transparent);
-        painter.drawPath(_closeButtonPath);
+        int labelWidth = _width - 3 * MARGIN - _icon.width();
+        if (closeIconDisplayed)
+            labelWidth -= _closeIcon.width() + 2 * TAB_CLOSE_ICON_PADDING + MARGIN * 0.5;
+
+        QFontMetrics fontMetrics = painter.fontMetrics();
+        QString elidedLabel = fontMetrics.elidedText(_label, Qt::ElideMiddle, labelWidth);
+        painter.setPen(_isEnabled ? _textColorEnabled : _textColor);
+        painter.drawText(x + 2 * MARGIN + _icon.width(), 0, labelWidth, height,
+                         Qt::AlignLeft | Qt::AlignVCenter, elidedLabel);
     }
 
-    // Close button icon
-    painter.drawPixmap(x + _width - MARGIN - _closeIcon.width() - TAB_CLOSE_ICON_PADDING,
-                       (height - _closeIcon.height()) / 2,
-                       _isEnabled ? _closeIconEnabled : _closeIcon);
+    // Draw the close button
+    if (closeIconDisplayed)
+    {
+        // Shape of the close button
+        _closeButtonPath.clear();
+        _closeButtonPath.addRoundedRect(
+            x + _width - MARGIN - _closeIcon.width() - 2 * TAB_CLOSE_ICON_PADDING,
+            (height - _closeIcon.height()) / 2 - TAB_CLOSE_ICON_PADDING,
+            _closeIcon.width() + 2 * TAB_CLOSE_ICON_PADDING,
+            _closeIcon.height() + 2 * TAB_CLOSE_ICON_PADDING,
+            CORNER_RADIUS, CORNER_RADIUS);
+
+        // Possible hover color behind the close button
+        if (_closeButtonHovered)
+        {
+            painter.setBrush(_isEnabled ? _closeButtonBackgroundColorEnabled : _closeButtonBackgroundColor);
+            painter.setPen(Qt::transparent);
+            painter.drawPath(_closeButtonPath);
+        }
+
+        // Close button icon
+        painter.drawPixmap(x + _width - MARGIN - _closeIcon.width() - TAB_CLOSE_ICON_PADDING,
+                           (height - _closeIcon.height()) / 2,
+                           _isEnabled ? _closeIconEnabled : _closeIcon);
+    }
 }
 
 bool MainTabBarElement::mouseMoved(QPoint pos)
 {
-    bool closeButtonHovered = _closeButtonPath.contains(pos);
+    bool closeButtonHovered = isCloseButtonDisplayed() && _closeButtonPath.contains(pos);
     if (closeButtonHovered != _closeButtonHovered)
     {
         _closeButtonHovered = closeButtonHovered;
@@ -202,4 +214,9 @@ bool MainTabBarElement::mouseMoved(QPoint pos)
     }
 
     return false;
+}
+
+bool MainTabBarElement::isCloseButtonDisplayed()
+{
+    return _width > CLOSE_BUTTON_MIN_WIDTH_CONDITION || _isEnabled;
 }

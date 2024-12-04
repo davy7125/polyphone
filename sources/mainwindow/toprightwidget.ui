@@ -89,9 +89,6 @@
      <property name="text">
       <string/>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
-     </property>
     </widget>
    </item>
    <item>
@@ -130,7 +127,7 @@
       </size>
      </property>
      <property name="popupMode">
-      <enum>QToolButton::ToolButtonPopupMode::InstantPopup</enum>
+      <enum>QToolButton::InstantPopup</enum>
      </property>
     </widget>
    </item>
@@ -155,7 +152,7 @@
       </size>
      </property>
      <property name="cursor">
-      <cursorShape>ArrowCursor</cursorShape>
+      <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="toolTip">
       <string>User area</string>
@@ -210,7 +207,7 @@
       </size>
      </property>
      <property name="popupMode">
-      <enum>QToolButton::ToolButtonPopupMode::InstantPopup</enum>
+      <enum>QToolButton::InstantPopup</enum>
      </property>
     </widget>
    </item>
@@ -233,6 +230,9 @@
        <width>42</width>
        <height>16777215</height>
       </size>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
       <string/>

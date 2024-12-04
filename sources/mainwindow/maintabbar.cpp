@@ -29,12 +29,24 @@
 #include <QStyleOptionTab>
 #include <QToolTip>
 #include "maintabbarelement.h"
+#include "contextmanager.h"
+
+const int MainTabBar::TAB_MIN_WIDTH = 50;
+const int MainTabBar::ARROW_WIDTH = 20;
+const int MainTabBar::ARROW_INNER_MARGIN = 5;
 
 MainTabBar::MainTabBar(QWidget *parent) : QWidget(parent),
     _clickedItemIndex(-1),
-    _clickedInCloseButton(false)
+    _clickedInCloseButton(false),
+    _firstTabDisplayed(0)
 {
     setMouseTracking(true);
+
+    // Icons
+    _leftArrowIcon = ContextManager::theme()->getColoredSvg(
+        ":/icons/arrow_left.svg", QSize(ARROW_WIDTH - ARROW_INNER_MARGIN, 1.5 * ARROW_WIDTH), ThemeManager::LIST_BACKGROUND);
+    _rightArrowIcon = ContextManager::theme()->getColoredSvg(
+        ":/icons/arrow_right.svg", QSize(ARROW_WIDTH - ARROW_INNER_MARGIN, 1.5 * ARROW_WIDTH), ThemeManager::LIST_BACKGROUND);
 }
 
 void MainTabBar::addWidget(QWidget * widget, QString iconName, QString label, bool isColored)
@@ -89,12 +101,19 @@ void MainTabBar::currentWidgetChanged(QWidget * widget)
 
 int MainTabBar::itemAt(const QPoint &pos)
 {
+    if (_withArrows)
+    {
+        if (pos.x() <= ARROW_WIDTH || pos.x() >= this->width() - ARROW_WIDTH)
+            return -1;
+    }
+
     for (int i = 0; i < _tabs.count(); i++)
     {
         MainTabBarElement * tab = _tabs[i];
         if (tab->getPath().contains(pos))
             return i;
     }
+
     return -1;
 }
 
@@ -104,9 +123,12 @@ bool MainTabBar::event(QEvent *event)
     {
         QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
         int index = itemAt(helpEvent->pos());
-        if (index != -1) {
+        if (index != -1)
+        {
             QToolTip::showText(helpEvent->globalPos(), _tabs[index]->getToolTip());
-        } else {
+        }
+        else
+        {
             QToolTip::hideText();
             event->ignore();
         }
@@ -127,7 +149,8 @@ void MainTabBar::mousePressEvent(QMouseEvent *event)
     if (_clickedItemIndex != -1)
     {
         // Middle click or click on the close button?
-        if (event->button() == Qt::MouseButton::MiddleButton || _tabs[_clickedItemIndex]->getCloseButtonPath().contains(event->pos()))
+        if (event->button() == Qt::MouseButton::MiddleButton ||
+            (_tabs[_clickedItemIndex]->isCloseButtonDisplayed() && _tabs[_clickedItemIndex]->getCloseButtonPath().contains(event->pos())))
         {
             // We are about to close the tab if the mouse stays in the button
             _clickedInCloseButton = true;
@@ -138,7 +161,7 @@ void MainTabBar::mousePressEvent(QMouseEvent *event)
             emit widgetClicked(_tabs[_clickedItemIndex]->getWidget());
         }
     }
-    else
+    else if (!_withArrows || (event->pos().x() > ARROW_WIDTH && event->pos().x() < this->width() - ARROW_WIDTH))
         QWidget::mousePressEvent(event);
 }
 
@@ -165,6 +188,14 @@ void MainTabBar::mouseMoveEvent(QMouseEvent *event)
 
 void MainTabBar::mouseReleaseEvent(QMouseEvent *event)
 {
+    if (_withArrows && _clickedPosX <= ARROW_WIDTH && event->pos().x() <= ARROW_WIDTH)
+    {
+        goLeft();
+    }
+    else if (_withArrows && _clickedPosX >= this->width() - ARROW_WIDTH && event->pos().x() >= this->width() - ARROW_WIDTH)
+    {
+        goRight();
+    }
     if (_clickedInCloseButton && _clickedItemIndex != -1 && (
             _tabs[_clickedItemIndex]->getCloseButtonPath().contains(event->pos()) ||
             (event->button() == Qt::MouseButton::MiddleButton && _clickedItemIndex == itemAt(event->pos()))))
@@ -207,6 +238,43 @@ void MainTabBar::mouseReleaseEvent(QMouseEvent *event)
     QWidget::mouseReleaseEvent(event);
 }
 
+void MainTabBar::wheelEvent(QWheelEvent *event)
+{
+    if (_clickedItemIndex == -1 && !_clickedInCloseButton)
+    {
+        if (event->angleDelta().ry() > 0)
+            goLeft();
+        else if (event->angleDelta().ry() < 0)
+            goRight();
+    }
+}
+
+void MainTabBar::goLeft()
+{
+    if (_firstTabDisplayed > 0)
+    {
+        _firstTabDisplayed--;
+        this->repaint();
+    }
+    else if (_firstTabDisplayed == -1 && _tabs.count() > 0)
+    {
+        _firstTabDisplayed = _tabs.count() - 1;
+        int sumWidth = _tabs[_firstTabDisplayed]->getWidth();
+        while (_firstTabDisplayed > 0 && sumWidth < this->width() - 2 * ARROW_WIDTH)
+            sumWidth += _tabs[--_firstTabDisplayed]->getWidth();
+        this->repaint();
+    }
+}
+
+void MainTabBar::goRight()
+{
+    if (_firstTabDisplayed != -1 && _firstTabDisplayed < _tabs.count())
+    {
+        _firstTabDisplayed++;
+        this->repaint();
+    }
+}
+
 QSize MainTabBar::minimumSizeHint() const
 {
     return QSize(0, MainTabBarElement::tabHeight());
@@ -217,16 +285,26 @@ void MainTabBar::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 
-    // First compute all tab widths
+    // First compute all tab widths and get the offset
     QVector<int> widths(_tabs.count());
     for (int i = 0; i < _tabs.count(); i++)
         widths[i] = _tabs[i]->computeFullWidth(painter);
-    adaptWidths(widths, this->width());
+    int xOffset = adaptWidths(widths, this->width());
+
+    if (_withArrows)
+    {
+        // Left / right buttons
+        painter.drawPixmap(ARROW_INNER_MARGIN, 0.5 * (this->height() - _leftArrowIcon.height()), _leftArrowIcon);
+        painter.drawPixmap(this->width() - _rightArrowIcon.width() - ARROW_INNER_MARGIN, 0.5 * (this->height() - _rightArrowIcon.height()), _rightArrowIcon);
+
+        // Clipping
+        painter.setClipRect(QRect(ARROW_WIDTH, 0, this->width()  - 2 * ARROW_WIDTH, this->height()));
+    }
 
     int x = 0;
     for (int i = 0; i < _tabs.count(); i++)
     {
-        _tabs[i]->setLimit(x, widths[i]);
+        _tabs[i]->setLimit(x - xOffset + (_withArrows ? ARROW_WIDTH : 0), widths[i]);
         x += widths[i];
     }
 
@@ -273,7 +351,7 @@ void MainTabBar::paintEvent(QPaintEvent *event)
     QWidget::paintEvent(event);
 }
 
-void MainTabBar::adaptWidths(QVector<int> &widths, int maxWidth)
+int MainTabBar::adaptWidths(QVector<int> &widths, int maxWidth)
 {
     int sumWidth, firstBiggest, secondBiggest, firstBiggestCount;
     while ((sumWidth = sum(widths)) > maxWidth)
@@ -302,6 +380,47 @@ void MainTabBar::adaptWidths(QVector<int> &widths, int maxWidth)
             }
         }
     }
+
+    // Minimum width
+    int delta = 0;
+    for (int i = 0; i < widths.count(); i++)
+    {
+        if (widths[i] < TAB_MIN_WIDTH)
+        {
+            delta += TAB_MIN_WIDTH - widths[i];
+            widths[i] = TAB_MIN_WIDTH;
+        }
+    }
+    if (delta > 0)
+    {
+        _withArrows = true;
+        delta += 2 * ARROW_WIDTH;
+    }
+    else
+        _withArrows = false;
+
+    if (delta == 0)
+        _firstTabDisplayed = 0;
+    else if (_firstTabDisplayed == 0)
+        delta = 0;
+    else if (_firstTabDisplayed > 0)
+    {
+        // Maybe more can be displayed
+        int rightWidth = 0;
+        for (int i = _firstTabDisplayed; i < widths.count(); i++)
+            rightWidth += widths[i];
+        if (rightWidth < maxWidth - 2 * ARROW_WIDTH)
+            _firstTabDisplayed = -1;
+        else
+        {
+            // Otherwise the sum of the hidden column widths is returrned
+            delta = 0;
+            for (int i = 0; i < _firstTabDisplayed; i++)
+                delta += widths[i];
+        }
+    }
+
+    return delta;
 }
 
 int MainTabBar::sum(QVector<int> &v)
