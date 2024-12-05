@@ -25,12 +25,6 @@
 #include "mididevice.h"
 #include <QApplication>
 #include "rtmidi/RtMidi.h"
-#include "controllerevent.h"
-#include "noteevent.h"
-#include "bendevent.h"
-#include "programevent.h"
-#include "monopressureevent.h"
-#include "polypressureevent.h"
 #include "confmanager.h"
 #include "soundfontmanager.h"
 #include "imidilistener.h"
@@ -39,51 +33,45 @@
 void midiCallback(double deltatime, std::vector<unsigned char> *message, void *userData)
 {
     Q_UNUSED(deltatime);
-
-    // Create an event
-    QEvent* ev = nullptr;
-    quint8 channel = message->at(0) & 0x0F;
-    quint8 status = message->at(0) & 0xF0;
-
-    switch (status)
+    MidiDevice * instance = static_cast<MidiDevice*>(userData);
+    switch (message->at(0) & 0xF0)
     {
-    case 0x80: case 0x90: // NOTE ON or NOTE OFF
+    case 0x80: // NOTE OFF
+        // First message is the note
+        instance->processKeyOff(message->at(0) & 0x0F, message->at(1));
+        break;
+    case 0x90: // NOTE ON
         // First message is the note, second is velocity
-        if (status == 0x80 || message->at(2) == 0)
-            ev = new NoteEvent(channel, message->at(1), 0);
+        if (message->at(2) == 0)
+            instance->processKeyOff(message->at(0) & 0x0F, message->at(1));
         else
-            ev = new NoteEvent(channel, message->at(1), message->at(2));
+            instance->processKeyOn(message->at(0) & 0x0F, message->at(1), message->at(2));
         break;
     case 0xA0: // AFTERTOUCH
         // First message is the note, second is the pressure
-        ev = new PolyPressureEvent(channel, message->at(1), message->at(2));
+        instance->processPolyPressureChanged(message->at(0) & 0x0F, message->at(1), message->at(2));
         break;
     case 0xB0: // CONTROLLER CHANGE
         // First message is the controller number, second is its value
-        ev = new ControllerEvent(true, channel, message->at(1), message->at(2));
+        instance->processControllerChanged(true, message->at(0) & 0x0F, message->at(1), message->at(2));
         break;
     case 0xC0: // PROGRAM CHANGED
         // First message is the program number
-        ev = new ProgramEvent(channel, message->at(1));
+        instance->processProgramChanged(message->at(0) & 0x0F, message->at(1));
         break;
     case 0xD0: // MONO PRESSURE
         // First message is the global pressure
-        ev = new MonoPressureEvent(channel, message->at(1));
+        instance->processMonoPressureChanged(message->at(0) & 0x0F, message->at(1));
         break;
     case 0xE0: // BEND
         // First message is the value
-        ev = new BendEvent(channel, message->at(1), message->at(2));
+        instance->processBendChanged(message->at(0) & 0x0F, static_cast<float>(((message->at(2) << 7) | message->at(1)) - 8192) / 8192.0f);
         break;
     default:
-        // Nothing
+        // qDebug() << "unknown MIDI event" << (message->at(0) & 0xF0) << "for channel" << (message->at(0) & 0x0F);
+        // for (unsigned int i = 0; i < message->size(); i++)
+        //     qDebug() << "data #" << i << "=" << message->at(i);
         break;
-    }
-
-    if (ev)
-    {
-        // Get the midi device instance and post the event
-        MidiDevice * instance = static_cast<MidiDevice*>(userData);
-        QApplication::postEvent(instance, ev);
     }
 }
 
@@ -97,8 +85,8 @@ MidiDevice::MidiDevice(ConfManager * configuration) :
     // Initialize MIDI values
     for (int channel = 0; channel <= 16; channel++)
     {
-        _midiStates[channel]._bendSensitivityValue = (channel == 0) ?
-                                                         _configuration->getValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", 2.0f).toFloat() : 2.0f;
+        _midiStates[channel]._bendSensitivityValue =
+            (channel == 0) ? _configuration->getValue(ConfManager::SECTION_MIDI, "wheel_sensitivity", 2.0f).toFloat() : 2.0f;
         for (int i = 0; i < 128; i++)
         {
             // Default value, depending on the CC number
@@ -306,62 +294,13 @@ void MidiDevice::check()
     }
 }
 
-void MidiDevice::customEvent(QEvent * event)
-{
-    if (event->type() == QEvent::User)
-    {
-        // Note on or off
-        NoteEvent *noteEvent = dynamic_cast<NoteEvent *>(event);
-        if (noteEvent->getVelocity() > 0)
-            this->processKeyOn(noteEvent->getChannel(), noteEvent->getNote(), noteEvent->getVelocity());
-        else
-            this->processKeyOff(noteEvent->getChannel(), noteEvent->getNote());
-        event->accept();
-    }
-    else if (event->type() == QEvent::User + 1)
-    {
-        // A controller value changed
-        ControllerEvent * controllerEvent = dynamic_cast<ControllerEvent *>(event);
-        processControllerChanged(controllerEvent->isExternal(), controllerEvent->getChannel(), controllerEvent->getNumController(), controllerEvent->getValue());
-        event->accept();
-    }
-    else if (event->type() == QEvent::User + 2)
-    {
-        // The pressure of a note changed
-        PolyPressureEvent *pressureEvent = dynamic_cast<PolyPressureEvent *>(event);
-        processPolyPressureChanged(pressureEvent->getChannel(), pressureEvent->getNote(), pressureEvent->getPressure());
-        event->accept();
-    }
-    else if (event->type() == QEvent::User + 3)
-    {
-        // The global pressure changed
-        MonoPressureEvent *pressureEvent = dynamic_cast<MonoPressureEvent *>(event);
-        processMonoPressureChanged(pressureEvent->getChannel(), pressureEvent->getPressure());
-        event->accept();
-    }
-    else if (event->type() == QEvent::User + 4)
-    {
-        // The bend changed
-        BendEvent *bendEvent = dynamic_cast<BendEvent *>(event);
-        processBendChanged(bendEvent->getChannel(), bendEvent->getValue());
-        event->accept();
-    }
-    else if (event->type() == QEvent::User + 5)
-    {
-        // The program changed (no need for now)
-        ProgramEvent *programEvent = dynamic_cast<ProgramEvent *>(event);
-        processProgramChanged(programEvent->getChannel(), programEvent->getValue());
-        event->accept();
-    }
-}
-
 void MidiDevice::processControllerChanged(bool external, int channel, int numController, int value)
 {
     int initialValue = value;
     MIDI_State * midiState = &_midiStates[channel + 1];
     Sustain_State * sustainState = &_sustainStates[channel + 1];
 
-    if (external)
+    if (false && external)
     {
         if (midiState->_controllerValueIsRelative[numController])
         {
@@ -487,6 +426,22 @@ void MidiDevice::processControllerChanged(bool external, int channel, int numCon
                         processKeyOff(channel, key);
                 }
             }
+        }
+    }
+    else if (numController == 120)
+    {
+        // All sound off: clear the sustain state and stop all notes
+        memset(sustainState, 0, sizeof(Sustain_State));
+        for (int key = 0; key < 128; key++)
+            processKeyOff(channel, key);
+    }
+    else if (numController == 123)
+    {
+        // All notes off: stop all keys that are not held by the sustain or sostenuto pedal
+        for (int key = 0; key < 128; key++)
+        {
+            if (!sustainState->_sostenutoMemoryKeys[key] && !sustainState->_sustainedKeys[key])
+                processKeyOff(channel, key);
         }
     }
 

@@ -812,8 +812,6 @@ HEADERS += \
     context/interface/configpanel.h \
     dialogs/dialogkeyboard.h \
     dialogs/dialogrecorder.h \
-    context/controllerevent.h \
-    context/noteevent.h \
     editor/tools/link_sample/toollinksample.h \
     editor/tools/unlink_sample/toolunlinksample.h \
     editor/tools/change_attenuation/toolchangeattenuation.h \
@@ -924,10 +922,6 @@ HEADERS += \
     editor/modulator/modulatorcombodest.h \
     editor/modulator/modulatorcombosrc.h \
     editor/modulator/modulatorlistwidget.h \
-    context/polypressureevent.h \
-    context/monopressureevent.h \
-    context/bendevent.h \
-    context/programevent.h \
     clavier/controllerarea.h \
     clavier/combocc.h \
     lib/iir/Iir_2.h \

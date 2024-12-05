@@ -19,8 +19,6 @@
 
 #include "pianokeybd.h"
 #include "pianoscene.h"
-#include "noteevent.h"
-#include "polypressureevent.h"
 #include "contextmanager.h"
 #include <QApplication>
 
@@ -188,15 +186,15 @@ void PianoKeybd::updateMapping()
 
 void PianoKeybd::onNoteOn(int k,int v)
 {
-    QApplication::postEvent(ContextManager::midi(), new NoteEvent(_channel, k, v));
+    ContextManager::midi()->processKeyOn(_channel, k, v);
 }
 
 void PianoKeybd::onNoteOff(int k)
 {
-    QApplication::postEvent(ContextManager::midi(), new NoteEvent(_channel, k, 0));
+    ContextManager::midi()->processKeyOff(_channel, k);
 }
 
 void PianoKeybd::onPolyPressureChanged(int k,int v)
 {
-    QApplication::postEvent(ContextManager::midi(), new PolyPressureEvent(_channel, k, v));
+    ContextManager::midi()->processPolyPressureChanged(_channel, k, v);
 }

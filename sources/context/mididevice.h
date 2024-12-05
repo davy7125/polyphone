@@ -57,8 +57,15 @@ public:
     int getMonoPressure(int channel) override;
     int getPolyPressure(int channel, int key) override;
 
-protected:
-    void customEvent(QEvent * event) override;
+    // Process MIDI signals
+    void processKeyOn(int channel, int key, int vel);
+    void processKeyOff(int channel, int key);
+    void processPolyPressureChanged(int channel, int key, int pressure);
+    void processMonoPressureChanged(int channel, int value);
+    void processControllerChanged(bool external, int channel, int num, int value);
+    void processBendChanged(int channel, float value);
+    void processBendSensitivityChanged(int channel, float semitones);
+    void processProgramChanged(int channel, quint8 preset);
 
 private slots:
     // When using modulators, default values of controllers might change
@@ -99,14 +106,6 @@ private:
     void openMidiPort();
     bool readConfiguration(QString config);
     void getMidiList(int api, QMap<QString, QString> *map);
-    void processKeyOn(int channel, int key, int vel);
-    void processKeyOff(int channel, int key);
-    void processPolyPressureChanged(int channel, int key, int pressure);
-    void processMonoPressureChanged(int channel, int value);
-    void processControllerChanged(bool external, int channel, int num, int value);
-    void processBendChanged(int channel, float value);
-    void processBendSensitivityChanged(int channel, float semitones);
-    void processProgramChanged(int channel, quint8 preset);
 
     ConfManager * _configuration;
     RtMidiIn * _midiIn;
