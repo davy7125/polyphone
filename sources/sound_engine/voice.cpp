@@ -30,7 +30,7 @@ volatile int Voice::s_tuningFork = 440;
 volatile float Voice::s_temperament[12] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 volatile int Voice::s_temperamentRelativeKey = 0;
 float Voice::s_sinc_table7[256][7];
-float Voice::s_sin_table[256];
+float Voice::s_sin_table[2048];
 float Voice::s_pow10_table[2048];
 
 void Voice::prepareTables()
@@ -60,8 +60,8 @@ void Voice::prepareTables()
     }
 
     // Lookup table for sinus, values in [0; pi/2[
-    for (int i = 0; i < 256; i++)
-        s_sin_table[i] = (float)sin(static_cast<double>(i) * M_PI_2 / 256.0);
+    for (int i = 0; i < 2048; i++)
+        s_sin_table[i] = (float)sin(static_cast<double>(i) * M_PI_2 / 2048.0);
 
     // Lookup table for pow10, values in [-102.4; 102.3]
     for (int i = 0; i < 2048; i++)
@@ -80,7 +80,6 @@ Voice::Voice(VoiceParam * voiceParam) : QObject(nullptr),
     _dataModArray = new float[_arrayLength];
     _modLfoArray = new float[_arrayLength];
     _vibLfoArray = new float[_arrayLength];
-    _modFreqArray = new float[_arrayLength];
     _pointDistanceArray = new quint32[_arrayLength];
 }
 
@@ -89,7 +88,6 @@ Voice::~Voice()
     delete [] _dataModArray;
     delete [] _modLfoArray;
     delete [] _vibLfoArray;
-    delete [] _modFreqArray;
     delete [] _pointDistanceArray;
     delete [] _srcData;
     if (_voiceParam->getType() != 0 && _dataSmpl != nullptr)
@@ -177,13 +175,11 @@ void Voice::generateData(float * data, quint32 len)
         delete [] _dataModArray;
         delete [] _modLfoArray;
         delete [] _vibLfoArray;
-        delete [] _modFreqArray;
         delete [] _pointDistanceArray;
 
         _dataModArray = new float[len];
         _modLfoArray = new float[len];
         _vibLfoArray = new float[len];
-        _modFreqArray = new float[len];
         _pointDistanceArray = new quint32[len];
         _arrayLength = len;
     }
@@ -263,15 +259,15 @@ void Voice::generateData(float * data, quint32 len)
         }
 
         // Low-pass filter
-        for (quint32 i = 0; i < len; i++)
-            _modFreqArray[i] = v_filterFreq *
-                               EnveloppeVol::fastPow2((_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) * 0.000833333f /* 1:1200 */);
+        // - 3.01f => so that a value of 0 gives a non-resonant low pass
+        // If v_filterQ is 0, inv_q_lin is sqrt(2)
+        float inv_q_lin = fastPow10(-0.05f * (v_filterQ - 3.01f));
         float a0, a1, a2, b1, b2, valTmp;
-        float filterQ = v_filterQ - 3.01f; // So that a value of 0 gives a non-resonant low pass
-        float inv_q_lin = fastPow10(-0.05f * filterQ); // If filterQ is -3.01, inv_q_lin is sqrt(2)
         for (quint32 i = 0; i < len; ++i)
         {
-            biQuadCoefficients(a0, a1, a2, b1, b2, _modFreqArray[i], inv_q_lin);
+            valTmp = v_filterFreq * EnveloppeVol::fastPow2(
+                         (_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) * 0.000833333f /* 1:1200 */);
+            biQuadCoefficients(a0, a1, a2, b1, b2, valTmp, inv_q_lin);
             valTmp = a0 * data[i] + a1 * _x1 + a2 * _x2 - b1 * _y1 - b2 * _y2;
             _x2 = _x1;
             _x1 = data[i];
@@ -418,28 +414,30 @@ void Voice::biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float
 {
     // Calcul des coefficients d'une structure bi-quad pour un passe-bas
 
-    // The maximum frequency is half the audio sample rate
+    // The maximum frequency must be before the half the audio sample rate (otherwise resulting values can be > 1)
     // Range of theta is [0; 1] for [0; pi]
     float theta = 2.f * freq * _audioSmplRateInv;
+    if (theta > 0.98f)
+        theta = 0.98f;
 
-    if (inv_Q <= 0)
+    if (inv_Q <= 0.f)
     {
-        a0 = 1;
-        a1 = 0;
-        a2 = 0;
-        b1 = 0;
-        b2 = 0;
+        a0 = 1.f;
+        a1 = 0.f;
+        a2 = 0.f;
+        b1 = 0.f;
+        b2 = 0.f;
     }
     else
     {
         float dTmp = inv_Q * fastSin(theta) * 0.5f;
         if (dTmp <= -1.0f)
         {
-            a0 = 1;
-            a1 = 0;
-            a2 = 0;
-            b1 = 0;
-            b2 = 0;
+            a0 = 1.f;
+            a1 = 0.f;
+            a2 = 0.f;
+            b1 = 0.f;
+            b2 = 0.f;
         }
         else
         {
@@ -466,18 +464,18 @@ float Voice::fastCos(float value)
 
 float Voice::getSinValue(float value)
 {
-    value *= 512.f;
+    value *= 4096.f;
     int indexBefore = static_cast<int>(value);
     float diff = value - static_cast<float>(indexBefore);
 
     if (indexBefore < 0)
         return 0.f;
-    if (indexBefore > 255)
+    if (indexBefore > 2047)
         return 1.f;
 
     // Linear interpolation
-    return indexBefore >= 255 ?
-               s_sin_table[255] + (1.f - s_sin_table[255]) * diff :
+    return indexBefore >= 2047 ?
+               s_sin_table[2047] + (1.f - s_sin_table[2047]) * diff :
                s_sin_table[indexBefore] + (s_sin_table[indexBefore + 1] - s_sin_table[indexBefore]) * diff;
 }
 

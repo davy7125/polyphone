@@ -109,7 +109,6 @@ private:
     float * _dataModArray;
     float * _modLfoArray;
     float * _vibLfoArray;
-    float * _modFreqArray;
     quint32 * _pointDistanceArray;
 
     quint32 _srcDataLength;
@@ -119,7 +118,7 @@ private:
     static volatile float s_temperament[12]; // Fine tune in cents from each key from C to B
     static volatile int s_temperamentRelativeKey;
     static float s_sinc_table7[256][7];
-    static float s_sin_table[256];
+    static float s_sin_table[2048];
     static float s_pow10_table[2048];
 };
 
