@@ -44,9 +44,12 @@ MainTabBar::MainTabBar(QWidget *parent) : QWidget(parent),
 
     // Icons
     _leftArrowIcon = ContextManager::theme()->getColoredSvg(
-        ":/icons/arrow_left.svg", QSize(ARROW_WIDTH - ARROW_INNER_MARGIN, 1.5 * ARROW_WIDTH), ThemeManager::LIST_BACKGROUND);
+        ":/icons/arrow_left.svg", QSize(ARROW_WIDTH - ARROW_INNER_MARGIN, 1.5 * ARROW_WIDTH),
+        ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
+            ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND);
     _rightArrowIcon = ContextManager::theme()->getColoredSvg(
-        ":/icons/arrow_right.svg", QSize(ARROW_WIDTH - ARROW_INNER_MARGIN, 1.5 * ARROW_WIDTH), ThemeManager::LIST_BACKGROUND);
+        ":/icons/arrow_right.svg", QSize(ARROW_WIDTH - ARROW_INNER_MARGIN, 1.5 * ARROW_WIDTH),             ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
+            ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND);
 }
 
 void MainTabBar::addWidget(QWidget * widget, QString iconName, QString label, bool isColored)
@@ -54,6 +57,7 @@ void MainTabBar::addWidget(QWidget * widget, QString iconName, QString label, bo
     MainTabBarElement * tab = new MainTabBarElement(widget, iconName, isColored);
     tab->setLabel(label);
     _tabs.append(tab);
+    _firstTabDisplayed = -1; // Go to the last position
 
     this->repaint();
 }
