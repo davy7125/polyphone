@@ -125,7 +125,7 @@ public:
     void configure(SynthConfig * configuration);
     void setIMidiValues(IMidiValues * midiValues);
     int play(EltID id, int channel, int key, int velocity);
-    void stop(bool allChannels);
+    void stop(bool allChannels, bool fast);
 
     // Configuration for reading samples
     void setSampleGain(double gain);
@@ -177,7 +177,7 @@ private:
     // presetId: -1 (no filter) or specific preset id
     // channel: -2 (all channels), -1 (GUI channel) or [0 - 15] (MIDI channel)
     // key: -2 (all keys), -1 (all keys < 0) or a specific key
-    void releaseVoices(int sf2Id, int presetId, int channel, int key);
+    void releaseVoices(int sf2Id, int presetId, int channel, int key, bool fast);
 
     void destroySoundEnginesAndBuffers();
     void createSoundEnginesAndBuffers();

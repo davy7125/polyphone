@@ -430,8 +430,23 @@ void MidiDevice::processControllerChanged(bool external, int channel, int numCon
     }
     else if (numController == 120)
     {
-        // All sound off: clear the sustain state and stop all notes
+        // All sound off: clear the sustain state
         memset(sustainState, 0, sizeof(Sustain_State));
+    }
+
+    // Process the controller change for the current channel
+    bool consumed = false;
+    for (int i = 0; i < _listeners.size(); ++i)
+        consumed |= _listeners[i]->processControllerChanged(channel, numController, value);
+
+    // And possibly update channel -1 if the change has not been consumed
+    if (channel != -1 && !consumed)
+        processControllerChanged(external, -1, numController, initialValue);
+
+    // In case not all MIDI listeners support CC120 / CC123
+    if (numController == 120)
+    {
+        // All sound off: clear the sustain state and stop all notes
         for (int key = 0; key < 128; key++)
             processKeyOff(channel, key);
     }
@@ -444,15 +459,6 @@ void MidiDevice::processControllerChanged(bool external, int channel, int numCon
                 processKeyOff(channel, key);
         }
     }
-
-    // Process the controller change for the current channel
-    bool consumed = false;
-    for (int i = 0; i < _listeners.size(); ++i)
-        consumed |= _listeners[i]->processControllerChanged(channel, numController, value);
-
-    // And possibly update channel -1 if the change has not been consumed
-    if (channel != -1 && !consumed)
-        processControllerChanged(external, -1, numController, initialValue);
 }
 
 void MidiDevice::processKeyOn(int channel, int key, int vel)

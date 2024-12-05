@@ -133,7 +133,7 @@ int Synth::play(EltID id, int channel, int key, int velocity)
     // Possibly release voices
     if (velocity == 0)
     {
-        releaseVoices(id.indexSf2, id.indexElt, channel, key);
+        releaseVoices(id.indexSf2, id.indexElt, channel, key, false);
         return -1;
     }
 
@@ -346,7 +346,7 @@ void Synth::configureVoices()
     }
 }
 
-void Synth::releaseVoices(int sf2Id, int presetId, int channel, int key)
+void Synth::releaseVoices(int sf2Id, int presetId, int channel, int key, bool fast)
 {
     Voice ** voices1, ** voices2;
     int count1, count2;
@@ -375,19 +375,19 @@ void Synth::releaseVoices(int sf2Id, int presetId, int channel, int key)
         if (key != -2 && (key != -1 || voiceParam->getKey() >= 0) && voiceParam->getKey() != key)
             continue;
 
-        voice->release();
+        voice->release(fast);
     }
 }
 
-void Synth::stop(bool allChannels)
+void Synth::stop(bool allChannels, bool fast)
 {
     // Stop required for all voices
-    releaseVoices(-1, -1, allChannels ? -2 : -1, -2);
+    releaseVoices(-1, -1, allChannels ? -2 : -1, -2, fast);
 }
 
 void Synth::configure(SynthConfig * configuration)
 {
-    this->stop(true);
+    this->stop(true, true);
     _configuration.copy(configuration);
 
     // Update reverb and chorus
@@ -607,6 +607,12 @@ bool Synth::processControllerChanged(int channel, int num, int value)
             voiceParam->processControllerChanged(num, value);
     }
 
+    // Stop required for all voices?
+    if (num == 120)
+        releaseVoices(-1, -1, channel, -2, true);
+    else if (num == 123)
+        releaseVoices(-1, -1, channel, -2, false);
+
     return false;
 }
 
@@ -658,7 +664,7 @@ void Synth::setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize)
     _internalConfiguration.sampleRate = sampleRate;
 
     // Reset
-    this->stop(true);
+    this->stop(true, true);
 
     // Sample rate update
     _sinus.setSampleRate(sampleRate);

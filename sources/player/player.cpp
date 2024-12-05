@@ -140,7 +140,7 @@ void Player::onBankSelectionChanged(QItemSelection selected, QItemSelection dese
     // Mute everything
     ui->listPreset->selectionModel()->clear();
     _currentIds.clear();
-    _synth->stop(true);
+    _synth->stop(true, false);
     memset(_currentKeyVelocities, 0, 128 * sizeof(int));
 
     // Populate the preset list
@@ -490,6 +490,6 @@ QString Player::getTabTitlePrefix()
 
 void Player::on_pushPanic_clicked()
 {
-    _synth->stop(true);
+    _synth->stop(true, true);
     ContextManager::midi()->stopAll();
 }
