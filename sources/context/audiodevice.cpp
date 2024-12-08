@@ -236,7 +236,18 @@ void AudioDevice::initAudio()
     // Buffer size
     quint32 bufferSize = _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 0).toUInt();
     if (bufferSize == 0)
-        bufferSize = 256;
+    {
+        // Default buffer size, depends on the API
+        switch (_currentApi)
+        {
+        case RtAudio::WINDOWS_WASAPI: case RtAudio::WINDOWS_DS:
+            bufferSize = 512;
+            break;
+        default:
+            bufferSize = 256;
+            break;
+        }
+    }
 
     // Instanciate an RtAudio object with the selected api
     try {

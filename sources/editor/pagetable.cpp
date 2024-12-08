@@ -1257,7 +1257,7 @@ AttributeValue PageTable::attributeFromString(AttributeType champ, bool isPrst, 
             txtRight = strValue.right(strValue.size() - posSeparator - 1);
         }
 
-        int val1, val2;
+        int val1 = 0, val2 = 0;
         if (champ == champ_velRange)
         {
             bool tmp;

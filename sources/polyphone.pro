@@ -62,7 +62,7 @@ win32 {
     INCLUDEPATH += ../lib_windows/include
     RC_FILE = polyphone.rc
     QMAKE_CXXFLAGS += -ffloat-store
-    LIBS += -lzlib1 -lwinmm -logg -lvorbis -lvorbisfile -lvorbisenc.dll -lcrypto -lFLAC \
+    LIBS += -lzlib1 -lwinmm -logg -lvorbis -lvorbisfile -lvorbisenc -lcrypto -lFLAC -lsndfile \
         -lole32 -lwinmm -lksuser -lmfplat -lmfuuid -lwmcodecdspuuid # <- for RtAudio
     LIBS += -L$$PWD/../lib_windows/64bits
     DESTDIR = $$PWD/../lib_windows/64bits

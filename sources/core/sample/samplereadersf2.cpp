@@ -68,7 +68,7 @@ float * SampleReaderSf2::getData(SampleReaderResult &result, QFile &fi)
         result = FILE_NOT_READABLE;
         return nullptr;
     }
-    if (nb != _info->dwLength * sizeof(qint16))
+    if (nb != (qint64)(_info->dwLength * sizeof(qint16)))
     {
         delete [] data;
         delete [] fData;

@@ -406,7 +406,7 @@ void Attribute::getLimit(AttributeType champ, bool isPrst, int &min, int &max)
 
 AttributeValue Attribute::limit(AttributeType champ, AttributeValue value, bool isPrst)
 {
-    int min, max;
+    int min = 0, max = 0;
     getLimit(champ, isPrst, min, max);
 
     switch (champ)
