@@ -61,7 +61,13 @@ SampleReader::SampleReaderResult SampleReaderFile::launchDecoder(float * data)
 {
     // Open the file and get the details
     SF_INFO sfInfo;
+    memset(&sfInfo, 0, sizeof(SF_INFO));
+#if defined(Q_OS_WIN)
+    // Reopen the file for preventing a bug
+    SNDFILE * sndFile = sf_open(_file->fileName().toStdString().c_str(), SFM_READ, &sfInfo);
+#else
     SNDFILE * sndFile = sf_open_fd(_file->handle(), SFM_READ, &sfInfo, false);
+#endif
     if (sndFile == nullptr)
         return SampleReader::FILE_NOT_SUPPORTED;
 

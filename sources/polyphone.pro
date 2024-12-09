@@ -59,13 +59,13 @@ win32 {
     # Compiler must be MinGW for the option -ffloat-store, required by sfArk
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __WINDOWS_MM__ __WINDOWS_WASAPI__ __WINDOWS_ASIO__ #__WINDOWS_DS__
-    INCLUDEPATH += ../lib_windows/include
+    INCLUDEPATH += ../windows/include
     RC_FILE = polyphone.rc
     QMAKE_CXXFLAGS += -ffloat-store
-    LIBS += -lzlib1 -lwinmm -logg -lvorbis -lvorbisfile -lvorbisenc -lcrypto -lFLAC -lsndfile \
+    LIBS += -lz -lwinmm -logg -lvorbis -lvorbisfile -lvorbisenc -lcrypto -lFLAC -lsndfile \
         -lole32 -lwinmm -lksuser -lmfplat -lmfuuid -lwmcodecdspuuid # <- for RtAudio
-    LIBS += -L$$PWD/../lib_windows/64bits
-    DESTDIR = $$PWD/../lib_windows/64bits
+    LIBS += -L$$PWD/../windows/lib
+    DESTDIR = $$PWD/../windows/bin
 
     # Files necessary for ASIO with RtAudio
     HEADERS += lib/_option_rtaudio/rtaudio/include/asio.h \

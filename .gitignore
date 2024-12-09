@@ -4,7 +4,7 @@
 /sources/.qmake.stash
 /private
 /build*
-lib_*
+/windows
 .DS_Store
 /fedora
 /debian
