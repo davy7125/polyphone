@@ -121,17 +121,17 @@ unix:!macx {
 }
 macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.13
-    QMAKE_MAC_SDK = macosx12.1
+    QMAKE_MAC_SDK = macosx13.1
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
-        __MACOSX_CORE__ __UNIX_JACK__ TARGET_OS_IPHONE=0
-    INCLUDEPATH += ../lib_mac/Jackmp.framework/Headers \
-        ../lib_mac/include
-    LIBS += -L$$PWD/../lib_mac -logg -lFLAC -lvorbis -lssl -lcrypto -F$$PWD/../lib_mac/ -framework Jackmp \
+        __MACOSX_CORE__ TARGET_OS_IPHONE=0
+    INCLUDEPATH += ../macos/include
+    LIBS += -L$$PWD/../macos/lib -lssl -lcrypto -lz \
+        -lsndfile -lopus -lmpg123 -logg -lFLAC -lvorbis -lvorbisfile -lvorbisenc -lmp3lame \
         -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
-        -framework AudioUnit -framework AudioToolbox -framework Cocoa -lz
+        -framework AudioUnit -framework AudioToolbox -framework Cocoa
     ICON = polyphone.icns
     QMAKE_INFO_PLIST = polyphone.plist
-    DESTDIR = $$PWD/../lib_mac
+    DESTDIR = $$PWD/../macos
 }
 DEFINES += SFTOOLS_NOXML
 
