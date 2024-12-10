@@ -5,7 +5,8 @@
 /private
 /build*
 /windows
-.DS_Store
+/macos
 /fedora
 /debian
 /sources/build
+.DS_Store
