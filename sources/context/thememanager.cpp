@@ -42,6 +42,7 @@ ThemeManager::ThemeManager(ConfManager * configuration) :
     _defaultPalette.setColor(QPalette::AlternateBase, mix(colorBase, _defaultPalette.color(QPalette::Text), 0.05));
 
     // Fix some colors for Mac OS
+#if defined(Q_OS_MACOS)
     if (loadedStyle == "macOS")
     {
         QColor colorTmp = _customPalette.color(QPalette::Window);
@@ -51,6 +52,9 @@ ThemeManager::ThemeManager(ConfManager * configuration) :
         colorTmp = mix(_defaultPalette.color(QPalette::HighlightedText), _defaultPalette.color(QPalette::Highlight), 0.7);
         _defaultPalette.setColor(QPalette::Disabled, QPalette::HighlightedText, colorTmp);
     }
+    if (_defaultPalette.color(QPalette::ButtonText) == QColor(0, 0, 0) && _defaultPalette.color(QPalette::Button).value() < 60)
+        _defaultPalette.setColor(QPalette::ButtonText, QColor(255, 255, 255));
+#endif
 
     // Load themes
     _themes << getDefaultTheme() << getThemes();

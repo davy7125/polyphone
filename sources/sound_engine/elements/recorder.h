@@ -28,6 +28,7 @@
 
 #include <QObject>
 #include <QFile>
+#include <QDataStream>
 
 class Recorder: public QObject
 {
