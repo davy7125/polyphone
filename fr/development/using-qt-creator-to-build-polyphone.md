@@ -20,7 +20,7 @@ Les instructions pour les installer dépendent de votre système d'exploitation,
 ### Copier les sources
 
 
-Téléchargez les sources de Polyphone <a href="download" target="_blank">ici</a> ou depuis <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>.
+Téléchargez les sources de Polyphone <a href="software" target="_blank">ici</a> ou depuis <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>.
 
 
 ### Ouvrir et configurer le projet

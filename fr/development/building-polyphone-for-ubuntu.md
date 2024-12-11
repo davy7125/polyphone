@@ -1,4 +1,4 @@
-Utilisez ces instructions si vous ne pouvez pas installer Polyphone sur votre distribution Linux avec les installeurs fournis dans la section «&nbsp;[Download](download)&nbsp;».
+Utilisez ces instructions si vous ne pouvez pas installer Polyphone sur votre distribution Linux avec les installeurs fournis dans la section «&nbsp;[Logiciel](software)&nbsp;».
 Cette méthode a été testée avec Ubuntu 16.04 (Xenial).
 
 
@@ -20,7 +20,7 @@ Les bibliothèques suivantes sont nécessaires&nbsp;:
 
 Utilisez par exemple :program:`synaptic` pour les installer.
 
-Vous aurez également besoin des sources du logiciel, disponibles <a href="download" target="_blank">ici</a> ou sur <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>.
+Vous aurez également besoin des sources du logiciel, disponibles <a href="software" target="_blank">ici</a> ou sur <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>.
 
 
 ## Compilation

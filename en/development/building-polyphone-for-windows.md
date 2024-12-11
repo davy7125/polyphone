@@ -39,7 +39,7 @@ In doing so, mingw64 executables can be called by Qt.
 
 ### Polyphone dependencies
 
-Download the project dependencies available [here](files/windows.zip). These are additional elements used by Polyphone that are not supplied by Qt. If some of the dependencies are out of date, it is possible to download them <a href="https://www.msys2.org/" target="_blank">here</a/>.
+Download the project dependencies available [here](files/windows.zip). These are additional elements used by Polyphone that are not supplied by Qt. If some of the dependencies are out of date, it is possible to download them <a href="https://www.msys2.org/" target="_blank">here</a>.
 
 
 ## Build
@@ -47,7 +47,7 @@ Download the project dependencies available [here](files/windows.zip). These are
 
 ### Sources
 
-Start by downloading the Polyphone sources <a href="download" target="_blank">here</a> or from <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a> and unarchive the files on your Windows desktop, for example.
+Start by downloading the Polyphone sources <a href="software" target="_blank">here</a> or from <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a> and unarchive the files on your Windows desktop, for example.
 
 Then, unarchive the additional Polyphone dependencies in directory :file:`windows` that must be next to the :file:`sources` folder.
 

@@ -1,4 +1,4 @@
-Use these instructions if you cannot install Polyphone on your Mac with the available installers in the section “[Download](download)”.
+Use these instructions if you cannot install Polyphone on your Mac with the available installers in the section “[Software](software)”.
 
 
 ## Prerequisite
@@ -9,7 +9,7 @@ The following applications are required:
 * <a href="https://www.qt.io/download-open-source" target="_blank">Qt Creator with its framework</a>,
 * Xcode or just the "Command Line Tools" (the version to use is specified on the Qt website - <a href="https://doc.qt.io/qt-6/supported-platforms.html" target="_blank">here</a> for instance).
 
-You also need the sources of Polyphone, available <a href="download" target="_blank">here</a> or on <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>, along with the necessary libraries you can download [here](files/macos.zip).
+You also need the sources of Polyphone, available <a href="software" target="_blank">here</a> or on <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>, along with the necessary libraries you can download [here](files/macos.zip).
 
 For correctly opening a project with Qt Creator, it must first be given the permission to read all files from your computer (in "Security and privacy" => "Full disk access" => add "Qt creator.app" which is in its installation directory).
 
@@ -21,7 +21,7 @@ make install
 ```
 Then copy all .h (headers) and .a (static libraries).
 
-Another way to get the libraries already built is to use <a href="https://brew.sh/" target="_blank">Homebrew</a>. After installing this tool, it is possible to get "libsndfile" along with its dependencies with this command:
+Another way to get the libraries already built is to use <a href="https://brew.sh/" target="_blank">Homebrew</a>. After installing this tool, it is for example possible to get "libsndfile" along with its dependencies with this command:
 ```
 arch -x86_64 brew install libsndfile
 ```
@@ -34,9 +34,9 @@ The .h and .a files will then be located in "/usr/local/Cellar".
 Unzip the libraries and place the directory :file:`macos` just next to the directory :file:`sources`.
 
 Open the file :file:`polyphone.pro` with :program:`Qt Creator`.
-Build the project, a bundle :file:`polyphone.app` should appear in the directory :file:`lib_mac`.
+Build the project, a bundle :file:`polyphone.app` should appear in the directory :file:`macos`.
 
-If the SDK path cannot be resolved, try modifying this variable in file :file:`polyphone.pro` for matching your SDK version (linked to the XCode version):
+If the SDK path cannot be resolved, try modifying this variable in file :file:`polyphone.pro` for matching your SDK version (linked to the Xcode version):
 ```
 QMAKE_MAC_SDK = macosx10.15
 ```
@@ -54,7 +54,7 @@ This value is also to be written in file "sources/contrib/mac/polyphone.plist" b
 Run the following command to include libraries and frameworks inside the bundle (adjust the path first!):
 
 ```
-/Path/To/Qt/5.2.0/clang_64/bin/macdeployqt /Path/To/lib_mac/polyphone.app
+/Path/To/Qt/5.2.0/clang_64/bin/macdeployqt /Path/To/macos/polyphone.app
 ```
 
 You can then execute the program or compress it as a .zip or .dmg file to share it.

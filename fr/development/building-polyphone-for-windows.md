@@ -39,7 +39,7 @@ De cette manière, les exécutables de mingw64 pourront être appelés par Qt.
 
 ### Dépendances de Polyphone
 
-Téléchargez les dépendances du projet disponibles [ici](files/windows.zip). Ce sont des éléments supplémentaires utilisés par Polyphone et qui ne sont pas fournis par Qt. Si certaines des dépendances ne sont pas à jour, il est possible de les récupérer <a href="https://www.msys2.org/" target="_blank">ici</a/>.
+Téléchargez les dépendances du projet disponibles [ici](files/windows.zip). Ce sont des éléments supplémentaires utilisés par Polyphone et qui ne sont pas fournis par Qt. Si certaines des dépendances ne sont pas à jour, il est possible de les récupérer <a href="https://www.msys2.org/" target="_blank">ici</a>.
 
 
 ## Compilation
@@ -47,7 +47,7 @@ Téléchargez les dépendances du projet disponibles [ici](files/windows.zip). C
 
 ### Sources
 
-Tout d'abord, téléchargez les sources de Polyphone <a href="download" target="_blank">ici</a> ou depuis <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a> et désarchivez l'ensemble sur votre bureau Windows par exemple.
+Tout d'abord, téléchargez les sources de Polyphone <a href="software" target="_blank">ici</a> ou depuis <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a> et désarchivez l'ensemble sur votre bureau Windows par exemple.
 
 Ensuite, désarchivez les dépendences supplémentaires de Polyphone dans un dossier :file:`windows` qui doit se trouver à côté du dossier :file:`sources`.
 
