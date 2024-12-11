@@ -120,7 +120,7 @@ unix:!macx {
     QMAKE_LFLAGS_RPATH=
 }
 macx {
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.13
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 12.0
     QMAKE_MAC_SDK = macosx13.1
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __MACOSX_CORE__ TARGET_OS_IPHONE=0
@@ -129,8 +129,8 @@ macx {
         -lsndfile -lopus -lmpg123 -logg -lFLAC -lvorbis -lvorbisfile -lvorbisenc -lmp3lame \
         -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
         -framework AudioUnit -framework AudioToolbox -framework Cocoa
-    ICON = polyphone.icns
-    QMAKE_INFO_PLIST = polyphone.plist
+    ICON = contrib/mac/polyphone.icns
+    QMAKE_INFO_PLIST = contrib/mac/polyphone.plist
     DESTDIR = $$PWD/../macos
 }
 DEFINES += SFTOOLS_NOXML
