@@ -1,4 +1,4 @@
-Utilisez ces instructions si vous ne pouvez pas installer Polyphone sur votre Mac OS X avec les installeurs disponibles dans la section «&nbsp;[Download](download)&nbsp;».
+Utilisez ces instructions si vous ne pouvez pas installer Polyphone sur votre Mac avec les installeurs disponibles dans la section «&nbsp;[Download](download)&nbsp;».
 
 
 ## Prérequis
@@ -6,12 +6,12 @@ Utilisez ces instructions si vous ne pouvez pas installer Polyphone sur votre Ma
 
 Les éléments suivants seront nécessaires&nbsp;:
 
-* Xcode (disponible dans l'Apple Store),
-* <a href="https://www.qt.io/download-open-source" target="_blank">Qt Creator avec son framework</a>.
+* <a href="https://www.qt.io/download-open-source" target="_blank">Qt Creator avec son framework</a>,
+* Xcode ou seulement les «&nbsp;Command Line Tools"&nbsp;» (la version à utiliser est indiquée sur le site de Qt - <a href="https://doc.qt.io/qt-6/supported-platforms.html" target="_blank">ici</a> par exemple).
 
-Vous aurez également besoin des sources de Polyphone, disponibles <a href="download" target="_blank">ici</a> ou sur <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>, ainsi que les dépendances téléchargeables [ici](files/lib_mac.zip).
+Vous aurez également besoin des sources de Polyphone, disponibles <a href="download" target="_blank">ici</a> ou sur <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>, ainsi que les dépendances téléchargeables [ici](files/macos.zip).
 
-Pour pouvoir ouvrir correctement un projet avec Qt Creator, il faut au préalable lui donner la permission de lire tous les fichiers (dans "Sécurité et confidentialité => Accès complet au disque => ajouter "Qt creator.app" qui se trouve dans son répertoire d'installation).
+Pour pouvoir ouvrir correctement un projet avec Qt Creator, il faut au préalable lui donner la permission de lire tous les fichiers (dans "Sécurité et confidentialité" => "Accès complet au disque" => ajouter "Qt creator.app" qui se trouve dans son répertoire d'installation).
 
 Si certaines des dépendances précédemment fournies ne sont pas à jour ou pas compatibles avec la version de Mac, comme SSL par exemple, il faudra aller chercher leurs sources sur internet et les recompiler en autorisant une liaison statique&nbsp;:
 ```
@@ -21,21 +21,34 @@ make install
 ```
 Ensuite copier tous les .h (entêtes) et .a (bibliothèques statiques).
 
+Une autre manière pour récupérer des dépendances déjà compilées est d'utiliser <a href="https://brew.sh/" target="_blank">Homebrew</a>. Après l'installation de cet outil, il est possible de récupérer "libsndfile" ainsi que ses dépendances par cette commande&nbsp;:
+```
+arch -x86_64 brew install libsndfile
+```
+Les fichiers .h et .a se trouvent ensuite dans "/usr/local/Cellar".
+
 
 ## Compilation
 
 
-Décompressez l'archive des dépendances et placez le répertoire :file:`lib_mac` juste à côté du dossier :file:`sources`.
+Décompressez l'archive des dépendances et placez le répertoire :file:`macos` juste à côté du dossier :file:`sources`.
 
 Ouvrez le fichier :file:`polyphone.pro` avec :program:`Qt Creator`.
 Compiler le projet, un bundle :file:`polyphone.app` devrait apparaître dans le répertoire :file:`lib_mac`.
 
-Si le chemin du SDK ne peut être résolu, essayez de modifier le fichier :file:`polyphone.pro` pour y faire apparaître ces variables (après avoir ajusté la version de Mac OSX)&nbsp;:
+Si le chemin du SDK ne peut être résolu, essayez de modifier cette variable dans le fichier :file:`polyphone.pro` pour cibler la version de votre SDK (qui dépend de la version d'XCode installée)&nbsp;:
 
 ```
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.15
 QMAKE_MAC_SDK = macosx10.15
+
 ```
+
+Si le compilateur indique à présent que certaines fonctionnalités ne sont pas disponibles dans la cible MacOS spécifiée, vous pouvez augmenter la version de cette variable dans le fichier .pro&nbsp;:
+```
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.15
+```
+Cette valeur est à reporter dans le fichier "sources/contrib/mac/polyphone.plist" sous "LSMinimumSystemVersion".
+
 
 ## Compléter le bundle
 
@@ -46,16 +59,7 @@ Lancez la commande suivante pour intégrer les dépendances et le framework Qt d
 /Path/To/Qt/5.2.0/clang_64/bin/macdeployqt /Path/To/lib_mac/polyphone.app
 ```
 
-Copiez the framework Jackmp dans :file:`lib_mac` et collez-le dans :file:`lib_mac/polyphone.app/Contents/Frameworks`.
-Pour naviguer à l'intérieur du bundle, clic droit dessus et sélection de :guilabel:`View content` (un double-clic sur le bundle l'exécutera et ce n'est pas ce que nous voulons ici).
-
-Enfin, lancez la commande suivante sur une seule ligne (ajustez les chemins au prélable&nbsp;!)&nbsp;:
-
-```
-install_name_tool -change /System/Library/Frameworks/Jackmp.framework/Versions/A/Jackmp @executable_path/../Frameworks/Jackmp.framework/Versions/A/Jackmp /Path/To/lib_mac/polyphone.app/Contents/MacOS/Polyphone
-```
-
-Vous pourvez ensuite exécuter le programme grâce à un double-clic sur le bundle ou le compresser en fichier .zip pour le partager.
+Vous pourvez ensuite exécuter le programme grâce à un double-clic sur le bundle ou le compresser en fichier .zip ou .dmg pour le partager.
 
 
 ## Dépannage

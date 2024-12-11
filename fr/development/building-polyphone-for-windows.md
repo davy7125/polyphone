@@ -39,7 +39,7 @@ De cette manière, les exécutables de mingw64 pourront être appelés par Qt.
 
 ### Dépendances de Polyphone
 
-Téléchargez les dépendances du projet disponibles [ici](files/lib_windows.zip). Ce sont des éléments supplémentaires utilisés par Polyphone et qui ne sont pas fournis par Qt.
+Téléchargez les dépendances du projet disponibles [ici](files/windows.zip). Ce sont des éléments supplémentaires utilisés par Polyphone et qui ne sont pas fournis par Qt. Si certaines des dépendances ne sont pas à jour, il est possible de les récupérer <a href="https://www.msys2.org/" target="_blank">ici</a/>.
 
 
 ## Compilation
@@ -49,16 +49,16 @@ Téléchargez les dépendances du projet disponibles [ici](files/lib_windows.zip
 
 Tout d'abord, téléchargez les sources de Polyphone <a href="download" target="_blank">ici</a> ou depuis <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a> et désarchivez l'ensemble sur votre bureau Windows par exemple.
 
-Ensuite, désarchivez les dépendences supplémentaires de Polyphone dans un dossier :file:`lib_windows` qui doit se trouver à côté du dossier :file:`sources`.
+Ensuite, désarchivez les dépendences supplémentaires de Polyphone dans un dossier :file:`windows` qui doit se trouver à côté du dossier :file:`sources`.
 
 Continuez maintenant avec ce tutoriel pour la compilation de Polyphone avec Qt Creator&nbsp;: [Compiler avec Qt Creator](development/using-qt-creator-to-build-polyphone.md). Aucune modification du fichier :file:`polyphone.pro` ne sera nécessaire.
 
 ### Lancer Polyphone sans Qt Creator
 
-Placez-vous dans le répertoire :file:`lib_windows/64bits`. Si la compilation s'est bien déroulée, vous devriez y voir l'exécutable :file:`polyphone.exe`. Pour rendre possible son exécution de manière indépendante, il est nécessaire de compléter ce dossier. Exécutez la commande suivante dans un terminal (adaptez les chemins au préalable)&nbsp;:
+Placez-vous dans le répertoire :file:`windows/bin`. Si la compilation s'est bien déroulée, vous devriez y voir l'exécutable :file:`polyphone.exe`. Pour rendre possible son exécution de manière indépendante, il est nécessaire de compléter ce dossier. Exécutez la commande suivante dans un terminal (adaptez les chemins au préalable)&nbsp;:
 
 ```
-C:\Qt\6.7.2\mingw_64\bin\windeployqt.exe "C:\Users\User\Desktop\polyphone\lib_windows\64bits\polyphone.exe"
+C:\Qt\6.7.2\mingw_64\bin\windeployqt.exe "C:\Users\User\Desktop\polyphone\windows\bin\polyphone.exe"
 ```
 
 Vous verrez apparaitre les bibliothèques Qt (:file:`Qt6Core` par exemple) et un double-clic sur :file:`polyphone.exe` permettra de lancer le logiciel.
