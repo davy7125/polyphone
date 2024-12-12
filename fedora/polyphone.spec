@@ -5,8 +5,8 @@ Summary:        Soundfont editor
 License:        GPLv3+
 URL:            https://www.polyphone.io
 Group:          Applications/Multimedia
-BuildRequires:  alsa-lib-devel rtaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel rtmidi-devel stk-devel
-Requires:       alsa-utils rtaudio zlib libogg flac libvorbis glib2 openssl rtmidi stk qt6-qtbase qt6-qtsvg
+BuildRequires:  alsa-lib-devel rtaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel rtmidi-devel stk-devel libsndfile-devel
+Requires:       alsa-utils rtaudio zlib libogg flac libvorbis glib2 openssl rtmidi stk qt6-qtbase qt6-qtsvg libsndfile
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Packager:       Davy Triponney
 

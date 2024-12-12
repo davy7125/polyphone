@@ -1,6 +1,6 @@
-polyphone (2.4-1) unstable; urgency=low
+polyphone (2.5-0) unstable; urgency=low
 
   * Initial debian release
 
- -- Davy Triponney <davy.triponney@gmail.com>  Tue, 3 Sep 2024 15:20:22 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  Thu, 12 Dec 2024 08:20:22 +0100
 
