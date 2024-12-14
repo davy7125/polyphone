@@ -1,6 +1,7 @@
 /build*
-/lib_*
 /sources
 /private
 /debian
 /fedora
+/macos
+/windows

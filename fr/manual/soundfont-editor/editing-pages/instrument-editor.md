@@ -108,7 +108,7 @@ N'oubliez pas les [outils](manual/soundfont-editor/tools/instrument-tools.md) di
 En particulier l'outil permettant de [paramétrer en fonction des notes](manual/soundfont-editor/tools/instrument-tools.md#doc_global).
 
 
-### Rendre des divisions muettes
+### Rendre des divisions muettes {#doc_solo}
 
 
 À des fins de test, il est possible de rendre muette une division ou de rendre muettes toutes les divisions sauf une dans les tables.

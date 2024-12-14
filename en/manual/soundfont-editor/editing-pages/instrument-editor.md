@@ -108,7 +108,7 @@ Do not forget the [tools](manual/soundfont-editor/tools/instrument-tools.md) ava
 In particular the tool allowing a [key-based configuration](manual/soundfont-editor/tools/instrument-tools.md#doc_global).
 
 
-### Possibility to mute divisions
+### Possibility to mute divisions {#doc_solo}
 
 
 For testing purposes, it is possible to mute a division or mute all divisions but one in the tables.
