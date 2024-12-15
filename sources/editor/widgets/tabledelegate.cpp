@@ -374,6 +374,18 @@ void TableDelegate::getLimits(int numRow, double &min, double &max) const
 {
     // Get min / max raw values of the parameter
     AttributeType champ = _table->getChamp(numRow);
+
+    // Min and max for offset is the combination of coarse + fine offset
+    if (champ == champ_startloopAddrsCoarseOffset || champ == champ_endloopAddrsCoarseOffset ||
+            champ == champ_startAddrsCoarseOffset || champ == champ_endAddrsCoarseOffset ||
+            champ == champ_startloopAddrsOffset || champ == champ_startAddrsOffset ||
+            champ == champ_endloopAddrsOffset || champ == champ_endAddrsOffset)
+    {
+        min = -2147483648;
+        max = 2147483647;
+        return;
+    }
+
     bool isPrst = !_table->isInstrumentLevel();
     int rawMin, rawMax;
     Attribute::getLimit(champ, isPrst, rawMin, rawMax);
