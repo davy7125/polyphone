@@ -120,7 +120,7 @@ polyphone -3 -i <fichier/à/convertir> -d <répertoire/de/destination> -o <nom_d
 
 
 ```
-polyphone -3 -i /adresse/du/fichier.sf3 -c 011
+polyphone -3 -i /adresse/du/fichier.sf3 -c '0|1|1'
 ```
 
 

@@ -119,7 +119,7 @@ polyphone -3 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c
 
 
 ```
-polyphone -3 -i /path/to/file.sf3 -c 011
+polyphone -3 -i /path/to/file.sf3 -c '0|1|1'
 ```
 
 
