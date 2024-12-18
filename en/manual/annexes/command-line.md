@@ -108,11 +108,11 @@ polyphone -3 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c
   This argument is optional, by default this is the same name than the input file.
 
 -c
-: Conversion configuration made of 3 characters. This argument is optional, by default this is “000”.
+: Conversion configuration made of 3 values separated by the “|” character. This argument is optional, by default this is “0|0|0”.
   
-  * The first character is “1” if each preset must be prefixed by its preset number, “0” otherwise.
-  * The second character is “1” if a directory per bank must be created, “0” otherwise.
-  * The third character is “1” if the General MIDI classification must be used to sort presets, “0” otherwise.
+  * The first value is “1” if each preset must be prefixed by its preset number, “0” otherwise.
+  * The second value is “1” if a directory per bank must be created, “0” otherwise.
+  * The third value is “1” if the General MIDI classification must be used to sort presets, “0” otherwise.
 
 
 ### Example
@@ -145,11 +145,11 @@ polyphone -s -i <file/to/read> -c <configuration>
 : Mode “s” is “open Polyphone in synth mode”.
 
 -c
-: Synth configuration. The field consists of 3 fields separated by the “|” character. This argument is optional, by default this is “0|off|off”. These parameters can then be changed via the graphical interface.
+: Synth configuration made of 3 values separated by the “|” character. This argument is optional, by default this is “0|off|off”. These parameters can then be changed via the graphical interface.
   
-  * The first field is the MIDI channel number (between 1 and 16) to be listened to for playing. A value of 0 or “all” to indicates that all channels will be used and processed as one channel. A value of -1 or “each” listens to each channel separately, which is a prerequisite for [playing MIDI files](tutorials/read-midi-file-with-polyphone.md) for instance.
-  * The second field is “off” or “on”, enabling or disabling the selection of multiple presets for playing.
-  * The third field is “off”, “on”, or “toggle”, enabling or disabling the selection of presets by the keys corresponding to the preset number (key 0 activates preset 0, for example).
+  * The first value is the MIDI channel number (between 1 and 16) to be listened to for playing. A value of 0 or “all” to indicates that all channels will be used and processed as one channel. A value of -1 or “each” listens to each channel separately, which is a prerequisite for [playing MIDI files](tutorials/read-midi-file-with-polyphone.md) for instance.
+  * The second value is “off” or “on”, enabling or disabling the selection of multiple presets for playing.
+  * The third value is “off”, “on”, or “toggle”, enabling or disabling the selection of presets by the keys corresponding to the preset number (key 0 activates preset 0, for example).
 
 
 ### Example

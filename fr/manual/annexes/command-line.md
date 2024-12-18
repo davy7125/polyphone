@@ -108,11 +108,11 @@ polyphone -3 -i <fichier/à/convertir> -d <répertoire/de/destination> -o <nom_d
   Cet argument est optionnel&nbsp;: par défaut le nom du fichier d'entrée est utilisé.
 
 -c
-: Configuration de la conversion sur 3 caractères. Cet argument est optionnel&nbsp;: par défaut la valeur utilisée est «&nbsp;000&nbsp;».
+: Configuration de la conversion, composée de 3 valeurs séparées par le caractère «&nbsp;|&nbsp;». Cet argument est optionnel&nbsp;: par défaut la valeur utilisée est «&nbsp;0|0|0&nbsp;».
   
-  * Le premier caractère est «&nbsp;1&nbsp;» si chaque ensemble doit être préfixé par son numéro d'ensemble, «&nbsp;0&nbsp;» sinon.
-  * Le deuxième caractère est «&nbsp;1&nbsp;» si un répertoire par banque doit être créé, «&nbsp;0&nbsp;» sinon.
-  * Le troisième caractère est «&nbsp;1&nbsp;» si la classification General MIDI doit être utilisée pour trier les ensembles, «&nbsp;0&nbsp;» sinon.
+  * La première valeur est «&nbsp;1&nbsp;» si chaque ensemble doit être préfixé par son numéro d'ensemble, «&nbsp;0&nbsp;» sinon.
+  * La deuxième valeur est «&nbsp;1&nbsp;» si un répertoire par banque doit être créé, «&nbsp;0&nbsp;» sinon.
+  * La troisième valeur est «&nbsp;1&nbsp;» si la classification General MIDI doit être utilisée pour trier les ensembles, «&nbsp;0&nbsp;» sinon.
   
 
 
@@ -146,7 +146,7 @@ polyphone -s -i <fichier/à/lire> -c <configuration>
 : Mode «&nbsp;s&nbsp;» est «&nbsp;ouvrir Polyphone en mode synthé&nbsp;».
 
 -c
-: Configuration du synthé. Le champ comprend 3 champs séparés du caractère «&nbsp;|&nbsp;». Cet argument est optionnel&nbsp;: par défaut la valeur utilisée est «&nbsp;0|off|off&nbsp;». L'interface graphique permettra ensuite de changer ces paramètres.
+: Configuration du synthé, composée de 3 valeurs séparées du caractère «&nbsp;|&nbsp;». Cet argument est optionnel&nbsp;: par défaut la valeur utilisée est «&nbsp;0|off|off&nbsp;». L'interface graphique permettra ensuite de changer ces paramètres.
   
   * Le premier champ est le numéro du canal MIDI (entre 1 et 16) à écouter pour jouer. La valeur 0 ou «&nbsp;all&nbsp;» indique que tous les canaux seront utilisés et seront traités comme un seul canal. La valeur -1 ou «&nbsp;each&nbsp;» écoute chaque canal séparément, ce qui constitue un prérequis pour [lire des fichiers MIDI](tutorials/read-midi-file-with-polyphone.md) par exemple.
   * Le deuxième champ est «&nbsp;off&nbsp;» ou «&nbsp;on&nbsp;», rendant possible ou non la sélection de plusieurs ensembles pour jouer.
