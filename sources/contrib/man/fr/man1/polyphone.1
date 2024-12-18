@@ -92,13 +92,13 @@ La configuration est faite avec un caractère indiquant la qualité de la compre
  * 
 .B conversion sfz
 .br
-La configuration est faite de trois caractères. Le premier caractère est '1' si chaque ensemble doit être préfixé par son numéro d'ensemble, '0' sinon. Le deuxième caractère est '1' si un répertoire par banque doit être créé, '0' sinon. Le troisième caractère est '1' si la classification General MIDI doit être utilisée pour trier les ensembles, '0' sinon. Par défaut, c'est '000'.
+La configuration est composée de 3 valeurs séparées d'un '|'. La première valeur est '1' si chaque ensemble doit être préfixé par son numéro d'ensemble, '0' sinon. La deuxième valeur est '1' si un répertoire par banque doit être créé, '0' sinon. La troisième valeur est '1' si la classification General MIDI doit être utilisée pour trier les ensembles, '0' sinon. Par défaut, '0|0|0' est utilisé.
 .br
 .BR
  * 
 .B mode synthétiseur
 .br
-La configuration est composée de 3 parties séparées d'un '/'. La première partie désigne le canal MIDI à écouter, qui peut être une valeur de 1 à 16 ou 'all'. La deuxième partie est 'on' ou 'off' pour rendre possible la lecture de plusieurs ensembles en même temps. La troisième partie est 'on', 'off' ou 'toggle' pour permettre l'activation ou la désactivation des ensembles par les notes les plus basses du clavier.
+La configuration est composée de 3 valeurs séparées d'un '|'. La première valeur désigne le canal MIDI à écouter, qui peut être une valeur de 1 à 16. La valeur 0 ou « all » indique que tous les canaux seront utilisés et seront traités comme un seul canal. La valeur -1 ou « each » écoute chaque canal séparément, ce qui constitue un prérequis pour lire des fichiers MIDI par exemple. La deuxième valeur est 'on' ou 'off' pour rendre possible la lecture de plusieurs ensembles en même temps. La troisième valeur est 'on', 'off' ou 'toggle' pour permettre l'activation ou la désactivation des ensembles par les notes les plus basses du clavier. Par défaut, 'all|off|off' est utilisé.
 .SH EXEMPLES
  * Conversion depuis sfArk vers sf2 :
 .br
@@ -115,13 +115,13 @@ La configuration est composée de 3 parties séparées d'un '/'. La première pa
  * Conversion depuis sf3 vers sfz (sous-répertoire pour la banque et classification GM) :
 .br
 .BR polyphone
--3 -i /chemin/vers/le/fichier.sf3 -c 011
+-3 -i /chemin/vers/le/fichier.sf3 -c '0|1|1'
 .br
 .BR
  * Ouverture de Polyphone en mode synthétiseur en permettant l'usage des touches basse pour la sélection de l'ensemble à jouer avec un clavier MIDI :
 .br
 .BR polyphone
--s -i /chemin/vers/le/fichier.sf2 -c 'all/off/toggle'
+-s -i /chemin/vers/le/fichier.sf2 -c 'all|off|toggle'
 .SH AUTEUR
 Davy Triponney (davy.triponney@gmail.com)
 .br

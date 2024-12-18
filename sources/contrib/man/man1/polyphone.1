@@ -92,13 +92,13 @@ The configuration is made of one character indicating the compression quality. '
  * 
 .B sfz conversion
 .br
-The configuration is made of three characters. The first character is '1' if each preset must be prefixed by its preset number, '0' otherwise. The second character is '1' if a directory per bank must be created, '0' otherwise. The third character is '1' if the general midi classification must be used to sort presets, '0' otherwise. Default is '000'.
+The configuration is made up of 3 values separated by a '|'. The first value is '1' if each preset must be prefixed by its preset number, '0' otherwise. The second value is '1' if a directory per bank must be created, '0' otherwise. The third value is '1' if the general midi classification must be used to sort presets, '0' otherwise. Default is '0|0|0'.
 .br
 .BR
  * 
 .B synthesizer mode
 .br
-The configuration is made up of 3 parts separated by a '/'. The first part specifies the MIDI channel to be listened to, which can be a value from 1 to 16 or 'all'. The second part is 'on' or 'off' to enable playback of several presets at the same time. The third part is 'on', 'off' or 'toggle' to enable presets to be activated or deactivated by the lowest notes on the keyboard.
+The configuration is made up of 3 values separated by a '|'. The first value specifies the MIDI channel to be listened to, which can be a value from 1 to 16. A value of 0 or “all” to indicates that all channels will be used and processed as one channel. A value of -1 or “each” listens to each channel separately, which is a prerequisite for playing MIDI files for instance. The second value is 'on' or 'off' to enable playback of several presets at the same time. The third value is 'on', 'off' or 'toggle' to enable presets to be activated or deactivated by the lowest notes on the keyboard. Default is 'all|off|off'.
 .SH EXAMPLES
  * Conversion from sfArk to sf2:
 .br
@@ -115,12 +115,12 @@ The configuration is made up of 3 parts separated by a '/'. The first part speci
  * Conversion from sf3 to sfz (sub-directories for bank and gm classification):
 .br
 .BR polyphone
--3 -i /path/to/file.sf3 -c 011
+-3 -i /path/to/file.sf3 -c '0|1|1'
 .br
 .BR
  * Open Polyphone in synthesizer mode, allowing use of the bass keys to select the ensemble to be played with a MIDI keyboard:
 .br
 .BR polyphone
--s -i /path/to/file.sf2 -c 'all/off/toggle'
+-s -i /path/to/file.sf2 -c 'all|off|toggle'
 .SH AUTHOR
 Davy Triponney (davy.triponney@gmail.com)

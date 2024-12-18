@@ -34,8 +34,8 @@
  ​<launchable type="desktop-id">io.polyphone.polyphone.desktop</launchable>
  <url type="homepage">https://www.polyphone.io/</url>
  <releases>
-   <release type="stable" version="2.5" date="2024-11-22">
-     <url>https://www.polyphone.io/en/news/version-2-4</url>
+   <release type="stable" version="2.5" date="2024-12-22">
+     <url>https://www.polyphone.io/en/news/version-2-5</url>
    </release>
  </releases>
 </component>
