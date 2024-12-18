@@ -74,7 +74,7 @@ Muet
 : À des fins de test, une division au sein d'un instrument ou d'un ensemble peut être rendue muette. Cette option peut aussi être trouvée dans le menu contextuel de l'[entête des tables](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_solo).
 
 Toujours jouer
-: À des fins de test, un ou plusieurs instruments ou ensembles peut être ajoutés au moment de jouer. Il est ainsi possible de trouver un bon équilibre entre plusieurs instruments ou ensembles jouant simultanément.
+: À l'opposé de la fonction «&nbsp;Muet&nbsp;», un ou plusieurs instruments ou ensembles peuvent être ajoutés au moment de jouer. Il est ainsi possible de trouver un bon équilibre entre plusieurs instruments ou ensembles jouant simultanément.
 
 Rétablir la lecture
 : Annule les effets de “Muet” et “Toujours jouer”.

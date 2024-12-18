@@ -74,7 +74,7 @@ Mute
 : For testing purposes, a division within an instrument or a preset can be muted. This option can also be found in the contextual menu of the [table header](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_solo).
 
 Always play
-: For testing purposes, one or more instruments or presets can be added when playing. It is thus possible to find a good balance between different instruments or presets playing together.
+: Opposite to the “Mute” function, one or more instruments or presets can be added when playing. It is thus possible to find a good balance between different instruments or presets playing together.
 
 Restore playback
 : Cancel the effects of “Mute” and “Always play”.
