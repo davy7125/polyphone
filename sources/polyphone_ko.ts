@@ -9,7 +9,7 @@
         <translation>아직 처리되지 않음</translation>
     </message>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="86"/>
+        <location filename="core/input/abstractinputparser.cpp" line="89"/>
         <source>This file is already open.</source>
         <translation>파일이 이미 열려있습니다.</translation>
     </message>
@@ -1280,12 +1280,12 @@ repository</source>
         <translation>프레셔</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="228"/>
+        <location filename="clavier/controllerarea.cpp" line="225"/>
         <source>on</source>
         <translation>켜기</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="233"/>
+        <location filename="clavier/controllerarea.cpp" line="230"/>
         <source>off</source>
         <translation>끄기</translation>
     </message>
@@ -4936,7 +4936,7 @@ download content</source>
         <translation>저장하지 않음(&amp;N)</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="346"/>
+        <location filename="mainwindow/tabmanager.cpp" line="361"/>
         <source>User area</source>
         <translation>사용자 공간</translation>
     </message>
@@ -4992,67 +4992,67 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ThemeManager</name>
     <message>
-        <location filename="context/thememanager.cpp" line="76"/>
+        <location filename="context/thememanager.cpp" line="80"/>
         <source>Custom</source>
         <translation>사용자 정의</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="464"/>
+        <location filename="context/thememanager.cpp" line="468"/>
         <source>Default</source>
         <translation>기본</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="484"/>
+        <location filename="context/thememanager.cpp" line="488"/>
         <source>Gnome</source>
         <translation>그놈(Gnome)</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="497"/>
+        <location filename="context/thememanager.cpp" line="501"/>
         <source>Dark, blue</source>
         <translation>어두운, 파랑</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="510"/>
+        <location filename="context/thememanager.cpp" line="514"/>
         <source>Dark, orange</source>
         <translation>어두운, 오렌지</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="523"/>
+        <location filename="context/thememanager.cpp" line="527"/>
         <source>Dark, green</source>
         <translation>어두운, 초록</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="536"/>
+        <location filename="context/thememanager.cpp" line="540"/>
         <source>Dark, yellow</source>
         <translation>어두운, 노랑</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="549"/>
+        <location filename="context/thememanager.cpp" line="553"/>
         <source>Aqua</source>
         <translation>아쿠아</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="562"/>
+        <location filename="context/thememanager.cpp" line="566"/>
         <source>Spring</source>
         <translation>봄</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="575"/>
+        <location filename="context/thememanager.cpp" line="579"/>
         <source>Windows 10</source>
         <translation>윈도우즈 10</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="588"/>
+        <location filename="context/thememanager.cpp" line="592"/>
         <source>Ubuntu</source>
         <translation>우분투(Ubuntu)</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="601"/>
+        <location filename="context/thememanager.cpp" line="605"/>
         <source>Good night</source>
         <translation>밤</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="614"/>
+        <location filename="context/thememanager.cpp" line="618"/>
         <source>Pink</source>
         <translation>분홍</translation>
     </message>
@@ -5988,7 +5988,8 @@ Other soundfont editors might display other units.</source>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
-        <source>Crossfade loop</source>
+        <source>Cross-fade loop</source>
+        <oldsource>Crossfade loop</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6774,17 +6775,17 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TopRightWidget</name>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="161"/>
+        <location filename="mainwindow/toprightwidget.ui" line="158"/>
         <source>User area</source>
         <translation>사용자 공간</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="121"/>
+        <location filename="mainwindow/toprightwidget.ui" line="118"/>
         <source>Download status</source>
         <translation>다운로드</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="201"/>
+        <location filename="mainwindow/toprightwidget.ui" line="198"/>
         <source>Main menu</source>
         <translation>메인 메뉴</translation>
     </message>

@@ -9,7 +9,7 @@
         <translation>pas encore traité</translation>
     </message>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="86"/>
+        <location filename="core/input/abstractinputparser.cpp" line="89"/>
         <source>This file is already open.</source>
         <translation>Ce fichier est déjà ouvert.</translation>
     </message>
@@ -1282,12 +1282,12 @@ en ligne</translation>
         <translation>Pression</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="228"/>
+        <location filename="clavier/controllerarea.cpp" line="225"/>
         <source>on</source>
         <translation>on</translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="233"/>
+        <location filename="clavier/controllerarea.cpp" line="230"/>
         <source>off</source>
         <translation>off</translation>
     </message>
@@ -4961,7 +4961,7 @@ de télécharger le contenu</translation>
         <translation>&amp;Quitter sans enregistrer</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="346"/>
+        <location filename="mainwindow/tabmanager.cpp" line="361"/>
         <source>User area</source>
         <translation>Espace utilisateur</translation>
     </message>
@@ -5017,67 +5017,67 @@ D&apos;autres éditeurs de soundfonts pourraient utiliser d&apos;autres unités.
 <context>
     <name>ThemeManager</name>
     <message>
-        <location filename="context/thememanager.cpp" line="76"/>
+        <location filename="context/thememanager.cpp" line="80"/>
         <source>Custom</source>
         <translation>Personnalisées</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="464"/>
+        <location filename="context/thememanager.cpp" line="468"/>
         <source>Default</source>
         <translation>Défaut</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="484"/>
+        <location filename="context/thememanager.cpp" line="488"/>
         <source>Gnome</source>
         <translation>Gnome</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="497"/>
+        <location filename="context/thememanager.cpp" line="501"/>
         <source>Dark, blue</source>
         <translation>Sombre, bleu</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="510"/>
+        <location filename="context/thememanager.cpp" line="514"/>
         <source>Dark, orange</source>
         <translation>Sombre, orange</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="523"/>
+        <location filename="context/thememanager.cpp" line="527"/>
         <source>Dark, green</source>
         <translation>Sombre, vert</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="536"/>
+        <location filename="context/thememanager.cpp" line="540"/>
         <source>Dark, yellow</source>
         <translation>Sombre, jaune</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="549"/>
+        <location filename="context/thememanager.cpp" line="553"/>
         <source>Aqua</source>
         <translation>Aqua</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="562"/>
+        <location filename="context/thememanager.cpp" line="566"/>
         <source>Spring</source>
         <translation>Printemps</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="575"/>
+        <location filename="context/thememanager.cpp" line="579"/>
         <source>Windows 10</source>
         <translation>Windows 10</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="588"/>
+        <location filename="context/thememanager.cpp" line="592"/>
         <source>Ubuntu</source>
         <translation>Ubuntu</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="601"/>
+        <location filename="context/thememanager.cpp" line="605"/>
         <source>Good night</source>
         <translation>Bonne nuit</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="614"/>
+        <location filename="context/thememanager.cpp" line="618"/>
         <source>Pink</source>
         <translation>Rose</translation>
     </message>
@@ -6016,7 +6016,8 @@ D&apos;autres éditeurs de soundfonts pourraient utiliser d&apos;autres unités.
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
-        <source>Crossfade loop</source>
+        <source>Cross-fade loop</source>
+        <oldsource>Crossfade loop</oldsource>
         <translation>Fondu enchaîné</translation>
     </message>
 </context>
@@ -6803,17 +6804,17 @@ D&apos;autres éditeurs de soundfonts pourraient utiliser d&apos;autres unités.
 <context>
     <name>TopRightWidget</name>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="161"/>
+        <location filename="mainwindow/toprightwidget.ui" line="158"/>
         <source>User area</source>
         <translation>Espace utilisateur</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="121"/>
+        <location filename="mainwindow/toprightwidget.ui" line="118"/>
         <source>Download status</source>
         <translation>Status des téléchargements</translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="201"/>
+        <location filename="mainwindow/toprightwidget.ui" line="198"/>
         <source>Main menu</source>
         <translation>Menu principal</translation>
     </message>

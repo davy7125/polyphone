@@ -9,7 +9,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/input/abstractinputparser.cpp" line="86"/>
+        <location filename="core/input/abstractinputparser.cpp" line="89"/>
         <source>This file is already open.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1278,12 +1278,12 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="228"/>
+        <location filename="clavier/controllerarea.cpp" line="225"/>
         <source>on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="clavier/controllerarea.cpp" line="233"/>
+        <location filename="clavier/controllerarea.cpp" line="230"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4917,7 +4917,7 @@ download content</source>
         <translation>保存しない(&amp;N)</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="346"/>
+        <location filename="mainwindow/tabmanager.cpp" line="361"/>
         <source>User area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4971,67 +4971,67 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>ThemeManager</name>
     <message>
-        <location filename="context/thememanager.cpp" line="76"/>
+        <location filename="context/thememanager.cpp" line="80"/>
         <source>Custom</source>
         <translation>カスタム</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="464"/>
+        <location filename="context/thememanager.cpp" line="468"/>
         <source>Default</source>
         <translation>デフォルト</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="484"/>
+        <location filename="context/thememanager.cpp" line="488"/>
         <source>Gnome</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="497"/>
+        <location filename="context/thememanager.cpp" line="501"/>
         <source>Dark, blue</source>
         <translation>ダーク ブルー</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="510"/>
+        <location filename="context/thememanager.cpp" line="514"/>
         <source>Dark, orange</source>
         <translation>ダーク オレンジ</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="523"/>
+        <location filename="context/thememanager.cpp" line="527"/>
         <source>Dark, green</source>
         <translation>ダーク グリーン</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="536"/>
+        <location filename="context/thememanager.cpp" line="540"/>
         <source>Dark, yellow</source>
         <translation>ダーク イエロー</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="549"/>
+        <location filename="context/thememanager.cpp" line="553"/>
         <source>Aqua</source>
         <translation>アクア</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="562"/>
+        <location filename="context/thememanager.cpp" line="566"/>
         <source>Spring</source>
         <translation>春</translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="575"/>
+        <location filename="context/thememanager.cpp" line="579"/>
         <source>Windows 10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="588"/>
+        <location filename="context/thememanager.cpp" line="592"/>
         <source>Ubuntu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="601"/>
+        <location filename="context/thememanager.cpp" line="605"/>
         <source>Good night</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/thememanager.cpp" line="614"/>
+        <location filename="context/thememanager.cpp" line="618"/>
         <source>Pink</source>
         <translation>ピンク</translation>
     </message>
@@ -5967,7 +5967,8 @@ Other soundfont editors might display other units.</source>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
-        <source>Crossfade loop</source>
+        <source>Cross-fade loop</source>
+        <oldsource>Crossfade loop</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6753,17 +6754,17 @@ Other soundfont editors might display other units.</source>
 <context>
     <name>TopRightWidget</name>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="161"/>
+        <location filename="mainwindow/toprightwidget.ui" line="158"/>
         <source>User area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="121"/>
+        <location filename="mainwindow/toprightwidget.ui" line="118"/>
         <source>Download status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="201"/>
+        <location filename="mainwindow/toprightwidget.ui" line="198"/>
         <source>Main menu</source>
         <translation type="unfinished"></translation>
     </message>

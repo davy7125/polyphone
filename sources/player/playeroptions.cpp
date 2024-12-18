@@ -42,11 +42,8 @@ PlayerOptions::PlayerOptions(PlayerOptions * options) :
     }
 }
 
-bool PlayerOptions::parse(QString text)
+bool PlayerOptions::parse(QStringList configurations)
 {
-    // Parse the text
-    QStringList configurations = text.split('|');
-
     // Channel
     if (configurations.length() >= 1)
     {

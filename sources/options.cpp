@@ -141,58 +141,74 @@ void Options::processType2(QString arg)
         _outputFile = arg;
         _currentState = STATE_NONE; // no more output
         break;
-    case STATE_CONFIG:
-        if (_mode == MODE_CONVERSION_TO_SFZ)
+    case STATE_CONFIG: {
+        QStringList configurations = arg.split('|');
+
+        switch (_mode)
         {
-            if (arg.length() == 3)
+        case MODE_CONVERSION_TO_SFZ:
+            if (configurations.count() >= 1)
             {
-                if (arg[0] == '0' || arg[0] == '1')
-                    _sfzPresetPrefix = (arg[0] == '1');
-                else
-                    _error = true;
-
-                if (arg[1] == '0' || arg[1] == '1')
-                    _sfzOneDirPerBank = (arg[1] == '1');
-                else
-                    _error = true;
-
-                if (arg[2] == '0' || arg[2] == '1')
-                    _sfzGeneralMidi = (arg[2] == '1');
-                else
+                if (configurations[0] == "1")
+                    _sfzPresetPrefix = true;
+                else if (configurations[0] != "0")
                     _error = true;
             }
-            else
-                _error = true;
-        }
-        else if (_mode == MODE_CONVERSION_TO_SF3)
-        {
-            if (arg.length() == 1)
+
+            if (configurations.count() >= 2)
             {
-                if (arg[0] == '0')
+                if (configurations[1] == "1")
+                    _sfzOneDirPerBank = true;
+                else if (configurations[1] != "0")
+                    _error = true;
+            }
+
+            if (configurations.count() >= 3)
+            {
+                if (configurations[2] == "1")
+                    _sfzGeneralMidi = true;
+                else if (configurations[2] != "0")
+                    _error = true;
+            }
+
+            if (configurations.count() > 3)
+                _error = true;
+            break;
+        case  MODE_CONVERSION_TO_SF2:
+            if (configurations.count() > 0)
+                _error = true;
+            break;
+        case MODE_CONVERSION_TO_SF3:
+            if (configurations.count() >= 1)
+            {
+                if (configurations[0] == "0")
                     _sf3Quality = 0;
-                else if (arg[0] == '1')
+                else if (configurations[0] == "1")
                     _sf3Quality = 1;
-                else if (arg[0] == '2')
+                else if (configurations[0] == "2")
                     _sf3Quality = 2;
                 else
                     _error = true;
             }
-            else
+
+            if (configurations.count() > 1)
                 _error = true;
-        }
-        else if (_mode == MODE_SYNTHESIZER)
-        {
+            break;
+        case MODE_SYNTHESIZER:
             if (_playerOptions == nullptr)
             {
                 _playerOptions = new PlayerOptions();
-                _error = !_playerOptions->parse(arg);
+                _error = !_playerOptions->parse(configurations);
             }
             else
                 _error = true;
-        }
-        else
+            break;
+        default:
             _error = true;
-        break;
+            break;
+        }
+
+    } break;
     default:
         _error = true;
         break;

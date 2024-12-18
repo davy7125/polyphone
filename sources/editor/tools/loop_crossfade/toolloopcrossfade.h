@@ -58,7 +58,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return tr("Crossfade loop");
+        return tr("Cross-fade loop");
     }
 };
 

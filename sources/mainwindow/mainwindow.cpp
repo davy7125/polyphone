@@ -321,7 +321,7 @@ void MainWindow::openFiles(QString fileNames)
     PlayerOptions playerOptions;
     QStringList split = fileNames.split("||");
     if (split.size() > 1)
-        playerOptions.parse(split[1]);
+        playerOptions.parse(split[1].split('|'));
 
     QStringList files = split[0].split('|', Qt::SkipEmptyParts);
     foreach (QString file, files)

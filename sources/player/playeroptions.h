@@ -32,7 +32,7 @@ class PlayerOptions
 public:
     PlayerOptions(PlayerOptions * options = nullptr);
 
-    bool parse(QString text);
+    bool parse(QStringList configurations);
 
     /// Valid parameters?
     bool isValid() { return _isValid; }

@@ -1,7 +1,7 @@
 polyphone (2.5) unstable; urgency=low
 
   * (new) "play with" feature, for playing several instruments or presets
-  * (new) sample tool for adding a crossfade around loop points
+  * (new) sample tool for adding a cross-fade around loop points
   * (new) tool for creating samples that are a merge of all instruments / samples inside a preset
   * (new) sfz support of trigger "release"
   * (new) mp3, aiff and snd sample formats can be imported
