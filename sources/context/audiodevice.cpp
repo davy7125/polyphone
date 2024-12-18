@@ -48,8 +48,8 @@ QList<AudioDevice::HostInfo> AudioDevice::getAllHosts()
         // Host details
         RtAudio::Api availableApi = apis[i];
         HostInfo hostInfo;
-        hostInfo.identifier = QString(RtAudio::getApiName(availableApi).c_str());
-        hostInfo.name = QString(RtAudio::getApiDisplayName(availableApi).c_str());
+        hostInfo.identifier = QString::fromLatin1(RtAudio::getApiName(availableApi).c_str());
+        hostInfo.name = QString::fromLatin1(RtAudio::getApiDisplayName(availableApi).c_str());
 
         if (availableApi == _currentApi && !_currentDeviceName.isEmpty())
         {
@@ -93,7 +93,7 @@ QList<AudioDevice::HostInfo> AudioDevice::getAllHosts()
                     {
                         // Device details
                         DeviceInfo deviceInfo;
-                        deviceInfo.name = QString(info.name.c_str());
+                        deviceInfo.name = QString::fromLatin1(info.name.c_str());
                         deviceInfo.channelCount = info.outputChannels;
                         deviceInfo.isDefault = info.isDefaultOutput;
                         hostInfo.devices << deviceInfo;
@@ -125,7 +125,7 @@ int AudioDevice::getCurrentDeviceIndex(QList<AudioDevice::HostInfo> hosts, QStri
     int api;
     QString deviceName;
     getApiAndDeviceNameFromConfig(config, api, deviceName);
-    QString hostIdentifier = QString(RtAudio::getApiName((RtAudio::Api)api).c_str());
+    QString hostIdentifier = QString::fromLatin1(RtAudio::getApiName((RtAudio::Api)api).c_str());
 
     int currentIndex = 0;
     int exactMatch = -1;
@@ -249,7 +249,7 @@ void AudioDevice::initAudio()
         }
     }
 
-    // Instanciate an RtAudio object with the selected api
+    // Instantiate an RtAudio object with the selected api
     try {
         _rtAudio = new RtAudio((RtAudio::Api)_currentApi);
     } catch (RtAudioError &error) {
@@ -276,7 +276,7 @@ void AudioDevice::initAudio()
             if (deviceInfo.outputChannels < 2)
                 continue;
 
-            if (QString(deviceInfo.name.c_str()) == _currentDeviceName)
+            if (QString::fromLatin1(deviceInfo.name.c_str()) == _currentDeviceName)
             {
                 selectedDevice = i;
                 sampleRates = deviceInfo.sampleRates;
