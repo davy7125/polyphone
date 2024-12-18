@@ -24,7 +24,7 @@ Si vous avez besoin de plus d'aide, ou si la lecture de ces pages vous rebute, v
 
 Trois manières d'ouvrir une banque de sons (aussi appelée «&nbsp;soundfont&nbsp;» en anglais)&nbsp;:
 
-* un clic sur :guilabel:`Ouvrir banque de sons` ouvre un navigateur de fichiers, les fichiers sélectionnables ayant l'extension sf2, sf3, sfArk ou sfz (les différents formats sont décrits [ici](manual/annexes/the-different-soundfont-formats.md))&nbsp;;
+* un clic sur :guilabel:`Ouvrir banque de sons` ouvre un navigateur de fichiers, les fichiers sélectionnables ayant l'extension :file:`.sf2`, :file:`.sf3`, :file:`.sfArk`, :file:`.sfz` ou :file:`.organ` (les différents formats sont décrits [ici](manual/annexes/the-different-soundfont-formats.md))&nbsp;;
 * un clic sur :guilabel:`Nouvelle banque de sons` ouvre une banque de sons vide, tout devant être fait à partir de zéro&nbsp;;
 * un double-clic sur une banque de sons de l'historique la ré-ouvre.
 

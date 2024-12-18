@@ -12,7 +12,7 @@ Nouveau
   Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`N`.
 
 Ouvrir…
-: Ouvre un fichier [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) ou [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark).
+: Ouvre un fichier [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [.sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) ou [.organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
   Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`O`.
 
 

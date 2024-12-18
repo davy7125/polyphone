@@ -142,8 +142,10 @@ polyphone -s -i <fichier/à/lire> -c <configuration>
 : Mode «&nbsp;s&nbsp;» est «&nbsp;ouvrir Polyphone en mode synthé&nbsp;».
 
 -c
-: Configuration du synthé. Le champ comprend 3 champs séparés du caractère «&nbsp;|&nbsp;». Le premier champ est le numéro du canal MIDI (entre 1 et 16) à écouter pour jouer, ou 0 pour indiquer que tous les canaux seront utilisés. Le deuxième champ est «&nbsp;off&nbsp;» ou «&nbsp;on&nbsp;», rendant possible ou non la sélection de plusieurs ensembles pour jouer. Le troisième champ est «&nbsp;off&nbsp;», «&nbsp;on&nbsp;», ou «&nbsp;toggle&nbsp;», autorisant ou non la sélection des ensembles par les touches correspondant au numéro de l'ensemble (la touche 0 permettant d'activer par exemple l'ensemble 0).
-  Cet argument est optionnel&nbsp;: par défaut la valeur utilisée est «&nbsp;0|off|off&nbsp;». L'interface graphique permettra ensuite de changer ces paramètres.
+: Configuration du synthé. Le champ comprend 3 champs séparés du caractère «&nbsp;|&nbsp;». Cet argument est optionnel&nbsp;: par défaut la valeur utilisée est «&nbsp;0|off|off&nbsp;». L'interface graphique permettra ensuite de changer ces paramètres.
+  * Le premier champ est le numéro du canal MIDI (entre 1 et 16) à écouter pour jouer, ou 0 pour indiquer que tous les canaux seront utilisés.
+  * Le deuxième champ est «&nbsp;off&nbsp;» ou «&nbsp;on&nbsp;», rendant possible ou non la sélection de plusieurs ensembles pour jouer.
+  * Le troisième champ est «&nbsp;off&nbsp;», «&nbsp;on&nbsp;», ou «&nbsp;toggle&nbsp;», autorisant ou non la sélection des ensembles par les touches correspondant au numéro de l'ensemble (la touche 0 permettant d'activer par exemple l'ensemble 0).
 
 
 ### Exemple

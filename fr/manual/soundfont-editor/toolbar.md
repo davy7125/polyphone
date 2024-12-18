@@ -16,7 +16,7 @@ Les éléments dans la partie gauche de la barre d'outils présentent des foncti
 
 ![nouvel échantillon](images/toolbar_sample.png "new sample"){.inline} Nouvel échantillon
 : Ajoute de nouveaux [échantillons](manual/soundfont-editor/editing-pages/sample-editor.md) à la banque de sons.
-  Une fenêtre de dialogue s'affiche pour sélectionner les fichiers audio (les fichiers :file:`.wav` et :file:`.flac` peuvent être importés).
+  Une fenêtre de dialogue s'affiche pour sélectionner les fichiers audio (les fichiers :file:`.wav`, :file:`.flac`, :file:`.mp3`, :file:`.ogg`, :file:`.aiff` et :file:`.snd` peuvent être importés).
 
 ![nouvel instrument](images/toolbar_instrument.png "new instrument"){.inline} Nouvel instrument
 : Ajoute un nouvel [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md).

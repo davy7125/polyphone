@@ -16,7 +16,7 @@ The elements in the left part of the toolbar are for common editing functions:
 
 ![new sample](images/toolbar_sample.png "new sample"){.inline} New sample
 : Add new [samples](manual/soundfont-editor/editing-pages/sample-editor.md) to the soundfont.
-  A dialog will be displayed for selecting audio files (:file:`.wav` and :file:`.flac` files can be imported).
+  A dialog will be displayed for selecting audio files (:file:`.wav`, :file:`.flac`, :file:`.mp3`, :file:`.ogg`, :file:`.aiff` and :file:`.snd` files can be imported).
 
 ![new instrument](images/toolbar_instrument.png "new instrument"){.inline} New instrument
 : Create a new [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md).

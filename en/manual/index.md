@@ -24,7 +24,7 @@ The first screen of Polyphone is basically made of 3 parts:
 
 Three ways for opening a soundfont:
 
-* a click on :guilabel:`Open soundfont` opens a file browser, the allowed file to select having the extension sf2, sf3, sfArk or sfz (the different formats are described [here](manual/annexes/the-different-soundfont-formats.md));
+* a click on :guilabel:`Open soundfont` opens a file browser, the allowed file to select having the extension :file:`.sf2`, :file:`.sf3`, :file:`.sfArk`, :file:`.sfz` or :file:`.organ` (the different formats are described [here](manual/annexes/the-different-soundfont-formats.md));
 * a click on :guilabel:`New soundfont` opens an empty soundfont, everything is to be done from scratch;
 * a double-click on a soundfont from the history re-open it.
 

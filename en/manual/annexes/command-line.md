@@ -142,8 +142,10 @@ polyphone -s -i <file/to/read> -c <configuration>
 : Mode “s” is “open Polyphone in synth mode”.
 
 -c
-: Synth configuration. The field consists of 3 fields separated by the “|” character. The first field is the MIDI channel number (between 1 and 16) to be listened to for playing, or 0 to indicate that all channels will be used. The second field is “off” or “on”, enabling or disabling the selection of multiple presets for playing. The third field is “off”, “on”, or “toggle”, enabling or disabling the selection of presets by the keys corresponding to the preset number (key 0 activates preset 0, for example).
-  This argument is optional, by default this is “0|off|off”. These parameters can then be changed via the graphical interface.
+: Synth configuration. The field consists of 3 fields separated by the “|” character. This argument is optional, by default this is “0|off|off”. These parameters can then be changed via the graphical interface.
+  * The first field is the MIDI channel number (between 1 and 16) to be listened to for playing, or 0 to indicate that all channels will be used.
+  * The second field is “off” or “on”, enabling or disabling the selection of multiple presets for playing.
+  * The third field is “off”, “on”, or “toggle”, enabling or disabling the selection of presets by the keys corresponding to the preset number (key 0 activates preset 0, for example).
 
 
 ### Example
