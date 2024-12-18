@@ -68,8 +68,8 @@ Parameters at the instrument level can override or offset the parameters defined
 With this tool, it is possible to fix or complete the sample parameters with what is defined in the instruments using these samples:
 
 * modifying the sample root key with the override defined at the instrument level,
-* shifting the sample root key with the "Tuning (semitones)" parameter,
-* shifting the sample pitch correcting with the "Tuning (cents)" parameter,
+* shifting the sample root key with the “Tuning (semitones)” parameter,
+* shifting the sample pitch correcting with the “Tuning (cents)” parameter,
 * defining the sample loop start and end with the loop offset parameters.
 
 ![Tool for loading a parameter from the instruments](images/tool_load_from_instruments.png "Tool for loading a parameter from the instruments")
@@ -103,7 +103,7 @@ After having selected a destination directory, all selected samples will be expo
 The software seeks two positions in the sample, distant and suitable for creating a loop.
 If needed, a short sound segment is copied with a cross-fade so that the transition at the join location is as smooth as possible.
 
-If it fails, a warning message appears indicating that no loop can be found.
+If it fails, a warning message appears indicating that no loops can be found.
 
 **Warning:** This tool modifies the original sample.
 Modifications can be undone via the “[undo](manual/soundfont-editor/toolbar.md#doc_edit)” function, but if the file is saved and Polyphone is closed there is no way to step back.
@@ -116,9 +116,9 @@ To hear it, you must select ![loop on](images/loop_on.png "loop on"){.inline} in
 
 ### Cross-fade loop {#doc_crossfadeloop}
 
-The crossfade tool can be seen as the manual version of the [auto loop tool](#doc_autoloop). First, you need to position the start and end of the loop in the graphic (WAV display area) around a stable area. Then, this tool creates a loop from theses positions by applying a cross-fade whose duration is configurable. Everything is therefore configurable but in return the search for the start and end of the loop must be meticulous:
+The cross-fade tool can be seen as the manual version of the [auto loop tool](#doc_autoloop). First, you need to position the start and end of the loop in the graphic (WAV display area) around a stable area. Then, this tool creates a loop from theses positions by applying a cross-fade whose duration is configurable. Everything is therefore configurable but care must be taken when searching for the start and end of the loop:
 
-* the harmonics of the sound must match so as not to hear a scratched record effect during the transition,
+* at both positions, the harmonics of the sound must match so as not to hear a scratched vinyl record effect during the transition,
 * the phases of the different harmonics must also match so as not to hear a frequency cancellation during the cross-fade, which strongly alters the timbre of an instrument,
 * as much as possible, the end of the loop must be far from the start to avoid a sound that is too synthetic.
 

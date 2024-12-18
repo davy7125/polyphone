@@ -95,9 +95,9 @@ On the right is shown the list of dominant peaks with the following information:
 From these data an estimate of the pitch of the sound is made.
 This estimate can be used for tuning.
 
-A right-click on the graph opens a contextual menu that allows you to:
+A right click on the graph opens a contextual menu that allows you to:
 
-* export the graph into a png image,
+* export the graph into a .png image,
 * show the list of all peaks and a button for exporting this list into a .csv file.
 
 ![Show peak frequencies](images/tool_show_peak_frequencies.png "Show peak frequencies")

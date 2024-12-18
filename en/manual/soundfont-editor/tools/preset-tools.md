@@ -55,7 +55,7 @@ Same tool than “[Division duplication](manual/soundfont-editor/tools/instrumen
 
 In the case where a preset calls several instruments and samples simultaneously when a key is struck, this tool will merge, for each note, all the samples played. The result is a new preset that plays only one sample per key, thus reducing the CPU load required to run the preset.
 
-The options defined in the image below will make the tool simulate every 3 notes a 5-second key press. The audio recording will be in stereo and the release will not be recorded. The samples thus created will then be looped using the [auto-loop tool](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) and the instrument containing all these samples will be named "Cymbale III".
+The options defined in the image below will make the tool simulate every 3 notes a 5-second key press. The audio recording will be in stereo and the release will not be recorded. The samples thus created will then be looped using the [auto-loop tool](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) and the instrument containing all these samples will be named “Cymbale III”.
 
 **Note:** using the auto loop option will remove the release part and slighly decrease the sustained duration of each sample.
 

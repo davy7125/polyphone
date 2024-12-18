@@ -9,7 +9,7 @@ Quand au moins un échantillon est sélectionné dans l'[arborescence](manual/so
 L'utilisation d'outils pour plusieurs échantillons simultanément est possible (avec une sélection multiple).
 
 
-## Boucle / lecture
+## Boucle / lecture {#doc_cat_loop_playback}
 
 
 ### Ajuster à la fin de boucle {#doc_trimloop}
@@ -50,8 +50,8 @@ Tout silence au début de l'échantillon est éliminé, réduisant le temps avan
 
 L'outil de fondu enchaîné peut être vu comme la version manuelle de l'[outil de bouclage automatique](#doc_autoloop). Tout d'abord, vous devez positionner le début et la fin de la boucle autour d'une zone stable dans le graphique présentant l'onde sonore. Ensuite, cet outil crée une boucle à partir de ces positions en appliquant un fondu enchaîné dont la durée est paramétrable. Tout est donc configurable mais en contrepartie la recherche du début et de la fin de la boucle doit être minutieuse&nbsp;:
 
-* les harmoniques du son doivent correspondre pour ne pas entendre en effet de disque rayé lors de la transition,
-* les phases des différentes harmoniques doivent correspondre également pour ne pas entendre d'annulation de fréquence pendant le fondu, altérant fortement le timbre d'un instrument,
+* aux 2 positions, les harmoniques du son doivent correspondre pour ne pas entendre un effet de disque rayé lors de la transition,
+* les phases des différentes harmoniques doivent correspondre également pour ne pas entendre d'annulations de fréquence pendant le fondu, altérant fortement le timbre d'un instrument,
 * autant que possible, la fin de la boucle doit être éloigné du début pour éviter un son trop synthétique.
 
 Un conseil est de se concentrer sur les positions où l'onde croise l'axe des x (valeur 0).
