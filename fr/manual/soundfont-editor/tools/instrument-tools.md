@@ -212,7 +212,7 @@ Et <a href="files/chord_done.mp3" download>après</a>&nbsp;:
 
 ![](files/chord_done.mp3)
 
-Un fichier .sf2 d'exemple, se basant sur une flûte, peut être téléchargé <a href="files/chords.sf2" download>ici</a>.
+Un exemple de soundfont contenant un son de flûte et sa transformation peut être téléchargé <a href="files/chords.sf2" download>ici</a>.
 
 
 ### Dupliquer les divisions {#doc_division}

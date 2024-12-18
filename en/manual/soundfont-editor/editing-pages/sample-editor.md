@@ -82,6 +82,9 @@ Via a multiple selection in the [tree](manual/soundfont-editor/tree.md), several
 
 
 The frequency analysis includes a Fourier transform (graph showing the intensity of frequencies contained in the signal).
+
+![Fourier graph](images/fourier_graph.png "Fourier graph")
+
 On the right is shown the list of dominant peaks with the following information:
 
 * ratio between the peak intensity and the intensity of the maximum peak,
@@ -92,11 +95,12 @@ On the right is shown the list of dominant peaks with the following information:
 From these data an estimate of the pitch of the sound is made.
 This estimate can be used for tuning.
 
-An export of the graph into a png image is possible by using the contextual menu of the graph (right click).
-A [tool](manual/soundfont-editor/tools/sample-tools.md#doc_peakfrequencies) is also available to export peak information of all samples.
+A right-click on the graph opens a contextual menu that allows you to:
 
+* export the graph into a png image,
+* show the list of all peaks and a button for exporting this list into a .csv file.
 
-![Fourier graph](images/fourier_graph.png "Fourier graph")
+![Show peak frequencies](images/tool_show_peak_frequencies.png "Show peak frequencies")
 
 
 ## Equalizer {#doc_eq}

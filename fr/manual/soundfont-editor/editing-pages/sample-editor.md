@@ -82,6 +82,9 @@ Grâce à une sélection multiple dans l'[arborescence](manual/soundfont-editor/
 
 
 L'analyse fréquentielle inclut une transformée de Fourier (graphique présentant l'intensité des fréquences contenues dans le signal).
+
+![Graphique de Fourier](images/fourier_graph.png "Graphique de Fourier")
+
 La liste des pics dominants est affichée sur la droite, contenant les informations suivantes&nbsp;:
 
 * ratio entre l'intensité du pic courant et l'intensité du plus haut pic,
@@ -92,11 +95,12 @@ La liste des pics dominants est affichée sur la droite, contenant les informati
 À partir de ces données, une estimation de la hauteur de note de l'échantillon est effectué.
 Cette estimation peut être utilisée pour l'accordage.
 
-Un export du graphique dans une image .png est possible en utilisant le menu contextuel du graphique (clic droit).
-Un [outil](manual/soundfont-editor/tools/sample-tools.md#doc_peakfrequencies) est également disponible pour exporter les informations sur les pics de tous les échantillons.
+Un clic droit sur le graphique ouvre un menu contextuel qui permet&nbsp;:
 
+* l'export du graphique dans une image .png,
+* l'affichage de la liste de tous les pics avec la possibilité d'exporter l'ensemble dans un fichier .csv.
 
-![Graphique de Fourier](images/fourier_graph.png "Graphique de Fourier")
+![Pics de fréquences](images/tool_show_peak_frequencies.png "Pics de fréquences")
 
 
 ## Égaliseur {#doc_eq}
