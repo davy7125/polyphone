@@ -19,7 +19,7 @@ polyphone (2.5) unstable; urgency=low
   * (fix) sfz attenuation export
   * (fix) finding root keys of very short loops
 
- -- Davy Triponney <davy.triponney@gmail.com>  Wed, 4 Dec 2024 14:10:12 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  Sun, 22 Dec 2024 09:14:36 +0100
   
 
 polyphone (2.4) UNRELEASED; urgency=low

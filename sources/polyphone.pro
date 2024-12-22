@@ -23,8 +23,8 @@ DEFINES += USE_LOCAL_RTAUDIO
 
 # Polyphone version
 DEFINES += SOFT_VERSION=\\\"2.5.0\\\"
-DEFINES += IDENTIFIER=\\\"beta\\\"
-DEFINES += CURRENT_YEAR=\\\"2024\\\"
+DEFINES += IDENTIFIER=\\\"\\\"
+DEFINES += CURRENT_YEAR=\\\"2025\\\"
 
 # List to be completed if other translations are desired
 # Format: polyphone_XX.ts, XX being the language code
