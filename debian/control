@@ -1,7 +1,7 @@
 Source: polyphone
 Section: sound
 Priority: optional
-Maintainer: Davy Triponney <davy.triponney@gmail.com>
+Maintainer: Davy Triponney <contact@polyphone.io>
 Build-Depends:
  alsa-utils,
  debhelper (>= 9.0.0),
