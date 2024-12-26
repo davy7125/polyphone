@@ -1,7 +1,7 @@
 ![logo](logo.png "logo")
 # Polyphone
 
-Polyphone is an multiplatform and open-source soundfont editor for creating musical instruments.
+Polyphone is a multiplatform and open-source soundfont editor for creating musical instruments.
 
 ### Features
 
