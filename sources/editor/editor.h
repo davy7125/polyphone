@@ -53,6 +53,9 @@ public:
     bool processBendSensitivityChanged(int channel, float semitones) override { Q_UNUSED(channel); Q_UNUSED(semitones); return false; }
     bool processProgramChanged(int channel, quint16 bank, quint8 preset) override { Q_UNUSED(channel); Q_UNUSED(bank); Q_UNUSED(preset); return false; }
 
+signals:
+    void processKeyMainThread(int channel, int key, int vel);
+
 protected:
     void showEvent(QShowEvent* event) override;
     void tabInitializing(QString filename) override;
@@ -63,6 +66,7 @@ protected:
     DialogKeyboard * _dialogKeyboard;
 
 private slots:
+    void onProcessKeyMainThread(int channel, int key, int vel);
     void onSelectionChanged(IdList ids);
     void displayOptionChanged(int displayOption);
     void customizeKeyboard();

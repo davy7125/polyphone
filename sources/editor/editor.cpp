@@ -117,6 +117,7 @@ Editor::Editor(DialogKeyboard *dialogKeyboard) : Tab(nullptr),
     connect(SoundfontManager::getInstance(), SIGNAL(parameterForCustomizingKeyboardChanged()), this, SLOT(customizeKeyboard()));
     connect(SoundfontManager::getInstance(), SIGNAL(editingDone(QString, QList<int>)), this, SLOT(onEditingDone(QString, QList<int>)));
     connect(SoundfontManager::getInstance(), SIGNAL(errorEncountered(QString)), this, SLOT(onErrorEncountered(QString)));
+    connect(this, SIGNAL(processKeyMainThread(int,int,int)), this, SLOT(onProcessKeyMainThread(int,int,int)));
 }
 
 Editor::~Editor()
@@ -496,14 +497,8 @@ bool Editor::processKey(int channel, int key, int vel)
     if (!this->isVisible())
         return false;
 
-    // Inner page
-    Page * page = _pageSelector->getLastPage(_currentElementType);
-    if (page != nullptr)
-    {
-        // The signal has possibly been caught
-        if (page->onKeyPlayed(key, vel) && vel > 0)
-            return false;
-    }
+    // GUI thread
+    processKeyMainThread(channel, key, vel);
 
     // SAMPLE
 
@@ -514,14 +509,42 @@ bool Editor::processKey(int channel, int key, int vel)
     // INSTRUMENT
 
     ids = _currentIds.getSelectedIds(elementInst);
-    SoundfontManager * sf2 = SoundfontManager::getInstance();
     if (ids.count() == 1)
     {
         if (vel > 0)
             ContextManager::audio()->getSynth()->play(ids[0], -1, key, vel);
         else
             ContextManager::audio()->getSynth()->play(EltID(elementSf2, ids[0].indexSf2), -1, key, 0);
+    }
 
+    // PRESET
+    ids = _currentIds.getSelectedIds(elementPrst);
+    if (ids.count() == 1)
+    {
+        if (vel > 0)
+            ContextManager::audio()->getSynth()->play(ids[0], -1, key, vel);
+        else
+            ContextManager::audio()->getSynth()->play(EltID(elementSf2, ids[0].indexSf2), -1, key, 0);
+    }
+
+    return false;
+}
+
+void Editor::onProcessKeyMainThread(int channel, int key, int vel)
+{
+    Q_UNUSED(channel)
+
+    // Inner page
+    Page * page = _pageSelector->getLastPage(_currentElementType);
+    if (page != nullptr)
+        page->onKeyPlayed(key, vel);
+
+    // INSTRUMENT
+
+    IdList ids = _currentIds.getSelectedIds(elementInst);
+    SoundfontManager * sf2 = SoundfontManager::getInstance();
+    if (ids.count() == 1)
+    {
         if (vel > 0)
         {
             // Emphasize the related ranges
@@ -588,14 +611,10 @@ bool Editor::processKey(int channel, int key, int vel)
     }
 
     // PRESET
+
     ids = _currentIds.getSelectedIds(elementPrst);
     if (ids.count() == 1)
     {
-        if (vel > 0)
-            ContextManager::audio()->getSynth()->play(ids[0], -1, key, vel);
-        else
-            ContextManager::audio()->getSynth()->play(EltID(elementSf2, ids[0].indexSf2), -1, key, 0);
-
         // Possibly update the current selection
         if (vel > 0 && (QApplication::queryKeyboardModifiers() & Qt::ControlModifier) != 0)
         {
@@ -654,6 +673,4 @@ bool Editor::processKey(int channel, int key, int vel)
                 ui->treeView->onSelectionChanged(currentIds);
         }
     }
-
-    return false;
 }

@@ -988,7 +988,7 @@ int PageTable::limit(int iVal, AttributeType champ, EltID id)
     return ret;
 }
 
-bool PageTable::keyPlayedInternal(int key, int velocity)
+void PageTable::keyPlayedInternal(int key, int velocity)
 {
     // Visualization on the table
 
@@ -1052,8 +1052,6 @@ bool PageTable::keyPlayedInternal(int key, int velocity)
             }
         }
     }
-
-    return false;
 }
 
 bool PageTable::isPlayingInInst(int key, int vel, EltID idInst)

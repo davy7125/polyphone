@@ -491,7 +491,6 @@ void PianoScene::resetCustomization(int key, PianoKeybd::CustomizationType type)
     refreshKeys();
 }
 
-
 void PianoScene::triggerGlowEffect()
 {
     PianoKey::setGlowEffect(1);

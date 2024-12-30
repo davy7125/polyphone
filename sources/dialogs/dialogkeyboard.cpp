@@ -63,6 +63,7 @@ DialogKeyboard::DialogKeyboard(QWidget *parent) :
 
     // Connections for displaying the current note and velocity
     connect(ui->keyboard, SIGNAL(mouseOver(int,int)), this, SLOT(onMouseHover(int,int)));
+    connect(this, SIGNAL(processKeyMainThread(int,int,int)), this, SLOT(onProcessKeyMainThread(int,int,int)));
 
     // Visibility of the control area
     updateControlAreaVisibility();
@@ -217,8 +218,14 @@ void DialogKeyboard::keyPressEvent(QKeyEvent * event)
 
 bool DialogKeyboard::processKey(int channel, int key, int vel)
 {
-    if (channel != -1)
-        return false;
+    if (channel == -1)
+        emit processKeyMainThread(channel, key, vel);
+    return false;
+}
+
+void DialogKeyboard::onProcessKeyMainThread(int channel, int key, int vel)
+{
+    Q_UNUSED(channel)
 
     if (key >= 0 && key <= 127)
     {
@@ -244,7 +251,6 @@ bool DialogKeyboard::processKey(int channel, int key, int vel)
     }
 
     displayKeyInfo();
-    return false;
 }
 
 bool DialogKeyboard::processPolyPressureChanged(int channel, int key, int pressure)
