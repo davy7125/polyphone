@@ -123,7 +123,7 @@ typedef enum
     champ_son = 156,
     champ_wBpsInit = 157,
     champ_wBpsSave = 158,
-    champ_wChannel = 159,   // current chanel
+    champ_wChannel = 159,   // current channel
     champ_wChannels = 160,  // nb canaux total
 
     champ_filenameInitial = 163,   // QString (sf2)

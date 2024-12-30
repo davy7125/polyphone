@@ -43,7 +43,7 @@ public:
     QModelIndex mapFromSource(const QModelIndex &sourceIndex) const override;
     QVariant data(const QModelIndex &proxyIndex, int role = Qt::DisplayRole) const override;
 
-protected:
+private:
     int getPresetId(const QModelIndex &index) const;
 
     int _indexSf2;

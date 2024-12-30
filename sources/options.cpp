@@ -54,6 +54,9 @@ Options::Options(int argc, char *argv[]) :
     // Argument processing
     foreach (QString arg, args)
     {
+        if (arg.isEmpty())
+            continue;
+
         if (arg[0] == '-')
             processType1(arg);
         else

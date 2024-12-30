@@ -96,7 +96,7 @@ void SampleWriterWav::write(Sound *leftSound, Sound *rightSound)
     quint32 dwLength = channel1.size();
     if (dwLength < (unsigned)channel2.size())
     {
-        // On complète chanel1
+        // On complète channel1
         QByteArray baTemp;
         baTemp.resize(channel2.size() - dwLength);
         baTemp.fill(0);
@@ -105,7 +105,7 @@ void SampleWriterWav::write(Sound *leftSound, Sound *rightSound)
     }
     else if (dwLength > (unsigned)channel2.size())
     {
-        // On complète chanel2
+        // On complète channel2
         QByteArray baTemp;
         baTemp.resize(dwLength - channel2.size());
         baTemp.fill(0);
