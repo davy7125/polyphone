@@ -25,7 +25,7 @@ sudo dnf install qt-creator qt5-qtsvg-devel qt5-qttools-devel
 Install the following dependencies (if you have :program:`Synaptic` installed you could alternatively use it for installation):
 
 ```
-sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel rtaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel rtmidi-devel stk-devel
+sudo dnf install alsa-lib-devel jack-audio-connection-kit-devel rtaudio-devel zlib-devel libogg-devel flac-devel libvorbis-devel glib2-devel openssl-devel rtmidi-devel stk-devel libsndfile-devel
 ```
 
 
