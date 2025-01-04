@@ -364,8 +364,19 @@ void SoundFont::readVersion(sfVersionTag * v)
 char* SoundFont::readString(int n)
 {
     char data[2500];
+    int skip = 0;
+    if (n > 2500)
+    {
+        skip = n - 2500;
+        n = 2500;
+    }
     if (file->read((char*)data, n) != n)
         throw(QString("unexpected end of file\n"));
+    if (skip > 0)
+    {
+        if (file->skip(skip) != skip)
+            throw(QString("unexpected end of file\n"));
+    }
     if (data[n-1] != 0)
         data[n] = 0;
     return strdup(data);
