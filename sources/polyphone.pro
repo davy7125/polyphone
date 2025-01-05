@@ -121,7 +121,7 @@ unix:!macx {
 }
 macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.13
-    QMAKE_MAC_SDK = macosx13.1
+    QMAKE_MAC_SDK = macosx14.4
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __MACOSX_CORE__ TARGET_OS_IPHONE=0
     INCLUDEPATH += ../macos/include
