@@ -110,8 +110,11 @@ void Player::tabInitialized(int indexSf2)
     // Display the player controls
     ui->stackedMain->setCurrentWidget(ui->pagePlay);
 
-    // Select the first bank
-    ui->listBank->setCurrentIndex(ui->listBank->model()->index(0, 0));
+    // Select bank 128 if it exists and if the current channel is 9, or select the first bank
+    if (_playerOptions->playerChannel() == 9 && _bankPositionByBankNumber[128] != -1)
+        ui->listBank->setCurrentIndex(ui->listBank->model()->index(_bankPositionByBankNumber[128], 0));
+    else
+        ui->listBank->setCurrentIndex(ui->listBank->model()->index(0, 0));
 
     _initializing = false;
 
