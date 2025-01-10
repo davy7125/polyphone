@@ -1,5 +1,6 @@
+%global source_date_epoch_from_changelog 0
 Name:           polyphone
-Version:        2.4.0
+Version:        2.5
 Release:        1%{?dist}
 Summary:        Soundfont editor
 License:        GPLv3+
@@ -50,11 +51,11 @@ mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_datadir}/icons
 mkdir -p %{buildroot}%{_datadir}/mime/packages
 mkdir -p %{buildroot}%{_docdir}/%{name}
-install -p -m 755 polyphone %{buildroot}%{_bindir}
-install -p -m 644 polyphone.png %{buildroot}%{_datadir}/icons
-install -p -m 644 ../sources/contrib/polyphone.xml %{buildroot}%{_datadir}/mime/packages/polyphone.xml
-install -p -m 644 ../sources/changelog %{buildroot}%{_docdir}/%{name}
-desktop-file-install --vendor="" --dir=%{buildroot}%{_datadir}/applications/ ../sources/contrib/io.polyphone.polyphone.desktop
+install -p -m 755 ../polyphone %{buildroot}%{_bindir}
+install -p -m 644 ../polyphone.png %{buildroot}%{_datadir}/icons
+install -p -m 644 ../../sources/contrib/polyphone.xml %{buildroot}%{_datadir}/mime/packages/polyphone.xml
+install -p -m 644 ../../sources/changelog %{buildroot}%{_docdir}/%{name}
+desktop-file-install --vendor="" --dir=%{buildroot}%{_datadir}/applications/ ../../sources/contrib/io.polyphone.polyphone.desktop
 
 %post
 # icons
@@ -78,11 +79,12 @@ update-mime-database %{_datadir}/mime &> /dev/null || :
 update-desktop-database &> /dev/null || :
 
 %files
-%license ../sources/LICENSE.txt
-%doc ../sources/contrib/man/man1/polyphone.1
-%doc ../sources/contrib/man/fr/man1/polyphone.1
+%license ../../sources/LICENSE.txt
+%doc ../../sources/contrib/man/man1/polyphone.1
+%doc ../../sources/contrib/man/fr/man1/polyphone.1
 %{_bindir}/%{name}
 %{_docdir}/%{name}
 %{_datadir}/applications/io.polyphone.polyphone.desktop
 %{_datadir}/icons/polyphone.png
 %{_datadir}/mime/packages/polyphone.xml
+

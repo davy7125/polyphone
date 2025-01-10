@@ -8,5 +8,5 @@ set -e
 # A RPM package will appear in fedora/x86_64
 
 cd fedora
-fedpkg --release f40 local
+fedpkg --release f41 local
 cd ..
