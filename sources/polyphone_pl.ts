@@ -1557,7 +1557,7 @@ online</translation>
         <location filename="dialogs/dialog_about.cpp" line="82"/>
         <source>Spessasus</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>Spessasus</translation>
     </message>
 </context>
 <context>
@@ -3640,7 +3640,8 @@ to display its division ranges</source>
     <message>
         <location filename="player/player.cpp" line="50"/>
         <source>MIDI panic</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>&quot;MIDI Panic&quot; in polish does not make any sense, so I&apos;ve translated it to &quot;Mute Everything&quot;</translatorcomment>
+        <translation>Wycisz wszystko</translation>
     </message>
     <message>
         <location filename="player/player.cpp" line="51"/>
@@ -3995,7 +3996,7 @@ Obydwa przedziały muszą mieć takie same zakresy klawiszy i sił klawiszy.</tr
     <message>
         <location filename="core/input/sf/inputsf.h" line="35"/>
         <source>Soundfont files</source>
-        <translation type="unfinished"></translation>
+        <translation>Pliki SoundFont</translation>
     </message>
 </context>
 <context>
@@ -5086,7 +5087,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="47"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Pętla / Odtwarzanie</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="65"/>
@@ -5210,7 +5211,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Przetwarzanie próbek</translation>
+        <translation>Przetwarzanie próbek</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="61"/>
@@ -5541,7 +5542,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="48"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Przetwarzanie próbek</translation>
+        <translation>Przetwarzanie próbek</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="66"/>
@@ -5655,7 +5656,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Przetwarzanie próbek</translation>
+        <translation>Przetwarzanie próbek</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
@@ -5977,13 +5978,13 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Pętla / przetwarzanie</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
         <source>Cross-fade loop</source>
         <oldsource>Crossfade loop</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Płynne przejście pętli</translation>
     </message>
 </context>
 <context>
@@ -5991,23 +5992,23 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="20"/>
         <source>Crossfade duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas trwania płynnego przejścia</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="29"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="49"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Anuluj</translation>
+        <translation>&amp;Anuluj</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="58"/>
         <source> ms</source>
         <comment>Unit for milliseconds</comment>
-        <translation type="unfinished"></translation>
+        <translation> ms</translation>
     </message>
 </context>
 <context>
@@ -6015,17 +6016,17 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.cpp" line="66"/>
         <source>The preset doesn&apos;t trigger any samples.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ten preset nie wywołuje żadnych próbek.</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="47"/>
         <source>Transformation</source>
-        <translation type="unfinished">Transformacja</translation>
+        <translation>Transformacja</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="62"/>
         <source>Merge samples for each note</source>
-        <translation type="unfinished"></translation>
+        <translation>Złącz próbki dla każdej z nut</translation>
     </message>
 </context>
 <context>
@@ -6035,62 +6036,62 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="102"/>
         <source> s</source>
         <comment>unit for second</comment>
-        <translation type="unfinished"> s</translation>
+        <translation> s</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="38"/>
         <source>Sample creation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tworzenie próbki:</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="45"/>
         <source>Stereo</source>
-        <translation type="unfinished">Stereo</translation>
+        <translation>Stereo</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="59"/>
         <source>Sustain duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas wybrzmiewania</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="66"/>
         <source>Auto loop</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto pętla</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="77"/>
         <source>for every key</source>
-        <translation type="unfinished">dla każdego klawisza</translation>
+        <translation>dla każdego klawisza</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="82"/>
         <source>every 3 keys</source>
-        <translation type="unfinished">co 3 klawisze</translation>
+        <translation>co 3 klawisze</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="87"/>
         <source>every 6 keys</source>
-        <translation type="unfinished">co 6 klawiszy</translation>
+        <translation>co 6 klawiszy</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="95"/>
         <source>Preset name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa presetu:</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="112"/>
         <source>Release duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas zanikania</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="136"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="156"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Anuluj</translation>
+        <translation>&amp;Anuluj</translation>
     </message>
 </context>
 <context>
@@ -6597,7 +6598,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>one file per preset</source>
-        <translation type="unfinished"></translation>
+        <translation>jeden plik na preset</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="166"/>
@@ -6677,7 +6678,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Przetwarzanie próbek</translation>
+        <translation>Przetwarzanie próbek</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="61"/>
@@ -6731,7 +6732,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Pętla / odtwarzanie</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="64"/>
@@ -6744,7 +6745,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Pętla / odtwarzanie</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="67"/>
@@ -6813,7 +6814,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tree/treeitemdelegate.cpp" line="241"/>
         <source>playing</source>
-        <translation type="unfinished"></translation>
+        <translation>odtwarzanie</translation>
     </message>
 </context>
 <context>
@@ -6874,18 +6875,18 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="89"/>
         <source>Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>Wycisz</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="95"/>
         <source>Always play</source>
         <oldsource>Play along</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Zawsze odtwarzaj</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="101"/>
         <source>Restore playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywróć odtwarzanie</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="109"/>
