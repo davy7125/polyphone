@@ -93,6 +93,11 @@ MidiDevice::MidiDevice(ConfManager * configuration) :
             int defaultValue = 0;
             switch (i)
             {
+            case 0: // Bank number
+                // Default bank is 128 for channel 10 (percussions)
+                if (channel == 10)
+                    defaultValue = 128;
+                break;
             case 8: // Balance
             case 10: // Pan position
                 defaultValue = 64;
@@ -299,6 +304,9 @@ void MidiDevice::processControllerChanged(bool external, int channel, int numCon
     int initialValue = value;
     MIDI_State * midiState = &_midiStates[channel + 1];
     Sustain_State * sustainState = &_sustainStates[channel + 1];
+
+    if (numController == 0 && channel == 9)
+        return; // Ignored: keep bank 128 on channel 10 (percussions)
 
     if (false && external)
     {
@@ -573,9 +581,6 @@ void MidiDevice::processProgramChanged(int channel, quint8 preset)
     // Compute the corresponding bank for the current channel
     quint16 bankNumber = 256 * _midiStates[channel + 1]._controllerValues[32] +
                          _midiStates[channel + 1]._controllerValues[0];
-
-    // Update the current channel state
-    _midiStates[channel + 1]._preset = preset;
 
     bool consumed = false;
     for (int i = 0; i < _listeners.size(); ++i)

@@ -89,9 +89,6 @@ private:
         int _rpnHistoryControllers[4];
         int _rpnHistoryValues[4];
         quint8 _rpnHistoryPosition;
-
-        // Preset selection
-        quint8 _preset;
     };
 
     struct Sustain_State
