@@ -583,19 +583,19 @@ bool SampleUtils::loopStep1(QVector<float> vData, quint32 dwSmplRate, quint32 &l
     if (vData.count() > 40000)
     {
         posStart = 4000;
-        if (posEnd > vData.count() - 400)
+        if (posEnd + 400 > vData.count())
             posEnd = vData.count() - 400;
     }
     else if (vData.count() > 4000)
     {
         posStart = 400;
-        if (posEnd > vData.count() - 400)
+        if (posEnd + 400 > vData.count())
             posEnd = vData.count() - 400;
     }
     else
     {
         posStart = 2;
-        if (posEnd > vData.count() - 1)
+        if (posEnd + 1 > vData.count())
             posEnd = vData.count() - 1;
     }
 
@@ -642,7 +642,7 @@ bool SampleUtils::loopStep1(QVector<float> vData, quint32 dwSmplRate, quint32 &l
 
     // Absolute maximum value of the signal
     float max = 0.00045f, tmp;
-    for (quint32 i = 0; i < vData.size(); i++)
+    for (qint32 i = 0; i < vData.size(); i++)
     {
         tmp = vData[i];
         if (tmp > max)
