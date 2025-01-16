@@ -3,5 +3,5 @@ index.md=Tutoriels
 |how-to-prepare-a-sample.md=Comment préparer un échantillon
 |using-custom-releases-in-an-instrument.md=Utiliser des échantillons pour la relâche d'une note
 |use-polyphone-as-a-synthesizer.md=Utiliser Polyphone comme un synthétiseur
-|create-a-synthesizer-with-rasperry-pi.md=Créer un synthétiseur avec un Raspberry Pi
+|create-a-synthesizer-with-raspberry-pi.md=Créer un synthétiseur avec un Raspberry Pi
 |read-midi-file-with-polyphone.md=Lire un fichier MIDI avec Polyphone

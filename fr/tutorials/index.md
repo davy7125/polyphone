@@ -13,3 +13,16 @@ Ce tutoriel décrit comment ajouter et préparer un échantillon dans une banque
 
 Le but de ce tutoriel est de créer un instrument expressif en utilisant des échantillons possédant des boucles et dont les relâches (release) ont été enregistrées.
 Vous apprendrez ici comment utiliser complètement les possibilités de tels échantillons, en utilisant non seulement leur attaque et leur maintien (sustain), mais aussi leur relâche.
+
+### [Utiliser Polyphone comme un synthétiseur](tutorials/use-polyphone-as-a-synthesizer.md)
+
+Polyphone n'est pas qu'un éditeur de soundfonts, c'est aussi un synthétiseur complet permettant de jouer avec un clavier MIDI.
+Ce tutoriel indique comment lancer Polyphone en mode «&nbsp;synthé&nbsp;».
+
+### [Créer un synthétiseur avec un Raspberry Pi](tutorials/create-a-synthesizer-with-raspberry-pi.md)
+
+Tuto bientôt disponible&nbsp;!
+
+### [Lire un fichier MIDI avec Polyphone](tutorials/read-midi-file-with-polyphone.md)
+
+Tuto bientôt disponible&nbsp;!
