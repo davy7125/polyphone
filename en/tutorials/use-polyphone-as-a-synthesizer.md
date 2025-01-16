@@ -3,7 +3,7 @@ This tutorial shows you how to launch Polyphone in synth mode.
 
 ## Prerequisites
 
-First you need a master keyboard or other MIDI controller, which you connect to the computer via a MIDI-to-USB adapter.
+First you need a **master keyboard** or other MIDI controller, which you connect to the computer via a **MIDI-to-USB adapter**.
 
 Download the latest version of Polyphone [here](software), then install and open the program. In the settings, you should find your MIDI device among the [MIDI inputs](documentation/manual/settings#doc_general). If this is not the case, it's likely that the MIDI adapter driver is not installed on the computer (resolve this before continuing).
 
@@ -85,7 +85,7 @@ For **Linux** or **macOS**, simply complete the command line. For **Windows**, c
 "C:\Program Files\Polyphone\polyphone.exe" -s -c "all|on|toggle"
 ```
 
-The various options are described on this (page)[manual/annexes/command-line.md#doc_synth].
+The various options are described on this [page](manual/annexes/command-line.md#doc_synth).
 
 ## Synth uses
 
