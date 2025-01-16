@@ -64,13 +64,15 @@ Un changement d'instrument se fait généralement grâce à un message MIDI de t
 Un autre mécanisme peut toutefois être utilisé&nbsp;: l'usage de touches programmées pour envoyer des messages de type «&nbsp;Note ON&nbsp;» / «&nbsp;Note OFF&nbsp;», le numéro de la note correspondant au numéro de l'instrument. Ce mécanisme peut être utile dans le cas où la soundfont ne présente que quelques instruments et dans le cas où des touches peuvent être programmées pour envoyer des notes précises (par exemple les pads des claviers maîtres).
 
 Si l'option :guilabel:`Sélection par note` est mise à :guilabel:`on`&nbsp;:
-- un instrument est activé lorsqu'un message de type «&nbsp;Note ON&nbsp;» est reçu,
-- un instrument est désactivé lorsqu'un message de type «&nbsp;Note OFF&nbsp;» est reçu.
+- un instrument est activé lorsqu'un message MIDI de type «&nbsp;Note ON&nbsp;» est reçu,
+- un instrument est désactivé lorsqu'un message MIDI de type «&nbsp;Note OFF&nbsp;» est reçu.
+
 Cette option peut être utilisée lorsque le pad d'un clavier maître est configuré pour être une bascule (une pression active la note et une autre pression désactive la note).
 
 Si :guilabel:`basculer` est choisi&nbsp;:
-- un instrument est activé lorsqu'un message de type «&nbsp;Note ON&nbsp;» est reçu,
-- un instrument est désactivé lorsqu'un autre message de type «&nbsp;Note ON&nbsp;» est reçu.
+- un instrument est activé lorsqu'un message MIDI de type «&nbsp;Note ON&nbsp;» est reçu,
+- un instrument est désactivé lorsqu'un autre message MIDI de type «&nbsp;Note ON&nbsp;» est reçu.
+
 La bascule se fait cette fois au niveau de Polyphone.
 
 ## Options du lancement de Polyphone
@@ -83,7 +85,7 @@ Pour **Linux** ou **macOS**, il suffira de compléter la ligne de commande. Pour
 "C:\Program Files\Polyphone\polyphone.exe" -s -c "all|on|toggle"
 ```
 
-Les différentes options sont décrites sur cette (page)[manual/annexes/command-line#doc_synth].
+Les différentes options sont décrites sur cette (page)[manual/annexes/command-line.md#doc_synth].
 
 ## Utilisations du synthé
 

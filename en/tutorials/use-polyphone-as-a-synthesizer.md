@@ -49,7 +49,7 @@ To play several instruments when a key is pressed on the keyboard, simply set th
 
 ### Playing several instruments separately
 
-If you have several MIDI controllers connected to the computer, you can open several soundfonts and choose a specific channel for each of the open soundfonts. In this way, for example, a first keyboard will be used to play one instrument, and a second keyboard will be used to play another. The same soundfont can be opened several times to play several of its instruments simultaneously.
+If you have several MIDI controllers connected to the computer, you can open several soundfonts and choose a specific channel for each of the opened soundfonts. In this way, for example, a first keyboard will be used to play one instrument, and a second keyboard will be used to play another one. The same soundfont can be opened several times to play several of its instruments simultaneously.
 
 Channel assignment is done by modifying the value of :guilabel:`channel`. For example, the first tab opened will listen to channel 1, while the second will listen to channel 2.
 
@@ -57,20 +57,22 @@ Channel assignment is done by modifying the value of :guilabel:`channel`. For ex
 
 **Note:** some keyboards can be split into two parts, so that a single keyboard can be used to send keys to 2 different channels.
 
-### Switch instruments with a key
+### Switching instruments with a key
 
 Switching the instrument is generally made via a MIDI message of type “Program change” and Polyphone is able to read these.
 
 However, another mechanism can be used: the use of keys programmed to send “Note ON” / “Note OFF” messages, with the note number corresponding to the instrument number. This mechanism can be useful when the soundfont features only a few instruments, and when keys can be programmed to send specific notes (e.g. master keyboard pads).
 
-If the :guilabel:`Selection by note` option is set to :guilabel:`on`:
-- an instrument is activated when a “Note ON” message is received,
-- an instrument is deactivated when a “Note OFF” message is received.
-This option can be used when the pad on a master keyboard is configured as a toggle (one press activates the note, another deactivates it).
+If the :guilabel:`Selection by keys` option is set to :guilabel:`on`:
+- an instrument is activated when a “Note ON” MIDI message is received,
+- an instrument is deactivated when a “Note OFF” MIDI message is received.
+
+This option can be used when the pad on a master keyboard is configured as a toggle (one press activates the note, another press deactivates it).
 
 If :guilabel:`toggle` is selected:
-- an instrument is activated when a “Note ON” message is received,
-- an instrument is deactivated when another “Note ON” message is received.
+- an instrument is activated when a “Note ON” MIDI message is received,
+- an instrument is deactivated when another “Note ON” MIDI message is received.
+
 This time, the switchover takes place at Polyphone level.
 
 ## Polyphone launch options
@@ -83,7 +85,7 @@ For **Linux** or **macOS**, simply complete the command line. For **Windows**, c
 "C:\Program Files\Polyphone\polyphone.exe" -s -c "all|on|toggle"
 ```
 
-The various options are described on this page [manual/annexes/command-line#doc_synth].
+The various options are described on this (page)[manual/annexes/command-line.md#doc_synth].
 
 ## Synth uses
 
