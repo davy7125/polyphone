@@ -91,4 +91,4 @@ The various options are described on this [page](manual/annexes/command-line.md#
 
 Now that you know how to turn Polyphone into a synthesizer, why not [use a Raspberry Pi to create a musical instrument](tutorials/create-a-synthesizer-with-raspberry-pi.md)?
 
-Polyphone's synth mode can also be used to [read MIDI files](tutorials/read-midi-file-with-polyphone.md).
+Polyphone's synth mode can also be used to [read MIDI files](tutorials/read-midi-file-with-soundfont.md).
