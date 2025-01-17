@@ -35,7 +35,7 @@ Ouvrir un terminal et écrire la commande suivante&nbsp;:
 
 ## Jouer d'un instrument
 
-Pour jouer d'un instrument, il suffit d'ouvrir une soundfont que vous pouvez télécharger depuis le [dépôt](soundfonts) par exemple, et sélectionner un instrument contenu dans cette soundfont. Les instruments sont rangés par banque&nbsp;: il faut donc sélectionner une banque pour que la liste des instruments s'affiche en-dessous.
+Pour jouer d'un instrument, il suffit d'ouvrir une banque de sons que vous pouvez télécharger depuis le [dépôt](soundfonts) par exemple, et sélectionner un instrument. Les instruments sont rangés par banque&nbsp;: il faut donc sélectionner une banque pour que la liste des instruments s'affiche en-dessous.
 
 ![Polyphone ouvert avec le mode «&nbsp;synthé&nbsp;»](images/synth_mode.png "Polyphone ouvert avec le mode «&nbsp;synthé&nbsp;»")
 
@@ -49,7 +49,7 @@ Pour jouer de plusieurs instruments lorsqu'une note est appuyée sur le clavier,
 
 ### Jouer de plusieurs instruments séparément
 
-Dans le cas où vous disposez de plusieurs contrôleurs MIDI raccordés à l'ordinateur, il est possible d'ouvrir plusieurs soundfonts et de choisir un canal spécifique pour chacune des soundfonts ouvertes. De cette manière, un premier clavier sera par exemple utilisé pour jouer d'un instrument et un second clavier sera utilisé pour jouer d'un autre instrument. Il est possible d'ouvrir plusieurs fois la même soundfont pour jouer plusieurs de ses instruments simultanément.
+Dans le cas où vous disposez de plusieurs contrôleurs MIDI raccordés à l'ordinateur, il est possible d'ouvrir plusieurs banques de sons et de choisir un canal spécifique pour chacune d'elles. De cette manière, un premier clavier sera par exemple utilisé pour jouer d'un instrument et un second clavier sera utilisé pour jouer d'un autre instrument. Il est possible d'ouvrir plusieurs fois la même banque de sons pour jouer plusieurs de ses instruments simultanément.
 
 L'assignation d'un canal se fait en modifiant la valeur de :guilabel:`canal`. Le premier onglet ouvert pourra par exemple écouter le canal 1, alors que le second pourra écouter le canal 2.
 
@@ -61,7 +61,7 @@ L'assignation d'un canal se fait en modifiant la valeur de :guilabel:`canal`. Le
 
 Un changement d'instrument se fait généralement grâce à un message MIDI de type «&nbsp;Program change&nbsp;» et Polyphone est capable de les lire.
 
-Un autre mécanisme peut toutefois être utilisé&nbsp;: l'usage de touches programmées pour envoyer des messages de type «&nbsp;Note ON&nbsp;» / «&nbsp;Note OFF&nbsp;», le numéro de la note correspondant au numéro de l'instrument. Ce mécanisme peut être utile dans le cas où la soundfont ne présente que quelques instruments et dans le cas où des touches peuvent être programmées pour envoyer des notes précises (par exemple les pads des claviers maîtres).
+Un autre mécanisme peut toutefois être utilisé&nbsp;: l'usage de touches programmées pour envoyer des messages de type «&nbsp;Note ON&nbsp;» / «&nbsp;Note OFF&nbsp;», le numéro de la note correspondant au numéro de l'instrument. Ce mécanisme peut être utile dans le cas où la banque de sons ne présente que quelques instruments et dans le cas où des touches peuvent être programmées pour envoyer des notes précises (par exemple les pads des claviers maîtres).
 
 Si l'option :guilabel:`Sélection par note` est mise à :guilabel:`on`&nbsp;:
 - un instrument est activé lorsqu'un message MIDI de type «&nbsp;Note ON&nbsp;» est reçu,
@@ -77,7 +77,7 @@ La bascule se fait cette fois au niveau de Polyphone.
 
 ## Options du lancement de Polyphone
 
-Toutes les options vues précédemment peuvent être appelées lors de l'ouverture de Polyphone en ajoutant des paramètres dans la ligne de commande. Il est aussi possible de préciser la soundfont à ouvrir.
+Toutes les options vues précédemment peuvent être appelées lors de l'ouverture de Polyphone en ajoutant des paramètres dans la ligne de commande. Il est aussi possible de préciser la banque de sons à ouvrir.
 
 Pour **Linux** ou **macOS**, il suffira de compléter la ligne de commande. Pour **Windows**, il faudra créer un raccourci en faisant un clic droit sur le fichier exécutable :file:`polyphone.exe`, puis sélectionner :guilabel:`Envoyer vers le bureau (créer un raccourci)` dans les :guilabel:`Autres options` du menu contextuel. Ensuite, en affichant les propriétés de ce raccourci il est possible d'ajouter les paramètres dans la cible qui pourra par exemple être&nbsp;:
 

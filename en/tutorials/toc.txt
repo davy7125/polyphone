@@ -4,4 +4,4 @@ index.md=Tutorials
 |using-custom-releases-in-an-instrument.md=Using custom releases in an instrument
 |use-polyphone-as-a-synthesizer.md=Use Polyphone as a synthesizer
 |create-a-synthesizer-with-raspberry-pi.md=Create a synthesizer with a Raspberry Pi
-|read-midi-file-with-polyphone.md=Read a MIDI file with Polyphone
+|read-midi-file-with-soundfont.md=Read a MIDI file with a soundfont

@@ -23,6 +23,6 @@ This tutorial shows you how to launch Polyphone in synth mode.
 
 Coming soon!
 
-### [Read a MIDI file with Polyphone](tutorials/read-midi-file-with-polyphone.md)
+### [Read a MIDI file with a soundfont](tutorials/read-midi-file-with-soundfont.md)
 
-Coming soon!
+MIDI files contain MIDI messages which, when put together, form a melody. They can be combined with a synthesizer using a soundfont, and this tutorial shows how to use a MIDI file to test the rendering of a soundfont.
