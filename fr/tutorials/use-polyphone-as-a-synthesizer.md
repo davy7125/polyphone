@@ -5,9 +5,9 @@ Ce tutoriel indique comment lancer Polyphone en mode «&nbsp;synthé&nbsp;».
 
 Tout d'abord il vous faut un **clavier maître** ou tout autre contrôleur MIDI, que vous relierez à l'ordinateur par l'intermédiaire d'un **adaptateur MIDI vers USB**.
 
-Téléchargez ensuite la dernière version de Polyphone [ici](software), puis installez et ouvrez le logiciel. Dans les paramètres, vous devriez trouver votre appareil MIDI parmi les [entrées MIDI](documentation/manual/settings#doc_general). Si ce n'est pas le cas, il est probable que le pilote de l'adaptateur MIDI n'est pas installé sur l'ordinateur (résoudre ce point avant de continuer).
+Téléchargez ensuite la dernière version de Polyphone [ici](software), puis installez et ouvrez le logiciel. Dans les paramètres, vous devriez trouver votre appareil MIDI parmi les [entrées MIDI](manual/settings.md#doc_general). Si ce n'est pas le cas, il est probable que le pilote de l'adaptateur MIDI n'est pas installé sur l'ordinateur (résoudre ce point avant de continuer).
 
-Toujours dans les paramètres, vérifiez que la [sortie audio](documentation/manual/settings#doc_general) est correcte.
+Toujours dans les paramètres, vérifiez que la [sortie audio](manual/settings.md#doc_general) est correcte.
 
 ## Ouvrir Polyphone dans le mode «&nbsp;synthé&nbsp;»
 
