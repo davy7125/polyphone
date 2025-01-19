@@ -31,7 +31,7 @@ Click on the :guilabel:`Load MIDI file` button, select your MIDI file, and you a
 
 ## Selecting a soundfont
 
-To use a soundfont of your choice, click on the :guilabel:`Load soundfont` button and select your file.
+To use a soundfont of your choice, click on the :guilabel:`Upload soundfont` button and select your file.
 
 ## Connecting the MIDI output to Polyphone
 
