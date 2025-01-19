@@ -27,6 +27,8 @@ A simple method is to use the <a href="https://spessasus.github.io/SpessaSynth/"
 
 Click on the :guilabel:`Load MIDI file` button, select your MIDI file, and you are ready to go.
 
+![The SpessaSynth MIDI player and synthesizer](images/SpessaSynth.jpg "The SpessaSynth MIDI player and synthesizer")
+
 ## Selecting a soundfont
 
 To use a soundfont of your choice, click on the :guilabel:`Load soundfont` button and select your file.

@@ -27,6 +27,8 @@ Un méthode simple consiste à utiliser le synthétiseur <a href="https://spessa
 
 Cliquez sur le bouton :guilabel:`Charger un fichier MIDI`, sélectionnez votre fichier MIDI, et le tour est joué.
 
+![Le lecteur MIDI et synthétiseur SpessaSynth](images/SpessaSynth.jpg "Le lecteur MIDI et synthétiseur SpessaSynth")
+
 ## Choisir la soundfont
 
 Pour utiliser la banque de sons de votre choix, cliquez sur le bouton :guilabel:`Charger une banque de sons` et sélectionnez votre fichier.
