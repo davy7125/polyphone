@@ -112,7 +112,7 @@ In particular the tool allowing a [key-based configuration](manual/soundfont-edi
 
 
 For testing purposes, it is possible to mute a division or mute all divisions but one in the tables.
-The options are accessible with a right click on the header of a division.
+The options are accessible with a right click on the header of a division, and also in the contextual menu of the [tree](manual/soundfont-editor/tree.md#doc_menu).
 
 
 ![Mute divisions in a table](images/table_mute_divisions.png "Mute divisions in a table")

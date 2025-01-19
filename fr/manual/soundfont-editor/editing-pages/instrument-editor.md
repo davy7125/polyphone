@@ -112,7 +112,7 @@ En particulier l'outil permettant de [paramétrer en fonction des notes](manual/
 
 
 À des fins de test, il est possible de rendre muette une division ou de rendre muettes toutes les divisions sauf une dans les tables.
-Les options sont accessibles par un clic droit sur l'entête d'une division.
+Les options sont accessibles par un clic droit sur l'entête d'une division ainsi que dans le menu contextuel de l'[arborescence](manual/soundfont-editor/tree.md#doc_menu).
 
 
 ![Rendre des divisions muettes dans une table](images/table_mute_divisions.png "Rendre des divisions muettes dans une table")
