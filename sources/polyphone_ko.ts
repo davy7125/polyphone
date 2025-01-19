@@ -1708,12 +1708,12 @@ repository</source>
         <translation>애프터 터치</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="199"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="200"/>
         <source>Hide the controller area</source>
         <translation>컨트롤러 영역 숨기기</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="205"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="206"/>
         <source>Show the controller area</source>
         <translation>컨트롤러 영역 보이기</translation>
     </message>
@@ -2088,7 +2088,7 @@ repository</source>
         <translation>파일을 열 수 없음</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="475"/>
+        <location filename="editor/editor.cpp" line="476"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
@@ -3572,7 +3572,7 @@ to display its division ranges</source>
         <translation>전역</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1226"/>
+        <location filename="editor/pagetable.cpp" line="1224"/>
         <source>absolute value</source>
         <translation>절댓값</translation>
     </message>

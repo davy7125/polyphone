@@ -1759,12 +1759,12 @@ Fundgrube</translation>
         <translation>Aftertouch</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="199"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="200"/>
         <source>Hide the controller area</source>
         <translation>Controler-Feld zeigen</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogkeyboard.cpp" line="205"/>
+        <location filename="dialogs/dialogkeyboard.cpp" line="206"/>
         <source>Show the controller area</source>
         <translation>Controler-Feld ausblenden</translation>
     </message>
@@ -2140,7 +2140,7 @@ Fundgrube</translation>
         <translation>Datei kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="475"/>
+        <location filename="editor/editor.cpp" line="476"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
@@ -3653,7 +3653,7 @@ to display its division ranges</source>
         <translation>Global</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1226"/>
+        <location filename="editor/pagetable.cpp" line="1224"/>
         <source>absolute value</source>
         <translation>absoluter Wert</translation>
     </message>
