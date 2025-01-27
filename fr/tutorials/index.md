@@ -2,12 +2,10 @@
 
 Apprenez les bases pour créer une nouvelle banque de sons.
 
-
 ### [Comment préparer un échantillon](tutorials/how-to-prepare-a-sample.md)
 
 Un instrument construit dans une banque de sons contient des échantillons, provenant par exemple de l'enregistrement d'un instrument réel.
 Ce tutoriel décrit comment ajouter et préparer un échantillon dans une banque de sons.
-
 
 ### [Utiliser des échantillons pour la relâche d'une note](tutorials/using-custom-releases-in-an-instrument.md)
 
@@ -21,7 +19,7 @@ Ce tutoriel indique comment lancer Polyphone en mode «&nbsp;synthé&nbsp;».
 
 ### [Créer un synthétiseur avec un Raspberry Pi](tutorials/create-a-synthesizer-with-raspberry-pi.md)
 
-Tuto bientôt disponible&nbsp;!
+Un Raspberry Pi est un ordinateur de la taille d'une carte bancaire et dans lequel Polyphone peut être installé. En l'intégrant dans un caisson contenant des haut-parleurs et en associant un clavier maître, il est possible de réaliser un vrai synthétiseur&nbsp;!
 
 ### [Lire un fichier MIDI avec une soundfont](tutorials/read-midi-file-with-soundfont.md)
 

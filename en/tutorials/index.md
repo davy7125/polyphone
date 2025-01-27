@@ -2,12 +2,10 @@
 
 Learn the basics to create a new soundfont.
 
-
 ### [How to prepare a sample](tutorials/how-to-prepare-a-sample.md)
 
 An instrument built in a soundfont is made of samples, coming for example from the recordings of a real instrument.
 This tutorial describes how to add and prepare a sample in a soundfont.
-
 
 ### [Custom releases](tutorials/using-custom-releases-in-an-instrument.md)
 
@@ -21,7 +19,7 @@ This tutorial shows you how to launch Polyphone in synth mode.
 
 ### [Create a synthesizer with a Raspberry Pi](tutorials/create-a-synthesizer-with-raspberry-pi.md)
 
-Coming soon!
+A Raspberry Pi is a credit-card-sized computer in which Polyphone can be installed. By integrating it into a box containing speakers and associating it with a master keyboard, it's possible to create a real synthesizer!
 
 ### [Read a MIDI file with a soundfont](tutorials/read-midi-file-with-soundfont.md)
 
