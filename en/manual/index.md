@@ -9,7 +9,7 @@ If you need more help, or if the reading of these pages puts you off, you may fi
 The first screen of Polyphone is basically made of 3 parts:
 
 * a [left part](#doc_left), containing a file history and shortcuts;
-* a [right part](#doc_right), dedicated to the soundfont repository;
+* a [right part](#doc_right), dedicated to the soundfont library;
 * a [top area](#doc_top), containing tabs and a menu.
 
 
@@ -44,10 +44,10 @@ Three buttons are located at the bottom of the left part:
 ## Right part {#doc_right}
 
 
-### Online repository
+### Online library
 
 
-A click on the button :guilabel:`Online repository` opens a tab with the [soundfont browser](manual/soundfont-browser.md).
+A click on the button :guilabel:`Online library` opens a tab with the [soundfont browser](manual/soundfont-browser.md).
 
 
 ### Daily soundfonts
@@ -76,7 +76,7 @@ The tabs provide a quick access between:
 * the [editor](manual/soundfont-editor/index.md) of an open soundfont,
 * the software [settings](manual/settings.md),
 * the [soundfont browser](manual/soundfont-browser.md),
-* a [soundfont description](manual/soundfont-browser.md#doc_description) from the repository.
+* a [soundfont description](manual/soundfont-browser.md#doc_description) from the library.
 
 Navigation between tabs can be performed using keyboard shortcuts:
 * :kbd:`Ctrl`+:kbd:`Tab` to go to the next tab, excluding the home screen tab,

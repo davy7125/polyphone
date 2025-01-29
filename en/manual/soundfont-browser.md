@@ -1,11 +1,11 @@
-The soundfont browser is a link between Polyphone and the soundfont repository of the Polyphone website.
+The soundfont browser is a link between Polyphone and the soundfont library of the Polyphone website.
 It allows you, directly in Polyphone, to download, test and possibly re-use soundfonts.
 
 
 ## Browsing soundfonts {#doc_browse}
 
 
-To open the soundfont browser, click on :guilabel:`Online repository` or write a keyword on the [home screen](manual/index.md).
+To open the soundfont browser, click on :guilabel:`Online library` or write a keyword on the [home screen](manual/index.md).
 Once the soundfont browser is open in a new tab, it is possible to search, sort and filter the results.
 
 
@@ -72,7 +72,7 @@ Tags
 
 Opening a soundfont description can be made with a double-click on a cell in the :guilabel:`Daily soundfonts` of the [home screen](manual/index.md#doc_right) or in the [soundfont browser](#doc_browse).
 A Premium account is required for soundfonts that are not in the :guilabel:`Daily soundfonts`.
-Connecting Polyphone to your account is possible in the [settings](manual/settings.md#doc_repository) of the software.
+Connecting Polyphone to your account is possible in the [settings](manual/settings.md#doc_library) of the software.
 
 
 ![Description page of a soundfont](images/soundfont_browser_description.png "Description page of a soundfont")

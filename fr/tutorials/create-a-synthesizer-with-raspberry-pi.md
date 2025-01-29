@@ -57,8 +57,8 @@ Note&nbsp;: il faut placer les haut-parleurs de manière à ce qu'il n'y ait pas
 
 ![Le Raspberry Pi](images/synth_raspberry_pi.jpg "Le Raspberry Pi")
 
-3 prises USB sont utilisées&nbsp:
+3 prises USB sont utilisées&nbsp;:
 - l'une pour obtenir une sortie jack,
-- les 2 autres sont redirigés vers l'arrière du caisson et serviront pour raccorder le clavier maître ou, lors de la configuration du Raspberry Pi, un clavier et une souris.
+- les 2 autres sont redirigées vers l'arrière du caisson et serviront pour raccorder le clavier maître ou, lors de la configuration du Raspberry Pi, un clavier et une souris.
 
 (suite bientôt disponible)

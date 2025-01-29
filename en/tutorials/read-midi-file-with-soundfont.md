@@ -18,7 +18,7 @@ To play a MIDI file using the method described below, you will need:
 - an internet access,
 - a web browser,
 - a MIDI file, such as <a href="files/ff7choco.mid" download>this one</a>,
-- optionally, a soundfont that you want to test and that complies with the <a href="https://en.wikipedia.org/wiki/General_MIDI" target="_blank">General MIDI</a> standard (a filter exists in the [repository](soundfonts/midi-standard/gm)),
+- optionally, a soundfont that you want to test and that complies with the <a href="https://en.wikipedia.org/wiki/General_MIDI" target="_blank">General MIDI</a> standard (a filter exists in the [library](soundfonts/midi-standard/gm)),
 - optionally, the latest version of Polyphone available on this [page](software).
 
 ## Reading a MIDI file

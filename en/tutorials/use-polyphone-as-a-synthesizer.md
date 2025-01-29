@@ -35,7 +35,7 @@ Open a terminal and write the following command line:
 
 ## Playing an instrument
 
-To play an instrument, simply open a soundfont that you can download from the [repository](soundfonts), for example, and select an instrument contained in that soundfont. Instruments are arranged by bank: select a bank to display the instrument list below.
+To play an instrument, simply open a soundfont that you can download from the [library](soundfonts), for example, and select an instrument contained in that soundfont. Instruments are arranged by bank: select a bank to display the instrument list below.
 
 ![Polyphone opened with the synth mode option](images/synth_mode.png "Polyphone opened with the synth mode option")
 

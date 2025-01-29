@@ -72,7 +72,7 @@ Tags
 
 L'ouverture d'une page de présentation se fait à l'aide d'un double-clic sur un élément dans les :guilabel:`Banques de sons du jour` de l'[écran d'accueil](manual/index.md#doc_right) ou dans l'[explorateur de banques de sons](#doc_browse).
 Un compte Premium est requis pour les banques de sons qui n'apparaissent pas dans les :guilabel:`Banques de sons du jour`.
-Connecter Polyphone à votre compte est possible dans les [préférences](manual/settings.md#doc_repository) du logiciel.
+Connecter Polyphone à votre compte est possible dans les [préférences](manual/settings.md#doc_library) du logiciel.
 
 
 ![Page de présentation](images/soundfont_browser_description.png "Page de présentation")
