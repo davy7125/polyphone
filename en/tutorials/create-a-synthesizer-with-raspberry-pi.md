@@ -65,7 +65,7 @@ Note: speakers must be placed so that there is no possible return of sound betwe
 
 ### Installing Debian
 
-One of the first steps to be taken when receiving a Raspberry Pi is to install **Debian** on a micro SD card. You can easily find instructions on the Internet, for example [here](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system).
+One of the first steps to be taken when receiving a Raspberry Pi is to install **Debian** on a micro SD card. You can easily find instructions on the Internet, for example <a href="https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system" target="_blank">here</a>.
 
 Once the micro SD card has been prepared, you can insert it into the slot provided in the Raspberry Pi. Then connect the power supply, monitor, mouse and keyboard, and your computer is ready to go!
 
@@ -103,7 +103,7 @@ The command line can be expanded with options for listening to a particular MIDI
 
 ### Sound equalization
 
-Each loudspeaker, by virtue of its morphology, responds more or less differently depending on the frequencies you want it to emit. To obtain a flat frequency response and thus faithfully reproduce the sound, it is possible to create an equalization that compensates for the loudspeaker's shortcomings. The [HiFiScan](https://github.com/erdewit/HiFiScan) tool automatically calculates the equalization parameters, the protocol being described on the project page.
+Each loudspeaker, by virtue of its morphology, responds more or less differently depending on the frequencies you want it to emit. To obtain a flat frequency response and thus faithfully reproduce the sound, it is possible to create an equalization that compensates for the loudspeaker's shortcomings. The <a href="https://github.com/erdewit/HiFiScan" target="_blank">HiFiScan</a> tool automatically calculates the equalization parameters, the protocol being described on the project page.
 
 Once the equalization curve has been calculated, **HiFiScan** can export coefficients for integration into equalizers. We are interested in the 12-band equalization that can be used with **Calf**.
 

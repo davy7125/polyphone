@@ -65,7 +65,7 @@ Note&nbsp;: il faut placer les haut-parleurs de manière à ce qu'il n'y ait pas
 
 ### Installation de Debian
 
-L'une des premières étapes à réaliser après la réception d'un Raspberry Pi est l'installation de **Debian** sur une carte micro SD. Vous trouverez des instructions sur Internet très facilement, par exemple [ici](https://www.raspberrypi-france.fr/installer-debian-sur-un-raspberry-pi-guide-complet/).
+L'une des premières étapes à réaliser après la réception d'un Raspberry Pi est l'installation de **Debian** sur une carte micro SD. Vous trouverez des instructions sur Internet très facilement, par exemple <a href="https://www.raspberrypi-france.fr/installer-debian-sur-un-raspberry-pi-guide-complet/" target="_blank">ici</a>.
 
 Une fois la carte micro SD préparée, vous pourrez l'insérer dans la fente prévue à cet effet dans le Raspberry Pi. Connectez ensuite l'alimentation, un écran, une souris et un clavier, et votre ordinateur est prêt !
 
@@ -103,9 +103,9 @@ La ligne de commande peut être complétée avec des options pour par exemple é
 
 ### Égalisation du son
 
-Chaque haut-parleur, de par sa morphologie, répond plus ou moins différemment selon les fréquences que l'on veut lui faire émettre. Pour obtenir une réponse fréquentielle plate et ainsi restituer fidèlement le son, il est possible de créer une égalisation qui compense les défauts des hauts-parleurs. L'outil [HiFiScan](https://github.com/erdewit/HiFiScan) permet de calculer automatiquement les paramètres de l'égalisation, le protocole étant décrit sur la page du projet.
+Chaque haut-parleur, de par sa morphologie, répond plus ou moins différemment selon les fréquences que l'on veut lui faire émettre. Pour obtenir une réponse fréquentielle plate et ainsi restituer fidèlement le son, il est possible de créer une égalisation qui compense les défauts des hauts-parleurs. L'outil <a href="https://github.com/erdewit/HiFiScan" target="_blank">HiFiScan</a> permet de calculer automatiquement les paramètres de l'égalisation, le protocole étant décrit sur la page du projet.
 
-Une fois la courbe d'égalisation calculée, **HiFiScan** peut exporter des coefficients à intégrer dans des égaliseur. Ce qui nous intéresse est l'égalisation 12 bandes qui peut être utilisée avec **Calf**.
+Une fois la courbe d'égalisation calculée, **HiFiScan** peut exporter des coefficients à intégrer dans des égaliseurs. Ce qui nous intéresse est l'égalisation 12 bandes qui peut être utilisée avec **Calf**.
 
 ### Connexion à distance
 
