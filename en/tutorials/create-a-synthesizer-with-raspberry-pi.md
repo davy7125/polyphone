@@ -61,4 +61,52 @@ Note: speakers must be placed so that there is no possible return of sound betwe
 - one to obtain a jack output,
 - the other 2 are redirected to the back of the box and will be used to connect the master keyboard or, when configuring the Raspberry Pi, a keyboard and a mouse.
 
-(more coming soon)
+## Preparing the Raspberry Pi
+
+### Installing Debian
+
+One of the first steps to be taken when receiving a Raspberry Pi is to install **Debian** on a micro SD card. You can easily find instructions on the Internet, for example [here](https://www.raspberrypi.com/documentation/computers/getting-started.html#installing-the-operating-system).
+
+Once the micro SD card has been prepared, you can insert it into the slot provided in the Raspberry Pi. Then connect the power supply, monitor, mouse and keyboard, and your computer is ready to go!
+
+### Installing and configuring Polyphone
+
+First, update the system with:
+
+```
+apt-get update
+apt-get upgrade
+```
+
+Then install **Polyphone** using the .deb package available on this [page](software). Connect the MIDI keyboard via USB to the Raspberry Pi (disconnect the computer keyboard if no USB port is available), then open Polyphone and select the MIDI keyboard from the drop-down list of MIDI inputs in the [settings](manual/settings.md#doc_general). By downloading a soundfont, for example from the [library](soundfonts), it's already possible to play an instrument with the MIDI keyboard associated with the Raspberry Pi!
+
+### Launching Polyphone automatically
+
+This step is necessary to eliminate the need for the screen. Polyphone can be launched automatically when the Raspberry Pi starts up by creating a :file:`synthesizer.desktop` file, containing this text:
+
+```
+[Desktop Entry]
+Name=Synthesizer
+Exec=polyphone -s /home/pi/Desktop/my-soundfont.sf2
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=/home/pi/Desktop/my-icon.png
+Categories=AudioVideo;
+```
+
+This file will then be placed in the :file:`/home/pi/.config/autostart` folder. 
+
+The command line can be expanded with options for listening to a particular MIDI channel, playing several instruments simultaneously or activating/deactivating instruments via keys. This [page](tutorials/use-polyphone-as-a-synthesizer.md) details the options for using Polyphone in synth mode.
+
+## To go further
+
+### Sound equalization
+
+Each loudspeaker, by virtue of its morphology, responds more or less differently depending on the frequencies you want it to emit. To obtain a flat frequency response and thus faithfully reproduce the sound, it is possible to create an equalization that compensates for the loudspeaker's shortcomings. The [HiFiScan](https://github.com/erdewit/HiFiScan) tool automatically calculates the equalization parameters, the protocol being described on the project page.
+
+Once the equalization curve has been calculated, **HiFiScan** can export coefficients for integration into equalizers. We are interested in the 12-band equalization that can be used with **Calf**.
+
+### Remote connection
+
+Up to now, Raspberry Pi configuration has required a screen to display the desktop. However, it is possible to configure the system to allow remote access via the **VNC protocol**, and resources are available on the Internet for its configuration.
