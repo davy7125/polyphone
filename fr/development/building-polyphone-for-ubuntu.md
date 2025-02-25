@@ -7,16 +7,17 @@ Cette méthode a été testée avec Ubuntu 16.04 (Xenial).
 
 Les bibliothèques suivantes sont nécessaires&nbsp;:
 
-* qt (``qt5-default`` + ``libqt5svg5-dev``)
+* qt (``qt6-base-dev`` + ``qt6-svg-dev``)
 * alsa (``libasound2-dev``)
 * jack (``libjack-jackd2-dev``)
 * rtaudio (``librtaudio-dev``)
 * rtmidi (``librtmidi-dev``)
-* stk (``libstk0-dev``)
+* stk (``libstk-dev``)
 * vorbis (``libvorbis-dev``)
 * ogg (``libogg-dev``)
 * flac (``libflac-dev``)
 * ssl (``libssl-dev``)
+* sndfile (``libsndfile-dev``)
 
 Utilisez par exemple :program:`synaptic` pour les installer.
 
