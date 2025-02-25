@@ -67,11 +67,7 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) :
     // Possibly remove the window borders
     if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "window_borders", false).toBool())
     {
-        ui->gridLayoutTop->setContentsMargins(
-            ui->gridLayoutTop->contentsMargins().right(), // Left is smaller, right value is used
-            ui->gridLayoutTop->contentsMargins().top(),
-            ui->gridLayoutTop->contentsMargins().right(),
-            ui->gridLayoutTop->contentsMargins().bottom());
+        setBigLeftMargin(false);
     }
     else
     {
@@ -83,6 +79,7 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) :
                 .arg(ContextManager::theme()->getColor(ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT) ?
                                                            ThemeManager::LIST_BACKGROUND : ThemeManager::LIST_TEXT).name())
             );
+        setBigLeftMargin(!(this->windowState() & Qt::WindowMaximized));
     }
 
 #ifdef NO_SF2_CREATION
@@ -569,4 +566,31 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
     }
 
     return false;
+}
+
+void MainWindow::changeEvent(QEvent * event)
+{
+    if (event->type() == QEvent::WindowStateChange &&
+        !ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "window_borders", false).toBool())
+    {
+        QWindowStateChangeEvent* wscEvent = static_cast< QWindowStateChangeEvent *>(event);
+
+        if ((wscEvent->oldState() & Qt::WindowMaximized) && !(this->windowState() & Qt::WindowMaximized))
+        {
+            setBigLeftMargin(true);
+        }
+        else if (!(wscEvent->oldState() & Qt::WindowMaximized) && (this->windowState() & Qt::WindowMaximized))
+        {
+            setBigLeftMargin(false);
+        }
+    }
+}
+
+void MainWindow::setBigLeftMargin(bool isOn)
+{
+    ui->gridLayoutTop->setContentsMargins(
+        isOn ? 48 : ui->gridLayoutTop->contentsMargins().right(), // Left is smaller, right value is used
+        ui->gridLayoutTop->contentsMargins().top(),
+        ui->gridLayoutTop->contentsMargins().right(),
+        ui->gridLayoutTop->contentsMargins().bottom());
 }

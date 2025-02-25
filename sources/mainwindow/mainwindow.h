@@ -50,6 +50,7 @@ public slots:
 protected:
     void closeEvent(QCloseEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
+    void changeEvent(QEvent * event) override;
 
 private slots:
     void on_pushButtonDocumentation_clicked();
@@ -71,6 +72,7 @@ private slots:
 
 private:
     bool eventFilter(QObject *object, QEvent *event) override;
+    void setBigLeftMargin(bool isOn);
     static const int RESIZE_BORDER_WIDTH;
 
     Ui::MainWindow * ui;
