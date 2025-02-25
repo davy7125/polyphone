@@ -100,6 +100,7 @@ Voice::~Voice()
 void Voice::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv, Smpl * smpl,
                        qint8 channel, qint8 key, qint8 vel, qint8 type, quint32 audioSmplRate, int token)
 {
+    // Possibly delete previous sample data that has been copied
     if (_voiceParam->getType() != 0 && _dataSmpl != nullptr)
     {
         delete [] _dataSmpl;
@@ -125,7 +126,6 @@ void Voice::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Div
     _x2 = 0;
     _y1 = 0;
     _y2 = 0;
-    _arrayLength = 0;
 
     _modLFO.initialize(_audioSmplRate);
     _vibLFO.initialize(_audioSmplRate);

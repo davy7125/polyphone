@@ -41,6 +41,10 @@ public:
     // Initial key is:
     // * -1 when we use "play" for reading a sample
     // >= 0 otherwise (sample, instrument or preset level)
+    // Type is:
+    // * 1 for a sample
+    // * 2 for its stereo part
+    // * 0 otherwise (instrument / preset)
     void initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Division * instDiv, Smpl * smpl,
                     qint8 channel, qint8 key, qint8 vel, qint8 type, quint32 audioSmplRate, int token);
 
