@@ -37,7 +37,7 @@ public:
 
     // Apply an envelop on data
     // Return true if the end of the release is reached
-    bool applyEnveloppe(float *data, quint32 size, bool release, int note, float gain, VoiceParam * voiceParam);
+    bool getEnvelope(float *data, quint32 chunkCount, bool release, int note, float gain, VoiceParam * voiceParam);
 
     // Call a quick release
     void quickRelease();

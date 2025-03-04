@@ -78,7 +78,7 @@ signals:
 private:
     // Oscillators and envelopes
     OscTriangle _modLFO, _vibLFO;
-    EnveloppeVol _enveloppeVol, _enveloppeMod;
+    EnveloppeVol _volEnvelope, _modEnvelope;
 
     // Sound data and parameters
     float * _dataSmpl;
@@ -93,35 +93,32 @@ private:
     quint32 _currentSmplPos, _elapsedSmplPos;
     double _time;
     bool _release;
-    quint32 _delayEnd;
     bool _isFinished;
     bool _isRunning;
 
-    // Save state for resampling
-    float _firstVal[6];
+    // Saved state for resampling
+    float _srcData[7];
     quint32 _lastDistanceFraction;
 
     // Save state for low pass filter
     float _x1, _x2, _y1, _y2;
 
-    bool takeData(float * data, quint32 nbRead, qint32 loopMode);
+    void takeData(float * data, quint32 nbSkip, quint32 nbRead, qint32 loopMode, quint32 loopStart, quint32 loopEnd);
     void biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float inv_Q);
     static float getSinValue(float value); // Range [0; 0.5] for [0; pi / 2]
 
     // Arrays
     quint32 _arrayLength;
+    quint32 * _distanceArray;
+    float * _dataVolArray;
     float * _dataModArray;
     float * _modLfoArray;
     float * _vibLfoArray;
-    quint32 * _pointDistanceArray;
-
-    quint32 _srcDataLength;
-    float * _srcData;
 
     static volatile int s_tuningFork;
     static volatile float s_temperament[12]; // Fine tune in cents from each key from C to B
     static volatile int s_temperamentRelativeKey;
-    static float s_sinc_table7[256][7];
+    static float s_sinc_table7[2048][7];
     static float s_sin_table[2048];
     static float s_pow10_table[2048];
 };

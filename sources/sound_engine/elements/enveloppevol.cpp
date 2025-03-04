@@ -31,12 +31,12 @@ void EnveloppeVol::initialize(quint32 sampleRate, bool isMod)
     _currentSmpl = 0;
     _precValue = 0.0f;
     _currentPhase = phase1delay;
-    _sampleRate = sampleRate;
+    _sampleRate = sampleRate / COMPUTATION_CHUNK;
     _isMod = isMod;
     _quickRelease = false;
 }
 
-bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int note, float gain, VoiceParam * voiceParam)
+bool EnveloppeVol::getEnvelope(float * data, quint32 chunkCount, bool release, int note, float gain, VoiceParam * voiceParam)
 {
     // Load parameters
     quint32 v_timeDelay;
@@ -101,21 +101,21 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
     float lastValue = 0;
     float coef;
 
-    while (avancement < size)
+    while (avancement < chunkCount)
     {
         switch (_currentPhase)
         {
         case phase1delay:
             // Number of remaining points in the phase
             duration = _currentSmpl < v_timeDelay ? v_timeDelay - _currentSmpl : 0;
-            if (duration <= size - avancement)
+            if (duration <= chunkCount - avancement)
             {
                 _currentPhase = phase2attack;
                 _currentSmpl = 0;
             }
             else
             {
-                duration = size - avancement;
+                duration = chunkCount - avancement;
                 _currentSmpl += duration;
             }
             lastValue = 0;
@@ -125,14 +125,14 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
         case phase2attack:
             // Number of remaining points in the phase
             duration = _currentSmpl < v_timeAttack ? v_timeAttack - _currentSmpl : 0;
-            if (duration <= size - avancement)
+            if (duration <= chunkCount - avancement)
             {
                 _currentPhase = phase3hold;
                 _currentSmpl = 0;
             }
             else
             {
-                duration = size - avancement;
+                duration = chunkCount - avancement;
                 _currentSmpl += duration;
             }
 
@@ -155,7 +155,7 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                 coef = 1.f / v_timeAttack; // Target is 1.f
                 for (quint32 i = 0; i < duration; i++)
                 {
-                    data[avancement + i] *= gain * lastValue ;
+                    data[avancement + i] = gain * lastValue;
                     lastValue += coef;
                 }
             }
@@ -163,39 +163,31 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
         case phase3hold:
             // Number of remaining points in the phase
             duration = _currentSmpl < timeHold ? timeHold - _currentSmpl : 0;
-            if (duration <= size - avancement)
+            if (duration <= chunkCount - avancement)
             {
                 _currentPhase = phase4decay;
                 _currentSmpl = 0;
             }
             else
             {
-                duration = size - avancement;
+                duration = chunkCount - avancement;
                 _currentSmpl += duration;
             }
             lastValue = 1;
-            if (_isMod)
-            {
-                for (quint32 i = 0; i < duration; i++)
-                    data[avancement + i] = gain;
-            }
-            else
-            {
-                for (quint32 i = 0; i < duration; i++)
-                    data[avancement + i] *= gain;
-            }
+            for (quint32 i = 0; i < duration; i++)
+                data[avancement + i] = gain;
             break;
         case phase4decay:
             // Number of remaining points in the phase
             duration = _currentSmpl < timeDecay ? timeDecay - _currentSmpl : 0;
-            if (duration <= size - avancement)
+            if (duration <= chunkCount - avancement)
             {
                 _currentPhase = phase5sustain;
                 _currentSmpl = 0;
             }
             else
             {
-                duration = size - avancement;
+                duration = chunkCount - avancement;
                 _currentSmpl += duration;
             }
             if (_isMod)
@@ -218,37 +210,29 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                 lastValue = (_precValue - levelSustain) * coef + levelSustain;
                 for (quint32 i = 0; i < duration; i++)
                 {
-                    data[avancement + i] *= gain * lastValue;
+                    data[avancement + i] = gain * lastValue;
                     lastValue = (lastValue - levelSustain) * coef + levelSustain;
                 }
             }
             break;
         case phase5sustain:
             // Number of values
-            duration = size - avancement;
+            duration = chunkCount - avancement;
             lastValue = levelSustain;
-            if (_isMod)
-            {
-                for (quint32 i = 0; i < duration; i++)
-                    data[avancement + i] = gain * lastValue;
-            }
-            else
-            {
-                for (quint32 i = 0; i < duration; i++)
-                    data[avancement + i] *= gain * lastValue;
-            }
+            for (quint32 i = 0; i < duration; i++)
+                data[avancement + i] = gain * lastValue;
             break;
         case phase6quickAttack:
             // Number of remaining points in the phase
             duration = _currentSmpl < v_timeAttack ? v_timeAttack - _currentSmpl : 0;
-            if (duration > size - avancement)
-                duration = size - avancement;
+            if (duration > chunkCount - avancement)
+                duration = chunkCount - avancement;
 
             lastValue = _precValue;
             for (quint32 i = 0; i < duration; i++)
             {
                 lastValue = (_currentSmpl + i) * _quickAttackTarget / (v_timeAttack - 1);
-                data[avancement + i] *= gain * lastValue;
+                data[avancement + i] = gain * lastValue;
             }
 
             if (duration == 0)
@@ -262,14 +246,14 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
         case phase6release:
             // Number of remaining points in the phase
             duration = _currentSmpl < v_timeRelease ? v_timeRelease - _currentSmpl : 0;
-            if (duration <= size - avancement)
+            if (duration <= chunkCount - avancement)
             {
                 _currentPhase = phase7off;
                 _currentSmpl = 0;
             }
             else
             {
-                duration = size - avancement;
+                duration = chunkCount - avancement;
                 _currentSmpl += duration;
             }
             if (_isMod)
@@ -292,14 +276,14 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
                 lastValue = _precValue * coef;
                 for (quint32 i = 0; i < duration; i++)
                 {
-                    data[avancement + i] *= gain * lastValue;
+                    data[avancement + i] = gain * lastValue;
                     lastValue *= coef;
                 }
             }
             break;
         case phase7off:
             // Number of values
-            duration = size - avancement;
+            duration = chunkCount - avancement;
             lastValue = 0;
             for (quint32 i = 0; i < duration; i++)
                 data[avancement + i] = 0;

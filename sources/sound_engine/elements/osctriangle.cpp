@@ -24,10 +24,11 @@
 
 #include "osctriangle.h"
 #include <string.h>
+#include "basetypes.h"
 
 void OscTriangle::initialize(quint32 sampleRate)
 {
-    _sampleRate = sampleRate;
+    _sampleRate = sampleRate / COMPUTATION_CHUNK;
     _fourInvSampleRate = sampleRate > 0 ? 4.0f / static_cast<float>(sampleRate) : 0.0f;
     _previousFreq = -1.0f;
     _currentDelay = 0;
@@ -36,7 +37,7 @@ void OscTriangle::initialize(quint32 sampleRate)
     _previousPoint = 0.0f;
 }
 
-void OscTriangle::getData(float * data, quint32 len, float freq, float delay)
+void OscTriangle::getData(float * data, quint32 chunkCount, float freq, float delay)
 {
     quint32 total = 0;
 
@@ -44,14 +45,14 @@ void OscTriangle::getData(float * data, quint32 len, float freq, float delay)
     quint32 delayTime = static_cast<quint32>(delay * _sampleRate);
     if (!_delayEnded && _currentDelay < delayTime)
     {
-        total = qMin(delayTime - _currentDelay, len);
+        total = qMin(delayTime - _currentDelay, chunkCount);
         memset(data, 0, total * sizeof(float));
         _currentDelay += total;
         _delayEnded = (_currentDelay >= delayTime);
     }
 
     // Triangle
-    if (total != len)
+    if (total != chunkCount)
     {
         if (_previousFreq < 0)
         {
@@ -64,7 +65,7 @@ void OscTriangle::getData(float * data, quint32 len, float freq, float delay)
         if (qAbs(_previousFreq - freq) > 0)
         {
             float progDelta;
-            float invTmp = 1.0f / static_cast<float>(len - total);
+            float invTmp = 1.0f / static_cast<float>(chunkCount - total);
             float delta2;
             delta2 = _fourInvSampleRate * freq;
             int totalInit = total;
@@ -75,9 +76,9 @@ void OscTriangle::getData(float * data, quint32 len, float freq, float delay)
             }
 
         up1:
-            while (total < len)
+            while (total < chunkCount)
             {
-                progDelta = (static_cast<float>(len - total) * _delta + static_cast<float>(total - totalInit) * delta2) * invTmp;
+                progDelta = (static_cast<float>(chunkCount - total) * _delta + static_cast<float>(total - totalInit) * delta2) * invTmp;
                 data[total] = _previousPoint + progDelta;
 
                 if (data[total] > 1.0f)
@@ -94,9 +95,9 @@ void OscTriangle::getData(float * data, quint32 len, float freq, float delay)
             goto end1;
 
         down1:
-            while (total < len)
+            while (total < chunkCount)
             {
-                progDelta = (static_cast<float>(len - total) * _delta + static_cast<float>(total - totalInit) * delta2) * invTmp;
+                progDelta = (static_cast<float>(chunkCount - total) * _delta + static_cast<float>(total - totalInit) * delta2) * invTmp;
                 data[total] = _previousPoint + progDelta;
 
                 if (data[total] < -1.0f)
@@ -123,7 +124,7 @@ void OscTriangle::getData(float * data, quint32 len, float freq, float delay)
                 goto down2;
 
         up2:
-            while (total < len)
+            while (total < chunkCount)
             {
                 data[total] = _previousPoint + _delta;
 
@@ -140,7 +141,7 @@ void OscTriangle::getData(float * data, quint32 len, float freq, float delay)
             return;
 
         down2:
-            while (total < len)
+            while (total < chunkCount)
             {
                 data[total] = _previousPoint + _delta;
 

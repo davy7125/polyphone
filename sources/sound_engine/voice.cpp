@@ -29,7 +29,7 @@
 volatile int Voice::s_tuningFork = 440;
 volatile float Voice::s_temperament[12] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 volatile int Voice::s_temperamentRelativeKey = 0;
-float Voice::s_sinc_table7[256][7];
+float Voice::s_sinc_table7[2048][7];
 float Voice::s_sin_table[2048];
 float Voice::s_pow10_table[2048];
 
@@ -39,10 +39,10 @@ void Voice::prepareTables()
     for (int i = 0; i < 7; i++) // i: Offset in terms of whole samples
     {
         // i2: Offset in terms of fractional samples ('subsamples')
-        for (int i2 = 0; i2 < 256; i2++)
+        for (int i2 = 0; i2 < 2048; i2++)
         {
             // Center on middle of table
-            i_shifted = (double)i - (7.0 / 2.0) + (double)i2 / 256.0;
+            i_shifted = (double)i - (7.0 / 2.0) + (double)i2 / 2048.0;
 
             // sinc(0) cannot be calculated straightforward (limit needed for 0/0)
             if (fabs (i_shifted) > 0.000001)
@@ -55,7 +55,7 @@ void Voice::prepareTables()
             else
                 v = 1.0;
 
-            s_sinc_table7[256 - i2 - 1][i] = (float)v;
+            s_sinc_table7[2048 - i2 - 1][i] = (float)v;
         }
     }
 
@@ -73,23 +73,21 @@ Voice::Voice(VoiceParam * voiceParam) : QObject(nullptr),
     _voiceParam(voiceParam)
 {
     // Array initialization
-    _srcDataLength = INITIAL_ARRAY_LENGTH;
-    _srcData = new float[_srcDataLength + 7];
-
     _arrayLength = INITIAL_ARRAY_LENGTH;
+    _distanceArray = new quint32[_arrayLength];
+    _dataVolArray = new float[_arrayLength];
     _dataModArray = new float[_arrayLength];
     _modLfoArray = new float[_arrayLength];
     _vibLfoArray = new float[_arrayLength];
-    _pointDistanceArray = new quint32[_arrayLength];
 }
 
 Voice::~Voice()
 {
+    delete [] _distanceArray;
+    delete [] _dataVolArray;
     delete [] _dataModArray;
     delete [] _modLfoArray;
     delete [] _vibLfoArray;
-    delete [] _pointDistanceArray;
-    delete [] _srcData;
     if (_voiceParam->getType() != 0 && _dataSmpl != nullptr)
     {
         delete [] _dataSmpl;
@@ -119,7 +117,6 @@ void Voice::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Div
     _elapsedSmplPos = 0;
     _time = 0;
     _release = false;
-    _delayEnd = 10;
     _isFinished = false;
     _isRunning = false;
     _x1 = 0;
@@ -129,11 +126,11 @@ void Voice::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Div
 
     _modLFO.initialize(_audioSmplRate);
     _vibLFO.initialize(_audioSmplRate);
-    _enveloppeVol.initialize(_audioSmplRate, false);
-    _enveloppeMod.initialize(_audioSmplRate, true);
+    _volEnvelope.initialize(_audioSmplRate, false);
+    _modEnvelope.initialize(_audioSmplRate, true);
 
     // Resampling initialization
-    memset(_firstVal, 0, 6 * sizeof(float));
+    memset(_srcData, 0, 7 * sizeof(float));
     _lastDistanceFraction = 0;
 }
 
@@ -167,31 +164,42 @@ void Voice::generateData(float * data, quint32 len)
 
     float v_attenuation = _voiceParam->getFloat(champ_initialAttenuation);
 
-    bool endSample = false;
+    // Number of chunks
+    quint32 chunkCount = (len >> COMPUTATION_CHUNK_SHIFT);
 
-    // Possible increase the length of arrays
-    if (len > _arrayLength)
+    // Possibly increase the length of arrays
+    if (chunkCount > _arrayLength)
     {
+        delete [] _distanceArray;
+        delete [] _dataVolArray;
         delete [] _dataModArray;
         delete [] _modLfoArray;
         delete [] _vibLfoArray;
-        delete [] _pointDistanceArray;
 
-        _dataModArray = new float[len];
-        _modLfoArray = new float[len];
-        _vibLfoArray = new float[len];
-        _pointDistanceArray = new quint32[len];
-        _arrayLength = len;
+        _distanceArray = new quint32[chunkCount];
+        _dataVolArray = new float[chunkCount];
+        _dataModArray = new float[chunkCount];
+        _modLfoArray = new float[chunkCount];
+        _vibLfoArray = new float[chunkCount];
+        _arrayLength = chunkCount;
     }
 
-    /// ENVELOPPE DE MODULATION ///
-    _enveloppeMod.applyEnveloppe(_dataModArray, len, _release, playedNote, 1.0f, _voiceParam);
+    /// ENVELOPES ///
+    if (_volEnvelope.getEnvelope(_dataVolArray, chunkCount, _release, playedNote, fastPow10(0.05f * (_gain - v_attenuation - 0.5f * v_filterQ)), _voiceParam))
+        if (v_loopMode != 3)
+            _isFinished = true;
+    _modEnvelope.getEnvelope(_dataModArray, chunkCount, _release, playedNote, 1.0f, _voiceParam);
 
     /// LFOs ///
-    _modLFO.getData(_modLfoArray, len, v_modLfoFreq, v_modLfoDelay);
-    _vibLFO.getData(_vibLfoArray, len, v_vibLfoFreq, v_vibLfoDelay);
+    _modLFO.getData(_modLfoArray, chunkCount, v_modLfoFreq, v_modLfoDelay);
+    _vibLFO.getData(_vibLfoArray, chunkCount, v_vibLfoFreq, v_vibLfoDelay);
 
-    if (v_loopMode == 2 && !_release)
+    if (_dataSmpl == nullptr)
+    {
+        memset(data, 0, len * sizeof(float));
+        _isFinished = true;
+    }
+    else if (v_loopMode == 2 && !_release)
     {
         // Blank
         memset(data, 0, len * sizeof(float));
@@ -205,94 +213,77 @@ void Voice::generateData(float * data, quint32 len)
                                     qLn(static_cast<double>(_audioSmplRate) * 440.f / (_smplRate * s_tuningFork)) +
                                 (playedNote - v_rootkey) * v_scaleTune + (temperamentFineTune + v_fineTune) + 100.0f * v_coarseTune;
 
-        // Compute the distance of each point
-        if (v_modEnvToPitch == 0 && v_modLfoToPitch == 0 && v_vibLfoToPitch == 0)
+        // Loop
+        quint32 loopStart = _voiceParam->getPosition(champ_dwStartLoop);
+        quint32 loopEnd = _voiceParam->getPosition(champ_dwEndLoop);
+        if (loopStart >= loopEnd)
+            v_loopMode = 0;
+
+        for (quint32 chunk = 0; chunk < chunkCount; ++chunk)
         {
-            // Double required for tuning accuracy
-            double gap = EnveloppeVol::fastPow2(deltaPitchFixed * 0.000833333f /* 1:1200 */ + 8.0f /* multiply by 256, which is 2^8 */);
-            double initialDistance = static_cast<double>(_lastDistanceFraction) + gap;
-            for (quint32 i = 0; i < len; i++)
-                _pointDistanceArray[i] = static_cast<int>(0.5 + initialDistance + gap * i);
-        }
-        else
-        {
-            // Double required for tuning accuracy
-            double distance = static_cast<double>(_lastDistanceFraction);
-            float currentDeltaPitch;
-            for (quint32 i = 0; i < len; i++)
+            quint32 sampleStart = (chunk << COMPUTATION_CHUNK_SHIFT);
+            quint32 sampleEnd = sampleStart + COMPUTATION_CHUNK;
+
+            // Distance between the points
+            float currentDeltaPitch = deltaPitchFixed + v_modEnvToPitch * _dataModArray[chunk] + v_modLfoToPitch * _modLfoArray[chunk] + v_vibLfoToPitch * _vibLfoArray[chunk];
+            int fixedGap = static_cast<quint32>(
+                EnveloppeVol::fastPow2(currentDeltaPitch * 0.000833333f /* 1:1200 */ + 11.0f /* multiply by 2048, which is 2^11 */) + 0.5f);
+
+            // Resampling
+            float * coeffs;
+            int goOn, pointsToLoad;
+            for (quint32 i = sampleStart; i < sampleEnd; ++i)
             {
-                currentDeltaPitch = deltaPitchFixed + _dataModArray[i] * v_modEnvToPitch + _modLfoArray[i] * v_modLfoToPitch + _vibLfoArray[i] * v_vibLfoToPitch;
-                distance += EnveloppeVol::fastPow2(currentDeltaPitch * 0.000833333f /* 1:1200 */ + 8.0f /* multiply by 256, which is 2^8 */);
-                _pointDistanceArray[i] = static_cast<int>(0.5f + distance);
+                // New position and number of points to skip / load
+                _lastDistanceFraction += fixedGap;
+                goOn = _lastDistanceFraction >> 11;
+                pointsToLoad = goOn > 7 ? 7 : goOn;
+                _lastDistanceFraction &= 0x7FF;
+
+                // Update the current data needed for resampling
+                memcpy(&_srcData[0], &_srcData[pointsToLoad], (7 - pointsToLoad) * sizeof(float));
+                takeData(&_srcData[7 - pointsToLoad], goOn - pointsToLoad, pointsToLoad, v_loopMode, loopStart, loopEnd);
+
+                // 7th order sinc interpolation
+                coeffs = s_sinc_table7[_lastDistanceFraction];
+                data[i] = coeffs[0] * _srcData[0] +
+                          coeffs[1] * _srcData[1] +
+                          coeffs[2] * _srcData[2] +
+                          coeffs[3] * _srcData[3] +
+                          coeffs[4] * _srcData[4] +
+                          coeffs[5] * _srcData[5] +
+                          coeffs[6] * _srcData[6];
+            }
+
+            // Volume envelope and volume modulation with values from the mod LFO converted to dB
+            float coeff = _dataVolArray[chunk] * fastPow10(0.05f * v_modLfoToVolume * _modLfoArray[chunk]);
+
+            // Low-pass filter
+            // - 3.01f => so that a value of 0 gives a non-resonant low pass
+            // If v_filterQ is 0, inv_q_lin is sqrt(2)
+            float inv_q_lin = fastPow10(-0.05f * (v_filterQ - 3.01f));
+            float a0, a1, a2, b1, b2, valTmp;
+            valTmp = v_filterFreq * EnveloppeVol::fastPow2(
+                         (_dataModArray[chunk] * v_modEnvToFilterFc + _modLfoArray[chunk] * v_modLfoToFilterFreq) * 0.000833333f /* 1:1200 */);
+            biQuadCoefficients(a0, a1, a2, b1, b2, valTmp, inv_q_lin);
+            for (quint32 i = sampleStart; i < sampleEnd; ++i)
+            {
+                valTmp = a0 * data[i] + a1 * _x1 + a2 * _x2 - b1 * _y1 - b2 * _y2;
+                _x2 = _x1;
+                _x1 = data[i];
+                _y2 = _y1;
+                _y1 = valTmp;
+                data[i] = coeff * valTmp;
             }
         }
-        _lastDistanceFraction = (_pointDistanceArray[len - 1] & 0xFF);
-
-        // Resample data
-        quint32 nbDataTmp = (_pointDistanceArray[len - 1] >> 8);
-        if (nbDataTmp > _srcDataLength)
-        {
-            delete [] _srcData;
-            _srcData = new float[nbDataTmp + 7];
-            _srcDataLength = nbDataTmp;
-        }
-
-        memcpy(_srcData, _firstVal, 6 * sizeof(float));
-        endSample = takeData(&_srcData[6], nbDataTmp, v_loopMode);
-        _srcData[6 + nbDataTmp] = 0; // Extra 0 needed
-        memcpy(_firstVal, &_srcData[nbDataTmp], 6 * sizeof(float));
-
-        float * coeffs;
-        quint32 currentPos;
-        for (quint32 i = 0; i < len; i++)
-        {
-            // Sinc interpolation 7th order
-            coeffs = s_sinc_table7[_pointDistanceArray[i] & 0xFF];
-            currentPos = (_pointDistanceArray[i] >> 8);
-            data[i] = coeffs[0] * _srcData[currentPos] +
-                      coeffs[1] * _srcData[currentPos + 1] +
-                      coeffs[2] * _srcData[currentPos + 2] +
-                      coeffs[3] * _srcData[currentPos + 3] +
-                      coeffs[4] * _srcData[currentPos + 4] +
-                      coeffs[5] * _srcData[currentPos + 5] +
-                      coeffs[6] * _srcData[currentPos + 6];
-        }
-
-        // Low-pass filter
-        // - 3.01f => so that a value of 0 gives a non-resonant low pass
-        // If v_filterQ is 0, inv_q_lin is sqrt(2)
-        float inv_q_lin = fastPow10(-0.05f * (v_filterQ - 3.01f));
-        float a0, a1, a2, b1, b2, valTmp;
-        for (quint32 i = 0; i < len; ++i)
-        {
-            valTmp = v_filterFreq * EnveloppeVol::fastPow2(
-                         (_dataModArray[i] * v_modEnvToFilterFc + _modLfoArray[i] * v_modLfoToFilterFreq) * 0.000833333f /* 1:1200 */);
-            biQuadCoefficients(a0, a1, a2, b1, b2, valTmp, inv_q_lin);
-            valTmp = a0 * data[i] + a1 * _x1 + a2 * _x2 - b1 * _y1 - b2 * _y2;
-            _x2 = _x1;
-            _x1 = data[i];
-            _y2 = _y1;
-            _y1 = valTmp;
-            data[i] = valTmp;
-        }
-
-        // Volume modulation with values from the mod LFO converted to dB
-        for (quint32 i = 0; i < len; ++i)
-            data[i] *= fastPow10(0.05f * v_modLfoToVolume * _modLfoArray[i]);
     }
-
-    // Apply the volume envelop
-    bool bRet2 = _enveloppeVol.applyEnveloppe(data, len, _release, playedNote,
-                                              fastPow10(0.05f * (_gain - v_attenuation - 0.5f * v_filterQ)),
-                                              _voiceParam);
 
     // No need to go further if only the release is needed
     if (v_loopMode == 2 && !_release)
         return;
 
-    if ((bRet2 && v_loopMode != 3) || endSample)
+    if (_isFinished)
     {
-        _isFinished = true;
         if (_voiceParam->getKey() == -1)
         {
             emit currentPosChanged(0);
@@ -310,23 +301,16 @@ void Voice::generateData(float * data, quint32 len)
     }
 }
 
-bool Voice::takeData(float * data, quint32 nbRead, qint32 loopMode)
+void Voice::takeData(float * data, quint32 nbSkip, quint32 nbRead, qint32 loopMode, quint32 loopStart, quint32 loopEnd)
 {
-    if (_dataSmpl == nullptr)
+    if (loopMode == 1 || (loopMode == 3 && !_release)) // Loop?
     {
-        memset(data, 0, nbRead * sizeof(float));
-        return true;
-    }
+        // Skip
+        _currentSmplPos += nbSkip;
+        while (_currentSmplPos >= loopEnd)
+            _currentSmplPos += loopStart - loopEnd;
 
-    bool endSample = false;
-    quint32 loopStart = _voiceParam->getPosition(champ_dwStartLoop);
-    quint32 loopEnd = _voiceParam->getPosition(champ_dwEndLoop);
-
-    if ((loopMode == 1 || (loopMode == 3 && !_release)) && loopStart < loopEnd)
-    {
-        // Loop
-        if (_currentSmplPos >= loopEnd)
-            _currentSmplPos = loopStart;
+        // Read
         quint32 total = 0;
         while (nbRead - total > 0)
         {
@@ -340,13 +324,16 @@ bool Voice::takeData(float * data, quint32 nbRead, qint32 loopMode)
     }
     else
     {
-        // No loop
+        // Skip
+        _currentSmplPos += nbSkip;
+
+        // Read
         quint32 sampleEnd = _dataSmplLength;
         if (_currentSmplPos > sampleEnd)
         {
             // No more data, fill with 0
             memset(data, 0, nbRead * sizeof(float));
-            endSample = true;
+            _isFinished = true;
         }
         else if (sampleEnd - _currentSmplPos < nbRead)
         {
@@ -356,9 +343,7 @@ bool Voice::takeData(float * data, quint32 nbRead, qint32 loopMode)
 
             // We are now at the end
             _currentSmplPos = sampleEnd;
-            _delayEnd--;
-            if (_delayEnd == 0)
-                endSample = true;
+            _isFinished = true;
         }
         else
         {
@@ -367,8 +352,6 @@ bool Voice::takeData(float * data, quint32 nbRead, qint32 loopMode)
             _currentSmplPos += nbRead;
         }
     }
-
-    return endSample;
 }
 
 void Voice::release(bool quick)
@@ -376,12 +359,12 @@ void Voice::release(bool quick)
     if (quick)
     {
         // Stopped by an exclusive class => quick release
-        _enveloppeVol.quickRelease();
+        _volEnvelope.quickRelease();
     }
     else if (_voiceParam->getInteger(champ_sampleModes) == 2)
     {
         // Start of a sample in the release mode
-        _enveloppeVol.quickAttack();
+        _volEnvelope.quickAttack();
     }
     _release = true;
 }
