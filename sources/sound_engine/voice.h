@@ -100,16 +100,16 @@ private:
     float _srcData[7];
     quint32 _lastDistanceFraction;
 
-    // Save state for low pass filter
+    // Save state for the low pass filter
     float _x1, _x2, _y1, _y2;
 
-    void takeData(float * data, quint32 nbSkip, quint32 nbRead, qint32 loopMode, quint32 loopStart, quint32 loopEnd);
+    float * getData(quint32 goOn);
+    float * getDataWithLoop(quint32 goOn, quint32 loopStart, quint32 loopEnd);
     void biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float inv_Q);
     static float getSinValue(float value); // Range [0; 0.5] for [0; pi / 2]
 
     // Arrays
     quint32 _arrayLength;
-    quint32 * _distanceArray;
     float * _dataVolArray;
     float * _dataModArray;
     float * _modLfoArray;

@@ -47,7 +47,7 @@ void Voice::prepareTables()
             // sinc(0) cannot be calculated straightforward (limit needed for 0/0)
             if (fabs (i_shifted) > 0.000001)
             {
-                v = sin (i_shifted * M_PI) / (M_PI * i_shifted);
+                v = sin(i_shifted * M_PI) / (M_PI * i_shifted);
 
                 // Hamming window
                 v *= 0.5 * (1.0 + cos (2.0 * M_PI * i_shifted / 7));
@@ -74,7 +74,6 @@ Voice::Voice(VoiceParam * voiceParam) : QObject(nullptr),
 {
     // Array initialization
     _arrayLength = INITIAL_ARRAY_LENGTH;
-    _distanceArray = new quint32[_arrayLength];
     _dataVolArray = new float[_arrayLength];
     _dataModArray = new float[_arrayLength];
     _modLfoArray = new float[_arrayLength];
@@ -83,7 +82,6 @@ Voice::Voice(VoiceParam * voiceParam) : QObject(nullptr),
 
 Voice::~Voice()
 {
-    delete [] _distanceArray;
     delete [] _dataVolArray;
     delete [] _dataModArray;
     delete [] _modLfoArray;
@@ -136,33 +134,13 @@ void Voice::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Div
 
 void Voice::generateData(float * data, quint32 len)
 {
-    // Get voice current parameters
     if (_currentSmplPos == 0xFFFFFFFF)
         _currentSmplPos = _voiceParam->getPosition(champ_dwStart16); // This value is read only once
-    qint32 v_rootkey = _voiceParam->getInteger(champ_overridingRootKey);
     qint32 playedNote = _voiceParam->getInteger(champ_keynum);
-    qint32 v_scaleTune = _voiceParam->getInteger(champ_scaleTuning);
-    qint32 v_fineTune = _voiceParam->getInteger(champ_fineTune);
-    qint32 v_coarseTune = _voiceParam->getInteger(champ_coarseTune);
-
-    float v_modLfoFreq = _voiceParam->getFloat(champ_freqModLFO);
-    float v_modLfoDelay = _voiceParam->getFloat(champ_delayModLFO);
-    qint32 v_modLfoToPitch = _voiceParam->getInteger(champ_modLfoToPitch);
-    qint32 v_modLfoToFilterFreq = _voiceParam->getInteger(champ_modLfoToFilterFc);
-    float v_modLfoToVolume = _voiceParam->getFloat(champ_modLfoToVolume);
-
-    float v_vibLfoFreq = _voiceParam->getFloat(champ_freqVibLFO);
-    float v_vibLfoDelay = _voiceParam->getFloat(champ_delayVibLFO);
-    qint32 v_vibLfoToPitch = _voiceParam->getInteger(champ_vibLfoToPitch);
-
-    qint32 v_modEnvToPitch = _voiceParam->getInteger(champ_modEnvToPitch);
-    qint32 v_modEnvToFilterFc = _voiceParam->getInteger(champ_modEnvToFilterFc);
+    qint32 v_loopMode = _voiceParam->getInteger(champ_sampleModes);
 
     float v_filterQ = _voiceParam->getFloat(champ_initialFilterQ);
     float v_filterFreq = _voiceParam->getFloat(champ_initialFilterFc);
-    qint32 v_loopMode = _voiceParam->getInteger(champ_sampleModes);
-
-    float v_attenuation = _voiceParam->getFloat(champ_initialAttenuation);
 
     // Number of chunks
     quint32 chunkCount = (len >> COMPUTATION_CHUNK_SHIFT);
@@ -170,29 +148,32 @@ void Voice::generateData(float * data, quint32 len)
     // Possibly increase the length of arrays
     if (chunkCount > _arrayLength)
     {
-        delete [] _distanceArray;
         delete [] _dataVolArray;
         delete [] _dataModArray;
         delete [] _modLfoArray;
         delete [] _vibLfoArray;
 
-        _distanceArray = new quint32[chunkCount];
-        _dataVolArray = new float[chunkCount];
-        _dataModArray = new float[chunkCount];
-        _modLfoArray = new float[chunkCount];
-        _vibLfoArray = new float[chunkCount];
         _arrayLength = chunkCount;
+        _dataVolArray = new float[_arrayLength];
+        _dataModArray = new float[_arrayLength];
+        _modLfoArray = new float[_arrayLength];
+        _vibLfoArray = new float[_arrayLength];
     }
 
     /// ENVELOPES ///
+    float v_attenuation = _voiceParam->getFloat(champ_initialAttenuation);
     if (_volEnvelope.getEnvelope(_dataVolArray, chunkCount, _release, playedNote, fastPow10(0.05f * (_gain - v_attenuation - 0.5f * v_filterQ)), _voiceParam))
         if (v_loopMode != 3)
             _isFinished = true;
     _modEnvelope.getEnvelope(_dataModArray, chunkCount, _release, playedNote, 1.0f, _voiceParam);
 
     /// LFOs ///
-    _modLFO.getData(_modLfoArray, chunkCount, v_modLfoFreq, v_modLfoDelay);
-    _vibLFO.getData(_vibLfoArray, chunkCount, v_vibLfoFreq, v_vibLfoDelay);
+    _modLFO.getData(_modLfoArray, chunkCount,
+                    _voiceParam->getFloat(champ_freqModLFO),
+                    _voiceParam->getFloat(champ_delayModLFO));
+    _vibLFO.getData(_vibLfoArray, chunkCount,
+                    _voiceParam->getFloat(champ_freqVibLFO),
+                    _voiceParam->getFloat(champ_delayVibLFO));
 
     if (_dataSmpl == nullptr)
     {
@@ -206,7 +187,19 @@ void Voice::generateData(float * data, quint32 len)
     }
     else
     {
+        // LFOs and modulation effects
+        qint32 v_modLfoToPitch = _voiceParam->getInteger(champ_modLfoToPitch);
+        qint32 v_modLfoToFilterFreq = _voiceParam->getInteger(champ_modLfoToFilterFc);
+        float v_modLfoToVolume = _voiceParam->getFloat(champ_modLfoToVolume);
+        qint32 v_vibLfoToPitch = _voiceParam->getInteger(champ_vibLfoToPitch);
+        qint32 v_modEnvToPitch = _voiceParam->getInteger(champ_modEnvToPitch);
+        qint32 v_modEnvToFilterFc = _voiceParam->getInteger(champ_modEnvToFilterFc);
+
         // Pitch modulation
+        qint32 v_rootkey = _voiceParam->getInteger(champ_overridingRootKey);
+        qint32 v_scaleTune = _voiceParam->getInteger(champ_scaleTuning);
+        qint32 v_fineTune = _voiceParam->getInteger(champ_fineTune);
+        qint32 v_coarseTune = _voiceParam->getInteger(champ_coarseTune);
         float temperamentFineTune = _voiceParam->getKey() < 0 ? 0.0f : (s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
                                                                         s_temperament[(21 - s_temperamentRelativeKey) % 12]); // Correction so that the tuning fork is accurate
         float deltaPitchFixed = -1731.234f /* -1200 / ln(2) */ *
@@ -219,6 +212,11 @@ void Voice::generateData(float * data, quint32 len)
         if (loopStart >= loopEnd)
             v_loopMode = 0;
 
+        // Parameter for the low-pass filter
+        // - 3.01f => so that a value of 0 gives a non-resonant low pass
+        // If v_filterQ is 0, inv_q_lin is sqrt(2)
+        float inv_q_lin = fastPow10(-0.05f * (v_filterQ - 3.01f));
+
         for (quint32 chunk = 0; chunk < chunkCount; ++chunk)
         {
             quint32 sampleStart = (chunk << COMPUTATION_CHUNK_SHIFT);
@@ -230,41 +228,55 @@ void Voice::generateData(float * data, quint32 len)
                 EnveloppeVol::fastPow2(currentDeltaPitch * 0.000833333f /* 1:1200 */ + 11.0f /* multiply by 2048, which is 2^11 */) + 0.5f);
 
             // Resampling
-            float * coeffs;
-            int goOn, pointsToLoad;
-            for (quint32 i = sampleStart; i < sampleEnd; ++i)
+            float * coeffs, * srcData;
+            if (v_loopMode == 1 || (v_loopMode == 3 && !_release)) // Loop?
             {
-                // New position and number of points to skip / load
-                _lastDistanceFraction += fixedGap;
-                goOn = _lastDistanceFraction >> 11;
-                pointsToLoad = goOn > 7 ? 7 : goOn;
-                _lastDistanceFraction &= 0x7FF;
+                for (quint32 i = sampleStart; i < sampleEnd; ++i)
+                {
+                    // Compute the new position of the data to read and return a pointer to this data
+                    _lastDistanceFraction += fixedGap;
+                    srcData = getDataWithLoop(_lastDistanceFraction >> 11, loopStart, loopEnd);
+                    _lastDistanceFraction &= 0x7FF;
 
-                // Update the current data needed for resampling
-                memcpy(&_srcData[0], &_srcData[pointsToLoad], (7 - pointsToLoad) * sizeof(float));
-                takeData(&_srcData[7 - pointsToLoad], goOn - pointsToLoad, pointsToLoad, v_loopMode, loopStart, loopEnd);
+                    // 7th order sinc interpolation
+                    coeffs = s_sinc_table7[_lastDistanceFraction];
+                    data[i] = coeffs[0] * srcData[0] +
+                              coeffs[1] * srcData[1] +
+                              coeffs[2] * srcData[2] +
+                              coeffs[3] * srcData[3] +
+                              coeffs[4] * srcData[4] +
+                              coeffs[5] * srcData[5] +
+                              coeffs[6] * srcData[6];
+                }
+            }
+            else
+            {
+                for (quint32 i = sampleStart; i < sampleEnd; ++i)
+                {
+                    // Compute the new position of the data to read and return a pointer to this data
+                    _lastDistanceFraction += fixedGap;
+                    srcData = getData(_lastDistanceFraction >> 11);
+                    _lastDistanceFraction &= 0x7FF;
 
-                // 7th order sinc interpolation
-                coeffs = s_sinc_table7[_lastDistanceFraction];
-                data[i] = coeffs[0] * _srcData[0] +
-                          coeffs[1] * _srcData[1] +
-                          coeffs[2] * _srcData[2] +
-                          coeffs[3] * _srcData[3] +
-                          coeffs[4] * _srcData[4] +
-                          coeffs[5] * _srcData[5] +
-                          coeffs[6] * _srcData[6];
+                    // 7th order sinc interpolation
+                    coeffs = s_sinc_table7[_lastDistanceFraction];
+                    data[i] = coeffs[0] * srcData[0] +
+                              coeffs[1] * srcData[1] +
+                              coeffs[2] * srcData[2] +
+                              coeffs[3] * srcData[3] +
+                              coeffs[4] * srcData[4] +
+                              coeffs[5] * srcData[5] +
+                              coeffs[6] * srcData[6];
+                }
             }
 
             // Volume envelope and volume modulation with values from the mod LFO converted to dB
             float coeff = _dataVolArray[chunk] * fastPow10(0.05f * v_modLfoToVolume * _modLfoArray[chunk]);
 
             // Low-pass filter
-            // - 3.01f => so that a value of 0 gives a non-resonant low pass
-            // If v_filterQ is 0, inv_q_lin is sqrt(2)
-            float inv_q_lin = fastPow10(-0.05f * (v_filterQ - 3.01f));
-            float a0, a1, a2, b1, b2, valTmp;
-            valTmp = v_filterFreq * EnveloppeVol::fastPow2(
-                         (_dataModArray[chunk] * v_modEnvToFilterFc + _modLfoArray[chunk] * v_modLfoToFilterFreq) * 0.000833333f /* 1:1200 */);
+            float valTmp = v_filterFreq * EnveloppeVol::fastPow2(
+                         (v_modEnvToFilterFc * _dataModArray[chunk] + v_modLfoToFilterFreq * _modLfoArray[chunk]) * 0.000833333f /* 1:1200 */);
+            float a0, a1, a2, b1, b2;
             biQuadCoefficients(a0, a1, a2, b1, b2, valTmp, inv_q_lin);
             for (quint32 i = sampleStart; i < sampleEnd; ++i)
             {
@@ -278,80 +290,88 @@ void Voice::generateData(float * data, quint32 len)
         }
     }
 
-    // No need to go further if only the release is needed
-    if (v_loopMode == 2 && !_release)
-        return;
-
-    if (_isFinished)
+    // Update the playback bar at the sample level
+    if (_voiceParam->getKey() == -1)
     {
-        if (_voiceParam->getKey() == -1)
+        if (_isFinished)
         {
             emit currentPosChanged(0);
             _elapsedSmplPos = 0;
         }
-    }
-    else if (_voiceParam->getKey() == -1)
-    {
-        _elapsedSmplPos += len;
-        if (_elapsedSmplPos > (_smplRate >> 5))
+        else
         {
-            emit currentPosChanged(_currentSmplPos);
-            _elapsedSmplPos = 0;
+            _elapsedSmplPos += len;
+            if (_elapsedSmplPos > (_smplRate >> 5))
+            {
+                emit currentPosChanged(_currentSmplPos);
+                _elapsedSmplPos = 0;
+            }
         }
     }
 }
 
-void Voice::takeData(float * data, quint32 nbSkip, quint32 nbRead, qint32 loopMode, quint32 loopStart, quint32 loopEnd)
+float * Voice::getData(quint32 goOn)
 {
-    if (loopMode == 1 || (loopMode == 3 && !_release)) // Loop?
-    {
-        // Skip
-        _currentSmplPos += nbSkip;
-        while (_currentSmplPos >= loopEnd)
-            _currentSmplPos += loopStart - loopEnd;
+    // New sample position
+    _currentSmplPos += goOn;
 
-        // Read
+    // If at least 7 points are available after the current position, use a pointer to the data directly
+    if (_dataSmplLength - _currentSmplPos >= 7)
+        return &_dataSmpl[_currentSmplPos];
+
+    quint32 remainingSamples = _dataSmplLength - _currentSmplPos;
+    if (remainingSamples > 0)
+    {
+        // Copy what is possible to copy, fill the rest with 0
+        memcpy(_srcData, &_dataSmpl[_currentSmplPos], remainingSamples * sizeof(float));
+        memset(&_srcData[remainingSamples], 0, (7 - remainingSamples) * sizeof(float));
+    }
+    else
+    {
+        // No more data, fill with 0
+        memset(_srcData, 0, 7 * sizeof(float));
+    }
+
+    _isFinished = true;
+    return _srcData;
+}
+
+float * Voice::getDataWithLoop(quint32 goOn, quint32 loopStart, quint32 loopEnd)
+{
+    // New sample position
+    _currentSmplPos += goOn;
+
+    // Possibly go back to the beginning of the loop
+    while (_currentSmplPos >= loopEnd)
+        _currentSmplPos += loopStart - loopEnd;
+
+    // If at least 7 points are available after the current position, use a pointer to the data directly
+    if (loopEnd - _currentSmplPos >= 7)
+        return &_dataSmpl[_currentSmplPos];
+
+    if (loopEnd - loopStart >= 7)
+    {
+        // Or take the end + the beginning of the loop
+        quint32 remainingSamples = loopEnd - _currentSmplPos;
+        memcpy(_srcData, &_dataSmpl[_currentSmplPos], remainingSamples * sizeof(float));
+        memcpy(&_srcData[remainingSamples], &_dataSmpl[loopStart], (7 - remainingSamples) * sizeof(float));
+    }
+    else
+    {
+        // Or, if the loop is too short, use the loop several times
         quint32 total = 0;
-        while (nbRead - total > 0)
+        while (total < 7)
         {
-            const quint32 chunk = qMin(loopEnd - _currentSmplPos, nbRead - total);
-            memcpy(&data[total], &_dataSmpl[_currentSmplPos], chunk * sizeof(float));
+            const quint32 chunk = qMin(loopEnd - _currentSmplPos, 7 - total);
+            memcpy(&_srcData[total], &_dataSmpl[_currentSmplPos], chunk * sizeof(float));
             _currentSmplPos += chunk;
             if (_currentSmplPos >= loopEnd)
                 _currentSmplPos = loopStart;
             total += chunk;
         }
     }
-    else
-    {
-        // Skip
-        _currentSmplPos += nbSkip;
 
-        // Read
-        quint32 sampleEnd = _dataSmplLength;
-        if (_currentSmplPos > sampleEnd)
-        {
-            // No more data, fill with 0
-            memset(data, 0, nbRead * sizeof(float));
-            _isFinished = true;
-        }
-        else if (sampleEnd - _currentSmplPos < nbRead)
-        {
-            // Copy what is possible to copy, fill the rest with 0
-            memcpy(data, &_dataSmpl[_currentSmplPos], sizeof(qint32) * (sampleEnd - _currentSmplPos));
-            memset(&data[sampleEnd - _currentSmplPos], 0, (nbRead - sampleEnd + _currentSmplPos) * sizeof(float));
-
-            // We are now at the end
-            _currentSmplPos = sampleEnd;
-            _isFinished = true;
-        }
-        else
-        {
-            // Copy data
-            memcpy(data, &_dataSmpl[_currentSmplPos], nbRead * sizeof(float));
-            _currentSmplPos += nbRead;
-        }
-    }
+    return _srcData;
 }
 
 void Voice::release(bool quick)
