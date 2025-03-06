@@ -76,6 +76,17 @@ signals:
     void readFinished(int token);
 
 private:
+    inline float multiply(float * coeffs, float * srcData)
+    {
+        return coeffs[0] * srcData[0] +
+               coeffs[1] * srcData[1] +
+               coeffs[2] * srcData[2] +
+               coeffs[3] * srcData[3] +
+               coeffs[4] * srcData[4] +
+               coeffs[5] * srcData[5] +
+               coeffs[6] * srcData[6];
+    }
+
     // Oscillators and envelopes
     OscTriangle _modLFO, _vibLFO;
     EnveloppeVol _volEnvelope, _modEnvelope;
@@ -99,11 +110,12 @@ private:
     // Saved state for resampling
     float _srcData[7];
     quint32 _lastDistanceFraction;
+    qint32 _moreAvailable;
 
     // Save state for the low pass filter
     float _x1, _x2, _y1, _y2;
 
-    float * getData(quint32 goOn);
+    float * getData(quint32 goOn, quint32 loopStart, quint32 loopEnd);
     float * getDataWithLoop(quint32 goOn, quint32 loopStart, quint32 loopEnd);
     void biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float inv_Q);
     static float getSinValue(float value); // Range [0; 0.5] for [0; pi / 2]

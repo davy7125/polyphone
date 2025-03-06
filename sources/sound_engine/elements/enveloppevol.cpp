@@ -55,8 +55,8 @@ bool EnveloppeVol::getEnvelope(float * data, quint32 chunkCount, bool release, i
         v_timeDecay = voiceParam->getFloat(champ_decayModEnv) * _sampleRate;
         v_levelSustain = voiceParam->getFloat(champ_sustainModEnv);
         v_timeRelease = voiceParam->getFloat(champ_releaseModEnv) * _sampleRate;
-        v_noteToHold = static_cast<float>(voiceParam->getInteger(champ_keynumToModEnvHold)) / 1200.f;
-        v_noteToDecay = static_cast<float>(voiceParam->getInteger(champ_keynumToModEnvDecay)) / 1200.f;
+        v_noteToHold = static_cast<float>(voiceParam->getInteger(champ_keynumToModEnvHold)) * 0.000833333f /* 1:1200 */;
+        v_noteToDecay = static_cast<float>(voiceParam->getInteger(champ_keynumToModEnvDecay)) * 0.000833333f /* 1:1200 */;
     }
     else
     {
@@ -66,17 +66,17 @@ bool EnveloppeVol::getEnvelope(float * data, quint32 chunkCount, bool release, i
         v_timeDecay = voiceParam->getFloat(champ_decayVolEnv) * _sampleRate;
         v_levelSustain = voiceParam->getFloat(champ_sustainVolEnv);
         v_timeRelease = voiceParam->getFloat(champ_releaseVolEnv) * _sampleRate;
-        v_noteToHold = static_cast<float>(voiceParam->getInteger(champ_keynumToVolEnvHold)) / 1200.f;
-        v_noteToDecay = static_cast<float>(voiceParam->getInteger(champ_keynumToVolEnvDecay)) / 1200.f;
+        v_noteToHold = static_cast<float>(voiceParam->getInteger(champ_keynumToVolEnvHold)) * 0.000833333f /* 1:1200 */;
+        v_noteToDecay = static_cast<float>(voiceParam->getInteger(champ_keynumToVolEnvDecay)) * 0.000833333f /* 1:1200 */;
     }
 
     // Duration of a quick release
     if (_quickRelease)
-        v_timeRelease = static_cast<quint32>(0.04 * _sampleRate);
+        v_timeRelease = static_cast<quint32>(0.04f * _sampleRate);
 
     // Duration of the attack for the release mode
     if (_currentPhase == phase6quickAttack)
-        v_timeAttack = static_cast<quint32>(0.04 * _sampleRate);
+        v_timeAttack = static_cast<quint32>(0.04f * _sampleRate);
 
     // Beginning of the release phase?
     if (release && _currentPhase != phase7off && _currentPhase != phase6release && _currentPhase != phase6quickAttack)
@@ -87,7 +87,7 @@ bool EnveloppeVol::getEnvelope(float * data, quint32 chunkCount, bool release, i
 
     // Compute the sustain level
     float levelSustain = _isMod ?
-                (1.f - v_levelSustain / 100) : // percentage
+                (1.f - 0.01f * v_levelSustain) : // percentage
                 static_cast<float>(qPow(10, -0.05 * static_cast<double>(v_levelSustain))); // decrease in dB
 
     // Update hold / decay time and volume according to the key

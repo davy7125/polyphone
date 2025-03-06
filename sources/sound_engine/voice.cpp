@@ -130,6 +130,7 @@ void Voice::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Div
     // Resampling initialization
     memset(_srcData, 0, 7 * sizeof(float));
     _lastDistanceFraction = 0;
+    _moreAvailable = -1;
 }
 
 void Voice::generateData(float * data, quint32 len)
@@ -227,48 +228,51 @@ void Voice::generateData(float * data, quint32 len)
             int fixedGap = static_cast<quint32>(
                 EnveloppeVol::fastPow2(currentDeltaPitch * 0.000833333f /* 1:1200 */ + 11.0f /* multiply by 2048, which is 2^11 */) + 0.5f);
 
-            // Resampling
-            float * coeffs, * srcData;
-            if (v_loopMode == 1 || (v_loopMode == 3 && !_release)) // Loop?
-            {
-                for (quint32 i = sampleStart; i < sampleEnd; ++i)
-                {
-                    // Compute the new position of the data to read and return a pointer to this data
-                    _lastDistanceFraction += fixedGap;
-                    srcData = getDataWithLoop(_lastDistanceFraction >> 11, loopStart, loopEnd);
-                    _lastDistanceFraction &= 0x7FF;
+            // Resampling (7th order sinc interpolation)
+            float * srcData = &_dataSmpl[_currentSmplPos];
+            quint32 i = sampleStart;
+            quint32 nextPosition = 0;
+            float *(Voice::*slowExtractFunction)(quint32,quint32,quint32) = (v_loopMode == 1 || (v_loopMode == 3 && !_release)) ? &Voice::getDataWithLoop : &Voice::getData;
 
-                    // 7th order sinc interpolation
-                    coeffs = s_sinc_table7[_lastDistanceFraction];
-                    data[i] = coeffs[0] * srcData[0] +
-                              coeffs[1] * srcData[1] +
-                              coeffs[2] * srcData[2] +
-                              coeffs[3] * srcData[3] +
-                              coeffs[4] * srcData[4] +
-                              coeffs[5] * srcData[5] +
-                              coeffs[6] * srcData[6];
+resample_fast:
+            // Fast extraction, if possible
+            while (1)
+            {
+                _lastDistanceFraction += fixedGap;
+                if ((qint32)(nextPosition = (_lastDistanceFraction >> 11)) > _moreAvailable)
+                {
+                    // Revert the last jump and update the current position
+                    _lastDistanceFraction -= fixedGap;
+                    _currentSmplPos += (_lastDistanceFraction >> 11);
+                    _lastDistanceFraction &= 0x7FF;
+                    goto resample_slow;
+                }
+
+                data[i++] = multiply(s_sinc_table7[_lastDistanceFraction & 0x7FF], &srcData[nextPosition]);
+                if (i >= sampleEnd)
+                {
+                    // Update the current position
+                    _currentSmplPos += nextPosition;
+                    _moreAvailable -= nextPosition;
+                    _lastDistanceFraction &= 0x7FF;
+                    goto resample_end;
                 }
             }
-            else
+resample_slow:
+            // First data extraction or complex extraction
+            while (1)
             {
-                for (quint32 i = sampleStart; i < sampleEnd; ++i)
-                {
-                    // Compute the new position of the data to read and return a pointer to this data
-                    _lastDistanceFraction += fixedGap;
-                    srcData = getData(_lastDistanceFraction >> 11);
-                    _lastDistanceFraction &= 0x7FF;
+                _lastDistanceFraction += fixedGap;
+                srcData = (*this.*slowExtractFunction)(_lastDistanceFraction >> 11, loopStart, loopEnd);
+                _lastDistanceFraction &= 0x7FF;
+                data[i++] = multiply(s_sinc_table7[_lastDistanceFraction], srcData);
 
-                    // 7th order sinc interpolation
-                    coeffs = s_sinc_table7[_lastDistanceFraction];
-                    data[i] = coeffs[0] * srcData[0] +
-                              coeffs[1] * srcData[1] +
-                              coeffs[2] * srcData[2] +
-                              coeffs[3] * srcData[3] +
-                              coeffs[4] * srcData[4] +
-                              coeffs[5] * srcData[5] +
-                              coeffs[6] * srcData[6];
-                }
+                if (i >= sampleEnd)
+                    goto resample_end;
+                if (_moreAvailable > 0)
+                    goto resample_fast;
             }
+resample_end:
 
             // Volume envelope and volume modulation with values from the mod LFO converted to dB
             float coeff = _dataVolArray[chunk] * fastPow10(0.05f * v_modLfoToVolume * _modLfoArray[chunk]);
@@ -278,7 +282,7 @@ void Voice::generateData(float * data, quint32 len)
                          (v_modEnvToFilterFc * _dataModArray[chunk] + v_modLfoToFilterFreq * _modLfoArray[chunk]) * 0.000833333f /* 1:1200 */);
             float a0, a1, a2, b1, b2;
             biQuadCoefficients(a0, a1, a2, b1, b2, valTmp, inv_q_lin);
-            for (quint32 i = sampleStart; i < sampleEnd; ++i)
+            for (i = sampleStart; i < sampleEnd; ++i)
             {
                 valTmp = a0 * data[i] + a1 * _x1 + a2 * _x2 - b1 * _y1 - b2 * _y2;
                 _x2 = _x1;
@@ -310,16 +314,19 @@ void Voice::generateData(float * data, quint32 len)
     }
 }
 
-float * Voice::getData(quint32 goOn)
+float * Voice::getData(quint32 goOn, quint32 loopStart, quint32 loopEnd)
 {
+    Q_UNUSED(loopStart)
+    Q_UNUSED(loopEnd)
+
     // New sample position
     _currentSmplPos += goOn;
 
     // If at least 7 points are available after the current position, use a pointer to the data directly
-    if (_dataSmplLength - _currentSmplPos >= 7)
+    if ((_moreAvailable = _dataSmplLength - _currentSmplPos - 7) >= 0)
         return &_dataSmpl[_currentSmplPos];
 
-    quint32 remainingSamples = _dataSmplLength - _currentSmplPos;
+    qint32 remainingSamples = _dataSmplLength - _currentSmplPos;
     if (remainingSamples > 0)
     {
         // Copy what is possible to copy, fill the rest with 0
@@ -346,10 +353,10 @@ float * Voice::getDataWithLoop(quint32 goOn, quint32 loopStart, quint32 loopEnd)
         _currentSmplPos += loopStart - loopEnd;
 
     // If at least 7 points are available after the current position, use a pointer to the data directly
-    if (loopEnd - _currentSmplPos >= 7)
+    if ((_moreAvailable = loopEnd - _currentSmplPos - 7) >= 0)
         return &_dataSmpl[_currentSmplPos];
 
-    if (loopEnd - loopStart >= 7)
+    if (loopEnd >= 7 + loopStart)
     {
         // Or take the end + the beginning of the loop
         quint32 remainingSamples = loopEnd - _currentSmplPos;
