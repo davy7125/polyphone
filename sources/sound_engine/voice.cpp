@@ -280,23 +280,16 @@ resample_end:
             // Low-pass filter
             float valTmp = v_filterFreq * EnveloppeVol::fastPow2(
                          (v_modEnvToFilterFc * _dataModArray[chunk] + v_modLfoToFilterFreq * _modLfoArray[chunk]) * 0.000833333f /* 1:1200 */);
-            float coeffs[3];
-            if (biQuadCoefficients(coeffs, valTmp, inv_q_lin))
+            float a0, a1, a2, b1, b2;
+            biQuadCoefficients(a0, a1, a2, b1, b2, valTmp, inv_q_lin);
+            for (i = sampleStart; i < sampleEnd; ++i)
             {
-                for (i = sampleStart; i < sampleEnd; ++i)
-                {
-                    valTmp = coeffs[0] * (data[i] + _x1 + _x1 + _x2) + coeffs[1] * _y1 + coeffs[2] * _y2;
-                    _x2 = _x1;
-                    _x1 = data[i];
-                    _y2 = _y1;
-                    _y1 = valTmp;
-                    data[i] = coeff * valTmp;
-                }
-            }
-            else
-            {
-                for (i = sampleStart; i < sampleEnd; ++i)
-                    data[i] *= coeff;
+                valTmp = a0 * data[i] + a1 * _x1 + a2 * _x2 - b1 * _y1 - b2 * _y2;
+                _x2 = _x1;
+                _x1 = data[i];
+                _y2 = _y1;
+                _y1 = valTmp;
+                data[i] = coeff * valTmp;
             }
         }
     }
@@ -427,7 +420,7 @@ void Voice::triggerReadFinishedSignal()
     emit readFinished(_token);
 }
 
-bool Voice::biQuadCoefficients(float * coeffs, float freq, float inv_Q)
+void Voice::biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float inv_Q)
 {
     // Calcul des coefficients d'une structure bi-quad pour un passe-bas
 
@@ -438,18 +431,35 @@ bool Voice::biQuadCoefficients(float * coeffs, float freq, float inv_Q)
         theta = 0.98f;
 
     if (inv_Q <= 0.f)
-        return false;
-
-    float dTmp = inv_Q * fastSin(theta) * 0.5f;
-    if (dTmp <= -1.0f)
-        return false;
-
-    float beta = 0.5f * (1.f - dTmp) / (1.f + dTmp);
-    float gamma = (0.5f + beta) * fastCos(theta);
-    coeffs[0] = (0.5f + beta - gamma) * 0.5f;
-    coeffs[1] = 2.f * gamma;
-    coeffs[2] = -2.f * beta;
-    return true;
+    {
+        a0 = 1.f;
+        a1 = 0.f;
+        a2 = 0.f;
+        b1 = 0.f;
+        b2 = 0.f;
+    }
+    else
+    {
+        float dTmp = inv_Q * fastSin(theta) * 0.5f;
+        if (dTmp <= -1.0f)
+        {
+            a0 = 1.f;
+            a1 = 0.f;
+            a2 = 0.f;
+            b1 = 0.f;
+            b2 = 0.f;
+        }
+        else
+        {
+            float beta = 0.5f * (1.f - dTmp) / (1.f + dTmp);
+            float gamma = (0.5f + beta) * fastCos(theta);
+            a0 = (0.5f + beta - gamma) * 0.5f;
+            a1 = 2.f * a0;
+            a2 = a0;
+            b1 = -2.f * gamma;
+            b2 = 2.f * beta;
+        }
+    }
 }
 
 float Voice::fastSin(float value)

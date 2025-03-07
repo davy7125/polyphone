@@ -76,7 +76,7 @@ signals:
     void readFinished(int token);
 
 private:
-    inline float multiply(const float * __restrict__ coeffs, const float * __restrict__ srcData)
+    inline float multiply(float * coeffs, float * srcData)
     {
         return coeffs[0] * srcData[0] +
                coeffs[1] * srcData[1] +
@@ -117,7 +117,7 @@ private:
 
     float * getData(quint32 goOn, quint32 loopStart, quint32 loopEnd);
     float * getDataWithLoop(quint32 goOn, quint32 loopStart, quint32 loopEnd);
-    bool biQuadCoefficients(float *coeffs, float freq, float inv_Q);
+    void biQuadCoefficients(float &a0, float &a1, float &a2, float &b1, float &b2, float freq, float inv_Q);
     static float getSinValue(float value); // Range [0; 0.5] for [0; pi / 2]
 
     // Arrays
