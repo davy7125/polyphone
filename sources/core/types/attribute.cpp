@@ -26,6 +26,7 @@
 #include "utils.h"
 #include <qmath.h>
 #include "basetypes.h"
+#include "enveloppevol.h"
 
 QList<AttributeType> Attribute::s_attributesForPrstMod = QList<AttributeType>()
         << champ_fineTune << champ_coarseTune << champ_scaleTuning
@@ -133,7 +134,7 @@ double Attribute::toRealValue(AttributeType champ, bool isPrst, AttributeValue s
     case champ_decayModEnv: case champ_decayVolEnv:
     case champ_releaseModEnv: case champ_releaseVolEnv:
     case champ_delayModLFO: case champ_delayVibLFO:
-        realValue = qPow(2., 0.000833333 * storedValue.shValue); // 0.000833333 = 1/1200
+        realValue = (double)EnveloppeVol::fastPow2(0.000833333f * storedValue.shValue); // 0.000833333 = 1/1200
         break;
     case champ_fineTune: case champ_coarseTune: case champ_keynumToVolEnvHold: case champ_keynumToVolEnvDecay:
     case champ_keynumToModEnvHold: case champ_keynumToModEnvDecay: case champ_modEnvToPitch:
@@ -163,9 +164,9 @@ double Attribute::toRealValue(AttributeType champ, bool isPrst, AttributeValue s
         break;
     case champ_initialFilterFc: case champ_freqModLFO: case champ_freqVibLFO:
         if (isPrst)
-            realValue = qPow(2., 0.000833333 * storedValue.shValue); // 0.000833333 = 1/1200
+            realValue = (double)EnveloppeVol::fastPow2(0.000833333f * storedValue.shValue); // 0.000833333 = 1/1200
         else
-            realValue = qPow(2., 0.000833333 * storedValue.shValue) * 8.176;
+            realValue = (double)EnveloppeVol::fastPow2(0.000833333f * storedValue.shValue) * 8.176;
         break;
     case champ_keyRange: case champ_velRange:
         realValue = storedValue.rValue.byLo * 1000 + storedValue.rValue.byHi;
