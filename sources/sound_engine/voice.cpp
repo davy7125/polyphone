@@ -122,10 +122,11 @@ void Voice::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Div
     _y1 = 0;
     _y2 = 0;
 
-    _modLFO.initialize(_audioSmplRate);
-    _vibLFO.initialize(_audioSmplRate);
-    _volEnvelope.initialize(_audioSmplRate, false);
-    _modEnvelope.initialize(_audioSmplRate, true);
+    quint32 sampleRateForChunks = (_audioSmplRate >> COMPUTATION_CHUNK_SHIFT);
+    _modLFO.initialize(sampleRateForChunks);
+    _vibLFO.initialize(sampleRateForChunks);
+    _volEnvelope.initialize(sampleRateForChunks, false);
+    _modEnvelope.initialize(sampleRateForChunks, true);
 
     // Resampling initialization
     memset(_srcData, 0, 7 * sizeof(float));

@@ -32,7 +32,7 @@ void EnveloppeVol::initialize(quint32 sampleRate, bool isMod)
     _currentSmpl = 0;
     _precValue = 0.0f;
     _currentPhase = phase1delay;
-    _sampleRate = sampleRate / COMPUTATION_CHUNK;
+    _sampleRate = sampleRate;
     _isMod = isMod;
     _quickRelease = false;
 }

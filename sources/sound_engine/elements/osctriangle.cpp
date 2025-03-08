@@ -24,12 +24,11 @@
 
 #include "osctriangle.h"
 #include <string.h>
-#include "basetypes.h"
 
 void OscTriangle::initialize(quint32 sampleRate)
 {
-    _sampleRate = sampleRate / COMPUTATION_CHUNK;
-    _fourInvSampleRate = sampleRate > 0 ? 4.0f / static_cast<float>(sampleRate) : 0.0f;
+    _sampleRate = sampleRate;
+    _fourInvSampleRate = _sampleRate > 0 ? 4.0f / static_cast<float>(_sampleRate) : 0.0f;
     _previousFreq = -1.0f;
     _currentDelay = 0;
     _delayEnded = false;
