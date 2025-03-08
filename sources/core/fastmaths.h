@@ -22,51 +22,34 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ENVELOPPEVOL_H
-#define ENVELOPPEVOL_H
+#ifndef FASTMATHS_H
+#define FASTMATHS_H
 
 #include <QtGlobal>
-class VoiceParam;
 
-class EnveloppeVol
+class FastMaths
 {
 public:
-    EnveloppeVol() {}
+    static void initialize();
 
-    void initialize(quint32 sampleRate, bool isMod);
-
-    // Apply an envelop on data
-    // Return true if the end of the release is reached
-    bool getEnvelope(float *data, quint32 chunkCount, bool release, int note, float gain, VoiceParam * voiceParam);
-
-    // Call a quick release
-    void quickRelease();
-
-    // Call a quick attack, just before the release (sample mode "release")
-    void quickAttack();
+    static float fastSin(float value); // Range [0; 1] for [0; pi]
+    static float fastCos(float value); // Range [0; 1] for [0; pi]
+    static float fastPow10(float value); // Range [-102.4; 102.3]
+    static float fastPow2(float p)
+    {
+        float offset = (p < 0) ? 1.0f : 0.0f;
+        float clipp = (p < -126) ? -126.0f : p;
+        int w = static_cast<int>(clipp);
+        float z = clipp - static_cast<float>(w) + offset;
+        union { quint32 i; float f; } v =
+            { static_cast<quint32> ( (1 << 23) * (clipp + 121.2740575f + 27.7280233f / (4.84252568f - z) - 1.49012907f * z) ) };
+        return v.f;
+    }
 
 private:
-    enum EnveloppePhase
-    {
-        phase1delay,
-        phase2attack,
-        phase3hold,
-        phase4decay,
-        phase5sustain,
-        phase6quickAttack,
-        phase6release,
-        phase7off
-    };
-
-    // State of the system
-    quint32 _currentSmpl;
-    float _precValue;
-    EnveloppePhase _currentPhase;
-
-    quint32 _sampleRate;
-    bool _isMod;
-    bool _quickRelease;
-    float _quickAttackTarget;
+    static float getSinValue(float value); // Range [0; 0.5] for [0; pi / 2]
+    static float s_sin_table[2048];
+    static float s_pow10_table[2048];
 };
 
-#endif // ENVELOPPEVOL_H
+#endif // FASTMATHS_H

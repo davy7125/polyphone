@@ -26,6 +26,7 @@
 #include "soundengine.h"
 #include "voicelist.h"
 #include "voice.h"
+#include "fastmaths.h"
 #include <QThread>
 
 VoiceList * SoundEngine::s_voices = nullptr;
@@ -134,8 +135,8 @@ void SoundEngine::generateData(quint32 len)
         voice->generateData(_dataTmp, len);
 
         tmp = 0.005f * (voice->getParam()->getFloat(champ_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]
-        coefL = Voice::fastCos(tmp);
-        coefR = Voice::fastSin(tmp);
+        coefL = FastMaths::fastCos(tmp);
+        coefR = FastMaths::fastSin(tmp);
 
         coefRev = 0.01f * voice->getParam()->getFloat(champ_reverbEffectsSend);
         coefNonRev = 1.f - coefRev;

@@ -39,6 +39,7 @@
 #include "mainwindow.h"
 #include "translationmanager.h"
 #include "modulatordata.h"
+#include "fastmaths.h"
 #include "voice.h"
 #include "tools/merge_samples/runnablemerger.h"
 
@@ -57,6 +58,7 @@ int launchApplication(QtSingleApplication * app, Options &options)
 {
     // Prepare arrays
     SFModulator::prepareConversionTables();
+    FastMaths::initialize();
     Voice::prepareTables();
 
     // Application style

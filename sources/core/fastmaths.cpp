@@ -22,51 +22,61 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ENVELOPPEVOL_H
-#define ENVELOPPEVOL_H
+#include "fastmaths.h"
+#include "qmath.h"
 
-#include <QtGlobal>
-class VoiceParam;
+float FastMaths::s_sin_table[2048];
+float FastMaths::s_pow10_table[2048];
 
-class EnveloppeVol
+void FastMaths::initialize()
 {
-public:
-    EnveloppeVol() {}
+    // Lookup table for sinus, values in [0; pi/2[
+    for (int i = 0; i < 2048; i++)
+        s_sin_table[i] = (float)sin(static_cast<double>(i) * M_PI_2 / 2048.0);
 
-    void initialize(quint32 sampleRate, bool isMod);
+    // Lookup table for pow10, values in [-102.4; 102.3]
+    for (int i = 0; i < 2048; i++)
+        s_pow10_table[i] = qPow(10.0, 0.1 * (double)(i - 1024));
+}
 
-    // Apply an envelop on data
-    // Return true if the end of the release is reached
-    bool getEnvelope(float *data, quint32 chunkCount, bool release, int note, float gain, VoiceParam * voiceParam);
+float FastMaths::fastSin(float value)
+{
+    return value < 0.5f ? getSinValue(value) : getSinValue(1.f - value);
+}
 
-    // Call a quick release
-    void quickRelease();
+float FastMaths::fastCos(float value)
+{
+    return value < 0.5f ? getSinValue(0.5f - value) : -getSinValue(value - 0.5f);
+}
 
-    // Call a quick attack, just before the release (sample mode "release")
-    void quickAttack();
+float FastMaths::getSinValue(float value)
+{
+    value *= 4096.f;
+    int indexBefore = static_cast<int>(value);
+    float diff = value - static_cast<float>(indexBefore);
 
-private:
-    enum EnveloppePhase
-    {
-        phase1delay,
-        phase2attack,
-        phase3hold,
-        phase4decay,
-        phase5sustain,
-        phase6quickAttack,
-        phase6release,
-        phase7off
-    };
+    if (indexBefore < 0)
+        return 0.f;
+    if (indexBefore > 2047)
+        return 1.f;
 
-    // State of the system
-    quint32 _currentSmpl;
-    float _precValue;
-    EnveloppePhase _currentPhase;
+    // Linear interpolation
+    return indexBefore >= 2047 ?
+               s_sin_table[2047] + (1.f - s_sin_table[2047]) * diff :
+               s_sin_table[indexBefore] + (s_sin_table[indexBefore + 1] - s_sin_table[indexBefore]) * diff;
+}
 
-    quint32 _sampleRate;
-    bool _isMod;
-    bool _quickRelease;
-    float _quickAttackTarget;
-};
+float FastMaths::fastPow10(float value)
+{
+    value = 10.0f * (value + 102.4f);
+    int indexBefore = static_cast<int>(value);
+    float diff = value - static_cast<float>(indexBefore);
 
-#endif // ENVELOPPEVOL_H
+    if (indexBefore < 0)
+        return s_pow10_table[0];
+    if (indexBefore > 2047)
+        return s_pow10_table[2047];
+
+    // Linear interpolation
+    return s_pow10_table[indexBefore] + (s_pow10_table[indexBefore + 1] - s_pow10_table[indexBefore]) * diff;
+}

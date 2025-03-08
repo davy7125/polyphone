@@ -25,7 +25,7 @@
 #include "enveloppevol.h"
 #include "qmath.h"
 #include "voiceparam.h"
-#include "voice.h"
+#include "fastmaths.h"
 
 void EnveloppeVol::initialize(quint32 sampleRate, bool isMod)
 {
@@ -89,11 +89,11 @@ bool EnveloppeVol::getEnvelope(float * data, quint32 chunkCount, bool release, i
     // Compute the sustain level
     float levelSustain = _isMod ?
                 (1.f - 0.01f * v_levelSustain) : // percentage
-                Voice::fastPow10(-0.05f * v_levelSustain); // decrease in dB
+                FastMaths::fastPow10(-0.05f * v_levelSustain); // decrease in dB
 
     // Update hold / decay time and volume according to the key
-    quint32 timeHold = static_cast<quint32>(v_timeHold * fastPow2(v_noteToHold * static_cast<float>(60 - note)));
-    quint32 timeDecay = static_cast<quint32>(v_timeDecay * fastPow2(v_noteToDecay * static_cast<float>(60 - note)));
+    quint32 timeHold = static_cast<quint32>(v_timeHold * FastMaths::fastPow2(v_noteToHold * static_cast<float>(60 - note)));
+    quint32 timeDecay = static_cast<quint32>(v_timeDecay * FastMaths::fastPow2(v_noteToDecay * static_cast<float>(60 - note)));
 
     // Avancement
     bool end = false;

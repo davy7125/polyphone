@@ -23,15 +23,13 @@
 ***************************************************************************/
 
 #include "voice.h"
-#include "qmath.h"
 #include "smpl.h"
+#include "fastmaths.h"
 
 volatile int Voice::s_tuningFork = 440;
 volatile float Voice::s_temperament[12] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 volatile int Voice::s_temperamentRelativeKey = 0;
 float Voice::s_sinc_table7[2048][7];
-float Voice::s_sin_table[2048];
-float Voice::s_pow10_table[2048];
 
 void Voice::prepareTables()
 {
@@ -58,14 +56,6 @@ void Voice::prepareTables()
             s_sinc_table7[2048 - i2 - 1][i] = (float)v;
         }
     }
-
-    // Lookup table for sinus, values in [0; pi/2[
-    for (int i = 0; i < 2048; i++)
-        s_sin_table[i] = (float)sin(static_cast<double>(i) * M_PI_2 / 2048.0);
-
-    // Lookup table for pow10, values in [-102.4; 102.3]
-    for (int i = 0; i < 2048; i++)
-        s_pow10_table[i] = qPow(10.0, 0.1 * (double)(i - 1024));
 }
 
 Voice::Voice(VoiceParam * voiceParam) : QObject(nullptr),
@@ -164,7 +154,7 @@ void Voice::generateData(float * data, quint32 len)
 
     /// ENVELOPES ///
     float v_attenuation = _voiceParam->getFloat(champ_initialAttenuation);
-    if (_volEnvelope.getEnvelope(_dataVolArray, chunkCount, _release, playedNote, fastPow10(0.05f * (_gain - v_attenuation - 0.5f * v_filterQ)), _voiceParam))
+    if (_volEnvelope.getEnvelope(_dataVolArray, chunkCount, _release, playedNote, FastMaths::fastPow10(0.05f * (_gain - v_attenuation - 0.5f * v_filterQ)), _voiceParam))
         if (v_loopMode != 3)
             _isFinished = true;
     _modEnvelope.getEnvelope(_dataModArray, chunkCount, _release, playedNote, 1.0f, _voiceParam);
@@ -217,7 +207,7 @@ void Voice::generateData(float * data, quint32 len)
         // Parameter for the low-pass filter
         // - 3.01f => so that a value of 0 gives a non-resonant low pass
         // If v_filterQ is 0, inv_q_lin is sqrt(2)
-        float inv_q_lin = fastPow10(-0.05f * (v_filterQ - 3.01f));
+        float inv_q_lin = FastMaths::fastPow10(-0.05f * (v_filterQ - 3.01f));
 
         for (quint32 chunk = 0; chunk < chunkCount; ++chunk)
         {
@@ -227,7 +217,7 @@ void Voice::generateData(float * data, quint32 len)
             // Distance between the points
             float currentDeltaPitch = deltaPitchFixed + v_modEnvToPitch * _dataModArray[chunk] + v_modLfoToPitch * _modLfoArray[chunk] + v_vibLfoToPitch * _vibLfoArray[chunk];
             int fixedGap = static_cast<quint32>(
-                EnveloppeVol::fastPow2(currentDeltaPitch * 0.000833333f /* 1:1200 */ + 11.0f /* multiply by 2048, which is 2^11 */) + 0.5f);
+                FastMaths::fastPow2(currentDeltaPitch * 0.000833333f /* 1:1200 */ + 11.0f /* multiply by 2048, which is 2^11 */) + 0.5f);
 
             // Resampling (7th order sinc interpolation)
             float * srcData = &_dataSmpl[_currentSmplPos];
@@ -276,10 +266,10 @@ resample_slow:
 resample_end:
 
             // Volume envelope and volume modulation with values from the mod LFO converted to dB
-            float coeff = _dataVolArray[chunk] * fastPow10(0.05f * v_modLfoToVolume * _modLfoArray[chunk]);
+            float coeff = _dataVolArray[chunk] * FastMaths::fastPow10(0.05f * v_modLfoToVolume * _modLfoArray[chunk]);
 
             // Low-pass filter
-            float valTmp = v_filterFreq * EnveloppeVol::fastPow2(
+            float valTmp = v_filterFreq * FastMaths::fastPow2(
                          (v_modEnvToFilterFc * _dataModArray[chunk] + v_modLfoToFilterFreq * _modLfoArray[chunk]) * 0.000833333f /* 1:1200 */);
             float coeffs[3];
             if (biQuadCoefficients(coeffs, valTmp, inv_q_lin))
@@ -441,56 +431,14 @@ bool Voice::biQuadCoefficients(float * coeffs, float freq, float inv_Q)
     if (inv_Q <= 0.f)
         return false;
 
-    float dTmp = inv_Q * fastSin(theta) * 0.5f;
+    float dTmp = inv_Q * FastMaths::fastSin(theta) * 0.5f;
     if (dTmp <= -1.0f)
         return false;
 
     float beta = 0.5f * (1.f - dTmp) / (1.f + dTmp);
-    float gamma = (0.5f + beta) * fastCos(theta);
+    float gamma = (0.5f + beta) * FastMaths::fastCos(theta);
     coeffs[0] = (0.5f + beta - gamma) * 0.5f;
     coeffs[1] = 2.f * gamma;
     coeffs[2] = -2.f * beta;
     return true;
-}
-
-float Voice::fastSin(float value)
-{
-    return value < 0.5f ? getSinValue(value) : getSinValue(1.f - value);
-}
-
-float Voice::fastCos(float value)
-{
-    return value < 0.5f ? getSinValue(0.5f - value) : -getSinValue(value - 0.5f);
-}
-
-float Voice::getSinValue(float value)
-{
-    value *= 4096.f;
-    int indexBefore = static_cast<int>(value);
-    float diff = value - static_cast<float>(indexBefore);
-
-    if (indexBefore < 0)
-        return 0.f;
-    if (indexBefore > 2047)
-        return 1.f;
-
-    // Linear interpolation
-    return indexBefore >= 2047 ?
-               s_sin_table[2047] + (1.f - s_sin_table[2047]) * diff :
-               s_sin_table[indexBefore] + (s_sin_table[indexBefore + 1] - s_sin_table[indexBefore]) * diff;
-}
-
-float Voice::fastPow10(float value)
-{
-    value = 10.0f * (value + 102.4f);
-    int indexBefore = static_cast<int>(value);
-    float diff = value - static_cast<float>(indexBefore);
-
-    if (indexBefore < 0)
-        return s_pow10_table[0];
-    if (indexBefore > 2047)
-        return s_pow10_table[2047];
-
-    // Linear interpolation
-    return s_pow10_table[indexBefore] + (s_pow10_table[indexBefore + 1] - s_pow10_table[indexBefore]) * diff;
 }

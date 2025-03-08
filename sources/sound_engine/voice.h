@@ -67,9 +67,6 @@ public:
 
     // Maths
     static void prepareTables();
-    static float fastSin(float value); // Range [0; 1] for [0; pi]
-    static float fastCos(float value); // Range [0; 1] for [0; pi]
-    static float fastPow10(float value); // Range [-102.4; 102.3]
 
 signals:
     void currentPosChanged(quint32 pos);
@@ -118,7 +115,6 @@ private:
     float * getData(quint32 goOn, quint32 loopStart, quint32 loopEnd);
     float * getDataWithLoop(quint32 goOn, quint32 loopStart, quint32 loopEnd);
     bool biQuadCoefficients(float *coeffs, float freq, float inv_Q);
-    static float getSinValue(float value); // Range [0; 0.5] for [0; pi / 2]
 
     // Arrays
     quint32 _arrayLength;
@@ -131,8 +127,6 @@ private:
     static volatile float s_temperament[12]; // Fine tune in cents from each key from C to B
     static volatile int s_temperamentRelativeKey;
     static float s_sinc_table7[2048][7];
-    static float s_sin_table[2048];
-    static float s_pow10_table[2048];
 };
 
 #endif // VOICE_H

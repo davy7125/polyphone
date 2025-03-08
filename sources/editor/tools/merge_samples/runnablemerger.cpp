@@ -30,6 +30,7 @@
 #include "soundfont.h"
 #include "instprst.h"
 #include "voice.h"
+#include "fastmaths.h"
 
 quint32 RunnableMerger::SAMPLE_RATE = 48000;
 quint32 RunnableMerger::BUFFER_LENGTH = 1024;
@@ -208,8 +209,8 @@ void RunnableMerger::playSmpl(float * dataR, float * dataL, InstPrst * prst, Div
 
     // Pan coeffs
     float tmp = 0.005f * (voiceParam->getFloat(champ_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]
-    float coefR = Voice::fastSin(tmp);
-    float coefL = Voice::fastCos(tmp);
+    float coefR = FastMaths::fastSin(tmp);
+    float coefL = FastMaths::fastCos(tmp);
 
     // Buffers
     float * buffer = new float[BUFFER_LENGTH];

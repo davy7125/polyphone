@@ -223,6 +223,7 @@ INCLUDEPATH += lib \
     .
 
 SOURCES	+= main.cpp \
+    core/fastmaths.cpp \
     core/input/grandorgue/grandorguedatathrough.cpp \
     core/input/grandorgue/grandorgueranklink.cpp \
     core/input/grandorgue/grandorgueswitch.cpp \
@@ -584,6 +585,7 @@ SOURCES	+= main.cpp \
 
 HEADERS += \
     context/imidilistener.h \
+    core/fastmaths.h \
     core/input/grandorgue/grandorguedatathrough.h \
     core/input/grandorgue/grandorgueranklink.h \
     core/input/grandorgue/grandorgueswitch.h \
