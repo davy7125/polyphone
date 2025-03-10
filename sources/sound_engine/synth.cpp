@@ -33,6 +33,7 @@
 #include "smpl.h"
 #include "parametermodulator.h"
 #include "voice.h"
+#include "fastmaths.h"
 
 int Synth::s_sampleVoiceTokenCounter = 0;
 
@@ -758,10 +759,8 @@ void Synth::applyChoRev(float * dataL, float * dataR, quint32 maxlen)
     }
 
     // Add the data rev
-    for (quint32 i = 0; i < maxlen; i++)
-        dataL[i] += _dataRevL[i];
-    for (quint32 i = 0; i < maxlen; i++)
-        dataR[i] += _dataRevR[i];
+    FastMaths::addVectors(dataL, _dataRevL, maxlen);
+    FastMaths::addVectors(dataR, _dataRevR, maxlen);
 
     if (_internalConfiguration.reverbOn && lockAcquired)
     {
@@ -786,14 +785,10 @@ void Synth::applyChoRev(float * dataL, float * dataR, quint32 maxlen)
     if (lockAcquired)
         _effectsInUse.storeRelaxed(0);
 
-    for (quint32 i = 0; i < maxlen; i++)
-        dataL[i] += _dataChoL[i];
-    for (quint32 i = 0; i < maxlen; i++)
-        dataR[i] += _dataChoR[i];
+    FastMaths::addVectors(dataL, _dataChoL, maxlen);
+    FastMaths::addVectors(dataR, _dataChoR, maxlen);
 
     // Add the data with no effects
-    for (quint32 i = 0; i < maxlen; i++)
-        dataL[i] += _dataL[i];
-    for (quint32 i = 0; i < maxlen; i++)
-        dataR[i] += _dataR[i];
+    FastMaths::addVectors(dataL, _dataL, maxlen);
+    FastMaths::addVectors(dataR, _dataR, maxlen);
 }

@@ -30,11 +30,22 @@ class IMidiListener;
 class IMidiValues
 {
 public:
+    virtual ~IMidiValues() {}
     virtual int getControllerValue(int channel, int controllerNumber) = 0;
     virtual float getBendValue(int channel) = 0;
     virtual float getBendSensitivityValue(int channel) = 0;
     virtual int getMonoPressure(int channel) = 0;
     virtual int getPolyPressure(int channel, int key) = 0;
+};
+
+class DummyMidiDevice: public IMidiValues
+{
+public:
+    int getControllerValue(int, int) override { return 0; }
+    float getBendValue(int) override { return 0.f; }
+    float getBendSensitivityValue(int) override { return 0.f; }
+    int getMonoPressure(int) override { return 0; }
+    int getPolyPressure(int, int) override { return 0; }
 };
 
 #endif // IMIDIVALUES_H

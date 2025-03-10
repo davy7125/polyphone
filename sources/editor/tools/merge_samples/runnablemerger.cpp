@@ -133,7 +133,8 @@ void RunnableMerger::run()
         sm->set(idSmplL, champ_sfSampleType, value);
     }
 
-    emit _tool->elementProcessed(idSmplR, idSmplL, _key, _minKey);
+    if (_tool)
+        emit _tool->elementProcessed(idSmplR, idSmplL, _key, _minKey);
 }
 
 void RunnableMerger::playPrst(float * dataR, float * dataL, Soundfont * soundfont, InstPrst * prst)

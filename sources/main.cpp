@@ -196,11 +196,12 @@ int displayHelp(Options &options)
     return 0;
 }
 
-int test()
+/// This test, using the merge tool, can be called for profiling the sound generation in voice.cpp
+int testVoice()
 {
     ContextManager::initializeNoAudioMidi();
 
-    QString filePath = "/home/davy/Téléchargements/POS - plein-jeu.sf2";
+    QString filePath = "/home/davy/Téléchargements/GO - Plein jeu V.sf2";
     AbstractInputParser * input = InputFactory::getInput(filePath);
     input->process(false);
     if (!input->isSuccess())
@@ -217,7 +218,15 @@ int test()
     for (int key = 36; key <= 40; key++)
     {
         writeLine("Key: " + QString::number(key));
-        RunnableMerger merger(nullptr, EltID(elementPrst, sf2Index, 2), key, key, false, true, 4, 2);
+        RunnableMerger merger(
+            nullptr,
+            EltID(elementPrst, sf2Index, 0),  // The first preset is used
+            key, key,
+            false, // No loop
+            true, // Stereo enabled
+            4, // Create samples lasting 4s (sustained phase)
+            2  // With a 2s releaase
+        );
         merger.run();
         writeLine("ok");
     }
@@ -225,9 +234,35 @@ int test()
     return 0;
 }
 
+/// This test can be used for testing the synth parallel computing mechanisms
+int testSynth()
+{
+    int bufferLength = 512;
+    int sampleRate = 48000;
+    int duration = 400; // in seconds
+
+    ContextManager::initializeNoAudioMidi();
+    Synth * synth = new Synth(SoundfontManager::getInstance()->getSoundfonts(), SoundfontManager::getInstance()->getMutex());
+    synth->configure(ContextManager::configuration()->getSynthConfig());
+    synth->setSampleRateAndBufferSize(sampleRate, bufferLength);
+
+    float * lBuffer = new float[bufferLength];
+    float * rBuffer = new float[bufferLength];
+    int iterationNumber = duration * sampleRate / bufferLength;
+    for (int i = 0; i < iterationNumber; i++)
+        synth->readData(lBuffer, rBuffer, bufferLength);
+    delete [] lBuffer;
+    delete [] rBuffer;
+    delete synth;
+
+    return 0;
+}
+
 int main(int argc, char *argv[])
 {
-    //return test();
+    // Uncomment for testing purposes
+    //return testVoice();
+    //return testSynth();
 
 #ifdef Q_OS_LINUX
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::RoundPreferFloor);

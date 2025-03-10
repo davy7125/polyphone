@@ -262,24 +262,12 @@ void SoundEngine::setData(float * dataL, float * dataR, float * dataChoL, float 
 void SoundEngine::addData(float * dataL, float * dataR, float * dataChoL, float * dataChoR,
                           float * dataRevL, float * dataRevR, float * dataChoRevL, float * dataChoRevR, quint32 len)
 {
-    quint32 i;
-    for (i = 0; i < len; ++i)
-        dataL[i] += _dataL[i];
-    for (i = 0; i < len; ++i)
-        dataR[i] += _dataR[i];
-
-    for (i = 0; i < len; ++i)
-        dataChoL[i] += _dataChoL[i];
-    for (i = 0; i < len; ++i)
-        dataChoR[i] += _dataChoR[i];
-
-    for (i = 0; i < len; ++i)
-        dataRevL[i] += _dataRevL[i];
-    for (i = 0; i < len; ++i)
-        dataRevR[i] += _dataRevR[i];
-
-    for (i = 0; i < len; ++i)
-        dataChoRevL[i] += _dataChoRevL[i];
-    for (i = 0; i < len; ++i)
-        dataChoRevR[i] += _dataChoRevR[i];
+    FastMaths::addVectors(dataL, _dataL, len);
+    FastMaths::addVectors(dataR, _dataR, len);
+    FastMaths::addVectors(dataChoL, _dataChoL, len);
+    FastMaths::addVectors(dataChoR, _dataChoR, len);
+    FastMaths::addVectors(dataRevL, _dataRevL, len);
+    FastMaths::addVectors(dataRevR, _dataRevR, len);
+    FastMaths::addVectors(dataChoRevL, _dataChoRevL, len);
+    FastMaths::addVectors(dataChoRevR, _dataChoRevR, len);
 }

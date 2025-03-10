@@ -73,8 +73,10 @@ signals:
     void readFinished(int token);
 
 private:
-    inline float multiply(const float * __restrict__ coeffs, const float * __restrict__ srcData)
+    inline float multiply(const float * __restrict coeffs, const float * __restrict srcData)
     {
+        coeffs = (float*)__builtin_assume_aligned(coeffs, 32);
+        srcData = (float*)__builtin_assume_aligned(srcData, 32);
         return coeffs[0] * srcData[0] +
                coeffs[1] * srcData[1] +
                coeffs[2] * srcData[2] +

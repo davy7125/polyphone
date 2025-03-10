@@ -132,7 +132,8 @@ ContextManager::ContextManager(bool withAudioAndMidi) :
 ContextManager::~ContextManager()
 {
     // Delete everything in the reverse order
-    _midi->removeListener(_audio->getSynth());
+    if (_audio)
+        _midi->removeListener(_audio->getSynth());
     delete _midi;
     delete _audio;
     delete _translation;

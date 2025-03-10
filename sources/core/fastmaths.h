@@ -45,6 +45,13 @@ public:
             { static_cast<quint32> ( (1 << 23) * (clipp + 121.2740575f + 27.7280233f / (4.84252568f - z) - 1.49012907f * z) ) };
         return v.f;
     }
+    static inline void addVectors(float * __restrict a, float * __restrict b, int size)
+    {
+        a = (float*)__builtin_assume_aligned(a, 32);
+        b = (float*)__builtin_assume_aligned(b, 32);
+        while (size--)
+            (*a++) += (*b++);
+    }
 
 private:
     static float getSinValue(float value); // Range [0; 0.5] for [0; pi / 2]

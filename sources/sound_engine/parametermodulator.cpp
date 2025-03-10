@@ -26,8 +26,12 @@
 #include "modulatedparameter.h"
 #include "imidivalues.h"
 
-IMidiValues * ParameterModulator::s_midiValues = nullptr;
-void ParameterModulator::setIMidiValues(IMidiValues * midiValues) { s_midiValues = midiValues; }
+IMidiValues * ParameterModulator::s_midiValues = new DummyMidiDevice();
+void ParameterModulator::setIMidiValues(IMidiValues * midiValues)
+{
+    delete s_midiValues;
+    s_midiValues = midiValues;
+}
 
 void ParameterModulator::initialize(const ModulatorData &modData, bool isPrst, int channel, int initialKey, int keyForComputation, int velForComputation)
 {
