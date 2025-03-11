@@ -1233,6 +1233,8 @@ LPC_CORR SfArkExtractor2::schur(             // returns the minimum mean square 
 
     LPC_CORR2 error, r;
     LPC_CORR2 Gen0[PMAX], Gen1[PMAX];
+    memset(Gen0, 0, PMAX * sizeof(LPC_CORR2));
+    memset(Gen1, 0, PMAX * sizeof(LPC_CORR2));
 
     if (ac[0] == 0)
     {

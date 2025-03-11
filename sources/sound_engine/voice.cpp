@@ -34,16 +34,16 @@ float Voice::s_sinc_table7[2048][7];
 void Voice::prepareTables()
 {
     double v, i_shifted;
-    for (int i = 0; i < 7; i++) // i: Offset in terms of whole samples
+    for (int i = 0; i < 7; ++i) // i: Offset in terms of whole samples
     {
         // i2: Offset in terms of fractional samples ('subsamples')
-        for (int i2 = 0; i2 < 2048; i2++)
+        for (int i2 = 0; i2 < 2048; ++i2)
         {
             // Center on middle of table
             i_shifted = (double)i - (7.0 / 2.0) + (double)i2 / 2048.0;
 
             // sinc(0) cannot be calculated straightforward (limit needed for 0/0)
-            if (fabs (i_shifted) > 0.000001)
+            if (fabs(i_shifted) > 0.000001)
             {
                 v = sin(i_shifted * M_PI) / (M_PI * i_shifted);
 
@@ -212,7 +212,7 @@ void Voice::generateData(float * data, quint32 len)
         for (quint32 chunk = 0; chunk < chunkCount; ++chunk)
         {
             quint32 sampleStart = (chunk << COMPUTATION_CHUNK_SHIFT);
-            quint32 sampleEnd = sampleStart + COMPUTATION_CHUNK;
+            float * pDataEnd = &data[sampleStart + COMPUTATION_CHUNK];
 
             // Distance between the points
             float currentDeltaPitch = deltaPitchFixed + v_modEnvToPitch * _dataModArray[chunk] + v_modLfoToPitch * _modLfoArray[chunk] + v_vibLfoToPitch * _vibLfoArray[chunk];
@@ -221,13 +221,13 @@ void Voice::generateData(float * data, quint32 len)
 
             // Resampling (7th order sinc interpolation)
             float * srcData = &_dataSmpl[_currentSmplPos];
-            quint32 i = sampleStart;
+            float * pData = &data[sampleStart];
             quint32 nextPosition = 0;
             float *(Voice::*slowExtractFunction)(quint32,quint32,quint32) = (v_loopMode == 1 || (v_loopMode == 3 && !_release)) ? &Voice::getDataWithLoop : &Voice::getData;
 
 resample_fast:
             // Fast extraction, if possible
-            while (1)
+            while (true)
             {
                 _lastDistanceFraction += fixedGap;
                 if ((qint32)(nextPosition = (_lastDistanceFraction >> 11)) > _moreAvailable)
@@ -239,8 +239,9 @@ resample_fast:
                     goto resample_slow;
                 }
 
-                data[i++] = multiply(s_sinc_table7[_lastDistanceFraction & 0x7FF], &srcData[nextPosition]);
-                if (i >= sampleEnd)
+                (*pData++) = multiply(s_sinc_table7[_lastDistanceFraction & 0x7FF], &srcData[nextPosition]);
+
+                if (pData >= pDataEnd)
                 {
                     // Update the current position
                     _currentSmplPos += nextPosition;
@@ -249,16 +250,17 @@ resample_fast:
                     goto resample_end;
                 }
             }
+
 resample_slow:
             // First data extraction or complex extraction
-            while (1)
+            while (true)
             {
                 _lastDistanceFraction += fixedGap;
                 srcData = (*this.*slowExtractFunction)(_lastDistanceFraction >> 11, loopStart, loopEnd);
                 _lastDistanceFraction &= 0x7FF;
-                data[i++] = multiply(s_sinc_table7[_lastDistanceFraction], srcData);
+                (*pData++) = multiply(s_sinc_table7[_lastDistanceFraction], srcData);
 
-                if (i >= sampleEnd)
+                if (pData >= pDataEnd)
                     goto resample_end;
                 if (_moreAvailable > 0)
                     goto resample_fast;
@@ -269,25 +271,26 @@ resample_end:
             float coeff = _dataVolArray[chunk] * FastMaths::fastPow10(0.05f * v_modLfoToVolume * _modLfoArray[chunk]);
 
             // Low-pass filter
+            pData = &data[sampleStart];
             float valTmp = v_filterFreq * FastMaths::fastPow2(
                          (v_modEnvToFilterFc * _dataModArray[chunk] + v_modLfoToFilterFreq * _modLfoArray[chunk]) * 0.000833333f /* 1:1200 */);
             float coeffs[3];
             if (biQuadCoefficients(coeffs, valTmp, inv_q_lin))
             {
-                for (i = sampleStart; i < sampleEnd; ++i)
+                while (pData < pDataEnd)
                 {
-                    valTmp = coeffs[0] * (data[i] + _x1 + _x1 + _x2) + coeffs[1] * _y1 + coeffs[2] * _y2;
+                    valTmp = coeffs[0] * ((*pData) + _x1 + _x1 + _x2) + coeffs[1] * _y1 + coeffs[2] * _y2;
                     _x2 = _x1;
-                    _x1 = data[i];
+                    _x1 = (*pData);
                     _y2 = _y1;
                     _y1 = valTmp;
-                    data[i] = coeff * valTmp;
+                    (*pData++) = coeff * valTmp;
                 }
             }
             else
             {
-                for (i = sampleStart; i < sampleEnd; ++i)
-                    data[i] *= coeff;
+                while (pData < pDataEnd)
+                    (*pData++) *= coeff;
             }
         }
     }
