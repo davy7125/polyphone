@@ -139,8 +139,7 @@ int Synth::play(EltID id, int channel, int key, int velocity)
     }
 
     // Corresponding soundfont
-    if (_mutexSoundfonts)
-        QMutexLocker mutexLocker(_mutexSoundfonts);
+    QMutexLocker mutexLocker(_mutexSoundfonts);  // Will do nothing if _mutexSoundfonts is null
     Soundfont * soundfont = _soundfonts->getSoundfont(id.indexSf2);
     if (soundfont == nullptr)
         return -1;
