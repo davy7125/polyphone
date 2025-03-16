@@ -52,6 +52,7 @@ public:
     VoiceParam * getParam() { return _voiceParam; }
 
     void release(bool quick = false);
+    void finish() { _isFinished = true; }
     bool isInRelease() { return _release; }
     bool isFinished() { return _isFinished; }
     void triggerReadFinishedSignal();

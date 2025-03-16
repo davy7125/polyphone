@@ -57,6 +57,7 @@ private:
         short channel;
         short numPreset;
         int exclusiveClass;
+        Voice * voice;
     };
 
     /// Variables shared by different threads
