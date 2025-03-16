@@ -33,7 +33,7 @@ class EnveloppeVol
 public:
     EnveloppeVol() {}
 
-    void initialize(quint32 sampleRate, bool isMod);
+    void initialize(quint32 chunkRate, bool isMod);
 
     // Apply an envelop on data
     // Return true if the end of the release is reached
@@ -59,11 +59,11 @@ private:
     };
 
     // State of the system
-    quint32 _currentSmpl;
-    float _precValue;
+    quint32 _currentChunk;
+    float _lastValue;
     EnveloppePhase _currentPhase;
 
-    quint32 _sampleRate;
+    quint32 _chunkRate;
     bool _isMod;
     bool _quickRelease;
     float _quickAttackTarget;

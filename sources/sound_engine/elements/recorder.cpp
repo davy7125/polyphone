@@ -144,8 +144,8 @@ void Recorder::process(float * dataL, float * dataR, quint32 maxlen)
     // Interleave and write
     for (quint32 i = 0; i < maxlen; i++)
     {
-        _dataWav[2 * i + 1] = dataL[i];
-        _dataWav[2 * i] = dataR[i];
+        _dataWav[2 * i] = dataL[i];
+        _dataWav[2 * i + 1] = dataR[i];
     }
     _recordStream.writeRawData(reinterpret_cast<char*>(_dataWav), static_cast<int>(maxlen * 2 * sizeof(float)));
 

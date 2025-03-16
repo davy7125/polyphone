@@ -174,11 +174,11 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
         // Start / end / length of the sample
         value.dwValue = SHDR._end.value - SHDR._start.value;
         _sm->set(id, champ_dwLength, value);
-        value.dwValue = SHDR._start.value * 2 + (20 + header._infoSize.value + sdtaPart._startSmplOffset);
+        value.dwValue = 20 + header._infoSize.value + sdtaPart._startSmplOffset + SHDR._start.value * 2;
         _sm->set(id, champ_dwStart16, value);
         if (sdtaPart._startSm24Offset > 0)
         {
-            value.dwValue = SHDR._start.value + sdtaPart._startSm24Offset;
+            value.dwValue = 20 + header._infoSize.value + sdtaPart._startSm24Offset + SHDR._start.value;
             _sm->set(id, champ_dwStart24, value);
             value.wValue = 24;
             _sm->set(id, champ_bpsFile, value);
