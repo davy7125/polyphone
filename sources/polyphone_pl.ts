@@ -38,363 +38,363 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="core/types/attribute.cpp" line="482"/>
+        <location filename="core/types/attribute.cpp" line="483"/>
         <source>unknown</source>
         <translation>nieznany</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="487"/>
+        <location filename="core/types/attribute.cpp" line="488"/>
         <source>Sample start offset</source>
         <translation>Przesunięcie początku dźwięku</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="490"/>
+        <location filename="core/types/attribute.cpp" line="491"/>
         <source>Sample start offset (× 32768)</source>
         <translation>Przesunięcie początku dźwięku (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="493"/>
+        <location filename="core/types/attribute.cpp" line="494"/>
         <source>Sample end offset</source>
         <translation>Przesunięcie końca dźwięku</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="496"/>
+        <location filename="core/types/attribute.cpp" line="497"/>
         <source>Sample end offset (× 32768)</source>
         <translation>Przesunięcie końca dźwięku (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="499"/>
+        <location filename="core/types/attribute.cpp" line="500"/>
         <source>Loop start offset</source>
         <translation>Przesunięcie początku pętli</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="502"/>
+        <location filename="core/types/attribute.cpp" line="503"/>
         <source>Loop start offset (× 32768)</source>
         <translation>Przesunięcie początku pętli (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="505"/>
+        <location filename="core/types/attribute.cpp" line="506"/>
         <source>Loop end offset</source>
         <translation>Przesunięcie końca pętli</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="508"/>
+        <location filename="core/types/attribute.cpp" line="509"/>
         <source>Loop end offset (× 32768)</source>
         <translation>Przesunięcie końca pętli (× 32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="511"/>
+        <location filename="core/types/attribute.cpp" line="512"/>
         <source>Mod LFO → pitch (c)</source>
         <translation>Osc. modulacji → wysokość (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="514"/>
+        <location filename="core/types/attribute.cpp" line="515"/>
         <source>Vib LFO → pitch (c)</source>
         <translation>Osc. vibrato → ton (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="517"/>
+        <location filename="core/types/attribute.cpp" line="518"/>
         <source>Mod env → pitch (c)</source>
         <translation>Obwiedna modulacji → wysokość (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="520"/>
+        <location filename="core/types/attribute.cpp" line="521"/>
         <source>Filter, cutoff (×)</source>
         <translation>Częstotliwość graniczna (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="521"/>
+        <location filename="core/types/attribute.cpp" line="522"/>
         <source>Filter, cutoff (Hz)</source>
         <translation>Częstotliwość graniczna (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="524"/>
+        <location filename="core/types/attribute.cpp" line="525"/>
         <source>Filter, resonance (dB)</source>
         <translation>Rezonans filtra (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="527"/>
+        <location filename="core/types/attribute.cpp" line="528"/>
         <source>Mod LFO → filter (c)</source>
         <translation>Osc. modulacji → filtr (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="530"/>
+        <location filename="core/types/attribute.cpp" line="531"/>
         <source>Mod env → filter (c)</source>
         <translation>Obwiedna modulacji → filtr (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="533"/>
+        <location filename="core/types/attribute.cpp" line="534"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>Osc. modulacji → głośność (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="536"/>
+        <location filename="core/types/attribute.cpp" line="537"/>
         <source>Chorus (%)</source>
         <translation>Chór (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="539"/>
+        <location filename="core/types/attribute.cpp" line="540"/>
         <source>Reverb (%)</source>
         <translation>Pogłos (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="542"/>
+        <location filename="core/types/attribute.cpp" line="543"/>
         <source>Pan [-100;100]</source>
         <translation>Panorama [-100;100]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="543"/>
+        <location filename="core/types/attribute.cpp" line="544"/>
         <source>Pan [-50;50]</source>
         <translation>Panorama [-50;50]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="546"/>
+        <location filename="core/types/attribute.cpp" line="547"/>
         <source>Mod LFO delay (×)</source>
         <translation>Opóźn. osc. modulacji (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="547"/>
+        <location filename="core/types/attribute.cpp" line="548"/>
         <source>Mod LFO delay (s)</source>
         <translation>Opóźn. osc. modulacji (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="550"/>
+        <location filename="core/types/attribute.cpp" line="551"/>
         <source>Mod LFO freq (×)</source>
         <translation>Częst. osc. modulacji (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="551"/>
+        <location filename="core/types/attribute.cpp" line="552"/>
         <source>Mod LFO freq (Hz)</source>
         <translation>Częst. osc. modulacji (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="554"/>
+        <location filename="core/types/attribute.cpp" line="555"/>
         <source>Vib LFO delay (×)</source>
         <translation>Częst. osc. vibrato (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="555"/>
+        <location filename="core/types/attribute.cpp" line="556"/>
         <source>Vib LFO delay (s)</source>
         <translation>Opoźn. osc. vibrato (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="558"/>
+        <location filename="core/types/attribute.cpp" line="559"/>
         <source>Vib LFO freq (×)</source>
         <translation>Częst. osc. vibrato (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="559"/>
+        <location filename="core/types/attribute.cpp" line="560"/>
         <source>Vib LFO freq (Hz)</source>
         <translation>Częst. osc. vibrato (Hz)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="562"/>
+        <location filename="core/types/attribute.cpp" line="563"/>
         <source>Mod env delay (×)</source>
         <translation>Opóźnienie obw. mod. (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="563"/>
+        <location filename="core/types/attribute.cpp" line="564"/>
         <source>Mod env delay (s)</source>
         <translation>Opóźnienie obw. mod. (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="566"/>
+        <location filename="core/types/attribute.cpp" line="567"/>
         <source>Mod env attack (×)</source>
         <translation>Atak obw. mod. (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="567"/>
+        <location filename="core/types/attribute.cpp" line="568"/>
         <source>Mod env attack (s)</source>
         <translation>Atak obw. mod. (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="570"/>
+        <location filename="core/types/attribute.cpp" line="571"/>
         <source>Mod env hold (×)</source>
         <translation>Utrzymanie obw. mod. (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="571"/>
+        <location filename="core/types/attribute.cpp" line="572"/>
         <source>Mod env hold (s)</source>
         <translation>Utrzymanie obw. mod. (×s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="574"/>
+        <location filename="core/types/attribute.cpp" line="575"/>
         <source>Mod env decay (×)</source>
         <translation>Upadek obw. mod. (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="575"/>
+        <location filename="core/types/attribute.cpp" line="576"/>
         <source>Mod env decay (s)</source>
         <translation>Upadek obw. mod. (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="578"/>
+        <location filename="core/types/attribute.cpp" line="579"/>
         <source>Mod env sustain (%)</source>
         <translation>Wybrzmiewanie obw. mod. (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="581"/>
+        <location filename="core/types/attribute.cpp" line="582"/>
         <source>Mod env release (×)</source>
         <translation>Wyciszenie obw. mod. (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="582"/>
+        <location filename="core/types/attribute.cpp" line="583"/>
         <source>Mod env release (s)</source>
         <translation>Wyciszenie obw. mod. (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="585"/>
+        <location filename="core/types/attribute.cpp" line="586"/>
         <source>Key → Mod env hold (c)</source>
         <translation>Klaw. → Utrzymanie obw. mod. (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="588"/>
+        <location filename="core/types/attribute.cpp" line="589"/>
         <source>Key → Mod env decay (c)</source>
         <translation>Klaw. → Upadek obw. mod. (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="591"/>
+        <location filename="core/types/attribute.cpp" line="592"/>
         <source>Vol env delay (×)</source>
         <translation>Opóźnienie obw. głośń. (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="592"/>
+        <location filename="core/types/attribute.cpp" line="593"/>
         <source>Vol env delay (s)</source>
         <translation>Opóźnienie obw. głośń. (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="595"/>
+        <location filename="core/types/attribute.cpp" line="596"/>
         <source>Vol env attack (×)</source>
         <translation>Atak obw. głośń. (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="596"/>
+        <location filename="core/types/attribute.cpp" line="597"/>
         <source>Vol env attack (s)</source>
         <translation>Atak obw. głośń. (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="599"/>
+        <location filename="core/types/attribute.cpp" line="600"/>
         <source>Vol env hold (×)</source>
         <translation>Utrzymanie obw. głośń. (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="600"/>
+        <location filename="core/types/attribute.cpp" line="601"/>
         <source>Vol env hold (s)</source>
         <translation>Utrzymanie obw. głośń. (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="603"/>
+        <location filename="core/types/attribute.cpp" line="604"/>
         <source>Vol env decay (×)</source>
         <translation>Upadek obw. głośń. (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="604"/>
+        <location filename="core/types/attribute.cpp" line="605"/>
         <source>Vol env decay (s)</source>
         <translation>Zanikanie obw. głośń. (s)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="607"/>
+        <location filename="core/types/attribute.cpp" line="608"/>
         <source>Vol env sustain (dB)</source>
         <translation>Wybrzmiewanie obw. głośń. (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="610"/>
+        <location filename="core/types/attribute.cpp" line="611"/>
         <source>Vol env release (×)</source>
         <translatorcomment>There really isn&apos;t a direct translation to &quot;envelope&quot; in polish that I can think of. I had to change it so it still makes sense</translatorcomment>
         <translation>Zanikanie obw. głośń. (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="611"/>
+        <location filename="core/types/attribute.cpp" line="612"/>
         <source>Vol env release (s)</source>
         <translation>Wyciszenie obw. głośń. (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="614"/>
+        <location filename="core/types/attribute.cpp" line="615"/>
         <source>Key → Vol env hold (c)</source>
         <translation>Klaw. → Utrzymanie obw. głośń. (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="617"/>
+        <location filename="core/types/attribute.cpp" line="618"/>
         <source>Key → Vol env decay (c)</source>
         <translation>Klaw. → Upadek obw. głośń. (c)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="620"/>
+        <location filename="core/types/attribute.cpp" line="621"/>
         <source>Key range</source>
         <translation>Zakres klawiszy</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="623"/>
+        <location filename="core/types/attribute.cpp" line="624"/>
         <source>Velocity range</source>
         <translation>Zakres siły klawiszy</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="626"/>
+        <location filename="core/types/attribute.cpp" line="627"/>
         <source>Fixed key</source>
         <translation>Stały klawisz</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="629"/>
+        <location filename="core/types/attribute.cpp" line="630"/>
         <source>Fixed velocity</source>
         <translation>Stała siła klawisza</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="632"/>
+        <location filename="core/types/attribute.cpp" line="633"/>
         <source>Attenuation (dB)</source>
         <translation>Wyciszenie (dB)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="635"/>
+        <location filename="core/types/attribute.cpp" line="636"/>
         <source>Tuning (semi-tones)</source>
         <translation>Dostrajanie (półtony)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="638"/>
+        <location filename="core/types/attribute.cpp" line="639"/>
         <source>Tuning (cents)</source>
         <translation>Dostrajanie (centy)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="641"/>
+        <location filename="core/types/attribute.cpp" line="642"/>
         <source>Loop playback</source>
         <translation>Zapętlanie</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="644"/>
+        <location filename="core/types/attribute.cpp" line="645"/>
         <source>Scale tuning</source>
         <translation>Dostrajanie skalowane</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="647"/>
+        <location filename="core/types/attribute.cpp" line="648"/>
         <source>Exclusive class</source>
         <translation>Unikalna klasa</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="650"/>
+        <location filename="core/types/attribute.cpp" line="651"/>
         <source>Root key</source>
         <translation>Pierwotny klawisz</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="653"/>
+        <location filename="core/types/attribute.cpp" line="654"/>
         <source>Sample root key</source>
         <translation>Oryginalny klawisz próbki</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="656"/>
+        <location filename="core/types/attribute.cpp" line="657"/>
         <source>Sample length</source>
         <translation>Długość próbki</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="659"/>
+        <location filename="core/types/attribute.cpp" line="660"/>
         <source>Loop start</source>
         <translation>Początek pętli</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="662"/>
+        <location filename="core/types/attribute.cpp" line="663"/>
         <source>Loop end</source>
         <translation>Koniec pętli</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="665"/>
+        <location filename="core/types/attribute.cpp" line="666"/>
         <source>Pitch correction (cents)</source>
         <translation>Dostrajanie (centy)</translation>
     </message>
@@ -2643,48 +2643,48 @@ online</translation>
         <translation>Edytor SoundFontów Polyphone</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="211"/>
+        <location filename="mainwindow/mainwindow.cpp" line="208"/>
         <source>Untitled</source>
         <translation>Bez Tytułu</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="220"/>
+        <location filename="mainwindow/mainwindow.cpp" line="217"/>
         <source>Warning</source>
         <translation>Uwaga</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="221"/>
+        <location filename="mainwindow/mainwindow.cpp" line="218"/>
         <source>Save before exiting?</source>
         <translation>Zapisać przed wyjściem?</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="224"/>
+        <location filename="mainwindow/mainwindow.cpp" line="221"/>
         <source>The following files have been modified:</source>
         <translation>Podane pliki zostały zmodyfikowane:</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="231"/>
+        <location filename="mainwindow/mainwindow.cpp" line="228"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Plik &quot;%1&quot; został zmodyfikowany.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="234"/>
+        <location filename="mainwindow/mainwindow.cpp" line="231"/>
         <source>&amp;Save</source>
         <translation>&amp;Zapisz</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="235"/>
+        <location filename="mainwindow/mainwindow.cpp" line="232"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Anuluj</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="236"/>
+        <location filename="mainwindow/mainwindow.cpp" line="233"/>
         <source>Do&amp;n&apos;t save</source>
         <translatorcomment>not sure about &quot;&amp;&quot; here...</translatorcomment>
         <translation>Ni&amp;e zapisuj</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="307"/>
+        <location filename="mainwindow/mainwindow.cpp" line="304"/>
         <source>Opening files</source>
         <translation>Otwieranie plików</translation>
     </message>

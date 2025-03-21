@@ -38,362 +38,362 @@
 <context>
     <name>Attribute</name>
     <message>
-        <location filename="core/types/attribute.cpp" line="482"/>
+        <location filename="core/types/attribute.cpp" line="483"/>
         <source>unknown</source>
         <translation>неизвестно</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="487"/>
+        <location filename="core/types/attribute.cpp" line="488"/>
         <source>Sample start offset</source>
         <translation>Смещение начала семпла</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="490"/>
+        <location filename="core/types/attribute.cpp" line="491"/>
         <source>Sample start offset (× 32768)</source>
         <translation>Смещение начала семпла (×32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="493"/>
+        <location filename="core/types/attribute.cpp" line="494"/>
         <source>Sample end offset</source>
         <translation>Смещение конца семпла</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="496"/>
+        <location filename="core/types/attribute.cpp" line="497"/>
         <source>Sample end offset (× 32768)</source>
         <translation>Смещение конца семпла (×32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="499"/>
+        <location filename="core/types/attribute.cpp" line="500"/>
         <source>Loop start offset</source>
         <translation>Смещение начала петли</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="502"/>
+        <location filename="core/types/attribute.cpp" line="503"/>
         <source>Loop start offset (× 32768)</source>
         <translation>Смещение начала петли (×32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="505"/>
+        <location filename="core/types/attribute.cpp" line="506"/>
         <source>Loop end offset</source>
         <translation>Смещение конца петли</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="508"/>
+        <location filename="core/types/attribute.cpp" line="509"/>
         <source>Loop end offset (× 32768)</source>
         <translation>Смещение конца петли (×32768)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="511"/>
+        <location filename="core/types/attribute.cpp" line="512"/>
         <source>Mod LFO → pitch (c)</source>
         <translation>Модулятор ГНЧ → высота тона (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="514"/>
+        <location filename="core/types/attribute.cpp" line="515"/>
         <source>Vib LFO → pitch (c)</source>
         <translation>Виб. ГНЧ → высота тона (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="517"/>
+        <location filename="core/types/attribute.cpp" line="518"/>
         <source>Mod env → pitch (c)</source>
         <translation>Огибающая модуляции → высота тона (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="520"/>
+        <location filename="core/types/attribute.cpp" line="521"/>
         <source>Filter, cutoff (×)</source>
         <translation>Фильтр: срез (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="521"/>
+        <location filename="core/types/attribute.cpp" line="522"/>
         <source>Filter, cutoff (Hz)</source>
         <translation>Фильтр: срез (Гц)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="524"/>
+        <location filename="core/types/attribute.cpp" line="525"/>
         <source>Filter, resonance (dB)</source>
         <translation>Фильтр: коэф. передачи (дБ)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="527"/>
+        <location filename="core/types/attribute.cpp" line="528"/>
         <source>Mod LFO → filter (c)</source>
         <translation>Модулятор ГНЧ → фильтр (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="530"/>
+        <location filename="core/types/attribute.cpp" line="531"/>
         <source>Mod env → filter (c)</source>
         <translation>Огибающая модуляции → фильтр (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="533"/>
+        <location filename="core/types/attribute.cpp" line="534"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>Модулятор ГНЧ → громкость (дБ)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="536"/>
+        <location filename="core/types/attribute.cpp" line="537"/>
         <source>Chorus (%)</source>
         <translation>Хорус (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="539"/>
+        <location filename="core/types/attribute.cpp" line="540"/>
         <source>Reverb (%)</source>
         <translation>Реверберация (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="542"/>
+        <location filename="core/types/attribute.cpp" line="543"/>
         <source>Pan [-100;100]</source>
         <translation>Панорама [-100;100]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="543"/>
+        <location filename="core/types/attribute.cpp" line="544"/>
         <source>Pan [-50;50]</source>
         <translation>Панорама [-50;50]</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="546"/>
+        <location filename="core/types/attribute.cpp" line="547"/>
         <source>Mod LFO delay (×)</source>
         <translation>Модулятор ГНЧ: задержка (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="547"/>
+        <location filename="core/types/attribute.cpp" line="548"/>
         <source>Mod LFO delay (s)</source>
         <translation>Модулятор ГНЧ: задержка (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="550"/>
+        <location filename="core/types/attribute.cpp" line="551"/>
         <source>Mod LFO freq (×)</source>
         <translation>Модулятор ГНЧ: частота (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="551"/>
+        <location filename="core/types/attribute.cpp" line="552"/>
         <source>Mod LFO freq (Hz)</source>
         <translation>Модулятор ГНЧ: частота (Гц)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="554"/>
+        <location filename="core/types/attribute.cpp" line="555"/>
         <source>Vib LFO delay (×)</source>
         <translation>Виб. ГНЧ: задержка (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="555"/>
+        <location filename="core/types/attribute.cpp" line="556"/>
         <source>Vib LFO delay (s)</source>
         <translation>Виб. ГНЧ: задержка (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="558"/>
+        <location filename="core/types/attribute.cpp" line="559"/>
         <source>Vib LFO freq (×)</source>
         <translation>Виб. ГНЧ: частота (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="559"/>
+        <location filename="core/types/attribute.cpp" line="560"/>
         <source>Vib LFO freq (Hz)</source>
         <translation>Виб. ГНЧ: частота (Гц)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="562"/>
+        <location filename="core/types/attribute.cpp" line="563"/>
         <source>Mod env delay (×)</source>
         <translation>Огибающая модуляции: задержка (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="563"/>
+        <location filename="core/types/attribute.cpp" line="564"/>
         <source>Mod env delay (s)</source>
         <translation>Огибающая модуляции: задержка (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="566"/>
+        <location filename="core/types/attribute.cpp" line="567"/>
         <source>Mod env attack (×)</source>
         <translation>Огибающая модуляции: атака (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="567"/>
+        <location filename="core/types/attribute.cpp" line="568"/>
         <source>Mod env attack (s)</source>
         <translation>Огибающая модуляции: атака (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="570"/>
+        <location filename="core/types/attribute.cpp" line="571"/>
         <source>Mod env hold (×)</source>
         <translation>Огибающая модуляции: удержание (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="571"/>
+        <location filename="core/types/attribute.cpp" line="572"/>
         <source>Mod env hold (s)</source>
         <translation>Огибающая модуляции: удержание (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="574"/>
+        <location filename="core/types/attribute.cpp" line="575"/>
         <source>Mod env decay (×)</source>
         <translation>Огибающая модуляции: спад (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="575"/>
+        <location filename="core/types/attribute.cpp" line="576"/>
         <source>Mod env decay (s)</source>
         <translation>Огибающая модуляции: спад (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="578"/>
+        <location filename="core/types/attribute.cpp" line="579"/>
         <source>Mod env sustain (%)</source>
         <translation>Огибающая модуляции: поддержка (%)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="581"/>
+        <location filename="core/types/attribute.cpp" line="582"/>
         <source>Mod env release (×)</source>
         <translation>Огибающая модуляции: затухание (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="582"/>
+        <location filename="core/types/attribute.cpp" line="583"/>
         <source>Mod env release (s)</source>
         <translation>Огибающая модуляции: затухание (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="585"/>
+        <location filename="core/types/attribute.cpp" line="586"/>
         <source>Key → Mod env hold (c)</source>
         <translation>Клавиша → Огиб. мод.: удержание (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="588"/>
+        <location filename="core/types/attribute.cpp" line="589"/>
         <source>Key → Mod env decay (c)</source>
         <translation>Клавиша → Огиб. мод.: спад (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="591"/>
+        <location filename="core/types/attribute.cpp" line="592"/>
         <source>Vol env delay (×)</source>
         <translation>Огибающая громкости: затухание (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="592"/>
+        <location filename="core/types/attribute.cpp" line="593"/>
         <source>Vol env delay (s)</source>
         <translation>Огибающая громкости: задержка (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="595"/>
+        <location filename="core/types/attribute.cpp" line="596"/>
         <source>Vol env attack (×)</source>
         <translation>Огибающая громкости: атака (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="596"/>
+        <location filename="core/types/attribute.cpp" line="597"/>
         <source>Vol env attack (s)</source>
         <translation>Огибающая громкости: атака (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="599"/>
+        <location filename="core/types/attribute.cpp" line="600"/>
         <source>Vol env hold (×)</source>
         <translation>Огибающая громкости: удержание (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="600"/>
+        <location filename="core/types/attribute.cpp" line="601"/>
         <source>Vol env hold (s)</source>
         <translation>Огибающая громкости: удержание (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="603"/>
+        <location filename="core/types/attribute.cpp" line="604"/>
         <source>Vol env decay (×)</source>
         <translation>Огибающая громкости: спад (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="604"/>
+        <location filename="core/types/attribute.cpp" line="605"/>
         <source>Vol env decay (s)</source>
         <translation>Огибающая громкости: спад (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="607"/>
+        <location filename="core/types/attribute.cpp" line="608"/>
         <source>Vol env sustain (dB)</source>
         <translation>Огибающая громкости: поддержка (дБ)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="610"/>
+        <location filename="core/types/attribute.cpp" line="611"/>
         <source>Vol env release (×)</source>
         <translation>Огибающая громкости: затухание (×)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="611"/>
+        <location filename="core/types/attribute.cpp" line="612"/>
         <source>Vol env release (s)</source>
         <translation>Огибающая громкости: затухание (сек)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="614"/>
+        <location filename="core/types/attribute.cpp" line="615"/>
         <source>Key → Vol env hold (c)</source>
         <translation>Клавиша → Огиб. громк.: удержание (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="617"/>
+        <location filename="core/types/attribute.cpp" line="618"/>
         <source>Key → Vol env decay (c)</source>
         <translation>Клавиша → Огиб. громк.: спад (цент)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="620"/>
+        <location filename="core/types/attribute.cpp" line="621"/>
         <source>Key range</source>
         <translation>Диапазон клавиш</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="623"/>
+        <location filename="core/types/attribute.cpp" line="624"/>
         <source>Velocity range</source>
         <translation>Диапазон силы нажатия</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="626"/>
+        <location filename="core/types/attribute.cpp" line="627"/>
         <source>Fixed key</source>
         <translation>Фиксированная клавиша</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="629"/>
+        <location filename="core/types/attribute.cpp" line="630"/>
         <source>Fixed velocity</source>
         <translation>Фиксированная сила нажатия</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="632"/>
+        <location filename="core/types/attribute.cpp" line="633"/>
         <source>Attenuation (dB)</source>
         <translation>Приглушение (дБ)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="635"/>
+        <location filename="core/types/attribute.cpp" line="636"/>
         <source>Tuning (semi-tones)</source>
         <translation>Подстройка (в полутонах)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="638"/>
+        <location filename="core/types/attribute.cpp" line="639"/>
         <source>Tuning (cents)</source>
         <translation>Подстройка (в центах)</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="641"/>
+        <location filename="core/types/attribute.cpp" line="642"/>
         <source>Loop playback</source>
         <translation>Играть петлю</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="644"/>
+        <location filename="core/types/attribute.cpp" line="645"/>
         <source>Scale tuning</source>
         <translation>Подстройка звукоряда</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="647"/>
+        <location filename="core/types/attribute.cpp" line="648"/>
         <source>Exclusive class</source>
         <translation>Исключающий класс</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="650"/>
+        <location filename="core/types/attribute.cpp" line="651"/>
         <source>Root key</source>
         <translation>Корневая клавиша</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="653"/>
+        <location filename="core/types/attribute.cpp" line="654"/>
         <source>Sample root key</source>
         <translation>Корневая клавиша семпла</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="656"/>
+        <location filename="core/types/attribute.cpp" line="657"/>
         <source>Sample length</source>
         <translation>Длина семпла</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="659"/>
+        <location filename="core/types/attribute.cpp" line="660"/>
         <source>Loop start</source>
         <translation>Начало петли</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="662"/>
+        <location filename="core/types/attribute.cpp" line="663"/>
         <source>Loop end</source>
         <translation>Конец петли</translation>
     </message>
     <message>
-        <location filename="core/types/attribute.cpp" line="665"/>
+        <location filename="core/types/attribute.cpp" line="666"/>
         <source>Pitch correction (cents)</source>
         <translation>Коррекция высоты тона (в центах)</translation>
     </message>
@@ -2659,47 +2659,47 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="211"/>
+        <location filename="mainwindow/mainwindow.cpp" line="208"/>
         <source>Untitled</source>
         <translation>Без заголовка</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="220"/>
+        <location filename="mainwindow/mainwindow.cpp" line="217"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="221"/>
+        <location filename="mainwindow/mainwindow.cpp" line="218"/>
         <source>Save before exiting?</source>
         <translation>Сохранить перед выходом?</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="224"/>
+        <location filename="mainwindow/mainwindow.cpp" line="221"/>
         <source>The following files have been modified:</source>
         <translation>Следующие файлы были изменены:</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="231"/>
+        <location filename="mainwindow/mainwindow.cpp" line="228"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>Файл «%1» был изменён.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="234"/>
+        <location filename="mainwindow/mainwindow.cpp" line="231"/>
         <source>&amp;Save</source>
         <translation>Со&amp;хранить</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="235"/>
+        <location filename="mainwindow/mainwindow.cpp" line="232"/>
         <source>&amp;Cancel</source>
         <translation>О&amp;тменить</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="236"/>
+        <location filename="mainwindow/mainwindow.cpp" line="233"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Не сохранять</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="307"/>
+        <location filename="mainwindow/mainwindow.cpp" line="304"/>
         <source>Opening files</source>
         <translation>Открытые файлы</translation>
     </message>
