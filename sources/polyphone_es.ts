@@ -1648,12 +1648,12 @@ en línea</translation>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="88"/>
         <source>Create a preset comprising the instrument %1?</source>
-        <translation>¿Crear un preajuste que comprenda el instrumento %1?</translation>
+        <translation>¿Crear un conjunto que comprenda el instrumento %1?</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="94"/>
         <source>Create a preset</source>
-        <translation>Crear un preajuste</translation>
+        <translation>Crear un conjunto</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="95"/>
@@ -1735,7 +1735,7 @@ en línea</translation>
     <message>
         <location filename="dialogs/dialog_list.cpp" line="63"/>
         <source>Preset list</source>
-        <translation>Lista de preajustes</translation>
+        <translation>Lista de conjuntos</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_list.ui" line="61"/>
@@ -1768,7 +1768,7 @@ en línea</translation>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="51"/>
         <source>Create a new preset</source>
-        <translation>Crear un nuevo preajuste</translation>
+        <translation>Crear un nuevo conjunto</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="51"/>
@@ -1778,7 +1778,7 @@ en línea</translation>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="52"/>
         <source>Name of the new preset</source>
-        <translation>Nombre del nuevo preajuste</translation>
+        <translation>Nombre del nuevo conjunto</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="52"/>
@@ -2029,7 +2029,7 @@ en línea</translation>
     <message>
         <location filename="core/duplicator.cpp" line="536"/>
         <source>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation>El preajuste &quot;%1&quot; ya existe.&lt;br/&gt;¿Reemplazar?</translation>
+        <translation>El conjunto &quot;%1&quot; ya existe.&lt;br/&gt;¿Reemplazar?</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="558"/>
@@ -2039,7 +2039,7 @@ en línea</translation>
     <message>
         <location filename="core/duplicator.cpp" line="559"/>
         <source>No preset available.</source>
-        <translation>No hay preajustes disponibles.</translation>
+        <translation>No hay conjuntos disponibles.</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="757"/>
@@ -2172,7 +2172,7 @@ en línea</translation>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="70"/>
         <source>Add a preset</source>
-        <translation>Agregar un preajuste</translation>
+        <translation>Agregar un conjunto</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="75"/>
@@ -2217,7 +2217,7 @@ en línea</translation>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="437"/>
         <source>Cannot create more presets.</source>
-        <translation>No se pueden crear más preajustes.</translation>
+        <translation>No se pueden crear más conjuntos.</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="437"/>
@@ -2294,17 +2294,17 @@ en línea</translation>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="75"/>
         <source>Instrument not linked to a preset yet.</source>
-        <translation>Instrumento aún no vinculado a ningún preajuste.</translation>
+        <translation>Instrumento aún no vinculado a ningún conjunto.</translation>
     </message>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="77"/>
         <source>Instrument linked to preset:</source>
-        <translation>Instrumento enlazado a preajuste:</translation>
+        <translation>Instrumento enlazado a conjunto:</translation>
     </message>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="79"/>
         <source>Instrument linked to presets:</source>
-        <translation>Instrumentos enlazados a preajustes:</translation>
+        <translation>Instrumentos enlazados a conjuntos:</translation>
     </message>
 </context>
 <context>
@@ -2328,7 +2328,7 @@ en línea</translation>
     <message>
         <location filename="editor/footers/footerprst.ui" line="64"/>
         <source>Preset</source>
-        <translation>Preajuste</translation>
+        <translation>Conjunto</translation>
     </message>
     <message>
         <location filename="editor/footers/footerprst.ui" line="103"/>
@@ -2881,12 +2881,12 @@ el modulador por defecto.</translation>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="648"/>
         <source>offsets cannot be modulated in a preset.</source>
-        <translation>los desfaces no se pueden modular en un preajuste.</translation>
+        <translation>los desfaces no se pueden modular en un conjunto.</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="657"/>
         <source>%1 cannot be modulated in a preset.</source>
-        <translation>%1 no se puede(n) modular en un preajuste.</translation>
+        <translation>%1 no se puede(n) modular en un conjunto.</translation>
     </message>
 </context>
 <context>
@@ -3112,13 +3112,13 @@ en bucle</translation>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="32"/>
         <source>Presets</source>
-        <translation>Preajustes</translation>
+        <translation>Conjuntos</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="38"/>
         <source>Bank - Preset</source>
         <oldsource>Banque - Preset</oldsource>
-        <translation>Banco - Preajuste</translation>
+        <translation>Banco - Conjunto</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="39"/>
@@ -3306,7 +3306,7 @@ de muestreo</translation>
         <source>Select a single instrument or preset
 to display its division ranges</source>
         <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a single instrument or preset&lt;/p&gt;&lt;p&gt;to display its division ranges&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation>Selecciona un solo instrumento o preajuste
+        <translation>Selecciona un solo instrumento o conjunto
 para mostrar sus rangos de división</translation>
     </message>
 </context>
@@ -3370,7 +3370,7 @@ para mostrar sus rangos de división</translation>
     <message>
         <location filename="editor/pagesf2.ui" line="508"/>
         <source>Presets</source>
-        <translation>Preajustes</translation>
+        <translation>Conjuntos</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="530"/>
@@ -3781,7 +3781,7 @@ para mostrar sus rangos de división</translation>
     <message>
         <location filename="core/model/soundfont.cpp" line="47"/>
         <source>Presets</source>
-        <translation>Preajustes</translation>
+        <translation>Conjuntos</translation>
     </message>
     <message>
         <location filename="core/sample/sound.cpp" line="64"/>
@@ -4373,7 +4373,7 @@ Ambas divisiones deben compartir los mismos rangos de notas y velocidades.</tran
         <location filename="repository/repositorymanager.cpp" line="147"/>
         <location filename="repository/repositorymanager.cpp" line="148"/>
         <source>ethnic / world</source>
-        <translation>ethnic / world</translation>
+        <translation>música étnica / del mundo</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="165"/>
@@ -5535,7 +5535,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="85"/>
         <source>A preset comprising no instruments is not compatible with this tool:</source>
-        <translation>Un preajuste que no comprende instrumentos no es compatible con esta herramienta:</translation>
+        <translation>Un conjunto que no comprende instrumentos no es compatible con esta herramienta:</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="45"/>
@@ -6065,7 +6065,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.cpp" line="66"/>
         <source>The preset doesn&apos;t trigger any samples.</source>
-        <translation>El preajuste no provoca ninguna muestra.</translation>
+        <translation>El conjunto no provoca ninguna muestra.</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="47"/>
@@ -6125,7 +6125,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="95"/>
         <source>Preset name:</source>
-        <translation>Nombre del preajuste:</translation>
+        <translation>Nombre del conjunto:</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="112"/>
@@ -6371,7 +6371,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist.h" line="60"/>
         <source>Export preset list</source>
-        <translation>Exportar la lista de preajustes</translation>
+        <translation>Exportar la lista de conjuntos</translation>
     </message>
 </context>
 <context>
@@ -6626,7 +6626,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="120"/>
         <source>preset number as prefix</source>
-        <translation>Número de preajuste como prefijo</translation>
+        <translation>Número de conjunto como prefijo</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="134"/>
@@ -6646,7 +6646,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>one file per preset</source>
-        <translation>un archivo por preajuste</translation>
+        <translation>un archivo por conjunto</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="166"/>
@@ -6691,7 +6691,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="195"/>
         <source>At least one preset must be selected.</source>
-        <translation>Al menos un preajuste debe estar seleccionado.</translation>
+        <translation>Al menos un conjunto debe estar seleccionado.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="201"/>
@@ -6701,7 +6701,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="210"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation>En caso de exportar varias soundfonts el número máxmo de preajustes por soundfont es 127.</translation>
+        <translation>En caso de exportar varias soundfonts el número máxmo de conjuntos por soundfont es 127.</translation>
     </message>
 </context>
 <context>
@@ -6877,7 +6877,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tree/treeview.cpp" line="966"/>
         <source>preset</source>
-        <translation>preajuste</translation>
+        <translation>conjunto</translation>
     </message>
     <message>
         <location filename="editor/tree/treeview.cpp" line="987"/>
@@ -6887,7 +6887,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tree/treeview.cpp" line="987"/>
         <source>Cannot create more presets.</source>
-        <translation>No se pueden crear más preajustes.</translation>
+        <translation>No se pueden crear más conjuntos.</translation>
     </message>
 </context>
 <context>
@@ -6965,7 +6965,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="264"/>
         <source>Cannot delete an instrument used by another preset.</source>
-        <translation>No puede eliminar un instrumento usado por otro preajuste.</translation>
+        <translation>No puede eliminar un instrumento usado por otro conjunto.</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="408"/>
@@ -6980,7 +6980,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="412"/>
         <source>Preset name</source>
-        <translation>Nombre del preajuste</translation>
+        <translation>Nombre del conjunto</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="434"/>
