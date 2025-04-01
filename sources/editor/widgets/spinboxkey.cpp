@@ -103,7 +103,9 @@ QString SpinBoxKey::textFromValue(int val) const
 
 bool SpinBoxKey::processKey(int channel, int key, int vel)
 {
-    Q_UNUSED(channel)
+    if (channel == -1)
+        return false;
+
     if (vel > 0 && this->hasFocus())
         this->setValue(key);
     return false;

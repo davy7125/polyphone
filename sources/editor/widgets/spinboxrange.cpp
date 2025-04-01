@@ -34,7 +34,8 @@ SpinBoxRange::SpinBoxRange(QWidget *parent) : QAbstractSpinBox(parent),
     _isNull(false),
     _valMin(MINI),
     _valMax(MAXI),
-    _firstMidiKey(-1)
+    _firstMidiKey(-1),
+    _secondMidiKey(-1)
 {
     connect(this, SIGNAL(editingFinished()), this, SLOT(updateValue()));
     ContextManager::midi()->addListener(this, 1000);
@@ -142,27 +143,63 @@ void SpinBoxRange::clear()
 
 bool SpinBoxRange::processKey(int channel, int key, int vel)
 {
-    Q_UNUSED(channel)
+    if (channel == -1)
+        return false;
+    if (!this->hasFocus())
+    {
+        _firstMidiKey = -1;
+        _secondMidiKey = -1;
+    }
 
-    if (vel > 0 && this->hasFocus())
+    if (vel > 0)
     {
         if (_firstMidiKey == -1)
         {
             // Single note for now
             _firstMidiKey = key;
-            _valMin = _valMax = key;
+        }
+        else if (_secondMidiKey == -1)
+        {
+            // The second creates a range
+            if (_firstMidiKey < key)
+                _secondMidiKey = key;
+            else if (_firstMidiKey > key)
+            {
+                _secondMidiKey = _firstMidiKey;
+                _firstMidiKey = key;
+            }
         }
         else
         {
-            // The second creates a range
-            _valMin = qMin(_firstMidiKey, key);
-            _valMax = qMax(_firstMidiKey, key);
-            _firstMidiKey = -1;
+            // Replace one or the other note
+            if (key < _firstMidiKey)
+                _firstMidiKey = key;
+            else if (key > _secondMidiKey)
+                _secondMidiKey = key;
         }
-        formatText();
+
+        if (_firstMidiKey != -1)
+        {
+            if (_secondMidiKey != -1)
+            {
+                _valMin = _firstMidiKey;
+                _valMax = _secondMidiKey;
+            }
+            else
+                _valMin = _valMax = _firstMidiKey;
+            formatText();
+        }
     }
     else
-        _firstMidiKey = -1;
+    {
+        if (_firstMidiKey == key)
+        {
+            _firstMidiKey = _secondMidiKey;
+            _secondMidiKey = -1;
+        }
+        if (_secondMidiKey == key)
+            _secondMidiKey = -1;
+    }
 
     return false;
 }

@@ -84,7 +84,7 @@ private:
     static int MAXI;
     bool _isNull;
     int _valMin, _valMax;
-    int _firstMidiKey;
+    int _firstMidiKey, _secondMidiKey;
 };
 
 class SpinBoxVelocityRange : public SpinBoxRange
