@@ -38,12 +38,12 @@ QDataStream & operator >> (QDataStream &in, Sf2PdtaPart &pdta)
     if (in.readRawData(pdta._LIST, 4) != 4)
         return in;
 
+    // Size of the section "pdta"
+    in >> pdta._pdtaSize;
+
     // 4 char, should be "pdta"
     if (in.readRawData(pdta._pdta, 4) != 4)
         return in;
-
-    // Size of the section "pdta"
-    in >> pdta._pdtaSize;
 
     /// Read PHDR
 
