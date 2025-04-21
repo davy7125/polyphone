@@ -17,5 +17,6 @@ index.md=User manual
 |settings.md=Settings
 |menu.md=Menu
 |annexes/index.md=Annexes
+||annexes/common-issues.md=Typical flaws found in soundfonts
 ||annexes/the-different-soundfont-formats.md=The different soundfont formats
 ||annexes/command-line.md=Command line
