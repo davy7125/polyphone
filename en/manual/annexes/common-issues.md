@@ -1,37 +1,37 @@
-Cette page liste les défauts typiques des soundfonts (pouvant être relevés par des revues) et, pour chacun d'eux, des techniques et des liens vers la documentation pour les corriger&nbsp;:
+This page lists typical flaws found in soundfonts (which may be pointed out in reviews) and, for each of them, provides techniques and documentation links to fix them:
 
-* [échantillons de mauvaise qualité ou mal préparés](#sample),
-* [mauvais accordage](#tuning),
-* [enveloppe ADSR inadéquate](#adsr),
-* [boucles manquantes ou imprécises](#loop),
-* [standard MIDI non respecté](#standard).
-
-
-## Échantillons de mauvaise qualité ou mal préparés {#sample}
+* [poor quality or badly prepared samples](#sample),
+* [incorrect tuning](#tuning),
+* [inappropriate ADSR envelope](#adsr),
+* [missing or inaccurate loops](#loop),
+* [MIDI standard not met](#standard).
 
 
-(en cours de rédaction)
+## Poor quality or badly prepared samples {#sample}
 
 
-## Mauvais accordage {#tuning}
+(in progress)
 
 
-(en cours de rédaction)
+## Incorrect tuning {#tuning}
 
 
-## Enveloppe ADSR inadéquate {#adsr}
+(in progress)
 
 
-(en cours de rédaction)
+## Inappropriate ADSR envelope {#adsr}
 
 
-## Boucles manquantes ou imprécises {#loop}
+(in progress)
 
 
-(en cours de rédaction)
+## Missing or inaccurate loops {#loop}
 
 
-## Standard MIDI non respecté {#standard}
+(in progress)
 
 
-(en cours de rédaction)
+## MIDI standard not met {#standard}
+
+
+(in progress)
