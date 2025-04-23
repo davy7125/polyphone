@@ -10,13 +10,13 @@ Cette page liste les défauts typiques des banques de sons (pouvant être relev�
 ## Échantillons de mauvaise qualité ou mal préparés {#sample}
 
 
-Il est possible qu'une banque de sons ne fournisse pas d'instrument convainquant et si la cause provient d'échantillons de mauvaise qualité, la seule solution est de les remplacer&nbsp;:
+Il est possible qu'une banque de sons ne fournisse pas d'instrument convaincant et si la cause provient d'échantillons de mauvaise qualité, la seule solution est de les remplacer&nbsp;:
 
 * recherche d'autres échantillons sur internet,
 * enregistrement avec un micro de meilleur qualité (ou utilisation d'outils externes de traitement du signal),
 * création d'échantillons par un autre moyen.
 
-D'autre fois, le problème peut se résoudre en préparant ou utilisant mieux les échantillons.
+D'autres fois, le problème peut se résoudre en préparant ou utilisant mieux les échantillons.
 
 ### Son mauvais, surtout vers les aigus
 
@@ -50,9 +50,9 @@ Les échantillons ne sont souvent utilisés que partiellement et enlever le supe
 ## Enveloppe ADSR inadéquate {#adsr}
 
 
-L'enveloppe ADSR représente l'évolution du volume lorsqu'une note est lue mais aussi lorsqu'une cette même note est arrêtée. Chacune des 4 lettres du mot ADSR correspond à une phase particulière et l'enveloppe de volume utilisée dans les banques de sons au format Soundfont contient en réalité 6 phases&nbsp;:
+L'enveloppe ADSR représente l'évolution du volume lorsqu'une note est lue mais aussi lorsque cette même note est arrêtée. Chacune des 4 lettres du mot ADSR correspond à une phase particulière et l'enveloppe de volume utilisée dans les banques de sons au format Soundfont contient en réalité 6 phases&nbsp;:
 
-* délais,
+* délai,
 * attaque (A),
 * maintien,
 * déclin (D),
@@ -63,7 +63,7 @@ Ces phases sont décrites plus en détails sur cette [page](manual/soundfont-edi
 
 ### Un son démarre trop soudainement
 
-Pour adoucir le démarrage d'une note, précisez ou augmentez la durée d'attaque de la note.
+Pour adoucir le démarrage d'une note, précisez ou augmentez la durée d'attaque de la note au niveau des [instruments](manual/soundfont-editor/editing-pages/instrument-editor.md) ou des [ensembles](manual/soundfont-editor/editing-pages/preset-editor.md).
 
 ### Un son est trop mou à démarrer
 
@@ -73,7 +73,7 @@ Pour adoucir le démarrage d'une note, précisez ou augmentez la durée d'attaqu
 
 Trois solutions possibles et pouvant être complémentaires&nbsp;:
 
-* supprimez la durée du délai si elle est précisée au niveau des instruments ou des ensembles,
+* supprimez la durée du délai si elle est précisée au niveau des [instruments](manual/soundfont-editor/editing-pages/instrument-editor.md) ou des [ensembles](manual/soundfont-editor/editing-pages/preset-editor.md),
 * supprimer le silence au début de l'échantillon audio (voir la découpe de l'échantillon sur cette [page](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) ou l'outil de suppression du silence au démarrage [ici](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)),
 * enfin, la latence entendue peut être causée par le serveur audio que vous utilisez sur votre ordinateur (il ne s'agit donc pas d'un défaut interne à une banque de sons et il est possible de changer la sortie audio dans les [configurations](manual/settings.md#doc_general)).
 
@@ -81,7 +81,7 @@ Trois solutions possibles et pouvant être complémentaires&nbsp;:
 
 Si le son s'arrête subitement alors qu'il devrait continuer tant que la note n'est pas relâchée, voir la section des [boucles](#loop).
 
-Si le son s'arrête subitement lorsqu'une note est relâchée, précisez ou augmenter la durée de relâche. Cet [outil](manual/soundfont-editor/tools/instrument-tools.md#doc_release) permet de configurer cette durée pour qu'elle semble naturelle à l'oreille des graves jusqu'aux aigus.
+Si le son s'arrête subitement lorsqu'une note est relâchée, précisez ou augmenter la durée de relâche au niveau des [instruments](manual/soundfont-editor/editing-pages/instrument-editor.md) ou des [ensembles](manual/soundfont-editor/editing-pages/preset-editor.md). Cet [outil](manual/soundfont-editor/tools/instrument-tools.md#doc_release) permet de configurer cette durée pour qu'elle semble naturelle à l'oreille des graves jusqu'aux aigus.
 
 
 ## Boucles manquantes ou imprécises {#loop}
