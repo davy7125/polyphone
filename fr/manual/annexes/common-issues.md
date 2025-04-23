@@ -54,7 +54,7 @@ Cet accordage est le plus important et est décrit sur cette [page](tutorials/ho
 
 4 paramètres, décrits sur cette [page](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), sont utilisés pour définir la transposition avec laquelle un échantillon est lu&nbsp;: **note de base**, **accordage (demi-tons)**, **accordage (centièmes)** et **réglage de tonalité**. Ces valeurs peuvent être modifiées lors de l'utilisation de l'instrument par des [modulateurs](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator), qu'il est donc important de passer en revue également.
 
-Et si aucun paramètre ou modulateur n'est défini pour la division d'un instrument associée à un échantillon, il faudra alors vérifier si des paramètres ou modulateurs sont définis dans la **division globale** de cet instrument (cette division définit le paramètrage par défaut de toutes les autres divisions).
+Et si aucun paramètre ou modulateur n'est défini pour la division d'un instrument associée à un échantillon, il faudra alors vérifier si des paramètres ou modulateurs sont définis dans la **division globale** de cet instrument (cette division définit le paramétrage par défaut de toutes les autres divisions).
 
 ### Accordage au niveau des ensembles
 

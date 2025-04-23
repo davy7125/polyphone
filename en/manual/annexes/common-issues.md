@@ -54,7 +54,7 @@ This is the most important tuning step and is described on this [page](tutorials
 
 4 parameters, described on this [page](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table), are used to define the transposition with which a sample is played: **root key**, **tuning (semitones)**, **tuning (cents)**, and **tuning scale**. These values can be modified during instrument playback by [modulators](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator), which should also be reviewed carefully.
 
-If no parameter or modulator is defined for the instrument division linked to a sample, it's important to check whether any parameters or modulators are defined in the global division of the instrument (this division sets the default configuration for all other divisions).
+If no parameters or modulators are defined for the instrument division linked to a sample, it's important to check whether any parameters or modulators are defined in the global division of the instrument (this division sets the default configuration for all other divisions).
 
 ### Tuning at the preset level
 
@@ -117,7 +117,7 @@ If the sound stops when it should continue playing, the most likely causes are:
 The loop is most likely incorrect, and this [page](tutorials/how-to-prepare-a-sample.md#doc_loop) explains how to create proper loops.
 
 
-## MIDI standard not met {#standard}
+## MIDI standard not met {#doc_standard}
 
 
 (in progress)

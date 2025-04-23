@@ -55,7 +55,7 @@ Sample playback
 
 Root key
 : Allows you to change the normal root key of a sample to a different note from that usually used.
-  For example, if a sample has a root key of 50 and is played over the key range [49 – 51], it will be initially transposed by -1, 0, and +1 semitone(s) on keys 49, 50, and 51 respectively.
+  For example, if a sample has a root key of 50 and is played over the key range [49 - 51], it will be initially transposed by -1, 0, and +1 semitone(s) on keys 49, 50, and 51 respectively.
   If the root key is then overridden to 51 at the instrument level, the same sample will be initially transposed by -2, -1, and 0 semitone(s) on keys 49, 50, and 51 respectively.
 
 Tuning (semitones and cents)
