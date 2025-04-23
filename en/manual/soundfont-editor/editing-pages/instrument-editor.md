@@ -55,10 +55,17 @@ Sample playback
 
 Root key
 : Allows you to change the normal root key of a sample to a different note from that usually used.
+  For example, if a sample has a root key of 50 and is played over the key range [49 – 51], it will be initially transposed by -1, 0, and +1 semitone(s) on keys 49, 50, and 51 respectively.
+  If the root key is then overridden to 51 at the instrument level, the same sample will be initially transposed by -2, -1, and 0 semitone(s) on keys 49, 50, and 51 respectively.
 
-Tuning
-: Change the tuning in semitones and cents of semitones.
-  Changing “scale” plays on the difference between two consecutive notes.
+Tuning (semitones and cents)
+: Adjusts the tuning in semitones and hundredths of a semitone.
+  This transposition is added on top of the initial transposition related to the triggered note (for example, the initial transposition of a sample with a root key of 60 will be +2 semitones if the key pressed on the keyboard is 62).
+
+Tuning (scale)
+: This parameter modifies the interval between two consecutive notes and will therefore affect the initial transposition linked to the triggered note.
+  A value of 100 represents the equal temperament scale: 100 hundredths of a semitone are used to transpose a sample from one key to the next.
+  A value of 0 disables this initial transposition, meaning the sample will be played identically across all keys on the keyboard.
 
 Filter
 : Apply a low-pass filter, by specifying the cutoff frequency and the resonance.

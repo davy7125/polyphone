@@ -2,7 +2,7 @@ Un instrument construit sous la forme d'une banque de sons est composé d'échan
 Ce tutoriel décrit comment ajouter et préparer un échantillon dans une banque de sons.
 
 
-## Import
+## Importation {#doc_import}
 
 
 Tout d'abord, assurez-vous d'avoir des échantillons sur votre ordinateur.
@@ -13,10 +13,10 @@ Pour ce tutoriel, cet échantillon de flûte est fourni&nbsp;: <a href="files/fl
 Lorsque vous l'avez, créez une nouvelle banque de sons avec Polyphone (:menuselection:`Menu --> Nouveau`) et importez l'échantillon (:guilabel:`Nouvel échantillon`).
 
 
-![Import d'un échantillon](images/import-sample.png "Import d'un échantillon")
+![Importation d'un échantillon](images/import-sample.png "Importation d'un échantillon")
 
 
-## Bouclage
+## Bouclage {#doc_loop}
 
 
 ### Introduction
@@ -77,7 +77,7 @@ Il créera automatiquement une boucle en coupant l'échantillon et en superposan
 Voir la documentation en rapport avec l'outil pour plus d'informations.
 
 
-## Accordage
+## Accordage {#doc_tuning}
 
 
 Tous les échantillons doivent être accordés si vous ne voulez pas vous retrouver avec un instrument désaccordé.
@@ -120,7 +120,7 @@ Voici des exemples contenant le son d'une flûte et le sinus de calibration&nbsp
 ![Accordage des échantillons&nbsp;: analyse fréquentielle](images/tune-sample-3.png "Accordage des échantillons&nbsp;: analyse fréquentielle")
 
 
-## Pour aller plus loin
+## Pour aller plus loin {#doc_further}
 
 
 Différents outils sont disponibles pour l'édition des échantillons comme&nbsp;:
@@ -132,7 +132,7 @@ Différents outils sont disponibles pour l'édition des échantillons comme&nbsp
 * [ajuster la balance](manual/soundfont-editor/tools/sample-tools.md#doc_balance) pour les échantillons stéréo.
 
 
-## Note sur les échantillons stéréo
+## Note sur les échantillons stéréo {#doc_stereo}
 
 
 Les échantillons stéréo sont composés de deux échantillons mono.

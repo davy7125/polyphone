@@ -2,7 +2,7 @@ An instrument built in a soundfont is made of samples, coming for example from t
 This tutorial describes how to add and prepare a sample in a soundfont.
 
 
-## Import
+## Import {#doc_import}
 
 
 You must first have samples on your computer.
@@ -16,7 +16,7 @@ Once you have it, create a new soundfont with Polyphone (:menuselection:`Menu --
 ![Import sample](images/import-sample.png "Import sample")
 
 
-## Loop
+## Loop {#doc_loop}
 
 
 ### Introduction
@@ -77,7 +77,7 @@ It will automatically create a loop by cutting the sample and superimposing two 
 See the related documentation for more information.
 
 
-## Tuning
+## Tuning {#doc_tuning}
 
 
 All samples have to be tuned if you don't want an out-of-tune instrument.
@@ -120,7 +120,7 @@ Here are examples containing the sound of a flute and a calibration sine:
 ![Tune sample: frequency analysis](images/tune-sample-3.png "Tune sample: frequency analysis")
 
 
-## To go further
+## To go further {#doc_further}
 
 
 Several tools are available in the menu :guilabel:`Tools`.
@@ -133,7 +133,7 @@ You can edit samples by:
 * [adjusting the balance](manual/soundfont-editor/tools/sample-tools.md#doc_balance) for stereo samples.
 
 
-## Note on the stereo samples
+## Note on the stereo samples {#doc_stereo}
 
 
 Stereo samples are made of two mono samples.

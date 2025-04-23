@@ -31,10 +31,10 @@ Par ailleurs, il est possible de cocher les options suivantes&nbsp;:
   L'option s'applique également lors de l'édition de divisions stéréo d'un instrument&nbsp;: la division correspondant à l'autre canal (et ayant les mêmes étendues de notes et de vélocités) est éditée de la même manière.
 
 Import d'échantillons&nbsp;: ajuster à la boucle
-: Lors de l'import d'un échantillon, les données situées après la fin de la boucle sont automatiquement enlevées (même effet que l'outil «&nbsp;[Ajuster à la fin de boucle](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)&nbsp;»).
+: Lors de l'importation d'un échantillon, les données situées après la fin de la boucle sont automatiquement enlevées (même effet que l'outil «&nbsp;[Ajuster à la fin de boucle](manual/soundfont-editor/tools/sample-tools.md#doc_trimloop)&nbsp;»).
 
-Import d'échantillons&nbsp;: enlever le blanc au départ
-: Lors de l'import d'un échantillon, la partie silencieuse située avant l'attaque est automatiquement enlevée (même effet que l'outil «&nbsp;[Enlever le silence initial](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)&nbsp;»).
+Importation d'échantillons&nbsp;: enlever le blanc au départ
+: Lors de l'importation d'un échantillon, la partie silencieuse située avant l'attaque est automatiquement enlevée (même effet que l'outil «&nbsp;[Enlever le silence initial](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank)&nbsp;»).
 
 
 ![Préférences, général](images/settings_general.png "Préférences, général")

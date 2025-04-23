@@ -55,10 +55,17 @@ Mode de lecture
 
 Note de base
 : Permet de changer la note de base configurée dans un échantillon par une autre.
+  Si par exemple un échantillon possède la note de base de 50 et que cet échantillon est lu sur l'étendue de notes [49 - 51], alors l'échantillon sera lu avec une transposition initiale de -1, 0 et +1 demi-ton sur les notes 49, 50, 51.
+  Si à présent la note de base est surchargée à 51 au niveau de l'instrument, alors ce même échantillon sera lu avec une transposition initiale de -2, -1 et 0 demi-ton(s) sur les notes 49, 50, 51.
 
-Accordage
+Accordage (demi-tons et centièmes)
 : Modifie l'accordage en demi-tons et en centièmes de demi-ton.
-  Le paramètre «&nbsp;Réglage de tonalité&nbsp;» modifie la distance entre deux notes consécutives.
+  Cette transposition s'ajoute à la transposition initiale liée à la note déclenchée (par exemple la transposition initiale d'un échantillon dont la note de base est 60 sera +2 demi-tons si la touche appuyée le clavier est 62).
+
+Réglage de tonalité
+: Ce paramètre modifie la distance entre deux notes consécutives et modifiera ainsi la transposition initiale liée à la note déclenchée.
+  Une valeur de 100 décrit la gamme tempérée&nbsp; 100 centièmes de demi-tons sont utilisés pour transposer un échantillon d'une touche à l'autre.
+  Une valeur de 0 désactive cette transposition initiale et l'échantillon sera ainsi lu à l'identique sur toutes les touches du clavier.
 
 Filtre
 : Applique un filtre passe-bas, en spécifiant la fréquence de coupure et la résonance.
