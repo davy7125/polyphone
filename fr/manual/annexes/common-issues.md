@@ -120,4 +120,7 @@ La boucle est a priori mauvaise et cette [page](tutorials/how-to-prepare-a-sampl
 ## Standard MIDI non respecté {#doc_standard}
 
 
-(en cours de rédaction)
+Les standards MIDI imposent une numérotation précise pour les instruments contenus dans les banques de sons. Il est ainsi possible d'interchanger des banques de sons différentes mais respectant le même standard sans qu'il en résulte une grande différence dans les timbres joués&nbsp;: un piano et une flûte seront par exemple appelés de la même manière. Si une revue indique qu'un standard n'est pas respecté, 2 solutions possibles&nbsp;
+
+* soit enlever l'information indiquant que la banque de sons respecte un standard,
+* soit vérifier que tous les ensembles de la banque de sons sont bien associés au bon type d'instrument (voir cette [page](manual/annexes/midi-standards.md) pour la liste des instruments) et que tous les instruments prévus par le standard sont bien présents.

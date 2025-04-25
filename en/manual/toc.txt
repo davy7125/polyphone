@@ -19,4 +19,5 @@ index.md=User manual
 |annexes/index.md=Annexes
 ||annexes/common-issues.md=Typical flaws found in soundfonts
 ||annexes/the-different-soundfont-formats.md=The different soundfont formats
-||annexes/command-line.md=Command line
+||annexes/midi-standards.md=The MIDI standards
+||annexes/command-line.md=Polyphone command-line interface

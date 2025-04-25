@@ -120,4 +120,7 @@ The loop is most likely incorrect, and this [page](tutorials/how-to-prepare-a-sa
 ## MIDI standard not met {#doc_standard}
 
 
-(in progress)
+MIDI standards impose a specific numbering for the instruments contained in soundfonts. This allows different soundfonts that follow the same standard to be interchangeable, without causing significant differences in the timbres played: for example, a piano and a flute will be called in the same way. If a review indicates that a standard is not being followed, there are two possible solutions:
+
+* either remove the information stating that the soundfont complies with a standard,
+* or verify that all presets in the soundfont are correctly assigned to the appropriate kind of instrument (see this [page](manual/annexes/midi-standards.md) for the list of instruments) and that all instruments required by the standard are present.

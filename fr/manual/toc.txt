@@ -19,4 +19,5 @@ index.md=Manuel utilisateur
 |annexes/index.md=Annexes
 ||annexes/common-issues.md=Défauts typiques des banques de sons
 ||annexes/the-different-soundfont-formats.md=Les différents formats de banques de sons
+||annexes/midi-standards.md=Les standards MIDI
 ||annexes/command-line.md=Polyphone en ligne de commande
