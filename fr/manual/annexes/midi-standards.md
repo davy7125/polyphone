@@ -1,4 +1,4 @@
-# Les normes MIDI et la compatibilité des banques de sons
+## Les normes MIDI et la compatibilité des banques de sons
 
 Les normes MIDI définissent des règles pour l'échange de données musicales entre des éléments électroniques (claviers, expandeurs, &hellip;) et logiciels (instruments virtuels, séquenceurs, &hellip;) afin d'assurer leur compatibilité. En ce qui concerne les banques de sons, ces normes précisent toute une série d'instruments et pour chacun d'eux, les numéros de banque et d'ensemble à utiliser. Plusieurs normes existent&nbsp;:
 
@@ -7,7 +7,7 @@ Les normes MIDI définissent des règles pour l'échange de données musicales e
 * Yamaha est à l'origine du standard [XG](#doc_xg) en 1994.
 
 
-# Le standard General MIDI (GM) {#doc_gm}
+## Le standard General MIDI (GM) {#doc_gm}
 
 
 Le standard General MIDI est détaillé dans ce [document](files/RP-003_General_MIDI_System_Level_1_Specification_96-1-4_0.1.pdf). Les instruments ayant un numéro d'ensemble entre 0 et 127 sont décrits ci-dessous (le numéro de banque est généralement 0)&nbsp;:
@@ -212,7 +212,7 @@ Les percussions, appelées par l'ensemble 0 de la banque 128 par exemple, sont r
 </div>
 
 
-# Le standard MT-32 de Roland {#doc_mt32}
+## Le standard MT-32 de Roland {#doc_mt32}
 
 
 Le standard MT-32 est détaillé dans ce [document](files/Roland MT-32_OM.pdf). Le numéro de banque n'est pas important mais les instruments, selon le numéro d'ensemble, sont les suivants&nbsp;:
@@ -357,13 +357,13 @@ Le standard MT-32 est détaillé dans ce [document](files/Roland MT-32_OM.pdf). 
 </div>
 
 
-# Le standard GS de Roland {#doc_gs}
+## Le standard GS de Roland {#doc_gs}
 
 
 Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est détaillée dans ce [document](files/Roland SC-55_OM.pdf), la mise à jour de 1994 dans [celui-ci](files/Roland SC-88_OM.pdf) et la mise à jour de 1996 dans [celui-ci](files/Roland SC-88PRO_OM.pdf).
 
 
-# Le standard XG de Yamaha {#doc_xg}
+## Le standard XG de Yamaha {#doc_xg}
 
 
 Le standard XG est détaillé dans ce [document](files/xg_spec.pdf).

@@ -1,4 +1,4 @@
-# MIDI Standards and soundfont compatibility
+## MIDI Standards and soundfont compatibility
 
 MIDI standards define rules for the exchange of musical data between electronic devices (keyboards, sound modules, &hellip;) and software (virtual instruments, sequencers, &hellip;) to ensure their compatibility. Regarding soundfonts, these standards specify a series of instruments along with the bank and preset numbers to be used for each. Several standards exist:
 
@@ -7,7 +7,7 @@ MIDI standards define rules for the exchange of musical data between electronic 
 * Yamaha introduced the [XG](#doc_xg) standard in 1994.
 
 
-# The General MIDI (GM) Standard {#doc_gm}
+## The General MIDI (GM) Standard {#doc_gm}
 
 
 The General MIDI standard is detailed in this [document](files/RP-003_General_MIDI_System_Level_1_Specification_96-1-4_0.1.pdf). Instruments with preset number from 0 to 127 are described below (bank number is usually 0):
@@ -212,7 +212,7 @@ Percussion instruments, called by preset 0 of bank 128 for example, are distribu
 </div>
 
 
-# The Roland MT-32 Standard {#doc_mt32}
+## The Roland MT-32 Standard {#doc_mt32}
 
 
 The MT-32 standard is detailed in this [document](files/Roland MT-32_OM.pdf). The bank number is not important but the instruments, according to the preset number, are the following:
@@ -357,13 +357,13 @@ The MT-32 standard is detailed in this [document](files/Roland MT-32_OM.pdf). Th
 </div>
 
 
-# The Roland GS Standard {#doc_gs}
+## The Roland GS Standard {#doc_gs}
 
 
 The GS standard was extended twice. The initial 1991 version is detailed in this [document](files/Roland SC-55_OM.pdf), the 1994 update in [this&nbsp;one](files/Roland SC-88_OM.pdf), and the 1996 update in [this&nbsp;one](files/Roland SC-88PRO_OM.pdf).
 
 
-# The Yamaha XG Standard {#doc_xg}
+## The Yamaha XG Standard {#doc_xg}
 
 
 The XG standard is detailed in this [document](files/xg_spec.pdf).
