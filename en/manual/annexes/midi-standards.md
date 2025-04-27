@@ -215,7 +215,7 @@ Percussion instruments, called by preset 0 of bank 128 for example, are distribu
 ## The Roland MT-32 Standard {#doc_mt32}
 
 
-The MT-32 standard is detailed in this [document](files/Roland MT-32_OM.pdf). The bank number is not important but the instruments, according to the preset number, are the following:
+The MT-32 standard is detailed in this [document](files/Roland_MT-32_OM.pdf). The bank number is not important but the instruments, according to the preset number, are the following:
 
 <div class='table-columns-4'>
 <table>
@@ -360,7 +360,7 @@ The MT-32 standard is detailed in this [document](files/Roland MT-32_OM.pdf). Th
 ## The Roland GS Standard {#doc_gs}
 
 
-The GS standard was extended twice. The initial 1991 version is detailed in this [document](files/Roland SC-55_OM.pdf), the 1994 update in [this&nbsp;one](files/Roland SC-88_OM.pdf), and the 1996 update in [this&nbsp;one](files/Roland SC-88PRO_OM.pdf).
+The GS standard was extended twice. The initial 1991 version is detailed in this [document](files/Roland_SC-55_OM.pdf), the 1994 update in [this&nbsp;one](files/Roland_SC-88_OM.pdf), and the 1996 update in [this&nbsp;one](files/Roland_SC-88PRO_OM.pdf).
 
 
 ## The Yamaha XG Standard {#doc_xg}
