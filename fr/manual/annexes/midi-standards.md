@@ -12,7 +12,7 @@ Les normes MIDI définissent des règles pour l'échange de données musicales e
 
 Le standard General MIDI est détaillé dans ce [document](files/RP-003_General_MIDI_System_Level_1_Specification_96-1-4_0.1.pdf). Les instruments ayant un numéro d'ensemble entre 0 et 127 sont décrits ci-dessous (le numéro de banque est généralement 0)&nbsp;:
 
-<div class='table-columns'>
+<div class="table-wrapper"><div class='table-columns'>
 <table cellspacing="0" cellpadding="1">
 <tr><td>000</td><td>Acoustic Grand Piano</td></tr>
 <tr><td>001</td><td>Bright Acoustic Piano</td></tr>
@@ -149,11 +149,11 @@ Le standard General MIDI est détaillé dans ce [document](files/RP-003_General_
 <tr><td>126</td><td>Applause</td></tr>
 <tr><td>127</td><td>Gun Shot</td></tr>
 </table>
-</div>
+</div></div>
 
 Les percussions, appelées par l'ensemble 0 de la banque 128 par exemple, sont réparties ainsi&nbsp;:
 
-<div class='table-columns'>
+<div class="table-wrapper"><div class='table-columns'>
 <table cellspacing="0" cellpadding="1">
 <tr><td>035</td><td>Acoustic Bass Drum</td></tr>
 <tr><td>036</td><td>Bass Drum 1</td></tr>
@@ -210,7 +210,7 @@ Les percussions, appelées par l'ensemble 0 de la banque 128 par exemple, sont r
 <tr><td>081</td><td>Open Triangle</td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 </table>
-</div>
+</div></div>
 
 
 ## Le standard MT-32 de Roland {#doc_mt32}
@@ -218,7 +218,7 @@ Les percussions, appelées par l'ensemble 0 de la banque 128 par exemple, sont r
 
 Le standard MT-32 est détaillé dans ce [document](files/Roland_MT-32_OM.pdf). Le numéro de banque n'est pas important mais les instruments, selon le numéro d'ensemble, sont les suivants&nbsp;:
 
-<div class='table-columns'>
+<div class="table-wrapper"><div class='table-columns'>
 <table cellspacing="0" cellpadding="1">
 <tr><td>000</td><td>Acoustic Piano 1</td></tr>
 <tr><td>001</td><td>Acoustic Piano 2</td></tr>
@@ -355,7 +355,7 @@ Le standard MT-32 est détaillé dans ce [document](files/Roland_MT-32_OM.pdf). 
 <tr><td>126</td><td>Water Bell</td></tr>
 <tr><td>127</td><td>Jungle Tune</td></tr>
 </table>
-</div>
+</div></div>
 
 
 ## Le standard GS de Roland {#doc_gs}
@@ -363,7 +363,7 @@ Le standard MT-32 est détaillé dans ce [document](files/Roland_MT-32_OM.pdf). 
 
 Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est détaillée dans ce [document](files/Roland_SC-55_OM.pdf), la mise à jour de 1994 dans [celui-ci](files/Roland_SC-88_OM.pdf) et la mise à jour de 1996 dans [celui-ci](files/Roland_SC-88PRO_OM.pdf). La liste des instruments comprend tous les instruments du standard [General MIDI](#doc_gm) ainsi que les éléments suivants&nbsp;:
 
-<div class='table-columns'>
+<div class="table-wrapper"><div class='table-columns'>
 <table cellspacing="0" cellpadding="1">
 <tr><td>008:000</td><td>Piano 1 (1 w)</td></tr>
 <tr><td>016:000</td><td>Piano 1 (1 d)</td></tr>
@@ -1048,7 +1048,7 @@ Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est d�
 <tr><td>004:127</td><td>Eruption (3)</td></tr>
 <tr><td>005:127</td><td>Big Shot (3)</td></tr>
 </table>
-</div>
+</div></div>
 
 Légende&nbsp;:
 
@@ -1066,7 +1066,7 @@ Légende&nbsp;:
 
 Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste des instruments comprend tous les instruments du standard [General MIDI](#doc_gm) ainsi que les éléments suivants&nbsp;:
 
-<div class='table-columns'>
+<div class="table-wrapper"><div class='table-columns'>
 <table cellspacing="0" cellpadding="1">
 <tr><td>001:000</td><td>Grand PianoK</td></tr>
 <tr><td>018:000</td><td>MelloGrP</td></tr>
@@ -1397,7 +1397,7 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>064:118</td><td>Ana Tom</td></tr>
 <tr><td>065:118</td><td>ElecPerc</td></tr>
 </table>
-</div>
+</div></div>
 
 
 *[MIDI]: Musical Instrument Digital Interface

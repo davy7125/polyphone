@@ -12,7 +12,7 @@ MIDI standards define rules for the exchange of musical data between electronic 
 
 The General MIDI standard is detailed in this [document](files/RP-003_General_MIDI_System_Level_1_Specification_96-1-4_0.1.pdf). Instruments with preset number from 0 to 127 are described below (bank number is usually 0):
 
-<div class='table-columns'>
+<div class="table-wrapper"><div class='table-columns'>
 <table cellspacing="0" cellpadding="1">
 <tr><td>000</td><td>Acoustic Grand Piano</td></tr>
 <tr><td>001</td><td>Bright Acoustic Piano</td></tr>
@@ -149,11 +149,11 @@ The General MIDI standard is detailed in this [document](files/RP-003_General_MI
 <tr><td>126</td><td>Applause</td></tr>
 <tr><td>127</td><td>Gun Shot</td></tr>
 </table>
-</div>
+</div></div>
 
 Percussion instruments, called by preset 0 of bank 128 for example, are distributed as follows:
 
-<div class='table-columns'>
+<div class="table-wrapper"><div class='table-columns'>
 <table cellspacing="0" cellpadding="1">
 <tr><td>035</td><td>Acoustic Bass Drum</td></tr>
 <tr><td>036</td><td>Bass Drum 1</td></tr>
@@ -210,7 +210,7 @@ Percussion instruments, called by preset 0 of bank 128 for example, are distribu
 <tr><td>081</td><td>Open Triangle</td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 </table>
-</div>
+</div></div>
 
 
 ## The Roland MT-32 standard {#doc_mt32}
@@ -218,7 +218,7 @@ Percussion instruments, called by preset 0 of bank 128 for example, are distribu
 
 The MT-32 standard is detailed in this [document](files/Roland_MT-32_OM.pdf). The bank number is not important but the instruments, according to the preset number, are the following:
 
-<div class='table-columns'>
+<div class="table-wrapper"><div class='table-columns'>
 <table cellspacing="0" cellpadding="1">
 <tr><td>000</td><td>Acoustic Piano 1</td></tr>
 <tr><td>001</td><td>Acoustic Piano 2</td></tr>
@@ -355,7 +355,7 @@ The MT-32 standard is detailed in this [document](files/Roland_MT-32_OM.pdf). Th
 <tr><td>126</td><td>Water Bell</td></tr>
 <tr><td>127</td><td>Jungle Tune</td></tr>
 </table>
-</div>
+</div></div>
 
 
 ## The Roland GS standard {#doc_gs}
@@ -363,7 +363,7 @@ The MT-32 standard is detailed in this [document](files/Roland_MT-32_OM.pdf). Th
 
 The GS standard was extended twice. The initial 1991 version is detailed in this [document](files/Roland_SC-55_OM.pdf), the 1994 update in [this&nbsp;one](files/Roland_SC-88_OM.pdf), and the 1996 update in [this&nbsp;one](files/Roland_SC-88PRO_OM.pdf). The instrument list includes all [General MIDI](#doc_gm) standard instruments and all the following items:
 
-<div class='table-columns'>
+<div class="table-wrapper"><div class='table-columns'>
 <table cellspacing="0" cellpadding="1">
 <tr><td>008:000</td><td>Piano 1 (1 w)</td></tr>
 <tr><td>016:000</td><td>Piano 1 (1 d)</td></tr>
@@ -1048,7 +1048,7 @@ The GS standard was extended twice. The initial 1991 version is detailed in this
 <tr><td>004:127</td><td>Eruption (3)</td></tr>
 <tr><td>005:127</td><td>Big Shot (3)</td></tr>
 </table>
-</div>
+</div></div>
 
 Legend:
 
@@ -1066,7 +1066,7 @@ Legend:
 
 The XG standard is detailed in this [document](files/xg_spec.pdf). The instrument list includes all [General MIDI](#doc_gm) standard instruments and also the following items:
 
-<div class='table-columns'>
+<div class="table-wrapper"><div class='table-columns'>
 <table cellspacing="0" cellpadding="1">
 <tr><td>001:000</td><td>Grand PianoK</td></tr>
 <tr><td>018:000</td><td>MelloGrP</td></tr>
@@ -1397,7 +1397,7 @@ The XG standard is detailed in this [document](files/xg_spec.pdf). The instrumen
 <tr><td>064:118</td><td>Ana Tom</td></tr>
 <tr><td>065:118</td><td>ElecPerc</td></tr>
 </table>
-</div>
+</div></div>
 
 
 *[MIDI]: Musical Instrument Digital Interface
