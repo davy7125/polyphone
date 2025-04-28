@@ -13,7 +13,7 @@ MIDI standards define rules for the exchange of musical data between electronic 
 The General MIDI standard is detailed in this [document](files/RP-003_General_MIDI_System_Level_1_Specification_96-1-4_0.1.pdf). Instruments with preset number from 0 to 127 are described below (bank number is usually 0):
 
 <div class='table-columns-4'>
-<table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>000</td><td>Acoustic Grand Piano</td></tr>
 <tr><td>001</td><td>Bright Acoustic Piano</td></tr>
 <tr><td>002</td><td>Electric Grand Piano</td></tr>
@@ -47,7 +47,7 @@ The General MIDI standard is detailed in this [document](files/RP-003_General_MI
 <tr><td>030</td><td>Distortion Guitar</td></tr>
 <tr><td>031</td><td>Guitar Harmonics</td></tr>
 </table>
-<table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>032</td><td>Acoustic Bass</td></tr>
 <tr><td>033</td><td>Electric Bass (finder)</td></tr>
 <tr><td>034</td><td>Electric Bass (pick)</td></tr>
@@ -81,7 +81,7 @@ The General MIDI standard is detailed in this [document](files/RP-003_General_MI
 <tr><td>062</td><td>Synth Brass 1</td></tr>
 <tr><td>063</td><td>Synth Brass 2</td></tr>
 </table>
-<table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>064</td><td>Soprano Sax</td></tr>
 <tr><td>065</td><td>Alto Sax</td></tr>
 <tr><td>066</td><td>Tenor Sax</td></tr>
@@ -115,7 +115,7 @@ The General MIDI standard is detailed in this [document](files/RP-003_General_MI
 <tr><td>094</td><td>Pad 7 (halo)</td></tr>
 <tr><td>095</td><td>Pad 8 (sweep)</td></tr>
 </table>
-<table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>096</td><td>FX 1 (rain)</td></tr>
 <tr><td>097</td><td>FX 2 (soundtrack)</td></tr>
 <tr><td>098</td><td>FX 3 (crystal)</td></tr>
@@ -154,7 +154,7 @@ The General MIDI standard is detailed in this [document](files/RP-003_General_MI
 Percussion instruments, called by preset 0 of bank 128 for example, are distributed as follows:
 
 <div class='table-columns-4'>
-<table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>035</td><td>Acoustic Bass Drum</td></tr>
 <tr><td>036</td><td>Bass Drum 1</td></tr>
 <tr><td>037</td><td>Side Stick </td></tr>
@@ -168,7 +168,7 @@ Percussion instruments, called by preset 0 of bank 128 for example, are distribu
 <tr><td>045</td><td>Low Tom</td></tr>
 <tr><td>046</td><td>Open Hi-Hat</td></tr>
 </table>
-<table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>047</td><td>Low-Mid Tom</td></tr>
 <tr><td>048</td><td>Hi Mid Tom</td></tr>
 <tr><td>049</td><td>Crash Cymbal 1</td></tr>
@@ -182,7 +182,7 @@ Percussion instruments, called by preset 0 of bank 128 for example, are distribu
 <tr><td>057</td><td>Crash Cymbal 2</td></tr>
 <tr><td>058</td><td>Vibraslap</td></tr>
 </table>
-<table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>059</td><td>Ride Cymbal 2</td></tr>
 <tr><td>060</td><td>Hi Bongo</td></tr>
 <tr><td>061</td><td>Low Bongo</td></tr>
@@ -196,7 +196,7 @@ Percussion instruments, called by preset 0 of bank 128 for example, are distribu
 <tr><td>069</td><td>Cabasa</td></tr>
 <tr><td>070</td><td>Maracas</td></tr>
 </table>
-<table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>071</td><td>Short Whistle</td></tr>
 <tr><td>072</td><td>Long Whistle</td></tr>
 <tr><td>073</td><td>Short Guiro</td></tr>
@@ -208,6 +208,7 @@ Percussion instruments, called by preset 0 of bank 128 for example, are distribu
 <tr><td>079</td><td>Open Cuica</td></tr>
 <tr><td>080</td><td>Mute Triangle</td></tr>
 <tr><td>081</td><td>Open Triangle</td></tr>
+<tr><td></td><td></td></tr>
 </table>
 </div>
 
@@ -218,7 +219,7 @@ Percussion instruments, called by preset 0 of bank 128 for example, are distribu
 The MT-32 standard is detailed in this [document](files/Roland_MT-32_OM.pdf). The bank number is not important but the instruments, according to the preset number, are the following:
 
 <div class='table-columns-4'>
-<table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>000</td><td>Acoustic Piano 1</td></tr>
 <tr><td>001</td><td>Acoustic Piano 2</td></tr>
 <tr><td>002</td><td>Acoustic Piano 3</td></tr>
@@ -252,7 +253,7 @@ The MT-32 standard is detailed in this [document](files/Roland_MT-32_OM.pdf). Th
 <tr><td>030</td><td>Synth Bass 3</td></tr>
 <tr><td>031</td><td>Synth Bass 4</td></tr>
 </table>
-<table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>032</td><td>Fantasy</td></tr>
 <tr><td>033</td><td>Harmo Pan</td></tr>
 <tr><td>034</td><td>Chorale</td></tr>
@@ -286,7 +287,7 @@ The MT-32 standard is detailed in this [document](files/Roland_MT-32_OM.pdf). Th
 <tr><td>062</td><td>Electric Gtr 2</td></tr>
 <tr><td>063</td><td>Sitar</td></tr>
 </table>
-<table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>064</td><td>Acoustic Bass 1</td></tr>
 <tr><td>065</td><td>Acoustic Bass 2</td></tr>
 <tr><td>066</td><td>Electric Bass 1</td></tr>
@@ -320,7 +321,7 @@ The MT-32 standard is detailed in this [document](files/Roland_MT-32_OM.pdf). Th
 <tr><td>094</td><td>Tuba</td></tr>
 <tr><td>095</td><td>Brass Section 1</td></tr>
 </table>
-<table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>096</td><td>Brass Section 2</td></tr>
 <tr><td>097</td><td>Vibe 1</td></tr>
 <tr><td>098</td><td>Vibe 2</td></tr>
@@ -353,7 +354,7 @@ The MT-32 standard is detailed in this [document](files/Roland_MT-32_OM.pdf). Th
 <tr><td>125</td><td>One Note Jam</td></tr>
 <tr><td>126</td><td>Water Bell</td></tr>
 <tr><td>127</td><td>Jungle Tune</td></tr>
-<table>
+<table cellspacing="0" cellpadding="1">
 </div>
 
 
