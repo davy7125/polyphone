@@ -7,7 +7,7 @@ MIDI standards define rules for the exchange of musical data between electronic 
 * Yamaha introduced the [XG](#doc_xg) standard in 1994.
 
 
-## The General MIDI (GM) Standard {#doc_gm}
+## The General MIDI (GM) standard {#doc_gm}
 
 
 The General MIDI standard is detailed in this [document](files/RP-003_General_MIDI_System_Level_1_Specification_96-1-4_0.1.pdf). Instruments with preset number from 0 to 127 are described below (bank number is usually 0):
@@ -213,7 +213,7 @@ Percussion instruments, called by preset 0 of bank 128 for example, are distribu
 </div>
 
 
-## The Roland MT-32 Standard {#doc_mt32}
+## The Roland MT-32 standard {#doc_mt32}
 
 
 The MT-32 standard is detailed in this [document](files/Roland_MT-32_OM.pdf). The bank number is not important but the instruments, according to the preset number, are the following:
@@ -358,7 +358,7 @@ The MT-32 standard is detailed in this [document](files/Roland_MT-32_OM.pdf). Th
 </div>
 
 
-## The Roland GS Standard {#doc_gs}
+## The Roland GS standard {#doc_gs}
 
 
 The GS standard was extended twice. The initial 1991 version is detailed in this [document](files/Roland_SC-55_OM.pdf), the 1994 update in [this&nbsp;one](files/Roland_SC-88_OM.pdf), and the 1996 update in [this&nbsp;one](files/Roland_SC-88PRO_OM.pdf). The instrument list includes all [General MIDI](#doc_gm) standard instruments and adds the following items:
@@ -366,7 +366,7 @@ The GS standard was extended twice. The initial 1991 version is detailed in this
 (coming soon)
 
 
-## The Yamaha XG Standard {#doc_xg}
+## The Yamaha XG standard {#doc_xg}
 
 
 The XG standard is detailed in this [document](files/xg_spec.pdf). The instrument list includes all [General MIDI](#doc_gm) standard instruments and adds the following items:
