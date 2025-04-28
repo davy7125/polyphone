@@ -1,4 +1,4 @@
-## MIDI Standards and soundfont compatibility
+## MIDI standards and soundfont compatibility
 
 MIDI standards define rules for the exchange of musical data between electronic devices (keyboards, sound modules, &hellip;) and software (virtual instruments, sequencers, &hellip;) to ensure their compatibility. Regarding soundfonts, these standards specify a series of instruments along with the bank and preset numbers to be used for each. Several standards exist:
 
@@ -361,13 +361,17 @@ The MT-32 standard is detailed in this [document](files/Roland_MT-32_OM.pdf). Th
 ## The Roland GS Standard {#doc_gs}
 
 
-The GS standard was extended twice. The initial 1991 version is detailed in this [document](files/Roland_SC-55_OM.pdf), the 1994 update in [this&nbsp;one](files/Roland_SC-88_OM.pdf), and the 1996 update in [this&nbsp;one](files/Roland_SC-88PRO_OM.pdf).
+The GS standard was extended twice. The initial 1991 version is detailed in this [document](files/Roland_SC-55_OM.pdf), the 1994 update in [this&nbsp;one](files/Roland_SC-88_OM.pdf), and the 1996 update in [this&nbsp;one](files/Roland_SC-88PRO_OM.pdf). The instrument list includes all [General MIDI](#doc_gm) standard instruments and adds the following items:
+
+(coming soon)
 
 
 ## The Yamaha XG Standard {#doc_xg}
 
 
-The XG standard is detailed in this [document](files/xg_spec.pdf).
+The XG standard is detailed in this [document](files/xg_spec.pdf). The instrument list includes all [General MIDI](#doc_gm) standard instruments and adds the following items:
+
+(coming soon)
 
 
 *[MIDI]: Musical Instrument Digital Interface

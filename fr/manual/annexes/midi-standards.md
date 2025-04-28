@@ -208,6 +208,7 @@ Les percussions, appelées par l'ensemble 0 de la banque 128 par exemple, sont r
 <tr><td>079</td><td>Open Cuica</td></tr>
 <tr><td>080</td><td>Mute Triangle</td></tr>
 <tr><td>081</td><td>Open Triangle</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 </table>
 </div>
 
@@ -360,13 +361,17 @@ Le standard MT-32 est détaillé dans ce [document](files/Roland_MT-32_OM.pdf). 
 ## Le standard GS de Roland {#doc_gs}
 
 
-Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est détaillée dans ce [document](files/Roland_SC-55_OM.pdf), la mise à jour de 1994 dans [celui-ci](files/Roland_SC-88_OM.pdf) et la mise à jour de 1996 dans [celui-ci](files/Roland_SC-88PRO_OM.pdf).
+Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est détaillée dans ce [document](files/Roland_SC-55_OM.pdf), la mise à jour de 1994 dans [celui-ci](files/Roland_SC-88_OM.pdf) et la mise à jour de 1996 dans [celui-ci](files/Roland_SC-88PRO_OM.pdf). La liste des instruments comprend tous les instruments du standard [General MIDI](#doc_gm) et ajoute les éléments suivants&nbsp;:
+
+(en cours de rédaction)
 
 
 ## Le standard XG de Yamaha {#doc_xg}
 
 
-Le standard XG est détaillé dans ce [document](files/xg_spec.pdf).
+Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste des instruments comprend tous les instruments du standard [General MIDI](#doc_gm) et ajoute les éléments suivants&nbsp;:
+
+(en cours de rédaction)
 
 
 *[MIDI]: Musical Instrument Digital Interface
