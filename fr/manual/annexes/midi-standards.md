@@ -361,7 +361,7 @@ Le standard MT-32 est détaillé dans ce [document](files/Roland_MT-32_OM.pdf). 
 ## Le standard GS de Roland {#doc_gs}
 
 
-Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est détaillée dans ce [document](files/Roland_SC-55_OM.pdf), la mise à jour de 1994 dans [celui-ci](files/Roland_SC-88_OM.pdf) et la mise à jour de 1996 dans [celui-ci](files/Roland_SC-88PRO_OM.pdf). La liste des instruments comprend tous les instruments du standard [General MIDI](#doc_gm) et ajoute les éléments suivants&nbsp;:
+Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est détaillée dans ce [document](files/Roland_SC-55_OM.pdf), la mise à jour de 1994 dans [celui-ci](files/Roland_SC-88_OM.pdf) et la mise à jour de 1996 dans [celui-ci](files/Roland_SC-88PRO_OM.pdf). La liste des instruments comprend tous les instruments du standard [General MIDI](#doc_gm) ainsi que les éléments suivants&nbsp;:
 
 <div class='table-columns'>
 <table cellspacing="0" cellpadding="1">
@@ -1064,7 +1064,7 @@ Légende&nbsp;:
 ## Le standard XG de Yamaha {#doc_xg}
 
 
-Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste des instruments comprend tous les instruments du standard [General MIDI](#doc_gm) et ajoute les éléments suivants&nbsp;:
+Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste des instruments comprend tous les instruments du standard [General MIDI](#doc_gm) ainsi que les éléments suivants&nbsp;:
 
 <div class='table-columns'>
 <table cellspacing="0" cellpadding="1">
