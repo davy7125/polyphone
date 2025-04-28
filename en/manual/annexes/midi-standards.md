@@ -208,7 +208,7 @@ Percussion instruments, called by preset 0 of bank 128 for example, are distribu
 <tr><td>079</td><td>Open Cuica</td></tr>
 <tr><td>080</td><td>Mute Triangle</td></tr>
 <tr><td>081</td><td>Open Triangle</td></tr>
-<tr><td></td><td></td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 </table>
 </div>
 
