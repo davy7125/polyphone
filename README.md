@@ -32,6 +32,10 @@ Check this [page](https://www.polyphone.io/software) to find installers for your
 
 See the [documentation](https://www.polyphone.io/documentation) and [forum](https://www.polyphone.io/forum).
 
+### Contributing
+
+To contribute to the project (create a bug report / suggest an improvement / complete a translation), please see this [page](CONTRIBUTE.md).
+
 - - - - 
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone%20project)
