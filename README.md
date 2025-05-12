@@ -34,7 +34,7 @@ See the [documentation](https://www.polyphone.io/documentation) and [forum](http
 
 ### Contributing
 
-To contribute to the project (create a bug report / suggest an improvement / complete a translation), please see this [page](CONTRIBUTE.md).
+To contribute to the project (create a bug report / suggest an improvement / complete a translation), please see this [page](CONTRIBUTING.md).
 
 - - - - 
 
