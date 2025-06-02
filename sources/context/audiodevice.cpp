@@ -22,7 +22,6 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include <QDebug>
 #include "audiodevice.h"
 #include "rtaudio/RtAudio.h"
 #include "confmanager.h"
@@ -83,7 +82,13 @@ QList<AudioDevice::HostInfo> AudioDevice::getAllHosts()
             #ifdef RT_AUDIO_5_2
             for (unsigned int j = 0, end = audio->getDeviceCount(); j < end; ++j)
             #else
-            std::vector<unsigned int> deviceIds = audio->getDeviceIds();
+            std::vector<unsigned int> deviceIds;
+            try {
+                deviceIds = audio->getDeviceIds();
+            } catch (RtAudioError &error) {
+                error.printMessage();
+            }
+
             for (unsigned int j: deviceIds)
             #endif
             {
@@ -267,7 +272,12 @@ void AudioDevice::initAudio()
     #ifdef RT_AUDIO_5_2
     for (unsigned int i = 0, end = _rtAudio->getDeviceCount(); i < end; ++i)
     #else
-    std::vector<unsigned int> deviceIds = _rtAudio->getDeviceIds();
+    std::vector<unsigned int> deviceIds;
+    try {
+        deviceIds = _rtAudio->getDeviceIds();
+    } catch (RtAudioError &error) {
+        error.printMessage();
+    }
     for (unsigned int i: deviceIds)
     #endif
     {
