@@ -461,7 +461,8 @@ void SoundFont::readSection(const char* fourcc, int len)
         break;
     default:
         skip(len);
-        throw(QString("unknown fourcc <%1>").arg(fourcc));
+        //throw(QString("unknown fourcc <%1>").arg(fourcc));
+        break;
     }
 }
 
