@@ -424,6 +424,12 @@ void ConversionSfz::writeElement(AttributeType champ, double value)
     case champ_keyRange:{
         int lokey = qRound(value / 1000.);
         int hikey = qRound(value - 1000. * qRound(value / 1000.));
+        if (lokey > hikey)
+        {
+            int tmp = lokey;
+            lokey = hikey;
+            hikey = tmp;
+        }
         if (lokey != hikey)
         {
             _sfzWriter->addLine("lokey", ContextManager::keyName()->getKeyName(lokey, false, false, true));
@@ -435,6 +441,12 @@ void ConversionSfz::writeElement(AttributeType champ, double value)
     case champ_velRange:{
         int lovel = qRound(value / 1000.);
         int hivel = qRound(value - 1000. * lovel);
+        if (lovel > hivel)
+        {
+            int tmp = lovel;
+            lovel = hivel;
+            hivel = tmp;
+        }
         _sfzWriter->addLine("lovel", lovel);
         _sfzWriter->addLine("hivel", hivel);
     }break;
