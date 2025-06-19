@@ -96,8 +96,6 @@ void InputParserSf2::parse(QDataStream &stream, bool &success, QString &error, i
 
 void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pdtaPart, bool &success, QString &error, int &sf2Index)
 {
-    Q_UNUSED(error)
-
     // Create a new soundfont
     sf2Index = _sm->add(EltID(elementSf2));
     EltID id(elementSf2, sf2Index);
@@ -221,6 +219,11 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
         // Foreach ibag
         for (int j = bagmin; j < bagmax; j++)
         {
+            if (j >= pdtaPart._ibags.count())
+            {
+                error = "invalid ibag index";
+                return;
+            }
             Sf2PdtaPart_bag bag = pdtaPart._ibags[j];
 
             // Indexes of IMOD and IGEN
@@ -240,8 +243,15 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
             // Global zone?
             global = 1;
             for (int k = genmin; k < genmax; k++)
+            {
+                if (k >= pdtaPart._igens.count())
+                {
+                    error = "invalid igen index";
+                    return;
+                }
                 if (pdtaPart._igens[k]._sfGenOper.value == champ_sampleID)
                     global = 0;
+            }
             id2.indexElt2 = -1;
 
             // Parameters
@@ -255,6 +265,11 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
             }
             for (int k = genmin; k < genmax; k++)
             {
+                if (k >= pdtaPart._igens.count())
+                {
+                    error = "invalid igen index";
+                    return;
+                }
                 if (pdtaPart._igens[k]._sfGenOper.value < champ_endOper)
                 {
                     value.wValue = pdtaPart._igens[k]._genAmount.value;
@@ -265,6 +280,11 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
             // Modulators
             for (unsigned int k = modmin; k < modmax; k++)
             {
+                if (k >= pdtaPart._imods.count())
+                {
+                    error = "invalid imod index";
+                    return;
+                }
                 id2.indexMod = -1;
                 if (global)
                 {
@@ -328,6 +348,11 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
         // Foreach pbag
         for (int j = bagmin; j < bagmax; j++)
         {
+            if (j >= pdtaPart._pbags.count())
+            {
+                error = "invalid pbag index";
+                return;
+            }
             Sf2PdtaPart_bag bag = pdtaPart._pbags[j];
 
             // Indexes of PMOD and PGEN
@@ -347,8 +372,15 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
             // Global zone?
             global = 1;
             for (int k = genmin; k < genmax; k++)
+            {
+                if (k >= pdtaPart._pgens.count())
+                {
+                    error = "invalid pgen index";
+                    return;
+                }
                 if (pdtaPart._pgens[k]._sfGenOper.value == champ_instrument)
                     global = 0;
+            }
 
             // Parameters
             id2.indexElt2 = -1;
@@ -362,6 +394,11 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
             }
             for (int k = genmin; k < genmax; k++)
             {
+                if (k >= pdtaPart._pgens.count())
+                {
+                    error = "invalid pgen index";
+                    return;
+                }
                 if (pdtaPart._pgens[k]._sfGenOper.value < champ_endOper)
                 {
                     value.wValue = pdtaPart._pgens[k]._genAmount.value;
@@ -372,6 +409,11 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
             // Modulators
             for (int k = modmin; k < modmax; k++)
             {
+                if (k >= pdtaPart._pmods.count())
+                {
+                    error = "invalid pmod index";
+                    return;
+                }
                 id2.indexMod = -1;
                 if (global)
                 {
