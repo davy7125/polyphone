@@ -111,6 +111,7 @@ void Voice::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Div
     _x2 = 0;
     _y1 = 0;
     _y2 = 0;
+    _volumeCoeff = 0;
 
     quint32 sampleRateForChunks = (_audioSmplRate >> COMPUTATION_CHUNK_SHIFT);
     _modLFO.initialize(sampleRateForChunks);
@@ -268,7 +269,7 @@ resample_slow:
 resample_end:
 
             // Volume envelope and volume modulation with values from the mod LFO converted to dB
-            float coeff = _dataVolArray[chunk] * FastMaths::fastPow10(0.05f * v_modLfoToVolume * _modLfoArray[chunk]);
+            float deltaCoeff = (_dataVolArray[chunk] * FastMaths::fastPow10(0.05f * v_modLfoToVolume * _modLfoArray[chunk]) - _volumeCoeff) * COMPUTATION_CHUNK_INVERT;
 
             // Low-pass filter
             pData = &data[sampleStart];
@@ -279,18 +280,30 @@ resample_end:
             {
                 while (pData < pDataEnd)
                 {
+                    _volumeCoeff += deltaCoeff;
                     valTmp = coeffs[0] * ((*pData) + _x1 + _x1 + _x2) + coeffs[1] * _y1 + coeffs[2] * _y2;
                     _x2 = _x1;
                     _x1 = (*pData);
                     _y2 = _y1;
                     _y1 = valTmp;
-                    (*pData++) = coeff * valTmp;
+                    (*pData++) = _volumeCoeff * valTmp;
                 }
             }
             else
             {
-                while (pData < pDataEnd)
-                    (*pData++) *= coeff;
+                if (deltaCoeff == 0)
+                {
+                    while (pData < pDataEnd)
+                        (*pData++) *= _volumeCoeff;
+                }
+                else
+                {
+                    while (pData < pDataEnd)
+                    {
+                        _volumeCoeff += deltaCoeff;
+                        (*pData++) *= _volumeCoeff;
+                    }
+                }
             }
         }
     }

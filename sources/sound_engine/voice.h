@@ -115,6 +115,9 @@ private:
     // Save state for the low pass filter
     float _x1, _x2, _y1, _y2;
 
+    // Evolving volume coefficient
+    float _volumeCoeff;
+
     float * getData(quint32 goOn, quint32 loopStart, quint32 loopEnd);
     float * getDataWithLoop(quint32 goOn, quint32 loopStart, quint32 loopEnd);
     bool biQuadCoefficients(float *coeffs, float freq, float inv_Q);
