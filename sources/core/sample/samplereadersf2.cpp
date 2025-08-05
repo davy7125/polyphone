@@ -107,7 +107,7 @@ float * SampleReaderSf2::getData(SampleReaderResult &result, QFile &fi)
     qint32 tmp;
     for (quint32 i = 0; i < _info->dwLength; i++)
     {
-        tmp = (data[i] << 8) | data24[i];
+        tmp = (static_cast<qint32>(data[i]) << 8) | data24[i];
         if (tmp & 0x800000)
             tmp |= 0xff000000;
         fData[i] = Utils::int24ToFloat(tmp);
