@@ -37,13 +37,27 @@ SoundEngine::SoundEngine(quint32 bufferSize) : QObject(),
 {
     _dataL = new float[bufferSize];
     _dataR = new float[bufferSize];
+    memset(_dataL, 0, bufferSize * sizeof(float));
+    memset(_dataR, 0, bufferSize * sizeof(float));
+
     _dataRevL = new float[bufferSize];
     _dataRevR = new float[bufferSize];
+    memset(_dataRevL, 0, bufferSize * sizeof(float));
+    memset(_dataRevR, 0, bufferSize * sizeof(float));
+
     _dataChoL = new float[bufferSize];
     _dataChoR = new float[bufferSize];
+    memset(_dataChoL, 0, bufferSize * sizeof(float));
+    memset(_dataChoR, 0, bufferSize * sizeof(float));
+
     _dataChoRevL = new float[bufferSize];
     _dataChoRevR = new float[bufferSize];
+    memset(_dataChoRevL, 0, bufferSize * sizeof(float));
+    memset(_dataChoRevR, 0, bufferSize * sizeof(float));
+
     _dataTmp = new float[bufferSize];
+    memset(_dataTmp, 0, bufferSize * sizeof(float));
+
     _mutexSynchro.lock();
 }
 

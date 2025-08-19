@@ -52,6 +52,12 @@ MainTabBar::MainTabBar(QWidget *parent) : QWidget(parent),
             ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND);
 }
 
+MainTabBar::~MainTabBar()
+{
+    while (!_tabs.empty())
+        delete _tabs.takeFirst();
+}
+
 void MainTabBar::addWidget(QWidget * widget, QString iconName, QString label, bool isColored)
 {
     MainTabBarElement * tab = new MainTabBarElement(widget, iconName, isColored);
@@ -66,7 +72,7 @@ void MainTabBar::removeWidget(QWidget * widget)
 {
     for (int i = _tabs.count() - 1; i >= 0; i--)
         if (_tabs[i]->getWidget() == widget)
-            _tabs.removeAt(i);
+            delete _tabs.takeAt(i);
 
     // Repaint will be done later when another widget will be enabled
 }

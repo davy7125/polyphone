@@ -35,6 +35,7 @@ class MainTabBar : public QWidget
 
 public:
     MainTabBar(QWidget *parent = nullptr);
+    ~MainTabBar();
 
     void addWidget(QWidget * widget, QString iconName, QString label, bool isColored);
     void removeWidget(QWidget * widget);
