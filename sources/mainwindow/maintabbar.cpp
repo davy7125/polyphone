@@ -167,7 +167,7 @@ void MainTabBar::mousePressEvent(QMouseEvent *event)
         }
         else
         {
-            // Select a new tab immediatly
+            // Select a new tab immediately
             emit widgetClicked(_tabs[_clickedItemIndex]->getWidget());
         }
     }
@@ -363,6 +363,12 @@ void MainTabBar::paintEvent(QPaintEvent *event)
 
 int MainTabBar::adaptWidths(QVector<int> &widths, int maxWidth)
 {
+    // Initially set a minimum width
+    for (int i = 0; i < widths.count(); i++)
+        if (widths[i] < TAB_MIN_WIDTH)
+            widths[i] = TAB_MIN_WIDTH;
+
+    // Shrink all tabs until sum(widths) <= maxWidth
     int sumWidth, firstBiggest, secondBiggest, firstBiggestCount;
     while ((sumWidth = sum(widths)) > maxWidth)
     {
@@ -382,7 +388,7 @@ int MainTabBar::adaptWidths(QVector<int> &widths, int maxWidth)
             if (widths[i] == firstBiggest)
             {
                 widths[i] -= deltaPerBiggestWidth;
-                if (deltaDelta)
+                if (deltaDelta > 0)
                 {
                     deltaDelta--;
                     widths[i] -= 1;
@@ -391,23 +397,23 @@ int MainTabBar::adaptWidths(QVector<int> &widths, int maxWidth)
         }
     }
 
-    // Minimum width
-    int delta = 0;
+    // Minimum width again
     for (int i = 0; i < widths.count(); i++)
-    {
         if (widths[i] < TAB_MIN_WIDTH)
-        {
-            delta += TAB_MIN_WIDTH - widths[i];
             widths[i] = TAB_MIN_WIDTH;
-        }
-    }
+
+    // Is it exceeding the maximum length?
+    int delta = sum(widths) - maxWidth;
     if (delta > 0)
     {
         _withArrows = true;
         delta += 2 * ARROW_WIDTH;
     }
     else
+    {
         _withArrows = false;
+        delta = 0;
+    }
 
     if (delta == 0)
         _firstTabDisplayed = 0;
@@ -423,7 +429,7 @@ int MainTabBar::adaptWidths(QVector<int> &widths, int maxWidth)
             _firstTabDisplayed = -1;
         else
         {
-            // Otherwise the sum of the hidden column widths is returrned
+            // Otherwise the sum of the hidden column widths is returned
             delta = 0;
             for (int i = 0; i < _firstTabDisplayed; i++)
                 delta += widths[i];
