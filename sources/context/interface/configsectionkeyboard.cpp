@@ -28,10 +28,12 @@
 #include "editkey.h"
 #include <QTextStream>
 #include <QFile>
+#include "tuningprogrammanager.h"
 
 ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ConfigSectionKeyboard)
+    ui(new Ui::ConfigSectionKeyboard),
+    _currentTuningBank(0)
 {
     ui->setupUi(this);
     this->renameComboFirstC();
@@ -58,17 +60,10 @@ ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
     ui->tableKeyboardMap->setCellWidget(i, j, new EditKey(i, static_cast<ConfManager::Key>(j)));
 
     // Load the temperaments
+    QMap<int, TuningProgram> * programs = TuningProgramManager::getInstance()->getAllPrograms();
     ui->comboTemperament->blockSignals(true);
-    ui->comboTemperament->addItem(tr("Equal", "Equal musical temperament"), "Equal,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0");
-    QString temperamentFile = ":/misc/temperaments.csv";
-    QFile file(temperamentFile);
-    if (file.open(QIODevice::ReadOnly | QFile::Text))
-    {
-        QTextStream in(&file);
-        QString line;
-        while (!(line = in.readLine()).isEmpty())
-            ui->comboTemperament->addItem(line.split(",")[0], line);
-    }
+    for (auto i = programs->cbegin(), end = programs->cend(); i != end; ++i)
+        ui->comboTemperament->addItem(i.value()._name, i.key());
     ui->comboTemperament->blockSignals(false);
 
     // Temperament relative key
@@ -108,7 +103,7 @@ void ConfigSectionKeyboard::initialize()
 
     // Tuning fork
     ui->spinTuningFork->blockSignals(true);
-    ui->spinTuningFork->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", 440).toInt());
+    ui->spinTuningFork->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "tuning", 440).toInt());
     ui->spinTuningFork->blockSignals(false);
 
     // Temperament
@@ -152,7 +147,7 @@ void ConfigSectionKeyboard::on_comboFirstC_currentIndexChanged(int index)
 
 void ConfigSectionKeyboard::on_spinTuningFork_valueChanged(int value)
 {
-    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "tuning_fork", value);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "tuning", value);
 }
 
 void ConfigSectionKeyboard::on_pushDefaultTuningFork_clicked()
@@ -162,16 +157,24 @@ void ConfigSectionKeyboard::on_pushDefaultTuningFork_clicked()
 
 void ConfigSectionKeyboard::on_comboTemperament_currentIndexChanged(int index)
 {
+    TuningProgram * program = TuningProgramManager::getInstance()->getTuningProgram(ui->comboTemperament->itemData(index).toInt());
+    if (program == nullptr)
+        return;
+
     ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "temperament",
-                                              ui->comboTemperament->itemData(index).toString() +
+                                              program->getDescription() +
                                               "," + ui->comboTemperamentRelativeKey->currentData().toString());
     ui->comboTemperamentRelativeKey->setEnabled(index != 0);
 }
 
 void ConfigSectionKeyboard::on_comboTemperamentRelativeKey_currentIndexChanged(int index)
 {
+    TuningProgram * program = TuningProgramManager::getInstance()->getTuningProgram(ui->comboTemperament->currentData().toInt());
+    if (program == nullptr)
+        return;
+
     ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "temperament",
-                                              ui->comboTemperament->currentData().toString() +
+                                              program->getDescription() +
                                               "," + ui->comboTemperamentRelativeKey->itemData(index).toString());
 }
 
@@ -179,4 +182,56 @@ void ConfigSectionKeyboard::on_pushDefaultTemperament_clicked()
 {
     ui->comboTemperament->setCurrentIndex(0);
     ui->comboTemperamentRelativeKey->setCurrentIndex(0);
+}
+
+bool ConfigSectionKeyboard::processRPNChanged(int sf2Index, int channel, int parameter, int value, bool isRegistered, int trigger)
+{
+    // These configurations will be for all opened soundfonts and all channels
+    Q_UNUSED(sf2Index)
+    Q_UNUSED(channel)
+
+    if (isRegistered && parameter == 1 && trigger == 4)
+    {
+        // Master fine tuning
+        float semitones = static_cast<float>(value - 8192) / 8192.f;
+        int pitchHz = static_cast<int>(440 * qPow(2.0, semitones / 12.0) + 0.5);
+        if (pitchHz < 390)
+            pitchHz = 390;
+        else if (pitchHz > 470)
+            pitchHz = 470;
+        ui->spinTuningFork->setValue(pitchHz);
+    }
+    else if (isRegistered && parameter == 2 && trigger == 3)
+    {
+        // Master coarse tuning => not implemented
+    }
+    else if (isRegistered && parameter == 3 && trigger == 3)
+    {
+        // Tuning program
+        int tuningProgramIndex = 128 * _currentTuningBank + (parameter >> 7);
+        for (int i = 0; i < ui->comboTemperament->count(); i++)
+        {
+            if (ui->comboTemperament->itemData(i).toInt() == tuningProgramIndex)
+            {
+                ui->comboTemperament->setCurrentIndex(i);
+                break;
+            }
+        }
+    }
+    else if (isRegistered && parameter == 4 && trigger == 3)
+    {
+        // Tuning bank
+        _currentTuningBank = (parameter >> 7);
+    }
+    else if (isRegistered && parameter == 5 && trigger == 3)
+    {
+        // Tuning key
+        int key = (parameter >> 7);
+        if (key < 0)
+            key = 0;
+        key %= 12;
+        ui->comboTemperamentRelativeKey->setCurrentIndex(key);
+    }
+
+    return false;
 }

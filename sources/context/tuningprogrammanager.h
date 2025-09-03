@@ -1,6 +1,6 @@
 /***************************************************************************
 **                                                                        **
-**  Polyphone, a soundfont editor                                         **
+**  PVP: Phoenix Voicing Program                                          **
 **  Copyright (C) 2013-2024 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
@@ -22,40 +22,39 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef CONFIGSECTIONKEYBOARD_H
-#define CONFIGSECTIONKEYBOARD_H
+#ifndef TUNINGPROGRAMMANAGER_H
+#define TUNINGPROGRAMMANAGER_H
 
-#include <QWidget>
-#include "imidilistener.h"
+#include <QString>
+#include <QMap>
 
-namespace Ui {
-class ConfigSectionKeyboard;
-}
-
-class ConfigSectionKeyboard : public QWidget, IMidiListener
+    class TuningProgram
 {
-    Q_OBJECT
-
 public:
-    explicit ConfigSectionKeyboard(QWidget *parent = nullptr);
-    ~ConfigSectionKeyboard();
-    void initialize();
+    TuningProgram();
+    bool parse(QString description);
+    QString getDescription();
 
-    bool processRPNChanged(int sf2Index, int channel, int parameter, int value, bool isRegistered, int trigger);
-
-private slots:
-    void on_comboFirstC_currentIndexChanged(int index);
-    void initializeFirstC();
-    void on_spinTuningFork_valueChanged(int value);
-    void on_pushDefaultTuningFork_clicked();
-    void on_comboTemperament_currentIndexChanged(int index);
-    void on_comboTemperamentRelativeKey_currentIndexChanged(int index);
-    void on_pushDefaultTemperament_clicked();
-
-private:
-    void renameComboFirstC();
-    Ui::ConfigSectionKeyboard *ui;
-    int _currentTuningBank;
+    QString _name;
+    float _deviations[12];
 };
 
-#endif // CONFIGSECTIONKEYBOARD_H
+class TuningProgramManager
+{
+public:
+    static TuningProgramManager * getInstance();
+    bool addTuningProgram(int index, QString name, float deviations[12]);
+
+    TuningProgram * getTuningProgram(int index);
+    QMap<int, TuningProgram> * getAllPrograms() { return &_tuningPrograms; }
+
+private:
+    TuningProgramManager();
+
+    bool _defaultPrograms;
+    QMap<int, TuningProgram> _tuningPrograms;
+
+    static TuningProgramManager * s_instance;
+};
+
+#endif // TUNINGPROGRAMMANAGER_H
