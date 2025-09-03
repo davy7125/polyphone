@@ -355,30 +355,58 @@ void MidiDevice::processControllerChanged(bool external, int channel, int numCon
     // Update the current channel
     midiState->_controllerValues[numController] = value;
     midiState->_controllerValueSpecified[numController] = true;
-    if (numController == 101 || numController == 100 || numController == 6 || numController == 38)
+
+    if (numController == 101 || numController == 100 || // RPN parameter
+        numController == 99 || numController == 98 || // NRPN parameter
+        numController == 6 || numController == 38 || // (N)RPN value
+        numController == 96 || numController == 97) // ((N)RPN value increment / decrement
     {
-        // RPN reception, store the messages since they are grouped by 4
-        // http://midi.teragonaudio.com/tech/midispec/rpn.htm
-        midiState->_rpnHistoryControllers[midiState->_rpnHistoryPosition] = numController;
-        midiState->_rpnHistoryValues[midiState->_rpnHistoryPosition] = value;
-        midiState->_rpnHistoryPosition = (midiState->_rpnHistoryPosition + 1) % 4;
+        // (N)RPN reception
+        if (numController == 101 || numController == 100)
+            midiState->_rpnIsRegistered = true;
+        else if (numController == 99 || numController == 98)
+            midiState->_rpnIsRegistered = false;
 
-        // Try to recognize an update in the bend sensitivity
-        if (numController == 38)
+        int trigger = 0;
+        if (numController == 101 || numController == 99)
         {
-            int pos = midiState->_rpnHistoryPosition;
-            if (midiState->_rpnHistoryControllers[pos] == 101 && midiState->_rpnHistoryValues[pos] == 0 && // B0 65 00
-                midiState->_rpnHistoryControllers[(pos + 1) % 4] == 100 && midiState->_rpnHistoryValues[(pos + 1) % 4] == 0 && // B0 64 00
-                midiState->_rpnHistoryControllers[(pos + 2) % 4] == 6 && // B0 06 XX => semitones
-                midiState->_rpnHistoryControllers[(pos + 3) % 4] == 38) // B0 38 YY => cents
-            {
-                float pitch = 0.01f * midiState->_rpnHistoryValues[(pos + 3) % 4] + midiState->_rpnHistoryValues[(pos + 2) % 4];
-                processBendSensitivityChanged(channel, pitch);
-            }
+            midiState->_rpnMSBparameter = value;
+            trigger = 1;
         }
-    }
+        else if (numController == 100 || numController == 98)
+        {
+            midiState->_rpnLSBparameter = value;
+            trigger = 2;
+        }
+        else if (numController == 6)
+        {
+            midiState->_rpnMSBvalue = value;
+            trigger = 3;
+        }
+        else if (numController == 38)
+        {
+            midiState->_rpnLSBvalue = value;
+            trigger = 4;
+        }
+        else if (numController == 96)
+        {
+            if (midiState->_rpnMSBvalue < 126)
+                midiState->_rpnMSBvalue++;
+            trigger = 5;
+        }
+        else if (numController == 97)
+        {
+            if (midiState->_rpnMSBvalue > 0)
+                midiState->_rpnMSBvalue--;
+            trigger = 6;
+        }
 
-    if (numController == 64)
+        processRPNChanged(channel,
+                          midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
+                          midiState->_rpnMSBvalue << 7 | midiState->_rpnLSBvalue,
+                          midiState->_rpnIsRegistered, trigger);
+    }
+    else if (numController == 64)
     {
         // Sustain pedal
         if (value >= 64 && !sustainState->_isSustainOn)
@@ -562,18 +590,19 @@ void MidiDevice::processBendChanged(int channel, float value)
         processBendChanged(-1, value);
 }
 
-void MidiDevice::processBendSensitivityChanged(int channel, float semitones)
+void MidiDevice::processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger)
 {
-    // Update the current channel state
-    _midiStates[channel + 1]._bendSensitivityValue = semitones;
+    // Possibly update the bend sensitivity value
+    if (isRegistered && parameter == 0 && trigger == 4)
+        _midiStates[channel + 1]._bendSensitivityValue = static_cast<float>(value >> 7) + 0.01f * static_cast<float>(value & 0x7F);
 
     bool consumed = false;
     for (int i = 0; i < _listeners.size(); ++i)
-        consumed |= _listeners[i]->processBendSensitivityChanged(channel, semitones);
+        consumed |= _listeners[i]->processRPNChanged(channel, parameter, value, isRegistered, trigger);
 
     // And possibly update channel -1 if the change has not been consumed
     if (channel != -1 && !consumed)
-        processBendSensitivityChanged(-1, semitones);
+        processRPNChanged(-1, parameter, value, isRegistered, trigger);
 }
 
 void MidiDevice::processProgramChanged(int channel, quint8 preset)

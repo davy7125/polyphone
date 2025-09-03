@@ -46,13 +46,10 @@ public:
     void setChannel(int channel);
 
     // Reaction to MIDI signals
-    bool processKey(int channel, int key, int vel) override { Q_UNUSED(channel); Q_UNUSED(key); Q_UNUSED(vel); return false; }
-    bool processPolyPressureChanged(int channel, int key, int pressure) override { Q_UNUSED(channel); Q_UNUSED(key); Q_UNUSED(pressure); return false; }
     bool processMonoPressureChanged(int channel, int value) override;
     bool processControllerChanged(int channel, int num, int value) override;
     bool processBendChanged(int channel, float value) override;
-    bool processBendSensitivityChanged(int channel, float semitones) override;
-    bool processProgramChanged(int channel, quint16 bank, quint8 preset) override { Q_UNUSED(channel); Q_UNUSED(bank); Q_UNUSED(preset); return false; }
+    bool processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger) override;
 
     void updateBend(int channel, float value, bool stopTimer = true);
 
@@ -68,6 +65,7 @@ private slots:
     void on_knob2_valueChanged(int value);
     void on_knob3_valueChanged(int value);
     void on_push4_clicked();
+    void setBendSensitivity(float semitones);
 
 private:
     void updateInput4Display();

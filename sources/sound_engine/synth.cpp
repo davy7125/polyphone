@@ -633,18 +633,24 @@ bool Synth::processBendChanged(int channel, float value)
     return false;
 }
 
-bool Synth::processBendSensitivityChanged(int channel, float semitones)
+bool Synth::processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger)
 {
-    Voice ** voices1, ** voices2;
-    int count1, count2;
-    _voices.getVoices(voices1, count1, voices2, count2);
-
-    VoiceParam * voiceParam;
-    for (int i = 0; i < count1 + count2; ++i)
+    if (isRegistered && parameter == 0 && trigger == 4)
     {
-        voiceParam = i < count1 ? voices1[i]->getParam() : voices2[i - count1]->getParam();
-        if (voiceParam->getChannel() == channel)
-            voiceParam->processBendSensitivityChanged(semitones);
+        // Bend sensitivity changed
+        float semitones = static_cast<float>(value >> 7) + 0.01f * static_cast<float>(value & 0x7F);
+
+        Voice ** voices1, ** voices2;
+        int count1, count2;
+        _voices.getVoices(voices1, count1, voices2, count2);
+
+        VoiceParam * voiceParam;
+        for (int i = 0; i < count1 + count2; ++i)
+        {
+            voiceParam = i < count1 ? voices1[i]->getParam() : voices2[i - count1]->getParam();
+            if (voiceParam->getChannel() == channel)
+                voiceParam->processBendSensitivityChanged(semitones);
+        }
     }
 
     return false;

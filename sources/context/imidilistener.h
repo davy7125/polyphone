@@ -28,13 +28,70 @@
 class IMidiListener
 {
 public:
-    virtual bool processKey(int channel, int key, int vel) = 0;
-    virtual bool processPolyPressureChanged(int channel, int key, int pressure) = 0;
-    virtual bool processMonoPressureChanged(int channel, int value) = 0;
-    virtual bool processControllerChanged(int channel, int num, int value) = 0;
-    virtual bool processBendChanged(int channel, float value) = 0;
-    virtual bool processBendSensitivityChanged(int channel, float semitones) = 0;
-    virtual bool processProgramChanged(int channel, quint16 bank, quint8 preset) = 0;
+    virtual bool processKey(int channel, int key, int vel)
+    {
+        Q_UNUSED(channel)
+        Q_UNUSED(key)
+        Q_UNUSED(vel)
+        return false;
+    }
+
+    virtual bool processPolyPressureChanged(int channel, int key, int pressure)
+    {
+        Q_UNUSED(channel)
+        Q_UNUSED(key)
+        Q_UNUSED(pressure)
+        return false;
+    }
+
+    virtual bool processMonoPressureChanged(int channel, int value)
+    {
+        Q_UNUSED(channel)
+        Q_UNUSED(value)
+        return false;
+    }
+
+    virtual bool processControllerChanged(int channel, int num, int value)
+    {
+        Q_UNUSED(channel)
+        Q_UNUSED(num)
+        Q_UNUSED(value)
+        return false;
+    }
+
+    virtual bool processBendChanged(int channel, float value)
+    {
+        Q_UNUSED(channel)
+        Q_UNUSED(value)
+        return false;
+    }
+
+    virtual bool processProgramChanged(int channel, quint16 bank, quint8 preset)
+    {
+        Q_UNUSED(channel)
+        Q_UNUSED(bank)
+        Q_UNUSED(preset)
+        return false;
+    }
+
+    // (N)RPN changes are the combination of 4 messages:
+    // 1 - parameter MSB (100 for RPN or 98 for NRPN)
+    // 2 - parameter LSB (101 for RPN or 99 for NRPN)
+    // 3 - value MSB (6)
+    // 4 - value LSB (38)
+    // The trigger in the function is value 1 to 4 above or:
+    // 5 - increment (96)
+    // 6 - decrement (97)
+    // Depending on the parameter type, we may have to wait for a specific trigger for having a complete command
+    virtual bool processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger)
+    {
+        Q_UNUSED(channel)
+        Q_UNUSED(parameter)
+        Q_UNUSED(value)
+        Q_UNUSED(isRegistered)
+        Q_UNUSED(trigger)
+        return false;
+    }
 };
 
 #endif // IMIDILISTENER_H

@@ -152,8 +152,8 @@ public:
     bool processMonoPressureChanged(int channel, int value) override;
     bool processControllerChanged(int channel, int num, int value) override;
     bool processBendChanged(int channel, float value) override;
-    bool processBendSensitivityChanged(int channel, float semitones) override;
     bool processProgramChanged(int channel, quint16 bank, quint8 preset) override;
+    bool processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger) override;
 
     // Following functions are executed by the audio server (thread 3)
     void setSampleRateAndBufferSize(quint32 sampleRate, quint32 bufferSize);

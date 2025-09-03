@@ -64,7 +64,7 @@ public:
     void processMonoPressureChanged(int channel, int value);
     void processControllerChanged(bool external, int channel, int num, int value);
     void processBendChanged(int channel, float value);
-    void processBendSensitivityChanged(int channel, float semitones);
+    void processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger);
     void processProgramChanged(int channel, quint8 preset);
 
 private slots:
@@ -85,10 +85,12 @@ private:
         volatile int _monoPressureValue;
         volatile int _polyPressureValues[128];
 
-        // RPN history since we need 4 messages to know what command it is
-        int _rpnHistoryControllers[4];
-        int _rpnHistoryValues[4];
-        quint8 _rpnHistoryPosition;
+        // RPN memory
+        unsigned char _rpnMSBparameter;
+        unsigned char _rpnLSBparameter;
+        unsigned char _rpnMSBvalue;
+        unsigned char _rpnLSBvalue;
+        bool _rpnIsRegistered;
     };
 
     struct Sustain_State

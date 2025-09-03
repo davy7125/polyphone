@@ -63,7 +63,7 @@ void ControllerArea::setChannel(int channel)
     _channel = channel;
 
     // Initialization of the sensitivity slider
-    processBendSensitivityChanged(_channel, ContextManager::midi()->getBendSensitivityValue(_channel));
+    setBendSensitivity(ContextManager::midi()->getBendSensitivityValue(_channel));
 
     // Initialization of the pressure slider
     processMonoPressureChanged(_channel, ContextManager::midi()->getMonoPressure(_channel));
@@ -109,9 +109,9 @@ void ControllerArea::on_sliderPitchWheel_valueChanged(int value)
 void ControllerArea::on_sliderSensitivity_valueChanged(int value)
 {
     float semitones = 0.01f * value;
-    processBendSensitivityChanged(_channel, semitones);
+    setBendSensitivity(semitones);
 
-    // Combinaison of 4 controller events
+    // Combination of 4 controller events
     ContextManager::midi()->processControllerChanged(false, _channel, 101, 0);
     ContextManager::midi()->processControllerChanged(false, _channel, 100, 0);
     ContextManager::midi()->processControllerChanged(false, _channel, 6, value / 100);
@@ -316,11 +316,22 @@ void ControllerArea::updateBend(int channel, float value, bool stopTimer)
     ui->labelWheelValue->setText(QLocale::system().toString(value, 'f', 2));
 }
 
-bool ControllerArea::processBendSensitivityChanged(int channel, float semitones)
+bool ControllerArea::processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger)
 {
     if (channel != _channel)
         return false;
 
+    if (isRegistered && parameter == 0 && trigger == 4)
+    {
+        // Bend sensitivity
+        setBendSensitivity(static_cast<float>(value >> 7) + 0.01f * static_cast<float>(value & 0x7F));
+    }
+
+    return false;
+}
+
+void ControllerArea::setBendSensitivity(float semitones)
+{
     if (semitones < 0)
         semitones = 0;
     else if (semitones > 15.0)
@@ -331,5 +342,4 @@ bool ControllerArea::processBendSensitivityChanged(int channel, float semitones)
     ui->sliderSensitivity->blockSignals(false);
 
     ui->labelSensitivityValue->setText(QLocale::system().toString(semitones, 'f', 2));
-    return false;
 }
