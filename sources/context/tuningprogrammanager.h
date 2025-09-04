@@ -1,6 +1,6 @@
 /***************************************************************************
 **                                                                        **
-**  PVP: Phoenix Voicing Program                                          **
+**  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2024 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
@@ -28,7 +28,7 @@
 #include <QString>
 #include <QMap>
 
-    class TuningProgram
+class TuningProgram
 {
 public:
     TuningProgram();
@@ -43,16 +43,21 @@ class TuningProgramManager
 {
 public:
     static TuningProgramManager * getInstance();
-    bool addTuningProgram(int index, QString name, float deviations[12]);
+    static void kill();
+    bool addTuningProgram(int index, QString name, const double deviations[12]);
 
     TuningProgram * getTuningProgram(int index);
-    QMap<int, TuningProgram> * getAllPrograms() { return &_tuningPrograms; }
+    QMap<int, TuningProgram> * getAllPrograms();
+    bool hasBeenUpdated() { return _updated; }
 
 private:
     TuningProgramManager();
+    ~TuningProgramManager();
 
     bool _defaultPrograms;
+    bool _updated;
     QMap<int, TuningProgram> _tuningPrograms;
+    QString _settingToRestore;
 
     static TuningProgramManager * s_instance;
 };

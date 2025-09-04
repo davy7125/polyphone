@@ -308,7 +308,7 @@ void MidiDevice::processControllerChanged(bool external, int channel, int numCon
     if (numController == 0 && channel == 9)
         return; // Ignored: keep bank 128 on channel 10 (percussions)
 
-    if (false && external)
+    if (external)
     {
         if (midiState->_controllerValueIsRelative[numController])
         {
@@ -401,10 +401,11 @@ void MidiDevice::processControllerChanged(bool external, int channel, int numCon
             trigger = 6;
         }
 
-        processRPNChanged(channel,
-                          midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
-                          midiState->_rpnMSBvalue << 7 | midiState->_rpnLSBvalue,
-                          midiState->_rpnIsRegistered, trigger);
+        if (trigger >= 2)
+            processRPNChanged(-1, midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
+                              midiState->_rpnMSBvalue << 7 | midiState->_rpnLSBvalue,
+                              midiState->_rpnIsRegistered, trigger);
+        return;
     }
     else if (numController == 64)
     {

@@ -41,7 +41,7 @@ public:
     ~ConfigSectionKeyboard();
     void initialize();
 
-    bool processRPNChanged(int sf2Index, int channel, int parameter, int value, bool isRegistered, int trigger);
+    bool processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger) override;
 
 private slots:
     void on_comboFirstC_currentIndexChanged(int index);
@@ -54,6 +54,8 @@ private slots:
 
 private:
     void renameComboFirstC();
+    void updateTemperaments();
+
     Ui::ConfigSectionKeyboard *ui;
     int _currentTuningBank;
 };

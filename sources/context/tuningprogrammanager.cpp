@@ -1,6 +1,6 @@
 /***************************************************************************
 **                                                                        **
-**  PVP: Phoenix Voicing Program                                          **
+**  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2024 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
@@ -25,6 +25,7 @@
 #include "tuningprogrammanager.h"
 #include <QFile>
 #include <QTextStream>
+#include "contextmanager.h"
 
 TuningProgramManager * TuningProgramManager::s_instance = nullptr;
 
@@ -67,8 +68,18 @@ TuningProgramManager * TuningProgramManager::getInstance()
     return s_instance;
 }
 
+void TuningProgramManager::kill()
+{
+    if (s_instance != nullptr)
+    {
+        delete s_instance;
+        s_instance = nullptr;
+    }
+}
+
 TuningProgramManager::TuningProgramManager() :
-    _defaultPrograms(true)
+    _defaultPrograms(true),
+    _updated(true)
 {
     // Load the default tuning programs
     _tuningPrograms[0].parse(QObject::tr("Equal", "Equal musical temperament") + ",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0");
@@ -88,7 +99,13 @@ TuningProgramManager::TuningProgramManager() :
     }
 }
 
-bool TuningProgramManager::addTuningProgram(int index, QString name, float deviations[12])
+TuningProgramManager::~TuningProgramManager()
+{
+    if (!_settingToRestore.isEmpty())
+        ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", _settingToRestore);
+}
+
+bool TuningProgramManager::addTuningProgram(int index, QString name, const double deviations[12])
 {
     if (index < 0 || index > 16383)
         return false;
@@ -97,10 +114,13 @@ bool TuningProgramManager::addTuningProgram(int index, QString name, float devia
     {
         _tuningPrograms.clear();
         _defaultPrograms = false;
+        _settingToRestore = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString();
     }
+    _updated = true;
+
     _tuningPrograms[index]._name = name.isEmpty() ? QObject::tr("Tuning program %1:%2").arg(index / 128).arg(index % 128) : name;
     for (int i = 0; i < 12; i++)
-        _tuningPrograms[index]._deviations[i] = deviations[i];
+        _tuningPrograms[index]._deviations[i] = static_cast<float>(deviations[i]);
 
     return true;
 }
@@ -110,4 +130,10 @@ TuningProgram * TuningProgramManager::getTuningProgram(int index)
     if (_tuningPrograms.contains(index))
         return &_tuningPrograms[index];
     return nullptr;
+}
+
+QMap<int, TuningProgram> * TuningProgramManager::getAllPrograms()
+{
+    _updated = false;
+    return &_tuningPrograms;
 }
