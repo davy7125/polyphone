@@ -1,4 +1,14 @@
-polyphone (2.5) unstable; urgency=low
+polyphone (2.6) unstable; urgency=low
+
+  * (new) RPN messages can change the tuning
+  * (improvement) faster sound engine
+  * (fix) correct key ranges when saving as sfz
+  * (fix) tab widths of the GUI
+
+ -- Davy Triponney <davy.triponney@gmail.com>  Mon, 1 Dec 2025 09:14:36 +0100
+
+
+polyphone (2.5) UNRELEASED; urgency=low
 
   * (new) "play with" feature, for playing several instruments or presets
   * (new) sample tool for adding a cross-fade around loop points

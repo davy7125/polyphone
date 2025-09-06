@@ -22,8 +22,8 @@ DEFINES += USE_LOCAL_RTAUDIO
 #DEFINES += NO_SF2_CREATION
 
 # Polyphone version
-DEFINES += SOFT_VERSION=\\\"2.5.1\\\"
-DEFINES += IDENTIFIER=\\\"\\\"
+DEFINES += SOFT_VERSION=\\\"2.6.0\\\"
+DEFINES += IDENTIFIER=\\\"BETA\\\"
 DEFINES += CURRENT_YEAR=\\\"2025\\\"
 
 # List to be completed if other translations are desired

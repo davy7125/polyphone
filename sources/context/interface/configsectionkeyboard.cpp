@@ -56,8 +56,8 @@ ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
 
     // Populate the table with all keys and all octaves
     for (int j = 0; j < ui->tableKeyboardMap->columnCount(); j++)
-    for (int i = 0; i < ui->tableKeyboardMap->rowCount(); i++)
-    ui->tableKeyboardMap->setCellWidget(i, j, new EditKey(i, static_cast<ConfManager::Key>(j)));
+        for (int i = 0; i < ui->tableKeyboardMap->rowCount(); i++)
+            ui->tableKeyboardMap->setCellWidget(i, j, new EditKey(i, static_cast<ConfManager::Key>(j)));
 
     // Temperament relative keys
     ui->comboTemperamentRelativeKey->blockSignals(true);
