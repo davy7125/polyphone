@@ -356,55 +356,54 @@ void MidiDevice::processControllerChanged(bool external, int channel, int numCon
     midiState->_controllerValues[numController] = value;
     midiState->_controllerValueSpecified[numController] = true;
 
-    if (numController == 101 || numController == 100 || // RPN parameter
-        numController == 99 || numController == 98 || // NRPN parameter
-        numController == 6 || numController == 38 || // (N)RPN value
-        numController == 96 || numController == 97) // ((N)RPN value increment / decrement
+    if ((numController >= 96 && numController <= 101) || numController == 6 || numController == 38)
     {
         // (N)RPN reception
-        if (numController == 101 || numController == 100)
-            midiState->_rpnIsRegistered = true;
-        else if (numController == 99 || numController == 98)
-            midiState->_rpnIsRegistered = false;
-
-        int trigger = 0;
         if (numController == 101 || numController == 99)
         {
+            // Full parameter not known yet
+            midiState->_rpnIsRegistered = (numController == 101);
             midiState->_rpnMSBparameter = value;
-            trigger = 1;
         }
         else if (numController == 100 || numController == 98)
         {
+            // No value yet
+            midiState->_rpnIsRegistered = (numController == 100);
             midiState->_rpnLSBparameter = value;
-            trigger = 2;
+            processRPNChanged(channel,
+                              midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
+                              0, midiState->_rpnIsRegistered, 2);
         }
         else if (numController == 6)
         {
+            // Coarse value
             midiState->_rpnMSBvalue = value;
-            trigger = 3;
+            processRPNChanged(channel,
+                              midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
+                              value, midiState->_rpnIsRegistered, 3);
         }
         else if (numController == 38)
         {
-            midiState->_rpnLSBvalue = value;
-            trigger = 4;
+            // Fine value
+            processRPNChanged(channel,
+                              midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
+                              midiState->_rpnMSBvalue << 7 | value,
+                              midiState->_rpnIsRegistered, 4);
         }
         else if (numController == 96)
         {
-            if (midiState->_rpnMSBvalue < 126)
-                midiState->_rpnMSBvalue++;
-            trigger = 5;
+            // Increment
+            processRPNChanged(channel,
+                              midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
+                              value, midiState->_rpnIsRegistered, 5);
         }
         else if (numController == 97)
         {
-            if (midiState->_rpnMSBvalue > 0)
-                midiState->_rpnMSBvalue--;
-            trigger = 6;
+            // Decrement
+            processRPNChanged(channel,
+                              midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
+                              value, midiState->_rpnIsRegistered, 6);
         }
-
-        if (trigger >= 2)
-            processRPNChanged(-1, midiState->_rpnMSBparameter << 7 | midiState->_rpnLSBparameter,
-                              midiState->_rpnMSBvalue << 7 | midiState->_rpnLSBvalue,
-                              midiState->_rpnIsRegistered, trigger);
         return;
     }
     else if (numController == 64)

@@ -196,62 +196,100 @@ void ConfigSectionKeyboard::on_pushDefaultTemperament_clicked()
 
 bool ConfigSectionKeyboard::processRPNChanged(int channel, int parameter, int value, bool isRegistered, int trigger)
 {
+    if (!isRegistered)
+        return false;
+
     // These configurations will be for all channels
     Q_UNUSED(channel)
 
-    // TODO: 5 / 6
-    if (isRegistered && parameter == 1 && trigger >= 4)
+    if (parameter == 1 && trigger >= 4)
     {
-        // Master fine tuning
-        float semitones = static_cast<float>(value - 8192) / 8192.f;
-        int pitchHz = static_cast<int>(440 * qPow(2.0, semitones / 12.0) + 0.5);
+        // Master fine tuning: convert to Hz
+        double pitchHz = 440;
+        if (trigger == 4)
+        {
+            double semitones = static_cast<double>(value - 8192) / 8192.f;
+            pitchHz = 440.0 * qPow(2.0, semitones / 12.0) + 0.5;
+        }
+        else if (trigger == 5)
+            pitchHz = ui->spinReferencePitch->value() + 1;
+        else if (trigger == 6)
+            pitchHz = ui->spinReferencePitch->value() - 1;
+
         if (pitchHz < 390)
             pitchHz = 390;
         else if (pitchHz > 470)
             pitchHz = 470;
-        ui->spinReferencePitch->setValue(pitchHz);
+        ui->spinReferencePitch->setValue(pitchHz + 0.05);
     }
-    else if (isRegistered && parameter == 2 && trigger >= 3)
+    else if (parameter == 2 && (trigger == 3 || trigger >= 5))
     {
         // Master coarse tuning => not implemented
     }
-    else if (isRegistered && parameter == 3 && trigger >= 3)
+    else if (parameter == 3 && (trigger == 3 || trigger >= 5))
     {
         // Tuning program
         int tuningProgramIndex = 128 * _currentTuningBank + (value >> 7);
-        updateTemperaments();
-        bool found = false;
-        for (int i = 0; i < ui->comboTemperament->count(); i++)
+        int newIndex = -1;
+        if (trigger == 5)
         {
-            if (ui->comboTemperament->itemData(i).toInt() == tuningProgramIndex)
+            if (ui->comboTemperament->currentIndex() < ui->comboTemperament->count() - 1)
+                newIndex = ui->comboTemperament->currentIndex() + 1;
+        }
+        else if (trigger == 6)
+        {
+            if (ui->comboTemperament->currentIndex() > 0)
+                newIndex = ui->comboTemperament->currentIndex() - 1;
+        }
+        else
+        {
+            for (int i = 0; i < ui->comboTemperament->count(); i++)
             {
-                ui->comboTemperament->blockSignals(true);
-                ui->comboTemperament->setCurrentIndex(i);
-                ui->comboTemperament->blockSignals(false);
-                on_comboTemperament_currentIndexChanged(i);
-                found = true;
-                break;
+                if (ui->comboTemperament->itemData(i).toInt() == tuningProgramIndex)
+                {
+                    newIndex = i;
+                    break;
+                }
             }
         }
 
-        if (!found)
+        if (newIndex != -1)
         {
-            // Back to the equal temperament
-            ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "equal,0,0,0,0,0,0,0,0,0,0,0,0,0");
+            ui->comboTemperament->blockSignals(true);
+            ui->comboTemperament->setCurrentIndex(newIndex);
+            ui->comboTemperament->blockSignals(false);
+            on_comboTemperament_currentIndexChanged(newIndex);
         }
     }
-    else if (isRegistered && parameter == 4 && trigger >= 3)
+    else if (parameter == 4 && (trigger == 3 || trigger >= 5))
     {
         // Tuning bank
-        _currentTuningBank = (value >> 7);
+        if (trigger == 5)
+            _currentTuningBank++;
+        else if (trigger == 6)
+            _currentTuningBank--;
+        else
+            _currentTuningBank = (value >> 7);
+
+        if (_currentTuningBank < 0)
+            _currentTuningBank = 0;
+        else if (_currentTuningBank > 127)
+            _currentTuningBank = 127;
     }
-    else if (isRegistered && parameter == 5 && trigger >= 3)
+    else if (parameter == 5 && (trigger == 3 || trigger >= 5))
     {
-        // Tuning key
-        int key = (value >> 7);
+        // Tuning relative key
+        int key;
+        if (trigger == 5)
+            key = ui->comboTemperamentRelativeKey->currentIndex() + 1;
+        else if (trigger == 6)
+            key = ui->comboTemperamentRelativeKey->currentIndex() - 1;
+        else
+            key = (value >> 7);
         if (key < 0)
-            key = 0;
+            key += 12;
         key %= 12;
+
         ui->comboTemperamentRelativeKey->setCurrentIndex(key);
     }
 
