@@ -60,7 +60,7 @@ polyphone (2.3) UNRELEASED; urgency=low
   * (new) parameter inconsistencies displayed in the sample summary
   * (new) different native styles available in the options
   * (new) option to allow multiple instances of Polyphone
-  * (new) option to change the tuning fork from 390 to 470 Hz
+  * (new) option to change the reference pitch from 390 to 470 Hz
   * (new) option to apply a temperament when playing
   * (new) tool scanning the instruments for filling parameters at the sample level
   * (new) after having cut a sample, possibility to create another one with the removed part

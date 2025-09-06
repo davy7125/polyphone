@@ -63,7 +63,7 @@ public:
     void generateData(float *data, quint32 len);
 
     // Configuration
-    static void setTuningFork(int tuningFork);
+    static void setReferencePitch(int referencePitch);
     static void setTemperament(float temperament[12], int relativeKey);
 
     // Maths
@@ -129,7 +129,7 @@ private:
     float * _modLfoArray;
     float * _vibLfoArray;
 
-    static volatile int s_tuningFork;
+    static volatile int s_referencePitch;
     static volatile float s_temperament[12]; // Fine tune in cents from each key from C to B
     static volatile int s_temperamentRelativeKey;
     static float s_sinc_table7[2048][7];

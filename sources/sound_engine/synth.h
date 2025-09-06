@@ -54,7 +54,7 @@ public:
         revWidth(0),
         revDamping(0),
         masterGain(0),
-        tuningFork(440),
+        referencePitch(4400),
         temperament(QStringList())
     {}
 
@@ -68,7 +68,7 @@ public:
         revWidth = other->revWidth;
         revDamping = other->revDamping;
         masterGain = other->masterGain;
-        tuningFork = other->tuningFork;
+        referencePitch = other->referencePitch;
         temperament = other->temperament;
     }
 
@@ -84,7 +84,7 @@ public:
 
     // Master gain / tuning
     double masterGain;
-    int tuningFork;
+    int referencePitch;
     QStringList temperament;
 };
 

@@ -96,6 +96,11 @@ ConfManager::ConfManager(): QObject(),
             _settings.setValue("repository/email", _settings.value("repository/username"));
             _settings.remove("repository/username");
         }
+
+        if (v_major * 100 + v_minor <= 205)
+        {
+            _settings.remove("synth/tuning");
+        }
     }
 
     // Special initialization here (for more speed when reading modulator_vel_to_filter)
@@ -304,7 +309,7 @@ SynthConfig * ConfManager::getSynthConfig()
     _synthConfig->revWidth = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_width", 0).toInt();
     _synthConfig->revDamping = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", 0).toInt();
     _synthConfig->masterGain = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
-    _synthConfig->tuningFork = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "tuning", 440).toInt();
+    _synthConfig->referencePitch = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "reference_pitch", 4400).toInt();
     _synthConfig->temperament = this->getValue(ConfManager::SECTION_SOUND_ENGINE, "temperament", "").toString().split(",");
     return _synthConfig;
 }

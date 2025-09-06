@@ -26,7 +26,7 @@
 #include "smpl.h"
 #include "fastmaths.h"
 
-volatile int Voice::s_tuningFork = 440;
+volatile int Voice::s_referencePitch = 4400;
 volatile float Voice::s_temperament[12] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 volatile int Voice::s_temperamentRelativeKey = 0;
 float Voice::s_sinc_table7[2048][7];
@@ -194,9 +194,9 @@ void Voice::generateData(float * data, quint32 len)
         qint32 v_fineTune = _voiceParam->getInteger(champ_fineTune);
         qint32 v_coarseTune = _voiceParam->getInteger(champ_coarseTune);
         float temperamentFineTune = _voiceParam->getKey() < 0 ? 0.0f : (s_temperament[(playedNote - s_temperamentRelativeKey + 12) % 12] -
-                                                                        s_temperament[(21 - s_temperamentRelativeKey) % 12]); // Correction so that the tuning fork is accurate
+                                                                        s_temperament[(21 - s_temperamentRelativeKey) % 12]); // Correction so that the reference pitch is accurate
         float deltaPitchFixed = -1731.234f /* -1200 / ln(2) */ *
-                                    qLn(static_cast<double>(_audioSmplRate) * 440.f / (_smplRate * s_tuningFork)) +
+                                    qLn(static_cast<double>(_audioSmplRate) * 4400.f / (_smplRate * s_referencePitch)) +
                                 (playedNote - v_rootkey) * v_scaleTune + (temperamentFineTune + v_fineTune) + 100.0f * v_coarseTune;
 
         // Loop
@@ -415,10 +415,10 @@ void Voice::setGain(float gain)
     _gain = gain;
 }
 
-void Voice::setTuningFork(int tuningFork)
+void Voice::setReferencePitch(int referencePitch)
 {
     // Atomic operation
-    s_tuningFork = tuningFork;
+    s_referencePitch = referencePitch;
 }
 
 void Voice::setTemperament(float temperament[12], int relativeKey)

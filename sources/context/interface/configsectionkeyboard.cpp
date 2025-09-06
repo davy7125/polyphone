@@ -50,8 +50,8 @@ ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
     ui->tableKeyboardMap->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->tableKeyboardMap->setStyleSheet(ContextManager::theme()->getTableTheme());
 
-    ui->spinTuningFork->setSuffix(" " + tr("Hz", "unit for Herz"));
-    ui->pushDefaultTuningFork->setIcon(ContextManager::theme()->getColoredSvg(":/icons/edit-undo.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
+    ui->spinReferencePitch->setSuffix(" " + tr("Hz", "unit for Herz"));
+    ui->pushDefaultReferencePitch->setIcon(ContextManager::theme()->getColoredSvg(":/icons/edit-undo.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
     ui->pushDefaultTemperament->setIcon(ContextManager::theme()->getColoredSvg(":/icons/edit-undo.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
 
     // Populate the table with all keys and all octaves
@@ -95,10 +95,10 @@ void ConfigSectionKeyboard::initialize()
     // Octave configuration
     initializeFirstC();
 
-    // Tuning fork
-    ui->spinTuningFork->blockSignals(true);
-    ui->spinTuningFork->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "tuning", 440).toInt());
-    ui->spinTuningFork->blockSignals(false);
+    // Reference pitch
+    ui->spinReferencePitch->blockSignals(true);
+    ui->spinReferencePitch->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "reference_pitch", 4400).toDouble() / 10.0);
+    ui->spinReferencePitch->blockSignals(false);
 
     // Load the temperaments
     updateTemperaments();
@@ -155,14 +155,14 @@ void ConfigSectionKeyboard::on_comboFirstC_currentIndexChanged(int index)
     ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "octave_offset", index);
 }
 
-void ConfigSectionKeyboard::on_spinTuningFork_valueChanged(int value)
+void ConfigSectionKeyboard::on_spinReferencePitch_valueChanged(double value)
 {
-    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "tuning", value);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "reference_pitch", static_cast<int>(value * 10.0 + 0.5));
 }
 
-void ConfigSectionKeyboard::on_pushDefaultTuningFork_clicked()
+void ConfigSectionKeyboard::on_pushDefaultReferencePitch_clicked()
 {
-    ui->spinTuningFork->setValue(440);
+    ui->spinReferencePitch->setValue(440.0);
 }
 
 void ConfigSectionKeyboard::on_comboTemperament_currentIndexChanged(int index)
@@ -199,6 +199,7 @@ bool ConfigSectionKeyboard::processRPNChanged(int channel, int parameter, int va
     // These configurations will be for all channels
     Q_UNUSED(channel)
 
+    // TODO: 5 / 6
     if (isRegistered && parameter == 1 && trigger >= 4)
     {
         // Master fine tuning
@@ -208,7 +209,7 @@ bool ConfigSectionKeyboard::processRPNChanged(int channel, int parameter, int va
             pitchHz = 390;
         else if (pitchHz > 470)
             pitchHz = 470;
-        ui->spinTuningFork->setValue(pitchHz);
+        ui->spinReferencePitch->setValue(pitchHz);
     }
     else if (isRegistered && parameter == 2 && trigger >= 3)
     {
@@ -256,3 +257,4 @@ bool ConfigSectionKeyboard::processRPNChanged(int channel, int parameter, int va
 
     return false;
 }
+

@@ -17,10 +17,10 @@
    <item row="3" column="0">
     <spacer name="horizontalSpacer">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
+      <enum>QSizePolicy::Policy::Fixed</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -33,7 +33,7 @@
    <item row="6" column="1">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Tuning fork</string>
+      <string>Reference pitch</string>
      </property>
     </widget>
    </item>
@@ -48,7 +48,7 @@
     </widget>
    </item>
    <item row="6" column="4">
-    <widget class="QPushButton" name="pushDefaultTuningFork">
+    <widget class="QPushButton" name="pushDefaultReferencePitch">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -172,10 +172,10 @@
       </size>
      </property>
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::Shape::StyledPanel</enum>
      </property>
      <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOn</enum>
+      <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
      </property>
      <property name="showDropIndicator" stdset="0">
       <bool>false</bool>
@@ -184,10 +184,10 @@
       <bool>false</bool>
      </property>
      <property name="selectionMode">
-      <enum>QAbstractItemView::NoSelection</enum>
+      <enum>QAbstractItemView::SelectionMode::NoSelection</enum>
      </property>
      <property name="horizontalScrollMode">
-      <enum>QAbstractItemView::ScrollPerPixel</enum>
+      <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
      </property>
      <property name="cornerButtonEnabled">
       <bool>false</bool>
@@ -309,21 +309,27 @@
     </widget>
    </item>
    <item row="6" column="2" colspan="2">
-    <widget class="QSpinBox" name="spinTuningFork">
+    <widget class="QDoubleSpinBox" name="spinReferencePitch">
      <property name="sizePolicy">
       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="decimals">
+      <number>1</number>
+     </property>
      <property name="minimum">
-      <number>390</number>
+      <double>390.000000000000000</double>
      </property>
      <property name="maximum">
-      <number>470</number>
+      <double>470.000000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.100000000000000</double>
      </property>
      <property name="value">
-      <number>440</number>
+      <double>440.000000000000000</double>
      </property>
     </widget>
    </item>
@@ -332,8 +338,8 @@
  <tabstops>
   <tabstop>tableKeyboardMap</tabstop>
   <tabstop>comboFirstC</tabstop>
-  <tabstop>spinTuningFork</tabstop>
-  <tabstop>pushDefaultTuningFork</tabstop>
+  <tabstop>spinReferencePitch</tabstop>
+  <tabstop>pushDefaultReferencePitch</tabstop>
   <tabstop>comboTemperament</tabstop>
   <tabstop>comboTemperamentRelativeKey</tabstop>
   <tabstop>pushDefaultTemperament</tabstop>

@@ -419,8 +419,8 @@ void Synth::configure(SynthConfig * configuration)
     _chorusR.setModFrequency(0.06667 * _configuration.choFrequency);
     _effectsInUse.storeRelaxed(0);
 
-    // Update the tuning fork and temperament
-    Voice::setTuningFork(_configuration.tuningFork);
+    // Update the reference pitch and temperament
+    Voice::setReferencePitch(_configuration.referencePitch);
 
     if (_configuration.temperament.count() == 14)
     {

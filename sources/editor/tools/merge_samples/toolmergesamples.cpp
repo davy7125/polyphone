@@ -346,16 +346,16 @@ EltID ToolMergeSamples::createInstrumentInPreset(SoundfontManager * sm, QString 
 
 void ToolMergeSamples::initVoices()
 {
-    // Remove the temperament and the tuning fork
+    // Remove the temperament and the reference pitch
     float temperament[12];
     memset(temperament, 0, 12 * sizeof(float));
     Voice::setTemperament(temperament, 0);
-    Voice::setTuningFork(440);
+    Voice::setReferencePitch(4400);
 }
 
 void ToolMergeSamples::restoreVoices()
 {
-    // Restore the temperament and the tuning fork
+    // Restore the temperament and the reference pitch
     SynthConfig * configuration = ContextManager::configuration()->getSynthConfig();
     if (configuration->temperament.count() == 14)
     {
@@ -366,5 +366,5 @@ void ToolMergeSamples::restoreVoices()
         Voice::setTemperament(temperament, temperamentRelativeKey);
     }
 
-    Voice::setTuningFork(configuration->tuningFork);
+    Voice::setReferencePitch(configuration->referencePitch);
 }

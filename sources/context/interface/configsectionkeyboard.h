@@ -46,8 +46,8 @@ public:
 private slots:
     void on_comboFirstC_currentIndexChanged(int index);
     void initializeFirstC();
-    void on_spinTuningFork_valueChanged(int value);
-    void on_pushDefaultTuningFork_clicked();
+    void on_spinReferencePitch_valueChanged(double value);
+    void on_pushDefaultReferencePitch_clicked();
     void on_comboTemperament_currentIndexChanged(int index);
     void on_comboTemperamentRelativeKey_currentIndexChanged(int index);
     void on_pushDefaultTemperament_clicked();
