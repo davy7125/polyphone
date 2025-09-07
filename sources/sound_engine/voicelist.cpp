@@ -161,7 +161,9 @@ void VoiceList::prepareComputation()
             for (int i = 0; i < _closeCommandNumber; i++)
             {
                 if (_closeCommands[i].channel == voiceParam->getChannel() &&
+                    _closeCommands[i].sf2Id == voiceParam->getSf2Id() &&
                     _closeCommands[i].numPreset == voiceParam->getPresetId() &&
+                    _closeCommands[i].key != voiceParam->getKey() && // The key must be different for the new voices
                     _closeCommands[i].exclusiveClass == exclusiveClass)
                 {
                     _closeCommands[i].voice->finish();
@@ -174,7 +176,9 @@ void VoiceList::prepareComputation()
             if (exclusiveClass != 0)
             {
                 _closeCommands[_closeCommandNumber].channel = voiceParam->getChannel();
+                _closeCommands[_closeCommandNumber].sf2Id = voiceParam->getSf2Id();
                 _closeCommands[_closeCommandNumber].numPreset = voiceParam->getPresetId();
+                _closeCommands[_closeCommandNumber].key = voiceParam->getKey();
                 _closeCommands[_closeCommandNumber].exclusiveClass = exclusiveClass;
                 _closeCommands[_closeCommandNumber].voice = voice;
                 _closeCommandNumber++;
@@ -198,6 +202,7 @@ void VoiceList::prepareComputation()
             for (int i = 0; i < _closeCommandNumber; i++)
             {
                 if (_closeCommands[i].channel == voiceParam->getChannel() &&
+                    _closeCommands[i].sf2Id == voiceParam->getSf2Id() &&
                     _closeCommands[i].numPreset == voiceParam->getPresetId() &&
                     _closeCommands[i].exclusiveClass == voiceParam->getInteger(champ_exclusiveClass))
                 {

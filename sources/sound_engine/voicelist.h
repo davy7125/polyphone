@@ -55,7 +55,9 @@ private:
     struct ExclusiveClassCloseCommand
     {
         short channel;
+        short sf2Id;
         short numPreset;
+        short key;
         int exclusiveClass;
         Voice * voice;
     };
