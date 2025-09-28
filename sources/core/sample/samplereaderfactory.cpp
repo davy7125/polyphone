@@ -32,6 +32,9 @@ SampleReader * SampleReaderFactory::getSampleReader(QString filename)
     QFileInfo fileInfo(filename);
     QString ext = fileInfo.suffix().toLower();
 
+    if (filename.isEmpty())
+        return nullptr;
+
     // Soundfont?
     if (ext.compare("sf2") == 0 || ext.compare("sf3") == 0)
         return new SampleReaderSf2(filename);

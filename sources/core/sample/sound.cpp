@@ -55,7 +55,11 @@ bool Sound::setFileName(QString qStr, bool tryFindRootKey)
     _reader = SampleReaderFactory::getSampleReader(_fileName);
 
     // Get information about the sample
-    if (_reader != nullptr)
+    if (_reader == nullptr)
+    {
+        _info.reset();
+    }
+    else
     {
         SampleReader::SampleReaderResult result = _reader->getInfo(&_info);
         switch (result)
@@ -76,12 +80,10 @@ bool Sound::setFileName(QString qStr, bool tryFindRootKey)
             isOk = true;
             break;
         }
-    }
-    else
-        _info.reset();
 
-    if (!_info.pitchDefined && tryFindRootKey)
-        determineRootKey();
+        if (!_info.pitchDefined && tryFindRootKey)
+            determineRootKey();
+    }
 
     return isOk;
 }
