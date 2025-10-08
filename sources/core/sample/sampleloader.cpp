@@ -175,7 +175,7 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                 // Update data
                 val.wValue = static_cast<quint16>(j);
                 sound.set(champ_wChannel, val);
-                sm->set(id, sound.getDataVector(true));
+                sm->set(id, sound.getDataFloat(true));
             }
             else
             {

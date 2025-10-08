@@ -55,8 +55,8 @@ SoundEngine::SoundEngine(quint32 bufferSize) : QObject(),
     memset(_dataChoRevL, 0, bufferSize * sizeof(float));
     memset(_dataChoRevR, 0, bufferSize * sizeof(float));
 
-    _dataTmp = new float[bufferSize];
-    memset(_dataTmp, 0, bufferSize * sizeof(float));
+    _voiceData = new float[bufferSize];
+    memset(_voiceData, 0, bufferSize * sizeof(float));
 
     _mutexSynchro.lock();
 }
@@ -71,7 +71,7 @@ SoundEngine::~SoundEngine()
     delete [] _dataChoR;
     delete [] _dataChoRevL;
     delete [] _dataChoRevR;
-    delete [] _dataTmp;
+    delete [] _voiceData;
 }
 
 // DATA GENERATION //
@@ -106,6 +106,14 @@ void SoundEngine::stop()
 void SoundEngine::prepareData(quint32 len)
 {
     _lenToPrepare = len;
+    memset(_dataL, 0, len * sizeof(float));
+    memset(_dataR, 0, len * sizeof(float));
+    memset(_dataRevL, 0, len * sizeof(float));
+    memset(_dataRevR, 0, len * sizeof(float));
+    memset(_dataChoL, 0, len * sizeof(float));
+    memset(_dataChoR, 0, len * sizeof(float));
+    memset(_dataChoRevL, 0, len * sizeof(float));
+    memset(_dataChoRevR, 0, len * sizeof(float));
     if (_runningState.testAndSetRelaxed(2, 3))
     {
         // Nothing else to do, unlock not needed since the mutex will not be locked
@@ -126,7 +134,6 @@ void SoundEngine::generateData(quint32 len)
 
     Voice * voice;
     float tmp, coefR, coefL, coefRev, coefNonRev, coefCho, coefNonCho;
-    quint32 i;
     while (true)
     {
         voice = s_voices->getNextVoiceToCompute();
@@ -146,7 +153,7 @@ void SoundEngine::generateData(quint32 len)
         }
 
         // Get data
-        voice->generateData(_dataTmp, len);
+        voice->generateData(_voiceData, len);
 
         tmp = 0.005f * (voice->getParam()->getFloat(champ_pan) + 50.f); // Between 0 and 1/2 for [0; PI/2]
         coefL = FastMaths::fastCos(tmp);
@@ -162,101 +169,57 @@ void SoundEngine::generateData(quint32 len)
         if (initialized)
         {
             // Left, no reverb, no chorus
-            tmp = coefL * coefNonRev * coefNonCho;
-            for (i = 0; i < len; ++i)
-                _dataL[i] += tmp * _dataTmp[i];
+            FastMaths::multiplyAdd(_dataL, _voiceData, len, coefL * coefNonRev * coefNonCho);
 
             // Right, no reverb, no chorus
-            tmp = coefR * coefNonRev * coefNonCho;
-            for (i = 0; i < len; ++i)
-                _dataR[i] += tmp * _dataTmp[i];
+            FastMaths::multiplyAdd(_dataR, _voiceData, len, coefR * coefNonRev * coefNonCho);
 
             // Left, reverb, no chorus
-            tmp = coefL * coefRev * coefNonCho;
-            for (i = 0; i < len; ++i)
-                _dataRevL[i] += tmp * _dataTmp[i];
+            FastMaths::multiplyAdd(_dataRevL, _voiceData, len, coefL * coefRev * coefNonCho);
 
             // Right, reverb, no chorus
-            tmp = coefR * coefRev * coefNonCho;
-            for (i = 0; i < len; ++i)
-                _dataRevR[i] += tmp * _dataTmp[i];
+            FastMaths::multiplyAdd(_dataRevR, _voiceData, len, coefR * coefRev * coefNonCho);
 
             // Left, no reverb, chorus
-            tmp = coefL * coefNonRev * coefCho;
-            for (i = 0; i < len; ++i)
-                _dataChoL[i] += tmp * _dataTmp[i];
+            FastMaths::multiplyAdd(_dataChoL, _voiceData, len, coefL * coefNonRev * coefCho);
 
             // Right, no reverb, chorus
-            tmp = coefR * coefNonRev * coefCho;
-            for (i = 0; i < len; ++i)
-                _dataChoR[i] += tmp * _dataTmp[i];
+            FastMaths::multiplyAdd(_dataChoR, _voiceData, len, coefR * coefNonRev * coefCho);
 
             // Left, reverb, chorus
-            tmp = coefL * coefRev * coefCho;
-            for (i = 0; i < len; ++i)
-                _dataChoRevL[i] += tmp * _dataTmp[i];
+            FastMaths::multiplyAdd(_dataChoRevL, _voiceData, len, coefL * coefRev * coefCho);
 
             // Right, reverb, chorus
-            tmp = coefR * coefRev * coefCho;
-            for (i = 0; i < len; ++i)
-                _dataChoRevR[i] += tmp * _dataTmp[i];
+            FastMaths::multiplyAdd(_dataChoRevR, _voiceData, len, coefR * coefRev * coefCho);
         }
         else
         {
             initialized = true;
 
             // Left, no reverb, no chorus
-            tmp = coefL * coefNonRev * coefNonCho;
-            for (i = 0; i < len; ++i)
-                _dataL[i] = tmp * _dataTmp[i];
+            FastMaths::multiply(_dataL, _voiceData, len, coefL * coefNonRev * coefNonCho);
 
             // Right, no reverb, no chorus
-            tmp = coefR * coefNonRev * coefNonCho;
-            for (i = 0; i < len; ++i)
-                _dataR[i] = tmp * _dataTmp[i];
+            FastMaths::multiply(_dataR, _voiceData, len, coefR * coefNonRev * coefNonCho);
 
             // Left, reverb, no chorus
-            tmp = coefL * coefRev * coefNonCho;
-            for (i = 0; i < len; ++i)
-                _dataRevL[i] = tmp * _dataTmp[i];
+            FastMaths::multiply(_dataRevL, _voiceData, len, coefL * coefRev * coefNonCho);
 
             // Right, reverb, no chorus
-            tmp = coefR * coefRev * coefNonCho;
-            for (i = 0; i < len; ++i)
-                _dataRevR[i] = tmp * _dataTmp[i];
+            FastMaths::multiply(_dataRevR, _voiceData, len, coefR * coefRev * coefNonCho);
 
             // Left, no reverb, chorus
-            tmp = coefL * coefNonRev * coefCho;
-            for (i = 0; i < len; ++i)
-                _dataChoL[i] = tmp * _dataTmp[i];
+            FastMaths::multiply(_dataChoL, _voiceData, len, coefL * coefNonRev * coefCho);
 
             // Right, no reverb, chorus
-            tmp = coefR * coefNonRev * coefCho;
-            for (i = 0; i < len; ++i)
-                _dataChoR[i] = tmp * _dataTmp[i];
+            FastMaths::multiply(_dataChoR, _voiceData, len, coefR * coefNonRev * coefCho);
 
             // Left, reverb, chorus
-            tmp = coefL * coefRev * coefCho;
-            for (i = 0; i < len; ++i)
-                _dataChoRevL[i] = tmp * _dataTmp[i];
+            FastMaths::multiply(_dataChoRevL, _voiceData, len, coefL * coefRev * coefCho);
 
             // Right, reverb, chorus
-            tmp = coefR * coefRev * coefCho;
-            for (i = 0; i < len; ++i)
-                _dataChoRevR[i] = tmp * _dataTmp[i];
+            FastMaths::multiply(_dataChoRevR, _voiceData, len, coefR * coefRev * coefCho);
         }
-    }
-
-    if (!initialized)
-    {
-        memset(_dataL, 0, len * sizeof(float));
-        memset(_dataR, 0, len * sizeof(float));
-        memset(_dataRevL, 0, len * sizeof(float));
-        memset(_dataRevR, 0, len * sizeof(float));
-        memset(_dataChoL, 0, len * sizeof(float));
-        memset(_dataChoR, 0, len * sizeof(float));
-        memset(_dataChoRevL, 0, len * sizeof(float));
-        memset(_dataChoRevR, 0, len * sizeof(float));
     }
 }
 

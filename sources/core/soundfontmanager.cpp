@@ -473,9 +473,7 @@ QVector<float> SoundfontManager::getData(EltID idSmpl)
         return baRet;
 
     Smpl *tmp = _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt);
-    baRet = tmp->_sound.getDataVector(false);
-
-    return baRet;
+    return tmp->_sound.getDataFloat(false);
 }
 
 QList<int> SoundfontManager::getSiblings(EltID &id)
@@ -1529,8 +1527,8 @@ int SoundfontManager::set(EltID idSmpl, QVector<float> data)
     oldData.clear();
 
     // Update sample data
-    oldData = _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt)->_sound.getDataVector(false);
-    _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt)->_sound.setData(data);
+    oldData = _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt)->_sound.getDataFloat(false);
+    _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt)->_sound.setDataFloat(data);
 
     // Création et stockage de l'action
     Action *action = new Action();
@@ -1990,6 +1988,6 @@ void SoundfontManager::loadAllSamples(int sf2Index)
     {
         // And load data in RAM if it's not hidden
         if (!smplTmp->isHidden())
-            smplTmp->_sound.loadInRam();
+            smplTmp->_sound.loadSample();
     }
 }

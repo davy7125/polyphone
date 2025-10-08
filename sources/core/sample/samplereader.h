@@ -71,9 +71,10 @@ public:
     }
 
     // Get sample data
-    float * getData(SampleReaderResult &result)
+    SampleReaderResult getData(qint16 *& data16, quint8 *& data24)
     {
-        float * data = nullptr;
+        data16 = nullptr;
+        data24 = nullptr;
 
         if (_result == FILE_OK)
         {
@@ -82,7 +83,7 @@ public:
             {
                 if (fi.open(QFile::ReadOnly | QFile::Unbuffered))
                 {
-                    data = getData(_result, fi);
+                    _result = getData(fi, data16, data24);
                     fi.close();
                 }
                 else
@@ -92,13 +93,12 @@ public:
                 _result = FILE_NOT_FOUND;
         }
 
-        result = _result;
-        return data;
+        return _result;
     }
 
 protected:
     virtual SampleReaderResult getInfo(QFile &fi, InfoSound *info) = 0;
-    virtual float * getData(SampleReaderResult &result, QFile &fi) = 0;
+    virtual SampleReaderResult getData(QFile &fi, qint16 *& data16, quint8 *& data24) = 0;
 
 private:
     QString _filename;

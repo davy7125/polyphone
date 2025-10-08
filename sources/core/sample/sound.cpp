@@ -26,21 +26,27 @@
 #include <QFileInfo>
 #include "samplereader.h"
 #include "samplereaderfactory.h"
+#include "sampleutils.h"
 
 Sound::Sound() :
     _fileName(""),
-    _error(""),
-    _data(nullptr),
+    _data16(nullptr),
+    _data24(nullptr),
     _reader(nullptr)
 {}
 
 Sound::~Sound()
 {
     delete _reader;
-    if (_data != nullptr)
+    if (_data16 != nullptr)
     {
-        delete [] _data;
-        _data = nullptr;
+        delete [] _data16;
+        _data16 = nullptr;
+    }
+    if (_data24 != nullptr)
+    {
+        delete [] _data24;
+        _data24 = nullptr;
     }
 }
 
@@ -55,11 +61,7 @@ bool Sound::setFileName(QString qStr, bool tryFindRootKey)
     _reader = SampleReaderFactory::getSampleReader(_fileName);
 
     // Get information about the sample
-    if (_reader == nullptr)
-    {
-        _info.reset();
-    }
-    else
+    if (_reader != nullptr)
     {
         SampleReader::SampleReaderResult result = _reader->getInfo(&_info);
         switch (result)
@@ -80,64 +82,47 @@ bool Sound::setFileName(QString qStr, bool tryFindRootKey)
             isOk = true;
             break;
         }
-
-        if (!_info.pitchDefined && tryFindRootKey)
-            determineRootKey();
     }
+    else
+        _info.reset();
+
+    if (!_info.pitchDefined && tryFindRootKey)
+        determineRootKey();
 
     return isOk;
 }
 
-float * Sound::getData(quint32 &length, bool forceReload, bool getCopy)
+void Sound::getData(quint32 &sampleLength, qint16* &data16, quint8* &data24, bool forceReload, bool getCopy)
 {
-    if (_reader != nullptr)
+    loadSample(forceReload);
+    sampleLength = (_data16 == nullptr) ? 0 : _info.dwLength;
+
+    if (getCopy && _data16 != nullptr)
     {
-        SampleReader::SampleReaderResult result;
-        if (forceReload)
-        {
-            // Current length / channel
-            quint32 oldLength = _info.dwLength;
-            quint16 channel = _info.wChannel;
-
-            // Update the details and keep the channel number
-            _reader->getInfo(&_info);
-            _info.wChannel = channel;
-
-            // Write over the current data or replace the pointer
-            float * newData = _reader->getData(result);
-            quint32 newLength = _info.dwLength;
-            _info.dwLength = oldLength;
-            this->setData(newData, newLength);
-        }
-        else if (_data == nullptr)
-        {
-            _data = _reader->getData(result);
-        }
+        qint16* copy16 = new qint16[_info.dwLength];
+        memcpy(copy16, _data16, _info.dwLength * sizeof(qint16));
+        data16 = copy16;
     }
+    else
+        data16 = _data16;
 
-    length = _data == nullptr ? 0 : _info.dwLength;
-
-    if (getCopy && _data != nullptr)
+    if (getCopy && _data24 != nullptr)
     {
-        float * copy = new float[_info.dwLength];
-        memcpy(copy, _data, _info.dwLength * sizeof(float));
-        return copy;
+        quint8* copy24 = new quint8[_info.dwLength];
+        memcpy(copy24, _data24, _info.dwLength * sizeof(quint8));
+        data24 = copy24;
     }
-
-    return _data;
+    else
+        data24 = _data24;
 }
 
-QVector<float> Sound::getDataVector(bool forceReload)
+QVector<float> Sound::getDataFloat(bool forceReload)
 {
-    quint32 length;
-    float * data = this->getData(length, forceReload, false);
-    QVector<float> v;
-    if (length > 0)
-    {
-        v.reserve(length);
-        std::copy(data, data + length, std::back_inserter(v));
-    }
-    return v;
+    quint32 sampleLength;
+    qint16 * data16;
+    quint8 * data24;
+    this->getData(sampleLength, data16, data24, forceReload, false);
+    return SampleUtils::int24ToFloat(data16, data24, sampleLength);
 }
 
 quint32 Sound::getUInt32(AttributeType champ)
@@ -198,31 +183,53 @@ qint32 Sound::getInt32(AttributeType champ)
     return result;
 }
 
-void Sound::setData(QVector<float> data)
+void Sound::setData(qint16 * data16, quint8 * data24, quint32 length)
 {
-    // Create a copy of the data
-    float * copy = new float[data.size()];
-    memcpy(copy, data.constData(), data.size() * sizeof(float));
-    this->setData(copy, data.size());
-}
-
-void Sound::setData(float * newData, quint32 length)
-{
-    if (_data != nullptr && length == _info.dwLength)
+    if (_data16 != nullptr && length == _info.dwLength)
     {
-        // Copy data into the existing array (as a precaution if _data is being read by a voice in the synth)
-        memcpy(_data, newData, length * sizeof(float));
-
-        delete [] newData;
+        if (data16 == nullptr)
+            _data16 = nullptr;
+        else
+        {
+            // Copy data into the existing array (as a precaution if _data16 is being read by a voice in the synth)
+            memcpy(_data16, data16, length * sizeof(qint16));
+            delete [] data16;
+        }
     }
     else
     {
-        if (_data != nullptr)
-            delete [] _data;
-        _data = newData;
+        if (_data16 != nullptr)
+            delete [] _data16;
+        _data16 = data16;
+    }
+
+    if (_data24 != nullptr && length == _info.dwLength)
+    {
+        if (data24 == nullptr)
+            _data24 = nullptr;
+        else
+        {
+            // Copy data into the existing array (as a precaution if _data16 is being read by a voice in the synth)
+            memcpy(_data24, data24, length * sizeof(quint8));
+            delete [] data24;
+        }
+    }
+    else
+    {
+        if (_data24 != nullptr)
+            delete [] _data24;
+        _data24 = data24;
     }
 
     _info.dwLength = length;
+}
+
+void Sound::setDataFloat(QVector<float> data)
+{
+    qint16 * data16;
+    quint8 * data24;
+    SampleUtils::floatToInt24(data, data16, data24);
+    setData(data16, data24, data.length());
 }
 
 void Sound::set(AttributeType champ, AttributeValue value)
@@ -284,12 +291,33 @@ void Sound::set(AttributeType champ, AttributeValue value)
     }
 }
 
-void Sound::loadInRam()
+void Sound::loadSample(bool forceReload)
 {
-    if (_data == nullptr)
+    // The sample is maybe already loaded
+    if ((_data16 != nullptr && !forceReload) || _reader == nullptr)
+        return;
+
+    if (forceReload)
     {
-        SampleReader::SampleReaderResult result;
-        _data = _reader->getData(result);
+        // Current length / channel
+        quint32 oldLength = _info.dwLength;
+        quint16 channel = _info.wChannel;
+
+        // Update the details and keep the channel number
+        _reader->getInfo(&_info);
+        _info.wChannel = channel;
+
+        // Write over the current data or replace the pointer
+        qint16 * newData16;
+        quint8 * newData24;
+        _reader->getData(newData16, newData24);
+        quint32 newLength = _info.dwLength;
+        _info.dwLength = oldLength;
+        this->setData(newData16, newData24, newLength);
+    }
+    else if (_data16 == nullptr)
+    {
+        _reader->getData(_data16, _data24);
     }
 }
 

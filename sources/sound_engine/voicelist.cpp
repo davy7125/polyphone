@@ -26,7 +26,6 @@
 #include "voicelist.h"
 #include "voice.h"
 #include "voiceparam.h"
-#include "synth.h"
 
 VoiceList::VoiceList() :
     _threadCount(1),
@@ -35,7 +34,7 @@ VoiceList::VoiceList() :
     _currentIndex(0),
     _firstRunningIndex(0),
     _lastRunningIndex(0),
-    _maxPossibleVoicesToCompute(2),
+    _maxPolyphony(DEFAULT_POLYPHONY),
     _uncomputedVoiceCount(0)
 {
     memset(_voices, 0, MAX_NUMBER_OF_VOICES * sizeof(Voice *));
@@ -50,15 +49,24 @@ VoiceList::~VoiceList()
         delete _voiceParameters[i];
 }
 
-void VoiceList::initialize(Synth * synth)
+void VoiceList::initialize()
 {
     for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
     {
         _voiceParameters[i] = new VoiceParam();
         _voices[i] = new Voice(_voiceParameters[i]);
-        QObject::connect(_voices[i], SIGNAL(currentPosChanged(quint32)), synth, SIGNAL(currentPosChanged(quint32)));
-        QObject::connect(_voices[i], SIGNAL(readFinished(int)), synth, SIGNAL(readFinished(int)));
     }
+}
+
+void VoiceList::setMaxPolyphony(int maxPolyphony)
+{
+    if (maxPolyphony <= 0)
+        maxPolyphony = DEFAULT_POLYPHONY;
+    else if (maxPolyphony < MIN_POLYPHONY)
+        maxPolyphony = MIN_POLYPHONY;
+    else if (maxPolyphony > MAX_POLYPHONY)
+        maxPolyphony = MAX_POLYPHONY;
+    _maxPolyphony = maxPolyphony;
 }
 
 Voice * VoiceList::getVoiceToPrepare()
@@ -81,13 +89,14 @@ Voice * VoiceList::getVoiceToPrepare()
     }
 
     // Index for preparing a voice
-    int index = _preparationIndex.fetchAndAddRelaxed(1) & VOICE_INDEX_MASK;
+    int index = _preparationIndex & VOICE_INDEX_MASK;
+    _preparationIndex += 1;
     return _voices[index];
 }
 
 void VoiceList::addPreparedVoices()
 {
-    _additionIndex.storeRelaxed(_preparationIndex & VOICE_INDEX_MASK);
+    _additionIndex = (_preparationIndex & VOICE_INDEX_MASK);
 }
 
 void VoiceList::getVoices(Voice ** &voices1, int &count1, Voice ** &voices2, int &count2)
@@ -111,11 +120,16 @@ void VoiceList::getVoices(Voice ** &voices1, int &count1, Voice ** &voices2, int
     }
 }
 
+int VoiceList::getVoiceCount()
+{
+    return (_lastRunningIndex - _firstRunningIndex) & VOICE_INDEX_MASK;
+}
+
 void VoiceList::endComputation()
 {
     int first = _firstRunningIndex;
     int last = _lastRunningIndex;
-    int currentIndex = _currentIndex.fetchAndStoreRelaxed(_lastRunningIndex) & VOICE_INDEX_MASK;
+    int currentIndex = _currentIndex.fetchAndStoreOrdered(last) & VOICE_INDEX_MASK;
 
     // Number of voices that have not been computed
     if (first <= last)
@@ -126,29 +140,21 @@ void VoiceList::endComputation()
 
 void VoiceList::prepareComputation()
 {
-    int additionIndex = _additionIndex.loadRelaxed();
     int first = _firstRunningIndex;
     int last = _lastRunningIndex;
-
-    // Update the reference of the maximum number of voices to compute
-    int voiceCount = (last - first) & VOICE_INDEX_MASK;
-    int computedVoiceCount = voiceCount - _uncomputedVoiceCount;
-    if (computedVoiceCount > _maxPossibleVoicesToCompute)
-        _maxPossibleVoicesToCompute = computedVoiceCount;
-    else if (_maxPossibleVoicesToCompute > 4)
-        _maxPossibleVoicesToCompute -= 2;
+    int additionIndex = _additionIndex;
 
     // Minimum number of voices to close
-    int numberOfVoicesToClose = _uncomputedVoiceCount > 0 ? _uncomputedVoiceCount + ((additionIndex - _lastRunningIndex) & VOICE_INDEX_MASK) : 0;
-    if (voiceCount - numberOfVoicesToClose < _maxPossibleVoicesToCompute)
-        numberOfVoicesToClose = voiceCount - _maxPossibleVoicesToCompute;
+    int numberOfVoicesToClose = ((additionIndex - first) & VOICE_INDEX_MASK) - _maxPolyphony;
+    if (_uncomputedVoiceCount > 0)
+        numberOfVoicesToClose += (_maxPolyphony >> 3); // The maximum becomes 87.5% of _maxPolyphony
 
     // Gather the exclusive class close commands
     _closeCommandNumber = 0;
     Voice * voice;
     VoiceParam * voiceParam;
     int exclusiveClass;
-    for (int index = _lastRunningIndex; index != additionIndex; index = (index + 1) & VOICE_INDEX_MASK)
+    for (int index = last; index != additionIndex; index = (index + 1) & VOICE_INDEX_MASK)
     {
         Voice * voice = _voices[index];
         voiceParam = voice->getParam();
@@ -193,7 +199,7 @@ void VoiceList::prepareComputation()
         voice = _voices[index];
         voiceParam = voice->getParam();
 
-        close = voice->isFinished() || (numberOfVoicesToClose > 0 && voice->isInRelease());
+        close = voice->isFinished() || (numberOfVoicesToClose > 0 && voice->isRelease());
         quickRelease = false;
 
         if (!close)
@@ -215,13 +221,9 @@ void VoiceList::prepareComputation()
 
         if (close)
         {
-            // Signal emitted for the sample player (voice -1)
-            if (voiceParam->getKey() == -1)
-                voice->triggerReadFinishedSignal();
-
-            Voice * voiceTmp = _voices[index];
+            voice->finish();
             _voices[index] = _voices[first];
-            _voices[first] = voiceTmp;
+            _voices[first] = voice;
 
             first = (first + 1) & VOICE_INDEX_MASK;
 
@@ -231,23 +233,70 @@ void VoiceList::prepareComputation()
             voice->release(true);
     }
 
-    // Include the added voices
-    _lastRunningIndex = additionIndex;
+    // If more voices are to be closed, stop the already uncomputed voices
+    if (numberOfVoicesToClose > 0 && _uncomputedVoiceCount > 0)
+    {
+        int index = numberOfVoicesToClose < _uncomputedVoiceCount ?
+                        (last - numberOfVoicesToClose) & VOICE_INDEX_MASK :
+                        (last - _uncomputedVoiceCount) & VOICE_INDEX_MASK;
+        do
+        {
+            voice = _voices[index];
+            voice->finish();
+            _voices[index] = _voices[first];
+            _voices[first] = voice;
+
+            --numberOfVoicesToClose;
+            first = (first + 1) & VOICE_INDEX_MASK;
+            index = (index + 1) & VOICE_INDEX_MASK;
+        }
+        while (index != last);
+    }
 
     // Remove first voices if more of them must be closed
     if (numberOfVoicesToClose > 0)
-        first = (first + numberOfVoicesToClose) & VOICE_INDEX_MASK;
+    {
+        // Move the voices with a small sensitivity at the beginning of the list
+        // (bourdon / flutes have the priority to be closed)
+        int closableIndex = first;
+        int maxClosableIndex = (first + numberOfVoicesToClose) & VOICE_INDEX_MASK;
+        for (int index = first; index != additionIndex; index = (index + 1) & VOICE_INDEX_MASK)
+        {
+            if (_voices[index]->getSensitivity() < 80)
+            {
+                // Swap
+                voice = _voices[index];
+                _voices[index] = _voices[closableIndex];
+                _voices[closableIndex] = voice;
+
+                // Update the closable index and possibly stop here
+                closableIndex = (closableIndex + 1) & VOICE_INDEX_MASK;;
+                if (closableIndex == maxClosableIndex)
+                    break;
+            }
+        }
+
+        // Stop the first voices
+        last = (first + numberOfVoicesToClose) & VOICE_INDEX_MASK;
+        for (; first != last; first = (first + 1) & VOICE_INDEX_MASK)
+            _voices[first]->finish();
+    }
+
+    // Include the added voices
+    _lastRunningIndex = additionIndex;
+
+    // Update the first index
     _firstRunningIndex = first;
 
     // Reset the running index
-    _currentIndex = first;
+    _currentIndex.storeRelease(first);
 }
 
 Voice * VoiceList::getNextVoiceToCompute()
 {
     int first = _firstRunningIndex;
     int last = _lastRunningIndex;
-    int voiceIndex = _currentIndex.fetchAndAddRelaxed(1) & VOICE_INDEX_MASK;
+    int voiceIndex = _currentIndex.fetchAndAddOrdered(1) & VOICE_INDEX_MASK;
 
     // No more voices to compute?
     if (first <= last)

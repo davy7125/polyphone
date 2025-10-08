@@ -181,7 +181,6 @@ private:
 
     void destroySoundEnginesAndBuffers();
     void createSoundEnginesAndBuffers();
-    void gatherSoundEngineData(quint32 maxlen);
     void applyChoRev(float * dataL, float * dataR, quint32 maxlen);
 
     // Soundfonts

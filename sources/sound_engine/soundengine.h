@@ -56,7 +56,7 @@ public slots:
 private:
     void generateData(quint32 len);
 
-    float * _dataTmp;
+    float * _voiceData;
     float * _dataL, * _dataR, * _dataRevL, * _dataRevR, * _dataChoL, * _dataChoR, * _dataChoRevL, * _dataChoRevR;
 
     volatile bool _interrupted;

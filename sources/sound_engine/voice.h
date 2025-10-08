@@ -53,7 +53,7 @@ public:
 
     void release(bool quick = false);
     void finish() { _isFinished = true; }
-    bool isInRelease() { return _release; }
+    bool isInRelease() { return _release || _loopMode == 2; }
     bool isFinished() { return _isFinished; }
     void triggerReadFinishedSignal();
 
@@ -74,41 +74,31 @@ signals:
     void readFinished(int token);
 
 private:
-    inline float multiply(const float * __restrict coeffs, const float * __restrict srcData)
-    {
-        coeffs = (float*)__builtin_assume_aligned(coeffs, 32);
-        srcData = (float*)__builtin_assume_aligned(srcData, 32);
-        return coeffs[0] * srcData[0] +
-               coeffs[1] * srcData[1] +
-               coeffs[2] * srcData[2] +
-               coeffs[3] * srcData[3] +
-               coeffs[4] * srcData[4] +
-               coeffs[5] * srcData[5] +
-               coeffs[6] * srcData[6];
-    }
-
     // Oscillators and envelopes
     OscTriangle _modLFO, _vibLFO;
     EnveloppeVol _volEnvelope, _modEnvelope;
 
     // Sound data and parameters
-    float * _dataSmpl;
+    qint16 * _dataSmpl16;
+    quint8 * _dataSmpl24;
     quint32 _dataSmplLength;
     quint32 _smplRate, _audioSmplRate;
     float _audioSmplRateInv;
     float _gain;
     VoiceParam * _voiceParam;
     int _token;
+    char _loopMode;
 
     // Sample playback
-    quint32 _currentSmplPos, _elapsedSmplPos;
-    double _time;
     bool _release;
     bool _isFinished;
-    bool _isRunning;
+    bool _dummy;
+    quint32 _currentSmplPos, _elapsedSmplPos;
+    double _time;
 
     // Saved state for resampling
-    float _srcData[7];
+    qint16 _srcData16[8]; // The 8th value is 0, necessary for vectorization
+    quint8 _srcData24[8];
     quint32 _lastDistanceFraction;
     qint32 _moreAvailable;
 
@@ -118,8 +108,8 @@ private:
     // Evolving volume coefficient
     float _volumeCoeff;
 
-    float * getData(quint32 goOn, quint32 loopStart, quint32 loopEnd);
-    float * getDataWithLoop(quint32 goOn, quint32 loopStart, quint32 loopEnd);
+    void getData(quint32 goOn, quint32 loopStart, quint32 loopEnd, qint16 * &srcData16, quint8 * &srcData24);
+    void getDataWithLoop(quint32 goOn, quint32 loopStart, quint32 loopEnd, qint16 * &srcData16, quint8 * &srcData24);
     bool biQuadCoefficients(float *coeffs, float freq, float inv_Q);
 
     // Arrays
@@ -132,7 +122,8 @@ private:
     static volatile int s_referencePitch;
     static volatile float s_temperament[12]; // Fine tune in cents from each key from C to B
     static volatile int s_temperamentRelativeKey;
-    static float s_sinc_table7[2048][7];
+    static float s_sinc_table7[2048][8];
+    static float s_floatConversionCoef24;
 };
 
 #endif // VOICE_H

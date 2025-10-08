@@ -34,6 +34,7 @@ public:
 
     static float fastSin(float value); // Range [0; 1] for [0; pi]
     static float fastCos(float value); // Range [0; 1] for [0; pi]
+
     static float fastPow10(float value); // Range [-102.4; 102.3]
     static float fastPow2(float p)
     {
@@ -45,18 +46,20 @@ public:
             { static_cast<quint32> ( (1 << 23) * (clipp + 121.2740575f + 27.7280233f / (4.84252568f - z) - 1.49012907f * z) ) };
         return v.f;
     }
-    static inline void addVectors(float * __restrict a, float * __restrict b, int size)
-    {
-        a = (float*)__builtin_assume_aligned(a, 32);
-        b = (float*)__builtin_assume_aligned(b, 32);
-        while (size--)
-            (*a++) += (*b++);
-    }
+
+    static void addVectors(float * __restrict a, const float * __restrict b, unsigned int size);
+    static void clamp(float * values, unsigned int size);
+    static void multiplyAdd(float* __restrict data, const float* __restrict dataToMultiplyAndAdd, unsigned int size, float coeff);
+    static void multiply(float* __restrict data, const float* __restrict dataToMultiply, unsigned int size, float coeff);
+    static float multiply8(const float * __restrict coeffs, const qint16 * __restrict srcData16, const quint8 * __restrict srcData24);
 
 private:
     static float getSinValue(float value); // Range [0; 0.5] for [0; pi / 2]
     static float s_sin_table[2048];
     static float s_pow10_table[2048];
+    static inline qint32 toInt32(qint16 val16, quint8 val8) noexcept {
+        return static_cast<qint32>(static_cast<quint32>(val16) << 8) | val8;
+    }
 };
 
 #endif // FASTMATHS_H

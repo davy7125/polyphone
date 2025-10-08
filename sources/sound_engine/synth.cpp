@@ -278,7 +278,7 @@ int Synth::playSmpl(Smpl * smpl, int channel, int key, int velocity, bool other,
                     InstPrst * prst, Division * prstDiv)
 {
     // Load the sound
-    smpl->_sound.loadInRam();
+    smpl->_sound.loadSample();
 
     int currentToken = s_sampleVoiceTokenCounter++;
 
@@ -701,7 +701,9 @@ void Synth::readData(float * dataL, float * dataR, quint32 maxlen)
         _soundEngines[i]->endCurrentProcessing();
 
     // Get the data of all sound engines, even if they are still working
-    gatherSoundEngineData(maxlen);
+    _soundEngines[0]->setData(_dataL, _dataR, _dataChoL, _dataChoR, _dataRevL, _dataRevR, _dataChoRevL, _dataChoRevR, maxlen);
+    for (int i = 1; i < _soundEngineCount; i++)
+        _soundEngines[i]->addData(_dataL, _dataR, _dataChoL, _dataChoR, _dataRevL, _dataRevR, _dataChoRevL, _dataChoRevR, maxlen);
 
     // Tell the sound engines to restart (or continue) the processing
     _voices.prepareComputation();
@@ -718,31 +720,11 @@ void Synth::readData(float * dataL, float * dataR, quint32 maxlen)
     _sinus.addData(dataL, dataR, maxlen);
 
     // Clipping
-    for (unsigned int i = 0; i < maxlen; ++i)
-    {
-        if (dataL[i] > 1.0f)
-            dataL[i] = 1.0f;
-        else if (dataL[i] < -1.0f)
-            dataL[i] = -1.0f;
-    }
-    for (unsigned int i = 0; i < maxlen; ++i)
-    {
-        if (dataR[i] > 1.0f)
-            dataR[i] = 1.0f;
-        else if (dataR[i] < -1.0f)
-            dataR[i] = -1.0f;
-    }
+    FastMaths::clamp(dataL, maxlen);
+    FastMaths::clamp(dataR, maxlen);
 
     // Possible recording
     _recorder.process(dataL, dataR, maxlen);
-}
-
-void Synth::gatherSoundEngineData(quint32 maxlen)
-{
-    // Gather the different parts of the sound
-    _soundEngines[0]->setData(_dataL, _dataR, _dataChoL, _dataChoR, _dataRevL, _dataRevR, _dataChoRevL, _dataChoRevR, maxlen);
-    for (int i = 1; i < _soundEngineCount; i++)
-        _soundEngines[i]->addData(_dataL, _dataR, _dataChoL, _dataChoR, _dataRevL, _dataRevR, _dataChoRevL, _dataChoRevR, maxlen);
 }
 
 void Synth::applyChoRev(float * dataL, float * dataR, quint32 maxlen)

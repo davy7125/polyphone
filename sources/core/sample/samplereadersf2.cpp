@@ -25,7 +25,8 @@
 #include "samplereadersf2.h"
 #include "utils.h"
 
-SampleReaderSf2::SampleReaderSf2(QString filename) : SampleReader(filename),
+SampleReaderSf2::SampleReaderSf2(QString filename) :
+    SampleReader(filename),
     _info(nullptr)
 {
 
@@ -46,75 +47,39 @@ SampleReader::SampleReaderResult SampleReaderSf2::getInfo(QFile &fi, InfoSound *
     return FILE_OK;
 }
 
-float * SampleReaderSf2::getData(SampleReaderResult &result, QFile &fi)
+SampleReader::SampleReaderResult SampleReaderSf2::getData(QFile &fi, qint16 *& data16, quint8 *& data24)
 {
+    data16 = nullptr;
+    data24 = nullptr;
     if (_info->dwLength == 0)
-    {
-        result = FILE_OK;
-        return nullptr;
-    }
-
-    // Sample data
-    float * fData = new float[_info->dwLength];
+        return FILE_OK;
 
     // Load the smpl part of an sf2
     fi.seek(_info->dwStart);
-    qint16 * data = new qint16[_info->dwLength];
-    qint64 nb = fi.read((char *)data, _info->dwLength * sizeof(qint16));
-    if (nb == -1)
-    {
-        delete [] data;
-        delete [] fData;
-        result = FILE_NOT_READABLE;
-        return nullptr;
-    }
+    data16 = new qint16[_info->dwLength];
+    qint64 nb = fi.read((char *)data16, _info->dwLength * sizeof(qint16));
     if (nb != (qint64)(_info->dwLength * sizeof(qint16)))
     {
-        delete [] data;
-        delete [] fData;
-        result = FILE_CORRUPT;
-        return nullptr;
+        delete [] data16;
+        data16 = nullptr;
+        return nb == -1 ? FILE_NOT_READABLE : FILE_CORRUPT;
     }
 
     // Possibly load the sm24 part of an sf2
-    unsigned char * data24 = new unsigned char[_info->dwLength];
-    if (_info->wBpsFile >= 24 && _info->dwLength > 0)
+    if (_info->wBpsFile >= 24)
     {
-        // Copy data
+        data24 = new quint8[_info->dwLength];
         fi.seek(_info->dwStart2);
         qint64 nb = fi.read((char *)data24, _info->dwLength);
-        if (nb == -1)
+        if (nb != (qint64)_info->dwLength)
         {
-            delete [] data;
+            delete [] data16;
             delete [] data24;
-            delete [] fData;
-            result = FILE_NOT_READABLE;
-            return nullptr;
-        }
-        if (nb != _info->dwLength)
-        {
-            delete [] data;
-            delete [] data24;
-            delete [] fData;
-            result = FILE_CORRUPT;
-            return nullptr;
+            data16 = nullptr;
+            data24 = nullptr;
+            return nb == -1 ? FILE_NOT_READABLE : FILE_CORRUPT;
         }
     }
-    else
-        memset(data24, 0, _info->dwLength);
 
-    // Convert to float between -1 and 1
-    qint32 tmp;
-    for (quint32 i = 0; i < _info->dwLength; i++)
-    {
-        tmp = (static_cast<qint32>(data[i]) << 8) | data24[i];
-        if (tmp & 0x800000)
-            tmp |= 0xff000000;
-        fData[i] = Utils::int24ToFloat(tmp);
-    }
-
-    delete [] data;
-    delete [] data24;
-    result = FILE_OK;
-    return fData;
+    return FILE_OK;
 }

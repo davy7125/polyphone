@@ -23,11 +23,38 @@
 ***************************************************************************/
 
 #include "sampleutils.h"
+#include "utils.h"
 #include <QMessageBox>
 
-SampleUtils::SampleUtils()
+QVector<float> SampleUtils::int24ToFloat(const qint16 * data16, const quint8 * data24, quint32 length)
 {
+    QVector<float> result;
+    result.resize(length, 0.f);
+    if (data24 == nullptr)
+    {
+        for (quint32 i = 0; i < length; i++)
+            result[i] = Utils::int24ToFloat(data16[i] << 8);
+    }
+    else
+    {
+        for (quint32 i = 0; i < length; i++)
+            result[i] = Utils::int24ToFloat(data16[i] << 8 | data24[i]);
+    }
+    return result;
+}
 
+void SampleUtils::floatToInt24(const QVector<float> data, qint16 *& data16, quint8 *& data24)
+{
+    data16 = new qint16[data.length()];
+    data24 = new quint8[data.length()];
+    int iTmp;
+    for (int i = 0; i < data.length(); i++)
+    {
+        iTmp = Utils::floatToInt24(data[i]);
+        data16[i] = (iTmp >> 8);
+        if (data24 != nullptr)
+            data24[i] = iTmp & 0xFF;
+    }
 }
 
 QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, quint32 echFinal)

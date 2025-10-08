@@ -24,7 +24,6 @@
 
 #include "samplereaderfile.h"
 #include <sndfile.hh>
-#include <QDebug>
 
 SampleReaderFile::SampleReaderFile(QString filename) : SampleReader(filename),
     _file(nullptr),
@@ -43,21 +42,21 @@ SampleReader::SampleReaderResult SampleReaderFile::getInfo(QFile &fi, InfoSound 
     _file = &fi;
 
     // Decode the file
-    return launchDecoder(nullptr);
+    return launchDecoder(nullptr, nullptr);
 }
 
-float * SampleReaderFile::getData(SampleReaderResult &result, QFile &fi)
+SampleReader::SampleReaderResult SampleReaderFile::getData(QFile &fi, qint16 *& data16, quint8 *& data24)
 {
     // Access to the file
     _file = &fi;
 
     // Decode the file and read data
-    float * data = new float[_info->dwLength];
-    result = launchDecoder(data);
-    return data;
+    data16 = new qint16[_info->dwLength];
+    data24 = new quint8[_info->dwLength];
+    return launchDecoder(data16, data24);
 }
 
-SampleReader::SampleReaderResult SampleReaderFile::launchDecoder(float * data)
+SampleReader::SampleReaderResult SampleReaderFile::launchDecoder(qint16 * data16, quint8 * data24)
 {
     // Open the file and get the details
     SF_INFO sfInfo;
@@ -86,14 +85,19 @@ SampleReader::SampleReaderResult SampleReaderFile::launchDecoder(float * data)
             _info->loops << QPair<quint32, quint32>(instrument.loops[i].start, instrument.loops[i].end);
     }
 
-    if (data != nullptr)
+    if (data16 != nullptr)
     {
-        float * interleavedData = new float[_info->wChannels * _info->dwLength];
-        sf_readf_float(sndFile, interleavedData, _info->dwLength);
+        int * interleavedData = new int[_info->wChannels * _info->dwLength];
+        sf_readf_int(sndFile, interleavedData, _info->dwLength);
 
         // Extract a channel
+        int iTmp;
         for (quint32 i = 0; i < _info->dwLength; i++)
-            data[i] = interleavedData[i * _info->wChannels + _info->wChannel];
+        {
+            iTmp = interleavedData[i * _info->wChannels + _info->wChannel];
+            data16[i] = iTmp >> 16;
+            data24[i] = (iTmp >> 8) & 0xFF;
+        }
         delete [] interleavedData;
     }
 

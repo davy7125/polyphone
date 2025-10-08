@@ -33,14 +33,15 @@ class SampleWriterWav
 public:
     SampleWriterWav(QString fileName);
 
-    void write(Sound *sound);
-    void write(Sound *leftSound, Sound *rightSound);
+    void write(Sound * sound);
+    void write(Sound * leftSound, Sound * rightSound);
 
 private:
     void write(QByteArray &baData, InfoSound &info);
-    static void convertTo16bit(QVector<float> dataSrc, QByteArray &dataDest);
-    static void convertTo24bit(QVector<float> dataSrc, QByteArray &dataDest);
-    static QByteArray from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, quint16 wBps, bool bigEndian = false);
+    static void resample(int );
+    static QByteArray convertTo16bit(qint16 * data16, quint32 length);
+    static QByteArray convertTo24bit(qint16 * data16, quint8 * data24, quint32 length);
+    static QByteArray from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, quint16 wBps);
 
     QString _fileName;
 };

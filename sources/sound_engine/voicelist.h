@@ -1,6 +1,6 @@
 /***************************************************************************
 **                                                                        **
-**  Polyphone, a soundfont editor                                         **
+**  PVP: Phoenix Voicing Program                                          **
 **  Copyright (C) 2013-2024 Davy Triponney                                **
 **                2014      Andrea Celani                                 **
 **                                                                        **
@@ -36,17 +36,18 @@ class VoiceList
 public:
     VoiceList();
     ~VoiceList();
-    void initialize(Synth * synth);
+    void initialize();
     void setThreadCount(int threadCount) { _threadCount = threadCount; }
+    void setMaxPolyphony(int maxPolyphony);
 
-    // Prepare multiple voice and then add them
+    // Prepare multiple voice and then add them, run by the MIDI or GUI thread
     Voice * getVoiceToPrepare();
     void addPreparedVoices();
 
     // Return all voices currently running and prepared to be run
     void getVoices(Voice ** &voices1, int &count1, Voice ** &voices2, int &count2);
+    int getVoiceCount();
 
-    //
     void endComputation();
     void prepareComputation();
     Voice * getNextVoiceToCompute();
@@ -69,15 +70,15 @@ private:
     int _threadCount;
 
     // Indexes
-    QAtomicInt _preparationIndex; // When voices are being added
-    QAtomicInt _additionIndex; // When a set of voices is complete
-    QAtomicInt _currentIndex;
-    QAtomicInt _firstRunningIndex;
-    QAtomicInt _lastRunningIndex;
+    volatile int _preparationIndex;  // When voices are being added
+    volatile int _additionIndex;     // When a set of voices is complete
+    QAtomicInt _currentIndex;        // Index of the last voice being computed
+    volatile int _firstRunningIndex; // Index of the first voice to compute
+    volatile int _lastRunningIndex;  // Index of the last voice to compute
 
     /// Variables used by the audio thread only
 
-    int _maxPossibleVoicesToCompute;
+    volatile int _maxPolyphony; // Also set by the main thread
     int _uncomputedVoiceCount;
     ExclusiveClassCloseCommand _closeCommands[MAX_NUMBER_OF_VOICES];
     unsigned short _closeCommandNumber;

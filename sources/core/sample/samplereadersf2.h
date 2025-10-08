@@ -37,7 +37,7 @@ public:
     SampleReaderResult getInfo(QFile &fi, InfoSound * info) override;
 
     // Get sample data
-    float * getData(SampleReaderResult &result, QFile &fi) override;
+    SampleReaderResult getData(QFile &fi, qint16 *& data16, quint8 *& data24) override;
 
 private:
     InfoSound * _info;
