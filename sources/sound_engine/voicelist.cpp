@@ -199,7 +199,7 @@ void VoiceList::prepareComputation()
         voice = _voices[index];
         voiceParam = voice->getParam();
 
-        close = voice->isFinished() || (numberOfVoicesToClose > 0 && voice->isRelease());
+        close = voice->isFinished() || (numberOfVoicesToClose > 0 && voice->isInRelease());
         quickRelease = false;
 
         if (!close)
@@ -256,27 +256,6 @@ void VoiceList::prepareComputation()
     // Remove first voices if more of them must be closed
     if (numberOfVoicesToClose > 0)
     {
-        // Move the voices with a small sensitivity at the beginning of the list
-        // (bourdon / flutes have the priority to be closed)
-        int closableIndex = first;
-        int maxClosableIndex = (first + numberOfVoicesToClose) & VOICE_INDEX_MASK;
-        for (int index = first; index != additionIndex; index = (index + 1) & VOICE_INDEX_MASK)
-        {
-            if (_voices[index]->getSensitivity() < 80)
-            {
-                // Swap
-                voice = _voices[index];
-                _voices[index] = _voices[closableIndex];
-                _voices[closableIndex] = voice;
-
-                // Update the closable index and possibly stop here
-                closableIndex = (closableIndex + 1) & VOICE_INDEX_MASK;;
-                if (closableIndex == maxClosableIndex)
-                    break;
-            }
-        }
-
-        // Stop the first voices
         last = (first + numberOfVoicesToClose) & VOICE_INDEX_MASK;
         for (; first != last; first = (first + 1) & VOICE_INDEX_MASK)
             _voices[first]->finish();

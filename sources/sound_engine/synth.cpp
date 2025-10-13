@@ -54,7 +54,7 @@ Synth::Synth(Soundfonts * soundfonts, QRecursiveMutex * mutexSoundfonts) : QObje
     _dataChoRevR(nullptr)
 {
     connect(&_recorder, SIGNAL(dataWritten(quint32,quint32)), this, SIGNAL(dataWritten(quint32,quint32)));
-    _voices.initialize(this);
+    _voices.initialize();
 }
 
 Synth::~Synth()
