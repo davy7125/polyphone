@@ -474,11 +474,6 @@ void Voice::setTemperament(float temperament[12], int relativeKey)
     s_temperamentRelativeKey = relativeKey;
 }
 
-void Voice::triggerReadFinishedSignal()
-{
-    emit readFinished(_token);
-}
-
 bool Voice::biQuadCoefficients(float * coeffs, float freq, float inv_Q)
 {
     // Calcul des coefficients d'une structure bi-quad pour un passe-bas
@@ -502,4 +497,13 @@ bool Voice::biQuadCoefficients(float * coeffs, float freq, float inv_Q)
     coeffs[1] = 2.f * gamma;
     coeffs[2] = -2.f * beta;
     return true;
+}
+
+
+void Voice::finish()
+{
+    // Signal emitted for the sample player (voice -1)
+    if (_voiceParam->getKey() == -1)
+        emit readFinished(_token);
+    _isFinished = true;
 }

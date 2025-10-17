@@ -52,10 +52,9 @@ public:
     VoiceParam * getParam() { return _voiceParam; }
 
     void release(bool quick = false);
-    void finish() { _isFinished = true; }
+    void finish();
     bool isInRelease() { return _release || _loopMode == 2; }
     bool isFinished() { return _isFinished; }
-    void triggerReadFinishedSignal();
 
     void setGain(float gain);
 

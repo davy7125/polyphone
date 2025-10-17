@@ -26,6 +26,7 @@
 #include "voicelist.h"
 #include "voice.h"
 #include "voiceparam.h"
+#include "synth.h"
 
 VoiceList::VoiceList() :
     _threadCount(1),
@@ -49,12 +50,14 @@ VoiceList::~VoiceList()
         delete _voiceParameters[i];
 }
 
-void VoiceList::initialize()
+void VoiceList::initialize(Synth * synth)
 {
     for (int i = 0; i < MAX_NUMBER_OF_VOICES; ++i)
     {
         _voiceParameters[i] = new VoiceParam();
         _voices[i] = new Voice(_voiceParameters[i]);
+        QObject::connect(_voices[i], SIGNAL(currentPosChanged(quint32)), synth, SIGNAL(currentPosChanged(quint32)));
+        QObject::connect(_voices[i], SIGNAL(readFinished(int)), synth, SIGNAL(readFinished(int)));
     }
 }
 

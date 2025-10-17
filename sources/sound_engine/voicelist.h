@@ -1,6 +1,6 @@
 /***************************************************************************
 **                                                                        **
-**  PVP: Phoenix Voicing Program                                          **
+**  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2024 Davy Triponney                                **
 **                2014      Andrea Celani                                 **
 **                                                                        **
@@ -36,7 +36,7 @@ class VoiceList
 public:
     VoiceList();
     ~VoiceList();
-    void initialize();
+    void initialize(Synth * synth);
     void setThreadCount(int threadCount) { _threadCount = threadCount; }
     void setMaxPolyphony(int maxPolyphony);
 
