@@ -106,7 +106,7 @@ void Synth::createSoundEnginesAndBuffers()
     _dataChoRevL = new float[_bufferSize];
     _dataChoRevR = new float[_bufferSize];
 
-    _soundEngineCount = qMax(QThread::idealThreadCount(), 1);
+    _soundEngineCount = qMax(QThread::idealThreadCount() - 1, 1);
     _soundEngines = new SoundEngine * [_soundEngineCount];
     //qWarning() << _soundEngineCount << "sound engines created";
 
@@ -114,7 +114,7 @@ void Synth::createSoundEnginesAndBuffers()
     {
         SoundEngine * soundEngine = new SoundEngine(_bufferSize);
         soundEngine->moveToThread(new QThread());
-        soundEngine->thread()->start(QThread::TimeCriticalPriority);
+        soundEngine->thread()->start(QThread::HighPriority);
         QMetaObject::invokeMethod(soundEngine, "start");
         _soundEngines[i] = soundEngine;
     }
