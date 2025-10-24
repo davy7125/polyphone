@@ -262,9 +262,8 @@ QByteArray SampleWriterWav::convertTo16bit(qint16 * data16, quint32 length)
     if (data16 != nullptr && length > 0)
     {
         dataDest.resize(2 * length);
-        qint16 * data16 = reinterpret_cast<qint16 *>(dataDest.data());
-        for (quint32 i = 0; i < length; i++)
-            data16[i] = data16[i];
+        qint16 * dataDest16 = reinterpret_cast<qint16 *>(dataDest.data());
+        memcpy(dataDest16, data16, length * sizeof(qint16));
     }
     return dataDest;
 }
@@ -275,12 +274,12 @@ QByteArray SampleWriterWav::convertTo24bit(qint16 * data16, quint8 * data24, qui
     if (data16 != nullptr && length > 0)
     {
         dataDest.resize(3 * length);
-        char * dataChar = dataDest.data();
+        char * dataDestChar = dataDest.data();
         for (quint32 i = 0; i < length; i++)
         {
-            dataChar[3 * i] = (data24 == nullptr ? 0 : data24[i]);
-            dataChar[3 * i + 1] = (data16[i] & 0xFF);
-            dataChar[3 * i + 2] = (data16[i] >> 8);
+            dataDestChar[3 * i] = (data24 == nullptr ? 0 : data24[i]);
+            dataDestChar[3 * i + 1] = (data16[i] & 0xFF);
+            dataDestChar[3 * i + 2] = (data16[i] >> 8);
         }
     }
     return dataDest;
