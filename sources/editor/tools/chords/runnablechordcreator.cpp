@@ -271,7 +271,7 @@ QVector<float> RunnableChordCreator::getSampleData(EltID idSmpl, quint32 nbRead)
 {
     // Récupération de données provenant d'un sample, en prenant en compte la boucle
     SoundfontManager * sm = SoundfontManager::getInstance();
-    QVector<float> vData = sm->getData(idSmpl);
+    QVector<float> vData = sm->getDataFloat(idSmpl);
     quint32 loopStart = sm->get(idSmpl, champ_dwStartLoop).dwValue;
     quint32 loopEnd = sm->get(idSmpl, champ_dwEndLoop).dwValue;
     QVector<float> vDataRet(nbRead);

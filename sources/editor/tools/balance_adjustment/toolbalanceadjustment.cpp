@@ -74,8 +74,8 @@ void ToolBalanceAdjustment::process(SoundfontManager * sm, EltID id, AbstractToo
     _mutex.unlock();
 
     // Get sample data
-    QVector<float> vData1 = sm->getData(id);
-    QVector<float> vData2 = sm->getData(id2);
+    QVector<float> vData1 = sm->getDataFloat(id);
+    QVector<float> vData2 = sm->getDataFloat(id2);
 
     // Find steady areas
     quint32 debut1, fin1;

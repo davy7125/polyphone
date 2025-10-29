@@ -39,7 +39,7 @@ void ToolTransposeSmpl::process(SoundfontManager * sm, EltID id, AbstractToolPar
     ToolTransposeSmpl_parameters * params = dynamic_cast<ToolTransposeSmpl_parameters *>(parameters);
 
     // Get sample data
-    QVector<float> vData = sm->getData(id);
+    QVector<float> vData = sm->getDataFloat(id);
     quint32 echFinal = sm->get(id, champ_dwSampleRate).dwValue;
 
     // Compute the new initial sample rate
