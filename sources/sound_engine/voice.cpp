@@ -25,40 +25,18 @@
 #include "voice.h"
 #include "smpl.h"
 #include "fastmaths.h"
+#include "sampleutils.h"
 
 volatile int Voice::s_referencePitch = 4400;
 volatile float Voice::s_temperament[12] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 volatile int Voice::s_temperamentRelativeKey = 0;
-float Voice::s_sinc_table7[2048][8];
+float Voice::s_sinc_tables[7][RESAMPLING_SUBDIVISION][RESAMPLING_ORDER];
 float Voice::s_floatConversionCoef24;
 
 void Voice::prepareTables()
 {
-    double v, i_shifted;
-    for (int i = 0; i < 7; ++i) // i: Offset in terms of whole samples
-    {
-        // i2: Offset in terms of fractional samples ('subsamples')
-        for (int i2 = 0; i2 < 2048; ++i2)
-        {
-            // Center on middle of table
-            i_shifted = (double)i - (7.0 / 2.0) + (double)i2 / 2048.0;
-
-            // sinc(0) cannot be calculated straightforward (limit needed for 0/0)
-            if (fabs(i_shifted) > 0.000001)
-            {
-                v = sin(i_shifted * M_PI) / (M_PI * i_shifted);
-
-                // Hamming window
-                v *= 0.5 * (1.0 + cos (2.0 * M_PI * i_shifted / 7));
-            }
-            else
-                v = 1.0;
-
-            s_sinc_table7[2048 - i2 - 1][i] = (float)v;
-        }
-    }
-    for (int i2 = 0; i2 < 2048; ++i2)
-        s_sinc_table7[i2][7] = 0;
+    for (int i = 0; i < 7; i++)
+        SampleUtils::fillSincTable(&s_sinc_tables[i][0][0], RESAMPLING_ORDER, RESAMPLING_SUBDIVISION, 1.2 + 0.4 * i);
 
     // Integer => float conversion
     s_floatConversionCoef24 = 1.0f / (0.5f + static_cast<float>(0x7FFFFF));
@@ -111,6 +89,7 @@ void Voice::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Div
     smpl->_sound.getData(_dataSmplLength, _dataSmpl16, _dataSmpl24, false, _voiceParam->getType() != 0 /* copy data at the sample level */);
     if (_dataSmpl24 == nullptr)
         _dataSmpl24 = (quint8 *)_dataSmpl16;
+    _sincWindow = s_sinc_tables[smpl->_sound.getUInt32(champ_byOriginalPitch) / 19];
 
     _smplRate = smpl->_sound.getUInt32(champ_dwSampleRate);
     _audioSmplRate = audioSmplRate;
@@ -135,8 +114,8 @@ void Voice::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Div
     _modEnvelope.initialize(sampleRateForChunks, true);
 
     // Resampling initialization
-    memset(_srcData16, 0, 8 * sizeof(float));
-    memset(_srcData24, 0, 8 * sizeof(float));
+    memset(_srcData16, 0, RESAMPLING_ORDER * sizeof(float));
+    memset(_srcData24, 0, RESAMPLING_ORDER * sizeof(float));
     _lastDistanceFraction = 0;
     _moreAvailable = -1;
 }
@@ -241,7 +220,7 @@ void Voice::generateData(float * data, quint32 len)
             quint32 fixedGap = static_cast<quint32>(
                 FastMaths::fastPow2(currentDeltaPitch * 0.000833333f /* 1:1200 */ + 11.0f /* multiply by 2048, which is 2^11 */) + 0.5f);
 
-            // Resampling (7th order sinc interpolation)
+            // Resampling (sinc interpolation)
             qint16 * srcData16 = &_dataSmpl16[_currentSmplPos];
             quint8 * srcData24 = &_dataSmpl24[_currentSmplPos];
             float * pData = &data[sampleStart];
@@ -262,7 +241,8 @@ resample_fast:
                     goto resample_slow;
                 }
 
-                (*pData++) = FastMaths::multiply8(s_sinc_table7[_lastDistanceFraction & 0x7FF], &srcData16[nextPosition], &srcData24[nextPosition]);
+                (*pData++) = FastMaths::multiply8(_sincWindow[(_lastDistanceFraction >> 3) & 0xFF], &srcData16[nextPosition], &srcData24[nextPosition]);
+                            // + FastMaths::multiply8(&_sincWindow[(_lastDistanceFraction >> 3) & 0xFF][8], &srcData16[nextPosition + 8], &srcData24[nextPosition + 8]);
 
                 if (pData >= pDataEnd)
                 {
@@ -281,7 +261,8 @@ resample_slow:
                 _lastDistanceFraction += fixedGap;
                 (*this.*slowExtractFunction)(_lastDistanceFraction >> 11, loopStart, loopEnd, srcData16, srcData24);
                 _lastDistanceFraction &= 0x7FF;
-                (*pData++) = FastMaths::multiply8(s_sinc_table7[_lastDistanceFraction], srcData16, srcData24);
+                (*pData++) = FastMaths::multiply8(_sincWindow[(_lastDistanceFraction >> 3) & 0xFF], srcData16, srcData24);
+                            // + FastMaths::multiply8(&_sincWindow[(_lastDistanceFraction >> 3) & 0xFF][8], &srcData16[8], &srcData24[8]);
 
                 if (pData >= pDataEnd)
                     goto resample_end;
@@ -365,8 +346,8 @@ void Voice::getData(quint32 goOn, quint32 loopStart, quint32 loopEnd, qint16 * &
     // New sample position
     _currentSmplPos += goOn;
 
-    // If at least 7 points are available after the current position, use a pointer to the data directly
-    if ((_moreAvailable = _dataSmplLength - _currentSmplPos - 7) >= 0)
+    // If at least RESAMPLING_ORDER points are available after the current position, use a pointer to the data directly
+    if ((_moreAvailable = _dataSmplLength - _currentSmplPos - RESAMPLING_ORDER) >= 0)
     {
         srcData16 = &_dataSmpl16[_currentSmplPos];
         srcData24 = &_dataSmpl24[_currentSmplPos];
@@ -378,15 +359,15 @@ void Voice::getData(quint32 goOn, quint32 loopStart, quint32 loopEnd, qint16 * &
     {
         // Copy what is possible to copy, fill the rest with 0
         memcpy(_srcData16, &_dataSmpl16[_currentSmplPos], remainingSamples * sizeof(qint16));
-        memset(&_srcData16[remainingSamples], 0, (7 - remainingSamples) * sizeof(qint16));
+        memset(&_srcData16[remainingSamples], 0, (RESAMPLING_ORDER - remainingSamples) * sizeof(qint16));
         memcpy(_srcData24, &_dataSmpl24[_currentSmplPos], remainingSamples * sizeof(quint8));
-        memset(&_srcData24[remainingSamples], 0, (7 - remainingSamples) * sizeof(quint8));
+        memset(&_srcData24[remainingSamples], 0, (RESAMPLING_ORDER - remainingSamples) * sizeof(quint8));
     }
     else
     {
         // No more data, fill with 0
-        memset(_srcData16, 0, 7 * sizeof(qint16));
-        memset(_srcData24, 0, 7 * sizeof(quint8));
+        memset(_srcData16, 0, RESAMPLING_ORDER * sizeof(qint16));
+        memset(_srcData24, 0, RESAMPLING_ORDER * sizeof(quint8));
     }
 
     finish();
@@ -403,30 +384,30 @@ void Voice::getDataWithLoop(quint32 goOn, quint32 loopStart, quint32 loopEnd, qi
     while (_currentSmplPos >= loopEnd)
         _currentSmplPos += loopStart - loopEnd;
 
-    // If at least 7 points are available after the current position, use a pointer to the data directly
-    if ((_moreAvailable = loopEnd - _currentSmplPos - 7) >= 0)
+    // If at least RESAMPLING_ORDER points are available after the current position, use a pointer to the data directly
+    if ((_moreAvailable = loopEnd - _currentSmplPos - RESAMPLING_ORDER) >= 0)
     {
         srcData16 = &_dataSmpl16[_currentSmplPos];
         srcData24 = &_dataSmpl24[_currentSmplPos];
         return;
     }
 
-    if (loopEnd >= 7 + loopStart)
+    if (loopEnd >= RESAMPLING_ORDER + loopStart)
     {
         // Or take the end + the beginning of the loop
         quint32 remainingSamples = loopEnd - _currentSmplPos;
         memcpy(_srcData16, &_dataSmpl16[_currentSmplPos], remainingSamples * sizeof(qint16));
-        memcpy(&_srcData16[remainingSamples], &_dataSmpl16[loopStart], (7 - remainingSamples) * sizeof(qint16));
+        memcpy(&_srcData16[remainingSamples], &_dataSmpl16[loopStart], (RESAMPLING_ORDER - remainingSamples) * sizeof(qint16));
         memcpy(_srcData24, &_dataSmpl24[_currentSmplPos], remainingSamples * sizeof(quint8));
-        memcpy(&_srcData24[remainingSamples], &_dataSmpl24[loopStart], (7 - remainingSamples) * sizeof(quint8));
+        memcpy(&_srcData24[remainingSamples], &_dataSmpl24[loopStart], (RESAMPLING_ORDER - remainingSamples) * sizeof(quint8));
     }
     else
     {
         // Or, if the loop is too short, use the loop several times
         quint32 total = 0;
-        while (total < 7)
+        while (total < RESAMPLING_ORDER)
         {
-            const quint32 chunk = qMin(loopEnd - _currentSmplPos, 7 - total);
+            const quint32 chunk = qMin(loopEnd - _currentSmplPos, RESAMPLING_ORDER - total);
             memcpy(&_srcData16[total], &_dataSmpl16[_currentSmplPos], chunk * sizeof(qint16));
             memcpy(&_srcData24[total], &_dataSmpl24[_currentSmplPos], chunk * sizeof(quint8));
             _currentSmplPos += chunk;

@@ -234,6 +234,7 @@ float FastMaths::multiply8(const float * __restrict coeffs, const qint16 * __res
            coeffs[3] * static_cast<float>(toInt32(srcData16[3], srcData24[3])) +
            coeffs[4] * static_cast<float>(toInt32(srcData16[4], srcData24[4])) +
            coeffs[5] * static_cast<float>(toInt32(srcData16[5], srcData24[5])) +
-           coeffs[6] * static_cast<float>(toInt32(srcData16[6], srcData24[6]));
+           coeffs[6] * static_cast<float>(toInt32(srcData16[6], srcData24[6])) +
+           coeffs[7] * static_cast<float>(toInt32(srcData16[7], srcData24[7]));
 #endif
 }

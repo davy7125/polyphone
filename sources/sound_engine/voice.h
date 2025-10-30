@@ -94,10 +94,11 @@ private:
     bool _dummy;
     quint32 _currentSmplPos, _elapsedSmplPos;
     double _time;
+    float (*_sincWindow)[RESAMPLING_ORDER];
 
     // Saved state for resampling
-    qint16 _srcData16[8]; // The 8th value is 0, necessary for vectorization
-    quint8 _srcData24[8];
+    qint16 _srcData16[RESAMPLING_ORDER];
+    quint8 _srcData24[RESAMPLING_ORDER];
     quint32 _lastDistanceFraction;
     qint32 _moreAvailable;
 
@@ -121,7 +122,7 @@ private:
     static volatile int s_referencePitch;
     static volatile float s_temperament[12]; // Fine tune in cents from each key from C to B
     static volatile int s_temperamentRelativeKey;
-    static float s_sinc_table7[2048][8];
+    static float s_sinc_tables[7][RESAMPLING_SUBDIVISION][RESAMPLING_ORDER];
     static float s_floatConversionCoef24;
 };
 

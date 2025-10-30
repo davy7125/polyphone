@@ -73,8 +73,8 @@ QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, q
     const float * dataF = vData.constData();
 
     // Création fenêtre Kaiser-Bessel 2048 points
-    double kbdWindow[2048];
-    KBDWindow(kbdWindow, 2048, alpha);
+    double kbWindow[2048];
+    fillKaiserBesselWindow(kbWindow, 2048, alpha);
 
     // Nombre de points à trouver
     quint32 sizeFinal = static_cast<quint32>(1. + (sizeInit - 1.0) * echFinal / echInit);
@@ -111,8 +111,8 @@ QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, q
             else if (pos2 > 2047)
                 pos2 = 2047;
 
-            sincCoef[j + nbPoints] *= kbdWindow[pos1] * (ceil((delta)) - delta)
-                    + kbdWindow[pos2] * (1.f - ceil((delta)) + delta);
+            sincCoef[j + nbPoints] *= kbWindow[pos1] * (ceil((delta)) - delta)
+                    + kbWindow[pos2] * (1.f - ceil((delta)) + delta);
         }
 
         // Valeur
@@ -1179,54 +1179,86 @@ double SampleUtils::sinc(double x)
     }
 }
 
-// Keser-Bessel window
-void SampleUtils::KBDWindow(double* window, int size, double alpha)
+void SampleUtils::fillKaiserBesselWindow(double * window, int size, double alpha)
 {
-    double sumvalue = 0.;
-    int i;
-
-    for (i = 0; i < size/2; i++)
+    double alphaPi = M_PI * alpha;
+    double multiplier = 1.0 / besselI0(alphaPi);
+    double twoInvSize = 2.0 / (double)size;
+    double dTmp;
+    for (int i = 0; i < size / 2; i++)
     {
-        sumvalue += BesselI0(M_PI * alpha * sqrt(1. - pow(4.0*i/size - 1., 2)));
-        window[i] = sumvalue;
-    }
-
-    // need to add one more value to the nomalization factor at size/2:
-    sumvalue += BesselI0(M_PI * alpha * sqrt(1. - pow(4.0*(size/2) / size-1., 2)));
-
-    // normalize the window and fill in the righthand side of the window:
-    for (i = 0; i < size/2; i++)
-    {
-        window[i] = sqrt(window[i]/sumvalue);
-        window[size-1-i] = window[i];
+        dTmp = twoInvSize * i - 1.;
+        window[size - 1 - i] = window[i] = besselI0(alphaPi * sqrt(1. - dTmp * dTmp)) * multiplier;
     }
 }
 
-double SampleUtils::BesselI0(double x)
+void SampleUtils::fillSincTable(float * table, int order, int subdivisions, double kaiserBesserAlpha)
 {
-    double denominator;
-    double numerator;
-    double z;
+    double v, posI, posIshifted;
 
-    if (x == 0.0)
-        return 1.0;
+    // i2: Offset in terms of fractional samples ('subsamples')
+    for (int i2 = 0; i2 < subdivisions; ++i2)
+    {
+        // i: Offset in terms of whole samples
+        for (int i = 0; i < order; ++i)
+        {
+            posI = (double)i + (double)(subdivisions - i2 - 1) / (double)subdivisions;
+            posIshifted = posI - (double)order / 2.0;
+
+            // sinc(0) cannot be calculated straightforward (limit needed for 0/0)
+            if (fabs(posIshifted) > 0.000001)
+            {
+                v = sin(posIshifted * M_PI) / (posIshifted * M_PI);
+
+                // Kaiser-bessel window
+                double alphaPi = M_PI * kaiserBesserAlpha;
+                double dTmp = 2 * posI / (double)order - 1.;
+                v *= besselI0(alphaPi * sqrt(1. - dTmp * dTmp)) / besselI0(alphaPi);
+            }
+            else
+                v = 1.0;
+
+            table[i2 * order + i] = (float)v;
+        }
+    }
+}
+
+double SampleUtils::besselI0(double x)
+{
+    // Computation based on Abramowitz & Stegun work
+    double ax = std::fabs(x);
+    double y;
+    double result;
+
+    if (ax < 3.75)
+    {
+        // Approximation for |x| < 3.75
+        y = (x / 3.75);
+        y *= y;
+        result = 1.0 + y * (3.5156229 +
+                            y * (3.0899424 +
+                                 y * (1.2067492 +
+                                      y * (0.2659732 +
+                                           y * (0.0360768 +
+                                                y * (0.0045813))))));
+    }
     else
     {
-        z = x * x;
-        numerator = (z* (z* (z* (z* (z* (z* (z* (z* (z* (z* (z* (z* (z*
-                                                                     (z* 0.210580722890567e-22  + 0.380715242345326e-19 ) +
-                                                                     0.479440257548300e-16) + 0.435125971262668e-13 ) +
-                                                             0.300931127112960e-10) + 0.160224679395361e-7  ) +
-                                                     0.654858370096785e-5)  + 0.202591084143397e-2  ) +
-                                             0.463076284721000e0)   + 0.754337328948189e2   ) +
-                                     0.830792541809429e4)   + 0.571661130563785e6   ) +
-                             0.216415572361227e8)   + 0.356644482244025e9   ) +
-                     0.144048298227235e10);
-        denominator = (z*(z*(z-0.307646912682801e4)+
-                          0.347626332405882e7)-0.144048298227235e10);
+        // Approximation for |x| >= 3.75
+        y = 3.75 / ax;
+        result = (std::exp(ax) / std::sqrt(ax)) *
+                 (0.39894228 +
+                  y * (0.01328592 +
+                       y * (0.00225319 +
+                            y * (-0.00157565 +
+                                 y * (0.00916281 +
+                                      y * (-0.02057706 +
+                                           y * (0.02635537 +
+                                                y * (-0.01647633 +
+                                                     y * (0.00392377)))))))));
     }
 
-    return -numerator/denominator;
+    return result;
 }
 
 float SampleUtils::computeLoopQuality(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 checkNumber, bool bipolar, float maxValue)
