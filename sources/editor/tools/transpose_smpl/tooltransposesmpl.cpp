@@ -40,10 +40,10 @@ void ToolTransposeSmpl::process(SoundfontManager * sm, EltID id, AbstractToolPar
 
     // Get sample data
     QVector<float> vData = sm->getData(id);
-    quint32 echFinal = sm->get(id, champ_dwSampleRate).dwValue;
 
-    // Compute the new initial sample rate
-    double echInit = static_cast<double>(echFinal) * qPow(2, params->getSemiTones() / 12);
+    // Compute the final sample rate
+    double echInit = (double)sm->get(id, champ_dwSampleRate).dwValue;
+    double echFinal = echInit / qPow(2, params->getSemiTones() / 12);
 
     // Resampling
     vData = SampleUtils::resampleMono(vData, echInit, echFinal);

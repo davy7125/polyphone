@@ -70,8 +70,6 @@ private:
     static float sum(QVector<float> vData);
     static float sumSquare(QVector<float> vData);
     static void regimePermanent(QVector<float> data, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd, quint32 nbOK, float coef);
-    static double sinc(double x);
-    static void fillKaiserBesselWindow(double * window, int size, double alpha);
     static double besselI0(double x);
     static Complex * FFT(Complex * x, quint32 N); // N must be a power of 2
     static Complex * IFFT(Complex * x, quint32 N); // N must be a power of 2
