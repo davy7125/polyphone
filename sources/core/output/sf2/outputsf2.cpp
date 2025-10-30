@@ -639,13 +639,13 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
 
         // dwLibrary
         dwTmp = sm->get(id, champ_dwLibrary).dwValue;
-        fi.write((char *)&wTmp, 4);
+        fi.write((char *)&dwTmp, 4);
         // dwGenre
         dwTmp = sm->get(id, champ_dwGenre).dwValue;
-        fi.write((char *)&wTmp, 4);
+        fi.write((char *)&dwTmp, 4);
         // dwMorphology
         dwTmp = sm->get(id, champ_dwMorphology).dwValue;
-        fi.write((char *)&wTmp, 4);
+        fi.write((char *)&dwTmp, 4);
     }
     // phdr de fin (38 byte)
     fi.write("EOP", 3);
