@@ -1195,6 +1195,11 @@ void SampleUtils::fillKaiserBesselWindow(double * window, int size, double alpha
 void SampleUtils::fillSincTable(float * table, int order, int subdivisions, double kaiserBesserAlpha)
 {
     double v, posI, posIshifted;
+    double alphaPi = M_PI * kaiserBesserAlpha;
+    double multiplier = 1.0 / besselI0(alphaPi);
+    double twoInvOrder = 2.0 / (double)order;
+    double dTmp;
+    double invSubDivisions = 1.0 / (double)subdivisions;
 
     // i2: Offset in terms of fractional samples ('subsamples')
     for (int i2 = 0; i2 < subdivisions; ++i2)
@@ -1202,7 +1207,7 @@ void SampleUtils::fillSincTable(float * table, int order, int subdivisions, doub
         // i: Offset in terms of whole samples
         for (int i = 0; i < order; ++i)
         {
-            posI = (double)i + (double)(subdivisions - i2 - 1) / (double)subdivisions;
+            posI = (double)i + (double)(subdivisions - i2 - 1) * invSubDivisions;
             posIshifted = posI - (double)order / 2.0;
 
             // sinc(0) cannot be calculated straightforward (limit needed for 0/0)
@@ -1211,9 +1216,8 @@ void SampleUtils::fillSincTable(float * table, int order, int subdivisions, doub
                 v = sin(posIshifted * M_PI) / (posIshifted * M_PI);
 
                 // Kaiser-bessel window
-                double alphaPi = M_PI * kaiserBesserAlpha;
-                double dTmp = 2 * posI / (double)order - 1.;
-                v *= besselI0(alphaPi * sqrt(1. - dTmp * dTmp)) / besselI0(alphaPi);
+                dTmp = twoInvOrder * posI - 1.;
+                v *= besselI0(alphaPi * sqrt(1. - dTmp * dTmp)) * multiplier;
             }
             else
                 v = 1.0;
