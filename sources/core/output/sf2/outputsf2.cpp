@@ -503,9 +503,12 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
         // Copy each sample
         id2.indexElt = i;
         dwTmp = 2 * sm->get(id2, champ_dwLength).dwValue;
-        fData = sm->getData(id2);
-        convertTo16bit(fData, baData);
-        fi.write(baData.constData(), dwTmp);
+
+        quint32 sampleLength;
+        qint16 * data16;
+        quint8 * data24;
+        sm->getData(id2, sampleLength, data16, data24, false);
+        fi.write((char *)data16, dwTmp);
 
         // Add 46 null sample points
         charTmp = '\0';
@@ -537,9 +540,12 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
             // copie de chaque sample
             id2.indexElt = i;
             dwTmp = sm->get(id2, champ_dwLength).dwValue;
-            fData = sm->getData(id2);
-            convertTo24bit(fData, baData);
-            fi.write(baData.constData(), dwTmp);
+
+            quint32 sampleLength;
+            qint16 * data16;
+            quint8 * data24;
+            sm->getData(id2, sampleLength, data16, data24, false);
+            fi.write((char *)data24, dwTmp);
 
             // Add 46 null sample points
             charTmp = '\0';

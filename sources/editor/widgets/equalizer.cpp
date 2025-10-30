@@ -94,7 +94,7 @@ void Equalizer::on_pushEgaliser_clicked()
         if (sm->isValid(id) && !listprocessedID.contains(id))
         {
             listprocessedID << id;
-            QVector<float> baData = sm->getData(id);
+            QVector<float> baData = sm->getDataFloat(id);
             baData = SampleUtils::EQ(baData, sm->get(id, champ_dwSampleRate).dwValue, gatherEqVariables());
             sm->set(id, baData);
 
@@ -105,7 +105,7 @@ void Equalizer::on_pushEgaliser_clicked()
                 if (sm->isValid(id2) && !listprocessedID.contains(id2))
                 {
                     listprocessedID << id2;
-                    QVector<float> baData = sm->getData(id2);
+                    QVector<float> baData = sm->getDataFloat(id2);
                     baData = SampleUtils::EQ(baData, sm->get(id2, champ_dwSampleRate).dwValue, gatherEqVariables());
                     sm->set(id2, baData);
                 }

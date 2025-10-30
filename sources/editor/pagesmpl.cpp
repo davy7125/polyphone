@@ -191,7 +191,7 @@ void PageSmpl::updateInterface(QString editingSource)
     else
     {
         ui->waveDisplay->displayMultipleSelection(false);
-        QVector<float> baData = _sf2->getData(id);
+        QVector<float> baData = _sf2->getDataFloat(id);
         ui->waveDisplay->setData(baData, sampleRate); // prend du temps
         ui->waveDisplay->setStartLoop(startLoop, false);
         ui->waveDisplay->setEndLoop(endLoop, false);
@@ -814,7 +814,7 @@ void PageSmpl::setRateElt(EltID id, quint32 echFinal)
 {
     // Modification échantillonnage
     quint32 echInit = _sf2->get(id, champ_dwSampleRate).dwValue;
-    QVector<float> baData = _sf2->getData(id);
+    QVector<float> baData = _sf2->getDataFloat(id);
     baData = SampleUtils::resampleMono(baData, echInit, echFinal);
     _sf2->set(id, baData);
     AttributeValue val;
@@ -1102,7 +1102,7 @@ bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end, EltID &createdSmp
         wBps = 24;
     else
         wBps = 16;
-    QVector<float> vData = _sf2->getData(id);
+    QVector<float> vData = _sf2->getDataFloat(id);
 
     // Possibly adapt start and end of loop
     quint32 startLoop = _sf2->get(id, champ_dwStartLoop).dwValue;
@@ -1221,7 +1221,7 @@ void PageSmpl::updateLoopQuality()
     QList<EltID> ids = _currentIds.getSelectedIds(elementSmpl);
     if (ids.size() == 1 && ui->spinStartLoop->value() != ui->spinEndLoop->value())
     {
-        QVector<float> vData = _sf2->getData(ids.first());
+        QVector<float> vData = _sf2->getDataFloat(ids.first());
         float loopQuality = SampleUtils::computeLoopQuality(vData, ui->spinStartLoop->value(), ui->spinEndLoop->value(), 3, false);
         if (loopQuality < 0.05)
             ui->iconLoopWarning->setPixmap(QPixmap());

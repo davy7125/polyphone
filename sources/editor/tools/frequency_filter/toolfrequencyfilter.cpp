@@ -40,7 +40,7 @@ void ToolFrequencyFilter::process(SoundfontManager * sm, EltID id, AbstractToolP
     QVector<float> dValues = params->getCurve();
 
     // Get data and sample rate of the sample
-    QVector<float> vData = sm->getData(id);
+    QVector<float> vData = sm->getDataFloat(id);
     quint32 dwSmplRate = sm->get(id, champ_dwSampleRate).dwValue;
 
     // Apply the filter and update data

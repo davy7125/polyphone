@@ -57,7 +57,7 @@ void ToolFrequencyFilter_gui::updateInterface(AbstractToolParameters * parameter
     {
         EltID id = ids[i];
         quint32 sampleRate = sm->get(id, champ_dwSampleRate).dwValue;
-        QVector<float> vData = sm->getData(id);
+        QVector<float> vData = sm->getDataFloat(id);
 
         // Get the Fourier transform of the sample
         QVector<float> fData = SampleUtils::getFourierTransform(vData);

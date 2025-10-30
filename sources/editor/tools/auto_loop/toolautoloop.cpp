@@ -65,7 +65,7 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
     _mutex.unlock();
 
     // Get data, sample rate, start and end loop of sample 1
-    QVector<float> vData = sm->getData(id);
+    QVector<float> vData = sm->getDataFloat(id);
     quint32 dwSmplRate = sm->get(id, champ_dwSampleRate).dwValue;
     quint32 startLoop = sm->get(id, champ_dwStartLoop).dwValue;
     quint32 endLoop = sm->get(id, champ_dwEndLoop).dwValue;
@@ -81,7 +81,7 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
         quint32 dwSmplRate2 = sm->get(id2, champ_dwSampleRate).dwValue;
         if (dwSmplRate2 == dwSmplRate)
         {
-            QVector<float> vData2 = sm->getData(id2);
+            QVector<float> vData2 = sm->getDataFloat(id2);
             quint32 startLoop2 = sm->get(id2, champ_dwStartLoop).dwValue;
             quint32 endLoop2 = sm->get(id2, champ_dwEndLoop).dwValue;
 

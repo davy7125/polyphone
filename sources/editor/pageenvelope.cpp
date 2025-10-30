@@ -289,7 +289,7 @@ void PageEnvelope::addSample(EltID idInstSmpl)
     idSmpl.indexElt = _sf2->get(idInstSmpl, champ_sampleID).wValue;
 
     // Data
-    QVector<float> vData = _sf2->getData(idSmpl);
+    QVector<float> vData = _sf2->getDataFloat(idSmpl);
 
     // Parameters
     int sampleRate = _sf2->get(idSmpl, champ_dwSampleRate).dwValue;

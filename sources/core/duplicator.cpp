@@ -321,7 +321,7 @@ EltID Duplicator::copySmpl(EltID idSource, EltID idDest)
     if (index == -1 || (_copieSmpl != IGNORER && _copieSmpl != IGNORER_TOUT))
     {
         // Sample configuration
-        _sm->set(idDest, _sm->getData(idSource));
+        _sm->set(idDest, _sm->getDataFloat(idSource));
         _sm->set(idDest, champ_dwLength, _sm->get(idSource, champ_dwLength));
         _sm->set(idDest, champ_dwSampleRate, _sm->get(idSource, champ_dwSampleRate));
         _sm->set(idDest, champ_dwStartLoop, _sm->get(idSource, champ_dwStartLoop));

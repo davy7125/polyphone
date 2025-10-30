@@ -74,7 +74,7 @@ void GraphicsFourier::setCurrentIds(IdList ids)
         this->_dwSmplRate = SoundfontManager::getInstance()->get(_currentIds[0], champ_dwSampleRate).dwValue;
 
         // Load data
-        _fData = SoundfontManager::getInstance()->getData(_currentIds[0]);
+        _fData = SoundfontManager::getInstance()->getDataFloat(_currentIds[0]);
 
         // Menu
         _menu->actions()[0]->setEnabled(true);

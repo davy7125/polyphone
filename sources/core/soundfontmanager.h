@@ -54,7 +54,8 @@ public:
     AttributeValue get(EltID id, AttributeType champ);
     QString getQstr(EltID id, AttributeType champ);
     Sound *getSound(EltID id);
-    QVector<float> getData(EltID idSmpl);
+    void getData(EltID idSmpl, quint32 &sampleLength, qint16 *&data16, quint8 *&data24, bool getCopy = false);
+    QVector<float> getDataFloat(EltID idSmpl);
     int set(EltID id, AttributeType champ, AttributeValue value);
     int set(EltID id, AttributeType champ, QString qStr);
     int set(EltID idSmpl, QVector<float> data);

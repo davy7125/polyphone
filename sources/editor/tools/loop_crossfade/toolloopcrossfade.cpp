@@ -38,7 +38,7 @@ void ToolLoopCrossfade::process(SoundfontManager * sm, EltID id, AbstractToolPar
     ToolLoopCrossfade_parameters * params = dynamic_cast<ToolLoopCrossfade_parameters *>(parameters);
 
     // Get sample data
-    QVector<float> vData = sm->getData(id);
+    QVector<float> vData = sm->getDataFloat(id);
     quint32 sampleRate = sm->get(id, champ_dwSampleRate).dwValue;
     quint32 loopStart = sm->get(id, champ_dwStartLoop).dwValue;
     quint32 loopEnd = sm->get(id, champ_dwEndLoop).dwValue;

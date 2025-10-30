@@ -83,7 +83,7 @@ void ToolTrimStart::trim(IdList ids)
     for (int i = 0; i < ids.count(); i++)
     {
         quint32 tmp, maxTmp;
-        vDataList << sm->getData(ids[i]);
+        vDataList << sm->getDataFloat(ids[i]);
         SampleUtils::removeBlankStep1(vDataList[i], tmp, maxTmp);
 
         if (i == 0 || tmp > pos)

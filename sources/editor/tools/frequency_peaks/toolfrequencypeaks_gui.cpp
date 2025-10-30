@@ -42,7 +42,7 @@ public:
     {
         // Get raw data
         SoundfontManager * sm = SoundfontManager::getInstance();
-        QVector<float> vData = sm->getData(_id);
+        QVector<float> vData = sm->getDataFloat(_id);
 
         // Compute the peaks
         QVector<float> vectFourier;
