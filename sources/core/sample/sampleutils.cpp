@@ -58,7 +58,7 @@ void SampleUtils::floatToInt24(const QVector<float> data, qint16 *& data16, quin
     }
 }
 
-QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, quint32 echFinal)
+QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, double echFinal)
 {
     // Parameters
     double alpha = 3;
@@ -66,8 +66,8 @@ QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, q
     quint32 subDivisions = 1024;
 
     // Prepare the input signal
-    double ratio = (double)echInit / (double)echFinal;
-    double lowPassFilterFrequency = 0.9 * qMin(1.0, 1.0 / ratio) * echInit;
+    double ratio = echInit / echFinal;
+    double lowPassFilterFrequency = 0.9 * qMin(echFinal, echInit) * 0.5;
     vData = SampleUtils::bandFilter(vData, echInit, lowPassFilterFrequency, 0, -1);
 
     // Initialize the output
