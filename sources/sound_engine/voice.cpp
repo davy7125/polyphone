@@ -30,13 +30,17 @@
 volatile int Voice::s_referencePitch = 4400;
 volatile float Voice::s_temperament[12] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 volatile int Voice::s_temperamentRelativeKey = 0;
-float Voice::s_sinc_tables[7][RESAMPLING_SUBDIVISION][RESAMPLING_ORDER];
+float Voice::s_sinc_tables[8][RESAMPLING_SUBDIVISION][RESAMPLING_ORDER];
 float Voice::s_floatConversionCoef24;
 
 void Voice::prepareTables()
 {
-    for (int i = 0; i < 7; i++)
-        SampleUtils::fillSincTable(&s_sinc_tables[i][0][0], RESAMPLING_ORDER, RESAMPLING_SUBDIVISION, 1.2 + 0.4 * i);
+    // Create sinc tables with different windows (polyphase algorithm)
+    // beta = 5   => Hamming window
+    // beta = 6   => Hann window
+    // beta = 8.6 => Blackman window
+    for (int i = 0; i < 8; i++)
+        SampleUtils::fillSincTable(&s_sinc_tables[i][0][0], RESAMPLING_ORDER, RESAMPLING_SUBDIVISION, 3 + i);
 
     // Integer => float conversion
     s_floatConversionCoef24 = 1.0f / (0.5f + static_cast<float>(0x7FFFFF));
@@ -89,9 +93,10 @@ void Voice::initialize(InstPrst * prst, Division * prstDiv, InstPrst * inst, Div
     smpl->_sound.getData(_dataSmplLength, _dataSmpl16, _dataSmpl24, false, _voiceParam->getType() != 0 /* copy data at the sample level */);
     if (_dataSmpl24 == nullptr)
         _dataSmpl24 = (quint8 *)_dataSmpl16;
-    _sincWindow = s_sinc_tables[smpl->_sound.getUInt32(champ_byOriginalPitch) / 19];
+    _sincWindow = nullptr;
 
     _smplRate = smpl->_sound.getUInt32(champ_dwSampleRate);
+    _sampleRootKey = smpl->_sound.getUInt32(champ_byOriginalPitch);
     _audioSmplRate = audioSmplRate;
     _audioSmplRateInv = 1.0f / _audioSmplRate;
     _gain = 0.0f;
@@ -198,6 +203,8 @@ void Voice::generateData(float * data, quint32 len)
         float deltaPitchFixed = -1731.234f /* -1200 / ln(2) */ *
                                     qLn(static_cast<double>(_audioSmplRate) * 4400.f / (_smplRate * s_referencePitch)) +
                                 (playedNote - v_rootkey) * v_scaleTune + (temperamentFineTune + static_cast<float>(v_fineTune)) + 100.0f * v_coarseTune;
+        if (_sincWindow == nullptr)
+            _sincWindow = s_sinc_tables[whichSincTable(_sampleRootKey, deltaPitchFixed)];
 
         // Loop
         quint32 loopStart = _voiceParam->getPosition(champ_dwStartLoop);
@@ -487,4 +494,16 @@ void Voice::finish()
     if (_voiceParam->getKey() == -1)
         emit readFinished(_token);
     _isFinished = true;
+}
+
+int Voice::whichSincTable(unsigned char sampleRootKey, double shift)
+{
+    const double changeByRootKey = 0.03;
+    const double changeByShift = 0.3;
+    int index = static_cast<int>(3.0 + changeByRootKey * ((double)sampleRootKey - 64.) + changeByShift * shift + 0.5);
+    if (index < 0)
+        return 0;
+    if (index > 7)
+        return 7;
+    return index;
 }

@@ -61,7 +61,7 @@ void SampleUtils::floatToInt24(const QVector<float> data, qint16 *& data16, quin
 QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, double echFinal)
 {
     // Parameters
-    double alpha = 3;
+    double beta = 6;
     quint32 order = 64; // Must be a multiple of 4
     quint32 subDivisions = 1024;
 
@@ -85,7 +85,7 @@ QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, d
 
     // SinC table
     float * sincWindow = new float[order * subDivisions];
-    fillSincTable(sincWindow, order, subDivisions, alpha);
+    fillSincTable(sincWindow, order, subDivisions, beta);
 
     // Resample
     const float * dataF = vData.constData();
@@ -1130,11 +1130,10 @@ void SampleUtils::regimePermanent(QVector<float> data, quint32 dwSmplRate, quint
     posEnd += sizePeriode;
 }
 
-void SampleUtils::fillSincTable(float * table, int order, int subdivisions, double kaiserBesserAlpha)
+void SampleUtils::fillSincTable(float * table, int order, int subdivisions, double kaiserBesserBeta)
 {
     double v, posI, posIshifted;
-    double alphaPi = M_PI * kaiserBesserAlpha;
-    double multiplier = 1.0 / besselI0(alphaPi);
+    double multiplier = 1.0 / besselI0(kaiserBesserBeta);
     double twoInvOrder = 2.0 / (double)order;
     double dTmp;
     double invSubDivisions = 1.0 / (double)subdivisions;
@@ -1155,7 +1154,7 @@ void SampleUtils::fillSincTable(float * table, int order, int subdivisions, doub
 
                 // Kaiser-bessel window
                 dTmp = twoInvOrder * posI - 1.;
-                v *= besselI0(alphaPi * sqrt(1. - dTmp * dTmp)) * multiplier;
+                v *= besselI0(kaiserBesserBeta * sqrt(1. - dTmp * dTmp)) * multiplier;
             }
             else
                 v = 1.0;
