@@ -211,6 +211,7 @@ void PageSf2::countElements()
     QString greenStr = "QLabel { color : " + ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::WINDOW_BACKGROUND).name() + "; }";
     QString redStr = "QLabel { color : " + ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND).name() +
             "; font-weight: bold; }";
+    QString normalStr = "QLabel { color : " + ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name() + "; font-weight: normal; }";
 
     // Display
     if (unusedSmpl)
@@ -221,7 +222,7 @@ void PageSf2::countElements()
     else
     {
         ui->label_nbSmpl->setText(QString::number(usedSmpl));
-        ui->label_nbSmpl->setStyleSheet("");
+        ui->label_nbSmpl->setStyleSheet(normalStr);
     }
     if (unusedInst)
     {
@@ -231,7 +232,7 @@ void PageSf2::countElements()
     else
     {
         ui->label_nbInst->setText(QString::number(usedInst));
-        ui->label_nbInst->setStyleSheet("");
+        ui->label_nbInst->setStyleSheet(normalStr);
     }
     ui->label_nbPrst->setText(QString::number(usedPrst));
 
