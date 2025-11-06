@@ -40,7 +40,7 @@ void Voice::prepareTables()
     // beta = 6   => Hann window
     // beta = 8.6 => Blackman window
     for (int i = 0; i < 8; i++)
-        SampleUtils::fillSincTable(&s_sinc_tables[i][0][0], RESAMPLING_ORDER, RESAMPLING_SUBDIVISION, 3 + i);
+        SampleUtils::fillSincTable(&s_sinc_tables[i][0][0], RESAMPLING_ORDER, RESAMPLING_SUBDIVISION, 4.3 + 0.5 * i);
 
     // Integer => float conversion
     s_floatConversionCoef24 = 1.0f / (0.5f + static_cast<float>(0x7FFFFF));
