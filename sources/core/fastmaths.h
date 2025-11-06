@@ -52,6 +52,7 @@ public:
     static void multiplyAdd(float* __restrict data, const float* __restrict dataToMultiplyAndAdd, unsigned int size, float coeff);
     static void multiply(float* __restrict data, const float* __restrict dataToMultiply, unsigned int size, float coeff);
     static float multiply8(const float * __restrict coeffs, const qint16 * __restrict srcData16, const quint8 * __restrict srcData24);
+    static float multiply4(const float * __restrict coeffs, const float * __restrict srcDataF);
 
 private:
     static float getSinValue(float value); // Range [0; 0.5] for [0; pi / 2]

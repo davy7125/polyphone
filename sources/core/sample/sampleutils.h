@@ -32,7 +32,8 @@ class SampleUtils
 public:
     static QVector<float> int24ToFloat(const qint16 * data16, const quint8 * data24, quint32 length);
     static void floatToInt24(const QVector<float> data, qint16 *& data16, quint8 *& data24);
-    static QVector<float> resampleMono(QVector<float> vData, double echInit, quint32 echFinal);
+    static QVector<float> resampleMono(QVector<float> vData, double echInit, double echFinal);
+    static void fillSincTable(float * table, int order, int subdivisions, double kaiserBesserBeta);
     static QVector<float> bandFilter(QVector<float> vData, double dwSmplRate, double fBas, double fHaut, int ordre);
     static QVector<float> cutFilter(QVector<float> vData, quint32 dwSmplRate, QVector<float> dValues, int maxFreq);
     static QVector<float> EQ(QVector<float> vData, quint32 dwSmplRate, QVector<int> eqGains);
@@ -69,9 +70,7 @@ private:
     static float sum(QVector<float> vData);
     static float sumSquare(QVector<float> vData);
     static void regimePermanent(QVector<float> data, quint32 dwSmplRate, quint32 &posStart, quint32 &posEnd, quint32 nbOK, float coef);
-    static double sinc(double x);
-    static void KBDWindow(double* window, int size, double alpha);
-    static double BesselI0(double x);
+    static double besselI0(double x);
     static Complex * FFT(Complex * x, quint32 N); // N must be a power of 2
     static Complex * IFFT(Complex * x, quint32 N); // N must be a power of 2
     static float getDiffForLoopQuality(const float *data, quint32 pos1, quint32 pos2);

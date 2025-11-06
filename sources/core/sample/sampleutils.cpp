@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "sampleutils.h"
+#include "fastmaths.h"
 #include "utils.h"
 #include <QMessageBox>
 
@@ -57,75 +58,55 @@ void SampleUtils::floatToInt24(const QVector<float> data, qint16 *& data16, quin
     }
 }
 
-QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, quint32 echFinal)
+QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, double echFinal)
 {
-    // Paramètres
-    double alpha = 3;
-    qint32 nbPoints = 10;
+    // Parameters
+    double beta = 6;
+    quint32 order = 64; // Must be a multiple of 4
+    quint32 subDivisions = 1024;
 
-    // Préparation signal d'entrée
-    if (echFinal < echInit)
-    {
-        // Filtre passe bas (voir sinc filter)
-        vData = SampleUtils::bandFilter(vData, echInit, echFinal / 2, 0, -1);
-    }
+    // Prepare the input signal
+    double ratio = echInit / echFinal;
+    double lowPassFilterFrequency = 0.9 * qMin(echFinal, echInit) * 0.5;
+    vData = SampleUtils::bandFilter(vData, echInit, lowPassFilterFrequency, 0, -1);
+
+    // Initialize the output
     quint32 sizeInit = static_cast<quint32>(vData.size());
-    const float * dataF = vData.constData();
-
-    // Création fenêtre Kaiser-Bessel 2048 points
-    double kbdWindow[2048];
-    KBDWindow(kbdWindow, 2048, alpha);
-
-    // Nombre de points à trouver
-    quint32 sizeFinal = static_cast<quint32>(1. + (sizeInit - 1.0) * echFinal / echInit);
+    quint32 sizeFinal = 1 + static_cast<quint32>((double)(sizeInit - 1) / ratio);
     QVector<float> dataRet(sizeFinal);
+    dataRet.fill(0);
 
-    // Calcul des points par interpolation à bande limitée
-    float pos, delta;
-    qint32 pos1, pos2;
-    float * sincCoef = new float[1 + 2 * static_cast<quint32>(nbPoints)];
+    // Prepend / append extra 0 to the input for the resampling
+    for (quint32 i = 0; i < order / 2; i++)
+    {
+        vData.prepend(0);
+        vData.append(0);
+    }
+
+    // SinC table
+    float * sincWindow = new float[order * subDivisions];
+    fillSincTable(sincWindow, order, subDivisions, beta);
+
+    // Resample
+    const float * dataF = vData.constData();
+    double currentPosition = 0;
+    quint32 currentPositionWhole = 0;
+    quint32 currentPositionFraction = 0;
     float valMax = 0;
     for (quint32 i = 0; i < sizeFinal; i++)
     {
-        // Position à interpoler
-        pos = (echInit * i) / echFinal;
+        for (quint32 j = 0; j < order; j += 4)
+            dataRet[i] += FastMaths::multiply4(&sincWindow[currentPositionFraction * order + j], &dataF[currentPositionWhole + j]);
 
-        // Calcul des coefs
-        for (qint32 j = -nbPoints; j <= nbPoints; j++)
-        {
-            delta = pos - floor(pos);
-
-            // Calcul du sinus cardinal
-            sincCoef[j + nbPoints] = sinc(M_PI * (static_cast<double>(j) - delta));
-
-            // Application fenêtre
-            delta = static_cast<double>(j + nbPoints - delta) / (1 + 2 * nbPoints) * 2048;
-            pos1 = static_cast<qint32>(floor(delta) + .5);
-            if (pos1 < 0)
-                pos1 = 0;
-            else if (pos1 > 2047)
-                pos1 = 2047;
-            pos2 = static_cast<qint32>(ceil (delta) + .5);
-            if (pos2 < 0)
-                pos2 = 0;
-            else if (pos2 > 2047)
-                pos2 = 2047;
-
-            sincCoef[j + nbPoints] *= kbdWindow[pos1] * (ceil((delta)) - delta)
-                    + kbdWindow[pos2] * (1.f - ceil((delta)) + delta);
-        }
-
-        // Valeur
-        dataRet[i] = 0;
-        for (int j = qMax(0, static_cast<qint32>(pos) - nbPoints);
-             j <= qMin(static_cast<qint32>(sizeInit) - 1, static_cast<qint32>(pos) + nbPoints); j++)
-            dataRet[i] += sincCoef[j - static_cast<qint32>(pos) + nbPoints] * dataF[j];
+        currentPosition += ratio;
+        currentPositionWhole += (int)currentPosition;
+        currentPosition -= (int)currentPosition;
+        currentPositionFraction = static_cast<int>(currentPosition * subDivisions) % subDivisions;
 
         valMax = qMax(valMax, qAbs(dataRet[i]));
     }
-    delete [] sincCoef;
 
-    // Limitation si besoin
+    // Possible clipping
     if (valMax > 1.0f)
     {
         float coef = 1.0f / valMax;
@@ -133,8 +114,7 @@ QVector<float> SampleUtils::resampleMono(QVector<float> vData, double echInit, q
             dataRet[i] *= coef;
     }
 
-    // Filtre passe bas après resampling
-    dataRet = SampleUtils::bandFilter(dataRet, echFinal, echFinal / 2, 0, -1);
+    delete [] sincWindow;
     return dataRet;
 }
 
@@ -249,7 +229,7 @@ QVector<float> SampleUtils::bandFilter(QVector<float> vData, double dwSmplRate, 
     for (unsigned long i = 0; i < size; i++)
         cpxData[i].real(cpxData[i].real() / size);
 
-    // Retour en QByteArray
+    // Final conversion
     QVector<float> vRet = fromComplexToFloat(cpxData, vData.size());
     delete [] cpxData;
     return vRet;
@@ -271,12 +251,12 @@ QVector<float> SampleUtils::cutFilter(QVector<float> vData, quint32 dwSmplRate, 
     {
         // Left side
         float module = sqrt(fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag() +
-                             fc_sortie_fft[i].real() * fc_sortie_fft[i].real());
+                            fc_sortie_fft[i].real() * fc_sortie_fft[i].real());
         moduleMax = qMax(moduleMax, module);
 
         // Right side
         module = sqrt(fc_sortie_fft[size-1-i].imag() * fc_sortie_fft[size-1-i].imag() +
-                fc_sortie_fft[size-1-i].real() * fc_sortie_fft[size-1-i].real());
+                      fc_sortie_fft[size-1-i].real() * fc_sortie_fft[size-1-i].real());
         moduleMax = qMax(moduleMax, module);
     }
 
@@ -287,9 +267,9 @@ QVector<float> SampleUtils::cutFilter(QVector<float> vData, quint32 dwSmplRate, 
         // Current frequency and current module
         float freq = static_cast<float>(dwSmplRate * i) / (size - 1);
         float module1 = sqrt(fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag() +
-                              fc_sortie_fft[i].real() * fc_sortie_fft[i].real());
+                             fc_sortie_fft[i].real() * fc_sortie_fft[i].real());
         float module2 = sqrt(fc_sortie_fft[size - 1 - i].imag() * fc_sortie_fft[size - 1 - i].imag() +
-                fc_sortie_fft[size - 1 - i].real() * fc_sortie_fft[size - 1 - i].real());
+                             fc_sortie_fft[size - 1 - i].real() * fc_sortie_fft[size - 1 - i].real());
 
         // Module max
         float limit = moduleMax;
@@ -407,11 +387,11 @@ QVector<float> SampleUtils::getFourierTransform(QVector<float> input)
     for (quint32 i = 0; i < size / 2; i++)
     {
         vectFourier[static_cast<int>(i)] =
-                static_cast<float>(0.5 * qSqrt(fc_sortie_fft[i].real() * fc_sortie_fft[i].real() +
-                                               fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag()));
+            static_cast<float>(0.5 * qSqrt(fc_sortie_fft[i].real() * fc_sortie_fft[i].real() +
+                                           fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag()));
         vectFourier[static_cast<int>(i)] +=
-                static_cast<float>(0.5 * qSqrt(fc_sortie_fft[size-i-1].real() * fc_sortie_fft[size-i-1].real() +
-                fc_sortie_fft[size-i-1].imag() * fc_sortie_fft[size-i-1].imag()));
+            static_cast<float>(0.5 * qSqrt(fc_sortie_fft[size-i-1].real() * fc_sortie_fft[size-i-1].real() +
+                                           fc_sortie_fft[size-i-1].imag() * fc_sortie_fft[size-i-1].imag()));
     }
     delete [] fc_sortie_fft;
 
@@ -731,8 +711,8 @@ QVector<float> SampleUtils::loopStep2(QVector<float> vData, quint32 loopStart, q
     {
         dTmp = static_cast<float>(i) / static_cast<float>(loopCrossfadeLength - 1);
         fData[loopEnd - loopCrossfadeLength + i] =
-                (1.f - dTmp) * fData[loopEnd - loopCrossfadeLength + i] +
-                dTmp * fData[loopStart - loopCrossfadeLength + i];
+            (1.f - dTmp) * fData[loopEnd - loopCrossfadeLength + i] +
+            dTmp * fData[loopStart - loopCrossfadeLength + i];
     }
 
     if (withTrimEnd)
@@ -847,7 +827,7 @@ int SampleUtils::lastLettersToRemove(QString str1, QString str2)
     QString fin2_1 = str2.right(1);
 
     if ((fin1_3.compare("(r)") == 0 && fin2_3.compare("(l)") == 0) ||
-            (fin1_3.compare("(l)") == 0 && fin2_3.compare("(r)") == 0))
+        (fin1_3.compare("(l)") == 0 && fin2_3.compare("(r)") == 0))
         nbLetters = 3;
     else if (((fin1_1.compare("r") == 0 && fin2_1.compare("l") == 0) ||
               (fin1_1.compare("l") == 0 && fin2_1.compare("r") == 0)) &&
@@ -855,9 +835,9 @@ int SampleUtils::lastLettersToRemove(QString str1, QString str2)
     {
         nbLetters = 1;
         if ((fin1_2.compare("-") == 0 && fin2_2.compare("-") == 0) ||
-                (fin1_2.compare("_") == 0 && fin2_2.compare("_") == 0) ||
-                (fin1_2.compare(".") == 0 && fin2_2.compare(".") == 0) ||
-                (fin1_2.compare(" ") == 0 && fin2_2.compare(" ") == 0))
+            (fin1_2.compare("_") == 0 && fin2_2.compare("_") == 0) ||
+            (fin1_2.compare(".") == 0 && fin2_2.compare(".") == 0) ||
+            (fin1_2.compare(" ") == 0 && fin2_2.compare(" ") == 0))
             nbLetters = 2;
     }
 
@@ -1150,83 +1130,76 @@ void SampleUtils::regimePermanent(QVector<float> data, quint32 dwSmplRate, quint
     posEnd += sizePeriode;
 }
 
-double SampleUtils::sinc(double x)
+void SampleUtils::fillSincTable(float * table, int order, int subdivisions, double kaiserBesserBeta)
 {
-    double epsilon0 = 0.32927225399135962333569506281281311031656150598474e-9L;
-    double epsilon2 = qSqrt(epsilon0);
-    double epsilon4 = qSqrt(epsilon2);
+    double v, posI, posIshifted;
+    double multiplier = 1.0 / besselI0(kaiserBesserBeta);
+    double twoInvOrder = 2.0 / (double)order;
+    double dTmp;
+    double invSubDivisions = 1.0 / (double)subdivisions;
 
-    if (qAbs(x) >= epsilon4)
-        return(qSin(x)/x);
-    else
+    // i2: Offset in terms of fractional samples ('subsamples')
+    for (int i2 = 0; i2 < subdivisions; ++i2)
     {
-        // x très proche de 0, développement limité ordre 0
-        double result = 1;
-        if (qAbs(x) >= epsilon0)
+        // i: Offset in terms of whole samples
+        for (int i = 0; i < order; ++i)
         {
-            double x2 = x*x;
+            posI = (double)i + (double)(subdivisions - i2 - 1) * invSubDivisions;
+            posIshifted = posI - (double)order / 2.0;
 
-            // x un peu plus loin de 0, développement limité ordre 2
-            result -= x2 / 6.;
-
-            if (qAbs(x) >= epsilon2)
+            // sinc(0) cannot be calculated straightforward (limit needed for 0/0)
+            if (fabs(posIshifted) > 0.000001)
             {
-                // x encore plus loin de 0, développement limité ordre 4
-                result += (x2 * x2) / 120.;
+                v = sin(posIshifted * M_PI) / (posIshifted * M_PI);
+
+                // Kaiser-bessel window
+                dTmp = twoInvOrder * posI - 1.;
+                v *= besselI0(kaiserBesserBeta * sqrt(1. - dTmp * dTmp)) * multiplier;
             }
+            else
+                v = 1.0;
+
+            table[i2 * order + i] = (float)v;
         }
-        return(result);
     }
 }
 
-// Keser-Bessel window
-void SampleUtils::KBDWindow(double* window, int size, double alpha)
+double SampleUtils::besselI0(double x)
 {
-    double sumvalue = 0.;
-    int i;
+    // Computation based on Abramowitz & Stegun work
+    double ax = std::fabs(x);
+    double y;
+    double result;
 
-    for (i = 0; i < size/2; i++)
+    if (ax < 3.75)
     {
-        sumvalue += BesselI0(M_PI * alpha * sqrt(1. - pow(4.0*i/size - 1., 2)));
-        window[i] = sumvalue;
+        // Approximation for |x| < 3.75
+        y = (x / 3.75);
+        y *= y;
+        result = 1.0 + y * (3.5156229 +
+                            y * (3.0899424 +
+                                 y * (1.2067492 +
+                                      y * (0.2659732 +
+                                           y * (0.0360768 +
+                                                y * (0.0045813))))));
     }
-
-    // need to add one more value to the nomalization factor at size/2:
-    sumvalue += BesselI0(M_PI * alpha * sqrt(1. - pow(4.0*(size/2) / size-1., 2)));
-
-    // normalize the window and fill in the righthand side of the window:
-    for (i = 0; i < size/2; i++)
-    {
-        window[i] = sqrt(window[i]/sumvalue);
-        window[size-1-i] = window[i];
-    }
-}
-
-double SampleUtils::BesselI0(double x)
-{
-    double denominator;
-    double numerator;
-    double z;
-
-    if (x == 0.0)
-        return 1.0;
     else
     {
-        z = x * x;
-        numerator = (z* (z* (z* (z* (z* (z* (z* (z* (z* (z* (z* (z* (z*
-                                                                     (z* 0.210580722890567e-22  + 0.380715242345326e-19 ) +
-                                                                     0.479440257548300e-16) + 0.435125971262668e-13 ) +
-                                                             0.300931127112960e-10) + 0.160224679395361e-7  ) +
-                                                     0.654858370096785e-5)  + 0.202591084143397e-2  ) +
-                                             0.463076284721000e0)   + 0.754337328948189e2   ) +
-                                     0.830792541809429e4)   + 0.571661130563785e6   ) +
-                             0.216415572361227e8)   + 0.356644482244025e9   ) +
-                     0.144048298227235e10);
-        denominator = (z*(z*(z-0.307646912682801e4)+
-                          0.347626332405882e7)-0.144048298227235e10);
+        // Approximation for |x| >= 3.75
+        y = 3.75 / ax;
+        result = (std::exp(ax) / std::sqrt(ax)) *
+                 (0.39894228 +
+                  y * (0.01328592 +
+                       y * (0.00225319 +
+                            y * (-0.00157565 +
+                                 y * (0.00916281 +
+                                      y * (-0.02057706 +
+                                           y * (0.02635537 +
+                                                y * (-0.01647633 +
+                                                     y * (0.00392377)))))))));
     }
 
-    return -numerator/denominator;
+    return result;
 }
 
 float SampleUtils::computeLoopQuality(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 checkNumber, bool bipolar, float maxValue)

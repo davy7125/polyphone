@@ -2,6 +2,8 @@ polyphone (2.6) unstable; urgency=low
 
   * (new) RPN messages can change the tuning
   * (improvement) faster sound engine
+  * (improvement) more accurate resampling
+  * (improvement) less RAM usage
   * (fix) correct key ranges when saving as sfz
   * (fix) tab widths of the GUI
 

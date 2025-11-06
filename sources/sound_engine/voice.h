@@ -91,13 +91,14 @@ private:
     // Sample playback
     bool _release;
     bool _isFinished;
-    bool _dummy;
+    unsigned char _sampleRootKey;
     quint32 _currentSmplPos, _elapsedSmplPos;
     double _time;
+    float (*_sincWindow)[RESAMPLING_ORDER];
 
     // Saved state for resampling
-    qint16 _srcData16[8]; // The 8th value is 0, necessary for vectorization
-    quint8 _srcData24[8];
+    qint16 _srcData16[RESAMPLING_ORDER];
+    quint8 _srcData24[RESAMPLING_ORDER];
     quint32 _lastDistanceFraction;
     qint32 _moreAvailable;
 
@@ -106,10 +107,6 @@ private:
 
     // Evolving volume coefficient
     float _volumeCoeff;
-
-    void getData(quint32 goOn, quint32 loopStart, quint32 loopEnd, qint16 * &srcData16, quint8 * &srcData24);
-    void getDataWithLoop(quint32 goOn, quint32 loopStart, quint32 loopEnd, qint16 * &srcData16, quint8 * &srcData24);
-    bool biQuadCoefficients(float *coeffs, float freq, float inv_Q);
 
     // Arrays
     quint32 _arrayLength;
@@ -121,8 +118,13 @@ private:
     static volatile int s_referencePitch;
     static volatile float s_temperament[12]; // Fine tune in cents from each key from C to B
     static volatile int s_temperamentRelativeKey;
-    static float s_sinc_table7[2048][8];
+    static float s_sinc_tables[8][RESAMPLING_SUBDIVISION][RESAMPLING_ORDER];
     static float s_floatConversionCoef24;
+
+    void getData(quint32 goOn, quint32 loopStart, quint32 loopEnd, qint16 * &srcData16, quint8 * &srcData24);
+    void getDataWithLoop(quint32 goOn, quint32 loopStart, quint32 loopEnd, qint16 * &srcData16, quint8 * &srcData24);
+    bool biQuadCoefficients(float *coeffs, float freq, float inv_Q);
+    static int whichSincTable(unsigned char sampleRootKey, double shift);
 };
 
 #endif // VOICE_H

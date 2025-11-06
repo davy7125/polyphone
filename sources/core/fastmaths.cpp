@@ -196,7 +196,7 @@ void FastMaths::multiply(float * __restrict data, const float * __restrict dataT
 
 float FastMaths::multiply8(const float * __restrict coeffs, const qint16 * __restrict srcData16, const quint8 * __restrict srcData24)
 {
-    coeffs  = (const float*)__builtin_assume_aligned(coeffs, 32);
+    coeffs = (const float*)__builtin_assume_aligned(coeffs, 32);
 
 #ifdef __aarch64__
     // Load 8 int16 and convert to int32
@@ -234,6 +234,30 @@ float FastMaths::multiply8(const float * __restrict coeffs, const qint16 * __res
            coeffs[3] * static_cast<float>(toInt32(srcData16[3], srcData24[3])) +
            coeffs[4] * static_cast<float>(toInt32(srcData16[4], srcData24[4])) +
            coeffs[5] * static_cast<float>(toInt32(srcData16[5], srcData24[5])) +
-           coeffs[6] * static_cast<float>(toInt32(srcData16[6], srcData24[6]));
+           coeffs[6] * static_cast<float>(toInt32(srcData16[6], srcData24[6])) +
+           coeffs[7] * static_cast<float>(toInt32(srcData16[7], srcData24[7]));
+#endif
+}
+
+float FastMaths::multiply4(const float * __restrict coeffs, const float * __restrict srcDataF)
+{
+    coeffs = (const float*)__builtin_assume_aligned(coeffs, 32);
+    srcDataF = (const float*)__builtin_assume_aligned(srcDataF, 32);
+
+#ifdef __aarch64__
+    // Load all values
+    float32x4_t a = vld1q_f32(coeffs);
+    float32x4_t b = vld1q_f32(srcDataF);
+
+    // Multiply everything
+    float32x4_t prod = vmulq_f32(a, b);
+
+    // Return the sum
+    return vaddvq_f32(prod);
+#else
+    return coeffs[0] * srcDataF[0] +
+           coeffs[1] * srcDataF[1] +
+           coeffs[2] * srcDataF[2] +
+           coeffs[3] * srcDataF[3];
 #endif
 }
