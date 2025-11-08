@@ -39,7 +39,7 @@ void ToolChangeVolume::process(SoundfontManager * sm, EltID id, AbstractToolPara
     ToolChangeVolume_parameters * params = (ToolChangeVolume_parameters *)parameters;
 
     // Sample data
-    QVector<float> vData = sm->getData(id);
+    QVector<float> vData = sm->getDataFloat(id);
 
     // Change the volume
     float db = 0;

@@ -36,7 +36,7 @@ void ToolTrimEnd::process(SoundfontManager * sm, EltID id, AbstractToolParameter
 void ToolTrimEnd::trim(EltID id)
 {
     SoundfontManager * sm = SoundfontManager::getInstance();
-    QVector<float> baData = sm->getData(id);
+    QVector<float> baData = sm->getDataFloat(id);
 
     // End of loop
     qint32 endLoop = sm->get(id, champ_dwEndLoop).dwValue;
