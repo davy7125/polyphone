@@ -25,6 +25,8 @@
 #include "sf2header.h"
 #include <QDataStream>
 #include "utils.h"
+#include "sf2pdtapart.h"
+#include "sf2sdtapart.h"
 
 Sf2Header::Sf2Header() :
     _isValid(false),
@@ -49,6 +51,28 @@ SfVersionTag Sf2Header::getVersion(QString key)
     version.wMajor = 0;
     version.wMinor = 0;
     return version;
+}
+
+void Sf2Header::prepareBeforeWritingData(Sf2SdtaPart * sdtaPart, Sf2PdtaPart * pdtaPart)
+{
+    // Constant strings
+    memcpy(_RIFF, "RIFF", 4);
+    memcpy(_sfbk, "sfbk", 4);
+    memcpy(_LIST, "LIST", 4);
+    memcpy(_INFO, "INFO", 4);
+
+    // Sizes
+    _infoSize.value = 4;
+    foreach (QString block, _infos.keys())
+    {
+        QByteArray data = block == "ICMT" ? _infos[block].toUtf8() : _infos[block].toLatin1();
+        _infoSize.value += 8 + data.size() + 1; // Extra zero
+        _infoSize.value += _infoSize.value % 2; // Even size: another zero
+    }
+    _infoSize.value += 12 * _versions.count();
+
+    _size = 12 + _infoSize.value + sdtaPart->prepareBeforeWritingData() + pdtaPart->prepareBeforeWritingData();
+    sdtaPart->_position = 20 + _infoSize.value;
 }
 
 QDataStream & operator >> (QDataStream &in, Sf2Header &header)
@@ -79,10 +103,10 @@ QDataStream & operator >> (QDataStream &in, Sf2Header &header)
     while (pos < header._infoSize.value)
     {
         // Bloc name
-        char blocName[4];
-        if (in.readRawData(blocName, 4) != 4)
+        char blockName[4];
+        if (in.readRawData(blockName, 4) != 4)
             return in;
-        QString bloc = QString::fromLatin1(blocName, 4);
+        QString block = QString::fromLatin1(blockName, 4);
 
         // Number of bytes to read
         quint32Reversed size;
@@ -90,14 +114,14 @@ QDataStream & operator >> (QDataStream &in, Sf2Header &header)
         if (pos + 8 + size.value > header._infoSize.value)
             return in;
 
-        if (bloc == "ifil" || bloc == "iver")
+        if (block == "ifil" || block == "iver")
         {
             // Read a version
             quint16Reversed valTmp;
             in >> valTmp;
-            header._versions[bloc].wMajor = valTmp.value;
+            header._versions[block].wMajor = valTmp.value;
             in >> valTmp;
-            header._versions[bloc].wMinor = valTmp.value;
+            header._versions[block].wMinor = valTmp.value;
         }
         else
         {
@@ -119,15 +143,15 @@ QDataStream & operator >> (QDataStream &in, Sf2Header &header)
             if (nullIndex != -1)
                 buffer.truncate(nullIndex);
 
-            if (bloc == "ICMT")
+            if (block == "ICMT")
             {
                 if (Utils::isValidUtf8(buffer))
-                    header._infos[bloc] = QString::fromUtf8(buffer);
+                    header._infos[block] = QString::fromUtf8(buffer);
                 else
-                    header._infos[bloc] = QString::fromLatin1(buffer);
+                    header._infos[block] = QString::fromLatin1(buffer);
             }
             else
-                header._infos[bloc] = QString::fromLatin1(buffer);
+                header._infos[block] = QString::fromLatin1(buffer);
         }
 
         pos += 8 + size.value;
@@ -135,4 +159,67 @@ QDataStream & operator >> (QDataStream &in, Sf2Header &header)
 
     header._isValid = true;
     return in;
+}
+
+QDataStream & operator << (QDataStream &out, Sf2Header &header)
+{
+    // RIFF
+    if (out.writeRawData(header._RIFF, 4) != 4)
+        return out;
+
+    // Full size - 8
+    out << header._size;
+
+    // "sfbk"
+    if (out.writeRawData(header._sfbk, 4) != 4)
+        return out;
+
+    // "LIST"
+    if (out.writeRawData(header._LIST, 4) != 4)
+        return out;
+
+    // Size of the section "INFO"
+    out << header._infoSize;
+
+    // "INFO"
+    if (out.writeRawData(header._INFO, 4) != 4)
+        return out;
+
+    quint16Reversed val16Tmp;
+    quint32Reversed val32Tmp;
+    foreach (QString block, header._versions.keys())
+    {
+        out.writeRawData(block.toStdString().c_str(), 4);
+        val32Tmp.value = 4;
+        out << val32Tmp;
+        val16Tmp.value = header._versions[block].wMajor;
+        out << val16Tmp;
+        val16Tmp.value = header._versions[block].wMinor;
+        out << val16Tmp;
+    }
+    foreach (QString block, header._infos.keys())
+    {
+        QByteArray data = block == "ICMT" ? header._infos[block].toUtf8() : header._infos[block].toLatin1();
+
+        out.writeRawData(block.toStdString().c_str(), 4);
+        val32Tmp.value = data.size() + 1;
+        if (val32Tmp.value % 2 == 1)
+        {
+            val32Tmp.value += 1;
+            out << val32Tmp;
+            if (out.writeRawData(data.constData(), data.length()) != data.length())
+                return out;
+            out.writeRawData("\0\0", 2);
+        }
+        else
+        {
+            out << val32Tmp;
+            if (out.writeRawData(data.constData(), data.length()) != data.length())
+                return out;
+            out.writeRawData("\0", 1);
+        }
+    }
+
+    header._isValid = true;
+    return out;
 }

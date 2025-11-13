@@ -48,3 +48,19 @@ QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_inst &inst)
     inst._isValid = true;
     return in;
 }
+
+QDataStream & operator << (QDataStream &out, Sf2PdtaPart_inst &inst)
+{
+    // Name
+    QByteArray data = inst._name.toLatin1().left(20);
+    if (out.writeRawData(data.constData(), data.length()) != data.length())
+        return out;
+    for (int i = 0; i < 20 - data.length(); i++)
+        out.writeRawData("\0", 1);
+
+    // Min index for pBag
+    out << inst._iBagIndex;
+
+    inst._isValid = true;
+    return out;
+}

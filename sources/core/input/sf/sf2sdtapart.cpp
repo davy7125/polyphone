@@ -24,12 +24,16 @@
 
 #include "sf2sdtapart.h"
 #include <QDataStream>
+#include "sound.h"
 
 Sf2SdtaPart::Sf2SdtaPart() :
     _isValid(false),
     _sdtaSize(0),
+    _smplSize(0),
+    _sm24Size(0),
     _startSmplOffset(0),
-    _startSm24Offset(0)
+    _startSm24Offset(0),
+    _sample24bits(0)
 {
 
 }
@@ -67,12 +71,11 @@ QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta)
     if (block == "smpl")
     {
         // Size of the block "smpl"
-        quint32Reversed smplSize;
-        in >> smplSize;
+        in >> sdta._smplSize;
 
         // Keep the position of "smpl" and skip the block
         sdta._startSmplOffset = 20;
-        skipData(in, smplSize.value);
+        skipData(in, sdta._smplSize.value);
 
         // Block sm24?
         {
@@ -83,13 +86,12 @@ QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta)
         }
         if (block == "sm24")
         {
-            // Size of the block "smpl"
-            quint32Reversed sm24Size;
-            in >> sm24Size;
+            // Size of the block "sm24"
+            in >> sdta._sm24Size;
 
             // Keep the position of "sm24" and skip the block
-            sdta._startSm24Offset = 20 + smplSize.value + 8;
-            skipData(in, sm24Size.value);
+            sdta._startSm24Offset = 20 + sdta._smplSize.value + 8;
+            skipData(in, sdta._sm24Size.value);
         }
         else
         {
@@ -111,4 +113,98 @@ QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta)
 
     sdta._isValid = true;
     return in;
+}
+
+quint32 Sf2SdtaPart::prepareBeforeWritingData()
+{
+    // Constant strings
+    memcpy(_LIST, "LIST", 4);
+    memcpy(_sdta, "sdta", 4);
+
+    // Sizes
+    _smplSize.value = 0;
+    _sm24Size.value = 0;
+    foreach (Sound * sound, _sounds)
+        _smplSize.value += 2 * (sound->getUInt32(champ_dwLength) + 46); // Extra '0' required by the format
+    _sdtaSize.value = _smplSize.value + 12;
+
+    if (_sample24bits)
+    {
+        _sm24Size.value = _smplSize.value / 2;
+        _sm24Size.value += (_sm24Size.value % 2); // Even size
+        _sdtaSize.value += _sm24Size.value + 8;
+    }
+
+    return 8 + _sdtaSize.value;
+}
+
+QDataStream & operator << (QDataStream &out, Sf2SdtaPart &sdta)
+{
+    // "LIST"
+    if (out.writeRawData(sdta._LIST, 4) != 4)
+        return out;
+
+    // Size of the section "pdta"
+    out << sdta._sdtaSize;
+
+    // "sdta"
+    if (out.writeRawData(sdta._sdta, 4) != 4)
+        return out;
+
+    // "smpl" with its size
+    if (out.writeRawData("smpl", 4) != 4)
+        return out;
+    out << sdta._smplSize;
+
+    // 16-bit part
+    quint32 sampleLength;
+    qint16 * data16;
+    quint8 * data24;
+    AttributeValue val;
+    val.dwValue = sdta._position + 5 * 4;
+    foreach (Sound * sound, sdta._sounds)
+    {
+        sound->getData(sampleLength, data16, data24, false, false);
+        sampleLength *= sizeof(qint16);
+        if (out.writeRawData((char*)data16, sampleLength) != sampleLength)
+            return out;
+        sound->set(champ_dwStart16, val);
+
+        // Extra 46 values
+        for (int i = 0; i < 46; i++)
+            out.writeRawData("\0\0", 2);
+
+        val.dwValue += sampleLength + 46 * 2;
+    }
+
+    // Possible extra 8-bit part
+    if (sdta._sample24bits)
+    {
+        // "sm24" with its size
+        if (out.writeRawData("sm24", 4) != 4)
+            return out;
+        out << sdta._sm24Size;
+
+        val.dwValue += 2 * 4;
+        foreach (Sound * sound, sdta._sounds)
+        {
+            sound->getData(sampleLength, data16, data24, false, false);
+            if (out.writeRawData((char*)data24, sampleLength) != sampleLength)
+                return out;
+            sound->set(champ_dwStart24, val);
+
+            // Extra 46 values
+            for (int i = 0; i < 46; i++)
+                out.writeRawData("\0", 1);
+
+            val.dwValue += sampleLength + 46;
+        }
+
+        // Possible ending 0 (for an even number of bytes)
+        if (val.dwValue % 2)
+            out.writeRawData("\0", 1);
+    }
+
+    sdta._isValid = true;
+    return out;
 }

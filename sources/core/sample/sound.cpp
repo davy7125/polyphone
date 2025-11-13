@@ -237,53 +237,53 @@ void Sound::set(AttributeType champ, AttributeValue value)
     switch (champ)
     {
     case champ_dwStart16:
-        // modification du départ
+        // Sample start (16 bits)
         _info.dwStart = value.dwValue;
         break;
     case champ_dwStart24:
-        // modification du départ
+        // Sample start (extra 8 bits)
         _info.dwStart2 = value.dwValue;
         break;
     case champ_dwLength:
-        // modification de la longueur
+        // Sample length (complete length is sample length * bytes per sample)
         _info.dwLength = value.dwValue;
         break;
     case champ_dwStartLoop:
-        // modification du début de la boucle
+        // Loop start
         if (_info.loops.empty())
             _info.loops << QPair<quint32, quint32>(value.dwValue, value.dwValue);
         else
             _info.loops[0].first = value.dwValue;
         break;
     case champ_dwEndLoop:
-        // modification de la fin de la boucle
+        // Loop end
         if (_info.loops.empty())
             _info.loops << QPair<quint32, quint32>(value.dwValue, value.dwValue);
         else
             _info.loops[0].second = value.dwValue;
         break;
     case champ_dwSampleRate:
-        // modification de l'échantillonnage
+        // Sample rate
         _info.dwSampleRate = value.dwValue;
         break;
     case champ_wChannel:
-        // modification du canal utilisé
+        // Channel used (left / right)
         _info.wChannel = value.wValue;
         break;
     case champ_wChannels:
-        // modification du nombre de canaux
+        // Number of channels
         _info.wChannels = value.wValue;
         break;
     case champ_bpsFile:
-        // modification de la résolution
+        // Resolution (16 / 24)
         _info.wBpsFile = value.wValue;
         break;
     case champ_byOriginalPitch:
-        // Modification de la note en demi tons
+        // Root key in semitones
         _info.dwRootKey = value.bValue;
         break;
     case champ_chPitchCorrection:
-        // Modification de la note en centième de ton
+        // Root key correction in cents
         _info.iFineTune = -value.cValue; // Fine tune is the opposite of correction
         break;
     default:

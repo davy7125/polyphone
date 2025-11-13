@@ -22,19 +22,19 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SF2INDEXCONVERTER_H
-#define SF2INDEXCONVERTER_H
+#ifndef SFINDEXCONVERTER_H
+#define SFINDEXCONVERTER_H
 
 #include "basetypes.h"
 
-class Sf2IndexConverter
+class SfIndexConverter
 {
 public:
-    Sf2IndexConverter(EltID id);
+    SfIndexConverter(EltID id);
     int getIndexOf(int index, bool isModDestOper);
 
 private:
     QList<int> _indexes;
 };
 
-#endif // SF2INDEXCONVERTER_H
+#endif // SFINDEXCONVERTER_H

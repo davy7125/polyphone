@@ -503,11 +503,9 @@ SOURCES	+= main.cpp \
     core/output/abstractoutput.cpp \
     core/output/outputfactory.cpp \
     core/output/empty/outputdummy.cpp \
-    core/output/sf2/outputsf2.cpp \
     core/output/sfz/outputsfz.cpp \
     core/output/not_supported/outputnotsupported.cpp \
     core/output/sfz/sfzparamlist.cpp \
-    core/output/sf2/sf2indexconverter.cpp \
     core/output/sf3/outputsf3.cpp \
     core/input/sfz/sfzparameter.cpp \
     dialogs/dialogcreateelements.cpp \
@@ -582,7 +580,9 @@ SOURCES	+= main.cpp \
     editor/tools/load_from_inst/toolloadfrominst_gui.cpp \
     editor/tools/load_from_inst/toolloadfrominst_parameters.cpp \
     core/input/sfark/sfarkextractor1.cpp \
-    core/input/sfark/sfarkextractor2.cpp
+    core/input/sfark/sfarkextractor2.cpp \
+    core/output/sf/outputsf.cpp \
+    core/output/sf/sfindexconverter.cpp
 
 HEADERS += \
     context/imidilistener.h \
@@ -882,11 +882,9 @@ HEADERS += \
     core/output/abstractoutput.h \
     core/output/outputfactory.h \
     core/output/empty/outputdummy.h \
-    core/output/sf2/outputsf2.h \
     core/output/sfz/outputsfz.h \
     core/output/not_supported/outputnotsupported.h \
     core/output/sfz/sfzparamlist.h \
-    core/output/sf2/sf2indexconverter.h \
     core/output/sf3/outputsf3.h \
     core/input/sfz/sfzparameter.h \
     dialogs/dialogcreateelements.h \
@@ -969,7 +967,9 @@ HEADERS += \
     editor/tools/load_from_inst/toolloadfrominst_gui.h \
     editor/tools/load_from_inst/toolloadfrominst_parameters.h \
     core/input/sfark/sfarkextractor2.h \
-    core/input/sfark/abstractextractor.h
+    core/input/sfark/abstractextractor.h \
+    core/output/sf/outputsf.h \
+    core/output/sf/sfindexconverter.h
 
 FORMS += \
     dialogs/dialog_list.ui \

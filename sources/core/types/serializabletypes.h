@@ -36,6 +36,7 @@ public:
     quint32 value;
 };
 QDataStream & operator >> (QDataStream &in, quint32Reversed &val);
+QDataStream & operator << (QDataStream &out, quint32Reversed &val);
 
 class quint16Reversed
 {
@@ -44,14 +45,7 @@ public:
     quint16 value;
 };
 QDataStream & operator >> (QDataStream &in, quint16Reversed &val);
-
-class qint32Reversed
-{
-public:
-    qint32Reversed(qint32 val = 0) : value(val) {}
-    qint32 value;
-};
-QDataStream & operator >> (QDataStream &in, qint32Reversed &val);
+QDataStream & operator << (QDataStream &out, quint16Reversed &val);
 
 class qint16Reversed
 {
@@ -60,7 +54,9 @@ public:
     qint16 value;
 };
 QDataStream & operator >> (QDataStream &in, qint16Reversed &val);
+QDataStream & operator << (QDataStream &out, qint16Reversed &val);
 
 QDataStream & operator >> (QDataStream &in, SFModulator &mod);
+QDataStream & operator << (QDataStream &out, SFModulator &mod);
 
 #endif // SERIALIZABLETYPES_H

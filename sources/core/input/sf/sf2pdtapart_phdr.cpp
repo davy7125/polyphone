@@ -48,17 +48,36 @@ QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_phdr &phdr)
     phdr._name = QString::fromLatin1(buffer.data()).trimmed();
 
     // Preset, bank
-    in >> phdr._preset;
-    in >> phdr._bank;
+    in >> phdr._preset >> phdr._bank;
 
     // Min index for pBag
     in >> phdr._pBagIndex;
 
     // Characteristics
-    in >> phdr._library;
-    in >> phdr._genre;
-    in >> phdr._morphology;
+    in >> phdr._library >> phdr._genre >> phdr._morphology;
 
     phdr._isValid = true;
     return in;
+}
+
+QDataStream & operator << (QDataStream &out, Sf2PdtaPart_phdr &phdr)
+{
+    // Name
+    QByteArray data = phdr._name.toLatin1().left(20);
+    if (out.writeRawData(data.constData(), data.length()) != data.length())
+        return out;
+    for (int i = 0; i < 20 - data.length(); i++)
+        out.writeRawData("\0", 1);
+
+    // Preset, bank
+    out << phdr._preset << phdr._bank;
+
+    // Min index for pBag
+    out << phdr._pBagIndex;
+
+    // Characteristics
+    out << phdr._library << phdr._genre << phdr._morphology;
+
+    phdr._isValid = true;
+    return out;
 }

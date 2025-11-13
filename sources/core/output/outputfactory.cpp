@@ -30,7 +30,7 @@
 #include "soundfontmanager.h"
 #include "contextmanager.h"
 #include "abstractoutput.h"
-#include "sf2/outputsf2.h"
+#include "sf/outputsf.h"
 #include "sf3/outputsf3.h"
 #include "sfz/outputsfz.h"
 #include "not_supported/outputnotsupported.h"
@@ -52,7 +52,7 @@ AbstractOutput * OutputFactory::getOutput(QString fileName)
         if (extension == "sf2")
         {
             // Format sf2
-            output = new OutputSf2();
+            output = new OutputSf();
         }
         else if (extension == "sf3")
         {

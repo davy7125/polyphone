@@ -27,6 +27,7 @@
 
 Sf2PdtaPart_shdr::Sf2PdtaPart_shdr() :
     _isValid(false),
+    _name(""),
     _start(0),
     _end(0),
     _startLoop(0),
@@ -59,4 +60,26 @@ QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_shdr &shdr)
 
     shdr._isValid = true;
     return in;
+}
+
+QDataStream & operator << (QDataStream &out, Sf2PdtaPart_shdr &shdr)
+{
+    // Name
+    QByteArray data = shdr._name.toLatin1().left(20);
+    if (out.writeRawData(data.constData(), data.length()) != data.length())
+        return out;
+    for (int i = 0; i < 20 - data.length(); i++)
+        out.writeRawData("\0", 1);
+
+    // Positions
+    out << shdr._start << shdr._end << shdr._startLoop << shdr._endLoop;
+
+    // Pitch
+    out << shdr._sampleRate << shdr._originalPitch << shdr._correction;
+
+    // Link
+    out << shdr._wSampleLink << shdr._sfSampleType;
+
+    shdr._isValid = true;
+    return out;
 }

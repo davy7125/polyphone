@@ -22,26 +22,38 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef OUTPUTSF2_H
-#define OUTPUTSF2_H
+#ifndef OUTPUTSF_H
+#define OUTPUTSF_H
 
 #include "abstractoutput.h"
+#include "basetypes.h"
+#include "../../input/sf/sf2pdtapart_mod.h"
+#include "../../input/sf/sf2pdtapart_gen.h"
+#include "sfindexconverter.h"
 class SoundfontManager;
+class Sf2Header;
+class Sf2SdtaPart;
+class Sf2PdtaPart;
 
-class OutputSf2 : public AbstractOutput
+class OutputSf : public AbstractOutput
 {
     Q_OBJECT
     
 public:
-    OutputSf2();
+    OutputSf();
 
 protected slots:
     void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index, QMap<QString, QVariant> & options) override;
 
 private:
-    void save(QString fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index);
+    SoundfontManager * _sm;
+
+    void save(QString fileName, bool &success, QString &error, int sf2Index);
+    void fillSf2(int sf2Index, Sf2Header * header, Sf2SdtaPart * sdtaPart, Sf2PdtaPart * pdtaPart);
+    void loadMods(EltID idMod, QList<Sf2PdtaPart_mod> &mods, quint32 &index);
+    void loadGens(EltID idGen, EltID idDiv, QList<Sf2PdtaPart_gen> &gens, quint32 &index, SfIndexConverter &indexConverter);
     static void convertTo16bit(QVector<float> dataSrc, QByteArray &dataDest);
     static void convertTo24bit(QVector<float> dataSrc, QByteArray &dataDest);
 };
 
-#endif // OUTPUTSF2_H
+#endif // OUTPUTSF_H

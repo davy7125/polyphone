@@ -22,15 +22,15 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "sf2indexconverter.h"
+#include "sfindexconverter.h"
 #include "soundfontmanager.h"
 
-Sf2IndexConverter::Sf2IndexConverter(EltID id)
+SfIndexConverter::SfIndexConverter(EltID id)
 {
     _indexes = SoundfontManager::getInstance()->getSiblings(id);
 }
 
-int Sf2IndexConverter::getIndexOf(int index, bool isModDestOper)
+int SfIndexConverter::getIndexOf(int index, bool isModDestOper)
 {
     int correspondingIndex = 0;
 

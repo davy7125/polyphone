@@ -26,23 +26,34 @@
 #define SF2SDTAPART_H
 
 #include "basetypes.h"
+class Sound;
 
 class Sf2SdtaPart
 {
 public:
     Sf2SdtaPart();
+    quint32 prepareBeforeWritingData();
 
     bool _isValid;
 
     char _LIST[4]; // Should be "LIST"
-    quint32Reversed _sdtaSize; // Size of the section sdta
+    quint32Reversed _sdtaSize;
     char _sdta[4]; // Should be "sdta"
+    quint32Reversed _smplSize;
+    quint32Reversed _sm24Size;
+
+    // Import
     unsigned int _startSmplOffset; // Relative position of the first sample in the section "smpl" (absolute is 20 + infoSize + this value)
     unsigned int _startSm24Offset; // Same for the section "sm24"
+
+    // Export
+    quint32 _position;
+    QList<Sound *> _sounds;
+    bool _sample24bits;
 };
 
 // Extension methods for QDataStream to serialize / deserialize
 QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta);
-//QDataStream & operator << (QDataStream &out, const Sf2SdtaPart &sdta);
+QDataStream & operator << (QDataStream &out, Sf2SdtaPart &sdta);
 
 #endif // SF2SDTAPART_H

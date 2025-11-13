@@ -37,5 +37,13 @@ QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_mod &mod)
     in >> mod._sfModSrcOper >> mod._sfModDestOper >> mod._modAmount >> mod._sfModAmtSrcOper >> mod._sfModTransOper;
 
     mod._isValid = true;
-    return  in;
+    return in;
+}
+
+QDataStream & operator << (QDataStream &out, Sf2PdtaPart_mod &mod)
+{
+    out << mod._sfModSrcOper << mod._sfModDestOper << mod._modAmount << mod._sfModAmtSrcOper << mod._sfModTransOper;
+
+    mod._isValid = true;
+    return out;
 }

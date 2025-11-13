@@ -465,21 +465,6 @@ QString SoundfontManager::getQstr(EltID id, AttributeType champ)
     return ret;
 }
 
-void SoundfontManager::getData(EltID idSmpl, quint32 &sampleLength, qint16 *&data16, quint8 *&data24, bool getCopy)
-{
-    QMutexLocker locker(&_mutex);
-
-    sampleLength = 0;
-    data16 = nullptr;
-    data24 = nullptr;
-
-    if (!this->isValid(idSmpl))
-        return;
-
-    Smpl *tmp = _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt);
-    tmp->_sound.getData(sampleLength, data16, data24, false, getCopy);
-}
-
 QVector<float> SoundfontManager::getDataFloat(EltID idSmpl)
 {
     QMutexLocker locker(&_mutex);

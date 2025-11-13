@@ -39,6 +39,8 @@ class Sf2PdtaPart
 public:
     Sf2PdtaPart();
 
+    quint32 prepareBeforeWritingData();
+
     bool _isValid;
 
     char _LIST[4]; // Should be "LIST"
@@ -84,6 +86,6 @@ public:
 
 // Extension methods for QDataStream to serialize / deserialize
 QDataStream & operator >> (QDataStream &in, Sf2PdtaPart &pdta);
-//QDataStream & operator << (QDataStream &out, const Sf2PdtaPart &pdta);
+QDataStream & operator << (QDataStream &out, Sf2PdtaPart &pdta);
 
 #endif // SF2PDTAPART_H

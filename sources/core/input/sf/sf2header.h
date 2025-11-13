@@ -27,6 +27,8 @@
 
 #include "basetypes.h"
 #include <QMap>
+class Sf2PdtaPart;
+class Sf2SdtaPart;
 
 class Sf2Header
 {
@@ -35,6 +37,8 @@ public:
 
     QString getInfo(QString key);
     SfVersionTag getVersion(QString key);
+
+    void prepareBeforeWritingData(Sf2SdtaPart * sdtaPart, Sf2PdtaPart * pdtaPart);
 
     bool _isValid;
 
@@ -50,6 +54,6 @@ public:
 
 // Extension methods for QDataStream to serialize / deserialize
 QDataStream & operator >> (QDataStream &in, Sf2Header &header);
-//QDataStream & operator << (QDataStream &out, const Sf2Header &header);
+QDataStream & operator << (QDataStream &out, Sf2Header &header);
 
 #endif // SF2HEADER_H

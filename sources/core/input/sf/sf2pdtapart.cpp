@@ -181,7 +181,7 @@ QDataStream & operator >> (QDataStream &in, Sf2PdtaPart &pdta)
         in >> pdta._igens[i];
     }
 
-    /// READ SHDR
+    /// Read SHDR
 
     // 4 char, should be "shdr"
     if (in.readRawData(pdta._shdr, 4) != 4)
@@ -200,4 +200,163 @@ QDataStream & operator >> (QDataStream &in, Sf2PdtaPart &pdta)
 
     pdta._isValid = true;
     return in;
+}
+
+quint32 Sf2PdtaPart::prepareBeforeWritingData()
+{
+    // Constant strings
+    memcpy(_LIST, "LIST", 4);
+    memcpy(_pdta, "pdta", 4);
+    memcpy(_phdr, "phdr", 4);
+    memcpy(_pbag, "pbag", 4);
+    memcpy(_pmod, "pmod", 4);
+    memcpy(_pgen, "pgen", 4);
+    memcpy(_inst, "inst", 4);
+    memcpy(_ibag, "ibag", 4);
+    memcpy(_imod, "imod", 4);
+    memcpy(_igen, "igen", 4);
+    memcpy(_shdr, "shdr", 4);
+
+    // Sizes
+    _phdrSize.value = 38 * _phdrs.count();
+    _pbagSize.value = 4 * _pbags.count();
+    _pmodSize.value = 10 * _pmods.count();
+    _pgenSize.value = 4 * _pgens.count();
+    _instSize.value = 22 * _insts.count();
+    _ibagSize.value = 4 * _ibags.count();
+    _imodSize.value = 10 * _imods.count();
+    _igenSize.value = 4 * _igens.count();
+    _shdrSize.value = 46 * _shdrs.count();
+
+    // Total size
+    _pdtaSize = _phdrSize.value + _pbagSize.value + _pmodSize.value +
+                _pgenSize.value + _instSize.value + _ibagSize.value +
+                _imodSize.value +  _igenSize.value + _shdrSize.value +
+                8 * 9 + 4;
+    return 8 + _pdtaSize.value;
+}
+
+QDataStream & operator << (QDataStream &out, Sf2PdtaPart &pdta)
+{
+    // "LIST"
+    if (out.writeRawData(pdta._LIST, 4) != 4)
+        return out;
+
+    // Size of the section "pdta"
+    out << pdta._pdtaSize;
+
+    // "pdta"
+    if (out.writeRawData(pdta._pdta, 4) != 4)
+        return out;
+
+    /// Write PHDR
+
+    // "phdr"
+    if (out.writeRawData(pdta._phdr, 4) != 4)
+        return out;
+
+    // Size of the section "phdr"
+    out << pdta._phdrSize;
+
+    for (unsigned int i = 0; i < pdta._phdrs.count(); i++)
+        out << pdta._phdrs[i];
+
+    /// Write PBAG
+
+    // "pbag"
+    if (out.writeRawData(pdta._pbag, 4) != 4)
+        return out;
+
+    // Size of the section "pbag"
+    out << pdta._pbagSize;
+
+    for (unsigned int i = 0; i < pdta._pbags.count(); i++)
+        out << pdta._pbags[i];
+
+    /// Write PMOD
+
+    // "pmod"
+    if (out.writeRawData(pdta._pmod, 4) != 4)
+        return out;
+
+    // Size of the section "pmod"
+    out << pdta._pmodSize;
+
+    for (unsigned int i = 0; i < pdta._pmods.count(); i++)
+        out << pdta._pmods[i];
+
+    /// Write PGEN
+
+    // "pgen"
+    if (out.writeRawData(pdta._pgen, 4) != 4)
+        return out;
+
+    // Size of the section "pgen"
+    out << pdta._pgenSize;
+
+    for (unsigned int i = 0; i < pdta._pgens.count(); i++)
+        out << pdta._pgens[i];
+
+    /// Write INST
+
+    // "inst"
+    if (out.writeRawData(pdta._inst, 4) != 4)
+        return out;
+
+    // Size of the section "inst"
+    out << pdta._instSize;
+
+    for (unsigned int i = 0; i < pdta._insts.count(); i++)
+        out << pdta._insts[i];
+
+    /// Write IBAG
+
+    // "ibag"
+    if (out.writeRawData(pdta._ibag, 4) != 4)
+        return out;
+
+    // Size of the section "ibag"
+    out << pdta._ibagSize;
+
+    for (unsigned int i = 0; i < pdta._ibags.count(); i++)
+        out << pdta._ibags[i];
+
+    /// Write IMOD
+
+    // "imod"
+    if (out.writeRawData(pdta._imod, 4) != 4)
+        return out;
+
+    // Size of the section "imod"
+    out << pdta._imodSize;
+
+    for (unsigned int i = 0; i < pdta._imods.count(); i++)
+        out << pdta._imods[i];
+
+    /// Write IGEN
+
+    // "igen"
+    if (out.writeRawData(pdta._igen, 4) != 4)
+        return out;
+
+    // Size of the section "igen"
+    out << pdta._igenSize;
+
+    for (unsigned int i = 0; i < pdta._igens.count(); i++)
+        out << pdta._igens[i];
+
+    /// Write SHDR
+
+    // "shdr"
+    if (out.writeRawData(pdta._shdr, 4) != 4)
+        return out;
+
+    // Size of the section "shdr"
+    out << pdta._shdrSize;
+
+    for (unsigned int i = 0; i < pdta._shdrs.count(); i++)
+        out << pdta._shdrs[i];
+
+    pdta._isValid = true;
+    return out;
 }

@@ -35,10 +35,16 @@ Sf2PdtaPart_bag::Sf2PdtaPart_bag() :
 
 QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_bag &bag)
 {
-    in >> bag._genIndex;
-    in >> bag._modIndex;
+    in >> bag._genIndex >> bag._modIndex;
 
     bag._isValid = true;
     return in;
 }
 
+QDataStream & operator << (QDataStream &out, Sf2PdtaPart_bag &bag)
+{
+    out << bag._genIndex << bag._modIndex;
+
+    bag._isValid = true;
+    return out;
+}
