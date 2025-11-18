@@ -199,9 +199,8 @@ QDataStream & operator << (QDataStream &out, Sf2SdtaPart &sdta)
         // Raw data is preferred if available (compressed sf3 data)
         char * rawData = nullptr;
         quint32 rawDataLength = 0;
-        if (sdta._isSf3)
-            sound->getRawData(rawData, rawDataLength);
-        if (rawDataLength > 0)
+        sound->getRawData(rawData, rawDataLength);
+        if (sdta._isSf3 && rawDataLength > 0)
         {
             if (out.writeRawData(rawData, rawDataLength) != rawDataLength)
                 return out;

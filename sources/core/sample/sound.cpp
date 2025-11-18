@@ -379,7 +379,7 @@ void Sound::determineRootKey()
 void Sound::loadSample(bool forceReload)
 {
     // The sample is maybe already loaded
-    if (((_data16 != nullptr || _rawData != nullptr) && !forceReload) || _reader == nullptr)
+    if ((_data16 != nullptr && !forceReload) || _reader == nullptr)
         return;
 
     if (forceReload)
@@ -445,7 +445,8 @@ void Sound::setRawData(const char * rawData, quint32 rawDataLength)
 
 void Sound::copyDataFrom(Sound * sourceSound)
 {
-    // Copying raw data is preferred
+    // Copying raw data if possible
+    this->_info.rawDataAvailable = false;
     if (sourceSound->isRawDataUnchanged())
     {
         // Raw data from source
@@ -460,14 +461,11 @@ void Sound::copyDataFrom(Sound * sourceSound)
             memcpy(this->_rawData, rawData, rawDataLength);
             this->_rawDataLength = rawDataLength;
             this->_info.rawDataAvailable = true;
-            this->_info.dwLength = sourceSound->_rawDataLength;
-            return;
         }
     }
 
-    // Otherwise data16 + data24
+    // Load data16 + data24
     quint32 sampleLength;
     sourceSound->getData(sampleLength, _data16, _data24, false, true);
-    this->_info.rawDataAvailable = false;
     this->_info.dwLength = sampleLength;
 }
