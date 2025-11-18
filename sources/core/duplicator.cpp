@@ -333,8 +333,8 @@ EltID Duplicator::copySmpl(EltID idSource, EltID idDest)
         _sm->set(idDest, champ_name, nom);
 
         // Link
-        if (_sm->get(idSource, champ_sfSampleType).wValue != RomMonoSample &&
-                _sm->get(idSource, champ_sfSampleType).wValue != monoSample)
+        if (_sm->get(idSource, champ_sfSampleType).sfLinkValue != RomMonoSample &&
+                _sm->get(idSource, champ_sfSampleType).sfLinkValue != monoSample)
         {
             // Possible?
             EltID idSourceLink = idSource;
@@ -349,7 +349,7 @@ EltID Duplicator::copySmpl(EltID idSource, EltID idDest)
                 val.wValue = idDest.indexElt;
                 _sm->set(idDestLink, champ_wSampleLink, val);
 
-                switch (_sm->get(idSource, champ_sfSampleType).wValue)
+                switch (_sm->get(idSource, champ_sfSampleType).sfLinkValue)
                 {
                 case linkedSample:
                     val.sfLinkValue = linkedSample;
@@ -369,14 +369,22 @@ EltID Duplicator::copySmpl(EltID idSource, EltID idDest)
                 case RomLeftSample:
                     val.sfLinkValue = RomRightSample;
                     break;
+                default:
+                    val.wValue = 0;
+                    _sm->set(idDest, champ_wSampleLink, val);
+                    _sm->set(idDestLink, champ_wSampleLink, val);
+
+                    val.sfLinkValue = monoSample;
+                    _sm->set(idDest, champ_sfSampleType, val);
+                    break;
                 }
                 _sm->set(idDestLink, champ_sfSampleType, val);
             }
             else
             {
-                if (_sm->get(idSource, champ_sfSampleType).wValue == linkedSample ||
-                        _sm->get(idSource, champ_sfSampleType).wValue == rightSample ||
-                        _sm->get(idSource, champ_sfSampleType).wValue == leftSample)
+                if (_sm->get(idSource, champ_sfSampleType).sfLinkValue == linkedSample ||
+                        _sm->get(idSource, champ_sfSampleType).sfLinkValue == rightSample ||
+                        _sm->get(idSource, champ_sfSampleType).sfLinkValue == leftSample)
                     val.sfLinkValue = monoSample;
                 else
                     val.sfLinkValue = RomMonoSample;
@@ -411,8 +419,8 @@ EltID Duplicator::copyInst(EltID idSource, EltID idDest, bool withSmpl)
                 copy(idSmpl, idDest);
 
             // Sample stéréo ?
-            if (_sm->get(idSource, champ_sfSampleType).wValue != RomMonoSample &&
-                    _sm->get(idSource, champ_sfSampleType).wValue != monoSample)
+            if (_sm->get(idSource, champ_sfSampleType).sfLinkValue != RomMonoSample &&
+                    _sm->get(idSource, champ_sfSampleType).sfLinkValue != monoSample)
             {
                 EltID idSourceLink = idSource;
                 idSourceLink.indexElt = _sm->get(idSource, champ_wSampleLink).wValue;

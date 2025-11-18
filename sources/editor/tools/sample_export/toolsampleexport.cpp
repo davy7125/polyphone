@@ -67,8 +67,8 @@ void ToolSampleExport::process(SoundfontManager * sm, EltID id, AbstractToolPara
     _exportedSamples << id;
 
     // Stereo sample?
-    if (sm->get(id, champ_sfSampleType).wValue != monoSample &&
-            sm->get(id, champ_sfSampleType).wValue != RomMonoSample)
+    if (sm->get(id, champ_sfSampleType).sfLinkValue != monoSample &&
+            sm->get(id, champ_sfSampleType).sfLinkValue != RomMonoSample)
     {
         id2.indexElt = sm->get(id, champ_wSampleLink).wValue;
         _exportedSamples << id2;
@@ -85,7 +85,7 @@ void ToolSampleExport::process(SoundfontManager * sm, EltID id, AbstractToolPara
     if (isStereo)
     {
         // First id must be the left sound
-        if (sm->get(id, champ_sfSampleType).wValue == rightSample || sm->get(id, champ_sfSampleType).wValue == RomRightSample)
+        if (sm->get(id, champ_sfSampleType).sfLinkValue == rightSample || sm->get(id, champ_sfSampleType).sfLinkValue == RomRightSample)
         {
             EltID idTmp = id;
             id = id2;
