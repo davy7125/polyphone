@@ -281,12 +281,8 @@ bool Sf2SdtaPart::compressSample(Sound* sound, double quality)
     vorbis_comment   vc;
 
     vorbis_info_init(&vi);
-    int ret = vorbis_encode_init_vbr(&vi, 1, sound->getUInt32(champ_dwSampleRate), quality);
-    if (ret != 0)
-    {
-        // Vorbis initialization failed
-        return false;
-    }
+    if (vorbis_encode_init_vbr(&vi, 1, sound->getUInt32(champ_dwSampleRate), quality) != 0)
+        return false; // Failed to initialize vorbis
 
     vorbis_comment_init(&vc);
     vorbis_analysis_init(&vd, &vi);
@@ -303,75 +299,62 @@ bool Sf2SdtaPart::compressSample(Sound* sound, double quality)
     ogg_stream_packetin(&os, &header_comm);
     ogg_stream_packetin(&os, &header_code);
 
-    char* obuf = new char[1048576]; // 1024 * 1024
-    char* p = obuf;
+    QByteArray obuf;
+    obuf.reserve(1024 * 1024);
+
+    auto append_page = [&](const ogg_page &pg){
+        obuf.append(reinterpret_cast<const char*>(pg.header), pg.header_len);
+        obuf.append(reinterpret_cast<const char*>(pg.body),   pg.body_len);
+    };
 
     while (ogg_stream_flush(&os, &og) != 0)
-    {
-        memcpy(p, og.header, og.header_len);
-        p += og.header_len;
-        memcpy(p, og.body, og.body_len);
-        p += og.body_len;
-    }
+        append_page(og);
 
-    long i;
     quint32 page = 0;
-    quint32 max;
+    quint32 max = 0;
     do
     {
         int bufflength = qMin(Sf2SdtaPart::BLOCK_SIZE, sampleLength - page * Sf2SdtaPart::BLOCK_SIZE);
         float **buffer = vorbis_analysis_buffer(&vd, bufflength);
 
-        // Convert int16 to float
         int j = 0;
-        float coef = 1.0f / ((0.5f + 0x7fff) * 1.009f); // 1.009 seems to be necessary, but why?
+        float coef = 1.0f / ((0.5f + 0x7fff) * 1.009f);
         max = qMin((page + 1) * Sf2SdtaPart::BLOCK_SIZE, sampleLength);
-        for (i = page * Sf2SdtaPart::BLOCK_SIZE; i < max ; i++)
-        {
-            buffer[0][j] = (0.5f + data16[i]) * coef;
-            j++;
-        }
+
+        for (quint32 i = page * Sf2SdtaPart::BLOCK_SIZE; i < max; i++)
+            buffer[0][j++] = (0.5f + data16[i]) * coef;
 
         vorbis_analysis_wrote(&vd, bufflength);
 
         while (vorbis_analysis_blockout(&vd, &vb) == 1)
         {
-            vorbis_analysis(&vb, 0);
+            vorbis_analysis(&vb, nullptr);
             vorbis_bitrate_addblock(&vb);
 
             while (vorbis_bitrate_flushpacket(&vd, &op))
             {
                 ogg_stream_packetin(&os, &op);
                 while (ogg_stream_pageout(&os, &og) != 0)
-                {
-                    memcpy(p, og.header, og.header_len);
-                    p += og.header_len;
-                    memcpy(p, og.body, og.body_len);
-                    p += og.body_len;
-                }
+                    append_page(og);
             }
         }
+
         page++;
     }
-    while (max != sampleLength && page * Sf2SdtaPart::BLOCK_SIZE < sampleLength);
+    while (max != sampleLength);
 
     vorbis_analysis_wrote(&vd, 0);
 
     while (vorbis_analysis_blockout(&vd, &vb) == 1)
     {
-        vorbis_analysis(&vb, 0);
+        vorbis_analysis(&vb, nullptr);
         vorbis_bitrate_addblock(&vb);
 
         while (vorbis_bitrate_flushpacket(&vd, &op))
         {
             ogg_stream_packetin(&os, &op);
             while (ogg_stream_pageout(&os, &og) != 0)
-            {
-                memcpy(p, og.header, og.header_len);
-                p += og.header_len;
-                memcpy(p, og.body, og.body_len);
-                p += og.body_len;
-            }
+                append_page(og);
         }
     }
 
@@ -381,9 +364,6 @@ bool Sf2SdtaPart::compressSample(Sound* sound, double quality)
     vorbis_comment_clear(&vc);
     vorbis_info_clear(&vi);
 
-    // Set raw data
-    sound->setRawData(obuf, p - obuf);
-    delete [] obuf;
-
+    sound->setRawData(obuf.data(), obuf.size());
     return true;
 }
