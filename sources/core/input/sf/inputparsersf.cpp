@@ -22,7 +22,7 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "inputparsersf2.h"
+#include "inputparsersf.h"
 #include "soundfontmanager.h"
 #include <QFile>
 #include <QDataStream>
@@ -30,9 +30,9 @@
 #include "sf2sdtapart.h"
 #include "sf2pdtapart.h"
 
-InputParserSf2::InputParserSf2() : AbstractInputParser() {}
+InputParserSf::InputParserSf() : AbstractInputParser() {}
 
-void InputParserSf2::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath)
+void InputParserSf::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath)
 {
     Q_UNUSED(tempFilePath)
 
@@ -62,7 +62,7 @@ void InputParserSf2::processInternal(QString fileName, SoundfontManager * sm, bo
     fi.close();
 }
 
-void InputParserSf2::parse(QDataStream &stream, bool &success, QString &error, int &sf2Index)
+void InputParserSf::parse(QDataStream &stream, bool &success, QString &error, int &sf2Index)
 {
     // Parse the different parts of the file
     Sf2Header header;
@@ -94,7 +94,7 @@ void InputParserSf2::parse(QDataStream &stream, bool &success, QString &error, i
     fillSf2(header, sdtaPart, pdtaPart, success, error, sf2Index);
 }
 
-void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pdtaPart, bool &success, QString &error, int &sf2Index)
+void InputParserSf::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pdtaPart, bool &success, QString &error, int &sf2Index)
 {
     // Create a new soundfont
     sf2Index = _sm->add(EltID(elementSf2));
@@ -114,6 +114,7 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
     AttributeValue value;
     value.sfVerValue = header.getVersion("ifil");
     _sm->set(id, champ_IFIL, value);
+    bool isSf3 = value.sfVerValue.wMajor >= 3;
     value.sfVerValue = header.getVersion("iver");
     _sm->set(id, champ_IVER, value);
 
@@ -140,18 +141,33 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
 
         id.indexElt = _sm->add(id);
         _sm->set(id, champ_name, SHDR._name);
+        _sm->set(id, champ_filenameForData, _filename);
+
+        // Sample type + link
+        Sound * sound = _sm->getSound(id);
+        value.wValue = SHDR._wSampleLink.value;
+        _sm->set(id, champ_wSampleLink, value);
+        if (isSf3 && SHDR._sfSampleType.value & 0x10)
+        {
+            SHDR._sfSampleType.value &= ~0x10;
+            value.cValue = 1;
+            sound->set(champ_rawDataAvailable, value);
+        }
+        else
+        {
+            value.cValue = 0;
+            sound->set(champ_rawDataAvailable, value);
+        }
+        value.sfLinkValue = (SFSampleLink)SHDR._sfSampleType.value;
+        _sm->set(id, champ_sfSampleType, value);
 
         // Sample properties
         value.bValue = SHDR._originalPitch;
-        _sm->set(id, champ_byOriginalPitch, value);
+        sound->set(champ_byOriginalPitch, value);
         value.cValue = SHDR._correction;
-        _sm->set(id, champ_chPitchCorrection, value);
-        value.wValue = SHDR._wSampleLink.value;
-        _sm->set(id, champ_wSampleLink, value);
-        value.sfLinkValue = (SFSampleLink)SHDR._sfSampleType.value;
-        _sm->set(id, champ_sfSampleType, value);
+        sound->set(champ_chPitchCorrection, value);
         value.wValue = 1;
-        _sm->set(id, champ_wChannel, value);
+        sound->set(champ_wChannel, value);
         value.dwValue = SHDR._sampleRate.value;
         if (value.dwValue == 0)
         {
@@ -166,34 +182,45 @@ void InputParserSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPa
             if (value.dwValue == 0)
                 value.dwValue = 44100; // Nothing else has been found, 44100 is set since this is common
         }
-        _sm->set(id, champ_dwSampleRate, value);
-        _sm->set(id, champ_filenameForData, _filename);
+        sound->set(champ_dwSampleRate, value);
 
         // Start / end / length of the sample
         value.dwValue = SHDR._end.value - SHDR._start.value;
-        _sm->set(id, champ_dwLength, value);
-        value.dwValue = 20 + header._infoSize.value + sdtaPart._startSmplOffset + SHDR._start.value * 2;
-        _sm->set(id, champ_dwStart16, value);
+        sound->set(champ_dwLength, value);
+        value.dwValue = 20 + header._infoSize.value + sdtaPart._startSmplOffset + SHDR._start.value * (isSf3 ? 1 : 2);
+        sound->set(champ_dwStart16, value);
         if (sdtaPart._startSm24Offset > 0)
         {
             value.dwValue = 20 + header._infoSize.value + sdtaPart._startSm24Offset + SHDR._start.value;
-            _sm->set(id, champ_dwStart24, value);
+            sound->set(champ_dwStart24, value);
             value.wValue = 24;
-            _sm->set(id, champ_bpsFile, value);
+            sound->set(champ_bpsFile, value);
         }
         else
         {
             value.dwValue = 0;
-            _sm->set(id, champ_dwStart24, value);
+            sound->set(champ_dwStart24, value);
             value.wValue = 16;
-            _sm->set(id, champ_bpsFile, value);
+            sound->set(champ_bpsFile, value);
         }
 
         // Loop
-        value.dwValue = SHDR._startLoop.value - SHDR._start.value;
-        _sm->set(id, champ_dwStartLoop, value);
-        value.dwValue = SHDR._endLoop.value - SHDR._start.value;
-        _sm->set(id, champ_dwEndLoop, value);
+        if (isSf3)
+        {
+            // Already relative to the sample start
+            value.dwValue = SHDR._startLoop.value;
+            sound->set(champ_dwStartLoop, value);
+            value.dwValue = SHDR._endLoop.value;
+            sound->set(champ_dwEndLoop, value);
+        }
+        else
+        {
+            // Absolute position => relative position
+            value.dwValue = SHDR._startLoop.value - SHDR._start.value;
+            sound->set(champ_dwStartLoop, value);
+            value.dwValue = SHDR._endLoop.value - SHDR._start.value;
+            sound->set(champ_dwEndLoop, value);
+        }
     }
 
     /// Instruments

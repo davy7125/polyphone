@@ -22,61 +22,35 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "inputparsersf3.h"
-#include "soundfontmanager.h"
-#include "sf3/sfont.h"
-#include "inputfactory.h"
+#ifndef SAMPLEREADERSF_H
+#define SAMPLEREADERSF_H
 
-InputParserSf3::InputParserSf3() : AbstractInputParser() {}
+#include "samplereader.h"
 
-void InputParserSf3::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath)
+class SampleReaderSf: public SampleReader
 {
-    Q_UNUSED(sm)
-    success = false;
-
-    // Name of the temporary file
-    tempFilePath = QDir::tempPath() + "/" + QFileInfo(fileName).completeBaseName() + "_tmp";
-    if (QFile(tempFilePath + ".sf2").exists())
+public:
+    // For the OGG callback
+    struct VorbisData
     {
-        int index = 1;
-        while (QFile(tempFilePath + "-" + QString::number(index) + ".sf2").exists())
-            index++;
-        tempFilePath = tempFilePath + "-" + QString::number(index);
-    }
-    tempFilePath += ".sf2";
+        quint32 pos;
+        quint32 length;
+        const char* data;
+    };
 
-    // First convert to sf2
-    SfTools::SoundFont sf(fileName);
-    if (sf.read())
-    {
-        QFile fo(tempFilePath);
-        if (fo.open(QIODevice::WriteOnly))
-        {
-            if (sf.uncompress(&fo))
-            {
-                error = "";
-                success = true;
+    SampleReaderSf(QString filename);
+    ~SampleReaderSf() override {}
 
-                // Then load the sf2
-                AbstractInputParser * sf2Input = InputFactory::getInput(tempFilePath);
-                sf2Input->process(false);
-                if (sf2Input->isSuccess())
-                {
-                    success = true;
-                    sf2Index = sf2Input->getSf2Index();
-                }
-                else
-                    error = sf2Input->getError();
-                delete sf2Input;
-            }
-            else
-                error = tr("Error during the sf3 => sf2 conversion");
+    // Extract general information (sampling rate, ...)
+    SampleReaderResult getInfo(QFile &fi, InfoSound* info) override;
 
-            fo.close();
-        }
-        else
-            error = tr("Cannot create file \"%1\"").arg(tempFilePath);
-    }
-    else
-        error = tr("Cannot read file \"%1\"").arg(fileName);
-}
+    // Get sample data
+    SampleReaderResult getRawData(QFile &fi, char* &rawData, quint32 &length) override;
+    SampleReaderResult getData(QFile &fi, qint16* &data16, quint8* &data24, const char* rawData, quint32 rawDataLength) override;
+
+private:
+    InfoSound* _info;
+    VorbisData _vorbisData;
+};
+
+#endif // SAMPLEREADERSF_H

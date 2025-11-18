@@ -48,7 +48,7 @@ public:
     virtual ~SampleReader() {}
 
     // Extract general information (sampling rate, ...)
-    SampleReaderResult getInfo(InfoSound *info)
+    SampleReaderResult getInfo(InfoSound* info)
     {
         if (_result != FILE_OK)
             return _result;
@@ -71,7 +71,32 @@ public:
     }
 
     // Get sample data
-    SampleReaderResult getData(qint16 *& data16, quint8 *& data24)
+    SampleReaderResult getRawData(char* &rawData, quint32 &rawDataLength)
+    {
+        rawData = nullptr;
+        rawDataLength = 0;
+
+        if (_result == FILE_OK)
+        {
+            QFile fi(_filename);
+            if (fi.exists())
+            {
+                if (fi.open(QFile::ReadOnly | QFile::Unbuffered))
+                {
+                    _result = getRawData(fi, rawData, rawDataLength);
+                    fi.close();
+                }
+                else
+                    _result = FILE_NOT_READABLE;
+            }
+            else
+                _result = FILE_NOT_FOUND;
+        }
+
+        return _result;
+    }
+
+    SampleReaderResult getData(qint16* &data16, quint8* &data24, const char* rawData, quint32 rawDataLength)
     {
         data16 = nullptr;
         data24 = nullptr;
@@ -83,7 +108,7 @@ public:
             {
                 if (fi.open(QFile::ReadOnly | QFile::Unbuffered))
                 {
-                    _result = getData(fi, data16, data24);
+                    _result = getData(fi, data16, data24, rawData, rawDataLength);
                     fi.close();
                 }
                 else
@@ -98,7 +123,8 @@ public:
 
 protected:
     virtual SampleReaderResult getInfo(QFile &fi, InfoSound *info) = 0;
-    virtual SampleReaderResult getData(QFile &fi, qint16 *& data16, quint8 *& data24) = 0;
+    virtual SampleReaderResult getRawData(QFile &fi, char* &rawData, quint32 &length) = 0;
+    virtual SampleReaderResult getData(QFile &fi, qint16* &data16, quint8* &data24, const char* rawData, quint32 rawDataLength) = 0;
 
 private:
     QString _filename;

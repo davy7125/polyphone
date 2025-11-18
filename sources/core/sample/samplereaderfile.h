@@ -34,16 +34,17 @@ public:
     ~SampleReaderFile() override {}
 
     // Extract general information (sampling rate, ...)
-    SampleReaderResult getInfo(QFile &fi, InfoSound * info) override;
+    SampleReaderResult getInfo(QFile &fi, InfoSound* info) override;
 
     // Get sample data
-    SampleReaderResult getData(QFile &fi, qint16 *& data16, quint8 *& data24) override;
+    SampleReaderResult getRawData(QFile &fi, char* &rawData, quint32 &length) override;
+    SampleReaderResult getData(QFile &fi, qint16* &data16, quint8* &data24, const char *rawData, quint32 rawDataLength) override;
 
 private:
-    SampleReaderResult launchDecoder(qint16 * data16, quint8 * data24);
+    SampleReaderResult launchDecoder(qint16* data16, quint8* data24);
 
-    QFile * _file;
-    InfoSound * _info;
+    QFile* _file;
+    InfoSound* _info;
 };
 
 #endif // SAMPLEREADERFILE_H

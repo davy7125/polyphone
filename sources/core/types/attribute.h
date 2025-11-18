@@ -143,7 +143,8 @@ typedef enum
 
     champ_pitchDefined = 300, // if pitch defined in a sample (wav)
     champ_mute = 301, // Divisions can be muted for testing purposes
-    champ_alwaysPlayed = 302 // Instruments and presets can be played along for testing purposes
+    champ_alwaysPlayed = 302, // Instruments and presets can be played along for testing purposes
+    champ_rawDataAvailable = 303 // Raw data (for example compressed data) is written in the source file
 } AttributeType;
 
 typedef enum

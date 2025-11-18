@@ -41,7 +41,7 @@ public:
     // Get information about the sample loaded
     QString getError() { return _error; }
     QString getFileName() { return _fileName; }
-    void getData(quint32 &sampleLength, qint16 *&data16, quint8 *&data24, bool forceReload, bool getCopy);
+    void getData(quint32 &sampleLength, qint16* &data16, quint8* &data24, bool forceReload, bool getCopy);
     QVector<float> getDataFloat(bool forceReload);
     quint32 getUInt32(AttributeType champ); // For everything but the pitch correction
     qint32 getInt32(AttributeType champ); // For the pitch correction
@@ -49,20 +49,26 @@ public:
     // Set data
     void set(AttributeType champ, AttributeValue value);
     bool setFileName(QString qStr, bool tryFindRootKey = true);
-    void setData(qint16 * data16, quint8 * data24, quint32 length);
     void setDataFloat(QVector<float> data);
     void loadSample(bool forceReload = false);
+
+    // Raw data management
+    bool isRawDataObsolete();
+    void getRawData(char *& rawData, quint32 &rawDataLength);
 
 private:
     QString _fileName;
     QString _error;
     InfoSound _info;
-    qint16 * _data16;
-    quint8 * _data24;
-    SampleReader * _reader;
+    qint16* _data16;
+    quint8* _data24;
+    char* _rawData;
+    quint32 _rawDataLength;
+    SampleReader* _reader;
 
-    void setData(float * newData, quint32 length); // Sound takes the ownership of data and will destroy it
+    void setData(qint16* data16, quint8* data24, quint32 length);
     void determineRootKey();
+    void decompressData();
 };
 
 #endif // SOUND_H

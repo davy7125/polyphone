@@ -49,6 +49,7 @@ public:
         wChannel = 0;
         iFineTune = 0;
         pitchDefined = false;
+        rawDataAvailable = false;
     }
 
     quint32 dwStart;
@@ -60,8 +61,9 @@ public:
     QList<QPair<quint32, quint32> > loops;
     quint32 dwRootKey;
     quint16 wChannel;
-    int iFineTune; // from -100 (-1 semi tone) to 100 (+1 semi tone)
+    qint16 iFineTune; // from -100 (-1 semi tone) to 100 (+1 semi tone)
     bool pitchDefined;
+    bool rawDataAvailable;
 };
 
 #endif // INFOSOUND_H

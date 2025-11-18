@@ -223,6 +223,8 @@ INCLUDEPATH += lib \
     .
 
 SOURCES	+= main.cpp \
+    core/input/sf/inputparsersf.cpp \
+    core/sample/samplereadersf.cpp \
     context/tuningprogrammanager.cpp \
     core/fastmaths.cpp \
     core/input/grandorgue/grandorguedatathrough.cpp \
@@ -243,14 +245,11 @@ SOURCES	+= main.cpp \
     core/input/grandorgue/inputgrandorgue.cpp \
     core/input/grandorgue/inputparsergrandorgue.cpp \
     core/input/not_supported/inputparsernotsupported.cpp \
-    core/input/sf/inputparsersf2.cpp \
-    core/input/sf/inputparsersf3.cpp \
     core/input/sfark/inputparsersfark.cpp \
     core/input/sfark/inputsfark.cpp \
     core/input/sfz/inputparsersfz.cpp \
     core/input/sfz/inputsfz.cpp \
     core/sample/samplereaderfactory.cpp \
-    core/sample/samplereadersf2.cpp \
     core/sample/sampleutils.cpp \
     core/sample/samplewriterwav.cpp \
     core/sample/sound.cpp \
@@ -586,6 +585,8 @@ SOURCES	+= main.cpp \
 
 HEADERS += \
     context/imidilistener.h \
+    core/input/sf/inputparsersf.h \
+    core/sample/samplereadersf.h \
     context/tuningprogrammanager.h \
     core/fastmaths.h \
     core/input/grandorgue/grandorguedatathrough.h \
@@ -607,8 +608,6 @@ HEADERS += \
     core/input/grandorgue/inputgrandorgue.h \
     core/input/grandorgue/inputparsergrandorgue.h \
     core/input/not_supported/inputparsernotsupported.h \
-    core/input/sf/inputparsersf2.h \
-    core/input/sf/inputparsersf3.h \
     core/input/sfark/inputparsersfark.h \
     core/input/sfark/inputsfark.h \
     core/input/sfz/inputparsersfz.h \
@@ -616,7 +615,6 @@ HEADERS += \
     core/sample/infosound.h \
     core/sample/samplereader.h \
     core/sample/samplereaderfactory.h \
-    core/sample/samplereadersf2.h \
     core/sample/sampleutils.h \
     core/sample/samplewriterwav.h \
     core/sample/sound.h \

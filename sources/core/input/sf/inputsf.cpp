@@ -23,27 +23,10 @@
 ***************************************************************************/
 
 #include "inputsf.h"
-#include "inputparsersf2.h"
-#include "inputparsersf3.h"
-#include "sf2header.h"
+#include "inputparsersf.h"
 
 AbstractInputParser * InputSf::getParser(QString filename)
 {
-    // Find the right parser depending on the sf version
-    bool isSf3 = false;
-    QFile fi(filename);
-    if (fi.exists() && fi.open(QIODevice::ReadOnly))
-    {
-        // Parse the header of the file
-        QDataStream stream(&fi);
-        Sf2Header header;
-        stream >> header;
-
-        // Close the file
-        fi.close();
-
-        isSf3 = header.getVersion("ifil").wMajor > 2;
-    }
-
-    return isSf3 ? (AbstractInputParser *)(new InputParserSf3()) : (AbstractInputParser *)(new InputParserSf2());
+    Q_UNUSED(filename)
+    return new InputParserSf();
 }

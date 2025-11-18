@@ -32,22 +32,23 @@ Sound::Sound() :
     _fileName(""),
     _data16(nullptr),
     _data24(nullptr),
+    _rawData(nullptr),
+    _rawDataLength(0),
     _reader(nullptr)
 {}
 
 Sound::~Sound()
 {
     delete _reader;
-    if (_data16 != nullptr)
-    {
-        delete [] _data16;
-        _data16 = nullptr;
-    }
-    if (_data24 != nullptr)
-    {
-        delete [] _data24;
-        _data24 = nullptr;
-    }
+
+    delete [] _data16;
+    _data16 = nullptr;
+
+    delete [] _data24;
+    _data24 = nullptr;
+
+    delete [] _rawData;
+    _rawData = nullptr;
 }
 
 bool Sound::setFileName(QString qStr, bool tryFindRootKey)
@@ -119,8 +120,8 @@ void Sound::getData(quint32 &sampleLength, qint16* &data16, quint8* &data24, boo
 QVector<float> Sound::getDataFloat(bool forceReload)
 {
     quint32 sampleLength;
-    qint16 * data16;
-    quint8 * data24;
+    qint16* data16;
+    quint8* data24;
     this->getData(sampleLength, data16, data24, forceReload, false);
     return SampleUtils::int24ToFloat(data16, data24, sampleLength);
 }
@@ -137,6 +138,9 @@ quint32 Sound::getUInt32(AttributeType champ)
         result = _info.dwStart2;
         break;
     case champ_dwLength:
+        // Possibly decompress data first for knowing the final size
+        if (_info.rawDataAvailable && _data16 == nullptr)
+            loadSample();
         result = _info.dwLength;
         break;
     case champ_dwStartLoop:
@@ -163,6 +167,9 @@ quint32 Sound::getUInt32(AttributeType champ)
     case champ_pitchDefined:
         result = (_info.pitchDefined ? 1 : 0);
         break;
+    case champ_rawDataAvailable:
+        result = (_info.rawDataAvailable ? 1 : 0);
+        break;
     default:
         break;
     }
@@ -183,8 +190,12 @@ qint32 Sound::getInt32(AttributeType champ)
     return result;
 }
 
-void Sound::setData(qint16 * data16, quint8 * data24, quint32 length)
+void Sound::setData(qint16* data16, quint8* data24, quint32 length)
 {
+    // Delete possible existing raw data since there are now obsolete
+    delete [] _rawData;
+    _rawData = nullptr;
+
     if (_data16 != nullptr && length == _info.dwLength)
     {
         if (data16 == nullptr)
@@ -286,38 +297,11 @@ void Sound::set(AttributeType champ, AttributeValue value)
         // Root key correction in cents
         _info.iFineTune = -value.cValue; // Fine tune is the opposite of correction
         break;
+    case champ_rawDataAvailable:
+        _info.rawDataAvailable = value.cValue ? true : false;
+        break;
     default:
         break;
-    }
-}
-
-void Sound::loadSample(bool forceReload)
-{
-    // The sample is maybe already loaded
-    if ((_data16 != nullptr && !forceReload) || _reader == nullptr)
-        return;
-
-    if (forceReload)
-    {
-        // Current length / channel
-        quint32 oldLength = _info.dwLength;
-        quint16 channel = _info.wChannel;
-
-        // Update the details and keep the channel number
-        _reader->getInfo(&_info);
-        _info.wChannel = channel;
-
-        // Write over the current data or replace the pointer
-        qint16 * newData16;
-        quint8 * newData24;
-        _reader->getData(newData16, newData24);
-        quint32 newLength = _info.dwLength;
-        _info.dwLength = oldLength;
-        this->setData(newData16, newData24, newLength);
-    }
-    else if (_data16 == nullptr)
-    {
-        _reader->getData(_data16, _data24);
     }
 }
 
@@ -390,4 +374,61 @@ void Sound::determineRootKey()
         _info.dwRootKey = key;
         _info.pitchDefined = true;
     }
+}
+
+void Sound::loadSample(bool forceReload)
+{
+    // The sample is maybe already loaded
+    if (((_data16 != nullptr || _rawData != nullptr) && !forceReload) || _reader == nullptr)
+        return;
+
+    if (forceReload)
+    {
+        delete [] _rawData;
+        _rawData = nullptr;
+        _rawDataLength = 0;
+
+        // Current length / channel
+        quint32 oldLength = _info.dwLength;
+        quint16 channel = _info.wChannel;
+
+        // Update the details and keep the channel number
+        _reader->getInfo(&_info);
+        _info.wChannel = channel;
+
+        if (_info.rawDataAvailable)
+        {
+            // Update the raw data
+            _reader->getRawData(_rawData, _rawDataLength);
+        }
+
+        // Write over the current data or replace the pointer
+        qint16* newData16;
+        quint8* newData24;
+        _reader->getData(newData16, newData24, _rawData, _rawDataLength);
+
+        quint32 newLength = _info.dwLength;
+        _info.dwLength = oldLength;
+        this->setData(newData16, newData24, newLength);
+    }
+    else if (_data16 == nullptr)
+    {
+        if (_info.rawDataAvailable && _rawData == nullptr)
+            _reader->getRawData(_rawData, _rawDataLength);
+        _reader->getData(_data16, _data24, _rawData, _rawDataLength);
+    }
+}
+
+bool Sound::isRawDataObsolete()
+{
+    return _info.rawDataAvailable && _rawData == nullptr && _data16 != nullptr;
+}
+
+void Sound::getRawData(char* &rawData, quint32 &rawDataLength)
+{
+    if (_info.rawDataAvailable && _rawData == nullptr)
+        _reader->getRawData(_rawData, _rawDataLength);
+
+    rawData = _rawData;
+    rawDataLength = (rawData == nullptr) ? 0 : _rawDataLength;
 }

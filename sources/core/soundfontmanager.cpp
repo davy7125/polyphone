@@ -364,14 +364,14 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
 Sound * SoundfontManager::getSound(EltID id)
 {
     QMutexLocker locker(&_mutex);
-    Sound * son = nullptr;
+    Sound * sound = nullptr;
     if (!this->isValid(id))
-        return son;
+        return sound;
 
     if (id.typeElement == elementSmpl)
-        son = &_soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt)->_sound;
+        sound = &_soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt)->_sound;
 
-    return son;
+    return sound;
 }
 
 QString SoundfontManager::getQstr(EltID id, AttributeType champ)

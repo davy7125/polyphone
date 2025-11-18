@@ -32,7 +32,7 @@ SampleReaderFile::SampleReaderFile(QString filename) : SampleReader(filename),
 
 }
 
-SampleReader::SampleReaderResult SampleReaderFile::getInfo(QFile &fi, InfoSound * info)
+SampleReader::SampleReaderResult SampleReaderFile::getInfo(QFile &fi, InfoSound *info)
 {
     // Initialize the info and keep a track of it
     info->reset();
@@ -45,8 +45,19 @@ SampleReader::SampleReaderResult SampleReaderFile::getInfo(QFile &fi, InfoSound 
     return launchDecoder(nullptr, nullptr);
 }
 
-SampleReader::SampleReaderResult SampleReaderFile::getData(QFile &fi, qint16 *& data16, quint8 *& data24)
+SampleReader::SampleReaderResult SampleReaderFile::getRawData(QFile &fi, char* &rawData, quint32 &length)
 {
+    Q_UNUSED(fi)
+    rawData = nullptr;
+    length = 0;
+    return FILE_OK;
+}
+
+SampleReader::SampleReaderResult SampleReaderFile::getData(QFile &fi, qint16* &data16, quint8* &data24, const char* rawData, quint32 rawDataLength)
+{
+    Q_UNUSED(rawData)
+    Q_UNUSED(rawDataLength)
+
     // Access to the file
     _file = &fi;
 
@@ -56,7 +67,7 @@ SampleReader::SampleReaderResult SampleReaderFile::getData(QFile &fi, qint16 *& 
     return launchDecoder(data16, data24);
 }
 
-SampleReader::SampleReaderResult SampleReaderFile::launchDecoder(qint16 * data16, quint8 * data24)
+SampleReader::SampleReaderResult SampleReaderFile::launchDecoder(qint16* data16, quint8* data24)
 {
     // Open the file and get the details
     SF_INFO sfInfo;
@@ -74,6 +85,7 @@ SampleReader::SampleReaderResult SampleReaderFile::launchDecoder(qint16 * data16
     _info->wChannels = sfInfo.channels;
     _info->dwSampleRate = sfInfo.samplerate;
     _info->dwLength = sfInfo.frames;
+    _info->rawDataAvailable = false; // Maybe later it will be true if we keep OGG data as it it stored
 
     // Loop / root key / fine tune
     SF_INSTRUMENT instrument;

@@ -23,7 +23,7 @@
 ***************************************************************************/
 
 #include "samplereaderfactory.h"
-#include "samplereadersf2.h"
+#include "samplereadersf.h"
 #include "samplereaderfile.h"
 #include <QFileInfo>
 
@@ -37,7 +37,7 @@ SampleReader * SampleReaderFactory::getSampleReader(QString filename)
 
     // Soundfont?
     if (ext.compare("sf2") == 0 || ext.compare("sf3") == 0)
-        return new SampleReaderSf2(filename);
+        return new SampleReaderSf(filename);
 
     // Other kind of file => libsndfile
     return new SampleReaderFile(filename);

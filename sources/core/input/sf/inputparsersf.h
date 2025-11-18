@@ -22,8 +22,8 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef INPUTPARSERSF2_H
-#define INPUTPARSERSF2_H
+#ifndef INPUTPARSERSF_H
+#define INPUTPARSERSF_H
 
 #include "abstractinputparser.h"
 class SoundfontManager;
@@ -31,12 +31,12 @@ class Sf2Header;
 class Sf2SdtaPart;
 class Sf2PdtaPart;
 
-class InputParserSf2 : public AbstractInputParser
+class InputParserSf : public AbstractInputParser
 {
     Q_OBJECT
     
 public:
-    InputParserSf2();
+    InputParserSf();
 
 protected slots:
     void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
@@ -49,4 +49,4 @@ private:
     QString _filename;
 };
 
-#endif // INPUTPARSERSF2_H
+#endif // INPUTPARSERSF_H
