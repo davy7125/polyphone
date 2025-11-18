@@ -25,6 +25,11 @@
 #include "sf2sdtapart.h"
 #include <QDataStream>
 #include "sound.h"
+#include <vorbis/vorbisenc.h>
+#include <vorbis/codec.h>
+#include <vorbis/vorbisfile.h>
+
+const quint32 Sf2SdtaPart::BLOCK_SIZE = 1024;
 
 Sf2SdtaPart::Sf2SdtaPart() :
     _isValid(false),
@@ -115,8 +120,10 @@ QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta)
     return in;
 }
 
-quint32 Sf2SdtaPart::prepareBeforeWritingData()
+quint32 Sf2SdtaPart::prepareBeforeWritingData(bool isSf3, double qualityValue)
 {
+    _isSf3 = isSf3;
+
     // Constant strings
     memcpy(_LIST, "LIST", 4);
     memcpy(_sdta, "sdta", 4);
@@ -125,7 +132,32 @@ quint32 Sf2SdtaPart::prepareBeforeWritingData()
     _smplSize.value = 0;
     _sm24Size.value = 0;
     foreach (Sound * sound, _sounds)
-        _smplSize.value += 2 * (sound->getUInt32(champ_dwLength) + 46); // Extra '0' required by the format
+    {
+        if (isSf3 && (qualityValue > 0 || sound->isRawDataUnchanged()))
+        {
+            if (!sound->isRawDataUnchanged())
+            {
+                // Compress data for knowing the size
+                if (!compressSample(sound, qualityValue))
+                    return 0;
+            }
+
+            // Read the compress size
+            char * rawData;
+            quint32 rawDataLength;
+            sound->getRawData(rawData, rawDataLength);
+            _smplSize.value += rawDataLength;
+
+            // Possible padding
+            if (rawDataLength % 4 != 0)
+            {
+                int padNumber = 4 - (rawDataLength % 4);
+                _smplSize.value += padNumber;
+            }
+        }
+        else
+            _smplSize.value += 2 * (sound->getUInt32(champ_dwLength) + 46); // Extra '0' required by the format
+    }
     _sdtaSize.value = _smplSize.value + 12;
 
     if (_sample24bits)
@@ -164,17 +196,41 @@ QDataStream & operator << (QDataStream &out, Sf2SdtaPart &sdta)
     val.dwValue = sdta._position + 5 * 4;
     foreach (Sound * sound, sdta._sounds)
     {
-        sound->getData(sampleLength, data16, data24, false, false);
-        sampleLength *= sizeof(qint16);
-        if (out.writeRawData((char*)data16, sampleLength) != sampleLength)
-            return out;
-        sound->set(champ_dwStart16, val);
+        // Raw data is preferred if available (compressed sf3 data)
+        char * rawData = nullptr;
+        quint32 rawDataLength = 0;
+        if (sdta._isSf3)
+            sound->getRawData(rawData, rawDataLength);
+        if (rawDataLength > 0)
+        {
+            if (out.writeRawData(rawData, rawDataLength) != rawDataLength)
+                return out;
+            sound->set(champ_dwStart16, val);
+            val.dwValue += rawDataLength;
 
-        // Extra 46 values
-        for (int i = 0; i < 46; i++)
-            out.writeRawData("\0\0", 2);
+            // Possible padding
+            if (rawDataLength % 4 != 0)
+            {
+                int padNumber = 4 - (rawDataLength % 4);
+                for (int i = 0; i < padNumber; i++)
+                    out.writeRawData("\0", 1);
+                val.dwValue += padNumber;
+            }
+        }
+        else
+        {
+            sound->getData(sampleLength, data16, data24, false, false);
+            sampleLength *= sizeof(qint16);
+            if (out.writeRawData((char*)data16, sampleLength) != sampleLength)
+                return out;
+            sound->set(champ_dwStart16, val);
 
-        val.dwValue += sampleLength + 46 * 2;
+            // Extra 46 values
+            for (int i = 0; i < 46; i++)
+                out.writeRawData("\0\0", 2);
+
+            val.dwValue += sampleLength + 46 * 2;
+        }
     }
 
     // Possible extra 8-bit part
@@ -207,4 +263,128 @@ QDataStream & operator << (QDataStream &out, Sf2SdtaPart &sdta)
 
     sdta._isValid = true;
     return out;
+}
+
+bool Sf2SdtaPart::compressSample(Sound* sound, double quality)
+{
+    // 16-bit data
+    quint32 sampleLength;
+    qint16* data16;
+    quint8* data24;
+    sound->getData(sampleLength, data16, data24, false, false);
+
+    ogg_stream_state os;
+    ogg_page         og;
+    ogg_packet       op;
+    vorbis_info      vi;
+    vorbis_dsp_state vd;
+    vorbis_block     vb;
+    vorbis_comment   vc;
+
+    vorbis_info_init(&vi);
+    int ret = vorbis_encode_init_vbr(&vi, 1, sound->getUInt32(champ_dwSampleRate), quality);
+    if (ret != 0)
+    {
+        // Vorbis initialization failed
+        return false;
+    }
+
+    vorbis_comment_init(&vc);
+    vorbis_analysis_init(&vd, &vi);
+    vorbis_block_init(&vd, &vb);
+    srand(time(nullptr));
+    ogg_stream_init(&os, rand());
+
+    ogg_packet header;
+    ogg_packet header_comm;
+    ogg_packet header_code;
+
+    vorbis_analysis_headerout(&vd, &vc, &header, &header_comm, &header_code);
+    ogg_stream_packetin(&os, &header);
+    ogg_stream_packetin(&os, &header_comm);
+    ogg_stream_packetin(&os, &header_code);
+
+    char* obuf = new char[1048576]; // 1024 * 1024
+    char* p = obuf;
+
+    while (ogg_stream_flush(&os, &og) != 0)
+    {
+        memcpy(p, og.header, og.header_len);
+        p += og.header_len;
+        memcpy(p, og.body, og.body_len);
+        p += og.body_len;
+    }
+
+    long i;
+    quint32 page = 0;
+    quint32 max;
+    do
+    {
+        int bufflength = qMin(Sf2SdtaPart::BLOCK_SIZE, sampleLength - page * Sf2SdtaPart::BLOCK_SIZE);
+        float **buffer = vorbis_analysis_buffer(&vd, bufflength);
+
+        // Convert int16 to float
+        int j = 0;
+        float coef = 1.0f / ((0.5f + 0x7fff) * 1.009f); // 1.009 seems to be necessary, but why?
+        max = qMin((page + 1) * Sf2SdtaPart::BLOCK_SIZE, sampleLength);
+        for (i = page * Sf2SdtaPart::BLOCK_SIZE; i < max ; i++)
+        {
+            buffer[0][j] = (0.5f + data16[i]) * coef;
+            j++;
+        }
+
+        vorbis_analysis_wrote(&vd, bufflength);
+
+        while (vorbis_analysis_blockout(&vd, &vb) == 1)
+        {
+            vorbis_analysis(&vb, 0);
+            vorbis_bitrate_addblock(&vb);
+
+            while (vorbis_bitrate_flushpacket(&vd, &op))
+            {
+                ogg_stream_packetin(&os, &op);
+                while (ogg_stream_pageout(&os, &og) != 0)
+                {
+                    memcpy(p, og.header, og.header_len);
+                    p += og.header_len;
+                    memcpy(p, og.body, og.body_len);
+                    p += og.body_len;
+                }
+            }
+        }
+        page++;
+    }
+    while (max != sampleLength && page * Sf2SdtaPart::BLOCK_SIZE < sampleLength);
+
+    vorbis_analysis_wrote(&vd, 0);
+
+    while (vorbis_analysis_blockout(&vd, &vb) == 1)
+    {
+        vorbis_analysis(&vb, 0);
+        vorbis_bitrate_addblock(&vb);
+
+        while (vorbis_bitrate_flushpacket(&vd, &op))
+        {
+            ogg_stream_packetin(&os, &op);
+            while (ogg_stream_pageout(&os, &og) != 0)
+            {
+                memcpy(p, og.header, og.header_len);
+                p += og.header_len;
+                memcpy(p, og.body, og.body_len);
+                p += og.body_len;
+            }
+        }
+    }
+
+    ogg_stream_clear(&os);
+    vorbis_block_clear(&vb);
+    vorbis_dsp_clear(&vd);
+    vorbis_comment_clear(&vc);
+    vorbis_info_clear(&vi);
+
+    // Set raw data
+    sound->setRawData(obuf, p - obuf);
+    delete [] obuf;
+
+    return true;
 }

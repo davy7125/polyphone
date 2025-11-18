@@ -23,7 +23,9 @@
 ***************************************************************************/
 
 #include "sf2pdtapart.h"
+#include "sf2sdtapart.h"
 #include <QDataStream>
+#include "sound.h"
 
 Sf2PdtaPart::Sf2PdtaPart() :
     _isValid(false),
@@ -202,7 +204,7 @@ QDataStream & operator >> (QDataStream &in, Sf2PdtaPart &pdta)
     return in;
 }
 
-quint32 Sf2PdtaPart::prepareBeforeWritingData()
+quint32 Sf2PdtaPart::prepareBeforeWritingData(Sf2SdtaPart* sdtaPart, bool isSf3)
 {
     // Constant strings
     memcpy(_LIST, "LIST", 4);
@@ -216,6 +218,37 @@ quint32 Sf2PdtaPart::prepareBeforeWritingData()
     memcpy(_imod, "imod", 4);
     memcpy(_igen, "igen", 4);
     memcpy(_shdr, "shdr", 4);
+
+    // Sample properties
+    quint32 position = 0;
+    for (int i = 0; i < sdtaPart->_sounds.count(); i++)
+    {
+        Sound* sound = sdtaPart->_sounds[i];
+        char* rawData = nullptr;
+        quint32 rawDataLength = 0;
+        if (isSf3)
+            sound->getRawData(rawData, rawDataLength);
+
+        _shdrs[i]._start.value = position;
+        _shdrs[i]._end.value = position + (rawDataLength > 0 ? rawDataLength : sound->getUInt32(champ_dwLength));
+        _shdrs[i]._startLoop.value = (isSf3 ? 0 : position) + sound->getUInt32(champ_dwStartLoop);
+        _shdrs[i]._endLoop.value = (isSf3 ? 0 : position) + sound->getUInt32(champ_dwEndLoop);
+        _shdrs[i]._sfSampleType.value |= (rawDataLength > 0 ? 0x10 : 0x00);
+
+        // Go on
+        position = _shdrs[i]._end.value;
+        if (rawDataLength > 0)
+        {
+            // Possible padding
+            if (rawDataLength % 4 != 0)
+                position += 4 - (rawDataLength % 4);
+        }
+        else
+        {
+            // 46 zeros for non-compressed samples
+            position += 46;
+        }
+    }
 
     // Sizes
     _phdrSize.value = 38 * _phdrs.count();

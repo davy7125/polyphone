@@ -358,7 +358,6 @@ SOURCES	+= main.cpp \
     sound_engine/elements/calibrationsinus.cpp \
     sound_engine/elements/enveloppevol.cpp \
     sound_engine/elements/oscsinus.cpp \
-    lib/sf3/sfont.cpp \
     options.cpp \
     mainwindow/widgetshowhistory.cpp \
     mainwindow/widgetshowhistorycell.cpp \
@@ -505,7 +504,6 @@ SOURCES	+= main.cpp \
     core/output/sfz/outputsfz.cpp \
     core/output/not_supported/outputnotsupported.cpp \
     core/output/sfz/sfzparamlist.cpp \
-    core/output/sf3/outputsf3.cpp \
     core/input/sfz/sfzparameter.cpp \
     dialogs/dialogcreateelements.cpp \
     editor/widgets/tableheaderview.cpp \
@@ -731,7 +729,6 @@ HEADERS += \
     sound_engine/elements/calibrationsinus.h \
     sound_engine/elements/enveloppevol.h \
     sound_engine/elements/oscsinus.h \
-    lib/sf3/sfont.h \
     options.h \
     mainwindow/widgetshowhistory.h \
     mainwindow/widgetshowhistorycell.h \
@@ -883,7 +880,6 @@ HEADERS += \
     core/output/sfz/outputsfz.h \
     core/output/not_supported/outputnotsupported.h \
     core/output/sfz/sfzparamlist.h \
-    core/output/sf3/outputsf3.h \
     core/input/sfz/sfzparameter.h \
     dialogs/dialogcreateelements.h \
     editor/widgets/tableheaderview.h \

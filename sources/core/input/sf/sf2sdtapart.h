@@ -32,7 +32,7 @@ class Sf2SdtaPart
 {
 public:
     Sf2SdtaPart();
-    quint32 prepareBeforeWritingData();
+    quint32 prepareBeforeWritingData(bool isSf3, double qualityValue);
 
     bool _isValid;
 
@@ -50,6 +50,11 @@ public:
     quint32 _position;
     QList<Sound *> _sounds;
     bool _sample24bits;
+    bool _isSf3;
+
+private:
+    bool compressSample(Sound * sound, double quality);
+    static const quint32 BLOCK_SIZE;
 };
 
 // Extension methods for QDataStream to serialize / deserialize

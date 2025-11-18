@@ -36,8 +36,21 @@ OutputSf::OutputSf() : AbstractOutput() {}
 
 void OutputSf::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index, QMap<QString, QVariant> & options)
 {
-    Q_UNUSED(options)
     _sm = sm;
+
+    // Get the quality value if a compression of all uncompressed samples is required
+    bool isSf3 = fileName.endsWith(".sf3");
+    double qualityValue = -1.0;
+    if (isSf3)
+    {
+        int quality = options.contains("quality") ? options["quality"].toInt() : 1;
+        switch (quality)
+        {
+        case 0: qualityValue = 0.2; break;
+        case 1: qualityValue = 0.6; break;
+        case 2: qualityValue = 1.0; break;
+        }
+    }
 
     // Check that we don't save over another soundfont already open
     EltID idSf2(elementSf2);
@@ -57,17 +70,18 @@ void OutputSf::processInternal(QString fileName, SoundfontManager * sm, bool &su
     {
         // Use a temporary file
         QString filenameTmp = fileName.left(fileName.length() - 4) + "_tmp";
-        if (QFile(filenameTmp + ".sf2").exists())
+        QString extension = isSf3 ? ".sf3" : ".sf2";
+        if (QFile(filenameTmp + extension).exists())
         {
             int index = 1;
-            while (QFile(filenameTmp + "-" + QString::number(index) + ".sf2").exists())
+            while (QFile(filenameTmp + "-" + QString::number(index) + extension).exists())
                 index++;
             filenameTmp = filenameTmp + "-" + QString::number(index);
         }
-        filenameTmp += ".sf2";
+        filenameTmp += extension;
 
         // Save the file
-        this->save(filenameTmp, success, error, sf2Index);
+        this->save(filenameTmp, success, error, sf2Index, qualityValue);
         if (!success)
             return;
 
@@ -104,22 +118,31 @@ void OutputSf::processInternal(QString fileName, SoundfontManager * sm, bool &su
     else
     {
         // Just save the file
-        this->save(fileName, success, error, sf2Index);
+        this->save(fileName, success, error, sf2Index, qualityValue);
     }
 
     _sm->clearNewEditing();
     _sm->markAsSaved(sf2Index);
 }
 
-void OutputSf::save(QString fileName, bool &success, QString &error, int sf2Index)
+void OutputSf::save(QString fileName, bool &success, QString &error, int sf2Index, double qualityValue)
 {
     EltID id(elementSf2, sf2Index, 0, 0, 0);
+    bool isSf3 = fileName.endsWith(".sf3");
 
     // Update the editing software and the soundfont format version
     _sm->set(id, champ_ISFT, QString("Polyphone"));
     AttributeValue valTmp;
-    valTmp.sfVerValue.wMajor = 2;
-    valTmp.sfVerValue.wMinor = 4;
+    if (isSf3)
+    {
+        valTmp.sfVerValue.wMajor = 3;
+        valTmp.sfVerValue.wMinor = 0;
+    }
+    else
+    {
+        valTmp.sfVerValue.wMajor = 2;
+        valTmp.sfVerValue.wMinor = 4;
+    }
     _sm->set(id, champ_IFIL, valTmp);
 
     // Prepare the data to write
@@ -127,7 +150,7 @@ void OutputSf::save(QString fileName, bool &success, QString &error, int sf2Inde
     Sf2SdtaPart sdtaPart;
     Sf2PdtaPart pdtaPart;
     fillSf2(sf2Index, &header, &sdtaPart, &pdtaPart);
-    header.prepareBeforeWritingData(&sdtaPart, &pdtaPart);
+    header.prepareBeforeWritingData(&sdtaPart, &pdtaPart, isSf3, qualityValue);
 
     // Write everything
     QFile fi(fileName);
@@ -487,7 +510,6 @@ void OutputSf::fillSf2(int sf2Index, Sf2Header * header, Sf2SdtaPart * sdtaPart,
 
     // Samples
     id.typeElement = elementSmpl;
-    dwTmp = 0;
     indexes = _sm->getSiblings(id);
     pdtaPart->_shdrs.resize(indexes.count() + 1);
     for (int i = 0; i < indexes.count(); i++)
@@ -499,16 +521,8 @@ void OutputSf::fillSf2(int sf2Index, Sf2Header * header, Sf2SdtaPart * sdtaPart,
         if (pdtaPart->_shdrs[i]._name.isEmpty())
             pdtaPart->_shdrs[i]._name = QString("sample %1").arg(i + 1);
 
-        // dwStart, dwEnd, dwStartLoop, dwEndLoop
-        pdtaPart->_shdrs[i]._start = dwTmp;
-        pdtaPart->_shdrs[i]._end = dwTmp + _sm->get(id, champ_dwLength).dwValue;
-        pdtaPart->_shdrs[i]._startLoop = dwTmp + _sm->get(id, champ_dwStartLoop).dwValue;
-        pdtaPart->_shdrs[i]._endLoop = dwTmp + _sm->get(id, champ_dwEndLoop).dwValue;
-
-        // Go on
-        dwTmp = pdtaPart->_shdrs[i]._end.value + 46; // 46 zeros
-
         // Properties
+        // dwStart, dwEnd, dwStartLoop, dwEndLoop => initiliazed later
         pdtaPart->_shdrs[i]._sampleRate = _sm->get(id, champ_dwSampleRate).dwValue;
         pdtaPart->_shdrs[i]._originalPitch = _sm->get(id, champ_byOriginalPitch).bValue;
         pdtaPart->_shdrs[i]._correction = _sm->get(id, champ_chPitchCorrection).cValue;

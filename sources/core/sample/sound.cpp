@@ -419,9 +419,9 @@ void Sound::loadSample(bool forceReload)
     }
 }
 
-bool Sound::isRawDataObsolete()
+bool Sound::isRawDataUnchanged()
 {
-    return _info.rawDataAvailable && _rawData == nullptr && _data16 != nullptr;
+    return _info.rawDataAvailable && (_data16 == nullptr || _rawData != nullptr);
 }
 
 void Sound::getRawData(char* &rawData, quint32 &rawDataLength)
@@ -431,4 +431,43 @@ void Sound::getRawData(char* &rawData, quint32 &rawDataLength)
 
     rawData = _rawData;
     rawDataLength = (rawData == nullptr) ? 0 : _rawDataLength;
+}
+
+
+void Sound::setRawData(const char * rawData, quint32 rawDataLength)
+{
+    delete [] _rawData;
+    _rawData = new char[rawDataLength];
+    memcpy(_rawData, rawData, rawDataLength);
+    _rawDataLength = rawDataLength;
+    _info.rawDataAvailable = true;
+}
+
+void Sound::copyDataFrom(Sound * sourceSound)
+{
+    // Copying raw data is preferred
+    if (sourceSound->isRawDataUnchanged())
+    {
+        // Raw data from source
+        char * rawData;
+        quint32 rawDataLength;
+        sourceSound->getRawData(rawData, rawDataLength);
+
+        if (rawData != nullptr && rawDataLength > 0)
+        {
+            // Copy
+            this->_rawData = new char[rawDataLength];
+            memcpy(this->_rawData, rawData, rawDataLength);
+            this->_rawDataLength = rawDataLength;
+            this->_info.rawDataAvailable = true;
+            this->_info.dwLength = sourceSound->_rawDataLength;
+            return;
+        }
+    }
+
+    // Otherwise data16 + data24
+    quint32 sampleLength;
+    sourceSound->getData(sampleLength, _data16, _data24, false, true);
+    this->_info.rawDataAvailable = false;
+    this->_info.dwLength = sampleLength;
 }

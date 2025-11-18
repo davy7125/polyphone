@@ -38,7 +38,7 @@ public:
     QString getInfo(QString key);
     SfVersionTag getVersion(QString key);
 
-    void prepareBeforeWritingData(Sf2SdtaPart * sdtaPart, Sf2PdtaPart * pdtaPart);
+    void prepareBeforeWritingData(Sf2SdtaPart * sdtaPart, Sf2PdtaPart * pdtaPart, bool isSf3, double qualityValue);
 
     bool _isValid;
 

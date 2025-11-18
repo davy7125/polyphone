@@ -31,7 +31,6 @@
 #include "contextmanager.h"
 #include "abstractoutput.h"
 #include "sf/outputsf.h"
-#include "sf3/outputsf3.h"
 #include "sfz/outputsfz.h"
 #include "not_supported/outputnotsupported.h"
 #include "empty/outputdummy.h"
@@ -49,15 +48,10 @@ AbstractOutput * OutputFactory::getOutput(QString fileName)
     {
         QFileInfo fileInfo(fileName);
         QString extension = fileInfo.suffix().toLower();
-        if (extension == "sf2")
+        if (extension == "sf2" || extension == "sf3")
         {
-            // Format sf2
+            // Format sf2 / sf3
             output = new OutputSf();
-        }
-        else if (extension == "sf3")
-        {
-            // Format sf3
-            output = new OutputSf3();
         }
         else if (extension == "sfz")
         {

@@ -33,13 +33,14 @@
 #include "sf2pdtapart_inst.h"
 #include "sf2pdtapart_shdr.h"
 #include <QList>
+class Sf2SdtaPart;
 
 class Sf2PdtaPart
 {
 public:
     Sf2PdtaPart();
 
-    quint32 prepareBeforeWritingData();
+    quint32 prepareBeforeWritingData(Sf2SdtaPart* sdtaPart, bool isSf3);
 
     bool _isValid;
 

@@ -281,12 +281,12 @@ void Duplicator::copyGlobal(EltID idSource, EltID idDest)
 // OPERATIONS DANS UN AUTRE SF2 //
 //////////////////////////////////
 
-// Copie d'un sample dans un autre sf2
-// idSource : sample
-// idDest   : indexSf2 différent ou provenant d'un autre fichier
+// Copy  a sample in another sf2
+// idSource: sample
+// idDest  : a different indexSf2 coming from another file
 EltID Duplicator::copySmpl(EltID idSource, EltID idDest)
 {
-    // Recherche si un sample du même nom existe déjà dans les éléments initiaux
+    // Try to find a sample with the same name in the initial elements
     idDest.typeElement = elementSmpl;
     QString nom = _sm->getQstr(idSource, champ_name);
     int index = -1;
@@ -299,7 +299,7 @@ EltID Duplicator::copySmpl(EltID idSource, EltID idDest)
                 index = j;
         }
 
-        // Remplacement ?
+        // Replacement?
         if (_copieSmpl != REMPLACER_TOUT && _copieSmpl != IGNORER_TOUT && index != -1)
             _copieSmpl = openDialog(tr("The sample \"%1\" already exists.<br />Replace?").arg(nom.left(20)));
     }
@@ -310,19 +310,22 @@ EltID Duplicator::copySmpl(EltID idSource, EltID idDest)
     }
     else
     {
-        // création d'un nouveau smpl
+        // Create a new sample
         idDest.indexElt = _sm->add(idDest);
     }
 
-    // Adaptation éventuelle du nom
+    // Possibly adapt the name
     if (_copieSmpl == DUPLIQUER || _copieSmpl == DUPLIQUER_TOUT)
         nom = adaptName(nom, idDest);
 
     if (index == -1 || (_copieSmpl != IGNORER && _copieSmpl != IGNORER_TOUT))
     {
-        // Sample configuration
-        _sm->set(idDest, _sm->getDataFloat(idSource));
-        _sm->set(idDest, champ_dwLength, _sm->get(idSource, champ_dwLength));
+        // Sample data
+        Sound * soundSource = _sm->getSound(idSource);
+        Sound * soundDest = _sm->getSound(idDest);
+        soundDest->copyDataFrom(soundSource);
+
+        // Sample properties
         _sm->set(idDest, champ_dwSampleRate, _sm->get(idSource, champ_dwSampleRate));
         _sm->set(idDest, champ_dwStartLoop, _sm->get(idSource, champ_dwStartLoop));
         _sm->set(idDest, champ_dwEndLoop, _sm->get(idSource, champ_dwEndLoop));
@@ -393,7 +396,7 @@ EltID Duplicator::copySmpl(EltID idSource, EltID idDest)
         }
     }
 
-    // Enregistrement de l'élément copié, avec sa correspondance
+    // Copy the copied element with its match
     _listCopy << idSource;
     _listPaste << idDest;
 

@@ -51,10 +51,12 @@ public:
     bool setFileName(QString qStr, bool tryFindRootKey = true);
     void setDataFloat(QVector<float> data);
     void loadSample(bool forceReload = false);
+    void copyDataFrom(Sound * sourceSound);
 
     // Raw data management
-    bool isRawDataObsolete();
+    bool isRawDataUnchanged();
     void getRawData(char *& rawData, quint32 &rawDataLength);
+    void setRawData(const char *rawData, quint32 rawDataLength);
 
 private:
     QString _fileName;

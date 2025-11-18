@@ -53,7 +53,7 @@ SfVersionTag Sf2Header::getVersion(QString key)
     return version;
 }
 
-void Sf2Header::prepareBeforeWritingData(Sf2SdtaPart * sdtaPart, Sf2PdtaPart * pdtaPart)
+void Sf2Header::prepareBeforeWritingData(Sf2SdtaPart * sdtaPart, Sf2PdtaPart * pdtaPart, bool isSf3, double qualityValue)
 {
     // Constant strings
     memcpy(_RIFF, "RIFF", 4);
@@ -71,7 +71,9 @@ void Sf2Header::prepareBeforeWritingData(Sf2SdtaPart * sdtaPart, Sf2PdtaPart * p
     }
     _infoSize.value += 12 * _versions.count();
 
-    _size = 12 + _infoSize.value + sdtaPart->prepareBeforeWritingData() + pdtaPart->prepareBeforeWritingData();
+    _size = 12 + _infoSize.value +
+            sdtaPart->prepareBeforeWritingData(isSf3, qualityValue) +
+            pdtaPart->prepareBeforeWritingData(sdtaPart, isSf3);
     sdtaPart->_position = 20 + _infoSize.value;
 }
 
