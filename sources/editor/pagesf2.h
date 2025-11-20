@@ -89,7 +89,8 @@ private slots:
     void on_pushViewSamples_clicked();
     void on_pushViewInstruments_clicked();
     void on_pushViewPresets_clicked();
-    void on_comboBox_currentIndexChanged(int index);
+    void on_comboBitDepth_currentIndexChanged(int index);
+    void on_comboCompression_currentIndexChanged(int index);
 
 protected:
     // Update the interface

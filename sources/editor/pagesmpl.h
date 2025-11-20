@@ -80,6 +80,8 @@ private slots:
     QString getName(QString name, int maxCharacters, int suffixNumber);
     void on_checkLectureBoucle_clicked(bool checked);
 
+    void on_pushCompress_clicked();
+
 private:
     Ui::PageSmpl *ui;
     int _currentPlayingToken;

@@ -89,7 +89,7 @@ void PageSf2::updateInterface(QString editingSource)
     this->countElements();
 
     // Mode 24 bits ?
-    ui->comboBox->setCurrentIndex(_sf2->get(_currentID, champ_wBpsSave).wValue == 24 ? 1 : 0);
+    ui->comboBitDepth->setCurrentIndex(_sf2->get(_currentID, champ_wBpsSave).wValue == 24 ? 1 : 0);
 
     ui->label_sfVersion->setText(QString("%1.%2")
                                  .arg(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMajor)
@@ -389,7 +389,7 @@ void PageSf2::on_pushViewPresets_clicked()
     emit selectedIdsChanged(EltID(elementRootPrst, _currentID.indexSf2));
 }
 
-void PageSf2::on_comboBox_currentIndexChanged(int index)
+void PageSf2::on_comboBitDepth_currentIndexChanged(int index)
 {
     if (_preparingPage)
         return;
@@ -400,3 +400,9 @@ void PageSf2::on_comboBox_currentIndexChanged(int index)
     _sf2->set(_currentID, champ_wBpsSave, valTmp);
     _sf2->endEditing(_editingSource);
 }
+
+void PageSf2::on_comboCompression_currentIndexChanged(int index)
+{
+
+}
+

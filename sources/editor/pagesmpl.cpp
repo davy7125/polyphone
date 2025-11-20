@@ -49,8 +49,9 @@ PageSmpl::PageSmpl(QWidget *parent) :
                                      ";border: 1px solid " + ContextManager::theme()->getColor(ThemeManager::BORDER).name() + ";border-radius: 3px;}");
 
     // Icons
-    ui->pushFullLength->setIcon(ContextManager::theme()->getColoredSvg(":/icons/range.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
+    ui->pushFullLength->setIcon(ContextManager::theme()->getColoredSvg(":/icons/range.svg", QSize(20, 18), ThemeManager::BUTTON_TEXT));
     ui->pushAutoTune->setIcon(ContextManager::theme()->getColoredSvg(":/icons/left.svg", QSize(14, 14), ThemeManager::BUTTON_TEXT));
+    ui->pushCompress->setIcon(ContextManager::theme()->getColoredSvg(":/icons/compress.svg", QSize(20, 18), ThemeManager::BUTTON_TEXT));
 
     // Initialize spin box for the key names
     ui->spinRootKey->setAlwaysShowKeyName(true);
@@ -1243,3 +1244,9 @@ void PageSmpl::updateLoopQuality()
     else
         ui->iconLoopWarning->setPixmap(QPixmap());
 }
+
+void PageSmpl::on_pushCompress_clicked()
+{
+
+}
+
