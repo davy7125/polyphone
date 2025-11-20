@@ -133,18 +133,24 @@ void DownloadManager::fileDownloaded(QString error)
 
         // Save the file
         QFile file(pathWithoutExtension + "." + extension);
-        file.open(QIODevice::WriteOnly);
-        file.write(_reader->getRawData());
-        file.close();
+        if (file.open(QIODevice::WriteOnly))
+        {
+            file.write(_reader->getRawData());
+            file.close();
 
-        // The download is complete, notify it
-        emit progressChanged(100, _currentDownloadId, currentDownload, pathWithoutExtension + "." + extension);
+            // The download is complete, notify it
+            emit progressChanged(100, _currentDownloadId, currentDownload, pathWithoutExtension + "." + extension);
+        }
+        else
+        {
+            QMessageBox::warning(QApplication::activeWindow(), tr("Warning"),
+                                 tr("Couldn't write file \"%1\"").arg(pathWithoutExtension + "." + extension));
+        }
     }
     else
     {
         QMessageBox::warning(QApplication::activeWindow(), tr("Warning"),
-                             tr("Couldn't download file \"%1\": %2").arg(currentDownload)
-                             .arg(error));
+                             tr("Couldn't download file \"%1\": %2").arg(currentDownload).arg(error));
     }
     _currentDownloadId = -1;
     _mutex.unlock();

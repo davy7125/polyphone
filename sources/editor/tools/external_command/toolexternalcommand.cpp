@@ -95,9 +95,17 @@ void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolP
     // Export the sample in a temporary file
     QTemporaryFile * tempFile = new QTemporaryFile(QDir::tempPath() + "/" + QApplication::applicationName() + "-XXXXXX.wav");
     tempFile->setAutoRemove(true);
-    tempFile->open();
-    QString pathTempFile = tempFile->fileName();
-    tempFile->close();
+    QString pathTempFile;
+    if (tempFile->open())
+    {
+        QString pathTempFile = tempFile->fileName();
+        tempFile->close();
+    }
+    else
+    {
+        _warning = tr("Couldn't export the sample.");
+        return;
+    }
 
     SampleWriterWav writer(pathTempFile);
     if (id2.indexElt != -1)

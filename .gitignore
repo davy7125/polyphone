@@ -10,3 +10,4 @@
 /debian
 /sources/build
 .DS_Store
+sources/.qtcreator/polyphone.pro.user
