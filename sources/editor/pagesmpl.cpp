@@ -109,8 +109,9 @@ void PageSmpl::updateInterface(QString editingSource)
         return;
 
     IdList ids = _currentIds.getSelectedIds(elementSmpl);
-    int nombreElements = ids.size();
+    int sampleCount = ids.size();
 
+    // Gather the common configuration
     EltID id = ids.first();
     quint32 sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
     int rootKey = _sf2->get(id, champ_byOriginalPitch).bValue;
@@ -123,6 +124,7 @@ void PageSmpl::updateInterface(QString editingSource)
         endLoop = 0;
     quint32 length = _sf2->get(id, champ_dwLength).dwValue;
     SFSampleLink typeLink = _sf2->get(id, champ_sfSampleType).sfLinkValue;
+    bool unCompressed = !_sf2->getSound(id)->isRawDataUnchanged();
     for (int i = 1; i < ids.count(); i++)
     {
         EltID idTmp = ids[i];
@@ -139,9 +141,10 @@ void PageSmpl::updateInterface(QString editingSource)
         length = qMin(length, _sf2->get(idTmp, champ_dwLength).dwValue);
         if (typeLink != _sf2->get(idTmp, champ_sfSampleType).sfLinkValue)
             typeLink = linkInvalid;
+        unCompressed |= !_sf2->getSound(idTmp)->isRawDataUnchanged();
     }
 
-    // Remplissage des informations
+    // Fill details
     while (ui->comboSampleRate->count() > 7)
         ui->comboSampleRate->removeItem(7);
     int sampleRateIndex = ui->comboSampleRate->findText(QString::number(sampleRate));
@@ -154,7 +157,7 @@ void PageSmpl::updateInterface(QString editingSource)
         sampleRateIndex = 7;
     }
     ui->comboSampleRate->setCurrentIndex(sampleRateIndex);
-    if (nombreElements == 1)
+    if (sampleCount == 1)
         ui->labelTaille->setText(QString::number(length) + " - " +
                                  QLocale::system().toString((double)length / sampleRate, 'f', 3) + " " + tr("s", "unit for seconds"));
     else
@@ -184,7 +187,7 @@ void PageSmpl::updateInterface(QString editingSource)
     ui->grapheFourier->setSampleName(_sf2->getQstr(id, champ_name));
     ui->grapheFourier->setCurrentIds(_currentIds);
     ui->waveDisplay->setCurrentSample(0);
-    if (nombreElements > 1)
+    if (sampleCount > 1)
     {
         ui->waveDisplay->displayMultipleSelection(true);
         ui->pushAutoTune->setEnabled(true);
@@ -208,16 +211,16 @@ void PageSmpl::updateInterface(QString editingSource)
     }
 
     // Lecteur
-    if (nombreElements == 1)
+    if (sampleCount == 1)
     {
         ui->checkLectureBoucle->setEnabled(ui->spinStartLoop->value() != ui->spinEndLoop->value());
         ui->checkLectureBoucle->setChecked(qAbs(ui->spinEndLoop->value() - ui->spinStartLoop->value()) > 10);
     }
     else
         ui->checkLectureBoucle->setEnabled(false);
-    ui->checkLectureSinus->setEnabled(nombreElements == 1);
-    ui->pushLecture->setEnabled(nombreElements == 1);
-    ui->sliderLectureVolume->setEnabled(nombreElements == 1);
+    ui->checkLectureSinus->setEnabled(sampleCount == 1);
+    ui->pushLecture->setEnabled(sampleCount == 1);
+    ui->sliderLectureVolume->setEnabled(sampleCount == 1);
 
     // Type et lien
     EltID id2 = id;
@@ -225,7 +228,7 @@ void PageSmpl::updateInterface(QString editingSource)
     ui->comboType->clear();
 
     // Liens possibles
-    if (nombreElements == 1)
+    if (sampleCount == 1)
     {
         foreach (int i, _sf2->getSiblings(id2))
         {
@@ -238,9 +241,9 @@ void PageSmpl::updateInterface(QString editingSource)
     }
     ui->comboLink->model()->sort(0);
     ui->comboLink->insertItem(0, "-");
-    ui->comboLink->setEnabled(nombreElements == 1 && !ui->pushLecture->isChecked());
+    ui->comboLink->setEnabled(sampleCount == 1 && !ui->pushLecture->isChecked());
 
-    // Types possibles et sélections
+    // Current and possible types
     ui->comboType->addItem(tr("mono", "opposite to stereo"));
     if (typeLink == monoSample || typeLink == RomMonoSample)
     {
@@ -268,7 +271,7 @@ void PageSmpl::updateInterface(QString editingSource)
         default:
             ui->comboType->setCurrentIndex(-1);
         }
-        if (nombreElements == 1)
+        if (sampleCount == 1)
         {
             id2.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
             ui->comboLink->setCurrentIndex(ui->comboLink->findText(_sf2->getQstr(id2, champ_name)));
@@ -276,11 +279,67 @@ void PageSmpl::updateInterface(QString editingSource)
         else
             ui->comboLink->setCurrentIndex(-1);
 
-        ui->checkLectureLien->setEnabled(nombreElements == 1);
+        ui->checkLectureLien->setEnabled(sampleCount == 1);
     }
-    ui->comboType->setEnabled(nombreElements == 1 && !ui->pushLecture->isChecked());
+    ui->comboType->setEnabled(sampleCount == 1 && !ui->pushLecture->isChecked());
 
-    // Reprise de la lecture
+    // Compression state / command
+    id2.typeElement = elementSf2;
+    if (_sf2->get(id2, champ_IFIL).sfVerValue.wMajor == 3)
+    {
+        // Show the compression button
+        int index = ui->gridLayout_2->indexOf(ui->pushCompress);
+        if (index == -1)
+        {
+            index = ui->gridLayout_2->indexOf(ui->comboType);
+            if (index != -1)
+            {
+                int row, col, rowSpan, colSpan;
+                ui->gridLayout_2->getItemPosition(index, &row, &col, &rowSpan, &colSpan);
+                ui->gridLayout_2->addWidget(ui->comboType, row, col, rowSpan, colSpan - 1);
+                ui->gridLayout_2->addWidget(ui->pushCompress, row, col + colSpan - 1);
+            }
+            ui->pushCompress->show();
+        }
+
+        // At least one sample is not compressed?
+        if (unCompressed)
+        {
+            // The compression is allowed
+            ui->pushCompress->setFlat(false);
+            ui->pushCompress->setEnabled(true);
+            ui->pushCompress->setToolTip(tr("Compress the sample(s) to reduce the soundfont size\nWarning: quality will be reduced and the loop may be altered"));
+        }
+        else
+        {
+            // All samples are already compressed
+            ui->pushCompress->setFlat(true);
+            ui->pushCompress->setEnabled(false);
+            ui->pushCompress->setToolTip(sampleCount == 1 ?
+                                             tr("This sample is compressed to reduce the size of the soundfont") :
+                                             tr("The selected samples are compressed to reduce the size of the soundfont"));
+        }
+    }
+    else
+    {
+        // Hide the compression button
+        int index = ui->gridLayout_2->indexOf(ui->pushCompress);
+        if (index != -1)
+        {
+            ui->pushCompress->hide();
+            ui->pushCompress->setEnabled(false);
+            ui->gridLayout_2->removeWidget(ui->pushCompress);
+            index = ui->gridLayout_2->indexOf(ui->comboType);
+            if (index != -1)
+            {
+                int row, col, rowSpan, colSpan;
+                ui->gridLayout_2->getItemPosition(index, &row, &col, &rowSpan, &colSpan);
+                ui->gridLayout_2->addWidget(ui->comboType, row, col, rowSpan, colSpan + 1);
+            }
+        }
+    }
+
+    // Possibly restart playback
     _currentPlayingToken = 0;
     ui->checkLectureLien->blockSignals(true);
     ui->checkLectureLien->setChecked(_synth->isStereoEnabled());
@@ -291,7 +350,7 @@ void PageSmpl::updateInterface(QString editingSource)
 
     // Initialize the equalizer
     ui->widgetEqualizer->setCurrentIds(ids);
-    ui->widgetEqualizer->enableApply(!ui->pushLecture->isChecked() || nombreElements > 1);
+    ui->widgetEqualizer->enableApply(!ui->pushLecture->isChecked() || sampleCount > 1);
 }
 
 void PageSmpl::setStartLoop()
@@ -318,7 +377,7 @@ void PageSmpl::setStartLoop()
                 if (_sf2->isValid(id2))
                 {
                     if (val.dwValue != _sf2->get(id2, champ_dwStartLoop).dwValue &&
-                            val.dwValue <= _sf2->get(id2, champ_dwLength).dwValue)
+                        val.dwValue <= _sf2->get(id2, champ_dwLength).dwValue)
                         _sf2->set(id2, champ_dwStartLoop, val);
                 }
             }
@@ -374,7 +433,7 @@ void PageSmpl::setEndLoop()
                 if (_sf2->isValid(id2))
                 {
                     if (val.dwValue != _sf2->get(id2, champ_dwEndLoop).dwValue &&
-                            val.dwValue <= _sf2->get(id2, champ_dwLength).dwValue)
+                        val.dwValue <= _sf2->get(id2, champ_dwLength).dwValue)
                         _sf2->set(id2, champ_dwEndLoop, val);
                 }
             }
@@ -730,9 +789,9 @@ void PageSmpl::setLinkedSmpl(int index)
 
         // Restauration des types de liens
         bool keepTypeLink = (type == rightSample && typeLinkedNew == leftSample) ||
-                (type == RomRightSample && typeLinkedNew == RomLeftSample) ||
-                (type == leftSample && typeLinkedNew == rightSample) ||
-                (type == RomLeftSample && typeLinkedNew == RomRightSample);
+                            (type == RomRightSample && typeLinkedNew == RomLeftSample) ||
+                            (type == leftSample && typeLinkedNew == rightSample) ||
+                            (type == RomLeftSample && typeLinkedNew == RomRightSample);
         if (!keepTypeLink)
         {
             val.sfLinkValue = linkedSample;
@@ -796,7 +855,7 @@ void PageSmpl::setRate(int index)
             if (echInit != echFinal)
                 setRateElt(id, echFinal);
 
-            // Sample associé ?
+            // Linked sample?
             EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
@@ -842,7 +901,7 @@ EltID PageSmpl::getRepercussionID(EltID id)
     // Recherche du sample associé, le cas échéant et si la répercussion est activée
     SFSampleLink typeLien = _sf2->get(id, champ_sfSampleType).sfLinkValue;
     if (typeLien != monoSample && typeLien != RomMonoSample &&
-            ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool())
+        ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", true).toBool())
         id2.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
     else
         id2.indexElt = -1;
@@ -870,6 +929,7 @@ void PageSmpl::lecture()
         ui->comboType->setEnabled(false);
         ui->comboSampleRate->setEnabled(false);
         ui->widgetEqualizer->enableApply(false);
+        ui->pushCompress->setEnabled(false);
     }
 
     updatePlayButton();
@@ -887,6 +947,8 @@ void PageSmpl::lecteurFinished(int token)
     ui->comboType->setEnabled(true);
     ui->comboSampleRate->setEnabled(true);
     ui->widgetEqualizer->enableApply(true);
+    if (!ui->pushCompress->isFlat())
+        ui->pushCompress->setEnabled(true);
 
     if (ui->pushLecture->isChecked())
     {
@@ -1023,13 +1085,13 @@ void PageSmpl::updatePlayButton()
     {
         ui->pushLecture->setToolTip(tr("Stop"));
         ui->pushLecture->setIcon(ContextManager::theme()->getColoredSvg(
-                                     ":/icons/play.svg", QSize(36, 36), ThemeManager::HIGHLIGHTED_BACKGROUND));
+            ":/icons/play.svg", QSize(36, 36), ThemeManager::HIGHLIGHTED_BACKGROUND));
     }
     else
     {
         ui->pushLecture->setToolTip(tr("Play"));
         ui->pushLecture->setIcon(ContextManager::theme()->getColoredSvg(
-                                     ":/icons/play.svg", QSize(36, 36), ThemeManager::WINDOW_TEXT));
+            ":/icons/play.svg", QSize(36, 36), ThemeManager::WINDOW_TEXT));
     }
 }
 
@@ -1230,14 +1292,14 @@ void PageSmpl::updateLoopQuality()
         {
             QMap<QString, QString> replacement;
             replacement["currentColor"] = ContextManager::theme()->getFixedColor(
-                        ThemeManager::FixedColorType::YELLOW, ThemeManager::WINDOW_BACKGROUND).name();
+                                                                     ThemeManager::FixedColorType::YELLOW, ThemeManager::WINDOW_BACKGROUND).name();
             ui->iconLoopWarning->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/warning.svg", QSize(16, 16), replacement));
         }
         else
         {
             QMap<QString, QString> replacement;
             replacement["currentColor"] = ContextManager::theme()->getFixedColor(
-                        ThemeManager::FixedColorType::RED, ThemeManager::WINDOW_BACKGROUND).name();
+                                                                     ThemeManager::FixedColorType::RED, ThemeManager::WINDOW_BACKGROUND).name();
             ui->iconLoopWarning->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/warning.svg", QSize(16, 16), replacement));
         }
     }
@@ -1247,6 +1309,33 @@ void PageSmpl::updateLoopQuality()
 
 void PageSmpl::on_pushCompress_clicked()
 {
+    if (_preparingPage)
+        return;
 
+    // Soundfont editing
+    QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
+    foreach (EltID id, listID)
+    {
+        if (!_sf2->isValid(id))
+            continue;
+
+        Sound * sound = _sf2->getSound(id);
+        if (!sound->isRawDataUnchanged())
+        {
+
+        }
+
+        // Linked sample?
+        EltID id2 = getRepercussionID(id);
+        if (id2.indexElt != -1 && _sf2->isValid(id2))
+        {
+            sound = _sf2->getSound(id2);
+            if (!sound->isRawDataUnchanged())
+            {
+
+            }
+        }
+    }
+    _sf2->endEditing(_editingSource + ":update");
 }
 

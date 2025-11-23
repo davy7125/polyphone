@@ -55,6 +55,7 @@ private:
     QString link(int &status);
     QString sampleRate(EltID id);
     void findLinkedSample(EltID id);
+    QString compression(EltID id, int &status);
 
     QList<int> _usedSmpl;
     EltID _linkedSampleId;

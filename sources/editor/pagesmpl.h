@@ -79,7 +79,6 @@ private slots:
     QString findDuplicateName(EltID smplId);
     QString getName(QString name, int maxCharacters, int suffixNumber);
     void on_checkLectureBoucle_clicked(bool checked);
-
     void on_pushCompress_clicked();
 
 private:
@@ -91,6 +90,7 @@ private:
     void autoTune(EltID id, int &pitch, int &correction, float &score);
     void updateSinus();
     void updateLoopQuality();
+    void compressSound(Sound * sound);
 };
 
 #endif // PAGE_SMPL_H

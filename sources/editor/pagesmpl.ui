@@ -627,10 +627,6 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
-             <property name="toolTip">
-              <string>Compress the sample to reduce the soundfont size
-Warning: quality will be reduced and the loop may be altered</string>
-             </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{padding: 0 0 0 0;}</string>
              </property>

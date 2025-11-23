@@ -103,7 +103,7 @@ QString PageOverview::fillInformation(EltID id, int row)
     {
         SortedTableWidgetItem * item = new SortedTableWidgetItem(info[i], order[i]);
         item->setTextAlignment(Qt::AlignHCenter | Qt::AlignCenter);
-        if (status[i] == 1) // Warning
+        if (status[i] == 1) // Warning or something important
         {
             QFont font = item->font();
             font.setBold(true);

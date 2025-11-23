@@ -61,6 +61,8 @@ public:
     // if checknumber is high, the accuracy is best but it needs more samples to compute
     static float computeLoopQuality(QVector<float> vData, quint32 loopStart, quint32 loopEnd, quint32 checkNumber, bool bipolar, float maxValue = -1);
 
+    static QByteArray compressSample(qint16* data16, quint32 sampleLength, quint32 sampleRate, double oggQuality);
+
 private:
     static void FFT_calculate(Complex * x, quint32 N /* must be a power of 2 */,
                               Complex * X, Complex * scratch, Complex * twiddles);

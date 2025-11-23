@@ -25,9 +25,7 @@
 #include "sf2sdtapart.h"
 #include <QDataStream>
 #include "sound.h"
-#include <vorbis/vorbisenc.h>
-#include <vorbis/codec.h>
-#include <vorbis/vorbisfile.h>
+#include "sampleutils.h"
 
 const quint32 Sf2SdtaPart::BLOCK_SIZE = 1024;
 
@@ -272,98 +270,10 @@ bool Sf2SdtaPart::compressSample(Sound* sound, double quality)
     quint8* data24;
     sound->getData(sampleLength, data16, data24, false, false);
 
-    ogg_stream_state os;
-    ogg_page         og;
-    ogg_packet       op;
-    vorbis_info      vi;
-    vorbis_dsp_state vd;
-    vorbis_block     vb;
-    vorbis_comment   vc;
+    QByteArray compressedData = SampleUtils::compressSample(data16, sampleLength, sound->getUInt32(champ_dwSampleRate), quality);
+    if (compressedData.isEmpty())
+        return false;
 
-    vorbis_info_init(&vi);
-    if (vorbis_encode_init_vbr(&vi, 1, sound->getUInt32(champ_dwSampleRate), quality) != 0)
-        return false; // Failed to initialize vorbis
-
-    vorbis_comment_init(&vc);
-    vorbis_analysis_init(&vd, &vi);
-    vorbis_block_init(&vd, &vb);
-    srand(time(nullptr));
-    ogg_stream_init(&os, rand());
-
-    ogg_packet header;
-    ogg_packet header_comm;
-    ogg_packet header_code;
-
-    vorbis_analysis_headerout(&vd, &vc, &header, &header_comm, &header_code);
-    ogg_stream_packetin(&os, &header);
-    ogg_stream_packetin(&os, &header_comm);
-    ogg_stream_packetin(&os, &header_code);
-
-    QByteArray obuf;
-    obuf.reserve(1024 * 1024);
-
-    auto append_page = [&](const ogg_page &pg){
-        obuf.append(reinterpret_cast<const char*>(pg.header), pg.header_len);
-        obuf.append(reinterpret_cast<const char*>(pg.body),   pg.body_len);
-    };
-
-    while (ogg_stream_flush(&os, &og) != 0)
-        append_page(og);
-
-    quint32 page = 0;
-    quint32 max = 0;
-    do
-    {
-        int bufflength = qMin(Sf2SdtaPart::BLOCK_SIZE, sampleLength - page * Sf2SdtaPart::BLOCK_SIZE);
-        float **buffer = vorbis_analysis_buffer(&vd, bufflength);
-
-        int j = 0;
-        float coef = 1.0f / ((0.5f + 0x7fff) * 1.009f);
-        max = qMin((page + 1) * Sf2SdtaPart::BLOCK_SIZE, sampleLength);
-
-        for (quint32 i = page * Sf2SdtaPart::BLOCK_SIZE; i < max; i++)
-            buffer[0][j++] = (0.5f + data16[i]) * coef;
-
-        vorbis_analysis_wrote(&vd, bufflength);
-
-        while (vorbis_analysis_blockout(&vd, &vb) == 1)
-        {
-            vorbis_analysis(&vb, nullptr);
-            vorbis_bitrate_addblock(&vb);
-
-            while (vorbis_bitrate_flushpacket(&vd, &op))
-            {
-                ogg_stream_packetin(&os, &op);
-                while (ogg_stream_pageout(&os, &og) != 0)
-                    append_page(og);
-            }
-        }
-
-        page++;
-    }
-    while (max != sampleLength);
-
-    vorbis_analysis_wrote(&vd, 0);
-
-    while (vorbis_analysis_blockout(&vd, &vb) == 1)
-    {
-        vorbis_analysis(&vb, nullptr);
-        vorbis_bitrate_addblock(&vb);
-
-        while (vorbis_bitrate_flushpacket(&vd, &op))
-        {
-            ogg_stream_packetin(&os, &op);
-            while (ogg_stream_pageout(&os, &og) != 0)
-                append_page(og);
-        }
-    }
-
-    ogg_stream_clear(&os);
-    vorbis_block_clear(&vb);
-    vorbis_dsp_clear(&vd);
-    vorbis_comment_clear(&vc);
-    vorbis_info_clear(&vi);
-
-    sound->setRawData(obuf.data(), obuf.size());
+    sound->setRawData(compressedData.data(), compressedData.size());
     return true;
 }

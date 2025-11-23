@@ -43,7 +43,8 @@ QStringList PageOverviewSmpl::getHorizontalHeader()
             << tr("Correction")
             << tr("Sample\ntype")
             << tr("Linked\nsample")
-            << tr("Sample\nrate");
+            << tr("Sample\nrate")
+            << tr("Compression");
     return hHeader;
 }
 
@@ -119,6 +120,12 @@ void PageOverviewSmpl::getInformation(EltID id, QStringList &info, QStringList &
     info << strTmp;
     order << strTmp;
     status << 0;
+
+    // Compression
+    strTmp = compression(id, iTmp);
+    info << strTmp;
+    order << strTmp;
+    status << iTmp;
 }
 
 QString PageOverviewSmpl::isUsed(EltID id, int &status)
@@ -287,4 +294,18 @@ void PageOverviewSmpl::findLinkedSample(EltID id)
         _linkedSampleId.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
         _linkedSampleStatus = _sf2->isValid(_linkedSampleId) ? 1 : 2;
     }
+}
+
+QString PageOverviewSmpl::compression(EltID id, int &status)
+{
+    EltID(elementSf2, id.indexSf2);
+    SfVersionTag version = _sf2->get(EltID(elementSf2, id.indexSf2), champ_IFIL).sfVerValue;
+    if (version.wMajor == 3 && _sf2->getSound(id)->isRawDataUnchanged())
+    {
+        status = 1;
+        return tr("yes");
+    }
+
+    status = 0;
+    return tr("no");
 }

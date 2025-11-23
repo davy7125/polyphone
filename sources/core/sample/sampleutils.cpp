@@ -26,6 +26,9 @@
 #include "fastmaths.h"
 #include "utils.h"
 #include <QMessageBox>
+#include <vorbis/vorbisenc.h>
+#include <vorbis/codec.h>
+#include <vorbis/vorbisfile.h>
 
 QVector<float> SampleUtils::int24ToFloat(const qint16 * data16, const quint8 * data24, quint32 length)
 {
@@ -1274,4 +1277,103 @@ float SampleUtils::getDiffForLoopQuality(const float * data, quint32 pos1, quint
 
     // Combine the values
     return 0.45f * qAbs(diff0) + 0.33f * qAbs(diff1) + 0.22f * qAbs(diff2);
+}
+
+QByteArray SampleUtils::compressSample(qint16* data16, quint32 sampleLength, quint32 sampleRate, double oggQuality)
+{
+    quint32 BLOCK_SIZE = 1024;
+    ogg_stream_state os;
+    ogg_page         og;
+    ogg_packet       op;
+    vorbis_info      vi;
+    vorbis_dsp_state vd;
+    vorbis_block     vb;
+    vorbis_comment   vc;
+
+    vorbis_info_init(&vi);
+    if (vorbis_encode_init_vbr(&vi, 1, sampleRate, oggQuality) != 0)
+        return QByteArray(); // Failed to initialize vorbis
+
+    vorbis_comment_init(&vc);
+    vorbis_analysis_init(&vd, &vi);
+    vorbis_block_init(&vd, &vb);
+    srand(time(nullptr));
+    ogg_stream_init(&os, rand());
+
+    ogg_packet header;
+    ogg_packet header_comm;
+    ogg_packet header_code;
+
+    vorbis_analysis_headerout(&vd, &vc, &header, &header_comm, &header_code);
+    ogg_stream_packetin(&os, &header);
+    ogg_stream_packetin(&os, &header_comm);
+    ogg_stream_packetin(&os, &header_code);
+
+    QByteArray obuf;
+    obuf.reserve(1024 * 1024);
+
+    auto append_page = [&](const ogg_page &pg)
+    {
+        obuf.append(reinterpret_cast<const char*>(pg.header), pg.header_len);
+        obuf.append(reinterpret_cast<const char*>(pg.body),   pg.body_len);
+    };
+
+    while (ogg_stream_flush(&os, &og) != 0)
+        append_page(og);
+
+    quint32 page = 0;
+    quint32 max = 0;
+    do
+    {
+        int bufflength = qMin(BLOCK_SIZE, sampleLength - page * BLOCK_SIZE);
+        float **buffer = vorbis_analysis_buffer(&vd, bufflength);
+
+        int j = 0;
+        float coef = 1.0f / ((0.5f + 0x7fff) * 1.009f);
+        max = qMin((page + 1) * BLOCK_SIZE, sampleLength);
+
+        for (quint32 i = page * BLOCK_SIZE; i < max; i++)
+            buffer[0][j++] = (0.5f + data16[i]) * coef;
+
+        vorbis_analysis_wrote(&vd, bufflength);
+
+        while (vorbis_analysis_blockout(&vd, &vb) == 1)
+        {
+            vorbis_analysis(&vb, nullptr);
+            vorbis_bitrate_addblock(&vb);
+
+            while (vorbis_bitrate_flushpacket(&vd, &op))
+            {
+                ogg_stream_packetin(&os, &op);
+                while (ogg_stream_pageout(&os, &og) != 0)
+                    append_page(og);
+            }
+        }
+
+        page++;
+    }
+    while (max != sampleLength);
+
+    vorbis_analysis_wrote(&vd, 0);
+
+    while (vorbis_analysis_blockout(&vd, &vb) == 1)
+    {
+        vorbis_analysis(&vb, nullptr);
+        vorbis_bitrate_addblock(&vb);
+
+        while (vorbis_bitrate_flushpacket(&vd, &op))
+        {
+            ogg_stream_packetin(&os, &op);
+            while (ogg_stream_pageout(&os, &og) != 0)
+                append_page(og);
+        }
+    }
+
+    ogg_stream_clear(&os);
+    vorbis_block_clear(&vb);
+    vorbis_dsp_clear(&vd);
+    vorbis_comment_clear(&vc);
+    vorbis_info_clear(&vi);
+
+    return obuf;
 }

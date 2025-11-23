@@ -53,7 +53,7 @@ public:
     bool _isSf3;
 
 private:
-    bool compressSample(Sound * sound, double quality);
+    static bool compressSample(Sound * sound, double quality);
     static const quint32 BLOCK_SIZE;
 };
 

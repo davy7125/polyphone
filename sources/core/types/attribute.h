@@ -140,6 +140,7 @@ typedef enum
     champ_nameSort = 174,
 
     champ_sampleData = 200,             // QVector<float>
+    champ_sampleRawData = 201,
 
     champ_pitchDefined = 300, // if pitch defined in a sample (wav)
     champ_mute = 301, // Divisions can be muted for testing purposes

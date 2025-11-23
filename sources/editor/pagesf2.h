@@ -103,6 +103,7 @@ private:
     void countElements();
     void countElements(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &usedInst, int &usedPrst,
                        int &instGen, int &prstGen, int &instMod, int &prstMod);
+    void displaySfVersion();
 };
 
 #endif // PAGE_SF2_H

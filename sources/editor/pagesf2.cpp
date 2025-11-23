@@ -88,16 +88,17 @@ void PageSf2::updateInterface(QString editingSource)
     _currentID = _currentIds.getFirstId(elementSf2);
     this->countElements();
 
-    // Mode 24 bits ?
+    // 24-bit samples?
     ui->comboBitDepth->setCurrentIndex(_sf2->get(_currentID, champ_wBpsSave).wValue == 24 ? 1 : 0);
 
-    ui->label_sfVersion->setText(QString("%1.%2")
-                                 .arg(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMajor)
-                                 .arg(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMinor, 2, 10, QChar('0')));
+    // Compression possible?
+    ui->comboCompression->setCurrentIndex(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMajor == 3 ? 1 : 0);
+
+    displaySfVersion();
     ui->label_soundEngine->setText(_sf2->getQstr(_currentID, champ_ISNG));
     QString txt = QString("%1.%2")
-            .arg(_sf2->get(_currentID, champ_IVER).sfVerValue.wMajor)
-            .arg(_sf2->get(_currentID, champ_IVER).sfVerValue.wMinor, 2, 10, QChar('0'));
+                      .arg(_sf2->get(_currentID, champ_IVER).sfVerValue.wMajor)
+                      .arg(_sf2->get(_currentID, champ_IVER).sfVerValue.wMinor, 2, 10, QChar('0'));
     if (_sf2->getQstr(_currentID, champ_IROM).isEmpty())
         ui->label_romVersion->setText("- (version " + txt + ")");
     else
@@ -210,7 +211,7 @@ void PageSf2::countElements()
     // Colors
     QString greenStr = "QLabel { color : " + ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::WINDOW_BACKGROUND).name() + "; }";
     QString redStr = "QLabel { color : " + ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND).name() +
-            "; font-weight: bold; }";
+                     "; font-weight: bold; }";
     QString normalStr = "QLabel { color : " + ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name() + "; font-weight: normal; }";
 
     // Display
@@ -394,15 +395,76 @@ void PageSf2::on_comboBitDepth_currentIndexChanged(int index)
     if (_preparingPage)
         return;
 
-    // Soundfont editing
     AttributeValue valTmp;
-    valTmp.wValue = (index == 1 ? 24 : 16);
-    _sf2->set(_currentID, champ_wBpsSave, valTmp);
+    switch (index)
+    {
+    case 0:
+        valTmp.wValue = 16;
+        _sf2->set(_currentID, champ_wBpsSave, valTmp);
+        break;
+    case 1:
+        valTmp.wValue = 24;
+        _sf2->set(_currentID, champ_wBpsSave, valTmp);
+
+        // Soundfont version is 2.04, no possible compression
+        if (100 * _sf2->get(_currentID, champ_IFIL).sfVerValue.wMajor + _sf2->get(_currentID, champ_IFIL).sfVerValue.wMinor != 204)
+        {
+            valTmp.sfVerValue.wMajor = 2;
+            valTmp.sfVerValue.wMinor = 4;
+            _sf2->set(_currentID, champ_IFIL, valTmp);
+
+            ui->comboCompression->blockSignals(true);
+            ui->comboCompression->setCurrentIndex(0);
+            ui->comboCompression->blockSignals(false);
+            displaySfVersion();
+        }
+        break;
+    default:
+        return;
+    }
     _sf2->endEditing(_editingSource);
 }
 
 void PageSf2::on_comboCompression_currentIndexChanged(int index)
 {
+    if (_preparingPage)
+        return;
 
+    AttributeValue valTmp;
+    switch (index)
+    {
+    case 0:
+        // No compression: back to soundfont version 2.04
+        valTmp.sfVerValue.wMajor = 2;
+        valTmp.sfVerValue.wMinor = 4;
+        _sf2->set(_currentID, champ_IFIL, valTmp);
+        break;
+    case 1:
+        // Compression is possible in soundfont version 3.00
+        valTmp.sfVerValue.wMajor = 3;
+        valTmp.sfVerValue.wMinor = 0;
+        _sf2->set(_currentID, champ_IFIL, valTmp);
+
+        // Bit depth is 16 with this soundfont version
+        if (_sf2->get(_currentID, champ_wBpsSave).wValue != 16)
+        {
+            valTmp.wValue = 16;
+            _sf2->set(_currentID, champ_wBpsSave, valTmp);
+            ui->comboBitDepth->blockSignals(true);
+            ui->comboBitDepth->setCurrentIndex(0);
+            ui->comboBitDepth->blockSignals(false);
+        }
+        break;
+    default:
+        return;
+    }
+    _sf2->endEditing(_editingSource);
+    displaySfVersion();
 }
 
+void PageSf2::displaySfVersion()
+{
+    ui->label_sfVersion->setText(QString("%1.%2")
+                                     .arg(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMajor)
+                                     .arg(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMinor, 2, 10, QChar('0')));
+}
