@@ -433,9 +433,12 @@ void Sound::getRawData(char* &rawData, quint32 &rawDataLength)
     rawDataLength = (rawData == nullptr) ? 0 : _rawDataLength;
 }
 
-
 void Sound::setRawData(const char * rawData, quint32 rawDataLength)
 {
+    delete [] _data16;
+    _data16 = nullptr;
+    delete [] _data24;
+    _data24 = nullptr;
     delete [] _rawData;
     _rawData = new char[rawDataLength];
     memcpy(_rawData, rawData, rawDataLength);

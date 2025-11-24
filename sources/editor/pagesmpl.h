@@ -80,6 +80,7 @@ private slots:
     QString getName(QString name, int maxCharacters, int suffixNumber);
     void on_checkLectureBoucle_clicked(bool checked);
     void on_pushCompress_clicked();
+    void onCompress(double oggQuality);
 
 private:
     Ui::PageSmpl *ui;
@@ -90,7 +91,7 @@ private:
     void autoTune(EltID id, int &pitch, int &correction, float &score);
     void updateSinus();
     void updateLoopQuality();
-    void compressSound(Sound * sound);
+    void compressElt(EltID id, double oggQuality);
 };
 
 #endif // PAGE_SMPL_H

@@ -72,7 +72,7 @@ void ToolSoundfontExport::process(SoundfontManager * sm, IdList ids, AbstractToo
                 if (name.isEmpty())
                     name = getName(sm, presets.keys());
 
-                QMap<int,  QList<int> > preset;
+                QMap<int, QList<int> > preset;
                 preset[soundfontId] << presetId;
                 process(sm, name, preset, parameters);
             }

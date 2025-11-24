@@ -33,6 +33,7 @@
 #include "graphicsfourier.h"
 #include "sampleutils.h"
 #include "contextmanager.h"
+#include "dialogcompressquality.h"
 
 PageSmpl::PageSmpl(QWidget *parent) :
     Page(parent, "page:smpl"),
@@ -1312,6 +1313,13 @@ void PageSmpl::on_pushCompress_clicked()
     if (_preparingPage)
         return;
 
+    DialogCompressQuality * dial = new DialogCompressQuality(dynamic_cast<QWidget*>(this->parent()));
+    connect(dial, SIGNAL(onOk(double)), this, SLOT(onCompress(double)));
+    dial->show();
+}
+
+void PageSmpl::onCompress(double oggQuality)
+{
     // Soundfont editing
     QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
     foreach (EltID id, listID)
@@ -1319,23 +1327,33 @@ void PageSmpl::on_pushCompress_clicked()
         if (!_sf2->isValid(id))
             continue;
 
-        Sound * sound = _sf2->getSound(id);
-        if (!sound->isRawDataUnchanged())
-        {
-
-        }
+        if (!_sf2->getSound(id)->isRawDataUnchanged())
+            compressElt(id, oggQuality);
 
         // Linked sample?
         EltID id2 = getRepercussionID(id);
         if (id2.indexElt != -1 && _sf2->isValid(id2))
         {
-            sound = _sf2->getSound(id2);
-            if (!sound->isRawDataUnchanged())
-            {
-
-            }
+            if (!_sf2->getSound(id2)->isRawDataUnchanged())
+                compressElt(id2, oggQuality);
         }
     }
     _sf2->endEditing(_editingSource + ":update");
 }
 
+void PageSmpl::compressElt(EltID id, double oggQuality)
+{
+    Sound * sound = _sf2->getSound(id);
+
+    // 16-bit data
+    quint32 sampleLength;
+    qint16* data16;
+    quint8* data24;
+    sound->getData(sampleLength, data16, data24, false, false);
+
+    QByteArray compressedData = SampleUtils::compressSample(data16, sampleLength, sound->getUInt32(champ_dwSampleRate), oggQuality);
+    if (compressedData.isEmpty())
+        return;
+
+    sound->setRawData(compressedData.data(), compressedData.size());
+}

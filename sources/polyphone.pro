@@ -272,6 +272,7 @@ SOURCES	+= main.cpp \
     dialogs/dialog_list.cpp \
     dialogs/dialog_rename.cpp \
     dialogs/dialog_about.cpp \
+    dialogs/dialogcompressquality.cpp \
     dialogs/dialogselection.cpp \
     dialogs/dialogchangelog.cpp \
     editor/footers/footerlinkedto.cpp \
@@ -636,6 +637,7 @@ HEADERS += \
     dialogs/dialog_list.h \
     dialogs/dialog_rename.h \
     dialogs/dialog_about.h \
+    dialogs/dialogcompressquality.h \
     dialogs/dialogselection.h \
     dialogs/dialogchangelog.h \
     dialogs/modalprogressdialog.h \
@@ -969,6 +971,7 @@ FORMS += \
     dialogs/dialog_list.ui \
     dialogs/dialog_rename.ui \
     dialogs/dialog_about.ui \
+    dialogs/dialogcompressquality.ui \
     dialogs/dialogselection.ui \
     dialogs/dialogchangelog.ui \
     editor/footers/footerlinkedto.ui \
