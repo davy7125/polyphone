@@ -151,7 +151,6 @@ void ModulatorComboDest::onCurrentIndexChanged(int index)
             index = _listIndex[newIndex] + 32768;
         else
         {
-            qDebug() << "not good";
             return;
         }
     }

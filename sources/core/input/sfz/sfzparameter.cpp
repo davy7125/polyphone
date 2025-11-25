@@ -24,7 +24,6 @@
 
 #include "sfzparameter.h"
 #include "contextmanager.h"
-#include <QDebug>
 
 QString SfzParameter::DEFAULT_PATH = "";
 

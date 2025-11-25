@@ -106,7 +106,6 @@ void GraphVisualizer::setScale()
             _yMin /= qPow(delta, 0.1);
             _yMax *= qPow(delta, 0.05);
         }
-        qDebug() << _fMin << _yMin;
         _dispWarning = _fMin < _yMin;
     }
     else

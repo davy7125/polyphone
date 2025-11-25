@@ -147,11 +147,13 @@ void InputParserSf::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPar
         Sound * sound = _sm->getSound(id);
         value.wValue = SHDR._wSampleLink.value;
         _sm->set(id, champ_wSampleLink, value);
+        bool isCompressed = false;
         if (isSf3 && SHDR._sfSampleType.value & 0x10)
         {
             SHDR._sfSampleType.value &= ~0x10;
             value.cValue = 1;
             sound->set(champ_rawDataAvailable, value);
+            isCompressed = true;
         }
         else
         {
@@ -186,6 +188,8 @@ void InputParserSf::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPar
 
         // Start / end / length of the sample
         value.dwValue = SHDR._end.value - SHDR._start.value;
+        if (isSf3 && !isCompressed)
+            value.dwValue /= 2;
         sound->set(champ_dwLength, value);
         value.dwValue = 20 + header._infoSize.value + sdtaPart._startSmplOffset + SHDR._start.value * (isSf3 ? 1 : 2);
         sound->set(champ_dwStart16, value);

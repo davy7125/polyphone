@@ -39,22 +39,22 @@ void OutputSf::processInternal(QString fileName, SoundfontManager * sm, bool &su
     _sm = sm;
 
     // Get the quality value if a compression of all uncompressed samples is required
-    bool isSf3 = fileName.endsWith(".sf3");
+    EltID id(elementSf2, sf2Index);
+    bool isSf3 = _sm->get(id, champ_IFIL).sfVerValue.wMajor == 3;
     double qualityValue = -1.0;
-    if (isSf3)
+    if (isSf3 && options.contains("quality"))
     {
-        int quality = options.contains("quality") ? options["quality"].toInt() : 1;
+        int quality = options["quality"].toInt();
         switch (quality)
         {
         case 0: qualityValue = 0.2; break;
-        case 1: qualityValue = 0.6; break;
         case 2: qualityValue = 1.0; break;
+        default: qualityValue = 0.6; break;
         }
     }
 
     // Check that we don't save over another soundfont already open
-    EltID idSf2(elementSf2);
-    foreach (int i, _sm->getSiblings(idSf2))
+    foreach (int i, _sm->getSiblings(id))
     {
         if (i != sf2Index && QString::compare(_sm->getQstr(EltID(elementSf2, i), champ_filenameInitial), fileName, Qt::CaseSensitive) == 0)
         {
@@ -65,7 +65,7 @@ void OutputSf::processInternal(QString fileName, SoundfontManager * sm, bool &su
     }
 
     // Do we override the current file?
-    EltID id(elementSf2, sf2Index);
+    id.indexSf2 = sf2Index;
     if (_sm->getQstr(id, champ_filenameForData) == fileName)
     {
         // Use a temporary file
@@ -128,22 +128,10 @@ void OutputSf::processInternal(QString fileName, SoundfontManager * sm, bool &su
 void OutputSf::save(QString fileName, bool &success, QString &error, int sf2Index, double qualityValue)
 {
     EltID id(elementSf2, sf2Index, 0, 0, 0);
-    bool isSf3 = fileName.endsWith(".sf3");
+    bool isSf3 = _sm->get(id, champ_IFIL).sfVerValue.wMajor == 3;
 
-    // Update the editing software and the soundfont format version
+    // Update the editing software
     _sm->set(id, champ_ISFT, QString("Polyphone"));
-    AttributeValue valTmp;
-    if (isSf3)
-    {
-        valTmp.sfVerValue.wMajor = 3;
-        valTmp.sfVerValue.wMinor = 0;
-    }
-    else
-    {
-        valTmp.sfVerValue.wMajor = 2;
-        valTmp.sfVerValue.wMinor = 4;
-    }
-    _sm->set(id, champ_IFIL, valTmp);
 
     // Prepare the data to write
     Sf2Header header;

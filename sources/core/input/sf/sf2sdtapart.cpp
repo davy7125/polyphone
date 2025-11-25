@@ -131,7 +131,7 @@ quint32 Sf2SdtaPart::prepareBeforeWritingData(bool isSf3, double qualityValue)
     _sm24Size.value = 0;
     foreach (Sound * sound, _sounds)
     {
-        if (isSf3 && (qualityValue > 0 || sound->isRawDataUnchanged()))
+        if (_isSf3 && (qualityValue > 0 || sound->isRawDataUnchanged()))
         {
             if (!sound->isRawDataUnchanged())
             {
@@ -158,7 +158,7 @@ quint32 Sf2SdtaPart::prepareBeforeWritingData(bool isSf3, double qualityValue)
     }
     _sdtaSize.value = _smplSize.value + 12;
 
-    if (_sample24bits)
+    if (_sample24bits && !isSf3)
     {
         _sm24Size.value = _smplSize.value / 2;
         _sm24Size.value += (_sm24Size.value % 2); // Even size
@@ -231,7 +231,7 @@ QDataStream & operator << (QDataStream &out, Sf2SdtaPart &sdta)
     }
 
     // Possible extra 8-bit part
-    if (sdta._sample24bits)
+    if (sdta._sample24bits && !sdta._isSf3)
     {
         // "sm24" with its size
         if (out.writeRawData("sm24", 4) != 4)

@@ -27,7 +27,6 @@
 #include <QItemSelection>
 #include <QDir>
 #include <QScreen>
-#include <QDebug>
 #include "soundfontmanager.h"
 #include "inputfactory.h"
 #include "abstractinputparser.h"

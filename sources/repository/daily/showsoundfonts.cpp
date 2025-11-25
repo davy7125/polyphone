@@ -30,7 +30,6 @@
 #include "soundfontcell.h"
 #include <QJsonArray>
 #include <QResizeEvent>
-#include <QDebug>
 
 ShowSoundfonts::ShowSoundfonts(QWidget *parent) :
     QWidget(parent),

@@ -25,7 +25,6 @@
 #include "utils.h"
 #include <QStringList>
 #include <QFile>
-#include <QDebug>
 #include <QRegularExpression>
 
 #ifdef USE_WOLFSSL

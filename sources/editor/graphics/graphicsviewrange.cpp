@@ -1111,7 +1111,6 @@ bool GraphicsViewRange::event(QEvent* event)
 #else
                     _yInit = (nge->globalPosition().y() - this->mapToGlobal(QPoint(0, 0)).y()) / this->height();
 #endif
-                    qDebug() << _yInit;
                     _posYinit = _posY;
                     _posY = (_zoomY * _posYinit * (_zoomYinit - 1) +
                              _yInit * (_zoomY - _zoomYinit)) / (_zoomYinit * (_zoomY - 1));

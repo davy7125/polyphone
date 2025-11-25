@@ -29,7 +29,6 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QDirIterator>
-#include <QDebug>
 
 const QString TranslationManager::DEFAULT_LANGUAGE = "en"; // English is the default language;
 const QString TranslationManager::RESOURCE_PATH = ":/i18n";

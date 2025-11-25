@@ -230,7 +230,10 @@ quint32 Sf2PdtaPart::prepareBeforeWritingData(Sf2SdtaPart* sdtaPart, bool isSf3)
             sound->getRawData(rawData, rawDataLength);
 
         _shdrs[i]._start.value = position;
-        _shdrs[i]._end.value = position + (rawDataLength > 0 ? rawDataLength : sound->getUInt32(champ_dwLength));
+        if (isSf3)
+            _shdrs[i]._end.value = position + (rawDataLength > 0 ? rawDataLength : 2 * sound->getUInt32(champ_dwLength));
+        else
+            _shdrs[i]._end.value = position + sound->getUInt32(champ_dwLength);
         _shdrs[i]._startLoop.value = (isSf3 ? 0 : position) + sound->getUInt32(champ_dwStartLoop);
         _shdrs[i]._endLoop.value = (isSf3 ? 0 : position) + sound->getUInt32(champ_dwEndLoop);
         _shdrs[i]._sfSampleType.value |= (rawDataLength > 0 ? 0x10 : 0x00);
@@ -246,7 +249,7 @@ quint32 Sf2PdtaPart::prepareBeforeWritingData(Sf2SdtaPart* sdtaPart, bool isSf3)
         else
         {
             // 46 zeros for non-compressed samples
-            position += 46;
+            position += isSf3 ?  2 * 46 : 46;
         }
     }
 
