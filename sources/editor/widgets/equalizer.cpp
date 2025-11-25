@@ -96,7 +96,7 @@ void Equalizer::on_pushEgaliser_clicked()
             listprocessedID << id;
             QVector<float> baData = sm->getDataFloat(id);
             baData = SampleUtils::EQ(baData, sm->get(id, champ_dwSampleRate).dwValue, gatherEqVariables());
-            sm->set(id, baData);
+            sm->setData(id, baData);
 
             // Associated sample?
             EltID id2 = PageSmpl::getRepercussionID(id);
@@ -107,7 +107,7 @@ void Equalizer::on_pushEgaliser_clicked()
                     listprocessedID << id2;
                     QVector<float> baData = sm->getDataFloat(id2);
                     baData = SampleUtils::EQ(baData, sm->get(id2, champ_dwSampleRate).dwValue, gatherEqVariables());
-                    sm->set(id2, baData);
+                    sm->setData(id2, baData);
                 }
             }
         }

@@ -182,7 +182,7 @@ void ToolAutoLoop::updateSample(EltID id, QVector<float> vData, quint32 startLoo
 
     // Update data
     vData = SampleUtils::loopStep2(vData, startLoop, endLoop, crossfadeLength, true);
-    sm->set(id, vData);
+    sm->setData(id, vData);
 
     // Update length, startloop and endloop
     AttributeValue val;

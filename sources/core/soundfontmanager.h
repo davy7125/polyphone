@@ -57,7 +57,8 @@ public:
     QVector<float> getDataFloat(EltID idSmpl);
     int set(EltID id, AttributeType champ, AttributeValue value);
     int set(EltID id, AttributeType champ, QString qStr);
-    int set(EltID idSmpl, QVector<float> data);
+    int setData(EltID idSmpl, QVector<float> data);
+    int setRawData(EltID idSmpl, QByteArray data);
     void reset(EltID id, AttributeType champ);
     void simplify(EltID id, AttributeType champ);
 

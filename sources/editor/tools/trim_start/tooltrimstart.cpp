@@ -103,7 +103,7 @@ void ToolTrimStart::trim(IdList ids)
 
         // Data
         vDataList[i] = SampleUtils::removeBlankStep2(vDataList[i], pos);
-        sm->set(id, vDataList[i]);
+        sm->setData(id, vDataList[i]);
 
         // Update length
         AttributeValue val;

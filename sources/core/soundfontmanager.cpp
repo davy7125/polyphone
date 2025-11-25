@@ -680,12 +680,20 @@ QList<int> SoundfontManager::undo(QList<Action *> actions)
             if (action->champ >= champ_filenameInitial && action->champ <= champ_nameSort)
                 this->set(action->id, action->champ, action->qOldValue); // QString
             else if (action->champ == champ_sampleData)
-                this->set(action->id, action->fOldValue); // QVector<float>
+            {
+                // Reinterpret data (QVector<float>)
+                int size = action->bOldValue.size() / sizeof(float);
+                const float* ptr = reinterpret_cast<const float*>(action->bOldValue.constData());
+                QVector<float> fOldValue = QVector<float>(ptr, ptr + size);
+                this->setData(action->id, fOldValue);
+            }
+            else if (action->champ == champ_sampleRawData)
+                this->setRawData(action->id, action->bOldValue);
             else
                 this->set(action->id, action->champ, action->vOldValue); // Valeur
             break;
         case Action::TypeChangeFromDefault:
-            // Retour to the old value, reset
+            // Return to the old value, reset
             this->reset(action->id, action->champ);
             break;
         default:
@@ -727,7 +735,15 @@ void SoundfontManager::redo(int indexSf2)
             if (action->champ >= champ_filenameInitial && action->champ <= champ_nameSort)
                 this->set(action->id, action->champ, action->qNewValue); // QString
             else if (action->champ == champ_sampleData)
-                this->set(action->id, action->fNewValue); // QVector<float>
+            {
+                // Reinterpret data (QVector<float>)
+                int size = action->bNewValue.size() / sizeof(float);
+                const float* ptr = reinterpret_cast<const float*>(action->bNewValue.constData());
+                QVector<float> fNewValue = QVector<float>(ptr, ptr + size);
+                this->setData(action->id, fNewValue);
+            }
+            else if (action->champ == champ_sampleRawData)
+                this->setRawData(action->id, action->bNewValue);
             else
                 this->set(action->id, action->champ, action->vNewValue); // Valeur
             break;
@@ -1517,26 +1533,92 @@ int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
     return 0;
 }
 
-int SoundfontManager::set(EltID idSmpl, QVector<float> data)
+int SoundfontManager::setData(EltID idSmpl, QVector<float> data)
 {
     QMutexLocker locker(&_mutex);
     if (!this->isValid(idSmpl))
         return 1;
+    Sound* sound = &_soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt)->_sound;
 
-    QVector<float> oldData;
-    oldData.clear();
-
-    // Update sample data
-    oldData = _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt)->_sound.getDataFloat(false);
-    _soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt)->_sound.setDataFloat(data);
-
-    // Création et stockage de l'action
-    Action *action = new Action();
-    action->typeAction = Action::TypeUpdate;
+    // Create an action for the data
+    Action* action = new Action();
     action->id = idSmpl;
     action->champ = champ_sampleData;
-    action->fOldValue = oldData;
-    action->fNewValue = data;
+    if (sound->isRawDataUnchanged())
+    {
+        action->typeAction = Action::TypeChangeFromDefault;
+
+        // Store current raw data
+        char* rawData;
+        quint32 rawDataLength;
+        sound->getRawData(rawData, rawDataLength);
+
+        Action* action2 = new Action();
+        action2->typeAction = Action::TypeChangeToDefault;
+        action2->id = idSmpl;
+        action2->champ = champ_sampleRawData;
+        action2->bOldValue = QByteArray(rawData, rawDataLength);
+        // action2->bNewValue remains empty
+        this->_undoRedo->add(action2);
+    }
+    else
+    {
+        action->typeAction = Action::TypeUpdate;
+        QVector<float> oldData = sound->getDataFloat(false);
+        action->bOldValue = QByteArray(
+            reinterpret_cast<const char*>(oldData.constData()),
+            sizeof(float) * oldData.size());
+    }
+
+    // Update sample data
+    action->bNewValue = QByteArray(
+        reinterpret_cast<const char*>(data.constData()),
+        sizeof(float) * data.size());
+    sound->setDataFloat(data);
+    this->_undoRedo->add(action);
+
+    return 0;
+}
+
+int SoundfontManager::setRawData(EltID idSmpl, QByteArray data)
+{
+    QMutexLocker locker(&_mutex);
+    if (!this->isValid(idSmpl))
+        return 1;
+    Sound* sound = &_soundfonts->getSoundfont(idSmpl.indexSf2)->getSample(idSmpl.indexElt)->_sound;
+
+    // Create an action for the raw data
+    Action* action = new Action();
+    action->id = idSmpl;
+    action->champ = champ_sampleRawData;
+    if (sound->isRawDataUnchanged())
+    {
+        action->typeAction = Action::TypeUpdate;
+        char* rawData;
+        quint32 rawDataLength;
+        sound->getRawData(rawData, rawDataLength);
+        action->bOldValue = QByteArray(rawData, rawDataLength);
+    }
+    else
+    {
+        action->typeAction = Action::TypeChangeFromDefault;
+
+        // Store current data
+        Action* action2 = new Action();
+        action2->typeAction = Action::TypeChangeToDefault;
+        action2->id = idSmpl;
+        action2->champ = champ_sampleData;
+        QVector<float> oldData = sound->getDataFloat(false);
+        action2->bOldValue = QByteArray(
+            reinterpret_cast<const char*>(oldData.constData()),
+            sizeof(float) * oldData.size());
+        // action2->bNewValue remains empty
+        this->_undoRedo->add(action2);
+    }
+
+    // Update sample raw data
+    action->bNewValue = data;
+    sound->setRawData(data.constData(), data.size());
     this->_undoRedo->add(action);
 
     return 0;
@@ -1549,11 +1631,10 @@ void SoundfontManager::reset(EltID id, AttributeType champ)
         return;
 
     AttributeValue oldValue;
-    // Type d'élément à modifier
     switch (id.typeElement)
     {
     case elementInst:{
-        // Remise à zéro d'une propriété d'un instrument
+        // Reset an instrument property
         InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt);
         if (!tmp->getGlobalDivision()->isSet(champ))
             return;
@@ -1562,7 +1643,7 @@ void SoundfontManager::reset(EltID id, AttributeType champ)
         tmp->getGlobalDivision()->resetGen(champ);
     }break;
     case elementPrst:{
-        // Remise à zéro d'une propriété d'un preset
+        // Reset a preset property
         InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt);
         if (!tmp->getGlobalDivision()->isSet(champ))
             return;
@@ -1571,7 +1652,7 @@ void SoundfontManager::reset(EltID id, AttributeType champ)
         tmp->getGlobalDivision()->resetGen(champ);
     }break;
     case elementInstSmpl:{
-        // Remise à zéro d'une propriété d'un sample lié à un instrument
+        // Reset a property of a sample linked to an instrument
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2);
         if (!tmp->isSet(champ))
             return;
@@ -1580,7 +1661,7 @@ void SoundfontManager::reset(EltID id, AttributeType champ)
         tmp->resetGen(champ);
     }break;
     case elementPrstInst:{
-        // Remise à zéro d'une propriété d'un instrument lié à un preset
+        // Reset a property of an instrument linked to a preset
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
         if (!tmp->isSet(champ))
             return;

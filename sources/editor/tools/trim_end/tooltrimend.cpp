@@ -46,7 +46,7 @@ void ToolTrimEnd::trim(EltID id)
     {
         // Crop data
         baData.resize(endLoop + 8);
-        sm->set(id, baData);
+        sm->setData(id, baData);
 
         // Update length
         AttributeValue val;

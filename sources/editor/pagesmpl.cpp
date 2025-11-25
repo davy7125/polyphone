@@ -877,7 +877,7 @@ void PageSmpl::setRateElt(EltID id, quint32 echFinal)
     quint32 echInit = _sf2->get(id, champ_dwSampleRate).dwValue;
     QVector<float> baData = _sf2->getDataFloat(id);
     baData = SampleUtils::resampleMono(baData, echInit, echFinal);
-    _sf2->set(id, baData);
+    _sf2->setData(id, baData);
     AttributeValue val;
     val.dwValue = echFinal;
     _sf2->set(id, champ_dwSampleRate, val);
@@ -1200,7 +1200,7 @@ bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end, EltID &createdSmp
         // Data
         createdSmplId.indexElt = _sf2->add(createdSmplId);
         QVector<float> midData = vData.mid(start, end - start);
-        _sf2->set(createdSmplId, midData);
+        _sf2->setData(createdSmplId, midData);
         val.dwValue = static_cast<quint32>(midData.size());
         _sf2->set(createdSmplId, champ_dwLength, val);
         val.wValue = wBps;
@@ -1220,7 +1220,7 @@ bool PageSmpl::cutSample(EltID id, quint32 start, quint32 end, EltID &createdSmp
 
     // Remove data and update the sample
     vData.remove(start, end - start);
-    _sf2->set(id, vData);
+    _sf2->setData(id, vData);
     val.dwValue = static_cast<quint32>(vData.size());
     _sf2->set(id, champ_dwLength, val);
 
@@ -1355,5 +1355,5 @@ void PageSmpl::compressElt(EltID id, double oggQuality)
     if (compressedData.isEmpty())
         return;
 
-    sound->setRawData(compressedData.data(), compressedData.size());
+    _sf2->setRawData(id, compressedData);
 }

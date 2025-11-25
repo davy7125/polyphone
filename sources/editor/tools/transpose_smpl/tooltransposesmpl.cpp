@@ -47,7 +47,7 @@ void ToolTransposeSmpl::process(SoundfontManager * sm, EltID id, AbstractToolPar
 
     // Resampling
     vData = SampleUtils::resampleMono(vData, echInit, echFinal);
-    sm->set(id, vData);
+    sm->setData(id, vData);
 
     // Update the length
     AttributeValue val;

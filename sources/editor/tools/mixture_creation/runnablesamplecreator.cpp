@@ -116,7 +116,7 @@ void RunnableSampleCreator::run()
     idSmpl.indexElt = sm->add(idSmpl);
 
     // Ajout des données
-    sm->set(idSmpl, vData);
+    sm->setData(idSmpl, vData);
 
     // Configuration
     AttributeValue value;

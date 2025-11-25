@@ -61,5 +61,5 @@ void ToolChangeVolume::process(SoundfontManager * sm, EltID id, AbstractToolPara
     }
 
     // Update the sample data
-    sm->set(id, vData);
+    sm->setData(id, vData);
 }

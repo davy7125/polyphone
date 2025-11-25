@@ -108,8 +108,8 @@ void ToolBalanceAdjustment::process(SoundfontManager * sm, EltID id, AbstractToo
     vData2 = SampleUtils::multiply(vData2, intensiteMoy / intensite2, gain2);
 
     // Update sample data
-    sm->set(id, vData1);
-    sm->set(id2, vData2);
+    sm->setData(id, vData1);
+    sm->setData(id2, vData2);
 }
 
 QString ToolBalanceAdjustment::getWarning()

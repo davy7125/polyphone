@@ -86,7 +86,7 @@ void RunnableMerger::run()
     idSmplR.indexElt = sm->add(idSmplR);
 
     // Add data
-    sm->set(idSmplR, dataR);
+    sm->setData(idSmplR, dataR);
 
     // Configuration
     AttributeValue value;
@@ -113,7 +113,7 @@ void RunnableMerger::run()
         idSmplL.indexElt = sm->add(idSmplL);
 
         // Add data
-        sm->set(idSmplL, dataL);
+        sm->setData(idSmplL, dataL);
 
         // Configuration
         AttributeValue value;

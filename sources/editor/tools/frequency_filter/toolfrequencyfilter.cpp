@@ -45,5 +45,5 @@ void ToolFrequencyFilter::process(SoundfontManager * sm, EltID id, AbstractToolP
 
     // Apply the filter and update data
     vData = SampleUtils::cutFilter(vData, dwSmplRate, dValues, 20000);
-    sm->set(id, vData);
+    sm->setData(id, vData);
 }
