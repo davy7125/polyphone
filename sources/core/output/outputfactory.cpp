@@ -81,12 +81,16 @@ bool OutputFactory::save(int indexSf2, bool saveAs)
     if (!sm->isEdited(id.indexSf2) && !saveAs)
         return false;
 
+    // Sf3?
+    bool isSf3 = sm->get(id, champ_IFIL).sfVerValue.wMajor == 3;
+
     // Path of the file for saving the soundfont
     QString savePath;
     QString filePathInitial = sm->getQstr(id, champ_filenameInitial);
     QString filePathForData = sm->getQstr(id, champ_filenameForData);
-    if (saveAs || !filePathInitial.toLower().endsWith(".sf2") ||
-            filePathInitial != filePathForData || filePathInitial.isEmpty())
+    bool sfExtensionOk = (filePathInitial.toLower().endsWith(".sf2") && !isSf3) ||
+                         (filePathInitial.toLower().endsWith(".sf3") && isSf3);
+    if (saveAs || !sfExtensionOk || filePathInitial != filePathForData || filePathInitial.isEmpty())
     {
         // Default path for selecting the destination
         QString defaultPath;
@@ -98,23 +102,29 @@ bool OutputFactory::save(int indexSf2, bool saveAs)
                 currentName = QObject::tr("untitled");
             defaultPath = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SOUNDFONT) + "/" + currentName + ".sf2";
         }
-        else if (filePathInitial != filePathForData || !filePathInitial.toLower().endsWith(".sf2"))
+        else if (filePathInitial != filePathForData || !sfExtensionOk)
         {
-            // The soundfont to be saved was imported => the path is based on the initial file with another extension
+            // The soundfont to be saved was imported or the extension doesn't match with the soundfont version
+            // => the path is based on the initial file with another extension
             QFileInfo fi(filePathInitial);
-            defaultPath = fi.absolutePath() + "/" + fi.completeBaseName() + ".sf2";
+            defaultPath = fi.absolutePath() + "/" + fi.completeBaseName() + (isSf3 ? ".sf3" : ".sf2");
         }
         else
             defaultPath = filePathInitial;
 
         // Dialog for choosing a destination
-        savePath = QFileDialog::getSaveFileName(QApplication::activeWindow(), QObject::tr("Save a soundfont"),
-                                                defaultPath, QObject::tr("Sf2 files") + " (*.sf2)");
+        savePath = QFileDialog::getSaveFileName(
+            QApplication::activeWindow(),
+            QObject::tr("Save a soundfont"),
+            defaultPath,
+            isSf3 ? QObject::tr("Sf3 files") + " (*.sf3)" : QObject::tr("Sf2 files") + " (*.sf2)");
         if (savePath.isNull())
             return false;
 
-        if (!savePath.endsWith(".sf2"))
+        if (!isSf3 && !savePath.endsWith(".sf2"))
             savePath += ".sf2";
+        if (isSf3 && !savePath.endsWith(".sf3"))
+            savePath += ".sf3";
     }
     else
         savePath = filePathInitial;
