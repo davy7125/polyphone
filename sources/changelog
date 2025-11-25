@@ -1,11 +1,16 @@
 polyphone (2.6) unstable; urgency=low
 
   * (new) RPN messages can change the tuning
+  * (new) option for allowing the compression in a soundfont
+  * (new) option for compressing a non-compressed sample in a sf3 file
+  * (improvement) saving a sf3 file doesn't lower the sample quality
+  * (improvement) display of the compressed samples in the sample summary page
   * (improvement) faster sound engine
   * (improvement) more accurate resampling
   * (improvement) less RAM usage
   * (fix) correct key ranges when saving as sfz
   * (fix) tab widths of the GUI
+  * (fix) sample links are kept during an export
 
  -- Davy Triponney <davy.triponney@gmail.com>  Mon, 1 Dec 2025 09:14:36 +0100
 
