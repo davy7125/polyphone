@@ -785,8 +785,10 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="145"/>
         <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
-(same effect as the tool “Remove blank at start”)</source>
-        <translation>Quando si importa un campione, tutti silenzi prima del attacco sarano rimossi.
+(same effect as the tool &quot;Remove blank at start&quot;)</source>
+        <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
+(same effect as the tool “Remove blank at start”)</oldsource>
+        <translation type="unfinished">Quando si importa un campione, tutti silenzi prima del attacco sarano rimossi.
 (Stesso effetto che lo strumento di &quot;rimozzione dei silenzi a l&apos;inizio&quot;)</translation>
     </message>
     <message>
@@ -798,8 +800,10 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="122"/>
         <source>When importing a sample, data located after the end of loop are automatically removed.
-(same effect as the tool “Trim to end of loop”)</source>
-        <translation>Quando si importa un campione , i dati situati dopo la fine del loop sarano automaticamente rimossi.
+(same effect as the tool &quot;Trim to end of loop&quot;)</source>
+        <oldsource>When importing a sample, data located after the end of loop are automatically removed.
+(same effect as the tool “Trim to end of loop”)</oldsource>
+        <translation type="unfinished">Quando si importa un campione , i dati situati dopo la fine del loop sarano automaticamente rimossi.
 (stesso effetto che lo strumento &quot;Taglia a fine loop&quot;)</translation>
     </message>
     <message>

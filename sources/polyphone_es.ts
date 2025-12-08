@@ -785,8 +785,10 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="145"/>
         <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
-(same effect as the tool “Remove blank at start”)</source>
-        <translation>Al importar una muestra, cualquier área en blanco ubicada antes del comienzo del ataque se elimina automáticamente.
+(same effect as the tool &quot;Remove blank at start&quot;)</source>
+        <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
+(same effect as the tool “Remove blank at start”)</oldsource>
+        <translation type="unfinished">Al importar una muestra, cualquier área en blanco ubicada antes del comienzo del ataque se elimina automáticamente.
 (mismo efecto que la herramienta &quot;Eliminar espacio en blanco al inicio&quot;)</translation>
     </message>
     <message>
@@ -798,8 +800,10 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="122"/>
         <source>When importing a sample, data located after the end of loop are automatically removed.
-(same effect as the tool “Trim to end of loop”)</source>
-        <translation>Al importar una muestra, los datos ubicados después del final del bucle se eliminan automáticamente.
+(same effect as the tool &quot;Trim to end of loop&quot;)</source>
+        <oldsource>When importing a sample, data located after the end of loop are automatically removed.
+(same effect as the tool “Trim to end of loop”)</oldsource>
+        <translation type="unfinished">Al importar una muestra, los datos ubicados después del final del bucle se eliminan automáticamente.
 (El mismo efecto que la herramienta &quot;Recortar hasta el final del bucle&quot;)</translation>
     </message>
     <message>

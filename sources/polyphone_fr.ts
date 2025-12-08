@@ -785,8 +785,10 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="145"/>
         <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
-(same effect as the tool “Remove blank at start”)</source>
-        <translation>Lors de l&apos;import d&apos;un échantillon, le silence situé avant le début de l&apos;attaque est automatiquement supprimé.
+(same effect as the tool &quot;Remove blank at start&quot;)</source>
+        <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
+(same effect as the tool “Remove blank at start”)</oldsource>
+        <translation type="unfinished">Lors de l&apos;import d&apos;un échantillon, le silence situé avant le début de l&apos;attaque est automatiquement supprimé.
 (même effet que l&apos;outil &quot;Enlever le silence initial&quot;)</translation>
     </message>
     <message>
@@ -798,8 +800,10 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="122"/>
         <source>When importing a sample, data located after the end of loop are automatically removed.
-(same effect as the tool “Trim to end of loop”)</source>
-        <translation>Lors de l&apos;import d&apos;un échantillon, les données situées après la fin de la boucle sont automatiquement supprimées.
+(same effect as the tool &quot;Trim to end of loop&quot;)</source>
+        <oldsource>When importing a sample, data located after the end of loop are automatically removed.
+(same effect as the tool “Trim to end of loop”)</oldsource>
+        <translation type="unfinished">Lors de l&apos;import d&apos;un échantillon, les données situées après la fin de la boucle sont automatiquement supprimées.
 (même effet que l&apos;outil &quot;Ajuster à la fin de boucle&quot;)</translation>
     </message>
     <message>

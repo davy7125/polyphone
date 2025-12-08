@@ -789,8 +789,10 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="122"/>
         <source>When importing a sample, data located after the end of loop are automatically removed.
-(same effect as the tool “Trim to end of loop”)</source>
-        <translation>Quan s&apos;importa una mostra, les dades localitzades després del final del bucle s&apos;eliminen automàticament.
+(same effect as the tool &quot;Trim to end of loop&quot;)</source>
+        <oldsource>When importing a sample, data located after the end of loop are automatically removed.
+(same effect as the tool “Trim to end of loop”)</oldsource>
+        <translation type="unfinished">Quan s&apos;importa una mostra, les dades localitzades després del final del bucle s&apos;eliminen automàticament.
 (té el mateix efecte que l&apos;eina &quot;Retallar fins al final del bucle&quot;)</translation>
     </message>
     <message>
@@ -801,8 +803,10 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="145"/>
         <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
-(same effect as the tool “Remove blank at start”)</source>
-        <translation>Quan s&apos;importa una mostra, tota àrea amb silenci situada abans de l&apos;inici de l&apos;atac s&apos;eliminarà automàticament.
+(same effect as the tool &quot;Remove blank at start&quot;)</source>
+        <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
+(same effect as the tool “Remove blank at start”)</oldsource>
+        <translation type="unfinished">Quan s&apos;importa una mostra, tota àrea amb silenci situada abans de l&apos;inici de l&apos;atac s&apos;eliminarà automàticament.
 (té el mateix efecte que l&apos;eina &quot;Elimina el silenci a l&apos;inici&quot;)</translation>
     </message>
     <message>

@@ -790,8 +790,10 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="122"/>
         <source>When importing a sample, data located after the end of loop are automatically removed.
-(same effect as the tool “Trim to end of loop”)</source>
-        <translation>Podczas importowania próbki, dane znajdujące się poza końcem pętli są automatycznie usuwane.
+(same effect as the tool &quot;Trim to end of loop&quot;)</source>
+        <oldsource>When importing a sample, data located after the end of loop are automatically removed.
+(same effect as the tool “Trim to end of loop”)</oldsource>
+        <translation type="unfinished">Podczas importowania próbki, dane znajdujące się poza końcem pętli są automatycznie usuwane.
 (taki sam efekt jak narzędzie &quot;Obetnij do końca pętli&quot;)</translation>
     </message>
     <message>
@@ -802,8 +804,10 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="145"/>
         <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
-(same effect as the tool “Remove blank at start”)</source>
-        <translation>Podczas importowania próbki, cisza przed rozpoczęciem dźwięku jest automatycznie usuwana.
+(same effect as the tool &quot;Remove blank at start&quot;)</source>
+        <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
+(same effect as the tool “Remove blank at start”)</oldsource>
+        <translation type="unfinished">Podczas importowania próbki, cisza przed rozpoczęciem dźwięku jest automatycznie usuwana.
 (taki sam efekt jak narzędzie &quot;Usuń ciszę na początku&quot;)</translation>
     </message>
     <message>
