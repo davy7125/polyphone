@@ -70,17 +70,17 @@
     <message>
         <location filename="core/types/attribute.cpp" line="512"/>
         <source>Mod LFO → pitch (c)</source>
-        <translation type="unfinished">Mod LFO → tono (c)</translation>
+        <translation>Mod LFO → tono (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="515"/>
         <source>Vib LFO → pitch (c)</source>
-        <translation type="unfinished">Vib LFO → tono (c)</translation>
+        <translation>Vib LFO → tono (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="518"/>
         <source>Mod env → pitch (c)</source>
-        <translation type="unfinished">Mod env → tono (c)</translation>
+        <translation>Mod env → tono (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="521"/>
@@ -100,12 +100,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="528"/>
         <source>Mod LFO → filter (c)</source>
-        <translation type="unfinished">Mod LFO → filtro (c)</translation>
+        <translation>Mod LFO → filtro (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="531"/>
         <source>Mod env → filter (c)</source>
-        <translation type="unfinished">Mod env → filtro (c)</translation>
+        <translation>Mod env → filtro (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="497"/>
@@ -120,7 +120,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="534"/>
         <source>Mod LFO → volume (dB)</source>
-        <translation type="unfinished">Mod LFO → volumen (dB)</translation>
+        <translation>Mod LFO → volumen (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="537"/>
@@ -145,172 +145,172 @@
     <message>
         <location filename="core/types/attribute.cpp" line="547"/>
         <source>Mod LFO delay (×)</source>
-        <translation type="unfinished">Mod LFO delay (×)</translation>
+        <translation>Mod LFO retraso (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="548"/>
         <source>Mod LFO delay (s)</source>
-        <translation type="unfinished">Mod LFO delay (s)</translation>
+        <translation>Mod LFO retraso (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="551"/>
         <source>Mod LFO freq (×)</source>
-        <translation type="unfinished">Mod LFO frec (×)</translation>
+        <translation>Mod LFO frec (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="552"/>
         <source>Mod LFO freq (Hz)</source>
-        <translation type="unfinished">Mod LFO frec (Hz)</translation>
+        <translation>Mod LFO frec (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="555"/>
         <source>Vib LFO delay (×)</source>
-        <translation type="unfinished">Vib LFO delay (×)</translation>
+        <translation>Vib LFO retraso (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="556"/>
         <source>Vib LFO delay (s)</source>
-        <translation type="unfinished">Vib LFO delay (s)</translation>
+        <translation>Vib LFO retraso (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="559"/>
         <source>Vib LFO freq (×)</source>
-        <translation type="unfinished">Vib LFO freq (×)</translation>
+        <translation>Vib LFO frec (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="560"/>
         <source>Vib LFO freq (Hz)</source>
-        <translation type="unfinished">Vib LFO freq (Hz)</translation>
+        <translation>Vib LFO frec (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="563"/>
         <source>Mod env delay (×)</source>
-        <translation type="unfinished">Mod env retraso (×)</translation>
+        <translation>Mod env retraso (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="564"/>
         <source>Mod env delay (s)</source>
-        <translation type="unfinished">Mod env retraso (s)</translation>
+        <translation>Mod env retraso (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="567"/>
         <source>Mod env attack (×)</source>
-        <translation type="unfinished">Mod env ataque (×)</translation>
+        <translation>Mod env ataque (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="568"/>
         <source>Mod env attack (s)</source>
-        <translation type="unfinished">Mod env ataque (s)</translation>
+        <translation>Mod env ataque (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="571"/>
         <source>Mod env hold (×)</source>
-        <translation type="unfinished">Mod env hold (×)</translation>
+        <translation>Mod env mantenimiento (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="572"/>
         <source>Mod env hold (s)</source>
-        <translation type="unfinished">Mod env hold (s)</translation>
+        <translation>Mod env mantenimiento (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="575"/>
         <source>Mod env decay (×)</source>
-        <translation type="unfinished">Mod env caída (×)</translation>
+        <translation>Mod env decaimiento (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="576"/>
         <source>Mod env decay (s)</source>
-        <translation type="unfinished">Mod env caída (s)</translation>
+        <translation>Mod env decaimiento (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="579"/>
         <source>Mod env sustain (%)</source>
-        <translation type="unfinished">Mod env sustain (%)</translation>
+        <translation>Mod env sostenido (%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="582"/>
         <source>Mod env release (×)</source>
-        <translation type="unfinished">Mod env liberación (×)</translation>
+        <translation>Mod env liberación (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="583"/>
         <source>Mod env release (s)</source>
-        <translation type="unfinished">Mod env liberación (s)</translation>
+        <translation>Mod env liberación (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="586"/>
         <source>Key → Mod env hold (c)</source>
-        <translation type="unfinished">Nota → Mod env hold (c)</translation>
+        <translation>Nota → Mod env mantenimiento (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="589"/>
         <source>Key → Mod env decay (c)</source>
-        <translation type="unfinished">Nota → Mod env caída (c)</translation>
+        <translation>Nota → Mod env decaimiento (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="592"/>
         <source>Vol env delay (×)</source>
-        <translation type="unfinished">Vol env retraso(×)</translation>
+        <translation>Vol env retraso (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="593"/>
         <source>Vol env delay (s)</source>
-        <translation type="unfinished">Vol env retraso(s)</translation>
+        <translation>Vol env retraso (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="596"/>
         <source>Vol env attack (×)</source>
-        <translation type="unfinished">Vol env ataque (×)</translation>
+        <translation>Vol env ataque (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="597"/>
         <source>Vol env attack (s)</source>
-        <translation type="unfinished">Vol env ataque (s)</translation>
+        <translation>Vol env ataque (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="600"/>
         <source>Vol env hold (×)</source>
-        <translation type="unfinished">Vol env hold (×)</translation>
+        <translation>Vol env mantenimiento (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="601"/>
         <source>Vol env hold (s)</source>
-        <translation type="unfinished">Vol env hold (s)</translation>
+        <translation>Vol env mantenimiento (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="604"/>
         <source>Vol env decay (×)</source>
-        <translation type="unfinished">Vol env caída (×)</translation>
+        <translation>Vol env decaimiento (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="605"/>
         <source>Vol env decay (s)</source>
-        <translation type="unfinished">Vol env caída (s)</translation>
+        <translation>Vol env decaimiento (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="608"/>
         <source>Vol env sustain (dB)</source>
-        <translation type="unfinished">Vol env sustain (dB)</translation>
+        <translation>Vol env sostenido (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="611"/>
         <source>Vol env release (×)</source>
-        <translation type="unfinished">Vol env release (×)</translation>
+        <translation>Vol env liberación (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="612"/>
         <source>Vol env release (s)</source>
-        <translation type="unfinished">Vol env release (s)</translation>
+        <translation>Vol env liberación (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="615"/>
         <source>Key → Vol env hold (c)</source>
-        <translation type="unfinished">Nota → Vol env hold (c)</translation>
+        <translation>Nota → Vol env mantenimiento (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="618"/>
         <source>Key → Vol env decay (c)</source>
-        <translation type="unfinished">Nota → Vol env caída (c)</translation>
+        <translation>Nota → Vol env decaimiento (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="621"/>
@@ -788,8 +788,8 @@
 (same effect as the tool &quot;Remove blank at start&quot;)</source>
         <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool “Remove blank at start”)</oldsource>
-        <translation type="unfinished">Al importar una muestra, cualquier área en blanco ubicada antes del comienzo del ataque se elimina automáticamente.
-(mismo efecto que la herramienta &quot;Eliminar espacio en blanco al inicio&quot;)</translation>
+        <translation>Al importar una muestra, cualquier área en blanco ubicada antes del comienzo del ataque se elimina automáticamente.
+(mismo efecto que la herramienta &quot;Eliminar silencio al inicio&quot;)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="44"/>
@@ -803,8 +803,8 @@
 (same effect as the tool &quot;Trim to end of loop&quot;)</source>
         <oldsource>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool “Trim to end of loop”)</oldsource>
-        <translation type="unfinished">Al importar una muestra, los datos ubicados después del final del bucle se eliminan automáticamente.
-(El mismo efecto que la herramienta &quot;Recortar hasta el final del bucle&quot;)</translation>
+        <translation>Al importar una muestra, los datos ubicados después del final del bucle se eliminan automáticamente.
+(mismo efecto que la herramienta &quot;Recortar hasta el final del bucle&quot;)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="186"/>
@@ -1042,7 +1042,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Reference pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Diapasón de referencia</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
@@ -1501,7 +1501,7 @@ en línea</translation>
         <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>Alejandro Moctezuma</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>Alejandro Moctezuma</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="74"/>
@@ -1617,27 +1617,27 @@ en línea</translation>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="17"/>
         <source>Sample compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Compresión de la muestra</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="27"/>
         <source>Medium</source>
-        <translation type="unfinished">Media</translation>
+        <translation>Media</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="44"/>
         <source>Quality of the compression:</source>
-        <translation type="unfinished"></translation>
+        <translation>Calidad de la compresión:</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="51"/>
         <source>High (good sound quality but larger file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alta (buena calidad de sonido pero mayor tamaño de archivo)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="58"/>
         <source>Low (poor sound quality but smaller file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>Baja (mala calidad de sonido pero menor tamaño de archivo)</translation>
     </message>
 </context>
 <context>
@@ -1993,7 +1993,7 @@ en línea</translation>
     <message>
         <location filename="repository/downloadmanager.cpp" line="147"/>
         <source>Couldn&apos;t write file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo escribir el archivo &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="153"/>
@@ -2511,12 +2511,12 @@ en línea</translation>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="48"/>
         <source>Cannot find file &quot;%1&quot;.</source>
-        <translation type="unfinished">No se puede encontrar el archivo &quot;%1&quot;.</translation>
+        <translation>No se puede encontrar el archivo &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="55"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
-        <translation type="unfinished">Acceso denegado para leer el archivo &quot;%1&quot;.</translation>
+        <translation>Acceso denegado para leer el archivo &quot;%1&quot;.</translation>
     </message>
 </context>
 <context>
@@ -2633,11 +2633,6 @@ en línea</translation>
         <translation>Sin nombre</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="304"/>
-        <source>Opening files</source>
-        <translation>Abriendo archivos</translation>
-    </message>
-    <message>
         <location filename="mainwindow/mainwindow.cpp" line="218"/>
         <source>Save before exiting?</source>
         <translation>¿Guardar antes de salir?</translation>
@@ -2651,6 +2646,11 @@ en línea</translation>
         <location filename="mainwindow/mainwindow.cpp" line="228"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>El archivo &quot;%1&quot; ha sido modificado.</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="304"/>
+        <source>Opening files</source>
+        <translation>Abriendo archivos</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="342"/>
@@ -2863,8 +2863,8 @@ el modulador por defecto.</translation>
         <location filename="editor/modulator/modulatoreditor.cpp" line="262"/>
         <source>%n modulator(s):</source>
         <translation>
-            <numerusform>%n modulator:</numerusform>
-            <numerusform>%n modulatores:</numerusform>
+            <numerusform>%n modulador:</numerusform>
+            <numerusform>%n moduladores:</numerusform>
         </translation>
     </message>
     <message>
@@ -2922,22 +2922,22 @@ el modulador por defecto.</translation>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="62"/>
         <source>Please close file before overriding it.</source>
-        <translation type="unfinished">Por favor cierra el archivo antes de sobreescribirlo.</translation>
+        <translation>Por favor, cierre el archivo antes de sobrescribirlo.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="91"/>
         <source>Couldn&apos;t delete file &quot;%1&quot;.</source>
-        <translation type="unfinished">No se pudo eliminar el archivo &quot;%1&quot;.</translation>
+        <translation>No se pudo eliminar el archivo &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="101"/>
         <source>Couldn&apos;t rename file &quot;%1&quot;.</source>
-        <translation type="unfinished">No se pudo renombrar el archivo &quot;%1&quot;.</translation>
+        <translation>No se pudo renombrar el archivo &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="148"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede crear el archivo &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -2965,7 +2965,7 @@ el modulador por defecto.</translation>
     <message>
         <location filename="editor/pageenvelope.ui" line="181"/>
         <source>Key → Decay</source>
-        <translation type="unfinished">Ton → Caída</translation>
+        <translation>Nota → Decaimiento</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="263"/>
@@ -2991,7 +2991,7 @@ el modulador por defecto.</translation>
     <message>
         <location filename="editor/pageenvelope.ui" line="391"/>
         <source>Key → Hold</source>
-        <translation type="unfinished">Ton → Hold</translation>
+        <translation>Nota → Mantenimiento</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="420"/>
@@ -3236,7 +3236,7 @@ de muestreo</translation>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="47"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Compresión</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
@@ -3394,19 +3394,19 @@ para mostrar sus rangos de división</translation>
     <message>
         <location filename="editor/pagesf2.ui" line="667"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Compresión</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="674"/>
         <location filename="editor/pagesf2.ui" line="757"/>
         <location filename="editor/pagesf2.ui" line="820"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Conteo</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="688"/>
         <source>Bit depth</source>
-        <translation type="unfinished"></translation>
+        <translation>Profundidad de bits</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="702"/>
@@ -3421,12 +3421,12 @@ para mostrar sus rangos de división</translation>
     <message>
         <location filename="editor/pagesf2.ui" line="716"/>
         <source>no</source>
-        <translation type="unfinished">no</translation>
+        <translation>no</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="721"/>
         <source>possible</source>
-        <translation type="unfinished"></translation>
+        <translation>posible</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="750"/>
@@ -3451,7 +3451,7 @@ para mostrar sus rangos de división</translation>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (sin usar: %n)</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%1 (sin usar: %n)</numerusform>
         </translation>
     </message>
 </context>
@@ -3583,17 +3583,18 @@ para mostrar sus rangos de división</translation>
         <location filename="editor/pagesmpl.cpp" line="312"/>
         <source>Compress the sample(s) to reduce the soundfont size
 Warning: quality will be reduced and the loop may be altered</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprimir la(s) muestra(s) para reducir el tamaño del soundfont
+Advertencia: la calidad se reducirá y el bucle podría alterarse</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="320"/>
         <source>This sample is compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta muestra está comprimida para reducir el tamaño del soundfont</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="321"/>
         <source>The selected samples are compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>Las muestras seleccionadas están comprimidas para reducir el tamaño del soundfont</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="537"/>
@@ -3757,7 +3758,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/output/outputfactory.cpp" line="120"/>
         <source>Sf3 files</source>
-        <translation type="unfinished">Archivos .sf2 {3 ?}</translation>
+        <translation>Archivos .sf3</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="146"/>
@@ -4091,12 +4092,12 @@ Ambas divisiones deben compartir los mismos rangos de notas y velocidades.</tran
         <location filename="context/tuningprogrammanager.cpp" line="85"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
-        <translation type="unfinished">Igual</translation>
+        <translation>Igual</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="121"/>
         <source>Tuning program %1:%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Programa de afinación %1:%2</translation>
     </message>
 </context>
 <context>
@@ -4279,7 +4280,7 @@ Ambas divisiones deben compartir los mismos rangos de notas y velocidades.</tran
     <message>
         <location filename="repository/repositorymanager.cpp" line="114"/>
         <source>long / evolving</source>
-        <translation>largo/evolutivo</translation>
+        <translation>largo / evolutivo</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="115"/>
@@ -4521,7 +4522,7 @@ Ambas divisiones deben compartir los mismos rangos de notas y velocidades.</tran
     <message>
         <location filename="repository/repositorymanager.cpp" line="416"/>
         <source>brass</source>
-        <translation type="unfinished">bronces</translation>
+        <translation>bronces</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="419"/>
@@ -4804,7 +4805,7 @@ descargar la lista</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="245"/>
         <source>MIDI standard</source>
-        <translation>Estandar MIDI</translation>
+        <translation>Standard MIDI</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="46"/>
@@ -4964,7 +4965,7 @@ puede descargar</translation>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="241"/>
         <source>MIDI standard</source>
-        <translation>Estandar MIDI</translation>
+        <translation>Standard MIDI</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="257"/>
@@ -5634,7 +5635,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="106"/>
         <source>Couldn&apos;t export the sample.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo exportar la muestra.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="126"/>
@@ -6047,8 +6048,8 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
         <source>Couldn&apos;t configure %n sample(s).</source>
         <oldsource>Couln&apos;t configure %n sample(s).</oldsource>
         <translation>
-            <numerusform>No se pudieron configurar %n muestra(s).</numerusform>
-            <numerusform></numerusform>
+            <numerusform>No se pudo configurar %n muestra.</numerusform>
+            <numerusform>No se pudieron configurar %n muestras.</numerusform>
         </translation>
     </message>
 </context>
@@ -6513,7 +6514,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
         <source>%n modulator(s) has(have) been deleted.</source>
         <translation>
             <numerusform>%n modulador ha sido eliminado.</numerusform>
-            <numerusform>%n moduladores han sido eliminado.</numerusform>
+            <numerusform>%n moduladores han sido eliminados.</numerusform>
         </translation>
     </message>
     <message>
@@ -6764,7 +6765,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="210"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation>En caso de exportar varias soundfonts el número máxmo de conjuntos por soundfont es 127.</translation>
+        <translation>En caso de exportar varias soundfonts, el número máximo de conjuntos por soundfont es 127.</translation>
     </message>
 </context>
 <context>
