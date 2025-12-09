@@ -45,12 +45,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="488"/>
         <source>Sample start offset</source>
-        <translation>样本起点偏移</translation>
+        <translation>采样起点偏移</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="494"/>
         <source>Sample end offset</source>
-        <translation>样本终点偏移</translation>
+        <translation>采样终点偏移</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="500"/>
@@ -70,62 +70,62 @@
     <message>
         <location filename="core/types/attribute.cpp" line="512"/>
         <source>Mod LFO → pitch (c)</source>
-        <translation>Mod LFO → pitch (c)</translation>
+        <translation>Mod LFO → 音高 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="515"/>
         <source>Vib LFO → pitch (c)</source>
-        <translation>Vib LFO → pitch (c)</translation>
+        <translation>Vib LFO → 音高 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="518"/>
         <source>Mod env → pitch (c)</source>
-        <translation>Mod env → pitch (c)</translation>
+        <translation>Mod 包络 → 音高 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="521"/>
         <source>Filter, cutoff (×)</source>
-        <translation>Filter, cutoff (×)</translation>
+        <translation>滤波器，截止 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="522"/>
         <source>Filter, cutoff (Hz)</source>
-        <translation>Filter, cutoff (Hz)</translation>
+        <translation>滤波器，截止 (赫兹)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="525"/>
         <source>Filter, resonance (dB)</source>
-        <translation>Filter, resonance (dB)</translation>
+        <translation>滤波器，共振 (分贝)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="528"/>
         <source>Mod LFO → filter (c)</source>
-        <translation>Mod LFO → filter (c)</translation>
+        <translation>Mod LFO → 滤波器 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="531"/>
         <source>Mod env → filter (c)</source>
-        <translation>Mod env → filter (c)</translation>
+        <translation>Mod 包络 → 滤波器 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="497"/>
         <source>Sample end offset (× 32768)</source>
-        <translation>样本终点偏移 (× 32768)</translation>
+        <translation>采样终点偏移 (× 32768)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="491"/>
         <source>Sample start offset (× 32768)</source>
-        <translation>样本起点偏移 (× 32768)</translation>
+        <translation>采样起点偏移 (× 32768)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="534"/>
         <source>Mod LFO → volume (dB)</source>
-        <translation>Mod LFO → volume (dB)</translation>
+        <translation>Mod LFO → 音量 (分贝)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="537"/>
         <source>Chorus (%)</source>
-        <translation>和声(%)</translation>
+        <translation>合唱(%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="540"/>
@@ -135,52 +135,52 @@
     <message>
         <location filename="core/types/attribute.cpp" line="543"/>
         <source>Pan [-100;100]</source>
-        <translation>平衡[-100:100]</translation>
+        <translation>声像 [-100;100]</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="544"/>
         <source>Pan [-50;50]</source>
-        <translation>平衡[-50:50]</translation>
+        <translation>声像 [-50;50]</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="547"/>
         <source>Mod LFO delay (×)</source>
-        <translation>Mod LFO delay (×)</translation>
+        <translation>Mod LFO 延迟 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="548"/>
         <source>Mod LFO delay (s)</source>
-        <translation>Mod LFO delay (s)</translation>
+        <translation>Mod LFO 延迟 (秒)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="551"/>
         <source>Mod LFO freq (×)</source>
-        <translation>Mod LFO freq (×)</translation>
+        <translation>Mod LFO 频率 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="552"/>
         <source>Mod LFO freq (Hz)</source>
-        <translation>Mod LFO freq (Hz)</translation>
+        <translation>Mod LFO 频率 (赫兹)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="555"/>
         <source>Vib LFO delay (×)</source>
-        <translation>Vib LFO delay (×)</translation>
+        <translation>Vib LFO 延迟 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="556"/>
         <source>Vib LFO delay (s)</source>
-        <translation>Vib LFO delay (s)</translation>
+        <translation>Vib LFO 延迟 (秒)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="559"/>
         <source>Vib LFO freq (×)</source>
-        <translation>Vib LFO freq (×)</translation>
+        <translation>Vib LFO 频率 (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="560"/>
         <source>Vib LFO freq (Hz)</source>
-        <translation>Vib LFO freq (Hz)</translation>
+        <translation>Vib LFO 频率 (赫兹)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="563"/>
@@ -240,12 +240,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="586"/>
         <source>Key → Mod env hold (c)</source>
-        <translation>Key → Mod env hold (c)</translation>
+        <translation>音符 → Mod 包络保持 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="589"/>
         <source>Key → Mod env decay (c)</source>
-        <translation>Key → Mod env decay (c)</translation>
+        <translation>音符 → Mod 包络衰减 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="592"/>
@@ -305,12 +305,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="615"/>
         <source>Key → Vol env hold (c)</source>
-        <translation>Key → Vol env hold (c)</translation>
+        <translation>音符 → 音量包络保持 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="618"/>
         <source>Key → Vol env decay (c)</source>
-        <translation>Key → Vol env decay (c)</translation>
+        <translation>音符 → 音量包络衰减 (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="621"/>
@@ -340,27 +340,27 @@
     <message>
         <location filename="core/types/attribute.cpp" line="654"/>
         <source>Sample root key</source>
-        <translation type="unfinished"></translation>
+        <translation>采样根音</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="657"/>
         <source>Sample length</source>
-        <translation type="unfinished"></translation>
+        <translation>采样长度</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="660"/>
         <source>Loop start</source>
-        <translation type="unfinished"></translation>
+        <translation>循环起始点</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="663"/>
         <source>Loop end</source>
-        <translation type="unfinished"></translation>
+        <translation>循环结束点</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="666"/>
         <source>Pitch correction (cents)</source>
-        <translation type="unfinished"></translation>
+        <translation>音高修正 (音分)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="509"/>
@@ -370,12 +370,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="636"/>
         <source>Tuning (semi-tones)</source>
-        <translation>校音(半音)</translation>
+        <translation>调音(半音)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="639"/>
         <source>Tuning (cents)</source>
-        <translation>校音(音分)</translation>
+        <translation>调音(音分)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="642"/>
@@ -385,7 +385,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="645"/>
         <source>Scale tuning</source>
-        <translation>音阶调整</translation>
+        <translation>音阶调音</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="648"/>
@@ -788,7 +788,8 @@
 (same effect as the tool &quot;Remove blank at start&quot;)</source>
         <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool “Remove blank at start”)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>导入采样时，位于起音之前的空白区域将自动移除。
+（效果与“移除开头空白”工具相同）</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="44"/>
@@ -802,7 +803,8 @@
 (same effect as the tool &quot;Trim to end of loop&quot;)</source>
         <oldsource>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool “Trim to end of loop”)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>导入采样时，位于循环结束点之后的数据将自动移除。
+（效果与“裁剪至循环终点”工具相同）</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="186"/>
@@ -813,28 +815,28 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="23"/>
         <source>Sample management</source>
-        <translation type="unfinished"></translation>
+        <translation>采样管理</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="36"/>
         <source>Sample import</source>
         <oldsource>Wav file import</oldsource>
-        <translation>文件导入</translation>
+        <translation>采样导入</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="237"/>
         <source>change linked sample</source>
-        <translation>修改链接的样本</translation>
+        <translation>修改链接的采样</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="126"/>
         <source>trim to loop</source>
-        <translation>裁剪样本至循环部分</translation>
+        <translation>裁剪采样至循环部分</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="218"/>
         <source>Stereo editing</source>
-        <translation>双声道编辑</translation>
+        <translation>立体声编辑</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="149"/>
@@ -892,12 +894,12 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="615"/>
         <source>Window borders</source>
-        <translation type="unfinished"></translation>
+        <translation>窗口边框</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="476"/>
         <source>Behaviour</source>
-        <translation type="unfinished"></translation>
+        <translation>行为</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="49"/>
@@ -928,12 +930,12 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="35"/>
         <source>Decorations</source>
-        <translation type="unfinished"></translation>
+        <translation>装饰</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="42"/>
         <source>Unique instance</source>
-        <translation type="unfinished"></translation>
+        <translation>单一实例</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="457"/>
@@ -943,7 +945,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="464"/>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>颜色</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="316"/>
@@ -979,7 +981,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="490"/>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>样式</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="25"/>
@@ -1005,7 +1007,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="81"/>
         <source>Mapping</source>
-        <translation type="unfinished"></translation>
+        <translation>映射</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="209"/>
@@ -1030,7 +1032,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="297"/>
         <source>Temperament</source>
-        <translation type="unfinished"></translation>
+        <translation>调律</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="69"/>
@@ -1040,18 +1042,18 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Reference pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>参考音高</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
         <location filename="context/interface/configsectionkeyboard.ui" line="94"/>
         <source>Back to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复默认值</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="156"/>
         <source>Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>调音</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.cpp" line="53"/>
@@ -1070,7 +1072,7 @@
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="20"/>
         <source>Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>目录</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="112"/>
@@ -1096,7 +1098,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="355"/>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>账户</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="367"/>
@@ -1168,37 +1170,37 @@ Premium!</source>
         <location filename="context/interface/configsectionsound.ui" line="333"/>
         <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
         <oldsource>Modulator &quot;velocity → filter cutoff&quot;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>默认调制器 “力度 → 滤波器截止频率”</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="126"/>
         <source>soundfont 2.01</source>
-        <translation type="unfinished"></translation>
+        <translation>音色库 2.01</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="112"/>
         <source>General volume</source>
-        <translation type="unfinished"></translation>
+        <translation>总音量</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="131"/>
         <source>soundfont 2.04</source>
-        <translation type="unfinished"></translation>
+        <translation>音色库 2.04</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="136"/>
         <source>disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>已禁用</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="242"/>
         <source>Damp</source>
-        <translation>湿度</translation>
+        <translation>衰减</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="181"/>
         <source>Room</source>
-        <translation>体积</translation>
+        <translation>房间</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="362"/>
@@ -1208,7 +1210,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="388"/>
         <source>Chorus</source>
-        <translation>和声</translation>
+        <translation>合唱</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="45"/>
@@ -1263,27 +1265,27 @@ repository</source>
     <message>
         <location filename="clavier/controllerarea.ui" line="209"/>
         <source>Pitch wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>弯音轮</translation>
     </message>
     <message>
         <location filename="clavier/controllerarea.ui" line="233"/>
         <source>Sensitivity</source>
-        <translation type="unfinished"></translation>
+        <translation>灵敏度</translation>
     </message>
     <message>
         <location filename="clavier/controllerarea.ui" line="257"/>
         <source>Pressure</source>
-        <translation type="unfinished"></translation>
+        <translation>压感</translation>
     </message>
     <message>
         <location filename="clavier/controllerarea.cpp" line="225"/>
         <source>on</source>
-        <translation type="unfinished"></translation>
+        <translation>开</translation>
     </message>
     <message>
         <location filename="clavier/controllerarea.cpp" line="230"/>
         <source>off</source>
-        <translation type="unfinished"></translation>
+        <translation>关</translation>
     </message>
 </context>
 <context>
@@ -1337,7 +1339,7 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="688"/>
         <source>Ensemble</source>
-        <translation>和弦</translation>
+        <translation>合奏</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="690"/>
@@ -1372,7 +1374,7 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="702"/>
         <source>Ethnic</source>
-        <translation>民乐</translation>
+        <translation>民族</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="704"/>
@@ -1497,7 +1499,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>Alejandro Moctezuma</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>亚历杭德罗·莫克特苏马</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="74"/>
@@ -1551,13 +1553,13 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="83"/>
         <source>Spessasus</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>斯佩萨苏斯</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="73"/>
         <source>Chris Hansen</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation></translation>
+        <translation>Chris Hansen</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="50"/>
@@ -1613,27 +1615,27 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="17"/>
         <source>Sample compression</source>
-        <translation type="unfinished"></translation>
+        <translation>采样压缩</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="27"/>
         <source>Medium</source>
-        <translation type="unfinished">中</translation>
+        <translation>中</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="44"/>
         <source>Quality of the compression:</source>
-        <translation type="unfinished"></translation>
+        <translation>压缩质量：</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="51"/>
         <source>High (good sound quality but larger file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>高（音质良好但文件大小较大）</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="58"/>
         <source>Low (poor sound quality but smaller file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>低（音质较差但文件大小较小）</translation>
     </message>
 </context>
 <context>
@@ -1656,7 +1658,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="72"/>
         <source>Create an instrument comprising the sample %1?</source>
-        <translation>由 %1 样本组合创建乐器？</translation>
+        <translation>由 %1 采样组合创建乐器？</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="78"/>
@@ -1666,12 +1668,12 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="79"/>
         <source>for each sample</source>
-        <translation>为每个样本</translation>
+        <translation>为每个采样</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="80"/>
         <source>comprising the %1 samples</source>
-        <translation>正在组合 %1 样本</translation>
+        <translation>正在组合 %1 采样</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="88"/>
@@ -1734,17 +1736,17 @@ repository</source>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="238"/>
         <source>Aftertouch</source>
-        <translation type="unfinished"></translation>
+        <translation>触后</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.cpp" line="200"/>
         <source>Hide the controller area</source>
-        <translation type="unfinished"></translation>
+        <translation>隐藏控制器区域</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.cpp" line="206"/>
         <source>Show the controller area</source>
-        <translation type="unfinished"></translation>
+        <translation>显示控制器区域</translation>
     </message>
 </context>
 <context>
@@ -1753,7 +1755,7 @@ repository</source>
         <location filename="dialogs/dialog_list.cpp" line="53"/>
         <source>Sample list</source>
         <oldsource>Liste des samples</oldsource>
-        <translation>样本列表</translation>
+        <translation>采样列表</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_list.cpp" line="58"/>
@@ -1806,23 +1808,23 @@ repository</source>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="52"/>
         <source>Name of the new preset</source>
-        <translation type="unfinished"></translation>
+        <translation>新预设名称</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="52"/>
         <source>Name of the new instrument</source>
-        <translation type="unfinished"></translation>
+        <translation>新乐器名称</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="53"/>
         <source>Link selected instruments</source>
         <oldsource>Link selected isntruments</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>链接选定乐器</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="54"/>
         <source>Link selected samples</source>
-        <translation type="unfinished"></translation>
+        <translation>链接选定采样</translation>
     </message>
 </context>
 <context>
@@ -1872,7 +1874,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="61"/>
         <source>Overwrite existing name with key name and velocity as suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>使用音符名称和力度作为后缀覆盖现有名称</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="71"/>
@@ -1989,7 +1991,7 @@ repository</source>
     <message>
         <location filename="repository/downloadmanager.cpp" line="147"/>
         <source>Couldn&apos;t write file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>无法写入文件 “%1”</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="153"/>
@@ -2053,7 +2055,7 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="304"/>
         <source>The sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation>样本 &quot;%1&quot; 已存在。&lt;br/&gt;是否替换？</translation>
+        <translation>采样 &quot;%1&quot; 已存在。&lt;br/&gt;是否替换？</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="452"/>
@@ -2134,17 +2136,17 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertimage.ui" line="14"/>
         <source>Insert an image</source>
-        <translation type="unfinished"></translation>
+        <translation>插入图片</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertimage.ui" line="30"/>
         <source>Invalid URL (example: https://www.website.com/image.png)</source>
-        <translation type="unfinished"></translation>
+        <translation>无效的URL (例如: https://www.website.com/image.png)</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertimage.ui" line="37"/>
         <source>URL of the image to insert...</source>
-        <translation type="unfinished"></translation>
+        <translation>要插入图片的URL...</translation>
     </message>
 </context>
 <context>
@@ -2152,12 +2154,12 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="14"/>
         <source>Insert a link</source>
-        <translation type="unfinished"></translation>
+        <translation>插入链接</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="24"/>
         <source>Text to display</source>
-        <translation type="unfinished"></translation>
+        <translation>要显示的文本</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="31"/>
@@ -2170,17 +2172,17 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginserttable.ui" line="14"/>
         <source>Insert a table</source>
-        <translation type="unfinished"></translation>
+        <translation>插入表格</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginserttable.ui" line="47"/>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>列</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginserttable.ui" line="67"/>
         <source>Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>行</translation>
     </message>
 </context>
 <context>
@@ -2188,7 +2190,7 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertvideo.ui" line="14"/>
         <source>Insert a YouTube video</source>
-        <translation type="unfinished"></translation>
+        <translation>插入YouTube视频</translation>
     </message>
 </context>
 <context>
@@ -2196,7 +2198,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="68"/>
         <source>Add a sample</source>
-        <translation>添加样本</translation>
+        <translation>添加采样</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="69"/>
@@ -2211,7 +2213,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="75"/>
         <source>Toolbox</source>
-        <translation>工具栏</translation>
+        <translation>工具箱</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="71"/>
@@ -2246,12 +2248,12 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="281"/>
         <source>Audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>音频文件</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="437"/>
         <source>Cannot create more presets.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法创建更多预设。</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="437"/>
@@ -2264,7 +2266,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/equalizer.ui" line="586"/>
         <source>preview</source>
-        <translation type="unfinished"></translation>
+        <translation>预览</translation>
     </message>
     <message>
         <location filename="editor/widgets/equalizer.ui" line="618"/>
@@ -2284,12 +2286,12 @@ repository</source>
     <message>
         <location filename="editor/widgets/equalizer.cpp" line="123"/>
         <source>Equalization successfully applied on 1 sample.</source>
-        <translation type="unfinished"></translation>
+        <translation>均衡已成功应用于 1 个采样。</translation>
     </message>
     <message>
         <location filename="editor/widgets/equalizer.cpp" line="124"/>
         <source>Equalization successfully applied on %1 samples.</source>
-        <translation type="unfinished"></translation>
+        <translation>均衡已成功应用于 %1 个采样。</translation>
     </message>
 </context>
 <context>
@@ -2313,17 +2315,17 @@ repository</source>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="66"/>
         <source>Sample not linked to an instrument yet.</source>
-        <translation>样本未链接到乐器。</translation>
+        <translation>采样未链接到乐器。</translation>
     </message>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="68"/>
         <source>Sample linked to instrument:</source>
-        <translation>样本已链接的乐器：</translation>
+        <translation>采样已链接的乐器：</translation>
     </message>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="70"/>
         <source>Sample linked to instruments:</source>
-        <translation>样本已链接的乐器：</translation>
+        <translation>采样已链接的乐器：</translation>
     </message>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="75"/>
@@ -2347,7 +2349,7 @@ repository</source>
         <location filename="editor/footers/footeroverview.cpp" line="68"/>
         <source>%n element(s)</source>
         <translation>
-            <numerusform>%n元素</numerusform>
+            <numerusform>%n个元素</numerusform>
         </translation>
     </message>
 </context>
@@ -2366,7 +2368,7 @@ repository</source>
     <message>
         <location filename="editor/footers/footerprst.ui" line="103"/>
         <source>(percussion)</source>
-        <translation>(percussion)</translation>
+        <translation>(打击乐)</translation>
     </message>
 </context>
 <context>
@@ -2396,7 +2398,7 @@ repository</source>
         <location filename="editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="60"/>
         <source>kHz</source>
         <comment>unit for kilo Herz</comment>
-        <translation type="unfinished"></translation>
+        <translation>千赫</translation>
     </message>
 </context>
 <context>
@@ -2506,12 +2508,12 @@ repository</source>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="48"/>
         <source>Cannot find file &quot;%1&quot;.</source>
-        <translation type="unfinished">无法找到文件 &quot;%1&quot;。</translation>
+        <translation>无法找到文件 &quot;%1&quot;。</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="55"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
-        <translation type="unfinished">读取文件时被拒绝访问 &quot;%1&quot;。</translation>
+        <translation>读取文件“%1”时访问被拒绝。</translation>
     </message>
 </context>
 <context>
@@ -2519,7 +2521,7 @@ repository</source>
     <message>
         <location filename="core/input/sfz/inputparsersfz.cpp" line="109"/>
         <source>File recursion</source>
-        <translation>递归文件</translation>
+        <translation>文件递归</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputparsersfz.cpp" line="117"/>
@@ -2620,7 +2622,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="64"/>
         <source>Polyphone SoundFont Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Polyphone 音色库编辑器</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="208"/>
@@ -2662,7 +2664,15 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="78"/>
         <source>Home screen</source>
-        <translation type="unfinished"></translation>
+        <translation>主屏幕</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.ui" line="106"/>
+        <source></source>
+        <extracomment>prefixed with 2 spaces for each line</extracomment>
+        <translatorcomment>  New
+  soundfont</translatorcomment>
+        <translation>  新音色库</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="121"/>
@@ -2712,7 +2722,7 @@ repository</source>
     <message>
         <location filename="editor/modulator/modulatorcell.ui" line="127"/>
         <source>no operation</source>
-        <translation type="unfinished"></translation>
+        <translation>无操作</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.ui" line="132"/>
@@ -2727,25 +2737,27 @@ repository</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="99"/>
         <source>Default mod.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认调制。</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="156"/>
         <source>overwritten by %1</source>
         <oldsource>overriden by %1</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>被 %1 覆盖</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="163"/>
         <source>disabling
 default mod.</source>
-        <translation type="unfinished"></translation>
+        <translation>禁用
+默认调制。</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="165"/>
         <source>overriding
 default mod.</source>
-        <translation type="unfinished"></translation>
+        <translation>覆盖
+默认调制。</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="383"/>
@@ -2756,30 +2768,30 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="391"/>
         <source>semi-tones</source>
-        <translation type="unfinished"></translation>
+        <translation>半音</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="394"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
-        <translation type="unfinished"></translation>
+        <translation>音分</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="405"/>
         <source>Add from:</source>
         <oldsource>Add from: </oldsource>
-        <translation type="unfinished"></translation>
+        <translation>添加自：</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="406"/>
         <source>Multiply from:</source>
-        <translation type="unfinished"></translation>
+        <translation>乘以：</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="408"/>
         <source>To:</source>
         <oldsource>To: </oldsource>
-        <translation type="unfinished"></translation>
+        <translation>至：</translation>
     </message>
 </context>
 <context>
@@ -2801,7 +2813,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatorcombosrc.cpp" line="93"/>
         <source>Link (invalid)</source>
-        <translation>链接(不合法)</translation>
+        <translation>链接 (无效)</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcombosrc.cpp" line="96"/>
@@ -2819,7 +2831,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="103"/>
         <source>Paste the copied modulators</source>
-        <translation>粘贴调制器</translation>
+        <translation>粘贴复制的调制器</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="132"/>
@@ -2829,31 +2841,31 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="161"/>
         <source>Collapse the modulator section</source>
-        <translation type="unfinished"></translation>
+        <translation>折叠调制器区域</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="202"/>
         <location filename="editor/modulator/modulatoreditor.cpp" line="153"/>
         <location filename="editor/modulator/modulatoreditor.cpp" line="257"/>
         <source>No modulators</source>
-        <translation type="unfinished"></translation>
+        <translation>无调制器</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="234"/>
         <location filename="editor/modulator/modulatoreditor.cpp" line="162"/>
         <source>Select a single division to display the modulator list</source>
-        <translation type="unfinished"></translation>
+        <translation>选择单个分区以显示调制器列表</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="320"/>
         <source>Expand the modulator section</source>
-        <translation type="unfinished"></translation>
+        <translation>展开调制器区域</translation>
     </message>
     <message numerus="yes">
         <location filename="editor/modulator/modulatoreditor.cpp" line="262"/>
         <source>%n modulator(s):</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n个调制器：</numerusform>
         </translation>
     </message>
     <message>
@@ -2864,7 +2876,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="346"/>
         <source>Copy the selected modulators</source>
-        <translation>复制选择的调制器</translation>
+        <translation>复制选定的调制器</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="351"/>
@@ -2874,7 +2886,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="352"/>
         <source>Copy all modulators</source>
-        <translation>复制全部调制器</translation>
+        <translation>复制所有调制器</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.cpp" line="637"/>
@@ -2911,22 +2923,22 @@ default mod.</source>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="62"/>
         <source>Please close file before overriding it.</source>
-        <translation type="unfinished">覆盖文件前先关闭文件。</translation>
+        <translation>覆盖文件前请关闭文件。</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="91"/>
         <source>Couldn&apos;t delete file &quot;%1&quot;.</source>
-        <translation type="unfinished">无法删除文件 &quot;%1&quot;。</translation>
+        <translation>无法删除文件 “%1”。</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="101"/>
         <source>Couldn&apos;t rename file &quot;%1&quot;.</source>
-        <translation type="unfinished">无法重命名文件 &quot;%1&quot;。</translation>
+        <translation>无法重命名文件 “%1”。</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="148"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished">无法创建文件 &quot;%1&quot;</translation>
+        <translation>无法创建文件 “%1”</translation>
     </message>
 </context>
 <context>
@@ -2954,7 +2966,7 @@ default mod.</source>
     <message>
         <location filename="editor/pageenvelope.ui" line="181"/>
         <source>Key → Decay</source>
-        <translation>Key → Decay</translation>
+        <translation>音符 → 衰减</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="263"/>
@@ -2980,7 +2992,7 @@ default mod.</source>
     <message>
         <location filename="editor/pageenvelope.ui" line="391"/>
         <source>Key → Hold</source>
-        <translation>Key → Hold</translation>
+        <translation>音符 → 保持</translation>
     </message>
     <message>
         <location filename="editor/pageenvelope.ui" line="420"/>
@@ -3031,7 +3043,7 @@ default mod.</source>
         <location filename="editor/overview/pageoverviewinst.cpp" line="39"/>
         <source>Sample number</source>
         <oldsource>Nombre d&apos;échantillons</oldsource>
-        <translation>样本数</translation>
+        <translation>采样数</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="40"/>
@@ -3071,7 +3083,7 @@ default mod.</source>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="46"/>
         <source>Chorus</source>
-        <translation>和声</translation>
+        <translation>合唱</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="47"/>
@@ -3101,25 +3113,25 @@ default mod.</source>
         <location filename="editor/overview/pageoverviewprst.cpp" line="38"/>
         <source>Bank - Preset</source>
         <oldsource>Banque - Preset</oldsource>
-        <translation>库-预设</translation>
+        <translation>库 - 预设</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="39"/>
         <source>Instrument number</source>
         <oldsource>Nombre d&apos;instruments</oldsource>
-        <translation>乐器编号</translation>
+        <translation>乐器数量</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="40"/>
         <source>Parameter number</source>
         <oldsource>Nombre de paramètres</oldsource>
-        <translation>参数编号</translation>
+        <translation>参数数量</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="41"/>
         <source>Modulator number</source>
         <oldsource>Nombre de modulateurs</oldsource>
-        <translation>调制器编号</translation>
+        <translation>调制器数量</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="42"/>
@@ -3141,7 +3153,7 @@ default mod.</source>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="45"/>
         <source>Chorus</source>
-        <translation>和声</translation>
+        <translation>合唱</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="46"/>
@@ -3162,8 +3174,7 @@ default mod.</source>
         <source>Total
 duration</source>
         <oldsource>Durée de la boucle</oldsource>
-        <translation>总
-时长</translation>
+        <translation>总时长</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="43"/>
@@ -3174,35 +3185,31 @@ duration</source>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="41"/>
         <source>Loop
 duration</source>
-        <translation>循环
-时长</translation>
+        <translation>循环时长</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="33"/>
         <source>Samples</source>
-        <translation>样本</translation>
+        <translation>采样</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="42"/>
         <source>Root
 key</source>
-        <translation>根
-音符</translation>
+        <translation>根音符</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="44"/>
         <source>Sample
 type</source>
         <oldsource>Échantillon lié</oldsource>
-        <translation>样本
-类型</translation>
+        <translation>采样类型</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="45"/>
         <source>Linked
 sample</source>
-        <translation>链接的
-样本</translation>
+        <translation>链接的采样</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="46"/>
@@ -3213,7 +3220,7 @@ rate</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="47"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>压缩</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
@@ -3237,7 +3244,7 @@ rate</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="226"/>
         <source>Invalid link</source>
-        <translation>不合法的链接</translation>
+        <translation>无效链接</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="230"/>
@@ -3250,26 +3257,26 @@ rate</source>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="237"/>
         <source>Stereo right</source>
         <oldsource>Stereo droit</oldsource>
-        <translation>左声道</translation>
+        <translation>立体声右</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="241"/>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="245"/>
         <source>Stereo left</source>
         <oldsource>Stereo gauche</oldsource>
-        <translation>右声道</translation>
+        <translation>立体声左</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="249"/>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="253"/>
         <source>Stereo non defined</source>
         <oldsource>Stereo non défini</oldsource>
-        <translation>双声道未定义</translation>
+        <translation>立体声未定义</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="276"/>
         <source>invalid</source>
-        <translation>不合法</translation>
+        <translation>无效</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="282"/>
@@ -3290,7 +3297,8 @@ rate</source>
         <source>Select a single instrument or preset
 to display its division ranges</source>
         <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a single instrument or preset&lt;/p&gt;&lt;p&gt;to display its division ranges&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>选择单个乐器或预设
+以显示其分区范围</translation>
     </message>
 </context>
 <context>
@@ -3318,7 +3326,7 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesf2.ui" line="200"/>
         <source>Product</source>
-        <translation>厂商</translation>
+        <translation>产品</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="214"/>
@@ -3365,24 +3373,24 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesf2.ui" line="592"/>
         <source>Samples</source>
-        <translation>样本</translation>
+        <translation>采样</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="667"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>压缩</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="674"/>
         <location filename="editor/pagesf2.ui" line="757"/>
         <location filename="editor/pagesf2.ui" line="820"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>计数</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="688"/>
         <source>Bit depth</source>
-        <translation type="unfinished"></translation>
+        <translation>位深</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="702"/>
@@ -3397,12 +3405,12 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesf2.ui" line="716"/>
         <source>no</source>
-        <translation type="unfinished">否</translation>
+        <translation>否</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="721"/>
         <source>possible</source>
-        <translation type="unfinished"></translation>
+        <translation>可能</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="750"/>
@@ -3426,7 +3434,7 @@ to display its division ranges</source>
         <location filename="editor/pagesf2.cpp" line="230"/>
         <source>%1 (unused: %n)</source>
         <translation>
-            <numerusform>%1(未使用：%n)</numerusform>
+            <numerusform>%1 (未使用：%n)</numerusform>
         </translation>
     </message>
 </context>
@@ -3466,12 +3474,12 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="291"/>
         <source>stereo</source>
-        <translation>双声道</translation>
+        <translation>立体声</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="426"/>
         <source>Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>调音</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="456"/>
@@ -3481,12 +3489,12 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="549"/>
         <source>Use the full length of the sample as loop</source>
-        <translation>全长循环</translation>
+        <translation>将采样的完整长度用作循环</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="594"/>
         <source>Size</source>
-        <translation>长度</translation>
+        <translation>大小</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="601"/>
@@ -3506,7 +3514,7 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="228"/>
         <source>Use the estimated pitch and correction as values</source>
-        <translation>使用估计的音高校正音符值</translation>
+        <translation>使用估算的音高和校正值</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="669"/>
@@ -3558,23 +3566,24 @@ to display its division ranges</source>
         <location filename="editor/pagesmpl.cpp" line="312"/>
         <source>Compress the sample(s) to reduce the soundfont size
 Warning: quality will be reduced and the loop may be altered</source>
-        <translation type="unfinished"></translation>
+        <translation>压缩采样以减小音色库大小
+警告：音质会降低，循环可能会改变</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="320"/>
         <source>This sample is compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>此采样已压缩以减小音色库大小</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="321"/>
         <source>The selected samples are compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>选定的采样已压缩以减小音色库大小</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="537"/>
         <location filename="editor/pagesmpl.cpp" line="1059"/>
         <source>Change successfully applied to the different samples</source>
-        <translation>更改已成功应用到其它样本</translation>
+        <translation>更改已成功应用到不同采样</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="804"/>
@@ -3596,23 +3605,23 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="editor/pagesmpl.cpp" line="1107"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>确定要将采样从 &lt;b&gt;%1&lt;/b&gt; 剪切到 &lt;b&gt;%2&lt;/b&gt; 吗？</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1109"/>
         <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>是(&amp;Y)</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1110"/>
         <source>&amp;No</source>
-        <translation type="unfinished"></translation>
+        <translation>否(&amp;N)</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1111"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>是并创建另一个采样(&amp;C)</translation>
     </message>
 </context>
 <context>
@@ -3638,75 +3647,75 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.ui" line="59"/>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>通道</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="67"/>
         <source>all</source>
-        <translation type="unfinished"></translation>
+        <translation>所有</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="152"/>
         <source>detect...</source>
-        <translation type="unfinished"></translation>
+        <translation>检测...</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="160"/>
         <source>Multiple selection</source>
-        <translation type="unfinished">多选</translation>
+        <translation>多选</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="168"/>
         <location filename="player/player.ui" line="189"/>
         <source>off</source>
-        <translation type="unfinished"></translation>
+        <translation>关</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="173"/>
         <location filename="player/player.ui" line="194"/>
         <source>on</source>
-        <translation type="unfinished"></translation>
+        <translation>开</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="181"/>
         <source>Selection by keys</source>
-        <translation type="unfinished"></translation>
+        <translation>按键选择</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="199"/>
         <source>toggle</source>
-        <translation type="unfinished"></translation>
+        <translation>切换</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="278"/>
         <source>Opening file...</source>
-        <translation type="unfinished">正在打开文件...</translation>
+        <translation>正在打开文件...</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="356"/>
         <source>Banks (number of instruments)</source>
         <oldsource>Banques (nombre d&apos;instruments)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>音色库 (乐器数量)</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="433"/>
         <source>Instruments</source>
-        <translation type="unfinished">乐器</translation>
+        <translation>乐器</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="567"/>
         <source>Cannot open the file</source>
-        <translation type="unfinished">无法打开文件</translation>
+        <translation>无法打开文件</translation>
     </message>
     <message>
         <location filename="player/player.cpp" line="50"/>
         <source>MIDI panic</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI紧急复位</translation>
     </message>
     <message>
         <location filename="player/player.cpp" line="51"/>
         <source>Recorder</source>
-        <translation type="unfinished">录音机</translation>
+        <translation>录音机</translation>
     </message>
 </context>
 <context>
@@ -3714,11 +3723,19 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/playertreeproxymodel.cpp" line="150"/>
         <source>Bank %1</source>
-        <translation type="unfinished"></translation>
+        <translation>音色库 %1</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
+    <message>
+        <location filename="core/input/grandorgue/grandorguerank.cpp" line="142"/>
+        <location filename="core/input/grandorgue/grandorguestop.cpp" line="141"/>
+        <location filename="core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
+        <location filename="core/output/outputfactory.cpp" line="102"/>
+        <source>untitled</source>
+        <translation>未命名</translation>
+    </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="118"/>
         <source>Save a soundfont</source>
@@ -3727,12 +3744,12 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/output/outputfactory.cpp" line="120"/>
         <source>Sf2 files</source>
-        <translation>SF2 文件</translation>
+        <translation>Sf2 文件</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="120"/>
         <source>Sf3 files</source>
-        <translation type="unfinished">SF2 文件 {3 ?}</translation>
+        <translation>Sf3 文件</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="146"/>
@@ -3743,17 +3760,17 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="84"/>
         <source>Sample &quot;%1L&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation>样本 &quot;%1L&quot; 已存在。&lt;br/&gt;是否替换？</translation>
+        <translation>采样 &quot;%1L&quot; 已存在。&lt;br /&gt;是否替换？</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="89"/>
         <source>Sample &quot;%1R&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation>样本 &quot;%1R&quot; 已存在。&lt;br/&gt;是否替换？</translation>
+        <translation>采样 &quot;%1R&quot; 已存在。&lt;br /&gt;是否替换？</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="97"/>
         <source>Sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation>样本 &quot;%1&quot; 已存在。&lt;br/&gt;是否替换？</translation>
+        <translation>采样 &quot;%1&quot; 已存在。&lt;br /&gt;是否替换？</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="110"/>
@@ -3763,7 +3780,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="111"/>
         <source>R&amp;eplace all</source>
-        <translation>替换全部(&amp;E)</translation>
+        <translation>全部替换(&amp;E)</translation>
     </message>
     <message>
         <location filename="core/sample/sampleloader.cpp" line="112"/>
@@ -3793,7 +3810,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/model/soundfont.cpp" line="45"/>
         <source>Samples</source>
-        <translation>样本</translation>
+        <translation>采样</translation>
     </message>
     <message>
         <location filename="core/model/soundfont.cpp" line="46"/>
@@ -3825,14 +3842,6 @@ Warning: quality will be reduced and the loop may be altered</source>
         <source>File not supported: &quot;%1&quot;</source>
         <oldsource>File not supported &quot;%1&quot;</oldsource>
         <translation>不支持文件: &quot;%1&quot;</translation>
-    </message>
-    <message>
-        <location filename="core/input/grandorgue/grandorguerank.cpp" line="142"/>
-        <location filename="core/input/grandorgue/grandorguestop.cpp" line="141"/>
-        <location filename="core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
-        <location filename="core/output/outputfactory.cpp" line="102"/>
-        <source>untitled</source>
-        <translation>未命名</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="116"/>
@@ -3884,7 +3893,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="context/keynamemanager.cpp" line="132"/>
         <source>D♭</source>
         <comment>key name</comment>
-        <translation></translation>
+        <translation>降D</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="66"/>
@@ -3899,7 +3908,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="context/keynamemanager.cpp" line="138"/>
         <source>E♭</source>
         <comment>key name</comment>
-        <translation></translation>
+        <translation>降E</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="68"/>
@@ -3922,7 +3931,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="context/keynamemanager.cpp" line="146"/>
         <source>G♭</source>
         <comment>key name</comment>
-        <translation></translation>
+        <translation>降G</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="71"/>
@@ -3937,7 +3946,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="context/keynamemanager.cpp" line="152"/>
         <source>A♭</source>
         <comment>key name</comment>
-        <translation></translation>
+        <translation>降A</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="73"/>
@@ -3952,7 +3961,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="context/keynamemanager.cpp" line="158"/>
         <source>B♭</source>
         <comment>key name</comment>
-        <translation></translation>
+        <translation>降B</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="75"/>
@@ -3967,35 +3976,35 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="context/keynamemanager.cpp" line="131"/>
         <source>C♯</source>
         <comment>key name</comment>
-        <translation></translation>
+        <translation>升C</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="85"/>
         <location filename="context/keynamemanager.cpp" line="137"/>
         <source>D♯</source>
         <comment>key name</comment>
-        <translation></translation>
+        <translation>升D</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="88"/>
         <location filename="context/keynamemanager.cpp" line="145"/>
         <source>F♯</source>
         <comment>key name</comment>
-        <translation></translation>
+        <translation>升F</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="90"/>
         <location filename="context/keynamemanager.cpp" line="151"/>
         <source>G♯</source>
         <comment>key name</comment>
-        <translation></translation>
+        <translation>升G</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="92"/>
         <location filename="context/keynamemanager.cpp" line="157"/>
         <source>A♯</source>
         <comment>key name</comment>
-        <translation></translation>
+        <translation>升A</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="55"/>
@@ -4029,7 +4038,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/input/grandorgue/inputgrandorgue.h" line="35"/>
         <source>GrandOrgue sample sets</source>
-        <translation type="unfinished"></translation>
+        <translation>GrandOrgue 采样集</translation>
     </message>
     <message>
         <location filename="core/input/inputfactory.cpp" line="109"/>
@@ -4052,23 +4061,26 @@ Warning: quality will be reduced and the loop may be altered</source>
 This rule applies at the sample level and also when editing a division of an instrument:
 the division corresponding to the other channel, if any, is edited the same.
 Both divisions must share the same note and velocity ranges.</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑立体声采样的一侧时，另一侧会自动进行相同的编辑。
+此规则适用于采样级别以及编辑乐器分区时：
+如果存在对应的另一个通道的分区，它将以相同方式进行编辑。
+两个分区必须共享相同的音符和力度范围。</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputsf.h" line="35"/>
         <source>Soundfont files</source>
-        <translation type="unfinished"></translation>
+        <translation>音色库文件</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="85"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
-        <translation type="unfinished"></translation>
+        <translation>平均律</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="121"/>
         <source>Tuning program %1:%2</source>
-        <translation type="unfinished"></translation>
+        <translation>调音程序 %1:%2</translation>
     </message>
 </context>
 <context>
@@ -4086,47 +4098,47 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="77"/>
         <source>various records</source>
-        <translation type="unfinished"></translation>
+        <translation>多种录音</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="78"/>
         <source>additive synthesis</source>
-        <translation>加法合成器</translation>
+        <translation>加法合成</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="79"/>
         <source>subtrative synthesis</source>
-        <translation>减法合成器</translation>
+        <translation>减法合成</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="80"/>
         <source>wavetable synthesis</source>
-        <translation>波表合成器</translation>
+        <translation>波表合成</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="81"/>
         <source>model synthesis</source>
-        <translation>模型合成器</translation>
+        <translation>模型合成</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="82"/>
         <source>FM synthesis</source>
-        <translation>调频合成器</translation>
+        <translation>调频合成</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="83"/>
         <source>vector synthesis</source>
-        <translation>矢量合成器</translation>
+        <translation>矢量合成</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="84"/>
         <source>granular synthesis</source>
-        <translation>粒子合成器</translation>
+        <translation>粒子合成</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="85"/>
         <source>other synthesis</source>
-        <translation>其它合成器</translation>
+        <translation>其他合成</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="88"/>
@@ -4141,12 +4153,12 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="90"/>
         <source>distorted</source>
-        <translation type="unfinished"></translation>
+        <translation>失真</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="91"/>
         <source>clean</source>
-        <translation type="unfinished"></translation>
+        <translation>干净</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="92"/>
@@ -4161,22 +4173,22 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="94"/>
         <source>warm</source>
-        <translation>温和</translation>
+        <translation>温暖</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="95"/>
         <source>cold</source>
-        <translation>冷酷</translation>
+        <translation>冷冽</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="96"/>
         <source>fat</source>
-        <translation type="unfinished"></translation>
+        <translation>厚重</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="97"/>
         <source>thin</source>
-        <translation type="unfinished"></translation>
+        <translation>纤细</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="98"/>
@@ -4186,12 +4198,12 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="99"/>
         <source>soft</source>
-        <translation>柔软</translation>
+        <translation>柔和</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="100"/>
         <source>muted</source>
-        <translation type="unfinished"></translation>
+        <translation>闷音</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="101"/>
@@ -4201,7 +4213,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="102"/>
         <source>dissonant</source>
-        <translation type="unfinished"></translation>
+        <translation>不和谐</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="103"/>
@@ -4216,32 +4228,32 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="105"/>
         <source>wooden</source>
-        <translation type="unfinished"></translation>
+        <translation>木质</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="106"/>
         <source>exotic</source>
-        <translation type="unfinished"></translation>
+        <translation>异域</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="109"/>
         <source>slow attack</source>
-        <translation type="unfinished"></translation>
+        <translation>慢起音</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="110"/>
         <source>decaying</source>
-        <translation type="unfinished"></translation>
+        <translation>衰减</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="111"/>
         <source>sustained</source>
-        <translation type="unfinished"></translation>
+        <translation>延音</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="112"/>
         <source>long release</source>
-        <translation type="unfinished"></translation>
+        <translation>长释音</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="113"/>
@@ -4251,12 +4263,12 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="114"/>
         <source>long / evolving</source>
-        <translation type="unfinished"></translation>
+        <translation>长音 / 渐变</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="115"/>
         <source>pulsating</source>
-        <translation type="unfinished"></translation>
+        <translation>脉冲</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="116"/>
@@ -4266,42 +4278,42 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="117"/>
         <source>pad</source>
-        <translation type="unfinished"></translation>
+        <translation>铺底</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="118"/>
         <source>lead</source>
-        <translation type="unfinished"></translation>
+        <translation>主音</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="119"/>
         <source>monophonic</source>
-        <translation type="unfinished"></translation>
+        <translation>单音</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="120"/>
         <source>chord</source>
-        <translation>和声</translation>
+        <translation>和弦</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="121"/>
         <source>glide / pitch mod</source>
-        <translation type="unfinished"></translation>
+        <translation>滑音 / 音高调制</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="122"/>
         <source>sweep / filter mod</source>
-        <translation type="unfinished"></translation>
+        <translation>扫频 / 滤波器调制</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="123"/>
         <source>arpeggiated</source>
-        <translation>琵音</translation>
+        <translation>琶音</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="124"/>
         <source>expressive</source>
-        <translation type="unfinished"></translation>
+        <translation>富有表现力</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="125"/>
@@ -4316,28 +4328,28 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="129"/>
         <source>classic music</source>
-        <translation>古典</translation>
+        <translation>古典音乐</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="130"/>
         <source>electronic music</source>
-        <translation>电子</translation>
+        <translation>电子音乐</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="131"/>
         <source>trance</source>
-        <translation>迷幻</translation>
+        <translation>迷幻舞曲</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="132"/>
         <location filename="repository/repositorymanager.cpp" line="133"/>
         <source>ambient music</source>
-        <translation>氛围</translation>
+        <translation>氛围音乐</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="134"/>
         <source>house</source>
-        <translation type="unfinished"></translation>
+        <translation>浩室</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="135"/>
@@ -4347,7 +4359,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="136"/>
         <source>D&apos;n&apos;B / breaks</source>
-        <translation type="unfinished"></translation>
+        <translation>鼓打贝斯 / 碎拍</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="137"/>
@@ -4357,53 +4369,53 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="138"/>
         <source>experimental</source>
-        <translation>实验</translation>
+        <translation>实验音乐</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="139"/>
         <source>funk / soul</source>
-        <translation type="unfinished"></translation>
+        <translation>放克 / 灵魂乐</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="140"/>
         <source>reggae / dub</source>
-        <translation type="unfinished"></translation>
+        <translation>雷鬼 / 回响</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="141"/>
         <source>latin / afro-cuban</source>
-        <translation type="unfinished"></translation>
+        <translation>拉丁 / 非古巴</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="142"/>
         <source>pop / rock</source>
-        <translation>流行/摇滚</translation>
+        <translation>流行 / 摇滚</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="143"/>
         <source>metal music</source>
-        <translation>金属</translation>
+        <translation>金属音乐</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="144"/>
         <source>hiphop / rap</source>
-        <translation>嘻哈/说唱</translation>
+        <translation>嘻哈 / 说唱</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="145"/>
         <source>jazz / swing</source>
-        <translation>爵士/摇摆</translation>
+        <translation>爵士 / 摇摆</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="146"/>
         <source>folk / country</source>
-        <translation>乡村</translation>
+        <translation>民谣 / 乡村</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="147"/>
         <location filename="repository/repositorymanager.cpp" line="148"/>
         <source>ethnic / world</source>
-        <translation>民族/世界</translation>
+        <translation>民族 / 世界音乐</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="165"/>
@@ -4503,7 +4515,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="422"/>
         <source>unpitched percussion</source>
-        <translation type="unfinished"></translation>
+        <translation>无音高打击乐</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="425"/>
@@ -4518,7 +4530,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="431"/>
         <source>soundscape</source>
-        <translation>环境音效</translation>
+        <translation>音景</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="434"/>
@@ -4567,7 +4579,8 @@ Both divisions must share the same note and velocity ranges.</source>
         <location filename="repository/daily/showsoundfonts.ui" line="217"/>
         <source>Oops! Cannot
 download the list</source>
-        <translation>无法下载列表</translation>
+        <translation>糟糕！无法
+下载列表</translation>
     </message>
 </context>
 <context>
@@ -4590,12 +4603,12 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="410"/>
         <source>Timbre</source>
-        <translation>乐器音质</translation>
+        <translation>音色</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="425"/>
         <source>Articulation</source>
-        <translation>发音清晰度</translation>
+        <translation>发音</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="440"/>
@@ -4640,18 +4653,19 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="545"/>
         <source>Go to the previous page</source>
-        <translation type="unfinished"></translation>
+        <translation>前往上一页</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="580"/>
         <source>Go to the next page</source>
-        <translation type="unfinished"></translation>
+        <translation>前往下一页</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="670"/>
         <source>Oops! Cannot
 download the list</source>
-        <translation>无法下载列表</translation>
+        <translation>糟糕！无法
+下载列表</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.cpp" line="140"/>
@@ -4695,12 +4709,12 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorcenter.ui" line="128"/>
         <source>Add a file</source>
-        <translation type="unfinished"></translation>
+        <translation>添加文件</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorcenter.cpp" line="74"/>
         <source>At least one file must be uploaded.</source>
-        <translation type="unfinished"></translation>
+        <translation>至少上传一个文件。</translation>
     </message>
 </context>
 <context>
@@ -4714,12 +4728,12 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="80"/>
         <source>The number of files cannot exceed %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>文件数量不能超过 %1。</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
         <source>File to upload</source>
-        <translation type="unfinished"></translation>
+        <translation>要上传的文件</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
@@ -4729,7 +4743,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
         <source>The file size cannot exceed %1 MB.</source>
-        <translation type="unfinished"></translation>
+        <translation>文件大小不能超过 %1 MB。</translation>
     </message>
 </context>
 <context>
@@ -4737,7 +4751,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="36"/>
         <source>Timbre</source>
-        <translation>乐器音质</translation>
+        <translation>音色</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="62"/>
@@ -4747,7 +4761,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="94"/>
         <source>Articulation</source>
-        <translation>发音清晰度</translation>
+        <translation>发音</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="113"/>
@@ -4762,7 +4776,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="184"/>
         <source>Website...</source>
-        <translation type="unfinished"></translation>
+        <translation>网站...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="197"/>
@@ -4777,12 +4791,12 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="46"/>
         <source>Select a license...</source>
-        <translation type="unfinished"></translation>
+        <translation>选择许可证...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="52"/>
         <source>Select a category...</source>
-        <translation type="unfinished"></translation>
+        <translation>选择一个分类...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="58"/>
@@ -4791,17 +4805,17 @@ download the list</source>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="73"/>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="78"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>无</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="130"/>
         <source>A category must be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>必须选择一个分类。</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="134"/>
         <source>A license must be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>必须选择一个许可证。</translation>
     </message>
 </context>
 <context>
@@ -4814,7 +4828,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditortop.cpp" line="56"/>
         <source>A title must be provided.</source>
-        <translation type="unfinished"></translation>
+        <translation>必须提供标题。</translation>
     </message>
 </context>
 <context>
@@ -4822,7 +4836,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="78"/>
         <source>Description...</source>
-        <translation type="unfinished"></translation>
+        <translation>描述...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="91"/>
@@ -4832,12 +4846,12 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="104"/>
         <source>Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>替换</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="44"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>移除</translation>
     </message>
 </context>
 <context>
@@ -4845,23 +4859,24 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="112"/>
         <source>Edit the soundfont description</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑音色库描述</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="360"/>
         <source>Oops! Cannot
 download content</source>
-        <translation>无法下载列表</translation>
+        <translation>糟糕！无法
+下载内容</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="512"/>
         <source>Discard changes</source>
-        <translation type="unfinished"></translation>
+        <translation>放弃更改</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="540"/>
         <source>Submit the changes</source>
-        <translation type="unfinished"></translation>
+        <translation>提交更改</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="201"/>
@@ -4874,7 +4889,7 @@ download content</source>
     <message>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
         <source>The upload failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>上传失败：%1</translation>
     </message>
 </context>
 <context>
@@ -4915,12 +4930,12 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="193"/>
         <source>Timbre</source>
-        <translation>乐器音质</translation>
+        <translation>音色</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="209"/>
         <source>Articulation</source>
-        <translation>发音清晰度</translation>
+        <translation>发音</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="225"/>
@@ -5015,12 +5030,12 @@ download content</source>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="59"/>
         <source>solo</source>
-        <translation type="unfinished"></translation>
+        <translation>独奏</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="68"/>
         <source>solo on selection</source>
-        <translation type="unfinished"></translation>
+        <translation>选定独奏</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="63"/>
@@ -5033,13 +5048,14 @@ download content</source>
     <message>
         <location filename="editor/pageinst.cpp" line="121"/>
         <source>Loop</source>
-        <translation>循环点</translation>
+        <translation>循环</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="132"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
-        <translation type="unfinished"></translation>
+        <translation>此行中的值以实际分贝表示。
+其他音色库编辑器可能会显示其他单位。</translation>
     </message>
 </context>
 <context>
@@ -5048,7 +5064,8 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/pageprst.cpp" line="103"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
-        <translation type="unfinished"></translation>
+        <translation>此行中的值以实际分贝表示。
+其他音色库编辑器可能会显示其他单位。</translation>
     </message>
 </context>
 <context>
@@ -5096,7 +5113,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="context/thememanager.cpp" line="566"/>
         <source>Spring</source>
-        <translation>Spring</translation>
+        <translation>春天</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="579"/>
@@ -5111,12 +5128,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="context/thememanager.cpp" line="605"/>
         <source>Good night</source>
-        <translation type="unfinished"></translation>
+        <translation>晚安</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="618"/>
         <source>Pink</source>
-        <translation type="unfinished"></translation>
+        <translation>粉色</translation>
     </message>
 </context>
 <context>
@@ -5130,7 +5147,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
         <source>Sample auto-positioning</source>
         <oldsource>Automatically link the samples</oldsource>
-        <translation>自动链接样本</translation>
+        <translation>采样自动定位</translation>
     </message>
 </context>
 <context>
@@ -5138,22 +5155,22 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="205"/>
         <source>Failed to loop sample &quot;%1&quot;.</source>
-        <translation>无法自动循环样本 &quot;%1&quot;。</translation>
+        <translation>无法循环采样 &quot;%1&quot;。</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="208"/>
         <source>The following samples couldn&apos;t be looped:</source>
-        <translation>下列样本无法循环：</translation>
+        <translation>以下采样无法循环：</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="213"/>
         <source>Possible reasons: too short or too turbulent.</source>
-        <translation>可能原因：样本太短或太混乱。</translation>
+        <translation>可能原因：太短或太不稳定。</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="47"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>循环/播放</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="65"/>
@@ -5166,12 +5183,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.cpp" line="121"/>
         <source>This tool cannot be used with mono samples:</source>
-        <translation>该工具无法用于单声道样本:</translation>
+        <translation>此工具不能用于单声道采样：</translation>
     </message>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="47"/>
         <source>Stereo samples</source>
-        <translation>双声道样本</translation>
+        <translation>立体声采样</translation>
     </message>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="65"/>
@@ -5207,7 +5224,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="97"/>
         <source>Division to the next octave</source>
-        <translation>划分到下个八度</translation>
+        <translation>划分到下一个八度</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="58"/>
@@ -5248,7 +5265,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="125"/>
         <source>Possible offset</source>
-        <translation>可偏移量</translation>
+        <translation>可能偏移量</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="112"/>
@@ -5277,7 +5294,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">样本处理</translation>
+        <translation>音频处理</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="61"/>
@@ -5305,12 +5322,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="79"/>
         <source>Multiply</source>
-        <translation>放大倍数</translation>
+        <translation>乘</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="49"/>
         <source>Normalize</source>
-        <translation>规格化</translation>
+        <translation>归一化</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="88"/>
@@ -5328,7 +5345,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords.cpp" line="61"/>
         <source>The instrument contains no samples.</source>
-        <translation>该乐器不包含样本。</translation>
+        <translation>该乐器不包含任何采样。</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords.h" line="48"/>
@@ -5351,12 +5368,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="39"/>
         <source>Sample creation:</source>
-        <translation>样本创建物：</translation>
+        <translation>采样创建：</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="47"/>
         <source>for every key</source>
-        <translation>每个音符</translation>
+        <translation>针对每个音符</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="52"/>
@@ -5376,37 +5393,37 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="75"/>
         <source>Stereo</source>
-        <translation>双声道</translation>
+        <translation>立体声</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="89"/>
         <source>Chord</source>
-        <translation>和声</translation>
+        <translation>和弦</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="112"/>
         <source>Seventh</source>
-        <translation>七度</translation>
+        <translation>七度音</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="124"/>
         <source>Ninth</source>
-        <translation>九度</translation>
+        <translation>九度音</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="136"/>
         <source>Third</source>
-        <translation>三度</translation>
+        <translation>三度音</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="172"/>
         <source>Root key</source>
-        <translation>根音符</translation>
+        <translation>根音</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="184"/>
         <source>Fifth</source>
-        <translation>五度</translation>
+        <translation>五度音</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="221"/>
@@ -5439,23 +5456,23 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="335"/>
         <source>Inversion number</source>
-        <translation>倒数</translation>
+        <translation>转位次数</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="363"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="411"/>
         <source>diminished</source>
-        <translation type="unfinished"></translation>
+        <translation>减</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="406"/>
         <source>perfect</source>
-        <translation type="unfinished"></translation>
+        <translation>完全</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="416"/>
         <source>augmented</source>
-        <translation type="unfinished"></translation>
+        <translation>增</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="656"/>
@@ -5480,20 +5497,20 @@ Other soundfont editors might display other units.</source>
         <source>%1 and %2 have been deleted.</source>
         <comment>[X sample(s)] and [Y instrument(s)] have been deleted.</comment>
         <translatorcomment>[X个样本]和[Y个乐器]已被删除。</translatorcomment>
-        <translation>%1和%2已被删除。</translation>
+        <translation>%1 和 %2 已被删除。</translation>
     </message>
     <message numerus="yes">
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="109"/>
         <source>%n sample(s)</source>
         <translation>
-            <numerusform>%n个样本</numerusform>
+            <numerusform>%n 个采样</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="110"/>
         <source>%n instrument(s)</source>
         <translation>
-            <numerusform>%n个乐器</numerusform>
+            <numerusform>%n 个乐器</numerusform>
         </translation>
     </message>
     <message>
@@ -5517,7 +5534,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod.h" line="60"/>
         <source>Override a default modulator</source>
-        <translation type="unfinished"></translation>
+        <translation>覆盖默认调制器</translation>
     </message>
 </context>
 <context>
@@ -5525,19 +5542,19 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="20"/>
         <source>Here is the list of modulators automatically set for every instrument. You can override or disable them by selecting the corresponding modulators and action below.</source>
-        <translation type="unfinished"></translation>
+        <translation>以下是为每个乐器自动设置的调制器列表。您可以通过选择相应的调制器并点击下面的操作来覆盖或禁用它们。</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="58"/>
         <source>&amp;Override</source>
         <oldsource>Override</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>覆盖(&amp;O)</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="68"/>
         <source>&amp;Disable</source>
         <oldsource>Disable</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>禁用(&amp;D)</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="88"/>
@@ -5551,12 +5568,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="84"/>
         <source>An instrument comprising no samples is not compatible with this tool:</source>
-        <translation>不含样本的乐器与该工具不兼容：</translation>
+        <translation>不包含采样的乐器与此工具不兼容：</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="85"/>
         <source>A preset comprising no instruments is not compatible with this tool:</source>
-        <translation>不包含乐器的预设与该工具不兼容：</translation>
+        <translation>不包含乐器的预设与此工具不兼容：</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="45"/>
@@ -5566,7 +5583,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="63"/>
         <source>Division duplication</source>
-        <translation>复制分层</translation>
+        <translation>分区复制</translation>
     </message>
 </context>
 <context>
@@ -5574,7 +5591,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="30"/>
         <source>A division for each velocity range</source>
-        <translation>为每个力度范围创建分层</translation>
+        <translation>每个力度范围一个分区</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="143"/>
@@ -5589,7 +5606,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="20"/>
         <source>A division for each key</source>
-        <translation>为每个音符创建分层</translation>
+        <translation>每个音符一个分区</translation>
     </message>
 </context>
 <context>
@@ -5597,7 +5614,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="106"/>
         <source>Couldn&apos;t export the sample.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法导出采样。</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="126"/>
@@ -5607,13 +5624,13 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="129"/>
         <source>The execution of the command ended with an error.</source>
-        <translation>命令的执行以含错误的状态结束。</translation>
+        <translation>命令执行以错误结束。</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="48"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">样本处理</translation>
+        <translation>音频处理</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="66"/>
@@ -5636,12 +5653,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="94"/>
         <source>Authorize stereo editing</source>
-        <translation>允许编辑双声道</translation>
+        <translation>授权立体声编辑</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="118"/>
         <source>Replace sample information if possible</source>
-        <translation>如可能则替换样本信息</translation>
+        <translation>如果可能，替换采样信息</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="150"/>
@@ -5672,12 +5689,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="118"/>
         <source>You must enter a command with at least {wav} as argument.</source>
-        <translation>输入的命令需要包含{wav}参数。</translation>
+        <translation>您必须输入一个至少包含 {wav} 参数的命令。</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="125"/>
         <source>The command must contain the argument {wav}.</source>
-        <translation>命令必须包含参数{wav}。</translation>
+        <translation>命令必须包含参数 {wav}。</translation>
     </message>
 </context>
 <context>
@@ -5690,7 +5707,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl.h" line="61"/>
         <source>Shift a parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>移动参数</translation>
     </message>
 </context>
 <context>
@@ -5708,12 +5725,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="67"/>
         <source>Add</source>
-        <translation>增加</translation>
+        <translation>添加</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="74"/>
         <source>Multiply</source>
-        <translation>放大倍数</translation>
+        <translation>乘</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="84"/>
@@ -5727,12 +5744,12 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">样本处理</translation>
+        <translation>音频处理</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
         <source>Filter frequencies</source>
-        <translation>频率滤波</translation>
+        <translation>滤波频率</translation>
     </message>
 </context>
 <context>
@@ -5751,7 +5768,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="32"/>
         <source>Mark with red color where you want to cut the frequencies:</source>
         <oldsource>Put in red the part of frequencies to filter:</oldsource>
-        <translation>将要剪掉的频率置于红色部分：</translation>
+        <translation>用红色标记您想剪切的频率部分：</translation>
     </message>
 </context>
 <context>
@@ -5759,7 +5776,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="54"/>
         <source>Sample</source>
-        <translation>样本</translation>
+        <translation>采样</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="54"/>
@@ -5820,7 +5837,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="75"/>
         <source>Sample</source>
-        <translation>样本</translation>
+        <translation>采样</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="76"/>
@@ -5861,7 +5878,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="168"/>
         <source>Csv file</source>
-        <translation>CSV文件</translation>
+        <translation>CSV 文件</translation>
     </message>
 </context>
 <context>
@@ -5917,7 +5934,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="126"/>
         <source>Modification</source>
-        <translation>修改方式</translation>
+        <translation>修改</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="153"/>
@@ -5952,7 +5969,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="249"/>
         <source>Apply to a velocity range</source>
-        <translation>应用到力度范围</translation>
+        <translation>应用于力度范围</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="278"/>
@@ -5967,7 +5984,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="222"/>
         <source>Stiffness</source>
-        <translation>硬度</translation>
+        <translation>刚度</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="227"/>
@@ -5980,12 +5997,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/link_sample/toollinksample.h" line="49"/>
         <source>Stereo samples</source>
-        <translation>双声道样本</translation>
+        <translation>立体声采样</translation>
     </message>
     <message>
         <location filename="editor/tools/link_sample/toollinksample.h" line="67"/>
         <source>Find a link</source>
-        <translation>搜索链接</translation>
+        <translation>查找链接</translation>
     </message>
 </context>
 <context>
@@ -5998,7 +6015,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="62"/>
         <source>Load a parameter from the instruments</source>
-        <translation type="unfinished"></translation>
+        <translation>从乐器加载参数</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="296"/>
@@ -6009,8 +6026,8 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="301"/>
         <source>Couldn&apos;t configure %n sample(s).</source>
         <oldsource>Couln&apos;t configure %n sample(s).</oldsource>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>无法配置 %n 个采样。</numerusform>
         </translation>
     </message>
 </context>
@@ -6024,17 +6041,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="27"/>
         <source>Tuning (semi-tones)</source>
-        <translation>校音(半音)</translation>
+        <translation>调音 (半音)</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="34"/>
         <source>Tuning (cents)</source>
-        <translation>校音(音分)</translation>
+        <translation>调音 (音分)</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="41"/>
         <source>Loop start / loop end</source>
-        <translation type="unfinished"></translation>
+        <translation>循环开始 / 循环结束</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="63"/>
@@ -6052,13 +6069,13 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>循环/播放</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
         <source>Cross-fade loop</source>
         <oldsource>Crossfade loop</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>交叉淡入淡出循环</translation>
     </message>
 </context>
 <context>
@@ -6066,23 +6083,23 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="20"/>
         <source>Crossfade duration</source>
-        <translation type="unfinished"></translation>
+        <translation>交叉淡入淡出时长</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="29"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">确定(&amp;O)</translation>
+        <translation>确定(&amp;O)</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="49"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">取消(&amp;C)</translation>
+        <translation>取消(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="58"/>
         <source> ms</source>
         <comment>Unit for milliseconds</comment>
-        <translation type="unfinished"></translation>
+        <translation> 毫秒</translation>
     </message>
 </context>
 <context>
@@ -6090,17 +6107,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.cpp" line="66"/>
         <source>The preset doesn&apos;t trigger any samples.</source>
-        <translation type="unfinished"></translation>
+        <translation>该预设未触发任何采样。</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="47"/>
         <source>Transformation</source>
-        <translation type="unfinished">变换</translation>
+        <translation>变换</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="62"/>
         <source>Merge samples for each note</source>
-        <translation type="unfinished"></translation>
+        <translation>合并每个音符的采样</translation>
     </message>
 </context>
 <context>
@@ -6110,62 +6127,62 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="102"/>
         <source> s</source>
         <comment>unit for second</comment>
-        <translation type="unfinished"> 秒</translation>
+        <translation> 秒</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="38"/>
         <source>Sample creation:</source>
-        <translation type="unfinished"></translation>
+        <translation>采样创建：</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="45"/>
         <source>Stereo</source>
-        <translation type="unfinished">双声道</translation>
+        <translation>立体声</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="59"/>
         <source>Sustain duration</source>
-        <translation type="unfinished"></translation>
+        <translation>延音时长</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="66"/>
         <source>Auto loop</source>
-        <translation type="unfinished">自动循环</translation>
+        <translation>自动循环</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="77"/>
         <source>for every key</source>
-        <translation type="unfinished">每个音符</translation>
+        <translation>针对每个音符</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="82"/>
         <source>every 3 keys</source>
-        <translation type="unfinished">每 6 个音符 {3 ?}</translation>
+        <translation>每3个音符</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="87"/>
         <source>every 6 keys</source>
-        <translation type="unfinished"></translation>
+        <translation>每6个音符</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="95"/>
         <source>Preset name:</source>
-        <translation type="unfinished"></translation>
+        <translation>预设名称：</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="112"/>
         <source>Release duration</source>
-        <translation type="unfinished"></translation>
+        <translation>释音时长</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="136"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">确定(&amp;O)</translation>
+        <translation>确定(&amp;O)</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="156"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">取消(&amp;C)</translation>
+        <translation>取消(&amp;C)</translation>
     </message>
 </context>
 <context>
@@ -6173,7 +6190,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.cpp" line="60"/>
         <source>The instrument contains no samples.</source>
-        <translation>该乐器不包含样本。</translation>
+        <translation>该乐器不包含任何采样。</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="48"/>
@@ -6183,7 +6200,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="63"/>
         <source>Mixture creation</source>
-        <translation>创建混合音栓</translation>
+        <translation>混合音栓创建</translation>
     </message>
 </context>
 <context>
@@ -6191,27 +6208,27 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="25"/>
         <source>Name of the mixture:</source>
-        <translation>名称：</translation>
+        <translation>混合音栓名称：</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="39"/>
         <source>Sample creation:</source>
-        <translation>创建样本：</translation>
+        <translation>采样创建：</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="47"/>
         <source>for every key</source>
-        <translation>每个音符</translation>
+        <translation>针对每个音符</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="52"/>
         <source>every 3 keys</source>
-        <translation>每 3 个音符</translation>
+        <translation>每3个音符</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="57"/>
         <source>every 6 keys</source>
-        <translation>每 6 个音符</translation>
+        <translation>每6个音符</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="65"/>
@@ -6221,12 +6238,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="75"/>
         <source>Stereo</source>
-        <translation>双声道</translation>
+        <translation>立体声</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="89"/>
         <source>Divisions</source>
-        <translation>分层</translation>
+        <translation>分区</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="242"/>
@@ -6236,7 +6253,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="265"/>
         <source>Ranks</source>
-        <translation>管列</translation>
+        <translation>音栓级别</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="338"/>
@@ -6332,12 +6349,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="570"/>
         <source>The instrument name must be provided.</source>
-        <translation>该乐器需要名称。</translation>
+        <translation>必须提供乐器名称。</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="586"/>
         <source>At least one rank must be specified.</source>
-        <translation>至少指定一个管列。</translation>
+        <translation>必须指定至少一个音栓级别。</translation>
     </message>
 </context>
 <context>
@@ -6373,17 +6390,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="174"/>
         <source>Defined value in the global division</source>
-        <translation type="unfinished"></translation>
+        <translation>全局分区中定义的值</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="189"/>
         <source>Default value for the selected parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>选定参数的默认值</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="201"/>
         <source>Defined value in a division</source>
-        <translation type="unfinished"></translation>
+        <translation>分区中定义的值</translation>
     </message>
 </context>
 <context>
@@ -6414,12 +6431,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="81"/>
         <source>csv format</source>
-        <translation>CSV 表</translation>
+        <translation>CSV 格式</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="91"/>
         <source>html table</source>
-        <translation>HTML 表</translation>
+        <translation>HTML 表格</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="113"/>
@@ -6455,17 +6472,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="70"/>
         <source>Division to the next octave</source>
-        <translation>划分到下个八度</translation>
+        <translation>划分到下一个八度</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="116"/>
         <source>Detuning induced (semi-tones)</source>
-        <translation>引发失谐(半音)</translation>
+        <translation>引起的失谐 (半音)</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.cpp" line="51"/>
         <source>Release time (key %1)</source>
-        <translation>释音时长(音符 %1)</translation>
+        <translation>释音时间 (音符 %1)</translation>
     </message>
 </context>
 <context>
@@ -6474,13 +6491,13 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="118"/>
         <source>%n modulator(s) has(have) been deleted.</source>
         <translation>
-            <numerusform>%n个调制器已被删除。</numerusform>
+            <numerusform>%n 个调制器已被删除。</numerusform>
         </translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="124"/>
         <source>The selection contains no modulators.</source>
-        <translation>选择的对象不包含调制器。</translation>
+        <translation>所选内容不包含调制器。</translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.h" line="45"/>
@@ -6508,7 +6525,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.h" line="68"/>
         <source>Wav export</source>
-        <translation>WAV导出</translation>
+        <translation>WAV 导出</translation>
     </message>
 </context>
 <context>
@@ -6534,7 +6551,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="59"/>
         <source>Spreading (%)</source>
-        <translation>扩散(%)</translation>
+        <translation>扩散 (%)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="21"/>
@@ -6549,12 +6566,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="31"/>
         <source>Hollow</source>
-        <translation>回荡</translation>
+        <translation>空洞</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="36"/>
         <source>Spike</source>
-        <translation>刺入</translation>
+        <translation>尖峰</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="41"/>
@@ -6579,17 +6596,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="66"/>
         <source>Division number</source>
-        <translation>分割数</translation>
+        <translation>分区数量</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="121"/>
         <source>Offset (0-100)</source>
-        <translation>偏移(0-100)</translation>
+        <translation>偏移 (0-100)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="181"/>
         <source>Filling (%)</source>
-        <translation>填充(%)</translation>
+        <translation>填充 (%)</translation>
     </message>
 </context>
 <context>
@@ -6640,17 +6657,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="113"/>
         <source>General MIDI classification</source>
-        <translation>GM MIDI 分类</translation>
+        <translation>通用MIDI分类</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="106"/>
         <source>one directory per bank</source>
-        <translation>每个库置于单独文件夹</translation>
+        <translation>每个库一个目录</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="120"/>
         <source>preset number as prefix</source>
-        <translation>附加预设号前缀</translation>
+        <translation>预设编号作为前缀</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="134"/>
@@ -6670,7 +6687,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>one file per preset</source>
-        <translation type="unfinished"></translation>
+        <translation>每个预设一个文件</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="166"/>
@@ -6710,7 +6727,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="166"/>
         <source>Invalid directory.</source>
-        <translation>路径不合法。</translation>
+        <translation>无效目录。</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="195"/>
@@ -6720,12 +6737,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="201"/>
         <source>The maximal number of soundfont to export is 127.</source>
-        <translation>一次最多只能导出 127 个音色库。</translation>
+        <translation>可导出的音色库最大数量为 127。</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="210"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation>导出音色库时，每个音色库的预设数不能超过 127。</translation>
+        <translation>如果导出多个音色库，每个音色库的最大预设数量为 127。</translation>
     </message>
 </context>
 <context>
@@ -6733,7 +6750,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.cpp" line="159"/>
         <source>An instrument comprising no samples is not compatible with this tool:</source>
-        <translation>不含样本的乐器与该工具不兼容：</translation>
+        <translation>不含采样的乐器与此工具不兼容：</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.h" line="45"/>
@@ -6743,7 +6760,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.h" line="63"/>
         <source>Transpose</source>
-        <translation>变调</translation>
+        <translation>移调</translation>
     </message>
 </context>
 <context>
@@ -6752,12 +6769,12 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">样本处理</translation>
+        <translation>音频处理</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="61"/>
         <source>Transpose</source>
-        <translation>变调</translation>
+        <translation>移调</translation>
     </message>
 </context>
 <context>
@@ -6765,7 +6782,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="20"/>
         <source>Shift in semitones</source>
-        <translation>移动量(半音)</translation>
+        <translation>半音移位</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="59"/>
@@ -6783,12 +6800,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="20"/>
         <source>Shift in semitones</source>
-        <translation>移动量(半音)</translation>
+        <translation>半音移位</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="27"/>
         <source>Adapt keyrange</source>
-        <translation>适应音符范围</translation>
+        <translation>调整音符范围</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="56"/>
@@ -6806,12 +6823,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>循环/播放</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="64"/>
         <source>Trim to end of loop</source>
-        <translation>裁剪至循环终点</translation>
+        <translation>裁剪到循环结束</translation>
     </message>
 </context>
 <context>
@@ -6819,7 +6836,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>循环/播放</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="67"/>
@@ -6832,7 +6849,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/unlink_sample/toolunlinksample.h" line="49"/>
         <source>Stereo samples</source>
-        <translation>双声道样本</translation>
+        <translation>立体声采样</translation>
     </message>
     <message>
         <location filename="editor/tools/unlink_sample/toolunlinksample.h" line="64"/>
@@ -6865,7 +6882,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="137"/>
         <source>Subscribe to a Premium account to get all the features!</source>
-        <translation>订阅高级账户获取所有功能!</translation>
+        <translation>订阅高级账户以获取所有功能！</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="147"/>
@@ -6875,7 +6892,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="152"/>
         <source>Your account has been banned.</source>
-        <translation>你的账户已被封禁。</translation>
+        <translation>您的账户已被禁用。</translation>
     </message>
 </context>
 <context>
@@ -6888,7 +6905,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeitemdelegate.cpp" line="241"/>
         <source>playing</source>
-        <translation type="unfinished"></translation>
+        <translation>正在播放</translation>
     </message>
 </context>
 <context>
@@ -6911,7 +6928,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeview.cpp" line="987"/>
         <source>Cannot create more presets.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法创建更多预设。</translation>
     </message>
 </context>
 <context>
@@ -6919,7 +6936,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="47"/>
         <source>&amp;Bind to...</source>
-        <translation>绑定至(&amp;B)...</translation>
+        <translation>绑定到(&amp;B)...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="52"/>
@@ -6939,7 +6956,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="74"/>
         <source>D&amp;uplicate</source>
-        <translation>创建副本(&amp;D)</translation>
+        <translation>复制(&amp;U)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="80"/>
@@ -6949,18 +6966,18 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="89"/>
         <source>Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>静音</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="95"/>
         <source>Always play</source>
         <oldsource>Play along</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>始终播放</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="101"/>
         <source>Restore playback</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复播放</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="109"/>
@@ -6968,12 +6985,12 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tree/treeviewmenu.cpp" line="176"/>
         <source>Re&amp;name...</source>
         <oldsource>&amp;Rename...</oldsource>
-        <translation>重命名(&amp;R)...</translation>
+        <translation>重命名(&amp;N)...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="172"/>
         <source>Bulk re&amp;name...</source>
-        <translation type="unfinished"></translation>
+        <translation>批量重命名(&amp;N)...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="260"/>
@@ -6984,27 +7001,27 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="261"/>
         <source>Cannot delete a sample used by another instrument.</source>
-        <translation>无法删除已被乐器使用的样本。</translation>
+        <translation>无法删除被其他乐器使用的采样。</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="264"/>
         <source>Cannot delete an instrument used by another preset.</source>
-        <translation>无法删除已被预设使用的乐器。</translation>
+        <translation>无法删除被其他预设使用的乐器。</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="408"/>
         <source>Sample name</source>
-        <translation type="unfinished"></translation>
+        <translation>采样名称</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="410"/>
         <source>Instrument name</source>
-        <translation type="unfinished"></translation>
+        <translation>乐器名称</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="412"/>
         <source>Preset name</source>
-        <translation type="unfinished"></translation>
+        <translation>预设名称</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="434"/>
@@ -7022,12 +7039,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="repository/soundfont/uploadingdialog.ui" line="54"/>
         <source>Uploading soundfont...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在上传音色库...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/uploadingdialog.cpp" line="76"/>
         <source>Canceling...</source>
-        <translation>取消中...</translation>
+        <translation>正在取消...</translation>
     </message>
 </context>
 <context>
@@ -7051,12 +7068,12 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/waitingtooldialog.ui" line="51"/>
         <source>Processing...</source>
         <oldsource>Processing..</oldsource>
-        <translation>处理中...</translation>
+        <translation>正在处理...</translation>
     </message>
     <message>
         <location filename="editor/tools/waitingtooldialog.cpp" line="77"/>
         <source>Canceling...</source>
-        <translation>取消中...</translation>
+        <translation>正在取消...</translation>
     </message>
 </context>
 <context>
