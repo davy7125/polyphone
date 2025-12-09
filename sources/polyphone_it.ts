@@ -788,8 +788,8 @@
 (same effect as the tool &quot;Remove blank at start&quot;)</source>
         <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool “Remove blank at start”)</oldsource>
-        <translation type="unfinished">Quando si importa un campione, tutti silenzi prima del attacco sarano rimossi.
-(Stesso effetto che lo strumento di &quot;rimozzione dei silenzi a l&apos;inizio&quot;)</translation>
+        <translation>Quando si importa un campione, ogni area vuota situata prima dell&apos;inizio dell&apos;attacco viene automaticamente rimossa.
+(stesso effetto dello strumento &quot;Rimuovi silenzio all&apos;inizio&quot;)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="44"/>
@@ -803,8 +803,8 @@
 (same effect as the tool &quot;Trim to end of loop&quot;)</source>
         <oldsource>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool “Trim to end of loop”)</oldsource>
-        <translation type="unfinished">Quando si importa un campione , i dati situati dopo la fine del loop sarano automaticamente rimossi.
-(stesso effetto che lo strumento &quot;Taglia a fine loop&quot;)</translation>
+        <translation>Quando si importa un campione, i dati situati dopo la fine del loop vengono automaticamente rimossi.
+(stesso effetto dello strumento &quot;Taglia a fine loop&quot;)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="186"/>
@@ -1042,7 +1042,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Reference pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Intonazione di riferimento</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
@@ -1227,7 +1227,6 @@ Premium!</source>
         <location filename="context/interface/configsectionsound.cpp" line="129"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
-        <translatorcomment>unita per decibel</translatorcomment>
         <translation>dB</translation>
     </message>
 </context>
@@ -1433,6 +1432,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="49"/>
         <source>Copyright</source>
+        <oldsource>Copyright © </oldsource>
         <translation>Copyright</translation>
     </message>
     <message>
@@ -1475,7 +1475,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="66"/>
         <source>mirabilos</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation></translation>
+        <translation>mirabilos</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="67"/>
@@ -1500,7 +1500,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>Alejandro Moctezuma</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>Alejandro Moctezuma</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="74"/>
@@ -1554,13 +1554,13 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="83"/>
         <source>Spessasus</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>Spessasus</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="73"/>
         <source>Chris Hansen</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation></translation>
+        <translation>Chris Hansen</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="50"/>
@@ -1616,27 +1616,27 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="17"/>
         <source>Sample compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Compressione del campione</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="27"/>
         <source>Medium</source>
-        <translation type="unfinished">Media</translation>
+        <translation>Media</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="44"/>
         <source>Quality of the compression:</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualità della compressione:</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="51"/>
         <source>High (good sound quality but larger file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alta (buona qualità del suono ma file di dimensioni maggiori)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="58"/>
         <source>Low (poor sound quality but smaller file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bassa (scarsa qualità del suono ma file di dimensioni minori)</translation>
     </message>
 </context>
 <context>
@@ -1992,7 +1992,7 @@ repository</source>
     <message>
         <location filename="repository/downloadmanager.cpp" line="147"/>
         <source>Couldn&apos;t write file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile scrivere il file &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="153"/>
@@ -2457,7 +2457,7 @@ repository</source>
     <message>
         <location filename="editor/graphics/graphicsfourier.cpp" line="601"/>
         <source>Export a graph</source>
-        <translation>Esporta il grafico</translation>
+        <translation>Esporta un grafico</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicsfourier.cpp" line="602"/>
@@ -2510,12 +2510,12 @@ repository</source>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="48"/>
         <source>Cannot find file &quot;%1&quot;.</source>
-        <translation type="unfinished">Impossibile trovate il file &quot;%1&quot;.</translation>
+        <translation>Impossibile trovare il file &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="55"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
-        <translation type="unfinished">Accesso negato per leggere il file &quot;%1&quot;.</translation>
+        <translation>Accesso negato per la lettura del file &quot;%1&quot;.</translation>
     </message>
 </context>
 <context>
@@ -2624,7 +2624,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="64"/>
         <source>Polyphone SoundFont Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor SoundFont Polyphone</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="208"/>
@@ -2667,6 +2667,15 @@ repository</source>
         <location filename="mainwindow/mainwindow.ui" line="78"/>
         <source>Home screen</source>
         <translation>Schermo di casa</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.ui" line="106"/>
+        <source></source>
+        <extracomment>prefixed with 2 spaces for each line</extracomment>
+        <translatorcomment>  New
+  soundfont</translatorcomment>
+        <translation>  Nuovo
+  soundfont</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="121"/>
@@ -2767,7 +2776,6 @@ default mod.</source>
         <location filename="editor/modulator/modulatorcell.cpp" line="394"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
-        <translatorcomment>centesima di semi toni</translatorcomment>
         <translation>cents</translation>
     </message>
     <message>
@@ -2918,22 +2926,22 @@ default mod.</source>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="62"/>
         <source>Please close file before overriding it.</source>
-        <translation type="unfinished">Per favore, chiudi il file prima di sovrascriverlo.</translation>
+        <translation>Si prega di chiudere il file prima di sovrascriverlo.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="91"/>
         <source>Couldn&apos;t delete file &quot;%1&quot;.</source>
-        <translation type="unfinished">Impossibile cancellare il file &quot;%1&quot;.</translation>
+        <translation>Impossibile eliminare il file &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="101"/>
         <source>Couldn&apos;t rename file &quot;%1&quot;.</source>
-        <translation type="unfinished">Impossibile rinominare il file &quot;%1&quot;.</translation>
+        <translation>Impossibile rinominare il file &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="148"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished">Impossibile creare il file &quot;%1&quot;</translation>
+        <translation>Impossibile creare il file &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -3232,7 +3240,7 @@ di campionamento</translation>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="47"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Compressione</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
@@ -3309,7 +3317,8 @@ di campionamento</translation>
         <source>Select a single instrument or preset
 to display its division ranges</source>
         <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a single instrument or preset&lt;/p&gt;&lt;p&gt;to display its division ranges&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona un singolo strumento o preset
+per visualizzare i suoi intervalli di divisione</translation>
     </message>
 </context>
 <context>
@@ -3389,24 +3398,24 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesf2.ui" line="667"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Compressione</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="674"/>
         <location filename="editor/pagesf2.ui" line="757"/>
         <location filename="editor/pagesf2.ui" line="820"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Conteggio</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="688"/>
         <source>Bit depth</source>
-        <translation type="unfinished"></translation>
+        <translation>Profondità di bit</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="702"/>
         <source>16 bits</source>
-        <translation>24 bits {16 ?}</translation>
+        <translation>16 bit</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="707"/>
@@ -3416,12 +3425,12 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesf2.ui" line="716"/>
         <source>no</source>
-        <translation type="unfinished">no</translation>
+        <translation>no</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="721"/>
         <source>possible</source>
-        <translation type="unfinished"></translation>
+        <translation>possibile</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="750"/>
@@ -3445,7 +3454,7 @@ to display its division ranges</source>
         <location filename="editor/pagesf2.cpp" line="230"/>
         <source>%1 (unused: %n)</source>
         <translation>
-            <numerusform>%1 (inutilizzati: %n)</numerusform>
+            <numerusform>%1 (inutilizzato: %n)</numerusform>
             <numerusform>%1 (inutilizzati: %n)</numerusform>
         </translation>
     </message>
@@ -3578,17 +3587,18 @@ to display its division ranges</source>
         <location filename="editor/pagesmpl.cpp" line="312"/>
         <source>Compress the sample(s) to reduce the soundfont size
 Warning: quality will be reduced and the loop may be altered</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprimi il/i campione/i per ridurre le dimensioni del soundfont.
+Attenzione: la qualità sarà ridotta e il loop potrebbe essere alterato</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="320"/>
         <source>This sample is compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo campione è compresso per ridurre le dimensioni del soundfont</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="321"/>
         <source>The selected samples are compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>I campioni selezionati sono compressi per ridurre le dimensioni del soundfont</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="537"/>
@@ -3690,12 +3700,12 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.ui" line="181"/>
         <source>Selection by keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Selezione per note</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="199"/>
         <source>toggle</source>
-        <translation></translation>
+        <translation>alterna</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="278"/>
@@ -3706,7 +3716,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="player/player.ui" line="356"/>
         <source>Banks (number of instruments)</source>
         <oldsource>Banques (nombre d&apos;instruments)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Banchi (numero di strumenti)</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="433"/>
@@ -3721,7 +3731,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.cpp" line="50"/>
         <source>MIDI panic</source>
-        <translation type="unfinished"></translation>
+        <translation>Panico MIDI</translation>
     </message>
     <message>
         <location filename="player/player.cpp" line="51"/>
@@ -3740,6 +3750,14 @@ Warning: quality will be reduced and the loop may be altered</source>
 <context>
     <name>QObject</name>
     <message>
+        <location filename="core/input/grandorgue/grandorguerank.cpp" line="142"/>
+        <location filename="core/input/grandorgue/grandorguestop.cpp" line="141"/>
+        <location filename="core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
+        <location filename="core/output/outputfactory.cpp" line="102"/>
+        <source>untitled</source>
+        <translation>senza nome</translation>
+    </message>
+    <message>
         <location filename="core/output/outputfactory.cpp" line="118"/>
         <source>Save a soundfont</source>
         <translation>Salva un soundfont</translation>
@@ -3752,7 +3770,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/output/outputfactory.cpp" line="120"/>
         <source>Sf3 files</source>
-        <translation type="unfinished">.sf2 file {3 ?}</translation>
+        <translation>.sf3 file</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="146"/>
@@ -3833,7 +3851,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/sample/sound.cpp" line="74"/>
         <source>Cannot find file &quot;%1&quot;</source>
-        <translation>Impossibile trovate il file &quot;%1&quot;</translation>
+        <translation>Impossibile trovare il file &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/sample/sound.cpp" line="77"/>
@@ -3845,14 +3863,6 @@ Warning: quality will be reduced and the loop may be altered</source>
         <source>File not supported: &quot;%1&quot;</source>
         <oldsource>File not supported &quot;%1&quot;</oldsource>
         <translation>File non supportato: &quot;%1&quot;</translation>
-    </message>
-    <message>
-        <location filename="core/input/grandorgue/grandorguerank.cpp" line="142"/>
-        <location filename="core/input/grandorgue/grandorguestop.cpp" line="141"/>
-        <location filename="core/input/grandorgue/grandorgueswitch.cpp" line="73"/>
-        <location filename="core/output/outputfactory.cpp" line="102"/>
-        <source>untitled</source>
-        <translation>senza nome</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="116"/>
@@ -4049,7 +4059,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/input/grandorgue/inputgrandorgue.h" line="35"/>
         <source>GrandOrgue sample sets</source>
-        <translation type="unfinished"></translation>
+        <translation>Set di campioni GrandOrgue</translation>
     </message>
     <message>
         <location filename="core/input/inputfactory.cpp" line="109"/>
@@ -4072,23 +4082,26 @@ Warning: quality will be reduced and the loop may be altered</source>
 This rule applies at the sample level and also when editing a division of an instrument:
 the division corresponding to the other channel, if any, is edited the same.
 Both divisions must share the same note and velocity ranges.</source>
-        <translation type="unfinished"></translation>
+        <translation>Quando si modifica un lato di un campione stereo, l&apos;altro lato viene automaticamente modificato allo stesso modo.
+Questa regola si applica a livello del campione e anche quando si modifica una divisione di uno strumento:
+la divisione corrispondente all&apos;altro canale, se presente, viene modificata allo stesso modo.
+Entrambe le divisioni devono condividere gli stessi intervalli di note e di velocità.</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputsf.h" line="35"/>
         <source>Soundfont files</source>
-        <translation type="unfinished"></translation>
+        <translation>File Soundfont</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="85"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
-        <translation type="unfinished">Temperamento musicale uguale</translation>
+        <translation>Uguale</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="121"/>
         <source>Tuning program %1:%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Programma di accordatura %1:%2</translation>
     </message>
 </context>
 <context>
@@ -4953,12 +4966,12 @@ scaricare il contenuto</translation>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="241"/>
         <source>MIDI standard</source>
-        <translation>MIDI standard</translation>
+        <translation>Standard MIDI</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="257"/>
         <source>Tags</source>
-        <translation>Tags</translation>
+        <translation>Tag</translation>
     </message>
 </context>
 <context>
@@ -4990,7 +5003,7 @@ scaricare il contenuto</translation>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="204"/>
         <source>Online repository</source>
-        <translation>Online repository</translation>
+        <translation>Archivio online</translation>
     </message>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="242"/>
@@ -5020,7 +5033,7 @@ scaricare il contenuto</translation>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="251"/>
         <source>Do&amp;n&apos;t save</source>
-        <translation>&amp;Esci senza salvare</translation>
+        <translation>Non salvare</translation>
     </message>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="361"/>
@@ -5033,22 +5046,22 @@ scaricare il contenuto</translation>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="55"/>
         <source>mute</source>
-        <translation>mute</translation>
+        <translation>muto</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="59"/>
         <source>solo</source>
-        <translation type="unfinished"></translation>
+        <translation>solo</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="68"/>
         <source>solo on selection</source>
-        <translation type="unfinished"></translation>
+        <translation>solo su selezione</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="63"/>
         <source>unmute all</source>
-        <translation>unmute all</translation>
+        <translation>attiva audio su tutti</translation>
     </message>
 </context>
 <context>
@@ -5081,7 +5094,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="context/thememanager.cpp" line="80"/>
         <source>Custom</source>
-        <translation>Costume</translation>
+        <translation>Personalizzato</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="468"/>
@@ -5101,7 +5114,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="context/thememanager.cpp" line="514"/>
         <source>Dark, orange</source>
-        <translation>Scuro, arancia</translation>
+        <translation>Scuro, arancione</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="527"/>
@@ -5116,7 +5129,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="context/thememanager.cpp" line="553"/>
         <source>Aqua</source>
-        <translation>Aqua</translation>
+        <translation>Acqua</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="566"/>
@@ -5155,7 +5168,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
         <source>Sample auto-positioning</source>
         <oldsource>Automatically link the samples</oldsource>
-        <translation>Posizionamento automatico del campione</translation>
+        <translation>Auto-posizionamento campione</translation>
     </message>
 </context>
 <context>
@@ -5163,22 +5176,22 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="205"/>
         <source>Failed to loop sample &quot;%1&quot;.</source>
-        <translation>Impossibile looppare il campione &quot;%1&quot;.</translation>
+        <translation>Impossibile creare il loop del campione &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="208"/>
         <source>The following samples couldn&apos;t be looped:</source>
-        <translation>I seguenti campioni non possono essere messi in loop :</translation>
+        <translation>I seguenti campioni non possono essere messi in loop:</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="213"/>
         <source>Possible reasons: too short or too turbulent.</source>
-        <translation>Possibili cause : troppo corto o troppo turbolento.</translation>
+        <translation>Possibili cause: troppo corto o troppo turbolento.</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="47"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Loop / riproduzione</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="65"/>
@@ -5201,7 +5214,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="65"/>
         <source>Balance adjustement</source>
-        <translation>Aggiustamento del bilanciamento</translation>
+        <translation>Regolazione del bilanciamento</translation>
     </message>
 </context>
 <context>
@@ -5214,7 +5227,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning.h" line="60"/>
         <source>Detune</source>
-        <translation>Stona</translation>
+        <translation>Scordatura</translation>
     </message>
 </context>
 <context>
@@ -5232,17 +5245,17 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="97"/>
         <source>Division to the next octave</source>
-        <translation>Divisioni alla prossima ottava</translation>
+        <translation>Divisione all&apos;ottava successiva</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="58"/>
         <source>The algebraic sign determines the tuning direction.</source>
-        <translation>Il segno determina la direzine della scordatura.</translation>
+        <translation>Il segno algebrico determina la direzione dell&apos;accordatura.</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
         <source>Number of beats per second</source>
-        <translation>Numero di beats per secondo</translation>
+        <translation>Numero di battiti per secondo</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
@@ -5260,7 +5273,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation.h" line="64"/>
         <source>Change attenuations</source>
-        <translation>Cambia le attenuazioni</translation>
+        <translation>Cambia attenuazioni</translation>
     </message>
 </context>
 <context>
@@ -5273,12 +5286,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="125"/>
         <source>Possible offset</source>
-        <translation>Possibile offset</translation>
+        <translation>Offset possibile</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="112"/>
         <source>Attenuation range</source>
-        <translation>Intervallo di attenuazioni</translation>
+        <translation>Intervallo di attenuazione</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="55"/>
@@ -5302,12 +5315,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Processamento del campione</translation>
+        <translation>Elaborazione audio</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="61"/>
         <source>Change volume</source>
-        <translation>Modificare il volume</translation>
+        <translation>Modifica volume</translation>
     </message>
 </context>
 <context>
@@ -5315,7 +5328,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="56"/>
         <source>Add</source>
-        <translation>Addizione</translation>
+        <translation>Aggiungi</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="108"/>
@@ -5330,12 +5343,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="79"/>
         <source>Multiply</source>
-        <translation>Multiplicazione</translation>
+        <translation>Moltiplica</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="49"/>
         <source>Normalize</source>
-        <translation>Normalizzare</translation>
+        <translation>Normalizza</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="88"/>
@@ -5371,12 +5384,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="25"/>
         <source>Instrument name:</source>
-        <translation>Nome Strumento:</translation>
+        <translation>Nome strumento:</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="39"/>
         <source>Sample creation:</source>
-        <translation>Creazione campioni:</translation>
+        <translation>Creazione campione:</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="47"/>
@@ -5411,7 +5424,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="112"/>
         <source>Seventh</source>
-        <translation>Undicesima</translation>
+        <translation>Settima</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="124"/>
@@ -5426,7 +5439,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="172"/>
         <source>Root key</source>
-        <translation>Nota di base</translation>
+        <translation>Nota fondamentale</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="184"/>
@@ -5459,18 +5472,18 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="250"/>
         <source>yes</source>
-        <translation>si</translation>
+        <translation>sì</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="335"/>
         <source>Inversion number</source>
-        <translation>Inversione numero</translation>
+        <translation>Numero di inversione</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="363"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="411"/>
         <source>diminished</source>
-        <translation>diminuita</translation>
+        <translation>diminuito</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="406"/>
@@ -5531,7 +5544,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="66"/>
         <source>Remove unused elements</source>
-        <translation>Rimuovi gli elementi non utilizzati</translation>
+        <translation>Rimuovi elementi non utilizzati</translation>
     </message>
 </context>
 <context>
@@ -5544,7 +5557,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod.h" line="60"/>
         <source>Override a default modulator</source>
-        <translation type="unfinished"></translation>
+        <translation>Sovrascrivi un modulatore predefinito</translation>
     </message>
 </context>
 <context>
@@ -5552,19 +5565,19 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="20"/>
         <source>Here is the list of modulators automatically set for every instrument. You can override or disable them by selecting the corresponding modulators and action below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecco l&apos;elenco dei modulatori impostati automaticamente per ogni strumento. Puoi sovrascriverli o disattivarli selezionando i modulatori corrispondenti e l&apos;azione sottostante.</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="58"/>
         <source>&amp;Override</source>
         <oldsource>Override</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sovrascrivi</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="68"/>
         <source>&amp;Disable</source>
         <oldsource>Disable</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Disabilita</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="88"/>
@@ -5578,12 +5591,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="84"/>
         <source>An instrument comprising no samples is not compatible with this tool:</source>
-        <translation>Uno strumento senza campioni non è compatibile con questo tool:</translation>
+        <translation>Uno strumento senza campioni non è compatibile con questo strumento:</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="85"/>
         <source>A preset comprising no instruments is not compatible with this tool:</source>
-        <translation>Un preset senza strumenti non è compatibile con questo tool:</translation>
+        <translation>Un preset senza strumenti non è compatibile con questo strumento:</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="45"/>
@@ -5601,7 +5614,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="30"/>
         <source>A division for each velocity range</source>
-        <translation>Una divisione per ogni gruppo di velocità</translation>
+        <translation>Una divisione per ogni intervallo di velocità</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="143"/>
@@ -5624,12 +5637,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="106"/>
         <source>Couldn&apos;t export the sample.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile esportare il campione.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="126"/>
         <source>Couldn&apos;t start the command.</source>
-        <translation>Impossibile lanciare il comando.</translation>
+        <translation>Impossibile avviare il comando.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="129"/>
@@ -5640,7 +5653,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="48"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Processamento campione</translation>
+        <translation>Elaborazione audio</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="66"/>
@@ -5658,17 +5671,17 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="87"/>
         <source>History</source>
-        <translation>Storia</translation>
+        <translation>Cronologia</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="94"/>
         <source>Authorize stereo editing</source>
-        <translation>Consentire la modifica stereo</translation>
+        <translation>Autorizza modifica stereo</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="118"/>
         <source>Replace sample information if possible</source>
-        <translation>Sostituire le informazioni del campione, se possibile</translation>
+        <translation>Sostituisci le informazioni del campione se possibile</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="150"/>
@@ -5683,7 +5696,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="50"/>
         <source>Command examples:</source>
-        <translation>Esempi di comandi:</translation>
+        <translation>Esempi di comando:</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="101"/>
@@ -5699,12 +5712,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="118"/>
         <source>You must enter a command with at least {wav} as argument.</source>
-        <translation>È necessario immettere un comando con almeno {wav} come argomento.</translation>
+        <translation>Devi inserire un comando con almeno {wav} come argomento.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="125"/>
         <source>The command must contain the argument {wav}.</source>
-        <translation>Il mosto comando contiene l&apos;argomento {} wav.</translation>
+        <translation>Il comando deve contenere l&apos;argomento {wav}.</translation>
     </message>
 </context>
 <context>
@@ -5717,7 +5730,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl.h" line="61"/>
         <source>Shift a parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta un parametro</translation>
     </message>
 </context>
 <context>
@@ -5735,17 +5748,17 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="67"/>
         <source>Add</source>
-        <translation>Addizione</translation>
+        <translation>Aggiungi</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="74"/>
         <source>Multiply</source>
-        <translation>Multiplicazione</translation>
+        <translation>Moltiplica</translation>
     </message>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl_gui.ui" line="84"/>
         <source>Parameter</source>
-        <translation>Parametri</translation>
+        <translation>Parametro</translation>
     </message>
 </context>
 <context>
@@ -5754,12 +5767,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Processamento campione</translation>
+        <translation>Elaborazione audio</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
         <source>Filter frequencies</source>
-        <translation>Filtrare le frequenze</translation>
+        <translation>Filtra frequenze</translation>
     </message>
 </context>
 <context>
@@ -5778,7 +5791,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="32"/>
         <source>Mark with red color where you want to cut the frequencies:</source>
         <oldsource>Put in red the part of frequencies to filter:</oldsource>
-        <translation>Segna in rosso dove vuoi tagliare le frequenze:</translation>
+        <translation>Segna in rosso le frequenze che vuoi tagliare:</translation>
     </message>
 </context>
 <context>
@@ -5827,7 +5840,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="60"/>
         <source>Show peak frequencies</source>
         <oldsource>Show peak frequency</oldsource>
-        <translation>Mostra i picchi di frequenza</translation>
+        <translation>Mostra frequenze di picco</translation>
     </message>
 </context>
 <context>
@@ -5883,12 +5896,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="167"/>
         <source>Export peak frequency</source>
-        <translation>Esporta i picchi di frequenza</translation>
+        <translation>Esporta frequenza di picco</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="168"/>
         <source>Csv file</source>
-        <translation>Csv file</translation>
+        <translation>File CSV</translation>
     </message>
 </context>
 <context>
@@ -5901,7 +5914,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings.h" line="64"/>
         <source>Key-based configuration</source>
-        <translation>Key-based configuration</translation>
+        <translation>Configurazione basata su tasti</translation>
     </message>
 </context>
 <context>
@@ -5919,7 +5932,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="40"/>
         <source>Multiplication</source>
-        <translation>Multiplicazione</translation>
+        <translation>Moltiplicazione</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="45"/>
@@ -5929,12 +5942,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="76"/>
         <source>Parameter</source>
-        <translation>Parametri</translation>
+        <translation>Parametro</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="96"/>
         <source>Pattern</source>
-        <translation>Tipo</translation>
+        <translation>Modello</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="119"/>
@@ -5944,7 +5957,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="126"/>
         <source>Modification</source>
-        <translation>Operazione</translation>
+        <translation>Modifica</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="153"/>
@@ -5954,22 +5967,22 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="158"/>
         <source>Linear ascending</source>
-        <translation>Lineare crescente</translation>
+        <translation>Lineare ascendente</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="163"/>
         <source>Linear descending</source>
-        <translation>Lineare decrescente</translation>
+        <translation>Lineare discendente</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="168"/>
         <source>Exponential ascending</source>
-        <translation>Esponenziale crescente</translation>
+        <translation>Esponenziale ascendente</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="173"/>
         <source>Exponential descending</source>
-        <translation>Esponenziale decrescente</translation>
+        <translation>Esponenziale discendente</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="178"/>
@@ -5979,7 +5992,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="249"/>
         <source>Apply to a velocity range</source>
-        <translation>Applica al gruppo di velocità</translation>
+        <translation>Applica a un intervallo di velocità</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="278"/>
@@ -5994,7 +6007,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="222"/>
         <source>Stiffness</source>
-        <translation>Rigidezza</translation>
+        <translation>Rigidità</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="227"/>
@@ -6025,7 +6038,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="62"/>
         <source>Load a parameter from the instruments</source>
-        <translation type="unfinished"></translation>
+        <translation>Carica un parametro dagli strumenti</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="296"/>
@@ -6036,9 +6049,9 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="301"/>
         <source>Couldn&apos;t configure %n sample(s).</source>
         <oldsource>Couln&apos;t configure %n sample(s).</oldsource>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Impossibile configurare %n campione.</numerusform>
+            <numerusform>Impossibile configurare %n campioni.</numerusform>
         </translation>
     </message>
 </context>
@@ -6047,17 +6060,17 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="20"/>
         <source>Root key</source>
-        <translation>Nota di base</translation>
+        <translation>Nota fondamentale</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="27"/>
         <source>Tuning (semi-tones)</source>
-        <translation>Accordatura (semi-toni)</translation>
+        <translation>Accordatura (semitoni)</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="34"/>
         <source>Tuning (cents)</source>
-        <translation>Accordatura (centesimi)</translation>
+        <translation>Accordatura (cents)</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="41"/>
@@ -6080,13 +6093,13 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Loop / riproduzione</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
         <source>Cross-fade loop</source>
         <oldsource>Crossfade loop</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Loop con dissolvenza incrociata</translation>
     </message>
 </context>
 <context>
@@ -6094,23 +6107,23 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="20"/>
         <source>Crossfade duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durata della dissolvenza incrociata</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="29"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="49"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Annulla</translation>
+        <translation>&amp;Annulla</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="58"/>
         <source> ms</source>
         <comment>Unit for milliseconds</comment>
-        <translation type="unfinished"></translation>
+        <translation> ms</translation>
     </message>
 </context>
 <context>
@@ -6118,17 +6131,17 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.cpp" line="66"/>
         <source>The preset doesn&apos;t trigger any samples.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il preset non attiva alcun campione.</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="47"/>
         <source>Transformation</source>
-        <translation type="unfinished">Trasformazione</translation>
+        <translation>Trasformazione</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="62"/>
         <source>Merge samples for each note</source>
-        <translation type="unfinished"></translation>
+        <translation>Unisci campioni per ogni nota</translation>
     </message>
 </context>
 <context>
@@ -6138,62 +6151,62 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="102"/>
         <source> s</source>
         <comment>unit for second</comment>
-        <translation type="unfinished"> s</translation>
+        <translation> s</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="38"/>
         <source>Sample creation:</source>
-        <translation type="unfinished">Creazione campioni:</translation>
+        <translation>Creazione campione:</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="45"/>
         <source>Stereo</source>
-        <translation type="unfinished">Stereo</translation>
+        <translation>Stereo</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="59"/>
         <source>Sustain duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durata del sustain</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="66"/>
         <source>Auto loop</source>
-        <translation type="unfinished">Auto loop</translation>
+        <translation>Auto loop</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="77"/>
         <source>for every key</source>
-        <translation type="unfinished">per ogni nota</translation>
+        <translation>per ogni nota</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="82"/>
         <source>every 3 keys</source>
-        <translation type="unfinished">ogni 3 note</translation>
+        <translation>ogni 3 note</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="87"/>
         <source>every 6 keys</source>
-        <translation type="unfinished">ogni 6 note</translation>
+        <translation>ogni 6 note</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="95"/>
         <source>Preset name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome preset:</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="112"/>
         <source>Release duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durata del release</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="136"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="156"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Annulla</translation>
+        <translation>&amp;Annulla</translation>
     </message>
 </context>
 <context>
@@ -6211,7 +6224,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="63"/>
         <source>Mixture creation</source>
-        <translation>Creazione mixture</translation>
+        <translation>Creazione di mixture</translation>
     </message>
 </context>
 <context>
@@ -6224,7 +6237,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="39"/>
         <source>Sample creation:</source>
-        <translation>Creazione campioni:</translation>
+        <translation>Creazione campione:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="47"/>
@@ -6259,12 +6272,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="242"/>
         <source>Key range</source>
-        <translation>Range di Note</translation>
+        <translation>Intervallo di note</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="265"/>
         <source>Ranks</source>
-        <translation>Ranks</translation>
+        <translation>Classifiche</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="338"/>
@@ -6329,7 +6342,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="401"/>
         <source>twenty-third</source>
-        <translation>ventitresima</translation>
+        <translation>ventitreesima</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="406"/>
@@ -6365,7 +6378,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="586"/>
         <source>At least one rank must be specified.</source>
-        <translation>Almeno un rank deve essere specificato.</translation>
+        <translation>Almeno una classifica deve essere specificata.</translation>
     </message>
 </context>
 <context>
@@ -6378,7 +6391,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/monitor/toolmonitor.h" line="57"/>
         <source>Display parameters</source>
-        <translation>Mostra i parametri</translation>
+        <translation>Visualizza parametri</translation>
     </message>
 </context>
 <context>
@@ -6386,7 +6399,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="80"/>
         <source>Display options</source>
-        <translation>Opzioni di Disegno</translation>
+        <translation>Opzioni di visualizzazione</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="121"/>
@@ -6401,17 +6414,17 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="174"/>
         <source>Defined value in the global division</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore definito nella divisione globale</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="189"/>
         <source>Default value for the selected parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore predefinito per il parametro selezionato</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="201"/>
         <source>Defined value in a division</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore definito in una divisione</translation>
     </message>
 </context>
 <context>
@@ -6424,7 +6437,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist.h" line="60"/>
         <source>Export preset list</source>
-        <translation>Esporta la lista di presets</translation>
+        <translation>Esporta elenco preset</translation>
     </message>
 </context>
 <context>
@@ -6442,7 +6455,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="81"/>
         <source>csv format</source>
-        <translation>Formato csv</translation>
+        <translation>formato CSV</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="91"/>
@@ -6483,17 +6496,17 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="70"/>
         <source>Division to the next octave</source>
-        <translation>Divisioni alla prossima ottava</translation>
+        <translation>Divisione all&apos;ottava successiva</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="116"/>
         <source>Detuning induced (semi-tones)</source>
-        <translation>Scordatura indotta (semi-toni)</translation>
+        <translation>Scordatura indotta (semitoni)</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.cpp" line="51"/>
         <source>Release time (key %1)</source>
-        <translation>Release time (nota %1)</translation>
+        <translation>Tempo di release (nota %1)</translation>
     </message>
 </context>
 <context>
@@ -6502,8 +6515,8 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="118"/>
         <source>%n modulator(s) has(have) been deleted.</source>
         <translation>
-            <numerusform>%n modulatore è stato cancellato.</numerusform>
-            <numerusform>%n modulatori sono stati cancellati.</numerusform>
+            <numerusform>%n modulatore è stato eliminato.</numerusform>
+            <numerusform>%n modulatori sono stati eliminati.</numerusform>
         </translation>
     </message>
     <message>
@@ -6532,12 +6545,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.h" line="50"/>
         <source>Files</source>
-        <translation>Files</translation>
+        <translation>File</translation>
     </message>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.h" line="68"/>
         <source>Wav export</source>
-        <translation>Esporta Wav</translation>
+        <translation>Esportazione WAV</translation>
     </message>
 </context>
 <context>
@@ -6558,7 +6571,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="138"/>
         <source>Inversions</source>
-        <translation>Inversione</translation>
+        <translation>Inversioni</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="59"/>
@@ -6578,7 +6591,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="31"/>
         <source>Hollow</source>
-        <translation>Vuoto</translation>
+        <translation>Cavo</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="36"/>
@@ -6603,12 +6616,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="104"/>
         <source>Pattern</source>
-        <translation>Tipo</translation>
+        <translation>Modello</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="66"/>
         <source>Division number</source>
-        <translation>Numero divisioni</translation>
+        <translation>Numero di divisioni</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="121"/>
@@ -6618,7 +6631,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="181"/>
         <source>Filling (%)</source>
-        <translation>Occupazione (%)</translation>
+        <translation>Riempimento (%)</translation>
     </message>
 </context>
 <context>
@@ -6626,17 +6639,17 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="151"/>
         <source>Merge soudfonts:</source>
-        <translation>Unisci soundfonts:</translation>
+        <translation>Unisci soundfont:</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="246"/>
         <source>Export successful!</source>
-        <translation>Esportazione con successo!</translation>
+        <translation>Esportazione riuscita!</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.h" line="46"/>
         <source>Files</source>
-        <translation>Files</translation>
+        <translation>File</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.h" line="61"/>
@@ -6669,17 +6682,17 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="113"/>
         <source>General MIDI classification</source>
-        <translation>Classificazione General MIDI</translation>
+        <translation>Classificazione MIDI generale</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="106"/>
         <source>one directory per bank</source>
-        <translation>una cartella per ogni banco</translation>
+        <translation>una directory per banco</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="120"/>
         <source>preset number as prefix</source>
-        <translation>numero di preset come prefisso</translation>
+        <translation>numero preset come prefisso</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="134"/>
@@ -6699,7 +6712,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>one file per preset</source>
-        <translation type="unfinished"></translation>
+        <translation>un file per preset</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="166"/>
@@ -6726,7 +6739,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="150"/>
         <source>Select the destination directory</source>
-        <translation>Seleziona la cartella di destinazione</translation>
+        <translation>Seleziona la directory di destinazione</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="166"/>
@@ -6739,7 +6752,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="166"/>
         <source>Invalid directory.</source>
-        <translation>Directory non valido.</translation>
+        <translation>Directory non valida.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="195"/>
@@ -6749,12 +6762,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="201"/>
         <source>The maximal number of soundfont to export is 127.</source>
-        <translation>Il numero massimo di soudfont da esportare è 127.</translation>
+        <translation>Il numero massimo di soundfont da esportare è 127.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="210"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation>Nel caso in cui vengono esportati alcuni soundfonts, il numero massimo di preset per soundfont è 127.</translation>
+        <translation>Nel caso in cui vengano esportati più soundfont, il numero massimo di preset per soundfont è 127.</translation>
     </message>
 </context>
 <context>
@@ -6762,7 +6775,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.cpp" line="159"/>
         <source>An instrument comprising no samples is not compatible with this tool:</source>
-        <translation>Uno strumento senza campioni non compatibile con questo tool:</translation>
+        <translation>Uno strumento senza campioni non è compatibile con questo strumento:</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.h" line="45"/>
@@ -6772,7 +6785,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.h" line="63"/>
         <source>Transpose</source>
-        <translation>Transponi</translation>
+        <translation>Trasponi</translation>
     </message>
 </context>
 <context>
@@ -6781,12 +6794,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Processamento campione</translation>
+        <translation>Elaborazione audio</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="61"/>
         <source>Transpose</source>
-        <translation>Transponi</translation>
+        <translation>Trasponi</translation>
     </message>
 </context>
 <context>
@@ -6794,7 +6807,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="20"/>
         <source>Shift in semitones</source>
-        <translation>Differenza in semitoni</translation>
+        <translation>Spostamento in semitoni</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="59"/>
@@ -6812,12 +6825,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="20"/>
         <source>Shift in semitones</source>
-        <translation>Differenza in semitoni</translation>
+        <translation>Spostamento in semitoni</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="27"/>
         <source>Adapt keyrange</source>
-        <translation>Adatta l&apos;intervallo delle note</translation>
+        <translation>Adatta l&apos;intervallo di note</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="56"/>
@@ -6835,12 +6848,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Loop / riproduzione</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="64"/>
         <source>Trim to end of loop</source>
-        <translation>Taglia a fine loop</translation>
+        <translation>Taglia alla fine del loop</translation>
     </message>
 </context>
 <context>
@@ -6848,7 +6861,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Loop / riproduzione</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="67"/>
@@ -6874,17 +6887,17 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="158"/>
         <source>User area</source>
-        <translation>Area User</translation>
+        <translation>Area utente</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="118"/>
         <source>Download status</source>
-        <translation>Stato del Download</translation>
+        <translation>Stato del download</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="198"/>
         <source>Main menu</source>
-        <translation>Menu Principale</translation>
+        <translation>Menu principale</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="275"/>
@@ -6894,7 +6907,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="137"/>
         <source>Subscribe to a Premium account to get all the features!</source>
-        <translation>Sottoscrivi un account Premium per utilizzare tutte le funzionalità!</translation>
+        <translation>Abbonati a un account Premium per ottenere tutte le funzionalità!</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="147"/>
@@ -6912,12 +6925,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tree/treeitemdelegate.cpp" line="240"/>
         <source>mute</source>
-        <translation>mute</translation>
+        <translation>muto</translation>
     </message>
     <message>
         <location filename="editor/tree/treeitemdelegate.cpp" line="241"/>
         <source>playing</source>
-        <translation type="unfinished"></translation>
+        <translation>in riproduzione</translation>
     </message>
 </context>
 <context>
@@ -6940,7 +6953,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tree/treeview.cpp" line="987"/>
         <source>Cannot create more presets.</source>
-        <translation>Non si puo creare altre preimpostazioni.</translation>
+        <translation>Non si possono creare più preset.</translation>
     </message>
 </context>
 <context>
@@ -6948,12 +6961,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="47"/>
         <source>&amp;Bind to...</source>
-        <translation>&amp;Associa a...</translation>
+        <translation>&amp;Collega a...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="52"/>
         <source>&amp;Replace by...</source>
-        <translation>&amp;Rimpiazza da...</translation>
+        <translation>&amp;Sostituisci con...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="62"/>
@@ -6973,23 +6986,23 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="80"/>
         <source>&amp;Delete</source>
-        <translation>Ca&amp;ncella</translation>
+        <translation>&amp;Elimina</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="89"/>
         <source>Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>Muto</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="95"/>
         <source>Always play</source>
         <oldsource>Play along</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Riproduci sempre</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="101"/>
         <source>Restore playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripristina riproduzione</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="109"/>
@@ -7002,7 +7015,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="172"/>
         <source>Bulk re&amp;name...</source>
-        <translation>Ri&amp;nomina il gruppo...</translation>
+        <translation>Ri&amp;nomina in blocco...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="260"/>
@@ -7013,27 +7026,27 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="261"/>
         <source>Cannot delete a sample used by another instrument.</source>
-        <translation>Impossibile cancellare un campione usato da un altro strumento.</translation>
+        <translation>Impossibile eliminare un campione utilizzato da un altro strumento.</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="264"/>
         <source>Cannot delete an instrument used by another preset.</source>
-        <translation>Impossibile cancellare uno strumento usato da un altro preset.</translation>
+        <translation>Impossibile eliminare uno strumento utilizzato da un altro preset.</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="408"/>
         <source>Sample name</source>
-        <translation>Nome del campione</translation>
+        <translation>Nome campione</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="410"/>
         <source>Instrument name</source>
-        <translation>Nome dello strumento</translation>
+        <translation>Nome strumento</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="412"/>
         <source>Preset name</source>
-        <translation>Nome dello preset</translation>
+        <translation>Nome preset</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="434"/>
@@ -7051,12 +7064,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="repository/soundfont/uploadingdialog.ui" line="54"/>
         <source>Uploading soundfont...</source>
-        <translation type="unfinished"></translation>
+        <translation>Caricamento soundfont...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/uploadingdialog.cpp" line="76"/>
         <source>Canceling...</source>
-        <translation>Cancellando...</translation>
+        <translation>Annullamento...</translation>
     </message>
 </context>
 <context>
@@ -7071,7 +7084,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     <message>
         <location filename="repository/usermanager.cpp" line="122"/>
         <source>Wrong username or password</source>
-        <translation>Password o nome utente errato</translation>
+        <translation>Nome utente o password errati</translation>
     </message>
 </context>
 <context>
@@ -7080,12 +7093,12 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
         <location filename="editor/tools/waitingtooldialog.ui" line="51"/>
         <source>Processing...</source>
         <oldsource>Processing..</oldsource>
-        <translation>Processando...</translation>
+        <translation>Elaborazione...</translation>
     </message>
     <message>
         <location filename="editor/tools/waitingtooldialog.cpp" line="77"/>
         <source>Canceling...</source>
-        <translation>Cancellando...</translation>
+        <translation>Annullamento...</translation>
     </message>
 </context>
 <context>
