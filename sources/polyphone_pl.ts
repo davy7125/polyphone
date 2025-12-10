@@ -300,7 +300,6 @@
     <message>
         <location filename="core/types/attribute.cpp" line="611"/>
         <source>Vol env release (×)</source>
-        <translatorcomment>There really isn&apos;t a direct translation to &quot;envelope&quot; in polish that I can think of. I had to change it so it still makes sense</translatorcomment>
         <translation>Zanikanie obw. głośń. (×)</translation>
     </message>
     <message>
@@ -791,9 +790,7 @@
         <location filename="context/interface/configsectiongeneral.ui" line="122"/>
         <source>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool &quot;Trim to end of loop&quot;)</source>
-        <oldsource>When importing a sample, data located after the end of loop are automatically removed.
-(same effect as the tool “Trim to end of loop”)</oldsource>
-        <translation type="unfinished">Podczas importowania próbki, dane znajdujące się poza końcem pętli są automatycznie usuwane.
+        <translation>Podczas importowania próbki, dane znajdujące się poza końcem pętli są automatycznie usuwane.
 (taki sam efekt jak narzędzie &quot;Obetnij do końca pętli&quot;)</translation>
     </message>
     <message>
@@ -805,9 +802,7 @@
         <location filename="context/interface/configsectiongeneral.ui" line="145"/>
         <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool &quot;Remove blank at start&quot;)</source>
-        <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
-(same effect as the tool “Remove blank at start”)</oldsource>
-        <translation type="unfinished">Podczas importowania próbki, cisza przed rozpoczęciem dźwięku jest automatycznie usuwana.
+        <translation>Podczas importowania próbki, cisza przed rozpoczęciem dźwięku jest automatycznie usuwana.
 (taki sam efekt jak narzędzie &quot;Usuń ciszę na początku&quot;)</translation>
     </message>
     <message>
@@ -1004,7 +999,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Reference pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Ton referencyjny</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
@@ -1501,7 +1496,7 @@ online</translation>
         <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>Alejandro Moctezuma</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>Alejandro Moctezuma</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="73"/>
@@ -1612,27 +1607,27 @@ online</translation>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="17"/>
         <source>Sample compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompresja próbek</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="27"/>
         <source>Medium</source>
-        <translation type="unfinished">Średni</translation>
+        <translation>Średni</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="44"/>
         <source>Quality of the compression:</source>
-        <translation type="unfinished"></translation>
+        <translation>Jakość kompresji:</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="51"/>
         <source>High (good sound quality but larger file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wysoka (dobra jakość dźwięku, ale większy rozmiar pliku)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="58"/>
         <source>Low (poor sound quality but smaller file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>Niska (słaba jakość dźwięku, ale mniejszy rozmiar pliku)</translation>
     </message>
 </context>
 <context>
@@ -1655,7 +1650,7 @@ online</translation>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="72"/>
         <source>Create an instrument comprising the sample %1?</source>
-        <translation>Utworzyć instrument składający się z próbki %1?</translation>
+        <translation>Utworzyć instrument zawierający próbkę %1?</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="78"/>
@@ -1675,7 +1670,7 @@ online</translation>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="88"/>
         <source>Create a preset comprising the instrument %1?</source>
-        <translation>Utworzyć preset składający się z instrumentu %1?</translation>
+        <translation>Utworzyć preset zawierający instrument %1?</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="94"/>
@@ -1984,7 +1979,7 @@ online</translation>
     <message>
         <location filename="repository/downloadmanager.cpp" line="147"/>
         <source>Couldn&apos;t write file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się zapisać pliku &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="153"/>
@@ -2342,9 +2337,9 @@ online</translation>
         <location filename="editor/footers/footeroverview.cpp" line="68"/>
         <source>%n element(s)</source>
         <translation>
-            <numerusform>%n element(ów)</numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n element</numerusform>
+            <numerusform>%n elementy</numerusform>
+            <numerusform>%n elementów</numerusform>
         </translation>
     </message>
 </context>
@@ -2503,12 +2498,12 @@ online</translation>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="48"/>
         <source>Cannot find file &quot;%1&quot;.</source>
-        <translation type="unfinished">Nie można odnaleźć pliku &quot;%1&quot;.</translation>
+        <translation>Nie można odnaleźć pliku &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="55"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
-        <translation type="unfinished">Odmowa dostępu do pliku &quot;%1&quot;.</translation>
+        <translation>Odmowa dostępu do pliku &quot;%1&quot;.</translation>
     </message>
 </context>
 <context>
@@ -2562,6 +2557,11 @@ online</translation>
         <translation>&amp;Eksportuj SoundFonty...</translation>
     </message>
     <message>
+        <location filename="mainwindow/mainmenu.cpp" line="82"/>
+        <source>&amp;Close file</source>
+        <translation>&amp;Zamknij plik</translation>
+    </message>
+    <message>
         <location filename="mainwindow/mainmenu.cpp" line="89"/>
         <source>&amp;Full screen</source>
         <translation>&amp;Pełny ekran</translation>
@@ -2569,7 +2569,6 @@ online</translation>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="96"/>
         <source>Se&amp;ttings</source>
-        <translatorcomment>still not sure about &quot;&amp;&quot; thing there</translatorcomment>
         <translation>Us&amp;tawienia</translation>
     </message>
     <message>
@@ -2581,11 +2580,6 @@ online</translation>
         <location filename="mainwindow/mainmenu.cpp" line="106"/>
         <source>About &amp;Polyphone...</source>
         <translation>O &amp;Polyphone...</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainmenu.cpp" line="82"/>
-        <source>&amp;Close file</source>
-        <translation>&amp;Zamknij plik</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="112"/>
@@ -2700,7 +2694,6 @@ online</translation>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="233"/>
         <source>Do&amp;n&apos;t save</source>
-        <translatorcomment>not sure about &quot;&amp;&quot; here...</translatorcomment>
         <translation>Ni&amp;e zapisuj</translation>
     </message>
     <message>
@@ -2854,9 +2847,9 @@ domyślnego mod.</translation>
         <location filename="editor/modulator/modulatoreditor.cpp" line="262"/>
         <source>%n modulator(s):</source>
         <translation>
+            <numerusform>%n modulator:</numerusform>
+            <numerusform>%n modulatory:</numerusform>
             <numerusform>%n modulatorów:</numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -2914,22 +2907,22 @@ domyślnego mod.</translation>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="62"/>
         <source>Please close file before overriding it.</source>
-        <translation type="unfinished">Zamknij plik przed nadpisaniem.</translation>
+        <translation>Proszę zamknąć plik przed nadpisaniem.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="91"/>
         <source>Couldn&apos;t delete file &quot;%1&quot;.</source>
-        <translation type="unfinished">Nie można usunąć pliku &quot;%1&quot;.</translation>
+        <translation>Nie udało się usunąć pliku &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="101"/>
         <source>Couldn&apos;t rename file &quot;%1&quot;.</source>
-        <translation type="unfinished">Nie można zmienić nazwy pliku &quot;%1&quot;.</translation>
+        <translation>Nie udało się zmienić nazwy pliku &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="148"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished">Nie można utworzyć pliku &quot;%1&quot;</translation>
+        <translation>Nie można utworzyć pliku &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -3201,7 +3194,7 @@ próbkowania</translation>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="47"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompresja</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
@@ -3354,19 +3347,19 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesf2.ui" line="667"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompresja</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="674"/>
         <location filename="editor/pagesf2.ui" line="757"/>
         <location filename="editor/pagesf2.ui" line="820"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Liczba</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="688"/>
         <source>Bit depth</source>
-        <translation type="unfinished"></translation>
+        <translation>Głębia bitowa</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="702"/>
@@ -3381,12 +3374,12 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesf2.ui" line="716"/>
         <source>no</source>
-        <translation type="unfinished">nie</translation>
+        <translation>nie</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="721"/>
         <source>possible</source>
-        <translation type="unfinished"></translation>
+        <translation>możliwa</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="750"/>
@@ -3411,8 +3404,8 @@ to display its division ranges</source>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (nieużywany: %n)</numerusform>
-            <numerusform>%1 (nieużywany: %n)</numerusform>
-            <numerusform>%1 (nieużywany: %n)</numerusform>
+            <numerusform>%1 (nieużywane: %n)</numerusform>
+            <numerusform>%1 (nieużywane: %n)</numerusform>
         </translation>
     </message>
 </context>
@@ -3544,17 +3537,17 @@ to display its division ranges</source>
         <location filename="editor/pagesmpl.cpp" line="312"/>
         <source>Compress the sample(s) to reduce the soundfont size
 Warning: quality will be reduced and the loop may be altered</source>
-        <translation type="unfinished"></translation>
+        <translation>Skompresuj próbkę(i) aby zmniejszyć rozmiar SoundFonta. Uwaga: jakość zostanie obniżona, a pętla może zostać zmieniona</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="320"/>
         <source>This sample is compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta próbka jest skompresowana, aby zmniejszyć rozmiar SoundFonta</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="321"/>
         <source>The selected samples are compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybrane próbki są skompresowane, aby zmniejszyć rozmiar SoundFonta</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="537"/>
@@ -3684,7 +3677,6 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.cpp" line="50"/>
         <source>MIDI panic</source>
-        <translatorcomment>&quot;MIDI Panic&quot; in polish does not make any sense, so I&apos;ve translated it to &quot;Mute Everything&quot;</translatorcomment>
         <translation>Wycisz wszystko</translation>
     </message>
     <message>
@@ -3859,9 +3851,25 @@ Obydwa przedziały muszą mieć takie same zakresy klawiszy i sił klawiszy.</tr
         <translation>Wszystkie</translation>
     </message>
     <message>
+        <location filename="core/output/outputfactory.cpp" line="118"/>
+        <source>Save a soundfont</source>
+        <translation>Zapisz SoundFonta</translation>
+    </message>
+    <message>
         <location filename="core/output/outputfactory.cpp" line="120"/>
         <source>Sf2 files</source>
         <translation>Pliki SF2</translation>
+    </message>
+    <message>
+        <location filename="core/output/outputfactory.cpp" line="120"/>
+        <source>Sf3 files</source>
+        <translation>Pliki SF3</translation>
+    </message>
+    <message>
+        <location filename="core/output/outputfactory.cpp" line="146"/>
+        <location filename="core/sample/sampleloader.cpp" line="60"/>
+        <source>Warning</source>
+        <translation>Uwaga</translation>
     </message>
     <message>
         <location filename="core/input/sfark/inputsfark.h" line="35"/>
@@ -3894,22 +3902,6 @@ Obydwa przedziały muszą mieć takie same zakresy klawiszy i sił klawiszy.</tr
         <translation>Presety</translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="118"/>
-        <source>Save a soundfont</source>
-        <translation>Zapisz SoundFonta</translation>
-    </message>
-    <message>
-        <location filename="core/output/outputfactory.cpp" line="120"/>
-        <source>Sf3 files</source>
-        <translation type="unfinished">Pliki SF2 {3 ?}</translation>
-    </message>
-    <message>
-        <location filename="core/output/outputfactory.cpp" line="146"/>
-        <location filename="core/sample/sampleloader.cpp" line="60"/>
-        <source>Warning</source>
-        <translation>Uwaga</translation>
-    </message>
-    <message>
         <location filename="core/sample/sampleloader.cpp" line="84"/>
         <source>Sample &quot;%1L&quot; already exists.&lt;br /&gt;Replace?</source>
         <translation>Próbka &quot;%1L&quot; już istnieje. &lt;br /&gt;Zamienić?</translation>
@@ -3932,7 +3924,6 @@ Obydwa przedziały muszą mieć takie same zakresy klawiszy i sił klawiszy.</tr
     <message>
         <location filename="core/sample/sampleloader.cpp" line="111"/>
         <source>R&amp;eplace all</source>
-        <translatorcomment>not sure about the &quot;&amp;&quot; there...</translatorcomment>
         <translation>Z&amp;amień wszystko</translation>
     </message>
     <message>
@@ -3974,27 +3965,6 @@ Obydwa przedziały muszą mieć takie same zakresy klawiszy i sił klawiszy.</tr
         <location filename="core/sample/sound.cpp" line="80"/>
         <source>File not supported: &quot;%1&quot;</source>
         <translation>Plik nie wspierany: &quot;%1&quot;</translation>
-    </message>
-    <message>
-        <location filename="dialogs/dialog_about.cpp" line="127"/>
-        <source>Created by</source>
-        <translation>Stworzone przez</translation>
-    </message>
-    <message>
-        <location filename="dialogs/dialog_about.cpp" line="128"/>
-        <source>Contributors</source>
-        <translation>Współautorzy</translation>
-    </message>
-    <message>
-        <location filename="dialogs/dialog_about.cpp" line="129"/>
-        <source>Translated by</source>
-        <translatorcomment>spessasus :-)</translatorcomment>
-        <translation>Przetłumaczone przez</translation>
-    </message>
-    <message>
-        <location filename="dialogs/dialog_about.cpp" line="171"/>
-        <source>Icons</source>
-        <translation>Ikony</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="116"/>
@@ -4051,12 +4021,32 @@ Obydwa przedziały muszą mieć takie same zakresy klawiszy i sił klawiszy.</tr
         <location filename="context/tuningprogrammanager.cpp" line="85"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
-        <translation type="unfinished">równomiernie temperowany</translation>
+        <translation>równomiernie temperowany</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="121"/>
         <source>Tuning program %1:%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Program strojenia %1:%2</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="127"/>
+        <source>Created by</source>
+        <translation>Stworzone przez</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="128"/>
+        <source>Contributors</source>
+        <translation>Współautorzy</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="129"/>
+        <source>Translated by</source>
+        <translation>Przetłumaczone przez</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="171"/>
+        <source>Icons</source>
+        <translation>Ikony</translation>
     </message>
 </context>
 <context>
@@ -4144,7 +4134,6 @@ Obydwa przedziały muszą mieć takie same zakresy klawiszy i sił klawiszy.</tr
     <message>
         <location filename="repository/repositorymanager.cpp" line="93"/>
         <source>dark</source>
-        <translatorcomment>not sure about this one...</translatorcomment>
         <translation>ciemny</translation>
     </message>
     <message>
@@ -4989,7 +4978,6 @@ pobrać zawartości</translation>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="251"/>
         <source>Do&amp;n&apos;t save</source>
-        <translatorcomment>what is that &quot;&amp;&quot;?? I copied it but not sure...</translatorcomment>
         <translation>Ni&amp;e zapisuj</translation>
     </message>
     <message>
@@ -5270,7 +5258,6 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="46"/>
         <source>Audio processing</source>
-        <oldsource>Sample processing</oldsource>
         <translation>Przetwarzanie próbek</translation>
     </message>
     <message>
@@ -5345,7 +5332,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="39"/>
         <source>Sample creation:</source>
-        <translation>Utworzenie próbkI:</translation>
+        <translation>Utworzenie próbki:</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="47"/>
@@ -5469,6 +5456,14 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
 </context>
 <context>
     <name>ToolCleanUnused</name>
+    <message numerus="yes">
+        <source>%n modulator(s) has(have) been deleted.</source>
+        <translation type="vanished">
+            <numerusform>Usunięto %n modulator.</numerusform>
+            <numerusform>Usunięto %n modulatory.</numerusform>
+            <numerusform>Usunięto %n modulatorów.</numerusform>
+        </translation>
+    </message>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="108"/>
         <source>%1 and %2 have been deleted.</source>
@@ -5479,19 +5474,23 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="109"/>
         <source>%n sample(s)</source>
         <translation>
-            <numerusform>%n prób(ek)</numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n próbka</numerusform>
+            <numerusform>%n próbki</numerusform>
+            <numerusform>%n próbek</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="110"/>
         <source>%n instrument(s)</source>
         <translation>
-            <numerusform>%n instrument(ów)</numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n instrument</numerusform>
+            <numerusform>%n instrumenty</numerusform>
+            <numerusform>%n instrumentów</numerusform>
         </translation>
+    </message>
+    <message>
+        <source>The selection contains no modulators.</source>
+        <translation type="vanished">Wybór nie zawiera żadnych modulatorów.</translation>
     </message>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="48"/>
@@ -5591,7 +5590,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="106"/>
         <source>Couldn&apos;t export the sample.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się wyeksportować próbki.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="126"/>
@@ -5606,7 +5605,6 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="48"/>
         <source>Audio processing</source>
-        <oldsource>Sample processing</oldsource>
         <translation>Przetwarzanie próbek</translation>
     </message>
     <message>
@@ -5666,7 +5664,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="118"/>
         <source>You must enter a command with at least {wav} as argument.</source>
-        <translation>Musisz wprowadzić polecenie z przynajmniej {wav} jako argumentem,</translation>
+        <translation>Musisz wprowadzić polecenie z przynajmniej {wav} jako argumentem.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="125"/>
@@ -5720,7 +5718,6 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
         <source>Audio processing</source>
-        <oldsource>Sample processing</oldsource>
         <translation>Przetwarzanie próbek</translation>
     </message>
     <message>
@@ -5989,9 +5986,9 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="301"/>
         <source>Couldn&apos;t configure %n sample(s).</source>
         <translation>
-            <numerusform>Nie można skonfigurować %n prób(ek).</numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Nie można skonfigurować %n próbkę.</numerusform>
+            <numerusform>Nie można skonfigurować %n próbki.</numerusform>
+            <numerusform>Nie można skonfigurować %n próbek.</numerusform>
         </translation>
     </message>
     <message>
@@ -6043,12 +6040,11 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="46"/>
         <source>Loop / playback</source>
-        <translation>Pętla / przetwarzanie</translation>
+        <translation>Pętla / odtwarzanie</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
         <source>Cross-fade loop</source>
-        <oldsource>Crossfade loop</oldsource>
         <translation>Płynne przejście pętli</translation>
     </message>
 </context>
@@ -6465,9 +6461,9 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="118"/>
         <source>%n modulator(s) has(have) been deleted.</source>
         <translation>
+            <numerusform>Usunięto %n modulator.</numerusform>
+            <numerusform>Usunięto %n modulatory.</numerusform>
             <numerusform>Usunięto %n modulatorów.</numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -6509,7 +6505,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization.h" line="45"/>
         <source>Fast editing</source>
-        <translation>Szyka edycja</translation>
+        <translation>Szybka edycja</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization.h" line="63"/>
@@ -6716,7 +6712,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="210"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation>W przypadku wielokrotnego eksportu, maksymalna ilość SoundFontów do eksportu to 127.</translation>
+        <translation>W przypadku wielokrotnego eksportu, maksymalna ilość presetów na SoundFont to 127.</translation>
     </message>
 </context>
 <context>
@@ -6742,7 +6738,6 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="46"/>
         <source>Audio processing</source>
-        <oldsource>Sample processing</oldsource>
         <translation>Przetwarzanie próbek</translation>
     </message>
     <message>
@@ -6945,7 +6940,6 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="95"/>
         <source>Always play</source>
-        <oldsource>Play along</oldsource>
         <translation>Zawsze odtwarzaj</translation>
     </message>
     <message>
