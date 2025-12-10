@@ -110,7 +110,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="497"/>
         <source>Sample end offset (× 32768)</source>
-        <translation>Posun konce vzorku (× 32768)</translation>
+        <translation>Posun konce smyčky (× 32768)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="491"/>
@@ -340,7 +340,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="654"/>
         <source>Sample root key</source>
-        <translation type="unfinished"></translation>
+        <translation>Základní nota vzorku</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="657"/>
@@ -360,7 +360,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="666"/>
         <source>Pitch correction (cents)</source>
-        <translation type="unfinished"></translation>
+        <translation>Korekce výšky tónu (centy)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="509"/>
@@ -788,7 +788,8 @@
 (same effect as the tool &quot;Remove blank at start&quot;)</source>
         <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool “Remove blank at start”)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Při importu vzorku je automaticky odstraněna jakákoli prázdná oblast před začátkem náběhu.
+(stejný efekt jako nástroj &quot;Odstranit ticho na začátku&quot;)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="44"/>
@@ -802,7 +803,8 @@
 (same effect as the tool &quot;Trim to end of loop&quot;)</source>
         <oldsource>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool “Trim to end of loop”)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Při importu vzorku jsou data umístěná za koncem smyčky automaticky odstraněna.
+(stejný efekt jako nástroj &quot;Ořezat na konec smyčky&quot;)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="186"/>
@@ -813,7 +815,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="23"/>
         <source>Sample management</source>
-        <translation type="unfinished"></translation>
+        <translation>Správa vzorků</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="36"/>
@@ -892,12 +894,12 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="615"/>
         <source>Window borders</source>
-        <translation type="unfinished"></translation>
+        <translation>Okraje okna</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="476"/>
         <source>Behaviour</source>
-        <translation type="unfinished"></translation>
+        <translation>Chování</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="49"/>
@@ -933,7 +935,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="42"/>
         <source>Unique instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Jediná instance</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="457"/>
@@ -979,7 +981,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="490"/>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Styl</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="25"/>
@@ -1005,7 +1007,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="81"/>
         <source>Mapping</source>
-        <translation type="unfinished"></translation>
+        <translation>Mapování</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="209"/>
@@ -1030,7 +1032,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="297"/>
         <source>Temperament</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperament</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="69"/>
@@ -1040,18 +1042,18 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Reference pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Referenční výška tónu</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
         <location filename="context/interface/configsectionkeyboard.ui" line="94"/>
         <source>Back to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpět na výchozí hodnotu</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="156"/>
         <source>Tuning</source>
-        <translation type="unfinished">Ladění</translation>
+        <translation>Ladění</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.cpp" line="53"/>
@@ -1070,7 +1072,7 @@
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="20"/>
         <source>Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresář</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="112"/>
@@ -1169,7 +1171,7 @@ prémiový!</translation>
         <location filename="context/interface/configsectionsound.ui" line="333"/>
         <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
         <oldsource>Modulator &quot;velocity → filter cutoff&quot;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí modulátor &quot;dynamika → frekvence odříznutí filtru&quot;</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="126"/>
@@ -1270,12 +1272,12 @@ repository</source>
     <message>
         <location filename="clavier/controllerarea.ui" line="233"/>
         <source>Sensitivity</source>
-        <translation type="unfinished"></translation>
+        <translation>Citlivost</translation>
     </message>
     <message>
         <location filename="clavier/controllerarea.ui" line="257"/>
         <source>Pressure</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlak</translation>
     </message>
     <message>
         <location filename="clavier/controllerarea.cpp" line="225"/>
@@ -1499,7 +1501,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>Alejandro Moctezuma</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>Alejandro Moctezuma</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="74"/>
@@ -1553,7 +1555,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="83"/>
         <source>Spessasus</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>Spessasus</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="73"/>
@@ -1615,27 +1617,27 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="17"/>
         <source>Sample compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Komprese vzorků</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="27"/>
         <source>Medium</source>
-        <translation type="unfinished">Průměrná</translation>
+        <translation>Průměrná</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="44"/>
         <source>Quality of the compression:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvalita komprese:</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="51"/>
         <source>High (good sound quality but larger file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vysoká (dobrá kvalita zvuku, ale větší velikost souboru)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="58"/>
         <source>Low (poor sound quality but smaller file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nízká (špatná kvalita zvuku, ale menší velikost souboru)</translation>
     </message>
 </context>
 <context>
@@ -1736,17 +1738,17 @@ repository</source>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="238"/>
         <source>Aftertouch</source>
-        <translation type="unfinished"></translation>
+        <translation>Aftertouch</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.cpp" line="200"/>
         <source>Hide the controller area</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt oblast ovladačů</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.cpp" line="206"/>
         <source>Show the controller area</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit oblast ovladačů</translation>
     </message>
 </context>
 <context>
@@ -1819,12 +1821,12 @@ repository</source>
         <location filename="dialogs/dialognewelement.cpp" line="53"/>
         <source>Link selected instruments</source>
         <oldsource>Link selected isntruments</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Propojit vybrané nástroje</translation>
     </message>
     <message>
         <location filename="dialogs/dialognewelement.cpp" line="54"/>
         <source>Link selected samples</source>
-        <translation type="unfinished"></translation>
+        <translation>Propojit vybrané vzorky</translation>
     </message>
 </context>
 <context>
@@ -1874,7 +1876,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="61"/>
         <source>Overwrite existing name with key name and velocity as suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Přepsat stávající název názvem noty a dynamiky jako příponou</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="71"/>
@@ -1991,7 +1993,7 @@ repository</source>
     <message>
         <location filename="repository/downloadmanager.cpp" line="147"/>
         <source>Couldn&apos;t write file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze zapsat soubor &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="153"/>
@@ -2022,7 +2024,7 @@ repository</source>
     <message>
         <location filename="repository/widgets/downloadprogresscell.cpp" line="86"/>
         <source>Couldn&apos;t open file &quot;%1&quot;. If this is an archive, you may have to extract it first.</source>
-        <translation>Nepodařilo se otevřít soubor &quot;%1&quot;. Pokud se jedná o archiv, možná jej budete muset nejprve rozbalit.</translation>
+        <translation>Nelze otevřít soubor &quot;%1&quot;. Pokud se jedná o archiv, možná jej budete muset nejprve rozbalit.</translation>
     </message>
     <message>
         <location filename="repository/widgets/downloadprogresscell.cpp" line="115"/>
@@ -2146,7 +2148,7 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertimage.ui" line="37"/>
         <source>URL of the image to insert...</source>
-        <translation type="unfinished"></translation>
+        <translation>URL obrázku k vložení...</translation>
     </message>
 </context>
 <context>
@@ -2154,12 +2156,12 @@ repository</source>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="14"/>
         <source>Insert a link</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit odkaz</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="24"/>
         <source>Text to display</source>
-        <translation type="unfinished"></translation>
+        <translation>Text k zobrazení</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/editordialoginsertlink.ui" line="31"/>
@@ -2253,7 +2255,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="437"/>
         <source>Cannot create more presets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze vytvořit více přednastavení.</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="437"/>
@@ -2286,12 +2288,12 @@ repository</source>
     <message>
         <location filename="editor/widgets/equalizer.cpp" line="123"/>
         <source>Equalization successfully applied on 1 sample.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekvalizace úspěšně aplikována na 1 vzorek.</translation>
     </message>
     <message>
         <location filename="editor/widgets/equalizer.cpp" line="124"/>
         <source>Equalization successfully applied on %1 samples.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekvalizace úspěšně aplikována na %1 vzorků.</translation>
     </message>
 </context>
 <context>
@@ -2510,12 +2512,12 @@ repository</source>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="48"/>
         <source>Cannot find file &quot;%1&quot;.</source>
-        <translation type="unfinished">Nelze najít soubor &quot;%1&quot;.</translation>
+        <translation>Nelze najít soubor &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="55"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
-        <translation type="unfinished">Přístup ke čtení souboru&quot;%1&quot;. odepřen.</translation>
+        <translation>Přístup ke čtení souboru &quot;%1&quot; odepřen.</translation>
     </message>
 </context>
 <context>
@@ -2624,7 +2626,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="64"/>
         <source>Polyphone SoundFont Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Polyphone SoundFont Editor</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="208"/>
@@ -2666,7 +2668,14 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="78"/>
         <source>Home screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Domovská obrazovka</translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.ui" line="106"/>
+        <source></source>
+        <extracomment>prefixed with 2 spaces for each line</extracomment>
+        <translation>  Nová
+  zvuková banka</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="121"/>
@@ -2719,7 +2728,7 @@ repository</source>
     <message>
         <location filename="editor/modulator/modulatorcell.ui" line="127"/>
         <source>no operation</source>
-        <translation type="unfinished"></translation>
+        <translation>žádná operace</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.ui" line="132"/>
@@ -2740,19 +2749,21 @@ repository</source>
         <location filename="editor/modulator/modulatorcell.cpp" line="156"/>
         <source>overwritten by %1</source>
         <oldsource>overriden by %1</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>přepsáno %1</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="163"/>
         <source>disabling
 default mod.</source>
-        <translation type="unfinished"></translation>
+        <translation>zakázání
+výchozího mod.</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="165"/>
         <source>overriding
 default mod.</source>
-        <translation type="unfinished"></translation>
+        <translation>přepsání
+výchozího mod.</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="383"/>
@@ -2769,24 +2780,24 @@ default mod.</source>
         <location filename="editor/modulator/modulatorcell.cpp" line="394"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
-        <translation type="unfinished"></translation>
+        <translation>centy</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="405"/>
         <source>Add from:</source>
         <oldsource>Add from: </oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Přidat od:</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="406"/>
         <source>Multiply from:</source>
-        <translation type="unfinished"></translation>
+        <translation>Násobit od:</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="408"/>
         <source>To:</source>
         <oldsource>To: </oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Do:</translation>
     </message>
 </context>
 <context>
@@ -2836,7 +2847,7 @@ default mod.</source>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="161"/>
         <source>Collapse the modulator section</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbalit sekci modulátorů</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="202"/>
@@ -2849,12 +2860,12 @@ default mod.</source>
         <location filename="editor/modulator/modulatoreditor.ui" line="234"/>
         <location filename="editor/modulator/modulatoreditor.cpp" line="162"/>
         <source>Select a single division to display the modulator list</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte jednu divizi pro zobrazení seznamu modulátorů</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatoreditor.ui" line="320"/>
         <source>Expand the modulator section</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozbalit sekci modulátorů</translation>
     </message>
     <message numerus="yes">
         <location filename="editor/modulator/modulatoreditor.cpp" line="262"/>
@@ -2920,22 +2931,22 @@ default mod.</source>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="62"/>
         <source>Please close file before overriding it.</source>
-        <translation type="unfinished">Zavřete, prosím, soubor před jeho zrušením.</translation>
+        <translation>Před přepsáním soubor zavřete.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="91"/>
         <source>Couldn&apos;t delete file &quot;%1&quot;.</source>
-        <translation type="unfinished">Nepodařilo se smazat soubor &quot;%1&quot;.</translation>
+        <translation>Nelze odstranit soubor &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="101"/>
         <source>Couldn&apos;t rename file &quot;%1&quot;.</source>
-        <translation type="unfinished">Nepodařilo se přejmenovat soubor &quot;%1&quot;.</translation>
+        <translation>Nelze přejmenovat soubor &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="148"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze vytvořit soubor &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -3220,7 +3231,7 @@ rate</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="47"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Komprese</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
@@ -3294,7 +3305,8 @@ rate</source>
         <source>Select a single instrument or preset
 to display its division ranges</source>
         <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a single instrument or preset&lt;/p&gt;&lt;p&gt;to display its division ranges&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte jeden nástroj nebo přednastavení
+pro zobrazení rozsahů jeho divizí</translation>
     </message>
 </context>
 <context>
@@ -3374,24 +3386,24 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesf2.ui" line="667"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Komprese</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="674"/>
         <location filename="editor/pagesf2.ui" line="757"/>
         <location filename="editor/pagesf2.ui" line="820"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="688"/>
         <source>Bit depth</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitová hloubka</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="702"/>
         <source>16 bits</source>
-        <translation>24 bitů {16 ?}</translation>
+        <translation>16 bitů</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="707"/>
@@ -3401,12 +3413,12 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesf2.ui" line="716"/>
         <source>no</source>
-        <translation type="unfinished">Ne</translation>
+        <translation>ne</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="721"/>
         <source>possible</source>
-        <translation type="unfinished"></translation>
+        <translation>možné</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="750"/>
@@ -3487,7 +3499,7 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="549"/>
         <source>Use the full length of the sample as loop</source>
-        <translation>Použít celou délku vzorku jako smyčky</translation>
+        <translation>Použít celou délku vzorku jako smyčku</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="594"/>
@@ -3564,17 +3576,18 @@ to display its division ranges</source>
         <location filename="editor/pagesmpl.cpp" line="312"/>
         <source>Compress the sample(s) to reduce the soundfont size
 Warning: quality will be reduced and the loop may be altered</source>
-        <translation type="unfinished"></translation>
+        <translation>Komprimovat vzorek(vzorky) pro snížení velikosti soundfontu.
+Upozornění: kvalita bude snížena a smyčka může být změněna</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="320"/>
         <source>This sample is compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento vzorek je komprimován pro snížení velikosti soundfontu</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="321"/>
         <source>The selected samples are compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrané vzorky jsou komprimovány pro snížení velikosti soundfontu</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="537"/>
@@ -3602,7 +3615,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="editor/pagesmpl.cpp" line="1107"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Jste si jisti, že chcete oříznout vzorek od &lt;b&gt;%1&lt;/b&gt; do &lt;b&gt;%2&lt;/b&gt;?</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1109"/>
@@ -3618,7 +3631,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="editor/pagesmpl.cpp" line="1111"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ano a &amp;vytvořit další vzorek</translation>
     </message>
 </context>
 <context>
@@ -3676,7 +3689,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.ui" line="181"/>
         <source>Selection by keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Výběr podle not</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="199"/>
@@ -3692,7 +3705,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="player/player.ui" line="356"/>
         <source>Banks (number of instruments)</source>
         <oldsource>Banques (nombre d&apos;instruments)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Banky (počet nástrojů)</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="433"/>
@@ -3707,7 +3720,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.cpp" line="50"/>
         <source>MIDI panic</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI panika</translation>
     </message>
     <message>
         <location filename="player/player.cpp" line="51"/>
@@ -3738,7 +3751,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/output/outputfactory.cpp" line="120"/>
         <source>Sf3 files</source>
-        <translation type="unfinished">Soubory .sf2 {3 ?}</translation>
+        <translation>Soubory .sf3</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="146"/>
@@ -4035,7 +4048,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/input/grandorgue/inputgrandorgue.h" line="35"/>
         <source>GrandOrgue sample sets</source>
-        <translation type="unfinished"></translation>
+        <translation>Sady vzorků GrandOrgue</translation>
     </message>
     <message>
         <location filename="core/input/inputfactory.cpp" line="109"/>
@@ -4058,23 +4071,26 @@ Warning: quality will be reduced and the loop may be altered</source>
 This rule applies at the sample level and also when editing a division of an instrument:
 the division corresponding to the other channel, if any, is edited the same.
 Both divisions must share the same note and velocity ranges.</source>
-        <translation type="unfinished"></translation>
+        <translation>Při úpravě jedné strany stereo vzorku je druhá strana automaticky upravena stejně.
+Toto pravidlo platí na úrovni vzorku a také při úpravě divize nástroje:
+divize odpovídající druhému kanálu, pokud existuje, je upravena stejně.
+Obě divize musí sdílet stejné rozsahy not a dynamiky.</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputsf.h" line="35"/>
         <source>Soundfont files</source>
-        <translation type="unfinished"></translation>
+        <translation>Soundfont soubory</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="85"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
-        <translation type="unfinished"></translation>
+        <translation>Temperované</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="121"/>
         <source>Tuning program %1:%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Program ladění %1:%2</translation>
     </message>
 </context>
 <context>
@@ -4353,7 +4369,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="136"/>
         <source>D&apos;n&apos;B / breaks</source>
-        <translation>D&apos;n&apos;B/breaks</translation>
+        <translation>D&apos;n&apos;B / breaks</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="137"/>
@@ -4647,12 +4663,12 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="545"/>
         <source>Go to the previous page</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejít na předchozí stránku</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="580"/>
         <source>Go to the next page</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejít na další stránku</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="670"/>
@@ -4708,7 +4724,7 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorcenter.cpp" line="74"/>
         <source>At least one file must be uploaded.</source>
-        <translation type="unfinished"></translation>
+        <translation>Musí být nahrán alespoň jeden soubor.</translation>
     </message>
 </context>
 <context>
@@ -4722,12 +4738,12 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="80"/>
         <source>The number of files cannot exceed %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet souborů nesmí překročit %1.</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
         <source>File to upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor k nahrání</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
@@ -4737,7 +4753,7 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
         <source>The file size cannot exceed %1 MB.</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost souboru nesmí překročit %1 MB.</translation>
     </message>
 </context>
 <context>
@@ -4804,12 +4820,12 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="130"/>
         <source>A category must be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Musí být vybrána kategorie.</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="134"/>
         <source>A license must be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Musí být vybrána licence.</translation>
     </message>
 </context>
 <context>
@@ -4822,7 +4838,7 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditortop.cpp" line="56"/>
         <source>A title must be provided.</source>
-        <translation type="unfinished"></translation>
+        <translation>Musí být zadán název.</translation>
     </message>
 </context>
 <context>
@@ -4853,7 +4869,7 @@ Nelze stáhnout seznam</translation>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="112"/>
         <source>Edit the soundfont description</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit popis soundfontu</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="360"/>
@@ -4883,7 +4899,7 @@ Nelze stáhnout obsah</translation>
     <message>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
         <source>The upload failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrávání se nezdařilo: %1</translation>
     </message>
 </context>
 <context>
@@ -5024,12 +5040,12 @@ Nelze stáhnout obsah</translation>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="59"/>
         <source>solo</source>
-        <translation type="unfinished"></translation>
+        <translation>sólo</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="68"/>
         <source>solo on selection</source>
-        <translation type="unfinished"></translation>
+        <translation>sólo ve výběru</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="63"/>
@@ -5048,7 +5064,8 @@ Nelze stáhnout obsah</translation>
         <location filename="editor/pageinst.cpp" line="132"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hodnoty v tomto řádku jsou vyjádřeny ve skutečných dB.
+Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     </message>
 </context>
 <context>
@@ -5057,7 +5074,8 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/pageprst.cpp" line="103"/>
         <source>Values on this row are expressed in real dB.
 Other soundfont editors might display other units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hodnoty v tomto řádku jsou vyjádřeny ve skutečných dB.
+Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     </message>
 </context>
 <context>
@@ -5162,7 +5180,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="47"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Smyčka / přehrávání</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="65"/>
@@ -5286,7 +5304,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Zpracování vzorku</translation>
+        <translation>Zpracování zvuku</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="61"/>
@@ -5489,7 +5507,7 @@ Other soundfont editors might display other units.</source>
         <source>%1 and %2 have been deleted.</source>
         <comment>[X sample(s)] and [Y instrument(s)] have been deleted.</comment>
         <translatorcomment>[Byl(o) smazán(o) X vzorek (vzorků)] a [Y nástroj (nástrojů)].</translatorcomment>
-        <translation>%1 a %2.</translation>
+        <translation>%1 a %2 byly smazány.</translation>
     </message>
     <message numerus="yes">
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="109"/>
@@ -5530,7 +5548,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod.h" line="60"/>
         <source>Override a default modulator</source>
-        <translation type="unfinished"></translation>
+        <translation>Přepsat výchozí modulátor</translation>
     </message>
 </context>
 <context>
@@ -5538,7 +5556,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="20"/>
         <source>Here is the list of modulators automatically set for every instrument. You can override or disable them by selecting the corresponding modulators and action below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zde je seznam modulátorů automaticky nastavených pro každý nástroj. Můžete je přepsat nebo zakázat výběrem odpovídajících modulátorů a akce níže.</translation>
     </message>
     <message>
         <location filename="editor/tools/default_mod/tooldefaultmod_gui.ui" line="58"/>
@@ -5564,12 +5582,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="84"/>
         <source>An instrument comprising no samples is not compatible with this tool:</source>
-        <translation>Nástroj, který neobsahuje žádné vzorky, se vylučuje s tímto nástrojem:</translation>
+        <translation>Nástroj, který neobsahuje žádné vzorky, není kompatibilní s tímto nástrojem:</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="85"/>
         <source>A preset comprising no instruments is not compatible with this tool:</source>
-        <translation>Přednastavení, které neobsahuje žádné nástroje, se vylučuje s tímto nástrojem:</translation>
+        <translation>Přednastavení, které neobsahuje žádné nástroje, není kompatibilní s tímto nástrojem:</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="45"/>
@@ -5610,7 +5628,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="106"/>
         <source>Couldn&apos;t export the sample.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se exportovat vzorek.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="126"/>
@@ -5626,7 +5644,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="48"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Zpracování vzorku  </translation>
+        <translation>Zpracování zvuku</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="66"/>
@@ -5703,7 +5721,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl.h" line="61"/>
         <source>Shift a parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunout parametr</translation>
     </message>
 </context>
 <context>
@@ -5740,7 +5758,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Zpracování vzorku  </translation>
+        <translation>Zpracování zvuku</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
@@ -6011,7 +6029,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="62"/>
         <source>Load a parameter from the instruments</source>
-        <translation type="unfinished"></translation>
+        <translation>Načíst parametr z nástrojů</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="296"/>
@@ -6022,10 +6040,10 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="301"/>
         <source>Couldn&apos;t configure %n sample(s).</source>
         <oldsource>Couln&apos;t configure %n sample(s).</oldsource>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Nepodařilo se konfigurovat %n vzorek.</numerusform>
+            <numerusform>Nepodařilo se konfigurovat %n vzorky.</numerusform>
+            <numerusform>Nepodařilo se konfigurovat %n vzorků.</numerusform>
         </translation>
     </message>
 </context>
@@ -6067,13 +6085,13 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Smyčka / přehrávání</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
         <source>Cross-fade loop</source>
         <oldsource>Crossfade loop</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Prolínání smyčky</translation>
     </message>
 </context>
 <context>
@@ -6081,23 +6099,23 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="20"/>
         <source>Crossfade duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka prolínání</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="29"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;OK</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="49"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Zrušit</translation>
+        <translation>&amp;Zrušit</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="58"/>
         <source> ms</source>
         <comment>Unit for milliseconds</comment>
-        <translation type="unfinished"></translation>
+        <translation> ms</translation>
     </message>
 </context>
 <context>
@@ -6105,17 +6123,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.cpp" line="66"/>
         <source>The preset doesn&apos;t trigger any samples.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přednastavení nespouští žádné vzorky.</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="47"/>
         <source>Transformation</source>
-        <translation type="unfinished">Proměna</translation>
+        <translation>Proměna</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="62"/>
         <source>Merge samples for each note</source>
-        <translation type="unfinished"></translation>
+        <translation>Sloučit vzorky pro každou notu</translation>
     </message>
 </context>
 <context>
@@ -6125,62 +6143,62 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="102"/>
         <source> s</source>
         <comment>unit for second</comment>
-        <translation type="unfinished"> s</translation>
+        <translation> s</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="38"/>
         <source>Sample creation:</source>
-        <translation type="unfinished">Vytvoření zvuku:</translation>
+        <translation>Vytvoření zvuku:</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="45"/>
         <source>Stereo</source>
-        <translation type="unfinished">Stereo</translation>
+        <translation>Stereo</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="59"/>
         <source>Sustain duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka držení tónu</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="66"/>
         <source>Auto loop</source>
-        <translation type="unfinished">Automatická smyčka</translation>
+        <translation>Automatická smyčka</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="77"/>
         <source>for every key</source>
-        <translation type="unfinished">pro každou notu</translation>
+        <translation>pro každou notu</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="82"/>
         <source>every 3 keys</source>
-        <translation type="unfinished">každé 3 noty</translation>
+        <translation>každé 3 noty</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="87"/>
         <source>every 6 keys</source>
-        <translation type="unfinished">každých 6 not</translation>
+        <translation>každých 6 not</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="95"/>
         <source>Preset name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název přednastavení:</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="112"/>
         <source>Release duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka uvolnění</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="136"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;OK</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="156"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Zrušit</translation>
+        <translation>&amp;Zrušit</translation>
     </message>
 </context>
 <context>
@@ -6388,17 +6406,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="174"/>
         <source>Defined value in the global division</source>
-        <translation type="unfinished"></translation>
+        <translation>Definovaná hodnota v globální divizi</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="189"/>
         <source>Default value for the selected parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí hodnota pro vybraný parametr</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="201"/>
         <source>Defined value in a division</source>
-        <translation type="unfinished"></translation>
+        <translation>Definovaná hodnota v divizi</translation>
     </message>
 </context>
 <context>
@@ -6687,7 +6705,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>one file per preset</source>
-        <translation type="unfinished"></translation>
+        <translation>jeden soubor na přednastavení</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="166"/>
@@ -6750,7 +6768,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.cpp" line="159"/>
         <source>An instrument comprising no samples is not compatible with this tool:</source>
-        <translation>Jeden nástroj neobsahující žádný vzorek není slučitelný s tímto nástrojem:</translation>
+        <translation>Nástroj, který neobsahuje žádné vzorky, není kompatibilní s tímto nástrojem:</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.h" line="45"/>
@@ -6769,7 +6787,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Zpracování vzorku  </translation>
+        <translation>Zpracování zvuku</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="61"/>
@@ -6823,7 +6841,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Smyčka / přehrávání</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="64"/>
@@ -6836,7 +6854,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Smyčka / přehrávání</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="67"/>
@@ -6905,7 +6923,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeitemdelegate.cpp" line="241"/>
         <source>playing</source>
-        <translation type="unfinished"></translation>
+        <translation>přehrává se</translation>
     </message>
 </context>
 <context>
@@ -6928,7 +6946,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeview.cpp" line="987"/>
         <source>Cannot create more presets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze vytvořit více přednastavení.</translation>
     </message>
 </context>
 <context>
@@ -6966,18 +6984,18 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="89"/>
         <source>Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>Ztlumit</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="95"/>
         <source>Always play</source>
         <oldsource>Play along</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Vždy přehrávat</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="101"/>
         <source>Restore playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnovit přehrávání</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="109"/>
@@ -7039,7 +7057,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="repository/soundfont/uploadingdialog.ui" line="54"/>
         <source>Uploading soundfont...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrávám soundfont...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/uploadingdialog.cpp" line="76"/>

@@ -5456,14 +5456,6 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
 </context>
 <context>
     <name>ToolCleanUnused</name>
-    <message numerus="yes">
-        <source>%n modulator(s) has(have) been deleted.</source>
-        <translation type="vanished">
-            <numerusform>Usunięto %n modulator.</numerusform>
-            <numerusform>Usunięto %n modulatory.</numerusform>
-            <numerusform>Usunięto %n modulatorów.</numerusform>
-        </translation>
-    </message>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="108"/>
         <source>%1 and %2 have been deleted.</source>
@@ -5487,10 +5479,6 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
             <numerusform>%n instrumenty</numerusform>
             <numerusform>%n instrumentów</numerusform>
         </translation>
-    </message>
-    <message>
-        <source>The selection contains no modulators.</source>
-        <translation type="vanished">Wybór nie zawiera żadnych modulatorów.</translation>
     </message>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="48"/>
