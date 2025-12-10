@@ -788,7 +788,7 @@
 (same effect as the tool &quot;Remove blank at start&quot;)</source>
         <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool “Remove blank at start”)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>При импорте семпла любая пустая область перед началом атаки автоматически удаляется (то же самое, что инструмент «Убрать тишину в начале»).</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="44"/>
@@ -801,7 +801,7 @@
 (same effect as the tool &quot;Trim to end of loop&quot;)</source>
         <oldsource>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool “Trim to end of loop”)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>При импорте семпла данные, расположенные после конца петли, автоматически удаляются (то же самое, что инструмент «Обрезать до конца петли»).</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="186"/>
@@ -811,7 +811,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="23"/>
         <source>Sample management</source>
-        <translation type="unfinished"></translation>
+        <translation>Управление семплами</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="36"/>
@@ -910,12 +910,12 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="615"/>
         <source>Window borders</source>
-        <translation type="unfinished"></translation>
+        <translation>Границы окна</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="476"/>
         <source>Behaviour</source>
-        <translation type="unfinished"></translation>
+        <translation>Поведение</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="49"/>
@@ -930,7 +930,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="42"/>
         <source>Unique instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Один экземпляр</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="457"/>
@@ -940,7 +940,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="464"/>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвета</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="83"/>
@@ -976,7 +976,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="490"/>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Стиль</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="25"/>
@@ -1002,7 +1002,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="81"/>
         <source>Mapping</source>
-        <translation type="unfinished"></translation>
+        <translation>Сопоставление</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="209"/>
@@ -1027,7 +1027,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="297"/>
         <source>Temperament</source>
-        <translation type="unfinished"></translation>
+        <translation>Темперация</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="69"/>
@@ -1037,13 +1037,13 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Reference pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Эталонная высота тона</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
         <location filename="context/interface/configsectionkeyboard.ui" line="94"/>
         <source>Back to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>Вернуть значение по умолчанию</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="156"/>
@@ -1067,7 +1067,7 @@
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="20"/>
         <source>Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Каталог</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="112"/>
@@ -1492,7 +1492,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="66"/>
         <source>mirabilos</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>мирабилос</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="67"/>
@@ -1517,7 +1517,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>Alejandro Moctezuma</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>Алехандро Моктесума</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="74"/>
@@ -1571,7 +1571,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="83"/>
         <source>Spessasus</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>Спессасус</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="73"/>
@@ -1628,27 +1628,27 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="17"/>
         <source>Sample compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Сжатие семплов</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="27"/>
         <source>Medium</source>
-        <translation type="unfinished">среднее</translation>
+        <translation>среднее</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="44"/>
         <source>Quality of the compression:</source>
-        <translation type="unfinished"></translation>
+        <translation>Качество сжатия:</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="51"/>
         <source>High (good sound quality but larger file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>Высокое (хорошее качество звука, но больший размер файла)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="58"/>
         <source>Low (poor sound quality but smaller file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>Низкое (плохое качество звука, но меньший размер файла)</translation>
     </message>
 </context>
 <context>
@@ -1890,7 +1890,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="61"/>
         <source>Overwrite existing name with key name and velocity as suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезаписать существующее имя с именем клавиши и силой нажатия в качестве суффикса</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="66"/>
@@ -2001,7 +2001,7 @@ repository</source>
     <message>
         <location filename="repository/downloadmanager.cpp" line="147"/>
         <source>Couldn&apos;t write file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось записать файл «%1»</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="153"/>
@@ -2520,12 +2520,12 @@ repository</source>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="48"/>
         <source>Cannot find file &quot;%1&quot;.</source>
-        <translation type="unfinished">Не удалось найти файл «%1».</translation>
+        <translation>Не удалось найти файл «%1».</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="55"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
-        <translation type="unfinished">Доступ запрещён для чтения файла «%1».</translation>
+        <translation>Доступ запрещён для чтения файла «%1».</translation>
     </message>
 </context>
 <context>
@@ -2626,7 +2626,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="78"/>
         <source>Home screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Начальный экран</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="121"/>
@@ -2676,7 +2676,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="64"/>
         <source>Polyphone SoundFont Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Polyphone SoundFont Редактор</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="208"/>
@@ -2929,22 +2929,22 @@ default mod.</source>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="62"/>
         <source>Please close file before overriding it.</source>
-        <translation type="unfinished">Закройте файл перед его перезаписью.</translation>
+        <translation>Закройте файл перед его перезаписью.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="91"/>
         <source>Couldn&apos;t delete file &quot;%1&quot;.</source>
-        <translation type="unfinished">Не удалось удалить файл «%1».</translation>
+        <translation>Не удалось удалить файл «%1».</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="101"/>
         <source>Couldn&apos;t rename file &quot;%1&quot;.</source>
-        <translation type="unfinished">Не удалось переименовать файл «%1».</translation>
+        <translation>Не удалось переименовать файл «%1».</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="148"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished">Не удалось создать файл «%1»</translation>
+        <translation>Не удалось создать файл «%1»</translation>
     </message>
 </context>
 <context>
@@ -3228,7 +3228,7 @@ rate</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="47"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Сжатие</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
@@ -3296,7 +3296,8 @@ rate</source>
         <location filename="editor/pagerange.ui" line="78"/>
         <source>Select a single instrument or preset
 to display its division ranges</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите один инструмент или пресет,
+чтобы отобразить диапазоны его разделов</translation>
     </message>
     <message>
         <location filename="editor/pagerange.h" line="48"/>
@@ -3381,19 +3382,19 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesf2.ui" line="667"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Сжатие</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="674"/>
         <location filename="editor/pagesf2.ui" line="757"/>
         <location filename="editor/pagesf2.ui" line="820"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="688"/>
         <source>Bit depth</source>
-        <translation type="unfinished"></translation>
+        <translation>Глубина дискретизации</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="702"/>
@@ -3408,12 +3409,12 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesf2.ui" line="716"/>
         <source>no</source>
-        <translation type="unfinished">нет</translation>
+        <translation>нет</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="721"/>
         <source>possible</source>
-        <translation type="unfinished"></translation>
+        <translation>возможно</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="750"/>
@@ -3573,17 +3574,18 @@ to display its division ranges</source>
         <location filename="editor/pagesmpl.cpp" line="312"/>
         <source>Compress the sample(s) to reduce the soundfont size
 Warning: quality will be reduced and the loop may be altered</source>
-        <translation type="unfinished"></translation>
+        <translation>Сжать семпл(ы) для уменьшения размера SoundFont.
+Внимание: качество будет снижено, и петля может быть изменена</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="320"/>
         <source>This sample is compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот семпл сжат для уменьшения размера SoundFont</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="321"/>
         <source>The selected samples are compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбранные семплы сжаты для уменьшения размера SoundFont</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="537"/>
@@ -3626,7 +3628,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="editor/pagesmpl.cpp" line="1111"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Да, и &amp;создать еще один семпл</translation>
     </message>
 </context>
 <context>
@@ -3684,12 +3686,12 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.ui" line="181"/>
         <source>Selection by keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор по клавишам</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="199"/>
         <source>toggle</source>
-        <translation type="unfinished"></translation>
+        <translation>переключить</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="278"/>
@@ -3700,7 +3702,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="player/player.ui" line="356"/>
         <source>Banks (number of instruments)</source>
         <oldsource>Banques (nombre d&apos;instruments)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Банки (количество инструментов)</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="433"/>
@@ -3715,7 +3717,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.cpp" line="50"/>
         <source>MIDI panic</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI паника</translation>
     </message>
     <message>
         <location filename="player/player.cpp" line="51"/>
@@ -3900,7 +3902,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/output/outputfactory.cpp" line="120"/>
         <source>Sf3 files</source>
-        <translation type="unfinished">Файлы sf2 {3 ?}</translation>
+        <translation>Файлы sf3</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="146"/>
@@ -4066,23 +4068,26 @@ Warning: quality will be reduced and the loop may be altered</source>
 This rule applies at the sample level and also when editing a division of an instrument:
 the division corresponding to the other channel, if any, is edited the same.
 Both divisions must share the same note and velocity ranges.</source>
-        <translation type="unfinished"></translation>
+        <translation>При редактировании одной стороны стерео-семпла, другая сторона автоматически редактируется так же.
+Это правило применяется на уровне семпла, а также при редактировании раздела инструмента:
+раздел, соответствующий другому каналу, если таковой имеется, редактируется так же.
+Оба раздела должны иметь одинаковые диапазоны нот и силы нажатия.</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputsf.h" line="35"/>
         <source>Soundfont files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы Soundfont</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="85"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
-        <translation type="unfinished"></translation>
+        <translation>Равномерная</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="121"/>
         <source>Tuning program %1:%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Программа настройки %1:%2</translation>
     </message>
 </context>
 <context>
@@ -4804,7 +4809,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorcenter.cpp" line="74"/>
         <source>At least one file must be uploaded.</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо загрузить хотя бы один файл.</translation>
     </message>
 </context>
 <context>
@@ -4818,12 +4823,12 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="80"/>
         <source>The number of files cannot exceed %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество файлов не может превышать %1.</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
         <source>File to upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл для загрузки</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
@@ -4833,7 +4838,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="138"/>
         <source>The file size cannot exceed %1 MB.</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер файла не может превышать %1 МБ.</translation>
     </message>
 </context>
 <context>
@@ -4900,12 +4905,12 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="130"/>
         <source>A category must be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо выбрать категорию.</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.cpp" line="134"/>
         <source>A license must be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо выбрать лицензию.</translation>
     </message>
 </context>
 <context>
@@ -4918,7 +4923,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditortop.cpp" line="56"/>
         <source>A title must be provided.</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо указать заголовок.</translation>
     </message>
 </context>
 <context>
@@ -4936,7 +4941,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="104"/>
         <source>Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Заменить</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="44"/>
@@ -4979,7 +4984,7 @@ download content</source>
     <message>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
         <source>The upload failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка не удалась: %1</translation>
     </message>
 </context>
 <context>
@@ -5259,7 +5264,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="47"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Петля / воспроизведение</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="65"/>
@@ -5383,7 +5388,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Обработка семпла</translation>
+        <translation>Обработка звука</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="61"/>
@@ -5492,19 +5497,16 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="112"/>
         <source>Seventh</source>
-        <translatorcomment>https://ru.wikipedia.org/wiki/Септима</translatorcomment>
         <translation>Септима</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="124"/>
         <source>Ninth</source>
-        <translatorcomment>https://ru.wikipedia.org/wiki/Нона_(интервал)</translatorcomment>
         <translation>Нона</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="136"/>
         <source>Third</source>
-        <translatorcomment>https://ru.wikipedia.org/wiki/Терция_(интервал)</translatorcomment>
         <translation>Терция</translation>
     </message>
     <message>
@@ -5515,7 +5517,6 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="184"/>
         <source>Fifth</source>
-        <translatorcomment>https://ru.wikipedia.org/wiki/Квинта</translatorcomment>
         <translation>Квинта</translation>
     </message>
     <message>
@@ -5555,19 +5556,16 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="363"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="411"/>
         <source>diminished</source>
-        <translatorcomment>https://ru.wikipedia.org/wiki/Квинта#Уменьшённая_квинта</translatorcomment>
         <translation>уменьшённая</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="406"/>
         <source>perfect</source>
-        <translatorcomment>https://ru.wikipedia.org/wiki/Квинта#Чистая_квинта</translatorcomment>
         <translation>чистая</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="416"/>
         <source>augmented</source>
-        <translatorcomment>https://ru.wikipedia.org/wiki/Квинта#Увеличенная_квинта</translatorcomment>
         <translation>увеличенная</translation>
     </message>
     <message>
@@ -5592,7 +5590,6 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="108"/>
         <source>%1 and %2 have been deleted.</source>
         <comment>[X sample(s)] and [Y instrument(s)] have been deleted.</comment>
-        <translatorcomment>Были удалены [X семпл(а,ов)] и [Y инструмент(а,ов)].</translatorcomment>
         <translation>Были удалены %1 и %2.</translation>
     </message>
     <message numerus="yes">
@@ -5711,7 +5708,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="106"/>
         <source>Couldn&apos;t export the sample.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось экспортировать семпл.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="126"/>
@@ -5727,7 +5724,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="48"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Обработка семпла</translation>
+        <translation>Обработка звука</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="66"/>
@@ -5755,12 +5752,12 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="94"/>
         <source>Authorize stereo editing</source>
-        <translation>Разрешить стерео-правку</translation>
+        <translation>Разрешить стерео-редактирование</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="101"/>
         <source>Executable file</source>
-        <translation>Исполнимый файл</translation>
+        <translation>Исполняемый файл</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="118"/>
@@ -5791,7 +5788,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="125"/>
         <source>The command must contain the argument {wav}.</source>
-        <translation>Команда должна включать аргумент {wav}.</translation>
+        <translation>Команда должна содержать аргумент {wav}.</translation>
     </message>
 </context>
 <context>
@@ -5804,7 +5801,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl.h" line="61"/>
         <source>Shift a parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Сдвинуть параметр</translation>
     </message>
 </context>
 <context>
@@ -5841,7 +5838,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Обработка семпла</translation>
+        <translation>Обработка звука</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
@@ -6108,7 +6105,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="62"/>
         <source>Load a parameter from the instruments</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить параметр из инструментов</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="296"/>
@@ -6119,10 +6116,10 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="301"/>
         <source>Couldn&apos;t configure %n sample(s).</source>
         <oldsource>Couln&apos;t configure %n sample(s).</oldsource>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Не удалось настроить %n семпл.</numerusform>
+            <numerusform>Не удалось настроить %n семпла.</numerusform>
+            <numerusform>Не удалось настроить %n семплов.</numerusform>
         </translation>
     </message>
 </context>
@@ -6131,7 +6128,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="20"/>
         <source>Root key</source>
-        <translation type="unfinished"></translation>
+        <translation>Корневая клавиша</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="27"/>
@@ -6146,7 +6143,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="41"/>
         <source>Loop start / loop end</source>
-        <translation>Начало петли / конца петли</translation>
+        <translation>Начало петли / конец петли</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="63"/>
@@ -6164,13 +6161,13 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Петля / воспроизведение</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
         <source>Cross-fade loop</source>
         <oldsource>Crossfade loop</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Кроссфейд петли</translation>
     </message>
 </context>
 <context>
@@ -6178,23 +6175,23 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="20"/>
         <source>Crossfade duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Длительность кроссфейда</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="29"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;ОК</translation>
+        <translation>&amp;ОК</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="49"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">О&amp;тменить</translation>
+        <translation>О&amp;тменить</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="58"/>
         <source> ms</source>
         <comment>Unit for milliseconds</comment>
-        <translation type="unfinished"></translation>
+        <translation> мс</translation>
     </message>
 </context>
 <context>
@@ -6202,17 +6199,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.cpp" line="66"/>
         <source>The preset doesn&apos;t trigger any samples.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пресет не активирует семплы.</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="47"/>
         <source>Transformation</source>
-        <translation type="unfinished">Преобразование</translation>
+        <translation>Преобразование</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="62"/>
         <source>Merge samples for each note</source>
-        <translation type="unfinished"></translation>
+        <translation>Объединить семплы для каждой ноты</translation>
     </message>
 </context>
 <context>
@@ -6222,62 +6219,62 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="102"/>
         <source> s</source>
         <comment>unit for second</comment>
-        <translation type="unfinished"> сек</translation>
+        <translation> с</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="38"/>
         <source>Sample creation:</source>
-        <translation type="unfinished">Создать семпл для:</translation>
+        <translation>Создание семпла:</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="45"/>
         <source>Stereo</source>
-        <translation type="unfinished">Стерео</translation>
+        <translation>Стерео</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="59"/>
         <source>Sustain duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Длительность сустейна</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="66"/>
         <source>Auto loop</source>
-        <translation type="unfinished">Авто-петля</translation>
+        <translation>Авто-петля</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="77"/>
         <source>for every key</source>
-        <translation type="unfinished">каждой клавиши</translation>
+        <translation>для каждой клавиши</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="82"/>
         <source>every 3 keys</source>
-        <translation type="unfinished">каждой 3-й клавиши</translation>
+        <translation>каждые 3 клавиши</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="87"/>
         <source>every 6 keys</source>
-        <translation type="unfinished">каждой 6-й клавиши</translation>
+        <translation>каждые 6 клавиш</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="95"/>
         <source>Preset name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя пресета:</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="112"/>
         <source>Release duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Длительность затухания</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="136"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;ОК</translation>
+        <translation>&amp;ОК</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="156"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">О&amp;тменить</translation>
+        <translation>О&amp;тменить</translation>
     </message>
 </context>
 <context>
@@ -6295,8 +6292,6 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="63"/>
         <source>Mixture creation</source>
-        <translatorcomment>https://en.wikipedia.org/wiki/Mixture_(organ_stop)
-https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструмент)</translatorcomment>
         <translation>Создание микстуры</translation>
     </message>
 </context>
@@ -6305,29 +6300,27 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="25"/>
         <source>Name of the mixture:</source>
-        <translatorcomment>https://en.wikipedia.org/wiki/Mixture_(organ_stop)
-https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструмент)</translatorcomment>
         <translation>Имя микстуры:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="39"/>
         <source>Sample creation:</source>
-        <translation>Создать семпл для:</translation>
+        <translation>Создание семпла:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="47"/>
         <source>for every key</source>
-        <translation>каждой клавиши</translation>
+        <translation>для каждой клавиши</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="52"/>
         <source>every 3 keys</source>
-        <translation>каждой 3-й клавиши</translation>
+        <translation>каждые 3 клавиши</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="57"/>
         <source>every 6 keys</source>
-        <translation>каждой 6-й клавиши</translation>
+        <translation>каждые 6 клавиш</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="65"/>
@@ -6362,73 +6355,72 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="346"/>
         <source>octave</source>
-        <translatorcomment>https://ru.wikipedia.org/wiki/Октава</translatorcomment>
         <translation>октава</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="351"/>
         <source>fifth</source>
-        <translation>5-й обертон</translation>
+        <translation>квинта</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="356"/>
         <source>third</source>
-        <translation>3-й обертон</translation>
+        <translation>терция</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="361"/>
         <source>seventh</source>
-        <translation>7-й обертон</translation>
+        <translation>септима</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="366"/>
         <source>ninth</source>
-        <translation>9-й обертон</translation>
+        <translation>нона</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="371"/>
         <source>eleventh</source>
-        <translation>11-й обертон</translation>
+        <translation>ундецима</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="376"/>
         <source>thirteenth</source>
-        <translation>13-й обертон</translation>
+        <translation>терцдецима</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="381"/>
         <source>fifteenth</source>
-        <translation>15-й обертон</translation>
+        <translation>квинтдецима</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="386"/>
         <source>seventeenth</source>
-        <translation>17-й обертон</translation>
+        <translation>секунда</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="391"/>
         <source>nineteenth</source>
-        <translation>19-й обертон</translation>
+        <translation>терция</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="396"/>
         <source>twenty-first</source>
-        <translation>21-й обертон</translation>
+        <translation>кварта</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="401"/>
         <source>twenty-third</source>
-        <translation>23-й обертон</translation>
+        <translation>квинта</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="406"/>
         <source>twenty-fifth</source>
-        <translation>25-й обертон</translation>
+        <translation>секста</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="411"/>
         <source>twenty-seventh</source>
-        <translation>27-й обертон</translation>
+        <translation>септима</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="498"/>
@@ -6475,7 +6467,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="80"/>
         <source>Display options</source>
-        <translation>Что показывать</translation>
+        <translation>Опции отображения</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="121"/>
@@ -6485,22 +6477,22 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="142"/>
         <source>Legend</source>
-        <translation>Условные обозначения</translation>
+        <translation>Легенда</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="174"/>
         <source>Defined value in the global division</source>
-        <translation type="unfinished"></translation>
+        <translation>Определенное значение в глобальном разделе</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="189"/>
         <source>Default value for the selected parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Значение по умолчанию для выбранного параметра</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="201"/>
         <source>Defined value in a division</source>
-        <translation type="unfinished"></translation>
+        <translation>Определенное значение в разделе</translation>
     </message>
 </context>
 <context>
@@ -6591,9 +6583,9 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="118"/>
         <source>%n modulator(s) has(have) been deleted.</source>
         <translation>
-            <numerusform>Был удалён 1 модулятор.</numerusform>
-            <numerusform>Были удалены %1 модулятора.</numerusform>
-            <numerusform>Было удалено %1 модуляторов.</numerusform>
+            <numerusform>Был удалён %n модулятор.</numerusform>
+            <numerusform>Были удалены %n модулятора.</numerusform>
+            <numerusform>Было удалено %n модуляторов.</numerusform>
         </translation>
     </message>
     <message>
@@ -6627,7 +6619,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.h" line="68"/>
         <source>Wav export</source>
-        <translation>Экспортировать в wav</translation>
+        <translation>Экспорт в Wav</translation>
     </message>
 </context>
 <context>
@@ -6678,7 +6670,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="66"/>
         <source>Division number</source>
-        <translation>Делитель</translation>
+        <translation>Номер деления</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="88"/>
@@ -6703,7 +6695,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="138"/>
         <source>Inversions</source>
-        <translation>Инверсия</translation>
+        <translation>Инверсии</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="181"/>
@@ -6716,14 +6708,12 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="151"/>
         <source>Merge soudfonts:</source>
-        <translation>Объединить несколько SoundFont:</translation>
+        <translation>Объединить SoundFont:</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="246"/>
         <source>Export successful!</source>
-        <translatorcomment>Использован менее эмоциональный перевод.
-Нормальное завершение — в порядке вещей, об ошибках следует говорить развёрнуто.</translatorcomment>
-        <translation>Экспорт завершён.</translation>
+        <translation>Экспорт успешно завершен!</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.h" line="46"/>
@@ -6741,12 +6731,12 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="22"/>
         <source>Select all</source>
-        <translation>Выбрать всё</translation>
+        <translation>Выбрать все</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="29"/>
         <source>Unselect all</source>
-        <translation>Снять выделение</translation>
+        <translation>Снять выделение со всего</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="99"/>
@@ -6766,32 +6756,32 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="106"/>
         <source>one directory per bank</source>
-        <translation>по каталогу на каждый банк</translation>
+        <translation>одна директория на банк</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="120"/>
         <source>preset number as prefix</source>
-        <translation>номер пресета как префикс</translation>
+        <translation>номер пресета в качестве префикса</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="134"/>
         <source>High</source>
-        <translation>высокое</translation>
+        <translation>Высокое</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="139"/>
         <source>Medium</source>
-        <translation>среднее</translation>
+        <translation>Среднее</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="144"/>
         <source>Low</source>
-        <translation>низкое</translation>
+        <translation>Низкое</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>one file per preset</source>
-        <translation type="unfinished"></translation>
+        <translation>один файл на пресет</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="166"/>
@@ -6801,7 +6791,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="177"/>
         <source>&amp;Export</source>
-        <translation>&amp;Экспортировать</translation>
+        <translation>&amp;Экспорт</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="197"/>
@@ -6811,12 +6801,12 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="62"/>
         <source>Untitled</source>
-        <translation>Без заголовка</translation>
+        <translation>Без названия</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="150"/>
         <source>Select the destination directory</source>
-        <translation>Выбор каталога назначения</translation>
+        <translation>Выберите папку назначения</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="166"/>
@@ -6829,22 +6819,22 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="166"/>
         <source>Invalid directory.</source>
-        <translation>Недопустимый каталог.</translation>
+        <translation>Неверный каталог.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="195"/>
         <source>At least one preset must be selected.</source>
-        <translation>Должен быть выбран хотя бы один пресет.</translation>
+        <translation>Необходимо выбрать хотя бы один пресет.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="201"/>
         <source>The maximal number of soundfont to export is 127.</source>
-        <translation>Максимальное количество SoundFont при экспорте составляет 127.</translation>
+        <translation>Максимальное количество SoundFont для экспорта — 127.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="210"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation>В случае, когда экспортируется несколько SoundFont, максимальное количество пресетов на каждый SoundFont составляет 127.</translation>
+        <translation>В случае экспорта нескольких SoundFont максимальное количество пресетов на SoundFont составляет 127.</translation>
     </message>
 </context>
 <context>
@@ -6871,7 +6861,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Обработка семпла</translation>
+        <translation>Обработка звука</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="61"/>
@@ -6907,7 +6897,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="27"/>
         <source>Adapt keyrange</source>
-        <translation>Подогнать диапазон клавиш</translation>
+        <translation>Адаптировать диапазон клавиш</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="36"/>
@@ -6925,7 +6915,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Петля / воспроизведение</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="64"/>
@@ -6938,7 +6928,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Петля / воспроизведение</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="67"/>
@@ -6956,7 +6946,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/unlink_sample/toolunlinksample.h" line="64"/>
         <source>Unlink</source>
-        <translation>Убрать ссылку</translation>
+        <translation>Отсоединить</translation>
     </message>
 </context>
 <context>
@@ -6969,7 +6959,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="118"/>
         <source>Download status</source>
-        <translation>Состояние загрузки</translation>
+        <translation>Статус загрузки</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="198"/>
@@ -6984,7 +6974,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="137"/>
         <source>Subscribe to a Premium account to get all the features!</source>
-        <translation>Премиум-подписка откроет вам все возможности!</translation>
+        <translation>Подпишитесь на премиум-аккаунт, чтобы получить все функции!</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="147"/>
@@ -6994,7 +6984,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="152"/>
         <source>Your account has been banned.</source>
-        <translation>Ваша учётная запись была заблокирована.</translation>
+        <translation>Ваш аккаунт был заблокирован.</translation>
     </message>
 </context>
 <context>
@@ -7002,12 +6992,12 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tree/treeitemdelegate.cpp" line="240"/>
         <source>mute</source>
-        <translation>выключить</translation>
+        <translation>заглушить</translation>
     </message>
     <message>
         <location filename="editor/tree/treeitemdelegate.cpp" line="241"/>
         <source>playing</source>
-        <translation type="unfinished"></translation>
+        <translation>играет</translation>
     </message>
 </context>
 <context>
@@ -7038,12 +7028,12 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="47"/>
         <source>&amp;Bind to...</source>
-        <translation>&amp;Связать с…</translation>
+        <translation>&amp;Связать с...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="52"/>
         <source>&amp;Replace by...</source>
-        <translation>&amp;Заменить на…</translation>
+        <translation>&amp;Заменить на...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="62"/>
@@ -7058,7 +7048,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="74"/>
         <source>D&amp;uplicate</source>
-        <translation>&amp;Дублировать</translation>
+        <translation>Д&amp;ублировать</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="80"/>
@@ -7068,30 +7058,30 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="89"/>
         <source>Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>Заглушить</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="95"/>
         <source>Always play</source>
         <oldsource>Play along</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Всегда играть</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="101"/>
         <source>Restore playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить воспроизведение</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="109"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="172"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="176"/>
         <source>Re&amp;name...</source>
-        <translation>&amp;Переименовать…</translation>
+        <translation>&amp;Переименовать...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="172"/>
         <source>Bulk re&amp;name...</source>
-        <translation>&amp;Множественное переименование…</translation>
+        <translation>&amp;Массовое переименование...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="260"/>
@@ -7140,12 +7130,12 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="repository/soundfont/uploadingdialog.ui" line="54"/>
         <source>Uploading soundfont...</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка SoundFont...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/uploadingdialog.cpp" line="76"/>
         <source>Canceling...</source>
-        <translation>Отмена…</translation>
+        <translation>Отмена...</translation>
     </message>
 </context>
 <context>
@@ -7160,7 +7150,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="repository/usermanager.cpp" line="122"/>
         <source>Wrong username or password</source>
-        <translation>Неправильный логин или пароль</translation>
+        <translation>Неправильное имя пользователя или пароль</translation>
     </message>
 </context>
 <context>
@@ -7168,12 +7158,12 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="editor/tools/waitingtooldialog.ui" line="51"/>
         <source>Processing...</source>
-        <translation>Обработка…</translation>
+        <translation>Обработка...</translation>
     </message>
     <message>
         <location filename="editor/tools/waitingtooldialog.cpp" line="77"/>
         <source>Canceling...</source>
-        <translation>Отмена…</translation>
+        <translation>Отмена...</translation>
     </message>
 </context>
 <context>
@@ -7181,7 +7171,7 @@ https://ru.wikipedia.org/wiki/Орган_(музыкальный_инструм�
     <message>
         <location filename="mainwindow/widgetshowhistory.ui" line="90"/>
         <source>Empty list</source>
-        <translation>Список пуст</translation>
+        <translation>Пустой список</translation>
     </message>
 </context>
 </TS>
