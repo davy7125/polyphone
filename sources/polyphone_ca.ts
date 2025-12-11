@@ -790,9 +790,7 @@
         <location filename="context/interface/configsectiongeneral.ui" line="122"/>
         <source>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool &quot;Trim to end of loop&quot;)</source>
-        <oldsource>When importing a sample, data located after the end of loop are automatically removed.
-(same effect as the tool “Trim to end of loop”)</oldsource>
-        <translation type="unfinished">Quan s&apos;importa una mostra, les dades localitzades després del final del bucle s&apos;eliminen automàticament.
+        <translation>Quan s&apos;importa una mostra, les dades situades després del final del bucle s&apos;eliminen automàticament.
 (té el mateix efecte que l&apos;eina &quot;Retallar fins al final del bucle&quot;)</translation>
     </message>
     <message>
@@ -804,9 +802,7 @@
         <location filename="context/interface/configsectiongeneral.ui" line="145"/>
         <source>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool &quot;Remove blank at start&quot;)</source>
-        <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
-(same effect as the tool “Remove blank at start”)</oldsource>
-        <translation type="unfinished">Quan s&apos;importa una mostra, tota àrea amb silenci situada abans de l&apos;inici de l&apos;atac s&apos;eliminarà automàticament.
+        <translation>Quan s&apos;importa una mostra, tota àrea amb silenci situada abans de l&apos;inici de l&apos;atac s&apos;eliminarà automàticament.
 (té el mateix efecte que l&apos;eina &quot;Elimina el silenci a l&apos;inici&quot;)</translation>
     </message>
     <message>
@@ -1003,7 +999,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Reference pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>To de referència</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
@@ -1080,7 +1076,7 @@ Premium!</translation>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="192"/>
         <source>Banned account</source>
-        <translation></translation>
+        <translation>Compte bloquejat</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="278"/>
@@ -1500,7 +1496,7 @@ en línia</translation>
         <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>Alejandro Moctezuma</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>Alejandro Moctezuma</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="73"/>
@@ -1560,7 +1556,7 @@ en línia</translation>
         <location filename="dialogs/dialog_about.cpp" line="83"/>
         <source>Spessasus</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>Spessasus</translation>
     </message>
 </context>
 <context>
@@ -1611,27 +1607,27 @@ en línia</translation>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="17"/>
         <source>Sample compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Compressió de mostres</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="27"/>
         <source>Medium</source>
-        <translation type="unfinished">Mitjà</translation>
+        <translation>Mitjà</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="44"/>
         <source>Quality of the compression:</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualitat de la compressió:</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="51"/>
         <source>High (good sound quality but larger file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alta (bona qualitat de so, però mida de fitxer més gran)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="58"/>
         <source>Low (poor sound quality but smaller file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>Baixa (mala qualitat de so, però mida de fitxer més petita)</translation>
     </message>
 </context>
 <context>
@@ -1888,7 +1884,6 @@ en línia</translation>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="76"/>
         <source>Insert at a specific position</source>
-        <oldsource>Insert after a specific position</oldsource>
         <translation>Insereix a la posició especificada</translation>
     </message>
     <message>
@@ -1984,7 +1979,7 @@ en línia</translation>
     <message>
         <location filename="repository/downloadmanager.cpp" line="147"/>
         <source>Couldn&apos;t write file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut escriure el fitxer &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="153"/>
@@ -2502,12 +2497,12 @@ en línia</translation>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="48"/>
         <source>Cannot find file &quot;%1&quot;.</source>
-        <translation type="unfinished">No s&apos;ha pogut trobar el fitxer &quot;%1&quot;.</translation>
+        <translation>No s&apos;ha pogut trobar el fitxer &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="55"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
-        <translation type="unfinished">Accés denegat per llegir el fitxer &quot;%1&quot;.</translation>
+        <translation>Accés denegat per llegir el fitxer &quot;%1&quot;.</translation>
     </message>
 </context>
 <context>
@@ -2703,7 +2698,7 @@ en línia</translation>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="304"/>
         <source>Opening files</source>
-        <translation>S&apos;estan obirnt els fitxers</translation>
+        <translation>S&apos;estan obrint els fitxers</translation>
     </message>
 </context>
 <context>
@@ -2737,15 +2732,15 @@ en línia</translation>
         <location filename="editor/modulator/modulatorcell.cpp" line="163"/>
         <source>disabling
 default mod.</source>
-        <translation>desactiva el
+        <translation>desactivant
 modulador per defecte.</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="165"/>
         <source>overriding
 default mod.</source>
-        <translation>sobreescriu 
-el modulador per defecte.</translation>
+        <translation>sobreescrivint
+modulador per defecte.</translation>
     </message>
     <message>
         <location filename="editor/modulator/modulatorcell.cpp" line="383"/>
@@ -2910,22 +2905,22 @@ el modulador per defecte.</translation>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="62"/>
         <source>Please close file before overriding it.</source>
-        <translation type="unfinished">Tanqueu el fitxer abans de sobreescriure&apos;l.</translation>
+        <translation>Si us plau, tanqueu el fitxer abans de sobreescriure&apos;l.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="91"/>
         <source>Couldn&apos;t delete file &quot;%1&quot;.</source>
-        <translation type="unfinished">No s&apos;ha pogut eliminar el fitxer &quot;%1&quot;.</translation>
+        <translation>No s&apos;ha pogut eliminar el fitxer &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="101"/>
         <source>Couldn&apos;t rename file &quot;%1&quot;.</source>
-        <translation type="unfinished">No s&apos;ha pogut canviar el nom al fitxer &quot;%1&quot;.</translation>
+        <translation>No s&apos;ha pogut canviar el nom al fitxer &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="148"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished">No es pot crear el fitxer &quot;%1&quot;</translation>
+        <translation>No es pot crear el fitxer &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -3197,7 +3192,7 @@ de mostreig</translation>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="47"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Compressió</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
@@ -3351,19 +3346,19 @@ per visualitzar els rangs de divisió</translation>
     <message>
         <location filename="editor/pagesf2.ui" line="667"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Compressió</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="674"/>
         <location filename="editor/pagesf2.ui" line="757"/>
         <location filename="editor/pagesf2.ui" line="820"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Recompte</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="688"/>
         <source>Bit depth</source>
-        <translation type="unfinished"></translation>
+        <translation>Profunditat de bits</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="702"/>
@@ -3378,12 +3373,12 @@ per visualitzar els rangs de divisió</translation>
     <message>
         <location filename="editor/pagesf2.ui" line="716"/>
         <source>no</source>
-        <translation type="unfinished">no</translation>
+        <translation>no</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="721"/>
         <source>possible</source>
-        <translation type="unfinished"></translation>
+        <translation>possible</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="750"/>
@@ -3509,7 +3504,6 @@ per visualitzar els rangs de divisió</translation>
         <location filename="editor/pagesmpl.cpp" line="170"/>
         <source>(min)</source>
         <comment>minimum</comment>
-        <translatorcomment>mínim</translatorcomment>
         <translation>(mín)</translation>
     </message>
     <message>
@@ -3541,17 +3535,18 @@ per visualitzar els rangs de divisió</translation>
         <location filename="editor/pagesmpl.cpp" line="312"/>
         <source>Compress the sample(s) to reduce the soundfont size
 Warning: quality will be reduced and the loop may be altered</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprimiu la mostra (o mostres) per reduir la mida del soundfont.
+Avís: la qualitat es reduirà i el bucle podria ser alterat</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="320"/>
         <source>This sample is compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquesta mostra es comprimeix per reduir la mida del soundfont</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="321"/>
         <source>The selected samples are compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>Les mostres seleccionades es comprimeixen per reduir la mida del soundfont</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="537"/>
@@ -3666,7 +3661,6 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.ui" line="356"/>
         <source>Banks (number of instruments)</source>
-        <oldsource>Banques (nombre d&apos;instruments)</oldsource>
         <translation>Bancs (nombre d&apos;instruments)</translation>
     </message>
     <message>
@@ -3682,7 +3676,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.cpp" line="50"/>
         <source>MIDI panic</source>
-        <translation type="unfinished"></translation>
+        <translation>Pànic MIDI</translation>
     </message>
     <message>
         <location filename="player/player.cpp" line="51"/>
@@ -3833,7 +3827,7 @@ This rule applies at the sample level and also when editing a division of an ins
 the division corresponding to the other channel, if any, is edited the same.
 Both divisions must share the same note and velocity ranges.</source>
         <translation>Quan s&apos;edita un canal d&apos;una mostra estèreo, l&apos;altre canal s&apos;edita automàticament igual.
-Aquesta regla s&apos;aplica tan a nivell de mostra com en l&apos;edició de les divisions d&apos;un instrument:
+Aquesta regla s&apos;aplica tant a nivell de mostra com en l&apos;edició de les divisions d&apos;un instrument:
 la divisió corresponent a l&apos;altre canal, si escau, s&apos;edita de la mateixa manera.
 Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</translation>
     </message>
@@ -3898,7 +3892,7 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
     <message>
         <location filename="core/output/outputfactory.cpp" line="120"/>
         <source>Sf3 files</source>
-        <translation type="unfinished">Fitxers sf2 {3 ?}</translation>
+        <translation>Fitxers sf3</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="146"/>
@@ -3969,7 +3963,6 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
     <message>
         <location filename="core/sample/sound.cpp" line="80"/>
         <source>File not supported: &quot;%1&quot;</source>
-        <oldsource>File not supported &quot;%1&quot;</oldsource>
         <translation>Fitxer no compatible: &quot;%1&quot;</translation>
     </message>
     <message>
@@ -4041,18 +4034,18 @@ Ambdues divisions han de compartir la mateixa nota i rang de velocitat.</transla
     <message>
         <location filename="core/input/sf/inputsf.h" line="35"/>
         <source>Soundfont files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fitxers Soundfont</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="85"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
-        <translation type="unfinished">Temperament igual</translation>
+        <translation>Temperament igual</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="121"/>
         <source>Tuning program %1:%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Programa d&apos;afinació %1:%2</translation>
     </message>
 </context>
 <context>
@@ -5140,7 +5133,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="47"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Bucle / reproducció</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="65"/>
@@ -5263,8 +5256,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="46"/>
         <source>Audio processing</source>
-        <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Processament de la mostra</translation>
+        <translation>Processament d&apos;àudio</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="61"/>
@@ -5582,7 +5574,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="106"/>
         <source>Couldn&apos;t export the sample.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut exportar la mostra.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="126"/>
@@ -5597,8 +5589,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="48"/>
         <source>Audio processing</source>
-        <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Processament de la mostra</translation>
+        <translation>Processament d&apos;àudio</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="66"/>
@@ -5711,8 +5702,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
         <source>Audio processing</source>
-        <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Processament de la mostra</translation>
+        <translation>Processament d&apos;àudio</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
@@ -6033,13 +6023,12 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Bucle / reproducció</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
         <source>Cross-fade loop</source>
-        <oldsource>Crossfade loop</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Bucle amb crossfade</translation>
     </message>
 </context>
 <context>
@@ -6047,23 +6036,23 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="20"/>
         <source>Crossfade duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durada del crossfade</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="29"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="49"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Cancel·la</translation>
+        <translation>&amp;Cancel·la</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="58"/>
         <source> ms</source>
         <comment>Unit for milliseconds</comment>
-        <translation type="unfinished"></translation>
+        <translation> ms</translation>
     </message>
 </context>
 <context>
@@ -6071,17 +6060,17 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.cpp" line="66"/>
         <source>The preset doesn&apos;t trigger any samples.</source>
-        <translation type="unfinished"></translation>
+        <translation>El preset no activa cap mostra.</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="47"/>
         <source>Transformation</source>
-        <translation type="unfinished">Transformació</translation>
+        <translation>Transformació</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="62"/>
         <source>Merge samples for each note</source>
-        <translation type="unfinished"></translation>
+        <translation>Fusiona les mostres per cada nota</translation>
     </message>
 </context>
 <context>
@@ -6091,62 +6080,62 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="102"/>
         <source> s</source>
         <comment>unit for second</comment>
-        <translation type="unfinished"> s</translation>
+        <translation> s</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="38"/>
         <source>Sample creation:</source>
-        <translation type="unfinished">Mostra creada:</translation>
+        <translation>Creació de la mostra:</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="45"/>
         <source>Stereo</source>
-        <translation type="unfinished">Estèreo</translation>
+        <translation>Estèreo</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="59"/>
         <source>Sustain duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durada del sustain</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="66"/>
         <source>Auto loop</source>
-        <translation type="unfinished">Bucle automàtic</translation>
+        <translation>Bucle automàtic</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="77"/>
         <source>for every key</source>
-        <translation type="unfinished">per cada nota</translation>
+        <translation>per cada nota</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="82"/>
         <source>every 3 keys</source>
-        <translation type="unfinished">cada 3 notes</translation>
+        <translation>cada 3 notes</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="87"/>
         <source>every 6 keys</source>
-        <translation type="unfinished">cada 6 notes</translation>
+        <translation>cada 6 notes</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="95"/>
         <source>Preset name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom del preset:</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="112"/>
         <source>Release duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durada del release</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="136"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="156"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Cancel·la</translation>
+        <translation>&amp;Cancel·la</translation>
     </message>
 </context>
 <context>
@@ -6652,7 +6641,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>one file per preset</source>
-        <translation type="unfinished"></translation>
+        <translation>un fitxer per cada preset</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="166"/>
@@ -6731,8 +6720,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="46"/>
         <source>Audio processing</source>
-        <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">Processament de la mostra</translation>
+        <translation>Processament d&apos;àudio</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="61"/>
@@ -6786,7 +6774,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Bucle / reproducció</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="64"/>
@@ -6799,7 +6787,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Bucle / reproducció</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="67"/>
@@ -6868,7 +6856,7 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tree/treeitemdelegate.cpp" line="241"/>
         <source>playing</source>
-        <translation type="unfinished"></translation>
+        <translation>reproduint</translation>
     </message>
 </context>
 <context>
@@ -6929,18 +6917,17 @@ Altres editors de soundfont poden mostrar altres unitats.</translation>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="89"/>
         <source>Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>Silencia</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="95"/>
         <source>Always play</source>
-        <oldsource>Play along</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Reprodueix sempre</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="101"/>
         <source>Restore playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurar reproducció</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="109"/>

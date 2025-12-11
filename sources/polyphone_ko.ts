@@ -788,7 +788,8 @@
 (same effect as the tool &quot;Remove blank at start&quot;)</source>
         <oldsource>When importing a sample, any blank area located before the beginning of the attack is automatically removed.
 (same effect as the tool “Remove blank at start”)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>샘플을 가져올 때, 어택 시작 전에 있는 모든 빈 영역은 자동으로 제거됩니다.
+(&quot;시작 부분 공백 제거&quot; 도구와 동일한 효과)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="44"/>
@@ -802,7 +803,8 @@
 (same effect as the tool &quot;Trim to end of loop&quot;)</source>
         <oldsource>When importing a sample, data located after the end of loop are automatically removed.
 (same effect as the tool “Trim to end of loop”)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>샘플을 가져올 때, 루프 끝 이후에 있는 데이터는 자동으로 제거됩니다.
+(&quot;루프 끝까지 다듬기&quot; 도구와 동일한 효과)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="186"/>
@@ -813,7 +815,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="23"/>
         <source>Sample management</source>
-        <translation type="unfinished"></translation>
+        <translation>샘플 관리</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="36"/>
@@ -892,12 +894,12 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="615"/>
         <source>Window borders</source>
-        <translation type="unfinished"></translation>
+        <translation>창 테두리</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="476"/>
         <source>Behaviour</source>
-        <translation type="unfinished"></translation>
+        <translation>동작</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="49"/>
@@ -933,7 +935,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="42"/>
         <source>Unique instance</source>
-        <translation type="unfinished"></translation>
+        <translation>단일 인스턴스</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="457"/>
@@ -943,7 +945,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="464"/>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>색상</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="316"/>
@@ -979,7 +981,7 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="490"/>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>스타일</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="25"/>
@@ -1005,7 +1007,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="81"/>
         <source>Mapping</source>
-        <translation type="unfinished"></translation>
+        <translation>매핑</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="209"/>
@@ -1030,7 +1032,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="297"/>
         <source>Temperament</source>
-        <translation type="unfinished"></translation>
+        <translation>음률</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="69"/>
@@ -1040,13 +1042,13 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="36"/>
         <source>Reference pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>기준 음높이</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="59"/>
         <location filename="context/interface/configsectionkeyboard.ui" line="94"/>
         <source>Back to default value</source>
-        <translation type="unfinished"></translation>
+        <translation>기본값으로 돌아가기</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="156"/>
@@ -1070,7 +1072,7 @@
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="20"/>
         <source>Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>디렉터리</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.ui" line="112"/>
@@ -1500,7 +1502,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>Alejandro Moctezuma</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>알레한드로 목테수마</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="74"/>
@@ -1554,7 +1556,7 @@ repository</source>
         <location filename="dialogs/dialog_about.cpp" line="83"/>
         <source>Spessasus</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>스페사수스</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="73"/>
@@ -1616,27 +1618,27 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="17"/>
         <source>Sample compression</source>
-        <translation type="unfinished"></translation>
+        <translation>샘플 압축</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="27"/>
         <source>Medium</source>
-        <translation type="unfinished">보통</translation>
+        <translation>보통</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="44"/>
         <source>Quality of the compression:</source>
-        <translation type="unfinished"></translation>
+        <translation>압축 품질:</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="51"/>
         <source>High (good sound quality but larger file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>높음 (좋은 음질, 큰 파일 크기)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcompressquality.ui" line="58"/>
         <source>Low (poor sound quality but smaller file size)</source>
-        <translation type="unfinished"></translation>
+        <translation>낮음 (나쁜 음질, 작은 파일 크기)</translation>
     </message>
 </context>
 <context>
@@ -1874,7 +1876,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="61"/>
         <source>Overwrite existing name with key name and velocity as suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>키 이름과 벨로시티를 접미사로 사용하여 기존 이름 덮어쓰기</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_rename.ui" line="71"/>
@@ -1991,7 +1993,7 @@ repository</source>
     <message>
         <location filename="repository/downloadmanager.cpp" line="147"/>
         <source>Couldn&apos;t write file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;%1&quot; 파일을 쓸 수 없습니다.</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="153"/>
@@ -2330,7 +2332,7 @@ repository</source>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="75"/>
         <source>Instrument not linked to a preset yet.</source>
-        <translation>악기가 아직 프리셋에 연결되지 않았습ㄴ디ㅏ.</translation>
+        <translation>악기가 아직 프리셋에 연결되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="editor/footers/footerlinkedto.cpp" line="77"/>
@@ -2348,8 +2350,8 @@ repository</source>
     <message numerus="yes">
         <location filename="editor/footers/footeroverview.cpp" line="68"/>
         <source>%n element(s)</source>
-        <translation type="unfinished">
-            <numerusform>%n element</numerusform>
+        <translation>
+            <numerusform>%n개의 요소</numerusform>
         </translation>
     </message>
 </context>
@@ -2508,12 +2510,12 @@ repository</source>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="48"/>
         <source>Cannot find file &quot;%1&quot;.</source>
-        <translation type="unfinished"> &quot;%1&quot; 파일을 열 수 없습니다.</translation>
+        <translation>&quot;%1&quot; 파일을 찾을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputparsersf.cpp" line="55"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
-        <translation type="unfinished">&quot;%1&quot; 파일을 읽을 권한이 없습니다.</translation>
+        <translation>&quot;%1&quot; 파일을 읽을 권한이 없습니다.</translation>
     </message>
 </context>
 <context>
@@ -2622,7 +2624,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="64"/>
         <source>Polyphone SoundFont Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>폴리폰 사운드폰트 에디터</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="208"/>
@@ -2664,7 +2666,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="78"/>
         <source>Home screen</source>
-        <translation type="unfinished"></translation>
+        <translation>홈 화면</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="106"/>
@@ -2864,7 +2866,7 @@ default mod.</source>
         <location filename="editor/modulator/modulatoreditor.cpp" line="262"/>
         <source>%n modulator(s):</source>
         <translation>
-            <numerusform>%n modulator:</numerusform>
+            <numerusform>%n개의 모듈레이터:</numerusform>
         </translation>
     </message>
     <message>
@@ -2922,22 +2924,22 @@ default mod.</source>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="62"/>
         <source>Please close file before overriding it.</source>
-        <translation type="unfinished">덮어쓰기 전에 파일을 닫아주세요.</translation>
+        <translation>덮어쓰기 전에 파일을 닫아주세요.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="91"/>
         <source>Couldn&apos;t delete file &quot;%1&quot;.</source>
-        <translation type="unfinished">&quot;%1&quot; 파일을 삭제할 수 없습니다.</translation>
+        <translation>&quot;%1&quot; 파일을 삭제할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="101"/>
         <source>Couldn&apos;t rename file &quot;%1&quot;.</source>
-        <translation type="unfinished">&quot;%1&quot; 파일 이름을 변경할 수 없습니다.</translation>
+        <translation>&quot;%1&quot; 파일 이름을 변경할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="core/output/sf/outputsf.cpp" line="148"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;%1&quot; 파일을 생성할 수 없습니다.</translation>
     </message>
 </context>
 <context>
@@ -3207,7 +3209,7 @@ rate</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="47"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>압축</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
@@ -3281,7 +3283,7 @@ rate</source>
         <source>Select a single instrument or preset
 to display its division ranges</source>
         <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a single instrument or preset&lt;/p&gt;&lt;p&gt;to display its division ranges&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>분할 범위를 표시하려면 단일 악기 또는 프리셋을 선택하십시오.</translation>
     </message>
 </context>
 <context>
@@ -3361,19 +3363,19 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesf2.ui" line="667"/>
         <source>Compression</source>
-        <translation type="unfinished"></translation>
+        <translation>압축</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="674"/>
         <location filename="editor/pagesf2.ui" line="757"/>
         <location filename="editor/pagesf2.ui" line="820"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>개수</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="688"/>
         <source>Bit depth</source>
-        <translation type="unfinished"></translation>
+        <translation>비트 깊이</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="702"/>
@@ -3388,12 +3390,12 @@ to display its division ranges</source>
     <message>
         <location filename="editor/pagesf2.ui" line="716"/>
         <source>no</source>
-        <translation type="unfinished">아니오</translation>
+        <translation>아니오</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="721"/>
         <source>possible</source>
-        <translation type="unfinished"></translation>
+        <translation>가능</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="750"/>
@@ -3417,7 +3419,7 @@ to display its division ranges</source>
         <location filename="editor/pagesf2.cpp" line="230"/>
         <source>%1 (unused: %n)</source>
         <translation>
-            <numerusform>%1 (unused: %n)</numerusform>
+            <numerusform>%1 (사용 안 함: %n개)</numerusform>
         </translation>
     </message>
 </context>
@@ -3549,17 +3551,17 @@ to display its division ranges</source>
         <location filename="editor/pagesmpl.cpp" line="312"/>
         <source>Compress the sample(s) to reduce the soundfont size
 Warning: quality will be reduced and the loop may be altered</source>
-        <translation type="unfinished"></translation>
+        <translation>사운드폰트 크기를 줄이기 위해 샘플을 압축합니다. 경고: 음질이 저하되고 루프가 변경될 수 있습니다.</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="320"/>
         <source>This sample is compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>이 샘플은 사운드폰트 크기를 줄이기 위해 압축되었습니다.</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="321"/>
         <source>The selected samples are compressed to reduce the size of the soundfont</source>
-        <translation type="unfinished"></translation>
+        <translation>선택한 샘플들은 사운드폰트 크기를 줄이기 위해 압축되었습니다.</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="537"/>
@@ -3587,7 +3589,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="editor/pagesmpl.cpp" line="1107"/>
         <source>Are you sure to cut the sample from &lt;b&gt;%1&lt;/b&gt; to &lt;b&gt;%2&lt;/b&gt;?</source>
         <oldsource>Are you sure to cut the sample from &lt;b&gt;%0&lt;/b&gt; to &lt;b&gt;%1&lt;/b&gt;?</oldsource>
-        <translation>&lt;b&gt;%1&lt;/b&gt;의 샘플을 &lt;b&gt;%2&lt;/b&gt;로 자르겠습니까? </translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt;부터 &lt;b&gt;%2&lt;/b&gt;까지 샘플을 자르시겠습니까?</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="1109"/>
@@ -3603,7 +3605,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="editor/pagesmpl.cpp" line="1111"/>
         <source>Yes and &amp;create another sample</source>
         <oldsource>Yes and create another &amp;sample</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>예, 다른 샘플을 &amp;생성합니다.</translation>
     </message>
 </context>
 <context>
@@ -3639,7 +3641,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.ui" line="152"/>
         <source>detect...</source>
-        <translation type="unfinished"></translation>
+        <translation>감지...</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="160"/>
@@ -3661,12 +3663,12 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.ui" line="181"/>
         <source>Selection by keys</source>
-        <translation type="unfinished"></translation>
+        <translation>키로 선택</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="199"/>
         <source>toggle</source>
-        <translation type="unfinished"></translation>
+        <translation>전환</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="278"/>
@@ -3677,7 +3679,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="player/player.ui" line="356"/>
         <source>Banks (number of instruments)</source>
         <oldsource>Banques (nombre d&apos;instruments)</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>뱅크 (악기 개수)</translation>
     </message>
     <message>
         <location filename="player/player.ui" line="433"/>
@@ -3692,7 +3694,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="player/player.cpp" line="50"/>
         <source>MIDI panic</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI 패닉</translation>
     </message>
     <message>
         <location filename="player/player.cpp" line="51"/>
@@ -3731,7 +3733,7 @@ Warning: quality will be reduced and the loop may be altered</source>
     <message>
         <location filename="core/output/outputfactory.cpp" line="120"/>
         <source>Sf3 files</source>
-        <translation type="unfinished">Sf2 파일 {3 ?}</translation>
+        <translation>Sf3 파일</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="146"/>
@@ -3875,7 +3877,7 @@ Warning: quality will be reduced and the loop may be altered</source>
         <location filename="context/keynamemanager.cpp" line="132"/>
         <source>D♭</source>
         <comment>key name</comment>
-        <translation>D</translation>
+        <translation>D♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="66"/>
@@ -4043,23 +4045,23 @@ Warning: quality will be reduced and the loop may be altered</source>
 This rule applies at the sample level and also when editing a division of an instrument:
 the division corresponding to the other channel, if any, is edited the same.
 Both divisions must share the same note and velocity ranges.</source>
-        <translation type="unfinished"></translation>
+        <translation>스테레오 샘플의 한쪽을 편집할 때, 다른 쪽은 자동으로 동일하게 편집됩니다. 이 규칙은 샘플 수준과 악기의 분할을 편집할 때도 적용됩니다. 즉, 다른 채널에 해당하는 분할(있는 경우)도 동일하게 편집됩니다. 두 분할 모두 동일한 음표 및 벨로시티 범위를 공유해야 합니다.</translation>
     </message>
     <message>
         <location filename="core/input/sf/inputsf.h" line="35"/>
         <source>Soundfont files</source>
-        <translation type="unfinished"></translation>
+        <translation>사운드폰트 파일</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="85"/>
         <source>Equal</source>
         <comment>Equal musical temperament</comment>
-        <translation type="unfinished"></translation>
+        <translation>균등</translation>
     </message>
     <message>
         <location filename="context/tuningprogrammanager.cpp" line="121"/>
         <source>Tuning program %1:%2</source>
-        <translation type="unfinished"></translation>
+        <translation>튜닝 프로그램 %1:%2</translation>
     </message>
 </context>
 <context>
@@ -4082,12 +4084,12 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="78"/>
         <source>additive synthesis</source>
-        <translation>첨가 합성</translation>
+        <translation>덧셈 합성</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="79"/>
         <source>subtrative synthesis</source>
-        <translation>감산 합성</translation>
+        <translation>뺄셈 합성</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="80"/>
@@ -4187,12 +4189,12 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="101"/>
         <source>detuned</source>
-        <translation>조정된</translation>
+        <translation>음정 이탈된</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="102"/>
         <source>dissonant</source>
-        <translation>불협화음</translation>
+        <translation>불협화음의</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="103"/>
@@ -4202,12 +4204,12 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="104"/>
         <source>metallic</source>
-        <translation>금속성</translation>
+        <translation>금속성의</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="105"/>
         <source>wooden</source>
-        <translation>목재</translation>
+        <translation>목재의</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="106"/>
@@ -4232,7 +4234,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="112"/>
         <source>long release</source>
-        <translation>길게 누름</translation>
+        <translation>긴 릴리즈</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="113"/>
@@ -4242,12 +4244,12 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="114"/>
         <source>long / evolving</source>
-        <translation>긴 / 진화하는</translation>
+        <translation>길게 지속되는 / 진화하는</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="115"/>
         <source>pulsating</source>
-        <translation>맥동치는</translation>
+        <translation>맥동하는</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="116"/>
@@ -4292,7 +4294,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="124"/>
         <source>expressive</source>
-        <translation>풍부한</translation>
+        <translation>표현적인</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="125"/>
@@ -4307,7 +4309,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="129"/>
         <source>classic music</source>
-        <translation>고전 음악</translation>
+        <translation>클래식 음악</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="130"/>
@@ -4323,7 +4325,7 @@ Both divisions must share the same note and velocity ranges.</source>
         <location filename="repository/repositorymanager.cpp" line="132"/>
         <location filename="repository/repositorymanager.cpp" line="133"/>
         <source>ambient music</source>
-        <translation>은은한 음악</translation>
+        <translation>앰비언트 음악</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="134"/>
@@ -4338,12 +4340,12 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="136"/>
         <source>D&apos;n&apos;B / breaks</source>
-        <translation>D&apos;n&apos;B / 브레이크</translation>
+        <translation>드럼 앤 베이스 / 브레이크</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="137"/>
         <source>industrial</source>
-        <translation>도발적</translation>
+        <translation>인더스트리얼</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="138"/>
@@ -4363,7 +4365,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="141"/>
         <source>latin / afro-cuban</source>
-        <translation>라틴 / 쿠바</translation>
+        <translation>라틴 / 아프로쿠반</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="142"/>
@@ -4394,42 +4396,42 @@ Both divisions must share the same note and velocity ranges.</source>
         <location filename="repository/repositorymanager.cpp" line="147"/>
         <location filename="repository/repositorymanager.cpp" line="148"/>
         <source>ethnic / world</source>
-        <translation>민족 / 세계</translation>
+        <translation>민속 / 월드</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="165"/>
         <source>public domain</source>
-        <translation>공공저작물</translation>
+        <translation>공개 도메인</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="166"/>
         <source>give credit</source>
-        <translation>제작자 표시</translation>
+        <translation>출처 표기</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="167"/>
         <source>give credit, don&apos;t distribute with more restrictions</source>
-        <translation>제작자 표시, 다른 제한으로 배포 불가</translation>
+        <translation>출처 표기, 더 많은 제한과 함께 배포 금지</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="168"/>
         <source>don&apos;t distribute a modified version</source>
-        <translation>수정된 버전 배포 불가</translation>
+        <translation>수정된 버전 배포 금지</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="169"/>
         <source>personal use</source>
-        <translation>개인적 사용</translation>
+        <translation>개인적인 용도</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="170"/>
         <source>personal use, don&apos;t distribute with more restrictions</source>
-        <translation>개인적 사용, 다른 제한으로 배포 불가</translation>
+        <translation>개인적인 용도, 더 많은 제한과 함께 배포 금지</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="171"/>
         <source>personal use, don&apos;t distribute a modified version</source>
-        <translation>개인적 사용, 수정된 버전 배포 불가</translation>
+        <translation>개인적인 용도, 수정된 버전 배포 금지</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="386"/>
@@ -4464,12 +4466,12 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="404"/>
         <source>plucked strings</source>
-        <translation>뜯는 현악기</translation>
+        <translation>발현악기</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="407"/>
         <source>bowed strings</source>
-        <translation>활 현악기</translation>
+        <translation>찰현악기</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="410"/>
@@ -4484,7 +4486,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="416"/>
         <source>brass</source>
-        <translation>브라스</translation>
+        <translation>금관악기</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="419"/>
@@ -4494,22 +4496,22 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="422"/>
         <source>unpitched percussion</source>
-        <translation>무음계 타악기</translation>
+        <translation>무음정 타악기</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="425"/>
         <source>melodic percussion</source>
-        <translation>음계 타악기</translation>
+        <translation>유음정 타악기</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="428"/>
         <source>sound effect</source>
-        <translation>사운드 효과</translation>
+        <translation>음향 효과</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="431"/>
         <source>soundscape</source>
-        <translation>소리</translation>
+        <translation>사운드스케이프</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="434"/>
@@ -4524,7 +4526,7 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="440"/>
         <source>unclassifiable</source>
-        <translation>미분류 악기</translation>
+        <translation>미분류</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="447"/>
@@ -4539,12 +4541,12 @@ Both divisions must share the same note and velocity ranges.</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="478"/>
         <source>Your account has been banned.</source>
-        <translation>당신의 계정은 정지됐습니다.</translation>
+        <translation>당신의 계정은 정지되었습니다.</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="483"/>
         <source>A Premium account allows you to browse and download all soundfonts available online.</source>
-        <translation>프리미엄 계정을 사용하면 온라인에서 사용할 수있 는 모든 사운드폰트를 찾고 내려받을 수 있습니다.</translation>
+        <translation>프리미엄 계정을 사용하면 온라인에서 사용할 수있는 모든 사운드폰트를 탐색하고 다운로드할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="492"/>
@@ -4559,7 +4561,7 @@ Both divisions must share the same note and velocity ranges.</source>
         <source>Oops! Cannot
 download the list</source>
         <translation>이런! 목록을
-내려받을 수 없음</translation>
+다운로드할 수 없음</translation>
     </message>
 </context>
 <context>
@@ -4602,12 +4604,12 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="470"/>
         <source>Tags</source>
-        <translation>꼬리표</translation>
+        <translation>태그</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="205"/>
         <source>Search a soundfont...</source>
-        <translation>사운드폰트 찾기...</translation>
+        <translation>사운드폰트 검색...</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="257"/>
@@ -4622,7 +4624,7 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="304"/>
         <source>Subscribe to a Premium account to get all the features!</source>
-        <translation>프리미엄 계정을 구독해 모든 기능을 얻으세요!</translation>
+        <translation>모든 기능을 사용하려면 프리미엄 계정을 구독하세요!</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="159"/>
@@ -4644,7 +4646,7 @@ download the list</source>
         <source>Oops! Cannot
 download the list</source>
         <translation>이런! 목록을
-내려받을 수 없음</translation>
+다운로드할 수 없음</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.cpp" line="140"/>
@@ -4654,7 +4656,7 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.cpp" line="141"/>
         <source>share after editing</source>
-        <translation>수정한 후 공유</translation>
+        <translation>편집 후 공유</translation>
     </message>
 </context>
 <context>
@@ -4670,7 +4672,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontdownloadcell.ui" line="72"/>
         <source>Download</source>
-        <translation>내려받기</translation>
+        <translation>다운로드</translation>
     </message>
 </context>
 <context>
@@ -4693,7 +4695,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorcenter.cpp" line="74"/>
         <source>At least one file must be uploaded.</source>
-        <translation>하나 이상의 파일을 올려야 합니다.</translation>
+        <translation>하나 이상의 파일을 업로드해야 합니다.</translation>
     </message>
 </context>
 <context>
@@ -4712,7 +4714,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
         <source>File to upload</source>
-        <translation>올리기할 파일</translation>
+        <translation>업로드할 파일</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorfiles.cpp" line="125"/>
@@ -4745,7 +4747,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="113"/>
         <source>Tags</source>
-        <translation>꼬리표</translation>
+        <translation>태그</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="177"/>
@@ -4755,7 +4757,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="184"/>
         <source>Website...</source>
-        <translation>누리집...</translation>
+        <translation>웹사이트...</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfonteditorleft.ui" line="197"/>
@@ -4825,7 +4827,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="104"/>
         <source>Replace</source>
-        <translation>대체</translation>
+        <translation>교체</translation>
     </message>
     <message>
         <location filename="repository/soundfont/editor/soundfontfilecell.ui" line="44"/>
@@ -4845,17 +4847,17 @@ download the list</source>
         <source>Oops! Cannot
 download content</source>
         <translation>이런! 콘텐츠를
-내려받을 수 없음</translation>
+다운로드할 수 없음</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="512"/>
         <source>Discard changes</source>
-        <translation>변경사항을 취소</translation>
+        <translation>변경 사항 취소</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="540"/>
         <source>Submit the changes</source>
-        <translation>변경사항을 제출</translation>
+        <translation>변경 사항 제출</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="201"/>
@@ -4868,7 +4870,7 @@ download content</source>
     <message>
         <location filename="repository/soundfont/soundfontviewer.cpp" line="287"/>
         <source>The upload failed: %1</source>
-        <translation>올리기 실패: %1</translation>
+        <translation>업로드 실패: %1</translation>
     </message>
 </context>
 <context>
@@ -4886,7 +4888,7 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewercenter.ui" line="93"/>
         <source>Downloads</source>
-        <translation>내려받기</translation>
+        <translation>다운로드</translation>
     </message>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewercenter.ui" line="129"/>
@@ -4929,7 +4931,7 @@ download content</source>
     <message>
         <location filename="repository/soundfont/viewer/soundfontviewerleft.ui" line="257"/>
         <source>Tags</source>
-        <translation>꼬리표</translation>
+        <translation>태그</translation>
     </message>
 </context>
 <context>
@@ -4945,7 +4947,7 @@ download content</source>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="106"/>
         <source>Settings</source>
-        <translation>환경설정</translation>
+        <translation>설정</translation>
     </message>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="133"/>
@@ -4961,7 +4963,7 @@ download content</source>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="204"/>
         <source>Online repository</source>
-        <translation>온라인 레퍼지토리</translation>
+        <translation>온라인 저장소</translation>
     </message>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="242"/>
@@ -4976,7 +4978,7 @@ download content</source>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="246"/>
         <source>File &quot;%1&quot; has been modified.</source>
-        <translation>&quot;%1&quot; 파일이 변경됐습니다.</translation>
+        <translation>&quot;%1&quot; 파일이 변경되었습니다.</translation>
     </message>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="249"/>
@@ -4996,7 +4998,7 @@ download content</source>
     <message>
         <location filename="mainwindow/tabmanager.cpp" line="361"/>
         <source>User area</source>
-        <translation>사용자 공간</translation>
+        <translation>사용자 영역</translation>
     </message>
 </context>
 <context>
@@ -5014,7 +5016,7 @@ download content</source>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="68"/>
         <source>solo on selection</source>
-        <translation>선택 부분 솔로</translation>
+        <translation>선택 솔로</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="63"/>
@@ -5107,7 +5109,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="context/thememanager.cpp" line="605"/>
         <source>Good night</source>
-        <translation>밤</translation>
+        <translation>굿나잇</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="618"/>
@@ -5121,7 +5123,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
         <source>Sample auto-positioning</source>
         <oldsource>Automatically link the samples</oldsource>
-        <translation>샘플을 자동으로 연결</translation>
+        <translation>샘플 자동 배치</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="45"/>
@@ -5149,7 +5151,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="47"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>루프 / 재생</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="65"/>
@@ -5203,7 +5205,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="97"/>
         <source>Division to the next octave</source>
-        <translation>다음 옥타브로 분류</translation>
+        <translation>다음 옥타브 분할</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="58"/>
@@ -5273,7 +5275,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">샘플 처리</translation>
+        <translation>오디오 처리</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="61"/>
@@ -5435,7 +5437,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="335"/>
         <source>Inversion number</source>
-        <translation>반행 번호</translation>
+        <translation>전위 번호</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="363"/>
@@ -5475,20 +5477,20 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="108"/>
         <source>%1 and %2 have been deleted.</source>
         <comment>[X sample(s)] and [Y instrument(s)] have been deleted.</comment>
-        <translation>%1 and %2 have been deleted.</translation>
+        <translation>%1 및 %2가 삭제되었습니다.</translation>
     </message>
     <message numerus="yes">
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="109"/>
         <source>%n sample(s)</source>
         <translation>
-            <numerusform>%n sample</numerusform>
+            <numerusform>%n개의 샘플</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="110"/>
         <source>%n instrument(s)</source>
         <translation>
-            <numerusform>%n instrument</numerusform>
+            <numerusform>%n개의 악기</numerusform>
         </translation>
     </message>
     <message>
@@ -5561,7 +5563,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="63"/>
         <source>Division duplication</source>
-        <translation>분류 복제</translation>
+        <translation>분할 복제</translation>
     </message>
 </context>
 <context>
@@ -5569,7 +5571,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="30"/>
         <source>A division for each velocity range</source>
-        <translation>각 벨로시티 범위에 대한 분류</translation>
+        <translation>각 벨로시티 범위에 대한 분할</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="143"/>
@@ -5584,7 +5586,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="20"/>
         <source>A division for each key</source>
-        <translation>각 키에 대한 분류</translation>
+        <translation>각 키에 대한 분할</translation>
     </message>
 </context>
 <context>
@@ -5592,7 +5594,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="106"/>
         <source>Couldn&apos;t export the sample.</source>
-        <translation type="unfinished"></translation>
+        <translation>샘플을 내보낼 수 없습니다.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="126"/>
@@ -5608,7 +5610,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="48"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">샘플 처리</translation>
+        <translation>오디오 처리</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="66"/>
@@ -5685,7 +5687,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/fast_edit_smpl/toolfasteditsmpl.h" line="61"/>
         <source>Shift a parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>매개변수 변경</translation>
     </message>
 </context>
 <context>
@@ -5722,7 +5724,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">샘플 처리</translation>
+        <translation>오디오 처리</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
@@ -5917,7 +5919,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="153"/>
         <source>Manual</source>
-        <translation>설명서</translation>
+        <translation>수동</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="158"/>
@@ -5993,7 +5995,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.h" line="62"/>
         <source>Load a parameter from the instruments</source>
-        <translation type="unfinished"></translation>
+        <translation>악기에서 매개변수 불러오기</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="296"/>
@@ -6004,8 +6006,8 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/load_from_inst/toolloadfrominst.cpp" line="301"/>
         <source>Couldn&apos;t configure %n sample(s).</source>
         <oldsource>Couln&apos;t configure %n sample(s).</oldsource>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n개의 샘플을 설정할 수 없습니다.</numerusform>
         </translation>
     </message>
 </context>
@@ -6029,7 +6031,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="41"/>
         <source>Loop start / loop end</source>
-        <translation>루프 시작 / 루프 끝까</translation>
+        <translation>루프 시작 / 루프 끝</translation>
     </message>
     <message>
         <location filename="editor/tools/load_from_inst/toolloadfrominst_gui.ui" line="63"/>
@@ -6047,13 +6049,13 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>루프 / 재생</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade.h" line="61"/>
         <source>Cross-fade loop</source>
         <oldsource>Crossfade loop</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>크로스페이드 루프</translation>
     </message>
 </context>
 <context>
@@ -6061,23 +6063,23 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="20"/>
         <source>Crossfade duration</source>
-        <translation type="unfinished"></translation>
+        <translation>크로스페이드 지속 시간</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="29"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">확인(&amp;O)</translation>
+        <translation>확인(&amp;O)</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="49"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">취소(&amp;C)</translation>
+        <translation>취소(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tools/loop_crossfade/toolloopcrossfade_gui.ui" line="58"/>
         <source> ms</source>
         <comment>Unit for milliseconds</comment>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
 </context>
 <context>
@@ -6085,17 +6087,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.cpp" line="66"/>
         <source>The preset doesn&apos;t trigger any samples.</source>
-        <translation type="unfinished"></translation>
+        <translation>프리셋이 아무 샘플도 트리거하지 않습니다.</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="47"/>
         <source>Transformation</source>
-        <translation type="unfinished">변환</translation>
+        <translation>변환</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.h" line="62"/>
         <source>Merge samples for each note</source>
-        <translation type="unfinished"></translation>
+        <translation>각 노트에 대한 샘플 병합</translation>
     </message>
 </context>
 <context>
@@ -6105,62 +6107,62 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="102"/>
         <source> s</source>
         <comment>unit for second</comment>
-        <translation type="unfinished"> 초</translation>
+        <translation> 초</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="38"/>
         <source>Sample creation:</source>
-        <translation type="unfinished">샘플 생성:</translation>
+        <translation>샘플 생성:</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="45"/>
         <source>Stereo</source>
-        <translation type="unfinished">스테레오</translation>
+        <translation>스테레오</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="59"/>
         <source>Sustain duration</source>
-        <translation type="unfinished"></translation>
+        <translation>서스테인 지속 시간</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="66"/>
         <source>Auto loop</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 루프</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="77"/>
         <source>for every key</source>
-        <translation type="unfinished">모든 키에</translation>
+        <translation>모든 키에</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="82"/>
         <source>every 3 keys</source>
-        <translation type="unfinished">세 키마다</translation>
+        <translation>세 키마다</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="87"/>
         <source>every 6 keys</source>
-        <translation type="unfinished">여섯 키마다</translation>
+        <translation>여섯 키마다</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="95"/>
         <source>Preset name:</source>
-        <translation type="unfinished"></translation>
+        <translation>프리셋 이름:</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="112"/>
         <source>Release duration</source>
-        <translation type="unfinished"></translation>
+        <translation>릴리즈 지속 시간</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="136"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">확인(&amp;O)</translation>
+        <translation>확인(&amp;O)</translation>
     </message>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples_gui.ui" line="156"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">취소(&amp;C)</translation>
+        <translation>취소(&amp;C)</translation>
     </message>
 </context>
 <context>
@@ -6221,7 +6223,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="89"/>
         <source>Divisions</source>
-        <translation>분류</translation>
+        <translation>분할</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="242"/>
@@ -6368,17 +6370,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="174"/>
         <source>Defined value in the global division</source>
-        <translation type="unfinished"></translation>
+        <translation>글로벌 분할에 정의된 값</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="189"/>
         <source>Default value for the selected parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>선택한 매개변수의 기본값</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="201"/>
         <source>Defined value in a division</source>
-        <translation type="unfinished"></translation>
+        <translation>분할에 정의된 값</translation>
     </message>
 </context>
 <context>
@@ -6432,7 +6434,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/release/toolrelease.h" line="61"/>
         <source>Natural release</source>
-        <translation>자연스럽게</translation>
+        <translation>자연스러운 릴리즈</translation>
     </message>
 </context>
 <context>
@@ -6450,7 +6452,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="70"/>
         <source>Division to the next octave</source>
-        <translation>다음 옥타브로 분류</translation>
+        <translation>다음 옥타브 분할</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="116"/>
@@ -6460,7 +6462,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.cpp" line="51"/>
         <source>Release time (key %1)</source>
-        <translation>누르는 시간 (키 %1)</translation>
+        <translation>릴리즈 시간 (키 %1)</translation>
     </message>
 </context>
 <context>
@@ -6469,7 +6471,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="118"/>
         <source>%n modulator(s) has(have) been deleted.</source>
         <translation>
-            <numerusform>%n modulator has been deleted.</numerusform>
+            <numerusform>%n개의 모듈레이터가 삭제되었습니다.</numerusform>
         </translation>
     </message>
     <message>
@@ -6574,17 +6576,17 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="66"/>
         <source>Division number</source>
-        <translation>분류 번호</translation>
+        <translation>분할 번호</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="121"/>
         <source>Offset (0-100)</source>
-        <translation>여백 (0-100)</translation>
+        <translation>오프셋 (0-100)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="181"/>
         <source>Filling (%)</source>
-        <translation>쌓아 올리기(%)</translation>
+        <translation>채우기(%)</translation>
     </message>
 </context>
 <context>
@@ -6665,7 +6667,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>one file per preset</source>
-        <translation type="unfinished"></translation>
+        <translation>프리셋당 한 개의 파일</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="166"/>
@@ -6747,7 +6749,7 @@ Other soundfont editors might display other units.</source>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="46"/>
         <source>Audio processing</source>
         <oldsource>Sample processing</oldsource>
-        <translation type="unfinished">샘플 처리</translation>
+        <translation>오디오 처리</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="61"/>
@@ -6801,7 +6803,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>루프 / 재생</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="64"/>
@@ -6814,7 +6816,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="46"/>
         <source>Loop / playback</source>
-        <translation type="unfinished"></translation>
+        <translation>루프 / 재생</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="67"/>
@@ -6845,7 +6847,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="118"/>
         <source>Download status</source>
-        <translation>다운로드</translation>
+        <translation>다운로드 상태</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="198"/>
@@ -6883,7 +6885,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeitemdelegate.cpp" line="241"/>
         <source>playing</source>
-        <translation type="unfinished"></translation>
+        <translation>재생 중</translation>
     </message>
 </context>
 <context>
@@ -6944,18 +6946,18 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="89"/>
         <source>Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>음소거</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="95"/>
         <source>Always play</source>
         <oldsource>Play along</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>항상 재생</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="101"/>
         <source>Restore playback</source>
-        <translation type="unfinished"></translation>
+        <translation>재생 복원</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="109"/>
@@ -6979,7 +6981,7 @@ Other soundfont editors might display other units.</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="261"/>
         <source>Cannot delete a sample used by another instrument.</source>
-        <translation>다른 프리셋에서 사용되는 샘플은 제거할 수 없습니다.</translation>
+        <translation>다른 악기에서 사용되는 샘플은 제거할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="264"/>
