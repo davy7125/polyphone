@@ -24,38 +24,201 @@
 
 #include "duplicationtool.h"
 #include <QVector>
+#include "soundfonts.h"
+#include "soundfont.h"
+#include "instprst.h"
+#include "division.h"
 
 DuplicationTool::DuplicationTool(EltID id) :
-    _sf2(SoundfontManager::getInstance()),
-    _id(id)
+    _sf2(SoundfontManager::getInstance())
 {
     _isInst = (id.typeElement == elementInstSmpl);
 
-    // List of elements per keyrange and velrange
-    foreach (int i, _sf2->getSiblings(_id))
+    // Browse directly in the model for speed
+    Soundfont * soundfont = _sf2->getSoundfonts()->getSoundfont(id.indexSf2);
+    InstPrst * elt = _isInst ? soundfont->getInstrument(id.indexElt) : soundfont->getPreset(id.indexElt);
+
+    // Keyrange / velrange specified in the global division
+    bool globalKeyRangeSet = elt->getGlobalDivision()->isSet(champ_keyRange);
+    RangesType globalKeyRange = globalKeyRangeSet ? elt->getGlobalDivision()->getGen(champ_keyRange).rValue : RangesType();
+    bool globalVelRangeSet = elt->getGlobalDivision()->isSet(champ_velRange);
+    RangesType globalVelRange = globalVelRangeSet ? elt->getGlobalDivision()->getGen(champ_velRange).rValue : RangesType();
+
+    // Sort all divisions by keyrange and velrange
+    RangesType keyRange, velRange;
+    foreach (Division * division, elt->getDivisions().values())
     {
-        EltID id = _id;
-        id.indexElt2 = i;
-        RangesType keyRange;
-        if (_sf2->isSet(id, champ_keyRange))
-            keyRange = _sf2->get(id, champ_keyRange).rValue;
-        else
+        if (division->isHidden())
+            continue;
+
+        // Key range
+        keyRange.byLo = 0;
+        keyRange.byHi = 127;
+
+        if (division->isSet(champ_keyRange))
+            keyRange = division->getGen(champ_keyRange).rValue;
+        else if (globalKeyRangeSet)
         {
-            keyRange.byLo = 0;
-            keyRange.byHi = 127;
+            // Maybe the key range is set in the global division
+            keyRange.byLo = globalKeyRange.byLo;
+            keyRange.byHi = globalKeyRange.byHi;
+        }
+        else if (!_isInst)
+        {
+            // Load the full key range from the linked instrument
+            InstPrst * instElt = soundfont->getInstrument(division->getGen(champ_instrument).wValue);
+            if (instElt != nullptr)
+                keyRange = getInstKeyRange(instElt);
         }
 
-        RangesType velRange;
-        if (_sf2->isSet(id, champ_velRange))
-            velRange = _sf2->get(id, champ_velRange).rValue;
-        else
+        if (keyRange.byHi < keyRange.byLo)
         {
-            velRange.byLo = 0;
-            velRange.byHi = 127;
+            quint8 tmp = keyRange.byHi;
+            keyRange.byHi = keyRange.byLo;
+            keyRange.byLo = tmp;
         }
 
-        _elts[QPair<int, int>(keyRange.byLo, keyRange.byHi)][QPair<int, int>(velRange.byLo, velRange.byHi)] << id;
+        // Vel range
+        velRange.byLo = 0;
+        velRange.byHi = 127;
+
+        if (division->isSet(champ_velRange))
+            velRange = division->getGen(champ_velRange).rValue;
+        else if (globalVelRangeSet)
+        {
+            // Maybe the vel range is set in the global division
+            velRange.byLo = globalVelRange.byLo;
+            velRange.byHi = globalVelRange.byHi;
+        }
+        else if (!_isInst)
+        {
+            // Load the full vel range from the linked instrument
+            InstPrst * instElt = soundfont->getInstrument(division->getGen(champ_instrument).wValue);
+            if (instElt != nullptr)
+                velRange = getInstVelRange(instElt);
+        }
+
+        if (velRange.byHi < velRange.byLo)
+        {
+            quint8 tmp = velRange.byHi;
+            velRange.byHi = velRange.byLo;
+            velRange.byLo = tmp;
+        }
+
+        // Store the division
+        _elts[QPair<int, int>(keyRange.byLo, keyRange.byHi)][QPair<int, int>(velRange.byLo, velRange.byHi)] << division->getId();
     }
+}
+
+RangesType DuplicationTool::getInstKeyRange(InstPrst * inst)
+{
+    if (_keyRangeByInst.contains(inst->getId().indexElt))
+        return _keyRangeByInst[inst->getId().indexElt];
+
+    // Initialization of the range
+    RangesType instKeyRange;
+    instKeyRange.byHi = 0;
+    instKeyRange.byLo = 127;
+
+    // Global key range of the instrument, if set
+    bool globalSet = inst->getGlobalDivision()->isSet(champ_keyRange);
+    RangesType globalKeyRange = globalSet ? inst->getGlobalDivision()->getGen(champ_keyRange).rValue : RangesType();
+
+    RangesType divRange;
+    foreach (Division * instDivision, inst->getDivisions().values())
+    {
+        if (instDivision->isHidden())
+            continue;
+
+        if (instDivision->isSet(champ_keyRange))
+            divRange = instDivision->getGen(champ_keyRange).rValue;
+        else if (globalSet)
+        {
+            divRange.byLo = globalKeyRange.byLo;
+            divRange.byHi = globalKeyRange.byHi;
+        }
+        else
+        {
+            divRange.byLo = 0;
+            divRange.byHi = 127;
+        }
+
+        if (divRange.byHi < divRange.byLo)
+        {
+            quint8 tmp = divRange.byHi;
+            divRange.byHi = divRange.byLo;
+            divRange.byLo = tmp;
+        }
+
+        // Merge
+        if (divRange.byLo < instKeyRange.byLo)
+            instKeyRange.byLo = divRange.byLo;
+        if (divRange.byHi > instKeyRange.byHi)
+            instKeyRange.byHi = divRange.byHi;
+    }
+
+    if (instKeyRange.byHi < instKeyRange.byLo)
+    {
+        instKeyRange.byLo = 0;
+        instKeyRange.byHi = 127;
+    }
+
+    _keyRangeByInst[inst->getId().indexElt] = instKeyRange;
+    return instKeyRange;
+}
+
+RangesType DuplicationTool::getInstVelRange(InstPrst * inst)
+{
+    if (_velRangeByInst.contains(inst->getId().indexElt))
+        return _velRangeByInst[inst->getId().indexElt];
+
+    // Initialization of the range
+    RangesType instVelRange;
+    instVelRange.byHi = 0;
+    instVelRange.byLo = 127;
+
+    // Global vel range of the instrument, if set
+    bool globalSet = inst->getGlobalDivision()->isSet(champ_velRange);
+    RangesType globalVelRange = globalSet ? inst->getGlobalDivision()->getGen(champ_velRange).rValue : RangesType();
+
+    RangesType divRange;
+    foreach (Division * instDivision, inst->getDivisions().values())
+    {
+        if (instDivision->isSet(champ_velRange))
+            divRange = instDivision->getGen(champ_velRange).rValue;
+        else if (globalSet)
+        {
+            divRange.byLo = globalVelRange.byLo;
+            divRange.byHi = globalVelRange.byHi;
+        }
+        else
+        {
+            divRange.byLo = 0;
+            divRange.byHi = 127;
+        }
+
+        if (divRange.byHi < divRange.byLo)
+        {
+            quint8 tmp = divRange.byHi;
+            divRange.byHi = divRange.byLo;
+            divRange.byLo = tmp;
+        }
+
+        // Merge
+        if (divRange.byLo < instVelRange.byLo)
+            instVelRange.byLo = divRange.byLo;
+        if (divRange.byHi > instVelRange.byHi)
+            instVelRange.byHi = divRange.byHi;
+    }
+
+    if (instVelRange.byHi < instVelRange.byLo)
+    {
+        instVelRange.byLo = 0;
+        instVelRange.byHi = 127;
+    }
+
+    _velRangeByInst[inst->getId().indexElt] = instVelRange;
+    return instVelRange;
 }
 
 void DuplicationTool::duplicateByKey()

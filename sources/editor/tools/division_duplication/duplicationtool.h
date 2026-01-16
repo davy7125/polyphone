@@ -27,6 +27,7 @@
 
 #include "soundfontmanager.h"
 #include <QMap>
+class InstPrst;
 
 class DuplicationTool : QObject
 {
@@ -53,11 +54,14 @@ private:
     void duplicateGenMod(EltID idFrom, EltID idTo);
 
     SoundfontManager * _sf2;
-    EltID _id;
     QMap<QPair<int, int>, QMap<QPair<int, int>, QList<EltID> > > _elts;
     bool _isInst;
+    QMap<int, RangesType > _keyRangeByInst;
+    QMap<int, RangesType > _velRangeByInst;
 
     static bool lessThan(QPair<int, int> elt1, QPair<int, int> elt2);
+    RangesType getInstKeyRange(InstPrst * inst);
+    RangesType getInstVelRange(InstPrst * inst);
 };
 
 #endif // DUPLICATIONTOOL_H
