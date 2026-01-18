@@ -563,7 +563,7 @@ void OutputSf::loadGens(EltID idGen, EltID idDiv, QList<Sf2PdtaPart_gen> &gens, 
         attributes.append(champ_instrument);
     }
 
-    foreach (int attribute, _sm->getSiblings(idGen))
+    foreach (int attribute, attributes)
     {
         gens[index]._sfGenOper = attribute;
         gens[index]._genAmount =
