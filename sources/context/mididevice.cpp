@@ -65,7 +65,7 @@ void midiCallback(double deltatime, std::vector<unsigned char> *message, void *u
         break;
     case 0xE0: // BEND
         // First message is the value
-        instance->processBendChanged(message->at(0) & 0x0F, static_cast<float>(((message->at(2) << 7) | message->at(1)) - 8192) / 8192.0f);
+        instance->processBendChanged(message->at(0) & 0x0F, (static_cast<float>((message->at(2) << 7) | message->at(1)) - 8192.0f) / 8192.0f);
         break;
     default:
         // qDebug() << "unknown MIDI event" << (message->at(0) & 0xF0) << "for channel" << (message->at(0) & 0x0F);
