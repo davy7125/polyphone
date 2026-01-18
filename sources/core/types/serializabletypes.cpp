@@ -69,7 +69,7 @@ QDataStream & operator >> (QDataStream &in, qint16Reversed &val)
 
 QDataStream & operator << (QDataStream &out, qint16Reversed &val)
 {
-    quint8 b0 = val.value && 0xFF;
+    quint8 b0 = val.value & 0xFF;
     quint8 b1 = (val.value >> 8) & 0xFF;
     out << b0 << b1;
     return out;
