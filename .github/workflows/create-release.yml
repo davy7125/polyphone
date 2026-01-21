@@ -76,7 +76,7 @@ jobs:
           name: Polyphone ${{ env.VERSION }}
           tag_name: ${{ env.VERSION }}
           body: ${{ steps.changelog.outputs.body }}
-          draft: ${{ contains(env.VERSION, 'test')
+          draft: ${{ contains(env.VERSION, 'test') }}
           prerelease: ${{ contains(env.VERSION, 'beta') || contains(env.VERSION, 'alpha') }}
           files: |
             artifacts/polyphone-windows-installer/*
