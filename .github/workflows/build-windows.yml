@@ -115,7 +115,7 @@ jobs:
 
       - name: Create installer
         run: |
-          iscc /DMyAppVersion=${{ env.VERSION }} /DSourceDir=../../deploy packaging/windows/polyphone.iss
+          iscc /DMyAppVersion=$env:VERSION /DSourceDir=../../deploy packaging/windows/polyphone.iss
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

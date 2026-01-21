@@ -62,7 +62,7 @@ jobs:
         run: |
           cd sources
           macdeployqt ../macos/polyphone.app -dmg
-          mv ../macos/polyphone.dmg ../macos/Polyphone_${{ env.VERSION }}-macOS.dmg
+          mv ../macos/polyphone.dmg ../macos/Polyphone_${VERSION}-macOS.dmg
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

@@ -24,10 +24,16 @@ jobs:
       - name: Inject version in .desktop
         run: |
           DESKTOP_FILE=packaging/io.polyphone.polyphone.desktop
+          CLEAN_VERSION=$(echo "$VERSION" | grep -oE '^[0-9]+\.[0-9]+(\.[0-9]+)?')
+          if [ -z "$CLEAN_VERSION" ]; then
+            echo "Erreur : version '$VERSION' invalide pour .desktop"
+            exit 1
+          fi
+
           if grep -q '^Version=' "$DESKTOP_FILE"; then
-            sed -i "s/^Version=.*/Version=$VERSION/" "$DESKTOP_FILE"
+            sed -i "s/^Version=.*/Version=$CLEAN_VERSION/" "$DESKTOP_FILE"
           else
-            echo "Version=$VERSION" >> "$DESKTOP_FILE"
+            echo "Version=$CLEAN_VERSION" >> "$DESKTOP_FILE"
           fi
 
       - name: Update metainfo XML
