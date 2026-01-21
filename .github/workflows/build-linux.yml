@@ -15,8 +15,8 @@ jobs:
     runs-on: ubuntu-24.04
     
     steps:
-      - name: Set VERSION from tag
-        run: echo "VERSION=${{ inputs.tag }}" >> $GITHUB_ENV
+      - name: Set TAG_VERSION from tag
+        run: echo "TAG_VERSION=${{ inputs.tag }}" >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,21 +24,20 @@ jobs:
       - name: Inject version in .desktop
         run: |
           DESKTOP_FILE=packaging/io.polyphone.polyphone.desktop
-          CLEAN_VERSION=$(echo "$VERSION" | grep -oE '^[0-9]+\.[0-9]+(\.[0-9]+)?')
-          if [ -z "$CLEAN_VERSION" ]; then
-            echo "Erreur : version '$VERSION' invalide pour .desktop"
+          SHORT_VERSION=$(echo "$TAG_VERSION" | grep -oE '^[0-9]+\.[0-9]+')
+          if [ -z "$SHORT_VERSION" ]; then
+            echo "Erreur : version '$TAG_VERSION' invalide pour .desktop"
             exit 1
           fi
-
           if grep -q '^Version=' "$DESKTOP_FILE"; then
-            sed -i "s/^Version=.*/Version=$CLEAN_VERSION/" "$DESKTOP_FILE"
+            sed -i "s/^Version=.*/Version=$SHORT_VERSION/" "$DESKTOP_FILE"
           else
-            echo "Version=$CLEAN_VERSION" >> "$DESKTOP_FILE"
+            echo "Version=$SHORT_VERSION" >> "$DESKTOP_FILE"
           fi
 
       - name: Update metainfo XML
         run: |
-          SHORT_VERSION=$(echo "$VERSION" | sed -E 's/^([0-9]+\.[0-9]+).*/\1/')
+          SHORT_VERSION=$(echo "$TAG_VERSION" | grep -oE '^[0-9]+\.[0-9]+')
           TODAY=$(date +%F)
           URL="https://www.polyphone.io/en/news/version-$SHORT_VERSION"
           METAFILE="packaging/io.polyphone.polyphone.metainfo.xml"

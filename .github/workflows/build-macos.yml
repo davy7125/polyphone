@@ -15,15 +15,15 @@ jobs:
     runs-on: macos-15
     
     steps:
-      - name: Set VERSION from tag
-        run: echo "VERSION=${{ inputs.tag }}" >> $GITHUB_ENV
+      - name: Set TAG_VERSION from tag
+        run: echo "TAG_VERSION=${{ inputs.tag }}" >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v4
         
       - name: Update macOS plist version
         run: |
-          NUMERIC_VERSION=$(echo "$VERSION" | sed -E 's/^([0-9]+\.[0-9]+)(\.([0-9]+))?.*/\1.\3/')
+          NUMERIC_VERSION=$(echo "$TAG_VERSION" | sed -E 's/^([0-9]+\.[0-9]+)(\.([0-9]+))?.*/\1.\3/')
           PATCH=$(echo "$NUMERIC_VERSION" | cut -d. -f3)
           if [ -z "$PATCH" ]; then
             NUMERIC_VERSION="${NUMERIC_VERSION}0"
@@ -62,7 +62,7 @@ jobs:
         run: |
           cd sources
           macdeployqt ../macos/polyphone.app -dmg
-          mv ../macos/polyphone.dmg ../macos/Polyphone_${VERSION}-macOS.dmg
+          mv ../macos/polyphone.dmg ../macos/Polyphone_$TAG_VERSION-macOS.dmg
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
