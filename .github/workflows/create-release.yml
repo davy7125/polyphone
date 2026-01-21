@@ -67,9 +67,9 @@ jobs:
           print("\n".join(md))
           print("EOF")
           EOF
-          shell: bash
-          env:
-            PYTHONUTF8: 1
+        shell: bash
+        env:
+          PYTHONUTF8: 1
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
