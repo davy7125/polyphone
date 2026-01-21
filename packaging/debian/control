@@ -1,0 +1,53 @@
+Source: polyphone
+Section: sound
+Priority: optional
+Maintainer: Davy Triponney <contact@polyphone.io>
+Build-Depends:
+ alsa-utils,
+ debhelper (>= 9.0.0),
+ dpkg-dev (>= 1.16.1~),
+ libasound2-dev,
+ libjack-jackd2-dev,
+ libogg-dev,
+ libqt6svg6-dev,
+ librtmidi-dev,
+ libstk-dev,
+ libvorbis-dev,
+ librtaudio-dev,
+ qt6-base-dev,
+ zlib1g-dev,
+ libssl-dev,
+ libflac-dev,
+ libsndfile-dev,
+Standards-Version: 3.9.6
+Homepage: https://www.polyphone.io
+
+Package: polyphone
+Architecture: any
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends}
+Description: soundfont editor
+ Turn any sound into a playable instrument with the help of SoundFonts.
+ These files contain a multitude of audio samples put together and
+ configured so as to form musical instruments that can be used by
+ synthesizers such as FluidSynth and played using a MIDI keyboard.
+ The goal of Polyphone is to provide:
+  - a simple and efficient interface for creating and editing soundfonts,
+ available on Linux, Windows and Mac OS X,
+  - tools to facilitate and automate the setting of different parameters,
+ making it possible to handle a large amount of data.
+ .
+ Main features:
+  - import from sf2, sf3, sfz, sfArk, GrandOrgue dispositions,
+  - export as sf2, sfz, sf3,
+  - support of sf2 format v2.01 and v2.04 (with 24-bit samples),
+  - support for Jack and ASIO audio servers,
+  - simultaneous editing of parameters,
+  - specific tools for musical instrument creation,
+  - automatic detection of the sample pitch and correction,
+  - automatic loop of samples,
+  - a recorder, for the record of what is played in a .wav file,
+  - built-in synthesizer, using a virtual keyboard or MIDI signals,
+  - user manual, forum and online soundfont repository,
+  - available in several languages.

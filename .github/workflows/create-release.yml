@@ -1,0 +1,137 @@
+name: Create release
+
+on:
+  workflow_run:
+    workflows:
+      - Build Polyphone for Windows
+      - Build Polyphone for Linux
+      - Build Polyphone for MacOS
+    types:
+      - completed
+
+jobs:
+  check-builds:
+    runs-on: ubuntu-latest
+    outputs:
+      all-success: ${{ steps.check.outputs.result }}
+
+    steps:
+      - name: Check all builds completed successfully
+        id: check
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const workflows = ['build-windows', 'build-linux', 'build-macos'];
+            const sha = context.payload.workflow_run.head_sha;
+            
+            for (const workflow of workflows) {
+              const runs = await github.rest.actions.listWorkflowRuns({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: `${workflow}.yml`,
+                head_sha: sha,
+                per_page: 1
+              });
+
+              const latestRun = runs.data.workflow_runs[0];
+
+              if (!latestRun || latestRun.status !== 'completed' || latestRun.conclusion !== 'success') {
+                console.log(`${workflow}: not ready (status: ${latestRun?.status}, conclusion: ${latestRun?.conclusion})`);
+                return 'false';
+              }
+
+              console.log(`${workflow}: success`);
+            }
+
+            return 'true';
+            
+  create-release:
+    needs: check-builds
+    if: needs.check-builds.outputs.all-success == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Extract version from changelog
+        id: version
+        run: |
+          VERSION=$(head -n 1 sources/changelog | grep -oP 'polyphone \(\K[^)]+')
+          if [ -z "$VERSION" ]; then
+            echo "Error: cannot extract version from sources/changelog"
+            exit 1
+          fi
+          
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+          
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Display structure of downloaded files
+        run: ls -la artifacts/
+        
+      - name: Generate release notes from changelog
+        id: changelog
+        run: |
+          python << 'EOF'
+          from pathlib import Path
+          text = Path("sources/changelog").read_text(encoding="utf-8").splitlines()
+          
+          news = []
+          improvements = []
+          fixes = []
+
+          for line in text:
+            line = line.strip()
+            if line.startswith("-- "):
+              break
+            if line.startswith("*"):
+              if "(new)" in line:
+                news.append(line.split(")", 1)[1].strip())
+              elif "(improvement)" in line:
+                improvements.append(line.split(")", 1)[1].strip())
+              elif "(fix)" in line:
+                fixes.append(line.split(")", 1)[1].strip())
+
+          md = []
+          if news:
+            md.append("# New\n")
+            md += [f"- {n}" for n in news]
+            md.append("")
+          if improvements:
+            md.append("# Improvement\n")
+            md += [f"- {i}" for i in improvements]
+            md.append("")
+          if fixes:
+            md.append("# Fix\n")
+            md += [f"- {f}" for f in fixes]
+
+          print("body<<EOF")
+          print("\n".join(md))
+          print("EOF")
+          EOF
+          shell: bash
+          env:
+            PYTHONUTF8: 1
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Polyphone ${{ env.VERSION }}
+          tag_name: ${{ env.VERSION }}
+          body: ${{ steps.changelog.outputs.body }}
+          draft: ${{ contains(env.VERSION, 'test')
+          prerelease: ${{ contains(env.VERSION, 'beta') || contains(env.VERSION, 'alpha') }}
+          files: |
+            artifacts/polyphone-windows-installer/*
+            artifacts/polyphone-linux-appimage/*
+            artifacts/polyphone-macos-installer/*

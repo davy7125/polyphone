@@ -108,13 +108,13 @@ unix:!macx {
     install_image_png.path = $$PREFIX/share/icons/hicolor/512x512/apps
     install_image_png.files = resources/polyphone.png
     install_desktop.path = $$PREFIX/share/applications
-    install_desktop.files = contrib/io.polyphone.polyphone.desktop
+    install_desktop.files = ../packaging/io.polyphone.polyphone.desktop
     install_appdata.path = $$PREFIX/share/metainfo
-    install_appdata.files = contrib/io.polyphone.polyphone.metainfo.xml
+    install_appdata.files = ../packaging/io.polyphone.polyphone.metainfo.xml
     install_mime.path = $$PREFIX/share/mime/packages
-    install_mime.files = contrib/polyphone.xml
+    install_mime.files = ../packaging/polyphone.xml
     install_man.path = $$PREFIX/share
-    install_man.files = contrib/man
+    install_man.files = ../packaging/man
     install_doc.path = $$PREFIX/share/doc/polyphone
     install_doc.files = ../README.md changelog
     
@@ -125,17 +125,16 @@ unix:!macx {
     QMAKE_LFLAGS_RPATH=
 }
 macx {
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.13
-    QMAKE_MAC_SDK = macosx14.4
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.15
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __MACOSX_CORE__ TARGET_OS_IPHONE=0
-    INCLUDEPATH += ../macos/include
-    LIBS += -L$$PWD/../macos/lib -lssl -lcrypto -lz \
+    INCLUDEPATH += ../macos/include /opt/homebrew/include
+    LIBS += -L$$PWD/../macos/lib -L/opt/homebrew/lib -lssl -lcrypto -lz \
         -lsndfile -lopus -lmpg123 -logg -lFLAC -lvorbis -lvorbisfile -lvorbisenc -lmp3lame \
         -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
         -framework AudioUnit -framework AudioToolbox -framework Cocoa
-    ICON = contrib/mac/polyphone.icns
-    QMAKE_INFO_PLIST = contrib/mac/polyphone.plist
+    ICON = ../packaging/mac/polyphone.icns
+    QMAKE_INFO_PLIST = ../packaging/mac/polyphone.plist
     DESTDIR = $$PWD/../macos
 }
 DEFINES += SFTOOLS_NOXML

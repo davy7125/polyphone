@@ -1,0 +1,124 @@
+name: Build Polyphone for Windows
+
+on:
+  push:
+    tags:
+      - '*'
+      
+env:
+  QT_VERSION: '6.6.2'
+  
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Set VERSION from tag
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Qt (MinGW)
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          host: windows
+          target: desktop
+          arch: win64_mingw
+
+      - name: Install MSYS2 and required libraries
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          install: >
+            mingw-w64-x86_64-toolchain
+            mingw-w64-x86_64-zlib
+            mingw-w64-x86_64-libogg
+            mingw-w64-x86_64-libvorbis
+            mingw-w64-x86_64-openssl
+            mingw-w64-x86_64-flac
+            mingw-w64-x86_64-libsndfile
+
+      - name: Configure with qmake
+        shell: msys2 {0}
+        run: |
+          export PATH="/mingw64/bin:$(cygpath -u "$QT_ROOT_DIR/bin"):$PATH"
+          mkdir build
+          cd build
+          qmake ../sources/polyphone.pro CONFIG+=release
+
+      - name: Build Polyphone
+        shell: msys2 {0}
+        run: |
+          cd build
+          mingw32-make -j$(nproc)
+          
+      - name: Prepare deployment with windeployqt
+        shell: cmd
+        run: |
+          mkdir deploy
+          copy windows\bin\polyphone.exe deploy\
+          "%QT_ROOT_DIR%\bin\windeployqt.exe" ^
+            --release ^
+            --no-translations ^
+            --no-system-d3d-compiler ^
+            --no-opengl-sw ^
+            deploy\polyphone.exe
+
+      - name: Copy MSYS2 dependencies
+        shell: msys2 {0}
+        run: |
+          MINGW_BIN="/mingw64/bin"
+          cp "$MINGW_BIN"/libgcc_s_seh-1.dll deploy/
+          cp "$MINGW_BIN"/libstdc++-6.dll deploy/
+          cp "$MINGW_BIN"/libwinpthread-1.dll deploy/
+          cp "$MINGW_BIN"/libsndfile-1.dll deploy/
+          cp "$MINGW_BIN"/libFLAC.dll deploy/
+          cp "$MINGW_BIN"/libogg-0.dll deploy/
+          cp "$MINGW_BIN"/libvorbis-0.dll deploy/
+          cp "$MINGW_BIN"/libvorbisenc-2.dll deploy/
+          cp "$MINGW_BIN"/libvorbisfile-3.dll deploy/
+          cp "$MINGW_BIN"/libopus-0.dll deploy/ 2>/dev/null || true
+          cp "$MINGW_BIN"/libmp3lame-0.dll deploy/ 2>/dev/null || true
+          cp "$MINGW_BIN"/libmpg123-0.dll deploy/ 2>/dev/null || true
+          cp "$MINGW_BIN"/libcrypto-3-x64.dll deploy/ 2>/dev/null || \
+          cp "$MINGW_BIN"/libcrypto-1_1-x64.dll deploy/ 2>/dev/null || true
+          cp "$MINGW_BIN"/libssl-3-x64.dll deploy/ 2>/dev/null || \
+          cp "$MINGW_BIN"/libssl-1_1-x64.dll deploy/ 2>/dev/null || true
+          cp "$MINGW_BIN"/zlib1.dll deploy/
+          cp "$MINGW_BIN"/libssp-0.dll deploy/ 2>/dev/null || true
+
+      - name: Copy installer resources
+        shell: cmd
+        run: |
+          copy LICENSE.txt deploy\license.txt 2>nul || echo "No license file"
+          copy packaging\windows\polyphone.ico deploy\ 2>nul || echo "No icon file"
+
+      - name: Install Inno Setup
+        run: choco install innosetup -y
+        
+      - name: Download Inno Setup extra translations
+        shell: pwsh
+        run: |
+          $url = "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/ChineseSimplified.isl"
+          $destination = "C:\Program Files (x86)\Inno Setup 6\Languages\ChineseSimplified.isl"
+          Invoke-WebRequest -Uri $url -OutFile $destination
+          Write-Host "ChineseSimplified.isl downloaded successfully"
+          
+          $url = "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/SerbianCyrillic.isl"
+          $destination = "C:\Program Files (x86)\Inno Setup 6\Languages\SerbianCyrillic.isl"
+          Invoke-WebRequest -Uri $url -OutFile $destination
+          Write-Host "SerbianCyrillic.isl downloaded successfully"
+
+      - name: Create installer
+        run: |
+          iscc /DMyAppVersion=${{ env.VERSION }} /DSourceDir=../../deploy packaging/windows/polyphone.iss
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: polyphone-windows-installer
+          path: packaging/windows/*.exe
+          retention-days: 7
+          if-no-files-found: error

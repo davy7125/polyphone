@@ -1,0 +1,59 @@
+name: Build Polyphone for MacOS
+
+on:
+  push:
+    tags:
+      - '*'
+      
+env:
+  QT_VERSION: '6.6.2'
+
+jobs:
+  build-macos:
+    runs-on: macos-15
+    
+    steps:
+      - name: Set VERSION from tag
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          host: mac
+          target: desktop
+          arch: clang_64
+
+      - name: Install dependencies
+        run: |
+          brew install \
+            libsndfile \
+            libogg \
+            libvorbis \
+            flac \
+            lame \
+            mpg123 \
+            opus
+
+      - name: Build
+        run: |
+          cd sources
+          qmake polyphone.pro CONFIG+=release
+          make -j$(sysctl -n hw.ncpu)
+
+      - name: Create DMG
+        run: |
+          cd sources
+          macdeployqt ../macos/polyphone.app -dmg
+          mv ../macos/polyphone.dmg ../macos/Polyphone-${{ env.QT_VERSION }}-macOS.dmg
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: polyphone-macos-installer
+          path: macos/*.dmg
+          retention-days: 7
+          if-no-files-found: error

@@ -1,18 +1,19 @@
-polyphone (2.6) unstable; urgency=low
+polyphone (2.6.0) unstable; urgency=low
 
   * (new) RPN messages can change the tuning
   * (new) option for allowing the compression in a soundfont
   * (new) option for compressing a non-compressed sample in a sf3 file
+  * (new) display of the compressed samples in the sample summary page
   * (improvement) saving a sf3 file doesn't lower the sample quality
-  * (improvement) display of the compressed samples in the sample summary page
   * (improvement) faster sound engine
   * (improvement) more accurate resampling
   * (improvement) less RAM usage
+  * (improvement) all translations completed with AI
   * (fix) correct key ranges when saving as sfz
   * (fix) tab widths of the GUI
   * (fix) sample links are kept during an export
 
- -- Davy Triponney <davy.triponney@gmail.com>  Mon, 1 Dec 2025 09:14:36 +0100
+ -- Davy Triponney <contact@polyphone.io>  Wed, 21 Jan 2025 10:30:00 +0100
 
 
 polyphone (2.5) UNRELEASED; urgency=low
@@ -36,7 +37,7 @@ polyphone (2.5) UNRELEASED; urgency=low
   * (fix) sfz attenuation export
   * (fix) finding root keys of very short loops
 
- -- Davy Triponney <davy.triponney@gmail.com>  Sun, 22 Dec 2024 09:14:36 +0100
+ -- Davy Triponney <contact@polyphone.io>  Sun, 22 Dec 2024 09:14:36 +0100
   
 
 polyphone (2.4) UNRELEASED; urgency=low
@@ -66,7 +67,7 @@ polyphone (2.4) UNRELEASED; urgency=low
   * (fix) limits in table cells
   * (fix) correct behaviour of the preset / bank spin boxes
 
- -- Davy Triponney <davy.triponney@gmail.com>  Fri, 11 Oct 2024 14:10:12 +0100
+ -- Davy Triponney <contact@polyphone.io>  Fri, 11 Oct 2024 14:10:12 +0100
 
 
 polyphone (2.3) UNRELEASED; urgency=low
@@ -107,7 +108,7 @@ polyphone (2.3) UNRELEASED; urgency=low
   * (fix) LFOs use now a triangle signal instead of a sine
   * (fix) linear modulator values
 
- -- Davy Triponney <davy.triponney@gmail.com>  Tue, 18 Jan 2022 23:20:08 +0100
+ -- Davy Triponney <contact@polyphone.io>  Tue, 18 Jan 2022 23:20:08 +0100
 
 
 polyphone (2.2) UNRELEASED; urgency=low
@@ -131,7 +132,7 @@ polyphone (2.2) UNRELEASED; urgency=low
   * (fix) instrument transposition tool correctly adapts rootkey / correction
   * (fix) playing state at the sample level
 
- -- Davy Triponney <davy.triponney@gmail.com>  Wed, 13 Nov 2019 08:37:48 +0100
+ -- Davy Triponney <contact@polyphone.io>  Wed, 13 Nov 2019 08:37:48 +0100
 
 
 polyphone (2.1) UNRELEASED; urgency=low
@@ -160,7 +161,7 @@ polyphone (2.1) UNRELEASED; urgency=low
   * (fix) bug when importing a sfz and then saving
   * (fix) small GUI issues
 
- -- Davy Triponney <davy.triponney@gmail.com>  Wed, 14 Aug 2019 14:40:30 +0100
+ -- Davy Triponney <contact@polyphone.io>  Wed, 14 Aug 2019 14:40:30 +0100
 
 
 polyphone (2.0) UNRELEASED; urgency=low
@@ -181,7 +182,7 @@ polyphone (2.0) UNRELEASED; urgency=low
   * (fix) bug when saving or loading 24-bit samples
   * (fix) opening big soundfonts
 
- -- Davy Triponney <davy.triponney@gmail.com>  Fri, 14 Dec 2018 22:15:09 +0100
+ -- Davy Triponney <contact@polyphone.io>  Fri, 14 Dec 2018 22:15:09 +0100
 
 
 polyphone (1.9) UNRELEASED; urgency=low
@@ -206,7 +207,7 @@ polyphone (1.9) UNRELEASED; urgency=low
   * (fix) sometimes the loop cell couldn't be edited with the mouse
   * (fix) wrong modulators were sometimes displayed after a selection in the tree
 
- -- Davy Triponney <davy.triponney@gmail.com>  Tue, 7 Nov 2017 12:40:25 +0100
+ -- Davy Triponney <contact@polyphone.io>  Tue, 7 Nov 2017 12:40:25 +0100
 
 
 polyphone (1.8) UNRELEASED; urgency=low
@@ -228,7 +229,7 @@ polyphone (1.8) UNRELEASED; urgency=low
   * (fix) natural order in the tree and tables
   * (fix) behaviour of the "loop playback" cell in the tables
 
- -- Davy Triponney <davy.triponney@gmail.com>  Wed, 16 Nov 2016 17:51:55 +0100
+ -- Davy Triponney <contact@polyphone.io>  Wed, 16 Nov 2016 17:51:55 +0100
 
 
 polyphone (1.7) UNRELEASED; urgency=low
@@ -246,7 +247,7 @@ polyphone (1.7) UNRELEASED; urgency=low
   * (fix) the "left / right" attribute was lost in duplicated samples
   * (fix) minor graphical interface issues
 
- -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 Sep 2015 20:51:55 +0100
+ -- Davy Triponney <contact@polyphone.io>  Wed, 27 Sep 2015 20:51:55 +0100
 
 
 polyphone (1.6) UNRELEASED; urgency=low
@@ -269,7 +270,7 @@ polyphone (1.6) UNRELEASED; urgency=low
   * (fix) GUI fix for mac
   * (fix) loop_mode one-shot caused sometimes a wrong envelop release in the sfz import
 
- -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 May 2015 20:11:10 +0100
+ -- Davy Triponney <contact@polyphone.io>  Wed, 27 May 2015 20:11:10 +0100
 
 
 polyphone (1.5) UNRELEASED; urgency=low
@@ -286,7 +287,7 @@ polyphone (1.5) UNRELEASED; urgency=low
   * (fix) sample synchronization in synth
   * (fix) bug when editing modulators
 
- -- Davy Triponney <davy.triponney@gmail.com>  Mon, 20 Oct 2014 18:37:28 +0100
+ -- Davy Triponney <contact@polyphone.io>  Mon, 20 Oct 2014 18:37:28 +0100
 
 
 polyphone (1.4) UNRELEASED; urgency=low
@@ -308,7 +309,7 @@ polyphone (1.4) UNRELEASED; urgency=low
   * (fix) the commands "replace all", "ignore all", "duplicate all" are now memorized
   * (fix) bug when editing an element hidden by the filter in the tree
 
- -- Davy Triponney <davy.triponney@gmail.com>  Thu, 7 Aug 2014 18:55:20 +0100
+ -- Davy Triponney <contact@polyphone.io>  Thu, 7 Aug 2014 18:55:20 +0100
 
 
 polyphone (1.3) UNRELEASED; urgency=low
@@ -329,7 +330,7 @@ polyphone (1.3) UNRELEASED; urgency=low
   * fixed a bug when using the autoloop tool in Windows XP
   * fixed small issues in sfz / sf2 conversion
 
- -- Davy Triponney <davy.triponney@gmail.com>  Sun, 16 Feb 2014 19:19:52 +0100
+ -- Davy Triponney <contact@polyphone.io>  Sun, 16 Feb 2014 19:19:52 +0100
 
 
 polyphone (1.2) UNRELEASED; urgency=low
@@ -354,7 +355,7 @@ polyphone (1.2) UNRELEASED; urgency=low
   * negative tune corrections were not exported correctly in wave files
   * using sample mode 3 (play sample to the end) now works
 
- -- Davy Triponney <davy.triponney@gmail.com>  Sat, 21 Dec 2013 00:10:09 +0100
+ -- Davy Triponney <contact@polyphone.io>  Sat, 21 Dec 2013 00:10:09 +0100
 
 
 polyphone (1.1) UNRELEASED; urgency=low
@@ -375,7 +376,7 @@ polyphone (1.1) UNRELEASED; urgency=low
   * when editing a sample, option to change the linked sample if stereo
   * possibility to change the audio buffer size
 
- -- Davy Triponney <davy.triponney@gmail.com>  Fri, 8 Nov 2013 18:21:43 +0100
+ -- Davy Triponney <contact@polyphone.io>  Fri, 8 Nov 2013 18:21:43 +0100
 
 
 polyphone (1.0) UNRELEASED; urgency=low
@@ -385,7 +386,7 @@ polyphone (1.0) UNRELEASED; urgency=low
   * fixed a bug in the loop tool
   * revision of the envelops, modulators and filters used in the synth
 
- -- Davy Triponney <davy.triponney@gmail.com>  Sun, 1 Sep 2013 09:05:12 +0100
+ -- Davy Triponney <contact@polyphone.io>  Sun, 1 Sep 2013 09:05:12 +0100
 
 
 polyphone (0.9) UNRELEASED; urgency=low
@@ -393,7 +394,7 @@ polyphone (0.9) UNRELEASED; urgency=low
   * added spatializer in the preset level
   * fixed minor bugs related to copy/paste or drag & drop in the tree
 
- -- Davy Triponney <davy.triponney@gmail.com>  Tue, 20 Aug 2013 15:08:47 +0100
+ -- Davy Triponney <contact@polyphone.io>  Tue, 20 Aug 2013 15:08:47 +0100
 
 
 polyphone (0.8) UNRELEASED; urgency=low
@@ -410,7 +411,7 @@ polyphone (0.8) UNRELEASED; urgency=low
   * parameters used in the mixture creation tool are stored
   * fixed minor bugs
 
- -- Davy Triponney <davy.triponney@gmail.com>  Sun, 21 Jul 2013 13:31:25 +0100
+ -- Davy Triponney <contact@polyphone.io>  Sun, 21 Jul 2013 13:31:25 +0100
 
 
 polyphone (0.7) UNRELEASED; urgency=low
@@ -420,7 +421,7 @@ polyphone (0.7) UNRELEASED; urgency=low
   * parameters used in the tools are memorized
   * help dialog resizable
 
- -- Davy Triponney <davy.triponney@gmail.com>  Fri, 28 Jun 2013 20:23:02 +0100
+ -- Davy Triponney <contact@polyphone.io>  Fri, 28 Jun 2013 20:23:02 +0100
 
 
 polyphone (0.6) UNRELEASED; urgency=low
@@ -432,7 +433,7 @@ polyphone (0.6) UNRELEASED; urgency=low
   * synth, lowered latency
   * recorder
  
- -- Davy Triponney <davy.triponney@gmail.com>  Tue, 25 Jun 2013 18:47:55 +0100
+ -- Davy Triponney <contact@polyphone.io>  Tue, 25 Jun 2013 18:47:55 +0100
 
 
 polyphone (0.5) UNRELEASED; urgency=low
@@ -443,7 +444,7 @@ polyphone (0.5) UNRELEASED; urgency=low
   * fixed a bug with asio
   * automatic sample association left-right for samples whose names only differ by the last letter R/L
 
- -- Davy Triponney <davy.triponney@gmail.com>  Wed, 20 Mar 2013 23:37:11 +0100
+ -- Davy Triponney <contact@polyphone.io>  Wed, 20 Mar 2013 23:37:11 +0100
 
 
 polyphone (0.4) UNRELEASED; urgency=low
@@ -455,7 +456,7 @@ polyphone (0.4) UNRELEASED; urgency=low
   * sample and instrument replacement in instrument / preset
   * band-limited sinc interpolation for non-real time resampling
 
- -- Davy Triponney <davy.triponney@gmail.com>  Sun, 3 Mar 2013 18:49:20 +0100
+ -- Davy Triponney <contact@polyphone.io>  Sun, 3 Mar 2013 18:49:20 +0100
   
 
 polyphone (0.3) UNRELEASED; urgency=low
@@ -465,7 +466,7 @@ polyphone (0.3) UNRELEASED; urgency=low
   * correction of parameter limits in the preset page
   * refactoring of configuration system
 
- -- Davy Triponney <davy.triponney@gmail.com>  Thu, 14 Feb 2013 10:24:11 +0100
+ -- Davy Triponney <contact@polyphone.io>  Thu, 14 Feb 2013 10:24:11 +0100
   
   
 polyphone (0.2) UNRELEASED; urgency=low
@@ -479,11 +480,11 @@ polyphone (0.2) UNRELEASED; urgency=low
   * synth to test instruments and preset (not fully implemented yet)
   * overlay feature in the graph
 
- -- Davy Triponney <davy.triponney@gmail.com>  Sun, 10 Feb 2013 19:12:31 +0100
+ -- Davy Triponney <contact@polyphone.io>  Sun, 10 Feb 2013 19:12:31 +0100
 
 
 polyphone (0.1) UNRELEASED; urgency=low
 
   * initial release
 
- -- Davy Triponney <davy.triponney@gmail.com>  Tue, 1 Jan 2013 13:51:43 +0200
+ -- Davy Triponney <contact@polyphone.io>  Tue, 1 Jan 2013 13:51:43 +0100
