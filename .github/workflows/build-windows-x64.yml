@@ -103,7 +103,7 @@ jobs:
       - name: Create portable archive
         shell: pwsh
         run: |
-          $portableName = "Polyphone_${{ inputs.tag }}-windows_x64_portable"
+          $portableName = "Polyphone_${{ inputs.tag }}-windows_x64-portable"
           Compress-Archive -Path deploy\* -DestinationPath "$portableName.zip" -CompressionLevel Optimal
           Write-Host "Created portable archive: $portableName.zip"
 

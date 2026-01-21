@@ -66,7 +66,7 @@ jobs:
 
       - name: Create AppImage
         env:
-          OUTPUT: Polyphone_${{ inputs.tag }}-aarch64.AppImage
+          OUTPUT: Polyphone_${{ inputs.tag }}-linux_aarch64.AppImage
         run: |
           # Install linuxdeploy
           wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-aarch64.AppImage
