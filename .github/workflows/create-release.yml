@@ -32,11 +32,10 @@ jobs:
         run: |
           python << 'EOF'
           from pathlib import Path
-          text = Path("sources/changelog").read_text(encoding="utf-8").splitlines()
+          import os
           
-          news = []
-          improvements = []
-          fixes = []
+          text = Path("sources/changelog").read_text(encoding="utf-8").splitlines()
+          news, improvements, fixes = [], [], []
 
           for line in text:
             line = line.strip()
