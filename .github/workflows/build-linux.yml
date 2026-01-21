@@ -18,20 +18,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Inject version in .desktop
-        run: |
-          DESKTOP_FILE=packaging/io.polyphone.polyphone.desktop
-          SHORT_VERSION=$(echo "${{ inputs.tag }}" | grep -oE '^[0-9]+\.[0-9]+')
-          if [ -z "$SHORT_VERSION" ]; then
-            echo "Erreur : version '${{ inputs.tag }}' invalide pour .desktop"
-            exit 1
-          fi
-          if grep -q '^Version=' "$DESKTOP_FILE"; then
-            sed -i "s/^Version=.*/Version=$SHORT_VERSION/" "$DESKTOP_FILE"
-          else
-            echo "Version=$SHORT_VERSION" >> "$DESKTOP_FILE"
-          fi
-
       - name: Update metainfo XML
         run: |
           SHORT_VERSION=$(echo "${{ inputs.tag }}" | grep -oE '^[0-9]+\.[0-9]+')
@@ -73,6 +59,8 @@ jobs:
           make -j$(nproc)
 
       - name: Create AppImage
+        env:
+          OUTPUT: polyphone_${{ inputs.tag }}-x86_64.AppImage
         run: |
           # Install linuxdeploy
           wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage

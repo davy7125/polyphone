@@ -14,7 +14,7 @@ AppPublisherURL=https://www.polyphone.io
 AppSupportURL=https://www.polyphone.io
 AppUpdatesURL=https://www.polyphone.io
 ChangesAssociations=yes
-DefaultDirName={pf64}\Polyphone
+DefaultDirName={autopf}\Polyphone
 DefaultGroupName=Polyphone
 LicenseFile={#SourceDir}\license.txt
 OutputDir=.
@@ -23,8 +23,8 @@ SetupIconFile=polyphone.ico
 Compression=zip
 SolidCompression=no
 UninstallDisplayIcon={app}\polyphone.exe
-ArchitecturesAllowed=x64
-ArchitecturesInstallIn64BitMode=x64
+ArchitecturesAllowed=x64compatible
+ArchitecturesInstallIn64BitMode=x64compatible
 
 [Languages]
 Name: "catalan"; MessagesFile: "compiler:Languages\Catalan.isl"
