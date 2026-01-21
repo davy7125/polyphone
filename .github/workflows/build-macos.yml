@@ -23,13 +23,15 @@ jobs:
         
       - name: Update macOS plist version
         run: |
-          CLEAN_VERSION=$(echo "$VERSION" | sed -E 's/^([0-9]+)\.([0-9]+)(\.([0-9]+))?.*/\1.\2.\4/')
-          if [[ "$CLEAN_VERSION" =~ \.$ ]]; then
-            CLEAN_VERSION="${CLEAN_VERSION}0"
+          NUMERIC_VERSION=$(echo "$VERSION" | sed -E 's/^([0-9]+\.[0-9]+)(\.([0-9]+))?.*/\1.\3/')
+          PATCH=$(echo "$NUMERIC_VERSION" | cut -d. -f3)
+          if [ -z "$PATCH" ]; then
+            NUMERIC_VERSION="${NUMERIC_VERSION}0"
+          else
+            NUMERIC_VERSION="$NUMERIC_VERSION"
           fi
-          echo "Setting plist version to $CLEAN_VERSION"
           PLIST_FILE="packaging/mac/polyphone.plist"
-          sed -i -E "s|(<key>CFBundleShortVersionString</key>[[:space:]]*<string>)[^<]+|\1$CLEAN_VERSION|" "$PLIST_FILE"
+          sed -i '' "s|<key>CFBundleShortVersionString</key>[[:space:]]*<string>[^<]*|<key>CFBundleShortVersionString</key><string>$NUMERIC_VERSION|" "$PLIST_FILE"
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
