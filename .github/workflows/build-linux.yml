@@ -2,6 +2,10 @@ name: Build Polyphone for Linux
 
 on:
   workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
       
 env:
   QT_VERSION: '6.6.2'
@@ -12,10 +16,31 @@ jobs:
     
     steps:
       - name: Set VERSION from tag
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+        run: echo "VERSION=${{ inputs.tag }}" >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Inject version in .desktop
+        run: |
+          DESKTOP_FILE=packaging/io.polyphone.polyphone.desktop
+          if grep -q '^Version=' "$DESKTOP_FILE"; then
+            sed -i "s/^Version=.*/Version=$VERSION/" "$DESKTOP_FILE"
+          else
+            echo "Version=$VERSION" >> "$DESKTOP_FILE"
+          fi
+
+      - name: Update metainfo XML
+        run: |
+          SHORT_VERSION=$(echo "$VERSION" | sed -E 's/^([0-9]+\.[0-9]+).*/\1/')
+          TODAY=$(date +%F)
+          URL="https://www.polyphone.io/en/news/version-$SHORT_VERSION"
+          METAFILE="packaging/io.polyphone.polyphone.metainfo.xml"
+          sed -i -E \
+            -e "s/(<release[^>]*version=\")[^\"]+/\1$SHORT_VERSION/" \
+            -e "s/(<release[^>]*date=\")[^\"]+/\1$TODAY/" \
+            -e "s|(</release>.*<url>)[^<]+|\1$URL|" \
+            "$METAFILE"
 
       - name: Install dependencies
         run: |

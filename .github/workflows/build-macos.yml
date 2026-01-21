@@ -2,6 +2,10 @@ name: Build Polyphone for MacOS
 
 on:
   workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
       
 env:
   QT_VERSION: '6.6.2'
@@ -12,10 +16,20 @@ jobs:
     
     steps:
       - name: Set VERSION from tag
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+        run: echo "VERSION=${{ inputs.tag }}" >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v4
+        
+      - name: Update macOS plist version
+        run: |
+          CLEAN_VERSION=$(echo "$VERSION" | sed -E 's/^([0-9]+)\.([0-9]+)(\.([0-9]+))?.*/\1.\2.\4/')
+          if [[ "$CLEAN_VERSION" =~ \.$ ]]; then
+            CLEAN_VERSION="${CLEAN_VERSION}0"
+          fi
+          echo "Setting plist version to $CLEAN_VERSION"
+          PLIST_FILE="packaging/mac/polyphone.plist"
+          sed -i -E "s|(<key>CFBundleShortVersionString</key>[[:space:]]*<string>)[^<]+|\1$CLEAN_VERSION|" "$PLIST_FILE"
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
@@ -46,7 +60,7 @@ jobs:
         run: |
           cd sources
           macdeployqt ../macos/polyphone.app -dmg
-          mv ../macos/polyphone.dmg ../macos/Polyphone-${{ env.QT_VERSION }}-macOS.dmg
+          mv ../macos/polyphone.dmg ../macos/Polyphone_${{ env.VERSION }}-macOS.dmg
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

@@ -2,14 +2,40 @@
 <mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
   <mime-type type="audio/x-soundfont">
     <comment>SoundFont</comment>
-    <comment xml:lang="ru">Файл SoundFont</comment>
+    <comment xml:lang="ca">Banc de sons</comment>
+    <comment xml:lang="cs">Zvuková banka</comment>
+    <comment xml:lang="da">Lydbank</comment>
+    <comment xml:lang="de">Klangbank</comment>
+    <comment xml:lang="es">Banco de sonidos</comment>
     <comment xml:lang="fr">Banque de sons</comment>
+    <comment xml:lang="it">Banco di suoni</comment>
+    <comment xml:lang="ja">サウンドフォント</comment>
+    <comment xml:lang="ko">사운드폰트</comment>
+    <comment xml:lang="nl">Geluidsbank</comment>
+    <comment xml:lang="pl">Bank dźwięków</comment>
+    <comment xml:lang="pt">Banco de sons</comment>
+    <comment xml:lang="ru">Файл SoundFont</comment>
+    <comment xml:lang="sr">Звучна банка</comment>
+    <comment xml:lang="zh">音色库</comment>
   </mime-type>
 
   <mime-type type="audio/x-sf2">
     <comment>SoundFont sf2</comment>
-    <comment xml:lang="ru">Файл SoundFont sf2</comment>
+    <comment xml:lang="ca">Banc de sons sf2</comment>
+    <comment xml:lang="cs">Zvuková banka sf2</comment>
+    <comment xml:lang="da">Lydbank sf2</comment>
+    <comment xml:lang="de">Klangbank sf2</comment>
+    <comment xml:lang="es">Banco de sonidos sf2</comment>
     <comment xml:lang="fr">Banque de sons sf2</comment>
+    <comment xml:lang="it">Banco di suoni sf2</comment>
+    <comment xml:lang="ja">サウンドフォント sf2</comment>
+    <comment xml:lang="ko">사운드폰트 sf2</comment>
+    <comment xml:lang="nl">Geluidsbank sf2</comment>
+    <comment xml:lang="pl">Bank dźwięków sf2</comment>
+    <comment xml:lang="pt">Banco de sons sf2</comment>
+    <comment xml:lang="ru">Файл SoundFont sf2</comment>
+    <comment xml:lang="sr">Звучна банка sf2</comment>
+    <comment xml:lang="zh">音色库 sf2</comment>
     <magic priority="50">
       <match type="string" offset="0" value="RIFF">
         <match type="string" offset="8" value="sfbk"/>
@@ -21,8 +47,21 @@
 
   <mime-type type="audio/x-sf3">
     <comment>Compressed SoundFont sf3</comment>
+    <comment xml:lang="ca">Banc de sons comprimit sf3</comment>
+    <comment xml:lang="cs">Komprimovaná zvuková banka sf3</comment>
+    <comment xml:lang="da">Komprimeret lydbank sf3</comment>
+    <comment xml:lang="de">Komprimierte Klangbank sf3</comment>
+    <comment xml:lang="es">Banco de sonidos comprimido sf3</comment>
+    <comment xml:lang="fr">Banque de sons compressée sf3</comment>
+    <comment xml:lang="it">Banco di suoni compresso sf3</comment>
+    <comment xml:lang="ja">圧縮サウンドフォント sf3</comment>
+    <comment xml:lang="ko">압축 사운드폰트 sf3</comment>
+    <comment xml:lang="nl">Gecomprimeerde geluidsbank sf3</comment>
+    <comment xml:lang="pl">Skompresowany bank dźwięków sf3</comment>
+    <comment xml:lang="pt">Banco de sons comprimido sf3</comment>
     <comment xml:lang="ru">Сжатый файл SoundFont sf3</comment>
-    <comment xml:lang="fr">Banque de sons compressés sf3</comment>
+    <comment xml:lang="sr">Компримована звучна банка sf3</comment>
+    <comment xml:lang="zh">压缩音色库 sf3</comment>
     <magic priority="50">
       <match type="string" offset="0" value="RIFF">
         <match type="string" offset="8" value="sfbk"/>
@@ -34,23 +73,63 @@
 
   <mime-type type="audio/x-sfark">
     <comment>SoundFont archive sfArk</comment>
+    <comment xml:lang="ca">Arxiu de banc de sons sfArk</comment>
+    <comment xml:lang="cs">Archiv zvukové banky sfArk</comment>
+    <comment xml:lang="da">Lydbank-arkiv sfArk</comment>
+    <comment xml:lang="de">Klangbank-Archiv sfArk</comment>
+    <comment xml:lang="es">Archivo de banco de sonidos sfArk</comment>
+    <comment xml:lang="fr">Archive de banque de sons sfArk</comment>
+    <comment xml:lang="it">Archivio banco di suoni sfArk</comment>
+    <comment xml:lang="ja">サウンドフォントアーカイブ sfArk</comment>
+    <comment xml:lang="ko">사운드폰트 아카이브 sfArk</comment>
+    <comment xml:lang="nl">Geluidsbank-archief sfArk</comment>
+    <comment xml:lang="pl">Archiwum banku dźwięków sfArk</comment>
+    <comment xml:lang="pt">Arquivo de banco de sons sfArk</comment>
     <comment xml:lang="ru">Архив SoundFont sfArk</comment>
-    <comment xml:lang="fr">Banque de sons compressés sfArk</comment>
+    <comment xml:lang="sr">Архива звучне банке sfArk</comment>
+    <comment xml:lang="zh">音色库归档 sfArk</comment>
     <glob pattern="*.sfArk"/>
     <sub-class-of type="audio/x-soundfont"/>
   </mime-type>
 
   <mime-type type="audio/x-sfz">
     <comment>SoundFont sfz</comment>
-    <comment xml:lang="ru">Файл SoundFont sfz</comment>
+    <comment xml:lang="ca">Banc de sons sfz</comment>
+    <comment xml:lang="cs">Zvuková banka sfz</comment>
+    <comment xml:lang="da">Lydbank sfz</comment>
+    <comment xml:lang="de">Klangbank sfz</comment>
+    <comment xml:lang="es">Banco de sonidos sfz</comment>
     <comment xml:lang="fr">Banque de sons sfz</comment>
+    <comment xml:lang="it">Banco di suoni sfz</comment>
+    <comment xml:lang="ja">サウンドフォント sfz</comment>
+    <comment xml:lang="ko">사운드폰트 sfz</comment>
+    <comment xml:lang="nl">Geluidsbank sfz</comment>
+    <comment xml:lang="pl">Bank dźwięków sfz</comment>
+    <comment xml:lang="pt">Banco de sons sfz</comment>
+    <comment xml:lang="ru">Файл SoundFont sfz</comment>
+    <comment xml:lang="sr">Звучна банка sfz</comment>
+    <comment xml:lang="zh">音色库 sfz</comment>
     <glob pattern="*.sfz"/>
     <sub-class-of type="text/plain"/>
   </mime-type>
 
   <mime-type type="audio/x-organ">
     <comment>GrandOrgue disposition</comment>
+    <comment xml:lang="ca">Disposició GrandOrgue</comment>
+    <comment xml:lang="cs">Dispozice GrandOrgue</comment>
+    <comment xml:lang="da">GrandOrgue-disposition</comment>
+    <comment xml:lang="de">GrandOrgue-Disposition</comment>
+    <comment xml:lang="es">Disposición GrandOrgue</comment>
     <comment xml:lang="fr">Disposition GrandOrgue</comment>
+    <comment xml:lang="it">Disposizione GrandOrgue</comment>
+    <comment xml:lang="ja">GrandOrgue ディスポジション</comment>
+    <comment xml:lang="ko">GrandOrgue 배치</comment>
+    <comment xml:lang="nl">GrandOrgue-dispositie</comment>
+    <comment xml:lang="pl">Dyspozycja GrandOrgue</comment>
+    <comment xml:lang="pt">Disposição GrandOrgue</comment>
+    <comment xml:lang="ru">Диспозиция GrandOrgue</comment>
+    <comment xml:lang="sr">GrandOrgue диспозиција</comment>
+    <comment xml:lang="zh">GrandOrgue 音栓配置</comment>
     <glob pattern="*.organ"/>
     <sub-class-of type="text/plain"/>
   </mime-type>

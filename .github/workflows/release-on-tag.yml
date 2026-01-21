@@ -8,12 +8,18 @@ on:
 jobs:
   build-windows:
     uses: ./.github/workflows/build-windows.yml
+    with:
+      tag: ${{ github.ref_name }}
 
   build-linux:
     uses: ./.github/workflows/build-linux.yml
+    with:
+      tag: ${{ github.ref_name }}
 
   build-macos:
     uses: ./.github/workflows/build-macos.yml
+    with:
+      tag: ${{ github.ref_name }}
 
   create-release:
     needs:
@@ -21,3 +27,5 @@ jobs:
       - build-linux
       - build-macos
     uses: ./.github/workflows/create-release.yml
+    with:
+      tag: ${{ github.ref_name }}

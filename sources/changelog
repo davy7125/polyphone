@@ -1,5 +1,6 @@
 polyphone (2.6.0) unstable; urgency=low
 
+  * (new) Dutch and Japanese translations, all others completed by AI
   * (new) RPN messages can change the tuning
   * (new) option for allowing the compression in a soundfont
   * (new) option for compressing a non-compressed sample in a sf3 file
@@ -8,7 +9,6 @@ polyphone (2.6.0) unstable; urgency=low
   * (improvement) faster sound engine
   * (improvement) more accurate resampling
   * (improvement) less RAM usage
-  * (improvement) all translations completed with AI
   * (fix) correct key ranges when saving as sfz
   * (fix) tab widths of the GUI
   * (fix) sample links are kept during an export
@@ -72,7 +72,7 @@ polyphone (2.4) UNRELEASED; urgency=low
 
 polyphone (2.3) UNRELEASED; urgency=low
 
-  * (new) Korean translation
+  * (new) Russian and Korean translations
   * (new) button on the bottom right enabling the stereo editing, now enabled by default
   * (new) detection of bad loops, a warning being displayed at the sample level and in the sample summary
   * (new) parameter inconsistencies displayed in the sample summary

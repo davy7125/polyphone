@@ -1,12 +1,23 @@
 [Desktop Entry]
 Name=Polyphone
+Name[ru]=Полифон
 Name[sr]=Полифон
 Comment=SoundFont editor
+Comment[ca]=Editor de SoundFont
+Comment[cs]=Editor SoundFontů
+Comment[da]=SoundFont-editor
+Comment[de]=SoundFont-Editor
 Comment[es]=Editor de soundfonts
 Comment[fr]=Éditeur de banques de sons
 Comment[it]=Editor di soundfont
+Comment[ja]=サウンドフォントエディタ
+Comment[ko]=사운드폰트 편집기
+Comment[nl]=SoundFont-editor
+Comment[pl]=Edytor SoundFont
+Comment[pt]=Editor de SoundFont
 Comment[ru]=Редактор SoundFont
 Comment[sr]=Уређивач звукотека (звучних фонтова)
+Comment[zh]=音色库编辑器
 TryExec=polyphone
 Exec=polyphone %F
 Icon=polyphone

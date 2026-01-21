@@ -2,6 +2,10 @@ name: Build Polyphone for Windows
 
 on:
   workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
       
 env:
   QT_VERSION: '6.6.2'
@@ -12,7 +16,7 @@ jobs:
     
     steps:
       - name: Set VERSION from tag
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+        run: echo "VERSION=${{ inputs.tag }}" >> $GITHUB_ENV
 
       - name: Checkout repository
         uses: actions/checkout@v4
