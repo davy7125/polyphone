@@ -63,9 +63,11 @@ jobs:
             md.append("# Fix\n")
             md += [f"- {f}" for f in fixes]
 
-          print("body<<EOF")
-          print("\n".join(md))
-          print("EOF")
+          body = "\n".join(md)
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+            f.write("body<<EOF\n")
+            f.write(body + "\n")
+            f.write("EOF\n")
           EOF
         shell: bash
         env:
