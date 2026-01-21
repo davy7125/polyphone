@@ -1,0 +1,23 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build-windows:
+    uses: ./.github/workflows/build-windows.yml
+
+  build-linux:
+    uses: ./.github/workflows/build-linux.yml
+
+  build-macos:
+    uses: ./.github/workflows/build-macos.yml
+
+  create-release:
+    needs:
+      - build-windows
+      - build-linux
+      - build-macos
+    uses: ./.github/workflows/create-release.yml

@@ -1,9 +1,7 @@
 name: Build Polyphone for Linux
 
 on:
-  push:
-    tags:
-      - '*'
+  workflow_call:
       
 env:
   QT_VERSION: '6.6.2'
