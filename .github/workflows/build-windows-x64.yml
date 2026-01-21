@@ -17,7 +17,7 @@ env:
   QT_VERSION: '6.6.2'
   
 jobs:
-  build-windows:
+  build-windows-x64:
     runs-on: windows-latest
     
     steps:

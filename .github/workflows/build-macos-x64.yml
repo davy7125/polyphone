@@ -17,7 +17,7 @@ env:
   QT_VERSION: '6.7.3'
 
 jobs:
-  build-macos:
+  build-macos-x64:
     runs-on: macos-15-intel
     
     steps:

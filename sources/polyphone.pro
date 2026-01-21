@@ -129,8 +129,8 @@ macx {
     CONFIG += sdk_no_version_check
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __MACOSX_CORE__ TARGET_OS_IPHONE=0
-    INCLUDEPATH += ../macos/include /opt/homebrew/include
-    LIBS += -L$$PWD/../macos/lib -L/opt/homebrew/lib -lssl -lcrypto -lz \
+    INCLUDEPATH += ../macos/include /opt/homebrew/include /usr/local/include
+    LIBS += -L$$PWD/../macos/lib -L/opt/homebrew/lib -L/usr/local/lib -lssl -lcrypto -lz \
         -lsndfile -lopus -lmpg123 -logg -lFLAC -lvorbis -lvorbisfile -lvorbisenc -lmp3lame \
         -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
         -framework AudioUnit -framework AudioToolbox -framework Cocoa
