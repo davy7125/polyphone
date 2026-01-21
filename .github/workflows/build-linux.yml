@@ -6,6 +6,12 @@ on:
       tag:
         required: true
         type: string
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        default: '0.0.0'
+        type: string
       
 env:
   QT_VERSION: '6.6.2'

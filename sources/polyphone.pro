@@ -125,7 +125,9 @@ unix:!macx {
     QMAKE_LFLAGS_RPATH=
 }
 macx {
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.15
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 12.0
+    QMAKE_APPLE_DEVICE_ARCHS = x86_64 arm64
+    CONFIG += sdk_no_version_check
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __MACOSX_CORE__ TARGET_OS_IPHONE=0
     INCLUDEPATH += ../macos/include /opt/homebrew/include

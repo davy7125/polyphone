@@ -6,13 +6,19 @@ on:
       tag:
         required: true
         type: string
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        default: '0.0.0'
+        type: string
       
 env:
   QT_VERSION: '6.6.2'
 
 jobs:
   build-macos:
-    runs-on: macos-15
+    runs-on: macos-12
     
     steps:
       - name: Checkout code
@@ -59,7 +65,7 @@ jobs:
         run: |
           cd sources
           macdeployqt ../macos/polyphone.app -dmg
-          mv ../macos/polyphone.dmg ../macos/Polyphone_${{ inputs.tag }}-macOS.dmg
+          mv ../macos/polyphone.dmg ../macos/Polyphone_${{ inputs.tag }}-MacOS_12.dmg
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
