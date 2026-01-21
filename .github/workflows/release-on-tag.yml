@@ -6,8 +6,8 @@ on:
       - '*'
 
 jobs:
-  build-windows:
-    uses: ./.github/workflows/build-windows.yml
+  build-windows-x64:
+    uses: ./.github/workflows/build-windows-x64.yml
     with:
       tag: ${{ github.ref_name }}
 
@@ -21,17 +21,23 @@ jobs:
     with:
       tag: ${{ github.ref_name }}
 
-  build-macos:
-    uses: ./.github/workflows/build-macos.yml
+  build-macos-x64:
+    uses: ./.github/workflows/build-macos-x64.yml
+    with:
+      tag: ${{ github.ref_name }}
+
+  build-macos-aarch64:
+    uses: ./.github/workflows/build-macos-aarch64.yml
     with:
       tag: ${{ github.ref_name }}
 
   create-release:
     needs:
-      - build-windows
+      - build-windows-x64
       - build-linux-x64
       - build-linux-aarch64
-      - build-macos
+      - build-macos-x64
+      - build-macos-aarch64
     uses: ./.github/workflows/create-release.yml
     with:
       tag: ${{ github.ref_name }}

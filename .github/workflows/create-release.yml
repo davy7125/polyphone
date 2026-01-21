@@ -81,8 +81,9 @@ jobs:
           draft: ${{ contains(inputs.tag, 'test') }}
           prerelease: ${{ contains(inputs.tag, 'beta') || contains(inputs.tag, 'alpha') }}
           files: |
-            artifacts/polyphone-windows-installer/*
-            artifacts/polyphone-windows-portable/*
+            artifacts/polyphone-windows-x64-installer/*
+            artifacts/polyphone-windows-x64-portable/*
             artifacts/polyphone-linux-x64-appimage/*
             artifacts/polyphone-linux-aarch64-appimage/*
-            artifacts/polyphone-macos-installer/*
+            artifacts/polyphone-macos-x64-installer/*
+            artifacts/polyphone-macos-aarch64-installer/*

@@ -1,0 +1,76 @@
+name: Build Polyphone for MacOS aarch64
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        default: '0.0.0'
+        type: string
+      
+env:
+  QT_VERSION: '6.7.3'
+
+jobs:
+  build-macos:
+    runs-on: macos-15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Update macOS plist version
+        run: |
+          NUMERIC_VERSION=$(echo "${{ inputs.tag }}" | sed -E 's/^([0-9]+\.[0-9]+)(\.([0-9]+))?.*/\1.\3/')
+          PATCH=$(echo "$NUMERIC_VERSION" | cut -d. -f3)
+          if [ -z "$PATCH" ]; then
+            NUMERIC_VERSION="${NUMERIC_VERSION}0"
+          else
+            NUMERIC_VERSION="$NUMERIC_VERSION"
+          fi
+          PLIST_FILE="packaging/mac/polyphone.plist"
+          sed -i '' "s|<key>CFBundleShortVersionString</key>[[:space:]]*<string>[^<]*|<key>CFBundleShortVersionString</key><string>$NUMERIC_VERSION|" "$PLIST_FILE"
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          host: mac
+          target: desktop
+          arch: clang_64
+
+      - name: Install dependencies
+        run: |
+          brew install \
+            libsndfile \
+            libogg \
+            libvorbis \
+            flac \
+            lame \
+            mpg123 \
+            opus
+
+      - name: Build
+        run: |
+          cd sources
+          qmake polyphone.pro CONFIG+=release
+          make -j$(sysctl -n hw.ncpu)
+
+      - name: Create DMG
+        run: |
+          cd sources
+          macdeployqt ../macos/polyphone.app -dmg
+          mv ../macos/polyphone.dmg ../macos/Polyphone_${{ inputs.tag }}-MacOS_12.dmg
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: polyphone-macos-aarch64-installer
+          path: macos/*.dmg
+          retention-days: 7
+          if-no-files-found: error

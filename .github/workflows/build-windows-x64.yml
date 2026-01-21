@@ -1,4 +1,4 @@
-name: Build Polyphone for Windows
+name: Build Polyphone for Windows x64
 
 on:
   workflow_call:
@@ -130,7 +130,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: polyphone-windows-installer
+          name: polyphone-windows-x64-installer
           path: packaging/windows/*.exe
           retention-days: 7
           if-no-files-found: error
@@ -138,7 +138,7 @@ jobs:
       - name: Upload portable artifact
         uses: actions/upload-artifact@v4
         with:
-          name: polyphone-windows-portable
+          name: polyphone-windows-x64-portable
           path: polyphone_*_portable.zip
           retention-days: 7
           if-no-files-found: error
