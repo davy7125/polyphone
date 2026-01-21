@@ -77,8 +77,8 @@ jobs:
           name: Polyphone ${{ inputs.tag }}
           tag_name: ${{ inputs.tag }}
           body: ${{ steps.changelog.outputs.body }}
-          draft: ${{ contains(${{ inputs.tag }}, 'test') }}
-          prerelease: ${{ contains(${{ inputs.tag }}, 'beta') || contains(${{ inputs.tag }}, 'alpha') }}
+          draft: ${{ contains(inputs.tag, 'test') }}
+          prerelease: ${{ contains(inputs.tag, 'beta') || contains(inputs.tag, 'alpha') }}
           files: |
             artifacts/polyphone-windows-installer/*
             artifacts/polyphone-linux-appimage/*
