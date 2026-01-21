@@ -1,0 +1,94 @@
+name: Build Polyphone for Linux x64
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        default: '0.0.0'
+        type: string
+      
+env:
+  QT_VERSION: '6.6.2'
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-24.04
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Update metainfo XML
+        run: |
+          SHORT_VERSION=$(echo "${{ inputs.tag }}" | grep -oE '^[0-9]+\.[0-9]+')
+          TODAY=$(date +%F)
+          URL="https://www.polyphone.io/en/news/version-$SHORT_VERSION"
+          METAFILE="packaging/io.polyphone.polyphone.metainfo.xml"
+          sed -i -E \
+            -e "s/(<release[^>]*version=\")[^\"]+/\1$SHORT_VERSION/" \
+            -e "s/(<release[^>]*date=\")[^\"]+/\1$TODAY/" \
+            -e "s|(</release>.*<url>)[^<]+|\1$URL|" \
+            "$METAFILE"
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            qt6-base-dev \
+            qt6-svg-dev \
+            qt6-tools-dev \
+            qt6-tools-dev-tools \
+            qt6-l10n-tools \
+            libasound2-dev \
+            libjack-jackd2-dev \
+            libsndfile1-dev \
+            libogg-dev \
+            libvorbis-dev \
+            libflac-dev \
+            zlib1g-dev \
+            libssl-dev \
+            librtaudio-dev \
+            librtmidi-dev \
+            libstk-dev
+
+      - name: Build
+        run: |
+          cd sources
+          qmake6 polyphone.pro CONFIG+=release PREFIX=/usr
+          make -j$(nproc)
+
+      - name: Create AppImage
+        env:
+          OUTPUT: Polyphone_${{ inputs.tag }}-x64.AppImage
+        run: |
+          # Install linuxdeploy
+          wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+          wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
+          chmod +x linuxdeploy*.AppImage
+          
+          # Create AppDir structure
+          mkdir -p AppDir/usr/bin
+          mkdir -p AppDir/usr/share/applications
+          mkdir -p AppDir/usr/share/icons/hicolor/512x512/apps
+          
+          cp sources/bin/polyphone AppDir/usr/bin/
+          cp packaging/io.polyphone.polyphone.desktop AppDir/usr/share/applications/
+          cp sources/resources/polyphone.png AppDir/usr/share/icons/hicolor/512x512/apps/
+          
+          # Generate the AppImage
+          ./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin qt --output appimage
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: polyphone-linux-x64-appimage
+          path: Polyphone*.AppImage
+          retention-days: 7
+          if-no-files-found: error

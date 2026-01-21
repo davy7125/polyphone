@@ -83,5 +83,6 @@ jobs:
           files: |
             artifacts/polyphone-windows-installer/*
             artifacts/polyphone-windows-portable/*
-            artifacts/polyphone-linux-appimage/*
+            artifacts/polyphone-linux-x64-appimage/*
+            artifacts/polyphone-linux-aarch64-appimage/*
             artifacts/polyphone-macos-installer/*

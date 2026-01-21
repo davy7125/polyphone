@@ -1,4 +1,4 @@
-name: Build Polyphone for Linux
+name: Build Polyphone for Linux aarch64
 
 on:
   workflow_call:
@@ -18,7 +18,7 @@ env:
 
 jobs:
   build-linux:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
     
     steps:
       - name: Checkout code
@@ -66,11 +66,11 @@ jobs:
 
       - name: Create AppImage
         env:
-          OUTPUT: Polyphone_${{ inputs.tag }}-x86_64.AppImage
+          OUTPUT: Polyphone_${{ inputs.tag }}-aarch64.AppImage
         run: |
           # Install linuxdeploy
-          wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
-          wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
+          wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-aarch64.AppImage
+          wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-aarch64.AppImage
           chmod +x linuxdeploy*.AppImage
           
           # Create AppDir structure
@@ -83,12 +83,12 @@ jobs:
           cp sources/resources/polyphone.png AppDir/usr/share/icons/hicolor/512x512/apps/
           
           # Generate the AppImage
-          ./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin qt --output appimage
+          ./linuxdeploy-aarch64.AppImage --appdir AppDir --plugin qt --output appimage
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: polyphone-linux-appimage
+          name: polyphone-linux-aarch64-appimage
           path: Polyphone*.AppImage
           retention-days: 7
           if-no-files-found: error

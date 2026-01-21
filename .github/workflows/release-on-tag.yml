@@ -11,8 +11,13 @@ jobs:
     with:
       tag: ${{ github.ref_name }}
 
-  build-linux:
-    uses: ./.github/workflows/build-linux.yml
+  build-linux-x64:
+    uses: ./.github/workflows/build-linux-x64.yml
+    with:
+      tag: ${{ github.ref_name }}
+
+  build-linux-aarch64:
+    uses: ./.github/workflows/build-linux-aarch64.yml
     with:
       tag: ${{ github.ref_name }}
 
@@ -24,7 +29,8 @@ jobs:
   create-release:
     needs:
       - build-windows
-      - build-linux
+      - build-linux-x64
+      - build-linux-aarch64
       - build-macos
     uses: ./.github/workflows/create-release.yml
     with:
