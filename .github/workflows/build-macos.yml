@@ -14,7 +14,7 @@ on:
         type: string
       
 env:
-  QT_VERSION: '6.7.4'
+  QT_VERSION: '6.7.3'
 
 jobs:
   build-macos:
