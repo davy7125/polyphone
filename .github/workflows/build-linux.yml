@@ -60,7 +60,7 @@ jobs:
 
       - name: Create AppImage
         env:
-          OUTPUT: polyphone_${{ inputs.tag }}-x86_64.AppImage
+          OUTPUT: Polyphone_${{ inputs.tag }}-x86_64.AppImage
         run: |
           # Install linuxdeploy
           wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
