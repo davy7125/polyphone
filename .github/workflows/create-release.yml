@@ -82,5 +82,6 @@ jobs:
           prerelease: ${{ contains(inputs.tag, 'beta') || contains(inputs.tag, 'alpha') }}
           files: |
             artifacts/polyphone-windows-installer/*
+            artifacts/polyphone-windows-portable/*
             artifacts/polyphone-linux-appimage/*
             artifacts/polyphone-macos-installer/*

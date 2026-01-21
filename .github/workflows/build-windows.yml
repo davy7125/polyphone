@@ -100,9 +100,16 @@ jobs:
           copy LICENSE.txt deploy\license.txt 2>nul || echo "No license file"
           copy packaging\windows\polyphone.ico deploy\ 2>nul || echo "No icon file"
 
+      - name: Create portable archive
+        shell: pwsh
+        run: |
+          $portableName = "Polyphone_${{ inputs.tag }}-windows_x64_portable"
+          Compress-Archive -Path deploy\* -DestinationPath "$portableName.zip" -CompressionLevel Optimal
+          Write-Host "Created portable archive: $portableName.zip"
+
       - name: Install Inno Setup
         run: choco install innosetup -y
-        
+
       - name: Download Inno Setup extra translations
         shell: pwsh
         run: |
@@ -125,5 +132,13 @@ jobs:
         with:
           name: polyphone-windows-installer
           path: packaging/windows/*.exe
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Upload portable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: polyphone-windows-portable
+          path: polyphone_*_portable.zip
           retention-days: 7
           if-no-files-found: error
