@@ -14,11 +14,11 @@ on:
         type: string
       
 env:
-  QT_VERSION: '6.6.2'
+  QT_VERSION: '6.7.4'
 
 jobs:
   build-macos:
-    runs-on: macos-13
+    runs-on: macos-15
     
     steps:
       - name: Checkout code
