@@ -15,18 +15,15 @@ jobs:
     runs-on: ubuntu-24.04
     
     steps:
-      - name: Set TAG_VERSION from tag
-        run: echo "TAG_VERSION=${{ inputs.tag }}" >> $GITHUB_ENV
-
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Inject version in .desktop
         run: |
           DESKTOP_FILE=packaging/io.polyphone.polyphone.desktop
-          SHORT_VERSION=$(echo "$TAG_VERSION" | grep -oE '^[0-9]+\.[0-9]+')
+          SHORT_VERSION=$(echo "${{ inputs.tag }}" | grep -oE '^[0-9]+\.[0-9]+')
           if [ -z "$SHORT_VERSION" ]; then
-            echo "Erreur : version '$TAG_VERSION' invalide pour .desktop"
+            echo "Erreur : version '${{ inputs.tag }}' invalide pour .desktop"
             exit 1
           fi
           if grep -q '^Version=' "$DESKTOP_FILE"; then
@@ -37,7 +34,7 @@ jobs:
 
       - name: Update metainfo XML
         run: |
-          SHORT_VERSION=$(echo "$TAG_VERSION" | grep -oE '^[0-9]+\.[0-9]+')
+          SHORT_VERSION=$(echo "${{ inputs.tag }}" | grep -oE '^[0-9]+\.[0-9]+')
           TODAY=$(date +%F)
           URL="https://www.polyphone.io/en/news/version-$SHORT_VERSION"
           METAFILE="packaging/io.polyphone.polyphone.metainfo.xml"

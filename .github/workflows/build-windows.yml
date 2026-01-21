@@ -15,9 +15,6 @@ jobs:
     runs-on: windows-latest
     
     steps:
-      - name: Set TAG_VERSION from tag
-        run: echo "TAG_VERSION=${{ inputs.tag }}" >> $GITHUB_ENV
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -114,9 +111,8 @@ jobs:
           Write-Host "SerbianCyrillic.isl downloaded successfully"
 
       - name: Create installer
-        shell: pwsh
         run: |
-          iscc /DMyAppVersion=$env:TAG_VERSION /DSourceDir=../../deploy packaging/windows/polyphone.iss
+          iscc /DMyAppVersion=${{ inputs.tag }} /DSourceDir=../../deploy packaging/windows/polyphone.iss
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

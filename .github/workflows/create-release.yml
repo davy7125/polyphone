@@ -14,9 +14,6 @@ jobs:
       contents: write
     
     steps:
-      - name: Set VERSION from tag
-        run: echo "VERSION=${{ inputs.tag }}" >> $GITHUB_ENV
-        
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -77,11 +74,11 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          name: Polyphone ${{ env.VERSION }}
-          tag_name: ${{ env.VERSION }}
+          name: Polyphone ${{ inputs.tag }}
+          tag_name: ${{ inputs.tag }}
           body: ${{ steps.changelog.outputs.body }}
-          draft: ${{ contains(env.VERSION, 'test') }}
-          prerelease: ${{ contains(env.VERSION, 'beta') || contains(env.VERSION, 'alpha') }}
+          draft: ${{ contains(${{ inputs.tag }}, 'test') }}
+          prerelease: ${{ contains(${{ inputs.tag }}, 'beta') || contains(${{ inputs.tag }}, 'alpha') }}
           files: |
             artifacts/polyphone-windows-installer/*
             artifacts/polyphone-linux-appimage/*
