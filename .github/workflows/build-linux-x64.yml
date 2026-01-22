@@ -55,7 +55,7 @@ jobs:
             libssl-dev \
             librtaudio-dev \
             librtmidi-dev \
-            libstk1-dev
+            libstk-dev
 
       - name: Build
         run: |
