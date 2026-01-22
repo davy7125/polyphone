@@ -14,11 +14,11 @@ on:
         type: string
       
 env:
-  QT_VERSION: '6.6.2'
+  QT_VERSION: '6.2.4'
 
 jobs:
   build-linux-x64:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     
     steps:
       - name: Checkout code
@@ -81,17 +81,6 @@ jobs:
           cp sources/bin/polyphone AppDir/usr/bin/
           cp packaging/io.polyphone.polyphone.desktop AppDir/usr/share/applications/
           cp sources/resources/polyphone.png AppDir/usr/share/icons/hicolor/512x512/apps/
-          
-          # AppRun
-          cat > AppDir/AppRun << 'EOF'
-          #!/bin/sh
-          HERE="$(dirname "$(readlink -f "$0")")"
-          export QT_PLUGIN_PATH="$HERE/usr/plugins"
-          export QT_TLS_BACKEND=openssl
-          export LD_LIBRARY_PATH="$HERE/usr/lib:$LD_LIBRARY_PATH"
-          exec "$HERE/usr/bin/polyphone"
-          EOF
-          chmod +x AppDir/AppRun
           
           # Generate the AppImage
           ./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin qt --output appimage
