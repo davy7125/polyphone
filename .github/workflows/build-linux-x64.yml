@@ -42,7 +42,6 @@ jobs:
           sudo apt-get install -y \
             build-essential \
             qt6-base-dev \
-            qt6-svg-dev \
             qt6-tools-dev \
             qt6-tools-dev-tools \
             qt6-l10n-tools \
@@ -56,7 +55,7 @@ jobs:
             libssl-dev \
             librtaudio-dev \
             librtmidi-dev \
-            libstk-dev
+            libstk1-dev
 
       - name: Build
         run: |
