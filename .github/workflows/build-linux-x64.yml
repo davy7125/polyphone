@@ -56,7 +56,8 @@ jobs:
             libssl-dev \
             librtaudio-dev \
             librtmidi-dev \
-            libstk-dev
+            libstk-dev \
+            ca-certificates
 
       - name: Build
         run: |
@@ -81,6 +82,10 @@ jobs:
           cp sources/bin/polyphone AppDir/usr/bin/
           cp packaging/io.polyphone.polyphone.desktop AppDir/usr/share/applications/
           cp sources/resources/polyphone.png AppDir/usr/share/icons/hicolor/512x512/apps/
+          
+          # Install SSL certificates into AppDir
+          mkdir -p AppDir/etc/ssl/certs
+          cp /etc/ssl/certs/ca-certificates.crt AppDir/etc/ssl/certs/
           
           # Generate the AppImage
           ./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin qt --output appimage
