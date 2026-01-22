@@ -14,11 +14,11 @@ on:
         type: string
       
 env:
-  QT_VERSION: '6.2.4'
+  QT_VERSION: '6.6.2'
 
 jobs:
   build-linux-x64:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     
     steps:
       - name: Checkout code
@@ -42,7 +42,7 @@ jobs:
           sudo apt-get install -y \
             build-essential \
             qt6-base-dev \
-            libqt6svg6-dev \
+            qt6-svg-dev \
             qt6-tools-dev \
             qt6-tools-dev-tools \
             qt6-l10n-tools \
@@ -53,7 +53,7 @@ jobs:
             libvorbis-dev \
             libflac-dev \
             zlib1g-dev \
-            libssl-dev \
+            libwolfssl-dev \
             librtaudio-dev \
             librtmidi-dev \
             libstk-dev
@@ -61,7 +61,7 @@ jobs:
       - name: Build
         run: |
           cd sources
-          qmake6 polyphone.pro CONFIG+=release PREFIX=/usr
+          qmake6 polyphone.pro CONFIG+=release CONFIG+=USE_WOLFSSL PREFIX=/usr
           make -j$(nproc)
 
       - name: Create AppImage
