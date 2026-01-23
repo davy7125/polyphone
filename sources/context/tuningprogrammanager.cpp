@@ -44,7 +44,7 @@ bool TuningProgram::parse(QString description)
     bool ok;
     for (int i = 1; i <= 12; i++)
     {
-        _deviations[i] = split[i].toFloat(&ok);
+        _deviations[i - 1] = split[i].toFloat(&ok);
         if (!ok)
             return false;
     }
