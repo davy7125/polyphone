@@ -104,6 +104,7 @@ jobs:
           
           # Create AppDir structure
           mkdir -p AppDir/usr/bin
+          mkdir -p AppDir/usr/lib
           mkdir -p AppDir/usr/share/applications
           mkdir -p AppDir/usr/share/icons/hicolor/512x512/apps
           mkdir -p AppDir/Qt/libs
@@ -112,12 +113,9 @@ jobs:
           cp packaging/io.polyphone.polyphone.desktop AppDir/usr/share/applications/
           cp sources/resources/polyphone.png AppDir/usr/share/icons/hicolor/512x512/apps/
           
-          # Copy some missed libs to the bundle
-          cp $(ldconfig -p | grep libssl.so.1 | head -n1 | tr ' ' '\n' | grep /) AppDir/Qt/libs/
-          cp $(ldconfig -p | grep libcrypto.so.1 | head -n1 | tr ' ' '\n' | grep /) AppDir/Qt/libs/
-          cp $(ldconfig -p | grep libicui18n.so | head -n1 | tr ' ' '\n' | grep /) AppDir/Qt/libs/
-          cp $(ldconfig -p | grep libicuuc.so | head -n1 | tr ' ' '\n' | grep /) AppDir/Qt/libs/
-          cp $(ldconfig -p | grep libicudata.so | head -n1 | tr ' ' '\n' | grep /) AppDir/Qt/libs/
+          # SSL
+          cp /usr/lib/x86_64-linux-gnu/libssl.so.3 AppDir/usr/lib/
+          cp /usr/lib/x86_64-linux-gnu/libcrypto.so.3 AppDir/usr/lib/
 
           # Generate the AppImage
           ./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin qt --output appimage
