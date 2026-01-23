@@ -2,27 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>BuildMachineOSBuild</key>
-  <string>12E55</string>
   <key>CFBundleDocumentTypes</key>
   <array>
     <dict>
       <key>CFBundleTypeIconFile</key>
-        <string>polyphoneFile.icns</string>
-      <key>CFBundleTypeOSTypes</key>
-      <array>
-        <string>SF2</string>
-          <string>SF3</string>
-          <string>SFZ</string>
-          <string>SFARK</string>
-          <string>ORGAN</string>
-      </array>
+      <string>polyphoneFile.icns</string>
       <key>CFBundleTypeExtensions</key>
       <array>
         <string>sf2</string>
         <string>sf3</string>
         <string>sfz</string>
-        <string>sfArk</string>
+        <string>sfark</string>
         <string>organ</string>
       </array>
       <key>CFBundleTypeName</key>
@@ -46,16 +36,12 @@
   <key>CFBundlePackageType</key>
   <string>APPL</string>
   <key>CFBundleShortVersionString</key>
-    <string>2.5.1</string>
-  <key>CFBundleSignature</key>
-  <string>pphn</string>
+  <string>2.5.1</string>
   <key>LSMinimumSystemVersion</key>
-    <string>12.0</string>
+  <string>12.0</string>
   <key>NSPrincipalClass</key>
   <string>NSApplication</string>
   <key>NSServices</key>
-  <key>NSHighResolutionCapable</key>
-  <true/>
   <array>
     <dict>
       <key>NSPortName</key>
@@ -67,6 +53,8 @@
       </array>
     </dict>
   </array>
+  <key>NSHighResolutionCapable</key>
+  <true/>
   <key>NSSupportsAutomaticGraphicsSwitching</key>
   <true/>
 </dict>

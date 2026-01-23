@@ -73,7 +73,7 @@ jobs:
             libvorbis-dev \
             libflac-dev \
             zlib1g-dev \
-            libwolfssl-dev \
+            libssl-dev \
             librtaudio-dev \
             librtmidi-dev \
             libstk-dev
@@ -84,7 +84,6 @@ jobs:
           qmake6 polyphone.pro \
             PREFIX=/usr \
             CONFIG+=release \
-            DEFINES+=USE_WOLFSSL \
             DEFINES+=USE_LOCAL_RTAUDIO
 
       - name: Build Polyphone
@@ -111,6 +110,10 @@ jobs:
           cp sources/bin/polyphone AppDir/usr/bin/
           cp packaging/io.polyphone.polyphone.desktop AppDir/usr/share/applications/
           cp sources/resources/polyphone.png AppDir/usr/share/icons/hicolor/512x512/apps/
+          
+          # SSL
+          cp /usr/lib/aarch64-linux-gnu/libssl.so.3 AppDir/usr/lib/
+          cp /usr/lib/aarch64-linux-gnu/libcrypto.so.3 AppDir/usr/lib/
           
           # Generate the AppImage
           export LINUXDEPLOY_EXTRA_LIBS=$(ldd sources/bin/polyphone | grep -E 'libssl|libcrypto' | awk '{print $3}' | tr '\n' ':')
