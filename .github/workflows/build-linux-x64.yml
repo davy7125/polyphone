@@ -73,7 +73,7 @@ jobs:
             libvorbis-dev \
             libflac-dev \
             zlib1g-dev \
-            libwolfssl-dev \
+            libssl-dev \
             librtaudio-dev \
             librtmidi-dev \
             libstk-dev
@@ -84,7 +84,6 @@ jobs:
           qmake6 polyphone.pro \
             PREFIX=/usr \
             CONFIG+=release \
-            DEFINES+=USE_WOLFSSL \
             DEFINES+=USE_LOCAL_RTAUDIO
 
       - name: Build Polyphone
