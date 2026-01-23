@@ -106,13 +106,20 @@ jobs:
           mkdir -p AppDir/usr/bin
           mkdir -p AppDir/usr/share/applications
           mkdir -p AppDir/usr/share/icons/hicolor/512x512/apps
+          mkdir -p AppDir/Qt/libs
           
           cp sources/bin/polyphone AppDir/usr/bin/
           cp packaging/io.polyphone.polyphone.desktop AppDir/usr/share/applications/
           cp sources/resources/polyphone.png AppDir/usr/share/icons/hicolor/512x512/apps/
           
+          # Copy some missed libs to the bundle
+          cp $(ldconfig -p | grep libssl.so.1 | head -n1 | tr ' ' '\n' | grep /) AppDir/Qt/libs/
+          cp $(ldconfig -p | grep libcrypto.so.1 | head -n1 | tr ' ' '\n' | grep /) AppDir/Qt/libs/
+          cp $(ldconfig -p | grep libicui18n.so | head -n1 | tr ' ' '\n' | grep /) AppDir/Qt/libs/
+          cp $(ldconfig -p | grep libicuuc.so | head -n1 | tr ' ' '\n' | grep /) AppDir/Qt/libs/
+          cp $(ldconfig -p | grep libicudata.so | head -n1 | tr ' ' '\n' | grep /) AppDir/Qt/libs/
+
           # Generate the AppImage
-          export LINUXDEPLOY_EXTRA_LIBS=$(ldd sources/bin/polyphone | grep -E 'libssl|libcrypto' | awk '{print $3}' | tr '\n' ':')
           ./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin qt --output appimage
 
       - name: Upload artifact
