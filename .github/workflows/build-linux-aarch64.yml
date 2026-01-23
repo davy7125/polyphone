@@ -76,9 +76,10 @@ jobs:
 
           cd sources
           qmake6 polyphone.pro \
-            CONFIG+=release \
-            CONFIG+=USE_WOLFSSL \
             PREFIX=/usr \
+            CONFIG+=release \
+            DEFINES+=USE_WOLFSSL \
+            DEFINES+=USE_LOCAL_RTAUDIO \
             DEFINES+="SOFT_VERSION=\"${SOFT_VERSION}\"" \
             DEFINES+="IDENTIFIER=\"${IDENTIFIER}\"" \
             DEFINES+="CURRENT_YEAR=\"${CURRENT_YEAR}\""

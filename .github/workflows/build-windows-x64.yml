@@ -158,6 +158,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: polyphone-windows-x64-portable
-          path: polyphone_*_portable.zip
+          path: polyphone_*-portable.zip
           retention-days: 7
           if-no-files-found: error
