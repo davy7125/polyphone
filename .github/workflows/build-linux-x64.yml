@@ -52,9 +52,9 @@ jobs:
           echo "IDENTIFIER: $IDENTIFIER"
           echo "CURRENT_YEAR: $CURRENT_YEAR"
 
-          sed -i 's/SOFT_VERSION=\\"[^"]*\\"/SOFT_VERSION=\\"'"${SOFT_VERSION}"'\\"/' sources/polyphone.pro
-          sed -i 's/IDENTIFIER=\\"[^"]*\\"/IDENTIFIER=\\"'"${IDENTIFIER}"'\\"/' sources/polyphone.pro
-          sed -i 's/CURRENT_YEAR=\\"[^"]*\\"/CURRENT_YEAR=\\"'"${CURRENT_YEAR}"'\\"/' sources/polyphone.pro
+          sed -i 's/SOFT_VERSION=\\\\\\\"[^\\]*\\\\\\\"/SOFT_VERSION=\\\\\\\"'${SOFT_VERSION}'\\\\\\\"/' sources/polyphone.pro
+          sed -i 's/IDENTIFIER=\\\\\\\"[^\\]*\\\\\\\"/IDENTIFIER=\\\\\\\"'${IDENTIFIER}'\\\\\\\"/' sources/polyphone.pro
+          sed -i 's/CURRENT_YEAR=\\\\\\\"[^\\]*\\\\\\\"/CURRENT_YEAR=\\\\\\\"'${CURRENT_YEAR}'\\\\\\\"/' sources/polyphone.pro
 
       - name: Install dependencies
         run: |
@@ -95,6 +95,8 @@ jobs:
       - name: Create AppImage
         env:
           OUTPUT: Polyphone_${{ inputs.tag }}-linux_x64.AppImage
+          EXTRA_PLATFORM_PLUGINS: "libqwayland-egl.so;libqwayland-generic.so"
+          EXTRA_QT_PLUGINS: "waylandcompositor"
         run: |
           # Install linuxdeploy
           wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
@@ -111,6 +113,7 @@ jobs:
           cp sources/resources/polyphone.png AppDir/usr/share/icons/hicolor/512x512/apps/
           
           # Generate the AppImage
+          export LINUXDEPLOY_EXTRA_LIBS=$(ldd sources/bin/polyphone | grep -E 'libssl|libcrypto' | awk '{print $3}' | tr '\n' ':')
           ./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin qt --output appimage
 
       - name: Upload artifact
