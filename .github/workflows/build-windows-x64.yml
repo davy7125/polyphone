@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Update version info in polyphone.pro
-        shell: msys2 {0}
+        shell: bash
         run: |
           TAG="${{ inputs.tag }}"
           SOFT_VERSION="${TAG%%-*}"
