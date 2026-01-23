@@ -53,15 +53,39 @@ jobs:
             libvorbis-dev \
             libflac-dev \
             zlib1g-dev \
-            libssl-dev \
+            libwolfssl-dev \
             librtaudio-dev \
             librtmidi-dev \
             libstk-dev
+            
+      - name: Configure with qmake
+        run: |
+          TAG="${{ inputs.tag }}"
+          SOFT_VERSION="${TAG%%-*}"
+          if [[ "$TAG" == *"-"* ]]; then
+            IDENTIFIER="${TAG#*-}"
+          else
+            IDENTIFIER=""
+          fi
+          CURRENT_YEAR=$(date +%Y)
 
-      - name: Build
+          echo "Tag: $TAG"
+          echo "SOFT_VERSION: $SOFT_VERSION"
+          echo "IDENTIFIER: $IDENTIFIER"
+          echo "CURRENT_YEAR: $CURRENT_YEAR"
+
+          cd sources
+          qmake6 polyphone.pro \
+            CONFIG+=release \
+            CONFIG+=USE_WOLFSSL \
+            PREFIX=/usr \
+            DEFINES+="SOFT_VERSION=\"${SOFT_VERSION}\"" \
+            DEFINES+="IDENTIFIER=\"${IDENTIFIER}\"" \
+            DEFINES+="CURRENT_YEAR=\"${CURRENT_YEAR}\""
+
+      - name: Build Polyphone
         run: |
           cd sources
-          qmake6 polyphone.pro CONFIG+=release PREFIX=/usr
           make -j$(nproc)
 
       - name: Create AppImage

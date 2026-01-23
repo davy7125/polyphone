@@ -1,4 +1,4 @@
-polyphone (2.6.0) unstable; urgency=low
+polyphone (2.6) unstable; urgency=low
 
   * (new) Dutch and Japanese translations, all others completed by AI
   * (new) RPN messages can change the tuning

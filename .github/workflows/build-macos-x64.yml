@@ -55,10 +55,33 @@ jobs:
             mpg123 \
             opus
 
-      - name: Build
+      - name: Configure with qmake
+        run: |
+          TAG="${{ inputs.tag }}"
+          SOFT_VERSION="${TAG%%-*}"
+          if [[ "$TAG" == *"-"* ]]; then
+            IDENTIFIER="${TAG#*-}"
+          else
+            IDENTIFIER=""
+          fi
+          CURRENT_YEAR=$(date +%Y)
+
+          echo "Tag: $TAG"
+          echo "SOFT_VERSION: $SOFT_VERSION"
+          echo "IDENTIFIER: $IDENTIFIER"
+          echo "CURRENT_YEAR: $CURRENT_YEAR"
+
+          cd sources
+          qmake polyphone.pro \
+            CONFIG+=release \
+            CONFIG+=USE_WOLFSSL \
+            DEFINES+="SOFT_VERSION=\"${SOFT_VERSION}\"" \
+            DEFINES+="IDENTIFIER=\"${IDENTIFIER}\"" \
+            DEFINES+="CURRENT_YEAR=\"${CURRENT_YEAR}\""
+
+      - name: Build Polyphone
         run: |
           cd sources
-          qmake polyphone.pro CONFIG+=release
           make -j$(sysctl -n hw.ncpu)
 
       - name: Create DMG
