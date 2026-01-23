@@ -35,6 +35,26 @@ jobs:
           fi
           PLIST_FILE="packaging/mac/polyphone.plist"
           sed -i '' "s|<key>CFBundleShortVersionString</key>[[:space:]]*<string>[^<]*|<key>CFBundleShortVersionString</key><string>$NUMERIC_VERSION|" "$PLIST_FILE"
+        
+      - name: Update version info in polyphone.pro
+        run: |
+          TAG="${{ inputs.tag }}"
+          SOFT_VERSION="${TAG%%-*}"
+          if [[ "$TAG" == *"-"* ]]; then
+            IDENTIFIER="${TAG#*-}"
+          else
+            IDENTIFIER=""
+          fi
+          CURRENT_YEAR=$(date +%Y)
+
+          echo "Tag: $TAG"
+          echo "SOFT_VERSION: $SOFT_VERSION"
+          echo "IDENTIFIER: $IDENTIFIER"
+          echo "CURRENT_YEAR: $CURRENT_YEAR"
+
+          sed -i "s|DEFINES += SOFT_VERSION=\\\\\"[^\"]*\\\\\"|DEFINES += SOFT_VERSION=\\\\\"${SOFT_VERSION}\\\\\"|" sources/polyphone.pro
+          sed -i "s|DEFINES += IDENTIFIER=\\\\\"[^\"]*\\\\\"|DEFINES += IDENTIFIER=\\\\\"${IDENTIFIER}\\\\\"|" sources/polyphone.pro
+          sed -i "s|DEFINES += CURRENT_YEAR=\\\\\"[^\"]*\\\\\"|DEFINES += CURRENT_YEAR=\\\\\"${CURRENT_YEAR}\\\\\"|" sources/polyphone.pro
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
@@ -57,27 +77,8 @@ jobs:
 
       - name: Configure with qmake
         run: |
-          TAG="${{ inputs.tag }}"
-          SOFT_VERSION="${TAG%%-*}"
-          if [[ "$TAG" == *"-"* ]]; then
-            IDENTIFIER="${TAG#*-}"
-          else
-            IDENTIFIER=""
-          fi
-          CURRENT_YEAR=$(date +%Y)
-
-          echo "Tag: $TAG"
-          echo "SOFT_VERSION: $SOFT_VERSION"
-          echo "IDENTIFIER: $IDENTIFIER"
-          echo "CURRENT_YEAR: $CURRENT_YEAR"
-
           cd sources
-          qmake polyphone.pro \
-            CONFIG+=release \
-            CONFIG+=USE_WOLFSSL \
-            DEFINES+="SOFT_VERSION=\"${SOFT_VERSION}\"" \
-            DEFINES+="IDENTIFIER=\"${IDENTIFIER}\"" \
-            DEFINES+="CURRENT_YEAR=\"${CURRENT_YEAR}\""
+          qmake polyphone.pro CONFIG+=release
 
       - name: Build Polyphone
         run: |
