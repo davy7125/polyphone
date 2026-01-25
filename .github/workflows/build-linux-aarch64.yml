@@ -130,6 +130,7 @@ jobs:
           
       - name: Sign the artifact
         uses: signpath/github-action-submit-signing-request@v2
+        environment: production
         with:
           api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
           organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
@@ -144,3 +145,4 @@ jobs:
         with:
           path: "signed/*.AppImage"
           name: polyphone-linux-aarch64-appimage-signed
+          if-no-files-found: error

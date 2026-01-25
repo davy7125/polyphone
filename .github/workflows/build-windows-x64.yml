@@ -168,6 +168,7 @@ jobs:
           
       - name: Sign the installer artifact
         uses: signpath/github-action-submit-signing-request@v2
+        environment: production
         with:
           api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
           organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
@@ -179,6 +180,7 @@ jobs:
           
       - name: Sign the portable artifact
         uses: signpath/github-action-submit-signing-request@v2
+        environment: production
         with:
           api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
           organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
@@ -193,9 +195,11 @@ jobs:
         with:
           path: "signed/*.exe"
           name: polyphone-windows-x64-installer-signed
+          if-no-files-found: error
 
       - name: Upload the signed archive as an artifact
         uses: actions/upload-artifact@v4
         with:
           path: "signed/*.zip"
           name: polyphone-windows-x64-portable-signed
+          if-no-files-found: error
