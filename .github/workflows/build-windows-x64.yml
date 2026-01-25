@@ -84,7 +84,7 @@ jobs:
         shell: cmd
         run: |
           mkdir deploy
-          copy windows\bin\polyphone.exe deploy\
+          copy build\release\polyphone.exe deploy\
           "%QT_ROOT_DIR%\bin\windeployqt.exe" ^
             --release ^
             --no-translations ^
