@@ -90,7 +90,7 @@ jobs:
           cd sources
           mv ../macos/polyphone.app ../macos/Polyphone.app
           macdeployqt ../macos/Polyphone.app -dmg
-          mv ../macos/Polyphone.dmg ../macos/Polyphone_${{ inputs.tag }}-macOS_12_Intel.dmg
+          mv ../macos/polyphone.dmg ../macos/Polyphone_${{ inputs.tag }}-macOS_12_Intel.dmg
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

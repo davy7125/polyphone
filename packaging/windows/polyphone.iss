@@ -85,22 +85,14 @@ Root: HKCR; Subkey: "Polyphone.organ\DefaultIcon"; ValueType: string; ValueData:
 Root: HKCR; Subkey: "Polyphone.organ\shell\open\command"; ValueType: string; ValueData: """{app}\polyphone.exe"" ""%1"""
 
 [Code]
-function IsWindows10AndAbove: Boolean;
-var
-  Major, Minor, Build: Cardinal;
+function IsWindows10OrLater: Boolean;
 begin
-  if not GetWindowsVersion(Major, Minor, Build) then
-  begin
-    Result := False;
-    exit;
-  end;
-  // Windows 10 correspond à Major = 10
-  Result := Major >= 10;
+  Result := (GetWindowsVersion >= $0A000000);
 end;
 
 [Run]
-Filename: "{sys}\ie4uinit.exe"; Parameters: "-ClearIconCache"; StatusMsg: "Refreshing Windows icon cache..."; Flags: runhidden; Check: not IsWindows10AndAbove and not IsWin64
-Filename: "{sys}\ie4uinit.exe"; Parameters: "-Show"; StatusMsg: "Refreshing Windows icon cache..."; Flags: runhidden; Check: IsWindows10AndAbove and not IsWin64
-Filename: "{sys}\ie4uinit.exe"; Parameters: "-ClearIconCache"; StatusMsg: "Refreshing Windows icon cache..."; Flags: runhidden 64bit; Check: not IsWindows10AndAbove and IsWin64
-Filename: "{sys}\ie4uinit.exe"; Parameters: "-Show"; StatusMsg: "Refreshing Windows icon cache..."; Flags: runhidden 64bit; Check: IsWindows10AndAbove and IsWin64
+Filename: "{sys}\ie4uinit.exe"; Parameters: "-ClearIconCache"; StatusMsg: "Refreshing Windows icon cache..."; Flags: runhidden; Check: not IsWindows10OrLater and not IsWin64
+Filename: "{sys}\ie4uinit.exe"; Parameters: "-Show"; StatusMsg: "Refreshing Windows icon cache..."; Flags: runhidden; Check: IsWindows10OrLater and not IsWin64
+Filename: "{sys}\ie4uinit.exe"; Parameters: "-ClearIconCache"; StatusMsg: "Refreshing Windows icon cache..."; Flags: runhidden 64bit; Check: not IsWindows10OrLater and IsWin64
+Filename: "{sys}\ie4uinit.exe"; Parameters: "-Show"; StatusMsg: "Refreshing Windows icon cache..."; Flags: runhidden 64bit; Check: IsWindows10OrLater and IsWin64
 Filename: "{app}\polyphone.exe"; Description: "{cm:LaunchProgram,Polyphone}"; Flags: nowait postinstall skipifsilent
