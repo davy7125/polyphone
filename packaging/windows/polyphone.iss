@@ -29,12 +29,12 @@ ArchitecturesInstallIn64BitMode=x64compatible
 [Languages]
 Name: "catalan"; MessagesFile: "compiler:Languages\Catalan.isl"
 Name: "chinesesimplified"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
-Name: "czech";  MessagesFile: "compiler:Languages\Czech.isl"
-Name: "danish";  MessagesFile: "compiler:Languages\Danish.isl"
-Name: "dutch";  MessagesFile: "compiler:Languages\Dutch.isl"
+Name: "czech"; MessagesFile: "compiler:Languages\Czech.isl"
+Name: "danish"; MessagesFile: "compiler:Languages\Danish.isl"
+Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"
 Name: "english"; MessagesFile: "compiler:Default.isl"
-Name: "french";  MessagesFile: "compiler:Languages\French.isl"
-Name: "german";  MessagesFile: "compiler:Languages\German.isl"
+Name: "french"; MessagesFile: "compiler:Languages\French.isl"
+Name: "german"; MessagesFile: "compiler:Languages\German.isl"
 Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
 Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
 Name: "korean"; MessagesFile: "compiler:Languages\Korean.isl"
@@ -83,6 +83,20 @@ Root: HKCR; Subkey: ".organ"; ValueType: string; ValueData: "Polyphone.organ"; F
 Root: HKCR; Subkey: "Polyphone.organ"; ValueType: string; ValueData: "GrandOrgue organ definition"; Flags: uninsdeletekey
 Root: HKCR; Subkey: "Polyphone.organ\DefaultIcon"; ValueType: string; ValueData: "{app}\polyphone.exe,5"
 Root: HKCR; Subkey: "Polyphone.organ\shell\open\command"; ValueType: string; ValueData: """{app}\polyphone.exe"" ""%1"""
+
+[Code]
+function IsWindows10AndAbove: Boolean;
+var
+  Major, Minor, Build: Cardinal;
+begin
+  if not GetWindowsVersion(Major, Minor, Build) then
+  begin
+    Result := False;
+    exit;
+  end;
+  // Windows 10 correspond à Major = 10
+  Result := Major >= 10;
+end;
 
 [Run]
 Filename: "{sys}\ie4uinit.exe"; Parameters: "-ClearIconCache"; StatusMsg: "Refreshing Windows icon cache..."; Flags: runhidden; Check: not IsWindows10AndAbove and not IsWin64
