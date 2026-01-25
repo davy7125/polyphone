@@ -2,25 +2,145 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+  <key>UTExportedTypeDeclarations</key>
+  <array>
+    <dict>
+      <key>UTTypeIdentifier</key>
+      <string>fr.polyphone.sf2</string>
+      <key>UTTypeDescription</key>
+      <string>SoundFont 2 file</string>
+      <key>UTTypeConformsTo</key>
+      <array>
+        <string>public.data</string>
+      </array>
+      <key>UTTypeTagSpecification</key>
+      <dict>
+        <key>public.filename-extension</key>
+        <string>sf2</string>
+      </dict>
+    </dict>
+    <dict>
+      <key>UTTypeIdentifier</key>
+      <string>fr.polyphone.sf3</string>
+      <key>UTTypeDescription</key>
+      <string>SoundFont 3 file</string>
+      <key>UTTypeConformsTo</key>
+      <array>
+        <string>public.data</string>
+      </array>
+      <key>UTTypeTagSpecification</key>
+      <dict>
+        <key>public.filename-extension</key>
+        <string>sf3</string>
+      </dict>
+    </dict>
+    <dict>
+      <key>UTTypeIdentifier</key>
+      <string>fr.polyphone.sfark</string>
+      <key>UTTypeDescription</key>
+      <string>sfArk soundfont archive</string>
+      <key>UTTypeConformsTo</key>
+      <array>
+        <string>public.archive</string>
+      </array>
+      <key>UTTypeTagSpecification</key>
+      <dict>
+        <key>public.filename-extension</key>
+        <string>sfark</string>
+      </dict>
+    </dict>
+    <dict>
+      <key>UTTypeIdentifier</key>
+      <string>fr.polyphone.sfz</string>
+      <key>UTTypeDescription</key>
+      <string>SFZ instrument definition</string>
+      <key>UTTypeConformsTo</key>
+      <array>
+        <string>public.text</string>
+      </array>
+      <key>UTTypeTagSpecification</key>
+      <dict>
+        <key>public.filename-extension</key>
+        <string>sfz</string>
+      </dict>
+    </dict>
+    <dict>
+      <key>UTTypeIdentifier</key>
+      <string>fr.polyphone.organ</string>
+      <key>UTTypeDescription</key>
+      <string>GrandOrgue organ definition</string>
+      <key>UTTypeConformsTo</key>
+      <array>
+        <string>public.data</string>
+      </array>
+      <key>UTTypeTagSpecification</key>
+      <dict>
+        <key>public.filename-extension</key>
+        <string>organ</string>
+      </dict>
+    </dict>
+  </array>
   <key>CFBundleDocumentTypes</key>
   <array>
     <dict>
-      <key>CFBundleTypeIconFile</key>
-      <string>polyphoneFile.icns</string>
-      <key>CFBundleTypeExtensions</key>
-      <array>
-        <string>sf2</string>
-        <string>sf3</string>
-        <string>sfz</string>
-        <string>sfark</string>
-        <string>organ</string>
-      </array>
       <key>CFBundleTypeName</key>
-      <string>Soundfont</string>
+      <string>SoundFont 2 file</string>
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
-      <key>LSIsAppleDefaultForType</key>
-      <true/>
+      <key>LSItemContentTypes</key>
+      <array>
+        <string>fr.polyphone.sf2</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>file_sf2</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeName</key>
+      <string>SoundFont 3 file</string>
+      <key>CFBundleTypeRole</key>
+      <string>Editor</string>
+      <key>LSItemContentTypes</key>
+      <array>
+        <string>fr.polyphone.sf3</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>file_sf3</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeName</key>
+      <string>sfArk soundfont archive</string>
+      <key>CFBundleTypeRole</key>
+      <string>Editor</string>
+      <key>LSItemContentTypes</key>
+      <array>
+        <string>fr.polyphone.sfark</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>file_sfArk</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeName</key>
+      <string>SFZ instrument definition</string>
+      <key>CFBundleTypeRole</key>
+      <string>Editor</string>
+      <key>LSItemContentTypes</key>
+      <array>
+        <string>fr.polyphone.sfz</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>file_sfz</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeName</key>
+      <string>GrandOrgue organ definition</string>
+      <key>CFBundleTypeRole</key>
+      <string>Editor</string>
+      <key>LSItemContentTypes</key>
+      <array>
+        <string>fr.polyphone.organ</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>file_organ</string>
     </dict>
   </array>
   <key>CFBundleExecutable</key>

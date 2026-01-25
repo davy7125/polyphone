@@ -5,6 +5,7 @@ polyphone (2.6) unstable; urgency=low
   * (new) option for allowing the compression in a soundfont
   * (new) option for compressing a non-compressed sample in a sf3 file
   * (new) display of the compressed samples in the sample summary page
+  * (new) icons for soundfont files on Windows and MacOS
   * (improvement) saving a sf3 file doesn't lower the sample quality
   * (improvement) faster sound engine
   * (improvement) more accurate resampling
@@ -13,7 +14,7 @@ polyphone (2.6) unstable; urgency=low
   * (fix) tab widths of the GUI
   * (fix) sample links are kept during an export
 
- -- Davy Triponney <contact@polyphone.io>  Wed, 21 Jan 2025 10:30:00 +0100
+ -- Davy Triponney <contact@polyphone.io>  Wed, 21 Jan 2026 10:30:00 +0100
 
 
 polyphone (2.5) UNRELEASED; urgency=low

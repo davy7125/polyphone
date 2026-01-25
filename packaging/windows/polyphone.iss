@@ -59,15 +59,34 @@ Name: "{group}\Polyphone"; Filename: "{app}\polyphone.exe"
 Name: "{commondesktop}\Polyphone"; Filename: "{app}\polyphone.exe"; Tasks: desktopicon
 
 [Registry]
-Root: HKCR; Subkey: ".sf2"; ValueType: string; ValueName: ""; ValueData: "PolyphoneFile"; Flags: uninsdeletevalue
-Root: HKCR; Subkey: ".sf3"; ValueType: string; ValueName: ""; ValueData: "PolyphoneFile"; Flags: uninsdeletevalue
-Root: HKCR; Subkey: ".sfz"; ValueType: string; ValueName: ""; ValueData: "PolyphoneFile"; Flags: uninsdeletevalue
-Root: HKCR; Subkey: ".sfArk"; ValueType: string; ValueName: ""; ValueData: "PolyphoneFile"; Flags: uninsdeletevalue
-Root: HKCR; Subkey: ".organ"; ValueType: string; ValueName: ""; ValueData: "PolyphoneFile"; Flags: uninsdeletevalue
-Root: HKCR; Subkey: "PolyphoneFile"; ValueType: string; ValueName: ""; ValueData: "soundfont"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "PolyphoneFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\polyphone.exe,1"
-Root: HKCR; Subkey: "PolyphoneFile\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\polyphone.exe"" ""%1"""
+Root: HKCR; Subkey: ".sf2"; ValueType: string; ValueData: "Polyphone.sf2"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "Polyphone.sf2"; ValueType: string; ValueData: "SoundFont 2 file"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Polyphone.sf2\DefaultIcon"; ValueType: string; ValueData: "{app}\polyphone.exe,1"
+Root: HKCR; Subkey: "Polyphone.sf2\shell\open\command"; ValueType: string; ValueData: """{app}\polyphone.exe"" ""%1"""
+
+Root: HKCR; Subkey: ".sf3"; ValueType: string; ValueData: "Polyphone.sf3"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "Polyphone.sf3"; ValueType: string; ValueData: "SoundFont 3 file"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Polyphone.sf3\DefaultIcon"; ValueType: string; ValueData: "{app}\polyphone.exe,2"
+Root: HKCR; Subkey: "Polyphone.sf3\shell\open\command"; ValueType: string; ValueData: """{app}\polyphone.exe"" ""%1"""
+
+Root: HKCR; Subkey: ".sfArk"; ValueType: string; ValueData: "Polyphone.sfArk"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "Polyphone.sfArk"; ValueType: string; ValueData: "sfArk soundfont archive"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Polyphone.sfArk\DefaultIcon"; ValueType: string; ValueData: "{app}\polyphone.exe,3"
+Root: HKCR; Subkey: "Polyphone.sfArk\shell\open\command"; ValueType: string; ValueData: """{app}\polyphone.exe"" ""%1"""
+
+Root: HKCR; Subkey: ".sfz"; ValueType: string; ValueData: "Polyphone.sfz"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "Polyphone.sfz"; ValueType: string; ValueData: "SFZ instrument definition"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Polyphone.sfz\DefaultIcon"; ValueType: string; ValueData: "{app}\polyphone.exe,4"
+Root: HKCR; Subkey: "Polyphone.sfz\shell\open\command"; ValueType: string; ValueData: """{app}\polyphone.exe"" ""%1"""
+
+Root: HKCR; Subkey: ".organ"; ValueType: string; ValueData: "Polyphone.organ"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "Polyphone.organ"; ValueType: string; ValueData: "GrandOrgue organ definition"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Polyphone.organ\DefaultIcon"; ValueType: string; ValueData: "{app}\polyphone.exe,5"
+Root: HKCR; Subkey: "Polyphone.organ\shell\open\command"; ValueType: string; ValueData: """{app}\polyphone.exe"" ""%1"""
 
 [Run]
+Filename: "{sys}\ie4uinit.exe"; Parameters: "-ClearIconCache"; StatusMsg: "Refreshing Windows icon cache..."; Flags: runhidden; Check: not IsWindows10AndAbove and not IsWin64
+Filename: "{sys}\ie4uinit.exe"; Parameters: "-Show"; StatusMsg: "Refreshing Windows icon cache..."; Flags: runhidden; Check: IsWindows10AndAbove and not IsWin64
+Filename: "{sys}\ie4uinit.exe"; Parameters: "-ClearIconCache"; StatusMsg: "Refreshing Windows icon cache..."; Flags: runhidden 64bit; Check: not IsWindows10AndAbove and IsWin64
+Filename: "{sys}\ie4uinit.exe"; Parameters: "-Show"; StatusMsg: "Refreshing Windows icon cache..."; Flags: runhidden 64bit; Check: IsWindows10AndAbove and IsWin64
 Filename: "{app}\polyphone.exe"; Description: "{cm:LaunchProgram,Polyphone}"; Flags: nowait postinstall skipifsilent
-

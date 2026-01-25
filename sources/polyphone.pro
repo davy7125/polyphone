@@ -64,13 +64,10 @@ win32 {
     # Compiler must be MinGW for the option -ffloat-store, required by sfArk
     DEFINES += USE_LOCAL_RTAUDIO USE_LOCAL_RTMIDI USE_LOCAL_STK \
         __WINDOWS_MM__ __WINDOWS_WASAPI__ __WINDOWS_ASIO__ #__WINDOWS_DS__
-    INCLUDEPATH += ../windows/include
-    RC_FILE = polyphone.rc
+    RC_FILE = ../packaging/windows/polyphone.rc
     QMAKE_CXXFLAGS += -ffloat-store
     LIBS += -lz -lwinmm -logg -lvorbis -lvorbisfile -lvorbisenc -lcrypto -lFLAC -lsndfile \
         -lole32 -lwinmm -lksuser -lmfplat -lmfuuid -lwmcodecdspuuid # <- for RtAudio
-    LIBS += -L$$PWD/../windows/lib
-    DESTDIR = $$PWD/../windows/bin
 
     # Files necessary for ASIO with RtAudio
     HEADERS += lib/_option_rtaudio/rtaudio/include/asio.h \
@@ -136,6 +133,14 @@ macx {
         -framework AudioUnit -framework AudioToolbox -framework Cocoa
     ICON = ../packaging/mac/polyphone.icns
     QMAKE_INFO_PLIST = ../packaging/mac/polyphone.plist
+    QMAKE_BUNDLE_DATA += fileicons
+    fileicons.files = \
+        ../packaging/mac/file_sf2.icns \
+        ../packaging/mac/file_sf3.icns \
+        ../packaging/mac/file_sfArk.icns \
+        ../packaging/mac/file_sfz.icns \
+        ../packaging/mac/file_organ.icns
+    fileicons.path = Contents/Resources
     DESTDIR = $$PWD/../macos
 }
 DEFINES += SFTOOLS_NOXML
