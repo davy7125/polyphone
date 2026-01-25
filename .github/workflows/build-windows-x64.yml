@@ -174,6 +174,7 @@ jobs:
           organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
           project-slug: polyphone
           signing-policy-slug: test-signing
+          artifact-configuration-slug: windows-installer
           wait-for-completion: true
           github-artifact-id: '${{ steps.upload-installer-artifact.outputs.artifact-id }}'
           output-artifact-directory: 'signed'
@@ -185,6 +186,7 @@ jobs:
           organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
           project-slug: polyphone
           signing-policy-slug: test-signing
+          artifact-configuration-slug: windows-portable
           wait-for-completion: true
           github-artifact-id: '${{ steps.upload-portable-artifact.outputs.artifact-id }}'
           output-artifact-directory: 'signed'
