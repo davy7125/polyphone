@@ -85,7 +85,7 @@ jobs:
           cd sources
           make -j$(sysctl -n hw.ncpu)
 
-      - name: Create DMG
+      - name: Deploy and create dmg
         run: |
           cd sources
           mv ../macos/polyphone.app ../macos/Polyphone.app
@@ -93,9 +93,27 @@ jobs:
           mv ../macos/polyphone.dmg ../macos/Polyphone_${{ inputs.tag }}-macOS_12_Intel.dmg
 
       - name: Upload artifact
+        id: upload-artifact
         uses: actions/upload-artifact@v4
         with:
           name: polyphone-macos-x64-installer
           path: macos/*.dmg
           retention-days: 7
           if-no-files-found: error
+          
+      - name: Sign the artifact
+        uses: signpath/github-action-submit-signing-request@v2
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: polyphone
+          signing-policy-slug: release-signing
+          wait-for-completion: true
+          github-artifact-id: '${{ steps.upload-artifact.outputs.artifact-id }}'
+          output-artifact-directory: 'signed'
+
+      - name: Upload the signed artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: "signed/*.dmg"
+          name: polyphone-macos-x64-installer-signed

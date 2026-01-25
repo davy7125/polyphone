@@ -120,9 +120,27 @@ jobs:
           ./linuxdeploy-aarch64.AppImage --appdir AppDir --plugin qt --output appimage
 
       - name: Upload artifact
+        id: upload-artifact
         uses: actions/upload-artifact@v4
         with:
           name: polyphone-linux-aarch64-appimage
           path: Polyphone*.AppImage
           retention-days: 7
           if-no-files-found: error
+          
+      - name: Sign the artifact
+        uses: signpath/github-action-submit-signing-request@v2
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: polyphone
+          signing-policy-slug: release-signing
+          wait-for-completion: true
+          github-artifact-id: '${{ steps.upload-artifact.outputs.artifact-id }}'
+          output-artifact-directory: 'signed'
+
+      - name: Upload the signed artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: "signed/*.AppImage"
+          name: polyphone-linux-aarch64-appimage-signed
