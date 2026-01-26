@@ -83,7 +83,7 @@ jobs:
           files: |
             artifacts/polyphone-windows-x64-installer-signed/*
             artifacts/polyphone-windows-x64-portable-signed/*
-            artifacts/polyphone-linux-x64-appimage-signed/*
-            artifacts/polyphone-linux-aarch64-appimage-signed/*
-            artifacts/polyphone-macos-x64-installer-signed/*
-            artifacts/polyphone-macos-aarch64-installer-signed/*
+            artifacts/polyphone-linux-x64-appimage/*
+            artifacts/polyphone-linux-aarch64-appimage/*
+            artifacts/polyphone-macos-x64-installer/*
+            artifacts/polyphone-macos-aarch64-installer/*
