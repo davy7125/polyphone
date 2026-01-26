@@ -105,6 +105,7 @@ jobs:
           
           # Create AppDir structure
           mkdir -p AppDir/usr/bin
+          mkdir -p AppDir/usr/lib
           mkdir -p AppDir/usr/share/applications
           mkdir -p AppDir/usr/share/icons/hicolor/512x512/apps
           
@@ -117,7 +118,6 @@ jobs:
           cp /usr/lib/aarch64-linux-gnu/libcrypto.so.3 AppDir/usr/lib/
           
           # Generate the AppImage
-          export LINUXDEPLOY_EXTRA_LIBS=$(ldd sources/bin/polyphone | grep -E 'libssl|libcrypto' | awk '{print $3}' | tr '\n' ':')
           ./linuxdeploy-aarch64.AppImage --appdir AppDir --plugin qt --output appimage
 
       - name: Upload artifact
