@@ -10,6 +10,8 @@ jobs:
     uses: ./.github/workflows/build-windows-x64.yml
     with:
       tag: ${{ github.ref_name }}
+    secrets:
+      SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
 
   build-linux-x64:
     uses: ./.github/workflows/build-linux-x64.yml

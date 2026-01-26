@@ -6,6 +6,9 @@ on:
       tag:
         required: true
         type: string
+    secrets:
+      SIGNPATH_API_TOKEN:
+        required: true
   workflow_dispatch:
     inputs:
       tag:
