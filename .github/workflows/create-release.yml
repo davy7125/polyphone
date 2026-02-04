@@ -50,19 +50,29 @@ jobs:
                 fixes.append(line.split(")", 1)[1].strip())
 
           md = []
+          md.append("# Changelog\n")
           if news:
-            md.append("# New\n")
+            md.append("## New\n")
             md += [f"- {n}" for n in news]
             md.append("")
           if improvements:
-            md.append("# Improvement\n")
+            md.append("## Improvement\n")
             md += [f"- {i}" for i in improvements]
             md.append("")
           if fixes:
-            md.append("# Fix\n")
+            md.append("## Fix\n")
             md += [f"- {f}" for f in fixes]
+          changelog_content = "\n".join(md).rstrip()
+          
+          release_path = Path("RELEASE.md")
+          release_content = release_path.read_text(encoding="utf-8").strip() if release_path.exists() else ""
+          
+          parts = []
+          parts.append(changelog_content)
+          if release_content:
+            parts.append(release_content)
+          body = "\n".join([p for p in parts if p])
 
-          body = "\n".join(md)
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
             f.write("body<<EOF\n")
             f.write(body + "\n")
