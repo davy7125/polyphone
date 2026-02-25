@@ -1,6 +1,6 @@
 polyphone (2.6) unstable; urgency=low
 
-  * (new) Dutch and Japanese translations, all others completed by AI
+  * (new) Dutch and Japanese translations added, all others completed by AI
   * (new) RPN messages can change the tuning
   * (new) option for allowing the compression in a soundfont
   * (new) option for compressing a non-compressed sample in a sf3 file

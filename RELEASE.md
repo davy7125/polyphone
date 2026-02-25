@@ -13,4 +13,4 @@ This application uses client-side HTTP requests exclusively for operational purp
 * user authentication and account access.
 
 The application does not collect, track, or share any personal data.
-No data is transmitted to any server other than [https://polyphone.io](https://polyphone.io), and no third-party services are involved.
+No data is transmitted to any server other than [https://www.polyphone.io](https://www.polyphone.io), and no third-party services are involved.
