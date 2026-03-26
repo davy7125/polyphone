@@ -22,6 +22,9 @@
 -3 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR] [\fB\-c\fR \fICONFIG\fR]
 .br
 .B polyphone
+-4 [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-d\fR \fIOUTPUT_DIR\fR] [\fB\-o\fR \fIOUTPUT_NAME\fR] [\fB\-c\fR \fICONFIG\fR]
+.br
+.B polyphone
 -s [\fB\-i\fR \fIINPUT_FILEPATH\fR] [\fB\-c\fR \fICONFIG\fR]
 
 .SH DESCRIPTION
@@ -56,6 +59,11 @@ to convert a file into the sf3 format.
 Use
 .B polyphone
 to convert a file into the sfz format.
+.TP
+.BR \fB-3\fR
+Use
+.B polyphone
+to convert a file into the csv format.
 .TP
 .BR \fB-s\fR
 Open
@@ -93,6 +101,12 @@ The configuration is made of one character indicating the compression quality. '
 .B sfz conversion
 .br
 The configuration is made up of 3 values separated by a '|'. The first value is '1' if each preset must be prefixed by its preset number, '0' otherwise. The second value is '1' if a directory per bank must be created, '0' otherwise. The third value is '1' if the general midi classification must be used to sort presets, '0' otherwise. Default is '0|0|0'.
+.br
+.BR
+ * 
+.B csv conversion
+.br
+The option 'raw' can be used to export raw values (as they are stored in the soundfont file) rather than values with physical, measurable units. For example, the exported release time will be 0.491 (milliseconds) or -1229 in its raw form. By default, values with physical units are exported.
 .br
 .BR
  * 

@@ -449,7 +449,7 @@ void Sound::setRawData(const char * rawData, quint32 rawDataLength)
 void Sound::copyDataFrom(Sound * sourceSound)
 {
     // Copying raw data if possible
-    this->_info.rawDataAvailable = false;
+    _info.rawDataAvailable = false;
     if (sourceSound->isRawDataUnchanged())
     {
         // Raw data from source
@@ -460,15 +460,15 @@ void Sound::copyDataFrom(Sound * sourceSound)
         if (rawData != nullptr && rawDataLength > 0)
         {
             // Copy
-            this->_rawData = new char[rawDataLength];
+            _rawData = new char[rawDataLength];
             memcpy(this->_rawData, rawData, rawDataLength);
-            this->_rawDataLength = rawDataLength;
-            this->_info.rawDataAvailable = true;
+            _rawDataLength = rawDataLength;
+            _info.rawDataAvailable = true;
         }
     }
 
     // Load data16 + data24
     quint32 sampleLength;
     sourceSound->getData(sampleLength, _data16, _data24, false, true);
-    this->_info.dwLength = sampleLength;
+    _info.dwLength = sampleLength;
 }

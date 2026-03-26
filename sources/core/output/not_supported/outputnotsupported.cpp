@@ -36,5 +36,5 @@ void OutputNotSupported::processInternal(QString fileName, SoundfontManager * sm
 
     // File not supported
     success = false;
-    error = tr("This file format is not supported.");
+    error = tr("this file format is not supported");
 }

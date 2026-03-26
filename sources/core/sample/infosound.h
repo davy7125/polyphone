@@ -53,7 +53,7 @@ public:
     }
 
     quint32 dwStart;
-    quint32 dwStart2; // for sf2 : 24-bit data are stored on 2 blocs
+    quint32 dwStart2; // for sf2 : 24-bit data are stored on 2 blocks
     quint32 dwLength;
     quint32 dwSampleRate;
     quint16 wChannels;

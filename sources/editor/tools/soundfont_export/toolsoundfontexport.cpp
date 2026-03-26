@@ -110,6 +110,9 @@ void ToolSoundfontExport::process(SoundfontManager * sm, QString name, QMap<int,
         output->setOption("bankdir", params->getBankDirectory());
         output->setOption("gmsort", params->getGmSort());
         break;
+    case 3: // csv
+        output->setOption("raw_values", params->getCsvRaw());
+        break;
     default:
         break;
     }
@@ -220,6 +223,7 @@ QString ToolSoundfontExport::getFilePath(QString directory, QString name, int fo
     case 0: extension = ".sf2"; break;
     case 1: extension = ".sf3"; break;
     case 2: extension = ".sfz"; break;
+    case 3: extension = ".csv"; break;
     default: extension = ".xxx"; break;
     }
 

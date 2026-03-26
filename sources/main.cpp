@@ -104,7 +104,7 @@ int convert(Options &options)
     QFileInfo inputFile(options.getInputFiles()[0]);
     if (!inputFile.exists())
     {
-        writeLine("The file " + inputFile.filePath() + " does not exist.");
+        writeLine(QObject::tr("The file \"%1\" does not exist.").arg(inputFile.filePath()));
         return 1;
     }
 
@@ -112,48 +112,52 @@ int convert(Options &options)
     QFileInfo outputFile(options.getOutputFileFullPath());
     if (!QDir(options.getOutputDirectory()).exists())
     {
-        writeLine("The directory " + options.getOutputDirectory() + " does not exist.");
+        writeLine(QObject::tr("The directory \"%1\" does not exist.").arg(options.getOutputDirectory()));
         return 1;
     }
-    if (outputFile.exists() && options.mode() != Options::MODE_CONVERSION_TO_SFZ)
+    if (outputFile.exists() && options.mode() != Options::MODE_CONVERSION_TO_SFZ && options.mode() != Options::MODE_CONVERSION_TO_CSV)
     {
-        writeLine("The file "  + outputFile.filePath() + " already exists.");
+        writeLine(QObject::tr("The file \"%1\" already exists.").arg(outputFile.filePath()));
         return 1;
     }
 
     // Load input file
-    writeLine("Loading file " + inputFile.filePath() + "...");
+    writeLine(QObject::tr("Loading file \"%1\"...").arg(inputFile.filePath()));
     AbstractInputParser * input = InputFactory::getInput(inputFile.filePath());
     input->process(false);
     if (!input->isSuccess())
     {
-        writeLine("Couldn't load " + inputFile.filePath() + ": " + input->getError());
+        writeLine(QObject::tr("Couldn't load file \"%1\": %2.").arg(inputFile.filePath()).arg(input->getError()));
         delete input;
         return 1;
     }
     int sf2Index = input->getSf2Index();
     delete input;
-    writeLine("File loaded");
+    writeLine(QObject::tr("File successfully loaded!"));
 
     // Prepare the output with the respective options
     AbstractOutput * output = OutputFactory::getOutput(outputFile.filePath());
     switch (options.mode())
     {
     case Options::MODE_CONVERSION_TO_SF2:
-        writeLine("Saving file " + outputFile.filePath() + " ...");
+        writeLine(QObject::tr("Writing file \"%1\"...").arg(outputFile.filePath()));
         break;
     case Options::MODE_CONVERSION_TO_SF3:
         output->setOption("quality", options.sf3Quality());
-        writeLine("Saving file " + outputFile.filePath() + "...");
+        writeLine(QObject::tr("Writing file \"%1\"...").arg(outputFile.filePath()));
         break;
     case Options::MODE_CONVERSION_TO_SFZ: {
         output->setOption("prefix", options.sfzPresetPrefix());
         output->setOption("bankdir", options.sfzOneDirPerBank());
         output->setOption("gmsort", options.sfzGeneralMidi());
-        writeLine("Exporting in directory " + options.getOutputDirectory() + "...");
+        writeLine(QObject::tr("Writing files in directory \"%1\"...").arg(options.getOutputDirectory()));
     } break;
+    case Options::MODE_CONVERSION_TO_CSV:
+        output->setOption("raw_values", options.csvRawValues());
+        writeLine(QObject::tr("Writing files in directory \"%1\"...").arg(options.getOutputDirectory()));
+        break;
     default:
-        writeLine("fail");
+        writeLine(QObject::tr("Unknown mode \"%1\".").arg(options.mode()));
         return 1;
     }
 
@@ -161,12 +165,12 @@ int convert(Options &options)
     output->process(sf2Index, false);
     if (!output->isSuccess())
     {
-        writeLine("Couldn't create " + outputFile.filePath() + ": " + output->getError());
+        writeLine(QObject::tr("An error occurred: %1.").arg(output->getError()));
         delete output;
         return 1;
     }
     delete output;
-    writeLine("done");
+    writeLine(QObject::tr("File successfully converted!"));
 
     // Destroy a singleton that has been silently created
     SoundfontManager::kill();
@@ -179,7 +183,7 @@ int resetConfig(Options &options)
 
     QSettings settings;
     settings.clear();
-    writeLine("Previous configuration is now cleared.");
+    writeLine(QObject::tr("Previous configuration is now cleared."));
 
     return 0;
 }
@@ -188,9 +192,9 @@ int displayHelp(Options &options)
 {
     Q_UNUSED(options)
 #ifdef _WIN32
-    writeLine("See 'https://www.polyphone.io/documentation/manual/annexes/command-line' for more information");
+    writeLine(QObject::tr("See \"%1\" for more information.").arg("https://www.polyphone.io/documentation/manual/annexes/command-line"));
 #else
-    writeLine("Write 'man polyphone' to show usage");
+    writeLine(QObject::tr("Write \"%1\" to show usage.").arg("man polyphone"));
 #endif
     return 0;
 }

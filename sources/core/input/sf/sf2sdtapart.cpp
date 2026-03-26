@@ -200,7 +200,7 @@ QDataStream & operator << (QDataStream &out, Sf2SdtaPart &sdta)
         sound->getRawData(rawData, rawDataLength);
         if (sdta._isSf3 && rawDataLength > 0)
         {
-            if (out.writeRawData(rawData, rawDataLength) != rawDataLength)
+            if (out.writeRawData(rawData, rawDataLength) != (int)rawDataLength)
                 return out;
             sound->set(champ_dwStart16, val);
             val.dwValue += rawDataLength;
@@ -218,7 +218,7 @@ QDataStream & operator << (QDataStream &out, Sf2SdtaPart &sdta)
         {
             sound->getData(sampleLength, data16, data24, false, false);
             sampleLength *= sizeof(qint16);
-            if (out.writeRawData((char*)data16, sampleLength) != sampleLength)
+            if (out.writeRawData((char*)data16, sampleLength) != (int)sampleLength)
                 return out;
             sound->set(champ_dwStart16, val);
 
@@ -242,7 +242,7 @@ QDataStream & operator << (QDataStream &out, Sf2SdtaPart &sdta)
         foreach (Sound * sound, sdta._sounds)
         {
             sound->getData(sampleLength, data16, data24, false, false);
-            if (out.writeRawData((char*)data24, sampleLength) != sampleLength)
+            if (out.writeRawData((char*)data24, sampleLength) != (int)sampleLength)
                 return out;
             sound->set(champ_dwStart24, val);
 

@@ -38,6 +38,7 @@ Options::Options(int argc, char *argv[]) :
     _sfzPresetPrefix(false),
     _sfzOneDirPerBank(false),
     _sfzGeneralMidi(false),
+    _csvRawValues(false),
     _playerOptions(nullptr)
 {
     _appPath = QFileInfo(QCoreApplication::applicationFilePath()).path();
@@ -101,6 +102,9 @@ void Options::processType1(QString arg)
         break;
     case '3':
         _mode = MODE_CONVERSION_TO_SFZ;
+        break;
+    case '4':
+        _mode = MODE_CONVERSION_TO_CSV;
         break;
     case 'd':
         _currentState = STATE_OUTPUT_DIRECTORY;
@@ -197,6 +201,11 @@ void Options::processType2(QString arg)
             if (configurations.count() > 1)
                 _error = true;
             break;
+        case MODE_CONVERSION_TO_CSV:
+            if (configurations.count() > 1)
+                _error = true;
+            _csvRawValues = configurations[0] == "raw";
+            break;
         case MODE_SYNTHESIZER:
             if (_playerOptions == nullptr)
             {
@@ -239,7 +248,8 @@ void Options::checkErrors()
         if (_outputDirectory != "" || _outputFile != "")
             _error = true;
         break;
-    case MODE_CONVERSION_TO_SF2: case MODE_CONVERSION_TO_SF3: case MODE_CONVERSION_TO_SFZ:
+    case MODE_CONVERSION_TO_SF2: case MODE_CONVERSION_TO_SF3:
+    case MODE_CONVERSION_TO_SFZ: case MODE_CONVERSION_TO_CSV:
         if (_inputFiles.count() != 1)
             _error = true;
         break;
@@ -248,7 +258,8 @@ void Options::checkErrors()
 
 void Options::postTreatment()
 {
-    if (_mode == MODE_CONVERSION_TO_SF2 || _mode == MODE_CONVERSION_TO_SF3 || _mode == MODE_CONVERSION_TO_SFZ)
+    if (_mode == MODE_CONVERSION_TO_SF2 || _mode == MODE_CONVERSION_TO_SF3 ||
+        _mode == MODE_CONVERSION_TO_SFZ || _mode == MODE_CONVERSION_TO_CSV)
     {
         // By default, the output directory is the same than the input file directory
         if (_outputDirectory == "")
@@ -278,6 +289,9 @@ QString Options::getOutputFileFullPath()
         break;
     case MODE_CONVERSION_TO_SFZ:
         extension = ".sfz";
+        break;
+    case MODE_CONVERSION_TO_CSV:
+        extension = ".csv";
         break;
     default:
         break;

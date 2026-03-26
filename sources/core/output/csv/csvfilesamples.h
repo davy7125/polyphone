@@ -22,29 +22,21 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "toolsoundfontexport_parameters.h"
-#include "contextmanager.h"
+#ifndef CSVFILESAMPLES_H
+#define CSVFILESAMPLES_H
 
-void ToolSoundfontExport_parameters::loadConfiguration()
-{
-    _directory = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_EXPORT);
-    _format = getToolValue("type", 0).toInt();
-    _quality = getToolValue("quality", 1).toInt();
-    _presetPrefix = getToolValue("preset_prefix", true).toBool();
-    _bankDirectory = getToolValue("bank_directory", false).toBool();
-    _gmSort = getToolValue("gm_sort", false).toBool();
-    _filePreset = getToolValue("file_preset", false).toBool();
-    _csvRaw = getToolValue("csv_raw", false).toBool();
-}
+#include "csv/abstractcsvfile.h"
+#include "basetypes.h"
+class SoundfontManager;
 
-void ToolSoundfontExport_parameters::saveConfiguration()
+class CsvFileSamples: public AbstractCsvFile
 {
-    ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_EXPORT, _directory + "/soundfont.sfz");
-    setToolValue("type", _format);
-    setToolValue("quality", _quality);
-    setToolValue("preset_prefix", _presetPrefix);
-    setToolValue("bank_directory", _bankDirectory);
-    setToolValue("gm_sort", _gmSort);
-    setToolValue("file_preset", _filePreset);
-    setToolValue("csv_raw", _csvRaw);
-}
+public:
+    CsvFileSamples(QString filePath);
+    bool writeSamples(SoundfontManager * sm, EltID idSf2);
+
+protected:
+    QList<QString> getHeaders() override;
+};
+
+#endif // CSVFILESAMPLES_H

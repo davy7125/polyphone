@@ -33,12 +33,13 @@ class Options
 public:
     enum Mode
     {
-        MODE_RESET_CONFIG = -1,
         MODE_GUI = 0,
-        MODE_CONVERSION_TO_SF2 = 1,
-        MODE_CONVERSION_TO_SF3 = 2,
-        MODE_CONVERSION_TO_SFZ = 3,
-        MODE_SYNTHESIZER = 4
+        MODE_SYNTHESIZER = 1,
+        MODE_RESET_CONFIG = 2,
+        MODE_CONVERSION_TO_SF2 = 100,
+        MODE_CONVERSION_TO_SF3 = 101,
+        MODE_CONVERSION_TO_SFZ = 102,
+        MODE_CONVERSION_TO_CSV = 103
     };
 
     Options(int argc, char *argv[]);
@@ -73,6 +74,9 @@ public:
 
     /// Sf3 option: compression quality (0 is low, 1 is medium, 2 is high);
     int sf3Quality() { return _sf3Quality; }
+
+    /// Csv option: write raw values
+    bool csvRawValues() { return _csvRawValues; }
 
     /// Player options
     PlayerOptions * playerOptions() { return _playerOptions; }
@@ -111,6 +115,9 @@ private:
     bool _sfzPresetPrefix;
     bool _sfzOneDirPerBank;
     bool _sfzGeneralMidi;
+
+    // Csv option
+    bool _csvRawValues;
 
     // Player options
     PlayerOptions * _playerOptions;

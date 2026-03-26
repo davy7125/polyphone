@@ -6,6 +6,7 @@ polyphone (2.6) unstable; urgency=low
   * (new) option for compressing a non-compressed sample in a sf3 file
   * (new) display of the compressed samples in the sample summary page
   * (new) icons for soundfont files on Windows and MacOS
+  * (new) csv export
   * (improvement) saving a sf3 file doesn't lower the sample quality
   * (improvement) faster sound engine
   * (improvement) more accurate resampling

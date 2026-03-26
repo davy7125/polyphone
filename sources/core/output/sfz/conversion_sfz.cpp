@@ -53,7 +53,7 @@ QString ConversionSfz::convert(QString dirPath, EltID idSf2, bool presetPrefix, 
         dirPath += "-" + QString::number(i);
     }
     if (!QDir().mkdir(dirPath))
-        return tr("Cannot create directory \"%1\"").arg(dirPath);
+        return tr("cannot create directory \"%1\"").arg(dirPath);
 
     // More than one bank in use?
     int uniqueBankNumber = -1;
@@ -519,7 +519,7 @@ void ConversionSfz::writeModulator(ModulatorData modData)
                 else
                     keyCenter = modData.srcOper.isDescending ? 128  : 0;
 
-                _sfzWriter->addLine("fil_keytrack", qRound(static_cast<double>(modData.amount) / (modData.srcOper.isBipolar ? 64 : 128)));
+                _sfzWriter->addLine("fil_keytrack", qRound(static_cast<double>(amount) / (modData.srcOper.isBipolar ? 64 : 128)));
                 _sfzWriter->addLine("fil_keycenter", keyCenter);
             }
         }

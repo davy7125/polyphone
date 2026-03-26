@@ -57,6 +57,9 @@ public:
 
     bool getGmSort() { return _gmSort; }
     void setGmSort(bool gmSort) { _gmSort = gmSort; }
+
+    bool getCsvRaw() { return _csvRaw; }
+    void setCsvRaw(bool csvRaw) { _csvRaw = csvRaw; }
     
     // Transitional data
     QMap<int, QList<int> > & getSelectedPresets() { return _selectedPresets; }
@@ -70,6 +73,7 @@ private:
     bool _bankDirectory;
     bool _gmSort;
     bool _filePreset;
+    bool _csvRaw;
 
     QMap<int, QList<int> > _selectedPresets;
 };

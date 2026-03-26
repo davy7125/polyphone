@@ -95,6 +95,7 @@ void ToolSoundfontExport_gui::updateInterface(AbstractToolParameters * parameter
     ui->checkPreset->setChecked(params->getPresetPrefix());
     ui->checkGM->setChecked(params->getGmSort());
     ui->checkFilePreset->setChecked(params->getFilePreset());
+    ui->checkRawValues->setChecked(params->getCsvRaw());
 
     int exportQuality = params->getQuality();
     if (exportQuality < 0 || exportQuality >= ui->comboQuality->count())
@@ -114,6 +115,7 @@ void ToolSoundfontExport_gui::saveParameters(AbstractToolParameters * parameters
     params->setBankDirectory(ui->checkBank->isChecked());
     params->setGmSort(ui->checkGM->isChecked());
     params->setFilePreset(ui->checkFilePreset->isChecked());
+    params->setCsvRaw(ui->checkRawValues->isChecked());
 
     // Preset list
     params->setSelectedPresets(_presetList);
@@ -227,4 +229,7 @@ void ToolSoundfontExport_gui::on_comboFormat_currentIndexChanged(int index)
     ui->checkBank->setVisible(index == 2);
     ui->checkGM->setVisible(index == 2);
     ui->checkPreset->setVisible(index == 2);
+
+    // Options for csv
+    ui->checkRawValues->setVisible(index == 3);
 }

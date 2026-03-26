@@ -7,7 +7,7 @@
 # Use local copies of RtAudio, RtMidi, and Stk libraries
 # (this is forced to true for Windows or Mac OS X)
 # Uncomment a line if your distribution doesn't come with some of the following libraries
-#DEFINES += USE_LOCAL_RTAUDIO
+DEFINES += USE_LOCAL_RTAUDIO
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
 
@@ -229,6 +229,10 @@ INCLUDEPATH += lib \
 
 SOURCES	+= main.cpp \
     core/input/sf/inputparsersf.cpp \
+    core/output/csv/abstractcsvfile.cpp \
+    core/output/csv/csvfileinstprst.cpp \
+    core/output/csv/csvfilesamples.cpp \
+    core/output/csv/outputcsv.cpp \
     core/sample/samplereadersf.cpp \
     context/tuningprogrammanager.cpp \
     core/fastmaths.cpp \
@@ -590,6 +594,10 @@ SOURCES	+= main.cpp \
 HEADERS += \
     context/imidilistener.h \
     core/input/sf/inputparsersf.h \
+    core/output/csv/abstractcsvfile.h \
+    core/output/csv/csvfileinstprst.h \
+    core/output/csv/csvfilesamples.h \
+    core/output/csv/outputcsv.h \
     core/sample/samplereadersf.h \
     context/tuningprogrammanager.h \
     core/fastmaths.h \

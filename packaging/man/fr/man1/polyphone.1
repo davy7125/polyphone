@@ -22,6 +22,9 @@
 -3 [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-d\fR \fIRÉPERTOIRE_EN_SORTIE\fR] [\fB\-o\fR \fINOM_EN_SORTIE\fR] [\fB\-c\fR \fICONFIG\fR]
 .br
 .B polyphone
+-4 [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-d\fR \fIRÉPERTOIRE_EN_SORTIE\fR] [\fB\-o\fR \fINOM_EN_SORTIE\fR] [\fB\-c\fR \fICONFIG\fR]
+.br
+.B polyphone
 -s [\fB\-i\fR \fICHEMIN_DE_FICHIER_EN_ENTRÉE\fR] [\fB\-c\fR \fICONFIG\fR]
 
 .SH DESCRIPTION
@@ -56,6 +59,11 @@ pour convertir un fichier dans le format sf3.
 Utiliser
 .B polyphone
 pour convertir un fichier dans le format sfz.
+.TP
+.BR \fB-3\fR
+Utiliser
+.B polyphone
+pour convertir un fichier dans le format csv.
 .TP
 .BR \fB-s\fR
 Ouvrir
@@ -93,6 +101,12 @@ La configuration est faite avec un caractère indiquant la qualité de la compre
 .B conversion sfz
 .br
 La configuration est composée de 3 valeurs séparées d'un '|'. La première valeur est '1' si chaque ensemble doit être préfixé par son numéro d'ensemble, '0' sinon. La deuxième valeur est '1' si un répertoire par banque doit être créé, '0' sinon. La troisième valeur est '1' si la classification General MIDI doit être utilisée pour trier les ensembles, '0' sinon. Par défaut, '0|0|0' est utilisé.
+.br
+.BR
+ * 
+.B conversion csv
+.br
+L'option 'raw' permet d'exporter des valeurs brutes (telles qu'elles sont enregistrées dans une soundfont) plutôt que des valeurs ayant des unités physiques et mesurables. Par exemple, la durée de relâchement exportée sera de 0,491 (millisecondes) ou de -1229 dans sa version brute. Par défaut, ce sont les valeurs avec des unités réelles qui sont exportées.
 .br
 .BR
  * 

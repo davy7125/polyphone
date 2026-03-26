@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>305</width>
-    <height>368</height>
+    <width>306</width>
+    <height>397</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,6 +55,56 @@
      <property name="verticalSpacing">
       <number>5</number>
      </property>
+     <item row="2" column="0">
+      <widget class="QLabel" name="labelQuality">
+       <property name="text">
+        <string>Quality</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lineFolder"/>
+     </item>
+     <item row="5" column="1" colspan="2">
+      <widget class="QCheckBox" name="checkGM">
+       <property name="text">
+        <string>General MIDI classification</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="pushFolder">
+       <property name="maximumSize">
+        <size>
+         <width>26</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Destination</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1" colspan="2">
+      <widget class="QCheckBox" name="checkPreset">
+       <property name="text">
+        <string>preset number as prefix</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="1" colspan="2">
       <widget class="QComboBox" name="comboFormat">
        <item>
@@ -72,31 +122,17 @@
          <string notr="true">.sfz</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string notr="true">.csv</string>
+        </property>
+       </item>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="pushFolder">
-       <property name="maximumSize">
-        <size>
-         <width>26</width>
-         <height>26</height>
-        </size>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::FocusPolicy::NoFocus</enum>
-       </property>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string/>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Destination</string>
+        <string>Format</string>
        </property>
       </widget>
      </item>
@@ -106,23 +142,6 @@
         <string>one directory per bank</string>
        </property>
       </widget>
-     </item>
-     <item row="5" column="1" colspan="2">
-      <widget class="QCheckBox" name="checkGM">
-       <property name="text">
-        <string>General MIDI classification</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1" colspan="2">
-      <widget class="QCheckBox" name="checkPreset">
-       <property name="text">
-        <string>preset number as prefix</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="lineFolder"/>
      </item>
      <item row="2" column="1" colspan="2">
       <widget class="QComboBox" name="comboQuality">
@@ -146,13 +165,6 @@
        </item>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Format</string>
-       </property>
-      </widget>
-     </item>
      <item row="6" column="1" colspan="2">
       <widget class="QCheckBox" name="checkFilePreset">
        <property name="text">
@@ -160,10 +172,10 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="labelQuality">
+     <item row="7" column="1" colspan="2">
+      <widget class="QCheckBox" name="checkRawValues">
        <property name="text">
-        <string>Quality</string>
+        <string>raw values</string>
        </property>
       </widget>
      </item>
@@ -181,7 +193,7 @@
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
+        <enum>Qt::Vertical</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>

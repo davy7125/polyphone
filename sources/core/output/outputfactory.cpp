@@ -34,6 +34,7 @@
 #include "sfz/outputsfz.h"
 #include "not_supported/outputnotsupported.h"
 #include "empty/outputdummy.h"
+#include "csv/outputcsv.h"
 
 AbstractOutput * OutputFactory::getOutput(QString fileName)
 {
@@ -57,6 +58,11 @@ AbstractOutput * OutputFactory::getOutput(QString fileName)
         {
             // Format sfz
             output = new OutputSfz();
+        }
+        else if (extension == "csv")
+        {
+            // Format csv
+            output = new OutputCsv();
         }
         else
         {

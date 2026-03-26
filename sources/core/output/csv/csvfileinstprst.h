@@ -22,29 +22,36 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "toolsoundfontexport_parameters.h"
-#include "contextmanager.h"
+#ifndef CSVFILEINSTPRST_H
+#define CSVFILEINSTPRST_H
 
-void ToolSoundfontExport_parameters::loadConfiguration()
-{
-    _directory = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_EXPORT);
-    _format = getToolValue("type", 0).toInt();
-    _quality = getToolValue("quality", 1).toInt();
-    _presetPrefix = getToolValue("preset_prefix", true).toBool();
-    _bankDirectory = getToolValue("bank_directory", false).toBool();
-    _gmSort = getToolValue("gm_sort", false).toBool();
-    _filePreset = getToolValue("file_preset", false).toBool();
-    _csvRaw = getToolValue("csv_raw", false).toBool();
-}
+#include "csv/abstractcsvfile.h"
+#include "basetypes.h"
+class SoundfontManager;
 
-void ToolSoundfontExport_parameters::saveConfiguration()
+class CsvFileInstPrst: public AbstractCsvFile
 {
-    ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_EXPORT, _directory + "/soundfont.sfz");
-    setToolValue("type", _format);
-    setToolValue("quality", _quality);
-    setToolValue("preset_prefix", _presetPrefix);
-    setToolValue("bank_directory", _bankDirectory);
-    setToolValue("gm_sort", _gmSort);
-    setToolValue("file_preset", _filePreset);
-    setToolValue("csv_raw", _csvRaw);
-}
+public:
+    CsvFileInstPrst(QString filePath, bool isPrst, bool rawValues);
+    bool write(SoundfontManager * sm, EltID idElt);
+
+protected:
+    QList<QString> getHeaders() override;
+
+private:
+    QString getRValue(AttributeType type);
+    QString getShValue(AttributeType type);
+    QString getWValue(AttributeType type);
+    AttributeValue * getAttributeValue(AttributeType type);
+
+    bool _isPrst;
+    bool _rawValues;
+
+    AttributeValue _defaultValue;
+    AttributeValue * _globalAttributes;
+    AttributeValue * _attributes;
+    bool * _globalAttributesSet;
+    bool * _attributesSet;
+};
+
+#endif // CSVFILEINSTPRST_H
