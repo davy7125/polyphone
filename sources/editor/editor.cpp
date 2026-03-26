@@ -37,7 +37,7 @@
 #include "dialogkeyboard.h"
 #include "pianokeybdcustom.h"
 
-Editor::Editor(DialogKeyboard *dialogKeyboard) : Tab(nullptr),
+Editor::Editor(DialogKeyboard * dialogKeyboard) : Tab(nullptr),
     _dialogKeyboard(dialogKeyboard),
     ui(new Ui::Editor),
     _pageSelector(new PageSelector()),

@@ -153,6 +153,11 @@ void ConfigSectionInterface::initialize()
     ui->comboSortDivisions->setCurrentIndex(
                 ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "division_sort", 0).toInt());
     ui->comboSortDivisions->blockSignals(false);
+
+    ui->comboStartupView->blockSignals(true);
+    ui->comboStartupView->setCurrentIndex(
+        ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "startup_view", 0).toInt());
+    ui->comboStartupView->blockSignals(false);
 }
 
 void ConfigSectionInterface::fillColors()
@@ -320,6 +325,11 @@ void ConfigSectionInterface::on_comboSortDivisions_currentIndexChanged(int index
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "division_sort", index);
 }
 
+void ConfigSectionInterface::on_comboStartupView_currentIndexChanged(int index)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "startup_view", index);
+}
+
 void ConfigSectionInterface::on_checkBorders_clicked()
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "window_borders", ui->checkBorders->isChecked());
@@ -372,3 +382,4 @@ void ConfigSectionInterface::updateColorThemeState()
     ui->labelColorSelection->setEnabled(enabled);
     ui->labelColorList->setEnabled(enabled);
 }
+

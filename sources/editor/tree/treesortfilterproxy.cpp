@@ -29,7 +29,7 @@
 #include "contextmanager.h"
 //#include <QAbstractItemModelTester>
 
-TreeSortFilterProxy::TreeSortFilterProxy(int indexSf2, TreeView *treeView, QAbstractItemModel * model) : QSortFilterProxyModel(treeView),
+TreeSortFilterProxy::TreeSortFilterProxy(int indexSf2, TreeView * treeView, QAbstractItemModel * model) : QSortFilterProxyModel(treeView),
     _indexSf2(indexSf2),
     _treeView(treeView),
     _sm(SoundfontManager::getInstance()),
@@ -40,7 +40,40 @@ TreeSortFilterProxy::TreeSortFilterProxy(int indexSf2, TreeView *treeView, QAbst
     this->setSourceModel(model);
     _treeView->setSf2Index(indexSf2);
     _treeView->setModel(this);
-    _treeView->setCurrentIndex(this->index(0, 0));
+
+    switch (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "startup_view", 0).toInt())
+    {
+    case 1: // Sample list
+        _treeView->setCurrentIndex(this->index(1, 0));
+        break;
+    case 2: // First sample
+        if (this->hasChildren(this->index(1, 0)))
+            _treeView->setCurrentIndex(this->index(0, 0, this->index(1, 0)));
+        else
+            _treeView->setCurrentIndex(this->index(1, 0));
+        break;
+    case 3: // Instrument list
+        _treeView->setCurrentIndex(this->index(2, 0));
+        break;
+    case 4: // First instrument
+        if (this->hasChildren(this->index(2, 0)))
+            _treeView->setCurrentIndex(this->index(0, 0, this->index(2, 0)));
+        else
+            _treeView->setCurrentIndex(this->index(2, 0));
+        break;
+    case 5: // Preset list
+        _treeView->setCurrentIndex(this->index(3, 0));
+        break;
+    case 6: // First preset
+        if (this->hasChildren(this->index(3, 0)))
+            _treeView->setCurrentIndex(this->index(0, 0, this->index(3, 0)));
+        else
+            _treeView->setCurrentIndex(this->index(3, 0));
+        break;
+    default: // General information
+        _treeView->setCurrentIndex(this->index(0, 0));
+        break;
+    }
 
     connect(ContextManager::configuration(), SIGNAL(divisionSortChanged()), this, SLOT(divisionSortChanged()));
 }

@@ -61,6 +61,8 @@ private slots:
     void on_comboStyle_currentIndexChanged(int index);
 
 
+    void on_comboStartupView_currentIndexChanged(int index);
+
 private:
     void initComboLanguage();
     void fillColors();
