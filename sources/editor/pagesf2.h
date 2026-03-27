@@ -84,8 +84,6 @@ private slots:
     void setDate();
     void setProduct();
     void setCommentaire();
-    void dateFocussed(bool hasFocus);
-    void on_pushButton_setNow_pressed();
     void on_pushViewSamples_clicked();
     void on_pushViewInstruments_clicked();
     void on_pushViewPresets_clicked();
