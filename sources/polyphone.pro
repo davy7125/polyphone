@@ -318,10 +318,10 @@ SOURCES	+= main.cpp \
     editor/tools/merge_samples/toolmergesamples_parameters.cpp \
     editor/tools/monitor/segmentpainter.cpp \
     editor/tree/treesplitter.cpp \
-    editor/widgets/dateeditor.cpp \
     editor/widgets/equalizer.cpp \
     editor/widgets/nullablespinbox.cpp \
     editor/widgets/pushstereoediting.cpp \
+    editor/widgets/styledlineeditwithcalendar.cpp \
     editor/widgets/tableheaderviewv.cpp \
     editor/widgets/tablewidget.cpp \
     editor/widgets/tabledelegate.cpp \
@@ -692,9 +692,9 @@ HEADERS += \
     editor/tools/monitor/segment.h \
     editor/tools/monitor/segmentpainter.h \
     editor/tree/treesplitter.h \
-    editor/widgets/dateeditor.h \
     editor/widgets/equalizer.h \
     editor/widgets/pushstereoediting.h \
+    editor/widgets/styledlineeditwithcalendar.h \
     editor/widgets/tableheaderviewv.h \
     editor/widgets/tablewidget.h \
     editor/widgets/tabledelegate.h \

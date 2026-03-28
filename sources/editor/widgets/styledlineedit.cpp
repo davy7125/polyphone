@@ -41,7 +41,8 @@ StyledLineEdit::StyledLineEdit(QWidget * parent) : QLineEdit(parent),
 
 void StyledLineEdit::setTextToElide(const QString text)
 {
-    this->setText(text);
+    if (text != this->text())
+        this->setText(text);
 
     // Initial width
     this->setMinimumWidth(sizeHint().width());
@@ -52,7 +53,8 @@ void StyledLineEdit::focusInEvent(QFocusEvent *e)
 {
     // Restore the full text
     this->blockSignals(true);
-    this->setText(_fullText);
+    if (_fullText != this->text())
+        this->setText(_fullText);
     this->blockSignals(false);
 
     this->setStyle(true);
@@ -80,7 +82,7 @@ void StyledLineEdit::keyPressEvent(QKeyEvent * e)
 
 void StyledLineEdit::setColor(QColor textColor)
 {
-    _textColor = textColor;this->sizeHint();
+    _textColor = textColor;
     this->setStyle(this->hasFocus());
 }
 
@@ -130,7 +132,8 @@ void StyledLineEdit::resizeEvent(QResizeEvent * e)
 
     // Display the elided text
     this->blockSignals(true);
-    this->setText(elidedText);
+    if (elidedText != this->text())
+        this->setText(elidedText);
     this->blockSignals(false);
 
     if (e != nullptr)

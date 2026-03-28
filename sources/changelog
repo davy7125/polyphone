@@ -12,6 +12,7 @@ polyphone (2.6) unstable; urgency=low
   * (improvement) faster sound engine
   * (improvement) more accurate resampling
   * (improvement) less RAM usage
+  * (improvement) a calendar is added for editing the soundfont creation date
   * (fix) correct key ranges when saving as sfz
   * (fix) tab widths of the GUI
   * (fix) sample links are kept during an export

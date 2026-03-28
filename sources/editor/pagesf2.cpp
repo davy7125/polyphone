@@ -64,10 +64,9 @@ PageSf2::PageSf2(QWidget * parent) :
     // Text validator
     ui->lineEdit_name->setValidator(new LatinValidator(ui->lineEdit_name));
     ui->lineEdit_author->setValidator(new LatinValidator(ui->lineEdit_author));
+    ui->lineEdit_date->setValidator(new LatinValidator(ui->lineEdit_date));
     ui->lineEdit_product->setValidator(new LatinValidator(ui->lineEdit_product));
     ui->lineEdit_copyright->setValidator(new LatinValidator(ui->lineEdit_copyright));
-
-    connect(ui->dateEditor, SIGNAL(editingFinished()), this, SLOT(setDate()));
 }
 
 PageSf2::~PageSf2()
@@ -103,7 +102,7 @@ void PageSf2::updateInterface(QString editingSource)
     ui->lineEdit_name->setTextToElide(_sf2->getQstr(_currentID, champ_name));
     ui->lineEdit_copyright->setText(_sf2->getQstr(_currentID, champ_ICOP));
     ui->lineEdit_author->setTextToElide(_sf2->getQstr(_currentID, champ_IENG));
-    ui->dateEditor->setInitialText(_sf2->getQstr(_currentID, champ_ICRD));
+    ui->lineEdit_date->setInitialText(_sf2->getQstr(_currentID, champ_ICRD));
     ui->lineEdit_product->setText(_sf2->getQstr(_currentID, champ_IPRD));
     ui->textEdit_Com->setPlainText(_sf2->getQstr(_currentID, champ_ICMT));
 }
@@ -152,10 +151,10 @@ void PageSf2::setDate()
     if (_preparingPage)
         return;
 
-    if (ui->dateEditor->getInitialText().compare(_sf2->getQstr(_currentID, champ_ICRD)) != 0)
+    if (ui->lineEdit_date->getInitialText().compare(_sf2->getQstr(_currentID, champ_ICRD)) != 0)
     {
         // Soundfont editing
-        _sf2->set(_currentID, champ_ICRD, ui->dateEditor->getInitialText());
+        _sf2->set(_currentID, champ_ICRD, ui->lineEdit_date->getInitialText());
         _sf2->endEditing(_editingSource);
     }
 }

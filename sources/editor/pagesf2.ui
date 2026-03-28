@@ -126,19 +126,37 @@
       </widget>
      </item>
      <item>
-      <widget class="DateEditor" name="dateEditor">
-       <property name="focusPolicy">
-        <enum>Qt::StrongFocus</enum>
+      <widget class="StyledLineEditWithCalendar" name="lineEdit_date">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
-       <property name="text">
-        <string notr="true">...</string>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="maxLength">
+        <number>255</number>
+       </property>
+       <property name="placeholderText">
+        <string>Date...</string>
        </property>
       </widget>
      </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -219,7 +237,7 @@
         </size>
        </property>
        <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
+        <enum>QFrame::Shape::NoFrame</enum>
        </property>
       </widget>
      </item>
@@ -231,7 +249,7 @@
        <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -263,10 +281,10 @@
        <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
+          <enum>QSizePolicy::Policy::Fixed</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -298,10 +316,10 @@
        <item>
         <spacer name="verticalSpacer_3">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
+          <enum>QSizePolicy::Policy::Fixed</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -333,10 +351,10 @@
        <item>
         <spacer name="verticalSpacer_4">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
+          <enum>QSizePolicy::Policy::Fixed</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -396,7 +414,7 @@
          </size>
         </property>
         <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
+         <enum>QFrame::Shape::NoFrame</enum>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <property name="spacing">
@@ -497,7 +515,7 @@
          </size>
         </property>
         <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
+         <enum>QFrame::Shape::NoFrame</enum>
         </property>
        </widget>
       </item>
@@ -510,7 +528,7 @@
          </size>
         </property>
         <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
+         <enum>QFrame::Shape::NoFrame</enum>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <property name="spacing">
@@ -611,7 +629,7 @@
          </size>
         </property>
         <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
+         <enum>QFrame::Shape::NoFrame</enum>
         </property>
        </widget>
       </item>
@@ -624,7 +642,7 @@
          </size>
         </property>
         <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
+         <enum>QFrame::Shape::NoFrame</enum>
         </property>
         <layout class="QGridLayout" name="gridLayout_4">
          <property name="leftMargin">
@@ -707,7 +725,7 @@
       <item row="1" column="2">
        <widget class="QFrame" name="frameInstrument">
         <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
+         <enum>QFrame::Shape::NoFrame</enum>
         </property>
         <layout class="QGridLayout" name="gridLayout_5">
          <property name="leftMargin">
@@ -770,7 +788,7 @@
       <item row="1" column="4">
        <widget class="QFrame" name="framePreset">
         <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
+         <enum>QFrame::Shape::NoFrame</enum>
         </property>
         <layout class="QGridLayout" name="gridLayout_6">
          <property name="leftMargin">
@@ -839,7 +857,7 @@
          </size>
         </property>
         <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
+         <enum>QFrame::Shape::NoFrame</enum>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <property name="spacing">
@@ -951,15 +969,15 @@
    <header>styledlineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>DateEditor</class>
-   <extends>QLabel</extends>
-   <header>dateeditor.h</header>
+   <class>StyledLineEditWithCalendar</class>
+   <extends>QLineEdit</extends>
+   <header>styledlineeditwithcalendar.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>lineEdit_name</tabstop>
   <tabstop>lineEdit_author</tabstop>
-  <tabstop>dateEditor</tabstop>
+  <tabstop>lineEdit_date</tabstop>
   <tabstop>lineEdit_product</tabstop>
   <tabstop>lineEdit_copyright</tabstop>
   <tabstop>textEdit_Com</tabstop>
@@ -996,8 +1014,8 @@
    <slot>setCommentaire()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>339</x>
-     <y>263</y>
+     <x>350</x>
+     <y>362</y>
     </hint>
     <hint type="destinationlabel">
      <x>339</x>
@@ -1012,8 +1030,8 @@
    <slot>setProduct()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>551</x>
-     <y>128</y>
+     <x>418</x>
+     <y>179</y>
     </hint>
     <hint type="destinationlabel">
      <x>339</x>
@@ -1028,8 +1046,8 @@
    <slot>setAuthor()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>370</x>
-     <y>64</y>
+     <x>173</x>
+     <y>101</y>
     </hint>
     <hint type="destinationlabel">
      <x>339</x>
@@ -1044,12 +1062,28 @@
    <slot>setCopyright()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>370</x>
-     <y>95</y>
+     <x>381</x>
+     <y>237</y>
     </hint>
     <hint type="destinationlabel">
      <x>339</x>
      <y>313</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_date</sender>
+   <signal>editingFinished()</signal>
+   <receiver>PageSf2</receiver>
+   <slot>setDate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>272</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>307</x>
+     <y>243</y>
     </hint>
    </hints>
   </connection>
