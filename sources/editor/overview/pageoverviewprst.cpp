@@ -211,9 +211,9 @@ QString PageOverviewPrst::getVelocityRange(EltID id, bool orderMode)
     // Global velocity range
     int globalMin = 0;
     int globalMax = 127;
-    if (_sf2->isSet(id, champ_velocity))
+    if (_sf2->isSet(id, champ_velRange))
     {
-        RangesType range = _sf2->get(id, champ_velocity).rValue;
+        RangesType range = _sf2->get(id, champ_velRange).rValue;
         globalMin = range.byLo;
         globalMax = range.byHi;
     }
@@ -225,9 +225,9 @@ QString PageOverviewPrst::getVelocityRange(EltID id, bool orderMode)
     foreach (int i, _sf2->getSiblings(id))
     {
         id.indexElt2 = i;
-        if (_sf2->isSet(id, champ_velocity))
+        if (_sf2->isSet(id, champ_velRange))
         {
-            RangesType range = _sf2->get(id, champ_velocity).rValue;
+            RangesType range = _sf2->get(id, champ_velRange).rValue;
             min = qMin(min, (int)range.byLo);
             max = qMax(max, (int)range.byHi);
         }

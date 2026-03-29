@@ -17,6 +17,7 @@ polyphone (2.6) unstable; urgency=low
   * (fix) tab widths of the GUI
   * (fix) sample links are kept during an export
   * (fix) attenuation range correctly displayed in the modulator list
+  * (fix) velocity range in the overview tables
 
  -- Davy Triponney <contact@polyphone.io>  Wed, 21 Jan 2026 10:30:00 +0100
 
