@@ -16,6 +16,7 @@ polyphone (2.6) unstable; urgency=low
   * (fix) correct key ranges when saving as sfz
   * (fix) tab widths of the GUI
   * (fix) sample links are kept during an export
+  * (fix) attenuation range correctly displayed in the modulator list
 
  -- Davy Triponney <contact@polyphone.io>  Wed, 21 Jan 2026 10:30:00 +0100
 

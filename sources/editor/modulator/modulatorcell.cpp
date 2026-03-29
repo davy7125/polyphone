@@ -354,11 +354,12 @@ void ModulatorCell::onOutputChanged(int dummy)
     }
     else if (currentAttribute != champ_unknown)
     {
+        // If the attribute is the attenuation, we use "pan" for avoiding the multiplication by DB_SF2_TO_REAL_DB
         AttributeValue val;
         val.shValue = min;
-        dMin = Attribute::toRealValue(currentAttribute, _isPrst, val);
+        dMin = Attribute::toRealValue(currentAttribute == champ_initialAttenuation ? champ_pan : currentAttribute, _isPrst, val);
         val.shValue = max;
-        dMax = Attribute::toRealValue(currentAttribute, _isPrst, val);
+        dMax = Attribute::toRealValue(currentAttribute == champ_initialAttenuation ? champ_pan : currentAttribute, _isPrst, val);
     }
 
     // Get the unit
