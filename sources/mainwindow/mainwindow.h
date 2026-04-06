@@ -60,6 +60,7 @@ private slots:
     void on_lineSearch_returnPressed();
     void on_pushButtonSoundfonts_clicked();
     void on_pushButtonOpen_clicked();
+    void on_pushButtonOpenDir_clicked();
     void on_pushButtonNew_clicked();
     void onAboutClicked();
     void onKeyboardDisplayChange(bool isDisplayed, bool propagate);

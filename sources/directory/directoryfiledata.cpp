@@ -22,45 +22,19 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef WIDGETSHOWHISTORYCELL_H
-#define WIDGETSHOWHISTORYCELL_H
+#include "directoryfiledata.h"
+#include <QFileInfo>
 
-#include <QWidget>
+DirectoryFileData::DirectoryFileData(const QFileInfo &fileInfo) :
+    _path(fileInfo.absoluteFilePath()),
+    _fileSize(fileInfo.size()),
+    _lastModified(fileInfo.lastModified())
+{
 
-namespace Ui {
-class WidgetShowHistoryCell;
 }
 
-class WidgetShowHistoryCell : public QWidget
+QString DirectoryFileData::getFileName() const
 {
-    Q_OBJECT
+    return QFileInfo(_path).fileName();
+}
 
-public:
-    explicit WidgetShowHistoryCell(QWidget *parent = nullptr);
-    ~WidgetShowHistoryCell();
-
-    void setLink(QString filePath);
-    QString getLink();
-    void setDateTime(QDateTime dateTime);
-    void setActive(bool isActive);
-
-private:
-    class Icons
-    {
-    public:
-        Icons();
-
-        QPixmap _fileIcon;
-        QPixmap _fileIconActive;
-        QPixmap _fileDirIcon;
-        QPixmap _fileDirIconActive;
-    };
-
-    Ui::WidgetShowHistoryCell *ui;
-    QString _link;
-    QString _activeStyleSheet;
-    bool _isDir;
-    static Icons * s_icons;
-};
-
-#endif // WIDGETSHOWHISTORYCELL_H

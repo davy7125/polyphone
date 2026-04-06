@@ -25,6 +25,7 @@
 #include "soundfontdownloaddata.h"
 #include <QJsonObject>
 #include <QObject>
+#include "utils.h"
 
 SoundfontDownloadData::SoundfontDownloadData(const QJsonObject &data)
 {
@@ -51,15 +52,7 @@ QDateTime SoundfontDownloadData::convertDate(QString txt)
 
 QString SoundfontDownloadData::getFormattedSize()
 {
-    if (_size < 1024)
-        return QString::number(_size) + " " + QObject::tr("bytes");
-    if (_size < 1024 * 1024)
-        return QLocale::system().toString(static_cast<double>(_size) / 1024, 'f', 2) + " " + QObject::tr("kB", "kilobytes");
-    if (_size < 1024 * 1024 * 1024)
-        return QLocale::system().toString(static_cast<double>(_size) / 1024 / 1024, 'f', 2) + " " + QObject::tr("MB", "megabytes");
-    if (_size / 1024 < 1024 * 1024 * 1024)
-        return QLocale::system().toString(static_cast<double>(_size) / 1024 / 1024 / 1024, 'f', 2) + " " + QObject::tr("GB", "gigabytes");
-    return QLocale::system().toString(static_cast<double>(_size) / 1024 / 1024 / 1024 / 1024, 'f', 2) + " " + QObject::tr("TB", "terabytes");
+    return Utils::getFormattedSize(_size);
 }
 
 QDate SoundfontDownloadData::getLastDate()

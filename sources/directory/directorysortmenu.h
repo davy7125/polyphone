@@ -22,45 +22,52 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef WIDGETSHOWHISTORYCELL_H
-#define WIDGETSHOWHISTORYCELL_H
+#ifndef DIRECTORYSORTMENU_H
+#define DIRECTORYSORTMENU_H
 
 #include <QWidget>
+#include <QIcon>
 
 namespace Ui {
-class WidgetShowHistoryCell;
+class DirectorySortMenu;
 }
 
-class WidgetShowHistoryCell : public QWidget
+class DirectorySortMenu : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit WidgetShowHistoryCell(QWidget *parent = nullptr);
-    ~WidgetShowHistoryCell();
+    explicit DirectorySortMenu(QWidget *parent = nullptr);
+    ~DirectorySortMenu();
 
-    void setLink(QString filePath);
-    QString getLink();
-    void setDateTime(QDateTime dateTime);
-    void setActive(bool isActive);
+    int currentIndex();
+
+signals:
+    void currentIndexChanged(int index);
+
+protected:
+#if QT_VERSION >= 0x060000
+    void enterEvent(QEnterEvent * event) override;
+#else
+    void enterEvent(QEvent * event) override;
+#endif
+    void leaveEvent(QEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+
+private slots:
+    void element1Clicked();
+    void element2Clicked();
+    void element3Clicked();
+    void element4Clicked();
+    void onMenuClosed();
 
 private:
-    class Icons
-    {
-    public:
-        Icons();
+    void elementClicked(int index);
+    void setStyle(bool hovered);
 
-        QPixmap _fileIcon;
-        QPixmap _fileIconActive;
-        QPixmap _fileDirIcon;
-        QPixmap _fileDirIconActive;
-    };
-
-    Ui::WidgetShowHistoryCell *ui;
-    QString _link;
-    QString _activeStyleSheet;
-    bool _isDir;
-    static Icons * s_icons;
+    Ui::DirectorySortMenu *ui;
+    QIcon _checkIcon;
+    QString _textColor, _backgroundColor, _hoveredBackgroundColor;
 };
 
-#endif // WIDGETSHOWHISTORYCELL_H
+#endif // DIRECTORYSORTMENU_H

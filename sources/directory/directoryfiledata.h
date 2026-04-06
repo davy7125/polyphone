@@ -22,45 +22,56 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef WIDGETSHOWHISTORYCELL_H
-#define WIDGETSHOWHISTORYCELL_H
+#ifndef DIRECTORYFILEDATA_H
+#define DIRECTORYFILEDATA_H
 
-#include <QWidget>
+#include <QDateTime>
+#include <QFileInfo>
+#include "basetypes.h"
 
-namespace Ui {
-class WidgetShowHistoryCell;
-}
-
-class WidgetShowHistoryCell : public QWidget
+struct DirectorySampleData
 {
-    Q_OBJECT
-
-public:
-    explicit WidgetShowHistoryCell(QWidget *parent = nullptr);
-    ~WidgetShowHistoryCell();
-
-    void setLink(QString filePath);
-    QString getLink();
-    void setDateTime(QDateTime dateTime);
-    void setActive(bool isActive);
-
-private:
-    class Icons
-    {
-    public:
-        Icons();
-
-        QPixmap _fileIcon;
-        QPixmap _fileIconActive;
-        QPixmap _fileDirIcon;
-        QPixmap _fileDirIconActive;
-    };
-
-    Ui::WidgetShowHistoryCell *ui;
-    QString _link;
-    QString _activeStyleSheet;
-    bool _isDir;
-    static Icons * s_icons;
+    int id;
+    QString name;
+    SFSampleLink sampleType = linkInvalid;
+    int samplingRateHz = 0;
+    int totalDurationMilliSec = 0;
+    int loopDurationMilliSec = 0;
 };
 
-#endif // WIDGETSHOWHISTORYCELL_H
+struct DirectoryInstrumentPresetData
+{
+    int id;
+    QString name;
+    int numDivisions = 0;
+    int numDistinctKeyRanges = 0;
+    int numDistinctVelocityRanges = 0;
+    int numParameters = 0;
+    int numModulators = 0;
+};
+
+class DirectoryFileData
+{
+public:
+    DirectoryFileData(const QFileInfo &fileInfo);
+
+    QString getPath() { return _path; }
+    QString getFileName() const;
+    quint64 getFileSize() const { return _fileSize; }
+    QDateTime getLastModified() const { return _lastModified; }
+    QList<DirectorySampleData> getSamples() const { return _samples; }
+    QList<DirectoryInstrumentPresetData> getInstruments() const { return _instruments; }
+    QList<DirectoryInstrumentPresetData> getPresets() const { return _presets; }
+
+private:
+    QString _path;
+    quint64 _fileSize;
+    QDateTime _lastModified;
+    QList<DirectorySampleData> _samples;
+    QList<DirectoryInstrumentPresetData> _instruments;
+    QList<DirectoryInstrumentPresetData> _presets;
+};
+
+Q_DECLARE_METATYPE(const DirectoryFileData *)
+
+#endif // DIRECTORYFILEDATA_H

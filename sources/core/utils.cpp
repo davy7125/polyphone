@@ -26,6 +26,7 @@
 #include <QStringList>
 #include <QFile>
 #include <QRegularExpression>
+#include <QLocale>
 
 #ifdef USE_WOLFSSL
 #include <wolfssl/options.h>
@@ -302,4 +303,17 @@ bool Utils::isValidUtf8(QByteArray data)
     }
 
     return true;
+}
+
+QString Utils::getFormattedSize(qint64 bytes)
+{
+    if (bytes < 1024)
+        return QString::number(bytes) + " " + QObject::tr("bytes");
+    if (bytes < 1024 * 1024)
+        return QLocale::system().toString(static_cast<double>(bytes) / 1024, 'f', 2) + " " + QObject::tr("kB", "kilobytes");
+    if (bytes < 1024 * 1024 * 1024)
+        return QLocale::system().toString(static_cast<double>(bytes) / 1024 / 1024, 'f', 2) + " " + QObject::tr("MB", "megabytes");
+    if (bytes / 1024 < 1024 * 1024 * 1024)
+        return QLocale::system().toString(static_cast<double>(bytes) / 1024 / 1024 / 1024, 'f', 2) + " " + QObject::tr("GB", "gigabytes");
+    return QLocale::system().toString(static_cast<double>(bytes) / 1024 / 1024 / 1024 / 1024, 'f', 2) + " " + QObject::tr("TB", "terabytes");
 }

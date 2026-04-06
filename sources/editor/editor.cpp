@@ -37,11 +37,12 @@
 #include "dialogkeyboard.h"
 #include "pianokeybdcustom.h"
 
-Editor::Editor(DialogKeyboard * dialogKeyboard) : Tab(nullptr),
+Editor::Editor(DialogKeyboard * dialogKeyboard, EltID initialSelection) : Tab(nullptr),
     _dialogKeyboard(dialogKeyboard),
     ui(new Ui::Editor),
     _pageSelector(new PageSelector()),
-    _currentElementType(elementUnknown)
+    _currentElementType(elementUnknown),
+    _initialSelection(initialSelection)
 {
     ui->setupUi(this);
 
@@ -143,8 +144,9 @@ void Editor::tabInError(QString errorMessage)
 void Editor::tabInitialized(int indexSf2)
 {
     // Prepare the tree
+    _initialSelection.indexSf2 = indexSf2;
     TreeModel * model = dynamic_cast<TreeModel*>(SoundfontManager::getInstance()->getModel(indexSf2));
-    TreeSortFilterProxy * proxy = new TreeSortFilterProxy(indexSf2, ui->treeView, model);
+    TreeSortFilterProxy * proxy = new TreeSortFilterProxy(indexSf2, ui->treeView, model, _initialSelection);
     connect(ui->editFilter, SIGNAL(textChanged(QString)), proxy, SLOT(filterChanged(QString)));
     connect(model, SIGNAL(saveExpandedState()), ui->treeView, SLOT(saveExpandedState()));
     connect(model, SIGNAL(restoreExpandedState()), ui->treeView, SLOT(restoreExpandedState()));
@@ -171,6 +173,11 @@ void Editor::tabUpdate(QString editingSource)
         AbstractFooter * absFooter = dynamic_cast<AbstractFooter *>(ui->stackedFooter->currentWidget());
         absFooter->updateInterface();
     }
+}
+
+void Editor::selectElement(EltID id)
+{
+    ui->treeView->onSelectionChanged(id);
 }
 
 void Editor::onSelectionChanged(IdList ids)

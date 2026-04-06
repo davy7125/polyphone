@@ -22,45 +22,28 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef WIDGETSHOWHISTORYCELL_H
-#define WIDGETSHOWHISTORYCELL_H
+#include "menulabel.h"
+#include <QMouseEvent>
+#include "contextmanager.h"
+#include <QString>
 
-#include <QWidget>
+MenuLabel::MenuLabel(QString text) : QLabel(text)
+{
+    QString textColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name();
+    QString backgroundColor = ThemeManager::mix(
+                                  ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
+                                  ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.5).name();
 
-namespace Ui {
-class WidgetShowHistoryCell;
+    this->setStyleSheet(QString("background: %1; color: %2; padding: 5px").arg(backgroundColor, textColor));
 }
 
-class WidgetShowHistoryCell : public QWidget
+void MenuLabel::mousePressEvent(QMouseEvent *event)
 {
-    Q_OBJECT
+    // Stop the propagation for not stopping the menu
+    event->accept();
+}
 
-public:
-    explicit WidgetShowHistoryCell(QWidget *parent = nullptr);
-    ~WidgetShowHistoryCell();
-
-    void setLink(QString filePath);
-    QString getLink();
-    void setDateTime(QDateTime dateTime);
-    void setActive(bool isActive);
-
-private:
-    class Icons
-    {
-    public:
-        Icons();
-
-        QPixmap _fileIcon;
-        QPixmap _fileIconActive;
-        QPixmap _fileDirIcon;
-        QPixmap _fileDirIconActive;
-    };
-
-    Ui::WidgetShowHistoryCell *ui;
-    QString _link;
-    QString _activeStyleSheet;
-    bool _isDir;
-    static Icons * s_icons;
-};
-
-#endif // WIDGETSHOWHISTORYCELL_H
+void MenuLabel::mouseReleaseEvent(QMouseEvent *event)
+{
+    event->accept();
+}

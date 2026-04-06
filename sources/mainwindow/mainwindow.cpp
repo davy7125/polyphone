@@ -96,7 +96,8 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) :
     // Icons
     QSize iconSize(36, 36);
     ui->pushButtonNew->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-new.svg", iconSize, ThemeManager::BUTTON_TEXT));
-    ui->pushButtonOpen->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", iconSize, ThemeManager::BUTTON_TEXT));
+    ui->pushButtonOpen->setIcon(ContextManager::theme()->getColoredSvg(":/icons/file-audio.svg", iconSize, ThemeManager::BUTTON_TEXT));
+    ui->pushButtonOpenDir->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", iconSize, ThemeManager::BUTTON_TEXT));
     ui->pushButtonDocumentation->setIcon(ContextManager::theme()->getColoredSvg(":/icons/book.svg", iconSize, ThemeManager::BUTTON_TEXT));
     ui->pushButtonForum->setIcon(ContextManager::theme()->getColoredSvg(":/icons/forum.svg", iconSize, ThemeManager::BUTTON_TEXT));
     ui->pushButtonSettings->setIcon(ContextManager::theme()->getColoredSvg(":/icons/settings.svg", iconSize, ThemeManager::BUTTON_TEXT));
@@ -301,10 +302,21 @@ void MainWindow::on_pushButtonSoundfonts_clicked()
 void MainWindow::on_pushButtonOpen_clicked()
 {
     // Open files
-    QStringList strList = QFileDialog::getOpenFileNames(this, tr("Opening files"),
-                                                        ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SOUNDFONT),
-                                                        InputFactory::getFileFilter());
+    QStringList strList = QFileDialog::getOpenFileNames(
+        this, tr("Opening files"),
+        ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SOUNDFONT),
+        InputFactory::getFileFilter());
     openFiles(strList.join('|'));
+}
+
+void MainWindow::on_pushButtonOpenDir_clicked()
+{
+    // Open a directory
+    QString directory = QFileDialog::getExistingDirectory(
+        this, tr("Opening a directory"),
+        ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SOUNDFONT));
+    if (!directory.isEmpty())
+        _tabManager->openDirectory(directory);
 }
 
 void MainWindow::on_pushButtonNew_clicked()
@@ -323,17 +335,24 @@ void MainWindow::openFiles(QString fileNames)
     QStringList files = split[0].split('|', Qt::SkipEmptyParts);
     foreach (QString file, files)
     {
-        if (playerOptions.playerChannel() == -2)
+        if (QFileInfo(file).isDir())
         {
-            for (int channel = 0; channel < 16; channel++)
-            {
-                PlayerOptions duplicatedOptions(&playerOptions);
-                duplicatedOptions.setPlayerChannel(channel);
-                _tabManager->openSoundfont(file, &duplicatedOptions, false);
-            }
+            _tabManager->openDirectory(file);
         }
         else
-            _tabManager->openSoundfont(file, &playerOptions, true);
+        {
+            if (playerOptions.playerChannel() == -2)
+            {
+                for (int channel = 0; channel < 16; channel++)
+                {
+                    PlayerOptions duplicatedOptions(&playerOptions);
+                    duplicatedOptions.setPlayerChannel(channel);
+                    _tabManager->openSoundfont(file, &duplicatedOptions, false);
+                }
+            }
+            else
+                _tabManager->openSoundfont(file, &playerOptions, true);
+        }
     }
 }
 
@@ -594,3 +613,4 @@ void MainWindow::setBigLeftMargin(bool isOn)
         ui->gridLayoutTop->contentsMargins().right(),
         ui->gridLayoutTop->contentsMargins().bottom());
 }
+

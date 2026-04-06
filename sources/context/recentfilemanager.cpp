@@ -51,8 +51,8 @@ RecentFileManager::RecentFileManager(ConfManager * configuration) : QObject(null
 
         // Test if still valid
         strTmp = _configuration->getValue(ConfManager::SECTION_RECENT_FILES, "file_" + QString::number(i), "").toString();
-        QFile file(strTmp);
-        if (file.exists())
+        QFileInfo fileInfo(strTmp);
+        if (fileInfo.exists())
         {
             _listFiles[j] = strTmp;
 

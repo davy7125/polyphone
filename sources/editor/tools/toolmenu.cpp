@@ -27,18 +27,12 @@
 #include "abstracttool.h"
 #include "contextmanager.h"
 #include "utils.h"
-#include <QLabel>
 #include <QWidgetAction>
+#include "menulabel.h"
 
 ToolMenu::ToolMenu(QWidget * parent) : QMenu(parent),
     _toolFactory(new ToolFactory())
 {
-    // Colors for the separators
-    _separatorTextColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name();
-    _separatorBackgroundColor = ThemeManager::mix(
-                ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
-                ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.5).name();
-
     // Style of the menu
     this->setStyleSheet(ContextManager::theme()->getMenuTheme());
 
@@ -86,14 +80,9 @@ void ToolMenu::selectionChanged(IdList ids)
 
 void ToolMenu::addCategory(QString categoryName)
 {
-    // Create a styled label
-    QLabel * label = new QLabel(categoryName);
-    label->setStyleSheet(QString("background: %1; color: %2; padding: 5px")
-                         .arg(_separatorBackgroundColor).arg(_separatorTextColor));
-
-    // Add it as a separator
+    // Create a styled label as a separator
     QWidgetAction * separator = new QWidgetAction(this);
-    separator->setDefaultWidget(label);
+    separator->setDefaultWidget(new MenuLabel(categoryName));
     this->addAction(separator);
 }
 

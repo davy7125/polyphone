@@ -44,6 +44,7 @@
 #include "utils.h"
 #include "synth.h"
 #include "editortoolbar.h"
+#include "directorybrowser.h"
 
 TabManager * TabManager::s_instance = nullptr;
 
@@ -96,6 +97,8 @@ TabManager::~TabManager()
         delete _tabs.takeFirst();
     while (!_viewers.isEmpty())
         delete _viewers.takeFirst();
+    while (!_dirBrowsers.isEmpty())
+        delete _dirBrowsers.takeFirst();
 }
 
 void TabManager::openConfiguration()
@@ -123,7 +126,7 @@ void TabManager::openNewSoundfont()
     _stackedWidget->setCurrentIndex(index);
 }
 
-void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, bool async)
+void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, bool async, EltID initialSelection)
 {
     fileName = Utils::fixFilePath(fileName);
 
@@ -150,25 +153,26 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, b
     }
 
     // Find the corresponding editor if the file is already open (not in synth mode)
-    if (!ContextManager::s_playerMode)
+    if (!ContextManager::s_playerMode && indexSf2 != -1)
     {
-        if (indexSf2 != -1)
+        foreach (Tab * tab, _tabs)
         {
-            foreach (Tab * tab, _tabs)
+            if (tab->getSf2Index() == indexSf2)
             {
-                if (tab->getSf2Index() == indexSf2)
-                {
-                    int index = _stackedWidget->indexOf(tab);
-                    _stackedWidget->setCurrentIndex(index);
-                    return;
-                }
+                initialSelection.indexSf2 = indexSf2;
+                Editor * editor = (Editor *)tab;
+                editor->selectElement(initialSelection);
+
+                int index = _stackedWidget->indexOf(tab);
+                _stackedWidget->setCurrentIndex(index);
+                return;
             }
         }
     }
 
     // Otherwise, create a new editor or player
-    Tab * tab = ContextManager::s_playerMode ? (Tab *)(new Player(playerOptions)) : (Tab *)(new Editor(_dialogKeyboard));
-    int index = _stackedWidget->addWidgetWithTab(tab, ":/icons/file-audio.svg", QFileInfo(fileName).fileName(), true);
+    Tab * tab = ContextManager::s_playerMode ? (Tab *)(new Player(playerOptions)) : (Tab *)(new Editor(_dialogKeyboard, initialSelection));
+    int index = _stackedWidget->addWidgetWithTab(tab, ":/icons/file-audio.svg", QFileInfo(fileName).baseName(), true);
     connect(tab, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
     connect(tab, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
     connect(tab, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
@@ -190,6 +194,44 @@ void TabManager::openSoundfont(QString fileName, PlayerOptions *playerOptions, b
         if (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "recorder_open", false).toBool())
             emit recorderDisplayChanged(true);
     }
+}
+
+void TabManager::openDirectory(QString directoryPath)
+{
+    directoryPath = Utils::fixFilePath(directoryPath);
+
+    // Check that the directory is not already open
+    foreach (DirectoryBrowser * browser, _dirBrowsers)
+    {
+        if (browser->getDirectoryPath() == directoryPath)
+        {
+            int index = _stackedWidget->indexOf(browser);
+            _stackedWidget->setCurrentIndex(index);
+            return;
+        }
+    }
+    ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, directoryPath);
+
+    // Name of the directory
+    QDir dir(directoryPath);
+    QString dirName = dir.dirName();
+
+    // Create a new browser
+    DirectoryBrowser * browser = new DirectoryBrowser();
+    connect(browser, SIGNAL(itemClicked(QString,EltID)), this, SLOT(openSoundfont(QString,EltID)));
+    int index = _stackedWidget->addWidgetWithTab(browser, ":/icons/document-open.svg", dirName, true);
+    _stackedWidget->setWidgetToolTip(browser, directoryPath);
+    _dirBrowsers << browser;
+
+    // Initialize and display it
+    browser->initialize(directoryPath);
+    _stackedWidget->setCurrentIndex(index);
+}
+
+void TabManager::openSoundfont(QString filePath, EltID id)
+{
+    /// TODO: select the id
+    openSoundfont(filePath, nullptr, true, id);
 }
 
 void TabManager::openRepository(SoundfontFilter *filter)
@@ -328,6 +370,14 @@ void TabManager::onTabCloseRequested(QWidget * widget)
         _viewers.removeAll(viewer);
         _stackedWidget->removeWidgetWithTab(widget);
         delete viewer;
+    }
+    else if (_dirBrowsers.contains(dynamic_cast<DirectoryBrowser*>(widget)))
+    {
+        // Close a directory browser
+        DirectoryBrowser * browser = dynamic_cast<DirectoryBrowser*>(widget);
+        _dirBrowsers.removeAll(browser);
+        _stackedWidget->removeWidgetWithTab(widget);
+        delete browser;
     }
 }
 

@@ -22,45 +22,40 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef WIDGETSHOWHISTORYCELL_H
-#define WIDGETSHOWHISTORYCELL_H
+#ifndef DIRECTORYTABLEVIEW_H
+#define DIRECTORYTABLEVIEW_H
 
-#include <QWidget>
+#include <QTableView>
+#include "basetypes.h"
+class DirectoryTableModel;
+class DirectoryTableDelegate;
+class DirectoryFileData;
+class DirectorySortProxyModel;
 
-namespace Ui {
-class WidgetShowHistoryCell;
-}
-
-class WidgetShowHistoryCell : public QWidget
+class DirectoryTableView : public QTableView
 {
     Q_OBJECT
 
 public:
-    explicit WidgetShowHistoryCell(QWidget *parent = nullptr);
-    ~WidgetShowHistoryCell();
+    explicit DirectoryTableView(QWidget *parent = nullptr);
 
-    void setLink(QString filePath);
-    QString getLink();
-    void setDateTime(QDateTime dateTime);
-    void setActive(bool isActive);
+    void addFile(DirectoryFileData * fileData);
+    void removeFile(QString filePath);
+    void updateFile(DirectoryFileData * fileData);
+
+signals:
+    void contentChanged();
+    void itemDoubleClicked(QString filePath, EltID elt);
+
+public slots:
+    void setDisplayOptions(int displayOptions);
+    void setSortType(int sortType);
+    void setFilter(QString filter);
 
 private:
-    class Icons
-    {
-    public:
-        Icons();
-
-        QPixmap _fileIcon;
-        QPixmap _fileIconActive;
-        QPixmap _fileDirIcon;
-        QPixmap _fileDirIconActive;
-    };
-
-    Ui::WidgetShowHistoryCell *ui;
-    QString _link;
-    QString _activeStyleSheet;
-    bool _isDir;
-    static Icons * s_icons;
+    DirectorySortProxyModel * _proxy;
+    DirectoryTableModel * _model;
+    DirectoryTableDelegate * _delegate;
 };
 
-#endif // WIDGETSHOWHISTORYCELL_H
+#endif // DIRECTORYTABLEVIEW_H

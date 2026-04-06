@@ -22,15 +22,15 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "browsersortmenu.h"
-#include "ui_browsersortmenu.h"
+#include "directorysortmenu.h"
+#include "ui_directorysortmenu.h"
 #include "contextmanager.h"
 #include <QMenu>
 #include <QMouseEvent>
 
-BrowserSortMenu::BrowserSortMenu(QWidget *parent) :
+DirectorySortMenu::DirectorySortMenu(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::BrowserSortMenu)
+    ui(new Ui::DirectorySortMenu)
 {
     ui->setupUi(this);
 
@@ -46,34 +46,34 @@ BrowserSortMenu::BrowserSortMenu(QWidget *parent) :
     _checkIcon.addPixmap(ContextManager::theme()->getColoredSvg(":/icons/check.svg", QSize(24, 24), ThemeManager::HIGHLIGHTED_TEXT), QIcon::Active);
 
     // Add a menu to the button
-    int currentSort = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "repository_sort", 0).toInt();
+    int currentSort = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "directory_browser_sort", 0).toInt();
     if (currentSort < 0 || currentSort > 3)
         currentSort = 0;
     QMenu * menu = new QMenu(this);
     connect(menu, SIGNAL(aboutToHide()), this, SLOT(onMenuClosed()));
     menu->setStyleSheet(ContextManager::theme()->getMenuTheme());
-    QAction * action = menu->addAction(tr("Date"));
+    QAction * action = menu->addAction(tr("Name (A→Z)"));
     if (currentSort == 0)
     {
         action->setIcon(_checkIcon);
         ui->pushButton->setText(action->text());
     }
     connect(action, SIGNAL(triggered()), this, SLOT(element1Clicked()));
-    action = menu->addAction(tr("Downloads"));
+    action = menu->addAction(tr("Newest first"));
     if (currentSort == 1)
     {
         action->setIcon(_checkIcon);
         ui->pushButton->setText(action->text());
     }
     connect(action, SIGNAL(triggered()), this, SLOT(element2Clicked()));
-    action = menu->addAction(tr("Rating score"));
+    action = menu->addAction(tr("Largest first"));
     if (currentSort == 2)
     {
         action->setIcon(_checkIcon);
         ui->pushButton->setText(action->text());
     }
     connect(action, SIGNAL(triggered()), this, SLOT(element3Clicked()));
-    action = menu->addAction(tr("Title (A→Z)"));
+    action = menu->addAction(tr("Smallest first"));
     if (currentSort == 3)
     {
         action->setIcon(_checkIcon);
@@ -83,12 +83,12 @@ BrowserSortMenu::BrowserSortMenu(QWidget *parent) :
     ui->pushButton->setMenu(menu);
 }
 
-BrowserSortMenu::~BrowserSortMenu()
+DirectorySortMenu::~DirectorySortMenu()
 {
     delete ui;
 }
 
-int BrowserSortMenu::currentIndex()
+int DirectorySortMenu::currentIndex()
 {
     QList<QAction *> actions = ui->pushButton->menu()->actions();
     for (int i = 0; i < actions.count(); i++)
@@ -99,29 +99,29 @@ int BrowserSortMenu::currentIndex()
     return 0;
 }
 
-void BrowserSortMenu::element1Clicked()
+void DirectorySortMenu::element1Clicked()
 {
     elementClicked(0);
 }
 
-void BrowserSortMenu::element2Clicked()
+void DirectorySortMenu::element2Clicked()
 {
     elementClicked(1);
 }
 
-void BrowserSortMenu::element3Clicked()
+void DirectorySortMenu::element3Clicked()
 {
     elementClicked(2);
 }
 
-void BrowserSortMenu::element4Clicked()
+void DirectorySortMenu::element4Clicked()
 {
     elementClicked(3);
 }
 
-void BrowserSortMenu::elementClicked(int index)
+void DirectorySortMenu::elementClicked(int index)
 {
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "repository_sort", index);
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "directory_browser_sort", index);
     QList<QAction *> actions = ui->pushButton->menu()->actions();
     for (int i = 0; i < actions.count(); i++)
     {
@@ -138,34 +138,34 @@ void BrowserSortMenu::elementClicked(int index)
 }
 
 #if QT_VERSION >= 0x060000
-void BrowserSortMenu::enterEvent(QEnterEvent *event)
+void DirectorySortMenu::enterEvent(QEnterEvent *event)
 #else
-void BrowserSortMenu::enterEvent(QEvent *event)
+void DirectorySortMenu::enterEvent(QEvent *event)
 #endif
 {
     setStyle(true);
     QWidget::enterEvent(event);
 }
 
-void BrowserSortMenu::leaveEvent(QEvent *event)
+void DirectorySortMenu::leaveEvent(QEvent *event)
 {
     setStyle(false);
     QWidget::leaveEvent(event);
 }
 
-void BrowserSortMenu::mousePressEvent(QMouseEvent *event)
+void DirectorySortMenu::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
         ui->pushButton->menu()->exec();
     QWidget::mousePressEvent(event);
 }
 
-void BrowserSortMenu::onMenuClosed()
+void DirectorySortMenu::onMenuClosed()
 {
     setStyle(false);
 }
 
-void BrowserSortMenu::setStyle(bool hovered)
+void DirectorySortMenu::setStyle(bool hovered)
 {
     ui->pushButton->setStyleSheet("QPushButton{border: 0; padding:0 5px 0 5px;color:" + _textColor + ";background-color:" +
                                   (hovered ? _hoveredBackgroundColor : _backgroundColor) + ";border-top-right-radius:2px;border-bottom-right-radius:2px}" +

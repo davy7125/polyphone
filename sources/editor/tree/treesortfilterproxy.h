@@ -35,7 +35,7 @@ class TreeSortFilterProxy : public QSortFilterProxyModel
     Q_OBJECT
 
 public:
-    TreeSortFilterProxy(int indexSf2, TreeView * treeView, QAbstractItemModel * model);
+    TreeSortFilterProxy(int indexSf2, TreeView * treeView, QAbstractItemModel * model, EltID initialSelection);
     bool isFiltered(EltID id);
 
 public slots:

@@ -39,7 +39,7 @@ public:
 
     enum FileType
     {
-        FILE_TYPE_SOUNDFONT,
+        FILE_TYPE_SOUNDFONT, // Soundfont or directory containing soundfonts
         FILE_TYPE_SAMPLE,
         FILE_TYPE_RECORD,
         FILE_TYPE_EXPORT,

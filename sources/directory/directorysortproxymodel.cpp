@@ -22,45 +22,58 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef WIDGETSHOWHISTORYCELL_H
-#define WIDGETSHOWHISTORYCELL_H
+#include "directorysortproxymodel.h"
+#include "directorytablemodel.h"
+#include "utils.h"
 
-#include <QWidget>
+DirectorySortProxyModel::DirectorySortProxyModel(QObject *parent) : QSortFilterProxyModel{parent},
+    _mode(SortByName),
+    _filter("")
+{}
 
-namespace Ui {
-class WidgetShowHistoryCell;
+void DirectorySortProxyModel::setSortMode(SortMode mode)
+{
+    _mode = mode;
+    invalidate();
 }
 
-class WidgetShowHistoryCell : public QWidget
+bool DirectorySortProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
-    Q_OBJECT
-
-public:
-    explicit WidgetShowHistoryCell(QWidget *parent = nullptr);
-    ~WidgetShowHistoryCell();
-
-    void setLink(QString filePath);
-    QString getLink();
-    void setDateTime(QDateTime dateTime);
-    void setActive(bool isActive);
-
-private:
-    class Icons
+    const DirectoryFileData * fdL = sourceModel()->data(left, DirectoryTableModel::SoundfontDataRole).value<const DirectoryFileData *>();
+    const DirectoryFileData * dfR = sourceModel()->data(right, DirectoryTableModel::SoundfontDataRole).value<const DirectoryFileData *>();
+    if (fdL == nullptr || dfR == nullptr)
+        return false;
+    switch (_mode)
     {
-    public:
-        Icons();
+    case SortByName:
+        return Utils::naturalOrder(fdL->getFileName(), dfR->getFileName()) > 0;
+    case SortByDateDesc:
+        return fdL->getLastModified() < dfR->getLastModified();
+    case SortBySizeDesc:
+        return fdL->getFileSize() < dfR->getFileSize();
+    case SortBySizeAsc:
+        return fdL->getFileSize() > dfR->getFileSize();
+    }
 
-        QPixmap _fileIcon;
-        QPixmap _fileIconActive;
-        QPixmap _fileDirIcon;
-        QPixmap _fileDirIconActive;
-    };
+    return false;
+}
 
-    Ui::WidgetShowHistoryCell *ui;
-    QString _link;
-    QString _activeStyleSheet;
-    bool _isDir;
-    static Icons * s_icons;
-};
+void DirectorySortProxyModel::setFilter(QString filter)
+{
+    beginFilterChange();
+    _filter = filter;
+    endFilterChange();
+}
 
-#endif // WIDGETSHOWHISTORYCELL_H
+bool DirectorySortProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
+{
+    if (_filter.isEmpty())
+        return true;
+
+    QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
+    const DirectoryFileData *fd = sourceModel()->data(index, DirectoryTableModel::SoundfontDataRole).value<const DirectoryFileData *>();
+    if (fd == nullptr)
+        return false;
+
+    return fd->getFileName().contains(_filter, Qt::CaseInsensitive);
+}

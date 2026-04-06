@@ -25,6 +25,7 @@
 #include "footersf2.h"
 #include "ui_footersf2.h"
 #include "soundfontmanager.h"
+#include "utils.h"
 
 FooterSf2::FooterSf2(QWidget *parent) :
     AbstractFooter(parent),
@@ -58,22 +59,7 @@ void FooterSf2::updateInterface()
         {
             int size = file.size();
             file.close();
-
-            if (size > 1073741824)
-            {
-                // GB
-                txt += QString(" (%1 %2)").arg((double)size / 1073741824, 3, 'f', 2).arg(tr("GB", "giga byte"));
-            }
-            else if (size > 1048576)
-            {
-                // MB
-                txt += QString(" (%1 %2)").arg((double)size / 1048576, 3, 'f', 2).arg(tr("MB", "mega byte"));
-            }
-            else
-            {
-                // kB
-                txt += QString(" (%1 %2)").arg((double)size / 1024, 3, 'f', 2).arg(tr("kB", "kilo byte"));
-            }
+            txt += " (" + Utils::getFormattedSize(size) + ")";
         }
     }
 

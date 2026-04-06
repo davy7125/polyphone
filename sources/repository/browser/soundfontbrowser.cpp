@@ -66,8 +66,7 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
                 ContextManager::theme()->getColor(ThemeManager::LIST_TEXT), 0.5);
     ui->labelNoResult->setStyleSheet("QLabel{color:" + color.name() + ";border:1px solid " + border + ";border-top:0;border-right:0;border-bottom:0}");
     ui->listWidget->setStyleSheet("QListWidget{border:1px solid " + border + ";border-top:0;border-right:0;border-bottom:0}" +
-                                  "QListWidget::item:selected {background-color: " + highlightedBackground + "}" +
-                                  "QAbstractSckrollArea{margin: 100px; padding: 100px;}");
+                                  "QListWidget::item:selected {background-color: " + highlightedBackground + "}");
 
     // Pagination style
     ui->framePagination->setStyleSheet("QFrame#framePagination{background-color: " +

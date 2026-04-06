@@ -22,45 +22,19 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef WIDGETSHOWHISTORYCELL_H
-#define WIDGETSHOWHISTORYCELL_H
+#ifndef MENULABEL_H
+#define MENULABEL_H
 
-#include <QWidget>
+#include <QLabel>
 
-namespace Ui {
-class WidgetShowHistoryCell;
-}
-
-class WidgetShowHistoryCell : public QWidget
+class MenuLabel : public QLabel
 {
-    Q_OBJECT
-
 public:
-    explicit WidgetShowHistoryCell(QWidget *parent = nullptr);
-    ~WidgetShowHistoryCell();
+    MenuLabel(QString text);
 
-    void setLink(QString filePath);
-    QString getLink();
-    void setDateTime(QDateTime dateTime);
-    void setActive(bool isActive);
-
-private:
-    class Icons
-    {
-    public:
-        Icons();
-
-        QPixmap _fileIcon;
-        QPixmap _fileIconActive;
-        QPixmap _fileDirIcon;
-        QPixmap _fileDirIconActive;
-    };
-
-    Ui::WidgetShowHistoryCell *ui;
-    QString _link;
-    QString _activeStyleSheet;
-    bool _isDir;
-    static Icons * s_icons;
+protected:
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 };
 
-#endif // WIDGETSHOWHISTORYCELL_H
+#endif // MENULABEL_H

@@ -22,45 +22,37 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef WIDGETSHOWHISTORYCELL_H
-#define WIDGETSHOWHISTORYCELL_H
+#ifndef DIRECTORYSORTPROXYMODEL_H
+#define DIRECTORYSORTPROXYMODEL_H
 
-#include <QWidget>
+#include <QObject>
+#include <QSortFilterProxyModel>
 
-namespace Ui {
-class WidgetShowHistoryCell;
-}
-
-class WidgetShowHistoryCell : public QWidget
+class DirectorySortProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 
 public:
-    explicit WidgetShowHistoryCell(QWidget *parent = nullptr);
-    ~WidgetShowHistoryCell();
-
-    void setLink(QString filePath);
-    QString getLink();
-    void setDateTime(QDateTime dateTime);
-    void setActive(bool isActive);
-
-private:
-    class Icons
+    enum SortMode
     {
-    public:
-        Icons();
-
-        QPixmap _fileIcon;
-        QPixmap _fileIconActive;
-        QPixmap _fileDirIcon;
-        QPixmap _fileDirIconActive;
+        SortByName,
+        SortByDateDesc,
+        SortBySizeDesc,
+        SortBySizeAsc
     };
 
-    Ui::WidgetShowHistoryCell *ui;
-    QString _link;
-    QString _activeStyleSheet;
-    bool _isDir;
-    static Icons * s_icons;
+    explicit DirectorySortProxyModel(QObject *parent = nullptr);
+
+    void setSortMode(SortMode mode);
+    void setFilter(QString filter);
+
+protected:
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
+    bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
+
+private:
+    SortMode _mode;
+    QString _filter;
 };
 
-#endif // WIDGETSHOWHISTORYCELL_H
+#endif // DIRECTORYSORTPROXYMODEL_H

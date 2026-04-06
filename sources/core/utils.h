@@ -58,6 +58,7 @@ public:
     static QString removeForbiddenFilePathCharacters(QString str);
 
     static bool isValidUtf8(QByteArray data);
+    static QString getFormattedSize(qint64 bytes);
 
 private:
     static int getNumberPart(const QString &str, int &length);

@@ -22,45 +22,37 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef WIDGETSHOWHISTORYCELL_H
-#define WIDGETSHOWHISTORYCELL_H
+#ifndef DIRECTORYTABLEDELEGATE_H
+#define DIRECTORYTABLEDELEGATE_H
 
-#include <QWidget>
+#include <QStyledItemDelegate>
+#include "basetypes.h"
 
-namespace Ui {
-class WidgetShowHistoryCell;
-}
-
-class WidgetShowHistoryCell : public QWidget
+class DirectoryTableDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 
 public:
-    explicit WidgetShowHistoryCell(QWidget *parent = nullptr);
-    ~WidgetShowHistoryCell();
+    explicit DirectoryTableDelegate(QObject *parent = nullptr) : QStyledItemDelegate(parent) {}
 
-    void setLink(QString filePath);
-    QString getLink();
-    void setDateTime(QDateTime dateTime);
-    void setActive(bool isActive);
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
-private:
-    class Icons
+    // Structure pour stocker les infos de chaque sous-élément (pour la détection de clic)
+    struct ItemRectInfo
     {
-    public:
-        Icons();
-
-        QPixmap _fileIcon;
-        QPixmap _fileIconActive;
-        QPixmap _fileDirIcon;
-        QPixmap _fileDirIconActive;
+        QRect rect;
+        int id;
     };
 
-    Ui::WidgetShowHistoryCell *ui;
-    QString _link;
-    QString _activeStyleSheet;
-    bool _isDir;
-    static Icons * s_icons;
+signals:
+    void itemDoubleClicked(const QString &itemId, EltID id) const;
+
+protected:
+    bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;
+
+private:
+    void drawListItems(QPainter *painter, const QRect &contentRect, const QModelIndex &index, const QFontMetrics &fm) const;
 };
 
-#endif // WIDGETSHOWHISTORYCELL_H
+#endif // DIRECTORYTABLEDELEGATE_H

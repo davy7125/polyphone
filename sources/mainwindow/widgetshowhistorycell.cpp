@@ -32,15 +32,14 @@ WidgetShowHistoryCell::Icons * WidgetShowHistoryCell::s_icons = nullptr;
 
 WidgetShowHistoryCell::WidgetShowHistoryCell(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::WidgetShowHistoryCell)
+    ui(new Ui::WidgetShowHistoryCell),
+    _isDir(false)
 {
     ui->setupUi(this);
 
     // File icons
     if (s_icons == nullptr)
         s_icons = new Icons();
-
-    ui->iconFile->setPixmap(s_icons->_fileIcon);
 
     // The style changes when the cell is activated
     _activeStyleSheet = "QLabel{color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";}";
@@ -50,6 +49,8 @@ WidgetShowHistoryCell::Icons::Icons()
 {
     _fileIcon = ContextManager::theme()->getColoredSvg(":/icons/file-audio.svg", QSize(48, 64), ThemeManager::LIST_TEXT);
     _fileIconActive = ContextManager::theme()->getColoredSvg(":/icons/file-audio.svg", QSize(48, 64), ThemeManager::HIGHLIGHTED_TEXT);
+    _fileDirIcon = ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", QSize(48, 43), ThemeManager::LIST_TEXT);
+    _fileDirIconActive = ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", QSize(48, 43), ThemeManager::HIGHLIGHTED_TEXT);
 }
 
 WidgetShowHistoryCell::~WidgetShowHistoryCell()
@@ -61,6 +62,10 @@ void WidgetShowHistoryCell::setLink(QString filePath)
 {
     _link = filePath;
     ui->labelLink->setTextToElide(filePath);
+    _isDir = QFileInfo(_link).isDir();
+    ui->iconFile->setMinimumHeight(_isDir ? 43 : 64);
+    ui->iconFile->setMaximumHeight(_isDir ? 43 : 64);
+    ui->iconFile->setPixmap(_isDir ? s_icons->_fileDirIcon : s_icons->_fileIcon);
 }
 
 QString WidgetShowHistoryCell::getLink()
@@ -71,7 +76,7 @@ QString WidgetShowHistoryCell::getLink()
 void WidgetShowHistoryCell::setDateTime(QDateTime dateTime)
 {
     if (dateTime.isValid())
-        ui->labelDateTime->setText(dateTime.toString("yyyy/MM/dd hh:mm"));
+        ui->labelDateTime->setText(dateTime.toString(QLocale().dateTimeFormat(QLocale::ShortFormat)));
     else
         ui->labelDateTime->setText("-");
 }
@@ -81,11 +86,11 @@ void WidgetShowHistoryCell::setActive(bool isActive)
     if (isActive && this->styleSheet() == "")
     {
         this->setStyleSheet(_activeStyleSheet);
-        ui->iconFile->setPixmap(s_icons->_fileIconActive);
+        ui->iconFile->setPixmap(_isDir ? s_icons->_fileDirIconActive : s_icons->_fileIconActive);
     }
     else if (!isActive && this->styleSheet() != "")
     {
         this->setStyleSheet("");
-        ui->iconFile->setPixmap(s_icons->_fileIcon);
+        ui->iconFile->setPixmap(_isDir ? s_icons->_fileDirIcon : s_icons->_fileIcon);
     }
 }

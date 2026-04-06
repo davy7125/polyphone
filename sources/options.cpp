@@ -232,6 +232,8 @@ void Options::checkErrors()
     // Input files
     foreach (QString inputFile, _inputFiles)
     {
+        if (QFileInfo(inputFile).isDir() && _mode == MODE_GUI)
+            continue;
         if (!InputFactory::isSuffixSupported(QFileInfo(inputFile).suffix()))
         {
             _error = true;

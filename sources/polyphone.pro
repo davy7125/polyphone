@@ -191,50 +191,65 @@ contains(DEFINES, USE_LOCAL_STK) {
     LIBS += -lstk
 }
 
-INCLUDEPATH += lib \
-    mainwindow \
-    dialogs \
+INCLUDEPATH += clavier \
     context \
     context/interface \
-    editor \
-    editor/footers \
-    editor/graphics \
-    editor/modulator \
-    editor/overview \
-    editor/tools \
-    editor/widgets \
-    editor/tree \
-    resources \
     core \
     core/input \
     core/output \
     core/model \
     core/sample \
     core/types \
-    clavier \
-    sound_engine \
-    sound_engine/elements \
+    dialogs \
+    directory \
+    editor \
+    editor/footers \
+    editor/graphics \
+    editor/modulator \
+    editor/overview \
+    editor/tools \
+    editor/tree \
+    editor/widgets \
+    extensions \
+    lib \
+    lib/qtsingleapplication \
+    mainwindow \
+    player \
     repository \
     repository/browser \
     repository/daily \
-    repository/widgets \
-    repository/user \
     repository/soundfont \
     repository/soundfont/viewer \
     repository/soundfont/editor \
-    lib/qtsingleapplication \
-    extensions \
-    player \
+    repository/user \
+    repository/widgets \
+    resources \
+    sound_engine \
+    sound_engine/elements \
     .
 
 SOURCES	+= main.cpp \
+    clavier/pianoscene.cpp \
+    clavier/pianokey.cpp \
+    clavier/pianokeybd.cpp \
+    clavier/pianokeybdcustom.cpp \
+    clavier/keyboardmap.cpp \
+    context/contextmanager.cpp \
+    context/thememanager.cpp \
+    context/confmanager.cpp \
+    context/recentfilemanager.cpp \
+    context/keynamemanager.cpp \
+    context/translationmanager.cpp \
+    context/interface/editkey.cpp \
+    context/audiodevice.cpp \
+    context/mididevice.cpp \
+    context/tuningprogrammanager.cpp \
     core/input/sf/inputparsersf.cpp \
     core/output/csv/abstractcsvfile.cpp \
     core/output/csv/csvfileinstprst.cpp \
     core/output/csv/csvfilesamples.cpp \
     core/output/csv/outputcsv.cpp \
     core/sample/samplereadersf.cpp \
-    context/tuningprogrammanager.cpp \
     core/fastmaths.cpp \
     core/input/grandorgue/grandorguedatathrough.cpp \
     core/input/grandorgue/grandorgueranklink.cpp \
@@ -269,21 +284,20 @@ SOURCES	+= main.cpp \
     core/input/sfark/sfarkglobal.cpp \
     core/input/sfark/sfarkfilemanager.cpp \
     core/output/sfz/conversion_sfz.cpp \
-    context/contextmanager.cpp \
-    context/thememanager.cpp \
-    context/confmanager.cpp \
-    context/recentfilemanager.cpp \
-    context/keynamemanager.cpp \
-    context/translationmanager.cpp \
-    context/interface/editkey.cpp \
-    context/audiodevice.cpp \
-    context/mididevice.cpp \
     dialogs/dialog_list.cpp \
     dialogs/dialog_rename.cpp \
     dialogs/dialog_about.cpp \
     dialogs/dialogcompressquality.cpp \
     dialogs/dialogselection.cpp \
     dialogs/dialogchangelog.cpp \
+    directory/directorybrowser.cpp \
+    directory/directorydisplaymenu.cpp \
+    directory/directoryfiledata.cpp \
+    directory/directorysortmenu.cpp \
+    directory/directorysortproxymodel.cpp \
+    directory/directorytabledelegate.cpp \
+    directory/directorytablemodel.cpp \
+    directory/directorytableview.cpp \
     editor/footers/footerlinkedto.cpp \
     editor/footers/footeroverview.cpp \
     editor/footers/footerprst.cpp \
@@ -319,6 +333,7 @@ SOURCES	+= main.cpp \
     editor/tools/monitor/segmentpainter.cpp \
     editor/tree/treesplitter.cpp \
     editor/widgets/equalizer.cpp \
+    editor/widgets/menulabel.cpp \
     editor/widgets/nullablespinbox.cpp \
     editor/widgets/pushstereoediting.cpp \
     editor/widgets/styledlineeditwithcalendar.cpp \
@@ -329,11 +344,6 @@ SOURCES	+= main.cpp \
     editor/widgets/spinboxrange.cpp \
     editor/widgets/comboboxloopmode.cpp \
     editor/tools/division_duplication/duplicationtool.cpp \
-    clavier/pianoscene.cpp \
-    clavier/pianokey.cpp \
-    clavier/pianokeybd.cpp \
-    clavier/pianokeybdcustom.cpp \
-    clavier/keyboardmap.cpp \
     editor/widgets/transparentframe.cpp \
     extensions/extension_midi_dialog.cpp \
     extensions/extensionmanager.cpp \
@@ -655,6 +665,14 @@ HEADERS += \
     dialogs/dialogselection.h \
     dialogs/dialogchangelog.h \
     dialogs/modalprogressdialog.h \
+    directory/directorybrowser.h \
+    directory/directorydisplaymenu.h \
+    directory/directoryfiledata.h \
+    directory/directorysortmenu.h \
+    directory/directorysortproxymodel.h \
+    directory/directorytabledelegate.h \
+    directory/directorytablemodel.h \
+    directory/directorytableview.h \
     editor/footers/abstractfooter.h \
     editor/footers/footerlinkedto.h \
     editor/footers/footeroverview.h \
@@ -693,6 +711,7 @@ HEADERS += \
     editor/tools/monitor/segmentpainter.h \
     editor/tree/treesplitter.h \
     editor/widgets/equalizer.h \
+    editor/widgets/menulabel.h \
     editor/widgets/pushstereoediting.h \
     editor/widgets/styledlineeditwithcalendar.h \
     editor/widgets/tableheaderviewv.h \
@@ -989,6 +1008,9 @@ FORMS += \
     dialogs/dialogcompressquality.ui \
     dialogs/dialogselection.ui \
     dialogs/dialogchangelog.ui \
+    directory/directorybrowser.ui \
+    directory/directorydisplaymenu.ui \
+    directory/directorysortmenu.ui \
     editor/footers/footerlinkedto.ui \
     editor/footers/footeroverview.ui \
     editor/footers/footerprst.ui \

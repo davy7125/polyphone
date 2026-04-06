@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>627</width>
+    <width>642</width>
     <height>367</height>
    </rect>
   </property>
@@ -137,6 +137,23 @@
            <property name="text">
             <string extracomment="prefixed with 2 spaces for each line">  Open
   soundfont</string>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>36</width>
+             <height>36</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButtonOpenDir">
+           <property name="styleSheet">
+            <string notr="true">padding: 10px;</string>
+           </property>
+           <property name="text">
+            <string extracomment="prefixed with 2 spaces for each line">  Open
+  directory</string>
            </property>
            <property name="iconSize">
             <size>

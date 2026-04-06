@@ -92,6 +92,8 @@ void TranslationManager::translate()
         if (!_translator->load(RESOURCE_PATH + fileName))
             qWarning() << "Cannot load translation" << RESOURCE_PATH + fileName;
     }
+    QLocale curLocale((QLocale(language)));
+    QLocale::setDefault(curLocale);
     QApplication::installTranslator(_translator);
 }
 

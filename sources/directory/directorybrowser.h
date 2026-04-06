@@ -22,45 +22,41 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef WIDGETSHOWHISTORYCELL_H
-#define WIDGETSHOWHISTORYCELL_H
+#ifndef DIRECTORYBROWSER_H
+#define DIRECTORYBROWSER_H
 
 #include <QWidget>
+#include "basetypes.h"
+class QFileSystemWatcher;
 
 namespace Ui {
-class WidgetShowHistoryCell;
+class DirectoryBrowser;
 }
 
-class WidgetShowHistoryCell : public QWidget
+class DirectoryBrowser : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit WidgetShowHistoryCell(QWidget *parent = nullptr);
-    ~WidgetShowHistoryCell();
+    DirectoryBrowser(QWidget *parent = nullptr);
+    ~DirectoryBrowser();
 
-    void setLink(QString filePath);
-    QString getLink();
-    void setDateTime(QDateTime dateTime);
-    void setActive(bool isActive);
+    void initialize(QString dirPath);
+    QString getDirectoryPath() { return _dirPath; }
+
+signals:
+    void itemClicked(QString filePath, EltID id);
+
+private slots:
+    void on_pushRetry_clicked();
+    void onDirectoryChanged(const QString &path);
+    void onContentChanged();
 
 private:
-    class Icons
-    {
-    public:
-        Icons();
-
-        QPixmap _fileIcon;
-        QPixmap _fileIconActive;
-        QPixmap _fileDirIcon;
-        QPixmap _fileDirIconActive;
-    };
-
-    Ui::WidgetShowHistoryCell *ui;
-    QString _link;
-    QString _activeStyleSheet;
-    bool _isDir;
-    static Icons * s_icons;
+    Ui::DirectoryBrowser *ui;
+    QString _dirPath;
+    QFileSystemWatcher * _watcher;
+    QMap<QString, QDateTime> _currentFiles;
 };
 
-#endif // WIDGETSHOWHISTORYCELL_H
+#endif // DIRECTORYBROWSER_H

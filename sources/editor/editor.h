@@ -41,11 +41,13 @@ class Editor : public Tab
     Q_OBJECT
 
 public:
-    Editor(DialogKeyboard * dialogKeyboard);
+    Editor(DialogKeyboard * dialogKeyboard, EltID initialSelection = EltID());
     ~Editor() override;
 
     // MIDI signals
     bool processKey(int channel, int key, int vel) override;
+
+    void selectElement(EltID id);
 
 signals:
     void processKeyMainThread(int channel, int key, int vel);
@@ -76,6 +78,7 @@ private:
     PageSelector * _pageSelector;
     ElementType _currentElementType;
     IdList _currentIds;
+    EltID _initialSelection;
 };
 
 #endif // EDITOR_H

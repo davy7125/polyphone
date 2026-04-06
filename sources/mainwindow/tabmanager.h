@@ -26,6 +26,7 @@
 #define TABMANAGER_H
 
 #include <QObject>
+#include "basetypes.h"
 class MainStackedWidget;
 class ConfigPanel;
 class SoundfontFilter;
@@ -35,6 +36,7 @@ class UserArea;
 class SoundfontViewer;
 class PlayerOptions;
 class DialogKeyboard;
+class DirectoryBrowser;
 
 class TabManager : public QObject
 {
@@ -53,7 +55,7 @@ public slots:
     void openConfiguration();
 
     /// Open the soundfont browser
-    void openSoundfont(QString fileName, PlayerOptions * playerOptions, bool async);
+    void openSoundfont(QString fileName, PlayerOptions * playerOptions, bool async, EltID initialSelection = EltID());
     void openNewSoundfont();
 
     /// Open the repository, initialized with a filter
@@ -66,6 +68,9 @@ public slots:
 
     /// Open the user profile
     void openUser();
+
+    /// Open a directory
+    void openDirectory(QString directoryPath);
 
     /// The function is called when pages have to be updated
     void editingDone(QString source, QList<int> sf2Indexes);
@@ -95,6 +100,9 @@ private slots:
     /// Called every time the tab changes
     void onTabIndexChanged(int tabIndex);
 
+    /// Called by the directory browser
+    void openSoundfont(QString filePath, EltID id);
+
 private:
     explicit TabManager(DialogKeyboard * dialogKeyboard, MainStackedWidget * stackedWidget);
     ~TabManager();
@@ -106,7 +114,8 @@ private:
     SoundfontBrowser * _browserTab;
     UserArea * _userTab;
     QList<Tab*> _tabs;
-    QList<SoundfontViewer*> _viewers;
+    QList<SoundfontViewer *> _viewers;
+    QList<DirectoryBrowser *> _dirBrowsers;
 
     static TabManager * s_instance;
 };
