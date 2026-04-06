@@ -39,9 +39,10 @@ void DirectoryTableDelegate::drawListItems(QPainter *painter, const QRect &conte
     QColor textColor = Qt::black;
     painter->setPen(textColor);
 
+    const DirectoryFileData * fd = index.data(Qt::UserRole).value<const DirectoryFileData *>();
     if (index.column() == 1) // Samples
     {
-        QList<DirectorySampleData> samples = index.data(DirectoryTableModel::SampleListRole).value<QList<DirectorySampleData>>();
+        QList<DirectorySampleData> samples = fd->getSamples();
         for (const auto& sample : samples)
         {
             QString text = sample.name;
@@ -53,7 +54,7 @@ void DirectoryTableDelegate::drawListItems(QPainter *painter, const QRect &conte
     }
     else if (index.column() == 2) // Instruments
     {
-        QList<DirectoryInstrumentPresetData> instruments = index.data(DirectoryTableModel::InstrumentListRole).value<QList<DirectoryInstrumentPresetData>>();
+        QList<DirectoryInstrumentPresetData> instruments = fd->getInstruments();
         for (const auto& inst : instruments)
         {
             QString text = inst.name;
@@ -65,7 +66,7 @@ void DirectoryTableDelegate::drawListItems(QPainter *painter, const QRect &conte
     }
     else if (index.column() == 3) // Presets
     {
-        QList<DirectoryInstrumentPresetData> presets = index.data(DirectoryTableModel::PresetListRole).value<QList<DirectoryInstrumentPresetData>>();
+        QList<DirectoryInstrumentPresetData> presets = fd->getPresets();
         for (const auto& prst : presets)
         {
             QString text = prst.name;
@@ -171,15 +172,22 @@ QSize DirectoryTableDelegate::sizeHint(const QStyleOptionViewItem &option, const
     int numItems = 0;
     int numLinesPerItem = 1; // Par défaut, 1 ligne par élément (non détaillé)
 
+    const DirectoryFileData * fd = index.data(Qt::UserRole).value<const DirectoryFileData *>();
     if (index.column() == 1) // Samples
     {
-        QList<DirectorySampleData> samples = index.data(DirectoryTableModel::SampleListRole).value<QList<DirectorySampleData>>();
+        QList<DirectorySampleData> samples = fd->getSamples();
         numItems = samples.count();
         // Les échantillons restent souvent sur une ligne même en détaillé dans ce toString()
     }
-    else if (index.column() == 2 || index.column() == 3) // Instruments or presets
+    else if (index.column() == 2) // Instruments
     {
-        QList<DirectoryInstrumentPresetData> items = index.data(DirectoryTableModel::InstrumentListRole).value<QList<DirectoryInstrumentPresetData>>();
+        QList<DirectoryInstrumentPresetData> items = fd->getInstruments();
+        numItems = items.count();
+        // Les instruments/presets restent souvent sur une ligne même en détaillé dans ce toString()
+    }
+    else if (index.column() == 3) // Presets
+    {
+        QList<DirectoryInstrumentPresetData> items = fd->getPresets();
         numItems = items.count();
         // Les instruments/presets restent souvent sur une ligne même en détaillé dans ce toString()
     }

@@ -23,7 +23,7 @@
 ***************************************************************************/
 
 #include "directorysortproxymodel.h"
-#include "directorytablemodel.h"
+#include "directoryfiledata.h"
 #include "utils.h"
 
 DirectorySortProxyModel::DirectorySortProxyModel(QObject *parent) : QSortFilterProxyModel{parent},
@@ -39,8 +39,8 @@ void DirectorySortProxyModel::setSortMode(SortMode mode)
 
 bool DirectorySortProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
-    const DirectoryFileData * fdL = sourceModel()->data(left, DirectoryTableModel::SoundfontDataRole).value<const DirectoryFileData *>();
-    const DirectoryFileData * dfR = sourceModel()->data(right, DirectoryTableModel::SoundfontDataRole).value<const DirectoryFileData *>();
+    const DirectoryFileData * fdL = sourceModel()->data(left, Qt::UserRole).value<const DirectoryFileData *>();
+    const DirectoryFileData * dfR = sourceModel()->data(right, Qt::UserRole).value<const DirectoryFileData *>();
     if (fdL == nullptr || dfR == nullptr)
         return false;
     switch (_mode)
@@ -71,7 +71,7 @@ bool DirectorySortProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex 
         return true;
 
     QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
-    const DirectoryFileData *fd = sourceModel()->data(index, DirectoryTableModel::SoundfontDataRole).value<const DirectoryFileData *>();
+    const DirectoryFileData *fd = sourceModel()->data(index, Qt::UserRole).value<const DirectoryFileData *>();
     if (fd == nullptr)
         return false;
 

@@ -9,14 +9,6 @@ class DirectoryTableModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
-    enum Roles
-    {
-        SoundfontDataRole = Qt::UserRole + 1,
-        SampleListRole,
-        InstrumentListRole,
-        PresetListRole
-    };
-
     explicit DirectoryTableModel(QObject *parent = nullptr);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -25,9 +17,9 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
     // Methods for updating the model
-    void addFile(DirectoryFileData * sf);
+    void addFile(DirectoryFileData * fd);
     void removeFile(QString filePath);
-    void updateFile(DirectoryFileData * sf);
+    void updateFile(DirectoryFileData * fd);
 
 private:
     QList<QString> _filePaths;

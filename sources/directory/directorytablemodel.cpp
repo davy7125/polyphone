@@ -39,14 +39,8 @@ QVariant DirectoryTableModel::data(const QModelIndex &index, int role) const
     }
 
     // Data for delegates
-    if (role == SoundfontDataRole)
+    if (role == Qt::UserRole)
         return QVariant::fromValue(fd);
-    if (role == SampleListRole)
-        return QVariant::fromValue(fd->getSamples());
-    if (role == InstrumentListRole)
-        return QVariant::fromValue(fd->getInstruments());
-    if (role == PresetListRole)
-        return QVariant::fromValue(fd->getPresets());
 
     return QVariant();
 }
@@ -67,11 +61,11 @@ QVariant DirectoryTableModel::headerData(int section, Qt::Orientation orientatio
     return QAbstractTableModel::headerData(section, orientation, role);
 }
 
-void DirectoryTableModel::addFile(DirectoryFileData * sf)
+void DirectoryTableModel::addFile(DirectoryFileData * fd)
 {
     beginInsertRows(QModelIndex(), _files.count(), _files.count());
-    _files[sf->getPath()] = sf;
-    _filePaths.append(sf->getPath());
+    _files[fd->getPath()] = fd;
+    _filePaths.append(fd->getPath());
     endInsertRows();
 }
 
@@ -87,23 +81,23 @@ void DirectoryTableModel::removeFile(QString filePath)
     }
 }
 
-void DirectoryTableModel::updateFile(DirectoryFileData * sf)
+void DirectoryTableModel::updateFile(DirectoryFileData * fd)
 {
     // Find the corresponding soundfont
-    if (_files.contains(sf->getPath()))
+    if (_files.contains(fd->getPath()))
     {
-        delete _files[sf->getPath()];
-        _files[sf->getPath()] = sf;
+        delete _files[fd->getPath()];
+        _files[fd->getPath()] = fd;
 
         // Notify the change
-        int row = _filePaths.indexOf(sf->getPath());
+        int row = _filePaths.indexOf(fd->getPath());
         QModelIndex topLeft = index(row, 0);
         QModelIndex bottomRight = index(row, columnCount() - 1);
-        emit dataChanged(topLeft, bottomRight, {Qt::DisplayRole, SoundfontDataRole, SampleListRole, InstrumentListRole, PresetListRole});
+        emit dataChanged(topLeft, bottomRight, {Qt::DisplayRole, Qt::UserRole});
     }
     else
     {
         // Add it instead
-        addFile(sf);
+        addFile(fd);
     }
 }
