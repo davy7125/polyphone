@@ -33,7 +33,6 @@
 #include "grandorgue/inputgrandorgue.h"
 #include "not_supported/inputparsernotsupported.h"
 #include "empty/inputparserempty.h"
-#include <QObject>
 
 InputFactory * InputFactory::s_instance = nullptr;
 

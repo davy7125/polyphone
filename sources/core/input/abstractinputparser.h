@@ -60,6 +60,9 @@ public:
     /// Name of the file to open
     QString getFileName() { return _fileName; }
 
+    /// Return true if the parser is able to quickly load details without loading all samples
+    virtual bool canFastLoad() { return false; }
+
 signals:
     /// Signal emitted when the file is processed
     void finished();

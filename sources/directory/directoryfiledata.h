@@ -28,11 +28,15 @@
 #include <QDateTime>
 #include <QFileInfo>
 #include "basetypes.h"
+class AbstractInputParser;
+class Smpl;
+class InstPrst;
 
 struct DirectorySampleData
 {
     int id;
     QString name;
+    QString nameSort;
     SFSampleLink sampleType = linkInvalid;
     int samplingRateHz = 0;
     int totalDurationMilliSec = 0;
@@ -43,6 +47,7 @@ struct DirectoryInstrumentPresetData
 {
     int id;
     QString name;
+    QString nameSort;
     int numDivisions = 0;
     int numDistinctKeyRanges = 0;
     int numDistinctVelocityRanges = 0;
@@ -56,17 +61,25 @@ public:
     DirectoryFileData(const QFileInfo &fileInfo);
 
     QString getPath() { return _path; }
-    QString getFileName() const;
+    QString getFileName() const { return QFileInfo(_path).fileName(); }
     quint64 getFileSize() const { return _fileSize; }
     QDateTime getLastModified() const { return _lastModified; }
+    bool isReadable() const { return _isReadable; }
+    bool isOpenable() const { return _isOpenable; }
+    bool isScanned() const { return _isScanned; }
     QList<DirectorySampleData> getSamples() const { return _samples; }
     QList<DirectoryInstrumentPresetData> getInstruments() const { return _instruments; }
     QList<DirectoryInstrumentPresetData> getPresets() const { return _presets; }
 
 private:
+    bool scan(AbstractInputParser * parser);
+    static void scanSmpl(QVectorIterator<Smpl*> &i, QList<DirectorySampleData> &list);
+    static void scanInstPrst(QVectorIterator<InstPrst*> &i, QList<DirectoryInstrumentPresetData> &list, bool isPrst);
+
     QString _path;
     quint64 _fileSize;
     QDateTime _lastModified;
+    bool _isReadable, _isOpenable, _isScanned;
     QList<DirectorySampleData> _samples;
     QList<DirectoryInstrumentPresetData> _instruments;
     QList<DirectoryInstrumentPresetData> _presets;

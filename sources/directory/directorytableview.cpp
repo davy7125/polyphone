@@ -46,9 +46,9 @@ DirectoryTableView::DirectoryTableView(QWidget * parent) : QTableView(parent),
     this->verticalHeader()->hide();
 
     // Custom delegate
-    this->setItemDelegateForColumn(1, _delegate);
-    this->setItemDelegateForColumn(2, _delegate);
-    this->setItemDelegateForColumn(3, _delegate);
+    //this->setItemDelegateForColumn(1, _delegate);
+    //this->setItemDelegateForColumn(2, _delegate);
+    //this->setItemDelegateForColumn(3, _delegate);
     connect(_delegate, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
 
     // Initialize display

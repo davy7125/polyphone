@@ -1,9 +1,12 @@
 #include "directorytablemodel.h"
 #include "utils.h"
+#include "contextmanager.h"
 
 DirectoryTableModel::DirectoryTableModel(QObject *parent) : QAbstractTableModel(parent)
 {
     _dateFormat = QLocale().dateFormat(QLocale::ShortFormat);
+    _colorEnabled = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT, ThemeManager::NORMAL);
+    _colorDisabled = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT, ThemeManager::DISABLED);
 }
 
 int DirectoryTableModel::rowCount(const QModelIndex &parent) const
@@ -21,26 +24,45 @@ QVariant DirectoryTableModel::data(const QModelIndex &index, int role) const
     if (!index.isValid() || index.row() >= _files.count())
         return QVariant();
 
-    const DirectoryFileData * fd = _files[_filePaths[index.row()]];
 
-    if (role == Qt::DisplayRole)
+    switch (role)
     {
+    case Qt::DisplayRole: {
+        const DirectoryFileData * fd = _files[_filePaths[index.row()]];
         switch (index.column())
         {
         case 0:
+            if (!fd->isOpenable())
+                return fd->getFileName();
+            if (!fd->isReadable())
+                return fd->getFileName() + "\n" + tr("not readable");
             return QString("%1\n%2\n%3").arg(fd->getFileName(), Utils::getFormattedSize(fd->getFileSize()), fd->getLastModified().toString(_dateFormat));
         case 1:
+            if (fd->isOpenable() && fd->isReadable())
+                return fd->isScanned() ? QString("%1 sample(s)").arg(fd->getSamples().count()) : "?";
+            return "";
             break;
         case 2:
+            if (fd->isOpenable() && fd->isReadable())
+                return fd->isScanned() ? QString("%1 instrument(s)").arg(fd->getInstruments().count()) : "?";
+            return "";
             break;
         case 3:
+            if (fd->isOpenable() && fd->isReadable())
+                return fd->isScanned() ? QString("%1 preset(s)").arg(fd->getPresets().count()) : "?";
+            return "";
             break;
         }
+    } break;
+    case Qt::ForegroundRole:
+        return QVariant::fromValue(_files[_filePaths[index.row()]]->isOpenable() ? _colorEnabled : _colorDisabled);
+    case Qt::TextAlignmentRole:
+        return QVariant::fromValue(Qt::AlignLeft | Qt::AlignTop);
+    case Qt::UserRole:
+        return QVariant::fromValue(_files[_filePaths[index.row()]]);
+    default:
+        break;
     }
-
-    // Data for delegates
-    if (role == Qt::UserRole)
-        return QVariant::fromValue(fd);
 
     return QVariant();
 }

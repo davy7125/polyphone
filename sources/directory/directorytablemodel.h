@@ -2,6 +2,7 @@
 #define DIRECTORYTABLEMODEL_H
 
 #include <QAbstractTableModel>
+#include <QColor>
 #include "directoryfiledata.h"
 
 class DirectoryTableModel : public QAbstractTableModel
@@ -25,6 +26,7 @@ private:
     QList<QString> _filePaths;
     QMap<QString, DirectoryFileData *> _files;
     QString _dateFormat;
+    QColor _colorEnabled, _colorDisabled;
 };
 
 #endif // DIRECTORYTABLEMODEL_H

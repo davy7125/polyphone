@@ -37,6 +37,7 @@ class InputParserSf : public AbstractInputParser
     
 public:
     InputParserSf();
+    bool canFastLoad() override { return true; }
 
 protected slots:
     void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;

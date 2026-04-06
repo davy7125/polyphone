@@ -24,7 +24,6 @@
 
 #include "directorytabledelegate.h"
 #include "directoryfiledata.h"
-#include "directorytablemodel.h"
 #include <QPainter>
 #include <QEvent>
 #include <QMouseEvent>
