@@ -56,6 +56,7 @@ DirectoryBrowser::DirectoryBrowser(QWidget *parent) : QWidget(parent),
     connect(ui->widgetSortMenu, SIGNAL(currentIndexChanged(int)), ui->tableView, SLOT(setSortType(int)));
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->tableView, SLOT(setFilter(QString)));
     connect(ui->tableView, SIGNAL(contentChanged()), this, SLOT(onContentChanged()));
+    connect(ui->tableView, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemClicked(QString,EltID)));
 
     // Initial sort type
     ui->tableView->setSortType(ui->widgetSortMenu->currentIndex());

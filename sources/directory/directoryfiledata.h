@@ -27,51 +27,71 @@
 
 #include <QDateTime>
 #include <QFileInfo>
+#include <QVectorIterator>
 #include "basetypes.h"
 class AbstractInputParser;
 class Smpl;
 class InstPrst;
 
-struct DirectorySampleData
-{
-    int id;
-    QString name;
-    QString nameSort;
-    SFSampleLink sampleType = linkInvalid;
-    int samplingRateHz = 0;
-    int totalDurationMilliSec = 0;
-    int loopDurationMilliSec = 0;
-};
-
-struct DirectoryInstrumentPresetData
-{
-    int id;
-    QString name;
-    QString nameSort;
-    int numDivisions = 0;
-    int numDistinctKeyRanges = 0;
-    int numDistinctVelocityRanges = 0;
-    int numParameters = 0;
-    int numModulators = 0;
-};
-
 class DirectoryFileData
 {
 public:
+    struct DetailsData
+    {
+        QStringList texts;
+        QList<int> values;
+    };
+
     DirectoryFileData(const QFileInfo &fileInfo);
 
-    QString getPath() { return _path; }
+    QString getPath() const { return _path; }
     QString getFileName() const { return QFileInfo(_path).fileName(); }
     quint64 getFileSize() const { return _fileSize; }
     QDateTime getLastModified() const { return _lastModified; }
+
     bool isReadable() const { return _isReadable; }
     bool isOpenable() const { return _isOpenable; }
     bool isScanned() const { return _isScanned; }
-    QList<DirectorySampleData> getSamples() const { return _samples; }
-    QList<DirectoryInstrumentPresetData> getInstruments() const { return _instruments; }
-    QList<DirectoryInstrumentPresetData> getPresets() const { return _presets; }
+
+    int getSampleCount() const { return _samples.count(); }
+    DetailsData getSampleDetails(int displayOptions) const;
+
+    int getInstrumentCount() const { return _instruments.count(); }
+    DetailsData getInstrumentDetails(int displayOptions) const;
+
+    int getPresetCount() const { return _presets.count(); }
+    DetailsData getPresetDetails(int displayOptions) const;
 
 private:
+    class DirectorySampleData
+    {
+    public:
+        QString getDetails(int displayOptions);
+
+        int id;
+        QString name;
+        QString nameSort;
+        SFSampleLink sampleType = linkInvalid;
+        int samplingRateHz = 0;
+        int totalDurationMilliSec = 0;
+        int loopDurationMilliSec = 0;
+    };
+
+    class DirectoryInstrumentPresetData
+    {
+    public:
+        QString getDetails(int displayOptions, bool isPrst);
+
+        int id;
+        QString name;
+        QString nameSort;
+        int numDivisions = 0;
+        int numDistinctKeyRanges = 0;
+        int numDistinctVelocityRanges = 0;
+        int numParameters = 0;
+        int numModulators = 0;
+    };
+
     bool scan(AbstractInputParser * parser);
     static void scanSmpl(QVectorIterator<Smpl*> &i, QList<DirectorySampleData> &list);
     static void scanInstPrst(QVectorIterator<InstPrst*> &i, QList<DirectoryInstrumentPresetData> &list, bool isPrst);

@@ -9,6 +9,11 @@ DirectoryTableModel::DirectoryTableModel(QObject *parent) : QAbstractTableModel(
     _colorDisabled = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT, ThemeManager::DISABLED);
 }
 
+DirectoryTableModel::~DirectoryTableModel()
+{
+    qDeleteAll(_files);
+}
+
 int DirectoryTableModel::rowCount(const QModelIndex &parent) const
 {
     return parent.isValid() ? 0 : _files.count();
@@ -24,7 +29,6 @@ QVariant DirectoryTableModel::data(const QModelIndex &index, int role) const
     if (!index.isValid() || index.row() >= _files.count())
         return QVariant();
 
-
     switch (role)
     {
     case Qt::DisplayRole: {
@@ -39,17 +43,17 @@ QVariant DirectoryTableModel::data(const QModelIndex &index, int role) const
             return QString("%1\n%2\n%3").arg(fd->getFileName(), Utils::getFormattedSize(fd->getFileSize()), fd->getLastModified().toString(_dateFormat));
         case 1:
             if (fd->isOpenable() && fd->isReadable())
-                return fd->isScanned() ? QString("%1 sample(s)").arg(fd->getSamples().count()) : "?";
+                return fd->isScanned() ? QString("%1 sample(s)").arg(fd->getSampleCount()) : "?";
             return "";
             break;
         case 2:
             if (fd->isOpenable() && fd->isReadable())
-                return fd->isScanned() ? QString("%1 instrument(s)").arg(fd->getInstruments().count()) : "?";
+                return fd->isScanned() ? QString("%1 instrument(s)").arg(fd->getInstrumentCount()) : "?";
             return "";
             break;
         case 3:
             if (fd->isOpenable() && fd->isReadable())
-                return fd->isScanned() ? QString("%1 preset(s)").arg(fd->getPresets().count()) : "?";
+                return fd->isScanned() ? QString("%1 preset(s)").arg(fd->getPresetCount()) : "?";
             return "";
             break;
         }
@@ -85,10 +89,19 @@ QVariant DirectoryTableModel::headerData(int section, Qt::Orientation orientatio
 
 void DirectoryTableModel::addFile(DirectoryFileData * fd)
 {
-    beginInsertRows(QModelIndex(), _files.count(), _files.count());
-    _files[fd->getPath()] = fd;
-    _filePaths.append(fd->getPath());
-    endInsertRows();
+    QString path = fd->getPath();
+    if (_files.contains(path))
+    {
+        // Update it instead
+        updateFile(fd);
+    }
+    else
+    {
+        beginInsertRows(QModelIndex(), _files.count(), _files.count());
+        _files[path] = fd;
+        _filePaths.append(path);
+        endInsertRows();
+    }
 }
 
 void DirectoryTableModel::removeFile(QString filePath)
@@ -106,13 +119,14 @@ void DirectoryTableModel::removeFile(QString filePath)
 void DirectoryTableModel::updateFile(DirectoryFileData * fd)
 {
     // Find the corresponding soundfont
-    if (_files.contains(fd->getPath()))
+    QString path = fd->getPath();
+    if (_files.contains(path))
     {
-        delete _files[fd->getPath()];
-        _files[fd->getPath()] = fd;
+        delete _files[path];
+        _files[path] = fd;
 
         // Notify the change
-        int row = _filePaths.indexOf(fd->getPath());
+        int row = _filePaths.indexOf(path);
         QModelIndex topLeft = index(row, 0);
         QModelIndex bottomRight = index(row, columnCount() - 1);
         emit dataChanged(topLeft, bottomRight, {Qt::DisplayRole, Qt::UserRole});

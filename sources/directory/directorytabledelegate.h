@@ -37,22 +37,15 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
-
-    // Structure pour stocker les infos de chaque sous-élément (pour la détection de clic)
-    struct ItemRectInfo
-    {
-        QRect rect;
-        int id;
-    };
+    QWidget * createEditor(QWidget * parent, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    void setEditorData(QWidget * editor, const QModelIndex &index) const override;
+    void updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 signals:
-    void itemDoubleClicked(const QString &itemId, EltID id) const;
+    void itemDoubleClicked(QString path, EltID id);
 
-protected:
-    bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;
-
-private:
-    void drawListItems(QPainter *painter, const QRect &contentRect, const QModelIndex &index, const QFontMetrics &fm) const;
+private slots:
+    void onEditorItemClicked(QModelIndex index);
 };
 
 #endif // DIRECTORYTABLEDELEGATE_H

@@ -52,6 +52,9 @@ public slots:
     void setSortType(int sortType);
     void setFilter(QString filter);
 
+private slots:
+    void onRowsInserted(const QModelIndex &parent, int first, int last);
+
 private:
     DirectorySortProxyModel * _proxy;
     DirectoryTableModel * _model;

@@ -47,6 +47,8 @@ DirectoryFileData::DirectoryFileData(const QFileInfo &fileInfo) :
             AbstractInputParser * parser = InputFactory::getInput(_path);
             if (parser->canFastLoad())
                 _isScanned = scan(parser);
+            SoundfontManager::getInstance()->remove(EltID(elementSf2, parser->getSf2Index()));
+            SoundfontManager::getInstance()->revertNewEditing();
             delete parser;
         }
     }
@@ -168,4 +170,49 @@ void DirectoryFileData::scanInstPrst(QVectorIterator<InstPrst*> &i, QList<Direct
     std::sort(list.begin(), list.end(), [](const DirectoryInstrumentPresetData &a, const DirectoryInstrumentPresetData &b) {
         return Utils::naturalOrder(a.nameSort, b.nameSort) < 0;
     });
+}
+
+DirectoryFileData::DetailsData DirectoryFileData::getSampleDetails(int displayOptions) const
+{
+    DetailsData result;
+    foreach (DirectorySampleData sample, _samples)
+    {
+        result.texts << sample.getDetails(displayOptions);
+        result.values << sample.id;
+    }
+    return result;
+}
+
+DirectoryFileData::DetailsData DirectoryFileData::getInstrumentDetails(int displayOptions) const
+{
+    DetailsData result;
+    foreach (DirectoryInstrumentPresetData instrument, _instruments)
+    {
+        result.texts << instrument.getDetails(displayOptions, false);
+        result.values << instrument.id;
+    }
+    return result;
+}
+
+DirectoryFileData::DetailsData DirectoryFileData::getPresetDetails(int displayOptions) const
+{
+    DetailsData result;
+    foreach (DirectoryInstrumentPresetData preset, _presets)
+    {
+        result.texts << preset.getDetails(displayOptions, true);
+        result.values << preset.id;
+    }
+    return result;
+}
+
+QString DirectoryFileData::DirectorySampleData::getDetails(int displayOptions)
+{
+    // TODO
+    return name;
+}
+
+QString DirectoryFileData::DirectoryInstrumentPresetData::getDetails(int displayOptions, bool isPrst)
+{
+    // TODO
+    return name;
 }

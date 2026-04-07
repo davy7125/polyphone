@@ -35,10 +35,11 @@ DirectoryTableView::DirectoryTableView(QWidget * parent) : QTableView(parent),
     // Custom types
     qRegisterMetaType<const DirectoryFileData*>();
 
-    // Model
+    // Proxy / model
     _proxy = new DirectorySortProxyModel(this);
     _proxy->setSourceModel(_model);
     this->setModel(_proxy);
+    connect(_proxy, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(onRowsInserted(QModelIndex,int,int)));
 
     // Configuration
     this->horizontalHeader()->setStretchLastSection(true);
@@ -46,9 +47,9 @@ DirectoryTableView::DirectoryTableView(QWidget * parent) : QTableView(parent),
     this->verticalHeader()->hide();
 
     // Custom delegate
-    //this->setItemDelegateForColumn(1, _delegate);
-    //this->setItemDelegateForColumn(2, _delegate);
-    //this->setItemDelegateForColumn(3, _delegate);
+    this->setItemDelegateForColumn(1, _delegate);
+    this->setItemDelegateForColumn(2, _delegate);
+    this->setItemDelegateForColumn(3, _delegate);
     connect(_delegate, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
 
     // Initialize display
@@ -91,4 +92,15 @@ void DirectoryTableView::setFilter(QString filter)
 {
     _proxy->setFilter(filter);
     emit contentChanged();
+}
+
+void DirectoryTableView::onRowsInserted(const QModelIndex &parent, int first, int last)
+{
+    Q_UNUSED(parent)
+    for (int row = first; row <= last; ++row)
+    {
+        this->openPersistentEditor(_proxy->index(row, 1));
+        this->openPersistentEditor(_proxy->index(row, 2));
+        this->openPersistentEditor(_proxy->index(row, 3));
+    }
 }

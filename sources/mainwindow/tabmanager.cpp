@@ -230,7 +230,6 @@ void TabManager::openDirectory(QString directoryPath)
 
 void TabManager::openSoundfont(QString filePath, EltID id)
 {
-    /// TODO: select the id
     openSoundfont(filePath, nullptr, true, id);
 }
 

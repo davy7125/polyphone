@@ -24,176 +24,98 @@
 
 #include "directorytabledelegate.h"
 #include "directoryfiledata.h"
-#include <QPainter>
-#include <QEvent>
-#include <QMouseEvent>
-
-void DirectoryTableDelegate::drawListItems(QPainter *painter, const QRect &contentRect, const QModelIndex &index, const QFontMetrics &fm) const
-{
-    int lineHeight = fm.height() + 2;
-    int currentY = contentRect.top();
-    int displayOptions = property("displayOptions").toInt();
-
-    // Définir la couleur du texte (par défaut ou depuis le rôle Qt::TextColorRole)
-    QColor textColor = Qt::black;
-    painter->setPen(textColor);
-
-    const DirectoryFileData * fd = index.data(Qt::UserRole).value<const DirectoryFileData *>();
-    if (index.column() == 1) // Samples
-    {
-        QList<DirectorySampleData> samples = fd->getSamples();
-        for (const auto& sample : samples)
-        {
-            QString text = sample.name;
-            painter->drawText(contentRect.left(), currentY, contentRect.width(), lineHeight, Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
-            currentY += lineHeight;
-            if (currentY > contentRect.bottom())
-                break; // Don't paint outside the cell
-        }
-    }
-    else if (index.column() == 2) // Instruments
-    {
-        QList<DirectoryInstrumentPresetData> instruments = fd->getInstruments();
-        for (const auto& inst : instruments)
-        {
-            QString text = inst.name;
-            painter->drawText(contentRect.left(), currentY, contentRect.width(), lineHeight, Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
-            currentY += lineHeight;
-            if (currentY > contentRect.bottom())
-                break; // Don't paint outside the cell
-        }
-    }
-    else if (index.column() == 3) // Presets
-    {
-        QList<DirectoryInstrumentPresetData> presets = fd->getPresets();
-        for (const auto& prst : presets)
-        {
-            QString text = prst.name;
-            painter->drawText(contentRect.left(), currentY, contentRect.width(), lineHeight, Qt::AlignLeft | Qt::AlignVCenter | Qt::TextDontClip, text);
-            currentY += lineHeight;
-            if (currentY > contentRect.bottom())
-                break; // Don't paint outside the cell
-        }
-    }
-}
+#include <QListView>
+#include <QApplication>
+#include <QStandardItemModel>
 
 void DirectoryTableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    painter->save();
-    painter->setRenderHint(QPainter::Antialiasing, true);
-
-    // Découpe le rendu à la zone de la cellule
-    painter->setClipRect(option.rect);
-
-    // Dessine l'arrière-plan de la cellule (sélection, focus, etc.)
     QStyleOptionViewItem opt = option;
-    initStyleOption(&opt, index); // Initialise avec les états actuels (sélectionné, survolé...)
-    opt.widget->style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
-
-    QRect contentRect = option.rect;
-    contentRect.adjust(2, 2, -2, -2); // Ajoute un peu de marge interne
-
-    drawListItems(painter, contentRect, index, option.fontMetrics);
-
-    painter->restore();
-}
-
-bool DirectoryTableDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index)
-{
-    // if (event->type() == QEvent::MouseButtonDblClick)
-    // {
-    //     QMouseEvent * mouseEvent = static_cast<QMouseEvent*>(event);
-    //     if (mouseEvent->button() == Qt::LeftButton)
-    //     {
-    //         // Il faut recréer les zones de dessin pour savoir quel sous-élément a été cliqué
-    //         QList<ItemRectInfo> itemRects;
-    //         QFontMetrics fm = option.fontMetrics;
-    //         int lineHeight = fm.height() + 2;
-
-    //         QRect contentRect = option.rect;
-    //         contentRect.adjust(2, 2, -2, -2);
-
-    //         int displayOptions = property("displayOptions").toInt();
-
-    //         int currentY = contentRect.top();
-
-    //         if (index.column() == 1) // Samples
-    //         {
-    //             QList<DirectorySampleData> samples = index.data(DirectoryTableModel::SampleListRole).value<QList<DirectorySampleData>>();
-    //             for (int i = 0; i < samples.count(); ++i)
-    //             {
-    //                 QRect itemRect(contentRect.left(), currentY, contentRect.width(), lineHeight);
-    //                 itemRects.append({itemRect, samples[i].id});
-    //                 currentY += lineHeight;
-    //             }
-    //         }
-    //         else if (index.column() == 2) // Instruments
-    //         {
-    //             QList<DirectoryInstrumentPresetData> instruments = index.data(DirectoryTableModel::InstrumentListRole).value<QList<DirectoryInstrumentPresetData>>();
-    //             for (int i = 0; i < instruments.count(); ++i)
-    //             {
-    //                 QRect itemRect(contentRect.left(), currentY, contentRect.width(), lineHeight);
-    //                 itemRects.append({itemRect, instruments[i].id, i});
-    //                 currentY += lineHeight;
-    //             }
-    //         }
-    //         else if (index.column() == 3) // Presets
-    //         {
-    //             QList<DirectoryInstrumentPresetData> presets = index.data(DirectoryTableModel::PresetListRole).value<QList<DirectoryInstrumentPresetData>>();
-    //             for (int i = 0; i < presets.count(); ++i)
-    //             {
-    //                 QRect itemRect(contentRect.left(), currentY, contentRect.width(), lineHeight);
-    //                 itemRects.append({itemRect, presets[i].id, i});
-    //                 currentY += lineHeight;
-    //             }
-    //         }
-
-    //         // Vérifie si le clic est tombé dans l'un des rectangles de sous-éléments
-    //         for (const auto& info : itemRects)
-    //         {
-    //             if (info.rect.contains(mouseEvent->pos()))
-    //             {
-    //                 emit itemDoubleClicked(info.id, index.column());
-    //                 return true; // Événement géré
-    //             }
-    //         }
-    //     }
-    // }
-    return QStyledItemDelegate::editorEvent(event, model, option, index);
+    initStyleOption(&opt, index);
+    QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter);
 }
 
 QSize DirectoryTableDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    // Calcule la hauteur nécessaire en fonction du contenu
-    QFontMetrics fm = option.fontMetrics;
-    int lineHeight = fm.height() + 2; // Hauteur de ligne + petit espacement
+    QSize s = QStyledItemDelegate::sizeHint(option, index);
+    s.setHeight(80);
+    return s;
+}
 
-    int numItems = 0;
-    int numLinesPerItem = 1; // Par défaut, 1 ligne par élément (non détaillé)
+QWidget * DirectoryTableDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    Q_UNUSED(option);
+    Q_UNUSED(index);
 
+    QListView * editor = new QListView(parent);
+    editor->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    editor->setModel(new QStandardItemModel(editor));
+    connect(editor, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(onEditorItemClicked(QModelIndex)));
+    return editor;
+}
+
+void DirectoryTableDelegate::setEditorData(QWidget * editor, const QModelIndex &index) const
+{
+    // Editor
+    QListView * listView = qobject_cast<QListView *>(editor);
+    if (!listView)
+        return;
+
+    // Editor model
+    QStandardItemModel * listViewModel = qobject_cast<QStandardItemModel*>(listView->model());
+    listViewModel->clear();
+
+    // Model data
     const DirectoryFileData * fd = index.data(Qt::UserRole).value<const DirectoryFileData *>();
-    if (index.column() == 1) // Samples
+    if (!fd)
+        return;
+
+    listView->setProperty("column", index.column());
+    listView->setProperty("path", fd->getPath());
+
+    // Display options
+    int displayOptions = property("displayOptions").toInt();
+
+    DirectoryFileData::DetailsData detailsData;
+    switch (index.column())
     {
-        QList<DirectorySampleData> samples = fd->getSamples();
-        numItems = samples.count();
-        // Les échantillons restent souvent sur une ligne même en détaillé dans ce toString()
-    }
-    else if (index.column() == 2) // Instruments
-    {
-        QList<DirectoryInstrumentPresetData> items = fd->getInstruments();
-        numItems = items.count();
-        // Les instruments/presets restent souvent sur une ligne même en détaillé dans ce toString()
-    }
-    else if (index.column() == 3) // Presets
-    {
-        QList<DirectoryInstrumentPresetData> items = fd->getPresets();
-        numItems = items.count();
-        // Les instruments/presets restent souvent sur une ligne même en détaillé dans ce toString()
+    case 1:
+        detailsData = fd->getSampleDetails(displayOptions);
+        break;
+    case 2:
+        detailsData = fd->getInstrumentDetails(displayOptions);
+        break;
+    case 3:
+        detailsData = fd->getPresetDetails(displayOptions);
+        break;
+    default:
+        break;
     }
 
-    if (numItems == 0)
-        return QSize(option.rect.width(), QStyledItemDelegate::sizeHint(option, index).height());
+    // Fill the model
+    for (int i = 0; i < detailsData.texts.size(); ++i)
+    {
+        QStandardItem * item = new QStandardItem(detailsData.texts[i]);
+        item->setData(detailsData.values[i], Qt::UserRole);
+        listViewModel->appendRow(item);
+    }
+}
 
-    int totalHeight = (numItems * numLinesPerItem * lineHeight) + 4; // Ajoute un peu de padding
-    return QSize(option.rect.width(), qMax(QStyledItemDelegate::sizeHint(option, index).height(), totalHeight));
+void DirectoryTableDelegate::updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    Q_UNUSED(index);
+    editor->setGeometry(option.rect);
+}
+
+void DirectoryTableDelegate::onEditorItemClicked(QModelIndex index)
+{
+    QListView * listView = qobject_cast<QListView *>(sender());
+    if (!listView)
+        return;
+
+    int column = listView->property("column").toInt();
+    QString path = listView->property("path").toString();
+    int id = index.data(Qt::UserRole).toInt();
+
+    emit itemDoubleClicked(path, EltID((ElementType)column, -1, id));
 }
