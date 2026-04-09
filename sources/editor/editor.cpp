@@ -31,7 +31,7 @@
 #include "soundfontmanager.h"
 #include "treemodel.h"
 #include "abstractinputparser.h"
-#include "treesplitter.h"
+#include "customsplitter.h"
 #include "solomanager.h"
 #include "pageselector.h"
 #include "dialogkeyboard.h"
@@ -47,7 +47,7 @@ Editor::Editor(DialogKeyboard * dialogKeyboard, EltID initialSelection) : Tab(nu
     ui->setupUi(this);
 
     // QSplitter so that the tree is resizable
-    TreeSplitter * splitter = new TreeSplitter(this, ui->leftPart, ui->rightPart);
+    CustomSplitter * splitter = new CustomSplitter(this, ui->leftPart, ui->rightPart, "tree_splitter_sizes");
     QVBoxLayout * layout = dynamic_cast<QVBoxLayout *>(this->layout());
     layout->addWidget(splitter);
 

@@ -22,17 +22,17 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TREESPLITTER_H
-#define TREESPLITTER_H
+#ifndef CUSTOMSPLITTER_H
+#define CUSTOMSPLITTER_H
 
 #include <QSplitter>
 
-class TreeSplitter : public QSplitter
+class CustomSplitter : public QSplitter
 {
     Q_OBJECT
 
 public:
-    TreeSplitter(QWidget *parent, QWidget *left, QWidget *right);
+    CustomSplitter(QWidget *parent, QWidget *left, QWidget *right, QString configurationKey);
 
 protected:
     void resizeEvent(QResizeEvent * event);
@@ -41,8 +41,9 @@ private slots:
     void splitterMoved(int pos, int index);
 
 private:
+    QString _configurationKey;
     static QVariantList toVariantList(QList<int> list);
     static QList<int> fromVariantList(QVariantList list);
 };
 
-#endif // TREESPLITTER_H
+#endif // CUSTOMSPLITTER_H

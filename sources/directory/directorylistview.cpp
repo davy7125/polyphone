@@ -22,15 +22,15 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "directorytableview.h"
-#include "directorytabledelegate.h"
-#include "directorytablemodel.h"
+#include "directorylistview.h"
+#include "directorylistdelegate.h"
+#include "directorylistmodel.h"
 #include <QHeaderView>
 #include "directorysortproxymodel.h"
 
-DirectoryTableView::DirectoryTableView(QWidget * parent) : QTableView(parent),
-    _model(new DirectoryTableModel(this)),
-    _delegate(new DirectoryTableDelegate(this))
+DirectoryListView::DirectoryListView(QWidget * parent) : QListView(parent),
+    _model(new DirectoryListModel(this)),
+    _delegate(new DirectoryListDelegate(this))
 {
     // Custom types
     qRegisterMetaType<const DirectoryFileData*>();
@@ -38,69 +38,37 @@ DirectoryTableView::DirectoryTableView(QWidget * parent) : QTableView(parent),
     // Proxy / model
     _proxy = new DirectorySortProxyModel(this);
     _proxy->setSourceModel(_model);
+    _proxy->sort(0);
     this->setModel(_proxy);
-    connect(_proxy, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(onRowsInserted(QModelIndex,int,int)));
-
-    // Configuration
-    this->horizontalHeader()->setStretchLastSection(true);
-    this->horizontalHeader()->setSectionsClickable(false);
-    this->verticalHeader()->hide();
 
     // Custom delegate
-    this->setItemDelegateForColumn(1, _delegate);
-    this->setItemDelegateForColumn(2, _delegate);
-    this->setItemDelegateForColumn(3, _delegate);
-    connect(_delegate, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
-
-    // Initialize display
-    this->resizeRowsToContents();
+    this->setItemDelegate(_delegate);
 }
 
-void DirectoryTableView::addFile(DirectoryFileData * fileData)
+void DirectoryListView::addFile(DirectoryFileData * fileData)
 {
     _model->addFile(fileData);
-    this->resizeRowsToContents();
     emit contentChanged();
 }
 
-void DirectoryTableView::removeFile(QString filePath)
+void DirectoryListView::removeFile(QString filePath)
 {
     _model->removeFile(filePath);
-    this->resizeRowsToContents();
     emit contentChanged();
 }
 
-void DirectoryTableView::updateFile(DirectoryFileData * fileData)
+void DirectoryListView::updateFile(DirectoryFileData * fileData)
 {
     _model->updateFile(fileData);
-    this->resizeRowsToContents();
 }
 
-void DirectoryTableView::setDisplayOptions(int displayOptions)
-{
-    _delegate->setProperty("displayOptions", displayOptions);
-    this->viewport()->update();
-    this->resizeRowsToContents();
-}
-
-void DirectoryTableView::setSortType(int sortType)
+void DirectoryListView::setSortType(int sortType)
 {
     _proxy->setSortMode((DirectorySortProxyModel::SortMode)sortType);
 }
 
-void DirectoryTableView::setFilter(QString filter)
+void DirectoryListView::setFilter(QString filter)
 {
     _proxy->setFilter(filter);
     emit contentChanged();
-}
-
-void DirectoryTableView::onRowsInserted(const QModelIndex &parent, int first, int last)
-{
-    Q_UNUSED(parent)
-    for (int row = first; row <= last; ++row)
-    {
-        this->openPersistentEditor(_proxy->index(row, 1));
-        this->openPersistentEditor(_proxy->index(row, 2));
-        this->openPersistentEditor(_proxy->index(row, 3));
-    }
 }

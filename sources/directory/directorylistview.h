@@ -22,58 +22,39 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "directorysortproxymodel.h"
-#include "directoryfiledata.h"
-#include "utils.h"
+#ifndef DIRECTORYLISTVIEW_H
+#define DIRECTORYLISTVIEW_H
 
-DirectorySortProxyModel::DirectorySortProxyModel(QObject *parent) : QSortFilterProxyModel{parent},
-    _mode(SortByName),
-    _filter("")
-{}
+#include <QListView>
+#include "basetypes.h"
+class DirectoryListModel;
+class DirectoryListDelegate;
+class DirectoryFileData;
+class DirectorySortProxyModel;
 
-void DirectorySortProxyModel::setSortMode(SortMode mode)
+class DirectoryListView : public QListView
 {
-    _mode = mode;
-    invalidate();
-}
+    Q_OBJECT
 
-bool DirectorySortProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
-{
-    const DirectoryFileData * fdL = sourceModel()->data(left, Qt::UserRole).value<const DirectoryFileData *>();
-    const DirectoryFileData * dfR = sourceModel()->data(right, Qt::UserRole).value<const DirectoryFileData *>();
-    if (fdL == nullptr || dfR == nullptr)
-        return false;
-    switch (_mode)
-    {
-    case SortByName:
-        return Utils::naturalOrder(fdL->getFileName(), dfR->getFileName()) < 0;
-    case SortByDateDesc:
-        return fdL->getLastModified() > dfR->getLastModified();
-    case SortBySizeDesc:
-        return fdL->getFileSize() > dfR->getFileSize();
-    case SortBySizeAsc:
-        return fdL->getFileSize() < dfR->getFileSize();
-    }
+public:
+    explicit DirectoryListView(QWidget *parent = nullptr);
 
-    return false;
-}
+    void addFile(DirectoryFileData * fileData);
+    void removeFile(QString filePath);
+    void updateFile(DirectoryFileData * fileData);
 
-void DirectorySortProxyModel::setFilter(QString filter)
-{
-    beginFilterChange();
-    _filter = filter;
-    endFilterChange();
-}
+signals:
+    void contentChanged();
+    void itemDoubleClicked(QString filePath, EltID elt);
 
-bool DirectorySortProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
-{
-    if (_filter.isEmpty())
-        return true;
+public slots:
+    void setSortType(int sortType);
+    void setFilter(QString filter);
 
-    QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
-    const DirectoryFileData *fd = sourceModel()->data(index, Qt::UserRole).value<const DirectoryFileData *>();
-    if (fd == nullptr)
-        return false;
+private:
+    DirectorySortProxyModel * _proxy;
+    DirectoryListModel * _model;
+    DirectoryListDelegate * _delegate;
+};
 
-    return fd->getFileName().contains(_filter, Qt::CaseInsensitive);
-}
+#endif // DIRECTORYLISTVIEW_H

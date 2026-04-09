@@ -45,12 +45,14 @@ public:
     QString getDirectoryPath() { return _dirPath; }
 
 signals:
-    void itemClicked(QString filePath, EltID id);
+    void itemDoubleClicked(QString filePath, EltID id);
 
 private slots:
     void on_pushRetry_clicked();
     void onDirectoryChanged(const QString &path);
     void onContentChanged();
+    void on_listView_clicked(const QModelIndex &index);
+    void on_listView_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::DirectoryBrowser *ui;

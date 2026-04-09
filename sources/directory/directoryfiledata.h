@@ -38,8 +38,18 @@ class DirectoryFileData
 public:
     struct DetailsData
     {
-        QStringList texts;
+        QStringList names;
+        QStringList details;
         QList<int> values;
+    };
+
+    enum Status {
+        NOT_INITIALIZED,
+        NOT_READABLE,
+        NOT_OPENABLE,
+        NOT_SCANNABLE,
+        CANNOT_SCAN,
+        OK
     };
 
     DirectoryFileData(const QFileInfo &fileInfo);
@@ -48,25 +58,22 @@ public:
     QString getFileName() const { return QFileInfo(_path).fileName(); }
     quint64 getFileSize() const { return _fileSize; }
     QDateTime getLastModified() const { return _lastModified; }
-
-    bool isReadable() const { return _isReadable; }
-    bool isOpenable() const { return _isOpenable; }
-    bool isScanned() const { return _isScanned; }
+    Status getStatus() const { return _status; }
 
     int getSampleCount() const { return _samples.count(); }
-    DetailsData getSampleDetails(int displayOptions) const;
+    DetailsData getSampleDetails() const;
 
     int getInstrumentCount() const { return _instruments.count(); }
-    DetailsData getInstrumentDetails(int displayOptions) const;
+    DetailsData getInstrumentDetails() const;
 
     int getPresetCount() const { return _presets.count(); }
-    DetailsData getPresetDetails(int displayOptions) const;
+    DetailsData getPresetDetails() const;
 
 private:
     class DirectorySampleData
     {
     public:
-        QString getDetails(int displayOptions);
+        QString getDetail();
 
         int id;
         QString name;
@@ -80,7 +87,7 @@ private:
     class DirectoryInstrumentPresetData
     {
     public:
-        QString getDetails(int displayOptions, bool isPrst);
+        QString getDetail();
 
         int id;
         QString name;
@@ -99,7 +106,7 @@ private:
     QString _path;
     quint64 _fileSize;
     QDateTime _lastModified;
-    bool _isReadable, _isOpenable, _isScanned;
+    Status _status;
     QList<DirectorySampleData> _samples;
     QList<DirectoryInstrumentPresetData> _instruments;
     QList<DirectoryInstrumentPresetData> _presets;

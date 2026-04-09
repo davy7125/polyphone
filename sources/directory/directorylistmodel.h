@@ -22,58 +22,31 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "directorysortproxymodel.h"
+#ifndef DIRECTORYLISTMODEL_H
+#define DIRECTORYLISTMODEL_H
+
+#include <QAbstractListModel>
 #include "directoryfiledata.h"
-#include "utils.h"
 
-DirectorySortProxyModel::DirectorySortProxyModel(QObject *parent) : QSortFilterProxyModel{parent},
-    _mode(SortByName),
-    _filter("")
-{}
-
-void DirectorySortProxyModel::setSortMode(SortMode mode)
+class DirectoryListModel : public QAbstractListModel
 {
-    _mode = mode;
-    invalidate();
-}
+    Q_OBJECT
 
-bool DirectorySortProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
-{
-    const DirectoryFileData * fdL = sourceModel()->data(left, Qt::UserRole).value<const DirectoryFileData *>();
-    const DirectoryFileData * dfR = sourceModel()->data(right, Qt::UserRole).value<const DirectoryFileData *>();
-    if (fdL == nullptr || dfR == nullptr)
-        return false;
-    switch (_mode)
-    {
-    case SortByName:
-        return Utils::naturalOrder(fdL->getFileName(), dfR->getFileName()) < 0;
-    case SortByDateDesc:
-        return fdL->getLastModified() > dfR->getLastModified();
-    case SortBySizeDesc:
-        return fdL->getFileSize() > dfR->getFileSize();
-    case SortBySizeAsc:
-        return fdL->getFileSize() < dfR->getFileSize();
-    }
+public:
+    explicit DirectoryListModel(QObject *parent = nullptr);
+    ~DirectoryListModel();
 
-    return false;
-}
+    // Methods for updating the model
+    void addFile(DirectoryFileData * fd);
+    void removeFile(QString filePath);
+    void updateFile(DirectoryFileData * fd);
 
-void DirectorySortProxyModel::setFilter(QString filter)
-{
-    beginFilterChange();
-    _filter = filter;
-    endFilterChange();
-}
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-bool DirectorySortProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
-{
-    if (_filter.isEmpty())
-        return true;
+private:
+    QList<QString> _filePaths;
+    QMap<QString, DirectoryFileData *> _files;
+};
 
-    QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
-    const DirectoryFileData *fd = sourceModel()->data(index, Qt::UserRole).value<const DirectoryFileData *>();
-    if (fd == nullptr)
-        return false;
-
-    return fd->getFileName().contains(_filter, Qt::CaseInsensitive);
-}
+#endif // DIRECTORYLISTMODEL_H

@@ -22,58 +22,38 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "directorysortproxymodel.h"
-#include "directoryfiledata.h"
-#include "utils.h"
+#include "directoryelementlistview.h"
+#include <QStringListModel>
+#include <QMouseEvent>
 
-DirectorySortProxyModel::DirectorySortProxyModel(QObject *parent) : QSortFilterProxyModel{parent},
-    _mode(SortByName),
-    _filter("")
-{}
-
-void DirectorySortProxyModel::setSortMode(SortMode mode)
+DirectoryElementListView::DirectoryElementListView(QWidget *parent) : QListView(parent),
+    _path(""),
+    _type(elementUnknown)
 {
-    _mode = mode;
-    invalidate();
+    this->setModel(new QStringListModel());
 }
 
-bool DirectorySortProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
+void DirectoryElementListView::clear()
 {
-    const DirectoryFileData * fdL = sourceModel()->data(left, Qt::UserRole).value<const DirectoryFileData *>();
-    const DirectoryFileData * dfR = sourceModel()->data(right, Qt::UserRole).value<const DirectoryFileData *>();
-    if (fdL == nullptr || dfR == nullptr)
-        return false;
-    switch (_mode)
-    {
-    case SortByName:
-        return Utils::naturalOrder(fdL->getFileName(), dfR->getFileName()) < 0;
-    case SortByDateDesc:
-        return fdL->getLastModified() > dfR->getLastModified();
-    case SortBySizeDesc:
-        return fdL->getFileSize() > dfR->getFileSize();
-    case SortBySizeAsc:
-        return fdL->getFileSize() < dfR->getFileSize();
-    }
-
-    return false;
+    QStringListModel * model = (QStringListModel *)this->model();
+    model->setStringList(QStringList());
+    _path = "";
+    _type = elementUnknown;
 }
 
-void DirectorySortProxyModel::setFilter(QString filter)
+void DirectoryElementListView::setData(DirectoryFileData::DetailsData data, QString path, ElementType type)
 {
-    beginFilterChange();
-    _filter = filter;
-    endFilterChange();
+    _path = path;
+    _type = type;
+    QStringListModel * model = (QStringListModel *)this->model();
+    model->setStringList(data.names);
+    _values = data.values;
 }
 
-bool DirectorySortProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
+void DirectoryElementListView::mouseDoubleClickEvent(QMouseEvent *event)
 {
-    if (_filter.isEmpty())
-        return true;
-
-    QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
-    const DirectoryFileData *fd = sourceModel()->data(index, Qt::UserRole).value<const DirectoryFileData *>();
-    if (fd == nullptr)
-        return false;
-
-    return fd->getFileName().contains(_filter, Qt::CaseInsensitive);
+    QModelIndex index = indexAt(event->pos());
+    if (index.isValid() && _type != elementUnknown && index.row() < _values.count())
+        emit itemDoubleClicked(_path, EltID(_type, -1, _values[index.row()]));
+    QListView::mouseDoubleClickEvent(event);
 }

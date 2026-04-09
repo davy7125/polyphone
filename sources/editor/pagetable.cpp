@@ -499,7 +499,7 @@ void PageTable::formatTable(bool multiGlobal)
 void PageTable::styleFixedRow(int numRow)
 {
     // Color, font
-    QFont font(this->font().family(), this->font().pointSize() - 1, QFont::Normal, true);
+    QFont font(this->font().family(), this->font().pointSize() * 0.9, QFont::Normal, true);
     QColor fixedColor = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
                                           ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.35);
 

@@ -22,30 +22,31 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef DIRECTORYTABLEDELEGATE_H
-#define DIRECTORYTABLEDELEGATE_H
+#ifndef DIRECTORYELEMENTLISTVIEW_H
+#define DIRECTORYELEMENTLISTVIEW_H
 
-#include <QStyledItemDelegate>
-#include "basetypes.h"
+#include <QListView>
+#include "directoryfiledata.h"
 
-class DirectoryTableDelegate : public QStyledItemDelegate
+class DirectoryElementListView : public QListView
 {
     Q_OBJECT
 
 public:
-    explicit DirectoryTableDelegate(QObject *parent = nullptr) : QStyledItemDelegate(parent) {}
-
-    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
-    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
-    QWidget * createEditor(QWidget * parent, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
-    void setEditorData(QWidget * editor, const QModelIndex &index) const override;
-    void updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    explicit DirectoryElementListView(QWidget *parent = nullptr);
+    void clear();
+    void setData(DirectoryFileData::DetailsData data, QString path, ElementType type);
 
 signals:
     void itemDoubleClicked(QString path, EltID id);
 
-private slots:
-    void onEditorItemClicked(QModelIndex index);
+protected:
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+
+private:
+    QString _path;
+    ElementType _type;
+    QList<int> _values;
 };
 
-#endif // DIRECTORYTABLEDELEGATE_H
+#endif // DIRECTORYELEMENTLISTVIEW_H

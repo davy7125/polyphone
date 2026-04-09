@@ -26,6 +26,7 @@
 #include "ui_directorybrowser.h"
 #include "contextmanager.h"
 #include "directoryfiledata.h"
+#include "customsplitter.h"
 
 DirectoryBrowser::DirectoryBrowser(QWidget *parent) : QWidget(parent),
     ui(new Ui::DirectoryBrowser),
@@ -33,33 +34,52 @@ DirectoryBrowser::DirectoryBrowser(QWidget *parent) : QWidget(parent),
 {
     ui->setupUi(this);
 
-    // Style
+    // Style: top part
     QString highlightedBackground = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
     QString highlightedText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
     QString border = ContextManager::theme()->getColor(ThemeManager::BORDER).name();
 
     ui->pushRetry->setIcon(ContextManager::theme()->getColoredSvg(":/icons/reload.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
-    ui->pushRetry->setStyleSheet("QPushButton{background-color:" + highlightedBackground + ";border-radius:5px;padding:5px}");
     ui->widgetColored->setStyleSheet("QWidget{background-color:" + highlightedBackground + "}");
     ui->widgetColored2->setStyleSheet("QWidget{background-color:" + highlightedBackground + "}");
     QString titleStyleSheet = "QLabel#labelFilters, QFrame#frameTop{background-color:" + highlightedBackground + ";color:" + highlightedText+ "}";
     ui->frameTop->setStyleSheet(titleStyleSheet);
     ui->lineSearch->setStyleSheet("QLineEdit{background-color:" + highlightedText + ";color:" + highlightedBackground + ";border:0;border-radius:2px;}");
+
+    // Style: center part
+    ui->pushRetry->setStyleSheet("QPushButton{background-color:" + highlightedBackground + ";border-radius:5px;padding:5px}");
     QColor color = ThemeManager::mix(
         ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
         ContextManager::theme()->getColor(ThemeManager::LIST_TEXT), 0.5);
     ui->labelNoResults->setStyleSheet("QLabel{color:" + color.name() + ";border:1px solid " + border + ";border-top:0;border-right:0;border-bottom:0}");
-    ui->tableView->hide();
+    ui->listView->hide();
+
+    // Style: right part
+    QMap<QString, QString> replacement;
+    replacement["currentColor"] = ContextManager::theme()->getFixedColor(ThemeManager::YELLOW, ThemeManager::WINDOW_BACKGROUND).name();
+    ui->iconSample->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/sample.svg", QSize(16, 16), replacement));
+    replacement["currentColor"] = ContextManager::theme()->getFixedColor(ThemeManager::BLUE, ThemeManager::WINDOW_BACKGROUND).name();
+    ui->iconInstrument->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/instrument.svg", QSize(16, 16), replacement));
+    replacement["currentColor"] = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND).name();
+    ui->iconPreset->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/preset.svg", QSize(16, 16), replacement));
 
     // Connections
-    connect(ui->widgetDisplayMenu, SIGNAL(displayOptionsChanged(int)), ui->tableView, SLOT(setDisplayOptions(int)));
-    connect(ui->widgetSortMenu, SIGNAL(currentIndexChanged(int)), ui->tableView, SLOT(setSortType(int)));
-    connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->tableView, SLOT(setFilter(QString)));
-    connect(ui->tableView, SIGNAL(contentChanged()), this, SLOT(onContentChanged()));
-    connect(ui->tableView, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemClicked(QString,EltID)));
+    //connect(ui->widgetDisplayMenu, SIGNAL(displayOptionsChanged(int)), ui->listView, SLOT(setDisplayOptions(int)));
+    connect(ui->widgetSortMenu, SIGNAL(currentIndexChanged(int)), ui->listView, SLOT(setSortType(int)));
+    connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listView, SLOT(setFilter(QString)));
+    connect(ui->listView, SIGNAL(contentChanged()), this, SLOT(onContentChanged()));
+    connect(ui->listSamples, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
+    connect(ui->listInstruments, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
+    connect(ui->listPresets, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
+
+    // Splitter
+    CustomSplitter * splitter = new CustomSplitter(this, ui->widgetLeft, ui->widgetRight, "directory_browser_splitter_sizes");
+    QGridLayout * layout = dynamic_cast<QGridLayout *>(ui->pageSoundfonts->layout());
+    layout->addWidget(splitter, 1, 0);
+    splitter->setHandleWidth(6);
 
     // Initial sort type
-    ui->tableView->setSortType(ui->widgetSortMenu->currentIndex());
+    ui->listView->setSortType(ui->widgetSortMenu->currentIndex());
 }
 
 DirectoryBrowser::~DirectoryBrowser()
@@ -97,14 +117,14 @@ void DirectoryBrowser::initialize(QString dirPath)
         if (_currentFiles.contains(fileInfo.absoluteFilePath()))
         {
             if (_currentFiles[fileInfo.absoluteFilePath()] != newFiles[fileInfo.absoluteFilePath()])
-                ui->tableView->updateFile(new DirectoryFileData(fileInfo));
+                ui->listView->updateFile(new DirectoryFileData(fileInfo));
             _currentFiles.remove(fileInfo.absoluteFilePath());
         }
         else
-            ui->tableView->addFile(new DirectoryFileData(fileInfo));
+            ui->listView->addFile(new DirectoryFileData(fileInfo));
     }
     foreach (QString absoluteFilePath, _currentFiles.keys())
-        ui->tableView->removeFile(absoluteFilePath);
+        ui->listView->removeFile(absoluteFilePath);
     _currentFiles = newFiles;
     ui->stackedWidget->setCurrentIndex(2);
 
@@ -129,14 +149,41 @@ void DirectoryBrowser::onDirectoryChanged(const QString &path)
 
 void DirectoryBrowser::onContentChanged()
 {
-    if (ui->tableView->model()->rowCount() > 0)
+    if (ui->listView->model()->rowCount() > 0)
     {
         ui->labelNoResults->hide();
-        ui->tableView->show();
+        ui->listView->show();
     }
     else
     {
-        ui->tableView->hide();
+        ui->listView->hide();
         ui->labelNoResults->show();
     }
 }
+
+void DirectoryBrowser::on_listView_clicked(const QModelIndex &index)
+{
+    const DirectoryFileData * d = index.data(Qt::UserRole).value<const DirectoryFileData *>();
+    if (d == nullptr)
+    {
+        ui->listSamples->clear();
+        ui->listInstruments->clear();
+        ui->listPresets->clear();
+    }
+    else
+    {
+        ui->listSamples->setData(d->getSampleDetails(), d->getPath(), elementSmpl);
+        ui->listInstruments->setData(d->getInstrumentDetails(), d->getPath(), elementInst);
+        ui->listPresets->setData(d->getPresetDetails(), d->getPath(), elementPrst);
+    }
+}
+
+void DirectoryBrowser::on_listView_doubleClicked(const QModelIndex &index)
+{
+    const DirectoryFileData * d = index.data(Qt::UserRole).value<const DirectoryFileData *>();
+    if (d == nullptr)
+        return;
+
+    emit itemDoubleClicked(d->getPath(), EltID(elementSf2));
+}
+

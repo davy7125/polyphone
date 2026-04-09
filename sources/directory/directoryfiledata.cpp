@@ -35,23 +35,30 @@
 DirectoryFileData::DirectoryFileData(const QFileInfo &fileInfo) :
     _path(fileInfo.absoluteFilePath()),
     _fileSize(fileInfo.size()),
-    _lastModified(fileInfo.lastModified())
+    _lastModified(fileInfo.lastModified()),
+    _status(NOT_INITIALIZED)
 {
-    _isReadable = _isScanned = false;
-    _isOpenable = InputFactory::isSuffixSupported(fileInfo.suffix());
-    if (_isOpenable)
+    if (InputFactory::isSuffixSupported(fileInfo.suffix()))
     {
-        _isReadable = fileInfo.isReadable();
-        if (_isReadable)
+        if (fileInfo.isReadable())
         {
             AbstractInputParser * parser = InputFactory::getInput(_path);
             if (parser->canFastLoad())
-                _isScanned = scan(parser);
+                if (scan(parser))
+                    _status = OK;
+                else
+                    _status = CANNOT_SCAN;
+            else
+                _status = NOT_SCANNABLE;
             SoundfontManager::getInstance()->remove(EltID(elementSf2, parser->getSf2Index()));
             SoundfontManager::getInstance()->revertNewEditing();
             delete parser;
         }
+        else
+            _status = NOT_READABLE;
     }
+    else
+        _status = NOT_OPENABLE;
 }
 
 bool DirectoryFileData::scan(AbstractInputParser * parser)
@@ -172,47 +179,78 @@ void DirectoryFileData::scanInstPrst(QVectorIterator<InstPrst*> &i, QList<Direct
     });
 }
 
-DirectoryFileData::DetailsData DirectoryFileData::getSampleDetails(int displayOptions) const
+DirectoryFileData::DetailsData DirectoryFileData::getSampleDetails() const
 {
     DetailsData result;
     foreach (DirectorySampleData sample, _samples)
     {
-        result.texts << sample.getDetails(displayOptions);
+        result.names << sample.name;
+        result.details << sample.getDetail();
         result.values << sample.id;
     }
     return result;
 }
 
-DirectoryFileData::DetailsData DirectoryFileData::getInstrumentDetails(int displayOptions) const
+DirectoryFileData::DetailsData DirectoryFileData::getInstrumentDetails() const
 {
     DetailsData result;
     foreach (DirectoryInstrumentPresetData instrument, _instruments)
     {
-        result.texts << instrument.getDetails(displayOptions, false);
+        result.names << instrument.name;
+        result.details << instrument.getDetail();
         result.values << instrument.id;
     }
     return result;
 }
 
-DirectoryFileData::DetailsData DirectoryFileData::getPresetDetails(int displayOptions) const
+DirectoryFileData::DetailsData DirectoryFileData::getPresetDetails() const
 {
     DetailsData result;
     foreach (DirectoryInstrumentPresetData preset, _presets)
     {
-        result.texts << preset.getDetails(displayOptions, true);
+        result.names << preset.name;
+        result.details << preset.getDetail();
         result.values << preset.id;
     }
     return result;
 }
 
-QString DirectoryFileData::DirectorySampleData::getDetails(int displayOptions)
+QString DirectoryFileData::DirectorySampleData::getDetail()
 {
-    // TODO
-    return name;
+    QString result;
+    switch (sampleType)
+    {
+    case linkInvalid:
+        result = QObject::tr("Invalid link");
+        break;
+    case monoSample: case RomMonoSample:
+        result = QObject::tr("Mono", "opposite to stereo");
+        break;
+    case rightSample: case RomRightSample:
+        result = QObject::tr("Stereo right");
+        break;
+    case leftSample: case RomLeftSample:
+        result = QObject::tr("Stereo left");
+        break;
+    case linkedSample: case RomLinkedSample:
+        result = QObject::tr("Stereo non defined");
+        break;
+    }
+
+    QString secondUnit = QObject::tr("s", "unit for seconds");
+    result += ", " + QLocale::system().toString((double)totalDurationMilliSec / 1000, 'f', 3) + " " + secondUnit;
+    if (loopDurationMilliSec > 0)
+        result += ", " + QObject::tr("loop") + " " + QLocale::system().toString((double)loopDurationMilliSec / 1000, 'f', 3) + " " + secondUnit;
+
+    return result;
 }
 
-QString DirectoryFileData::DirectoryInstrumentPresetData::getDetails(int displayOptions, bool isPrst)
+QString DirectoryFileData::DirectoryInstrumentPresetData::getDetail()
 {
-    // TODO
-    return name;
+    return QObject::tr("%1 division(s): %2 distinct key range(s) and %3 distinct velocity range(s)")
+               .arg(numDivisions)
+               .arg(numDistinctKeyRanges)
+               .arg(numDistinctVelocityRanges) +
+           "\n" +
+           QObject::tr("%1 parameter(s), %2 modulator(s)").arg(numParameters).arg(numModulators);
 }

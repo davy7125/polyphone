@@ -292,12 +292,13 @@ SOURCES	+= main.cpp \
     dialogs/dialogchangelog.cpp \
     directory/directorybrowser.cpp \
     directory/directorydisplaymenu.cpp \
+    directory/directoryelementlistview.cpp \
     directory/directoryfiledata.cpp \
+    directory/directorylistdelegate.cpp \
+    directory/directorylistmodel.cpp \
+    directory/directorylistview.cpp \
     directory/directorysortmenu.cpp \
     directory/directorysortproxymodel.cpp \
-    directory/directorytabledelegate.cpp \
-    directory/directorytablemodel.cpp \
-    directory/directorytableview.cpp \
     editor/footers/footerlinkedto.cpp \
     editor/footers/footeroverview.cpp \
     editor/footers/footerprst.cpp \
@@ -331,7 +332,7 @@ SOURCES	+= main.cpp \
     editor/tools/merge_samples/toolmergesamples_gui.cpp \
     editor/tools/merge_samples/toolmergesamples_parameters.cpp \
     editor/tools/monitor/segmentpainter.cpp \
-    editor/tree/treesplitter.cpp \
+    editor/tree/customsplitter.cpp \
     editor/widgets/equalizer.cpp \
     editor/widgets/menulabel.cpp \
     editor/widgets/nullablespinbox.cpp \
@@ -667,12 +668,13 @@ HEADERS += \
     dialogs/modalprogressdialog.h \
     directory/directorybrowser.h \
     directory/directorydisplaymenu.h \
+    directory/directoryelementlistview.h \
     directory/directoryfiledata.h \
+    directory/directorylistdelegate.h \
+    directory/directorylistmodel.h \
+    directory/directorylistview.h \
     directory/directorysortmenu.h \
     directory/directorysortproxymodel.h \
-    directory/directorytabledelegate.h \
-    directory/directorytablemodel.h \
-    directory/directorytableview.h \
     editor/footers/abstractfooter.h \
     editor/footers/footerlinkedto.h \
     editor/footers/footeroverview.h \
@@ -709,7 +711,7 @@ HEADERS += \
     editor/tools/merge_samples/toolmergesamples_parameters.h \
     editor/tools/monitor/segment.h \
     editor/tools/monitor/segmentpainter.h \
-    editor/tree/treesplitter.h \
+    editor/tree/customsplitter.h \
     editor/widgets/equalizer.h \
     editor/widgets/menulabel.h \
     editor/widgets/pushstereoediting.h \

@@ -22,10 +22,11 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "treesplitter.h"
+#include "customsplitter.h"
 #include "contextmanager.h"
 
-TreeSplitter::TreeSplitter(QWidget *parent, QWidget *left, QWidget *right) : QSplitter(Qt::Horizontal, parent)
+CustomSplitter::CustomSplitter(QWidget *parent, QWidget *left, QWidget *right, QString configurationKey) : QSplitter(Qt::Horizontal, parent),
+    _configurationKey(configurationKey)
 {
     // Initial the widgets
     this->setHandleWidth(0);
@@ -36,29 +37,29 @@ TreeSplitter::TreeSplitter(QWidget *parent, QWidget *left, QWidget *right) : QSp
 
     // Restore the geometry
     this->setSizes(fromVariantList(ContextManager::configuration()->getValue(
-                                       ConfManager::SECTION_DISPLAY, "tree_splitter_sizes",
+                                       ConfManager::SECTION_DISPLAY, _configurationKey,
                                        QVariantList()).toList()));
 
     // Reaction to a manual move
     connect(this, SIGNAL(splitterMoved(int, int)), this, SLOT(splitterMoved(int, int)));
 }
 
-void TreeSplitter::resizeEvent(QResizeEvent * event)
+void CustomSplitter::resizeEvent(QResizeEvent * event)
 {
     QSplitter::resizeEvent(event);
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "tree_splitter_sizes",
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, _configurationKey,
                                               toVariantList(this->sizes()));
 }
 
-void TreeSplitter::splitterMoved(int pos, int index)
+void CustomSplitter::splitterMoved(int pos, int index)
 {
     Q_UNUSED(pos)
     Q_UNUSED(index)
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "tree_splitter_sizes",
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, _configurationKey,
                                               toVariantList(this->sizes()));
 }
 
-QVariantList TreeSplitter::toVariantList(QList<int> list)
+QVariantList CustomSplitter::toVariantList(QList<int> list)
 {
     QVariantList listRet;
     foreach (int elt, list)
@@ -66,7 +67,7 @@ QVariantList TreeSplitter::toVariantList(QList<int> list)
     return listRet;
 }
 
-QList<int> TreeSplitter::fromVariantList(QVariantList list)
+QList<int> CustomSplitter::fromVariantList(QVariantList list)
 {
     QList<int> listRet;
     foreach (QVariant elt, list)

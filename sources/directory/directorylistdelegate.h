@@ -22,43 +22,34 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef DIRECTORYTABLEVIEW_H
-#define DIRECTORYTABLEVIEW_H
+#ifndef DIRECTORYLISTDELEGATE_H
+#define DIRECTORYLISTDELEGATE_H
 
-#include <QTableView>
+#include <QStyledItemDelegate>
 #include "basetypes.h"
-class DirectoryTableModel;
-class DirectoryTableDelegate;
 class DirectoryFileData;
-class DirectorySortProxyModel;
 
-class DirectoryTableView : public QTableView
+class DirectoryListDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 
 public:
-    explicit DirectoryTableView(QWidget *parent = nullptr);
+    explicit DirectoryListDelegate(QObject *parent = nullptr);
 
-    void addFile(DirectoryFileData * fileData);
-    void removeFile(QString filePath);
-    void updateFile(DirectoryFileData * fileData);
-
-signals:
-    void contentChanged();
-    void itemDoubleClicked(QString filePath, EltID elt);
-
-public slots:
-    void setDisplayOptions(int displayOptions);
-    void setSortType(int sortType);
-    void setFilter(QString filter);
-
-private slots:
-    void onRowsInserted(const QModelIndex &parent, int first, int last);
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 private:
-    DirectorySortProxyModel * _proxy;
-    DirectoryTableModel * _model;
-    DirectoryTableDelegate * _delegate;
+    int getCounterWidth(const QFontMetrics &fm, const DirectoryFileData *d) const;
+    void paintCounters(QPainter *painter, const QFontMetrics &fm, const DirectoryFileData *d, int x, int y, bool selected) const;
+
+    QColor _colorEnabled, _colorHighlighted, _colorDisabled;
+    QString _dateFormat;
+    QPixmap _iconSample, _iconInstrument, _iconPreset;
+    QPixmap _iconSampleSelected, _iconInstrumentSelected, _iconPresetSelected;
+
+    static const int MARGIN;
+    static const int ICON_SIZE;
 };
 
-#endif // DIRECTORYTABLEVIEW_H
+#endif // DIRECTORYLISTDELEGATE_H
