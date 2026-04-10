@@ -28,6 +28,8 @@
 #include "directoryfiledata.h"
 #include "customsplitter.h"
 #include "soundfontmanager.h"
+#include <QInputDialog>
+#include <QMessageBox>
 
 DirectoryBrowser::DirectoryBrowser(QWidget *parent) : QWidget(parent),
     ui(new Ui::DirectoryBrowser),
@@ -73,6 +75,8 @@ DirectoryBrowser::DirectoryBrowser(QWidget *parent) : QWidget(parent),
     connect(ui->listInstruments, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
     connect(ui->listPresets, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
     connect(ui->listView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onSelectionChanged(QItemSelection,QItemSelection)));
+    connect(ui->listView, SIGNAL(renameRequested(QString)), this, SLOT(onRenameRequested(QString)));
+    connect(ui->listView, SIGNAL(deleteRequested(QString)), this, SLOT(onDeleteRequested(QString)));
 
     // Splitter
     CustomSplitter * splitter = new CustomSplitter(this, ui->widgetLeft, ui->widgetRight, "directory_browser_splitter_sizes");
@@ -213,3 +217,35 @@ void DirectoryBrowser::on_listView_doubleClicked(const QModelIndex &index)
     emit itemDoubleClicked(d->getPath(), EltID(elementSf2));
 }
 
+void DirectoryBrowser::onRenameRequested(QString path)
+{
+    QFileInfo info(path);
+    QString currentName = info.fileName();
+
+    bool ok = false;
+    QString newName = QInputDialog::getText(this, tr("Rename"), tr("New name:"), QLineEdit::Normal, currentName, &ok);
+    if (!ok || newName.isEmpty() || newName == currentName)
+        return;
+
+    QDir dir = info.dir();
+    QString newPath = dir.filePath(newName);
+    if (QFile::exists(newPath))
+    {
+        QMessageBox::warning(this, tr("Error"), tr("A file with this name already exists."));
+        return;
+    }
+
+    if (!QFile::rename(path, newPath))
+        QMessageBox::warning(this, tr("Error"), tr("Cannot rename file \"%1\".").arg(currentName));
+}
+
+void DirectoryBrowser::onDeleteRequested(QString path)
+{
+    QFileInfo info(path);
+    if (QMessageBox::question(this, tr("Confirm deletion"),
+        tr("Are you sure you want to delete file \"%1\"?").arg(info.fileName()), QMessageBox::Yes | QMessageBox::No) != QMessageBox::Yes)
+        return;
+
+    if (!QFile::remove(path))
+        QMessageBox::warning(this, tr("Error"), tr("Cannot delete file \"%1\".").arg(info.fileName()));
+}

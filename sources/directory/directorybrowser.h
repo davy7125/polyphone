@@ -53,6 +53,8 @@ private slots:
     void onContentChanged();
     void onSelectionChanged(QItemSelection selected, QItemSelection deselected);
     void on_listView_doubleClicked(const QModelIndex &index);
+    void onRenameRequested(QString path);
+    void onDeleteRequested(QString path);
 
 private:
     Ui::DirectoryBrowser *ui;

@@ -32,9 +32,12 @@
 #include <QStandardItemModel>
 #include <QStyleOptionViewItem>
 #include <QFontMetrics>
+#include <QMouseEvent>
+#include <QToolTip>
 
 const int DirectoryListDelegate::MARGIN = 6;
 const int DirectoryListDelegate::ICON_SIZE = 16;
+const int DirectoryListDelegate::BUTTON_SIZE = 16;
 
 DirectoryListDelegate::DirectoryListDelegate(QObject *parent) : QStyledItemDelegate(parent)
 {
@@ -46,15 +49,20 @@ DirectoryListDelegate::DirectoryListDelegate(QObject *parent) : QStyledItemDeleg
     // Icons
     QMap<QString, QString> replacement;
     replacement["currentColor"] = ContextManager::theme()->getFixedColor(ThemeManager::YELLOW, ThemeManager::LIST_BACKGROUND).name();
-    _iconSample = ContextManager::theme()->getColoredSvg(":/icons/sample.svg", QSize(16, 16), replacement);
+    _iconSample = ContextManager::theme()->getColoredSvg(":/icons/sample.svg", QSize(ICON_SIZE, ICON_SIZE), replacement);
     replacement["currentColor"] = ContextManager::theme()->getFixedColor(ThemeManager::BLUE, ThemeManager::LIST_BACKGROUND).name();
-    _iconInstrument = ContextManager::theme()->getColoredSvg(":/icons/instrument.svg", QSize(16, 16), replacement);
+    _iconInstrument = ContextManager::theme()->getColoredSvg(":/icons/instrument.svg", QSize(ICON_SIZE, ICON_SIZE), replacement);
     replacement["currentColor"] = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND).name();
-    _iconPreset = ContextManager::theme()->getColoredSvg(":/icons/preset.svg", QSize(16, 16), replacement);
+    _iconPreset = ContextManager::theme()->getColoredSvg(":/icons/preset.svg", QSize(ICON_SIZE, ICON_SIZE), replacement);
 
-    _iconSampleSelected = ContextManager::theme()->getColoredSvg(":/icons/sample.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT);
-    _iconInstrumentSelected = ContextManager::theme()->getColoredSvg(":/icons/instrument.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT);
-    _iconPresetSelected = ContextManager::theme()->getColoredSvg(":/icons/preset.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT);
+    _iconSampleSelected = ContextManager::theme()->getColoredSvg(":/icons/sample.svg", QSize(ICON_SIZE, ICON_SIZE), ThemeManager::HIGHLIGHTED_TEXT);
+    _iconInstrumentSelected = ContextManager::theme()->getColoredSvg(":/icons/instrument.svg", QSize(ICON_SIZE, ICON_SIZE), ThemeManager::HIGHLIGHTED_TEXT);
+    _iconPresetSelected = ContextManager::theme()->getColoredSvg(":/icons/preset.svg", QSize(ICON_SIZE, ICON_SIZE), ThemeManager::HIGHLIGHTED_TEXT);
+
+    _iconRename = ContextManager::theme()->getColoredSvg(":/icons/pen.svg", QSize(BUTTON_SIZE, BUTTON_SIZE), ThemeManager::LIST_TEXT);
+    _iconRenameSelected = ContextManager::theme()->getColoredSvg(":/icons/pen.svg", QSize(BUTTON_SIZE, BUTTON_SIZE), ThemeManager::HIGHLIGHTED_TEXT);
+    _iconDelete = ContextManager::theme()->getColoredSvg(":/icons/trash.svg", QSize(BUTTON_SIZE, BUTTON_SIZE), ThemeManager::LIST_TEXT);
+    _iconDeleteSelected = ContextManager::theme()->getColoredSvg(":/icons/trash.svg", QSize(BUTTON_SIZE, BUTTON_SIZE), ThemeManager::HIGHLIGHTED_TEXT);
 }
 
 QSize DirectoryListDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -89,12 +97,24 @@ void DirectoryListDelegate::paint(QPainter *painter, const QStyleOptionViewItem 
     QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter);
 
     // Text color
+    bool selected = (option.state & QStyle::State_Selected);
     QColor textColor;
     if (d->getStatus() == DirectoryFileData::NOT_READABLE || d->getStatus() == DirectoryFileData::NOT_OPENABLE)
         textColor = _colorDisabled;
     else
-        textColor = (option.state & QStyle::State_Selected) ?  _colorHighlighted : _colorEnabled;
+        textColor = selected ?  _colorHighlighted : _colorEnabled;
     painter->setPen(textColor);
+
+    // Rename and delete buttons
+    int prefixWidth = 0;
+    if (selected)
+    {
+        QRect btnRect = getRenameButtonRect(option);
+        painter->drawPixmap(btnRect, _iconRenameSelected);
+        btnRect = getDeleteButtonRect(option);
+        painter->drawPixmap(btnRect, _iconDeleteSelected);
+        prefixWidth = 2 * (MARGIN + ICON_SIZE);
+    }
 
     // Font
     QFont font = option.font;
@@ -114,14 +134,14 @@ void DirectoryListDelegate::paint(QPainter *painter, const QStyleOptionViewItem 
 
         // First line: counters on the right
         int counterWidth = getCounterWidth(fm, d);
-        paintCounters(painter, fm, d, option.rect.right() - MARGIN - counterWidth, option.rect.top() + MARGIN, option.state & QStyle::State_Selected);
+        paintCounters(painter, fm, d, option.rect.right() - MARGIN - counterWidth, option.rect.top() + MARGIN, selected);
 
         // First line: text on the left
-        fileName = fmBold.elidedText(fileName, Qt::ElideMiddle, option.rect.width() - 3 * MARGIN - counterWidth - suffixWidth);
+        fileName = fmBold.elidedText(fileName, Qt::ElideMiddle, option.rect.width() - 3 * MARGIN - counterWidth - suffixWidth - prefixWidth);
         painter->setFont(fontBold);
-        painter->drawText(option.rect.left() + MARGIN, option.rect.top() + MARGIN + fm.ascent(), fileName);
+        painter->drawText(option.rect.left() + MARGIN + prefixWidth, option.rect.top() + MARGIN + fm.ascent(), fileName);
         painter->setFont(font);
-        painter->drawText(option.rect.left() + MARGIN + fmBold.horizontalAdvance(fileName), option.rect.top() + MARGIN + fm.ascent(), suffix);
+        painter->drawText(option.rect.left() + MARGIN + prefixWidth + fmBold.horizontalAdvance(fileName), option.rect.top() + MARGIN + fm.ascent(), suffix);
 
         // Second line
         QFont fontSmall = font;
@@ -144,9 +164,9 @@ void DirectoryListDelegate::paint(QPainter *painter, const QStyleOptionViewItem 
         if (d->getStatus() == DirectoryFileData::NOT_READABLE)
             fileName = "[" + tr("NOT READABLE") + "] " + fileName;
         fileName += suffix;
-        fileName = fm.elidedText(fileName, Qt::ElideMiddle, option.rect.width() - 2 * MARGIN);
+        fileName = fm.elidedText(fileName, Qt::ElideMiddle, option.rect.width() - 2 * MARGIN - prefixWidth);
         painter->setFont(font);
-        painter->drawText(option.rect.left() + MARGIN, option.rect.top() + MARGIN + fm.ascent(), fileName);
+        painter->drawText(option.rect.left() + MARGIN + prefixWidth, option.rect.top() + MARGIN + fm.ascent(), fileName);
     }
 
     painter->restore();
@@ -184,4 +204,117 @@ void DirectoryListDelegate::paintCounters(QPainter *painter, const QFontMetrics 
     x += ICON_SIZE + MARGIN / 2;
     count = d->getPresetCount();
     painter->drawText(x, y + fm.ascent(), QString::number(count));
+}
+
+QRect DirectoryListDelegate::getRenameButtonRect(const QStyleOptionViewItem &option) const
+{
+    QFont font = option.font;
+    const QFontMetrics fm(font);
+    int btnY = option.rect.top() + MARGIN + (fm.height() - BUTTON_SIZE) / 2;
+    return QRect(option.rect.left() + MARGIN, btnY, BUTTON_SIZE, BUTTON_SIZE);
+}
+
+QRect DirectoryListDelegate::getDeleteButtonRect(const QStyleOptionViewItem &option) const
+{
+    QFont font = option.font;
+    const QFontMetrics fm(font);
+    int btnY = option.rect.top() + MARGIN + (fm.height() - BUTTON_SIZE) / 2;
+    return QRect(option.rect.left() + 2 * MARGIN + BUTTON_SIZE, btnY, BUTTON_SIZE, BUTTON_SIZE);
+}
+
+bool DirectoryListDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index)
+{
+    const DirectoryFileData * d = index.data(Qt::UserRole).value<const DirectoryFileData *>();
+    QAbstractItemView * view = qobject_cast<QAbstractItemView *>(const_cast<QWidget *>(option.widget));
+    if (d != nullptr && view != nullptr)
+    {
+        if (event->type() == QEvent::MouseButtonPress)
+        {
+            QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(event);
+            if (mouseEvent->button() == Qt::LeftButton)
+            {
+                _pressedIndex = index;
+                _pressedWasSelected = view->selectionModel()->isSelected(index);
+            }
+        }
+        else if (event->type() == QEvent::MouseButtonRelease)
+        {
+            QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(event);
+            if (index == _pressedIndex && _pressedWasSelected && mouseEvent->button() == Qt::LeftButton)
+            {
+                if (getRenameButtonRect(option).contains(mouseEvent->pos()))
+                {
+                    emit renameRequested(d->getPath());
+                    return true;
+                }
+                if (getDeleteButtonRect(option).contains(mouseEvent->pos()))
+                {
+                    emit deleteRequested(d->getPath());
+                    return true;
+                }
+            }
+            if (view->cursor() != Qt::PointingHandCursor && (
+                    getRenameButtonRect(option).contains(mouseEvent->pos()) || getDeleteButtonRect(option).contains(mouseEvent->pos())))
+                view->setCursor(Qt::PointingHandCursor);
+        }
+        else if (event->type() == QEvent::MouseMove)
+        {
+            QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(event);
+            if (view->selectionModel()->isSelected(index) && (
+                    getRenameButtonRect(option).contains(mouseEvent->pos()) || getDeleteButtonRect(option).contains(mouseEvent->pos())))
+                view->setCursor(Qt::PointingHandCursor);
+            else
+                view->unsetCursor();
+        }
+        else if (event->type() == QEvent::Leave)
+        {
+            view->unsetCursor();
+        }
+    }
+
+    return QStyledItemDelegate::editorEvent(event, model, option, index);
+}
+
+bool DirectoryListDelegate::eventFilter(QObject *obj, QEvent *event)
+{
+    if (event->type() == QEvent::ToolTip)
+    {
+        QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
+
+        QAbstractItemView *view = qobject_cast<QAbstractItemView *>(obj->parent());
+        if (!view)
+            return false;
+
+        QModelIndex index = view->indexAt(helpEvent->pos());
+        if (!index.isValid())
+            return false;
+
+        QStyleOptionViewItem option;
+        option.initFrom(view);
+        option.rect = view->visualRect(index);
+
+        if (view->selectionModel()->isSelected(index))
+        {
+            const DirectoryFileData * d = index.data(Qt::UserRole).value<const DirectoryFileData *>();
+            if (d != nullptr)
+            {
+                if (getRenameButtonRect(option).contains(helpEvent->pos()))
+                {
+                    QToolTip::showText(helpEvent->globalPos(), tr("Rename file \"%1\"").arg(d->getFileName()));
+                    return true;
+                }
+                if (getDeleteButtonRect(option).contains(helpEvent->pos()))
+                {
+                    QToolTip::showText(helpEvent->globalPos(), tr("Delete file \"%1\"").arg(d->getFileName()));
+                    return true;
+                }
+            }
+        }
+
+        QToolTip::hideText();
+        event->ignore();
+        return true;
+    }
+
+    return QObject::eventFilter(obj, event);
 }

@@ -38,18 +38,29 @@ public:
 
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;
+    bool eventFilter(QObject *obj, QEvent *event) override;
+
+signals:
+    void renameRequested(QString path);
+    void deleteRequested(QString path);
 
 private:
     int getCounterWidth(const QFontMetrics &fm, const DirectoryFileData *d) const;
     void paintCounters(QPainter *painter, const QFontMetrics &fm, const DirectoryFileData *d, int x, int y, bool selected) const;
+    QRect getRenameButtonRect(const QStyleOptionViewItem &option) const;
+    QRect getDeleteButtonRect(const QStyleOptionViewItem &option) const;
 
     QColor _colorEnabled, _colorHighlighted, _colorDisabled;
     QString _dateFormat;
-    QPixmap _iconSample, _iconInstrument, _iconPreset;
-    QPixmap _iconSampleSelected, _iconInstrumentSelected, _iconPresetSelected;
+    QPixmap _iconSample, _iconInstrument, _iconPreset, _iconRename, _iconDelete;
+    QPixmap _iconSampleSelected, _iconInstrumentSelected, _iconPresetSelected, _iconRenameSelected, _iconDeleteSelected;
+    mutable QPersistentModelIndex _pressedIndex;
+    mutable bool _pressedWasSelected = false;
 
     static const int MARGIN;
     static const int ICON_SIZE;
+    static const int BUTTON_SIZE;
 };
 
 #endif // DIRECTORYLISTDELEGATE_H

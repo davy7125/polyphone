@@ -22,18 +22,21 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
+#include <QHeaderView>
+#include <QMouseEvent>
 #include "directorylistview.h"
 #include "directorylistdelegate.h"
 #include "directorylistmodel.h"
-#include <QHeaderView>
 #include "directorysortproxymodel.h"
 
 DirectoryListView::DirectoryListView(QWidget * parent) : QListView(parent),
     _model(new DirectoryListModel(this)),
     _delegate(new DirectoryListDelegate(this))
 {
-    // Custom types
+    // Custom types, configuration
     qRegisterMetaType<const DirectoryFileData*>();
+    setMouseTracking(true);
+    this->viewport()->installEventFilter(_delegate); // Tooltips
 
     // Proxy / model
     _proxy = new DirectorySortProxyModel(this);
@@ -43,6 +46,8 @@ DirectoryListView::DirectoryListView(QWidget * parent) : QListView(parent),
 
     // Custom delegate
     this->setItemDelegate(_delegate);
+    connect(_delegate, SIGNAL(renameRequested(QString)), this, SIGNAL(renameRequested(QString)));
+    connect(_delegate, SIGNAL(deleteRequested(QString)), this, SIGNAL(deleteRequested(QString)));
 }
 
 void DirectoryListView::addFile(DirectoryFileData * fileData)

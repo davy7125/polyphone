@@ -46,6 +46,8 @@ public:
 signals:
     void contentChanged();
     void itemDoubleClicked(QString filePath, EltID elt);
+    void renameRequested(QString filePath);
+    void deleteRequested(QString filePath);
 
 public slots:
     void setSortType(int sortType);
