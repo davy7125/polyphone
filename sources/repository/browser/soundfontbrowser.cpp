@@ -110,6 +110,7 @@ void SoundfontBrowser::initialize()
 {
     ui->spinner->startAnimation();
     ui->stackedWidget->setCurrentIndex(0);
+    ui->framePagination->hide();
 }
 
 void SoundfontBrowser::soundfontListAvailable(QString error)
@@ -119,10 +120,12 @@ void SoundfontBrowser::soundfontListAvailable(QString error)
         fillFilter();
         applyFilter(nullptr);
         ui->stackedWidget->setCurrentIndex(1);
+        ui->framePagination->show();
     }
     else
     {
         ui->stackedWidget->setCurrentIndex(2);
+        ui->framePagination->hide();
     }
 }
 

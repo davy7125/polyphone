@@ -27,6 +27,7 @@
 #include "contextmanager.h"
 #include "directoryfiledata.h"
 #include "customsplitter.h"
+#include "soundfontmanager.h"
 
 DirectoryBrowser::DirectoryBrowser(QWidget *parent) : QWidget(parent),
     ui(new Ui::DirectoryBrowser),
@@ -71,6 +72,7 @@ DirectoryBrowser::DirectoryBrowser(QWidget *parent) : QWidget(parent),
     connect(ui->listSamples, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
     connect(ui->listInstruments, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
     connect(ui->listPresets, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
+    connect(ui->listView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onSelectionChanged(QItemSelection,QItemSelection)));
 
     // Splitter
     CustomSplitter * splitter = new CustomSplitter(this, ui->widgetLeft, ui->widgetRight, "directory_browser_splitter_sizes");
@@ -108,6 +110,16 @@ void DirectoryBrowser::initialize(QString dirPath)
         return;
     }
 
+    // Files already open
+    QMap<QString, int> openedFilesWithId;
+    EltID idSf2(elementSf2);
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    foreach (int index, sm->getSiblings(idSf2))
+    {
+        idSf2.indexSf2 = index;
+        openedFilesWithId[sm->getQstr(idSf2, champ_filenameInitial)] = index;
+    }
+
     // Browse the files
     QMap<QString, QDateTime> newFiles;
     QFileInfoList files = dir.entryInfoList(QDir::Files | QDir::NoDotAndDotDot);
@@ -117,11 +129,19 @@ void DirectoryBrowser::initialize(QString dirPath)
         if (_currentFiles.contains(fileInfo.absoluteFilePath()))
         {
             if (_currentFiles[fileInfo.absoluteFilePath()] != newFiles[fileInfo.absoluteFilePath()])
-                ui->listView->updateFile(new DirectoryFileData(fileInfo));
+            {
+                int currentSf2Id = openedFilesWithId.contains(fileInfo.absoluteFilePath()) ?
+                                       openedFilesWithId[fileInfo.absoluteFilePath()] : -1;
+                ui->listView->updateFile(new DirectoryFileData(fileInfo, currentSf2Id));
+            }
             _currentFiles.remove(fileInfo.absoluteFilePath());
         }
         else
-            ui->listView->addFile(new DirectoryFileData(fileInfo));
+        {
+            int currentSf2Id = openedFilesWithId.contains(fileInfo.absoluteFilePath()) ?
+                                   openedFilesWithId[fileInfo.absoluteFilePath()] : -1;
+            ui->listView->addFile(new DirectoryFileData(fileInfo, currentSf2Id));
+        }
     }
     foreach (QString absoluteFilePath, _currentFiles.keys())
         ui->listView->removeFile(absoluteFilePath);
@@ -161,8 +181,12 @@ void DirectoryBrowser::onContentChanged()
     }
 }
 
-void DirectoryBrowser::on_listView_clicked(const QModelIndex &index)
+void DirectoryBrowser::onSelectionChanged(QItemSelection selected, QItemSelection deselected)
 {
+    Q_UNUSED(selected)
+    Q_UNUSED(deselected)
+
+    QModelIndex index = ui->listView->currentIndex();
     const DirectoryFileData * d = index.data(Qt::UserRole).value<const DirectoryFileData *>();
     if (d == nullptr)
     {

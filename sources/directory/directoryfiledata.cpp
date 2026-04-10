@@ -32,42 +32,57 @@
 #include "instprst.h"
 #include "utils.h"
 
-DirectoryFileData::DirectoryFileData(const QFileInfo &fileInfo) :
+DirectoryFileData::DirectoryFileData(const QFileInfo &fileInfo, int sf2Id) :
     _path(fileInfo.absoluteFilePath()),
     _fileSize(fileInfo.size()),
     _lastModified(fileInfo.lastModified()),
     _status(NOT_INITIALIZED)
 {
-    if (InputFactory::isSuffixSupported(fileInfo.suffix()))
+    if (sf2Id == -1)
     {
-        if (fileInfo.isReadable())
+        // Parse a file
+        if (InputFactory::isSuffixSupported(fileInfo.suffix()))
         {
-            AbstractInputParser * parser = InputFactory::getInput(_path);
-            if (parser->canFastLoad())
-                if (scan(parser))
-                    _status = OK;
+            if (fileInfo.isReadable())
+            {
+                AbstractInputParser * parser = InputFactory::getInput(_path);
+                if (parser->canFastLoad())
+                {
+                    parser->process(false);
+                    if (parser->isSuccess())
+                    {
+                        scan(parser->getSf2Index());
+                        _status = OK;
+                    }
+                    else
+                        _status = CANNOT_SCAN;
+                }
                 else
-                    _status = CANNOT_SCAN;
+                    _status = NOT_SCANNABLE;
+
+                int tmpIndex = parser->getSf2Index();
+                if (tmpIndex != -1)
+                    SoundfontManager::getInstance()->remove(EltID(elementSf2, tmpIndex));
+                SoundfontManager::getInstance()->revertNewEditing();
+                delete parser;
+            }
             else
-                _status = NOT_SCANNABLE;
-            SoundfontManager::getInstance()->remove(EltID(elementSf2, parser->getSf2Index()));
-            SoundfontManager::getInstance()->revertNewEditing();
-            delete parser;
+                _status = NOT_READABLE;
         }
         else
-            _status = NOT_READABLE;
+            _status = NOT_OPENABLE;
     }
     else
-        _status = NOT_OPENABLE;
+    {
+        // The file is already open
+        scan(sf2Id);
+        _status = OK;
+    }
 }
 
-bool DirectoryFileData::scan(AbstractInputParser * parser)
+bool DirectoryFileData::scan(int indexSf2)
 {
-    parser->process(false);
-    if (!parser->isSuccess())
-        return false;
-
-    Soundfont * soundfont = SoundfontManager::getInstance()->getSoundfonts()->getSoundfont(parser->getSf2Index());
+    Soundfont * soundfont = SoundfontManager::getInstance()->getSoundfonts()->getSoundfont(indexSf2);
     QVectorIterator<Smpl*> iteratorSmpl(soundfont->getSamples().values());
     scanSmpl(iteratorSmpl, _samples);
     QVectorIterator<InstPrst*> iteratorInst(soundfont->getInstruments().values());
@@ -77,7 +92,6 @@ bool DirectoryFileData::scan(AbstractInputParser * parser)
 
     return true;
 }
-
 
 void DirectoryFileData::scanSmpl(QVectorIterator<Smpl*> &i, QList<DirectorySampleData> &list)
 {
@@ -177,6 +191,45 @@ void DirectoryFileData::scanInstPrst(QVectorIterator<InstPrst*> &i, QList<Direct
     std::sort(list.begin(), list.end(), [](const DirectoryInstrumentPresetData &a, const DirectoryInstrumentPresetData &b) {
         return Utils::naturalOrder(a.nameSort, b.nameSort) < 0;
     });
+}
+
+bool DirectoryFileData::getFilterResult(QString filter) const
+{
+    return filter.isEmpty() ||
+           this->getFileName().contains(filter, Qt::CaseInsensitive) ||
+           this->getPresetFilterResult(filter) ||
+           this->getInstrumentFilterResult(filter) ||
+           this->getSampleFilterResult(filter) ;
+}
+
+bool DirectoryFileData::getSampleFilterResult(QString filter) const
+{
+    foreach (DirectorySampleData data, _samples)
+    {
+        if (data.name.contains(filter, Qt::CaseInsensitive))
+            return true;
+    }
+    return false;
+}
+
+bool DirectoryFileData::getInstrumentFilterResult(QString filter) const
+{
+    foreach (DirectoryInstrumentPresetData data, _instruments)
+    {
+        if (data.name.contains(filter, Qt::CaseInsensitive))
+            return true;
+    }
+    return false;
+}
+
+bool DirectoryFileData::getPresetFilterResult(QString filter) const
+{
+    foreach (DirectoryInstrumentPresetData data, _presets)
+    {
+        if (data.name.contains(filter, Qt::CaseInsensitive))
+            return true;
+    }
+    return false;
 }
 
 DirectoryFileData::DetailsData DirectoryFileData::getSampleDetails() const

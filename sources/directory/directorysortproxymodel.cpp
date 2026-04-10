@@ -82,5 +82,5 @@ bool DirectorySortProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex 
     if (fd == nullptr)
         return false;
 
-    return fd->getFileName().contains(_filter, Qt::CaseInsensitive);
+    return fd->getFilterResult(_filter);
 }

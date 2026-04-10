@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>550</width>
-    <height>357</height>
+    <height>447</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -64,26 +64,14 @@
        <item row="1" column="1">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>122</height>
-          </size>
+          <enum>Qt::Vertical</enum>
          </property>
         </spacer>
        </item>
        <item row="2" column="0">
         <spacer name="horizontalSpacer_2">
          <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>175</height>
-          </size>
+          <enum>Qt::Horizontal</enum>
          </property>
         </spacer>
        </item>
@@ -95,31 +83,25 @@
            <height>32</height>
           </size>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item row="2" column="2">
         <spacer name="horizontalSpacer_3">
          <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>175</height>
-          </size>
+          <enum>Qt::Horizontal</enum>
          </property>
         </spacer>
        </item>
        <item row="3" column="1">
         <spacer name="verticalSpacer_3">
          <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>122</height>
-          </size>
+          <enum>Qt::Vertical</enum>
          </property>
         </spacer>
        </item>
@@ -152,13 +134,7 @@
        <item row="1" column="1">
         <spacer name="verticalSpacer_4">
          <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>98</height>
-          </size>
+          <enum>Qt::Vertical</enum>
          </property>
         </spacer>
        </item>
@@ -168,20 +144,14 @@
           <string notr="true">Error...</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
        <item row="3" column="0">
         <spacer name="horizontalSpacer_4">
          <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>164</height>
-          </size>
+          <enum>Qt::Horizontal</enum>
          </property>
         </spacer>
        </item>
@@ -204,26 +174,14 @@
        <item row="3" column="2">
         <spacer name="horizontalSpacer_5">
          <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>163</height>
-          </size>
+          <enum>Qt::Horizontal</enum>
          </property>
         </spacer>
        </item>
        <item row="4" column="1">
         <spacer name="verticalSpacer_5">
          <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>97</height>
-          </size>
+          <enum>Qt::Vertical</enum>
          </property>
         </spacer>
        </item>
@@ -287,23 +245,23 @@
              <string>No results</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignmentFlag::AlignCenter</set>
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
           <item>
            <widget class="DirectoryListView" name="listView">
             <property name="frameShape">
-             <enum>QFrame::Shape::NoFrame</enum>
+             <enum>QFrame::NoFrame</enum>
             </property>
             <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+             <enum>Qt::ScrollBarAsNeeded</enum>
             </property>
             <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+             <enum>Qt::ScrollBarAlwaysOff</enum>
             </property>
             <property name="editTriggers">
-             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+             <set>QAbstractItemView::NoEditTriggers</set>
             </property>
             <property name="showDropIndicator" stdset="0">
              <bool>false</bool>
@@ -315,13 +273,13 @@
              <bool>true</bool>
             </property>
             <property name="selectionMode">
-             <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+             <enum>QAbstractItemView::SingleSelection</enum>
             </property>
             <property name="selectionBehavior">
-             <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+             <enum>QAbstractItemView::SelectRows</enum>
             </property>
             <property name="verticalScrollMode">
-             <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
+             <enum>QAbstractItemView::ScrollPerPixel</enum>
             </property>
            </widget>
           </item>
@@ -429,16 +387,16 @@
           <item row="3" column="0" colspan="2">
            <widget class="DirectoryElementListView" name="listInstruments">
             <property name="editTriggers">
-             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+             <set>QAbstractItemView::NoEditTriggers</set>
             </property>
             <property name="showDropIndicator" stdset="0">
              <bool>false</bool>
             </property>
             <property name="selectionBehavior">
-             <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+             <enum>QAbstractItemView::SelectRows</enum>
             </property>
             <property name="verticalScrollMode">
-             <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
+             <enum>QAbstractItemView::ScrollPerPixel</enum>
             </property>
            </widget>
           </item>
@@ -470,32 +428,32 @@
           <item row="5" column="0" colspan="2">
            <widget class="DirectoryElementListView" name="listPresets">
             <property name="editTriggers">
-             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+             <set>QAbstractItemView::NoEditTriggers</set>
             </property>
             <property name="showDropIndicator" stdset="0">
              <bool>false</bool>
             </property>
             <property name="selectionBehavior">
-             <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+             <enum>QAbstractItemView::SelectRows</enum>
             </property>
             <property name="verticalScrollMode">
-             <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
+             <enum>QAbstractItemView::ScrollPerPixel</enum>
             </property>
            </widget>
           </item>
           <item row="1" column="0" colspan="2">
            <widget class="DirectoryElementListView" name="listSamples">
             <property name="editTriggers">
-             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+             <set>QAbstractItemView::NoEditTriggers</set>
             </property>
             <property name="showDropIndicator" stdset="0">
              <bool>false</bool>
             </property>
             <property name="selectionBehavior">
-             <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+             <enum>QAbstractItemView::SelectRows</enum>
             </property>
             <property name="verticalScrollMode">
-             <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
+             <enum>QAbstractItemView::ScrollPerPixel</enum>
             </property>
            </widget>
           </item>
@@ -517,7 +475,7 @@
           </size>
          </property>
          <property name="frameShape">
-          <enum>QFrame::Shape::NoFrame</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <property name="leftMargin">
@@ -542,6 +500,9 @@
             </property>
             <property name="placeholderText">
              <string>Search a file, a sample, an instrument or a preset...</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
             </property>
            </widget>
           </item>

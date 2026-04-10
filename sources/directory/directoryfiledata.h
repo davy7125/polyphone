@@ -29,7 +29,6 @@
 #include <QFileInfo>
 #include <QVectorIterator>
 #include "basetypes.h"
-class AbstractInputParser;
 class Smpl;
 class InstPrst;
 
@@ -52,7 +51,7 @@ public:
         OK
     };
 
-    DirectoryFileData(const QFileInfo &fileInfo);
+    DirectoryFileData(const QFileInfo &fileInfo, int sf2Id);
 
     QString getPath() const { return _path; }
     QString getFileName() const { return QFileInfo(_path).fileName(); }
@@ -68,6 +67,8 @@ public:
 
     int getPresetCount() const { return _presets.count(); }
     DetailsData getPresetDetails() const;
+
+    bool getFilterResult(QString filter) const;
 
 private:
     class DirectorySampleData
@@ -99,7 +100,11 @@ private:
         int numModulators = 0;
     };
 
-    bool scan(AbstractInputParser * parser);
+    bool scan(int indexSf2);
+    bool getSampleFilterResult(QString filter) const;
+    bool getInstrumentFilterResult(QString filter) const;
+    bool getPresetFilterResult(QString filter) const;
+
     static void scanSmpl(QVectorIterator<Smpl*> &i, QList<DirectorySampleData> &list);
     static void scanInstPrst(QVectorIterator<InstPrst*> &i, QList<DirectoryInstrumentPresetData> &list, bool isPrst);
 
