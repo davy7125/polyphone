@@ -181,7 +181,9 @@ void DirectoryBrowser::on_listView_clicked(const QModelIndex &index)
 void DirectoryBrowser::on_listView_doubleClicked(const QModelIndex &index)
 {
     const DirectoryFileData * d = index.data(Qt::UserRole).value<const DirectoryFileData *>();
-    if (d == nullptr)
+    if (d == nullptr ||
+        d->getStatus() == DirectoryFileData::NOT_READABLE ||
+        d->getStatus() == DirectoryFileData::NOT_OPENABLE)
         return;
 
     emit itemDoubleClicked(d->getPath(), EltID(elementSf2));

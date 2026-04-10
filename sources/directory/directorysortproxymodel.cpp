@@ -60,9 +60,16 @@ bool DirectorySortProxyModel::lessThan(const QModelIndex &left, const QModelInde
 
 void DirectorySortProxyModel::setFilter(QString filter)
 {
+#if QT_VERSION >= 0x060900
     beginFilterChange();
+#endif
     _filter = filter;
+
+#if QT_VERSION >= 0x060900
     endFilterChange();
+#else
+    invalidateFilter();
+#endif
 }
 
 bool DirectorySortProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
