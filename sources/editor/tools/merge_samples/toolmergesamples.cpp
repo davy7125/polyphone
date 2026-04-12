@@ -63,7 +63,7 @@ void ToolMergeSamples::runInternal(SoundfontManager * sm, QWidget * parent, IdLi
     RangesType range = this->getPresetRange(sm, idPrst);
     if (range.byLo > range.byHi)
     {
-        _warning = tr("The preset doesn't trigger any samples.");
+        _warning = tr("The preset does not trigger any samples.");
         emit finished(true);
         return;
     }

@@ -227,7 +227,7 @@ QString ToolSoundfontExport::getFilePath(QString directory, QString name, int fo
     default: extension = ".xxx"; break;
     }
 
-    // Find a filepath that doesn't exist yet
+    // Find a filepath that does not exist yet
     QFile fichier(directory + "/" + name + extension);
     if (fichier.exists())
     {

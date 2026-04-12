@@ -41,7 +41,7 @@ ToolDefaultMod_gui::~ToolDefaultMod_gui()
 
 void ToolDefaultMod_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
 {
-    // The interface doesn't depend on the parameters or ids
+    // The interface does not depend on the parameters or ids
     Q_UNUSED(parameters)
     Q_UNUSED(ids)
 

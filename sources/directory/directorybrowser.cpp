@@ -101,13 +101,13 @@ DirectoryBrowser::~DirectoryBrowser()
 void DirectoryBrowser::initialize(QString dirPath)
 {
     _dirPath = dirPath;
-    ui->spinner->startAnimation();
+    //ui->spinner->startAnimation();
 
     // Directory checks
     QDir dir(dirPath);
     if (!dir.exists())
     {
-        ui->labelError->setText(tr("The directory \"%1\" doesn't exist.").arg(dirPath));
+        ui->labelError->setText(tr("The directory \"%1\" does not exist.").arg(dirPath));
         ui->stackedWidget->setCurrentIndex(1);
         return;
     }

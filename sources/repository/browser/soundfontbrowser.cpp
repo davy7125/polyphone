@@ -405,7 +405,7 @@ void SoundfontBrowser::onComboSortCurrentIndexChanged(int index)
 
 void SoundfontBrowser::keyPressEvent(QKeyEvent * event)
 {
-    // Key press event in the cell doesn't seem to work? So the code is here
+    // Key press event in the cell does not seem to work? So the code is here
     if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
     {
         for (int i = 0; i < ui->listWidget->count(); i++)

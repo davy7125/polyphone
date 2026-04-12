@@ -2042,7 +2042,8 @@ repository</source>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="110"/>
-        <source>The directory &quot;%1&quot; doesn&apos;t exist.</source>
+        <source>The directory &quot;%1&quot; does not exist.</source>
+        <oldsource>The directory &quot;%1&quot; doesn&apos;t exist.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2051,68 +2052,68 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="232"/>
+        <location filename="directory/directorybrowser.cpp" line="233"/>
         <source>Rename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="233"/>
+        <location filename="directory/directorybrowser.cpp" line="234"/>
         <source>New name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="235"/>
+        <location filename="directory/directorybrowser.cpp" line="236"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="236"/>
+        <location filename="directory/directorybrowser.cpp" line="237"/>
         <source>&amp;Ok</source>
         <oldsource>Ok</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="247"/>
+        <location filename="directory/directorybrowser.cpp" line="248"/>
         <source>A file with this name already exists.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="247"/>
-        <location filename="directory/directorybrowser.cpp" line="252"/>
-        <location filename="directory/directorybrowser.cpp" line="270"/>
+        <location filename="directory/directorybrowser.cpp" line="248"/>
+        <location filename="directory/directorybrowser.cpp" line="253"/>
+        <location filename="directory/directorybrowser.cpp" line="271"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="252"/>
+        <location filename="directory/directorybrowser.cpp" line="253"/>
         <source>Cannot rename file &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="260"/>
+        <location filename="directory/directorybrowser.cpp" line="261"/>
         <source>Confirm deletion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="261"/>
+        <location filename="directory/directorybrowser.cpp" line="262"/>
         <source>Are you sure you want to delete file &quot;%1&quot;?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="263"/>
+        <location filename="directory/directorybrowser.cpp" line="264"/>
         <source>&amp;Yes</source>
         <oldsource>Yes</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="264"/>
+        <location filename="directory/directorybrowser.cpp" line="265"/>
         <source>&amp;No</source>
         <oldsource>No</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="270"/>
+        <location filename="directory/directorybrowser.cpp" line="271"/>
         <source>Cannot delete file &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6430,7 +6431,8 @@ Other soundfont editors might display other units.</source>
     <name>ToolMergeSamples</name>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.cpp" line="66"/>
-        <source>The preset doesn&apos;t trigger any samples.</source>
+        <source>The preset does not trigger any samples.</source>
+        <oldsource>The preset doesn&apos;t trigger any samples.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

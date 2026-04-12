@@ -110,7 +110,7 @@ bool OutputFactory::save(int indexSf2, bool saveAs)
         }
         else if (filePathInitial != filePathForData || !sfExtensionOk)
         {
-            // The soundfont to be saved was imported or the extension doesn't match with the soundfont version
+            // The soundfont to be saved was imported or the extension does not match with the soundfont version
             // => the path is based on the initial file with another extension
             QFileInfo fi(filePathInitial);
             defaultPath = fi.absolutePath() + "/" + fi.completeBaseName() + (isSf3 ? ".sf3" : ".sf2");

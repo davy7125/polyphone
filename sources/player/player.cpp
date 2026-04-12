@@ -265,7 +265,7 @@ bool Player::processProgramChanged(int channel, quint16 bank, quint8 preset)
         return false;
 
     if (_bankPositionByBankNumber[bank] == -1)
-        return true; // The bank doesn't exist
+        return true; // The bank does not exist
 
     // Possibly change the bank
     QModelIndexList indexes = ui->listBank->selectionModel()->selection().indexes();

@@ -68,7 +68,7 @@ public:
     // Action management
     void endEditing(QString editingSource);
     void clearNewEditing(); // Keep the changes but don't make an undo
-    void revertNewEditing(); // Doesn't keep the changes
+    void revertNewEditing(); // Does not keep the changes
     bool isUndoable(int indexSf2);
     bool isRedoable(int indexSf2);
     void undo(int indexSf2);

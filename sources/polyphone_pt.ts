@@ -401,22 +401,22 @@
 <context>
     <name>BrowserSortMenu</name>
     <message>
-        <location filename="repository/browser/browsersortmenu.cpp" line="52"/>
+        <location filename="repository/browser/browsersortmenu.cpp" line="55"/>
         <source>Date</source>
         <translation>Data</translation>
     </message>
     <message>
-        <location filename="repository/browser/browsersortmenu.cpp" line="56"/>
+        <location filename="repository/browser/browsersortmenu.cpp" line="62"/>
         <source>Downloads</source>
         <translation>Transferências</translation>
     </message>
     <message>
-        <location filename="repository/browser/browsersortmenu.cpp" line="58"/>
+        <location filename="repository/browser/browsersortmenu.cpp" line="69"/>
         <source>Rating score</source>
         <translation>Pontuação de avaliação</translation>
     </message>
     <message>
-        <location filename="repository/browser/browsersortmenu.cpp" line="60"/>
+        <location filename="repository/browser/browsersortmenu.cpp" line="76"/>
         <source>Title (A→Z)</source>
         <translation>Título (A→Z)</translation>
     </message>
@@ -2018,6 +2018,249 @@ online</translation>
     </message>
 </context>
 <context>
+    <name>DirectoryBrowser</name>
+    <message>
+        <location filename="directory/directorybrowser.ui" line="293"/>
+        <source>No results</source>
+        <translation>Sem resultado</translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.ui" line="357"/>
+        <source>Instruments</source>
+        <translation>Instrumentos</translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.ui" line="369"/>
+        <source>Presets</source>
+        <translation>Predefinições</translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.ui" line="381"/>
+        <source>Samples</source>
+        <translation>Amostras</translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.ui" line="550"/>
+        <source>Search a file, a sample, an instrument or a preset...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="110"/>
+        <source>The directory &quot;%1&quot; does not exist.</source>
+        <oldsource>The directory &quot;%1&quot; doesn&apos;t exist.</oldsource>
+        <translation>A pasta &quot;%1&quot; não existe.</translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="117"/>
+        <source>The directory &quot;%1&quot; is not readable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="233"/>
+        <source>Rename</source>
+        <translation>Renomear</translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="234"/>
+        <source>New name:</source>
+        <translation>Novo nome:</translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="236"/>
+        <source>&amp;Cancel</source>
+        <oldsource>Cancel</oldsource>
+        <translation>Cancel&amp;ar</translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="237"/>
+        <source>&amp;Ok</source>
+        <oldsource>Ok</oldsource>
+        <translation>&amp;Ok</translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="248"/>
+        <source>A file with this name already exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="248"/>
+        <location filename="directory/directorybrowser.cpp" line="253"/>
+        <location filename="directory/directorybrowser.cpp" line="271"/>
+        <source>Warning</source>
+        <translation>Aviso</translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="253"/>
+        <source>Cannot rename file &quot;%1&quot;.</source>
+        <translation>Não foi possível renomear o arquivo &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="261"/>
+        <source>Confirm deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="262"/>
+        <source>Are you sure you want to delete file &quot;%1&quot;?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="264"/>
+        <source>&amp;Yes</source>
+        <oldsource>Yes</oldsource>
+        <translation>&amp;Sim</translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="265"/>
+        <source>&amp;No</source>
+        <oldsource>No</oldsource>
+        <translation>&amp;Não</translation>
+    </message>
+    <message>
+        <location filename="directory/directorybrowser.cpp" line="271"/>
+        <source>Cannot delete file &quot;%1&quot;.</source>
+        <translation>Não foi possível excluir o arquivo &quot;%1&quot;.</translation>
+    </message>
+</context>
+<context>
+    <name>DirectoryFileData</name>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="296"/>
+        <source>Invalid link</source>
+        <translation>Link inválido</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="299"/>
+        <source>Mono</source>
+        <comment>opposite to stereo</comment>
+        <translation>Mono</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="302"/>
+        <source>Stereo right</source>
+        <translation>Estéreo direito</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="305"/>
+        <source>Stereo left</source>
+        <translation>Estéreo esquerdo</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="308"/>
+        <source>Stereo non defined</source>
+        <translation>Estéreo não definido</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="312"/>
+        <source>s</source>
+        <comment>unit for seconds</comment>
+        <translation>s</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="315"/>
+        <source>Loop</source>
+        <translation>Loop</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="316"/>
+        <source>Hz</source>
+        <comment>unit for Herz</comment>
+        <translation>Hz</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="directory/directoryfiledata.cpp" line="326"/>
+        <source>%n division(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="directory/directoryfiledata.cpp" line="327"/>
+        <source>%n parameter(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="directory/directoryfiledata.cpp" line="328"/>
+        <source>%n modulator(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="directory/directoryfiledata.cpp" line="329"/>
+        <source>%n distinct key range(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="directory/directoryfiledata.cpp" line="330"/>
+        <source>%n distinct velocity range(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+</context>
+<context>
+    <name>DirectoryListDelegate</name>
+    <message>
+        <location filename="directory/directorylistdelegate.cpp" line="135"/>
+        <source>Analyze in progress...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="directory/directorylistdelegate.cpp" line="138"/>
+        <source>NOT READABLE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="directory/directorylistdelegate.cpp" line="145"/>
+        <source>Error when reading the file.</source>
+        <oldsource>Error when opening the file.</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="directory/directorylistdelegate.cpp" line="316"/>
+        <source>Rename file &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="directory/directorylistdelegate.cpp" line="321"/>
+        <source>Delete file &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DirectorySortMenu</name>
+    <message>
+        <location filename="directory/directorysortmenu.cpp" line="55"/>
+        <source>Name (A→Z)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="directory/directorysortmenu.cpp" line="62"/>
+        <source>Newest first</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="directory/directorysortmenu.cpp" line="69"/>
+        <source>Largest first</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="directory/directorysortmenu.cpp" line="76"/>
+        <source>Smallest first</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DownloadManager</name>
     <message>
         <location filename="repository/downloadmanager.cpp" line="111"/>
@@ -2159,17 +2402,17 @@ online</translation>
         <translation>Buscar...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="262"/>
+        <location filename="editor/editor.ui" line="268"/>
         <source>Opening file...</source>
         <translation>Abrindo o arquivo...</translation>
     </message>
     <message>
-        <location filename="editor/editor.ui" line="377"/>
+        <location filename="editor/editor.ui" line="383"/>
         <source>Cannot open the file</source>
         <translation>Não é possível abrir o arquivo</translation>
     </message>
     <message>
-        <location filename="editor/editor.cpp" line="476"/>
+        <location filename="editor/editor.cpp" line="483"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
@@ -2416,27 +2659,6 @@ online</translation>
     </message>
 </context>
 <context>
-    <name>FooterSf2</name>
-    <message>
-        <location filename="editor/footers/footersf2.cpp" line="65"/>
-        <source>GB</source>
-        <comment>giga byte</comment>
-        <translation>GB</translation>
-    </message>
-    <message>
-        <location filename="editor/footers/footersf2.cpp" line="70"/>
-        <source>MB</source>
-        <comment>mega byte</comment>
-        <translation>MB</translation>
-    </message>
-    <message>
-        <location filename="editor/footers/footersf2.cpp" line="75"/>
-        <source>kB</source>
-        <comment>kilo byte</comment>
-        <translation>kB</translation>
-    </message>
-</context>
-<context>
     <name>GraphFilterFrequencies</name>
     <message>
         <location filename="editor/tools/frequency_filter/graphfilterfrequencies.cpp" line="60"/>
@@ -2644,22 +2866,22 @@ online</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="231"/>
+        <location filename="mainwindow/mainwindow.cpp" line="232"/>
         <source>&amp;Save</source>
         <translation>&amp;Salvar</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="232"/>
+        <location filename="mainwindow/mainwindow.cpp" line="233"/>
         <source>&amp;Cancel</source>
         <translation>Cancel&amp;ar</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="233"/>
+        <location filename="mainwindow/mainwindow.cpp" line="234"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Não salvar</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="217"/>
+        <location filename="mainwindow/mainwindow.cpp" line="218"/>
         <source>Warning</source>
         <translation>Atenção</translation>
     </message>
@@ -2669,38 +2891,43 @@ online</translation>
         <translation>Editor de SoundFont Polyphone</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="208"/>
+        <location filename="mainwindow/mainwindow.cpp" line="209"/>
         <source>Untitled</source>
         <translation>Sem nome</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="218"/>
+        <location filename="mainwindow/mainwindow.cpp" line="219"/>
         <source>Save before exiting?</source>
         <translation>Salvar antes de sair?</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="221"/>
+        <location filename="mainwindow/mainwindow.cpp" line="222"/>
         <source>The following files have been modified:</source>
         <translation>Os seguintes arquivos foram modificados:</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="228"/>
+        <location filename="mainwindow/mainwindow.cpp" line="229"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>O arquivo &quot;%1&quot; foi modificado.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="304"/>
+        <location filename="mainwindow/mainwindow.cpp" line="306"/>
         <source>Opening files</source>
         <translation>Abrindo arquivos</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="342"/>
+        <location filename="mainwindow/mainwindow.cpp" line="316"/>
+        <source>Opening a directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.ui" line="359"/>
         <source>  Settings</source>
         <extracomment>prefixed with 2 spaces</extracomment>
         <translation>  Configurações</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="298"/>
+        <location filename="mainwindow/mainwindow.ui" line="315"/>
         <source>  Documentation</source>
         <extracomment>prefixed with 2 spaces</extracomment>
         <translation>  Documentação</translation>
@@ -2719,18 +2946,25 @@ online</translation>
   soundfont</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="320"/>
+        <location filename="mainwindow/mainwindow.ui" line="155"/>
+        <source>  Open
+  directory</source>
+        <extracomment>prefixed with 2 spaces for each line</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.ui" line="337"/>
         <source>  Forum</source>
         <extracomment>prefixed with 2 spaces</extracomment>
         <translation>  Forum</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="235"/>
+        <location filename="mainwindow/mainwindow.ui" line="252"/>
         <source>Daily soundfonts</source>
         <translation>Soundfonts de dia</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="245"/>
+        <location filename="mainwindow/mainwindow.ui" line="262"/>
         <source>  Online
   repository</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
@@ -2738,7 +2972,7 @@ online</translation>
   online</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="184"/>
+        <location filename="mainwindow/mainwindow.ui" line="201"/>
         <source>Search a soundfont...</source>
         <translation>Procurar um soundfont...</translation>
     </message>
@@ -2751,7 +2985,7 @@ online</translation>
   soundfont</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.ui" line="267"/>
+        <location filename="mainwindow/mainwindow.ui" line="284"/>
         <source>History</source>
         <translation>Histórico</translation>
     </message>
@@ -2799,35 +3033,35 @@ default mod.</source>
 mod. padrão.</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="383"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="384"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
         <translation>dB</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="391"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="392"/>
         <source>semi-tones</source>
         <translation>semitons</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="394"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="395"/>
         <source>cents</source>
         <comment>hundredth of semi-tones</comment>
         <translation>centavos</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="405"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="406"/>
         <source>Add from:</source>
         <oldsource>Add from: </oldsource>
         <translation>Adicionar de:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="406"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="407"/>
         <source>Multiply from:</source>
         <translation>Multiplicar de:</translation>
     </message>
     <message>
-        <location filename="editor/modulator/modulatorcell.cpp" line="408"/>
+        <location filename="editor/modulator/modulatorcell.cpp" line="409"/>
         <source>To:</source>
         <oldsource>To: </oldsource>
         <translation>Para:</translation>
@@ -3384,119 +3618,114 @@ para exibir seus alcances de divisão</translation>
         <translation>Data...</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="171"/>
-        <source>Current date</source>
-        <translation>Data atual</translation>
-    </message>
-    <message>
-        <location filename="editor/pagesf2.ui" line="200"/>
+        <location filename="editor/pagesf2.ui" line="184"/>
         <source>Product</source>
         <translation>Produto</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="214"/>
+        <location filename="editor/pagesf2.ui" line="198"/>
         <source>Copyright</source>
         <translation>Licenciado</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="228"/>
+        <location filename="editor/pagesf2.ui" line="212"/>
         <source>Comments</source>
         <translation>Comentários</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="283"/>
+        <location filename="editor/pagesf2.ui" line="270"/>
         <source>Soundfont version</source>
         <translation>Versão da soundfont</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="315"/>
+        <location filename="editor/pagesf2.ui" line="305"/>
         <source>ROM name and version</source>
         <translation>Nome e versão da ROM</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="347"/>
+        <location filename="editor/pagesf2.ui" line="340"/>
         <source>Sound engine</source>
         <translation>Dispositivo de som</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="379"/>
+        <location filename="editor/pagesf2.ui" line="375"/>
         <source>Editing software</source>
         <translation>Edição de software</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="478"/>
+        <location filename="editor/pagesf2.ui" line="474"/>
         <source>Presets</source>
         <translation>Predefinições</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="500"/>
-        <location filename="editor/pagesf2.ui" line="614"/>
-        <location filename="editor/pagesf2.ui" line="949"/>
+        <location filename="editor/pagesf2.ui" line="496"/>
+        <location filename="editor/pagesf2.ui" line="610"/>
+        <location filename="editor/pagesf2.ui" line="951"/>
         <source>Details</source>
         <translation>Detalhes</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="592"/>
+        <location filename="editor/pagesf2.ui" line="588"/>
         <source>Samples</source>
         <translation>Amostras</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="667"/>
+        <location filename="editor/pagesf2.ui" line="663"/>
         <source>Compression</source>
         <translation>Compressão</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="674"/>
-        <location filename="editor/pagesf2.ui" line="757"/>
-        <location filename="editor/pagesf2.ui" line="820"/>
+        <location filename="editor/pagesf2.ui" line="670"/>
+        <location filename="editor/pagesf2.ui" line="759"/>
+        <location filename="editor/pagesf2.ui" line="822"/>
         <source>Count</source>
         <translation>Contagem</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="688"/>
+        <location filename="editor/pagesf2.ui" line="684"/>
         <source>Bit depth</source>
         <translation>Profundidade de bits</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="702"/>
+        <location filename="editor/pagesf2.ui" line="698"/>
         <source>16 bits</source>
         <translation>16 bits</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="707"/>
+        <location filename="editor/pagesf2.ui" line="703"/>
         <source>24 bits</source>
         <translation>24 bits</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="716"/>
+        <location filename="editor/pagesf2.ui" line="718"/>
         <source>no</source>
         <translation>não</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="721"/>
+        <location filename="editor/pagesf2.ui" line="723"/>
         <source>possible</source>
         <translation>possível</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="750"/>
-        <location filename="editor/pagesf2.ui" line="848"/>
+        <location filename="editor/pagesf2.ui" line="752"/>
+        <location filename="editor/pagesf2.ui" line="850"/>
         <source>Modulators</source>
         <translation>Moduladores</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="778"/>
-        <location filename="editor/pagesf2.ui" line="813"/>
+        <location filename="editor/pagesf2.ui" line="780"/>
+        <location filename="editor/pagesf2.ui" line="815"/>
         <source>Parameters</source>
         <translation>Parâmetros</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="927"/>
+        <location filename="editor/pagesf2.ui" line="929"/>
         <source>Instruments</source>
         <translation>Instrumentos</translation>
     </message>
     <message numerus="yes">
-        <location filename="editor/pagesf2.cpp" line="220"/>
-        <location filename="editor/pagesf2.cpp" line="230"/>
+        <location filename="editor/pagesf2.cpp" line="208"/>
+        <location filename="editor/pagesf2.cpp" line="218"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (não utilizado: %n)</numerusform>
@@ -4073,30 +4302,30 @@ Aviso: a qualidade será reduzida e o loop pode ser alterado</translation>
         <translation>Lá♯</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="55"/>
+        <location filename="core/utils.cpp" line="311"/>
         <source>bytes</source>
         <translation>bytes</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="57"/>
+        <location filename="core/utils.cpp" line="313"/>
         <source>kB</source>
         <comment>kilobytes</comment>
         <translation>kB</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="59"/>
+        <location filename="core/utils.cpp" line="315"/>
         <source>MB</source>
         <comment>megabytes</comment>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="61"/>
+        <location filename="core/utils.cpp" line="317"/>
         <source>GB</source>
         <comment>gigabytes</comment>
         <translation>GB</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloaddata.cpp" line="62"/>
+        <location filename="core/utils.cpp" line="318"/>
         <source>TB</source>
         <comment>terabytes</comment>
         <translation>TB</translation>
@@ -4107,7 +4336,7 @@ Aviso: a qualidade será reduzida e o loop pode ser alterado</translation>
         <translation>Conjunto de amostras GrandOrgue</translation>
     </message>
     <message>
-        <location filename="core/input/inputfactory.cpp" line="109"/>
+        <location filename="core/input/inputfactory.cpp" line="108"/>
         <source>All</source>
         <translation>Todo</translation>
     </message>
@@ -4122,7 +4351,7 @@ Aviso: a qualidade será reduzida e o loop pode ser alterado</translation>
         <translation>Arquivos Sfz</translation>
     </message>
     <message>
-        <location filename="context/translationmanager.cpp" line="105"/>
+        <location filename="context/translationmanager.cpp" line="107"/>
         <source>When editing one side of a stereo sample, the other side is automatically edited the same.
 This rule applies at the sample level and also when editing a division of an instrument:
 the division corresponding to the other channel, if any, is edited the same.
@@ -4730,94 +4959,94 @@ baixar a lista</translation>
 <context>
     <name>SoundfontBrowser</name>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="365"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="377"/>
         <source>Category</source>
         <translation>Categoria</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="380"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="392"/>
         <source>License</source>
         <translation>Licença</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="395"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="407"/>
         <source>Sample source</source>
         <translation>Fonte da amostra</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="410"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="422"/>
         <source>Timbre</source>
         <translation>Timbre</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="425"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="437"/>
         <source>Articulation</source>
         <translation>Articulação</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="440"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="452"/>
         <source>Genre</source>
         <translation>Gênero</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="455"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="467"/>
         <source>MIDI standard</source>
         <translation>Padrão MIDI</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="470"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="482"/>
         <source>Tags</source>
         <translation>Tags</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="205"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="214"/>
         <source>Search a soundfont...</source>
         <translation>Procurar uma soundfont...</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="257"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="269"/>
         <source>Filters</source>
         <translation>Filtros</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="286"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="298"/>
         <source>Reset</source>
         <translation>Restabelecer</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="304"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="316"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation>Assine uma conta Premium para ter acesso a todos os recursos!</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="159"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="165"/>
         <source>No results</source>
         <translation>Sem resultado</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="545"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="557"/>
         <source>Go to the previous page</source>
         <translation>Ir para a página anterior</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="580"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="592"/>
         <source>Go to the next page</source>
         <translation>Ir para a próxima página</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.ui" line="670"/>
+        <location filename="repository/browser/soundfontbrowser.ui" line="682"/>
         <source>Oops! Cannot
 download the list</source>
         <translation>Ops! Não foi possível
 baixar a lista</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="140"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="142"/>
         <source>commercial use</source>
         <translation>uso comercial</translation>
     </message>
     <message>
-        <location filename="repository/browser/soundfontbrowser.cpp" line="141"/>
+        <location filename="repository/browser/soundfontbrowser.cpp" line="143"/>
         <source>share after editing</source>
         <translation>compartilhar após edição</translation>
     </message>
@@ -5108,58 +5337,58 @@ baixar o conteúdo</translation>
 <context>
     <name>TabManager</name>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="106"/>
+        <location filename="mainwindow/tabmanager.cpp" line="109"/>
         <source>Settings</source>
         <translation>Configurações</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="133"/>
-        <location filename="mainwindow/tabmanager.cpp" line="247"/>
+        <location filename="mainwindow/tabmanager.cpp" line="136"/>
+        <location filename="mainwindow/tabmanager.cpp" line="288"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="134"/>
+        <location filename="mainwindow/tabmanager.cpp" line="137"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation>Não é possível abrir o arquivo &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="204"/>
+        <location filename="mainwindow/tabmanager.cpp" line="245"/>
         <source>Online repository</source>
         <translation>Repositório online</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="242"/>
+        <location filename="mainwindow/tabmanager.cpp" line="283"/>
         <source>Save before exiting?</source>
         <translation>Salvar antes de sair?</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="245"/>
+        <location filename="mainwindow/tabmanager.cpp" line="286"/>
         <source>untitled</source>
         <translation>sem nome</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="246"/>
+        <location filename="mainwindow/tabmanager.cpp" line="287"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation>O arquivo &quot;%1&quot; foi modificado.</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="249"/>
+        <location filename="mainwindow/tabmanager.cpp" line="290"/>
         <source>&amp;Save</source>
         <translation>&amp;Salvar</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="250"/>
+        <location filename="mainwindow/tabmanager.cpp" line="291"/>
         <source>&amp;Cancel</source>
         <translation>Cancel&amp;ar</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="251"/>
+        <location filename="mainwindow/tabmanager.cpp" line="292"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Não salvar</translation>
     </message>
     <message>
-        <location filename="mainwindow/tabmanager.cpp" line="361"/>
+        <location filename="mainwindow/tabmanager.cpp" line="410"/>
         <source>User area</source>
         <translation>Área do usuário</translation>
     </message>
@@ -5763,7 +5992,7 @@ Outros editores de soundfont podem exibir outras unidades.</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="126"/>
         <source>Couldn&apos;t start the command.</source>
-        <translation>Não foi possível iniciar o comando</translation>
+        <translation>Não foi possível iniciar o comando.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="129"/>
@@ -6251,7 +6480,8 @@ Outros editores de soundfont podem exibir outras unidades.</translation>
     <name>ToolMergeSamples</name>
     <message>
         <location filename="editor/tools/merge_samples/toolmergesamples.cpp" line="66"/>
-        <source>The preset doesn&apos;t trigger any samples.</source>
+        <source>The preset does not trigger any samples.</source>
+        <oldsource>The preset doesn&apos;t trigger any samples.</oldsource>
         <translation>A predefinição não dispara nenhuma amostra.</translation>
     </message>
     <message>
