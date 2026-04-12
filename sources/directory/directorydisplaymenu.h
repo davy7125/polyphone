@@ -32,6 +32,10 @@ namespace Ui {
 class DirectoryDisplayMenu;
 }
 
+// NOT USED ANYMORE BUT MIGHT BE USEFULL LATER
+// This widget displays a button and a menu is shown when clicking on it
+// The elements are only checkboxes
+// The menu is not closed after checking / unchecking one element
 class DirectoryDisplayMenu : public QWidget
 {
     Q_OBJECT

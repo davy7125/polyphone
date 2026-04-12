@@ -22,48 +22,23 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef DIRECTORYBROWSER_H
-#define DIRECTORYBROWSER_H
+#ifndef DIRECTORYELEMENTLISTDELEGATE_H
+#define DIRECTORYELEMENTLISTDELEGATE_H
 
-#include <QWidget>
-#include "basetypes.h"
-class QFileSystemWatcher;
+#include <QStyledItemDelegate>
 
-namespace Ui {
-class DirectoryBrowser;
-}
-
-class DirectoryBrowser : public QWidget
+class DirectoryElementListDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 
 public:
-    DirectoryBrowser(QWidget *parent = nullptr);
-    ~DirectoryBrowser();
-
-    void initialize(QString dirPath);
-    QString getDirectoryPath() { return _dirPath; }
-
-signals:
-    void itemDoubleClicked(QString filePath, EltID id);
-
-private slots:
-    void on_pushRetry_clicked();
-    void onDirectoryChanged(const QString &path);
-    void onContentChanged();
-    void onSelectionChanged(QItemSelection selected, QItemSelection deselected);
-    void onSmplSelectionChanged(QItemSelection selected, QItemSelection deselected);
-    void onInstSelectionChanged(QItemSelection selected, QItemSelection deselected);
-    void onPrstSelectionChanged(QItemSelection selected, QItemSelection deselected);
-    void on_listView_doubleClicked(const QModelIndex &index);
-    void onRenameRequested(QString path);
-    void onDeleteRequested(QString path);
+    explicit DirectoryElementListDelegate(QObject *parent = nullptr);
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 private:
-    Ui::DirectoryBrowser *ui;
-    QString _dirPath;
-    QFileSystemWatcher * _watcher;
-    QMap<QString, QDateTime> _currentFiles;
+    QColor _colorEnabled, _colorHighlighted, _colorAlternate;
+    static const int MARGIN;
 };
 
-#endif // DIRECTORYBROWSER_H
+#endif // DIRECTORYELEMENTLISTDELEGATE_H

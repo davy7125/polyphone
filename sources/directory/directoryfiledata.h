@@ -83,6 +83,9 @@ private:
         int samplingRateHz = 0;
         int totalDurationMilliSec = 0;
         int loopDurationMilliSec = 0;
+
+    private:
+        QString _details;
     };
 
     class DirectoryInstrumentPresetData
@@ -98,6 +101,9 @@ private:
         int numDistinctVelocityRanges = 0;
         int numParameters = 0;
         int numModulators = 0;
+
+    private:
+        QString _details;
     };
 
     bool scan(int indexSf2);

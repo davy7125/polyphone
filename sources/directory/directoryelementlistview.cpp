@@ -23,20 +23,27 @@
 ***************************************************************************/
 
 #include "directoryelementlistview.h"
-#include <QStringListModel>
 #include <QMouseEvent>
+#include <QStandardItemModel>
+#include "directoryelementlistdelegate.h"
 
 DirectoryElementListView::DirectoryElementListView(QWidget *parent) : QListView(parent),
     _path(""),
     _type(elementUnknown)
 {
-    this->setModel(new QStringListModel());
+    _model = new QStandardItemModel(this);
+    _proxy = new QSortFilterProxyModel(this);
+    _proxy->setSourceModel(_model);
+    _proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    _proxy->setFilterRole(Qt::DisplayRole);
+    this->setModel(_proxy);
+
+    this->setItemDelegate(new DirectoryElementListDelegate(this));
 }
 
 void DirectoryElementListView::clear()
 {
-    QStringListModel * model = (QStringListModel *)this->model();
-    model->setStringList(QStringList());
+    _model->clear();
     _path = "";
     _type = elementUnknown;
 }
@@ -45,15 +52,32 @@ void DirectoryElementListView::setData(DirectoryFileData::DetailsData data, QStr
 {
     _path = path;
     _type = type;
-    QStringListModel * model = (QStringListModel *)this->model();
-    model->setStringList(data.names);
-    _values = data.values;
+
+    _model->clear();
+    for (int i = 0; i < data.names.size(); ++i)
+    {
+        QStandardItem *item = new QStandardItem();
+        item->setData(data.names[i], Qt::DisplayRole);
+
+        // Details
+        QString tmp = data.details[i];
+        item->setData(tmp, Qt::UserRole + 1);
+        item->setData(tmp.count('\n') + 1, Qt::UserRole + 2);
+        item->setData(data.values[i], Qt::UserRole + 3);
+
+        _model->appendRow(item);
+    }
 }
 
 void DirectoryElementListView::mouseDoubleClickEvent(QMouseEvent *event)
 {
     QModelIndex index = indexAt(event->pos());
-    if (index.isValid() && _type != elementUnknown && index.row() < _values.count())
-        emit itemDoubleClicked(_path, EltID(_type, -1, _values[index.row()]));
+    if (index.isValid() && _type != elementUnknown)
+        emit itemDoubleClicked(_path, EltID(_type, -1, index.data(Qt::UserRole + 3).toInt()));
     QListView::mouseDoubleClickEvent(event);
+}
+
+void DirectoryElementListView::setFilter(QString filter)
+{
+    _proxy->setFilterFixedString(filter);
 }

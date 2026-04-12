@@ -27,6 +27,8 @@
 
 #include <QListView>
 #include "directoryfiledata.h"
+class QStandardItemModel;
+class QSortFilterProxyModel;
 
 class DirectoryElementListView : public QListView
 {
@@ -37,6 +39,9 @@ public:
     void clear();
     void setData(DirectoryFileData::DetailsData data, QString path, ElementType type);
 
+public slots:
+    void setFilter(QString filter);
+
 signals:
     void itemDoubleClicked(QString path, EltID id);
 
@@ -44,9 +49,10 @@ protected:
     void mouseDoubleClickEvent(QMouseEvent *event) override;
 
 private:
+    QStandardItemModel * _model;
+    QSortFilterProxyModel * _proxy;
     QString _path;
     ElementType _type;
-    QList<int> _values;
 };
 
 #endif // DIRECTORYELEMENTLISTVIEW_H

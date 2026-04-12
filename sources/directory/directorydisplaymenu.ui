@@ -60,7 +60,7 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="text">
-      <string>Display</string>
+      <string notr="true">Display</string>
      </property>
     </widget>
    </item>

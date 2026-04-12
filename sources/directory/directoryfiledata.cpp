@@ -270,40 +270,45 @@ DirectoryFileData::DetailsData DirectoryFileData::getPresetDetails() const
 
 QString DirectoryFileData::DirectorySampleData::getDetail()
 {
-    QString result;
-    switch (sampleType)
+    if (_details.isEmpty())
     {
-    case linkInvalid:
-        result = QObject::tr("Invalid link");
-        break;
-    case monoSample: case RomMonoSample:
-        result = QObject::tr("Mono", "opposite to stereo");
-        break;
-    case rightSample: case RomRightSample:
-        result = QObject::tr("Stereo right");
-        break;
-    case leftSample: case RomLeftSample:
-        result = QObject::tr("Stereo left");
-        break;
-    case linkedSample: case RomLinkedSample:
-        result = QObject::tr("Stereo non defined");
-        break;
+        switch (sampleType)
+        {
+        case linkInvalid:
+            _details = QObject::tr("Invalid link");
+            break;
+        case monoSample: case RomMonoSample:
+            _details = QObject::tr("Mono", "opposite to stereo");
+            break;
+        case rightSample: case RomRightSample:
+            _details = QObject::tr("Stereo right");
+            break;
+        case leftSample: case RomLeftSample:
+            _details = QObject::tr("Stereo left");
+            break;
+        case linkedSample: case RomLinkedSample:
+            _details = QObject::tr("Stereo non defined");
+            break;
+        }
+
+        QString secondUnit = QObject::tr("s", "unit for seconds");
+        _details += " | " + QLocale::system().toString((double)totalDurationMilliSec / 1000, 'f', 3) + " " + secondUnit;
+        if (loopDurationMilliSec > 0)
+            _details += " | " + QObject::tr("Loop") + " " + QLocale::system().toString((double)loopDurationMilliSec / 1000, 'f', 3) + " " + secondUnit;
+        _details += " | " + QString::number(samplingRateHz) + " " + QObject::tr("Hz", "unit for Herz");
     }
 
-    QString secondUnit = QObject::tr("s", "unit for seconds");
-    result += ", " + QLocale::system().toString((double)totalDurationMilliSec / 1000, 'f', 3) + " " + secondUnit;
-    if (loopDurationMilliSec > 0)
-        result += ", " + QObject::tr("loop") + " " + QLocale::system().toString((double)loopDurationMilliSec / 1000, 'f', 3) + " " + secondUnit;
-
-    return result;
+    return _details;
 }
 
 QString DirectoryFileData::DirectoryInstrumentPresetData::getDetail()
 {
-    return QObject::tr("%1 division(s): %2 distinct key range(s) and %3 distinct velocity range(s)")
-               .arg(numDivisions)
-               .arg(numDistinctKeyRanges)
-               .arg(numDistinctVelocityRanges) +
-           "\n" +
-           QObject::tr("%1 parameter(s), %2 modulator(s)").arg(numParameters).arg(numModulators);
+    if (_details.isEmpty())
+        _details =
+            QObject::tr("%n division(s)", nullptr, numDivisions) + " | " +
+            QObject::tr("%n parameter(s)", nullptr, numParameters) + " | " +
+            QObject::tr("%n modulator(s)", nullptr, numModulators) + "\n" +
+            QObject::tr("%n distinct key range(s)", nullptr, numDistinctKeyRanges) + " | " +
+            QObject::tr("%n distinct velocity range(s)", nullptr, numDistinctVelocityRanges);
+    return _details;
 }

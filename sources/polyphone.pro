@@ -292,6 +292,7 @@ SOURCES	+= main.cpp \
     dialogs/dialogchangelog.cpp \
     directory/directorybrowser.cpp \
     directory/directorydisplaymenu.cpp \
+    directory/directoryelementlistdelegate.cpp \
     directory/directoryelementlistview.cpp \
     directory/directoryfiledata.cpp \
     directory/directorylistdelegate.cpp \
@@ -668,6 +669,7 @@ HEADERS += \
     dialogs/modalprogressdialog.h \
     directory/directorybrowser.h \
     directory/directorydisplaymenu.h \
+    directory/directoryelementlistdelegate.h \
     directory/directoryelementlistview.h \
     directory/directoryfiledata.h \
     directory/directorylistdelegate.h \

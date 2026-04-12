@@ -67,16 +67,21 @@ DirectoryBrowser::DirectoryBrowser(QWidget *parent) : QWidget(parent),
     ui->iconPreset->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/preset.svg", QSize(16, 16), replacement));
 
     // Connections
-    //connect(ui->widgetDisplayMenu, SIGNAL(displayOptionsChanged(int)), ui->listView, SLOT(setDisplayOptions(int)));
     connect(ui->widgetSortMenu, SIGNAL(currentIndexChanged(int)), ui->listView, SLOT(setSortType(int)));
     connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listView, SLOT(setFilter(QString)));
+    connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listSamples, SLOT(setFilter(QString)));
+    connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listInstruments, SLOT(setFilter(QString)));
+    connect(ui->lineSearch, SIGNAL(textEdited(QString)), ui->listPresets, SLOT(setFilter(QString)));
     connect(ui->listView, SIGNAL(contentChanged()), this, SLOT(onContentChanged()));
-    connect(ui->listSamples, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
-    connect(ui->listInstruments, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
-    connect(ui->listPresets, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
     connect(ui->listView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onSelectionChanged(QItemSelection,QItemSelection)));
     connect(ui->listView, SIGNAL(renameRequested(QString)), this, SLOT(onRenameRequested(QString)));
     connect(ui->listView, SIGNAL(deleteRequested(QString)), this, SLOT(onDeleteRequested(QString)));
+    connect(ui->listSamples, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
+    connect(ui->listSamples->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onSmplSelectionChanged(QItemSelection,QItemSelection)));
+    connect(ui->listInstruments->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onInstSelectionChanged(QItemSelection,QItemSelection)));
+    connect(ui->listPresets->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(onPrstSelectionChanged(QItemSelection,QItemSelection)));
+    connect(ui->listInstruments, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
+    connect(ui->listPresets, SIGNAL(itemDoubleClicked(QString,EltID)), this, SIGNAL(itemDoubleClicked(QString,EltID)));
 
     // Splitter
     CustomSplitter * splitter = new CustomSplitter(this, ui->widgetLeft, ui->widgetRight, "directory_browser_splitter_sizes");
@@ -222,30 +227,87 @@ void DirectoryBrowser::onRenameRequested(QString path)
     QFileInfo info(path);
     QString currentName = info.fileName();
 
-    bool ok = false;
-    QString newName = QInputDialog::getText(this, tr("Rename"), tr("New name:"), QLineEdit::Normal, currentName, &ok);
-    if (!ok || newName.isEmpty() || newName == currentName)
+    // Dialog
+    QInputDialog inputDialog(this);
+    inputDialog.setWindowTitle(tr("Rename"));
+    inputDialog.setLabelText(tr("New name:"));
+    inputDialog.setTextValue(currentName);
+    inputDialog.setCancelButtonText(tr("&Cancel"));
+    inputDialog.setOkButtonText(tr("&Ok"));
+    if (inputDialog.exec() != QDialog::Accepted)
+        return;
+    QString newName = inputDialog.textValue();
+    if (newName.isEmpty() || newName == currentName)
         return;
 
     QDir dir = info.dir();
     QString newPath = dir.filePath(newName);
     if (QFile::exists(newPath))
     {
-        QMessageBox::warning(this, tr("Error"), tr("A file with this name already exists."));
+        QMessageBox::warning(this, tr("Warning"), tr("A file with this name already exists."));
         return;
     }
 
     if (!QFile::rename(path, newPath))
-        QMessageBox::warning(this, tr("Error"), tr("Cannot rename file \"%1\".").arg(currentName));
+        QMessageBox::warning(this, tr("Warning"), tr("Cannot rename file \"%1\".").arg(currentName));
 }
 
 void DirectoryBrowser::onDeleteRequested(QString path)
 {
     QFileInfo info(path);
-    if (QMessageBox::question(this, tr("Confirm deletion"),
-        tr("Are you sure you want to delete file \"%1\"?").arg(info.fileName()), QMessageBox::Yes | QMessageBox::No) != QMessageBox::Yes)
+
+    QMessageBox msgBox(this);
+    msgBox.setWindowTitle(tr("Confirm deletion"));
+    msgBox.setText(tr("Are you sure you want to delete file \"%1\"?").arg(info.fileName()));
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.button(QMessageBox::Yes)->setText(tr("&Yes"));
+    msgBox.button(QMessageBox::No)->setText(tr("&No"));
+    msgBox.setIcon(QMessageBox::Question);
+    if (msgBox.exec() != QMessageBox::Yes)
         return;
 
-    if (!QFile::remove(path))
-        QMessageBox::warning(this, tr("Error"), tr("Cannot delete file \"%1\".").arg(info.fileName()));
+    if (!QFile::moveToTrash(path))
+        QMessageBox::warning(this, tr("Warning"), tr("Cannot delete file \"%1\".").arg(info.fileName()));
+}
+
+void DirectoryBrowser::onSmplSelectionChanged(QItemSelection selected, QItemSelection deselected)
+{
+    Q_UNUSED(selected)
+    Q_UNUSED(deselected)
+
+    ui->listInstruments->selectionModel()->blockSignals(true);
+    ui->listInstruments->clearSelection();
+    ui->listInstruments->selectionModel()->blockSignals(false);
+
+    ui->listPresets->selectionModel()->blockSignals(true);
+    ui->listPresets->clearSelection();
+    ui->listPresets->selectionModel()->blockSignals(false);
+}
+
+void DirectoryBrowser::onInstSelectionChanged(QItemSelection selected, QItemSelection deselected)
+{
+    Q_UNUSED(selected)
+    Q_UNUSED(deselected)
+
+    ui->listSamples->selectionModel()->blockSignals(true);
+    ui->listSamples->clearSelection();
+    ui->listSamples->selectionModel()->blockSignals(false);
+
+    ui->listPresets->selectionModel()->blockSignals(true);
+    ui->listPresets->clearSelection();
+    ui->listPresets->selectionModel()->blockSignals(false);
+}
+
+void DirectoryBrowser::onPrstSelectionChanged(QItemSelection selected, QItemSelection deselected)
+{
+    Q_UNUSED(selected)
+    Q_UNUSED(deselected)
+
+    ui->listSamples->selectionModel()->blockSignals(true);
+    ui->listSamples->clearSelection();
+    ui->listSamples->selectionModel()->blockSignals(false);
+
+    ui->listInstruments->selectionModel()->blockSignals(true);
+    ui->listInstruments->clearSelection();
+    ui->listInstruments->selectionModel()->blockSignals(false);
 }
