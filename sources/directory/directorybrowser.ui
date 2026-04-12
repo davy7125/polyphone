@@ -590,6 +590,14 @@
    <header>directoryelementlistview.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>lineSearch</tabstop>
+  <tabstop>listView</tabstop>
+  <tabstop>listSamples</tabstop>
+  <tabstop>listInstruments</tabstop>
+  <tabstop>listPresets</tabstop>
+  <tabstop>pushRetry</tabstop>
+ </tabstops>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

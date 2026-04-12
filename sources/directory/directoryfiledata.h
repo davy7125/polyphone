@@ -32,8 +32,10 @@
 class Smpl;
 class InstPrst;
 
-class DirectoryFileData
+class DirectoryFileData : public QObject
 {
+    Q_OBJECT
+
 public:
     struct DetailsData
     {
@@ -52,6 +54,7 @@ public:
     };
 
     DirectoryFileData(const QFileInfo &fileInfo, int sf2Id);
+    void process();
 
     QString getPath() const { return _path; }
     QString getFileName() const { return QFileInfo(_path).fileName(); }
@@ -69,6 +72,12 @@ public:
     DetailsData getPresetDetails() const;
 
     bool getFilterResult(QString filter) const;
+
+signals:
+    void processFinished();
+
+private slots:
+    void inputProcessed();
 
 private:
     class DirectorySampleData
@@ -117,6 +126,7 @@ private:
     QString _path;
     quint64 _fileSize;
     QDateTime _lastModified;
+    int _existingSf2Id;
     Status _status;
     QList<DirectorySampleData> _samples;
     QList<DirectoryInstrumentPresetData> _instruments;

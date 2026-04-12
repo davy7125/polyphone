@@ -32,15 +32,22 @@
 #include "instprst.h"
 #include "utils.h"
 
-DirectoryFileData::DirectoryFileData(const QFileInfo &fileInfo, int sf2Id) :
+DirectoryFileData::DirectoryFileData(const QFileInfo &fileInfo, int sf2Id) : QObject(nullptr),
     _path(fileInfo.absoluteFilePath()),
     _fileSize(fileInfo.size()),
     _lastModified(fileInfo.lastModified()),
+    _existingSf2Id(sf2Id),
     _status(NOT_INITIALIZED)
 {
-    if (sf2Id == -1)
+
+}
+
+void DirectoryFileData::process()
+{
+    if (_existingSf2Id == -1)
     {
         // Parse a file
+        QFileInfo fileInfo(_path);
         if (InputFactory::isSuffixSupported(fileInfo.suffix()))
         {
             if (fileInfo.isReadable())
@@ -48,23 +55,14 @@ DirectoryFileData::DirectoryFileData(const QFileInfo &fileInfo, int sf2Id) :
                 AbstractInputParser * parser = InputFactory::getInput(_path);
                 if (parser->canFastLoad())
                 {
-                    parser->process(false);
-                    if (parser->isSuccess())
-                    {
-                        scan(parser->getSf2Index());
-                        _status = OK;
-                    }
-                    else
-                        _status = CANNOT_SCAN;
+                    connect(parser, SIGNAL(finished()), this, SLOT(inputProcessed()));
+                    parser->process(true);
                 }
                 else
+                {
                     _status = NOT_SCANNABLE;
-
-                int tmpIndex = parser->getSf2Index();
-                if (tmpIndex != -1)
-                    SoundfontManager::getInstance()->remove(EltID(elementSf2, tmpIndex));
-                SoundfontManager::getInstance()->revertNewEditing();
-                delete parser;
+                    delete parser;
+                }
             }
             else
                 _status = NOT_READABLE;
@@ -75,9 +73,29 @@ DirectoryFileData::DirectoryFileData(const QFileInfo &fileInfo, int sf2Id) :
     else
     {
         // The file is already open
-        scan(sf2Id);
+        scan(_existingSf2Id);
+        _status = OK;
+        emit processFinished();
+    }
+}
+
+void DirectoryFileData::inputProcessed()
+{
+    AbstractInputParser * parser = dynamic_cast<AbstractInputParser *>(QObject::sender());
+    if (parser->isSuccess())
+    {
+        scan(parser->getSf2Index());
         _status = OK;
     }
+    else
+        _status = CANNOT_SCAN;
+
+    int tmpIndex = parser->getSf2Index();
+    delete parser;
+
+    if (tmpIndex != -1)
+        SoundfontManager::getInstance()->remove(EltID(elementSf2, tmpIndex));
+    emit processFinished();
 }
 
 bool DirectoryFileData::scan(int indexSf2)
@@ -275,27 +293,27 @@ QString DirectoryFileData::DirectorySampleData::getDetail()
         switch (sampleType)
         {
         case linkInvalid:
-            _details = QObject::tr("Invalid link");
+            _details = tr("Invalid link");
             break;
         case monoSample: case RomMonoSample:
-            _details = QObject::tr("Mono", "opposite to stereo");
+            _details = tr("Mono", "opposite to stereo");
             break;
         case rightSample: case RomRightSample:
-            _details = QObject::tr("Stereo right");
+            _details = tr("Stereo right");
             break;
         case leftSample: case RomLeftSample:
-            _details = QObject::tr("Stereo left");
+            _details = tr("Stereo left");
             break;
         case linkedSample: case RomLinkedSample:
-            _details = QObject::tr("Stereo non defined");
+            _details = tr("Stereo non defined");
             break;
         }
 
-        QString secondUnit = QObject::tr("s", "unit for seconds");
+        QString secondUnit = tr("s", "unit for seconds");
         _details += " | " + QLocale::system().toString((double)totalDurationMilliSec / 1000, 'f', 3) + " " + secondUnit;
         if (loopDurationMilliSec > 0)
-            _details += " | " + QObject::tr("Loop") + " " + QLocale::system().toString((double)loopDurationMilliSec / 1000, 'f', 3) + " " + secondUnit;
-        _details += " | " + QString::number(samplingRateHz) + " " + QObject::tr("Hz", "unit for Herz");
+            _details += " | " + tr("Loop") + " " + QLocale::system().toString((double)loopDurationMilliSec / 1000, 'f', 3) + " " + secondUnit;
+        _details += " | " + QString::number(samplingRateHz) + " " + tr("Hz", "unit for Herz");
     }
 
     return _details;
@@ -305,10 +323,10 @@ QString DirectoryFileData::DirectoryInstrumentPresetData::getDetail()
 {
     if (_details.isEmpty())
         _details =
-            QObject::tr("%n division(s)", nullptr, numDivisions) + " | " +
-            QObject::tr("%n parameter(s)", nullptr, numParameters) + " | " +
-            QObject::tr("%n modulator(s)", nullptr, numModulators) + "\n" +
-            QObject::tr("%n distinct key range(s)", nullptr, numDistinctKeyRanges) + " | " +
-            QObject::tr("%n distinct velocity range(s)", nullptr, numDistinctVelocityRanges);
+            tr("%n division(s)", nullptr, numDivisions) + " | " +
+            tr("%n parameter(s)", nullptr, numParameters) + " | " +
+            tr("%n modulator(s)", nullptr, numModulators) + "\n" +
+            tr("%n distinct key range(s)", nullptr, numDistinctKeyRanges) + " | " +
+            tr("%n distinct velocity range(s)", nullptr, numDistinctVelocityRanges);
     return _details;
 }

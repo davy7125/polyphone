@@ -2030,96 +2030,193 @@ en ligne</translation>
         <translation>Chercher un fichier, un échantillon, un instrument ou un ensemble...</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="107"/>
+        <location filename="directory/directorybrowser.cpp" line="110"/>
         <source>The directory &quot;%1&quot; doesn&apos;t exist.</source>
         <translation>Le répertoire « %1 » n&apos;existe pas.</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="114"/>
+        <location filename="directory/directorybrowser.cpp" line="117"/>
         <source>The directory &quot;%1&quot; is not readable.</source>
         <translation>Le répertoire « %1 » n&apos;est pas lisible.</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="229"/>
+        <location filename="directory/directorybrowser.cpp" line="232"/>
         <source>Rename</source>
         <translation>Renommer</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="230"/>
+        <location filename="directory/directorybrowser.cpp" line="233"/>
         <source>New name:</source>
         <translation>Nouveau nom :</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="232"/>
+        <location filename="directory/directorybrowser.cpp" line="235"/>
         <source>&amp;Cancel</source>
         <oldsource>Cancel</oldsource>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="233"/>
+        <location filename="directory/directorybrowser.cpp" line="236"/>
         <source>&amp;Ok</source>
         <oldsource>Ok</oldsource>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="244"/>
+        <location filename="directory/directorybrowser.cpp" line="247"/>
         <source>A file with this name already exists.</source>
         <translation>Un fichier avec ce nom existe déjà.</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="244"/>
-        <location filename="directory/directorybrowser.cpp" line="249"/>
-        <location filename="directory/directorybrowser.cpp" line="267"/>
+        <location filename="directory/directorybrowser.cpp" line="247"/>
+        <location filename="directory/directorybrowser.cpp" line="252"/>
+        <location filename="directory/directorybrowser.cpp" line="270"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="249"/>
+        <location filename="directory/directorybrowser.cpp" line="252"/>
         <source>Cannot rename file &quot;%1&quot;.</source>
         <translation>Impossible de renommer le fichier « %1 ».</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="257"/>
+        <location filename="directory/directorybrowser.cpp" line="260"/>
         <source>Confirm deletion</source>
         <translation>Confirmation de suppression</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="258"/>
+        <location filename="directory/directorybrowser.cpp" line="261"/>
         <source>Are you sure you want to delete file &quot;%1&quot;?</source>
         <translation>Supprimer le fichier « %1 » ?</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="260"/>
+        <location filename="directory/directorybrowser.cpp" line="263"/>
         <source>&amp;Yes</source>
         <oldsource>Yes</oldsource>
         <translation>&amp;Oui</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="261"/>
+        <location filename="directory/directorybrowser.cpp" line="264"/>
         <source>&amp;No</source>
         <oldsource>No</oldsource>
         <translation>&amp;Non</translation>
     </message>
     <message>
-        <location filename="directory/directorybrowser.cpp" line="267"/>
+        <location filename="directory/directorybrowser.cpp" line="270"/>
         <source>Cannot delete file &quot;%1&quot;.</source>
         <translation>Impossible de supprimer le fichier « %1 ».</translation>
     </message>
 </context>
 <context>
+    <name>DirectoryFileData</name>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="296"/>
+        <source>Invalid link</source>
+        <translation>Lien invalide</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="299"/>
+        <source>Mono</source>
+        <comment>opposite to stereo</comment>
+        <translation>Mono</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="302"/>
+        <source>Stereo right</source>
+        <translation>Stéréo droit</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="305"/>
+        <source>Stereo left</source>
+        <translation>Stéréo gauche</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="308"/>
+        <source>Stereo non defined</source>
+        <translation>Stéréo non défini</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="312"/>
+        <source>s</source>
+        <comment>unit for seconds</comment>
+        <translation>s</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="315"/>
+        <source>Loop</source>
+        <translation>Boucle</translation>
+    </message>
+    <message>
+        <location filename="directory/directoryfiledata.cpp" line="316"/>
+        <source>Hz</source>
+        <comment>unit for Herz</comment>
+        <translation>Hz</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="directory/directoryfiledata.cpp" line="326"/>
+        <source>%n division(s)</source>
+        <translation>
+            <numerusform>%n division</numerusform>
+            <numerusform>%n divisions</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="directory/directoryfiledata.cpp" line="327"/>
+        <source>%n parameter(s)</source>
+        <translation>
+            <numerusform>%n paramètre</numerusform>
+            <numerusform>%n paramètres</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="directory/directoryfiledata.cpp" line="328"/>
+        <source>%n modulator(s)</source>
+        <translation>
+            <numerusform>%n modulateur</numerusform>
+            <numerusform>%n modulateurs</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="directory/directoryfiledata.cpp" line="329"/>
+        <source>%n distinct key range(s)</source>
+        <translation>
+            <numerusform>%n étendue distincte de notes</numerusform>
+            <numerusform>%n étendues distinctes de notes</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="directory/directoryfiledata.cpp" line="330"/>
+        <source>%n distinct velocity range(s)</source>
+        <translation>
+            <numerusform>%n étendue distincte de vélocités</numerusform>
+            <numerusform>%n étendues distinctes de vélocités</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>DirectoryListDelegate</name>
     <message>
-        <location filename="directory/directorylistdelegate.cpp" line="165"/>
+        <location filename="directory/directorylistdelegate.cpp" line="135"/>
+        <source>Analyze in progress...</source>
+        <translation>Analyse en cours...</translation>
+    </message>
+    <message>
+        <location filename="directory/directorylistdelegate.cpp" line="138"/>
         <source>NOT READABLE</source>
         <translation>NON LISIBLE</translation>
     </message>
     <message>
-        <location filename="directory/directorylistdelegate.cpp" line="303"/>
+        <location filename="directory/directorylistdelegate.cpp" line="145"/>
+        <source>Error when reading the file.</source>
+        <oldsource>Error when opening the file.</oldsource>
+        <translation>Erreur lors de la lecture du fichier.</translation>
+    </message>
+    <message>
+        <location filename="directory/directorylistdelegate.cpp" line="316"/>
         <source>Rename file &quot;%1&quot;</source>
         <translation>Renommer le fichier « %1 »</translation>
     </message>
     <message>
-        <location filename="directory/directorylistdelegate.cpp" line="308"/>
+        <location filename="directory/directorylistdelegate.cpp" line="321"/>
         <source>Delete file &quot;%1&quot;</source>
         <translation>Supprimer le fichier « %1 »</translation>
     </message>
@@ -4314,90 +4411,6 @@ Les 2 divisions doivent partager les mêmes étendues de notes et de vélocités
         <location filename="main.cpp" line="197"/>
         <source>Write &quot;%1&quot; to show usage.</source>
         <translation>Tapez « %1 » pour afficher l&apos;aide.</translation>
-    </message>
-    <message>
-        <location filename="directory/directoryfiledata.cpp" line="278"/>
-        <source>Invalid link</source>
-        <translation>Lien invalide</translation>
-    </message>
-    <message>
-        <location filename="directory/directoryfiledata.cpp" line="281"/>
-        <source>Mono</source>
-        <comment>opposite to stereo</comment>
-        <translation>Mono</translation>
-    </message>
-    <message>
-        <location filename="directory/directoryfiledata.cpp" line="284"/>
-        <source>Stereo right</source>
-        <translation>Stéréo droit</translation>
-    </message>
-    <message>
-        <location filename="directory/directoryfiledata.cpp" line="287"/>
-        <source>Stereo left</source>
-        <translation>Stéréo gauche</translation>
-    </message>
-    <message>
-        <location filename="directory/directoryfiledata.cpp" line="290"/>
-        <source>Stereo non defined</source>
-        <translation>Stéréo non défini</translation>
-    </message>
-    <message>
-        <location filename="directory/directoryfiledata.cpp" line="294"/>
-        <source>s</source>
-        <comment>unit for seconds</comment>
-        <translation>s</translation>
-    </message>
-    <message>
-        <location filename="directory/directoryfiledata.cpp" line="297"/>
-        <source>Loop</source>
-        <oldsource>loop</oldsource>
-        <translation>Boucle</translation>
-    </message>
-    <message>
-        <location filename="directory/directoryfiledata.cpp" line="298"/>
-        <source>Hz</source>
-        <comment>unit for Herz</comment>
-        <translation>Hz</translation>
-    </message>
-    <message numerus="yes">
-        <location filename="directory/directoryfiledata.cpp" line="308"/>
-        <source>%n division(s)</source>
-        <translation>
-            <numerusform>%n division</numerusform>
-            <numerusform>%n divisions</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <location filename="directory/directoryfiledata.cpp" line="309"/>
-        <source>%n parameter(s)</source>
-        <translation>
-            <numerusform>%n paramètre</numerusform>
-            <numerusform>%n paramètres</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <location filename="directory/directoryfiledata.cpp" line="310"/>
-        <source>%n modulator(s)</source>
-        <translation>
-            <numerusform>%n modulateur</numerusform>
-            <numerusform>%n modulateurs</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <location filename="directory/directoryfiledata.cpp" line="311"/>
-        <source>%n distinct key range(s)</source>
-        <translation>
-            <numerusform>%n étendue distincte de notes</numerusform>
-            <numerusform>%n étendues distinctes de notes</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <location filename="directory/directoryfiledata.cpp" line="312"/>
-        <source>%n distinct velocity range(s)</source>
-        <translation>
-            <numerusform>%n étendue distincte de vélocités</numerusform>
-            <numerusform>%n étendues distinctes de vélocités</numerusform>
-        </translation>
     </message>
 </context>
 <context>

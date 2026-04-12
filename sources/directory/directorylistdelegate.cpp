@@ -74,7 +74,7 @@ QSize DirectoryListDelegate::sizeHint(const QStyleOptionViewItem &option, const 
     QFontMetrics fm(option.font);
     int height = fm.height() + 2 * MARGIN;
 
-    if (d->getStatus() == DirectoryFileData::OK)
+    if (d->getStatus() == DirectoryFileData::OK || d->getStatus() == DirectoryFileData::NOT_INITIALIZED)
         height += 0.5 * MARGIN + 0.9 * fm.height();
 
     return QSize(option.rect.width(), height);
@@ -116,7 +116,7 @@ void DirectoryListDelegate::paint(QPainter *painter, const QStyleOptionViewItem 
         prefixWidth = 2 * (MARGIN + ICON_SIZE);
     }
 
-    // Font
+    // Main font
     QFont font = option.font;
     const QFontMetrics fm(font);
 
@@ -124,49 +124,62 @@ void DirectoryListDelegate::paint(QPainter *painter, const QStyleOptionViewItem 
     QString fileName = d->getFileName();
     QString suffix = QString(" (%1 - %2)").arg(Utils::getFormattedSize(d->getFileSize()), d->getLastModified().toString(_dateFormat));
     int suffixWidth = fm.horizontalAdvance(suffix);
+    int counterWidth = 0;
 
-    if (d->getStatus() == DirectoryFileData::OK)
+    // Second line text
+    QString secondLineText = "";
+
+    switch (d->getStatus())
     {
-        // Bold font
-        QFont fontBold = font;
-        fontBold.setBold(true);
-        const QFontMetrics fmBold(fontBold);
-
+    case DirectoryFileData:: NOT_INITIALIZED:
+        secondLineText = tr("Analyze in progress...");
+        break;
+    case DirectoryFileData::NOT_READABLE:
+        fileName = "[" + tr("NOT READABLE") + "] " + fileName;
+        break;
+    case DirectoryFileData::NOT_OPENABLE:
+        break;
+    case DirectoryFileData::NOT_SCANNABLE:
+        break;
+    case DirectoryFileData::CANNOT_SCAN:
+        secondLineText = tr("Error when reading the file.");
+        break;
+    case DirectoryFileData::OK:
         // First line: counters on the right
-        int counterWidth = getCounterWidth(fm, d);
+        counterWidth = getCounterWidth(fm, d);
         paintCounters(painter, fm, d, option.rect.right() - MARGIN - counterWidth, option.rect.top() + MARGIN, selected);
 
-        // First line: text on the left
-        fileName = fmBold.elidedText(fileName, Qt::ElideMiddle, option.rect.width() - 3 * MARGIN - counterWidth - suffixWidth - prefixWidth);
-        painter->setFont(fontBold);
-        painter->drawText(option.rect.left() + MARGIN + prefixWidth, option.rect.top() + MARGIN + fm.ascent(), fileName);
-        painter->setFont(font);
-        painter->drawText(option.rect.left() + MARGIN + prefixWidth + fmBold.horizontalAdvance(fileName), option.rect.top() + MARGIN + fm.ascent(), suffix);
-
         // Second line
+        {
+            DirectoryFileData::DetailsData presets = d->getPresetDetails();
+            QStringList listTmp;
+            for (const QString &s : presets.names)
+                listTmp << s.mid(8);
+            secondLineText = listTmp.join(", ");
+        }
+        break;
+    }
+
+    // First line: text on the left
+    QFont fontBold = font;
+    fontBold.setBold(true);
+    const QFontMetrics fmBold(fontBold);
+    fileName = fmBold.elidedText(fileName, Qt::ElideMiddle, option.rect.width() - 3 * MARGIN - counterWidth - suffixWidth - prefixWidth);
+    painter->setFont(fontBold);
+    painter->drawText(option.rect.left() + MARGIN + prefixWidth, option.rect.top() + MARGIN + fm.ascent(), fileName);
+    painter->setFont(font);
+    painter->drawText(option.rect.left() + MARGIN + prefixWidth + fmBold.horizontalAdvance(fileName), option.rect.top() + MARGIN + fm.ascent(), suffix);
+
+    // Second line
+    if (!secondLineText.isEmpty())
+    {
         QFont fontSmall = font;
         fontSmall.setPointSizeF(font.pointSizeF() * 0.9);
         fontSmall.setItalic(true);
-        painter->setFont(fontSmall);
         const QFontMetrics fmSmall(fontSmall);
-
-        DirectoryFileData::DetailsData presets = d->getPresetDetails();
-        QStringList listTmp;
-        for (const QString &s : presets.names)
-            listTmp << s.mid(8);
-        QString secondLineText = listTmp.join(", ");
         secondLineText = fmSmall.elidedText(secondLineText, Qt::ElideRight, option.rect.width() - 2 * MARGIN);
+        painter->setFont(fontSmall);
         painter->drawText(option.rect.left() + MARGIN, option.rect.top() + MARGIN + fm.height() + 0.5 * MARGIN + fmSmall.ascent(), secondLineText);
-    }
-    else
-    {
-        // One line only, no counters
-        if (d->getStatus() == DirectoryFileData::NOT_READABLE)
-            fileName = "[" + tr("NOT READABLE") + "] " + fileName;
-        fileName += suffix;
-        fileName = fm.elidedText(fileName, Qt::ElideMiddle, option.rect.width() - 2 * MARGIN - prefixWidth);
-        painter->setFont(font);
-        painter->drawText(option.rect.left() + MARGIN + prefixWidth, option.rect.top() + MARGIN + fm.ascent(), fileName);
     }
 
     painter->restore();

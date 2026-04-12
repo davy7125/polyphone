@@ -45,6 +45,9 @@ void DirectoryListModel::addFile(DirectoryFileData * fd)
         _files[path] = fd;
         _filePaths.append(path);
         endInsertRows();
+
+        connect(fd, SIGNAL(processFinished()), this, SLOT(onProcessFinished()));
+        fd->process();
     }
 }
 
@@ -74,12 +77,28 @@ void DirectoryListModel::updateFile(DirectoryFileData * fd)
         QModelIndex topLeft = index(row, 0);
         QModelIndex bottomRight = index(row, 0);
         emit dataChanged(topLeft, bottomRight, {Qt::DisplayRole, Qt::UserRole});
+
+        connect(fd, SIGNAL(processFinished()), this, SLOT(onProcessFinished()));
+        fd->process();
     }
     else
     {
         // Add it instead
         addFile(fd);
     }
+}
+
+void DirectoryListModel::onProcessFinished()
+{
+    // Row with complete data
+    DirectoryFileData * fd = dynamic_cast<DirectoryFileData *>(QObject::sender());
+    QString path = fd->getPath();
+    int row = _filePaths.indexOf(path);
+
+    // Notify the change
+    QModelIndex topLeft = index(row, 0);
+    QModelIndex bottomRight = index(row, 0);
+    emit dataChanged(topLeft, bottomRight, {Qt::DisplayRole, Qt::UserRole});
 }
 
 int DirectoryListModel::rowCount(const QModelIndex &parent) const

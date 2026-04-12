@@ -44,6 +44,9 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
+private slots:
+    void onProcessFinished();
+
 private:
     QList<QString> _filePaths;
     QMap<QString, DirectoryFileData *> _files;
