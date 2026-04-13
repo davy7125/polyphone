@@ -652,6 +652,11 @@ void SfzParamList::merge(AttributeType attributeType, double value)
 
 double SfzParamList::limit(double val, AttributeType champ)
 {
+    // No limits for offsets
+    if (champ == champ_startAddrsOffset || champ == champ_endAddrsOffset ||
+        champ == champ_startloopAddrsOffset || champ == champ_endloopAddrsOffset)
+        return val;
+
     // Limits applied in method "fromRealValue"
     AttributeValue value = Attribute::fromRealValue(champ, false, val);
     return Attribute::toRealValue(champ, false, value);
