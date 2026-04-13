@@ -76,7 +76,7 @@ private:
     bool _dragFlag;
     bool _cutFlag;
     bool _modifiedFlag;
-    double _sizeX;
+    int _sizeX;
 
     // Input data properties
     quint32 _sampleSize;

@@ -100,7 +100,7 @@ void GraphicsWave::setData(const QVector<float> &vData, quint32 sampleRate)
 
     // Set data
     _wavePainter->setData(vData);
-    _sizeX = static_cast<double>(vData.size()) - 1.0;
+    _sizeX = vData.size();
 
     // Save the sample rate
     _sampleRate = sampleRate;
@@ -128,11 +128,11 @@ void GraphicsWave::displayMultipleSelection(bool isOn)
 
 void GraphicsWave::setPosX(int posX)
 {
-    if (this->_qScrollX)
+    if (_qScrollX)
     {
         _bFromExt = true;
         if (_qScrollX->maximum() > 0)
-            _posX = static_cast<double>(posX) / this->_qScrollX->maximum();
+            _posX = static_cast<double>(posX) / _qScrollX->maximum();
         else
             _posX = 0.5;
         this->update();
@@ -199,8 +199,8 @@ void GraphicsWave::paintEvent(QPaintEvent *event)
     painter.drawLine(QPointF(-1, 0.875 * this->height()), QPointF(this->width() + 1, 0.875 * this->height()));
 
     // Paint the waveform
-    double etendueX = _sizeX / _zoomX;
-    double offsetX = (_sizeX - etendueX) * _posX - 1;
+    double etendueX = static_cast<double>(_sizeX) / _zoomX;
+    double offsetX = (static_cast<double>(_sizeX) - etendueX) * _posX - 1;
     quint32 start = offsetX < 0 ? 0 : static_cast<quint32>(offsetX);
     quint32 end = offsetX + etendueX < 0 ? 0 : static_cast<quint32>(offsetX + etendueX);
     if (start >= end)
@@ -358,12 +358,12 @@ void GraphicsWave::mouseReleaseEvent(QMouseEvent *event)
         if (!_modifiedFlag)
         {
             // Modification start loop
-            if (this->_spinStart && this->_spinEnd)
+            if (_spinStart && _spinEnd)
             {
-                if (this->_spinEnd->value() > startSamplePosition)
+                if (_spinEnd->value() > startSamplePosition)
                 {
-                    this->_spinEnd->setMinimum(startSamplePosition);
-                    this->_spinStart->setValue(startSamplePosition);
+                    _spinEnd->setMinimum(startSamplePosition);
+                    _spinStart->setValue(startSamplePosition);
                     emit startLoopChanged();
                 }
             }
@@ -399,12 +399,12 @@ void GraphicsWave::mouseReleaseEvent(QMouseEvent *event)
         if (!_modifiedFlag)
         {
             // Modification end loop
-            if (this->_spinStart && this->_spinEnd)
+            if (_spinStart && _spinEnd)
             {
-                if (this->_spinStart->value() < startSamplePosition)
+                if (_spinStart->value() < startSamplePosition)
                 {
-                    this->_spinStart->setMaximum(startSamplePosition);
-                    this->_spinEnd->setValue(startSamplePosition);
+                    _spinStart->setMaximum(startSamplePosition);
+                    _spinEnd->setValue(startSamplePosition);
                     emit endLoopChanged();
                 }
             }
@@ -482,19 +482,21 @@ void GraphicsWave::wheelEvent(QWheelEvent *event)
 
 int GraphicsWave::getSamplePosX(double zoomX, double shiftX, double x)
 {
-    int pos = static_cast<int>(_sizeX / zoomX * ((zoomX - 1) * shiftX + x) - 1.0);
+    double etendueX = static_cast<double>(_sizeX) / zoomX;
+    double offsetX = (static_cast<double>(_sizeX) - etendueX) * shiftX;
+    int pos = static_cast<int>(offsetX + x * etendueX);
     if (pos < 0)
         pos = 0;
-    else if (pos > _sizeX)
-        pos = qRound(_sizeX - 1.0);
+    else if (pos >= _sizeX)
+        pos = _sizeX - 1;
     return pos;
 }
 
 void GraphicsWave::zoom(QPoint point)
 {
     // Shift
-    double decX = static_cast<double>(point.x()) / this->width() - this->_xInit;
-    double decY = this->_yInit - static_cast<double>(point.y()) / this->height();
+    double decX = static_cast<double>(point.x()) / this->width() - _xInit;
+    double decY = _yInit - static_cast<double>(point.y()) / this->height();
 
     // Update zoom & drag
     double newZoomX = _zoomXinit * pow(2, 25.0 * decX);
@@ -531,7 +533,7 @@ void GraphicsWave::zoom(QPoint point)
 void GraphicsWave::drag(QPoint point)
 {
     // Shift
-    double decX = static_cast<double>(point.x()) / this->width() - this->_xInit;
+    double decX = static_cast<double>(point.x()) / this->width() - _xInit;
 
     // Update posX et posY
     if (_zoomXinit > 1)
