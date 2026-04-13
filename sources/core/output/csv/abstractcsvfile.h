@@ -39,7 +39,7 @@ public:
     QString getError() { return _error; }
 
 protected:
-    virtual QStringList getHeaders() = 0;
+    virtual QList<QString> getHeaders() = 0;
     bool writeLine(QStringList elements);
     void setError(QString error) { _error = error; }
 
