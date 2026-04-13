@@ -2073,7 +2073,7 @@ oversigt</translation>
     <message>
         <location filename="directory/directorybrowser.ui" line="550"/>
         <source>Search a file, a sample, an instrument or a preset...</source>
-        <translation type="unfinished"></translation>
+        <translation>Søg efter en fil, en sample, et instrument eller et preset...</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="110"/>
@@ -2084,7 +2084,7 @@ oversigt</translation>
     <message>
         <location filename="directory/directorybrowser.cpp" line="117"/>
         <source>The directory &quot;%1&quot; is not readable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mappen &quot;%1&quot; kan ikke læses.</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="233"/>
@@ -2111,7 +2111,7 @@ oversigt</translation>
     <message>
         <location filename="directory/directorybrowser.cpp" line="248"/>
         <source>A file with this name already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>En fil med dette navn findes allerede.</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="248"/>
@@ -2128,12 +2128,12 @@ oversigt</translation>
     <message>
         <location filename="directory/directorybrowser.cpp" line="261"/>
         <source>Confirm deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekræft sletning</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="262"/>
         <source>Are you sure you want to delete file &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Er du sikker på, at du vil slette filen &quot;%1&quot;?</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="264"/>
@@ -2201,41 +2201,41 @@ oversigt</translation>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="326"/>
         <source>%n division(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n division</numerusform>
+            <numerusform>%n divisioner</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="327"/>
         <source>%n parameter(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n parameter</numerusform>
+            <numerusform>%n parametre</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="328"/>
         <source>%n modulator(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n modulator</numerusform>
+            <numerusform>%n modulatorer</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="329"/>
         <source>%n distinct key range(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n særskilt tangentområde</numerusform>
+            <numerusform>%n særskilte tangentområder</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="330"/>
         <source>%n distinct velocity range(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n særskilt anslagsområde</numerusform>
+            <numerusform>%n særskilte anslagsområder</numerusform>
         </translation>
     </message>
 </context>
@@ -2244,28 +2244,28 @@ oversigt</translation>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="135"/>
         <source>Analyze in progress...</source>
-        <translation type="unfinished"></translation>
+        <translation>Analyse i gang...</translation>
     </message>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="138"/>
         <source>NOT READABLE</source>
-        <translation type="unfinished"></translation>
+        <translation>IKKE LÆSBAR</translation>
     </message>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="145"/>
         <source>Error when reading the file.</source>
         <oldsource>Error when opening the file.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Fejl ved læsning af filen.</translation>
     </message>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="316"/>
         <source>Rename file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Omdøb fil &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="321"/>
         <source>Delete file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Slet fil &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -2273,22 +2273,22 @@ oversigt</translation>
     <message>
         <location filename="directory/directorysortmenu.cpp" line="55"/>
         <source>Name (A→Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>Navn (A→Z)</translation>
     </message>
     <message>
         <location filename="directory/directorysortmenu.cpp" line="62"/>
         <source>Newest first</source>
-        <translation type="unfinished"></translation>
+        <translation>Nyeste først</translation>
     </message>
     <message>
         <location filename="directory/directorysortmenu.cpp" line="69"/>
         <source>Largest first</source>
-        <translation type="unfinished"></translation>
+        <translation>Største først</translation>
     </message>
     <message>
         <location filename="directory/directorysortmenu.cpp" line="76"/>
         <source>Smallest first</source>
-        <translation type="unfinished"></translation>
+        <translation>Mindste først</translation>
     </message>
 </context>
 <context>
@@ -2403,7 +2403,7 @@ oversigt</translation>
         <location filename="core/duplicator.cpp" line="769"/>
         <source>R&amp;eplace all</source>
         <translatorcomment>U&amp;dskift alle</translatorcomment>
-        <translation></translation>
+        <translation>E&amp;rstat alle</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="770"/>
@@ -2950,7 +2950,7 @@ oversigt</translation>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="316"/>
         <source>Opening a directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Åbner en mappe</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="359"/>
@@ -2982,7 +2982,8 @@ oversigt</translation>
         <source>  Open
   directory</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  Åbn
+  mappe</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="337"/>

@@ -2042,7 +2042,7 @@ online</translation>
     <message>
         <location filename="directory/directorybrowser.ui" line="550"/>
         <source>Search a file, a sample, an instrument or a preset...</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar um arquivo, uma amostra, um instrumento ou uma predefinição...</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="110"/>
@@ -2053,7 +2053,7 @@ online</translation>
     <message>
         <location filename="directory/directorybrowser.cpp" line="117"/>
         <source>The directory &quot;%1&quot; is not readable.</source>
-        <translation type="unfinished"></translation>
+        <translation>O diretório &quot;%1&quot; não pode ser lido.</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="233"/>
@@ -2080,7 +2080,7 @@ online</translation>
     <message>
         <location filename="directory/directorybrowser.cpp" line="248"/>
         <source>A file with this name already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>Já existe um arquivo com este nome.</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="248"/>
@@ -2097,12 +2097,12 @@ online</translation>
     <message>
         <location filename="directory/directorybrowser.cpp" line="261"/>
         <source>Confirm deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmar exclusão</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="262"/>
         <source>Are you sure you want to delete file &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Você tem certeza que quer excluir o arquivo &quot;%1&quot;?</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="264"/>
@@ -2170,41 +2170,41 @@ online</translation>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="326"/>
         <source>%n division(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n divisão</numerusform>
+            <numerusform>%n divisões</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="327"/>
         <source>%n parameter(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n parâmetro</numerusform>
+            <numerusform>%n parâmetros</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="328"/>
         <source>%n modulator(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n modulador</numerusform>
+            <numerusform>%n moduladores</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="329"/>
         <source>%n distinct key range(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n alcance de nota distinto</numerusform>
+            <numerusform>%n alcances de nota distintos</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="330"/>
         <source>%n distinct velocity range(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n alcance de velocidade distinto</numerusform>
+            <numerusform>%n alcances de velocidade distintos</numerusform>
         </translation>
     </message>
 </context>
@@ -2213,28 +2213,27 @@ online</translation>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="135"/>
         <source>Analyze in progress...</source>
-        <translation type="unfinished"></translation>
+        <translation>Análise em andamento...</translation>
     </message>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="138"/>
         <source>NOT READABLE</source>
-        <translation type="unfinished"></translation>
+        <translation>ILEGÍVEL</translation>
     </message>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="145"/>
         <source>Error when reading the file.</source>
-        <oldsource>Error when opening the file.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao ler o arquivo.</translation>
     </message>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="316"/>
         <source>Rename file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Renomear arquivo &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="321"/>
         <source>Delete file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Excluir arquivo &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -2242,22 +2241,22 @@ online</translation>
     <message>
         <location filename="directory/directorysortmenu.cpp" line="55"/>
         <source>Name (A→Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome (A→Z)</translation>
     </message>
     <message>
         <location filename="directory/directorysortmenu.cpp" line="62"/>
         <source>Newest first</source>
-        <translation type="unfinished"></translation>
+        <translation>Mais recentes primeiro</translation>
     </message>
     <message>
         <location filename="directory/directorysortmenu.cpp" line="69"/>
         <source>Largest first</source>
-        <translation type="unfinished"></translation>
+        <translation>Maiores primeiro</translation>
     </message>
     <message>
         <location filename="directory/directorysortmenu.cpp" line="76"/>
         <source>Smallest first</source>
-        <translation type="unfinished"></translation>
+        <translation>Menores primeiro</translation>
     </message>
 </context>
 <context>
@@ -2918,7 +2917,7 @@ online</translation>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="316"/>
         <source>Opening a directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrindo um diretório</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="359"/>
@@ -2950,7 +2949,8 @@ online</translation>
         <source>  Open
   directory</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  Abrir
+  diretório</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="337"/>

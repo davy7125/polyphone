@@ -2041,7 +2041,7 @@ repository</source>
     <message>
         <location filename="directory/directorybrowser.ui" line="550"/>
         <source>Search a file, a sample, an instrument or a preset...</source>
-        <translation type="unfinished"></translation>
+        <translation>파일, 샘플, 악기 또는 프리셋 검색...</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="110"/>
@@ -2052,7 +2052,7 @@ repository</source>
     <message>
         <location filename="directory/directorybrowser.cpp" line="117"/>
         <source>The directory &quot;%1&quot; is not readable.</source>
-        <translation type="unfinished"></translation>
+        <translation>디렉터리 &quot;%1&quot;을(를) 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="233"/>
@@ -2079,7 +2079,7 @@ repository</source>
     <message>
         <location filename="directory/directorybrowser.cpp" line="248"/>
         <source>A file with this name already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>같은 이름의 파일이 이미 존재합니다.</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="248"/>
@@ -2096,12 +2096,12 @@ repository</source>
     <message>
         <location filename="directory/directorybrowser.cpp" line="261"/>
         <source>Confirm deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>삭제 확인</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="262"/>
         <source>Are you sure you want to delete file &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 &quot;%1&quot;을(를) 정말로 삭제하시겠습니까?</translation>
     </message>
     <message>
         <location filename="directory/directorybrowser.cpp" line="264"/>
@@ -2169,36 +2169,36 @@ repository</source>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="326"/>
         <source>%n division(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n개의 분할</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="327"/>
         <source>%n parameter(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n개의 매개변수</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="328"/>
         <source>%n modulator(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n개의 모듈레이터</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="329"/>
         <source>%n distinct key range(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n개의 고유한 키 범위</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="directory/directoryfiledata.cpp" line="330"/>
         <source>%n distinct velocity range(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n개의 고유한 벨로시티 범위</numerusform>
         </translation>
     </message>
 </context>
@@ -2207,28 +2207,27 @@ repository</source>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="135"/>
         <source>Analyze in progress...</source>
-        <translation type="unfinished"></translation>
+        <translation>분석 진행 중...</translation>
     </message>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="138"/>
         <source>NOT READABLE</source>
-        <translation type="unfinished"></translation>
+        <translation>읽을 수 없음</translation>
     </message>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="145"/>
         <source>Error when reading the file.</source>
-        <oldsource>Error when opening the file.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>파일을 읽는 중 오류가 발생했습니다.</translation>
     </message>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="316"/>
         <source>Rename file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 &quot;%1&quot; 이름 바꾸기</translation>
     </message>
     <message>
         <location filename="directory/directorylistdelegate.cpp" line="321"/>
         <source>Delete file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 &quot;%1&quot; 삭제하기</translation>
     </message>
 </context>
 <context>
@@ -2236,22 +2235,22 @@ repository</source>
     <message>
         <location filename="directory/directorysortmenu.cpp" line="55"/>
         <source>Name (A→Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>이름 (A→Z)</translation>
     </message>
     <message>
         <location filename="directory/directorysortmenu.cpp" line="62"/>
         <source>Newest first</source>
-        <translation type="unfinished"></translation>
+        <translation>최신순</translation>
     </message>
     <message>
         <location filename="directory/directorysortmenu.cpp" line="69"/>
         <source>Largest first</source>
-        <translation type="unfinished"></translation>
+        <translation>가장 큰 순</translation>
     </message>
     <message>
         <location filename="directory/directorysortmenu.cpp" line="76"/>
         <source>Smallest first</source>
-        <translation type="unfinished"></translation>
+        <translation>가장 작은 순</translation>
     </message>
 </context>
 <context>
@@ -2911,7 +2910,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="316"/>
         <source>Opening a directory</source>
-        <translation type="unfinished"></translation>
+        <translation>디렉터리 열기</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="359"/>
@@ -2942,7 +2941,8 @@ repository</source>
         <source>  Open
   directory</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  디렉터리
+  열기</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="337"/>

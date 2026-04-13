@@ -19,6 +19,8 @@ polyphone (2.6) unstable; urgency=low
   * (fix) sample links are kept during an export
   * (fix) attenuation range correctly displayed in the modulator list
   * (fix) velocity range in the overview tables
+  * (fix) last point was hidden in the sample viewer
+  * (fix) correct loop written during the sfz export
 
  -- Davy Triponney <contact@polyphone.io>  Wed, 21 Jan 2026 10:30:00 +0100
 
