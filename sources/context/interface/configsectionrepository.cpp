@@ -29,6 +29,7 @@
 #include <QUrl>
 #include <QDir>
 #include <QFileDialog>
+#include <QDebug>
 #include <QStandardPaths>
 #include "utils.h"
 
