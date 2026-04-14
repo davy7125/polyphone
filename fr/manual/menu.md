@@ -28,7 +28,7 @@ Sauvegarder sous…
   Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`Maj`+:kbd:`S`.
 
 Exporter banques de sons…
-: Fusionne et exporte un ou plusieurs ensembles depuis les banques de sons ouvertes dans le format [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) ou [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz).
+: Fusionne et exporte un ou plusieurs ensembles depuis les banques de sons ouvertes dans le format [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) ou [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz). Le format additionnel .csv exporte tous les paramètres pour une analyse fine du contenu de la banque de sons.
   Accessible également avec le raccourci clavier :kbd:`Ctrl`+:kbd:`E`.
 
 

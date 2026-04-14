@@ -1,4 +1,4 @@
-Polyphone peut être exécuté en ligne de commande pour convertir des banques de sons dans les formats [sf2](#doc_sf2), [sf3](#doc_sf3) ou [sfz](#doc_sfz). Les formats de fichiers supportés pour la conversion sont [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) et [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
+Polyphone peut être exécuté en ligne de commande pour convertir des banques de sons dans les formats [sf2](#doc_sf2), [sf3](#doc_sf3) ou [sfz](#doc_sfz). Les formats de fichiers supportés pour la conversion sont [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark), [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ) et .csv.
 
 Une option peut être appelée pour ouvrir Polyphone en [mode synthé](#doc_synth).
 
@@ -113,7 +113,6 @@ polyphone -3 -i <fichier/à/convertir> -d <répertoire/de/destination> -o <nom_d
   * La première valeur est «&nbsp;1&nbsp;» si chaque ensemble doit être préfixé par son numéro d'ensemble, «&nbsp;0&nbsp;» sinon.
   * La deuxième valeur est «&nbsp;1&nbsp;» si un répertoire par banque doit être créé, «&nbsp;0&nbsp;» sinon.
   * La troisième valeur est «&nbsp;1&nbsp;» si la classification General MIDI doit être utilisée pour trier les ensembles, «&nbsp;0&nbsp;» sinon.
-  
 
 
 ### Exemple
@@ -121,6 +120,46 @@ polyphone -3 -i <fichier/à/convertir> -d <répertoire/de/destination> -o <nom_d
 
 ```
 polyphone -3 -i /adresse/du/fichier.sf3 -c '0|1|1'
+```
+
+
+## Conversion en .csv {#doc_csv}
+
+
+### Ligne de commande
+
+
+```
+polyphone -4 -i <fichier/à/convertir> -d <répertoire/de/destination> -o <nom_de_sortie> -c <configuration>
+```
+
+**Note&nbsp;:** avec Windows vous devez écrire l'adresse complète de Polyphone au lieu de simplement écrire :command:`polyphone`, ce qui nous donne par exemple :command:`C:/Program files/Polyphone/polyphone.exe`.
+
+
+### Arguments
+
+
+-4
+: Mode «&nbsp;4&nbsp;» est «&nbsp;convertir en .csv&nbsp;».
+
+-d
+: Répertoire de destination qui recevra la conversion du fichier d'entrée.
+  Cet argument est optionnel&nbsp;: par défaut le même repertoire que celui qui contient le fichier d'entrée est utilisé.
+
+-o
+: Nom de sortie sans l'extension du fichier converti (l'extension «&nbsp;.csv&nbsp;» sera ajoutée automatiquement).
+  Cet argument est optionnel&nbsp;: par défaut le nom du fichier d'entrée est utilisé.
+
+-c
+: Configuration de la conversion.
+  L'option 'raw' permet d'exporter des valeurs brutes (telles qu'elles sont enregistrées dans une soundfont) plutôt que des valeurs ayant des unités physiques et mesurables. Par exemple, la durée de relâchement exportée sera de 0,491 (millisecondes) ou de -1229 dans sa version brute. Par défaut, ce sont les valeurs avec des unités réelles qui sont exportées.
+
+
+### Exemple
+
+
+```
+polyphone -4 -i /adresse/du/fichier.sf2 -c 'raw'
 ```
 
 

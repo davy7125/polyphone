@@ -28,7 +28,7 @@ Save as…
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`Shift`+:kbd:`S`.
 
 Export soundfonts…
-: Merge and export one or several presets from the open soundfonts in the [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) or [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) format.
+: Merge and export one or several presets from the open soundfonts in the [.sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [.sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) or [.sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz) format. The additional .csv format exports all parameters for a detailed analysis of the soundfont content.
   Also accessible with the shortcut :kbd:`Ctrl`+:kbd:`E`.
 
 
