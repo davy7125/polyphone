@@ -32,8 +32,7 @@
 
 QVector<float> SampleUtils::int24ToFloat(const qint16 * data16, const quint8 * data24, quint32 length)
 {
-    QVector<float> result;
-    result.resize(length, 0.f);
+    QVector<float> result(length);
     if (data24 == nullptr)
     {
         for (quint32 i = 0; i < length; i++)
