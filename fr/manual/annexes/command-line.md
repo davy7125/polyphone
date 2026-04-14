@@ -1,4 +1,4 @@
-Polyphone peut être exécuté en ligne de commande pour convertir des banques de sons dans les formats [sf2](#doc_sf2), [sf3](#doc_sf3) ou [sfz](#doc_sfz). Les formats de fichiers supportés pour la conversion sont [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark), [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ) et .csv.
+Polyphone peut être exécuté en ligne de commande pour convertir des banques de sons dans les formats [sf2](#doc_sf2), [sf3](#doc_sf3), [sfz](#doc_sfz) ou [csv](#doc_csv). Les formats de fichiers supportés pour la conversion sont [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark) et [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
 
 Une option peut être appelée pour ouvrir Polyphone en [mode synthé](#doc_synth).
 
@@ -152,7 +152,7 @@ polyphone -4 -i <fichier/à/convertir> -d <répertoire/de/destination> -o <nom_d
 
 -c
 : Configuration de la conversion.
-  L'option 'raw' permet d'exporter des valeurs brutes (telles qu'elles sont enregistrées dans une soundfont) plutôt que des valeurs ayant des unités physiques et mesurables. Par exemple, la durée de relâchement exportée sera de 0,491 (millisecondes) ou de -1229 dans sa version brute. Par défaut, ce sont les valeurs avec des unités réelles qui sont exportées.
+  L'option «&nbsp;raw&nbsp;» permet d'exporter des valeurs brutes (telles qu'elles sont enregistrées dans une soundfont) plutôt que des valeurs ayant des unités physiques et mesurables. Par exemple, la durée de relâchement exportée sera de 0,491 (millisecondes) ou de -1229 dans sa version brute. Par défaut, ce sont les valeurs avec des unités réelles qui sont exportées.
 
 
 ### Exemple

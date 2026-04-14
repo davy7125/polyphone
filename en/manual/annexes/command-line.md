@@ -1,4 +1,4 @@
-Polyphone can be run with a command line to convert soundfonts in the format [sf2](#doc_sf2), [sf3](#doc_sf3) or [sfz](#doc_sfz). Supported file formats for the conversion are [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark), [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ), and .csv.
+Polyphone can be run with a command line to convert soundfonts in the format [sf2](#doc_sf2), [sf3](#doc_sf3), [sfz](#doc_sfz) or [csv](#doc_csv). Supported file formats for the conversion are [sf2](manual/annexes/the-different-soundfont-formats.md#doc_sf2), [sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3), [sfz](manual/annexes/the-different-soundfont-formats.md#doc_sfz), [sfArk](manual/annexes/the-different-soundfont-formats.md#doc_sfark), and [organ](manual/annexes/the-different-soundfont-formats.md#doc_organ).
 
 An option can also be called for opening Polyphone in [synth mode](#doc_synth).
 
@@ -152,7 +152,7 @@ polyphone -4 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c
 
 -c
 : Conversion configuration.
-  The option 'raw' can be used to export raw values (as they are stored in the soundfont file) rather than values with physical, measurable units. For example, the exported release time will be 0.491 (milliseconds) or -1229 in its raw form. By default, values with physical units are exported.
+  The option “raw” can be used to export raw values (as they are stored in the soundfont file) rather than values with physical, measurable units. For example, the exported release time will be 0.491 (milliseconds) or -1229 in its raw form. By default, values with physical units are exported.
 
 
 ### Example
