@@ -27,6 +27,7 @@
 #include <QFile>
 #include <QRegularExpression>
 #include <QLocale>
+#include <QDebug>
 
 #ifdef USE_WOLFSSL
 #include <wolfssl/options.h>
