@@ -52,11 +52,14 @@ Key names
 : Keys may be named depending on their number (according to MIDI specification), or depending on the name of middle C (C3, C4 or C5).
   Key names may comprise sharps or flats.
 
-Sort divisions
-: The division order within an instrument or a preset can be changed here.
-
 Unique instance
 : Open all files in a single window.
+
+Startup view
+: Select the view to display when a soundfont is open from the following: general information (default), sample list, first sample, instrument list, first instrument, preset list, first preset.
+
+Sort divisions
+: The division order within an instrument or a preset can be changed here.
 
 Theme
 : Different styles and predefined color sets are available for customizing the appearance of Polyphone.

@@ -52,11 +52,14 @@ Nom des notes
 : Les notes peuvent être nommées selon leur numéro (en accord avec la spécification MIDI), ou selon le nom du Do central (Do3, Do4 ou Do5).
   Le nom des notes peut contenir des dièses ou des bémols.
 
-Ordonner les divisions
-: L'ordre des divisions au sein d'un instrument ou d'un ensemble peut être changé ici.
-
 Instance unique
 : Ouvre tous les fichiers dans une seule et même fenêtre.
+
+Vue au démarrage
+: Sélectionne la vue à l'ouverture d'une banque de sons parmi&nbsp;: informations générales (par défaut), liste des échantillons, premier échantillon, liste des instruments, premier instrument, liste des ensembles, premier ensemble.
+
+Ordonner les divisions
+: L'ordre des divisions au sein d'un instrument ou d'un ensemble peut être changé ici.
 
 Thème
 : Différents styles et jeux de couleurs prédéfinis sont disponibles pour personnaliser l'apparence de Polyphone.
