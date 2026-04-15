@@ -61,7 +61,7 @@ Les couleurs du graphique sont éditables dans les [préférences](manual/settin
 ## Section «&nbsp;Information&nbsp;» {#doc_info}
 
 
-La section :guilabel:Informations` permet la visualisation - et dans la plupart des cas l'édition - des informations suivantes&nbsp;:
+La section :guilabel:`Informations` permet la visualisation - et dans la plupart des cas l'édition - des informations suivantes&nbsp;:
 
 Taille de l'échantillon
 : Le nombre de valeurs et la correspondance en secondes sont affichés.
@@ -81,13 +81,13 @@ Type de son
 : Choix du type parmi :guilabel:`mono`, :guilabel:`gauche`, :guilabel:`droite` ou :guilabel:`lié`.
   Si le type est :guilabel:`gauche`, :guilabel:`droite` ou :guilabel:`lié`, il est possible d'annuler le stéréo en choisissant :guilabel:`mono`.
   Lorsque :guilabel:`mono` est sélectionné, revenir à un état stéréo se fera en sélectionnant un échantillon lié.
-  Si la compression est possible ([format sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)), un bouton de compression est affiché pour tous les échantillons non compressés. Lors d'une compression, le choix de la qualité de la compression est demandée dans un dialogue.
-  **Note&nbsp;:** la décompression s'effectue automatiquement lors d'une édition de l'échantillon (application d'un filtre, coupure, amplification, etc.).
+  Si la compression est possible ([format sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)), un bouton de compression est affiché pour tous les échantillons non compressés. Lors d'une compression, le choix de la qualité de la compression est demandée dans un dialogue.\
+  Note&nbsp;: la décompression s'effectue automatiquement lors d'une édition de l'échantillon (application d'un filtre, coupure, amplification, etc.).
 
 ![Choix de la qualité de compression](images/sample_compress_dialog.png "Choix de la qualité de compression")
 
-: Échantillon lié
-  Sélection de l'échantillon à lier pour rendre le son stéréo.
+Échantillon lié
+: Sélection de l'échantillon à lier pour rendre le son stéréo.
   Si un échantillon est sélectionné, leur type passera à :guilabel:`lié` (ce type pourra ensuite être changé en :guilabel:`gauche` ou :guilabel:`droite`).
 
 Chaque modification d'un échantillon stéréo peut être répercutée sur l'échantillon lié si l'option :guilabel:`Édition stéréo` est cochée dans les [préférences](manual/settings.md#doc_general).
