@@ -294,7 +294,7 @@ QDataStream & operator << (QDataStream &out, Sf2PdtaPart &pdta)
     // Size of the section "phdr"
     out << pdta._phdrSize;
 
-    for (unsigned int i = 0; i < pdta._phdrs.count(); i++)
+    for (int i = 0; i < pdta._phdrs.count(); i++)
         out << pdta._phdrs[i];
 
     /// Write PBAG
@@ -306,7 +306,7 @@ QDataStream & operator << (QDataStream &out, Sf2PdtaPart &pdta)
     // Size of the section "pbag"
     out << pdta._pbagSize;
 
-    for (unsigned int i = 0; i < pdta._pbags.count(); i++)
+    for (int i = 0; i < pdta._pbags.count(); i++)
         out << pdta._pbags[i];
 
     /// Write PMOD
@@ -318,7 +318,7 @@ QDataStream & operator << (QDataStream &out, Sf2PdtaPart &pdta)
     // Size of the section "pmod"
     out << pdta._pmodSize;
 
-    for (unsigned int i = 0; i < pdta._pmods.count(); i++)
+    for (int i = 0; i < pdta._pmods.count(); i++)
         out << pdta._pmods[i];
 
     /// Write PGEN
@@ -330,7 +330,7 @@ QDataStream & operator << (QDataStream &out, Sf2PdtaPart &pdta)
     // Size of the section "pgen"
     out << pdta._pgenSize;
 
-    for (unsigned int i = 0; i < pdta._pgens.count(); i++)
+    for (int i = 0; i < pdta._pgens.count(); i++)
         out << pdta._pgens[i];
 
     /// Write INST
@@ -342,7 +342,7 @@ QDataStream & operator << (QDataStream &out, Sf2PdtaPart &pdta)
     // Size of the section "inst"
     out << pdta._instSize;
 
-    for (unsigned int i = 0; i < pdta._insts.count(); i++)
+    for (int i = 0; i < pdta._insts.count(); i++)
         out << pdta._insts[i];
 
     /// Write IBAG
@@ -354,7 +354,7 @@ QDataStream & operator << (QDataStream &out, Sf2PdtaPart &pdta)
     // Size of the section "ibag"
     out << pdta._ibagSize;
 
-    for (unsigned int i = 0; i < pdta._ibags.count(); i++)
+    for (int i = 0; i < pdta._ibags.count(); i++)
         out << pdta._ibags[i];
 
     /// Write IMOD
@@ -366,7 +366,7 @@ QDataStream & operator << (QDataStream &out, Sf2PdtaPart &pdta)
     // Size of the section "imod"
     out << pdta._imodSize;
 
-    for (unsigned int i = 0; i < pdta._imods.count(); i++)
+    for (int i = 0; i < pdta._imods.count(); i++)
         out << pdta._imods[i];
 
     /// Write IGEN
@@ -378,7 +378,7 @@ QDataStream & operator << (QDataStream &out, Sf2PdtaPart &pdta)
     // Size of the section "igen"
     out << pdta._igenSize;
 
-    for (unsigned int i = 0; i < pdta._igens.count(); i++)
+    for (int i = 0; i < pdta._igens.count(); i++)
         out << pdta._igens[i];
 
     /// Write SHDR
@@ -390,7 +390,7 @@ QDataStream & operator << (QDataStream &out, Sf2PdtaPart &pdta)
     // Size of the section "shdr"
     out << pdta._shdrSize;
 
-    for (unsigned int i = 0; i < pdta._shdrs.count(); i++)
+    for (int i = 0; i < pdta._shdrs.count(); i++)
         out << pdta._shdrs[i];
 
     pdta._isValid = true;

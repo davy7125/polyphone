@@ -592,19 +592,19 @@ bool SampleUtils::loopStep1(QVector<float> vData, quint32 dwSmplRate, quint32 &l
     if (vData.count() > 40000)
     {
         posStart = 4000;
-        if (posEnd + 400 > vData.count())
+        if (posEnd + 400 > (quint32)vData.count())
             posEnd = vData.count() - 400;
     }
     else if (vData.count() > 4000)
     {
         posStart = 400;
-        if (posEnd + 400 > vData.count())
+        if (posEnd + 400 > (quint32)vData.count())
             posEnd = vData.count() - 400;
     }
     else
     {
         posStart = 2;
-        if (posEnd + 1 > vData.count())
+        if (posEnd + 1 > (quint32)vData.count())
             posEnd = vData.count() - 1;
     }
 
@@ -1235,7 +1235,7 @@ float SampleUtils::computeLoopQuality(QVector<float> vData, quint32 loopStart, q
         {
             offset += (M_PI_2 /* something irrational */ + i - 1) * i;
 
-            if (loopEnd + 3 + offset < vData.size())
+            if (loopEnd + 3 + offset < (quint32)vData.size())
             {
                 result += getDiffForLoopQuality(data, loopStart + offset - 1, loopEnd + offset - 1);
                 n += 1;

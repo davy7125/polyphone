@@ -311,7 +311,7 @@ void InputParserSf::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPar
             // Modulators
             for (unsigned int k = modmin; k < modmax; k++)
             {
-                if (k >= pdtaPart._imods.count())
+                if (k >= (quint32)pdtaPart._imods.count())
                 {
                     error = "invalid imod index";
                     return;
