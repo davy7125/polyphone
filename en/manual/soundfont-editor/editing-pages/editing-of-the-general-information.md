@@ -32,9 +32,14 @@ Copyright
 Comments
 : Information not included in any of the previous categories.
 
-Kind of samples
-: Indicates whether the samples are stored with a 16-bit or 24-bit resolution.
+Bit depth
+: Indicates whether the samples are stored with a 16-bit or 24-bit resolution (in which case the compression is not allowed).
   Please note that 24-bit samples may not be supported in some synthesizers.
+
+Compression
+: Enables the sample compression (in which case the bit depth is set to 16 bits). If this option is enabled, a compress button will be displayed in the [sample editor](manual/soundfont-editor/editing-pages/sample-editor.md).
+  The compression is a feature provided by the [sf3 format](manual/annexes/the-different-soundfont-formats.md#doc_sf3) and might not be supported by all synthesizers.
+  Enabling or disabling this option will determine the file format when saving, and Polyphone will change the file extension .sf2 / .sf3 if necessary.
 
 
 ## General information {#doc_info}

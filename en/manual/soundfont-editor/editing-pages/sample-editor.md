@@ -61,18 +61,34 @@ Graph colors are editable in the software [preferences](manual/settings.md#doc_i
 ## Section “Information” {#doc_info}
 
 
-The section “Information” allows the editing of the following information:
+The :guilabel:`Information` section allows viewing - and in most cases editing - the following information:
 
-* start and end of the loop,
-* root key of the sample and its correction to be applied for the sound to be tuned in the equal temperament,
-* sound sample rate (a change will cause re-sampling),
-* sound type (not linked: mono, otherwise left, right or linked),
-* the linked sample if the sample is stereo.
+Sample size
+: The number of values and the corresponding duration in seconds are displayed.
 
-In addition, the sample size in samples (number of values) and seconds is shown.
+Loop
+: The loop start and end points can be modified here.
+  A button edits the start and end positions so that the loop spans the entire sample.
 
-A button edits the start and end of the loop so that the loop is the entire sample.
-Another button edits the root key and the correction so that they match with the evaluation of the [frequency](#doc_freq).
+Tuning
+: Ability to adjust the root note of a sample and its correction in cents so that the sound is tuned to equal temperament.
+  A button edits the root note and correction so that the values match the estimated [frequency](#doc_freq).
+
+Sample rate
+: Any modification will trigger a resampling so that the pitch of the sound is not altered.
+
+Sound type
+: Select the type among :guilabel:`mono`, :guilabel:`left`, :guilabel:`right` or :guilabel:`linked`.
+  If the type is :guilabel:`left`, :guilabel:`right` or :guilabel:`linked`, it is possible to cancel the stereo by selecting :guilabel:`mono`.
+  When :guilabel:`mono` is selected, reverting to a stereo state will be done by selecting a linked sample.
+  If compression is possible ([sf3 format](manual/annexes/the-different-soundfont-formats.md#doc_sf3)), a compression button is displayed for all uncompressed samples. When compressing, the choice of compression quality is requested in a dialog.
+  **Note:** decompression is performed automatically when editing the sample (applying a filter, trimming, amplifying, etc.).
+
+![Compression quality selection](images/sample_compress_dialog.png "Compression quality selection")
+
+: Linked sample
+  Selection of the sample to link to make the sound stereo.
+  If a sample is selected, their type will switch to :guilabel:`linked` (this type can then be changed to :guilabel:`left` or :guilabel:`right`).
 
 Any change on a stereo sample may be applied on the linked sample if the option :guilabel:`Stereo editing` is ticked in the [preferences](manual/settings.md#doc_general).
 Via a multiple selection in the [tree](manual/soundfont-editor/tree.md), several samples may be edited simultaneously.

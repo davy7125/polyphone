@@ -32,9 +32,14 @@ Copyright
 Commentaires
 : Pour ajouter des informations non incluses dans les catégories précédentes.
 
-Type d'échantillons
-: Indique si les échantillons sont stockés avec une précision de 16 bits ou 24 bits.
+Profondeur de bits
+: Indique si les échantillons sont stockés avec une précision de 16 bits ou 24 bits (dans quel cas la compression n'est plus autorisée).
   Les échantillons 24 bits peuvent ne pas être supportés par tous les synthétiseurs.
+
+Compression
+: Rend possible la compression des échantillons (dans quel cas la précision est réglée à 16 bits). Si cette option est activée, un bouton de compression apparaitra dans l'éditeur des [échantillons](manual/soundfont-editor/editing-pages/sample-editor.md).
+  La compression est une fonctionnalité apportée par le [format sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3) et peut ne pas être supportée par tous les synthétiseurs.
+  L'activation ou la désactivation de cette option définira le format lors de la sauvegarde et Polyphone proposera un changement d'extension .sf2 / .sf3 si nécessaire.
 
 
 ## Informations générales {#doc_info}

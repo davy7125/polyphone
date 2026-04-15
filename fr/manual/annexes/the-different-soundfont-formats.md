@@ -32,10 +32,10 @@ Les spécifications sf2 sont disponibles [ici](files/sf_specifications_v2.01.pdf
 ## Banques de sons sf3 {#doc_sf3}
 
 
-Le format sf3, développé par <a href="https://musescore.org/" target="_blank">MuseScore</a>, est similaire en tout point au format sf2 sauf pour les [échantillons](manual/soundfont-editor/editing-pages/sample-editor.md) qui sont stockés dans le format OGG (version open-source du format MP3) au lieu d'être stockés en données brutes.
+Le format sf3, développé par <a href="https://musescore.org/" target="_blank">MuseScore</a>, est similaire en tout point au format sf2 sauf pour les [échantillons](manual/soundfont-editor/editing-pages/sample-editor.md) qui peuvent être stockés dans le format OGG (version open-source du format MP3) au lieu d'être stockés en données brutes.
 La conséquence est que le format sf3 est environ 10 fois plus léger que le format sf2 pour une qualité comparable.
 
-Une banque de son exportée dans ce format n'a pas pour but d'être ré-éditée ultérieurement à cause des compressions successives qui pourraient induire un abaissement de la qualité du son.
+Les échantillons compressés dans une banque de son exportée dans ce format n'ont pas pour but d'être ré-édités ultérieurement à cause des compressions successives qui pourraient induire un abaissement de la qualité du son.
 Ce format doit être considéré comme un produit final et est très intéressant pour les utilisateurs finaux des banques de sons car&nbsp;:
 
 * les téléchargements sont plus rapides sur internet,

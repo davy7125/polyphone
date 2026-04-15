@@ -20,6 +20,7 @@ For each sample, this page allows for example to perform the following checks:
 * Has the tuning been done?
 * Is it properly linked in stereo?
 * Is the sampling rate high enough for a good audio quality?
+* Has it been compressed?
 
 
 ## Instruments {#doc_instrument}

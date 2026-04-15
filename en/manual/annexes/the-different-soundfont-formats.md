@@ -32,10 +32,10 @@ The sf2 specifications are available [here](files/sf_specifications_v2.01.pdf) f
 ## Sf3 soundfonts {#doc_sf3}
 
 
-The sf3 format, developed by <a href="https://musescore.org/" target="_blank">MuseScore</a>, is similar in all respects to the sf2 format except that the [samples](manual/soundfont-editor/editing-pages/sample-editor.md) are stored in the OGG format (like the MP3 format but open source) instead of being stored as raw data.
+The sf3 format, developed by <a href="https://musescore.org/" target="_blank">MuseScore</a>, is similar in all respects to the sf2 format except that the [samples](manual/soundfont-editor/editing-pages/sample-editor.md) can be stored in the OGG format (like the MP3 format but open-source) instead of being stored as raw data.
 The consequence is that the sf3 format is about 10 times lighter than the sf2 format for a comparable quality.
 
-A soundfont exported in this format is not intended to be edited later because successive compressions would result in a lower sound quality.
+The compressed samples in a soundfont exported in this format are not intended to be edited later because successive compressions would result in a lower sound quality.
 This format should be seen as a final product and is very interesting for all end users of soundfonts in that:
 
 * downloads are made easier on internet,

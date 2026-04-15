@@ -61,18 +61,34 @@ Les couleurs du graphique sont éditables dans les [préférences](manual/settin
 ## Section «&nbsp;Information&nbsp;» {#doc_info}
 
 
-La section «&nbsp;Information&nbsp;» permet l'édition des informations suivantes&nbsp;:
+La section :guilabel:Informations` permet la visualisation - et dans la plupart des cas l'édition - des informations suivantes&nbsp;:
 
-* début et fin de la boucle,
-* note de base d'un échantillon et sa correction à appliquer pour que le son soit accordé dans le tempérament égal,
-* fréquence d'échantillonnage du son (une modification déclenchera un ré-échantillonnage),
-* type de son (non lié&nbsp;: mono, sinon gauche, droite ou lié),
-* l'échantillon lié si l'échantillon est stéréo.
+Taille de l'échantillon
+: Le nombre de valeurs et la correspondance en secondes sont affichés.
 
-Par ailleurs, la taille de l'échantillon en nombre de valeurs et en secondes est affiché.
+Boucle
+: Le début et la fin de la boucle peuvent être modifiés ici.
+  Un bouton édite les positions de début et de fin de manière à ce que la boucle représente l'échantillon entier.
 
-Un bouton édite les positions de début et de fin de la boucle de manière à ce que la boucle représente l'échantillon entier.
-Un autre bouton édite la note de base et la correction de sorte que les valeurs concordent avec l'estimation de la [fréquence](#doc_freq).
+Accordage
+: Possibilité d'ajuster la note de base d'un échantillon et sa correction en centièmes de demi-ton pour que le son soit accordé dans le tempérament égal.
+  Un bouton édite la note de base et la correction de sorte que les valeurs concordent avec l'estimation de la [fréquence](#doc_freq).
+
+Fréquence d'échantillonnage du son
+: Chaque modification déclenchera un ré-échantillonnage de manière à ce que la hauteur du son ne soit pas altérée.
+
+Type de son
+: Choix du type parmi :guilabel:`mono`, :guilabel:`gauche`, :guilabel:`droite` ou :guilabel:`lié`.
+  Si le type est :guilabel:`gauche`, :guilabel:`droite` ou :guilabel:`lié`, il est possible d'annuler le stéréo en choisissant :guilabel:`mono`.
+  Lorsque :guilabel:`mono` est sélectionné, revenir à un état stéréo se fera en sélectionnant un échantillon lié.
+  Si la compression est possible ([format sf3](manual/annexes/the-different-soundfont-formats.md#doc_sf3)), un bouton de compression est affiché pour tous les échantillons non compressés. Lors d'une compression, le choix de la qualité de la compression est demandée dans un dialogue.
+  **Note&nbsp;:** la décompression s'effectue automatiquement lors d'une édition de l'échantillon (application d'un filtre, coupure, amplification, etc.).
+
+![Choix de la qualité de compression](images/sample_compress_dialog.png "Choix de la qualité de compression")
+
+: Échantillon lié
+  Sélection de l'échantillon à lier pour rendre le son stéréo.
+  Si un échantillon est sélectionné, leur type passera à :guilabel:`lié` (ce type pourra ensuite être changé en :guilabel:`gauche` ou :guilabel:`droite`).
 
 Chaque modification d'un échantillon stéréo peut être répercutée sur l'échantillon lié si l'option :guilabel:`Édition stéréo` est cochée dans les [préférences](manual/settings.md#doc_general).
 Grâce à une sélection multiple dans l'[arborescence](manual/soundfont-editor/tree.md), plusieurs échantillons peuvent être édités simultanément.

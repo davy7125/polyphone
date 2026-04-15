@@ -20,6 +20,7 @@ Pour chaque échantillon, ce résumé permet par exemple d'effectuer les vérifi
 * L'accordage a-t-il été effectué&nbsp;?
 * Est-il proprement lié en stéréo&nbsp;?
 * Le taux d'échantillonnage est-il suffisant pour une bonne qualité audio&nbsp;?
+* A-t-il été compressé&nbsp;?
 
 
 ## Instruments {#doc_instrument}
