@@ -8,7 +8,7 @@ To open the online repository, click on :guilabel:`Online repository` or write a
 Once the online repository is open in a new tab, the list of soundfonts available for download is dispalayed and it is possible to search, sort and filter the results.
 
 
-![Browsing soundfonts](images/online_repository_browsing.png "Browsing soundfonts")
+![Online repository](images/online_repository.png "Online repository")
 
 
 ### Searching a soundfont
