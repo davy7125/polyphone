@@ -1,15 +1,14 @@
-The soundfont browser is a link between Polyphone and the soundfont library of the Polyphone website.
-It allows you, directly in Polyphone, to download, test and possibly re-use soundfonts.
+The online soundfont repository can be accessed directly in Polyphone, making it possible to download, test and possibly re-use soundfonts.
 
 
-## Browsing soundfonts {#doc_browse}
+## Access to the repository {#doc_access}
 
 
-To open the soundfont browser, click on :guilabel:`Online library` or write a keyword on the [home screen](manual/index.md).
-Once the soundfont browser is open in a new tab, it is possible to search, sort and filter the results.
+To open the online repository, click on :guilabel:`Online repository` or write a keyword on the [home screen](manual/index.md).
+Once the online repository is open in a new tab, the list of soundfonts available for download is dispalayed and it is possible to search, sort and filter the results.
 
 
-![Browsing soundfonts](images/soundfont_browser_browsing.png "Browsing soundfonts")
+![Browsing soundfonts](images/online_repository_browsing.png "Browsing soundfonts")
 
 
 ### Searching a soundfont
@@ -70,12 +69,12 @@ Tags
 ## Soundfont description {#doc_description}
 
 
-Opening a soundfont description can be made with a double-click on a cell in the :guilabel:`Daily soundfonts` of the [home screen](manual/index.md#doc_right) or in the [soundfont browser](#doc_browse).
-A Premium account is required for soundfonts that are not in the :guilabel:`Daily soundfonts`.
-Connecting Polyphone to your account is possible in the [settings](manual/settings.md#doc_library) of the software.
+Opening a soundfont description can be made with a double-click on a cell in the :guilabel:`Daily soundfonts` of the [home screen](manual/index.md#doc_right) or in the [soundfont list](#doc_access).
+A [Premium account](premium) is required for soundfonts that are not in the :guilabel:`Daily soundfonts`.
+Connecting Polyphone to your account is possible in the [settings](manual/settings.md#doc_repository) of the software.
 
 
-![Description page of a soundfont](images/soundfont_browser_description.png "Description page of a soundfont")
+![Description page of a soundfont](images/online_repository_description.png "Description page of a soundfont")
 
 
 The description of a soundfont is made of:
@@ -96,4 +95,4 @@ It is possible from the menu to clear the completed downloads.
 If everything is cleared, the download menu disappears.
 
 
-![Dowloading soundfonts](images/soundfont_browser_download.png "Dowloading soundfonts")
+![Dowloading soundfonts](images/online_repository_download.png "Dowloading soundfonts")

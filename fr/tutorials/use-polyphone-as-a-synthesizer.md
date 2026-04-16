@@ -1,4 +1,4 @@
-Polyphone n'est pas qu'un éditeur de soundfonts, c'est aussi un synthétiseur complet permettant de jouer avec un clavier MIDI.
+Polyphone n'est pas qu'un éditeur de banques de sons, c'est aussi un synthétiseur complet permettant de jouer avec un clavier MIDI.
 Ce tutoriel indique comment lancer Polyphone en mode «&nbsp;synthé&nbsp;».
 
 ## Prérequis

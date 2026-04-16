@@ -5,7 +5,7 @@ Elles sont divisées en cinq sections&nbsp;:
 * [Interface](#doc_interface)
 * [Son](#doc_sound)
 * [Clavier virtuel](#doc_keyboard)
-* [Banques de sons en ligne](#doc_library)
+* [Banques de sons en ligne](#doc_repository)
 
 
 ## Général {#doc_general}
@@ -103,15 +103,15 @@ Pour les musiciens plus avancés, le diapason et le tempérament peuvent être r
 ![Préférences, keyboard](images/settings_keyboard.png "Préférences, keyboard")
 
 
-## Banques de sons en ligne {#doc_library}
+## Banques de sons en ligne {#doc_repository}
 
 
-Les identifiants de connexion peuvent être entrés pour lier Polyphone à un compte, un compte Premium permettant de débloquer l'[explorateur de banques de sons](manual/soundfont-browser.md).
+Les identifiants de connexion peuvent être entrés pour lier Polyphone à un compte, un [compte Premium](premium) permettant de débloquer le [dépôt en ligne](manual/online-repository.md).
 
-Le répertoire de téléchargement utilisé par l'[explorateur](manual/soundfont-browser.md) peut être changé ici.
+Le répertoire utilisé pour les téléchargements de banques de sons depuis le [dépôt](manual/online-repository.md) peut être changé ici.
 
 
-![Préférences, banques de sons en ligne](images/settings_library.png "Préférences, banques de sons en ligne")
+![Préférences, banques de sons en ligne](images/settings_repository.png "Préférences, banques de sons en ligne")
 
 
 

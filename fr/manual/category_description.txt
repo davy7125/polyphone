@@ -1,5 +1,6 @@
 Cette section contient la description du logiciel Polyphone&nbsp;:
 
 * l'éditeur de banques de sons,
-* les banques de sons en ligne,
+* l'explorateur de banques de sons,
+* le dépôt de banques de sons en ligne,
 * la configuration.

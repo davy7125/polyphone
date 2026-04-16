@@ -98,7 +98,7 @@ Ce format tend à être obsolète dû à de nombreux problèmes de conception, c
 ## Dispositions GrandOrgue {#doc_organ}
 
 
-GrandOrgue est un logiciel dont le but principal est d'émuler des instruments tels que des orgues à tuyaux. La définition d'un orgue est faite par une série de fichiers wav, chaque fichier contenant le son d'un tuyau, et un fichier avec l'extension «&nbsp;.organ&nbsp;» qui contient tous les paramètres nécessaires pour créer un orgue basé sur tous les fichiers wav. Globalement, tous les échantillons sont associés à des touches spécifiques et sont regroupés par jeux, qui peuvent être activés ou désactivés lorsque l'on joue de l'orgue. Polyphone est capable de créer des soundfonts basées sur ce mapping mais ne supporte pas la conversion des soundfonts vers le format GrandOrgue.
+GrandOrgue est un logiciel dont le but principal est d'émuler des instruments tels que des orgues à tuyaux. La définition d'un orgue est faite par une série de fichiers wav, chaque fichier contenant le son d'un tuyau, et un fichier avec l'extension «&nbsp;.organ&nbsp;» qui contient tous les paramètres nécessaires pour créer un orgue basé sur tous les fichiers wav. Globalement, tous les échantillons sont associés à des touches spécifiques et sont regroupés par jeux, qui peuvent être activés ou désactivés lorsque l'on joue de l'orgue. Polyphone est capable de créer des banques de sons basées sur ce mapping mais ne supporte pas la conversion des banques de sons vers le format GrandOrgue.
 
 ### Limitation sur l'importation
 

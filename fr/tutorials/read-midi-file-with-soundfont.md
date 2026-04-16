@@ -9,7 +9,7 @@ Les fichiers au format MIDI contiennent des messages MIDI qui, mis ensemble, for
 
 <p>Un fichier MIDI peut piloter jusqu'à 16 canaux différents, permettant l'usage en parallèle de 16 instruments différents. En plus d'indiquer quelles notes jouer, le fichier MIDI contient des instructions demandant au synthétiseur d'utiliser l'instrument X de la banque Y pour les notes à venir du canal Z. Pour permettre une sélection correcte des instruments, la banque de sons utilisée par le synthétiseur doit respecter la norme <a href="https://fr.wikipedia.org/wiki/General_MIDI" target="_blank">General MIDI</a> qui assigne, pour chaque numéros X et Y, un instrument précis. Par exemple, l'instrument <strong>001</strong> doit correspondre à un piano dans la banque de sons.</p>
 
-<p>Pour récapituler, nous allons parler ici de la lecture d'un fichier MIDI pilotant un synthétiseur déclenchant des sons contenus dans une banque de son au format SoundFont respectant la norme General MIDI. La suite est plus simple&nbsp;!</p>
+<p>Pour récapituler, nous allons parler ici de la lecture d'un fichier MIDI pilotant un synthétiseur déclenchant des sons contenus dans une banque de sons au format SoundFont respectant la norme General MIDI. La suite est plus simple&nbsp;!</p>
 </div>
 
 ## Prérequis
@@ -29,7 +29,7 @@ Cliquez sur le bouton :guilabel:`Charger un fichier MIDI`, sélectionnez votre f
 
 ![Le lecteur MIDI et synthétiseur SpessaSynth](images/SpessaSynth.jpg "Le lecteur MIDI et synthétiseur SpessaSynth")
 
-## Choisir la soundfont
+## Choisir la banque de sons
 
 Pour utiliser la banque de sons de votre choix, cliquez sur le bouton :guilabel:`Charger une banque de sons` et sélectionnez votre fichier.
 

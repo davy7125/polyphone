@@ -5,7 +5,7 @@ They are divided into five sections:
 * [Interface](#doc_interface)
 * [Sound](#doc_sound)
 * [Virtual keyboard](#doc_keyboard)
-* [Online library](#doc_library)
+* [Online repository](#doc_repository)
 
 
 ## General {#doc_general}
@@ -103,15 +103,15 @@ For more advanced musicians, the tuning and temperament can be changed here.
 ![Settings, keyboard](images/settings_keyboard.png "Settings, keyboard")
 
 
-## Online library {#doc_library}
+## Online repository {#doc_repository}
 
 
-Identifiers can be entered here to link Polyphone with an account, a Premium account unlocking the [soundfont browser](manual/soundfont-browser.md).
+Identifiers can be entered here to link Polyphone with an account, a [Premium account](premium) unlocking the [online repository](manual/online-repository.md).
 
-The download directory used by the [soundfont browser](manual/soundfont-browser.md) can be changed here.
+The directory used when downloading soundfonts from the [online repository](manual/online-repository.md) can be changed here.
 
 
-![Settings, library](images/settings_library.png "Settings, library")
+![Settings, repository](images/settings_repository.png "Settings, repository")
 
 
 

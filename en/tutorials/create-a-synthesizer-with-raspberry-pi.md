@@ -78,7 +78,7 @@ apt-get update
 apt-get upgrade
 ```
 
-Then install **Polyphone** using the .deb package available on this [page](software). Connect the MIDI keyboard via USB to the Raspberry Pi (disconnect the computer keyboard if no USB port is available), then open Polyphone and select the MIDI keyboard from the drop-down list of MIDI inputs in the [settings](manual/settings.md#doc_general). By downloading a soundfont, for example from the [library](soundfonts), it's already possible to play an instrument with the MIDI keyboard associated with the Raspberry Pi!
+Then install **Polyphone** using the .deb package available on this [page](software). Connect the MIDI keyboard via USB to the Raspberry Pi (disconnect the computer keyboard if no USB port is available), then open Polyphone and select the MIDI keyboard from the drop-down list of MIDI inputs in the [settings](manual/settings.md#doc_general). By downloading a soundfont, for example from the [repository](soundfonts), it's already possible to play an instrument with the MIDI keyboard associated with the Raspberry Pi!
 
 ### Launching Polyphone automatically
 

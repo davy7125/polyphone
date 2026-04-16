@@ -1,15 +1,14 @@
-L'explorateur de banques de sons en ligne est un lien entre Polyphone et le dépôt de banques de sons sur le site web de Polyphone.
-Il vous permet, directement dans Polyphone, de télécharger, tester et potentiellement ré-utiliser des banques de sons.
+Le dépôt en ligne de banques de sons peut être ouvert directement dans Polyphone, ce qui permet de télécharger, tester et potentiellement ré-utiliser des banques de sons.
 
 
-## Explorer les banques de sons {#doc_browse}
+## Accès au dépôt {#doc_access}
 
 
-Pour ouvrir l'explorateur, cliquez sur :guilabel:`Banques de sons en ligne` ou écrivez un mot-clef sur l'[écran d'accueil](manual/index.md).
-Une fois l'explorateur ouvert dans un nouvel onglet, il est possible de chercher, trier et filtrer les résultats.
+Pour ouvrir le dépôt en ligne, cliquez sur :guilabel:`Banques de sons en ligne` ou écrivez un mot-clef sur l'[écran d'accueil](manual/index.md).
+Une fois le dépôt ouvert dans un nouvel onglet, la liste des banques de sons disponibles au téléchargement est affichée et il est possible de chercher, trier et filtrer les résultats.
 
 
-![Explorer les banques de sons](images/soundfont_browser_browsing.png "Explorer les banques de sons")
+![Dépôt en ligne](images/online_repository.png "Dépôt en ligne")
 
 
 ### Rechercher une banque de sons
@@ -70,12 +69,12 @@ Tags
 ## Page de présentation {#doc_description}
 
 
-L'ouverture d'une page de présentation se fait à l'aide d'un double-clic sur un élément dans les :guilabel:`Banques de sons du jour` de l'[écran d'accueil](manual/index.md#doc_right) ou dans l'[explorateur de banques de sons](#doc_browse).
-Un compte Premium est requis pour les banques de sons qui n'apparaissent pas dans les :guilabel:`Banques de sons du jour`.
-Connecter Polyphone à votre compte est possible dans les [préférences](manual/settings.md#doc_library) du logiciel.
+L'ouverture d'une page de présentation se fait à l'aide d'un double-clic sur un élément dans les :guilabel:`Banques de sons du jour` de l'[écran d'accueil](manual/index.md#doc_right) ou dans la [liste](#doc_access).
+Un [compte Premium](premium) est requis pour les banques de sons qui n'apparaissent pas dans les :guilabel:`Banques de sons du jour`.
+Connecter Polyphone à votre compte est possible dans les [préférences](manual/settings.md#doc_repository) du logiciel.
 
 
-![Page de présentation](images/soundfont_browser_description.png "Page de présentation")
+![Page de présentation](images/online_repository_description.png "Page de présentation")
 
 
 Une page de présentation est composée&nbsp;:
@@ -96,4 +95,4 @@ Il est possible depuis le menu de nettoyer tous les téléchargements terminés.
 Une fois que tout est nettoyé, le menu de téléchargement disparaît.
 
 
-![Téléchargement des banques de sons](images/soundfont_browser_download.png "Téléchargement des banques de sons")
+![Téléchargement des banques de sons](images/online_repository_download.png "Téléchargement des banques de sons")

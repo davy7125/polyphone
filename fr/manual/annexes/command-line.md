@@ -152,7 +152,7 @@ polyphone -4 -i <fichier/à/convertir> -d <répertoire/de/destination> -o <nom_d
 
 -c
 : Configuration de la conversion.
-  L'option «&nbsp;raw&nbsp;» permet d'exporter des valeurs brutes (telles qu'elles sont enregistrées dans une soundfont) plutôt que des valeurs ayant des unités physiques et mesurables. Par exemple, la durée de relâchement exportée sera de 0,491 (millisecondes) ou de -1229 dans sa version brute. Par défaut, ce sont les valeurs avec des unités réelles qui sont exportées.
+  L'option «&nbsp;raw&nbsp;» permet d'exporter des valeurs brutes (telles qu'elles sont enregistrées dans une banque de sons) plutôt que des valeurs ayant des unités physiques et mesurables. Par exemple, la durée de relâchement exportée sera de 0,491 (millisecondes) ou de -1229 dans sa version brute. Par défaut, ce sont les valeurs avec des unités réelles qui sont exportées.
 
 
 ### Exemple

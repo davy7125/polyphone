@@ -14,13 +14,13 @@ Vous apprendrez ici comment utiliser complètement les possibilités de tels éc
 
 ### [Utiliser Polyphone comme un synthétiseur](tutorials/use-polyphone-as-a-synthesizer.md)
 
-Polyphone n'est pas qu'un éditeur de soundfonts, c'est aussi un synthétiseur complet permettant de jouer avec un clavier MIDI.
+Polyphone n'est pas qu'un éditeur de banque de sons, c'est aussi un synthétiseur complet permettant de jouer avec un clavier MIDI.
 Ce tutoriel indique comment lancer Polyphone en mode «&nbsp;synthé&nbsp;».
 
 ### [Créer un synthétiseur avec un Raspberry Pi](tutorials/create-a-synthesizer-with-raspberry-pi.md)
 
 Un Raspberry Pi est un ordinateur de la taille d'une carte bancaire et dans lequel Polyphone peut être installé. En l'intégrant dans un caisson contenant des haut-parleurs et en associant un clavier maître, il est possible de réaliser un vrai synthétiseur&nbsp;!
 
-### [Lire un fichier MIDI avec une soundfont](tutorials/read-midi-file-with-soundfont.md)
+### [Lire un fichier MIDI avec une banque de sons](tutorials/read-midi-file-with-soundfont.md)
 
-Les fichiers au format MIDI contiennent des messages MIDI qui, mis ensemble, forment une mélodie. Ils peuvent être combinés à un synthétiseur utilisant une soundfont et ce tutoriel montre comment utiliser un fichier MIDI pour tester le rendu d'une soundfont.
+Les fichiers au format MIDI contiennent des messages MIDI qui, mis ensemble, forment une mélodie. Ils peuvent être combinés à un synthétiseur utilisant une banque de sons au format SoundFont et ce tutoriel montre comment utiliser un fichier MIDI pour tester le rendu d'une telle banque.

@@ -8,8 +8,8 @@ If you need more help, or if the reading of these pages puts you off, you may fi
 
 The first screen of Polyphone is basically made of 3 parts:
 
-* a [left part](#doc_left), containing a file history and shortcuts;
-* a [right part](#doc_right), dedicated to the soundfont library;
+* a [left part](#doc_left), containing a history of open files and directories, as well as shortcuts;
+* a [right part](#doc_right), dedicated to the soundfont repository;
 * a [top area](#doc_top), containing tabs and a menu.
 
 
@@ -22,10 +22,11 @@ The first screen of Polyphone is basically made of 3 parts:
 ### Opening a soundfont
 
 
-Three ways for opening a soundfont:
+Several ways for opening a soundfont:
 
 * a click on :guilabel:`Open soundfont` opens a file browser, the allowed file to select having the extension :file:`.sf2`, :file:`.sf3`, :file:`.sfArk`, :file:`.sfz` or :file:`.organ` (the different formats are described [here](manual/annexes/the-different-soundfont-formats.md));
 * a click on :guilabel:`New soundfont` opens an empty soundfont, everything is to be done from scratch;
+* a click on :guilabel:`Open directory` opens the [soundfont explorer](manual/soundfont-explorer.md), which scans an entire directory and allows you to open the desired file;
 * a double-click on a soundfont from the history re-open it.
 
 When a soundfont is open, a new tab appears with a [soundfont editor](manual/soundfont-editor/index.md) inside.
@@ -44,24 +45,23 @@ Three buttons are located at the bottom of the left part:
 ## Right part {#doc_right}
 
 
-### Online library
+### Online repository
 
 
-A click on the button :guilabel:`Online library` opens a tab with the [soundfont browser](manual/soundfont-browser.md).
+A click on the button :guilabel:`Online repository` opens a tab displaying the content of the [online soundfont repository](manual/online-repository.md).
 
 
 ### Daily soundfonts
 
 
-Every day, 5 random soundfonts are displayed here.
-This is made for inciting people discovering new soundfonts.
-Double-clicking on one of them opens a new tab with the corresponding [soundfont description](manual/soundfont-browser.md#doc_description).
+Every day, 5 random soundfonts are displayed here. This is made for inciting people discovering new soundfonts.
+Double-clicking on one of them opens a new tab with the corresponding [soundfont description](manual/online-repository.md#doc_description).
 
 
 ### Search
 
 
-It is possible to write a keyword here for searching specific soundfonts and the results will be displayed in the [soundfont browser](manual/soundfont-browser.md).
+It is possible to write a keyword here for searching specific soundfonts from the online repository, and the results will be displayed in the [dedicated tab](manual/online-repository.md).
 
 
 ## Top area {#doc_top}
@@ -74,9 +74,10 @@ The tabs provide a quick access between:
 
 * the [home screen](#doc_home) (first tab — always open),
 * the [editor](manual/soundfont-editor/index.md) of an open soundfont,
+* the [soundfont explorer](manual/soundfont-explorer.md),
 * the software [settings](manual/settings.md),
-* the [soundfont browser](manual/soundfont-browser.md),
-* a [soundfont description](manual/soundfont-browser.md#doc_description) from the library.
+* the [online repository](manual/online-repository.md),
+* a [soundfont description](manual/online-repository.md#doc_description) from the online repository.
 
 Navigation between tabs can be performed using keyboard shortcuts:
 * :kbd:`Ctrl`+:kbd:`Tab` to go to the next tab, excluding the home screen tab,
