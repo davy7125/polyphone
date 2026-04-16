@@ -1192,31 +1192,26 @@ Premium!</translation>
 <context>
     <name>ConfigSectionSound</name>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="375"/>
+        <location filename="context/interface/configsectionsound.ui" line="369"/>
         <source>Reverb</source>
         <translation>Reverberação</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="226"/>
+        <location filename="context/interface/configsectionsound.ui" line="223"/>
         <source>Width</source>
         <translation>Largura</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="22"/>
-        <location filename="context/interface/configsectionsound.ui" line="197"/>
+        <location filename="context/interface/configsectionsound.ui" line="195"/>
         <source>Level</source>
         <translation>Volume</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="333"/>
+        <location filename="context/interface/configsectionsound.ui" line="329"/>
         <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
         <oldsource>Modulator &quot;velocity → filter cutoff&quot;</oldsource>
         <translation>Modulador padrão &quot;velocidade → corte do filtro&quot;</translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectionsound.ui" line="126"/>
-        <source>soundfont 2.01</source>
-        <translation>soundfont 2.01</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="112"/>
@@ -1224,32 +1219,27 @@ Premium!</translation>
         <translation>Volume geral</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="131"/>
-        <source>soundfont 2.04</source>
-        <translation>soundfont 2.04</translation>
-    </message>
-    <message>
         <location filename="context/interface/configsectionsound.ui" line="136"/>
         <source>disabled</source>
         <translation>desativado</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="242"/>
+        <location filename="context/interface/configsectionsound.ui" line="238"/>
         <source>Damp</source>
         <translation>Suavização</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="181"/>
+        <location filename="context/interface/configsectionsound.ui" line="180"/>
         <source>Room</source>
         <translation>Sala</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="362"/>
+        <location filename="context/interface/configsectionsound.ui" line="357"/>
         <source>Options</source>
         <translation>Opções</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="388"/>
+        <location filename="context/interface/configsectionsound.ui" line="381"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
@@ -4302,30 +4292,30 @@ Aviso: a qualidade será reduzida e o loop pode ser alterado</translation>
         <translation>Lá♯</translation>
     </message>
     <message>
-        <location filename="core/utils.cpp" line="311"/>
+        <location filename="core/utils.cpp" line="312"/>
         <source>bytes</source>
         <translation>bytes</translation>
     </message>
     <message>
-        <location filename="core/utils.cpp" line="313"/>
+        <location filename="core/utils.cpp" line="314"/>
         <source>kB</source>
         <comment>kilobytes</comment>
         <translation>kB</translation>
     </message>
     <message>
-        <location filename="core/utils.cpp" line="315"/>
+        <location filename="core/utils.cpp" line="316"/>
         <source>MB</source>
         <comment>megabytes</comment>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="core/utils.cpp" line="317"/>
+        <location filename="core/utils.cpp" line="318"/>
         <source>GB</source>
         <comment>gigabytes</comment>
         <translation>GB</translation>
     </message>
     <message>
-        <location filename="core/utils.cpp" line="318"/>
+        <location filename="core/utils.cpp" line="319"/>
         <source>TB</source>
         <comment>terabytes</comment>
         <translation>TB</translation>

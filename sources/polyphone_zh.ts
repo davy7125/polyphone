@@ -1183,30 +1183,25 @@ Premium!</source>
 <context>
     <name>ConfigSectionSound</name>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="375"/>
+        <location filename="context/interface/configsectionsound.ui" line="369"/>
         <source>Reverb</source>
         <translation>混响</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="226"/>
+        <location filename="context/interface/configsectionsound.ui" line="223"/>
         <source>Width</source>
         <translation>宽度</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="22"/>
-        <location filename="context/interface/configsectionsound.ui" line="197"/>
+        <location filename="context/interface/configsectionsound.ui" line="195"/>
         <source>Level</source>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="333"/>
+        <location filename="context/interface/configsectionsound.ui" line="329"/>
         <source>Default modulator &quot;velocity → filter cutoff&quot;</source>
         <translation>默认调制器 “力度 → 滤波器截止频率”</translation>
-    </message>
-    <message>
-        <location filename="context/interface/configsectionsound.ui" line="126"/>
-        <source>soundfont 2.01</source>
-        <translation>音色库 2.01</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="112"/>
@@ -1214,32 +1209,27 @@ Premium!</source>
         <translation>总音量</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="131"/>
-        <source>soundfont 2.04</source>
-        <translation>音色库 2.04</translation>
-    </message>
-    <message>
         <location filename="context/interface/configsectionsound.ui" line="136"/>
         <source>disabled</source>
         <translation>已禁用</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="242"/>
+        <location filename="context/interface/configsectionsound.ui" line="238"/>
         <source>Damp</source>
         <translation>衰减</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="181"/>
+        <location filename="context/interface/configsectionsound.ui" line="180"/>
         <source>Room</source>
         <translation>房间</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="362"/>
+        <location filename="context/interface/configsectionsound.ui" line="357"/>
         <source>Options</source>
         <translation>选项</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="388"/>
+        <location filename="context/interface/configsectionsound.ui" line="381"/>
         <source>Chorus</source>
         <translation>合唱</translation>
     </message>
@@ -4224,30 +4214,30 @@ Warning: quality will be reduced and the loop may be altered</source>
         <translation>升A</translation>
     </message>
     <message>
-        <location filename="core/utils.cpp" line="311"/>
+        <location filename="core/utils.cpp" line="312"/>
         <source>bytes</source>
         <translation>字节</translation>
     </message>
     <message>
-        <location filename="core/utils.cpp" line="313"/>
+        <location filename="core/utils.cpp" line="314"/>
         <source>kB</source>
         <comment>kilobytes</comment>
         <translation>千字节</translation>
     </message>
     <message>
-        <location filename="core/utils.cpp" line="315"/>
+        <location filename="core/utils.cpp" line="316"/>
         <source>MB</source>
         <comment>megabytes</comment>
         <translation>兆字节</translation>
     </message>
     <message>
-        <location filename="core/utils.cpp" line="317"/>
+        <location filename="core/utils.cpp" line="318"/>
         <source>GB</source>
         <comment>gigabytes</comment>
         <translation>吉字节</translation>
     </message>
     <message>
-        <location filename="core/utils.cpp" line="318"/>
+        <location filename="core/utils.cpp" line="319"/>
         <source>TB</source>
         <comment>terabytes</comment>
         <translation>太字节</translation>

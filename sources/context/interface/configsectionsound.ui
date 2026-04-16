@@ -22,7 +22,7 @@
         <string>Level</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -45,7 +45,7 @@
         <string>Frequency</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -84,7 +84,7 @@
      <item row="0" column="3">
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -100,7 +100,7 @@
         <string>Depth</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -123,12 +123,12 @@
      </property>
      <item>
       <property name="text">
-       <string>soundfont 2.01</string>
+       <string notr="true">SoundFont 2.01</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>soundfont 2.04</string>
+       <string notr="true">SoundFont 2.04</string>
       </property>
      </item>
      <item>
@@ -173,7 +173,6 @@
       <widget class="QLabel" name="label_7">
        <property name="font">
         <font>
-         <weight>50</weight>
          <bold>false</bold>
         </font>
        </property>
@@ -181,7 +180,7 @@
         <string>Room</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -189,7 +188,6 @@
       <widget class="QLabel" name="label_6">
        <property name="font">
         <font>
-         <weight>50</weight>
          <bold>false</bold>
         </font>
        </property>
@@ -197,7 +195,7 @@
         <string>Level</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -218,7 +216,6 @@
       <widget class="QLabel" name="label_8">
        <property name="font">
         <font>
-         <weight>50</weight>
          <bold>false</bold>
         </font>
        </property>
@@ -226,7 +223,7 @@
         <string>Width</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -234,7 +231,6 @@
       <widget class="QLabel" name="label_9">
        <property name="font">
         <font>
-         <weight>50</weight>
          <bold>false</bold>
         </font>
        </property>
@@ -242,7 +238,7 @@
         <string>Damp</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -268,7 +264,7 @@
      <item row="0" column="4">
       <spacer name="horizontalSpacer_4">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -295,10 +291,10 @@
       <number>50</number>
      </property>
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="tickPosition">
-      <enum>QSlider::NoTicks</enum>
+      <enum>QSlider::TickPosition::NoTicks</enum>
      </property>
      <property name="tickInterval">
       <number>25</number>
@@ -317,7 +313,7 @@
       <string notr="true">+0 dB</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
    </item>
@@ -337,10 +333,10 @@
    <item row="1" column="0">
     <spacer name="horizontalSpacer_5">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
+      <enum>QSizePolicy::Policy::Fixed</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -354,7 +350,6 @@
     <widget class="QLabel" name="labelSubTitle1">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -367,7 +362,6 @@
     <widget class="QLabel" name="labelSubTitle2">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -380,7 +374,6 @@
     <widget class="QLabel" name="labelSubTitle3">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
