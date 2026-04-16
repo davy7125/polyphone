@@ -15,21 +15,21 @@ La liste principale, située à gauche de l'interface, contient la liste des fic
 
 Un clic sur un fichier pouvant être scanné permet d'afficher dans les listes de la partie droite de l'interface les échantillons, instruments et ensembles qui sont contenus. Chaque élément de ces listes contient également des informations qui permettent d'évaluer le niveau de détails et de travail sur la banque de sons.
 
-Détails au niveau du fichier&nbsp;:
+### Détails au niveau du fichier
 
 * la taille et la date de dernière mise à jour sont affichées pour chaque fichier,
 * pour les banques de sons pouvant être scannées, ces informations sont ajoutées&nbsp;:
   * nombre d'échantillons, d'instruments et d'ensembles,
   * noms des premiers ensembles.
 
-Informations pour chaque [échantillon](manual/soundfont-editor/editing-pages/sample-editor.md)&nbsp;:
+### Informations pour chaque échantillon
 
 * type (mono / stéréo),
 * durée totale,
 * durée de la boucle s'il y en a une,
 * fréquence d'échantillonnage.
 
-Informations pour chaque [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md) ou [ensemble](manual/soundfont-editor/editing-pages/preset-editor.md)&nbsp;:
+### Informations pour chaque instrument ou ensemble
 
 * nombre total de divisions, paramètres et générateurs,
 * nombre d'étendues distinctes de notes,
@@ -42,7 +42,7 @@ Informations pour chaque [instrument](manual/soundfont-editor/editing-pages/inst
 La partie haute présente un champ de texte. Lorsque celui-ci est rempli, l'explorateur n'affiche que les fichiers répondant à au moins l'un de ces critères&nbsp;:
 
 * le nom contient le texte recherché,
-* l'un des échantillons, instruments ou ensembles contient le texte recherché.
+* le nom de l'un des échantillons, instruments ou ensembles contient le texte recherché.
 
 Les listes des échantillons, instruments et ensembles sont également filtrées pour mettre en évidence les éléments recherchés.
 
@@ -65,4 +65,4 @@ Ces opérations permettent de gérer / assainir rapidement une collection locale
 
 Un double-clic sur un élément de la liste principale ouvre le fichier — dans le cas où son format est compatible avec Polyphone — à l'endroit configuré dans les [paramètres](manual/settings.md#doc_interface) (les [informations générales](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md) sont affichées par défaut).
 
-Un double-clic sur un échantillon, instrument ou ensemble ouvre le fichier sur l'élément sélectionné.
+Un double-clic sur un [échantillon](manual/soundfont-editor/editing-pages/sample-editor.md), [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md) ou [ensemble](manual/soundfont-editor/editing-pages/preset-editor.md) ouvre le fichier sur l'élément sélectionné.

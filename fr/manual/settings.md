@@ -56,7 +56,7 @@ Instance unique
 : Ouvre tous les fichiers dans une seule et même fenêtre.
 
 Vue au démarrage
-: Sélectionne la vue à l'ouverture d'une banque de sons parmi&nbsp;: informations générales (par défaut), liste des échantillons, premier échantillon, liste des instruments, premier instrument, liste des ensembles, premier ensemble.
+: Sélectionne la vue à l'ouverture d'une banque de sons parmi&nbsp;: :guilabel:`informations générales` (par défaut), :guilabel:`liste des échantillons`, :guilabel:`premier échantillon`, :guilabel:`liste des instruments`, :guilabel:`premier instrument`, :guilabel:`liste des ensembles`, :guilabel:`premier ensemble`.
 
 Ordonner les divisions
 : L'ordre des divisions au sein d'un instrument ou d'un ensemble peut être changé ici.

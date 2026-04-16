@@ -56,7 +56,7 @@ Unique instance
 : Open all files in a single window.
 
 Startup view
-: Select the view to display when a soundfont is open from the following: general information (default), sample list, first sample, instrument list, first instrument, preset list, first preset.
+: Select the view to display when a soundfont is open from the following: :guilabel:`general information` (default), :guilabel:`sample list`, :guilabel:`first sample`, :guilabel:`instrument list`, :guilabel:`first instrument`, :guilabel:`preset list`, :guilabel:`first preset`.
 
 Sort divisions
 : The division order within an instrument or a preset can be changed here.

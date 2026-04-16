@@ -15,21 +15,21 @@ The main list, located on the left side of the interface, contains the list of f
 
 Clicking on a scannable file displays, in the lists on the right side of the interface, the samples, instruments and presets it contains. Each item in these lists also includes information to help assess the level of detail and work put into the soundfont.
 
-File-level details:
+### File-level details
 
 * the size and last update date are displayed for each file,
 * for soundfonts that can be scanned, the following information is added:
   * number of samples, instruments and presets,
   * names of the first presets.
 
-Information for each [sample](manual/soundfont-editor/editing-pages/sample-editor.md):
+### Information for each sample
 
 * type (mono / stereo),
 * total duration,
 * loop duration, if any,
 * sample rate.
 
-Information for each [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md) or [preset](manual/soundfont-editor/editing-pages/preset-editor.md):
+### Information for each instrument or preset
 
 * total number of divisions, parameters and generators,
 * number of distinct key ranges,
@@ -42,7 +42,7 @@ Information for each [instrument](manual/soundfont-editor/editing-pages/instrume
 The upper section features a text field. When filled in, the browser only displays files matching at least one of the following criteria:
 
 * the name contains the searched text,
-* one of the samples, instruments or presets contains the searched text.
+* the name of one of the samples, instruments or presets contains the searched text.
 
 The lists of samples, instruments and presets are also filtered to highlight the matching elements.
 
@@ -65,4 +65,4 @@ These operations allow you to quickly manage and clean up a local soundfont coll
 
 Double-clicking on an item in the main list opens the file — provided its format is compatible with Polyphone — at the location configured in the [settings](manual/settings.md#doc_interface) ([general information](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md) is displayed by default).
 
-Double-clicking on a sample, instrument or preset opens the file at the selected element.
+Double-clicking on a [sample](manual/soundfont-editor/editing-pages/sample-editor.md), [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md) or [preset](manual/soundfont-editor/editing-pages/preset-editor.md) opens the file at the selected element.
