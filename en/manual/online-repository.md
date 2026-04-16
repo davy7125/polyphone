@@ -5,7 +5,7 @@ The online soundfont repository can be accessed directly in Polyphone, making it
 
 
 To open the online repository, click on :guilabel:`Online repository` or write a keyword on the [home screen](manual/index.md).
-Once the online repository is open in a new tab, the list of soundfonts available for download is dispalayed and it is possible to search, sort and filter the results.
+Once the online repository is open in a new tab, the list of soundfonts available for download is displayed and it is possible to search, sort and filter the results.
 
 
 ![Online repository](images/online_repository.png "Online repository")
