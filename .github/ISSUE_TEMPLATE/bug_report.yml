@@ -1,0 +1,70 @@
+name: Bug report
+description: Report a bug/incorrect behavior in Polyphone.
+
+labels: ["bug"]
+body:
+    - type: checkboxes
+      attributes:
+          label: Duplicated issue check
+          description: Please make sure that this issue has not been reported before.
+          options:
+              - label: I confirm that I have searched the existing issues.
+                required: true
+    - type: input
+      id: version
+      attributes:
+          label: version
+          description: The version of Polyphone you are using.
+      validations:
+          required: true
+    - type: textarea
+      id: description
+      attributes:
+          label: Description
+          description: Describe the bug.
+      validations:
+          required: true
+    - type: textarea
+      attributes:
+        label: Offending SoundFont
+        description: If the bug is specific to a soundfont, zip it and upload it here.
+      validations:
+        required: false
+    - type: textarea
+      id: expected
+      attributes:
+          label: Expected Behavior
+          description: A concise description of what you expected to happen.
+      validations:
+          required: true
+    - type: textarea
+      id: reproduction
+      attributes:
+          label: Reproduction Steps
+          description: Steps to reproduce the behavior.
+          placeholder: |
+              1. Open Polyphone..
+              2. Load this soundfont
+              3. Click on '...'
+              4. See error...
+      validations:
+          required: true
+    - type: dropdown
+      id: os
+      attributes:
+          label: Operating System
+          description: Which operating system are you using?
+          options:
+              - Microsoft Windows
+              - Mac OS
+              - Fedora Linux
+              - Ubuntu Linux
+              - Other Linux (please specify which one)
+      validations:
+          required: true
+    - type: textarea
+      attributes:
+          label: Additional Info
+          description: Any additional info and attachments go here.
+      validations:
+          required: false

@@ -1,0 +1,27 @@
+name: Feature request
+description: Suggest an idea for Polyphone!
+labels: ["enhancement"]
+body:
+    - type: textarea
+      id: problem
+      attributes:
+          label: Problem
+          description: Is your feature request related to a problem? Please describe.
+    - type: textarea
+      id: description
+      attributes:
+          label: Description
+          description: A clear and concise description of what you want to happen.
+      validations:
+          required: true
+    - type: textarea
+      id: alternatives
+      attributes:
+          label: Alternatives
+          description: Describe alternatives you've considered. (if any)
+    - type: textarea
+      attributes:
+          label: Additional info
+          description: Any additional info and attachments (screenshots, soundfonts, other environments) go here.
+      validations:
+          required: false
