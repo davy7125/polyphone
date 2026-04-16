@@ -85,7 +85,7 @@ Since the default modulator modifying the filter frequency has been changed betw
 
 * :guilabel:`SoundFont 2.01`: use the rule "lower the filter frequency taking into account the velocity IF the velocity is less than 64" (we can hear a clear and problematic gap between velocities 63 and 64);
 * :guilabel:`SoundFont 2.04`: use the rule "lower the filter frequency taking into account the velocity" (no more gap);
-* :guilabel:`désactivé`: this default modulator is not set.
+* :guilabel:`disabled`: this default modulator is not set.
 
 
 ![Settings, sound](images/settings_sound.png "Settings, sound")
