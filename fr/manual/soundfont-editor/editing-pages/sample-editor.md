@@ -61,7 +61,7 @@ Les couleurs du graphique sont éditables dans les [préférences](manual/settin
 ## Section «&nbsp;Information&nbsp;» {#doc_info}
 
 
-La section :guilabel:`Informations` permet la visualisation - et dans la plupart des cas l'édition - des informations suivantes&nbsp;:
+La section :guilabel:`Informations` permet la visualisation — et dans la plupart des cas l'édition — des informations suivantes&nbsp;:
 
 Taille de l'échantillon
 : Le nombre de valeurs et la correspondance en secondes sont affichés.

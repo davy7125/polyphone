@@ -55,7 +55,7 @@ Mode de lecture
 
 Note de base
 : Permet de changer la note de base configurée dans un échantillon par une autre.
-  Si par exemple un échantillon possède la note de base 50 et que cet échantillon est lu sur l'étendue de notes [49 - 51], alors l'échantillon sera lu avec une transposition initiale de -1, 0 et +1 demi-ton sur les notes 49, 50, 51.
+  Si par exemple un échantillon possède la note de base 50 et que cet échantillon est lu sur l'étendue de notes [49-51], alors l'échantillon sera lu avec une transposition initiale de -1, 0 et +1 demi-ton sur les notes 49, 50, 51.
   Si à présent la note de base est surchargée à 51 au niveau de l'instrument, alors ce même échantillon sera lu avec une transposition initiale de -2, -1 et 0 demi-ton(s) sur les notes 49, 50, 51.
 
 Accordage (demi-tons et centièmes)
@@ -187,7 +187,7 @@ Le partie gauche du graphique représente l'évolution de l'enveloppe lorsqu'une
 
 
 Délai
-: Durée pendant laquelle l'enveloppe reste à 0 juste après le déclenchement d'une touche. Dans la majorité des cas, on souhaite entendre le son immédiatement après avoir pressé une touche et ce paramètre reste donc à 0. Cependant le **délai** peut être utile dans le cas d'un son évoluant au cours du temps, construit à partir de plusieurs couches sonores. Supposons que l'on souhaite un second son introduit 0.5 s après l'appui sur une touche, on entrera donc "0.5" dans cette section. Il est à noter qu'un délai ne retarde pas la lecture du son - il annule simplement son volume. Après avoir mis un délai de 0.5 s, le son sera entendu après une durée de 0.5 s pendant laquelle il aura été lu en interne.
+: Durée pendant laquelle l'enveloppe reste à 0 juste après le déclenchement d'une touche. Dans la majorité des cas, on souhaite entendre le son immédiatement après avoir pressé une touche et ce paramètre reste donc à 0. Cependant le **délai** peut être utile dans le cas d'un son évoluant au cours du temps, construit à partir de plusieurs couches sonores. Supposons que l'on souhaite un second son introduit 0.5 s après l'appui sur une touche, on entrera donc "0.5" dans cette section. Il est à noter qu'un délai ne retarde pas la lecture du son — il annule simplement son volume. Après avoir mis un délai de 0.5 s, le son sera entendu après une durée de 0.5 s pendant laquelle il aura été lu en interne.
 
 Attaque
 : Durée après le **délai** pendant laquelle l'enveloppe passe de 0 à sa valeur maximale. Par exemple, un son de corde frottée comme un violon possède une attaque relativement longue, alors qu'un son de corde frappée comme une guitare a une attaque courte. Même lorsque l'on souhaite utiliser une attaque aussi courte que possible, il est conseillé d'inscrire une valeur de 0.001, sans quoi un "clic" pourrait se faire entendre après avoir appuyé sur une touche.

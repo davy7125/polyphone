@@ -1,8 +1,8 @@
 A Raspberry Pi is a credit-card-sized computer in which Polyphone can be installed. By integrating it into a box containing speakers and associating it with a master keyboard, it's possible to create a real synthesizer!
 
-![Home-made synthesizer - front](images/synth_front.jpg "Home-made synthesizer - front")
+![Home-made synthesizer — front](images/synth_front.jpg "Home-made synthesizer — front")
 
-![Home-made synthesizer - back](images/synth_back.jpg "Home-made synthesizer - back")
+![Home-made synthesizer — back](images/synth_back.jpg "Home-made synthesizer — back")
 
 ## Materials required
 
@@ -34,7 +34,7 @@ This tutorial will not focus on one particular way of making a box. The use of w
 - the speakers,
 - the power cable,
 - the on/off switch,
-- the volume and - if necessary - equalization knobs,
+- the volume and — if necessary — equalization knobs,
 - the Helmholtz resonators for the bass-reflex, and so on.
 
 A suggested order of installation in the box is as follows:

@@ -1,8 +1,8 @@
 Un Raspberry Pi est un ordinateur de la taille d'une carte bancaire et dans lequel Polyphone peut être installé. En l'intégrant dans un caisson contenant des haut-parleurs et en associant un clavier maître, il est possible de réaliser un vrai synthétiseur&nbsp;!
 
-![Synthétiseur fait maison - avant](images/synth_front.jpg "Synthétiseur fait maison - avant")
+![Synthétiseur fait maison — avant](images/synth_front.jpg "Synthétiseur fait maison — avant")
 
-![Synthétiseur fait maison - arrière](images/synth_back.jpg "Synthétiseur fait maison - arrière")
+![Synthétiseur fait maison — arrière](images/synth_back.jpg "Synthétiseur fait maison — arrière")
 
 ## Matériel nécessaire
 
@@ -34,7 +34,7 @@ Ce tutoriel ne présentera pas une manière en particulier de fabriquer un caiss
 - les enceintes,
 - le câble électrique,
 - le bouton on / off,
-- les boutons pour le volume et - le cas échéant - l'égalisation,
+- les boutons pour le volume et — le cas échéant — l'égalisation,
 - les résonateurs de Helmholtz pour le bass-reflex, etc.
 
 Un ordre de montage dans le caisson peut être le suivant&nbsp;:

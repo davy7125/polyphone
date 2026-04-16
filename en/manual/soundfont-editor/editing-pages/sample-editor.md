@@ -61,7 +61,7 @@ Graph colors are editable in the software [preferences](manual/settings.md#doc_i
 ## Section “Information” {#doc_info}
 
 
-The :guilabel:`Information` section allows viewing - and in most cases editing - the following information:
+The :guilabel:`Information` section allows viewing — and in most cases editing — the following information:
 
 Sample size
 : The number of values and the corresponding duration in seconds are displayed.

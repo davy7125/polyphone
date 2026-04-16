@@ -7,7 +7,7 @@ Use these instructions if you cannot install Polyphone on your Mac with the avai
 The following applications are required:
 
 * <a href="https://www.qt.io/download-open-source" target="_blank">Qt Creator with its framework</a>,
-* Xcode or just the "Command Line Tools" (the version to use is specified on the Qt website - <a href="https://doc.qt.io/qt-6/supported-platforms.html" target="_blank">here</a> for instance).
+* Xcode or just the "Command Line Tools" (the version to use is specified on the Qt website — <a href="https://doc.qt.io/qt-6/supported-platforms.html" target="_blank">here</a> for instance).
 
 You also need the sources of Polyphone, available <a href="software" target="_blank">here</a> or on <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>, along with the necessary libraries you can download [here](files/macos.zip).
 

@@ -7,7 +7,7 @@ Utilisez ces instructions si vous ne pouvez pas installer Polyphone sur votre Ma
 Les éléments suivants seront nécessaires&nbsp;:
 
 * <a href="https://www.qt.io/download-open-source" target="_blank">Qt Creator avec son framework</a>,
-* Xcode ou seulement les «&nbsp;Command Line Tools"&nbsp;» (la version à utiliser est indiquée sur le site de Qt - <a href="https://doc.qt.io/qt-6/supported-platforms.html" target="_blank">ici</a> par exemple).
+* Xcode ou seulement les «&nbsp;Command Line Tools"&nbsp;» (la version à utiliser est indiquée sur le site de Qt — <a href="https://doc.qt.io/qt-6/supported-platforms.html" target="_blank">ici</a> par exemple).
 
 Vous aurez également besoin des sources de Polyphone, disponibles <a href="software" target="_blank">ici</a> ou sur <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a>, ainsi que les dépendances téléchargeables [ici](files/macos.zip).
 

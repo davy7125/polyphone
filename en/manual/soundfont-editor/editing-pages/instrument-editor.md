@@ -55,7 +55,7 @@ Sample playback
 
 Root key
 : Allows you to change the normal root key of a sample to a different note from that usually used.
-  For example, if a sample has a root key of 50 and is played over the key range [49 - 51], it will be initially transposed by -1, 0, and +1 semitone(s) on keys 49, 50, and 51 respectively.
+  For example, if a sample has a root key of 50 and is played over the key range [49 — 51], it will be initially transposed by -1, 0, and +1 semitone(s) on keys 49, 50, and 51 respectively.
   If the root key is then overridden to 51 at the instrument level, the same sample will be initially transposed by -2, -1, and 0 semitone(s) on keys 49, 50, and 51 respectively.
 
 Tuning (semitones and cents)
@@ -186,7 +186,7 @@ The left part of the graph represents the evolution of the envelope when a key i
 7 out of the 8 parameters are involved in this representation:
 
 Delay
-: Duration during which the envelope remains at 0 just after a key is triggered. In the majority of cases we want to hear audio immediately after pressing the keys and then this parameter is left at zero. However **delay** comes in handy for example when we want to create richer pad sounds constructed with several layers. Suppose we want to introduce a second sound layer 0.5 seconds after the key is pressed, then we can set it by entering "0.5" in this -section. A delay does not hold the playback of the sound - it mutes the audio. If we have set the delay to 0.5 seconds, we will start hearing audio after 0.5 seconds of the sample that has already been played.
+: Duration during which the envelope remains at 0 just after a key is triggered. In the majority of cases we want to hear audio immediately after pressing the keys and then this parameter is left at zero. However **delay** comes in handy for example when we want to create richer pad sounds constructed with several layers. Suppose we want to introduce a second sound layer 0.5 seconds after the key is pressed, then we can set it by entering "0.5" in this -section. A delay does not hold the playback of the sound — it mutes the audio. If we have set the delay to 0.5 seconds, we will start hearing audio after 0.5 seconds of the sample that has already been played.
 
 Attack
 : Duration after **delay** during which the envelope grows from 0 to the maximum value. For example a bowed string sound like a violin has an attack which is quite long, while a plucked string sound such as a guitar is very short. Even when we want to use an attack as short as possible, an advise is to at least enter a value of 0.001 otherwise a "click" might be heard after pressing a key.
