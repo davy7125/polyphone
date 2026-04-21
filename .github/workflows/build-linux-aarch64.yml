@@ -77,7 +77,8 @@ jobs:
             libssl-dev \
             librtaudio-dev \
             librtmidi-dev \
-            libstk-dev
+            libstk-dev \
+            ca-certificates
             
       - name: Configure with qmake
         run: |
@@ -108,6 +109,8 @@ jobs:
           mkdir -p AppDir/usr/lib
           mkdir -p AppDir/usr/share/applications
           mkdir -p AppDir/usr/share/icons/hicolor/512x512/apps
+          mkdir -p AppDir/etc
+          mkdir -p AppDir/etc/ssl
           
           cp sources/bin/polyphone AppDir/usr/bin/
           cp packaging/io.polyphone.polyphone.desktop AppDir/usr/share/applications/
@@ -116,6 +119,8 @@ jobs:
           # SSL
           cp /usr/lib/aarch64-linux-gnu/libssl.so.3 AppDir/usr/lib/
           cp /usr/lib/aarch64-linux-gnu/libcrypto.so.3 AppDir/usr/lib/
+          cp -r /etc/ssl/certs AppDir/etc/ssl/
+          cp /etc/ssl/openssl.cnf AppDir/etc/ssl/ || true
           
           # Generate the AppImage
           ./linuxdeploy-aarch64.AppImage --appdir AppDir --plugin qt --output appimage
