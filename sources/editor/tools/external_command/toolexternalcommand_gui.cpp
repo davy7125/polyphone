@@ -37,7 +37,7 @@ ToolExternalCommand_gui::ToolExternalCommand_gui(QWidget *parent) :
 {
     // Prepare the interface
     ui->setupUi(this);
-    ui->pushOpen->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", QSize(24, 24), ThemeManager::WINDOW_TEXT));
+    ui->pushOpen->setIcon(ContextManager::theme()->getColoredSvg(":/icons/search.svg", QSize(24, 24), ThemeManager::WINDOW_TEXT));
 
     // Select the text
     ui->lineCommand->setFocus();

@@ -9,7 +9,6 @@
         <file alias="forum.svg">resources/forum.svg</file>
         <file alias="book.svg">resources/book.svg</file>
         <file alias="document-new.svg">resources/document-new.svg</file>
-        <file alias="document-open.svg">resources/document-open.svg</file>
         <file alias="globe.svg">resources/globe.svg</file>
         <file alias="reload.svg">resources/reload.svg</file>
         <file alias="comment.svg">resources/comment.svg</file>
@@ -93,6 +92,7 @@
         <file alias="compress.svg">resources/compress.svg</file>
         <file alias="eye.svg">resources/eye.svg</file>
         <file alias="trash.svg">resources/trash.svg</file>
+        <file alias="folder.svg">resources/folder.svg</file>
     </qresource>
     <qresource prefix="/misc">
         <file>changelog</file>

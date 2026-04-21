@@ -49,8 +49,8 @@ WidgetShowHistoryCell::Icons::Icons()
 {
     _fileIcon = ContextManager::theme()->getColoredSvg(":/icons/file-audio.svg", QSize(48, 64), ThemeManager::LIST_TEXT);
     _fileIconActive = ContextManager::theme()->getColoredSvg(":/icons/file-audio.svg", QSize(48, 64), ThemeManager::HIGHLIGHTED_TEXT);
-    _fileDirIcon = ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", QSize(48, 43), ThemeManager::LIST_TEXT);
-    _fileDirIconActive = ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", QSize(48, 43), ThemeManager::HIGHLIGHTED_TEXT);
+    _fileDirIcon = ContextManager::theme()->getColoredSvg(":/icons/folder.svg", QSize(48, 48), ThemeManager::LIST_TEXT);
+    _fileDirIconActive = ContextManager::theme()->getColoredSvg(":/icons/folder.svg", QSize(48, 48), ThemeManager::HIGHLIGHTED_TEXT);
 }
 
 WidgetShowHistoryCell::~WidgetShowHistoryCell()

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>296</width>
-    <height>210</height>
+    <width>416</width>
+    <height>252</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,10 +20,10 @@
       <bool>true</bool>
      </property>
      <property name="frameShape">
-      <enum>QFrame::Box</enum>
+      <enum>QFrame::Shape::Box</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Shadow::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <property name="leftMargin">
@@ -105,7 +105,7 @@
      </property>
      <property name="icon">
       <iconset resource="../../../resources.qrc">
-       <normaloff>:/icons/document-open.svg</normaloff>:/icons/document-open.svg</iconset>
+       <normaloff>:/icons/search.svg</normaloff>:/icons/search.svg</iconset>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -134,7 +134,7 @@
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>

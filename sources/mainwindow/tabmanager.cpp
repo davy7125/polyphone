@@ -219,7 +219,7 @@ void TabManager::openDirectory(QString directoryPath)
     // Create a new browser
     DirectoryBrowser * browser = new DirectoryBrowser();
     connect(browser, SIGNAL(itemDoubleClicked(QString,EltID)), this, SLOT(openSoundfont(QString,EltID)));
-    int index = _stackedWidget->addWidgetWithTab(browser, ":/icons/document-open.svg", dirName, true);
+    int index = _stackedWidget->addWidgetWithTab(browser, ":/icons/folder.svg", dirName, true);
     _stackedWidget->setWidgetToolTip(browser, directoryPath);
     _dirBrowsers << browser;
 

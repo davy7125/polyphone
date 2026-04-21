@@ -36,7 +36,7 @@ ToolSoundfontExport_gui::ToolSoundfontExport_gui(QWidget *parent) :
     ui(new Ui::ToolSoundfontExport_gui)
 {
     ui->setupUi(this);
-    ui->pushFolder->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", QSize(16, 16), ThemeManager::WINDOW_TEXT));
+    ui->pushFolder->setIcon(ContextManager::theme()->getColoredSvg(":/icons/folder.svg", QSize(24, 24), ThemeManager::WINDOW_TEXT));
 }
 
 ToolSoundfontExport_gui::~ToolSoundfontExport_gui()

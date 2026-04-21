@@ -97,7 +97,7 @@ MainWindow::MainWindow(bool playerMode, QWidget *parent) :
     QSize iconSize(36, 36);
     ui->pushButtonNew->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-new.svg", iconSize, ThemeManager::BUTTON_TEXT));
     ui->pushButtonOpen->setIcon(ContextManager::theme()->getColoredSvg(":/icons/file-audio.svg", iconSize, ThemeManager::BUTTON_TEXT));
-    ui->pushButtonOpenDir->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", iconSize, ThemeManager::BUTTON_TEXT));
+    ui->pushButtonOpenDir->setIcon(ContextManager::theme()->getColoredSvg(":/icons/folder.svg", iconSize, ThemeManager::BUTTON_TEXT));
     ui->pushButtonDocumentation->setIcon(ContextManager::theme()->getColoredSvg(":/icons/book.svg", iconSize, ThemeManager::BUTTON_TEXT));
     ui->pushButtonForum->setIcon(ContextManager::theme()->getColoredSvg(":/icons/forum.svg", iconSize, ThemeManager::BUTTON_TEXT));
     ui->pushButtonSettings->setIcon(ContextManager::theme()->getColoredSvg(":/icons/settings.svg", iconSize, ThemeManager::BUTTON_TEXT));

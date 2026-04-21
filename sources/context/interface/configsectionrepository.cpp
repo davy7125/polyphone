@@ -37,7 +37,7 @@ ConfigSectionRepository::ConfigSectionRepository(QWidget *parent) :
     ui(new Ui::ConfigSectionRepository)
 {
     ui->setupUi(this);
-    ui->pushDirectory->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", QSize(16, 16), ThemeManager::WINDOW_TEXT));
+    ui->pushDirectory->setIcon(ContextManager::theme()->getColoredSvg(":/icons/folder.svg", QSize(24, 24), ThemeManager::WINDOW_TEXT));
 
     // Style
     ui->labelSubTitle1->setStyleSheet("QLabel{margin: 20px 0;}");
