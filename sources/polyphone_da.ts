@@ -3600,124 +3600,139 @@ for at vise dets divisionsområder</translation>
         <translation>Titel...</translation>
     </message>
     <message>
+        <location filename="editor/pagesf2.ui" line="62"/>
+        <source>Author</source>
+        <translation>Forfatter</translation>
+    </message>
+    <message>
         <location filename="editor/pagesf2.ui" line="99"/>
         <source>Author...</source>
         <translation>Forfatter...</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="152"/>
+        <location filename="editor/pagesf2.ui" line="118"/>
+        <source>Date</source>
+        <translation>Dato</translation>
+    </message>
+    <message>
+        <location filename="editor/pagesf2.ui" line="155"/>
         <source>Date...</source>
         <translation>Dato...</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="184"/>
+        <location filename="editor/pagesf2.ui" line="207"/>
         <source>Product</source>
         <translation>Produkt</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="198"/>
+        <location filename="editor/pagesf2.ui" line="231"/>
         <source>Copyright</source>
         <translation>Ophavsrettigheder</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="212"/>
+        <location filename="editor/pagesf2.ui" line="214"/>
         <source>Comments</source>
         <translation>Kommentarer</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="270"/>
-        <source>Soundfont version</source>
-        <translation>Soundfont version</translation>
+        <location filename="editor/pagesf2.cpp" line="446"/>
+        <source>SoundFont format</source>
+        <translation>SoundFont-format</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="305"/>
-        <source>ROM name and version</source>
-        <translation>ROM navn og version</translation>
+        <location filename="editor/pagesf2.cpp" line="451"/>
+        <source>ROM name</source>
+        <translation>ROM-navn</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="340"/>
+        <location filename="editor/pagesf2.cpp" line="458"/>
+        <source>ROM version</source>
+        <translation>ROM-version</translation>
+    </message>
+    <message>
+        <location filename="editor/pagesf2.cpp" line="464"/>
         <source>Sound engine</source>
         <translation>Lyd engine</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="375"/>
+        <location filename="editor/pagesf2.cpp" line="469"/>
         <source>Editing software</source>
         <translation>Editeringssoftware</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="474"/>
+        <location filename="editor/pagesf2.ui" line="335"/>
         <source>Presets</source>
         <translation>Forvalg</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="496"/>
-        <location filename="editor/pagesf2.ui" line="610"/>
-        <location filename="editor/pagesf2.ui" line="951"/>
+        <location filename="editor/pagesf2.ui" line="357"/>
+        <location filename="editor/pagesf2.ui" line="471"/>
+        <location filename="editor/pagesf2.ui" line="812"/>
         <source>Details</source>
         <translation>Detaljer</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="588"/>
+        <location filename="editor/pagesf2.ui" line="449"/>
         <source>Samples</source>
         <translation>Samplinger</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="663"/>
+        <location filename="editor/pagesf2.ui" line="524"/>
         <source>Compression</source>
         <translation>Komprimering</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="670"/>
-        <location filename="editor/pagesf2.ui" line="759"/>
-        <location filename="editor/pagesf2.ui" line="822"/>
+        <location filename="editor/pagesf2.ui" line="531"/>
+        <location filename="editor/pagesf2.ui" line="620"/>
+        <location filename="editor/pagesf2.ui" line="683"/>
         <source>Count</source>
         <translation>Antal</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="684"/>
+        <location filename="editor/pagesf2.ui" line="545"/>
         <source>Bit depth</source>
         <translation>Bitdybde</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="698"/>
+        <location filename="editor/pagesf2.ui" line="559"/>
         <source>16 bits</source>
         <translation>16 bits</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="703"/>
+        <location filename="editor/pagesf2.ui" line="564"/>
         <source>24 bits</source>
         <translation>24 bits</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="718"/>
+        <location filename="editor/pagesf2.ui" line="579"/>
         <source>no</source>
         <translation>nej</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="723"/>
+        <location filename="editor/pagesf2.ui" line="584"/>
         <source>possible</source>
         <translation>muligt</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="752"/>
-        <location filename="editor/pagesf2.ui" line="850"/>
+        <location filename="editor/pagesf2.ui" line="613"/>
+        <location filename="editor/pagesf2.ui" line="711"/>
         <source>Modulators</source>
         <translation>Modulatorer</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="780"/>
-        <location filename="editor/pagesf2.ui" line="815"/>
+        <location filename="editor/pagesf2.ui" line="641"/>
+        <location filename="editor/pagesf2.ui" line="676"/>
         <source>Parameters</source>
         <translation>Parametre</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="929"/>
+        <location filename="editor/pagesf2.ui" line="790"/>
         <source>Instruments</source>
         <translation>Instrumenter</translation>
     </message>
     <message numerus="yes">
-        <location filename="editor/pagesf2.cpp" line="208"/>
-        <location filename="editor/pagesf2.cpp" line="218"/>
+        <location filename="editor/pagesf2.cpp" line="201"/>
+        <location filename="editor/pagesf2.cpp" line="211"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (ubrugt: %n)</numerusform>

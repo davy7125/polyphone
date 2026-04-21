@@ -57,6 +57,7 @@ PageSf2::PageSf2(QWidget * parent) :
     // Icons
     ui->labelUser->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/user.svg", QSize(18, 18), ThemeManager::WINDOW_TEXT));
     ui->labelDate->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/calendar.svg", QSize(18, 18), ThemeManager::WINDOW_TEXT));
+    ui->labelInfo->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/info.svg", QSize(18, 18), ThemeManager::WINDOW_TEXT));
     ui->labelSample->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/sample.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
     ui->labelInstrument->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/instrument.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
     ui->labelPreset->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/preset.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_TEXT));
@@ -89,22 +90,14 @@ void PageSf2::updateInterface(QString editingSource)
     // Compression possible?
     ui->comboCompression->setCurrentIndex(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMajor == 3 ? 1 : 0);
 
-    displaySfVersion();
-    ui->label_soundEngine->setText(_sf2->getQstr(_currentID, champ_ISNG));
-    QString txt = QString("%1.%2")
-                      .arg(_sf2->get(_currentID, champ_IVER).sfVerValue.wMajor)
-                      .arg(_sf2->get(_currentID, champ_IVER).sfVerValue.wMinor, 2, 10, QChar('0'));
-    if (_sf2->getQstr(_currentID, champ_IROM).isEmpty())
-        ui->label_romVersion->setText("- (version " + txt + ")");
-    else
-        ui->label_romVersion->setText(_sf2->getQstr(_currentID, champ_IROM) + " (version " + txt + ")");
-    ui->label_software->setText(_sf2->getQstr(_currentID, champ_ISFT));
     ui->lineEdit_name->setTextToElide(_sf2->getQstr(_currentID, champ_name));
     ui->lineEdit_copyright->setText(_sf2->getQstr(_currentID, champ_ICOP));
     ui->lineEdit_author->setTextToElide(_sf2->getQstr(_currentID, champ_IENG));
     ui->lineEdit_date->setInitialText(_sf2->getQstr(_currentID, champ_ICRD));
     ui->lineEdit_product->setText(_sf2->getQstr(_currentID, champ_IPRD));
     ui->textEdit_Com->setPlainText(_sf2->getQstr(_currentID, champ_ICMT));
+
+    updateInfoToolTip();
 }
 
 void PageSf2::setName()
@@ -398,7 +391,7 @@ void PageSf2::on_comboBitDepth_currentIndexChanged(int index)
             ui->comboCompression->blockSignals(true);
             ui->comboCompression->setCurrentIndex(0);
             ui->comboCompression->blockSignals(false);
-            displaySfVersion();
+            updateInfoToolTip();
         }
         break;
     default:
@@ -441,12 +434,40 @@ void PageSf2::on_comboCompression_currentIndexChanged(int index)
         return;
     }
     _sf2->endEditing(_editingSource);
-    displaySfVersion();
+    updateInfoToolTip();
 }
 
-void PageSf2::displaySfVersion()
+void PageSf2::updateInfoToolTip()
 {
-    ui->label_sfVersion->setText(QString("%1.%2")
-                                     .arg(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMajor)
-                                     .arg(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMinor, 2, 10, QChar('0')));
+    // SoundFont version
+    QString tmp = QString("%1.%2")
+                      .arg(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMajor)
+                      .arg(_sf2->get(_currentID, champ_IFIL).sfVerValue.wMinor, 2, 10, QChar('0'));
+    QString toolTip = "<table><tr><td>" + tr("SoundFont format") + "  </td><td>" + tmp + "</td></tr>";
+
+    // ROM name / version
+    tmp = _sf2->getQstr(_currentID, champ_IROM);
+    if (!tmp.isEmpty())
+        toolTip += "<tr><td>" + tr("ROM name") + "  </td><td>" + tmp + "</td></tr>";
+    AttributeValue valTmp = _sf2->get(_currentID, champ_IVER);
+    if (valTmp.sfVerValue.wMinor + valTmp.sfVerValue.wMajor > 0)
+    {
+        QString tmp = QString("%1.%2")
+            .arg(valTmp.sfVerValue.wMajor)
+            .arg(valTmp.sfVerValue.wMinor, 2, 10, QChar('0'));
+        toolTip += "<tr><td>" + tr("ROM version") + "  </td><td>" + tmp + "</td></tr>";
+    }
+
+    // Sound engine
+    tmp = _sf2->getQstr(_currentID, champ_ISNG);
+    if (!tmp.isEmpty())
+        toolTip += "<tr><td>" + tr("Sound engine") + "  </td><td>" + tmp + "</td></tr>";
+
+    // Editing software
+    tmp = _sf2->getQstr(_currentID, champ_ISFT);
+    if (!tmp.isEmpty())
+        toolTip += "<tr><td>" + tr("Editing software") + "  </td><td>" + tmp + "</td></tr>";
+
+    toolTip += "</table>";
+    ui->labelInfo->setToolTip(toolTip);
 }

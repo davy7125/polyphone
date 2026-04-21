@@ -3591,124 +3591,139 @@ to display its division ranges</source>
         <translation>Заголовок…</translation>
     </message>
     <message>
+        <location filename="editor/pagesf2.ui" line="62"/>
+        <source>Author</source>
+        <translation>Автор</translation>
+    </message>
+    <message>
         <location filename="editor/pagesf2.ui" line="99"/>
         <source>Author...</source>
         <translation>Автор…</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="152"/>
+        <location filename="editor/pagesf2.ui" line="118"/>
+        <source>Date</source>
+        <translation>Дата</translation>
+    </message>
+    <message>
+        <location filename="editor/pagesf2.ui" line="155"/>
         <source>Date...</source>
         <translation>Дата…</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="184"/>
+        <location filename="editor/pagesf2.ui" line="207"/>
         <source>Product</source>
         <translation>Продукт</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="198"/>
+        <location filename="editor/pagesf2.ui" line="231"/>
         <source>Copyright</source>
         <translation>Авторское право</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="212"/>
+        <location filename="editor/pagesf2.ui" line="214"/>
         <source>Comments</source>
         <translation>Комментарии</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="270"/>
-        <source>Soundfont version</source>
-        <translation>Версия SoundFont</translation>
+        <location filename="editor/pagesf2.cpp" line="446"/>
+        <source>SoundFont format</source>
+        <translation>Формат SoundFont</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="305"/>
-        <source>ROM name and version</source>
-        <translation>Имя и версия ROM</translation>
+        <location filename="editor/pagesf2.cpp" line="451"/>
+        <source>ROM name</source>
+        <translation>Имя ROM</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="340"/>
+        <location filename="editor/pagesf2.cpp" line="458"/>
+        <source>ROM version</source>
+        <translation>Версия ROM</translation>
+    </message>
+    <message>
+        <location filename="editor/pagesf2.cpp" line="464"/>
         <source>Sound engine</source>
         <translation>Звуковой движок</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="375"/>
+        <location filename="editor/pagesf2.cpp" line="469"/>
         <source>Editing software</source>
         <translation>Редактор</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="474"/>
+        <location filename="editor/pagesf2.ui" line="335"/>
         <source>Presets</source>
         <translation>Пресеты</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="496"/>
-        <location filename="editor/pagesf2.ui" line="610"/>
-        <location filename="editor/pagesf2.ui" line="951"/>
+        <location filename="editor/pagesf2.ui" line="357"/>
+        <location filename="editor/pagesf2.ui" line="471"/>
+        <location filename="editor/pagesf2.ui" line="812"/>
         <source>Details</source>
         <translation>Подробнее</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="588"/>
+        <location filename="editor/pagesf2.ui" line="449"/>
         <source>Samples</source>
         <translation>Семплы</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="663"/>
+        <location filename="editor/pagesf2.ui" line="524"/>
         <source>Compression</source>
         <translation>Сжатие</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="670"/>
-        <location filename="editor/pagesf2.ui" line="759"/>
-        <location filename="editor/pagesf2.ui" line="822"/>
+        <location filename="editor/pagesf2.ui" line="531"/>
+        <location filename="editor/pagesf2.ui" line="620"/>
+        <location filename="editor/pagesf2.ui" line="683"/>
         <source>Count</source>
         <translation>Количество</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="684"/>
+        <location filename="editor/pagesf2.ui" line="545"/>
         <source>Bit depth</source>
         <translation>Глубина дискретизации</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="698"/>
+        <location filename="editor/pagesf2.ui" line="559"/>
         <source>16 bits</source>
         <translation>16 бит</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="703"/>
+        <location filename="editor/pagesf2.ui" line="564"/>
         <source>24 bits</source>
         <translation>24 бита</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="718"/>
+        <location filename="editor/pagesf2.ui" line="579"/>
         <source>no</source>
         <translation>нет</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="723"/>
+        <location filename="editor/pagesf2.ui" line="584"/>
         <source>possible</source>
         <translation>возможно</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="752"/>
-        <location filename="editor/pagesf2.ui" line="850"/>
+        <location filename="editor/pagesf2.ui" line="613"/>
+        <location filename="editor/pagesf2.ui" line="711"/>
         <source>Modulators</source>
         <translation>Модуляторы</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="780"/>
-        <location filename="editor/pagesf2.ui" line="815"/>
+        <location filename="editor/pagesf2.ui" line="641"/>
+        <location filename="editor/pagesf2.ui" line="676"/>
         <source>Parameters</source>
         <translation>Параметры</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="929"/>
+        <location filename="editor/pagesf2.ui" line="790"/>
         <source>Instruments</source>
         <translation>Инструменты</translation>
     </message>
     <message numerus="yes">
-        <location filename="editor/pagesf2.cpp" line="208"/>
-        <location filename="editor/pagesf2.cpp" line="218"/>
+        <location filename="editor/pagesf2.cpp" line="201"/>
+        <location filename="editor/pagesf2.cpp" line="211"/>
         <source>%1 (unused: %n)</source>
         <translation>
             <numerusform>%1 (не используется: %n)</numerusform>

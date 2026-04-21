@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>615</width>
+    <width>717</width>
     <height>488</height>
    </rect>
   </property>
@@ -44,9 +44,6 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <property name="topMargin">
-      <number>0</number>
-     </property>
      <item>
       <widget class="QLabel" name="labelUser">
        <property name="minimumSize">
@@ -60,6 +57,9 @@
          <width>16</width>
          <height>18</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Author</string>
        </property>
        <property name="text">
         <string/>
@@ -114,6 +114,9 @@
          <height>18</height>
         </size>
        </property>
+       <property name="toolTip">
+        <string>Date</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -166,224 +169,82 @@
        </property>
       </spacer>
      </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="10,0,0">
-     <property name="topMargin">
-      <number>12</number>
-     </property>
-     <property name="bottomMargin">
-      <number>6</number>
-     </property>
      <item>
-      <layout class="QVBoxLayout" name="layoutMiddleLeft">
-       <item>
-        <widget class="QLabel" name="label_25">
-         <property name="text">
-          <string>Product</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="lineEdit_product">
-         <property name="maxLength">
-          <number>255</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_23">
-         <property name="text">
-          <string>Copyright</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="lineEdit_copyright">
-         <property name="maxLength">
-          <number>255</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_26">
-         <property name="text">
-          <string>Comments</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="TextEdit" name="textEdit_Com">
-         <property name="acceptRichText">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QFrame" name="frame">
+      <widget class="QLabel" name="labelInfo">
        <property name="minimumSize">
         <size>
-         <width>2</width>
-         <height>0</height>
+         <width>18</width>
+         <height>18</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>2</width>
-         <height>16777215</height>
+         <width>18</width>
+         <height>18</height>
         </size>
        </property>
-       <property name="frameShape">
-        <enum>QFrame::Shape::NoFrame</enum>
+       <property name="textFormat">
+        <enum>Qt::TextFormat::PlainText</enum>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../resources.qrc">:/icons/info.svg</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
-     <item>
-      <layout class="QVBoxLayout" name="layoutMiddleRight">
-       <property name="spacing">
-        <number>3</number>
+    </layout>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout_2">
+     <property name="bottomMargin">
+      <number>2</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_25">
+       <property name="text">
+        <string>Product</string>
        </property>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_5">
-         <property name="font">
-          <font>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Soundfont version</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_sfVersion">
-         <property name="text">
-          <string notr="true">version</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Policy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_4">
-         <property name="font">
-          <font>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>ROM name and version</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_romVersion">
-         <property name="text">
-          <string notr="true">rom</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Policy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_3">
-         <property name="font">
-          <font>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Sound engine</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_soundEngine">
-         <property name="text">
-          <string notr="true">sound engine</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Policy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="font">
-          <font>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Editing software</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_software">
-         <property name="text">
-          <string notr="true">Polyphone</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_26">
+       <property name="text">
+        <string>Comments</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="lineEdit_copyright">
+       <property name="maxLength">
+        <number>255</number>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_23">
+       <property name="text">
+        <string>Copyright</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lineEdit_product">
+       <property name="maxLength">
+        <number>255</number>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="TextEdit" name="textEdit_Com">
+       <property name="acceptRichText">
+        <bool>false</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -984,9 +845,6 @@
   <tabstop>lineEdit_name</tabstop>
   <tabstop>lineEdit_author</tabstop>
   <tabstop>lineEdit_date</tabstop>
-  <tabstop>lineEdit_product</tabstop>
-  <tabstop>lineEdit_copyright</tabstop>
-  <tabstop>textEdit_Com</tabstop>
   <tabstop>pushViewSamples</tabstop>
   <tabstop>comboBitDepth</tabstop>
   <tabstop>comboCompression</tabstop>
