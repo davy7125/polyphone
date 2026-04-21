@@ -28,7 +28,7 @@
 
 const QSize PageOverviewSampleDelegate::IMAGE_SIZE = QSize(35, 18);
 
-PageOverviewSampleDelegate::PageOverviewSampleDelegate() : QStyledItemDelegate()
+PageOverviewSampleDelegate::PageOverviewSampleDelegate(QObject * parent) : QStyledItemDelegate(parent)
 {
     // Sample mode icons
     QMap<QString, QString> replacement;

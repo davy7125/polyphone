@@ -32,7 +32,7 @@ class PageOverviewSampleDelegate: public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    PageOverviewSampleDelegate();
+    explicit PageOverviewSampleDelegate(QObject * parent = nullptr);
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 private:

@@ -40,7 +40,7 @@ PageOverview::PageOverview(ElementType typeElement, QWidget *parent) :
 
     // Custom display for sample modes
     if (typeElement == elementInst)
-        ui->table->setItemDelegateForColumn(9, new PageOverviewSampleDelegate());
+        ui->table->setItemDelegateForColumn(9, new PageOverviewSampleDelegate(ui->table));
 }
 
 PageOverview::~PageOverview()
