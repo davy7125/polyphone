@@ -113,7 +113,7 @@ void TabManager::openConfiguration()
 void TabManager::openNewSoundfont()
 {
     // Create a new editor
-    Editor * editor = new Editor(_dialogKeyboard);
+    Editor * editor = new Editor(_dialogKeyboard, EltID(elementSf2));
     int index = _stackedWidget->addWidgetWithTab(editor, ":/icons/file-audio.svg", "", true);
     connect(editor, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
     connect(editor, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
