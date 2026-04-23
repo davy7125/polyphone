@@ -27,6 +27,7 @@
 #include "instprst.h"
 #include "soundfont.h"
 #include "smpl.h"
+#include <QDebug>
 
 Division::Division(InstPrst * instPrst, Soundfont * soundfont, TreeItem * parent, EltID id) : TreeItem(id, parent),
     _instPrst(instPrst),
@@ -59,18 +60,32 @@ bool Division::isSet(AttributeType champ)
 
 AttributeValue Division::getGen(AttributeType champ)
 {
-    if (_attributeSet[champ])
-        return _attributeValues[champ];
+    bool returnDefault = false;
+    if (champ >= champ_endOper)
+    {
+        qWarning() << "Attempt to read field" << champ << "of a division";
+        returnDefault = true;
+    }
+    else if (!_attributeSet[champ])
+        returnDefault = true;
 
-    AttributeValue value;
-    value.wValue = 0;
-    return value;
+    if (returnDefault)
+    {
+        AttributeValue value;
+        value.wValue = 0;
+        return value;
+    }
+
+    return _attributeValues[champ];
 }
 
 void Division::setGen(AttributeType champ, AttributeValue value)
 {
     if (champ >= champ_endOper)
+    {
+        qWarning() << "Attempt to write field" << champ << "of a division";
         return;
+    }
 
     if (value.shValue == -1 && (champ == champ_overridingRootKey || champ == champ_keynum || champ == champ_velocity))
     {
@@ -88,7 +103,10 @@ void Division::setGen(AttributeType champ, AttributeValue value)
 void Division::resetGen(AttributeType champ)
 {
     if (champ >= champ_endOper)
+    {
+        qWarning() << "Attempt to reset field" << champ << "of a division";
         return;
+    }
 
     _attributeSet[champ] = false;
     if (champ == champ_keyRange)

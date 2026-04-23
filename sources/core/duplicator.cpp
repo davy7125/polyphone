@@ -421,14 +421,14 @@ EltID Duplicator::copyInst(EltID idSource, EltID idDest, bool withSmpl)
             if (!_listCopy.contains(idSmpl)) // Ne pas copier un smpl déjà copié
                 copy(idSmpl, idDest);
 
-            // Sample stéréo ?
-            if (_sm->get(idSource, champ_sfSampleType).sfLinkValue != RomMonoSample &&
-                    _sm->get(idSource, champ_sfSampleType).sfLinkValue != monoSample)
+            // Stereo sample?
+            SFSampleLink sampleLink = _sm->get(idSmpl, champ_sfSampleType).sfLinkValue;
+            if (sampleLink != RomMonoSample && sampleLink != monoSample)
             {
-                EltID idSourceLink = idSource;
-                idSourceLink.indexElt = _sm->get(idSource, champ_wSampleLink).wValue;
-                if (!_listCopy.contains(idSourceLink))
-                    copy(idSourceLink, idDest);
+                EltID idSmplLink = idSmpl;
+                idSmplLink.indexElt = _sm->get(idSmpl, champ_wSampleLink).wValue;
+                if (!_listCopy.contains(idSmplLink))
+                    copy(idSmplLink, idDest);
             }
         }
     }
