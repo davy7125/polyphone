@@ -41,8 +41,8 @@ DirectoryListView::DirectoryListView(QWidget * parent) : QListView(parent),
     // Proxy / model
     _proxy = new DirectorySortProxyModel(this);
     _proxy->setSourceModel(_model);
-    _proxy->sort(0);
     this->setModel(_proxy);
+    _proxy->sort(0);
 
     // Custom delegate
     this->setItemDelegate(_delegate);

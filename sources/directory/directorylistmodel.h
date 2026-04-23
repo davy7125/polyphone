@@ -49,7 +49,7 @@ private slots:
 
 private:
     QList<QString> _filePaths;
-    QMap<QString, DirectoryFileData *> _files;
+    QMap<QString, const DirectoryFileData *> _files;
 };
 
 #endif // DIRECTORYLISTMODEL_H
