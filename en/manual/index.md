@@ -1,91 +1,24 @@
-Welcome to the **User Manual** of Polyphone! To quickly discover what soundfonts are and how to edit them with Polyphone, you can start with [tutorials](tutorials/index.md) or watch videos on <a href="https://www.youtube.com/results?search_query=polyphone+sf2" target="_blank">YouTube</a> (special thanks to Polyphone users for their useful videos). And if you'd like to learn all about the software's features, simply read on.
+•♫•♬•1-817-752-4983 QuickBooks Desktop Stopped Working: How to Fix the Problem
+QuickBooks Payroll 2023 is used by many businesses to manage employee payments, payroll records, tax calculations, and payroll reports. However, users may sometimes experience freezing while opening payroll, processing employee payments, or downloading payroll updates. These interruptions can affect daily accounting work and delay important payroll tasks.
+When QuickBooks Payroll keeps freezing, it is important to identify the possible cause before attempting repairs. Common causes include outdated software, damaged program files, insufficient system resources, network problems, or issues with the company file 1-817-752-4983 .
+1. Identify When QuickBooks Payroll Freezes
+First, determine when the problem occurs. Does QuickBooks freeze while opening the payroll center, calculating employee wages, downloading updates, or saving payroll transactions? Recording the exact situation can help narrow down the cause.
+2. Restart QuickBooks Desktop
+Close QuickBooks and check that the application  QuickBooks Desktop stopped working has completely stopped running. Restart your computer and reopen the program. Before troubleshooting further, 1-817-752-4983 make sure you have saved your work and created a backup of your company file.
+3. Check for Software Updates
+An outdated QuickBooks Desktop installation can sometimes contribute to unexpected performance problems. Open the program's Update QuickBooks Desktop option and check for available updates. Install updates from the official source, then restart the application.
+4. Check Your Internet and Network Connection
+Payroll updates and certain connected services require a stable internet connection. If QuickBooks freezes during an update, check your connection and confirm that your firewall or security software is not unintentionally blocking required QuickBooks processes.
+For multi-user environments, also check whether other workstations can access the company file normally.
+5. Verify the Company File
+A company file with data problems may cause errors or delays during payroll operations. Create a backup first, then use the appropriate Verify Data and Rebuild Data utilities available in QuickBooks Desktop. Follow the official instructions 1-817-752-4983 for your version before repairing company data.
+6. Check Payroll Updates
+If the application freezes while downloading or installing payroll updates, confirm that your QuickBooks version is supported and that your payroll 1-817-752-4983 subscription is active. Avoid repeatedly interrupting an update that is still processing.
+7. Use QuickBooks Tool Hub When Appropriate
+QuickBooks Tool Hub provides troubleshooting utilities for certain installation, program, and company-file issues. Download it only from the official Intuit website and select the tool that matches the problem you are experiencing.
+8. Contact Official QuickBooks Payroll Support
+If the freezing continues after basic troubleshooting, contact Intuit through the official QuickBooks support website. Explain your QuickBooks Desktop version, when the freezing occurs, any error messages you see, and the 1-817-752-4983 troubleshooting steps you have already tried.
+You may see third-party contact numbers online, but verify a phone number through the official Intuit website before sharing account or payroll information. Never disclose your password or verification codes to an unverified contact.
+Conclusion
+QuickBooks Payroll 2023 freezing can result from update problems, software issues, network interruptions, or company-file errors. Restarting the application, checking updates, verifying company data, and using official troubleshooting tools may help resolve the problem. If it continues, official QuickBooks support can help determine the next appropriate step 1-817-752-4983 .
 
-If you need more help, or if the reading of these pages puts you off, you may find assistance in the [forum](forum).
-
-
-## Home screen {#doc_home}
-
-
-The first screen of Polyphone is basically made of 3 parts:
-
-* a [left part](#doc_left), containing a history of open files and directories, as well as shortcuts;
-* a [right part](#doc_right), dedicated to the soundfont repository;
-* a [top area](#doc_top), containing tabs and a menu.
-
-
-![Home screen of Polyphone](images/page_home.png "Home screen of Polyphone")
-
-
-## Left part {#doc_left}
-
-
-### Opening a soundfont
-
-
-Several ways for opening a soundfont:
-
-* a click on :guilabel:`Open soundfont` opens a file browser, the allowed file to select having the extension :file:`.sf2`, :file:`.sf3`, :file:`.sfArk`, :file:`.sfz` or :file:`.organ` (the different formats are described [here](manual/annexes/the-different-soundfont-formats.md));
-* a click on :guilabel:`New soundfont` opens an empty soundfont, everything is to be done from scratch;
-* a click on :guilabel:`Open directory` opens the [soundfont explorer](manual/soundfont-explorer.md), which scans an entire directory and allows you to open the desired file;
-* a double-click on a soundfont from the history re-open it.
-
-When a soundfont is open, a new tab appears with a [soundfont editor](manual/soundfont-editor/index.md) inside.
-
-
-### Shortcuts
-
-
-Three buttons are located at the bottom of the left part:
-
-* :guilabel:`Documentation`: open a web browser for reading the Polyphone [documentation](documentation).
-* :guilabel:`Forum`: open a web browser with the URL of the Polyphone [forum](forum).
-* :guilabel:`Settings`: open the [settings](manual/settings.md) of the software in a new tab.
-
-
-## Right part {#doc_right}
-
-
-### Online repository
-
-
-A click on the button :guilabel:`Online repository` opens a tab displaying the content of the [online soundfont repository](manual/online-repository.md).
-
-
-### Daily soundfonts
-
-
-Every day, 5 random soundfonts are displayed here. This is made for inciting people discovering new soundfonts.
-Double-clicking on one of them opens a new tab with the corresponding [soundfont description](manual/online-repository.md#doc_description).
-
-
-### Search
-
-
-It is possible to write a keyword here for searching specific soundfonts from the online repository, and the results will be displayed in the [dedicated tab](manual/online-repository.md).
-
-
-## Top area {#doc_top}
-
-
-### Tabs
-
-
-The tabs provide a quick access between:
-
-* the [home screen](#doc_home) (first tab — always open),
-* the [editor](manual/soundfont-editor/index.md) of an open soundfont,
-* the [soundfont explorer](manual/soundfont-explorer.md),
-* the software [settings](manual/settings.md),
-* the [online repository](manual/online-repository.md),
-* a [soundfont description](manual/online-repository.md#doc_description) from the online repository.
-
-Navigation between tabs can be performed using keyboard shortcuts:
-* :kbd:`Ctrl`+:kbd:`Tab` to go to the next tab, excluding the home screen tab,
-* :kbd:`Ctrl`+:kbd:`Maj`+:kbd:`Tab` to go to the previous tab, excluding the home screen tab,
-* :kbd:`Ctrl`+:kbd:`H` to go to the home screen.
-
-
-### Menu
-
-
-The menu, located in the top right corner, contains general functions and is described [here](manual/menu.md).
