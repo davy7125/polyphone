@@ -2,7 +2,7 @@
 
 Les normes MIDI définissent des règles pour l'échange de données musicales entre des éléments électroniques (claviers, expandeurs, &hellip;) et logiciels (instruments virtuels, séquenceurs, &hellip;) afin d'assurer leur compatibilité. En ce qui concerne les banques de sons, ces normes précisent toute une série d'instruments et pour chacun d'eux, les numéros de banque et d'ensemble à utiliser. Plusieurs normes existent&nbsp;:
 
-* la plus connue et la norme [General MIDI](#doc_gm), introduite en 1991,
+* la plus connue est la norme [General MIDI](#doc_gm), introduite en 1991,
 * Roland a défini les standards [MT-32](#doc_mt32) (1987) et [GS](#doc_gs) (1991, 1994 et 1996),
 * Yamaha est à l'origine du standard [XG](#doc_xg) en 1994.
 
@@ -21,7 +21,7 @@ Le standard General MIDI est détaillé dans ce [document](files/RP-003_General_
 <tr><td>004</td><td>Electric Piano 1</td></tr>
 <tr><td>005</td><td>Electric Piano 2</td></tr>
 <tr><td>006</td><td>Harpsichord</td></tr>
-<tr><td>007</td><td>Clavinet</td></tr>
+<tr><td>007</td><td>Clavi</td></tr>
 <tr><td>008</td><td>Celesta</td></tr>
 <tr><td>009</td><td>Glockenspiel</td></tr>
 <tr><td>010</td><td>Music Box</td></tr>
@@ -49,7 +49,7 @@ Le standard General MIDI est détaillé dans ce [document](files/RP-003_General_
 </table>
 <table cellspacing="0" cellpadding="1">
 <tr><td>032</td><td>Acoustic Bass</td></tr>
-<tr><td>033</td><td>Electric Bass (finder)</td></tr>
+<tr><td>033</td><td>Electric Bass (finger)</td></tr>
 <tr><td>034</td><td>Electric Bass (pick)</td></tr>
 <tr><td>035</td><td>Fretless Bass</td></tr>
 <tr><td>036</td><td>Slap Bass 1</td></tr>
@@ -64,8 +64,8 @@ Le standard General MIDI est détaillé dans ce [document](files/RP-003_General_
 <tr><td>045</td><td>Pizzicato Strings</td></tr>
 <tr><td>046</td><td>Orchestral Harp</td></tr>
 <tr><td>047</td><td>Timpani</td></tr>
-<tr><td>048</td><td>Strings Ensemble 1</td></tr>
-<tr><td>049</td><td>Strings Ensemble 2 (slow)</td></tr>
+<tr><td>048</td><td>String Ensemble 1</td></tr>
+<tr><td>049</td><td>String Ensemble 2</td></tr>
 <tr><td>050</td><td>Synth Strings 1</td></tr>
 <tr><td>051</td><td>Synth Strings 2</td></tr>
 <tr><td>052</td><td>Choir Aahs</td></tr>
@@ -223,15 +223,15 @@ Le standard MT-32 est détaillé dans ce [document](files/Roland_MT-32_OM.pdf). 
 <tr><td>000</td><td>Acoustic Piano 1</td></tr>
 <tr><td>001</td><td>Acoustic Piano 2</td></tr>
 <tr><td>002</td><td>Acoustic Piano 3</td></tr>
-<tr><td>003</td><td>Electronic Piano 1</td></tr>
-<tr><td>004</td><td>Electronic Piano 2</td></tr>
-<tr><td>005</td><td>Electronic Piano 3</td></tr>
-<tr><td>006</td><td>Electronic Piano 4</td></tr>
+<tr><td>003</td><td>Electric Piano 1</td></tr>
+<tr><td>004</td><td>Electric Piano 2</td></tr>
+<tr><td>005</td><td>Electric Piano 3</td></tr>
+<tr><td>006</td><td>Electric Piano 4</td></tr>
 <tr><td>007</td><td>Honkytonk</td></tr>
-<tr><td>008</td><td>Electronic Organ 1</td></tr>
-<tr><td>009</td><td>Electronic Organ 2</td></tr>
-<tr><td>010</td><td>Electronic Organ 3</td></tr>
-<tr><td>011</td><td>Electronic Organ 4</td></tr>
+<tr><td>008</td><td>Electric Organ 1</td></tr>
+<tr><td>009</td><td>Electric Organ 2</td></tr>
+<tr><td>010</td><td>Electric Organ 3</td></tr>
+<tr><td>011</td><td>Electric Organ 4</td></tr>
 <tr><td>012</td><td>Pipe Organ 1</td></tr>
 <tr><td>013</td><td>Pipe Organ 2</td></tr>
 <tr><td>014</td><td>Pipe Organ 3</td></tr>
@@ -352,7 +352,7 @@ Le standard MT-32 est détaillé dans ce [document](files/Roland_MT-32_OM.pdf). 
 <tr><td>123</td><td>Telephone</td></tr>
 <tr><td>124</td><td>Bird Tweet</td></tr>
 <tr><td>125</td><td>One Note Jam</td></tr>
-<tr><td>126</td><td>Water Bell</td></tr>
+<tr><td>126</td><td>Water Bells</td></tr>
 <tr><td>127</td><td>Jungle Tune</td></tr>
 </table>
 </div>
@@ -559,7 +559,7 @@ Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est d�
 <tr><td>006:039</td><td>MG Octave Bass 2 (3)</td></tr>
 <tr><td>007:039</td><td>MG Blip Bass (3 l)</td></tr>
 <tr><td>008:039</td><td>Synth Bass 4 (1)</td></tr>
-<tr><td>009:039</td><td>Dry Bass (2)</td></tr>
+<tr><td>009:039</td><td>X Wire Bass (2)</td></tr>
 <tr><td>010:039</td><td>X Wire Bass (3)</td></tr>
 <tr><td>011:039</td><td>Wire String Bass (3)</td></tr>
 <tr><td>012:039</td><td>Blip Bass (3 l)</td></tr>
@@ -626,7 +626,7 @@ Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est d�
 <tr><td>010:052</td><td>Church Choir (3)</td></tr>
 <tr><td>016:052</td><td>Choir Hahs (3)</td></tr>
 <tr><td>024:052</td><td>Chorus Lahs (3)</td></tr>
-<tr><td>032:052</td><td>Choir Aahs 2 (3)</td></tr>
+<tr><td>032:052</td><td>Choir Aahs 2 (1)</td></tr>
 <tr><td>033:052</td><td>Male Aah + String (3)</td></tr>
 <tr><td>008:053</td><td>Voice Dahs (3)</td></tr>
 <tr><td>008:054</td><td>Synth Voice (2)</td></tr>
@@ -909,7 +909,7 @@ Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est d�
 <tr><td>017:103</td><td>7th Atmosphere (3)</td></tr>
 <tr><td>018:103</td><td>Galaxy Way (3)</td></tr>
 <tr><td>001:104</td><td>Sitar 2 (1)</td></tr>
-<tr><td>002:104</td><td>Detune Sitar (3)</td></tr>
+<tr><td>002:104</td><td>Detune Sitar (2)</td></tr>
 <tr><td>003:104</td><td>Sitar 3 (3)</td></tr>
 <tr><td>008:104</td><td>Tambra (2)</td></tr>
 <tr><td>016:104</td><td>Tamboura (2)</td></tr>
@@ -997,7 +997,7 @@ Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est d�
 <tr><td>002:122</td><td>Thunder (1)</td></tr>
 <tr><td>003:122</td><td>Wind (1)</td></tr>
 <tr><td>004:122</td><td>Stream (1)</td></tr>
-<tr><td>005:122</td><td>Bubble (2)</td></tr>
+<tr><td>005:122</td><td>Bubble (1)</td></tr>
 <tr><td>006:122</td><td>Wind 2 (3)</td></tr>
 <tr><td>016:122</td><td>Pink Noise (3)</td></tr>
 <tr><td>017:122</td><td>White Noise (3)</td></tr>
@@ -1008,9 +1008,9 @@ Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est d�
 <tr><td>005:123</td><td>Growl (2)</td></tr>
 <tr><td>001:124</td><td>Telephone 2 (1)</td></tr>
 <tr><td>002:124</td><td>Door Creaking (1)</td></tr>
-<tr><td>003:124</td><td>Door Slam (1)</td></tr>
+<tr><td>003:124</td><td>Door (1)</td></tr>
 <tr><td>004:124</td><td>Scratch (1)</td></tr>
-<tr><td>005:124</td><td>Wind Chimes (2)</td></tr>
+<tr><td>005:124</td><td>Wind Chimes (1)</td></tr>
 </table>
 <table cellspacing="0" cellpadding="1">
 <tr><td>007:124</td><td>Scratch 2 (2)</td></tr>
@@ -1022,7 +1022,7 @@ Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est d�
 <tr><td>002:125</td><td>Car-Stop (1)</td></tr>
 <tr><td>003:125</td><td>Car-Pass (1)</td></tr>
 <tr><td>004:125</td><td>Car-Crash (1)</td></tr>
-<tr><td>005:125</td><td>Siren (2)</td></tr>
+<tr><td>005:125</td><td>Siren (1)</td></tr>
 <tr><td>006:125</td><td>Train (1)</td></tr>
 <tr><td>007:125</td><td>Jetplane (1)</td></tr>
 <tr><td>008:125</td><td>Starship (1)</td></tr>
@@ -1033,7 +1033,7 @@ Le standard GS a été étendu à 2 reprises. La version initiale de 1991 est d�
 <tr><td>002:126</td><td>Screaming (1)</td></tr>
 <tr><td>003:126</td><td>Punch (1)</td></tr>
 <tr><td>004:126</td><td>Heart Beat (1)</td></tr>
-<tr><td>005:126</td><td>Footsteps (2)</td></tr>
+<tr><td>005:126</td><td>Footsteps (1)</td></tr>
 <tr><td>006:126</td><td>Applause 2 (2)</td></tr>
 <tr><td>007:126</td><td>Small Club (3)</td></tr>
 <tr><td>008:126</td><td>Applause Wave (3)</td></tr>
@@ -1054,11 +1054,48 @@ Légende&nbsp;:
 
 * 1&nbsp;: jeu d'instruments SC-55
 * 2&nbsp;: jeu d'instruments SC-88
-* 3&nbsp;: jeu d'instruments SC-88 Pro Map
+* 3&nbsp;: jeu d'instruments SC-88 Pro
 * w&nbsp;: son avec réverbération
 * d&nbsp;: son sec
 * o&nbsp;: ouvert
 * l&nbsp;: legato possible
+
+Dans le jeu d'instruments SC-55, la variation 127 contient les 128 instruments du standard [MT-32](#doc_mt32) avec les mêmes numéros d'ensemble, et la variation 126 (ensembles 000 à 063) les instruments du CM-32P&nbsp;: le Roland CM-64 réunit ces deux modules, un CM-32L compatible avec le MT-32 et un CM-32P. Ces variations ne sont pas listées ci-dessus.
+
+Les kits de batterie se sélectionnent uniquement par leur numéro d'ensemble, sur une partie de batterie (canal 10 par défaut), et n'ont pas de variation&nbsp;: dans une banque de sons, ils se trouvent dans la banque 128, la banque des percussions de la spécification SoundFont.
+
+<div class='table-columns'>
+<table cellspacing="0" cellpadding="1">
+<tr><td>128:000</td><td>Standard (1)</td></tr>
+<tr><td>128:001</td><td>Standard 2 (2)</td></tr>
+<tr><td>128:002</td><td>Standard 3 (3)</td></tr>
+<tr><td>128:008</td><td>Room (1)</td></tr>
+<tr><td>128:009</td><td>Hip Hop (3)</td></tr>
+<tr><td>128:010</td><td>Jungle (3)</td></tr>
+<tr><td>128:011</td><td>Techno (3)</td></tr>
+<tr><td>128:016</td><td>Power (1)</td></tr>
+<tr><td>128:024</td><td>Electronic (1)</td></tr>
+<tr><td>128:025</td><td>TR-808 (1)</td></tr>
+<tr><td>128:026</td><td>Dance (2)</td></tr>
+<tr><td>128:027</td><td>CR-78 (3)</td></tr>
+<tr><td>128:028</td><td>TR-606 (3)</td></tr>
+</table>
+<table cellspacing="0" cellpadding="1">
+<tr><td>128:029</td><td>TR-707 (3)</td></tr>
+<tr><td>128:030</td><td>TR-909 (3)</td></tr>
+<tr><td>128:032</td><td>Jazz (1)</td></tr>
+<tr><td>128:040</td><td>Brush (1)</td></tr>
+<tr><td>128:048</td><td>Orchestra (1)</td></tr>
+<tr><td>128:049</td><td>Ethnic (2)</td></tr>
+<tr><td>128:050</td><td>Kick &amp; Snare (2)</td></tr>
+<tr><td>128:052</td><td>Asia (3)</td></tr>
+<tr><td>128:053</td><td>Cymbal &amp; Claps (3)</td></tr>
+<tr><td>128:056</td><td>SFX (1)</td></tr>
+<tr><td>128:057</td><td>Rhythm FX (2)</td></tr>
+<tr><td>128:058</td><td>Rhythm FX 2 (3)</td></tr>
+<tr><td>128:127</td><td>CM-64/32L (1)</td></tr>
+</table>
+</div>
 
 
 ## Le standard XG de Yamaha {#doc_xg}
@@ -1094,13 +1131,13 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>045:005</td><td>VX El.P2</td></tr>
 <tr><td>001:006</td><td>Harpsichord K</td></tr>
 <tr><td>025:006</td><td>Harpsichord 2</td></tr>
+</table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>035:006</td><td>Harpsichord 3</td></tr>
 <tr><td>001:007</td><td>Clavinet K</td></tr>
 <tr><td>027:007</td><td>ClaviWah</td></tr>
 <tr><td>064:007</td><td>PulseClv</td></tr>
 <tr><td>065:007</td><td>PierceCl</td></tr>
-</table>
-<table cellspacing="0" cellpadding="1">
 <tr><td>064:010</td><td>Orgel</td></tr>
 <tr><td>001:011</td><td>VibesK</td></tr>
 <tr><td>045:011</td><td>HardVibe</td></tr>
@@ -1122,6 +1159,8 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>038:016</td><td>EvenBar</td></tr>
 <tr><td>040:016</td><td>16+2"2/3</td></tr>
 <tr><td>064:016</td><td>Organ Ba</td></tr>
+</table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>065:016</td><td>70sDrOr2</td></tr>
 <tr><td>066:016</td><td>CheezOrg</td></tr>
 <tr><td>067:016</td><td>DrawOrg3</td></tr>
@@ -1130,10 +1169,8 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>033:017</td><td>LiteOrg</td></tr>
 <tr><td>037:017</td><td>PercOrg2</td></tr>
 <tr><td>064:018</td><td>RotaryOr</td></tr>
-<tr><td>065:018</td><td>SlwRotar</td></tr>
+<tr><td>065:018</td><td>SloRotar</td></tr>
 <tr><td>066:018</td><td>FstRotar</td></tr>
-</table>
-<table cellspacing="0" cellpadding="1">
 <tr><td>032:019</td><td>Church Organ 3</td></tr>
 <tr><td>035:019</td><td>Church Organ 2</td></tr>
 <tr><td>040:019</td><td>NotreDame organ</td></tr>
@@ -1146,10 +1183,12 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>016:024</td><td>NylonGt2</td></tr>
 <tr><td>025:024</td><td>NylonGt3</td></tr>
 <tr><td>043:024</td><td>VelGtHrm</td></tr>
-<tr><td>096:024</td><td>Ukelele</td></tr>
+<tr><td>096:024</td><td>Ukulele</td></tr>
 <tr><td>016:025</td><td>SteelGt2</td></tr>
 <tr><td>035:025</td><td>12StrGtr</td></tr>
 <tr><td>040:025</td><td>Nyln&Stl</td></tr>
+</table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>041:025</td><td>Stl&Body</td></tr>
 <tr><td>096:025</td><td>Mandolin</td></tr>
 <tr><td>018:026</td><td>MelloGtr</td></tr>
@@ -1165,8 +1204,6 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>065:031</td><td>GtFeedbk</td></tr>
 <tr><td>066:031</td><td>GtrHrmo2</td></tr>
 <tr><td>040:032</td><td>Jazz Rhythm</td></tr>
-</table>
-<table cellspacing="0" cellpadding="1">
 <tr><td>045:032</td><td>VX Upright</td></tr>
 <tr><td>018:033</td><td>FingrDrk</td></tr>
 <tr><td>027:033</td><td>FlangeBa</td></tr>
@@ -1178,6 +1215,8 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>032:035</td><td>Fretless 2</td></tr>
 <tr><td>033:035</td><td>Fretless 3</td></tr>
 <tr><td>034:035</td><td>Fretless 4</td></tr>
+</table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>096:035</td><td>SynFretl</td></tr>
 <tr><td>097:035</td><td>Smooth</td></tr>
 <tr><td>027:036</td><td>ResoSlap</td></tr>
@@ -1194,19 +1233,18 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>096:038</td><td>Hammer</td></tr>
 <tr><td>006:039</td><td>MelloSB1</td></tr>
 <tr><td>012:039</td><td>Seq Bass</td></tr>
-<tr><td>018:039</td><td>SynBa1Dk</td></tr>
+<tr><td>018:039</td><td>ClkSynBa</td></tr>
 <tr><td>019:039</td><td>SynBa2Dk</td></tr>
 <tr><td>032:039</td><td>SmthBa 2</td></tr>
 <tr><td>040:039</td><td>Modular Bass</td></tr>
-</table>
-<table cellspacing="0" cellpadding="1">
 <tr><td>041:039</td><td>DX Bass</td></tr>
 <tr><td>064:039</td><td>X WireBa</td></tr>
 <tr><td>008:040</td><td>SlowVln</td></tr>
-<tr><td>018:040</td><td>ClkSynBa</td></tr>
 <tr><td>008:044</td><td>SlowTrStr</td></tr>
 <tr><td>040:044</td><td>Susp Str</td></tr>
 <tr><td>040:046</td><td>Yang Chin</td></tr>
+</table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>003:048</td><td>S.Strngs</td></tr>
 <tr><td>008:048</td><td>SlowStr</td></tr>
 <tr><td>024:048</td><td>ArcoStr</td></tr>
@@ -1220,6 +1258,7 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>040:049</td><td>Warm Str</td></tr>
 <tr><td>041:049</td><td>Kingdom</td></tr>
 <tr><td>064:049</td><td>70s Str</td></tr>
+<tr><td>065:049</td><td>Str Ens3</td></tr>
 <tr><td>027:050</td><td>ResoStr</td></tr>
 <tr><td>064:050</td><td>Syn Str4</td></tr>
 <tr><td>065:050</td><td>SS Str</td></tr>
@@ -1231,12 +1270,13 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>041:054</td><td>Choral</td></tr>
 <tr><td>064:054</td><td>AnaVoice</td></tr>
 <tr><td>035:055</td><td>OrchHit2</td></tr>
+<tr><td>064:055</td><td>Impact</td></tr>
 </table>
 <table cellspacing="0" cellpadding="1">
-<tr><td>064:055</td><td>Impact</td></tr>
 <tr><td>016:056</td><td>Trumpet2</td></tr>
 <tr><td>017:056</td><td>BriteTrp</td></tr>
 <tr><td>032:056</td><td>WarmTrp</td></tr>
+<tr><td>096:056</td><td>FluglHrn</td></tr>
 <tr><td>018:057</td><td>Trmbone2</td></tr>
 <tr><td>016:058</td><td>Tuba 2</td></tr>
 <tr><td>006:060</td><td>FrHrSolo</td></tr>
@@ -1255,17 +1295,17 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>064:062</td><td>AnaBrss1</td></tr>
 <tr><td>018:063</td><td>Soft Brs</td></tr>
 <tr><td>040:063</td><td>SynBras4</td></tr>
-<tr><td>041:063</td><td>ChorBrss</td></tr>
+<tr><td>041:063</td><td>ChoirBrs</td></tr>
 <tr><td>045:063</td><td>VelBras2</td></tr>
 <tr><td>064:063</td><td>AnaBras2</td></tr>
 <tr><td>040:065</td><td>Sax Section</td></tr>
+</table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>043:065</td><td>HyprAlto</td></tr>
 <tr><td>040:066</td><td>BrthTnSx</td></tr>
 <tr><td>041:066</td><td>SoftTenr</td></tr>
 <tr><td>064:066</td><td>TnrSax 2</td></tr>
 <tr><td>006:080</td><td>Square 2</td></tr>
-</table>
-<table cellspacing="0" cellpadding="1">
 <tr><td>008:080</td><td>LMSquare</td></tr>
 <tr><td>018:080</td><td>Hollow</td></tr>
 <tr><td>019:080</td><td>Shmoog</td></tr>
@@ -1287,6 +1327,8 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>064:083</td><td>Rubby</td></tr>
 <tr><td>064:084</td><td>DistLead</td></tr>
 <tr><td>065:084</td><td>WireLead</td></tr>
+</table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>024:085</td><td>SynthAah</td></tr>
 <tr><td>064:085</td><td>VoxLead</td></tr>
 <tr><td>035:086</td><td>Big Five</td></tr>
@@ -1297,8 +1339,6 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>016:089</td><td>ThickPad</td></tr>
 <tr><td>017:089</td><td>Soft Pad</td></tr>
 <tr><td>018:089</td><td>SinePad</td></tr>
-</table>
-<table cellspacing="0" cellpadding="1">
 <tr><td>064:089</td><td>Horn Pad</td></tr>
 <tr><td>065:089</td><td>RotarStr</td></tr>
 <tr><td>064:090</td><td>PolyPd80</td></tr>
@@ -1315,13 +1355,16 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>020:095</td><td>Shwimmer</td></tr>
 <tr><td>027:095</td><td>Converge</td></tr>
 <tr><td>064:095</td><td>PolarPad</td></tr>
+</table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>066:095</td><td>Celstial</td></tr>
 <tr><td>045:096</td><td>ClaviPad</td></tr>
 <tr><td>064:096</td><td>HrmoRain</td></tr>
-<tr><td>065:096</td><td>AfrcnWod</td></tr>
+<tr><td>065:096</td><td>AfrcnWnd</td></tr>
 <tr><td>066:096</td><td>Caribean</td></tr>
 <tr><td>027:097</td><td>Prologue</td></tr>
 <tr><td>064:097</td><td>Ancestrl</td></tr>
+<tr><td>065:097</td><td>Rave</td></tr>
 <tr><td>012:098</td><td>SynDrCmp</td></tr>
 <tr><td>014:098</td><td>Popcorn</td></tr>
 <tr><td>018:098</td><td>TinyBell</td></tr>
@@ -1330,8 +1373,6 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>041:098</td><td>ClearBell</td></tr>
 <tr><td>042:098</td><td>ChorBell</td></tr>
 <tr><td>064:098</td><td>SynMalet</td></tr>
-</table>
-<table cellspacing="0" cellpadding="1">
 <tr><td>065:098</td><td>SftCryst</td></tr>
 <tr><td>066:098</td><td>LoudGlok</td></tr>
 <tr><td>067:098</td><td>XmasBell</td></tr>
@@ -1342,6 +1383,8 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>072:098</td><td>Gamelmba</td></tr>
 <tr><td>018:099</td><td>WarmAtms</td></tr>
 <tr><td>019:099</td><td>HollwRls</td></tr>
+</table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>040:099</td><td>NylonEP</td></tr>
 <tr><td>064:099</td><td>NylnHarp</td></tr>
 <tr><td>065:099</td><td>Harp Vox</td></tr>
@@ -1363,13 +1406,13 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>065:102</td><td>Big Pan</td></tr>
 <tr><td>066:102</td><td>SynPiano</td></tr>
 <tr><td>067:102</td><td>Creation</td></tr>
-</table>
-<table cellspacing="0" cellpadding="1">
 <tr><td>068:102</td><td>Stardust</td></tr>
 <tr><td>069:102</td><td>Reso Pan</td></tr>
 <tr><td>064:103</td><td>Starz</td></tr>
 <tr><td>032:104</td><td>DetSitar</td></tr>
 <tr><td>035:104</td><td>Sitar 2</td></tr>
+</table>
+<table cellspacing="0" cellpadding="1">
 <tr><td>096:104</td><td>Tambra</td></tr>
 <tr><td>097:104</td><td>Tamboura</td></tr>
 <tr><td>028:105</td><td>MuteBnjo</td></tr>
@@ -1396,6 +1439,26 @@ Le standard XG est détaillé dans ce [document](files/xg_spec.pdf). La liste de
 <tr><td>066:117</td><td>Rock Tom</td></tr>
 <tr><td>064:118</td><td>Ana Tom</td></tr>
 <tr><td>065:118</td><td>ElecPerc</td></tr>
+</table>
+</div>
+
+Les instruments marqués comme facultatifs ([Ext.]) dans la spécification ne sont pas listés ci-dessus.
+
+Les kits de batterie se sélectionnent avec le MSB de banque 127 et les kits d'effets sonores (SFX) avec le MSB de banque 126, alors que les banques ci-dessus sont des valeurs de LSB (avec un MSB de 0). Dans une banque de sons, ils se trouvent dans la banque 127 ou 126, ou dans la banque 128, la banque des percussions de la spécification SoundFont&nbsp;:
+
+<div class='table-columns'>
+<table cellspacing="0" cellpadding="1">
+<tr><td>127:000</td><td>Standard Kit</td></tr>
+<tr><td>127:001</td><td>Standard2 Kit</td></tr>
+<tr><td>127:008</td><td>Room Kit</td></tr>
+<tr><td>127:016</td><td>Rock Kit</td></tr>
+<tr><td>127:024</td><td>Electro Kit</td></tr>
+<tr><td>127:025</td><td>Analog Kit</td></tr>
+<tr><td>127:032</td><td>Jazz Kit</td></tr>
+<tr><td>127:040</td><td>Brush Kit</td></tr>
+<tr><td>127:048</td><td>Classic Kit</td></tr>
+<tr><td>126:000</td><td>SFX 1</td></tr>
+<tr><td>126:001</td><td>SFX 2</td></tr>
 </table>
 </div>
 
