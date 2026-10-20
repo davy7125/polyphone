@@ -49,7 +49,7 @@ The General MIDI standard is detailed in this [document](files/RP-003_General_MI
 </table>
 <table cellspacing="0" cellpadding="1">
 <tr><td>032</td><td>Acoustic Bass</td></tr>
-<tr><td>033</td><td>Electric Bass (finder)</td></tr>
+<tr><td>033</td><td>Electric Bass (finger)</td></tr>
 <tr><td>034</td><td>Electric Bass (pick)</td></tr>
 <tr><td>035</td><td>Fretless Bass</td></tr>
 <tr><td>036</td><td>Slap Bass 1</td></tr>
@@ -64,8 +64,8 @@ The General MIDI standard is detailed in this [document](files/RP-003_General_MI
 <tr><td>045</td><td>Pizzicato Strings</td></tr>
 <tr><td>046</td><td>Orchestral Harp</td></tr>
 <tr><td>047</td><td>Timpani</td></tr>
-<tr><td>048</td><td>Strings Ensemble 1</td></tr>
-<tr><td>049</td><td>Strings Ensemble 2 (slow)</td></tr>
+<tr><td>048</td><td>String Ensemble 1</td></tr>
+<tr><td>049</td><td>String Ensemble 2 (slow)</td></tr>
 <tr><td>050</td><td>Synth Strings 1</td></tr>
 <tr><td>051</td><td>Synth Strings 2</td></tr>
 <tr><td>052</td><td>Choir Aahs</td></tr>
@@ -352,7 +352,7 @@ The MT-32 standard is detailed in this [document](files/Roland_MT-32_OM.pdf). Th
 <tr><td>123</td><td>Telephone</td></tr>
 <tr><td>124</td><td>Bird Tweet</td></tr>
 <tr><td>125</td><td>One Note Jam</td></tr>
-<tr><td>126</td><td>Water Bell</td></tr>
+<tr><td>126</td><td>Water Bells</td></tr>
 <tr><td>127</td><td>Jungle Tune</td></tr>
 </table>
 </div>
@@ -626,7 +626,7 @@ The GS standard was extended twice. The initial 1991 version is detailed in this
 <tr><td>010:052</td><td>Church Choir (3)</td></tr>
 <tr><td>016:052</td><td>Choir Hahs (3)</td></tr>
 <tr><td>024:052</td><td>Chorus Lahs (3)</td></tr>
-<tr><td>032:052</td><td>Choir Aahs 2 (3)</td></tr>
+<tr><td>032:052</td><td>Choir Aahs 2 (1)</td></tr>
 <tr><td>033:052</td><td>Male Aah + String (3)</td></tr>
 <tr><td>008:053</td><td>Voice Dahs (3)</td></tr>
 <tr><td>008:054</td><td>Synth Voice (2)</td></tr>
@@ -909,7 +909,7 @@ The GS standard was extended twice. The initial 1991 version is detailed in this
 <tr><td>017:103</td><td>7th Atmosphere (3)</td></tr>
 <tr><td>018:103</td><td>Galaxy Way (3)</td></tr>
 <tr><td>001:104</td><td>Sitar 2 (1)</td></tr>
-<tr><td>002:104</td><td>Detune Sitar (3)</td></tr>
+<tr><td>002:104</td><td>Detune Sitar (2)</td></tr>
 <tr><td>003:104</td><td>Sitar 3 (3)</td></tr>
 <tr><td>008:104</td><td>Tambra (2)</td></tr>
 <tr><td>016:104</td><td>Tamboura (2)</td></tr>
@@ -997,7 +997,7 @@ The GS standard was extended twice. The initial 1991 version is detailed in this
 <tr><td>002:122</td><td>Thunder (1)</td></tr>
 <tr><td>003:122</td><td>Wind (1)</td></tr>
 <tr><td>004:122</td><td>Stream (1)</td></tr>
-<tr><td>005:122</td><td>Bubble (2)</td></tr>
+<tr><td>005:122</td><td>Bubble (1)</td></tr>
 <tr><td>006:122</td><td>Wind 2 (3)</td></tr>
 <tr><td>016:122</td><td>Pink Noise (3)</td></tr>
 <tr><td>017:122</td><td>White Noise (3)</td></tr>
@@ -1010,7 +1010,7 @@ The GS standard was extended twice. The initial 1991 version is detailed in this
 <tr><td>002:124</td><td>Door Creaking (1)</td></tr>
 <tr><td>003:124</td><td>Door Slam (1)</td></tr>
 <tr><td>004:124</td><td>Scratch (1)</td></tr>
-<tr><td>005:124</td><td>Wind Chimes (2)</td></tr>
+<tr><td>005:124</td><td>Wind Chimes (1)</td></tr>
 </table>
 <table cellspacing="0" cellpadding="1">
 <tr><td>007:124</td><td>Scratch 2 (2)</td></tr>
@@ -1022,7 +1022,7 @@ The GS standard was extended twice. The initial 1991 version is detailed in this
 <tr><td>002:125</td><td>Car-Stop (1)</td></tr>
 <tr><td>003:125</td><td>Car-Pass (1)</td></tr>
 <tr><td>004:125</td><td>Car-Crash (1)</td></tr>
-<tr><td>005:125</td><td>Siren (2)</td></tr>
+<tr><td>005:125</td><td>Siren (1)</td></tr>
 <tr><td>006:125</td><td>Train (1)</td></tr>
 <tr><td>007:125</td><td>Jetplane (1)</td></tr>
 <tr><td>008:125</td><td>Starship (1)</td></tr>
@@ -1033,7 +1033,7 @@ The GS standard was extended twice. The initial 1991 version is detailed in this
 <tr><td>002:126</td><td>Screaming (1)</td></tr>
 <tr><td>003:126</td><td>Punch (1)</td></tr>
 <tr><td>004:126</td><td>Heart Beat (1)</td></tr>
-<tr><td>005:126</td><td>Footsteps (2)</td></tr>
+<tr><td>005:126</td><td>Footsteps (1)</td></tr>
 <tr><td>006:126</td><td>Applause 2 (2)</td></tr>
 <tr><td>007:126</td><td>Small Club (3)</td></tr>
 <tr><td>008:126</td><td>Applause Wave (3)</td></tr>
@@ -1194,7 +1194,7 @@ The XG standard is detailed in this [document](files/xg_spec.pdf). The instrumen
 <tr><td>096:038</td><td>Hammer</td></tr>
 <tr><td>006:039</td><td>MelloSB1</td></tr>
 <tr><td>012:039</td><td>Seq Bass</td></tr>
-<tr><td>018:039</td><td>SynBa1Dk</td></tr>
+<tr><td>018:039</td><td>ClkSynBa</td></tr>
 <tr><td>019:039</td><td>SynBa2Dk</td></tr>
 <tr><td>032:039</td><td>SmthBa 2</td></tr>
 <tr><td>040:039</td><td>Modular Bass</td></tr>
@@ -1203,7 +1203,6 @@ The XG standard is detailed in this [document](files/xg_spec.pdf). The instrumen
 <tr><td>041:039</td><td>DX Bass</td></tr>
 <tr><td>064:039</td><td>X WireBa</td></tr>
 <tr><td>008:040</td><td>SlowVln</td></tr>
-<tr><td>018:040</td><td>ClkSynBa</td></tr>
 <tr><td>008:044</td><td>SlowTrStr</td></tr>
 <tr><td>040:044</td><td>Susp Str</td></tr>
 <tr><td>040:046</td><td>Yang Chin</td></tr>
@@ -1220,6 +1219,7 @@ The XG standard is detailed in this [document](files/xg_spec.pdf). The instrumen
 <tr><td>040:049</td><td>Warm Str</td></tr>
 <tr><td>041:049</td><td>Kingdom</td></tr>
 <tr><td>064:049</td><td>70s Str</td></tr>
+<tr><td>065:049</td><td>Str Ens3</td></tr>
 <tr><td>027:050</td><td>ResoStr</td></tr>
 <tr><td>064:050</td><td>Syn Str4</td></tr>
 <tr><td>065:050</td><td>SS Str</td></tr>
@@ -1237,6 +1237,7 @@ The XG standard is detailed in this [document](files/xg_spec.pdf). The instrumen
 <tr><td>016:056</td><td>Trumpet2</td></tr>
 <tr><td>017:056</td><td>BriteTrp</td></tr>
 <tr><td>032:056</td><td>WarmTrp</td></tr>
+<tr><td>096:056</td><td>FluglHrn</td></tr>
 <tr><td>018:057</td><td>Trmbone2</td></tr>
 <tr><td>016:058</td><td>Tuba 2</td></tr>
 <tr><td>006:060</td><td>FrHrSolo</td></tr>
@@ -1255,7 +1256,7 @@ The XG standard is detailed in this [document](files/xg_spec.pdf). The instrumen
 <tr><td>064:062</td><td>AnaBrss1</td></tr>
 <tr><td>018:063</td><td>Soft Brs</td></tr>
 <tr><td>040:063</td><td>SynBras4</td></tr>
-<tr><td>041:063</td><td>ChorBrss</td></tr>
+<tr><td>041:063</td><td>ChoirBrs</td></tr>
 <tr><td>045:063</td><td>VelBras2</td></tr>
 <tr><td>064:063</td><td>AnaBras2</td></tr>
 <tr><td>040:065</td><td>Sax Section</td></tr>
@@ -1318,10 +1319,11 @@ The XG standard is detailed in this [document](files/xg_spec.pdf). The instrumen
 <tr><td>066:095</td><td>Celstial</td></tr>
 <tr><td>045:096</td><td>ClaviPad</td></tr>
 <tr><td>064:096</td><td>HrmoRain</td></tr>
-<tr><td>065:096</td><td>AfrcnWod</td></tr>
+<tr><td>065:096</td><td>AfrcnWnd</td></tr>
 <tr><td>066:096</td><td>Caribean</td></tr>
 <tr><td>027:097</td><td>Prologue</td></tr>
 <tr><td>064:097</td><td>Ancestrl</td></tr>
+<tr><td>065:097</td><td>Rave</td></tr>
 <tr><td>012:098</td><td>SynDrCmp</td></tr>
 <tr><td>014:098</td><td>Popcorn</td></tr>
 <tr><td>018:098</td><td>TinyBell</td></tr>
