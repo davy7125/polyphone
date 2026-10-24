@@ -86,9 +86,6 @@ float FastMaths::fastPow10(float value)
 
 void FastMaths::addVectors(float * __restrict a, const float * __restrict b, unsigned int size)
 {
-    a = (float*)__builtin_assume_aligned(a, 32);
-    b = (const float*)__builtin_assume_aligned(b, 32);
-
 #ifdef __aarch64__
     unsigned int i = 0;
     const unsigned int simdSize = size & ~15u; // 16 floats per loop
@@ -123,8 +120,6 @@ void FastMaths::addVectors(float * __restrict a, const float * __restrict b, uns
 
 void FastMaths::clamp(float * values, unsigned int size)
 {
-    values = (float*)__builtin_assume_aligned(values, 32);
-
 #ifdef __aarch64__
 
     const float32x4_t vmaxv = vdupq_n_f32(1.0f);
@@ -164,9 +159,6 @@ void FastMaths::clamp(float * values, unsigned int size)
 void FastMaths::multiplyAdd(float * __restrict data, const float * __restrict dataToMultiplyAndAdd,
                             unsigned int size, float coeff)
 {
-    data = (float*)__builtin_assume_aligned(data, 32);
-    dataToMultiplyAndAdd = (const float*)__builtin_assume_aligned(dataToMultiplyAndAdd, 32);
-
 #ifdef __aarch64__
 
     const float32x4_t vCoeff = vdupq_n_f32(coeff);
@@ -207,9 +199,6 @@ void FastMaths::multiplyAdd(float * __restrict data, const float * __restrict da
 
 void FastMaths::multiply(float * __restrict data, const float * __restrict dataToMultiply, unsigned int size, float coeff)
 {
-    data = (float*)__builtin_assume_aligned(data, 32);
-    dataToMultiply = (const float*)__builtin_assume_aligned(dataToMultiply, 32);
-
 #ifdef __aarch64__
     const float32x4_t vCoeff = vdupq_n_f32(coeff);
 
@@ -243,8 +232,6 @@ void FastMaths::multiply(float * __restrict data, const float * __restrict dataT
 
 float FastMaths::multiply8(const float * __restrict coeffs, const qint16 * __restrict srcData16, const quint8 * __restrict srcData24)
 {
-    coeffs  = (const float*)__builtin_assume_aligned(coeffs, 32);
-
 #ifdef __aarch64__
     // Load 8 int16 and convert to int32
     int16x8_t s16 = vld1q_s16(srcData16);
@@ -288,9 +275,6 @@ float FastMaths::multiply8(const float * __restrict coeffs, const qint16 * __res
 
 float FastMaths::multiply4(const float * __restrict coeffs, const float * __restrict srcDataF)
 {
-    coeffs = (const float*)__builtin_assume_aligned(coeffs, 32);
-    srcDataF = (const float*)__builtin_assume_aligned(srcDataF, 32);
-
 #ifdef __aarch64__
     // Load all values
     float32x4_t a = vld1q_f32(coeffs);
