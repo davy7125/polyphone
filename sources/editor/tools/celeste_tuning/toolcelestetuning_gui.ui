@@ -17,7 +17,7 @@
    <item row="0" column="0" colspan="2">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string notr="true">Nombre de battements par secondes au do 4 (note 60)</string>
+      <string notr="true">Number of beats per second</string>
      </property>
     </widget>
    </item>

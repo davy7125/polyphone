@@ -5586,7 +5586,7 @@ Otros editores de soundfonts pueden mostrar otras unidades.</translation>
     </message>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="65"/>
-        <source>Balance adjustement</source>
+        <source>Balance adjustment</source>
         <translation>Ajuste de balance</translation>
     </message>
 </context>

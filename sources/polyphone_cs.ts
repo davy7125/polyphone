@@ -5575,7 +5575,7 @@ Jiné editory soundfontů mohou zobrazovat jiné jednotky.</translation>
     </message>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="65"/>
-        <source>Balance adjustement</source>
+        <source>Balance adjustment</source>
         <translation>Přizpůsobení vyvážení</translation>
     </message>
 </context>

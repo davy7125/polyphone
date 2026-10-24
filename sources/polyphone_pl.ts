@@ -5536,7 +5536,7 @@ Inne edytory SoundFontów mogą wyświetlać inne jednostki.</translation>
     </message>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="65"/>
-        <source>Balance adjustement</source>
+        <source>Balance adjustment</source>
         <translation>Dostosowanie balansu</translation>
     </message>
 </context>

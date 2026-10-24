@@ -62,7 +62,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return tr("Balance adjustement");
+        return tr("Balance adjustment");
     }
 
     /// Get the warning to display after the tool is run

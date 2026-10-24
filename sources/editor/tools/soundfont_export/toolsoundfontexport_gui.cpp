@@ -206,7 +206,7 @@ void ToolSoundfontExport_gui::on_pushExport_clicked()
 
     int maxNumberOfPresets = 0;
     foreach (int i, _presetList.keys())
-        maxNumberOfPresets += qMax(maxNumberOfPresets, _presetList[i].count());
+        maxNumberOfPresets = qMax(maxNumberOfPresets, _presetList[i].count());
     if (_presetList.count() > 1 && maxNumberOfPresets > 127)
     {
         QMessageBox::warning(this, tr("Warning"), tr("In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127."));

@@ -5580,7 +5580,7 @@ Altri editor di soundfont potrebbero visualizzare altre unità.</translation>
     </message>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="65"/>
-        <source>Balance adjustement</source>
+        <source>Balance adjustment</source>
         <translation>Regolazione del bilanciamento</translation>
     </message>
 </context>
