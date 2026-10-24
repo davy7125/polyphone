@@ -39,7 +39,7 @@ A click on the header :guilabel:`Instruments` displays the [configuration summar
 ### Section “Presets”
 
 
-This section lists all presets contained in the soundfont, a preset being a final elements made of instruments and that are accessible outside the soundfont.
+This section lists all presets contained in the soundfont, a preset being a final element, made of instruments, that is accessible from outside the soundfont.
 Presets contain links to instruments called “divisions”, displayed as a list below each preset.
 Selecting a preset or one of its divisions shows the [preset editor](manual/soundfont-editor/editing-pages/preset-editor.md).
 A click on the header :guilabel:`Presets` displays the [configuration summary](manual/soundfont-editor/configuration-summaries.md#doc_preset) of all presets.
@@ -52,10 +52,12 @@ A right click on an element shows a menu comprising the following actions:
 
 Bind to…
 : Bind the selected sample(s) to an instrument, or the selected instrument(s) to a preset.
+  The destination is chosen in a list that can be filtered.
+  When samples having different root keys are bound to an empty instrument, their key ranges are automatically defined (as with the tool [Sample auto-positioning](manual/soundfont-editor/tools/instrument-tools.md#doc_position)).
 
 Replace by…
-: Replace a sample by another sample in an instrument, or replace an instrument by another instrument in a preset.
-  The configuration of the divisions is kept.
+: Replace a sample by another sample in an instrument division, or replace an instrument by another instrument in a preset division.
+  The configuration of the division is kept.
 
 Copy
 : Copy the selected element(s), also accessible with :kbd:`Ctrl`+:kbd:`C`.
@@ -69,6 +71,7 @@ Duplicate
 
 Delete
 : Delete the selected element(s), also accessible with :kbd:`Del`.
+  A sample used by an instrument and an instrument used by a preset cannot be deleted.
 
 Mute
 : For testing purposes, a division within an instrument or a preset can be muted. This option can also be found in the contextual menu of the [table header](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_solo).
@@ -77,13 +80,15 @@ Always play
 : Opposite to the “Mute” function, one or more instruments or presets can be added when playing. It is thus possible to find a good balance between different instruments or presets playing together.
 
 Restore playback
-: Cancel the effects of “Mute” and “Always play”.
+: Cancel the effects of “Mute” and “Always play” in the whole soundfont.
 
 Rename or bulk rename
 : Rename the selected element(s), also accessible with :kbd:`F2`.
-  When several elements are selected, different options are provided:
+  Renaming a division renames the sample or the instrument it is linked to.
+  When several elements are selected, a dialog proposes different options:
   
-  * overwrite existing name with key name as suffix (for samples only),
+  * overwrite existing name with key name as suffix (for samples and instrument divisions only),
+  * overwrite existing name with key name and velocity as suffix (for instrument divisions only),
   * overwrite existing name with numerical ascending suffix,
   * replace characters,
   * insert text at a specific position,
@@ -98,7 +103,7 @@ Rename or bulk rename
 
 The operation “drag & drop” in the tree enables quick associations or copies.
 Before a drag & drop you need to select elements.
-This can be a single element or a multiple selection made possible with the buttons :kbd:`Ctrl` and :kbd:`Shift`.
+This can be a single element or a multiple selection made possible with the keys :kbd:`Ctrl` and :kbd:`Shift`.
 
 Then, the result of a drag & drop depends on the kind of elements that are dragged and the kind of element that is targeted.
 
@@ -115,7 +120,7 @@ Instrument → instrument
 : Copy of all divisions of the source instrument into the destination instrument (it can be the same instrument).
 
 Instrument division → instrument or instrument division
-: Copy of the division of the source instrument into the destination instrument (it can be the same instrument).
+: Copy of the selected divisions of the source instrument into the destination instrument (it can be the same instrument).
 
 Instrument → header :guilabel:`Presets`
 : Creation of a preset that contains all instruments dragged or creation of one preset per instrument dragged.
@@ -124,7 +129,10 @@ Preset → preset
 : Copy of all divisions of the source preset into the destination preset (it can be the same preset).
 
 Preset division → preset or preset division
-: Copy of the division of the source preset into the destination preset (it can be the same preset).
+: Copy of the selected divisions of the source preset into the destination preset (it can be the same preset).
+
+Audio file (from the file explorer of the computer) → tree
+: Import of the file as a new sample, if its format is supported (see the [sample editor](manual/soundfont-editor/editing-pages/sample-editor.md)).
 
 
 ## Copy / paste {#doc_copypaste}
@@ -132,7 +140,7 @@ Preset division → preset or preset division
 
 Everything that is possible with a drag & drop as seen previously is also possible with a copy / paste, accessible through the contextual menu or with the shortcuts :kbd:`Ctrl`+:kbd:`C` and :kbd:`Ctrl`+:kbd:`V`.
 
-Copy / Paste is also allowed within different soundfonts.
+Copy / Paste is also allowed between different soundfonts.
 It is possible to copy one element in a first soundfont, and paste it in a second soundfont.
 A multiple selection is allowed.
 
@@ -145,7 +153,7 @@ Instrument(s) selected
 Preset(s) selected
 : Copy of the presets including all instruments and samples linked.
 
-During a copy of elements between different soundfonts, if an element having the same name already exists several options are provided:
+During a copy of elements between different soundfonts, if an element having the same name already exists, several options are provided:
 
 * ignore the operation, in which case the copy is canceled for the element having the same name;
 * replace the existing element, in which case the existing element is overwritten by the copied element;
@@ -155,17 +163,17 @@ During a copy of elements between different soundfonts, if an element having the
 ## Search {#doc_search}
 
 
-To facilitate the search for items in the tree, a search bar is available to filter.
+To facilitate the search for items in the tree, a search bar is available to filter them (the shortcut :kbd:`Ctrl`+:kbd:`F` puts the focus on it).
 
 
 ![Tree: search bar](images/tree_3.png "Tree: search bar")
 
 
-When a string is inserted into the search bar, the elements containing it are shown.
+When a text is written in the search bar, the elements containing it are shown.
 Moreover:
 
-* if the string is included in the name of sample, the instruments using the sample and the presets using these instruments are displayed;
-* if the string is included in the name of an instrument, the samples used by the instrument and the presets using the instrument are displayed;
-* if the string is included in the name of a preset, the instruments used by the preset and the samples used by these instruments are displayed.
+* if the text is included in the name of a sample, the instruments using the sample and the presets using these instruments are displayed;
+* if the text is included in the name of an instrument, the samples used by the instrument and the presets using the instrument are displayed;
+* if the text is included in the name of a preset, the instruments used by the preset and the samples used by these instruments are displayed.
 
 A click on the cross to the right of the editable field cancels the filter.

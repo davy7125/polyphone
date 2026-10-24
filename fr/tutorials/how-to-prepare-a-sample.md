@@ -6,11 +6,11 @@ Ce tutoriel décrit comment ajouter et préparer un échantillon dans une banque
 
 
 Tout d'abord, assurez-vous d'avoir des échantillons sur votre ordinateur.
-Beaucoup d'échantillons gratuits peuvent être trouvés sur internet, provenant de l'enregistrement d'instruments réels (comme une flûte, guitare, violoncelle, …) ou créés à l'aide de diverses méthodes de synthèse audio.
+Beaucoup d'échantillons gratuits peuvent être trouvés sur internet, provenant de l'enregistrement d'instruments réels (comme une flûte, une guitare, un violoncelle, …) ou créés à l'aide de diverses méthodes de synthèse audio.
 
 Pour ce tutoriel, cet échantillon de flûte est fourni&nbsp;: <a href="files/flute.wav" download>flute.wav</a>.
 
-Lorsque vous l'avez, créez une nouvelle banque de sons avec Polyphone (:menuselection:`Menu --> Nouveau`) et importez l'échantillon (:guilabel:`Nouvel échantillon`).
+Lorsque vous l'avez, créez une nouvelle banque de sons avec Polyphone (:menuselection:`Menu --> Nouveau`) et importez l'échantillon (:guilabel:`Ajouter un échantillon` dans la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_edit)).
 
 
 ![Importation d'un échantillon](images/import-sample.png "Importation d'un échantillon")
@@ -26,7 +26,7 @@ Une boucle est une zone au sein de l'échantillon qui peut être répétée pour
 Supposons que nous ayons un échantillon qui dure une demi-seconde, avec une boucle le son pourra être étendu jusqu'à 10 secondes ou plus.
 Ceci est utile uniquement dans le cas d'échantillons non percussifs comme des flûtes, trompettes, orgues ou violons.
 À l'opposé, les tambours ne requièrent aucune boucle.
-Ce peut être applicable également pour un piano ou une guitare, selon la manière où les sons sont synthétisés.
+Ce peut être applicable également pour un piano ou une guitare, selon la manière dont les sons sont synthétisés.
 
 Ainsi, cette section est nécessaire si et seulement si vous ressentez le besoin d'étendre la durée initiale de l'échantillon.
 Si ce n'est pas le cas, vous pouvez aller directement à la prochaine section «&nbsp;Accordage&nbsp;».
@@ -42,7 +42,7 @@ Dans l'arborescence, cliquez sur l'échantillon que vous voulez boucler et porte
 
 
 Si vous êtes chanceux, ces valeurs ont été enregistrées dans l'échantillon .wav et les champs sont déjà renseignés.
-Si ce n'est pas le cas, ou s'ils ont été mal déterminés (ce qui peut malheureusement arriver…), cliquez arbitrairement dans le graphique (zone de visualisation WAVE) avec le bouton de droite et avec le bouton de gauche pour définir une fin et un début de boucle.
+Si ce n'est pas le cas, ou s'ils ont été mal déterminés (ce qui peut malheureusement arriver…), cliquez arbitrairement dans le graphique (zone de visualisation WAV) avec le bouton de droite et avec le bouton de gauche pour définir une fin et un début de boucle.
 Ceci est généralement effectué dans la phase stationnaire du son, en excluant l'attaque et la relâche.
 Ensuite, zoomez autour du début de boucle et essayez de superposer la courbe verte (ou rouge) et la courbe bleue en modifiant légèrement les paramètres de boucle.
 
@@ -53,7 +53,7 @@ Ensuite, zoomez autour du début de boucle et essayez de superposer la courbe ve
 ### Écouter le résultat
 
 
-Quand une boucle est configurée, appuyez sur :guilabel:`lecture` dans le lecteur avec la case :guilabel:`boucle` cochée pour écouter le résultat.
+Quand une boucle est configurée, appuyez sur :guilabel:`Lecture` dans le lecteur avec la case :guilabel:`en boucle` cochée pour écouter le résultat.
 
 
 ![Bouclage d'un échantillon&nbsp;: résultat](images/loop-sample-3.png "Bouclage d'un échantillon&nbsp;: résultat")
@@ -72,9 +72,9 @@ Sinon, maintenez la lecture de l'échantillon avec la boucle activée et modifie
 ![](files/good-loop.mp3)
 
 
-**Note&nbsp;:** Un outil existe pour "tricher" si vous ne pouvez pas trouver de boucles facilement&nbsp;: l'outil de [bouclage automatique](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop).
+**Note&nbsp;:** Un outil existe pour «&nbsp;tricher&nbsp;» si vous n'arrivez pas à trouver de boucles facilement&nbsp;: l'outil de [bouclage automatique](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop).
 Il créera automatiquement une boucle en coupant l'échantillon et en superposant deux sections, de manière à ce que la fin de la section corresponde exactement à son début.
-Voir la documentation en rapport avec l'outil pour plus d'informations.
+Voir la documentation de l'outil pour plus d'informations.
 
 
 ## Accordage {#doc_tuning}
@@ -82,15 +82,15 @@ Voir la documentation en rapport avec l'outil pour plus d'informations.
 
 Tous les échantillons doivent être accordés si vous ne voulez pas vous retrouver avec un instrument désaccordé.
 En indiquant dans la banque de sons la note exacte de l'échantillon importé, le moteur de rendu du son sera capable de l'adapter pour n'importe quelle touche du clavier.
-Certains échantillons contiennent déjà ces informations, dans quel cas vous pourriez ne pas avoir besoin de modifier les valeurs dans :guilabel:`Note de base` and :guilabel:`Correction (centièmes)`.
-Mais en précaution il est toujours mieux de vérifier.
+Certains échantillons contiennent déjà ces informations, auquel cas vous pourriez ne pas avoir besoin de modifier les valeurs de :guilabel:`Note de base` et de :guilabel:`Correction`.
+Par précaution, il est toujours préférable de vérifier.
 
 
 ![Accordage des échantillons&nbsp;: information sur la hauteur de note](images/tune-sample-1.png "Accordage des échantillons&nbsp;: information sur la hauteur de note")
 
 
-Activez la boucle si l'échantillon en contient une et appuyez sur :guilabel:`lecture` dans le lecteur.
-Ensuite ajoutez le sinus de calibration et ajustez son volume de manière à entendre les deux sons aussi clairement que possible.
+Activez la boucle si l'échantillon en contient une et appuyez sur :guilabel:`Lecture` dans le lecteur.
+Ensuite activez le :guilabel:`sinus` de calibration et ajustez le volume de manière à entendre les deux sons aussi clairement que possible.
 
 
 ![Accordage des échantillons&nbsp;: lire l'échantillon avec le signal de calibration](images/tune-sample-2.png "Accordage des échantillons&nbsp;: lire l'échantillon avec le signal de calibration")
@@ -98,7 +98,7 @@ Ensuite ajoutez le sinus de calibration et ajustez son volume de manière à ent
 
 Commencez l'accordage en modifiant la note de base jusqu'à ce que les deux sons correspondent le mieux possible.
 Continuez en ajustant la correction.
-Pour cette étape, portez votre oreille sur les battements qui apparaissent et faites en sorte qu'ils soient le plus lent possible.
+Pour cette étape, portez votre attention sur les battements qui apparaissent et faites en sorte qu'ils soient aussi lents que possible.
 Voici des exemples contenant le son d'une flûte et le sinus de calibration&nbsp;:
 
 * <a href="files/very-bad-tune.mp3" download>très mauvais accordage</a> (la note de base est mauvaise)
@@ -114,7 +114,7 @@ Voici des exemples contenant le son d'une flûte et le sinus de calibration&nbsp
 ![](files/good-tune.mp3)
 
 
-**Note&nbsp;:** L'[analyse fréquentielle](manual/soundfont-editor/editing-pages/sample-editor.md#doc_fred) peut être un bon indicateur pour commencer l'accordage. Mais gardez en tête qu'il n'y a pas d'algorithme parfait pour cette tâche et que seules vos oreilles trouveront le bon accordage.
+**Note&nbsp;:** L'[analyse fréquentielle](manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq) peut être un bon indicateur pour commencer l'accordage. Mais gardez en tête qu'il n'y a pas d'algorithme parfait pour cette tâche et que seules vos oreilles trouveront le bon accordage.
 
 
 ![Accordage des échantillons&nbsp;: analyse fréquentielle](images/tune-sample-3.png "Accordage des échantillons&nbsp;: analyse fréquentielle")
@@ -123,10 +123,10 @@ Voici des exemples contenant le son d'une flûte et le sinus de calibration&nbsp
 ## Pour aller plus loin {#doc_further}
 
 
-Différents outils sont disponibles pour l'édition des échantillons comme&nbsp;:
+Différents outils sont disponibles dans la boîte à outils pour l'édition des échantillons comme&nbsp;:
 
 * [supprimer le blanc](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) au démarrage,
-* [égaliser](manual/soundfont-editor/editing-pages/sample-editor#doc_eq) le son,
+* [égaliser](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) le son,
 * [transposer](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normaliser](manual/soundfont-editor/tools/sample-tools.md#doc_volume) le volume,
 * [ajuster la balance](manual/soundfont-editor/tools/sample-tools.md#doc_balance) pour les échantillons stéréo.

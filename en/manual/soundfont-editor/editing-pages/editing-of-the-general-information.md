@@ -2,7 +2,7 @@ The page for editing the general information is displayed when the header :guila
 This page is made of three kinds of elements:
 
 * [editable fields](#doc_edit),
-* [general information](#doc_info) that are not editable,
+* [general information](#doc_info) that is not editable,
 * [statistics](#doc_stats) about the soundfont.
 
 
@@ -21,16 +21,16 @@ Author
 : Relates to the author name of the soundfont.
 
 Date
-: Creation date of the file.
+: Creation date of the file (a calendar helps to choose it).
 
 Product
-: Product for which is designed the soundfont.
+: Product for which the soundfont is designed.
 
 Copyright
-: Mention to fill if the file is subject to copyright.
+: Mention to fill in if the file is subject to copyright.
 
 Comments
-: Information not included in any of the previous categories.
+: Information not included in any of the previous categories (the text can contain any UTF-8 character).
 
 Bit depth
 : Indicates whether the samples are stored with a 16-bit or 24-bit resolution (in which case the compression is not allowed).
@@ -45,9 +45,9 @@ Compression
 ## General information {#doc_info}
 
 
-The editing page of the general information comprises the following non-editable information:
+The editing page of the general information provides the following non-editable information:
 
-Soundfont version
+Soundfont format
 : Version of the [sf2 format](manual/annexes/the-different-soundfont-formats.md#doc_sf2) used by the file.
 
 ROM name and version
@@ -59,11 +59,10 @@ Sound engine
 Editing software
 : Editing software used for the soundfont creation.
 
-File name
-: Address and name of the file.
+These pieces of information are displayed in a tooltip when the mouse is over the information icon, at the end of the line showing the author and the date.
 
-File size
-: Size of the soundfont after it is saved.
+File name and size
+: Address and name of the file, and its size on the disk, displayed at the bottom of the window (the size is the one of the file as it was last saved).
 
 
 ## Statistics {#doc_stats}
@@ -77,7 +76,9 @@ A count is made on:
 * the number of parameters and modulators edited for the instruments,
 * the number of parameters and modulators edited for the presets.
 
+The button :guilabel:`Details` next to the samples, the instruments and the presets displays the corresponding [configuration summary](manual/soundfont-editor/configuration-summaries.md).
+
 Unused samples and instruments can be easily removed with the tool “[Remove unused elements](manual/soundfont-editor/tools/global-tools.md#doc_unused)”.
 
 **Note:** The number of 65536 parameters in the instruments and the presets should not be exceeded.
-Some synthesizers may not be adapted to read them all.
+Some synthesizers may not be able to read them all.

@@ -10,7 +10,7 @@ A lot of free samples can be found on internet, being either recorded from real 
 
 For this tutorial this flute sample is provided: <a href="files/flute.wav" download>flute.wav</a>.
 
-Once you have it, create a new soundfont with Polyphone (:menuselection:`Menu --> New`) and import the sample (:guilabel:`Add a sample`).
+Once you have it, create a new soundfont with Polyphone (:menuselection:`Menu --> New`) and import the sample (:guilabel:`Add a sample` in the [toolbar](manual/soundfont-editor/toolbar.md#doc_edit)).
 
 
 ![Import sample](images/import-sample.png "Import sample")
@@ -25,7 +25,7 @@ Once you have it, create a new soundfont with Polyphone (:menuselection:`Menu --
 A loop is an area within a sample that can be repeated to extend the duration of the sample.
 Let's say a sample lasts only 0.5 second, with a nice loop the sound can be extended up to 10 seconds or more.
 This is useful only for samples of non-percussive instruments such as flutes, trumpets, organs, violins.
-To the opposite, drums require no loops.
+On the contrary, drums require no loops.
 This might also be the case for a piano or a guitar, depending on how these sounds are synthesized.
 
 Thus, this section is necessary if and only if you feel the need of extending the original length of a sample.
@@ -53,7 +53,7 @@ Then, zoom around the beginning of the loop and try to superimpose the green (or
 ### Listening to the result
 
 
-When the loop is configured, press :guilabel:`play` on the player with the :guilabel:`loop` enabled to check the result.
+When the loop is configured, press :guilabel:`Play` on the player with the option :guilabel:`loop` enabled to check the result.
 
 
 ![Loop sample: check the result](images/loop-sample-3.png "Loop sample: check the result")
@@ -61,7 +61,7 @@ When the loop is configured, press :guilabel:`play` on the player with the :guil
 
 If you don't hear the transition once the end of the loop is read, this means that the loop is good.
 Otherwise, keep the player on and slightly move the end and / or the beginning of the loop until you find points with a transition as smooth as possible.
-Try the next records to see the difference between a bad and a good loop:
+Listen to the following recordings to hear the difference between a bad and a good loop:
 
 * <a href="files/bad-loop.mp3" download>bad loop</a>
 
@@ -82,15 +82,15 @@ See the related documentation for more information.
 
 All samples have to be tuned if you don't want an out-of-tune instrument.
 By indicating in the soundfont the exact pitch of all imported samples, the soundfont will be able to adapt them to keys.
-Some samples may already have these information, in which case you shouldn't have to change the values in :guilabel:`Root Key` and :guilabel:`Correction (cents)`.
+Some samples may already have this information, in which case you shouldn't have to change the values in :guilabel:`Root Key` and :guilabel:`Correction (cents)`.
 But as a precaution it is always good to check.
 
 
 ![Tune sample: pitch information](images/tune-sample-1.png "Tune sample: pitch information")
 
 
-Enable the loop if the sample has one and press :guilabel:`play` on the player.
-Then add the calibration sine and adjust its volume so that you can hear both sounds as clearly as possible.
+Enable the loop if the sample has one and press :guilabel:`Play` on the player.
+Then enable the calibration :guilabel:`sine` and adjust the volume so that you can hear both sounds as clearly as possible.
 
 
 ![Tune sample: play sample along with calibration signal](images/tune-sample-2.png "Tune sample: play sample along with calibration signal")
@@ -114,7 +114,7 @@ Here are examples containing the sound of a flute and a calibration sine:
 ![](files/good-tune.mp3)
 
 
-**Note:** The [frequency analysis](manual/soundfont-editor/editing-pages/sample-editor.md#doc_fred) can be a good indicator to start tuning. But keep in mind that no algorithm is perfect for this task and only your ears will find the right tune.
+**Note:** The [frequency analysis](manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq) can be a good indicator to start tuning. But keep in mind that no algorithm is perfect for this task and only your ears will find the right tune.
 
 
 ![Tune sample: frequency analysis](images/tune-sample-3.png "Tune sample: frequency analysis")
@@ -123,11 +123,11 @@ Here are examples containing the sound of a flute and a calibration sine:
 ## To go further {#doc_further}
 
 
-Several tools are available in the menu :guilabel:`Tools`.
+Several tools are available in the menu :guilabel:`Toolbox` of the [toolbar](manual/soundfont-editor/toolbar.md#doc_edit).
 You can edit samples by:
 
 * [removing blank](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) at start,
-* [equalizing](manual/soundfont-editor/editing-pages/sample-editor#doc_eq) the sound,
+* [equalizing](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) the sound,
 * [transposing](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normalizing](manual/soundfont-editor/tools/sample-tools.md#doc_volume) the volume,
 * [adjusting the balance](manual/soundfont-editor/tools/sample-tools.md#doc_balance) for stereo samples.

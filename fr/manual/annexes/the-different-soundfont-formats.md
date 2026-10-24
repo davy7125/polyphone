@@ -1,4 +1,4 @@
-Polyphone est compatible avec plusieurs formats de banques de sons&nbsp;:
+Polyphone prend en charge plusieurs formats de banques de sons&nbsp;:
 
 * [sf2](#doc_sf2),
 * [sf3](#doc_sf3),
@@ -21,9 +21,9 @@ Les fichiers sf2 sont construits selon une architecture à trois niveaux&nbsp;:
 
 En plus de la définition et de la configuration de ces éléments, un fichier sf2 contient des [informations générales](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md) (l'auteur, la licence et la date de création par exemple).
 
-Les banques de sons sont utilisées par des synthétiseurs logiciels, comme <a href="http://www.fluidsynth.org/" target="_blank">Fluidsynth</a>, qui sont généralement pilotés par des signaux MIDI.
+Les banques de sons sont utilisées par des synthétiseurs logiciels, comme <a href="http://www.fluidsynth.org/" target="_blank">FluidSynth</a>, qui sont généralement pilotés par des signaux MIDI.
 Il est aussi possible d'utiliser les banques de sons au format sf2 pour écouter des fichiers MIDI avec <a href="https://sourceforge.net/projects/timidity" target="_blank">TiMidity</a>, <a href="https://www.mindwerks.net/projects/wildmidi" target="_blank">WildMIDI</a> ou QuickTime et écouter des partitions de musique avec <a href="https://musescore.org/" target="_blank">MuseScore</a>.
-Du matériel tel que sampleurs, cartes sons ou encore synthétiseurs peuvent aussi supporter le format .sf2.
+Du matériel tel que des sampleurs, des cartes son ou encore des synthétiseurs peut aussi prendre en charge le format .sf2.
 
 D'autres informations sur les banques de sons peuvent être trouvées par exemple sur <a href="https://fr.wikipedia.org/wiki/SoundFont" target="_blank">Wikipedia</a>.
 Les spécifications sf2 sont disponibles [ici](files/sf_specifications_v2.01.pdf) pour la version 2.01 et [là](files/sf_specifications_v2.04.pdf) pour la version 2.04.
@@ -34,8 +34,9 @@ Les spécifications sf2 sont disponibles [ici](files/sf_specifications_v2.01.pdf
 
 Le format sf3, développé par <a href="https://musescore.org/" target="_blank">MuseScore</a>, est similaire en tout point au format sf2 sauf pour les [échantillons](manual/soundfont-editor/editing-pages/sample-editor.md) qui peuvent être stockés dans le format OGG (version open-source du format MP3) au lieu d'être stockés en données brutes.
 La conséquence est que le format sf3 est environ 10 fois plus léger que le format sf2 pour une qualité comparable.
+Dans Polyphone, la compression est activée dans les [informations générales](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_edit) de la banque de sons et chaque échantillon peut ensuite être compressé dans l'[éditeur d'échantillons](manual/soundfont-editor/editing-pages/sample-editor.md#doc_info) (la qualité de la compression peut être choisie).
 
-Les échantillons compressés dans une banque de son exportée dans ce format n'ont pas pour but d'être ré-édités ultérieurement à cause des compressions successives qui pourraient induire un abaissement de la qualité du son.
+Les échantillons compressés dans une banque de sons exportée dans ce format ne sont pas destinés à être réédités ultérieurement, car les compressions successives induiraient un abaissement de la qualité du son.
 Ce format doit être considéré comme un produit final et est très intéressant pour les utilisateurs finaux des banques de sons car&nbsp;:
 
 * les téléchargements sont plus rapides sur internet,
@@ -49,11 +50,11 @@ Le code source est disponible, assurant ainsi sa pérennité (évitons les erreu
 ## Banques de sons sfz {#doc_sfz}
 
 
-Le format sfz a le même but que le format sf2&nbsp;: créer un instrument de musique virtuel en disposant et configurant des échantillons sur un clavier.
-La principale différence réside dans le fait que le format sf2 décrit un seul fichier qui contient tout, alors que le format sfz consiste en un fichier texte délivré avec un ensemble d'échantillons .wav.
+Le format sfz a le même but que le format sf2&nbsp;: créer un instrument de musique virtuel en disposant et en configurant des échantillons sur un clavier.
+La principale différence réside dans le fait que le format sf2 consiste en un seul fichier qui contient tout, alors que le format sfz consiste en un fichier texte livré avec un ensemble d'échantillons .wav.
 Étant donné que le fichier sfz est conçu pour être éditable par un humain, le principal avantage est qu'un éditeur complexe n'est pas nécessaire.
-Mais un éditeur est toutefois hautement recommandé pour des grands instruments, la quantité des paramètres devenant en effet rapidement décourageant.
-Par ailleurs le format sfz est défini de manière moins stricte que le format sf2&nbsp;: des différences peuvent apparaître dans la manière d'éditer et dans la manière dont les instruments sfz sont joués. Mais par la même occasions, les capacités des instruments sfz ont été augmentées par rapport au standard sf2.
+Mais un éditeur est toutefois vivement recommandé pour les gros instruments, la quantité de paramètres devenant en effet rapidement décourageante.
+Par ailleurs le format sfz est défini de manière moins stricte que le format sf2&nbsp;: des différences peuvent apparaître dans la manière d'éditer et dans la manière dont les instruments sfz sont joués. Mais, par la même occasion, les capacités des instruments sfz ont été augmentées par rapport au standard sf2.
 
 
 ### Limitations sur l'importation sfz
@@ -63,7 +64,7 @@ Par ailleurs le format sfz est défini de manière moins stricte que le format s
 * L'enveloppe appliquée à la hauteur de note et au filtre étant la même dans les fichiers sf2 (Mod env), importer différentes enveloppes pour la hauteur de note et pour le filtre n'est pas possible (opcodes ``fileg_*`` et ``pitcheg_*``).
 * Le LFO appliqué au volume et au filtre étant le même dans les fichiers sf2 (Mod LFO), importer différents LFOs pour le volume et le filtre n'est pas possible (opcodes ``amplfo_*`` et ``fillfo_*``).
 * Le seul filtre qui peut être importé est le filtre passe-bas du deuxième ordre (``fil_type=lpf_2p``).
-* Pour être importé correctement, les opcodes ``group`` et ``off_by`` doivent contenir la même valeur au sein du même groupe.
+* Pour être importés correctement, les opcodes ``group`` et ``off_by`` doivent contenir la même valeur au sein du même groupe.
 
 **Attention&nbsp;:** les opcodes ``width`` et ``position`` peuvent ne pas être interprétés correctement.
 
@@ -72,9 +73,9 @@ Par ailleurs le format sfz est défini de manière moins stricte que le format s
 
 
 * Les [modulateurs](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator) ne sont pour l'instant pas exportés.
-* Le format sfz (version 1) n'autorisant qu'une modulation de la hauteur de note, les deux paramètres :guilabel:`Vib LFO → note (c)` and :guilabel:`Mod LFO → note (c)` ne peuvent pas être exportés simultanément.
+* Le format sfz (version 1) n'autorisant qu'une modulation de la hauteur de note, les deux paramètres :guilabel:`Vib LFO → note (c)` et :guilabel:`Mod LFO → note (c)` ne peuvent pas être exportés simultanément.
 * Une boucle 0-1 peut être exportée mais elle sera ignorée par la plupart des lecteurs sfz.
-* Les échantillons 24 bits peuvent ne pas être supportés par certains lecteurs sfz, vérifiez tout d'abord leurs spécifications.
+* Les échantillons 24 bits peuvent ne pas être pris en charge par certains lecteurs sfz, consultez au préalable leurs spécifications.
 
 
 ### En général
@@ -83,26 +84,26 @@ Par ailleurs le format sfz est défini de manière moins stricte que le format s
 Les correspondances de niveaux du son (en dB), durant les processus de conversion sfz / sf2, ont été testées avec le logiciel Sforzando.
 Il peut cependant subsister quelques différences.
 
-Par ailleurs, la manière dont les paramètres varient selon la note (via :guilabel:`Note → Vol env maintien / déclin` et :guilabel:`Note → Mod env maintien / déclin`) n'ont pas d'équivalents exacts.
-Le format sf2 utilise une loi exponentielle pour définir la durée des phases de maintien et de déclin si ces durées dépendent de la note, alors que le format sf2 utilise une loi linéaire.
+Par ailleurs, la manière dont les paramètres varient selon la note (via :guilabel:`Note → Vol env maintien / déclin` et :guilabel:`Note → Mod env maintien / déclin`) n'a pas d'équivalent exact.
+Le format sf2 utilise une loi exponentielle pour définir la durée des phases de maintien et de déclin en fonction de la note, alors que le format sfz utilise une loi linéaire.
 
 
 ## Archives sfArk {#doc_sfark}
 
 
-Les archives sfArk, tout comme le format sf3, est un format utilisant la compression avec perte.
+Les archives sfArk, tout comme le format sf3, constituent un format utilisant la compression avec perte.
 Ce qui signifie que la qualité des sons est légèrement abaissée (mais souvent imperceptible).
-Ce format tend à être obsolète dû à de nombreux problèmes de conception, c'est pourquoi Polyphone ne propose que l'importation des archives sfArk et non leur exportation.
+Ce format tend à être obsolète en raison de nombreux problèmes de conception, c'est pourquoi Polyphone ne propose que l'importation des archives sfArk et non leur exportation.
 
 
 ## Dispositions GrandOrgue {#doc_organ}
 
 
-GrandOrgue est un logiciel dont le but principal est d'émuler des instruments tels que des orgues à tuyaux. La définition d'un orgue est faite par une série de fichiers wav, chaque fichier contenant le son d'un tuyau, et un fichier avec l'extension «&nbsp;.organ&nbsp;» qui contient tous les paramètres nécessaires pour créer un orgue basé sur tous les fichiers wav. Globalement, tous les échantillons sont associés à des touches spécifiques et sont regroupés par jeux, qui peuvent être activés ou désactivés lorsque l'on joue de l'orgue. Polyphone est capable de créer des banques de sons basées sur ce mapping mais ne supporte pas la conversion des banques de sons vers le format GrandOrgue.
+GrandOrgue est un logiciel dont le but principal est d'émuler des instruments tels que des orgues à tuyaux. La définition d'un orgue est faite par une série de fichiers wav, chaque fichier contenant le son d'un tuyau, et un fichier avec l'extension «&nbsp;.organ&nbsp;» qui contient tous les paramètres nécessaires pour créer un orgue basé sur tous les fichiers wav. Globalement, tous les échantillons sont associés à des touches spécifiques et sont regroupés par jeux, qui peuvent être activés ou désactivés lorsque l'on joue de l'orgue. Polyphone est capable de créer des banques de sons basées sur ce mapping mais ne prend pas en charge la conversion des banques de sons vers le format GrandOrgue.
 
 ### Limitation sur l'importation
 
-Les transpositions ne sont pour l'instant pas supportées.
+Les transpositions ne sont pour l'instant pas prises en charge.
 
 
 *[MIDI]: Musical Instrument Digital Interface

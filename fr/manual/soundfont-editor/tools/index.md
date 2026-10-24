@@ -1,9 +1,10 @@
-Lorsque vous avez compris comment les banques de sons fonctionnent (au travers les différents [éditeurs](manual/soundfont-editor/editing-pages/index.md)), les outils constituent probablement le prochain sujet d'intérêt.
+Lorsque vous avez compris comment les banques de sons fonctionnent (à travers les différents [éditeurs](manual/soundfont-editor/editing-pages/index.md)), les outils constituent probablement le prochain sujet d'intérêt.
 Ils ont tous été conçus pour accélérer / automatiser l'édition et pour éviter les erreurs courantes ou les imprécisions qu'un être humain fait habituellement.
 
 Les outils sont tous disponibles dans un menu qui est affiché en cliquant sur l'icône représentant une boîte à outils située dans la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_edit).
 Le contenu de ce menu dépend de la sélection dans l'[arborescence](manual/soundfont-editor/tree.md)&nbsp;: le type de sélection est tout d'abord pris en compte (comme décrit ci-dessous), ensuite le nombre des éléments sélectionnés.
 Certains outils ne peuvent pas manipuler plusieurs éléments en même temps et sont ainsi masqués lors d'une sélection multiple.
+Les outils sont triés par catégorie puis par nom, et un nom suivi de points de suspension (…) indique qu'une fenêtre sera affichée pour paramétrer l'outil.
 
 
 ## Outils globaux {#doc_global}

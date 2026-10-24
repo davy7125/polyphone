@@ -1,4 +1,4 @@
-To create a [soundfont](manual/annexes/the-different-soundfont-formats.md#doc_sf2), click on :guilabel:`Create a soundfont` in the [home screen](manual/index.md#doc_left).
+To create a [soundfont](manual/annexes/the-different-soundfont-formats.md#doc_sf2), click on :guilabel:`New soundfont` in the [home screen](manual/index.md#doc_left).
 Soundfonts are made from a 3-level structure, so the creation of a new soundfont involves three fundamental steps:
 
 * the [sample preparation](#doc_sample),
@@ -12,8 +12,8 @@ Soundfonts are made from a 3-level structure, so the creation of a new soundfont
 ### Sample loading
 
 
-The sample preparation begins by **loading** .wav files.
-To do this first select the :guilabel:`Samples` category in the [tree](manual/soundfont-editor/tree.md) and select :guilabel:`Import samples` from the [toolbar](manual/soundfont-editor/toolbar.md#doc_edit).
+The sample preparation begins by **loading** audio files (.wav for instance).
+To do this, click on :guilabel:`Add a sample` in the [toolbar](manual/soundfont-editor/toolbar.md#doc_edit) and select one or more audio files (the files can also be dragged and dropped onto the [tree](manual/soundfont-editor/tree.md#doc_dragdrop)).
 Samples may be obtained:
 
 * through Internet,
@@ -32,14 +32,14 @@ While you can assign loop points manually, using the “[Auto loop](manual/sound
 To assign loop points manually:
 
 1. click in the [tree](manual/soundfont-editor/tree.md) on the sample to be looped,
-2. in the [sample editor](manual/soundfont-editor/editing-pages/sample-editor.md), arbitrarily position the start and end of the loop in the [graphic](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) (WAV display area) unless a loop is already defined.
+2. in the [sample editor](manual/soundfont-editor/editing-pages/sample-editor.md), arbitrarily position the start and end of the loop in the [graph](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) (WAV display area) unless a loop is already defined.
   Use left-click for start and right-click for end.
-  The right loop point should be entered first (since the right point is by default at the position 0 and that it's not possible to assign a left point after the right point).
-3. press the :guilabel:`Play` button after having selected the loop function,
+  The right loop point should be entered first (since the right point is by default at the position 0 and it's not possible to assign a left point after the right point).
+3. press the :guilabel:`Play` button after having enabled the option :guilabel:`loop`,
 4. adjust the start and / or end of the loop, while the sample is playing, until the transition between the two positions is as smooth as possible.
 
 
-**Note:** to hear looping in an instrument, you must select ![loop on](images/loop_on.png "loop on"){.inline} in the :guilabel:`Loop playback` parameter row of either the Global or individual notes columns in the [Parameters Table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table). ![loop on](images/loop_on.png "loop on"){.inline} turns it On, ![loop off](images/loop_off.png "loop off"){.inline} or a blank turns it Off.
+**Note:** to hear looping in an instrument, you must select ![loop on](images/loop_on.png "loop on"){.inline} in the :guilabel:`Loop playback` parameter row of either the :guilabel:`Global` or individual notes columns in the [parameter table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table). ![loop on](images/loop_on.png "loop on"){.inline} turns it On, ![loop off](images/loop_off.png "loop off"){.inline} or a blank turns it Off.
 
 
 ![Loop illustration](images/loop_illustration.png "Loop illustration")
@@ -52,11 +52,11 @@ Finally, a **tuning** has to be done.
 To do this, a calibration tool (sine) is available in the editing page of [samples](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player).
 For each sample the method is as follows:
 
-1. begin the playback (press the :guilabel:`play` button), if possible with loop function selected,
-2. select the sine function,
+1. begin the playback (press the :guilabel:`Play` button), if possible with the option :guilabel:`loop` enabled,
+2. enable the option :guilabel:`sine`,
 3. adjust the volume slider to hear the two sounds as clearly as possible,
 4. change the :guilabel:`Root key` until the two sounds most closely match,
-5. adjust the :guilabel:`Correction (cents)` to tune the sample to the Rootkey.
+5. adjust the :guilabel:`Correction` (in cents) to tune the sample to the root key.
    To do this, pay attention to any beats that occur and make sure they are as slow as possible.
 
 The [frequency](manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq) analysis can be a good indicator to start tuning.
@@ -68,7 +68,7 @@ The [frequency](manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq)
 Several tools are available to edit samples like:
 
 * [removing blank](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) at start,
-* [equalizing](manual/soundfont-editor/editing-pages/sample-editor#doc_eq) the sound,
+* [equalizing](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) the sound,
 * [transposing](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normalizing](manual/soundfont-editor/tools/sample-tools.md#doc_volume) the volume,
 * [adjusting the balance](manual/soundfont-editor/tools/sample-tools.md#doc_balance) for stereo samples.
@@ -83,10 +83,10 @@ For this step, it is assumed that one or more samples are available for the crea
 ### Creating an instrument and adding samples
 
 
-First, click on :guilabel:`New instrument` in the [toolbar](manual/soundfont-editor/toolbar.md#doc_edit).
-A name must now be entered.
+First, click on :guilabel:`Add an instrument` in the [toolbar](manual/soundfont-editor/toolbar.md#doc_edit).
+A name must now be entered (if samples are selected in the tree, they can be linked directly to the new instrument).
 
-Then add samples to the instrument using a “[drag & drop](manual/soundfont-editor/tree.md#doc_dragdrop)”.
+Otherwise, add samples to the instrument using a “[drag & drop](manual/soundfont-editor/tree.md#doc_dragdrop)”.
 In the tree you will notice that divisions appear in the instrument.
 
 **Note:** When divisions are created the samples are not copied but linked. There are no constraints on the number of divisions.
@@ -98,7 +98,7 @@ In the tree you will notice that divisions appear in the instrument.
 When samples are added to instruments, they appear as divisions (columns) in the [instrument editor table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table).
 Each division must then be positioned on the keyboard by changing the :guilabel:`Key range` in the table.
 Generally, it is a good practice to have the range of a division include the root key of its represented sample.
-The entire surface of the keyboard must be covered (eg, key 36 to key 96 for a classic synthesizer keyboard).
+The entire surface of the keyboard must be covered (e.g. key 36 to key 96 for a classic synthesizer keyboard).
 
 The tool “[Sample auto-positioning](manual/soundfont-editor/tools/instrument-tools.md#doc_position)” automatically distributes the samples over the keyboard.
 
@@ -141,14 +141,14 @@ Each preset contains one or more instruments, just as instruments contain one or
 ### Creating a preset and adding instruments
 
 
-First, click on :guilabel:`New preset` in the [toolbar](manual/soundfont-editor/toolbar.md#doc_edit).
-A name must now be entered.
+First, click on :guilabel:`Add a preset` in the [toolbar](manual/soundfont-editor/toolbar.md#doc_edit).
+A name must now be entered (if instruments are selected in the tree, they can be linked directly to the new preset).
 
-Then add instruments to the preset using a “[drag & drop](manual/soundfont-editor/tree.md#doc_dragdrop)”.
+Otherwise, add instruments to the preset using a “[drag & drop](manual/soundfont-editor/tree.md#doc_dragdrop)”.
 In the tree you will notice that one or more divisions appear in the preset.
-Often there may only be one, as in the case of a preset containing a single intrument.
+Often there may only be one, as in the case of a preset containing a single instrument.
 
-It is possible to create as many or more presets as instruments, and each preset can contain one or more instruments.
+It is possible to create as many presets as instruments (or even more), and each preset can contain one or more instruments.
 
 
 ### Setting up a preset

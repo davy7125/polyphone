@@ -1,5 +1,6 @@
 Polyphone has been designed to support translations in order to increase the accessibility.
-Everyone can help in this process.
+Everyone can help in this process: a translation can be created from scratch or an existing translation can be completed or improved.
+Since version 2.6, all translations that were incomplete have been completed with the help of an AI, and they deserve to be reviewed by native speakers.
 
 
 ## Prerequisite
@@ -12,12 +13,14 @@ Download the translation package corresponding to the language you want to trans
 If the language is not in the list yet, use the [contact](contact) form to ask for it (you just need to specify the new language you want).
 You will quickly be provided with a new translation package.
 
+The translation files are also available in the <a href="https://github.com/davy7125/polyphone" target="_blank">GitHub</a> repository, in the directory :file:`sources` (one file :file:`polyphone_XX.ts` per language).
+
 
 ### Qt Linguist
 
 
 The only software you need to translate is :program:`Qt Linguist`: a tool for generating translation files.
-This software can be found <a href="https://github.com/thurask/Qt-Linguist/releases" target="_blank">here</a> for Windows users or in repositories for Linux users (via :program:`Synaptic`, :program:`Yum`, …).
+This software is installed with Qt (see the [development pages](development/index.md)), and can also be found <a href="https://github.com/thurask/Qt-Linguist/releases" target="_blank">here</a> for Windows users or in the repositories of Linux distributions (package :program:`linguist-qt6` on Debian and Ubuntu, :program:`qt6-linguist` on Fedora).
 
 
 ## Opening the translation file
@@ -61,10 +64,11 @@ And don't forget to save your work with :kbd:`Ctrl`+:kbd:`S`.
 At anytime you can check your work.
 In :program:`Qt Linguist` go to :menuselection:`File --> Release As…` and create a .qm file corresponding to the translation you are providing.
 Follow the instructions in the translation package to install it (:file:`readme.txt` file), then open Polyphone.
-Go to the configurations, select your translation and restart Polyphone.
+Go to the [settings](manual/settings.md#doc_interface), select your translation in the list of languages and restart Polyphone.
 You will now be able to review your translation.
 
 **Note:** the operation :guilabel:`Release As…` may translate only text comprising no accent. If this bug happens, open a terminal and use the following command: :command:`lrelease polyphone_XX.ts` (adapt it to your current file).
+A translation file :file:`polyphone_XX.qm` can also be loaded from a directory named :file:`translations` (in the current directory or in the configuration directory of Polyphone) instead of being embedded in the software.
 
 
 ## Submitting the translation
@@ -72,3 +76,5 @@ You will now be able to review your translation.
 
 Once you are done (or bothered!), send the .ts file (not .qm!) you were editing to <contact@polyphone.io>.
 The translation package of this [page](software/translations) will be updated.
+
+If you are used to GitHub, you can also propose your .ts file with a pull request on the <a href="https://github.com/davy7125/polyphone" target="_blank">repository</a> (see the contributing guide).

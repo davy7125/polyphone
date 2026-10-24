@@ -1,11 +1,13 @@
-The software preferences are accessible either from the [home screen](manual/index.md) or from the [menu](manual/menu.md#doc_shortcuts).
+The software preferences are accessible either from the [home screen](manual/index.md) or from the [menu](manual/menu.md#doc_shortcuts) (shortcut :kbd:`Ctrl`+:kbd:`,`).
 They are divided into five sections:
 
 * [General](#doc_general)
 * [Interface](#doc_interface)
 * [Sound](#doc_sound)
-* [Virtual keyboard](#doc_keyboard)
+* [Keyboard](#doc_keyboard)
 * [Online repository](#doc_repository)
+
+All modifications are saved immediately.
 
 
 ## General {#doc_general}
@@ -14,17 +16,19 @@ They are divided into five sections:
 The :guilabel:`General` section allows the modification of the following parameters:
 
 Audio backend
-: Specifies the audio backend used to play samples.
-  JACK and ASIO drivers (the latter for Windows only) may be chosen.
+: Specifies the audio system and the device used to play sounds.
+  The available systems depend on the operating system (for example WASAPI and ASIO on Windows, ALSA and JACK on Linux, Core Audio on macOS).
+  Choosing “-” turns off the audio output.
 
 Buffer size
-: Specifies the buffer size used for JACK and ASIO drivers.
+: Specifies the size of the audio buffer.
   A small buffer results in a small latency, but the sound may become scratchy.
+  With the value :guilabel:`Default`, the size depends on the audio system.
 
 MIDI input
-: Specifies the MIDI input controlling the virtual keyboard.
+: Specifies the MIDI input controlling the synthesizer and the virtual keyboard.
 
-Moreover, it is possible to check the following options:
+Moreover, it is possible to tick the following options:
 
 Stereo editing: change linked sample
 : When editing one side of a stereo sample, the other side is automatically edited the same.
@@ -46,30 +50,37 @@ Sample import: remove blank at start
 This section shows options related to the interface of the software:
 
 Language
-: The language may be changed here (a restart of the software is required).
+: The language may be changed here.
 
 Key names
-: Keys may be named depending on their number (according to MIDI specification), or depending on the name of middle C (C3, C4 or C5).
+: Keys may be named depending on their number (according to the MIDI specification), or depending on the name of middle C (C3, C4 or C5).
   Key names may comprise sharps or flats.
 
 Unique instance
 : Open all files in a single window.
 
 Startup view
-: Select the view to display when a soundfont is open from the following: :guilabel:`general information` (default), :guilabel:`sample list`, :guilabel:`first sample`, :guilabel:`instrument list`, :guilabel:`first instrument`, :guilabel:`preset list`, :guilabel:`first preset`.
+: Select the view to display when a soundfont is opened among the following: :guilabel:`general information` (default), :guilabel:`sample list`, :guilabel:`first sample`, :guilabel:`instrument list`, :guilabel:`first instrument`, :guilabel:`preset list`, :guilabel:`first preset`.
 
 Sort divisions
-: The division order within an instrument or a preset can be changed here.
+: The order of the divisions within an instrument or a preset can be changed here: :guilabel:`by key range`, :guilabel:`by velocity range`, :guilabel:`in alphabetical order` or :guilabel:`none` (the order of creation).
 
-Theme
-: Different styles and predefined color sets are available for customizing the appearance of Polyphone.
-  A manual selection of colors is also possible.
+Style
+: The style of the interface elements.
+  The style :guilabel:`Fusion` is the default one, and others may be proposed depending on the operating system (Adwaita, Windows, macOS…).
+
+Colors
+: Different predefined color sets are available for customizing the appearance of Polyphone.
+  A manual selection of the colors of the text, the window, the buttons, the selection and the lists is also possible.
+  Colors can be changed only with the styles :guilabel:`Fusion` and :guilabel:`Windows`.
 
 Window borders
-: Display or hide the window borders, for saving space on the screen.
+: Display or hide the window borders, for saving space on the screen (not available on macOS).
 
 Decorations
 : Background decorations in some lists can be deactivated for readability.
+
+A modification of the language, the key names, the style, the colors, the window borders or the decorations is applied during the next start of the software.
 
 
 ![Settings, interface](images/settings_interface.png "Settings, interface")
@@ -78,26 +89,35 @@ Decorations
 ## Sound {#doc_sound}
 
 
-The :guilabel:`Sound` section makes it possible to modify the chorus and reverb of the synth, along with its global volume.
-The global volume may be changed with the volume MIDI controller if an external keyboard is connected.
+The :guilabel:`Sound` section makes it possible to modify the reverb (level, room size, damping and width) and the chorus (level, depth and frequency) of the synthesizer, along with its general volume.
+The general volume may be changed with the volume MIDI controller if an external keyboard is connected.
 
-Since the default modulator modifying the filter frequency has been changed between versions 2.01 and 2.04 of the sf2 specifications, it is possible to define here which version to take:
+Since the default modulator modifying the filter cutoff frequency has been changed between versions 2.01 and 2.04 of the sf2 specifications, it is possible to define here which version to use:
 
-* :guilabel:`SoundFont 2.01`: use the rule "lower the filter frequency taking into account the velocity IF the velocity is less than 64" (we can hear a clear and problematic gap between velocities 63 and 64);
-* :guilabel:`SoundFont 2.04`: use the rule "lower the filter frequency taking into account the velocity" (no more gap);
+* :guilabel:`SoundFont 2.01`: use the rule “lower the filter frequency taking into account the velocity IF the velocity is less than 64” (a clear and problematic gap can be heard between velocities 63 and 64);
+* :guilabel:`SoundFont 2.04` (default): use the rule “lower the filter frequency taking into account the velocity” (no more gap);
 * :guilabel:`disabled`: this default modulator is not set.
 
 
 ![Settings, sound](images/settings_sound.png "Settings, sound")
 
 
-## Virtual keyboard {#doc_keyboard}
+## Keyboard {#doc_keyboard}
 
 
-The keys of the computer keyboard used to control the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard) are defined in the :guilabel:`Virtual keyboard` section.
-The pitch may be increased or decreased octave by octave.
+The keys of the computer keyboard used to control the [virtual keyboard](manual/soundfont-editor/toolbar.md#doc_keyboard) are defined in the :guilabel:`Keyboard` section.
+The pitch may be increased or decreased octave by octave with the setting :guilabel:`First C`.
 
-For more advanced musicians, the tuning and temperament can be changed here.
+For more advanced musicians, the tuning can be changed here:
+
+Reference pitch
+: The frequency of the A located above middle C (key 69), between 390 and 470 Hz (440 Hz by default).
+
+Temperament
+: A temperament other than the equal temperament can be applied when playing.
+  When a temperament is selected, the key that is the reference of this temperament (its tonic) can also be chosen.
+
+The reference pitch and the temperament can also be changed with MIDI RPN messages (master fine tuning, tuning program select and tuning bank select).
 
 
 ![Settings, keyboard](images/settings_keyboard.png "Settings, keyboard")
@@ -106,9 +126,10 @@ For more advanced musicians, the tuning and temperament can be changed here.
 ## Online repository {#doc_repository}
 
 
-Identifiers can be entered here to link Polyphone with an account, a [Premium account](premium) unlocking the [online repository](manual/online-repository.md).
+The email address and the password of an account can be entered here to link Polyphone with this account, a [Premium account](premium) unlocking the whole [online repository](manual/online-repository.md).
+After a successful connection, Polyphone is automatically connected to the account at each start, until the button :guilabel:`Log out` is used.
 
-The directory used when downloading soundfonts from the [online repository](manual/online-repository.md) can be changed here.
+The directory used when downloading soundfonts from the [online repository](manual/online-repository.md) can also be changed here.
 
 
 ![Settings, repository](images/settings_repository.png "Settings, repository")

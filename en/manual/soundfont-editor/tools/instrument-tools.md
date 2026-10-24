@@ -15,6 +15,7 @@ Using the tools simultaneously on several instruments is possible (with a multi 
 
 
 This tool displays the evolution of a parameter according to the key.
+The legend distinguishes the value defined in the global division, the values defined in the divisions and the default value of the parameter.
 A logarithmic scale is available (take care of values equal to or less than 0!).
 
 
@@ -41,8 +42,8 @@ For example, if the lowest attenuation of the divisions within the selected inst
 This feature slightly detunes the instrument notes, so as to create an undulating effect in conjunction with a tuned instrument.
 The intensity of the effect is expressed in number of beats per second and is adjustable:
 
-* number of beats per second at key 60, which is "C" in the middle of the keyboard;
-* evolution of the number of beats according to the note, dividing or multiplying the number of beats by a constant factor from one octave to another (value "1" means that the number of beats will be constant all over the keyboard).
+* number of beats per second at key 60, which is “C” in the middle of the keyboard (the sign of this number determines the direction of the detuning);
+* evolution of the number of beats according to the note, dividing or multiplying the number of beats by a constant factor from one octave to another (value “1” means that the number of beats will be constant all over the keyboard).
 
 
 ![Detuning tool](images/tool_detune.png "Detuning tool")
@@ -62,19 +63,27 @@ The corresponding .sf2 file can be downloaded <a href="files/celeste_tuning.sf2"
 ### Key-based configuration {#doc_global}
 
 
-This tool allows the editing of a parameter for all divisions of an instrument simultaneously.
+This tool allows the editing of a parameter for all divisions of an instrument simultaneously, according to the key range of each division.
 
 
 ![Key-based configuration tool](images/tool_keybased_configuration.png "Key-based configuration tool")
 
 
 The graph represents the modification intensity, the first value on the left corresponding to the change applied to the division comprising the key 0, and the last value on the right corresponding to the change applied to the division comprising the key 127.
+The minimum and the maximum values of the graph are adjustable.
 By changing the pattern, it is possible to edit the curve:
 
-* manually using the mouse,
-* by using a linear law,
-* by using an exponential law,
-* by using a random generation.
+Manual
+: The curve is drawn using the mouse.
+
+Linear ascending / Linear descending
+: The curve is a straight line.
+
+Exponential ascending / Exponential descending
+: The curve is an exponential, whose curvature is defined by the parameter :guilabel:`Stiffness`.
+
+Random
+: The values are randomly generated, according to the parameter :guilabel:`Distribution`.
 
 In the case where a linear or exponential law is used, a left click in the graph defines the beginning of the linear or exponential area, a right click defines the end.
 
@@ -96,7 +105,7 @@ It is possible to apply the changes only on divisions whose velocity range is co
 
 
 This tool creates a release for each division of the instrument.
-Release times are computed taking into account the first two parameters and a pitch modification may be added by using the third one.
+Release times are computed taking into account the first two parameters (the duration of the release for the key 36 and the factor between two consecutive octaves, :guilabel:`Division to the next octave`) and a pitch modification may be added by using the third one (:guilabel:`Detuning induced`).
 
 
 ![Natural release tool](images/tool_natural_release.png "Natural release tool")
@@ -106,6 +115,7 @@ Release times are computed taking into account the first two parameters and a pi
 
 
 The software determines the key ranges of all divisions of an instrument, in order to optimize their use all over the keyboard.
+This is also automatically done when samples having different root keys are bound to an empty instrument.
 
 
 ### Sound spatialization {#doc_spatialization}
@@ -140,7 +150,7 @@ Random
 
 Other options are available:
 
-* number of pattern repetitions (:guilabel:`Divisions number`),
+* number of pattern repetitions (:guilabel:`Division number`),
 * intensity of the effect (:guilabel:`Spreading`),
 * filling of a division (:guilabel:`Filling`),
 * offset left — right if the spreading is not 100% (:guilabel:`Offset`),
@@ -163,7 +173,7 @@ The operations performed by the tool, for each division of the instrument, are t
 
 * the root key is adjusted,
 * modification of the fine tuning if the transposition is performed by a number of semitones including decimals,
-* shift of the key range according to the number of semitones if :guilabel:`adapt key range` is checked.
+* shift of the key range according to the number of semitones if :guilabel:`Adapt keyrange` is checked.
 
 
 ![Transposition tool](images/tool_transpose_inst.png "Transposition tool")
@@ -176,7 +186,7 @@ The operations performed by the tool, for each division of the instrument, are t
 
 
 Default modulators are automatically assigned to every instrument.
-This tool can create modulators that will override or disable them.
+This tool displays the list of these modulators and can create modulators that will override or disable the ones that have been selected (buttons :guilabel:`Override` and :guilabel:`Disable`).
 
 
 ![Overriding tool](images/tool_default_mod.png "Overriding tool")
@@ -186,6 +196,7 @@ This tool can create modulators that will override or disable them.
 
 
 All modulators of all selected instruments will be removed.
+A message indicates how many modulators have been deleted.
 
 **Note:** Default modulators will still apply.
 The only way to disable a default modulator is to override it with the tool “[Override a default modulator](#doc_default_mod)”.
@@ -199,6 +210,9 @@ The only way to disable a default modulator is to override it with the tool “[
 
 Based on an instrument, this tool allows you to create all possible chords.
 This could be interesting for example for the creation of a choir or pads.
+
+The chord is defined by choosing which notes it contains (root key, third, fifth, seventh and ninth) and their quality (major, minor, perfect, diminished, augmented), the number of inversions and the octave.
+The samples that contain the chords are created for every key, every 3 keys or every 6 keys, with an optional auto loop, in mono or in stereo.
 
 
 ![Tool for creating chords](images/tool_create_chords.png "Tool for creating chords")
@@ -218,11 +232,12 @@ An example .sf2 file, based on a flute, can be downloaded <a href="files/chords.
 ### Division duplication {#doc_division}
 
 
-This action has for effect the duplication of all divisions of an instrument.
+This action duplicates all the divisions of an instrument.
 For example, if a sample linked to an instrument has a key range of 36-38, the software duplicates this division so as to have this linked sample for the key ranges 36-36, 37-37 and 38-38.
-It makes then possible to thoroughly edit each sample parameter for each different note, instead of editing whole divisions with the same parameters.
+It then makes it possible to thoroughly edit each sample parameter for each different note, instead of editing whole divisions with the same parameters.
 
 It is also possible to duplicate the divisions according to velocity ranges.
+An instrument without samples is not compatible with this tool.
 
 
 ![Division duplication tool](images/tool_division_duplication.png "Division duplication tool")
@@ -242,7 +257,7 @@ Types of possible ranks are very diverse, ranging from the octave to the 27th ha
 To work, this tool relies on all samples associated to the selected instrument, the range defined for each sample and the corresponding attenuation.
 Samples have to be tuned regardless the definition of the instrument (via the [sample editor](manual/soundfont-editor/editing-pages/sample-editor.md)), and the root key specified must not take into account membership in a stop (no transposition if the sound is a principal 4' for example).
 
-An option allows the automatic loop of created samples, another sets the creation interval of samples.
+An option allows the automatic loop of created samples, another sets the creation interval of samples (for every key, every 3 keys or every 6 keys).
 Finally, it is possible to choose the type of the created sounds: mono or stereo.
 
 Here is an example, <a href="files/mixture_base.mp3" download>before</a>:

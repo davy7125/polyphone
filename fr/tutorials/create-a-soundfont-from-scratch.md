@@ -12,8 +12,8 @@ Les banques de sons sont composées d'une structure à 3 niveaux et c'est ainsi 
 ### Chargement d'un échantillon
 
 
-La préparation d'un échantillon commence par le **chargement** d'un fichier .wav.
-Pour ce faire, sélectionnez la catégorie :guilabel:`Échantillons` dans l'[arborescence](manual/soundfont-editor/tree.md) et cliquez sur l'icône :guilabel:`Importer des échantillons` dans la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_edit).
+La préparation d'un échantillon commence par le **chargement** de fichiers audio (.wav par exemple).
+Pour ce faire, cliquez sur l'icône :guilabel:`Ajouter un échantillon` dans la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_edit) et sélectionnez un ou plusieurs fichiers audio (les fichiers peuvent aussi être glissés-déposés sur l'[arborescence](manual/soundfont-editor/tree.md#doc_dragdrop)).
 Les échantillons peuvent être obtenus&nbsp;:
 
 * sur Internet,
@@ -32,10 +32,10 @@ Bien que vous puissiez positionner des points de bouclage manuellement, l'outil 
 Pour positionner des points de bouclage manuellement&nbsp;:
 
 1. cliquez sur l'échantillon à boucler dans l'[arborescence](manual/soundfont-editor/tree.md),
-2. dans l'[éditeur d'échantillons](manual/soundfont-editor/editing-pages/sample-editor.md), positionner arbitrairement le début et la fin de la bouche dans le [graphique](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) (zone d'affichage WAV) à moins qu'une boucle soit déjà définie.
+2. dans l'[éditeur d'échantillons](manual/soundfont-editor/editing-pages/sample-editor.md), positionnez arbitrairement le début et la fin de la boucle dans le [graphique](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) (zone d'affichage WAV) à moins qu'une boucle soit déjà définie.
   Utilisez un clic gauche pour le début et un clic droit pour la fin.
   Le point de bouclage de droite doit être placé en premier (puisque le point de droite est par défaut placé sur la position 0 et qu'il n'est pas possible d'assigner le point de gauche après le point de droite).
-3. appuyer sur le bouton :guilabel:`Lecture` après avoir autorisé la fonction de bouclage,
+3. appuyez sur le bouton :guilabel:`Lecture` après avoir activé l'option :guilabel:`en boucle`,
 4. ajustez le début et / ou la fin de la boucle, l'échantillon étant toujours en cours de lecture, jusqu'à ce que la transition entre les deux positions soit la plus douce possible.
 
 
@@ -52,11 +52,11 @@ Enfin, un **accordage** doit être effectué.
 Pour ce faire, un outil de calibration (sinus) est disponible dans la page d'édition des [échantillons](manual/soundfont-editor/editing-pages/sample-editor.md#doc_player).
 Pour chaque échantillon, la méthode est la suivante&nbsp;:
 
-1. démarrez la lecture (en appuyant sur le bouton :guilabel:`Lecture`), si possible avec la fonction de bouclage sélectionnée,
-2. sélectionnez la fonction sinus,
-3. ajustez le bouton de volume pour entendre les deux sons aussi clairement que possible,
-4. changez la :guilabel:`Note de base` jusqu'à ce que les deux sons se superposent à peu près,
-5. ajustez la :guilabel:`Correction (centièmes)` pour accorder l'échantillon sur sa note de base.
+1. démarrez la lecture (en appuyant sur le bouton :guilabel:`Lecture`), si possible avec l'option :guilabel:`en boucle` activée,
+2. activez l'option :guilabel:`sinus`,
+3. ajustez le curseur de volume pour entendre les deux sons aussi clairement que possible,
+4. changez la :guilabel:`Note de base` jusqu'à ce que les deux sons concordent le mieux possible,
+5. ajustez la :guilabel:`Correction` (en centièmes) pour accorder l'échantillon sur sa note de base.
    Pour y parvenir, faites attention aux battements qui pourraient apparaître et rendez-les aussi lents que possible.
 
 L'[analyse fréquentielle](manual/soundfont-editor/editing-pages/sample-editor.md#doc_freq) peut être un bon indicateur pour commencer l'accordage.
@@ -68,7 +68,7 @@ L'[analyse fréquentielle](manual/soundfont-editor/editing-pages/sample-editor.m
 Différents outils sont disponibles pour l'édition des échantillons comme&nbsp;:
 
 * [supprimer le blanc](manual/soundfont-editor/tools/sample-tools.md#doc_removeblank) au démarrage,
-* [égaliser](manual/soundfont-editor/editing-pages/sample-editor#doc_eq) le son,
+* [égaliser](manual/soundfont-editor/editing-pages/sample-editor.md#doc_eq) le son,
 * [transposer](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
 * [normaliser](manual/soundfont-editor/tools/sample-tools.md#doc_volume) le volume,
 * [ajuster la balance](manual/soundfont-editor/tools/sample-tools.md#doc_balance) pour les échantillons stéréo.
@@ -83,10 +83,10 @@ Pour cette étape, il est supposé qu'au moins un échantillon est disponible po
 ### Créer un instrument et lier des échantillons
 
 
-Premièrement, cliquez sur :guilabel:`Nouvel instrument` dans la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_edit).
-Un nom doit à présent être renseigné.
+Premièrement, cliquez sur :guilabel:`Ajouter un instrument` dans la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_edit).
+Un nom doit à présent être renseigné (si des échantillons sont sélectionnés dans l'arborescence, ils peuvent être directement liés au nouvel instrument).
 
-Ajoutez ensuite des échantillons dans l'instrument en utilisant un «&nbsp;[drag & drop](manual/soundfont-editor/tree.md#doc_dragdrop)&nbsp;».
+Sinon, ajoutez des échantillons dans l'instrument en utilisant un «&nbsp;[glisser-déposer](manual/soundfont-editor/tree.md#doc_dragdrop)&nbsp;».
 Dans l'arborescence vous pourrez noter que des divisions apparaissent dans l'instrument.
 
 **Note&nbsp;:** Lorsque des divisions sont créées les échantillons ne sont pas copiés mais liés. Il n'y a par ailleurs aucune contrainte sur le nombre de divisions.
@@ -98,7 +98,7 @@ Dans l'arborescence vous pourrez noter que des divisions apparaissent dans l'ins
 Quand des échantillons sont liés dans des instruments, ils apparaissent comme divisions (colonnes) dans la [table d'édition des instruments](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table).
 Chaque division doit ensuite être positionnée sur le clavier en changeant le paramètre :guilabel:`Étendue de notes` dans la table.
 Pour un meilleur son, il est préférable que l'étendue d'une division inclut la note de base de l'échantillon représenté.
-L'étendue complète du clavier doit être couverte (soit de la note 36 à la note 96 pour le clavier classique d'un synthétiseur).
+L'étendue complète du clavier doit être couverte (par exemple de la note 36 à la note 96 pour le clavier classique d'un synthétiseur).
 
 L'outil «&nbsp;[Auto-positionnement des échantillons](manual/soundfont-editor/tools/instrument-tools.md#doc_position)&nbsp;» répartit automatiquement les échantillons sur le clavier.
 
@@ -106,7 +106,7 @@ L'outil «&nbsp;[Auto-positionnement des échantillons](manual/soundfont-editor/
 ### Paramétrer les divisions
 
 
-Pour autoriser la lecture en boucle dans un instrument contenant des échantillons bouclés, sélectionner ![loop on](images/loop_on.png "loop on"){.inline} dans la ligne correspondant au paramètre :guilabel:`Lecture en boucle` pour soit  :guilabel:`Global`, soit des colonnes individuelles dans la table des paramètres.
+Pour autoriser la lecture en boucle dans un instrument contenant des échantillons bouclés, sélectionnez ![loop on](images/loop_on.png "loop on"){.inline} dans la ligne correspondant au paramètre :guilabel:`Lecture en boucle` pour soit la colonne :guilabel:`Global`, soit des colonnes individuelles dans la table des paramètres.
 
 * ![loop on](images/loop_on.png "loop on"){.inline} active la lecture en boucle,
 * ![loop off](images/loop_off.png "loop off"){.inline} ou une cellule vide la désactive.
@@ -126,13 +126,13 @@ Les autres paramètres sont décrits dans la description des [tables](manual/sou
 ## Création d'un ensemble {#doc_preset}
 
 
-Pour cette étape, il est supposé qu'au moins un instrument est disponible pour la création d'un preset.
+Pour cette étape, il est supposé qu'au moins un instrument est disponible pour la création d'un ensemble.
 
 
-### Qu'est ce qu'un ensemble&nbsp;?
+### Qu'est-ce qu'un ensemble&nbsp;?
 
 
-Un ensemble est l'équivalent d'un «&nbsp;sound patch name&nbsp;» que l'on peut trouver sur les synthétiseurs hardware.
+Un ensemble est l'équivalent d'un «&nbsp;sound patch name&nbsp;» que l'on peut trouver sur les synthétiseurs matériels.
 Les ensembles, chacun caractérisé par un numéro de banque, un numéro d'ensemble et un nom, constituent la partie visible extérieurement de la banque de sons.
 Une banque de sons peut avoir un ou plusieurs ensembles.
 Chaque ensemble est lié à un ou plusieurs instruments, tout comme les instruments sont liés à un ou plusieurs échantillons.
@@ -141,10 +141,10 @@ Chaque ensemble est lié à un ou plusieurs instruments, tout comme les instrume
 ### Créer un ensemble et lier des instruments
 
 
-Tout d'abord, cliquez sur :guilabel:`Nouvel ensemble` dans la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_edit).
-Un nom doit maintenant être spécifié.
+Tout d'abord, cliquez sur :guilabel:`Ajouter un ensemble` dans la [barre d'outils](manual/soundfont-editor/toolbar.md#doc_edit).
+Un nom doit maintenant être spécifié (si des instruments sont sélectionnés dans l'arborescence, ils peuvent être directement liés au nouvel ensemble).
 
-Ensuite liez des instruments à l'ensemble en utilisant un «&nbsp;[drag & drop](manual/soundfont-editor/tree.md#doc_dragdrop)&nbsp;».
+Sinon, liez des instruments à l'ensemble en utilisant un «&nbsp;[glisser-déposer](manual/soundfont-editor/tree.md#doc_dragdrop)&nbsp;».
 Dans l'arborescence vous pourrez noter qu'une ou plusieurs divisions sont apparues sous l'ensemble.
 La plupart du temps les ensembles ne sont liés qu'à un seul instrument.
 
@@ -157,6 +157,6 @@ Il est possible de créer autant d'ensembles que d'instruments, voire plus, et c
 Modifier les paramètres dans les ensembles peut ne pas être nécessaire étant donné que&nbsp;:
 
 * lors de la création d'un ensemble, les numéros de banque et d'ensemble sont automatiquement assignés,
-* lors du lien entre un instrument et un ensemble, l'étendue de notes est automatiquement calculé en fonction de l'instrument.
+* lors du lien entre un instrument et un ensemble, l'étendue de notes est automatiquement calculée en fonction de l'instrument.
 
 Dans le cadre de ce tutoriel, la création de la banque de sons est terminée&nbsp;!

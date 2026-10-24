@@ -5,21 +5,24 @@ Vous apprendrez comment utiliser pleinement les capacités d'un tel échantillon
 ## Relâche classique ou relâche personnalisée
 
 
-Lorsque vous appuyez sur une touche vous entendez tout d'abord le début de l'échantillon (l'attaque) et ensuite, aussi longtemps que vous ne relevez pas la touche, la boucle au sein de l'échantillon sera jouée encore et encore (la phase de maintien).
-Lorsque vous relevez la touche, la boucle sera encore utilisée et le son sera progressivement atténué jusqu'à ce qu'il ne soit plus audible.
+Lorsque vous appuyez sur une touche, vous entendez tout d'abord le début de l'échantillon (l'attaque) puis, tant que vous ne relâchez pas la touche, la boucle au sein de l'échantillon sera jouée encore et encore (la phase de maintien).
+Lorsque vous relâchez la touche, la boucle est encore utilisée et le son sera progressivement atténué jusqu'à ce qu'il ne soit plus audible.
 Ceci est la méthode classique pour faire une relâche avec les banques de sons&nbsp;: elle est facile à configurer mais elle ignore toutes les harmoniques transitoires qui pourraient apparaître lors de l'arrêt réel du son d'un instrument acoustique.
 Ce type de relâche peut être vu comme une simple extension de la phase de maintien.
 
 Une relâche plus réaliste est d'utiliser la vraie relâche provenant d'un échantillon enregistré.
-L'attaque et la phase de maintien seront jouées de la même manière mais lorsque vient la relâche d'une note, la phase de maintien s'arrête rapidement pour laisser place à la relâche enregistrée qui va alors commencer à être lue.
-Une relâche personnalisée est utilisée plutôt qu'une extension de la phase de maintien, ajoutant ainsi des détails au son.
+L'attaque et la phase de maintien seront jouées de la même manière mais lorsque la note est relâchée, la phase de maintien s'arrête rapidement pour laisser place à la relâche enregistrée qui est alors lue.
+Une relâche personnalisée est ainsi utilisée à la place d'une simple extension de la phase de maintien, ce qui ajoute des détails au son.
 
 Créer un tel instrument est possible en séparant le problème en deux&nbsp;:
 
 * l'attaque et la phase de maintien sont définies dans un premier temps,
 * la relâche est ensuite déclenchée.
 
-L'exemple qui va être utilisé ici est le son d'une trompette sur l'orgue, pour son grand contenu harmonique et sa progression très perceptible.
+L'exemple qui va être utilisé ici est le son d'une trompette d'orgue, pour son riche contenu harmonique et sa progression très perceptible.
+
+**Note&nbsp;:** depuis la version 2.4, Polyphone peut aussi déclencher un échantillon lorsqu'une touche est relâchée, grâce au mode de lecture en boucle ![relâche](images/sample_mode_release.png "relâche"){.inline} (voir l'[éditeur d'instruments](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)), ce qui rend inutile la boucle courte et silencieuse décrite ci-dessous.
+Cependant, ce mode n'est pas documenté par le format sf2 et peut ne pas être pris en charge par d'autres lecteurs, alors que la méthode décrite dans ce tutoriel fonctionne avec tous les lecteurs.
 
 
 ## Préparation des échantillons
@@ -31,9 +34,9 @@ Deux cas peuvent apparaître&nbsp;: vous avez un fichier contenant l'échantillo
 ### Échantillon complet avec relâche
 
 
-Chargez l'échantillon 2 fois dans Polyphone et ensuite, dans la seconde instance de l'échantillon, effacer tout dans l'échantillon sauf la relâche.
-La suppression peut être effectuée en utilisant la touche :kbd:`Alt` et en surlignant la zone à supprimer dans le [graphique](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) de l'échantillon.
-Pour trouver le point où la relâche commence, jouer l'échantillon plusieurs fois et essayez de trouver l'endroit où vous pensez qu'il n'y a plus d'énergie pour nourrir le son.
+Chargez l'échantillon 2 fois dans Polyphone puis, dans la seconde instance de l'échantillon, effacez tout sauf la relâche.
+La suppression peut être effectuée en maintenant la touche :kbd:`Alt` et en définissant la zone à supprimer dans le [graphique](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) de l'échantillon.
+Pour trouver le point où la relâche commence, jouez l'échantillon plusieurs fois et essayez de trouver l'endroit où vous pensez qu'il n'y a plus d'énergie pour entretenir le son.
 Cette dernière partie sera la relâche.
 Suivez ensuite les instructions ci-dessous.
 
@@ -58,10 +61,10 @@ Spécifiez la même note de base et la même correction que pour le premier éch
 Créez un premier instrument avec les échantillons contenant l'attaque et la phase de maintien du son.
 Spécifiez les paramètres globaux ainsi&nbsp;:
 
-* choisissez l'option de lecture avec la boucle (2ème choix),
-* spécifiez 0.01s comme temps de relâche pour l'envelope de volume (relâche très courte).
+* sélectionnez ![boucle activée](images/loop_on.png "boucle activée"){.inline} pour le paramètre :guilabel:`Lecture en boucle`,
+* spécifiez 0,01 s pour le paramètre :guilabel:`Vol env relâche (s)` (relâche très courte).
 
-Vous avez maintenant l'instrument qui ne contient pas de relâche.
+Vous avez maintenant un instrument qui ne contient pas de relâche.
 
 
 ## Second instrument&nbsp;: relâche
@@ -70,13 +73,13 @@ Vous avez maintenant l'instrument qui ne contient pas de relâche.
 Créez un second instrument pour la relâche contenant les échantillons de relâche avec un blanc très court au début.
 Configurez-le de cette manière&nbsp;:
 
-* sélectionnez l'option de lecture :guilabel:`boucle + relâche` dans :guilabel:`lecture en boucle` (3ème choix),
-* sélectionnez un grand nombre comme 100 secondes pour le paramètre :guilabel:`Vol env release (s)` de manière à ce que la relâche ne soit pas atténuée,
-* déterminez approximativement la durée de l'attaque du premier échantillon et utilisez cette valeur en tant qu'attaque de l'envelope de volume.
+* sélectionnez ![boucle activée + relâche](images/loop_on_end.png "boucle activée + relâche"){.inline} (boucle + relâche) pour le paramètre :guilabel:`Lecture en boucle`,
+* sélectionnez une valeur élevée, comme 100 secondes, pour le paramètre :guilabel:`Vol env relâche (s)` de manière à ce que la relâche ne soit pas atténuée,
+* déterminez approximativement la durée de l'attaque du premier échantillon et utilisez cette valeur pour le paramètre :guilabel:`Vol env attaque (s)`.
 
 Vous avez à présent un instrument silencieux tant que vous ne relâchez pas la note et qui déclenche ensuite la relâche.
-Vous pouvez aussi noter qu'un appui très bref sur une note déclenche la relâche d'une manière atténuée.
-Ce point est peut-être délicat à entendre dans le cas de notre trompette car son attaque est très rapide.
+Vous pouvez aussi noter qu'un appui très bref sur une note déclenche la relâche de manière atténuée.
+Ce point est difficilement perceptible dans le cas de notre trompette car son attaque est très rapide.
 La durée de l'attaque a donc été légèrement augmentée dans l'exemple.
 
 
@@ -84,8 +87,8 @@ La durée de l'attaque a donc été légèrement augmentée dans l'exemple.
 
 
 Créez un ensemble en liant les deux instruments précédemment créés.
-Le premier instrument est déclenché lorsqu'une touche est appuyée et le second instrument est déclenché lorsque la touche est relâchée.
-Vous pouvez ensuite entendre le résultat et essayer de rendre la transition plus douce entre la phase de maintien et la relâche&nbsp;:
+Le premier instrument est déclenché lorsqu'une touche est enfoncée et le second instrument est déclenché lorsque la touche est relâchée.
+Vous pouvez ensuite écouter le résultat et essayer de rendre la transition plus douce entre la phase de maintien et la relâche&nbsp;:
 
 * en atténuant le premier ou le second instrument,
 * en augmentant la durée de la relâche dans le premier instrument.

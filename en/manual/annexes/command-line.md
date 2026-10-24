@@ -2,6 +2,12 @@ Polyphone can be run with a command line to convert soundfonts in the format [sf
 
 An option can also be called for opening Polyphone in [synth mode](#doc_synth).
 
+Files and directories can also be passed as arguments for opening them in the graphical interface, for instance :command:`polyphone file1.sf2 file2.sf3 /path/to/directory` (a directory is opened in the [soundfont explorer](manual/soundfont-explorer.md)).
+A few [other options](#doc_other) are available for resetting the configuration or for displaying the help.
+
+In a conversion, the loading and the writing are logged in the console.
+The returned code is 0 if the conversion succeeded, and another value in case of failure (the input file does not exist, the file cannot be read or written, an output file already exists for the formats sf2 and sf3, etc.).
+
 
 ## Conversion to sf2 {#doc_sf2}
 
@@ -24,11 +30,11 @@ polyphone -1 -i <file/to/convert> -d <output/directory> -o <output_file_name>
 
 -d
 : Output directory in which the input file will be converted.
-  This argument is optional, by default this is the same directory than the input file.
+  This argument is optional, by default this is the same directory as the input file.
 
 -o
 : Output name of the converted file without the extension (the extension “.sf2” will be automatically added).
-  This argument is optional, by default this is the same name than the input file.
+  This argument is optional, by default this is the same name as the input file.
 
 
 ### Example
@@ -60,11 +66,11 @@ polyphone -2 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c
 
 -d
 : Output directory in which the input file will be converted.
-  This argument is optional, by default this is the same directory than the input file.
+  This argument is optional, by default this is the same directory as the input file.
 
 -o
 : Output name of the converted file without the extension (the extension “.sf3” will be automatically added).
-  This argument is optional, by default this is the same name than the input file.
+  This argument is optional, by default this is the same name as the input file.
 
 -c
 : Conversion configuration.
@@ -101,11 +107,11 @@ polyphone -3 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c
 
 -d
 : Output directory in which the input file will be converted.
-  This argument is optional, by default this is the same directory than the input file.
+  This argument is optional, by default this is the same directory as the input file.
 
 -o
 : Output name of the converted file without the extension (the extension “.sfz” will be automatically added).
-  This argument is optional, by default this is the same name than the input file.
+  This argument is optional, by default this is the same name as the input file.
 
 -c
 : Conversion configuration made of 3 values separated by the “|” character. This argument is optional, by default this is “0|0|0”.
@@ -121,6 +127,8 @@ polyphone -3 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c
 ```
 polyphone -3 -i /path/to/file.sf3 -c '0|1|1'
 ```
+
+The conversion creates a directory (named after the output name) containing the sfz files and a sub-directory :file:`samples`. If this directory already exists, a number is added to its name.
 
 
 ## Conversion to .csv {#doc_csv}
@@ -144,15 +152,15 @@ polyphone -4 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c
 
 -d
 : Output directory in which the input file will be converted.
-  This argument is optional, by default this is the same directory than the input file.
+  This argument is optional, by default this is the same directory as the input file.
 
 -o
 : Output name of the converted file without the extension (the extension “.csv” will be automatically added).
-  This argument is optional, by default this is the same name than the input file.
+  This argument is optional, by default this is the same name as the input file.
 
 -c
 : Conversion configuration.
-  The option “raw” can be used to export raw values (as they are stored in the soundfont file) rather than values with physical, measurable units. For example, the exported release time will be 0.491 (milliseconds) or -1229 in its raw form. By default, values with physical units are exported.
+  The option “raw” can be used to export raw values (as they are stored in the soundfont file) rather than values with physical, measurable units. For example, the exported release time will be 0.491 (seconds) or -1229 in its raw form. By default, values with physical units are exported.
 
 
 ### Example
@@ -161,6 +169,8 @@ polyphone -4 -i <file/to/convert> -d <output/directory> -o <output_file_name> -c
 ```
 polyphone -4 -i /path/to/file.sf2 -c 'raw'
 ```
+
+The conversion creates a directory (named after the output name) containing the file :file:`samples.csv` and one file per instrument and per preset. If this directory already exists, a number is added to its name.
 
 
 ## Synth mode {#doc_synth}
@@ -187,7 +197,7 @@ polyphone -s -i <file/to/read> -c <configuration>
 -c
 : Synth configuration made of 3 values separated by the “|” character. This argument is optional, by default this is “0|off|off”. These parameters can then be changed via the graphical interface.
   
-  * The first value is the MIDI channel number (between 1 and 16) to be listened to for playing. A value of 0 or “all” to indicates that all channels will be used and processed as one channel. A value of -1 or “each” listens to each channel separately, which is a prerequisite for [playing MIDI files](tutorials/read-midi-file-with-polyphone.md) for instance.
+  * The first value is the MIDI channel number (between 1 and 16) to be listened to for playing. A value of 0 or “all” indicates that all channels will be used and processed as one channel. A value of -1 or “each” listens to each channel separately, which is a prerequisite for [playing MIDI files](tutorials/read-midi-file-with-soundfont.md) for instance.
   * The second value is “off” or “on”, enabling or disabling the selection of multiple presets for playing.
   * The third value is “off”, “on”, or “toggle”, enabling or disabling the selection of presets by the keys corresponding to the preset number (key 0 activates preset 0, for example).
 
@@ -197,4 +207,19 @@ polyphone -s -i <file/to/read> -c <configuration>
 
 ```
 polyphone -s -i /path/to/file.sf2 -c '1|on|toggle'
+```
+
+
+## Other options {#doc_other}
+
+
+-h
+: Displays a short help message.
+
+-r
+: Resets the configuration of Polyphone (settings, window geometry, history, etc.).
+  This can be useful in case of trouble.
+
+```
+polyphone -r
 ```

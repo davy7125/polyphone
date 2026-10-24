@@ -54,8 +54,9 @@ Même outil que «&nbsp;[Dupliquer les divisions](manual/soundfont-editor/tools/
 ### Fusionner les échantillons {#doc_mergesamples}
  
 Dans le cas où un ensemble appelle simultanément plusieurs instruments et échantillons lorsqu'une touche est appuyée, cet outil fusionnera, pour chaque note, tous les échantillons joués. Le résultat est un nouvel ensemble qui ne joue qu'un seul échantillon par touche, réduisant ainsi la charge CPU nécessaire à l'exécution de l'ensemble.
+La fenêtre demande le nom du nouvel ensemble, la durée du soutien et la durée de la relâche des sons enregistrés, l'intervalle entre les échantillons créés (à chaque note, toutes les 3 notes ou toutes les 6 notes), le bouclage automatique et le type de son (mono ou stéréo).
 
-Les options définies dans l'image ci-dessous feront que l'outil va simuler toutes les 3 notes un appui de 5 secondes sur une touche. L'enregistrement audio se fera en stéréo et la relâche ne sera pas enregistrée. Les échantillons ainsi créés seront ensuite bouclés grâce à l'outil de [bouclage automatique](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) et l'instrument recevant tous ces échantillons sera nommé «&nbsp;Cymbale III&nbsp;».
+Les options définies dans l'image ci-dessous feront que l'outil va simuler toutes les 3 notes un appui de 5 secondes sur une touche. L'enregistrement audio se fera en stéréo et la relâche ne sera pas enregistrée. Les échantillons ainsi créés seront ensuite bouclés grâce à l'outil de [bouclage automatique](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) et l'instrument recevant tous ces échantillons, ainsi que le nouvel ensemble qui l'utilise, seront nommés «&nbsp;Cymbale III&nbsp;».
 
 **Note&nbsp;:** l'utilisation de l'option de bouclage automatique supprimera la relâche et diminuera légèrement la durée de la partie appuyée de chaque échantillon.
 

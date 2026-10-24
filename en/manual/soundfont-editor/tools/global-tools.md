@@ -11,7 +11,8 @@ When the header :guilabel:`General` is selected in the [tree](manual/soundfont-e
 ### Remove unused elements {#doc_unused}
 
 
-All samples and instruments being used by no instruments or presets are automatically deleted.
+All samples that are not used by any instrument and all instruments that are not used by any preset are automatically deleted.
+A message indicates how many elements have been deleted.
 
 
 ## Modulators {#doc_cat_mod}
@@ -29,8 +30,9 @@ All [modulators](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_
 ### Export preset list {#doc_export}
 
 
-With this tool, the list of all [presets](manual/soundfont-editor/editing-pages/preset-editor.md) will be written in a text.
-This text can be formatted to be integrated in a CSV file or in HTML to be integrated in a website.
+With this tool, the list of all [presets](manual/soundfont-editor/editing-pages/preset-editor.md) is written as a text, with their bank and preset numbers.
+This text can be formatted as csv, to be integrated in a spreadsheet, or as an html table, to be integrated in a website.
+A button copies the text to the clipboard.
 
 
 ![Preset list](images/en_preset_list.png "Preset list")

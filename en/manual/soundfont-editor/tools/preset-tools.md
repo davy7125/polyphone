@@ -5,7 +5,7 @@ When a preset or one of its division is selected in the [tree](manual/soundfont-
 * [modulators](#doc_cat_mod),
 * [transformation](#doc_cat_transformation).
 
-Using the tools simultaneously on several presets is possible (with a multi selection), except for the visualizer.
+Using the tools simultaneously on several presets is possible (with a multi selection), except for displaying parameters.
 All tools are also available for the [instruments](manual/soundfont-editor/tools/instrument-tools.md).
 
 
@@ -14,7 +14,7 @@ All tools are also available for the [instruments](manual/soundfont-editor/tools
 
 ### Display parameters {#doc_display}
 
-Same tool than “[Display parameters](manual/soundfont-editor/tools/instrument-tools.md#doc_display)” for instruments.
+Same tool as “[Display parameters](manual/soundfont-editor/tools/instrument-tools.md#doc_display)” for instruments.
 
 
 ## Fast editing {#doc_cat_fast}
@@ -22,17 +22,17 @@ Same tool than “[Display parameters](manual/soundfont-editor/tools/instrument-
 
 ### Change attenuations {#doc_attenuation}
 
-Same tool than “[Change attenuations](manual/soundfont-editor/tools/instrument-tools.md#doc_attenuation)” for instruments.
+Same tool as “[Change attenuations](manual/soundfont-editor/tools/instrument-tools.md#doc_attenuation)” for instruments.
 
 
 ### Key-based configuration {#doc_global}
 
-Same tool than “[Key-based configuration](manual/soundfont-editor/tools/instrument-tools.md#doc_global)” for instruments.
+Same tool as “[Key-based configuration](manual/soundfont-editor/tools/instrument-tools.md#doc_global)” for instruments.
 
 
 ### Sound spatialization {#doc_spatialization}
 
-Same tool than “[Sound spatialization](manual/soundfont-editor/tools/instrument-tools.md#doc_spatialization)” for instruments.
+Same tool as “[Sound spatialization](manual/soundfont-editor/tools/instrument-tools.md#doc_spatialization)” for instruments.
 
 
 ## Modulators {#doc_cat_mod}
@@ -40,7 +40,7 @@ Same tool than “[Sound spatialization](manual/soundfont-editor/tools/instrumen
 
 ### Remove modulators {#doc_remove_mod}
 
-Same tool than “[Remove modulators](manual/soundfont-editor/tools/instrument-tools.md#doc_remove_mod)” for instruments.
+Same tool as “[Remove modulators](manual/soundfont-editor/tools/instrument-tools.md#doc_remove_mod)” for instruments.
 
 
 ## Transformation {#doc_cat_transformation}
@@ -48,15 +48,16 @@ Same tool than “[Remove modulators](manual/soundfont-editor/tools/instrument-t
 
 ### Division duplication {#doc_division}
 
-Same tool than “[Division duplication](manual/soundfont-editor/tools/instrument-tools.md#doc_division)” for instruments.
+Same tool as “[Division duplication](manual/soundfont-editor/tools/instrument-tools.md#doc_division)” for instruments.
 
 
 ### Merge samples for each note {#doc_mergesamples}
 
 In the case where a preset calls several instruments and samples simultaneously when a key is struck, this tool will merge, for each note, all the samples played. The result is a new preset that plays only one sample per key, thus reducing the CPU load required to run the preset.
+The window asks for the name of the new preset, the sustain duration and the release duration of the recorded sounds, the interval between created samples (every key, every 3 keys or every 6 keys), the auto loop and the type of sound (mono or stereo).
 
-The options defined in the image below will make the tool simulate every 3 notes a 5-second key press. The audio recording will be in stereo and the release will not be recorded. The samples thus created will then be looped using the [auto-loop tool](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) and the instrument containing all these samples will be named “Cymbale III”.
+The options defined in the image below will make the tool simulate every 3 notes a 5-second key press. The audio recording will be in stereo and the release will not be recorded. The samples thus created will then be looped using the [auto-loop tool](manual/soundfont-editor/tools/sample-tools.md#doc_autoloop) and the instrument containing all these samples, as well as the new preset using it, will be named “Cymbale III”.
 
-**Note:** using the auto loop option will remove the release part and slighly decrease the sustained duration of each sample.
+**Note:** using the auto loop option will remove the release part and slightly decrease the sustained duration of each sample.
 
 ![Merge samples for each note](images/tool_merge_samples.png "Merge samples for each note")

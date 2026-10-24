@@ -8,13 +8,14 @@ Quand un instrument ou l'une de ses divisions est sélectionné dans l'[arboresc
 Utiliser les outils simultanément sur plusieurs instruments est possible (avec une sélection multiple), sauf pour créer des accords, des mixtures et pour visualiser les paramètres.
 
 
-## Analyse {#doc_cat_analyze} 
+## Analyse {#doc_cat_analyze}
 
 
 ### Visualiser les paramètres {#doc_display}
 
 
 Cet outil affiche l'évolution d'un paramètre en fonction de la note.
+La légende distingue la valeur définie dans la division globale, les valeurs définies dans les divisions et la valeur par défaut du paramètre.
 Une échelle logarithmique est disponible (attention aux valeurs égales ou inférieures à 0&nbsp;!).
 
 
@@ -41,8 +42,8 @@ Par exemple, si l'atténuation minimale des divisions au sein des instruments s�
 Cette fonction désaccorde légèrement les notes d'un instrument, de manière à produire un effet ondulant en conjonction avec un instrument accordé.
 L'intensité de l'effet s'exprime en nombre de battements par seconde et est ajustable&nbsp;:
 
-* nombre de battement par seconde au do 60, au milieu du clavier&nbsp;;
-* évolution du nombre de battements en fonction de la note, en divisant ou multipliant le nombre de battements par un facteur constant d'une octave à l'autre (une valeur de "1" signifie que le nombre de battements sera constant sur tout le clavier).
+* nombre de battements par seconde sur la note 60, le Do central du clavier (le signe de ce nombre détermine le sens du désaccordage)&nbsp;;
+* évolution du nombre de battements en fonction de la note, en divisant ou multipliant le nombre de battements par un facteur constant d'une octave à l'autre (une valeur de «&nbsp;1&nbsp;» signifie que le nombre de battements sera constant sur tout le clavier).
 
 
 ![Outil de désaccordage](images/tool_detune.png "Outil de désaccordage")
@@ -62,23 +63,31 @@ Le fichier .sf2 correspondant peut être téléchargé <a href="files/celeste_tu
 ### Paramétrer en fonction des notes {#doc_global}
 
 
-Cet outil permet l'édition d'un paramètre pour toutes les divisions d'un instrument simultanément.
+Cet outil permet l'édition d'un paramètre pour toutes les divisions d'un instrument simultanément, en fonction de l'étendue de notes de chaque division.
 
 
 ![Outil de paramétrage en fonction des notes](images/tool_keybased_configuration.png "Outil de paramétrage en fonction des notes")
 
 
 Le graphique représente l'intensité de la modification, la première valeur sur la gauche correspondant à la modification appliquée à la division contenant la note 0, et la dernière valeur sur la droite correspondant à la modification appliquée à la division contenant la note 127.
+Les valeurs minimale et maximale du graphique sont ajustables.
 En changeant le motif, il est possible d'éditer la courbe&nbsp;:
 
-* manuellement avec la souris,
-* en utilisant une loi linéaire,
-* en utilisant une loi exponentielle,
-* en utilisant une génération aléatoire.
+Manuel
+: La courbe est dessinée avec la souris.
 
-Dans le cas où une règle linéaire ou exponentielle est utilisée, un clic gauche sur le graphique définit le début de la zone linéaire ou exponentielle et un clic droit définit la fin.
+Linéaire ascendant / Linéaire descendant
+: La courbe est une droite.
 
-Le paramètre à modifier peut être sélectionné dans :guilabel:`Paramètres` et le type de modification est choisi dans :guilabel:`Modification`&nbsp;:
+Exponentiel ascendant / Exponentiel descendant
+: La courbe est une exponentielle, dont la courbure est définie par le paramètre :guilabel:`Raideur`.
+
+Aléatoire
+: Les valeurs sont générées aléatoirement, selon le paramètre :guilabel:`Répartition`.
+
+Dans le cas où une loi linéaire ou exponentielle est utilisée, un clic gauche sur le graphique définit le début de la zone linéaire ou exponentielle et un clic droit définit la fin.
+
+Le paramètre à modifier peut être sélectionné dans :guilabel:`Paramètre` et le type de modification est choisi dans :guilabel:`Modification`&nbsp;:
 
 Addition
 : Le modificateur est ajouté à la valeur du paramètre choisi.
@@ -89,14 +98,14 @@ Multiplication
 Remplacement
 : Le modificateur remplace la valeur du paramètre choisi.
 
-Il est possible de n'appliquer les changements qu'aux divisions dont l'étendue de vélocités est comprise dans une étendue spécifique, utile par exemple pour le cas d'un piano qui auraient plusieurs couches de vélocités.
+Il est possible de n'appliquer les changements qu'aux divisions dont l'étendue de vélocités est comprise dans une étendue spécifique, utile par exemple pour le cas d'un piano qui aurait plusieurs couches de vélocités.
 
 
 ### Relâche naturelle {#doc_release}
 
 
 Cet outil crée une relâche pour chaque division de l'instrument.
-Les durées de relâche sont calculées en fonction des deux premiers paramètres et une modification du ton peut être ajoutée en utilisant le troisième.
+Les durées de relâche sont calculées en fonction des deux premiers paramètres (la durée de la relâche pour la note 36 et le facteur entre deux octaves consécutives, :guilabel:`Division à l'octave suivante`) et une modification de la hauteur de note peut être ajoutée en utilisant le troisième (:guilabel:`Désaccordage provoqué`).
 
 
 ![Outil de relâche naturelle](images/tool_natural_release.png "Outil de relâche naturelle")
@@ -106,6 +115,7 @@ Les durées de relâche sont calculées en fonction des deux premiers paramètre
 
 
 Le logiciel détermine une étendue de notes pour toutes les divisions d'un instrument, de manière à optimiser leur utilisation sur toute l'étendue du clavier.
+Cette opération est également effectuée automatiquement lorsque des échantillons ayant des notes de base différentes sont associés à un instrument vide.
 
 
 ### Spatialiser le son {#doc_spatialization}
@@ -141,9 +151,9 @@ Aléatoire
 D'autres options sont disponibles&nbsp;:
 
 * nombre de répétitions du motif (:guilabel:`Nombre divisions`),
-* intensité de l'effet (:guilabel:`Occupation`),
-* remplissage d'une division (:guilabel:`Étalement`),
-* offset gauche — droite si l'occupation n'est pas de 100% (:guilabel:`Offset`),
+* intensité de l'effet (:guilabel:`Étalement`),
+* remplissage d'une division (:guilabel:`Occupation`),
+* offset gauche — droite si l'étalement n'est pas de 100&nbsp;% (:guilabel:`Offset`),
 * :guilabel:`Renversements`.
 
 Le graphique est mis à jour à chaque fois qu'un paramètre change pour une meilleure visualisation.
@@ -176,7 +186,7 @@ Les opérations effectuées par cet outil, pour chaque division de l'instrument,
 
 
 Les modulateurs par défaut sont automatiquement assignés à chaque instrument.
-Cet outil peut créer des modulateurs qui les surchargeront ou les annuleront.
+Cet outil affiche la liste de ces modulateurs et peut créer des modulateurs qui surchargeront ou désactiveront ceux qui ont été sélectionnés (boutons :guilabel:`Surcharger` et :guilabel:`Désactiver`).
 
 
 ![Outil de surcharge des modulateurs par défaut](images/tool_default_mod.png "Outil de surcharge des modulateurs par défaut")
@@ -185,7 +195,8 @@ Cet outil peut créer des modulateurs qui les surchargeront ou les annuleront.
 ### Enlever les modulateurs {#doc_remove_mod}
 
 
-Tous les modulateurs de tous les instruments sélectionnés seront enlevés.
+Tous les modulateurs de tous les instruments sélectionnés sont enlevés.
+Un message indique combien de modulateurs ont été supprimés.
 
 **Note&nbsp;:** Les modulateurs par défaut s'appliqueront toujours.
 La seule manière de désactiver un modulateur par défaut est de le surcharger avec l'outil «&nbsp;[Surcharger un modulateur par défaut](#doc_default_mod)&nbsp;».
@@ -198,7 +209,10 @@ La seule manière de désactiver un modulateur par défaut est de le surcharger 
 
 
 Se basant sur un instrument, l'outil vous permet de créer tous les accords possibles.
-Ce peut être intéressant par exemple pour la création de chœurs ou de nappes de sons
+Ce peut être intéressant par exemple pour la création de chœurs ou de nappes de sons.
+
+L'accord est défini en choisissant les notes qu'il contient (fondamentale, tierce, quinte, septième et neuvième) et leur qualité (majeure, mineure, juste, diminuée, augmentée), le nombre de renversements et l'octave.
+Les échantillons contenant les accords sont créés à chaque note, toutes les 3 notes ou toutes les 6 notes, avec un bouclage automatique optionnel, en mono ou en stéréo.
 
 
 ![Outil de création d'accords](images/tool_create_chords.png "Outil de création d'accords")
@@ -218,11 +232,12 @@ Un exemple de banque de sons contenant un son de flûte et sa transformation peu
 ### Dupliquer les divisions {#doc_division}
 
 
-Cette action a pour effet la duplication de toutes les divisions d'un instrument.
+Cette action duplique toutes les divisions d'un instrument.
 Par exemple, si un échantillon lié à un instrument a pour étendue de notes 36-38, le logiciel duplique cette division de manière à avoir l'échantillon lié pour les étendues de notes 36-36, 37-37 et 38-38.
 Cela permet alors d'éditer plus précisément chaque paramètre d'échantillon pour chaque note différente, au lieu d'éditer des divisions entières avec les mêmes paramètres.
 
 Il est également possible de dupliquer les divisions en fonction des étendues de vélocités.
+Un instrument ne contenant aucun échantillon n'est pas compatible avec cet outil.
 
 
 ![Outil de duplication des divisions](images/tool_division_duplication.png "Outil de duplication des divisions")
@@ -232,17 +247,17 @@ Il est également possible de dupliquer les divisions en fonction des étendues 
 
 
 Spécifique à l'orgue, cet outil permet la création de mixtures à partir d'un instrument existant.
-Une interface apparaît pour définir les différentes divisions de la mixture et pour chacune d'elle la liste des rangs.
-Les types possibles des rangs sont très divers, allant de l'octave jusqu'à la 27ème harmonique.
+Une interface apparaît pour définir les différentes divisions de la mixture et pour chacune d'elles la liste des rangs.
+Les types possibles des rangs sont très divers, allant de l'octave jusqu'à la 27e harmonique.
 
 
 ![Outil de création de mixtures](images/tool_mixture.png "Outil de création de mixtures")
 
 
 Pour fonctionner, cet outil s'appuie sur tous les échantillons associés à l'instrument sélectionné, l'étendue définie pour chaque échantillon et leur atténuation correspondante.
-Les échantillons doivent être accordés sans tenir compte du paramétrage de l'instrument (à l'aide de l'[éditeur des échantillons](manual/soundfont-editor/editing-pages/sample-editor.md)) et la note de base spécifiée ne doit pas tenir compte de l'appartenance à un jeu (pas de transposition si le son est un principal 4' par exemple).
+Les échantillons doivent être accordés sans tenir compte du paramétrage de l'instrument (à l'aide de l'[éditeur d'échantillons](manual/soundfont-editor/editing-pages/sample-editor.md)) et la note de base spécifiée ne doit pas tenir compte de l'appartenance à un jeu (pas de transposition si le son est un principal 4' par exemple).
 
-Une option permet un bouclage automatique des échantillons créés, une autre modifie l'intervalle de création des échantillons.
+Une option permet un bouclage automatique des échantillons créés, une autre définit l'intervalle de création des échantillons (à chaque note, toutes les 3 notes ou toutes les 6 notes).
 Enfin, il est possible de choisir le type des sons créés&nbsp;: mono ou stéréo.
 
 Voici un exemple, <a href="files/mixture_base.mp3" download>avant</a>&nbsp;:

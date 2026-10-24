@@ -21,6 +21,9 @@ Creating such an instrument is made by splitting the problem in two:
 
 The example that will be taken here is the sound of a trumpet in an organ, for its high harmonic content and audible progression.
 
+**Note:** since version 2.4, Polyphone can also trigger a sample when a key is released, thanks to the loop playback mode ![release](images/sample_mode_release.png "release"){.inline} (see the [instrument editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table)), which makes the short silent loop described below unnecessary.
+However, this mode is not documented by the sf2 format and may not be supported by other players, while the method described in this tutorial works with any player.
+
 
 ## Sample preparation
 
@@ -49,7 +52,7 @@ A short inaudible loop will thus be made with this portion.
 Tune and loop the first sample as explained in the tutorial “[how to prepare a sample](tutorials/how-to-prepare-a-sample.md)”.
 
 Loop the second sample on a very short part at the beginning, for example from the point 1 to the point 2 or 3.
-Specify the same root key and correction than the first sample.
+Specify the same root key and correction as the first sample.
 
 
 ## First instrument: attack and sustained phase
@@ -58,8 +61,8 @@ Specify the same root key and correction than the first sample.
 Create a first instrument with the samples comprising the attack and the sustained phase of the sound.
 Configure the global division this way:
 
-* choose the loop option in loop playback (2nd choice),
-* specify 0.01s in the volume envelop release (very short release).
+* select ![loop on](images/loop_on.png "loop on"){.inline} in the :guilabel:`Loop playback` parameter,
+* specify 0.01 s in the :guilabel:`Vol env release (s)` parameter (very short release).
 
 Now you have an instrument comprising no releases.
 
@@ -70,14 +73,14 @@ Now you have an instrument comprising no releases.
 Create a second instrument for the release comprising the release samples with a very short blank loop at the beginning.
 Configure it this way:
 
-* choose the option :guilabel:`loop + release` in :guilabel:`loop playback` (3rd choice),
+* select ![loop on and end](images/loop_on_end.png "loop on and release"){.inline} (loop on + release) in the :guilabel:`Loop playback` parameter,
 * select a high number such as 100 seconds in the :guilabel:`Vol env release (s)` parameter so that the release is not attenuated,
-* determine approximately the duration of the attack in the first sample and use this value in the volume envelop attack.
+* determine approximately the duration of the attack in the first sample and use this value in the :guilabel:`Vol env attack (s)` parameter.
 
 Now you have an instrument remaining silent as long as you don't release a key, and then you can hear the release phase.
-You could also notice that a very fast shot on a key will trigger the release in an attenuated way.
+You may also notice that a very fast tap on a key will trigger the release in an attenuated way.
 This is barely noticeable here with the example since the attack of a trumpet is very fast.
-The duration of the attack has been slightly augmented in the example.
+The duration of the attack has been slightly increased in the example.
 
 
 ## Merging both instruments
@@ -92,7 +95,7 @@ You can then listen to the result and try to make a smoother transition between 
 
 The result with the example files is <a href="files/custom%20release.sf2" download>here</a>.
 
-You can listen here the differences between:
+You can listen here to the differences between:
 
 * a <a href="files/classic-release.mp3" download>classical release</a>
 

@@ -7,30 +7,33 @@ A Raspberry Pi is a credit-card-sized computer in which Polyphone can be install
 ## Materials required
 
 This list can be adapted to suit your project:
+
 - a Raspberry Pi,
 - a micro SD card with a capacity of 32 GB or more,
 - a power supply for the Raspberry Pi,
 - an analog/digital converter (DAC) to transform a USB output into an audio jack,
 - computer speakers, which have the advantage of containing both the speakers and the signal amplification part,
 - a general on/off switch,
-- a 2x male to female USB flush mount cable,
+- a double male-to-female USB flush-mount cable,
 - a case to put everything inside,
 - and of course a master keyboard for playing.
 
 To easily configure the Raspberry Pi, it is recommended to also have:
-- a screen with a mini-HDMI cable for the connection to the Raspberry Pi,
+
+- a screen with a micro-HDMI cable for the connection to the Raspberry Pi,
 - a keyboard,
 - a mouse.
 
 In the example on this page, second-hand Edifier R1280T speakers have been used. For a modest price, they are capable of reproducing low tones relatively well, and as you will see below, it will be possible to correct frequency response shortcomings.
 
-The master keyboard used is an Akai MPK Mini Plus, connectable via USB. The USB / jack adapter is a first-price UGREEN and the Raspberry Pi is version 5.
+The master keyboard used is an Akai MPK Mini Plus, connectable via USB. The USB / jack adapter is an entry-level UGREEN and the Raspberry Pi is version 5.
 
 (the aim of these details is not to advertise any particular brand, but to present a combination that works)
 
 ## Preparing the box
 
 This tutorial will not focus on one particular way of making a box. The use of wood will showcase your carpentry skills, as in this example, but cardboard can work just as well. It's up to you to express your creative talents! Overall, you will need a cover to access the components, and openings for:
+
 - the speakers,
 - the power cable,
 - the on/off switch,
@@ -38,6 +41,7 @@ This tutorial will not focus on one particular way of making a box. The use of w
 - the Helmholtz resonators for the bass-reflex, and so on.
 
 A suggested order of installation in the box is as follows:
+
 - start by recessing the on/off button, the USB connectors on the rear panel and any other buttons connected to the speakers,
 - place the power cable and connect it to the input of the on/off button,
 - place the transformer associated with the speakers and connect it to the output of the on/off button,
@@ -53,11 +57,12 @@ In the following image, the power supply and the electronic board related to the
 
 ![Inside the synthesizer](images/synth_inside.jpg "Inside the synthesizer")
 
-Note: speakers must be placed so that there is no possible return of sound between the speaker output and the inside of the box, otherwise a resonance will appear. **So not like in this example!** Sometimes we need to experiment to discover traps...
+Note: speakers must be placed so that there is no possible return of sound between the speaker output and the inside of the box, otherwise a resonance will appear. **So not like in this example!** Sometimes you need to experiment to discover the traps…
 
 ![The Raspberry Pi](images/synth_raspberry_pi.jpg "The Raspberry Pi")
 
 3 USB ports are used:
+
 - one to obtain a jack output,
 - the other 2 are redirected to the back of the box and will be used to connect the master keyboard or, when configuring the Raspberry Pi, a keyboard and a mouse.
 
@@ -74,8 +79,8 @@ Once the micro SD card has been prepared, you can insert it into the slot provid
 First, update the system with:
 
 ```
-apt-get update
-apt-get upgrade
+sudo apt-get update
+sudo apt-get upgrade
 ```
 
 Then install **Polyphone** using the .deb package available on this [page](software). Connect the MIDI keyboard via USB to the Raspberry Pi (disconnect the computer keyboard if no USB port is available), then open Polyphone and select the MIDI keyboard from the drop-down list of MIDI inputs in the [settings](manual/settings.md#doc_general). By downloading a soundfont, for example from the [repository](soundfonts), it's already possible to play an instrument with the MIDI keyboard associated with the Raspberry Pi!
@@ -95,9 +100,9 @@ Icon=/home/pi/Desktop/my-icon.png
 Categories=AudioVideo;
 ```
 
-This file will then be placed in the :file:`/home/pi/.config/autostart` folder. 
+This file will then be placed in the :file:`/home/pi/.config/autostart` folder.
 
-The command line can be expanded with options for listening to a particular MIDI channel, playing several instruments simultaneously or activating/deactivating instruments via keys. This [page](tutorials/use-polyphone-as-a-synthesizer.md) details the options for using Polyphone in synth mode.
+The command line can be completed with options for listening to a particular MIDI channel, playing several instruments simultaneously or activating / deactivating instruments via keys. This [page](tutorials/use-polyphone-as-a-synthesizer.md) details the options for using Polyphone in synth mode.
 
 ## To go further
 
@@ -109,4 +114,4 @@ Once the equalization curve has been calculated, **HiFiScan** can export coeffic
 
 ### Remote connection
 
-Up to now, Raspberry Pi configuration has required a screen to display the desktop. However, it is possible to configure the system to allow remote access via the **VNC protocol**, and resources are available on the Internet for its configuration.
+Up to now, the Raspberry Pi configuration has required a screen to display the desktop. However, it is possible to configure the system to allow remote access via the **VNC protocol**, and many resources are available on the Internet to set it up.

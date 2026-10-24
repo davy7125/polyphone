@@ -11,7 +11,8 @@ Quand l'entête :guilabel:`Général` est sélectionné dans l'[arborescence](ma
 ### Enlever les éléments non utilisés {#doc_unused}
 
 
-Tous les échantillons et instruments qui ne sont utilisés par aucun instrument ou ensemble sont automatiquement supprimés.
+Tous les échantillons qui ne sont utilisés par aucun instrument et tous les instruments qui ne sont utilisés par aucun ensemble sont automatiquement supprimés.
+Un message indique combien d'éléments ont été supprimés.
 
 
 ## Modulateurs {#doc_cat_mod}
@@ -29,8 +30,9 @@ Tous les [modulateurs](manual/soundfont-editor/editing-pages/instrument-editor.m
 ### Exporter la liste des ensembles {#doc_export}
 
 
-Avec cet outil, la liste de tous les [ensembles](manual/soundfont-editor/editing-pages/preset-editor.md) est mise sous forme d'un texte.
-Ce texte peut être formaté pour être intégré dans un fichier .csv ou en HTML pour être intégré dans un site web.
+Avec cet outil, la liste de tous les [ensembles](manual/soundfont-editor/editing-pages/preset-editor.md) est écrite sous forme de texte, avec leurs numéros de banque et d'ensemble.
+Ce texte peut être formaté en csv, pour être intégré dans un tableur, ou en tableau html, pour être intégré dans un site web.
+Un bouton copie le texte dans le presse-papier.
 
 
 ![Liste des ensembles](images/en_preset_list.png "Liste des ensembles")

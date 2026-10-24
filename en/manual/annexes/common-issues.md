@@ -20,7 +20,7 @@ Sometimes, the issue can be resolved by better preparing or using the existing s
 
 ### Poor sound quality, especially in the high range
 
-Typically, a single audio sample is not sufficient to create a high-quality instrument. A sample has its own pitch (except for non-melodic percussion), and using it over a wide note range will distort the sound, especially in the higher notes. To fix this issue, multiple samples should be used, or if only one sample is available, you can:
+Typically, a single audio sample is not sufficient to create a high-quality instrument. A sample has its own pitch (except for non-melodic percussion), and using it over a wide note range will distort the sound, especially in the higher notes. To fix this issue, multiple samples should be used, or, if only one sample is available, you can:
 
 * duplicate the sample,
 * transpose the duplicated sample by an octave, for example, using this [tool](manual/soundfont-editor/tools/sample-tools.md#doc_transpose),
@@ -83,7 +83,7 @@ To soften the start of a note, specify or increase the **attack duration** of th
 
 ### A sound starts too softly
 
-Conversely to the previous section, decrease or remove the **attack duration** of the note.
+Conversely to the previous case, decrease or remove the **attack duration** of the note.
 
 ### A delay is felt before the sound starts
 
@@ -110,7 +110,7 @@ Loops make it possible to produce a sound of infinite duration from a sample wit
 If the sound stops when it should continue playing, the most likely causes are:
 
 * the sample loop is not defined — in that case, you can refer to this [page](tutorials/how-to-prepare-a-sample.md#doc_loop) to set up a loop,
-* loop playback is not enabled — in this case, you need to change the **playback mode** at the [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) level.
+* loop playback is not enabled — in this case, you need to change the **loop playback** parameter at the [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) level.
 
 ### The sound contains regular “clicks”
 

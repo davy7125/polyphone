@@ -21,8 +21,8 @@ Sf2 files are built according to a 3-level structure:
 
 Further to the definition and setting of these elements, a sf2 file contains also [general information](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md) (the author, copyright or edit time for instance).
 
-Soundfonts are used by software synthesizers, such as <a href="http://www.fluidsynth.org/" target="_blank">Fluidsynth</a>, driven by MIDI signals.
-It is also possible to use sf2 soundfonts to listen MIDI files with <a href="https://sourceforge.net/projects/timidity" target="_blank">TiMidity</a>, <a href="https://www.mindwerks.net/projects/wildmidi" target="_blank">WildMIDI</a> or QuickTime and listen scores with <a href="https://musescore.org/" target="_blank">MuseScore</a>.
+Soundfonts are used by software synthesizers, such as <a href="http://www.fluidsynth.org/" target="_blank">FluidSynth</a>, driven by MIDI signals.
+It is also possible to use sf2 soundfonts to listen to MIDI files with <a href="https://sourceforge.net/projects/timidity" target="_blank">TiMidity</a>, <a href="https://www.mindwerks.net/projects/wildmidi" target="_blank">WildMIDI</a> or QuickTime and to listen to scores with <a href="https://musescore.org/" target="_blank">MuseScore</a>.
 Hardware such as samplers, soundcards or even synthesizers may also support the .sf2 format.
 
 Further information on soundfonts may be found for example on <a href="https://en.wikipedia.org/wiki/SoundFont" target="_blank">Wikipedia</a>.
@@ -34,6 +34,7 @@ The sf2 specifications are available [here](files/sf_specifications_v2.01.pdf) f
 
 The sf3 format, developed by <a href="https://musescore.org/" target="_blank">MuseScore</a>, is similar in all respects to the sf2 format except that the [samples](manual/soundfont-editor/editing-pages/sample-editor.md) can be stored in the OGG format (like the MP3 format but open-source) instead of being stored as raw data.
 The consequence is that the sf3 format is about 10 times lighter than the sf2 format for a comparable quality.
+In Polyphone, the compression is enabled in the [general information](manual/soundfont-editor/editing-pages/editing-of-the-general-information.md#doc_edit) of the soundfont and each sample can then be compressed in the [sample editor](manual/soundfont-editor/editing-pages/sample-editor.md#doc_info) (the quality of the compression can be chosen).
 
 The compressed samples in a soundfont exported in this format are not intended to be edited later because successive compressions would result in a lower sound quality.
 This format should be seen as a final product and is very interesting for all end users of soundfonts in that:
@@ -43,13 +44,13 @@ This format should be seen as a final product and is very interesting for all en
 * the combination MIDI + sf3 provides a lightweight and powerful solution to play soundtracks (video games, mobile applications, …).
 
 Unlike the <a href="http://www.fmjsoft.com/fmt/sf2pack.htm" target="_blank">sf2pack</a> format which answers the same issues, the sf3 format is entirely open-source.
-The source code is available, thus ensuring its sustainability (let's avoid the mistakes done with sfArk or sfPack!).
+The source code is available, thus ensuring its sustainability (let's avoid the mistakes made with sfArk or sfPack!).
 
 
 ## Sfz soundfonts {#doc_sfz}
 
 
-The sfz format has the same goal than the sf2 format: create a musical instrument by disposing and configuring samples over the keyboard.
+The sfz format has the same goal as the sf2 format: create a musical instrument by arranging and configuring samples over the keyboard.
 The main difference is that while the sf2 format is only 1 file that contains everything, the sfz format is a text file delivered with a set of .wav samples.
 Since it was meant to be editable by a human, the main advantage was to edit the file without the need of a complex editor.
 But an editor is still highly recommended for big instruments, the quantity of parameters can indeed be quickly discouraging.
@@ -90,7 +91,7 @@ The sf2 format uses an exponential law to define the decay and hold durations ac
 ## SfArk archives {#doc_sfark}
 
 
-SfArk archives, like the sf3 format, is a compressed format.
+SfArk archives, like the sf3 format, are a compressed format.
 This means that the quality of the sounds is a bit lowered (but often imperceptible).
 This format tends to be obsolete, that's why Polyphone only allows importing sfArk archives (not the export).
 
@@ -98,7 +99,7 @@ This format tends to be obsolete, that's why Polyphone only allows importing sfA
 ## GrandOrgue dispositions {#doc_organ}
 
 
-GrandOrgue is a program whose main purpose is to emulate instruments like pipe organs. An organ is defined by a series of wav files, each containing the sound of a pipe, and a file with the extension ".organ" which contains all the parameters needed to create an organ based on all wav files. Basically, all samples are associated with specific keys and are grouped by stops, which can be activated or deactivated when playing the organ. Polyphone is able to create soundfonts based on this mapping, but do not support the conversion of soundfonts to the GrandOrgue format.
+GrandOrgue is a program whose main purpose is to emulate instruments like pipe organs. An organ is defined by a series of wav files, each containing the sound of a pipe, and a file with the extension ".organ" which contains all the parameters needed to create an organ based on all wav files. Basically, all samples are associated with specific keys and are grouped by stops, which can be activated or deactivated when playing the organ. Polyphone is able to create soundfonts based on this mapping, but does not support the conversion of soundfonts to the GrandOrgue format.
 
 ### Import limitation
 

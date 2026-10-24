@@ -1,10 +1,10 @@
-Quand au moins un échantillon est sélectionné dans l'[arborescence](manual/soundfont-editor/tree.md), la [boîte à outils](manual/soundfont-editor/tools/index.md) propose des outils rangés dans quatre catégories&nbsp;:
+Quand au moins un échantillon est sélectionné dans l'[arborescence](manual/soundfont-editor/tree.md), la [boîte à outils](manual/soundfont-editor/tools/index.md) propose des outils rangés dans cinq catégories&nbsp;:
 
 * [boucle / lecture](#doc_cat_loop_playback),
 * [échantillons stéréo](#doc_cat_stereo),
 * [édition rapide](#doc_cat_fast_editing),
 * [fichiers](#doc_cat_files),
-* [traitement du son](#doc_cat_processing),
+* [traitement du son](#doc_cat_processing).
 
 L'utilisation d'outils pour plusieurs échantillons simultanément est possible (avec une sélection multiple).
 
@@ -26,7 +26,9 @@ Si une boucle est définie pour l'échantillon sélectionné, le logiciel couper
 Le logiciel détermine deux positions dans l'échantillon, distantes et appropriées pour créer une boucle.
 Si besoin, un court segment de son est copié avec un fondu enchaîné de manière à ce que la transition au point de jonction soit la plus douce possible.
 
-S'il échoue, un message d'avertissement apparaît indiquant qu'aucune boucle ne peut être faite.
+Avec un échantillon stéréo, la même boucle est créée des deux côtés.
+
+S'il échoue, un message d'avertissement apparaît indiquant qu'aucune boucle ne peut être faite (l'échantillon est probablement trop court ou trop turbulent).
 
 **Attention&nbsp;:** Cet outil modifie l'échantillon original.
 Les modifications peuvent être annulées avec la fonction «&nbsp;[annuler](manual/soundfont-editor/toolbar.md#doc_edit)&nbsp;», mais si le fichier est sauvegardé et si Polyphone est fermé il n'y a pas moyen de revenir en arrière.
@@ -40,6 +42,7 @@ Pour les entendre, vous devez sélectionner ![boucle activée](images/loop_on.pn
 ### Enlever le silence initial {#doc_removeblank}
 
 Tout silence au début de l'échantillon est éliminé, réduisant le temps avant que le son soit entendu.
+Avec un échantillon stéréo, la même durée est retirée des deux côtés.
 
 ![Suppression du silence initial](images/remove_blank.png "Suppression du silence initial")
 
@@ -48,11 +51,11 @@ Tout silence au début de l'échantillon est éliminé, réduisant le temps avan
 
 ### Fondu enchaîné {#doc_crossfadeloop}
 
-L'outil de fondu enchaîné peut être vu comme la version manuelle de l'[outil de bouclage automatique](#doc_autoloop). Tout d'abord, vous devez positionner le début et la fin de la boucle autour d'une zone stable dans le graphique présentant l'onde sonore. Ensuite, cet outil crée une boucle à partir de ces positions en appliquant un fondu enchaîné dont la durée est paramétrable. Tout est donc configurable mais en contrepartie la recherche du début et de la fin de la boucle doit être minutieuse&nbsp;:
+L'outil de fondu enchaîné peut être vu comme la version manuelle de l'[outil de bouclage automatique](#doc_autoloop). Tout d'abord, vous devez positionner le début et la fin de la boucle autour d'une zone stable dans le [graphique](manual/soundfont-editor/editing-pages/sample-editor.md#doc_graph) présentant l'onde sonore. Ensuite, cet outil crée une boucle à partir de ces positions en appliquant un fondu enchaîné dont la durée (en millisecondes) est paramétrable. Tout est donc configurable mais en contrepartie la recherche du début et de la fin de la boucle doit être minutieuse&nbsp;:
 
 * aux 2 positions, les harmoniques du son doivent correspondre pour ne pas entendre un effet de disque rayé lors de la transition,
 * les phases des différentes harmoniques doivent correspondre également pour ne pas entendre d'annulations de fréquence pendant le fondu, altérant fortement le timbre d'un instrument,
-* autant que possible, la fin de la boucle doit être éloigné du début pour éviter un son trop synthétique.
+* autant que possible, la fin de la boucle doit être éloignée du début pour éviter un son trop synthétique.
 
 Un conseil est de se concentrer sur les positions où l'onde croise l'axe des x (valeur 0).
 
@@ -74,17 +77,19 @@ L'édition stéréo, si elle est activée dans les [préférences](manual/settin
 
 Si l'échantillon est lié à un autre (stéréo), le logiciel peut égaliser l'intensité moyenne des deux échantillons pour ajuster la balance.
 Il sera ensuite possible de modifier la balance de manière plus précise dans un [instrument](manual/soundfont-editor/editing-pages/instrument-editor.md).
+Cet outil ne peut pas être utilisé avec des échantillons mono.
 
 
 ### Trouver un lien {#doc_link}
 
-Parmi les échantillons sélectionnés, les échantillons dont les noms ne diffèrent que par la dernière lettre (L&nbsp;/&nbsp;R) sont automatiquement liés.
+Parmi les échantillons sélectionnés, les échantillons dont les noms ne diffèrent que par la dernière lettre (L&nbsp;/&nbsp;R) sont automatiquement liés (les espaces et les caractères ``-``, ``_``, ``(``, ``)``, ``[``, ``]``, ``{``, ``}`` et ``|`` sont ignorés dans les noms).
 Par exemple, si dans une banque de sons deux échantillons sont nommés ``bassoon45L`` et ``bassoon45R``, ``bassoon45L`` sera reconnu comme la partie gauche de ``bassoon45R`` et ``bassoon45R`` sera reconnu comme la partie droite de ``bassoon45L``.
 
 Avec cette information la valeur initiale de la balance sera correctement renseignée lorsque ces échantillons seront ajoutés dans un instrument.
 Vous pourrez aussi profiter de l'édition simultanée des parties gauche et droite dans la [table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table) des instruments si l'édition stéréo est activée dans les [préférences](manual/settings.md#doc_general) du logiciel.
 
 **Attention&nbsp;:** Cet outil peut casser des liens existants si les noms ne remplissent pas la condition ci-dessus.
+Un message liste les échantillons pour lesquels aucune correspondance n'a été trouvée.
 
 
 ## Édition rapide {#doc_cat_fast_editing}
@@ -92,7 +97,7 @@ Vous pourrez aussi profiter de l'édition simultanée des parties gauche et droi
 
 ### Décaler un paramètre {#doc_shift_parameter}
 
-Cet outil permet l'édition simultanée, par l'ajout ou la multiplication d'une valeur, d'un de ces paramètres pour tous les échantillons sélectionnés&nbsp;:
+Cet outil permet l'édition simultanée, par l'ajout d'une valeur ou la multiplication par une valeur, de l'un de ces paramètres pour tous les échantillons sélectionnés&nbsp;:
 
 * note de base,
 * correction,
@@ -105,9 +110,9 @@ Cet outil permet l'édition simultanée, par l'ajout ou la multiplication d'une 
 ### Récupérer un paramètre depuis les instruments {#doc_load_from_instruments}
 
 Les paramètres au niveau de l'instrument peuvent remplacer ou décaler les paramètres définis au niveau de l'échantillon.
-Avec cet outil, il est possible de corriger ou complèter les paramètres de l'échantillon avec ce qui est défini au niveau des instruments utilisant ces échantillons&nbsp;:
+Avec cet outil, il est possible de corriger ou compléter les paramètres de l'échantillon avec ce qui est défini au niveau des instruments utilisant ces échantillons&nbsp;:
 
-* en modifiant la note de base de l'échantillon avec la surchage utilisée au niveau de l'instrument,
+* en modifiant la note de base de l'échantillon avec la surcharge utilisée au niveau de l'instrument,
 * en décalant la note de base de l'échantillon avec le paramètre «&nbsp;Accordage (demi-tons)&nbsp;»,
 * en décalant la correction de hauteur de l'échantillon avec le paramètre «&nbsp;Accordage (centièmes)&nbsp;»,
 * en définissant le début et la fin de la boucle de l'échantillon avec les offsets de boucle.
@@ -129,18 +134,28 @@ Après avoir sélectionné un répertoire de destination, tous les échantillons
 ### Commande externe {#doc_externalcommand}
 
 Cet outil vous permet d'utiliser une commande ou un programme externe pour éditer un échantillon.
-Vous n'avez ainsi pas besoin d'exporter et de ré-importer l'échantillon dans Polyphone, tout est effectué automatiquement&nbsp;:
+Vous n'avez ainsi pas besoin d'exporter et de réimporter l'échantillon dans Polyphone, tout est effectué automatiquement&nbsp;:
 
 1. téléchargez un logiciel d'édition pour les fichiers .wav, comme :program:`Audacity` ou :program:`Sweep` (Linux),
 2. utilisez l'outil :guilabel:`Commande externe` pour les échantillons sélectionnés,
-3. remplissez la ligne de commande dans le champ correspondant pour appeler le logiciel externe (il est possible que vous deviez lire la documentation du logiciel concerné au préalable),
+3. remplissez la ligne de commande dans le champ :guilabel:`Commande` pour appeler le logiciel externe (il est possible que vous deviez lire la documentation du logiciel concerné au préalable), l'argument :command:`{wav}` étant obligatoire puisqu'il est remplacé par le chemin du fichier exporté (par exemple :command:`sweep {wav}`),
 4. éditez les échantillons avec l'outil externe,
 5. sauvegardez la version modifiée des fichiers .wav avec le logiciel externe et fermez-le,
 6. les échantillons seront automatiquement chargés dans la banque de sons.
 
+Le bouton à droite du champ aide à sélectionner un fichier exécutable et la liste :guilabel:`Historique` rappelle les dernières commandes utilisées.
+Deux options sont disponibles&nbsp;:
+
+Autoriser l'édition stéréo
+: Lorsqu'un échantillon stéréo est traité, il est exporté avec l'échantillon lié dans un seul fichier stéréo, et les deux échantillons sont mis à jour lors de la réimportation du fichier.
+
+Remplacer les informations de l'échantillon si possible
+: La boucle, la note de base et la correction enregistrées dans le fichier renvoyé par le logiciel externe remplacent celles de l'échantillon.
+  Sinon, les informations existantes sont conservées.
+
 ![Outil d'appel à une commande externe](images/tool_external_command.png "Outil d'appel à une commande externe")
 
-**Note&nbsp;:** Pendant le processus, Polyphone exporte un fichier .wav et réimportera ce même fichier après exécution de la commande externe. Si la commande externe crée d'autres fichiers ou si le résultat est sauvegardé dans un autre fichier, ces fichiers seront ignorés et Polyphone réimportera le fichier exporté initialement qui ne sera probablement pas modifié.
+**Note&nbsp;:** Pendant le processus, Polyphone exporte un fichier .wav et réimporte ce même fichier après exécution de la commande externe. Si la commande externe crée d'autres fichiers ou si le résultat est sauvegardé dans un autre fichier, ces fichiers seront ignorés et Polyphone réimportera le fichier exporté initialement qui ne sera probablement pas modifié.
 
 
 ### Filtrer des fréquences {#doc_filter}
@@ -168,6 +183,6 @@ Vous pouvez changer le volume d'un échantillon de trois manières différentes&
 
 ### Transposer {#doc_transpose}
 
-L'outil demande un décalage en demi-tons et ensuite ré-échantillonne le son pour changer sa hauteur de note.
+L'outil demande un décalage en demi-tons puis rééchantillonne le son pour changer sa hauteur de note.
 
 ![Outil de transposition](images/tool_transpose_smpl.png "Outil de transposition")

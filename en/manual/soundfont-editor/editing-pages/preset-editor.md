@@ -3,9 +3,9 @@ A preset is a combination of one or more instruments and is the element visible 
 
 Similarly to the [instrument editor](manual/soundfont-editor/editing-pages/instrument-editor.md), several parts are present:
 
-* the table,
-* the range editor when the button :guilabel:`Edit ranges` of the [toolbar](manual/soundfont-editor/toolbar.md#doc_view) is clicked,
-* the modulator section.
+* the [table](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_table),
+* the [range editor](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_range) when the button :guilabel:`Edit ranges` of the [toolbar](manual/soundfont-editor/toolbar.md#doc_view) is clicked,
+* the [modulator section](manual/soundfont-editor/editing-pages/instrument-editor.md#doc_modulator).
 
 
 ![Preset page](images/edit_preset.png "Preset page")
@@ -18,8 +18,9 @@ In the case where several presets are selected, the global parameters of each of
 ## Differences with the instruments {#doc_diff}
 
 
-The parameters edited here are said relative unlike parameters of an instrument which, except in special cases, are said absolute.
-Values of a preset parameters are added or multiplied to the instrument parameters that compose it.
+The parameters edited here are said to be relative, unlike the parameters of an instrument which, except in special cases, are said to be absolute.
+The values of the parameters of a preset are added to or multiplied with the parameters of the instruments that compose it.
+For this reason, an attenuation (or any other parameter) can be negative at the preset level, which is not the case at the instrument level.
 Some parameters are not editable at the preset level:
 
 * loop playback,
@@ -29,7 +30,7 @@ Some parameters are not editable at the preset level:
 * fixed velocity,
 * the four offsets.
 
-A preset is identified by a preset number and bank number, this combination being unique and adjustable below the table.
-Each bank comprises 127 presets.
+A preset is identified by a preset number and a bank number, this combination being unique and adjustable below the table.
+Each bank comprises 128 presets (numbered from 0 to 127).
 
 The last bank (128) is usually used for percussion kits.

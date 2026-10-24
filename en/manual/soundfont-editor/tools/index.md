@@ -1,9 +1,10 @@
-Once you understand how soundfonts work (through the different [editors](manual/soundfont-editor/editing-pages/index.md)), tools are probably what you should care of.
-They are all designed to fasten / automate the editing and to avoid common errors or imprecision that a human usually does.
+Once you understand how soundfonts work (through the different [editors](manual/soundfont-editor/editing-pages/index.md)), tools are probably what you should look at next.
+They are all designed to speed up / automate the editing and to avoid the common errors or imprecisions that a human usually makes.
 
 Tools are all available in a menu that is displayed when clicking on the toolbox icon in the [toolbar](manual/soundfont-editor/toolbar.md#doc_edit).
 The content of this menu depends on the selection in the [tree](manual/soundfont-editor/tree.md): first on the kind of selection (as described below) but also on the number of selected elements.
 A few tools cannot process multiple elements so they will be hidden with a multiple selection.
+The tools are sorted by category and then by name, and a name followed by an ellipsis (…) indicates that a window will be displayed for configuring the tool.
 
 
 ## Global tools {#doc_global}
